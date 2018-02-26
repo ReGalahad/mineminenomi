@@ -42,7 +42,7 @@ public class ItoAbilities
 		
 		public void use(EntityPlayer player)
 		{
-			if(this.isOnCooldown)
+			if(!this.isOnCooldown)
 			{
 				Direction dir = WyHelper.get8Directions(player);
 				
@@ -85,20 +85,22 @@ public class ItoAbilities
 		
 		public void use(EntityPlayer player)
 		{
-			if(!player.worldObj.isRemote)
-			{
-				if(!isOnCooldown)
-				{					
-					for(EntityLivingBase l : WyHelper.getEntitiesNear(player, 20))
-					{
-						l.addPotionEffect(new PotionEffect(Potion.blindness.id, 1, 200));
-						l.addPotionEffect(new PotionEffect(Potion.confusion.id, 1, 200));
-					}
+			if(!isOnCooldown)
+			{			
+				for(EntityLivingBase l : WyHelper.getEntitiesNear(player, 20))
+				{
+					System.out.println(l);
+
+					l.addPotionEffect(new PotionEffect(Potion.blindness.id, 200, 10));
+					l.addPotionEffect(new PotionEffect(Potion.confusion.id, 200, 10));
 					
-					super.use(player);
+					l.addPotionEffect(new PotionEffect(Potion.digSlowdown.id, 200, 10));
+					l.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 200, 10));
 				}
+					
+				super.use(player);
 			}
-		};	
+		}
 	}
 
 }

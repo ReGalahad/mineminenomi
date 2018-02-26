@@ -27,14 +27,14 @@ public class MobRenderer extends RenderBiped
 	{
 		super(model, 0.0F);
 		this.scale = scale;
-		this.texture = new ResourceLocation(ID.PROJECT_ID + ":textures/models/" + tex + ".png");
+		this.texture = new ResourceLocation(ID.PROJECT_ID, "textures/models/" + tex + ".png");
 	}
 
 	public MobRenderer(ModelBiped model, String tex) 
 	{
 		super(model, 0.0F);
 		this.scale = 1.0F;
-		this.texture = new ResourceLocation(ID.PROJECT_ID + ":textures/models/" + tex + ".png");
+		this.texture = new ResourceLocation(ID.PROJECT_ID, "textures/models/" + tex + ".png");
 	}
 	
 	public MobRenderer(ModelBiped model) 
@@ -68,8 +68,8 @@ public class MobRenderer extends RenderBiped
 	
 	protected ResourceLocation getEntityTexture(Entity entity) 
 	{
-		if((this.texture == null && entity instanceof IDynamicRenderer) || this.texture.equals(new ResourceLocation(ID.PROJECT_ID + ":textures/mobs/null.png")))
-			return new ResourceLocation(ID.PROJECT_ID + ":textures/mobs/" + ((IDynamicRenderer)entity).getMobTexture() + ".png");
+		if((this.texture == null && entity instanceof IDynamicRenderer) || this.texture.equals(new ResourceLocation(ID.PROJECT_ID + ":textures/models/null.png")))
+			return new ResourceLocation(ID.PROJECT_ID + ":textures/models/" + ((IDynamicRenderer)entity).getMobTexture() + ".png");
 		else
 			return this.texture;
 	}

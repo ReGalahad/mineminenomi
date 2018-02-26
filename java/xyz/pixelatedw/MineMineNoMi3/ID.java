@@ -7,6 +7,8 @@ public class ID
 	
 	public static final ResourceLocation
 	
+	ICON_HARROW = new ResourceLocation(ID.PROJECT_ID, "textures/gui/icons/icon_arrow.png"),
+	
 	ICON_PIRATE = new ResourceLocation(ID.PROJECT_ID, "textures/gui/icons/icon_pirate.png"),
 	ICON_MARINE = new ResourceLocation(ID.PROJECT_ID, "textures/gui/icons/icon_marine.png"),
 	ICON_BOUNTYHUNTER = new ResourceLocation(ID.PROJECT_ID, "textures/gui/icons/icon_bountyhunter.png"),
@@ -31,7 +33,7 @@ public class ID
 	
 	
 	public static final String
-
+	
 	PROJECT_ID = "mineminenomi",
 	PROJECT_NAME = "Mine Mine no Mi",
 	PROJECT_VERSION = "0.3.0",
@@ -62,8 +64,11 @@ public class ID
 	LANG_KEYS_CATEGORY = "category.mmnmkeys", //Mine Mine no Mi Keys
 	LANG_KEY_PLAYER = "key.playerui", //Player UI
 	LANG_KEY_COMBATMODE = "key.combatmode", //Combat Mode
-	
-	
+	LANG_GUI_FACTION = "gui.faction.name",
+	LANG_GUI_RACE = "gui.race.name",
+	LANG_GUI_STYLE = "gui.style.name",
+	LANG_GUI_ABILITIES = "gui.abilities.name",
+
 	
 	NULL = "null";
 	

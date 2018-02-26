@@ -9,6 +9,7 @@ import com.google.common.collect.Iterables;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -22,14 +23,18 @@ import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.event.ClickEvent;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatStyle;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.IChatComponent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
@@ -48,6 +53,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityManager;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.MarineData;
 import xyz.pixelatedw.MineMineNoMi3.events.customevents.DorikiEvent;
@@ -87,8 +93,6 @@ public class EventsPersistence
 	 * onDorikiGained 
 	 * > Rewards the user with rokushiki/fishman karate based on doriki
 	 */	
-
-	private String[] UUIDs = new String[] {"c142a238-b214-46b0-8820-139df67be10b"};
 	
 	/** XXX onEntityUpdate */
 	@SubscribeEvent
@@ -129,15 +133,6 @@ public class EventsPersistence
 					{
 						props.getAbilityFromSlot(i).update(player);
 					}
-				}
-				
-				if(ID.DEV_EARLYACCESS)
-				{
-					for(String s : UUIDs)
-					{
-						if(!player.getUniqueID().toString().equals(s))
-							((EntityPlayerMP)player).playerNetServerHandler.kickPlayerFromServer(EnumChatFormatting.BOLD + "" + EnumChatFormatting.RED + "WARNING! \n\n " + EnumChatFormatting.RESET + "You don't have access to this version yet!");
-					}	
 				}
 			}
 			
@@ -220,7 +215,10 @@ public class EventsPersistence
 			if(props.hasHakiActive())
 				props.addHakiTimer();
 			else
-				props.resetHakiTimer();
+			{
+				if(props.getHakiTimer() > 0)
+					props.decHakiTimer();
+			}
 			
 			if(props.getHakiTimer() > 1000)
 			{
@@ -285,6 +283,9 @@ public class EventsPersistence
 					plusDoriki = ((EntityNewMob) target).getDorikiPower() + rng;
 					plusBounty = (((EntityNewMob) target).getDorikiPower() * 2) + rng;	
 					plusBelly = ((EntityNewMob) target).getBellyInPockets() + rng;
+					
+			    	if(!ID.DEV_EARLYACCESS && !player.worldObj.isRemote && !player.capabilities.isCreativeMode)
+			    		WyTelemetry.addDefeatedEntityStat("defeated_" + WyHelper.getFancyName(target.getCommandSenderName()), 1);
 				}
 				else
 				{
@@ -324,8 +325,15 @@ public class EventsPersistence
 				
 				if(props.getBelly() + plusBelly < Values.MAX_GENERAL)
 					props.alterBelly(plusBelly);
-			
+						
 			}
+			
+	    	if(!ID.DEV_EARLYACCESS && !player.worldObj.isRemote && !player.capabilities.isCreativeMode)
+	    	{
+	    		WyTelemetry.addGeneralStat("dorikiEarnedFromKills", plusDoriki);
+	    		WyTelemetry.addGeneralStat("bellyEarnedFromKills", plusBelly);
+	    		WyTelemetry.addGeneralStat("bountyEarnedFromKills", plusBounty);
+	    	}
 			
 			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
 		}
@@ -400,6 +408,9 @@ public class EventsPersistence
 
 		}
 
+		if(event.source.isExplosion())
+			event.setCanceled(true);
+		
 		if (event.entityLiving instanceof EntityPlayer)
 		{
 			if (props.getUsedFruit().equals("meramera") && (event.source.equals(DamageSource.inFire) || event.source.equals(DamageSource.onFire)))
@@ -427,6 +438,37 @@ public class EventsPersistence
 			
 			if (!player.worldObj.isRemote)
 			{				
+				if(ID.DEV_EARLYACCESS)
+				{					
+					try 
+					{
+						URL url = new URL("https://dl.dropboxusercontent.com/s/a1v3m3eaqz5o185/earlyaccess.txt?dl=0");
+						Scanner scanner = new Scanner(url.openStream());
+						boolean flag = false;
+						
+						while(scanner.hasNextLine())
+						{
+							String uuid = scanner.nextLine();
+							
+							if(player.getUniqueID().toString().equals(uuid) || player.getDisplayName().equals(uuid))
+							{
+								flag = true;
+								break;
+							}													
+						}
+						
+						if(!flag)
+							((EntityPlayerMP)player).playerNetServerHandler.kickPlayerFromServer(EnumChatFormatting.BOLD + "" + EnumChatFormatting.RED + "WARNING! \n\n " + EnumChatFormatting.RESET + "You don't have access to this version yet!");														
+						
+						scanner.close();
+					} 
+					catch (IOException e) 
+					{
+						((EntityPlayerMP)player).playerNetServerHandler.kickPlayerFromServer(EnumChatFormatting.BOLD + "" + EnumChatFormatting.RED + "WARNING! \n\n " + EnumChatFormatting.RESET + "You don't have access to this version yet!");						
+						e.printStackTrace();
+					}				
+				}
+				
 				if (props.getRace().equals("N/A") && props.getFaction().equals("N/A") && props.getFightStyle().equals("N/A") && !player.inventory.hasItemStack(new ItemStack(ListMisc.CharacterCreator)))
 					player.inventory.addItemStackToInventory(new ItemStack(ListMisc.CharacterCreator, 1));
 				
@@ -479,10 +521,12 @@ public class EventsPersistence
 						{
 							if(!ID.PROJECT_VERSION.equals(parts[1]))
 							{
-								WyHelper.sendMsgToPlayer(player, EnumChatFormatting.RED + "" + EnumChatFormatting.BOLD + "[UPDATE]" + EnumChatFormatting.RED + " Mine Mine no Mi " + parts[1] + " is now available !");
+								ChatStyle updateStyle = new ChatStyle().setColor(EnumChatFormatting.GOLD).setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "http://pixelatedw.xyz/builds.php"));
+								
+								player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.RED + "" + EnumChatFormatting.BOLD + "[UPDATE]" + EnumChatFormatting.RED + " Mine Mine no Mi " + parts[1] + " is now available !").setChatStyle(updateStyle) );
+								player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.RED + "Download it from the official website : [http://pixelatedw.xyz/builds.php]").setChatStyle(updateStyle) );
 							}
-						}
-						
+						}					
 					}
 					
 					scanner.close();
@@ -491,6 +535,7 @@ public class EventsPersistence
 				{
 					e.printStackTrace();
 				}
+				
 			}		
 		}
 	}

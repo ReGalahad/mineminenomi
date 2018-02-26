@@ -10,6 +10,7 @@ import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 
@@ -60,6 +61,9 @@ public class UltraCola extends ItemFood
 			else
 				player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 250, 0));
 				
+	    	if(!ID.DEV_EARLYACCESS && !player.capabilities.isCreativeMode)
+	    		WyTelemetry.addGeneralStat("bottlesOfUltraColaDrank", 1);
+			
 			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
 		}			
 	}

@@ -6,18 +6,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.EnumFruitType;
-import xyz.pixelatedw.MineMineNoMi3.MainMod;
-import xyz.pixelatedw.MineMineNoMi3.Values;
-import xyz.pixelatedw.MineMineNoMi3.abilities.MeraAbilities;
+import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
-import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListCreativeTabs;
-import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 
 
 public class AkumaNoMi extends ItemFood
@@ -46,7 +42,7 @@ public class AkumaNoMi extends ItemFood
 	public void onFoodEaten(ItemStack itemStack, World world, EntityPlayer player) 
 	{
 		ExtendedEntityStats props = ExtendedEntityStats.get(player);
-		
+
 		if(props.hasYamiPower())
 		{
 			if(!props.getUsedFruit().equals("yamidummy"))
@@ -71,8 +67,8 @@ public class AkumaNoMi extends ItemFood
 			{
 				props.setYamiPower(true);
 				if(props.getUsedFruit().equals("N/A"))
-					props.setUsedFruit("yamidummy");
-					
+					props.setUsedFruit("yamidummy");			
+				
 				props.setIsLogia(false);
 				
 				for(Ability a : abilities)
@@ -97,6 +93,9 @@ public class AkumaNoMi extends ItemFood
 				}
 			}
 		}
+		
+    	if(!ID.DEV_EARLYACCESS && !world.isRemote && !player.capabilities.isCreativeMode)
+    		WyTelemetry.addDevilFruitStat("eaten_" + this.getUnlocalizedName().substring(5).replace("nomi", "").replace(":", "").replace(",", "").replace("model", ""), 1);
 	}
 	
 	public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean par4)

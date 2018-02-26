@@ -102,7 +102,7 @@ public class MeraProjectiles
 		
 		public void onUpdate()
 		{	
-			for (int i = 0; i < 50; i++)
+			for (int i = 0; i < 75; i++)
 			{
 				double offsetX = (new Random().nextInt(40) + 2.0D - 20.0D) / 10.0D;
 				double offsetY = (new Random().nextInt(40) + 2.0D - 20.0D) / 10.0D;

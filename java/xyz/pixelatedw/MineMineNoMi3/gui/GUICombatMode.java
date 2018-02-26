@@ -7,27 +7,20 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent.RenderTickEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.culling.Frustrum;
 import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.client.resources.IResourceManager;
-import net.minecraft.client.shader.ShaderGroup;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
-import net.minecraft.util.MovingObjectPosition;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.WyHelper.Direction;
 import xyz.pixelatedw.MineMineNoMi3.api.WyRenderHelper;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 
@@ -110,10 +103,91 @@ public class GUICombatMode extends Gui
 						if(trackMob != null && player.getDistanceToEntity(trackMob) < trackDistance)
 						{
 							trackDistance = (int) player.getDistanceToEntity(trackMob);							
-							float angle = (float) Math.toDegrees(Math.atan2(trackMob.posX - player.posX, trackMob.posZ - player.posZ));				
-
+							float angle = (float) Math.toDegrees(Math.atan2(trackMob.posZ - player.posZ, trackMob.posX - player.posX));
+							String text = "";
+							
+							text += trackDistance + " blocks";						
+							Direction playerDir = WyHelper.get4Directions(player);						
+							switch(playerDir)
+							{
+							case NORTH:
+								if(angle > 75 && angle < 115)
+									text += " [↓]";
+								else if(angle > 115 && angle < 165)
+									text += " [↙]";
+								else if((angle > 165 && angle < 180) || (angle > -180 && angle < -165))
+									text += " [←]";
+								else if(angle < -104 && angle > -165)
+									text += " [↖]";
+								else if(angle < -60 && angle > -104)
+									text += " [↑]";
+								else if(angle < -20 && angle > -60)
+									text += " [↗]";
+								else if((angle < 0 && angle > -20) || (angle > 0 && angle < 30))
+									text += " [→]";
+								else if(angle > 30 && angle < 115)
+									text += " [↘]";
+								break;
+							case SOUTH:
+								if(angle > 75 && angle < 115)
+									text += " [↑]";
+								else if(angle > 115 && angle < 165)
+									text += " [↗]";
+								else if((angle > 165 && angle < 180) || (angle > -180 && angle < -165))
+									text += " [→]";
+								else if(angle < -104 && angle > -165)
+									text += " [↘]";
+								else if(angle < -60 && angle > -104)
+									text += " [↓]";
+								else if(angle < -20 && angle > -60)
+									text += " [↙]";
+								else if((angle < 0 && angle > -20) || (angle > 0 && angle < 30))
+									text += " [←]";
+								else if(angle > 30 && angle < 115)
+									text += " [↖]";
+								break;
+							case EAST:
+								if(angle > 75 && angle < 115)
+									text += " [→]";
+								else if(angle > 115 && angle < 165)
+									text += " [↘]";
+								else if((angle > 165 && angle < 180) || (angle > -180 && angle < -165))
+									text += " [↓]";
+								else if(angle < -104 && angle > -165)
+									text += " [↙]";
+								else if(angle < -60 && angle > -104)
+									text += " [←]";
+								else if(angle < -20 && angle > -60)
+									text += " [↖]";
+								else if((angle < 0 && angle > -20) || (angle > 0 && angle < 30))
+									text += " [↑]";
+								else if(angle > 30 && angle < 115)
+									text += " [↗]";
+								break;
+							case WEST:
+								if(angle > 75 && angle < 115)
+									text += " [←]";
+								else if(angle > 115 && angle < 165)
+									text += " [↖]";
+								else if((angle > 165 && angle < 180) || (angle > -180 && angle < -165))
+									text += " [↑]";
+								else if(angle < -104 && angle > -165)
+									text += " [↗]";
+								else if(angle < -60 && angle > -104)
+									text += " [→]";
+								else if(angle < -20 && angle > -60)
+									text += " [↘]";
+								else if((angle < 0 && angle > -20) || (angle > 0 && angle < 30))
+									text += " [↓]";
+								else if(angle > 30 && angle < 115)
+									text += " [↙]";
+								break;
+							default:
+								break;
+							}
+							
 							WyRenderHelper.drawEntityOnScreen((posX + 320) / 2, posY - 42, 40, 40, 0, trackMob);
-							this.drawCenteredString(this.mc.fontRenderer, trackDistance + " blocks", (posX + 320) / 2, posY - 32, Color.WHITE.getRGB());
+							this.drawCenteredString(this.mc.fontRenderer, text, (posX + 320) / 2, posY - 32, Color.WHITE.getRGB());
 						}
 					}
 				}

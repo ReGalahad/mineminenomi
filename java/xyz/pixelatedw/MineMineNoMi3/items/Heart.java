@@ -18,7 +18,7 @@ public class Heart extends Item
 {
 	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
 	{
-		if(world.getEntityByID(itemStack.getTagCompound().getInteger("owner")) != null)
+		if(itemStack.getTagCompound() != null && world.getEntityByID(itemStack.getTagCompound().getInteger("owner")) != null)
 		{
 			world.getEntityByID(itemStack.getTagCompound().getInteger("owner")).attackEntityFrom(DamageSource.magic, 5);
 			((EntityLivingBase) world.getEntityByID(itemStack.getTagCompound().getInteger("owner"))).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 250, 1));
@@ -31,14 +31,19 @@ public class Heart extends Item
 	
 	public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean par4)
 	{
-		if(player.worldObj.getEntityByID(itemStack.getTagCompound().getInteger("owner")) != null)
+		if(itemStack.getTagCompound() != null)
 		{
-			list.add(EnumChatFormatting.GOLD + "[Owner] " + EnumChatFormatting.RESET + player.worldObj.getEntityByID(itemStack.getTagCompound().getInteger("owner")).getCommandSenderName());
-			list.add(EnumChatFormatting.GOLD + "[HP] " + EnumChatFormatting.RESET + ((EntityLivingBase) player.worldObj.getEntityByID(itemStack.getTagCompound().getInteger("owner"))).getHealth());
-			list.add(EnumChatFormatting.GOLD + "[Location] " + EnumChatFormatting.RESET + (int)player.worldObj.getEntityByID(itemStack.getTagCompound().getInteger("owner")).posX + "X " + (int)player.worldObj.getEntityByID(itemStack.getTagCompound().getInteger("owner")).posY + "Y " + (int)player.worldObj.getEntityByID(itemStack.getTagCompound().getInteger("owner")).posZ +"Z");
+			if(player.worldObj.getEntityByID(itemStack.getTagCompound().getInteger("owner")) != null)
+			{
+				list.add(EnumChatFormatting.GOLD + "[Owner] " + EnumChatFormatting.RESET + player.worldObj.getEntityByID(itemStack.getTagCompound().getInteger("owner")).getCommandSenderName());
+				list.add(EnumChatFormatting.GOLD + "[HP] " + EnumChatFormatting.RESET + ((EntityLivingBase) player.worldObj.getEntityByID(itemStack.getTagCompound().getInteger("owner"))).getHealth());
+				list.add(EnumChatFormatting.GOLD + "[Location] " + EnumChatFormatting.RESET + (int)player.worldObj.getEntityByID(itemStack.getTagCompound().getInteger("owner")).posX + "X " + (int)player.worldObj.getEntityByID(itemStack.getTagCompound().getInteger("owner")).posY + "Y " + (int)player.worldObj.getEntityByID(itemStack.getTagCompound().getInteger("owner")).posZ +"Z");
+			}
+			else
+				list.add(EnumChatFormatting.GOLD + itemStack.getDisplayName().replace("'s Heart", "") + " is dead !");
 		}
 		else
-			list.add(EnumChatFormatting.GOLD + itemStack.getDisplayName().replace("'s Heart", "") + " is dead !");
+			list.add(EnumChatFormatting.RED + "I AM JEFF!");
 	}
 	
 	public void setHeartOwner(ItemStack itemStack, EntityLivingBase e)

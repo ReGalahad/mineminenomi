@@ -14,6 +14,7 @@ public class EntityNewMob extends EntityMob implements IDynamicRenderer
 	public EntityNewMob(World worldIn) 
 	{
 		super(worldIn);
+		addRandomArmor();
 	}
 		
 	public String getTexture() {return texture;}

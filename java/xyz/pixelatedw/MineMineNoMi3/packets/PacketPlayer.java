@@ -182,15 +182,13 @@ public class PacketPlayer implements IMessage
 					player.worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL.getParticleName(), player.posX + offsetX, player.posY + offsetY, player.posZ + offsetZ, 0.0D, 0.1D, 0.0D);
 				}	
 			}
+			
 			if(message.cmd.equals("particles_test"))
-			{	
-								
-				Timer timer = new Timer(true);
+			{
+				Timer timer = new Timer(true); 
 				timer.schedule(ListParticleEffects.createSphereFX(player, EnumParticleTypes.FLAME.getParticleName(), 2, 20, 2), 0);
-
 			}
-			
-			
+
 			return null;		
 		}
 	}

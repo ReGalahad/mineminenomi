@@ -8,6 +8,7 @@ import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 
@@ -40,6 +41,9 @@ public class Cola extends ItemFood
 				else 
 					props.setCola(props.getMaxCola());
 			}
+			
+	    	if(!ID.DEV_EARLYACCESS && !player.capabilities.isCreativeMode)
+	    		WyTelemetry.addGeneralStat("bottlesOfColaDrank", 1);
 			
 			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
 		}			

@@ -8,6 +8,7 @@ import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
+import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityCustomSpawner;
 
 public class ListExtraStructures
 {
@@ -41,14 +42,28 @@ public class ListExtraStructures
 			x3 = 13;
 		}
 		
+		
+		TileEntityCustomSpawner spw1 = new TileEntityCustomSpawner(toSpawn1, 5);
+		TileEntityCustomSpawner spw2 = new TileEntityCustomSpawner(toSpawn1, 5);
+		TileEntityCustomSpawner spw3 = new TileEntityCustomSpawner(toSpawn1, 5);
+		TileEntityCustomSpawner spw4 = new TileEntityCustomSpawner(toSpawn1, 5);
+		TileEntityCustomSpawner spw5 = new TileEntityCustomSpawner(toSpawn1, 5);
+		TileEntityCustomSpawner spw6 = new TileEntityCustomSpawner(toSpawnCpt, 1);
+		
 		world.setBlock(posX + 10, posY + 2, posZ + 27, ListMisc.CustomSpawner.setSpawnerMob(toSpawn1).setSpawnerLimit(5) );
+		world.setTileEntity(posX + 10, posY + 2, posZ + 27, spw1);
 		world.setBlock(posX + 14, posY + 2, posZ + 32, ListMisc.CustomSpawner.setSpawnerMob(toSpawn2).setSpawnerLimit(5) );
+		world.setTileEntity(posX + 14, posY + 2, posZ + 32, spw2);
 		
 		world.setBlock(posX + 12, posY + 8, posZ + 17, ListMisc.CustomSpawner.setSpawnerMob(toSpawn1).setSpawnerLimit(5) );
+		world.setTileEntity(posX + 12, posY + 8, posZ + 17, spw3);
 		world.setBlock(posX + 12, posY + 8, posZ + 11, ListMisc.CustomSpawner.setSpawnerMob(toSpawn1).setSpawnerLimit(5) );
-
+		world.setTileEntity(posX + 12, posY + 8, posZ + 11, spw4);
+		
 		world.setBlock(posX + 14, posY + 8, posZ + 42, ListMisc.CustomSpawner.setSpawnerMob(toSpawn1).setSpawnerLimit(5) );
+		world.setTileEntity(posX + 14, posY + 8, posZ + 42, spw5);
 		world.setBlock(posX + 8, posY + 8, posZ + 42, ListMisc.CustomSpawner.setSpawnerMob(toSpawnCpt).setSpawnerLimit(1) );
+		world.setTileEntity(posX + 8, posY + 8, posZ + 42, spw6);
 		
 		TileEntityChest chest1 = new TileEntityChest();
 		world.setTileEntity(posX + x1, posY + 2, posZ + 39, chest1);
@@ -136,9 +151,17 @@ public class ListExtraStructures
 			swordToSpawn = ListMisc.PirateCutlass;
 		}
 		
+		
+		TileEntityCustomSpawner spw1 = new TileEntityCustomSpawner(toSpawn1, 5);
+		TileEntityCustomSpawner spw2 = new TileEntityCustomSpawner(toSpawn2, 5);
+		TileEntityCustomSpawner spw3 = new TileEntityCustomSpawner(toSpawn1, 2);
+		
 		world.setBlock(posX + 10, posY + 2, posZ + 32, ListMisc.CustomSpawner.setSpawnerMob(toSpawn1).setSpawnerLimit(5));
+		world.setTileEntity(posX + 10, posY + 2, posZ + 32, spw1);
 		world.setBlock(posX + 10, posY + 2, posZ + 43, ListMisc.CustomSpawner.setSpawnerMob(toSpawn2).setSpawnerLimit(5));
+		world.setTileEntity(posX + 10, posY + 2, posZ + 43, spw2);
 		world.setBlock(posX + 10, posY + 7, posZ + 45, ListMisc.CustomSpawner.setSpawnerMob(toSpawn1).setSpawnerLimit(2));
+		world.setTileEntity(posX + 10, posY + 7, posZ + 45, spw3);
 
 		world.setBlock(posX + 12, posY + 2, posZ + 32, Blocks.torch);
 		world.setBlock(posX + 12, posY + 2, posZ + 38, Blocks.torch);

@@ -35,7 +35,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.math.Sphere;
 public class WyHelper 
 {
 
-	public static enum Direction {SOUTH, SOUTH_EAST, EAST, NORTH, NORTH_EAST, NORTH_WEST, WEST, SOUTH_WEST;}
+	public enum Direction {SOUTH, SOUTH_EAST, EAST, NORTH, NORTH_EAST, NORTH_WEST, WEST, SOUTH_WEST;}
 	
 	public static AxisAlignedBB NULL_AABB = AxisAlignedBB.getBoundingBox(0, 0, 0, 0, 0, 0);
 	

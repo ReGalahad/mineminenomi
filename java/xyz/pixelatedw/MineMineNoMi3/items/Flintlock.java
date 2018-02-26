@@ -24,7 +24,7 @@ public class Flintlock extends Item
 	{		
 		if(!world.isRemote)
 		{
-			if(MainKeys.isShiftKeyDown())
+			if(player.isSneaking())
 			{
 				if(itemStack.getTagCompound().getInteger("bulletType") == 0 && itemStack.getTagCompound().getInteger("bullets") == 0) 
 				{

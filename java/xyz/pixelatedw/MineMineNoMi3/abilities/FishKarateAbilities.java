@@ -86,11 +86,6 @@ public class FishKarateAbilities
 		{
 			super(ListAttributes.SAMEHADASHOTEI); 
 		}
-			
-		public void use(EntityPlayer player)
-		{
-			super.use(player);
-		}
 	}
 	
 	public static class KarakusagawaraSeiken extends Ability

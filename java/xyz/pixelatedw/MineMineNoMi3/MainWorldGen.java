@@ -17,6 +17,7 @@ import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 public class MainWorldGen implements IWorldGenerator 
 {
 	//-8290517664781417306
+	//1682725888991043500
 	
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
 	{
@@ -32,10 +33,10 @@ public class MainWorldGen implements IWorldGenerator
 				
 		if(MainConfig.enableShips)
 		{
-			this.addStructureSpawn(WySchematicHelper.load("marineShip"), world, random, i, j, 32, 32, 2.0);
-			this.addStructureSpawn(WySchematicHelper.load("pyrateShip"), world, random, i, j, 32, 32, 2.2);
-			this.addStructureSpawn(WySchematicHelper.load("pyrateLargeShip"), world, random, i, j, 32, 32, 1.7);
-			this.addStructureSpawn(WySchematicHelper.load("marineLargeShip"), world, random, i, j, 32, 32, 1.5);
+			this.addStructureSpawn(WySchematicHelper.load("marineShip"), world, random, i * 2, j * 2, 1, 1, 1.0);
+			this.addStructureSpawn(WySchematicHelper.load("pyrateShip"), world, random, i * 2, j * 2, 1, 1, 1.2);
+			this.addStructureSpawn(WySchematicHelper.load("pyrateLargeShip"), world, random, i * 2, j * 2, 1, 1, 1.0);
+			this.addStructureSpawn(WySchematicHelper.load("marineLargeShip"), world, random, i * 2, j * 2, 1, 1, 1.1);
 		}
 	}
 	 
@@ -63,14 +64,14 @@ public class MainWorldGen implements IWorldGenerator
 	{
 		if(world.rand.nextInt(100) + world.rand.nextDouble() <= rarity)
 		{		
-			int posX = blockXPos + random.nextInt(maxX);
+			int posX = blockXPos;// + random.nextInt(maxX);
 			int posY = random.nextInt(128);
-			int posZ = blockZPos + random.nextInt(maxZ);			
+			int posZ = blockZPos;// + random.nextInt(maxZ);			
 			BiomeGenBase biome = world.getBiomeGenForCoordsBody(posX, posZ);		
 			
 			if( (biome.biomeName.equals("Ocean") || biome.biomeName.equals("Deep Ocean") ) && checkForShipSpawn(s, world, posX, posY, posZ))
 			{
-				System.out.println("[MainWorldGen-73] " + s.getName() + " spawned at x:" + posX + " y:" + posY + " z:" + posZ);
+				System.out.println("" + s.getName() + " spawned at /tp @p " + posX + " " + posY + " " + posZ);
 				if(s.getName().equals("marineShip") || s.getName().equals("pyrateShip"))		
 				{
 					WySchematicHelper.build(s, world, posX, posY, posZ);
@@ -90,11 +91,10 @@ public class MainWorldGen implements IWorldGenerator
 		for(int i = 0; i < s.getWidth(); i++)
 		for(int j = 0; j < s.getHeight(); j++)
 		for(int k = 0; k < s.getLength(); k++)
-		{
-			
-			if(world.getBlock(posX + i, posY + j, posZ + k) == Blocks.air || world.getBlock(posX, posY, posZ) == Blocks.water || world.getBlock(posX + i, posY + j, posZ + k) == Blocks.flowing_water)
+		{			
+			if(world.getBlock(posX + i, posY + j, posZ + k) == Blocks.air) //|| world.getBlock(posX, posY, posZ) == Blocks.water || world.getBlock(posX + i, posY + j, posZ + k) == Blocks.flowing_water)
 			{
-				if( world.getBlock(posX, posY, posZ) == Blocks.water || world.getBlock(posX, posY, posZ) == Blocks.flowing_water )
+				if( world.getBlock(posX, posY - 1, posZ) == Blocks.water || world.getBlock(posX, posY - 1, posZ) == Blocks.flowing_water )
 				{
 					if( world.getBlock(posX, posY + 2, posZ) == Blocks.air)
 						return true;
@@ -102,17 +102,6 @@ public class MainWorldGen implements IWorldGenerator
 				}
 				else return false;
 			}
-			
-			/*if( world.getBlockState(new BlockPos(posX, posY, posZ).add(i, j, k)) == Blocks.AIR.getDefaultState() || world.getBlockState(new BlockPos(posX, posY, posZ)) == Blocks.WATER.getDefaultState() || world.getBlockState(new BlockPos(posX + i, posY + j, posZ + k)) == Blocks.FLOWING_WATER.getDefaultState())
-			{
-				if( world.getBlockState(new BlockPos(posX, posY, posZ)) == Blocks.WATER.getDefaultState() || world.getBlockState(new BlockPos(posX, posY, posZ)) == Blocks.FLOWING_WATER.getDefaultState() )
-				{
-					if( world.getBlockState(new BlockPos(posX, posY + 2, posZ)) == Blocks.AIR.getDefaultState()) 
-						return true;
-					else return false;
-				}
-				else return false;
-			}*/
 		}		
 		return false;
 	}

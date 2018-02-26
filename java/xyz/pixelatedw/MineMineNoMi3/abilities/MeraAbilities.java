@@ -107,7 +107,7 @@ public class MeraAbilities
 			if(!isOnCooldown)
 			{
 				Sphere.generate((int)(int) player.posX, (int)(int) player.posY, (int)(int) player.posZ, 12, new ISphere()
-				{ 
+				{
 					public void call(int x, int y, int z)
 					{
 						for(int i = -3; i <= 3; i++)

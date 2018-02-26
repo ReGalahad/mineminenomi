@@ -404,6 +404,7 @@ public class ExtendedEntityStats implements IExtendedEntityProperties
 	public void triggerActiveHaki(boolean isHakiActive) { this.hasHakiActive = isHakiActive; }
 	public int getHakiTimer() { return hakiTimer; }
 	public void addHakiTimer() { hakiTimer++; }
+	public void decHakiTimer() { hakiTimer--; }
 	public void resetHakiTimer() { hakiTimer = 0; }
 
 	public void setKilo(boolean kilo) { this.kilo = kilo; }

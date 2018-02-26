@@ -14,29 +14,11 @@ public class DevilFruitsBoosts
 		for(int j = -20; j < 20; j++)
 		for(int k = -20; k < 20; k++)
 		{
-			//if(entity.worldObj.getBlock((int)entity.posX + i, (int)entity.posY + j, (int)entity.posZ + k) == ListMisc.OpeMid)
-			//	return true;
+			if(entity.worldObj.getBlock((int)entity.posX + i, (int)entity.posY + j, (int)entity.posZ + k) == ListMisc.OpeMid)
+				return true;
 		}
 		
 		return false;
-	}
-	
-	public static int getExtraDamageFromClay(EntityLivingBase entity)
-	{	
-		int extraPower = 0;
-		
-		for(int i = -10; i < 10; i++)
-		for(int j = -10; j < 10; j++)
-		for(int k = -10; k < 10; k++)
-		{
-			if(entity.worldObj.getBlock((int)entity.posX + i, (int)entity.posY + j, (int)entity.posZ + k) == Blocks.clay)
-			{
-				extraPower++;
-				entity.worldObj.setBlock((int)entity.posX + i, (int)entity.posY + j, (int)entity.posZ + k, Blocks.air);
-			}
-		}
-		
-		return extraPower;
 	}
 	
 	public static int getRegenFromPoision(EntityLivingBase entity)

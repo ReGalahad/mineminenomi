@@ -19,7 +19,7 @@ import xyz.pixelatedw.MineMineNoMi3.MainMod;
 public class WyRegistry
 {
 
-	private static int entityID = 100;
+	private static int entityID = 200;
 	private static int packetID = 0;
 	protected static HashMap lang = new HashMap();
 	protected static HashMap items = new HashMap();

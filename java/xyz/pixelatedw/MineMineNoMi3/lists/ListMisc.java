@@ -7,6 +7,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
+import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.NewBlock;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyRegistry;
@@ -177,6 +178,27 @@ public class ListMisc
  		addBLOCK(CustomSpawner		, "Custom Spawner"		, Float.POSITIVE_INFINITY		, TileEntityCustomSpawner.class	, ListCreativeTabs.tabMisc);
  		addBLOCK(Darkness			, "Darkness"			, Float.POSITIVE_INFINITY		, null							, ListCreativeTabs.tabMisc);
  		
+ 		WyRegistry.registerName("race.n/a.name", "N/A");
+ 		WyRegistry.registerName("faction.n/a.name", "N/A");
+ 		WyRegistry.registerName("style.n/a.name", "N/A");
+ 		
+ 		WyRegistry.registerName("race.human.name", "Human");
+ 		WyRegistry.registerName("race.fishman.name", "Fishman");
+ 		WyRegistry.registerName("race.cyborg.name", "Cyborg");
+ 		
+ 		WyRegistry.registerName("faction.pirate.name", "Pirate");
+ 		WyRegistry.registerName("faction.marine.name", "Marine");
+ 		WyRegistry.registerName("faction.bountyhunter.name", "Bounty Hunter");
+ 		
+ 		WyRegistry.registerName("style.swordsman.name", "Swordsman");
+ 		WyRegistry.registerName("style.sniper.name", "Sniper");
+ 		WyRegistry.registerName("style.medic.name", "Medic");
+ 		
+ 		WyRegistry.registerName(ID.LANG_GUI_FACTION, "Faction");
+ 		WyRegistry.registerName(ID.LANG_GUI_RACE, "Race");
+ 		WyRegistry.registerName(ID.LANG_GUI_STYLE, "Style");
+ 		WyRegistry.registerName(ID.LANG_GUI_ABILITIES, "Abilities");
+ 		WyRegistry.registerName("gui.epithet.name", "Epithets");
 	}   
 	 
 	private static void addITEM(Item item,String localizedName, CreativeTabs tab)

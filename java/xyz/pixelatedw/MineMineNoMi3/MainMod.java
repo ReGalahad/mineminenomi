@@ -1,12 +1,8 @@
 package xyz.pixelatedw.MineMineNoMi3;
 
-import java.util.HashMap;
-
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.ModContainer;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -16,12 +12,11 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
-import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
-import xyz.pixelatedw.MineMineNoMi3.commands.CommandAbility;
 import xyz.pixelatedw.MineMineNoMi3.commands.CommandBelly;
 import xyz.pixelatedw.MineMineNoMi3.commands.CommandBounty;
 import xyz.pixelatedw.MineMineNoMi3.commands.CommandDoriki;
 import xyz.pixelatedw.MineMineNoMi3.commands.CommandExtol;
+import xyz.pixelatedw.MineMineNoMi3.commands.CommandFG;
 import xyz.pixelatedw.MineMineNoMi3.gui.GUIHandler;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListCreativeTabs;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListDevilFruits;
@@ -65,8 +60,7 @@ public class MainMod
 		
 		proxy.init();
 		
-		//if(WyDebug.isDebug())
-		//	WyHelper.generateLangFiles();
+		//WyHelper.generateLangFiles();
 	}
 	
 	@EventHandler
@@ -75,8 +69,8 @@ public class MainMod
 	@EventHandler
 	public void serverInit(FMLServerStartingEvent event)
 	{
-		//if(WyDebug.isDebug())
 		//	event.registerServerCommand(new CommandAbility());
+		event.registerServerCommand(new CommandFG());
 		event.registerServerCommand(new CommandDoriki());
 		event.registerServerCommand(new CommandBelly());
 		event.registerServerCommand(new CommandBounty());

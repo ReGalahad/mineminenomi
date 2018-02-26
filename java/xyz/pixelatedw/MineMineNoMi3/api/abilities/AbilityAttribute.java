@@ -7,6 +7,7 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
+import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.EffectType;
 
 public class AbilityAttribute 
@@ -15,8 +16,9 @@ public class AbilityAttribute
 	private boolean projectileExplosionHasFire = true, projectileExplosionHasSmoke = true, canBeCharged = false, isRepeater = false, itemExplosionHasFire = true, itemExplosionHasSmoke = true, isPassive = false;
 	private int itemTicks = 0, entityTicks = 60, entitySpeed = 1, entityExplosion = 0, potionEffectAoeRadius = 0, itemMaxCharge = 0, itemExplosion = 0;
 	private float projectileAlpha = 255, entityDamage = 1;
+	private double entityXRotation = 0, entityYRotation = 0, entityZRotation = 0;
 	private Color entityColor = Color.decode("#FFFFFF");
-	private double[] entityScale = new double[] {1, 1, 1}, entityPos = new double[] {0, 0, 0}, entityRotation = new double[] {0, 0, 0, 0}, entityMotion = new double[] {0, 0, 0};
+	private double[] entityScale = new double[] {1, 1, 1}, entityPos = new double[] {0, 0, 0}, entityMotion = new double[] {0, 0, 0};
 	private ModelBase entityModel = null;
 	private PotionEffect[] potionEffectsForProjectile = null, potionEffectsForUser = null, potionEffectsForAoE = null;
 	private ResourceLocation entityTexture = null;
@@ -49,6 +51,10 @@ public class AbilityAttribute
 	public AbilityAttribute setProjectileExplosion(int i, boolean fire) {this.entityExplosion = i;this.projectileExplosionHasFire = fire;return this;}
 	public AbilityAttribute setProjectileExplosion(int i) {this.entityExplosion = i;return this;}
 	public AbilityAttribute setProjectileSpeed(int i) {this.entitySpeed = i;return this;}
+	public AbilityAttribute setProjectileTexture(String textureName) {this.entityTexture = new ResourceLocation(ID.PROJECT_ID, "textures/models/projectiles/" + textureName +".png"); return this;}
+	public AbilityAttribute setProjectileXRotation(double angle) { entityXRotation = angle; return this;}
+	public AbilityAttribute setProjectileYRotation(double angle) { entityYRotation = angle; return this;}
+	public AbilityAttribute setProjectileZRotation(double angle) { entityZRotation = angle; return this;}
 		//Potion Effects
 	public AbilityAttribute addEffects(EffectType type, PotionEffect... e) 
 	{
@@ -74,18 +80,22 @@ public class AbilityAttribute
 	public boolean canAbilityExplosionDestroyBlocks() { return this.itemExplosionHasSmoke; }
 	public boolean isPassive() { return this.isPassive; }
 		//Projectile
-	public boolean hasProjectile() {return this.entityTicks > 0 && this.entityModel != null;}
-	public int getProjectileTicks() {return entityTicks;}
-	public float getProjectileDamage() {return entityDamage;}
-	public Color getProjectileColor() {return entityColor;}
-	public ModelBase getProjectileModel() {return entityModel;}
-	public double[] getProjectileSize() {return entityScale;}
+	public boolean hasProjectile() { return this.entityTicks > 0 && this.entityModel != null; }
+	public int getProjectileTicks() { return entityTicks; }
+	public float getProjectileDamage() { return entityDamage; }
+	public Color getProjectileColor() { return entityColor; }
+	public ModelBase getProjectileModel() { return entityModel; }
+	public double[] getProjectileSize() { return entityScale; }
 	public double[] getProjectilePosition() { return entityPos; }
-	public int getProjectileSpeed() {return entitySpeed;}
-	public int getProjectileExplosionPower() {return entityExplosion;}		
-	public boolean canExplosionSetFire() {return projectileExplosionHasFire;}
-	public boolean canExplosionDestroyBlocks() {return itemExplosionHasSmoke;}	
+	public int getProjectileSpeed() { return entitySpeed; }
+	public int getProjectileExplosionPower() { return entityExplosion; }		
+	public boolean canExplosionSetFire() { return projectileExplosionHasFire; }
+	public boolean canExplosionDestroyBlocks() { return itemExplosionHasSmoke; }	
 	public float getProjectileAlpha() { return this.projectileAlpha; }
+	public ResourceLocation getProjectileTexture() { return this.entityTexture; }
+	public double getProjectileXRotation() { return this.entityXRotation; }
+	public double getProjectileYRotation() { return this.entityYRotation; }
+	public double getProjectileZRotation() { return this.entityZRotation; }
 		//Potion Effects
 	public PotionEffect[] getPotionEffectsForProjectile() {return this.potionEffectsForProjectile;}
 	public PotionEffect[] getPotionEffectsForUser() {return this.potionEffectsForUser;}

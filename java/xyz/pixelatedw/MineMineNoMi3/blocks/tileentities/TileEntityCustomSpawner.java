@@ -1,6 +1,7 @@
 package xyz.pixelatedw.MineMineNoMi3.blocks.tileentities;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
@@ -16,7 +17,7 @@ public class TileEntityCustomSpawner extends TileEntity
 	
 	private String entityToSpawn;
 	private int spawnLimit = 5;
-	private ArrayList spawnedEntities = new ArrayList();
+	private ArrayList<EntityLivingBase> spawnedEntities = new ArrayList<EntityLivingBase>();
 	
 	public TileEntityCustomSpawner(String entityToSpawn, int spawnLimit)
 	{
@@ -26,31 +27,37 @@ public class TileEntityCustomSpawner extends TileEntity
 	
     public void updateEntity()
     {
-    	if(!WyHelper.getEntitiesNear(this, 30, EntityPlayer.class).isEmpty())
-		{			
-			EntityLivingBase elb = WyHelper.getEntitiesNear(this, 30, EntityPlayer.class).get(0);
-			//EntityList.createEntityByName(entityName, worldIn)
-			if(elb instanceof EntityPlayer)
-			{ 
-				EntityPlayer player = (EntityPlayer) elb;
-
-				if((this.spawnedEntities.size() < this.spawnLimit) && !this.worldObj.isRemote)
-				{						
-					EntityLivingBase newSpawn = (EntityLivingBase) EntityList.createEntityByName(this.entityToSpawn, this.worldObj);//new EntityPig(this.worldObj);
-					newSpawn.setLocationAndAngles(this.xCoord, this.yCoord, this.zCoord, 0, 0);
-					this.worldObj.spawnEntityInWorld(newSpawn);
-					this.spawnedEntities.add(newSpawn);
+    	if(!this.worldObj.isRemote)
+    	{
+	    	if(!WyHelper.getEntitiesNear(this, 30, EntityPlayer.class).isEmpty())
+	    	{
+				EntityLivingBase elb = WyHelper.getEntitiesNear(this, 30, EntityPlayer.class).get(0);
+				
+				if(elb instanceof EntityPlayer)
+				{
+					EntityPlayer player = (EntityPlayer) elb;
+					
+					if((this.spawnedEntities.size() < this.spawnLimit))
+					{
+						EntityLivingBase newSpawn = (EntityLivingBase) EntityList.createEntityByName(this.entityToSpawn, this.worldObj);//new EntityPig(this.worldObj);
+						newSpawn.setLocationAndAngles(this.xCoord, this.yCoord, this.zCoord, 0, 0);	
+						this.worldObj.spawnEntityInWorld(newSpawn);
+						this.spawnedEntities.add(newSpawn);
+					}
+				}
+			} 
+			else
+			{ 	
+				if(this.spawnedEntities.size() == this.spawnLimit)
+				{
+					for(int i = 0; i <= this.spawnedEntities.size(); i++)
+					{
+						this.spawnedEntities.get(i).setDead();
+						this.spawnedEntities.clear();
+					}
 				}
 			}
-		} 
-		else
-		{ 
-			for(Object elbz : this.spawnedEntities.toArray())
-			{
-				((EntityLivingBase)elbz).setDead();
-				this.spawnedEntities.clear();
-			}
-		}
+    	}
     }
 	
 }

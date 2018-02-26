@@ -8,6 +8,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
@@ -35,15 +36,23 @@ public class GUIPlayer extends GuiScreen
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);	
 		
 		int posX = (this.width - 256) / 2;
-		int posY = (this.height - 256) / 2;
+		int posY = (this.height - 256) / 2;		
 		
-		mc.fontRenderer.drawStringWithShadow(EnumChatFormatting.BOLD + "COLA: " + EnumChatFormatting.RESET + "" + props.getCola() + " / " + props.getMaxCola(), posX - 30, posY + 50, -1) ;
-		mc.fontRenderer.drawStringWithShadow(EnumChatFormatting.BOLD + "DORIKI: " + EnumChatFormatting.RESET + "" + props.getDoriki(), posX - 30, posY + 70, -1);
-		mc.fontRenderer.drawStringWithShadow(EnumChatFormatting.BOLD + "FACTION: " + EnumChatFormatting.RESET + "" + props.getFaction(), posX - 30, posY + 90, -1);
-		mc.fontRenderer.drawStringWithShadow(EnumChatFormatting.BOLD + "RACE: " + EnumChatFormatting.RESET + "" + props.getRace(), posX - 30, posY + 110, -1);
-		mc.fontRenderer.drawStringWithShadow(EnumChatFormatting.BOLD + "FIGHTING ", posX - 30, posY + 130, -1);
-		mc.fontRenderer.drawStringWithShadow(EnumChatFormatting.BOLD + "STYLE ", posX - 5, posY + 140, -1);
-		mc.fontRenderer.drawStringWithShadow(EnumChatFormatting.BOLD + ": "+ EnumChatFormatting.RESET + "" + props.getFightStyle(), posX + 35, posY + 135, -1);
+		String factionGUI = I18n.format(ID.LANG_GUI_FACTION);
+		String raceGUI = I18n.format(ID.LANG_GUI_RACE);
+		String styleGUI = I18n.format(ID.LANG_GUI_STYLE);
+		
+		String factionActual = I18n.format("faction." + props.getFaction().toLowerCase() + ".name");
+		String raceActual = I18n.format("race." + props.getRace().toLowerCase() + ".name");
+		String styleActual = I18n.format("style." + props.getFightStyle().toLowerCase() + ".name");
+		
+		
+		if(props.getRace().equals(ID.RACE_CYBORG))
+			mc.fontRenderer.drawStringWithShadow(EnumChatFormatting.BOLD + "COLA: " + EnumChatFormatting.RESET + props.getCola() + " / " + props.getMaxCola(), posX - 30, posY + 50, -1) ;
+		mc.fontRenderer.drawStringWithShadow(EnumChatFormatting.BOLD + "DORIKI: " + EnumChatFormatting.RESET + props.getDoriki(), posX - 30, posY + 70, -1);
+		mc.fontRenderer.drawStringWithShadow(EnumChatFormatting.BOLD + factionGUI + ": " + EnumChatFormatting.RESET + factionActual, posX - 30, posY + 90, -1);
+		mc.fontRenderer.drawStringWithShadow(EnumChatFormatting.BOLD + raceGUI + ": " + EnumChatFormatting.RESET + raceActual, posX - 30, posY + 110, -1);
+		mc.fontRenderer.drawStringWithShadow(EnumChatFormatting.BOLD + styleGUI + ": " + EnumChatFormatting.RESET + styleActual, posX - 30, posY + 130, -1);
 
 		if(props.getBelly() > 0)
 		{
@@ -107,9 +116,9 @@ public class GUIPlayer extends GuiScreen
 		int posX = (this.width - 256) / 2;
 		int posY = (this.height - 256) / 2;
 
-		//this.buttonList.add(new GuiButton(1, posX - 32, posY + 35, 80, 20, "Achievements"));
+		this.buttonList.add(new GuiButton(1, posX - 23, posY + 210, 80, 20, I18n.format(ID.LANG_GUI_ABILITIES)));
 		
-		this.buttonList.add(new GuiButton(1, posX - 23, posY + 210, 80, 20, "Abilities"));
+		//this.buttonList.add(new GuiButton(2, posX + 63, posY + 210, 80, 20, I18n.format("gui.epithet.name")));
 	}
 	
 	public void actionPerformed(GuiButton button)

@@ -1,5 +1,7 @@
 package xyz.pixelatedw.MineMineNoMi3.api.abilities;
 
+import java.util.Date;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -8,8 +10,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
+import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.MeraProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 
@@ -19,26 +23,16 @@ public class Ability
 	protected AbilityProjectile projectile;
 	protected AbilityAttribute attr;
 	protected boolean isOnCooldown = false, isCharging = false, isRepeating = false, passiveActive = false;
-	private int ticksForCooldown, ticksForCharge, ticksForRepeater, slotId = -1;
+	private int ticksForCooldown, ticksForCharge, ticksForRepeater;
 	
 	public Ability(AbilityAttribute attr)
 	{
 		this.attr = attr;
 		ticksForCooldown = attr.getAbilityCooldown();
 		ticksForCharge = attr.getAbilityCharges();
-		ticksForRepeater = attr.getAbilityCooldown();
+		ticksForRepeater = attr.getAbilityCooldown();		
 	}
-	
-	public void setSlotId(int slot)
-	{
-		this.slotId = slot;
-	}
-	
-	public int getSlotId()
-	{
-		return this.slotId;
-	}
-	
+
 	public AbilityAttribute getAttribute() { return attr; }
 	
 	public void use(EntityPlayer player)
@@ -68,7 +62,11 @@ public class Ability
 			
 			if(!player.getDisplayName().equals(FMLCommonHandler.instance().getMinecraftServerInstance().getServerOwner()))	
 				WyNetworkHelper.sendTo(new PacketPlayer("clientUpdateIsCooldown" + this.getAttribute().getAttributeName(), true), (EntityPlayerMP) player);
+
+	    	if(!ID.DEV_EARLYACCESS && !player.capabilities.isCreativeMode)
+	    		WyTelemetry.addDevilFruitStat("abilityUsed_" + WyHelper.getFancyName(this.getAttribute().getAttributeName()), 1);
 			startCooldown();
+			//newUpdate(player);
 		}
 	}
 	
@@ -141,6 +139,8 @@ public class Ability
 		if(!isOnCooldown)
 		{
 			isCharging = true;
+	    	if(!ID.DEV_EARLYACCESS && !player.capabilities.isCreativeMode)
+	    		WyTelemetry.addDevilFruitStat("abilityUsed_" + WyHelper.getFancyName(this.getAttribute().getAttributeName()), 1);
 			if(!player.getDisplayName().equals(FMLCommonHandler.instance().getMinecraftServerInstance().getServerOwner()))
 				WyNetworkHelper.sendTo(new PacketPlayer("clientUpdateIsCharging" + this.getAttribute().getAttributeName(), true), (EntityPlayerMP) player);
 		}
@@ -180,6 +180,64 @@ public class Ability
 	protected void startCooldown()
 	{
 		isOnCooldown = true;
+	}
+	
+	public void newUpdate(EntityPlayer player)
+	{
+		long startTime = System.currentTimeMillis();
+		long elapsedTime = 0L;
+
+		while (elapsedTime < 2*60*1000) 
+		{
+			elapsedTime = new Date().getTime() - startTime;
+			System.out.println("" + elapsedTime);
+			if(isOnCooldown)
+			{
+				if(ticksForCooldown > 0)
+				{
+					ticksForCooldown--;
+					if(isRepeating)
+					{
+						ticksForRepeater--;
+						if(ticksForRepeater > this.attr.getAbilityCooldown() - (this.attr.getAbilityCooldown() / 6) && projectile != null)
+						{
+							try 
+							{
+								player.worldObj.spawnEntityInWorld(projectile.getClass().getDeclaredConstructor(World.class, EntityLivingBase.class, AbilityAttribute.class).newInstance(player.worldObj, player, attr));
+							} 
+							catch (Exception e) { e.printStackTrace(); }
+						}
+						else
+						{
+							isRepeating = false;	
+							ticksForRepeater = attr.getAbilityCooldown();
+						}
+					}
+					duringCooldown(player, ticksForCooldown);
+				}
+				else
+				{
+					ticksForCooldown = this.attr.getAbilityCooldown();
+					isOnCooldown = false;				
+					if(!player.getDisplayName().equals(FMLCommonHandler.instance().getMinecraftServerInstance().getServerOwner()))
+						WyNetworkHelper.sendTo(new PacketPlayer("clientUpdateIsCooldown" + this.getAttribute().getAttributeName(), false), (EntityPlayerMP) player);
+					break;
+				}
+			}
+			if(isCharging)
+			{
+				if(ticksForCharge > 0)
+				{
+					ticksForCharge--;	
+					duringCharging(player, ticksForCharge);
+				}
+				else
+				{
+					ticksForCharge = this.attr.getAbilityCharges();
+					endCharging(player);
+				}
+			}
+		}
 	}
 	
 	public void update(EntityPlayer player) 

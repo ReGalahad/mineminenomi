@@ -13,6 +13,7 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.Doppelman;
@@ -23,46 +24,42 @@ import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 public class MarineData extends EntityNewMob
 {
 	protected EntityAIBase entityAIMeleeAttack = new EntityAIAttackOnCollide(this, 1.0D, false);
+	private EntityAIBase entityAIAttackNonMarine = new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true);
 	
 	public MarineData(World world)
 	{
 		super(world);
+        this.getNavigator().setBreakDoors(true);
+        this.getNavigator().setAvoidsWater(true);
 		this.tasks.addTask(0, entityAIMeleeAttack);
-		this.tasks.addTask(1, new EntityAISwimming(this));
-		this.tasks.addTask(2, new EntityAIOpenDoor(this, true));
-		this.tasks.addTask(3, new EntityAIWander(this, 1.0D));
-		this.tasks.addTask(4, new EntityAILookIdle(this));
+		this.tasks.addTask(0, new EntityAISwimming(this));
+		this.tasks.addTask(1, new EntityAIOpenDoor(this, true));
+		this.tasks.addTask(2, new EntityAIWander(this, 1.0D));
+		this.tasks.addTask(3, new EntityAILookIdle(this));
 		this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));
 		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, PirateData.class, 0, true));
 	}
   
 	public void onEntityUpdate() 
 	{
-/*		if(this.getAttackTarget() != null)
+		if(this.getAttackTarget() == null)
 		{
-			if(this.getAttackTarget() instanceof EntityPlayer)
-			{
-				ExtendedEntityStats props = ExtendedEntityStats.get(((EntityPlayer)this.getAttackTarget()));
-				
-				if(!(((EntityPlayer)this.getAttackTarget()).capabilities.isCreativeMode))
+			this.targetTasks.removeTask(entityAIAttackNonMarine);
+			for(EntityLivingBase target : WyHelper.getEntitiesNear(this, 20))
+			{	
+				if(target instanceof EntityPlayer)
 				{
-					if(!props.getFaction().equals("Marine"))
-					{
-						this.targetTasks.addTask(1, attackMelee);
-						this.targetTasks.addTask(2, nearestTarget);
-					}
-					else
-					{
-						this.targetTasks.removeTask(attackMelee);
-						this.targetTasks.removeTask(nearestTarget);	
-					}
-				}	
+					EntityPlayer targetP = (EntityPlayer) target;
+					ExtendedEntityStats props = ExtendedEntityStats.get(targetP);
+									
+					if(props.getFaction().equals(ID.FACTION_MARINE) || props.getFaction().equals(ID.FACTION_BOUNTYHUNTER))
+						break;
+									
+					this.setTarget(targetP);
+					this.targetTasks.addTask(1, entityAIAttackNonMarine);
+				}
 			}
-			else
-			{
-				this.targetTasks.addTask(1, attackMelee);			
-			}
-		}*/
+		}
 		
 		super.onEntityUpdate();
 	}
