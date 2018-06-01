@@ -83,12 +83,10 @@ public class BaneAbilities
 
 			if(player.onGround)
 				motion("+", 0, 1.2 + (double)1/2, 0, (EntityPlayerMP) player);
-				//player.motionY += 1.2 + (double)1/2;
 			else
 				motion("+", 0, 1.36 + (double)1/7, 0, (EntityPlayerMP) player);
-				//player.motionY += 1.36 + (double)1/7;
 	
-			if(dir == WyHelper.Direction.NORTH) 		motion("-", 0, 0, 1.4 + (double)1/2, player); //player.motionZ -= 1.4 + (double)1/2;
+			if(dir == WyHelper.Direction.NORTH) 		motion("-", 0, 0, 1.4 + (double)1/2, player);
 			if(dir == WyHelper.Direction.NORTH_WEST) {	motion("-", 1.4 + (double)1/2, 0, 1.4 + (double)1/2, player);}
 			if(dir == WyHelper.Direction.SOUTH)			motion("+", 0, 0, 1.4 + (double)1/2, player);
 			if(dir == WyHelper.Direction.NORTH_EAST) {	motion("-", 0, 0, 1.4 + (double)1/2, player);motion("+", 1.4 + (double)1/2, 0, 0, player);}

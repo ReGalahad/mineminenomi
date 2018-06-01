@@ -15,6 +15,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.GoroProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.MokuProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 
 public class MokuAbilities 
@@ -57,7 +58,7 @@ public class MokuAbilities
 			{
 				for(EntityLivingBase e : WyHelper.getEntitiesNear(player, 1.6))
 					e.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) player), 2);
-		    	WyNetworkHelper.sendTo(new PacketPlayer("particles_whiteLauncher"), (EntityPlayerMP) player);
+		    	WyNetworkHelper.sendTo(new PacketParticles("whiteLauncher", player), (EntityPlayerMP) player);
 			}
 	    }
 	}

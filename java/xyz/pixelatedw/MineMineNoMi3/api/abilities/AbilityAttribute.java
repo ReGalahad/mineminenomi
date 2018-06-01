@@ -6,6 +6,7 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.EffectType;
@@ -13,8 +14,8 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.EffectType;
 public class AbilityAttribute 
 {	
 	private String attributeName = "N/A";
-	private boolean projectileExplosionHasFire = true, projectileExplosionHasSmoke = true, canBeCharged = false, isRepeater = false, itemExplosionHasFire = true, itemExplosionHasSmoke = true, isPassive = false;
-	private int itemTicks = 0, entityTicks = 60, entitySpeed = 1, entityExplosion = 0, potionEffectAoeRadius = 0, itemMaxCharge = 0, itemExplosion = 0;
+	private boolean projectileExplosionHasFire = true, projectileExplosionHasSmoke = true, canBeCharged = false, isRepeater = false, itemExplosionHasFire = true, itemExplosionHasSmoke = true, isPassive = false, isPunch = false;
+	private int itemTicks = 0, entityTicks = 60, entitySpeed = 1, entityExplosion = 0, potionEffectAoeRadius = 0, itemMaxCharge = 0, itemExplosion = 0, itemRepeaterFreq = 6;
 	private float projectileAlpha = 255, entityDamage = 1;
 	private double entityXRotation = 0, entityYRotation = 0, entityZRotation = 0;
 	private Color entityColor = Color.decode("#FFFFFF");
@@ -22,20 +23,65 @@ public class AbilityAttribute
 	private ModelBase entityModel = null;
 	private PotionEffect[] potionEffectsForProjectile = null, potionEffectsForUser = null, potionEffectsForAoE = null;
 	private ResourceLocation entityTexture = null;
-	private Object[] entityTrailType = null, itemTrailType = null;
 	
 	public AbilityAttribute() {}	
 	public AbilityAttribute(String name) {this.attributeName = name;}
 	
+	public AbilityAttribute(AbilityAttribute attr) 
+	{
+		this.attributeName = attr.attributeName;
+		
+		this.projectileExplosionHasFire = attr.projectileExplosionHasFire;
+		this.projectileExplosionHasSmoke = attr.projectileExplosionHasSmoke;
+		this.canBeCharged = attr.canBeCharged;
+		this.isRepeater = attr.isRepeater;
+		this.itemExplosionHasFire = attr.itemExplosionHasFire;
+		this.itemExplosionHasSmoke = attr.itemExplosionHasSmoke;
+		this.isPassive = attr.isPassive;
+		this.isPunch = attr.isPunch;
+		
+		this.itemTicks = attr.itemTicks;
+		this.entityTicks = attr.entityTicks;
+		this.entitySpeed = attr.entitySpeed;
+		this.entityExplosion = attr.entityExplosion;
+		this.potionEffectAoeRadius = attr.potionEffectAoeRadius;
+		this.itemMaxCharge = attr.itemMaxCharge;
+		this.itemExplosion = attr.itemExplosion;
+		this.itemRepeaterFreq = attr.itemRepeaterFreq;
+		
+		this.projectileAlpha = attr.projectileAlpha;
+		this.entityDamage = attr.entityDamage;
+		
+		this.entityXRotation = attr.entityXRotation;
+		this.entityYRotation = attr.entityYRotation;
+		this.entityZRotation = attr.entityZRotation;
+		
+		this.entityColor = attr.entityColor;
+		
+		this.entityScale = attr.entityScale;
+		this.entityPos = attr.entityPos;
+		this.entityMotion = attr.entityMotion;
+		
+		this.entityModel = attr.entityModel;
+		this.potionEffectsForProjectile = attr.potionEffectsForProjectile;
+		this.potionEffectsForUser = attr.potionEffectsForUser;
+		this.potionEffectsForAoE = attr.potionEffectsForAoE;
+		
+		this.entityTexture = attr.entityTexture;		
+	}
+	
+	
 	public AbilityAttribute setAttributeName(String name) { this.attributeName = name; return this; }
 		//Item
-	public AbilityAttribute setAbilityCooldown(int i) { this.itemTicks = i; return this; }	
+	public AbilityAttribute setAbilityCooldown(double seconds) { this.itemTicks = MathHelper.ceiling_double_int(seconds * 24); return this; }	
 	public AbilityAttribute setAbilityCharges(int ticks) { this.canBeCharged = true; this.itemMaxCharge = ticks; return this; }
 	public AbilityAttribute setAbilityExplosion(int i, boolean fire, boolean explosion) { this.itemExplosion = i; this.itemExplosionHasFire = fire; this.itemExplosionHasSmoke = explosion; return this; }
 	public AbilityAttribute setAbilityExplosion(int i, boolean fire) { this.itemExplosion = i; this.itemExplosionHasFire = fire; return this; }
 	public AbilityAttribute setAbilityExplosion(int i) { this.itemExplosion = i; return this; }
 	public AbilityAttribute setAbilityPassive() { this.isPassive = true; return this;}
+	public AbilityAttribute setAbilityPunch() { this.isPunch = true; return this; }
 	public AbilityAttribute setAbilityRepeater() { this.isRepeater = true; return this; }
+	public AbilityAttribute setAbilityRepeaterFrequency(int i) { this.itemRepeaterFreq = i; return this; }
 		//Projectile
 	public AbilityAttribute setProjectileTicks(int i) {this.entityTicks = i;return this;}
 	public AbilityAttribute setProjectileDamage(float i) {this.entityDamage = i;return this;}
@@ -79,6 +125,8 @@ public class AbilityAttribute
 	public boolean canAbilityExplosionSetFire() { return this.itemExplosionHasFire; }
 	public boolean canAbilityExplosionDestroyBlocks() { return this.itemExplosionHasSmoke; }
 	public boolean isPassive() { return this.isPassive; }
+	public int getAbilityRepeaterFrequency() { return this.itemRepeaterFreq; }
+	public boolean isPunch() { return this.isPunch; }
 		//Projectile
 	public boolean hasProjectile() { return this.entityTicks > 0 && this.entityModel != null; }
 	public int getProjectileTicks() { return entityTicks; }
@@ -103,5 +151,6 @@ public class AbilityAttribute
 	public int getEffectRadius() {return this.potionEffectAoeRadius;}
 		//Misc
 	public String getAttributeName() {return this.attributeName;}
-
+	
+	
 }

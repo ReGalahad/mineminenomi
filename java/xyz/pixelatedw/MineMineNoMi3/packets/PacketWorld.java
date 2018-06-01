@@ -5,15 +5,14 @@ import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.WorldServer;
-import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 
 public class PacketWorld implements IMessage
 {
 	protected int posX = 0, posY = 0, posZ = 0, blockId = -1;
-	
+
 	public PacketWorld() {}
 	
 	public PacketWorld(int posX, int posY, int posZ, int blockId) 
@@ -23,7 +22,7 @@ public class PacketWorld implements IMessage
 		this.posZ = posZ;
 		this.blockId = blockId;
 	}
-	
+
 	public void fromBytes(ByteBuf buf) 
 	{
 		this.posX = buf.readInt();
@@ -49,8 +48,8 @@ public class PacketWorld implements IMessage
 
 			if(message.blockId != -1)
 				player.worldObj.setBlock(message.posX, message.posY, message.posZ, Block.getBlockById(message.blockId));
-		
+			
 			return null;
 		}
-	}	
+	}		
 }

@@ -76,7 +76,7 @@ public class MeraProjectiles
 		public void tasksImapct(MovingObjectPosition hit)
 		{
 			this.worldObj.setBlock((int)this.posX, (int)this.posY, (int)this.posZ, Blocks.fire);
-		};
+		}
 		
 		public void onUpdate()
 		{	

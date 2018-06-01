@@ -1,22 +1,26 @@
 package xyz.pixelatedw.MineMineNoMi3.abilities;
 
-import com.mojang.realmsclient.gui.ChatFormatting;
-
+import net.minecraft.block.Block;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.math.ISphere;
 import xyz.pixelatedw.MineMineNoMi3.api.math.Sphere;
+import xyz.pixelatedw.MineMineNoMi3.blocks.BlockOpeMid;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.OpeProjectiles;
+import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
+import xyz.pixelatedw.MineMineNoMi3.items.Heart;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
 public class OpeAbilities
 {
-
-	public static Ability[] abilitiesArray = new Ability[] {new Room(), new CounterShock(), new GammaKnife()};
+	
+	public static Ability[] abilitiesArray = new Ability[] {new Room(), new Mes(), new CounterShock(), new GammaKnife()};
 	
 	public static class GammaKnife extends Ability
 	{
@@ -37,13 +41,24 @@ public class OpeAbilities
 		public Mes() 
 		{
 			super(ListAttributes.MES); 
-		}
+		}	
 		
-		public void use(EntityPlayer player)
+		public void hitEntity(EntityPlayer player, EntityLivingBase target) 
 		{
-			WyHelper.sendMsgToPlayer(player, ChatFormatting.RED + "NOT YET IMPLEMENTED");
-			//possible implementation using ~~raycasting~~ turning it passive and use the hand as means to activate Mes
-			super.use(player);
+			ExtendedEntityStats targetprops = ExtendedEntityStats.get(target);
+			
+			if(targetprops.hasHeart())
+			{
+		        ItemStack heart = new ItemStack(ListMisc.Heart);
+		        ((Heart)heart.getItem()).setHeartOwner(heart, target);
+		        heart.setStackDisplayName(target.getCommandSenderName() + "'s Heart");
+		        
+		        player.inventory.addItemStackToInventory(heart);
+		        
+		        targetprops.setHasHeart(false);
+			}
+			
+			super.hitEntity(player, target);
 		}
 	}
 	
@@ -88,7 +103,16 @@ public class OpeAbilities
 				
 				canSpawnRoom = false;
 				super.use(player);
-			}	
+			}
+			else if(!canSpawnRoom)
+			{
+				if(WyHelper.isBlockNearby(player, 20, ListMisc.OpeMid))
+				{
+					Block b = WyHelper.getBlockNearby(player, 20, ListMisc.OpeMid);
+					((BlockOpeMid)b).clearRoom();
+					canSpawnRoom = true;
+				}
+			}
 		} 
 		
 		public void alterSpawnFlag(boolean flag)

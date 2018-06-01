@@ -328,6 +328,13 @@ public class ModelJabraWolf extends ModelBiped
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(f, f1, f2, f3, f4, f5);
 
+		this.bipedLeftLeg.isHidden = true;
+		this.bipedRightLeg.isHidden = true;
+		this.bipedLeftArm.isHidden = true;
+		this.bipedRightArm.isHidden = true;
+		this.bipedBody.isHidden = true;
+		this.bipedHead.isHidden = true;
+		
 		// int i = (int) (MathHelper.cos(f * 0.6662F) * 1.4F * f1);
 
 		/*

@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.HieProjectiles;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.MeraProjectiles;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
 public class Values 
@@ -24,6 +23,8 @@ public class Values
 	public static final int MAX_GENERAL = 999999999; //Used by Bounty, Reputation, Belly & Extol
 	public static final int MAX_CREW = 50;
 	
+	public static final Item[] KAIROSEKI_ITEMS = new Item[] {ListMisc.Kairoseki, ListMisc.KairosekiBullets, ListMisc.DenseKairoseki};
+	 
 	//public static Block[] BANNED_BLOCKS = new Block[] {Blocks.bedrock, ListMisc.Ope, ListMisc.OpeMid};	
 
 	//ReflectionHelper

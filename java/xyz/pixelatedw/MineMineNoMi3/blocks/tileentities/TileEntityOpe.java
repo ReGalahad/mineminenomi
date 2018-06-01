@@ -8,8 +8,10 @@ import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.abilities.OpeAbilities.Room;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityManager;
+import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketWorld;
 
 public class TileEntityOpe extends TileEntity
 {
@@ -32,16 +34,7 @@ public class TileEntityOpe extends TileEntity
 				{
 					if(user.getDistanceSq(this.xCoord, this.yCoord, this.zCoord) > 810)
 					{
-						final World world = this.worldObj;
-						if(!world.isRemote)
-						{
-							for(int i = -22; i < 22; i++)
-							for(int k = -21; k < 21; k++)
-							for(int j = -22; j < 22; j++)
-								if(world.getBlock((int) this.xCoord + i, (int) this.yCoord + k, (int) this.zCoord + j) == ListMisc.Ope)
-									world.setBlock((int) this.xCoord + i, (int) this.yCoord + k, (int) this.zCoord + j, Blocks.air);
-							world.setBlock((int) this.xCoord, (int) this.yCoord, (int) this.zCoord, Blocks.air);
-						}
+						clearRoom();
 						
 						for(String abl : props.getDevilFruitAbilities())
 						{
@@ -55,6 +48,18 @@ public class TileEntityOpe extends TileEntity
 			}
 		}
 	}
+    
+    public void clearRoom()
+    {
+    	World world = this.worldObj;
+
+		for(int i = -22; i < 22; i++)
+		for(int k = -21; k < 21; k++)
+		for(int j = -22; j < 22; j++)
+			if(world.getBlock((int) this.xCoord + i, (int) this.yCoord + k, (int) this.zCoord + j) == ListMisc.Ope)
+				WyNetworkHelper.sendToServer(new PacketWorld((int) this.xCoord + i, (int) this.yCoord + k, (int) this.zCoord + j, 0));
+		WyNetworkHelper.sendToServer(new PacketWorld((int) this.xCoord, (int) this.yCoord, (int) this.zCoord, 0));
+    }
 	
 }
 

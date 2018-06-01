@@ -22,9 +22,14 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.kriegPirates.models.ModelGin;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.kriegPirates.models.ModelKrieg;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.kriegPirates.models.ModelPearl;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.EntityMarine;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.EntityMarineCaptain;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.EntityMarineWithGun;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.EntityMorgan;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.models.ModelMarine;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.models.ModelMarineCaptain;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.models.ModelMarineWithGun;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.models.ModelMorgan;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDoppelman;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirate;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirateCaptain;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirateWithGun;
@@ -50,9 +55,13 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.models.ModelKu
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.models.ModelLucci;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.models.ModelLucciLeopard;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.models.ModelSpandam;
-import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFXTest;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.EntityZoanBisonPower;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.RenderZoanBisonPower;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFXGasRobe;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFXSuna;
+import xyz.pixelatedw.MineMineNoMi3.entities.zoan.EntityMorphVenomDemon;
+import xyz.pixelatedw.MineMineNoMi3.entities.zoan.EntityZoanPowerBison;
+import xyz.pixelatedw.MineMineNoMi3.entities.zoan.RenderZoanMorph;
+import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelPowerBison;
+import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelVenomDemon;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListDevilFruits;
 
 public class ClientProxy extends CommonProxy
@@ -76,6 +85,8 @@ public class ClientProxy extends CommonProxy
 		//Marines
 		RenderingRegistry.registerEntityRenderingHandler(EntityMarine.class, new MobRenderer(new ModelMarine()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityMarineWithGun.class, new MobRenderer(new ModelMarineWithGun()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityMarineCaptain.class, new MobRenderer(new ModelMarineCaptain(), "marinecaptain"));
+		RenderingRegistry.registerEntityRenderingHandler(EntityMorgan.class, new MobRenderer(new ModelMorgan(), "morgan"));
 		
 		//W.GOV
 		RenderingRegistry.registerEntityRenderingHandler(EntityLucci.class, new MobRenderer(new ModelLucci(), "lucci"));
@@ -103,30 +114,25 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityGin.class, new MobRenderer(new ModelGin(), "gin"));
 		RenderingRegistry.registerEntityRenderingHandler(EntityPearl.class, new MobRenderer(new ModelPearl(), "pearl"));
 
-		//Zoan
-		RenderingRegistry.registerEntityRenderingHandler(EntityZoanBisonPower.class, new RenderZoanBisonPower());
+		//Zoan / Morphs
+		RenderingRegistry.registerEntityRenderingHandler(EntityMorphVenomDemon.class, new RenderZoanMorph(new ModelVenomDemon(), "venomdemon"));
+		RenderingRegistry.registerEntityRenderingHandler(EntityZoanPowerBison.class, new RenderZoanMorph(new ModelPowerBison(), "bisonpower", 1.4, new float[] {0, 0.8f, 0}));
+
+		
+		//Others
+		RenderingRegistry.registerEntityRenderingHandler(EntityDoppelman.class, new MobRenderer(new ModelMarine(), "doppelman"));
 	}
 	
-	public void generateTestParticles(Entity theEntity)
-	{ 
-		for(int i = 0; i < 32; i++)
-		{
-			//double motionX = theEntity.worldObj.rand.nextGaussian() * 0.02D;
-			//double motionY = theEntity.worldObj.rand.nextGaussian() * 0.02D;
-			//double motionZ = theEntity.worldObj.rand.nextGaussian() * 0.02D;			
-			
-			EntityFX fx = new EntityParticleFXTest
-					(
-						theEntity.worldObj, 
-						theEntity.posX, 
-						theEntity.posY - 1, 
-						theEntity.posZ, 
-						0, 
-						0, 
-						0
-					);
-				 
-			Minecraft.getMinecraft().effectRenderer.addEffect(fx);  
-		}
+	public void spawnCustomParticles(Entity theEntity, String particleType, double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
+	{ 			
+		EntityFX fx = null;
+		
+		if(particleType.toLowerCase().equals("gasrobe"))		
+			fx = new EntityParticleFXGasRobe(theEntity.worldObj, posX, posY, posZ, motionX, motionY, motionZ);
+		if(particleType.toLowerCase().equals("suna"))	
+			fx = new EntityParticleFXSuna(theEntity.worldObj, posX, posY, posZ, motionX, motionY, motionZ);
+		
+		Minecraft.getMinecraft().effectRenderer.addEffect(fx);  
+		
 	}
 }

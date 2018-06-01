@@ -7,7 +7,7 @@ import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
 public class EntityPirateCaptain extends PirateData
 { 
-	private String[] textures = {"piratec1", "piratec2", "piratec3"};
+	private String[] textures = {"piratec1", "piratec2", "piratec3", "piratec4"};
 	
 	public EntityPirateCaptain(World world) 
 	{
@@ -34,6 +34,6 @@ public class EntityPirateCaptain extends PirateData
 		return new double[] {0, 0, -0.1};
 	}
 	
-	public int getDorikiPower() { return this.worldObj.rand.nextInt(5) + 1; }
-	public int getBellyInPockets() { return this.worldObj.rand.nextInt(15) + 1; }
+	public int getDorikiPower() { return this.worldObj.rand.nextInt(5) + 12; }
+	public int getBellyInPockets() { return this.worldObj.rand.nextInt(15) + 5; }
 }

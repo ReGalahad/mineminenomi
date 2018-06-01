@@ -1,8 +1,12 @@
 package xyz.pixelatedw.MineMineNoMi3.abilities;
 
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
@@ -10,6 +14,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.WyHelper.Direction;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.RokushikiProjectiles;
+import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 
@@ -123,10 +128,10 @@ public class RokushikiAbilities
 			super(ListAttributes.SHIGAN); 
 		}
 		
-		public void use(EntityPlayer player)
+		public void hitEntity(EntityPlayer player, EntityLivingBase target) 
 		{
-			this.projectile = new RokushikiProjectiles.Shigan(player.worldObj, player, ListAttributes.SHIGAN);
-			super.use(player);
+			super.hitEntity(player, target);
+			target.attackEntityFrom(DamageSource.causePlayerDamage(player), 20);
 		}
 	}
 	

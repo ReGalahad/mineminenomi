@@ -2,21 +2,65 @@ package xyz.pixelatedw.MineMineNoMi3.abilities;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
 
-import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.living.EnderTeleportEvent;
+import net.minecraft.init.Blocks;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.DamageSource;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.DokuProjectiles;
+import xyz.pixelatedw.MineMineNoMi3.entities.zoan.EntityMorphVenomDemon;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
+import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
 public class DokuAbilities 
 {
 
-	public static Ability[] abilitiesArray = new Ability[] {new Hydra(), new ChloroBall(), new DokuFugu()};	
+	public static Ability[] abilitiesArray = new Ability[] {new Hydra(), new ChloroBall(), new DokuFugu(), new VenomDemon()};	
 		
+	
+	public static class VenomDemon extends Ability
+	{
+		private EntityMorphVenomDemon demonDummy;
+		
+		public VenomDemon() 
+		{
+			super(ListAttributes.VENOMDEMON); 
+		}
+		
+		public void startPassive(EntityPlayer player) 
+		{
+			demonDummy = new EntityMorphVenomDemon(player.worldObj);
+			demonDummy.setPositionAndRotation(player.posX, player.posY, player.posZ, player.rotationPitch, player.rotationYaw);
+			demonDummy.setOwner(player);
+			player.worldObj.spawnEntityInWorld(demonDummy);						
+		}
+		
+		public void duringPassive(EntityPlayer player, int passiveTimer) 
+		{
+			player.addPotionEffect(new PotionEffect(Potion.invisibility.id, 20, 1, true));
+			if (player.worldObj.getBlock((int)player.posX - 1, (int)player.posY - 1, (int)player.posZ) != Blocks.air
+			&& player.worldObj.getBlock((int)player.posX - 1, (int)player.posY - 1, (int)player.posZ) != ListMisc.Poison
+			&& player.worldObj.getBlock((int)player.posX - 1, (int)player.posY - 1, (int)player.posZ) != ListMisc.Ope
+			&& player.worldObj.getBlock((int)player.posX - 1, (int)player.posY - 1, (int)player.posZ) != ListMisc.OpeMid
+			&& player.worldObj.getBlock((int)player.posX - 1, (int)player.posY - 1, (int)player.posZ) != Blocks.bedrock)
+				player.worldObj.setBlock((int)player.posX - 1, (int)player.posY, (int)player.posZ, ListMisc.DemonPoison);
+		}
+		
+		public void hitEntity(EntityPlayer player, EntityLivingBase target) 
+		{
+			target.addPotionEffect(new PotionEffect(Potion.poison.id, 400, 2));
+		}
+		
+		public void endPassive(EntityPlayer player) 
+		{
+			demonDummy.setDead();
+			
+			player.removePotionEffect(Potion.invisibility.id);
+		}
+	}
 	
 	public static class DokuFugu extends Ability
 	{

@@ -13,7 +13,10 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.kriegPirates.EntityDonKrieg;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.kriegPirates.EntityGin;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.kriegPirates.EntityPearl;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.EntityMarine;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.EntityMarineCaptain;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.EntityMarineWithGun;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.EntityMorgan;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDoppelman;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirate;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirateCaptain;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirateWithGun;
@@ -28,7 +31,8 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityKumadori
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityLucci;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityLucciL;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntitySpandam;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.EntityZoanBisonPower;
+import xyz.pixelatedw.MineMineNoMi3.entities.zoan.EntityMorphVenomDemon;
+import xyz.pixelatedw.MineMineNoMi3.entities.zoan.EntityZoanPowerBison;
 
 public class ListEntities 
 {
@@ -47,6 +51,8 @@ public class ListEntities
 		//Marines
 		WyRegistry.registerMob("Marine with Sword", EntityMarine.class, 0x02258e, 0xFFFFFF);
 		WyRegistry.registerMob("Marine with Gun", EntityMarineWithGun.class, 0x02258e, 0xFFFFFF);
+		WyRegistry.registerMob("Marine Captain", EntityMarineCaptain.class, 0x02258e, 0xFFFFFF);
+		WyRegistry.registerMob("Captain Morgan", EntityMorgan.class);
 		 
 		//W.GOV
 		WyRegistry.registerMob("Lucci", EntityLucci.class);
@@ -74,10 +80,12 @@ public class ListEntities
 		WyRegistry.registerMob("Gin", EntityGin.class);
 		WyRegistry.registerMob("Pearl", EntityPearl.class);
 		
-		//Zoan
-		WyRegistry.registerMob("Zoan Bison Power Point", EntityZoanBisonPower.class);
+		//Zoan / Morphs
+		WyRegistry.registerMob("Morph Venom Demon", EntityMorphVenomDemon.class);
+		WyRegistry.registerMob("Zoan Power Bison", EntityZoanPowerBison.class);
 		
 		//Others
+		WyRegistry.registerMob("Doppelman", EntityDoppelman.class);
 	}
 	
 }

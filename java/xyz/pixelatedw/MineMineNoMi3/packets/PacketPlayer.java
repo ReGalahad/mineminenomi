@@ -149,46 +149,6 @@ public class PacketPlayer implements IMessage
 				player.setPositionAndRotation(message.mX, message.mY, message.mZ, player.rotationYaw, player.rotationPitch);
 			}
 			
-			if(message.cmd.equals("particles_daienkaiCharge"))
-			{
-				for (int i = 0; i < 20; i++)
-				{
-					double offsetX = (new Random().nextInt(40) + 1.0D - 20.0D) / 20.0D;
-					double offsetY = (new Random().nextInt(40) + 1.0D - 20.0D) / 20.0D;
-					double offsetZ = (new Random().nextInt(40) + 1.0D - 20.0D) / 20.0D;
-			      
-					player.worldObj.spawnParticle(EnumParticleTypes.FLAME.getParticleName(), player.posX + offsetX, player.posY + offsetY, player.posZ + offsetZ, 0.0D, 0.1D, 0.0D);
-				}		
-			}
-			if(message.cmd.equals("particles_fubukiUse"))
-			{
-				for (int i = 0; i < 1024 * 15; i++)
-				{
-					double offsetX = (new Random().nextInt(50) + 1.0D - 25.0D) / 1.0D;
-					double offsetY = (new Random().nextInt(50) + 1.0D - 25.0D) / 1.0D;
-					double offsetZ = (new Random().nextInt(50) + 1.0D - 25.0D) / 1.0D;
-			      
-					player.worldObj.spawnParticle(EnumParticleTypes.SNOW_SHOVEL.getParticleName(), player.posX + offsetX, (player.posY + offsetY) + 3, player.posZ + offsetZ, 0.0D, 0.0D, 0.0D);
-				}		
-			}
-			if(message.cmd.equals("particles_whiteLauncher"))
-			{
-				for (int i = 0; i < 20; i++)
-				{
-					double offsetX = (new Random().nextInt(20) + 1.0D - 10.0D) / 15.0D;
-					double offsetY = (new Random().nextInt(20) + 1.0D - 10.0D) / 15.0D;
-					double offsetZ = (new Random().nextInt(20) + 1.0D - 10.0D) / 15.0D;
-			      
-					player.worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL.getParticleName(), player.posX + offsetX, player.posY + offsetY, player.posZ + offsetZ, 0.0D, 0.1D, 0.0D);
-				}	
-			}
-			
-			if(message.cmd.equals("particles_test"))
-			{
-				Timer timer = new Timer(true); 
-				timer.schedule(ListParticleEffects.createSphereFX(player, EnumParticleTypes.FLAME.getParticleName(), 2, 20, 2), 0);
-			}
-
 			return null;		
 		}
 	}
@@ -209,6 +169,9 @@ public class PacketPlayer implements IMessage
 					props.addRacialAbility(CyborgAbilities.RADICALBEAM);
 					props.addRacialAbility(CyborgAbilities.STRONGRIGHT);
 					props.addRacialAbility(CyborgAbilities.COUPDEVENT);
+					
+					props.setMaxCola(100);
+					props.setCola(props.getMaxCola());
 				}
 				
 				for(ItemStack is : player.inventory.mainInventory)

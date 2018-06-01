@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class WyMathHelper
 {	
-	public static double percentage(double i, double j) { return i * (j / 100); }
+	public static double percentage(double i, double j) { return (i / 100) * j; }
 	
     public static double randomWithRange (int min, int max) { return new Random().nextInt(max + 1 - min) + min;}
 

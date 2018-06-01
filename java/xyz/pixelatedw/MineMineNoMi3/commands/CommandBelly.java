@@ -7,7 +7,9 @@ import net.minecraft.command.PlayerNotFoundException;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.EnumChatFormatting;
 import xyz.pixelatedw.MineMineNoMi3.Values;
+import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
@@ -18,44 +20,82 @@ public class CommandBelly extends CommandBase
 	{
 		if(str.length >= 2)
 		{
-			EntityPlayer player = null;
+			EntityPlayer senderEntity = this.getCommandSenderAsPlayer(sender);
+			EntityPlayer target = null;
 			ExtendedEntityStats props = null;
+			int plusBelly = 0;		
+			
+			if(!str[1].equals("INF"))
+				plusBelly = Integer.decode(str[1]);
 			
 			if(str.length == 2)
 			{
-				try{player = this.getCommandSenderAsPlayer(sender);}
+				try{target = this.getCommandSenderAsPlayer(sender);}
 				catch(PlayerNotFoundException e){e.printStackTrace();}
-				props = ExtendedEntityStats.get(player);
+				props = ExtendedEntityStats.get(target);
 			}
 			if(str.length == 3)
 			{
-				player = MinecraftServer.getServer().getConfigurationManager().func_152612_a(str[2]);	
-				props = ExtendedEntityStats.get(player);
+				target = MinecraftServer.getServer().getConfigurationManager().func_152612_a(str[2]);	
+				props = ExtendedEntityStats.get(target);
 			}
 
 			if(str[0].equals("+"))
 			{
-				if(Integer.decode(str[1]) + props.getBelly() <= Values.MAX_GENERAL)
-					props.alterBelly(Integer.decode(str[1]));
+				if(plusBelly + props.getBelly() <= Values.MAX_GENERAL)
+				{
+					props.alterBelly(plusBelly);
+					if(props.getBellyFromCommand() + plusBelly <= Values.MAX_GENERAL)
+						props.alterBellyFromCommand(plusBelly);
+				}
 				else
+				{
 					props.setBelly(Values.MAX_GENERAL);
+					props.alterBellyFromCommand( Values.MAX_GENERAL - plusBelly );
+				}
+				
+				WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] Added " + plusBelly + " doriki to " + target.getCommandSenderName()); 
 			}
 			else if(str[0].equals("-"))
 			{
-				if(props.getBelly() - Integer.decode(str[1]) <= 0)
+				if(props.getBelly() - plusBelly <= 0)
+				{			
 					props.setBelly(0);
+					if(props.getBellyFromCommand() - plusBelly > 0)
+						props.alterBellyFromCommand( -(props.getBellyFromCommand() - plusBelly) );
+					else
+						props.setBellyFromCommand(0);
+				}
 				else
-					props.alterBelly(-Integer.decode(str[1]));		
+				{
+					props.alterBelly(-plusBelly);	
+					if(props.getBellyFromCommand() - plusBelly > 0)
+						props.alterBellyFromCommand( -(props.getBellyFromCommand() - plusBelly) );
+					else
+						props.setBellyFromCommand(0);
+				}
+				
+				WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] Subtracted " + plusBelly + " doriki from " + target.getCommandSenderName()); 
 			}
 			else if(str[0].equals("="))
 			{
 				if(str[1].equals("INF"))
-					props.setBelly(Values.MAX_GENERAL);
-				else if(Integer.decode(str[1]) <= Values.MAX_GENERAL)
-					props.setBelly(Integer.decode(str[1]));
+				{
+					props.setBellyFromCommand( Values.MAX_GENERAL );
+					props.setBelly( Values.MAX_GENERAL );
+					
+					WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] " + target.getCommandSenderName() + " now has " + Values.MAX_GENERAL + " doriki"); 
+				}
+				else if(plusBelly <= Values.MAX_GENERAL)
+				{
+					props.setBellyFromCommand(plusBelly);
+					props.setBelly(plusBelly);
+					
+					WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] " + target.getCommandSenderName() + " now has " + plusBelly + " doriki"); 
+				}				
 			}
 			 
-			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP)player);
+			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP)target);
 		}		
 	}
 

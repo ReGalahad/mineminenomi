@@ -187,6 +187,12 @@ public class ModelJabra extends ModelBiped
 	{
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(f, f1, f2, f3, f4, f5);
+		
+		this.bipedLeftLeg.isHidden = true;
+		this.bipedRightLeg.isHidden = true;
+		this.bipedLeftArm.isHidden = true;
+		this.bipedRightArm.isHidden = true;
+		
 		head.render(f5);
 		body.render(f5);
 		rightarm.render(f5);

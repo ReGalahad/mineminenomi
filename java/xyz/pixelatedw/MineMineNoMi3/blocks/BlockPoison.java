@@ -12,6 +12,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
@@ -21,6 +22,8 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketWorld;
 public class BlockPoison extends Block
 {
 	protected static final AxisAlignedBB CARPET_AABB = AxisAlignedBB.getBoundingBox(0.0D, 0.0D, 0.0D, 1.0D, 0.0625D, 1.0D);
+	
+	private int ticks = 120;
 	
 	public BlockPoison()
 	{
@@ -40,6 +43,11 @@ public class BlockPoison extends Block
 
     public boolean renderAsNormalBlock() { return false; }
 	
+    public boolean shouldSideBeRendered(IBlockAccess p_149646_1_, int p_149646_2_, int p_149646_3_, int p_149646_4_, int p_149646_5_)
+    {
+    	return true;
+    }
+    
     public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
     {
     	if(entity instanceof EntityLivingBase)
@@ -57,5 +65,13 @@ public class BlockPoison extends Block
     {
     	if(world.getBlock(x, y - 1, z) == Blocks.air)
     		WyNetworkHelper.sendToServer(new PacketWorld(x, y, z, Block.getIdFromBlock(Blocks.air)));
+    	
+    	if(ticks > 0)
+    		ticks--;
+    	else
+    	{
+    		WyNetworkHelper.sendToServer(new PacketWorld(x, y, z, Block.getIdFromBlock(Blocks.air)));
+    		ticks = 120;
+    	}
 	}
 }

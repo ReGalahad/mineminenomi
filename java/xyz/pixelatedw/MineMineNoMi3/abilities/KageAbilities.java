@@ -11,6 +11,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.KageProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.KageProjectiles.TsunotokagePillar;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDoppelman;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListExtraAttributes;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
@@ -18,7 +19,7 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 public class KageAbilities 
 {
 
-	public static Ability[] abilitiesArray = new Ability[] {new BrickBat(), new BlackBox(), new Tsunotokage()};
+	public static Ability[] abilitiesArray = new Ability[] {new Doppelman(), new BrickBat(), new BlackBox(), new Tsunotokage()};
 
 	public static class BrickBat extends Ability
 	{
@@ -36,16 +37,30 @@ public class KageAbilities
 	
 	public static class Doppelman extends Ability
 	{
+		private EntityDoppelman doppelman;
+		
 		public Doppelman() 
 		{
 			super(ListAttributes.DOPPELMAN); 
 		}
 		
-		public void use(EntityPlayer player)
+		public void duringPassive(EntityPlayer player, int passiveTimer)
 		{		
-			WyHelper.sendMsgToPlayer(player, ChatFormatting.RED + "NOT YET IMPLEMENTED");
-			//super.use(player);
+			
 		} 
+
+		public void startPassive(EntityPlayer player) 
+		{
+			doppelman = new EntityDoppelman(player.worldObj, player);
+			doppelman.setPositionAndRotation(player.posX, player.posY, player.posZ, 180, 0);
+			player.worldObj.spawnEntityInWorld(doppelman);
+		}	
+		
+		public void endPassive(EntityPlayer player) 
+		{
+			doppelman.setDead();
+		}
+		
 	}
 	
 	public static class BlackBox extends Ability

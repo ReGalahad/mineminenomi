@@ -18,13 +18,14 @@ public class AkumaNoMiBox extends Item
 	
 	private int tier;
 	private AkumaNoMi[] tier1Fruits = new AkumaNoMi[] 
-			{ListDevilFruits.BaneBaneNoMi, ListDevilFruits.SukeSukeNoMi, ListDevilFruits.NoroNoroNoMi, ListDevilFruits.DoruDoruNoMi};
+			{ListDevilFruits.BaneBaneNoMi, ListDevilFruits.SukeSukeNoMi, ListDevilFruits.NoroNoroNoMi, ListDevilFruits.DoruDoruNoMi, ListDevilFruits.GoeGoeNoMi, ListDevilFruits.BariBariNoMi};
 	private AkumaNoMi[] tier2Fruits = new AkumaNoMi[] 
-			{ListDevilFruits.OpeOpeNoMi, ListDevilFruits.MokuMokuNoMi, ListDevilFruits.NikyuNikyuNoMi, ListDevilFruits.BomuBomuNoMi, ListDevilFruits.GuraGuraNoMi, ListDevilFruits.KageKageNoMi, ListDevilFruits.DokuDokuNoMi,
-			ListDevilFruits.YukiYukiNoMi};
+			{ListDevilFruits.NoroNoroNoMi, ListDevilFruits.OpeOpeNoMi, ListDevilFruits.MokuMokuNoMi, ListDevilFruits.NikyuNikyuNoMi, ListDevilFruits.BomuBomuNoMi, ListDevilFruits.GuraGuraNoMi, 
+			ListDevilFruits.KageKageNoMi, ListDevilFruits.DokuDokuNoMi, ListDevilFruits.YukiYukiNoMi, ListDevilFruits.UshiUshiNoMiBison, ListDevilFruits.GoeGoeNoMi, ListDevilFruits.HoroHoroNoMi,
+			ListDevilFruits.GomuGomuNoMi};
 	private AkumaNoMi[] tier3Fruits = new AkumaNoMi[] 
-			{ListDevilFruits.MeraMeraNoMi, ListDevilFruits.MaguMaguNoMi, ListDevilFruits.HieHieNoMi, ListDevilFruits.PikaPikaNoMi, ListDevilFruits.OpeOpeNoMi, ListDevilFruits.GoroGoroNoMi, ListDevilFruits.SunaSunaNoMi,
-			ListDevilFruits.GasuGasuNoMi};
+			{ListDevilFruits.MeraMeraNoMi, ListDevilFruits.MaguMaguNoMi, ListDevilFruits.HieHieNoMi, ListDevilFruits.PikaPikaNoMi, ListDevilFruits.OpeOpeNoMi, ListDevilFruits.GoroGoroNoMi, 
+			ListDevilFruits.SunaSunaNoMi, ListDevilFruits.GasuGasuNoMi, ListDevilFruits.UshiUshiNoMiBison, ListDevilFruits.YamiYamiNoMi, ListDevilFruits.ItoItoNoMi, ListDevilFruits.GomuGomuNoMi};
 		
 	public AkumaNoMiBox(int tier)
 	{
@@ -67,49 +68,25 @@ public class AkumaNoMiBox extends Item
 			if(tier == 1)
 			{
 				if(rand.nextInt(100) + rand.nextDouble() < 1)
-					return tier2Fruits[rand.nextInt(tier2Fruits.length - 1)];				
+					return tier2Fruits[rand.nextInt(tier2Fruits.length)];				
 				else
-					return tier1Fruits[rand.nextInt(tier1Fruits.length - 1)];
+				{
+					System.out.println( tier1Fruits[1] );
+					return tier1Fruits[rand.nextInt(tier1Fruits.length)];
+				}
 			}
 			else if(tier == 2)
 			{
 				if(rand.nextInt(100) + rand.nextDouble() < 1)
-					return tier3Fruits[rand.nextInt(tier3Fruits.length - 1)];				
+					return tier3Fruits[rand.nextInt(tier3Fruits.length)];				
 				else
-					return tier2Fruits[rand.nextInt(tier2Fruits.length - 1)];
+					return tier2Fruits[rand.nextInt(tier2Fruits.length)];
 			}
 			else if(tier == 3)
 			{
-				return tier3Fruits[rand.nextInt(tier3Fruits.length - 1)];
+				return tier3Fruits[rand.nextInt(tier3Fruits.length)];
 			}
 		}
-		
-/*		int fruitListId = (int) WyMathHelper.randomWithRange(0, Values.devilfruits.size() - 1);
-		
-		if(rand.nextInt(100) + rand.nextDouble() <= 95)
-		{
-			if(tier == 1)
-			{
-				if( ((AkumaNoMi)Values.devilfruits.get( fruitListId )).getType() == EnumFruitType.PARAMECIA )
-					return ((AkumaNoMi)Values.devilfruits.get( fruitListId ));
-				else
-					return roulette();
-			}
-			else if(tier == 2)
-			{
-				if( ((AkumaNoMi)Values.devilfruits.get( fruitListId )).getType() == EnumFruitType.ZOAN )
-					return ((AkumaNoMi)Values.devilfruits.get( fruitListId ));
-				else
-					return roulette();
-			}
-			else if(tier == 3)
-			{
-				if( ((AkumaNoMi)Values.devilfruits.get( fruitListId )).getType() == EnumFruitType.LOGIA )
-					return ((AkumaNoMi)Values.devilfruits.get( fruitListId ));
-				else
-					return roulette();
-			}
-		}*/
 		
 		return null;
 	}

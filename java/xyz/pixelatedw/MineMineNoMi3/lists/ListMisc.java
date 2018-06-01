@@ -7,6 +7,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.DimensionManager;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.NewBlock;
 import xyz.pixelatedw.MineMineNoMi3.Values;
@@ -14,6 +15,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.WyRegistry;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockBarrier;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockCustomSpawner;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockDarkness;
+import xyz.pixelatedw.MineMineNoMi3.blocks.BlockDemonPoison;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockDenDenMushi;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockEnchantmentTable2;
@@ -28,25 +30,28 @@ import xyz.pixelatedw.MineMineNoMi3.items.CharacterCreator;
 import xyz.pixelatedw.MineMineNoMi3.items.Cola;
 import xyz.pixelatedw.MineMineNoMi3.items.Flintlock;
 import xyz.pixelatedw.MineMineNoMi3.items.Heart;
+import xyz.pixelatedw.MineMineNoMi3.items.ItemAbilityWeapon;
 import xyz.pixelatedw.MineMineNoMi3.items.ItemCoreWeapon;
 import xyz.pixelatedw.MineMineNoMi3.items.UltraCola;
+import xyz.pixelatedw.MineMineNoMi3.world.WorldProviderScenarioArena;
 
 public class ListMisc 
 {	
 	public static Block Ope = new BlockOpe();
 	public static Block OpeMid = new BlockOpeMid();
-	public static Block KairosekiBlock = new NewBlock(Material.rock);
+	public static Block KairosekiBlock = new NewBlock(Material.rock).setHardness(10);
 	public static Block KairosekiOre = new NewBlock(Material.rock)
 	{
 		public int quantityDropped(Random random) {return 2 + random.nextInt(3);}
 		public Item getItemDropped(int id, Random rand, int fortune) {return Kairoseki;}
-	}; 
+	}.setHardness(10); 
 	public static Block EnchantmentTable = new BlockEnchantmentTable2();
 	public static Block DenDenMushi = new BlockDenDenMushi();
 	public static Block SkyBlock = new NewBlock(Material.cloth);
 	public static Block Dial = new BlockDial();
 	public static Block Barrier = new BlockBarrier();
 	public static Block Poison = new BlockPoison();
+	public static Block DemonPoison = new BlockDemonPoison();
 	public static BlockCustomSpawner CustomSpawner = new BlockCustomSpawner();
 	public static Block Darkness = new BlockDarkness();
 
@@ -58,9 +63,9 @@ public class ListMisc
 	public static Item Heart = new Heart().setMaxStackSize(1);
 	public static Item BellyPouch = new BellyPouch().setMaxStackSize(1);
 	public static Item Key = new Item();
-	public static Item Box1 = new AkumaNoMiBox(1).setMaxStackSize(1);
-	public static Item Box2 = new AkumaNoMiBox(2).setMaxStackSize(1);
-	public static Item Box3 = new AkumaNoMiBox(3).setMaxStackSize(1);
+	public static Item Box1;
+	public static Item Box2;
+	public static Item Box3;
 	
 	public static Item DialDefault = new Item().setMaxStackSize(16); 
 	public static Item DialEisen = new Item().setMaxStackSize(16);
@@ -80,10 +85,10 @@ public class ListMisc
 	public static Item PirateLeggings = new ItemCoreArmor(EnumToolMats.pirate_armor, EntityEquipmentSlot.LEGS);
 	public static Item PirateBoots = new ItemCoreArmor(EnumToolMats.pirate_armor, EntityEquipmentSlot.FEET);*/
 	
-	public static Item Flintlock = new Flintlock().setFull3D();
-	public static ItemCoreWeapon MarineSword = new ItemCoreWeapon(5);
-	public static ItemCoreWeapon PirateCutlass = new ItemCoreWeapon(5);
-	public static ItemCoreWeapon Pipe = new ItemCoreWeapon(4);
+	public static Item Flintlock = new Flintlock().setMaxStackSize(1).setFull3D();
+	public static ItemCoreWeapon MarineSword = new ItemCoreWeapon(5).setMaxDamage(300);
+	public static ItemCoreWeapon PirateCutlass = new ItemCoreWeapon(5).setMaxDamage(300);
+	public static ItemCoreWeapon Pipe = new ItemCoreWeapon(4).setMaxDamage(200);
 	public static ItemCoreWeapon Scissors = new ItemCoreWeapon(6);
 	public static ItemCoreWeapon Kikoku = new ItemCoreWeapon(8);
 	public static ItemCoreWeapon Kiribachi = new ItemCoreWeapon(6);
@@ -91,9 +96,8 @@ public class ListMisc
 	public static ItemCoreWeapon Biseto = new ItemCoreWeapon(8);
 	public static ItemCoreWeapon Hook = new ItemCoreWeapon(6);
 	public static ItemCoreWeapon Umbrella = new ItemCoreWeapon(3);
-	public static ItemCoreWeapon Jitte = new ItemCoreWeapon(7);
+	public static ItemCoreWeapon Jitte = new ItemCoreWeapon(7).setMaxDamage(500);
 	public static ItemCoreWeapon BoStick = new ItemCoreWeapon(6);
-	
 	public static ItemCoreWeapon Hammer5t = new ItemCoreWeapon(1);
 	public static ItemCoreWeapon Hammer10t = new ItemCoreWeapon(1);
 	public static ItemCoreWeapon Hammer100t = new ItemCoreWeapon(1);
@@ -104,8 +108,22 @@ public class ListMisc
 	public static ItemCoreWeapon Kitetsu = new ItemCoreWeapon(8);
 	public static ItemCoreWeapon Shusui = new ItemCoreWeapon(8);
 	
+	public static ItemAbilityWeapon IceSaber = new ItemAbilityWeapon(9);
+	public static ItemAbilityWeapon AmaNoMurakumo = new ItemAbilityWeapon(9);
+	public static ItemAbilityWeapon NoroNoroBeamSword = new ItemAbilityWeapon(5);
+	public static ItemAbilityWeapon DoruDoruArtsKen = new ItemAbilityWeapon(6);
+	public static ItemAbilityWeapon BlueSword = new ItemAbilityWeapon(8);
+	public static ItemAbilityWeapon TabiraYuki = new ItemAbilityWeapon(8);
+	
 	public static void init()
 	{
+		DimensionManager.registerProviderType(ID.DIMENSION_ID_SCENARIOARENA, WorldProviderScenarioArena.class, true);
+		DimensionManager.registerDimension(ID.DIMENSION_ID_SCENARIOARENA, ID.DIMENSION_ID_SCENARIOARENA);
+		
+ 		Box1 = new AkumaNoMiBox(1).setMaxStackSize(1);
+ 		Box2 = new AkumaNoMiBox(2).setMaxStackSize(1);
+ 		Box3 = new AkumaNoMiBox(3).setMaxStackSize(1);
+		
 		addITEM(Kairoseki							, "Kairoseki"				, ListCreativeTabs.tabMisc);
 		addITEM(DenseKairoseki						, "Dense Kairoseki"			, ListCreativeTabs.tabMisc);
 		addITEM(BlackMetal							, "Black Metal"				, ListCreativeTabs.tabMisc);
@@ -153,6 +171,13 @@ public class ListMisc
 		addITEM(WadoIchimonji						, "Wado Ichimonji"			, ListCreativeTabs.tabWeapons);		
 		addITEM(Kitetsu								, "Kitetsu"					, ListCreativeTabs.tabWeapons);		
 		addITEM(Shusui								, "Shusui"					, ListCreativeTabs.tabWeapons);	
+
+		addITEM(IceSaber							, "Ice Saber"				, null);	
+		addITEM(AmaNoMurakumo						, "Ama no Murakumo"			, null);	
+		addITEM(NoroNoroBeamSword					, "Noro Noro Beam Sword"	, null);	
+		addITEM(DoruDoruArtsKen						, "Doru Doru Arts : Ken"	, null);
+		addITEM(BlueSword							, "Blue Sword"				, null);
+		addITEM(TabiraYuki							, "Tabira Yuki"				, null);
 		
  		addITEM(CharacterCreator					, "Character Creator"		, ListCreativeTabs.tabMisc);  
 		
@@ -175,6 +200,7 @@ public class ListMisc
  		addBLOCK(Dial				, "Dial"				, 1.5F							, null							, null);
  		addBLOCK(Barrier			, "Crash Barrier"		, Float.POSITIVE_INFINITY		, null							, null);
  		addBLOCK(Poison				, "Poison"				, 1.5F							, null							, null);
+ 		addBLOCK(DemonPoison		, "Demon Poison"		, 1.5F							, null							, null);
  		addBLOCK(CustomSpawner		, "Custom Spawner"		, Float.POSITIVE_INFINITY		, TileEntityCustomSpawner.class	, ListCreativeTabs.tabMisc);
  		addBLOCK(Darkness			, "Darkness"			, Float.POSITIVE_INFINITY		, null							, ListCreativeTabs.tabMisc);
  		
@@ -192,13 +218,14 @@ public class ListMisc
  		
  		WyRegistry.registerName("style.swordsman.name", "Swordsman");
  		WyRegistry.registerName("style.sniper.name", "Sniper");
- 		WyRegistry.registerName("style.medic.name", "Medic");
+ 		WyRegistry.registerName("style.doctor.name", "Medic");
  		
  		WyRegistry.registerName(ID.LANG_GUI_FACTION, "Faction");
  		WyRegistry.registerName(ID.LANG_GUI_RACE, "Race");
  		WyRegistry.registerName(ID.LANG_GUI_STYLE, "Style");
  		WyRegistry.registerName(ID.LANG_GUI_ABILITIES, "Abilities");
  		WyRegistry.registerName("gui.epithet.name", "Epithets");
+ 			
 	}   
 	 
 	private static void addITEM(Item item,String localizedName, CreativeTabs tab)

@@ -4,6 +4,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
@@ -14,13 +15,38 @@ import xyz.pixelatedw.MineMineNoMi3.api.math.Sphere;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.YukiProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
+import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 
 public class YukiAbilities 
 {
 
-	public static Ability[] abilitiesArray = new Ability[] {new Kamakura(), new YukiRabi(), new KamakuraJussoshi(), new Fubuki()};	
+	public static Ability[] abilitiesArray = new Ability[] {new Kamakura(), new TabiraYuki(), new YukiRabi(), new KamakuraJussoshi(), new Fubuki()};	
 		
+
+	public static class TabiraYuki extends Ability
+	{
+		public TabiraYuki()
+		{
+			super(ListAttributes.TABIRAYUKI); 
+		}
+		
+		public void startPassive(EntityPlayer player) 
+		{
+			if(player.inventory.getCurrentItem() == null)
+				player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(ListMisc.TabiraYuki));
+			else
+			{
+				WyHelper.sendMsgToPlayer(player, "Cannot equip " + this.getAttribute().getAttributeName() + " while holding another item in hand !");
+				this.passive(player);
+			}
+		}
+		
+		public void endPassive(EntityPlayer player) 
+		{
+			player.inventory.clearInventory(ListMisc.TabiraYuki, -1);
+		}
+	}
 	
 	public static class Fubuki extends Ability
 	{
@@ -49,7 +75,7 @@ public class YukiAbilities
 				    });
 				}
 				
-				WyNetworkHelper.sendTo(new PacketPlayer("particles_fubukiUse"), (EntityPlayerMP) player);
+				WyNetworkHelper.sendTo(new PacketPlayer("fubuki", player.posX, player.posY, player.posZ), (EntityPlayerMP) player);
 				super.use(player);
 			}
 		}

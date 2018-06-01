@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
@@ -40,10 +41,11 @@ public class DokuProjectiles
 		{		
 			for (int i = 0; i < 20; i++)
 			{
-				double offsetX = (new Random().nextInt(5) + 1.0D + 5.0D) - 5.0D;
-				double offsetZ = (new Random().nextInt(5) + 1.0D + 5.0D) - 5.0D;
+				double offsetX = new Random().nextInt(5) - 3;
+				double offsetZ = new Random().nextInt(5) - 3;
 				
-				this.worldObj.setBlock((int)(this.posX + offsetX), (int)this.posY, (int)(this.posZ + offsetZ), ListMisc.Poison);
+				if(this.worldObj.getBlock((int)(this.posX + offsetX), (int)this.posY, (int)(this.posZ + offsetZ)) == Blocks.air && this.worldObj.getBlock((int)(this.posX + offsetX), (int)this.posY - 1, (int)(this.posZ + offsetZ)) != Blocks.air)
+					this.worldObj.setBlock((int)(this.posX + offsetX), (int)this.posY, (int)(this.posZ + offsetZ), ListMisc.Poison);
 			}
 		};
 	}

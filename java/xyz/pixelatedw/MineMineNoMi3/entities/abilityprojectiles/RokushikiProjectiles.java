@@ -21,7 +21,6 @@ public class RokushikiProjectiles
 	static
 	{
 		abilitiesClassesArray.add(new Object[] {Rankyaku.class, ListAttributes.RANKYAKU});
-		abilitiesClassesArray.add(new Object[] {Shigan.class, ListAttributes.SHIGAN});
 	}
 	
 	public static class Rankyaku extends AbilityProjectile
@@ -33,20 +32,6 @@ public class RokushikiProjectiles
 		{super(world, x, y, z);}
 		
 		public Rankyaku(World world, EntityLivingBase player, AbilityAttribute attr) 
-		{		
-			super(world, player, attr);		
-		}
-	}
-	
-	public static class Shigan extends AbilityProjectile
-	{
-		public Shigan(World world)
-		{super(world);}
-		
-		public Shigan(World world, double x, double y, double z)
-		{super(world, x, y, z);}
-		
-		public Shigan(World world, EntityLivingBase player, AbilityAttribute attr) 
 		{		
 			super(world, player, attr);		
 		}

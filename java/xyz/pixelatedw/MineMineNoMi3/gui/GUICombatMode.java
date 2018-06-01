@@ -4,24 +4,44 @@ import java.awt.Color;
 import java.util.List;
 
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
+import org.lwjgl.util.glu.Project;
 
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityClientPlayerMP;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemCloth;
+import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
 import net.minecraft.util.MathHelper;
+import net.minecraftforge.client.GuiIngameForge;
+import net.minecraftforge.client.event.FOVUpdateEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
+import net.minecraftforge.client.event.RenderHandEvent;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper.Direction;
 import xyz.pixelatedw.MineMineNoMi3.api.WyRenderHelper;
+import xyz.pixelatedw.MineMineNoMi3.entities.zoan.EntityMorphVenomDemon;
+import xyz.pixelatedw.MineMineNoMi3.entities.zoan.EntityZoanMorph;
+import xyz.pixelatedw.MineMineNoMi3.events.customevents.MorphRenderEvent;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 
 @SideOnly(Side.CLIENT)
@@ -46,22 +66,55 @@ public class GUICombatMode extends Gui
 		int posX = event.resolution.getScaledWidth();
 		int posY = event.resolution.getScaledHeight();
 		
+		GuiIngameForge.left_height += 1;
+
+		if(event.type == ElementType.HEALTH)
+		{
+			event.setCanceled(true);
+			double maxHealth = player.getEntityAttribute(SharedMonsterAttributes.maxHealth).getAttributeValue();
+			double health = player.getHealth();
+
+			this.drawCenteredString(this.mc.fontRenderer, (int)health + "", posX / 2 - 20, posY - 39, Color.RED.getRGB());
+			
+			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+			
+			this.mc.getTextureManager().bindTexture(icons);	
+			double f2 = player.getAbsorptionAmount();
+
+			for(int i = MathHelper.ceiling_double_int((maxHealth) / 2.0F) - 1; i >= 0; i--)
+			{
+				int k = (posX / 2 - 91) + i % 10 * 6;
+				
+				this.drawTexturedModalRect(k, posY - 39, 16, 0, 9, 9);			
+			}
+			
+			for(int i = 0; i < (100 - (((maxHealth - health) / maxHealth)) * 100) / 10; i++)
+			{
+				int k = (posX / 2 - 91) + i % 10 * 6;				
+
+				this.drawTexturedModalRect(k, posY - 39, 16 + 36, 9 * 0, 9, 9);
+			}
+		}
+		
+		
 		if (props.isInCombatMode() && event.type == ElementType.HOTBAR)
 		{ 
 			event.setCanceled(true);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			GL11.glDisable(GL11.GL_LIGHTING);
-			this.mc.getTextureManager().bindTexture(ID.TEXTURE_COMBATMODE);           
-			
+			this.mc.getTextureManager().bindTexture(ID.TEXTURE_COMBATMODE);
+ 			
 			for(int i = 0; i < 8; i++)
 			{
 	            GL11.glEnable(GL11.GL_BLEND);
-	            if(props.getAbilityFromSlot(i) != null && props.getAbilityFromSlot(i).isOnCooldown())
+	            if(props.getAbilityFromSlot(i) != null && props.getAbilityFromSlot(i).isOnCooldown() && !props.getAbilityFromSlot(i).isDisabled())
 	            	this.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 24, 0, 23, 23);
 	            else if(props.getAbilityFromSlot(i) != null && props.getAbilityFromSlot(i).isCharging())
 	            	this.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 72, 0, 23, 23);
 	            else if(props.getAbilityFromSlot(i) != null && props.getAbilityFromSlot(i).isPassiveActive())
 	            	this.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 48, 0, 23, 23);
+	            else if(props.getAbilityFromSlot(i) != null && props.getAbilityFromSlot(i).isDisabled())
+	            	this.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 96, 0, 23, 23);
 	            else
 	            	this.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 0, 0, 23, 23);
 			}
@@ -107,84 +160,43 @@ public class GUICombatMode extends Gui
 							String text = "";
 							
 							text += trackDistance + " blocks";						
-							Direction playerDir = WyHelper.get4Directions(player);						
-							switch(playerDir)
-							{
-							case NORTH:
-								if(angle > 75 && angle < 115)
-									text += " [↓]";
-								else if(angle > 115 && angle < 165)
-									text += " [↙]";
-								else if((angle > 165 && angle < 180) || (angle > -180 && angle < -165))
-									text += " [←]";
-								else if(angle < -104 && angle > -165)
-									text += " [↖]";
-								else if(angle < -60 && angle > -104)
-									text += " [↑]";
-								else if(angle < -20 && angle > -60)
-									text += " [↗]";
-								else if((angle < 0 && angle > -20) || (angle > 0 && angle < 30))
-									text += " [→]";
-								else if(angle > 30 && angle < 115)
-									text += " [↘]";
-								break;
-							case SOUTH:
-								if(angle > 75 && angle < 115)
-									text += " [↑]";
-								else if(angle > 115 && angle < 165)
-									text += " [↗]";
-								else if((angle > 165 && angle < 180) || (angle > -180 && angle < -165))
-									text += " [→]";
-								else if(angle < -104 && angle > -165)
-									text += " [↘]";
-								else if(angle < -60 && angle > -104)
-									text += " [↓]";
-								else if(angle < -20 && angle > -60)
-									text += " [↙]";
-								else if((angle < 0 && angle > -20) || (angle > 0 && angle < 30))
-									text += " [←]";
-								else if(angle > 30 && angle < 115)
-									text += " [↖]";
-								break;
-							case EAST:
-								if(angle > 75 && angle < 115)
-									text += " [→]";
-								else if(angle > 115 && angle < 165)
-									text += " [↘]";
-								else if((angle > 165 && angle < 180) || (angle > -180 && angle < -165))
-									text += " [↓]";
-								else if(angle < -104 && angle > -165)
-									text += " [↙]";
-								else if(angle < -60 && angle > -104)
-									text += " [←]";
-								else if(angle < -20 && angle > -60)
-									text += " [↖]";
-								else if((angle < 0 && angle > -20) || (angle > 0 && angle < 30))
-									text += " [↑]";
-								else if(angle > 30 && angle < 115)
-									text += " [↗]";
-								break;
-							case WEST:
-								if(angle > 75 && angle < 115)
-									text += " [←]";
-								else if(angle > 115 && angle < 165)
-									text += " [↖]";
-								else if((angle > 165 && angle < 180) || (angle > -180 && angle < -165))
-									text += " [↑]";
-								else if(angle < -104 && angle > -165)
-									text += " [↗]";
-								else if(angle < -60 && angle > -104)
-									text += " [→]";
-								else if(angle < -20 && angle > -60)
-									text += " [↘]";
-								else if((angle < 0 && angle > -20) || (angle > 0 && angle < 30))
-									text += " [↓]";
-								else if(angle > 30 && angle < 115)
-									text += " [↙]";
-								break;
-							default:
-								break;
-							}
+							
+							Minecraft.getMinecraft().getTextureManager().bindTexture(ID.ICON_HARROW);
+							GL11.glPushMatrix();	
+							
+							//GL11.glTranslated(270, 60, 0);
+							
+							int posX2 = (posX - 256) / 2;
+							int posY2 = (posY - 256);
+							
+							GL11.glTranslated(posX2 + 190, posY2 + 60, 0);
+							
+							GL11.glTranslated(128, 128, 128);
+							GL11.glScaled(0.2, 0.2, 0);
+							
+							Direction playerDir = WyHelper.get8Directions(player);	
+														
+							if(playerDir == Direction.SOUTH)
+								GL11.glRotated(angle - 90, 0.0, 0.0, 1.0);
+							else if(playerDir == Direction.SOUTH_EAST)
+								GL11.glRotated(angle - 45, 0.0, 0.0, 1.0);
+							if(playerDir == Direction.EAST)
+								GL11.glRotated(angle, 0.0, 0.0, 1.0);
+							else if(playerDir == Direction.NORTH_EAST)
+								GL11.glRotated(angle + 45, 0.0, 0.0, 1.0);
+							else if(playerDir == Direction.NORTH)
+								GL11.glRotated(angle + 90, 0.0, 0.0, 1.0);
+							else if(playerDir == Direction.NORTH_WEST)
+								GL11.glRotated(angle + 135, 0.0, 0.0, 1.0);
+							else if(playerDir == Direction.WEST)
+								GL11.glRotated(angle + 180, 0.0, 0.0, 1.0);
+							else if(playerDir == Direction.SOUTH_WEST)
+								GL11.glRotated(angle + 225, 0.0, 0.0, 1.0);
+							
+							GL11.glTranslated(-128, -128, -128);
+							this.drawTexturedModalRect(0, 0, 0, 0, 256, 256);
+														
+							GL11.glPopMatrix();
 							
 							WyRenderHelper.drawEntityOnScreen((posX + 320) / 2, posY - 42, 40, 40, 0, trackMob);
 							this.drawCenteredString(this.mc.fontRenderer, text, (posX + 320) / 2, posY - 32, Color.WHITE.getRGB());
@@ -194,6 +206,22 @@ public class GUICombatMode extends Gui
 			}
 			
 			GL11.glDisable(GL11.GL_BLEND);				
+		}
+	}
+	
+	@SubscribeEvent
+	public void updateFOV(FOVUpdateEvent event)
+	{
+		if(!MainConfig.enableFOVModifier)
+		{
+			if (event.entity.isPotionActive(Potion.moveSlowdown))
+				event.newfov = 1.0F;
+			
+			if (event.entity.isPotionActive(Potion.moveSpeed))
+				event.newfov = 1.0F;
+			
+			if ((event.entity.isPotionActive(Potion.moveSpeed)) && (event.entity.isSprinting()))
+				event.newfov = 1.1F;
 		}
 	}
 	

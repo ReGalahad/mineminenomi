@@ -2,16 +2,41 @@ package xyz.pixelatedw.MineMineNoMi3.abilities;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.DoruProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
+import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
 public class DoruAbilities 
 {
 
-	public static Ability[] abilitiesArray = new Ability[] {new DoruDoruArtsMori(), new CandleWall(), new CandleHouse()};
+	public static Ability[] abilitiesArray = new Ability[] {new DoruDoruArtsMori(), new DoruDoruArtsKen(), new CandleWall(), new CandleHouse()};
 
+	public static class DoruDoruArtsKen extends Ability
+	{
+		public DoruDoruArtsKen()
+		{
+			super(ListAttributes.DORUDORUARTSKEN); 
+		}
+		
+		public void startPassive(EntityPlayer player) 
+		{
+			if(player.inventory.getCurrentItem() == null)
+				player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(ListMisc.DoruDoruArtsKen));
+			else
+			{
+				WyHelper.sendMsgToPlayer(player, "Cannot equip " + this.getAttribute().getAttributeName() + " while holding another item in hand !");
+				this.passive(player);
+			}
+		}
+		
+		public void endPassive(EntityPlayer player) 
+		{
+			player.inventory.clearInventory(ListMisc.DoruDoruArtsKen, -1);
+		}
+	}
 	
 	public static class CandleHouse extends Ability
 	{

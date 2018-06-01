@@ -2,6 +2,7 @@ package xyz.pixelatedw.MineMineNoMi3.items;
 
 import com.google.common.collect.Multimap;
 
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.item.Item;
@@ -26,6 +27,23 @@ public class ItemCoreWeapon extends Item
 		this.maxStackSize = 1;
 		this.setFull3D();
 	}
+	
+	public ItemCoreWeapon setMaxDamage(int maxDamage)
+	{
+		super.setMaxDamage(maxDamage);
+		return this;
+	}
+	
+	public ItemCoreWeapon setQuality()
+	{
+		return this;
+	}
+	
+    public boolean hitEntity(ItemStack itemStack, EntityLivingBase attacker, EntityLivingBase target)
+    {
+    	itemStack.damageItem(1, target);
+        return true;
+    }
 	
 	public Multimap getAttributeModifiers(ItemStack stack)
 	{

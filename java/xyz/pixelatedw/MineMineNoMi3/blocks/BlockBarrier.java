@@ -13,7 +13,7 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketWorld;
 
 public class BlockBarrier extends Block
 {	
-	private int ticks = 35;
+	private int ticks = 2;
 	
 	public BlockBarrier()
 	{
@@ -32,6 +32,9 @@ public class BlockBarrier extends Block
     	if(ticks > 0)
     		ticks--;
     	else
+    	{
     		WyNetworkHelper.sendToServer(new PacketWorld(x, y, z, Block.getIdFromBlock(Blocks.air)));
+    		ticks = 2;
+    	}
 	}
 }

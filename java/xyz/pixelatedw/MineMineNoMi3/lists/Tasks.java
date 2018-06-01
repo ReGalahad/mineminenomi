@@ -13,7 +13,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
-import xyz.pixelatedw.MineMineNoMi3.DevilFruitsBoosts;
+import xyz.pixelatedw.MineMineNoMi3.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper.Direction;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
@@ -170,7 +170,7 @@ public class Tasks
 			
 			if(!player.worldObj.isRemote && itemStack.getTagCompound().getInteger("specialCooldown") <= 0)
 			{
-				if(props.getUsedFruit().equals("opeope") && DevilFruitsBoosts.isEntityInRoom(player))
+				if(props.getUsedFruit().equals("opeope") && DevilFruitsHelper.isEntityInRoom(player))
 				{
 					//AbilityProjectile proj = new AbilityProjectile(player.worldObj, (EntityPlayer) player, ListAttributes.DIALAXE.getAttribute());
 					//proj.setHeadingFromThrower(player, player.rotationPitch, player.rotationYaw, 0, 1.7F, 0);
@@ -274,199 +274,6 @@ public class Tasks
 			}			
 		};
 	};
-	
-	public static AbilityTask gear = new AbilityTask()
-	{ 	
-		public void onItemAfterUse(ItemStack itemStack, EntityPlayer player, int timeLeft)
-		{ 
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);
-
-			if(itemStack.getDisplayName().equals("§rGear Second"))
-				props.setGear((byte) 2);
-			if(itemStack.getDisplayName().equals("§rGear Third"))
-				props.setGear((byte) 3);
-			if(itemStack.getDisplayName().equals("§rGear Forth"))
-				props.setGear((byte) 4);
-		}
-		
-		public void onItemWhileUsing(ItemStack itemStack, EntityPlayer player, int count) 
-		{
-			if(!player.worldObj.isRemote)
-			{
-				if(count <= 80 && count > 40)
-					itemStack.setStackDisplayName("§rGear Second");
-				if(count <= 40 && count > 20)
-					itemStack.setStackDisplayName("§rGear Third");
-				if(count <= 20)
-					itemStack.setStackDisplayName("§rGear Forth");
-			}
-		}
-		
-		public void onItemCooldown(ItemStack itemStack, EntityPlayer player) 
-		{
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);
-
-			if((itemStack.getTagCompound().getInteger("ticks") < 200 && props.getGear() == 2) || (itemStack.getTagCompound().getInteger("ticks") < 250 && props.getGear() == 3) || (itemStack.getTagCompound().getInteger("ticks") < 300 && props.getGear() == 4))
-				props.setGear((byte) 1);
-			else if(itemStack.getTagCompound().getInteger("ticks") < 10) 
-				itemStack.setStackDisplayName("§rGear");
-		};
-	};
-	
-	public static AbilityTask gomugomubazooka = new AbilityTask()
-	{ 
-		public void onItemAfterUse(ItemStack itemStack, EntityPlayer player, int timeLeft)
-		{
-			if(!player.worldObj.isRemote)
-			{
-				/*AbilityAttribute aa = ((AbilityItem)itemStack.getItem()).getAttribute();
-				int power = (timeLeft - ((AbilityItem)itemStack.getItem()).getAttribute().getItemMaxCharges()) * -1;
-				ExtendedEntityStats props = ExtendedEntityStats.get(player);
-				
-				if(power == 0) power = aa.getItemMaxCharges();
-	
-				AbilityProjectile proj = null;*/
-	
-				/*if(props.getGear() == 1)
-					proj = new AbilityProjectile(player.worldObj, player, ListExtraAttributes.GOMUGOMUNOBAZOOKA.setProjectileDamage(5 + (power/3)) );				
-				else if(props.getGear() == 2)
-					proj = new AbilityProjectile(player.worldObj, player, ListExtraAttributes.GOMUGOMUNOJETBAZOOKA.setProjectileDamage(10 + (power/3)) );
-				else if(props.getGear() == 3)
-					proj = new AbilityProjectile(player.worldObj, player, ListExtraAttributes.GOMUGOMUNOGIGANTBAZOOKA.setProjectileDamage(15 + (power/2)) );
-				else if(props.getGear() == 4)
-					proj = new AbilityProjectile(player.worldObj, player, ListExtraAttributes.GOMUGOMUNOLEOBAZOOKA.setProjectileDamage(15 + power) );
-				*/
-				/*if(proj != null)
-				{
-					//proj.setHeadingFromThrower(player, player.rotationPitch, player.rotationYaw, 0, 1.5F, 1);
-					player.worldObj.spawnEntityInWorld(proj);
-				}*/
-			}
-		}
-		
-		public void onItemTick(ItemStack itemStack, EntityPlayer player) 
-		{
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);
-
-			if(props.getGear() == 1)
-				itemStack.setStackDisplayName("§rGomu Gomu no Bazooka");
-			if(props.getGear() == 2)
-				itemStack.setStackDisplayName("§rGomu Gomu no Jet Bazooka");
-			if(props.getGear() == 3)
-				itemStack.setStackDisplayName("§rGomu Gomu no Gigant Bazooka");
-			if(props.getGear() == 4)
-				itemStack.setStackDisplayName("§rGomu Gomu no Leo Bazooka");
-		};
-		
-		public void onProjectileHit(AbilityProjectile abilityProjectile, MovingObjectPosition hit) 
-		{
-			if(hit.entityHit instanceof EntityLivingBase)
-			{
-				((EntityLivingBase) hit.entityHit).motionY += 0.8;
-				Direction dir = WyHelper.get4Directions(abilityProjectile.getThrower());
-				if(dir == WyHelper.Direction.SOUTH)
-					((EntityLivingBase) hit.entityHit).motionZ += 1.7;
-				else if(dir == WyHelper.Direction.EAST)
-					((EntityLivingBase) hit.entityHit).motionX += 1.7; 
-				else if(dir == WyHelper.Direction.NORTH)
-					((EntityLivingBase) hit.entityHit).motionZ -= 1.7;
-				else if(dir == WyHelper.Direction.WEST)  
-					((EntityLivingBase) hit.entityHit).motionX -= 1.7;	
-			}
-		}; 
-	};
-
-	public static AbilityTask gomugomugatling = new AbilityTask()
-	{ 	
-		public void onItemUse(ItemStack itemStack, EntityPlayer player)  
-		{
-			if(!player.worldObj.isRemote)
-			{
-				ExtendedEntityStats props = ExtendedEntityStats.get(player);
-				
-				AbilityProjectile proj = null;
-	
-				/*if(props.getGear() == 1)
-					proj = new AbilityProjectile(player.worldObj, player, ListExtraAttributes.GOMUGOMUNOGATLING.setProjectileDamage(5) );				
-				else if(props.getGear() == 2)
-					proj = new AbilityProjectile(player.worldObj, player, ListExtraAttributes.GOMUGOMUNOJETGATLING.setProjectileDamage(5) );
-				else if(props.getGear() == 3)
-					proj = new AbilityProjectile(player.worldObj, player, ListExtraAttributes.GOMUGOMUNOGIGANTGATLING.setProjectileDamage(10) );
-				else if(props.getGear() == 4)
-					proj = new AbilityProjectile(player.worldObj, player, ListExtraAttributes.GOMUGOMUNOKONGORGAN.setProjectileSpeed(4).setProjectileDamage(10) );
-				*/
-				if(proj != null)
-				{
-					//proj.setHeadingFromThrower(player, player.rotationPitch, player.rotationYaw, 0, 1.5F, 1);
-					player.worldObj.spawnEntityInWorld(proj);
-				}	
-			}
-		};
-		
-		public void onItemTick(ItemStack itemStack, EntityPlayer player) 
-		{
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);
-
-			if(props.getGear() == 1)
-				itemStack.setStackDisplayName("§rGomu Gomu no Gatling");
-			if(props.getGear() == 2)
-				itemStack.setStackDisplayName("§rGomu Gomu no Jet Gatling");
-			if(props.getGear() == 3)
-				itemStack.setStackDisplayName("§rGomu Gomu no Gigant Gatling");
-			if(props.getGear() == 4)
-				itemStack.setStackDisplayName("§rGomu Gomu no Kong Organ");
-		};		
-	};
-	
-	public static AbilityTask gomugomupistol = new AbilityTask()
-	{ 		
-		public void onItemAfterUse(ItemStack itemStack, EntityPlayer player, int timeLeft)
-		{
-			if(!player.worldObj.isRemote)
-			{
-				/*AbilityAttribute aa = ((AbilityItem)itemStack.getItem()).getAttribute();
-				int power = (timeLeft - ((AbilityItem)itemStack.getItem()).getAttribute().getItemMaxCharges()) * -1;
-				ExtendedEntityStats props = ExtendedEntityStats.get(player);
-				
-				if(power == 0) power = aa.getItemMaxCharges();
-	*/
-				AbilityProjectile proj = null;
-	
-				/*if(props.getGear() == 1)
-					proj = new AbilityProjectile(player.worldObj, player, ListExtraAttributes.GOMUGOMUNOPISTOL.setProjectileDamage(5 + (power/2)) );
-				else if(props.getGear() == 2)
-					proj = new AbilityProjectile(player.worldObj, player, ListExtraAttributes.GOMUGOMUNOJETPISTOL.setProjectileDamage(10 + (power/2)) );
-				else if(props.getGear() == 3)
-					proj = new AbilityProjectile(player.worldObj, player, ListExtraAttributes.GOMUGOMUNOGIGANTPISTOL.setProjectileDamage(20 + (power/2)) );
-				else if(props.getGear() == 4)
-					proj = new AbilityProjectile(player.worldObj, player, ListExtraAttributes.GOMUGOMUNOKONGGUN.setProjectileSpeed(4).setProjectileDamage(20 + power) );
-				*/
-				if(proj != null)
-				{
-					//proj.setHeadingFromThrower(player, player.rotationPitch, player.rotationYaw, 0, 1.5F, 1);
-					player.worldObj.spawnEntityInWorld(proj);
-				}
-			}
-		}
-		
-		public void onItemTick(ItemStack itemStack, EntityPlayer player) 
-		{
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);
-
-			if(!player.worldObj.isRemote)
-			{
-				if(props.getGear() == 1)
-					itemStack.setStackDisplayName("§rGomu Gomu no Pistol");
-				if(props.getGear() == 2)
-					itemStack.setStackDisplayName("§rGomu Gomu no Jet Pistol");
-				if(props.getGear() == 3)
-					itemStack.setStackDisplayName("§rGomu Gomu no Gigant Pistol");
-				if(props.getGear() == 4)
-					itemStack.setStackDisplayName("§rGomu Gomu no Kong Gun");
-			}
-		};
-		
-	};
 
 	public static AbilityTask doppelman = new AbilityTask()
 	{ 
@@ -558,50 +365,6 @@ public class Tasks
 				itemStack.setStackDisplayName("§rDoppelman");	
 		};*/
 		
-	};
-	
-	/** TODO Shadow's Asgard */	
-	public static AbilityTask shadowsasgard = new AbilityTask()
-	{ 
-		public void onItemUse(ItemStack itemStack, EntityPlayer player)
-		{
-			
-		}
-	};
-	
-	public static AbilityTask sables = new AbilityTask()
-	{ 
-		public void onItemHit(ItemStack itemStack, EntityLivingBase target, EntityLivingBase attacker) 
-		{
-			target.motionY += 1;
-			target.addPotionEffect(new PotionEffect(Potion.hunger.id, 500, 1));
-			Direction dir = WyHelper.get4Directions(attacker);
-			if(dir == WyHelper.Direction.SOUTH)
-				target.motionX += 0.2;
-			else if(dir == WyHelper.Direction.EAST)
-				target.motionX -= 0.2; 
-			else if(dir == WyHelper.Direction.NORTH)
-				target.motionZ += 0.2;
-			else if(dir == WyHelper.Direction.WEST)  
-				target.motionZ -= 0.2;	
-		}			
-	};
-	
-	public static AbilityTask padho = new AbilityTask()
-	{ 
-		public void onItemHit(ItemStack itemStack, EntityLivingBase target, EntityLivingBase attacker) 
-		{
-			target.motionY += 5;
-			Direction dir = WyHelper.get4Directions(attacker);
-			if(dir == WyHelper.Direction.SOUTH)
-				target.motionX += 10;
-			else if(dir == WyHelper.Direction.EAST)
-				target.motionX -= 10; 
-			else if(dir == WyHelper.Direction.NORTH)
-				target.motionZ += 10;
-			else if(dir == WyHelper.Direction.WEST)  
-				target.motionZ -= 10;	
-		}			
 	};
 
 	public static AbilityTask bluesword = new AbilityTask() {public void onItemHit(ItemStack itemStack, EntityLivingBase target, EntityLivingBase attacker) {target.setFire(100);}};

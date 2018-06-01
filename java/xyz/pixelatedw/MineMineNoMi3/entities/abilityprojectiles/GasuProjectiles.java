@@ -1,10 +1,13 @@
 package xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import xyz.pixelatedw.MineMineNoMi3.MainMod;
+import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.DokuProjectiles.Hydra;
@@ -48,6 +51,17 @@ public class GasuProjectiles
 		{		
 			super(world, player, attr);		
 		}	
+		
+		public void onUpdate()
+		{	
+			double posXOffset = this.worldObj.rand.nextGaussian() * 0.42D;
+			double posYOffset = this.worldObj.rand.nextGaussian() * 0.22D;
+			double posZOffset = this.worldObj.rand.nextGaussian() * 0.42D;		
+			
+			MainMod.proxy.spawnCustomParticles(this, "gasrobe", this.posX + posXOffset, this.posY + posYOffset, this.posZ + posZOffset, 0.0D, 0.0D, 0.0D);
+			
+			super.onUpdate();
+		}
 	}
 	
 	

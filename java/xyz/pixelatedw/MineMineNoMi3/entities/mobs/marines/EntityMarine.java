@@ -1,28 +1,13 @@
 package xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines;
 
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMoveThroughVillage;
-import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.passive.EntityVillager;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import xyz.pixelatedw.MineMineNoMi3.ID;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.Doppelman;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirate;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.PirateData;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
 public class EntityMarine extends MarineData
 { 
-	private String[] textures = {"marine1", "marine2", "marine3"};
+	private String[] textures = {"marine1", "marine2", "marine3", "marine4"};
 	
 	public EntityMarine(World world) 
 	{
@@ -49,6 +34,6 @@ public class EntityMarine extends MarineData
 		return new double[] {0, 0, -0.1};
 	}
 	
-	public int getDorikiPower() { return this.worldObj.rand.nextInt(3) + 1; }
+	public int getDorikiPower() { return this.worldObj.rand.nextInt(3) + 10; }
 	public int getBellyInPockets() { return this.worldObj.rand.nextInt(10) + 1; }
 }

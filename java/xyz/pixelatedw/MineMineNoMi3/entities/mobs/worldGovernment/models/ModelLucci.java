@@ -30,7 +30,7 @@ public class ModelLucci extends ModelBiped
 	{
 		textureWidth = 64;
 		textureHeight = 64;
-
+		
 		this.bipedHeadwear = new ModelRenderer(this, 1, 1);
 		this.bipedHeadwear.addBox(0F, 0F, 0F, 0, 0, 0);
 		this.bipedHeadwear.setRotationPoint(0F, 0F, 0F);
@@ -146,6 +146,12 @@ public class ModelLucci extends ModelBiped
 	{
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(f, f1, f2, f3, f4, f5);
+		
+		this.bipedLeftLeg.isHidden = true;
+		this.bipedRightLeg.isHidden = true;
+		this.bipedLeftArm.isHidden = true;
+		this.bipedRightArm.isHidden = true;
+		
 		head.render(f5);
 		body.render(f5);
 		rightarm.render(f5);
@@ -176,6 +182,9 @@ public class ModelLucci extends ModelBiped
 		leftleg.rotateAngleX = MathHelper.cos(par2 * 0.6662F) * 1.0F * par3;
 		rightleg.rotateAngleX = MathHelper.cos(par2 * 0.6662F + (float) Math.PI) * 1.0F * par3;
 
+		leftarm.rotateAngleX = MathHelper.cos(par2 * 0.6662F) * 1.0F * par3;
+		rightarm.rotateAngleX = MathHelper.cos(par2 * 0.6662F + (float) Math.PI) * 1.0F * par3;
+		
 		pi1.rotateAngleX = MathHelper.cos(par2 * 0.6662F + (float) Math.PI) * 2.0F * par3 * 0.5F;
 		pi2.rotateAngleX = MathHelper.cos(par2 * 0.6662F + (float) Math.PI) * 2.0F * par3 * 0.5F;
 		pi3.rotateAngleX = MathHelper.cos(par2 * 0.6662F + (float) Math.PI) * 2.0F * par3 * 0.5F;

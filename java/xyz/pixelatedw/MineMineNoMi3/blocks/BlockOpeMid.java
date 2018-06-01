@@ -12,12 +12,18 @@ import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityOpe;
 
 public class BlockOpeMid extends BlockContainer
 {
+	private TileEntityOpe tile;
+	
 	public BlockOpeMid()
 	{
 		super(Material.iron);
 	} 
 
-	public TileEntity createNewTileEntity(World world, int i) {return new TileEntityOpe();}
+	public TileEntity createNewTileEntity(World world, int i) 
+	{
+		tile = new TileEntityOpe();
+		return tile;
+	}
 	
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {return WyHelper.NULL_AABB;} 
 	
@@ -28,6 +34,12 @@ public class BlockOpeMid extends BlockContainer
 
     public boolean renderAsNormalBlock() { return false; }
 
-	
+    public void clearRoom()
+    {
+    	if(tile != null)
+    	{
+    		tile.clearRoom();
+    	}
+    }
 }
 

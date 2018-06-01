@@ -10,6 +10,7 @@ public class EntityNewMob extends EntityMob implements IDynamicRenderer
 
 	private boolean hasHaki = false, isLogia = false;
 	private String texture = "N/A", model = "N/A";
+	private int state;
 
 	public EntityNewMob(World worldIn) 
 	{
@@ -47,8 +48,14 @@ public class EntityNewMob extends EntityMob implements IDynamicRenderer
         return data;
     }
 	
+    public void setState(int i) { this.getDataWatcher().updateObject(27, i); }
+    public int getState() { return this.getDataWatcher().getWatchableObjectInt(27); }
+    
 	protected void entityInit()
-	{super.entityInit();}
+	{
+		this.getDataWatcher().addObject(27, state);
+		super.entityInit();
+	}
 	
 	protected boolean isValidLightLevel()
 	{return true;} 

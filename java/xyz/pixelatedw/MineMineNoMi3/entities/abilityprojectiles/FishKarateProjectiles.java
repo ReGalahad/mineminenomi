@@ -3,11 +3,11 @@ package xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles;
 import java.util.ArrayList;
 
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.RokushikiProjectiles.Rankyaku;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.RokushikiProjectiles.Shigan;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 
 public class FishKarateProjectiles 
@@ -46,6 +46,11 @@ public class FishKarateProjectiles
 		public Soshark(World world, EntityLivingBase player, AbilityAttribute attr) 
 		{		
 			super(world, player, attr);		
+		}
+		
+		public void tasksImapct(MovingObjectPosition hit)
+		{
+			WyHelper.explosion(this, this.posX, this.posY, this.posZ, 2.2f);
 		}
 	}
 }

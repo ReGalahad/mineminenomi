@@ -14,6 +14,7 @@ import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
 public class EventsDrops
@@ -37,17 +38,20 @@ public class EventsDrops
 	 
 	@SubscribeEvent	
 	public void onBreak(BreakEvent event)
-	{	
+	{
 		if(MainConfig.enableDFtoDrop && (event.block == Blocks.leaves || event.block == Blocks.leaves2))
 		{
 			Random rand = new Random();
-			double chance = rand.nextInt(100000) + rand.nextDouble();
-
-			if( 1/chance <= MainConfig.rateDFDrops / 10000 )
+			double chance = rand.nextInt(99) + rand.nextDouble();
+			
+			//System.out.println( chance );
+			
+			if( chance < MainConfig.rateDFDrops )
 			{
 				ItemStack df = new ItemStack(Values.devilfruits.get(rand.nextInt(Values.devilfruits.size())));
 				event.getPlayer().inventory.addItemStackToInventory(df);
-			} 
+			}
+			
 		}
 	}
 	

@@ -16,7 +16,7 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 public class GoroAbilities
 {
 
-	public static Ability[] abilitiesArray = new Ability[] {new ElThor(), new Raigo(), new Kari(), new Sango()};
+	public static Ability[] abilitiesArray = new Ability[] {new ElThor(), new VoltVari(), new Raigo(), new Kari(), new Sango()};
 	
 	public static class ElThor extends Ability
 	{
@@ -43,6 +43,20 @@ public class GoroAbilities
 				
 				super.use(player);
 			}	
+		} 
+	}
+	
+	public static class VoltVari extends Ability
+	{
+		public VoltVari() 
+		{
+			super(ListAttributes.VOLTVARI); 
+		}
+		
+		public void use(EntityPlayer player)
+		{
+			this.projectile = new GoroProjectiles.VoltVari(player.worldObj, player, attr);
+			super.use(player);
 		} 
 	}
 	

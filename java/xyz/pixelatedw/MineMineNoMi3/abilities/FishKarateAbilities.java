@@ -2,16 +2,22 @@ package xyz.pixelatedw.MineMineNoMi3.abilities;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
 
-import net.minecraft.client.Minecraft;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MovingObjectPosition;
-import xyz.pixelatedw.MineMineNoMi3.abilities.RokushikiAbilities.Kamie;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
+import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.FishKarateProjectiles;
+import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
+import xyz.pixelatedw.MineMineNoMi3.items.Heart;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
+import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 
 public class FishKarateAbilities 
 {
@@ -21,7 +27,7 @@ public class FishKarateAbilities
 	public static Ability SAMEHADASHOTEI = new SamehadaShotei();
 	public static Ability KARAKUSAGAWARASEIKEN = new KarakusagawaraSeiken();
 	
-	public static Ability[] abilitiesArray = new Ability[] {UCHIMIZU, SOSHARK, SAMEHADASHOTEI, KARAKUSAGAWARASEIKEN};
+	public static Ability[] abilitiesArray = new Ability[] {UCHIMIZU, SOSHARK, SAMEHADASHOTEI, KARAKUSAGAWARASEIKEN, KACHIAGEHAISOKU};
 	
 	public static class Uchimizu extends Ability
 	{
@@ -32,7 +38,7 @@ public class FishKarateAbilities
 			
 		public void use(EntityPlayer player)
 		{
-			this.projectile = new FishKarateProjectiles.Uchimizu(player.worldObj, player, ListAttributes.HIGAN);
+			this.projectile = new FishKarateProjectiles.Uchimizu(player.worldObj, player, ListAttributes.UCHIMIZU);
 			super.use(player);
 		}
 	}
@@ -46,7 +52,7 @@ public class FishKarateAbilities
 			
 		public void use(EntityPlayer player)
 		{
-			this.projectile = new FishKarateProjectiles.Soshark(player.worldObj, player, ListAttributes.HIGAN);
+			this.projectile = new FishKarateProjectiles.Soshark(player.worldObj, player, ListAttributes.SOSHARK);
 			super.use(player);
 		}
 	}
@@ -58,25 +64,13 @@ public class FishKarateAbilities
 			super(ListAttributes.KACHIAGEHAISOKU); 
 		}
 			
-		public void use(EntityPlayer player)
+		public void hitEntity(EntityPlayer player, EntityLivingBase target) 
 		{
-			/*MovingObjectPosition mop = Minecraft.getMinecraft().objectMouseOver;
-			
-			if(mop != null && mop.entityHit != null)
-			{			
-				if(mop.entityHit instanceof EntityLivingBase)
-				{
-					EntityLivingBase elb = (EntityLivingBase) mop.entityHit;
-
-					if(player.getDistanceSqToEntity(elb) < 7)
-					{
-						//elb.attackEntityFrom(DamageSource.causePlayerDamage(player), 8);					
-					}
-				}
-			}*/
-			
-			WyHelper.sendMsgToPlayer(player, ChatFormatting.RED + "NOT YET IMPLEMENTED");
-			//super.use(player);
+			super.hitEntity(player, target);
+			int damage = 10;
+			if(player.isInsideOfMaterial(Material.water))
+				damage = 40;
+			target.attackEntityFrom(DamageSource.causePlayerDamage(player), damage);
 		}
 	}
 	
@@ -85,6 +79,11 @@ public class FishKarateAbilities
 		public SamehadaShotei() 
 		{
 			super(ListAttributes.SAMEHADASHOTEI); 
+		}
+		
+		public void duringPassive(EntityPlayer player, int passiveTimer) 
+		{
+			WyNetworkHelper.sendTo(new PacketParticles("samehada", player), (EntityPlayerMP) player);
 		}
 	}
 	

@@ -20,7 +20,11 @@ public class ID
 	ICON_SWORDSMAN = new ResourceLocation(ID.PROJECT_ID, "textures/gui/icons/icon_swordsman.png"),
 	ICON_SNIPER = new ResourceLocation(ID.PROJECT_ID, "textures/gui/icons/icon_sniper.png"),
 	ICON_MEDIC = new ResourceLocation(ID.PROJECT_ID, "textures/gui/icons/icon_medic.png"),
-	 
+	
+	HANDTEXTURE_ZOANMORPH_BUSO = new ResourceLocation(ID.PROJECT_ID, "textures/models/zoanmorph/hand_buso.png"),
+	
+	TEXTURE_NULL = new ResourceLocation(ID.PROJECT_ID, "textures/gui/null.png"),
+	
 	TEXTURE_STRINGS1 = new ResourceLocation(ID.PROJECT_ID, "textures/gui/gui_strings.png"),
 	TEXTURE_BOUNTYPOSTER = new ResourceLocation(ID.PROJECT_ID, "textures/gui/gui_bounty.png"),
 	TEXTURE_WIDGETS = new ResourceLocation(ID.PROJECT_ID, "textures/gui/widgets.png"),
@@ -36,7 +40,7 @@ public class ID
 	
 	PROJECT_ID = "mineminenomi",
 	PROJECT_NAME = "Mine Mine no Mi",
-	PROJECT_VERSION = "0.3.0",
+	PROJECT_VERSION = "0.3.1",
 	PROJECT_MCVERSION = "1.7.10",
 	PROJECT_SOURCEFOLDER = "D:/Programming/Minecraft Modding/Mine Mine no Mi/src/main/resources/",
 
@@ -69,10 +73,15 @@ public class ID
 	LANG_GUI_STYLE = "gui.style.name",
 	LANG_GUI_ABILITIES = "gui.abilities.name",
 
+	DIMENSION_NAME_SCENARIOARENA = "scenarioarena",
+	
+	SCENARIO_ROMANCEDAWN_CAPTAINMORGAN = "scenario_cptmorgan",
 	
 	NULL = "null";
 	
 	public static final int 
+	
+	DIMENSION_ID_SCENARIOARENA = 4,
 	
 	ENTITY_STATE = 27,
 	

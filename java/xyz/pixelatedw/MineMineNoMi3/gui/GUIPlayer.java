@@ -14,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainMod;
+import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyRenderHelper;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 
@@ -42,7 +43,7 @@ public class GUIPlayer extends GuiScreen
 		String raceGUI = I18n.format(ID.LANG_GUI_RACE);
 		String styleGUI = I18n.format(ID.LANG_GUI_STYLE);
 		
-		String factionActual = I18n.format("faction." + props.getFaction().toLowerCase() + ".name");
+		String factionActual = I18n.format("faction." + WyHelper.getFancyName(props.getFaction().toLowerCase()) + ".name");
 		String raceActual = I18n.format("race." + props.getRace().toLowerCase() + ".name");
 		String styleActual = I18n.format("style." + props.getFightStyle().toLowerCase() + ".name");
 		
@@ -71,14 +72,18 @@ public class GUIPlayer extends GuiScreen
 		if(!props.getUsedFruit().equals("N/A") && !props.getUsedFruit().equals("null"))
 		{
 			String model = "";
+			String fullModel = "";
 			if(props.getUsedFruit().equals("ushiushibison"))
+			{
 				model = "bison";
-
+				fullModel = "model" + model;
+			}
+			
 			ItemStack yamiFruit = new ItemStack(GameRegistry.findItem(ID.PROJECT_ID, "yamiyaminomi"));
 			ItemStack df;
 			if(!props.getUsedFruit().equals("yamidummy"))
 			{
-				df = new ItemStack(GameRegistry.findItem(ID.PROJECT_ID, props.getUsedFruit().replace(model, "") + "nomi" + model));
+				df = new ItemStack(GameRegistry.findItem(ID.PROJECT_ID, props.getUsedFruit().replace(model, "") + "nomi" + fullModel));
 				
 				if(props.hasYamiPower())
 					mc.fontRenderer.drawStringWithShadow(EnumChatFormatting.BOLD + yamiFruit.getDisplayName() + " + " + df.getDisplayName(), posX - 28, posY + 194, -1);

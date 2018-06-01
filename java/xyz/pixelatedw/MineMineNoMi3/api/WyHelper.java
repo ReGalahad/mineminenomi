@@ -27,8 +27,12 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityExplosion;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityManager;
 import xyz.pixelatedw.MineMineNoMi3.api.math.ISphere;
 import xyz.pixelatedw.MineMineNoMi3.api.math.Sphere;
 
@@ -39,6 +43,45 @@ public class WyHelper
 	
 	public static AxisAlignedBB NULL_AABB = AxisAlignedBB.getBoundingBox(0, 0, 0, 0, 0, 0);
 	
+    public static AbilityExplosion explosion(Entity entity, double posX, double posY, double posZ, float size)
+    {
+    	AbilityExplosion explosion = new AbilityExplosion(entity, posX, posY, posZ, size);
+    	explosion.doExplosionA();
+        return explosion;
+    }
+	
+	public static boolean isBlockNearby(EntityLivingBase player, int radius, Block... blocks)
+	{
+		for(Block b : blocks)
+		{
+			for (int x = -radius; x < radius; x++) 
+			for (int y = -radius; y < radius; y++) 
+			for (int z = -radius; z < radius; z++) 
+			{
+				if(player.worldObj.getBlock((int)player.posX + x, (int)player.posY + y, (int)player.posZ + z) == b)
+				{
+					return true;
+				}
+			}
+		}
+		
+		return false;
+	}
+	
+	public static Block getBlockNearby(EntityPlayer player, int radius, Block block)
+	{
+		for (int x = -radius; x < radius; x++) 
+		for (int y = -radius; y < radius; y++) 
+		for (int z = -radius; z < radius; z++) 
+		{
+			if(player.worldObj.getBlock((int)player.posX + x, (int)player.posY + y, (int)player.posZ + z) == block)
+			{
+				return player.worldObj.getBlock((int)player.posX + x, (int)player.posY + y, (int)player.posZ + z);
+			}
+		}
+		
+		return null;
+	}
 	
 	public static <K extends Comparable,V extends Comparable> Map<K,V> sortAlphabetically(Map<K,V> map)
 	{
@@ -87,6 +130,35 @@ public class WyHelper
 		}
 	}
 	
+	public static void generateExtraBotFiles()
+	{		
+		Map<String, Ability> sorted = AbilityManager.instance().getHashMap();
+		Set set = sorted.entrySet();
+		Iterator i = set.iterator();
+		
+		File folder = new File(ID.PROJECT_SOURCEFOLDER + "/assets/" + ID.PROJECT_ID + "/EXTRA_BOT_FIELS/");
+		folder.mkdirs();
+		
+		if(folder.exists())
+		{			
+			try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(ID.PROJECT_SOURCEFOLDER + "/assets/" + ID.PROJECT_ID + "/EXTRA_BOT_FIELS/fruits.data"), "UTF-8"))) 
+			{
+				while(i.hasNext())
+				{
+					Map.Entry entry = (Map.Entry)i.next();
+					
+					Ability abl = ((Ability)entry.getValue());
+					
+					//writer.write("[\"" + abl.getAttribute().getAttributeName() + "\", \"" + abl + "\", \"Hiken\", \"Higan\", \"Dai Enkai : Entei\", \"Hidaruma\", \"Jujika\", \"Enjomo\"]");
+					
+					//writer.write(entry.getKey() + "=" + entry.getValue() + "\n");
+				}
+				writer.close();
+			}
+			catch(Exception e) {e.getStackTrace();}
+		}
+	}
+	
 /*	LEGACY METHOD TO GENERATE 1.8+ JSON MODELS
 	public void generateIngameModels()
 	{
@@ -111,7 +183,7 @@ public class WyHelper
 */	
 	
 	/**
-	 * 0) is burning; 1) is sneaking; 2) is riding something; 3) is sprinting; 4) is eating
+	 * 0) is burning; 1) is sneaking; 2) is riding something; 3) is sprinting; 4) is eating; 5) is invisible
 	 */
     public static void setEntityFlag(Entity player, int id, boolean bool)
     {

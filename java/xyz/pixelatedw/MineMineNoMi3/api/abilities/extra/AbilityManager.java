@@ -35,4 +35,14 @@ public class AbilityManager
 			return null;
 		}
 	}
+	
+	public HashMap<String, Ability> getHashMap()
+	{
+		return registeredAbilities;
+	}
+	
+	public int getSize()
+	{
+		return registeredAbilities.size();
+	}
 }

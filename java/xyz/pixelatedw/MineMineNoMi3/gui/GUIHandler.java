@@ -1,6 +1,7 @@
 package xyz.pixelatedw.MineMineNoMi3.gui;
 
 import cpw.mods.fml.common.network.IGuiHandler;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
@@ -16,7 +17,6 @@ public class GUIHandler implements IGuiHandler
 			case 1: return id == 1 ? new GUIPlayer(player) : null;
 			case 2: return id == 2 ? new GUICC(player) : null;
 			case 4: return id == 4 ? new GUISelectHotbarAbilities(player) : null;
-			case 5: return id == 5 ? new GUIEditAbilities(player) : null;
 		}
 		return null;
 	}

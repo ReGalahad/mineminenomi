@@ -43,7 +43,7 @@ public class BellyPouch extends Item
 				props.setBelly(Values.MAX_GENERAL);	
 			
 	    	if(!ID.DEV_EARLYACCESS && !player.capabilities.isCreativeMode)
-	    		WyTelemetry.addGeneralStat("bellyEarnedFromPouches", amount);
+	    		WyTelemetry.addStat("bellyEarnedFromPouches", amount);
 		}
 		
 		WyNetworkHelper.sendToServer(new PacketSync(props));

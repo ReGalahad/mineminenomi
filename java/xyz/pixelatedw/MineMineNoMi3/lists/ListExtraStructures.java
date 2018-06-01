@@ -13,6 +13,16 @@ import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityCustomSpawner;
 public class ListExtraStructures
 {
 	
+	public static void buildCamp(int posX, int posY, int posZ, World world)
+	{
+		String toSpawn1 = ID.PROJECT_ID + ".Marine with Sword";
+		String toSpawn2 = ID.PROJECT_ID + ".Marine with Gun";
+		String toSpawnCpt = ID.PROJECT_ID + ".Marine with Sword";
+		
+		world.setBlock(posX - 2, posY, posZ + 15, Blocks.bedrock );
+		world.setBlock(posX - 15, posY, posZ - 2, Blocks.bedrock );
+	}
+	
 	public static void buildLargeShip(int posX, int posY, int posZ, World world, String faction)
 	{
 		String toSpawn1;

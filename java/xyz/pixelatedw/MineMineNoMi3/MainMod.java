@@ -17,14 +17,19 @@ import xyz.pixelatedw.MineMineNoMi3.commands.CommandBounty;
 import xyz.pixelatedw.MineMineNoMi3.commands.CommandDoriki;
 import xyz.pixelatedw.MineMineNoMi3.commands.CommandExtol;
 import xyz.pixelatedw.MineMineNoMi3.commands.CommandFG;
+import xyz.pixelatedw.MineMineNoMi3.commands.CommandRemoveDF;
 import xyz.pixelatedw.MineMineNoMi3.gui.GUIHandler;
+import xyz.pixelatedw.MineMineNoMi3.lists.ListBiomes;
+import xyz.pixelatedw.MineMineNoMi3.lists.ListCraftingRecipes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListCreativeTabs;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListDevilFruits;
+import xyz.pixelatedw.MineMineNoMi3.lists.ListEffects;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListEntities;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListForge;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListPackets;
 import xyz.pixelatedw.MineMineNoMi3.proxy.CommonProxy;
+import xyz.pixelatedw.MineMineNoMi3.world.MainWorldGen;
 
 @Mod(modid = ID.PROJECT_ID, name = ID.PROJECT_NAME, version = ID.PROJECT_VERSION)
 public class MainMod 
@@ -43,6 +48,7 @@ public class MainMod
 		
 		ListPackets.init();
 		ListEntities.init();
+		ListBiomes.init();
 		
 		proxy.preInit();
 	}
@@ -55,7 +61,9 @@ public class MainMod
 		
 		ListDevilFruits.init(); 
 		ListMisc.init();
+		ListEffects.init();
 		ListCreativeTabs.init();
+		ListCraftingRecipes.init();
 		ListForge.init();
 		
 		proxy.init();
@@ -75,6 +83,7 @@ public class MainMod
 		event.registerServerCommand(new CommandBelly());
 		event.registerServerCommand(new CommandBounty());
 		event.registerServerCommand(new CommandExtol());
+		event.registerServerCommand(new CommandRemoveDF());
 	}
 	
 	public static MainMod getMineMineNoMi() {return instance;}

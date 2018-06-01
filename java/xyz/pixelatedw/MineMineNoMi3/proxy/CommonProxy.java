@@ -15,5 +15,5 @@ public class CommonProxy
         return ctx.getServerHandler().playerEntity;
 	}
 	
-	public void generateTestParticles(Entity theEntity) { }
+	public void spawnCustomParticles(Entity theEntity, String particleType, double posX, double posY, double posZ, double motionX, double motionY, double motionZ) { }
 }

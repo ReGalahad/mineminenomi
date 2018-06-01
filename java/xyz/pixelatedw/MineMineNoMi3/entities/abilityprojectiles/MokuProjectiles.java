@@ -2,15 +2,18 @@ package xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Timer;
 
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.HieProjectiles.IceBall;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.HieProjectiles.IceBlockPartisan;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
+import xyz.pixelatedw.MineMineNoMi3.lists.ListParticleEffects;
 
 public class MokuProjectiles 
 {
@@ -70,6 +73,15 @@ public class MokuProjectiles
 				this.worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL.getParticleName(), this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);		
 			}
 			super.onUpdate();
+		}
+		
+		public void tasksImapct(MovingObjectPosition hit)
+		{
+			if(hit.entityHit != null && !hit.entityHit.isDead)
+			{
+				((EntityLivingBase) hit.entityHit).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 240, 1));
+				((EntityLivingBase) hit.entityHit).addPotionEffect(new PotionEffect(Potion.digSlowdown.id, 240, 1));
+			}
 		}
 	}
 }

@@ -62,7 +62,7 @@ public class UltraCola extends ItemFood
 				player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 250, 0));
 				
 	    	if(!ID.DEV_EARLYACCESS && !player.capabilities.isCreativeMode)
-	    		WyTelemetry.addGeneralStat("bottlesOfUltraColaDrank", 1);
+	    		WyTelemetry.addStat("bottlesOfUltraColaDrank", 1);
 			
 			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
 		}			

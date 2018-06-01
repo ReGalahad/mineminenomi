@@ -1,7 +1,10 @@
 package xyz.pixelatedw.MineMineNoMi3.items;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
@@ -11,6 +14,7 @@ import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.EnumFruitType;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListCreativeTabs;
@@ -57,9 +61,8 @@ public class AkumaNoMi extends ItemFood
 				props.setIsLogia(true);
 			 
 			for(Ability a : abilities)
-			{
-				props.addDevilFruitAbility(a);
-			}
+				if(!props.hasDevilFruitAbility(a))
+					props.addDevilFruitAbility(a);
 		}
 		else
 		{	
@@ -72,30 +75,32 @@ public class AkumaNoMi extends ItemFood
 				props.setIsLogia(false);
 				
 				for(Ability a : abilities)
-				{
-					props.addDevilFruitAbility(a);
-				}
+					if(!props.hasDevilFruitAbility(a))
+						props.addDevilFruitAbility(a);
+
 			}
 			else
 			{
 				if(!props.getUsedFruit().equals("N/A") && !props.hasYamiPower())
 					player.attackEntityFrom(DamageSource.wither, Float.POSITIVE_INFINITY);			
-				
-				if(props.getUsedFruit().equals("N/A"))				
+
+				if(props.getUsedFruit().equals("N/A"))	
+				{
 					props.setUsedFruit(this.getUnlocalizedName().substring(5).replace("nomi", "").replace(":", "").replace(",", "").replace("model", ""));
 
-				if(this.type == EnumFruitType.LOGIA)
-					props.setIsLogia(true);
-				 
-				for(Ability a : abilities)
-				{
-					props.addDevilFruitAbility(a);
+					if(this.type == EnumFruitType.LOGIA)
+						props.setIsLogia(true);
+					 
+					for(Ability a : abilities)
+						if(!props.hasDevilFruitAbility(a))
+							props.addDevilFruitAbility(a);
 				}
+
 			}
 		}
 		
     	if(!ID.DEV_EARLYACCESS && !world.isRemote && !player.capabilities.isCreativeMode)
-    		WyTelemetry.addDevilFruitStat("eaten_" + this.getUnlocalizedName().substring(5).replace("nomi", "").replace(":", "").replace(",", "").replace("model", ""), 1);
+    		WyTelemetry.addStat("eaten_" + this.getUnlocalizedName().substring(5).replace("nomi", "").replace(":", "").replace(",", "").replace("model", ""), 1);
 	}
 	
 	public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean par4)

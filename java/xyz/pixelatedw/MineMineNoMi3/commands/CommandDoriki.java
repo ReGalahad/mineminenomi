@@ -7,8 +7,10 @@ import net.minecraft.command.PlayerNotFoundException;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.MinecraftForge;
 import xyz.pixelatedw.MineMineNoMi3.Values;
+import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.events.customevents.DorikiEvent;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
@@ -20,47 +22,86 @@ public class CommandDoriki extends CommandBase
 	{
 		if(str.length >= 2)
 		{
-			EntityPlayer player = null;
+			EntityPlayer senderEntity = this.getCommandSenderAsPlayer(sender);
+			EntityPlayer target = null;
 			ExtendedEntityStats props = null;
+			int plusDoriki = 0;
+			
+			
+			if(!str[1].equals("INF"))
+				plusDoriki = Integer.decode(str[1]);
 			
 			if(str.length == 2)
 			{
-				try{player = this.getCommandSenderAsPlayer(sender);}
+				try{target = this.getCommandSenderAsPlayer(sender);}
 				catch(PlayerNotFoundException e){e.printStackTrace();}
-				props = ExtendedEntityStats.get(player);
+				props = ExtendedEntityStats.get(target);
 			}
 			if(str.length == 3)
 			{
-				player = MinecraftServer.getServer().getConfigurationManager().func_152612_a(str[2]);	
-				props = ExtendedEntityStats.get(player);
+				target = MinecraftServer.getServer().getConfigurationManager().func_152612_a(str[2]);	
+				props = ExtendedEntityStats.get(target);
 			}
 
 			if(str[0].equals("+"))
 			{
-				if(Integer.decode(str[1]) + props.getDoriki() <= Values.MAX_DORIKI)
-					props.alterDoriki(Integer.decode(str[1]));
+				if(plusDoriki + props.getDoriki() <= Values.MAX_DORIKI)
+				{
+					props.alterDoriki(plusDoriki);
+					if(props.getDorikiFromCommand() + plusDoriki <= Values.MAX_DORIKI)
+						props.alterDorikiFromCommand(plusDoriki);
+				}
 				else
+				{
 					props.setDoriki(Values.MAX_DORIKI);
+					props.alterDorikiFromCommand( Values.MAX_DORIKI - plusDoriki );
+				}
+				
+				WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] Added " + plusDoriki + " doriki to " + target.getCommandSenderName()); 
 			}
 			else if(str[0].equals("-"))
 			{
-				if(props.getDoriki() - Integer.decode(str[1]) <= 0)
+				if(props.getDoriki() - plusDoriki <= 0)
+				{			
 					props.setDoriki(0);
+					if(props.getDorikiFromCommand() - plusDoriki > 0)
+						props.alterDorikiFromCommand( -(props.getDorikiFromCommand() - plusDoriki) );
+					else
+						props.setDorikiFromCommand(0);
+				}
 				else
-					props.alterDoriki(-Integer.decode(str[1]));		
+				{
+					props.alterDoriki(-plusDoriki);	
+					if(props.getDorikiFromCommand() - plusDoriki > 0)
+						props.alterDorikiFromCommand( -(props.getDorikiFromCommand() - plusDoriki) );
+					else
+						props.setDorikiFromCommand(0);
+				}
+				
+				WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] Subtracted " + plusDoriki + " doriki from " + target.getCommandSenderName()); 
 			}
 			else if(str[0].equals("="))
 			{
 				if(str[1].equals("INF"))
-					props.setDoriki(Values.MAX_DORIKI);
-				else if(Integer.decode(str[1]) <= Values.MAX_DORIKI)
-					props.setDoriki(Integer.decode(str[1]));
+				{
+					props.setDorikiFromCommand( Values.MAX_DORIKI );
+					props.setDoriki( Values.MAX_DORIKI );
+					
+					WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] " + target.getCommandSenderName() + " now has " + Values.MAX_DORIKI + " doriki"); 
+				}
+				else if(plusDoriki <= Values.MAX_DORIKI)
+				{
+					props.setDorikiFromCommand(plusDoriki);
+					props.setDoriki(plusDoriki);
+					
+					WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] " + target.getCommandSenderName() + " now has " + plusDoriki + " doriki"); 
+				}				
 			}
 			 
-			DorikiEvent e = new DorikiEvent(player);
+			DorikiEvent e = new DorikiEvent(target);
 			if (MinecraftForge.EVENT_BUS.post(e))
 				return;
-			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP)player);
+			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP)target);
 		}		
 	}
 

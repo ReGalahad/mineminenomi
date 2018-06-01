@@ -1,64 +1,65 @@
 package xyz.pixelatedw.MineMineNoMi3.events;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
 
-import com.google.common.collect.Iterables;
-
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
-import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
+import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.event.ClickEvent;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.EnumAction;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatStyle;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.IChatComponent;
+import net.minecraftforge.client.event.EntityViewRenderEvent;
+import net.minecraftforge.client.event.FOVUpdateEvent;
+import net.minecraftforge.client.event.RenderHandEvent;
+import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
-import scala.Int;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+import xyz.pixelatedw.MineMineNoMi3.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.abilities.FishKarateAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.HakiAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.HakiAbilities.BusoshokuHaki;
 import xyz.pixelatedw.MineMineNoMi3.abilities.HakiAbilities.KenbunshokuHaki;
 import xyz.pixelatedw.MineMineNoMi3.abilities.RokushikiAbilities;
-import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
-import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityManager;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
+import xyz.pixelatedw.MineMineNoMi3.api.math.ISphere;
+import xyz.pixelatedw.MineMineNoMi3.api.math.Sphere;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.MarineData;
+import xyz.pixelatedw.MineMineNoMi3.entities.zoan.EntityZoanMorph;
 import xyz.pixelatedw.MineMineNoMi3.events.customevents.DorikiEvent;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 import xyz.pixelatedw.MineMineNoMi3.items.AkumaNoMi;
+import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListEffects;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
@@ -98,44 +99,12 @@ public class EventsPersistence
 	@SubscribeEvent
 	public void onEntityUpdate(LivingUpdateEvent event)
 	{
-		/*if(event.entityLiving instanceof Doppelman && !event.entityLiving.worldObj.isRemote)
-		{
-			Doppelman dopp = (Doppelman) event.entityLiving;
-			EntityPlayer doppOwner = dopp.getOwner();
-
-			if(doppOwner != null)
-			{
-				if(dopp != null)
-				{
-					ItemStack heldItem = doppOwner.getHeldItem();
-					if(heldItem != null && heldItem.getItem() == ListAbilities.DOPPELMAN && dopp.getDistanceSqToEntity(doppOwner) > 6000)
-					{
-						dopp.setDead();
-						heldItem.getTagCompound().setBoolean("doppelman", false);
-					}
-				}
-			}
-			else
-				dopp.setDead();
-		}*/
-		
 		if (event.entityLiving instanceof EntityPlayer)
 		{
 			EntityPlayer player = (EntityPlayer) event.entityLiving;
 			ExtendedEntityStats props = ExtendedEntityStats.get(player);
 			ItemStack heldItem = player.getHeldItem();				
-			
-			if(!player.worldObj.isRemote)
-			{			
-				for(int i = 0; i < props.getAbilitiesInHotbar(); i++)
-				{
-					if(props.getAbilityFromSlot(i) != null && !props.getAbilityFromSlot(i).equals("n/a"))
-					{
-						props.getAbilityFromSlot(i).update(player);
-					}
-				}
-			}
-			
+						
 			if (heldItem != null)
 			{				
 				if(heldItem.getItem() == ListMisc.Umbrella && player.worldObj.getBlock((int)player.posX, (int)player.posY - 4, (int)player.posZ) == Blocks.air && !player.capabilities.isCreativeMode)
@@ -153,27 +122,80 @@ public class EventsPersistence
 				}*/
 			}
 			
-			if (props.getUsedFruit().equals("gomugomu") || props.getUsedFruit().equals("banebane") || props.isLogia() || (player.getHeldItem() != null 
-					|| (player.getHeldItem() != null)) )
+			if(!props.getUsedFruit().equals("N/A") && !player.worldObj.isRemote)
+			{
+				if( WyHelper.isBlockNearby(player, 3, ListMisc.KairosekiBlock, ListMisc.KairosekiOre) || DevilFruitsHelper.hasKairosekiItem(player) || player.inventory.hasItem(Item.getItemFromBlock(ListMisc.KairosekiBlock))
+						|| player.inventory.hasItem( Item.getItemFromBlock(ListMisc.KairosekiOre)) || (player.isInsideOfMaterial(Material.water) || (player.isWet() && (player.worldObj.getBlock((int) player.posX, (int) player.posY - 1, (int) player.posZ) == Blocks.water 
+						|| player.worldObj.getBlock((int) player.posX, (int) player.posY - 1, (int) player.posZ) == Blocks.flowing_water))) )
+				{
+					if(DevilFruitsHelper.hasKairosekiItem(player))
+						player.addPotionEffect(new PotionEffect(Potion.confusion.getId(), 120, 0));
+					else
+						player.addPotionEffect(new PotionEffect(Potion.confusion.getId(), 240, 0));
+					for(int i = 0; i < props.countAbilitiesInHotbar(); i++)
+					{
+						if(props.getAbilityFromSlot(i) != null && !props.getAbilityFromSlot(i).equals("n/a") && !props.getAbilityFromSlot(i).isDisabled())
+						{ 
+							props.getAbilityFromSlot(i).setCooldownActive(true);
+							props.getAbilityFromSlot(i).disable(player, true);
+						}			
+					}
+				}
+				else
+				{
+					for(int i = 0; i < props.countAbilitiesInHotbar(); i++)
+					{
+						if(props.getAbilityFromSlot(i) != null && !props.getAbilityFromSlot(i).equals("n/a") && props.getAbilityFromSlot(i).isDisabled())
+						{ 
+							props.getAbilityFromSlot(i).setCooldownActive(false);
+							props.getAbilityFromSlot(i).disable(player, false);
+						}			
+					}					
+				}
+				
+				for(int i = 0; i < props.countAbilitiesInHotbar(); i++)
+				{
+					if(props.getAbilityFromSlot(i) != null && !props.getAbilityFromSlot(i).equals("n/a") && props.getAbilityFromSlot(i).isRepeating())
+					{ 
+						props.getAbilityFromSlot(i).duringRepeater(player);
+					}				
+				}
+			}
+			
+			if(props.getUsedFruit().equals("hiehie"))
+			{
+				final EntityLivingBase finalPlayer = player;
+				for (int x1 = -1; x1 < 2; x1++) 
+				for (int y1 = -1; y1 < 0; y1++) 
+				for (int z1 = -1; z1 < 2; z1++) 
+				{
+					Sphere.generate((int) player.posX - 1 + x1, (int) player.posY + y1, (int) player.posZ + z1, 1, new ISphere()
+					{						
+						public void call(int x, int y, int z)
+						{
+							if(finalPlayer.worldObj.getBlock(x, y, z) == Blocks.water)
+								finalPlayer.worldObj.setBlock(x, y ,z, Blocks.ice);
+						}
+					});
+				}
+			}
+			
+			if (props.getUsedFruit().equals("gomugomu") || props.getUsedFruit().equals("banebane") || props.isLogia())
 				player.fallDistance = 0;
 
 			if (props.getUsedFruit().equals("dokudoku"))
 			{
-				if (player.worldObj.getBlock((int)player.posX, (int)player.posY - 1, (int)player.posZ) != Blocks.air
-						&& player.worldObj.getBlock((int)player.posX, (int)player.posY - 1, (int)player.posZ) != ListMisc.Poison
-						&& player.worldObj.getBlock((int)player.posX, (int)player.posY - 1, (int)player.posZ) != ListMisc.Ope
-						&& player.worldObj.getBlock((int)player.posX, (int)player.posY - 1, (int)player.posZ) != ListMisc.OpeMid)
-					player.worldObj.setBlock((int)player.posX, (int)player.posY, (int)player.posZ, ListMisc.Poison);
-
 				if (player.isPotionActive(Potion.poison.id))
 					player.removePotionEffect(Potion.poison.id);
 			}
 			
-			if ((player.isInsideOfMaterial(Material.water) || (player.isWet() && player.worldObj.getBlock((int) player.posX, (int) player.posY - 3, (int) player.posZ) == Blocks.water))
-					&& !player.capabilities.isCreativeMode)
-			{
+			if ( (player.isInsideOfMaterial(Material.water) || (player.isWet() && (player.worldObj.getBlock((int) player.posX, (int) player.posY - 1, (int) player.posZ) == Blocks.water || player.worldObj.getBlock((int) player.posX, (int) player.posY - 1, (int) player.posZ) == Blocks.flowing_water))))
+			{ 
 				if (!props.getUsedFruit().equals("N/A"))
-					player.motionY -= 5;
+				{
+					if(!player.capabilities.isCreativeMode)
+						player.motionY -= 5;				
+				}				
 
 				if (props.getRace().equals(ID.RACE_FISHMAN) && props.getUsedFruit().equals("N/A"))
 				{
@@ -208,9 +230,17 @@ public class EventsPersistence
 						player.motionZ *= 1.9D;
 					}
 				}
-			}
+			}	
 			
-			//System.out.println("" + props.hasHakiActive() + "; " + props.getHakiTimer());
+			if(props.getTempPreviousAbility().equals("geppo") || props.getTempPreviousAbility().equals("soranomichi"))
+			{
+				if(!player.onGround && player.worldObj.getBlock((int)player.posX, (int)player.posY - 1, (int)player.posZ) == Blocks.air)
+					player.fallDistance = 0;
+				else
+				{
+					props.setTempPreviousAbility("N/A");
+				}
+			}
 			
 			if(props.hasHakiActive())
 				props.addHakiTimer();
@@ -232,7 +262,7 @@ public class EventsPersistence
 			
 		}
 	}	
-
+	
 	/** XXX onLivingDeath */
 	@SubscribeEvent
 	public void onEntityDeath(LivingDeathEvent event)
@@ -263,7 +293,10 @@ public class EventsPersistence
 			IAttributeInstance attrHP = target.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.maxHealth);
 
 			int rng = player.worldObj.rand.nextInt(3) + 1;
-			int plusDoriki = 0, plusBounty = 0, plusBelly = 0;		
+			int plusBounty = 0, plusBelly = 0;		
+			double plusDoriki = 0;
+			
+			boolean targetPlayer = false;
 			
 			if (target instanceof EntityPlayer)
 			{
@@ -272,6 +305,8 @@ public class EventsPersistence
 				plusDoriki = (targetprops.getDoriki() / 4) + rng;
 				plusBounty = (targetprops.getBounty() / 2) + rng;
 				plusBelly = targetprops.getBelly();
+				
+				targetPlayer = true;
 			}
 			else
 			{
@@ -280,12 +315,21 @@ public class EventsPersistence
 				
 				if(target instanceof EntityNewMob)
 				{				
-					plusDoriki = ((EntityNewMob) target).getDorikiPower() + rng;
+					/*plusDoriki = ((EntityNewMob) target).getDorikiPower() + rng;*/
+					if((props.getDoriki() / 100) > ((EntityNewMob) target).getDorikiPower())
+					{
+						plusDoriki = 1 / ( (props.getDoriki() / 100) - ((EntityNewMob) target).getDorikiPower() );
+						if(plusDoriki < 1)
+							plusDoriki = 1;
+					}
+					else
+						plusDoriki = ((EntityNewMob) target).getDorikiPower();
+							
 					plusBounty = (((EntityNewMob) target).getDorikiPower() * 2) + rng;	
-					plusBelly = ((EntityNewMob) target).getBellyInPockets() + rng;
+					plusBelly = ((EntityNewMob) target).getBellyInPockets() + rng;	
 					
 			    	if(!ID.DEV_EARLYACCESS && !player.worldObj.isRemote && !player.capabilities.isCreativeMode)
-			    		WyTelemetry.addDefeatedEntityStat("defeated_" + WyHelper.getFancyName(target.getCommandSenderName()), 1);
+			    		WyTelemetry.addStat("defeated_" + WyHelper.getFancyName(target.getClass().getSimpleName()).replace("entity", ""), 1);
 				}
 				else
 				{
@@ -309,9 +353,9 @@ public class EventsPersistence
 					
 				if (plusDoriki > 0)
 				{
-					if (props.getDoriki() + plusDoriki < Values.MAX_DORIKI && plusDoriki > props.getDoriki() / 100)
+					if (props.getDoriki() + plusDoriki < Values.MAX_DORIKI )
 					{
-						props.alterDoriki(plusDoriki);
+						props.alterDoriki((int) Math.round(plusDoriki));
 						DorikiEvent e = new DorikiEvent(player);
 						if (MinecraftForge.EVENT_BUS.post(e))
 							return;
@@ -330,9 +374,18 @@ public class EventsPersistence
 			
 	    	if(!ID.DEV_EARLYACCESS && !player.worldObj.isRemote && !player.capabilities.isCreativeMode)
 	    	{
-	    		WyTelemetry.addGeneralStat("dorikiEarnedFromKills", plusDoriki);
-	    		WyTelemetry.addGeneralStat("bellyEarnedFromKills", plusBelly);
-	    		WyTelemetry.addGeneralStat("bountyEarnedFromKills", plusBounty);
+	    		if(!targetPlayer)
+	    		{
+		    		WyTelemetry.addStat("dorikiEarnedFromEntities", (int) Math.round(plusDoriki));
+		    		WyTelemetry.addStat("bellyEarnedFromEntities", plusBelly - props.getBellyFromCommand());
+		    		WyTelemetry.addStat("bountyEarnedFromEntities", plusBounty - props.getBountyFromCommand());
+	    		}
+	    		else
+	    		{
+		    		WyTelemetry.addStat("dorikiEarnedFromPlayers", (int) Math.round(plusDoriki));
+		    		WyTelemetry.addStat("bellyEarnedFromPlayers", plusBelly - props.getBellyFromCommand());
+		    		WyTelemetry.addStat("bountyEarnedFromPlayers", plusBounty - props.getBountyFromCommand());
+	    		}
 	    	}
 			
 			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
@@ -355,12 +408,27 @@ public class EventsPersistence
 		
 		if (sourceOfDamage instanceof EntityPlayer)
 		{			
-			ExtendedEntityStats propz = ExtendedEntityStats.get((EntityLivingBase) sourceOfDamage);
-			ItemStack heldItem = ((EntityLivingBase) sourceOfDamage).getHeldItem();
+			ExtendedEntityStats propz = ExtendedEntityStats.get((EntityPlayer) sourceOfDamage);
+			ItemStack heldItem = ((EntityPlayer) sourceOfDamage).getHeldItem();
 
-			if(heldItem != null)
+			if(!sourceOfDamage.worldObj.isRemote && heldItem == null)
+			{		
+				for(int i = 0; i < propz.countAbilitiesInHotbar(); i++)
+				{	
+					if(propz.getAbilityFromSlot(i) != null && !propz.getAbilityFromSlot(i).equals("n/a") && !propz.getAbilityFromSlot(i).isOnCooldown() 
+							&& propz.getAbilityFromSlot(i).getAttribute().isPassive() && propz.getAbilityFromSlot(i).isPassiveActive())
+					{							
+						if(propz.getAbilityFromSlot(i).getAttribute().isPunch())
+						{							
+							propz.getAbilityFromSlot(i).hitEntity((EntityPlayer) sourceOfDamage, entity);
+						}
+					}
+				}
+			}
+			
+			if(heldItem != null && MainConfig.enableLogiaInvulnerability && !this.kairosekiChecks(entity))
 			{
-				boolean hasKairosekiWeapon = heldItem.isItemEnchanted() ? EnchantmentHelper.getEnchantmentLevel(ListEffects.kairoseki.effectId, heldItem) > 0 : false;
+				boolean hasKairosekiWeapon = heldItem.isItemEnchanted() && EnchantmentHelper.getEnchantmentLevel(ListEffects.kairoseki.effectId, heldItem) > 0;
 				boolean hasHaki = propz.hasBusoHakiActive();
 	
 				if (entity instanceof EntityPlayer)
@@ -382,10 +450,10 @@ public class EventsPersistence
 						// Possible mods/plugins support ?
 					}					
 				}
-			}
+			}		
 		}
 
-		if (sourceOfDamage instanceof EntityLivingBase && !(sourceOfDamage instanceof EntityPlayer))
+		if (sourceOfDamage instanceof EntityLivingBase && !(sourceOfDamage instanceof EntityPlayer) && MainConfig.enableLogiaInvulnerability && !this.kairosekiChecks(entity))
 		{
 			boolean hasKairosekiWeapon;
 			boolean hasHaki;
@@ -400,15 +468,14 @@ public class EventsPersistence
 					event.setCanceled(true);
 
 		}
- 
-		if (sourceOfDamage instanceof EntityArrow)
-		{
-			if (entity instanceof EntityPlayer && props.isLogia())
+		
+		if (sourceOfDamage instanceof EntityArrow && props.isLogia() && MainConfig.enableLogiaInvulnerability && !this.kairosekiChecks(entity))
 				event.setCanceled(true);
 
-		}
-
-		if(event.source.isExplosion())
+		if(sourceOfDamage instanceof AbilityProjectile && ((AbilityProjectile)sourceOfDamage).getAttribute().getAttributeName().equals("Bullet") && props.isLogia() && MainConfig.enableLogiaInvulnerability && !this.kairosekiChecks(entity))
+			event.setCanceled(true);
+		
+		if(event.source.isExplosion() && props.isLogia() && MainConfig.enableLogiaInvulnerability && !this.kairosekiChecks(entity))
 			event.setCanceled(true);
 		
 		if (event.entityLiving instanceof EntityPlayer)
@@ -423,7 +490,22 @@ public class EventsPersistence
 			{
 				entity.extinguish();
 				event.setCanceled(true);
-			}
+			} 
+		}
+	}
+	
+	private boolean kairosekiChecks(EntityLivingBase entity)
+	{
+		if(entity instanceof EntityPlayer)
+		{
+			EntityPlayer entityP = (EntityPlayer) entity;
+			return WyHelper.isBlockNearby(entityP, 3, ListMisc.KairosekiBlock, ListMisc.KairosekiOre) 
+					|| DevilFruitsHelper.hasKairosekiItem(entityP) || entityP.inventory.hasItem(Item.getItemFromBlock(ListMisc.KairosekiBlock)) 
+					|| entityP.inventory.hasItem( Item.getItemFromBlock(ListMisc.KairosekiOre));
+		}
+		else
+		{
+			return WyHelper.isBlockNearby(entity, 3, ListMisc.KairosekiBlock, ListMisc.KairosekiOre);
 		}
 	}
 	
@@ -442,7 +524,7 @@ public class EventsPersistence
 				{					
 					try 
 					{
-						URL url = new URL("https://dl.dropboxusercontent.com/s/a1v3m3eaqz5o185/earlyaccess.txt?dl=0");
+						URL url = new URL("https://dl.dropboxusercontent.com/s/cs2cv9ezaatzgd3/earlyaccess.txt?dl=0");
 						Scanner scanner = new Scanner(url.openStream());
 						boolean flag = false;
 						
@@ -475,11 +557,15 @@ public class EventsPersistence
 				if(props.getUsedFruit() != null && !props.getUsedFruit().equals("N/A"))
 				{
 					String model = "";
+					String fullModel = "";
 					if(props.getUsedFruit().equals("ushiushibison"))
+					{
 						model = "bison";
+						fullModel = "model" + model;
+					}
 					
 					ItemStack yamiFruit = new ItemStack(GameRegistry.findItem(ID.PROJECT_ID, "yamiyaminomi"));
-					ItemStack df = new ItemStack(GameRegistry.findItem(ID.PROJECT_ID, props.getUsedFruit().replace(model, "") + "nomi" + model));
+					ItemStack df = new ItemStack(GameRegistry.findItem(ID.PROJECT_ID, props.getUsedFruit().replace(model, "") + "nomi" + fullModel));
 					
 					props.clearDevilFruitAbilities();
 					
@@ -492,11 +578,9 @@ public class EventsPersistence
 					}
 					
 					for(Ability a : ((AkumaNoMi)df.getItem()).abilities)
-					{
 						props.addDevilFruitAbility(a);
-					}
-					
-					for(int i = 0; i < props.getAbilitiesInHotbar(); i++)
+
+					for(int i = 0; i < props.countAbilitiesInHotbar(); i++)
 					{
 						if(props.getAbilityFromSlot(i) != null)
 						{
@@ -508,45 +592,103 @@ public class EventsPersistence
 					
 				WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
 				
-				try 
+				if(MainConfig.enableUpdateMsg)
 				{
-					URL url = new URL("https://dl.dropboxusercontent.com/s/3io0vaqiqaoabnh/version.txt?dl=0");
-					Scanner scanner = new Scanner(url.openStream());
-					
-					while(scanner.hasNextLine())
+					try 
 					{
-						String[] parts = scanner.nextLine().split("\\-");
-
-						if(ID.PROJECT_MCVERSION.equals(parts[0]))
+						URL url = new URL("https://dl.dropboxusercontent.com/s/3io0vaqiqaoabnh/version.txt?dl=0");
+						Scanner scanner = new Scanner(url.openStream());
+						
+						while(scanner.hasNextLine())
 						{
-							if(!ID.PROJECT_VERSION.equals(parts[1]))
+							String[] parts = scanner.nextLine().split("\\-");
+	
+							if(ID.PROJECT_MCVERSION.equals(parts[0]))
 							{
-								ChatStyle updateStyle = new ChatStyle().setColor(EnumChatFormatting.GOLD).setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "http://pixelatedw.xyz/builds.php"));
+								String cloudVersion = parts[1].replace(".", "");
+								String localVersion = ID.PROJECT_VERSION.replace(".", "");
 								
-								player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.RED + "" + EnumChatFormatting.BOLD + "[UPDATE]" + EnumChatFormatting.RED + " Mine Mine no Mi " + parts[1] + " is now available !").setChatStyle(updateStyle) );
-								player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.RED + "Download it from the official website : [http://pixelatedw.xyz/builds.php]").setChatStyle(updateStyle) );
-							}
-						}					
+								if(Integer.parseInt(localVersion) < Integer.parseInt(cloudVersion))
+								{
+									ChatStyle updateStyle = new ChatStyle().setColor(EnumChatFormatting.GOLD).setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "http://pixelatedw.xyz/builds.php"));
+									
+									player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.RED + "" + EnumChatFormatting.BOLD + "[UPDATE]" + EnumChatFormatting.RED + " Mine Mine no Mi " + parts[1] + " is now available !").setChatStyle(updateStyle) );
+									player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.RED + "Download it from the official website : [http://pixelatedw.xyz/builds.php]").setChatStyle(updateStyle) );
+								}
+							}					
+						}
+						
+						scanner.close();
+					} 
+					catch (IOException e) 
+					{
+						e.printStackTrace();
 					}
-					
-					scanner.close();
-				} 
-				catch (IOException e) 
-				{
-					e.printStackTrace();
 				}
 				
 			}		
 		}
 	}
 	
+	/** XXX onClonePlayer */
+	@SubscribeEvent
+	public void onClonePlayer(PlayerEvent.Clone e) 
+	{
+		if(e.wasDeath) 
+		{
+			if(MainConfig.enableKeepIEEPAfterDeath.equals("full"))
+			{
+				NBTTagCompound compound = new NBTTagCompound();
+				ExtendedEntityStats.get(e.original).saveNBTData(compound);
+				ExtendedEntityStats props = ExtendedEntityStats.get(e.entityPlayer);
+				props.loadNBTData(compound);
+				
+				if(e.entityPlayer != null && MainConfig.enableExtraHearts)		
+				{
+					IAttributeInstance maxHp = e.entityPlayer.getEntityAttribute(SharedMonsterAttributes.maxHealth);
+								
+					if(props.getDoriki() / 100 <= 20)
+						e.entityPlayer.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20);
+					else
+						e.entityPlayer.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(props.getDoriki() / 100);
+				}
+			}
+			else if(MainConfig.enableKeepIEEPAfterDeath.equals("auto"))
+			{
+				ExtendedEntityStats props = ExtendedEntityStats.get(e.original);
+				NBTTagCompound compound = new NBTTagCompound();
+				
+				String faction = props.getFaction();
+				String race = props.getRace();
+				String fightStyle = props.getFightStyle();
+				String crew = props.getCrew();			
+				
+				props.resetNBTData(compound);
+				props.loadNBTData(compound);
+								
+				props.setFaction(faction);
+				props.setRace(race);
+				props.setFightStyle(fightStyle);
+				props.setCrew(crew);
+				
+				props.setMaxCola(100);
+				props.setCola(props.getMaxCola());
+				
+				props.saveNBTData(compound);
+								
+				ExtendedEntityStats.get(e.entityPlayer).loadNBTData(compound);
+			}
+		}
+	}
 
 	/** XXX onDorikiGained */
 	@SubscribeEvent
 	public void onDorikiGained(DorikiEvent event)
 	{
+		ExtendedEntityStats props = ExtendedEntityStats.get(event.player);
+		
 		if (event.props.getRace().equals(ID.RACE_HUMAN))
-		{
+		{			
 			ability(event.player, 500, RokushikiAbilities.SORU);
 			ability(event.player, 1500, RokushikiAbilities.TEKKAI);
 			ability(event.player, 3000, RokushikiAbilities.SHIGAN);
@@ -561,7 +703,7 @@ public class EventsPersistence
 		{
 			ability(event.player, 800, FishKarateAbilities.UCHIMIZU);
 			ability(event.player, 2000, FishKarateAbilities.SOSHARK);
-			//ability(event.player, 2500, FishKarateAbilities.KACHIAGEHAISOKU);
+			ability(event.player, 2500, FishKarateAbilities.KACHIAGEHAISOKU);
 			ability(event.player, 3000, FishKarateAbilities.SAMEHADASHOTEI);
 			ability(event.player, 4000, HakiAbilities.KENBUNSHOKUHAKI);
 			ability(event.player, 7500, FishKarateAbilities.KARAKUSAGAWARASEIKEN);
@@ -573,28 +715,20 @@ public class EventsPersistence
 			ability(event.player, 8500, HakiAbilities.BUSOSHOKUHAKI);
 		}
 		
-		if(event.player != null)		
+		if(event.player != null && MainConfig.enableExtraHearts)		
 		{
-			ExtendedEntityStats props = ExtendedEntityStats.get(event.player);
 			IAttributeInstance maxHp = event.player.getEntityAttribute(SharedMonsterAttributes.maxHealth);
 						
-			if(props.getDoriki() < 70)
-			{
+			if(props.getDoriki() / 100 <= 20)
 				event.player.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20);
-			}
 			else
-			{
-				if(props.getDoriki() % 70 == 0)
-				{
-					event.player.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(maxHp.getAttributeValue() + 2);
-				}
-			}
+				event.player.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(props.getDoriki() / 100);
 		}
 	}	
 
 	private void ability(EntityPlayer player, int doriki, Ability ability)
 	{
-		ExtendedEntityStats props = ExtendedEntityStats.get(player);	
+		ExtendedEntityStats props = ExtendedEntityStats.get(player);
 			
 		if(ability instanceof KenbunshokuHaki || ability instanceof BusoshokuHaki)
 		{
@@ -608,8 +742,8 @@ public class EventsPersistence
 			if (props.getDoriki() >= doriki && !props.hasRacialAbility(ability))
 				props.addRacialAbility(ability);
 			if (props.getDoriki() < doriki && props.hasRacialAbility(ability))
-				props.removeRacialAbility(ability);		
+				props.removeRacialAbility(ability);	
 		}
-	}
+	}	
 	
 }

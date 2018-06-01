@@ -9,58 +9,29 @@ import java.net.URL;
 
 import net.minecraft.client.Minecraft;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 
 public class WyTelemetry 
 {
 
-	public static void addGeneralStat(final String statName, final int value) 
+	public static void addStat(final String statName, final int value) 
 	{
         Thread newThread = new Thread()
         {
             public void run()
             {
-    			String data =  "general" + ID.PROJECT_VERSION.replace(".", "") + ":" + statName + "=" + value;
+    			String data =  "stats" + ID.PROJECT_VERSION.replace(".", "") + ":" + statName + "=" + value;
     			
     			sendData(data);
-            }
-        };
-        newThread.setName("MMnM Stats Thread");
-        newThread.start();
-	} 
-	
-	public static void addDevilFruitStat(final String statName, final int value) 
-	{
-        Thread newThread = new Thread()
-        {
-            public void run()
-            {
-    			String data =  "devilfruits" + ID.PROJECT_VERSION.replace(".", "") + ":" + statName + "=" + value;
-    			
-    			sendData(data);
-            }
-        };
-        newThread.setName("MMnM Stats Thread");
-        newThread.start();
-	} 
-	
-	public static void addDefeatedEntityStat(final String statName, final int value) 
-	{		
-        Thread newThread = new Thread()
-        {
-            public void run()
-            {
-        		String data =  "entities" + ID.PROJECT_VERSION.replace(".", "") + ":" + statName + "=" + value;
-
-        		sendData(data);
             }
         };
         newThread.setName("MMnM Stats Thread");
         newThread.start();
 	}
-
+	
 	private static void sendData(String data)
 	{
-		if(!data.isEmpty() && data != null)
+		if(MainConfig.enableTelemetry && !data.isEmpty() && data != null)
 		{
 			try 
 			{
@@ -79,7 +50,7 @@ public class WyTelemetry
 	            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 	            StringBuffer ret = new StringBuffer();
 	            String line;
-	
+	 
 	            while ((line = in.readLine()) != null)
 	            {
 	                ret.append(line);

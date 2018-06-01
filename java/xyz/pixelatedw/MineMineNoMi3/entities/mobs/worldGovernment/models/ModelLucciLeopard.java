@@ -166,7 +166,16 @@ public class ModelLucciLeopard extends ModelBiped {
     }
 
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) { 
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)    
+	{ 
+    	
+		this.bipedLeftLeg.isHidden = true;
+		this.bipedRightLeg.isHidden = true;
+		this.bipedLeftArm.isHidden = true;
+		this.bipedRightArm.isHidden = true;
+		this.bipedBody.isHidden = true;
+		this.bipedHead.isHidden = true;
+    	
         this.tail3.render(f5);
         this.body1.render(f5);
         this.leftleg.render(f5);

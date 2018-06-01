@@ -2,6 +2,8 @@ package xyz.pixelatedw.MineMineNoMi3.abilities;
 
 import java.util.Random;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -46,7 +48,7 @@ public class CyborgAbilities
 		public void duringCharging(EntityPlayer player, int currentCharge)
 		{
 			player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 10, 1000));
-			player.addPotionEffect(new PotionEffect(Potion.digSlowdown.id, 10, 1000));
+			player.addPotionEffect(new PotionEffect(Potion.digSlowdown.id, 10, 1000));	
 		}
 		
 		public void endCharging(EntityPlayer player)

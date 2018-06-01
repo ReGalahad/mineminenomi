@@ -3,6 +3,7 @@ package xyz.pixelatedw.MineMineNoMi3.abilities;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.HieProjectiles;
@@ -12,7 +13,32 @@ import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 public class HieAbilities
 {
 
-	public static Ability[] abilitiesArray = new Ability[] {new IceBlockPartisan(), new IceAge(), new IceBall(), new IceTimeCapsule(), new IceBlockPheasant()};
+	public static Ability[] abilitiesArray = new Ability[] {new IceBlockPartisan(), new IceSaber(), new IceAge(), new IceBall(), new IceTimeCapsule(), new IceBlockPheasant()};
+	
+	public static class IceSaber extends Ability
+	{
+		public IceSaber()
+		{
+			super(ListAttributes.ICESABER); 
+		}
+		
+		public void startPassive(EntityPlayer player) 
+		{
+			if(player.inventory.getCurrentItem() == null)
+				player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(ListMisc.IceSaber));
+			else
+			{
+				WyHelper.sendMsgToPlayer(player, "Cannot equip " + this.getAttribute().getAttributeName() + " while holding another item in hand !");
+				this.passive(player);
+			}
+		}
+		
+		public void endPassive(EntityPlayer player) 
+		{
+			player.inventory.clearInventory(ListMisc.IceSaber, -1);
+		}
+	}
+		
 	
 	public static class IceBlockPartisan extends Ability
 	{
