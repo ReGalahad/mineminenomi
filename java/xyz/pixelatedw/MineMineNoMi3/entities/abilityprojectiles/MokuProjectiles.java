@@ -9,6 +9,8 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
@@ -41,14 +43,15 @@ public class MokuProjectiles
 		
 		public void onUpdate()
 		{	
-			for (int i = 0; i < 50; i++)
+			for(int i = 0; i < 5; i++)
 			{
 				double offsetX = (new Random().nextInt(20) + 1.0D - 10.0D) / 18.0D;
 				double offsetY = (new Random().nextInt(20) + 1.0D - 10.0D) / 18.0D;
 				double offsetZ = (new Random().nextInt(20) + 1.0D - 10.0D) / 18.0D;
-		      
-				this.worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL.getParticleName(), this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ, 0.0D, 0.0D, 0.0D);		
+			      
+				MainMod.proxy.spawnCustomParticles(this, ID.PARTICLE_NAME_MOKU2, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ, 0.0D, -2.01D, 0.0D);
 			}
+
 			super.onUpdate();
 		}
 	}	
@@ -68,10 +71,12 @@ public class MokuProjectiles
 		
 		public void onUpdate()
 		{	
-			for (int i = 0; i < 10; i++)
-			{
-				this.worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL.getParticleName(), this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);		
-			}
+			double offsetX = (new Random().nextInt(20) + 1.0D - 10.0D) / 18.0D;
+			double offsetY = (new Random().nextInt(20) + 1.0D - 10.0D) / 18.0D;
+			double offsetZ = (new Random().nextInt(20) + 1.0D - 10.0D) / 18.0D;
+			      
+			MainMod.proxy.spawnCustomParticles(this, ID.PARTICLE_NAME_MOKU, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ, 0.0D, -0.01D, 0.0D);
+			
 			super.onUpdate();
 		}
 		

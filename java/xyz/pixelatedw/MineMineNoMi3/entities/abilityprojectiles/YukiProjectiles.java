@@ -5,6 +5,8 @@ import java.util.Random;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.world.World;
+import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
@@ -37,13 +39,13 @@ public class YukiProjectiles
 		
 		public void onUpdate()
 		{	
-			for (int i = 0; i < 10; i++)
+			for (int i = 0; i < 1; i++)
 			{
-				double offsetX = (new Random().nextInt(10) + 2.0D - 5.0D) / 2.0D;
-				double offsetY = (new Random().nextInt(10) + 2.0D - 5.0D) / 2.0D;
-				double offsetZ = (new Random().nextInt(10) + 2.0D - 5.0D) / 2.0D;
+				double offsetX = (new Random().nextInt(4) + 2.0D - 2.0D) / 2.0D;
+				double offsetY = (new Random().nextInt(4) + 2.0D - 2.0D) / 2.0D;
+				double offsetZ = (new Random().nextInt(4) + 2.0D - 2.0D) / 2.0D;
 		      
-				this.worldObj.spawnParticle(EnumParticleTypes.SNOW_SHOVEL.getParticleName(), this.posX, this.posY, this.posZ, 0.0D, 0.2D, 0.0D);		
+				MainMod.proxy.spawnCustomParticles(this, ID.PARTICLE_NAME_YUKI, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ, 0.0, 0.0, 0.0);
 			}
 			
 			super.onUpdate();

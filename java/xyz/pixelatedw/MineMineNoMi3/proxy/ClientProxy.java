@@ -6,6 +6,7 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.entity.Entity;
+import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityRenderer;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.MobRenderer;
@@ -29,7 +30,9 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.models.ModelMarine;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.models.ModelMarineCaptain;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.models.ModelMarineWithGun;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.models.ModelMorgan;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDenDenMushi;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDoppelman;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.models.ModelBlockDenDenMushi;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirate;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirateCaptain;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirateWithGun;
@@ -55,8 +58,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.models.ModelKu
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.models.ModelLucci;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.models.ModelLucciLeopard;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.models.ModelSpandam;
-import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFXGasRobe;
-import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFXSuna;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.EntityMorphVenomDemon;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.EntityZoanPowerBison;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.RenderZoanMorph;
@@ -85,7 +87,7 @@ public class ClientProxy extends CommonProxy
 		//Marines
 		RenderingRegistry.registerEntityRenderingHandler(EntityMarine.class, new MobRenderer(new ModelMarine()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityMarineWithGun.class, new MobRenderer(new ModelMarineWithGun()));
-		RenderingRegistry.registerEntityRenderingHandler(EntityMarineCaptain.class, new MobRenderer(new ModelMarineCaptain(), "marinecaptain"));
+		RenderingRegistry.registerEntityRenderingHandler(EntityMarineCaptain.class, new MobRenderer(new ModelMarineCaptain()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityMorgan.class, new MobRenderer(new ModelMorgan(), "morgan"));
 		
 		//W.GOV
@@ -118,21 +120,43 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityMorphVenomDemon.class, new RenderZoanMorph(new ModelVenomDemon(), "venomdemon"));
 		RenderingRegistry.registerEntityRenderingHandler(EntityZoanPowerBison.class, new RenderZoanMorph(new ModelPowerBison(), "bisonpower", 1.4, new float[] {0, 0.8f, 0}));
 
-		
 		//Others
 		RenderingRegistry.registerEntityRenderingHandler(EntityDoppelman.class, new MobRenderer(new ModelMarine(), "doppelman"));
+		RenderingRegistry.registerEntityRenderingHandler(EntityDenDenMushi.class, new MobRenderer(new ModelBlockDenDenMushi(), "dendenmushi"));
+
 	}
 	
 	public void spawnCustomParticles(Entity theEntity, String particleType, double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
 	{ 			
 		EntityFX fx = null;
-		
-		if(particleType.toLowerCase().equals("gasrobe"))		
-			fx = new EntityParticleFXGasRobe(theEntity.worldObj, posX, posY, posZ, motionX, motionY, motionZ);
-		if(particleType.toLowerCase().equals("suna"))	
-			fx = new EntityParticleFXSuna(theEntity.worldObj, posX, posY, posZ, motionX, motionY, motionZ);
-		
+
+		switch(particleType)
+		{
+			case "pika":
+				fx = new EntityParticleFX(theEntity.worldObj, ID.PARTICLE_ICON_PIKA, posX, posY, posZ, motionX, motionY, motionZ).setParticleScale(4).setParticleGravity(0).setParticleAge(20); break;				
+			case "yuki":
+				fx = new EntityParticleFX(theEntity.worldObj, ID.PARTICLE_ICON_YUKI, posX, posY, posZ, motionX, motionY, motionZ).setParticleScale(3).setParticleGravity(3).setParticleAge(300); break;
+			case "mera":
+				fx = new EntityParticleFX(theEntity.worldObj, ID.PARTICLE_ICON_MERA, posX, posY, posZ, motionX, motionY, motionZ).setParticleScale(1.3F).setParticleGravity(0).setParticleAge(10); break;
+			case "moku":
+				fx = new EntityParticleFX(theEntity.worldObj, ID.PARTICLE_ICON_MOKU, posX, posY, posZ, motionX, motionY, motionZ).setParticleScale(1.3F).setParticleGravity(0).setParticleAge(20); break;
+			case "mera2":
+				fx = new EntityParticleFX(theEntity.worldObj, ID.PARTICLE_ICON_MERA2, posX, posY, posZ, motionX, motionY, motionZ).setParticleScale(1.3F).setParticleGravity(0).setParticleAge(10); break;
+			case "moku2":
+				fx = new EntityParticleFX(theEntity.worldObj, ID.PARTICLE_ICON_MOKU2, posX, posY, posZ, motionX, motionY, motionZ).setParticleScale(3F).setParticleGravity(0).setParticleAge(20); break;	
+			case "moku3":
+				fx = new EntityParticleFX(theEntity.worldObj, ID.PARTICLE_ICON_MOKU3, posX, posY, posZ, motionX, motionY, motionZ).setParticleScale(1.3F).setParticleGravity(0).setParticleAge(20); break;
+			case "suna":
+				fx = new EntityParticleFX(theEntity.worldObj, ID.PARTICLE_ICON_SUNA, posX, posY, posZ, motionX, motionY, motionZ).setParticleScale(2F).setParticleGravity(0).setParticleAge(30); break;
+			case "suna2":
+				fx = new EntityParticleFX(theEntity.worldObj, ID.PARTICLE_ICON_SUNA2, posX, posY, posZ, motionX, motionY, motionZ).setParticleScale(2F).setParticleGravity(0).setParticleAge(30); break;
+			case "gasu":
+				fx = new EntityParticleFX(theEntity.worldObj, ID.PARTICLE_ICON_GASU, posX, posY, posZ, motionX, motionY, motionZ).setParticleScale(2F).setParticleGravity(0).setParticleAge(1); break;
+			case "gasu2":
+				fx = new EntityParticleFX(theEntity.worldObj, ID.PARTICLE_ICON_GASU2, posX, posY, posZ, motionX, motionY, motionZ).setParticleScale(2F).setParticleGravity(0).setParticleAge(1); break;
+		}
+
 		Minecraft.getMinecraft().effectRenderer.addEffect(fx);  
-		
+				
 	}
 }

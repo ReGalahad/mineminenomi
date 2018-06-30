@@ -2,8 +2,6 @@ package xyz.pixelatedw.MineMineNoMi3.abilities;
 
 import java.util.Random;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -40,13 +38,13 @@ public class CyborgAbilities
 			ExtendedEntityStats props = ExtendedEntityStats.get(player);
 
 			if(!isOnCooldown && props.getCola() >= 100)
-				isCharging = true;
+				super.startCharging(player);
 			else if(props.getCola() < 100)
-				WyHelper.sendMsgToPlayer(player, "Not enough Cola !");
+				WyHelper.sendMsgToPlayer(player, "Not enough Cola !");					
 		}
 		
 		public void duringCharging(EntityPlayer player, int currentCharge)
-		{
+		{		
 			player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 10, 1000));
 			player.addPotionEffect(new PotionEffect(Potion.digSlowdown.id, 10, 1000));	
 		}
@@ -72,6 +70,7 @@ public class CyborgAbilities
 				
 			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
 			startCooldown();
+			startExtUpdate(player);
 		}	
 	}
 	
@@ -183,7 +182,7 @@ public class CyborgAbilities
 					
 					props.setCola(0);
 					
-					player.setHealth((float) (player.getHealth() + ((r / 100) * player.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue()) ));
+					player.setHealth((float) (player.getHealth() + ((r / 100) * player.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue()) ));					
 					
 					WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
 					super.use(player);

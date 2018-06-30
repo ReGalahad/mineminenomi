@@ -5,6 +5,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
@@ -24,13 +25,8 @@ public class BellyPouch extends Item
 	{
 		ExtendedEntityStats props = ExtendedEntityStats.get(player);
 
-		//player.addStat(stat);
-		
 		if(!world.isRemote)
-		{
-			//player.addStat(ListStats.SHIPS_RAIDED);
-			//System.out.println( ((EntityPlayerMP)player).getStatFile().readStat(ListStats.SHIPS_RAIDED) );
-			
+		{			
 			int amount = (int) WyMathHelper.randomWithRange(5, 100);		
 			
 			if(props.getBelly() <= Values.MAX_GENERAL - amount)

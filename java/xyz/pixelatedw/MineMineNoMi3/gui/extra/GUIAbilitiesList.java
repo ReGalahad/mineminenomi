@@ -67,7 +67,7 @@ public class GUIAbilitiesList extends GuiScrollingList
 					flag = false;
 				}
 			}
-			
+						
 			if(flag)
 			{
 				props.setAbilityInSlot(parent.slotSelected, AbilityManager.instance().getAbilityByName( WyHelper.getFancyName(availableAbilities.get(index).getAttributeName()) ));

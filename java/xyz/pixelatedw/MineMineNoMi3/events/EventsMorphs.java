@@ -1,7 +1,5 @@
 package xyz.pixelatedw.MineMineNoMi3.events;
 
-import javax.swing.plaf.synth.SynthSpinnerUI;
-
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 import org.lwjgl.util.glu.Project;
@@ -11,7 +9,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.EntityLivingBase;
@@ -19,11 +16,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.MathHelper;
 import net.minecraftforge.client.event.RenderHandEvent;
-import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
+import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
+import xyz.pixelatedw.MineMineNoMi3.entities.zoan.EntityMorphVenomDemon;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.EntityZoanMorph;
+import xyz.pixelatedw.MineMineNoMi3.entities.zoan.EntityZoanPowerBison;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.RenderZoanMorph;
 import xyz.pixelatedw.MineMineNoMi3.events.customevents.MorphRenderEvent;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
@@ -39,6 +38,15 @@ public class EventsMorphs
 	}
 	
 	@SubscribeEvent
+	public void onPlayerArmorRendered(RenderPlayerEvent.Pre event)
+	{
+		ExtendedEntityStats props = ExtendedEntityStats.get(event.entityPlayer);
+
+		if(!props.getZoanPoint().toLowerCase().equals("n/a"))
+			event.setCanceled(true);		
+	}
+	
+	@SubscribeEvent
 	public void onEntityConstructing(EntityJoinWorldEvent event) 
 	{
 		if(event.entity instanceof EntityPlayer)
@@ -46,7 +54,7 @@ public class EventsMorphs
 			EntityPlayer owner = (EntityPlayer) event.entity;
 			ExtendedEntityStats props = ExtendedEntityStats.get(owner);
 			
-			if(props.getUsedFruit().equals("ushiushibison"))
+			if(!props.getZoanPoint().toLowerCase().equals("n/a"))
 			{
 				for(EntityLivingBase zm : WyHelper.getEntitiesNear(owner, 1.5, EntityZoanMorph.class))
 					zm.setDead();
@@ -64,10 +72,10 @@ public class EventsMorphs
 
 		if(Minecraft.getMinecraft().gameSettings.thirdPersonView == 0)
 		{
-			event.setCanceled(true);
+			//event.setCanceled(true);
 			
-			/*if(props.getUsedFruit().equals("dokudoku") && event.morph instanceof EntityMorphVenomDemon)
-				event.setCanceled(true);*/
+			if(!props.getZoanPoint().toLowerCase().equals("n/a") && event.morph instanceof EntityZoanMorph)
+				event.setCanceled(true);
 		}
 	}
 	

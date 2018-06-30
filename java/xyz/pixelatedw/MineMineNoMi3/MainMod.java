@@ -31,7 +31,7 @@ import xyz.pixelatedw.MineMineNoMi3.lists.ListPackets;
 import xyz.pixelatedw.MineMineNoMi3.proxy.CommonProxy;
 import xyz.pixelatedw.MineMineNoMi3.world.MainWorldGen;
 
-@Mod(modid = ID.PROJECT_ID, name = ID.PROJECT_NAME, version = ID.PROJECT_VERSION)
+@Mod(modid = ID.PROJECT_ID, name = ID.PROJECT_NAME, version = ID.PROJECT_VERSION, acceptedMinecraftVersions="[1.7.10]")
 public class MainMod 
 {
 	@Instance(ID.PROJECT_ID)
@@ -69,6 +69,7 @@ public class MainMod
 		proxy.init();
 		
 		//WyHelper.generateLangFiles();
+		//WyHelper.generateExtraTypScriptFiles();
 	}
 	
 	@EventHandler
@@ -78,7 +79,8 @@ public class MainMod
 	public void serverInit(FMLServerStartingEvent event)
 	{
 		//	event.registerServerCommand(new CommandAbility());
-		event.registerServerCommand(new CommandFG());
+		if(ID.DEV_EARLYACCESS)
+			event.registerServerCommand(new CommandFG());
 		event.registerServerCommand(new CommandDoriki());
 		event.registerServerCommand(new CommandBelly());
 		event.registerServerCommand(new CommandBounty());

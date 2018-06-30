@@ -36,9 +36,15 @@ public class ListExtraAttributes
 	public static AbilityAttribute GOMUGOMUNOELEPHANTGATLING = new AbilityAttribute("Gomu Gomu no Elephant Gatling").setProjectileTicks(16).setProjectileModel(new ModelCube()).setProjectileColor("F5DEB3").setProjectileSize(5, 3, 3).setProjectileDamage(12);
 	public static AbilityAttribute GOMUGOMUNOKONGORGAN = new AbilityAttribute("Gomu Gomu no Kong Organ").setProjectileTicks(16).setProjectileModel(new ModelCube()).setProjectileColor("2A3439").setProjectileSize(5, 3, 3).setProjectileDamage(15);
 
+	public static AbilityAttribute GRAVITO = new AbilityAttribute("Gravito").setProjectileModel(new ModelCube()).setProjectileDamage(5).setProjectileSize(1.5, 0.4, 6).setProjectileTicks(100).setProjectileColor("E590DF").setProjectileAlpha(50).addEffects(EffectType.PROJECTILE, new PotionEffect(Potion.moveSlowdown.id, 550, 1), new PotionEffect(Potion.weakness.id, 550, 1));                       
+
+	
 	public static AbilityAttribute NORMALBULLET = new AbilityAttribute("Bullet").setProjectileModel(new ModelSphere()).setProjectileDamage(2).setProjectileSize(.5, .5, .5).setProjectileTicks(100).setProjectileColor("#D3D3D3");
 	public static AbilityAttribute KAIROSEKIBULLET = new AbilityAttribute("Kairoseki Bullet").setProjectileModel(new ModelSphere()).setProjectileDamage(4).setProjectileSize(.5, .5, .5).setProjectileTicks(100).setProjectileColor("#F3F3F3");
-	
-	public static AbilityAttribute GRAVITO = new AbilityAttribute("Gravito").setProjectileModel(new ModelCube()).setProjectileDamage(5).setProjectileSize(1.5, 0.4, 6).setProjectileTicks(100).setProjectileColor("E590DF").setProjectileAlpha(50).addEffects(EffectType.PROJECTILE, new PotionEffect(Potion.moveSlowdown.id, 550, 1), new PotionEffect(Potion.weakness.id, 550, 1));                       
-	
+	public static AbilityAttribute POPGREEN = new AbilityAttribute("Pop Green").setProjectileModel(new ModelSphere()).setProjectileDamage(2).setProjectileSize(.5, .5, .5).setProjectileTicks(100).setProjectileColor("#7ccc6a");
+	public static AbilityAttribute KUJAARROW = new AbilityAttribute("Kuja Arrow").setProjectileModel(new ModelCube()).setProjectileDamage(4).setProjectileSize(3, .5, .5).setProjectileTicks(100).setProjectileColor("#7ccc6a");
+
+	public static AbilityAttribute DIALAXE = new AbilityAttribute("Axe Dial").setProjectileModel(new ModelCube()).setProjectileDamage(5).setProjectileSize(1.5, 0.4, 6).setProjectileTicks(100).setProjectileColor("69E3FF");
+	public static AbilityAttribute DIALMILKY = new AbilityAttribute("Milky Dial").setProjectileModel(new ModelSphere()).setProjectileSize(.1, .1, .1).setProjectileTicks(40).setProjectileColor("69E3FF").setProjectileMoveThroughBlocks(true);
+
 }

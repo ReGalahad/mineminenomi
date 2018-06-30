@@ -13,6 +13,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.EnumFruitType;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.MainConfig;
+import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
@@ -61,7 +63,7 @@ public class AkumaNoMi extends ItemFood
 				props.setIsLogia(true);
 			 
 			for(Ability a : abilities)
-				if(!props.hasDevilFruitAbility(a))
+				if(!WyHelper.verifyIfAbilityIsBanned(a) && !props.hasDevilFruitAbility(a))
 					props.addDevilFruitAbility(a);
 		}
 		else
@@ -75,7 +77,7 @@ public class AkumaNoMi extends ItemFood
 				props.setIsLogia(false);
 				
 				for(Ability a : abilities)
-					if(!props.hasDevilFruitAbility(a))
+					if(!WyHelper.verifyIfAbilityIsBanned(a) && !props.hasDevilFruitAbility(a))
 						props.addDevilFruitAbility(a);
 
 			}
@@ -92,7 +94,7 @@ public class AkumaNoMi extends ItemFood
 						props.setIsLogia(true);
 					 
 					for(Ability a : abilities)
-						if(!props.hasDevilFruitAbility(a))
+						if(!WyHelper.verifyIfAbilityIsBanned(a) && !props.hasDevilFruitAbility(a))
 							props.addDevilFruitAbility(a);
 				}
 
@@ -106,7 +108,7 @@ public class AkumaNoMi extends ItemFood
 	public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean par4)
 	{
 		for(int i = 0; i < this.abilities.length; i++)
-			if(this.abilities[i] != null)
+			if(!WyHelper.verifyIfAbilityIsBanned(this.abilities[i]) && this.abilities[i] != null)
 				list.add(this.abilities[i].getAttribute().getAttributeName());
 			
 	  	list.add("");

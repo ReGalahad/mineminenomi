@@ -44,8 +44,6 @@ public class EventsDrops
 			Random rand = new Random();
 			double chance = rand.nextInt(99) + rand.nextDouble();
 			
-			//System.out.println( chance );
-			
 			if( chance < MainConfig.rateDFDrops )
 			{
 				ItemStack df = new ItemStack(Values.devilfruits.get(rand.nextInt(Values.devilfruits.size())));

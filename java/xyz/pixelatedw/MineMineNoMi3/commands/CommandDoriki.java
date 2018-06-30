@@ -1,5 +1,6 @@
 package xyz.pixelatedw.MineMineNoMi3.commands;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -9,6 +10,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.MinecraftForge;
+import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
@@ -24,24 +26,25 @@ public class CommandDoriki extends CommandBase
 		{
 			EntityPlayer senderEntity = this.getCommandSenderAsPlayer(sender);
 			EntityPlayer target = null;
-			ExtendedEntityStats props = null;
-			int plusDoriki = 0;
-			
+			int plusDoriki = 0;	
 			
 			if(!str[1].equals("INF"))
 				plusDoriki = Integer.decode(str[1]);
 			
 			if(str.length == 2)
-			{
-				try{target = this.getCommandSenderAsPlayer(sender);}
-				catch(PlayerNotFoundException e){e.printStackTrace();}
-				props = ExtendedEntityStats.get(target);
-			}
+				target = this.getCommandSenderAsPlayer(sender);
 			if(str.length == 3)
 			{
-				target = MinecraftServer.getServer().getConfigurationManager().func_152612_a(str[2]);	
-				props = ExtendedEntityStats.get(target);
+				if(MainConfig.commandPermissionDoriki != 1)				
+					target = MinecraftServer.getServer().getConfigurationManager().func_152612_a(str[2]);
+				else
+				{
+					WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.RED + "You don't have permission to use this command !");
+					return;
+				}			
 			}
+			
+			ExtendedEntityStats props = ExtendedEntityStats.get(target);
 
 			if(str[0].equals("+"))
 			{
@@ -105,9 +108,15 @@ public class CommandDoriki extends CommandBase
 		}		
 	}
 
-	public boolean canCommandSenderUseCommand(ICommandSender cmd)
+	public boolean canCommandSenderUseCommand(ICommandSender sender)
 	{
-		return true;
+		EntityPlayer senderEntity = this.getCommandSenderAsPlayer(sender);
+		boolean flag = FMLCommonHandler.instance().getMinecraftServerInstance().getConfigurationManager().func_152596_g(senderEntity.getGameProfile());
+		
+		if( (MainConfig.commandPermissionDoriki == 2 && flag) || MainConfig.commandPermissionDoriki < 2 )
+			return true;
+		else	
+			return false;	
 	}
 	
 	public String getCommandUsage(ICommandSender icommandsender)

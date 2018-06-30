@@ -39,4 +39,17 @@ public class EntityPirate extends PirateData
 	
 	public int getDorikiPower() { return this.worldObj.rand.nextInt(3) + 10; }
 	public int getBellyInPockets() { return this.worldObj.rand.nextInt(10) + 1; }
+	
+    protected void dropRareDrop(int i)
+    {
+        switch (this.rand.nextInt(4))
+        {
+            case 0:
+                this.dropItem(ListMisc.PirateChestplate, 1); break;
+            case 1:
+                this.dropItem(ListMisc.PirateLeggings, 1); break;
+            case 2:
+                this.dropItem(ListMisc.PirateBoots, 1); break;
+        }
+    }
 }

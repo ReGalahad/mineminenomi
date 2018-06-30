@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+import org.apache.commons.lang3.ArrayUtils;
+
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
@@ -11,8 +13,14 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.BiomeDictionary.Type;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainMod;
 
@@ -74,6 +82,14 @@ public class WyRegistry
 		registerName("entity." + name + ".name", name);
 	}
 
+	public static void registerSpawnBiomesFor(Class<? extends EntityLiving> entity, int rarity, int min, int max, Type... biomeTypes)
+	{
+		BiomeGenBase[] biomes = new BiomeGenBase[0];
+		for(Type t : biomeTypes)
+			biomes = ArrayUtils.addAll(biomes, BiomeDictionary.getBiomesForType(t));
+		EntityRegistry.addSpawn(entity, rarity, min, max, EnumCreatureType.creature, biomes);		
+	}
+	
 	/*public void registerEnchantment(Enchantment enc, String name)
 	{
 		String truename = WyHelper.getFancyName(name);

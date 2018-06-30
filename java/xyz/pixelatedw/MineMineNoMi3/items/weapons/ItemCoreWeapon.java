@@ -1,4 +1,4 @@
-package xyz.pixelatedw.MineMineNoMi3.items;
+package xyz.pixelatedw.MineMineNoMi3.items.weapons;
 
 import com.google.common.collect.Multimap;
 

@@ -22,7 +22,7 @@ import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 public class YamiAbilities 
 {
 
-	public static Ability[] abilitiesArray = new Ability[] {new DarkMatter(), new Kurouzu(), new Liberation(), new BlackHole()};	
+	public static Ability[] abilitiesArray = new Ability[] {new DarkMatter(), new Liberation(), new BlackHole()};	
 	
 	public static class BlackHole extends Ability
 	{

@@ -10,6 +10,7 @@ import xyz.pixelatedw.MineMineNoMi3.abilities.ExtraAbilities.SpeedPoint;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
+import xyz.pixelatedw.MineMineNoMi3.entities.zoan.EntityZoanMorph;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
@@ -60,7 +61,8 @@ public class UshiBisonAbilities
 			if(currentCooldown > 130)
 			{
 				for(EntityLivingBase e : WyHelper.getEntitiesNear(player, 1.6))
-					e.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) player), 6);
+					if(!(e instanceof EntityZoanMorph))
+						e.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) player), 6);
 			}
 	    }
 	}

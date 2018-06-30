@@ -12,6 +12,7 @@ import net.minecraft.world.gen.feature.WorldGenMinable;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.api.Schematic;
+import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WySchematicHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListExtraStructures;
@@ -36,11 +37,18 @@ public class MainWorldGen implements IWorldGenerator
 				
 		if(MainConfig.enableShips)
 		{
-			this.addStructureSpawn(WySchematicHelper.load("marineShip"), world, random, i * 2, j * 2, 1, 1, 1.8 * MainConfig.rateShipsSpawn);
+			this.addStructureSpawn(WySchematicHelper.load("marineShip"), world, random, i , j * 2, 1, 1, 1.8 * MainConfig.rateShipsSpawn);
 			this.addStructureSpawn(WySchematicHelper.load("pyrateShip"), world, random, i * 2, j * 2, 1, 1, 2.1 * MainConfig.rateShipsSpawn);
 			this.addStructureSpawn(WySchematicHelper.load("pyrateLargeShip"), world, random, i * 2, j * 2, 1, 1, 1.8 * MainConfig.rateShipsSpawn);
 			this.addStructureSpawn(WySchematicHelper.load("marineLargeShip"), world, random, i * 2, j * 2, 1, 1, 1.9 * MainConfig.rateShipsSpawn);
 		}
+		
+		this.addDialSpawn(ListMisc.DialEisenBlock, world, random, i, j, 1, 1, 100);
+		this.addDialSpawn(ListMisc.DialFireBlock, world, random, i, j, 1, 1, 70);
+		this.addDialSpawn(ListMisc.DialAxeBlock, world, random, i, j, 1, 1, 70);
+		this.addDialSpawn(ListMisc.DialMilkyBlock, world, random, i, j, 1, 1, 20);
+		this.addDialSpawn(ListMisc.DialRejectBlock, world, random, i, j, 1, 1, 10);
+		
 		/*if(MainConfig.enableCamps)
 		{
 			this.addStructureSpawn(WySchematicHelper.load("marineCamp"), world, random, i * 3, j * 3, 1, 1, 50);
@@ -66,7 +74,30 @@ public class MainWorldGen implements IWorldGenerator
 			//	new WorldGenMinable(block.getDefaultState(), maxVeinSize).generate(world, random, new BlockPos(posX, posY, posZ));
 		}
 	}
-	 
+	
+	
+	private void addDialSpawn(Block blockToSpawn, World world, Random random, int blockXPos, int blockZPos, int maxX, int maxZ, double rarity)
+	{
+		if(world.rand.nextInt(100) + world.rand.nextDouble() <= rarity)
+		{		
+			int posX = blockXPos;
+			int posY = random.nextInt(128);
+			int posZ = blockZPos;
+			BiomeGenBase biome = world.getBiomeGenForCoordsBody(posX, posZ);	
+			
+			if( (biome.biomeName.equals("Beach") || biome.biomeName.equals("Plains")) && (world.getBlock(posX, posY - 1, posZ) == Blocks.sand || world.getBlock(posX, posY - 1, posZ) == Blocks.grass) && world.getBlock(posX, posY + 1, posZ) == Blocks.air)
+			{
+				world.setBlock(posX, posY, posZ, blockToSpawn);
+				
+				System.out.println("" + blockToSpawn.getLocalizedName() + " spawned at /tp @p " + posX + " " + (posY + 1) + " " + posZ);
+				
+		    	if(!ID.DEV_EARLYACCESS)
+		    		WyTelemetry.addStat("spawnedDial_" + WyHelper.getFancyName(blockToSpawn.getLocalizedName()), 1);
+			}
+			
+		}
+	}
+	
 	private void addStructureSpawn(Schematic s, World world, Random random, int blockXPos, int blockZPos, int maxX, int maxZ, double rarity)
 	{
 		if(world.rand.nextInt(100) + world.rand.nextDouble() <= rarity)
@@ -75,12 +106,11 @@ public class MainWorldGen implements IWorldGenerator
 			int posY = random.nextInt(128);
 			int posZ = blockZPos;// + random.nextInt(maxZ);			
 			BiomeGenBase biome = world.getBiomeGenForCoordsBody(posX, posZ);		
-			
+
 			if(s.getName().toLowerCase().contains("ship"))
 			{
-				if( (biome.biomeName.equals("Ocean") || biome.biomeName.equals("Deep Ocean") ) && world.getChunkProvider().chunkExists(posX, posZ) && checkForShipSpawn(s, world, posX, posY, posZ))
+				if( (biome.biomeName.equals("Ocean") || biome.biomeName.equals("Deep Ocean") ) && checkForShipSpawn(s, world, posX, posY, posZ))
 				{
-					System.out.println("" + s.getName() + " spawned at /tp @p " + posX + " " + posY + " " + posZ);
 					if(s.getName().equals("marineShip") || s.getName().equals("pyrateShip"))		
 					{
 						WySchematicHelper.build(s, world, posX, posY, posZ);
@@ -91,7 +121,8 @@ public class MainWorldGen implements IWorldGenerator
 						WySchematicHelper.build(s, world, posX, posY - 4, posZ);	
 						ListExtraStructures.buildLargeShip(posX, posY, posZ, world, s.getName());
 					}
-					
+					System.out.println("" + s.getName() + " spawned at /tp @p " + posX + " " + posY + " " + posZ);
+
 			    	if(!ID.DEV_EARLYACCESS)
 			    		WyTelemetry.addStat("spawnedStructure_" + s.getName(), 1);
 				}

@@ -13,18 +13,28 @@ public class MainConfig
 	private static Configuration config;
 	
 	public static String enableKeepIEEPAfterDeath;
-	
 	public static boolean enableShips;
 	public static boolean enableCamps;
 	public static boolean enableDFtoDrop;
 	public static boolean enableLogiaInvulnerability;	
 	public static boolean enableExtraHearts;
-	public static boolean enableTelemetry;
-	public static boolean enableUpdateMsg;
-	public static boolean enableFOVModifier;
-	
 	public static double rateDFDrops;
 	public static double rateShipsSpawn;
+	
+	public static boolean enableTelemetry;
+	public static boolean enableUpdateMsg;
+	public static boolean enableFOVModifier;	
+	
+	public static int enchantmentDialImpactId = 100;
+	public static int enchantmentKairosekiId = 101;
+	
+	public static int commandPermissionRemoveDF = 2;
+	public static int commandPermissionDoriki = 2;
+	public static int commandPermissionBelly = 2;
+	public static int commandPermissionBounty = 2;
+	public static int commandPermissionExtol = 2;
+	public static String[] abilityRestrictions;
+	
 	
 	public static void init(File configFile)
 	{
@@ -44,10 +54,19 @@ public class MainConfig
 		enableLogiaInvulnerability = config.get(Configuration.CATEGORY_GENERAL, "Allow Logia Invulnerability", true).getBoolean();
 		enableExtraHearts = config.get(Configuration.CATEGORY_GENERAL, "Receive Extra Hearts", true).getBoolean();
 		
+		enchantmentDialImpactId = config.get("ids", "Enchantment ID : Dial Impact", 100).getInt();
+		enchantmentKairosekiId = config.get("ids", "Enchantment ID : Kairoseki", 101).getInt();
+		
 		enableTelemetry = config.get("system", "Allow Telemetry", true).getBoolean();
 		enableUpdateMsg = config.get("system", "Allow Update Message", true).getBoolean();	
 		enableFOVModifier = config.get("system", "Allow FOV Modifiers", false).getBoolean();
 		
+		commandPermissionRemoveDF = config.get("permissions", "Permission : /removedf", 2).getInt();
+		commandPermissionDoriki = config.get("permissions", "Permission : /doriki", 2).getInt();
+		commandPermissionBelly = config.get("permissions", "Permission : /belly", 2).getInt();
+		commandPermissionBounty = config.get("permissions", "Permission : /bounty", 2).getInt();
+		commandPermissionExtol = config.get("permissions", "Permission : /extol", 2).getInt();
+		abilityRestrictions = config.get("permissions", "Ability Restrictions", new String[] {"example1", "example2"}).getStringList();		
 		
 		
 		config.save();

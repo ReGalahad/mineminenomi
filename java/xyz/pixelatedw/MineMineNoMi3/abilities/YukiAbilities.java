@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.MovingObjectPosition;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.math.ISphere;
@@ -16,6 +17,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.YukiProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 
 public class YukiAbilities 
@@ -75,7 +77,7 @@ public class YukiAbilities
 				    });
 				}
 				
-				WyNetworkHelper.sendTo(new PacketPlayer("fubuki", player.posX, player.posY, player.posZ), (EntityPlayerMP) player);
+				WyNetworkHelper.sendTo(new PacketParticles("fubuki", player.posX, player.posY, player.posZ), (EntityPlayerMP) player);
 				super.use(player);
 			}
 		}
@@ -92,18 +94,21 @@ public class YukiAbilities
 		{	
 			if(!isOnCooldown)
 			{
-				if(WyHelper.rayTraceBlocks(player).entityHit != null && WyHelper.rayTraceBlocks(player).entityHit instanceof EntityLivingBase)
+				
+				MovingObjectPosition mop = WyHelper.rayTraceBlocks(player);
+				
+				if(mop != null)
 				{
-					WyHelper.createSphere(WyHelper.rayTraceBlocks(player).entityHit, 4, Blocks.snow);
-					WyHelper.createSphere(WyHelper.rayTraceBlocks(player).entityHit, 6, Blocks.snow);
-					WyHelper.createSphere(WyHelper.rayTraceBlocks(player).entityHit, 8, Blocks.snow);
+					WyHelper.createSphere(player, mop.blockX, mop.blockY, mop.blockZ, 4, Blocks.snow);
+					WyHelper.createSphere(player, mop.blockX, mop.blockY, mop.blockZ, 6, Blocks.snow);
+					WyHelper.createSphere(player, mop.blockX, mop.blockY, mop.blockZ, 8, Blocks.snow);
 				}
 				else
 				{
 					WyHelper.createSphere(player, 4, Blocks.snow);
 					WyHelper.createSphere(player, 6, Blocks.snow);
-					WyHelper.createSphere(player, 8, Blocks.snow);
-				}	
+					WyHelper.createSphere(player, 8, Blocks.snow);				
+				}
 				
 				super.use(player);
 			}
@@ -135,11 +140,14 @@ public class YukiAbilities
 		{	
 			if(!isOnCooldown)
 			{
-				if(WyHelper.rayTraceBlocks(player).entityHit != null && WyHelper.rayTraceBlocks(player).entityHit instanceof EntityLivingBase)
-					WyHelper.createSphere(WyHelper.rayTraceBlocks(player).entityHit, 4, Blocks.snow);
-				else
-					WyHelper.createSphere(player, 4, Blocks.snow);
 				
+				MovingObjectPosition mop = WyHelper.rayTraceBlocks(player);
+				
+				if(mop != null)
+					WyHelper.createSphere(player, mop.blockX, mop.blockY, mop.blockZ, 4, Blocks.snow);
+				else
+					WyHelper.createSphere(player, 4, Blocks.snow);		
+
 				super.use(player);
 			}
 		} 

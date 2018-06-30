@@ -92,7 +92,8 @@ public class AbilityProjectile extends EntityThrowable
 
 				tasksImapct(hit);
 				
-				this.setDead();
+				if(!this.attr.canProjectileMoveThroughBlocks())
+					this.setDead();
 			}  
 		}
 		else

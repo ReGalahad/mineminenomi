@@ -168,12 +168,9 @@ public class GUISelectHotbarAbilities extends GuiScreen
 	
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton)
     {
-    	if(mouseButton == 1 && this.slotSelected > -1)
-    	{		
-    		if( props.getAbilityFromSlot(this.slotSelected) != null )
-    		{
-    			props.setAbilityInSlot(this.slotSelected, null);
-    		}
+    	if(mouseButton == 1 && this.slotSelected > -1 && props.getAbilityFromSlot(this.slotSelected) != null)
+    	{	
+    		props.setAbilityInSlot(this.slotSelected, null);
     	}
     	super.mouseClicked(mouseX, mouseY, mouseButton);
     }

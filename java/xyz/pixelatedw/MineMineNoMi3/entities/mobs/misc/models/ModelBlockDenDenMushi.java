@@ -1,10 +1,11 @@
 package xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.models;
 
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.tileentity.TileEntity;
 
-public class ModelBlockDenDenMushi extends ModelBase
+public class ModelBlockDenDenMushi extends ModelBiped
 {
   //fields
     ModelRenderer Shape1;

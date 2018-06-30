@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
+import xyz.pixelatedw.MineMineNoMi3.items.weapons.ItemCoreWeapon;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 
 public class ItemAbilityWeapon extends ItemCoreWeapon

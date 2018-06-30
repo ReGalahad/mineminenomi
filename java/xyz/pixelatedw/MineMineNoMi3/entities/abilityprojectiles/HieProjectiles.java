@@ -76,7 +76,13 @@ public class HieProjectiles
 		
 		public void tasksImapct(MovingObjectPosition hit)
 		{
-			WyHelper.createSphere(this, 6, Blocks.packed_ice);
+			if(!this.worldObj.isRemote)
+			{
+				WyHelper.createSphere(this, 6, Blocks.packed_ice);
+				WyHelper.createSphere(this, 6, Blocks.packed_ice);
+				WyHelper.createSphere(this, 7, Blocks.packed_ice);
+				WyHelper.createSphere(this, 7, Blocks.packed_ice);
+			}
 		}
 	}
 }

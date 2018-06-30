@@ -34,26 +34,24 @@ public class AkumaNoMiBox extends Item
 
 	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
 	{
-		if(!world.isRemote)
+		boolean flag = false;	
+		for(int i = 0; i < player.inventory.mainInventory.length; i++)
 		{
-			if(player.inventory.hasItemStack(new ItemStack(ListMisc.Key)))
+			if(player.inventory.getStackInSlot(i) != null && player.inventory.getStackInSlot(i).getItem() == ListMisc.Key)
 			{
-				for(int i = 0; i < player.inventory.mainInventory.length; i++)
-				{
-					if(player.inventory.getStackInSlot(i) != null && player.inventory.getStackInSlot(i).getItem() == ListMisc.Key)
-					{
-						player.inventory.decrStackSize(i, 1);
-						break;
-					}
-				}
-				WyHelper.removeStackFromInventory(player, itemStack);
-				
-				player.inventory.addItemStackToInventory(new ItemStack(roulette(), 1, 0));
-				
-			}
-			else
-				WyHelper.sendMsgToPlayer(player, "You need a key !");
-		}
+				player.inventory.decrStackSize(i, 1);
+				flag = true;
+				break;
+			}				
+		}	
+			
+		if(flag)
+		{
+			WyHelper.removeStackFromInventory(player, itemStack);				 
+			player.inventory.addItemStackToInventory(new ItemStack(roulette(), 1, 0));
+		}		
+		else
+			WyHelper.sendMsgToPlayer(player, "You need a key !");
 
 		return itemStack;
 	}

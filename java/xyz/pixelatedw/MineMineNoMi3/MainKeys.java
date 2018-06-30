@@ -19,7 +19,9 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 public class MainKeys 
 {
 
-	public static KeyBinding guiPlayer, enterCombatMode;
+	public static KeyBinding guiPlayer, enterCombatMode, combatSlot1, combatSlot2, combatSlot3, combatSlot4, combatSlot5, combatSlot6, combatSlot7, combatSlot8;
+	
+	private static KeyBinding[] keyBindsCombatbar;
 	
 	public static void init() 
 	{		
@@ -28,6 +30,25 @@ public class MainKeys
 		
 		enterCombatMode = new KeyBinding(ID.LANG_KEY_COMBATMODE, Keyboard.KEY_LMENU, ID.LANG_KEYS_CATEGORY);
 		ClientRegistry.registerKeyBinding(enterCombatMode);
+		
+		combatSlot1 = new KeyBinding(ID.LANG_KEY_COMBATSLOT1, Keyboard.KEY_1, ID.LANG_KEYS_CATEGORY);
+		ClientRegistry.registerKeyBinding(combatSlot1);	
+		combatSlot2 = new KeyBinding(ID.LANG_KEY_COMBATSLOT2, Keyboard.KEY_2, ID.LANG_KEYS_CATEGORY);
+		ClientRegistry.registerKeyBinding(combatSlot2);	
+		combatSlot3 = new KeyBinding(ID.LANG_KEY_COMBATSLOT3, Keyboard.KEY_3, ID.LANG_KEYS_CATEGORY);
+		ClientRegistry.registerKeyBinding(combatSlot3);		
+		combatSlot4 = new KeyBinding(ID.LANG_KEY_COMBATSLOT4, Keyboard.KEY_4, ID.LANG_KEYS_CATEGORY);
+		ClientRegistry.registerKeyBinding(combatSlot4);
+		combatSlot5 = new KeyBinding(ID.LANG_KEY_COMBATSLOT5, Keyboard.KEY_5, ID.LANG_KEYS_CATEGORY);
+		ClientRegistry.registerKeyBinding(combatSlot5);
+		combatSlot6 = new KeyBinding(ID.LANG_KEY_COMBATSLOT6, Keyboard.KEY_6, ID.LANG_KEYS_CATEGORY);
+		ClientRegistry.registerKeyBinding(combatSlot6);
+		combatSlot7 = new KeyBinding(ID.LANG_KEY_COMBATSLOT7, Keyboard.KEY_7, ID.LANG_KEYS_CATEGORY);
+		ClientRegistry.registerKeyBinding(combatSlot7);
+		combatSlot8 = new KeyBinding(ID.LANG_KEY_COMBATSLOT8, Keyboard.KEY_8, ID.LANG_KEYS_CATEGORY);
+		ClientRegistry.registerKeyBinding(combatSlot8);
+		
+		keyBindsCombatbar = new KeyBinding[] {combatSlot1, combatSlot2, combatSlot3, combatSlot4, combatSlot5, combatSlot6, combatSlot7, combatSlot8};
 	}
 	    
 	public static boolean isShiftKeyDown()
@@ -45,20 +66,56 @@ public class MainKeys
     	
 		if(guiPlayer.isPressed())
 		{
-        	player.openGui(MainMod.getMineMineNoMi(), 1, world, (int)player.posX, (int)player.posY, (int)player.posZ);
-        	
         	WyNetworkHelper.sendToServer(new PacketPlayer("forcesync"));
-		}
+
+        	player.openGui(MainMod.getMineMineNoMi(), 1, world, (int)player.posX, (int)player.posY, (int)player.posZ);
+        }
 		
 		if(enterCombatMode.isPressed()) 
 		{
 			props.setCombatMode(!props.isInCombatMode());
+			if(props.isInCombatMode())
+			{
+				for(KeyBinding kb : Minecraft.getMinecraft().gameSettings.keyBindsHotbar)
+				{
+					kb.setKeyCode(0);
+				}
+
+				int keyId = 2;
+				for(KeyBinding kb : this.keyBindsCombatbar)
+				{
+					if(kb.getKeyCode() < 9)
+						kb.setKeyCode(keyId);
+					keyId++;
+				}
+				
+				KeyBinding.resetKeyBindingArrayAndHash();
+			}
+			else
+			{
+				for(KeyBinding kb : this.keyBindsCombatbar)
+				{
+					if(kb.getKeyCode() < 9)
+						kb.setKeyCode(0);
+				}
+				
+				int keyId = 2;
+				for(KeyBinding kb : Minecraft.getMinecraft().gameSettings.keyBindsHotbar)
+				{			
+					kb.setKeyCode(keyId);
+					keyId++;
+				}
+				
+				KeyBinding.resetKeyBindingArrayAndHash();
+			}
         	WyNetworkHelper.sendToServer(new PacketPlayer("enterCombatMode"));
 		}
-			
-		for(int i = 0; i < 8; i++)
+		
+		int j = keyBindsCombatbar.length;
+		
+		for(int i = 0; i < j; i++)
 		{
-			if(Minecraft.getMinecraft().gameSettings.keyBindsHotbar[i].isPressed())
+			if(keyBindsCombatbar[i].isPressed())
 			{
 	        	if(props.isInCombatMode())
 	        		WyNetworkHelper.sendToServer(new PacketPlayer("useAbility" + i));

@@ -1,0 +1,5 @@
+export var KamakuraJussoshi: Ability = {name: 'Kamakura Jussoshi', desc: 'Like "Kamakura", but creates a multi-layered snow barrier.', cooldown: 18.0, };
+export var Uchimizu: Ability = {name: 'Uchimizu', desc: 'The user hurls big and fast water droplets at the opponent.', cooldown: 5.0, projectileDamage: 5.0, projectileNumber: 15, };
+export var Sables: Ability = {name: 'Sables', desc: 'The user launches a compressed sandstorm at the opponent, which sends them flying.', cooldown: 3.0, };
+export var Geppo: Ability = {name: 'Geppo', desc: 'The user kicks the air beneath them to launch themselves into the air.', cooldown: 0.9, };
+export var YasakaninoMagatama: Ability = {name: 'Yasakani no Magatama', desc: 'Fires a torrent of deadly light particles, causing huge destruction.', cooldown: 2.5, projectileDamage: 2.0, projectileNumber: 5, projectileExplosion: 1, };

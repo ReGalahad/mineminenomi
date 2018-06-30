@@ -4,16 +4,20 @@ import com.mojang.realmsclient.gui.ChatFormatting;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
+import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.DokuProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.EntityMorphVenomDemon;
+import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 
 public class DokuAbilities 
 {
@@ -35,23 +39,41 @@ public class DokuAbilities
 			demonDummy = new EntityMorphVenomDemon(player.worldObj);
 			demonDummy.setPositionAndRotation(player.posX, player.posY, player.posZ, player.rotationPitch, player.rotationYaw);
 			demonDummy.setOwner(player);
-			player.worldObj.spawnEntityInWorld(demonDummy);						
+			player.worldObj.spawnEntityInWorld(demonDummy);
+			
+			ExtendedEntityStats props = ExtendedEntityStats.get(player);
+			
+			if(props.getZoanPoint().isEmpty())
+				props.setZoanPoint("n/a");
+				
+			
+			if(props.getZoanPoint().toLowerCase().equals("n/a"))
+			{
+				props.setZoanPoint("doku");
+				WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
+			}
 		}
 		
 		public void duringPassive(EntityPlayer player, int passiveTimer) 
 		{
 			player.addPotionEffect(new PotionEffect(Potion.invisibility.id, 20, 1, true));
-			if (player.worldObj.getBlock((int)player.posX - 1, (int)player.posY - 1, (int)player.posZ) != Blocks.air
-			&& player.worldObj.getBlock((int)player.posX - 1, (int)player.posY - 1, (int)player.posZ) != ListMisc.Poison
-			&& player.worldObj.getBlock((int)player.posX - 1, (int)player.posY - 1, (int)player.posZ) != ListMisc.Ope
-			&& player.worldObj.getBlock((int)player.posX - 1, (int)player.posY - 1, (int)player.posZ) != ListMisc.OpeMid
-			&& player.worldObj.getBlock((int)player.posX - 1, (int)player.posY - 1, (int)player.posZ) != Blocks.bedrock)
-				player.worldObj.setBlock((int)player.posX - 1, (int)player.posY, (int)player.posZ, ListMisc.DemonPoison);
-		}
+			if(!WyHelper.isBlockNearby(player, 2, Blocks.water, Blocks.flowing_water, ListMisc.KairosekiOre, ListMisc.KairosekiBlock))
+			{
+				if (player.worldObj.getBlock((int)player.posX - 1, (int)player.posY - 1, (int)player.posZ) != Blocks.air
+				&& player.worldObj.getBlock((int)player.posX - 1, (int)player.posY - 1, (int)player.posZ) != ListMisc.Poison
+				&& player.worldObj.getBlock((int)player.posX - 1, (int)player.posY - 1, (int)player.posZ) != ListMisc.Ope
+				&& player.worldObj.getBlock((int)player.posX - 1, (int)player.posY - 1, (int)player.posZ) != ListMisc.OpeMid
+				&& player.worldObj.getBlock((int)player.posX - 1, (int)player.posY - 1, (int)player.posZ) != Blocks.bedrock)
+					player.worldObj.setBlock((int)player.posX - 1, (int)player.posY, (int)player.posZ, ListMisc.DemonPoison);
+			}
+		}		
 		
 		public void hitEntity(EntityPlayer player, EntityLivingBase target) 
 		{
-			target.addPotionEffect(new PotionEffect(Potion.poison.id, 400, 2));
+			if(!WyHelper.isBlockNearby(player, 2, Blocks.water, Blocks.flowing_water, ListMisc.KairosekiOre, ListMisc.KairosekiBlock))
+			{
+				target.addPotionEffect(new PotionEffect(Potion.poison.id, 400, 2));
+			}
 		}
 		
 		public void endPassive(EntityPlayer player) 
@@ -59,6 +81,13 @@ public class DokuAbilities
 			demonDummy.setDead();
 			
 			player.removePotionEffect(Potion.invisibility.id);
+			ExtendedEntityStats props = ExtendedEntityStats.get(player);
+			
+			if(props.getZoanPoint().toLowerCase().equals("doku"))
+			{
+				props.setZoanPoint("n/a");	
+				WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);	
+			}
 		}
 	}
 	

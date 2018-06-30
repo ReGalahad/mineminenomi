@@ -30,7 +30,8 @@ public class EntityZoanMorph extends EntityLiving
 	
     public boolean attackEntityFrom(DamageSource ds, float f)
     {
-    	this.owner.attackEntityFrom(ds, f);
+    	if(this.owner != null && this.owner.isEntityAlive())
+    		this.owner.attackEntityFrom(ds, f);
     	return true;
     }
 	

@@ -1,4 +1,4 @@
-package xyz.pixelatedw.MineMineNoMi3.items;
+package xyz.pixelatedw.MineMineNoMi3.items.weapons;
 
 import java.util.List;
 
@@ -10,12 +10,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.MainKeys;
+import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
+import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.ExtraProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListExtraAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 
 public class Flintlock extends Item
 {
@@ -50,7 +53,7 @@ public class Flintlock extends Item
 						if(itemStack.getTagCompound().getInteger("bulletType") == 0) proj = new ExtraProjectiles.NormalBullet(player.worldObj, player, ListExtraAttributes.NORMALBULLET);
 						else if(itemStack.getTagCompound().getInteger("bulletType") == 1) proj = new ExtraProjectiles.KairosekiBullet(player.worldObj, player, ListExtraAttributes.KAIROSEKIBULLET);
 						player.worldObj.spawnEntityInWorld(proj);
-						
+												
 			    		WyTelemetry.addStat( (itemStack.getTagCompound().getInteger("bulletType") == 0 ? "normal" : "kairoseki") + "BulletsShot", 1);
 						
 			    		itemStack.getTagCompound().setBoolean("canUse", false);

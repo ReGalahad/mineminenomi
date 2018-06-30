@@ -6,6 +6,7 @@ import java.util.Random;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
@@ -58,7 +59,14 @@ public class GasuProjectiles
 			double posYOffset = this.worldObj.rand.nextGaussian() * 0.22D;
 			double posZOffset = this.worldObj.rand.nextGaussian() * 0.42D;		
 			
-			MainMod.proxy.spawnCustomParticles(this, "gasrobe", this.posX + posXOffset, this.posY + posYOffset, this.posZ + posZOffset, 0.0D, 0.0D, 0.0D);
+			MainMod.proxy.spawnCustomParticles(this, ID.PARTICLE_NAME_GASU, this.posX + posXOffset, this.posY + posYOffset, this.posZ + posZOffset, 0.0D, 0.0D, 0.0D);
+			
+			posXOffset = this.worldObj.rand.nextGaussian() * 0.12D;
+			posYOffset = this.worldObj.rand.nextGaussian() * 0.06D;
+			posZOffset = this.worldObj.rand.nextGaussian() * 0.12D;		
+			
+			MainMod.proxy.spawnCustomParticles(this, ID.PARTICLE_NAME_GASU2, this.posX + posXOffset, this.posY + posYOffset, this.posZ + posZOffset, 0.0D, 0.0D, 0.0D);
+
 			
 			super.onUpdate();
 		}

@@ -3,6 +3,7 @@ package xyz.pixelatedw.MineMineNoMi3.lists;
 import java.util.ArrayList;
 
 import cpw.mods.fml.common.registry.EntityRegistry;
+import net.minecraftforge.common.BiomeDictionary.Type;
 import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.WyRegistry;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
@@ -16,6 +17,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.EntityMarine;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.EntityMarineCaptain;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.EntityMarineWithGun;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.EntityMorgan;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDenDenMushi;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDoppelman;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirate;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirateCaptain;
@@ -48,9 +50,14 @@ public class ListEntities
 			}
 		}
 		
+		Type[] generalBiomes = new Type[]
+				{Type.BEACH, Type.JUNGLE, Type.SWAMP, Type.SAVANNA, Type.FOREST, Type.HILLS, Type.CONIFEROUS};
+		
 		//Marines
 		WyRegistry.registerMob("Marine with Sword", EntityMarine.class, 0x02258e, 0xFFFFFF);
+		WyRegistry.registerSpawnBiomesFor(EntityMarine.class, 20, 3, 6, generalBiomes);
 		WyRegistry.registerMob("Marine with Gun", EntityMarineWithGun.class, 0x02258e, 0xFFFFFF);
+		WyRegistry.registerSpawnBiomesFor(EntityMarineWithGun.class, 20, 3, 6, generalBiomes);
 		WyRegistry.registerMob("Marine Captain", EntityMarineCaptain.class, 0x02258e, 0xFFFFFF);
 		WyRegistry.registerMob("Captain Morgan", EntityMorgan.class);
 		 
@@ -69,7 +76,9 @@ public class ListEntities
 		
 		//Pirates
 		WyRegistry.registerMob("Pirate with Sword", EntityPirate.class, 0x960606, 0xFFFFFF);
+		WyRegistry.registerSpawnBiomesFor(EntityPirate.class, 20, 3, 6, generalBiomes);
 		WyRegistry.registerMob("Pirate with Gun", EntityPirateWithGun.class, 0x960606, 0xFFFFFF);
+		WyRegistry.registerSpawnBiomesFor(EntityPirateWithGun.class, 20, 3, 6, generalBiomes);
 		WyRegistry.registerMob("Pirate Captain", EntityPirateCaptain.class, 0x960606, 0xFFFFFF);
 		//Arlong Pirates
 		WyRegistry.registerMob("Arlong", EntityArlong.class);
@@ -86,6 +95,7 @@ public class ListEntities
 		
 		//Others
 		WyRegistry.registerMob("Doppelman", EntityDoppelman.class);
+		WyRegistry.registerMob("Den Den Mushi", EntityDenDenMushi.class, 0xFF00FF, 0x00FF00);
 	}
 	
 }

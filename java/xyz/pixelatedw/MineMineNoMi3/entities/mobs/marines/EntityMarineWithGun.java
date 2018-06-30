@@ -9,10 +9,11 @@ import xyz.pixelatedw.MineMineNoMi3.api.WyHelper.Direction;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.EntityAISharpshooter;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListExtraAttributes;
+import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
 public class EntityMarineWithGun extends MarineData
 {
-	private String[] textures = {"marinegun1", "marinegun2", "marinegun3"};
+	private String[] textures = {"marinegun1", "marinegun2", "marinegun3", "marinegun4"};
 	
 	public EntityMarineWithGun(World world) 
 	{
@@ -29,7 +30,7 @@ public class EntityMarineWithGun extends MarineData
 		super.applyEntityAttributes(); 
 		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(35.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.23000000417232513D);
-		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(2.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(1.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20.0D);
 	}
 	
@@ -37,4 +38,19 @@ public class EntityMarineWithGun extends MarineData
 	
 	public int getDorikiPower() { return this.worldObj.rand.nextInt(3) + 10; }
 	public int getBellyInPockets() { return this.worldObj.rand.nextInt(10) + 1; }
+	
+    protected void dropRareDrop(int i)
+    {
+        switch (this.rand.nextInt(4))
+        {
+            case 0:
+                this.dropItem(ListMisc.MarineHelm, 1); break;
+            case 1:
+                this.dropItem(ListMisc.MarineChestplate, 1); break;
+            case 2:
+                this.dropItem(ListMisc.MarineLeggings, 1); break;
+            case 3:
+                this.dropItem(ListMisc.MarineBoots, 1); break;
+        }
+    }
 }

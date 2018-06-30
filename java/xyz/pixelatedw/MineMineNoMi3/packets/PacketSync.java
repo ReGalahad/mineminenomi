@@ -44,7 +44,7 @@ public class PacketSync implements IMessage
 			ExtendedEntityStats props = ExtendedEntityStats.get(player);	 
 
 			props.loadNBTData(message.data);
-	
+				
 			return null;
 		}
 	}

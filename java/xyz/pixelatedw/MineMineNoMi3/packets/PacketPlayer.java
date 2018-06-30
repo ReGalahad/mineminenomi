@@ -162,8 +162,10 @@ public class PacketPlayer implements IMessage
 	
 			if(message.cmd.equals("delete_book"))
 			{
+				props.clearRacialAbilities();
+				
 				if(props.getRace().equals(ID.RACE_CYBORG))
-				{
+				{										
 					props.addRacialAbility(CyborgAbilities.FRESHFIRE);
 					props.addRacialAbility(CyborgAbilities.COLAOVERDRIVE);
 					props.addRacialAbility(CyborgAbilities.RADICALBEAM);

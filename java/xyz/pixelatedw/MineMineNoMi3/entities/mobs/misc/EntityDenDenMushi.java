@@ -12,10 +12,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
-public class DenDenMushi extends EntityMob
+public class EntityDenDenMushi extends EntityMob
 {
 
-	public DenDenMushi(World world) 
+	public EntityDenDenMushi(World world) 
 	{
 		super(world);
         this.tasks.addTask(1, new EntityAILookIdle(this));
@@ -28,7 +28,7 @@ public class DenDenMushi extends EntityMob
     	
         super.applyEntityAttributes();     
         this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(25.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.12000000417232513D); 
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.12D); 
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(5.0D);  	
     }
     

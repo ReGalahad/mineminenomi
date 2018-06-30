@@ -1,5 +1,6 @@
 package xyz.pixelatedw.MineMineNoMi3.commands;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.PlayerNotFoundException;
@@ -9,6 +10,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.potion.Potion;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.EnumChatFormatting;
+import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
@@ -24,11 +26,17 @@ public class CommandRemoveDF extends CommandBase
 	{
 		EntityPlayer senderEntity = this.getCommandSenderAsPlayer(sender);
 		EntityPlayer target = null;
+		boolean flag = FMLCommonHandler.instance().getMinecraftServerInstance().getConfigurationManager().func_152596_g(senderEntity.getGameProfile());
 		
 		if(str.length >= 1)
 		{
-			try{target = this.getCommandSenderAsPlayer(sender);}
-			catch(PlayerNotFoundException e){e.printStackTrace();}		
+			if(MainConfig.commandPermissionRemoveDF != 1)		
+				target = MinecraftServer.getServer().getConfigurationManager().func_152612_a(str[0]);
+			else
+			{
+				WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.RED + "You don't have permission to use this command !");
+				return;
+			}
 		}
 		else
 		{
@@ -39,21 +47,30 @@ public class CommandRemoveDF extends CommandBase
 		
 		props.setUsedFruit("N/A");
 		props.setYamiPower(false);
+		props.setIsLogia(false);
 		
 		props.clearHotbar();
 		props.clearDevilFruitAbilities();
+		target.clearActivePotions();
 		
 		for(EntityLivingBase zm : WyHelper.getEntitiesNear(target, 1.5, EntityZoanMorph.class))
 			zm.setDead();
-		target.removePotionEffect(Potion.invisibility.id);
 		props.setZoanPoint("n/a");
+		
+		target.clearActivePotions();
 		
 		WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP)target);	
 	}
 
-	public boolean canCommandSenderUseCommand(ICommandSender cmd)
-	{
-		return true;
+	public boolean canCommandSenderUseCommand(ICommandSender sender)
+	{		
+		EntityPlayer senderEntity = this.getCommandSenderAsPlayer(sender);
+		boolean flag = FMLCommonHandler.instance().getMinecraftServerInstance().getConfigurationManager().func_152596_g(senderEntity.getGameProfile());
+		
+		if( (MainConfig.commandPermissionRemoveDF == 2 && flag) || MainConfig.commandPermissionRemoveDF < 2 )
+			return true;
+		else	
+			return false;		
 	}
 	
 	public String getCommandUsage(ICommandSender icommandsender)
@@ -65,6 +82,5 @@ public class CommandRemoveDF extends CommandBase
 	{
 		return "removedf";
 	}
-
 }
 

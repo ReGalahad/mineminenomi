@@ -45,8 +45,8 @@ public class ExtraAbilities
 						if(props.getUsedFruit().equals("ushiushibison"))
 							this.dummy.setDead();
 						player.removePotionEffect(Potion.invisibility.id);
-					}
-					WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
+					}				
+					WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);	
 				}
 				else
 				{
@@ -64,6 +64,8 @@ public class ExtraAbilities
 					}
 				}
 
+				
+				
 				super.use(player);
 			}
 		}

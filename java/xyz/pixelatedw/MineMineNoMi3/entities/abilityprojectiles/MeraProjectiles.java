@@ -8,7 +8,10 @@ import net.minecraft.client.particle.EntityFireworkSparkFX;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
@@ -50,9 +53,17 @@ public class MeraProjectiles
 				double offsetX = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
 				double offsetY = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
 				double offsetZ = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
-		      
-				this.worldObj.spawnParticle(EnumParticleTypes.FLAME.getParticleName(), this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ, 0.0D, 0.03D, 0.0D);
-				this.worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL.getParticleName(), this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ, 0.0D, 0.03D, 0.0D);
+				
+				MainMod.proxy.spawnCustomParticles(this, ID.PARTICLE_NAME_MERA, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ, 0, 0, 0);
+			}
+			
+			for (int i = 0; i < 3; i++)
+			{
+				double offsetX = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
+				double offsetY = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
+				double offsetZ = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
+				
+				MainMod.proxy.spawnCustomParticles(this, ID.PARTICLE_NAME_MOKU, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ, 0, 0, 0);
 			}
 			
 			super.onUpdate();
@@ -80,8 +91,11 @@ public class MeraProjectiles
 		
 		public void onUpdate()
 		{	
-			this.worldObj.spawnParticle(EnumParticleTypes.FLAME.getParticleName(), this.posX, this.posY, this.posZ, 0.0D, 0.03D, 0.0D);
-			this.worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL.getParticleName(), this.posX, this.posY, this.posZ, 0.0D, 0.03D, 0.0D);
+			double posXOffset = this.worldObj.rand.nextGaussian() * 0.42D;
+			double posYOffset = this.worldObj.rand.nextGaussian() * 0.22D;
+			double posZOffset = this.worldObj.rand.nextGaussian() * 0.42D;		
+			
+			MainMod.proxy.spawnCustomParticles(this, ID.PARTICLE_NAME_MERA, this.posX + posXOffset, this.posY + posYOffset, this.posZ + posZOffset, 0, 0, 0);
 			
 			super.onUpdate();
 		}
@@ -108,8 +122,16 @@ public class MeraProjectiles
 				double offsetY = (new Random().nextInt(40) + 2.0D - 20.0D) / 10.0D;
 				double offsetZ = (new Random().nextInt(40) + 2.0D - 20.0D) / 10.0D;
 		      
-				this.worldObj.spawnParticle(EnumParticleTypes.FLAME.getParticleName(), this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ, 0.0D, 0.03D, 0.0D);
-				this.worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL.getParticleName(), this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ, 0.0D, 0.03D, 0.0D);
+				MainMod.proxy.spawnCustomParticles(this, ID.PARTICLE_NAME_MERA, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ, 0, 0, 0);
+			}
+			
+			for (int i = 0; i < 20; i++)
+			{
+				double offsetX = (new Random().nextInt(40) + 2.0D - 20.0D) / 10.0D;
+				double offsetY = (new Random().nextInt(40) + 2.0D - 20.0D) / 10.0D;
+				double offsetZ = (new Random().nextInt(40) + 2.0D - 20.0D) / 10.0D;
+		      
+				MainMod.proxy.spawnCustomParticles(this, ID.PARTICLE_NAME_MOKU, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ, 0, 0, 0);
 			}
 			
 			super.onUpdate();

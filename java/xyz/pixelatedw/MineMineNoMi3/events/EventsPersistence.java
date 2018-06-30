@@ -2,6 +2,7 @@ package xyz.pixelatedw.MineMineNoMi3.events;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Random;
 import java.util.Scanner;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -46,6 +47,7 @@ import xyz.pixelatedw.MineMineNoMi3.abilities.HakiAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.HakiAbilities.BusoshokuHaki;
 import xyz.pixelatedw.MineMineNoMi3.abilities.HakiAbilities.KenbunshokuHaki;
 import xyz.pixelatedw.MineMineNoMi3.abilities.RokushikiAbilities;
+import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
@@ -59,9 +61,11 @@ import xyz.pixelatedw.MineMineNoMi3.entities.zoan.EntityZoanMorph;
 import xyz.pixelatedw.MineMineNoMi3.events.customevents.DorikiEvent;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 import xyz.pixelatedw.MineMineNoMi3.items.AkumaNoMi;
+import xyz.pixelatedw.MineMineNoMi3.items.ItemCoreArmor;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListEffects;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 
 public class EventsPersistence
@@ -129,9 +133,9 @@ public class EventsPersistence
 						|| player.worldObj.getBlock((int) player.posX, (int) player.posY - 1, (int) player.posZ) == Blocks.flowing_water))) )
 				{
 					if(DevilFruitsHelper.hasKairosekiItem(player))
-						player.addPotionEffect(new PotionEffect(Potion.confusion.getId(), 120, 0));
+						player.addPotionEffect(new PotionEffect(Potion.confusion.getId(), 48, 0));
 					else
-						player.addPotionEffect(new PotionEffect(Potion.confusion.getId(), 240, 0));
+						player.addPotionEffect(new PotionEffect(Potion.confusion.getId(), 120, 0));
 					for(int i = 0; i < props.countAbilitiesInHotbar(); i++)
 					{
 						if(props.getAbilityFromSlot(i) != null && !props.getAbilityFromSlot(i).equals("n/a") && !props.getAbilityFromSlot(i).isDisabled())
@@ -153,36 +157,61 @@ public class EventsPersistence
 					}					
 				}
 				
-				for(int i = 0; i < props.countAbilitiesInHotbar(); i++)
+			}
+						
+			if(props.getUsedFruit().equals("hiehie"))
+			{
+				if( !WyHelper.isBlockNearby(player, 3, ListMisc.KairosekiBlock, ListMisc.KairosekiOre) && !DevilFruitsHelper.hasKairosekiItem(player) 
+						&& !player.inventory.hasItem(Item.getItemFromBlock(ListMisc.KairosekiBlock)) && !player.inventory.hasItem( Item.getItemFromBlock(ListMisc.KairosekiOre)) 
+						&& !player.isInsideOfMaterial(Material.water) )
 				{
-					if(props.getAbilityFromSlot(i) != null && !props.getAbilityFromSlot(i).equals("n/a") && props.getAbilityFromSlot(i).isRepeating())
-					{ 
-						props.getAbilityFromSlot(i).duringRepeater(player);
-					}				
+					final EntityLivingBase finalPlayer = player;
+					for (int x1 = -1; x1 < 2; x1++) 
+					for (int y1 = -1; y1 < 0; y1++) 
+					for (int z1 = -1; z1 < 2; z1++) 
+					{
+						Sphere.generate((int) player.posX - 1 + x1, (int) player.posY + y1, (int) player.posZ + z1, 1, new ISphere()
+						{						
+							public void call(int x, int y, int z)
+							{
+								if(finalPlayer.worldObj.getBlock(x, y, z) == Blocks.water)
+									finalPlayer.worldObj.setBlock(x, y ,z, Blocks.ice);
+							}
+						});
+					}
 				}
 			}
 			
-			if(props.getUsedFruit().equals("hiehie"))
+			if( !WyHelper.isBlockNearby(player, 3, ListMisc.KairosekiBlock, ListMisc.KairosekiOre) && !DevilFruitsHelper.hasKairosekiItem(player) 
+					&& !player.inventory.hasItem(Item.getItemFromBlock(ListMisc.KairosekiBlock)) && !player.inventory.hasItem( Item.getItemFromBlock(ListMisc.KairosekiOre)) 
+					&& !player.isInsideOfMaterial(Material.water) )
 			{
-				final EntityLivingBase finalPlayer = player;
-				for (int x1 = -1; x1 < 2; x1++) 
-				for (int y1 = -1; y1 < 0; y1++) 
-				for (int z1 = -1; z1 < 2; z1++) 
-				{
-					Sphere.generate((int) player.posX - 1 + x1, (int) player.posY + y1, (int) player.posZ + z1, 1, new ISphere()
-					{						
-						public void call(int x, int y, int z)
-						{
-							if(finalPlayer.worldObj.getBlock(x, y, z) == Blocks.water)
-								finalPlayer.worldObj.setBlock(x, y ,z, Blocks.ice);
-						}
-					});
+				for(int i = 0; i < props.countAbilitiesInHotbar(); i++)
+				{					
+					if(props.getAbilityFromSlot(i) != null && !props.getAbilityFromSlot(i).equals("n/a") && props.getAbilityFromSlot(i).isRepeating())
+					{ 					
+						props.getAbilityFromSlot(i).duringRepeater(player);
+					}				
 				}
 			}
 			
 			if (props.getUsedFruit().equals("gomugomu") || props.getUsedFruit().equals("banebane") || props.isLogia())
 				player.fallDistance = 0;
 
+			if(props.getUsedFruit().equals("gomugomu"))
+			{
+				if(props.getGear() == 2)
+				{
+					player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 25, 1, false));
+					if(!player.worldObj.isRemote)
+			    		WyNetworkHelper.sendTo(new PacketParticles("gearSecond", player), (EntityPlayerMP) player);
+				}
+				else if(props.getGear() == 4)
+				{
+					player.addPotionEffect(new PotionEffect(Potion.jump.id, 25, 2, false));
+				}
+			}
+			
 			if (props.getUsedFruit().equals("dokudoku"))
 			{
 				if (player.isPotionActive(Potion.poison.id))
@@ -231,6 +260,48 @@ public class EventsPersistence
 					}
 				}
 			}	
+			
+			boolean hasColaBackpack = false;
+			
+			for(ItemStack armorStack : player.inventory.armorInventory)
+			{
+				if(armorStack != null && armorStack.getItem() instanceof ItemCoreArmor && ((ItemCoreArmor)armorStack.getItem()).getName().equals("colabackpack") )
+				{
+					hasColaBackpack = true;
+				}
+			}
+			
+			if(props.getRace().equals(ID.RACE_CYBORG))
+			{
+				if(hasColaBackpack && !props.hasColaBackpack())
+				{
+					props.setMaxCola(props.getMaxCola() + 200);
+					props.setColaBackpack(true);
+					
+			    	if(!ID.DEV_EARLYACCESS && !player.capabilities.isCreativeMode && !player.worldObj.isRemote)
+			    		WyTelemetry.addStat("colaBackpacksCurrentlyEquipped", 1);
+			    	
+					if(!player.worldObj.isRemote)
+						WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
+				}
+				else if(!hasColaBackpack && props.hasColaBackpack())
+				{
+					props.setMaxCola(props.getMaxCola() - 200);
+					
+					if(props.getCola() > props.getMaxCola())
+						props.setCola(props.getMaxCola());
+					
+					props.setColaBackpack(false);
+					
+			    	if(!ID.DEV_EARLYACCESS && !player.capabilities.isCreativeMode && !player.worldObj.isRemote)
+			    		WyTelemetry.addStat("colaBackpacksCurrentlyEquipped", -1);
+			    	
+					if(!player.worldObj.isRemote)
+						WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
+				}
+				
+			}
+			
 			
 			if(props.getTempPreviousAbility().equals("geppo") || props.getTempPreviousAbility().equals("soranomichi"))
 			{
@@ -300,7 +371,7 @@ public class EventsPersistence
 			
 			if (target instanceof EntityPlayer)
 			{
-				ExtendedEntityStats targetprops = ExtendedEntityStats.get(player);
+				ExtendedEntityStats targetprops = ExtendedEntityStats.get(target);
 
 				plusDoriki = (targetprops.getDoriki() / 4) + rng;
 				plusBounty = (targetprops.getBounty() / 2) + rng;
@@ -377,14 +448,14 @@ public class EventsPersistence
 	    		if(!targetPlayer)
 	    		{
 		    		WyTelemetry.addStat("dorikiEarnedFromEntities", (int) Math.round(plusDoriki));
-		    		WyTelemetry.addStat("bellyEarnedFromEntities", plusBelly - props.getBellyFromCommand());
-		    		WyTelemetry.addStat("bountyEarnedFromEntities", plusBounty - props.getBountyFromCommand());
+		    		WyTelemetry.addStat("bellyEarnedFromEntities", plusBelly);
+		    		WyTelemetry.addStat("bountyEarnedFromEntities", plusBounty);
 	    		}
 	    		else
 	    		{
-		    		WyTelemetry.addStat("dorikiEarnedFromPlayers", (int) Math.round(plusDoriki));
-		    		WyTelemetry.addStat("bellyEarnedFromPlayers", plusBelly - props.getBellyFromCommand());
-		    		WyTelemetry.addStat("bountyEarnedFromPlayers", plusBounty - props.getBountyFromCommand());
+		    		WyTelemetry.addStat("dorikiEarnedFromPlayers", (int) Math.round((ExtendedEntityStats.get(target).getDoriki() - ExtendedEntityStats.get(target).getDorikiFromCommand()) / 4));
+		    		WyTelemetry.addStat("bellyEarnedFromPlayers", plusBelly - ExtendedEntityStats.get(target).getBellyFromCommand());
+		    		WyTelemetry.addStat("bountyEarnedFromPlayers", (int) Math.round((ExtendedEntityStats.get(target).getBounty() - ExtendedEntityStats.get(target).getBountyFromCommand()) / 2));
 	    		}
 	    	}
 			
@@ -573,18 +644,20 @@ public class EventsPersistence
 					{
 						for(Ability a : ((AkumaNoMi)yamiFruit.getItem()).abilities)
 						{
-							props.addDevilFruitAbility(a);
+							if(!WyHelper.verifyIfAbilityIsBanned(a))
+								props.addDevilFruitAbility(a);
 						}
 					}
 					
 					for(Ability a : ((AkumaNoMi)df.getItem()).abilities)
-						props.addDevilFruitAbility(a);
+						if(!WyHelper.verifyIfAbilityIsBanned(a))
+							props.addDevilFruitAbility(a);
 
 					for(int i = 0; i < props.countAbilitiesInHotbar(); i++)
 					{
 						if(props.getAbilityFromSlot(i) != null)
 						{
-							if(props.getAbilityFromSlot(i) == null)
+							if(WyHelper.verifyIfAbilityIsBanned(props.getAbilityFromSlot(i)))
 								props.setAbilityInSlot(i, null);
 						}
 					}

@@ -8,12 +8,14 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability.Update;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
@@ -29,12 +31,11 @@ public class Ability
 	protected boolean isOnCooldown = false, isCharging = false, isRepeating = false, passiveActive = false, isDisabled = false;
 	private int ticksForCooldown, ticksForCharge, ticksForRepeater;
 	
-	private int dummy_projectileNumber = 0;
+	private int dummy_projectileNumber = 1;
 	
 	public Ability(AbilityAttribute attr)
 	{
 		this.attr = new AbilityAttribute(attr);
-		
 		ticksForCooldown = attr.getAbilityCooldown();
 		ticksForCharge = attr.getAbilityCharges();
 		ticksForRepeater = attr.getAbilityCooldown();		
@@ -188,11 +189,11 @@ public class Ability
 		if(!isOnCooldown)
 		{
 			isCharging = true;
-			(new Update(player, attr)).start();
 	    	if(!ID.DEV_EARLYACCESS && !player.capabilities.isCreativeMode)
 	    		WyTelemetry.addStat("abilityUsed_" + WyHelper.getFancyName(this.getAttribute().getAttributeName()), 1);
 			if(!player.getDisplayName().equals(FMLCommonHandler.instance().getMinecraftServerInstance().getServerOwner()))
 				WyNetworkHelper.sendTo(new PacketPlayer("clientUpdateIsCharging" + this.getAttribute().getAttributeName(), true), (EntityPlayerMP) player);
+			(new Update(player, attr)).start();
 		}
 	}
 	
@@ -242,6 +243,11 @@ public class Ability
 	protected void startCooldown()
 	{
 		isOnCooldown = true;
+	}
+	
+	protected void startExtUpdate(EntityPlayer player)
+	{
+		(new Update(player, attr)).start();
 	}
 	
 	public void reset()
@@ -347,12 +353,12 @@ public class Ability
 							ticksForRepeater--;
 							if(ticksForRepeater > this.attr.getAbilityCooldown() - (this.attr.getAbilityCooldown() / this.attr.getAbilityRepeaterFrequency()) && projectile != null)
 							{
-
+								
 							}
 							else
 							{
 								isRepeating = false;
-								dummy_projectileNumber = 0;
+								dummy_projectileNumber = 1;
 								ticksForRepeater = attr.getAbilityCooldown();
 							}
 						}

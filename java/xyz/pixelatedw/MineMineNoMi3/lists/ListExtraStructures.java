@@ -35,7 +35,7 @@ public class ListExtraStructures
 		{
 			toSpawn1 = ID.PROJECT_ID + ".Marine with Sword";
 			toSpawn2 = ID.PROJECT_ID + ".Marine with Gun";
-			toSpawnCpt = ID.PROJECT_ID + ".Marine with Sword";
+			toSpawnCpt = ID.PROJECT_ID + ".Marine Captain";
 			swordToSpawn = ListMisc.MarineSword;
 			x1 = 13;
 			x2 = 6;
@@ -53,12 +53,12 @@ public class ListExtraStructures
 		}
 		
 		
-		TileEntityCustomSpawner spw1 = new TileEntityCustomSpawner(toSpawn1, 5);
-		TileEntityCustomSpawner spw2 = new TileEntityCustomSpawner(toSpawn1, 5);
-		TileEntityCustomSpawner spw3 = new TileEntityCustomSpawner(toSpawn1, 5);
-		TileEntityCustomSpawner spw4 = new TileEntityCustomSpawner(toSpawn1, 5);
-		TileEntityCustomSpawner spw5 = new TileEntityCustomSpawner(toSpawn1, 5);
-		TileEntityCustomSpawner spw6 = new TileEntityCustomSpawner(toSpawnCpt, 1);
+		TileEntityCustomSpawner spw1 = new TileEntityCustomSpawner().setSpawnerMob(toSpawn1).setSpawnerLimit(5);
+		TileEntityCustomSpawner spw2 = new TileEntityCustomSpawner().setSpawnerMob(toSpawn1).setSpawnerLimit(5);
+		TileEntityCustomSpawner spw3 = new TileEntityCustomSpawner().setSpawnerMob(toSpawn1).setSpawnerLimit(5);
+		TileEntityCustomSpawner spw4 = new TileEntityCustomSpawner().setSpawnerMob(toSpawn1).setSpawnerLimit(5);
+		TileEntityCustomSpawner spw5 = new TileEntityCustomSpawner().setSpawnerMob(toSpawn1).setSpawnerLimit(5);
+		TileEntityCustomSpawner spw6 = new TileEntityCustomSpawner().setSpawnerMob(toSpawnCpt).setSpawnerLimit(1);
 		
 		world.setBlock(posX + 10, posY + 2, posZ + 27, ListMisc.CustomSpawner.setSpawnerMob(toSpawn1).setSpawnerLimit(5) );
 		world.setTileEntity(posX + 10, posY + 2, posZ + 27, spw1);
@@ -162,15 +162,15 @@ public class ListExtraStructures
 		}
 		
 		
-		TileEntityCustomSpawner spw1 = new TileEntityCustomSpawner(toSpawn1, 5);
-		TileEntityCustomSpawner spw2 = new TileEntityCustomSpawner(toSpawn2, 5);
-		TileEntityCustomSpawner spw3 = new TileEntityCustomSpawner(toSpawn1, 2);
+		TileEntityCustomSpawner spw1 = new TileEntityCustomSpawner().setSpawnerMob(toSpawn1).setSpawnerLimit(5);
+		TileEntityCustomSpawner spw2 = new TileEntityCustomSpawner().setSpawnerMob(toSpawn1).setSpawnerLimit(5);
+		TileEntityCustomSpawner spw3 = new TileEntityCustomSpawner().setSpawnerMob(toSpawn1).setSpawnerLimit(2);
 		
-		world.setBlock(posX + 10, posY + 2, posZ + 32, ListMisc.CustomSpawner.setSpawnerMob(toSpawn1).setSpawnerLimit(5));
+		world.setBlock(posX + 10, posY + 2, posZ + 32, ListMisc.CustomSpawner);
 		world.setTileEntity(posX + 10, posY + 2, posZ + 32, spw1);
-		world.setBlock(posX + 10, posY + 2, posZ + 43, ListMisc.CustomSpawner.setSpawnerMob(toSpawn2).setSpawnerLimit(5));
+		world.setBlock(posX + 10, posY + 2, posZ + 43, ListMisc.CustomSpawner);
 		world.setTileEntity(posX + 10, posY + 2, posZ + 43, spw2);
-		world.setBlock(posX + 10, posY + 7, posZ + 45, ListMisc.CustomSpawner.setSpawnerMob(toSpawn1).setSpawnerLimit(2));
+		world.setBlock(posX + 10, posY + 7, posZ + 45, ListMisc.CustomSpawner);
 		world.setTileEntity(posX + 10, posY + 7, posZ + 45, spw3);
 
 		world.setBlock(posX + 12, posY + 2, posZ + 32, Blocks.torch);

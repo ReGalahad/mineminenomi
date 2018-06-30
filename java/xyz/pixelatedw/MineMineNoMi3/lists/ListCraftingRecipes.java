@@ -9,6 +9,9 @@ public class ListCraftingRecipes
 	
 	public static void init()
 	{
+		GameRegistry.addShapedRecipe(new ItemStack(ListMisc.ColaBackpack), new Object[]
+				{ "X.X", "XOX", "X.X", 'X', ListMisc.UltraCola, 'O', Items.iron_ingot });	
+		
 		GameRegistry.addShapedRecipe(new ItemStack(ListMisc.Key), new Object[]
 				{ ".X.", ".X.", ".X.", 'X', Items.gold_ingot });	
 		

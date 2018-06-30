@@ -31,7 +31,7 @@ public class BlockCustomSpawner extends BlockContainer
 	public BlockCustomSpawner setSpawnerMob(String toSpawn) { entityToSpawn = toSpawn; return this; }
 	public BlockCustomSpawner setSpawnerLimit(int limit) { spawnLimit = limit; return this; }
 	
-	public TileEntity createNewTileEntity(World world, int i) {return null;}//new TileEntityCustomSpawner(entityToSpawn, spawnLimit);} //entityToSpawn, spawnLimit
+	public TileEntity createNewTileEntity(World world, int i) { return new TileEntityCustomSpawner();} //entityToSpawn, spawnLimit
 	
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {return WyHelper.NULL_AABB;} 
 	

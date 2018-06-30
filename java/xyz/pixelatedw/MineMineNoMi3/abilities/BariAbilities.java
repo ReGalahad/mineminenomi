@@ -51,8 +51,7 @@ public class BariAbilities
 				{
 					public void call(int x, int y, int z)
 					{
-						if(world.getBlock(x, y ,z) == Blocks.air || world.getBlock(x, y ,z) == Blocks.tallgrass || world.getBlock(x, y ,z) == Blocks.leaves2 
-								|| world.getBlock(x, y ,z) == Blocks.leaves || world.getBlock(x, y ,z) == Blocks.wheat || world.getBlock(x, y ,z) == Blocks.carrots)
+						if(world.getBlock(x, y ,z) == Blocks.air)
 							world.setBlock(x, y ,z, ListMisc.Barrier);
 					}
 				});
@@ -78,28 +77,32 @@ public class BariAbilities
 					for(int x = -3; x < 3; x++)
 					for(int y = 0; y <= 3; y++)
 					for(int z = -1; z <= 1; z++)
-						player.worldObj.setBlock((int) player.posX - x, (int) player.posY + y, ((int) player.posZ - 3) - z, ListMisc.Barrier);
+						if(player.worldObj.getBlock((int) player.posX - x, (int) player.posY + y, ((int) player.posZ - 3) - z) == Blocks.air)
+							player.worldObj.setBlock((int) player.posX - x, (int) player.posY + y, ((int) player.posZ - 3) - z, ListMisc.Barrier);
 				}
 				if(WyHelper.get4Directions(player) == WyHelper.Direction.SOUTH)
 				{
 					for(int x = -3; x < 3; x++)
 					for(int y = 0; y <= 3; y++)
 					for(int z = -1; z <= 1; z++)
-						player.worldObj.setBlock((int) player.posX - x, (int) player.posY + y, ((int) player.posZ + 2) - z, ListMisc.Barrier);
+						if(player.worldObj.getBlock((int) player.posX - x, (int) player.posY + y, ((int) player.posZ + 2) - z) == Blocks.air)
+							player.worldObj.setBlock((int) player.posX - x, (int) player.posY + y, ((int) player.posZ + 2) - z, ListMisc.Barrier);
 				}
 				if(WyHelper.get4Directions(player) == WyHelper.Direction.EAST)
 				{
 					for(int x = -1; x < 1; x++)
 					for(int y = 0; y <= 3; y++)
 					for(int z = -3; z <= 3; z++)
-						player.worldObj.setBlock(((int) player.posX + 2) - x, (int) player.posY + y, (int) player.posZ - z, ListMisc.Barrier);
+						if(player.worldObj.getBlock(((int) player.posX + 2) - x, (int) player.posY + y, (int) player.posZ - z) == Blocks.air)
+							player.worldObj.setBlock(((int) player.posX + 2) - x, (int) player.posY + y, (int) player.posZ - z, ListMisc.Barrier);
 				}
 				if(WyHelper.get4Directions(player) == WyHelper.Direction.WEST)
 				{
 					for(int x = -1; x < 1; x++)
 					for(int y = 0; y <= 3; y++)
-						for(int z = -3; z <= 3; z++)
-						player.worldObj.setBlock(((int) player.posX - 3) - x, (int) player.posY + y, (int) player.posZ - z, ListMisc.Barrier);
+					for(int z = -3; z <= 3; z++)
+						if(player.worldObj.getBlock(((int) player.posX - 3) - x, (int) player.posY + y, (int) player.posZ - z) == Blocks.air)
+							player.worldObj.setBlock(((int) player.posX - 3) - x, (int) player.posY + y, (int) player.posZ - z, ListMisc.Barrier);
 				}
 				
 				super.use(player);

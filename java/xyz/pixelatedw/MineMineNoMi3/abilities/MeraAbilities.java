@@ -42,7 +42,6 @@ public class MeraAbilities
 		
 		public void use(EntityPlayer player)
 		{
-			//WyNetworkHelper.sendTo(new PacketPlayer("particles_test"), (EntityPlayerMP) player);
 			this.projectile = new MeraProjectiles.Higan(player.worldObj, player, ListAttributes.HIGAN);
 			super.use(player);
 		};			

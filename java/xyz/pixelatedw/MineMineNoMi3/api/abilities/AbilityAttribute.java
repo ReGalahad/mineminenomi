@@ -14,7 +14,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.EffectType;
 public class AbilityAttribute 
 {	
 	private String attributeName = "N/A";
-	private boolean projectileExplosionHasFire = true, projectileExplosionHasSmoke = true, canBeCharged = false, isRepeater = false, itemExplosionHasFire = true, itemExplosionHasSmoke = true, isPassive = false, isPunch = false;
+	private boolean projectileExplosionHasFire = true, projectileExplosionHasSmoke = true, canBeCharged = false, isRepeater = false, itemExplosionHasFire = true, itemExplosionHasSmoke = true, isPassive = false, isPunch = false, entityMoveThroughBlocks = false;
 	private int itemTicks = 0, entityTicks = 60, entitySpeed = 1, entityExplosion = 0, potionEffectAoeRadius = 0, itemMaxCharge = 0, itemExplosion = 0, itemRepeaterFreq = 6;
 	private float projectileAlpha = 255, entityDamage = 1;
 	private double entityXRotation = 0, entityYRotation = 0, entityZRotation = 0;
@@ -48,6 +48,7 @@ public class AbilityAttribute
 		this.itemMaxCharge = attr.itemMaxCharge;
 		this.itemExplosion = attr.itemExplosion;
 		this.itemRepeaterFreq = attr.itemRepeaterFreq;
+		this.entityMoveThroughBlocks = attr.entityMoveThroughBlocks;
 		
 		this.projectileAlpha = attr.projectileAlpha;
 		this.entityDamage = attr.entityDamage;
@@ -101,6 +102,7 @@ public class AbilityAttribute
 	public AbilityAttribute setProjectileXRotation(double angle) { entityXRotation = angle; return this;}
 	public AbilityAttribute setProjectileYRotation(double angle) { entityYRotation = angle; return this;}
 	public AbilityAttribute setProjectileZRotation(double angle) { entityZRotation = angle; return this;}
+	public AbilityAttribute setProjectileMoveThroughBlocks(boolean flag) { entityMoveThroughBlocks = flag; return this; }
 		//Potion Effects
 	public AbilityAttribute addEffects(EffectType type, PotionEffect... e) 
 	{
@@ -144,6 +146,7 @@ public class AbilityAttribute
 	public double getProjectileXRotation() { return this.entityXRotation; }
 	public double getProjectileYRotation() { return this.entityYRotation; }
 	public double getProjectileZRotation() { return this.entityZRotation; }
+	public boolean canProjectileMoveThroughBlocks() { return this.entityMoveThroughBlocks; }
 		//Potion Effects
 	public PotionEffect[] getPotionEffectsForProjectile() {return this.potionEffectsForProjectile;}
 	public PotionEffect[] getPotionEffectsForUser() {return this.potionEffectsForUser;}

@@ -22,7 +22,7 @@ public class ExtendedEntityStats implements IExtendedEntityProperties
 	
 	private int doriki, dorikiCmd, bounty, bountyCmd, belly, bellyCmd, extol, extolCmd, cola = 100, maxCola = 100, hakiTimer = 0, ultraCola = 0, gear = 1;
 	private String akumaNoMiUsed = "N/A", faction = "N/A", race = "N/A", fightStyle = "N/A", crew = "N/A", zoanPoint = "N/A";
-	private boolean isLogia, hasShadow = true, hasHeart = true, firstTime = true, hasHakiActive = false, hasBusoHakiActive = false, hasKenHakiActive = false, kilo = false, hasYamiPower = false;
+	private boolean isLogia, hasShadow = true, hasHeart = true, firstTime = true, hasHakiActive = false, hasBusoHakiActive = false, hasKenHakiActive = false, kilo = false, hasYamiPower = false, hasColaBackpack = false;
 	
 	private String[] hotbarAbilities = new String[8];
 	private String[] devilFruitAbilities = new String[256];
@@ -83,6 +83,7 @@ public class ExtendedEntityStats implements IExtendedEntityProperties
 		props.setBoolean("hasBusoHakiActive", this.hasBusoHakiActive);
 		props.setBoolean("hasKenHakiActive", this.hasKenHakiActive);
 		props.setBoolean("hasYamiPower", this.hasYamiPower);
+		props.setBoolean("hasColaBackpack", this.hasColaBackpack);
 		
 		props.setBoolean("isInCombatMode", this.isInCombatMode);		
 		
@@ -139,6 +140,7 @@ public class ExtendedEntityStats implements IExtendedEntityProperties
 		this.hasBusoHakiActive = props.getBoolean("hasBusoHakiActive");
 		this.hasKenHakiActive = props.getBoolean("hasKenHakiActive");
 		this.hasYamiPower = props.getBoolean("hasYamiPower");
+		this.hasColaBackpack = props.getBoolean("hasColaBackpack");
 		
 		this.isInCombatMode = props.getBoolean("isInCombatMode");
 		
@@ -193,6 +195,7 @@ public class ExtendedEntityStats implements IExtendedEntityProperties
 		props.setBoolean("hasBusoHakiActive", false);
 		props.setBoolean("hasKenHakiActive", false);
 		props.setBoolean("hasYamiPower", false);
+		props.setBoolean("hasColaBackpack", false);
 		
 		props.setBoolean("isInCombatMode", false);		
 
@@ -528,6 +531,9 @@ public class ExtendedEntityStats implements IExtendedEntityProperties
 	
 	public void setYamiPower(boolean bool) { this.hasYamiPower = bool; }
 	public boolean hasYamiPower() { return hasYamiPower; } 
+	
+	public void setColaBackpack(boolean bool) { this.hasColaBackpack = bool; }
+	public boolean hasColaBackpack() { return hasColaBackpack; }
 	
 	public void setTempPreviousAbility(String temp) { this.tempPreviousAbility = temp; }
 	public String getTempPreviousAbility() { return this.tempPreviousAbility; }
