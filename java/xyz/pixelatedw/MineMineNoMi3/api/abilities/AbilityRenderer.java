@@ -4,10 +4,12 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
+import xyz.pixelatedw.MineMineNoMi3.ID;
 
 @SideOnly(Side.CLIENT)
 public class AbilityRenderer extends Render
@@ -40,22 +42,12 @@ public class AbilityRenderer extends Render
     	this.rotZ = ablAttr.getProjectileZRotation();
     	
     	this.model = ablAttr.getProjectileModel();
-		
-    	/*this.scaleX = 1;
-    	this.scaleY = 1;
-    	this.scaleZ = 1;
-
-    	this.red = 255;
-    	this.green = 0;
-    	this.blue = 0;
-    	this.alpha = 255;
-    	
-    	this.model = new ModelCube();*/
     	
     	GL11.glPushMatrix();
     	
     	GL11.glTranslatef((float)par2, (float)par4, (float)par6);
-    	GL11.glDisable(GL11.GL_TEXTURE_2D);
+    	if(this.texture == null)
+    		GL11.glDisable(GL11.GL_TEXTURE_2D);
     	GL11.glEnable(GL11.GL_BLEND);
     	GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA); 
     	
@@ -72,11 +64,15 @@ public class AbilityRenderer extends Render
     	GL11.glColor4f((float)this.red/255, (float)this.green/255, (float)this.blue/255, this.alpha/255);
     	GL11.glScaled(this.scaleX, this.scaleY, this.scaleZ);
     	
+    	if(this.texture != null)
+    		Minecraft.getMinecraft().renderEngine.bindTexture(this.getEntityTexture(entity));
+    	
 		if(this.model != null)
 			this.model.render(entity, (float)par2, (float)par4, (float)par6, 0.0F, 0.0F, 0.0625F);
 		
     	GL11.glDisable(GL11.GL_BLEND);
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
+    	if(this.texture == null)
+    		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		
 		GL11.glPopMatrix();
 	}
@@ -84,10 +80,7 @@ public class AbilityRenderer extends Render
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) 
 	{
-		if(this.texture != null)
-			return this.texture;
-		else
-			return null;
+		return this.texture;
 	}
 }
 

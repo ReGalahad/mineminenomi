@@ -13,4 +13,6 @@ public class WyMathHelper
     public static double clampd(double val, double min, double max) { return Math.max(min, Math.min(max, val)); }
     
     public static int clampi(int val, int min, int max) { return Math.max(min, Math.min(max, val)); }
+    
+    public static double lerp(double a, double b, double f) { return a + (b - a) * f; }
 }

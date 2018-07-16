@@ -8,16 +8,16 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.DamageSource;
+import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.DokuProjectiles;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.EntityMorphVenomDemon;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketSyncInfo;
 
 public class DokuAbilities 
 {
@@ -27,8 +27,6 @@ public class DokuAbilities
 	
 	public static class VenomDemon extends Ability
 	{
-		private EntityMorphVenomDemon demonDummy;
-		
 		public VenomDemon() 
 		{
 			super(ListAttributes.VENOMDEMON); 
@@ -36,35 +34,27 @@ public class DokuAbilities
 		
 		public void startPassive(EntityPlayer player) 
 		{
-			demonDummy = new EntityMorphVenomDemon(player.worldObj);
-			demonDummy.setPositionAndRotation(player.posX, player.posY, player.posZ, player.rotationPitch, player.rotationYaw);
-			demonDummy.setOwner(player);
-			player.worldObj.spawnEntityInWorld(demonDummy);
-			
 			ExtendedEntityStats props = ExtendedEntityStats.get(player);
 			
-			if(props.getZoanPoint().isEmpty())
+			if (props.getZoanPoint().isEmpty())
 				props.setZoanPoint("n/a");
-				
-			
-			if(props.getZoanPoint().toLowerCase().equals("n/a"))
-			{
-				props.setZoanPoint("doku");
-				WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
-			}
+
+			props.setZoanPoint(ID.ZOANMORPH_DOKU);
+			WyHelper.sendMsgToPlayer(player, "<" + player.getDisplayName() + "> Venom Demon !");
+			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
+			WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));
 		}
 		
 		public void duringPassive(EntityPlayer player, int passiveTimer) 
 		{
-			player.addPotionEffect(new PotionEffect(Potion.invisibility.id, 20, 1, true));
 			if(!WyHelper.isBlockNearby(player, 2, Blocks.water, Blocks.flowing_water, ListMisc.KairosekiOre, ListMisc.KairosekiBlock))
 			{
-				if (player.worldObj.getBlock((int)player.posX - 1, (int)player.posY - 1, (int)player.posZ) != Blocks.air
-				&& player.worldObj.getBlock((int)player.posX - 1, (int)player.posY - 1, (int)player.posZ) != ListMisc.Poison
-				&& player.worldObj.getBlock((int)player.posX - 1, (int)player.posY - 1, (int)player.posZ) != ListMisc.Ope
-				&& player.worldObj.getBlock((int)player.posX - 1, (int)player.posY - 1, (int)player.posZ) != ListMisc.OpeMid
-				&& player.worldObj.getBlock((int)player.posX - 1, (int)player.posY - 1, (int)player.posZ) != Blocks.bedrock)
-					player.worldObj.setBlock((int)player.posX - 1, (int)player.posY, (int)player.posZ, ListMisc.DemonPoison);
+				if (player.worldObj.getBlock((int)player.posX, (int)player.posY - 1, (int)player.posZ - 1) != Blocks.air
+				&& player.worldObj.getBlock((int)player.posX, (int)player.posY - 1, (int)player.posZ - 1) != ListMisc.Poison
+				&& player.worldObj.getBlock((int)player.posX, (int)player.posY - 1, (int)player.posZ - 1) != ListMisc.Ope
+				&& player.worldObj.getBlock((int)player.posX, (int)player.posY - 1, (int)player.posZ - 1) != ListMisc.OpeMid
+				&& player.worldObj.getBlock((int)player.posX, (int)player.posY - 1, (int)player.posZ - 1) != Blocks.bedrock)
+					player.worldObj.setBlock((int)player.posX, (int)player.posY, (int)player.posZ - 1, ListMisc.DemonPoison);
 			}
 		}		
 		
@@ -78,15 +68,13 @@ public class DokuAbilities
 		
 		public void endPassive(EntityPlayer player) 
 		{
-			demonDummy.setDead();
-			
-			player.removePotionEffect(Potion.invisibility.id);
 			ExtendedEntityStats props = ExtendedEntityStats.get(player);
 			
-			if(props.getZoanPoint().toLowerCase().equals("doku"))
+			if(props.getZoanPoint().toLowerCase().equals(ID.ZOANMORPH_DOKU))
 			{
 				props.setZoanPoint("n/a");	
-				WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);	
+				WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
+				WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));
 			}
 		}
 	}

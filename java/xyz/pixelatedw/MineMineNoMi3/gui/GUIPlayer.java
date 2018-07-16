@@ -16,6 +16,7 @@ import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyRenderHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 
 public class GUIPlayer extends GuiScreen
@@ -122,6 +123,7 @@ public class GUIPlayer extends GuiScreen
 		int posY = (this.height - 256) / 2;
 
 		this.buttonList.add(new GuiButton(1, posX - 23, posY + 210, 80, 20, I18n.format(ID.LANG_GUI_ABILITIES)));
+		this.buttonList.add(new GuiButton(2, posX + 63, posY + 210, 80, 20, I18n.format(ID.LANG_GUI_QUESTS)));
 		
 		//this.buttonList.add(new GuiButton(2, posX + 63, posY + 210, 80, 20, I18n.format("gui.epithet.name")));
 	}
@@ -130,7 +132,8 @@ public class GUIPlayer extends GuiScreen
 	{
 		switch(button.id)
 		{
-			case 1: player.openGui(MainMod.getMineMineNoMi(), 4, player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ);
+			case 1: player.openGui(MainMod.getMineMineNoMi(), 4, player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ); break;
+			case 2: player.openGui(MainMod.getMineMineNoMi(), 5, player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ); break;
 		}
 	}
 	

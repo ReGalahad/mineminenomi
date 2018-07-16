@@ -2,6 +2,7 @@ package xyz.pixelatedw.MineMineNoMi3.proxy;
 
 import java.util.ArrayList;
 
+import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
@@ -9,6 +10,8 @@ import net.minecraft.entity.Entity;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityRenderer;
+import xyz.pixelatedw.MineMineNoMi3.blocks.renderers.RenderBlockDenDenMushi;
+import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityDenDenMushi;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.MobRenderer;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.arlongPirates.EntityArlong;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.arlongPirates.EntityChew;
@@ -32,7 +35,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.models.ModelMarineWith
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.models.ModelMorgan;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDenDenMushi;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDoppelman;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.models.ModelBlockDenDenMushi;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.models.ModelDenDenMushi;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirate;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirateCaptain;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirateWithGun;
@@ -59,11 +62,6 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.models.ModelLu
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.models.ModelLucciLeopard;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.models.ModelSpandam;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.EntityMorphVenomDemon;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.EntityZoanPowerBison;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.RenderZoanMorph;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelPowerBison;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelVenomDemon;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListDevilFruits;
 
 public class ClientProxy extends CommonProxy
@@ -117,13 +115,18 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityPearl.class, new MobRenderer(new ModelPearl(), "pearl"));
 
 		//Zoan / Morphs
-		RenderingRegistry.registerEntityRenderingHandler(EntityMorphVenomDemon.class, new RenderZoanMorph(new ModelVenomDemon(), "venomdemon"));
+		/*RenderingRegistry.registerEntityRenderingHandler(EntityMorphVenomDemon.class, new RenderZoanMorph(new ModelVenomDemon(), "venomdemon"));
 		RenderingRegistry.registerEntityRenderingHandler(EntityZoanPowerBison.class, new RenderZoanMorph(new ModelPowerBison(), "bisonpower", 1.4, new float[] {0, 0.8f, 0}));
+		RenderingRegistry.registerEntityRenderingHandler(EntityZoanSpeedBison.class, new RenderZoanMorph(new ModelSpeedBison(), "bisonspeed", 1.4, new float[] {0, 0.8f, 0}));*/
 
 		//Others
 		RenderingRegistry.registerEntityRenderingHandler(EntityDoppelman.class, new MobRenderer(new ModelMarine(), "doppelman"));
-		RenderingRegistry.registerEntityRenderingHandler(EntityDenDenMushi.class, new MobRenderer(new ModelBlockDenDenMushi(), "dendenmushi"));
+		RenderingRegistry.registerEntityRenderingHandler(EntityDenDenMushi.class, new MobRenderer(new ModelDenDenMushi(), "dendenmushi"));
 
+		//Special Renderers
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDenDenMushi.class, new RenderBlockDenDenMushi());
+		//MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ListMisc.DenDenMushi), new RenderItemDenDenMushi(new RenderBlockDenDenMushi(), new TileEntityDenDenMushi()));
+		
 	}
 	
 	public void spawnCustomParticles(Entity theEntity, String particleType, double posX, double posY, double posZ, double motionX, double motionY, double motionZ)

@@ -33,8 +33,6 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityKumadori
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityLucci;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityLucciL;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntitySpandam;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.EntityMorphVenomDemon;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.EntityZoanPowerBison;
 
 public class ListEntities 
 {
@@ -88,11 +86,7 @@ public class ListEntities
 		WyRegistry.registerMob("Don Krieg", EntityDonKrieg.class);
 		WyRegistry.registerMob("Gin", EntityGin.class);
 		WyRegistry.registerMob("Pearl", EntityPearl.class);
-		
-		//Zoan / Morphs
-		WyRegistry.registerMob("Morph Venom Demon", EntityMorphVenomDemon.class);
-		WyRegistry.registerMob("Zoan Power Bison", EntityZoanPowerBison.class);
-		
+				
 		//Others
 		WyRegistry.registerMob("Doppelman", EntityDoppelman.class);
 		WyRegistry.registerMob("Den Den Mushi", EntityDenDenMushi.class, 0xFF00FF, 0x00FF00);

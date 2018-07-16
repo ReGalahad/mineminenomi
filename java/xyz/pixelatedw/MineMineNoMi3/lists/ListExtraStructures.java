@@ -13,6 +13,14 @@ import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityCustomSpawner;
 public class ListExtraStructures
 {
 	
+	public static void buildDojo(int posX, int posY, int posZ, World world)
+	{			
+		TileEntityCustomSpawner spw1 = new TileEntityCustomSpawner().setSpawnerMob(ID.PROJECT_ID + ".Dojo Master").setSpawnerLimit(1);
+		
+		world.setBlock(posX + 5, posY + 3, posZ + 11, ListMisc.CustomSpawner );
+		world.setTileEntity(posX + 5, posY + 3, posZ + 11, spw1);
+	}
+	
 	public static void buildCamp(int posX, int posY, int posZ, World world)
 	{
 		String toSpawn1 = ID.PROJECT_ID + ".Marine with Sword";
@@ -102,21 +110,30 @@ public class ListExtraStructures
 		world.setTileEntity(posX + x2, posY + 2, posZ + 39, chest2);
 		if(world.rand.nextInt(100) + world.rand.nextDouble() <= 100)
 		{
-			chest2.setInventorySlotContents((int) WyMathHelper.randomWithRange(0, 26), new ItemStack(Items.bread, (int) WyMathHelper.randomWithRange(1, 3), 0));	
-			chest2.setInventorySlotContents((int) WyMathHelper.randomWithRange(0, 26), new ItemStack(Items.bread, (int) WyMathHelper.randomWithRange(0, 1), 0));
+			chest2.setInventorySlotContents((int) WyMathHelper.randomWithRange(0, 26), new ItemStack(Items.bread, (int) WyMathHelper.randomWithRange(1, 5), 0));	
+			chest2.setInventorySlotContents((int) WyMathHelper.randomWithRange(0, 26), new ItemStack(Items.bread, (int) WyMathHelper.randomWithRange(1, 2), 0));
+			if(world.rand.nextInt(100) + world.rand.nextDouble() <= 10)
+				chest2.setInventorySlotContents((int) WyMathHelper.randomWithRange(0, 26), new ItemStack(Items.melon, (int) WyMathHelper.randomWithRange(5, 10), 0));	
 		}
 		if(world.rand.nextInt(100) + world.rand.nextDouble() <= 55)
 		{
 			chest2.setInventorySlotContents((int) WyMathHelper.randomWithRange(0, 26), new ItemStack(Items.baked_potato, (int) WyMathHelper.randomWithRange(0, 5), 0));	
-			chest2.setInventorySlotContents((int) WyMathHelper.randomWithRange(0, 26), new ItemStack(Items.apple, (int) WyMathHelper.randomWithRange(0, 2), 0));	
+			chest2.setInventorySlotContents((int) WyMathHelper.randomWithRange(0, 26), new ItemStack(Items.apple, (int) WyMathHelper.randomWithRange(1, 10), 0));	
+			if(world.rand.nextInt(100) + world.rand.nextDouble() <= 50)
+				chest2.setInventorySlotContents((int) WyMathHelper.randomWithRange(0, 26), new ItemStack(Items.melon, (int) WyMathHelper.randomWithRange(5, 10), 0));				
 		}
 		if(world.rand.nextInt(100) + world.rand.nextDouble() <= 20)
 		{
 			chest2.setInventorySlotContents((int) WyMathHelper.randomWithRange(0, 26), new ItemStack(ListMisc.Cola, (int) WyMathHelper.randomWithRange(0, 3), 0));	
 			if(world.rand.nextInt(100) + world.rand.nextDouble() <= 50)
-				chest2.setInventorySlotContents((int) WyMathHelper.randomWithRange(0, 26), new ItemStack(Items.cooked_porkchop, (int) WyMathHelper.randomWithRange(1, 2), 0));	
+			{
+				if(world.rand.nextInt(100) + world.rand.nextDouble() <= 50)
+					chest2.setInventorySlotContents((int) WyMathHelper.randomWithRange(0, 26), new ItemStack(Items.cooked_fished, (int) WyMathHelper.randomWithRange(1, 4), 0));
+				else
+					chest2.setInventorySlotContents((int) WyMathHelper.randomWithRange(0, 26), new ItemStack(Items.cooked_fished, (int) WyMathHelper.randomWithRange(1, 4), 1));
+			}
 			else
-				chest2.setInventorySlotContents((int) WyMathHelper.randomWithRange(0, 26), new ItemStack(Items.cooked_beef, (int) WyMathHelper.randomWithRange(1, 2), 0));
+				chest2.setInventorySlotContents((int) WyMathHelper.randomWithRange(0, 26), new ItemStack(Items.cooked_chicken, (int) WyMathHelper.randomWithRange(1, 2), 0));
 		}
 		if(world.rand.nextInt(100) + world.rand.nextDouble() <= 10)
 			chest2.setInventorySlotContents((int) WyMathHelper.randomWithRange(0, 26), new ItemStack(ListMisc.Cola, (int) WyMathHelper.randomWithRange(0, 5), 0));	
@@ -138,9 +155,10 @@ public class ListExtraStructures
 			chest3.setInventorySlotContents((int) WyMathHelper.randomWithRange(0, 26), new ItemStack(ListMisc.Box1, 1, 0));
 		if(world.rand.nextInt(100) + world.rand.nextDouble() <= 10)
 			chest3.setInventorySlotContents((int) WyMathHelper.randomWithRange(0, 26), new ItemStack(ListMisc.UltraCola, 1, 0));
+		if(world.rand.nextInt(100) + world.rand.nextDouble() <= 7)
+			chest3.setInventorySlotContents((int) WyMathHelper.randomWithRange(0, 26), new ItemStack(ListMisc.Box2, 1, 0));
 		if(world.rand.nextInt(100) + world.rand.nextDouble() <= 5)
 			chest3.setInventorySlotContents((int) WyMathHelper.randomWithRange(0, 26), new ItemStack(ListMisc.Box3, 1, 0));
-
 	}
 	
 	public static void buildSmallShip(int posX, int posY, int posZ, World world, String faction)
@@ -199,6 +217,8 @@ public class ListExtraStructures
 			chest1.setInventorySlotContents((int) WyMathHelper.randomWithRange(0, 26), new ItemStack(Items.boat, 1, 0));	
 		if(world.rand.nextInt(100) + world.rand.nextDouble() <= 5)
 			chest1.setInventorySlotContents((int) WyMathHelper.randomWithRange(0, 26), new ItemStack(ListMisc.Box1, 1, 0));
+		if(world.rand.nextInt(100) + world.rand.nextDouble() <= 1)
+			chest1.setInventorySlotContents((int) WyMathHelper.randomWithRange(0, 26), new ItemStack(ListMisc.Box2, 1, 0));
 	
 		TileEntityChest chest2 = new TileEntityChest();
 		world.setTileEntity(posX + 8, posY + 2, posZ + 25, chest2);
@@ -210,13 +230,15 @@ public class ListExtraStructures
 		if(world.rand.nextInt(100) + world.rand.nextDouble() <= 45)
 		{
 			chest2.setInventorySlotContents((int) WyMathHelper.randomWithRange(0, 26), new ItemStack(Items.baked_potato, (int) WyMathHelper.randomWithRange(0, 5), 0));	
-			chest2.setInventorySlotContents((int) WyMathHelper.randomWithRange(0, 26), new ItemStack(Items.apple, (int) WyMathHelper.randomWithRange(0, 2), 0));	
+			chest2.setInventorySlotContents((int) WyMathHelper.randomWithRange(0, 26), new ItemStack(Items.apple, (int) WyMathHelper.randomWithRange(1, 4), 0));
+			if(world.rand.nextInt(100) + world.rand.nextDouble() <= 70)
+				chest2.setInventorySlotContents((int) WyMathHelper.randomWithRange(0, 26), new ItemStack(Items.melon, (int) WyMathHelper.randomWithRange(5, 10), 0));
 		}
 		if(world.rand.nextInt(100) + world.rand.nextDouble() <= 10)
 		{
 			chest2.setInventorySlotContents((int) WyMathHelper.randomWithRange(0, 26), new ItemStack(ListMisc.Cola, (int) WyMathHelper.randomWithRange(0, 3), 0));	
 			if(world.rand.nextInt(100) + world.rand.nextDouble() <= 50)
-				chest2.setInventorySlotContents((int) WyMathHelper.randomWithRange(0, 26), new ItemStack(Items.cooked_porkchop, (int) WyMathHelper.randomWithRange(0, 2), 0));	
+				chest2.setInventorySlotContents((int) WyMathHelper.randomWithRange(0, 26), new ItemStack(Items.cooked_chicken, (int) WyMathHelper.randomWithRange(0, 2), 0));	
 			else
 				chest2.setInventorySlotContents((int) WyMathHelper.randomWithRange(0, 26), new ItemStack(Items.cooked_beef, (int) WyMathHelper.randomWithRange(0, 2), 0));
 		}

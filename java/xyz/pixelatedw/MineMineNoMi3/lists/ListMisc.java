@@ -33,6 +33,7 @@ import xyz.pixelatedw.MineMineNoMi3.blocks.dials.BlockDialImpact;
 import xyz.pixelatedw.MineMineNoMi3.blocks.dials.BlockDialMilky;
 import xyz.pixelatedw.MineMineNoMi3.blocks.dials.BlockDialReject;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityCustomSpawner;
+import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityDenDenMushi;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityOpe;
 import xyz.pixelatedw.MineMineNoMi3.items.AkumaNoMiBox;
 import xyz.pixelatedw.MineMineNoMi3.items.BellyPouch;
@@ -156,7 +157,7 @@ public class ListMisc
 	public static ItemAbilityWeapon TabiraYuki = new ItemAbilityWeapon(8);
 	
 	public static void init()
-	{
+	{		
 		DimensionManager.registerProviderType(ID.DIMENSION_ID_SCENARIOARENA, WorldProviderScenarioArena.class, true);
 		DimensionManager.registerDimension(ID.DIMENSION_ID_SCENARIOARENA, ID.DIMENSION_ID_SCENARIOARENA);
 		
@@ -207,7 +208,7 @@ public class ListMisc
  		addITEM(Kikoku								, "Kikoku"					, ListCreativeTabs.tabWeapons); 	
  		addITEM(Kiribachi							, "Kiribachi"				, ListCreativeTabs.tabWeapons); 
  		addITEM(Yoru								, "Yoru"					, ListCreativeTabs.tabWeapons); 
- 		addITEM(Biseto								, "Biseto"					, ListCreativeTabs.tabWeapons); 
+ 		addITEM(Biseto								, "Bisento"					, ListCreativeTabs.tabWeapons); 
  		addITEM(Hook								, "Hook"					, ListCreativeTabs.tabWeapons);	
  		addITEM(Umbrella							, "Umbrella"				, ListCreativeTabs.tabWeapons);	
 		addITEM(Jitte								, "Jitte"					, ListCreativeTabs.tabWeapons);	
@@ -243,7 +244,7 @@ public class ListMisc
  		addBLOCK(KairosekiOre		, "Kairoseki Ore"		, 3.5F							, null							, ListCreativeTabs.tabMisc);
  		addBLOCK(KairosekiBlock		, "Kairoseki Block"		, 3.5F							, null							, ListCreativeTabs.tabMisc);
  		addBLOCK(EnchantmentTable	, "Kairoseki Table"		, 3.5F							, null							, ListCreativeTabs.tabMisc);
- 		addBLOCK(DenDenMushi		, "Den Den Mushi"		, 3.5F							, null							, ListCreativeTabs.tabMisc);
+ 		addBLOCK(DenDenMushi		, "Den Den Mushi"		, 3.5F							, TileEntityDenDenMushi.class	, ListCreativeTabs.tabMisc);
  		addBLOCK(SkyBlock			, "Sky Block"			, 1.5F							, null							, ListCreativeTabs.tabMisc);
  		addBLOCK(Barrier			, "Crash Barrier"		, Float.POSITIVE_INFINITY		, null							, null);
  		addBLOCK(Poison				, "Poison"				, 1.5F							, null							, null);

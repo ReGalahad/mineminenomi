@@ -8,6 +8,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.ModelCube;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.ModelSphere;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.EffectType;
+import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelArrow;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelGomuBazooka;
 
 public class ListExtraAttributes
@@ -42,7 +43,7 @@ public class ListExtraAttributes
 	public static AbilityAttribute NORMALBULLET = new AbilityAttribute("Bullet").setProjectileModel(new ModelSphere()).setProjectileDamage(2).setProjectileSize(.5, .5, .5).setProjectileTicks(100).setProjectileColor("#D3D3D3");
 	public static AbilityAttribute KAIROSEKIBULLET = new AbilityAttribute("Kairoseki Bullet").setProjectileModel(new ModelSphere()).setProjectileDamage(4).setProjectileSize(.5, .5, .5).setProjectileTicks(100).setProjectileColor("#F3F3F3");
 	public static AbilityAttribute POPGREEN = new AbilityAttribute("Pop Green").setProjectileModel(new ModelSphere()).setProjectileDamage(2).setProjectileSize(.5, .5, .5).setProjectileTicks(100).setProjectileColor("#7ccc6a");
-	public static AbilityAttribute KUJAARROW = new AbilityAttribute("Kuja Arrow").setProjectileModel(new ModelCube()).setProjectileDamage(4).setProjectileSize(3, .5, .5).setProjectileTicks(100).setProjectileColor("#7ccc6a");
+	public static AbilityAttribute KUJAARROW = new AbilityAttribute("Kuja Arrow").setProjectileModel(new ModelArrow()).setProjectileYRotation(-90).setProjectileTexture("kujaarrow").setProjectileDamage(4).setProjectileSize(1.25, 1.25, 1.25).setProjectileTicks(100);
 
 	public static AbilityAttribute DIALAXE = new AbilityAttribute("Axe Dial").setProjectileModel(new ModelCube()).setProjectileDamage(5).setProjectileSize(1.5, 0.4, 6).setProjectileTicks(100).setProjectileColor("69E3FF");
 	public static AbilityAttribute DIALMILKY = new AbilityAttribute("Milky Dial").setProjectileModel(new ModelSphere()).setProjectileSize(.1, .1, .1).setProjectileTicks(40).setProjectileColor("69E3FF").setProjectileMoveThroughBlocks(true);

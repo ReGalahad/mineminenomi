@@ -1,10 +1,13 @@
 package xyz.pixelatedw.MineMineNoMi3.entities.zoan.models;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 
 public class ModelPowerBison extends ModelZoanMorph 
 {
@@ -160,24 +163,22 @@ public class ModelPowerBison extends ModelZoanMorph
     protected double distanceMovedTotal = 0.0D;
     
     public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float headYaw, float headPitch, float scaleFactor, Entity ent)
-    {
-		super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, headYaw, headPitch, scaleFactor, ent);
-
+    {    	
 	    double[] animationLegMovement = new double[]
-				{-20, -30, -40, -50, -60, -50, -40, -30, -20, -10, 0, 10, 20, 30, 40, 50, 40, 30, 20, 10, 0, -10, -20};       	    
+				{-20, -25, -30, -35, -40, -45, -50, -55, -60, -55, -50, -45, -40, -35, -30, -25, -20, -15, -10, -5, 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5, 0, -5, -10, -15, -20};       	    
 	
 	    double[] animationArmMovement = new double[]
-				{0, -10, -20, -30, -20, -10, 0, 10, 20, 30, 20, 10, 0};       	
+				{0, -5, -10, -15, -20, -25, -30, -25, -20, -15, -10, -5, 0, 5, 10, 15, 20, 25, 30, 25, 20, 15, 10, 5, 0};       	
 	    
         updateDistanceMovedTotal(ent);
-        int cycleIndexLeg = (int) ((getDistanceMovedTotal() * 3) % animationLegMovement.length);
-        int cycleIndexArm = (int) ((getDistanceMovedTotal() * 2) % animationArmMovement.length);
+        int cycleIndexLeg = (int) ((getDistanceMovedTotal() * 4) % animationLegMovement.length);
+        int cycleIndexArm = (int) ((getDistanceMovedTotal() * 1.25) % animationArmMovement.length);
         
 	    if(!Minecraft.getMinecraft().isGamePaused())
 	    {
 	    	if(ent.getDistance(ent.prevPosX, ent.prevPosY, ent.prevPosZ) > 0)
-	    	{
-		    	leftleg4.rotateAngleX = (float) degToRad(animationLegMovement[cycleIndexLeg]);
+	    	{		
+	    		leftleg4.rotateAngleX = (float) degToRad(animationLegMovement[cycleIndexLeg]);
 		    	rightleg4.rotateAngleX = (float) degToRad(animationLegMovement[cycleIndexLeg]) * -1;
 		    	
 		    	leftarm1.rotateAngleX = (float) degToRad(animationArmMovement[cycleIndexArm]);
@@ -194,10 +195,6 @@ public class ModelPowerBison extends ModelZoanMorph
 		    	
 	    }
 		
-		/*leftleg4.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.0F * limbSwingAmount;
-		rightleg4.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.0F * limbSwingAmount;
-		leftarm1.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.0F * limbSwingAmount;
-		rightarm1.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.0F * limbSwingAmount;*/
     }
     
     protected float degToRad(double degrees)
@@ -236,6 +233,10 @@ public class ModelPowerBison extends ModelZoanMorph
 
 	public ModelRenderer getHandRenderer() 
 	{
-		return this.rightarm1;
+		GL11.glScaled(1.2, 1.2, 1);
+		GL11.glTranslated(-0.1, -0.1, 0.05);
+		GL11.glRotated(-7, 1, 0, 0);
+		GL11.glRotated(7, 0, 0, 1);
+		return this.rightarm2;
 	}
 }

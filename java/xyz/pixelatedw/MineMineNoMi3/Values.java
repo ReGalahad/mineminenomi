@@ -6,7 +6,9 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import xyz.pixelatedw.MineMineNoMi3.api.quests.Quest;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
+import xyz.pixelatedw.MineMineNoMi3.lists.ListQuests;
 
 public class Values 
 {
@@ -25,9 +27,9 @@ public class Values
 	public static final Item[] KAIROSEKI_ITEMS = new Item[] {ListMisc.Kairoseki, ListMisc.KairosekiBullets, ListMisc.DenseKairoseki};
 	
 	public static HashMap<String, String> abilityDesc = new HashMap<String, String>();
-	
+
 	static
-	{
+	{		
 		abilityDesc.put("hiken", "Turns the user\\'s fist into flames and launches it towards the target.");
 		abilityDesc.put("higan", "Turns the user\\'s fingertips into flames and shoots bullets made of fire from them.");
 		abilityDesc.put("hidaruma", "Creates small green fireballs that set the target on fire.");

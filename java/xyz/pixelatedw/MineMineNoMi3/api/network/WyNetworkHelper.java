@@ -20,6 +20,11 @@ public class WyNetworkHelper
 		MainMod.dispatcher.sendTo(message, player);
 	}
 	
+	public static final void sendToAll(IMessage message)
+	{
+		MainMod.dispatcher.sendToAll(message);
+	}
+		
 	public static final void sendToAllAround(IMessage message, int dimension, double x, double y, double z, double range)
 	{
 		MainMod.dispatcher.sendToAllAround(message, new NetworkRegistry.TargetPoint(dimension, x, y, z, range));

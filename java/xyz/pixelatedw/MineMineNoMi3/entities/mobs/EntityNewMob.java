@@ -9,7 +9,7 @@ public class EntityNewMob extends EntityMob implements IDynamicRenderer
 {
 
 	private boolean hasHaki = false, isLogia = false;
-	private String texture = "N/A", model = "N/A";
+	private String texture = "n/a", model = "n/a";
 	private int state;
 
 	public EntityNewMob(World worldIn) 

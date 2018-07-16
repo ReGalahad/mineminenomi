@@ -10,7 +10,6 @@ import xyz.pixelatedw.MineMineNoMi3.abilities.ExtraAbilities.SpeedPoint;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.EntityZoanMorph;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
@@ -19,7 +18,7 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 public class UshiBisonAbilities 
 {
 
-	public static Ability[] abilitiesArray = new Ability[] {new PowerPoint(), new FiddleBanff(), new KokuteiCross()};
+	public static Ability[] abilitiesArray = new Ability[] {new PowerPoint(), new SpeedPoint(), new FiddleBanff(), new KokuteiCross()};
 
 	public static class FiddleBanff extends Ability
 	{
@@ -32,7 +31,7 @@ public class UshiBisonAbilities
 		{	
 			ExtendedEntityStats props = ExtendedEntityStats.get(player);
 			
-			if(props.getZoanPoint().equals("power") && !this.isOnCooldown)
+			if((props.getZoanPoint().equals("power") || props.getZoanPoint().equals("speed") ) && !this.isOnCooldown)
 			{
 
 				double mX = (double)(-MathHelper.sin(player.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(player.rotationPitch / 180.0F * (float)Math.PI) * 0.4);
@@ -50,9 +49,9 @@ public class UshiBisonAbilities
 				
 				super.use(player);
 			}
-			else if(!props.getZoanPoint().equals("power"))
+			else if(!props.getZoanPoint().equals("power") && !props.getZoanPoint().equals("speed"))
 			{
-				WyHelper.sendMsgToPlayer(player, "" + this.getAttribute().getAttributeName() + " can only be used while Power Point is active !");
+				WyHelper.sendMsgToPlayer(player, "" + this.getAttribute().getAttributeName() + " can only be used while Power Point or Speed Point is active !");
 			}
 		}
 		
@@ -61,8 +60,7 @@ public class UshiBisonAbilities
 			if(currentCooldown > 130)
 			{
 				for(EntityLivingBase e : WyHelper.getEntitiesNear(player, 1.6))
-					if(!(e instanceof EntityZoanMorph))
-						e.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) player), 6);
+					e.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) player), 6);
 			}
 	    }
 	}

@@ -7,6 +7,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 
 public class AbilityProjectile extends EntityThrowable
@@ -32,12 +33,10 @@ public class AbilityProjectile extends EntityThrowable
 		this.ticks = attr.getProjectileTicks();
 		this.maxticks = ticks;
 		this.user = player;
-		if(this.attr != null)
-		{
-			/*this.motionX *= this.attr.getSpeed();
-			this.motionY *= this.attr.getSpeed();
-			this.motionZ *= this.attr.getSpeed();
-			
+		this.motionX *= attr.getProjectileSpeed();
+		this.motionY *= attr.getProjectileSpeed();
+		this.motionZ *= attr.getProjectileSpeed();
+			/*
 			if(WyHelper.instance().get4Directions(player) == WyHelper.Direction.SOUTH)
 				this.attr.setPosition(this.attr.getPosition()[0], this.attr.getPosition()[1], this.attr.getPosition()[2]);
 			else if(WyHelper.instance().get4Directions(player) == WyHelper.Direction.EAST)
@@ -47,7 +46,6 @@ public class AbilityProjectile extends EntityThrowable
 			else if(WyHelper.instance().get4Directions(player) == WyHelper.Direction.WEST)
 				this.attr.setPosition(this.attr.getPosition()[2], this.attr.getPosition()[1], this.attr.getPosition()[0]);
 			*/
-		}
 	}
 
 	public AbilityAttribute getAttribute()
@@ -89,7 +87,9 @@ public class AbilityProjectile extends EntityThrowable
 			{
 				if(this.attr.getProjectileExplosionPower() > 0)
 					this.worldObj.newExplosion(this, this.posX, this.posY, this.posZ, this.attr.getProjectileExplosionPower(), this.attr.canExplosionSetFire(), this.attr.canExplosionDestroyBlocks());
-
+				else if(this.attr.getProjectileNewExplosionPower() > 0)
+					WyHelper.explosion(this, this.posX, this.posY, this.posZ, this.attr.getProjectileNewExplosionPower());
+				
 				tasksImapct(hit);
 				
 				if(!this.attr.canProjectileMoveThroughBlocks())

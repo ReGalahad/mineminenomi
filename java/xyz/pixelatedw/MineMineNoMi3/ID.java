@@ -2,6 +2,7 @@ package xyz.pixelatedw.MineMineNoMi3;
 
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.util.EnumHelper;
 
 public class ID 
@@ -59,10 +60,10 @@ public class ID
 	
 	PROJECT_ID = "mineminenomi",
 	PROJECT_NAME = "Mine Mine no Mi",
-	PROJECT_VERSION = "0.3.2",
+	PROJECT_VERSION = "0.4.0",
 	PROJECT_MCVERSION = "1.7.10",
 	PROJECT_SOURCEFOLDER = "D:/Programming/Minecraft Modding/Mine Mine no Mi/src/main/resources/",
-
+	
 	PARTICLE_NAME_PIKA = "pika",
 	PARTICLE_NAME_YUKI = "yuki",
 	PARTICLE_NAME_MERA = "mera",
@@ -96,6 +97,11 @@ public class ID
 	FSTYLE_OKAMA = "Okama",
 	FSTYLE_HASSHOKEN = "Hasshoken",
 	
+	ZOANMORPH_POWER = "power",
+	ZOANMORPH_SPEED = "speed",
+	ZOANMORPH_DOKU = "doku",
+	ZOANMORPH_PHOENIX = "phoenix",
+	
 	LANG_KEYS_CATEGORY = "category.mmnmkeys", //Mine Mine no Mi Keys
 	LANG_KEY_PLAYER = "key.playerui", //Player UI
 	LANG_KEY_COMBATMODE = "key.combatmode", //Combat Mode
@@ -111,7 +117,16 @@ public class ID
 	LANG_GUI_RACE = "gui.race.name",
 	LANG_GUI_STYLE = "gui.style.name",
 	LANG_GUI_ABILITIES = "gui.abilities.name",
-
+	LANG_GUI_QUESTS = "gui.quests.name",
+	LANG_GUI_CURRENTQUEST = "gui.currentquest.name",
+	
+	LANG_QUEST_SWORDSMANPROGRESSION_01 = "quest.swordsmanprogression01.name",
+	
+	LANG_QUEST_BOUNTYLOWLEVEL_01 = "quest.bountylowlevel01.name",
+			
+	LANG_QUEST_SWORDSMANPROGRESSION_01_DESC = "quest.swordsmanprogression01.desc",
+	
+	
 	DIMENSION_NAME_SCENARIOARENA = "scenarioarena",
 	
 	SCENARIO_ROMANCEDAWN_CAPTAINMORGAN = "scenario_cptmorgan",
@@ -120,7 +135,7 @@ public class ID
 	
 	public static final int 
 	
-	DIMENSION_ID_SCENARIOARENA = 4,
+	DIMENSION_ID_SCENARIOARENA = DimensionManager.getNextFreeDimId(),
 	
 	ENTITY_STATE = 27,
 	

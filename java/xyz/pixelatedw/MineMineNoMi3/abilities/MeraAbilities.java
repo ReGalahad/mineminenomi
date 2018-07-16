@@ -21,7 +21,7 @@ public class MeraAbilities
 	
 	public static class Hiken extends Ability
 	{
-		public Hiken() 
+		public Hiken()
 		{
 			super(ListAttributes.HIKEN);
 		}

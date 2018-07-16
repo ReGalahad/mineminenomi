@@ -41,7 +41,7 @@ public class PacketSync implements IMessage
 		public IMessage onMessage(PacketSync message, MessageContext ctx) 
 		{
 			EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);	 
+			ExtendedEntityStats props = ExtendedEntityStats.get(player);
 
 			props.loadNBTData(message.data);
 				

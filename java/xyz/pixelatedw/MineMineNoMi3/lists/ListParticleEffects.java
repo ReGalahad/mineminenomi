@@ -64,7 +64,7 @@ public class ListParticleEffects
 	
 }
 
-/** XXX Tornado **/
+/** XXX Particle Effect Template : Tornado */
 class Tornado extends TimerTask
 {
 	
@@ -120,7 +120,7 @@ class Tornado extends TimerTask
 	}
 }
 
-/** XXX GroundEffect1 **/
+/** XXX Particle Effect Template : GroundEffect1 */
 class GroundEffect1 extends TimerTask
 {
 	
@@ -175,7 +175,7 @@ class GroundEffect1 extends TimerTask
 	}
 }
 
-/** XXX ChargeEffect1 **/
+/** XXX Particle Effect Template : ChargeEffect1 */
 class ChargeEffect1 extends TimerTask
 {
 	
@@ -232,7 +232,7 @@ class ChargeEffect1 extends TimerTask
 	}
 }
 
-/** XXX Mist **/
+/** XXX Particle Effect Template : Mist */
 class Mist extends TimerTask
 {
 	
@@ -270,7 +270,7 @@ class Mist extends TimerTask
 	
 }
 
-/** XXX Sphere **/
+/** XXX Particle Effect Template : Sphere */
 class Sphere extends TimerTask
 {
 	

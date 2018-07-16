@@ -13,10 +13,11 @@ public class GUIHandler implements IGuiHandler
 	{
 		switch(id)
 		{
-			case 0: return id == 0 && world.getBlock(x, y, z) == ListMisc.EnchantmentTable ? new GUIEnchantmentTable(player, world, x, y, z) : null;
-			case 1: return id == 1 ? new GUIPlayer(player) : null;
-			case 2: return id == 2 ? new GUICC(player) : null;
-			case 4: return id == 4 ? new GUISelectHotbarAbilities(player) : null;
+			case 0: return (world.getBlock(x, y, z) == ListMisc.EnchantmentTable ? new GUIEnchantmentTable(player, world, x, y, z) : null);
+			case 1: return new GUIPlayer(player);
+			case 2: return new GUICC(player);
+			case 4: return new GUISelectHotbarAbilities(player);
+			case 5: return new GUIQuests(player);
 		}
 		return null;
 	}

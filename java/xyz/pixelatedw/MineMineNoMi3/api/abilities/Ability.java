@@ -36,15 +36,16 @@ public class Ability
 	public Ability(AbilityAttribute attr)
 	{
 		this.attr = new AbilityAttribute(attr);
-		ticksForCooldown = attr.getAbilityCooldown();
-		ticksForCharge = attr.getAbilityCharges();
-		ticksForRepeater = attr.getAbilityCooldown();		
+		ticksForCooldown = this.attr.getAbilityCooldown();
+		ticksForCharge = this.attr.getAbilityCharges();
+		ticksForRepeater = this.attr.getAbilityCooldown();
 	}
 
 	public AbilityAttribute getAttribute() { return attr; }
 	
 	public void use(EntityPlayer player)
 	{		
+		System.out.println(this.attr);
 		if(!isOnCooldown)
 		{
 			if(projectile != null)
@@ -203,9 +204,7 @@ public class Ability
 		isOnCooldown = true;
 		
 		if(projectile != null)
-		{
 			player.worldObj.spawnEntityInWorld(projectile);
-		}
 		
 		if(!player.getDisplayName().equals(FMLCommonHandler.instance().getMinecraftServerInstance().getServerOwner()))
 		{

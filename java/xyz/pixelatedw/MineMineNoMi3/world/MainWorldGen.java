@@ -4,7 +4,9 @@ import java.util.Random;
 
 import cpw.mods.fml.common.IWorldGenerator;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
+import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -14,9 +16,11 @@ import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.api.Schematic;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WySchematicHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListExtraStructures;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketWorldData;
 
 public class MainWorldGen implements IWorldGenerator 
 {
@@ -37,11 +41,13 @@ public class MainWorldGen implements IWorldGenerator
 				
 		if(MainConfig.enableShips)
 		{
-			this.addStructureSpawn(WySchematicHelper.load("marineShip"), world, random, i , j * 2, 1, 1, 1.8 * MainConfig.rateShipsSpawn);
+			this.addStructureSpawn(WySchematicHelper.load("marineShip"), world, random, i * 2, j * 2, 1, 1, 1.8 * MainConfig.rateShipsSpawn);
 			this.addStructureSpawn(WySchematicHelper.load("pyrateShip"), world, random, i * 2, j * 2, 1, 1, 2.1 * MainConfig.rateShipsSpawn);
 			this.addStructureSpawn(WySchematicHelper.load("pyrateLargeShip"), world, random, i * 2, j * 2, 1, 1, 1.8 * MainConfig.rateShipsSpawn);
 			this.addStructureSpawn(WySchematicHelper.load("marineLargeShip"), world, random, i * 2, j * 2, 1, 1, 1.9 * MainConfig.rateShipsSpawn);
 		}
+		
+		this.addStructureSpawn(WySchematicHelper.load("dojo"), world, random, i, j, 1, 1, 100);
 		
 		this.addDialSpawn(ListMisc.DialEisenBlock, world, random, i, j, 1, 1, 100);
 		this.addDialSpawn(ListMisc.DialFireBlock, world, random, i, j, 1, 1, 70);
@@ -127,7 +133,7 @@ public class MainWorldGen implements IWorldGenerator
 			    		WyTelemetry.addStat("spawnedStructure_" + s.getName(), 1);
 				}
 			}
-			else if(s.getName().toLowerCase().contains("camp"))
+			/*else if(s.getName().toLowerCase().contains("camp"))
 			{
 				if( (biome.biomeName.equals("Beach") || biome.biomeName.equals("Forest") || biome.biomeName.equals("Desert") || biome.biomeName.equals("Plains")) && checkForCampSpawn(s, world, posX, posY, posZ))
 				{
@@ -135,30 +141,51 @@ public class MainWorldGen implements IWorldGenerator
 					WySchematicHelper.build(s, world, posX, posY, posZ);
 					ListExtraStructures.buildCamp(posX, posY, posZ, world);
 				}
+			}*/
+			else if(s.getName().toLowerCase().contains("dojo"))
+			{
+				ExtendedWorldData worldData = ExtendedWorldData.get(world);
+				
+				if(worldData.getTotalDojosSpawned() < 5 && posY > 50 && world.getBlockLightValue(posX, posY, posZ) > 10)
+				{
+					if( (biome.biomeName.equals("Beach") || biome.biomeName.equals("Plains") || biome.biomeName.equals(biome.desert.biomeName) || biome.biomeName.equals(biome.savanna.biomeName)
+							|| biome.biomeName.equals(biome.icePlains.biomeName) || biome.biomeName.equals(biome.desert.biomeName) || biome.biomeName.equals(biome.swampland.biomeName)) 
+							&& checkForDojoSpawn(s, world, posX, posY, posZ))
+					{		
+						System.out.println("" + s.getName() + " spawned at /tp @p " + posX + " " + posY + " " + posZ);
+						WySchematicHelper.build(s, world, posX, posY, posZ);	
+						ListExtraStructures.buildDojo(posX, posY, posZ, world);
+						worldData.countUpDojoSpawned();
+						WyNetworkHelper.sendToAll(new PacketWorldData(worldData));
+						
+				    	if(!ID.DEV_EARLYACCESS)
+				    		WyTelemetry.addStat("spawnedStructure_" + s.getName(), 1);
+					}
+				}
 			}
 		}	
 	}
-	
-	private Block[] campBlocks = new Block[] {Blocks.dirt, Blocks.grass, Blocks.stone, Blocks.sand, Blocks.sandstone, Blocks.cobblestone};
-	
-	private boolean checkForCampSpawn(Schematic s, World world, int posX, int posY, int posZ)
+
+	private boolean checkForDojoSpawn(Schematic s, World world, int posX, int posY, int posZ)
 	{
-		for(int i = 0; i < s.getWidth(); i++)
-		for(int j = 0; j < s.getHeight(); j++)
-		for(int k = 0; k < s.getLength(); k++)
-		{	
-			for(Block b : campBlocks)
-			{
-				if( world.getBlock(posX + i, posY - 1, posZ + k) == b )
-				{
-					if( world.getBlock(posX, posY + 2, posZ) == Blocks.air)
-						return true;
-					else return false;
-				}
-				else return false;
-			}
-		}		
+		boolean corner1 = world.getBlock(posX, posY - 1, posZ) != Blocks.air;
+		boolean corner2 = world.getBlock(posX + s.getWidth(), posY - 1, posZ) != Blocks.air;
+		boolean corner3 = world.getBlock(posX, posY - 1, posZ + s.getLength()) != Blocks.air;
+		boolean corner4 = world.getBlock(posX + s.getWidth(), posY - 1, posZ + s.getLength()) != Blocks.air;		
+		
+		if(corner1 && corner2 && corner3 && corner4)
+		{
+			return true;
+		}
+		
 		return false;
+	}
+	
+	private boolean canReplace(World world, int posX, int posY, int posZ)
+	{
+		Block at = world.getBlock(posX, posY, posX);
+		Material material = at.getMaterial();
+		return material.isReplaceable() || material == Material.plants || material == Material.leaves;
 	}
 	
 	private boolean checkForShipSpawn(Schematic s, World world, int posX, int posY, int posZ)
