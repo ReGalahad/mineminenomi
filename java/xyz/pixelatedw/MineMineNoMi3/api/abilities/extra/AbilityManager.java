@@ -3,6 +3,7 @@ package xyz.pixelatedw.MineMineNoMi3.api.abilities.extra;
 import java.util.HashMap;
 
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.WyRegistry;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
 
@@ -22,7 +23,10 @@ public class AbilityManager
 		if(registeredAbilities.containsKey(WyHelper.getFancyName(ab.getAttribute().getAttributeName())))
 			WyDebug.info(ab.getAttribute().getAttributeName() + " ability is already registered ! Ignoring request.");
 		else
+		{
 			registeredAbilities.put(WyHelper.getFancyName(ab.getAttribute().getAttributeName()), ab);
+			WyRegistry.registerName("ability." + WyHelper.getFancyName(ab.getAttribute().getAttributeName()) + ".name", ab.getAttribute().getAttributeName());
+		}
 	}
 	
 	public Ability getAbilityByName(String key)

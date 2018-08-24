@@ -17,6 +17,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.abilities.CyborgAbilities;
+import xyz.pixelatedw.MineMineNoMi3.abilities.SwordsmanAbilities;
 import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
@@ -77,6 +78,16 @@ public class PacketPlayer implements IMessage
 			final EntityPlayer player = Minecraft.getMinecraft().thePlayer;
 			ExtendedEntityStats props = ExtendedEntityStats.get(player);
 
+		    boolean canAnimate = true;
+			double frame = 0;
+			
+			if(message.cmd.equals("ChangeRotation"))
+			{
+				float initialRotation = player.rotationYaw;
+				
+				player.rotationYaw = initialRotation + 10;
+			}
+			
 			if(message.cmd.equals("ElThorThunder"))
 			{
 				int i = (int) message.mX;
@@ -159,7 +170,7 @@ public class PacketPlayer implements IMessage
 		{
 			EntityPlayer player = ctx.getServerHandler().playerEntity;
 			ExtendedEntityStats props = ExtendedEntityStats.get(player);
-	
+			
 			if(message.cmd.equals("delete_book"))
 			{
 				props.clearRacialAbilities();
@@ -175,6 +186,9 @@ public class PacketPlayer implements IMessage
 					props.setMaxCola(100);
 					props.setCola(props.getMaxCola());
 				}
+				
+				if(props.getFightStyle().equals(ID.FSTYLE_SWORDSMAN))						
+					props.addRacialAbility(SwordsmanAbilities.SHISHISHISONSON);
 				
 				for(ItemStack is : player.inventory.mainInventory)
 					if(is != null && is.getItem() instanceof CharacterCreator)

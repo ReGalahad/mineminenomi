@@ -1,5 +1,8 @@
 package xyz.pixelatedw.MineMineNoMi3.api.quests;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -17,7 +20,7 @@ public class QuestProperties implements IExtendedEntityProperties
 	private boolean hasPrimaryActive = false;
 	
 	private Quest[] questsList = new Quest[4];
-	
+	private Quest[] completedQuests = new Quest[2048];	
 	
 	public QuestProperties(EntityPlayer entity) 
 	{
@@ -46,6 +49,16 @@ public class QuestProperties implements IExtendedEntityProperties
 			{
 				props.setString("inProgressQuest_" + i, this.questsList[i].getQuestID());
 				props.setDouble("progressForQuest_" + i, this.questsList[i].getProgress());
+				if(this.questsList[i].extraData != null)
+					props.setTag("extraData_" + i, this.questsList[i].extraData);
+			}
+		}
+		
+		for(int i = 0; i < completedQuests.length; i++)
+		{
+			if(this.completedQuests[i] != null)
+			{
+				props.setString("completedQuest_" + i, this.completedQuests[i].getQuestID());
 			}
 		}
 
@@ -65,12 +78,21 @@ public class QuestProperties implements IExtendedEntityProperties
 				//System.out.println(props.getString("inProgressQuest_" + i));
 				this.questsList[i] = (!props.getString("inProgressQuest_" + i).isEmpty() || QuestManager.instance().getQuestByNameFromList(ListQuests.allQuests, props.getString("inProgressQuest_" + i)) != null) ? QuestManager.instance().getQuestByNameFromList(ListQuests.allQuests, props.getString("inProgressQuest_" + i)).getClass().newInstance() : null;
 				if(this.questsList[i] != null)
+				{
 					this.questsList[i].setProgress(this.thePlayer, props.getDouble("progressForQuest_" + i));
+					this.questsList[i].extraData = (NBTTagCompound) props.getTag("extraData_" + i);
+				}
 			}
 		}
 		catch (Exception e)
 		{
+			Logger.getGlobal().log(Level.SEVERE, "Quest is not registered correctly or could not be found in the master list !");
 			e.printStackTrace();
+		}
+		
+		for(int i = 0; i < completedQuests.length; i++)
+		{
+			this.completedQuests[i] = (!props.getString("completedQuest_" + i).isEmpty() || QuestManager.instance().getQuestByNameFromList(ListQuests.allQuests, props.getString("completedQuest_" + i)) != null) ? QuestManager.instance().getQuestByNameFromList(ListQuests.allQuests, props.getString("completedQuest_" + i)) : null;
 		}
 
 	}
@@ -78,21 +100,37 @@ public class QuestProperties implements IExtendedEntityProperties
 	public void init(Entity entity, World world) {}
 
 
-	public void addQuestInTracker(Quest quest)
+	public boolean addQuestInTracker(Quest quest)
 	{
 		if((quest.isPrimary() && !this.hasPrimaryActive) || !quest.isPrimary())
 		{
 			for(int i = 0; i < questsList.length; i++)
 			{
-				if(this.questsList[i] == null)
+				if(this.questsList[i] == null && !this.hasQuestInTracker(quest))
 				{
 					if(quest.isPrimary())
 						this.hasPrimaryActive = true;
 					this.questsList[i] = quest;
-					break;
+					return true;
 				}
 			}
 		}
+		
+		return false;
+	}
+	
+	public boolean addCompletedQuest(Quest quest)
+	{
+		for(int i = 0; i < completedQuests.length; i++)
+		{
+			if(this.completedQuests[i] == null && !this.hasQuestCompleted(quest))
+			{
+				this.completedQuests[i] = quest;
+				return true;
+			}
+		}
+		
+		return false;
 	}
 	
 	public void removeQuestFromTracker(Quest questTemplate)
@@ -114,6 +152,19 @@ public class QuestProperties implements IExtendedEntityProperties
 		for(int i = 0; i < questsList.length; i++)
 		{
 			if(this.questsList[i] != null && this.questsList[i].getQuestID().toLowerCase().equals(questTemplate.getQuestID().toLowerCase()))
+			{
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	public boolean hasQuestCompleted(Quest questTemplate)
+	{
+		for(int i = 0; i < this.completedQuests.length; i++)
+		{
+			if(this.completedQuests[i] != null && this.completedQuests[i].getQuestID().toLowerCase().equals(questTemplate.getQuestID().toLowerCase()))
 			{
 				return true;
 			}
@@ -167,7 +218,7 @@ public class QuestProperties implements IExtendedEntityProperties
 		{
 			if(this.questsList[i] != null && this.questsList[i].getQuestID().toLowerCase().equals(questTemplate.getQuestID().toLowerCase()))
 			{
-				this.questsList[i].setProgress(this.thePlayer, progress);
+				this.questsList[i].alterProgress(this.thePlayer, progress);
 				break;
 			}
 		}
@@ -198,11 +249,22 @@ public class QuestProperties implements IExtendedEntityProperties
 		{
 			if(this.questsList[i] != null)
 			{
-				this.questsList[i] = null;
+				if(this.questsList[i].isPrimary())
+					this.hasPrimaryActive = false;
+				this.questsList[i] = null;				
 			}
 		}
 	}
 
-	
+	public void clearCompletedQuests()
+	{
+		for(int i = 0; i < this.completedQuests.length; i++)
+		{
+			if(this.completedQuests[i] != null)
+			{
+				this.completedQuests[i] = null;
+			}
+		}
+	}
 
 }

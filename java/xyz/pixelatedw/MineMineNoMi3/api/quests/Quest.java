@@ -2,6 +2,9 @@ package xyz.pixelatedw.MineMineNoMi3.api.quests;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumChatFormatting;
+import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketQuestSync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListQuests;
@@ -9,6 +12,8 @@ import xyz.pixelatedw.MineMineNoMi3.lists.ListQuests;
 public abstract class Quest
 {
 
+	protected NBTTagCompound extraData;
+	
 	protected double questProgress;
 	
 	public abstract String getQuestID();
@@ -17,16 +22,23 @@ public abstract class Quest
 	
 	public abstract String[] getQuestDescription();
 	
-	public abstract void startQuest(EntityPlayer player);
+	public void startQuest(EntityPlayer player)
+	{
+		WyHelper.sendMsgToPlayer(player, EnumChatFormatting.GREEN + this.getQuestName() + " has started !");
+	}
 	
 	public abstract boolean isPrimary();
+	
+	public abstract boolean isRepeatable();
 	
 	public void finishQuest(EntityPlayer player)
 	{
 		QuestProperties questProps = QuestProperties.get(player);
-
-		questProps.removeQuestFromTracker(ListQuests.swordsmanProgression01);
+		questProps.removeQuestFromTracker(this);
+		questProps.addCompletedQuest(this);
 		WyNetworkHelper.sendTo(new PacketQuestSync(questProps), (EntityPlayerMP) player);
+
+		WyHelper.sendMsgToPlayer(player, EnumChatFormatting.GREEN + "'" + this.getQuestName() + "' has been completed !");
 	}
 	
 	public abstract boolean canStart(EntityPlayer player);
@@ -58,8 +70,8 @@ public abstract class Quest
 		else
 			this.questProgress = this.getMaxProgress();
 	
-		if(this.isFinished(player))
-			this.finishQuest(player);		
+		//if(this.isFinished(player))
+		//	this.finishQuest(player);		
 	}
 
 	public void alterProgress(EntityPlayer player, double progress) 
@@ -69,8 +81,8 @@ public abstract class Quest
 		else
 			this.questProgress = this.getMaxProgress();
 	
-		if(this.isFinished(player))
-			this.finishQuest(player);		
+		//if(this.isFinished(player))
+		//	this.finishQuest(player);		
 	}
 
 }

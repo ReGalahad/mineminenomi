@@ -22,12 +22,12 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 public class FishKarateAbilities 
 {
 	public static Ability UCHIMIZU = new Uchimizu();
-	public static Ability SOSHARK = new Soshark();
+	public static Ability MURASAME = new Murasame();
 	public static Ability KACHIAGEHAISOKU = new KachiageHaisoku();
 	public static Ability SAMEHADASHOTEI = new SamehadaShotei();
 	public static Ability KARAKUSAGAWARASEIKEN = new KarakusagawaraSeiken();
 	
-	public static Ability[] abilitiesArray = new Ability[] {UCHIMIZU, SOSHARK, SAMEHADASHOTEI, KARAKUSAGAWARASEIKEN, KACHIAGEHAISOKU};
+	public static Ability[] abilitiesArray = new Ability[] {UCHIMIZU, MURASAME, SAMEHADASHOTEI, KARAKUSAGAWARASEIKEN, KACHIAGEHAISOKU};
 	
 	public static class Uchimizu extends Ability
 	{
@@ -43,16 +43,16 @@ public class FishKarateAbilities
 		}
 	}
 	
-	public static class Soshark extends Ability
+	public static class Murasame extends Ability
 	{
-		public Soshark() 
+		public Murasame() 
 		{
-			super(ListAttributes.SOSHARK); 
+			super(ListAttributes.MURASAME); 
 		}
 			
 		public void use(EntityPlayer player)
 		{
-			this.projectile = new FishKarateProjectiles.Soshark(player.worldObj, player, ListAttributes.SOSHARK);
+			this.projectile = new FishKarateProjectiles.Soshark(player.worldObj, player, ListAttributes.MURASAME);
 			super.use(player);
 		}
 	}

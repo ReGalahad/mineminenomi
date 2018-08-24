@@ -1,9 +1,13 @@
 package xyz.pixelatedw.MineMineNoMi3.abilities;
 
+import java.util.Random;
+import java.util.Timer;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
+import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
@@ -12,6 +16,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.math.Sphere;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.MeraProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
+import xyz.pixelatedw.MineMineNoMi3.lists.ListParticleEffects;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 
@@ -56,7 +61,7 @@ public class MeraAbilities
 		
 		public void startCharging(EntityPlayer player)
 		{
-			if(!this.isOnCooldown)			
+			if(!this.isOnCooldown)		
 				WyNetworkHelper.sendTo(new PacketParticles("daienkai2", player), (EntityPlayerMP) player);
 			super.startCharging(player);
 		}
@@ -70,7 +75,7 @@ public class MeraAbilities
 		{						
 			this.projectile = new MeraProjectiles.DaiEnkaiEntei(player.worldObj, player, ListAttributes.DAIENKAIENTEI);
 			super.endCharging(player);
-		};	
+		}
 	
 	}
 

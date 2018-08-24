@@ -1,23 +1,115 @@
 package xyz.pixelatedw.MineMineNoMi3.abilities;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
+import net.minecraft.world.World;
+import xyz.pixelatedw.MineMineNoMi3.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper.Direction;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
+import xyz.pixelatedw.MineMineNoMi3.api.math.ISphere;
+import xyz.pixelatedw.MineMineNoMi3.api.math.Sphere;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
+import xyz.pixelatedw.MineMineNoMi3.blocks.BlockStringMid;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.ItoProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
+import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 
 public class ItoAbilities 
 {
 	
-	public static Ability[] abilitiesArray = new Ability[] {new Parasite(), new SoraNoMichi(), new Overheat()};
+	public static Ability[] abilitiesArray = new Ability[] {new Parasite(), new SoraNoMichi(), new Overheat(), new Tamaito(), new KumoNoSugaki(), new Torikago()};
+	
+	
+	public static class Torikago extends Ability
+	{
+		private boolean canSpawnRoom = true;
+		
+		public Torikago() 
+		{
+			super(ListAttributes.TORIKAGO); 
+		}
+		
+		public void use(EntityPlayer player)
+		{
+			if(!this.isOnCooldown && canSpawnRoom)
+			{
+				final World world = player.worldObj;
+				Sphere.generate((int)player.posX, (int)player.posY, (int)player.posZ, 20, new ISphere()
+				{
+					public void call(int x, int y, int z)
+					{
+						DevilFruitsHelper.placeIfCanReplaceBlock(world, x, y ,z, ListMisc.StringWall);
+					}
+				});
+				player.worldObj.setBlock((int) player.posX, (int) player.posY, (int) player.posZ, ListMisc.StringMid);
+				
+				canSpawnRoom = false;
+				super.use(player);
+			}
+			else if(!canSpawnRoom)
+			{
+				if(WyHelper.isBlockNearby(player, 20, ListMisc.StringMid))
+				{
+					Block b = WyHelper.getBlockNearby(player, 20, ListMisc.StringMid);
+					((BlockStringMid)b).clearRoom();
+					canSpawnRoom = true;
+				}
+			}
+		} 
+		
+		public void alterSpawnFlag(boolean flag)
+		{
+			canSpawnRoom = flag;
+		}
+	}
+	
+	public static class KumoNoSugaki extends Ability
+	{
+		public KumoNoSugaki() 
+		{
+			super(ListAttributes.KUMONOSUGAKI); 
+		}
+		
+		public void duringPassive(EntityPlayer player, int passiveTimer)
+		{		
+			WyNetworkHelper.sendTo(new PacketParticles("kumonosugaki", player), (EntityPlayerMP) player);
+			
+			if(passiveTimer >= 15)
+			{
+				this.setPassiveActive(false);
+				this.startCooldown();
+				this.startExtUpdate(player);
+				super.endPassive(player);
+			}
+		}
+		
+		public void endPassive(EntityPlayer player) 
+		{
+			this.startCooldown();
+			this.startExtUpdate(player);
+		}
+	}
+	
+	public static class Tamaito extends Ability
+	{
+		public Tamaito() 
+		{
+			super(ListAttributes.TAMAITO); 
+		}
+		
+		public void use(EntityPlayer player)
+		{
+			this.projectile = new ItoProjectiles.Tamaito(player.worldObj, player, attr);
+			super.use(player);
+		}
+	}
 	
 	public static class Overheat extends Ability
 	{
@@ -30,7 +122,7 @@ public class ItoAbilities
 		{
 			this.projectile = new ItoProjectiles.Overheat(player.worldObj, player, attr);
 			super.use(player);
-		};	
+		}
 	}
 	
 	public static class SoraNoMichi extends Ability

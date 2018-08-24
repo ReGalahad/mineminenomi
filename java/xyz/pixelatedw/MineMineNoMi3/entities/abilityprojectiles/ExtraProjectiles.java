@@ -6,6 +6,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import xyz.pixelatedw.MineMineNoMi3.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
@@ -43,20 +44,19 @@ public class ExtraProjectiles
 		
 		public void onUpdate()
 		{
-
-			this.worldObj.setBlock((int)this.posX, (int)this.posY - 1, (int)this.posZ, ListMisc.SkyBlock);
-			this.worldObj.setBlock((int)this.posX + 1, (int)this.posY - 1, (int)this.posZ, ListMisc.SkyBlock);
-			this.worldObj.setBlock((int)this.posX - 1, (int)this.posY - 1, (int)this.posZ, ListMisc.SkyBlock);
-			this.worldObj.setBlock((int)this.posX + 1, (int)this.posY - 1, (int)this.posZ + 1, ListMisc.SkyBlock);
-			this.worldObj.setBlock((int)this.posX + 1, (int)this.posY - 1, (int)this.posZ - 1, ListMisc.SkyBlock);
-			this.worldObj.setBlock((int)this.posX - 1, (int)this.posY - 1, (int)this.posZ + 1, ListMisc.SkyBlock);
-			this.worldObj.setBlock((int)this.posX, (int)this.posY - 1, (int)this.posZ + 1, ListMisc.SkyBlock);
-			this.worldObj.setBlock((int)this.posX, (int)this.posY - 1, (int)this.posZ - 1, ListMisc.SkyBlock);
-			this.worldObj.setBlock((int)this.posX - 1, (int)this.posY - 1, (int)this.posZ - 1, ListMisc.SkyBlock);
-			this.worldObj.setBlock((int)this.posX, (int)this.posY - 2, (int)this.posZ, ListMisc.SkyBlock);
+			DevilFruitsHelper.placeIfCanReplaceBlock(this.worldObj, (int)this.posX, (int)this.posY - 1, (int)this.posZ, ListMisc.SkyBlock);
+			DevilFruitsHelper.placeIfCanReplaceBlock(this.worldObj, (int)this.posX + 1, (int)this.posY - 1, (int)this.posZ, ListMisc.SkyBlock);
+			DevilFruitsHelper.placeIfCanReplaceBlock(this.worldObj, (int)this.posX - 1, (int)this.posY - 1, (int)this.posZ, ListMisc.SkyBlock);
+			DevilFruitsHelper.placeIfCanReplaceBlock(this.worldObj, (int)this.posX + 1, (int)this.posY - 1, (int)this.posZ + 1, ListMisc.SkyBlock);
+			DevilFruitsHelper.placeIfCanReplaceBlock(this.worldObj, (int)this.posX + 1, (int)this.posY - 1, (int)this.posZ - 1, ListMisc.SkyBlock);
+			DevilFruitsHelper.placeIfCanReplaceBlock(this.worldObj, (int)this.posX - 1, (int)this.posY - 1, (int)this.posZ + 1, ListMisc.SkyBlock);
+			DevilFruitsHelper.placeIfCanReplaceBlock(this.worldObj, (int)this.posX, (int)this.posY - 1, (int)this.posZ + 1, ListMisc.SkyBlock);
+			DevilFruitsHelper.placeIfCanReplaceBlock(this.worldObj, (int)this.posX, (int)this.posY - 1, (int)this.posZ - 1, ListMisc.SkyBlock);
+			DevilFruitsHelper.placeIfCanReplaceBlock(this.worldObj, (int)this.posX - 1, (int)this.posY - 1, (int)this.posZ - 1, ListMisc.SkyBlock);
+			DevilFruitsHelper.placeIfCanReplaceBlock(this.worldObj, (int)this.posX, (int)this.posY - 2, (int)this.posZ, ListMisc.SkyBlock);
 			
 			super.onUpdate();
-		}	
+		}
 	}	
 	
 	public static class AxeDialProjectile extends AbilityProjectile

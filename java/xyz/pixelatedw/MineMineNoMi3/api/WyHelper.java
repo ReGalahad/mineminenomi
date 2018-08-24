@@ -134,6 +134,8 @@ public class WyHelper
 		Set set = sorted.entrySet();
 		Iterator i = set.iterator();
 
+		Map.Entry prevEntry = null;
+		
 		File langFolder = new File(ID.PROJECT_SOURCEFOLDER + "/assets/" + ID.PROJECT_ID + "/lang/");
 		langFolder.mkdirs();
 
@@ -145,7 +147,17 @@ public class WyHelper
 				{
 					Map.Entry entry = (Map.Entry) i.next();
 
-					writer.write(entry.getKey() + "=" + entry.getValue() + "\n");
+					if(prevEntry != null)
+					{
+						if( !((String)prevEntry.getKey()).substring(0, 2).equals( ((String)entry.getKey()).substring(0, 2) ))
+						{
+							writer.write("\n");
+						}
+					}
+					
+					writer.write(entry.getKey() + "=" + entry.getValue() + "\n");					
+					
+					prevEntry = entry;
 				}
 				writer.close();
 			} 
@@ -328,9 +340,9 @@ public class WyHelper
 
 		float p = 2 * l - q;
 
-		float r = Math.max(0, HueToRGB(p, q, h + (1.0f / 3.0f)));
-		float g = Math.max(0, HueToRGB(p, q, h));
-		float b = Math.max(0, HueToRGB(p, q, h - (1.0f / 3.0f)));
+		float r = Math.max(0, hueToRGB(p, q, h + (1.0f / 3.0f)));
+		float g = Math.max(0, hueToRGB(p, q, h));
+		float b = Math.max(0, hueToRGB(p, q, h - (1.0f / 3.0f)));
 
 		r = Math.min(r, 1.0f);
 		g = Math.min(g, 1.0f);
@@ -339,7 +351,7 @@ public class WyHelper
 		return new Color(r, g, b);
 	}
 
-	private static float HueToRGB(float p, float q, float h)
+	private static float hueToRGB(float p, float q, float h)
 	{
 		if (h < 0) h += 1;
 
@@ -359,7 +371,8 @@ public class WyHelper
 	
 	public static Color hexToRGB(String hexColor)
 	{
-		return Color.decode("#" + hexColor);
+		if(hexColor.startsWith("#")) return Color.decode(hexColor);
+		else return Color.decode("#" + hexColor);
 	}
 
 	public static void sendMsgToPlayer(EntityPlayer player, String text)

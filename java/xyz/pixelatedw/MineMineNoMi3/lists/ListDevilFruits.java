@@ -27,8 +27,11 @@ import xyz.pixelatedw.MineMineNoMi3.abilities.NoroAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.OpeAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.PikaAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.RokushikiAbilities;
+import xyz.pixelatedw.MineMineNoMi3.abilities.SniperAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.SukeAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.SunaAbilities;
+import xyz.pixelatedw.MineMineNoMi3.abilities.SwordsmanAbilities;
+import xyz.pixelatedw.MineMineNoMi3.abilities.ToriPhoenixAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.UshiBisonAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.YamiAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.YukiAbilities;
@@ -62,6 +65,8 @@ import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.PikaProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.RokushikiProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.SukeProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.SunaProjectiles;
+import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.SwordsmanProjectiles;
+import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.ToriPhoenixProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.YamiProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.YukiProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.items.AkumaNoMi;
@@ -74,7 +79,7 @@ public class ListDevilFruits
 			KageKageNoMi, SunaSunaNoMi, MaguMaguNoMi, DoruDoruNoMi, DokuDokuNoMi, BariBariNoMi, GasuGasuNoMi,
 			YukiYukiNoMi, JikiJikiNoMi, YamiYamiNoMi, ItoItoNoMi, HoroHoroNoMi, SupaSupaNoMi, OriOriNoMi, MeroMeroNoMi,
 			GoeGoeNoMi, KiloKiloNoMi, HanaHanaNoMi, HoruHoruNoMi, BetaBetaNoMi, IshiIshiNoMi, PamuPamuNoMi,
-			UshiUshiNoMiBison;
+			UshiUshiNoMiBison, ToriToriNoMiPhoenix;
 
 	private static final Ability[][] EVERY_FRUIT = 
 		{RokushikiAbilities.abilitiesArray, MeraAbilities.abilitiesArray, HieAbilities.abilitiesArray, BaneAbilities.abilitiesArray, PikaAbilities.abilitiesArray, SukeAbilities.abilitiesArray, 
@@ -82,7 +87,7 @@ public class ListDevilFruits
 				KageAbilities.abilitiesArray, SunaAbilities.abilitiesArray, MaguAbilities.abilitiesArray, DoruAbilities.abilitiesArray, DokuAbilities.abilitiesArray, GasuAbilities.abilitiesArray,
 				YukiAbilities.abilitiesArray, ItoAbilities.abilitiesArray, FishKarateAbilities.abilitiesArray, HakiAbilities.abilitiesArray, CyborgAbilities.abilitiesArray, BariAbilities.abilitiesArray,
 				HoroAbilities.abilitiesArray, GoeAbilities.abilitiesArray, NoroAbilities.abilitiesArray, YamiAbilities.abilitiesArray, GomuAbilities.abilitiesArray, UshiBisonAbilities.abilitiesArray,
-				};
+				SwordsmanAbilities.abilitiesArray, ToriPhoenixAbilities.abilitiesArray, SniperAbilities.abilitiesArray};
 	
 	public static final Object[] ALL_ENTITIES = new Object[] 
 		{RokushikiProjectiles.abilitiesClassesArray, MeraProjectiles.abilitiesClassesArray, HieProjectiles.abilitiesClassesArray, BaneProjectiles.abilitiesClassesArray, PikaProjectiles.abilitiesClassesArray, 
@@ -91,10 +96,12 @@ public class ListDevilFruits
 				MaguProjectiles.abilitiesClassesArray, DoruProjectiles.abilitiesClassesArray, DokuProjectiles.abilitiesClassesArray, GasuProjectiles.abilitiesClassesArray, YukiProjectiles.abilitiesClassesArray,
 				ItoProjectiles.abilitiesClassesArray, FishKarateProjectiles.abilitiesClassesArray, CyborgProjectiles.abilitiesClassesArray, ExtraProjectiles.abilitiesClassesArray, BariProjectiles.abilitiesClassesArray,
 				HoroProjectiles.abilitiesClassesArray, GoeProjectiles.abilitiesClassesArray, NoroProjectiles.abilitiesClassesArray, YamiProjectiles.abilitiesClassesArray, GomuProjectiles.abilitiesClassesArray,
-				};
+				SwordsmanProjectiles.abilitiesClassesArray, ToriPhoenixProjectiles.abilitiesClassesArray};
 	
 	public static void init() 
 	{
+		ToriToriNoMiPhoenix = new AkumaNoMi(EnumFruitType.MYTHICALZOAN, ToriPhoenixAbilities.abilitiesArray);
+		addITEM(ToriToriNoMiPhoenix, "Tori Tori no Mi, Model Phoenix");
 		UshiUshiNoMiBison = new AkumaNoMi(EnumFruitType.ZOAN, UshiBisonAbilities.abilitiesArray);
 		addITEM(UshiUshiNoMiBison, "Ushi Ushi no Mi, Model Bison");
 		//JikiJikiNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, JIKI);

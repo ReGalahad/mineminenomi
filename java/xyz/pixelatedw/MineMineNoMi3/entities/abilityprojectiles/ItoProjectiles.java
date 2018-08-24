@@ -18,7 +18,22 @@ public class ItoProjectiles
 	
 	static
 	{
+		abilitiesClassesArray.add(new Object[] {Tamaito.class, ListAttributes.TAMAITO});
 		abilitiesClassesArray.add(new Object[] {Overheat.class, ListAttributes.OVERHEAT});
+	}
+	
+	public static class Tamaito extends AbilityProjectile
+	{
+		public Tamaito(World world)
+		{super(world);}
+		
+		public Tamaito(World world, double x, double y, double z)
+		{super(world, x, y, z);}
+		
+		public Tamaito(World world, EntityLivingBase player, AbilityAttribute attr) 
+		{		
+			super(world, player, attr);		
+		}
 	}
 	
 	public static class Overheat extends AbilityProjectile

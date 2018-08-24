@@ -99,6 +99,7 @@ public class CyborgProjectiles
 		
 		public void onUpdate()
 		{				
+			/** TODO Change these particles with the custom ones */
 			this.worldObj.spawnParticle(EnumParticleTypes.FLAME.getParticleName(), this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);			
 			super.onUpdate();
 		}

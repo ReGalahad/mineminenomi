@@ -54,7 +54,7 @@ public class MokuAbilities
 		
 	    public void duringCooldown(EntityPlayer player, int currentCooldown)
 	    {
-			if(currentCooldown > 130)
+			if((currentCooldown / 20) > (ListAttributes.WHITELAUNCHER.getAbilityCooldown() / 20) - 3)
 			{
 				for(EntityLivingBase e : WyHelper.getEntitiesNear(player, 1.6))
 					e.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) player), 2);

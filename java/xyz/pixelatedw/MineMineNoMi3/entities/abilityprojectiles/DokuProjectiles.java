@@ -3,15 +3,20 @@ package xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles;
 import java.util.ArrayList;
 import java.util.Random;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.living.EnderTeleportEvent;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
+import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 
 public class DokuProjectiles 
 {
@@ -22,6 +27,38 @@ public class DokuProjectiles
 	{
 		abilitiesClassesArray.add(new Object[] {ChloroBall.class, ListAttributes.CHLOROBALL});
 		abilitiesClassesArray.add(new Object[] {Hydra.class, ListAttributes.HYDRA});
+		abilitiesClassesArray.add(new Object[] {VenomRoad.class, ListAttributes.VENOMROAD});
+	}
+	
+	
+	public static class VenomRoad extends AbilityProjectile
+	{
+		public VenomRoad(World world)
+		{super(world);}
+		
+		public VenomRoad(World world, double x, double y, double z)
+		{super(world, x, y, z);}
+		
+		public VenomRoad(World world, EntityLivingBase player, AbilityAttribute attr) 
+		{		
+			super(world, player, attr);		
+		}	
+		
+		public void tasksImapct(MovingObjectPosition hit)
+		{		
+			if(hit != null)
+			{
+				int x = hit.blockX;
+				int y = hit.blockY;
+				int z = hit.blockZ;
+				
+				if (this.getThrower().isRiding())
+					this.getThrower().mountEntity((Entity)null);
+				EnderTeleportEvent event = new EnderTeleportEvent(this.getThrower(), x, y, z, 5.0F);
+				this.getThrower().setPositionAndUpdate(event.targetX, event.targetY + 1, event.targetZ);
+				this.getThrower().fallDistance = 0.0F;
+			}
+		}
 	}
 	
 	public static class ChloroBall extends AbilityProjectile

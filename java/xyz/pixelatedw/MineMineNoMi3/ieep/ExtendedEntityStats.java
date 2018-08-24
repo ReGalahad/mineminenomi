@@ -22,7 +22,8 @@ public class ExtendedEntityStats implements IExtendedEntityProperties
 	
 	private int doriki, dorikiCmd, bounty, bountyCmd, belly, bellyCmd, extol, extolCmd, cola = 100, maxCola = 100, hakiTimer = 0, ultraCola = 0, gear = 1;
 	private String akumaNoMiUsed = "N/A", faction = "N/A", race = "N/A", fightStyle = "N/A", crew = "N/A", zoanPoint = "N/A";
-	private boolean isLogia, hasShadow = true, hasHeart = true, firstTime = true, hasHakiActive = false, hasBusoHakiActive = false, hasKenHakiActive = false, kilo = false, hasYamiPower = false, hasColaBackpack = false;
+	private boolean isLogia, hasShadow = true, hasHeart = true, firstTime = true, hasHakiActive = false, hasBusoHakiActive = false, hasKenHakiActive = false, kilo = false, hasYamiPower = false, hasColaBackpack = false,
+			isCandleLocked = false;
 	
 	private String[] hotbarAbilities = new String[8];
 	private String[] devilFruitAbilities = new String[256];
@@ -84,6 +85,7 @@ public class ExtendedEntityStats implements IExtendedEntityProperties
 		props.setBoolean("hasKenHakiActive", this.hasKenHakiActive);
 		props.setBoolean("hasYamiPower", this.hasYamiPower);
 		props.setBoolean("hasColaBackpack", this.hasColaBackpack);
+		props.setBoolean("isCandleLocked", this.isCandleLocked);
 		
 		props.setBoolean("isInCombatMode", this.isInCombatMode);		
 		
@@ -141,6 +143,7 @@ public class ExtendedEntityStats implements IExtendedEntityProperties
 		this.hasKenHakiActive = props.getBoolean("hasKenHakiActive");
 		this.hasYamiPower = props.getBoolean("hasYamiPower");
 		this.hasColaBackpack = props.getBoolean("hasColaBackpack");
+		this.isCandleLocked = props.getBoolean("isCandleLocked");
 		
 		this.isInCombatMode = props.getBoolean("isInCombatMode");
 		
@@ -196,6 +199,7 @@ public class ExtendedEntityStats implements IExtendedEntityProperties
 		props.setBoolean("hasKenHakiActive", false);
 		props.setBoolean("hasYamiPower", false);
 		props.setBoolean("hasColaBackpack", false);
+		props.setBoolean("isCandleLocked", false);
 		
 		props.setBoolean("isInCombatMode", false);		
 
@@ -528,6 +532,9 @@ public class ExtendedEntityStats implements IExtendedEntityProperties
 
 	public void setKilo(boolean kilo) { this.kilo = kilo; }
 	public boolean getKilo() { return kilo; } 
+	
+	public void setIsCandleLocked(boolean value) { this.isCandleLocked = value; }
+	public boolean isCandleLocked() { return isCandleLocked; } 
 	
 	public void setYamiPower(boolean bool) { this.hasYamiPower = bool; }
 	public boolean hasYamiPower() { return hasYamiPower; } 

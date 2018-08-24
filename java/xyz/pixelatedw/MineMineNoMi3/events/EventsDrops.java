@@ -59,12 +59,8 @@ public class EventsDrops
 		if(event.entityLiving instanceof EntityPlayer)
 		{	
 			EntityPlayer player = ((EntityPlayer)event.entityLiving);
-			
-			for(int i = 0; i < Values.abilities.size(); i++)
-				WyHelper.removeStackFromInventory(player, new ItemStack(Values.abilities.get(i)));
-			
-			WyHelper.removeStackFromInventory(player, new ItemStack(ListMisc.CharacterCreator));
 
+			WyHelper.removeStackFromInventory(player, new ItemStack(ListMisc.CharacterCreator));
 		}
 	}
 }

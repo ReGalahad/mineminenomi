@@ -12,7 +12,6 @@ import xyz.pixelatedw.MineMineNoMi3.lists.ListQuests;
 
 public class Values 
 {
-	public static List<Item> abilities = new ArrayList();
 	public static List<Item> devilfruits = new ArrayList();
 	public static List<Item> logias = new ArrayList();
 	public static List<Item> miscItems = new ArrayList();
@@ -23,6 +22,7 @@ public class Values
 	public static final int MAX_ULTRACOLA = 10;
 	public static final int MAX_GENERAL = 999999999; //Used by Bounty, Reputation, Belly & Extol
 	public static final int MAX_CREW = 50;
+	public static final int MAX_ACTIVITIES = 4;
 	
 	public static final Item[] KAIROSEKI_ITEMS = new Item[] {ListMisc.Kairoseki, ListMisc.KairosekiBullets, ListMisc.DenseKairoseki};
 	

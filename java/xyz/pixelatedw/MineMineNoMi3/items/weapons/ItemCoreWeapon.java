@@ -6,7 +6,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.client.resources.IResource;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -15,6 +14,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -26,7 +27,8 @@ public class ItemCoreWeapon extends Item
 	private double damage = 1;
 	private double multiplier = 1;
 	private boolean canUseSpecial = false;
-
+	private boolean isPoisonous = false;
+	
 	private IIcon baseIcon, sheathedIcon, hakiImbuedIcon;
 
 	public ItemCoreWeapon(int damage)
@@ -80,12 +82,25 @@ public class ItemCoreWeapon extends Item
 		return this;
 	}
 
-	public boolean hitEntity(ItemStack itemStack, EntityLivingBase attacker, EntityLivingBase target)
+	public boolean hitEntity(ItemStack itemStack, EntityLivingBase target, EntityLivingBase attacker)
 	{
-		itemStack.damageItem(1, target);
+		ExtendedEntityStats props = ExtendedEntityStats.get(attacker);
+
+		if(!props.hasBusoHakiActive())
+			itemStack.damageItem(1, attacker);
+		
+		if(isPoisonous)
+			target.addPotionEffect(new PotionEffect(Potion.poison.id, 100, 0));
+		
 		return true;
 	}
 
+	public ItemCoreWeapon setIsPoisonous()
+	{
+		this.isPoisonous = true;
+		return this;
+	}
+	
 	public Multimap getAttributeModifiers(ItemStack stack)
 	{
 		Multimap multimap = super.getAttributeModifiers(stack);

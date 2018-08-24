@@ -16,6 +16,21 @@ public class SwordsmanProjectiles
 	static
 	{
 		abilitiesClassesArray.add(new Object[] {SanbyakurokujuPoundHo.class, ListAttributes.SANBYAKUROKUJUPOUNDHO});
+		abilitiesClassesArray.add(new Object[] {Yakkodori.class, ListAttributes.YAKKODORI});
+	}
+	
+	public static class Yakkodori extends AbilityProjectile
+	{
+		public Yakkodori(World world)
+		{super(world);}
+		
+		public Yakkodori(World world, double x, double y, double z)
+		{super(world, x, y, z);}
+		
+		public Yakkodori(World world, EntityLivingBase player, AbilityAttribute attr) 
+		{		
+			super(world, player, attr);		
+		}
 	}
 	
 	public static class SanbyakurokujuPoundHo extends AbilityProjectile

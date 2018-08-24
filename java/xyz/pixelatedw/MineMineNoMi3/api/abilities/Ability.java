@@ -30,9 +30,7 @@ public class Ability
 	protected AbilityAttribute attr;
 	protected boolean isOnCooldown = false, isCharging = false, isRepeating = false, passiveActive = false, isDisabled = false;
 	private int ticksForCooldown, ticksForCharge, ticksForRepeater;
-	
-	private int dummy_projectileNumber = 1;
-	
+
 	public Ability(AbilityAttribute attr)
 	{
 		this.attr = new AbilityAttribute(attr);
@@ -44,8 +42,7 @@ public class Ability
 	public AbilityAttribute getAttribute() { return attr; }
 	
 	public void use(EntityPlayer player)
-	{		
-		System.out.println(this.attr);
+	{
 		if(!isOnCooldown)
 		{
 			if(projectile != null)
@@ -89,9 +86,8 @@ public class Ability
 		{
 			try 
 			{
-				player.worldObj.spawnEntityInWorld(projectile.getClass().getDeclaredConstructor(World.class, EntityLivingBase.class, AbilityAttribute.class).newInstance(player.worldObj, player, attr));
-				System.out.println(" i = " + dummy_projectileNumber);
-				dummy_projectileNumber++;
+				if(!player.worldObj.isRemote)
+					player.worldObj.spawnEntityInWorld(projectile.getClass().getDeclaredConstructor(World.class, EntityLivingBase.class, AbilityAttribute.class).newInstance(player.worldObj, player, attr));
 			} 
 			catch (Exception e) 
 			{
@@ -152,7 +148,13 @@ public class Ability
 		isDisabled = bool;
 	}
 	
-	public void endPassive(EntityPlayer player) {}
+	/** Only use super. if the ability is also using passive potion effects ! */
+	public void endPassive(EntityPlayer player) 
+	{
+		if(this.attr.getPotionEffectsForUser() != null)
+			for(PotionEffect p : this.attr.getPotionEffectsForUser())	
+				player.removePotionEffect(p.getPotionID());
+	}
 	
 	public void startPassive(EntityPlayer player) {}
 		
@@ -319,6 +321,8 @@ public class Ability
 			this.player = user;
 			this.attr = attribute;
 			this.setName("Update Thread for " + attr.getAttributeName());
+			ticksForCooldown = this.attr.getAbilityCooldown();
+			ticksForCharge = this.attr.getAbilityCharges();
 		}
 		
 		public void run()
@@ -357,7 +361,6 @@ public class Ability
 							else
 							{
 								isRepeating = false;
-								dummy_projectileNumber = 1;
 								ticksForRepeater = attr.getAbilityCooldown();
 							}
 						}

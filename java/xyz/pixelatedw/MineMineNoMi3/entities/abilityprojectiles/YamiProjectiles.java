@@ -4,15 +4,18 @@ import java.util.ArrayList;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
+import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListExtraAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 
 public class YamiProjectiles 
 {
@@ -57,7 +60,7 @@ public class YamiProjectiles
 		{		
 			super(world, player, attr);		
 		}	
-		
+
 		public void tasksImapct(MovingObjectPosition hit)
 		{
 			if(hit.entityHit != null)
@@ -65,12 +68,18 @@ public class YamiProjectiles
 				WyHelper.createSphere(hit.entityHit, 3, ListMisc.Darkness);
 				WyHelper.createSphere(hit.entityHit, 2, ListMisc.Darkness);
 				WyHelper.createSphere(hit.entityHit, 1, ListMisc.Darkness);
+				
+				WyNetworkHelper.sendTo(new PacketParticles("darkmatter", this.posX, this.posY, this.posZ), (EntityPlayerMP) this.getThrower());
+
 			}
 			else
 			{
 				WyHelper.createSphere(this, 3, ListMisc.Darkness);
 				WyHelper.createSphere(this, 2, ListMisc.Darkness);
 				WyHelper.createSphere(this, 1, ListMisc.Darkness);
+				
+				WyNetworkHelper.sendTo(new PacketParticles("darkmatter", this.posX, this.posY, this.posZ), (EntityPlayerMP) this.getThrower());
+
 			}
 		}
 	}

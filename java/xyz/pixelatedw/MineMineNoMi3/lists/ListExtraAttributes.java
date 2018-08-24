@@ -9,7 +9,8 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.ModelCube;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.ModelSphere;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.EffectType;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelArrow;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelGomuBazooka;
+import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelBazooka;
+import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelFist;
 
 public class ListExtraAttributes
 {
@@ -20,32 +21,32 @@ public class ListExtraAttributes
 	
 	public static AbilityAttribute ELTHORTHUNDER = new AbilityAttribute("El Thor Thunder").setProjectileTicks(500).setProjectileModel(new ModelCube()).setProjectileSize(60, 10, 10).setProjectileColor("77abff").setProjectileExplosion(2);
 	
-	public static AbilityAttribute TSUNOTOKAGEPILLAR = new AbilityAttribute("Tsuno-Tokage Pillar").setProjectileDamage(30).setProjectileModel(new ModelCube()).setProjectileSize(20, 4, 4).setProjectileColor(Color.BLACK).setProjectileTicks(5);
+	public static AbilityAttribute TSUNOTOKAGEPILLAR = new AbilityAttribute("Tsuno-Tokage Pillar").setProjectileDamage(30).setProjectileModel(new ModelCube()).setProjectileSize(4, 4, 20).setProjectileColor(Color.BLACK).setProjectileTicks(5);
+
+	public static AbilityAttribute GOMUGOMUNOPISTOL = new AbilityAttribute("Gomu Gomu no Pistol").setProjectileModel(new ModelFist()).setProjectileTexture("gomugomunopistol").setProjectileSize(3, 3, 3).setModelOffsets(0, 1, 0).setProjectileDamage(6);
+	public static AbilityAttribute GOMUGOMUNOJETPISTOL = new AbilityAttribute("Gomu Gomu no Jet Pistol").setProjectileModel(new ModelFist()).setProjectileTexture("gomugomunojetpistol").setProjectileSize(3, 3, 3).setModelOffsets(0, 1, 0).setProjectileSpeed(4).setProjectileDamage(12);
+	public static AbilityAttribute GOMUGOMUNOELEPHANTGUN = new AbilityAttribute("Gomu Gomu no Elephant Gun").setProjectileTicks(40).setProjectileModel(new ModelFist()).setProjectileTexture("gomugomunoelephantgun").setProjectileSize(15, 15, 13).setModelOffsets(0, 5, 0).setProjectileDamage(20).setProjectileMoveThroughBlocks(true).setProjectileNewExplosion(2);
+	public static AbilityAttribute GOMUGOMUNOKONGGUN = new AbilityAttribute("Gomu Gomu no Kong Gun").setProjectileTicks(30).setProjectileModel(new ModelFist()).setProjectileTexture("gomugomunokonggun").setProjectileSize(15, 15, 13).setModelOffsets(0, 5, 0).setProjectileDamage(30).setProjectileMoveThroughBlocks(true).setProjectileNewExplosion(2);
 	
-	public static AbilityAttribute GOMUGOMUNOPISTOL = new AbilityAttribute("Gomu Gomu no Pistol").setProjectileModel(new ModelCube()).setProjectileColor("F5DEB3").setProjectileSize(3, 1, 1).setProjectileDamage(6);
-	public static AbilityAttribute GOMUGOMUNOJETPISTOL = new AbilityAttribute("Gomu Gomu no Jet Pistol").setProjectileModel(new ModelCube()).setProjectileColor("F5DEB3").setProjectileSize(3, 1, 1).setProjectileSpeed(4).setProjectileDamage(12);
-	public static AbilityAttribute GOMUGOMUNOELEPHANTGUN = new AbilityAttribute("Gomu Gomu no Elephant Gun").setProjectileModel(new ModelCube()).setProjectileColor("491325").setProjectileSize(7, 5, 5).setProjectileDamage(20);
-	public static AbilityAttribute GOMUGOMUNOKONGGUN = new AbilityAttribute("Gomu Gomu no Kong Gun").setProjectileModel(new ModelCube()).setProjectileColor("491325").setProjectileSize(7, 5, 5).setProjectileDamage(30);
-	
-	public static AbilityAttribute GOMUGOMUNOBAZOOKA = new AbilityAttribute("Gomu Gomu no Bazooka").setProjectileModel(new ModelGomuBazooka()).setProjectileColor("F5DEB3").setProjectileSize(3, 1, 1).setProjectileDamage(10);
-	public static AbilityAttribute GOMUGOMUNOJETBAZOOKA = new AbilityAttribute("Gomu Gomu no Jet Bazooka").setProjectileModel(new ModelGomuBazooka()).setProjectileColor("F5DEB3").setProjectileSize(3, 1, 1).setProjectileSpeed(4).setProjectileDamage(16);
-	public static AbilityAttribute GOMUGOMUNOGRIZZLYMAGNUM = new AbilityAttribute("Gomu Gomu no Grizzly Magnum").setProjectileModel(new ModelGomuBazooka()).setProjectileColor("F5DEB3").setProjectileSize(7, 3, 5).setProjectileDamage(30);
-	public static AbilityAttribute GOMUGOMUNOLEOBAZOOKA = new AbilityAttribute("Gomu Gomu no Leo Bazooka").setProjectileModel(new ModelGomuBazooka()).setProjectileColor("2A3439").setProjectileSize(7, 5, 5).setProjectileDamage(50);
+	public static AbilityAttribute GOMUGOMUNOBAZOOKA = new AbilityAttribute("Gomu Gomu no Bazooka").setProjectileModel(new ModelBazooka()).setProjectileTexture("gomugomunobazooka").setProjectileSize(3, 3, 3).setModelOffsets(0, 1, 0).setProjectileDamage(10);
+	public static AbilityAttribute GOMUGOMUNOJETBAZOOKA = new AbilityAttribute("Gomu Gomu no Jet Bazooka").setProjectileModel(new ModelBazooka()).setProjectileTexture("gomugomunojetbazooka").setProjectileSize(3, 3, 3).setModelOffsets(0, 1, 0).setProjectileSpeed(4).setProjectileDamage(16);
+	public static AbilityAttribute GOMUGOMUNOGRIZZLYMAGNUM = new AbilityAttribute("Gomu Gomu no Grizzly Magnum").setProjectileTicks(40).setProjectileModel(new ModelBazooka()).setProjectileTexture("gomugomunogrizzlymagnum").setProjectileSize(15, 15, 13).setModelOffsets(0, 5, 0).setProjectileDamage(30);
+	public static AbilityAttribute GOMUGOMUNOLEOBAZOOKA = new AbilityAttribute("Gomu Gomu no Leo Bazooka").setProjectileTicks(30).setProjectileModel(new ModelBazooka()).setProjectileTexture("gomugomunoleobazooka").setProjectileSize(15, 15, 13).setModelOffsets(0, 5, 0).setProjectileDamage(50);
 	
 	public static AbilityAttribute GOMUGOMUNOGATLING = new AbilityAttribute("Gomu Gomu no Gatling").setProjectileTicks(16).setProjectileModel(new ModelCube()).setProjectileColor("F5DEB3").setProjectileSize(3, 1, 1).setProjectileDamage(5);
 	public static AbilityAttribute GOMUGOMUNOJETGATLING = new AbilityAttribute("Gomu Gomu no Jet Gatling").setProjectileTicks(16).setProjectileModel(new ModelCube()).setProjectileColor("F5DEB3").setProjectileSize(3, 1, 1).setProjectileSpeed(4).setProjectileDamage(7);
-	public static AbilityAttribute GOMUGOMUNOELEPHANTGATLING = new AbilityAttribute("Gomu Gomu no Elephant Gatling").setProjectileTicks(16).setProjectileModel(new ModelCube()).setProjectileColor("F5DEB3").setProjectileSize(5, 3, 3).setProjectileDamage(12);
-	public static AbilityAttribute GOMUGOMUNOKONGORGAN = new AbilityAttribute("Gomu Gomu no Kong Organ").setProjectileTicks(16).setProjectileModel(new ModelCube()).setProjectileColor("2A3439").setProjectileSize(5, 3, 3).setProjectileDamage(15);
+	public static AbilityAttribute GOMUGOMUNOELEPHANTGATLING = new AbilityAttribute("Gomu Gomu no Elephant Gatling").setProjectileTicks(15).setProjectileModel(new ModelCube()).setProjectileColor("F5DEB3").setProjectileSize(5, 3, 3).setProjectileDamage(12);
+	public static AbilityAttribute GOMUGOMUNOKONGORGAN = new AbilityAttribute("Gomu Gomu no Kong Organ").setProjectileTicks(15).setProjectileModel(new ModelCube()).setProjectileColor("2A3439").setProjectileSize(5, 3, 3).setProjectileDamage(15);
 
-	public static AbilityAttribute GRAVITO = new AbilityAttribute("Gravito").setProjectileModel(new ModelCube()).setProjectileDamage(5).setProjectileSize(1.5, 0.4, 6).setProjectileTicks(100).setProjectileColor("E590DF").setProjectileAlpha(50).addEffects(EffectType.PROJECTILE, new PotionEffect(Potion.moveSlowdown.id, 550, 1), new PotionEffect(Potion.weakness.id, 550, 1));                       
+	public static AbilityAttribute GRAVITO = new AbilityAttribute("Gravito").setProjectileModel(new ModelCube()).setProjectileDamage(5).setProjectileSize(6, 0.4, 1.5).setProjectileTicks(100).setProjectileColor("E590DF").setProjectileAlpha(50).addEffects(EffectType.PROJECTILE, new PotionEffect(Potion.moveSlowdown.id, 550, 1), new PotionEffect(Potion.weakness.id, 550, 1));                       
 
 	
 	public static AbilityAttribute NORMALBULLET = new AbilityAttribute("Bullet").setProjectileModel(new ModelSphere()).setProjectileDamage(2).setProjectileSize(.5, .5, .5).setProjectileTicks(100).setProjectileColor("#D3D3D3");
 	public static AbilityAttribute KAIROSEKIBULLET = new AbilityAttribute("Kairoseki Bullet").setProjectileModel(new ModelSphere()).setProjectileDamage(4).setProjectileSize(.5, .5, .5).setProjectileTicks(100).setProjectileColor("#F3F3F3");
 	public static AbilityAttribute POPGREEN = new AbilityAttribute("Pop Green").setProjectileModel(new ModelSphere()).setProjectileDamage(2).setProjectileSize(.5, .5, .5).setProjectileTicks(100).setProjectileColor("#7ccc6a");
-	public static AbilityAttribute KUJAARROW = new AbilityAttribute("Kuja Arrow").setProjectileModel(new ModelArrow()).setProjectileYRotation(-90).setProjectileTexture("kujaarrow").setProjectileDamage(4).setProjectileSize(1.25, 1.25, 1.25).setProjectileTicks(100);
+	public static AbilityAttribute KUJAARROW = new AbilityAttribute("Kuja Arrow").setProjectileModel(new ModelArrow()).setProjectileTexture("kujaarrow").setProjectileDamage(4).setProjectileSize(1.25, 1.25, 1.25).setProjectileTicks(100);
 
-	public static AbilityAttribute DIALAXE = new AbilityAttribute("Axe Dial").setProjectileModel(new ModelCube()).setProjectileDamage(5).setProjectileSize(1.5, 0.4, 6).setProjectileTicks(100).setProjectileColor("69E3FF");
+	public static AbilityAttribute DIALAXE = new AbilityAttribute("Axe Dial").setProjectileModel(new ModelCube()).setProjectileDamage(5).setProjectileSize(6, 0.4, 1.5).setProjectileTicks(100).setProjectileColor("69E3FF");
 	public static AbilityAttribute DIALMILKY = new AbilityAttribute("Milky Dial").setProjectileModel(new ModelSphere()).setProjectileSize(.1, .1, .1).setProjectileTicks(40).setProjectileColor("69E3FF").setProjectileMoveThroughBlocks(true);
 
 }

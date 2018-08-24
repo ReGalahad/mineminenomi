@@ -8,8 +8,10 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.WyHelper.Direction;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
+import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.GoeProjectiles.Todoroki;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListExtraAttributes;
@@ -121,6 +123,30 @@ public class GomuProjectiles
 		{		
 			super(world, player, attr);		
 		}	
+		
+		public void tasksImapct(MovingObjectPosition hit)
+		{
+			if(hit.entityHit != null && hit.entityHit instanceof EntityLivingBase)
+			{
+				double newPosX = 0, newPosY = 0, newPosZ = 0;
+				
+				int minPower = 13;
+				int maxPower = 17;
+				
+				newPosY += 2;
+				Direction dir = WyHelper.get4Directions(this.getThrower());
+				if(dir == WyHelper.Direction.SOUTH)
+					newPosZ += WyMathHelper.randomWithRange(minPower, maxPower);
+				else if(dir == WyHelper.Direction.EAST)
+					newPosX += WyMathHelper.randomWithRange(minPower, maxPower);
+				else if(dir == WyHelper.Direction.NORTH)
+					newPosZ -= WyMathHelper.randomWithRange(minPower, maxPower);
+				else if(dir == WyHelper.Direction.WEST)  
+					newPosX -= WyMathHelper.randomWithRange(minPower, maxPower);
+
+				((EntityLivingBase)hit.entityHit).setPositionAndUpdate(hit.entityHit.posX + newPosX, hit.entityHit.posY + newPosY, hit.entityHit.posZ + newPosZ);
+			}
+		}
 	}
 	
 	public static class GomuGomuNoGrizzlyMagnum extends AbilityProjectile
@@ -135,6 +161,30 @@ public class GomuProjectiles
 		{		
 			super(world, player, attr);		
 		}	
+		
+		public void tasksImapct(MovingObjectPosition hit)
+		{
+			if(hit.entityHit != null && hit.entityHit instanceof EntityLivingBase)
+			{
+				double newPosX = 0, newPosY = 0, newPosZ = 0;
+				
+				int minPower = 8;
+				int maxPower = 15;
+				
+				newPosY += 2;
+				Direction dir = WyHelper.get4Directions(this.getThrower());
+				if(dir == WyHelper.Direction.SOUTH)
+					newPosZ += WyMathHelper.randomWithRange(minPower, maxPower);
+				else if(dir == WyHelper.Direction.EAST)
+					newPosX += WyMathHelper.randomWithRange(minPower, maxPower);
+				else if(dir == WyHelper.Direction.NORTH)
+					newPosZ -= WyMathHelper.randomWithRange(minPower, maxPower);
+				else if(dir == WyHelper.Direction.WEST)  
+					newPosX -= WyMathHelper.randomWithRange(minPower, maxPower);
+
+				((EntityLivingBase)hit.entityHit).setPositionAndUpdate(hit.entityHit.posX + newPosX, hit.entityHit.posY + newPosY, hit.entityHit.posZ + newPosZ);
+			}
+		}
 	}
 
 	public static class GomuGomuNoJetBazooka extends AbilityProjectile
@@ -163,6 +213,30 @@ public class GomuProjectiles
 			}		
 			super.onUpdate();
 		}
+		
+		public void tasksImapct(MovingObjectPosition hit)
+		{
+			if(hit.entityHit != null && hit.entityHit instanceof EntityLivingBase)
+			{
+				double newPosX = 0, newPosY = 0, newPosZ = 0;
+				
+				int minPower = 5;
+				int maxPower = 8;
+				
+				newPosY += 2;
+				Direction dir = WyHelper.get4Directions(this.getThrower());
+				if(dir == WyHelper.Direction.SOUTH)
+					newPosZ += WyMathHelper.randomWithRange(minPower, maxPower);
+				else if(dir == WyHelper.Direction.EAST)
+					newPosX += WyMathHelper.randomWithRange(minPower, maxPower);
+				else if(dir == WyHelper.Direction.NORTH)
+					newPosZ -= WyMathHelper.randomWithRange(minPower, maxPower);
+				else if(dir == WyHelper.Direction.WEST)  
+					newPosX -= WyMathHelper.randomWithRange(minPower, maxPower);
+
+				((EntityLivingBase)hit.entityHit).setPositionAndUpdate(hit.entityHit.posX + newPosX, hit.entityHit.posY + newPosY, hit.entityHit.posZ + newPosZ);
+			}
+		}
 	}
 	
 	public static class GomuGomuNoBazooka extends AbilityProjectile
@@ -176,7 +250,31 @@ public class GomuProjectiles
 		public GomuGomuNoBazooka(World world, EntityLivingBase player, AbilityAttribute attr) 
 		{		
 			super(world, player, attr);		
-		}	
+		}
+		
+		public void tasksImapct(MovingObjectPosition hit)
+		{
+			if(hit.entityHit != null && hit.entityHit instanceof EntityLivingBase)
+			{
+				double newPosX = 0, newPosY = 0, newPosZ = 0;
+				
+				int minPower = 3;
+				int maxPower = 8;
+				
+				newPosY += 2;
+				Direction dir = WyHelper.get4Directions(this.getThrower());
+				if(dir == WyHelper.Direction.SOUTH)
+					newPosZ += WyMathHelper.randomWithRange(minPower, maxPower);
+				else if(dir == WyHelper.Direction.EAST)
+					newPosX += WyMathHelper.randomWithRange(minPower, maxPower);
+				else if(dir == WyHelper.Direction.NORTH)
+					newPosZ -= WyMathHelper.randomWithRange(minPower, maxPower);
+				else if(dir == WyHelper.Direction.WEST)  
+					newPosX -= WyMathHelper.randomWithRange(minPower, maxPower);
+
+				((EntityLivingBase)hit.entityHit).setPositionAndUpdate(hit.entityHit.posX + newPosX, hit.entityHit.posY + newPosY, hit.entityHit.posZ + newPosZ);
+			}
+		}
 	}
 	
 	public static class GomuGomuNoPistol extends AbilityProjectile

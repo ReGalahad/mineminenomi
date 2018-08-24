@@ -1,6 +1,7 @@
 package xyz.pixelatedw.MineMineNoMi3.abilities;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
@@ -13,13 +14,29 @@ import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.PikaProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 
 public class PikaAbilities
 {
 
-	public static Ability[] abilitiesArray = new Ability[] {new YataNoKagami(), new AmaNoMurakumo(), new YasakaniNoMagatama(), new Amaterasu()};
+	public static Ability[] abilitiesArray = new Ability[] {new YataNoKagami(), new AmaNoMurakumo(), new YasakaniNoMagatama(), new Amaterasu(), new Flash()};
 	
+	
+	public static class Flash extends Ability
+	{
+		public Flash() 
+		{
+			super(ListAttributes.FLASH); 
+		}
+		
+		public void use(EntityPlayer player)
+		{
+			if(!this.isOnCooldown)
+				WyNetworkHelper.sendTo(new PacketParticles("flash", player), (EntityPlayerMP) player);
+			super.use(player);
+		} 
+	}
 	
 	public static class AmaNoMurakumo extends Ability
 	{
@@ -52,11 +69,19 @@ public class PikaAbilities
 			super(ListAttributes.AMATERASU); 
 		}
 		
-		public void use(EntityPlayer player)
+		public void startCharging(EntityPlayer player)
 		{
+			if(!this.isOnCooldown)
+				WyNetworkHelper.sendTo(new PacketParticles("amaterasu", player), (EntityPlayerMP) player);
+			super.startCharging(player);				
+		}
+
+		public void endCharging(EntityPlayer player)
+		{						
 			this.projectile = new PikaProjectiles.Amaterasu(player.worldObj, player, attr);
-			super.use(player);
-		} 
+			super.endCharging(player);
+		}
+
 	}
 	
 	public static class YasakaniNoMagatama extends Ability
@@ -94,10 +119,10 @@ public class PikaAbilities
 					if (player.isRiding())
 						player.mountEntity((Entity)null);
 					EnderTeleportEvent event = new EnderTeleportEvent(player, x, y, z, 5.0F);
-	                player.setPositionAndUpdate(event.targetX, event.targetY, event.targetZ);
+					WyNetworkHelper.sendTo(new PacketParticles("yatanokagami", player), (EntityPlayerMP) player);
+	                player.setPositionAndUpdate(event.targetX, event.targetY + 1, event.targetZ);
+					WyNetworkHelper.sendTo(new PacketParticles("yatanokagami", player), (EntityPlayerMP) player);
 	                player.fallDistance = 0.0F;
-					//isOnCooldown = true;
-					//startCooldown();
 				}
 				super.use(player);
 			}

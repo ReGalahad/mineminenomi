@@ -13,6 +13,7 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import xyz.pixelatedw.MineMineNoMi3.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyRenderHelper;
@@ -81,15 +82,9 @@ public class GUISelectHotbarAbilities extends GuiScreen
 				WyRenderHelper.drawAbilityIcon("yamiyaminomi", (posX - 268) / 2, (posY - 187) / 2, 16, 16);
 			else
 			{
-				String model = "";
-				String fullModel = "";
-				if(props.getUsedFruit().equals("ushiushibison"))
-				{
-					model = "bison";
-					fullModel = "model" + model;
-				}
-				
-				WyRenderHelper.drawAbilityIcon(props.getUsedFruit().replace(model, "") + "nomi" + fullModel, (posX - 268) / 2, (posY - 187) / 2, 16, 16);
+				ItemStack df = DevilFruitsHelper.getDevilFruitItem(props.getUsedFruit());
+
+				WyRenderHelper.drawAbilityIcon(df.getUnlocalizedName().replace("item.", ""), (posX - 268) / 2, (posY - 187) / 2, 16, 16);
 			}
 			this.mc.getTextureManager().bindTexture(ID.TEXTURE_COMBATMODE);	
 		}

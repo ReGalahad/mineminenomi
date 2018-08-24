@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -109,7 +110,7 @@ public class AkumaNoMi extends ItemFood
 	{
 		for(int i = 0; i < this.abilities.length; i++)
 			if(!WyHelper.verifyIfAbilityIsBanned(this.abilities[i]) && this.abilities[i] != null)
-				list.add(this.abilities[i].getAttribute().getAttributeName());
+				list.add(  I18n.format("ability." + WyHelper.getFancyName(this.abilities[i].getAttribute().getAttributeName()) + ".name") );
 			
 	  	list.add("");
 	  	list.add(type.getColor() + type.getName());

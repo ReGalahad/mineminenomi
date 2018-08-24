@@ -1,46 +1,62 @@
 package xyz.pixelatedw.MineMineNoMi3.quests.questlines.swordsmanprogression;
 
+import java.util.Iterator;
+import java.util.Map.Entry;
+
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.Quest;
+import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDojoSensei;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
+import xyz.pixelatedw.MineMineNoMi3.items.weapons.ItemCoreWeapon;
+import xyz.pixelatedw.MineMineNoMi3.quests.EnumQuestlines;
+import xyz.pixelatedw.MineMineNoMi3.quests.IInteractQuest;
+import xyz.pixelatedw.MineMineNoMi3.quests.IProgressionQuest;
 
-public class QuestSwordsmanProgression01 extends Quest
+public class QuestSwordsmanProgression01 extends Quest implements IInteractQuest, IProgressionQuest
 {
 	
 	public String getQuestID()
 	{
-		return "swordsmanprogression_01";	
+		return "swordsmanprogression01";	
 	}
 	
 	public String getQuestName()
 	{
-		return ID.LANG_QUEST_SWORDSMANPROGRESSION_01;
+		return "Road to becoming the Best Swordsman";
 	}
 	
 	public String[] getQuestDescription()
 	{
 		return new String[] 
 				{
-					ID.LANG_QUEST_SWORDSMANPROGRESSION_01_DESC,
+					" I'm starting my journey to become the best swordsman",
+					"in the world. Proving the Master that  I'm ready won't",
+					"be easy but I need to start somewhere.",
 					"",
 					"",
 					"",
-					"",
-					"",
-					"",
+					""
 				};
 	}
 	
 	public void startQuest(EntityPlayer player)
 	{
-		WyHelper.sendMsgToPlayer(player, this.getQuestName() + " has started !");
+		WyHelper.sendMsgToPlayer(player, "<Swordsman Master> You want to become a swordsman master, young one ? I do like the sparks in your eyes so how about this, show me your best sword and I'll see if you're fit or not to start training with me.");								
+	
+		super.startQuest(player);
 	}
 
 	public void finishQuest(EntityPlayer player)
 	{
-		WyHelper.sendMsgToPlayer(player, this.getQuestName() + " has been completed !");	
+		WyHelper.sendMsgToPlayer(player, "<Swordsman Master> That's a really nice blade you have there, really strong indeed. Fine, I will train you, when you're ready come and talk with me again !");
 		
 		super.finishQuest(player);
 	}
@@ -60,15 +76,65 @@ public class QuestSwordsmanProgression01 extends Quest
 	{
 		super.setProgress(player, progress);
 	}
-	
+		
 	public void alterProgress(EntityPlayer player, double progress) 
 	{
 		super.alterProgress(player, progress);
+		
+		if(this.isFinished(player))
+			this.finishQuest(player);	
 	}
 
 	public boolean isPrimary()
 	{
 		return true;
+	}
+
+	public boolean isTarget(EntityPlayer player, EntityLivingBase target)
+	{
+		ItemStack heldItem = player.getHeldItem();
+		QuestProperties questProps = QuestProperties.get(player);
+		
+		if(!(target instanceof EntityDojoSensei))
+			return false;
+		
+		if(heldItem != null && (heldItem.getItem() instanceof ItemSword || heldItem.getItem() instanceof ItemCoreWeapon))
+		{
+			Iterator iterator = heldItem.getAttributeModifiers().entries().iterator();
+
+			while (iterator.hasNext())
+			{
+				Entry entry = (Entry)iterator.next();
+				
+				if(entry.getKey().equals(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName()))
+				{
+					AttributeModifier attrmodif = (AttributeModifier)entry.getValue();
+					double damage = attrmodif.getAmount();
+					
+					if(damage >= 7)
+					{
+						return true;						
+					}
+					else
+					{
+						WyHelper.sendMsgToPlayer(player, "<Swordsman Master> That sword of yours is way too weak, you won't get anywhere with that excuse of a sword.");	
+						return false;
+					}
+				}
+			}		
+		}
+		
+		return false;
+	}
+
+	public EnumQuestlines getQuestLine()
+	{
+		return EnumQuestlines.SWORDSMANPROGRESSION;
+	}
+
+	public boolean isRepeatable()
+	{
+		return false;
 	}
 
 }

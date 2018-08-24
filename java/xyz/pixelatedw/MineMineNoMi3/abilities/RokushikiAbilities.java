@@ -141,5 +141,16 @@ public class RokushikiAbilities
 		{
 			super(ListAttributes.KAMIE); 
 		}
+		
+		public void duringPassive(EntityPlayer player, int passiveTimer)
+		{
+			if(passiveTimer > 20)
+			{
+				this.setPassiveActive(false);
+				this.startCooldown();
+				this.startExtUpdate(player);
+				super.endPassive(player);
+			}
+		}
 	}
 }

@@ -41,19 +41,25 @@ public class AbilityRenderer extends Render
     	this.rotY = ablAttr.getProjectileYRotation();
     	this.rotZ = ablAttr.getProjectileZRotation();
     	
+    	this.renderPosX = ablAttr.getModelOffsets()[0];
+    	this.renderPosY = ablAttr.getModelOffsets()[1];
+    	this.renderPosZ = ablAttr.getModelOffsets()[2];
+    	
     	this.model = ablAttr.getProjectileModel();
     	
     	GL11.glPushMatrix();
     	
-    	GL11.glTranslatef((float)par2, (float)par4, (float)par6);
+    	GL11.glTranslated(par2 + renderPosX, par4 + renderPosY, par6 + renderPosZ);
     	if(this.texture == null)
     		GL11.glDisable(GL11.GL_TEXTURE_2D);
     	GL11.glEnable(GL11.GL_BLEND);
     	GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA); 
     	
-    	GL11.glRotatef(entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * par9 - 90.0F, 0.0F, 1.0F, 0.0F);
-    	GL11.glRotatef(entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * par9, 0.0F, 0.0F, 1.0F);
-
+    	GL11.glRotatef(entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * par9 - 180.0F, 0.0F, 1.0F, 0.0F);
+    	GL11.glRotatef(entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * par9, 1.0F, 0.0F, 0.0F);
+    	
+    	GL11.glRotatef(180, 0, 0, 1);
+    	
     	if(rotX != 0)
     		GL11.glRotated(rotX, 1, 0, 0);
     	if(rotY != 0)

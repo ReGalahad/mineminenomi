@@ -21,7 +21,14 @@ public class ID
 	PARTICLE_ICON_SUNA2 = new ResourceLocation(ID.PROJECT_ID, "textures/particles/particle_suna2.png"),
 	PARTICLE_ICON_GASU = new ResourceLocation(ID.PROJECT_ID, "textures/particles/particle_gasu.png"),
 	PARTICLE_ICON_GASU2 = new ResourceLocation(ID.PROJECT_ID, "textures/particles/particle_gasu2.png"),	
-	
+	PARTICLE_ICON_BLUEFLAME = new ResourceLocation(ID.PROJECT_ID, "textures/particles/particle_blueflame.png"),	
+	PARTICLE_ICON_DARKNESS = new ResourceLocation(ID.PROJECT_ID, "textures/particles/particle_darkness.png"),	
+	PARTICLE_ICON_GORO = new ResourceLocation(ID.PROJECT_ID, "textures/particles/particle_goro.png"),	
+	PARTICLE_ICON_DOKU = new ResourceLocation(ID.PROJECT_ID, "textures/particles/particle_doku.png"),	
+	PARTICLE_ICON_ITO = new ResourceLocation(ID.PROJECT_ID, "textures/particles/particle_ito.png"),	
+	PARTICLE_ICON_GURA = new ResourceLocation(ID.PROJECT_ID, "textures/particles/particle_gura.png"),	
+	PARTICLE_ICON_GURA2 = new ResourceLocation(ID.PROJECT_ID, "textures/particles/particle_gura2.png"),	
+					
 	ICON_HARROW = new ResourceLocation(ID.PROJECT_ID, "textures/gui/icons/icon_arrow.png"),
 	
 	ICON_PIRATE = new ResourceLocation(ID.PROJECT_ID, "textures/gui/icons/icon_pirate.png"),
@@ -65,6 +72,7 @@ public class ID
 	PROJECT_SOURCEFOLDER = "D:/Programming/Minecraft Modding/Mine Mine no Mi/src/main/resources/",
 	
 	PARTICLE_NAME_PIKA = "pika",
+	PARTICLE_NAME_PIKABIG = "pikabig",
 	PARTICLE_NAME_YUKI = "yuki",
 	PARTICLE_NAME_MERA = "mera",
 	PARTICLE_NAME_MOKU = "moku",	
@@ -75,6 +83,14 @@ public class ID
 	PARTICLE_NAME_SUNA2 = "suna2",
 	PARTICLE_NAME_GASU = "gasu",	
 	PARTICLE_NAME_GASU2 = "gasu2",		
+	PARTICLE_NAME_BLUEFLAME = "blueflame",
+	PARTICLE_NAME_DARKNESS = "darkness",
+	PARTICLE_NAME_GORO = "goro",
+	PARTICLE_NAME_DOKU = "doku",
+	PARTICLE_NAME_ITO = "ito",
+	PARTICLE_NAME_GURA = "gura",
+	PARTICLE_NAME_GURA2 = "gura2",
+	PARTICLE_NAME_GURABIG = "gurabig",
 	
 	CREW_ARLONG = "Arlong Pirates",
 	CREW_BAROQUEWORKS = "Baroque Works",
@@ -101,6 +117,7 @@ public class ID
 	ZOANMORPH_SPEED = "speed",
 	ZOANMORPH_DOKU = "doku",
 	ZOANMORPH_PHOENIX = "phoenix",
+	ZOANMORPH_HYBRID = "hybrid",
 	
 	LANG_KEYS_CATEGORY = "category.mmnmkeys", //Mine Mine no Mi Keys
 	LANG_KEY_PLAYER = "key.playerui", //Player UI
@@ -118,13 +135,7 @@ public class ID
 	LANG_GUI_STYLE = "gui.style.name",
 	LANG_GUI_ABILITIES = "gui.abilities.name",
 	LANG_GUI_QUESTS = "gui.quests.name",
-	LANG_GUI_CURRENTQUEST = "gui.currentquest.name",
-	
-	LANG_QUEST_SWORDSMANPROGRESSION_01 = "quest.swordsmanprogression01.name",
-	
-	LANG_QUEST_BOUNTYLOWLEVEL_01 = "quest.bountylowlevel01.name",
-			
-	LANG_QUEST_SWORDSMANPROGRESSION_01_DESC = "quest.swordsmanprogression01.desc",
+	LANG_GUI_QPROGRESS = "gui.qprogress.name",
 	
 	
 	DIMENSION_NAME_SCENARIOARENA = "scenarioarena",

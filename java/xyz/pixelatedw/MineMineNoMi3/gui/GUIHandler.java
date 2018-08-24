@@ -18,6 +18,7 @@ public class GUIHandler implements IGuiHandler
 			case 2: return new GUICC(player);
 			case 4: return new GUISelectHotbarAbilities(player);
 			case 5: return new GUIQuests(player);
+			case 6: return new GUIQuestYesNo(player);
 		}
 		return null;
 	}

@@ -55,9 +55,19 @@ public class BlockDemonPoison extends Block
     		ExtendedEntityStats props = ExtendedEntityStats.get((EntityLivingBase) entity);
     		
     		if(!props.getUsedFruit().equals("dokudoku"))
-    			((EntityLivingBase)entity).addPotionEffect(new PotionEffect(Potion.poison.id, 500, 2));
+    		{
+    			if(!((EntityLivingBase)entity).isPotionActive(Potion.poison.id))
+    			{
+    				((EntityLivingBase)entity).addPotionEffect(new PotionEffect(Potion.poison.id, 300, 2));
+    			}
+    		}
     		else
-    			((EntityLivingBase)entity).addPotionEffect(new PotionEffect(Potion.regeneration.id, 50, 1));
+    		{
+    			if(!((EntityLivingBase)entity).isPotionActive(Potion.regeneration.id))
+    			{
+    				((EntityLivingBase)entity).addPotionEffect(new PotionEffect(Potion.regeneration.id, 50, 1));
+    			}
+    		}
     	}
     }
     

@@ -64,7 +64,7 @@ public class BaneAbilities
 		
 	    public void duringCooldown(EntityPlayer player, int currentCooldown)
 	    {
-			if(currentCooldown > 115)
+			if((currentCooldown / 20) > (ListAttributes.SPRINGSNIPE.getAbilityCooldown() / 20) - 3)
 				for(EntityLivingBase e : WyHelper.getEntitiesNear(player, 1.6))
 					e.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) player), 5);
 	    }

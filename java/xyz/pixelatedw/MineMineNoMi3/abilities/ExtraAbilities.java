@@ -13,6 +13,42 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketSyncInfo;
 
 public class ExtraAbilities
 {
+	
+	
+	public static class HybridPoint extends Ability
+	{
+		public HybridPoint()
+		{
+			super(ListAttributes.HYBRIDPOINT);
+		}
+
+		public void use(EntityPlayer player)
+		{
+			ExtendedEntityStats props = ExtendedEntityStats.get(player);
+
+			if (!this.isOnCooldown)
+			{
+				if (props.getZoanPoint().isEmpty())
+					props.setZoanPoint("n/a");
+
+				if (props.getZoanPoint().toLowerCase().equals(ID.ZOANMORPH_HYBRID))
+				{
+					props.setZoanPoint("n/a");
+					WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
+					WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));
+				} 
+				else
+				{
+					props.setZoanPoint(ID.ZOANMORPH_HYBRID);
+					WyHelper.sendMsgToPlayer(player, "<" + player.getDisplayName() + "> Hybrid Point !");
+					WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
+					WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));
+				}
+
+				super.use(player);
+			}
+		}
+	}
 
 	public static class PowerPoint extends Ability
 	{

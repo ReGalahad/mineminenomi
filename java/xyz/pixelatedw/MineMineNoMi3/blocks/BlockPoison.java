@@ -55,9 +55,19 @@ public class BlockPoison extends Block
     		ExtendedEntityStats props = ExtendedEntityStats.get((EntityLivingBase) entity);
     		
     		if(!props.getUsedFruit().equals("dokudoku"))
-    			((EntityLivingBase)entity).addPotionEffect(new PotionEffect(Potion.poison.id, 300, 1));
+    		{
+    			if(!((EntityLivingBase)entity).isPotionActive(Potion.poison.id))
+    			{
+    				((EntityLivingBase)entity).addPotionEffect(new PotionEffect(Potion.poison.id, 300, 1));
+    			}
+    		}
     		else
-    			((EntityLivingBase)entity).addPotionEffect(new PotionEffect(Potion.regeneration.id, 50, 0));
+    		{
+    			if(!((EntityLivingBase)entity).isPotionActive(Potion.regeneration.id))
+    			{
+    				((EntityLivingBase)entity).addPotionEffect(new PotionEffect(Potion.regeneration.id, 50, 0));
+    			}
+    		}
     	}
     }
     

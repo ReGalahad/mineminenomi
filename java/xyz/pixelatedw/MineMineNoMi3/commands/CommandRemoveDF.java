@@ -3,22 +3,16 @@ package xyz.pixelatedw.MineMineNoMi3.commands;
 import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
-import net.minecraft.command.PlayerNotFoundException;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.potion.Potion;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.EnumChatFormatting;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
-import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
-import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.EntityZoanMorph;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
-import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketSyncInfo;
 
 public class CommandRemoveDF extends CommandBase
 {		
@@ -52,14 +46,13 @@ public class CommandRemoveDF extends CommandBase
 		props.clearHotbar();
 		props.clearDevilFruitAbilities();
 		target.clearActivePotions();
-		
-		for(EntityLivingBase zm : WyHelper.getEntitiesNear(target, 1.5, EntityZoanMorph.class))
-			zm.setDead();
+
 		props.setZoanPoint("n/a");
 		
 		target.clearActivePotions();
 		
 		WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP)target);	
+		WyNetworkHelper.sendToAll(new PacketSyncInfo(target.getDisplayName(), props));	
 	}
 
 	public boolean canCommandSenderUseCommand(ICommandSender sender)

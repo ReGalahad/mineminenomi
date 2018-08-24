@@ -16,6 +16,7 @@ public class EntityParticleFX extends EntityAuraFX
 {
 	private ResourceLocation texture;
 	private String partName;
+	private boolean hasZoom = false;
 	
 	public EntityParticleFX(World world, ResourceLocation texture, double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
 	{
@@ -28,6 +29,7 @@ public class EntityParticleFX extends EntityAuraFX
 		this.particleGravity = 1F;		
 		this.setRBGColorF(1.0F, 1.0F, 1.0F);
 		this.particleMaxAge = 10 + this.rand.nextInt(10);
+		this.particleAge = 0;
 	}
 
 	@Override
@@ -36,7 +38,7 @@ public class EntityParticleFX extends EntityAuraFX
 		Minecraft.getMinecraft().renderEngine.bindTexture(this.texture);
 	 
 		GL11.glDepthMask(false);
-		GL11.glEnable(GL11.GL_BLEND);
+		//GL11.glEnable(GL11.GL_BLEND);
 		GL11.glTexParameterf(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_LINEAR);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		GL11.glAlphaFunc(GL11.GL_GREATER, 0.003921569F);
@@ -45,6 +47,16 @@ public class EntityParticleFX extends EntityAuraFX
 		float x = (float) (prevPosX + (posX - prevPosX) * partialTicks - interpPosX);
 		float y = (float) (prevPosY + (posY - prevPosY) * partialTicks - interpPosY);
 		float z = (float) (prevPosZ + (posZ - prevPosZ) * partialTicks - interpPosZ);
+
+		float ticks = particleAge;
+		
+		if(hasZoom)
+		{
+			if(ticks < 8)
+				scale = ticks;
+			else
+				scale = this.particleMaxAge - ticks;
+		}
 		
 		tess.setColorRGBA_F(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha);
 		tess.addVertexWithUV(x - f2 * scale - f5 * scale, y - f3 * scale, z - f4 * scale - f6 * scale, 1, 1);
@@ -52,9 +64,9 @@ public class EntityParticleFX extends EntityAuraFX
 		tess.addVertexWithUV(x + f2 * scale + f5 * scale, y + f3 * scale, z + f4 * scale + f6 * scale, 0, 0);
         tess.addVertexWithUV(x + f2 * scale - f5 * scale, y - f3 * scale, z + f4 * scale - f6 * scale, 0, 1);      
         
-		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 128.0F, 128.0F);
-
-		GL11.glDisable(GL11.GL_BLEND);
+		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 128.0F, 128.0F);		
+		
+		//GL11.glDisable(GL11.GL_BLEND);
 		GL11.glDepthMask(true);
 		GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
 	}
@@ -69,7 +81,7 @@ public class EntityParticleFX extends EntityAuraFX
         this.motionY *= 0.99D;
         this.motionZ *= 0.99D;
 
-        if (this.particleMaxAge-- <= 0)
+        if (this.particleAge++ >= this.particleMaxAge)
             this.setDead();
 
         this.motionY = -0.04D * (double)this.particleGravity;    	
@@ -78,6 +90,7 @@ public class EntityParticleFX extends EntityAuraFX
     public EntityParticleFX setParticleScale(float f) { this.particleScale = f; return this; }
     public EntityParticleFX setParticleGravity(float f) { this.particleGravity = f; return this; }
     public EntityParticleFX setParticleAge(int i) { this.particleMaxAge = i + this.rand.nextInt(10); return this; }
+    public EntityParticleFX setHasZoom() { this.hasZoom = true; return this; }
     
     public int getFXLayer()
     {

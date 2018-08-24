@@ -14,11 +14,19 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketWorld;
 public class BlockBarrier extends Block
 {	
 	private int ticks = 2;
+	private int maxTicks = 2;
 	
 	public BlockBarrier()
 	{
 		super(Material.iron);
 	} 
+	
+	public BlockBarrier setTimer(int i)
+	{
+		this.ticks = i;
+		this.maxTicks = i;
+		return this;
+	}
 	
 	public boolean isOpaqueCube() {return false;}
 
@@ -34,7 +42,7 @@ public class BlockBarrier extends Block
     	else
     	{
     		WyNetworkHelper.sendToServer(new PacketWorld(x, y, z, Block.getIdFromBlock(Blocks.air)));
-    		ticks = 2;
+    		ticks = maxTicks;
     	}
 	}
 }

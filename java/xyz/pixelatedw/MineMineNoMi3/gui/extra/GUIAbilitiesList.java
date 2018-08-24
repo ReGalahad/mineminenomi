@@ -10,6 +10,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.resources.I18n;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyRenderHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
@@ -97,9 +98,9 @@ public class GUIAbilitiesList extends GuiScrollingList
 			}
     		
 			if(flag)
-				Minecraft.getMinecraft().fontRenderer.drawStringWithShadow(availableAbilities.get(slotIndex).getAttributeName(), this.left + 40, slotTop + 7, 0xFF0000);
+				Minecraft.getMinecraft().fontRenderer.drawStringWithShadow( I18n.format("ability." + WyHelper.getFancyName(availableAbilities.get(slotIndex).getAttributeName()) + ".name"), this.left + 40, slotTop + 7, 0xFF0000);
 			else
-				Minecraft.getMinecraft().fontRenderer.drawStringWithShadow(availableAbilities.get(slotIndex).getAttributeName(), this.left + 40, slotTop + 7, 0xFFFFFF);
+				Minecraft.getMinecraft().fontRenderer.drawStringWithShadow( I18n.format("ability." + WyHelper.getFancyName(availableAbilities.get(slotIndex).getAttributeName()) + ".name"), this.left + 40, slotTop + 7, 0xFFFFFF);
 		}
 		
     	WyRenderHelper.drawAbilityIcon(WyHelper.getFancyName(availableAbilities.get(slotIndex).getAttributeName()), this.left + 10, slotTop + 2, 16, 16);

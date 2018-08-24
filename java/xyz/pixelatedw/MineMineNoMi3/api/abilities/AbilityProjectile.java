@@ -33,9 +33,9 @@ public class AbilityProjectile extends EntityThrowable
 		this.ticks = attr.getProjectileTicks();
 		this.maxticks = ticks;
 		this.user = player;
-		this.motionX *= attr.getProjectileSpeed();
+		/*this.motionX *= attr.getProjectileSpeed();
 		this.motionY *= attr.getProjectileSpeed();
-		this.motionZ *= attr.getProjectileSpeed();
+		this.motionZ *= attr.getProjectileSpeed();*/
 			/*
 			if(WyHelper.instance().get4Directions(player) == WyHelper.Direction.SOUTH)
 				this.attr.setPosition(this.attr.getPosition()[0], this.attr.getPosition()[1], this.attr.getPosition()[2]);

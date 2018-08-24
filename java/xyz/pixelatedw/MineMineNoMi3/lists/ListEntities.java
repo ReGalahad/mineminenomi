@@ -18,10 +18,25 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.EntityMarineCaptain;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.EntityMarineWithGun;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.EntityMorgan;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDenDenMushi;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDojoSensei;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDoppelman;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirate;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirateCaptain;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirateWithGun;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityBazooka;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityBrickBat;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityFist;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityHydra;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityMeigo;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityNoroBeam;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityPaw;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityPheasant;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityPhoenixFull;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityPhoenixHybrid;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityShark;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntitySpear;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityTrident;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityYukiRabi;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityBlueno;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityFukuro;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityJabra;
@@ -90,6 +105,24 @@ public class ListEntities
 		//Others
 		WyRegistry.registerMob("Doppelman", EntityDoppelman.class);
 		WyRegistry.registerMob("Den Den Mushi", EntityDenDenMushi.class, 0xFF00FF, 0x00FF00);
+		WyRegistry.registerMob("Dojo Sensei", EntityDojoSensei.class, 0xFF00FF, 0x00FF00); /** TODO Remove the spawn egg, debug only */
+		
+		/** TODO Delete any and all mentions of these */
+		//Temp
+		WyRegistry.registerMob("TEMP_Fist", TempEntityFist.class);
+		WyRegistry.registerMob("TEMP_Bazooka", TempEntityBazooka.class);
+		WyRegistry.registerMob("TEMP_BrickBat", TempEntityBrickBat.class);
+		WyRegistry.registerMob("TEMP_Hydra", TempEntityHydra.class);
+		WyRegistry.registerMob("TEMP_Meigo", TempEntityMeigo.class);
+		WyRegistry.registerMob("TEMP_NoroBeam", TempEntityNoroBeam.class);	
+		WyRegistry.registerMob("TEMP_Paw", TempEntityPaw.class);
+		WyRegistry.registerMob("TEMP_Pheasant", TempEntityPheasant.class);
+		WyRegistry.registerMob("TEMP_Shark", TempEntityShark.class);
+		WyRegistry.registerMob("TEMP_Spear", TempEntitySpear.class);
+		WyRegistry.registerMob("TEMP_Trident", TempEntityTrident.class);
+		WyRegistry.registerMob("TEMP_YukiRabi", TempEntityYukiRabi.class);
+		WyRegistry.registerMob("TEMP_PhoenixFull", TempEntityPhoenixFull.class);
+		WyRegistry.registerMob("TEMP_PhoenixHybrid", TempEntityPhoenixHybrid.class);
 	}
 	
 }

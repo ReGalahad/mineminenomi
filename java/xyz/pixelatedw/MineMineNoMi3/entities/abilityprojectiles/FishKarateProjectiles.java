@@ -18,7 +18,7 @@ public class FishKarateProjectiles
 	static
 	{
 		abilitiesClassesArray.add(new Object[] {Uchimizu.class, ListAttributes.UCHIMIZU});
-		abilitiesClassesArray.add(new Object[] {Soshark.class, ListAttributes.SOSHARK});
+		abilitiesClassesArray.add(new Object[] {Soshark.class, ListAttributes.MURASAME});
 	}
 	
 	public static class Uchimizu extends AbilityProjectile

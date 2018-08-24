@@ -5,24 +5,79 @@ import java.util.Random;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import scala.reflect.api.Internals.ReificationSupportApi.SyntacitcSingletonTypeExtractor;
 import scala.tools.nsc.backend.icode.BasicBlocks.BasicBlock.SuccessorList;
+import xyz.pixelatedw.MineMineNoMi3.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
+import xyz.pixelatedw.MineMineNoMi3.blocks.BlockBarrier;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.YamiProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListExtraAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 
 public class YamiAbilities 
 {
 
-	public static Ability[] abilitiesArray = new Ability[] {new DarkMatter(), new Liberation(), new BlackHole()};	
+	public static Ability[] abilitiesArray = new Ability[] {new DarkMatter(), new Liberation(), new BlackHole(), new BlackWorld()};	
+	
+	public static class BlackWorld extends Ability
+	{
+		public BlackWorld() 
+		{
+			super(ListAttributes.BLACKWORLD); 
+		}
+		
+		public void use(EntityPlayer player)
+		{
+			if(!this.isOnCooldown)
+			{
+				WyNetworkHelper.sendTo(new PacketParticles("blackworld", player), (EntityPlayerMP) player);
+
+				for(int i = 0; i < 8; i++)
+				{
+					int a1 = player.getRNG().nextInt(20) - 10;
+					int a2 = player.getRNG().nextInt(20) - 10;
+					
+					DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1, (int)player.posY , (int)player.posZ + a2, ListMisc.Darkness);		
+					DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1, (int)player.posY + 1, (int)player.posZ + a2, ListMisc.Darkness);		
+					DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1, (int)player.posY + 2, (int)player.posZ + a2, ListMisc.Darkness);	
+					DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1, (int)player.posY + 3, (int)player.posZ + a2, ListMisc.Darkness);	
+					DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1, (int)player.posY + 4, (int)player.posZ + a2, ListMisc.Darkness);
+					
+					DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1 + 1, (int)player.posY, (int)player.posZ + a2, ListMisc.Darkness);		
+					DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1 + 1, (int)player.posY + 1, (int)player.posZ + a2, ListMisc.Darkness);		
+					DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1 + 1, (int)player.posY + 2, (int)player.posZ + a2, ListMisc.Darkness);	
+					DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1 + 1, (int)player.posY + 3, (int)player.posZ + a2, ListMisc.Darkness);	
+					DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1 + 1, (int)player.posY + 4, (int)player.posZ + a2, ListMisc.Darkness);	
+					
+					DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1, (int)player.posY, (int)player.posZ + a2 + 1, ListMisc.Darkness);		
+					DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1, (int)player.posY + 1, (int)player.posZ + a2 + 1, ListMisc.Darkness);		
+					DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1, (int)player.posY + 2, (int)player.posZ + a2 + 1, ListMisc.Darkness);	
+					DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1, (int)player.posY + 3, (int)player.posZ + a2 + 1, ListMisc.Darkness);	
+					DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1, (int)player.posY + 4, (int)player.posZ + a2 + 1, ListMisc.Darkness);	
+
+					DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1 + 1, (int)player.posY, (int)player.posZ + a2 + 1, ListMisc.Darkness);		
+					DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1 + 1, (int)player.posY + 1, (int)player.posZ + a2 + 1, ListMisc.Darkness);		
+					DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1 + 1, (int)player.posY + 2, (int)player.posZ + a2 + 1, ListMisc.Darkness);	
+					DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1 + 1, (int)player.posY + 3, (int)player.posZ + a2 + 1, ListMisc.Darkness);	
+					DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1 + 1, (int)player.posY + 4, (int)player.posZ + a2 + 1, ListMisc.Darkness);	
+
+				}
+				
+
+				super.use(player);
+			}
+		}
+	}
 	
 	public static class BlackHole extends Ability
 	{
@@ -41,8 +96,9 @@ public class YamiAbilities
 				{
 					if(!player.worldObj.isAirBlock((int) player.posX + i, (int) player.posY + j, (int) player.posZ + k) && player.worldObj.getBlock((int) player.posX + i, (int) player.posY + j, (int) player.posZ + k) != ListMisc.Ope
 							&& player.worldObj.getBlock((int) player.posX + i, (int) player.posY + j, (int) player.posZ + k) != ListMisc.OpeMid && player.worldObj.getBlock((int) player.posX + i, (int) player.posY + j, (int) player.posZ + k) != Blocks.bedrock)
-						player.worldObj.setBlock((int) player.posX + i, (int) player.posY + j, (int) player.posZ + k, ListMisc.Darkness);
+						player.worldObj.setBlock((int) player.posX + i, (int) player.posY + j, (int) player.posZ + k, ListMisc.Darkness);				
 				}
+				WyNetworkHelper.sendTo(new PacketParticles("blackhole", player), (EntityPlayerMP) player);
 				super.use(player);
 			}		
 		}
@@ -57,6 +113,7 @@ public class YamiAbilities
 			super(ListAttributes.LIBERATION); 
 		}
 		
+		/** TODO Explosion particles */
 		public void use(final EntityPlayer player)
 		{				
 			int libCount = 0;

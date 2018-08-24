@@ -2,18 +2,15 @@ package xyz.pixelatedw.MineMineNoMi3.events;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Random;
 import java.util.Scanner;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
-import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityArrow;
@@ -28,15 +25,13 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatStyle;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraftforge.client.event.EntityViewRenderEvent;
-import net.minecraftforge.client.event.FOVUpdateEvent;
-import net.minecraftforge.client.event.RenderHandEvent;
-import net.minecraftforge.client.event.RenderLivingEvent;
+import net.minecraft.util.MathHelper;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import xyz.pixelatedw.MineMineNoMi3.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.ID;
@@ -47,26 +42,27 @@ import xyz.pixelatedw.MineMineNoMi3.abilities.HakiAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.HakiAbilities.BusoshokuHaki;
 import xyz.pixelatedw.MineMineNoMi3.abilities.HakiAbilities.KenbunshokuHaki;
 import xyz.pixelatedw.MineMineNoMi3.abilities.RokushikiAbilities;
-import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
+import xyz.pixelatedw.MineMineNoMi3.abilities.SniperAbilities;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.MineMineNoMi3.api.math.ISphere;
 import xyz.pixelatedw.MineMineNoMi3.api.math.Sphere;
+import xyz.pixelatedw.MineMineNoMi3.api.network.PacketQuestSync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.MarineData;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.EntityZoanMorph;
 import xyz.pixelatedw.MineMineNoMi3.events.customevents.DorikiEvent;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 import xyz.pixelatedw.MineMineNoMi3.items.AkumaNoMi;
 import xyz.pixelatedw.MineMineNoMi3.items.ItemCoreArmor;
-import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListEffects;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketSyncInfo;
 
 public class EventsPersistence
 {
@@ -98,8 +94,7 @@ public class EventsPersistence
 	 * onDorikiGained 
 	 * > Rewards the user with rokushiki/fishman karate based on doriki
 	 */	
-	
-	/** XXX onEntityUpdate */
+
 	@SubscribeEvent
 	public void onEntityUpdate(LivingUpdateEvent event)
 	{
@@ -108,7 +103,7 @@ public class EventsPersistence
 			EntityPlayer player = (EntityPlayer) event.entityLiving;
 			ExtendedEntityStats props = ExtendedEntityStats.get(player);
 			ItemStack heldItem = player.getHeldItem();				
-						
+			
 			if (heldItem != null)
 			{				
 				if(heldItem.getItem() == ListMisc.Umbrella && player.worldObj.getBlock((int)player.posX, (int)player.posY - 4, (int)player.posZ) == Blocks.air && !player.capabilities.isCreativeMode)
@@ -157,6 +152,60 @@ public class EventsPersistence
 					}					
 				}
 				
+			}
+			
+			if(!player.capabilities.isCreativeMode)
+			{
+				if(!player.capabilities.allowFlying) 
+				{
+					if(props.getUsedFruit().equals("toritoriphoenix") && !props.getZoanPoint().toLowerCase().equals("n/a"))
+						player.capabilities.allowFlying = true;
+					else
+						player.capabilities.allowFlying = false;
+				}
+				else
+				{
+					if(player.isInWater() && !player.capabilities.isCreativeMode)
+						player.capabilities.isFlying = false;
+					
+					if(props.getZoanPoint().toLowerCase().equals("n/a") || (!props.getUsedFruit().equals("toritoriphoenix")))
+					{
+						player.capabilities.allowFlying = false;
+						player.capabilities.isFlying = false;
+					}
+				}
+			}
+			else
+				player.capabilities.allowFlying = true;
+			
+			if(props.getUsedFruit().equals("ushiushibison"))
+			{
+				if(props.getZoanPoint().equals(ID.ZOANMORPH_SPEED))
+				{
+					player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 2 * 20, 1, true));
+					
+					double mX = (double)(-MathHelper.sin(player.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(player.rotationPitch / 180.0F * (float)Math.PI) * 0.4);
+					double mZ = (double)(MathHelper.cos(player.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(player.rotationPitch / 180.0F * (float)Math.PI) * 0.4);
+						
+					double f2 = MathHelper.sqrt_double(mX * mX + player.motionY * player.motionY + mZ * mZ);
+					mX /= (double)f2;
+					mZ /= (double)f2;
+					mX += player.worldObj.rand.nextGaussian() * 0.007499999832361937D * 1.0;
+					mZ += player.worldObj.rand.nextGaussian() * 0.007499999832361937D * 1.0;
+					mX *= 2;
+					mZ *= 2;
+					
+					for(EntityLivingBase e : WyHelper.getEntitiesNear(player, 0.5))
+					{
+						e.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) player), 2);
+						e.motionX = mX;
+						e.motionZ = mZ;
+					}
+				}
+				else
+				{
+					player.removePotionEffect(Potion.moveSpeed.id);
+				}
 			}
 						
 			if(props.getUsedFruit().equals("hiehie"))
@@ -330,11 +379,23 @@ public class EventsPersistence
 					player.attackEntityFrom(DamageSource.generic, Integer.MAX_VALUE);
 				}
 			}
-			
+		}
+		else if(event.entityLiving instanceof EntityLivingBase)
+		{
+			EntityLivingBase entity = (EntityLivingBase) event.entityLiving;
+			ExtendedEntityStats propz = ExtendedEntityStats.get(entity);
+
+			if(!entity.worldObj.isRemote)
+			{
+				if(propz.isCandleLocked() && !entity.isPotionActive(Potion.moveSlowdown.id))
+				{				
+					propz.setIsCandleLocked(false);
+					WyNetworkHelper.sendToAll(new PacketSyncInfo(event.entityLiving.getEntityId(), propz));
+				}
+			}
 		}
 	}	
-	
-	/** XXX onLivingDeath */
+
 	@SubscribeEvent
 	public void onEntityDeath(LivingDeathEvent event)
 	{
@@ -389,7 +450,11 @@ public class EventsPersistence
 					/*plusDoriki = ((EntityNewMob) target).getDorikiPower() + rng;*/
 					if((props.getDoriki() / 100) > ((EntityNewMob) target).getDorikiPower())
 					{
-						plusDoriki = 1 / ( (props.getDoriki() / 100) - ((EntityNewMob) target).getDorikiPower() );
+						int x = (props.getDoriki() / 100) - ((EntityNewMob) target).getDorikiPower();
+						if(x > 0)
+							x = 1;
+						
+						plusDoriki = 1 / x;
 						if(plusDoriki < 1)
 							plusDoriki = 1;
 					}
@@ -463,7 +528,6 @@ public class EventsPersistence
 		}
 	}
 
-	/** XXX onEntityAttackEvent */
 	@SubscribeEvent
 	public void onEntityAttackEvent(LivingAttackEvent event)
 	{
@@ -481,7 +545,7 @@ public class EventsPersistence
 		{			
 			ExtendedEntityStats propz = ExtendedEntityStats.get((EntityPlayer) sourceOfDamage);
 			ItemStack heldItem = ((EntityPlayer) sourceOfDamage).getHeldItem();
-
+			
 			if(!sourceOfDamage.worldObj.isRemote && heldItem == null)
 			{		
 				for(int i = 0; i < propz.countAbilitiesInHotbar(); i++)
@@ -580,17 +644,37 @@ public class EventsPersistence
 		}
 	}
 	
-	/** XXX onEntityJoinWorld */
+	@SubscribeEvent
+	public void onEntityShootProjectile(ArrowLooseEvent event)
+	{
+		if(event.entityPlayer != null)
+		{
+			ExtendedEntityStats props = ExtendedEntityStats.get(event.entityPlayer);
+			for(int i = 0; i < props.countAbilitiesInHotbar(); i++)
+			{	
+				if(props.getAbilityFromSlot(i) != null && !props.getAbilityFromSlot(i).equals("n/a") && !props.getAbilityFromSlot(i).isOnCooldown() 
+						&& props.getAbilityFromSlot(i).getAttribute().isPassive() && props.getAbilityFromSlot(i).isPassiveActive())
+				{							
+					if(props.getAbilityFromSlot(i).getAttribute().isPunch())
+					{							
+						props.getAbilityFromSlot(i).endPassive(event.entityPlayer);
+					}
+				}
+			}
+		}
+	}
+	
 	@SubscribeEvent
 	public void onEntityJoinWorld(EntityJoinWorldEvent event)
 	{
 		if (event.entity instanceof EntityPlayer)
 		{
 			EntityPlayer player = (EntityPlayer) event.entity;
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);			
+			ExtendedEntityStats props = ExtendedEntityStats.get(player);
+			QuestProperties questProps = QuestProperties.get(player);
 			
 			if (!player.worldObj.isRemote)
-			{				
+			{			
 				if(ID.DEV_EARLYACCESS)
 				{					
 					try 
@@ -626,28 +710,11 @@ public class EventsPersistence
 					player.inventory.addItemStackToInventory(new ItemStack(ListMisc.CharacterCreator, 1));
 				
 				if(props.getUsedFruit() != null && !props.getUsedFruit().equals("N/A"))
-				{
-					String model = "";
-					String fullModel = "";
-					if(props.getUsedFruit().equals("ushiushibison"))
-					{
-						model = "bison";
-						fullModel = "model" + model;
-					}
-					
-					ItemStack yamiFruit = new ItemStack(GameRegistry.findItem(ID.PROJECT_ID, "yamiyaminomi"));
-					ItemStack df = new ItemStack(GameRegistry.findItem(ID.PROJECT_ID, props.getUsedFruit().replace(model, "") + "nomi" + fullModel));
+				{					
+					ItemStack df = DevilFruitsHelper.getDevilFruitItem(props.getUsedFruit());
 					
 					props.clearDevilFruitAbilities();
-					
-					if(props.hasYamiPower())
-					{
-						for(Ability a : ((AkumaNoMi)yamiFruit.getItem()).abilities)
-						{
-							if(!WyHelper.verifyIfAbilityIsBanned(a))
-								props.addDevilFruitAbility(a);
-						}
-					}
+					props.setGear(1);
 					
 					for(Ability a : ((AkumaNoMi)df.getItem()).abilities)
 						if(!WyHelper.verifyIfAbilityIsBanned(a))
@@ -664,6 +731,7 @@ public class EventsPersistence
 				}
 					
 				WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
+				WyNetworkHelper.sendTo(new PacketQuestSync(questProps), (EntityPlayerMP) player);
 				
 				if(MainConfig.enableUpdateMsg)
 				{
@@ -703,7 +771,6 @@ public class EventsPersistence
 		}
 	}
 	
-	/** XXX onClonePlayer */
 	@SubscribeEvent
 	public void onClonePlayer(PlayerEvent.Clone e) 
 	{
@@ -754,7 +821,6 @@ public class EventsPersistence
 		}
 	}
 
-	/** XXX onDorikiGained */
 	@SubscribeEvent
 	public void onDorikiGained(DorikiEvent event)
 	{
@@ -775,7 +841,7 @@ public class EventsPersistence
 		else if (event.props.getRace().equals(ID.RACE_FISHMAN))
 		{
 			ability(event.player, 800, FishKarateAbilities.UCHIMIZU);
-			ability(event.player, 2000, FishKarateAbilities.SOSHARK);
+			ability(event.player, 2000, FishKarateAbilities.MURASAME);
 			ability(event.player, 2500, FishKarateAbilities.KACHIAGEHAISOKU);
 			ability(event.player, 3000, FishKarateAbilities.SAMEHADASHOTEI);
 			ability(event.player, 4000, HakiAbilities.KENBUNSHOKUHAKI);

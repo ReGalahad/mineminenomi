@@ -8,9 +8,11 @@ import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.GoroProjectiles;
+import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.MeraProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.GoroProjectiles.ElThorThunder;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListExtraAttributes;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 
 public class GoroAbilities
@@ -25,25 +27,42 @@ public class GoroAbilities
 			super(ListAttributes.ELTHOR); 
 		}
 		
-		public void use(EntityPlayer player)
+		public void startCharging(EntityPlayer player)
 		{
-			if(!this.isOnCooldown)
+			super.startCharging(player);				
+		}
+		
+		public void duringCharging(EntityPlayer player, int currentCharge)
+		{
+			
+			MovingObjectPosition mop = WyHelper.rayTraceBlocks(player);	
+			
+			if(mop != null)
 			{
-				MovingObjectPosition mop = WyHelper.rayTraceBlocks(player);	
-				
-				if(mop != null)
-				{
-					double i = mop.blockX;
-					double j = mop.blockY;
-					double k = mop.blockZ;
+				double i = mop.blockX;
+				double j = mop.blockY;
+				double k = mop.blockZ;
 
-					WyNetworkHelper.sendTo(new PacketPlayer("ElThorThunder", i, j, k), (EntityPlayerMP) player);
-					player.worldObj.newExplosion(new EntityLightningBolt(player.worldObj, i, j, k), i, j, k, 6, true, true);
-				}		
-				
-				super.use(player);
-			}	
-		} 
+				WyNetworkHelper.sendTo(new PacketParticles("elthor", i, j, k), (EntityPlayerMP) player);
+			}
+		}
+		
+		public void endCharging(EntityPlayer player)
+		{						
+			MovingObjectPosition mop = WyHelper.rayTraceBlocks(player);	
+			
+			if(mop != null)
+			{
+				double i = mop.blockX;
+				double j = mop.blockY;
+				double k = mop.blockZ;
+
+				WyNetworkHelper.sendTo(new PacketPlayer("ElThorThunder", i, j, k), (EntityPlayerMP) player);
+				player.worldObj.newExplosion(new EntityLightningBolt(player.worldObj, i, j, k), i, j, k, 6, true, true);
+			}
+			
+			super.endCharging(player);
+		}
 	}
 	
 	public static class VoltVari extends Ability

@@ -1,15 +1,41 @@
 package xyz.pixelatedw.MineMineNoMi3.abilities;
 
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
+import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
+import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.GuraProjectiles;
+import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
+import xyz.pixelatedw.MineMineNoMi3.items.Heart;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
+import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 
 public class GuraAbilities 
 {
 
-	public static Ability[] abilitiesArray = new Ability[] {new Kaishin(), new Kabutowari(), new ShimaYurashi()};
+	public static Ability[] abilitiesArray = new Ability[] {new Kaishin(), new Kabutowari(), new ShimaYurashi(), new Gekishin()};
 
+	public static class Gekishin extends Ability
+	{
+		public Gekishin() 
+		{
+			super(ListAttributes.GEKISHIN); 
+		}
+		
+		public void hitEntity(EntityPlayer player, EntityLivingBase target) 
+		{			
+			super.hitEntity(player, target);
+			target.attackEntityFrom(DamageSource.causePlayerDamage(player), 100);
+			WyHelper.explosion(player, target.posX, target.posY, target.posZ, 3);
+			WyNetworkHelper.sendTo(new PacketParticles("gekishin", player), (EntityPlayerMP) player);
+		}
+	}
+	
 	public static class Kaishin extends Ability
 	{
 		public Kaishin() 

@@ -12,6 +12,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
+import xyz.pixelatedw.MineMineNoMi3.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
@@ -71,20 +72,12 @@ public class GUIPlayer extends GuiScreen
 		}
 
 		if(!props.getUsedFruit().equals("N/A") && !props.getUsedFruit().equals("null"))
-		{
-			String model = "";
-			String fullModel = "";
-			if(props.getUsedFruit().equals("ushiushibison"))
-			{
-				model = "bison";
-				fullModel = "model" + model;
-			}
-			
+		{			
 			ItemStack yamiFruit = new ItemStack(GameRegistry.findItem(ID.PROJECT_ID, "yamiyaminomi"));
 			ItemStack df;
 			if(!props.getUsedFruit().equals("yamidummy"))
 			{
-				df = new ItemStack(GameRegistry.findItem(ID.PROJECT_ID, props.getUsedFruit().replace(model, "") + "nomi" + fullModel));
+				df = DevilFruitsHelper.getDevilFruitItem(props.getUsedFruit());
 				
 				if(props.hasYamiPower())
 					mc.fontRenderer.drawStringWithShadow(EnumChatFormatting.BOLD + yamiFruit.getDisplayName() + " + " + df.getDisplayName(), posX - 28, posY + 194, -1);

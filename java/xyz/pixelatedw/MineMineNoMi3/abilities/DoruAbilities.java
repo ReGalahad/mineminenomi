@@ -12,8 +12,22 @@ import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 public class DoruAbilities 
 {
 
-	public static Ability[] abilitiesArray = new Ability[] {new DoruDoruArtsMori(), new DoruDoruArtsKen(), new CandleWall(), new CandleHouse()};
+	public static Ability[] abilitiesArray = new Ability[] {new DoruDoruArtsMori(), new DoruDoruArtsKen(), new CandleWall(), new CandleHouse(), new CandleLock()};
 
+	public static class CandleLock extends Ability
+	{
+		public CandleLock() 
+		{
+			super(ListAttributes.CANDLELOCK); 
+		}
+		
+		public void use(EntityPlayer player)
+		{		
+			this.projectile = new DoruProjectiles.CandleLock(player.worldObj, player, attr);
+			super.use(player);
+		} 
+	}
+	
 	public static class DoruDoruArtsKen extends Ability
 	{
 		public DoruDoruArtsKen()

@@ -23,9 +23,57 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 public class YukiAbilities 
 {
 
-	public static Ability[] abilitiesArray = new Ability[] {new Kamakura(), new TabiraYuki(), new YukiRabi(), new KamakuraJussoshi(), new Fubuki()};	
+	public static Ability[] abilitiesArray = new Ability[] {new Kamakura(), new TabiraYuki(), new YukiRabi(), new KamakuraJussoshi(), new Fubuki(), new YukiGaki()};	
 		
 
+	public static class YukiGaki extends Ability
+	{
+		public YukiGaki() 
+		{
+			super(ListAttributes.YUKIGAKI); 
+		}
+		
+		public void use(EntityPlayer player)
+		{		
+			if(!player.worldObj.isRemote)
+			{
+				if(!isOnCooldown)
+				{
+					if(WyHelper.get4Directions(player) == WyHelper.Direction.NORTH)
+					{
+						for(int x = -3; x <  3; x++)
+						for(int y = 0; y <= 3; y++)
+						for(int z = -1; z <= 1; z++)
+							player.worldObj.setBlock((int) player.posX - x, (int) player.posY + y, ((int) player.posZ - 3) - z, Blocks.snow);
+					}
+					if(WyHelper.get4Directions(player) == WyHelper.Direction.SOUTH)
+					{
+						for(int x = -3; x <  3; x++)
+						for(int y = 0; y <= 3; y++)
+						for(int z = -1; z <= 1; z++)
+							player.worldObj.setBlock((int) player.posX - x, (int) player.posY + y, ((int) player.posZ + 2) - z, Blocks.snow);
+					}
+					if(WyHelper.get4Directions(player) == WyHelper.Direction.EAST)
+					{
+						for(int x = -1; x < 1; x++)
+						for(int y = 0; y <= 3; y++)
+						for(int z = -3; z <= 3; z++)
+							player.worldObj.setBlock(((int) player.posX + 2) - x, (int) player.posY + y, (int) player.posZ - z, Blocks.snow);
+					}
+					if(WyHelper.get4Directions(player) == WyHelper.Direction.WEST)
+					{
+						for(int x = -1; x < 1; x++)
+						for(int y = 0; y <= 3; y++)
+						for(int z = -3; z <= 3; z++)
+							player.worldObj.setBlock(((int) player.posX - 3) - x, (int) player.posY + y, (int) player.posZ - z, Blocks.snow);
+					}
+					
+					super.use(player);
+				}
+			}
+		} 
+	}
+	
 	public static class TabiraYuki extends Ability
 	{
 		public TabiraYuki()

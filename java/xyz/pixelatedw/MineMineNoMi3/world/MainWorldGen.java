@@ -1,6 +1,8 @@
 package xyz.pixelatedw.MineMineNoMi3.world;
 
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import cpw.mods.fml.common.IWorldGenerator;
 import net.minecraft.block.Block;
@@ -13,6 +15,7 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
+import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.Schematic;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WySchematicHelper;
@@ -47,7 +50,7 @@ public class MainWorldGen implements IWorldGenerator
 			this.addStructureSpawn(WySchematicHelper.load("marineLargeShip"), world, random, i * 2, j * 2, 1, 1, 1.9 * MainConfig.rateShipsSpawn);
 		}
 		
-		this.addStructureSpawn(WySchematicHelper.load("dojo"), world, random, i, j, 1, 1, 100);
+		this.addStructureSpawn(WySchematicHelper.load("dojo"), world, random, i, j, 1, 1, 25);
 		
 		this.addDialSpawn(ListMisc.DialEisenBlock, world, random, i, j, 1, 1, 100);
 		this.addDialSpawn(ListMisc.DialFireBlock, world, random, i, j, 1, 1, 70);
@@ -113,65 +116,64 @@ public class MainWorldGen implements IWorldGenerator
 			int posZ = blockZPos;// + random.nextInt(maxZ);			
 			BiomeGenBase biome = world.getBiomeGenForCoordsBody(posX, posZ);		
 
-			if(s.getName().toLowerCase().contains("ship"))
+			if(s != null)
 			{
-				if( (biome.biomeName.equals("Ocean") || biome.biomeName.equals("Deep Ocean") ) && checkForShipSpawn(s, world, posX, posY, posZ))
+				if(s.getName().toLowerCase().contains("ship"))
 				{
-					if(s.getName().equals("marineShip") || s.getName().equals("pyrateShip"))		
+					if( (biome.biomeName.equals("Ocean") || biome.biomeName.equals("Deep Ocean") ) && checkForShipSpawn(s, world, posX, posY, posZ))
 					{
-						WySchematicHelper.build(s, world, posX, posY, posZ);
-						ListExtraStructures.buildSmallShip(posX, posY, posZ, world, s.getName());
-					}
-					else if(s.getName().equals("marineLargeShip") || s.getName().equals("pyrateLargeShip"))	
-					{ 
-						WySchematicHelper.build(s, world, posX, posY - 4, posZ);	
-						ListExtraStructures.buildLargeShip(posX, posY, posZ, world, s.getName());
-					}
-					System.out.println("" + s.getName() + " spawned at /tp @p " + posX + " " + posY + " " + posZ);
-
-			    	if(!ID.DEV_EARLYACCESS)
-			    		WyTelemetry.addStat("spawnedStructure_" + s.getName(), 1);
-				}
-			}
-			/*else if(s.getName().toLowerCase().contains("camp"))
-			{
-				if( (biome.biomeName.equals("Beach") || biome.biomeName.equals("Forest") || biome.biomeName.equals("Desert") || biome.biomeName.equals("Plains")) && checkForCampSpawn(s, world, posX, posY, posZ))
-				{
-					System.out.println("" + s.getName() + " spawned at /tp @p " + posX + " " + posY + " " + posZ);
-					WySchematicHelper.build(s, world, posX, posY, posZ);
-					ListExtraStructures.buildCamp(posX, posY, posZ, world);
-				}
-			}*/
-			else if(s.getName().toLowerCase().contains("dojo"))
-			{
-				ExtendedWorldData worldData = ExtendedWorldData.get(world);
-				
-				if(worldData.getTotalDojosSpawned() < 5 && posY > 50 && world.getBlockLightValue(posX, posY, posZ) > 10)
-				{
-					if( (biome.biomeName.equals("Beach") || biome.biomeName.equals("Plains") || biome.biomeName.equals(biome.desert.biomeName) || biome.biomeName.equals(biome.savanna.biomeName)
-							|| biome.biomeName.equals(biome.icePlains.biomeName) || biome.biomeName.equals(biome.desert.biomeName) || biome.biomeName.equals(biome.swampland.biomeName)) 
-							&& checkForDojoSpawn(s, world, posX, posY, posZ))
-					{		
+						if(s.getName().equals("marineShip") || s.getName().equals("pyrateShip"))		
+						{
+							WySchematicHelper.build(s, world, posX, posY, posZ);
+							ListExtraStructures.buildSmallShip(posX, posY, posZ, world, s.getName());
+						}
+						else if(s.getName().equals("marineLargeShip") || s.getName().equals("pyrateLargeShip"))	
+						{ 
+							WySchematicHelper.build(s, world, posX, posY - 4, posZ);	
+							ListExtraStructures.buildLargeShip(posX, posY, posZ, world, s.getName());
+						}
 						System.out.println("" + s.getName() + " spawned at /tp @p " + posX + " " + posY + " " + posZ);
-						WySchematicHelper.build(s, world, posX, posY, posZ);	
-						ListExtraStructures.buildDojo(posX, posY, posZ, world);
-						worldData.countUpDojoSpawned();
-						WyNetworkHelper.sendToAll(new PacketWorldData(worldData));
-						
+	
 				    	if(!ID.DEV_EARLYACCESS)
 				    		WyTelemetry.addStat("spawnedStructure_" + s.getName(), 1);
 					}
 				}
+				else if(s.getName().toLowerCase().contains("dojo"))
+				{
+					ExtendedWorldData worldData = ExtendedWorldData.get(world);
+					
+					if(worldData.getTotalDojosSpawned() < 5 && posY > 50 && world.getBlockLightValue(posX, posY, posZ) > 10)
+					{
+						if( (biome.biomeName.equals("Beach") || biome.biomeName.equals("Plains") || biome.biomeName.equals(biome.desert.biomeName) || biome.biomeName.equals(biome.savanna.biomeName)
+								|| biome.biomeName.equals(biome.icePlains.biomeName) || biome.biomeName.equals(biome.desert.biomeName) || biome.biomeName.equals(biome.swampland.biomeName)) 
+								&& checkForDojoSpawn(s, world, posX, posY, posZ))
+						{		
+							System.out.println("" + s.getName() + " spawned at /tp @p " + posX + " " + posY + " " + posZ);
+							WySchematicHelper.build(s, world, posX, posY, posZ);	
+							ListExtraStructures.buildDojo(posX, posY, posZ, world);
+							worldData.countUpDojoSpawned();
+							WyNetworkHelper.sendToAll(new PacketWorldData(worldData));
+							
+					    	if(!ID.DEV_EARLYACCESS)
+					    		WyTelemetry.addStat("spawnedStructure_" + s.getName(), 1);
+						}
+					}
+				}
+			}
+			else
+			{
+				Logger.getGlobal().log(Level.SEVERE, "Some schematic is null, this should never happen !");
 			}
 		}	
 	}
 
+	/** TODO Still spawns on water */
 	private boolean checkForDojoSpawn(Schematic s, World world, int posX, int posY, int posZ)
 	{
-		boolean corner1 = world.getBlock(posX, posY - 1, posZ) != Blocks.air;
-		boolean corner2 = world.getBlock(posX + s.getWidth(), posY - 1, posZ) != Blocks.air;
-		boolean corner3 = world.getBlock(posX, posY - 1, posZ + s.getLength()) != Blocks.air;
-		boolean corner4 = world.getBlock(posX + s.getWidth(), posY - 1, posZ + s.getLength()) != Blocks.air;		
+		boolean corner1 = world.getBlock(posX, posY - 1, posZ) != Blocks.air && world.getBlock(posX, posY - 1, posZ) != Blocks.water;
+		boolean corner2 = world.getBlock(posX + s.getWidth(), posY - 1, posZ) != Blocks.air && world.getBlock(posX + s.getWidth(), posY - 1, posZ) != Blocks.water;
+		boolean corner3 = world.getBlock(posX, posY - 1, posZ + s.getLength()) != Blocks.air && world.getBlock(posX, posY - 1, posZ + s.getLength()) != Blocks.water;
+		boolean corner4 = world.getBlock(posX + s.getWidth(), posY - 1, posZ + s.getLength()) != Blocks.air && world.getBlock(posX + s.getWidth(), posY - 1, posZ + s.getLength()) != Blocks.water;		
 		
 		if(corner1 && corner2 && corner3 && corner4)
 		{

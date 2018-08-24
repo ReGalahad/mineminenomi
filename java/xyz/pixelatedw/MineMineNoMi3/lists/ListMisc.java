@@ -2,19 +2,15 @@ package xyz.pixelatedw.MineMineNoMi3.lists;
 
 import java.util.Random;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.DimensionManager;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.NewBlock;
 import xyz.pixelatedw.MineMineNoMi3.Values;
-import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyRegistry;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockBarrier;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockCustomSpawner;
@@ -26,6 +22,8 @@ import xyz.pixelatedw.MineMineNoMi3.blocks.BlockKage;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockOpe;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockOpeMid;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockPoison;
+import xyz.pixelatedw.MineMineNoMi3.blocks.BlockStringMid;
+import xyz.pixelatedw.MineMineNoMi3.blocks.BlockStringWall;
 import xyz.pixelatedw.MineMineNoMi3.blocks.dials.BlockDialAxe;
 import xyz.pixelatedw.MineMineNoMi3.blocks.dials.BlockDialEisen;
 import xyz.pixelatedw.MineMineNoMi3.blocks.dials.BlockDialFire;
@@ -35,6 +33,7 @@ import xyz.pixelatedw.MineMineNoMi3.blocks.dials.BlockDialReject;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityCustomSpawner;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityDenDenMushi;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityOpe;
+import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityString;
 import xyz.pixelatedw.MineMineNoMi3.items.AkumaNoMiBox;
 import xyz.pixelatedw.MineMineNoMi3.items.BellyPouch;
 import xyz.pixelatedw.MineMineNoMi3.items.CharacterCreator;
@@ -74,6 +73,9 @@ public class ListMisc
 	public static BlockCustomSpawner CustomSpawner = new BlockCustomSpawner();
 	public static Block Darkness = new BlockDarkness();
 	public static Block KageBlock = new BlockKage();
+	public static Block StringWall = new BlockStringWall();
+	public static Block StringMid = new BlockStringMid();
+	
 	public static Block DialEisenBlock = new BlockDialEisen();
 	public static Block DialFireBlock = new BlockDialFire();
 	public static Block DialAxeBlock = new BlockDialAxe();
@@ -135,7 +137,7 @@ public class ListMisc
 	public static ItemCoreWeapon Kiribachi = new ItemCoreWeapon(6);
 	public static ItemCoreWeapon Yoru = new ItemCoreWeapon(10);
 	public static ItemCoreWeapon Biseto = new ItemCoreWeapon(8);
-	public static ItemCoreWeapon Hook = new ItemCoreWeapon(6);
+	public static ItemCoreWeapon Hook = new ItemCoreWeapon(6).setIsPoisonous();
 	public static ItemCoreWeapon Umbrella = new ItemCoreWeapon(3);
 	public static ItemCoreWeapon Jitte = new ItemCoreWeapon(7).setMaxDamage(500);
 	public static ItemCoreWeapon BoStick = new ItemCoreWeapon(6);
@@ -252,6 +254,9 @@ public class ListMisc
  		addBLOCK(CustomSpawner		, "Custom Spawner"		, Float.POSITIVE_INFINITY		, TileEntityCustomSpawner.class	, null);
  		addBLOCK(Darkness			, "Darkness"			, Float.POSITIVE_INFINITY		, null							, null);
  		addBLOCK(KageBlock			, "Kage Block"			, Float.POSITIVE_INFINITY		, null							, null);
+ 		addBLOCK(StringWall			, "String Wall"			, Float.POSITIVE_INFINITY		, null							, null);
+ 		addBLOCK(StringMid			, "String Mid"			, Float.POSITIVE_INFINITY		, TileEntityString.class		, null);
+
  		addBLOCK(DialEisenBlock		, "Eisen Dial Block"	, .3F							, null							, null);
  		addBLOCK(DialFireBlock		, "Flame Dial Block"	, .3F							, null							, null);
  		addBLOCK(DialAxeBlock		, "Axe Dial Block"		, .3F							, null							, null);
@@ -280,6 +285,8 @@ public class ListMisc
  		WyRegistry.registerName(ID.LANG_GUI_STYLE, "Style");
  		WyRegistry.registerName(ID.LANG_GUI_ABILITIES, "Abilities");
  		WyRegistry.registerName("gui.epithet.name", "Epithets");
+ 		WyRegistry.registerName(ID.LANG_GUI_QUESTS, "Quests");
+ 		WyRegistry.registerName(ID.LANG_GUI_QPROGRESS, "Progress");		
  			
 	}   
 	 
