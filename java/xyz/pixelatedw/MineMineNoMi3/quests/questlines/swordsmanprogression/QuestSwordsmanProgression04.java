@@ -1,16 +1,15 @@
 package xyz.pixelatedw.MineMineNoMi3.quests.questlines.swordsmanprogression;
 
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
-import net.minecraft.world.biome.BiomeGenBase;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.abilities.SwordsmanAbilities;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.Quest;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
@@ -18,7 +17,6 @@ import xyz.pixelatedw.MineMineNoMi3.items.weapons.ItemCoreWeapon;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListQuests;
 import xyz.pixelatedw.MineMineNoMi3.quests.EnumQuestlines;
 import xyz.pixelatedw.MineMineNoMi3.quests.IHitCounterQuest;
-import xyz.pixelatedw.MineMineNoMi3.quests.IKillQuest;
 import xyz.pixelatedw.MineMineNoMi3.quests.IProgressionQuest;
 
 public class QuestSwordsmanProgression04 extends Quest implements IHitCounterQuest, IProgressionQuest
@@ -59,9 +57,10 @@ public class QuestSwordsmanProgression04 extends Quest implements IHitCounterQue
 	{
 		//WyHelper.sendMsgToPlayer(player, "<Swordsman Master> That's a really nice blade you have there, really strong indeed. Fine, I will train you, when you're ready come and talk with me again !");
 		
-		ExtendedEntityStats props = ExtendedEntityStats.get(player);
+		AbilityProperties abilityProps = AbilityProperties.get(player);
 		
-		props.addRacialAbility(SwordsmanAbilities.SANBYAKUROKUJUPOUNDHO);
+		if(MainConfig.enableQuestProgression)
+			abilityProps.addRacialAbility(SwordsmanAbilities.SANBYAKUROKUJUPOUNDHO);
 		
 		super.finishQuest(player);
 	}

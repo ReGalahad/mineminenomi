@@ -44,13 +44,13 @@ public class MainWorldGen implements IWorldGenerator
 				
 		if(MainConfig.enableShips)
 		{
-			this.addStructureSpawn(WySchematicHelper.load("marineShip"), world, random, i * 2, j * 2, 1, 1, 1.8 * MainConfig.rateShipsSpawn);
-			this.addStructureSpawn(WySchematicHelper.load("pyrateShip"), world, random, i * 2, j * 2, 1, 1, 2.1 * MainConfig.rateShipsSpawn);
-			this.addStructureSpawn(WySchematicHelper.load("pyrateLargeShip"), world, random, i * 2, j * 2, 1, 1, 1.8 * MainConfig.rateShipsSpawn);
-			this.addStructureSpawn(WySchematicHelper.load("marineLargeShip"), world, random, i * 2, j * 2, 1, 1, 1.9 * MainConfig.rateShipsSpawn);
+			this.addStructureSpawn(WySchematicHelper.load("marineShip"), world, random, i * 2, j * 2, 1, 1, 2.5 * MainConfig.rateShipsSpawn);
+			this.addStructureSpawn(WySchematicHelper.load("pyrateShip"), world, random, i * 2, j * 2, 1, 1, 2.8 * MainConfig.rateShipsSpawn);
+			this.addStructureSpawn(WySchematicHelper.load("pyrateLargeShip"), world, random, i * 2, j * 2, 1, 1, 2.3 * MainConfig.rateShipsSpawn);
+			this.addStructureSpawn(WySchematicHelper.load("marineLargeShip"), world, random, i * 2, j * 2, 1, 1, 2.4 * MainConfig.rateShipsSpawn);
 		}
 		
-		this.addStructureSpawn(WySchematicHelper.load("dojo"), world, random, i, j, 1, 1, 25);
+		this.addStructureSpawn(WySchematicHelper.load("dojo"), world, random, i, j, 1, 1, 100);
 		
 		this.addDialSpawn(ListMisc.DialEisenBlock, world, random, i, j, 1, 1, 100);
 		this.addDialSpawn(ListMisc.DialFireBlock, world, random, i, j, 1, 1, 70);
@@ -142,7 +142,7 @@ public class MainWorldGen implements IWorldGenerator
 				{
 					ExtendedWorldData worldData = ExtendedWorldData.get(world);
 					
-					if(worldData.getTotalDojosSpawned() < 5 && posY > 50 && world.getBlockLightValue(posX, posY, posZ) > 10)
+					if(worldData.getTotalDojosSpawned() < MainConfig.maxDojoSpawn && posY > 50 && world.getBlockLightValue(posX, posY, posZ) > 10)
 					{
 						if( (biome.biomeName.equals("Beach") || biome.biomeName.equals("Plains") || biome.biomeName.equals(biome.desert.biomeName) || biome.biomeName.equals(biome.savanna.biomeName)
 								|| biome.biomeName.equals(biome.icePlains.biomeName) || biome.biomeName.equals(biome.desert.biomeName) || biome.biomeName.equals(biome.swampland.biomeName)) 
@@ -167,7 +167,6 @@ public class MainWorldGen implements IWorldGenerator
 		}	
 	}
 
-	/** TODO Still spawns on water */
 	private boolean checkForDojoSpawn(Schematic s, World world, int posX, int posY, int posZ)
 	{
 		boolean corner1 = world.getBlock(posX, posY - 1, posZ) != Blocks.air && world.getBlock(posX, posY - 1, posZ) != Blocks.water;

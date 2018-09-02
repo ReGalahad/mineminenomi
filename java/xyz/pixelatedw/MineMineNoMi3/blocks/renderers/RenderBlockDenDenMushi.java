@@ -3,16 +3,13 @@ package xyz.pixelatedw.MineMineNoMi3.blocks.renderers;
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import xyz.pixelatedw.MineMineNoMi3.ID;
-import xyz.pixelatedw.MineMineNoMi3.blocks.BlockDenDenMushi;
 import xyz.pixelatedw.MineMineNoMi3.blocks.models.ModelBlockDenDenMushi;
-import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityDenDenMushi;
 
 
-/** TODO Fix the Den Den Mushi Rendering */
+/** FIXME Fix the Den Den Mushi Rendering */
 
 public class RenderBlockDenDenMushi extends TileEntitySpecialRenderer
 {

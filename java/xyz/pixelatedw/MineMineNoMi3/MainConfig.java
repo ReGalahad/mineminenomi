@@ -18,8 +18,12 @@ public class MainConfig
 	public static boolean enableDFtoDrop;
 	public static boolean enableLogiaInvulnerability;	
 	public static boolean enableExtraHearts;
+	public static boolean enableMobRewards;
+	public static boolean enableQuestProgression;
+	public static boolean enableQuests;
 	public static double rateDFDrops;
 	public static double rateShipsSpawn;
+	public static int maxDojoSpawn;
 	
 	public static boolean enableTelemetry;
 	public static boolean enableUpdateMsg;
@@ -53,6 +57,11 @@ public class MainConfig
 
 		enableLogiaInvulnerability = config.get(Configuration.CATEGORY_GENERAL, "Allow Logia Invulnerability", true).getBoolean();
 		enableExtraHearts = config.get(Configuration.CATEGORY_GENERAL, "Receive Extra Hearts", true).getBoolean();
+		enableMobRewards = config.get(Configuration.CATEGORY_GENERAL, "Allow Mob Rewards", true).getBoolean();
+		
+		enableQuests = config.get(Configuration.CATEGORY_GENERAL, "Allow Quests", true).getBoolean();
+		enableQuestProgression = config.get(Configuration.CATEGORY_GENERAL, "Allow Quest Progression", true).getBoolean();
+		maxDojoSpawn = config.get(Configuration.CATEGORY_GENERAL, "Max Dojos to Spawn per World", 5).getInt();
 		
 		enchantmentDialImpactId = config.get("ids", "Enchantment ID : Dial Impact", 100).getInt();
 		enchantmentKairosekiId = config.get("ids", "Enchantment ID : Kairoseki", 101).getInt();

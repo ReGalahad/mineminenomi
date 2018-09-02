@@ -13,7 +13,7 @@ import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
 public class EntityMarineWithGun extends MarineData
 {
-	private String[] textures = {"marinegun1", "marinegun2", "marinegun3", "marinegun4"};
+	private String[] textures = {"marinegun1", "marinegun2", "marinegun3", "marinegun4", "marinegun5"};
 	
 	public EntityMarineWithGun(World world) 
 	{

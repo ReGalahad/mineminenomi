@@ -14,14 +14,14 @@ import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelZoanMorph;
 public class RenderZoanMorph extends Render
 {
 	private ResourceLocation texture = new ResourceLocation(ID.PROJECT_ID, "textures/models/null.png");
-	private ModelZoanMorph model;
+	private ModelBase model;
 	private double scale;
 	private float offset[] = new float[3];
 	
 	public RenderZoanMorph(ModelBase model, String texture)
 	{
 		this.shadowSize = 0;
-		this.model = (ModelZoanMorph) model;
+		this.model = model;
 		this.scale = 1;
 		this.texture = new ResourceLocation(ID.PROJECT_ID, "textures/models/" + texture + ".png");
 		this.offset = new float[] {0, 0, 0};
@@ -30,7 +30,7 @@ public class RenderZoanMorph extends Render
 	public RenderZoanMorph(ModelBase model, String texture, double scale)
 	{
 		this.shadowSize = 0;
-		this.model = (ModelZoanMorph) model;
+		this.model = model;
 		this.scale = scale;
 		this.texture = new ResourceLocation(ID.PROJECT_ID, "textures/models/" + texture + ".png");
 		this.offset = new float[] {0, 0, 0};
@@ -39,7 +39,7 @@ public class RenderZoanMorph extends Render
 	public RenderZoanMorph(ModelBase model, String texture, double scale, float offset[])
 	{
 		this.shadowSize = 0;
-		this.model = (ModelZoanMorph) model;
+		this.model = model;
 		this.scale = scale;
 		this.texture = new ResourceLocation(ID.PROJECT_ID, "textures/models/" + texture + ".png");
 		this.offset = offset;
@@ -49,8 +49,8 @@ public class RenderZoanMorph extends Render
     {
         float f = 1.0F;
         GL11.glColor3f(f, f, f);
-        if(this.model.getHandRenderer() != null)
-        	this.model.getHandRenderer().render(0.0625F);
+        if(this.model instanceof ModelZoanMorph && ((ModelZoanMorph) this.model).getHandRenderer() != null)
+        	((ModelZoanMorph) this.model).getHandRenderer().render(0.0625F);
     }
 	
 	public void doRender(Entity entity, double x, double y, double z, float u, float v) 

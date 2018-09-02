@@ -78,7 +78,7 @@ public class WyRegistry
 	{
 		EntityRegistry.registerModEntity(entity, name, entityID++, MainMod.getMineMineNoMi(), 128, 3, true);
 		if(color1 != -1 && color2 != -1)
-			EntityList.addMapping(entity, name, entityID++, color2, color2);
+			EntityList.addMapping(entity, name, entityID++, color1, color2);
 		registerName("entity." + name + ".name", name);
 	}
 

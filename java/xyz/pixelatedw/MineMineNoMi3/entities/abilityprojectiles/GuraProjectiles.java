@@ -4,9 +4,12 @@ import java.util.ArrayList;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.world.World;
+import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
+import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.HieProjectiles.IceBall;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.HieProjectiles.IceBlockPartisan;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
@@ -37,8 +40,13 @@ public class GuraProjectiles
 		
 		public void onUpdate()
 		{								
-			for (int i = 0; i < 50; i++)
-				this.worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_LARGE.getParticleName(), this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);			
+			for (int i = 0; i < 2; i++)
+			{
+				if(i % 2 == 0)
+					this.worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_LARGE.getParticleName(), this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
+				else
+					MainMod.proxy.spawnCustomParticles(this, ID.PARTICLE_NAME_GURA, this.posX + this.rand.nextFloat() * 2 - 1, this.posY + this.rand.nextFloat() * 2 - 1, this.posZ + this.rand.nextFloat() * 2 - 1, 0.0D, 0.0D, 0.0D);	
+			}
 			
 			super.onUpdate();
 		}
@@ -59,8 +67,13 @@ public class GuraProjectiles
 		
 		public void onUpdate()
 		{								
-			for (int i = 0; i < 50; i++)
-				this.worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_LARGE.getParticleName(), this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);			
+			for (int i = 0; i < 3; i++)
+			{
+				if(i % 2 == 0)
+					this.worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_LARGE.getParticleName(), this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
+				else
+					MainMod.proxy.spawnCustomParticles(this, ID.PARTICLE_NAME_GURA, this.posX + this.rand.nextFloat() * 2 - 1, this.posY + this.rand.nextFloat() * 2 - 1, this.posZ + this.rand.nextFloat() * 2 - 1, 0.0D, 0.0D, 0.0D);	
+			}
 			
 			super.onUpdate();
 		}

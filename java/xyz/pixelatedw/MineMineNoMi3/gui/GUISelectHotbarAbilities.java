@@ -17,7 +17,8 @@ import xyz.pixelatedw.MineMineNoMi3.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyRenderHelper;
-import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityManager;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.gui.extra.GUIAbilitiesList;
 import xyz.pixelatedw.MineMineNoMi3.gui.extra.GUIButtonNoTexture;
@@ -29,6 +30,7 @@ public class GUISelectHotbarAbilities extends GuiScreen
 {
 	protected EntityPlayer player;
 	protected ExtendedEntityStats props;
+	protected AbilityProperties abilityProps;
 	
 	private GUIAbilitiesList devilFruitsAbilitiesList, racialAbilitiesList, hakiAbilitiesList;
 	private RenderItem renderItem;
@@ -41,6 +43,7 @@ public class GUISelectHotbarAbilities extends GuiScreen
 	{
 		this.player = player;
 		this.props = ExtendedEntityStats.get(player);	
+		this.abilityProps = AbilityProperties.get(player);
 	}
 	
 	public void drawScreen(int x, int y, float f)
@@ -70,8 +73,8 @@ public class GUISelectHotbarAbilities extends GuiScreen
 		for(int i = 0; i < 8; i++)
 		{
             OpenGlHelper.glBlendFunc(770, 771, 1, 0);
-            if(props.getAbilityFromSlot(i) != null)
-            	WyRenderHelper.drawAbilityIcon(WyHelper.getFancyName(props.getAbilityFromSlot(i).getAttribute().getAttributeName()), (posX - 192 + (i * 50)) / 2, posY - 29, 16, 16);
+            if(abilityProps.getAbilityFromSlot(i) != null)
+            	WyRenderHelper.drawAbilityIcon(WyHelper.getFancyName(abilityProps.getAbilityFromSlot(i).getAttribute().getAttributeName()), (posX - 192 + (i * 50)) / 2, posY - 29, 16, 16);
         }
 		
 		this.mc.getTextureManager().bindTexture(ID.TEXTURE_COMBATMODE);		
@@ -88,16 +91,16 @@ public class GUISelectHotbarAbilities extends GuiScreen
 			}
 			this.mc.getTextureManager().bindTexture(ID.TEXTURE_COMBATMODE);	
 		}
-		if(props.getRacialAbilities()[0] != null && !props.getRacialAbilities()[0].equals("n/a"))
+		if(abilityProps.getRacialAbilities()[0] != null && !abilityProps.getRacialAbilities()[0].equals("n/a"))
 		{
 			this.drawTexturedModalRect((posX - 280) / 2, (posY - 140) / 2, 0, 23, 27, 26);
-			WyRenderHelper.drawAbilityIcon(props.getRacialAbilities()[0], (posX - 268) / 2, (posY - 127) / 2, 16, 16);	
+			WyRenderHelper.drawAbilityIcon(abilityProps.getRacialAbilities()[0].getAttribute().getAttributeName(), (posX - 268) / 2, (posY - 127) / 2, 16, 16);	
 			this.mc.getTextureManager().bindTexture(ID.TEXTURE_COMBATMODE);	
 		}
-		if(props.getHakiAbilities()[0] != null && !props.getHakiAbilities()[0].equals("n/a"))
+		if(abilityProps.getHakiAbilities()[0] != null && !abilityProps.getHakiAbilities()[0].equals("n/a"))
 		{
 			this.drawTexturedModalRect((posX - 280) / 2, (posY - 80) / 2, 0, 23, 27, 26);
-			WyRenderHelper.drawAbilityIcon(props.getHakiAbilities()[0], (posX - 268) / 2, (posY - 67) / 2, 16, 16);	
+			WyRenderHelper.drawAbilityIcon(abilityProps.getHakiAbilities()[0].getAttribute().getAttributeName(), (posX - 268) / 2, (posY - 67) / 2, 16, 16);	
 			this.mc.getTextureManager().bindTexture(ID.TEXTURE_COMBATMODE);	
 		}
 		
@@ -127,15 +130,12 @@ public class GUISelectHotbarAbilities extends GuiScreen
 		int posY = sr.getScaledHeight();
 		relativePosX = posX;
 		relativePosY = posY;
-		
-		//if(MainConfig.devilFruitAbilitiesSystem == 0 || MainConfig.devilFruitAbilitiesSystem == 1)
-		//	this.buttonList.add(new GuiButton(-1, (posX + 250) / 2, posY - 220, 80, 20, "Edit Abilities"));
-		
+
 		if(props.getUsedFruit() != null && !props.getUsedFruit().toLowerCase().equals("n/a"))
 			this.buttonList.add(new GUIButtonNoTexture(10, (posX - 280) / 2, (posY - 200) / 2, 27, 25, ""));
-		if(props.getRacialAbilities()[0] != null && !props.getRacialAbilities()[0].equals("n/a"))
+		if(abilityProps.getRacialAbilities()[0] != null)
 			this.buttonList.add(new GUIButtonNoTexture(11, (posX - 280) / 2, (posY - 140) / 2, 27, 25, ""));
-		if(props.getHakiAbilities()[0] != null && !props.getHakiAbilities()[0].equals("n/a"))
+		if(abilityProps.getHakiAbilities()[0] != null)
 			this.buttonList.add(new GUIButtonNoTexture(12, (posX - 280) / 2, (posY - 80) / 2, 27, 25, ""));
 		
 		for(int i = 0; i < 8; i++)
@@ -144,13 +144,17 @@ public class GUISelectHotbarAbilities extends GuiScreen
 			this.buttonList.add(new GUIButtonNoTexture(i, (posX - 196 + (i * 50)) / 2, posY - 31, 21, 21, ""));
 		}	
 		
-        this.devilFruitsAbilitiesList = new GUIAbilitiesList(this, props, props.getDevilFruitAbilities());
+		for(Ability abl : abilityProps.getDevilFruitAbilities())
+			if(abl != null)
+				System.out.println(abl.getAttribute().getAttributeName());
+		
+        this.devilFruitsAbilitiesList = new GUIAbilitiesList(this, abilityProps, abilityProps.getDevilFruitAbilities());
         this.devilFruitsAbilitiesList.registerScrollButtons(this.buttonList, 998, 999);
    
-        this.racialAbilitiesList = new GUIAbilitiesList(this, props, props.getRacialAbilities());
+        this.racialAbilitiesList = new GUIAbilitiesList(this, abilityProps, abilityProps.getRacialAbilities());
         this.racialAbilitiesList.registerScrollButtons(this.buttonList, 998, 999);
         
-        this.hakiAbilitiesList = new GUIAbilitiesList(this, props, props.getHakiAbilities());
+        this.hakiAbilitiesList = new GUIAbilitiesList(this, abilityProps, abilityProps.getHakiAbilities());
         this.hakiAbilitiesList.registerScrollButtons(this.buttonList, 998, 999);
    
 		updateScreen();
@@ -163,9 +167,9 @@ public class GUISelectHotbarAbilities extends GuiScreen
 	
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton)
     {
-    	if(mouseButton == 1 && this.slotSelected > -1 && props.getAbilityFromSlot(this.slotSelected) != null)
+    	if(mouseButton == 1 && this.slotSelected > -1 && abilityProps.getAbilityFromSlot(this.slotSelected) != null)
     	{	
-    		props.setAbilityInSlot(this.slotSelected, null);
+    		abilityProps.setAbilityInSlot(this.slotSelected, null);
     	}
     	super.mouseClicked(mouseX, mouseY, mouseButton);
     }

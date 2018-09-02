@@ -52,10 +52,10 @@ public class QuestSwordsmanProgression02 extends Quest implements ITimedQuest, I
 
 	public void finishQuest(EntityPlayer player)
 	{
-		boolean extraDays = (int) (player.worldObj.getWorldTime() / 24000) >= (this.extraData.getLong("currentDays") / 24000) + 3 ;
+		boolean extraDays = (int) (player.worldObj.getWorldTime()) >= (this.extraData.getLong("currentDays") + 72000) ;
 		
 		if(extraDays)
-			WyHelper.sendMsgToPlayer(player, "<Swordsman Master> Almost thought you died there kid, but there's no time to rest, hope you're ready for your next trial !");
+			WyHelper.sendMsgToPlayer(player, "<Swordsman Master> Almost thought you died there kid, I'm glad that you survived but there's no time to rest, hope you're ready for your next trial !");
 		else
 			WyHelper.sendMsgToPlayer(player, "<Swordsman Master> Seems like it was too easy for you ?");
 		
@@ -83,17 +83,12 @@ public class QuestSwordsmanProgression02 extends Quest implements ITimedQuest, I
 
 	public double getMaxProgress()
 	{
-		return 1;
-	}
-
-	public void setProgress(EntityPlayer player, double progress) 
-	{
-		super.setProgress(player, progress);
+		return 24000;
 	}
 	
 	public boolean isFinished(EntityPlayer player)
 	{	
-		if((int) (player.worldObj.getWorldTime() / 24000) >= (this.extraData.getLong("currentDays") / 24000) + 1) 
+		if((int) (player.worldObj.getWorldTime()) >= (this.extraData.getLong("currentDays") + 24000)) 
 			return true;
 		
 		return false;
@@ -126,7 +121,10 @@ public class QuestSwordsmanProgression02 extends Quest implements ITimedQuest, I
 	public void onTimePassEvent(EntityPlayer player)
 	{
 		if(!this.isFinished(player))
-			this.setProgress(player, (player.worldObj.getWorldTime() - this.extraData.getLong("currentDays")) / (double)(24000) );
+		{
+			System.out.println(player.worldObj.getWorldTime() - this.extraData.getLong("currentDays"));
+			this.setProgress(player, player.worldObj.getWorldTime() - this.extraData.getLong("currentDays") );
+		}
 	}
 
 }

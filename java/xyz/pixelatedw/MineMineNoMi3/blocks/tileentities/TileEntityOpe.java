@@ -9,11 +9,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.abilities.OpeAbilities.Room;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityManager;
-import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
-import xyz.pixelatedw.MineMineNoMi3.packets.PacketWorld;
 
 public class TileEntityOpe extends TileEntity
 {
@@ -31,6 +31,7 @@ public class TileEntityOpe extends TileEntity
 			{
 				EntityPlayer user = (EntityPlayer) elb;
 				ExtendedEntityStats props = ExtendedEntityStats.get(user);
+				AbilityProperties abilityProps = AbilityProperties.get(user);
 
 				if(props.getUsedFruit().equals("opeope"))
 				{
@@ -38,11 +39,11 @@ public class TileEntityOpe extends TileEntity
 					{
 						clearRoom();
 						
-						for(String abl : props.getDevilFruitAbilities())
+						for(Ability abl : abilityProps.getDevilFruitAbilities())
 						{
-							if(abl.toLowerCase().equals("room"))
+							if(abl.getAttribute().getAttributeName().equalsIgnoreCase("room"))
 							{
-								((Room)AbilityManager.instance().getAbilityByName(abl)).alterSpawnFlag(true);
+								((Room)abl).alterSpawnFlag(true);
 							}
 						}
 					}		

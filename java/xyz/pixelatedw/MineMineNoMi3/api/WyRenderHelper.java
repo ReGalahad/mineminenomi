@@ -12,14 +12,85 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 
 public class WyRenderHelper
 {	
+	public static void drawColourOnScreen(int colour, int alpha, double posX, double posY, double width, double height, double zLevel)
+	{
+		int r = (colour >> 16 & 0xff);
+		int g = (colour >> 8 & 0xff);
+		int b = (colour & 0xff);
+		drawColourOnScreen(r, g, b, alpha, posX, posY, width, height, zLevel);
+	}
+
+	public static void drawColourOnScreen(int r, int g, int b, int alpha, double posX, double posY, double width, double height, double zLevel)
+	{
+		if (width <= 0 || height <= 0)
+		{
+			return;
+		}
+		GL11.glDisable(GL11.GL_TEXTURE_2D);
+		Tessellator tessellator = Tessellator.instance;
+		tessellator.startDrawingQuads();
+		// worldrenderer.startDrawingQuads();
+		tessellator.setColorRGBA(r, g, b, alpha);
+		tessellator.addVertex(posX, posY + height, zLevel);
+		tessellator.addVertex(posX + width, posY + height, zLevel);
+		tessellator.addVertex(posX + width, posY, zLevel);
+		tessellator.addVertex(posX, posY, zLevel);
+		tessellator.draw();
+		GL11.glEnable(GL11.GL_TEXTURE_2D);
+	}
+
+	public static void renderTestStencil()
+	{
+		// Basic stencil test
+		Minecraft mc = Minecraft.getMinecraft();
+		ScaledResolution reso = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
+		EntityPlayer player = mc.thePlayer;
+		
+		GL11.glEnable(GL11.GL_STENCIL_TEST);
+
+		GL11.glColorMask(false, false, false, false);
+		GL11.glDepthMask(false);
+
+		GL11.glStencilFunc(GL11.GL_NEVER, 1, 0xFF);
+		GL11.glStencilOp(GL11.GL_REPLACE, GL11.GL_KEEP, GL11.GL_KEEP);
+
+		GL11.glStencilMask(0xFF);
+		GL11.glClear(GL11.GL_STENCIL_BUFFER_BIT);
+		GL11.glColor3d(255, 0, 0);
+		WyRenderHelper.drawEntityOnScreen((int)reso.getScaledWidth_double() / 2, (int)reso.getScaledHeight_double() / 2, 64, 0, 0, mc.thePlayer);
+		
+		//drawColourOnScreen(0xffffff, 255, 0, 0, 60, 60, 0);
+
+		GL11.glColorMask(true, true, true, true);
+		GL11.glDepthMask(true);
+
+		GL11.glStencilMask(0x00);
+
+		GL11.glStencilFunc(GL11.GL_EQUAL, 0, 0xFF);
+
+		GL11.glStencilFunc(GL11.GL_EQUAL, 1, 0xFF);
+		GL11.glColor3d(255, 0, 0);
+		WyRenderHelper.drawEntityOnScreen((int)reso.getScaledWidth_double() / 2, (int)reso.getScaledHeight_double() / 2, 64, 0, 0, mc.thePlayer);
+
+		//drawColourOnScreen(0xffffff, 255, 0, 0, reso.getScaledWidth_double(), reso.getScaledHeight_double(), 0);
+
+		GL11.glDisable(GL11.GL_STENCIL_TEST);
+	
+	}
+	
+	
+	
+	
+	
 	public static void drawAbilityIcon(String iconName, int x, int y, int u, int v)
 	{
-        Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation(ID.PROJECT_ID, "textures/items/" + iconName + ".png"));        
+        Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation(ID.PROJECT_ID, "textures/items/" + WyHelper.getFancyName(iconName) + ".png"));        
 		Tessellator tessellator = Tessellator.instance;
 	    tessellator.startDrawingQuads();    
 	    tessellator.addVertexWithUV(x			, y + v			, 0, 0.0, 1.0);

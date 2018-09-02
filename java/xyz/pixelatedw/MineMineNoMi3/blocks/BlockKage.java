@@ -13,12 +13,17 @@ import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper.Direction;
+import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketWorld;
 
 
 public class BlockKage extends Block
 {	
+	private int ticks = 200;
+	private int maxTicks = 200;
+	
 	public BlockKage()
 	{
 		super(Material.iron);
@@ -48,6 +53,17 @@ public class BlockKage extends Block
 	    		this.setBlockBounds(0, 0, 0, 1, 1, 1);
 	    		super.addCollisionBoxesToList(world, x, y, z, mask, list, entity);
 	    	}
+    	}
+	}
+    
+    public void randomDisplayTick(World worldIn, int x, int y, int z, Random rand)
+    {
+    	if(ticks > 0)
+    		ticks--;
+    	else
+    	{
+    		WyNetworkHelper.sendToServer(new PacketWorld(x, y, z, Block.getIdFromBlock(Blocks.air)));
+    		ticks = maxTicks;
     	}
 	}
 	

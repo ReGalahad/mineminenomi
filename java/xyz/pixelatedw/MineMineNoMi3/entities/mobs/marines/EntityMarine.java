@@ -8,7 +8,7 @@ import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
 public class EntityMarine extends MarineData
 { 
-	private String[] textures = {"marine1", "marine2", "marine3", "marine4"};
+	private String[] textures = {"marine1", "marine2", "marine3", "marine4", "marine5"};
 	
 	public EntityMarine(World world) 
 	{

@@ -6,7 +6,7 @@ import net.minecraft.util.EnumChatFormatting;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.Quest;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.PirateData;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.bandits.BanditData;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 import xyz.pixelatedw.MineMineNoMi3.quests.IKillQuest;
 
@@ -26,8 +26,8 @@ public class BountyLowLevel02 extends Quest implements IKillQuest
 	{
 		return new String[] 
 				{
-					"",
-					"",
+					"Some low-life bandits are terrorizing the local villagers",
+					"hunt them down fast before they cause more problems !",
 					"",
 					"",
 					"",
@@ -79,7 +79,7 @@ public class BountyLowLevel02 extends Quest implements IKillQuest
 
 	public boolean isTarget(EntityPlayer player, EntityLivingBase target)
 	{
-		return target instanceof PirateData;
+		return target instanceof BanditData;
 	}
 	
 	public boolean isRepeatable()

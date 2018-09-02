@@ -144,9 +144,10 @@ public class ListMisc
 	public static ItemCoreWeapon Hammer5t = new ItemCoreWeapon(1);
 	public static ItemCoreWeapon Hammer10t = new ItemCoreWeapon(1);
 	public static ItemCoreWeapon Hammer100t = new ItemCoreWeapon(1);
-	public static ItemCoreWeapon Tonfa = new ItemCoreWeapon(4);
+	public static ItemCoreWeapon Tonfa = new ItemCoreWeapon(4).setMaxDamage(500);
 	public static ItemCoreWeapon Knife1 = new ItemCoreWeapon(3);	
-	public static ItemCoreWeapon Knife2 = new ItemCoreWeapon(3);	
+	public static ItemCoreWeapon Knife2 = new ItemCoreWeapon(3);
+	public static ItemCoreWeapon Knife3 = new ItemCoreWeapon(3).setMaxDamage(250);
 	public static ItemCoreWeapon WadoIchimonji = new ItemCoreWeapon(8);
 	public static ItemCoreWeapon Kitetsu = new ItemCoreWeapon(8);
 	public static ItemCoreWeapon Shusui = new ItemCoreWeapon(8);
@@ -221,6 +222,7 @@ public class ListMisc
 		addITEM(Tonfa								, "Tonfa"					, ListCreativeTabs.tabWeapons);
 		addITEM(Knife1								, "Mihawk's Knife"			, ListCreativeTabs.tabWeapons);
 		addITEM(Knife2								, "Ace's Knife"				, ListCreativeTabs.tabWeapons);
+		addITEM(Knife3								, "Bandit's Knife"			, ListCreativeTabs.tabWeapons);
 		addITEM(WadoIchimonji						, "Wado Ichimonji"			, ListCreativeTabs.tabWeapons);		
 		addITEM(Kitetsu								, "Kitetsu"					, ListCreativeTabs.tabWeapons);		
 		addITEM(Shusui								, "Shusui"					, ListCreativeTabs.tabWeapons);	

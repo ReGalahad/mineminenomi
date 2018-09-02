@@ -70,7 +70,7 @@ public class ID
 	PROJECT_VERSION = "0.4.0",
 	PROJECT_MCVERSION = "1.7.10",
 	PROJECT_SOURCEFOLDER = "D:/Programming/Minecraft Modding/Mine Mine no Mi/src/main/resources/",
-	
+
 	PARTICLE_NAME_PIKA = "pika",
 	PARTICLE_NAME_PIKABIG = "pikabig",
 	PARTICLE_NAME_YUKI = "yuki",
@@ -91,7 +91,7 @@ public class ID
 	PARTICLE_NAME_GURA = "gura",
 	PARTICLE_NAME_GURA2 = "gura2",
 	PARTICLE_NAME_GURABIG = "gurabig",
-	
+
 	CREW_ARLONG = "Arlong Pirates",
 	CREW_BAROQUEWORKS = "Baroque Works",
 	CREW_ALVIDAPIRATES = "Alvida Pirates",
@@ -157,5 +157,5 @@ public class ID
 	
 	public static final boolean
 	
-	DEV_EARLYACCESS = false;
+	DEV_EARLYACCESS = true;
 }

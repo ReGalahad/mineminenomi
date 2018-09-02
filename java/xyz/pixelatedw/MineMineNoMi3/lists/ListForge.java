@@ -9,7 +9,7 @@ import xyz.pixelatedw.MineMineNoMi3.events.EventsQuestsProgress;
 import xyz.pixelatedw.MineMineNoMi3.events.EventsDrops;
 import xyz.pixelatedw.MineMineNoMi3.events.EventsEnchantments;
 import xyz.pixelatedw.MineMineNoMi3.events.EventsMorphs;
-import xyz.pixelatedw.MineMineNoMi3.events.EventsOnTime;
+import xyz.pixelatedw.MineMineNoMi3.events.EventsClientOnly;
 import xyz.pixelatedw.MineMineNoMi3.events.EventsPersistence;
 import xyz.pixelatedw.MineMineNoMi3.gui.GUICombatMode;
 
@@ -30,7 +30,7 @@ public class ListForge
 			MinecraftForge.EVENT_BUS.register(new EventsMorphs(Minecraft.getMinecraft()));
 			FMLCommonHandler.instance().bus().register(new MainKeys());
 			MainKeys.init();
-			FMLCommonHandler.instance().bus().register(new EventsOnTime());
+			FMLCommonHandler.instance().bus().register(new EventsClientOnly());
 		}
 	}
 	

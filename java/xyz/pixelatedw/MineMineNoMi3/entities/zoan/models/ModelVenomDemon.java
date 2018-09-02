@@ -326,7 +326,7 @@ public class ModelVenomDemon extends ModelZoanMorph
         modelRenderer.rotateAngleZ = z;
     }
 
-    /** TODO Make the venom demon hand visible (might need to rebuild the model from Tabula) */
+    /** FIXME Make the venom demon hand visible (might need to rebuild the model from Tabula) */
 	public ModelRenderer getHandRenderer() 
 	{
 		return righthand;

@@ -12,6 +12,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.EntityInteractEvent;
+import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketQuestSync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
@@ -40,7 +41,7 @@ public class EventsQuestsProgress
 		if(event.target instanceof EntityLivingBase)
 			target = (EntityLivingBase) event.target;
 
-		if(target != null && !player.worldObj.isRemote)
+		if(target != null && !player.worldObj.isRemote && MainConfig.enableQuests)
 		{
 			
 			// Swordsman Progression Questline Logic
@@ -54,7 +55,6 @@ public class EventsQuestsProgress
 				}
 				
 				// Starting the next quest in the questline
-				/** TODO Needs to be replaced with a accept/decline UI */
 				if(questProps.questsInProgress() < Values.MAX_ACTIVITIES)
 				{
 					Quest currentProgressionQuest = QuestLogicHelper.getQuestlineCurrentQuest(EnumQuestlines.SWORDSMANPROGRESSION.getQuests(), questProps);

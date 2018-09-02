@@ -10,6 +10,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.arlongPirates.EntityArlong;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.arlongPirates.EntityChew;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.arlongPirates.EntityKuroobi;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.bandits.EntityBandit;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.kriegPirates.EntityDonKrieg;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.kriegPirates.EntityGin;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.kriegPirates.EntityPearl;
@@ -66,6 +67,10 @@ public class ListEntities
 		Type[] generalBiomes = new Type[]
 				{Type.BEACH, Type.JUNGLE, Type.SWAMP, Type.SAVANNA, Type.FOREST, Type.HILLS, Type.CONIFEROUS};
 		
+		//Bandits
+		WyRegistry.registerMob("Bandit with Sword", EntityBandit.class, 0x5B2929, 0xFFFFFF);
+		WyRegistry.registerSpawnBiomesFor(EntityBandit.class, 30, 2, 5, generalBiomes);
+		
 		//Marines
 		WyRegistry.registerMob("Marine with Sword", EntityMarine.class, 0x02258e, 0xFFFFFF);
 		WyRegistry.registerSpawnBiomesFor(EntityMarine.class, 20, 3, 6, generalBiomes);
@@ -105,9 +110,9 @@ public class ListEntities
 		//Others
 		WyRegistry.registerMob("Doppelman", EntityDoppelman.class);
 		WyRegistry.registerMob("Den Den Mushi", EntityDenDenMushi.class, 0xFF00FF, 0x00FF00);
-		WyRegistry.registerMob("Dojo Sensei", EntityDojoSensei.class, 0xFF00FF, 0x00FF00); /** TODO Remove the spawn egg, debug only */
+		WyRegistry.registerMob("Dojo Sensei", EntityDojoSensei.class, 0xFF00FF, 0x00FF00); /** FORGOLD Remove the spawn egg, debug only */
 		
-		/** TODO Delete any and all mentions of these */
+		/** FORGOLD Delete any and all mentions of these */
 		//Temp
 		WyRegistry.registerMob("TEMP_Fist", TempEntityFist.class);
 		WyRegistry.registerMob("TEMP_Bazooka", TempEntityBazooka.class);

@@ -9,6 +9,8 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.EnumChatFormatting;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
+import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilitySync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
@@ -38,13 +40,14 @@ public class CommandRemoveDF extends CommandBase
 		}
 		
 		ExtendedEntityStats props = ExtendedEntityStats.get(target);
-		
+		AbilityProperties abilityProps = AbilityProperties.get(target);
+
 		props.setUsedFruit("N/A");
 		props.setYamiPower(false);
 		props.setIsLogia(false);
 		
-		props.clearHotbar();
-		props.clearDevilFruitAbilities();
+		abilityProps.clearHotbar();
+		abilityProps.clearDevilFruitAbilities();
 		target.clearActivePotions();
 
 		props.setZoanPoint("n/a");
@@ -53,6 +56,7 @@ public class CommandRemoveDF extends CommandBase
 		
 		WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP)target);	
 		WyNetworkHelper.sendToAll(new PacketSyncInfo(target.getDisplayName(), props));	
+		WyNetworkHelper.sendTo(new PacketAbilitySync(abilityProps), (EntityPlayerMP)target);	
 	}
 
 	public boolean canCommandSenderUseCommand(ICommandSender sender)

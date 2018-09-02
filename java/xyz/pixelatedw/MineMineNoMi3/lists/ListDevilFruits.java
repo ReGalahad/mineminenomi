@@ -63,6 +63,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.NoroProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.OpeProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.PikaProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.RokushikiProjectiles;
+import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.SniperProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.SukeProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.SunaProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.SwordsmanProjectiles;
@@ -96,7 +97,7 @@ public class ListDevilFruits
 				MaguProjectiles.abilitiesClassesArray, DoruProjectiles.abilitiesClassesArray, DokuProjectiles.abilitiesClassesArray, GasuProjectiles.abilitiesClassesArray, YukiProjectiles.abilitiesClassesArray,
 				ItoProjectiles.abilitiesClassesArray, FishKarateProjectiles.abilitiesClassesArray, CyborgProjectiles.abilitiesClassesArray, ExtraProjectiles.abilitiesClassesArray, BariProjectiles.abilitiesClassesArray,
 				HoroProjectiles.abilitiesClassesArray, GoeProjectiles.abilitiesClassesArray, NoroProjectiles.abilitiesClassesArray, YamiProjectiles.abilitiesClassesArray, GomuProjectiles.abilitiesClassesArray,
-				SwordsmanProjectiles.abilitiesClassesArray, ToriPhoenixProjectiles.abilitiesClassesArray};
+				SwordsmanProjectiles.abilitiesClassesArray, ToriPhoenixProjectiles.abilitiesClassesArray, SniperProjectiles.abilitiesClassesArray};
 	
 	public static void init() 
 	{

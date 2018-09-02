@@ -8,7 +8,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.abilities.ItoAbilities.Torikago;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityManager;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
@@ -30,6 +32,7 @@ public class TileEntityString extends TileEntity
 			{
 				EntityPlayer user = (EntityPlayer) elb;
 				ExtendedEntityStats props = ExtendedEntityStats.get(user);
+				AbilityProperties abilityProps = AbilityProperties.get(user);
 
 				if(props.getUsedFruit().equals("itoito"))
 				{
@@ -37,11 +40,11 @@ public class TileEntityString extends TileEntity
 					{
 						clearRoom();
 						
-						for(String abl : props.getDevilFruitAbilities())
+						for(Ability abl : abilityProps.getDevilFruitAbilities())
 						{
-							if(abl.toLowerCase().equals("torikago"))
+							if(abl.getAttribute().getAttributeName().equalsIgnoreCase("torikago"))
 							{
-								((Torikago)AbilityManager.instance().getAbilityByName(abl)).alterSpawnFlag(true);
+								((Torikago)abl).alterSpawnFlag(true);
 							}
 						}
 					}		

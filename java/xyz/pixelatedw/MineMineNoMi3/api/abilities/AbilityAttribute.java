@@ -15,8 +15,8 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.EffectType;
 public class AbilityAttribute 
 {	
 	private String attributeName = "N/A";
-	private boolean projectileExplosionHasFire = true, projectileExplosionHasSmoke = true, canBeCharged = false, isRepeater = false, itemExplosionHasFire = true, itemExplosionHasSmoke = true, isPassive = false, isPunch = false, entityMoveThroughBlocks = false, isProjectileInflence = false;
-	private int itemTicks = 0, entityTicks = 60, entitySpeed = 1, entityExplosion = 0, entityNewExplosion = 0, potionEffectAoeRadius = 0, itemMaxCharge = 0, itemExplosion = 0, itemRepeaterFreq = 6;
+	private boolean projectileExplosionHasFire = true, projectileExplosionHasSmoke = true, canBeCharged = false, isRepeater = false, itemExplosionHasFire = true, itemExplosionHasSmoke = true, isPassive = false, isPunch = false, entityMoveThroughBlocks = false;
+	private int itemTicks = 0, entityTicks = 60, entitySpeed = 1, entityExplosion = 0, entityNewExplosion = 0, potionEffectAoeRadius = 0, itemMaxCharge = 0, itemExplosion = 0, itemRepeaterTime = 6, itemRepeaterFreq = 1;
 	private float projectileAlpha = 255, entityDamage = 1;
 	private double entityXRotation = 0, entityYRotation = 0, entityZRotation = 0;
 	private Color entityColor = Color.decode("#FFFFFF");
@@ -40,7 +40,6 @@ public class AbilityAttribute
 		this.itemExplosionHasSmoke = attr.itemExplosionHasSmoke;
 		this.isPassive = attr.isPassive;
 		this.isPunch = attr.isPunch;
-		this.isProjectileInflence = attr.isProjectileInflence;
 		
 		this.itemTicks = attr.itemTicks;
 		this.entityTicks = attr.entityTicks;
@@ -50,6 +49,7 @@ public class AbilityAttribute
 		this.potionEffectAoeRadius = attr.potionEffectAoeRadius;
 		this.itemMaxCharge = attr.itemMaxCharge;
 		this.itemExplosion = attr.itemExplosion;
+		this.itemRepeaterTime = attr.itemRepeaterTime;
 		this.itemRepeaterFreq = attr.itemRepeaterFreq;
 		this.entityMoveThroughBlocks = attr.entityMoveThroughBlocks;
 		
@@ -86,9 +86,9 @@ public class AbilityAttribute
 	public AbilityAttribute setAbilityExplosion(int i) { this.itemExplosion = i; return this; }
 	public AbilityAttribute setAbilityPassive() { this.isPassive = true; return this;}
 	public AbilityAttribute setAbilityPunch() { this.isPunch = true; return this; }
-	public AbilityAttribute setAbilityRepeater() { this.isRepeater = true; return this; }
-	public AbilityAttribute setAbilityRepeaterFrequency(int i) { this.itemRepeaterFreq = i; return this; }
-	public AbilityAttribute setAbilityProjInfluence() { this.isProjectileInflence = true; return this; }
+	public AbilityAttribute setAbilityRepeater() { this.isRepeater = true; this.itemRepeaterTime = 6; this.itemRepeaterFreq = 1; return this; }
+	public AbilityAttribute setAbilityRepeater(int time) { this.isRepeater = true; this.itemRepeaterTime = time; this.itemRepeaterFreq = 1; return this; }
+	public AbilityAttribute setAbilityRepeater(int time, int frequency) { this.isRepeater = true; this.itemRepeaterTime = time; this.itemRepeaterFreq = frequency; return this; }
 		//Projectile
 	public AbilityAttribute setProjectileTicks(int i) {this.entityTicks = i;return this;}
 	public AbilityAttribute setProjectileDamage(float i) {this.entityDamage = i;return this;}
@@ -136,9 +136,9 @@ public class AbilityAttribute
 	public boolean canAbilityExplosionSetFire() { return this.itemExplosionHasFire; }
 	public boolean canAbilityExplosionDestroyBlocks() { return this.itemExplosionHasSmoke; }
 	public boolean isPassive() { return this.isPassive; }
+	public int getAbilityRepeaterTime() { return this.itemRepeaterTime; }
 	public int getAbilityRepeaterFrequency() { return this.itemRepeaterFreq; }
 	public boolean isPunch() { return this.isPunch; }
-	public boolean isProjectileInfluence() { return this.isProjectileInflence; }
 		//Projectile
 	public boolean hasProjectile() { return this.entityTicks > 0 && this.entityModel != null; }
 	public int getProjectileTicks() { return entityTicks; }

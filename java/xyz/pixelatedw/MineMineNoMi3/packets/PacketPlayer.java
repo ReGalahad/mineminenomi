@@ -1,8 +1,5 @@
 package xyz.pixelatedw.MineMineNoMi3.packets;
 
-import java.util.Random;
-import java.util.Timer;
-
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
@@ -16,14 +13,16 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.abilities.CyborgAbilities;
+import xyz.pixelatedw.MineMineNoMi3.abilities.SniperAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.SwordsmanAbilities;
-import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
+import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilitySync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 import xyz.pixelatedw.MineMineNoMi3.items.CharacterCreator;
-import xyz.pixelatedw.MineMineNoMi3.lists.ListParticleEffects;
 
 public class PacketPlayer implements IMessage
 {
@@ -77,6 +76,7 @@ public class PacketPlayer implements IMessage
 		{
 			final EntityPlayer player = Minecraft.getMinecraft().thePlayer;
 			ExtendedEntityStats props = ExtendedEntityStats.get(player);
+			AbilityProperties abilityProps = AbilityProperties.get(player);
 
 		    boolean canAnimate = true;
 			double frame = 0;
@@ -106,27 +106,27 @@ public class PacketPlayer implements IMessage
 				{
 					String ablName = message.cmd.substring("clientUpdateIsPassive".length(), message.cmd.length());
 					
-					if(props.getAbilityFromSlot(i) != null && ablName.toLowerCase().equals(props.getAbilityFromSlot(i).getAttribute().getAttributeName().toLowerCase())) 
+					if(abilityProps.getAbilityFromSlot(i) != null && ablName.toLowerCase().equals(abilityProps.getAbilityFromSlot(i).getAttribute().getAttributeName().toLowerCase())) 
 					{
-						props.getAbilityFromSlot(i).setPassiveActive(message.ablState);						
+						abilityProps.getAbilityFromSlot(i).setPassiveActive(message.ablState);						
 					}
 				}				
 				if(message.cmd.contains("clientUpdateIsCooldown"))
 				{
 					String ablName = message.cmd.substring("clientUpdateIsCooldown".length(), message.cmd.length());
 					
-					if(props.getAbilityFromSlot(i) != null && ablName.toLowerCase().equals(props.getAbilityFromSlot(i).getAttribute().getAttributeName().toLowerCase())) 
+					if(abilityProps.getAbilityFromSlot(i) != null && ablName.toLowerCase().equals(abilityProps.getAbilityFromSlot(i).getAttribute().getAttributeName().toLowerCase())) 
 					{
-						props.getAbilityFromSlot(i).setCooldownActive(message.ablState);						
+						abilityProps.getAbilityFromSlot(i).setCooldownActive(message.ablState);						
 					}
 				}
 				if(message.cmd.contains("clientUpdateIsCharging"))
 				{
 					String ablName = message.cmd.substring("clientUpdateIsCharging".length(), message.cmd.length());
 					
-					if(props.getAbilityFromSlot(i) != null && ablName.toLowerCase().equals(props.getAbilityFromSlot(i).getAttribute().getAttributeName().toLowerCase())) 
+					if(abilityProps.getAbilityFromSlot(i) != null && ablName.toLowerCase().equals(abilityProps.getAbilityFromSlot(i).getAttribute().getAttributeName().toLowerCase())) 
 					{
-						props.getAbilityFromSlot(i).setChargeActive(message.ablState);						
+						abilityProps.getAbilityFromSlot(i).setChargeActive(message.ablState);						
 					}
 				}			
 			}
@@ -170,31 +170,56 @@ public class PacketPlayer implements IMessage
 		{
 			EntityPlayer player = ctx.getServerHandler().playerEntity;
 			ExtendedEntityStats props = ExtendedEntityStats.get(player);
-			
+			AbilityProperties abilityProps = AbilityProperties.get(player);
+
 			if(message.cmd.equals("delete_book"))
 			{
-				props.clearRacialAbilities();
+				abilityProps.clearRacialAbilities();
 				
 				if(props.getRace().equals(ID.RACE_CYBORG))
 				{										
-					props.addRacialAbility(CyborgAbilities.FRESHFIRE);
-					props.addRacialAbility(CyborgAbilities.COLAOVERDRIVE);
-					props.addRacialAbility(CyborgAbilities.RADICALBEAM);
-					props.addRacialAbility(CyborgAbilities.STRONGRIGHT);
-					props.addRacialAbility(CyborgAbilities.COUPDEVENT);
+					abilityProps.addRacialAbility(CyborgAbilities.FRESHFIRE);
+					abilityProps.addRacialAbility(CyborgAbilities.COLAOVERDRIVE);
+					abilityProps.addRacialAbility(CyborgAbilities.RADICALBEAM);
+					abilityProps.addRacialAbility(CyborgAbilities.STRONGRIGHT);
+					abilityProps.addRacialAbility(CyborgAbilities.COUPDEVENT);
 					
 					props.setMaxCola(100);
 					props.setCola(props.getMaxCola());
 				}
 				
-				if(props.getFightStyle().equals(ID.FSTYLE_SWORDSMAN))						
-					props.addRacialAbility(SwordsmanAbilities.SHISHISHISONSON);
+				if(props.getFightStyle().equals(ID.FSTYLE_SWORDSMAN))
+				{
+					abilityProps.addRacialAbility(SwordsmanAbilities.SHISHISHISONSON);
+					if(!MainConfig.enableQuestProgression)
+					{
+						abilityProps.addRacialAbility(SwordsmanAbilities.SANBYAKUROKUJUPOUNDHO);
+						abilityProps.addRacialAbility(SwordsmanAbilities.YAKKODORI);
+						abilityProps.addRacialAbility(SwordsmanAbilities.SANZENSEKAI);
+					}
+				}
+	
+				if(props.getFightStyle().equals(ID.FSTYLE_SNIPER))		
+				{
+					abilityProps.addRacialAbility(SniperAbilities.KAENBOSHI);
+					/** FORGOLD Enable this piece of code and remove the other lines */
+					/*if(!MainConfig.enableQuestProgression)
+					{
+						props.addRacialAbility(SniperAbilities.KEMURIBOSHI);
+						props.addRacialAbility(SniperAbilities.RENPATSUNAMARIBOSHI);
+						props.addRacialAbility(SniperAbilities.SAKURETSUSABOTENBOSHI);
+					}*/
+					abilityProps.addRacialAbility(SniperAbilities.KEMURIBOSHI);
+					abilityProps.addRacialAbility(SniperAbilities.RENPATSUNAMARIBOSHI);
+					abilityProps.addRacialAbility(SniperAbilities.SAKURETSUSABOTENBOSHI);
+				}
 				
 				for(ItemStack is : player.inventory.mainInventory)
 					if(is != null && is.getItem() instanceof CharacterCreator)
 						WyHelper.removeStackFromInventory(player, is);	
 				
 				WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
+				WyNetworkHelper.sendTo(new PacketAbilitySync(abilityProps), (EntityPlayerMP) player);
 			}
 			if(message.cmd.equals("forcesync"))
 				WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
@@ -209,25 +234,25 @@ public class PacketPlayer implements IMessage
 			{
 				if(message.cmd.equals("useAbility" + i))
 				{
-					if(props.getAbilityFromSlot(i) != null) 
+					if(abilityProps.getAbilityFromSlot(i) != null) 
 					{
 						for(int j = 0; j < 8; j++)
 						{
-							if(props.getAbilityFromSlot(j) != null) 
+							if(abilityProps.getAbilityFromSlot(j) != null) 
 							{
-								if(props.getAbilityFromSlot(j).isCharging())
+								if(abilityProps.getAbilityFromSlot(j).isCharging())
 									return null;
-								if(props.getAbilityFromSlot(i) != props.getAbilityFromSlot(j) && props.getAbilityFromSlot(j).isPassiveActive() && props.getAbilityFromSlot(i).getAttribute().isPassive())
+								if(abilityProps.getAbilityFromSlot(i) != abilityProps.getAbilityFromSlot(j) && abilityProps.getAbilityFromSlot(j).isPassiveActive() && abilityProps.getAbilityFromSlot(i).getAttribute().isPassive())
 									return null;
 							}							
 						}
 						
-						if(props.getAbilityFromSlot(i).getAttribute().isPassive())
-							props.getAbilityFromSlot(i).passive(player);
-						else if(props.getAbilityFromSlot(i).getAttribute().getAbilityCharges() > 0)
-							props.getAbilityFromSlot(i).startCharging(player);
+						if(abilityProps.getAbilityFromSlot(i).getAttribute().isPassive())
+							abilityProps.getAbilityFromSlot(i).passive(player);
+						else if(abilityProps.getAbilityFromSlot(i).getAttribute().getAbilityCharges() > 0)
+							abilityProps.getAbilityFromSlot(i).startCharging(player);
 						else
-							props.getAbilityFromSlot(i).use(player);
+							abilityProps.getAbilityFromSlot(i).use(player);
 					}
 				}
 			}

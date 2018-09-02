@@ -37,17 +37,20 @@ import xyz.pixelatedw.MineMineNoMi3.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.Values;
+import xyz.pixelatedw.MineMineNoMi3.abilities.CyborgAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.FishKarateAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.HakiAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.HakiAbilities.BusoshokuHaki;
 import xyz.pixelatedw.MineMineNoMi3.abilities.HakiAbilities.KenbunshokuHaki;
 import xyz.pixelatedw.MineMineNoMi3.abilities.RokushikiAbilities;
-import xyz.pixelatedw.MineMineNoMi3.abilities.SniperAbilities;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
+import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
 import xyz.pixelatedw.MineMineNoMi3.api.math.ISphere;
 import xyz.pixelatedw.MineMineNoMi3.api.math.Sphere;
+import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilitySync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketQuestSync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
@@ -102,6 +105,7 @@ public class EventsPersistence
 		{
 			EntityPlayer player = (EntityPlayer) event.entityLiving;
 			ExtendedEntityStats props = ExtendedEntityStats.get(player);
+			AbilityProperties abilityProps = AbilityProperties.get(player);
 			ItemStack heldItem = player.getHeldItem();				
 			
 			if (heldItem != null)
@@ -131,23 +135,23 @@ public class EventsPersistence
 						player.addPotionEffect(new PotionEffect(Potion.confusion.getId(), 48, 0));
 					else
 						player.addPotionEffect(new PotionEffect(Potion.confusion.getId(), 120, 0));
-					for(int i = 0; i < props.countAbilitiesInHotbar(); i++)
+					for(int i = 0; i < abilityProps.countAbilitiesInHotbar(); i++)
 					{
-						if(props.getAbilityFromSlot(i) != null && !props.getAbilityFromSlot(i).equals("n/a") && !props.getAbilityFromSlot(i).isDisabled())
+						if(abilityProps.getAbilityFromSlot(i) != null && !abilityProps.getAbilityFromSlot(i).isDisabled())
 						{ 
-							props.getAbilityFromSlot(i).setCooldownActive(true);
-							props.getAbilityFromSlot(i).disable(player, true);
+							abilityProps.getAbilityFromSlot(i).setCooldownActive(true);
+							abilityProps.getAbilityFromSlot(i).disable(player, true);
 						}			
 					}
 				}
 				else
 				{
-					for(int i = 0; i < props.countAbilitiesInHotbar(); i++)
+					for(int i = 0; i < abilityProps.countAbilitiesInHotbar(); i++)
 					{
-						if(props.getAbilityFromSlot(i) != null && !props.getAbilityFromSlot(i).equals("n/a") && props.getAbilityFromSlot(i).isDisabled())
+						if(abilityProps.getAbilityFromSlot(i) != null && abilityProps.getAbilityFromSlot(i).isDisabled())
 						{ 
-							props.getAbilityFromSlot(i).setCooldownActive(false);
-							props.getAbilityFromSlot(i).disable(player, false);
+							abilityProps.getAbilityFromSlot(i).setCooldownActive(false);
+							abilityProps.getAbilityFromSlot(i).disable(player, false);
 						}			
 					}					
 				}
@@ -235,11 +239,11 @@ public class EventsPersistence
 					&& !player.inventory.hasItem(Item.getItemFromBlock(ListMisc.KairosekiBlock)) && !player.inventory.hasItem( Item.getItemFromBlock(ListMisc.KairosekiOre)) 
 					&& !player.isInsideOfMaterial(Material.water) )
 			{
-				for(int i = 0; i < props.countAbilitiesInHotbar(); i++)
+				for(int i = 0; i < abilityProps.countAbilitiesInHotbar(); i++)
 				{					
-					if(props.getAbilityFromSlot(i) != null && !props.getAbilityFromSlot(i).equals("n/a") && props.getAbilityFromSlot(i).isRepeating())
+					if(abilityProps.getAbilityFromSlot(i) != null && abilityProps.getAbilityFromSlot(i).isRepeating())
 					{ 					
-						props.getAbilityFromSlot(i).duringRepeater(player);
+						abilityProps.getAbilityFromSlot(i).duringRepeater(player);
 					}				
 				}
 			}
@@ -370,13 +374,17 @@ public class EventsPersistence
 					props.decHakiTimer();
 			}
 			
-			if(props.getHakiTimer() > 1000)
+			if(props.getHakiTimer() > 2400)
 			{
 				player.addPotionEffect(new PotionEffect(Potion.confusion.id, 100, 0));
 				player.addPotionEffect(new PotionEffect(Potion.weakness.id, 100, 0));
-				if(props.getHakiTimer() > 1500 + (props.getDoriki() / 15))
+				if(props.getHakiTimer() > 3600 + (props.getDoriki() / 15))
 				{
-					player.attackEntityFrom(DamageSource.generic, Integer.MAX_VALUE);
+					player.addPotionEffect(new PotionEffect(Potion.confusion.id, 100, 5));
+					player.addPotionEffect(new PotionEffect(Potion.weakness.id, 100, 5));
+					player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 100, 5));
+					player.addPotionEffect(new PotionEffect(Potion.blindness.id, 100, 5));
+					//player.attackEntityFrom(DamageSource.generic, Integer.MAX_VALUE);
 				}
 			}
 		}
@@ -403,13 +411,14 @@ public class EventsPersistence
 		{
 			EntityPlayer player = (EntityPlayer) event.entity;
 			ExtendedEntityStats props = ExtendedEntityStats.get(player);
+			AbilityProperties abilityProps = AbilityProperties.get(player);
 
 			props.setYamiPower(false);
 
 			for(int i = 0; i < 8; i++)
 			{
-				if(props.getAbilityFromSlot(i) != null)
-					props.getAbilityFromSlot(i).reset();
+				if(abilityProps.getAbilityFromSlot(i) != null)
+					abilityProps.getAbilityFromSlot(i).reset();
 			}
 			
 			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
@@ -510,7 +519,7 @@ public class EventsPersistence
 			
 	    	if(!ID.DEV_EARLYACCESS && !player.worldObj.isRemote && !player.capabilities.isCreativeMode)
 	    	{
-	    		if(!targetPlayer)
+	    		if(!targetPlayer && MainConfig.enableMobRewards)
 	    		{
 		    		WyTelemetry.addStat("dorikiEarnedFromEntities", (int) Math.round(plusDoriki));
 		    		WyTelemetry.addStat("bellyEarnedFromEntities", plusBelly);
@@ -544,18 +553,20 @@ public class EventsPersistence
 		if (sourceOfDamage instanceof EntityPlayer)
 		{			
 			ExtendedEntityStats propz = ExtendedEntityStats.get((EntityPlayer) sourceOfDamage);
+			AbilityProperties abilityProps = AbilityProperties.get((EntityPlayer) sourceOfDamage);
+
 			ItemStack heldItem = ((EntityPlayer) sourceOfDamage).getHeldItem();
 			
 			if(!sourceOfDamage.worldObj.isRemote && heldItem == null)
 			{		
-				for(int i = 0; i < propz.countAbilitiesInHotbar(); i++)
+				for(int i = 0; i < abilityProps.countAbilitiesInHotbar(); i++)
 				{	
-					if(propz.getAbilityFromSlot(i) != null && !propz.getAbilityFromSlot(i).equals("n/a") && !propz.getAbilityFromSlot(i).isOnCooldown() 
-							&& propz.getAbilityFromSlot(i).getAttribute().isPassive() && propz.getAbilityFromSlot(i).isPassiveActive())
+					if(abilityProps.getAbilityFromSlot(i) != null && !abilityProps.getAbilityFromSlot(i).isOnCooldown() 
+							&& abilityProps.getAbilityFromSlot(i).getAttribute().isPassive() && abilityProps.getAbilityFromSlot(i).isPassiveActive())
 					{							
-						if(propz.getAbilityFromSlot(i).getAttribute().isPunch())
+						if(abilityProps.getAbilityFromSlot(i).getAttribute().isPunch())
 						{							
-							propz.getAbilityFromSlot(i).hitEntity((EntityPlayer) sourceOfDamage, entity);
+							abilityProps.getAbilityFromSlot(i).hitEntity((EntityPlayer) sourceOfDamage, entity);
 						}
 					}
 				}
@@ -600,7 +611,10 @@ public class EventsPersistence
 
 			if (props.isLogia())
 				if (!hasHaki)
+				{
+					WyNetworkHelper.sendTo(new PacketParticles("logiaEffect_" + props.getUsedFruit(), entity), (EntityPlayerMP) entity);
 					event.setCanceled(true);
+				}
 
 		}
 		
@@ -650,15 +664,16 @@ public class EventsPersistence
 		if(event.entityPlayer != null)
 		{
 			ExtendedEntityStats props = ExtendedEntityStats.get(event.entityPlayer);
-			for(int i = 0; i < props.countAbilitiesInHotbar(); i++)
-			{	
-				if(props.getAbilityFromSlot(i) != null && !props.getAbilityFromSlot(i).equals("n/a") && !props.getAbilityFromSlot(i).isOnCooldown() 
-						&& props.getAbilityFromSlot(i).getAttribute().isPassive() && props.getAbilityFromSlot(i).isPassiveActive())
-				{							
-					if(props.getAbilityFromSlot(i).getAttribute().isPunch())
-					{							
-						props.getAbilityFromSlot(i).endPassive(event.entityPlayer);
-					}
+			AbilityProperties abilityProps = AbilityProperties.get(event.entityPlayer);
+
+			for(int i = 0; i < abilityProps.countAbilitiesInHotbar(); i++)
+			{					
+				if(abilityProps.getAbilityFromSlot(i) != null && !abilityProps.getAbilityFromSlot(i).isOnCooldown() 
+						&& abilityProps.getAbilityFromSlot(i).getAttribute().isPassive() && abilityProps.getAbilityFromSlot(i).isPassiveActive()
+						&& DevilFruitsHelper.isSniperAbility(abilityProps.getAbilityFromSlot(i)))
+				{		
+					abilityProps.getAbilityFromSlot(i).use(event.entityPlayer);
+					event.setCanceled(true);
 				}
 			}
 		}
@@ -672,11 +687,12 @@ public class EventsPersistence
 			EntityPlayer player = (EntityPlayer) event.entity;
 			ExtendedEntityStats props = ExtendedEntityStats.get(player);
 			QuestProperties questProps = QuestProperties.get(player);
+			AbilityProperties abilityProps = AbilityProperties.get(player);
 			
 			if (!player.worldObj.isRemote)
 			{			
-				if(ID.DEV_EARLYACCESS)
-				{					
+				if(ID.DEV_EARLYACCESS && !WyDebug.isDebug())
+				{
 					try 
 					{
 						URL url = new URL("https://dl.dropboxusercontent.com/s/cs2cv9ezaatzgd3/earlyaccess.txt?dl=0");
@@ -687,7 +703,13 @@ public class EventsPersistence
 						{
 							String uuid = scanner.nextLine();
 							
-							if(player.getUniqueID().toString().equals(uuid) || player.getDisplayName().equals(uuid))
+							if(uuid.startsWith("$"))
+							{
+								flag = true;
+								break;
+							}
+							
+							if(player.getUniqueID().toString().equals(uuid) || (uuid.startsWith("&") && player.getDisplayName().equals(uuid.substring(0, 2))))
 							{
 								flag = true;
 								break;
@@ -713,25 +735,30 @@ public class EventsPersistence
 				{					
 					ItemStack df = DevilFruitsHelper.getDevilFruitItem(props.getUsedFruit());
 					
-					props.clearDevilFruitAbilities();
+					abilityProps.clearDevilFruitAbilities();
 					props.setGear(1);
 					
 					for(Ability a : ((AkumaNoMi)df.getItem()).abilities)
 						if(!WyHelper.verifyIfAbilityIsBanned(a))
-							props.addDevilFruitAbility(a);
+							abilityProps.addDevilFruitAbility(a);
 
-					for(int i = 0; i < props.countAbilitiesInHotbar(); i++)
-					{
-						if(props.getAbilityFromSlot(i) != null)
-						{
-							if(WyHelper.verifyIfAbilityIsBanned(props.getAbilityFromSlot(i)))
-								props.setAbilityInSlot(i, null);
-						}
-					}
 				}
-					
+				
+				DevilFruitsHelper.validateRacialMoves(player);
+				DevilFruitsHelper.validateStyleMoves(player);
+				
+				for(int i = 0; i < abilityProps.countAbilitiesInHotbar(); i++)
+				{
+					if(abilityProps.getAbilityFromSlot(i) != null)
+					{
+						if(WyHelper.verifyIfAbilityIsBanned(abilityProps.getAbilityFromSlot(i)))
+							abilityProps.setAbilityInSlot(i, null);
+					}
+				}			
+				
 				WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
 				WyNetworkHelper.sendTo(new PacketQuestSync(questProps), (EntityPlayerMP) player);
+				WyNetworkHelper.sendTo(new PacketAbilitySync(abilityProps), (EntityPlayerMP) player);
 				
 				if(MainConfig.enableUpdateMsg)
 				{
@@ -850,6 +877,11 @@ public class EventsPersistence
 		}
 		else if(event.props.getRace().equals(ID.RACE_CYBORG))
 		{
+			ability(event.player, 0, CyborgAbilities.FRESHFIRE);
+			ability(event.player, 0, CyborgAbilities.COLAOVERDRIVE);
+			ability(event.player, 0, CyborgAbilities.STRONGRIGHT);
+			ability(event.player, 0, CyborgAbilities.RADICALBEAM);
+			ability(event.player, 0, CyborgAbilities.COUPDEVENT);
 			ability(event.player, 5500, HakiAbilities.KENBUNSHOKUHAKI);
 			ability(event.player, 8500, HakiAbilities.BUSOSHOKUHAKI);
 		}
@@ -868,20 +900,21 @@ public class EventsPersistence
 	private void ability(EntityPlayer player, int doriki, Ability ability)
 	{
 		ExtendedEntityStats props = ExtendedEntityStats.get(player);
-			
+		AbilityProperties abilityProps = AbilityProperties.get(player);
+
 		if(ability instanceof KenbunshokuHaki || ability instanceof BusoshokuHaki)
 		{
-			if (props.getDoriki() >= doriki && !props.hasHakiAbility(ability))
-				props.addHakiAbility(ability);
-			if (props.getDoriki() < doriki && props.hasHakiAbility(ability))
-				props.removeHakiAbility(ability);
+			if (props.getDoriki() >= doriki && !abilityProps.hasHakiAbility(ability) && !WyHelper.verifyIfAbilityIsBanned(ability))
+				abilityProps.addHakiAbility(ability);
+			if ((props.getDoriki() < doriki || WyHelper.verifyIfAbilityIsBanned(ability)) && abilityProps.hasHakiAbility(ability))
+				abilityProps.removeHakiAbility(ability);
 		}
 		else
 		{
-			if (props.getDoriki() >= doriki && !props.hasRacialAbility(ability))
-				props.addRacialAbility(ability);
-			if (props.getDoriki() < doriki && props.hasRacialAbility(ability))
-				props.removeRacialAbility(ability);	
+			if (props.getDoriki() >= doriki && !abilityProps.hasRacialAbility(ability) && !WyHelper.verifyIfAbilityIsBanned(ability))
+				abilityProps.addRacialAbility(ability);
+			if ((props.getDoriki() < doriki || WyHelper.verifyIfAbilityIsBanned(ability)) && abilityProps.hasRacialAbility(ability))
+				abilityProps.removeRacialAbility(ability);	
 		}
 	}	
 	

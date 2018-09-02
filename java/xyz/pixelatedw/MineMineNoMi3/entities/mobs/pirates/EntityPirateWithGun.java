@@ -8,7 +8,7 @@ import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
 public class EntityPirateWithGun extends PirateData
 {
-	private String[] textures = {"pirategun1", "pirategun2", "pirategun3", "pirategun4"};
+	private String[] textures = {"pirategun1", "pirategun2", "pirategun3", "pirategun4", "pirategun5"};
 	
 	public EntityPirateWithGun(World world) 
 	{

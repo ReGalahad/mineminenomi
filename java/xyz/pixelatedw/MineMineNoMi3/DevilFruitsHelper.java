@@ -1,5 +1,8 @@
 package xyz.pixelatedw.MineMineNoMi3;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
@@ -9,10 +12,25 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
+import xyz.pixelatedw.MineMineNoMi3.abilities.CyborgAbilities;
+import xyz.pixelatedw.MineMineNoMi3.abilities.FishKarateAbilities;
+import xyz.pixelatedw.MineMineNoMi3.abilities.HakiAbilities;
+import xyz.pixelatedw.MineMineNoMi3.abilities.RokushikiAbilities;
+import xyz.pixelatedw.MineMineNoMi3.abilities.SniperAbilities;
+import xyz.pixelatedw.MineMineNoMi3.abilities.SwordsmanAbilities;
+import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
+import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
+import xyz.pixelatedw.MineMineNoMi3.events.customevents.DorikiEvent;
+import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
+import xyz.pixelatedw.MineMineNoMi3.lists.ListQuests;
 
 public class DevilFruitsHelper
 { 
+
 	public static String[][] zoanModels = new String[][]
 	{
 		{"ushiushibison", "bison"},
@@ -23,6 +41,101 @@ public class DevilFruitsHelper
 			Blocks.flowing_lava, Blocks.waterlily, Blocks.redstone_wire, Blocks.double_plant, Blocks.wheat, Blocks.carrots, Blocks.carpet, Blocks.cake, Blocks.sapling, Blocks.deadbush, Blocks.web,
 			Blocks.wooden_pressure_plate, Blocks.stone_pressure_plate, Blocks.light_weighted_pressure_plate, Blocks.heavy_weighted_pressure_plate, Blocks.carrots, Blocks.carpet, Blocks.vine,
 			ListMisc.Poison, ListMisc.DemonPoison, Blocks.torch, Blocks.redstone_torch};
+	
+	public static void validateRacialMoves(EntityPlayer player)
+	{
+		ExtendedEntityStats props = ExtendedEntityStats.get(player);
+		AbilityProperties abilityProps = AbilityProperties.get(player);
+
+		DorikiEvent e = new DorikiEvent(player);
+		if (MinecraftForge.EVENT_BUS.post(e))
+			return;
+		
+		List<Ability> tempAblList = new ArrayList<Ability>();
+		
+		if(props.getRace().equals(ID.RACE_HUMAN))
+		{
+			for(Ability a : RokushikiAbilities.abilitiesArray)
+			{
+				if(abilityProps.hasRacialAbility(a) && !WyHelper.verifyIfAbilityIsBanned(a))
+				{
+					tempAblList.add(a);
+				}
+			}
+		}
+		
+		if(props.getRace().equals(ID.RACE_FISHMAN))
+		{
+			for(Ability a : FishKarateAbilities.abilitiesArray)
+			{
+				if(abilityProps.hasRacialAbility(a) && !WyHelper.verifyIfAbilityIsBanned(a))
+				{
+					tempAblList.add(a);
+				}
+			}
+		}
+		
+		if(props.getRace().equals(ID.RACE_CYBORG))
+		{
+			for(Ability a : CyborgAbilities.abilitiesArray)
+			{
+				if(abilityProps.hasRacialAbility(a) && !WyHelper.verifyIfAbilityIsBanned(a))
+				{
+					tempAblList.add(a);
+				}
+			}
+		}
+		
+		abilityProps.clearRacialAbilities();
+		
+		for(Ability a : tempAblList)
+			abilityProps.addRacialAbility(a);
+		
+		tempAblList.clear();
+
+		for(Ability a : HakiAbilities.abilitiesArray)
+		{
+			if(abilityProps.hasHakiAbility(a) && !WyHelper.verifyIfAbilityIsBanned(a))
+			{
+				tempAblList.add(a);
+			}
+		}
+		
+		abilityProps.clearHakiAbilities();
+		
+		for(Ability a : tempAblList)
+			abilityProps.addHakiAbility(a);
+	}
+	
+	
+	public static void validateStyleMoves(EntityPlayer player)
+	{
+		ExtendedEntityStats props = ExtendedEntityStats.get(player);
+		QuestProperties questProps = QuestProperties.get(player);
+		AbilityProperties abilityProps = AbilityProperties.get(player);
+
+		if(props.getFightStyle().equals(ID.FSTYLE_SWORDSMAN))
+		{
+			abilityProps.addRacialAbility(SwordsmanAbilities.SHISHISHISONSON);
+		
+			if(questProps.hasQuestCompleted(ListQuests.swordsmanProgression04))
+				abilityProps.addRacialAbility(SwordsmanAbilities.SANBYAKUROKUJUPOUNDHO);
+		}
+		else if(props.getFightStyle().equals(ID.FSTYLE_SNIPER))
+		{
+			abilityProps.addRacialAbility(SniperAbilities.KAENBOSHI);
+		}
+	}
+	
+	public static boolean isSniperAbility(Ability abl)
+	{
+		for(Ability a : SniperAbilities.abilitiesArray)
+		{
+			if(abl == a) return true;
+		}
+		
+		return false;
+	}
 	
 	public static boolean canReplaceBlock(Block b)
 	{
@@ -43,7 +156,7 @@ public class DevilFruitsHelper
 		{
 			if(b == blk)
 			{
-				world.setBlock(posX, posY, posZ, toPlace);
+				world.setBlock(posX, posY, posZ, toPlace, 0, 2);
 				break;
 			}
 		}

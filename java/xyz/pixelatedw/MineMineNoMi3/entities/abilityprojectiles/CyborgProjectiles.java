@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper.Direction;
@@ -99,8 +101,7 @@ public class CyborgProjectiles
 		
 		public void onUpdate()
 		{				
-			/** TODO Change these particles with the custom ones */
-			this.worldObj.spawnParticle(EnumParticleTypes.FLAME.getParticleName(), this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);			
+			MainMod.proxy.spawnCustomParticles(this, ID.PARTICLE_NAME_MERA, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
 			super.onUpdate();
 		}
 	}

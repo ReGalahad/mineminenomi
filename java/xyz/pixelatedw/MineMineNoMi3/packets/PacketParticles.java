@@ -19,7 +19,7 @@ import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
-import xyz.pixelatedw.MineMineNoMi3.api.WyHelper.Direction;
+import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListParticleEffects;
 
@@ -70,7 +70,37 @@ public class PacketParticles implements IMessage
 			final EntityPlayer player = Minecraft.getMinecraft().thePlayer;
 			ExtendedEntityStats props = ExtendedEntityStats.get(player);
 			
-			if(message.fx.equals("daienkai"))
+			
+			if(message.fx.contains("logiaEffect_"))
+			{
+				String devilFruit = message.fx.substring("logiaEffect_".length(), message.fx.length());
+								
+				double offsetX = (new Random().nextInt(20) + 1.0D - 10.0D) / 15.0D;
+				double offsetY = (new Random().nextInt(20) + 1.0D - 10.0D) / 15.0D;
+				double offsetZ = (new Random().nextInt(20) + 1.0D - 10.0D) / 15.0D;
+			      
+				if(devilFruit.equals("meramera"))
+					MainMod.proxy.spawnCustomParticles(player, ID.PARTICLE_NAME_MERA, message.posX + offsetX, (message.posY + 1) + offsetY, message.posZ + offsetZ, 0D, 0D, 0D);
+				else if(devilFruit.equals("hiehie"))
+					player.worldObj.spawnParticle(EnumParticleTypes.WATER_SPLASH.getParticleName(), message.posX + offsetX, (message.posY + 1) + offsetY, message.posZ + offsetZ, 0D, 0D, 0D);
+				else if(devilFruit.equals("pikapika"))
+					MainMod.proxy.spawnCustomParticles(player, ID.PARTICLE_NAME_PIKA, message.posX + offsetX, (message.posY + 1) + offsetY, message.posZ + offsetZ, 0D, 0D, 0D);
+				else if(devilFruit.equals("gorogoro"))
+					MainMod.proxy.spawnCustomParticles(player, ID.PARTICLE_NAME_GORO, message.posX + offsetX, (message.posY + 1) + offsetY, message.posZ + offsetZ, 0D, 0D, 0D);
+				else if(devilFruit.equals("mokumoku"))
+					MainMod.proxy.spawnCustomParticles(player, ID.PARTICLE_NAME_MOKU, message.posX + offsetX, (message.posY + 1) + offsetY, message.posZ + offsetZ, 0D, 0D, 0D);
+				else if(devilFruit.equals("sunasuna"))
+					MainMod.proxy.spawnCustomParticles(player, ID.PARTICLE_NAME_SUNA2, message.posX + offsetX, (message.posY + 1) + offsetY, message.posZ + offsetZ, 0D, 0D, 0D);
+				else if(devilFruit.equals("magumagu"))
+					player.worldObj.spawnParticle(EnumParticleTypes.LAVA.getParticleName(), message.posX + offsetX, (message.posY + 1) + offsetY, message.posZ + offsetZ, 0D, 0D, 0D);
+				else if(devilFruit.equals("gasugasu"))
+					MainMod.proxy.spawnCustomParticles(player, ID.PARTICLE_NAME_GASU, message.posX + offsetX, (message.posY + 1) + offsetY, message.posZ + offsetZ, 0D, 0D, 0D);
+				else if(devilFruit.equals("yukiyuki"))
+					MainMod.proxy.spawnCustomParticles(player, ID.PARTICLE_NAME_YUKI, message.posX + offsetX, (message.posY + 1) + offsetY, message.posZ + offsetZ, 0D, 0D, 0D);
+				else
+					player.worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL.getParticleName(), message.posX + offsetX, (message.posY + 1) + offsetY, message.posZ + offsetZ, 0D, 0D, 0D);
+			}
+			else if(message.fx.equals("daienkai"))
 			{
 				for (int i = 0; i < 20; i++)
 				{
@@ -137,7 +167,7 @@ public class PacketParticles implements IMessage
 					double offsetZ = (new Random().nextInt(20) + 1.0D - 10.0D) / 15.0D;
 			      
 					player.worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL.getParticleName(), message.posX + offsetX, (message.posY + 0.5) + offsetY, message.posZ + offsetZ, 0.0D, 0.1D, 0.0D);
-				}	
+				}
 			}
 			else if(message.fx.equals("tenseiNoSoen"))
 			{
@@ -268,6 +298,17 @@ public class PacketParticles implements IMessage
 					
 					player.worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_LARGE.getParticleName(), message.posX + offsetX + new Random().nextInt(5), message.posY + offsetY, message.posZ + offsetZ + new Random().nextInt(5), 0.0, 0.0, 0.0);
 				}		
+			}
+			else if(message.fx.equals("kemuriBoshi"))
+			{
+				for (int i = 0; i < 512; i++)
+				{
+					double offsetX = (new Random().nextInt(20) + 1.0D - 10.0D) / 2.0D;
+					double offsetY = (new Random().nextInt(20) + 1.0D - 10.0D) / 5.0D;
+					double offsetZ = (new Random().nextInt(20) + 1.0D - 10.0D) / 2.0D;
+			      
+					player.worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL.getParticleName(), message.posX + offsetX + WyMathHelper.randomWithRange(-7, 7), (message.posY + 0.5) + offsetY + WyMathHelper.randomWithRange(-1, 3), message.posZ + offsetZ + WyMathHelper.randomWithRange(-7, 7), 0.0D, 0.1D, 0.0D);
+				}	
 			}
 			else
 			{

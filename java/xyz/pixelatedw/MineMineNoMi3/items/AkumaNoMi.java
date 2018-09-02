@@ -18,6 +18,7 @@ import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListCreativeTabs;
@@ -49,7 +50,8 @@ public class AkumaNoMi extends ItemFood
 	public void onFoodEaten(ItemStack itemStack, World world, EntityPlayer player) 
 	{
 		ExtendedEntityStats props = ExtendedEntityStats.get(player);
-
+		AbilityProperties abilityProps = AbilityProperties.get(player);
+		
 		if(props.hasYamiPower())
 		{
 			if(!props.getUsedFruit().equals("yamidummy"))
@@ -64,8 +66,8 @@ public class AkumaNoMi extends ItemFood
 				props.setIsLogia(true);
 			 
 			for(Ability a : abilities)
-				if(!WyHelper.verifyIfAbilityIsBanned(a) && !props.hasDevilFruitAbility(a))
-					props.addDevilFruitAbility(a);
+				if(!WyHelper.verifyIfAbilityIsBanned(a) && !abilityProps.hasDevilFruitAbility(a))
+					abilityProps.addDevilFruitAbility(a);
 		}
 		else
 		{	
@@ -78,8 +80,8 @@ public class AkumaNoMi extends ItemFood
 				props.setIsLogia(false);
 				
 				for(Ability a : abilities)
-					if(!WyHelper.verifyIfAbilityIsBanned(a) && !props.hasDevilFruitAbility(a))
-						props.addDevilFruitAbility(a);
+					if(!WyHelper.verifyIfAbilityIsBanned(a) && !abilityProps.hasDevilFruitAbility(a))
+						abilityProps.addDevilFruitAbility(a);
 
 			}
 			else
@@ -95,12 +97,12 @@ public class AkumaNoMi extends ItemFood
 						props.setIsLogia(true);
 					 
 					for(Ability a : abilities)
-						if(!WyHelper.verifyIfAbilityIsBanned(a) && !props.hasDevilFruitAbility(a))
-							props.addDevilFruitAbility(a);
+						if(!WyHelper.verifyIfAbilityIsBanned(a) && !abilityProps.hasDevilFruitAbility(a))
+							abilityProps.addDevilFruitAbility(a);
 				}
 
 			}
-		}
+		}	
 		
     	if(!ID.DEV_EARLYACCESS && !world.isRemote && !player.capabilities.isCreativeMode)
     		WyTelemetry.addStat("eaten_" + this.getUnlocalizedName().substring(5).replace("nomi", "").replace(":", "").replace(",", "").replace("model", ""), 1);

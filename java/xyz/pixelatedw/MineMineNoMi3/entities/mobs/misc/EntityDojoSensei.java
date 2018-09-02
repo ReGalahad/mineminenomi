@@ -26,9 +26,12 @@ import xyz.pixelatedw.MineMineNoMi3.lists.ListQuests;
 public class EntityDojoSensei extends EntityNewMob
 {
 	
+	private String[] textures = {"dojosensei1", "dojosensei2"};
+	
 	public EntityDojoSensei(World worldIn)
 	{
 		super(worldIn);
+		this.setTexture(textures[this.rand.nextInt(textures.length)]);
 		this.tasks.addTask(0, new EntityAIAttackOnCollide(this, 1.0D, false));
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(1, new EntityAIOpenDoor(this, true));
@@ -50,6 +53,8 @@ public class EntityDojoSensei extends EntityNewMob
     	Item[] randomSword = new Item[] {ListMisc.Kitetsu, ListMisc.Shusui, ListMisc.Jitte, ListMisc.Kikoku, ListMisc.WadoIchimonji};
         this.setCurrentItemOrArmor(0, new ItemStack(randomSword[this.rand.nextInt(randomSword.length)]));
     }
+    
+    protected void dropEquipment(boolean p_82160_1_, int p_82160_2_) {}
     
 	public double[] itemOffset() 
 	{

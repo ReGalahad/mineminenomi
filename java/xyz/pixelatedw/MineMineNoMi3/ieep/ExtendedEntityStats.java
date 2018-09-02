@@ -23,22 +23,13 @@ public class ExtendedEntityStats implements IExtendedEntityProperties
 	private int doriki, dorikiCmd, bounty, bountyCmd, belly, bellyCmd, extol, extolCmd, cola = 100, maxCola = 100, hakiTimer = 0, ultraCola = 0, gear = 1;
 	private String akumaNoMiUsed = "N/A", faction = "N/A", race = "N/A", fightStyle = "N/A", crew = "N/A", zoanPoint = "N/A";
 	private boolean isLogia, hasShadow = true, hasHeart = true, firstTime = true, hasHakiActive = false, hasBusoHakiActive = false, hasKenHakiActive = false, kilo = false, hasYamiPower = false, hasColaBackpack = false,
-			isCandleLocked = false;
-	
-	private String[] hotbarAbilities = new String[8];
-	private String[] devilFruitAbilities = new String[256];
-	private String[] racialAbilities = new String[16];
-	private String[] hakiAbilities = new String[3];
-	
+			isCandleLocked = false, isTaktBlocked = false;
+
 	private String tempPreviousAbility = "N/A";
 	
 	public ExtendedEntityStats(EntityLivingBase entity) 
 	{
 		this.entity = entity;	
-		for(int i = 0; i < hotbarAbilities.length; i++) { hotbarAbilities[i] = "n/a"; }
-		for(int i = 0; i < devilFruitAbilities.length; i++) { devilFruitAbilities[i] = "n/a"; }
-		for(int i = 0; i < racialAbilities.length; i++) { racialAbilities[i] = "n/a"; }
-		for(int i = 0; i < hakiAbilities.length; i++) { hakiAbilities[i] = "n/a"; }
 	}
 	
 	public static final void register(EntityLivingBase entity) 
@@ -86,25 +77,9 @@ public class ExtendedEntityStats implements IExtendedEntityProperties
 		props.setBoolean("hasYamiPower", this.hasYamiPower);
 		props.setBoolean("hasColaBackpack", this.hasColaBackpack);
 		props.setBoolean("isCandleLocked", this.isCandleLocked);
+		props.setBoolean("isTaktBlocked", this.isTaktBlocked);		
 		
 		props.setBoolean("isInCombatMode", this.isInCombatMode);		
-		
-		for(int i = 0; i < hotbarAbilities.length; i++)
-		{
-			props.setString("ability" + i, hotbarAbilities[i]);
-		}
-		for(int i = 0; i < devilFruitAbilities.length; i++)
-		{
-			props.setString("available_DevilFruitAbilities" + i, devilFruitAbilities[i]);
-		}
-		for(int i = 0; i < racialAbilities.length; i++)
-		{
-			props.setString("available_RacialAbilities" + i, racialAbilities[i]);
-		}
-		for(int i = 0; i < hakiAbilities.length; i++)
-		{
-			props.setString("available_HakiAbilities" + i, hakiAbilities[i]);
-		}
 		
 		compound.setTag(EXT_PROP_NAME, props);
 	}
@@ -144,25 +119,9 @@ public class ExtendedEntityStats implements IExtendedEntityProperties
 		this.hasYamiPower = props.getBoolean("hasYamiPower");
 		this.hasColaBackpack = props.getBoolean("hasColaBackpack");
 		this.isCandleLocked = props.getBoolean("isCandleLocked");
-		
+		this.isTaktBlocked = props.getBoolean("isTaktBlocked");
+
 		this.isInCombatMode = props.getBoolean("isInCombatMode");
-		
-		for(int i = 0; i < hotbarAbilities.length; i++)
-		{
-			this.hotbarAbilities[i] = props.getString("ability" + i);
-		}
-		for(int i = 0; i < devilFruitAbilities.length; i++)
-		{
-			devilFruitAbilities[i] = props.getString("available_DevilFruitAbilities" + i);
-		}
-		for(int i = 0; i < racialAbilities.length; i++)
-		{
-			racialAbilities[i] = props.getString("available_RacialAbilities" + i);
-		}
-		for(int i = 0; i < hakiAbilities.length; i++)
-		{
-			this.hakiAbilities[i] = props.getString("available_HakiAbilities" + i);
-		}
 	}
 
 	public void resetNBTData(NBTTagCompound compound) 
@@ -200,207 +159,14 @@ public class ExtendedEntityStats implements IExtendedEntityProperties
 		props.setBoolean("hasYamiPower", false);
 		props.setBoolean("hasColaBackpack", false);
 		props.setBoolean("isCandleLocked", false);
-		
-		props.setBoolean("isInCombatMode", false);		
+		props.setBoolean("isTaktBlocked", false);
 
-		for(int i = 0; i < hotbarAbilities.length; i++)
-		{
-			props.setString("ability" + i, "n/a");
-		}
-		for(int i = 0; i < devilFruitAbilities.length; i++)
-		{
-			props.setString("available_DevilFruitAbilities" + i, "n/a");
-		}
-		for(int i = 0; i < racialAbilities.length; i++)
-		{
-			props.setString("available_RacialAbilities" + i, "n/a");
-		}
-		for(int i = 0; i < hakiAbilities.length; i++)
-		{
-			props.setString("available_HakiAbilities" + i, "n/a");
-		}
+		props.setBoolean("isInCombatMode", false);		
 		
 		compound.setTag(EXT_PROP_NAME, props);
 	}
 	
 	public void init(Entity entity, World world) {}
-	
-	// #REGION AVAILABLE DEVIL FRUITS ABILITIES
-	int devilFruitIndex = 0;
-	
-	public void addDevilFruitAbility(Ability abl)
-	{
-		if(this.devilFruitAbilities[devilFruitIndex] == null || this.devilFruitAbilities[devilFruitIndex].equals("n/a"))
-			this.devilFruitAbilities[devilFruitIndex] = WyHelper.getFancyName(abl.getAttribute().getAttributeName());
-		else
-		{
-			if(devilFruitIndex < this.devilFruitAbilities.length)
-				devilFruitIndex++;
-			else
-				devilFruitIndex = 0;
-			this.addDevilFruitAbility(abl);
-		}
-	}
-	
-	public void removeDevilFruitAbility(Ability abl)
-	{
-		if(this.devilFruitAbilities[devilFruitIndex] != null || this.devilFruitAbilities[devilFruitIndex].equals("n/a"))
-			this.devilFruitAbilities[devilFruitIndex] = "n/a";
-		else
-		{
-			if(devilFruitIndex < 16)
-				devilFruitIndex++;
-			else
-				devilFruitIndex = 0;
-			this.removeDevilFruitAbility(abl);			
-		}	
-	}
-	public boolean hasDevilFruitAbility(Ability abl)
-	{
-		for(String s : this.devilFruitAbilities)
-		{
-			if(s.equals(WyHelper.getFancyName(abl.getAttribute().getAttributeName())))
-				return true;					
-		}	
-		return false;
-	}
-	public String[] getDevilFruitAbilities()
-	{ 
-		return this.devilFruitAbilities; 
-	}
-	public void clearDevilFruitAbilities()
-	{
-		for(int j = 0; j < this.devilFruitAbilities.length; j++)
-			this.devilFruitAbilities[j] = "n/a";
-		devilFruitIndex = 0;
-	}
-	//	#END REGION
-	
-	// #REGION AVAILABLE RACIAL ABILITIES
-	int racialIndex = 0;
-	
-	public void addRacialAbility(Ability abl)
-	{
-		if(this.racialAbilities[racialIndex] == null || this.racialAbilities[racialIndex].equals("n/a"))
-			this.racialAbilities[racialIndex] = WyHelper.getFancyName(abl.getAttribute().getAttributeName());
-		else
-		{
-			if(racialIndex < 16)
-				racialIndex++;
-			else
-				racialIndex = 0;
-			this.addRacialAbility(abl);
-		}
-	}
-	
-	public boolean hasRacialAbility(Ability abl)
-	{	
-		for(String s : this.racialAbilities)
-		{
-			if(s.equals(WyHelper.getFancyName(abl.getAttribute().getAttributeName())))
-				return true;					
-		}	
-		return false;
-	}
-	
-	public void removeRacialAbility(Ability abl)
-	{
-		if(this.racialAbilities[racialIndex] != null || !this.racialAbilities[racialIndex].equals("n/a"))
-			this.racialAbilities[racialIndex] = "n/a";
-		else
-		{
-			if(racialIndex < 16)
-				racialIndex++;
-			else
-				racialIndex = 0;
-			this.removeRacialAbility(abl);			
-		}
-	}
-	
-	public String[] getRacialAbilities()
-	{ 
-		return this.racialAbilities; 
-	}
-	
-	public void clearRacialAbilities()
-	{
-		for(int j = 0; j < this.racialAbilities.length; j++)
-			this.racialAbilities[j] = "n/a";
-		racialIndex = 0;
-	}
-	//	#END REGION
-	
-	// #REGION AVAILABLE HAKI ABILITIES
-	int hakiIndex = 0;
-	
-	public void addHakiAbility(Ability abl)
-	{
-		if(this.hakiAbilities[hakiIndex] == null || this.hakiAbilities[hakiIndex].equals("n/a"))
-			this.hakiAbilities[hakiIndex] = WyHelper.getFancyName(abl.getAttribute().getAttributeName());
-		else
-		{
-			if(hakiIndex < 3)
-				hakiIndex++;
-			else
-				hakiIndex = 0;
-			this.addHakiAbility(abl);
-		}
-	}
-	public boolean hasHakiAbility(Ability abl)
-	{
-		for(String s : this.hakiAbilities)
-		{
-			if(s.equals(WyHelper.getFancyName(abl.getAttribute().getAttributeName())))
-				return true;					
-		}	
-		return false;
-	}
-	public void removeHakiAbility(Ability abl)
-	{
-		if(this.hakiAbilities[hakiIndex] != null || !this.hakiAbilities[hakiIndex].equals("n/a"))
-			this.hakiAbilities[hakiIndex] = "n/a";
-		else
-		{
-			if(hakiIndex < 16)
-				hakiIndex++;
-			else
-				hakiIndex = 0;
-			this.removeHakiAbility(abl);			
-		}
-	}
-	public String[] getHakiAbilities()
-	{ 
-		return this.hakiAbilities; 
-	}
-	public void clearHakiAbilities()
-	{
-		for(int j = 0; j < this.hakiAbilities.length; j++)
-			this.hakiAbilities[j] = "n/a";
-		hakiIndex = 0;
-	}
-	//	#END REGION
-	
-	public void setAbilityInSlot(int slot, Ability abl)
-	{
-		if(abl != null)
-			this.hotbarAbilities[slot] = WyHelper.getFancyName(abl.getAttribute().getAttributeName());
-		else
-			this.hotbarAbilities[slot] = "n/a";
-	}
-	public Ability getAbilityFromSlot(int slot)
-	{
-		return AbilityManager.instance().getAbilityByName(this.hotbarAbilities[slot]);
-	}
-	public int countAbilitiesInHotbar()
-	{
-		return this.hotbarAbilities.length;
-	}
-	public void clearHotbar()
-	{
-		for(int j = 0; j < this.hotbarAbilities.length; j++)
-			this.hotbarAbilities[j] = "n/a";
-	}
-	
 	
 	public void setCombatMode(boolean value) { this.isInCombatMode = value; }
 	public boolean isInCombatMode() { return this.isInCombatMode; }
@@ -535,6 +301,9 @@ public class ExtendedEntityStats implements IExtendedEntityProperties
 	
 	public void setIsCandleLocked(boolean value) { this.isCandleLocked = value; }
 	public boolean isCandleLocked() { return isCandleLocked; } 
+	
+	public void setIsTaktBlocked(boolean value) { this.isTaktBlocked = value; }
+	public boolean isTaktBlocked() { return isTaktBlocked; } 
 	
 	public void setYamiPower(boolean bool) { this.hasYamiPower = bool; }
 	public boolean hasYamiPower() { return hasYamiPower; } 

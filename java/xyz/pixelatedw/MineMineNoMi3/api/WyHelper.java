@@ -202,7 +202,7 @@ public class WyHelper
 					 		+ (abl.getAttribute().getAbilityCharges() > 0 ? "chargeTime: "+ String.format("%.1f", ((double)abl.getAttribute().getAbilityCharges()/24)) +", " : "")
 					 		
 					 		+ (abl.getAttribute().getProjectileDamage() > 1 ? "projectileDamage: "+ abl.getAttribute().getProjectileDamage() +", " : "")
-					 		+ ((abl.getAttribute().hasProjectile() && abl.getAttribute().isRepeater()) ? "projectileNumber: "+ ((abl.getAttribute().getAbilityCooldown() / abl.getAttribute().getAbilityRepeaterFrequency()) / 2) +", " : "")
+					 		+ ((abl.getAttribute().hasProjectile() && abl.getAttribute().isRepeater()) ? "projectileNumber: "+ ((abl.getAttribute().getAbilityCooldown() / abl.getAttribute().getAbilityRepeaterTime()) / 2) +", " : "")
 					 		+ (abl.getAttribute().getProjectileExplosionPower() > 0 ? "projectileExplosion: "+ abl.getAttribute().getProjectileExplosionPower() +", " : "")
 					 		
 					 		+ ((abl.getAttribute().getPotionEffectsForAoE() != null && abl.getAttribute().getPotionEffectsForAoE().length > 0) ? "aoeEffects: ["+ getPotionEffectsFor(abl.getAttribute().getPotionEffectsForAoE()) +"], " : "")

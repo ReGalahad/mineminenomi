@@ -13,8 +13,10 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.resources.I18n;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyRenderHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityManager;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.gui.GUISelectHotbarAbilities;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 
@@ -22,34 +24,29 @@ public class GUIAbilitiesList extends GuiScrollingList
 {
 
 	private GUISelectHotbarAbilities parent;
-	private ExtendedEntityStats props;
+	private AbilityProperties props;
 	
-	private List<AbilityAttribute> availableAbilities = new ArrayList<AbilityAttribute>();
+	private List<Ability> availableAbilities = new ArrayList<Ability>();
 	
-	public GUIAbilitiesList(GUISelectHotbarAbilities parent, ExtendedEntityStats props, String[] abilitiesList) 
+	public GUIAbilitiesList(GUISelectHotbarAbilities parent, AbilityProperties abilityProps, Ability[] abilities) 
 	{
 		super(parent.mc, 220, 300, (parent.relativePosY - 200) / 2, (parent.relativePosY + 60) / 2, (parent.relativePosX - 220) / 2, 26);
         this.parent = parent;
-        this.props = props;
+        this.props = abilityProps;
         availableAbilities.clear();
         
-		for(int i = 0; i < abilitiesList.length - 1; i++)
-		{		
-			if(AbilityManager.instance().getAbilityByName(abilitiesList[i]) != null)
-			{
-				this.availableAbilities.add( AbilityManager.instance().getAbilityByName(abilitiesList[i]).getAttribute() );
-			}
+		for(int i = 0; i < abilities.length - 1; i++)
+		{	
+			if(abilities[i] != null)
+				this.availableAbilities.add( abilities[i] );
 		}	 
 	}
-	
-	
 	
     protected int getContentHeight()
     {
         return (this.getSize()) * 25 + 1;
     }
 
-	
 	protected int getSize() 
 	{
 		return this.availableAbilities.size();
@@ -63,7 +60,7 @@ public class GUIAbilitiesList extends GuiScrollingList
 			
 			for(int i = 0; i < props.countAbilitiesInHotbar(); i++)
 			{								
-				if( props.getAbilityFromSlot(i) != null && props.getAbilityFromSlot(i) == AbilityManager.instance().getAbilityByName(WyHelper.getFancyName(availableAbilities.get(index).getAttributeName())) )
+				if( props.getAbilityFromSlot(i) != null && props.getAbilityFromSlot(i) == AbilityManager.instance().getAbilityByName(WyHelper.getFancyName(availableAbilities.get(index).getAttribute().getAttributeName())) )
 				{
 					flag = false;
 				}
@@ -71,7 +68,7 @@ public class GUIAbilitiesList extends GuiScrollingList
 						
 			if(flag)
 			{
-				props.setAbilityInSlot(parent.slotSelected, AbilityManager.instance().getAbilityByName( WyHelper.getFancyName(availableAbilities.get(index).getAttributeName()) ));
+				props.setAbilityInSlot(parent.slotSelected, AbilityManager.instance().getAbilityByName( WyHelper.getFancyName(availableAbilities.get(index).getAttribute().getAttributeName()) ));
 			}
 		}
 	}
@@ -92,18 +89,19 @@ public class GUIAbilitiesList extends GuiScrollingList
     	boolean flag = false;
 		for(int i = 0; i < props.countAbilitiesInHotbar(); i++)
 		{	
-			if(props.getAbilityFromSlot(i) != null && props.getAbilityFromSlot(i).getAttribute() == availableAbilities.get(slotIndex))
+			if(props.getAbilityFromSlot(i) != null && props.getAbilityFromSlot(i).getAttribute() == availableAbilities.get(slotIndex).getAttribute())
 			{
 				flag = true;
 			}
-    		
+
+			/** TODO use ternary */
 			if(flag)
-				Minecraft.getMinecraft().fontRenderer.drawStringWithShadow( I18n.format("ability." + WyHelper.getFancyName(availableAbilities.get(slotIndex).getAttributeName()) + ".name"), this.left + 40, slotTop + 7, 0xFF0000);
+				Minecraft.getMinecraft().fontRenderer.drawStringWithShadow( I18n.format("ability." + WyHelper.getFancyName(availableAbilities.get(slotIndex).getAttribute().getAttributeName()) + ".name"), this.left + 40, slotTop + 7, 0xFF0000);
 			else
-				Minecraft.getMinecraft().fontRenderer.drawStringWithShadow( I18n.format("ability." + WyHelper.getFancyName(availableAbilities.get(slotIndex).getAttributeName()) + ".name"), this.left + 40, slotTop + 7, 0xFFFFFF);
+				Minecraft.getMinecraft().fontRenderer.drawStringWithShadow( I18n.format("ability." + WyHelper.getFancyName(availableAbilities.get(slotIndex).getAttribute().getAttributeName()) + ".name"), this.left + 40, slotTop + 7, 0xFFFFFF);
 		}
 		
-    	WyRenderHelper.drawAbilityIcon(WyHelper.getFancyName(availableAbilities.get(slotIndex).getAttributeName()), this.left + 10, slotTop + 2, 16, 16);
+    	WyRenderHelper.drawAbilityIcon(WyHelper.getFancyName(availableAbilities.get(slotIndex).getAttribute().getAttributeName()), this.left + 10, slotTop + 2, 16, 16);
 	}
 	
 }

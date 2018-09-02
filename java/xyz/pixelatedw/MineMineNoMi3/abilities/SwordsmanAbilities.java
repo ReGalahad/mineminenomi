@@ -37,7 +37,7 @@ public class SwordsmanAbilities
 			if(player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ItemCoreWeapon)
 			{
 
-				/** TODO New Spherical particles around the player */
+				/** FIXME New Spherical particles around the player */
 								
 				if(!this.isOnCooldown)
 				{

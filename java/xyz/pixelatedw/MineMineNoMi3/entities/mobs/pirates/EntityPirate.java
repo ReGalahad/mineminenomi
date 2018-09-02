@@ -4,13 +4,14 @@ import javax.annotation.Nullable;
 
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
 public class EntityPirate extends PirateData
 { 
-	private String[] textures = {"pirate1", "pirate2", "pirate3", "pirate4"};
+	private String[] textures = {"pirate1", "pirate2", "pirate3", "pirate4", "pirate5"};
 	
 	public EntityPirate(World world) 
 	{
@@ -29,7 +30,8 @@ public class EntityPirate extends PirateData
 
     protected void addRandomArmor()
     {
-        this.setCurrentItemOrArmor(0, new ItemStack(ListMisc.PirateCutlass));
+    	Item[] randomSword = new Item[] {ListMisc.PirateCutlass, ListMisc.PirateCutlass};
+        this.setCurrentItemOrArmor(0, new ItemStack(randomSword[this.rand.nextInt(randomSword.length)]));
     }
     
 	public double[] itemOffset() 

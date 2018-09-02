@@ -2,18 +2,21 @@ package xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles;
 
 import java.util.ArrayList;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.Blocks;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.BaneProjectiles.SpringDeathKnock;
-import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
+import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListExtraAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 
 public class ExtraProjectiles 
 {
@@ -26,8 +29,41 @@ public class ExtraProjectiles
 		abilitiesClassesArray.add(new Object[] {AxeDialProjectile.class, ListExtraAttributes.DIALAXE});
 		abilitiesClassesArray.add(new Object[] {PopGreen.class, ListExtraAttributes.POPGREEN});
 		abilitiesClassesArray.add(new Object[] {KujaArrow.class, ListExtraAttributes.KUJAARROW});
-
 	}
+	
+	public static class EntityCloud extends Entity
+	{
+		private int life = 100;
+		private EntityPlayer thrower;
+		
+		public EntityCloud(World world)
+		{super(world);}
+		
+		public void onUpdate()
+		{
+			super.onUpdate();
+			if(life <= 0)
+				this.setDead();
+			
+			WyNetworkHelper.sendTo(new PacketParticles("kemuriBoshi", this.posX, this.posY, this.posZ), (EntityPlayerMP) thrower);
+			
+			life--;
+		}
+		
+		public void setThrower(EntityPlayer player)
+		{
+			this.thrower = player;
+		}
+		
+		public void setLife(int life)
+		{
+			this.life = life;
+		}
+		
+		protected void entityInit() {}
+		protected void readEntityFromNBT(NBTTagCompound nbt) {}
+		protected void writeEntityToNBT(NBTTagCompound nbt) {}
+	}	
 	
 	public static class MilkyDialProjectile extends AbilityProjectile
 	{

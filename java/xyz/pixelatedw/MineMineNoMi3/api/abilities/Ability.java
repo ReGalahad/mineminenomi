@@ -29,7 +29,7 @@ public class Ability
 	protected AbilityProjectile projectile;
 	protected AbilityAttribute attr;
 	protected boolean isOnCooldown = false, isCharging = false, isRepeating = false, passiveActive = false, isDisabled = false;
-	private int ticksForCooldown, ticksForCharge, ticksForRepeater;
+	private int ticksForCooldown, ticksForCharge, ticksForRepeater, ticksForRepeaterFreq, currentSpawn = 0;
 
 	public Ability(AbilityAttribute attr)
 	{
@@ -37,6 +37,7 @@ public class Ability
 		ticksForCooldown = this.attr.getAbilityCooldown();
 		ticksForCharge = this.attr.getAbilityCharges();
 		ticksForRepeater = this.attr.getAbilityCooldown();
+		ticksForRepeaterFreq = this.attr.getAbilityRepeaterFrequency();
 	}
 
 	public AbilityAttribute getAttribute() { return attr; }
@@ -83,16 +84,17 @@ public class Ability
 	public void duringRepeater(EntityPlayer player)
 	{
 		if(isRepeating)
-		{
+		{			
 			try 
 			{
-				if(!player.worldObj.isRemote)
+				if(!player.worldObj.isRemote && currentSpawn % ticksForRepeaterFreq == 0)
 					player.worldObj.spawnEntityInWorld(projectile.getClass().getDeclaredConstructor(World.class, EntityLivingBase.class, AbilityAttribute.class).newInstance(player.worldObj, player, attr));
 			} 
 			catch (Exception e) 
 			{
 				e.printStackTrace();
 			}
+			currentSpawn++;
 		}
 	}
 	
@@ -354,7 +356,7 @@ public class Ability
 						if(isRepeating)
 						{
 							ticksForRepeater--;
-							if(ticksForRepeater > this.attr.getAbilityCooldown() - (this.attr.getAbilityCooldown() / this.attr.getAbilityRepeaterFrequency()) && projectile != null)
+							if(ticksForRepeater > this.attr.getAbilityCooldown() - (this.attr.getAbilityCooldown() / this.attr.getAbilityRepeaterTime()) && projectile != null)
 							{
 								
 							}
@@ -377,6 +379,7 @@ public class Ability
 					else
 					{
 						ticksForCooldown = this.attr.getAbilityCooldown();
+						currentSpawn = 0;
 						isOnCooldown = false;
 						if(!player.getDisplayName().equals(FMLCommonHandler.instance().getMinecraftServerInstance().getServerOwner()))
 							WyNetworkHelper.sendTo(new PacketPlayer("clientUpdateIsCooldown" + attr.getAttributeName(), false), (EntityPlayerMP) player);

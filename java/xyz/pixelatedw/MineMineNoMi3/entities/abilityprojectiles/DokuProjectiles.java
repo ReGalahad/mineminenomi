@@ -46,7 +46,7 @@ public class DokuProjectiles
 		
 		public void tasksImapct(MovingObjectPosition hit)
 		{		
-			if(hit != null)
+			if(hit != null && hit.entityHit == null && !worldObj.isRemote)
 			{
 				int x = hit.blockX;
 				int y = hit.blockY;

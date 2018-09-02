@@ -20,6 +20,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.kriegPirates.EntityGin;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.kriegPirates.EntityPearl;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.EntityMorgan;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityBazooka;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityBrickBat;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityFist;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityHydra;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityMeigo;
@@ -99,6 +100,8 @@ public class CommandFG extends CommandBase
 				toSpawn = new EntityBlueno(player.worldObj); //COMPLETED
 			
 			
+			else if(str[0].equals("brickbat"))
+				toSpawn = new TempEntityBrickBat(player.worldObj);
 			else if(str[0].equals("fist"))
 				toSpawn = new TempEntityFist(player.worldObj);
 			else if(str[0].equals("bazooka"))
@@ -133,7 +136,12 @@ public class CommandFG extends CommandBase
 					new TeleporterScenarioArena((WorldServer) player.worldObj).teleport(player, ID.SCENARIO_ROMANCEDAWN_CAPTAINMORGAN);		
 			}
 			else if(str[0].equals("maxcola"))
-				props.setMaxCola(250);
+			{
+				if(!props.hasColaBackpack())
+					props.setMaxCola(250);
+				else
+					props.setMaxCola(450);
+			}
 			else if(str[0].equals("fillcola"))
 				props.setCola(props.getMaxCola());
 			else if(str[0].equals("rngquest"))

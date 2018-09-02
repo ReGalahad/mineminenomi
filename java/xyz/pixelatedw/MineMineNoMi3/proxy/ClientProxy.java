@@ -19,6 +19,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.arlongPirates.EntityKuroobi;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.arlongPirates.models.ModelArlong;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.arlongPirates.models.ModelChew;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.arlongPirates.models.ModelKuroobi;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.bandits.EntityBandit;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.kriegPirates.EntityDonKrieg;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.kriegPirates.EntityGin;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.kriegPirates.EntityPearl;
@@ -103,6 +104,9 @@ public class ClientProxy extends CommonProxy
 			}
 		}
 		
+		//Bandits
+		RenderingRegistry.registerEntityRenderingHandler(EntityBandit.class, new MobRenderer(new ModelMarine()));
+		
 		//Marines
 		RenderingRegistry.registerEntityRenderingHandler(EntityMarine.class, new MobRenderer(new ModelMarine()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityMarineWithGun.class, new MobRenderer(new ModelMarineWithGun()));
@@ -138,13 +142,13 @@ public class ClientProxy extends CommonProxy
 		//Others
 		RenderingRegistry.registerEntityRenderingHandler(EntityDoppelman.class, new MobRenderer(new ModelMarine(), "doppelman"));
 		RenderingRegistry.registerEntityRenderingHandler(EntityDenDenMushi.class, new MobRenderer(new ModelDenDenMushi(), "dendenmushi"));
-		RenderingRegistry.registerEntityRenderingHandler(EntityDojoSensei.class, new MobRenderer(new ModelDojoSensei(), "dojosensei"));
+		RenderingRegistry.registerEntityRenderingHandler(EntityDojoSensei.class, new MobRenderer(new ModelDojoSensei()));
 
 		//Special Renderers
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDenDenMushi.class, new RenderBlockDenDenMushi());
 		//MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ListMisc.DenDenMushi), new RenderItemDenDenMushi(new RenderBlockDenDenMushi(), new TileEntityDenDenMushi()));
 		
-		/** TODO Delete any and all mentions of these */
+		/** FORGOLD Delete any and all mentions of these */
 		//Temp
 		RenderingRegistry.registerEntityRenderingHandler(TempEntityFist.class, new AbilityRenderer(new AbilityAttribute(ListAttributes.HIKEN).setModelOffsets(0, 2, 0)));		
 		RenderingRegistry.registerEntityRenderingHandler(TempEntityBazooka.class, new AbilityRenderer(new AbilityAttribute(ListExtraAttributes.GOMUGOMUNOBAZOOKA).setModelOffsets(0, 2, 0)));

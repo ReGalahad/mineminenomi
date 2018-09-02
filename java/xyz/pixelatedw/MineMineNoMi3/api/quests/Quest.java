@@ -69,9 +69,6 @@ public abstract class Quest
 			this.questProgress = progress;
 		else
 			this.questProgress = this.getMaxProgress();
-	
-		//if(this.isFinished(player))
-		//	this.finishQuest(player);		
 	}
 
 	public void alterProgress(EntityPlayer player, double progress) 
@@ -79,10 +76,7 @@ public abstract class Quest
 		if(this.questProgress + progress <= this.getMaxProgress())
 			this.questProgress += progress;
 		else
-			this.questProgress = this.getMaxProgress();
-	
-		//if(this.isFinished(player))
-		//	this.finishQuest(player);		
+			this.questProgress = this.getMaxProgress();	
 	}
 
 }

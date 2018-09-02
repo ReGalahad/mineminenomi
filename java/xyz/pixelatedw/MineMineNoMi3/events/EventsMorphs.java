@@ -7,10 +7,16 @@ import org.lwjgl.util.glu.Project;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
+import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.model.ModelSheep1;
+import net.minecraft.client.model.ModelSheep2;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderPlayer;
+import net.minecraft.client.renderer.entity.RenderSheep;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
@@ -21,7 +27,11 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.abilities.extra.models.ModelCandleLock;
 import xyz.pixelatedw.MineMineNoMi3.abilities.extra.renderers.RenderCandleLock;
+import xyz.pixelatedw.MineMineNoMi3.api.WyRenderHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.MobRenderer;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.EntityMarine;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.models.ModelMarine;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.RenderZoanMorph;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelPhoenixFull;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelPhoenixHybrid;
@@ -62,19 +72,79 @@ public class EventsMorphs
 	{
 		ExtendedEntityStats props = ExtendedEntityStats.get(event.entity);
 
+		if (!props.getZoanPoint().toLowerCase().equals("n/a"))
+		{
+			event.setCanceled(true);
+			if (props.getUsedFruit().equals("dokudoku"))
+			{
+				if (props.getZoanPoint().toLowerCase().equals(ID.ZOANMORPH_DOKU))
+					this.doRenderZoanMorph(morphVenomDemon, event.x, event.y, event.z, event.entity);
+			}
+			else if (props.getUsedFruit().equals("ushiushibison"))
+			{
+				if (props.getZoanPoint().toLowerCase().equals(ID.ZOANMORPH_POWER))
+					this.doRenderZoanMorph(zoanBisonPower, event.x, event.y, event.z, event.entity);
+				if (props.getZoanPoint().toLowerCase().equals(ID.ZOANMORPH_SPEED))
+					this.doRenderZoanMorph(zoanBisonSpeed, event.x, event.y, event.z, event.entity);
+			}
+			else if (props.getUsedFruit().equals("toritoriphoenix"))
+			{
+				if (props.getZoanPoint().toLowerCase().equals(ID.ZOANMORPH_HYBRID))
+					this.doRenderZoanMorph(zoanPhoenixHybrid, event.x, event.y, event.z, event.entity);
+				if (props.getZoanPoint().toLowerCase().equals(ID.ZOANMORPH_PHOENIX))
+					this.doRenderZoanMorph(zoanPhoenixFull, event.x, event.y, event.z, event.entity);
+			}
+		}
+		
 		if(props.isCandleLocked())
 		{
 			if (Minecraft.getMinecraft().thePlayer.equals(event.entity))
 				candleLock.doRender(event.entity, 0D, -1.625D, 0D, 0F, 0.0625F);
 			else
-				candleLock.doRender(event.entity, event.entity.posX - Minecraft.getMinecraft().thePlayer.posX, (event.entity.posY - Minecraft.getMinecraft().thePlayer.posY), event.entity.posZ - Minecraft.getMinecraft().thePlayer.posZ, 0F, 0.0625F);	
+				candleLock.doRender(event.entity, event.x, event.y, event.z, 0F, 0.0625F);	
 		}
+		
+		
+		/*if(event.entity instanceof EntityMarine)
+		{
+			GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
+			GL11.glEnable(GL11.GL_LIGHTING);
+			GL11.glClearStencil(0);
+			GL11.glClear(GL11.GL_STENCIL_BUFFER_BIT);
+			GL11.glEnable(GL11.GL_STENCIL_TEST);
+			GL11.glStencilFunc(GL11.GL_ALWAYS, 1, 0xFFFF);
+			GL11.glStencilOp(GL11.GL_KEEP, GL11.GL_KEEP, GL11.GL_REPLACE);
+			GL11.glPolygonMode(GL11.GL_FRONT_AND_BACK, GL11.GL_FILL);
+			GL11.glColor3f(1.0f, 1.0f, 1.0f);
+			
+			// Render original.
+			//new RenderZoanMorph(new ModelBiped(), "null", 1).doRender(event.entity, event.x, event.y, event.z, 0, 0);
+			
+			GL11.glDisable(GL11.GL_LIGHTING);
+			GL11.glStencilFunc(GL11.GL_NOTEQUAL, 1, 0xFFFF);
+			GL11.glStencilOp(GL11.GL_KEEP, GL11.GL_KEEP, GL11.GL_REPLACE);
+			GL11.glLineWidth(1.5f);
+			GL11.glPolygonMode(GL11.GL_FRONT_AND_BACK, GL11.GL_LINE);
+			GL11.glColor4f(1.0F, 1.0F, 0.0F, 1.0F);
+			GL11.glDisable(GL11.GL_TEXTURE_2D);
+			
+			// Render stencil.
+			new RenderZoanMorph(new ModelBiped(), "null", 1).doRender(event.entity, event.x, event.y, event.z, 0, 0);
+			//zoanBisonPower.doRender(event.entity, event.x, event.y, event.z, 0F, 0F);
+
+			GL11.glEnable(GL11.GL_TEXTURE_2D);
+			GL11.glColor4f(1F, 1F, 1F, 1F);
+			GL11.glPopAttrib();
+			
+			event.setCanceled(true);
+		}*/
+		
 	}
 	
 	@SubscribeEvent
 	public void onPlayerRendered(RenderPlayerEvent.Pre event)
 	{
-		ExtendedEntityStats props = ExtendedEntityStats.get(event.entityPlayer);
+/*		ExtendedEntityStats props = ExtendedEntityStats.get(event.entityPlayer);
 
 		if (!props.getZoanPoint().toLowerCase().equals("n/a"))
 		{
@@ -99,15 +169,15 @@ public class EventsMorphs
 					this.doRenderZoanMorph(zoanPhoenixFull, event.entityPlayer);
 			}
 		}
-
+*/
 	}
 
-	private void doRenderZoanMorph(RenderZoanMorph render, EntityPlayer player)
+	private void doRenderZoanMorph(RenderZoanMorph render, double x, double y, double z, EntityLivingBase entity)
 	{
-		if (Minecraft.getMinecraft().thePlayer.equals(player))
-			render.doRender(player, 0D, -1.625D, 0D, 0F, 0.0625F);
+		if (Minecraft.getMinecraft().thePlayer.equals(entity))
+			render.doRender(entity, 0D, -1.625D, 0D, 0F, 0.0625F);
 		else
-			render.doRender(player, player.posX - Minecraft.getMinecraft().thePlayer.posX, (player.posY - Minecraft.getMinecraft().thePlayer.posY), player.posZ - Minecraft.getMinecraft().thePlayer.posZ, 0F, 0.0625F);
+			render.doRender(entity, x, y, z, 0F, 0.0625F);
 	}
 
 	@SubscribeEvent

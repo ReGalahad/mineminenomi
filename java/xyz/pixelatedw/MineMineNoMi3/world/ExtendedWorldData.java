@@ -3,6 +3,7 @@ package xyz.pixelatedw.MineMineNoMi3.world;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldSavedData;
+import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketWorldData;
 
@@ -55,7 +56,7 @@ public class ExtendedWorldData extends WorldSavedData
 	public void countUpDojoSpawned()
 	{
 		this.totalDojosSpawned++;
-		if(this.totalDojosSpawned >= 5)
+		if(this.totalDojosSpawned >= MainConfig.maxDojoSpawn)
 			this.setSwordsmanDojoSpawned(true);
 		markDirty();
 	}
@@ -63,7 +64,7 @@ public class ExtendedWorldData extends WorldSavedData
 	public void setDojoSpawned(int value)
 	{
 		this.totalDojosSpawned = value;
-		if(this.totalDojosSpawned >= 5)
+		if(this.totalDojosSpawned >= MainConfig.maxDojoSpawn)
 			this.setSwordsmanDojoSpawned(true);
 		markDirty();		
 	}

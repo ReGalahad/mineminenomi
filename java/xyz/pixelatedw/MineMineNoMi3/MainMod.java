@@ -11,6 +11,9 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.RendererLivingEntity;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
@@ -58,7 +61,7 @@ public class MainMod
 
 	@EventHandler
 	public void init(FMLInitializationEvent event)
-	{
+	{		
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GUIHandler());
 		GameRegistry.registerWorldGenerator(new MainWorldGen(), 1);
 
@@ -80,14 +83,14 @@ public class MainMod
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent evt)
 	{
-		WyTelemetry.addStat("170onlinePlayers", 1);
+		WyTelemetry.addStat(ID.PROJECT_MCVERSION.replace(".", "") + "onlinePlayers", 1);
 		Runtime.getRuntime().addShutdownHook(new Thread()
 		{
 			public void run()
 			{
 				try
 				{
-					WyTelemetry.addStat(ID.PROJECT_VERSION.replace(".", "") + "-onlinePlayers", -1);
+					WyTelemetry.addStat(ID.PROJECT_MCVERSION.replace(".", "") + "onlinePlayers", -1);
 					this.sleep(100);
 				} 
 				catch (InterruptedException e)

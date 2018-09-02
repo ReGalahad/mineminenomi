@@ -11,7 +11,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 import xyz.pixelatedw.MineMineNoMi3.quests.ITimedQuest;
 
-public class EventsOnTime
+public class EventsClientOnly
 {
 	@SubscribeEvent
 	public void onWorldTick(TickEvent.WorldTickEvent event)
