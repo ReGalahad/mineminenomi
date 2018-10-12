@@ -39,7 +39,6 @@ import xyz.pixelatedw.MineMineNoMi3.items.BellyPouch;
 import xyz.pixelatedw.MineMineNoMi3.items.CharacterCreator;
 import xyz.pixelatedw.MineMineNoMi3.items.Cola;
 import xyz.pixelatedw.MineMineNoMi3.items.Heart;
-import xyz.pixelatedw.MineMineNoMi3.items.ItemAbilityWeapon;
 import xyz.pixelatedw.MineMineNoMi3.items.ItemCoreArmor;
 import xyz.pixelatedw.MineMineNoMi3.items.UltraCola;
 import xyz.pixelatedw.MineMineNoMi3.items.dials.DialAxe;
@@ -49,6 +48,7 @@ import xyz.pixelatedw.MineMineNoMi3.items.dials.DialImpact;
 import xyz.pixelatedw.MineMineNoMi3.items.dials.DialMilky;
 import xyz.pixelatedw.MineMineNoMi3.items.dials.DialReject;
 import xyz.pixelatedw.MineMineNoMi3.items.weapons.Flintlock;
+import xyz.pixelatedw.MineMineNoMi3.items.weapons.ItemAbilityWeapon;
 import xyz.pixelatedw.MineMineNoMi3.items.weapons.ItemCoreWeapon;
 import xyz.pixelatedw.MineMineNoMi3.items.weapons.Kabuto;
 import xyz.pixelatedw.MineMineNoMi3.items.weapons.KujaBow;
@@ -152,12 +152,12 @@ public class ListMisc
 	public static ItemCoreWeapon Kitetsu = new ItemCoreWeapon(8);
 	public static ItemCoreWeapon Shusui = new ItemCoreWeapon(8);
 	
-	public static ItemAbilityWeapon IceSaber = new ItemAbilityWeapon(9);
+	public static ItemAbilityWeapon IceSaber = new ItemAbilityWeapon(9).setIsSlownessInducing();
 	public static ItemAbilityWeapon AmaNoMurakumo = new ItemAbilityWeapon(9);
-	public static ItemAbilityWeapon NoroNoroBeamSword = new ItemAbilityWeapon(5);
+	public static ItemAbilityWeapon NoroNoroBeamSword = new ItemAbilityWeapon(5).setIsSlownessInducing(75, true);
 	public static ItemAbilityWeapon DoruDoruArtsKen = new ItemAbilityWeapon(6);
-	public static ItemAbilityWeapon BlueSword = new ItemAbilityWeapon(8);
-	public static ItemAbilityWeapon TabiraYuki = new ItemAbilityWeapon(8);
+	public static ItemAbilityWeapon BlueSword = new ItemAbilityWeapon(8).setIsFireAspect();
+	public static ItemAbilityWeapon TabiraYuki = new ItemAbilityWeapon(8).setIsSlownessInducing(50);
 	
 	public static void init()
 	{		
@@ -288,7 +288,10 @@ public class ListMisc
  		WyRegistry.registerName(ID.LANG_GUI_ABILITIES, "Abilities");
  		WyRegistry.registerName("gui.epithet.name", "Epithets");
  		WyRegistry.registerName(ID.LANG_GUI_QUESTS, "Quests");
- 		WyRegistry.registerName(ID.LANG_GUI_QPROGRESS, "Progress");		
+ 		WyRegistry.registerName(ID.LANG_GUI_QUESTS_PROGRESS, "Progress");		
+ 		WyRegistry.registerName(ID.LANG_GUI_QUESTS_ACCEPT, "Accept");
+ 		WyRegistry.registerName(ID.LANG_GUI_QUESTS_DECLINE, "Decline");	
+ 		WyRegistry.registerName(ID.LANG_GUI_QUESTS_ACCEPTTEXT, "Do you wish to accept this quest ?");	
  			
 	}   
 	 

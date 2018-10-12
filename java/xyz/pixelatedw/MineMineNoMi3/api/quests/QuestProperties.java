@@ -75,7 +75,6 @@ public class QuestProperties implements IExtendedEntityProperties
 		{
 			for(int i = 0; i < questsList.length; i++)
 			{
-				//System.out.println(props.getString("inProgressQuest_" + i));
 				this.questsList[i] = (!props.getString("inProgressQuest_" + i).isEmpty() || QuestManager.instance().getQuestByNameFromList(ListQuests.allQuests, props.getString("inProgressQuest_" + i)) != null) ? QuestManager.instance().getQuestByNameFromList(ListQuests.allQuests, props.getString("inProgressQuest_" + i)).getClass().newInstance() : null;
 				if(this.questsList[i] != null)
 				{

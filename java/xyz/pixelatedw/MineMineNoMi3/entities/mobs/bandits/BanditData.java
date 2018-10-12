@@ -25,7 +25,12 @@ public class BanditData extends EntityNewMob
 	
 	public BanditData(World world)
 	{
-		super(world);
+		this(world, null);
+	}
+	
+	public BanditData(World world, String[] textures) 
+	{
+		super(world, textures);
         this.getNavigator().setBreakDoors(true);
         this.getNavigator().setAvoidsWater(true);
 		this.tasks.addTask(0, entityAIMeleeAttack);

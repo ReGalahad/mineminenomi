@@ -8,12 +8,10 @@ import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
 public class EntityPirateWithGun extends PirateData
 {
-	private String[] textures = {"pirategun1", "pirategun2", "pirategun3", "pirategun4", "pirategun5"};
-	
+
 	public EntityPirateWithGun(World world) 
 	{
-		super(world);
-		this.setTexture(textures[this.rand.nextInt(textures.length)]);
+		super(world, new String[] {"pirategun1", "pirategun2", "pirategun3", "pirategun4", "pirategun5"});
 		this.tasks.removeTask(entityAIMeleeAttack);
 		entityAIMeleeAttack = new EntityAIAttackOnCollide(this, 0.0D, false);
 		this.tasks.addTask(0, entityAIMeleeAttack);

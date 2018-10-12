@@ -1,5 +1,8 @@
 package xyz.pixelatedw.MineMineNoMi3.entities.mobs;
 
+import cpw.mods.fml.common.network.ByteBufUtils;
+import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.nbt.NBTTagCompound;
@@ -9,17 +12,25 @@ public class EntityNewMob extends EntityMob implements IDynamicRenderer
 {
 
 	private boolean hasHaki = false, isLogia = false;
-	private String texture = "n/a", model = "n/a";
-	private int state;
+	private String texture = "null", model = "n/a";
+	private int state, textureId;
+	private String[] textures;
 
 	public EntityNewMob(World worldIn) 
 	{
+		this(worldIn, null);
+	}
+	
+	public EntityNewMob(World worldIn, String[] textures) 
+	{
 		super(worldIn);
 		addRandomArmor();
+		this.textures = textures;
 	}
 		
-	public String getTexture() {return texture;}
-	protected void setTexture(String texture) {this.texture = texture;}
+	public String getTexture() { return textures[this.getDataWatcher().getWatchableObjectInt(28)]; }
+	public int getTextureId() { return this.getDataWatcher().getWatchableObjectInt(28); }
+	protected void setTexture(int texture) { this.getDataWatcher().updateObject(28, texture); }
 	
 	public boolean hasBusoHaki() { return false; }
 	public boolean hasHaoHaki() { return false; }
@@ -29,14 +40,14 @@ public class EntityNewMob extends EntityMob implements IDynamicRenderer
 	
 	public void writeEntityToNBT(NBTTagCompound nbt)
 	{
-		super.writeEntityToNBT(nbt);
-		nbt.setString("Texture", getTexture());
+		super.writeEntityToNBT(nbt);	
+		nbt.setInteger("Texture", getTextureId());
 	}
 	
 	public void readEntityFromNBT(NBTTagCompound nbt)
 	{
 		super.readEntityFromNBT(nbt);
-		setTexture(nbt.getString("Texture"));	
+		setTexture(nbt.getInteger("Texture"));
 	}
 	
     protected void addRandomArmor() {}
@@ -45,6 +56,8 @@ public class EntityNewMob extends EntityMob implements IDynamicRenderer
     {
         super.onSpawnWithEgg(data);
         addRandomArmor();
+		if(textures != null && textures.length > 0)
+			this.setTexture(this.rand.nextInt(textures.length));
         return data;
     }
 	
@@ -54,6 +67,7 @@ public class EntityNewMob extends EntityMob implements IDynamicRenderer
 	protected void entityInit()
 	{
 		this.getDataWatcher().addObject(27, state);
+		this.getDataWatcher().addObject(28, textureId);
 		super.entityInit();
 	}
 	
@@ -81,4 +95,5 @@ public class EntityNewMob extends EntityMob implements IDynamicRenderer
 	{
 		return new double[] {1, 1, 1};
 	}
+
 }

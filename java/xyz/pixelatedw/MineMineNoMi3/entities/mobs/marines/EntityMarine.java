@@ -1,5 +1,7 @@
 package xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines;
 
+import cpw.mods.fml.common.network.ByteBufUtils;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -8,19 +10,17 @@ import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
 public class EntityMarine extends MarineData
 { 
-	private String[] textures = {"marine1", "marine2", "marine3", "marine4", "marine5"};
-	
+
 	public EntityMarine(World world) 
 	{
-		super(world);
-		this.setTexture(textures[this.rand.nextInt(textures.length)]);
+		super(world, new String[] {"marine1", "marine2", "marine3", "marine4", "marine5"});	
  	}
 	
 	public void applyEntityAttributes()
 	{
 		super.applyEntityAttributes(); 
 		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(35.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.23000000417232513D);
+		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.23D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(2.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20.0D);
 	}
@@ -36,7 +36,7 @@ public class EntityMarine extends MarineData
 	}
 	
 	public int getDorikiPower() { return this.worldObj.rand.nextInt(3) + 10; }
-	public int getBellyInPockets() { return this.worldObj.rand.nextInt(10) + 1; }
+	public int getBellyInPockets() { return this.worldObj.rand.nextInt(10) + 5; }
 	
     protected void dropRareDrop(int i)
     {

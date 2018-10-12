@@ -50,7 +50,6 @@ public class GUIPlayer extends GuiScreen
 		String raceActual = I18n.format("race." + props.getRace().toLowerCase() + ".name");
 		String styleActual = I18n.format("style." + props.getFightStyle().toLowerCase() + ".name");
 		
-		
 		if(props.getRace().equals(ID.RACE_CYBORG))
 			mc.fontRenderer.drawStringWithShadow(EnumChatFormatting.BOLD + "COLA: " + EnumChatFormatting.RESET + props.getCola() + " / " + props.getMaxCola(), posX - 30, posY + 50, -1) ;
 		mc.fontRenderer.drawStringWithShadow(EnumChatFormatting.BOLD + "DORIKI: " + EnumChatFormatting.RESET + props.getDoriki(), posX - 30, posY + 70, -1);

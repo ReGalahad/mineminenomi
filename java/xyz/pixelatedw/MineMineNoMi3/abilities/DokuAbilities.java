@@ -20,6 +20,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.DokuProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSyncInfo;
 
@@ -45,17 +46,8 @@ public class DokuAbilities
 				this.startExtUpdate(player);
 			}
 
-			for (int i = 0; i < 30; i++)
-			{
-				double offsetX = (new Random().nextInt(20) - 10.0D) / 3.0D;
-				double offsetY = (new Random().nextInt(20) - 10.0D) / 35.0D;
-				double offsetZ = (new Random().nextInt(20) - 10.0D) / 3.0D;
-				
-				MainMod.proxy.spawnCustomParticles(player, ID.PARTICLE_NAME_DOKU, player.posX - 1 + offsetX + new Random().nextInt(5), player.posY + offsetY, player.posZ - 1 + offsetZ + new Random().nextInt(5), 0.0D, 0.0D, 0.0D);
-				MainMod.proxy.spawnCustomParticles(player, ID.PARTICLE_NAME_DOKU, player.posX - 1 + offsetX + new Random().nextInt(5), player.posY + 1.5 + offsetY, player.posZ - 1 + offsetZ + new Random().nextInt(5), 0.0D, 0.0D, 0.0D);		
-				MainMod.proxy.spawnCustomParticles(player, ID.PARTICLE_NAME_DOKU, player.posX - 1 + offsetX + new Random().nextInt(5), player.posY + 2.5 + offsetY, player.posZ - 1 + offsetZ + new Random().nextInt(5), 0.0D, 0.0D, 0.0D);	
-			}
-			
+			WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_DOKUGOMU, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
+
 			for(EntityLivingBase enemy : WyHelper.getEntitiesNear(player, 10))
 			{
 				if(!enemy.isPotionActive(Potion.blindness.id))
@@ -111,6 +103,8 @@ public class DokuAbilities
 				&& player.worldObj.getBlock((int)player.posX, (int)player.posY - 1, (int)player.posZ) != ListMisc.DemonPoison)
 					DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ, ListMisc.DemonPoison);
 			}
+			
+			WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_VENOMDEMON, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 		}		
 		
 		public void hitEntity(EntityPlayer player, EntityLivingBase target) 

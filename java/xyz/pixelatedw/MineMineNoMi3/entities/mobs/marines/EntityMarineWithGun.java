@@ -13,12 +13,10 @@ import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
 public class EntityMarineWithGun extends MarineData
 {
-	private String[] textures = {"marinegun1", "marinegun2", "marinegun3", "marinegun4", "marinegun5"};
 	
 	public EntityMarineWithGun(World world) 
 	{
-		super(world);
-		this.setTexture(textures[this.rand.nextInt(textures.length)]);
+		super(world, new String[] {"marinegun1", "marinegun2", "marinegun3", "marinegun4", "marinegun5"});
 		this.tasks.removeTask(entityAIMeleeAttack);
 		entityAIMeleeAttack = new EntityAIAttackOnCollide(this, 0.0D, false);
 		this.tasks.addTask(0, entityAIMeleeAttack);
@@ -37,7 +35,7 @@ public class EntityMarineWithGun extends MarineData
 	public int getCombatType() { return 1; }
 	
 	public int getDorikiPower() { return this.worldObj.rand.nextInt(3) + 10; }
-	public int getBellyInPockets() { return this.worldObj.rand.nextInt(10) + 1; }
+	public int getBellyInPockets() { return this.worldObj.rand.nextInt(10) + 5; }
 	
     protected void dropRareDrop(int i)
     {

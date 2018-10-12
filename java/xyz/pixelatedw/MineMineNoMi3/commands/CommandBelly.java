@@ -5,6 +5,7 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.PlayerNotFoundException;
+import net.minecraft.command.WrongUsageException;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
@@ -100,7 +101,9 @@ public class CommandBelly extends CommandBase
 			}
 			 
 			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP)target);
-		}		
+		}	
+		else
+			throw new WrongUsageException("/belly <+|-|=> <amount> [player]", new Object[0]);
 	}
 
 	public boolean canCommandSenderUseCommand(ICommandSender sender)
@@ -116,7 +119,7 @@ public class CommandBelly extends CommandBase
 	
 	public String getCommandUsage(ICommandSender icommandsender)
 	{
-		return "/belly <+/-/=> <amount> [player]";
+		return "/belly <+|-|=> <amount> [player]";
 	}
 
 	public String getCommandName() 

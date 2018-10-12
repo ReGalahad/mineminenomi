@@ -4,21 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cpw.mods.fml.client.GuiScrollingList;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.resources.I18n;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyRenderHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
-import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityManager;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
+import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilitySync;
+import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.gui.GUISelectHotbarAbilities;
-import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 
 public class GUIAbilitiesList extends GuiScrollingList
 {
@@ -60,7 +56,7 @@ public class GUIAbilitiesList extends GuiScrollingList
 			
 			for(int i = 0; i < props.countAbilitiesInHotbar(); i++)
 			{								
-				if( props.getAbilityFromSlot(i) != null && props.getAbilityFromSlot(i) == AbilityManager.instance().getAbilityByName(WyHelper.getFancyName(availableAbilities.get(index).getAttribute().getAttributeName())) )
+				if( props.getAbilityFromSlot(i) != null && props.getAbilityFromSlot(i).getAttribute().getAttributeName().equalsIgnoreCase(availableAbilities.get(index).getAttribute().getAttributeName()) )
 				{
 					flag = false;
 				}
@@ -69,6 +65,7 @@ public class GUIAbilitiesList extends GuiScrollingList
 			if(flag)
 			{
 				props.setAbilityInSlot(parent.slotSelected, AbilityManager.instance().getAbilityByName( WyHelper.getFancyName(availableAbilities.get(index).getAttribute().getAttributeName()) ));
+				WyNetworkHelper.sendToServer(new PacketAbilitySync(props));
 			}
 		}
 	}
@@ -89,16 +86,12 @@ public class GUIAbilitiesList extends GuiScrollingList
     	boolean flag = false;
 		for(int i = 0; i < props.countAbilitiesInHotbar(); i++)
 		{	
-			if(props.getAbilityFromSlot(i) != null && props.getAbilityFromSlot(i).getAttribute() == availableAbilities.get(slotIndex).getAttribute())
+			if(props.getAbilityFromSlot(i) != null && props.getAbilityFromSlot(i).getAttribute().getAttributeName().equalsIgnoreCase(availableAbilities.get(slotIndex).getAttribute().getAttributeName()))
 			{
 				flag = true;
 			}
 
-			/** TODO use ternary */
-			if(flag)
-				Minecraft.getMinecraft().fontRenderer.drawStringWithShadow( I18n.format("ability." + WyHelper.getFancyName(availableAbilities.get(slotIndex).getAttribute().getAttributeName()) + ".name"), this.left + 40, slotTop + 7, 0xFF0000);
-			else
-				Minecraft.getMinecraft().fontRenderer.drawStringWithShadow( I18n.format("ability." + WyHelper.getFancyName(availableAbilities.get(slotIndex).getAttribute().getAttributeName()) + ".name"), this.left + 40, slotTop + 7, 0xFFFFFF);
+			Minecraft.getMinecraft().fontRenderer.drawStringWithShadow( I18n.format("ability." + WyHelper.getFancyName(availableAbilities.get(slotIndex).getAttribute().getAttributeName()) + ".name"), this.left + 40, slotTop + 7, flag ? 0xFF0000 : 0xFFFFFF);
 		}
 		
     	WyRenderHelper.drawAbilityIcon(WyHelper.getFancyName(availableAbilities.get(slotIndex).getAttribute().getAttributeName()), this.left + 10, slotTop + 2, 16, 16);

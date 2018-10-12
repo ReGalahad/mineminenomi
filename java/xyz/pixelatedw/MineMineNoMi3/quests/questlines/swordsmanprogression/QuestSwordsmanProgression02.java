@@ -1,10 +1,16 @@
 package xyz.pixelatedw.MineMineNoMi3.quests.questlines.swordsmanprogression;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import org.apache.logging.log4j.LogManager;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumChatFormatting;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
-import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.Quest;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
@@ -46,7 +52,7 @@ public class QuestSwordsmanProgression02 extends Quest implements ITimedQuest, I
 		
 		this.extraData = new NBTTagCompound();	
 		this.extraData.setLong("currentDays", (int) (player.worldObj.getWorldTime()));
-		
+
 		super.startQuest(player);
 	}
 
@@ -88,8 +94,21 @@ public class QuestSwordsmanProgression02 extends Quest implements ITimedQuest, I
 	
 	public boolean isFinished(EntityPlayer player)
 	{	
-		if((int) (player.worldObj.getWorldTime()) >= (this.extraData.getLong("currentDays") + 24000)) 
+		try
+		{
+			if((int) (player.worldObj.getWorldTime()) >= (this.extraData.getLong("currentDays") + 24000)) 
+				return true;
+		}
+		catch(Exception e)
+		{
+			WyHelper.sendMsgToPlayer(player, "There was a major problem with this quest, please contact the mod owner asap (WITHOUT CLOSING THE GAME), it has been completed however so enjoy the rest of the storyline !");
+			System.err.println("Checking different objects to check for nulls \n"
+					+ "Extra Data, Stored as NBT - " + this.extraData + "\n"
+					+ "Player - " + player.getDisplayName() + "\n"
+					+ "Logic done on - " + (player.worldObj.isRemote ? "Client" : "Server") + "\n");
+			e.printStackTrace();
 			return true;
+		}
 		
 		return false;
 	}
@@ -121,10 +140,7 @@ public class QuestSwordsmanProgression02 extends Quest implements ITimedQuest, I
 	public void onTimePassEvent(EntityPlayer player)
 	{
 		if(!this.isFinished(player))
-		{
-			System.out.println(player.worldObj.getWorldTime() - this.extraData.getLong("currentDays"));
 			this.setProgress(player, player.worldObj.getWorldTime() - this.extraData.getLong("currentDays") );
-		}
 	}
 
 }

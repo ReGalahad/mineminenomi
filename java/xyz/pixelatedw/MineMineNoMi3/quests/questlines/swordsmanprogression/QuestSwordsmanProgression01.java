@@ -46,7 +46,7 @@ public class QuestSwordsmanProgression01 extends Quest implements IInteractQuest
 					""
 				};
 	}
-	
+
 	public void startQuest(EntityPlayer player)
 	{
 		WyHelper.sendMsgToPlayer(player, "<Swordsman Master> You want to become a swordsman master, young one ? I do like the sparks in your eyes so how about this, show me your best sword and I'll see if you're fit or not to start training with me.");								

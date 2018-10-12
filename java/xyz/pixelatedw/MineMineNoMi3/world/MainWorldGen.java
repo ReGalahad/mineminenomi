@@ -50,7 +50,7 @@ public class MainWorldGen implements IWorldGenerator
 			this.addStructureSpawn(WySchematicHelper.load("marineLargeShip"), world, random, i * 2, j * 2, 1, 1, 2.4 * MainConfig.rateShipsSpawn);
 		}
 		
-		this.addStructureSpawn(WySchematicHelper.load("dojo"), world, random, i, j, 1, 1, 100);
+		this.addStructureSpawn(WySchematicHelper.load("dojo"), world, random, i, j, 1, 1, 25);
 		
 		this.addDialSpawn(ListMisc.DialEisenBlock, world, random, i, j, 1, 1, 100);
 		this.addDialSpawn(ListMisc.DialFireBlock, world, random, i, j, 1, 1, 70);
@@ -134,7 +134,7 @@ public class MainWorldGen implements IWorldGenerator
 						}
 						System.out.println("" + s.getName() + " spawned at /tp @p " + posX + " " + posY + " " + posZ);
 	
-				    	if(!ID.DEV_EARLYACCESS)
+				    	if(!ID.DEV_EARLYACCESS )
 				    		WyTelemetry.addStat("spawnedStructure_" + s.getName(), 1);
 					}
 				}

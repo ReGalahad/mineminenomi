@@ -1,5 +1,7 @@
 package xyz.pixelatedw.MineMineNoMi3;
 
+import org.apache.logging.log4j.LogManager;
+
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -11,9 +13,6 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.entity.RendererLivingEntity;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
@@ -61,7 +60,7 @@ public class MainMod
 
 	@EventHandler
 	public void init(FMLInitializationEvent event)
-	{		
+	{
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GUIHandler());
 		GameRegistry.registerWorldGenerator(new MainWorldGen(), 1);
 
@@ -76,29 +75,32 @@ public class MainMod
 
 		proxy.init();
 
-		WyHelper.generateLangFiles();
-		// WyHelper.generateExtraTypScriptFiles();
+		//WyHelper.generateLangFiles();
+		//WyHelper.generateExtraTypScriptFiles();
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent evt)
 	{
-		WyTelemetry.addStat(ID.PROJECT_MCVERSION.replace(".", "") + "onlinePlayers", 1);
-		Runtime.getRuntime().addShutdownHook(new Thread()
+		if (!WyDebug.isDebug())
 		{
-			public void run()
+			WyTelemetry.addStat(ID.PROJECT_MCVERSION.replace(".", "") + "onlinePlayers", 1);
+			Runtime.getRuntime().addShutdownHook(new Thread()
 			{
-				try
+				public void run()
 				{
-					WyTelemetry.addStat(ID.PROJECT_MCVERSION.replace(".", "") + "onlinePlayers", -1);
-					this.sleep(100);
-				} 
-				catch (InterruptedException e)
-				{
-					e.printStackTrace();
+					try
+					{
+						WyTelemetry.addStat(ID.PROJECT_MCVERSION.replace(".", "") + "onlinePlayers", -1);
+						this.sleep(100);
+					}
+					catch (InterruptedException e)
+					{
+						e.printStackTrace();
+					}
 				}
-			}
-		});
+			});
+		}
 	}
 
 	@EventHandler

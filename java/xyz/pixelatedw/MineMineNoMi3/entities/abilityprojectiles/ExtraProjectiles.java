@@ -10,6 +10,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.DevilFruitsHelper;
+import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
@@ -42,12 +43,15 @@ public class ExtraProjectiles
 		public void onUpdate()
 		{
 			super.onUpdate();
-			if(life <= 0)
-				this.setDead();
+			if(!this.worldObj.isRemote)
+			{
+				if(life <= 0)
+					this.setDead();
+								
+				life--;
+			}
 			
-			WyNetworkHelper.sendTo(new PacketParticles("kemuriBoshi", this.posX, this.posY, this.posZ), (EntityPlayerMP) thrower);
-			
-			life--;
+			WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_KEMURIBOSHI, this.posX, this.posY, this.posZ), this.dimension, this.posX, this.posY, this.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 		}
 		
 		public void setThrower(EntityPlayer player)

@@ -4,6 +4,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIOpenDoor;
 import net.minecraft.entity.ai.EntityAISwimming;
@@ -25,16 +26,14 @@ import xyz.pixelatedw.MineMineNoMi3.lists.ListQuests;
 
 public class EntityDojoSensei extends EntityNewMob
 {
-	
-	private String[] textures = {"dojosensei1", "dojosensei2"};
-	
+
 	public EntityDojoSensei(World worldIn)
 	{
-		super(worldIn);
-		this.setTexture(textures[this.rand.nextInt(textures.length)]);
+		super(worldIn, new String[] {"dojosensei1", "dojosensei2", "dojosensei3"});
 		this.tasks.addTask(0, new EntityAIAttackOnCollide(this, 1.0D, false));
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(1, new EntityAIOpenDoor(this, true));
+        this.tasks.addTask(2, new EntityAIMoveTowardsRestriction(this, 1.0D));
 		this.tasks.addTask(2, new EntityAIWander(this, 1.0D));
 		this.tasks.addTask(3, new EntityAILookIdle(this));
 		this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));
@@ -43,7 +42,7 @@ public class EntityDojoSensei extends EntityNewMob
 	public void applyEntityAttributes()
 	{
 		super.applyEntityAttributes(); 
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.02D);
+		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.20D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(10.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(80.0D);
 	}
@@ -58,12 +57,12 @@ public class EntityDojoSensei extends EntityNewMob
     
 	public double[] itemOffset() 
 	{
-		return new double[] {0, 0, -0.1};
+		return new double[] {0, -0.05, -0.1};
 	}
 	
 	public int getDorikiPower() { return this.worldObj.rand.nextInt(10) + 20; }
 	public int getBellyInPockets() { return this.worldObj.rand.nextInt(10) + 10; }
 	
 	protected boolean canDespawn()
-	{return false;}
+	{return true;}
 }

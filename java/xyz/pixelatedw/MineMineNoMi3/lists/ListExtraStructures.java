@@ -15,10 +15,10 @@ public class ListExtraStructures
 	
 	public static void buildDojo(int posX, int posY, int posZ, World world)
 	{			
-		TileEntityCustomSpawner spw1 = new TileEntityCustomSpawner().setSpawnerMob(ID.PROJECT_ID + ".Dojo Master").setSpawnerLimit(1);
+		TileEntityCustomSpawner spw1 = new TileEntityCustomSpawner().setSpawnerMob(ID.PROJECT_ID + ".Dojo Sensei").setSpawnerLimit(1);
 		
-		world.setBlock(posX + 5, posY + 3, posZ + 11, ListMisc.CustomSpawner );
-		world.setTileEntity(posX + 5, posY + 3, posZ + 11, spw1);
+		world.setBlock(posX + 5, posY + 2, posZ + 11, ListMisc.CustomSpawner);
+		world.setTileEntity(posX + 5, posY + 2, posZ + 11, spw1);		
 	}
 	
 	public static void buildCamp(int posX, int posY, int posZ, World world)

@@ -2,13 +2,17 @@ package xyz.pixelatedw.MineMineNoMi3.abilities;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
+import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.HieProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 
 public class HieAbilities
 {
@@ -53,7 +57,7 @@ public class HieAbilities
 			super.use(player);
 		};	
 	}
-	
+
 	public static class IceAge extends Ability
 	{
 		public IceAge() 
@@ -70,7 +74,9 @@ public class HieAbilities
 				for (int k = -20; k < 20; k++)
 					if(!player.worldObj.isAirBlock((int) player.posX + i, (int) player.posY + j, (int) player.posZ + k) && player.worldObj.getBlock((int) player.posX + i, (int) player.posY + j, (int) player.posZ + k) != ListMisc.Ope
 							&& player.worldObj.getBlock((int) player.posX + i, (int) player.posY + j, (int) player.posZ + k) != ListMisc.OpeMid && player.worldObj.getBlock((int) player.posX + i, (int) player.posY + j, (int) player.posZ + k) != Blocks.bedrock)
-						player.worldObj.setBlock((int) player.posX + i, (int) player.posY + j, (int) player.posZ + k, Blocks.packed_ice);
+							player.worldObj.setBlock((int) player.posX + i, (int) player.posY + j, (int) player.posZ + k, Blocks.packed_ice);
+				
+				WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_ICEAGE, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 				
 				super.use(player);
 			}
@@ -90,20 +96,6 @@ public class HieAbilities
 			super.use(player);
 		};	
 	}
-	
-/*	public static class IceSaber extends SharpWeapon
-	{
-		public IceSaber() 
-		{
-			super(ListAttributes.ICESABER.getItemDamage(), false);
-			this.attr = ListAttributes.ICESABER; 
-		}
-
-		public void tasksHit(ItemStack itemStack, EntityLivingBase target, EntityLivingBase player)
-		{
-			target.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 100, 1));
-		};
-	}*/
 	
 	public static class IceTimeCapsule extends Ability
 	{

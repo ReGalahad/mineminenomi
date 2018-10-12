@@ -60,7 +60,7 @@ public class MainConfig
 		enableMobRewards = config.get(Configuration.CATEGORY_GENERAL, "Allow Mob Rewards", true).getBoolean();
 		
 		enableQuests = config.get(Configuration.CATEGORY_GENERAL, "Allow Quests", true).getBoolean();
-		enableQuestProgression = config.get(Configuration.CATEGORY_GENERAL, "Allow Quest Progression", true).getBoolean();
+		enableQuestProgression = config.get(Configuration.CATEGORY_GENERAL, "Allow Quest Progression", false).getBoolean();
 		maxDojoSpawn = config.get(Configuration.CATEGORY_GENERAL, "Max Dojos to Spawn per World", 5).getInt();
 		
 		enchantmentDialImpactId = config.get("ids", "Enchantment ID : Dial Impact", 100).getInt();

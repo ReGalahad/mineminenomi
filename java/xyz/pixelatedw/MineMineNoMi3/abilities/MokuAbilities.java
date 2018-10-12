@@ -5,6 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
+import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.abilities.GoroAbilities.ElThor;
 import xyz.pixelatedw.MineMineNoMi3.abilities.GoroAbilities.Kari;
 import xyz.pixelatedw.MineMineNoMi3.abilities.GoroAbilities.Raigo;
@@ -58,7 +59,7 @@ public class MokuAbilities
 			{
 				for(EntityLivingBase e : WyHelper.getEntitiesNear(player, 1.6))
 					e.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) player), 2);
-		    	WyNetworkHelper.sendTo(new PacketParticles("whiteLauncher", player), (EntityPlayerMP) player);
+		    	WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_WHITELAUNCHER, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 			}
 	    }
 	}

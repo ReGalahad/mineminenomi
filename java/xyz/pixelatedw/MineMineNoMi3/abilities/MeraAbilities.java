@@ -15,6 +15,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.math.ISphere;
 import xyz.pixelatedw.MineMineNoMi3.api.math.Sphere;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.MeraProjectiles;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListParticleEffects;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
@@ -62,13 +63,13 @@ public class MeraAbilities
 		public void startCharging(EntityPlayer player)
 		{
 			if(!this.isOnCooldown)		
-				WyNetworkHelper.sendTo(new PacketParticles("daienkai2", player), (EntityPlayerMP) player);
+				WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_DAIENKAI2, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);	
 			super.startCharging(player);
 		}
 		
 		public void duringCharging(EntityPlayer player, int currentCharge)
 		{
-			WyNetworkHelper.sendTo(new PacketParticles("daienkai", player), (EntityPlayerMP) player);
+			WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_DAIENKAI1, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 		}
 		
 		public void endCharging(EntityPlayer player)

@@ -9,12 +9,10 @@ import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
 public class EntityBandit extends BanditData
 { 
-	private String[] textures = {"bandit1", "bandit2", "bandit3"};
-	
+
 	public EntityBandit(World world) 
 	{
-		super(world);
-		this.setTexture(textures[this.rand.nextInt(textures.length)]);
+		super(world, new String[] {"bandit1", "bandit2", "bandit3"});
  	}
 	
 	public void applyEntityAttributes()

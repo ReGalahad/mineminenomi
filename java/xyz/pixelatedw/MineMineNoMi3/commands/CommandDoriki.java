@@ -5,6 +5,7 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.PlayerNotFoundException;
+import net.minecraft.command.WrongUsageException;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
@@ -105,7 +106,9 @@ public class CommandDoriki extends CommandBase
 			if (MinecraftForge.EVENT_BUS.post(e))
 				return;
 			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP)target);
-		}		
+		}	
+		else
+			throw new WrongUsageException("/doriki <+|-|=> <amount> [player]", new Object[0]);
 	}
 
 	public boolean canCommandSenderUseCommand(ICommandSender sender)
@@ -121,7 +124,7 @@ public class CommandDoriki extends CommandBase
 	
 	public String getCommandUsage(ICommandSender icommandsender)
 	{
-		return "/doriki <+/-/=> <amount> [player]";
+		return "/doriki <+|-|=> <amount> [player]";
 	}
 
 	public String getCommandName() 

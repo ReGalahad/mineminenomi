@@ -27,7 +27,8 @@ public class ItemCoreWeapon extends Item
 	private double damage = 1;
 	private double multiplier = 1;
 	private boolean canUseSpecial = false;
-	private boolean isPoisonous = false;
+	protected boolean isPoisonous = false, isFireAspect = false, isSlownessInducing = false, isStackable = false;
+	protected int poisonTimer = 100, fireAspectTimer = 100, slownessTimer = 100;
 	
 	private IIcon baseIcon, sheathedIcon, hakiImbuedIcon;
 
@@ -90,7 +91,26 @@ public class ItemCoreWeapon extends Item
 			itemStack.damageItem(1, attacker);
 		
 		if(isPoisonous)
-			target.addPotionEffect(new PotionEffect(Potion.poison.id, 100, 0));
+			target.addPotionEffect(new PotionEffect(Potion.poison.id, this.poisonTimer, 0));
+		
+		if(isFireAspect)
+			target.setFire(this.fireAspectTimer);
+		
+		if(isSlownessInducing)
+		{
+			if(isStackable)
+			{
+				if(target.isPotionActive(Potion.moveSlowdown))
+				{
+					int timer = target.getActivePotionEffect(Potion.moveSlowdown).getDuration();				
+					target.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, timer + this.slownessTimer, 0));
+				}
+				else
+					target.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, this.slownessTimer, 0));
+			}
+			else
+				target.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, this.slownessTimer, 0));
+		}
 		
 		return true;
 	}
@@ -98,9 +118,51 @@ public class ItemCoreWeapon extends Item
 	public ItemCoreWeapon setIsPoisonous()
 	{
 		this.isPoisonous = true;
+		this.poisonTimer = 100;
 		return this;
 	}
 	
+	public ItemCoreWeapon setIsPoisonous(int timer)
+	{
+		this.isPoisonous = true;
+		this.poisonTimer = timer;
+		return this;
+	}
+	
+	public ItemCoreWeapon setIsFireAspect()
+	{
+		this.isFireAspect = true;
+		return this;
+	}
+	
+	public ItemCoreWeapon setIsFireAspect(int timer)
+	{
+		this.isFireAspect = true;
+		this.fireAspectTimer = timer;
+		return this;
+	}
+	
+	public ItemCoreWeapon setIsSlownessInducing()
+	{
+		this.isSlownessInducing = true;
+		return this;
+	}
+	
+	public ItemCoreWeapon setIsSlownessInducing(int timer)
+	{
+		this.isSlownessInducing = true;
+		this.slownessTimer = timer;
+		return this;
+	}
+	
+	public ItemCoreWeapon setIsSlownessInducing(int timer, boolean isStackable)
+	{
+		this.isSlownessInducing = true;
+		this.slownessTimer = timer;
+		this.isStackable = isStackable;
+		return this;
+	}
+		
 	public Multimap getAttributeModifiers(ItemStack stack)
 	{
 		Multimap multimap = super.getAttributeModifiers(stack);

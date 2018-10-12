@@ -13,6 +13,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.bandits.BanditData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.MarineData;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 
@@ -23,7 +24,12 @@ public class PirateData extends EntityNewMob
 	
 	public PirateData(World world)
 	{
-		super(world);
+		this(world, null);
+	}
+	
+	public PirateData(World world, String[] textures) 
+	{
+		super(world, textures);
         this.getNavigator().setBreakDoors(true);
         this.getNavigator().setAvoidsWater(true);
 		this.tasks.addTask(0, entityAIMeleeAttack);
@@ -33,6 +39,7 @@ public class PirateData extends EntityNewMob
 		this.tasks.addTask(3, new EntityAILookIdle(this));
 		this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));
 		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, MarineData.class, 0, true));
+		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, BanditData.class, 0, true));
 	}
 
 	public void onEntityUpdate() 

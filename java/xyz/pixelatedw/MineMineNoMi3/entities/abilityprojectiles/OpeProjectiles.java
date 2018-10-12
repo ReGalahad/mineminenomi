@@ -25,23 +25,8 @@ public class OpeProjectiles
 	static
 	{
 		abilitiesClassesArray.add(new Object[] {GammaKnife.class, ListAttributes.GAMMAKNIFE});
-		abilitiesClassesArray.add(new Object[] {CounterShock.class, ListAttributes.COUNTERSHOCK});
 	}
 	
-	public static class CounterShock extends AbilityProjectile
-	{
-		public CounterShock(World world)
-		{super(world);}
-		
-		public CounterShock(World world, double x, double y, double z)
-		{super(world, x, y, z);}
-		
-		public CounterShock(World world, EntityLivingBase player, AbilityAttribute attr) 
-		{		
-			super(world, player, attr);		
-		}
-	
-	}	
 	
 	public static class GammaKnife extends AbilityProjectile
 	{

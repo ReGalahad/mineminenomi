@@ -8,6 +8,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper.Direction;
@@ -16,6 +17,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.RokushikiProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 
 public class RokushikiAbilities 
@@ -79,22 +81,7 @@ public class RokushikiAbilities
 				
 				motion("=", mX, mY, mZ, player);
 				
-				player.worldObj.spawnParticle(EnumParticleTypes.CLOUD.getParticleName(), (int) player.posX, (int) player.posY, (int) player.posZ, 0, 0, 0);
-					
-				player.worldObj.spawnParticle(EnumParticleTypes.CLOUD.getParticleName(), (int) player.posX + 0.2, (int) player.posY, (int) player.posZ + 0.2, 0, 0, 0);
-				player.worldObj.spawnParticle(EnumParticleTypes.CLOUD.getParticleName(), (int) player.posX + 0.2, (int) player.posY, (int) player.posZ - 0.2, 0, 0, 0);
-				player.worldObj.spawnParticle(EnumParticleTypes.CLOUD.getParticleName(), (int) player.posX - 0.2, (int) player.posY, (int) player.posZ - 0.2, 0, 0, 0);
-				player.worldObj.spawnParticle(EnumParticleTypes.CLOUD.getParticleName(), (int) player.posX - 0.2, (int) player.posY, (int) player.posZ + 0.2, 0, 0, 0);
-					
-				player.worldObj.spawnParticle(EnumParticleTypes.CLOUD.getParticleName(), (int) player.posX + 0.5, (int) player.posY, (int) player.posZ, 0, 0, 0);
-				player.worldObj.spawnParticle(EnumParticleTypes.CLOUD.getParticleName(), (int) player.posX + 0.2, (int) player.posY, (int) player.posZ, 0, 0, 0);
-				player.worldObj.spawnParticle(EnumParticleTypes.CLOUD.getParticleName(), (int) player.posX - 0.5, (int) player.posY, (int) player.posZ, 0, 0, 0);	
-				player.worldObj.spawnParticle(EnumParticleTypes.CLOUD.getParticleName(), (int) player.posX - 0.2, (int) player.posY, (int) player.posZ, 0, 0, 0);	
-					
-				player.worldObj.spawnParticle(EnumParticleTypes.CLOUD.getParticleName(), (int) player.posX, (int) player.posY, (int) player.posZ + 0.5, 0, 0, 0);
-				player.worldObj.spawnParticle(EnumParticleTypes.CLOUD.getParticleName(), (int) player.posX, (int) player.posY, (int) player.posZ + 0.2, 0, 0, 0);
-				player.worldObj.spawnParticle(EnumParticleTypes.CLOUD.getParticleName(), (int) player.posX, (int) player.posY, (int) player.posZ - 0.5, 0, 0, 0);
-				player.worldObj.spawnParticle(EnumParticleTypes.CLOUD.getParticleName(), (int) player.posX, (int) player.posY, (int) player.posZ - 0.2, 0, 0, 0);
+				WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_GEPPO, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 				
 				super.use(player);
 			}

@@ -16,6 +16,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 
 public class MeraProjectiles
@@ -48,24 +49,40 @@ public class MeraProjectiles
 		
 		public void onUpdate()
 		{		
-			for (int i = 0; i < 25; i++)
+			if(this.worldObj.isRemote)
 			{
-				double offsetX = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
-				double offsetY = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
-				double offsetZ = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
+				for (int i = 0; i < 25; i++)
+				{
+					double offsetX = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
+					double offsetY = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
+					double offsetZ = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
+					
+					EntityParticleFX particle = new EntityParticleFX(this.worldObj, ID.PARTICLE_ICON_MERA, 
+							posX + offsetX, 
+							posY + offsetY, 
+							posZ + offsetZ, 
+							0, 0, 0)
+							.setParticleAge(10).setParticleScale(1.3F);
+					
+					MainMod.proxy.spawnCustomParticles(this, particle);				
+				}
 				
-				MainMod.proxy.spawnCustomParticles(this, ID.PARTICLE_NAME_MERA, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ, 0, 0, 0);
+				for (int i = 0; i < 2; i++)
+				{
+					double offsetX = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
+					double offsetY = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
+					double offsetZ = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
+					
+					EntityParticleFX particle = new EntityParticleFX(this.worldObj, ID.PARTICLE_ICON_MOKU, 
+							posX + offsetX, 
+							posY + offsetY, 
+							posZ + offsetZ, 
+							0, 0, 0)
+							.setParticleAge(7).setParticleScale(1.2F);
+					
+					MainMod.proxy.spawnCustomParticles(this, particle);					
+				}
 			}
-			
-			for (int i = 0; i < 3; i++)
-			{
-				double offsetX = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
-				double offsetY = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
-				double offsetZ = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
-				
-				MainMod.proxy.spawnCustomParticles(this, ID.PARTICLE_NAME_MOKU, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ, 0, 0, 0);
-			}
-			
 			super.onUpdate();
 		}
 		
@@ -91,12 +108,21 @@ public class MeraProjectiles
 		
 		public void onUpdate()
 		{	
-			double posXOffset = this.worldObj.rand.nextGaussian() * 0.42D;
-			double posYOffset = this.worldObj.rand.nextGaussian() * 0.22D;
-			double posZOffset = this.worldObj.rand.nextGaussian() * 0.42D;		
-			
-			MainMod.proxy.spawnCustomParticles(this, ID.PARTICLE_NAME_MERA, this.posX + posXOffset, this.posY + posYOffset, this.posZ + posZOffset, 0, 0, 0);
-			
+			if(this.worldObj.isRemote)
+			{
+				double posXOffset = this.worldObj.rand.nextGaussian() * 0.42D;
+				double posYOffset = this.worldObj.rand.nextGaussian() * 0.22D;
+				double posZOffset = this.worldObj.rand.nextGaussian() * 0.42D;		
+	
+				EntityParticleFX particle = new EntityParticleFX(this.worldObj, ID.PARTICLE_ICON_MERA, 
+						posX + posXOffset, 
+						posY + posYOffset, 
+						posZ + posZOffset, 
+						0, 0, 0)
+						.setParticleAge(6).setParticleScale(0.7F);
+				
+				MainMod.proxy.spawnCustomParticles(this, particle);		
+			}
 			super.onUpdate();
 		}
 	}
@@ -104,10 +130,10 @@ public class MeraProjectiles
 	public static class DaiEnkaiEntei extends AbilityProjectile
 	{
 		public DaiEnkaiEntei(World world)
-		{super(world);}
+		{ super(world); }
 		
 		public DaiEnkaiEntei(World world, double x, double y, double z)
-		{super(world, x, y, z);}
+		{ super(world, x, y, z); }
 		
 		public DaiEnkaiEntei(World world, EntityLivingBase player, AbilityAttribute attr) 
 		{		
@@ -116,22 +142,39 @@ public class MeraProjectiles
 		
 		public void onUpdate()
 		{	
-			for (int i = 0; i < 75; i++)
+			if(this.worldObj.isRemote)
 			{
-				double offsetX = (new Random().nextInt(40) + 2.0D - 20.0D) / 10.0D;
-				double offsetY = (new Random().nextInt(40) + 2.0D - 20.0D) / 10.0D;
-				double offsetZ = (new Random().nextInt(40) + 2.0D - 20.0D) / 10.0D;
-		      
-				MainMod.proxy.spawnCustomParticles(this, ID.PARTICLE_NAME_MERA, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ, 0, 0, 0);
-			}
-			
-			for (int i = 0; i < 20; i++)
-			{
-				double offsetX = (new Random().nextInt(40) + 2.0D - 20.0D) / 10.0D;
-				double offsetY = (new Random().nextInt(40) + 2.0D - 20.0D) / 10.0D;
-				double offsetZ = (new Random().nextInt(40) + 2.0D - 20.0D) / 10.0D;
-		      
-				MainMod.proxy.spawnCustomParticles(this, ID.PARTICLE_NAME_MOKU, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ, 0, 0, 0);
+				for (int i = 0; i < 75; i++)
+				{
+					double offsetX = (new Random().nextInt(40) + 2.0D - 20.0D) / 10.0D;
+					double offsetY = (new Random().nextInt(40) + 2.0D - 20.0D) / 10.0D;
+					double offsetZ = (new Random().nextInt(40) + 2.0D - 20.0D) / 10.0D;
+			      
+					EntityParticleFX particle = new EntityParticleFX(this.worldObj, ID.PARTICLE_ICON_MERA, 
+							posX + offsetX, 
+							posY + offsetY, 
+							posZ + offsetZ, 
+							0, 0, 0)
+							.setParticleAge(10).setParticleScale(1.3F);
+					
+					MainMod.proxy.spawnCustomParticles(this, particle);					
+				}
+				
+				for (int i = 0; i < 10; i++)
+				{
+					double offsetX = (new Random().nextInt(40) + 2.0D - 20.0D) / 10.0D;
+					double offsetY = (new Random().nextInt(40) + 2.0D - 20.0D) / 10.0D;
+					double offsetZ = (new Random().nextInt(40) + 2.0D - 20.0D) / 10.0D;
+			      
+					EntityParticleFX particle = new EntityParticleFX(this.worldObj, ID.PARTICLE_ICON_MOKU, 
+							posX + offsetX, 
+							posY + offsetY, 
+							posZ + offsetZ, 
+							0, 0, 0)
+							.setParticleAge(7).setParticleScale(1.1F);
+					
+					MainMod.proxy.spawnCustomParticles(this, particle);	
+				}
 			}
 			
 			super.onUpdate();

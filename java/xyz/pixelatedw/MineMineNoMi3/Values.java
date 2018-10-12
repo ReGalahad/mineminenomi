@@ -26,10 +26,12 @@ public class Values
 	
 	public static final Item[] KAIROSEKI_ITEMS = new Item[] {ListMisc.Kairoseki, ListMisc.KairosekiBullets, ListMisc.DenseKairoseki};
 	
-	public static HashMap<String, String> abilityDesc = new HashMap<String, String>();
+	public static HashMap<String, String> abilityDesc = createMap();
 
-	static
-	{		
+	private static HashMap<String, String> createMap()
+	{
+		HashMap<String, String> abilityDesc = new HashMap<String, String>();
+		
 		abilityDesc.put("hiken", "Turns the user\\'s fist into flames and launches it towards the target.");
 		abilityDesc.put("higan", "Turns the user\\'s fingertips into flames and shoots bullets made of fire from them.");
 		abilityDesc.put("hidaruma", "Creates small green fireballs that set the target on fire.");
@@ -44,8 +46,8 @@ public class Values
 		abilityDesc.put("iceblockpheasant", "Releases a massive wave of ice in the shape of a pheasant.");
 		
 		abilityDesc.put("springhopper", "Turning the userps legs into springs, which launches them into the air.");
-		abilityDesc.put("springdeathknock", "By turning the user's arm into a spring and compressing it, they can launch a powerful punch.");
-		abilityDesc.put("springsnipe", "Turning the user's forelegs into springs, they can launch themselves directly at the opponent.");
+		abilityDesc.put("springdeathknock", "By turning the user\\'s arm into a spring and compressing it, they can launch a powerful punch.");
+		abilityDesc.put("springsnipe", "Turning the user\\'s forelegs into springs, they can launch themselves directly at the opponent.");
 		
 		abilityDesc.put("yasakaninomagatama", "Fires a torrent of deadly light particles, causing huge destruction.");
 		abilityDesc.put("yatanokagami", "Uses light to instantly teleport the user to their desired location.");
@@ -146,11 +148,11 @@ public class Values
 		abilityDesc.put("tabirayuki", "The user creates a sword made of solid hardened snow.");
 
 		abilityDesc.put("soru", "Allows the user to move at an extremely high speed.");
-		abilityDesc.put("tekkai", "Hardens the user's body to protect themselves, but they're unable to move.");
+		abilityDesc.put("tekkai", "Hardens the user\\'s body to protect themselves, but they\\'re unable to move.");
 		abilityDesc.put("geppo", "The user kicks the air beneath them to launch themselves into the air.");
 		abilityDesc.put("rankyaku", "By kicking at a very high speed, the user launches an air blade at the opponent.");
 		abilityDesc.put("shigan", "The user thrusts their finger at the opponent, to pierce them.");
-		abilityDesc.put("kamie", "Maked the user's body flexible in order to avoid attacks.");
+		abilityDesc.put("kamie", "Maked the user\\'s body flexible in order to avoid attacks.");
 		
 		abilityDesc.put("uchimizu", "The user hurls big and fast water droplets at the opponent.");
 		abilityDesc.put("soshark", "The user fires densely compressed shark-shaped waterbullet at the opponent.");
@@ -163,7 +165,10 @@ public class Values
 		abilityDesc.put("strongright", "The user punches the opponent with a metal fist.");
 		abilityDesc.put("coupdevent", "Launches a powerful blast of compressed air that blows the opponent away.");
 
-		abilityDesc.put("busoshokuhaki", "The user forms an invisible armor arounf themselves using their willpower, By using this form of Haki, the user can damage Logias.");
+		abilityDesc.put("busoshokuhaki", "The user forms an invisible armor around themselves using their willpower, By using this form of Haki, the user can damage Logias.");
 		abilityDesc.put("kenbushokuhaki", "Allows the user to sense the presence of others, pointing them to the opponent, Can also locate invisible mobs and players.");
+		
+		return abilityDesc;
 	}
+
 }

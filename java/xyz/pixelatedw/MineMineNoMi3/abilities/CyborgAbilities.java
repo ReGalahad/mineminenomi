@@ -174,22 +174,19 @@ public class CyborgAbilities
 		{
 			ExtendedEntityStats props = ExtendedEntityStats.get(player);
 			
-			if(!player.worldObj.isRemote)
+			if(!isOnCooldown && props.getCola() > 0)
 			{
-				if(!isOnCooldown && props.getCola() > 0)
-				{		
-					double r = (props.getCola() / props.getMaxCola()) * 100;
-					
-					props.setCola(0);
-					
-					player.setHealth((float) (player.getHealth() + ((r / 100) * player.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue()) ));					
-					
-					WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
-					super.use(player);
-				}
-				else if(props.getCola() <= 0)
-					WyHelper.sendMsgToPlayer(player, "Not enough Cola !");
-			} 
+				double r = (props.getCola() / props.getMaxCola()) * 100;
+				
+				props.setCola(0);
+				
+				player.setHealth((float) (player.getHealth() + ((r / 100) * player.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue()) ));	
+				
+				WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
+				super.use(player);
+			}
+			else if(props.getCola() <= 0)
+				WyHelper.sendMsgToPlayer(player, "Not enough Cola !");
 		}		
 	}
 }

@@ -14,6 +14,7 @@ import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListParticleEffects;
 
@@ -43,13 +44,23 @@ public class MokuProjectiles
 		
 		public void onUpdate()
 		{	
-			for(int i = 0; i < 5; i++)
+			if(this.worldObj.isRemote)
 			{
-				double offsetX = (new Random().nextInt(20) + 1.0D - 10.0D) / 18.0D;
-				double offsetY = (new Random().nextInt(20) + 1.0D - 10.0D) / 18.0D;
-				double offsetZ = (new Random().nextInt(20) + 1.0D - 10.0D) / 18.0D;
-			      
-				MainMod.proxy.spawnCustomParticles(this, ID.PARTICLE_NAME_MOKU2, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ, 0.0D, -2.01D, 0.0D);
+				for(int i = 0; i < 5; i++)
+				{
+					double offsetX = (new Random().nextInt(20) + 1.0D - 10.0D) / 18.0D;
+					double offsetY = (new Random().nextInt(20) + 1.0D - 10.0D) / 18.0D;
+					double offsetZ = (new Random().nextInt(20) + 1.0D - 10.0D) / 18.0D;
+				    
+					EntityParticleFX particle = new EntityParticleFX(this.worldObj, ID.PARTICLE_ICON_MOKU2, 
+							posX + offsetX, 
+							posY + offsetY, 
+							posZ + offsetZ, 
+							0, 0, 0)
+							.setParticleAge(15).setParticleScale(3F);
+					
+					MainMod.proxy.spawnCustomParticles(this, particle);				
+				}
 			}
 
 			super.onUpdate();
@@ -71,11 +82,21 @@ public class MokuProjectiles
 		
 		public void onUpdate()
 		{	
-			double offsetX = (new Random().nextInt(20) + 1.0D - 10.0D) / 18.0D;
-			double offsetY = (new Random().nextInt(20) + 1.0D - 10.0D) / 18.0D;
-			double offsetZ = (new Random().nextInt(20) + 1.0D - 10.0D) / 18.0D;
-			      
-			MainMod.proxy.spawnCustomParticles(this, ID.PARTICLE_NAME_MOKU, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ, 0.0D, -0.01D, 0.0D);
+			if(this.worldObj.isRemote)
+			{
+				double offsetX = (new Random().nextInt(20) + 1.0D - 10.0D) / 18.0D;
+				double offsetY = (new Random().nextInt(20) + 1.0D - 10.0D) / 18.0D;
+				double offsetZ = (new Random().nextInt(20) + 1.0D - 10.0D) / 18.0D;
+				      
+				EntityParticleFX particle = new EntityParticleFX(this.worldObj, ID.PARTICLE_ICON_MOKU, 
+						posX + offsetX, 
+						posY + offsetY, 
+						posZ + offsetZ, 
+						0, 0, 0)
+						.setParticleAge(15).setParticleScale(3F);
+				
+				MainMod.proxy.spawnCustomParticles(this, particle);	
+			}
 			
 			super.onUpdate();
 		}

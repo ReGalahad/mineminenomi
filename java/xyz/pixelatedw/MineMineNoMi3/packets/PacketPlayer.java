@@ -100,37 +100,6 @@ public class PacketPlayer implements IMessage
 				player.worldObj.spawnEntityInWorld(new EntityLightningBolt(player.worldObj, i, j, k-1));
 			}
 			
-			for(int i = 0; i < 8; i++)
-			{
-				if(message.cmd.contains("clientUpdateIsPassive"))
-				{
-					String ablName = message.cmd.substring("clientUpdateIsPassive".length(), message.cmd.length());
-					
-					if(abilityProps.getAbilityFromSlot(i) != null && ablName.toLowerCase().equals(abilityProps.getAbilityFromSlot(i).getAttribute().getAttributeName().toLowerCase())) 
-					{
-						abilityProps.getAbilityFromSlot(i).setPassiveActive(message.ablState);						
-					}
-				}				
-				if(message.cmd.contains("clientUpdateIsCooldown"))
-				{
-					String ablName = message.cmd.substring("clientUpdateIsCooldown".length(), message.cmd.length());
-					
-					if(abilityProps.getAbilityFromSlot(i) != null && ablName.toLowerCase().equals(abilityProps.getAbilityFromSlot(i).getAttribute().getAttributeName().toLowerCase())) 
-					{
-						abilityProps.getAbilityFromSlot(i).setCooldownActive(message.ablState);						
-					}
-				}
-				if(message.cmd.contains("clientUpdateIsCharging"))
-				{
-					String ablName = message.cmd.substring("clientUpdateIsCharging".length(), message.cmd.length());
-					
-					if(abilityProps.getAbilityFromSlot(i) != null && ablName.toLowerCase().equals(abilityProps.getAbilityFromSlot(i).getAttribute().getAttributeName().toLowerCase())) 
-					{
-						abilityProps.getAbilityFromSlot(i).setChargeActive(message.ablState);						
-					}
-				}			
-			}
-			
 			if(message.cmd.contains("motion+"))
 			{
 				player.motionX += message.mX;
@@ -174,6 +143,7 @@ public class PacketPlayer implements IMessage
 
 			if(message.cmd.equals("delete_book"))
 			{
+				abilityProps.clearHotbar();
 				abilityProps.clearRacialAbilities();
 				
 				if(props.getRace().equals(ID.RACE_CYBORG))
@@ -195,23 +165,19 @@ public class PacketPlayer implements IMessage
 					{
 						abilityProps.addRacialAbility(SwordsmanAbilities.SANBYAKUROKUJUPOUNDHO);
 						abilityProps.addRacialAbility(SwordsmanAbilities.YAKKODORI);
-						abilityProps.addRacialAbility(SwordsmanAbilities.SANZENSEKAI);
+						abilityProps.addRacialAbility(SwordsmanAbilities.OTATSUMAKI);
 					}
 				}
 	
 				if(props.getFightStyle().equals(ID.FSTYLE_SNIPER))		
 				{
 					abilityProps.addRacialAbility(SniperAbilities.KAENBOSHI);
-					/** FORGOLD Enable this piece of code and remove the other lines */
-					/*if(!MainConfig.enableQuestProgression)
+					if(!MainConfig.enableQuestProgression)
 					{
-						props.addRacialAbility(SniperAbilities.KEMURIBOSHI);
-						props.addRacialAbility(SniperAbilities.RENPATSUNAMARIBOSHI);
-						props.addRacialAbility(SniperAbilities.SAKURETSUSABOTENBOSHI);
-					}*/
-					abilityProps.addRacialAbility(SniperAbilities.KEMURIBOSHI);
-					abilityProps.addRacialAbility(SniperAbilities.RENPATSUNAMARIBOSHI);
-					abilityProps.addRacialAbility(SniperAbilities.SAKURETSUSABOTENBOSHI);
+						abilityProps.addRacialAbility(SniperAbilities.KEMURIBOSHI);
+						abilityProps.addRacialAbility(SniperAbilities.RENPATSUNAMARIBOSHI);
+						abilityProps.addRacialAbility(SniperAbilities.SAKURETSUSABOTENBOSHI);
+					}
 				}
 				
 				for(ItemStack is : player.inventory.mainInventory)
@@ -222,7 +188,10 @@ public class PacketPlayer implements IMessage
 				WyNetworkHelper.sendTo(new PacketAbilitySync(abilityProps), (EntityPlayerMP) player);
 			}
 			if(message.cmd.equals("forcesync"))
+			{
 				WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
+				WyNetworkHelper.sendTo(new PacketAbilitySync(abilityProps), (EntityPlayerMP) player);
+			}
 			if(message.cmd.contains("msg"))
 				WyHelper.sendMsgToPlayer(player, message.cmd.replace("msg", ""));
 			if(message.cmd.equals("enterCombatMode"))

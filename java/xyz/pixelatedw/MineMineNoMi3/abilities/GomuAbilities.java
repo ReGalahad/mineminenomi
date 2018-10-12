@@ -2,12 +2,16 @@ package xyz.pixelatedw.MineMineNoMi3.abilities;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.GomuProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListExtraAttributes;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 
 public class GomuAbilities 
@@ -33,6 +37,8 @@ public class GomuAbilities
 		{
 			ExtendedEntityStats props = ExtendedEntityStats.get(player);
 
+			player.addPotionEffect(new PotionEffect(Potion.jump.id, 25, 2, false));
+			
 			if(passiveTimer >= 30)
 			{
 				props.setGear(1);
@@ -90,6 +96,7 @@ public class GomuAbilities
 		} 
 	}		
 	
+	
 	public static class GearSecond extends Ability
 	{
 		public GearSecond() 
@@ -109,6 +116,10 @@ public class GomuAbilities
 		{
 			ExtendedEntityStats props = ExtendedEntityStats.get(player);
 
+			player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 25, 1, false));
+			if(!player.worldObj.isRemote)
+	    		WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_GEARSECOND, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
+			
 			if(passiveTimer >= 60)
 			{
 				props.setGear(1);

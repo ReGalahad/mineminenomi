@@ -14,6 +14,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.CyborgProjectile
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.CyborgProjectiles.FreshFire;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.CyborgProjectiles.RadicalBeam;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.CyborgProjectiles.StrongRight;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 
 public class ToriPhoenixProjectiles
@@ -42,8 +43,18 @@ public class ToriPhoenixProjectiles
 		}
 		
 		public void onUpdate()
-		{				
-			MainMod.proxy.spawnCustomParticles(this, ID.PARTICLE_NAME_BLUEFLAME, this.posX, this.posY, this.posZ, 0, 0, 0);
+		{		
+			if(this.worldObj.isRemote)
+			{
+				EntityParticleFX particle = new EntityParticleFX(this.worldObj, ID.PARTICLE_ICON_BLUEFLAME, 
+						posX, 
+						posY, 
+						posZ, 
+						0, 0, 0)
+						.setParticleAge(1).setParticleScale(1.2F);
+				
+				MainMod.proxy.spawnCustomParticles(this, particle);
+			}
 			super.onUpdate();
 		}
 	}

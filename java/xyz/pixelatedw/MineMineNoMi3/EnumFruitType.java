@@ -14,7 +14,6 @@ public enum EnumFruitType
 	ARTIFICIALPARAM	(EnumChatFormatting.GOLD		, "Artificial Paramecia"),
 	ARTIFICIALZOAN	(EnumChatFormatting.GOLD		, "Artificial Zoan");
 	
-	
 	private EnumChatFormatting color;
 	private String name;
 	

@@ -7,7 +7,6 @@ import net.minecraft.entity.player.EntityPlayer;
 public interface ITimedQuest
 {
 
-	@SideOnly(Side.CLIENT)
 	void onTimePassEvent(EntityPlayer player);
 	
 }

@@ -141,7 +141,7 @@ public class ClientProxy extends CommonProxy
 
 		//Others
 		RenderingRegistry.registerEntityRenderingHandler(EntityDoppelman.class, new MobRenderer(new ModelMarine(), "doppelman"));
-		RenderingRegistry.registerEntityRenderingHandler(EntityDenDenMushi.class, new MobRenderer(new ModelDenDenMushi(), "dendenmushi"));
+		RenderingRegistry.registerEntityRenderingHandler(EntityDenDenMushi.class, new MobRenderer(new ModelDenDenMushi(), "denden"));
 		RenderingRegistry.registerEntityRenderingHandler(EntityDojoSensei.class, new MobRenderer(new ModelDojoSensei()));
 
 		//Special Renderers
@@ -150,7 +150,7 @@ public class ClientProxy extends CommonProxy
 		
 		/** FORGOLD Delete any and all mentions of these */
 		//Temp
-		RenderingRegistry.registerEntityRenderingHandler(TempEntityFist.class, new AbilityRenderer(new AbilityAttribute(ListAttributes.HIKEN).setModelOffsets(0, 2, 0)));		
+		RenderingRegistry.registerEntityRenderingHandler(TempEntityFist.class, new AbilityRenderer(new AbilityAttribute(ListAttributes.SPRINGDEATHKNOCK).setModelOffsets(0, 2, 0)));		
 		RenderingRegistry.registerEntityRenderingHandler(TempEntityBazooka.class, new AbilityRenderer(new AbilityAttribute(ListExtraAttributes.GOMUGOMUNOBAZOOKA).setModelOffsets(0, 2, 0)));
 		RenderingRegistry.registerEntityRenderingHandler(TempEntityBrickBat.class, new AbilityRenderer(new AbilityAttribute(ListAttributes.BRICKBAT).setModelOffsets(0, 2, 0)));
 		RenderingRegistry.registerEntityRenderingHandler(TempEntityHydra.class, new AbilityRenderer(new AbilityAttribute(ListAttributes.HYDRA).setModelOffsets(0, 2, 0)));
@@ -167,55 +167,9 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(TempEntityPhoenixHybrid.class, new RenderZoanMorph(new ModelPhoenixHybrid(), "phoenixhybrid"));
 	}
 	
-	public void spawnCustomParticles(Entity theEntity, String particleType, double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
-	{ 			
-		EntityFX fx = null;
-
-		switch(particleType)
-		{
-			case ID.PARTICLE_NAME_PIKA:
-				fx = new EntityParticleFX(theEntity.worldObj, ID.PARTICLE_ICON_PIKA, posX, posY, posZ, motionX, motionY, motionZ).setParticleScale(4).setParticleGravity(0).setParticleAge(20); break;	
-			case ID.PARTICLE_NAME_PIKABIG:
-				fx = new EntityParticleFX(theEntity.worldObj, ID.PARTICLE_ICON_PIKA, posX, posY, posZ, motionX, motionY, motionZ).setParticleScale(50).setParticleGravity(0).setParticleAge(10).setHasZoom(); break;
-			case ID.PARTICLE_NAME_YUKI:
-				fx = new EntityParticleFX(theEntity.worldObj, ID.PARTICLE_ICON_YUKI, posX, posY, posZ, motionX, motionY, motionZ).setParticleScale(3).setParticleGravity(3).setParticleAge(300); break;
-			case ID.PARTICLE_NAME_MERA:
-				fx = new EntityParticleFX(theEntity.worldObj, ID.PARTICLE_ICON_MERA, posX, posY, posZ, motionX, motionY, motionZ).setParticleScale(1.3F).setParticleGravity(0).setParticleAge(10); break;
-			case ID.PARTICLE_NAME_MOKU:
-				fx = new EntityParticleFX(theEntity.worldObj, ID.PARTICLE_ICON_MOKU, posX, posY, posZ, motionX, motionY, motionZ).setParticleScale(1.3F).setParticleGravity(0).setParticleAge(20); break;
-			case ID.PARTICLE_NAME_MERA2:
-				fx = new EntityParticleFX(theEntity.worldObj, ID.PARTICLE_ICON_MERA2, posX, posY, posZ, motionX, motionY, motionZ).setParticleScale(1.3F).setParticleGravity(0).setParticleAge(10); break;
-			case ID.PARTICLE_NAME_MOKU2:
-				fx = new EntityParticleFX(theEntity.worldObj, ID.PARTICLE_ICON_MOKU2, posX, posY, posZ, motionX, motionY, motionZ).setParticleScale(3F).setParticleGravity(0).setParticleAge(20); break;	
-			case ID.PARTICLE_NAME_MOKU3:
-				fx = new EntityParticleFX(theEntity.worldObj, ID.PARTICLE_ICON_MOKU3, posX, posY, posZ, motionX, motionY, motionZ).setParticleScale(1.3F).setParticleGravity(0).setParticleAge(20); break;
-			case ID.PARTICLE_NAME_SUNA:
-				fx = new EntityParticleFX(theEntity.worldObj, ID.PARTICLE_ICON_SUNA, posX, posY, posZ, motionX, motionY, motionZ).setParticleScale(2F).setParticleGravity(0).setParticleAge(30); break;
-			case ID.PARTICLE_NAME_SUNA2:
-				fx = new EntityParticleFX(theEntity.worldObj, ID.PARTICLE_ICON_SUNA2, posX, posY, posZ, motionX, motionY, motionZ).setParticleScale(2F).setParticleGravity(0).setParticleAge(30); break;
-			case ID.PARTICLE_NAME_GASU:
-				fx = new EntityParticleFX(theEntity.worldObj, ID.PARTICLE_ICON_GASU, posX, posY, posZ, motionX, motionY, motionZ).setParticleScale(2F).setParticleGravity(0).setParticleAge(1); break;
-			case ID.PARTICLE_NAME_GASU2:
-				fx = new EntityParticleFX(theEntity.worldObj, ID.PARTICLE_ICON_GASU2, posX, posY, posZ, motionX, motionY, motionZ).setParticleScale(2F).setParticleGravity(0).setParticleAge(1); break;
-			case ID.PARTICLE_NAME_BLUEFLAME:
-				fx = new EntityParticleFX(theEntity.worldObj, ID.PARTICLE_ICON_BLUEFLAME, posX, posY, posZ, motionX, motionY, motionZ).setParticleScale(1.2F).setParticleGravity(0).setParticleAge(1); break;
-			case ID.PARTICLE_NAME_DARKNESS:
-				fx = new EntityParticleFX(theEntity.worldObj, ID.PARTICLE_ICON_DARKNESS, posX, posY, posZ, motionX, motionY, motionZ).setParticleScale(1.2F).setParticleGravity(-1 + (theEntity.worldObj.rand.nextInt(2) * -1)).setParticleAge(30 + theEntity.worldObj.rand.nextInt(10)); break;
-			case ID.PARTICLE_NAME_GORO:
-				fx = new EntityParticleFX(theEntity.worldObj, ID.PARTICLE_ICON_GORO, posX, posY, posZ, motionX, motionY, motionZ).setParticleScale(2F).setParticleGravity(0).setParticleAge(1); break;
-			case ID.PARTICLE_NAME_DOKU:
-				fx = new EntityParticleFX(theEntity.worldObj, ID.PARTICLE_ICON_DOKU, posX, posY, posZ, motionX, motionY, motionZ).setParticleScale(1F).setParticleGravity(0).setParticleAge(1 + theEntity.worldObj.rand.nextInt(2)); break;
-			case ID.PARTICLE_NAME_ITO:
-				fx = new EntityParticleFX(theEntity.worldObj, ID.PARTICLE_ICON_ITO, posX, posY, posZ, motionX, motionY, motionZ).setParticleScale(30).setParticleGravity(0).setParticleAge(10); break;
-			case ID.PARTICLE_NAME_GURA:
-				fx = new EntityParticleFX(theEntity.worldObj, ID.PARTICLE_ICON_GURA, posX, posY, posZ, motionX, motionY, motionZ).setParticleScale(3).setParticleGravity(0).setParticleAge(10); break;
-			case ID.PARTICLE_NAME_GURA2:
-				fx = new EntityParticleFX(theEntity.worldObj, ID.PARTICLE_ICON_GURA2, posX, posY, posZ, motionX, motionY, motionZ).setParticleScale(3).setParticleGravity(0).setParticleAge(10); break;
-			case ID.PARTICLE_NAME_GURABIG:
-				fx = new EntityParticleFX(theEntity.worldObj, ID.PARTICLE_ICON_GURA, posX, posY, posZ, motionX, motionY, motionZ).setParticleScale(50).setParticleGravity(0).setParticleAge(10).setHasZoom(); break;	
-		}
-
-		Minecraft.getMinecraft().effectRenderer.addEffect(fx);  
-				
+	public void spawnCustomParticles(Entity theEntity, EntityParticleFX particle)
+	{
+		Minecraft.getMinecraft().effectRenderer.addEffect(particle);
 	}
+
 }

@@ -8,6 +8,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
@@ -69,7 +70,7 @@ public class YamiProjectiles
 				WyHelper.createSphere(hit.entityHit, 2, ListMisc.Darkness);
 				WyHelper.createSphere(hit.entityHit, 1, ListMisc.Darkness);
 				
-				WyNetworkHelper.sendTo(new PacketParticles("darkmatter", this.posX, this.posY, this.posZ), (EntityPlayerMP) this.getThrower());
+				WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_DARKMATTER, this.posX, this.posY, this.posZ), this.dimension, this.posX, this.posY, this.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 
 			}
 			else
@@ -78,7 +79,7 @@ public class YamiProjectiles
 				WyHelper.createSphere(this, 2, ListMisc.Darkness);
 				WyHelper.createSphere(this, 1, ListMisc.Darkness);
 				
-				WyNetworkHelper.sendTo(new PacketParticles("darkmatter", this.posX, this.posY, this.posZ), (EntityPlayerMP) this.getThrower());
+				WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_DARKMATTER, this.posX, this.posY, this.posZ), this.dimension, this.posX, this.posY, this.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 
 			}
 		}

@@ -18,6 +18,50 @@ import xyz.pixelatedw.MineMineNoMi3.ID;
 
 public class WyRenderHelper
 {	
+	
+	public static double[] generateAnimationArray(double startPos, double minPos, double maxPos, double frameSkip, int framesPerSlot)
+	{				
+		int framesCount = 0;
+		double currentFrame = startPos;
+		boolean hasReachedMaxPos = false;
+		boolean hasReachedMinPos = false;
+		
+		for(double i = startPos; i <= maxPos; i += frameSkip)
+			framesCount++;
+		
+		for(double i = maxPos; i > minPos; i -= frameSkip)
+			framesCount++;
+		
+		for(double i = minPos; i <= startPos; i += frameSkip)
+			framesCount++;
+		
+		framesCount *= framesPerSlot;
+		
+		framesCount -= 1 * framesPerSlot;
+ 		double[] animation = new double[framesCount];	
+		
+		for(int j = 0; j < framesCount; j++)
+		{
+			for(int i = 0; i < framesPerSlot; i++)
+			{
+				if(j + 1 < framesCount)
+				{
+					if(i > 0)
+						j++;
+					animation[j] = currentFrame;
+				}
+			}
+			if(!hasReachedMaxPos && currentFrame < maxPos) currentFrame += frameSkip;			
+			else if(!hasReachedMinPos && hasReachedMaxPos && currentFrame > minPos) currentFrame -= frameSkip;
+			else if(hasReachedMinPos && currentFrame < startPos) currentFrame += frameSkip;
+			
+			if(currentFrame >= maxPos) hasReachedMaxPos = true;
+			if(currentFrame <= minPos) hasReachedMinPos = true;
+		}
+		
+ 		return animation;
+	}
+	
 	public static void drawColourOnScreen(int colour, int alpha, double posX, double posY, double width, double height, double zLevel)
 	{
 		int r = (colour >> 16 & 0xff);
@@ -89,6 +133,18 @@ public class WyRenderHelper
 	
 	
 	public static void drawAbilityIcon(String iconName, int x, int y, int u, int v)
+	{
+        Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation(ID.PROJECT_ID, "textures/abilities/" + WyHelper.getFancyName(iconName) + ".png"));        
+		Tessellator tessellator = Tessellator.instance;
+	    tessellator.startDrawingQuads();    
+	    tessellator.addVertexWithUV(x			, y + v			, 0, 0.0, 1.0);
+	    tessellator.addVertexWithUV(x + u		, y + v			, 0, 1.0, 1.0);
+	    tessellator.addVertexWithUV(x + u		, y        		, 0, 1.0, 0.0);
+	    tessellator.addVertexWithUV(x			, y         	, 0, 0.0, 0.0);
+	    tessellator.draw();	    
+	}
+	
+	public static void drawDevilFruitIcon(String iconName, int x, int y, int u, int v)
 	{
         Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation(ID.PROJECT_ID, "textures/items/" + WyHelper.getFancyName(iconName) + ".png"));        
 		Tessellator tessellator = Tessellator.instance;

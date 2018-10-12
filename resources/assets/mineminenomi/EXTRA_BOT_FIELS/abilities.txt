@@ -1,5 +1,6 @@
-export var KamakuraJussoshi: Ability = {name: 'Kamakura Jussoshi', desc: 'Like "Kamakura", but creates a multi-layered snow barrier.', cooldown: 18.0, };
-export var Uchimizu: Ability = {name: 'Uchimizu', desc: 'The user hurls big and fast water droplets at the opponent.', cooldown: 5.0, projectileDamage: 5.0, projectileNumber: 15, };
-export var Sables: Ability = {name: 'Sables', desc: 'The user launches a compressed sandstorm at the opponent, which sends them flying.', cooldown: 3.0, };
-export var Geppo: Ability = {name: 'Geppo', desc: 'The user kicks the air beneath them to launch themselves into the air.', cooldown: 0.9, };
-export var YasakaninoMagatama: Ability = {name: 'Yasakani no Magatama', desc: 'Fires a torrent of deadly light particles, causing huge destruction.', cooldown: 2.5, projectileDamage: 2.0, projectileNumber: 5, projectileExplosion: 1, };
+export var Hiken: Ability = {name: 'Hiken', desc: 'Turns the user\'s fist into flames and launches it towards the target.', cooldown: 8.0, projectileDamage: 20.0, projectileExplosion: 2, };
+export var Higan: Ability = {name: 'Higan', desc: 'Turns the user\'s fingertips into flames and shoots bullets made of fire from them.', cooldown: 4.0, projectileDamage: 5.0, projectileNumber: 10, };
+export var DaiEnkaiEntei: Ability = {name: 'Dai Enkai : Entei', desc: 'Amasses the user\'s flames into a gigantic fireball that the user hurls at the opponent.', cooldown: 25.0, chargeTime: 3.6, projectileDamage: 45.0, projectileExplosion: 7, };
+export var Hidaruma: Ability = {name: 'Hidaruma', desc: 'Creates small green fireballs that set the target on fire.', cooldown: 6.0, };
+export var Jujika: Ability = {name: 'Jujika', desc: 'Launches a cross-shaped column of fire at the opponent, leaving a cross of fire.', cooldown: 6.0, projectileDamage: 5.0, };
+export var Enjomo: Ability = {name: 'Enjomo', desc: 'Creates a circle of fire around the user, burning everyone inside of it.', cooldown: 10.0, };

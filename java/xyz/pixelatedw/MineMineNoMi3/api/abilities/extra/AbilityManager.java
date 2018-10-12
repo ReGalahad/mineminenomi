@@ -1,6 +1,7 @@
 package xyz.pixelatedw.MineMineNoMi3.api.abilities.extra;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyRegistry;
@@ -16,7 +17,7 @@ public class AbilityManager
 		return instance;
 	}
 	
-	private HashMap<String, Ability> registeredAbilities = new HashMap<String, Ability>();	
+	private LinkedHashMap<String, Ability> registeredAbilities = new LinkedHashMap<String, Ability>();	
 	
 	public void registerAbility(Ability ab)
 	{
@@ -40,7 +41,7 @@ public class AbilityManager
 		}
 	}
 	
-	public HashMap<String, Ability> getHashMap()
+	public LinkedHashMap<String, Ability> getHashMap()
 	{
 		return registeredAbilities;
 	}

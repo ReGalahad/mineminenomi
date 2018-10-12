@@ -51,7 +51,7 @@ import xyz.pixelatedw.MineMineNoMi3.world.TeleporterScenarioArena;
 public class CommandFG extends CommandBase
 {	
 	
-	private Quest[] questsPool = new Quest[] {ListQuests.bountyLowLevel01, ListQuests.bountyLowLevel02, ListQuests.bountyLowLevel03, ListQuests.swordsmanProgression01};
+	private Quest[] questsPool = new Quest[] {ListQuests.bountyLowLevel01, ListQuests.bountyLowLevel02, ListQuests.bountyLowLevel03};
 	
 	public void processCommand(ICommandSender sender, String[] str) 
 	{

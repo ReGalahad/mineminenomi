@@ -4,16 +4,20 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.network.play.server.S0BPacketAnimation;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.WorldServer;
+import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.SwordsmanProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.items.weapons.ItemCoreWeapon;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 
 public class SwordsmanAbilities 
@@ -21,24 +25,21 @@ public class SwordsmanAbilities
 	public static Ability SHISHISHISONSON = new ShiShishiSonson();
 	public static Ability SANBYAKUROKUJUPOUNDHO = new SanbyakurokujuPoundHo();
 	public static Ability YAKKODORI = new Yakkodori();
-	public static Ability SANZENSEKAI = new SanzenSekai();
+	public static Ability OTATSUMAKI = new OTatsumaki();
 	
-	public static Ability[] abilitiesArray = new Ability[] {SHISHISHISONSON, SANBYAKUROKUJUPOUNDHO, YAKKODORI, SANZENSEKAI};
+	public static Ability[] abilitiesArray = new Ability[] {SHISHISHISONSON, SANBYAKUROKUJUPOUNDHO, YAKKODORI, OTATSUMAKI};
 	
-	public static class SanzenSekai extends Ability
+	public static class OTatsumaki extends Ability
 	{
-		public SanzenSekai() 
+		public OTatsumaki() 
 		{
-			super(ListAttributes.SANZENSEKAI); 
+			super(ListAttributes.OTATSUMAKI); 
 		}
 			
 		public void use(EntityPlayer player)
 		{
 			if(player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ItemCoreWeapon)
-			{
-
-				/** FIXME New Spherical particles around the player */
-								
+			{	
 				if(!this.isOnCooldown)
 				{
 					for(EntityLivingBase e : WyHelper.getEntitiesNear(player, 2.5))
@@ -47,8 +48,9 @@ public class SwordsmanAbilities
 						
 						e.addPotionEffect(new PotionEffect(Potion.weakness.id, 10 * 20, 1, true));
 					}
-					
-					Minecraft.getMinecraft().thePlayer.swingItem();
+					WyNetworkHelper.sendTo(new PacketParticles(ID.PARTICLEFX_KOKUTEICROSS, player), (EntityPlayerMP) player);
+					if (player.worldObj instanceof WorldServer)
+						((WorldServer)player.worldObj).getEntityTracker().func_151248_b(player, new S0BPacketAnimation(player, 0));
 				}
 				super.use(player);
 			}
@@ -70,7 +72,8 @@ public class SwordsmanAbilities
 			{
 				this.projectile = new SwordsmanProjectiles.Yakkodori(player.worldObj, player, ListAttributes.YAKKODORI);
 				if(!this.isOnCooldown)
-					Minecraft.getMinecraft().thePlayer.swingItem();
+					if (player.worldObj instanceof WorldServer)
+						((WorldServer)player.worldObj).getEntityTracker().func_151248_b(player, new S0BPacketAnimation(player, 0));
 				super.use(player);
 			}
 			else
@@ -104,7 +107,8 @@ public class SwordsmanAbilities
 				
 					motion("=", mX, player.motionY, mZ, player);
 					
-					Minecraft.getMinecraft().thePlayer.swingItem();
+					if (player.worldObj instanceof WorldServer)
+						((WorldServer)player.worldObj).getEntityTracker().func_151248_b(player, new S0BPacketAnimation(player, 0));
 				}
 				
 				super.use(player);
@@ -136,7 +140,8 @@ public class SwordsmanAbilities
 			{
 				this.projectile = new SwordsmanProjectiles.SanbyakurokujuPoundHo(player.worldObj, player, ListAttributes.SANBYAKUROKUJUPOUNDHO);
 				if(!this.isOnCooldown)
-					Minecraft.getMinecraft().thePlayer.swingItem();
+					if (player.worldObj instanceof WorldServer)
+						((WorldServer)player.worldObj).getEntityTracker().func_151248_b(player, new S0BPacketAnimation(player, 0));
 				super.use(player);
 			}
 			else

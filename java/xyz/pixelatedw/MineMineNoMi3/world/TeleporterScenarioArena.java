@@ -11,6 +11,7 @@ import net.minecraft.world.WorldServer;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.EntityMorgan;
+import xyz.pixelatedw.MineMineNoMi3.world.scenario.ScenarioManager;
 
 public class TeleporterScenarioArena extends Teleporter
 {
@@ -29,30 +30,9 @@ public class TeleporterScenarioArena extends Teleporter
 	{
 		EntityPlayerMP playerMP = (EntityPlayerMP) entity;
 		
-        double dx = 0;
-        double dy = 64;
-        double dz = 0;
-		
-		entity.setPosition(dx, dy + 1, dz);
-
-        entity.motionX = entity.motionY = entity.motionZ = 0.0D;
-        entity.setPosition(dx, dy + 1, dz);
-
         playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, ID.DIMENSION_ID_SCENARIOARENA, this);
 
-        entity.setPositionAndRotation(dx, dy + 1, dz, 180, 0);
-        
-        for(int x = -20; x < 20; x++)
-        {
-        	for(int z = -20; z < 20; z++)
-        	{
-        		playerMP.worldObj.setBlock((int)dx + x, (int)dy, (int)dz + z, Blocks.stone);
-        	}
-        }
-        
-        EntityMorgan target = new EntityMorgan(playerMP.worldObj);
-        target.setPositionAndRotation(dx, dy + 1, dz + 8, 180, 0);
-        playerMP.worldObj.spawnEntityInWorld(target);
+        ScenarioManager.scenarios.get(ID.SCENARIO_ROMANCEDAWN_CAPTAINMORGAN).load(playerMP, playerMP.worldObj);
 	}
 
 	public void placeInPortal(Entity entity, double x, double y, double z, double f)

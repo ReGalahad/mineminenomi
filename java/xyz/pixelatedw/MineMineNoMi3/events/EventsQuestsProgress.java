@@ -1,11 +1,6 @@
 package xyz.pixelatedw.MineMineNoMi3.events;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
-import cpw.mods.fml.common.gameevent.TickEvent.Phase;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -13,11 +8,11 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.EntityInteractEvent;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
+import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketQuestSync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.Quest;
-import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestManager;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDojoSensei;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
@@ -25,7 +20,6 @@ import xyz.pixelatedw.MineMineNoMi3.quests.EnumQuestlines;
 import xyz.pixelatedw.MineMineNoMi3.quests.IHitCounterQuest;
 import xyz.pixelatedw.MineMineNoMi3.quests.IInteractQuest;
 import xyz.pixelatedw.MineMineNoMi3.quests.IKillQuest;
-import xyz.pixelatedw.MineMineNoMi3.quests.ITimedQuest;
 import xyz.pixelatedw.MineMineNoMi3.quests.QuestLogicHelper;
 
 public class EventsQuestsProgress
@@ -41,14 +35,14 @@ public class EventsQuestsProgress
 		if(event.target instanceof EntityLivingBase)
 			target = (EntityLivingBase) event.target;
 
-		if(target != null && !player.worldObj.isRemote && MainConfig.enableQuests)
+		if(target != null && MainConfig.enableQuests)
 		{
 			
 			// Swordsman Progression Questline Logic
 			if(target instanceof EntityDojoSensei)
 			{				
 				// Turning in every quest based on the given questline
-				if(questProps.questsInProgress() > 0)
+				if(questProps.questsInProgress() > 0 && !player.worldObj.isRemote)
 				{
 					if(QuestLogicHelper.turnInQuestlineQuest(player, EnumQuestlines.SWORDSMANPROGRESSION.getQuests()) > 0)
 						return;
@@ -61,8 +55,10 @@ public class EventsQuestsProgress
 						
 					if(currentProgressionQuest != null && !questProps.hasQuestInTracker(currentProgressionQuest))
 					{
-						QuestManager.instance().startQuest(player, currentProgressionQuest);
-						WyNetworkHelper.sendTo(new PacketQuestSync(questProps), (EntityPlayerMP) player);
+						player.openGui(MainMod.getMineMineNoMi(), 6, player.worldObj, 0, 0, 0);
+						//Minecraft.getMinecraft().displayGuiScreen((GuiScreen) new GUIQuestYesNo(player, currentProgressionQuest));
+						//QuestManager.instance().startQuest(player, currentProgressionQuest);
+						//WyNetworkHelper.sendTo(new PacketQuestSync(questProps), (EntityPlayerMP) player);
 						return;
 					}
 				}
@@ -70,7 +66,7 @@ public class EventsQuestsProgress
 			
 			
 			// General logic for progressing throught 'interact' activties			
-			if(questProps.questsInProgress() > 0)
+			if(questProps.questsInProgress() > 0  && !player.worldObj.isRemote)
 			{
 				for(int i = 0; i < Values.MAX_ACTIVITIES; i++)
 				{
@@ -85,7 +81,8 @@ public class EventsQuestsProgress
 				}
 			}
 			
-			WyNetworkHelper.sendTo(new PacketQuestSync(questProps), (EntityPlayerMP) player);
+			if(!player.worldObj.isRemote)
+				WyNetworkHelper.sendTo(new PacketQuestSync(questProps), (EntityPlayerMP) player);
 		}
 		
 	}

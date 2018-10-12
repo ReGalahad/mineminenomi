@@ -10,6 +10,7 @@ import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelSheep1;
 import net.minecraft.client.model.ModelSheep2;
+import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -140,37 +141,6 @@ public class EventsMorphs
 		}*/
 		
 	}
-	
-	@SubscribeEvent
-	public void onPlayerRendered(RenderPlayerEvent.Pre event)
-	{
-/*		ExtendedEntityStats props = ExtendedEntityStats.get(event.entityPlayer);
-
-		if (!props.getZoanPoint().toLowerCase().equals("n/a"))
-		{
-			event.setCanceled(true);
-			if (props.getUsedFruit().equals("dokudoku"))
-			{
-				if (props.getZoanPoint().toLowerCase().equals(ID.ZOANMORPH_DOKU))
-					this.doRenderZoanMorph(morphVenomDemon, event.entityPlayer);
-			}
-			else if (props.getUsedFruit().equals("ushiushibison"))
-			{
-				if (props.getZoanPoint().toLowerCase().equals(ID.ZOANMORPH_POWER))
-					this.doRenderZoanMorph(zoanBisonPower, event.entityPlayer);
-				if (props.getZoanPoint().toLowerCase().equals(ID.ZOANMORPH_SPEED))
-					this.doRenderZoanMorph(zoanBisonSpeed, event.entityPlayer);
-			}
-			else if (props.getUsedFruit().equals("toritoriphoenix"))
-			{
-				if (props.getZoanPoint().toLowerCase().equals(ID.ZOANMORPH_HYBRID))
-					this.doRenderZoanMorph(zoanPhoenixHybrid, event.entityPlayer);
-				if (props.getZoanPoint().toLowerCase().equals(ID.ZOANMORPH_PHOENIX))
-					this.doRenderZoanMorph(zoanPhoenixFull, event.entityPlayer);
-			}
-		}
-*/
-	}
 
 	private void doRenderZoanMorph(RenderZoanMorph render, double x, double y, double z, EntityLivingBase entity)
 	{
@@ -240,12 +210,21 @@ public class EventsMorphs
 
 		if (this.mc.gameSettings.thirdPersonView == 0 && !this.mc.renderViewEntity.isPlayerSleeping() && !this.mc.gameSettings.hideGUI)
 		{
-			//Minecraft.getMinecraft().entityRenderer.enableLightmap((double)f);
+			RenderHelper.enableStandardItemLighting();
+			Minecraft.getMinecraft().entityRenderer.enableLightmap((double)f);
 			if (player.inventory.getCurrentItem() != null)
 				Minecraft.getMinecraft().entityRenderer.itemRenderer.renderItemInFirstPerson(f);
 			else
+			{
+		        int i2 = this.mc.theWorld.getLightBrightnessForSkyBlocks(MathHelper.floor_double(player.posX), MathHelper.floor_double(player.posY), MathHelper.floor_double(player.posZ), 0);
+		        int j = i2 % 65536;
+		        int k = i2 / 65536;
+		        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float)j / 1.0F, (float)k / 1.0F);
+		        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 				renderCustomHand(player);
-			//Minecraft.getMinecraft().entityRenderer.disableLightmap((double)f);
+			}
+			Minecraft.getMinecraft().entityRenderer.disableLightmap((double)f);
+			RenderHelper.disableStandardItemLighting();
 		}
 
 		GL11.glPopMatrix();
@@ -326,7 +305,6 @@ public class EventsMorphs
 		GL11.glPopMatrix();
 
 		GL11.glDisable(GL12.GL_RESCALE_NORMAL);
-		RenderHelper.disableStandardItemLighting();
 	}
 
 	private ResourceLocation getTextureFromMorph(EntityClientPlayerMP player)

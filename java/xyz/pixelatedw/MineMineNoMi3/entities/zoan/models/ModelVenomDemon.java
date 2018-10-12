@@ -1,5 +1,7 @@
 package xyz.pixelatedw.MineMineNoMi3.entities.zoan.models;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -326,9 +328,11 @@ public class ModelVenomDemon extends ModelZoanMorph
         modelRenderer.rotateAngleZ = z;
     }
 
-    /** FIXME Make the venom demon hand visible (might need to rebuild the model from Tabula) */
-	public ModelRenderer getHandRenderer() 
+    public ModelRenderer getHandRenderer() 
 	{
-		return righthand;
+		GL11.glScaled(1.2, 1.2, 1);
+		GL11.glTranslated(0.2, 0.2, 0.4);
+		GL11.glRotated(45, 1, 0, 0);
+		return rightarm;
 	}
 }

@@ -42,6 +42,17 @@ public class DevilFruitsHelper
 			Blocks.wooden_pressure_plate, Blocks.stone_pressure_plate, Blocks.light_weighted_pressure_plate, Blocks.heavy_weighted_pressure_plate, Blocks.carrots, Blocks.carpet, Blocks.vine,
 			ListMisc.Poison, ListMisc.DemonPoison, Blocks.torch, Blocks.redstone_torch};
 	
+	public static boolean verifyIfAbilityIsBanned(Ability a)
+	{
+		for(String str : MainConfig.abilityRestrictions)
+		{
+			if(WyHelper.getFancyName(str).contains(WyHelper.getFancyName(a.getAttribute().getAttributeName())))
+				return true;
+		}
+		
+		return false;
+	}
+	
 	public static void validateRacialMoves(EntityPlayer player)
 	{
 		ExtendedEntityStats props = ExtendedEntityStats.get(player);
@@ -54,37 +65,20 @@ public class DevilFruitsHelper
 		List<Ability> tempAblList = new ArrayList<Ability>();
 		
 		if(props.getRace().equals(ID.RACE_HUMAN))
-		{
 			for(Ability a : RokushikiAbilities.abilitiesArray)
-			{
-				if(abilityProps.hasRacialAbility(a) && !WyHelper.verifyIfAbilityIsBanned(a))
-				{
+				if(abilityProps.hasRacialAbility(a) && !verifyIfAbilityIsBanned(a))
 					tempAblList.add(a);
-				}
-			}
-		}
 		
 		if(props.getRace().equals(ID.RACE_FISHMAN))
-		{
 			for(Ability a : FishKarateAbilities.abilitiesArray)
-			{
-				if(abilityProps.hasRacialAbility(a) && !WyHelper.verifyIfAbilityIsBanned(a))
-				{
+				if(abilityProps.hasRacialAbility(a) && !verifyIfAbilityIsBanned(a))
 					tempAblList.add(a);
-				}
-			}
-		}
+
 		
 		if(props.getRace().equals(ID.RACE_CYBORG))
-		{
 			for(Ability a : CyborgAbilities.abilitiesArray)
-			{
-				if(abilityProps.hasRacialAbility(a) && !WyHelper.verifyIfAbilityIsBanned(a))
-				{
+				if(abilityProps.hasRacialAbility(a) && !verifyIfAbilityIsBanned(a))
 					tempAblList.add(a);
-				}
-			}
-		}
 		
 		abilityProps.clearRacialAbilities();
 		
@@ -94,12 +88,8 @@ public class DevilFruitsHelper
 		tempAblList.clear();
 
 		for(Ability a : HakiAbilities.abilitiesArray)
-		{
-			if(abilityProps.hasHakiAbility(a) && !WyHelper.verifyIfAbilityIsBanned(a))
-			{
+			if(abilityProps.hasHakiAbility(a) && !verifyIfAbilityIsBanned(a))
 				tempAblList.add(a);
-			}
-		}
 		
 		abilityProps.clearHakiAbilities();
 		
@@ -118,12 +108,32 @@ public class DevilFruitsHelper
 		{
 			abilityProps.addRacialAbility(SwordsmanAbilities.SHISHISHISONSON);
 		
-			if(questProps.hasQuestCompleted(ListQuests.swordsmanProgression04))
+			if(MainConfig.enableQuestProgression)
+			{
+				if(questProps.hasQuestCompleted(ListQuests.swordsmanProgression04))
+					abilityProps.addRacialAbility(SwordsmanAbilities.SANBYAKUROKUJUPOUNDHO);
+			}
+			else
+			{
 				abilityProps.addRacialAbility(SwordsmanAbilities.SANBYAKUROKUJUPOUNDHO);
+				abilityProps.addRacialAbility(SwordsmanAbilities.YAKKODORI);
+				abilityProps.addRacialAbility(SwordsmanAbilities.OTATSUMAKI);
+			}
 		}
 		else if(props.getFightStyle().equals(ID.FSTYLE_SNIPER))
 		{
 			abilityProps.addRacialAbility(SniperAbilities.KAENBOSHI);
+			
+			if(MainConfig.enableQuestProgression)
+			{
+
+			}
+			else
+			{
+				abilityProps.addRacialAbility(SniperAbilities.KEMURIBOSHI);
+				abilityProps.addRacialAbility(SniperAbilities.RENPATSUNAMARIBOSHI);
+				abilityProps.addRacialAbility(SniperAbilities.SAKURETSUSABOTENBOSHI);	
+			}
 		}
 	}
 	
@@ -131,7 +141,7 @@ public class DevilFruitsHelper
 	{
 		for(Ability a : SniperAbilities.abilitiesArray)
 		{
-			if(abl == a) return true;
+			if(abl.getAttribute().getAttributeName().equalsIgnoreCase(a.getAttribute().getAttributeName())) return true;
 		}
 		
 		return false;

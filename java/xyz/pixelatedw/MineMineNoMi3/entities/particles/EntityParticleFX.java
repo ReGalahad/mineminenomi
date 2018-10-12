@@ -25,10 +25,10 @@ public class EntityParticleFX extends EntityAuraFX
 		this.texture = texture;
 		this.partName = texture.getResourcePath().replace("textures/particles/", "").replace(".png", "").replace("particle_", "");
 		
-		this.particleScale = 1F;
-		this.particleGravity = 1F;		
+		this.particleScale = 1.3F;
+		this.particleGravity = 0F;		
 		this.setRBGColorF(1.0F, 1.0F, 1.0F);
-		this.particleMaxAge = 10 + this.rand.nextInt(10);
+		this.particleMaxAge = 30 + this.rand.nextInt(10);
 		this.particleAge = 0;
 	}
 
@@ -91,6 +91,32 @@ public class EntityParticleFX extends EntityAuraFX
     public EntityParticleFX setParticleGravity(float f) { this.particleGravity = f; return this; }
     public EntityParticleFX setParticleAge(int i) { this.particleMaxAge = i + this.rand.nextInt(10); return this; }
     public EntityParticleFX setHasZoom() { this.hasZoom = true; return this; }
+    public EntityParticleFX setParticleTexture(ResourceLocation res)
+    {
+		this.texture = res;
+		this.partName = texture.getResourcePath().replace("textures/particles/", "").replace(".png", "").replace("particle_", "");
+		return this;
+    }
+    
+    public String getParticlePartName() { return this.partName; }
+    public ResourceLocation getParticleTexture() { return this.texture; }
+    public float getParticleScale() { return this.particleScale; }
+    public float getParticleGravity() { return this.particleGravity; }
+    public int getParticleAge() { return this.particleAge; }
+    public boolean hasZoom() { return this.hasZoom; }
+    
+    public EntityParticleFX clone(double posX, double posY, double posZ)
+    {
+    	EntityParticleFX clone = new EntityParticleFX(this.worldObj, this.texture,
+    			posX, posY, posZ,
+    			0, 0, 0)
+    			.setParticleScale(this.particleScale).setParticleGravity(this.particleGravity).setParticleAge(this.particleMaxAge);
+    	
+    	if(this.hasZoom)
+    		clone.setHasZoom();
+
+    	return clone;
+    }
     
     public int getFXLayer()
     {

@@ -13,8 +13,8 @@ public class ID
 	PARTICLE_ICON_YUKI = new ResourceLocation(ID.PROJECT_ID, "textures/particles/particle_yuki.png"),
 	PARTICLE_ICON_PIKA = new ResourceLocation(ID.PROJECT_ID, "textures/particles/particle_pika.png"),
 	PARTICLE_ICON_MERA = new ResourceLocation(ID.PROJECT_ID, "textures/particles/particle_mera.png"),
-	PARTICLE_ICON_MOKU = new ResourceLocation(ID.PROJECT_ID, "textures/particles/particle_moku.png"),
 	PARTICLE_ICON_MERA2 = new ResourceLocation(ID.PROJECT_ID, "textures/particles/particle_mera2.png"),
+	PARTICLE_ICON_MOKU = new ResourceLocation(ID.PROJECT_ID, "textures/particles/particle_moku.png"),
 	PARTICLE_ICON_MOKU2 = new ResourceLocation(ID.PROJECT_ID, "textures/particles/particle_moku2.png"),
 	PARTICLE_ICON_MOKU3 = new ResourceLocation(ID.PROJECT_ID, "textures/particles/particle_moku3.png"),
 	PARTICLE_ICON_SUNA = new ResourceLocation(ID.PROJECT_ID, "textures/particles/particle_suna.png"),
@@ -28,7 +28,8 @@ public class ID
 	PARTICLE_ICON_ITO = new ResourceLocation(ID.PROJECT_ID, "textures/particles/particle_ito.png"),	
 	PARTICLE_ICON_GURA = new ResourceLocation(ID.PROJECT_ID, "textures/particles/particle_gura.png"),	
 	PARTICLE_ICON_GURA2 = new ResourceLocation(ID.PROJECT_ID, "textures/particles/particle_gura2.png"),	
-					
+	PARTICLE_ICON_HIE = new ResourceLocation(ID.PROJECT_ID, "textures/particles/particle_hie.png"),	
+			
 	ICON_HARROW = new ResourceLocation(ID.PROJECT_ID, "textures/gui/icons/icon_arrow.png"),
 	
 	ICON_PIRATE = new ResourceLocation(ID.PROJECT_ID, "textures/gui/icons/icon_pirate.png"),
@@ -71,27 +72,34 @@ public class ID
 	PROJECT_MCVERSION = "1.7.10",
 	PROJECT_SOURCEFOLDER = "D:/Programming/Minecraft Modding/Mine Mine no Mi/src/main/resources/",
 
-	PARTICLE_NAME_PIKA = "pika",
-	PARTICLE_NAME_PIKABIG = "pikabig",
-	PARTICLE_NAME_YUKI = "yuki",
-	PARTICLE_NAME_MERA = "mera",
-	PARTICLE_NAME_MOKU = "moku",	
-	PARTICLE_NAME_MERA2 = "mera2",
-	PARTICLE_NAME_MOKU2 = "moku2",
-	PARTICLE_NAME_MOKU3 = "moku3",
-	PARTICLE_NAME_SUNA = "suna",	
-	PARTICLE_NAME_SUNA2 = "suna2",
-	PARTICLE_NAME_GASU = "gasu",	
-	PARTICLE_NAME_GASU2 = "gasu2",		
-	PARTICLE_NAME_BLUEFLAME = "blueflame",
-	PARTICLE_NAME_DARKNESS = "darkness",
-	PARTICLE_NAME_GORO = "goro",
-	PARTICLE_NAME_DOKU = "doku",
-	PARTICLE_NAME_ITO = "ito",
-	PARTICLE_NAME_GURA = "gura",
-	PARTICLE_NAME_GURA2 = "gura2",
-	PARTICLE_NAME_GURABIG = "gurabig",
+	PARTICLEFX_DOKUGOMU = "dokuGumo",
+	PARTICLEFX_DAIENKAI1 = "daiEnkai1",
+	PARTICLEFX_DAIENKAI2 = "daiEnkai2",			
+	PARTICLEFX_FUBUKI = "fubuki",	
+	PARTICLEFX_WHITELAUNCHER = "whiteLauncher",	
+	PARTICLEFX_SAMEHADA = "samehada",
+	PARTICLEFX_SABLES = "sables",
+	PARTICLEFX_GROUNDDEATH = "groundDeath",
+	PARTICLEFX_KOKUTEICROSS = "kokuteiCross",
+	PARTICLEFX_GEARSECOND = "gearSecond",
+	PARTICLEFX_TENSEINOSOEN1 = "tenseiNoSoen1",
+	PARTICLEFX_TENSEINOSOEN2 = "tenseiNoSoen2",
+	PARTICLEFX_BLACKWORLD = "blackWorld",
+	PARTICLEFX_ELTHOR = "elThor",
+	PARTICLEFX_YATANOKAGAMI = "yatanNoKagami",
+	PARTICLEFX_AMATERASU = "amaterasu",
+	PARTICLEFX_DARKMATTER = "darkMatter",
+	PARTICLEFX_BLACKHOLE = "blackHole",
+	PARTICLEFX_KUMONOSUGAKI = "kumoNoSugaki",
+	PARTICLEFX_FLASH = "flash",
+	PARTICLEFX_GEKISHIN = "gekishin",
+	PARTICLEFX_KEMURIBOSHI = "kemuriBoshi",
+	PARTICLEFX_GEPPO = "geppo",
+	PARTICLEFX_BLUEFLAMES = "blueFlames",
+	PARTICLEFX_ICEAGE = "iceAge",
+	PARTICLEFX_VENOMDEMON = "venomDemon",
 
+			
 	CREW_ARLONG = "Arlong Pirates",
 	CREW_BAROQUEWORKS = "Baroque Works",
 	CREW_ALVIDAPIRATES = "Alvida Pirates",
@@ -106,12 +114,13 @@ public class ID
 	RACE_HUMAN = "Human",
 	RACE_FISHMAN = "Fishman",
 	RACE_CYBORG = "Cyborg",
+	RACE_MINK = "Mink",
 	
 	FSTYLE_SWORDSMAN = "Swordsman",
 	FSTYLE_SNIPER = "Sniper",
 	FSTYLE_DOCTOR = "Doctor",
+	FSTYLE_ARTOFWEATHER = "Art of Weather",
 	FSTYLE_OKAMA = "Okama",
-	FSTYLE_HASSHOKEN = "Hasshoken",
 	
 	ZOANMORPH_POWER = "power",
 	ZOANMORPH_SPEED = "speed",
@@ -135,9 +144,11 @@ public class ID
 	LANG_GUI_STYLE = "gui.style.name",
 	LANG_GUI_ABILITIES = "gui.abilities.name",
 	LANG_GUI_QUESTS = "gui.quests.name",
-	LANG_GUI_QPROGRESS = "gui.qprogress.name",
-	
-	
+	LANG_GUI_QUESTS_PROGRESS = "gui.quests.progress.name",
+	LANG_GUI_QUESTS_ACCEPT = "gui.quests.accept.name",	
+	LANG_GUI_QUESTS_DECLINE = "gui.quests.decline.name",	
+	LANG_GUI_QUESTS_ACCEPTTEXT = "gui.quests.accepttext.name",	
+			
 	DIMENSION_NAME_SCENARIOARENA = "scenarioarena",
 	
 	SCENARIO_ROMANCEDAWN_CAPTAINMORGAN = "scenario_cptmorgan",
@@ -145,6 +156,8 @@ public class ID
 	NULL = "null";
 	
 	public static final int 
+	
+	GENERIC_PARTICLES_RENDER_DISTANCE = 128,
 	
 	DIMENSION_ID_SCENARIOARENA = DimensionManager.getNextFreeDimId(),
 	
@@ -154,8 +167,8 @@ public class ID
 	GUI_PLAYER = 1,
 	GUI_CHARACTERCREATOR = 2,
 	GUI_ABILITIES = 3;	
+
+	public static final boolean 
 	
-	public static final boolean
-	
-	DEV_EARLYACCESS = true;
+	DEV_EARLYACCESS = false;
 }

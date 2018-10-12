@@ -1,6 +1,5 @@
 package xyz.pixelatedw.MineMineNoMi3.abilities;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -8,6 +7,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.DevilFruitsHelper;
+import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper.Direction;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
@@ -29,7 +29,7 @@ public class ItoAbilities
 	
 	public static class Torikago extends Ability
 	{
-		private boolean canSpawnRoom = true;
+		private boolean canSpawnTorikago = true;
 		
 		public Torikago() 
 		{
@@ -38,7 +38,7 @@ public class ItoAbilities
 		
 		public void use(EntityPlayer player)
 		{
-			if(!this.isOnCooldown && canSpawnRoom)
+			if(!this.isOnCooldown && canSpawnTorikago)
 			{
 				final World world = player.worldObj;
 				Sphere.generate((int)player.posX, (int)player.posY, (int)player.posZ, 20, new ISphere()
@@ -50,23 +50,24 @@ public class ItoAbilities
 				});
 				player.worldObj.setBlock((int) player.posX, (int) player.posY, (int) player.posZ, ListMisc.StringMid);
 				
-				canSpawnRoom = false;
+				canSpawnTorikago = false;
 				super.use(player);
 			}
-			else if(!canSpawnRoom)
+			else if(!canSpawnTorikago)
 			{
-				if(WyHelper.isBlockNearby(player, 20, ListMisc.StringMid))
+				if(!WyHelper.isBlockNearby(player, 30, ListMisc.StringMid))
+					canSpawnTorikago = true;
+				else
 				{
-					Block b = WyHelper.getBlockNearby(player, 20, ListMisc.StringMid);
-					((BlockStringMid)b).clearRoom();
-					canSpawnRoom = true;
+					((BlockStringMid)WyHelper.getBlockNearby(player, 30, ListMisc.StringMid)).clearRoom();
+					canSpawnTorikago = true;
 				}
 			}
 		} 
 		
 		public void alterSpawnFlag(boolean flag)
 		{
-			canSpawnRoom = flag;
+			canSpawnTorikago = flag;
 		}
 	}
 	
@@ -79,7 +80,7 @@ public class ItoAbilities
 		
 		public void duringPassive(EntityPlayer player, int passiveTimer)
 		{		
-			WyNetworkHelper.sendTo(new PacketParticles("kumonosugaki", player), (EntityPlayerMP) player);
+			WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_KUMONOSUGAKI, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 			
 			if(passiveTimer >= 15)
 			{

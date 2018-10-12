@@ -9,8 +9,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
-import xyz.pixelatedw.MineMineNoMi3.api.quests.Quest;
 
 public class AbilityProperties implements IExtendedEntityProperties 
 {
@@ -72,6 +72,7 @@ public class AbilityProperties implements IExtendedEntityProperties
 		
 		data.setString("name", abl.getAttribute().getAttributeName());
 		data.setBoolean("isOnCooldown", abl.isOnCooldown());
+		data.setBoolean("isCharging", abl.isCharging());
 		data.setBoolean("isPassiveActive", abl.isPassiveActive());
 		//data.setBoolean("isDisabled", abl.isDisabled());
 		
@@ -85,39 +86,19 @@ public class AbilityProperties implements IExtendedEntityProperties
 		try
 		{
 			for(int i = 0; i < hotbarAbilities.length; i++)
-			{
-				this.hotbarAbilities[i] = (!props.getString("hotbar_ability_" + i).isEmpty() || AbilityManager.instance().getAbilityByName(props.getString("hotbar_ability_" + i)) != null) ? AbilityManager.instance().getAbilityByName(props.getString("hotbar_ability_" + i)).getClass().newInstance() : null;
-				if(this.hotbarAbilities[i] != null)
-					this.loadNLOBData(this.hotbarAbilities[i]);
-			}
+				this.hotbarAbilities[i] = this.loadAbilityFromNLOB((NBTTagCompound) props.getTag("hotbar_ability_" + i));
 
 			for(int i = 0; i < devilFruitAbilities.length; i++)
-			{
 				this.devilFruitAbilities[i] = this.loadAbilityFromNLOB((NBTTagCompound) props.getTag("devilfruits_ability_" + i));
-				if(this.devilFruitAbilities[i] != null)
-					this.loadNLOBData(this.devilFruitAbilities[i]);
-			}
 			
 			for(int i = 0; i < racialAbilities.length; i++)
-			{
 				this.racialAbilities[i] = this.loadAbilityFromNLOB((NBTTagCompound) props.getTag("racial_ability_" + i));
-				if(this.racialAbilities[i] != null)
-					this.loadNLOBData(this.racialAbilities[i]);
-			}
 			
 			for(int i = 0; i < styleAbilities.length; i++)
-			{
 				this.styleAbilities[i] = this.loadAbilityFromNLOB((NBTTagCompound) props.getTag("style_ability_" + i));
-				if(this.styleAbilities[i] != null)
-					this.loadNLOBData(this.styleAbilities[i]);
-			}
 			
 			for(int i = 0; i < hakiAbilities.length; i++)
-			{
 				this.hakiAbilities[i] = this.loadAbilityFromNLOB((NBTTagCompound) props.getTag("haki_ability_" + i));
-				if(this.hakiAbilities[i] != null)
-					this.loadNLOBData(this.hakiAbilities[i]);
-			}
 		}
 		catch (Exception e)
 		{
@@ -135,8 +116,13 @@ public class AbilityProperties implements IExtendedEntityProperties
 		Ability ability = null;
 		try
 		{
-			if(AbilityManager.instance().getAbilityByName(ablName) != null)
-				ability = AbilityManager.instance().getAbilityByName(ablName).getClass().newInstance();
+			if(AbilityManager.instance().getAbilityByName(WyHelper.getFancyName(ablName)) != null)
+			{
+				ability = AbilityManager.instance().getAbilityByName(WyHelper.getFancyName(ablName)).getClass().newInstance();
+				ability.setCooldownActive(props.getBoolean("isOnCooldown"));
+				ability.setChargeActive(props.getBoolean("isCharging"));			
+				ability.setPassiveActive(props.getBoolean("isPassiveActive"));
+			}
 		}
 		catch (Exception e)
 		{
@@ -144,16 +130,6 @@ public class AbilityProperties implements IExtendedEntityProperties
 		}
 		
 		return ability;
-	}
-	
-	private NBTTagCompound loadNLOBData(Ability abl)
-	{
-		NBTTagCompound data = new NBTTagCompound();
-		
-		abl.setCooldownActive(data.getBoolean("isOnCooldown"));
-		abl.setPassiveActive(data.getBoolean("isPassiveActive"));
-		
-		return data;
 	}
 	
 	public void init(Entity entity, World world) {}

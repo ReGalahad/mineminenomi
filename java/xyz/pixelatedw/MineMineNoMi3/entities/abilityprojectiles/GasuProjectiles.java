@@ -12,6 +12,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.DokuProjectiles.Hydra;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
@@ -55,18 +56,34 @@ public class GasuProjectiles
 		
 		public void onUpdate()
 		{	
-			double posXOffset = this.worldObj.rand.nextGaussian() * 0.42D;
-			double posYOffset = this.worldObj.rand.nextGaussian() * 0.22D;
-			double posZOffset = this.worldObj.rand.nextGaussian() * 0.42D;		
-			
-			MainMod.proxy.spawnCustomParticles(this, ID.PARTICLE_NAME_GASU, this.posX + posXOffset, this.posY + posYOffset, this.posZ + posZOffset, 0.0D, 0.0D, 0.0D);
-			
-			posXOffset = this.worldObj.rand.nextGaussian() * 0.12D;
-			posYOffset = this.worldObj.rand.nextGaussian() * 0.06D;
-			posZOffset = this.worldObj.rand.nextGaussian() * 0.12D;		
-			
-			MainMod.proxy.spawnCustomParticles(this, ID.PARTICLE_NAME_GASU2, this.posX + posXOffset, this.posY + posYOffset, this.posZ + posZOffset, 0.0D, 0.0D, 0.0D);
-
+			if(this.worldObj.isRemote)
+			{
+				double posXOffset = this.worldObj.rand.nextGaussian() * 0.42D;
+				double posYOffset = this.worldObj.rand.nextGaussian() * 0.22D;
+				double posZOffset = this.worldObj.rand.nextGaussian() * 0.42D;		
+				
+				EntityParticleFX particle = new EntityParticleFX(this.worldObj, ID.PARTICLE_ICON_GASU, 
+						posX + posXOffset, 
+						posY + posYOffset, 
+						posZ + posZOffset, 
+						0, 0, 0)
+						.setParticleAge(2).setParticleScale(2);
+				
+				MainMod.proxy.spawnCustomParticles(this, particle);
+				
+				posXOffset = this.worldObj.rand.nextGaussian() * 0.12D;
+				posYOffset = this.worldObj.rand.nextGaussian() * 0.06D;
+				posZOffset = this.worldObj.rand.nextGaussian() * 0.12D;		
+				
+				particle = new EntityParticleFX(this.worldObj, ID.PARTICLE_ICON_GASU2, 
+						posX + posXOffset, 
+						posY + posYOffset, 
+						posZ + posZOffset, 
+						0, 0, 0)
+						.setParticleAge(2).setParticleScale(2);
+				
+				MainMod.proxy.spawnCustomParticles(this, particle);
+			}
 			
 			super.onUpdate();
 		}

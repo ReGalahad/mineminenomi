@@ -31,6 +31,7 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import xyz.pixelatedw.MineMineNoMi3.DevilFruitsHelper;
@@ -63,9 +64,12 @@ import xyz.pixelatedw.MineMineNoMi3.items.AkumaNoMi;
 import xyz.pixelatedw.MineMineNoMi3.items.ItemCoreArmor;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListEffects;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
+import xyz.pixelatedw.MineMineNoMi3.lists.ListQuests;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSyncInfo;
+import xyz.pixelatedw.MineMineNoMi3.quests.ITimedQuest;
+import xyz.pixelatedw.MineMineNoMi3.quests.QuestLogicHelper;
 
 public class EventsPersistence
 {
@@ -107,6 +111,19 @@ public class EventsPersistence
 			ExtendedEntityStats props = ExtendedEntityStats.get(player);
 			AbilityProperties abilityProps = AbilityProperties.get(player);
 			ItemStack heldItem = player.getHeldItem();				
+
+			QuestProperties questProps = QuestProperties.get(player);
+			
+			if(QuestLogicHelper.checkForITimedQuests(questProps))
+			{
+				for(int i = 0; i < questProps.questsInProgress(); i++)
+				{
+					if(questProps.getQuestIndexFromTracker(i) != null && questProps.getQuestIndexFromTracker(i) instanceof ITimedQuest)
+					{
+						((ITimedQuest)questProps.getQuestIndexFromTracker(i)).onTimePassEvent(player);					
+					}
+				}
+			}
 			
 			if (heldItem != null)
 			{				
@@ -251,20 +268,6 @@ public class EventsPersistence
 			if (props.getUsedFruit().equals("gomugomu") || props.getUsedFruit().equals("banebane") || props.isLogia())
 				player.fallDistance = 0;
 
-			if(props.getUsedFruit().equals("gomugomu"))
-			{
-				if(props.getGear() == 2)
-				{
-					player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 25, 1, false));
-					if(!player.worldObj.isRemote)
-			    		WyNetworkHelper.sendTo(new PacketParticles("gearSecond", player), (EntityPlayerMP) player);
-				}
-				else if(props.getGear() == 4)
-				{
-					player.addPotionEffect(new PotionEffect(Potion.jump.id, 25, 2, false));
-				}
-			}
-			
 			if (props.getUsedFruit().equals("dokudoku"))
 			{
 				if (player.isPotionActive(Potion.poison.id))
@@ -354,7 +357,6 @@ public class EventsPersistence
 				}
 				
 			}
-			
 			
 			if(props.getTempPreviousAbility().equals("geppo") || props.getTempPreviousAbility().equals("soranomichi"))
 			{
@@ -543,7 +545,7 @@ public class EventsPersistence
 		EntityLivingBase entity = event.entityLiving;
 		Entity sourceOfDamage = event.source.getSourceOfDamage();
 		ExtendedEntityStats props = ExtendedEntityStats.get(entity);
-
+		
 		for (int i = -2; i <= 2; i++)
 			for (int j = -2; j <= 2; j++)
 				for (int k = -2; k <= 2; k++)
@@ -570,6 +572,11 @@ public class EventsPersistence
 						}
 					}
 				}
+			}
+			
+			if(heldItem == null && props.isLogia() && !propz.hasBusoHakiActive())
+			{
+				event.setCanceled(true);
 			}
 			
 			if(heldItem != null && MainConfig.enableLogiaInvulnerability && !this.kairosekiChecks(entity))
@@ -643,6 +650,31 @@ public class EventsPersistence
 		}
 	}
 	
+	@SubscribeEvent
+	public void onEntityAttackEvent(LivingHurtEvent event)
+	{
+		EntityLivingBase entity = event.entityLiving;
+		Entity sourceOfDamage = event.source.getSourceOfDamage();
+		
+		if (sourceOfDamage instanceof EntityPlayer)
+		{	
+			ExtendedEntityStats props = ExtendedEntityStats.get((EntityLivingBase) sourceOfDamage);
+			if(props.getUsedFruit() != null && !props.getUsedFruit().equalsIgnoreCase("n/a"))
+			{
+				if(props.getUsedFruit().equalsIgnoreCase("ushiushibison") && props.getZoanPoint().equalsIgnoreCase(ID.ZOANMORPH_POWER))
+					event.ammount += 3;
+			}
+			
+			if(props.hasBusoHakiActive())
+			{
+				double power = props.getDoriki() / 500;
+				event.ammount += power;
+			}
+			
+			//System.out.println("Damage Recieved from " + sourceOfDamage.getCommandSenderName() + " : " + event.ammount);
+		}
+	}
+	
 	private boolean kairosekiChecks(EntityLivingBase entity)
 	{
 		if(entity instanceof EntityPlayer)
@@ -667,8 +699,8 @@ public class EventsPersistence
 			AbilityProperties abilityProps = AbilityProperties.get(event.entityPlayer);
 
 			for(int i = 0; i < abilityProps.countAbilitiesInHotbar(); i++)
-			{					
-				if(abilityProps.getAbilityFromSlot(i) != null && !abilityProps.getAbilityFromSlot(i).isOnCooldown() 
+			{						
+				if(abilityProps.getAbilityFromSlot(i) != null && !abilityProps.getAbilityFromSlot(i).isOnCooldown()
 						&& abilityProps.getAbilityFromSlot(i).getAttribute().isPassive() && abilityProps.getAbilityFromSlot(i).isPassiveActive()
 						&& DevilFruitsHelper.isSniperAbility(abilityProps.getAbilityFromSlot(i)))
 				{		
@@ -739,7 +771,7 @@ public class EventsPersistence
 					props.setGear(1);
 					
 					for(Ability a : ((AkumaNoMi)df.getItem()).abilities)
-						if(!WyHelper.verifyIfAbilityIsBanned(a))
+						if(!DevilFruitsHelper.verifyIfAbilityIsBanned(a))
 							abilityProps.addDevilFruitAbility(a);
 
 				}
@@ -751,7 +783,7 @@ public class EventsPersistence
 				{
 					if(abilityProps.getAbilityFromSlot(i) != null)
 					{
-						if(WyHelper.verifyIfAbilityIsBanned(abilityProps.getAbilityFromSlot(i)))
+						if(DevilFruitsHelper.verifyIfAbilityIsBanned(abilityProps.getAbilityFromSlot(i)))
 							abilityProps.setAbilityInSlot(i, null);
 					}
 				}			
@@ -810,6 +842,11 @@ public class EventsPersistence
 				ExtendedEntityStats props = ExtendedEntityStats.get(e.entityPlayer);
 				props.loadNBTData(compound);
 				
+				compound = new NBTTagCompound();
+				AbilityProperties.get(e.original).saveNBTData(compound);
+				AbilityProperties abilityProps = AbilityProperties.get(e.entityPlayer);
+				abilityProps.loadNBTData(compound);
+				
 				if(e.entityPlayer != null && MainConfig.enableExtraHearts)		
 				{
 					IAttributeInstance maxHp = e.entityPlayer.getEntityAttribute(SharedMonsterAttributes.maxHealth);
@@ -845,6 +882,11 @@ public class EventsPersistence
 								
 				ExtendedEntityStats.get(e.entityPlayer).loadNBTData(compound);
 			}
+			
+			NBTTagCompound compound = new NBTTagCompound();
+			QuestProperties.get(e.original).saveNBTData(compound);
+			QuestProperties questProps = QuestProperties.get(e.entityPlayer);
+			questProps.loadNBTData(compound);
 		}
 	}
 
@@ -904,16 +946,16 @@ public class EventsPersistence
 
 		if(ability instanceof KenbunshokuHaki || ability instanceof BusoshokuHaki)
 		{
-			if (props.getDoriki() >= doriki && !abilityProps.hasHakiAbility(ability) && !WyHelper.verifyIfAbilityIsBanned(ability))
+			if (props.getDoriki() >= doriki && !abilityProps.hasHakiAbility(ability) && !DevilFruitsHelper.verifyIfAbilityIsBanned(ability))
 				abilityProps.addHakiAbility(ability);
-			if ((props.getDoriki() < doriki || WyHelper.verifyIfAbilityIsBanned(ability)) && abilityProps.hasHakiAbility(ability))
+			if ((props.getDoriki() < doriki || DevilFruitsHelper.verifyIfAbilityIsBanned(ability)) && abilityProps.hasHakiAbility(ability))
 				abilityProps.removeHakiAbility(ability);
 		}
 		else
 		{
-			if (props.getDoriki() >= doriki && !abilityProps.hasRacialAbility(ability) && !WyHelper.verifyIfAbilityIsBanned(ability))
+			if (props.getDoriki() >= doriki && !abilityProps.hasRacialAbility(ability) && !DevilFruitsHelper.verifyIfAbilityIsBanned(ability))
 				abilityProps.addRacialAbility(ability);
-			if ((props.getDoriki() < doriki || WyHelper.verifyIfAbilityIsBanned(ability)) && abilityProps.hasRacialAbility(ability))
+			if ((props.getDoriki() < doriki || DevilFruitsHelper.verifyIfAbilityIsBanned(ability)) && abilityProps.hasRacialAbility(ability))
 				abilityProps.removeRacialAbility(ability);	
 		}
 	}	

@@ -30,6 +30,8 @@ public class ToriPhoenixAbilities
 	
 	public static class TenseiNoSoen extends Ability
 	{
+		private int particlesSpawned = 0;
+		
 		public TenseiNoSoen() 
 		{
 			super(ListAttributes.TENSEINOSOEN); 
@@ -38,12 +40,13 @@ public class ToriPhoenixAbilities
 		public void startCharging(EntityPlayer player)
 		{
 			ExtendedEntityStats props = ExtendedEntityStats.get(player);
+			particlesSpawned = 0;
 			
 			if((props.getZoanPoint().equals(ID.ZOANMORPH_PHOENIX)) && !this.isOnCooldown)
 			{
 				if(!player.onGround)
 				{
-					WyNetworkHelper.sendTo(new PacketParticles("tenseiNoSoen", player), (EntityPlayerMP) player);
+					WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_TENSEINOSOEN1, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 					super.startCharging(player);
 				}
 				else
@@ -64,8 +67,11 @@ public class ToriPhoenixAbilities
 	    {
 			if(currentCooldown > 28 * 20)
 			{
-				if(player.onGround)
-					WyNetworkHelper.sendTo(new PacketParticles("tenseiNoSoen2", player), (EntityPlayerMP) player);
+				if(player.onGround && particlesSpawned < 10)
+				{
+					WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_TENSEINOSOEN2, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
+					particlesSpawned++;
+				}			
 				
 				for(EntityLivingBase e : WyHelper.getEntitiesNear(player, 20))
 				{
@@ -123,15 +129,7 @@ public class ToriPhoenixAbilities
 			else
 				target.setHealth(target.getHealth());
 			
-			for (int i = 0; i < 25; i++)
-			{
-				double offsetX = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
-				double offsetY = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
-				double offsetZ = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
-				
-				MainMod.proxy.spawnCustomParticles(target, ID.PARTICLE_NAME_BLUEFLAME, target.posX + offsetX, target.posY + 1 + offsetY, target.posZ + offsetZ, 0, 0, 0);
-			}
-
+			WyNetworkHelper.sendTo(new PacketParticles(ID.PARTICLEFX_BLUEFLAMES, player), (EntityPlayerMP) player);
 		}
 	}	
 	
@@ -146,14 +144,7 @@ public class ToriPhoenixAbilities
 		{
 			if(!isOnCooldown)
 			{
-				for (int i = 0; i < 50; i++)
-				{
-					double offsetX = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
-					double offsetY = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
-					double offsetZ = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
-					
-					MainMod.proxy.spawnCustomParticles(player, ID.PARTICLE_NAME_BLUEFLAME, player.posX + offsetX, player.posY + 1 + offsetY, player.posZ + offsetZ, 0, 0, 0);
-				}
+				WyNetworkHelper.sendTo(new PacketParticles(ID.PARTICLEFX_BLUEFLAMES, player), (EntityPlayerMP) player);
 			}
 			super.use(player);
 		}
@@ -191,14 +182,7 @@ public class ToriPhoenixAbilities
 					
 					props.setZoanPoint(ID.ZOANMORPH_PHOENIX);
 					WyHelper.sendMsgToPlayer(player, "<" + player.getDisplayName() + "> Phoenix Point !");
-					for (int i = 0; i < 50; i++)
-					{
-						double offsetX = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
-						double offsetY = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
-						double offsetZ = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
-						
-						MainMod.proxy.spawnCustomParticles(player, ID.PARTICLE_NAME_BLUEFLAME, player.posX + offsetX, player.posY + 1 + offsetY, player.posZ + offsetZ, 0, 0, 0);
-					}
+					WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_BLUEFLAMES, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 					WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
 					WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));
 				}

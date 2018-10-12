@@ -12,6 +12,7 @@ import net.minecraft.util.MovingObjectPosition;
 import scala.reflect.api.Internals.ReificationSupportApi.SyntacitcSingletonTypeExtractor;
 import scala.tools.nsc.backend.icode.BasicBlocks.BasicBlock.SuccessorList;
 import xyz.pixelatedw.MineMineNoMi3.DevilFruitsHelper;
+import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
@@ -40,7 +41,7 @@ public class YamiAbilities
 		{
 			if(!this.isOnCooldown)
 			{
-				WyNetworkHelper.sendTo(new PacketParticles("blackworld", player), (EntityPlayerMP) player);
+				WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_BLACKWORLD, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 
 				for(int i = 0; i < 8; i++)
 				{
@@ -98,7 +99,7 @@ public class YamiAbilities
 							&& player.worldObj.getBlock((int) player.posX + i, (int) player.posY + j, (int) player.posZ + k) != ListMisc.OpeMid && player.worldObj.getBlock((int) player.posX + i, (int) player.posY + j, (int) player.posZ + k) != Blocks.bedrock)
 						player.worldObj.setBlock((int) player.posX + i, (int) player.posY + j, (int) player.posZ + k, ListMisc.Darkness);				
 				}
-				WyNetworkHelper.sendTo(new PacketParticles("blackhole", player), (EntityPlayerMP) player);
+				WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_BLACKHOLE, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 				super.use(player);
 			}		
 		}

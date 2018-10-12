@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
+import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
@@ -33,7 +34,7 @@ public class PikaAbilities
 		public void use(EntityPlayer player)
 		{
 			if(!this.isOnCooldown)
-				WyNetworkHelper.sendTo(new PacketParticles("flash", player), (EntityPlayerMP) player);
+				WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_FLASH, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 			super.use(player);
 		} 
 	}
@@ -72,7 +73,7 @@ public class PikaAbilities
 		public void startCharging(EntityPlayer player)
 		{
 			if(!this.isOnCooldown)
-				WyNetworkHelper.sendTo(new PacketParticles("amaterasu", player), (EntityPlayerMP) player);
+				WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_AMATERASU, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 			super.startCharging(player);				
 		}
 
@@ -119,9 +120,9 @@ public class PikaAbilities
 					if (player.isRiding())
 						player.mountEntity((Entity)null);
 					EnderTeleportEvent event = new EnderTeleportEvent(player, x, y, z, 5.0F);
-					WyNetworkHelper.sendTo(new PacketParticles("yatanokagami", player), (EntityPlayerMP) player);
+					WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_YATANOKAGAMI, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 	                player.setPositionAndUpdate(event.targetX, event.targetY + 1, event.targetZ);
-					WyNetworkHelper.sendTo(new PacketParticles("yatanokagami", player), (EntityPlayerMP) player);
+					WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_YATANOKAGAMI, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 	                player.fallDistance = 0.0F;
 				}
 				super.use(player);

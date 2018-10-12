@@ -1,25 +1,22 @@
 package xyz.pixelatedw.MineMineNoMi3.api.abilities;
 
-import java.lang.reflect.InvocationTargetException;
-
 import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
-import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability.Update;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
+import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilitySync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
-import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 
@@ -66,17 +63,16 @@ public class Ability
 			if(!(this.attr.getAbilityCharges() > 0) && this.attr.getAbilityExplosionPower() > 0)
 				player.worldObj.newExplosion(player, player.posX, player.posY, player.posZ, this.attr.getAbilityExplosionPower(), this.attr.canAbilityExplosionSetFire(), this.attr.canAbilityExplosionDestroyBlocks());		
 			
-			if(!player.getDisplayName().equals(FMLCommonHandler.instance().getMinecraftServerInstance().getServerOwner()))	
-				WyNetworkHelper.sendTo(new PacketPlayer("clientUpdateIsCooldown" + this.getAttribute().getAttributeName(), true), (EntityPlayerMP) player);
-
 	    	if(!ID.DEV_EARLYACCESS && !player.capabilities.isCreativeMode)
-	    		WyTelemetry.addStat("abilityUsed_" + WyHelper.getFancyName(this.getAttribute().getAttributeName()), 1);
+	    		WyTelemetry.addStat("abilityUsed_" + this.getAttribute().getAttributeName(), 1);
 	    	
 	    	ExtendedEntityStats props = ExtendedEntityStats.get(player);
+	    	AbilityProperties abilityProps = AbilityProperties.get(player);
 	    	props.setTempPreviousAbility(WyHelper.getFancyName(this.attr.getAttributeName()));
 	    	
 	    	duringRepeater(player);
 			startCooldown();
+			WyNetworkHelper.sendTo(new PacketAbilitySync(abilityProps), (EntityPlayerMP) player);
 			(new Update(player, attr)).start();
 		}
 	}
@@ -115,8 +111,7 @@ public class Ability
 			if(passiveActive)
 			{
 				passiveActive = false;
-				if(!player.getDisplayName().equals(FMLCommonHandler.instance().getMinecraftServerInstance().getServerOwner()))
-					WyNetworkHelper.sendTo(new PacketPlayer("clientUpdateIsPassive" + this.getAttribute().getAttributeName(), false), (EntityPlayerMP) player);
+				WyNetworkHelper.sendTo(new PacketAbilitySync(AbilityProperties.get(player)), (EntityPlayerMP) player);
 				if(this.attr.getPotionEffectsForUser() != null)
 					for(PotionEffect p : this.attr.getPotionEffectsForUser())	
 						player.removePotionEffect(p.getPotionID());
@@ -126,8 +121,7 @@ public class Ability
 			else
 			{
 				passiveActive = true;
-				if(!player.getDisplayName().equals(FMLCommonHandler.instance().getMinecraftServerInstance().getServerOwner()))
-					WyNetworkHelper.sendTo(new PacketPlayer("clientUpdateIsPassive" + this.getAttribute().getAttributeName(), true), (EntityPlayerMP) player);
+				WyNetworkHelper.sendTo(new PacketAbilitySync(AbilityProperties.get(player)), (EntityPlayerMP) player);
 				if(this.attr.getPotionEffectsForUser() != null)
 					for(PotionEffect p : this.attr.getPotionEffectsForUser())				
 						player.addPotionEffect(new PotionEffect(p.getPotionID(), Integer.MAX_VALUE, p.getAmplifier(), true));
@@ -148,6 +142,7 @@ public class Ability
 		if(bool)
 			(new ResetDisable(player, attr)).start();
 		isDisabled = bool;
+		WyNetworkHelper.sendTo(new PacketAbilitySync(AbilityProperties.get(player)), (EntityPlayerMP) player);
 	}
 	
 	/** Only use super. if the ability is also using passive potion effects ! */
@@ -194,10 +189,9 @@ public class Ability
 		if(!isOnCooldown)
 		{
 			isCharging = true;
+			WyNetworkHelper.sendTo(new PacketAbilitySync(AbilityProperties.get(player)), (EntityPlayerMP) player);
 	    	if(!ID.DEV_EARLYACCESS && !player.capabilities.isCreativeMode)
-	    		WyTelemetry.addStat("abilityUsed_" + WyHelper.getFancyName(this.getAttribute().getAttributeName()), 1);
-			if(!player.getDisplayName().equals(FMLCommonHandler.instance().getMinecraftServerInstance().getServerOwner()))
-				WyNetworkHelper.sendTo(new PacketPlayer("clientUpdateIsCharging" + this.getAttribute().getAttributeName(), true), (EntityPlayerMP) player);
+	    		WyTelemetry.addStat("abilityUsed_" + this.getAttribute().getAttributeName(), 1);
 			(new Update(player, attr)).start();
 		}
 	}
@@ -206,17 +200,11 @@ public class Ability
 	{
 		isCharging = false;
 		isOnCooldown = true;
+		WyNetworkHelper.sendTo(new PacketAbilitySync(AbilityProperties.get(player)), (EntityPlayerMP) player);
 		
 		if(projectile != null)
 			player.worldObj.spawnEntityInWorld(projectile);
 		
-		if(!player.getDisplayName().equals(FMLCommonHandler.instance().getMinecraftServerInstance().getServerOwner()))
-		{
-			WyNetworkHelper.sendTo(new PacketPlayer("clientUpdateIsCharging" + this.getAttribute().getAttributeName(), false), (EntityPlayerMP) player);
-			WyNetworkHelper.sendTo(new PacketPlayer("clientUpdateIsCooldown" + this.getAttribute().getAttributeName(), true), (EntityPlayerMP) player);
-		}
-		
-		startCooldown();
 		(new Update(player, attr)).start();
 	}
 	
@@ -240,6 +228,8 @@ public class Ability
 		
 		passiveActive = false;
 		startCooldown();
+		WyNetworkHelper.sendTo(new PacketAbilitySync(AbilityProperties.get(player)), (EntityPlayerMP) player);
+
 		(new Update(player, attr)).start();
 	}
 	
@@ -250,6 +240,7 @@ public class Ability
 	
 	protected void startExtUpdate(EntityPlayer player)
 	{
+		WyNetworkHelper.sendTo(new PacketAbilitySync(AbilityProperties.get(player)), (EntityPlayerMP) player);
 		(new Update(player, attr)).start();
 	}
 	
@@ -381,16 +372,8 @@ public class Ability
 						ticksForCooldown = this.attr.getAbilityCooldown();
 						currentSpawn = 0;
 						isOnCooldown = false;
-						if(!player.getDisplayName().equals(FMLCommonHandler.instance().getMinecraftServerInstance().getServerOwner()))
-							WyNetworkHelper.sendTo(new PacketPlayer("clientUpdateIsCooldown" + attr.getAttributeName(), false), (EntityPlayerMP) player);
-						try 
-						{
-							this.join();
-						} 
-						catch (InterruptedException e) 
-						{
-							e.printStackTrace();
-						}
+						WyNetworkHelper.sendTo(new PacketAbilitySync(AbilityProperties.get(player)), (EntityPlayerMP) player);
+						return;
 					}
 				}	
 			}

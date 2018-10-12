@@ -12,6 +12,8 @@ import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper.Direction;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
+import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 
 public class CyborgProjectiles 
@@ -45,16 +47,20 @@ public class CyborgProjectiles
 		{
 			if(hit.entityHit != null)
 			{
-				hit.entityHit.motionY += 5;
+				double newPosX = 0, newPosY = 0, newPosZ = 0;
+				
+				hit.entityHit.motionY += 2;
 				Direction dir = WyHelper.get4Directions(hit.entityHit);
 				if(dir == WyHelper.Direction.SOUTH)
-					hit.entityHit.motionZ += 10;
+					newPosX += WyMathHelper.randomWithRange(-5, 5);
 				else if(dir == WyHelper.Direction.EAST)
-					hit.entityHit.motionX -= 10; 
+					newPosX -= WyMathHelper.randomWithRange(-5, 5);
 				else if(dir == WyHelper.Direction.NORTH)
-					hit.entityHit.motionZ -= 10;
+					newPosZ += WyMathHelper.randomWithRange(-5, 5);
 				else if(dir == WyHelper.Direction.WEST)  
-					hit.entityHit.motionX += 10;	
+					newPosZ -= WyMathHelper.randomWithRange(-5, 5);
+
+				((EntityLivingBase)hit.entityHit).setPositionAndUpdate(hit.entityHit.posX + newPosX, hit.entityHit.posY + newPosY, hit.entityHit.posZ + newPosZ);
 			}
 		}
 		
@@ -100,8 +106,16 @@ public class CyborgProjectiles
 		}
 		
 		public void onUpdate()
-		{				
-			MainMod.proxy.spawnCustomParticles(this, ID.PARTICLE_NAME_MERA, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
+		{			
+			if(this.worldObj.isRemote)
+			{
+				EntityParticleFX particle = new EntityParticleFX(this.worldObj, ID.PARTICLE_ICON_MERA, 
+						posX, 
+						posY + 0.5, 
+						posZ, 
+						0, 0, 0);
+				MainMod.proxy.spawnCustomParticles(this, particle);
+			}
 			super.onUpdate();
 		}
 	}

@@ -67,7 +67,7 @@ public class GUIQuests extends GuiScreen
 		String currentQuest = questProps.getQuestIndexFromTracker(questIndex) != null ? questProps.getQuestIndexFromTracker(questIndex).getQuestName() : "None";
 		double currentProgress = questProps.getQuestIndexFromTracker(questIndex) != null ? (questProps.getQuestIndexFromTracker(questIndex).getProgress() / questProps.getQuestIndexFromTracker(questIndex).getMaxProgress()) * 100 : -1;
 		String[] currentDescription = questProps.getQuestIndexFromTracker(questIndex) != null ? questProps.getQuestIndexFromTracker(questIndex).getQuestDescription() : null;
-
+		
 		GL11.glPushMatrix();
 		{
 			double scale = 1.30056;
@@ -82,7 +82,7 @@ public class GUIQuests extends GuiScreen
 		GL11.glPopMatrix();
 		
 		if(currentProgress != -1)
-			mc.fontRenderer.drawString(EnumChatFormatting.BOLD + I18n.format(ID.LANG_GUI_QPROGRESS) + " : " + String.format("%.1f", currentProgress) + "%", posX + 5, posY + 65, WyHelper.hexToRGB("#161616").getRGB());
+			mc.fontRenderer.drawString(EnumChatFormatting.BOLD + I18n.format(ID.LANG_GUI_QUESTS_PROGRESS) + " : " + String.format("%.1f", currentProgress) + "%", posX + 5, posY + 65, WyHelper.hexToRGB("#161616").getRGB());
 
 		if(currentDescription != null)
 		{

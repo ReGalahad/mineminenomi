@@ -92,6 +92,8 @@ public class GUICombatMode extends Gui
 
 			for (int i = 0; i < 8; i++)
 			{
+				//if(abilityProps.getAbilityFromSlot(0) != null)
+				//	System.out.println("" + abilityProps.getAbilityFromSlot(0).isOnCooldown());
 				GL11.glEnable(GL11.GL_BLEND);
 				if (abilityProps.getAbilityFromSlot(i) != null && abilityProps.getAbilityFromSlot(i).isOnCooldown() && !abilityProps.getAbilityFromSlot(i).isDisabled())
 					this.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 24, 0, 23, 23);

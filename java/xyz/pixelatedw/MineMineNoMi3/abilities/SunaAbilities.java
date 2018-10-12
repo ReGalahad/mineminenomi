@@ -8,6 +8,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper.Direction;
@@ -62,7 +63,7 @@ public class SunaAbilities
 			else if(dir == WyHelper.Direction.WEST)  
 				newPosZ -= WyMathHelper.randomWithRange(-10, 10);
 
-			WyNetworkHelper.sendTo(new PacketParticles("sables", target), (EntityPlayerMP) player);
+			WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_SABLES, target), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 			target.setPositionAndUpdate(target.posX + newPosX, target.posY + newPosY, target.posZ + newPosZ);
 			
 			super.hitEntity(player, target);
@@ -91,7 +92,7 @@ public class SunaAbilities
 					}				
 				}	
 				
-				WyNetworkHelper.sendTo(new PacketParticles("groundDeath", player.posX, player.posY, player.posZ), (EntityPlayerMP) player);
+				WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_GROUNDDEATH, player.posX, player.posY, player.posZ), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 
 				super.use(player);
 			}

@@ -19,6 +19,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyRenderHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
+import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilitySync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.gui.extra.GUIAbilitiesList;
 import xyz.pixelatedw.MineMineNoMi3.gui.extra.GUIButtonNoTexture;
@@ -82,12 +83,12 @@ public class GUISelectHotbarAbilities extends GuiScreen
 		{
 			this.drawTexturedModalRect((posX - 280) / 2, (posY - 200) / 2, 0, 23, 27, 26);
 			if(props.hasYamiPower())
-				WyRenderHelper.drawAbilityIcon("yamiyaminomi", (posX - 268) / 2, (posY - 187) / 2, 16, 16);
+				WyRenderHelper.drawDevilFruitIcon("yamiyaminomi", (posX - 268) / 2, (posY - 187) / 2, 16, 16);
 			else
 			{
 				ItemStack df = DevilFruitsHelper.getDevilFruitItem(props.getUsedFruit());
 
-				WyRenderHelper.drawAbilityIcon(df.getUnlocalizedName().replace("item.", ""), (posX - 268) / 2, (posY - 187) / 2, 16, 16);
+				WyRenderHelper.drawDevilFruitIcon(df.getUnlocalizedName().replace("item.", ""), (posX - 268) / 2, (posY - 187) / 2, 16, 16);
 			}
 			this.mc.getTextureManager().bindTexture(ID.TEXTURE_COMBATMODE);	
 		}
@@ -143,11 +144,7 @@ public class GUISelectHotbarAbilities extends GuiScreen
             GL11.glEnable(GL11.GL_BLEND);
 			this.buttonList.add(new GUIButtonNoTexture(i, (posX - 196 + (i * 50)) / 2, posY - 31, 21, 21, ""));
 		}	
-		
-		for(Ability abl : abilityProps.getDevilFruitAbilities())
-			if(abl != null)
-				System.out.println(abl.getAttribute().getAttributeName());
-		
+
         this.devilFruitsAbilitiesList = new GUIAbilitiesList(this, abilityProps, abilityProps.getDevilFruitAbilities());
         this.devilFruitsAbilitiesList.registerScrollButtons(this.buttonList, 998, 999);
    
@@ -170,6 +167,7 @@ public class GUISelectHotbarAbilities extends GuiScreen
     	if(mouseButton == 1 && this.slotSelected > -1 && abilityProps.getAbilityFromSlot(this.slotSelected) != null)
     	{	
     		abilityProps.setAbilityInSlot(this.slotSelected, null);
+			WyNetworkHelper.sendToServer(new PacketAbilitySync(abilityProps));
     	}
     	super.mouseClicked(mouseX, mouseY, mouseButton);
     }

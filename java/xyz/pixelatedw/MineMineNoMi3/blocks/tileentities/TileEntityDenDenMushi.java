@@ -5,9 +5,4 @@ import net.minecraft.tileentity.TileEntity;
 public class TileEntityDenDenMushi extends TileEntity
 {
 	
-	public TileEntityDenDenMushi()
-	{
-		
-	}
-	
 }

@@ -31,7 +31,7 @@ public class UshiBisonAbilities
 		public void use(EntityPlayer player)
 		{	
 			ExtendedEntityStats props = ExtendedEntityStats.get(player);
-			
+
 			if((props.getZoanPoint().equals(ID.ZOANMORPH_POWER) || props.getZoanPoint().equals(ID.ZOANMORPH_SPEED) ) && !this.isOnCooldown)
 			{
 
@@ -58,11 +58,9 @@ public class UshiBisonAbilities
 		
 	    public void duringCooldown(EntityPlayer player, int currentCooldown)
 	    {
-			if(currentCooldown > 130)
-			{
+			if(currentCooldown > 110)
 				for(EntityLivingBase e : WyHelper.getEntitiesNear(player, 1.6))
 					e.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) player), 6);
-			}
 	    }
 	}
 	
@@ -92,7 +90,7 @@ public class UshiBisonAbilities
 			{
 				super.hitEntity(player, target);
 				target.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) player), 20);
-				WyNetworkHelper.sendTo(new PacketParticles("kokuteiCross", target), (EntityPlayerMP) player);
+				WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_KOKUTEICROSS, target), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 				
 				double mX = (double)(-MathHelper.sin(player.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(player.rotationPitch / 180.0F * (float)Math.PI) * 0.4);
 				double mZ = (double)(MathHelper.cos(player.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(player.rotationPitch / 180.0F * (float)Math.PI) * 0.4);

@@ -1,5 +1,8 @@
 package xyz.pixelatedw.MineMineNoMi3.lists;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import xyz.pixelatedw.MineMineNoMi3.EnumFruitType;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.abilities.BaneAbilities;
@@ -83,12 +86,12 @@ public class ListDevilFruits
 			UshiUshiNoMiBison, ToriToriNoMiPhoenix;
 
 	private static final Ability[][] EVERY_FRUIT = 
-		{RokushikiAbilities.abilitiesArray, MeraAbilities.abilitiesArray, HieAbilities.abilitiesArray, BaneAbilities.abilitiesArray, PikaAbilities.abilitiesArray, SukeAbilities.abilitiesArray, 
+		{MeraAbilities.abilitiesArray, HieAbilities.abilitiesArray, BaneAbilities.abilitiesArray, PikaAbilities.abilitiesArray, SukeAbilities.abilitiesArray, 
 				OpeAbilities.abilitiesArray, GoroAbilities.abilitiesArray, MokuAbilities.abilitiesArray, NikyuAbilities.abilitiesArray, BomuAbilities.abilitiesArray, GuraAbilities.abilitiesArray,
 				KageAbilities.abilitiesArray, SunaAbilities.abilitiesArray, MaguAbilities.abilitiesArray, DoruAbilities.abilitiesArray, DokuAbilities.abilitiesArray, GasuAbilities.abilitiesArray,
-				YukiAbilities.abilitiesArray, ItoAbilities.abilitiesArray, FishKarateAbilities.abilitiesArray, HakiAbilities.abilitiesArray, CyborgAbilities.abilitiesArray, BariAbilities.abilitiesArray,
-				HoroAbilities.abilitiesArray, GoeAbilities.abilitiesArray, NoroAbilities.abilitiesArray, YamiAbilities.abilitiesArray, GomuAbilities.abilitiesArray, UshiBisonAbilities.abilitiesArray,
-				SwordsmanAbilities.abilitiesArray, ToriPhoenixAbilities.abilitiesArray, SniperAbilities.abilitiesArray};
+				YukiAbilities.abilitiesArray, ItoAbilities.abilitiesArray, BariAbilities.abilitiesArray, HoroAbilities.abilitiesArray, GoeAbilities.abilitiesArray,
+				NoroAbilities.abilitiesArray, YamiAbilities.abilitiesArray, GomuAbilities.abilitiesArray, UshiBisonAbilities.abilitiesArray, ToriPhoenixAbilities.abilitiesArray,
+				RokushikiAbilities.abilitiesArray, FishKarateAbilities.abilitiesArray, CyborgAbilities.abilitiesArray, HakiAbilities.abilitiesArray, SwordsmanAbilities.abilitiesArray, SniperAbilities.abilitiesArray};
 	
 	public static final Object[] ALL_ENTITIES = new Object[] 
 		{RokushikiProjectiles.abilitiesClassesArray, MeraProjectiles.abilitiesClassesArray, HieProjectiles.abilitiesClassesArray, BaneProjectiles.abilitiesClassesArray, PikaProjectiles.abilitiesClassesArray, 
@@ -101,6 +104,8 @@ public class ListDevilFruits
 	
 	public static void init() 
 	{
+		int totalFruits = 0, totalAbilities = 0;
+		
 		ToriToriNoMiPhoenix = new AkumaNoMi(EnumFruitType.MYTHICALZOAN, ToriPhoenixAbilities.abilitiesArray);
 		addITEM(ToriToriNoMiPhoenix, "Tori Tori no Mi, Model Phoenix");
 		UshiUshiNoMiBison = new AkumaNoMi(EnumFruitType.ZOAN, UshiBisonAbilities.abilitiesArray);
@@ -167,9 +172,18 @@ public class ListDevilFruits
 		addITEM(MeraMeraNoMi, "Mera Mera no Mi");
 
 		for (int i = 0; i < EVERY_FRUIT.length; i++)
+		{		
+			totalFruits++;
 			for (Ability a : EVERY_FRUIT[i])
 				if (a != null)
+				{
+					totalAbilities++;
 					AbilityManager.instance().registerAbility(a);
+				}
+		}
+		
+		Logger.getGlobal().log(Level.INFO, "A total of " + totalFruits + " Devil Fruits have been registered");
+		Logger.getGlobal().log(Level.INFO, "A total of " + totalAbilities + " abilities have been registered");
 	}
 
 	public static void addITEM(AkumaNoMi item, String localizedName) 

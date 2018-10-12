@@ -12,6 +12,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.GasuProjectiles.GasRobe;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.GasuProjectiles.Gastille;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 
 public class YukiProjectiles 
@@ -39,15 +40,25 @@ public class YukiProjectiles
 		
 		public void onUpdate()
 		{	
-			for (int i = 0; i < 1; i++)
+			if(this.worldObj.isRemote)
 			{
-				double offsetX = (new Random().nextInt(4) + 2.0D - 2.0D) / 2.0D;
-				double offsetY = (new Random().nextInt(4) + 2.0D - 2.0D) / 2.0D;
-				double offsetZ = (new Random().nextInt(4) + 2.0D - 2.0D) / 2.0D;
-		      
-				MainMod.proxy.spawnCustomParticles(this, ID.PARTICLE_NAME_YUKI, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ, 0.0, 0.0, 0.0);
+				for (int i = 0; i < 1; i++)
+				{
+					double offsetX = (new Random().nextInt(4) + 2.0D - 2.0D) / 2.0D;
+					double offsetY = (new Random().nextInt(4) + 2.0D - 2.0D) / 2.0D;
+					double offsetZ = (new Random().nextInt(4) + 2.0D - 2.0D) / 2.0D;
+	
+					EntityParticleFX particle = new EntityParticleFX(this.worldObj, ID.PARTICLE_ICON_YUKI, 
+							posX + offsetX, 
+							posY + offsetY, 
+							posZ + offsetZ, 
+							0, 0, 0)
+							.setParticleAge(10).setParticleScale(1.5F);
+					
+					MainMod.proxy.spawnCustomParticles(this, particle);				
+				}
 			}
-			
+				
 			super.onUpdate();
 		}
 	}

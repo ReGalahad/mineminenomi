@@ -11,12 +11,10 @@ import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
 public class EntityPirate extends PirateData
 { 
-	private String[] textures = {"pirate1", "pirate2", "pirate3", "pirate4", "pirate5"};
-	
+
 	public EntityPirate(World world) 
 	{
-		super(world);
-		this.setTexture(textures[this.rand.nextInt(textures.length)]);
+		super(world, new String[] {"pirate1", "pirate2", "pirate3", "pirate4", "pirate5"});
  	} 
 	  
 	public void applyEntityAttributes()

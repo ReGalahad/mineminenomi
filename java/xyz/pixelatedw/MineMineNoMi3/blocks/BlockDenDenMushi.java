@@ -1,8 +1,7 @@
 package xyz.pixelatedw.MineMineNoMi3.blocks;
 
 import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
@@ -11,7 +10,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
@@ -36,18 +34,17 @@ public class BlockDenDenMushi extends BlockContainer
 		FMLNetworkHandler.openGui(par5EntityPlayer, MainMod.getMineMineNoMi(), 2, par1World, par2, par3, par4);
 		return true;
 	}
-	
+
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {return WyHelper.NULL_AABB;} 
 
 	public boolean isOpaqueCube() {return false;}
 
-	public int getRenderType() { return 0; }
+	public int getRenderType() { return -1; }
 	
     public boolean renderAsNormalBlock() { return false; }
     
-	public TileEntity createNewTileEntity(World world, int i)
-	{ 
+	public TileEntity createNewTileEntity(World wolrd, int i)
+	{
 		return new TileEntityDenDenMushi();
 	}
-
 }

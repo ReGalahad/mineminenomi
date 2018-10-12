@@ -12,6 +12,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.HieProjectiles.IceBall;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.HieProjectiles.IceBlockPartisan;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 
 public class GuraProjectiles 
@@ -39,15 +40,27 @@ public class GuraProjectiles
 		}
 		
 		public void onUpdate()
-		{								
-			for (int i = 0; i < 2; i++)
+		{		
+			if(this.worldObj.isRemote)
 			{
-				if(i % 2 == 0)
-					this.worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_LARGE.getParticleName(), this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
-				else
-					MainMod.proxy.spawnCustomParticles(this, ID.PARTICLE_NAME_GURA, this.posX + this.rand.nextFloat() * 2 - 1, this.posY + this.rand.nextFloat() * 2 - 1, this.posZ + this.rand.nextFloat() * 2 - 1, 0.0D, 0.0D, 0.0D);	
+				for (int i = 0; i < 2; i++)
+				{
+					if(i % 2 == 0)
+						this.worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_LARGE.getParticleName(), this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
+					else
+					{
+						EntityParticleFX particle = new EntityParticleFX(this.worldObj, ID.PARTICLE_ICON_GURA2, 
+								posX + this.rand.nextFloat() * 2 - 1, 
+								posY + this.rand.nextFloat() * 2 - 1, 
+								posZ + this.rand.nextFloat() * 2 - 1, 
+								0, 0, 0)
+								.setParticleAge(10).setParticleScale(3);
+						
+						MainMod.proxy.spawnCustomParticles(this, particle);	
+					}
+				}
 			}
-			
+				
 			super.onUpdate();
 		}
 	}	
@@ -66,13 +79,25 @@ public class GuraProjectiles
 		}
 		
 		public void onUpdate()
-		{								
-			for (int i = 0; i < 3; i++)
+		{		
+			if(this.worldObj.isRemote)
 			{
-				if(i % 2 == 0)
-					this.worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_LARGE.getParticleName(), this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
-				else
-					MainMod.proxy.spawnCustomParticles(this, ID.PARTICLE_NAME_GURA, this.posX + this.rand.nextFloat() * 2 - 1, this.posY + this.rand.nextFloat() * 2 - 1, this.posZ + this.rand.nextFloat() * 2 - 1, 0.0D, 0.0D, 0.0D);	
+				for (int i = 0; i < 3; i++)
+				{
+					if(i % 2 == 0)
+						this.worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_LARGE.getParticleName(), this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
+					else
+					{
+						EntityParticleFX particle = new EntityParticleFX(this.worldObj, ID.PARTICLE_ICON_GURA2, 
+								posX + this.rand.nextFloat() * 2 - 1, 
+								posY + this.rand.nextFloat() * 2 - 1, 
+								posZ + this.rand.nextFloat() * 2 - 1, 
+								0, 0, 0)
+								.setParticleAge(10).setParticleScale(3);
+						
+						MainMod.proxy.spawnCustomParticles(this, particle);	
+					}
+				}
 			}
 			
 			super.onUpdate();

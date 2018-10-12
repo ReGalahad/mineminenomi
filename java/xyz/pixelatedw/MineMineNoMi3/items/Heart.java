@@ -13,6 +13,9 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
+import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 
 public class Heart extends Item
 {
@@ -20,12 +23,25 @@ public class Heart extends Item
 	{
 		if(itemStack.getTagCompound() != null && world.getEntityByID(itemStack.getTagCompound().getInteger("owner")) != null)
 		{
-			world.getEntityByID(itemStack.getTagCompound().getInteger("owner")).attackEntityFrom(DamageSource.magic, 5);
-			((EntityLivingBase) world.getEntityByID(itemStack.getTagCompound().getInteger("owner"))).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 250, 1));
-			((EntityLivingBase) world.getEntityByID(itemStack.getTagCompound().getInteger("owner"))).addPotionEffect(new PotionEffect(Potion.confusion.id, 250, 1));
+			EntityLivingBase owner = (EntityLivingBase) world.getEntityByID(itemStack.getTagCompound().getInteger("owner"));
+			if(owner == player)
+			{
+				ExtendedEntityStats props = new ExtendedEntityStats(player);
+				props.setHasHeart(true);
+				/** TODO This throws an error server-side, just make sure it doesn't break anything or find a fix ;) */
+				WyNetworkHelper.sendToServer(new PacketSync(props));
+				WyHelper.removeStackFromInventory(player, itemStack);
+			}
+			else
+			{
+				owner.attackEntityFrom(DamageSource.magic, 5);
+				owner.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 250, 1));
+				owner.addPotionEffect(new PotionEffect(Potion.confusion.id, 250, 1));
+				if(owner.getHealth() <= 0)
+					WyHelper.removeStackFromInventory(player, itemStack);
+			}
 		}
-		else
-			WyHelper.removeStackFromInventory(player, itemStack);			
+
 		return itemStack;
 	}
 	
@@ -43,7 +59,7 @@ public class Heart extends Item
 				list.add(EnumChatFormatting.GOLD + itemStack.getDisplayName().replace("'s Heart", "") + " is dead !");
 		}
 		else
-			list.add(EnumChatFormatting.RED + "I AM JEFF!");
+			list.add(EnumChatFormatting.RED + "SOMEBODY TOUCHA MA HART!");
 	}
 	
 	public void setHeartOwner(ItemStack itemStack, EntityLivingBase e)

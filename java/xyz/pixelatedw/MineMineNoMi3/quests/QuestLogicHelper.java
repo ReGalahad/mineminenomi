@@ -39,6 +39,20 @@ public class QuestLogicHelper
 		return questline[0];		
 	}
 	
+	public static boolean checkForITimedQuests(QuestProperties questProps)
+	{			
+		if(questProps.questsInProgress() <= 0)
+			return false;
+		
+		for(int i = 0; i < questProps.questsInProgress(); i++)
+		{
+			if(questProps.getQuestIndexFromTracker(i) instanceof ITimedQuest)
+				return true;
+		}
+		
+		return false;		
+	}
+	
 	public static boolean isQuestPartofQuestline(Quest quest, Quest[] questline)
 	{		
 		for(int i = 0; i < questline.length; i++)

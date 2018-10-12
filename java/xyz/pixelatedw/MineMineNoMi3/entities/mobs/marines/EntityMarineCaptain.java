@@ -7,12 +7,10 @@ import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
 public class EntityMarineCaptain extends MarineData
 { 
-	private String[] textures = {"marinec1", "marinec2", "marinec3", "marinec4", "marinec5"};
-	
+
 	public EntityMarineCaptain(World world) 
 	{
-		super(world);
-		this.setTexture(textures[this.rand.nextInt(textures.length)]);
+		super(world, new String[] {"marinec1", "marinec2", "marinec3", "marinec4", "marinec5"});
  	}
 	
 	public void applyEntityAttributes()
@@ -35,5 +33,5 @@ public class EntityMarineCaptain extends MarineData
 	}
 	
 	public int getDorikiPower() { return this.worldObj.rand.nextInt(5) + 12; }
-	public int getBellyInPockets() { return this.worldObj.rand.nextInt(20) + 5; }
+	public int getBellyInPockets() { return this.worldObj.rand.nextInt(20) + 10; }
 }

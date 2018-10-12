@@ -11,6 +11,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import xyz.pixelatedw.MineMineNoMi3.MainMod;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
 
@@ -58,7 +59,7 @@ public class PacketAbilitySync implements IMessage
 			AbilityProperties props = AbilityProperties.get(player);	 
 
 			props.loadNBTData(message.data);
-	
+			
 			return null;
 		}
 	}
