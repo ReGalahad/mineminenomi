@@ -109,7 +109,7 @@ public class GUICombatMode extends Gui
 
 			if (props.getRace().equals(ID.RACE_CYBORG))
 			{
-				this.drawTexturedModalRect((posX - 260) / 2, posY - 42, 0, 52, 23, 56);
+				this.drawTexturedModalRect((posX - 260) / 2, posY - 42, 0, 52, 23, 40);
 				int barHeight = (int) (((float) props.getCola() / props.getMaxCola()) * 30) + 23;
 
 				if (barHeight > 0 && barHeight < 24)

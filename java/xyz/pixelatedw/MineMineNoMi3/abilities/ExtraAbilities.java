@@ -40,7 +40,6 @@ public class ExtraAbilities
 				else
 				{
 					props.setZoanPoint(ID.ZOANMORPH_HYBRID);
-					WyHelper.sendMsgToPlayer(player, "<" + player.getDisplayName() + "> Hybrid Point !");
 					WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
 					WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));
 				}
@@ -75,7 +74,6 @@ public class ExtraAbilities
 				else
 				{
 					props.setZoanPoint(ID.ZOANMORPH_POWER);
-					WyHelper.sendMsgToPlayer(player, "<" + player.getDisplayName() + "> Power Point !");
 					WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
 					WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));
 				}
@@ -110,7 +108,6 @@ public class ExtraAbilities
 				else
 				{
 					props.setZoanPoint(ID.ZOANMORPH_SPEED);
-					WyHelper.sendMsgToPlayer(player, "<" + player.getDisplayName() + "> Speed Point !");
 					WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
 					WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));
 				}

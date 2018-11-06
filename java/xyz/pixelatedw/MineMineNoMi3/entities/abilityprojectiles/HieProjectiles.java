@@ -7,7 +7,9 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import xyz.pixelatedw.MineMineNoMi3.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
@@ -86,7 +88,7 @@ public class HieProjectiles
 		
 		public void tasksImapct(MovingObjectPosition hit)
 		{
-			this.worldObj.setBlock((int)this.posX, (int)this.posY, (int)this.posZ, Blocks.packed_ice);
+			DevilFruitsHelper.setBlock(this.worldObj, (int)this.posX, (int)this.posY, (int)this.posZ, Blocks.packed_ice);
 		}
 		
 		public void onUpdate()
@@ -126,11 +128,14 @@ public class HieProjectiles
 		public void tasksImapct(MovingObjectPosition hit)
 		{
 			if(!this.worldObj.isRemote)
-			{
-				WyHelper.createSphere(this, 6, Blocks.packed_ice);
-				WyHelper.createSphere(this, 6, Blocks.packed_ice);
-				WyHelper.createSphere(this, 7, Blocks.packed_ice);
-				WyHelper.createSphere(this, 7, Blocks.packed_ice);
+			{	
+				if(MainConfig.enableGriefing)
+				{
+					WyHelper.createSphere(this, 6, Blocks.packed_ice);
+					WyHelper.createSphere(this, 6, Blocks.packed_ice);
+					WyHelper.createSphere(this, 7, Blocks.packed_ice);
+					WyHelper.createSphere(this, 7, Blocks.packed_ice);
+				}
 			}
 		}
 	}

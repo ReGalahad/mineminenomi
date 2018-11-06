@@ -1,6 +1,5 @@
 package xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.suna;
 
-import java.util.Random;
 import java.util.Timer;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,18 +10,27 @@ import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.ParticleEffect;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListParticleEffects;
 
-public class ParticleEffectGroundDeath extends ParticleEffect
+public class ParticleEffectDesertGirasole extends ParticleEffect
 {
 
 	public void spawn(EntityPlayer player, double posX, double posY, double posZ)
 	{		
-		Timer timer = new Timer(true); 
-		EntityParticleFX particle = new EntityParticleFX(player.worldObj, ID.PARTICLE_ICON_SUNA2, 
-				posX, 
-				posY - 1, 
-				posZ, 
-				0, 0, 0);
-		timer.schedule(ListParticleEffects.createCharge1FX(player, particle.posX, particle.posY, particle.posZ, particle, 0.5, 1, 0.80, 0.2), 0);
+		for (int i = 0; i < 64; i++)
+		{
+			double offsetX = WyMathHelper.randomWithRange(-15, 15);
+			double offsetZ = WyMathHelper.randomWithRange(-15, 15);
+			
+			for (int j = 0; j < 90; j++)
+			{
+				MainMod.proxy.spawnCustomParticles(player,
+						new EntityParticleFX(player.worldObj, ID.PARTICLE_ICON_SUNA2,
+								posX + offsetX,
+								posY - 0.5 - (0.15 * j),
+								posZ + offsetZ,
+								0, 0, 0)
+						.setParticleScale(4).setParticleGravity(-3.8F).setParticleAge((int) (80 + (0.2 * j))));
+			}
+		}	
 	}
 
 }

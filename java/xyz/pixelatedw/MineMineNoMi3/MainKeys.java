@@ -123,14 +123,5 @@ public class MainKeys
 	        		player.inventory.currentItem = i;
 			}
 		}
-	}
-	
-	@SubscribeEvent
-	public void onMoseInput(MouseInputEvent event)
-	{
-		Minecraft minecraft = Minecraft.getMinecraft();
-		EntityPlayer player = minecraft.thePlayer; 
-		ExtendedEntityStats props = ExtendedEntityStats.get(player);
-	}
-	
+	}	
 }

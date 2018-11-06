@@ -8,7 +8,9 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import xyz.pixelatedw.MineMineNoMi3.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper.Direction;
@@ -17,6 +19,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.SunaProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
+import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListParticleEffects;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
@@ -24,8 +27,56 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 public class SunaAbilities 
 {
 
-	public static Ability[] abilitiesArray = new Ability[] {new Barjan(), new Sables(), new GroundDeath(), new DesertSpada()};
+	public static Ability[] abilitiesArray = new Ability[] {new Barjan(), new Sables(), new GroundDeath(), new DesertSpada(), new DesertEncierro(), new DesertGirasole()};
 
+	public static class DesertGirasole extends Ability
+	{
+		public DesertGirasole() 
+		{
+			super(ListAttributes.DESERTGIRASOLE); 
+		}
+		
+		public void startCharging(EntityPlayer player)
+		{
+			if(!this.isOnCooldown)
+				WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_DESERTGIRASOLE, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
+			super.startCharging(player);
+		}
+		
+		public void endCharging(EntityPlayer player)
+		{		
+			if(!this.isOnCooldown)
+			{
+				if(!MainConfig.enableGriefing)
+				{
+					for(int i = -15; i < 15; i++)
+					for(int j = -5; j < 5; j++)
+					for(int k = -15; k < 15; k++)
+					{
+						int posX = (int) (player.posX + i + (i < -WyMathHelper.randomWithRange(8, 12) || i > WyMathHelper.randomWithRange(8, 12) ? WyMathHelper.randomWithRange(-5, 5) : 0));
+						int posY = (int) player.posY + j;
+						int posZ = (int) (player.posZ + k + (k < -WyMathHelper.randomWithRange(8, 12) || k > WyMathHelper.randomWithRange(8, 12) ? WyMathHelper.randomWithRange(-5, 5) : 0));
+						
+						if(!player.worldObj.isAirBlock(posX, posY, posZ) && player.worldObj.getBlock(posX, posY, posZ) != ListMisc.Ope
+								&& player.worldObj.getBlock(posX, posY, posZ) != ListMisc.OpeMid && player.worldObj.getBlock(posX, posY, posZ) != Blocks.bedrock)
+							player.worldObj.setBlock(posX, posY, posZ, ListMisc.SunaSand);				
+					}
+					WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_DESERTGIRASOLE2, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
+				}
+
+				super.endCharging(player);
+			}	
+		}
+	}
+	
+	public static class DesertEncierro extends Ability
+	{
+		public DesertEncierro() 
+		{
+			super(ListAttributes.DESERTENCIERRO); 
+		}
+	}
+	
 	public static class Barjan extends Ability
 	{
 		public Barjan() 
@@ -37,7 +88,7 @@ public class SunaAbilities
 		{		
 			this.projectile = new SunaProjectiles.Barjan(player.worldObj, player, attr);
 			super.use(player);
-		} 
+		}
 	}
 	
 	public static class Sables extends Ability
@@ -79,21 +130,24 @@ public class SunaAbilities
 		
 		public void use(EntityPlayer player)
 		{	
-			if(!isOnCooldown)
+			if(!this.isOnCooldown())
 			{
-				for(EntityLivingBase l : WyHelper.getEntitiesNear(player, 25))
+				if(!MainConfig.enableGriefing)
 				{
-					for(int i = -2; i < 2; i++)
-					for(int j = -3; j < 3; j++)
-					for(int k = -2; k < 2; k++)
+					for(EntityLivingBase l : WyHelper.getEntitiesNear(player, 25))
 					{
-						l.worldObj.setBlock((int) l.posX + k, (int) l.posY - j, (int) l.posZ + i, Blocks.air);
-						l.worldObj.setBlock((int) l.posX + k, (int) l.posY + j, (int) l.posZ + i, Blocks.sand);
-					}				
-				}	
+						for(int i = -2; i < 2; i++)
+						for(int j = -3; j < 3; j++)
+						for(int k = -2; k < 2; k++)
+						{
+							l.worldObj.setBlock((int) l.posX + k, (int) l.posY - j, (int) l.posZ + i, Blocks.air);
+							l.worldObj.setBlock((int) l.posX + k, (int) l.posY + j, (int) l.posZ + i, Blocks.sand);
+						}				
+					}	
+					
+					WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_GROUNDDEATH, player.posX, player.posY, player.posZ), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);			
+				}
 				
-				WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_GROUNDDEATH, player.posX, player.posY, player.posZ), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
-
 				super.use(player);
 			}
 		}
@@ -110,46 +164,77 @@ public class SunaAbilities
 		{		
 			if(!isOnCooldown)
 			{
-				if(WyHelper.get4Directions(player) == WyHelper.Direction.NORTH)
+				if(!MainConfig.enableGriefing)
 				{
-					for(int i = -3; i < 3; i++)
-					for(int j = 0; j < 5; j++)
-					for(int k = 0; k < 12; k++)		
+					if(WyHelper.get4Directions(player) == WyHelper.Direction.NORTH)
 					{
-						player.worldObj.setBlock((int) player.posX + i, (int) player.posY - (j + 1), (int) player.posZ - (k + 2), Blocks.air);
-						player.worldObj.setBlock((int) player.posX + i, (int) player.posY + (j + 1), (int) player.posZ - (k + 2), Blocks.sand);
+						for(int i = -4; i < 6; i++)
+						for(int j = 0; j < 5; j++)
+						for(int k = 0; k < 30; k++)		
+						{
+							int posX = (int) player.posX + i;
+							int posY = (int) player.posY - (j + 1);
+							int posZ = (int) player.posZ - (k + 2);
+							
+							if(player.worldObj.getBlock(posX, posY, posZ) != ListMisc.Ope && player.worldObj.getBlock(posX, posY, posZ) != ListMisc.OpeMid && player.worldObj.getBlock(posX, posY, posZ) != Blocks.bedrock)
+							{
+								player.worldObj.setBlock(posX, posY, posZ, Blocks.air);
+								player.worldObj.setBlock(posX, posY, posZ, ListMisc.SunaSand);
+							}
+						}
 					}
+					else if(WyHelper.get4Directions(player) == WyHelper.Direction.SOUTH)
+					{
+						for(int i = -4; i < 6; i++)
+						for(int j = 0; j < 5; j++)
+						for(int k = 0; k < 30; k++)		
+						{
+							int posX = (int) player.posX + i;
+							int posY = (int) player.posY - (j + 1);
+							int posZ = (int) player.posZ + (k + 2);
+							
+							if(player.worldObj.getBlock(posX, posY, posZ) != ListMisc.Ope && player.worldObj.getBlock(posX, posY, posZ) != ListMisc.OpeMid && player.worldObj.getBlock(posX, posY, posZ) != Blocks.bedrock)
+							{
+								player.worldObj.setBlock(posX, posY, posZ, Blocks.air);
+								player.worldObj.setBlock(posX, posY, posZ, ListMisc.SunaSand);
+							}
+						}
+					}
+					else if(WyHelper.get4Directions(player) == WyHelper.Direction.EAST)
+					{
+						for(int i = 0; i < 30; i++)
+						for(int j = 0; j < 5; j++)
+						for(int k = -4; k < 6; k++)		
+						{
+							int posX = (int) player.posX + (i + 2);
+							int posY = (int) player.posY - (j + 1);
+							int posZ = (int) player.posZ + k;
+							
+							if(player.worldObj.getBlock(posX, posY, posZ) != ListMisc.Ope && player.worldObj.getBlock(posX, posY, posZ) != ListMisc.OpeMid && player.worldObj.getBlock(posX, posY, posZ) != Blocks.bedrock)
+							{
+								player.worldObj.setBlock(posX, posY, posZ, Blocks.air);
+								player.worldObj.setBlock(posX, posY, posZ, ListMisc.SunaSand);
+							}
+						}
+					}
+					else if(WyHelper.get4Directions(player) == WyHelper.Direction.WEST)
+					{
+						for(int i = 0; i < 30; i++)
+						for(int j = 0; j < 5; j++)
+						for(int k = -4; k < 6; k++)
+						{
+							int posX = (int) player.posX - (i + 2);
+							int posY = (int) player.posY - (j + 1);
+							int posZ = (int) player.posZ + k;
+							
+							if(player.worldObj.getBlock(posX, posY, posZ) != ListMisc.Ope && player.worldObj.getBlock(posX, posY, posZ) != ListMisc.OpeMid && player.worldObj.getBlock(posX, posY, posZ) != Blocks.bedrock)
+							{
+								player.worldObj.setBlock(posX, posY, posZ, Blocks.air);
+								player.worldObj.setBlock(posX, posY, posZ, ListMisc.SunaSand);
+							}
+						}	
+					}		
 				}
-				else if(WyHelper.get4Directions(player) == WyHelper.Direction.SOUTH)
-				{
-					for(int i = -3; i < 3; i++)
-					for(int j = 0; j < 5; j++)
-					for(int k = 0; k < 12; k++)		
-					{
-						player.worldObj.setBlock((int) player.posX + i, (int) player.posY - (j + 1), (int) player.posZ + (k + 2), Blocks.air);
-						player.worldObj.setBlock((int) player.posX + i, (int) player.posY + (j + 1), (int) player.posZ + (k + 2), Blocks.sand);
-					}
-				}
-				else if(WyHelper.get4Directions(player) == WyHelper.Direction.EAST)
-				{
-					for(int i = 0; i < 12; i++)
-					for(int j = 0; j < 5; j++)
-					for(int k = -3; k < 3; k++)		
-					{
-						player.worldObj.setBlock((int) player.posX + (i + 2), (int) player.posY - (j + 1), (int) player.posZ + k, Blocks.air);
-						player.worldObj.setBlock((int) player.posX + (i + 2), (int) player.posY + (j + 1), (int) player.posZ + k, Blocks.sand);
-					}
-				}
-				else if(WyHelper.get4Directions(player) == WyHelper.Direction.WEST)
-				{
-					for(int i = 0; i < 12; i++)
-					for(int j = 0; j < 5; j++)
-					for(int k = -3; k < 3; k++)		
-					{
-						player.worldObj.setBlock((int) player.posX - (i + 2), (int) player.posY - (j + 1), (int) player.posZ + k, Blocks.air);
-						player.worldObj.setBlock((int) player.posX - (i + 2), (int) player.posY + (j + 1), (int) player.posZ + k, Blocks.sand);
-					}
-				}				
 				super.use(player);
 			}
 		}

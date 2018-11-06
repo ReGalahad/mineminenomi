@@ -33,6 +33,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.MobRenderer;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.EntityMarine;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.models.ModelMarine;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDojoSensei;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.RenderZoanMorph;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelPhoenixFull;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelPhoenixHybrid;
@@ -75,7 +76,15 @@ public class EventsMorphs
 
 		if (!props.getZoanPoint().toLowerCase().equals("n/a"))
 		{
+			if(event.entity.hurtTime > 0)
+			{
+				GL11.glPushMatrix();
+				GL11.glColor3f(1.0f, 0, 0);	        
+				GL11.glPopMatrix();
+			}
+			
 			event.setCanceled(true);
+			
 			if (props.getUsedFruit().equals("dokudoku"))
 			{
 				if (props.getZoanPoint().toLowerCase().equals(ID.ZOANMORPH_DOKU))
@@ -106,7 +115,7 @@ public class EventsMorphs
 		}
 		
 		
-		/*if(event.entity instanceof EntityMarine)
+/*		if(event.entity instanceof EntityDojoSensei)
 		{
 			GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
 			GL11.glEnable(GL11.GL_LIGHTING);
@@ -119,25 +128,25 @@ public class EventsMorphs
 			GL11.glColor3f(1.0f, 1.0f, 1.0f);
 			
 			// Render original.
-			//new RenderZoanMorph(new ModelBiped(), "null", 1).doRender(event.entity, event.x, event.y, event.z, 0, 0);
+			//new RenderZoanMorph(new ModelBiped(), "null", 2).doRender(event.entity, event.x, event.y, event.z, 0, 0);
 			
 			GL11.glDisable(GL11.GL_LIGHTING);
 			GL11.glStencilFunc(GL11.GL_NOTEQUAL, 1, 0xFFFF);
 			GL11.glStencilOp(GL11.GL_KEEP, GL11.GL_KEEP, GL11.GL_REPLACE);
-			GL11.glLineWidth(1.5f);
-			GL11.glPolygonMode(GL11.GL_FRONT_AND_BACK, GL11.GL_LINE);
+			GL11.glLineWidth(6.5f);
+			GL11.glPolygonMode(GL11.GL_FRONT, GL11.GL_LINE);
 			GL11.glColor4f(1.0F, 1.0F, 0.0F, 1.0F);
 			GL11.glDisable(GL11.GL_TEXTURE_2D);
 			
 			// Render stencil.
-			new RenderZoanMorph(new ModelBiped(), "null", 1).doRender(event.entity, event.x, event.y, event.z, 0, 0);
-			//zoanBisonPower.doRender(event.entity, event.x, event.y, event.z, 0F, 0F);
+			//new RenderZoanMorph(new ModelBiped(), "null", 1.35).doRender(event.entity, event.x, event.y + 1.3, event.z, 0, 0);
+			zoanBisonPower.doRender(event.entity, event.x, event.y, event.z, 0F, 0F);
 
 			GL11.glEnable(GL11.GL_TEXTURE_2D);
 			GL11.glColor4f(1F, 1F, 1F, 1F);
 			GL11.glPopAttrib();
 			
-			event.setCanceled(true);
+			//event.setCanceled(true);
 		}*/
 		
 	}

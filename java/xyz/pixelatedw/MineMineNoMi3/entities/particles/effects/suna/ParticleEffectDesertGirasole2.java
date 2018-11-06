@@ -1,6 +1,5 @@
 package xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.suna;
 
-import java.util.Random;
 import java.util.Timer;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,18 +10,19 @@ import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.ParticleEffect;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListParticleEffects;
 
-public class ParticleEffectGroundDeath extends ParticleEffect
+public class ParticleEffectDesertGirasole2 extends ParticleEffect
 {
 
 	public void spawn(EntityPlayer player, double posX, double posY, double posZ)
 	{		
 		Timer timer = new Timer(true); 
-		EntityParticleFX particle = new EntityParticleFX(player.worldObj, ID.PARTICLE_ICON_SUNA2, 
+		EntityParticleFX particle = new EntityParticleFX(player.worldObj, ID.PARTICLE_ICON_SUNA, 
 				posX, 
 				posY - 1, 
 				posZ, 
-				0, 0, 0);
-		timer.schedule(ListParticleEffects.createCharge1FX(player, particle.posX, particle.posY, particle.posZ, particle, 0.5, 1, 0.80, 0.2), 0);
+				0, 0, 0)
+			.setParticleScale(4).setParticleGravity(-1.5F);
+		timer.schedule(ListParticleEffects.createTornadoFX(player, particle.posX, particle.posY, particle.posZ, particle, 0.3, 1, 4, .8), 0);
 	}
 
 }

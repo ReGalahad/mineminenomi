@@ -21,7 +21,7 @@ public class ParticleEffectTenseiNoSoen2 extends ParticleEffect
 				posY, 
 				posZ, 
 				0, 0, 0);
-		timer.schedule(ListParticleEffects.createWave1FX(player, particle.posX, particle.posY, particle.posZ, particle), 0);
+		timer.schedule(ListParticleEffects.createWave1FX(player, particle.posX, particle.posY, particle.posZ, particle, 20), 0);
 	}
 
 }

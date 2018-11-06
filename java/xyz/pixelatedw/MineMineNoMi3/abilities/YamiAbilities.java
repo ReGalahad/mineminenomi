@@ -13,6 +13,7 @@ import scala.reflect.api.Internals.ReificationSupportApi.SyntacitcSingletonTypeE
 import scala.tools.nsc.backend.icode.BasicBlocks.BasicBlock.SuccessorList;
 import xyz.pixelatedw.MineMineNoMi3.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
@@ -41,40 +42,42 @@ public class YamiAbilities
 		{
 			if(!this.isOnCooldown)
 			{
-				WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_BLACKWORLD, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
-
-				for(int i = 0; i < 8; i++)
+				if(MainConfig.enableGriefing)
 				{
-					int a1 = player.getRNG().nextInt(20) - 10;
-					int a2 = player.getRNG().nextInt(20) - 10;
-					
-					DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1, (int)player.posY , (int)player.posZ + a2, ListMisc.Darkness);		
-					DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1, (int)player.posY + 1, (int)player.posZ + a2, ListMisc.Darkness);		
-					DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1, (int)player.posY + 2, (int)player.posZ + a2, ListMisc.Darkness);	
-					DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1, (int)player.posY + 3, (int)player.posZ + a2, ListMisc.Darkness);	
-					DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1, (int)player.posY + 4, (int)player.posZ + a2, ListMisc.Darkness);
-					
-					DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1 + 1, (int)player.posY, (int)player.posZ + a2, ListMisc.Darkness);		
-					DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1 + 1, (int)player.posY + 1, (int)player.posZ + a2, ListMisc.Darkness);		
-					DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1 + 1, (int)player.posY + 2, (int)player.posZ + a2, ListMisc.Darkness);	
-					DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1 + 1, (int)player.posY + 3, (int)player.posZ + a2, ListMisc.Darkness);	
-					DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1 + 1, (int)player.posY + 4, (int)player.posZ + a2, ListMisc.Darkness);	
-					
-					DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1, (int)player.posY, (int)player.posZ + a2 + 1, ListMisc.Darkness);		
-					DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1, (int)player.posY + 1, (int)player.posZ + a2 + 1, ListMisc.Darkness);		
-					DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1, (int)player.posY + 2, (int)player.posZ + a2 + 1, ListMisc.Darkness);	
-					DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1, (int)player.posY + 3, (int)player.posZ + a2 + 1, ListMisc.Darkness);	
-					DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1, (int)player.posY + 4, (int)player.posZ + a2 + 1, ListMisc.Darkness);	
-
-					DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1 + 1, (int)player.posY, (int)player.posZ + a2 + 1, ListMisc.Darkness);		
-					DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1 + 1, (int)player.posY + 1, (int)player.posZ + a2 + 1, ListMisc.Darkness);		
-					DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1 + 1, (int)player.posY + 2, (int)player.posZ + a2 + 1, ListMisc.Darkness);	
-					DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1 + 1, (int)player.posY + 3, (int)player.posZ + a2 + 1, ListMisc.Darkness);	
-					DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1 + 1, (int)player.posY + 4, (int)player.posZ + a2 + 1, ListMisc.Darkness);	
-
+					WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_BLACKWORLD, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
+	
+					for(int i = 0; i < 8; i++)
+					{
+						int a1 = player.getRNG().nextInt(20) - 10;
+						int a2 = player.getRNG().nextInt(20) - 10;
+						
+						DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1, (int)player.posY , (int)player.posZ + a2, ListMisc.Darkness);		
+						DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1, (int)player.posY + 1, (int)player.posZ + a2, ListMisc.Darkness);		
+						DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1, (int)player.posY + 2, (int)player.posZ + a2, ListMisc.Darkness);	
+						DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1, (int)player.posY + 3, (int)player.posZ + a2, ListMisc.Darkness);	
+						DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1, (int)player.posY + 4, (int)player.posZ + a2, ListMisc.Darkness);
+						
+						DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1 + 1, (int)player.posY, (int)player.posZ + a2, ListMisc.Darkness);		
+						DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1 + 1, (int)player.posY + 1, (int)player.posZ + a2, ListMisc.Darkness);		
+						DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1 + 1, (int)player.posY + 2, (int)player.posZ + a2, ListMisc.Darkness);	
+						DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1 + 1, (int)player.posY + 3, (int)player.posZ + a2, ListMisc.Darkness);	
+						DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1 + 1, (int)player.posY + 4, (int)player.posZ + a2, ListMisc.Darkness);	
+						
+						DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1, (int)player.posY, (int)player.posZ + a2 + 1, ListMisc.Darkness);		
+						DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1, (int)player.posY + 1, (int)player.posZ + a2 + 1, ListMisc.Darkness);		
+						DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1, (int)player.posY + 2, (int)player.posZ + a2 + 1, ListMisc.Darkness);	
+						DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1, (int)player.posY + 3, (int)player.posZ + a2 + 1, ListMisc.Darkness);	
+						DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1, (int)player.posY + 4, (int)player.posZ + a2 + 1, ListMisc.Darkness);	
+	
+						DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1 + 1, (int)player.posY, (int)player.posZ + a2 + 1, ListMisc.Darkness);		
+						DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1 + 1, (int)player.posY + 1, (int)player.posZ + a2 + 1, ListMisc.Darkness);		
+						DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1 + 1, (int)player.posY + 2, (int)player.posZ + a2 + 1, ListMisc.Darkness);	
+						DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1 + 1, (int)player.posY + 3, (int)player.posZ + a2 + 1, ListMisc.Darkness);	
+						DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX + a1 + 1, (int)player.posY + 4, (int)player.posZ + a2 + 1, ListMisc.Darkness);	
+	
+					}
 				}
 				
-
 				super.use(player);
 			}
 		}
@@ -91,15 +94,19 @@ public class YamiAbilities
 		{				
 			if(!this.isOnCooldown)
 			{
-				for(int i = -7; i < 7; i++)
-				for(int j = -5; j < 5; j++)
-				for(int k = -7; k < 7; k++)
+				if(MainConfig.enableGriefing)
 				{
-					if(!player.worldObj.isAirBlock((int) player.posX + i, (int) player.posY + j, (int) player.posZ + k) && player.worldObj.getBlock((int) player.posX + i, (int) player.posY + j, (int) player.posZ + k) != ListMisc.Ope
-							&& player.worldObj.getBlock((int) player.posX + i, (int) player.posY + j, (int) player.posZ + k) != ListMisc.OpeMid && player.worldObj.getBlock((int) player.posX + i, (int) player.posY + j, (int) player.posZ + k) != Blocks.bedrock)
-						player.worldObj.setBlock((int) player.posX + i, (int) player.posY + j, (int) player.posZ + k, ListMisc.Darkness);				
+					for(int i = -7; i < 7; i++)
+					for(int j = -5; j < 5; j++)
+					for(int k = -7; k < 7; k++)
+					{
+						if(!player.worldObj.isAirBlock((int) player.posX + i, (int) player.posY + j, (int) player.posZ + k) && player.worldObj.getBlock((int) player.posX + i, (int) player.posY + j, (int) player.posZ + k) != ListMisc.Ope
+								&& player.worldObj.getBlock((int) player.posX + i, (int) player.posY + j, (int) player.posZ + k) != ListMisc.OpeMid && player.worldObj.getBlock((int) player.posX + i, (int) player.posY + j, (int) player.posZ + k) != Blocks.bedrock)
+							player.worldObj.setBlock((int) player.posX + i, (int) player.posY + j, (int) player.posZ + k, ListMisc.Darkness);				
+					}
+					WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_BLACKHOLE, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 				}
-				WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_BLACKHOLE, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
+				
 				super.use(player);
 			}		
 		}

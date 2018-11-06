@@ -4,12 +4,20 @@ import java.util.HashMap;
 
 import net.minecraft.entity.player.EntityPlayer;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketQuestSync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 
 public class QuestManager
 {
 
+	private static final double VERSION = 1.00;
+	
+	static
+	{
+		WyDebug.debug("Quest Core System version " + VERSION + " loaded!");
+	}
+	
 	private static QuestManager instance;
 	public static QuestManager instance()
 	{
@@ -24,13 +32,13 @@ public class QuestManager
 		
 		if(questProps.hasQuestCompleted(quest) && !quest.isRepeatable())
 		{
-			WyHelper.sendMsgToPlayer(player, quest.getQuestName() + " was completed and cannot be started again !");
+			WyHelper.sendMsgToPlayer(player, quest.getQuestName() + " was completed and cannot be started again!");
 			return null;
 		}
 		
 		if(questProps.hasQuestInTracker(quest))
 		{
-			WyHelper.sendMsgToPlayer(player, quest.getQuestName() + " is already in progress !");
+			WyHelper.sendMsgToPlayer(player, quest.getQuestName() + " is already in progress!");
 			return null;
 		}
 		

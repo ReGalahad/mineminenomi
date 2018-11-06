@@ -22,7 +22,22 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 public class MokuAbilities 
 {
 
-	public static Ability[] abilitiesArray = new Ability[] {new WhiteOut(), new WhiteSnake(), new WhiteLauncher()};
+	public static Ability[] abilitiesArray = new Ability[] {new WhiteOut(), new WhiteSnake(), new WhiteLauncher(), new WhiteStrike()};
+	
+	public static class WhiteStrike extends Ability
+	{
+		public WhiteStrike() 
+		{
+			super(ListAttributes.WHITESTRIKE); 
+		}
+		
+		public void use(EntityPlayer player)
+		{	
+			if(!this.isOnCooldown())
+				WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_WHITESTRIKE, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
+			super.use(player);
+		}
+	}
 	
 	public static class WhiteLauncher extends Ability
 	{

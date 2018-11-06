@@ -1,18 +1,29 @@
 package xyz.pixelatedw.MineMineNoMi3.api.abilities;
 
+import java.util.Arrays;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.network.play.client.C01PacketChatMessage;
+import net.minecraft.network.play.server.S02PacketChat;
+import net.minecraft.network.play.server.S0BPacketAnimation;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import xyz.pixelatedw.MineMineNoMi3.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
+import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilitySync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
@@ -61,7 +72,7 @@ public class Ability
 						l.addPotionEffect(new PotionEffect(p));
 	
 			if(!(this.attr.getAbilityCharges() > 0) && this.attr.getAbilityExplosionPower() > 0)
-				player.worldObj.newExplosion(player, player.posX, player.posY, player.posZ, this.attr.getAbilityExplosionPower(), this.attr.canAbilityExplosionSetFire(), this.attr.canAbilityExplosionDestroyBlocks());		
+				player.worldObj.newExplosion(player, player.posX, player.posY, player.posZ, this.attr.getAbilityExplosionPower(), this.attr.canAbilityExplosionSetFire(), MainConfig.enableGriefing ? this.attr.canAbilityExplosionDestroyBlocks() : false);		
 			
 	    	if(!ID.DEV_EARLYACCESS && !player.capabilities.isCreativeMode)
 	    		WyTelemetry.addStat("abilityUsed_" + this.getAttribute().getAttributeName(), 1);
@@ -69,6 +80,9 @@ public class Ability
 	    	ExtendedEntityStats props = ExtendedEntityStats.get(player);
 	    	AbilityProperties abilityProps = AbilityProperties.get(player);
 	    	props.setTempPreviousAbility(WyHelper.getFancyName(this.attr.getAttributeName()));
+
+			if (player.worldObj instanceof WorldServer && !this.attr.isPassive() && MainConfig.enableAnimeScreaming)
+				((WorldServer)player.worldObj).getEntityTracker().func_151248_b(player, new S02PacketChat(new ChatComponentText("<" + player.getDisplayName() + "> " + this.attr.getAttributeName().toUpperCase() )));
 	    	
 	    	duringRepeater(player);
 			startCooldown();
@@ -126,6 +140,9 @@ public class Ability
 					for(PotionEffect p : this.attr.getPotionEffectsForUser())				
 						player.addPotionEffect(new PotionEffect(p.getPotionID(), Integer.MAX_VALUE, p.getAmplifier(), true));
 				
+				if (player.worldObj instanceof WorldServer && MainConfig.enableAnimeScreaming)
+					((WorldServer)player.worldObj).getEntityTracker().func_151248_b(player, new S02PacketChat(new ChatComponentText("<" + player.getDisplayName() + "> " + this.attr.getAttributeName().toUpperCase() )));	    	
+				
 				startPassive(player);
 				(new Update(player, attr)).start();
 			}			
@@ -178,20 +195,36 @@ public class Ability
 	}
 	
 	
-	
-	public void duringCharging(EntityPlayer player, int currentCharge)
-	{
-
-	}
+	public void duringCharging(EntityPlayer player, int currentCharge) {}
 	
 	public void startCharging(EntityPlayer player)
 	{
 		if(!isOnCooldown)
 		{
+			if (player.worldObj instanceof WorldServer && MainConfig.enableAnimeScreaming)
+			{
+				String[] abilityWords = this.attr.getAttributeName().toUpperCase().replaceAll(" [:]", "").split(" ");
+				System.out.println(Arrays.toString(abilityWords));
+				int noOfWords = (int) Math.ceil((double)abilityWords.length / (abilityWords.length > 2 ? 1.5 : 2));
+				String animeScream = "";
+				
+				if(noOfWords > 1)
+				{
+					StringBuilder sb = new StringBuilder();
+					for(int i = 0; i < noOfWords; i++)
+						sb.append(abilityWords[i] + " ");
+					animeScream = sb.toString().substring(0, sb.toString().length() - 1) + "...";
+				}
+				else
+				{
+					animeScream = this.attr.getAttributeName().toUpperCase();
+				}
+				
+				((WorldServer)player.worldObj).getEntityTracker().func_151248_b(player, new S02PacketChat(new ChatComponentText("<" + player.getDisplayName() + "> " + animeScream )));	    	
+			}
+			
 			isCharging = true;
 			WyNetworkHelper.sendTo(new PacketAbilitySync(AbilityProperties.get(player)), (EntityPlayerMP) player);
-	    	if(!ID.DEV_EARLYACCESS && !player.capabilities.isCreativeMode)
-	    		WyTelemetry.addStat("abilityUsed_" + this.getAttribute().getAttributeName(), 1);
 			(new Update(player, attr)).start();
 		}
 	}
@@ -204,6 +237,28 @@ public class Ability
 		
 		if(projectile != null)
 			player.worldObj.spawnEntityInWorld(projectile);
+		
+		if (player.worldObj instanceof WorldServer && MainConfig.enableAnimeScreaming)
+		{
+			String[] abilityWords = this.attr.getAttributeName().toUpperCase().replaceAll(" [:]", "").split(" ");
+			WyDebug.debug(Arrays.toString(abilityWords));
+			int noOfWords = (int) Math.ceil((double)abilityWords.length / (abilityWords.length > 2 ? 1.5 : 2));
+			String animeScream = "";
+			
+			if(noOfWords > 1)
+			{
+				StringBuilder sb = new StringBuilder();
+				for(int i = noOfWords; i < abilityWords.length; i++)
+					sb.append(abilityWords[i] + " ");
+				animeScream = "..." + sb.toString();
+				
+				((WorldServer)player.worldObj).getEntityTracker().func_151248_b(player, new S02PacketChat(new ChatComponentText("<" + player.getDisplayName() + "> " + animeScream )));
+			}
+		}
+		
+		
+    	if(!ID.DEV_EARLYACCESS && !player.capabilities.isCreativeMode)
+    		WyTelemetry.addStat("abilityUsed_" + this.getAttribute().getAttributeName(), 1);
 		
 		(new Update(player, attr)).start();
 	}
@@ -222,14 +277,19 @@ public class Ability
 	
 	public void hitEntity(EntityPlayer player, EntityLivingBase target) 
 	{
-		if(this.attr.getPotionEffectsForProjectile() != null)
-			for(PotionEffect p : this.attr.getPotionEffectsForProjectile())				
-				target.addPotionEffect(new PotionEffect(p.getPotionID(), p.getDuration(), p.getAmplifier(), true));
+		if(this.attr.getPotionEffectsForHit() != null)
+			for(PotionEffect p : this.attr.getPotionEffectsForHit())				
+				target.addPotionEffect(new PotionEffect(p.getPotionID(), p.getDuration(), p.getAmplifier(), true)); 
+
+		if(this.attr.getAbilityExplosionPower() > 0)
+			player.worldObj.newExplosion(target, target.posX, target.posY, target.posZ, this.attr.getAbilityExplosionPower(), this.attr.canAbilityExplosionSetFire(), MainConfig.enableGriefing ? this.attr.canAbilityExplosionDestroyBlocks() : false);		
 		
 		passiveActive = false;
 		startCooldown();
 		WyNetworkHelper.sendTo(new PacketAbilitySync(AbilityProperties.get(player)), (EntityPlayerMP) player);
 
+		target.attackEntityFrom(DamageSource.causePlayerDamage(player), this.attr.getPunchDamage());
+		
 		(new Update(player, attr)).start();
 	}
 	

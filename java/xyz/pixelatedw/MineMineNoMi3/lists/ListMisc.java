@@ -24,6 +24,7 @@ import xyz.pixelatedw.MineMineNoMi3.blocks.BlockOpeMid;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockPoison;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockStringMid;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockStringWall;
+import xyz.pixelatedw.MineMineNoMi3.blocks.BlockSunaSand;
 import xyz.pixelatedw.MineMineNoMi3.blocks.dials.BlockDialAxe;
 import xyz.pixelatedw.MineMineNoMi3.blocks.dials.BlockDialEisen;
 import xyz.pixelatedw.MineMineNoMi3.blocks.dials.BlockDialFire;
@@ -75,6 +76,7 @@ public class ListMisc
 	public static Block KageBlock = new BlockKage();
 	public static Block StringWall = new BlockStringWall();
 	public static Block StringMid = new BlockStringMid();
+	public static Block SunaSand = new BlockSunaSand();
 	
 	public static Block DialEisenBlock = new BlockDialEisen();
 	public static Block DialFireBlock = new BlockDialFire();
@@ -258,6 +260,7 @@ public class ListMisc
  		addBLOCK(KageBlock			, "Kage Block"			, Float.POSITIVE_INFINITY		, null							, null);
  		addBLOCK(StringWall			, "String Wall"			, Float.POSITIVE_INFINITY		, null							, null);
  		addBLOCK(StringMid			, "String Mid"			, Float.POSITIVE_INFINITY		, TileEntityString.class		, null);
+ 		addBLOCK(SunaSand			, "Suna Sand"			, 1.0F							, null							, null);
 
  		addBLOCK(DialEisenBlock		, "Eisen Dial Block"	, .3F							, null							, null);
  		addBLOCK(DialFireBlock		, "Flame Dial Block"	, .3F							, null							, null);

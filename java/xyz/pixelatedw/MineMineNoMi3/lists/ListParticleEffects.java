@@ -74,16 +74,16 @@ public class ListParticleEffects
 	}
 	
 	//Wave
-	public static TimerTask createWave1FX(EntityLivingBase living, Object fxName)
+	public static TimerTask createWave1FX(EntityLivingBase living, Object fxName, int radius)
 	{
-		return createWave1FX(living, living.posX, living.posY, living.posZ, fxName);
+		return createWave1FX(living, living.posX, living.posY, living.posZ, fxName, radius);
 	}
-	public static TimerTask createWave1FX(EntityLivingBase living, double posX, double posY, double posZ, Object fxName)
+	public static TimerTask createWave1FX(EntityLivingBase living, double posX, double posY, double posZ, Object fxName, int radius)
 	{
 		if(fxName instanceof String)
-			return new ParticleTaskWave1(living, posX, posY, posZ, (String) fxName);
+			return new ParticleTaskWave1(living, posX, posY, posZ, (String) fxName, radius);
 		else if(fxName instanceof EntityParticleFX)
-			return new ParticleTaskWave1(living, posX, posY, posZ, (EntityParticleFX) fxName);
+			return new ParticleTaskWave1(living, posX, posY, posZ, (EntityParticleFX) fxName, radius);
 		
 		return null;
 	}

@@ -68,7 +68,7 @@ public class ID
 	
 	PROJECT_ID = "mineminenomi",
 	PROJECT_NAME = "Mine Mine no Mi",
-	PROJECT_VERSION = "0.4.0",
+	PROJECT_VERSION = "0.4.1",
 	PROJECT_MCVERSION = "1.7.10",
 	PROJECT_SOURCEFOLDER = "D:/Programming/Minecraft Modding/Mine Mine no Mi/src/main/resources/",
 
@@ -98,7 +98,9 @@ public class ID
 	PARTICLEFX_BLUEFLAMES = "blueFlames",
 	PARTICLEFX_ICEAGE = "iceAge",
 	PARTICLEFX_VENOMDEMON = "venomDemon",
-
+	PARTICLEFX_WHITESTRIKE = "whiteStrike",
+	PARTICLEFX_DESERTGIRASOLE = "desertGirasole",
+	PARTICLEFX_DESERTGIRASOLE2 = "desertGirasole2",
 			
 	CREW_ARLONG = "Arlong Pirates",
 	CREW_BAROQUEWORKS = "Baroque Works",
@@ -170,5 +172,5 @@ public class ID
 
 	public static final boolean 
 	
-	DEV_EARLYACCESS = false;
+	DEV_EARLYACCESS = true;
 }

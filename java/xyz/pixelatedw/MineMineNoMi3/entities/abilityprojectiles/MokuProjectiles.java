@@ -104,10 +104,7 @@ public class MokuProjectiles
 		public void tasksImapct(MovingObjectPosition hit)
 		{
 			if(hit.entityHit != null && !hit.entityHit.isDead)
-			{
-				((EntityLivingBase) hit.entityHit).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 240, 1));
-				((EntityLivingBase) hit.entityHit).addPotionEffect(new PotionEffect(Potion.digSlowdown.id, 240, 1));
-			}
+				((EntityLivingBase) hit.entityHit).setPosition(this.getThrower().posX, this.getThrower().posY, this.getThrower().posZ);
 		}
 	}
 }

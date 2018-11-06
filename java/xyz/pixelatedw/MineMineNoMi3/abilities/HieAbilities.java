@@ -1,13 +1,24 @@
 package xyz.pixelatedw.MineMineNoMi3.abilities;
 
+import java.util.Arrays;
+
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
+import xyz.pixelatedw.MineMineNoMi3.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
+import xyz.pixelatedw.MineMineNoMi3.api.math.Circle;
+import xyz.pixelatedw.MineMineNoMi3.api.math.ICircle;
+import xyz.pixelatedw.MineMineNoMi3.api.math.ISphere;
+import xyz.pixelatedw.MineMineNoMi3.api.math.Sphere;
+import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.HieProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
@@ -68,14 +79,33 @@ public class HieAbilities
 		public void use(EntityPlayer player)
 		{
 			if(!this.isOnCooldown)
-			{
-				for (int i = -20; i < 20; i++) 
-				for (int j = -10; j < 10; j++) 
-				for (int k = -20; k < 20; k++)
-					if(!player.worldObj.isAirBlock((int) player.posX + i, (int) player.posY + j, (int) player.posZ + k) && player.worldObj.getBlock((int) player.posX + i, (int) player.posY + j, (int) player.posZ + k) != ListMisc.Ope
-							&& player.worldObj.getBlock((int) player.posX + i, (int) player.posY + j, (int) player.posZ + k) != ListMisc.OpeMid && player.worldObj.getBlock((int) player.posX + i, (int) player.posY + j, (int) player.posZ + k) != Blocks.bedrock)
-							player.worldObj.setBlock((int) player.posX + i, (int) player.posY + j, (int) player.posZ + k, Blocks.packed_ice);
-				
+			{			
+				Sphere.generateFilled((int) player.posX, (int) player.posY, (int) player.posZ, 20, new ISphere()
+				{
+					public void call(int x, int y, int z)
+					{	
+						int posX = x;
+						int posY = y;
+						int posZ = z;
+
+						if(!player.worldObj.isAirBlock(posX, posY, posZ) && player.worldObj.getBlock(posX, posY, posZ) != ListMisc.Ope && player.worldObj.getBlock(posX, posY, posZ) != ListMisc.OpeMid && player.worldObj.getBlock(posX, posY, posZ) != Blocks.bedrock)
+							DevilFruitsHelper.setBlock(player.worldObj, posX, posY, posZ, Blocks.packed_ice);
+					}
+				});
+	
+				Sphere.generateFilled((int) player.posX, (int) player.posY, (int) player.posZ, 20, new ISphere()
+				{
+					public void call(int x, int y, int z)
+					{	
+						int posX = x;
+						int posY = y;
+						int posZ = z;
+
+						if(!player.worldObj.isAirBlock(posX, posY, posZ) && player.worldObj.getBlock(posX, posY, posZ) != ListMisc.Ope && player.worldObj.getBlock(posX, posY, posZ) != ListMisc.OpeMid && player.worldObj.getBlock(posX, posY, posZ) != Blocks.bedrock)
+							DevilFruitsHelper.setBlock(player.worldObj, posX, posY, posZ, Blocks.packed_ice);
+					}
+				});
+
 				WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_ICEAGE, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 				
 				super.use(player);
@@ -106,12 +136,16 @@ public class HieAbilities
 		
 		public void use(EntityPlayer player)
 		{
-			if(!this.isOnCooldown)
+			if(!this.isOnCooldown())
 			{
-				for(EntityLivingBase l : WyHelper.getEntitiesNear(player, 25))
+				if(MainConfig.enableGriefing)
 				{
-					WyHelper.createCube(l, new int[] {2, 4, 2}, Blocks.packed_ice);
+					for(EntityLivingBase l : WyHelper.getEntitiesNear(player, 25))
+					{
+						WyHelper.createCube(l, new int[] {2, 4, 2}, Blocks.packed_ice);
+					}	
 				}
+			
 				super.use(player);
 			}
 		};	

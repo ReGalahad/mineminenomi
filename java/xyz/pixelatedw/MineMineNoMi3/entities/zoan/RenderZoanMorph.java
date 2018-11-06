@@ -6,7 +6,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelZoanMorph;
@@ -67,7 +70,7 @@ public class RenderZoanMorph extends Render
 		GL11.glScalef(1.0F, 1.0F, 1.0F);
 		
 		Minecraft.getMinecraft().renderEngine.bindTexture(this.getEntityTexture(entity));
-		this.model.render(entity, 0.0F, 0.0F, 0F, 0.0F, 0.0F, 0.0625F);
+		this.model.render(entity, 0.0F, 0.0F, 0F, 0F, 0F, 0.0625F);
 		
 		GL11.glPopMatrix();
 	}

@@ -1,1 +1,0 @@
-{"parent": "mineminenomi:item/handheldp", "textures": { "layer0": "mineminenomi:items/hook"} ,"overrides": [{"predicate": { "form": 1 }, "model": "mineminenomi:item/hook_1"}]}

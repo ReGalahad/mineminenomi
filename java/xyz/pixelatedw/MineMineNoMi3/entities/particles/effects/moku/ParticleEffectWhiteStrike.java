@@ -1,5 +1,6 @@
-package xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.suna;
+package xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.moku;
 
+import java.util.Random;
 import java.util.Timer;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -8,18 +9,19 @@ import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.ParticleEffect;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListParticleEffects;
 
-public class ParticleEffectSables extends ParticleEffect
+public class ParticleEffectWhiteStrike extends ParticleEffect
 {
 
 	public void spawn(EntityPlayer player, double posX, double posY, double posZ)
 	{
 		Timer timer = new Timer(true); 
-		EntityParticleFX particle = new EntityParticleFX(player.worldObj, ID.PARTICLE_ICON_SUNA2, 
+		EntityParticleFX particle = new EntityParticleFX(player.worldObj, ID.PARTICLE_ICON_MOKU, 
 				posX, 
-				posY - 1, 
+				posY - 0.8, 
 				posZ, 
-				0, 0, 0);
-		timer.schedule(ListParticleEffects.createTornadoFX(player, particle.posX, particle.posY, particle.posZ, particle, 2.0, 2, 0.35, 0.7), 0);		
+				0, 0, 0)
+			.setParticleScale(4.0F);
+		timer.schedule(ListParticleEffects.createWave1FX(player, particle.posX, particle.posY, particle.posZ, particle, 15), 0);
 	}
-
+	
 }

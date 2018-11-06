@@ -1,6 +1,7 @@
 package xyz.pixelatedw.MineMineNoMi3.gui;
 
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL13;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -42,8 +43,7 @@ public class GUIQuests extends GuiScreen
 		
 		int posX = (this.width - 256) / 2;
 		int posY = (this.height - 256) / 2;		
-			
-				
+						
 		Minecraft.getMinecraft().getTextureManager().bindTexture(ID.TEXTURE_BLANK);
 		GL11.glPushMatrix();
 		{
@@ -57,7 +57,7 @@ public class GUIQuests extends GuiScreen
 			drawTexturedModalRect(0, 0, 0, 0, 256, 256);
 			
 			Minecraft.getMinecraft().getTextureManager().bindTexture(ID.TEXTURE_COMBATMODE);
-			drawTexturedModalRect(-20, 30, 0, 92, 25, 100);	
+			drawTexturedModalRect(-20, 30, 0, 92, 25, 100);
 			drawTexturedModalRect(232, 30, 26, 92, 30, 100);
 			
 		}
@@ -67,6 +67,29 @@ public class GUIQuests extends GuiScreen
 		String currentQuest = questProps.getQuestIndexFromTracker(questIndex) != null ? questProps.getQuestIndexFromTracker(questIndex).getQuestName() : "None";
 		double currentProgress = questProps.getQuestIndexFromTracker(questIndex) != null ? (questProps.getQuestIndexFromTracker(questIndex).getProgress() / questProps.getQuestIndexFromTracker(questIndex).getMaxProgress()) * 100 : -1;
 		String[] currentDescription = questProps.getQuestIndexFromTracker(questIndex) != null ? questProps.getQuestIndexFromTracker(questIndex).getQuestDescription() : null;
+		
+		if(questProps.getQuestIndexFromTracker(questIndex) != null)
+		{
+			GL11.glPushMatrix();
+			{
+				double scale = 1.2156;
+	
+				GL11.glTranslated(posX + 12, posY + 90, 0);
+				GL11.glTranslated(256, 256, 0);
+	
+				GL11.glScaled(scale, scale, 0);
+				GL11.glTranslated(-256, -256, 0);
+				GL11.glRotated(-12, 0, 0, 1);
+					
+				if(questProps.getQuestIndexFromTracker(questIndex).isPrimary())
+					GL11.glColor3f(1.0F, 1.0F, 0.0F);
+				else
+					GL11.glColor3f(1.0F, 1.0F, 1.0F);
+					
+				drawTexturedModalRect(0, 0, 103, 200, 12, 33);	
+			}
+			GL11.glPopMatrix();
+		}
 		
 		GL11.glPushMatrix();
 		{

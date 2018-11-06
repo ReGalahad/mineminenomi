@@ -11,6 +11,7 @@ import net.minecraft.world.WorldServer;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.EntityMorgan;
+import xyz.pixelatedw.MineMineNoMi3.world.scenario.Scenario;
 import xyz.pixelatedw.MineMineNoMi3.world.scenario.ScenarioManager;
 
 public class TeleporterScenarioArena extends Teleporter
@@ -30,9 +31,28 @@ public class TeleporterScenarioArena extends Teleporter
 	{
 		EntityPlayerMP playerMP = (EntityPlayerMP) entity;
 		
-        playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, ID.DIMENSION_ID_SCENARIOARENA, this);
-
-        ScenarioManager.scenarios.get(ID.SCENARIO_ROMANCEDAWN_CAPTAINMORGAN).load(playerMP, playerMP.worldObj);
+        Scenario scenario = ScenarioManager.scenarios.get(scenarioName);
+        
+		if(ScenarioManager.canSpawn(worldServerInstance, ScenarioManager.instanceSpawnX, ScenarioManager.instanceSpawnY, ScenarioManager.instanceSpawnZ))
+		{
+	        playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, ID.DIMENSION_ID_SCENARIOARENA, this);
+			
+	        scenario.scenarioXPos = ScenarioManager.instanceSpawnX;
+	        scenario.scenarioYPos = ScenarioManager.instanceSpawnY;
+	        scenario.scenarioZPos = ScenarioManager.instanceSpawnZ;
+	        
+	        scenario.load(playerMP, worldServerInstance);
+		}
+	}
+	
+	public void endScenario(Entity entity, String scenarioName)
+	{
+		EntityPlayerMP playerMP = (EntityPlayerMP) entity;
+		
+		ScenarioManager.scenarios.get(scenarioName).unload(playerMP, playerMP.worldObj);
+		
+        playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, 0, this);
+		
 	}
 
 	public void placeInPortal(Entity entity, double x, double y, double z, double f)

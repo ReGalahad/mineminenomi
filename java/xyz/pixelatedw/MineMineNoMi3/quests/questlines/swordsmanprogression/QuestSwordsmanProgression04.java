@@ -55,7 +55,7 @@ public class QuestSwordsmanProgression04 extends Quest implements IHitCounterQue
 
 	public void finishQuest(EntityPlayer player)
 	{
-		//WyHelper.sendMsgToPlayer(player, "<Swordsman Master> That's a really nice blade you have there, really strong indeed. Fine, I will train you, when you're ready come and talk with me again !");
+		WyHelper.sendMsgToPlayer(player, "<Swordsman Master> I hope you've learned something from this. Now for the final test...");
 		
 		AbilityProperties abilityProps = AbilityProperties.get(player);
 		

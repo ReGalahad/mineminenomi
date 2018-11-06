@@ -16,11 +16,14 @@ import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.ito.ParticleEffec
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.mera.ParticleEffectDaiEnkai;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.mera.ParticleEffectDaiEnkai2;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.moku.ParticleEffectWhiteLauncher;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.moku.ParticleEffectWhiteStrike;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.pika.ParticleEffectAmaterasu;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.pika.ParticleEffectFlash;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.pika.ParticleEffectYataNoKagami;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.rokushiki.ParticleEffectGeppo;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.sniper.ParticleEffectKemuriBoshi;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.suna.ParticleEffectDesertGirasole;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.suna.ParticleEffectDesertGirasole2;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.suna.ParticleEffectGroundDeath;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.suna.ParticleEffectSables;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.toriphoenix.ParticleEffectBlueFlames;
@@ -64,6 +67,7 @@ public class ParticleManager
 		
 		// Moku
 		map.put(ID.PARTICLEFX_WHITELAUNCHER, new ParticleEffectWhiteLauncher());
+		map.put(ID.PARTICLEFX_WHITESTRIKE, new ParticleEffectWhiteStrike());
 		
 		// Fishman
 		map.put(ID.PARTICLEFX_SAMEHADA, new ParticleEffectSamehada());	
@@ -71,7 +75,9 @@ public class ParticleManager
 		// Suna
 		map.put(ID.PARTICLEFX_SABLES, new ParticleEffectSables());
 		map.put(ID.PARTICLEFX_GROUNDDEATH, new ParticleEffectGroundDeath());	
-		
+		map.put(ID.PARTICLEFX_DESERTGIRASOLE, new ParticleEffectDesertGirasole());
+		map.put(ID.PARTICLEFX_DESERTGIRASOLE2, new ParticleEffectDesertGirasole2());
+
 		// Ushi Bison
 		map.put(ID.PARTICLEFX_KOKUTEICROSS, new ParticleEffectKokuteiCross());	
 		

@@ -26,11 +26,11 @@ public class AkumaNoMiBox extends Item
 	private AkumaNoMi[] tier3Fruits = new AkumaNoMi[] 
 			{ListDevilFruits.MeraMeraNoMi, ListDevilFruits.HieHieNoMi, ListDevilFruits.PikaPikaNoMi, ListDevilFruits.GoroGoroNoMi, ListDevilFruits.SunaSunaNoMi, ListDevilFruits.MaguMaguNoMi, 
 			 ListDevilFruits.GasuGasuNoMi, ListDevilFruits.MokuMokuNoMi, ListDevilFruits.YukiYukiNoMi, ListDevilFruits.YamiYamiNoMi, ListDevilFruits.ToriToriNoMiPhoenix, ListDevilFruits.GuraGuraNoMi};
-			
+
 	public AkumaNoMiBox(int tier)
 	{
 		this.tier = tier;
-	} 
+	}
 
 	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
 	{

@@ -23,6 +23,7 @@ import xyz.pixelatedw.MineMineNoMi3.gui.extra.GUIButtonNoTexture;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListQuests;
 import xyz.pixelatedw.MineMineNoMi3.quests.EnumQuestlines;
+import xyz.pixelatedw.MineMineNoMi3.quests.IProgressionQuest;
 import xyz.pixelatedw.MineMineNoMi3.quests.QuestLogicHelper;
 
 public class GUIQuestYesNo extends GuiScreen
@@ -33,13 +34,12 @@ public class GUIQuestYesNo extends GuiScreen
 	private QuestProperties questProps;
 	private Quest currentQuestToDisplay;
 	
-	public GUIQuestYesNo(EntityPlayer player)
+	public GUIQuestYesNo(EntityPlayer player, int x, int y, int z)
 	{
 		this.player = player;
 		this.props = ExtendedEntityStats.get(player);
 		this.questProps = QuestProperties.get(player);
-		/** TODO Change this so you get the QUESTLINE from the current primary quest */
-		this.currentQuestToDisplay = QuestLogicHelper.getQuestlineCurrentQuest(EnumQuestlines.SWORDSMANPROGRESSION.getQuests(), questProps);
+		this.currentQuestToDisplay = QuestLogicHelper.getQuestlineCurrentQuest(QuestLogicHelper.getQuestlineFromSelectedEntity(player, x, y, z).getQuests(), questProps);
 	}
 
 	public void drawScreen(int x, int y, float f)

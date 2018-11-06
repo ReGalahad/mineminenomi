@@ -6,6 +6,7 @@ import java.util.TimerTask;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import xyz.pixelatedw.MineMineNoMi3.MainMod;
+import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
 
 public class ParticleTaskWave1 extends TimerTask
@@ -14,23 +15,26 @@ public class ParticleTaskWave1 extends TimerTask
 	private EntityLivingBase player;
 	private Object particle;
 	private double posX, posY, posZ;
-
-	public ParticleTaskWave1(EntityLivingBase player, double posX, double posY, double posZ, String particle)
+	private int radius;
+	
+	public ParticleTaskWave1(EntityLivingBase player, double posX, double posY, double posZ, String particle, int radius)
 	{
 		this.player = player;
 		this.particle = particle;
 		this.posX = posX;
 		this.posY = posY;
 		this.posZ = posZ;
+		this.radius = radius;
 	}
 	
-	public ParticleTaskWave1(EntityLivingBase player, double posX, double posY, double posZ, EntityParticleFX particle)
+	public ParticleTaskWave1(EntityLivingBase player, double posX, double posY, double posZ, EntityParticleFX particle, int radius)
 	{
 		this.player = player;
 		this.particle = particle;
 		this.posX = posX;
 		this.posY = posY;
 		this.posZ = posZ;
+		this.radius = radius;
 	}
 	
 	public void run()
@@ -39,7 +43,7 @@ public class ParticleTaskWave1 extends TimerTask
 		double x, y, z;
 		Random rand = this.player.getRNG();
 
-		while(t < 20)
+		while(t < radius)
 		{
 			t += 0.5 * Math.PI;
 			
@@ -47,15 +51,15 @@ public class ParticleTaskWave1 extends TimerTask
 			{
 				x = t * Math.cos(theta);
 				//y = Math.sin(theta / (0.5 * t));
-				//y = Math.exp(t * -0.4) + Math.sin((t*t) * 0.05);
-				y = rand.nextInt(1) + rand.nextDouble();
+				//y = Math.exp(t * -0.4) + Math.sin((t*t) * 0.25);
+				y = rand.nextInt(1);
 				z = t * Math.sin(theta);
 				
 				try
 				{
 					if(this.particle instanceof EntityParticleFX)
 					{
-						EntityParticleFX clone = ((EntityParticleFX)particle).clone(this.posX + (rand.nextInt(4) - 2) + x, this.posY + 1 + y, this.posZ  + (rand.nextInt(4) - 2) + z);
+						EntityParticleFX clone = ((EntityParticleFX)particle).clone(this.posX + WyMathHelper.randomWithRange(-3, 3) + x, this.posY + 1 + y, this.posZ  + WyMathHelper.randomWithRange(-3, 3) + z);
 						Minecraft.getMinecraft().effectRenderer.addEffect(clone);
 					}
 					else							

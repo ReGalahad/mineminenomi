@@ -10,6 +10,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
+import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
@@ -88,14 +89,17 @@ public class DokuProjectiles
 		}	
 		
 		public void tasksImapct(MovingObjectPosition hit)
-		{		
-			for (int i = 0; i < 20; i++)
+		{	
+			if(MainConfig.enableGriefing)
 			{
-				double offsetX = new Random().nextInt(5) - 3;
-				double offsetZ = new Random().nextInt(5) - 3;
-				
-				if(this.worldObj.getBlock((int)(this.posX + offsetX), (int)this.posY, (int)(this.posZ + offsetZ)) == Blocks.air && this.worldObj.getBlock((int)(this.posX + offsetX), (int)this.posY - 1, (int)(this.posZ + offsetZ)) != Blocks.air)
-					this.worldObj.setBlock((int)(this.posX + offsetX), (int)this.posY, (int)(this.posZ + offsetZ), ListMisc.Poison);
+				for (int i = 0; i < 20; i++)
+				{
+					double offsetX = new Random().nextInt(5) - 3;
+					double offsetZ = new Random().nextInt(5) - 3;
+					
+					if(this.worldObj.getBlock((int)(this.posX + offsetX), (int)this.posY, (int)(this.posZ + offsetZ)) == Blocks.air && this.worldObj.getBlock((int)(this.posX + offsetX), (int)this.posY - 1, (int)(this.posZ + offsetZ)) != Blocks.air)
+						this.worldObj.setBlock((int)(this.posX + offsetX), (int)this.posY, (int)(this.posZ + offsetZ), ListMisc.Poison);
+				}
 			}
 		};
 	}

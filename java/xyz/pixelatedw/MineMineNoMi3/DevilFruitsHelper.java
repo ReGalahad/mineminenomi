@@ -1,15 +1,19 @@
 package xyz.pixelatedw.MineMineNoMi3;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+
+import com.google.common.collect.Multimap;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EntityLivingBase;import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
 import net.minecraft.potion.Potion;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
@@ -37,11 +41,36 @@ public class DevilFruitsHelper
 		{"toritoriphoenix", "phoenix"}
 	};
 	
+	public static String[] flyingFruits = new String[]
+	{
+		"gasugasu", "sunasuna"
+	};
+	
 	public static Block[] replaceableBlocks = new Block[] { Blocks.air, Blocks.tallgrass, Blocks.snow_layer, Blocks.red_flower, Blocks.yellow_flower, Blocks.water, Blocks.flowing_water, Blocks.lava, 
 			Blocks.flowing_lava, Blocks.waterlily, Blocks.redstone_wire, Blocks.double_plant, Blocks.wheat, Blocks.carrots, Blocks.carpet, Blocks.cake, Blocks.sapling, Blocks.deadbush, Blocks.web,
 			Blocks.wooden_pressure_plate, Blocks.stone_pressure_plate, Blocks.light_weighted_pressure_plate, Blocks.heavy_weighted_pressure_plate, Blocks.carrots, Blocks.carpet, Blocks.vine,
 			ListMisc.Poison, ListMisc.DemonPoison, Blocks.torch, Blocks.redstone_torch};
 	
+    public static boolean setBlock(World world, int posX, int posY, int posZ, Block block)
+    {
+    	if(MainConfig.enableGriefing)
+        	return world.setBlock(posX, posY, posZ, block);
+    	
+    	return false;
+    }
+	
+    public static boolean isSword(ItemStack itemStack)
+    {
+    	if(itemStack.getItem() instanceof ItemSword)
+    		return true;
+    	
+    	Multimap multimap = itemStack.getAttributeModifiers();
+    	if(multimap.containsKey(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName()))
+    		return true;	
+    	
+    	return false;
+    }
+    
 	public static boolean verifyIfAbilityIsBanned(Ability a)
 	{
 		for(String str : MainConfig.abilityRestrictions)
@@ -103,26 +132,31 @@ public class DevilFruitsHelper
 		ExtendedEntityStats props = ExtendedEntityStats.get(player);
 		QuestProperties questProps = QuestProperties.get(player);
 		AbilityProperties abilityProps = AbilityProperties.get(player);
-
+		
 		if(props.getFightStyle().equals(ID.FSTYLE_SWORDSMAN))
 		{
-			abilityProps.addRacialAbility(SwordsmanAbilities.SHISHISHISONSON);
+			if(!verifyIfAbilityIsBanned(SwordsmanAbilities.SHISHISHISONSON))
+				abilityProps.addRacialAbility(SwordsmanAbilities.SHISHISHISONSON);
 		
 			if(MainConfig.enableQuestProgression)
 			{
-				if(questProps.hasQuestCompleted(ListQuests.swordsmanProgression04))
+				if(questProps.hasQuestCompleted(ListQuests.swordsmanProgression04) && !verifyIfAbilityIsBanned(SwordsmanAbilities.SANBYAKUROKUJUPOUNDHO))
 					abilityProps.addRacialAbility(SwordsmanAbilities.SANBYAKUROKUJUPOUNDHO);
 			}
 			else
 			{
-				abilityProps.addRacialAbility(SwordsmanAbilities.SANBYAKUROKUJUPOUNDHO);
-				abilityProps.addRacialAbility(SwordsmanAbilities.YAKKODORI);
-				abilityProps.addRacialAbility(SwordsmanAbilities.OTATSUMAKI);
+				if(!verifyIfAbilityIsBanned(SwordsmanAbilities.SANBYAKUROKUJUPOUNDHO))
+					abilityProps.addRacialAbility(SwordsmanAbilities.SANBYAKUROKUJUPOUNDHO);
+				if(!verifyIfAbilityIsBanned(SwordsmanAbilities.YAKKODORI))
+					abilityProps.addRacialAbility(SwordsmanAbilities.YAKKODORI);
+				if(!verifyIfAbilityIsBanned(SwordsmanAbilities.OTATSUMAKI))
+					abilityProps.addRacialAbility(SwordsmanAbilities.OTATSUMAKI);
 			}
 		}
 		else if(props.getFightStyle().equals(ID.FSTYLE_SNIPER))
 		{
-			abilityProps.addRacialAbility(SniperAbilities.KAENBOSHI);
+			if(!verifyIfAbilityIsBanned(SniperAbilities.KAENBOSHI))
+				abilityProps.addRacialAbility(SniperAbilities.KAENBOSHI);
 			
 			if(MainConfig.enableQuestProgression)
 			{
@@ -130,9 +164,12 @@ public class DevilFruitsHelper
 			}
 			else
 			{
-				abilityProps.addRacialAbility(SniperAbilities.KEMURIBOSHI);
-				abilityProps.addRacialAbility(SniperAbilities.RENPATSUNAMARIBOSHI);
-				abilityProps.addRacialAbility(SniperAbilities.SAKURETSUSABOTENBOSHI);	
+				if(!verifyIfAbilityIsBanned(SniperAbilities.KEMURIBOSHI))
+					abilityProps.addRacialAbility(SniperAbilities.KEMURIBOSHI);
+				if(!verifyIfAbilityIsBanned(SniperAbilities.RENPATSUNAMARIBOSHI))
+					abilityProps.addRacialAbility(SniperAbilities.RENPATSUNAMARIBOSHI);
+				if(!verifyIfAbilityIsBanned(SniperAbilities.SAKURETSUSABOTENBOSHI))
+					abilityProps.addRacialAbility(SniperAbilities.SAKURETSUSABOTENBOSHI);	
 			}
 		}
 	}

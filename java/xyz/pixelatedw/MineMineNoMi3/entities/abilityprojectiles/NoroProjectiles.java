@@ -60,9 +60,7 @@ public class NoroProjectiles
 				{
 					target.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 240, 10));
 					target.addPotionEffect(new PotionEffect(Potion.digSlowdown.id, 240, 10));
-				}
-				
-				System.out.println(target.getActivePotionEffect(Potion.moveSlowdown).getDuration());
+				}			
 			}
 		}
 	}	

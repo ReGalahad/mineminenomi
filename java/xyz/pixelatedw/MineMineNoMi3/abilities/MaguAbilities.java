@@ -3,8 +3,12 @@ package xyz.pixelatedw.MineMineNoMi3.abilities;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.world.World;
+import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
+import xyz.pixelatedw.MineMineNoMi3.api.math.ISphere;
+import xyz.pixelatedw.MineMineNoMi3.api.math.Sphere;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.MaguProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
@@ -25,13 +29,24 @@ public class MaguAbilities
 		{		
 			if(!this.isOnCooldown)
 			{
-				for (int i = -10; i < 10; i++) 
-				for (int j = -5; j < 5; j++) 
-				for (int k = -10; k < 10; k++)
-					if(!player.worldObj.isAirBlock((int) player.posX + i, (int) player.posY + j, (int) player.posZ + k) && player.worldObj.getBlock((int) player.posX + i, (int) player.posY + j, (int) player.posZ + k) != ListMisc.Ope
-							&& player.worldObj.getBlock((int) player.posX + i, (int) player.posY + j, (int) player.posZ + k) != ListMisc.OpeMid && player.worldObj.getBlock((int) player.posX + i, (int) player.posY + j, (int) player.posZ + k) != Blocks.bedrock)
-						player.worldObj.setBlock((int) player.posX + i, (int) player.posY + j, (int) player.posZ + k, Blocks.flowing_lava);	
 				
+				final World world = player.worldObj;
+				if(MainConfig.enableGriefing)
+				{
+					Sphere.generateFilled((int) player.posX, (int) player.posY, (int) player.posZ, 10, new ISphere()
+					{
+						public void call(int x, int y, int z)
+						{	
+							int posX = x;
+							int posY = y;
+							int posZ = z;
+							
+							if(!player.worldObj.isAirBlock(posX, posY, posZ) && player.worldObj.getBlock(posX, posY, posZ) != ListMisc.Ope && player.worldObj.getBlock(posX, posY, posZ) != ListMisc.OpeMid && player.worldObj.getBlock(posX, posY, posZ) != Blocks.bedrock)
+								player.worldObj.setBlock(posX, posY, posZ, Blocks.lava);
+						}
+					});
+				}
+
 				super.use(player);
 			}
 		} 

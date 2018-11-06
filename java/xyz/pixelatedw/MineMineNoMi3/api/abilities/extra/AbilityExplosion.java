@@ -17,6 +17,7 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
+import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 
 public class AbilityExplosion extends Explosion
 {
@@ -147,7 +148,7 @@ public class AbilityExplosion extends Explosion
 		int k1;
 		Block block;
 
-		if (this.isSmoking)
+		if (this.isSmoking && MainConfig.enableGriefing)
 		{
 			iterator = this.affectedBlockPositions.iterator();
 

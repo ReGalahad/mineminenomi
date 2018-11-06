@@ -2,6 +2,7 @@ package xyz.pixelatedw.MineMineNoMi3.events;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Scanner;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -181,6 +182,8 @@ public class EventsPersistence
 				{
 					if(props.getUsedFruit().equals("toritoriphoenix") && !props.getZoanPoint().toLowerCase().equals("n/a"))
 						player.capabilities.allowFlying = true;
+					else if(Arrays.stream(DevilFruitsHelper.flyingFruits).anyMatch(p -> props.getUsedFruit().equalsIgnoreCase(p)))
+						player.capabilities.allowFlying = true;
 					else
 						player.capabilities.allowFlying = false;
 				}
@@ -188,6 +191,9 @@ public class EventsPersistence
 				{
 					if(player.isInWater() && !player.capabilities.isCreativeMode)
 						player.capabilities.isFlying = false;
+					
+					if(!Arrays.stream(DevilFruitsHelper.flyingFruits).anyMatch(p -> props.getUsedFruit().equalsIgnoreCase(p)))
+						player.capabilities.allowFlying = false;
 					
 					if(props.getZoanPoint().toLowerCase().equals("n/a") || (!props.getUsedFruit().equals("toritoriphoenix")))
 					{
@@ -458,13 +464,12 @@ public class EventsPersistence
 				
 				if(target instanceof EntityNewMob)
 				{				
-					/*plusDoriki = ((EntityNewMob) target).getDorikiPower() + rng;*/
 					if((props.getDoriki() / 100) > ((EntityNewMob) target).getDorikiPower())
 					{
 						int x = (props.getDoriki() / 100) - ((EntityNewMob) target).getDorikiPower();
-						if(x > 0)
+						if(x <= 0)
 							x = 1;
-						
+
 						plusDoriki = 1 / x;
 						if(plusDoriki < 1)
 							plusDoriki = 1;

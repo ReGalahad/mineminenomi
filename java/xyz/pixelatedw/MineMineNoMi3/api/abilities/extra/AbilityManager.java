@@ -10,6 +10,14 @@ import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
 
 public class AbilityManager 
 {
+	
+	private static final double VERSION = 1.00;
+	
+	static
+	{
+		WyDebug.debug("Ability Core System version " + VERSION + " loaded!");
+	}
+	
 	private static AbilityManager instance;
 	public static AbilityManager instance()
 	{

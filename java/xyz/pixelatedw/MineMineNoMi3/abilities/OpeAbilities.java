@@ -28,6 +28,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.math.ISphere;
 import xyz.pixelatedw.MineMineNoMi3.api.math.Sphere;
+import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockOpeMid;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockStringMid;
@@ -202,8 +203,8 @@ public class OpeAbilities
 									int nPosY = (int) prevEntity.posY;
 									int nPosZ = (int) prevEntity.posZ;
 
-									prevEntity.setPosition(entity.posX + r.nextInt(5), entity.posY, entity.posZ + r.nextInt(5));
-									entity.setPosition(nPosX + r.nextInt(5), nPosY, nPosZ + r.nextInt(5));
+									prevEntity.setPosition(entity.posX + WyMathHelper.randomWithRange(-5, 5), entity.posY, entity.posZ + WyMathHelper.randomWithRange(-5, 5));
+									entity.setPosition(nPosX + WyMathHelper.randomWithRange(-5, 5), nPosY, nPosZ + WyMathHelper.randomWithRange(-5, 5));
 								}
 							}
 						}
@@ -272,8 +273,6 @@ public class OpeAbilities
 		public void hitEntity(EntityPlayer player, EntityLivingBase target)
 		{
 			super.hitEntity(player, target);
-			target.attackEntityFrom(DamageSource.causePlayerDamage(player), 40);
-			player.worldObj.newExplosion(target, target.posX, target.posY, target.posZ, 1, false, true);
 			WyNetworkHelper.sendTo(new PacketParticles(ID.PARTICLEFX_ELTHOR, target.posX, target.posY, target.posZ), (EntityPlayerMP) player);
 		}
 	}

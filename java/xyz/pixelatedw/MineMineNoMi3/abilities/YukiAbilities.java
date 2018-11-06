@@ -10,6 +10,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.math.ISphere;
@@ -36,9 +37,9 @@ public class YukiAbilities
 		
 		public void use(EntityPlayer player)
 		{		
-			if(!player.worldObj.isRemote)
+			if(!isOnCooldown)
 			{
-				if(!isOnCooldown)
+				if(MainConfig.enableGriefing)
 				{
 					if(WyHelper.get4Directions(player) == WyHelper.Direction.NORTH)
 					{
@@ -68,11 +69,11 @@ public class YukiAbilities
 						for(int z = -3; z <= 3; z++)
 							player.worldObj.setBlock(((int) player.posX - 3) - x, (int) player.posY + y, (int) player.posZ - z, Blocks.snow);
 					}
-					
-					super.use(player);
 				}
+					
+				super.use(player);
 			}
-		} 
+		}
 	}
 	
 	public static class TabiraYuki extends Ability
@@ -115,15 +116,18 @@ public class YukiAbilities
 					e.attackEntityFrom(DamageSource.causePlayerDamage(player), 8);
 					e.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 200, 2));
 					
-					Sphere.generate((int)(int) player.posX, (int)(int) player.posY, (int)(int) player.posZ, 25, new ISphere()
-				    { 
-						public void call(int x, int y, int z)
-						{
-			    			for(int i = -4; i <= 4; i++)
-					    		if(player.worldObj.isAirBlock(x, y, z) && player.worldObj.getBlock(x, y - 1, z) != Blocks.air && player.worldObj.getBlock(x, y - 1, z) != Blocks.snow_layer)
-					    			player.worldObj.setBlock(x, y, z, Blocks.snow_layer);
-						}
-				    });
+					if(MainConfig.enableGriefing)
+					{
+						Sphere.generate((int)(int) player.posX, (int)(int) player.posY, (int)(int) player.posZ, 25, new ISphere()
+					    { 
+							public void call(int x, int y, int z)
+							{
+				    			for(int i = -4; i <= 4; i++)
+						    		if(player.worldObj.isAirBlock(x, y, z) && player.worldObj.getBlock(x, y - 1, z) != Blocks.air && player.worldObj.getBlock(x, y - 1, z) != Blocks.snow_layer)
+						    			player.worldObj.setBlock(x, y, z, Blocks.snow_layer);
+							}
+					    });
+					}
 				}
 				
 				WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_FUBUKI, player.posX, player.posY, player.posZ), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
@@ -142,21 +146,23 @@ public class YukiAbilities
 		public void use(EntityPlayer player)
 		{	
 			if(!isOnCooldown)
-			{
-				
-				MovingObjectPosition mop = WyHelper.rayTraceBlocks(player);
-				
-				if(mop != null)
+			{			
+				if(MainConfig.enableGriefing)
 				{
-					WyHelper.createSphere(player, mop.blockX, mop.blockY, mop.blockZ, 4, Blocks.snow);
-					WyHelper.createSphere(player, mop.blockX, mop.blockY, mop.blockZ, 6, Blocks.snow);
-					WyHelper.createSphere(player, mop.blockX, mop.blockY, mop.blockZ, 8, Blocks.snow);
-				}
-				else
-				{
-					WyHelper.createSphere(player, 4, Blocks.snow);
-					WyHelper.createSphere(player, 6, Blocks.snow);
-					WyHelper.createSphere(player, 8, Blocks.snow);				
+					MovingObjectPosition mop = WyHelper.rayTraceBlocks(player);
+					
+					if(mop != null)
+					{
+						WyHelper.createSphere(player, mop.blockX, mop.blockY, mop.blockZ, 4, Blocks.snow);
+						WyHelper.createSphere(player, mop.blockX, mop.blockY, mop.blockZ, 6, Blocks.snow);
+						WyHelper.createSphere(player, mop.blockX, mop.blockY, mop.blockZ, 8, Blocks.snow);
+					}
+					else
+					{
+						WyHelper.createSphere(player, 4, Blocks.snow);
+						WyHelper.createSphere(player, 6, Blocks.snow);
+						WyHelper.createSphere(player, 8, Blocks.snow);				
+					}
 				}
 				
 				super.use(player);
@@ -189,13 +195,15 @@ public class YukiAbilities
 		{	
 			if(!isOnCooldown)
 			{
-				
-				MovingObjectPosition mop = WyHelper.rayTraceBlocks(player);
-				
-				if(mop != null)
-					WyHelper.createSphere(player, mop.blockX, mop.blockY, mop.blockZ, 4, Blocks.snow);
-				else
-					WyHelper.createSphere(player, 4, Blocks.snow);		
+				if(MainConfig.enableGriefing)
+				{
+					MovingObjectPosition mop = WyHelper.rayTraceBlocks(player);
+					
+					if(mop != null)
+						WyHelper.createSphere(player, mop.blockX, mop.blockY, mop.blockZ, 4, Blocks.snow);
+					else
+						WyHelper.createSphere(player, 4, Blocks.snow);	
+				}
 
 				super.use(player);
 			}

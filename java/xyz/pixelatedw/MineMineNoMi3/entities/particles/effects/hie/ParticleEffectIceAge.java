@@ -24,7 +24,7 @@ public class ParticleEffectIceAge extends ParticleEffect
 					posZ, 
 					0, 0, 0)
 					.setParticleScale(1 + player.worldObj.rand.nextFloat());
-			timer.schedule(ListParticleEffects.createWave1FX(player, particle.posX, particle.posY, particle.posZ, particle), 0);
+			timer.schedule(ListParticleEffects.createWave1FX(player, particle.posX, particle.posY, particle.posZ, particle, 20), 0);
 		}
 	}
 

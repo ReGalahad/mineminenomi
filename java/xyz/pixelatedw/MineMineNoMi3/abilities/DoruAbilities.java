@@ -3,6 +3,7 @@ package xyz.pixelatedw.MineMineNoMi3.abilities;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.DoruProjectiles;
@@ -61,9 +62,9 @@ public class DoruAbilities
 		
 		public void use(EntityPlayer player)
 		{		
-			if(!player.worldObj.isRemote)
+			if(!isOnCooldown)
 			{
-				if(!isOnCooldown)
+				if(MainConfig.enableGriefing)
 				{
 					for(int y = 0; y <= 3; y++)
 					{
@@ -84,9 +85,9 @@ public class DoruAbilities
 						for(int y = 0; y < 1; y++)
 							for(int z = -5; z < 5; z++)
 						  		player.worldObj.setBlock((int) player.posX - x, ((int) player.posY + 4) + y, (int) player.posZ - z, Blocks.clay);
-					
-					super.use(player);
 				}
+				
+				super.use(player);
 			}
 		} 
 	}
@@ -100,9 +101,9 @@ public class DoruAbilities
 		
 		public void use(EntityPlayer player)
 		{		
-			if(!player.worldObj.isRemote)
+			if(!isOnCooldown)
 			{
-				if(!isOnCooldown)
+				if(MainConfig.enableGriefing)
 				{
 					if(WyHelper.get4Directions(player) == WyHelper.Direction.NORTH)
 					{
@@ -132,9 +133,9 @@ public class DoruAbilities
 						for(int z = -3; z <= 3; z++)
 							player.worldObj.setBlock(((int) player.posX - 3) - x, (int) player.posY + y, (int) player.posZ - z, Blocks.clay);
 					}
-					
-					super.use(player);
 				}
+					
+				super.use(player);
 			}
 		} 
 	}

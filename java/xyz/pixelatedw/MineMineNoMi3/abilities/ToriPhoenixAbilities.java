@@ -181,7 +181,6 @@ public class ToriPhoenixAbilities
 					}
 					
 					props.setZoanPoint(ID.ZOANMORPH_PHOENIX);
-					WyHelper.sendMsgToPlayer(player, "<" + player.getDisplayName() + "> Phoenix Point !");
 					WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_BLUEFLAMES, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 					WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
 					WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));

@@ -10,9 +10,17 @@ import java.net.URL;
 import net.minecraft.client.Minecraft;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
+import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
 
 public class WyTelemetry 
 {
+	
+	private static final double VERSION = 1.00;
+	
+	static
+	{
+		WyDebug.debug("Telemetry Core System version " + VERSION + " loaded!");
+	}
 
 	public static void addStat(final String statName, final int value) 
 	{

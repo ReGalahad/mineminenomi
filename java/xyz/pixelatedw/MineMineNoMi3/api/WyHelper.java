@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -185,7 +186,7 @@ public class WyHelper
 								+ (abl.getAttribute().getAbilityCooldown() > 0 ? "cooldown: " + String.format("%.1f", ((double) abl.getAttribute().getAbilityCooldown() / 20)) + ", " : "") 
 								+ (abl.getAttribute().getAbilityCharges() > 0 ? "chargeTime: " + String.format("%.1f", ((double) abl.getAttribute().getAbilityCharges() / 20)) + ", " : "")
 								+ (abl.getAttribute().getProjectileDamage() > 1 ? "projectileDamage: " + abl.getAttribute().getProjectileDamage() + ", " : "") 
-								+ ((abl.getAttribute().hasProjectile() && abl.getAttribute().isRepeater()) ? "projectileNumber: " + ((abl.getAttribute().getAbilityCooldown() / abl.getAttribute().getAbilityRepeaterTime()) / 2) + ", " : "") 
+								+ ((abl.getAttribute().hasProjectile() && abl.getAttribute().isRepeater()) ? "projectileNumber: " + ((abl.getAttribute().getAbilityCooldown() / abl.getAttribute().getAbilityRepeaterTime()) / abl.getAttribute().getAbilityRepeaterTime()) + ", " : "") 
 								+ (abl.getAttribute().getProjectileExplosionPower() > 0 ? "projectileExplosion: " + abl.getAttribute().getProjectileExplosionPower() + ", " : "")
 								
 								+ ((abl.getAttribute().getPotionEffectsForAoE() != null && abl.getAttribute().getPotionEffectsForAoE().length > 0) ? "aoeEffects: [" 
@@ -243,10 +244,12 @@ public class WyHelper
 		StringBuilder builder = new StringBuilder();
 		for (int i = 0; i < pe.length; i++)
 		{
+			double d = Math.ceil(((double) pe[i].getDuration() / 24));
+			
 			if (i < pe.length - 1)
-				builder.append("\'" + I18n.format(pe[i].getEffectName()) + " - " + String.format("%.0f", ((double) pe[i].getDuration() / 24)) + " seconds\', ");
+				builder.append("\'" + I18n.format(pe[i].getEffectName()) + " " + String.format("%.0f", d) + " " + (d == 1 ? "second" : "seconds") + " (" + (pe[i].getAmplifier() > 0 ? "+" : "-") + ")\', ");
 			else
-				builder.append("\'" + I18n.format(pe[i].getEffectName()) + " - " + String.format("%.0f", ((double) pe[i].getDuration() / 24)) + " seconds\'");
+				builder.append("\'" + I18n.format(pe[i].getEffectName()) + " " + String.format("%.0f", d) + " " + (d == 1 ? "second" : "seconds") + " (" + (pe[i].getAmplifier() > 0 ? "+" : "-") + ")\'");
 		}
 		String potionList = builder.toString();
 
@@ -476,57 +479,42 @@ public class WyHelper
 		return ray;
 	}
 
-	public static void createCube(Entity e, int i, Block b)
+	public static void createCube(Entity e, int i, Block b, Block... bannedBlocks)
 	{
-		createCube(e, new int[]
-		{
-				i, i, i
-		}, b);
+		createCube(e, new int[] {i, i, i}, b, bannedBlocks);
 	}
 
-	public static void createCube(Entity e, int[] s, Block b)
+	public static void createCube(Entity e, int[] s, Block b, Block... bannedBlocks)
 	{
 		for (int x = (s[0] * 0) - s[0]; x < s[0]; x++)
-			for (int y = (s[1] * 0) - s[1]; y < s[1]; y++)
-				for (int z = (s[2] * 0) - s[2]; z < s[2]; z++)
-				{
-					e.worldObj.setBlock((int) e.posX + x, (int) e.posY + y, (int) e.posZ + z, b);
-				}
+		for (int y = (s[1] * 0) - s[1]; y < s[1]; y++)
+		for (int z = (s[2] * 0) - s[2]; z < s[2]; z++)
+		{
+			if(!Arrays.stream(bannedBlocks).anyMatch(p -> p == b))
+				e.worldObj.setBlock((int) e.posX + x, (int) e.posY + y, (int) e.posZ + z, b);
+		}
 	}
 
-	public static void createSphere(Object e, int size, final Block b)
+	public static void createSphere(Object e, int size, final Block b, Block... bannedBlocks)
 	{
 		int x = 0, y = 0, z = 0;
-		final World world;
 		if (e instanceof Entity)
 		{
 			x = (int) ((Entity) e).posX;
 			y = (int) ((Entity) e).posY;
 			z = (int) ((Entity) e).posZ;
-			world = ((Entity) e).worldObj;
 		}
 		else if (e instanceof TileEntity)
 		{
 			x = (int) ((TileEntity) e).xCoord;
 			y = (int) ((TileEntity) e).yCoord;
 			z = (int) ((TileEntity) e).zCoord;
-			world = ((TileEntity) e).getWorldObj();
-		}
-		else
-		{
-			world = null;
 		}
 
-		Sphere.generate(x, y, z, size, new ISphere()
-		{
-			public void call(int x, int y, int z)
-			{
-				world.setBlock(x, y, z, b);
-			}
-		});
+		createSphere(e, x, y, z, size, b, bannedBlocks);
 	}
 
-	public static void createSphere(Object e, int x, int y, int z, int size, final Block b)
+	public static void createSphere(Object e, int x, int y, int z, int size, final Block b, Block... bannedBlocks)
 	{
 		final World world;
 		if (e instanceof Entity)
@@ -535,16 +523,22 @@ public class WyHelper
 			world = ((TileEntity) e).getWorldObj();
 		else
 			world = null;
-
+		
 		Sphere.generate(x, y, z, size, new ISphere()
 		{
 			public void call(int x, int y, int z)
 			{
-				world.setBlock(x, y, z, b);
+				//for(Block bannedBlock : bannedBlocks)
+				//{
+					//if(world.getBlock(x, y, z) == bannedBlock)
+					//	continue;
+					
+					world.setBlock(x, y, z, b);
+				//}
 			}
 		});
 	}
-
+	
 	public static void removeStackFromInventory(EntityPlayer player, ItemStack stack)
 	{
 		for (int i = 0; i < player.inventory.mainInventory.length; i++)

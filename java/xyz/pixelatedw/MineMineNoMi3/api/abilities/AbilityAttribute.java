@@ -17,12 +17,12 @@ public class AbilityAttribute
 	private String attributeName = "N/A";
 	private boolean projectileExplosionHasFire = true, projectileExplosionHasSmoke = true, canBeCharged = false, isRepeater = false, itemExplosionHasFire = true, itemExplosionHasSmoke = true, isPassive = false, isPunch = false, entityMoveThroughBlocks = false;
 	private int itemTicks = 0, entityTicks = 60, entitySpeed = 1, entityExplosion = 0, entityNewExplosion = 0, potionEffectAoeRadius = 0, itemMaxCharge = 0, itemExplosion = 0, itemRepeaterTime = 6, itemRepeaterFreq = 1;
-	private float projectileAlpha = 255, entityDamage = 1;
+	private float projectileAlpha = 255, entityDamage = 1, punchDamage = 1;
 	private double entityXRotation = 0, entityYRotation = 0, entityZRotation = 0;
 	private Color entityColor = Color.decode("#FFFFFF");
 	private double[] entityScale = new double[] {1, 1, 1}, entityPos = new double[] {0, 0, 0}, entityMotion = new double[] {0, 0, 0}, entityCollisionSize = new double[] {1, 1}, modelOffset = new double[] {0, 0, 0};
 	private ModelBase entityModel = null;
-	private PotionEffect[] potionEffectsForProjectile = null, potionEffectsForUser = null, potionEffectsForAoE = null;
+	private PotionEffect[] potionEffectsForProjectile = null, potionEffectsForUser = null, potionEffectsForAoE = null, potionEffectsForHit = null;
 	private ResourceLocation entityTexture = null;
 	
 	public AbilityAttribute() {}	
@@ -59,6 +59,7 @@ public class AbilityAttribute
 		this.entityXRotation = attr.entityXRotation;
 		this.entityYRotation = attr.entityYRotation;
 		this.entityZRotation = attr.entityZRotation;
+		this.punchDamage = attr.punchDamage;
 		
 		this.entityColor = attr.entityColor;
 		
@@ -72,6 +73,7 @@ public class AbilityAttribute
 		this.potionEffectsForProjectile = attr.potionEffectsForProjectile;
 		this.potionEffectsForUser = attr.potionEffectsForUser;
 		this.potionEffectsForAoE = attr.potionEffectsForAoE;
+		this.potionEffectsForHit = attr.potionEffectsForHit;
 		
 		this.entityTexture = attr.entityTexture;		
 	}
@@ -85,7 +87,8 @@ public class AbilityAttribute
 	public AbilityAttribute setAbilityExplosion(int i, boolean fire) { this.itemExplosion = i; this.itemExplosionHasFire = fire; return this; }
 	public AbilityAttribute setAbilityExplosion(int i) { this.itemExplosion = i; return this; }
 	public AbilityAttribute setAbilityPassive() { this.isPassive = true; return this;}
-	public AbilityAttribute setAbilityPunch() { this.isPunch = true; return this; }
+	public AbilityAttribute setAbilityPunch() { this.isPassive = true; this.isPunch = true; return this; }
+	public AbilityAttribute setAbilityPunch(float damage) { this.isPunch = true; this.punchDamage = damage; return this; }
 	public AbilityAttribute setAbilityRepeater() { this.isRepeater = true; this.itemRepeaterTime = 6; this.itemRepeaterFreq = 1; return this; }
 	public AbilityAttribute setAbilityRepeater(int time) { this.isRepeater = true; this.itemRepeaterTime = time; this.itemRepeaterFreq = 1; return this; }
 	public AbilityAttribute setAbilityRepeater(int time, int frequency) { this.isRepeater = true; this.itemRepeaterTime = time; this.itemRepeaterFreq = frequency; return this; }
@@ -118,14 +121,11 @@ public class AbilityAttribute
 		if(type == EffectType.PROJECTILE) this.potionEffectsForProjectile = e;
 		if(type == EffectType.USER) this.potionEffectsForUser = e;
 		if(type == EffectType.AOE) this.potionEffectsForAoE = e;
+		if(type == EffectType.HIT) this.potionEffectsForHit = e;
 		return this;
 	}
 	public AbilityAttribute setEffectRadius(int i) { this.potionEffectAoeRadius = i;return this;}
 
-	
-	
-	
-	
 
 		//Item
 	public int getAbilityCooldown() { return itemTicks; }
@@ -139,6 +139,7 @@ public class AbilityAttribute
 	public int getAbilityRepeaterTime() { return this.itemRepeaterTime; }
 	public int getAbilityRepeaterFrequency() { return this.itemRepeaterFreq; }
 	public boolean isPunch() { return this.isPunch; }
+	public float getPunchDamage() { return this.punchDamage; }
 		//Projectile
 	public boolean hasProjectile() { return this.entityTicks > 0 && this.entityModel != null; }
 	public int getProjectileTicks() { return entityTicks; }
@@ -161,6 +162,7 @@ public class AbilityAttribute
 	public double[] getProjectileCollisionSizes() { return this.entityCollisionSize; }
 	public double[] getModelOffsets() { return this.modelOffset; }
 		//Potion Effects
+	public PotionEffect[] getPotionEffectsForHit() {return this.potionEffectsForHit;}
 	public PotionEffect[] getPotionEffectsForProjectile() {return this.potionEffectsForProjectile;}
 	public PotionEffect[] getPotionEffectsForUser() {return this.potionEffectsForUser;}
 	public PotionEffect[] getPotionEffectsForAoE() {return this.potionEffectsForAoE;}

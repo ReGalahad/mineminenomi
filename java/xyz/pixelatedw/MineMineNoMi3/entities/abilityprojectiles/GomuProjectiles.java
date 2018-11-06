@@ -52,8 +52,7 @@ public class GomuProjectiles
 			super(world, player, attr);		
 		}	
 	}
-	
-	
+		
 	public static class GomuGomuNoElephantGatling extends AbilityProjectile
 	{
 		public GomuGomuNoElephantGatling(World world)

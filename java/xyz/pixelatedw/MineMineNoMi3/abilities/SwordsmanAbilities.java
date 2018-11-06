@@ -10,6 +10,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.WorldServer;
+import xyz.pixelatedw.MineMineNoMi3.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
@@ -38,7 +39,7 @@ public class SwordsmanAbilities
 			
 		public void use(EntityPlayer player)
 		{
-			if(player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ItemCoreWeapon)
+			if(player.getHeldItem() != null && DevilFruitsHelper.isSword(player.getHeldItem()))
 			{	
 				if(!this.isOnCooldown)
 				{
@@ -48,7 +49,9 @@ public class SwordsmanAbilities
 						
 						e.addPotionEffect(new PotionEffect(Potion.weakness.id, 10 * 20, 1, true));
 					}
-					WyNetworkHelper.sendTo(new PacketParticles(ID.PARTICLEFX_KOKUTEICROSS, player), (EntityPlayerMP) player);
+					
+					WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_KOKUTEICROSS, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
+					
 					if (player.worldObj instanceof WorldServer)
 						((WorldServer)player.worldObj).getEntityTracker().func_151248_b(player, new S0BPacketAnimation(player, 0));
 				}
@@ -68,7 +71,7 @@ public class SwordsmanAbilities
 			
 		public void use(EntityPlayer player)
 		{
-			if(player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ItemCoreWeapon)
+			if(player.getHeldItem() != null && DevilFruitsHelper.isSword(player.getHeldItem()))
 			{
 				this.projectile = new SwordsmanProjectiles.Yakkodori(player.worldObj, player, ListAttributes.YAKKODORI);
 				if(!this.isOnCooldown)
@@ -90,7 +93,7 @@ public class SwordsmanAbilities
 			
 		public void use(EntityPlayer player)
 		{
-			if(player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ItemCoreWeapon)
+			if(player.getHeldItem() != null && DevilFruitsHelper.isSword(player.getHeldItem()))
 			{
 				if(!this.isOnCooldown)
 				{
@@ -136,7 +139,7 @@ public class SwordsmanAbilities
 			
 		public void use(EntityPlayer player)
 		{
-			if(player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ItemCoreWeapon)
+			if(player.getHeldItem() != null && DevilFruitsHelper.isSword(player.getHeldItem()) )
 			{
 				this.projectile = new SwordsmanProjectiles.SanbyakurokujuPoundHo(player.worldObj, player, ListAttributes.SANBYAKUROKUJUPOUNDHO);
 				if(!this.isOnCooldown)

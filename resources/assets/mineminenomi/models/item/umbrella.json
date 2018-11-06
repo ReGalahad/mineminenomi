@@ -1,1 +1,0 @@
-{"parent": "mineminenomi:item/handheldp", "textures": { "layer0": "mineminenomi:items/umbrella"} ,"overrides": [{"predicate": { "open": 1 }, "model": "mineminenomi:item/umbrella_1"}]}

@@ -1,5 +1,6 @@
 package xyz.pixelatedw.MineMineNoMi3.lists;
 
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -41,6 +42,7 @@ import xyz.pixelatedw.MineMineNoMi3.abilities.YukiAbilities;
 import xyz.pixelatedw.MineMineNoMi3.api.WyRegistry;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityManager;
+import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.BaneProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.BariProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.BomuProjectiles;
@@ -182,8 +184,8 @@ public class ListDevilFruits
 				}
 		}
 		
-		Logger.getGlobal().log(Level.INFO, "A total of " + totalFruits + " Devil Fruits have been registered");
-		Logger.getGlobal().log(Level.INFO, "A total of " + totalAbilities + " abilities have been registered");
+		WyDebug.info("A total of " + totalFruits + " Devil Fruits have been registered");
+		WyDebug.info("A total of " + totalAbilities + " abilities have been registered");
 	}
 
 	public static void addITEM(AkumaNoMi item, String localizedName) 

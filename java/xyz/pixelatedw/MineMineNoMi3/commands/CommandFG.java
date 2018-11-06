@@ -55,102 +55,110 @@ public class CommandFG extends CommandBase
 	
 	public void processCommand(ICommandSender sender, String[] str) 
 	{
-		if(str.length == 1)
+		if(str.length >= 1)
 		{
 			EntityPlayer player = this.getCommandSenderAsPlayer(sender);
 			ExtendedEntityStats props = ExtendedEntityStats.get(player);
 			QuestProperties questProps = QuestProperties.get(player);
 			Entity toSpawn = null;
 			
-			if(str[0].equals("arlong"))
+			if(str[0].equalsIgnoreCase("arlong"))
 				toSpawn = new EntityArlong(player.worldObj);
-			else if(str[0].equals("chew"))
+			else if(str[0].equalsIgnoreCase("chew"))
 				toSpawn = new EntityChew(player.worldObj);
-			else if(str[0].equals("kuroobi"))
+			else if(str[0].equalsIgnoreCase("kuroobi"))
 				toSpawn = new EntityKuroobi(player.worldObj);
-			else if(str[0].equals("krieg"))
+			else if(str[0].equalsIgnoreCase("krieg"))
 				toSpawn = new EntityDonKrieg(player.worldObj);
-			else if(str[0].equals("gin"))
+			else if(str[0].equalsIgnoreCase("gin"))
 				toSpawn = new EntityGin(player.worldObj);
-			else if(str[0].equals("pearl"))
+			else if(str[0].equalsIgnoreCase("pearl"))
 				toSpawn = new EntityPearl(player.worldObj);
-			else if(str[0].equals("lucci"))
+			else if(str[0].equalsIgnoreCase("lucci"))
 				toSpawn = new EntityLucci(player.worldObj);
-			else if(str[0].equals("luccil"))
+			else if(str[0].equalsIgnoreCase("luccil"))
 				toSpawn = new EntityLucciL(player.worldObj);
-			else if(str[0].equals("jabra"))
+			else if(str[0].equalsIgnoreCase("jabra"))
 				toSpawn = new EntityJabra(player.worldObj);
-			else if(str[0].equals("jabral"))
+			else if(str[0].equalsIgnoreCase("jabral"))
 				toSpawn = new EntityJabraL(player.worldObj);
-			else if(str[0].equals("kalifa"))
+			else if(str[0].equalsIgnoreCase("kalifa"))
 				toSpawn = new EntityKalifa(player.worldObj);
-			else if(str[0].equals("kaku"))
+			else if(str[0].equalsIgnoreCase("kaku"))
 				toSpawn = new EntityKaku(player.worldObj);
-			else if(str[0].equals("kakul"))
+			else if(str[0].equalsIgnoreCase("kakul"))
 				toSpawn = new EntityKakuL(player.worldObj);
-			else if(str[0].equals("spandam"))
+			else if(str[0].equalsIgnoreCase("spandam"))
 				toSpawn = new EntitySpandam(player.worldObj);
-			else if(str[0].equals("morgan"))
+			else if(str[0].equalsIgnoreCase("morgan"))
 				toSpawn = new EntityMorgan(player.worldObj);	
-			else if(str[0].equals("fukuro"))
+			else if(str[0].equalsIgnoreCase("fukuro"))
 				toSpawn = new EntityFukuro(player.worldObj); //COMPLETED
-			else if(str[0].equals("kumadori"))
+			else if(str[0].equalsIgnoreCase("kumadori"))
 				toSpawn = new EntityKumadori(player.worldObj); //COMPLETED
-			else if(str[0].equals("blueno"))
+			else if(str[0].equalsIgnoreCase("blueno"))
 				toSpawn = new EntityBlueno(player.worldObj); //COMPLETED
 			
 			
-			else if(str[0].equals("brickbat"))
+			else if(str[0].equalsIgnoreCase("brickbat"))
 				toSpawn = new TempEntityBrickBat(player.worldObj);
-			else if(str[0].equals("fist"))
+			else if(str[0].equalsIgnoreCase("fist"))
 				toSpawn = new TempEntityFist(player.worldObj);
-			else if(str[0].equals("bazooka"))
+			else if(str[0].equalsIgnoreCase("bazooka"))
 				toSpawn = new TempEntityBazooka(player.worldObj);			
-			else if(str[0].equals("hydra"))
+			else if(str[0].equalsIgnoreCase("hydra"))
 				toSpawn = new TempEntityHydra(player.worldObj);
-			else if(str[0].equals("meigo"))
+			else if(str[0].equalsIgnoreCase("meigo"))
 				toSpawn = new TempEntityMeigo(player.worldObj);	
-			else if(str[0].equals("noro"))
+			else if(str[0].equalsIgnoreCase("noro"))
 				toSpawn = new TempEntityNoroBeam(player.worldObj);
-			else if(str[0].equals("paw"))
+			else if(str[0].equalsIgnoreCase("paw"))
 				toSpawn = new TempEntityPaw(player.worldObj);			
-			else if(str[0].equals("pheasant"))
+			else if(str[0].equalsIgnoreCase("pheasant"))
 				toSpawn = new TempEntityPheasant(player.worldObj);
-			else if(str[0].equals("shark"))
+			else if(str[0].equalsIgnoreCase("shark"))
 				toSpawn = new TempEntityShark(player.worldObj);				
-			else if(str[0].equals("spear"))
+			else if(str[0].equalsIgnoreCase("spear"))
 				toSpawn = new TempEntitySpear(player.worldObj);			
-			else if(str[0].equals("trident"))
+			else if(str[0].equalsIgnoreCase("trident"))
 				toSpawn = new TempEntityTrident(player.worldObj);
-			else if(str[0].equals("yukirabi"))
+			else if(str[0].equalsIgnoreCase("yukirabi"))
 				toSpawn = new TempEntityYukiRabi(player.worldObj);		
-			else if(str[0].equals("phoenixfull"))
+			else if(str[0].equalsIgnoreCase("phoenixfull"))
 				toSpawn = new TempEntityPhoenixFull(player.worldObj);
-			else if(str[0].equals("phoenixhybrid"))
+			else if(str[0].equalsIgnoreCase("phoenixhybrid"))
 				toSpawn = new TempEntityPhoenixHybrid(player.worldObj);
 			
 			
-			else if(str[0].equals("scenario"))
+			else if(str[0].equalsIgnoreCase("scenario"))
 			{
-				if(!player.worldObj.isRemote)
-					new TeleporterScenarioArena((WorldServer) player.worldObj).teleport(player, ID.SCENARIO_ROMANCEDAWN_CAPTAINMORGAN);		
+				if(str[1].equalsIgnoreCase("start"))
+				{
+					if(!player.worldObj.isRemote)
+						new TeleporterScenarioArena((WorldServer) player.worldObj).teleport(player, ID.SCENARIO_ROMANCEDAWN_CAPTAINMORGAN);
+				}
+				else if(str[1].equalsIgnoreCase("end"))
+				{
+					if(!player.worldObj.isRemote)
+						new TeleporterScenarioArena((WorldServer) player.worldObj).endScenario(player, ID.SCENARIO_ROMANCEDAWN_CAPTAINMORGAN);
+				}
 			}
-			else if(str[0].equals("maxcola"))
+			else if(str[0].equalsIgnoreCase("maxcola"))
 			{
 				if(!props.hasColaBackpack())
 					props.setMaxCola(250);
 				else
 					props.setMaxCola(450);
 			}
-			else if(str[0].equals("fillcola"))
+			else if(str[0].equalsIgnoreCase("fillcola"))
 				props.setCola(props.getMaxCola());
-			else if(str[0].equals("rngquest"))
+			else if(str[0].equalsIgnoreCase("rngquest"))
 			{
 				//QuestManager.instance().startQuest(player, questsPool[player.getRNG().nextInt(questsPool.length)]);
 				QuestManager.instance().startQuest(player, ListQuests.bountyLowLevel01);
 				WyNetworkHelper.sendTo(new PacketQuestSync(questProps), (EntityPlayerMP) player);
 			}
-			else if(str[0].equals("resetquests"))
+			else if(str[0].equalsIgnoreCase("resetquests"))
 			{
 				questProps.clearQuestTracker();
 				questProps.clearCompletedQuests();

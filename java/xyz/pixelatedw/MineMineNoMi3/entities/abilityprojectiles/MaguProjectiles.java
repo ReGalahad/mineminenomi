@@ -7,6 +7,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
@@ -77,7 +78,8 @@ public class MaguProjectiles
 			if(hit.entityHit != null)
 				hit.entityHit.setFire(100);
 			
-			this.worldObj.setBlock(hit.blockX, hit.blockY, hit.blockZ, Blocks.flowing_lava);
+			if(MainConfig.enableGriefing)
+				this.worldObj.setBlock(hit.blockX, hit.blockY, hit.blockZ, Blocks.flowing_lava);
 		};
 		
 		public void onUpdate()

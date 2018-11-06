@@ -55,10 +55,7 @@ public class EventsQuestsProgress
 						
 					if(currentProgressionQuest != null && !questProps.hasQuestInTracker(currentProgressionQuest))
 					{
-						player.openGui(MainMod.getMineMineNoMi(), 6, player.worldObj, 0, 0, 0);
-						//Minecraft.getMinecraft().displayGuiScreen((GuiScreen) new GUIQuestYesNo(player, currentProgressionQuest));
-						//QuestManager.instance().startQuest(player, currentProgressionQuest);
-						//WyNetworkHelper.sendTo(new PacketQuestSync(questProps), (EntityPlayerMP) player);
+						player.openGui(MainMod.getMineMineNoMi(), 6, player.worldObj, (int)target.posX, (int)target.posY, (int)target.posZ);
 						return;
 					}
 				}

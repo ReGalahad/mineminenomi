@@ -21,6 +21,8 @@ public class MainConfig
 	public static boolean enableMobRewards;
 	public static boolean enableQuestProgression;
 	public static boolean enableQuests;
+	public static boolean enableGriefing;
+	public static boolean enableAnimeScreaming;
 	public static double rateDFDrops;
 	public static double rateShipsSpawn;
 	public static int maxDojoSpawn;
@@ -29,8 +31,8 @@ public class MainConfig
 	public static boolean enableUpdateMsg;
 	public static boolean enableFOVModifier;	
 	
-	public static int enchantmentDialImpactId = 100;
-	public static int enchantmentKairosekiId = 101;
+	public static int enchantmentDialImpactId = 169;
+	public static int enchantmentKairosekiId = 170;
 	
 	public static int commandPermissionRemoveDF = 2;
 	public static int commandPermissionDoriki = 2;
@@ -51,7 +53,9 @@ public class MainConfig
 		enableShips = config.get(Configuration.CATEGORY_GENERAL, "Allow Ships to Spawn", true).getBoolean();
 		rateShipsSpawn = config.get(Configuration.CATEGORY_GENERAL, "Modifier for Spawning Ships", 1).getDouble();
 		//enableCamps = config.get(Configuration.CATEGORY_GENERAL, "Allow Camps to Spawn", true).getBoolean();
-
+		enableGriefing = config.get(Configuration.CATEGORY_GENERAL, "Allow Griefing in Worlds", true).getBoolean();
+		enableAnimeScreaming  = config.get(Configuration.CATEGORY_GENERAL, "Anime Screaming", false).getBoolean();
+		
 		enableDFtoDrop = config.get(Configuration.CATEGORY_GENERAL, "Allow Devil Fruits to drop from leaves", false).getBoolean();
 		rateDFDrops = config.get(Configuration.CATEGORY_GENERAL, "Rate at which Devil Fruits drop from leaves", 1).getDouble();
 

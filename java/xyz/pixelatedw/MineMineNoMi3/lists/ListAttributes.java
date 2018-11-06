@@ -110,15 +110,17 @@ public class ListAttributes
 	public static AbilityAttribute CANDLEHOUSE = new AbilityAttribute("Candle House").setAbilityCooldown(30);
 	public static AbilityAttribute CANDLEWALL = new AbilityAttribute("Candle Wall").setAbilityCooldown(4);
 	public static AbilityAttribute DORUDORUARTSKEN = new AbilityAttribute("Doru Doru Arts : Ken").setAbilityPassive();
-	public static AbilityAttribute DORUDORUARTSMORI = new AbilityAttribute("Doru Doru Arts : Mori").setAbilityCooldown(3).setProjectileDamage(15).setProjectileModel(new ModelSpear()).setProjectileTexture("dorudoruartsmori").setProjectileSize(2, 2, 2).setModelOffsets(0, 2, 0);
+	public static AbilityAttribute DORUDORUARTSMORI = new AbilityAttribute("Doru Doru Arts : Mori").setAbilityCooldown(3).setProjectileDamage(15).setProjectileModel(new ModelSpear()).setProjectileTexture("dorudoruartsmori").setProjectileSize(2, 2, 2).setModelOffsets(0, 1, 0);
 	
 	public static AbilityAttribute BAKURETSUKAZAN = new AbilityAttribute("Bakuretsu Kazan").setAbilityCooldown(15);
 	public static AbilityAttribute RYUSEIKAZAN = new AbilityAttribute("Ryusei Kazan").setAbilityCooldown(12).setProjectileDamage(10).setAbilityRepeater();
 	public static AbilityAttribute MEIGO = new AbilityAttribute("Meigo").setAbilityCooldown(10).setProjectileDamage(40).setProjectileModel(new ModelMeigo()).setProjectileTexture("meigo").setProjectileSize(4, 4, 4).setModelOffsets(0, 1.2, 0).setProjectileTicks(3);
 	public static AbilityAttribute DAIFUNKA = new AbilityAttribute("Dai Funka").setAbilityCooldown(8).setProjectileDamage(20).setProjectileModel(new ModelFist()).setProjectileTexture("daifunka").setProjectileSize(4, 4, 4).setModelOffsets(0, 1, 0);
 	
+	public static AbilityAttribute DESERTGIRASOLE = new AbilityAttribute("Desert Girasole").setAbilityCooldown(25).setAbilityCharges(100);
+	public static AbilityAttribute DESERTENCIERRO = new AbilityAttribute("Desert Encierro").setAbilityCooldown(10).setAbilityPunch().addEffects(EffectType.HIT, new PotionEffect(Potion.hunger.id, 100, 1), new PotionEffect(Potion.weakness.id, 100, 1), new PotionEffect(Potion.moveSlowdown.id, 100, 1), new PotionEffect(Potion.digSlowdown.id, 100, 1));
 	public static AbilityAttribute GROUNDDEATH = new AbilityAttribute("Ground Death").setAbilityCooldown(15);
-	public static AbilityAttribute BARJAN = new AbilityAttribute("Barjan").setAbilityCooldown(5).setProjectileDamage(15).setProjectileModel(new ModelCube()).setProjectileColor("967117").setProjectileSize(6, 0.4, 1.5).addEffects(EffectType.PROJECTILE, new PotionEffect(Potion.hunger.id, 500, 1));
+	public static AbilityAttribute BARJAN = new AbilityAttribute("Barjan").setAbilityCooldown(5).setProjectileDamage(15).setProjectileModel(new ModelCube()).setProjectileColor("967117").setProjectileSize(6, 0.4, 1.5).addEffects(EffectType.PROJECTILE, new PotionEffect(Potion.hunger.id, 500, 1)).setProjectileMoveThroughBlocks(true);
 	public static AbilityAttribute SABLES = new AbilityAttribute("Sables").setAbilityCooldown(3).setAbilityPassive().setAbilityPunch();
 	public static AbilityAttribute DESERTSPADA = new AbilityAttribute("Desert Spada").setAbilityCooldown(7);
 	
@@ -141,9 +143,10 @@ public class ListAttributes
 	public static AbilityAttribute TSUPPARIPADHO = new AbilityAttribute("Tsuppari Pad Ho").setAbilityCooldown(10).setProjectileDamage(15).setProjectileExplosion(1, false, true).setAbilityRepeater(5, 7);
 	public static AbilityAttribute HANPATSU = new AbilityAttribute("Hanpatsu").setAbilityCooldown(4).setAbilityPassive().setAbilityPunch();
 
+	public static AbilityAttribute WHITESTRIKE = new AbilityAttribute("White Strike").setAbilityCooldown(35).addEffects(EffectType.AOE, new PotionEffect(Potion.moveSlowdown.id, 300, 1), new PotionEffect(Potion.digSlowdown.id, 300, 1), new PotionEffect(Potion.jump.id, 300, -10)).setEffectRadius(30);
 	public static AbilityAttribute WHITELAUNCHER = new AbilityAttribute("White Launcher").setAbilityCooldown(5).setAbilityCharges(20);
 	public static AbilityAttribute WHITESNAKE = new AbilityAttribute("White Snake").setAbilityCooldown(5).setProjectileTicks(120).setProjectileModel(new ModelCube()).setProjectileSpeed(5).setProjectileSize(0, 0, 0).setProjectileDamage(30).addEffects(EffectType.PROJECTILE, new PotionEffect(Potion.poison.id, 120, 0));
-	public static AbilityAttribute WHITEOUT = new AbilityAttribute("White Out").setAbilityCooldown(4).setProjectileModel(new ModelCube()).setProjectileSpeed(5).setProjectileSize(0, 0, 0).setProjectileDamage(5).addEffects(EffectType.PROJECTILE, new PotionEffect(Potion.moveSlowdown.id, 500, 5)).setAbilityRepeater(15);
+	public static AbilityAttribute WHITEOUT = new AbilityAttribute("White Out").setAbilityCooldown(4).setProjectileModel(new ModelCube()).setProjectileSpeed(5).setProjectileSize(0, 0, 0).setProjectileDamage(5).addEffects(EffectType.PROJECTILE, new PotionEffect(Potion.moveSlowdown.id, 240, 1), new PotionEffect(Potion.digSlowdown.id, 240, 1), new PotionEffect(Potion.jump.id, 240, -10));
 	
 	public static AbilityAttribute SANGO = new AbilityAttribute("Sango").setAbilityCooldown(10).setProjectileTicks(10).setProjectileModel(new ModelCube()).setProjectileSize(3, 3, 10).setProjectileColor("7CB9E8").setProjectileDamage(15);
 	public static AbilityAttribute KARI = new AbilityAttribute("Kari").setAbilityCooldown(6).setAbilityExplosion(6, false, false);
@@ -155,8 +158,8 @@ public class ListAttributes
 	public static AbilityAttribute SHAMBLES = new AbilityAttribute("Shambles").setAbilityCooldown(8);
 	public static AbilityAttribute TAKT = new AbilityAttribute("Takt").setAbilityCooldown(10).setAbilityPassive();
 	public static AbilityAttribute GAMMAKNIFE = new AbilityAttribute("Gamma Knife").setAbilityCooldown(30).setProjectileTicks(20).setProjectileModel(new ModelCube()).setProjectileColor("00AB66").setProjectileDamage(100).setProjectileSize(1, 1, 5);
-	public static AbilityAttribute MES = new AbilityAttribute("Mes").setAbilityCooldown(5).setAbilityPassive().setAbilityPunch(); 
-	public static AbilityAttribute COUNTERSHOCK = new AbilityAttribute("Counter Shock").setAbilityCooldown(10).setAbilityPassive().setAbilityPunch();
+	public static AbilityAttribute MES = new AbilityAttribute("Mes").setAbilityCooldown(5).setAbilityPassive().setAbilityPunch(1); 
+	public static AbilityAttribute COUNTERSHOCK = new AbilityAttribute("Counter Shock").setAbilityCooldown(10).setAbilityPassive().setAbilityPunch(40).setAbilityExplosion(1, false);
 	public static AbilityAttribute ROOM = new AbilityAttribute("Room").setAbilityCooldown(5);
 	
 	public static AbilityAttribute NORONOROBEAM = new AbilityAttribute("Noro Noro Beam").setAbilityCooldown(5).setProjectileModel(new ModelNoroNoroBeam()).setProjectileTexture("noronorobeam").setProjectileSize(5, 5, 5).setProjectileSpeed(5);
@@ -232,13 +235,6 @@ public class ListAttributes
 	public static AbilityAttribute KENBUNSHOKUHAKI = new AbilityAttribute("Kenbunshoku Haki").setAbilityPassive();
 	public static AbilityAttribute BUSOSHOKUHAKI = new AbilityAttribute("Busoshoku Haki").setAbilityPassive();
 	public static AbilityAttribute HAOSHOKUHAKI = new AbilityAttribute("Haoshoku Haki");
-	/*
-	public static AbilityAttribute DIALREJECT = new AbilityAttribute("Reject Dial").setItemMaxStack(16).setProjectileExplosion(4, false).setItemMaxDamage(1).addTasks(Tasks.rejectDial, Tasks.consumable);
-	public static AbilityAttribute DIALBREATH = new AbilityAttribute("Breath Dial").setItemMaxStack(16).setItemMaxDamage(4).addTasks(Tasks.breathDial, Tasks.consumable);
-	public static AbilityAttribute DIALIMPACT = new AbilityAttribute("Impact Dial").setItemMaxStack(16).setProjectileExplosion(4, false).setItemMaxDamage(1).addTasks(Tasks.consumable);
-	public static AbilityAttribute DIALFIRE = new AbilityAttribute("Fire Dial").setItemMaxStack(16).setProjectileModel(new ModelCube()).setProjectileDamage(8).setProjectileColor("FF0000").setProjectileSize(1, .8, .8).setProjectileExplosion(1).setItemMaxDamage(2).addTasks(Tasks.consumable);
-	public static AbilityAttribute DIALMILKY = new AbilityAttribute("Milky Road").setItemMaxStack(16).setProjectileModel(new ModelCube()).setProjectileSize(.1, .1, .1).setProjectileColor(Color.BLUE).setProjectileTicks(20).setItemMaxDamage(1).addTasks(Tasks.milkydial, Tasks.consumable);
-	*/
-	
+
 	public static AbilityAttribute NULL = new AbilityAttribute("n/a");
 }
