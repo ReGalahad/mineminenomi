@@ -82,7 +82,7 @@ public class GUIQuestYesNo extends GuiScreen
 			GL11.glScaled(scale, scale, 0);
 			GL11.glTranslated(-256, -256, 0);
 			
-			mc.fontRenderer.drawString(EnumChatFormatting.BOLD + "" + currentQuest, 0, 0, WyHelper.hexToRGB("#161616").getRGB());		
+			mc.fontRenderer.drawString(EnumChatFormatting.BOLD + "" + I18n.format("quest." + currentQuestToDisplay.getQuestID() + ".name"), 0, 0, WyHelper.hexToRGB("#161616").getRGB());		
 		}
 		GL11.glPopMatrix();
 

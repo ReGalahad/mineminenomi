@@ -9,6 +9,7 @@ import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.Schematic;
 import xyz.pixelatedw.MineMineNoMi3.api.WySchematicHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
 
 public class ScenarioManager
 {
@@ -30,11 +31,27 @@ public class ScenarioManager
 
 	public static boolean canSpawn(World world, int posX, int posY, int posZ)
 	{
+		WyDebug.info("Check coords : X:" + posX + " Y:" + posY + " Z:" + posZ);
+		
 		if(world.getBlock(posX, posY, posZ) == Blocks.air)
 			return true;
 
-		ScenarioManager.instanceSpawnX += 2000;
-		return canSpawn(world, posX + 2000, posY, posZ);
+		return false;
+	}
+	
+	public static int[] getSpawnPos(World world, int posX, int posY, int posZ)
+	{
+		WyDebug.info("Get coords : X:" + posX + " Y:" + posY + " Z:" + posZ);
+		
+		if(canSpawn(world, posX, posY, posZ))
+		{
+			return new int[] {posX, posY, posZ};
+		}
+		else
+		{
+			ScenarioManager.instanceSpawnX += 2000;
+			return getSpawnPos(world, posX + 2000, posY, posZ);
+		}
 	}
 	
     

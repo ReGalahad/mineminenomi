@@ -494,7 +494,7 @@ public class WyHelper
 				e.worldObj.setBlock((int) e.posX + x, (int) e.posY + y, (int) e.posZ + z, b);
 		}
 	}
-
+	
 	public static void createSphere(Object e, int size, final Block b, Block... bannedBlocks)
 	{
 		int x = 0, y = 0, z = 0;

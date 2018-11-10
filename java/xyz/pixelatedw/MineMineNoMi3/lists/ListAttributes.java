@@ -172,8 +172,9 @@ public class ListAttributes
 	public static AbilityAttribute GEARSECOND = new AbilityAttribute("Gear Second").setAbilityCooldown(60).setAbilityPassive();
 	public static AbilityAttribute GEARTHIRD = new AbilityAttribute("Gear Third").setAbilityCooldown(90).setAbilityPassive();
 	public static AbilityAttribute GEARFOURTH = new AbilityAttribute("Gear Forth").setAbilityCooldown(300).setAbilityPassive();
+	public static AbilityAttribute GOMUGOMUNOROCKET = new AbilityAttribute("Gomu Gomu no Rocket").setProjectileModel(new ModelFist()).setProjectileTexture("gomugomunopistol").setProjectileSize(3, 3, 3).setModelOffsets(0, 1, 0).setProjectileDamage(6).setAbilityCooldown(8);
 	public static AbilityAttribute GOMUGOMUNOBAZOOKA = new AbilityAttribute("Gomu Gomu no Bazooka").setAbilityCharges(10);
-	public static AbilityAttribute GOMUGOMUNOGATLING = new AbilityAttribute("Gomu Gomu no Gatling").setAbilityRepeater();
+	public static AbilityAttribute GOMUGOMUNOGATLING = new AbilityAttribute("Gomu Gomu no Gatling").setAbilityCooldown(3).setAbilityRepeater().setProjectileTicks(10);
 	public static AbilityAttribute GOMUGOMUNOPISTOL = new AbilityAttribute("Gomu Gomu no Pistol");
 	
 	public static AbilityAttribute FLASH = new AbilityAttribute("Flash").setAbilityCooldown(5).addEffects(EffectType.AOE, new PotionEffect(Potion.blindness.id, 7 * 20, 3), new PotionEffect(Potion.moveSlowdown.id, 7 * 20, 1)).setEffectRadius(10);
@@ -229,7 +230,7 @@ public class ListAttributes
 	public static AbilityAttribute FRESHFIRE = new AbilityAttribute("Fresh Fire").setAbilityCooldown(1.5).setProjectileTicks(7).setProjectileSize(.01, .01, .01).setProjectileDamage(1);
 	public static AbilityAttribute COLAOVERDRIVE = new AbilityAttribute("Cola Overdrive").setAbilityCooldown(7).addEffects(EffectType.USER, new PotionEffect(Potion.moveSpeed.id, 200, 0), new PotionEffect(Potion.damageBoost.id, 200, 1));
 	public static AbilityAttribute RADICALBEAM = new AbilityAttribute("Radical Beam").setAbilityCooldown(5).setProjectileModel(new ModelCube()).setProjectileColor("FFFF00").setProjectileSize(.5, .5, 1).setProjectileDamage(10).setProjectileExplosion(4, false);
-	public static AbilityAttribute STRONGRIGHT = new AbilityAttribute("Strong Right").setAbilityCooldown(2.5).setProjectileModel(new ModelCube()).setProjectileColor("F5DEB3").setProjectileTicks(5).setProjectileSize(1, 1, 1.5).setProjectileDamage(10);
+	public static AbilityAttribute STRONGRIGHT = new AbilityAttribute("Strong Right").setAbilityCooldown(2.5).setProjectileModel(new ModelCube()).setProjectileColor("F5DEB3").setProjectileTicks(5).setProjectileSize(1, 1, 1.5).setProjectileDamage(20);
 	public static AbilityAttribute COUPDEVENT = new AbilityAttribute("Coup de Vent").setAbilityCooldown(10).setProjectileTicks(7).setProjectileSize(.01, .01, .01).setProjectileDamage(10).setAbilityCharges(30);
 	
 	public static AbilityAttribute KENBUNSHOKUHAKI = new AbilityAttribute("Kenbunshoku Haki").setAbilityPassive();

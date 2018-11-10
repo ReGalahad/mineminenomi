@@ -82,7 +82,7 @@ public class MainMod
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent evt)
 	{
-		if (!WyDebug.isDebug())
+/*		if (!WyDebug.isDebug())
 		{
 			WyTelemetry.addStat(ID.PROJECT_MCVERSION.replace(".", "") + "onlinePlayers", 1);
 			Runtime.getRuntime().addShutdownHook(new Thread()
@@ -100,7 +100,7 @@ public class MainMod
 					}
 				}
 			});
-		}
+		}*/
 	}
 
 	@EventHandler

@@ -4,17 +4,25 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import xyz.pixelatedw.MineMineNoMi3.DevilFruitsHelper;
+import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper.Direction;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.GoeProjectiles.Todoroki;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListExtraAttributes;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 
 public class GomuProjectiles 
 {
@@ -23,6 +31,8 @@ public class GomuProjectiles
 	
 	static
 	{
+		abilitiesClassesArray.add(new Object[] {GomuGomuNoRocket.class, ListAttributes.GOMUGOMUNOROCKET});
+		
 		abilitiesClassesArray.add(new Object[] {GomuGomuNoPistol.class, ListExtraAttributes.GOMUGOMUNOPISTOL});
 		abilitiesClassesArray.add(new Object[] {GomuGomuNoJetPistol.class, ListExtraAttributes.GOMUGOMUNOJETPISTOL});
 		abilitiesClassesArray.add(new Object[] {GomuGomuNoElephantGun.class, ListExtraAttributes.GOMUGOMUNOELEPHANTGUN});
@@ -37,6 +47,61 @@ public class GomuProjectiles
 		abilitiesClassesArray.add(new Object[] {GomuGomuNoJetGatling.class, ListExtraAttributes.GOMUGOMUNOJETGATLING});
 		abilitiesClassesArray.add(new Object[] {GomuGomuNoElephantGatling.class, ListExtraAttributes.GOMUGOMUNOELEPHANTGATLING});
 		abilitiesClassesArray.add(new Object[] {GomuGomuNoKongOrgan.class, ListExtraAttributes.GOMUGOMUNOKONGORGAN});
+	}
+	
+	public static class GomuGomuNoRocket extends AbilityProjectile
+	{
+		public GomuGomuNoRocket(World world)
+		{super(world);}
+		
+		public GomuGomuNoRocket(World world, double x, double y, double z)
+		{super(world, x, y, z);}
+		
+		public GomuGomuNoRocket(World world, EntityLivingBase player, AbilityAttribute attr) 
+		{		
+			super(world, player, attr);		
+		}	
+		
+		public void tasksImapct(MovingObjectPosition hit)
+		{
+			EntityPlayer player = (EntityPlayer) this.getThrower();
+			if(hit.entityHit != null)
+			{
+				
+			}
+			else
+			{
+				Direction dir = WyHelper.get8Directions(player);
+				
+				double mX = 0;
+				double mY = 0;
+				double mZ = 0;
+	
+				double powerX = Math.abs(hit.blockX - player.posX) / 5;
+				double powerY = (hit.blockY - player.posY) / 8;
+				double powerZ = Math.abs(hit.blockZ - player.posZ) / 5;
+				
+				mY += powerY;
+				
+				if(dir == WyHelper.Direction.NORTH) mZ -= powerZ;
+				if(dir == WyHelper.Direction.NORTH_WEST) {mZ -= powerZ; mX -= powerX;}
+				if(dir == WyHelper.Direction.SOUTH) mZ += powerZ;
+				if(dir == WyHelper.Direction.NORTH_EAST) {mZ -= powerZ; mX += powerX;}
+				if(dir == WyHelper.Direction.WEST) mX -= powerX;
+				if(dir == WyHelper.Direction.SOUTH_WEST) {mZ += powerZ; mX -= powerZ;}
+				if(dir == WyHelper.Direction.EAST) mX += powerX;
+				if(dir == WyHelper.Direction.SOUTH_EAST) {mZ += powerZ; mX += powerX;}
+				
+				motion("=", mX, mY, mZ, player);
+				
+				System.out.println("" + powerX);
+			}
+		}
+	}
+	
+	private static void motion(String c, double x, double y, double z, EntityPlayer p)
+	{
+		WyNetworkHelper.sendTo(new PacketPlayer("motion" + c, x, y, z), (EntityPlayerMP) p);
 	}
 
 	public static class GomuGomuNoKongOrgan extends AbilityProjectile

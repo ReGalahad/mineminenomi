@@ -37,9 +37,9 @@ public class CyborgAbilities
 		{
 			ExtendedEntityStats props = ExtendedEntityStats.get(player);
 
-			if(!isOnCooldown && props.getCola() >= 100)
+			if(!isOnCooldown && props.getCola() >= 25)
 				super.startCharging(player);
-			else if(props.getCola() < 100)
+			else if(props.getCola() < 25)
 				WyHelper.sendMsgToPlayer(player, "Not enough Cola !");					
 		}
 		
@@ -53,7 +53,7 @@ public class CyborgAbilities
 		{
 			ExtendedEntityStats props = ExtendedEntityStats.get(player);
 
-			props.alterCola(-100);
+			props.alterCola(-25);
 			isCharging = false;
 			isOnCooldown = true;	
 					

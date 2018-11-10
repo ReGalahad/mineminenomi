@@ -1,5 +1,9 @@
 package xyz.pixelatedw.MineMineNoMi3.gui;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 
@@ -66,7 +70,7 @@ public class GUIQuests extends GuiScreen
 		
 		String currentQuest = questProps.getQuestIndexFromTracker(questIndex) != null ? questProps.getQuestIndexFromTracker(questIndex).getQuestName() : "None";
 		double currentProgress = questProps.getQuestIndexFromTracker(questIndex) != null ? (questProps.getQuestIndexFromTracker(questIndex).getProgress() / questProps.getQuestIndexFromTracker(questIndex).getMaxProgress()) * 100 : -1;
-		String[] currentDescription = questProps.getQuestIndexFromTracker(questIndex) != null ? questProps.getQuestIndexFromTracker(questIndex).getQuestDescription() : null;
+		List<String> currentDescription = questProps.getQuestIndexFromTracker(questIndex) != null ? Arrays.stream(questProps.getQuestIndexFromTracker(questIndex).getQuestDescription()).filter(line -> !line.isEmpty()).collect(Collectors.toList()) : null;
 		
 		if(questProps.getQuestIndexFromTracker(questIndex) != null)
 		{
@@ -100,7 +104,9 @@ public class GUIQuests extends GuiScreen
 			GL11.glScaled(scale, scale, 0);
 			GL11.glTranslated(-256, -256, 0);
 			
-			mc.fontRenderer.drawString(EnumChatFormatting.BOLD + "" + EnumChatFormatting.UNDERLINE + currentQuest, 0, 0, WyHelper.hexToRGB("#161616").getRGB());
+			String questTitleToRender = questProps.getQuestIndexFromTracker(questIndex) != null ? questProps.getQuestIndexFromTracker(questIndex).getQuestID() : "none";
+			
+			mc.fontRenderer.drawString(EnumChatFormatting.BOLD + "" + EnumChatFormatting.UNDERLINE + I18n.format("quest." + questTitleToRender + ".name"), 0, 0, WyHelper.hexToRGB("#161616").getRGB());
 		}
 		GL11.glPopMatrix();
 		
@@ -110,9 +116,9 @@ public class GUIQuests extends GuiScreen
 		if(currentDescription != null)
 		{
 			int i = 18;
-			for(String line : currentDescription)
+			for(int l = 0; l <  currentDescription.size(); l++)
 			{
-				mc.fontRenderer.drawString(line, posX - 20, posY + 65 + i, WyHelper.hexToRGB("#161616").getRGB());
+				mc.fontRenderer.drawString(I18n.format("quest." + questProps.getQuestIndexFromTracker(questIndex).getQuestID() + "_" + l + ".desc"), posX - 20, posY + 65 + i, WyHelper.hexToRGB("#161616").getRGB());
 				i += 16;
 			}
 		}

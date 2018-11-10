@@ -58,6 +58,22 @@ public class DevilFruitsHelper
     	
     	return false;
     }
+    
+    public static boolean hasBusoHakiAquired(EntityPlayer player)
+    {
+		ExtendedEntityStats props = ExtendedEntityStats.get(player);
+		
+		if(props.getRace().equalsIgnoreCase(ID.RACE_HUMAN) && props.getDoriki() >= 9000)
+			return true;
+			
+		if(props.getRace().equalsIgnoreCase(ID.RACE_FISHMAN) && props.getDoriki() >= 9000)
+			return true;
+		
+		if(props.getRace().equalsIgnoreCase(ID.RACE_CYBORG) && props.getDoriki() >= 8500)
+			return true;
+    	
+    	return false;
+    }
 	
     public static boolean isSword(ItemStack itemStack)
     {

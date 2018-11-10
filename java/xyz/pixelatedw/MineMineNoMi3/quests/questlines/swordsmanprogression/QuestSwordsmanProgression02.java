@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import org.apache.logging.log4j.LogManager;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
@@ -48,7 +49,7 @@ public class QuestSwordsmanProgression02 extends Quest implements ITimedQuest, I
 	
 	public void startQuest(EntityPlayer player)
 	{
-		WyHelper.sendMsgToPlayer(player, "<Swordsman Master> First we'll test your determination, you must survive the night in the wilderness without dying !");
+		WyHelper.sendMsgToPlayer(player, I18n.format("quest." + this.getQuestID() + ".started"));	
 		
 		this.extraData = new NBTTagCompound();	
 		this.extraData.setLong("currentDays", (int) (player.worldObj.getWorldTime()));
@@ -60,11 +61,14 @@ public class QuestSwordsmanProgression02 extends Quest implements ITimedQuest, I
 	{
 		boolean extraDays = (int) (player.worldObj.getWorldTime()) >= (this.extraData.getLong("currentDays") + 72000) ;
 		
+		WyHelper.sendMsgToPlayer(player, I18n.format("quest." + this.getQuestID() + ".completed"));	
+
+		/*
 		if(extraDays)
 			WyHelper.sendMsgToPlayer(player, "<Swordsman Master> Almost thought you died there kid, I'm glad that you survived but there's no time to rest, hope you're ready for your next trial !");
 		else
 			WyHelper.sendMsgToPlayer(player, "<Swordsman Master> Seems like it was too easy for you ?");
-		
+		*/
 		super.finishQuest(player);
 	}
 

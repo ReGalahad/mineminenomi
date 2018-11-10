@@ -23,6 +23,7 @@ import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainMod;
+import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
 
 public class WyRegistry
 {
@@ -37,7 +38,8 @@ public class WyRegistry
 	
 	public static void registerName(String key, String localizedName)
 	{
-		getLangMap().put(key, localizedName);
+		if(WyDebug.isDebug())
+			getLangMap().put(key, localizedName);
 	}  
 	 
 	public static void registerBlock(Block block, String localizedName, float hard, CreativeTabs tab, Class<? extends TileEntity> tile)

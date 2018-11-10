@@ -30,29 +30,19 @@ public class TeleporterScenarioArena extends Teleporter
 	public void teleport(Entity entity, String scenarioName)
 	{
 		EntityPlayerMP playerMP = (EntityPlayerMP) entity;
+
+		playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, ID.DIMENSION_ID_SCENARIOARENA, this);
 		
-        Scenario scenario = ScenarioManager.scenarios.get(scenarioName);
-        
-		if(ScenarioManager.canSpawn(worldServerInstance, ScenarioManager.instanceSpawnX, ScenarioManager.instanceSpawnY, ScenarioManager.instanceSpawnZ))
-		{
-	        playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, ID.DIMENSION_ID_SCENARIOARENA, this);
-			
-	        scenario.scenarioXPos = ScenarioManager.instanceSpawnX;
-	        scenario.scenarioYPos = ScenarioManager.instanceSpawnY;
-	        scenario.scenarioZPos = ScenarioManager.instanceSpawnZ;
-	        
-	        scenario.load(playerMP, worldServerInstance);
-		}
+		playerMP.setPositionAndUpdate(-20000, 64, -20000);
 	}
 	
 	public void endScenario(Entity entity, String scenarioName)
 	{
 		EntityPlayerMP playerMP = (EntityPlayerMP) entity;
 		
-		ScenarioManager.scenarios.get(scenarioName).unload(playerMP, playerMP.worldObj);
+		//ScenarioManager.scenarios.get(scenarioName).unload(playerMP, playerMP.worldObj);
 		
-        playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, 0, this);
-		
+        playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, 0, this);	
 	}
 
 	public void placeInPortal(Entity entity, double x, double y, double z, double f)

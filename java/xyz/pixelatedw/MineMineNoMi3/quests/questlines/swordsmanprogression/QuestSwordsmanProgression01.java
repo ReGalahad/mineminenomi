@@ -3,6 +3,7 @@ package xyz.pixelatedw.MineMineNoMi3.quests.questlines.swordsmanprogression;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -49,14 +50,14 @@ public class QuestSwordsmanProgression01 extends Quest implements IInteractQuest
 
 	public void startQuest(EntityPlayer player)
 	{
-		WyHelper.sendMsgToPlayer(player, "<Swordsman Master> You want to become a swordsman master, young one ? I do like the sparks in your eyes so how about this, show me your best sword and I'll see if you're fit or not to start training with me.");								
+		WyHelper.sendMsgToPlayer(player, I18n.format("quest." + this.getQuestID() + ".started"));								
 	
 		super.startQuest(player);
 	}
 
 	public void finishQuest(EntityPlayer player)
 	{
-		WyHelper.sendMsgToPlayer(player, "<Swordsman Master> That's a really nice blade you have there, really strong indeed. Fine, I will train you, when you're ready come and talk with me again !");
+		WyHelper.sendMsgToPlayer(player, I18n.format("quest." + this.getQuestID() + ".started"));								
 		
 		super.finishQuest(player);
 	}

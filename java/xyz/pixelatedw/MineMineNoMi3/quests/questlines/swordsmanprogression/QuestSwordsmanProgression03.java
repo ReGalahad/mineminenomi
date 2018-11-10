@@ -1,5 +1,6 @@
 package xyz.pixelatedw.MineMineNoMi3.quests.questlines.swordsmanprogression;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -48,14 +49,14 @@ public class QuestSwordsmanProgression03 extends Quest implements IKillQuest, IP
 	
 	public void startQuest(EntityPlayer player)
 	{
-		WyHelper.sendMsgToPlayer(player, "<Swordsman Master> Next we will test your strength and stamina ! Go to the nearby mountains and kill 20 creatures of your choice while breathing some fresh air.");
+		WyHelper.sendMsgToPlayer(player, I18n.format("quest." + this.getQuestID() + ".started"));	
 		
 		super.startQuest(player);
 	}
 
 	public void finishQuest(EntityPlayer player)
 	{
-		WyHelper.sendMsgToPlayer(player, "<Swordsman Master> Impressive.");
+		WyHelper.sendMsgToPlayer(player, I18n.format("quest." + this.getQuestID() + ".completed"));	
 
 		super.finishQuest(player);
 	}

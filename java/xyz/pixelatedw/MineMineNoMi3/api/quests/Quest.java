@@ -1,9 +1,11 @@
 package xyz.pixelatedw.MineMineNoMi3.api.quests;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
+import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketQuestSync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
@@ -24,7 +26,7 @@ public abstract class Quest
 	
 	public void startQuest(EntityPlayer player)
 	{
-		WyHelper.sendMsgToPlayer(player, EnumChatFormatting.GREEN + this.getQuestName() + " has started !");
+		WyHelper.sendMsgToPlayer(player, EnumChatFormatting.GREEN + I18n.format("quest." + this.getQuestID() + ".name") + " " + I18n.format(ID.LANG_GUI_QUESTS_STARTED));
 	}
 	
 	public abstract boolean isPrimary();
@@ -38,7 +40,7 @@ public abstract class Quest
 		questProps.addCompletedQuest(this);
 		WyNetworkHelper.sendTo(new PacketQuestSync(questProps), (EntityPlayerMP) player);
 
-		WyHelper.sendMsgToPlayer(player, EnumChatFormatting.GREEN + "'" + this.getQuestName() + "' has been completed !");
+		WyHelper.sendMsgToPlayer(player, EnumChatFormatting.GREEN + I18n.format("quest." + this.getQuestID() + ".name") + " " + I18n.format(ID.LANG_GUI_QUESTS_COMPLETED));
 	}
 	
 	public abstract boolean canStart(EntityPlayer player);

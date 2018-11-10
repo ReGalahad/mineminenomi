@@ -150,7 +150,9 @@ public class ID
 	LANG_GUI_QUESTS_ACCEPT = "gui.quests.accept.name",	
 	LANG_GUI_QUESTS_DECLINE = "gui.quests.decline.name",	
 	LANG_GUI_QUESTS_ACCEPTTEXT = "gui.quests.accepttext.name",	
-			
+	LANG_GUI_QUESTS_STARTED = "gui.quests.started",	
+	LANG_GUI_QUESTS_COMPLETED = "gui.quests.completed",	
+						
 	DIMENSION_NAME_SCENARIOARENA = "scenarioarena",
 	
 	SCENARIO_ROMANCEDAWN_CAPTAINMORGAN = "scenario_cptmorgan",
@@ -170,6 +172,10 @@ public class ID
 	GUI_CHARACTERCREATOR = 2,
 	GUI_ABILITIES = 3;	
 
+	public static final int[]
+			
+	COORDS_SWORDSMANPROGRESSION05_DOJOAMBUSH = new int[] {-20000, 64, -20000};
+	
 	public static final boolean 
 	
 	DEV_EARLYACCESS = true;

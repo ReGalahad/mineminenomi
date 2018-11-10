@@ -1,5 +1,6 @@
 package xyz.pixelatedw.MineMineNoMi3.quests.questlines.swordsmanprogression;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -48,14 +49,14 @@ public class QuestSwordsmanProgression04 extends Quest implements IHitCounterQue
 	
 	public void startQuest(EntityPlayer player)
 	{
-		WyHelper.sendMsgToPlayer(player, "<Swordsman Master> Now for the last test we must train your movement during combat. Deal 25 critical hits.");
+		WyHelper.sendMsgToPlayer(player, I18n.format("quest." + this.getQuestID() + ".started"));	
 		
 		super.startQuest(player);
 	}
 
 	public void finishQuest(EntityPlayer player)
 	{
-		WyHelper.sendMsgToPlayer(player, "<Swordsman Master> I hope you've learned something from this. Now for the final test...");
+		WyHelper.sendMsgToPlayer(player, I18n.format("quest." + this.getQuestID() + ".completed"));	
 		
 		AbilityProperties abilityProps = AbilityProperties.get(player);
 		

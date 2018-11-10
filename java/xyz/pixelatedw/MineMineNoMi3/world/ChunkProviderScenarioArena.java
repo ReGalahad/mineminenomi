@@ -12,6 +12,12 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
+import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.api.Schematic;
+import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.WySchematicHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
+import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
 public class ChunkProviderScenarioArena implements IChunkProvider
 {
@@ -22,6 +28,8 @@ public class ChunkProviderScenarioArena implements IChunkProvider
     private int chunkZ = 0;
     private BiomeGenBase[] biomesForGeneration;
 
+    private boolean generatedDojoAmbushInstances;
+    
 	public ChunkProviderScenarioArena(World world, long seed)
 	{
 		this.random = new Random(seed);
@@ -50,7 +58,7 @@ public class ChunkProviderScenarioArena implements IChunkProvider
         {
             abyte1[i] = (byte)this.biomesForGeneration[i].biomeID;
         }
-
+                
         chunk.generateSkylightMap();
 		return chunk;
 	}
@@ -64,7 +72,31 @@ public class ChunkProviderScenarioArena implements IChunkProvider
 	@Override
 	public void populate(IChunkProvider chunkProvider, int x, int z) 
 	{
-        BlockFalling.fallInstantly = true;
+        BlockFalling.fallInstantly = true;        
+
+        long initTime = System.currentTimeMillis();
+        
+        //Dojo Section
+        Schematic sch = WySchematicHelper.load("dojo");
+        
+        int wallSizeX = sch.getWidth() * 3;
+        int wallSizeY = sch.getHeight() * 3;
+        int wallSizeZ = sch.getLength() * 3;
+        
+        int posX = ID.COORDS_SWORDSMANPROGRESSION05_DOJOAMBUSH[0];
+        int posY = ID.COORDS_SWORDSMANPROGRESSION05_DOJOAMBUSH[1];
+        int posZ = ID.COORDS_SWORDSMANPROGRESSION05_DOJOAMBUSH[2];
+
+        /*WyHelper.createCube(worldObj, 
+        		new int[] {posX, posY, posZ}, 
+        		new int[] {wallSizeX, wallSizeY, wallSizeZ}, ListMisc.Darkness);*/
+        if(!generatedDojoAmbushInstances)
+        {
+	        WySchematicHelper.build(sch, this.worldObj, posX, posY, posZ);     
+	        WyDebug.info("Dojo Ambush Instance Created - " + (System.currentTimeMillis() - initTime) + "ms - X:" + posX + " Y:" + posY + " Z:" + posZ);
+	        generatedDojoAmbushInstances = true;
+        }
+        
         BlockFalling.fallInstantly = false;		
 	}
 
