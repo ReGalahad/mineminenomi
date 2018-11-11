@@ -71,6 +71,11 @@ public class ItemCoreWeapon extends Item
 			itemStack.getTagCompound().setDouble("multiplier", multiplier);
 		}
 	}
+	
+    public int getItemEnchantability()
+    {
+        return 22;
+    }
 
 	public ItemCoreWeapon setMaxDamage(int maxDamage)
 	{

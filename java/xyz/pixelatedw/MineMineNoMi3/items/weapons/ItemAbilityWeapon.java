@@ -65,6 +65,11 @@ public class ItemAbilityWeapon extends ItemCoreWeapon
 		}	
 	}
 
+    public int getItemEnchantability()
+    {
+        return 0;
+    }
+	
 	public ItemAbilityWeapon setIsPoisonous()
 	{
 		this.isPoisonous = true;

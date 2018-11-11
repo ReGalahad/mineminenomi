@@ -170,8 +170,8 @@ public class ModelSpeedBison extends ModelZoanMorph
 		{ 0, 5, 10, 15, 20, 25, 30, 25, 20, 15, 10, 5, 0, -5, -10, -15, -20, -25, -30, -25, -20, -15, -10, -5, 0 };
 
 		updateDistanceMovedTotal(ent);
-		int cycleIndexFrontLeg = (int) ((getDistanceMovedTotal() * 4) % animationFrontLegMovement.length);
-		int cycleIndexBackLeg = (int) ((getDistanceMovedTotal() * 3) % animationBackLegMovement.length);
+		int cycleIndexFrontLeg = (int) ((getDistanceMovedTotal() * 0.2) % animationFrontLegMovement.length);
+		int cycleIndexBackLeg = (int) ((getDistanceMovedTotal() * 0.4) % animationBackLegMovement.length);
 
 		if (!Minecraft.getMinecraft().isGamePaused())
 		{

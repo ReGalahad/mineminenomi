@@ -774,6 +774,7 @@ public class EventsPersistence
 					
 					abilityProps.clearDevilFruitAbilities();
 					props.setGear(1);
+					props.setZoanPoint("n/a");
 					
 					for(Ability a : ((AkumaNoMi)df.getItem()).abilities)
 						if(!DevilFruitsHelper.verifyIfAbilityIsBanned(a))

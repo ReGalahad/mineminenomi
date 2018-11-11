@@ -309,7 +309,13 @@ public class OpeAbilities
 					canSpawnRoom = true;
 				else
 				{
-					((BlockOpeMid) WyHelper.getBlockNearby(player, 30, ListMisc.OpeMid)).clearRoom();
+					for(int x = -50; x < 50; x++)
+					for(int y = -50; y < 50; y++)
+					for(int z = -50; z < 50; z++)
+					{
+						if(player.worldObj.getBlock((int) player.posX + x, (int) player.posY + y, (int) player.posZ + z) == ListMisc.Ope || player.worldObj.getBlock((int) player.posX + x, (int) player.posY + y, (int) player.posZ + z) == ListMisc.OpeMid)
+							player.worldObj.setBlock((int) player.posX + x, (int) player.posY + y, (int) player.posZ + z, Blocks.air);
+					}	
 					canSpawnRoom = true;
 				}
 			}

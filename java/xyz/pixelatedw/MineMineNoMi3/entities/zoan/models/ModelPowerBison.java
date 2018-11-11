@@ -165,6 +165,8 @@ public class ModelPowerBison extends ModelZoanMorph
     
     public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float headYaw, float headPitch, float scaleFactor, Entity ent)
     {    	
+    	EntityLivingBase entity = ((EntityLivingBase)ent);
+    	
 	    double[] animationLegMovement = new double[]
 				{-20, -25, -30, -35, -40, -45, -50, -55, -60, -55, -50, -45, -40, -35, -30, -25, -20, -15, -10, -5, 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5, 0, -5, -10, -15, -20};       	    
 	
@@ -172,28 +174,48 @@ public class ModelPowerBison extends ModelZoanMorph
 				{0, -5, -10, -15, -20, -25, -30, -25, -20, -15, -10, -5, 0, 5, 10, 15, 20, 25, 30, 25, 20, 15, 10, 5, 0};       	
 	    
         updateDistanceMovedTotal(ent);
-        int cycleIndexLeg = (int) ((getDistanceMovedTotal() * 4) % animationLegMovement.length);
-        int cycleIndexArm = (int) ((getDistanceMovedTotal() * 1.25) % animationArmMovement.length);
+        int cycleIndexLeg = (int) ((getDistanceMovedTotal() * 1) % animationLegMovement.length);
+        int cycleIndexArm = (int) ((getDistanceMovedTotal() * 0.25) % animationArmMovement.length);
         
 	    if(!Minecraft.getMinecraft().isGamePaused())
-	    {
+	    {  	
+	        this.head.rotateAngleY = headYaw / (270F / (float)Math.PI);
+	        this.head.rotateAngleX = headPitch / (360F / (float)Math.PI);
+	        
 	    	if(ent.getDistance(ent.prevPosX, ent.prevPosY, ent.prevPosZ) > 0)
-	    	{		
+	    	{	    		
 	    		leftleg4.rotateAngleX = (float) degToRad(animationLegMovement[cycleIndexLeg]);
 		    	rightleg4.rotateAngleX = (float) degToRad(animationLegMovement[cycleIndexLeg]) * -1;
 		    	
 		    	leftarm1.rotateAngleX = (float) degToRad(animationArmMovement[cycleIndexArm]);
 		    	rightarm1.rotateAngleX = (float) degToRad(animationArmMovement[cycleIndexArm]) * -1;
 	    	}
-	    	else
+    	
+	    	if( entity.isSwingInProgress )
+	    	{
+	    		rightarm1.rotateAngleX = MathHelper.sin(entity.swingProgress * 3.0F + (float)Math.PI) * 1.2F;
+	    		rightarm1.rotateAngleY = MathHelper.sin(entity.swingProgress * 3.0F + (float)Math.PI) * -0.2F;
+	    		rightarm1.rotateAngleZ = -MathHelper.cos(entity.swingProgress * 4.0F + (float)Math.PI) * 0.5F;
+	    	}
+
+	    	if(ent.getDistance(ent.prevPosX, ent.prevPosY, ent.prevPosZ) <= 0.1F && !entity.isSwingInProgress)
 	    	{
 	    		leftleg4.rotateAngleX = (float) degToRad(-20);
 	    		rightleg4.rotateAngleX = (float) degToRad(-20);
 	    		
-	    		leftarm1.rotateAngleX = (float) degToRad(0);
-	    		rightarm1.rotateAngleX = (float) degToRad(0);
-	    	}
+		    	rightarm1.rotateAngleX = 0;
+		    	rightarm1.rotateAngleY = 0;
+		    	rightarm1.rotateAngleZ = 0.209F;
 		    	
+		    	leftarm1.rotateAngleX = 0;
+		    	leftarm1.rotateAngleY = 0;
+		    	leftarm1.rotateAngleZ = -0.209F;
+	    	}
+	    	else if( !entity.isSwingInProgress && ent.getDistance(ent.prevPosX, ent.prevPosY, ent.prevPosZ) > 0)
+	    	{
+		    	rightarm1.rotateAngleY = 0;
+		    	rightarm1.rotateAngleZ = 0.209F;
+	    	}
 	    }
 		
     }

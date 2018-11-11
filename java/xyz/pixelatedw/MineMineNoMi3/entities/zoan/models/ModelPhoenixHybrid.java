@@ -6,6 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyRenderHelper;
 
@@ -96,8 +97,13 @@ public class ModelPhoenixHybrid extends ModelZoanMorph
 
 	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float headYaw, float headPitch, float scaleFactor, Entity ent)
 	{
+    	EntityLivingBase entity = ((EntityLivingBase)ent);
+
 		if (!Minecraft.getMinecraft().isGamePaused())
 		{
+	        this.head.rotateAngleY = headYaw / (270F / (float)Math.PI);
+	        this.head.rotateAngleX = headPitch / (360F / (float)Math.PI);
+	        
 			updateDistanceMovedTotal(ent);
 
 			if (!ent.onGround)
@@ -156,9 +162,23 @@ public class ModelPhoenixHybrid extends ModelZoanMorph
 					Rightarm.rotateAngleZ = (float) degToRad(-57);
 
 					Leftarm.rotateAngleX = (float) degToRad(65);
-					Rightarm.rotateAngleX = (float) degToRad(65);
+					Rightarm.rotateAngleX = (float) degToRad(65);				
 				}
 			}
+			
+	    	if( entity.isSwingInProgress )
+	    	{
+	    		Rightarm.rotateAngleY = MathHelper.sin(entity.swingProgress * 3.0F + (float)Math.PI) * 1.2F;
+	    		Rightarm.rotateAngleZ = -MathHelper.cos(entity.swingProgress * 4.0F + (float)Math.PI) * 0.2F;
+	    	}
+	    	
+	    	
+	    	if(ent.getDistance(ent.prevPosX, ent.prevPosY, ent.prevPosZ) <= 0.1F && !entity.isSwingInProgress && ent.onGround)
+	    	{
+		    	Rightarm.rotateAngleX = 1.134F;
+		    	Rightarm.rotateAngleY = -0.261F;
+		    	Rightarm.rotateAngleZ = -0.994F;
+	    	}
 		}
 	}
 

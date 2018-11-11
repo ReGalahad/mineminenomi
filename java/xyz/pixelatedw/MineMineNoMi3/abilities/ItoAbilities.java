@@ -3,6 +3,7 @@ package xyz.pixelatedw.MineMineNoMi3.abilities;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
@@ -45,7 +46,7 @@ public class ItoAbilities
 				{
 					public void call(int x, int y, int z)
 					{
-						DevilFruitsHelper.placeIfCanReplaceBlock(world, x, y ,z, ListMisc.StringWall);
+						DevilFruitsHelper.placeIfCanReplaceBlock(world, x, y , z, ListMisc.StringWall);
 					}
 				});
 				player.worldObj.setBlock((int) player.posX, (int) player.posY, (int) player.posZ, ListMisc.StringMid);
@@ -59,7 +60,13 @@ public class ItoAbilities
 					canSpawnTorikago = true;
 				else
 				{
-					((BlockStringMid)WyHelper.getBlockNearby(player, 30, ListMisc.StringMid)).clearRoom();
+					for(int x = -50; x < 50; x++)
+					for(int y = -50; y < 50; y++)
+					for(int z = -50; z < 50; z++)
+					{
+						if(player.worldObj.getBlock((int) player.posX + x, (int) player.posY + y, (int) player.posZ + z) == ListMisc.StringWall || player.worldObj.getBlock((int) player.posX + x, (int) player.posY + y, (int) player.posZ + z) == ListMisc.StringMid)
+							player.worldObj.setBlock((int) player.posX + x, (int) player.posY + y, (int) player.posZ + z, Blocks.air);
+					}					
 					canSpawnTorikago = true;
 				}
 			}
