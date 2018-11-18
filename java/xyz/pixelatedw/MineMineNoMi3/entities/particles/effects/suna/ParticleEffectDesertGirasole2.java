@@ -4,11 +4,9 @@ import java.util.Timer;
 
 import net.minecraft.entity.player.EntityPlayer;
 import xyz.pixelatedw.MineMineNoMi3.ID;
-import xyz.pixelatedw.MineMineNoMi3.MainMod;
-import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.ParticleEffect;
-import xyz.pixelatedw.MineMineNoMi3.lists.ListParticleEffects;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.tasks.ParticleTaskTornado;
 
 public class ParticleEffectDesertGirasole2 extends ParticleEffect
 {
@@ -22,7 +20,7 @@ public class ParticleEffectDesertGirasole2 extends ParticleEffect
 				posZ, 
 				0, 0, 0)
 			.setParticleScale(4).setParticleGravity(-1.5F);
-		timer.schedule(ListParticleEffects.createTornadoFX(player, particle.posX, particle.posY, particle.posZ, particle, 0.3, 1, 4, .8), 0);
+		timer.schedule(ParticleTaskTornado.Create(player, particle.posX, particle.posY, particle.posZ, particle, 0.3, 1, 4, .8), 0);
 	}
 
 }

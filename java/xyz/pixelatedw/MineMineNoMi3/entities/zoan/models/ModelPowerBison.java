@@ -164,7 +164,7 @@ public class ModelPowerBison extends ModelZoanMorph
     protected double distanceMovedTotal = 0.0D;
     
     public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float headYaw, float headPitch, float scaleFactor, Entity ent)
-    {    	
+    {
     	EntityLivingBase entity = ((EntityLivingBase)ent);
     	
 	    double[] animationLegMovement = new double[]
@@ -178,7 +178,7 @@ public class ModelPowerBison extends ModelZoanMorph
         int cycleIndexArm = (int) ((getDistanceMovedTotal() * 0.25) % animationArmMovement.length);
         
 	    if(!Minecraft.getMinecraft().isGamePaused())
-	    {  	
+	    {
 	        this.head.rotateAngleY = headYaw / (270F / (float)Math.PI);
 	        this.head.rotateAngleX = headPitch / (360F / (float)Math.PI);
 	        

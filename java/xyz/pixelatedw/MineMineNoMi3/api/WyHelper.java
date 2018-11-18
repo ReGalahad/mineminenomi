@@ -78,15 +78,15 @@ public class WyHelper
 		return false;
 	}
 
-	public static Block getBlockNearby(EntityPlayer player, int radius, Block block)
+	public static Block getBlockNearby(EntityLivingBase entity, int radius, Block block)
 	{
 		for (int x = -radius; x < radius; x++)
 			for (int y = -radius; y < radius; y++)
 				for (int z = -radius; z < radius; z++)
 				{
-					if (player.worldObj.getBlock((int) player.posX + x, (int) player.posY + y, (int) player.posZ + z) == block)
+					if (entity.worldObj.getBlock((int) entity.posX + x, (int) entity.posY + y, (int) entity.posZ + z) == block)
 					{
-						return player.worldObj.getBlock((int) player.posX + x, (int) player.posY + y, (int) player.posZ + z);
+						return entity.worldObj.getBlock((int) entity.posX + x, (int) entity.posY + y, (int) entity.posZ + z);
 					}
 				}
 

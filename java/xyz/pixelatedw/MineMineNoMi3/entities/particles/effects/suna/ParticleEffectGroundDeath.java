@@ -1,15 +1,12 @@
 package xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.suna;
 
-import java.util.Random;
 import java.util.Timer;
 
 import net.minecraft.entity.player.EntityPlayer;
 import xyz.pixelatedw.MineMineNoMi3.ID;
-import xyz.pixelatedw.MineMineNoMi3.MainMod;
-import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.ParticleEffect;
-import xyz.pixelatedw.MineMineNoMi3.lists.ListParticleEffects;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.tasks.ParticleTaskCharge;
 
 public class ParticleEffectGroundDeath extends ParticleEffect
 {
@@ -22,7 +19,7 @@ public class ParticleEffectGroundDeath extends ParticleEffect
 				posY - 1, 
 				posZ, 
 				0, 0, 0);
-		timer.schedule(ListParticleEffects.createCharge1FX(player, particle.posX, particle.posY, particle.posZ, particle, 0.5, 1, 0.80, 0.2), 0);
+		timer.schedule(ParticleTaskCharge.Create(player, particle.posX, particle.posY, particle.posZ, particle, 0.5, 1, 0.80, 0.2), 0);
 	}
 
 }

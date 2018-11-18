@@ -50,6 +50,7 @@ public class GUIPlayer extends GuiScreen
 		String raceActual = I18n.format("race." + props.getRace().toLowerCase() + ".name");
 		String styleActual = I18n.format("style." + props.getFightStyle().toLowerCase() + ".name");
 		
+		//TODO DORIKI and COLA I18n strings
 		if(props.getRace().equals(ID.RACE_CYBORG))
 			mc.fontRenderer.drawStringWithShadow(EnumChatFormatting.BOLD + "COLA: " + EnumChatFormatting.RESET + props.getCola() + " / " + props.getMaxCola(), posX - 30, posY + 50, -1) ;
 		mc.fontRenderer.drawStringWithShadow(EnumChatFormatting.BOLD + "DORIKI: " + EnumChatFormatting.RESET + props.getDoriki(), posX - 30, posY + 70, -1);
@@ -100,6 +101,7 @@ public class GUIPlayer extends GuiScreen
     
 		if(props.getFaction().equals(ID.FACTION_PIRATE) && props.getBounty() > 0)
 		{
+			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			this.mc.renderEngine.bindTexture(ID.TEXTURE_BOUNTYPOSTER);
 			this.drawTexturedModalRect(posX + 200, posY + 130, 0, 0, 180, 200);
 			mc.fontRenderer.drawStringWithShadow(EnumChatFormatting.BOLD + "" + props.getBounty(), posX + 220, posY + 208, -1);

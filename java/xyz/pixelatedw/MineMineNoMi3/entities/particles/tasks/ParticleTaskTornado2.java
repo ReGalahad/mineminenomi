@@ -8,8 +8,8 @@ import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
 
 
-/** TODO Change this shitty effect */
-public class ParticleTaskCharge2 extends TimerTask
+/** TODO Change this shitty effect, this is a Tornado2 effect clearly */
+public class ParticleTaskTornado2 extends TimerTask
 {
 	
 	private EntityLivingBase player;
@@ -17,18 +17,12 @@ public class ParticleTaskCharge2 extends TimerTask
 	private double radius, posX, posY, posZ;
 	private int density;
 
-	public ParticleTaskCharge2(EntityLivingBase player, double posX, double posY, double posZ, String particle, double radius, int density)
+	public static ParticleTaskTornado2 Create(EntityLivingBase player, double posX, double posY, double posZ, Object particle, double radius, int density)
 	{
-		this.player = player;
-		this.particle = particle;
-		this.radius = radius;
-		this.density = density;
-		this.posX = posX;
-		this.posY = posY;
-		this.posZ = posZ;
+		return new ParticleTaskTornado2(player, posX, posY, posZ, particle, radius, density);
 	}
 	
-	public ParticleTaskCharge2(EntityLivingBase player, double posX, double posY, double posZ, EntityParticleFX particle, double radius, int density)
+	private ParticleTaskTornado2(EntityLivingBase player, double posX, double posY, double posZ, Object particle, double radius, int density)
 	{
 		this.player = player;
 		this.particle = particle;

@@ -2,9 +2,12 @@ package xyz.pixelatedw.MineMineNoMi3.entities.zoan.models;
 
 import org.lwjgl.opengl.GL11;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.MathHelper;
 
 public class ModelVenomDemon extends ModelZoanMorph 
 {
@@ -268,6 +271,8 @@ public class ModelVenomDemon extends ModelZoanMorph
     @Override
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) 
     { 
+    	setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+
         this.finger32.render(f5);
         this.body6.render(f5);
         this.finger42_1.render(f5);
@@ -321,6 +326,26 @@ public class ModelVenomDemon extends ModelZoanMorph
         this.neck.render(f5);
     }
 
+    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float headYaw, float headPitch, float scaleFactor, Entity ent)
+    {
+    	EntityLivingBase entity = ((EntityLivingBase)ent);
+    	
+	    if(!Minecraft.getMinecraft().isGamePaused())
+	    {
+	    	//TODO Head animation and punching animation, needs a recompilation of the model with child sets
+	    	if( entity.isSwingInProgress )
+	    	{
+	    		this.rightarm.rotateAngleX = MathHelper.sin(entity.swingProgress * 3.0F + (float)Math.PI) * 1.2F;
+	    		this.rightarm.rotateAngleY = MathHelper.sin(entity.swingProgress * 3.0F + (float)Math.PI) * -0.2F;
+	    		this.rightarm.rotateAngleZ = -MathHelper.cos(entity.swingProgress * 4.0F + (float)Math.PI) * 0.5F;
+	    	}
+	    	else
+	    	{
+	    		
+	    	}
+	    }
+    }
+    
     public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
     {
         modelRenderer.rotateAngleX = x;

@@ -1,17 +1,12 @@
 package xyz.pixelatedw.MineMineNoMi3.abilities;
 
-import java.util.Timer;
-
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import xyz.pixelatedw.MineMineNoMi3.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
-import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper.Direction;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
@@ -20,9 +15,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.SunaProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
-import xyz.pixelatedw.MineMineNoMi3.lists.ListParticleEffects;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
-import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 
 public class SunaAbilities 
 {
@@ -47,7 +40,7 @@ public class SunaAbilities
 		{		
 			if(!this.isOnCooldown)
 			{
-				if(!MainConfig.enableGriefing)
+				if(MainConfig.enableGriefing)
 				{
 					for(int i = -15; i < 15; i++)
 					for(int j = -5; j < 5; j++)
@@ -132,7 +125,7 @@ public class SunaAbilities
 		{	
 			if(!this.isOnCooldown())
 			{
-				if(!MainConfig.enableGriefing)
+				if(MainConfig.enableGriefing)
 				{
 					for(EntityLivingBase l : WyHelper.getEntitiesNear(player, 25))
 					{
@@ -164,7 +157,7 @@ public class SunaAbilities
 		{		
 			if(!isOnCooldown)
 			{
-				if(!MainConfig.enableGriefing)
+				if(MainConfig.enableGriefing)
 				{
 					if(WyHelper.get4Directions(player) == WyHelper.Direction.NORTH)
 					{

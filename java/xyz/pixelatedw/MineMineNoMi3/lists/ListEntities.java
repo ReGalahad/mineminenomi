@@ -110,9 +110,9 @@ public class ListEntities
 		//Others
 		WyRegistry.registerMob("Doppelman", EntityDoppelman.class);
 		WyRegistry.registerMob("Den Den Mushi", EntityDenDenMushi.class, 0xFF00FF, 0x00FF00);
-		WyRegistry.registerMob("Dojo Sensei", EntityDojoSensei.class, 0xFF00FF, 0x00FF00); /** FORGOLD Remove the spawn egg, debug only */
+		WyRegistry.registerMob("Dojo Sensei", EntityDojoSensei.class, 0xFF00FF, 0x00FF00);
 		
-		/** FORGOLD Delete any and all mentions of these */
+		/*
 		//Temp
 		WyRegistry.registerMob("TEMP_Fist", TempEntityFist.class);
 		WyRegistry.registerMob("TEMP_Bazooka", TempEntityBazooka.class);
@@ -127,7 +127,7 @@ public class ListEntities
 		WyRegistry.registerMob("TEMP_Trident", TempEntityTrident.class);
 		WyRegistry.registerMob("TEMP_YukiRabi", TempEntityYukiRabi.class);
 		WyRegistry.registerMob("TEMP_PhoenixFull", TempEntityPhoenixFull.class);
-		WyRegistry.registerMob("TEMP_PhoenixHybrid", TempEntityPhoenixHybrid.class);
+		WyRegistry.registerMob("TEMP_PhoenixHybrid", TempEntityPhoenixHybrid.class);*/
 	}
 	
 }

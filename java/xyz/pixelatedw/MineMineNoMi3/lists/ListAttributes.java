@@ -101,7 +101,7 @@ public class ListAttributes
 	
 	public static AbilityAttribute DOKUGUMO = new AbilityAttribute("Doku Gumo").setAbilityCooldown(30).setAbilityPassive();
 	public static AbilityAttribute DOKUFUGU = new AbilityAttribute("Doku Fugu").setAbilityCooldown(8).setProjectileDamage(15).setProjectileModel(new ModelSphere()).setProjectileColor("A020F0").setProjectileSize(5, 5, 5).addEffects(EffectType.PROJECTILE, new PotionEffect(Potion.poison.id, 240, 1)).setAbilityRepeater(10, 3);
-	public static AbilityAttribute VENOMDEMON = new AbilityAttribute("Venom Demon").setAbilityCooldown(20).setAbilityPassive();
+	public static AbilityAttribute VENOMDEMON = new AbilityAttribute("Venom Demon").setAbilityCooldown(40).setAbilityPassive();
 	public static AbilityAttribute VENOMROAD = new AbilityAttribute("Venom Road").setAbilityCooldown(8).setProjectileDamage(20).setProjectileModel(new ModelHydra()).setProjectileTexture("hydra").setProjectileSize(2, 2, 2.4).addEffects(EffectType.PROJECTILE, new PotionEffect(Potion.poison.id, 500, 1));
 	public static AbilityAttribute CHLOROBALL = new AbilityAttribute("Chloro Ball").setAbilityCooldown(6).setProjectileDamage(10).setProjectileModel(new ModelSphere()).setProjectileColor("A020F0").setProjectileSize(5, 5, 5).addEffects(EffectType.PROJECTILE, new PotionEffect(Potion.poison.id, 240, 1));
 	public static AbilityAttribute HYDRA = new AbilityAttribute("Hydra").setAbilityCooldown(8).setProjectileDamage(30).setProjectileModel(new ModelHydra()).setProjectileTexture("hydra").setProjectileSize(2, 2, 2.4).setProjectileTicks(10).addEffects(EffectType.PROJECTILE, new PotionEffect(Potion.poison.id, 500, 1));
@@ -148,10 +148,10 @@ public class ListAttributes
 	public static AbilityAttribute WHITESNAKE = new AbilityAttribute("White Snake").setAbilityCooldown(5).setProjectileTicks(120).setProjectileModel(new ModelCube()).setProjectileSpeed(5).setProjectileSize(0, 0, 0).setProjectileDamage(30).addEffects(EffectType.PROJECTILE, new PotionEffect(Potion.poison.id, 120, 0));
 	public static AbilityAttribute WHITEOUT = new AbilityAttribute("White Out").setAbilityCooldown(4).setProjectileModel(new ModelCube()).setProjectileSpeed(5).setProjectileSize(0, 0, 0).setProjectileDamage(5).addEffects(EffectType.PROJECTILE, new PotionEffect(Potion.moveSlowdown.id, 240, 1), new PotionEffect(Potion.digSlowdown.id, 240, 1), new PotionEffect(Potion.jump.id, 240, -10));
 	
-	public static AbilityAttribute SANGO = new AbilityAttribute("Sango").setAbilityCooldown(10).setProjectileTicks(10).setProjectileModel(new ModelCube()).setProjectileSize(3, 3, 10).setProjectileColor("7CB9E8").setProjectileDamage(15);
-	public static AbilityAttribute KARI = new AbilityAttribute("Kari").setAbilityCooldown(6).setAbilityExplosion(6, false, false);
-	public static AbilityAttribute RAIGO = new AbilityAttribute("Raigo").setAbilityCooldown(15).setProjectileModel(new ModelCube()).setProjectileColor("5D8AA8").setProjectileSize(8, 8, 8).setProjectileDamage(40).setProjectileExplosion(7, false);
-	public static AbilityAttribute VOLTVARI = new AbilityAttribute("Volt Vari").setAbilityCooldown(3).setProjectileModel(new ModelSphere()).setProjectileModel(new ModelSphere()).setProjectileSize(3, 3, 3).setProjectileDamage(5).setProjectileColor("7CB9E8");
+	public static AbilityAttribute SANGO = new AbilityAttribute("Sango").setAbilityCooldown(10).setProjectileTicks(128).setProjectileModel(new ModelCube()).setProjectileSize(0, 0, 0).setProjectileColor("7CB9E8").setProjectileDamage(15).setAbilityRepeater();
+	public static AbilityAttribute KARI = new AbilityAttribute("Kari").setAbilityCharges(7 * 20).setAbilityCooldown(15).setAbilityExplosion(20, false, false);
+	public static AbilityAttribute RAIGO = new AbilityAttribute("Raigo").setAbilityCooldown(30).setProjectileTicks(256).setProjectileModel(new ModelSphere()).setProjectileColor("5D8AA8").setProjectileSize(50, 50, 50).setProjectileDamage(120).setProjectileExplosion(30, false);
+	public static AbilityAttribute VOLTVARI = new AbilityAttribute("Volt Vari").setAbilityCooldown(3).setAbilityCharges(10 * 20);
 	public static AbilityAttribute ELTHOR = new AbilityAttribute("El Thor").setAbilityCooldown(8).setAbilityCharges(6 * 20);
 	
 	public static AbilityAttribute INJECTIONSHOT = new AbilityAttribute("Injection Shot").setAbilityCooldown(15);

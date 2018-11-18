@@ -35,6 +35,7 @@ public class Ability
 {
 	
 	protected AbilityProjectile projectile;
+	protected String originalDisplayName = "n/a";
 	protected AbilityAttribute attr;
 	protected boolean isOnCooldown = false, isCharging = false, isRepeating = false, passiveActive = false, isDisabled = false;
 	private int ticksForCooldown, ticksForCharge, ticksForRepeater, ticksForRepeaterFreq, currentSpawn = 0;
@@ -42,10 +43,11 @@ public class Ability
 	public Ability(AbilityAttribute attr)
 	{
 		this.attr = new AbilityAttribute(attr);
-		ticksForCooldown = this.attr.getAbilityCooldown();
-		ticksForCharge = this.attr.getAbilityCharges();
-		ticksForRepeater = this.attr.getAbilityCooldown();
-		ticksForRepeaterFreq = this.attr.getAbilityRepeaterFrequency();
+		this.ticksForCooldown = this.attr.getAbilityCooldown();
+		this.ticksForCharge = this.attr.getAbilityCharges();
+		this.ticksForRepeater = this.attr.getAbilityCooldown();
+		this.ticksForRepeaterFreq = this.attr.getAbilityRepeaterFrequency();
+		this.originalDisplayName = this.attr.getAttributeName();
 	}
 
 	public AbilityAttribute getAttribute() { return attr; }
@@ -84,6 +86,9 @@ public class Ability
 			if (player.worldObj instanceof WorldServer && !this.attr.isPassive() && MainConfig.enableAnimeScreaming)
 				((WorldServer)player.worldObj).getEntityTracker().func_151248_b(player, new S02PacketChat(new ChatComponentText("<" + player.getDisplayName() + "> " + this.attr.getAttributeName().toUpperCase() )));
 	    	
+			if(!this.originalDisplayName.equalsIgnoreCase("n/a") && !this.attr.getAttributeName().equalsIgnoreCase(this.originalDisplayName))
+				this.attr.setAttributeName(originalDisplayName);
+				
 	    	duringRepeater(player);
 			startCooldown();
 			WyNetworkHelper.sendTo(new PacketAbilitySync(abilityProps), (EntityPlayerMP) player);
@@ -254,12 +259,17 @@ public class Ability
 				
 				((WorldServer)player.worldObj).getEntityTracker().func_151248_b(player, new S02PacketChat(new ChatComponentText("<" + player.getDisplayName() + "> " + animeScream )));
 			}
-		}
+		}	
 		
-		
+		if(this.attr.getAbilityExplosionPower() > 0)
+			player.worldObj.newExplosion(player, player.posX, player.posY, player.posZ, this.attr.getAbilityExplosionPower(), this.attr.canAbilityExplosionSetFire(), MainConfig.enableGriefing ? this.attr.canAbilityExplosionDestroyBlocks() : false);		
+				
     	if(!ID.DEV_EARLYACCESS && !player.capabilities.isCreativeMode)
     		WyTelemetry.addStat("abilityUsed_" + this.getAttribute().getAttributeName(), 1);
 		
+		if(!this.originalDisplayName.equalsIgnoreCase("n/a") && !this.attr.getAttributeName().equalsIgnoreCase(this.originalDisplayName))
+			this.attr.setAttributeName(originalDisplayName);
+    	
 		(new Update(player, attr)).start();
 	}
 	

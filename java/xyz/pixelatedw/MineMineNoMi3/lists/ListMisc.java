@@ -289,6 +289,27 @@ public class ListMisc
  		WyRegistry.registerName("gui.quests.started", "has started !");
  		WyRegistry.registerName("gui.quests.completed", "has been completed !");		
  		
+ 		WyRegistry.registerName("ability.gomugomunojetpistol.name", "Gomu Gomu no Jet Pistol");
+ 		WyRegistry.registerName("ability.gomugomunoelephantgun.name", "Gomu Gomu no Elephant Gun");
+ 		WyRegistry.registerName("ability.gomugomunokonggun.name", "Gomu Gomu no Kong Gun");
+ 		
+ 		WyRegistry.registerName("ability.gomugomunojetbazooka.name", "Gomu Gomu no Jet Bazooka");
+ 		WyRegistry.registerName("ability.gomugomunogrizzlymagnum.name", "Gomu Gomu no Grizzly Magnum");
+ 		WyRegistry.registerName("ability.gomugomunoleobazooka.name", "Gomu Gomu no Leo Bazooka");
+ 		
+ 		WyRegistry.registerName("ability.gomugomunojetgatling.name", "Gomu Gomu no Jet Gatling");
+ 		WyRegistry.registerName("ability.gomugomunoelephantgatling.name", "Gomu Gomu no Elephant Gatling");
+ 		WyRegistry.registerName("ability.gomugomunokongorgan.name", "Gomu Gomu no Kong Organ");
+ 		
+ 		WyRegistry.registerName("ability.1millionvoltvari.name", "1 Million Volt Vari");
+ 		WyRegistry.registerName("ability.5millionvoltvari.name", "5 Million Volt Vari");
+ 		WyRegistry.registerName("ability.10millionvoltvari.name", "10 Million Volt Vari");
+ 		WyRegistry.registerName("ability.20millionvoltvari.name", "20 Million Volt Vari");
+ 		WyRegistry.registerName("ability.50millionvoltvari.name", "50 Million Volt Vari");
+ 		WyRegistry.registerName("ability.60millionvoltvari.name", "60 Million Volt Vari");
+ 		WyRegistry.registerName("ability.100millionvoltvari.name", "100 Million Volt Vari");
+ 		WyRegistry.registerName("ability.max200millionvoltvari.name", "Max 200 Million Volt Vari");
+ 		
  		WyRegistry.registerName("quest." + ListQuests.swordsmanProgression01.getQuestID() + ".started", "<Swordsman Master> You want to become a swordsman master, young one ? I do like the sparks in your eyes so how about this, show me your best sword and I'll see if you're fit or not to start training with me.");
  		WyRegistry.registerName("quest." + ListQuests.swordsmanProgression01.getQuestID() + ".completed", "<Swordsman Master> That's a really nice blade you have there, really strong indeed. Fine, I will train you, when you're ready come and talk with me again !");
  		WyRegistry.registerName("quest." + ListQuests.swordsmanProgression02.getQuestID() + ".started", "<Swordsman Master> First we'll test your determination, you must survive the night in the wilderness without dying !");

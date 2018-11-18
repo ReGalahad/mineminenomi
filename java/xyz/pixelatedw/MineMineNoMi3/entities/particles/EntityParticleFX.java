@@ -122,8 +122,11 @@ public class EntityParticleFX extends EntityAuraFX
     {
     	int layer = 1;
     	
-    	if(this.partName.equals("moku") || this.partName.equals("gasu2") || this.partName.equals("suna2"))
+    	if(this.partName.equals("moku") || this.partName.equals("gasu2") || this.partName.equals("suna2") || this.partName.equals("goro2"))
     		layer = 2;
+    	
+    	if(this.partName.equals("goro3"))
+    		layer = 0;
     	
         return layer;
     }

@@ -82,6 +82,11 @@ public class FishKarateAbilities
 			super(ListAttributes.SAMEHADASHOTEI); 
 		}
 		
+		public void startPassive(EntityPlayer player) 
+		{
+			super.startPassive(player);
+		}
+		
 		public void duringPassive(EntityPlayer player, int passiveTimer) 
 		{
 			WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_SAMEHADA, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);

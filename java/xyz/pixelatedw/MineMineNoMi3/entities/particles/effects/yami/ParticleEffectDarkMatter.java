@@ -1,14 +1,12 @@
 package xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.yami;
 
-import java.util.Random;
 import java.util.Timer;
 
 import net.minecraft.entity.player.EntityPlayer;
 import xyz.pixelatedw.MineMineNoMi3.ID;
-import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.ParticleEffect;
-import xyz.pixelatedw.MineMineNoMi3.lists.ListParticleEffects;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.tasks.ParticleTaskTornado;
 
 public class ParticleEffectDarkMatter extends ParticleEffect
 {
@@ -22,7 +20,7 @@ public class ParticleEffectDarkMatter extends ParticleEffect
 				posZ, 
 				0, 0, 0)
 				.setParticleGravity(-1.25f + player.worldObj.rand.nextFloat()).setParticleScale(player.worldObj.rand.nextInt(3) + 1);
-		timer.schedule(ListParticleEffects.createTornadoFX(player, posX, posY, posZ, particle, 8.0, 2, 0.15, 0.5), 0);
+		timer.schedule(ParticleTaskTornado.Create(player, posX, posY, posZ, particle, 8.0, 2, 0.15, 0.5), 0);
 	}
 
 }

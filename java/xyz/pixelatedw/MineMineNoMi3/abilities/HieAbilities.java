@@ -79,38 +79,28 @@ public class HieAbilities
 		public void use(EntityPlayer player)
 		{
 			if(!this.isOnCooldown)
-			{			
-				Sphere.generateFilled((int) player.posX, (int) player.posY, (int) player.posZ, 20, new ISphere()
+			{		
+				final World world = player.worldObj;
+				if(MainConfig.enableGriefing)
 				{
-					public void call(int x, int y, int z)
-					{	
-						int posX = x;
-						int posY = y;
-						int posZ = z;
-
-						if(!player.worldObj.isAirBlock(posX, posY, posZ) && player.worldObj.getBlock(posX, posY, posZ) != ListMisc.Ope && player.worldObj.getBlock(posX, posY, posZ) != ListMisc.OpeMid && player.worldObj.getBlock(posX, posY, posZ) != Blocks.bedrock)
-							DevilFruitsHelper.setBlock(player.worldObj, posX, posY, posZ, Blocks.packed_ice);
-					}
-				});
-	
-				Sphere.generateFilled((int) player.posX, (int) player.posY, (int) player.posZ, 20, new ISphere()
-				{
-					public void call(int x, int y, int z)
-					{	
-						int posX = x;
-						int posY = y;
-						int posZ = z;
-
-						if(!player.worldObj.isAirBlock(posX, posY, posZ) && player.worldObj.getBlock(posX, posY, posZ) != ListMisc.Ope && player.worldObj.getBlock(posX, posY, posZ) != ListMisc.OpeMid && player.worldObj.getBlock(posX, posY, posZ) != Blocks.bedrock)
-							DevilFruitsHelper.setBlock(player.worldObj, posX, posY, posZ, Blocks.packed_ice);
-					}
-				});
-
-				WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_ICEAGE, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
+					Sphere.generateFilled((int) player.posX, (int) player.posY, (int) player.posZ, 20, new ISphere()
+					{
+						public void call(int x, int y, int z)
+						{	
+							int posX = x;
+							int posY = y;
+							int posZ = z;
+							
+							if(!player.worldObj.isAirBlock(posX, posY, posZ) && player.worldObj.getBlock(posX, posY, posZ) != ListMisc.Ope && player.worldObj.getBlock(posX, posY, posZ) != ListMisc.OpeMid && player.worldObj.getBlock(posX, posY, posZ) != Blocks.bedrock)
+								player.worldObj.setBlock(posX, posY, posZ, Blocks.packed_ice);
+						}
+					});
+					WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_ICEAGE, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
+				}
 				
 				super.use(player);
 			}
-		};	
+		}
 	}
 	
 	public static class IceBall extends Ability

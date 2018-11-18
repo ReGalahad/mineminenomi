@@ -1,13 +1,8 @@
 package xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.rokushiki;
 
-import java.util.Random;
-import java.util.Timer;
-
 import net.minecraft.entity.player.EntityPlayer;
 import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
-import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.ParticleEffect;
-import xyz.pixelatedw.MineMineNoMi3.lists.ListParticleEffects;
 
 public class ParticleEffectGeppo extends ParticleEffect
 {

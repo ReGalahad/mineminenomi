@@ -123,7 +123,7 @@ public class YamiAbilities
 		
 		/** TODO Explosion particles */
 		public void use(final EntityPlayer player)
-		{				
+		{
 			int libCount = 0;
 			
 			if(!this.isOnCooldown)
@@ -148,7 +148,7 @@ public class YamiAbilities
 							player.worldObj.spawnEntityInWorld(proj);
 							liberationCount--;	
 						}					
-					}					
+					}
 				}
 				else
 				{

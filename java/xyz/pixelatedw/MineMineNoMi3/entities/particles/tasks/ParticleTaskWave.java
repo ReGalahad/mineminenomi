@@ -9,25 +9,19 @@ import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
 
-public class ParticleTaskWave1 extends TimerTask
+public class ParticleTaskWave extends TimerTask
 {
 	
 	private EntityLivingBase player;
 	private Object particle;
-	private double posX, posY, posZ;
-	private int radius;
-	
-	public ParticleTaskWave1(EntityLivingBase player, double posX, double posY, double posZ, String particle, int radius)
+	private double posX, posY, posZ, radius;
+
+	public static ParticleTaskWave Create(EntityLivingBase player, double posX, double posY, double posZ, Object particle, double radius)
 	{
-		this.player = player;
-		this.particle = particle;
-		this.posX = posX;
-		this.posY = posY;
-		this.posZ = posZ;
-		this.radius = radius;
+		return new ParticleTaskWave(player, posX, posY, posZ, particle, radius);
 	}
 	
-	public ParticleTaskWave1(EntityLivingBase player, double posX, double posY, double posZ, EntityParticleFX particle, int radius)
+	private ParticleTaskWave(EntityLivingBase player, double posX, double posY, double posZ, Object particle, double radius)
 	{
 		this.player = player;
 		this.particle = particle;

@@ -10,6 +10,8 @@ import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.doku.ParticleEffe
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.fishkarate.ParticleEffectSamehada;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.gomu.ParticleEffectGearSecond;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.goro.ParticleEffectElThor;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.goro.ParticleEffectKari;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.goro.ParticleEffectRaigo;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.gura.ParticleEffectGekishin;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.hie.ParticleEffectIceAge;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.ito.ParticleEffectKumoNoSugaki;
@@ -107,6 +109,8 @@ public class ParticleManager
 	
 		// Goro
 		map.put(ID.PARTICLEFX_ELTHOR, new ParticleEffectElThor());
+		map.put(ID.PARTICLEFX_KARI, new ParticleEffectKari());
+		map.put(ID.PARTICLEFX_RAIGO, new ParticleEffectRaigo());
 		
 		// Sniper
 		map.put(ID.PARTICLEFX_KEMURIBOSHI, new ParticleEffectKemuriBoshi());

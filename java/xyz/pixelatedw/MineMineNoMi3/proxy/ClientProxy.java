@@ -148,7 +148,7 @@ public class ClientProxy extends CommonProxy
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDenDenMushi.class, new RenderBlockDenDenMushi());
 		//MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ListMisc.DenDenMushi), new RenderItemDenDenMushi(new RenderBlockDenDenMushi(), new TileEntityDenDenMushi()));
 		
-		/** FORGOLD Delete any and all mentions of these */
+		/* 
 		//Temp
 		RenderingRegistry.registerEntityRenderingHandler(TempEntityFist.class, new AbilityRenderer(new AbilityAttribute(ListAttributes.SPRINGDEATHKNOCK).setModelOffsets(0, 2, 0)));		
 		RenderingRegistry.registerEntityRenderingHandler(TempEntityBazooka.class, new AbilityRenderer(new AbilityAttribute(ListExtraAttributes.GOMUGOMUNOBAZOOKA).setModelOffsets(0, 2, 0)));
@@ -162,7 +162,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(TempEntitySpear.class, new AbilityRenderer(new AbilityAttribute(ListAttributes.DORUDORUARTSMORI).setModelOffsets(0, 2, 0)));
 		RenderingRegistry.registerEntityRenderingHandler(TempEntityTrident.class, new AbilityRenderer(new AbilityAttribute(ListAttributes.ICEBLOCKPARTISAN).setModelOffsets(0, 2, 0)));
 		RenderingRegistry.registerEntityRenderingHandler(TempEntityYukiRabi.class, new AbilityRenderer(new AbilityAttribute(ListAttributes.YUKIRABI).setModelOffsets(0, 2, 0)));
-		
+		*/
 		RenderingRegistry.registerEntityRenderingHandler(TempEntityPhoenixFull.class, new RenderZoanMorph(new ModelPhoenixFull(), "phoenixfull"));
 		RenderingRegistry.registerEntityRenderingHandler(TempEntityPhoenixHybrid.class, new RenderZoanMorph(new ModelPhoenixHybrid(), "phoenixhybrid"));
 	}

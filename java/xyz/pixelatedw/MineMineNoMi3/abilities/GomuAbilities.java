@@ -1,5 +1,6 @@
 package xyz.pixelatedw.MineMineNoMi3.abilities;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.potion.Potion;
@@ -174,18 +175,22 @@ public class GomuAbilities
 				{
 					case 1:
 						type = 0;
+						this.attr.setAttributeName(I18n.format("ability.gomugomunogatling.name"));
 						this.attr.setAbilityCooldown(1);
 						break;
 					case 2:
 						type = 1;
+						this.attr.setAttributeName(I18n.format("ability.gomugomunojetgatling.name"));
 						this.attr.setAbilityCooldown(0.5);
 						break;
 					case 3:
 						type = 2;
+						this.attr.setAttributeName(I18n.format("ability.gomugomunojetgatling.name"));
 						this.attr.setAbilityCooldown(3);
 						break;
 					case 4:
 						type = 3;
+						this.attr.setAttributeName(I18n.format("ability.gomugomunokongorgan.name"));
 						this.attr.setAbilityCooldown(4);
 						break;
 				}
@@ -211,6 +216,7 @@ public class GomuAbilities
 					AbilityProjectile proj = null;
 					if(type == 0)
 						proj = new GomuProjectiles.GomuGomuNoGatling(player.worldObj, player, ListExtraAttributes.GOMUGOMUNOGATLING);	
+
 					else if(type == 1)
 						proj = new GomuProjectiles.GomuGomuNoJetGatling(player.worldObj, player, ListExtraAttributes.GOMUGOMUNOJETGATLING);
 					else if(type == 2)
@@ -262,21 +268,25 @@ public class GomuAbilities
 			switch(props.getGear())
 			{
 				case 1:
+					this.attr.setAttributeName(I18n.format("ability.gomugomunobazooka.name"));
 					this.projectile = new GomuProjectiles.GomuGomuNoBazooka(player.worldObj, player, ListExtraAttributes.GOMUGOMUNOBAZOOKA);
 					this.attr.setAbilityCooldown(12);
 					this.attr.setAbilityCharges(20);
 					break;
 				case 2:
+					this.attr.setAttributeName(I18n.format("ability.gomugomunojetbazooka.name"));
 					this.projectile = new GomuProjectiles.GomuGomuNoJetBazooka(player.worldObj, player, ListExtraAttributes.GOMUGOMUNOJETBAZOOKA);
 					this.attr.setAbilityCooldown(6);
 					this.attr.setAbilityCharges(10);
 					break;
 				case 3:
+					this.attr.setAttributeName(I18n.format("ability.gomugomunogrizzlymagnum.name"));
 					this.projectile = new GomuProjectiles.GomuGomuNoGrizzlyMagnum(player.worldObj, player, ListExtraAttributes.GOMUGOMUNOGRIZZLYMAGNUM);
 					this.attr.setAbilityCooldown(20);
 					this.attr.setAbilityCharges(40);
 					break;
 				case 4:
+					this.attr.setAttributeName(I18n.format("ability.gomugomunoleobazooka.name"));
 					this.projectile = new GomuProjectiles.GomuGomuNoLeoBazooka(player.worldObj, player, ListExtraAttributes.GOMUGOMUNOLEOBAZOOKA);
 					this.attr.setAbilityCooldown(30);
 					this.attr.setAbilityCharges(40);
@@ -296,23 +306,26 @@ public class GomuAbilities
 		
 		public void use(EntityPlayer player)
 		{
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);
-				
+			ExtendedEntityStats props = ExtendedEntityStats.get(player);		
 			switch(props.getGear())
 			{
 				case 1:
+					this.attr.setAttributeName(I18n.format("ability.gomugomunopistol.name"));
 					this.projectile = new GomuProjectiles.GomuGomuNoPistol(player.worldObj, player, ListExtraAttributes.GOMUGOMUNOPISTOL);
 					this.attr.setAbilityCooldown(10);
 					break;
 				case 2:
+					this.attr.setAttributeName(I18n.format("ability.gomugomunojetpistol.name"));
 					this.projectile = new GomuProjectiles.GomuGomuNoJetPistol(player.worldObj, player, ListExtraAttributes.GOMUGOMUNOJETPISTOL);
 					this.attr.setAbilityCooldown(5);
 					break;
 				case 3:
+					this.attr.setAttributeName(I18n.format("ability.gomugomunoelephantgun.name"));
 					this.projectile = new GomuProjectiles.GomuGomuNoElephantGun(player.worldObj, player, ListExtraAttributes.GOMUGOMUNOELEPHANTGUN);
 					this.attr.setAbilityCooldown(15);
 					break;
 				case 4:
+					this.attr.setAttributeName(I18n.format("ability.gomugomunokonggun.name"));
 					this.projectile = new GomuProjectiles.GomuGomuNoKongGun(player.worldObj, player, ListExtraAttributes.GOMUGOMUNOKONGGUN);
 					this.attr.setAbilityCooldown(30);
 					break;

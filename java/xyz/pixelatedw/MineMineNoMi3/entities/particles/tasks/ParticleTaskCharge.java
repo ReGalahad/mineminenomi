@@ -6,9 +6,13 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.ResourceLocation;
+import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.MainMod;
+import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
 
-public class ParticleTaskCharge1 extends TimerTask
+public class ParticleTaskCharge extends TimerTask
 {
 	
 	private EntityLivingBase player;
@@ -16,7 +20,12 @@ public class ParticleTaskCharge1 extends TimerTask
 	private double radius, posX, posY, posZ, height, opening;
 	private int density;
 
-	public ParticleTaskCharge1(EntityLivingBase player, double posX, double posY, double posZ, String particle, double radius, int density, double opening, double height)
+	public static ParticleTaskCharge Create(EntityLivingBase player, double posX, double posY, double posZ, Object particle, double radius, int density, double opening, double height)
+	{
+		return new ParticleTaskCharge(player, posX, posY, posZ, particle, radius, density, opening, height);
+	}
+	
+	private ParticleTaskCharge(EntityLivingBase player, double posX, double posY, double posZ, Object particle, double radius, int density, double opening, double height)
 	{
 		this.player = player;
 		this.particle = particle;
@@ -28,20 +37,7 @@ public class ParticleTaskCharge1 extends TimerTask
 		this.posY = posY;
 		this.posZ = posZ;
 	}
-	
-	public ParticleTaskCharge1(EntityLivingBase player, double posX, double posY, double posZ, EntityParticleFX particle, double radius, int density, double opening, double height)
-	{
-		this.player = player;
-		this.particle = particle;
-		this.radius = radius;
-		this.density = density;
-		this.opening = opening;
-		this.height = height;
-		this.posX = posX;
-		this.posY = posY;
-		this.posZ = posZ;
-	}
-	
+
 	public void run()
 	{
 		double phi = 0;
@@ -53,9 +49,9 @@ public class ParticleTaskCharge1 extends TimerTask
 			for(double t = 0; t <= 2 * Math.PI; t += Math.PI / 16)
 			{
 				for(double i = 0; i <= 1; i += 1)
-				{				
+				{
 					x = opening * (radius / Math.PI + t) / Math.cos(t * phi + i * Math.PI);
-					y = height * t;
+					y = 0.5 * t;
 					z = opening * (radius / Math.PI + t) / Math.sin(t * phi + i * Math.PI);
 					
 					try
@@ -68,13 +64,13 @@ public class ParticleTaskCharge1 extends TimerTask
 						else							
 							player.worldObj.spawnParticle((String) particle, this.posX + x, this.posY + y, this.posZ + z, 0.0D, 0.0D, 0.0D);
 						Thread.sleep(1);
-					} 
+					}
 					catch (InterruptedException e) 
 					{
 						e.printStackTrace();
-					}	
+					}
 				}
 			}
-		}		
+		}
 	}
 }

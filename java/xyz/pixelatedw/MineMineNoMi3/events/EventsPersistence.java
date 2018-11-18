@@ -548,115 +548,104 @@ public class EventsPersistence
 	public void onEntityAttackEvent(LivingAttackEvent event)
 	{
 		EntityLivingBase entity = event.entityLiving;
-		Entity sourceOfDamage = event.source.getSourceOfDamage();
-		ExtendedEntityStats props = ExtendedEntityStats.get(entity);
+		DamageSource damageSource  = event.source;
+		Entity sourceOfDamage = event.source.getSourceOfDamage();	
+		ItemStack heldItem = null;
 		
-		for (int i = -2; i <= 2; i++)
-			for (int j = -2; j <= 2; j++)
-				for (int k = -2; k <= 2; k++)
-					if (entity.worldObj.getBlock((int)entity.posX + i, (int)entity.posY + j, (int)entity.posZ + k) == ListMisc.KairosekiOre || entity.worldObj.getBlock((int)entity.posX + i, (int)entity.posY + j, (int)entity.posZ + k) == ListMisc.KairosekiBlock)
-						return;
+		boolean entityIsLogia = false;
+		String entityUsedFruit = "n/a";
 		
-		if (sourceOfDamage instanceof EntityPlayer)
-		{			
-			ExtendedEntityStats propz = ExtendedEntityStats.get((EntityPlayer) sourceOfDamage);
-			AbilityProperties abilityProps = AbilityProperties.get((EntityPlayer) sourceOfDamage);
+		if(entity instanceof EntityPlayer)
+		{
+			ExtendedEntityStats props = ExtendedEntityStats.get(entity);
+			entityIsLogia = props.isLogia();
+			entityUsedFruit = props.getUsedFruit();
+		}
+		else if(entity instanceof EntityNewMob)
+		{
+			entityIsLogia = ((EntityNewMob) entity).isLogia();
+			entityUsedFruit = ((EntityNewMob) entity).getDevilFruitUsed();
+		}
+		
+		boolean attackerHasKairosekiWeapon = false;
+		boolean attackerHasHaki = false;
+		String attackerUsedFruit = "n/a";
+		
+		if(sourceOfDamage instanceof EntityPlayer)
+		{
+			ExtendedEntityStats props = ExtendedEntityStats.get((EntityPlayer) sourceOfDamage);
+			attackerHasHaki = props.hasBusoHakiActive();
+			attackerUsedFruit = props.getUsedFruit();
+			heldItem = ((EntityPlayer) sourceOfDamage).getHeldItem();
+			//TODO Add natural kairoseki weapons like the Jitte
+			if(heldItem != null)
+				attackerHasKairosekiWeapon = heldItem.isItemEnchanted() && EnchantmentHelper.getEnchantmentLevel(ListEffects.kairoseki.effectId, heldItem) > 0;		
+		}
+		else if(sourceOfDamage instanceof EntityNewMob)
+		{
+			attackerHasHaki = ((EntityNewMob) sourceOfDamage).hasBusoHaki();
+			heldItem = ((EntityNewMob) sourceOfDamage).getHeldItem();
+			attackerUsedFruit = ((EntityNewMob) sourceOfDamage).getDevilFruitUsed();
+			//TODO Check if mobs have kairoseki weapons
+			if(heldItem != null)
+				attackerHasKairosekiWeapon = false;
+		}
 
-			ItemStack heldItem = ((EntityPlayer) sourceOfDamage).getHeldItem();
-			
-			if(!sourceOfDamage.worldObj.isRemote && heldItem == null)
-			{		
-				for(int i = 0; i < abilityProps.countAbilitiesInHotbar(); i++)
-				{	
-					if(abilityProps.getAbilityFromSlot(i) != null && !abilityProps.getAbilityFromSlot(i).isOnCooldown() 
-							&& abilityProps.getAbilityFromSlot(i).getAttribute().isPassive() && abilityProps.getAbilityFromSlot(i).isPassiveActive())
-					{							
-						if(abilityProps.getAbilityFromSlot(i).getAttribute().isPunch())
+		if(sourceOfDamage instanceof EntityLivingBase)
+		{
+			if(entityIsLogia && !attackerHasHaki)
+			{
+				if(entityUsedFruit.equalsIgnoreCase("gorogoro") && attackerUsedFruit.equalsIgnoreCase("gomugomu"))
+					return;
+				
+				event.setCanceled(true);
+				WyNetworkHelper.sendToAllAround(new PacketParticles("logiaEffect_" + entityUsedFruit, entity), entity.dimension, entity.posX, entity.posY, entity.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
+			}
+			else
+			{
+				AbilityProperties abilityProps = AbilityProperties.get((EntityPlayer) sourceOfDamage);
+
+				if(!sourceOfDamage.worldObj.isRemote && heldItem == null)
+				{		
+					for(int i = 0; i < abilityProps.countAbilitiesInHotbar(); i++)
+					{	
+						if(abilityProps.getAbilityFromSlot(i) != null && !abilityProps.getAbilityFromSlot(i).isOnCooldown() 
+								&& abilityProps.getAbilityFromSlot(i).getAttribute().isPassive() && abilityProps.getAbilityFromSlot(i).isPassiveActive())
 						{							
-							abilityProps.getAbilityFromSlot(i).hitEntity((EntityPlayer) sourceOfDamage, entity);
+							if(abilityProps.getAbilityFromSlot(i).getAttribute().isPunch())
+							{							
+								abilityProps.getAbilityFromSlot(i).hitEntity((EntityPlayer) sourceOfDamage, entity);
+							}
 						}
 					}
 				}
 			}
-			
-			if(heldItem == null && props.isLogia() && !propz.hasBusoHakiActive())
-			{
-				event.setCanceled(true);
-			}
-			
-			if(heldItem != null && MainConfig.enableLogiaInvulnerability && !this.kairosekiChecks(entity))
-			{
-				boolean hasKairosekiWeapon = heldItem.isItemEnchanted() && EnchantmentHelper.getEnchantmentLevel(ListEffects.kairoseki.effectId, heldItem) > 0;
-				boolean hasHaki = propz.hasBusoHakiActive();
-	
-				if (entity instanceof EntityPlayer)
-				{
-					if (props.isLogia())
-						if (!hasHaki && !hasKairosekiWeapon)
-							event.setCanceled(true);
-				}
-				else
-				{
-					if (entity instanceof EntityNewMob)
-					{
-						if (((EntityNewMob) entity).isLogia())
-							if (!hasHaki && !hasKairosekiWeapon)
-								event.setCanceled(true);
-					}
-					else
-					{
-						// Possible mods/plugins support ?
-					}					
-				}
-			}		
 		}
 
-		if (sourceOfDamage instanceof EntityLivingBase && !(sourceOfDamage instanceof EntityPlayer) && MainConfig.enableLogiaInvulnerability && !this.kairosekiChecks(entity))
+		if(sourceOfDamage instanceof EntityArrow && entityIsLogia && MainConfig.enableLogiaInvulnerability && !this.kairosekiChecks(entity))
+			event.setCanceled(true);
+		
+		if(sourceOfDamage instanceof AbilityProjectile && ((AbilityProjectile)sourceOfDamage).getAttribute().getAttributeName().equals("Bullet") && entityIsLogia && MainConfig.enableLogiaInvulnerability && !this.kairosekiChecks(entity))
+			event.setCanceled(true);
+		
+		if(event.source.isExplosion() && entityIsLogia && MainConfig.enableLogiaInvulnerability && !this.kairosekiChecks(entity))
+			event.setCanceled(true);
+		
+		if(entityUsedFruit.equalsIgnoreCase("meramera") && damageSource.equals(DamageSource.inFire) || damageSource.equals(DamageSource.onFire))
 		{
-			boolean hasKairosekiWeapon;
-			boolean hasHaki;
-
-			if (sourceOfDamage instanceof EntityNewMob)
-				hasHaki = ((EntityNewMob) sourceOfDamage).hasBusoHaki();
-			else
-				hasHaki = false;
-
-			if (props.isLogia())
-				if (!hasHaki)
-				{
-					WyNetworkHelper.sendTo(new PacketParticles("logiaEffect_" + props.getUsedFruit(), entity), (EntityPlayerMP) entity);
-					event.setCanceled(true);
-				}
-
+			entity.extinguish();
+			event.setCanceled(true);
 		}
 		
-		if (sourceOfDamage instanceof EntityArrow && props.isLogia() && MainConfig.enableLogiaInvulnerability && !this.kairosekiChecks(entity))
-				event.setCanceled(true);
-
-		if(sourceOfDamage instanceof AbilityProjectile && ((AbilityProjectile)sourceOfDamage).getAttribute().getAttributeName().equals("Bullet") && props.isLogia() && MainConfig.enableLogiaInvulnerability && !this.kairosekiChecks(entity))
-			event.setCanceled(true);
-		
-		if(event.source.isExplosion() && props.isLogia() && MainConfig.enableLogiaInvulnerability && !this.kairosekiChecks(entity))
-			event.setCanceled(true);
-		
-		if (event.entityLiving instanceof EntityPlayer)
+		if(entityUsedFruit.equalsIgnoreCase("magumagu") && damageSource.equals(DamageSource.inFire) || damageSource.equals(DamageSource.onFire) || event.source.equals(DamageSource.lava))
 		{
-			if (props.getUsedFruit().equals("meramera") && (event.source.equals(DamageSource.inFire) || event.source.equals(DamageSource.onFire)))
-			{
-				entity.extinguish();
-				event.setCanceled(true);
-			}
-			if (props.getUsedFruit().equals("magumagu")
-					&& (event.source.equals(DamageSource.inFire) || event.source.equals(DamageSource.onFire) || event.source.equals(DamageSource.lava)))
-			{
-				entity.extinguish();
-				event.setCanceled(true);
-			} 
+			entity.extinguish();
+			event.setCanceled(true);
 		}
 	}
 	
 	@SubscribeEvent
-	public void onEntityAttackEvent(LivingHurtEvent event)
+	public void onEntityHurtEvent(LivingHurtEvent event)
 	{
 		EntityLivingBase entity = event.entityLiving;
 		Entity sourceOfDamage = event.source.getSourceOfDamage();
@@ -668,6 +657,9 @@ public class EventsPersistence
 			{
 				if(props.getUsedFruit().equalsIgnoreCase("ushiushibison") && props.getZoanPoint().equalsIgnoreCase(ID.ZOANMORPH_POWER))
 					event.ammount += 3;
+				
+				if(props.getUsedFruit().equalsIgnoreCase("dokudoku") && props.getZoanPoint().equalsIgnoreCase(ID.ZOANMORPH_DOKU))
+					entity.addPotionEffect(new PotionEffect(Potion.poison.id, 60, 0));
 			}
 			
 			if(props.hasBusoHakiActive())

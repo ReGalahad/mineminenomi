@@ -15,6 +15,7 @@ import net.minecraft.item.ItemStack;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.abilities.CyborgAbilities;
+import xyz.pixelatedw.MineMineNoMi3.abilities.GoroAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.SniperAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.SwordsmanAbilities;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
@@ -209,6 +210,8 @@ public class PacketPlayer implements IMessage
 						{
 							if(abilityProps.getAbilityFromSlot(j) != null) 
 							{
+								if(abilityProps.getAbilityFromSlot(j).isCharging() && abilityProps.getAbilityFromSlot(j) == abilityProps.getAbilityFromSlot(i) && abilityProps.getAbilityFromSlot(i).getAttribute().getAttributeName().equalsIgnoreCase(GoroAbilities.abilitiesArray[1].getAttribute().getAttributeName()))
+									abilityProps.getAbilityFromSlot(i).endCharging(player);
 								if(abilityProps.getAbilityFromSlot(j).isCharging())
 									return null;
 								if(abilityProps.getAbilityFromSlot(i) != abilityProps.getAbilityFromSlot(j) && abilityProps.getAbilityFromSlot(j).isPassiveActive() && abilityProps.getAbilityFromSlot(i).getAttribute().isPassive())

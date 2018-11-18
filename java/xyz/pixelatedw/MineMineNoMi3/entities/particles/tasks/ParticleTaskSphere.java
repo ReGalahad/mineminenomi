@@ -15,28 +15,21 @@ public class ParticleTaskSphere extends TimerTask
 	private int density, repeats;
 	private double radius, posX, posY, posZ;
 
-	public ParticleTaskSphere(EntityLivingBase player, double posX, double posY, double posZ, String particle, double radius, int density, int repeats)
+	public static ParticleTaskSphere Create(EntityLivingBase player, double posX, double posY, double posZ, Object particle, double radius, int density, int repeats)
 	{
-		this.player = player;
-		this.posX = posX;
-		this.posY = posY;
-		this.posZ = posZ;
-		this.particle = particle;
-		this.radius = radius;
-		this.density = density;
-		this.repeats = repeats;
+		return new ParticleTaskSphere(player, posX, posY, posZ, particle, radius, density, repeats);
 	}
 	
-	public ParticleTaskSphere(EntityLivingBase player, double posX, double posY, double posZ, EntityParticleFX particle, double radius, int density, int repeats)
+	private ParticleTaskSphere(EntityLivingBase player, double posX, double posY, double posZ, Object particle, double radius, int density, int repeats)
 	{
 		this.player = player;
+		this.posX = posX;
+		this.posY = posY;
+		this.posZ = posZ;
 		this.particle = particle;
 		this.radius = radius;
 		this.density = density;
 		this.repeats = repeats;
-		this.posX = posX;
-		this.posY = posY;
-		this.posZ = posZ;
 	}
 	
 	public void run()

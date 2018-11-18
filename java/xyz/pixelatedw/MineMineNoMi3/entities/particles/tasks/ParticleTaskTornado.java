@@ -15,20 +15,12 @@ public class ParticleTaskTornado extends TimerTask
 	private double radius, opening, posX, posY, posZ, height;
 	private int density, repeats;
 
-	public ParticleTaskTornado(EntityLivingBase player, double posX, double posY, double posZ, String particle, double radius, int density, double opening, double height)
+	public static ParticleTaskTornado Create(EntityLivingBase player, double posX, double posY, double posZ, Object particle, double radius, int density, double opening, double height)
 	{
-		this.player = player;
-		this.particle = particle;
-		this.radius = radius;
-		this.density = density;
-		this.opening = opening;
-		this.height = height;
-		this.posX = posX;
-		this.posY = posY;
-		this.posZ = posZ;
+		return new ParticleTaskTornado(player, posX, posY, posZ, particle, radius, density, opening, height);
 	}
 	
-	public ParticleTaskTornado(EntityLivingBase player, double posX, double posY, double posZ, EntityParticleFX particle, double radius, int density, double opening, double height)
+	private ParticleTaskTornado(EntityLivingBase player, double posX, double posY, double posZ, Object particle, double radius, int density, double opening, double height)
 	{
 		this.player = player;
 		this.particle = particle;
@@ -40,6 +32,7 @@ public class ParticleTaskTornado extends TimerTask
 		this.posY = posY;
 		this.posZ = posZ;
 	}
+
 	
 	public void run()
 	{

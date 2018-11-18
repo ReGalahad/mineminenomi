@@ -28,8 +28,7 @@ public class MaguAbilities
 		public void use(EntityPlayer player)
 		{		
 			if(!this.isOnCooldown)
-			{
-				
+			{				
 				final World world = player.worldObj;
 				if(MainConfig.enableGriefing)
 				{

@@ -1,14 +1,12 @@
 package xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.toriphoenix;
 
-import java.util.Random;
 import java.util.Timer;
 
 import net.minecraft.entity.player.EntityPlayer;
 import xyz.pixelatedw.MineMineNoMi3.ID;
-import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.ParticleEffect;
-import xyz.pixelatedw.MineMineNoMi3.lists.ListParticleEffects;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.tasks.ParticleTaskWave;
 
 public class ParticleEffectTenseiNoSoen2 extends ParticleEffect
 {
@@ -21,7 +19,7 @@ public class ParticleEffectTenseiNoSoen2 extends ParticleEffect
 				posY, 
 				posZ, 
 				0, 0, 0);
-		timer.schedule(ListParticleEffects.createWave1FX(player, particle.posX, particle.posY, particle.posZ, particle, 20), 0);
+		timer.schedule(ParticleTaskWave.Create(player, particle.posX, particle.posY, particle.posZ, particle, 20), 0);
 	}
 
 }

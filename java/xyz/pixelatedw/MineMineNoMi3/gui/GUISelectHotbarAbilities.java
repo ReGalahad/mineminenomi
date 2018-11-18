@@ -184,7 +184,10 @@ public class GUISelectHotbarAbilities extends GuiScreen
 			if(this.slotSelected != button.id)
 				slotSelected = button.id;
 			else
-				slotSelected = -1;
+			{
+	    		abilityProps.setAbilityInSlot(this.slotSelected, null);
+				WyNetworkHelper.sendToServer(new PacketAbilitySync(abilityProps));
+			}
 		}
 		/*		
  		if(button.id >= 100)
