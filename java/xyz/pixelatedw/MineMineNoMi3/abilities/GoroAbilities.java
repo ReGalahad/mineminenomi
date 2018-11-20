@@ -102,38 +102,38 @@ public class GoroAbilities
 		public void endCharging(EntityPlayer player)
 		{
 			double truePower = Math.abs(power - this.attr.getAbilityCharges());
-			double trueCooldown = (truePower / 20) * 2;
+			double trueCooldown = (truePower / 20) * 3;
 
 			if(truePower > 0 && truePower <= 50)
 			{
-				if(truePower > 0 && truePower <= 25)
+				/*if(truePower > 0 && truePower <= 25)
 					this.attr.setAttributeName(I18n.format("ability.1millionvoltvari.name"));
 				else
-					this.attr.setAttributeName(I18n.format("ability.5millionvoltvari.name"));
+					this.attr.setAttributeName(I18n.format("ability.5millionvoltvari.name"));*/
 				this.projectile = new VoltVari5Million(player.worldObj, player, ListExtraAttributes.VOLTVARI5MILLION);
 			}
 			else if(truePower > 50 && truePower <= 100)
 			{
-				if(truePower > 50 && truePower <= 75)
+				/*if(truePower > 50 && truePower <= 75)
 					this.attr.setAttributeName(I18n.format("ability.10millionvoltvari.name"));
 				else
-					this.attr.setAttributeName(I18n.format("ability.20millionvoltvari.name"));
+					this.attr.setAttributeName(I18n.format("ability.20millionvoltvari.name"));*/
 				this.projectile = new VoltVari20Million(player.worldObj, player, ListExtraAttributes.VOLTVARI20MILLION);
 			}
 			else if(truePower > 100 && truePower <= 150)
 			{
-				if(truePower > 100 && truePower <= 125)
+				/*if(truePower > 100 && truePower <= 125)
 					this.attr.setAttributeName(I18n.format("ability.50millionvoltvari.name"));
 				else
-					this.attr.setAttributeName(I18n.format("ability.60millionvoltvari.name"));
+					this.attr.setAttributeName(I18n.format("ability.60millionvoltvari.name"));*/
 				this.projectile = new VoltVari60Million(player.worldObj, player, ListExtraAttributes.VOLTVARI60MILLION);
 			}
 			else if(truePower > 150 && truePower <= 200)
 			{
-				if(truePower > 150 && truePower <= 175)
+				/*if(truePower > 150 && truePower <= 175)
 					this.attr.setAttributeName(I18n.format("ability.100millionvoltvari.name"));
 				else
-					this.attr.setAttributeName(I18n.format("ability.max200millionvoltvari.name"));
+					this.attr.setAttributeName(I18n.format("ability.max200millionvoltvari.name"));*/
 				this.projectile = new VoltVari200Million(player.worldObj, player, ListExtraAttributes.VOLTVARI200MILLION);
 			}
 			

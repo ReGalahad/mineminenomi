@@ -83,7 +83,20 @@ public class HieAbilities
 				final World world = player.worldObj;
 				if(MainConfig.enableGriefing)
 				{
-					Sphere.generateFilled((int) player.posX, (int) player.posY, (int) player.posZ, 20, new ISphere()
+					for(int i = -15; i < 15; i++)
+					for(int j = -10; j < 10; j++)
+					for(int k = -15; k < 15; k++)
+					{
+						int posX = (int) (player.posX + i + (i < -WyMathHelper.randomWithRange(8, 12) || i > WyMathHelper.randomWithRange(8, 12) ? WyMathHelper.randomWithRange(-5, 5) : 0));
+						int posY = (int) player.posY + j;
+						int posZ = (int) (player.posZ + k + (k < -WyMathHelper.randomWithRange(8, 12) || k > WyMathHelper.randomWithRange(8, 12) ? WyMathHelper.randomWithRange(-5, 5) : 0));
+						
+						if(!player.worldObj.isAirBlock(posX, posY, posZ) && player.worldObj.getBlock(posX, posY, posZ) != ListMisc.Ope
+								&& player.worldObj.getBlock(posX, posY, posZ) != ListMisc.OpeMid && player.worldObj.getBlock(posX, posY, posZ) != Blocks.bedrock)
+							player.worldObj.setBlock(posX, posY, posZ, Blocks.packed_ice);				
+					}
+					
+					/*Sphere.generateFilled((int) player.posX, (int) player.posY, (int) player.posZ, 20, new ISphere()
 					{
 						public void call(int x, int y, int z)
 						{	
@@ -94,7 +107,7 @@ public class HieAbilities
 							if(!player.worldObj.isAirBlock(posX, posY, posZ) && player.worldObj.getBlock(posX, posY, posZ) != ListMisc.Ope && player.worldObj.getBlock(posX, posY, posZ) != ListMisc.OpeMid && player.worldObj.getBlock(posX, posY, posZ) != Blocks.bedrock)
 								player.worldObj.setBlock(posX, posY, posZ, Blocks.packed_ice);
 						}
-					});
+					});*/
 					WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_ICEAGE, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 				}
 				
