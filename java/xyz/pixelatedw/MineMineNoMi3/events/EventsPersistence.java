@@ -12,6 +12,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
+import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityArrow;
@@ -147,7 +148,7 @@ public class EventsPersistence
 			{
 				if( WyHelper.isBlockNearby(player, 3, ListMisc.KairosekiBlock, ListMisc.KairosekiOre) || DevilFruitsHelper.hasKairosekiItem(player) || player.inventory.hasItem(Item.getItemFromBlock(ListMisc.KairosekiBlock))
 						|| player.inventory.hasItem( Item.getItemFromBlock(ListMisc.KairosekiOre)) || (player.isInsideOfMaterial(Material.water) || (player.isWet() && (player.worldObj.getBlock((int) player.posX, (int) player.posY - 1, (int) player.posZ) == Blocks.water 
-						|| player.worldObj.getBlock((int) player.posX, (int) player.posY - 1, (int) player.posZ) == Blocks.flowing_water))) )
+						|| player.worldObj.getBlock((int) player.posX, (int) player.posY - 1, (int) player.posZ) == Blocks.flowing_water) && !player.isRiding()  )) )
 				{
 					if(DevilFruitsHelper.hasKairosekiItem(player))
 						player.addPotionEffect(new PotionEffect(Potion.confusion.getId(), 48, 0));
@@ -156,10 +157,10 @@ public class EventsPersistence
 					for(int i = 0; i < abilityProps.countAbilitiesInHotbar(); i++)
 					{
 						if(abilityProps.getAbilityFromSlot(i) != null && !abilityProps.getAbilityFromSlot(i).isDisabled())
-						{ 
+						{
 							abilityProps.getAbilityFromSlot(i).setCooldownActive(true);
 							abilityProps.getAbilityFromSlot(i).disable(player, true);
-						}			
+						}
 					}
 				}
 				else
@@ -167,40 +168,29 @@ public class EventsPersistence
 					for(int i = 0; i < abilityProps.countAbilitiesInHotbar(); i++)
 					{
 						if(abilityProps.getAbilityFromSlot(i) != null && abilityProps.getAbilityFromSlot(i).isDisabled())
-						{ 
+						{
 							abilityProps.getAbilityFromSlot(i).setCooldownActive(false);
 							abilityProps.getAbilityFromSlot(i).disable(player, false);
-						}			
-					}					
+						}
+					}
 				}
-				
 			}
 			
 			if(!player.capabilities.isCreativeMode)
 			{
-				if(!player.capabilities.allowFlying) 
+				if(player.isInWater())
+					player.capabilities.isFlying = false;
+				
+				player.capabilities.allowFlying = Arrays.stream(DevilFruitsHelper.flyingFruits).anyMatch(p ->
 				{
-					if(props.getUsedFruit().equals("toritoriphoenix") && !props.getZoanPoint().toLowerCase().equals("n/a"))
-						player.capabilities.allowFlying = true;
-					else if(Arrays.stream(DevilFruitsHelper.flyingFruits).anyMatch(p -> props.getUsedFruit().equalsIgnoreCase(p)))
-						player.capabilities.allowFlying = true;
-					else
-						player.capabilities.allowFlying = false;
-				}
-				else
-				{
-					if(player.isInWater() && !player.capabilities.isCreativeMode)
-						player.capabilities.isFlying = false;
+					if(props.getUsedFruit().equalsIgnoreCase("toritoriphoenix") && !props.getZoanPoint().toLowerCase().equals("n/a"))
+						return true;
 					
-					if(!Arrays.stream(DevilFruitsHelper.flyingFruits).anyMatch(p -> props.getUsedFruit().equalsIgnoreCase(p)))
-						player.capabilities.allowFlying = false;
-					
-					if(props.getZoanPoint().toLowerCase().equals("n/a") || (!props.getUsedFruit().equals("toritoriphoenix")))
-					{
-						player.capabilities.allowFlying = false;
-						player.capabilities.isFlying = false;
-					}
-				}
+					return props.getUsedFruit().equalsIgnoreCase(p);
+				});
+				
+				if(!player.capabilities.allowFlying)
+					player.capabilities.isFlying = false;
 			}
 			else
 				player.capabilities.allowFlying = true;
@@ -280,8 +270,8 @@ public class EventsPersistence
 					player.removePotionEffect(Potion.poison.id);
 			}
 			
-			if ( (player.isInsideOfMaterial(Material.water) || (player.isWet() && (player.worldObj.getBlock((int) player.posX, (int) player.posY - 1, (int) player.posZ) == Blocks.water || player.worldObj.getBlock((int) player.posX, (int) player.posY - 1, (int) player.posZ) == Blocks.flowing_water))))
-			{ 
+			if ( (player.isInsideOfMaterial(Material.water) || (player.isWet() && (player.worldObj.getBlock((int) player.posX, (int) player.posY - 1, (int) player.posZ) == Blocks.water || player.worldObj.getBlock((int) player.posX, (int) player.posY - 1, (int) player.posZ) == Blocks.flowing_water) && !player.isRiding())))
+			{
 				if (!props.getUsedFruit().equals("N/A"))
 				{
 					if(!player.capabilities.isCreativeMode)
@@ -603,18 +593,21 @@ public class EventsPersistence
 			}
 			else
 			{
-				AbilityProperties abilityProps = AbilityProperties.get((EntityPlayer) sourceOfDamage);
+				if(sourceOfDamage instanceof EntityPlayer)
+				{
+					AbilityProperties abilityProps = AbilityProperties.get((EntityPlayer) sourceOfDamage);
 
-				if(!sourceOfDamage.worldObj.isRemote && heldItem == null)
-				{		
-					for(int i = 0; i < abilityProps.countAbilitiesInHotbar(); i++)
-					{	
-						if(abilityProps.getAbilityFromSlot(i) != null && !abilityProps.getAbilityFromSlot(i).isOnCooldown() 
-								&& abilityProps.getAbilityFromSlot(i).getAttribute().isPassive() && abilityProps.getAbilityFromSlot(i).isPassiveActive())
-						{							
-							if(abilityProps.getAbilityFromSlot(i).getAttribute().isPunch())
+					if(!sourceOfDamage.worldObj.isRemote && heldItem == null)
+					{		
+						for(int i = 0; i < abilityProps.countAbilitiesInHotbar(); i++)
+						{	
+							if(abilityProps.getAbilityFromSlot(i) != null && !abilityProps.getAbilityFromSlot(i).isOnCooldown() 
+									&& abilityProps.getAbilityFromSlot(i).getAttribute().isPassive() && abilityProps.getAbilityFromSlot(i).isPassiveActive())
 							{							
-								abilityProps.getAbilityFromSlot(i).hitEntity((EntityPlayer) sourceOfDamage, entity);
+								if(abilityProps.getAbilityFromSlot(i).getAttribute().isPunch())
+								{							
+									abilityProps.getAbilityFromSlot(i).hitEntity((EntityPlayer) sourceOfDamage, entity);
+								}
 							}
 						}
 					}

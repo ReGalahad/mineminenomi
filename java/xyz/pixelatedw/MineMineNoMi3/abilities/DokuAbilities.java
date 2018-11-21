@@ -82,7 +82,6 @@ public class DokuAbilities
 				props.setZoanPoint("n/a");
 
 			props.setZoanPoint(ID.ZOANMORPH_DOKU);
-			WyHelper.sendMsgToPlayer(player, "<" + player.getDisplayName() + "> Venom Demon !");
 			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
 			WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));
 		}

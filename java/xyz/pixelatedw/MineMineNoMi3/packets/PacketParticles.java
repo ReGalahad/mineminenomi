@@ -17,6 +17,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
+import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.ParticleManager;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
@@ -113,8 +114,7 @@ public class PacketParticles implements IMessage
 			}	
 			
 			if(!pass)
-				Logger.getGlobal().log(Level.INFO, message.fx + " is not an initialized particle effect !");
-		
+				WyDebug.warn(message.fx + " is not an initialized particle effect !");
 			
 			return null;	
 		}

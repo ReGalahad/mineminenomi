@@ -30,6 +30,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketShounenScream;
 
 public class Ability 
 {
@@ -67,12 +68,12 @@ public class Ability
 			if(this.attr.getPotionEffectsForUser() != null)
 				for(PotionEffect p : this.attr.getPotionEffectsForUser())				
 					player.addPotionEffect(new PotionEffect(p));
-					 
+
 			if(this.attr.getPotionEffectsForAoE() != null) 
 				for(PotionEffect p : this.attr.getPotionEffectsForAoE())
 					for(EntityLivingBase l : WyHelper.getEntitiesNear(player, this.attr.getEffectRadius())) 
 						l.addPotionEffect(new PotionEffect(p));
-	
+
 			if(!(this.attr.getAbilityCharges() > 0) && this.attr.getAbilityExplosionPower() > 0)
 				player.worldObj.newExplosion(player, player.posX, player.posY, player.posZ, this.attr.getAbilityExplosionPower(), this.attr.canAbilityExplosionSetFire(), MainConfig.enableGriefing ? this.attr.canAbilityExplosionDestroyBlocks() : false);		
 			
@@ -83,11 +84,8 @@ public class Ability
 	    	AbilityProperties abilityProps = AbilityProperties.get(player);
 	    	props.setTempPreviousAbility(WyHelper.getFancyName(this.attr.getAttributeName()));
 
-			if (player.worldObj instanceof WorldServer && !this.attr.isPassive() && MainConfig.enableAnimeScreaming)
-				((WorldServer)player.worldObj).getEntityTracker().func_151248_b(player, new S02PacketChat(new ChatComponentText("<" + player.getDisplayName() + "> " + this.attr.getAttributeName().toUpperCase() )));
-	    	
-			if(!this.originalDisplayName.equalsIgnoreCase("n/a") && !this.attr.getAttributeName().equalsIgnoreCase(this.originalDisplayName))
-				this.attr.setAttributeName(originalDisplayName);
+	    	if(!this.attr.isPassive())
+	    		this.sendShounenScream(player);
 				
 	    	duringRepeater(player);
 			startCooldown();
@@ -145,8 +143,7 @@ public class Ability
 					for(PotionEffect p : this.attr.getPotionEffectsForUser())				
 						player.addPotionEffect(new PotionEffect(p.getPotionID(), Integer.MAX_VALUE, p.getAmplifier(), true));
 				
-				if (player.worldObj instanceof WorldServer && MainConfig.enableAnimeScreaming)
-					((WorldServer)player.worldObj).getEntityTracker().func_151248_b(player, new S02PacketChat(new ChatComponentText("<" + player.getDisplayName() + "> " + this.attr.getAttributeName().toUpperCase() )));	    	
+				this.sendShounenScream(player);
 				
 				startPassive(player);
 				(new Update(player, attr)).start();
@@ -167,7 +164,7 @@ public class Ability
 		WyNetworkHelper.sendTo(new PacketAbilitySync(AbilityProperties.get(player)), (EntityPlayerMP) player);
 	}
 	
-	/** Only use super. if the ability is also using passive potion effects ! */
+	/** Only use super. if the ability is also using passive potion effects, otherwise there's really no plus */
 	public void endPassive(EntityPlayer player) 
 	{
 		if(this.attr.getPotionEffectsForUser() != null)
@@ -206,27 +203,7 @@ public class Ability
 	{
 		if(!isOnCooldown)
 		{
-			if (player.worldObj instanceof WorldServer && MainConfig.enableAnimeScreaming)
-			{
-				String[] abilityWords = this.attr.getAttributeName().toUpperCase().replaceAll(" [:]", "").split(" ");
-				System.out.println(Arrays.toString(abilityWords));
-				int noOfWords = (int) Math.ceil((double)abilityWords.length / (abilityWords.length > 2 ? 1.5 : 2));
-				String animeScream = "";
-				
-				if(noOfWords > 1)
-				{
-					StringBuilder sb = new StringBuilder();
-					for(int i = 0; i < noOfWords; i++)
-						sb.append(abilityWords[i] + " ");
-					animeScream = sb.toString().substring(0, sb.toString().length() - 1) + "...";
-				}
-				else
-				{
-					animeScream = this.attr.getAttributeName().toUpperCase();
-				}
-				
-				((WorldServer)player.worldObj).getEntityTracker().func_151248_b(player, new S02PacketChat(new ChatComponentText("<" + player.getDisplayName() + "> " + animeScream )));	    	
-			}
+			this.sendShounenScream(player, 1);
 			
 			isCharging = true;
 			WyNetworkHelper.sendTo(new PacketAbilitySync(AbilityProperties.get(player)), (EntityPlayerMP) player);
@@ -243,33 +220,14 @@ public class Ability
 		if(projectile != null)
 			player.worldObj.spawnEntityInWorld(projectile);
 		
-		if (player.worldObj instanceof WorldServer && MainConfig.enableAnimeScreaming)
-		{
-			String[] abilityWords = this.attr.getAttributeName().toUpperCase().replaceAll(" [:]", "").split(" ");
-			WyDebug.debug(Arrays.toString(abilityWords));
-			int noOfWords = (int) Math.ceil((double)abilityWords.length / (abilityWords.length > 2 ? 1.5 : 2));
-			String animeScream = "";
-			
-			if(noOfWords > 1)
-			{
-				StringBuilder sb = new StringBuilder();
-				for(int i = noOfWords; i < abilityWords.length; i++)
-					sb.append(abilityWords[i] + " ");
-				animeScream = "..." + sb.toString();
-				
-				((WorldServer)player.worldObj).getEntityTracker().func_151248_b(player, new S02PacketChat(new ChatComponentText("<" + player.getDisplayName() + "> " + animeScream )));
-			}
-		}	
+		this.sendShounenScream(player, 2);
 		
 		if(this.attr.getAbilityExplosionPower() > 0)
 			player.worldObj.newExplosion(player, player.posX, player.posY, player.posZ, this.attr.getAbilityExplosionPower(), this.attr.canAbilityExplosionSetFire(), MainConfig.enableGriefing ? this.attr.canAbilityExplosionDestroyBlocks() : false);		
 				
     	if(!ID.DEV_EARLYACCESS && !player.capabilities.isCreativeMode)
     		WyTelemetry.addStat("abilityUsed_" + this.getAttribute().getAttributeName(), 1);
-		
-		if(!this.originalDisplayName.equalsIgnoreCase("n/a") && !this.attr.getAttributeName().equalsIgnoreCase(this.originalDisplayName))
-			this.attr.setAttributeName(originalDisplayName);
-    	
+
 		(new Update(player, attr)).start();
 	}
 	
@@ -293,7 +251,7 @@ public class Ability
 
 		if(this.attr.getAbilityExplosionPower() > 0)
 			player.worldObj.newExplosion(target, target.posX, target.posY, target.posZ, this.attr.getAbilityExplosionPower(), this.attr.canAbilityExplosionSetFire(), MainConfig.enableGriefing ? this.attr.canAbilityExplosionDestroyBlocks() : false);		
-		
+
 		passiveActive = false;
 		startCooldown();
 		WyNetworkHelper.sendTo(new PacketAbilitySync(AbilityProperties.get(player)), (EntityPlayerMP) player);
@@ -312,6 +270,21 @@ public class Ability
 	{
 		WyNetworkHelper.sendTo(new PacketAbilitySync(AbilityProperties.get(player)), (EntityPlayerMP) player);
 		(new Update(player, attr)).start();
+	}
+	
+	protected void sendShounenScream(EntityPlayer player)
+	{
+		this.sendShounenScream(player, 0);
+	}
+	
+	protected void sendShounenScream(EntityPlayer player, int part)
+	{
+		if(MainConfig.enableAnimeScreaming)
+		{
+    		WyNetworkHelper.sendToAllAround(new PacketShounenScream(player.getCommandSenderName(), WyHelper.getFancyName(this.attr.getAttributeName()), part), player.dimension, player.posX, player.posY, player.posZ, 15);
+			if(!this.originalDisplayName.equalsIgnoreCase("n/a") && !this.attr.getAttributeName().equalsIgnoreCase(this.originalDisplayName))
+				this.attr.setAttributeName(originalDisplayName);
+		}
 	}
 	
 	public void reset()

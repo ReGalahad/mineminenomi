@@ -97,6 +97,39 @@ public class GoroAbilities
 		public void duringCharging(EntityPlayer player, int currentCharge)
 		{		
 			power = currentCharge;
+			double truePower = Math.abs(power - this.attr.getAbilityCharges());
+
+			if(truePower % 25 == 0)
+			{
+				int voltVariType = (int) Math.floor(truePower / 25);
+				switch(voltVariType)
+				{
+					case 1:
+						this.attr.setAttributeName("1 Million Volt Vari");
+						break;
+					case 2:
+						this.attr.setAttributeName("5 Million Volt Vari");
+						break;
+					case 3:
+						this.attr.setAttributeName("10 Million Volt Vari");
+						break;
+					case 4:
+						this.attr.setAttributeName("20 Million Volt Vari");
+						break;
+					case 5:
+						this.attr.setAttributeName("50 Million Volt Vari");
+						break;
+					case 6:
+						this.attr.setAttributeName("60 Million Volt Vari");
+						break;
+					case 7:
+						this.attr.setAttributeName("100 Million Volt Vari");
+						break;
+				}
+				
+				if(voltVariType < 8)
+					this.sendShounenScream(player);
+			}
 		}
 		
 		public void endCharging(EntityPlayer player)
@@ -106,40 +139,39 @@ public class GoroAbilities
 
 			if(truePower > 0 && truePower <= 50)
 			{
-				/*if(truePower > 0 && truePower <= 25)
-					this.attr.setAttributeName(I18n.format("ability.1millionvoltvari.name"));
+				if(truePower > 0 && truePower <= 25)
+					this.attr.setAttributeName("1 Million Volt Vari");
 				else
-					this.attr.setAttributeName(I18n.format("ability.5millionvoltvari.name"));*/
+					this.attr.setAttributeName("5 Million Volt Vari");
 				this.projectile = new VoltVari5Million(player.worldObj, player, ListExtraAttributes.VOLTVARI5MILLION);
 			}
 			else if(truePower > 50 && truePower <= 100)
 			{
-				/*if(truePower > 50 && truePower <= 75)
-					this.attr.setAttributeName(I18n.format("ability.10millionvoltvari.name"));
+				if(truePower > 50 && truePower <= 75)
+					this.attr.setAttributeName("10 Million Volt Vari");
 				else
-					this.attr.setAttributeName(I18n.format("ability.20millionvoltvari.name"));*/
+					this.attr.setAttributeName("20 Million Volt Vari");
 				this.projectile = new VoltVari20Million(player.worldObj, player, ListExtraAttributes.VOLTVARI20MILLION);
 			}
 			else if(truePower > 100 && truePower <= 150)
 			{
-				/*if(truePower > 100 && truePower <= 125)
-					this.attr.setAttributeName(I18n.format("ability.50millionvoltvari.name"));
+				if(truePower > 100 && truePower <= 125)
+					this.attr.setAttributeName("50 Million Volt Vari");
 				else
-					this.attr.setAttributeName(I18n.format("ability.60millionvoltvari.name"));*/
+					this.attr.setAttributeName("60 Million Volt Vari");
 				this.projectile = new VoltVari60Million(player.worldObj, player, ListExtraAttributes.VOLTVARI60MILLION);
 			}
 			else if(truePower > 150 && truePower <= 200)
 			{
-				/*if(truePower > 150 && truePower <= 175)
-					this.attr.setAttributeName(I18n.format("ability.100millionvoltvari.name"));
+				if(truePower > 150 && truePower <= 175)
+					this.attr.setAttributeName("100 Million Volt Vari");
 				else
-					this.attr.setAttributeName(I18n.format("ability.max200millionvoltvari.name"));*/
+					this.attr.setAttributeName("Max 200 Million Volt Vari");
 				this.projectile = new VoltVari200Million(player.worldObj, player, ListExtraAttributes.VOLTVARI200MILLION);
 			}
 			
-			if (player.worldObj instanceof WorldServer && !this.attr.isPassive() && MainConfig.enableAnimeScreaming)
-				((WorldServer)player.worldObj).getEntityTracker().func_151248_b(player, new S02PacketChat(new ChatComponentText("<" + player.getDisplayName() + "> " + this.attr.getAttributeName().toUpperCase() )));
-			
+			this.sendShounenScream(player);
+				
 			this.attr.setAbilityCooldown(trueCooldown);
 
 			this.isCharging = false;
@@ -148,9 +180,6 @@ public class GoroAbilities
 
 	    	if(!ID.DEV_EARLYACCESS && !player.capabilities.isCreativeMode)
 	    		WyTelemetry.addStat("abilityUsed_" + this.getAttribute().getAttributeName(), 1);
-			
-			if(!this.originalDisplayName.equalsIgnoreCase("n/a") && !this.attr.getAttributeName().equalsIgnoreCase(this.originalDisplayName))
-				this.attr.setAttributeName(originalDisplayName);
 
 			if(projectile != null)
 				player.worldObj.spawnEntityInWorld(projectile);

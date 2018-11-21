@@ -81,7 +81,7 @@ public class BlockPoison extends Block
     	else
     	{
     		WyNetworkHelper.sendToServer(new PacketWorld(x, y, z, Block.getIdFromBlock(Blocks.air)));
-    		ticks = 120;
+    		ticks = 60;
     	}
 	}
 }
