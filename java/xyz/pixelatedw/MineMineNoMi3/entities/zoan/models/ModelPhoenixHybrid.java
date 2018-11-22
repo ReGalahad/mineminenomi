@@ -25,12 +25,8 @@ public class ModelPhoenixHybrid extends ModelZoanMorph
 	public ModelRenderer RightWing1;
 	public ModelRenderer RightWing2;
 
-	private double[] wingAnimationArray;
-
 	public ModelPhoenixHybrid()
 	{
-		wingAnimationArray = WyRenderHelper.generateAnimationArray(0, -20, 20, 0.9, 1);
-
 		this.textureWidth = 128;
 		this.textureHeight = 64;
 		this.leftleg = new ModelRenderer(this, 0, 16);
@@ -93,108 +89,59 @@ public class ModelPhoenixHybrid extends ModelZoanMorph
 		this.head.render(f5);
 	}
 
-	protected double distanceMovedTotal = 0.0D;
-
 	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float headYaw, float headPitch, float scaleFactor, Entity ent)
 	{
-    	EntityLivingBase entity = ((EntityLivingBase)ent);
+		EntityLivingBase entity = ((EntityLivingBase) ent);
 
-		if (!Minecraft.getMinecraft().isGamePaused())
+		this.head.rotateAngleY = headYaw / (270F / (float) Math.PI);
+		this.head.rotateAngleX = headPitch / (360F / (float) Math.PI);
+
+		leftleg.rotateAngleX = MathHelper.cos(limbSwing * 0.6F) * 0.8F * limbSwingAmount;
+		rightleg.rotateAngleX = MathHelper.cos(limbSwing * 0.6F + (float) Math.PI) * 0.8F * limbSwingAmount;
+
+		if (ent.onGround)
 		{
-	        this.head.rotateAngleY = headYaw / (270F / (float)Math.PI);
-	        this.head.rotateAngleX = headPitch / (360F / (float)Math.PI);
-	        
-			updateDistanceMovedTotal(ent);
+			Leftarm.rotateAngleX = (float) degToRad(65);
+			Rightarm.rotateAngleX = (float) degToRad(65);
 
-			if (!ent.onGround)
-			{
-				int cycleIndexFlyWing = (int) ((ent.ticksExisted * 6.5) % (wingAnimationArray.length - 1));
+			Leftarm.rotateAngleZ = (float) degToRad(57);
+			Rightarm.rotateAngleZ = (float) degToRad(-57);
 
-				leftleg.rotateAngleX = (float) degToRad(wingAnimationArray[cycleIndexFlyWing]);
-				rightleg.rotateAngleX = (float) -degToRad(wingAnimationArray[cycleIndexFlyWing]);
+			RightWing2.rotateAngleY = (float) degToRad(-10);
+			LeftWing2.rotateAngleY = (float) degToRad(10);
 
-				Leftarm.rotateAngleX = (float) degToRad(60);
-				Rightarm.rotateAngleX = (float) degToRad(60);
+			Rightarm.rotateAngleY = MathHelper.cos(limbSwing * 0.6662F) * 0.4F * limbSwingAmount;
+			Leftarm.rotateAngleY = -MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.4F * limbSwingAmount;
+		}
+		else
+		{
+			Leftarm.rotateAngleX = (float) degToRad(60);
+			Rightarm.rotateAngleX = (float) degToRad(60);
 
-				Leftarm.rotateAngleZ = (float) degToRad(0);
-				Rightarm.rotateAngleZ = (float) degToRad(0);
+			Rightarm.rotateAngleY = Rightarm.rotateAngleZ = 3 * MathHelper.cos(ageInTicks * 0.4F) * 0.23F;
+			Leftarm.rotateAngleY = Leftarm.rotateAngleZ = 3 * MathHelper.cos(ageInTicks * 0.4F + (float) Math.PI) * 0.23F;
 
-				Leftarm.rotateAngleZ = (float) degToRad(wingAnimationArray[cycleIndexFlyWing]);
-				Rightarm.rotateAngleZ = (float) -degToRad(wingAnimationArray[cycleIndexFlyWing]);
+			RightWing2.rotateAngleY = MathHelper.cos(ageInTicks * 0.4F) * 0.35F;
+			LeftWing2.rotateAngleY = MathHelper.cos(ageInTicks * 0.4F + (float) Math.PI) * 0.35F;
+		}
 
-				Leftarm.rotateAngleY = (float) degToRad(wingAnimationArray[cycleIndexFlyWing]);
-				Rightarm.rotateAngleY = (float) -degToRad(wingAnimationArray[cycleIndexFlyWing]);
+		if (entity.isSwingInProgress)
+		{
+			Rightarm.rotateAngleY = MathHelper.sin(entity.swingProgress * 3.0F + (float) Math.PI) * 1.2F;
+			Rightarm.rotateAngleZ = -MathHelper.cos(entity.swingProgress * 4.0F + (float) Math.PI) * 0.2F;
+		}
 
-				LeftWing2.rotateAngleY = (float) degToRad(wingAnimationArray[cycleIndexFlyWing]);
-				RightWing2.rotateAngleY = (float) -degToRad(wingAnimationArray[cycleIndexFlyWing]);
-			}
-			else
-			{
-				if (ent.getDistance(ent.prevPosX, ent.prevPosY, ent.prevPosZ) > 0)
-				{
-					int cycleIndexMoveWing = (int) ((ent.ticksExisted * 7.5) % (wingAnimationArray.length - 1));
-					int cycleIndexMoveLegs = (int) ((ent.ticksExisted * 10) % (wingAnimationArray.length - 1));
-
-					leftleg.rotateAngleX = (float) degToRad(wingAnimationArray[cycleIndexMoveLegs]);
-					rightleg.rotateAngleX = (float) -degToRad(wingAnimationArray[cycleIndexMoveLegs]);
-
-					Leftarm.rotateAngleX = (float) degToRad(65);
-					Rightarm.rotateAngleX = (float) degToRad(65);
-
-					Leftarm.rotateAngleY = (float) degToRad(wingAnimationArray[cycleIndexMoveWing]);
-					Rightarm.rotateAngleY = (float) degToRad(wingAnimationArray[cycleIndexMoveWing]);
-
-					Leftarm.rotateAngleZ = (float) degToRad(57);
-					Rightarm.rotateAngleZ = (float) degToRad(-57);
-				}
-				else
-				{
-					leftleg.rotateAngleX = (float) degToRad(0);
-					rightleg.rotateAngleX = (float) degToRad(0);
-
-					Leftarm.rotateAngleX = (float) degToRad(65);
-					Rightarm.rotateAngleX = (float) degToRad(65);
-
-					Leftarm.rotateAngleY = (float) degToRad(15);
-					Rightarm.rotateAngleY = (float) degToRad(-15);
-
-					Leftarm.rotateAngleZ = (float) degToRad(57);
-					Rightarm.rotateAngleZ = (float) degToRad(-57);
-
-					Leftarm.rotateAngleX = (float) degToRad(65);
-					Rightarm.rotateAngleX = (float) degToRad(65);				
-				}
-			}
-			
-	    	if( entity.isSwingInProgress )
-	    	{
-	    		Rightarm.rotateAngleY = MathHelper.sin(entity.swingProgress * 3.0F + (float)Math.PI) * 1.2F;
-	    		Rightarm.rotateAngleZ = -MathHelper.cos(entity.swingProgress * 4.0F + (float)Math.PI) * 0.2F;
-	    	}
-	    	
-	    	
-	    	if(ent.getDistance(ent.prevPosX, ent.prevPosY, ent.prevPosZ) <= 0.1F && !entity.isSwingInProgress && ent.onGround)
-	    	{
-		    	Rightarm.rotateAngleX = 1.134F;
-		    	Rightarm.rotateAngleY = -0.261F;
-		    	Rightarm.rotateAngleZ = -0.994F;
-	    	}
+		if (ent.getDistance(ent.prevPosX, ent.prevPosY, ent.prevPosZ) <= 0.1F && !entity.isSwingInProgress && ent.onGround)
+		{
+			Rightarm.rotateAngleX = 1.134F;
+			Rightarm.rotateAngleY = -0.261F;
+			Rightarm.rotateAngleZ = -0.994F;
 		}
 	}
 
 	protected float degToRad(double degrees)
 	{
 		return (float) (degrees * (double) Math.PI / 180);
-	}
-
-	protected void updateDistanceMovedTotal(Entity e)
-	{
-		distanceMovedTotal += e.getDistance(e.prevPosX, e.prevPosY, e.prevPosZ);
-	}
-
-	protected double getDistanceMovedTotal()
-	{
-		return (distanceMovedTotal);
 	}
 
 	/**

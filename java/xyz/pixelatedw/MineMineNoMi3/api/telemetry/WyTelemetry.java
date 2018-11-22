@@ -15,13 +15,16 @@ import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
 public class WyTelemetry 
 {
 	
-	private static final double VERSION = 1.00;
+	private static String urlConnection;
 	
 	static
 	{
-		WyDebug.debug("Telemetry Core System version " + VERSION + " loaded!");
+		if(WyDebug.isDebug())
+			urlConnection = "http://wynd.go.ro/mineminenomi/globalstats.php";
+		else
+			urlConnection = "http://stats.pixelatedw.xyz/globalstats.php";
 	}
-
+	
 	public static void addStat(final String statName, final int value) 
 	{
         Thread newThread = new Thread()
@@ -39,11 +42,12 @@ public class WyTelemetry
 	
 	private static void sendData(String data)
 	{
+		System.out.println(urlConnection);
 		if(MainConfig.enableTelemetry && !data.isEmpty() && data != null)
 		{
 			try 
 			{
-	            HttpURLConnection conn = (HttpURLConnection)(new URL("http://stats.pixelatedw.xyz/globalstats.php")).openConnection();
+	            HttpURLConnection conn = (HttpURLConnection)(new URL(urlConnection)).openConnection();
 	            conn.setRequestMethod("POST");
 	            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 	            conn.setRequestProperty("Content-Length", "" + data.getBytes().length);

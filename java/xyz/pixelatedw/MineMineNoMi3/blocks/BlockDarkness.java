@@ -7,6 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
@@ -49,6 +50,8 @@ public class BlockDarkness extends Block
 	    		super.addCollisionBoxesToList(world, x, y, z, mask, list, entity);
 	    	}
     	}
+    	else if(entity instanceof EntityFallingBlock)
+    		entity.setDead();
 	}
 	
     public void randomDisplayTick(World world, int x, int y, int z, Random rand)

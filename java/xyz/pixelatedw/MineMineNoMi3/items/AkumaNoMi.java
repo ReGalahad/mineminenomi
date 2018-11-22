@@ -101,7 +101,7 @@ public class AkumaNoMi extends ItemFood
 		}	
 		
     	if(!ID.DEV_EARLYACCESS && !world.isRemote && !player.capabilities.isCreativeMode)
-    		WyTelemetry.addStat("eaten_" + this.getUnlocalizedName().substring(5).replace("nomi", "").replace(":", "").replace(",", "").replace("model", ""), 1);
+    		WyTelemetry.addStat("eaten_" + itemStack.getDisplayName(), 1);
 	}
 	
 	public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean par4)

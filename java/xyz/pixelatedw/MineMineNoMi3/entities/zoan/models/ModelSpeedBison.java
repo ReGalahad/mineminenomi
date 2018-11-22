@@ -3,6 +3,7 @@ package xyz.pixelatedw.MineMineNoMi3.entities.zoan.models;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.MathHelper;
 
 public class ModelSpeedBison extends ModelZoanMorph
 {
@@ -30,8 +31,6 @@ public class ModelSpeedBison extends ModelZoanMorph
 	public ModelRenderer rearlefthull2;
 	public ModelRenderer rearrighthull1;
 	public ModelRenderer rearrighthull2;
-
-	protected double distanceMovedTotal = 0.0D;
 
 	public ModelSpeedBison()
 	{
@@ -160,58 +159,11 @@ public class ModelSpeedBison extends ModelZoanMorph
 
 	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float headYaw, float headPitch, float scaleFactor, Entity ent)
 	{
-		double[] animationFrontLegMovement = new double[]
-		{ 0, 5, 10, 15, 20, 25, 30, 35, 40, 35, 30, 20, 15, 10, 5, 0, -5, -10, -15, -20, -25, -30, -25, -20, -15, -10, -5, 0 };
+		leftleg2.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 0.3F * limbSwingAmount;
+		rightleg2.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.3F * limbSwingAmount;
 
-		double[] animationFrontLowerLegMovement = new double[]
-		{ 0, 0, 0, 5, 10, 15, 20, 25, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 25, 20, 15, 10, 5, 0 };
-
-		double[] animationBackLegMovement = new double[]
-		{ 0, 5, 10, 15, 20, 25, 30, 25, 20, 15, 10, 5, 0, -5, -10, -15, -20, -25, -30, -25, -20, -15, -10, -5, 0 };
-
-		updateDistanceMovedTotal(ent);
-		int cycleIndexFrontLeg = (int) ((getDistanceMovedTotal() * 0.2) % animationFrontLegMovement.length);
-		int cycleIndexBackLeg = (int) ((getDistanceMovedTotal() * 0.4) % animationBackLegMovement.length);
-
-		if (!Minecraft.getMinecraft().isGamePaused())
-		{
-			if (ent.getDistance(ent.prevPosX, ent.prevPosY, ent.prevPosZ) > 0)
-			{
-				this.rightleg2.rotateAngleX = (float) degToRad(animationFrontLegMovement[cycleIndexFrontLeg]);
-				this.rightleg1.rotateAngleX = (float) degToRad(animationFrontLegMovement[cycleIndexFrontLeg]);
-
-				this.leftleg2.rotateAngleX = (float) -degToRad(animationFrontLegMovement[cycleIndexFrontLeg]);
-				this.leftleg1.rotateAngleX = (float) -degToRad(animationFrontLegMovement[cycleIndexFrontLeg]);
-
-				this.rearleftleg1.rotateAngleX = (float) -degToRad(animationBackLegMovement[cycleIndexBackLeg]);
-
-				this.rearrightleg1.rotateAngleX = (float) degToRad(animationBackLegMovement[cycleIndexBackLeg]);
-			} else
-			{
-				rightleg2.rotateAngleX = leftleg2.rotateAngleX = (float) degToRad(0);
-				rightleg1.rotateAngleX = leftleg1.rotateAngleX = (float) degToRad(0);
-
-				rearleftleg1.rotateAngleX = (float) degToRad(0);
-				rearrightleg1.rotateAngleX = (float) degToRad(0);
-			}
-
-		}
-
-	}
-
-	protected float degToRad(double degrees)
-	{
-		return (float) (degrees * (double) Math.PI / 180);
-	}
-
-	protected void updateDistanceMovedTotal(Entity e)
-	{
-		distanceMovedTotal += e.getDistance(e.prevPosX, e.prevPosY, e.prevPosZ);
-	}
-
-	protected double getDistanceMovedTotal()
-	{
-		return (distanceMovedTotal);
+		rearrightleg1.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 0.4F * limbSwingAmount;
+		rearleftleg1.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.4F * limbSwingAmount;
 	}
 
 	public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
