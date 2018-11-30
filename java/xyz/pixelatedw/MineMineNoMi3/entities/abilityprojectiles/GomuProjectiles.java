@@ -93,8 +93,6 @@ public class GomuProjectiles
 				if(dir == WyHelper.Direction.SOUTH_EAST) {mZ += powerZ; mX += powerX;}
 				
 				motion("=", mX, mY, mZ, player);
-				
-				System.out.println("" + powerX);
 			}
 		}
 	}

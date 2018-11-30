@@ -171,7 +171,7 @@ public class ListAttributes
 	 
 	public static AbilityAttribute GEARSECOND = new AbilityAttribute("Gear Second").setAbilityCooldown(60).setAbilityPassive();
 	public static AbilityAttribute GEARTHIRD = new AbilityAttribute("Gear Third").setAbilityCooldown(90).setAbilityPassive();
-	public static AbilityAttribute GEARFOURTH = new AbilityAttribute("Gear Forth").setAbilityCooldown(300).setAbilityPassive();
+	public static AbilityAttribute GEARFOURTH = new AbilityAttribute("Gear Fourth").setAbilityCooldown(300).setAbilityPassive();
 	public static AbilityAttribute GOMUGOMUNOROCKET = new AbilityAttribute("Gomu Gomu no Rocket").setProjectileModel(new ModelFist()).setProjectileTexture("gomugomunopistol").setProjectileSize(3, 3, 3).setModelOffsets(0, 1, 0).setProjectileDamage(6).setAbilityCooldown(8);
 	public static AbilityAttribute GOMUGOMUNOBAZOOKA = new AbilityAttribute("Gomu Gomu no Bazooka").setAbilityCharges(10);
 	public static AbilityAttribute GOMUGOMUNOGATLING = new AbilityAttribute("Gomu Gomu no Gatling").setAbilityRepeater().setProjectileTicks(10);
