@@ -9,6 +9,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.MainKeys;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
@@ -29,7 +30,7 @@ public class DialImpact extends Item
 	    	if(!player.isSneaking())
 	    	{
 				player.addPotionEffect(new PotionEffect(Potion.resistance.id, 1, 100));
-				world.newExplosion(player, player.posX, player.posY, player.posZ, 3, false, true);
+				world.newExplosion(player, player.posX, player.posY, player.posZ, 3, false, MainConfig.enableGriefing);
 				
 		    	if(!ID.DEV_EARLYACCESS && !player.capabilities.isCreativeMode)
 		    		WyTelemetry.addStat("impactDialsUsed", 1);

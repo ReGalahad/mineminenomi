@@ -27,7 +27,7 @@ public class ParticleEffectWhiteLauncher extends ParticleEffect
 							0, 0, 0)
 					.setParticleScale(1.3F).setParticleGravity(0).setParticleAge(20));
 
-		}			
+		}
 	}
 
 }

@@ -43,7 +43,7 @@ public class DevilFruitsHelper
 	
 	public static String[] flyingFruits = new String[]
 	{
-		"gasugasu", "sunasuna"
+		"gasugasu", "sunasuna", "mokumoku"
 	};
 	
 	public static Block[] replaceableBlocks = new Block[] { Blocks.air, Blocks.tallgrass, Blocks.snow_layer, Blocks.red_flower, Blocks.yellow_flower, Blocks.water, Blocks.flowing_water, Blocks.lava, 

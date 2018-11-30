@@ -3,6 +3,7 @@ package xyz.pixelatedw.MineMineNoMi3.events;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -28,6 +29,7 @@ import net.minecraft.util.ChatStyle;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
@@ -39,6 +41,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import xyz.pixelatedw.MineMineNoMi3.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
+import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.abilities.CyborgAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.FishKarateAbilities;
@@ -60,6 +63,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.MarineData;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
 import xyz.pixelatedw.MineMineNoMi3.events.customevents.DorikiEvent;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 import xyz.pixelatedw.MineMineNoMi3.items.AkumaNoMi;
@@ -178,19 +182,48 @@ public class EventsPersistence
 			
 			if(!player.capabilities.isCreativeMode)
 			{
-				if(player.isInWater())
-					player.capabilities.isFlying = false;
-				
-				player.capabilities.allowFlying = Arrays.stream(DevilFruitsHelper.flyingFruits).anyMatch(p ->
+				if(MainConfig.enableSpecialFlying)
 				{
-					if(props.getUsedFruit().equalsIgnoreCase("toritoriphoenix") && !props.getZoanPoint().toLowerCase().equals("n/a"))
-						return true;
+					if(player.isInWater())
+						player.capabilities.isFlying = false;
 					
-					return props.getUsedFruit().equalsIgnoreCase(p);
-				});
-				
-				if(!player.capabilities.allowFlying)
-					player.capabilities.isFlying = false;
+					player.capabilities.allowFlying = Arrays.stream(DevilFruitsHelper.flyingFruits).anyMatch(p ->
+					{
+						if(props.getUsedFruit().equalsIgnoreCase("toritoriphoenix") && !props.getZoanPoint().toLowerCase().equals("n/a"))
+							return true;
+						
+						return props.getUsedFruit().equalsIgnoreCase(p);
+					});
+					
+					if(!player.capabilities.allowFlying)
+						player.capabilities.isFlying = false;
+					
+					if(player.capabilities.isFlying && !player.worldObj.isRemote)
+					{
+						ResourceLocation particleToUse = null;
+						if(props.getUsedFruit().equalsIgnoreCase("mokumoku") )
+							particleToUse = ID.PARTICLE_ICON_MOKU;
+						else if(props.getUsedFruit().equalsIgnoreCase("gasugasu") )
+							particleToUse = ID.PARTICLE_ICON_GASU;
+						else if(props.getUsedFruit().equalsIgnoreCase("sunasuna") )
+							particleToUse = ID.PARTICLE_ICON_SUNA2;							
+						
+						for (int i = 0; i < 10; i++)
+						{							
+							double offsetX = (new Random().nextInt(20) + 1.0D - 10.0D) / 15.0D;
+							double offsetY = (new Random().nextInt(13) + 1.0D - 10.0D) / 10.0D;
+							double offsetZ = (new Random().nextInt(20) + 1.0D - 10.0D) / 15.0D;
+								
+							MainMod.proxy.spawnCustomParticles(player, 
+									new EntityParticleFX(player.worldObj, particleToUse, 
+											player.posX + offsetX, 
+											player.posY + 0.5 + offsetY, 
+											player.posZ + offsetZ, 
+											0, 0, 0)
+									.setParticleScale(1.3F).setParticleGravity(0).setParticleAge(5));
+						}
+					}
+				}
 			}
 			else
 				player.capabilities.allowFlying = true;
@@ -712,7 +745,7 @@ public class EventsPersistence
 			AbilityProperties abilityProps = AbilityProperties.get(player);
 			
 			if (!player.worldObj.isRemote)
-			{			
+			{
 				if(ID.DEV_EARLYACCESS && !WyDebug.isDebug())
 				{
 					try 
@@ -724,12 +757,9 @@ public class EventsPersistence
 						while(scanner.hasNextLine())
 						{
 							String uuid = scanner.nextLine();
-							
+							System.out.println(uuid);
 							if(uuid.startsWith("$"))
-							{
-								flag = true;
-								break;
-							}
+								continue;
 							
 							if(player.getUniqueID().toString().equals(uuid) || (uuid.startsWith("&") && player.getDisplayName().equals(uuid.substring(0, 2))))
 							{

@@ -99,7 +99,7 @@ public class GoroAbilities
 			power = currentCharge;
 			double truePower = Math.abs(power - this.attr.getAbilityCharges());
 
-			if(truePower % 25 == 0)
+			if(truePower % 25 == 0 && MainConfig.enableAnimeScreaming)
 			{
 				int voltVariType = (int) Math.floor(truePower / 25);
 				switch(voltVariType)
@@ -139,34 +139,46 @@ public class GoroAbilities
 
 			if(truePower > 0 && truePower <= 50)
 			{
-				if(truePower > 0 && truePower <= 25)
-					this.attr.setAttributeName("1 Million Volt Vari");
-				else
-					this.attr.setAttributeName("5 Million Volt Vari");
+				if(MainConfig.enableAnimeScreaming)
+				{
+					if(truePower > 0 && truePower <= 25)
+						this.attr.setAttributeName("1 Million Volt Vari");
+					else
+						this.attr.setAttributeName("5 Million Volt Vari");
+				}
 				this.projectile = new VoltVari5Million(player.worldObj, player, ListExtraAttributes.VOLTVARI5MILLION);
 			}
 			else if(truePower > 50 && truePower <= 100)
 			{
-				if(truePower > 50 && truePower <= 75)
-					this.attr.setAttributeName("10 Million Volt Vari");
-				else
-					this.attr.setAttributeName("20 Million Volt Vari");
+				if(MainConfig.enableAnimeScreaming)
+				{
+					if(truePower > 50 && truePower <= 75)
+						this.attr.setAttributeName("10 Million Volt Vari");
+					else
+						this.attr.setAttributeName("20 Million Volt Vari");
+				}
 				this.projectile = new VoltVari20Million(player.worldObj, player, ListExtraAttributes.VOLTVARI20MILLION);
 			}
 			else if(truePower > 100 && truePower <= 150)
 			{
-				if(truePower > 100 && truePower <= 125)
-					this.attr.setAttributeName("50 Million Volt Vari");
-				else
-					this.attr.setAttributeName("60 Million Volt Vari");
+				if(MainConfig.enableAnimeScreaming)
+				{
+					if(truePower > 100 && truePower <= 125)
+						this.attr.setAttributeName("50 Million Volt Vari");
+					else
+						this.attr.setAttributeName("60 Million Volt Vari");
+				}
 				this.projectile = new VoltVari60Million(player.worldObj, player, ListExtraAttributes.VOLTVARI60MILLION);
 			}
 			else if(truePower > 150 && truePower <= 200)
 			{
-				if(truePower > 150 && truePower <= 175)
-					this.attr.setAttributeName("100 Million Volt Vari");
-				else
-					this.attr.setAttributeName("Max 200 Million Volt Vari");
+				if(MainConfig.enableAnimeScreaming)
+				{
+					if(truePower > 150 && truePower <= 175)
+						this.attr.setAttributeName("100 Million Volt Vari");
+					else
+						this.attr.setAttributeName("Max 200 Million Volt Vari");
+				}
 				this.projectile = new VoltVari200Million(player.worldObj, player, ListExtraAttributes.VOLTVARI200MILLION);
 			}
 			
