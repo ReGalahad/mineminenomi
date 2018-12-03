@@ -1,11 +1,5 @@
 package xyz.pixelatedw.MineMineNoMi3.events;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.Arrays;
-import java.util.Random;
-import java.util.Scanner;
-
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -13,7 +7,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
-import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityArrow;
@@ -70,12 +63,17 @@ import xyz.pixelatedw.MineMineNoMi3.items.AkumaNoMi;
 import xyz.pixelatedw.MineMineNoMi3.items.ItemCoreArmor;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListEffects;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
-import xyz.pixelatedw.MineMineNoMi3.lists.ListQuests;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSyncInfo;
 import xyz.pixelatedw.MineMineNoMi3.quests.ITimedQuest;
 import xyz.pixelatedw.MineMineNoMi3.quests.QuestLogicHelper;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.Arrays;
+import java.util.Random;
+import java.util.Scanner;
 
 public class EventsPersistence
 {
@@ -214,8 +212,8 @@ public class EventsPersistence
 							double offsetY = (new Random().nextInt(13) + 1.0D - 10.0D) / 10.0D;
 							double offsetZ = (new Random().nextInt(20) + 1.0D - 10.0D) / 15.0D;
 								
-							MainMod.proxy.spawnCustomParticles(player, 
-									new EntityParticleFX(player.worldObj, particleToUse, 
+							MainMod.proxy.spawnCustomParticles(player,
+									new EntityParticleFX(player.worldObj, particleToUse,
 											player.posX + offsetX, 
 											player.posY + 0.5 + offsetY, 
 											player.posZ + offsetZ, 
@@ -443,6 +441,7 @@ public class EventsPersistence
 			EntityPlayer player = (EntityPlayer) event.entity;
 			ExtendedEntityStats props = ExtendedEntityStats.get(player);
 			AbilityProperties abilityProps = AbilityProperties.get(player);
+
 
 			props.setYamiPower(false);
 
