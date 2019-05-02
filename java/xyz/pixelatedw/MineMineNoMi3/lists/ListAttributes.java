@@ -28,6 +28,7 @@ import java.awt.*;
 public class ListAttributes 
 {
 	
+	
 	public static AbilityAttribute MINIMININOFULLREBOUND = new AbilityAttribute("Mini Mini no Full Rebound").setAbilityCooldown(3).setAbilityPassive(true);
 	
 	public static AbilityAttribute BIGAN = new AbilityAttribute("Bigan").setAbilityCooldown(8).setProjectileDamage(20).setProjectileModel(new ModelCube()).setProjectileColor("#6D5E24").setProjectileSize(1, 1, 2.4).setProjectileTicks(10).addEffects(EffectType.PROJECTILE, new PotionEffect(Potion.weakness.id, 600, 0), new PotionEffect(Potion.moveSlowdown.id, 600, 2)).setModelOffsets(0, 1.5, 0);
@@ -260,6 +261,10 @@ public class ListAttributes
 
 	public static AbilityAttribute RUSTTOUCH = new AbilityAttribute("Rust Touch").setAbilityCooldown(19).setAbilityPunch().setAbilityPassive();
 
+	public static AbilityAttribute THUNDERBALL = new AbilityAttribute("Thunder Ball").setAbilityCooldown(5).setProjectileModel(new ModelSphere()).setProjectileColor("FFFF00").setProjectileAlpha(150).setProjectileSize(1.5, 1.5, 1.5).setProjectileTicks(300);
+	public static AbilityAttribute COOLBALL = new AbilityAttribute("Cool Ball").setAbilityCooldown(5).setProjectileModel(new ModelSphere()).setProjectileColor("0000FF").setProjectileAlpha(150).setProjectileSize(1.5, 1.5, 1.5).setProjectileTicks(300);
+	public static AbilityAttribute HEATBALL = new AbilityAttribute("Heat Ball").setAbilityCooldown(5).setProjectileModel(new ModelSphere()).setProjectileColor("FF0000").setProjectileAlpha(150).setProjectileSize(1.5, 1.5, 1.5).setProjectileTicks(300);
+	
 	public static AbilityAttribute UCHIMIZU = new AbilityAttribute("Uchimizu").setAbilityCooldown(5).setProjectileModel(new ModelCube()).setProjectileColor("00CED1").setProjectileSize(.5, .5, 1).setProjectileDamage(5).setAbilityRepeater(3, 2);
 	public static AbilityAttribute MURASAME = new AbilityAttribute("Murasame").setAbilityCooldown(8).setProjectileModel(new ModelShark()).setProjectileTexture("murasame").setProjectileSize(.8, .8, 1.2).setProjectileDamage(25);
 	public static AbilityAttribute KACHIAGEHAISOKU = new AbilityAttribute("Kachiage Haisoku").setAbilityCooldown(15).setAbilityPassive().setAbilityPunch();

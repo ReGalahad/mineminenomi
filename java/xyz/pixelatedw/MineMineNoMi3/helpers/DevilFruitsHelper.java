@@ -38,6 +38,7 @@ import xyz.pixelatedw.MineMineNoMi3.abilities.HakiAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.RokushikiAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.SniperAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.SwordsmanAbilities;
+import xyz.pixelatedw.MineMineNoMi3.abilities.WeatherAbilities;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
@@ -227,6 +228,10 @@ public class DevilFruitsHelper
 		QuestProperties questProps = QuestProperties.get(player);
 		AbilityProperties abilityProps = AbilityProperties.get(player);
 
+		abilityProps.addRacialAbility(WeatherAbilities.HEATBALL);
+		abilityProps.addRacialAbility(WeatherAbilities.COOLBALL);
+		abilityProps.addRacialAbility(WeatherAbilities.THUNDERBALL);
+				
 		if (props.isSwordsman())
 		{
 			if (!verifyIfAbilityIsBanned(SwordsmanAbilities.SHISHISHISONSON))
