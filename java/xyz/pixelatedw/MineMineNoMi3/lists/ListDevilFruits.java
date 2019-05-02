@@ -49,6 +49,7 @@ import xyz.pixelatedw.MineMineNoMi3.abilities.SupaAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.SwordsmanAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.ToriPhoenixAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.UshiBisonAbilities;
+import xyz.pixelatedw.MineMineNoMi3.abilities.WeatherAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.YamiAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.YomiAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.YukiAbilities;
@@ -93,6 +94,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.SupaProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.SwordsmanProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.ToriPhoenixProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.UshiGiraffeProjectiles;
+import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.WeatherProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.YamiProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.YukiProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.ZouProjectiles;
@@ -125,7 +127,7 @@ public class ListDevilFruits
 				
 				// Special Abilities lists
 				RokushikiAbilities.abilitiesArray, FishKarateAbilities.abilitiesArray, CyborgAbilities.abilitiesArray, 
-				SniperAbilities.abilitiesArray, SwordsmanAbilities.abilitiesArray, HakiAbilities.abilitiesArray};
+				SniperAbilities.abilitiesArray, SwordsmanAbilities.abilitiesArray, WeatherAbilities.abilitiesArray, HakiAbilities.abilitiesArray};
 	
 	public static final Object[] ALL_ENTITIES = new Object[] 
 		{RokushikiProjectiles.abilitiesClassesArray, MeraProjectiles.abilitiesClassesArray, HieProjectiles.abilitiesClassesArray, BaneProjectiles.abilitiesClassesArray, PikaProjectiles.abilitiesClassesArray, 
@@ -135,7 +137,8 @@ public class ListDevilFruits
 				ItoProjectiles.abilitiesClassesArray, FishKarateProjectiles.abilitiesClassesArray, CyborgProjectiles.abilitiesClassesArray, ExtraProjectiles.abilitiesClassesArray, BariProjectiles.abilitiesClassesArray,
 				HoroProjectiles.abilitiesClassesArray, GoeProjectiles.abilitiesClassesArray, NoroProjectiles.abilitiesClassesArray, YamiProjectiles.abilitiesClassesArray, GomuProjectiles.abilitiesClassesArray,
 				SwordsmanProjectiles.abilitiesClassesArray, ToriPhoenixProjectiles.abilitiesClassesArray, SniperProjectiles.abilitiesClassesArray, JuryoProjectiles.abilitiesClassesArray, BakuProjectiles.abilitiesClassesArray,
-				ZouProjectiles.abilitiesClassesArray, SupaProjectiles.abilitiesClassesArray, MeroProjectiles.abilitiesClassesArray, OriProjectiles.abilitiesClassesArray, UshiGiraffeProjectiles.abilitiesClassesArray};
+				ZouProjectiles.abilitiesClassesArray, SupaProjectiles.abilitiesClassesArray, MeroProjectiles.abilitiesClassesArray, OriProjectiles.abilitiesClassesArray, UshiGiraffeProjectiles.abilitiesClassesArray,
+				WeatherProjectiles.abilitiesClassesArray};
 	
 	public static void init()
 	{

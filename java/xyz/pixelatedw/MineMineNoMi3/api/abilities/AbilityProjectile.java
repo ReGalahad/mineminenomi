@@ -28,6 +28,7 @@ public class AbilityProjectile extends EntityThrowable
 	public int ticks, maxticks;
 	private AbilityAttribute attr;
 	private EntityLivingBase user;
+	public float gravity = 0.001F;
 
 	public AbilityProjectile(World world)
 	{
@@ -196,7 +197,7 @@ public class AbilityProjectile extends EntityThrowable
 
 	protected float getGravityVelocity()
 	{
-		return 0.001F;
+		return gravity;
 	}
 
 }

@@ -63,6 +63,7 @@ import xyz.pixelatedw.MineMineNoMi3.items.dials.DialFire;
 import xyz.pixelatedw.MineMineNoMi3.items.dials.DialImpact;
 import xyz.pixelatedw.MineMineNoMi3.items.dials.DialMilky;
 import xyz.pixelatedw.MineMineNoMi3.items.dials.DialReject;
+import xyz.pixelatedw.MineMineNoMi3.items.weapons.ClimaTact;
 import xyz.pixelatedw.MineMineNoMi3.items.weapons.Flintlock;
 import xyz.pixelatedw.MineMineNoMi3.items.weapons.ItemAbilityWeapon;
 import xyz.pixelatedw.MineMineNoMi3.items.weapons.ItemCoreWeapon;
@@ -208,6 +209,8 @@ public class ListMisc
 	public static ItemCoreWeapon SoulSolid = new ItemCoreWeapon(8);
 	public static ItemCoreWeapon Durandal = new ItemCoreWeapon(7);
 	
+	public static ClimaTact ClimaTact = new ClimaTact();
+	
 	public static ItemAbilityWeapon IceSaber = new ItemAbilityWeapon(9).setIsSlownessInducing();
 	public static ItemAbilityWeapon AmaNoMurakumo = new ItemAbilityWeapon(9);
 	public static ItemAbilityWeapon NoroNoroBeamSword = new ItemAbilityWeapon(5).setIsSlownessInducing(75, true);
@@ -289,6 +292,8 @@ public class ListMisc
 		addITEM(Shusui, "Shusui", ListCreativeTabs.tabWeapons);
 		addITEM(SoulSolid, "Soul Solid", ListCreativeTabs.tabWeapons);
 		addITEM(Durandal, "Durandal", ListCreativeTabs.tabWeapons);
+		
+		addITEM(ClimaTact, "Clima Tact", ListCreativeTabs.tabWeapons);
 		
 		addITEM(IceSaber, "Ice Saber", null);
 		addITEM(AmaNoMurakumo, "Ama no Murakumo", null);

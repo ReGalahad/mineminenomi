@@ -79,7 +79,7 @@ public class ExtraProjectiles
 		protected void entityInit() {}
 		protected void readEntityFromNBT(NBTTagCompound nbt) {}
 		protected void writeEntityToNBT(NBTTagCompound nbt) {}
-	}	
+	}
 	
 	public static class MilkyDialProjectile extends AbilityProjectile
 	{

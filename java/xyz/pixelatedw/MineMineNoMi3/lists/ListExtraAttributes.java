@@ -15,6 +15,8 @@ import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelFist
 public class ListExtraAttributes
 {
 
+	public static AbilityAttribute WEATHERCLOUD = new AbilityAttribute("Weather Cloud").setProjectileModel(new ModelCube()).setProjectileSize(65, 5, 65).setProjectileColor(Color.WHITE).setProjectileAlpha(150).setProjectileTicks(200).setProjectileCollisionSizes(65, 5, 65).setProjectileMoveThroughBlocks(true);
+
 	public static AbilityAttribute LIBERATIONBLOCK = new AbilityAttribute("Liberation Block").setProjectileModel(new ModelCube()).setProjectileColor(Color.BLACK).setProjectileDamage(20).setProjectileSize(3, 3, 3);
 	 
 	public static AbilityAttribute METEOR = new AbilityAttribute("Meteor").setProjectileTicks(500).setProjectileModel(new ModelSphere()).setProjectileSize(20, 20, 20).setProjectileColor("56494B").setProjectileExplosion(13);
