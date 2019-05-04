@@ -2,6 +2,7 @@ package xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 import net.minecraft.entity.Entity;
@@ -12,11 +13,16 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import scala.actors.threadpool.Arrays;
+import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityExplosion;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
+import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListExtraAttributes;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
@@ -68,7 +74,7 @@ public class WeatherProjectiles
 			super.onUpdate();
 			if(!this.worldObj.isRemote)
 			{
-				List weatherBallsNear = WyHelper.getEntitiesNear(this, 2, WeatherBall.class);
+				List weatherBallsNear = WyHelper.getEntitiesNear(this, new double[] {4, 1, 4}, WeatherBall.class);
 				if(weatherBallsNear.size() > 0 && this.ticksExisted > 100)
 				{
 					List<HeatBall> heatBalls = (List<HeatBall>) weatherBallsNear.stream().filter(x ->
@@ -92,6 +98,8 @@ public class WeatherProjectiles
 						}
 						
 						this.worldObj.spawnEntityInWorld(weatherCloud);
+						if(this.getThrower() != null)
+							DevilFruitsHelper.sendShounenScream((EntityPlayer) this.getThrower(), "Thunderbolt Tempo", 0);
 						
 						this.setDead();
 					}
@@ -156,6 +164,7 @@ public class WeatherProjectiles
 		private EntityPlayer thrower;
 		private List<WeatherBall> weatherBalls = new ArrayList<WeatherBall>();
 		private boolean charged = false;
+		private boolean superCharged = false;
 		
 		public EntityWeatherCloud(World world)
 		{
@@ -164,114 +173,101 @@ public class WeatherProjectiles
 		
 		public void onUpdate()
 		{
+			if(this.worldObj.isRemote)
+			{
+				for(int i = 0; i < 100; i++)
+				{
+					double offsetX = WyMathHelper.randomWithRange(-12, 12) + (WyMathHelper.randomDouble() * 7);
+					double offsetY = WyMathHelper.randomWithRange(-2, 0) + WyMathHelper.randomDouble();
+					double offsetZ = WyMathHelper.randomWithRange(-12, 12) + (WyMathHelper.randomDouble() * 7);
+					    
+					EntityParticleFX particle = new EntityParticleFX(this.worldObj, ID.PARTICLE_ICON_GORO2, 
+							posX + offsetX, 
+							posY + offsetY, 
+							posZ + offsetZ, 
+							0, 0, 0)
+							.setParticleAge(20 + new Random().nextInt(5)).setParticleScale(15F).setParticleGravity(-0.75F);
+						
+					MainMod.proxy.spawnCustomParticles(this, particle);
+					
+					particle = new EntityParticleFX(this.worldObj, ID.PARTICLE_ICON_MOKU2, 
+							posX + offsetX + WyMathHelper.randomDouble(), 
+							posY + offsetY + WyMathHelper.randomDouble(), 
+							posZ + offsetZ + WyMathHelper.randomDouble(), 
+							0, 0, 0)
+							.setParticleAge(25 + new Random().nextInt(5)).setParticleScale(15F).setParticleGravity(-0.75F);
+					
+					MainMod.proxy.spawnCustomParticles(this, particle);
+				}
+			}
+			
 			super.onUpdate();
+			
 			if(!this.worldObj.isRemote)
 			{
-				if(life <= 0)
+				if(life <= 0 || this.getThrower() == null)
 					this.setDead();
 
 				life--;
 				
 				if(this.charged)
-				{
-					List<EntityLivingBase> targets = WyHelper.getEntitiesNear(this, 30);
-					
-					System.out.println(Arrays.toString(targets.toArray()));
-					System.out.println(Arrays.toString(WyMathHelper.shuffle(targets).toArray()));
+				{					
+					List<EntityLivingBase> targets = WyHelper.getEntitiesNear(this, new double[] {15, 50, 15}, EntityLivingBase.class);
 					
 					targets.remove(this.getThrower());
+
+					int thunderTimer = this.superCharged ? 30 : 50;
 					
 					for(EntityLivingBase entity : targets)
 					{
 						if(entity.posY <= this.posY)
 						{
-							if(this.ticksExisted % 50 == 0)
+							if(this.ticksExisted % thunderTimer == 0)
 							{
 								WyNetworkHelper.sendTo(new PacketPlayer("ElThorThunder", entity.posX, entity.posY, entity.posZ), (EntityPlayerMP) this.getThrower());
 								EntityLightningBolt thunder = new EntityLightningBolt(worldObj, entity.posX, entity.posY, entity.posZ);
+								AbilityExplosion exp = WyHelper.newExplosion(this, entity.posX, entity.posY, entity.posZ, 1);
+								exp.setFireAfterExplosion(false);
+								exp.setDestroyBlocks(false);
+								exp.setSmokeParticles("");
+								exp.doExplosion();
 								
 								this.worldObj.spawnEntityInWorld(thunder);
-								break;
+								if(!this.superCharged)
+									break;
 							}
 						}
 					}
 				}
-				else
-				{			
-					List weatherBallsNear = WyHelper.getEntitiesNear(this, 2, WeatherBall.class);
-					if(weatherBallsNear.size() > 0 && this.weatherBalls.size() < 8)
+				
+				int thunderBallsIn = (int) this.weatherBalls.stream().filter(x -> x.getType() == 3).count();
+					
+				if(thunderBallsIn >= 3 && !superCharged)
+				{
+					superCharged = true;
+					DevilFruitsHelper.sendShounenScream(getThrower(), "Thunderstorm Tempo", 0);
+				}
+
+				List weatherBallsNear = WyHelper.getEntitiesNear(this, new double[] {15, 4, 15}, WeatherBall.class);
+					
+				if(weatherBallsNear.size() > 0)
+				{
+					List<ThunderBall> thunderBalls = (List<ThunderBall>) weatherBallsNear.stream().filter(x ->
 					{
-						List<HeatBall> heatBalls = (List<HeatBall>) weatherBallsNear.stream().filter(x ->
-						{
-							WeatherBall ball = (WeatherBall)x;
-							
-							return ball.getType() == 1;
-						}).collect(Collectors.toList());
-	
-						List<CoolBall> coolBalls = (List<CoolBall>) weatherBallsNear.stream().filter(x ->
-						{
-							WeatherBall ball = (WeatherBall)x;
-							
-							return ball.getType() == 2;
-						}).collect(Collectors.toList());
+						WeatherBall ball = (WeatherBall)x;
 						
-						List<ThunderBall> thunderBalls = (List<ThunderBall>) weatherBallsNear.stream().filter(x ->
-						{
-							WeatherBall ball = (WeatherBall)x;
-							
-							return ball.getType() == 3;
-						}).collect(Collectors.toList());
-						
-						if(heatBalls.size() > 0)
-						{
-							for(HeatBall hb : heatBalls)
-							{
-								if(this.weatherBalls.get(this.weatherBalls.size() - 1) instanceof CoolBall)
-								{
-									this.addWeatherBall(hb);
-									this.life += 50;
-								}
-								else
-								{
-									WyHelper.doExplosion(this, this.posX, this.posY, this.posZ, 10);
-									this.setDead();
-								}
-								
-								hb.setDead();
-							}
-						}
-						
-						if(coolBalls.size() > 0)
-						{
-							for(CoolBall cb : coolBalls)
-							{
-								if(this.weatherBalls.get(this.weatherBalls.size() - 1) instanceof HeatBall)
-								{
-									this.addWeatherBall(cb);
-									this.life += 50;
-								}
-								else
-								{
-									WyHelper.doExplosion(this, this.posX, this.posY, this.posZ, 10);
-									this.setDead();
-								}
-								
-								cb.setDead();
-							}
-						}
-						
-						if(thunderBalls.size() > 0)
-						{
-							for(ThunderBall tb : thunderBalls)
-							{		
-								this.charged = true;
-								tb.setDead();
-							}
-						}
-					}
-					else if(this.weatherBalls.size() >= 8)
+						return ball.getType() == 3;
+					}).collect(Collectors.toList());
+												
+					if(thunderBalls.size() > 0)
 					{
-						
+						for(ThunderBall tb : thunderBalls)
+						{
+							this.life += 100;
+							this.weatherBalls.add(tb);
+							this.charged = true;
+							tb.setDead();
+						}
 					}
 				}
 			}	
