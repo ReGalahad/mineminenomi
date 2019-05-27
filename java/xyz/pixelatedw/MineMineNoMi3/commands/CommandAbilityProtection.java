@@ -17,21 +17,17 @@ public class CommandAbilityProtection extends CommandBase
 {
 	public void processCommand(ICommandSender sender, String[] str)
 	{
-		if (str.length > 0)
-		{
+		//if (str.length > 0)
+		//{
 			EntityPlayer player = this.getCommandSenderAsPlayer(sender);
 			ExtendedWorldData worldData = ExtendedWorldData.get(player.worldObj);
-			int areaSize = Integer.parseInt(str[0]);
+			int areaSize = 100;//Integer.parseInt(str[0]);
 			
 			TileEntityAbilityProtection center = new TileEntityAbilityProtection().setRadius(areaSize);
 			player.worldObj.setTileEntity((int)player.posX, (int)player.posY, (int)player.posZ, center);
 
-			System.out.println("1 : " + center.getRadius());
-			
-			player.worldObj.setBlock((int)player.posX, (int)player.posY, (int)player.posZ, ListMisc.AbilityProtectionBlock);
-			
-			System.out.println("3 : " + ((TileEntityAbilityProtection) player.worldObj.getTileEntity((int)player.posX, (int)player.posY, (int)player.posZ)).getRadius() );
-		}
+			player.worldObj.setBlock((int)player.posX, (int)player.posY, (int)player.posZ, ListMisc.AbilityProtectionBlock);		
+		//}
 	}
 
 	public boolean canCommandSenderUseCommand(ICommandSender sender)
