@@ -100,7 +100,7 @@ public class PacketSyncInfo implements IMessage
 			else if(entityID != 0)
 			{
 				Entity target = null;
-
+				
 				for (Object e : player.worldObj.loadedEntityList)
 				{
 					if(e instanceof EntityLivingBase)

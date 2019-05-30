@@ -1,9 +1,15 @@
 package xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.models;
 
+import org.lwjgl.opengl.GL11;
+
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 
 public class ModelMarineCaptain extends ModelBiped 
 {
@@ -24,12 +30,6 @@ public class ModelMarineCaptain extends ModelBiped
     public ModelRenderer capeleftcollar2;
     public ModelRenderer caperightcollar1;
     public ModelRenderer caperightcollar2;
-/*    public ModelRenderer leftArm;
-    public ModelRenderer leftLeg;
-    public ModelRenderer head;
-    public ModelRenderer body;
-    public ModelRenderer rightArm;
-    public ModelRenderer rightLeg;*/
 
     public ModelMarineCaptain() 
     {
@@ -41,9 +41,6 @@ public class ModelMarineCaptain extends ModelBiped
         this.capeleftsholderpad1.setRotationPoint(6.0F, -0.75F, -3.0F);
         this.capeleftsholderpad1.addBox(0.0F, 0.0F, 1.9000000000000006F, 5, 1, 6, 0.0F);
         this.setRotateAngle(capeleftsholderpad1, 0.0F, 0.0F, 0.17453292012214658F);
-        /*this.rightArm = new ModelRenderer(this, 32, 48);
-        this.rightArm.setRotationPoint(5.0F, 2.0F, 0.0F);
-        this.rightArm.addBox(-1.0F, -2.0F, -2.0F, 4, 12, 4, 0.0F);*/
         this.caperightcollar2 = new ModelRenderer(this, 51, 90);
         this.caperightcollar2.setRotationPoint(-5.199999809265137F, -3.0F, -2.299999952316284F);
         this.caperightcollar2.addBox(0.0F, 0.0F, 1.9000000000000006F, 0, 2, 5, 0.0F);
@@ -68,28 +65,13 @@ public class ModelMarineCaptain extends ModelBiped
         this.capeleftcollar2.setRotationPoint(5.199999809265137F, -3.0F, -2.299999952316284F);
         this.capeleftcollar2.addBox(0.0F, 0.0F, 1.9000000000000006F, 0, 2, 5, 0.0F);
         this.setRotateAngle(capeleftcollar2, 0.020315480286447005F, -0.1909214923392362F, -0.106665067667416F);
- /*       this.head = new ModelRenderer(this, 0, 0);
-        this.head.setRotationPoint(0.0F, 0.0F, 0.0F);
-        this.head.addBox(-4.0F, -8.0F, -4.0F, 8, 8, 8, 0.0F);
-        this.body = new ModelRenderer(this, 16, 16);
-        this.body.setRotationPoint(0.0F, 0.0F, 0.0F);
-        this.body.addBox(-4.0F, 0.0F, -2.0F, 8, 12, 4, 0.0F);
-        this.rightLeg = new ModelRenderer(this, 16, 48);
-        this.rightLeg.setRotationPoint(1.9F, 12.0F, 0.0F);
-        this.rightLeg.addBox(-2.0F, 0.0F, -2.0F, 4, 12, 4, 0.0F);*/
         this.caperightsholderpad1 = new ModelRenderer(this, 5, 98);
         this.caperightsholderpad1.setRotationPoint(-6.0F, -0.75F, -3.0F);
         this.caperightsholderpad1.addBox(-5.0F, 0.0F, 1.9000000000000006F, 5, 1, 6, 0.0F);
         this.setRotateAngle(caperightsholderpad1, 0.0F, 0.0F, -0.17453292012214658F);
-/*        this.leftLeg = new ModelRenderer(this, 0, 16);
-        this.leftLeg.setRotationPoint(-1.9F, 12.0F, 0.0F);
-        this.leftLeg.addBox(-2.0F, 0.0F, -2.0F, 4, 12, 4, 0.0F);*/
         this.capeback = new ModelRenderer(this, 5, 75);
         this.capeback.setRotationPoint(-8.5F, 0.0F, 2.5F);
         this.capeback.addBox(0.0F, 0.0F, 1.9000000000000006F, 17, 22, 0, 0.0F);
-/*        this.leftArm = new ModelRenderer(this, 40, 16);
-        this.leftArm.setRotationPoint(-5.0F, 2.0F, 0.0F);
-        this.leftArm.addBox(-3.0F, -2.0F, -2.0F, 4, 12, 4, 0.0F);*/
         this.capefrontleft = new ModelRenderer(this, 28, 98);
         this.capefrontleft.setRotationPoint(8.5F, 0.0F, -2.5F);
         this.capefrontleft.addBox(-3.0F, 0.0F, 1.9000000000000006F, 3, 22, 0, 0.0F);
@@ -116,9 +98,19 @@ public class ModelMarineCaptain extends ModelBiped
 
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) 
     { 
-    	super.render(entity, f, f1, f2, f3, f4, f5);
-        this.capeleftsholderpad1.render(f5);
-        //this.rightArm.render(f5);
+    	super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+    	
+    	ExtendedEntityData props = ExtendedEntityData.get((EntityLivingBase) entity);
+    	boolean hasHaki = props.hasBusoHakiActive();
+
+        this.bipedHead.render(f5);
+        this.bipedBody.render(f5);
+        this.bipedRightLeg.render(f5);
+        this.bipedLeftLeg.render(f5);
+        this.bipedHeadwear.render(f5);
+		this.bipedLeftArm.render(f5);
+
+		this.capeleftsholderpad1.render(f5);
         this.caperightcollar2.render(f5);
         this.capeleftsholderpad2.render(f5);
         this.capefrontright.render(f5);
@@ -126,13 +118,8 @@ public class ModelMarineCaptain extends ModelBiped
         this.capeleftsholder.render(f5);
         this.capeleftcollar1.render(f5);
         this.capeleftcollar2.render(f5);
-        //this.head.render(f5);
-        //this.body.render(f5);
-        //this.rightLeg.render(f5);
         this.caperightsholderpad1.render(f5);
-        //this.leftLeg.render(f5);
         this.capeback.render(f5);
-        //this.leftArm.render(f5);
         this.capefrontleft.render(f5);
         this.caperightcollar1.render(f5);
         this.caperightsholder.render(f5);
@@ -140,6 +127,16 @@ public class ModelMarineCaptain extends ModelBiped
         this.caperightsholderpad2.render(f5);
         this.capeleft.render(f5);
         this.capeleftarm.render(f5);
+        
+		if (hasHaki)
+		{
+			Minecraft.getMinecraft().renderEngine.bindTexture(ID.HANDTEXTURE_ZOANMORPH_BUSO);
+			this.bipedRightArm.render(f5);
+		}
+		else
+		{
+			this.bipedRightArm.render(f5);
+		}
     }
 
     public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) 

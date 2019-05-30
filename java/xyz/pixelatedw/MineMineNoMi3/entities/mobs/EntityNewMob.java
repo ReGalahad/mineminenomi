@@ -7,14 +7,15 @@ import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedNPCData;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketSyncNPCData;
 
 public class EntityNewMob extends EntityMob implements IDynamicRenderer
 {
 
-	private boolean hasHaki = false, isLogia = false;
-	private String texture = "null", model = "n/a";
-	private int state, textureId;
-	private String[] textures;
+	private int textureId, state;
+	protected String[] textures;
 
 	public EntityNewMob(World worldIn) 
 	{
@@ -27,25 +28,10 @@ public class EntityNewMob extends EntityMob implements IDynamicRenderer
 		addRandomArmor();
 		this.textures = textures;
 	}
-		
+
 	public String getTexture() { return textures[this.getDataWatcher().getWatchableObjectInt(28)]; }
 	public int getTextureId() { return this.getDataWatcher().getWatchableObjectInt(28); }
 	protected void setTexture(int texture) { this.getDataWatcher().updateObject(28, texture); }
-	
-	public boolean hasBusoHaki() { return false; }
-	public boolean hasHaoHaki() { return false; }
-	
-	public void writeEntityToNBT(NBTTagCompound nbt)
-	{
-		super.writeEntityToNBT(nbt);	
-		nbt.setInteger("Texture", getTextureId());
-	}
-	
-	public void readEntityFromNBT(NBTTagCompound nbt)
-	{
-		super.readEntityFromNBT(nbt);
-		setTexture(nbt.getInteger("Texture"));
-	}
 	
     protected void addRandomArmor() {}
 	
@@ -66,6 +52,18 @@ public class EntityNewMob extends EntityMob implements IDynamicRenderer
 		this.getDataWatcher().addObject(27, state);
 		this.getDataWatcher().addObject(28, textureId);
 		super.entityInit();
+	}
+	
+	public void writeEntityToNBT(NBTTagCompound nbt)
+	{
+		super.writeEntityToNBT(nbt);	
+		nbt.setInteger("Texture", this.getTextureId());
+	}
+	
+	public void readEntityFromNBT(NBTTagCompound nbt)
+	{
+		super.readEntityFromNBT(nbt);
+		this.setTexture(nbt.getInteger("Texture"));
 	}
 	
 	protected boolean isValidLightLevel()

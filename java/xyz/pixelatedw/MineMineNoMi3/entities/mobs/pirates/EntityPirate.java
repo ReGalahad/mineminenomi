@@ -4,6 +4,7 @@ import javax.annotation.Nullable;
 
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -34,7 +35,7 @@ public class EntityPirate extends PirateData
 
     protected void addRandomArmor()
     {
-    	Item[] randomSword = new Item[] {ListMisc.PirateCutlass, ListMisc.PirateCutlass};
+    	Item[] randomSword = new Item[] {ListMisc.PirateCutlass, Items.iron_sword};
         this.setCurrentItemOrArmor(0, new ItemStack(randomSword[this.rand.nextInt(randomSword.length)]));
     }
     

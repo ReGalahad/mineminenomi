@@ -28,6 +28,8 @@ import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedNPCData;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
 import xyz.pixelatedw.MineMineNoMi3.events.customevents.DorikiEvent;
 import xyz.pixelatedw.MineMineNoMi3.events.customevents.YomiTriggerEvent;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketNewAABB;
@@ -41,6 +43,9 @@ public class EventsCore
 	{
 		if (event.entity instanceof EntityLivingBase && ExtendedEntityData.get((EntityLivingBase) event.entity) == null)
 			ExtendedEntityData.register((EntityLivingBase) event.entity);
+		
+		if (event.entity instanceof EntityLivingBase)
+			ExtendedNPCData.register((EntityLivingBase) event.entity);
 		
 		if (event.entity instanceof EntityPlayer)
 		{

@@ -23,6 +23,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedNPCData;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedWorldData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.MarineData;
@@ -153,7 +154,7 @@ public class EventsOnGain
 
 				if (target instanceof EntityNewMob)
 				{
-					ExtendedEntityData targetprops = ExtendedEntityData.get(target);
+					ExtendedNPCData targetprops = ExtendedNPCData.get((EntityNewMob) target);
 					
 					if ((props.getDoriki() / 100) > targetprops.getDoriki())
 					{
