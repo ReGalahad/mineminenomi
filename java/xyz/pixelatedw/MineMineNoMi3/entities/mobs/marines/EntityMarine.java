@@ -4,6 +4,7 @@ import cpw.mods.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
@@ -33,7 +34,8 @@ public class EntityMarine extends MarineData
 	
     protected void addRandomArmor()
     {
-        this.setCurrentItemOrArmor(0, new ItemStack(ListMisc.MarineSword));
+    	Item[] randomSword = new Item[] {ListMisc.MarineSword, Items.iron_sword};
+    	this.setCurrentItemOrArmor(0, new ItemStack(randomSword[this.rand.nextInt(randomSword.length)]));
     }
     
 	public double[] itemOffset() 
