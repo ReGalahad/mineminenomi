@@ -62,6 +62,8 @@ import xyz.pixelatedw.MineMineNoMi3.items.ItemCoreArmor;
 import xyz.pixelatedw.MineMineNoMi3.items.SeaKingMeat;
 import xyz.pixelatedw.MineMineNoMi3.items.UltraCola;
 import xyz.pixelatedw.MineMineNoMi3.items.WantedPoster;
+import xyz.pixelatedw.MineMineNoMi3.items.devilfruitextras.Shadow;
+import xyz.pixelatedw.MineMineNoMi3.items.devilfruitextras.WateringCan;
 import xyz.pixelatedw.MineMineNoMi3.items.dials.DialAxe;
 import xyz.pixelatedw.MineMineNoMi3.items.dials.DialBreath;
 import xyz.pixelatedw.MineMineNoMi3.items.dials.DialEisen;
@@ -147,7 +149,7 @@ public class ListMisc
 	public static Item Kairoseki = new Item();
 	public static Item DenseKairoseki = new Item();
 	public static Item BlackMetal = new Item();
-	public static Item Shadow = new Item();
+	public static Item Shadow = new Shadow();
 	public static Item Heart = new Heart().setMaxStackSize(1);
 	public static Item BellyPouch = new BellyPouch().setMaxStackSize(1);
 	public static Item Key = new Item();
@@ -156,6 +158,7 @@ public class ListMisc
 	public static Item Box3;
 	public static WantedPoster WantedPoster = (WantedPoster) new WantedPoster().setMaxStackSize(1);
 	public static Item SeaKingMeat = new SeaKingMeat();
+	public static Item WateringCan = new WateringCan();
 	
 	public static Item DialEisen = new DialEisen();
 	public static Item DialFire = new DialFire();
@@ -251,6 +254,7 @@ public class ListMisc
 		addITEM(Box3, "Golden Box", ListCreativeTabs.tabMisc);
 		addITEM(WantedPoster, "Wanted Poster", null);
 		addITEM(SeaKingMeat, "Sea King Meat", ListCreativeTabs.tabMisc);
+		addITEM(WateringCan, "Watering Can", ListCreativeTabs.tabMisc);
 		
 		addITEM(KujaArrow, "Kuja Arrow", ListCreativeTabs.tabWeapons);
 		addITEM(PopGreen, "Pop Green", ListCreativeTabs.tabWeapons);
