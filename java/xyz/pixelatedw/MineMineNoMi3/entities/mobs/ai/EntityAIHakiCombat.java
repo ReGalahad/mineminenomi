@@ -2,7 +2,9 @@ package xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
@@ -21,14 +23,13 @@ public class EntityAIHakiCombat extends EntityAIBase
     public EntityAIHakiCombat(EntityNewMob entity)
     {
         this.entity = entity;
-        this.setMutexBits(0);
     }
 
 	public boolean shouldExecute()
 	{
 		ExtendedEntityData props = ExtendedEntityData.get(this.entity);
 		ExtendedNPCData npcProps = ExtendedNPCData.get(this.entity);
-		
+
 		if(!npcProps.getBusoHaki())
 			return false;
 		
@@ -36,8 +37,10 @@ public class EntityAIHakiCombat extends EntityAIBase
 		{
 			System.out.println("target set");
 			props.triggerBusoHaki(true);
-			WyNetworkHelper.sendToAllAround(new PacketSyncInfo(this.entity.getEntityId(), props), this.entity.dimension, this.entity.posX, this.entity.posY, this.entity.posZ, 256);
+			this.entity.getEntityAttribute(SharedMonsterAttributes.attackDamage).applyModifier(new AttributeModifier("Extra Haki Damage", 2, 2));
 			
+			WyNetworkHelper.sendToAllAround(new PacketSyncInfo(this.entity.getEntityId(), props), this.entity.dimension, this.entity.posX, this.entity.posY, this.entity.posZ, 256);
+
 			ItemStack itemStack = this.entity.getHeldItem();
 			
 			if(itemStack != null)
@@ -54,8 +57,10 @@ public class EntityAIHakiCombat extends EntityAIBase
 		{
 			System.out.println("target unset");
 			props.triggerBusoHaki(false);
+			this.entity.getEntityAttribute(SharedMonsterAttributes.attackDamage).removeAllModifiers();
+
 			WyNetworkHelper.sendToAllAround(new PacketSyncInfo(this.entity.getEntityId(), props), this.entity.dimension, this.entity.posX, this.entity.posY, this.entity.posZ, 256);
-			
+
 			ItemStack itemStack = this.entity.getHeldItem();
 			
 			if(itemStack != null)

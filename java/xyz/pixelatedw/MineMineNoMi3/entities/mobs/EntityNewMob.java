@@ -1,21 +1,20 @@
 package xyz.pixelatedw.MineMineNoMi3.entities.mobs;
 
-import cpw.mods.fml.common.network.ByteBufUtils;
-import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
-import io.netty.buffer.ByteBuf;
+import java.util.LinkedList;
+import java.util.Queue;
+
 import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
-import xyz.pixelatedw.MineMineNoMi3.data.ExtendedNPCData;
-import xyz.pixelatedw.MineMineNoMi3.packets.PacketSyncNPCData;
 
 public class EntityNewMob extends EntityMob implements IDynamicRenderer
 {
 
 	private int textureId, state;
 	protected String[] textures;
+	private EntityAIBase currentAI, previousAI;
 
 	public EntityNewMob(World worldIn) 
 	{
@@ -78,6 +77,26 @@ public class EntityNewMob extends EntityMob implements IDynamicRenderer
 	public boolean getCanSpawnHere()
 	{return true;}
 
+	public EntityAIBase getCurrentAI()
+	{
+		return this.currentAI;
+	}
+	
+	public EntityAIBase getPreviousAI()
+	{
+		return this.previousAI;
+	}
+	
+	public void setCurrentAI(EntityAIBase ai)
+	{
+		this.currentAI = ai;
+	}
+	
+	public void setPreviousAI(EntityAIBase ai)
+	{
+		this.previousAI = ai;
+	}
+	
 	public String getMobTexture()
 	{ return this.getTexture(); }
 

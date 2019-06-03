@@ -1,27 +1,47 @@
 package xyz.pixelatedw.MineMineNoMi3.items;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemFood;
+import net.minecraft.item.EnumAction;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
-public class SeaKingMeat extends ItemFood
+public class SeaKingMeat extends Item
 {
 
 	public SeaKingMeat()
 	{
-		super(12, 0.8F, false);
+		
 	}
 
-	public void onFoodEaten(ItemStack itemStack, World world, EntityPlayer player)
+	public ItemStack onEaten(ItemStack itemStack, World world, EntityPlayer player)
 	{
-		super.onFoodEaten(itemStack, world, player);
 		if (!world.isRemote)
 		{
-			player.heal(player.getHealth() / 3.0F);
+			player.heal(player.getMaxHealth() / 3.0F);
+			player.getFoodStats().addStats(5, 1);
 			player.addPotionEffect(new PotionEffect(Potion.regeneration.id, 100, 0));
+			--itemStack.stackSize;
 		}
+		
+		return itemStack;
 	}
+
+    public int getMaxItemUseDuration(ItemStack p_77626_1_)
+    {
+        return 32;
+    }
+    
+    public EnumAction getItemUseAction(ItemStack p_77661_1_)
+    {
+        return EnumAction.drink;
+    }
+    
+    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
+    {
+        player.setItemInUse(itemStack, this.getMaxItemUseDuration(itemStack));
+        return itemStack;
+    }
 }
