@@ -9,7 +9,7 @@ import scala.actors.threadpool.Arrays;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedNPCData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.EntityAIHakiCombat;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.swordsman.EntityAIOTasumakiAbility;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.swordsman.EntityAIShiShishiSonsonAbility;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.swordsman.EntityAIYakkodoriAbility;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
 public class EntityMarineCaptain extends MarineData
@@ -21,7 +21,7 @@ public class EntityMarineCaptain extends MarineData
 	{
 		super(world, new String[] {"marinec1", "marinec2", "marinec3", "marinec4", "marinec5"});
 		this.tasks.addTask(0, new EntityAIHakiCombat(this));
-		this.tasks.addTask(1, new EntityAIShiShishiSonsonAbility(this));
+		this.tasks.addTask(1, new EntityAIYakkodoriAbility(this));
 		this.tasks.addTask(1, new EntityAIOTasumakiAbility(this));
  	}
 	

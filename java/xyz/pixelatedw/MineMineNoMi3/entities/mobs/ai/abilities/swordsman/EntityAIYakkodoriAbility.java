@@ -10,12 +10,12 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.EntityAICooldown;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 
-public class EntityAIShiShishiSonsonAbility extends EntityAICooldown
+public class EntityAIYakkodoriAbility extends EntityAICooldown
 {
 	private EntityNewMob entity;
 	private EntityLivingBase attackTarget;
 	
-	public EntityAIShiShishiSonsonAbility(EntityNewMob entity)
+	public EntityAIYakkodoriAbility(EntityNewMob entity)
 	{
 		super(entity, 120, entity.getRNG().nextInt(20));
 		this.entity = entity;
@@ -58,7 +58,7 @@ public class EntityAIShiShishiSonsonAbility extends EntityAICooldown
 
     public void execute()
     {
-    	WyDebug.info("Shi Shishi Sonson");
+    	WyDebug.info("Yakkodori");
     	
     	double d0 = entity.getDistanceSqToEntity(entity.getAttackTarget());
 		float f = MathHelper.sqrt_float(MathHelper.sqrt_double(d0));
