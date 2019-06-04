@@ -5,11 +5,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import scala.actors.threadpool.Arrays;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedNPCData;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.EntityAIHakiCombat;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.swordsman.EntityAIOTasumakiAbility;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.swordsman.EntityAIYakkodoriAbility;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.EntityAIGapCloser;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.EntityAIHakiCombat;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.swordsman.EntityAIOTasumaki;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.swordsman.EntityAIYakkodori;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
 public class EntityMarineCaptain extends MarineData
@@ -21,15 +21,16 @@ public class EntityMarineCaptain extends MarineData
 	{
 		super(world, new String[] {"marinec1", "marinec2", "marinec3", "marinec4", "marinec5"});
 		this.tasks.addTask(0, new EntityAIHakiCombat(this));
-		this.tasks.addTask(1, new EntityAIYakkodoriAbility(this));
-		this.tasks.addTask(1, new EntityAIOTasumakiAbility(this));
+		this.tasks.addTask(1, new EntityAIYakkodori(this));
+		this.tasks.addTask(1, new EntityAIOTasumaki(this));
+		this.tasks.addTask(1, new EntityAIGapCloser(this));
  	}
 	
 	public void applyEntityAttributes()
 	{
 		super.applyEntityAttributes(); 
 		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(35.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.23000000417232513D);
+		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.23D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(6.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(50.0D);
 			
@@ -44,7 +45,7 @@ public class EntityMarineCaptain extends MarineData
 			if(this.rand.nextInt(100) <= 60)
 			{
 				props.setBusoHaki(true);
-				System.out.println("haki enabled");
+
 				Item sword = randomSword[this.rand.nextInt(randomSword.length)];			
 				if(sword != null)
 				{
@@ -62,19 +63,6 @@ public class EntityMarineCaptain extends MarineData
 		}
 	}
 
-	public void onEntityUpdate()
-	{
-		super.onEntityUpdate();
-		
-		/*if(!this.worldObj.isRemote && this.entityAge % 2000 == 0)
-		{
-			System.out.println("===============");
-			System.out.println(this.getCurrentAI());
-			System.out.println(this.getPreviousAI());
-			System.out.println("===============");
-		}*/
-	}
-	
     protected void addRandomArmor()
     {
     	if(swordStack != null)

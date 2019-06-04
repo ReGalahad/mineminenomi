@@ -1,4 +1,4 @@
-package xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai;
+package xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -18,7 +18,6 @@ public class EntityAIHakiCombat extends EntityAIBase
 
     private EntityNewMob entity;
     private EntityNewMob target;
-    private static final String __OBFID = "CL_00001618";
 
     public EntityAIHakiCombat(EntityNewMob entity)
     {
@@ -35,7 +34,6 @@ public class EntityAIHakiCombat extends EntityAIBase
 		
 		if(!props.hasBusoHakiActive() && this.entity.getAttackTarget() != null)
 		{
-			System.out.println("target set");
 			props.triggerBusoHaki(true);
 			this.entity.getEntityAttribute(SharedMonsterAttributes.attackDamage).applyModifier(new AttributeModifier("Extra Haki Damage", 2, 2));
 			
@@ -55,7 +53,6 @@ public class EntityAIHakiCombat extends EntityAIBase
 		}
 		else if(props.hasBusoHakiActive() && this.entity.getAttackTarget() == null)
 		{
-			System.out.println("target unset");
 			props.triggerBusoHaki(false);
 			this.entity.getEntityAttribute(SharedMonsterAttributes.attackDamage).removeAllModifiers();
 

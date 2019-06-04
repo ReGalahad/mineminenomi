@@ -9,23 +9,26 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.EntityAICooldown;
+import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketShounenScream;
 
-public class EntityAIOTasumakiAbility extends EntityAICooldown
+public class EntityAIOTasumaki extends EntityAICooldown
 {
 	private EntityNewMob entity;
-	private EntityLivingBase attackTarget;
 	private double damage;
 	
-	public EntityAIOTasumakiAbility(EntityNewMob entity)
+	public EntityAIOTasumaki(EntityNewMob entity)
 	{
 		super(entity, 80, entity.getRNG().nextInt(20));
-		this.entity = entity;		
+		this.entity = entity;
+		this.damage = this.entity.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
 	}
 
 	public boolean shouldExecute()
@@ -51,12 +54,6 @@ public class EntityAIOTasumakiAbility extends EntityAICooldown
 		return true;
 	} 
 	
-	public void startExecuting()
-	{
-		this.attackTarget = this.entity.getAttackTarget();
-		this.damage = this.entity.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
-	}
-	
 	public void endCooldown()	
 	{
 		super.endCooldown();
@@ -66,9 +63,7 @@ public class EntityAIOTasumakiAbility extends EntityAICooldown
 
     public void execute()
     {
-		WyDebug.info("O Tatsumaki");
-		
-		for(EntityLivingBase e : WyHelper.getEntitiesNear(this.entity, 3))
+		for(EntityLivingBase e : WyHelper.getEntitiesNear(this.entity, 4))
 		{
 			e.attackEntityFrom(DamageSource.causeMobDamage(this.entity), (float) this.damage);				
 			e.addPotionEffect(new PotionEffect(Potion.weakness.id, 10 * 20, 1, true));

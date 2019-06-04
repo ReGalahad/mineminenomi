@@ -13,23 +13,36 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketQuestSync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestManager;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedNPCData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.EntityAIGapCloser;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.EntityAIHakiCombat;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.swordsman.EntityAIOTasumaki;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.swordsman.EntityAIYakkodori;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.PirateData;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListQuests;
 
 public class EntityDojoSensei extends EntityNewMob
 {
+	private ItemStack swordStack;
 
 	public EntityDojoSensei(World worldIn)
 	{
 		super(worldIn, new String[] {"dojosensei1", "dojosensei2", "dojosensei3"});
+		
+		this.tasks.addTask(0, new EntityAIHakiCombat(this));
+		this.tasks.addTask(1, new EntityAIYakkodori(this));
+		this.tasks.addTask(1, new EntityAIOTasumaki(this));
+		this.tasks.addTask(1, new EntityAIGapCloser(this));
+		
 		this.tasks.addTask(0, new EntityAIAttackOnCollide(this, 1.0D, false));
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(1, new EntityAIOpenDoor(this, true));
@@ -43,14 +56,34 @@ public class EntityDojoSensei extends EntityNewMob
 	{
 		super.applyEntityAttributes(); 
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.20D);
-		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(10.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(80.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(12.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(150.0D);
+		
+		ExtendedNPCData props = ExtendedNPCData.get(this);
+		
+		props.setDoriki(50 + this.worldObj.rand.nextInt(5));
+		props.setBelly(10 + this.worldObj.rand.nextInt(50));
+
+		if(!this.worldObj.isRemote)
+		{
+			Item[] randomSword = new Item[] {ListMisc.NidaiKitetsu, ListMisc.SandaiKitetsu, ListMisc.Shusui, ListMisc.Jitte, ListMisc.Kikoku, ListMisc.WadoIchimonji};
+
+			props.setBusoHaki(true);
+
+			Item sword = randomSword[this.rand.nextInt(randomSword.length)];			
+			if(sword != null)
+			{
+				swordStack = new ItemStack(sword);
+				swordStack.setTagCompound(new NBTTagCompound());
+				swordStack.stackTagCompound.setInteger("metadata", 1);
+			}
+		}
 	}
 	
     protected void addRandomArmor()
     {
-    	Item[] randomSword = new Item[] {ListMisc.NidaiKitetsu, ListMisc.SandaiKitetsu, ListMisc.Shusui, ListMisc.Jitte, ListMisc.Kikoku, ListMisc.WadoIchimonji};
-        this.setCurrentItemOrArmor(0, new ItemStack(randomSword[this.rand.nextInt(randomSword.length)]));
+    	if(swordStack != null)
+    		this.setCurrentItemOrArmor(0, swordStack);
     }
     
     protected void dropEquipment(boolean p_82160_1_, int p_82160_2_) {}
@@ -59,10 +92,7 @@ public class EntityDojoSensei extends EntityNewMob
 	{
 		return new double[] {0, -0.05, -0.1};
 	}
-	
-	public int getDorikiPower() { return this.worldObj.rand.nextInt(10) + 20; }
-	public int getBellyInPockets() { return this.worldObj.rand.nextInt(10) + 10; }
-	
+
 	protected boolean canDespawn()
 	{return true;}
 }

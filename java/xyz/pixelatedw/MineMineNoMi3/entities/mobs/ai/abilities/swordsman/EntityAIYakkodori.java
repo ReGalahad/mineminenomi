@@ -3,19 +3,21 @@ package xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.swordsman;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
+import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.abilities.SwordsmanAbilities;
 import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
+import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.SwordsmanProjectiles.Yakkodori;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.EntityAICooldown;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketShounenScream;
 
-public class EntityAIYakkodoriAbility extends EntityAICooldown
+public class EntityAIYakkodori extends EntityAICooldown
 {
 	private EntityNewMob entity;
-	private EntityLivingBase attackTarget;
 	
-	public EntityAIYakkodoriAbility(EntityNewMob entity)
+	public EntityAIYakkodori(EntityNewMob entity)
 	{
 		super(entity, 120, entity.getRNG().nextInt(20));
 		this.entity = entity;
@@ -44,11 +46,6 @@ public class EntityAIYakkodoriAbility extends EntityAICooldown
 		return true;
 	} 
 	
-	public void startExecuting()
-	{
-		this.attackTarget = this.entity.getAttackTarget();
-	}
-	
 	public void endCooldown()	
 	{
 		super.endCooldown();
@@ -58,8 +55,9 @@ public class EntityAIYakkodoriAbility extends EntityAICooldown
 
     public void execute()
     {
-    	WyDebug.info("Yakkodori");
-    	
+		//if(MainConfig.enableAnimeScreaming)
+    	//	WyNetworkHelper.sendToAllAround(new PacketShounenScream(this.entity.getCommandSenderName(), ListAttributes.YAKKODORI.getAbilityDisplayName(), 0), this.entity.dimension, this.entity.posX, this.entity.posY, this.entity.posZ, 15);
+		
     	double d0 = entity.getDistanceSqToEntity(entity.getAttackTarget());
 		float f = MathHelper.sqrt_float(MathHelper.sqrt_double(d0));
 		double d1 = entity.getAttackTarget().posX - entity.posX;
