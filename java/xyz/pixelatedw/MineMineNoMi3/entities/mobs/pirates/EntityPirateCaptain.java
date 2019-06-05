@@ -37,8 +37,8 @@ public class EntityPirateCaptain extends PirateData
 		
 		ExtendedNPCData props = ExtendedNPCData.get(this);
 			
-		props.setDoriki(15 + this.worldObj.rand.nextInt(5));
-		props.setBelly(30 + this.worldObj.rand.nextInt(30));
+		props.setDoriki(30 + this.worldObj.rand.nextInt(5));
+		props.setBelly(50 + this.worldObj.rand.nextInt(30));
 
 		if(!this.worldObj.isRemote)
 		{

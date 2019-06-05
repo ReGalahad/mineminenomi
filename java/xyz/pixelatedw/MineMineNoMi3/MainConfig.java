@@ -13,7 +13,7 @@ public class MainConfig
 	private static Configuration config;
 	
 	public static String enableKeepIEEPAfterDeath;
-	public static String[] statsToKepp;
+	public static String[] statsToKeep;
 	public static boolean enableShips;
 	public static boolean enableCamps;
 	public static boolean enableDFtoDrop;
@@ -59,7 +59,7 @@ public class MainConfig
 		config.load();
 		
 		enableKeepIEEPAfterDeath = config.get(Configuration.CATEGORY_GENERAL, "Keep stats after death", "auto").getString();
-		statsToKepp = config.get(Configuration.CATEGORY_GENERAL, "Data to Keep", new String[] {"Doriki", "Bounty", "Belly", "Race", "Faction", "Fighting Style", "Devil Fruit"}).getStringList();		
+		statsToKeep = config.get(Configuration.CATEGORY_GENERAL, "Data to Keep", new String[] {"Doriki", "Bounty", "Belly", "Race", "Faction", "Fighting Style", "Devil Fruit"}).getStringList();		
 		//enableCamps = config.get(Configuration.CATEGORY_GENERAL, "Allow Camps to Spawn", true).getBoolean();
 		enableGriefing = config.get(Configuration.CATEGORY_GENERAL, "Allow Griefing in Worlds", true, "Allows abilities to break or replace blocks, this will make some abilities completly useless; true by default").getBoolean();
 		enableAnimeScreaming  = config.get(Configuration.CATEGORY_GENERAL, "Anime Screaming", false, "Will send a chat message to nearby players with the used ability's name; false by default").getBoolean();

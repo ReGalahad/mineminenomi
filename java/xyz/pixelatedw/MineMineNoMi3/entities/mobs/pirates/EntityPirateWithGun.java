@@ -4,6 +4,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedNPCData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.EntityAISharpshooter;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
@@ -27,7 +28,7 @@ public class EntityPirateWithGun extends PirateData
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(1.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20.0D);
 		
-		ExtendedEntityData props = ExtendedEntityData.get(this);
+		ExtendedNPCData props = ExtendedNPCData.get(this);
 		
 		props.setDoriki(10 + this.worldObj.rand.nextInt(3));
 		props.setBelly(5 + this.worldObj.rand.nextInt(10));
