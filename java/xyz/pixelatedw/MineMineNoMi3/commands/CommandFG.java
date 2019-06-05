@@ -18,6 +18,7 @@ import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityCustomSpawner;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedWorldData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.baroqueWorks.EntityMr0;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.EntityMorgan;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityWantedPostersPackage;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityDummy;
 import xyz.pixelatedw.MineMineNoMi3.helpers.ItemsHelper;
@@ -43,7 +44,9 @@ public class CommandFG extends CommandBase
 				toSpawn = new TempEntityDummy(player.worldObj);
 			else if(str[0].equalsIgnoreCase("mr0"))
 				toSpawn = new EntityMr0(player.worldObj);
-						
+			else if(str[0].equalsIgnoreCase("morgan"))
+				toSpawn = new EntityMorgan(player.worldObj);
+			
 			else if(str[0].equalsIgnoreCase("package"))
 			{			
 				toSpawn = new EntityWantedPostersPackage(player.worldObj);

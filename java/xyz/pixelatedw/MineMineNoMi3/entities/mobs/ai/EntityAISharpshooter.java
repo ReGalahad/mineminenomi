@@ -31,14 +31,14 @@ public class EntityAISharpshooter extends EntityAIBase
 		switch(bulletType)
 		{
 		case 0:
-			bullet = ListExtraAttributes.NORMALBULLET.setProjectileDamage(6);
+			bullet = ListExtraAttributes.NORMALBULLET.setProjectileDamage(4);
 			break;
 		case 1:
-			bullet = ListExtraAttributes.KAIROSEKIBULLET.setProjectileDamage(9);
+			bullet = ListExtraAttributes.KAIROSEKIBULLET.setProjectileDamage(6);
 			break;
 			
 		default:
-			bullet = ListExtraAttributes.NORMALBULLET.setProjectileDamage(6);
+			bullet = ListExtraAttributes.NORMALBULLET.setProjectileDamage(4);
 			break;
 		}
 		

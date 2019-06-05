@@ -24,6 +24,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDenDenMushi;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDojoSensei;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDoppelman;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityWantedPostersPackage;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityFatPirate;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirate;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirateCaptain;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirateWithGun;
@@ -87,6 +88,7 @@ public class ListEntities
 		WyRegistry.registerMob("Pirate with Gun", EntityPirateWithGun.class, 0x960606, 0xFFFFFF);
 		WyRegistry.registerSpawnBiomesFor(EntityPirateWithGun.class, 20, 3, 6, generalBiomes);
 		WyRegistry.registerMob("Pirate Captain", EntityPirateCaptain.class, 0x960606, 0xFFFFFF);
+		WyRegistry.registerMob("Fat Pirate", EntityFatPirate.class, 0x960606, 0xFFFFFF);
 		//Arlong Pirates
 		WyRegistry.registerMob("Arlong", EntityArlong.class);
 		WyRegistry.registerMob("Chew", EntityChew.class);

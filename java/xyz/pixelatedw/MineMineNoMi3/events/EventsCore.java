@@ -120,7 +120,7 @@ public class EventsCore
 				ExtendedEntityData oldProps = ExtendedEntityData.get(e.original);
 				ExtendedEntityData props = ExtendedEntityData.get(e.entityPlayer);
 
-				for(String stat : MainConfig.statsToKepp)
+				for(String stat : MainConfig.statsToKeep)
 				{
 					switch(WyHelper.getFancyName(stat))
 					{
