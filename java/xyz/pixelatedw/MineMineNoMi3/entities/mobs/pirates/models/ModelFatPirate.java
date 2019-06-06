@@ -1,10 +1,14 @@
 package xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.models;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
+import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 
 public class ModelFatPirate extends ModelBiped
 {
@@ -59,12 +63,24 @@ public class ModelFatPirate extends ModelBiped
 	{
 		this.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 
-		this.rightarm.render(f5);
+    	ExtendedEntityData props = ExtendedEntityData.get((EntityLivingBase) entity);
+    	boolean hasHaki = props.hasBusoHakiActive();
+    	
 		this.rightleg1.render(f5);
 		this.leftarm.render(f5);
 		this.body.render(f5);
 		this.head.render(f5);
-		this.leftleg1.render(f5);
+		this.leftleg1.render(f5);	
+		
+		if (hasHaki)
+		{
+			Minecraft.getMinecraft().renderEngine.bindTexture(ID.HANDTEXTURE_ZOANMORPH_BUSO);
+			this.rightarm.render(f5);
+		}
+		else
+		{
+			this.rightarm.render(f5);
+		}
 	}
 
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
@@ -101,6 +117,8 @@ public class ModelFatPirate extends ModelBiped
 		this.leftleg1.rotationPointZ = 0.1F;
 		this.rightleg1.rotationPointY = 12.0F;
 		this.leftleg1.rotationPointY = 12.0F;
+		this.rightleg2.rotationPointY = 1.0F;
+		this.leftleg2.rotationPointY = 1.0F;
 		this.head.rotationPointY = 0.0F;
 
 		this.rightarm.rotateAngleZ += MathHelper.cos(f2 * 0.09F) * 0.05F + 0.05F;

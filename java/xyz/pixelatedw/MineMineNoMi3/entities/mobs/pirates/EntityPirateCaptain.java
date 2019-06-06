@@ -9,6 +9,7 @@ import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedNPCData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.EntityAIGapCloser;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.EntityAIHakiCombat;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.brawler.EntityAIHakaiHo;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.swordsman.EntityAIOTasumaki;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.swordsman.EntityAIYakkodori;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
@@ -25,6 +26,7 @@ public class EntityPirateCaptain extends PirateData
 		this.tasks.addTask(1, new EntityAIYakkodori(this));
 		this.tasks.addTask(1, new EntityAIOTasumaki(this));
 		this.tasks.addTask(1, new EntityAIGapCloser(this));
+		this.tasks.addTask(1, new EntityAIHakaiHo(this));
  	} 
 	  
 	public void applyEntityAttributes()
@@ -37,7 +39,7 @@ public class EntityPirateCaptain extends PirateData
 		
 		ExtendedNPCData props = ExtendedNPCData.get(this);
 			
-		props.setDoriki(30 + this.worldObj.rand.nextInt(5));
+		props.setDoriki(30 + this.worldObj.rand.nextInt(50));
 		props.setBelly(50 + this.worldObj.rand.nextInt(30));
 
 		if(!this.worldObj.isRemote)

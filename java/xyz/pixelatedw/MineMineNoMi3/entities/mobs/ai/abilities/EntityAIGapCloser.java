@@ -13,15 +13,30 @@ public class EntityAIGapCloser extends EntityAIBase
 {
 
 	private EntityNewMob entity;
-	private int hitCount;
+	private int hitCount, maxCount;
 	private float prevHealth;
+	private double speed;
 	
 	public EntityAIGapCloser(EntityNewMob entity)
 	{
 		this.entity = entity;
+		this.speed = 1.5;
+		this.maxCount = 3;
 		this.prevHealth = this.entity.getHealth();
 	}
 
+	public EntityAIGapCloser setSpeed(double speed)
+	{
+		this.speed = speed;
+		return this;
+	}
+	
+	public EntityAIGapCloser setMaxCounter(int counter)
+	{
+		this.maxCount = counter;
+		return this;
+	}
+	
 	public boolean shouldExecute()
 	{		
 		if(this.entity.getAttackTarget() == null)
@@ -37,7 +52,7 @@ public class EntityAIGapCloser extends EntityAIBase
 		if(distance > 14 && distance < 2)
 			return false;
 
-		if(this.hitCount < 3)
+		if(this.hitCount < this.maxCount)
 			return false;
 		
 		this.execute();
@@ -54,8 +69,8 @@ public class EntityAIGapCloser extends EntityAIBase
 		mZ /= (double)f2;
 		mX += this.entity.worldObj.rand.nextGaussian() * 0.007499999832361937D * 1.0;
 		mZ += this.entity.worldObj.rand.nextGaussian() * 0.007499999832361937D * 1.0;
-		mX *= 1.5;
-		mZ *= 1.5;
+		mX *= this.speed;
+		mZ *= this.speed;
 		
 		this.entity.motionX = mX;
 		this.entity.motionZ = mZ;

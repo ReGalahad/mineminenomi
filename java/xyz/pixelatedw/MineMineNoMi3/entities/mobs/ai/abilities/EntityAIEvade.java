@@ -1,4 +1,4 @@
-package xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai;
+package xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
