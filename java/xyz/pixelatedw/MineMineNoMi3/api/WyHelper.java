@@ -93,6 +93,13 @@ public class WyHelper
 		return now.after(target);
 	}
 	
+	public static boolean isNullOrEmpty(String str) 
+	{
+        if(str != null && !str.isEmpty())
+            return false;
+        return true;
+    }
+	
 	public static AbilityExplosion newExplosion(Entity entity, double posX, double posY, double posZ, double size)
 	{
 		AbilityExplosion explosion = new AbilityExplosion(entity, posX, posY, posZ, size);

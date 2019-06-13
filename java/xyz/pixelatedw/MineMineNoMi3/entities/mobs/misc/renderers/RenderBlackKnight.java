@@ -32,8 +32,7 @@ public class RenderBlackKnight extends MobRenderer
 	{
 		super(new ModelBiped());
 	}
-	
-	
+		
 	protected ResourceLocation getEntityTexture(Entity entity) 
 	{
 		ResourceLocation rs = AbstractClientPlayer.locationStevePng;

@@ -62,7 +62,6 @@ public class ItoAbilities
 		{
 			blackKnight = new EntityBlackKnight(player.worldObj, player);
 			blackKnight.setPositionAndRotation(player.posX, player.posY, player.posZ, 180, 0);
-			blackKnight.getEntityData().setString("TextureName", "test");
 			player.worldObj.spawnEntityInWorld(blackKnight);
 		}
 

@@ -12,7 +12,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.NoroProjectiles;
-import xyz.pixelatedw.MineMineNoMi3.items.Heart;
+import xyz.pixelatedw.MineMineNoMi3.items.devilfruitextras.Heart;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 

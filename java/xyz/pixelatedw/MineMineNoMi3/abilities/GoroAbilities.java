@@ -13,6 +13,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityExplosion;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
+import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilitySync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
@@ -81,6 +82,18 @@ public class GoroAbilities
 				exp.setFireAfterExplosion(true);
 				exp.doExplosion();
 			}
+			
+			/*for(int x = 0; x < 10; x++)
+			{
+				int i = (int) (player.posX + WyMathHelper.randomWithRange(-50, 50));
+				int j = (int) player.posY;
+				int k = (int) (player.posZ + WyMathHelper.randomWithRange(-50, 50));
+				
+				WyNetworkHelper.sendTo(new PacketPlayer("ElThorThunder", i, j, k), (EntityPlayerMP) player);
+				AbilityExplosion exp = WyHelper.newExplosion(player, i, j, k, 20);
+				exp.setFireAfterExplosion(true);
+				exp.doExplosion();
+			}*/
 			
 			super.endCharging(player);
 		}

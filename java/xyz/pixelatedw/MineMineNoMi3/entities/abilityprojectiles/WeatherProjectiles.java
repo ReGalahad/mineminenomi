@@ -10,9 +10,13 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
-import scala.actors.threadpool.Arrays;
+import net.minecraft.world.storage.WorldInfo;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
@@ -21,10 +25,13 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityExplosion;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
+import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.ExtraProjectiles.EntityCloud;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
 import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListExtraAttributes;
+import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 
 public class WeatherProjectiles
@@ -51,7 +58,7 @@ public class WeatherProjectiles
 		public ThunderBall(World world, EntityLivingBase player, AbilityAttribute attr) 
 		{		
 			super(world, player, attr);
-			this.type = 3;
+			this.weaponUsed = player.getHeldItem() != null ? player.getHeldItem().getItem() : null;
 		}
 	}
 	
@@ -66,7 +73,7 @@ public class WeatherProjectiles
 		public CoolBall(World world, EntityLivingBase player, AbilityAttribute attr) 
 		{		
 			super(world, player, attr);
-			this.type = 2;
+			this.weaponUsed = player.getHeldItem() != null ? player.getHeldItem().getItem() : null;
 		}
 		
 		public void onUpdate()
@@ -81,7 +88,7 @@ public class WeatherProjectiles
 					{
 						WeatherBall ball = (WeatherBall)x;
 						
-						return ball.getType() == 1;
+						return ball instanceof HeatBall;
 					}).collect(Collectors.toList());
 
 					if(heatBalls.size() > 0)
@@ -119,7 +126,7 @@ public class WeatherProjectiles
 		public HeatBall(World world, EntityLivingBase player, AbilityAttribute attr) 
 		{		
 			super(world, player, attr);		
-			this.type = 1;
+			this.weaponUsed = player.getHeldItem() != null ? player.getHeldItem().getItem() : null;
 		}
 	}
 	
@@ -127,7 +134,7 @@ public class WeatherProjectiles
 	
 	public static class WeatherBall extends AbilityProjectile
 	{
-		protected int type;
+		protected Item weaponUsed;
 		
 		public WeatherBall(World world)
 		{super(world);}
@@ -151,10 +158,24 @@ public class WeatherProjectiles
 			else
 				this.motionY = 0;
 		}
-		
-		public int getType()
+
+		public Item getWeaponUsed()
 		{
-			return type;
+			return this.weaponUsed;
+		}
+	}
+	
+	public static class EntityMirageTempoCloud extends EntityCloud
+	{
+		public EntityMirageTempoCloud(World world)
+		{
+			super(world);
+		}
+		
+		public void onUpdate()
+		{
+			super.onUpdate();
+			WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_KEMURIBOSHI, this.posX, this.posY, this.posZ), this.dimension, this.posX, this.posY, this.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 		}
 	}
 	
@@ -239,12 +260,12 @@ public class WeatherProjectiles
 						}
 					}
 				}
-				
-				int thunderBallsIn = (int) this.weatherBalls.stream().filter(x -> x.getType() == 3).count();
+		        
+				int perfectThunderBallsIn = (int) this.weatherBalls.stream().filter(x -> x instanceof ThunderBall && x.getWeaponUsed() == ListMisc.PerfectClimaTact).count();
 					
-				if(thunderBallsIn >= 3 && !superCharged)
+				if(perfectThunderBallsIn >= 2 && !this.superCharged)
 				{
-					superCharged = true;
+					this.superCharged = true;
 					DevilFruitsHelper.sendShounenScream(getThrower(), "Thunderstorm Tempo", 0);
 				}
 
@@ -256,18 +277,40 @@ public class WeatherProjectiles
 					{
 						WeatherBall ball = (WeatherBall)x;
 						
-						return ball.getType() == 3;
+						return ball instanceof ThunderBall;
 					}).collect(Collectors.toList());
 												
 					if(thunderBalls.size() > 0)
 					{
 						for(ThunderBall tb : thunderBalls)
 						{
-							this.life += 100;
+							this.life += 50;
 							this.weatherBalls.add(tb);
 							this.charged = true;
 							tb.setDead();
 						}
+					}
+					
+					List<CoolBall> coolBalls = (List<CoolBall>) weatherBallsNear.stream().filter(x ->
+					{
+						WeatherBall ball = (WeatherBall)x;
+						
+						return ball instanceof CoolBall && ball.getWeaponUsed() == ListMisc.PerfectClimaTact;
+					}).collect(Collectors.toList());
+
+					if(coolBalls.size() >= 2)
+					{					
+						DevilFruitsHelper.sendShounenScream(getThrower(), "Rain Tempo", 0);				
+				        WorldInfo worldinfo = MinecraftServer.getServer().worldServers[0].getWorldInfo();
+				        worldinfo.setRaining(true);
+				        
+						for(CoolBall cb : coolBalls)
+						{
+							this.life += 100;
+							cb.setDead();
+						}
+						
+				        this.setDead();
 					}
 				}
 			}	

@@ -18,7 +18,7 @@ public class EventsBounty
 	private HashMap<EntityPlayer, double[]> cachedPositions = new HashMap<EntityPlayer, double[]>();
 	
 	@SubscribeEvent
-	public void onRenderTick(TickEvent.PlayerTickEvent event)
+	public void onPlayerTick(TickEvent.PlayerTickEvent event)
 	{
 		if(MainConfig.enableWantedPostersPackages)
 		{

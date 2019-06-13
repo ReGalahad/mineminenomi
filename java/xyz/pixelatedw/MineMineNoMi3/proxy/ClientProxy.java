@@ -58,6 +58,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityBlackKnight;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDenDenMushi;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDojoSensei;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDoppelman;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityMirageClone;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityWantedPostersPackage;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.models.ModelDenDenMushi;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.models.ModelDojoSensei;
@@ -160,6 +161,7 @@ public class ClientProxy extends CommonProxy
 		//Others
 		RenderingRegistry.registerEntityRenderingHandler(EntityDoppelman.class, new RenderDoppelman());
 		RenderingRegistry.registerEntityRenderingHandler(EntityBlackKnight.class, new RenderBlackKnight());
+		RenderingRegistry.registerEntityRenderingHandler(EntityMirageClone.class, new RenderBlackKnight());
 		RenderingRegistry.registerEntityRenderingHandler(EntityDenDenMushi.class, new MobRenderer(new ModelDenDenMushi(), "denden"));
 		RenderingRegistry.registerEntityRenderingHandler(EntityDojoSensei.class, new MobRenderer(new ModelDojoSensei()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityWantedPostersPackage.class, new MobRenderer(new ModelWantedPostersPackage(), "wantedposterspackage"));
