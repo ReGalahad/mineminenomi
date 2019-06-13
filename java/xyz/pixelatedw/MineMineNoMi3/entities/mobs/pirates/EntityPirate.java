@@ -14,7 +14,6 @@ import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
 public class EntityPirate extends PirateData
 { 
-
 	public EntityPirate(World world) 
 	{
 		super(world, new String[] {"pirate1", "pirate2", "pirate3", "pirate4", "pirate5"});
