@@ -100,6 +100,20 @@ public class FishKarateAbilities
 		public void duringPassive(EntityPlayer player, int passiveTimer) 
 		{
 			WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_SAMEHADA, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
+			
+			if(passiveTimer > 800)
+			{
+				this.setPassiveActive(false);
+				this.startCooldown();
+				this.startExtUpdate(player);
+				super.endPassive(player);
+			}
+		}
+		
+		public void endPassive(EntityPlayer player)
+		{
+			this.startCooldown();
+			this.startExtUpdate(player);	
 		}
 	}
 	
