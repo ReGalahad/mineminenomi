@@ -319,6 +319,7 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 	public boolean isPirate() { return this.faction.equalsIgnoreCase("pirate"); }
 	public boolean isMarine() { return this.faction.equalsIgnoreCase("marine"); }
 	public boolean isBountyHunter() { return this.faction.equalsIgnoreCase("bountyhunter"); }
+	public boolean isRevolutionary() { return this.faction.equalsIgnoreCase("revolutionary"); }
 	public boolean hasFaction() { return !this.faction.equalsIgnoreCase("n/a"); }
 	public void setFaction(String i) {this.faction = i;}
 	

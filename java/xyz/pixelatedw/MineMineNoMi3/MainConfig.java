@@ -28,9 +28,11 @@ public class MainConfig
 	public static boolean enableSpecialFlying;
 	public static boolean enableOneFruitPerWorld;
 	public static boolean enableYamiSpecialPower;
+	public static boolean enableAmbushes;
 	public static double rateDFDrops;
 	public static double modifierShipsSpawn;
 	public static double rateWantedPostersPackagesSpawn;
+	public static double rateAmbushesSpawn;
 	public static double modifierDorikiReward;
 	public static int maxDojoSpawn;
 	
@@ -82,7 +84,9 @@ public class MainConfig
 		
 		rateWantedPostersPackagesSpawn = config.get("bounty", "Rate at which Wanted Poster Packages will drop", 18000, "Represented in minecraft ticks, 20 ticks = 1 second, 18000 ticks = 15 min").getInt();
 		enableWantedPostersPackages  = config.get("bounty", "Allow Wanted Poster Packages", true, "Allows wanted poster packages to drop from the sky; true by default").getBoolean();
-
+		enableAmbushes = config.get("bounty", "Allow Ambushes", true, "Allows mobs to spawn randomly near your possition based on the bounty and attack the player").getBoolean();
+		rateAmbushesSpawn = config.get("bounty", "Rate at which ambushes can spawn", 36000, "Represented in minecraft ticks, 20 ticks = 1 second, 36000 ticks = 30 min").getInt();
+		
 		enchantmentDialImpactId = config.get("ids", "Enchantment ID : Dial Impact", 200).getInt();
 		enchantmentKairosekiId = config.get("ids", "Enchantment ID : Kairoseki", 201).getInt();
 		enchantmentDialFlashId = config.get("ids", "Enchantment ID : Dial Flash", 202).getInt();

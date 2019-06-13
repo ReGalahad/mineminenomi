@@ -37,9 +37,9 @@ public class EntityNewMob extends EntityMob implements IDynamicRenderer
     public IEntityLivingData onSpawnWithEgg(IEntityLivingData data)
     {
         super.onSpawnWithEgg(data);
-        addRandomArmor();
-		if(textures != null && textures.length > 0)
-			this.setTexture(this.rand.nextInt(textures.length));
+        this.addRandomArmor();
+		if(this.textures != null && this.textures.length > 0)
+			this.setTexture(this.rand.nextInt(this.textures.length));
         return data;
     }
 	
