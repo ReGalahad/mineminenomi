@@ -13,6 +13,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.SunaProjectiles.Barjan;
+import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
@@ -79,7 +80,7 @@ public class MaguProjectiles
 				hit.entityHit.setFire(100);
 			
 			if(MainConfig.enableGriefing)
-				this.worldObj.setBlock(hit.blockX, hit.blockY, hit.blockZ, Blocks.flowing_lava);
+				DevilFruitsHelper.placeBlockIfAllowed(worldObj, hit.blockX, hit.blockY, hit.blockZ, Blocks.flowing_lava, "core", "foliage");
 		};
 		
 		public void onUpdate()
