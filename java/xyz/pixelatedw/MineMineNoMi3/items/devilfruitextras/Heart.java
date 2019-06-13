@@ -1,4 +1,4 @@
-package xyz.pixelatedw.MineMineNoMi3.items;
+package xyz.pixelatedw.MineMineNoMi3.items.devilfruitextras;
 
 import java.util.List;
 

@@ -180,7 +180,13 @@ public class AbilityExplosion
                 double d11 = (1.0D - d4) * d10;
                 float damage = (float)((int)((d11 * d11 + d11) / 2.0D * 8.0D * (double)this.explosionSize + 1.0D));
 
-                DamageSource damageSource = DamageSource.causeMobDamage((EntityLivingBase) this.exploder);
+                DamageSource damageSource;
+                
+                if(this.exploder instanceof EntityLivingBase)       
+	                damageSource = DamageSource.causeMobDamage((EntityLivingBase) this.exploder);
+                else
+	                damageSource = DamageSource.magic;
+                	
                 entity.attackEntityFrom(this.setExplosionSource(this), damage);
 			}
 		}

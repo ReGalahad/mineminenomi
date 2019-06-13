@@ -57,11 +57,11 @@ import xyz.pixelatedw.MineMineNoMi3.items.AkumaNoMiBox;
 import xyz.pixelatedw.MineMineNoMi3.items.BellyPouch;
 import xyz.pixelatedw.MineMineNoMi3.items.CharacterCreator;
 import xyz.pixelatedw.MineMineNoMi3.items.Cola;
-import xyz.pixelatedw.MineMineNoMi3.items.Heart;
 import xyz.pixelatedw.MineMineNoMi3.items.ItemCoreArmor;
 import xyz.pixelatedw.MineMineNoMi3.items.SeaKingMeat;
 import xyz.pixelatedw.MineMineNoMi3.items.UltraCola;
 import xyz.pixelatedw.MineMineNoMi3.items.WantedPoster;
+import xyz.pixelatedw.MineMineNoMi3.items.devilfruitextras.Heart;
 import xyz.pixelatedw.MineMineNoMi3.items.devilfruitextras.Shadow;
 import xyz.pixelatedw.MineMineNoMi3.items.devilfruitextras.WateringCan;
 import xyz.pixelatedw.MineMineNoMi3.items.dials.DialAxe;
@@ -222,6 +222,7 @@ public class ListMisc
 	public static ItemCoreWeapon Durandal = new ItemCoreWeapon(7);
 	
 	public static ClimaTact ClimaTact = new ClimaTact();
+	public static ClimaTact PerfectClimaTact = new ClimaTact();
 	
 	public static ItemAbilityWeapon IceSaber = new ItemAbilityWeapon(9).setIsSlownessInducing();
 	public static ItemAbilityWeapon AmaNoMurakumo = new ItemAbilityWeapon(9);
@@ -307,6 +308,7 @@ public class ListMisc
 		addITEM(Durandal, "Durandal", ListCreativeTabs.tabWeapons);
 		
 		addITEM(ClimaTact, "Clima Tact", ListCreativeTabs.tabWeapons);
+		addITEM(PerfectClimaTact, "Perfect Clima Tact", ListCreativeTabs.tabWeapons);
 		
 		addITEM(IceSaber, "Ice Saber", null);
 		addITEM(AmaNoMurakumo, "Ama no Murakumo", null);
