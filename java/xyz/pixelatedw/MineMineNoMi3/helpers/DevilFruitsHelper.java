@@ -314,12 +314,13 @@ public class DevilFruitsHelper
 	 * rule format : "add core", "ignore core", if no formula (add, ignore) is
 	 * specified "add" will be the default choice
 	 * 
-	 * core - basic blocks that will always be replaceable either due to their
-	 * low value or commonness air - specific filter for the air block ores -
-	 * self explanatory, also includes the compressed blocks for those ores
-	 * foliage - things like flowers, vines and leaves liquids - water and lava
-	 * all - all blocks restricted - removes some blocks that should never be
-	 * replaced, has no use for add/ignore param
+	 * core - basic blocks that will always be replaceable either due to their low value or commonness 
+	 * air - specific filter for the air block 
+	 * ores - self explanatory, also includes the compressed blocks for those ores
+	 * foliage - things like flowers, vines and leaves 
+	 * liquids - water and lava
+	 * all - all blocks 
+	 * restricted - removes some blocks that should never be replaced, has no use for add/ignore param
 	 * 
 	 * nogrief is used for abilities that should place blocks even if griefing is disabled, room or torikago for example
 	 */
