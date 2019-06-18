@@ -59,6 +59,7 @@ public class EventsBounty
 			EntityPlayer player = event.player;
 			ExtendedEntityData props = ExtendedEntityData.get(player);
 			
+			// Ambushes
 			if(MainConfig.enableAmbushes)
 			{
 				boolean canBeAmbushed = false;
@@ -78,16 +79,30 @@ public class EventsBounty
 							
 							if(bountyLevel <= 6)
 							{
-								int marines = bountyLevel < 4 ? bountyLevel * 3 : bountyLevel * 2;
-								this.spawnAmbush(player, marines, EntityMarine.class);
+								if(spawnType)
+								{
+									int lowLevelMobs = bountyLevel < 4 ? bountyLevel * 3 : bountyLevel * 2;
+									this.spawnAmbush(player, lowLevelMobs, EntityMarine.class);
+								}
+								else
+								{
+									
+								}
 							}
 							else if(bountyLevel > 6)
 							{
-								int marines = bountyLevel < 9 ? player.worldObj.rand.nextInt(10) + 5 : player.worldObj.rand.nextInt(10) + 10;
-								this.spawnAmbush(player, marines, EntityMarine.class);
-												
-								int captains = bountyLevel < 9 ? 1 : player.worldObj.rand.nextInt(2) + 1;
-								this.spawnAmbush(player, captains, EntityMarineCaptain.class);
+								if(spawnType)
+								{
+									int lowLevelMobs = bountyLevel < 9 ? player.worldObj.rand.nextInt(10) + 5 : player.worldObj.rand.nextInt(10) + 10;
+									this.spawnAmbush(player, lowLevelMobs, EntityMarine.class);
+													
+									int mediumLevelMobs = bountyLevel < 9 ? 1 : player.worldObj.rand.nextInt(2) + 1;
+									this.spawnAmbush(player, mediumLevelMobs, EntityMarineCaptain.class);
+								}
+								else
+								{
+									
+								}
 							}
 						}
 					}
