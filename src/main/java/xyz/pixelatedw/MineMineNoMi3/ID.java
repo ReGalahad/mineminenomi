@@ -41,7 +41,8 @@ public class ID
 	ICON_PIRATE = new ResourceLocation(ID.PROJECT_ID, "textures/gui/icons/icon_pirate.png"),
 	ICON_MARINE = new ResourceLocation(ID.PROJECT_ID, "textures/gui/icons/icon_marine.png"),
 	ICON_BOUNTYHUNTER = new ResourceLocation(ID.PROJECT_ID, "textures/gui/icons/icon_bountyhunter.png"),
-	
+	ICON_REVOLUTIONARY = new ResourceLocation(ID.PROJECT_ID, "textures/gui/icons/icon_revolutionary.png"),
+			
 	ICON_HUMAN = new ResourceLocation(ID.PROJECT_ID, "textures/gui/icons/icon_human.png"),
 	ICON_FISHMAN = new ResourceLocation(ID.PROJECT_ID, "textures/gui/icons/icon_fishman.png"),
 	ICON_CYBORG = new ResourceLocation(ID.PROJECT_ID, "textures/gui/icons/icon_cyborg.png"),
@@ -49,7 +50,8 @@ public class ID
 	ICON_SWORDSMAN = new ResourceLocation(ID.PROJECT_ID, "textures/gui/icons/icon_swordsman.png"),
 	ICON_SNIPER = new ResourceLocation(ID.PROJECT_ID, "textures/gui/icons/icon_sniper.png"),
 	ICON_MEDIC = new ResourceLocation(ID.PROJECT_ID, "textures/gui/icons/icon_medic.png"),
-	
+	ICON_ARTOFWEATHER = new ResourceLocation(ID.PROJECT_ID, "textures/gui/icons/icon_artofweather.png"),
+			
 	HANDTEXTURE_ZOANMORPH_BUSO = new ResourceLocation(ID.PROJECT_ID, "textures/models/zoanmorph/hand_buso.png"),
 	HANDTEXTURE_ZOANMORPH_HOTBOILINGSPECIAL = new ResourceLocation(ID.PROJECT_ID, "textures/models/zoanmorph/hand_hotboilingspecial.png"),
 			

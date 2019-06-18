@@ -1,12 +1,35 @@
+# eclipse
+bin
+*.launch
+.settings
+.metadata
+.classpath
+.project
 
-java/version.txt
-java/earlyaccess.txt
-resources/assets/mineminenomi/EXTRA_BOT_FILES
-out/
-gradle/
-eclipse/
-.idea/
-.gradle/
-build.gradle
-gradlew
-gradlew.bat
+# idea
+out
+*.ipr
+*.iws
+*.iml
+.idea
+
+# gradle
+build
+.gradle
+2.7
+
+# other
+src/main/java/version.txt
+src/main/java/earlyaccess.txt
+src/main/resources/assets/mineminenomi/EXTRA_BOT_FILES
+eclipse
+bin
+config
+logs
+mods
+resourcepacks
+saves
+options.txt
+usernamecache.json
+
+
