@@ -87,11 +87,13 @@ public class ListMisc
 	public static Block KairosekiBlock = new NewBlock(Material.rock).setHardness(10);
 	public static Block KairosekiOre = new NewBlock(Material.rock)
 	{
+		@Override
 		public int quantityDropped(Random random)
 		{
 			return 2 + random.nextInt(3);
 		}
 
+		@Override
 		public Item getItemDropped(int id, Random rand, int fortune)
 		{
 			return Kairoseki;
@@ -110,6 +112,7 @@ public class ListMisc
 	public static Block StringMid = new BlockStringMid();
 	public static Block SunaSand = new BlockSunaSand()
 	{
+		@Override
 		public int quantityDropped(Random random)
 		{
 			return 0;
@@ -121,11 +124,13 @@ public class ListMisc
 	public static Block OriBars = new BlockCustomBars("oribars", "oribars");
 	public static Block KairosekiBars = new BlockCustomBars("kairosekibars", "kairosekibars")
 	{
+		@Override
 		public int quantityDropped(Random random)
 		{
 			return 1;
 		}
 
+		@Override
 		public Item getItemDropped(int id, Random rand, int fortune)
 		{
 			return Item.getItemFromBlock(KairosekiBars);
@@ -333,7 +338,7 @@ public class ListMisc
 		addBLOCK(KairosekiOre, "Kairoseki Ore", 3.5F, null, ListCreativeTabs.tabMisc);
 		addBLOCK(KairosekiBlock, "Kairoseki Block", 3.5F, null, ListCreativeTabs.tabMisc);
 		addBLOCK(EnchantmentTable, "Kairoseki Table", 3.5F, null, ListCreativeTabs.tabMisc);
-		addBLOCK(DenDenMushi, "Den Den Mushi", 3.5F, TileEntityDenDenMushi.class, ListCreativeTabs.tabMisc);
+		addBLOCK(DenDenMushi, "Den Den Mushi", 0.5F, TileEntityDenDenMushi.class, ListCreativeTabs.tabMisc);
 		addBLOCK(SkyBlock, "Sky Block", 1.5F, null, ListCreativeTabs.tabMisc);
 		addBLOCK(Barrier, "Crash Barrier", Float.POSITIVE_INFINITY, null, null);
 		addBLOCK(Poison, "Poison", 1.5F, null, null);
