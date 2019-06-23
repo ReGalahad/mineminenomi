@@ -2,13 +2,10 @@ package xyz.pixelatedw.MineMineNoMi3.commands;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.command.CommandBase;
-import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
-import net.minecraft.command.PlayerNotFoundException;
 import net.minecraft.command.WrongUsageException;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.EnumChatFormatting;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.Values;
@@ -20,6 +17,7 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 
 public class CommandExtol extends CommandBase
 {		
+	@Override
 	public void processCommand(ICommandSender sender, String[] str) 
 	{
 		// Checking if the basic formula is used
@@ -35,15 +33,15 @@ public class CommandExtol extends CommandBase
 		{
 			// If it's a player check for permissions and command format, if one of them is false, return the actual sender as a target
 			if(str.length == 3 && MainConfig.commandPermissionExtol != 1)
-				target = this.getPlayer(sender, str[2]);
+				target = CommandBase.getPlayer(sender, str[2]);
 			else
-				target = this.getCommandSenderAsPlayer(sender);		
+				target = CommandBase.getCommandSenderAsPlayer(sender);		
 		}
 		else
 		{
 			// If it's not a player then the [player] parameter is mandatory, @p works as well, otherwise return an error in the logs (for good measure)
 			if(str.length == 3)
-				target = this.getPlayer(sender, str[2]);
+				target = CommandBase.getPlayer(sender, str[2]);
 			else
 			{
 				WyDebug.error("A player must be provided when the command is not used by a player !");
@@ -131,12 +129,13 @@ public class CommandExtol extends CommandBase
 			WyHelper.sendMsgToPlayer(target, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] Added " + value + " extol to " + target.getCommandSenderName()); 		
 	}
 
+	@Override
 	public boolean canCommandSenderUseCommand(ICommandSender sender)
 	{
 		if(!(sender instanceof EntityPlayer))
 			return true;
 		
-		EntityPlayer senderEntity = this.getCommandSenderAsPlayer(sender);
+		EntityPlayer senderEntity = CommandBase.getCommandSenderAsPlayer(sender);
 		boolean flag = FMLCommonHandler.instance().getMinecraftServerInstance().getConfigurationManager().func_152596_g(senderEntity.getGameProfile());
 		
 		if( (MainConfig.commandPermissionExtol == 2 && flag) || MainConfig.commandPermissionExtol < 2 )
@@ -145,11 +144,13 @@ public class CommandExtol extends CommandBase
 			return false;	
 	}
 	
+	@Override
 	public String getCommandUsage(ICommandSender icommandsender)
 	{
 		return "/extol <+|-|=> <amount> [player]";
 	}
 
+	@Override
 	public String getCommandName() 
 	{
 		return "extol";

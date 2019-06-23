@@ -10,14 +10,12 @@ import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-import scala.actors.threadpool.Arrays;
 import xyz.pixelatedw.MineMineNoMi3.EnumFruitType;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.abilities.FishKarateAbilities;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
-import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityManager;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilitySync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
@@ -25,7 +23,6 @@ import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListCreativeTabs;
-import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSyncInfo;
 
 public class AkumaNoMi extends ItemFood
@@ -45,12 +42,14 @@ public class AkumaNoMi extends ItemFood
 		this.setAlwaysEdible();
 	}
 
+	@Override
 	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
 	{
 		player.setItemInUse(itemStack, itemUseDuration);
 		return itemStack;
 	}
 
+	@Override
 	public void onFoodEaten(ItemStack itemStack, World world, EntityPlayer player)
 	{
 		ExtendedEntityData props = ExtendedEntityData.get(player);
@@ -116,8 +115,9 @@ public class AkumaNoMi extends ItemFood
 		if (!ID.DEV_EARLYACCESS && !world.isRemote && !player.capabilities.isCreativeMode)
 			WyTelemetry.addStat("eaten_" + itemStack.getDisplayName(), 1);
 
-	}
+	} 
 
+	@Override
 	public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean par4)
 	{
 		for (int i = 0; i < this.abilities.length; i++)

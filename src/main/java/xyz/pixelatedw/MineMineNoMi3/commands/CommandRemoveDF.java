@@ -5,29 +5,25 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.EnumChatFormatting;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
-import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
-import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilitySync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
-import xyz.pixelatedw.MineMineNoMi3.packets.PacketNewAABB;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSyncInfo;
 
 public class CommandRemoveDF extends CommandBase
 {		
+	@Override
 	public void processCommand(ICommandSender sender, String[] str) 
 	{
 		EntityPlayer player = null;
 		
 		if(str.length == 1)
-			player = this.getPlayer(sender, str[0]);
+			player = CommandBase.getPlayer(sender, str[0]);
 		else
-			player = this.getCommandSenderAsPlayer(sender);
+			player = CommandBase.getCommandSenderAsPlayer(sender);
 		
 		boolean flag = FMLCommonHandler.instance().getMinecraftServerInstance().getConfigurationManager().func_152596_g(player.getGameProfile());
 		
@@ -54,12 +50,13 @@ public class CommandRemoveDF extends CommandBase
 		WyNetworkHelper.sendTo(new PacketAbilitySync(abilityProps), (EntityPlayerMP)player);	
 	}
 
+	@Override
 	public boolean canCommandSenderUseCommand(ICommandSender sender)
 	{
 		if(!(sender instanceof EntityPlayer))
 			return true;
 		
-		EntityPlayer senderEntity = this.getCommandSenderAsPlayer(sender);
+		EntityPlayer senderEntity = CommandBase.getCommandSenderAsPlayer(sender);
 		boolean flag = FMLCommonHandler.instance().getMinecraftServerInstance().getConfigurationManager().func_152596_g(senderEntity.getGameProfile());
 		
 		if( (MainConfig.commandPermissionRemoveDF == 2 && flag) || MainConfig.commandPermissionRemoveDF < 2 )
@@ -68,11 +65,13 @@ public class CommandRemoveDF extends CommandBase
 			return false;		
 	}
 	
+	@Override
 	public String getCommandUsage(ICommandSender icommandsender)
 	{
 		return "/removedf [player]";
 	}
 
+	@Override
 	public String getCommandName() 
 	{
 		return "removedf";

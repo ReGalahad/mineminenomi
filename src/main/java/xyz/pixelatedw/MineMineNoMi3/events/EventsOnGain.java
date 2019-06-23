@@ -14,9 +14,9 @@ import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.abilities.CyborgAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.FishKarateAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.HakiAbilities;
-import xyz.pixelatedw.MineMineNoMi3.abilities.RokushikiAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.HakiAbilities.BusoshokuHaki;
 import xyz.pixelatedw.MineMineNoMi3.abilities.HakiAbilities.KenbunshokuHaki;
+import xyz.pixelatedw.MineMineNoMi3.abilities.RokushikiAbilities;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
@@ -24,7 +24,6 @@ import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedNPCData;
-import xyz.pixelatedw.MineMineNoMi3.data.ExtendedWorldData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.MarineData;
 import xyz.pixelatedw.MineMineNoMi3.events.customevents.BountyEvent;
@@ -154,7 +153,7 @@ public class EventsOnGain
 
 				if (target instanceof EntityNewMob)
 				{
-					ExtendedNPCData targetprops = ExtendedNPCData.get((EntityNewMob) target);
+					ExtendedNPCData targetprops = ExtendedNPCData.get(target);
 					
 					if ((props.getDoriki() / 100) > targetprops.getDoriki())
 					{
@@ -168,6 +167,8 @@ public class EventsOnGain
 					}
 					else
 						plusDoriki = targetprops.getDoriki();
+					
+					plusDoriki *= MainConfig.modifierDorikiReward;
 
 					plusBounty = (targetprops.getDoriki() * 2) + rng;
 					plusBelly = targetprops.getBelly() + rng;
@@ -233,9 +234,9 @@ public class EventsOnGain
 				}
 				else
 				{
-					WyTelemetry.addStat("dorikiEarnedFromPlayers", (int) Math.round((ExtendedEntityData.get(target).getDoriki() - ExtendedEntityData.get(target).getDorikiFromCommand()) / 4));
+					WyTelemetry.addStat("dorikiEarnedFromPlayers", Math.round((ExtendedEntityData.get(target).getDoriki() - ExtendedEntityData.get(target).getDorikiFromCommand()) / 4));
 					WyTelemetry.addStat("bellyEarnedFromPlayers", plusBelly - ExtendedEntityData.get(target).getBellyFromCommand());
-					WyTelemetry.addStat("bountyEarnedFromPlayers", (int) Math.round((ExtendedEntityData.get(target).getBounty() - ExtendedEntityData.get(target).getBountyFromCommand()) / 2));
+					WyTelemetry.addStat("bountyEarnedFromPlayers", Math.round((ExtendedEntityData.get(target).getBounty() - ExtendedEntityData.get(target).getBountyFromCommand()) / 2));
 				}
 			}
 

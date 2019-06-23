@@ -1,11 +1,7 @@
 package xyz.pixelatedw.MineMineNoMi3.abilities;
 
-import java.util.Arrays;
-
-import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -15,14 +11,9 @@ import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.abilities.extra.effects.DFEffectHieSlowness;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
-import xyz.pixelatedw.MineMineNoMi3.api.math.Circle;
-import xyz.pixelatedw.MineMineNoMi3.api.math.ICircle;
-import xyz.pixelatedw.MineMineNoMi3.api.math.ISphere;
-import xyz.pixelatedw.MineMineNoMi3.api.math.Sphere;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.HieProjectiles;
-import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
@@ -48,6 +39,7 @@ public class HieAbilities
 			super(ListAttributes.ICESABER); 
 		}
 		
+		@Override
 		public void startPassive(EntityPlayer player) 
 		{
 			if(player.inventory.getCurrentItem() == null)
@@ -59,6 +51,7 @@ public class HieAbilities
 			}
 		}
 		
+		@Override
 		public void endPassive(EntityPlayer player) 
 		{
 			player.inventory.clearInventory(ListMisc.IceSaber, -1);
@@ -73,6 +66,7 @@ public class HieAbilities
 			super(ListAttributes.ICEBLOCKPARTISAN); 
 		}
 		
+		@Override
 		public void use(EntityPlayer player)
 		{
 			this.projectile = new HieProjectiles.IceBlockPartisan(player.worldObj, player, ListAttributes.ICEBLOCKPARTISAN);
@@ -87,6 +81,7 @@ public class HieAbilities
 			super(ListAttributes.ICEAGE); 
 		}
 		
+		@Override
 		public void use(EntityPlayer player)
 		{
 			if(!this.isOnCooldown)
@@ -128,6 +123,7 @@ public class HieAbilities
 			super(ListAttributes.ICEBALL); 
 		}
 		
+		@Override
 		public void use(EntityPlayer player)
 		{
 			this.projectile = new HieProjectiles.IceBall(player.worldObj, player, ListAttributes.ICEBALL);
@@ -142,6 +138,7 @@ public class HieAbilities
 			super(ListAttributes.ICETIMECAPSULE); 
 		}
 		
+		@Override
 		public void use(EntityPlayer player)
 		{
 			if(!this.isOnCooldown())
@@ -150,7 +147,7 @@ public class HieAbilities
 				{
 					for(EntityLivingBase l : WyHelper.getEntitiesNear(player, 25))
 					{
-						WyHelper.createFilledCube(l, new int[] {2, 4, 2}, Blocks.packed_ice, "air");
+						WyHelper.createFilledCube(l, new int[] {2, 4, 2}, Blocks.packed_ice, "air", "foliage");
 					}	
 				}
 			
@@ -166,6 +163,7 @@ public class HieAbilities
 			super(ListAttributes.ICEBLOCKPHEASANT); 
 		}
 		
+		@Override
 		public void use(EntityPlayer player)
 		{
 			this.projectile = new HieProjectiles.IceBlockPheasant(player.worldObj, player, ListAttributes.ICEBLOCKPHEASANT);

@@ -1,26 +1,20 @@
 package xyz.pixelatedw.MineMineNoMi3.commands;
 
-import java.util.Arrays;
-
 import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import xyz.pixelatedw.MineMineNoMi3.ID;
-import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
-import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedWorldData;
-import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketViewProtection;
 
 public class CommandAbilityProtectionView extends CommandBase
 {
+	@Override
 	public void processCommand(ICommandSender sender, String[] str)
 	{
-		EntityPlayer player = this.getCommandSenderAsPlayer(sender);
+		EntityPlayer player = CommandBase.getCommandSenderAsPlayer(sender);
 		ExtendedWorldData worldData = ExtendedWorldData.get(player.worldObj);
 
 		for(int[][] area : worldData.getAllRestrictions())
@@ -39,9 +33,10 @@ public class CommandAbilityProtectionView extends CommandBase
 		}
 	}
 
+	@Override
 	public boolean canCommandSenderUseCommand(ICommandSender sender)
 	{
-		EntityPlayer senderEntity = this.getCommandSenderAsPlayer(sender);
+		EntityPlayer senderEntity = CommandBase.getCommandSenderAsPlayer(sender);
 		boolean flag = FMLCommonHandler.instance().getMinecraftServerInstance().getConfigurationManager().func_152596_g(senderEntity.getGameProfile());
 
 		if (flag)
@@ -50,11 +45,13 @@ public class CommandAbilityProtectionView extends CommandBase
 		return false;
 	}
 
+	@Override
 	public String getCommandUsage(ICommandSender icommandsender)
 	{
 		return "/abilityprotectionview";
 	}
 
+	@Override
 	public String getCommandName()
 	{
 		return "abilityprotectionview";
