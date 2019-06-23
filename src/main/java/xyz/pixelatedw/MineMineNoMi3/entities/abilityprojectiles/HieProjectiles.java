@@ -1,7 +1,6 @@
 package xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
@@ -11,17 +10,10 @@ import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.abilities.extra.effects.DFEffectHieSlowness;
-import xyz.pixelatedw.MineMineNoMi3.abilities.extra.effects.DFEffectMeroPetrification;
-import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.MeraProjectiles.DaiEnkaiEntei;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.MeraProjectiles.Hidaruma;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.MeraProjectiles.Higan;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.MeraProjectiles.Hiken;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.MeraProjectiles.Jujika;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
 import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
@@ -51,6 +43,7 @@ public class HieProjectiles
 			super(world, player, attr);		
 		}
 		
+		@Override
 		public void tasksImapct(MovingObjectPosition hit)
 		{
 			if(hit.entityHit != null && hit.entityHit instanceof EntityLivingBase)
@@ -61,6 +54,7 @@ public class HieProjectiles
 			}
 		}
 		
+		@Override
 		public void onUpdate()
 		{	
 			if(this.worldObj.isRemote)
@@ -98,6 +92,7 @@ public class HieProjectiles
 			super(world, player, attr);		
 		}
 		
+		@Override
 		public void tasksImapct(MovingObjectPosition hit)
 		{
 			if(hit.entityHit != null && hit.entityHit instanceof EntityLivingBase)
@@ -110,6 +105,7 @@ public class HieProjectiles
 			DevilFruitsHelper.placeBlockIfAllowed(this.worldObj, (int)posX, (int)posY, (int)posZ, Blocks.packed_ice, "core", "foliage");
 		}
 		
+		@Override
 		public void onUpdate()
 		{	
 			if(this.worldObj.isRemote)
@@ -144,6 +140,7 @@ public class HieProjectiles
 			super(world, player, attr);		
 		}
 		
+		@Override
 		public void tasksImapct(MovingObjectPosition hit)
 		{
 			if(hit.entityHit != null && hit.entityHit instanceof EntityLivingBase)
@@ -155,7 +152,7 @@ public class HieProjectiles
 			
 			if(MainConfig.enableGriefing)
 			{
-				WyHelper.createEmptySphere(this.worldObj, (int)this.posX, (int)this.posY, (int)this.posZ, 6, Blocks.packed_ice, "air");
+				WyHelper.createEmptySphere(this.worldObj, (int)this.posX, (int)this.posY, (int)this.posZ, 6, Blocks.packed_ice, "air", "foliage");
 			}
 		}
 	}

@@ -1,8 +1,5 @@
 package xyz.pixelatedw.MineMineNoMi3.api;
 
-import java.awt.Color;
-import java.util.Random;
-
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
@@ -181,8 +178,8 @@ public class WyRenderHelper
 	{
         GL11.glEnable(GL11.GL_COLOR_MATERIAL);
         GL11.glPushMatrix();
-        GL11.glTranslatef((float)posX, (float)posY, 50.0F);
-        GL11.glScalef((float)(-scale), (float)scale, (float)scale);
+        GL11.glTranslatef(posX, posY, 50.0F);
+        GL11.glScalef((-scale), scale, scale);
         GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
         float f2 = entity.renderYawOffset;
         float f3 = entity.rotationYaw;
@@ -192,10 +189,10 @@ public class WyRenderHelper
         GL11.glRotatef(135.0F, 0.0F, 1.0F, 0.0F);
         RenderHelper.enableStandardItemLighting();
         GL11.glRotatef(-135.0F, 0.0F, 1.0F, 0.0F);
-        GL11.glRotatef(-((float)Math.atan((double)(mouseY / 40.0F))) * 20.0F, 1.0F, 0.0F, 0.0F);
-        entity.renderYawOffset = (float)Math.atan((double)(mouseX / 40.0F)) * 20.0F;
-        entity.rotationYaw = (float)Math.atan((double)(mouseX / 40.0F)) * 40.0F;
-        entity.rotationPitch = -((float)Math.atan((double)(mouseY / 40.0F))) * 20.0F;
+        GL11.glRotatef(-((float)Math.atan(mouseY / 40.0F)) * 20.0F, 1.0F, 0.0F, 0.0F);
+        entity.renderYawOffset = (float)Math.atan(mouseX / 40.0F) * 20.0F;
+        entity.rotationYaw = (float)Math.atan(mouseX / 40.0F) * 40.0F;
+        entity.rotationPitch = -((float)Math.atan(mouseY / 40.0F)) * 20.0F;
         entity.rotationYawHead = entity.rotationYaw;
         entity.prevRotationYawHead = entity.rotationYaw;
         GL11.glTranslatef(0.0F, entity.yOffset, 0.0F);
@@ -220,8 +217,8 @@ public class WyRenderHelper
 
         ScaledResolution scaledRes = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
 
-        double scaleW = (double)mc.displayWidth / scaledRes.getScaledWidth_double();
-        double scaleH = (double)mc.displayHeight / scaledRes.getScaledHeight_double();
+        double scaleW = mc.displayWidth / scaledRes.getScaledWidth_double();
+        double scaleH = mc.displayHeight / scaledRes.getScaledHeight_double();
 
         if(width <= 0 || height <= 0)
         {
@@ -238,7 +235,7 @@ public class WyRenderHelper
 
         GL11.glEnable(GL11.GL_SCISSOR_TEST);
 
-        GL11.glScissor((int)Math.floor((double)x * scaleW), (int)Math.floor((double)mc.displayHeight - ((double)(y + height) * scaleH)), (int)Math.floor((double)(x + width) * scaleW) - (int)Math.floor((double)x * scaleW), (int)Math.floor((double)mc.displayHeight - ((double)y * scaleH)) - (int)Math.floor((double)mc.displayHeight - ((double)(y + height) * scaleH))); //starts from lower left corner (minecraft starts from upper left)
+        GL11.glScissor((int)Math.floor(x * scaleW), (int)Math.floor(mc.displayHeight - ((y + height) * scaleH)), (int)Math.floor((x + width) * scaleW) - (int)Math.floor(x * scaleW), (int)Math.floor(mc.displayHeight - (y * scaleH)) - (int)Math.floor(mc.displayHeight - ((y + height) * scaleH))); //starts from lower left corner (minecraft starts from upper left)
     }
     
     public static void endGlScissor()

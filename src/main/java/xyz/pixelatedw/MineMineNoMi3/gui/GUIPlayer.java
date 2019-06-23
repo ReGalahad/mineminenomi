@@ -3,7 +3,6 @@ package xyz.pixelatedw.MineMineNoMi3.gui;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -17,8 +16,8 @@ import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyRenderHelper;
-import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
 import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 
 public class GUIPlayer extends GuiScreen
@@ -26,18 +25,24 @@ public class GUIPlayer extends GuiScreen
 	private EntityPlayer player;
 	private RenderItem renderItem;
 	private ExtendedEntityData props;
-
+	private EntityNewMob testEntity;
+	
 	public GUIPlayer(EntityPlayer player)
 	{
 		this.player = player;
 		this.props = ExtendedEntityData.get(player);
+				 
+		//testEntity = new EntityMorgan(Minecraft.getMinecraft().theWorld);
+		//testEntity.onSpawnWithEgg(null);
 	}
 
+	@Override
 	public void drawScreen(int x, int y, float f)
 	{
 		drawDefaultBackground();
-    
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);	
+		//this.drawGradientRect(0, 0, this.width, this.height, WyHelper.hexToRGB("#FD637F").getRGB(), WyHelper.hexToRGB("#FD637F").getRGB());
+		
+		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		
 		int posX = (this.width - 256) / 2;
 		int posY = (this.height - 256) / 2;		
@@ -96,8 +101,9 @@ public class GUIPlayer extends GuiScreen
 			}
 			
 		}
-		 
+
 		WyRenderHelper.drawEntityOnScreen(posX + 140, posY + 180 , 68, 0, 0, this.player);
+		//WyRenderHelper.drawEntityOnScreen(posX + 140, posY + 180 , 68, -50, 0, this.testEntity);
     
 		/*
 		if(props.isPirate() && props.getBounty() > 0)
@@ -114,6 +120,7 @@ public class GUIPlayer extends GuiScreen
 		super.drawScreen(x, y, f);
 	}
 
+	@Override
 	public void initGui()
 	{
 		int posX = (this.width - 256) / 2;
@@ -126,6 +133,7 @@ public class GUIPlayer extends GuiScreen
 		//this.buttonList.add(new GuiButton(2, posX + 63, posY + 210, 80, 20, I18n.format("gui.epithet.name")));
 	}
 	
+	@Override
 	public void actionPerformed(GuiButton button)
 	{
 		switch(button.id)
@@ -135,6 +143,7 @@ public class GUIPlayer extends GuiScreen
 		}
 	}
 	
+	@Override
 	public boolean doesGuiPauseGame()
 	{
 		return false;

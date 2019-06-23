@@ -1,14 +1,12 @@
 package xyz.pixelatedw.MineMineNoMi3.items.weapons.renderers;
 
-import java.util.Arrays;
-
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.client.gui.inventory.GuiInventory;
-import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureManager;
@@ -17,13 +15,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.IItemRenderer;
-import net.minecraftforge.client.IItemRenderer.ItemRenderType;
-import net.minecraftforge.client.IItemRenderer.ItemRendererHelper;
-import xyz.pixelatedw.MineMineNoMi3.ID;
-import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 
 public class RenderCoreWeapon implements IItemRenderer
@@ -113,7 +105,7 @@ public class RenderCoreWeapon implements IItemRenderer
 			GL11.glTranslatef(0.05F, -0.05F, 0.0F);
 		}
 
-		RenderManager.instance.itemRenderer.renderItemIn2D(tessellator, f1, f2, f, f3, iicon.getIconWidth(), iicon.getIconHeight(), 0.0625F);	
+		ItemRenderer.renderItemIn2D(tessellator, f1, f2, f, f3, iicon.getIconWidth(), iicon.getIconHeight(), 0.0625F);	
 		GL11.glPopMatrix();
 	}
 }

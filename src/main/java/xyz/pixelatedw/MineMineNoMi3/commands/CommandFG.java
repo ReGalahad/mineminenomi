@@ -31,11 +31,12 @@ public class CommandFG extends CommandBase
 	
 	private Quest[] questsPool = new Quest[] {ListQuests.bountyLowLevel01, ListQuests.bountyLowLevel02, ListQuests.bountyLowLevel03};
 	
+	@Override
 	public void processCommand(ICommandSender sender, String[] str) 
 	{
 		if(str.length >= 1)
 		{
-			EntityPlayer player = this.getCommandSenderAsPlayer(sender);
+			EntityPlayer player = CommandBase.getCommandSenderAsPlayer(sender);
 			ExtendedEntityData props = ExtendedEntityData.get(player);
 			QuestProperties questProps = QuestProperties.get(player);
 			Entity toSpawn = null;
@@ -124,16 +125,19 @@ public class CommandFG extends CommandBase
 		}
 	}
 
+	@Override
 	public boolean canCommandSenderUseCommand(ICommandSender cmd)
 	{
 		return true;
 	}
 	
+	@Override
 	public String getCommandUsage(ICommandSender icommandsender)
 	{
 		return "/fg <entity>";
 	}
 
+	@Override
 	public String getCommandName() 
 	{
 		return "fg";
