@@ -1,7 +1,6 @@
 package xyz.pixelatedw.MineMineNoMi3.events.devilfruits;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,11 +8,10 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -21,7 +19,6 @@ import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerUseItemEvent;
-import net.minecraftforge.event.world.BlockEvent;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.abilities.RokushikiAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.extra.effects.DFEffectHieSlowness;
@@ -51,7 +48,7 @@ public class EventsPassives
 	{
 		if (event.entityLiving instanceof EntityLivingBase)
 		{
-			EntityLivingBase entity = (EntityLivingBase) event.entityLiving;
+			EntityLivingBase entity = event.entityLiving;
 			ExtendedEntityData propz = ExtendedEntityData.get(entity);
 
 			if (!propz.hasShadow() && entity.getBrightness(1.0F) > 0.8F)
@@ -82,7 +79,7 @@ public class EventsPassives
 						if (Math.abs(player.motionX) > 0.15 || Math.abs(player.motionZ) > 0.15)
 						{
 							for (EntityLivingBase e : WyHelper.getEntitiesNear(player, 1.6))
-								e.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) player), 2);
+								e.attackEntityFrom(DamageSource.causePlayerDamage(player), 2);
 						}
 					}
 				}
@@ -267,6 +264,27 @@ public class EventsPassives
 			ExtendedEntityData props = ExtendedEntityData.get(attacked);
 			AbilityProperties abilityProps = AbilityProperties.get(attacked);
 
+			if (props.getUsedFruit().equals("chiyuchiyu"))
+			{
+				ItemStack waterCan = null;
+		        for (int i = 0; i < attacked.inventory.mainInventory.length; ++i)
+		        {
+		            if (attacked.inventory.mainInventory[i] != null && attacked.inventory.mainInventory[i].getItem() == ListMisc.WateringCan)
+		            {
+		                waterCan = attacked.inventory.mainInventory[i];
+		            }
+		        }
+
+		        if(waterCan == null)
+		        	return;
+		        
+		        if(!waterCan.hasTagCompound())
+		        	waterCan.setTagCompound(new NBTTagCompound());
+		        
+		        int tears = waterCan.getTagCompound().getInteger("tears");
+		        waterCan.getTagCompound().setInteger("tears", tears + 1);
+			}
+			
 			if (props.getUsedFruit().equalsIgnoreCase("yomiyomi") && props.getZoanPoint().equalsIgnoreCase("yomi"))
 			{
 				Ability soulParade = abilityProps.getAbilityFromName(ListAttributes.SOULPARADE.getAttributeName());
