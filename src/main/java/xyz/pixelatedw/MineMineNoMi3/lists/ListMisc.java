@@ -378,11 +378,13 @@ public class ListMisc
 		WyRegistry.registerName("faction.pirate.name", "Pirate");
 		WyRegistry.registerName("faction.marine.name", "Marine");
 		WyRegistry.registerName("faction.bountyhunter.name", "Bounty Hunter");
-
+		WyRegistry.registerName("faction.revolutionary.name", "Revolutionary Army");
+		
 		WyRegistry.registerName("style.swordsman.name", "Swordsman");
 		WyRegistry.registerName("style.sniper.name", "Sniper");
 		WyRegistry.registerName("style.doctor.name", "Medic");
-
+		WyRegistry.registerName("style.art of weather.name", "Art of Weather");
+		
 		WyRegistry.registerName("quest.none.name", "None");
 		WyRegistry.registerName("gui.quests.started", "has started !");
 		WyRegistry.registerName("gui.quests.completed", "has been completed !");

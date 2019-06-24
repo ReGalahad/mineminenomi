@@ -8,10 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ResourceLocation;
 import xyz.pixelatedw.MineMineNoMi3.ID;
-import xyz.pixelatedw.MineMineNoMi3.Values;
-import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.gui.extra.GUIButtonNoTexture;
@@ -29,6 +26,7 @@ public class GUICC extends GuiScreen
 		this.player = player;
 	}
 	
+	@Override
 	public void drawScreen(int x, int y, float f)
 	{
 		drawDefaultBackground();
@@ -36,6 +34,8 @@ public class GUICC extends GuiScreen
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		ExtendedEntityData props = ExtendedEntityData.get(player);
     
+		GL11.glTranslated(20, -10, 0);
+		
 		int posX = (this.width - 256) / 2;
 		int posY = (this.height - 256) / 2;
 		
@@ -75,6 +75,13 @@ public class GUICC extends GuiScreen
 			else if(this.selectedOpt == 2)
 			{
 				Minecraft.getMinecraft().getTextureManager().bindTexture(ID.ICON_BOUNTYHUNTER);
+				drawTexturedModalRect(posX - 2, posY + 10, 0, 0, 256, 256);
+				Minecraft.getMinecraft().getTextureManager().bindTexture(ID.TEXTURE_STRINGS1);
+				drawTexturedModalRect(posX + 46, posY + 65, 0, 52, 170, 50);
+			}
+			else if(this.selectedOpt == 3)
+			{
+				Minecraft.getMinecraft().getTextureManager().bindTexture(ID.ICON_REVOLUTIONARY);
 				drawTexturedModalRect(posX - 2, posY + 10, 0, 0, 256, 256);
 				Minecraft.getMinecraft().getTextureManager().bindTexture(ID.TEXTURE_STRINGS1);
 				drawTexturedModalRect(posX + 46, posY + 65, 0, 52, 170, 50);
@@ -126,37 +133,47 @@ public class GUICC extends GuiScreen
 				drawTexturedModalRect(posX - 2, posY + 10, 0, 0, 256, 256);
 				Minecraft.getMinecraft().getTextureManager().bindTexture(ID.TEXTURE_STRINGS1);
 				drawTexturedModalRect(posX + 75, posY + 72, 109, 159, 86, 27);
-			}	
+			}
+			else if(this.selectedOpt == 3)
+			{
+				Minecraft.getMinecraft().getTextureManager().bindTexture(ID.ICON_ARTOFWEATHER);
+				drawTexturedModalRect(posX - 2, posY + 10, 0, 0, 256, 256);
+				Minecraft.getMinecraft().getTextureManager().bindTexture(ID.TEXTURE_STRINGS1);
+				drawTexturedModalRect(posX + 75, posY + 72, 109, 159, 86, 27);
+			}
 		}
 		
 		super.drawScreen(x, y, f);
 	}
 	
+	@Override
 	public void initGui()
 	{
 		int posX = (this.width - 256) / 2;
 		int posY = (this.height - 256) / 2;
 		
-		this.buttonList.add(new GUIButtonNoTexture(100, posX - 78, posY + 73, 90, 36, ""));	
-		this.buttonList.add(new GUIButtonNoTexture(101, posX - 78, (int)(posY + 73 * 1.6), 90, 36, ""));	
-		this.buttonList.add(new GUIButtonNoTexture(102, posX - 78, (int)(posY + 72 * 2.2), 90, 36, ""));
+		this.buttonList.add(new GUIButtonNoTexture(100, posX - 58, posY + 63, 90, 36, ""));	
+		this.buttonList.add(new GUIButtonNoTexture(101, posX - 58, (int)(posY + 63 * 1.6), 90, 36, ""));	
+		this.buttonList.add(new GUIButtonNoTexture(102, posX - 58, (int)(posY + 62 * 2.2), 90, 36, ""));
 			
-		this.buttonList.add(new GUIButtonNoTexture(103, posX + 15, posY + 85, 24, 100, ""));		
-		this.buttonList.add(new GUIButtonNoTexture(104, posX + 210, posY + 83, 24, 100, ""));
+		this.buttonList.add(new GUIButtonNoTexture(103, posX + 35, posY + 75, 24, 100, ""));		
+		this.buttonList.add(new GUIButtonNoTexture(104, posX + 230, posY + 73, 24, 100, ""));
 		
-		this.buttonList.add(new GUIButtonNoTexture(105, posX + 77, posY + 205, 90, 35, ""));
+		this.buttonList.add(new GUIButtonNoTexture(105, posX + 97, posY + 195, 90, 35, ""));
 	}
 
+	@Override
 	public void updateScreen()
 	{
 		if(this.page == 0)
+			maxOpt = 4;
+		if(this.page == 1)
 			maxOpt = 3;
 		if(this.page == 2)
-			maxOpt = 3;
-		if(this.page != 2)
-			maxOpt = 3;
+			maxOpt = 4;
 	}
 	
+	@Override
 	public void actionPerformed(GuiButton button)
 	{
 		ExtendedEntityData props = ExtendedEntityData.get(player);
@@ -190,6 +207,7 @@ public class GUICC extends GuiScreen
 			if(this.lastFac == 0) props.setFaction(ID.FACTION_PIRATE);
 			else if(this.lastFac == 1) props.setFaction(ID.FACTION_MARINE);
 			else if(this.lastFac == 2) props.setFaction(ID.FACTION_BOUNTYHUNTER);
+			else if(this.lastFac == 3) props.setFaction(ID.FACTION_REVOLUTIONARY);
 			
 			if(this.lastRace == 0) props.setRace(ID.RACE_HUMAN);
 			else if(this.lastRace == 1) props.setRace(ID.RACE_FISHMAN);
@@ -198,7 +216,8 @@ public class GUICC extends GuiScreen
 			if(this.lastFStyle == 0) props.setFightStyle(ID.FSTYLE_SWORDSMAN);
 			else if(this.lastFStyle == 1) props.setFightStyle(ID.FSTYLE_SNIPER);
 			else if(this.lastFStyle == 2) props.setFightStyle(ID.FSTYLE_DOCTOR);
-				
+			else if(this.lastFStyle == 3) props.setFightStyle(ID.FSTYLE_ARTOFWEATHER);
+			
 			switch(this.page)
 			{
 				case 0:
@@ -213,6 +232,9 @@ public class GUICC extends GuiScreen
 						break;
 					case 2:
 						props.setFaction(ID.FACTION_BOUNTYHUNTER);
+						break;
+					case 3:
+						props.setFaction(ID.FACTION_REVOLUTIONARY);
 						break;
 					}
 					break;
@@ -246,6 +268,9 @@ public class GUICC extends GuiScreen
 					case 2:
 						props.setFightStyle(ID.FSTYLE_DOCTOR);
 						break;
+					case 3:
+						props.setFightStyle(ID.FSTYLE_ARTOFWEATHER);
+						break;
 					}
 					break;					
 				}
@@ -270,7 +295,7 @@ public class GUICC extends GuiScreen
 			if(this.page == 1) this.selectedOpt = lastRace;
 			if(this.page == 2) this.selectedOpt = lastFStyle;		
 			
-			this.mc.displayGuiScreen((GuiScreen)this);
+			this.mc.displayGuiScreen(this);
 			break;
 			
 		case 101:
@@ -284,7 +309,7 @@ public class GUICC extends GuiScreen
 			if(this.page == 1) this.selectedOpt = lastRace;
 			if(this.page == 2) this.selectedOpt = lastFStyle;	
 			
-			this.mc.displayGuiScreen((GuiScreen)this);
+			this.mc.displayGuiScreen(this);
 			break;
 			
 		case 102:
@@ -298,12 +323,13 @@ public class GUICC extends GuiScreen
 			if(this.page == 1) this.selectedOpt = lastRace;
 			if(this.page == 2) this.selectedOpt = lastFStyle;	
 			
-			this.mc.displayGuiScreen((GuiScreen)this);
+			this.mc.displayGuiScreen(this);
 			break;
 		}
 		
 	}
 	
+	@Override
 	public boolean doesGuiPauseGame()
 	{
 		return false;

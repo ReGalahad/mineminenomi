@@ -6,6 +6,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,7 +16,6 @@ import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
-import xyz.pixelatedw.MineMineNoMi3.api.WyRenderHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
 import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
@@ -42,7 +42,7 @@ public class GUIPlayer extends GuiScreen
 		drawDefaultBackground();
 		//this.drawGradientRect(0, 0, this.width, this.height, WyHelper.hexToRGB("#FD637F").getRGB(), WyHelper.hexToRGB("#FD637F").getRGB());
 		
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		GL11.glColor4f(0.0F, 0.0F, 0.0F, 0.0F);
 		
 		int posX = (this.width - 256) / 2;
 		int posY = (this.height - 256) / 2;		
@@ -102,7 +102,8 @@ public class GUIPlayer extends GuiScreen
 			
 		}
 
-		WyRenderHelper.drawEntityOnScreen(posX + 140, posY + 180 , 68, 0, 0, this.player);
+		RenderHelper.disableStandardItemLighting();
+		//WyRenderHelper.drawEntityOnScreen(posX + 140, posY + 180 , 68, 0, 0, this.player);
 		//WyRenderHelper.drawEntityOnScreen(posX + 140, posY + 180 , 68, -50, 0, this.testEntity);
     
 		/*

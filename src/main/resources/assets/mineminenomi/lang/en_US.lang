@@ -265,6 +265,7 @@ faction.bountyhunter.name=Bounty Hunter
 faction.marine.name=Marine
 faction.n/a.name=N/A
 faction.pirate.name=Pirate
+faction.revolutionary.name=Revolutionary Army
 
 gui.abilities.name=Abilities
 gui.epithet.name=Epithets
@@ -453,6 +454,7 @@ race.fishman.name=Fishman
 race.human.name=Human
 race.n/a.name=N/A
 
+style.art of weather.name=Art of Weather
 style.doctor.name=Medic
 style.n/a.name=N/A
 style.sniper.name=Sniper
