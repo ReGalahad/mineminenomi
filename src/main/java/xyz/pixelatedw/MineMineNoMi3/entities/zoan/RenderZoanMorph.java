@@ -3,12 +3,9 @@ package xyz.pixelatedw.MineMineNoMi3.entities.zoan;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
 
-import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture.Type;
 
@@ -17,25 +14,18 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.tileentity.TileEntitySkullRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTUtil;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StringUtils;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelZoanMorph;
@@ -136,6 +126,7 @@ public class RenderZoanMorph extends Render
 			((ModelZoanMorph) this.model).getHandRenderer().render(0.0625F);
 	}
 
+	@Override
 	public void doRender(Entity entity, double x, double y, double z, float u, float v)
 	{
 		EntityLivingBase entityLiving = ((EntityLivingBase) entity);
@@ -221,9 +212,12 @@ public class RenderZoanMorph extends Render
 				return props.getZoanPoint().equalsIgnoreCase((String) x[0]);
 			}).findFirst();
 
-			if(opt == null)
+			if(opt == null || opt.get()[3] == null)
+			{
+				GL11.glPopMatrix();
 				return;
-			
+			}
+
 			float[] itemOffset = (float[]) opt.get()[3];
 						
 			GL11.glTranslatef(itemOffset[0], itemOffset[1], itemOffset[2]);
@@ -283,9 +277,9 @@ public class RenderZoanMorph extends Render
 				for (i = 0; i < itemstack.getItem().getRenderPasses(itemstack.getItemDamage()); ++i)
 				{
 					int j = itemstack.getItem().getColorFromItemStack(itemstack, i);
-					f5 = (float) (j >> 16 & 255) / 255.0F;
-					f2 = (float) (j >> 8 & 255) / 255.0F;
-					float f3 = (float) (j & 255) / 255.0F;
+					f5 = (j >> 16 & 255) / 255.0F;
+					f2 = (j >> 8 & 255) / 255.0F;
+					float f3 = (j & 255) / 255.0F;
 					GL11.glColor4f(f5, f2, f3, 1.0F);
 					this.renderManager.itemRenderer.renderItem(entity, itemstack, i);
 				}
@@ -293,9 +287,9 @@ public class RenderZoanMorph extends Render
 			else
 			{
 				i = itemstack.getItem().getColorFromItemStack(itemstack, 0);
-				float f4 = (float) (i >> 16 & 255) / 255.0F;
-				f5 = (float) (i >> 8 & 255) / 255.0F;
-				f2 = (float) (i & 255) / 255.0F;
+				float f4 = (i >> 16 & 255) / 255.0F;
+				f5 = (i >> 8 & 255) / 255.0F;
+				f2 = (i & 255) / 255.0F;
 				GL11.glColor4f(f4, f5, f2, 1.0F);
 				this.renderManager.itemRenderer.renderItem(entity, itemstack, 0);
 			}
@@ -327,7 +321,7 @@ public class RenderZoanMorph extends Render
 
 		if (entityLiving.deathTime > 0)
 		{
-			float f3 = ((float) entityLiving.deathTime + v - 1.0F) / 20.0F * 1.6F;
+			float f3 = (entityLiving.deathTime + v - 1.0F) / 20.0F * 1.6F;
 			f3 = MathHelper.sqrt_float(f3);
 
 			if (f3 > 1.0F)
@@ -340,6 +334,7 @@ public class RenderZoanMorph extends Render
 		}
 	}
 
+	@Override
 	public ResourceLocation getEntityTexture(Entity p_110775_1_)
 	{
 		return texture;

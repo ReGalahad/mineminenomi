@@ -1,37 +1,23 @@
 package xyz.pixelatedw.MineMineNoMi3.helpers;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
-import java.util.AbstractMap.SimpleEntry;
-import java.util.Map.Entry;
-import java.util.stream.Collectors;
-
-import com.google.common.collect.Multimap;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
-import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.abilities.CyborgAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.FishKarateAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.HakiAbilities;
@@ -42,7 +28,6 @@ import xyz.pixelatedw.MineMineNoMi3.abilities.WeatherAbilities;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
-import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
@@ -250,11 +235,9 @@ public class DevilFruitsHelper
 		ExtendedEntityData props = ExtendedEntityData.get(player);
 		QuestProperties questProps = QuestProperties.get(player);
 		AbilityProperties abilityProps = AbilityProperties.get(player);
-
-		abilityProps.addRacialAbility(WeatherAbilities.HEATBALL);
-		abilityProps.addRacialAbility(WeatherAbilities.COOLBALL);
-		abilityProps.addRacialAbility(WeatherAbilities.THUNDERBALL);
-				
+		
+		System.out.println(props.getFightStyle());
+		
 		if (props.isSwordsman())
 		{
 			if (!verifyIfAbilityIsBanned(SwordsmanAbilities.SHISHISHISONSON))
@@ -292,6 +275,24 @@ public class DevilFruitsHelper
 					abilityProps.addRacialAbility(SniperAbilities.RENPATSUNAMARIBOSHI);
 				if (!verifyIfAbilityIsBanned(SniperAbilities.SAKURETSUSABOTENBOSHI))
 					abilityProps.addRacialAbility(SniperAbilities.SAKURETSUSABOTENBOSHI);
+			}
+		}
+		else if (props.isWeatherWizard())
+		{
+			if (!verifyIfAbilityIsBanned(WeatherAbilities.HEATBALL))
+				abilityProps.addRacialAbility(WeatherAbilities.HEATBALL);
+			if (!verifyIfAbilityIsBanned(WeatherAbilities.COOLBALL))
+				abilityProps.addRacialAbility(WeatherAbilities.COOLBALL);
+			if (!verifyIfAbilityIsBanned(WeatherAbilities.THUNDERBALL))
+				abilityProps.addRacialAbility(WeatherAbilities.THUNDERBALL);
+			
+			if (MainConfig.enableQuestProgression)
+			{
+
+			}
+			else
+			{
+
 			}
 		}
 	}
@@ -332,7 +333,7 @@ public class DevilFruitsHelper
 	
 	public static boolean placeBlockIfAllowed(World world, int posX, int posY, int posZ, Block toPlace, int flag, String... rules)
 	{
-		Block b = world.getBlock((int) posX, (int) posY, (int) posZ);
+		Block b = world.getBlock(posX, posY, posZ);
 		List<Block> bannedBlocks = new ArrayList<Block>();
 		boolean noGriefFlag = Arrays.toString(rules).contains("nogrief");
 		
@@ -373,7 +374,7 @@ public class DevilFruitsHelper
 				{
 					Block.blockRegistry.forEach(block ->
 					{
-						bannedBlocks.remove((Block) block);
+						bannedBlocks.remove(block);
 					});
 				}
 			}

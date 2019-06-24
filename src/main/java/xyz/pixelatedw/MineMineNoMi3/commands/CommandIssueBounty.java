@@ -5,7 +5,6 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedWorldData;
@@ -42,7 +41,7 @@ public class CommandIssueBounty extends CommandBase
 		{
 			player.worldObj.loadedEntityList.stream().filter(x -> 
 			{
-				return x instanceof EntityPlayer && ExtendedEntityData.get((EntityLivingBase) x).getFaction().equalsIgnoreCase(ID.FACTION_PIRATE) && ExtendedEntityData.get((EntityLivingBase) x).getBounty() > 0;
+				return x instanceof EntityPlayer && (ExtendedEntityData.get((EntityLivingBase) x).isPirate() || ExtendedEntityData.get((EntityLivingBase) x).isRevolutionary()) && ExtendedEntityData.get((EntityLivingBase) x).getBounty() > 0;
 			}).forEach(x ->
 			{
 				EntityPlayer pirate = (EntityPlayer) x;
