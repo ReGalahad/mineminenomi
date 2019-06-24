@@ -2,7 +2,6 @@ package xyz.pixelatedw.MineMineNoMi3;
 
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.util.EnumHelper;
 
 public class ID 

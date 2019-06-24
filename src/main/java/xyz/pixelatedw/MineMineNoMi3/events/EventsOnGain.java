@@ -209,7 +209,7 @@ public class EventsOnGain
 					}
 				}
 
-				if (props.isPirate()) // TODO Revo can gain bounties and such || props.getFaction().equals(ID.FACTION_REVOLUTIONARY))
+				if (props.isPirate() || props.isRevolutionary())
 					if (plusBounty > 0)
 						if (props.getBounty() + plusBounty < Values.MAX_GENERAL)
 						{

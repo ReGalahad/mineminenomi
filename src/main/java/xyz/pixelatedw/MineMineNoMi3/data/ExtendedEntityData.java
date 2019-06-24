@@ -43,6 +43,7 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 		return this.entity;
 	}
 	
+	@Override
 	public void saveNBTData(NBTTagCompound compound) 
 	{
 		NBTTagCompound props = new NBTTagCompound();
@@ -89,6 +90,7 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 		compound.setTag(EXT_PROP_NAME, props);
 	}
 
+	@Override
 	public void loadNBTData(NBTTagCompound compound) 
 	{
 		NBTTagCompound props = (NBTTagCompound) compound.getTag(EXT_PROP_NAME);
@@ -200,6 +202,7 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 		System.out.println("");
 	}
 
+	@Override
 	public void init(Entity entity, World world) {}
 	
 	public void setCombatMode(boolean value) { this.isInCombatMode = value; }
@@ -305,6 +308,7 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 	public boolean isSwordsman() { return this.fightStyle.equalsIgnoreCase("swordsman"); }
 	public boolean isSniper() { return this.fightStyle.equalsIgnoreCase("sniper"); }
 	public boolean isMedic() { return this.fightStyle.equalsIgnoreCase("medic"); }
+	public boolean isWeatherWizard() { return this.fightStyle.equalsIgnoreCase("art of weather"); }
 	public boolean hasFightingStyle() { return !this.fightStyle.equalsIgnoreCase("n/a"); }
 	public void setFightStyle(String i) {this.fightStyle = i;}
 	

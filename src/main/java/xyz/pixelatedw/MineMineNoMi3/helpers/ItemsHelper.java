@@ -1,11 +1,10 @@
 package xyz.pixelatedw.MineMineNoMi3.helpers;
 
 import java.text.SimpleDateFormat;
+import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.AbstractMap.SimpleEntry;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
@@ -20,7 +19,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
@@ -51,7 +49,7 @@ public class ItemsHelper
     	{
     		WyHelper.getEntitiesNear(posX, posY, posZ, world, 10).stream().filter(x -> 
     		{
-    			return x instanceof EntityPlayer && ExtendedEntityData.get(x).isPirate() && worldData.getBounty(x.getCommandSenderName()) != 0;
+    			return x instanceof EntityPlayer && (ExtendedEntityData.get(x).isPirate() || ExtendedEntityData.get(x).isRevolutionary()) && worldData.getBounty(x.getCommandSenderName()) != 0;
     		}).forEach(x -> 
     		{
     			SimpleEntry<String, Long> se = new SimpleEntry<String, Long>( x.getCommandSenderName(), worldData.getBounty(x.getCommandSenderName()) );
