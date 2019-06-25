@@ -1,17 +1,14 @@
 package xyz.pixelatedw.MineMineNoMi3;
 
-import org.apache.commons.codec.language.bm.Lang;
 import org.lwjgl.input.Keyboard;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.InputEvent.KeyInputEvent;
-import cpw.mods.fml.common.gameevent.InputEvent.MouseInputEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
@@ -83,7 +80,7 @@ public class MainKeys
 				}
 
 				int keyId = 2;
-				for(KeyBinding kb : this.keyBindsCombatbar)
+				for(KeyBinding kb : MainKeys.keyBindsCombatbar)
 				{
 					if(kb.getKeyCode() < 9)
 						kb.setKeyCode(keyId);
@@ -94,7 +91,7 @@ public class MainKeys
 			}
 			else
 			{
-				for(KeyBinding kb : this.keyBindsCombatbar)
+				for(KeyBinding kb : MainKeys.keyBindsCombatbar)
 				{
 					if(kb.getKeyCode() < 9)
 						kb.setKeyCode(0);

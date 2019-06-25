@@ -13,6 +13,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.WorldInfo;
 import xyz.pixelatedw.MineMineNoMi3.ID;
@@ -41,8 +42,54 @@ public class WeatherProjectiles
 		abilitiesClassesArray.add(new Object[] {HeatBall.class, ListAttributes.HEAT_BALL});
 		abilitiesClassesArray.add(new Object[] {CoolBall.class, ListAttributes.COOL_BALL});
 		abilitiesClassesArray.add(new Object[] {ThunderBall.class, ListAttributes.THUNDER_BALL});
-		
+		abilitiesClassesArray.add(new Object[] {GustSword.class, ListAttributes.GUST_SWORD});
+
 		abilitiesClassesArray.add(new Object[] {EntityWeatherCloud.class, ListExtraAttributes.WEATHER_CLOUD});
+	}
+	
+	public static class GustSword extends AbilityProjectile
+	{
+		public GustSword(World world)
+		{super(world);}
+		
+		public GustSword(World world, double x, double y, double z)
+		{super(world, x, y, z);}
+		
+		public GustSword(World world, EntityLivingBase player, AbilityAttribute attr) 
+		{		
+			super(world, player, attr);
+		}
+		
+		@Override
+		public void onUpdate()
+		{
+			if(this.worldObj.isRemote)
+			{
+				for(int i = 0; i < 5; i++)
+				{
+					double offsetX = (new Random().nextInt(20) + 1.0D - 10.0D) / 18.0D;
+					double offsetY = (new Random().nextInt(20) + 1.0D - 10.0D) / 18.0D;
+					double offsetZ = (new Random().nextInt(20) + 1.0D - 10.0D) / 18.0D;
+				    
+					EntityParticleFX particle = new EntityParticleFX(this.worldObj, ID.PARTICLE_ICON_MOKU2, 
+							posX + offsetX, 
+							posY + offsetY, 
+							posZ + offsetZ, 
+							0, 0, 0)
+							.setParticleAge(15).setParticleScale(3F);
+					
+					MainMod.proxy.spawnCustomParticles(this, particle);				
+				}
+			}
+
+			super.onUpdate();
+		}
+		
+		@Override
+		public void tasksImapct(MovingObjectPosition hit)
+		{
+			
+		}
 	}
 	
 	public static class ThunderBall extends WeatherBall

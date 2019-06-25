@@ -8,17 +8,16 @@ import cpw.mods.fml.common.IWorldGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
-import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
-import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.Schematic;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WySchematicHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedWorldData;
@@ -31,6 +30,7 @@ public class MainWorldGen implements IWorldGenerator
 	//-8290517664781417306
 	//1682725888991043500
 	
+	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
 	{
 		switch (world.provider.dimensionId)
@@ -67,7 +67,7 @@ public class MainWorldGen implements IWorldGenerator
 		}*/
 	}
 	 
-	private void addOreSpawn(Block block, World world, Random random, int blockXPos, int blockZPos, int maxX, int maxZ, int maxVeinSize, int chancesToSpawn, int minY, int maxY)
+	public boolean addOreSpawn(Block block, World world, Random random, int blockXPos, int blockZPos, int maxX, int maxZ, int maxVeinSize, int chancesToSpawn, int minY, int maxY)
 	{
 		int maxPossY = minY + (maxY - 1);
 		int diffBtwnMinMaxY = maxY - minY;
@@ -80,15 +80,22 @@ public class MainWorldGen implements IWorldGenerator
 			BiomeGenBase biome = world.getBiomeGenForCoordsBody(posX, posZ);
 			
 			if(block == ListMisc.KairosekiOre)
+			{
 				if(biome.biomeName.equals("Ocean") || biome.biomeName.equals("Deep Ocean") || biome.biomeName.equals("Beach"))
+				{
 					new WorldGenMinable(block, maxVeinSize).generate(world, random, posX, posY, posZ);
+					return true;
+				}
+			}
 			//else
 			//	new WorldGenMinable(block.getDefaultState(), maxVeinSize).generate(world, random, new BlockPos(posX, posY, posZ));
 		}
+		
+		return false;
 	}
 	
 	
-	private void addDialSpawn(Block blockToSpawn, World world, Random random, int blockXPos, int blockZPos, int maxX, int maxZ, double rarity)
+	public boolean addDialSpawn(Block blockToSpawn, World world, Random random, int blockXPos, int blockZPos, int maxX, int maxZ, double rarity)
 	{
 		if(world.rand.nextInt(100) + world.rand.nextDouble() <= rarity)
 		{		
@@ -101,19 +108,24 @@ public class MainWorldGen implements IWorldGenerator
 			{
 				world.setBlock(posX, posY, posZ, blockToSpawn);
 				
-				//System.out.println("" + blockToSpawn.getLocalizedName() + " spawned at /tp @p " + posX + " " + (posY + 1) + " " + posZ);
+				if(WyDebug.isDebug())
+					System.out.println("" + blockToSpawn.getLocalizedName() + " spawned at /tp @p " + posX + " " + (posY + 1) + " " + posZ);
 				
 		    	if(!ID.DEV_EARLYACCESS)
 		    		WyTelemetry.addStat("spawnedDial_" + WyHelper.getFancyName(blockToSpawn.getLocalizedName()), 1);
+		    	
+		    	return true;
 			}
 			
 		}
+		
+		return false;
 	}
 	
-	private void addStructureSpawn(Schematic s, World world, Random random, int blockXPos, int blockZPos, int maxX, int maxZ, double rarity)
+	public boolean addStructureSpawn(Schematic s, World world, Random random, int blockXPos, int blockZPos, int maxX, int maxZ, double rarity)
 	{
-		if(world.rand.nextInt(100) + world.rand.nextDouble() <= rarity)
-		{		
+		if(random.nextInt(100) + random.nextDouble() <= rarity)
+		{
 			int posX = blockXPos;// + random.nextInt(maxX);
 			int posY = random.nextInt(128);
 			int posZ = blockZPos;// + random.nextInt(maxZ);			
@@ -123,7 +135,7 @@ public class MainWorldGen implements IWorldGenerator
 			{
 				if(s.getName().toLowerCase().contains("ship"))
 				{
-					if( (biome.biomeName.equals("Ocean") || biome.biomeName.equals("Deep Ocean") ) && checkForShipSpawn(s, world, posX, posY, posZ))
+					if( (biome == BiomeGenBase.ocean || biome == BiomeGenBase.deepOcean ) && checkForShipSpawn(s, world, posX, posY, posZ))
 					{
 						if(s.getName().equals("marineShip") || s.getName().equals("pyrateShip"))		
 						{
@@ -135,10 +147,14 @@ public class MainWorldGen implements IWorldGenerator
 							WySchematicHelper.build(s, world, posX, posY - 4, posZ);	
 							ListExtraStructures.buildLargeShip(posX, posY, posZ, world, s.getName());
 						}
-						//System.out.println("" + s.getName() + " spawned at /tp @p " + posX + " " + posY + " " + posZ);
+						
+						if(WyDebug.isDebug())
+							System.out.println("" + s.getName() + " spawned at /tp @p " + posX + " " + posY + " " + posZ);
 	
 				    	if(!ID.DEV_EARLYACCESS )
 				    		WyTelemetry.addStat("spawnedStructure_" + s.getName(), 1);
+				    	
+				    	return true;
 					}
 				}
 				else if(s.getName().toLowerCase().contains("dojo"))
@@ -147,18 +163,22 @@ public class MainWorldGen implements IWorldGenerator
 					
 					if(worldData.getTotalDojosSpawned() < MainConfig.maxDojoSpawn && posY > 50 && world.getBlockLightValue(posX, posY, posZ) > 10)
 					{
-						if( (biome.biomeName.equals("Beach") || biome.biomeName.equals("Plains") || biome.biomeName.equals(biome.desert.biomeName) || biome.biomeName.equals(biome.savanna.biomeName)
-								|| biome.biomeName.equals(biome.icePlains.biomeName) || biome.biomeName.equals(biome.desert.biomeName) || biome.biomeName.equals(biome.swampland.biomeName)) 
+						if( (biome == BiomeGenBase.beach || biome == BiomeGenBase.plains || biome == BiomeGenBase.desert || biome == BiomeGenBase.savanna
+								|| biome == BiomeGenBase.icePlains || biome == BiomeGenBase.swampland || biome == BiomeGenBase.taiga) 
 								&& checkForDojoSpawn(s, world, posX, posY, posZ))
 						{		
-							//System.out.println("" + s.getName() + " spawned at /tp @p " + posX + " " + posY + " " + posZ);
 							WySchematicHelper.build(s, world, posX, posY, posZ);	
 							ListExtraStructures.buildDojo(posX, posY, posZ, world);
 							worldData.countUpDojoSpawned();
 							WyNetworkHelper.sendToAll(new PacketWorldData(worldData));
 							
+							if(WyDebug.isDebug())
+								System.out.println("" + s.getName() + " spawned at /tp @p " + posX + " " + posY + " " + posZ);
+							
 					    	if(!ID.DEV_EARLYACCESS)
 					    		WyTelemetry.addStat("spawnedStructure_" + s.getName(), 1);
+					    	
+					    	return true;
 						}
 					}
 				}
@@ -167,7 +187,9 @@ public class MainWorldGen implements IWorldGenerator
 			{
 				Logger.getGlobal().log(Level.SEVERE, "Some schematic is null, this should never happen !");
 			}
-		}	
+		}
+		
+		return false;
 	}
 
 	private boolean checkForDojoSpawn(Schematic s, World world, int posX, int posY, int posZ)
