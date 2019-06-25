@@ -42,7 +42,7 @@ public class WeatherProjectiles
 		abilitiesClassesArray.add(new Object[] {CoolBall.class, ListAttributes.COOL_BALL});
 		abilitiesClassesArray.add(new Object[] {ThunderBall.class, ListAttributes.THUNDER_BALL});
 		
-		abilitiesClassesArray.add(new Object[] {EntityWeatherCloud.class, ListExtraAttributes.WEATHERCLOUD});
+		abilitiesClassesArray.add(new Object[] {EntityWeatherCloud.class, ListExtraAttributes.WEATHER_CLOUD});
 	}
 	
 	public static class ThunderBall extends WeatherBall

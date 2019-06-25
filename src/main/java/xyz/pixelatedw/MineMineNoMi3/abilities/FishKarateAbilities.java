@@ -32,13 +32,13 @@ public class FishKarateAbilities
 		Values.abilityWebAppExtraParams.put("kachiagehaisoku", new String[] {"desc", "The user delivers a powerful kick to the opponent's chin.", "dorikiRequiredForFishman", "2500"});
 	}
 	
-	public static Ability UCHIMIZU = new Uchimizu();
-	public static Ability MURASAME = new Murasame();
-	public static Ability KACHIAGEHAISOKU = new KachiageHaisoku();
-	public static Ability SAMEHADASHOTEI = new SamehadaShotei();
-	public static Ability KARAKUSAGAWARASEIKEN = new KarakusagawaraSeiken();
+	public static final Ability UCHIMIZU = new Uchimizu();
+	public static final Ability MURASAME = new Murasame();
+	public static final Ability KACHIAGE_HAISOKU = new KachiageHaisoku();
+	public static final Ability SAMEHADA_SHOTEI = new SamehadaShotei();
+	public static final Ability KARAKUSAGAWARA_SEIKEN = new KarakusagawaraSeiken();
 	
-	public static Ability[] abilitiesArray = new Ability[] {UCHIMIZU, MURASAME, SAMEHADASHOTEI, KARAKUSAGAWARASEIKEN, KACHIAGEHAISOKU};
+	public static Ability[] abilitiesArray = new Ability[] {UCHIMIZU, MURASAME, SAMEHADA_SHOTEI, KARAKUSAGAWARA_SEIKEN, KACHIAGE_HAISOKU};
 	
 	public static class Uchimizu extends Ability
 	{

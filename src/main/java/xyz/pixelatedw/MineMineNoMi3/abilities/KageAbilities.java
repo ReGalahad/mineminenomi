@@ -149,7 +149,7 @@ public class KageAbilities
 					double j = mop.blockY;
 					double k = mop.blockZ;
 
-					TsunotokagePillar pillar = new TsunotokagePillar(player.worldObj, player, ListExtraAttributes.TSUNOTOKAGEPILLAR);
+					TsunotokagePillar pillar = new TsunotokagePillar(player.worldObj, player, ListExtraAttributes.TSUNOTOKAGE_PILLAR);
 					pillar.setLocationAndAngles(i, j + 1, k, 0, 0);
 					pillar.motionX = 0;
 					pillar.motionZ = 0;

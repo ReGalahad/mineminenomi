@@ -31,14 +31,14 @@ public class EntityAISharpshooter extends EntityAIBase
 		switch(bulletType)
 		{
 		case 0:
-			bullet = ListExtraAttributes.NORMALBULLET.setProjectileDamage(4);
+			bullet = ListExtraAttributes.NORMAL_BULLET.setProjectileDamage(4);
 			break;
 		case 1:
-			bullet = ListExtraAttributes.KAIROSEKIBULLET.setProjectileDamage(6);
+			bullet = ListExtraAttributes.KAIROSEKI_BULLET.setProjectileDamage(6);
 			break;
 			
 		default:
-			bullet = ListExtraAttributes.NORMALBULLET.setProjectileDamage(4);
+			bullet = ListExtraAttributes.NORMAL_BULLET.setProjectileDamage(4);
 			break;
 		}
 		
@@ -75,8 +75,8 @@ public class EntityAISharpshooter extends EntityAIBase
 	    		double d3 = theEntity.getAttackTarget().posZ - theEntity.posZ;
 	
 				AbilityProjectile proj;
-				if(bullet == ListExtraAttributes.NORMALBULLET) proj = new ExtraProjectiles.NormalBullet(theEntity.worldObj, theEntity, bullet);
-				else if(bullet == ListExtraAttributes.KAIROSEKIBULLET) proj = new ExtraProjectiles.KairosekiBullet(theEntity.worldObj, theEntity, bullet);
+				if(bullet == ListExtraAttributes.NORMAL_BULLET) proj = new ExtraProjectiles.NormalBullet(theEntity.worldObj, theEntity, bullet);
+				else if(bullet == ListExtraAttributes.KAIROSEKI_BULLET) proj = new ExtraProjectiles.KairosekiBullet(theEntity.worldObj, theEntity, bullet);
 				else proj = new ExtraProjectiles.NormalBullet(theEntity.worldObj, theEntity, bullet);
 				
 				proj.posY = theEntity.posY + (double)(theEntity.height / 2.0F) + 0.5D;

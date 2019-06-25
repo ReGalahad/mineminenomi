@@ -16,12 +16,12 @@ public class SniperAbilities
 		Values.abilityWebAppExtraParams.put("sakuretsusabotenboshi", new String[] {"desc", "The fired projectile explodes on impact and creates cacti arond the target, to trap them."});
 	}
 
-	public static Ability KAENBOSHI = new KaenBoshi();
-	public static Ability KEMURIBOSHI = new KemuriBoshi();
-	public static Ability RENPATSUNAMARIBOSHI = new RenpatsuNamariBoshi();
-	public static Ability SAKURETSUSABOTENBOSHI = new SakuretsuSabotenBoshi();
+	public static final Ability KAEN_BOSHI = new KaenBoshi();
+	public static final Ability KEMURI_BOSHI = new KemuriBoshi();
+	public static final Ability RENPATSU_NAMARI_BOSHI = new RenpatsuNamariBoshi();
+	public static final Ability SAKURETSU_SABOTEN_BOSHI = new SakuretsuSabotenBoshi();
 	
-	public static Ability[] abilitiesArray = new Ability[] {KAENBOSHI, KEMURIBOSHI, RENPATSUNAMARIBOSHI, SAKURETSUSABOTENBOSHI};
+	public static Ability[] abilitiesArray = new Ability[] {KAEN_BOSHI, KEMURI_BOSHI, RENPATSU_NAMARI_BOSHI, SAKURETSU_SABOTEN_BOSHI};
 	
 	public static class SakuretsuSabotenBoshi extends Ability
 	{

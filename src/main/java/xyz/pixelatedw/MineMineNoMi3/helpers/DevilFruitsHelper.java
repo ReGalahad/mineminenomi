@@ -244,23 +244,23 @@ public class DevilFruitsHelper
 				
 		if (props.isSwordsman())
 		{
-			verifyAndGiveAbility(SwordsmanAbilities.SHISHISHISONSON, abilityProps);
+			verifyAndGiveAbility(SwordsmanAbilities.SHI_SHISHI_SONSON, abilityProps);
 
 			if (MainConfig.enableQuestProgression)
 			{
-				if (questProps.hasQuestCompleted(ListQuests.swordsmanProgression04) && !verifyIfAbilityIsBanned(SwordsmanAbilities.SANBYAKUROKUJUPOUNDHO))
-					abilityProps.addRacialAbility(SwordsmanAbilities.SANBYAKUROKUJUPOUNDHO);
+				if (questProps.hasQuestCompleted(ListQuests.swordsmanProgression04) && !verifyIfAbilityIsBanned(SwordsmanAbilities.SANBYAKUROKUJU_POUND_HO))
+					abilityProps.addRacialAbility(SwordsmanAbilities.SANBYAKUROKUJU_POUND_HO);
 			}
 			else
 			{
-				verifyAndGiveAbility(SwordsmanAbilities.SANBYAKUROKUJUPOUNDHO, abilityProps);
+				verifyAndGiveAbility(SwordsmanAbilities.SANBYAKUROKUJU_POUND_HO, abilityProps);
 				verifyAndGiveAbility(SwordsmanAbilities.YAKKODORI, abilityProps);
 				verifyAndGiveAbility(SwordsmanAbilities.OTATSUMAKI, abilityProps);
 			}
 		}
 		else if (props.isSniper())
 		{
-			verifyAndGiveAbility(SniperAbilities.KAENBOSHI, abilityProps);
+			verifyAndGiveAbility(SniperAbilities.KAEN_BOSHI, abilityProps);
 
 			if (MainConfig.enableQuestProgression)
 			{
@@ -268,16 +268,16 @@ public class DevilFruitsHelper
 			}
 			else
 			{
-				verifyAndGiveAbility(SniperAbilities.KEMURIBOSHI, abilityProps);
-				verifyAndGiveAbility(SniperAbilities.RENPATSUNAMARIBOSHI, abilityProps);
-				verifyAndGiveAbility(SniperAbilities.SAKURETSUSABOTENBOSHI, abilityProps);
+				verifyAndGiveAbility(SniperAbilities.KEMURI_BOSHI, abilityProps);
+				verifyAndGiveAbility(SniperAbilities.RENPATSU_NAMARI_BOSHI, abilityProps);
+				verifyAndGiveAbility(SniperAbilities.SAKURETSU_SABOTEN_BOSHI, abilityProps);
 			}
 		}
 		else if (props.isWeatherWizard())
 		{
-			verifyAndGiveAbility(WeatherAbilities.HEATBALL, abilityProps);
-			verifyAndGiveAbility(WeatherAbilities.COOLBALL, abilityProps);
-			verifyAndGiveAbility(WeatherAbilities.THUNDERBALL, abilityProps);
+			verifyAndGiveAbility(WeatherAbilities.HEAT_BALL, abilityProps);
+			verifyAndGiveAbility(WeatherAbilities.COOL_BALL, abilityProps);
+			verifyAndGiveAbility(WeatherAbilities.THUNDER_BALL, abilityProps);
 			
 			if (MainConfig.enableQuestProgression)
 			{

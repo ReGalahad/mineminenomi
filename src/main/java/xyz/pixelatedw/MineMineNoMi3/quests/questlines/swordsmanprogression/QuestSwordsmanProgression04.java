@@ -61,7 +61,7 @@ public class QuestSwordsmanProgression04 extends Quest implements IHitCounterQue
 		AbilityProperties abilityProps = AbilityProperties.get(player);
 		
 		if(MainConfig.enableQuestProgression)
-			abilityProps.addRacialAbility(SwordsmanAbilities.SANBYAKUROKUJUPOUNDHO);
+			abilityProps.addRacialAbility(SwordsmanAbilities.SANBYAKUROKUJU_POUND_HO);
 		
 		super.finishQuest(player);
 	}
