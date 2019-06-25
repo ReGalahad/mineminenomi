@@ -1,12 +1,16 @@
-buildscript {
-    repositories {
+buildscript 
+{
+    repositories 
+	{
         mavenCentral()
-        maven {
+        maven 
+		{
             name = "forge"
             url = "http://files.minecraftforge.net/maven"
         }
     }
-    dependencies {
+    dependencies 
+	{
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
     }
 }
@@ -42,9 +46,10 @@ def getVersion()
     }
 }
 
-minecraft {
+minecraft 
+{
     version = "1.7.10-10.13.4.1614-1.7.10"
-    runDir = "eclipse"
+    runDir = "run"
 }
 
 processResources
@@ -61,4 +66,9 @@ processResources
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
+}
+
+dependencies
+{
+
 }

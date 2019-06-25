@@ -14,6 +14,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.WeatherProjectil
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityMirageClone;
 import xyz.pixelatedw.MineMineNoMi3.items.weapons.ClimaTact;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
+import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 
 public class WeatherAbilities
@@ -22,7 +23,7 @@ public class WeatherAbilities
 	public static final Ability HEAT_BALL = new HeatBall();
 	public static final Ability COOL_BALL = new CoolBall();
 	public static final Ability THUNDER_BALL = new ThunderBall();
-	public static final Ability GUST_SWORD = new ThunderBall();
+	public static final Ability GUST_SWORD = new GustSword();
 	
 	public static Ability[] abilitiesArray = new Ability[] {HEAT_BALL, COOL_BALL, THUNDER_BALL, GUST_SWORD};	
 
@@ -36,7 +37,11 @@ public class WeatherAbilities
 		@Override
 		public void use(EntityPlayer player)
 		{
-			
+			if(player.inventory.getCurrentItem() == null || (player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() != ListMisc.PerfectClimaTact))
+				return;
+
+			this.projectile = new WeatherProjectiles.GustSword(player.worldObj, player, attr);
+			super.use(player);
 		}
 	}
 	

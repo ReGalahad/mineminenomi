@@ -285,7 +285,7 @@ public class DevilFruitsHelper
 			}
 			else
 			{
-
+				verifyAndGiveAbility(WeatherAbilities.GUST_SWORD, abilityProps);
 			}
 		}
 	}
