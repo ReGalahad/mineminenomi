@@ -65,7 +65,7 @@ public class Kabuto extends Item
 
 			if(f > 0.85)
 			{
-				AbilityProjectile entityarrow = new ExtraProjectiles.PopGreen(world, player, ListExtraAttributes.POPGREEN);
+				AbilityProjectile entityarrow = new ExtraProjectiles.PopGreen(world, player, ListExtraAttributes.POP_GREEN);
 	
 				world.playSoundAtEntity(player, "random.bow", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
 	

@@ -3,19 +3,13 @@ package xyz.pixelatedw.MineMineNoMi3.abilities;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
-import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.Values;
-import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper.Direction;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
-import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.RokushikiProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
@@ -34,12 +28,12 @@ public class RokushikiAbilities
 		Values.abilityWebAppExtraParams.put("kamie", new String[] {"desc", "Maked the user's body flexible in order to avoid attacks.", "dorikiRequiredForHumans", "6000"});
 	}
 	
-	public static Ability SORU = new Soru();
-	public static Ability TEKKAI = new Tekkai();
-	public static Ability GEPPO = new Geppo();
-	public static Ability RANKYAKU = new Rankyaku();
-	public static Ability SHIGAN = new Shigan();
-	public static Ability KAMIE = new Kamie();
+	public static final Ability SORU = new Soru();
+	public static final Ability TEKKAI = new Tekkai();
+	public static final Ability GEPPO = new Geppo();
+	public static final Ability RANKYAKU = new Rankyaku();
+	public static final Ability SHIGAN = new Shigan();
+	public static final Ability KAMIE = new Kamie();
 	
 	public static Ability[] abilitiesArray = new Ability[] {SORU, TEKKAI, GEPPO, RANKYAKU, SHIGAN, KAMIE};
 	
@@ -58,6 +52,7 @@ public class RokushikiAbilities
 			super(ListAttributes.TEKKAI); 
 		}
 		
+		@Override
 		public void duringPassive(EntityPlayer player, int passiveTimer)
 		{
 			if(passiveTimer > 1200)
@@ -69,6 +64,7 @@ public class RokushikiAbilities
 			}
 		}
 		
+		@Override
 		public void endPassive(EntityPlayer player)
 		{
 			this.startCooldown();
@@ -83,6 +79,7 @@ public class RokushikiAbilities
 			super(ListAttributes.GEPPO); 
 		}
 		
+		@Override
 		public void use(EntityPlayer player)
 		{
 			if(!this.isOnCooldown)
@@ -128,6 +125,7 @@ public class RokushikiAbilities
 			super(ListAttributes.RANKYAKU); 
 		}
 		
+		@Override
 		public void use(EntityPlayer player)
 		{
 			this.projectile = new RokushikiProjectiles.Rankyaku(player.worldObj, player, ListAttributes.RANKYAKU);
@@ -143,6 +141,7 @@ public class RokushikiAbilities
 			super(ListAttributes.SHIGAN); 
 		}
 		
+		@Override
 		public void hitEntity(EntityPlayer player, EntityLivingBase target) 
 		{
 			super.hitEntity(player, target);
@@ -157,6 +156,7 @@ public class RokushikiAbilities
 			super(ListAttributes.KAMIE); 
 		}
 		
+		@Override
 		public void duringPassive(EntityPlayer player, int passiveTimer)
 		{
 			if(passiveTimer > 400)
@@ -168,6 +168,7 @@ public class RokushikiAbilities
 			}
 		}
 		
+		@Override
 		public void endPassive(EntityPlayer player)
 		{
 			this.startCooldown();

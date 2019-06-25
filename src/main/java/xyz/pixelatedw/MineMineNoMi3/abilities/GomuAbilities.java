@@ -223,13 +223,13 @@ public class GomuAbilities
 				{
 					AbilityProjectile proj = null;
 					if(type == 0)
-						proj = new GomuProjectiles.GomuGomuNoGatling(player.worldObj, player, ListExtraAttributes.GOMUGOMUNOGATLING);
+						proj = new GomuProjectiles.GomuGomuNoGatling(player.worldObj, player, ListExtraAttributes.GOMU_GOMU_NO_GATLING);
 					else if(type == 1)
-						proj = new GomuProjectiles.GomuGomuNoJetGatling(player.worldObj, player, ListExtraAttributes.GOMUGOMUNOJETGATLING);
+						proj = new GomuProjectiles.GomuGomuNoJetGatling(player.worldObj, player, ListExtraAttributes.GOMU_GOMU_NO_JET_GATLING);
 					else if(type == 2)
-						proj = new GomuProjectiles.GomuGomuNoElephantGatling(player.worldObj, player, ListExtraAttributes.GOMUGOMUNOELEPHANTGATLING);
+						proj = new GomuProjectiles.GomuGomuNoElephantGatling(player.worldObj, player, ListExtraAttributes.GOMU_GOMU_NO_ELEPHANT_GATLING);
 					else if(type == 3)
-						proj = new GomuProjectiles.GomuGomuNoKongOrgan(player.worldObj, player, ListExtraAttributes.GOMUGOMUNOKONGORGAN);
+						proj = new GomuProjectiles.GomuGomuNoKongOrgan(player.worldObj, player, ListExtraAttributes.GOMU_GOMU_NO_KONG_ORGAN);
 					
 					proj.setLocationAndAngles(
 							player.posX + WyMathHelper.randomWithRange(-projectileSpace, projectileSpace) + player.worldObj.rand.nextDouble(), 
@@ -301,22 +301,22 @@ public class GomuAbilities
 			switch(props.getGear())
 			{
 				case 1:
-					this.projectile = new GomuProjectiles.GomuGomuNoBazooka(player.worldObj, player, ListExtraAttributes.GOMUGOMUNOBAZOOKA);
+					this.projectile = new GomuProjectiles.GomuGomuNoBazooka(player.worldObj, player, ListExtraAttributes.GOMU_GOMU_NO_BAZOOKA);
 					this.attr.setAbilityCooldown(12);
 					this.attr.setAbilityCharges(18);
 					break;
 				case 2:
-					this.projectile = new GomuProjectiles.GomuGomuNoJetBazooka(player.worldObj, player, ListExtraAttributes.GOMUGOMUNOJETBAZOOKA);
+					this.projectile = new GomuProjectiles.GomuGomuNoJetBazooka(player.worldObj, player, ListExtraAttributes.GOMU_GOMU_NO_JET_BAZOOKA);
 					this.attr.setAbilityCooldown(6);
 					this.attr.setAbilityCharges(13);
 					break;
 				case 3:
-					this.projectile = new GomuProjectiles.GomuGomuNoGrizzlyMagnum(player.worldObj, player, ListExtraAttributes.GOMUGOMUNOGRIZZLYMAGNUM);
+					this.projectile = new GomuProjectiles.GomuGomuNoGrizzlyMagnum(player.worldObj, player, ListExtraAttributes.GOMU_GOMU_NO_GRIZZLY_MAGNUM);
 					this.attr.setAbilityCooldown(20);
 					this.attr.setAbilityCharges(40);
 					break;
 				case 4:
-					this.projectile = new GomuProjectiles.GomuGomuNoLeoBazooka(player.worldObj, player, ListExtraAttributes.GOMUGOMUNOLEOBAZOOKA);
+					this.projectile = new GomuProjectiles.GomuGomuNoLeoBazooka(player.worldObj, player, ListExtraAttributes.GOMU_GOMU_NO_LEO_BAZOOKA);
 					this.attr.setAbilityCooldown(30);
 					this.attr.setAbilityCharges(40);
 					break;
@@ -341,22 +341,22 @@ public class GomuAbilities
 			{
 				case 1:
 					if(MainConfig.enableAnimeScreaming) this.attr.setAbilityDisplayName("Gomu Gomu no Pistol");
-					this.projectile = new GomuProjectiles.GomuGomuNoPistol(player.worldObj, player, ListExtraAttributes.GOMUGOMUNOPISTOL);
+					this.projectile = new GomuProjectiles.GomuGomuNoPistol(player.worldObj, player, ListExtraAttributes.GOMU_GOMU_NO_PISTOL);
 					this.attr.setAbilityCooldown(8);
 					break;
 				case 2:
 					if(MainConfig.enableAnimeScreaming) this.attr.setAbilityDisplayName("Gomu Gomu no Jet Pistol");
-					this.projectile = new GomuProjectiles.GomuGomuNoJetPistol(player.worldObj, player, ListExtraAttributes.GOMUGOMUNOJETPISTOL);
+					this.projectile = new GomuProjectiles.GomuGomuNoJetPistol(player.worldObj, player, ListExtraAttributes.GOMU_GOMU_NO_JET_PISTOL);
 					this.attr.setAbilityCooldown(5);
 					break;
 				case 3:
 					if(MainConfig.enableAnimeScreaming) this.attr.setAbilityDisplayName("Gomu Gomu no Elephant Gun");
-					this.projectile = new GomuProjectiles.GomuGomuNoElephantGun(player.worldObj, player, ListExtraAttributes.GOMUGOMUNOELEPHANTGUN);
+					this.projectile = new GomuProjectiles.GomuGomuNoElephantGun(player.worldObj, player, ListExtraAttributes.GOMU_GOMU_NO_ELEPHANT_GUN);
 					this.attr.setAbilityCooldown(15);
 					break;
 				case 4:
 					if(MainConfig.enableAnimeScreaming) this.attr.setAbilityDisplayName("Gomu Gomu no Kong Gun");
-					this.projectile = new GomuProjectiles.GomuGomuNoKongGun(player.worldObj, player, ListExtraAttributes.GOMUGOMUNOKONGGUN);
+					this.projectile = new GomuProjectiles.GomuGomuNoKongGun(player.worldObj, player, ListExtraAttributes.GOMU_GOMU_NO_KONG_GUN);
 					this.attr.setAbilityCooldown(30);
 					break;
 			}

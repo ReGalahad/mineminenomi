@@ -27,11 +27,11 @@ public class ExtraProjectiles
 	
 	static
 	{
-		abilitiesClassesArray.add(new Object[] {NormalBullet.class, ListExtraAttributes.NORMALBULLET});
-		abilitiesClassesArray.add(new Object[] {KairosekiBullet.class, ListExtraAttributes.KAIROSEKIBULLET});
-		abilitiesClassesArray.add(new Object[] {AxeDialProjectile.class, ListExtraAttributes.DIALAXE});
-		abilitiesClassesArray.add(new Object[] {PopGreen.class, ListExtraAttributes.POPGREEN});
-		abilitiesClassesArray.add(new Object[] {KujaArrow.class, ListExtraAttributes.KUJAARROW});
+		abilitiesClassesArray.add(new Object[] {NormalBullet.class, ListExtraAttributes.NORMAL_BULLET});
+		abilitiesClassesArray.add(new Object[] {KairosekiBullet.class, ListExtraAttributes.KAIROSEKI_BULLET});
+		abilitiesClassesArray.add(new Object[] {AxeDialProjectile.class, ListExtraAttributes.DIAL_AXE});
+		abilitiesClassesArray.add(new Object[] {PopGreen.class, ListExtraAttributes.POP_GREEN});
+		abilitiesClassesArray.add(new Object[] {KujaArrow.class, ListExtraAttributes.KUJA_ARROW});
 	}
 	
 	public static class EntityCloud extends Entity

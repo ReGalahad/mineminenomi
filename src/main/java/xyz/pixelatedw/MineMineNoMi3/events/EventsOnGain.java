@@ -53,19 +53,19 @@ public class EventsOnGain
 		{
 			gainAbility(event.player, 800, FishKarateAbilities.UCHIMIZU);
 			gainAbility(event.player, 2000, FishKarateAbilities.MURASAME);
-			gainAbility(event.player, 2500, FishKarateAbilities.KACHIAGEHAISOKU);
-			gainAbility(event.player, 3000, FishKarateAbilities.SAMEHADASHOTEI);
+			gainAbility(event.player, 2500, FishKarateAbilities.KACHIAGE_HAISOKU);
+			gainAbility(event.player, 3000, FishKarateAbilities.SAMEHADA_SHOTEI);
 			gainAbility(event.player, 4000, HakiAbilities.KENBUNSHOKUHAKI);
-			gainAbility(event.player, 7500, FishKarateAbilities.KARAKUSAGAWARASEIKEN);
+			gainAbility(event.player, 7500, FishKarateAbilities.KARAKUSAGAWARA_SEIKEN);
 			gainAbility(event.player, 9000, HakiAbilities.BUSOSHOKUHAKI);
 		}
 		else if(event.props.isCyborg())
 		{
-			gainAbility(event.player, 0, CyborgAbilities.FRESHFIRE);
-			gainAbility(event.player, 0, CyborgAbilities.COLAOVERDRIVE);
-			gainAbility(event.player, 0, CyborgAbilities.STRONGRIGHT);
-			gainAbility(event.player, 0, CyborgAbilities.RADICALBEAM);
-			gainAbility(event.player, 0, CyborgAbilities.COUPDEVENT);
+			gainAbility(event.player, 0, CyborgAbilities.FRESH_FIRE);
+			gainAbility(event.player, 0, CyborgAbilities.COLA_OVERDRIVE);
+			gainAbility(event.player, 0, CyborgAbilities.STRONG_RIGHT);
+			gainAbility(event.player, 0, CyborgAbilities.RADICAL_BEAM);
+			gainAbility(event.player, 0, CyborgAbilities.COUP_DE_VENT);
 			gainAbility(event.player, 5500, HakiAbilities.KENBUNSHOKUHAKI);
 			gainAbility(event.player, 8500, HakiAbilities.BUSOSHOKUHAKI);
 		}

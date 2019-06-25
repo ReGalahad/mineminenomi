@@ -33,53 +33,53 @@ public class GomuProjectiles
 
 		abilitiesClassesArray.add(new Object[]
 		{
-				GomuGomuNoPistol.class, ListExtraAttributes.GOMUGOMUNOPISTOL
+				GomuGomuNoPistol.class, ListExtraAttributes.GOMU_GOMU_NO_PISTOL
 		});
 		abilitiesClassesArray.add(new Object[]
 		{
-				GomuGomuNoJetPistol.class, ListExtraAttributes.GOMUGOMUNOJETPISTOL
+				GomuGomuNoJetPistol.class, ListExtraAttributes.GOMU_GOMU_NO_JET_PISTOL
 		});
 		abilitiesClassesArray.add(new Object[]
 		{
-				GomuGomuNoElephantGun.class, ListExtraAttributes.GOMUGOMUNOELEPHANTGUN
+				GomuGomuNoElephantGun.class, ListExtraAttributes.GOMU_GOMU_NO_ELEPHANT_GUN
 		});
 		abilitiesClassesArray.add(new Object[]
 		{
-				GomuGomuNoKongGun.class, ListExtraAttributes.GOMUGOMUNOKONGGUN
-		});
-
-		abilitiesClassesArray.add(new Object[]
-		{
-				GomuGomuNoBazooka.class, ListExtraAttributes.GOMUGOMUNOBAZOOKA
-		});
-		abilitiesClassesArray.add(new Object[]
-		{
-				GomuGomuNoJetBazooka.class, ListExtraAttributes.GOMUGOMUNOJETBAZOOKA
-		});
-		abilitiesClassesArray.add(new Object[]
-		{
-				GomuGomuNoGrizzlyMagnum.class, ListExtraAttributes.GOMUGOMUNOGRIZZLYMAGNUM
-		});
-		abilitiesClassesArray.add(new Object[]
-		{
-				GomuGomuNoLeoBazooka.class, ListExtraAttributes.GOMUGOMUNOLEOBAZOOKA
+				GomuGomuNoKongGun.class, ListExtraAttributes.GOMU_GOMU_NO_KONG_GUN
 		});
 
 		abilitiesClassesArray.add(new Object[]
 		{
-				GomuGomuNoGatling.class, ListExtraAttributes.GOMUGOMUNOGATLING
+				GomuGomuNoBazooka.class, ListExtraAttributes.GOMU_GOMU_NO_BAZOOKA
 		});
 		abilitiesClassesArray.add(new Object[]
 		{
-				GomuGomuNoJetGatling.class, ListExtraAttributes.GOMUGOMUNOJETGATLING
+				GomuGomuNoJetBazooka.class, ListExtraAttributes.GOMU_GOMU_NO_JET_BAZOOKA
 		});
 		abilitiesClassesArray.add(new Object[]
 		{
-				GomuGomuNoElephantGatling.class, ListExtraAttributes.GOMUGOMUNOELEPHANTGATLING
+				GomuGomuNoGrizzlyMagnum.class, ListExtraAttributes.GOMU_GOMU_NO_GRIZZLY_MAGNUM
 		});
 		abilitiesClassesArray.add(new Object[]
 		{
-				GomuGomuNoKongOrgan.class, ListExtraAttributes.GOMUGOMUNOKONGORGAN
+				GomuGomuNoLeoBazooka.class, ListExtraAttributes.GOMU_GOMU_NO_LEO_BAZOOKA
+		});
+
+		abilitiesClassesArray.add(new Object[]
+		{
+				GomuGomuNoGatling.class, ListExtraAttributes.GOMU_GOMU_NO_GATLING
+		});
+		abilitiesClassesArray.add(new Object[]
+		{
+				GomuGomuNoJetGatling.class, ListExtraAttributes.GOMU_GOMU_NO_JET_GATLING
+		});
+		abilitiesClassesArray.add(new Object[]
+		{
+				GomuGomuNoElephantGatling.class, ListExtraAttributes.GOMU_GOMU_NO_ELEPHANT_GATLING
+		});
+		abilitiesClassesArray.add(new Object[]
+		{
+				GomuGomuNoKongOrgan.class, ListExtraAttributes.GOMU_GOMU_NO_KONG_ORGAN
 		});
 	}
 

@@ -31,12 +31,12 @@ public class SwordsmanAbilities
 		Values.abilityWebAppExtraParams.put("otatsumaki", new String[] {"desc", "By spinning, the user creates a small tornado, which slashes and weakens nearby opponents."});
 	}
 	
-	public static Ability SHISHISHISONSON = new ShiShishiSonson();
-	public static Ability SANBYAKUROKUJUPOUNDHO = new SanbyakurokujuPoundHo();
-	public static Ability YAKKODORI = new Yakkodori();
-	public static Ability OTATSUMAKI = new OTatsumaki();
+	public static final Ability SHI_SHISHI_SONSON = new ShiShishiSonson();
+	public static final Ability SANBYAKUROKUJU_POUND_HO = new SanbyakurokujuPoundHo();
+	public static final Ability YAKKODORI = new Yakkodori();
+	public static final Ability OTATSUMAKI = new OTatsumaki();
 	
-	public static Ability[] abilitiesArray = new Ability[] {SHISHISHISONSON, SANBYAKUROKUJUPOUNDHO, YAKKODORI, OTATSUMAKI};
+	public static Ability[] abilitiesArray = new Ability[] {SHI_SHISHI_SONSON, SANBYAKUROKUJU_POUND_HO, YAKKODORI, OTATSUMAKI};
 	
 	public static class OTatsumaki extends Ability
 	{

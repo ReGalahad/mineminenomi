@@ -30,7 +30,7 @@ public class DialAxe extends Item
 		{
 	    	if(!player.isSneaking())
 	    	{
-	    		AxeDialProjectile proj = new AxeDialProjectile(player.worldObj, player, ListExtraAttributes.DIALAXE);
+	    		AxeDialProjectile proj = new AxeDialProjectile(player.worldObj, player, ListExtraAttributes.DIAL_AXE);
 				
 	    		world.spawnEntityInWorld(proj);
 	    		

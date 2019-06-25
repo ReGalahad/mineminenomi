@@ -19,12 +19,12 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 public class WeatherAbilities
 {
 	
-	public static Ability HEATBALL = new HeatBall();
-	public static Ability COOLBALL = new CoolBall();
-	public static Ability THUNDERBALL = new ThunderBall();
-	public static Ability GUSTSWORD = new ThunderBall();
+	public static final Ability HEAT_BALL = new HeatBall();
+	public static final Ability COOL_BALL = new CoolBall();
+	public static final Ability THUNDER_BALL = new ThunderBall();
+	public static final Ability GUST_SWORD = new ThunderBall();
 	
-	public static Ability[] abilitiesArray = new Ability[] {HEATBALL, COOLBALL, THUNDERBALL, GUSTSWORD};	
+	public static Ability[] abilitiesArray = new Ability[] {HEAT_BALL, COOL_BALL, THUNDER_BALL, GUST_SWORD};	
 
 	public static class GustSword extends Ability
 	{

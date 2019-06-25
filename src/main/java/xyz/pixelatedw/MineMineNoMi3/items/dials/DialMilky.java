@@ -28,7 +28,7 @@ public class DialMilky extends Item
 		{
 	    	if(!player.isSneaking()) //GuiScreen.isShiftKeyDown()
 	    	{
-	    		MilkyDialProjectile proj = new MilkyDialProjectile(player.worldObj, player, ListExtraAttributes.DIALMILKY);
+	    		MilkyDialProjectile proj = new MilkyDialProjectile(player.worldObj, player, ListExtraAttributes.DIAL_MILKY);
 				
 	    		world.spawnEntityInWorld(proj);
 				

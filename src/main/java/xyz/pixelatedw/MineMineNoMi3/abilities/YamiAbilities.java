@@ -143,7 +143,7 @@ public class YamiAbilities
 
 						while(liberationCount > 0)
 						{
-							AbilityProjectile proj = new YamiProjectiles.Liberation(player.worldObj, player, ListExtraAttributes.LIBERATIONBLOCK);	
+							AbilityProjectile proj = new YamiProjectiles.Liberation(player.worldObj, player, ListExtraAttributes.LIBERATION_BLOCK);	
 							proj.setLocationAndAngles(x + WyMathHelper.randomWithRange(-3, 3), (y + 14) + WyMathHelper.randomWithRange(0, 4), z + WyMathHelper.randomWithRange(-3, 3), 0, 0);
 							proj.motionX = 0;
 							proj.motionZ = 0;

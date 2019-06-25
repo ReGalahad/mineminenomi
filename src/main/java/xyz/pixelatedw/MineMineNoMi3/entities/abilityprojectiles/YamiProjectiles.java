@@ -25,7 +25,7 @@ public class YamiProjectiles
 	
 	static
 	{
-		abilitiesClassesArray.add(new Object[] {Liberation.class, ListExtraAttributes.LIBERATIONBLOCK});
+		abilitiesClassesArray.add(new Object[] {Liberation.class, ListExtraAttributes.LIBERATION_BLOCK});
 		abilitiesClassesArray.add(new Object[] {DarkMatter.class, ListAttributes.DARK_MATTER});
 	}
 	

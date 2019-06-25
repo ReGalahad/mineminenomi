@@ -24,13 +24,13 @@ public class GoroProjectiles
 	
 	static
 	{
-		abilitiesClassesArray.add(new Object[] {ElThorThunder.class, ListExtraAttributes.ELTHORTHUNDER});
+		abilitiesClassesArray.add(new Object[] {ElThorThunder.class, ListExtraAttributes.EL_THOR_THUNDER});
 		abilitiesClassesArray.add(new Object[] {Sango.class, ListAttributes.SANGO});
 		abilitiesClassesArray.add(new Object[] {Raigo.class, ListAttributes.RAIGO});
-		abilitiesClassesArray.add(new Object[] {VoltVari5Million.class, ListExtraAttributes.VOLTVARI5MILLION});
-		abilitiesClassesArray.add(new Object[] {VoltVari20Million.class, ListExtraAttributes.VOLTVARI20MILLION});
-		abilitiesClassesArray.add(new Object[] {VoltVari60Million.class, ListExtraAttributes.VOLTVARI60MILLION});
-		abilitiesClassesArray.add(new Object[] {VoltVari200Million.class, ListExtraAttributes.VOLTVARI200MILLION});
+		abilitiesClassesArray.add(new Object[] {VoltVari5Million.class, ListExtraAttributes.VOLT_VARI_5_MILLION});
+		abilitiesClassesArray.add(new Object[] {VoltVari20Million.class, ListExtraAttributes.VOLT_VARI_20_MILLION});
+		abilitiesClassesArray.add(new Object[] {VoltVari60Million.class, ListExtraAttributes.VOLT_VARI_60_MILLION});
+		abilitiesClassesArray.add(new Object[] {VoltVari200Million.class, ListExtraAttributes.VOLT_VARI_200_MILLION});
 	}
 	
 	public static class ElThorThunder extends AbilityProjectile

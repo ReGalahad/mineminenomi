@@ -12,7 +12,6 @@ import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
-import xyz.pixelatedw.MineMineNoMi3.data.ExtendedWorldData;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.CyborgProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
@@ -28,13 +27,13 @@ public class CyborgAbilities
 		Values.abilityWebAppExtraParams.put("coupdevent", new String[] {"desc", "Launches a powerful blast of compressed air that blows the opponent away.", "dorikiRequiredForCyborgs", "0"});
 	}
 	
-	public static Ability FRESHFIRE = new FreshFire();
-	public static Ability COLAOVERDRIVE = new ColaOverdrive();
-	public static Ability RADICALBEAM = new RadicalBeam();
-	public static Ability STRONGRIGHT = new StrongRight();
-	public static Ability COUPDEVENT = new CoupDeVent();
+	public static final Ability FRESH_FIRE = new FreshFire();
+	public static final Ability COLA_OVERDRIVE = new ColaOverdrive();
+	public static final Ability RADICAL_BEAM = new RadicalBeam();
+	public static final Ability STRONG_RIGHT = new StrongRight();
+	public static final Ability COUP_DE_VENT = new CoupDeVent();
 	
-	public static Ability[] abilitiesArray = new Ability[] {FRESHFIRE, COLAOVERDRIVE, RADICALBEAM, STRONGRIGHT, COUPDEVENT};
+	public static Ability[] abilitiesArray = new Ability[] {FRESH_FIRE, COLA_OVERDRIVE, RADICAL_BEAM, STRONG_RIGHT, COUP_DE_VENT};
 	
 	public static class CoupDeVent extends Ability
 	{
@@ -43,6 +42,7 @@ public class CyborgAbilities
 			super(ListAttributes.COUP_DE_VENT); 
 		}
 		
+		@Override
 		public void startCharging(EntityPlayer player)
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
@@ -53,12 +53,14 @@ public class CyborgAbilities
 				WyHelper.sendMsgToPlayer(player, "Not enough Cola !");					
 		}
 		
+		@Override
 		public void duringCharging(EntityPlayer player, int currentCharge)
 		{		
 			player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 10, 1000));
 			player.addPotionEffect(new PotionEffect(Potion.digSlowdown.id, 10, 1000));	
 		}
 		
+		@Override
 		public void endCharging(EntityPlayer player)
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
@@ -91,6 +93,7 @@ public class CyborgAbilities
 			super(ListAttributes.STRONG_RIGHT); 
 		}
 		
+		@Override
 		public void use(EntityPlayer player)
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
@@ -119,6 +122,7 @@ public class CyborgAbilities
 			super(ListAttributes.RADICAL_BEAM); 
 		}
 		
+		@Override
 		public void use(EntityPlayer player)
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
@@ -147,6 +151,7 @@ public class CyborgAbilities
 			super(ListAttributes.FRESH_FIRE); 
 		}
 		
+		@Override
 		public void use(EntityPlayer player)
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
@@ -180,6 +185,7 @@ public class CyborgAbilities
 			super(ListAttributes.COLA_OVERDRIVE); 
 		}
 		
+		@Override
 		public void use(EntityPlayer player)
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);

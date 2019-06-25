@@ -55,8 +55,8 @@ public class Flintlock extends Item
 						int powder = itemStack.getTagCompound().getInteger("gunPowder");
 						if (!world.isRemote)
 						{
-							if (itemStack.getTagCompound().getInteger("bulletType") == 0) proj = new ExtraProjectiles.NormalBullet(player.worldObj, player, ListExtraAttributes.NORMALBULLET);
-							else if (itemStack.getTagCompound().getInteger("bulletType") == 1) proj = new ExtraProjectiles.KairosekiBullet(player.worldObj, player, ListExtraAttributes.KAIROSEKIBULLET);
+							if (itemStack.getTagCompound().getInteger("bulletType") == 0) proj = new ExtraProjectiles.NormalBullet(player.worldObj, player, ListExtraAttributes.NORMAL_BULLET);
+							else if (itemStack.getTagCompound().getInteger("bulletType") == 1) proj = new ExtraProjectiles.KairosekiBullet(player.worldObj, player, ListExtraAttributes.KAIROSEKI_BULLET);
 							player.worldObj.spawnEntityInWorld(proj);
 							if (!ID.DEV_EARLYACCESS)
 								WyTelemetry.addStat((itemStack.getTagCompound().getInteger("bulletType") == 0 ? "normal" : "kairoseki") + "BulletsShot", 1);
