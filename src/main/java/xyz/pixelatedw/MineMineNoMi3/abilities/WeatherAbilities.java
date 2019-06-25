@@ -22,9 +22,24 @@ public class WeatherAbilities
 	public static Ability HEATBALL = new HeatBall();
 	public static Ability COOLBALL = new CoolBall();
 	public static Ability THUNDERBALL = new ThunderBall();
+	public static Ability GUSTSWORD = new ThunderBall();
 	
-	public static Ability[] abilitiesArray = new Ability[] {HEATBALL, COOLBALL, THUNDERBALL};	
+	public static Ability[] abilitiesArray = new Ability[] {HEATBALL, COOLBALL, THUNDERBALL, GUSTSWORD};	
 
+	public static class GustSword extends Ability
+	{
+		public GustSword() 
+		{
+			super(ListAttributes.GUSTSWORD); 
+		}
+		
+		@Override
+		public void use(EntityPlayer player)
+		{
+			
+		}
+	}
+	
 	public static class ThunderBall extends Ability
 	{
 		public ThunderBall() 
@@ -70,7 +85,6 @@ public class WeatherAbilities
 							EntityWeatherCloud target = targets.get(0);
 							if(target != null && target.isSuperCharged())
 							{
-								System.out.println("@@@@");
 								climaTact.setDamage(20);
 							}
 						}

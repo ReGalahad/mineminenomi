@@ -1,6 +1,5 @@
 package xyz.pixelatedw.MineMineNoMi3.abilities;
 
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.potion.Potion;
@@ -9,7 +8,6 @@ import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
-import xyz.pixelatedw.MineMineNoMi3.api.WyHelper.Direction;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
@@ -17,8 +15,6 @@ import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.GomuProjectiles;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.YamiProjectiles;
-import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListExtraAttributes;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
@@ -45,6 +41,7 @@ public class GomuAbilities
 			super(ListAttributes.GEARFOURTH); 
 		}
 		
+		@Override
 		public void passive(EntityPlayer player)
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
@@ -56,6 +53,7 @@ public class GomuAbilities
 				WyHelper.sendMsgToPlayer(player, "" + this.getAttribute().getAttributeName() + " can only be activated while Busoshoku Haki is active !");
 		}
 		
+		@Override
 		public void startPassive(EntityPlayer player)
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
@@ -64,6 +62,7 @@ public class GomuAbilities
 			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
 		}
 			
+		@Override
 		public void duringPassive(EntityPlayer player, int passiveTimer)
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
@@ -79,6 +78,7 @@ public class GomuAbilities
 			}
 		}
 		
+		@Override
 		public void endPassive(EntityPlayer player)
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
@@ -96,6 +96,7 @@ public class GomuAbilities
 			super(ListAttributes.GEARTHIRD); 
 		}
 		
+		@Override
 		public void startPassive(EntityPlayer player)
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
@@ -104,6 +105,7 @@ public class GomuAbilities
 			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
 		} 
 			
+		@Override
 		public void duringPassive(EntityPlayer player, int passiveTimer)
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
@@ -117,6 +119,7 @@ public class GomuAbilities
 			}			
 		} 
 		
+		@Override
 		public void endPassive(EntityPlayer player)
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
@@ -135,6 +138,7 @@ public class GomuAbilities
 			super(ListAttributes.GEARSECOND); 
 		}
 		
+		@Override
 		public void startPassive(EntityPlayer player)
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
@@ -143,6 +147,7 @@ public class GomuAbilities
 			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
 		} 
 			
+		@Override
 		public void duringPassive(EntityPlayer player, int passiveTimer)
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
@@ -160,6 +165,7 @@ public class GomuAbilities
 			}			
 		} 
 		
+		@Override
 		public void endPassive(EntityPlayer player)
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
@@ -174,9 +180,10 @@ public class GomuAbilities
 	{
 		public GomuGomuNoGatling() 
 		{
-			super(ListAttributes.GOMUGOMUNOGATLING); 
+			super(ListAttributes.GOMU_GOMU_NO_GATLING); 
 		}
 		
+		@Override
 		public void use(EntityPlayer player)
 		{		
 			if(!this.isOnCooldown)
@@ -241,12 +248,13 @@ public class GomuAbilities
 	{
 		public GomuGomuNoRocket() 
 		{
-			super(ListAttributes.GOMUGOMUNOROCKET); 
+			super(ListAttributes.GOMU_GOMU_NO_BAZOOKA); 
 		}
 		
+		@Override
 		public void use(EntityPlayer player)
 		{
-			this.projectile = new GomuProjectiles.GomuGomuNoRocket(player.worldObj, player, ListAttributes.GOMUGOMUNOROCKET);
+			this.projectile = new GomuProjectiles.GomuGomuNoRocket(player.worldObj, player, ListAttributes.GOMU_GOMU_NO_BAZOOKA);
 			super.use(player);
 		} 
 	}
@@ -255,9 +263,10 @@ public class GomuAbilities
 	{
 		public GomuGomuNoBazooka() 
 		{
-			super(ListAttributes.GOMUGOMUNOBAZOOKA); 
+			super(ListAttributes.GOMU_GOMU_NO_BAZOOKA); 
 		}
 
+		@Override
 		public void startCharging(EntityPlayer player)
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
@@ -284,6 +293,7 @@ public class GomuAbilities
 			super.startCharging(player);
 		}
 		
+		@Override
 		public void endCharging(EntityPlayer player)
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
@@ -320,9 +330,10 @@ public class GomuAbilities
 	{
 		public GomuGomuNoPistol() 
 		{
-			super(ListAttributes.GOMUGOMUNOPISTOL); 
+			super(ListAttributes.GOMU_GOMU_NO_PISTOL); 
 		}
 		
+		@Override
 		public void use(EntityPlayer player)
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);		

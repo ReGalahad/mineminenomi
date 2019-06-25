@@ -6,10 +6,8 @@ import java.util.Random;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper.Direction;
@@ -17,11 +15,8 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.GoeProjectiles.Todoroki;
-import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListExtraAttributes;
-import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 
 public class GomuProjectiles
@@ -33,7 +28,7 @@ public class GomuProjectiles
 	{
 		abilitiesClassesArray.add(new Object[]
 		{
-				GomuGomuNoRocket.class, ListAttributes.GOMUGOMUNOROCKET
+				GomuGomuNoRocket.class, ListAttributes.GOMU_GOMU_NO_BAZOOKA
 		});
 
 		abilitiesClassesArray.add(new Object[]
@@ -105,6 +100,7 @@ public class GomuProjectiles
 			super(world, player, attr);
 		}
 
+		@Override
 		public void tasksImapct(MovingObjectPosition hit)
 		{
 			EntityPlayer player = (EntityPlayer) this.getThrower();
@@ -218,6 +214,7 @@ public class GomuProjectiles
 			super(world, player, attr);
 		}
 
+		@Override
 		public void onUpdate()
 		{
 			for (int i = 0; i < 2; i++)
@@ -268,6 +265,7 @@ public class GomuProjectiles
 			super(world, player, attr);
 		}
 
+		@Override
 		public void tasksImapct(MovingObjectPosition hit)
 		{
 			if (hit.entityHit != null && hit.entityHit instanceof EntityLivingBase)
@@ -310,6 +308,7 @@ public class GomuProjectiles
 			super(world, player, attr);
 		}
 
+		@Override
 		public void tasksImapct(MovingObjectPosition hit)
 		{
 			if (hit.entityHit != null && hit.entityHit instanceof EntityLivingBase)
@@ -352,6 +351,7 @@ public class GomuProjectiles
 			super(world, player, attr);
 		}
 
+		@Override
 		public void onUpdate()
 		{
 			for (int i = 0; i < 2; i++)
@@ -366,6 +366,7 @@ public class GomuProjectiles
 			super.onUpdate();
 		}
 
+		@Override
 		public void tasksImapct(MovingObjectPosition hit)
 		{
 			if (hit.entityHit != null && hit.entityHit instanceof EntityLivingBase)
@@ -408,6 +409,7 @@ public class GomuProjectiles
 			super(world, player, attr);
 		}
 
+		@Override
 		public void tasksImapct(MovingObjectPosition hit)
 		{
 			if (hit.entityHit != null && hit.entityHit instanceof EntityLivingBase)
@@ -468,6 +470,7 @@ public class GomuProjectiles
 			super(world, player, attr);
 		}
 
+		@Override
 		public void onUpdate()
 		{
 			for (int i = 0; i < 2; i++)

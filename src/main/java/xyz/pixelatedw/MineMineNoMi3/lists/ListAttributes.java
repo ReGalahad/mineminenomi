@@ -1,5 +1,7 @@
 package xyz.pixelatedw.MineMineNoMi3.lists;
 
+import java.awt.Color;
+
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
@@ -22,8 +24,6 @@ import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelSpea
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelTokuHollow;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelTrident;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelYukiRabi;
-
-import java.awt.*;
 
 public class ListAttributes 
 {
@@ -210,10 +210,10 @@ public class ListAttributes
 	public static AbilityAttribute GEARSECOND = new AbilityAttribute("Gear Second").setAbilityCooldown(60).setAbilityPassive();
 	public static AbilityAttribute GEARTHIRD = new AbilityAttribute("Gear Third").setAbilityCooldown(90).setAbilityPassive();
 	public static AbilityAttribute GEARFOURTH = new AbilityAttribute("Gear Fourth").setAbilityCooldown(300).setAbilityPassive();
-	public static AbilityAttribute GOMUGOMUNOROCKET = new AbilityAttribute("Gomu Gomu no Rocket").setProjectileModel(new ModelFist()).setProjectileTexture("gomugomunopistol").setProjectileSize(3, 3, 3).setModelOffsets(0, 1, 0).setProjectileDamage(6).setAbilityCooldown(8).setProjectilePhysical().setProjectileSpeed(2.5F);
-	public static AbilityAttribute GOMUGOMUNOBAZOOKA = new AbilityAttribute("Gomu Gomu no Bazooka").setAbilityCharges(10);
-	public static AbilityAttribute GOMUGOMUNOGATLING = new AbilityAttribute("Gomu Gomu no Gatling").setProjectileTicks(10);
-	public static AbilityAttribute GOMUGOMUNOPISTOL = new AbilityAttribute("Gomu Gomu no Pistol");
+	public static final AbilityAttribute GOMU_GOMU_NO_ROCKET = new AbilityAttribute("Gomu Gomu no Rocket").setProjectileModel(new ModelFist()).setProjectileTexture("gomugomunopistol").setProjectileSize(3, 3, 3).setModelOffsets(0, 1, 0).setProjectileDamage(6).setAbilityCooldown(8).setProjectilePhysical().setProjectileSpeed(2.5F);
+	public static final AbilityAttribute GOMU_GOMU_NO_BAZOOKA = new AbilityAttribute("Gomu Gomu no Bazooka").setAbilityCharges(10);
+	public static final AbilityAttribute GOMU_GOMU_NO_GATLING = new AbilityAttribute("Gomu Gomu no Gatling").setProjectileTicks(10);
+	public static final AbilityAttribute GOMU_GOMU_NO_PISTOL = new AbilityAttribute("Gomu Gomu no Pistol");
 	
 	public static AbilityAttribute FLASH = new AbilityAttribute("Flash").setAbilityCooldown(5).addEffects(EffectType.AOE, new PotionEffect(Potion.blindness.id, 7 * 20, 3), new PotionEffect(Potion.moveSlowdown.id, 7 * 20, 1)).setEffectRadius(10);
 	public static AbilityAttribute AMANOMURAKUMO = new AbilityAttribute("Ama no Murakumo").setAbilityPassive(true);
@@ -260,7 +260,8 @@ public class ListAttributes
 	public static AbilityAttribute KILOPRESS = new AbilityAttribute("Kilo Press").setAbilityCooldown(10).setAbilityPassive();
 
 	public static AbilityAttribute RUSTTOUCH = new AbilityAttribute("Rust Touch").setAbilityCooldown(19).setAbilityPunch().setAbilityPassive();
-
+	
+	public static AbilityAttribute GUSTSWORD = new AbilityAttribute("Gust Sword").setAbilityCooldown(8).setProjectileSize(.01, .01, .01).setAbilityRepeater(2).setProjectileDamage(2).setProjectileSpeed(5);
 	public static AbilityAttribute THUNDERBALL = new AbilityAttribute("Thunder Ball").setAbilityCooldown(5).setProjectileModel(new ModelSphere()).setProjectileColor("FFFF00").setProjectileAlpha(150).setProjectileSize(1.5, 1.5, 1.5).setProjectileTicks(300);
 	public static AbilityAttribute COOLBALL = new AbilityAttribute("Cool Ball").setAbilityCooldown(5).setProjectileModel(new ModelSphere()).setProjectileColor("0000FF").setProjectileAlpha(150).setProjectileSize(1.5, 1.5, 1.5).setProjectileTicks(300);
 	public static AbilityAttribute HEATBALL = new AbilityAttribute("Heat Ball").setAbilityCooldown(5).setProjectileModel(new ModelSphere()).setProjectileColor("FF0000").setProjectileAlpha(150).setProjectileSize(1.5, 1.5, 1.5).setProjectileTicks(300);
