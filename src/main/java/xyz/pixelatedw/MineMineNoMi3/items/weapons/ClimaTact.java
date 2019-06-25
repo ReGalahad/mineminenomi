@@ -1,22 +1,24 @@
 package xyz.pixelatedw.MineMineNoMi3.items.weapons;
 
-import net.minecraft.entity.player.EntityPlayer;
+import com.google.common.collect.Multimap;
+
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
-import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.WeatherProjectiles.WeatherBall;
 
 public class ClimaTact extends Item
 {
+
+	private double damage = 1;
 
 	public ClimaTact()
 	{
 		
 	}
-	
 	
 	public void emptyCharge(ItemStack itemStack)
 	{
@@ -26,8 +28,6 @@ public class ClimaTact extends Item
 		itemStack.getTagCompound().setString("firstSlot", "");
 		itemStack.getTagCompound().setString("secondSlot", "");
 		itemStack.getTagCompound().setString("thirdSlot", "");
-		
-		WyDebug.debug("Empty Charge");
 	}
 	
 	public String checkCharge(ItemStack itemStack)
@@ -62,5 +62,25 @@ public class ClimaTact extends Item
 		
 		else if(WyHelper.isNullOrEmpty(itemStack.getTagCompound().getString("thirdSlot")))
 			itemStack.getTagCompound().setString("thirdSlot", ball);	
+	}
+	
+	public void setDamage(double damage)
+	{
+		this.damage = damage;
+	}
+	
+	@Override
+	public boolean hitEntity(ItemStack itemStack, EntityLivingBase target, EntityLivingBase attacker)
+	{
+		this.setDamage(1);
+		return true;
+	}
+	
+	@Override
+	public Multimap getAttributeModifiers(ItemStack stack)
+	{
+		Multimap multimap = super.getAttributeModifiers(stack);
+		multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Weapon modifier", this.damage, 0));
+		return multimap;
 	}
 }

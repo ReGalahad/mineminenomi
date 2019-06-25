@@ -12,8 +12,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.WorldInfo;
@@ -76,6 +74,7 @@ public class WeatherProjectiles
 			this.weaponUsed = player.getHeldItem() != null ? player.getHeldItem().getItem() : null;
 		}
 		
+		@Override
 		public void onUpdate()
 		{
 			super.onUpdate();
@@ -147,6 +146,7 @@ public class WeatherProjectiles
 			super(world, player, attr);		
 		}
 		
+		@Override
 		public void onUpdate()
 		{
 			super.onUpdate();
@@ -172,6 +172,7 @@ public class WeatherProjectiles
 			super(world);
 		}
 		
+		@Override
 		public void onUpdate()
 		{
 			super.onUpdate();
@@ -192,6 +193,7 @@ public class WeatherProjectiles
 			super(world);
 		}
 		
+		@Override
 		public void onUpdate()
 		{
 			if(this.worldObj.isRemote)
@@ -232,7 +234,7 @@ public class WeatherProjectiles
 				life--;
 				
 				if(this.charged)
-				{					
+				{
 					List<EntityLivingBase> targets = WyHelper.getEntitiesNear(this, new double[] {15, 50, 15}, EntityLivingBase.class);
 					
 					targets.remove(this.getThrower());
@@ -316,6 +318,16 @@ public class WeatherProjectiles
 			}	
 		}
 		
+		public boolean isCharged()
+		{
+			return this.charged;
+		}
+		
+		public boolean isSuperCharged()
+		{
+			return this.superCharged;
+		}
+		
 		public void addWeatherBall(WeatherBall ball)
 		{
 			this.weatherBalls.add(ball);
@@ -341,8 +353,11 @@ public class WeatherProjectiles
 			this.life = life;
 		}
 		
+		@Override
 		protected void entityInit() {}
+		@Override
 		protected void readEntityFromNBT(NBTTagCompound nbt) {}
+		@Override
 		protected void writeEntityToNBT(NBTTagCompound nbt) {}
 	}	
 }
