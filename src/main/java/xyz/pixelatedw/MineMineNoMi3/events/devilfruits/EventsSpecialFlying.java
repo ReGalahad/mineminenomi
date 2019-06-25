@@ -32,7 +32,7 @@ public class EventsSpecialFlying
 			ExtendedEntityData props = ExtendedEntityData.get(player);
 			AbilityProperties abilityProps = AbilityProperties.get(player);
 
-			Ability abareHimatsuri = abilityProps.getAbilityFromName(ListAttributes.ABAREHIMATSURI.getAttributeName());
+			Ability abareHimatsuri = abilityProps.getAbilityFromName(ListAttributes.ABARE_HIMATSURI.getAttributeName());
 			boolean hasAbareHimatsuri = props.getUsedFruit().equalsIgnoreCase("zushizushi") && abareHimatsuri != null && abareHimatsuri.isPassiveActive();
 			
 			boolean hasToriFruit = props.getUsedFruit().equalsIgnoreCase("toritoriphoenix") && !props.getZoanPoint().toLowerCase().equals("n/a");

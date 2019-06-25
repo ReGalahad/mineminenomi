@@ -72,7 +72,7 @@ public class FishKarateAbilities
 	{
 		public KachiageHaisoku() 
 		{
-			super(ListAttributes.KACHIAGEHAISOKU); 
+			super(ListAttributes.KACHIAGE_HAISOKU); 
 		}
 			
 		public void hitEntity(EntityPlayer player, EntityLivingBase target) 
@@ -89,7 +89,7 @@ public class FishKarateAbilities
 	{
 		public SamehadaShotei() 
 		{
-			super(ListAttributes.SAMEHADASHOTEI); 
+			super(ListAttributes.SAMEHADA_SHOTEI); 
 		}
 		
 		public void startPassive(EntityPlayer player) 
@@ -121,7 +121,7 @@ public class FishKarateAbilities
 	{
 		public KarakusagawaraSeiken() 
 		{
-			super(ListAttributes.KARAKUSAGAWARASEIKEN); 
+			super(ListAttributes.KARAKUSAGAWARA_SEIKEN); 
 		}
 			
 		public void use(EntityPlayer player)

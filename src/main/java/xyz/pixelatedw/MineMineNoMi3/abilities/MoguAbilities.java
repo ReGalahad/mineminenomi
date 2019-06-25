@@ -50,7 +50,7 @@ public class MoguAbilities
 
 		public MoguraTonpo()
 		{
-			super(ListAttributes.MOGURATONPO);
+			super(ListAttributes.MOGURA_TONPO);
 		}
 
 		public void use(EntityPlayer player)
@@ -147,7 +147,7 @@ public class MoguAbilities
 	{
 		public MoguraBanana()
 		{
-			super(ListAttributes.MOGURABANANA);
+			super(ListAttributes.MOGURA_BANANA);
 		}
 
 		public void startPassive(EntityPlayer player)
@@ -187,7 +187,7 @@ public class MoguAbilities
 	{
 		public PowerPoint()
 		{
-			super(ListAttributes.MOGU_POWERPOINT);
+			super(ListAttributes.MOGU_POWER_POINT);
 		}
 
 		public void passive(EntityPlayer player)

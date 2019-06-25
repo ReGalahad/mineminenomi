@@ -88,7 +88,7 @@ public class HandRendererHelper
 		ExtendedEntityData props = ExtendedEntityData.get(player);
 		AbilityProperties abilityProps = AbilityProperties.get(player);
 		
-		Ability hotBoilingSpecial = abilityProps.getAbilityFromName(ListAttributes.HOTBOILINGSPECIAL.getAttributeName());
+		Ability hotBoilingSpecial = abilityProps.getAbilityFromName(ListAttributes.HOT_BOILING_SPECIAL.getAttributeName());
 		boolean hasHotBoilingSpecial = (hotBoilingSpecial != null && hotBoilingSpecial.isPassiveActive());
 		
 		float f5;

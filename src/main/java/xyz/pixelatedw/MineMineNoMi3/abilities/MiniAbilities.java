@@ -32,7 +32,7 @@ public class MiniAbilities
 	{
 		public MiniMiniNoFullRebound()
 		{
-			super(ListAttributes.MINIMININOFULLREBOUND);
+			super(ListAttributes.MINI_MINI_NO_FULL_REBOUND);
 		}
 
 		public void passive(EntityPlayer player)

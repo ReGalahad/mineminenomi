@@ -28,7 +28,7 @@ public class MeraProjectiles
 	{
 		abilitiesClassesArray.add(new Object[] {Hiken.class, ListAttributes.HIKEN});
 		abilitiesClassesArray.add(new Object[] {Higan.class, ListAttributes.HIGAN});
-		abilitiesClassesArray.add(new Object[] {DaiEnkaiEntei.class, ListAttributes.DAIENKAIENTEI});
+		abilitiesClassesArray.add(new Object[] {DaiEnkaiEntei.class, ListAttributes.DAI_ENKAI_ENTEI});
 		abilitiesClassesArray.add(new Object[] {Hidaruma.class, ListAttributes.HIDARUMA});
 		abilitiesClassesArray.add(new Object[] {Jujika.class, ListAttributes.JUJIKA});
 	}

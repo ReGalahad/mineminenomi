@@ -28,7 +28,7 @@ public class YomiAbilities
 	{
 		public SoulParade() 
 		{
-			super(ListAttributes.SOULPARADE); 
+			super(ListAttributes.SOUL_PARADE); 
 		}
 		
 		public void passive(EntityPlayer player)
@@ -61,7 +61,7 @@ public class YomiAbilities
 	{
 		public KasuriutaFubukiGiri() 
 		{
-			super(ListAttributes.KASURIUTAFUBUKIGIRI); 
+			super(ListAttributes.KASURIUTA_FUBUKI_GIRI); 
 		}
 			
 		public void use(EntityPlayer player)

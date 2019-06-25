@@ -36,7 +36,7 @@ public class MokuAbilities
 	{
 		public WhiteStrike() 
 		{
-			super(ListAttributes.WHITESTRIKE); 
+			super(ListAttributes.WHITE_STRIKE); 
 		}
 		
 		public void use(EntityPlayer player)
@@ -51,7 +51,7 @@ public class MokuAbilities
 	{
 		public WhiteLauncher() 
 		{
-			super(ListAttributes.WHITELAUNCHER); 
+			super(ListAttributes.WHITE_LAUNCHER); 
 		}
 		
 		public void endCharging(EntityPlayer player)
@@ -78,7 +78,7 @@ public class MokuAbilities
 		
 	    public void duringCooldown(EntityPlayer player, int currentCooldown)
 	    {
-			if((currentCooldown / 20) > (ListAttributes.WHITELAUNCHER.getAbilityCooldown() / 20) - 3)
+			if((currentCooldown / 20) > (ListAttributes.WHITE_LAUNCHER.getAbilityCooldown() / 20) - 3)
 			{
 				for(EntityLivingBase e : WyHelper.getEntitiesNear(player, 1.6))
 					e.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) player), 2);
@@ -91,7 +91,7 @@ public class MokuAbilities
 	{
 		public WhiteSnake() 
 		{
-			super(ListAttributes.WHITESNAKE); 
+			super(ListAttributes.WHITE_SNAKE); 
 		}
 		
 		public void use(EntityPlayer player)
@@ -105,7 +105,7 @@ public class MokuAbilities
 	{
 		public WhiteOut() 
 		{
-			super(ListAttributes.WHITEOUT); 
+			super(ListAttributes.WHITE_OUT); 
 		}
 		
 		public void use(EntityPlayer player)

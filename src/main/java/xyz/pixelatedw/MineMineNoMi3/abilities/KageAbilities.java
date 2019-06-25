@@ -37,7 +37,7 @@ public class KageAbilities
 	{
 		public BrickBat()
 		{
-			super(ListAttributes.BRICKBAT);
+			super(ListAttributes.BRICK_BAT);
 		}
 
 		public void use(EntityPlayer player)
@@ -120,7 +120,7 @@ public class KageAbilities
 	{
 		public BlackBox()
 		{
-			super(ListAttributes.BLACKBOX);
+			super(ListAttributes.BLACK_BOX);
 		}
 
 		public void use(EntityPlayer player)

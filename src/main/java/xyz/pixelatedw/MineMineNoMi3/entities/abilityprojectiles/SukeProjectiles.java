@@ -17,7 +17,7 @@ public class SukeProjectiles
 	
 	static
 	{
-		abilitiesClassesArray.add(new Object[] {ShishaNoTe.class, ListAttributes.SHISHANOTE});
+		abilitiesClassesArray.add(new Object[] {ShishaNoTe.class, ListAttributes.SHISHA_NO_TE});
 	}
 	
 	public static class ShishaNoTe extends AbilityProjectile

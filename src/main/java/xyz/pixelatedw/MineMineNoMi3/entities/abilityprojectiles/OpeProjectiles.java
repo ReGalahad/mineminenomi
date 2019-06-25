@@ -24,7 +24,7 @@ public class OpeProjectiles
 	
 	static
 	{
-		abilitiesClassesArray.add(new Object[] {GammaKnife.class, ListAttributes.GAMMAKNIFE});
+		abilitiesClassesArray.add(new Object[] {GammaKnife.class, ListAttributes.GAMMA_KNIFE});
 	}
 	
 	

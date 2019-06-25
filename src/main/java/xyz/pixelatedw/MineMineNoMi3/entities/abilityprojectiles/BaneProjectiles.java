@@ -17,7 +17,7 @@ public class BaneProjectiles
 	
 	static
 	{
-		abilitiesClassesArray.add(new Object[] {SpringDeathKnock.class, ListAttributes.SPRINGDEATHKNOCK});
+		abilitiesClassesArray.add(new Object[] {SpringDeathKnock.class, ListAttributes.SPRING_DEATH_KNOCK});
 	}
 	
 	public static class SpringDeathKnock extends AbilityProjectile

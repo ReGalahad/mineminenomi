@@ -26,10 +26,10 @@ public class SniperProjectiles
 	
 	static
 	{
-		abilitiesClassesArray.add(new Object[] {KaenBoshi.class, ListAttributes.KAENBOSHI});
-		abilitiesClassesArray.add(new Object[] {KemuriBoshi.class, ListAttributes.KEMURIBOSHI});
-		abilitiesClassesArray.add(new Object[] {RenpatsuNamariBoshi.class, ListAttributes.RENPATSUNAMARIBOSHI});
-		abilitiesClassesArray.add(new Object[] {SakuretsuSabotenBoshi.class, ListAttributes.SAKURETSUSABOTENBOSHI});
+		abilitiesClassesArray.add(new Object[] {KaenBoshi.class, ListAttributes.KAEN_BOSHI});
+		abilitiesClassesArray.add(new Object[] {KemuriBoshi.class, ListAttributes.KEMURI_BOSHI});
+		abilitiesClassesArray.add(new Object[] {RenpatsuNamariBoshi.class, ListAttributes.RENPATSU_NAMARI_BOSHI});
+		abilitiesClassesArray.add(new Object[] {SakuretsuSabotenBoshi.class, ListAttributes.SAKURETSU_SABOTEN_BOSHI});
 
 	}
 	

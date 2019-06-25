@@ -21,8 +21,8 @@ public class MokuProjectiles
 	
 	static
 	{
-		abilitiesClassesArray.add(new Object[] {WhiteSnake.class, ListAttributes.WHITESNAKE});
-		abilitiesClassesArray.add(new Object[] {WhiteOut.class, ListAttributes.WHITEOUT});
+		abilitiesClassesArray.add(new Object[] {WhiteSnake.class, ListAttributes.WHITE_SNAKE});
+		abilitiesClassesArray.add(new Object[] {WhiteOut.class, ListAttributes.WHITE_OUT});
 	}
 	
 	public static class WhiteSnake extends AbilityProjectile

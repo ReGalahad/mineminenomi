@@ -24,7 +24,7 @@ public class GasuProjectiles
 	static
 	{
 		abilitiesClassesArray.add(new Object[] {Gastille.class, ListAttributes.GASTILLE});
-		abilitiesClassesArray.add(new Object[] {GasRobe.class, ListAttributes.GASROBE});
+		abilitiesClassesArray.add(new Object[] {GasRobe.class, ListAttributes.GAS_ROBE});
 	}
 	
 	public static class Gastille extends AbilityProjectile

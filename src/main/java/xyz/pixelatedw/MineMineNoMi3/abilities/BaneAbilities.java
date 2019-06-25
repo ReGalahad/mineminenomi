@@ -32,7 +32,7 @@ public class BaneAbilities
 	{
 		public SpringDeathKnock() 
 		{
-			super(ListAttributes.SPRINGDEATHKNOCK); 
+			super(ListAttributes.SPRING_DEATH_KNOCK); 
 		}
 		
 		public void use(EntityPlayer player)
@@ -46,7 +46,7 @@ public class BaneAbilities
 	{
 		public SpringSnipe() 
 		{
-			super(ListAttributes.SPRINGSNIPE); 
+			super(ListAttributes.SPRING_SNIPE); 
 		}	
 		
 		public void endCharging(EntityPlayer player)
@@ -73,7 +73,7 @@ public class BaneAbilities
 		
 	    public void duringCooldown(EntityPlayer player, int currentCooldown)
 	    {
-			if((currentCooldown / 20) > (ListAttributes.SPRINGSNIPE.getAbilityCooldown() / 20) - 3)
+			if((currentCooldown / 20) > (ListAttributes.SPRING_SNIPE.getAbilityCooldown() / 20) - 3)
 				for(EntityLivingBase e : WyHelper.getEntitiesNear(player, 1.6))
 					e.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) player), 8);
 	    }
@@ -83,7 +83,7 @@ public class BaneAbilities
 	{
 		public SpringHopper() 
 		{
-			super(ListAttributes.SPRINGHOPPER); 
+			super(ListAttributes.SPRING_HOPPER); 
 		}
 
 	    public void endCharging(EntityPlayer player)

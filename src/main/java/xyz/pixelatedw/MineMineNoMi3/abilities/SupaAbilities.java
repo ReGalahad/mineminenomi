@@ -42,7 +42,7 @@ public class SupaAbilities
 		
 		public SparklingDaisy() 
 		{
-			super(ListAttributes.SPARKLINGDAISY); 
+			super(ListAttributes.SPARKLING_DAISY); 
 		}
 		
 		public void use(EntityPlayer player)
@@ -95,7 +95,7 @@ public class SupaAbilities
 	{
 		public SpiralHollow()
 		{
-			super(ListAttributes.SPIRALHOLLOW);
+			super(ListAttributes.SPIRAL_HOLLOW);
 		}
 		
 		public void use(EntityPlayer player)
@@ -109,7 +109,7 @@ public class SupaAbilities
 	{
 		public AtomicSpurt()
 		{
-			super(ListAttributes.ATOMICSPURT);
+			super(ListAttributes.ATOMIC_SPURT);
 		}
 		
 		public void duringPassive(EntityPlayer player, int passiveTime)
@@ -136,7 +136,7 @@ public class SupaAbilities
 	{
 		public SparClaw()
 		{
-			super(ListAttributes.SPARCLAW);
+			super(ListAttributes.SPAR_CLAW);
 		}
 		
 		public void hitEntity(EntityPlayer player, EntityLivingBase target)

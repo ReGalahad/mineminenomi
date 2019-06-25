@@ -45,7 +45,7 @@ public class YamiAbilities
 	{
 		public BlackWorld() 
 		{
-			super(ListAttributes.BLACKWORLD); 
+			super(ListAttributes.BLACK_WORLD); 
 		}
 		
 		public void use(EntityPlayer player)
@@ -232,7 +232,7 @@ public class YamiAbilities
 	{
 		public DarkMatter() 
 		{
-			super(ListAttributes.DARKMATTER);
+			super(ListAttributes.DARK_MATTER);
 		}
 		
 		public void use(final EntityPlayer player)

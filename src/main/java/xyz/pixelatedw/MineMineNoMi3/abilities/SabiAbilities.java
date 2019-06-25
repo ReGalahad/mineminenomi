@@ -15,7 +15,7 @@ public class SabiAbilities {
 
     public static class RustTouch extends Ability {
         public RustTouch() {
-            super(ListAttributes.RUSTTOUCH);
+            super(ListAttributes.RUST_TOUCH);
         }
 
         public void hitEntity(EntityPlayer player, EntityLivingBase target) {

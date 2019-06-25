@@ -44,7 +44,7 @@ public class DokuAbilities
 	{
 		public DokuGumo() 
 		{
-			super(ListAttributes.DOKUGUMO); 
+			super(ListAttributes.DOKU_GUMO); 
 		}
 
 		public void duringPassive(EntityPlayer player, int passiveTimer) 
@@ -81,7 +81,7 @@ public class DokuAbilities
 	{
 		public VenomDemon() 
 		{
-			super(ListAttributes.VENOMDEMON); 
+			super(ListAttributes.VENOM_DEMON); 
 		}
 		
 		public void startPassive(EntityPlayer player) 
@@ -142,7 +142,7 @@ public class DokuAbilities
 	{
 		public DokuFugu() 
 		{
-			super(ListAttributes.DOKUFUGU); 
+			super(ListAttributes.DOKU_FUGU); 
 		}
 		
 		public void use(EntityPlayer player)
@@ -156,7 +156,7 @@ public class DokuAbilities
 	{
 		public VenomRoad() 
 		{
-			super(ListAttributes.VENOMROAD); 
+			super(ListAttributes.VENOM_ROAD); 
 		}
 		
 		public void use(EntityPlayer player)
@@ -170,7 +170,7 @@ public class DokuAbilities
 	{
 		public ChloroBall() 
 		{
-			super(ListAttributes.CHLOROBALL); 
+			super(ListAttributes.CHLORO_BALL); 
 		}
 		
 		public void use(EntityPlayer player)

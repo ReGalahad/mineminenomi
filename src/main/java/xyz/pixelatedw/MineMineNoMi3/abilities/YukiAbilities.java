@@ -43,7 +43,7 @@ public class YukiAbilities
 	{
 		public YukiGaki() 
 		{
-			super(ListAttributes.YUKIGAKI); 
+			super(ListAttributes.YUKI_GAKI); 
 		}
 		
 		public void use(EntityPlayer player)
@@ -91,7 +91,7 @@ public class YukiAbilities
 	{
 		public TabiraYuki()
 		{
-			super(ListAttributes.TABIRAYUKI); 
+			super(ListAttributes.TABIRA_YUKI); 
 		}
 		
 		public void startPassive(EntityPlayer player) 
@@ -151,7 +151,7 @@ public class YukiAbilities
 	{
 		public KamakuraJussoshi() 
 		{
-			super(ListAttributes.KAMAKURAJUSSOSHI); 
+			super(ListAttributes.KAMAKURA_JUSSOSHI); 
 		}
 		
 		public void use(EntityPlayer player)
@@ -189,7 +189,7 @@ public class YukiAbilities
 	{
 		public YukiRabi() 
 		{
-			super(ListAttributes.YUKIRABI); 
+			super(ListAttributes.YUKI_RABI); 
 		}
 		
 		public void use(EntityPlayer player)

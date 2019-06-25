@@ -86,7 +86,7 @@ public class GuraAbilities
 	{
 		public ShimaYurashi() 
 		{
-			super(ListAttributes.SHIMAYURASHI); 
+			super(ListAttributes.SHIMA_YURASHI); 
 		}
 		
 		public void use(EntityPlayer player)

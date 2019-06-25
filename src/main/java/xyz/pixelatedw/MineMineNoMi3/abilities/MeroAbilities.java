@@ -25,7 +25,7 @@ public class MeroAbilities
 	{
 		public PerfumeFemur() 
 		{
-			super(ListAttributes.PERFUMEFEMUR); 
+			super(ListAttributes.PERFUME_FEMUR); 
 		}
 		
 		public void hitEntity(EntityPlayer player, EntityLivingBase target)
@@ -47,7 +47,7 @@ public class MeroAbilities
 	{
 		public SlaveArrow() 
 		{
-			super(ListAttributes.SLAVEARROW); 
+			super(ListAttributes.SLAVE_ARROW); 
 		}
 		
 		public void startCharging(EntityPlayer player)
@@ -69,7 +69,7 @@ public class MeroAbilities
 	{
 		public PistolKiss()
 		{
-			super(ListAttributes.PISTOLKISS);
+			super(ListAttributes.PISTOL_KISS);
 		}
 		
 		public void use(EntityPlayer player)
@@ -83,7 +83,7 @@ public class MeroAbilities
 	{
 		public MeroMeroMellow()
 		{
-			super(ListAttributes.MEROMEROMELLOW);
+			super(ListAttributes.MERO_MERO_MELLOW);
 		}
 		
 		public void use(EntityPlayer player)

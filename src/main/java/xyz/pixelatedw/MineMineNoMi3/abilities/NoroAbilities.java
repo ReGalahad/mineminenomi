@@ -32,7 +32,7 @@ public class NoroAbilities
 	{
 		public NoroNoroBeamSword()
 		{
-			super(ListAttributes.NORONOROBEAMSWORD); 
+			super(ListAttributes.NORO_NORO_BEAM_SWORD); 
 		}
 		
 		public void startPassive(EntityPlayer player) 
@@ -57,7 +57,7 @@ public class NoroAbilities
 	{
 		public KyubiRush() 
 		{
-			super(ListAttributes.KYUBIRUSH); 
+			super(ListAttributes.KYUBI_RUSH); 
 		}
 		
 		public void hitEntity(EntityPlayer player, EntityLivingBase target) 
@@ -88,7 +88,7 @@ public class NoroAbilities
 	{
 		public NoroNoroBeam() 
 		{
-			super(ListAttributes.NORONOROBEAM); 
+			super(ListAttributes.NORO_NORO_BEAM); 
 		}
 		
 		public void use(EntityPlayer player)

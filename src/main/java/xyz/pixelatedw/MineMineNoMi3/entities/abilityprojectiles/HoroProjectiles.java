@@ -14,9 +14,9 @@ public class HoroProjectiles
 	
 	static
 	{
-		abilitiesClassesArray.add(new Object[] {NegativeHollow.class, ListAttributes.NEGATIVEHOLLOW});
-		abilitiesClassesArray.add(new Object[] {MiniHollow.class, ListAttributes.MINIHOLLOW});
-		abilitiesClassesArray.add(new Object[] {TokuHollow.class, ListAttributes.TOKUHOLLOW});
+		abilitiesClassesArray.add(new Object[] {NegativeHollow.class, ListAttributes.NEGATIVE_HOLLOW});
+		abilitiesClassesArray.add(new Object[] {MiniHollow.class, ListAttributes.MINI_HOLLOW});
+		abilitiesClassesArray.add(new Object[] {TokuHollow.class, ListAttributes.TOKU_HOLLOW});
 	}
 	
 	public static class TokuHollow extends AbilityProjectile

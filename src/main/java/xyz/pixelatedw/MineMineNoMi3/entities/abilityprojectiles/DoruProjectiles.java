@@ -20,8 +20,8 @@ public class DoruProjectiles
 	
 	static
 	{
-		abilitiesClassesArray.add(new Object[] {DoruDoruArtsMori.class, ListAttributes.DORUDORUARTSMORI});
-		abilitiesClassesArray.add(new Object[] {CandleLock.class, ListAttributes.CANDLELOCK});
+		abilitiesClassesArray.add(new Object[] {DoruDoruArtsMori.class, ListAttributes.DORU_DORU_ARTS_MORI});
+		abilitiesClassesArray.add(new Object[] {CandleLock.class, ListAttributes.CANDLE_LOCK});
 	}
 	
 	public static class DoruDoruArtsMori extends AbilityProjectile

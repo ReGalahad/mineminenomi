@@ -42,7 +42,7 @@ public class SwordsmanAbilities
 	{
 		public OTatsumaki() 
 		{
-			super(ListAttributes.OTATSUMAKI); 
+			super(ListAttributes.O_TATSUMAKI); 
 		}
 			
 		public void use(EntityPlayer player)
@@ -96,7 +96,7 @@ public class SwordsmanAbilities
 	{
 		public ShiShishiSonson() 
 		{
-			super(ListAttributes.SHISHISHISONSON); 
+			super(ListAttributes.SHI_SHISHI_SONSON); 
 		}
 			
 		public void use(EntityPlayer player)
@@ -142,14 +142,14 @@ public class SwordsmanAbilities
 	{
 		public SanbyakurokujuPoundHo() 
 		{
-			super(ListAttributes.SANBYAKUROKUJUPOUNDHO); 
+			super(ListAttributes.SANBYAKUROKUJU_POUND_HO); 
 		}
 			
 		public void use(EntityPlayer player)
 		{
 			if((player.getHeldItem() != null && ItemsHelper.isSword(player.getHeldItem())) || DevilFruitsHelper.canUseSwordsmanAbilities(player))
 			{
-				this.projectile = new SwordsmanProjectiles.SanbyakurokujuPoundHo(player.worldObj, player, ListAttributes.SANBYAKUROKUJUPOUNDHO);
+				this.projectile = new SwordsmanProjectiles.SanbyakurokujuPoundHo(player.worldObj, player, ListAttributes.SANBYAKUROKUJU_POUND_HO);
 				if(!this.isOnCooldown)
 					if (player.worldObj instanceof WorldServer)
 						((WorldServer)player.worldObj).getEntityTracker().func_151248_b(player, new S0BPacketAnimation(player, 0));

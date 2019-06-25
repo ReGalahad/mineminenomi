@@ -38,7 +38,7 @@ public class UshiBisonAbilities
 	{
 		public PowerPoint()
 		{
-			super(ListAttributes.BISON_POWERPOINT);
+			super(ListAttributes.BISON_POWER_POINT);
 		}
 		
 		public void passive(EntityPlayer player)
@@ -81,7 +81,7 @@ public class UshiBisonAbilities
 	{		
 		public SpeedPoint()
 		{
-			super(ListAttributes.BISON_SPEEDPOINT);
+			super(ListAttributes.BISON_SPEED_POINT);
 		}
 
 		public void passive(EntityPlayer player)
@@ -120,7 +120,7 @@ public class UshiBisonAbilities
 	{
 		public FiddleBanff() 
 		{
-			super(ListAttributes.FIDDLEBANFF); 
+			super(ListAttributes.FIDDLE_BANFF); 
 		}
 		
 		public void use(EntityPlayer player)
@@ -163,7 +163,7 @@ public class UshiBisonAbilities
 	{
 		public KokuteiCross() 
 		{
-			super(ListAttributes.KOKUTEICROSS); 
+			super(ListAttributes.KOKUTEI_CROSS); 
 		}	
 		
 		public void startPassive(EntityPlayer player) 

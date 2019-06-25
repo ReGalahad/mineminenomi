@@ -25,7 +25,7 @@ public class HoroAbilities
 	{
 		public TokuHollow() 
 		{
-			super(ListAttributes.TOKUHOLLOW); 
+			super(ListAttributes.TOKU_HOLLOW); 
 		}
 		
 		public void use(EntityPlayer player)
@@ -39,7 +39,7 @@ public class HoroAbilities
 	{
 		public MiniHollow() 
 		{
-			super(ListAttributes.MINIHOLLOW); 
+			super(ListAttributes.MINI_HOLLOW); 
 		}
 		
 		public void use(EntityPlayer player)
@@ -53,7 +53,7 @@ public class HoroAbilities
 	{
 		public NegativeHollow() 
 		{
-			super(ListAttributes.NEGATIVEHOLLOW); 
+			super(ListAttributes.NEGATIVE_HOLLOW); 
 		}
 		
 		public void use(EntityPlayer player)

@@ -25,9 +25,9 @@ public class HieProjectiles
 	
 	static
 	{
-		abilitiesClassesArray.add(new Object[] {IceBall.class, ListAttributes.ICEBALL});
-		abilitiesClassesArray.add(new Object[] {IceBlockPartisan.class, ListAttributes.ICEBLOCKPARTISAN});
-		abilitiesClassesArray.add(new Object[] {IceBlockPheasant.class, ListAttributes.ICEBLOCKPHEASANT});
+		abilitiesClassesArray.add(new Object[] {IceBall.class, ListAttributes.ICE_BALL});
+		abilitiesClassesArray.add(new Object[] {IceBlockPartisan.class, ListAttributes.ICE_BLOCK_PARTISAN});
+		abilitiesClassesArray.add(new Object[] {IceBlockPheasant.class, ListAttributes.ICE_BLOCK_PHEASANT});
 	}
 	
 	public static class IceBlockPheasant extends AbilityProjectile

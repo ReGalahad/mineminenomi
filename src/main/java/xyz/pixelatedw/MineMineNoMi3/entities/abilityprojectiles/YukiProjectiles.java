@@ -22,7 +22,7 @@ public class YukiProjectiles
 	
 	static
 	{
-		abilitiesClassesArray.add(new Object[] {YukiRabi.class, ListAttributes.YUKIRABI});
+		abilitiesClassesArray.add(new Object[] {YukiRabi.class, ListAttributes.YUKI_RABI});
 	}
 	
 	public static class YukiRabi extends AbilityProjectile

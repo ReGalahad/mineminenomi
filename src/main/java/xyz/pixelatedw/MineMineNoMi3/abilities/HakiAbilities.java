@@ -30,7 +30,7 @@ public class HakiAbilities
 	{
 		public KenbunshokuHaki() 
 		{
-			super(ListAttributes.KENBUNSHOKUHAKI); 
+			super(ListAttributes.KENBUNSHOKU_HAKI); 
 		}
 		
 		public void startPassive(EntityPlayer player)
@@ -58,7 +58,7 @@ public class HakiAbilities
 	{
 		public BusoshokuHaki() 
 		{
-			super(ListAttributes.BUSOSHOKUHAKI); 			
+			super(ListAttributes.BUSOSHOKU_HAKI); 			
 		}
 		
 		public void startPassive(EntityPlayer player)

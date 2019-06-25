@@ -23,7 +23,7 @@ public class NoroProjectiles
 	
 	static
 	{
-		abilitiesClassesArray.add(new Object[] {NoroNoroBeam.class, ListAttributes.NORONOROBEAM});
+		abilitiesClassesArray.add(new Object[] {NoroNoroBeam.class, ListAttributes.NORO_NORO_BEAM});
 	}
 	
 	public static class NoroNoroBeam extends AbilityProjectile

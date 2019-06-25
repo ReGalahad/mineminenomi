@@ -28,7 +28,7 @@ public class DoruAbilities
 	{
 		public CandleLock() 
 		{
-			super(ListAttributes.CANDLELOCK); 
+			super(ListAttributes.CANDLE_LOCK); 
 		}
 		
 		public void use(EntityPlayer player)
@@ -42,7 +42,7 @@ public class DoruAbilities
 	{
 		public DoruDoruArtsKen()
 		{
-			super(ListAttributes.DORUDORUARTSKEN); 
+			super(ListAttributes.DORU_DORU_ARTS_KEN); 
 		}
 		
 		public void startPassive(EntityPlayer player) 
@@ -66,7 +66,7 @@ public class DoruAbilities
 	{
 		public CandleHouse() 
 		{
-			super(ListAttributes.CANDLEHOUSE); 
+			super(ListAttributes.CANDLE_HOUSE); 
 		}
 		
 		public void use(EntityPlayer player)
@@ -105,7 +105,7 @@ public class DoruAbilities
 	{
 		public CandleWall() 
 		{
-			super(ListAttributes.CANDLEWALL); 
+			super(ListAttributes.CANDLE_WALL); 
 		}
 		
 		public void use(EntityPlayer player)
@@ -133,7 +133,7 @@ public class DoruAbilities
 	{
 		public DoruDoruArtsMori() 
 		{
-			super(ListAttributes.DORUDORUARTSMORI); 
+			super(ListAttributes.DORU_DORU_ARTS_MORI); 
 		}
 		
 		public void use(EntityPlayer player)

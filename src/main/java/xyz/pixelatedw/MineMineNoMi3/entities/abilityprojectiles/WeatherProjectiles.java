@@ -38,9 +38,9 @@ public class WeatherProjectiles
 
 	static
 	{
-		abilitiesClassesArray.add(new Object[] {HeatBall.class, ListAttributes.HEATBALL});
-		abilitiesClassesArray.add(new Object[] {CoolBall.class, ListAttributes.COOLBALL});
-		abilitiesClassesArray.add(new Object[] {ThunderBall.class, ListAttributes.THUNDERBALL});
+		abilitiesClassesArray.add(new Object[] {HeatBall.class, ListAttributes.HEAT_BALL});
+		abilitiesClassesArray.add(new Object[] {CoolBall.class, ListAttributes.COOL_BALL});
+		abilitiesClassesArray.add(new Object[] {ThunderBall.class, ListAttributes.THUNDER_BALL});
 		
 		abilitiesClassesArray.add(new Object[] {EntityWeatherCloud.class, ListExtraAttributes.WEATHERCLOUD});
 	}

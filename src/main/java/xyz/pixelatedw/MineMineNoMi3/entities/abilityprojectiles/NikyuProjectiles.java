@@ -22,8 +22,8 @@ public class NikyuProjectiles
 	
 	static
 	{
-		abilitiesClassesArray.add(new Object[] {PadHo.class, ListAttributes.PADHO});
-		abilitiesClassesArray.add(new Object[] {UrsusShock.class, ListAttributes.URSUSSHOCK});
+		abilitiesClassesArray.add(new Object[] {PadHo.class, ListAttributes.PAD_HO});
+		abilitiesClassesArray.add(new Object[] {UrsusShock.class, ListAttributes.URSUS_SHOCK});
 	}
 	
 	public static class PadHo extends AbilityProjectile

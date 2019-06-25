@@ -39,7 +39,7 @@ public class BariAbilities
 		
 		public BarrierbilityStairs() 
 		{
-			super(ListAttributes.BARRIERBILITYSTAIRS); 
+			super(ListAttributes.BARRIERBILITY_STAIRS); 
 		}	
 		
 		public void fillBlocksList(List<int[]> entityList)
@@ -72,7 +72,7 @@ public class BariAbilities
 	{
 		public BariBariNoPistol() 
 		{
-			super(ListAttributes.BARIBARINOPISTOL); 
+			super(ListAttributes.BARI_BARI_NO_PISTOL); 
 		}	
 		
 		public void hitEntity(EntityPlayer player, EntityLivingBase target) 
@@ -90,7 +90,7 @@ public class BariAbilities
 	{
 		public BarrierCrash() 
 		{
-			super(ListAttributes.BARRIERCRASH); 
+			super(ListAttributes.BARRIER_CRASH); 
 		}
 		
 		public void use(EntityPlayer player)
@@ -106,7 +106,7 @@ public class BariAbilities
 		
 		public BarrierBall() 
 		{
-			super(ListAttributes.BARRIERBALL); 
+			super(ListAttributes.BARRIER_BALL); 
 		}
 		
 		public void passive(EntityPlayer player)

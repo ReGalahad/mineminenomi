@@ -25,7 +25,7 @@ public class ToriPhoenixProjectiles
 	
 	static
 	{
-		abilitiesClassesArray.add(new Object[] {PhoenixGoen.class, ListAttributes.PHOENIXGOEN});
+		abilitiesClassesArray.add(new Object[] {PhoenixGoen.class, ListAttributes.PHOENIX_GOEN});
 	}
 	
 	

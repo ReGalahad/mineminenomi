@@ -17,8 +17,8 @@ public class BakuProjectiles
 	
 	static
 	{
-		abilitiesClassesArray.add(new Object[] {BeroCannon.class, ListAttributes.BEROCANNON});
-		abilitiesClassesArray.add(new Object[] {BakuTsuiho.class, ListAttributes.BAKUTSUIHO});
+		abilitiesClassesArray.add(new Object[] {BeroCannon.class, ListAttributes.BERO_CANNON});
+		abilitiesClassesArray.add(new Object[] {BakuTsuiho.class, ListAttributes.BAKU_TSUIHO});
 	}
 	
 	public static class BakuTsuiho extends AbilityProjectile
