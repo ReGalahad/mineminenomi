@@ -34,7 +34,7 @@ public class JuryoAbilities
 		
 		public AbareHimatsuri() 
 		{
-			super(ListAttributes.ABAREHIMATSURI); 
+			super(ListAttributes.ABARE_HIMATSURI); 
 		}
 
 		public void passive(EntityPlayer player) 
@@ -162,7 +162,7 @@ public class JuryoAbilities
 	{
 		public SagariNoRyusei() 
 		{
-			super(ListAttributes.SAGARINORYUSEI); 
+			super(ListAttributes.SAGARI_NO_RYUSEI); 
 		}
 		
 		public void use(EntityPlayer player)
@@ -177,7 +177,7 @@ public class JuryoAbilities
 					double y = mop.blockY;
 					double z = mop.blockZ;
 
-					AbilityProjectile proj = new JuryoProjectiles.SagariNoRyusei(player.worldObj, player, ListAttributes.SAGARINORYUSEI);	
+					AbilityProjectile proj = new JuryoProjectiles.SagariNoRyusei(player.worldObj, player, ListAttributes.SAGARI_NO_RYUSEI);	
 					proj.setLocationAndAngles(x, (y + 90), z, 0, 0);
 					proj.motionX = 0;
 					proj.motionZ = 0;

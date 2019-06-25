@@ -20,7 +20,7 @@ public class PikaProjectiles
 	static
 	{
 		abilitiesClassesArray.add(new Object[] {Amaterasu.class, ListAttributes.AMATERASU});
-		abilitiesClassesArray.add(new Object[] {YasakaniNoMagatama.class, ListAttributes.YASAKANINOMAGATAMA});
+		abilitiesClassesArray.add(new Object[] {YasakaniNoMagatama.class, ListAttributes.YASAKANI_NO_MAGATAMA});
 	}
 	
 	public static class YasakaniNoMagatama extends AbilityProjectile

@@ -24,9 +24,9 @@ public class MeroProjectiles
 	
 	static
 	{
-		abilitiesClassesArray.add(new Object[] {MeroMeroMellow.class, ListAttributes.MEROMEROMELLOW});
-		abilitiesClassesArray.add(new Object[] {PistolKiss.class, ListAttributes.PISTOLKISS});
-		abilitiesClassesArray.add(new Object[] {SlaveArrow.class, ListAttributes.SLAVEARROW});
+		abilitiesClassesArray.add(new Object[] {MeroMeroMellow.class, ListAttributes.MERO_MERO_MELLOW});
+		abilitiesClassesArray.add(new Object[] {PistolKiss.class, ListAttributes.PISTOL_KISS});
+		abilitiesClassesArray.add(new Object[] {SlaveArrow.class, ListAttributes.SLAVE_ARROW});
 	}
 	
 	public static class SlaveArrow extends AbilityProjectile

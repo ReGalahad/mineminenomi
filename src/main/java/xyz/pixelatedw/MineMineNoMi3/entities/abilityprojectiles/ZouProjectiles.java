@@ -14,7 +14,7 @@ public class ZouProjectiles
 	
 	static
 	{
-		abilitiesClassesArray.add(new Object[] {TrunkShot.class, ListAttributes.TRUNKSHOT});
+		abilitiesClassesArray.add(new Object[] {TrunkShot.class, ListAttributes.TRUNK_SHOT});
 	}
 	
 	public static class TrunkShot extends AbilityProjectile

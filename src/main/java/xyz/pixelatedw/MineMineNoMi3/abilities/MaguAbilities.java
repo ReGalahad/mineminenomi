@@ -31,7 +31,7 @@ public class MaguAbilities
 	{
 		public BakuretsuKazan() 
 		{
-			super(ListAttributes.BAKURETSUKAZAN); 
+			super(ListAttributes.BAKURETSU_KAZAN); 
 		}
 		
 		public void use(EntityPlayer player)
@@ -51,7 +51,7 @@ public class MaguAbilities
 	{
 		public RyuseiKazan() 
 		{
-			super(ListAttributes.RYUSEIKAZAN); 
+			super(ListAttributes.RYUSEI_KAZAN); 
 		}
 		
 		public void use(EntityPlayer player)
@@ -79,7 +79,7 @@ public class MaguAbilities
 	{
 		public DaiFunka() 
 		{
-			super(ListAttributes.DAIFUNKA); 
+			super(ListAttributes.DAI_FUNKA); 
 		}
 		
 		public void use(EntityPlayer player)

@@ -38,7 +38,7 @@ public class ToriPhoenixAbilities
 	{
 		public HybridPoint()
 		{
-			super(ListAttributes.PHOENIX_HYBRIDPOINT);
+			super(ListAttributes.PHOENIX_HYBRID_POINT);
 		}
 
 		public void passive(EntityPlayer player)
@@ -79,7 +79,7 @@ public class ToriPhoenixAbilities
 		
 		public TenseiNoSoen() 
 		{
-			super(ListAttributes.TENSEINOSOEN); 
+			super(ListAttributes.TENSEI_NO_SOEN); 
 		}
 		
 		public void startCharging(EntityPlayer player)
@@ -130,7 +130,7 @@ public class ToriPhoenixAbilities
 	{
 		public PhoenixGoen() 
 		{
-			super(ListAttributes.PHOENIXGOEN); 
+			super(ListAttributes.PHOENIX_GOEN); 
 		}
 		
 		public void use(EntityPlayer player)
@@ -162,7 +162,7 @@ public class ToriPhoenixAbilities
 	{
 		public FlameOfRestoration() 
 		{
-			super(ListAttributes.FLAMEOFRESTORATION); 
+			super(ListAttributes.FLAME_OF_RESTORATION); 
 		}
 		
 		public void hitEntity(EntityPlayer player, EntityLivingBase target) 
@@ -182,7 +182,7 @@ public class ToriPhoenixAbilities
 	{
 		public BlueFlamesOfResurrection() 
 		{
-			super(ListAttributes.BLUEFLAMESOFRESURRECTION); 
+			super(ListAttributes.BLUE_FLAMES_OF_RESURRECTION); 
 		}
 		
 		public void use(EntityPlayer player)
@@ -199,7 +199,7 @@ public class ToriPhoenixAbilities
 	{
 		public PhoenixPoint()
 		{
-			super(ListAttributes.PHOENIX_FULLPOINT);
+			super(ListAttributes.PHOENIX_FULL_POINT);
 		}
 
 		public void passive(EntityPlayer player)

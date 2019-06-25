@@ -58,7 +58,7 @@ public class OriAbilities {
 
     public static class GreatCage extends Ability {
         public GreatCage() {
-            super(ListAttributes.GREATCAGE);
+            super(ListAttributes.GREAT_CAGE);
         }
 
         public void use(EntityPlayer player) {
@@ -77,7 +77,7 @@ public class OriAbilities {
         private ArrayList<int[]> blockList;
 
         public PrisonBreak() {
-            super(ListAttributes.PRISONBREAK);
+            super(ListAttributes.PRISON_BREAK);
         }
 
         public void passive(EntityPlayer player) {
@@ -110,7 +110,7 @@ public class OriAbilities {
 
 
         public AwaseBaori() {
-            super(ListAttributes.AWASEBAORI);
+            super(ListAttributes.AWASE_BAORI);
         }
 
         public void use(final EntityPlayer player) {

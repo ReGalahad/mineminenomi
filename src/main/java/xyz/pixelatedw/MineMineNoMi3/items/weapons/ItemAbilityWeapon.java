@@ -43,17 +43,17 @@ public class ItemAbilityWeapon extends ItemCoreWeapon
 						if(!abilityProps.getAbilityFromSlot(i).isPassiveActive())
 						{
 							String ablName = WyHelper.getFancyName(abilityProps.getAbilityFromSlot(i).getAttribute().getAttributeName());
-							if(ablName.equals(WyHelper.getFancyName(ListAttributes.ICESABER.getAttributeName())))
+							if(ablName.equals(WyHelper.getFancyName(ListAttributes.ICE_SABER.getAttributeName())))
 								owner.inventory.clearInventory(this, -1);
-							else if(ablName.equals(WyHelper.getFancyName(ListAttributes.AMANOMURAKUMO.getAttributeName())))
+							else if(ablName.equals(WyHelper.getFancyName(ListAttributes.AMA_NO_MURAKUMO.getAttributeName())))
 								owner.inventory.clearInventory(this, -1);
-							else if(ablName.equals(WyHelper.getFancyName(ListAttributes.NORONOROBEAMSWORD.getAttributeName())))
+							else if(ablName.equals(WyHelper.getFancyName(ListAttributes.NORO_NORO_BEAM_SWORD.getAttributeName())))
 								owner.inventory.clearInventory(this, -1);
-							else if(ablName.equals(WyHelper.getFancyName(ListAttributes.DORUDORUARTSKEN.getAttributeName())))
+							else if(ablName.equals(WyHelper.getFancyName(ListAttributes.DORU_DORU_ARTS_KEN.getAttributeName())))
 								owner.inventory.clearInventory(this, -1);
-							else if(ablName.equals(WyHelper.getFancyName(ListAttributes.BLUESWORD.getAttributeName())))
+							else if(ablName.equals(WyHelper.getFancyName(ListAttributes.BLUE_SWORD.getAttributeName())))
 								owner.inventory.clearInventory(this, -1);
-							else if(ablName.equals(WyHelper.getFancyName(ListAttributes.TABIRAYUKI.getAttributeName())))
+							else if(ablName.equals(WyHelper.getFancyName(ListAttributes.TABIRA_YUKI.getAttributeName())))
 								owner.inventory.clearInventory(this, -1);
 						}
 					}

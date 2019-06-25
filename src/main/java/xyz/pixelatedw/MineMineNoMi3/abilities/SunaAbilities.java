@@ -35,7 +35,7 @@ public class SunaAbilities
 	{
 		public DesertGirasole() 
 		{
-			super(ListAttributes.DESERTGIRASOLE); 
+			super(ListAttributes.DESERT_GIRASOLE); 
 		}
 		
 		public void startCharging(EntityPlayer player)
@@ -75,7 +75,7 @@ public class SunaAbilities
 	{
 		public DesertEncierro() 
 		{
-			super(ListAttributes.DESERTENCIERRO); 
+			super(ListAttributes.DESERT_ENCIERRO); 
 		}
 		
 		public void hitEntity(EntityPlayer player, EntityLivingBase target)
@@ -133,7 +133,7 @@ public class SunaAbilities
 	{
 		public GroundDeath() 
 		{
-			super(ListAttributes.GROUNDDEATH); 
+			super(ListAttributes.GROUND_DEATH); 
 		}
 		
 		public void use(EntityPlayer player)
@@ -159,7 +159,7 @@ public class SunaAbilities
 	{
 		public DesertSpada() 
 		{
-			super(ListAttributes.DESERTSPADA); 
+			super(ListAttributes.DESERT_SPADA); 
 		}
 		
 		public void use(EntityPlayer player)

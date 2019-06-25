@@ -20,7 +20,7 @@ public class HoruAbilities
 	{
 		public TensionHormone()
 		{
-			super(ListAttributes.TENSIONHORMONE);
+			super(ListAttributes.TENSION_HORMONE);
 		}
 		
 		public void passive(EntityPlayer player)
@@ -47,7 +47,7 @@ public class HoruAbilities
 	{
 		public ChiyuHormone()
 		{
-			super(ListAttributes.CHIYUHORMONE);
+			super(ListAttributes.CHIYU_HORMONE);
 		}
 		
 		public void passive(EntityPlayer player)
@@ -74,7 +74,7 @@ public class HoruAbilities
 	{
 		public OnnaHormone() 
 		{
-			super(ListAttributes.ONNAHORMONE); 
+			super(ListAttributes.ONNA_HORMONE); 
 		}
 		
 		public void hitEntity(EntityPlayer player, EntityLivingBase target)

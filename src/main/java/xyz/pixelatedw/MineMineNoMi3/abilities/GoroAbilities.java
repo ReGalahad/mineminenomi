@@ -45,7 +45,7 @@ public class GoroAbilities
 	{
 		public ElThor() 
 		{
-			super(ListAttributes.ELTHOR); 
+			super(ListAttributes.EL_THOR); 
 		}
 		
 		public void startCharging(EntityPlayer player)
@@ -105,7 +105,7 @@ public class GoroAbilities
 		
 		public VoltVari() 
 		{
-			super(ListAttributes.VOLTVARI); 
+			super(ListAttributes.VOLT_VARI); 
 		}
 		
 		public void startCharging(EntityPlayer player)
@@ -293,7 +293,7 @@ public class GoroAbilities
 	public static class SparkStep extends Ability
 	{
 		public SparkStep() {
-			super(ListAttributes.SPARKSTEP);
+			super(ListAttributes.SPARK_STEP);
 		}
 		public void use(EntityPlayer player) {
 			if (!this.isOnCooldown) {

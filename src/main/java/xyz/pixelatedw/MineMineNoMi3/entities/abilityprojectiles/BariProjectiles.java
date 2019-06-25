@@ -23,8 +23,8 @@ public class BariProjectiles
 	
 	static
 	{
-		abilitiesClassesArray.add(new Object[] {BarrierCrash.class, ListAttributes.BARRIERCRASH});
-		abilitiesClassesArray.add(new Object[] {BarrierbilityStairs.class, ListAttributes.BARRIERBILITYSTAIRS});
+		abilitiesClassesArray.add(new Object[] {BarrierCrash.class, ListAttributes.BARRIER_CRASH});
+		abilitiesClassesArray.add(new Object[] {BarrierbilityStairs.class, ListAttributes.BARRIERBILITY_STAIRS});
 	}
 	
 	public static class BarrierbilityStairs extends AbilityProjectile
@@ -48,7 +48,7 @@ public class BariProjectiles
 					return;
 				
 				AbilityProperties abilityProps = AbilityProperties.get((EntityPlayer) this.getThrower());			
-				Ability ability = abilityProps.getAbilityFromName(ListAttributes.BARRIERBILITYSTAIRS.getAttributeName());            
+				Ability ability = abilityProps.getAbilityFromName(ListAttributes.BARRIERBILITY_STAIRS.getAttributeName());            
 
 				if(ability != null)
 				{

@@ -63,7 +63,7 @@ public class EventsPassives
 			AbilityProperties abilityProps = AbilityProperties.get(player);
 			ItemStack heldItem = player.getHeldItem();
 
-			Ability atomicSpurt = abilityProps.getAbilityFromName(ListAttributes.ATOMICSPURT.getAttributeName());
+			Ability atomicSpurt = abilityProps.getAbilityFromName(ListAttributes.ATOMIC_SPURT.getAttributeName());
 			if (props.getUsedFruit().equals("supasupa"))
 			{
 				if (atomicSpurt != null && atomicSpurt.isPassiveActive())
@@ -287,7 +287,7 @@ public class EventsPassives
 			
 			if (props.getUsedFruit().equalsIgnoreCase("yomiyomi") && props.getZoanPoint().equalsIgnoreCase("yomi"))
 			{
-				Ability soulParade = abilityProps.getAbilityFromName(ListAttributes.SOULPARADE.getAttributeName());
+				Ability soulParade = abilityProps.getAbilityFromName(ListAttributes.SOUL_PARADE.getAttributeName());
 
 				if (soulParade != null && soulParade.isPassiveActive())
 				{
@@ -395,7 +395,7 @@ public class EventsPassives
 		if (propz.getUsedFruit().equalsIgnoreCase("kachikachi"))
 		{
 			AbilityProperties abilityProps = AbilityProperties.get(event.entityPlayer);
-			Ability fireFist = abilityProps.getAbilityFromName(ListAttributes.HOTBOILINGSPECIAL.getAttributeName());
+			Ability fireFist = abilityProps.getAbilityFromName(ListAttributes.HOT_BOILING_SPECIAL.getAttributeName());
 			if (fireFist != null && fireFist.isPassiveActive())
 			{
 				event.target.setFire(4);

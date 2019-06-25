@@ -21,7 +21,7 @@ public class BomuAbilities
 	{
 		public KickBomb() 
 		{
-			super(ListAttributes.KICKBOMB); 
+			super(ListAttributes.KICK_BOMB); 
 		}
 		
 		public void use(EntityPlayer player)
@@ -34,7 +34,7 @@ public class BomuAbilities
 	{
 		public NoseFancyCannon() 
 		{
-			super(ListAttributes.NOSEFANCYCANNON); 
+			super(ListAttributes.NOSE_FANCY_CANNON); 
 		}
 		
 		public void use(EntityPlayer player)

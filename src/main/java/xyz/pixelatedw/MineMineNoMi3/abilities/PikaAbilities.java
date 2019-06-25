@@ -54,7 +54,7 @@ public class PikaAbilities
 	{
 		public AmaNoMurakumo() 
 		{
-			super(ListAttributes.AMANOMURAKUMO); 
+			super(ListAttributes.AMA_NO_MURAKUMO); 
 		}
 		
 		public void startPassive(EntityPlayer player) 
@@ -100,7 +100,7 @@ public class PikaAbilities
 	{
 		public YasakaniNoMagatama() 
 		{
-			super(ListAttributes.YASAKANINOMAGATAMA); 
+			super(ListAttributes.YASAKANI_NO_MAGATAMA); 
 		}
 		
 		public void use(EntityPlayer player)
@@ -114,7 +114,7 @@ public class PikaAbilities
 	{
 		public YataNoKagami() 
 		{
-			super(ListAttributes.YATANOKAGAMI); 
+			super(ListAttributes.YATA_NO_KAGAMI); 
 		}
 		
 		public void use(EntityPlayer player)

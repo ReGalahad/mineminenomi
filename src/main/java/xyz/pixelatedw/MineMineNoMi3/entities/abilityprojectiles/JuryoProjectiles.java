@@ -25,7 +25,7 @@ public class JuryoProjectiles
 	
 	static
 	{
-		abilitiesClassesArray.add(new Object[] {SagariNoRyusei.class, ListAttributes.SAGARINORYUSEI});
+		abilitiesClassesArray.add(new Object[] {SagariNoRyusei.class, ListAttributes.SAGARI_NO_RYUSEI});
 		abilitiesClassesArray.add(new Object[] {Moko.class, ListAttributes.MOKO});
 	}
 	

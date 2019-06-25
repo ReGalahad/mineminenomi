@@ -17,7 +17,7 @@ public class BomuProjectiles
 	
 	static
 	{
-		abilitiesClassesArray.add(new Object[] {NoseFancyCannon.class, ListAttributes.NOSEFANCYCANNON});
+		abilitiesClassesArray.add(new Object[] {NoseFancyCannon.class, ListAttributes.NOSE_FANCY_CANNON});
 	}
 	
 	public static class NoseFancyCannon extends AbilityProjectile

@@ -64,7 +64,7 @@ public class OpeAbilities
 	{
 		public InjectionShot()
 		{
-			super(ListAttributes.INJECTIONSHOT);
+			super(ListAttributes.INJECTION_SHOT);
 		}
 
 		public void use(EntityPlayer player)
@@ -227,7 +227,7 @@ public class OpeAbilities
 	{
 		public GammaKnife()
 		{
-			super(ListAttributes.GAMMAKNIFE);
+			super(ListAttributes.GAMMA_KNIFE);
 		}
 
 		public void use(EntityPlayer player)
@@ -272,7 +272,7 @@ public class OpeAbilities
 	{
 		public CounterShock()
 		{
-			super(ListAttributes.COUNTERSHOCK);
+			super(ListAttributes.COUNTER_SHOCK);
 		}
 
 		public void hitEntity(EntityPlayer player, EntityLivingBase target)

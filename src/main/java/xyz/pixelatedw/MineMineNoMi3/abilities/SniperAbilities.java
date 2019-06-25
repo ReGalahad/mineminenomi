@@ -27,7 +27,7 @@ public class SniperAbilities
 	{
 		public SakuretsuSabotenBoshi() 
 		{
-			super(ListAttributes.SAKURETSUSABOTENBOSHI); 
+			super(ListAttributes.SAKURETSU_SABOTEN_BOSHI); 
 		}
 		
 		public void use(EntityPlayer player)
@@ -45,7 +45,7 @@ public class SniperAbilities
 	{
 		public RenpatsuNamariBoshi() 
 		{
-			super(ListAttributes.RENPATSUNAMARIBOSHI); 
+			super(ListAttributes.RENPATSU_NAMARI_BOSHI); 
 		}
 		
 		public void use(EntityPlayer player)
@@ -63,7 +63,7 @@ public class SniperAbilities
 	{
 		public KemuriBoshi() 
 		{
-			super(ListAttributes.KEMURIBOSHI); 
+			super(ListAttributes.KEMURI_BOSHI); 
 		}
 		
 		public void use(EntityPlayer player)
@@ -81,7 +81,7 @@ public class SniperAbilities
 	{
 		public KaenBoshi() 
 		{
-			super(ListAttributes.KAENBOSHI); 
+			super(ListAttributes.KAEN_BOSHI); 
 		}
 		
 		public void use(EntityPlayer player)

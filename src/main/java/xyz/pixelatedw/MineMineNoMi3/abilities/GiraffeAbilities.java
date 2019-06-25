@@ -46,7 +46,7 @@ public class GiraffeAbilities
 	{
 		public PowerPoint()
 		{
-			super(ListAttributes.GIRAFFE_POWERPOINT);
+			super(ListAttributes.GIRAFFE_POWER_POINT);
 		}
 		
 		public void passive(EntityPlayer player)
@@ -89,7 +89,7 @@ public class GiraffeAbilities
 	{		
 		public SpeedPoint()
 		{
-			super(ListAttributes.GIRAFFE_SPEEDPOINT);
+			super(ListAttributes.GIRAFFE_SPEED_POINT);
 		}
 
 		public void passive(EntityPlayer player)

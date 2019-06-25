@@ -43,7 +43,7 @@ public class ChiyuAbilities
 	{
 		public HealingTouch() 
 		{
-			super(ListAttributes.HEALINGTOUCH); 
+			super(ListAttributes.HEALING_TOUCH); 
 		}	
 
 		public void hitEntity(EntityPlayer player, EntityLivingBase target) 

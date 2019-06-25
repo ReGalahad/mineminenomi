@@ -28,8 +28,8 @@ public class KageProjectiles
 	static
 	{
 		abilitiesClassesArray.add(new Object[] {TsunotokagePillar.class, ListExtraAttributes.TSUNOTOKAGEPILLAR});
-		abilitiesClassesArray.add(new Object[] {BlackBox.class, ListAttributes.BLACKBOX});
-		abilitiesClassesArray.add(new Object[] {BrickBat.class, ListAttributes.BRICKBAT});
+		abilitiesClassesArray.add(new Object[] {BlackBox.class, ListAttributes.BLACK_BOX});
+		abilitiesClassesArray.add(new Object[] {BrickBat.class, ListAttributes.BRICK_BAT});
 	}
 	
 	public static class BrickBat extends AbilityProjectile

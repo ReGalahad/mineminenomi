@@ -20,7 +20,7 @@ public class OriProjectiles
 
 	static
 	{
-		abilitiesClassesArray.add(new Object[] { AwaseBaori.class, ListAttributes.AWASEBAORI });
+		abilitiesClassesArray.add(new Object[] { AwaseBaori.class, ListAttributes.AWASE_BAORI });
 	}
 
 	public static class AwaseBaori extends AbilityProjectile

@@ -22,7 +22,7 @@ public class GuraProjectiles
 	
 	static
 	{
-		abilitiesClassesArray.add(new Object[] {ShimaYurashi.class, ListAttributes.SHIMAYURASHI});
+		abilitiesClassesArray.add(new Object[] {ShimaYurashi.class, ListAttributes.SHIMA_YURASHI});
 		abilitiesClassesArray.add(new Object[] {Kaishin.class, ListAttributes.KAISHIN});
 	}
 	

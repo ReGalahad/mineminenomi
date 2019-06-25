@@ -23,10 +23,10 @@ public class CyborgProjectiles
 	
 	static
 	{
-		abilitiesClassesArray.add(new Object[] {FreshFire.class, ListAttributes.FRESHFIRE});
-		abilitiesClassesArray.add(new Object[] {RadicalBeam.class, ListAttributes.RADICALBEAM});
-		abilitiesClassesArray.add(new Object[] {StrongRight.class, ListAttributes.STRONGRIGHT});
-		abilitiesClassesArray.add(new Object[] {CoupDeVent.class, ListAttributes.COUPDEVENT});
+		abilitiesClassesArray.add(new Object[] {FreshFire.class, ListAttributes.FRESH_FIRE});
+		abilitiesClassesArray.add(new Object[] {RadicalBeam.class, ListAttributes.RADICAL_BEAM});
+		abilitiesClassesArray.add(new Object[] {StrongRight.class, ListAttributes.STRONG_RIGHT});
+		abilitiesClassesArray.add(new Object[] {CoupDeVent.class, ListAttributes.COUP_DE_VENT});
 	}
 	
 	

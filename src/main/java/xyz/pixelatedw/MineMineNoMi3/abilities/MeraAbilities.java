@@ -60,7 +60,7 @@ public class MeraAbilities
 	{
 		public DaiEnkaiEntei() 
 		{
-			super(ListAttributes.DAIENKAIENTEI); 
+			super(ListAttributes.DAI_ENKAI_ENTEI); 
 		}
 		
 		public void startCharging(EntityPlayer player)
@@ -75,7 +75,7 @@ public class MeraAbilities
 		
 		public void endCharging(EntityPlayer player)
 		{						
-			this.projectile = new MeraProjectiles.DaiEnkaiEntei(player.worldObj, player, ListAttributes.DAIENKAIENTEI);
+			this.projectile = new MeraProjectiles.DaiEnkaiEntei(player.worldObj, player, ListAttributes.DAI_ENKAI_ENTEI);
 			super.endCharging(player);
 		}
 	

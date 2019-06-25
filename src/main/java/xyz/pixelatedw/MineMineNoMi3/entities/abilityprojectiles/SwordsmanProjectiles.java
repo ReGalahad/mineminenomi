@@ -15,7 +15,7 @@ public class SwordsmanProjectiles
 	
 	static
 	{
-		abilitiesClassesArray.add(new Object[] {SanbyakurokujuPoundHo.class, ListAttributes.SANBYAKUROKUJUPOUNDHO});
+		abilitiesClassesArray.add(new Object[] {SanbyakurokujuPoundHo.class, ListAttributes.SANBYAKUROKUJU_POUND_HO});
 		abilitiesClassesArray.add(new Object[] {Yakkodori.class, ListAttributes.YAKKODORI});
 	}
 	

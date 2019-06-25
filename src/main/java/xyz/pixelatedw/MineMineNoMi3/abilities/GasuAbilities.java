@@ -35,7 +35,7 @@ public class GasuAbilities
 	{
 		public BlueSword()
 		{
-			super(ListAttributes.BLUESWORD); 
+			super(ListAttributes.BLUE_SWORD); 
 		}
 		
 		public void startPassive(EntityPlayer player) 
@@ -111,7 +111,7 @@ public class GasuAbilities
 	{
 		public GasRobe() 
 		{
-			super(ListAttributes.GASROBE); 
+			super(ListAttributes.GAS_ROBE); 
 		}
 		
 		public void use(EntityPlayer player)

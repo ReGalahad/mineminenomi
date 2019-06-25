@@ -44,7 +44,7 @@ public class ItoAbilities
 
 		public BlackKnight()
 		{
-			super(ListAttributes.BLACKKNIGHT);
+			super(ListAttributes.BLACK_KNIGHT);
 		}
 
 		public void passive(EntityPlayer player)
@@ -117,7 +117,7 @@ public class ItoAbilities
 	{
 		public KumoNoSugaki() 
 		{
-			super(ListAttributes.KUMONOSUGAKI); 
+			super(ListAttributes.KUMO_NO_SUGAKI); 
 		}
 		
 		public void duringPassive(EntityPlayer player, int passiveTimer)
@@ -172,7 +172,7 @@ public class ItoAbilities
 	{
 		public SoraNoMichi() 
 		{
-			super(ListAttributes.SORANOMICHI); 
+			super(ListAttributes.SORA_NO_MICHI); 
 		}
 		
 		public void use(EntityPlayer player)

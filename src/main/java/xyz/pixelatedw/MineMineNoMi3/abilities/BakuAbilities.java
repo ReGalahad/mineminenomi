@@ -40,7 +40,7 @@ public class BakuAbilities
 	{
 		public BakuBakuFactory() 
 		{
-			super(ListAttributes.BAKUBAKUFACTORY); 
+			super(ListAttributes.BAKU_BAKU_FACTORY); 
 		}
 		
 		public void use(EntityPlayer player)
@@ -57,7 +57,7 @@ public class BakuAbilities
 		
 		public BakuTsuiho() 
 		{
-			super(ListAttributes.BAKUTSUIHO); 
+			super(ListAttributes.BAKU_TSUIHO); 
 		}
 
 		public void startCharging(EntityPlayer player)
@@ -108,7 +108,7 @@ public class BakuAbilities
 		{
 			for(int j = 0; j < this.loadedProjectiles.size(); j++)
 			{
-				AbilityProjectile proj = new BakuProjectiles.BeroCannon(player.worldObj, player, ListAttributes.BEROCANNON);
+				AbilityProjectile proj = new BakuProjectiles.BeroCannon(player.worldObj, player, ListAttributes.BERO_CANNON);
 				int distanceBetweenProjectiles = this.loadedProjectiles.size() / 7;
 				
 				proj.setLocationAndAngles(
@@ -126,7 +126,7 @@ public class BakuAbilities
 	{
 		public BeroCannon() 
 		{
-			super(ListAttributes.BEROCANNON); 
+			super(ListAttributes.BERO_CANNON); 
 		}
 		
 		public void use(EntityPlayer player)
@@ -164,7 +164,7 @@ public class BakuAbilities
 	{
 		public BakuMunch() 
 		{
-			super(ListAttributes.BAKUMUNCH); 
+			super(ListAttributes.BAKU_MUNCH); 
 		}
 		
 		public void use(EntityPlayer player)

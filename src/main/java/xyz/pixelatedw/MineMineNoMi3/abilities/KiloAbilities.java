@@ -105,7 +105,7 @@ public class KiloAbilities {
 
 
         public KickOffJump() {
-            super(ListAttributes.KICKOFFJUMP);
+            super(ListAttributes.KICK_OFF_JUMP);
         }
 
         public void passive(EntityPlayer player) {
@@ -142,7 +142,7 @@ public class KiloAbilities {
 
     public static class HeavyPunch extends Ability {
         public HeavyPunch() {
-            super (ListAttributes.HEAVYPUNCH);
+            super (ListAttributes.HEAVY_PUNCH);
         }
 /*
         public void passive(EntityPlayer player) {
@@ -184,7 +184,7 @@ public class KiloAbilities {
         private double initialY;
 
         public KiloPress() {
-            super(ListAttributes.KILOPRESS);
+            super(ListAttributes.KILO_PRESS);
         }
 
         public void passive(EntityPlayer player) {

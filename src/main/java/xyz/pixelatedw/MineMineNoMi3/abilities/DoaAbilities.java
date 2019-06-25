@@ -24,7 +24,7 @@ public class DoaAbilities {
     public static class AirDoor extends Ability {
         
         public AirDoor() {
-            super(ListAttributes.AIRDOOR);
+            super(ListAttributes.AIR_DOOR);
         }
 
         public void passive(EntityPlayer player) {

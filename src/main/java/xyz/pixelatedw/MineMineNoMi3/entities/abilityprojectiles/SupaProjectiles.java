@@ -14,7 +14,7 @@ public class SupaProjectiles
 	
 	static
 	{
-		abilitiesClassesArray.add(new Object[] {SpiralHollow.class, ListAttributes.SPIRALHOLLOW});
+		abilitiesClassesArray.add(new Object[] {SpiralHollow.class, ListAttributes.SPIRAL_HOLLOW});
 	}
 	
 	public static class SpiralHollow extends AbilityProjectile

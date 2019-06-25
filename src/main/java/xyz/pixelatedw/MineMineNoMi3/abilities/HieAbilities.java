@@ -36,7 +36,7 @@ public class HieAbilities
 	{
 		public IceSaber()
 		{
-			super(ListAttributes.ICESABER); 
+			super(ListAttributes.ICE_SABER); 
 		}
 		
 		@Override
@@ -63,13 +63,13 @@ public class HieAbilities
 	{
 		public IceBlockPartisan() 
 		{
-			super(ListAttributes.ICEBLOCKPARTISAN); 
+			super(ListAttributes.ICE_BLOCK_PARTISAN); 
 		}
 		
 		@Override
 		public void use(EntityPlayer player)
 		{
-			this.projectile = new HieProjectiles.IceBlockPartisan(player.worldObj, player, ListAttributes.ICEBLOCKPARTISAN);
+			this.projectile = new HieProjectiles.IceBlockPartisan(player.worldObj, player, ListAttributes.ICE_BLOCK_PARTISAN);
 			super.use(player);
 		};	
 	}
@@ -78,7 +78,7 @@ public class HieAbilities
 	{
 		public IceAge() 
 		{
-			super(ListAttributes.ICEAGE); 
+			super(ListAttributes.ICE_AGE); 
 		}
 		
 		@Override
@@ -120,13 +120,13 @@ public class HieAbilities
 	{
 		public IceBall() 
 		{
-			super(ListAttributes.ICEBALL); 
+			super(ListAttributes.ICE_BALL); 
 		}
 		
 		@Override
 		public void use(EntityPlayer player)
 		{
-			this.projectile = new HieProjectiles.IceBall(player.worldObj, player, ListAttributes.ICEBALL);
+			this.projectile = new HieProjectiles.IceBall(player.worldObj, player, ListAttributes.ICE_BALL);
 			super.use(player);
 		};	
 	}
@@ -135,7 +135,7 @@ public class HieAbilities
 	{
 		public IceTimeCapsule() 
 		{
-			super(ListAttributes.ICETIMECAPSULE); 
+			super(ListAttributes.ICE_TIME_CAPSULE); 
 		}
 		
 		@Override
@@ -160,13 +160,13 @@ public class HieAbilities
 	{
 		public IceBlockPheasant() 
 		{
-			super(ListAttributes.ICEBLOCKPHEASANT); 
+			super(ListAttributes.ICE_BLOCK_PHEASANT); 
 		}
 		
 		@Override
 		public void use(EntityPlayer player)
 		{
-			this.projectile = new HieProjectiles.IceBlockPheasant(player.worldObj, player, ListAttributes.ICEBLOCKPHEASANT);
+			this.projectile = new HieProjectiles.IceBlockPheasant(player.worldObj, player, ListAttributes.ICE_BLOCK_PHEASANT);
 			super.use(player);
 		};		
 	}

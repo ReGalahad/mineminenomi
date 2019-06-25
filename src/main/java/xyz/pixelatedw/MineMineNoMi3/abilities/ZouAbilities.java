@@ -31,7 +31,7 @@ public class ZouAbilities
 	{
 		public TrunkShot()
 		{
-			super(ListAttributes.TRUNKSHOT);
+			super(ListAttributes.TRUNK_SHOT);
 		}
 		
 		public void use(EntityPlayer player)
@@ -44,7 +44,7 @@ public class ZouAbilities
 				return;
 			}
 			
-			this.projectile = new ZouProjectiles.TrunkShot(player.worldObj, player, ListAttributes.TRUNKSHOT);			
+			this.projectile = new ZouProjectiles.TrunkShot(player.worldObj, player, ListAttributes.TRUNK_SHOT);			
 			super.use(player);	
 		}
 	}
@@ -53,7 +53,7 @@ public class ZouAbilities
 	{
 		public GreatStomp() 
 		{
-			super(ListAttributes.GREATSTOMP); 
+			super(ListAttributes.GREAT_STOMP); 
 		}	
 		
 		public void use(EntityPlayer player) 
@@ -85,7 +85,7 @@ public class ZouAbilities
 	{
 		public IvoryStomp() 
 		{
-			super(ListAttributes.IVORYSTOMP); 
+			super(ListAttributes.IVORY_STOMP); 
 		}	
 		
 		public void passive(EntityPlayer player)
@@ -139,7 +139,7 @@ public class ZouAbilities
 		
 		public IvoryDart() 
 		{
-			super(ListAttributes.IVORYDART); 
+			super(ListAttributes.IVORY_DART); 
 		}
 		
 		public void use(EntityPlayer player)
@@ -196,7 +196,7 @@ public class ZouAbilities
 	{
 		public ZouPoint()
 		{
-			super(ListAttributes.ZOU_FULLPOINT);
+			super(ListAttributes.ZOU_FULL_POINT);
 		}
 		
 		public void passive(EntityPlayer player)
@@ -239,7 +239,7 @@ public class ZouAbilities
 	{
 		public HybridPoint()
 		{
-			super(ListAttributes.ZOU_HYBRIDPOINT);
+			super(ListAttributes.ZOU_HYBRID_POINT);
 		}
 		
 		public void passive(EntityPlayer player)

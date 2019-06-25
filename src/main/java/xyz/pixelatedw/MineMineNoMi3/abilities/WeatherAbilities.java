@@ -30,7 +30,7 @@ public class WeatherAbilities
 	{
 		public GustSword() 
 		{
-			super(ListAttributes.GUSTSWORD); 
+			super(ListAttributes.GUST_SWORD); 
 		}
 		
 		@Override
@@ -44,7 +44,7 @@ public class WeatherAbilities
 	{
 		public ThunderBall() 
 		{
-			super(ListAttributes.THUNDERBALL); 
+			super(ListAttributes.THUNDER_BALL); 
 		}
 		
 		@Override
@@ -67,7 +67,7 @@ public class WeatherAbilities
 				}
 				else
 				{
-					WeatherProjectiles.ThunderBall proj = new WeatherProjectiles.ThunderBall(player.worldObj, player, ListAttributes.THUNDERBALL);	
+					WeatherProjectiles.ThunderBall proj = new WeatherProjectiles.ThunderBall(player.worldObj, player, ListAttributes.THUNDER_BALL);	
 					proj.setLocationAndAngles(player.posX, player.posY + player.getEyeHeight(), player.posZ, player.rotationYaw, player.rotationPitch);
 					player.worldObj.spawnEntityInWorld(proj);
 				}
@@ -109,7 +109,7 @@ public class WeatherAbilities
 	{
 		public CoolBall() 
 		{
-			super(ListAttributes.COOLBALL); 
+			super(ListAttributes.COOL_BALL); 
 		}
 		
 		@Override
@@ -132,7 +132,7 @@ public class WeatherAbilities
 				}
 				else
 				{
-					WeatherProjectiles.CoolBall proj = new WeatherProjectiles.CoolBall(player.worldObj, player, ListAttributes.COOLBALL);	
+					WeatherProjectiles.CoolBall proj = new WeatherProjectiles.CoolBall(player.worldObj, player, ListAttributes.COOL_BALL);	
 					proj.setLocationAndAngles(player.posX, player.posY + player.getEyeHeight(), player.posZ, player.rotationYaw, player.rotationPitch);
 					player.worldObj.spawnEntityInWorld(proj);
 				}
@@ -158,7 +158,7 @@ public class WeatherAbilities
 	{
 		public HeatBall() 
 		{
-			super(ListAttributes.HEATBALL); 
+			super(ListAttributes.HEAT_BALL); 
 		}
 		
 		@Override
@@ -181,7 +181,7 @@ public class WeatherAbilities
 				}
 				else
 				{
-					WeatherProjectiles.HeatBall proj = new WeatherProjectiles.HeatBall(player.worldObj, player, ListAttributes.HEATBALL);	
+					WeatherProjectiles.HeatBall proj = new WeatherProjectiles.HeatBall(player.worldObj, player, ListAttributes.HEAT_BALL);	
 					proj.setLocationAndAngles(player.posX, player.posY + player.getEyeHeight(), player.posZ, player.rotationYaw, player.rotationPitch);
 					player.worldObj.spawnEntityInWorld(proj);
 				}

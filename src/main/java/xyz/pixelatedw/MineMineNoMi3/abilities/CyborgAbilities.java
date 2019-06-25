@@ -40,7 +40,7 @@ public class CyborgAbilities
 	{
 		public CoupDeVent() 
 		{
-			super(ListAttributes.COUPDEVENT); 
+			super(ListAttributes.COUP_DE_VENT); 
 		}
 		
 		public void startCharging(EntityPlayer player)
@@ -88,7 +88,7 @@ public class CyborgAbilities
 	{
 		public StrongRight() 
 		{
-			super(ListAttributes.STRONGRIGHT); 
+			super(ListAttributes.STRONG_RIGHT); 
 		}
 		
 		public void use(EntityPlayer player)
@@ -116,7 +116,7 @@ public class CyborgAbilities
 	{
 		public RadicalBeam() 
 		{
-			super(ListAttributes.RADICALBEAM); 
+			super(ListAttributes.RADICAL_BEAM); 
 		}
 		
 		public void use(EntityPlayer player)
@@ -144,7 +144,7 @@ public class CyborgAbilities
 	{
 		public FreshFire() 
 		{
-			super(ListAttributes.FRESHFIRE); 
+			super(ListAttributes.FRESH_FIRE); 
 		}
 		
 		public void use(EntityPlayer player)
@@ -177,7 +177,7 @@ public class CyborgAbilities
 	{
 		public ColaOverdrive() 
 		{
-			super(ListAttributes.COLAOVERDRIVE); 
+			super(ListAttributes.COLA_OVERDRIVE); 
 		}
 		
 		public void use(EntityPlayer player)

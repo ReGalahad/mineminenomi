@@ -37,7 +37,7 @@ public class SukeAbilities
 	{
 		public SukePunch()
 		{
-			super(ListAttributes.SUKEPUNCH);
+			super(ListAttributes.SUKE_PUNCH);
 		}
 
 		public void hitEntity(EntityPlayer player, EntityLivingBase target)
@@ -55,7 +55,7 @@ public class SukeAbilities
 	{
 		public ShishaNoTe() 
 		{
-			super(ListAttributes.SHISHANOTE); 
+			super(ListAttributes.SHISHA_NO_TE); 
 		}
 		
 		public void use(EntityPlayer player)

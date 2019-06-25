@@ -58,7 +58,7 @@ public class NikyuAbilities
 	{
 		public TsuppariPadHo() 
 		{
-			super(ListAttributes.TSUPPARIPADHO); 
+			super(ListAttributes.TSUPPARI_PAD_HO); 
 		}
 		
 		public void use(EntityPlayer player)
@@ -72,7 +72,7 @@ public class NikyuAbilities
 	{
 		public PadHo() 
 		{
-			super(ListAttributes.PADHO); 
+			super(ListAttributes.PAD_HO); 
 		}
 		
 		public void use(EntityPlayer player)
@@ -86,7 +86,7 @@ public class NikyuAbilities
 	{
 		public UrsusShock() 
 		{
-			super(ListAttributes.URSUSSHOCK); 
+			super(ListAttributes.URSUS_SHOCK); 
 		}
 		
 		public void endCharging(EntityPlayer player)

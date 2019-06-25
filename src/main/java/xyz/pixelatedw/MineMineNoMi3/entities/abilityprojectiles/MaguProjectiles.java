@@ -25,7 +25,7 @@ public class MaguProjectiles
 	static
 	{
 		abilitiesClassesArray.add(new Object[] {Meigo.class, ListAttributes.MEIGO});
-		abilitiesClassesArray.add(new Object[] {DaiFunka.class, ListAttributes.DAIFUNKA});
+		abilitiesClassesArray.add(new Object[] {DaiFunka.class, ListAttributes.DAI_FUNKA});
 	}
 	
 	public static class Meigo extends AbilityProjectile

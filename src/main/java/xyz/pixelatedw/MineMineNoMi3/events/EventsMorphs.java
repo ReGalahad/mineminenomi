@@ -230,7 +230,7 @@ public class EventsMorphs
 		boolean renderHandFlag = false;
 		boolean renderHandEffectFlag = false;
 
-		Ability hotBoilingSpecial = abilityProps.getAbilityFromName(ListAttributes.HOTBOILINGSPECIAL.getAttributeName());
+		Ability hotBoilingSpecial = abilityProps.getAbilityFromName(ListAttributes.HOT_BOILING_SPECIAL.getAttributeName());
 		boolean hasHotBoilingSpecial = (hotBoilingSpecial != null && hotBoilingSpecial.isPassiveActive());
 		if (player.getHeldItem() == null && (props.hasBusoHakiActive() || hasHotBoilingSpecial))
 		{

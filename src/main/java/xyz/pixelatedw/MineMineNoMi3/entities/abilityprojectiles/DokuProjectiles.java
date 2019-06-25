@@ -36,9 +36,9 @@ public class DokuProjectiles
 	
 	static
 	{
-		abilitiesClassesArray.add(new Object[] {ChloroBall.class, ListAttributes.CHLOROBALL});
+		abilitiesClassesArray.add(new Object[] {ChloroBall.class, ListAttributes.CHLORO_BALL});
 		abilitiesClassesArray.add(new Object[] {Hydra.class, ListAttributes.HYDRA});
-		abilitiesClassesArray.add(new Object[] {VenomRoad.class, ListAttributes.VENOMROAD});
+		abilitiesClassesArray.add(new Object[] {VenomRoad.class, ListAttributes.VENOM_ROAD});
 	}
 		
 	public static class VenomRoad extends AbilityProjectile

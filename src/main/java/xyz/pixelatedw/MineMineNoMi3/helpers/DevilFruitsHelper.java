@@ -104,7 +104,7 @@ public class DevilFruitsHelper
 	public static boolean canUseSwordsmanAbilities(EntityPlayer player)
 	{
 		ExtendedEntityData props = ExtendedEntityData.get(player);
-		Ability sparClaw = AbilityProperties.get(player).getAbilityFromName(ListAttributes.SPARCLAW.getAttributeName());
+		Ability sparClaw = AbilityProperties.get(player).getAbilityFromName(ListAttributes.SPAR_CLAW.getAttributeName());
 		
 		if(props.getUsedFruit().equalsIgnoreCase("supasupa") && sparClaw != null && sparClaw.isPassiveActive())
 		{

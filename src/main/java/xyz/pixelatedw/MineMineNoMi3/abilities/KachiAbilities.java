@@ -26,7 +26,7 @@ public class KachiAbilities {
 
     public static class HotBoilingSpecial extends Ability {
         public HotBoilingSpecial() {
-            super(ListAttributes.HOTBOILINGSPECIAL);
+            super(ListAttributes.HOT_BOILING_SPECIAL);
         }
 
         public void passive(EntityPlayer player) {
