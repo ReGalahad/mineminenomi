@@ -176,6 +176,12 @@ public class DevilFruitsHelper
 		return false;
 	}
 
+	public static void verifyAndGiveAbility(Ability a, AbilityProperties abilityProps)
+	{
+		if(!verifyIfAbilityIsBanned(a))
+			abilityProps.addRacialAbility(a);
+	}
+	
 	public static boolean verifyIfAbilityIsBanned(Ability a)
 	{
 		for (String str : MainConfig.abilityRestrictions)
@@ -235,13 +241,10 @@ public class DevilFruitsHelper
 		ExtendedEntityData props = ExtendedEntityData.get(player);
 		QuestProperties questProps = QuestProperties.get(player);
 		AbilityProperties abilityProps = AbilityProperties.get(player);
-		
-		System.out.println(props.getFightStyle());
-		
+				
 		if (props.isSwordsman())
 		{
-			if (!verifyIfAbilityIsBanned(SwordsmanAbilities.SHISHISHISONSON))
-				abilityProps.addRacialAbility(SwordsmanAbilities.SHISHISHISONSON);
+			verifyAndGiveAbility(SwordsmanAbilities.SHISHISHISONSON, abilityProps);
 
 			if (MainConfig.enableQuestProgression)
 			{
@@ -250,18 +253,14 @@ public class DevilFruitsHelper
 			}
 			else
 			{
-				if (!verifyIfAbilityIsBanned(SwordsmanAbilities.SANBYAKUROKUJUPOUNDHO))
-					abilityProps.addRacialAbility(SwordsmanAbilities.SANBYAKUROKUJUPOUNDHO);
-				if (!verifyIfAbilityIsBanned(SwordsmanAbilities.YAKKODORI))
-					abilityProps.addRacialAbility(SwordsmanAbilities.YAKKODORI);
-				if (!verifyIfAbilityIsBanned(SwordsmanAbilities.OTATSUMAKI))
-					abilityProps.addRacialAbility(SwordsmanAbilities.OTATSUMAKI);
+				verifyAndGiveAbility(SwordsmanAbilities.SANBYAKUROKUJUPOUNDHO, abilityProps);
+				verifyAndGiveAbility(SwordsmanAbilities.YAKKODORI, abilityProps);
+				verifyAndGiveAbility(SwordsmanAbilities.OTATSUMAKI, abilityProps);
 			}
 		}
 		else if (props.isSniper())
 		{
-			if (!verifyIfAbilityIsBanned(SniperAbilities.KAENBOSHI))
-				abilityProps.addRacialAbility(SniperAbilities.KAENBOSHI);
+			verifyAndGiveAbility(SniperAbilities.KAENBOSHI, abilityProps);
 
 			if (MainConfig.enableQuestProgression)
 			{
@@ -269,22 +268,16 @@ public class DevilFruitsHelper
 			}
 			else
 			{
-				if (!verifyIfAbilityIsBanned(SniperAbilities.KEMURIBOSHI))
-					abilityProps.addRacialAbility(SniperAbilities.KEMURIBOSHI);
-				if (!verifyIfAbilityIsBanned(SniperAbilities.RENPATSUNAMARIBOSHI))
-					abilityProps.addRacialAbility(SniperAbilities.RENPATSUNAMARIBOSHI);
-				if (!verifyIfAbilityIsBanned(SniperAbilities.SAKURETSUSABOTENBOSHI))
-					abilityProps.addRacialAbility(SniperAbilities.SAKURETSUSABOTENBOSHI);
+				verifyAndGiveAbility(SniperAbilities.KEMURIBOSHI, abilityProps);
+				verifyAndGiveAbility(SniperAbilities.RENPATSUNAMARIBOSHI, abilityProps);
+				verifyAndGiveAbility(SniperAbilities.SAKURETSUSABOTENBOSHI, abilityProps);
 			}
 		}
 		else if (props.isWeatherWizard())
 		{
-			if (!verifyIfAbilityIsBanned(WeatherAbilities.HEATBALL))
-				abilityProps.addRacialAbility(WeatherAbilities.HEATBALL);
-			if (!verifyIfAbilityIsBanned(WeatherAbilities.COOLBALL))
-				abilityProps.addRacialAbility(WeatherAbilities.COOLBALL);
-			if (!verifyIfAbilityIsBanned(WeatherAbilities.THUNDERBALL))
-				abilityProps.addRacialAbility(WeatherAbilities.THUNDERBALL);
+			verifyAndGiveAbility(WeatherAbilities.HEATBALL, abilityProps);
+			verifyAndGiveAbility(WeatherAbilities.COOLBALL, abilityProps);
+			verifyAndGiveAbility(WeatherAbilities.THUNDERBALL, abilityProps);
 			
 			if (MainConfig.enableQuestProgression)
 			{

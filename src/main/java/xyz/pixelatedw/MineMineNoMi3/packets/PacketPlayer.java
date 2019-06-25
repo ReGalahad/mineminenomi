@@ -13,18 +13,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import xyz.pixelatedw.MineMineNoMi3.ID;
-import xyz.pixelatedw.MineMineNoMi3.MainConfig;
-import xyz.pixelatedw.MineMineNoMi3.abilities.CyborgAbilities;
-import xyz.pixelatedw.MineMineNoMi3.abilities.GoroAbilities;
-import xyz.pixelatedw.MineMineNoMi3.abilities.SniperAbilities;
-import xyz.pixelatedw.MineMineNoMi3.abilities.SwordsmanAbilities;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilitySync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.gui.GUIWantedPoster;
+import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.items.CharacterCreator;
 
 public class PacketPlayer implements IMessage
@@ -61,6 +56,7 @@ public class PacketPlayer implements IMessage
 		this.mZ = mZ;
 	}
 	
+	@Override
 	public void fromBytes(ByteBuf buf) 
 	{
 		this.cmd = ByteBufUtils.readUTF8String(buf);
@@ -71,6 +67,7 @@ public class PacketPlayer implements IMessage
 		this.nbt = ByteBufUtils.readTag(buf);
 	}
 
+	@Override
 	public void toBytes(ByteBuf buf) 
 	{
 		ByteBufUtils.writeUTF8String(buf, this.cmd);
@@ -83,6 +80,7 @@ public class PacketPlayer implements IMessage
 
 	public static class ClientHandler implements IMessageHandler<PacketPlayer, IMessage>
 	{
+		@Override
 		@SideOnly(Side.CLIENT)
 		public IMessage onMessage(PacketPlayer message, MessageContext ctx) 
 		{
@@ -150,6 +148,7 @@ public class PacketPlayer implements IMessage
 	
 	public static class ServerHandler implements IMessageHandler<PacketPlayer, IMessage>
 	{
+		@Override
 		public IMessage onMessage(PacketPlayer message, MessageContext ctx) 
 		{
 			EntityPlayer player = ctx.getServerHandler().playerEntity;
@@ -161,38 +160,13 @@ public class PacketPlayer implements IMessage
 				abilityProps.clearHotbar();
 				abilityProps.clearRacialAbilities();
 				
+				DevilFruitsHelper.validateRacialMoves(player);
+				DevilFruitsHelper.validateStyleMoves(player);
+				
 				if(props.isCyborg())
-				{										
-					abilityProps.addRacialAbility(CyborgAbilities.FRESHFIRE);
-					abilityProps.addRacialAbility(CyborgAbilities.COLAOVERDRIVE);
-					abilityProps.addRacialAbility(CyborgAbilities.RADICALBEAM);
-					abilityProps.addRacialAbility(CyborgAbilities.STRONGRIGHT);
-					abilityProps.addRacialAbility(CyborgAbilities.COUPDEVENT);
-					
+				{
 					props.setMaxCola(100);
 					props.setCola(props.getMaxCola());
-				}
-				
-				if(props.isSwordsman())
-				{
-					abilityProps.addRacialAbility(SwordsmanAbilities.SHISHISHISONSON);
-					if(!MainConfig.enableQuestProgression)
-					{
-						abilityProps.addRacialAbility(SwordsmanAbilities.SANBYAKUROKUJUPOUNDHO);
-						abilityProps.addRacialAbility(SwordsmanAbilities.YAKKODORI);
-						abilityProps.addRacialAbility(SwordsmanAbilities.OTATSUMAKI);
-					}
-				}
-	
-				if(props.isSniper())		
-				{
-					abilityProps.addRacialAbility(SniperAbilities.KAENBOSHI);
-					if(!MainConfig.enableQuestProgression)
-					{
-						abilityProps.addRacialAbility(SniperAbilities.KEMURIBOSHI);
-						abilityProps.addRacialAbility(SniperAbilities.RENPATSUNAMARIBOSHI);
-						abilityProps.addRacialAbility(SniperAbilities.SAKURETSUSABOTENBOSHI);
-					}
 				}
 				
 				for(ItemStack is : player.inventory.mainInventory)

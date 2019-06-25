@@ -12,32 +12,24 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.Map.Entry;
+import java.util.Scanner;
 import java.util.Set;
-import java.util.stream.Stream;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChatComponentText;
@@ -48,20 +40,10 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.Values;
-import xyz.pixelatedw.MineMineNoMi3.abilities.CyborgAbilities;
-import xyz.pixelatedw.MineMineNoMi3.abilities.FishKarateAbilities;
-import xyz.pixelatedw.MineMineNoMi3.abilities.HakiAbilities;
-import xyz.pixelatedw.MineMineNoMi3.abilities.RokushikiAbilities;
-import xyz.pixelatedw.MineMineNoMi3.abilities.SniperAbilities;
-import xyz.pixelatedw.MineMineNoMi3.abilities.SwordsmanAbilities;
-import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
-import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityExplosion;
-import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityManager;
 import xyz.pixelatedw.MineMineNoMi3.api.math.ISphere;
 import xyz.pixelatedw.MineMineNoMi3.api.math.Sphere;
 import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
-import xyz.pixelatedw.MineMineNoMi3.items.AkumaNoMi;
 
 public class WyHelper
 {
@@ -179,6 +161,7 @@ public class WyHelper
 
 		Collections.sort(entries, new Comparator<Map.Entry<K, V>>()
 		{
+			@Override
 			public int compare(Entry<K, V> o1, Entry<K, V> o2)
 			{
 				return o1.getKey().compareTo(o2.getKey());
@@ -394,13 +377,13 @@ public class WyHelper
 		return null;
 	}
 
-	public static List<EntityLivingBase> getEntitiesNear(Entity e, double[] radius, Class<? extends Entity>... classEntities)
+	public static <T> List<T> getEntitiesNear(Entity e, double[] radius, Class<? extends T>... classEntities)
 	{
 		try
 		{
 			AxisAlignedBB aabb = AxisAlignedBB.getBoundingBox(e.posX, e.posY, e.posZ, e.posX + 1, e.posY + 1, e.posZ + 1).expand(radius[0], radius[1], radius[2]);
-			List list = new ArrayList();
-			for(Class<? extends Entity> clz : classEntities)
+			List<T> list = new ArrayList<T>();
+			for(Class<? extends T> clz : classEntities)
 				list.addAll(e.worldObj.getEntitiesWithinAABB(clz, aabb));
 			list.remove(e);
 			return list;
@@ -420,7 +403,7 @@ public class WyHelper
 
 	public static List<EntityLivingBase> getEntitiesNear(TileEntity e, double radius, Class<? extends Entity> classEntity)
 	{
-		AxisAlignedBB aabb = AxisAlignedBB.getBoundingBox((double) e.xCoord, (double) e.yCoord, (double) e.zCoord, (double) (e.xCoord + 1), (double) (e.yCoord + 1), (double) (e.zCoord + 1)).expand(radius, radius, radius);
+		AxisAlignedBB aabb = AxisAlignedBB.getBoundingBox(e.xCoord, e.yCoord, e.zCoord, e.xCoord + 1, e.yCoord + 1, e.zCoord + 1).expand(radius, radius, radius);
 		List list = e.getWorldObj().getEntitiesWithinAABB(classEntity, aabb);
 		return list;
 	}
@@ -470,9 +453,9 @@ public class WyHelper
 		float f = 1.0F;
 		float f1 = e.prevRotationPitch + (e.rotationPitch - e.prevRotationPitch) * f;
 		float f2 = e.prevRotationYaw + (e.rotationYaw - e.prevRotationYaw) * f;
-		double d = e.prevPosX + (e.posX - e.prevPosX) * (double) f;
-		double d1 = (e.prevPosY + (e.posY - e.prevPosY) * (double) f + 1.6200000000000001D) - (double) e.getYOffset();
-		double d2 = e.prevPosZ + (e.posZ - e.prevPosZ) * (double) f;
+		double d = e.prevPosX + (e.posX - e.prevPosX) * f;
+		double d1 = (e.prevPosY + (e.posY - e.prevPosY) * f + 1.6200000000000001D) - e.getYOffset();
+		double d2 = e.prevPosZ + (e.posZ - e.prevPosZ) * f;
 		Vec3 vec3d = Vec3.createVectorHelper(d, d1, d2);
 		float f3 = MathHelper.cos(-f2 * 0.01745329F - 3.141593F);
 		float f4 = MathHelper.sin(-f2 * 0.01745329F - 3.141593F);
@@ -482,7 +465,7 @@ public class WyHelper
 		float f9 = f3 * f5;
 		double d3 = 5000D;
 
-		Vec3 vec3 = vec3d.addVector((double) f7 * d3, (double) f6 * d3, (double) f9 * d3);
+		Vec3 vec3 = vec3d.addVector(f7 * d3, f6 * d3, f9 * d3);
 		MovingObjectPosition ray = e.worldObj.rayTraceBlocks(vec3d, vec3, false);
 
 		return ray;
@@ -542,6 +525,7 @@ public class WyHelper
 		        {
 					Sphere.generate(posX, posY, posZ, size, new ISphere()
 					{
+						@Override
 						public void call(int x, int y, int z)
 						{
 							DevilFruitsHelper.placeBlockIfAllowed(world, x, y, z, block, blockRules);
@@ -574,6 +558,7 @@ public class WyHelper
 		        {
 					Sphere.generateFilled(posX, posY, posZ, size, new ISphere()
 					{
+						@Override
 						public void call(int x, int y, int z)
 						{
 							DevilFruitsHelper.placeBlockIfAllowed(world, x, y, z, block, blockRules);
