@@ -228,6 +228,7 @@ public class ListMisc
 	
 	public static ClimaTact ClimaTact = new ClimaTact();
 	public static ClimaTact PerfectClimaTact = new ClimaTact();
+	public static ClimaTact SorceryClimaTact = new ClimaTact();
 	
 	public static ItemAbilityWeapon IceSaber = new ItemAbilityWeapon(9).setIsSlownessInducing();
 	public static ItemAbilityWeapon AmaNoMurakumo = new ItemAbilityWeapon(9);
@@ -314,6 +315,7 @@ public class ListMisc
 		
 		addITEM(ClimaTact, "Clima Tact", ListCreativeTabs.tabWeapons);
 		addITEM(PerfectClimaTact, "Perfect Clima Tact", ListCreativeTabs.tabWeapons);
+		addITEM(SorceryClimaTact, "Sorcery Clima Tact", ListCreativeTabs.tabWeapons);
 		
 		addITEM(IceSaber, "Ice Saber", null);
 		addITEM(AmaNoMurakumo, "Ama no Murakumo", null);

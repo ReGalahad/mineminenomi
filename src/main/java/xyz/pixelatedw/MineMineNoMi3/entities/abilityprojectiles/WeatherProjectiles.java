@@ -68,17 +68,27 @@ public class WeatherProjectiles
 			{
 				for(int i = 0; i < 5; i++)
 				{
-					double offsetX = WyMathHelper.randomDouble();
-					double offsetY = WyMathHelper.randomDouble();
-					double offsetZ = WyMathHelper.randomDouble();
+					double offsetX = WyMathHelper.randomDouble() / 4;
+					double offsetY = WyMathHelper.randomDouble() / 4;
+					double offsetZ = WyMathHelper.randomDouble() / 4;
 				    
 					EntityParticleFX particle = new EntityParticleFX(this.worldObj, ID.PARTICLE_ICON_MOKU2, 
 							posX + offsetX, 
 							posY + offsetY, 
 							posZ + offsetZ, 
 							0, 0.01F, 0)
-							.setParticleAge(2).setParticleScale(3F);			
-					MainMod.proxy.spawnCustomParticles(this, particle);				
+							.setParticleAge(2).setParticleScale(1F);
+					particle.setAlphaF(0.5F);
+					MainMod.proxy.spawnCustomParticles(this, particle);
+					
+					particle = new EntityParticleFX(this.worldObj, ID.PARTICLE_ICON_MOKU, 
+							posX + offsetX, 
+							posY + offsetY, 
+							posZ + offsetZ, 
+							0, 0.01F, 0)
+							.setParticleAge(2).setParticleScale(1F);
+					particle.setAlphaF(0.7F);
+					MainMod.proxy.spawnCustomParticles(this, particle);
 				}
 			}
 
