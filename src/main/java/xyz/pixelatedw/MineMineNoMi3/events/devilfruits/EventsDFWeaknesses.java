@@ -1,17 +1,13 @@
 package xyz.pixelatedw.MineMineNoMi3.events.devilfruits;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
-import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilitySync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
@@ -19,7 +15,6 @@ import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
 import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.helpers.ItemsHelper;
-import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
 public class EventsDFWeaknesses
 {
@@ -49,12 +44,12 @@ public class EventsDFWeaknesses
 			ItemStack heldItem = player.getHeldItem();
 			boolean updateDisabledAbilities = false;
 			
-			if (props.hasDevilFruit() && !player.worldObj.isRemote)
+			if (!player.worldObj.isRemote)
 			{
-				if (ItemsHelper.hasKairosekiItem(player))
+				if (props.hasDevilFruit() && ItemsHelper.hasKairosekiItem(player))
 					player.addPotionEffect(new PotionEffect(Potion.confusion.getId(), 200, 0));
 				
-				if (DevilFruitsHelper.isNearbyKairoseki(player))
+				if (props.hasDevilFruit() && DevilFruitsHelper.isNearbyKairoseki(player))
 				{
 					for (int i = 0; i < abilityProps.countAbilitiesInHotbar(); i++)
 					{

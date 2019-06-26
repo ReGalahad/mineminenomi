@@ -261,7 +261,7 @@ public class ListAttributes
 
 	public static final AbilityAttribute RUST_TOUCH = new AbilityAttribute("Rust Touch").setAbilityCooldown(19).setAbilityPunch().setAbilityPassive();
 	
-	public static final AbilityAttribute GUST_SWORD = new AbilityAttribute("Gust Sword").setAbilityCooldown(8).setProjectileSize(.01, .01, .01).setAbilityRepeater(2).setProjectileDamage(2).setProjectileSpeed(5);
+	public static final AbilityAttribute GUST_SWORD = new AbilityAttribute("Gust Sword").setAbilityCooldown(8).setProjectileTicks(5).setProjectileSize(.01, .01, .01).setAbilityRepeater(3).setProjectileDamage(2).setProjectileSpeed(5);
 	public static final AbilityAttribute THUNDER_BALL = new AbilityAttribute("Thunder Ball").setAbilityCooldown(5).setProjectileModel(new ModelSphere()).setProjectileColor("FFFF00").setProjectileAlpha(150).setProjectileSize(1.5, 1.5, 1.5).setProjectileTicks(300);
 	public static final AbilityAttribute COOL_BALL = new AbilityAttribute("Cool Ball").setAbilityCooldown(5).setProjectileModel(new ModelSphere()).setProjectileColor("0000FF").setProjectileAlpha(150).setProjectileSize(1.5, 1.5, 1.5).setProjectileTicks(300);
 	public static final AbilityAttribute HEAT_BALL = new AbilityAttribute("Heat Ball").setAbilityCooldown(5).setProjectileModel(new ModelSphere()).setProjectileColor("FF0000").setProjectileAlpha(150).setProjectileSize(1.5, 1.5, 1.5).setProjectileTicks(300);

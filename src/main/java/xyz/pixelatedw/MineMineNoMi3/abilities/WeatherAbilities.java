@@ -38,7 +38,10 @@ public class WeatherAbilities
 		public void use(EntityPlayer player)
 		{
 			if(player.inventory.getCurrentItem() == null || (player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() != ListMisc.PerfectClimaTact))
+			{
+				WyHelper.sendMsgToPlayer(player, "Cannot use " + this.getAttribute().getAttributeName() + " without a Perfect or better Clima Tact in hand!");
 				return;
+			}
 
 			this.projectile = new WeatherProjectiles.GustSword(player.worldObj, player, attr);
 			super.use(player);

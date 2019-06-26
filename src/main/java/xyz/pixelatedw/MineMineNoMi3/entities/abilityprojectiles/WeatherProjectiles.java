@@ -13,6 +13,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.WorldInfo;
@@ -67,17 +68,16 @@ public class WeatherProjectiles
 			{
 				for(int i = 0; i < 5; i++)
 				{
-					double offsetX = (new Random().nextInt(20) + 1.0D - 10.0D) / 18.0D;
-					double offsetY = (new Random().nextInt(20) + 1.0D - 10.0D) / 18.0D;
-					double offsetZ = (new Random().nextInt(20) + 1.0D - 10.0D) / 18.0D;
+					double offsetX = WyMathHelper.randomDouble();
+					double offsetY = WyMathHelper.randomDouble();
+					double offsetZ = WyMathHelper.randomDouble();
 				    
 					EntityParticleFX particle = new EntityParticleFX(this.worldObj, ID.PARTICLE_ICON_MOKU2, 
 							posX + offsetX, 
 							posY + offsetY, 
 							posZ + offsetZ, 
-							0, 0, 0)
-							.setParticleAge(15).setParticleScale(3F);
-					
+							0, 0.01F, 0)
+							.setParticleAge(2).setParticleScale(3F);			
 					MainMod.proxy.spawnCustomParticles(this, particle);				
 				}
 			}
@@ -88,7 +88,38 @@ public class WeatherProjectiles
 		@Override
 		public void tasksImapct(MovingObjectPosition hit)
 		{
-			
+			if(hit.entityHit != null && hit.entityHit instanceof EntityLivingBase)
+			{
+				double mX = -MathHelper.sin(this.getThrower().rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.getThrower().rotationPitch / 180.0F * (float)Math.PI) * 0.4;
+				double mZ = MathHelper.cos(this.getThrower().rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.getThrower().rotationPitch / 180.0F * (float)Math.PI) * 0.4;
+					
+				double f2 = MathHelper.sqrt_double(mX * mX + this.getThrower().motionY * this.getThrower().motionY + mZ * mZ);
+				mX /= f2;
+				mZ /= f2;
+				mX += this.getThrower().worldObj.rand.nextGaussian() * 0.007499999832361937D * 1.0;
+				mZ += this.getThrower().worldObj.rand.nextGaussian() * 0.007499999832361937D * 1.0;
+				mX *= 2;
+				mZ *= 2;
+				
+				hit.entityHit.motionX = mX;
+				hit.entityHit.motionZ = mZ;
+				
+				/*double newPosX = 0, newPosY = 0, newPosZ = 0;
+				
+				int range = 10;
+				newPosY += 1;
+				Direction dir = WyHelper.get4Directions(this.getThrower());
+				if(dir == WyHelper.Direction.SOUTH)
+					newPosX += WyMathHelper.randomWithRange(0, range);
+				else if(dir == WyHelper.Direction.EAST)
+					newPosX -= WyMathHelper.randomWithRange(0, range);
+				else if(dir == WyHelper.Direction.NORTH)
+					newPosZ += WyMathHelper.randomWithRange(0, range);
+				else if(dir == WyHelper.Direction.WEST)  
+					newPosZ -= WyMathHelper.randomWithRange(0, range);
+
+				((EntityLivingBase)hit.entityHit).setPositionAndUpdate(hit.entityHit.posX + newPosX, hit.entityHit.posY + newPosY, hit.entityHit.posZ + newPosZ);*/
+			}
 		}
 	}
 	
