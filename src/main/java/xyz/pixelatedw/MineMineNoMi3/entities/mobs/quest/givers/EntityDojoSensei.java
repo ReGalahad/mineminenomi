@@ -1,4 +1,4 @@
-package xyz.pixelatedw.MineMineNoMi3.entities.mobs.questgivers;
+package xyz.pixelatedw.MineMineNoMi3.entities.mobs.quest.givers;
 
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;

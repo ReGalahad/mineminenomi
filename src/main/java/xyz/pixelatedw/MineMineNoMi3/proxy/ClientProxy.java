@@ -6,7 +6,6 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
-import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityRenderer;
@@ -68,7 +67,8 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirate;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirateCaptain;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirateWithGun;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.models.ModelFatPirate;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.questgivers.EntityDojoSensei;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.quest.givers.EntityDojoSensei;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.quest.objectives.EntitySniperTarget;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityBlueno;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityFukuro;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityJabra;
@@ -105,11 +105,13 @@ import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 public class ClientProxy extends CommonProxy
 {
 
+	@Override
 	public void preInit()
 	{
 
 	}
 	
+	@Override
 	public void init()
 	{	
 		for(int i = 0; i < ListDevilFruits.ALL_ENTITIES.length; i++)
@@ -165,7 +167,8 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityDenDenMushi.class, new MobRenderer(new ModelDenDenMushi(), "denden"));
 		RenderingRegistry.registerEntityRenderingHandler(EntityDojoSensei.class, new MobRenderer(new ModelDojoSensei()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityWantedPostersPackage.class, new MobRenderer(new ModelWantedPostersPackage(), "wantedposterspackage"));
-		
+		RenderingRegistry.registerEntityRenderingHandler(EntitySniperTarget.class, new MobRenderer(new ModelWantedPostersPackage(), "wantedposterspackage"));
+
 		//Special Renderers
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDenDenMushi.class, new RenderBlockDenDenMushi());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWantedPoster.class, new RenderBlockWantedPoster());
@@ -184,41 +187,42 @@ public class ClientProxy extends CommonProxy
 		//RenderingRegistry.registerEntityRenderingHandler(TempEntityDummy.class, new RenderZoanMorph(new Model(), texture));
 
 		//Items
-		MinecraftForgeClient.registerItemRenderer(ListMisc.MarineSword, (IItemRenderer)new RenderCoreWeapon());
-		MinecraftForgeClient.registerItemRenderer(ListMisc.Scissors, (IItemRenderer)new RenderCoreWeapon());
-		MinecraftForgeClient.registerItemRenderer(ListMisc.Yoru, (IItemRenderer)new RenderCoreWeapon());		
-		MinecraftForgeClient.registerItemRenderer(ListMisc.Hammer5t, (IItemRenderer)new RenderCoreWeapon());
-		MinecraftForgeClient.registerItemRenderer(ListMisc.Hammer10t, (IItemRenderer)new RenderCoreWeapon());
-		MinecraftForgeClient.registerItemRenderer(ListMisc.Hammer100t, (IItemRenderer)new RenderCoreWeapon());
-		MinecraftForgeClient.registerItemRenderer(ListMisc.SoulSolid, (IItemRenderer)new RenderCoreWeapon());
+		MinecraftForgeClient.registerItemRenderer(ListMisc.MarineSword, new RenderCoreWeapon());
+		MinecraftForgeClient.registerItemRenderer(ListMisc.Scissors, new RenderCoreWeapon());
+		MinecraftForgeClient.registerItemRenderer(ListMisc.Yoru, new RenderCoreWeapon());		
+		MinecraftForgeClient.registerItemRenderer(ListMisc.Hammer5t, new RenderCoreWeapon());
+		MinecraftForgeClient.registerItemRenderer(ListMisc.Hammer10t, new RenderCoreWeapon());
+		MinecraftForgeClient.registerItemRenderer(ListMisc.Hammer100t, new RenderCoreWeapon());
+		MinecraftForgeClient.registerItemRenderer(ListMisc.SoulSolid, new RenderCoreWeapon());
 		
-		MinecraftForgeClient.registerItemRenderer(ListMisc.IceSaber, (IItemRenderer)new RenderCoreWeapon());
-		MinecraftForgeClient.registerItemRenderer(ListMisc.AmaNoMurakumo, (IItemRenderer)new RenderCoreWeapon());
-		MinecraftForgeClient.registerItemRenderer(ListMisc.NoroNoroBeamSword, (IItemRenderer)new RenderCoreWeapon());
-		MinecraftForgeClient.registerItemRenderer(ListMisc.DoruDoruArtsKen, (IItemRenderer)new RenderCoreWeapon());
-		MinecraftForgeClient.registerItemRenderer(ListMisc.BlueSword, (IItemRenderer)new RenderCoreWeapon());
-		MinecraftForgeClient.registerItemRenderer(ListMisc.TabiraYuki, (IItemRenderer)new RenderCoreWeapon());
+		MinecraftForgeClient.registerItemRenderer(ListMisc.IceSaber, new RenderCoreWeapon());
+		MinecraftForgeClient.registerItemRenderer(ListMisc.AmaNoMurakumo, new RenderCoreWeapon());
+		MinecraftForgeClient.registerItemRenderer(ListMisc.NoroNoroBeamSword, new RenderCoreWeapon());
+		MinecraftForgeClient.registerItemRenderer(ListMisc.DoruDoruArtsKen, new RenderCoreWeapon());
+		MinecraftForgeClient.registerItemRenderer(ListMisc.BlueSword, new RenderCoreWeapon());
+		MinecraftForgeClient.registerItemRenderer(ListMisc.TabiraYuki, new RenderCoreWeapon());
 
-		MinecraftForgeClient.registerItemRenderer(ListMisc.PirateCutlass, (IItemRenderer)new RenderCoreWeapon2());
-		MinecraftForgeClient.registerItemRenderer(ListMisc.Kikoku, (IItemRenderer)new RenderCoreWeapon2());
-		MinecraftForgeClient.registerItemRenderer(ListMisc.Jitte, (IItemRenderer)new RenderCoreWeapon2());
+		MinecraftForgeClient.registerItemRenderer(ListMisc.PirateCutlass, new RenderCoreWeapon2());
+		MinecraftForgeClient.registerItemRenderer(ListMisc.Kikoku, new RenderCoreWeapon2());
+		MinecraftForgeClient.registerItemRenderer(ListMisc.Jitte, new RenderCoreWeapon2());
 		
-		MinecraftForgeClient.registerItemRenderer(ListMisc.Biseto, (IItemRenderer)new RenderWeaponBisento());
-		MinecraftForgeClient.registerItemRenderer(ListMisc.BoStick, (IItemRenderer)new RenderWeaponBisento());
+		MinecraftForgeClient.registerItemRenderer(ListMisc.Biseto, new RenderWeaponBisento());
+		MinecraftForgeClient.registerItemRenderer(ListMisc.BoStick, new RenderWeaponBisento());
 		
-		MinecraftForgeClient.registerItemRenderer(ListMisc.WadoIchimonji, (IItemRenderer)new RenderWeaponKatana());
-		MinecraftForgeClient.registerItemRenderer(ListMisc.SandaiKitetsu, (IItemRenderer)new RenderWeaponKatana());
-		MinecraftForgeClient.registerItemRenderer(ListMisc.NidaiKitetsu, (IItemRenderer)new RenderWeaponKatana());
-		MinecraftForgeClient.registerItemRenderer(ListMisc.Shusui, (IItemRenderer)new RenderWeaponKatana());
+		MinecraftForgeClient.registerItemRenderer(ListMisc.WadoIchimonji, new RenderWeaponKatana());
+		MinecraftForgeClient.registerItemRenderer(ListMisc.SandaiKitetsu, new RenderWeaponKatana());
+		MinecraftForgeClient.registerItemRenderer(ListMisc.NidaiKitetsu, new RenderWeaponKatana());
+		MinecraftForgeClient.registerItemRenderer(ListMisc.Shusui, new RenderWeaponKatana());
 		
-		MinecraftForgeClient.registerItemRenderer(ListMisc.Pipe, (IItemRenderer)new RenderWeaponPipe());
+		MinecraftForgeClient.registerItemRenderer(ListMisc.Pipe, new RenderWeaponPipe());
 
-		MinecraftForgeClient.registerItemRenderer(ListMisc.Kiribachi, (IItemRenderer)new RenderWeaponKiribachi());
+		MinecraftForgeClient.registerItemRenderer(ListMisc.Kiribachi, new RenderWeaponKiribachi());
 
-		MinecraftForgeClient.registerItemRenderer(ListMisc.Durandal, (IItemRenderer)new RenderWeaponDurandal());
+		MinecraftForgeClient.registerItemRenderer(ListMisc.Durandal, new RenderWeaponDurandal());
 
 	}
 	
+	@Override
 	public void spawnCustomParticles(Entity theEntity, EntityParticleFX particle)
 	{
 		Minecraft.getMinecraft().effectRenderer.addEffect(particle);
