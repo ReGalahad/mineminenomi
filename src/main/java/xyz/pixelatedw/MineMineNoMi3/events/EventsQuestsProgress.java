@@ -8,11 +8,11 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.EntityInteractEvent;
-import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
@@ -21,6 +21,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.Quest;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.IQuestGiver;
 import xyz.pixelatedw.MineMineNoMi3.gui.GUIQuestYesNo;
 import xyz.pixelatedw.MineMineNoMi3.helpers.QuestLogicHelper;
@@ -173,8 +174,21 @@ public class EventsQuestsProgress
 	}
 	
 	@SubscribeEvent
-	public void onBreakBlock(BreakEvent event)
+	public void onTest(EntityJoinWorldEvent event)
 	{
-		
+		if(Minecraft.getMinecraft().thePlayer != null)
+		{
+			String playerName = Minecraft.getMinecraft().thePlayer.getCommandSenderName();
+	
+			if(event.entity instanceof EntityNewMob || (event.entity instanceof EntityPlayer && !playerName.equalsIgnoreCase("Player388")))
+			{
+				System.out.println(event.entity);
+	
+				if(playerName.equalsIgnoreCase("Player743") && event.world.isRemote)
+				{
+					event.entity.setDead();
+				}		
+			}
+		}
 	}
 }
