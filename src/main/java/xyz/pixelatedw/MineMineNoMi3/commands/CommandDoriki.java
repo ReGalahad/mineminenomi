@@ -14,7 +14,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
-import xyz.pixelatedw.MineMineNoMi3.events.customevents.DorikiEvent;
+import xyz.pixelatedw.MineMineNoMi3.events.customevents.EventDoriki;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 
 public class CommandDoriki extends CommandBase
@@ -68,7 +68,7 @@ public class CommandDoriki extends CommandBase
 				equal(target, value); break;
 		}
 
-		DorikiEvent e = new DorikiEvent(target);
+		EventDoriki e = new EventDoriki(target);
 		if (MinecraftForge.EVENT_BUS.post(e))
 			return;
 		WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP)target);
