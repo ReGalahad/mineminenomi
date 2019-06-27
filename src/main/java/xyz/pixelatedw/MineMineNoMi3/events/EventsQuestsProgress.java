@@ -3,6 +3,7 @@ package xyz.pixelatedw.MineMineNoMi3.events;
 import java.util.List;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -11,8 +12,8 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.EntityInteractEvent;
+import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
-import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketQuestSync;
@@ -20,7 +21,8 @@ import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.Quest;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDojoSensei;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.IQuestGiver;
+import xyz.pixelatedw.MineMineNoMi3.gui.GUIQuestYesNo;
 import xyz.pixelatedw.MineMineNoMi3.helpers.QuestLogicHelper;
 import xyz.pixelatedw.MineMineNoMi3.quests.EnumQuestlines;
 import xyz.pixelatedw.MineMineNoMi3.quests.IHitCounterQuest;
@@ -53,7 +55,7 @@ public class EventsQuestsProgress
 	@SubscribeEvent
 	public void onEntityInteract(EntityInteractEvent event)
 	{
-		EntityPlayer player = (EntityPlayer) event.entityPlayer;
+		EntityPlayer player = event.entityPlayer;
 		ExtendedEntityData props = ExtendedEntityData.get(player);
 		QuestProperties questProps = QuestProperties.get(player);
 		EntityLivingBase target = null;
@@ -62,31 +64,32 @@ public class EventsQuestsProgress
 
 		if (target != null && MainConfig.enableQuests)
 		{
-			//TODO Find a general solution for interacting with a quest giver and recieving either the current quest in the questline or opening a UI with available quests
-			// Swordsman Progression Questline Logic
-			if (target instanceof EntityDojoSensei)
+			//A general solution for interacting with a quest giver and receive either the current quest in the questline or opening a UI with available quests
+			if (target instanceof IQuestGiver)
 			{
+				EnumQuestlines questline = ((IQuestGiver) target).getQuestline();
+
 				// Turning in every quest based on the given questline
-				if (questProps.questsInProgress() > 0 && !player.worldObj.isRemote)
-				{
-					if (QuestLogicHelper.turnInQuestlineQuest(player, EnumQuestlines.SWORDSMANPROGRESSION.getQuests()) > 0)
+				if (questProps.questsInProgress() > 0)
+				{					
+					if(QuestLogicHelper.turnInQuestlineQuest(player, questline.getQuests()) > 0)
 						return;
 				}
-
+				
 				// Starting the next quest in the questline
 				if (questProps.questsInProgress() < Values.MAX_ACTIVITIES)
 				{
-					Quest currentProgressionQuest = QuestLogicHelper.getQuestlineCurrentQuest(EnumQuestlines.SWORDSMANPROGRESSION.getQuests(), questProps);
+					Quest currentProgressionQuest = QuestLogicHelper.getQuestlineCurrentQuest(questline.getQuests(), questProps);
 
 					if (currentProgressionQuest != null && !questProps.hasQuestInTracker(currentProgressionQuest))
 					{
-						player.openGui(MainMod.getMineMineNoMi(), 6, player.worldObj, (int) target.posX, (int) target.posY, (int) target.posZ);
+						Minecraft.getMinecraft().displayGuiScreen(new GUIQuestYesNo(player, (int)player.posX, (int)player.posY, (int)player.posZ, questline));
 						return;
 					}
 				}
 			}
 
-			// General logic for progressing throught 'interact' activties
+			// General logic for progressing through 'interact' activities
 			if (questProps.questsInProgress() > 0 && !player.worldObj.isRemote)
 			{
 				for (int i = 0; i < Values.MAX_ACTIVITIES; i++)
@@ -102,8 +105,8 @@ public class EventsQuestsProgress
 				}
 			}
 
-			if (!player.worldObj.isRemote)
-				WyNetworkHelper.sendTo(new PacketQuestSync(questProps), (EntityPlayerMP) player);
+			//if (!player.worldObj.isRemote)
+			//	WyNetworkHelper.sendTo(new PacketQuestSync(questProps), (EntityPlayerMP) player);
 		}
 
 	}
@@ -118,7 +121,7 @@ public class EventsQuestsProgress
 			QuestProperties questProps = QuestProperties.get(player);
 			EntityLivingBase target = event.entityLiving;
 
-			// General logic for progressing throught 'kill' activties
+			// General logic for progressing through 'kill' activities
 			if (questProps.questsInProgress() > 0)
 			{
 				for (int i = 0; i < Values.MAX_ACTIVITIES; i++)
@@ -149,7 +152,7 @@ public class EventsQuestsProgress
 			QuestProperties questProps = QuestProperties.get(player);
 			EntityLivingBase target = event.entityLiving;
 
-			// General logic for progressing throught 'hit counter' activties
+			// General logic for progressing through 'hit counter' activities
 			if (questProps.questsInProgress() > 0)
 			{
 				for (int i = 0; i < Values.MAX_ACTIVITIES; i++)
@@ -167,5 +170,11 @@ public class EventsQuestsProgress
 			WyNetworkHelper.sendTo(new PacketQuestSync(questProps), (EntityPlayerMP) player);
 
 		}
+	}
+	
+	@SubscribeEvent
+	public void onBreakBlock(BreakEvent event)
+	{
+		
 	}
 }

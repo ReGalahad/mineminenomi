@@ -1,16 +1,13 @@
 package xyz.pixelatedw.MineMineNoMi3;
 
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDojoSensei;
-import xyz.pixelatedw.MineMineNoMi3.items.AkumaNoMi;
-import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
-import xyz.pixelatedw.MineMineNoMi3.quests.EnumQuestlines;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import xyz.pixelatedw.MineMineNoMi3.items.AkumaNoMi;
+import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
 public class Values 
 {
@@ -30,17 +27,6 @@ public class Values
 	public static String RESOURCES_FOLDER;
 	
 	public static Item[] KAIROSEKI_ITEMS = new Item[] {ListMisc.Kairoseki, ListMisc.KairosekiBullets, ListMisc.DenseKairoseki};
-	
-	public static HashMap<Class, EnumQuestlines> questGivers = createQuestGiversMap();
-
-	private static HashMap<Class, EnumQuestlines> createQuestGiversMap()
-	{
-		HashMap<Class, EnumQuestlines> map = new HashMap<Class, EnumQuestlines>();
-		
-		map.put(EntityDojoSensei.class, EnumQuestlines.SWORDSMANPROGRESSION);
-		
-		return map;
-	}
 	
 	public static HashMap<String, String[]> abilityWebAppExtraParams = new HashMap<String, String[]>();
 

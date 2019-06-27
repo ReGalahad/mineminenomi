@@ -1,16 +1,8 @@
 package xyz.pixelatedw.MineMineNoMi3.quests.questlines.swordsmanprogression;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import org.apache.logging.log4j.LogManager;
-
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumChatFormatting;
-import xyz.pixelatedw.MineMineNoMi3.ID;
-import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.Quest;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
@@ -23,16 +15,19 @@ import xyz.pixelatedw.MineMineNoMi3.quests.ITimedQuest;
 public class QuestSwordsmanProgression02 extends Quest implements ITimedQuest, IProgressionQuest
 {
 
+	@Override
 	public String getQuestID()
 	{
 		return "swordsmanprogression02";	
 	}
 	
+	@Override
 	public String getQuestName()
 	{
 		return "Staying Alive";
 	}
 	
+	@Override
 	public String[] getQuestDescription()
 	{
 		return new String[] 
@@ -47,6 +42,7 @@ public class QuestSwordsmanProgression02 extends Quest implements ITimedQuest, I
 				};
 	}
 	
+	@Override
 	public void startQuest(EntityPlayer player)
 	{
 		WyHelper.sendMsgToPlayer(player, I18n.format("quest." + this.getQuestID() + ".started"));	
@@ -57,6 +53,7 @@ public class QuestSwordsmanProgression02 extends Quest implements ITimedQuest, I
 		super.startQuest(player);
 	}
 
+	@Override
 	public void finishQuest(EntityPlayer player)
 	{
 		boolean extraDays = (int) (player.worldObj.getWorldTime()) >= (this.extraData.getLong("currentDays") + 72000) ;
@@ -72,6 +69,7 @@ public class QuestSwordsmanProgression02 extends Quest implements ITimedQuest, I
 		super.finishQuest(player);
 	}
 
+	@Override
 	public boolean canStart(EntityPlayer player)
 	{
 		ExtendedEntityData props = ExtendedEntityData.get(player);
@@ -91,11 +89,13 @@ public class QuestSwordsmanProgression02 extends Quest implements ITimedQuest, I
 		return true;
 	}
 
+	@Override
 	public double getMaxProgress()
 	{
 		return 24000;
 	}
 	
+	@Override
 	public boolean isFinished(EntityPlayer player)
 	{	
 		try
@@ -105,7 +105,7 @@ public class QuestSwordsmanProgression02 extends Quest implements ITimedQuest, I
 		}
 		catch(Exception e)
 		{
-			WyHelper.sendMsgToPlayer(player, "There was a major problem with this quest, please contact the mod owner asap (WITHOUT CLOSING THE GAME), it has been completed however so enjoy the rest of the storyline !");
+			WyHelper.sendMsgToPlayer(player, "There was a major problem with this quest, please contact the mod owner asap, it has been completed however so enjoy the rest of the storyline !");
 			System.err.println("Checking different objects to check for nulls \n"
 					+ "Extra Data, Stored as NBT - " + this.extraData + "\n"
 					+ "Player - " + player.getDisplayName() + "\n"
@@ -117,6 +117,7 @@ public class QuestSwordsmanProgression02 extends Quest implements ITimedQuest, I
 		return false;
 	}
 	
+	@Override
 	public void alterProgress(EntityPlayer player, double progress) 
 	{
 		super.alterProgress(player, progress);
@@ -125,16 +126,19 @@ public class QuestSwordsmanProgression02 extends Quest implements ITimedQuest, I
 			this.finishQuest(player);	
 	}
 
+	@Override
 	public boolean isPrimary()
 	{
 		return true;
 	}
 
+	@Override
 	public EnumQuestlines getQuestLine()
 	{
-		return EnumQuestlines.SWORDSMANPROGRESSION;
+		return EnumQuestlines.SWORDSMAN_PROGRESSION;
 	}
 
+	@Override
 	public boolean isRepeatable()
 	{
 		return false;

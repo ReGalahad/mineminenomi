@@ -3,33 +3,14 @@ package xyz.pixelatedw.MineMineNoMi3.helpers;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import xyz.pixelatedw.MineMineNoMi3.Values;
-import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.Quest;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
-import xyz.pixelatedw.MineMineNoMi3.quests.EnumQuestlines;
 import xyz.pixelatedw.MineMineNoMi3.quests.ITimedQuest;
 
 public class QuestLogicHelper
 {
-	
-	public static EnumQuestlines getQuestlineFromSelectedEntity(EntityPlayer player, int posX, int posY, int posZ)
-	{
-		for(EntityLivingBase entity : WyHelper.getEntitiesNear(player, 10))
-		{
-			if((int)entity.posX == posX && (int)entity.posY == posY && (int)entity.posZ == posZ)
-			{
-				if(Values.questGivers.containsKey(entity.getClass()))
-				{
-					return Values.questGivers.get(entity.getClass());
-				}
-			}
-		}
-				
-		return null;
-	}
 	
 	public static int turnInQuestlineQuest(EntityPlayer player, Quest[] questline)
 	{
@@ -40,6 +21,9 @@ public class QuestLogicHelper
 		{
 			if(questProps.getQuestIndexFromTracker(i) != null && questProps.getQuestIndexFromTracker(i).isFinished(player) && isQuestPartofQuestline(questProps.getQuestIndexFromTracker(i), questline))
 			{
+				if(player.worldObj.isRemote)
+					return 0;
+				
 				questProps.getQuestIndexFromTracker(i).finishQuest(player);
 				turnedInQuests++;
 			}

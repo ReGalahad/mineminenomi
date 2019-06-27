@@ -9,7 +9,6 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import xyz.pixelatedw.MineMineNoMi3.ID;
@@ -22,9 +21,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.gui.extra.GUIButtonNoTexture;
 import xyz.pixelatedw.MineMineNoMi3.helpers.QuestLogicHelper;
-import xyz.pixelatedw.MineMineNoMi3.lists.ListQuests;
 import xyz.pixelatedw.MineMineNoMi3.quests.EnumQuestlines;
-import xyz.pixelatedw.MineMineNoMi3.quests.IProgressionQuest;
 
 public class GUIQuestYesNo extends GuiScreen
 {
@@ -34,14 +31,15 @@ public class GUIQuestYesNo extends GuiScreen
 	private QuestProperties questProps;
 	private Quest currentQuestToDisplay;
 	
-	public GUIQuestYesNo(EntityPlayer player, int x, int y, int z)
+	public GUIQuestYesNo(EntityPlayer player, int x, int y, int z, EnumQuestlines quesstline)
 	{
 		this.player = player;
 		this.props = ExtendedEntityData.get(player);
 		this.questProps = QuestProperties.get(player);
-		this.currentQuestToDisplay = QuestLogicHelper.getQuestlineCurrentQuest(QuestLogicHelper.getQuestlineFromSelectedEntity(player, x, y, z).getQuests(), questProps);
+		this.currentQuestToDisplay = QuestLogicHelper.getQuestlineCurrentQuest(quesstline.getQuests(), questProps);
 	}
 
+	@Override
 	public void drawScreen(int x, int y, float f)
 	{
 		drawDefaultBackground();
@@ -102,6 +100,7 @@ public class GUIQuestYesNo extends GuiScreen
 		super.drawScreen(x, y, f);
 	}
 
+	@Override
 	public void initGui()
 	{
 		int posX = (this.width - 256) / 2;
@@ -112,6 +111,7 @@ public class GUIQuestYesNo extends GuiScreen
 
 	}
 	
+	@Override
 	public void actionPerformed(GuiButton button)
 	{
 		switch(button.id)
@@ -127,6 +127,7 @@ public class GUIQuestYesNo extends GuiScreen
 		}
 	}
 	
+	@Override
 	public boolean doesGuiPauseGame()
 	{
 		return false;

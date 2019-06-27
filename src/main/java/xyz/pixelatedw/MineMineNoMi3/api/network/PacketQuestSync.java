@@ -9,11 +9,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
-import xyz.pixelatedw.MineMineNoMi3.lists.ListQuests;
 
 public class PacketQuestSync implements IMessage
 {
@@ -27,11 +25,13 @@ public class PacketQuestSync implements IMessage
 		props.saveNBTData(data);
 	}
 
+	@Override
 	public void fromBytes(ByteBuf buffer) 
 	{
 		data = ByteBufUtils.readTag(buffer);
 	}
 	
+	@Override
 	public void toBytes(ByteBuf buffer) 
 	{
 		ByteBufUtils.writeTag(buffer, data);
@@ -39,6 +39,7 @@ public class PacketQuestSync implements IMessage
 	
 	public static class ClientHandler implements IMessageHandler<PacketQuestSync, IMessage>
 	{
+		@Override
 		@SideOnly(Side.CLIENT)
 		public IMessage onMessage(PacketQuestSync message, MessageContext ctx) 
 		{
@@ -53,16 +54,15 @@ public class PacketQuestSync implements IMessage
 	
 	public static class ServerHandler implements IMessageHandler<PacketQuestSync, IMessage>
 	{
+		@Override
 		public IMessage onMessage(PacketQuestSync message, MessageContext ctx) 
 		{
 			EntityPlayer player = MainMod.proxy.getPlayerEntity(ctx);
 			QuestProperties props = QuestProperties.get(player);	 
 			
 			props.loadNBTData(message.data);
-	
-			//WyNetworkHelper.sendTo(new PacketQuestSync(props), (EntityPlayerMP) player);
-			
-			return null;
+
+			return new PacketQuestSync(props);
 		}
 	}
 }
