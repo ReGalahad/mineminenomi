@@ -56,7 +56,6 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.models.ModelMarineWith
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.models.ModelMorgan;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityBlackKnight;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDenDenMushi;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDojoSensei;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDoppelman;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityMirageClone;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityWantedPostersPackage;
@@ -69,6 +68,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirate;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirateCaptain;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirateWithGun;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.models.ModelFatPirate;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.questgivers.EntityDojoSensei;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityBlueno;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityFukuro;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityJabra;

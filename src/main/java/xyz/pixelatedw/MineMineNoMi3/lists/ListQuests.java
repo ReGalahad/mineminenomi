@@ -7,6 +7,8 @@ import xyz.pixelatedw.MineMineNoMi3.api.quests.Quest;
 import xyz.pixelatedw.MineMineNoMi3.quests.bounties.lowlevel.BountyLowLevel01;
 import xyz.pixelatedw.MineMineNoMi3.quests.bounties.lowlevel.BountyLowLevel02;
 import xyz.pixelatedw.MineMineNoMi3.quests.bounties.lowlevel.BountyLowLevel03;
+import xyz.pixelatedw.MineMineNoMi3.quests.questlines.sniperprogression.QuestSniperProgression01;
+import xyz.pixelatedw.MineMineNoMi3.quests.questlines.sniperprogression.QuestSniperProgression02;
 import xyz.pixelatedw.MineMineNoMi3.quests.questlines.swordsmanprogression.QuestSwordsmanProgression01;
 import xyz.pixelatedw.MineMineNoMi3.quests.questlines.swordsmanprogression.QuestSwordsmanProgression02;
 import xyz.pixelatedw.MineMineNoMi3.quests.questlines.swordsmanprogression.QuestSwordsmanProgression03;
@@ -24,6 +26,10 @@ public class ListQuests
 	public static Quest swordsmanProgression03 = new QuestSwordsmanProgression03();	
 	public static Quest swordsmanProgression04 = new QuestSwordsmanProgression04();	
 	
+	// Quest Line : Sniper Progression
+	public static Quest sniperProgression01 = new QuestSniperProgression01();	
+	public static Quest sniperProgression02 = new QuestSniperProgression02();	
+	
 	// Bounties
 	// Low Level
 	public static Quest bountyLowLevel01 = new BountyLowLevel01();		
@@ -40,6 +46,9 @@ public class ListQuests
 		registerQuest(swordsmanProgression03);
 		registerQuest(swordsmanProgression04);	
 		
+		// Quest Line : Sniper Progression
+		registerQuest(sniperProgression01);
+		registerQuest(sniperProgression02);
 		
 		// Bounties
 		registerQuest(bountyLowLevel01);	

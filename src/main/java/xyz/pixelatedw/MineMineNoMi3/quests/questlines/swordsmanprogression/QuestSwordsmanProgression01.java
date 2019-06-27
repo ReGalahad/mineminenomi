@@ -10,12 +10,11 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
-import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.Quest;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDojoSensei;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.questgivers.EntityDojoSensei;
 import xyz.pixelatedw.MineMineNoMi3.items.weapons.ItemCoreWeapon;
 import xyz.pixelatedw.MineMineNoMi3.quests.EnumQuestlines;
 import xyz.pixelatedw.MineMineNoMi3.quests.IInteractQuest;
@@ -24,16 +23,19 @@ import xyz.pixelatedw.MineMineNoMi3.quests.IProgressionQuest;
 public class QuestSwordsmanProgression01 extends Quest implements IInteractQuest, IProgressionQuest
 {
 	
+	@Override
 	public String getQuestID()
 	{
 		return "swordsmanprogression01";	
 	}
 	
+	@Override
 	public String getQuestName()
 	{
 		return "Road to becoming the Best Swordsman";
 	}
 	
+	@Override
 	public String[] getQuestDescription()
 	{
 		return new String[] 
@@ -48,6 +50,7 @@ public class QuestSwordsmanProgression01 extends Quest implements IInteractQuest
 				};
 	}
 
+	@Override
 	public void startQuest(EntityPlayer player)
 	{
 		WyHelper.sendMsgToPlayer(player, I18n.format("quest." + this.getQuestID() + ".started"));								
@@ -55,29 +58,34 @@ public class QuestSwordsmanProgression01 extends Quest implements IInteractQuest
 		super.startQuest(player);
 	}
 
+	@Override
 	public void finishQuest(EntityPlayer player)
 	{
-		WyHelper.sendMsgToPlayer(player, I18n.format("quest." + this.getQuestID() + ".started"));								
+		WyHelper.sendMsgToPlayer(player, I18n.format("quest." + this.getQuestID() + ".completed"));								
 		
 		super.finishQuest(player);
 	}
 
+	@Override
 	public boolean canStart(EntityPlayer player)
 	{
 		ExtendedEntityData props = ExtendedEntityData.get(player);
 		return props.isSwordsman();
 	}
 
+	@Override
 	public double getMaxProgress()
 	{
 		return 1;
 	}
 
+	@Override
 	public void setProgress(EntityPlayer player, double progress) 
 	{
 		super.setProgress(player, progress);
 	}
 		
+	@Override
 	public void alterProgress(EntityPlayer player, double progress) 
 	{
 		super.alterProgress(player, progress);
@@ -86,11 +94,13 @@ public class QuestSwordsmanProgression01 extends Quest implements IInteractQuest
 			this.finishQuest(player);	
 	}
 
+	@Override
 	public boolean isPrimary()
 	{
 		return true;
 	}
 
+	@Override
 	public boolean isTarget(EntityPlayer player, EntityLivingBase target)
 	{
 		ItemStack heldItem = player.getHeldItem();
@@ -128,11 +138,13 @@ public class QuestSwordsmanProgression01 extends Quest implements IInteractQuest
 		return false;
 	}
 
+	@Override
 	public EnumQuestlines getQuestLine()
 	{
-		return EnumQuestlines.SWORDSMANPROGRESSION;
+		return EnumQuestlines.SWORDSMAN_PROGRESSION;
 	}
 
+	@Override
 	public boolean isRepeatable()
 	{
 		return false;

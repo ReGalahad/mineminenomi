@@ -9,7 +9,6 @@ import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketQuestSync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
-import xyz.pixelatedw.MineMineNoMi3.lists.ListQuests;
 
 public abstract class Quest
 {
@@ -34,12 +33,12 @@ public abstract class Quest
 	public abstract boolean isRepeatable();
 	
 	public void finishQuest(EntityPlayer player)
-	{
+	{	
 		QuestProperties questProps = QuestProperties.get(player);
 		questProps.removeQuestFromTracker(this);
 		questProps.addCompletedQuest(this);
 		WyNetworkHelper.sendTo(new PacketQuestSync(questProps), (EntityPlayerMP) player);
-
+		
 		WyHelper.sendMsgToPlayer(player, EnumChatFormatting.GREEN + I18n.format("quest." + this.getQuestID() + ".name") + " " + I18n.format(ID.LANG_GUI_QUESTS_COMPLETED));
 	}
 	

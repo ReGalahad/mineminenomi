@@ -1,45 +1,43 @@
-package xyz.pixelatedw.MineMineNoMi3.quests.questlines.swordsmanprogression;
+package xyz.pixelatedw.MineMineNoMi3.quests.questlines.sniperprogression;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
 import net.minecraft.world.biome.BiomeGenBase;
-import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
-import xyz.pixelatedw.MineMineNoMi3.api.network.PacketQuestSync;
-import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.Quest;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
-import xyz.pixelatedw.MineMineNoMi3.items.weapons.ItemCoreWeapon;
-import xyz.pixelatedw.MineMineNoMi3.lists.ListQuests;
+import xyz.pixelatedw.MineMineNoMi3.helpers.ItemsHelper;
 import xyz.pixelatedw.MineMineNoMi3.quests.EnumQuestlines;
 import xyz.pixelatedw.MineMineNoMi3.quests.IKillQuest;
 import xyz.pixelatedw.MineMineNoMi3.quests.IProgressionQuest;
 
-public class QuestSwordsmanProgression03 extends Quest implements IKillQuest, IProgressionQuest
+public class QuestSniperProgression01 extends Quest implements IProgressionQuest, IKillQuest
 {
 
+	@Override
 	public String getQuestID()
 	{
-		return "swordsmanprogression03";	
+		return "sniperprogression01";	
 	}
 	
+	@Override
 	public String getQuestName()
 	{
-		return "Feel the Wind";
+		return "Crack Shot";
 	}
-	
+
+	@Override
 	public String[] getQuestDescription()
 	{
 		return new String[] 
 				{
-					" Killing 20 creatures near the mountains, apparently",
-					"that is my next trial. Not so hard but it seems...",
-					"pointless.",
+					" Test Description1",
+					"Test Description2",
+					"Test Description3",
 					"",
 					"",
 					"",
@@ -47,13 +45,17 @@ public class QuestSwordsmanProgression03 extends Quest implements IKillQuest, IP
 				};
 	}
 	
+	@Override
 	public void startQuest(EntityPlayer player)
 	{
 		WyHelper.sendMsgToPlayer(player, I18n.format("quest." + this.getQuestID() + ".started"));	
 		
+		this.alterProgress(player, 10);
+		
 		super.startQuest(player);
 	}
 
+	@Override
 	public void finishQuest(EntityPlayer player)
 	{
 		WyHelper.sendMsgToPlayer(player, I18n.format("quest." + this.getQuestID() + ".completed"));	
@@ -61,50 +63,56 @@ public class QuestSwordsmanProgression03 extends Quest implements IKillQuest, IP
 		super.finishQuest(player);
 	}
 
+	@Override
 	public boolean canStart(EntityPlayer player)
 	{
 		ExtendedEntityData props = ExtendedEntityData.get(player);
 		QuestProperties questProps = QuestProperties.get(player);
 		
-		boolean flag1 = !props.isSwordsman() || !questProps.hasQuestCompleted(ListQuests.swordsmanProgression02);
-		
-		if(flag1)
-			return false;
+		boolean flagSniper = props.isSniper();
 
-		return true;
+		if(flagSniper)
+			return true;
+
+		return false;
 	}
-
+	
+	@Override
 	public double getMaxProgress()
 	{
-		return 20;
+		return 10;
 	}
 
+	@Override
 	public boolean isPrimary()
 	{
 		return true;
 	}
 
+	@Override
 	public EnumQuestlines getQuestLine()
 	{
-		return EnumQuestlines.SWORDSMAN_PROGRESSION;
+		return EnumQuestlines.SNIPER_PROGRESSION;
 	}
 
+	@Override
 	public boolean isRepeatable()
 	{
 		return false;
 	}
-
+	
 	@Override
 	public boolean isTarget(EntityPlayer player, EntityLivingBase target)
 	{
 		BiomeGenBase biome = player.worldObj.getBiomeGenForCoordsBody((int)player.posX, (int)player.posZ);
 		ItemStack heldItem = player.getHeldItem();
 		
-		if((biome.biomeName.equalsIgnoreCase(BiomeGenBase.extremeHills.biomeName) || biome.biomeName.equalsIgnoreCase(BiomeGenBase.extremeHillsPlus.biomeName)) 
-				&& target instanceof EntityMob && heldItem != null && (heldItem.getItem() instanceof ItemCoreWeapon || heldItem.getItem() instanceof ItemSword))
-		{
+		boolean flagMob = target instanceof EntityMob;
+		boolean flagBow = ItemsHelper.isBow(heldItem);
+		boolean flagDistance = player.getDistanceToEntity(target) >= 50;
+		
+		if(flagMob && flagBow && flagDistance)
 			return true;
-		}
 		
 		return false;
 	}
