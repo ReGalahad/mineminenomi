@@ -21,10 +21,11 @@ import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.Quest;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.IQuestGiver;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.quest.objectives.IQuestObjective;
 import xyz.pixelatedw.MineMineNoMi3.gui.GUIQuestYesNo;
 import xyz.pixelatedw.MineMineNoMi3.helpers.QuestLogicHelper;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketQuestObjectiveSpawn;
 import xyz.pixelatedw.MineMineNoMi3.quests.EnumQuestlines;
 import xyz.pixelatedw.MineMineNoMi3.quests.IHitCounterQuest;
 import xyz.pixelatedw.MineMineNoMi3.quests.IInteractQuest;
@@ -174,21 +175,27 @@ public class EventsQuestsProgress
 	}
 	
 	@SubscribeEvent
-	public void onTest(EntityJoinWorldEvent event)
+	public void onQuestObjectiveSpawn(EntityJoinWorldEvent event)
 	{
-		if(Minecraft.getMinecraft().thePlayer != null)
+		EntityPlayer localPlayer = Minecraft.getMinecraft().thePlayer;
+		
+		if(localPlayer == null)
+			return;
+		
+		if(event.entity instanceof IQuestObjective && !event.world.isRemote)
 		{
-			String playerName = Minecraft.getMinecraft().thePlayer.getCommandSenderName();
-	
-			if(event.entity instanceof EntityNewMob || (event.entity instanceof EntityPlayer && !playerName.equalsIgnoreCase("Player388")))
-			{
-				System.out.println(event.entity);
-	
-				if(playerName.equalsIgnoreCase("Player743") && event.world.isRemote)
-				{
-					event.entity.setDead();
-				}		
-			}
+			IQuestObjective objective = (IQuestObjective) event.entity;
+
+			if(objective.getOwner() == null)
+				return;
+			
+			int localId = localPlayer.getEntityId();
+			int ownerId = objective.getOwner().getEntityId();
+			
+			boolean flag = localId == ownerId;
+
+			if(flag)
+				WyNetworkHelper.sendToAll(new PacketQuestObjectiveSpawn(ownerId, event.entity.getEntityId()));
 		}
 	}
 }

@@ -30,8 +30,8 @@ import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedNPCData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
-import xyz.pixelatedw.MineMineNoMi3.events.customevents.DorikiEvent;
-import xyz.pixelatedw.MineMineNoMi3.events.customevents.YomiTriggerEvent;
+import xyz.pixelatedw.MineMineNoMi3.events.customevents.EventDoriki;
+import xyz.pixelatedw.MineMineNoMi3.events.customevents.EventYomiTrigger;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketNewAABB;
 
 public class EventsCore
@@ -147,7 +147,7 @@ public class EventsCore
 			QuestProperties questProps = QuestProperties.get(e.entityPlayer);
 			questProps.loadNBTData(compound);
 			
-			YomiTriggerEvent yomiEvent = new YomiTriggerEvent(e.entityPlayer, oldPlayerProps, newPlayerProps);
+			EventYomiTrigger yomiEvent = new EventYomiTrigger(e.entityPlayer, oldPlayerProps, newPlayerProps);
 			if (MinecraftForge.EVENT_BUS.post(yomiEvent))
 				return;
 		}

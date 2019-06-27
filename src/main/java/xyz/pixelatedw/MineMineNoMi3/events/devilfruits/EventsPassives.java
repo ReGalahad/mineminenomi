@@ -30,7 +30,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDoppelman;
-import xyz.pixelatedw.MineMineNoMi3.events.customevents.YomiTriggerEvent;
+import xyz.pixelatedw.MineMineNoMi3.events.customevents.EventYomiTrigger;
 import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.helpers.ItemsHelper;
 import xyz.pixelatedw.MineMineNoMi3.items.ItemCoreArmor;
@@ -358,7 +358,7 @@ public class EventsPassives
 	}
 
 	@SubscribeEvent
-	public void onYomiDeath(YomiTriggerEvent event)
+	public void onYomiDeath(EventYomiTrigger event)
 	{
 		if (event.oldPlayerData.getUsedFruit().equalsIgnoreCase("yomiyomi") && !event.oldPlayerData.getZoanPoint().equalsIgnoreCase("yomi"))
 		{
