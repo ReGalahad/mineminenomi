@@ -69,6 +69,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirateWithGun;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.models.ModelFatPirate;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.quest.givers.EntityDojoSensei;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.quest.objectives.EntitySniperTarget;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.quest.objectives.models.ModelSniperTarget;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityBlueno;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityFukuro;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityJabra;
@@ -167,7 +168,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityDenDenMushi.class, new MobRenderer(new ModelDenDenMushi(), "denden"));
 		RenderingRegistry.registerEntityRenderingHandler(EntityDojoSensei.class, new MobRenderer(new ModelDojoSensei()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityWantedPostersPackage.class, new MobRenderer(new ModelWantedPostersPackage(), "wantedposterspackage"));
-		RenderingRegistry.registerEntityRenderingHandler(EntitySniperTarget.class, new MobRenderer(new ModelWantedPostersPackage(), "wantedposterspackage"));
+		RenderingRegistry.registerEntityRenderingHandler(EntitySniperTarget.class, new MobRenderer(new ModelSniperTarget(), "snipertarget"));
 
 		//Special Renderers
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDenDenMushi.class, new RenderBlockDenDenMushi());
