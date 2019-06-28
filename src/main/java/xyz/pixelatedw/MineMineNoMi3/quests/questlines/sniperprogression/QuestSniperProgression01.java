@@ -6,12 +6,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.Quest;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.quest.givers.EntityDojoSensei;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.quest.objectives.EntitySniperTarget;
 import xyz.pixelatedw.MineMineNoMi3.helpers.ItemsHelper;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketQuestObjectiveSpawn;
 import xyz.pixelatedw.MineMineNoMi3.quests.EnumQuestlines;
 import xyz.pixelatedw.MineMineNoMi3.quests.IInteractQuest;
 import xyz.pixelatedw.MineMineNoMi3.quests.IKillQuest;
@@ -75,6 +77,8 @@ public class QuestSniperProgression01 extends Quest implements IProgressionQuest
 				if (!player.worldObj.isRemote)
 					player.worldObj.spawnEntityInWorld(target);
 			}
+			
+			WyNetworkHelper.sendToAll(new PacketQuestObjectiveSpawn(player.getEntityId()));
 
 			this.questState = 1;
 			return super.isFinished(player);

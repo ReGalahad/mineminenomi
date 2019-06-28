@@ -14,28 +14,25 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.quest.objectives.IQuestObjecti
 public class PacketQuestObjectiveSpawn implements IMessage
 {
 	
-	private int ownerId, objectiveId;
+	private int ownerId;
 
 	public PacketQuestObjectiveSpawn() {}
 	
-	public PacketQuestObjectiveSpawn(int ownerId, int objectiveId) 
+	public PacketQuestObjectiveSpawn(int ownerId) 
 	{
 		this.ownerId = ownerId;
-		this.objectiveId = objectiveId;
 	}
 
 	@Override
 	public void fromBytes(ByteBuf buffer) 
 	{
 		this.ownerId = buffer.readInt();
-		this.objectiveId = buffer.readInt();
 	}
 	
 	@Override
 	public void toBytes(ByteBuf buffer) 
 	{
 		buffer.writeInt(this.ownerId);
-		buffer.writeInt(this.objectiveId);
 	}
 
 	public static class ClientHandler implements IMessageHandler<PacketQuestObjectiveSpawn, IMessage>
@@ -45,22 +42,19 @@ public class PacketQuestObjectiveSpawn implements IMessage
 		public IMessage onMessage(PacketQuestObjectiveSpawn message, MessageContext ctx) 
 		{
 			EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-
+			
 			if(player.getEntityId() == message.ownerId)
 				return null;
-			
+						
 			for(Object entityObject : player.worldObj.loadedEntityList)
 			{
 				Entity entity = (Entity) entityObject;
 				if(entity instanceof IQuestObjective)
 				{
-					System.out.println(entity);
-					//entity.setDead();
+					entity.setDead();
 				}
 			}
-			
-			//player.worldObj.getEntityByID(message.objectiveId).setDead();
-			
+						
 			return null;
 		}
 	}
