@@ -41,9 +41,9 @@ public class QuestSniperProgression01 extends Quest implements IProgressionQuest
 	{
 		return new String[]
 			{
-				" Test Description1", 
-				"Test Description2", 
-				"Test Description3", 
+				"", 
+				"", 
+				"", 
 				"", 
 				"", 
 				"", 
@@ -66,13 +66,14 @@ public class QuestSniperProgression01 extends Quest implements IProgressionQuest
 
 			for (int i = 0; i < 6; i++)
 			{
-				EntitySniperTarget target = new EntitySniperTarget(player.worldObj, this);
+				EntitySniperTarget target = new EntitySniperTarget(player.worldObj);
 				double posX = player.posX + WyMathHelper.randomWithRange(-10, 10);
 				double posY = player.posY + 30;
 				double posZ = player.posZ + WyMathHelper.randomWithRange(-10, 10);
 
 				target.setLocationAndAngles(posX, posY, posZ, 0, 0);
 				target.setOwner(player);
+				target.setActive(true);
 				
 				if (!player.worldObj.isRemote)
 					player.worldObj.spawnEntityInWorld(target);

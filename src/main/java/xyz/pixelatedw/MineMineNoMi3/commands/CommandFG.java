@@ -8,6 +8,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.WorldServer;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketQuestSync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
@@ -24,6 +25,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityDummy;
 import xyz.pixelatedw.MineMineNoMi3.helpers.ItemsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListQuests;
+import xyz.pixelatedw.MineMineNoMi3.quests.EnumQuestlines;
 import xyz.pixelatedw.MineMineNoMi3.world.TeleporterScenarioArena;
 
 public class CommandFG extends CommandBase
@@ -109,6 +111,39 @@ public class CommandFG extends CommandBase
 				//QuestManager.instance().startQuest(player, questsPool[player.getRNG().nextInt(questsPool.length)]);
 				QuestManager.instance().startQuest(player, ListQuests.bountyLowLevel01);
 				WyNetworkHelper.sendTo(new PacketQuestSync(questProps), (EntityPlayerMP) player);
+			}
+			else if(str[0].equalsIgnoreCase("questprogress"))
+			{
+				Quest[] questline = null;
+				
+				if(str.length < 3)
+					WyHelper.sendMsgToPlayer(player, "Incorrect syntax");
+				
+				if(str[1].equalsIgnoreCase("swordsman"))
+				{
+					questline = EnumQuestlines.SWORDSMAN_PROGRESSION.getQuests();					
+				}
+								
+				int questNo = Integer.parseInt(str[2]);
+				
+				if(questline == null)
+					WyHelper.sendMsgToPlayer(player, "Incorrect Questline");
+				
+				for(int i = 0; i < questNo; i++)
+				{				
+					try
+					{
+						Quest nQuest = questline[i].getClass().newInstance();
+						questProps.addQuestInTracker(nQuest);
+						questProps.getQuestIndexFromTracker(0).startQuest(player);
+						questProps.getQuestIndexFromTracker(0).finishQuest(player);
+						WyNetworkHelper.sendTo(new PacketQuestSync(questProps), (EntityPlayerMP) player);
+					}
+					catch (InstantiationException | IllegalAccessException e)
+					{
+						e.printStackTrace();
+					}
+				}
 			}
 			else if(str[0].equalsIgnoreCase("resetquests"))
 			{

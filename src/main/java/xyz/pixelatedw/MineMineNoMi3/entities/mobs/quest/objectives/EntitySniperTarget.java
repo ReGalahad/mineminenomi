@@ -5,22 +5,15 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-import xyz.pixelatedw.MineMineNoMi3.api.quests.Quest;
 
 public class EntitySniperTarget extends EntityMob implements IQuestObjective
 {
-	private Quest quest;
 	private EntityPlayer owner;
-	
+	private boolean active = false;
+
 	public EntitySniperTarget(World world)
 	{
 		super(world);
-	}
-	
-	public EntitySniperTarget(World world, Quest quest)
-	{
-		super(world);
-		this.quest = quest;
 		this.experienceValue = 0;
 	}
 	
@@ -68,5 +61,17 @@ public class EntitySniperTarget extends EntityMob implements IQuestObjective
 	public EntityPlayer getOwner()
 	{
 		return this.owner;
+	}
+
+	@Override
+	public boolean isActive()
+	{
+		return this.active;
+	}
+
+	@Override
+	public void setActive(boolean active)
+	{
+		this.active = active;
 	}
 }

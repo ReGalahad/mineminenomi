@@ -98,6 +98,7 @@ public class EventsQuestsProgress
 						if (((IInteractQuest) questProps.getQuestIndexFromTracker(i)).isTarget(player, target))
 						{
 							questProps.alterQuestProgress(questProps.getQuestIndexFromTracker(i), 1);
+							event.setCanceled(true);
 							break;
 						}
 					}

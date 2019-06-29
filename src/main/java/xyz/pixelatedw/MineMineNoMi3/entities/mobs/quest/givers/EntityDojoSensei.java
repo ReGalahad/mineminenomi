@@ -96,6 +96,6 @@ public class EntityDojoSensei extends EntityNewMob implements IQuestGiver
 	@Override
 	public EnumQuestlines getQuestline()
 	{
-		return EnumQuestlines.SNIPER_PROGRESSION;
+		return EnumQuestlines.SWORDSMAN_PROGRESSION;
 	}
 }
