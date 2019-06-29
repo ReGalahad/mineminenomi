@@ -49,7 +49,7 @@ public class PacketQuestObjectiveSpawn implements IMessage
 			for(Object entityObject : player.worldObj.loadedEntityList)
 			{
 				Entity entity = (Entity) entityObject;
-				if(entity instanceof IQuestObjective)
+				if(entity instanceof IQuestObjective && ((IQuestObjective) entity).isActive())
 				{
 					entity.setDead();
 				}

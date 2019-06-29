@@ -11,17 +11,19 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.MarineData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.PirateData;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.quest.objectives.IQuestObjective;
 
-public class BanditData extends EntityNewMob
+public class BanditData extends EntityNewMob implements IQuestObjective
 {
 	protected EntityAIBase entityAIMeleeAttack = new EntityAIAttackOnCollide(this, 1.0D, false);
 	private EntityAIBase entityAIAttackNonMarine = new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true);
+	private EntityPlayer owner;
+	private boolean active = false;
 	
 	public BanditData(World world)
 	{
@@ -43,6 +45,7 @@ public class BanditData extends EntityNewMob
 		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, MarineData.class, 0, true));
 	}
   
+	@Override
 	public void onEntityUpdate() 
 	{
 		if(this.getAttackTarget() == null)
@@ -64,17 +67,44 @@ public class BanditData extends EntityNewMob
 		super.onEntityUpdate();
 	}
 
+	@Override
 	protected boolean isValidLightLevel()
 	{return true;} 
     
+	@Override
 	protected boolean canDespawn()
 	{return true;}
     
+	@Override
 	public boolean isAIEnabled()
 	{return true;}
 	
+	@Override
 	public boolean getCanSpawnHere()
 	{return true;}
 		
+	@Override
+	public void setOwner(EntityPlayer player)
+	{
+		this.owner = player;
+	}
+	
+	@Override
+	public EntityPlayer getOwner()
+	{
+		return this.owner;
+	}
+
+	@Override
+	public boolean isActive()
+	{
+		return this.active;
+	}
+
+	@Override
+	public void setActive(boolean active)
+	{
+		this.active = active;
+	}
 }
 

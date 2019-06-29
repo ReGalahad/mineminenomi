@@ -13,6 +13,7 @@ import xyz.pixelatedw.MineMineNoMi3.quests.questlines.swordsmanprogression.Quest
 import xyz.pixelatedw.MineMineNoMi3.quests.questlines.swordsmanprogression.QuestSwordsmanProgression02;
 import xyz.pixelatedw.MineMineNoMi3.quests.questlines.swordsmanprogression.QuestSwordsmanProgression03;
 import xyz.pixelatedw.MineMineNoMi3.quests.questlines.swordsmanprogression.QuestSwordsmanProgression04;
+import xyz.pixelatedw.MineMineNoMi3.quests.questlines.swordsmanprogression.QuestSwordsmanProgression05;
 
 public class ListQuests
 {
@@ -21,10 +22,11 @@ public class ListQuests
 	
 	
 	// Quest Line : Swordsman Progression
-	public static Quest swordsmanProgression01 = new QuestSwordsmanProgression01();	
-	public static Quest swordsmanProgression02 = new QuestSwordsmanProgression02();	
-	public static Quest swordsmanProgression03 = new QuestSwordsmanProgression03();	
-	public static Quest swordsmanProgression04 = new QuestSwordsmanProgression04();	
+	public static Quest swordsmanProgression01 = new QuestSwordsmanProgression01();
+	public static Quest swordsmanProgression02 = new QuestSwordsmanProgression02();
+	public static Quest swordsmanProgression03 = new QuestSwordsmanProgression03();
+	public static Quest swordsmanProgression04 = new QuestSwordsmanProgression04();
+	public static Quest swordsmanProgression05 = new QuestSwordsmanProgression05();
 	
 	// Quest Line : Sniper Progression
 	public static Quest sniperProgression01 = new QuestSniperProgression01();	
@@ -44,7 +46,8 @@ public class ListQuests
 		registerQuest(swordsmanProgression01);
 		registerQuest(swordsmanProgression02);
 		registerQuest(swordsmanProgression03);
-		registerQuest(swordsmanProgression04);	
+		registerQuest(swordsmanProgression04);
+		registerQuest(swordsmanProgression05);
 		
 		// Quest Line : Sniper Progression
 		registerQuest(sniperProgression01);
@@ -63,7 +66,7 @@ public class ListQuests
 		for(int i = 0; i < quest.getQuestDescription().length; i++)
 		{
 			if(!quest.getQuestDescription()[i].isEmpty())
-				WyRegistry.registerName("quest." + (quest.getQuestID() + "_" + i) + ".desc", quest.getQuestDescription()[i]);
+				WyRegistry.registerName("quest." + quest.getQuestID() + ".desc." + i, quest.getQuestDescription()[i]);
 		}
 		allQuests.put(quest.getQuestID(), quest);
 	}

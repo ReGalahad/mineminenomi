@@ -11,7 +11,7 @@ public enum EnumQuestlines
 	SNIPER_PROGRESSION("sniperprogression",
 			ListQuests.sniperProgression01, ListQuests.sniperProgression02),
 	SWORDSMAN_PROGRESSION("swordsmanprogression",
-			ListQuests.swordsmanProgression01, ListQuests.swordsmanProgression02, ListQuests.swordsmanProgression03, ListQuests.swordsmanProgression04);
+			ListQuests.swordsmanProgression01, ListQuests.swordsmanProgression02, ListQuests.swordsmanProgression03, ListQuests.swordsmanProgression04, ListQuests.swordsmanProgression05);
 	
 	String questlineName;
 	Quest[] quests;

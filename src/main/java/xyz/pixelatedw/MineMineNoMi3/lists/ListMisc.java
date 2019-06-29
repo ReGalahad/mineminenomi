@@ -412,6 +412,7 @@ public class ListMisc
 		WyRegistry.registerName("ability.100millionvoltvari.name", "100 Million Volt Vari");
 		WyRegistry.registerName("ability.max200millionvoltvari.name", "Max 200 Million Volt Vari");
 
+		// Swordsman Progression Questline
 		WyRegistry.registerName("quest." + ListQuests.swordsmanProgression01.getQuestID() + ".started", "<Swordsman Master> You want to become a swordsman master, young one ? I do like the sparks in your eyes so how about this, show me your best sword and I'll see if you're fit or not to start training with me.");
 		WyRegistry.registerName("quest." + ListQuests.swordsmanProgression01.getQuestID() + ".completed", "<Swordsman Master> That's a really nice blade you have there, really strong indeed. Fine, I will train you, when you're ready come and talk with me again !");
 		WyRegistry.registerName("quest." + ListQuests.swordsmanProgression02.getQuestID() + ".started", "<Swordsman Master> First we'll test your determination, you must survive the night in the wilderness without dying !");
@@ -421,6 +422,8 @@ public class ListMisc
 		WyRegistry.registerName("quest." + ListQuests.swordsmanProgression04.getQuestID() + ".started", "<Swordsman Master> Now for the last test we must train your movement during combat. Deal 25 critical hits.");
 		WyRegistry.registerName("quest." + ListQuests.swordsmanProgression04.getQuestID() + ".completed", "<Swordsman Master> I hope you've learned something from this. You're free for now, I will need some time to think how to challenge your skill even more.");
 
+		// Sniper Progression Questline
+		
 		WyRegistry.registerName(ID.LANG_GUI_FACTION, "Faction");
 		WyRegistry.registerName(ID.LANG_GUI_RACE, "Race");
 		WyRegistry.registerName(ID.LANG_GUI_STYLE, "Style");
