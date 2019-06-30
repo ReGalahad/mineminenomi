@@ -1,17 +1,17 @@
 package xyz.pixelatedw.MineMineNoMi3.api.math;
 
-import net.minecraft.entity.player.EntityPlayer;
-import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
-
 import java.util.List;
 import java.util.Random;
+
+import net.minecraft.entity.player.EntityPlayer;
+import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 
 public class WyMathHelper
 {
 	public static List shuffle(List ar)
 	{
 		Random rnd = new Random();
-		
+
 		for (int i = ar.size() - 1; i > 0; i--)
 		{
 			int index = rnd.nextInt(i + 1);
@@ -20,8 +20,36 @@ public class WyMathHelper
 			ar.set(index, ar.get(i));
 			ar.set(i, a);
 		}
-		
+
 		return ar;
+	}
+
+	public static String shuffleArray(char[] array)
+	{
+		Random rnd = new Random();
+		for (int i = array.length - 1; i > 0; i--)
+		{
+			int index = rnd.nextInt(i + 1);
+
+			char a = array[index];
+			array[index] = array[i];
+			array[i] = a;
+		}
+		
+		return String.valueOf(array);
+	}
+	
+	public static void shuffleArray(int[] array)
+	{
+		Random rnd = new Random();
+		for (int i = array.length - 1; i > 0; i--)
+		{
+			int index = rnd.nextInt(i + 1);
+
+			int a = array[index];
+			array[index] = array[i];
+			array[i] = a;
+		}
 	}
 
 	public static double percentage(double i, double j)

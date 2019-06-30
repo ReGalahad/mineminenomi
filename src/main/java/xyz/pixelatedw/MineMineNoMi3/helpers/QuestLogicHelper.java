@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.item.ItemStack;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.Quest;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
@@ -11,6 +13,23 @@ import xyz.pixelatedw.MineMineNoMi3.quests.ITimedQuest;
 
 public class QuestLogicHelper
 {
+	
+	public static ItemStack getQuestItemStack(InventoryPlayer inventory, String forQuest)
+	{
+		for(int i = 0; i < inventory.mainInventory.length; i++)
+		{
+			ItemStack itemStack = inventory.getStackInSlot(i);
+			if(itemStack != null && itemStack.hasTagCompound())
+			{
+				String nbtForQuest = itemStack.getTagCompound().getString("ForQuest");
+				
+				if(nbtForQuest.equalsIgnoreCase(forQuest))
+					return itemStack;
+			}
+		}
+		
+		return null;
+	}
 	
 	public static int turnInQuestlineQuest(EntityPlayer player, Quest[] questline)
 	{

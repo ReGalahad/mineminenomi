@@ -5,6 +5,8 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketQuestSync;
@@ -14,6 +16,8 @@ import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.bandits.BanditData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.bandits.EntityBandit;
+import xyz.pixelatedw.MineMineNoMi3.helpers.QuestLogicHelper;
+import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListQuests;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketQuestObjectiveSpawn;
 import xyz.pixelatedw.MineMineNoMi3.quests.EnumQuestlines;
@@ -74,6 +78,9 @@ public class QuestSwordsmanProgression05 extends Quest implements IInteractQuest
 		
 		WyNetworkHelper.sendToAll(new PacketQuestObjectiveSpawn(player.getEntityId()));
 	
+		this.extraData = new NBTTagCompound();	
+		this.extraData.setInteger("phase", this.questState);
+		
 		super.startQuest(player);
 	}
 	
@@ -88,16 +95,18 @@ public class QuestSwordsmanProgression05 extends Quest implements IInteractQuest
 		
 		if(flagSwordsman && flagPrevQuest)
 			return true;
-
+		
 		return false;
 	}
 	
 	@Override
 	public void finishQuest(EntityPlayer player)
 	{
-		WyHelper.sendMsgToPlayer(player, I18n.format("quest." + this.getQuestID() + ".completed"));	
+		WyHelper.sendMsgToPlayer(player, I18n.format("quest." + this.getQuestID() + ".completed"));
 		
+		ItemStack itemStack = QuestLogicHelper.getQuestItemStack(player.inventory, this.getQuestID());
 		
+		WyHelper.removeStackFromInventory(player, itemStack);
 		
 		super.finishQuest(player);
 	}
@@ -105,21 +114,66 @@ public class QuestSwordsmanProgression05 extends Quest implements IInteractQuest
 	@Override
 	public boolean isFinished(EntityPlayer player)
 	{
+		this.questState = this.extraData.getInteger("phase");
+		
 		boolean flagQuestStateKill = this.questState == 0;
+		boolean flagNearbyMobs = WyHelper.getEntitiesNear(player, 20, BanditData.class).size() > 0;
 		boolean flagQuestComplete = this.getProgress() >= this.getMaxProgress();
 		boolean flagQuestStateInteract = this.questState == 1;
+		
+		if(flagNearbyMobs)
+		{
+			if (!player.worldObj.isRemote)
+				WyHelper.sendMsgToPlayer(player, "<Dojo Sensei> There are still some bandits nearby!");		
+			
+			return false;
+		}
 		
 		if (flagQuestStateKill && !flagQuestComplete)
 		{
 			if (!player.worldObj.isRemote)
-				WyHelper.sendMsgToPlayer(player, "<Dojo Sensei> No doubt they came here for this note. You must go to a nearby village and decipher it, a librarian will probably be able to crack this code.");
+				WyHelper.sendMsgToPlayer(player, "<Dojo Sensei> No doubt they came here for this note. You must decipher it, a librarian will probably be able to crack this code.");
+				
+			ItemStack mysteriousNote = new ItemStack(ListMisc.Note);
+			mysteriousNote.setStackDisplayName("Mysterious Note");
 			
-			this.questState = 1;
+			mysteriousNote.getTagCompound().setString("ForQuest", this.getQuestID());
+			
+			// Adding lore
+			NBTTagCompound questLore = new NBTTagCompound();
+			questLore.setString("lore1", WyMathHelper.shuffleArray("Random Lore".toCharArray()));
+			questLore.setString("lore2", WyMathHelper.shuffleArray("Random Lore".toCharArray()));
+			questLore.setString("lore3", WyMathHelper.shuffleArray("Random Lore".toCharArray()));
+			
+			mysteriousNote.getTagCompound().setTag("QuestLore", questLore);
+						
+			player.inventory.addItemStackToInventory(mysteriousNote);
+			
+			this.extraData.setInteger("phase", 1);
 		}
 		else if(flagQuestStateInteract && flagQuestComplete)
 		{
 			if (!player.worldObj.isRemote)
-				WyHelper.sendMsgToPlayer(player, "<Villager> ");
+			{
+				ItemStack itemStack = QuestLogicHelper.getQuestItemStack(player.inventory, this.getQuestID());
+				
+				if(itemStack != null && itemStack.hasTagCompound())
+				{
+					NBTTagCompound questLore = (NBTTagCompound) itemStack.getTagCompound().getTag("QuestLore");
+					
+					if(questLore == null)
+						return false;
+					
+					itemStack.setStackDisplayName("Deciphered Note");
+					
+					// Adding dechipered lore
+					questLore.setString("lore1", "Random Lore");
+					questLore.setString("lore2", "Random Lore");
+					questLore.setString("lore3", "Random Lore");
+					
+					itemStack.getTagCompound().setTag("QuestLore", questLore);
+				}
+			}
 			return true;
 		}
 
@@ -153,11 +207,14 @@ public class QuestSwordsmanProgression05 extends Quest implements IInteractQuest
 	@Override
 	public boolean isTarget(EntityPlayer player, EntityLivingBase target)
 	{
+		this.questState = this.extraData.getInteger("phase");
+		
 		if(questState == 0)
 		{
 			boolean flagMob = target instanceof BanditData;
+			boolean flagCompletion = this.getProgress() < this.getMaxProgress() - 1;
 			
-			if(flagMob)
+			if(flagMob && flagCompletion)
 				return true;
 		}
 		else if(questState == 1)
