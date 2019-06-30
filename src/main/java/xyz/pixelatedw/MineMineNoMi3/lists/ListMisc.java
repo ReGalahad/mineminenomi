@@ -165,6 +165,8 @@ public class ListMisc
 	public static Item SeaKingMeat = new SeaKingMeat();
 	public static Item WateringCan = new WateringCan();
 	
+	public static Item Note = new Item().setMaxStackSize(1);
+	
 	public static Item DialEisen = new DialEisen();
 	public static Item DialFire = new DialFire();
 	public static Item DialAxe = new DialAxe();
@@ -279,6 +281,8 @@ public class ListMisc
 
 		addITEM(ColaBackpack, "Cola Backpack", ListCreativeTabs.tabWeapons);
 
+		addITEM(Note, "Note", ListCreativeTabs.tabMisc);
+		
 		addITEM(GreenKujaBow, "Green Kuja Bow", ListCreativeTabs.tabWeapons);
 		addITEM(BlueKujaBow, "Blue Kuja Bow", ListCreativeTabs.tabWeapons);
 		addITEM(RedKujaBow, "Red Kuja Bow", ListCreativeTabs.tabWeapons);

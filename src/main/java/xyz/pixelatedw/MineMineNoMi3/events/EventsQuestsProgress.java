@@ -8,12 +8,15 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.EntityInteractEvent;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.Values;
+import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketQuestSync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
@@ -169,6 +172,30 @@ public class EventsQuestsProgress
 
 			WyNetworkHelper.sendTo(new PacketQuestSync(questProps), (EntityPlayerMP) player);
 
+		}
+	}
+	
+	@SubscribeEvent
+	public void onToolTip(ItemTooltipEvent event)
+	{
+		ItemStack itemStack = event.itemStack;
+		
+		if(!itemStack.hasTagCompound())
+			return;
+		
+		NBTTagCompound questLore = (NBTTagCompound) itemStack.getTagCompound().getTag("QuestLore");
+		
+		if(questLore == null)
+			return;
+
+		for(int i = 0; i < 10; i++)
+		{
+			String loreLine = questLore.getString("lore" + i);
+				
+			if(WyHelper.isNullOrEmpty(loreLine))
+				continue;
+				
+			event.toolTip.add(loreLine);
 		}
 	}
 }
