@@ -18,10 +18,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityCustomSpawner;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedWorldData;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.baroqueWorks.EntityMr0;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.EntityMorgan;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityWantedPostersPackage;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityDummy;
 import xyz.pixelatedw.MineMineNoMi3.helpers.ItemsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListQuests;
@@ -43,14 +40,14 @@ public class CommandFG extends CommandBase
 			QuestProperties questProps = QuestProperties.get(player);
 			Entity toSpawn = null;
 
-			if(str[0].equalsIgnoreCase("dummy"))
+			/*if(str[0].equalsIgnoreCase("dummy"))
 				toSpawn = new TempEntityDummy(player.worldObj);
 			else if(str[0].equalsIgnoreCase("mr0"))
 				toSpawn = new EntityMr0(player.worldObj);
 			else if(str[0].equalsIgnoreCase("morgan"))
-				toSpawn = new EntityMorgan(player.worldObj);
+				toSpawn = new EntityMorgan(player.worldObj);*/
 			
-			else if(str[0].equalsIgnoreCase("package"))
+			if(str[0].equalsIgnoreCase("package"))
 			{			
 				toSpawn = new EntityWantedPostersPackage(player.worldObj);
 				toSpawn.setLocationAndAngles(player.posX + WyMathHelper.randomWithRange(-10, 10), player.posY + 30, player.posZ + WyMathHelper.randomWithRange(-10, 10), 0, 0);
@@ -120,10 +117,10 @@ public class CommandFG extends CommandBase
 					WyHelper.sendMsgToPlayer(player, "Incorrect syntax");
 				
 				if(str[1].equalsIgnoreCase("swordsman"))
-				{
-					questline = EnumQuestlines.SWORDSMAN_PROGRESSION.getQuests();					
-				}
-								
+					questline = EnumQuestlines.SWORDSMAN_PROGRESSION.getQuests();
+				else if(str[1].equalsIgnoreCase("sniper"))
+					questline = EnumQuestlines.SNIPER_PROGRESSION.getQuests();
+									
 				int questNo = Integer.parseInt(str[2]);
 				
 				if(questline == null)
