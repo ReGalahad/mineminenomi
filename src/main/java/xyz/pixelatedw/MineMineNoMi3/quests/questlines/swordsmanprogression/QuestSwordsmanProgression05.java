@@ -28,7 +28,7 @@ import xyz.pixelatedw.MineMineNoMi3.quests.IProgressionQuest;
 public class QuestSwordsmanProgression05 extends Quest implements IInteractQuest, IKillQuest, IProgressionQuest
 {
 	
-	private int questState = 0;
+	private int questPhase = 0;
 
 	@Override
 	public String getQuestID()
@@ -79,7 +79,7 @@ public class QuestSwordsmanProgression05 extends Quest implements IInteractQuest
 		WyNetworkHelper.sendToAll(new PacketQuestObjectiveSpawn(player.getEntityId()));
 	
 		this.extraData = new NBTTagCompound();	
-		this.extraData.setInteger("phase", this.questState);
+		this.extraData.setInteger("phase", this.questPhase);
 		
 		super.startQuest(player);
 	}
@@ -114,12 +114,12 @@ public class QuestSwordsmanProgression05 extends Quest implements IInteractQuest
 	@Override
 	public boolean isFinished(EntityPlayer player)
 	{
-		this.questState = this.extraData.getInteger("phase");
+		this.questPhase = this.extraData.getInteger("phase");
 		
-		boolean flagQuestStateKill = this.questState == 0;
+		boolean flagQuestStateKill = this.questPhase == 0;
 		boolean flagNearbyMobs = WyHelper.getEntitiesNear(player, 20, BanditData.class).size() > 0;
 		boolean flagQuestComplete = this.getProgress() >= this.getMaxProgress();
-		boolean flagQuestStateInteract = this.questState == 1;
+		boolean flagQuestStateInteract = this.questPhase == 1;
 		
 		if(flagNearbyMobs)
 		{
@@ -141,9 +141,13 @@ public class QuestSwordsmanProgression05 extends Quest implements IInteractQuest
 			
 			// Adding lore
 			NBTTagCompound questLore = new NBTTagCompound();
-			questLore.setString("lore1", WyMathHelper.shuffleArray("Random Lore".toCharArray()));
-			questLore.setString("lore2", WyMathHelper.shuffleArray("Random Lore".toCharArray()));
-			questLore.setString("lore3", WyMathHelper.shuffleArray("Random Lore".toCharArray()));
+			questLore.setString("lore1", WyMathHelper.shuffleArray("Transport Content :"));
+			questLore.setString("lore2", WyMathHelper.shuffleArray("* 100 TNT Blocks"));
+			questLore.setString("lore3", WyMathHelper.shuffleArray("* 50 Gunpowder"));
+			questLore.setString("lore4", "");
+			questLore.setString("lore5", WyMathHelper.shuffleArray("Delivered to :"));					
+			questLore.setString("lore6", WyMathHelper.shuffleArray("X:0 Y:0 Z:0"));	
+			questLore.setString("lore7", WyMathHelper.shuffleArray("- Simple Text Name"));
 			
 			mysteriousNote.getTagCompound().setTag("QuestLore", questLore);
 						
@@ -166,10 +170,14 @@ public class QuestSwordsmanProgression05 extends Quest implements IInteractQuest
 					
 					itemStack.setStackDisplayName("Deciphered Note");
 					
-					// Adding dechipered lore
-					questLore.setString("lore1", "Random Lore");
-					questLore.setString("lore2", "Random Lore");
-					questLore.setString("lore3", "Random Lore");
+					// Adding deciphered lore
+					questLore.setString("lore1", "Transport Content :");
+					questLore.setString("lore2", "* 100 TNT Blocks");
+					questLore.setString("lore3", "* 50 Gunpowder");
+					questLore.setString("lore4", "");
+					questLore.setString("lore5", "Delivered to :");					
+					questLore.setString("lore6", "X:0 Y:0 Z:0");	
+					questLore.setString("lore7", "- Simple Text Name");
 					
 					itemStack.getTagCompound().setTag("QuestLore", questLore);
 				}
@@ -207,9 +215,9 @@ public class QuestSwordsmanProgression05 extends Quest implements IInteractQuest
 	@Override
 	public boolean isTarget(EntityPlayer player, EntityLivingBase target)
 	{
-		this.questState = this.extraData.getInteger("phase");
+		this.questPhase = this.extraData.getInteger("phase");
 		
-		if(questState == 0)
+		if(questPhase == 0)
 		{
 			boolean flagMob = target instanceof BanditData;
 			boolean flagCompletion = this.getProgress() < this.getMaxProgress() - 1;
@@ -217,7 +225,7 @@ public class QuestSwordsmanProgression05 extends Quest implements IInteractQuest
 			if(flagMob && flagCompletion)
 				return true;
 		}
-		else if(questState == 1)
+		else if(questPhase == 1)
 		{
 			boolean flagMob = target instanceof EntityVillager;
 			boolean flagLibrarian = flagMob && ((EntityVillager) target).getProfession() == 1;

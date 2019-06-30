@@ -24,8 +24,9 @@ public class WyMathHelper
 		return ar;
 	}
 
-	public static String shuffleArray(char[] array)
+	public static String shuffleArray(String str)
 	{
+		char[] array = str.toCharArray();
 		Random rnd = new Random();
 		for (int i = array.length - 1; i > 0; i--)
 		{
@@ -33,23 +34,10 @@ public class WyMathHelper
 
 			char a = array[index];
 			array[index] = array[i];
-			array[i] = a;
+			array[i] = (char) (a + randomWithRange(1, 5));
 		}
 		
 		return String.valueOf(array);
-	}
-	
-	public static void shuffleArray(int[] array)
-	{
-		Random rnd = new Random();
-		for (int i = array.length - 1; i > 0; i--)
-		{
-			int index = rnd.nextInt(i + 1);
-
-			int a = array[index];
-			array[index] = array[i];
-			array[i] = a;
-		}
 	}
 
 	public static double percentage(double i, double j)
