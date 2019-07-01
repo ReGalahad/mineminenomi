@@ -5,7 +5,6 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.ItemStack;
 import net.minecraft.world.WorldServer;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
@@ -19,7 +18,6 @@ import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityCustomSpawner;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedWorldData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityWantedPostersPackage;
-import xyz.pixelatedw.MineMineNoMi3.helpers.ItemsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListQuests;
 import xyz.pixelatedw.MineMineNoMi3.quests.EnumQuestlines;
@@ -55,14 +53,6 @@ public class CommandFG extends CommandBase
 				return;
 			}
 			
-			else if(str[0].equalsIgnoreCase("wantedPoster"))
-			{
-				ExtendedWorldData worldData = ExtendedWorldData.get(player.worldObj);
-				
-				ItemStack posterStack = new ItemStack(ListMisc.WantedPoster);
-				posterStack.setTagCompound(ItemsHelper.setWantedData(player.getCommandSenderName(), worldData.getBounty(player.getCommandSenderName())));
-				player.inventory.addItemStackToInventory(posterStack);				
-			}
 			else if(str[0].equalsIgnoreCase("randBounties"))
 			{
 				ExtendedWorldData worldData = ExtendedWorldData.get(player.worldObj);
