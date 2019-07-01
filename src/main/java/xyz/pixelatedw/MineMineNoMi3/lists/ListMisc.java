@@ -425,9 +425,17 @@ public class ListMisc
 		WyRegistry.registerName("quest." + ListQuests.swordsmanProgression03.getQuestID() + ".completed", "<Swordsman Master> Impressive.");
 		WyRegistry.registerName("quest." + ListQuests.swordsmanProgression04.getQuestID() + ".started", "<Swordsman Master> Now for the last test we must train your movement during combat. Deal 25 critical hits.");
 		WyRegistry.registerName("quest." + ListQuests.swordsmanProgression04.getQuestID() + ".completed", "<Swordsman Master> I hope you've learned something from this. You're free for now, I will need some time to think how to challenge your skill even more.");
-
+		WyRegistry.registerName("quest." + ListQuests.swordsmanProgression05.getQuestID() + ".started", "<Swordsman Master> This can wait, we've got some bandit company outside kid, help me get rid of them.");
+		WyRegistry.registerName("quest." + ListQuests.swordsmanProgression05.getQuestID() + ".completed", "<Swordsman Master> With so much explosive power they are probably planning something big, better to investigate first.");
+		WyRegistry.registerName("quest." + ListQuests.swordsmanProgression05.getQuestID() + ".dialogue.01", "<Swordsman Master> There are still some bandits nearby!");
+		WyRegistry.registerName("quest." + ListQuests.swordsmanProgression05.getQuestID() + ".dialogue.02", "<Swordsman Master> No doubt they came here for this note. You must decipher it, a librarian will probably be able to crack this code.");
+		
 		// Sniper Progression Questline
 		
+		// Quest related items
+		WyRegistry.registerName("quest.item.mysteriousnote", "Mysterious Note");
+		WyRegistry.registerName("quest.item.decipherednote", "Deciphered Note");
+				
 		WyRegistry.registerName(ID.LANG_GUI_FACTION, "Faction");
 		WyRegistry.registerName(ID.LANG_GUI_RACE, "Race");
 		WyRegistry.registerName(ID.LANG_GUI_STYLE, "Style");

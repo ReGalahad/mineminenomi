@@ -29,7 +29,14 @@ public class QuestSwordsmanProgression05 extends Quest implements IInteractQuest
 {
 	
 	private int questPhase = 0;
-
+	private String lore1 = "Transport Content :";
+	private String lore2 = "* 100 TNT Blocks";
+	private String lore3 = "* 50 Gunpowder";
+	private String lore4 = "";
+	private String lore5 = "Delivered to :";					
+	private String lore6 = "X:0 Y:0 Z:0";	
+	private String lore7 = "- Simple Text Name";
+	
 	@Override
 	public String getQuestID()
 	{
@@ -124,7 +131,7 @@ public class QuestSwordsmanProgression05 extends Quest implements IInteractQuest
 		if(flagNearbyMobs)
 		{
 			if (!player.worldObj.isRemote)
-				WyHelper.sendMsgToPlayer(player, "<Dojo Sensei> There are still some bandits nearby!");		
+				WyHelper.sendMsgToPlayer(player, I18n.format("quest." + this.getQuestID() + ".dialogue.01"));		
 			
 			return false;
 		}
@@ -132,7 +139,7 @@ public class QuestSwordsmanProgression05 extends Quest implements IInteractQuest
 		if (flagQuestStateKill && !flagQuestComplete)
 		{
 			if (!player.worldObj.isRemote)
-				WyHelper.sendMsgToPlayer(player, "<Dojo Sensei> No doubt they came here for this note. You must decipher it, a librarian will probably be able to crack this code.");
+				WyHelper.sendMsgToPlayer(player, I18n.format("quest." + this.getQuestID() + ".dialogue.02"));
 				
 			ItemStack mysteriousNote = new ItemStack(ListMisc.Note);
 			mysteriousNote.setStackDisplayName("Mysterious Note");
@@ -141,13 +148,13 @@ public class QuestSwordsmanProgression05 extends Quest implements IInteractQuest
 			
 			// Adding lore
 			NBTTagCompound questLore = new NBTTagCompound();
-			questLore.setString("lore1", WyMathHelper.shuffleArray("Transport Content :"));
-			questLore.setString("lore2", WyMathHelper.shuffleArray("* 100 TNT Blocks"));
-			questLore.setString("lore3", WyMathHelper.shuffleArray("* 50 Gunpowder"));
-			questLore.setString("lore4", "");
-			questLore.setString("lore5", WyMathHelper.shuffleArray("Delivered to :"));					
-			questLore.setString("lore6", WyMathHelper.shuffleArray("X:0 Y:0 Z:0"));	
-			questLore.setString("lore7", WyMathHelper.shuffleArray("- Simple Text Name"));
+			questLore.setString("lore1", WyMathHelper.shuffleArray(this.lore1));
+			questLore.setString("lore2", WyMathHelper.shuffleArray(this.lore2));
+			questLore.setString("lore3", WyMathHelper.shuffleArray(this.lore3));
+			questLore.setString("lore4", this.lore4);
+			questLore.setString("lore5", WyMathHelper.shuffleArray(this.lore5));					
+			questLore.setString("lore6", WyMathHelper.shuffleArray(this.lore6));	
+			questLore.setString("lore7", WyMathHelper.shuffleArray(this.lore7));
 			
 			mysteriousNote.getTagCompound().setTag("QuestLore", questLore);
 						
@@ -171,13 +178,13 @@ public class QuestSwordsmanProgression05 extends Quest implements IInteractQuest
 					itemStack.setStackDisplayName("Deciphered Note");
 					
 					// Adding deciphered lore
-					questLore.setString("lore1", "Transport Content :");
-					questLore.setString("lore2", "* 100 TNT Blocks");
-					questLore.setString("lore3", "* 50 Gunpowder");
-					questLore.setString("lore4", "");
-					questLore.setString("lore5", "Delivered to :");					
-					questLore.setString("lore6", "X:0 Y:0 Z:0");	
-					questLore.setString("lore7", "- Simple Text Name");
+					questLore.setString("lore1", this.lore1);
+					questLore.setString("lore2", this.lore2);
+					questLore.setString("lore3", this.lore3);
+					questLore.setString("lore4", this.lore4);
+					questLore.setString("lore5", this.lore5);					
+					questLore.setString("lore6", this.lore6);	
+					questLore.setString("lore7", this.lore7);
 					
 					itemStack.getTagCompound().setTag("QuestLore", questLore);
 				}
