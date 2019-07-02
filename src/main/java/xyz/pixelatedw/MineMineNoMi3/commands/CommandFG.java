@@ -5,9 +5,11 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.WorldServer;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.api.WySchematicHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketQuestSync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
@@ -117,6 +119,11 @@ public class CommandFG extends CommandBase
 				WyNetworkHelper.sendTo(new PacketQuestSync(questProps), (EntityPlayerMP) player);
 			}
 
+			else if(str[0].equalsIgnoreCase("marinebase"))
+			{
+				WySchematicHelper.build(WySchematicHelper.load("largeMarineBase"), player.worldObj, (int)player.posX, (int)player.posY - 24, (int)player.posZ, Blocks.bedrock);
+			}
+			
 			if(toSpawn != null)
 			{
 				toSpawn.setLocationAndAngles(player.posX, player.posY, player.posZ, 0, 0);

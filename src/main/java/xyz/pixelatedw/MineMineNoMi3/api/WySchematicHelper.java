@@ -37,7 +37,12 @@ public class WySchematicHelper
 	}
 	
 	public static void build(Schematic sch, World world, int posX, int posY, int posZ)
-	{ 
+	{
+		build(sch, world, posX, posY, posZ, null);
+	}
+
+	public static void build(Schematic sch, World world, int posX, int posY, int posZ, Block airReplacement)
+	{
 		try  
 		{
 			int i = 0;
@@ -50,18 +55,20 @@ public class WySchematicHelper
 				if(b != Blocks.air)  
 				{
 					if(world.getBlock(posX + sx, posY + sy, posZ + sz) != b)
-					{					
-						//world.setBlockToAir(posX + sx, posY + sy, posZ + sz);	
+					{
 						world.setBlock(posX + sx, posY + sy, posZ + sz, b, sch.getData()[i], 2);
 						if(world.getBlock(posX + sx, posY + sy, posZ + sz) == Blocks.water || world.getBlock(posX + sx, posY + sy, posZ + sz) == Blocks.flowing_water)
 							world.markBlockForUpdate(posX + sx, posY + sy, posZ + sz);
 					}
+					
+					if(b == airReplacement)
+						world.setBlockToAir(posX + sx, posY + sy, posZ + sz);
 				}
 				i++;
 			}
 		}
 		catch(Exception e)
-		{System.out.println("[ERROR] The .schematic could not be built due to : " + e.toString());}
+		{System.out.println("[ERROR] The .schematic could not be built due to : " + e.toString());}	
 	}
-
+	
 }
