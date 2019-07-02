@@ -8,22 +8,22 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.ModelCube;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.ModelSphere;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.EffectType;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelArrow;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelBrickBat;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelFist;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelHeart;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelHydra;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelMeigo;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelMiniHollow;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelNegativeHollow;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelNoroNoroBeam;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelPaw;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelPheasant;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelShark;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelSpear;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelTokuHollow;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelTrident;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelYukiRabi;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.projectiles.ModelArrow;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.projectiles.ModelBrickBat;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.projectiles.ModelFist;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.projectiles.ModelHeart;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.projectiles.ModelHydra;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.projectiles.ModelMeigo;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.projectiles.ModelMiniHollow;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.projectiles.ModelNegativeHollow;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.projectiles.ModelNoroNoroBeam;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.projectiles.ModelPaw;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.projectiles.ModelPheasant;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.projectiles.ModelShark;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.projectiles.ModelSpear;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.projectiles.ModelTokuHollow;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.projectiles.ModelTrident;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.projectiles.ModelYukiRabi;
 
 public class ListAttributes 
 {

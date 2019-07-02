@@ -5,19 +5,19 @@ import java.util.HashMap;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.EntityRendererZoanEyes;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.RenderZoanMorph;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelBisonPower;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelBisonSpeed;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelGiraffePower;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelGiraffeSpeed;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelMoguPower;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelPhoenixFull;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelPhoenixHybrid;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelVenomDemon;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelYomi;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelZouFull;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelZouHybrid;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.renderers.RenderMorphYomi;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.zoans.ModelBisonPower;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.zoans.ModelBisonSpeed;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.zoans.ModelGiraffePower;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.zoans.ModelGiraffeSpeed;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.zoans.ModelMoguPower;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.zoans.ModelPhoenixFull;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.zoans.ModelPhoenixHybrid;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.zoans.ModelVenomDemon;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.zoans.ModelYomi;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.zoans.ModelZouFull;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.zoans.ModelZouHybrid;
+import xyz.pixelatedw.MineMineNoMi3.renderers.entities.zoans.RenderMorphYomi;
+import xyz.pixelatedw.MineMineNoMi3.renderers.entities.zoans.RenderZoanMorph;
 
 public class MorphsHelper
 {
