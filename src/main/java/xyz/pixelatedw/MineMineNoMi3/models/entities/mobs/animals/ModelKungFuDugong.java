@@ -1,14 +1,13 @@
 package xyz.pixelatedw.MineMineNoMi3.models.entities.mobs.animals;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import xyz.pixelatedw.MineMineNoMi3.animations.kungfudugong.AnimatorDugong;
-import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
-import xyz.pixelatedw.MineMineNoMi3.models.AnimatedModel;
+import net.minecraft.util.MathHelper;
 
-public class ModelKungFuDugong extends AnimatedModel
+public class ModelKungFuDugong extends ModelBiped
 {
 	public ModelRenderer head;
 	public ModelRenderer headShell;
@@ -27,7 +26,6 @@ public class ModelKungFuDugong extends AnimatedModel
 
 	public ModelKungFuDugong()
 	{
-		super(new AnimatorDugong());
 		this.textureWidth = 100;
 		this.textureHeight = 50;
 		this.tail3 = new ModelRenderer(this, 48, 16);
@@ -90,7 +88,7 @@ public class ModelKungFuDugong extends AnimatedModel
 	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
 	{
-		// this.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+		this.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		// this.runAnimator(entity, this);
 		this.body2.render(f5);
 		this.rightArm.render(f5);
@@ -117,20 +115,7 @@ public class ModelKungFuDugong extends AnimatedModel
 		if (Minecraft.getMinecraft().isGamePaused())
 			return;
 
-		double[] animationHappyTail = new double[]
-			{
-					35, 30, 25, 20, 15, 10, 5, 0, -5, -10, -15, -20, -15, -10, -5, 0, 5, 10, 15, 20, 25, 30, 35
-			};
-
-		this.frame += 1;
-		if (((int) frame) < animationHappyTail.length)
-		{
-			int tick = entity.ticksExisted % animationHappyTail.length;
-			this.tail2.rotateAngleX = WyMathHelper.degToRad(animationHappyTail[tick]);
-			this.tail3.rotateAngleX = WyMathHelper.degToRad(animationHappyTail[tick]);
-		}
-		else
-			this.frame = 0;
+		/**/
 	}
 
 	@Override
@@ -139,15 +124,8 @@ public class ModelKungFuDugong extends AnimatedModel
 		if (Minecraft.getMinecraft().isGamePaused())
 			return;
 
-		/*
-		 * long now = System.nanoTime();
-		 * double delta = (now - this.lastTime) / ns;
-		 * this.lastTime = now;
-		 * if (delta >= 1)
-		 * {
-		 */
-
-		// delta--;
-		// }
+		// Happy Tail
+		this.tail2.rotateAngleX = 0.4F * (0.7F + MathHelper.cos(ageInTicks * 0.4F));
+		this.tail3.rotateAngleX = 0.6F * this.tail2.rotateAngleX;
 	}
 }
