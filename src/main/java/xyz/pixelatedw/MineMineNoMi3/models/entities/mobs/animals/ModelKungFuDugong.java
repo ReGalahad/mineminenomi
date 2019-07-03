@@ -4,8 +4,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.animals.EntityKungFuDugong;
 
 public class ModelKungFuDugong extends ModelBiped
 {
@@ -110,22 +110,18 @@ public class ModelKungFuDugong extends ModelBiped
 	}
 
 	@Override
-	public void setLivingAnimations(EntityLivingBase entity, float limbSwing, float limbSwingAmount, float ageInTicks)
-	{
-		if (Minecraft.getMinecraft().isGamePaused())
-			return;
-
-		/**/
-	}
-
-	@Override
 	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float headYaw, float headPitch, float scaleFactor, Entity ent)
 	{
 		if (Minecraft.getMinecraft().isGamePaused())
 			return;
 
+		EntityKungFuDugong entity = (EntityKungFuDugong)ent;
+		
 		// Happy Tail
-		this.tail2.rotateAngleX = 0.4F * (0.7F + MathHelper.cos(ageInTicks * 0.4F));
-		this.tail3.rotateAngleX = 0.6F * this.tail2.rotateAngleX;
+		if(entity.isHappy())
+		{
+			this.tail2.rotateAngleX = 0.4F * (0.7F + MathHelper.cos(ageInTicks * 0.4F));
+			this.tail3.rotateAngleX = 0.6F * this.tail2.rotateAngleX;
+		}
 	}
 }
