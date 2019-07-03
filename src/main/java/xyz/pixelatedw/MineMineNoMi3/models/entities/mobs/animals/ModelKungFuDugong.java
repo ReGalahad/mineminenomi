@@ -1,10 +1,14 @@
 package xyz.pixelatedw.MineMineNoMi3.models.entities.mobs.animals;
 
-import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import xyz.pixelatedw.MineMineNoMi3.animations.kungfudugong.AnimatorDugong;
+import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
+import xyz.pixelatedw.MineMineNoMi3.models.AnimatedModel;
 
-public class ModelKungFuDugong extends ModelBase
+public class ModelKungFuDugong extends AnimatedModel
 {
 	public ModelRenderer head;
 	public ModelRenderer headShell;
@@ -23,6 +27,7 @@ public class ModelKungFuDugong extends ModelBase
 
 	public ModelKungFuDugong()
 	{
+		super(new AnimatorDugong());
 		this.textureWidth = 100;
 		this.textureHeight = 50;
 		this.tail3 = new ModelRenderer(this, 48, 16);
@@ -85,6 +90,8 @@ public class ModelKungFuDugong extends ModelBase
 	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
 	{
+		// this.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+		// this.runAnimator(entity, this);
 		this.body2.render(f5);
 		this.rightArm.render(f5);
 		this.leftArm.render(f5);
@@ -102,5 +109,45 @@ public class ModelKungFuDugong extends ModelBase
 		modelRenderer.rotateAngleX = x;
 		modelRenderer.rotateAngleY = y;
 		modelRenderer.rotateAngleZ = z;
+	}
+
+	@Override
+	public void setLivingAnimations(EntityLivingBase entity, float limbSwing, float limbSwingAmount, float ageInTicks)
+	{
+		if (Minecraft.getMinecraft().isGamePaused())
+			return;
+
+		double[] animationHappyTail = new double[]
+			{
+					35, 30, 25, 20, 15, 10, 5, 0, -5, -10, -15, -20, -15, -10, -5, 0, 5, 10, 15, 20, 25, 30, 35
+			};
+
+		this.frame += 1;
+		if (((int) frame) < animationHappyTail.length)
+		{
+			int tick = entity.ticksExisted % animationHappyTail.length;
+			this.tail2.rotateAngleX = WyMathHelper.degToRad(animationHappyTail[tick]);
+			this.tail3.rotateAngleX = WyMathHelper.degToRad(animationHappyTail[tick]);
+		}
+		else
+			this.frame = 0;
+	}
+
+	@Override
+	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float headYaw, float headPitch, float scaleFactor, Entity ent)
+	{
+		if (Minecraft.getMinecraft().isGamePaused())
+			return;
+
+		/*
+		 * long now = System.nanoTime();
+		 * double delta = (now - this.lastTime) / ns;
+		 * this.lastTime = now;
+		 * if (delta >= 1)
+		 * {
+		 */
+
+		// delta--;
+		// }
 	}
 }

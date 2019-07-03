@@ -1,10 +1,10 @@
 package xyz.pixelatedw.MineMineNoMi3.api.math;
 
-import net.minecraft.entity.player.EntityPlayer;
-import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
-
 import java.util.List;
 import java.util.Random;
+
+import net.minecraft.entity.player.EntityPlayer;
+import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 
 public class WyMathHelper
 {
@@ -24,6 +24,11 @@ public class WyMathHelper
 		return ar;
 	}
 
+	public static float degToRad(double degrees)
+	{
+		return (float) (degrees * Math.PI / 180);
+	}
+	
 	public static double percentage(double i, double j)
 	{
 		return (i / 100) * j;

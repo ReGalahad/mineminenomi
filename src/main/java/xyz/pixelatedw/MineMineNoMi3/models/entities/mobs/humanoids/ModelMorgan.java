@@ -1,7 +1,6 @@
 package xyz.pixelatedw.MineMineNoMi3.models.entities.mobs.humanoids;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -124,7 +123,8 @@ public class ModelMorgan extends ModelBiped
         this.axe_hand.addChild(this.axe4);
     }
 
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) 
+    @Override
+	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) 
     { 
     	setRotationAngles(f, f1, f2, f3, f4, f5, entity);
         this.leftarm1.render(f5);
@@ -135,12 +135,11 @@ public class ModelMorgan extends ModelBiped
         this.rightleg.render(f5);
     }
 
-    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float headYaw, float headPitch, float scaleFactor, Entity ent)
+    @Override
+	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float headYaw, float headPitch, float scaleFactor, Entity ent)
     {
 		super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, headYaw, headPitch, scaleFactor, ent);
-		
-		ent = ((EntityNewMob)ent);
-		
+
 	    double[] animationChopX = new double[]
 				{0, -28, -45, -65, -80, -106, -120, -120, -106, -80, -75, -65,  -45, -35, -25,  0};
 	    double[] animationChopY = new double[]
@@ -169,9 +168,9 @@ public class ModelMorgan extends ModelBiped
 	    		if(((int)frame) < animationChopX.length)
 	    		{
 		    		cycleIndex = (int)frame;
-		    		this.rightarm1.rotateAngleX  = (float) degToRad(animationChopX[cycleIndex]);
-		    		this.rightarm1.rotateAngleY  = (float) degToRad(animationChopY[cycleIndex]);
-		    		this.rightarm1.rotateAngleZ  = (float) degToRad(animationChopZ[cycleIndex]);
+		    		this.rightarm1.rotateAngleX  = degToRad(animationChopX[cycleIndex]);
+		    		this.rightarm1.rotateAngleY  = degToRad(animationChopY[cycleIndex]);
+		    		this.rightarm1.rotateAngleZ  = degToRad(animationChopZ[cycleIndex]);
 		    		if(frame == animationChopX.length - 1)
 		    			canAnimate = false;
 	    		}
@@ -186,7 +185,7 @@ public class ModelMorgan extends ModelBiped
     
     protected float degToRad(double degrees)
     {
-        return (float) (degrees * (double)Math.PI / 180) ;
+        return (float) (degrees * Math.PI / 180) ;
     }
     
     public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) 

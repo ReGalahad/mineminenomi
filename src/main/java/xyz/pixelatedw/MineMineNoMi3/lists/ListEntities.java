@@ -8,6 +8,7 @@ import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.WyRegistry;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.animals.EntityDenDenMushi;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.animals.EntityKungFuDugong;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.arlongPirates.EntityArlong;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.arlongPirates.EntityChew;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.arlongPirates.EntityKuroobi;
@@ -105,9 +106,12 @@ public class ListEntities
 		WyRegistry.registerMob("Doppelman", EntityDoppelman.class);
 		WyRegistry.registerMob("Black Knight", EntityBlackKnight.class);
 		WyRegistry.registerMob("Mirage Clone", EntityMirageClone.class);
-		WyRegistry.registerMob("Den Den Mushi", EntityDenDenMushi.class, 0xFF00FF, 0x00FF00);
 		WyRegistry.registerMob("Dojo Sensei", EntityDojoSensei.class, 0xFF00FF, 0x00FF00);
 		WyRegistry.registerMob("Wanted Posters Package", EntityWantedPostersPackage.class);
+
+		//Animals
+		WyRegistry.registerMob("Den Den Mushi", EntityDenDenMushi.class, 0xFF00FF, 0x00FF00);
+		WyRegistry.registerMob("Kung Fu Dugong", EntityKungFuDugong.class, 0xdbac64, 0x26815a);
 
 		//Temp
 		//WyRegistry.registerMob("TEMP_Dummy", TempEntityDummy.class);
