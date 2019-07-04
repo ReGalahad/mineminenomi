@@ -6,8 +6,12 @@ import java.util.UUID;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
+import net.minecraft.entity.ai.EntityAIOpenDoor;
+import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
@@ -31,16 +35,20 @@ public class EntityKungFuDugong extends EntityMob implements INBTEntity
 		{
 				Items.cooked_beef, Items.cooked_chicken, Items.cooked_fished, Items.cooked_porkchop
 		};
-	private boolean isHappy, isTamed, isWaiting, isEnraged;
+	private boolean isHappy, isTamed, isWaiting, isEnraged, isTraining;
 	private EntityPlayer owner;
 	private UUID ownerUUID;
 
 	public EntityKungFuDugong(World world)
 	{
 		super(world);
+		this.tasks.addTask(0, new EntityAISwimming(this));
+		this.tasks.addTask(0, new EntityAIAttackOnCollide(this, 1.0D, false));
+		this.tasks.addTask(1, new EntityAIOpenDoor(this, true));
 		this.tasks.addTask(1, new EntityAILookIdle(this));
 		this.tasks.addTask(2, new EntityAIMoveTowardsRestriction(this, 1.0D));
 		this.tasks.addTask(3, new EntityAIWander(this, 1.0D));
+		this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));
 	}
 
 	@Override
@@ -61,19 +69,29 @@ public class EntityKungFuDugong extends EntityMob implements INBTEntity
 		{
 			boolean flagOwner = this.getOwner() != null && this.getDistanceToEntity(this.getOwner()) < 10;
 			boolean flagTamed = this.isTamed();
-			boolean flagWaiting = this.getAttackTarget() == null && this.isWaiting();
+			boolean flagHasNoTarget = this.getAttackTarget() == null;
+			boolean flagWaiting = flagHasNoTarget && this.isWaiting();
 			boolean flagHealth = this.getHealth() > this.getMaxHealth() / 3;
-			
-			if ( flagOwner && flagTamed && flagWaiting && flagHealth )
+
+			if (flagOwner && flagTamed && flagWaiting && flagHealth)
 				this.isHappy = true;
 			else
 				this.isHappy = false;
 
+			if (flagHasNoTarget && this.ticksExisted % 250 == 0)
+			{
+				this.isTraining = !this.isTraining;
+				this.updateNBT();
+			}
+
 			if (this.ticksExisted % 100 == 0)
 				this.updateNBT();
-			
-			if(this.isWaiting())
+
+			if (this.isWaiting() || this.isTraining())
 				this.getNavigator().clearPathEntity();
+
+			if (this.getAttackTarget() == this.owner)
+				this.setAttackTarget(null);
 		}
 	}
 
@@ -100,6 +118,7 @@ public class EntityKungFuDugong extends EntityMob implements INBTEntity
 		nbt.setBoolean("IsWaiting", this.isWaiting);
 		nbt.setBoolean("IsHappy", this.isHappy);
 		nbt.setBoolean("IsEnraged", this.isEnraged);
+		nbt.setBoolean("IsTraining", this.isTraining);
 		nbt.setString("OwnerUUID", this.ownerUUID != null ? this.ownerUUID.toString() : "");
 	}
 
@@ -118,6 +137,7 @@ public class EntityKungFuDugong extends EntityMob implements INBTEntity
 		this.isWaiting = nbt.getBoolean("IsWaiting");
 		this.isHappy = nbt.getBoolean("IsHappy");
 		this.isEnraged = nbt.getBoolean("IsEnraged");
+		this.isTraining = nbt.getBoolean("IsTraining");
 		String uuid = nbt.getString("OwnerUUID");
 
 		if (!WyHelper.isNullOrEmpty(uuid))
@@ -135,9 +155,9 @@ public class EntityKungFuDugong extends EntityMob implements INBTEntity
 
 		Entity entity = damageSource.getEntity();
 
-		if(this.isTamed())
+		if (this.isTamed())
 			return true;
-		
+
 		if (entity instanceof EntityPlayer)
 		{
 			EntityPlayer player = (EntityPlayer) entity;
@@ -163,7 +183,7 @@ public class EntityKungFuDugong extends EntityMob implements INBTEntity
 			}
 			else
 			{
-				if (!this.isEnraged() && this.getHealth() < this.getMaxHealth() / 3)
+				if (!this.isEnraged() && this.getHealth() < this.getMaxHealth() / 2)
 				{
 					this.setOwner(player);
 					this.updateNBT();
@@ -172,7 +192,7 @@ public class EntityKungFuDugong extends EntityMob implements INBTEntity
 						double d0 = this.rand.nextGaussian() * 0.02D;
 						double d1 = this.rand.nextGaussian() * 0.02D;
 						double d2 = this.rand.nextGaussian() * 0.02D;
-						this.worldObj.spawnParticle(EnumParticleTypes.VILLAGER_HAPPY.getParticleName(), this.posX + this.rand.nextFloat() * this.width * 2.0F - this.width, this.posY + 1.0D + this.rand.nextFloat() * this.height, this.posZ + this.rand.nextFloat() * this.width * 2.0F - this.width, d0, d1, d2);
+						this.worldObj.spawnParticle(EnumParticleTypes.HEART.getParticleName(), this.posX + this.rand.nextFloat() * this.width * 2.0F - this.width, this.posY + 0.5D + this.rand.nextFloat() * this.height, this.posZ + this.rand.nextFloat() * this.width * 2.0F - this.width, d0, d1, d2);
 					}
 				}
 			}
@@ -196,15 +216,21 @@ public class EntityKungFuDugong extends EntityMob implements INBTEntity
 				{
 					--heldStack.stackSize;
 					this.heal(4);
+					for (int i = 0; i < 5; ++i)
+					{
+						double d0 = this.rand.nextGaussian() * 0.02D;
+						double d1 = this.rand.nextGaussian() * 0.02D;
+						double d2 = this.rand.nextGaussian() * 0.02D;
+						this.worldObj.spawnParticle(EnumParticleTypes.HEART.getParticleName(), this.posX + this.rand.nextFloat() * this.width * 2.0F - this.width, this.posY + 0.5D + this.rand.nextFloat() * this.height, this.posZ + this.rand.nextFloat() * this.width * 2.0F - this.width, d0, d1, d2);
+					}
 					return true;
 				}
 			}
 
 			this.isWaiting = !this.isWaiting;
 			this.updateNBT();
-			return true;
 		}
-
+		
 		return false;
 	}
 
@@ -228,6 +254,11 @@ public class EntityKungFuDugong extends EntityMob implements INBTEntity
 		return this.isEnraged;
 	}
 
+	public boolean isTraining()
+	{
+		return this.isTraining;
+	}
+
 	private void setOwner(EntityPlayer player)
 	{
 		this.owner = player;
@@ -239,11 +270,11 @@ public class EntityKungFuDugong extends EntityMob implements INBTEntity
 	{
 		return this.owner;
 	}
-	
+
 	@Override
 	protected boolean canDespawn()
 	{
-		if(this.isTamed())
+		if (this.isTamed())
 			return false;
 		else
 			return true;
