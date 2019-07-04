@@ -5,6 +5,7 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.animals.EntityKungFuDugong;
 
 public class ModelKungFuDugong extends ModelBiped
@@ -117,11 +118,47 @@ public class ModelKungFuDugong extends ModelBiped
 
 		EntityKungFuDugong entity = (EntityKungFuDugong)ent;
 		
-		// Happy Tail
+		// Happy Tail animation
 		if(entity.isHappy())
 		{
 			this.tail2.rotateAngleX = 0.4F * (0.7F + MathHelper.cos(ageInTicks * 0.4F));
 			this.tail3.rotateAngleX = 0.6F * this.tail2.rotateAngleX;
+		}
+		else
+		{
+			this.tail2.rotateAngleX = 0.69F;
+			this.tail3.rotateAngleX = WyMathHelper.degToRad(0);
+			
+			this.tail2.rotateAngleZ = MathHelper.cos(limbSwing * 0.4F + (float)Math.PI) * 2.0F * limbSwingAmount * 0.3F;
+			this.tail3.rotateAngleZ = MathHelper.cos(limbSwing * 0.4F + (float)Math.PI) * 2.0F * limbSwingAmount * 0.3F;
+
+		}
+		
+		// Training animations
+		if(entity.isTraining())
+		{
+			float rightArmMovement = MathHelper.cos(ageInTicks * 0.9F);
+			float leftArmMovement = -MathHelper.cos(ageInTicks * 0.9F);
+			
+			if(leftArmMovement >= 0.4 || leftArmMovement <= -0.4)
+			{
+				this.rightArm.rotateAngleX = WyMathHelper.degToRad(-90);
+				this.rightArm.offsetZ = 0.1F * (0.9F - rightArmMovement);
+			}
+			
+			if(rightArmMovement >= 0.4 || rightArmMovement <= -0.4)
+			{
+				this.leftArm.rotateAngleX = WyMathHelper.degToRad(-90);
+				this.leftArm.offsetZ = 0.1F * (0.9F - leftArmMovement);
+			}
+		}
+		else
+		{
+			this.rightArm.offsetZ = 0;
+			this.leftArm.offsetZ = 0;
+			
+	        this.rightArm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 2.0F * limbSwingAmount * 0.5F;
+	        this.leftArm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 2.0F * limbSwingAmount * 0.5F;
 		}
 	}
 }
