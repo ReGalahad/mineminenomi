@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.IEntityOwnable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -23,13 +24,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.INBTEntity;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketEntityNBTSync;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 
-public class EntityKungFuDugong extends EntityMob implements INBTEntity
+public class EntityKungFuDugong extends EntityMob implements INBTEntity, IEntityOwnable
 {
 	private Item[] food = new Item[]
 		{
@@ -87,11 +90,21 @@ public class EntityKungFuDugong extends EntityMob implements INBTEntity
 			if (this.ticksExisted % 100 == 0)
 				this.updateNBT();
 
-			if (this.isWaiting() || this.isTraining())
+			if (flagWaiting || this.isTraining())
 				this.getNavigator().clearPathEntity();
 
 			if (this.getAttackTarget() == this.owner)
 				this.setAttackTarget(null);
+			
+			if(this.owner != null)
+			{
+				if(this.getDistanceToEntity(this.owner) > 10)
+					this.getNavigator().tryMoveToEntityLiving(this.owner, 1.5);
+				
+				if(this.getDistanceToEntity(this.owner) > 80)
+					this.setPositionAndUpdate(this.owner.posX, this.owner.posY, this.owner.posZ);			
+			}
+			
 		}
 	}
 
@@ -173,27 +186,15 @@ public class EntityKungFuDugong extends EntityMob implements INBTEntity
 					this.isEnraged = true;
 					this.updateNBT();
 				}
-				for (int i = 0; i < 5; ++i)
-				{
-					double d0 = this.rand.nextGaussian() * 0.02D;
-					double d1 = this.rand.nextGaussian() * 0.02D;
-					double d2 = this.rand.nextGaussian() * 0.02D;
-					this.worldObj.spawnParticle(EnumParticleTypes.VILLAGER_ANGRY.getParticleName(), this.posX + this.rand.nextFloat() * this.width * 2.0F - this.width, this.posY + 0.5D + this.rand.nextFloat() * this.height, this.posZ + this.rand.nextFloat() * this.width * 2.0F - this.width, d0, d1, d2);
-				}
+				WyNetworkHelper.sendToAll(new PacketParticles(ID.PARTICLEFX_ABOVEHEAD_ANGRY, this.posX, this.posY + 1, this.posZ));
 			}
 			else
 			{
 				if (!this.isEnraged() && this.getHealth() < this.getMaxHealth() / 2)
 				{
+					WyNetworkHelper.sendToAll(new PacketParticles(ID.PARTICLEFX_ABOVEHEAD_HAPPY, this.posX, this.posY + 0.5, this.posZ));
 					this.setOwner(player);
 					this.updateNBT();
-					for (int i = 0; i < 5; ++i)
-					{
-						double d0 = this.rand.nextGaussian() * 0.02D;
-						double d1 = this.rand.nextGaussian() * 0.02D;
-						double d2 = this.rand.nextGaussian() * 0.02D;
-						this.worldObj.spawnParticle(EnumParticleTypes.HEART.getParticleName(), this.posX + this.rand.nextFloat() * this.width * 2.0F - this.width, this.posY + 0.5D + this.rand.nextFloat() * this.height, this.posZ + this.rand.nextFloat() * this.width * 2.0F - this.width, d0, d1, d2);
-					}
 				}
 			}
 		}
@@ -266,6 +267,7 @@ public class EntityKungFuDugong extends EntityMob implements INBTEntity
 		this.isTamed = true;
 	}
 
+	@Override
 	public EntityPlayer getOwner()
 	{
 		return this.owner;
@@ -278,5 +280,14 @@ public class EntityKungFuDugong extends EntityMob implements INBTEntity
 			return false;
 		else
 			return true;
+	}
+
+	@Override
+	public String func_152113_b()
+	{
+		if(this.ownerUUID != null)
+			return this.ownerUUID.toString();
+		else
+			return "";
 	}
 }

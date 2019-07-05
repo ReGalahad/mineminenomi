@@ -131,7 +131,10 @@ public class ID
 	PARTICLEFX_RUSTTOUCH = "rustTouch",
 	PARTICLEFX_CHLOROBALL = "chloroBall",
 	PARTICLEFX_CHLOROBALLCLOUD = "chloroBallCloud",
-			
+	PARTICLEFX_ABOVEHEAD_ANGRY = "aboveHeadAngry",
+	PARTICLEFX_ABOVEHEAD_HAPPY = "aboveHeadHappy",
+	PARTICLEFX_ABOVEHEAD_HEART = "aboveHeadHeart",
+	
 	EXTRAEFFECT_MERO = "mero",
 	EXTRAEFFECT_HIE = "hie",
 	EXTRAEFFECT_CHIYUHORMONE = "chiyuHormone",
