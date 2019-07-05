@@ -8,6 +8,7 @@ import xyz.pixelatedw.MineMineNoMi3.events.EventsBounty;
 import xyz.pixelatedw.MineMineNoMi3.events.EventsCombatMode;
 import xyz.pixelatedw.MineMineNoMi3.events.EventsCore;
 import xyz.pixelatedw.MineMineNoMi3.events.EventsCrafting;
+import xyz.pixelatedw.MineMineNoMi3.events.EventsCrew;
 import xyz.pixelatedw.MineMineNoMi3.events.EventsDrops;
 import xyz.pixelatedw.MineMineNoMi3.events.EventsEnchantments;
 import xyz.pixelatedw.MineMineNoMi3.events.EventsMorphs;
@@ -29,6 +30,9 @@ public class ListForge
 	{
 		// Handles some core features of the mod, like IEEP registrations, update notifications or Early Access protection 		
 		MinecraftForge.EVENT_BUS.register(new EventsCore());
+		
+		// Handles different event driven logic about crew members
+		MinecraftForge.EVENT_BUS.register(new EventsCrew());
 		
 		// Handles any bounty/wanted poster related event
 		MinecraftForge.EVENT_BUS.register(new EventsBounty());
