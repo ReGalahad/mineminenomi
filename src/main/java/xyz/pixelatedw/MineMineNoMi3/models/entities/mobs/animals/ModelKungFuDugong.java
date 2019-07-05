@@ -7,6 +7,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.animals.EntityKungFuDugong;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityDugong;
 
 public class ModelKungFuDugong extends ModelBiped
 {
@@ -113,7 +114,8 @@ public class ModelKungFuDugong extends ModelBiped
 	@Override
 	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float headYaw, float headPitch, float scaleFactor, Entity ent)
 	{
-		if (Minecraft.getMinecraft().isGamePaused())
+		boolean flagTempEntity = ent instanceof TempEntityDugong;
+		if (Minecraft.getMinecraft().isGamePaused() || flagTempEntity)
 			return;
 
 		EntityKungFuDugong entity = (EntityKungFuDugong)ent;

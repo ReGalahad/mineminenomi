@@ -30,6 +30,8 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityFatPirate;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirate;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirateCaptain;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirateWithGun;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityDugong;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityLapahn;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityBlueno;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityFukuro;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityJabra;
@@ -58,6 +60,8 @@ public class ListEntities
 		
 		Type[] generalBiomes = new Type[]
 				{Type.BEACH, Type.JUNGLE, Type.SWAMP, Type.SAVANNA, Type.FOREST, Type.HILLS, Type.CONIFEROUS};
+		Type[] dugongBiomes = new Type[]
+				{Type.BEACH, Type.SANDY};
 		
 		//Bandits
 		WyRegistry.registerMob("Bandit with Sword", EntityBandit.class, 0x5B2929, 0xFFFFFF);
@@ -112,9 +116,13 @@ public class ListEntities
 		//Animals
 		WyRegistry.registerMob("Den Den Mushi", EntityDenDenMushi.class, 0xFF00FF, 0x00FF00);
 		WyRegistry.registerMob("Kung Fu Dugong", EntityKungFuDugong.class, 0xdbac64, 0x26815a);
+		WyRegistry.registerSpawnBiomesFor(EntityKungFuDugong.class, 30, 3, 6, dugongBiomes);
 
 		//Temp
 		//WyRegistry.registerMob("TEMP_Dummy", TempEntityDummy.class);
+		WyRegistry.registerMob("TEMP_Dugong", TempEntityDugong.class);
+		WyRegistry.registerMob("TEMP_Laphan", TempEntityLapahn.class);
+
 	}
 	
 }

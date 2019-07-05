@@ -43,6 +43,8 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityFatPirate;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirate;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirateCaptain;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirateWithGun;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityDugong;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityLapahn;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityBlueno;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityFukuro;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityJabra;
@@ -71,6 +73,7 @@ import xyz.pixelatedw.MineMineNoMi3.models.blocks.ModelRejectDial;
 import xyz.pixelatedw.MineMineNoMi3.models.blocks.ModelWantedPostersPackage;
 import xyz.pixelatedw.MineMineNoMi3.models.entities.mobs.animals.ModelDenDenMushi;
 import xyz.pixelatedw.MineMineNoMi3.models.entities.mobs.animals.ModelKungFuDugong;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.mobs.animals.ModelLapahn;
 import xyz.pixelatedw.MineMineNoMi3.models.entities.mobs.humanoids.ModelArlong;
 import xyz.pixelatedw.MineMineNoMi3.models.entities.mobs.humanoids.ModelBlueno;
 import xyz.pixelatedw.MineMineNoMi3.models.entities.mobs.humanoids.ModelChew;
@@ -172,6 +175,10 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityDenDenMushi.class, new MobRenderer(new ModelDenDenMushi(), "denden"));
 		RenderingRegistry.registerEntityRenderingHandler(EntityKungFuDugong.class, new MobRenderer(new ModelKungFuDugong(), "kungfudugong"));
 		
+		//TEMP
+		RenderingRegistry.registerEntityRenderingHandler(TempEntityDugong.class, new MobRenderer(new ModelKungFuDugong(), "kungfudugong"));
+		RenderingRegistry.registerEntityRenderingHandler(TempEntityLapahn.class, new MobRenderer(new ModelLapahn(), "lapahn"));
+
 		//Special Renderers
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDenDenMushi.class, new RenderBlockDenDenMushi());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWantedPoster.class, new RenderBlockWantedPoster());

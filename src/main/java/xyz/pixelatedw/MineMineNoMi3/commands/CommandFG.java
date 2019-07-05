@@ -22,7 +22,9 @@ import xyz.pixelatedw.MineMineNoMi3.data.ExtendedWorldData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.baroqueWorks.EntityMr0;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.EntityMorgan;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityWantedPostersPackage;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityDugong;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityDummy;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityLapahn;
 import xyz.pixelatedw.MineMineNoMi3.helpers.ItemsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListQuests;
@@ -49,6 +51,10 @@ public class CommandFG extends CommandBase
 				toSpawn = new EntityMr0(player.worldObj);
 			else if(str[0].equalsIgnoreCase("morgan"))
 				toSpawn = new EntityMorgan(player.worldObj);
+			else if(str[0].equalsIgnoreCase("dugong"))
+				toSpawn = new TempEntityDugong(player.worldObj);
+			else if(str[0].equalsIgnoreCase("lapahn"))
+				toSpawn = new TempEntityLapahn(player.worldObj);
 			
 			else if(str[0].equalsIgnoreCase("package"))
 			{			
