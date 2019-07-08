@@ -25,6 +25,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityWantedPostersPackag
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityDugong;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityDummy;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityLapahn;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityYagaraBull;
 import xyz.pixelatedw.MineMineNoMi3.helpers.ItemsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListQuests;
@@ -55,6 +56,8 @@ public class CommandFG extends CommandBase
 				toSpawn = new TempEntityDugong(player.worldObj);
 			else if(str[0].equalsIgnoreCase("lapahn"))
 				toSpawn = new TempEntityLapahn(player.worldObj);
+			else if(str[0].equalsIgnoreCase("yagarabull"))
+				toSpawn = new TempEntityYagaraBull(player.worldObj);
 			
 			else if(str[0].equalsIgnoreCase("package"))
 			{			

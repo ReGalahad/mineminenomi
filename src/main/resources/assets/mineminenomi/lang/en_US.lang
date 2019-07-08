@@ -262,6 +262,7 @@ entity.Pirate with Sword.name=Pirate with Sword
 entity.Spandam.name=Spandam
 entity.TEMP_Dugong.name=TEMP_Dugong
 entity.TEMP_Laphan.name=TEMP_Laphan
+entity.TEMP_YagaraBull.name=TEMP_YagaraBull
 entity.Wanted Posters Package.name=Wanted Posters Package
 
 faction.bountyhunter.name=Bounty Hunter

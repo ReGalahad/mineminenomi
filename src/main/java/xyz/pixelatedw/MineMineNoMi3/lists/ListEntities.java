@@ -32,6 +32,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirateCaptain;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirateWithGun;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityDugong;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityLapahn;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityYagaraBull;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityBlueno;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityFukuro;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityJabra;
@@ -122,6 +123,7 @@ public class ListEntities
 		//WyRegistry.registerMob("TEMP_Dummy", TempEntityDummy.class);
 		WyRegistry.registerMob("TEMP_Dugong", TempEntityDugong.class);
 		WyRegistry.registerMob("TEMP_Laphan", TempEntityLapahn.class);
+		WyRegistry.registerMob("TEMP_YagaraBull", TempEntityYagaraBull.class);
 
 	}
 	

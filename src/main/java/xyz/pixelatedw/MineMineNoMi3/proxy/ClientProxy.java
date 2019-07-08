@@ -45,6 +45,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirateCaptain;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirateWithGun;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityDugong;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityLapahn;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityYagaraBull;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityBlueno;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityFukuro;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityJabra;
@@ -74,6 +75,7 @@ import xyz.pixelatedw.MineMineNoMi3.models.blocks.ModelWantedPostersPackage;
 import xyz.pixelatedw.MineMineNoMi3.models.entities.mobs.animals.ModelDenDenMushi;
 import xyz.pixelatedw.MineMineNoMi3.models.entities.mobs.animals.ModelKungFuDugong;
 import xyz.pixelatedw.MineMineNoMi3.models.entities.mobs.animals.ModelLapahn;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.mobs.animals.ModelYagaraBull;
 import xyz.pixelatedw.MineMineNoMi3.models.entities.mobs.humanoids.ModelArlong;
 import xyz.pixelatedw.MineMineNoMi3.models.entities.mobs.humanoids.ModelBlueno;
 import xyz.pixelatedw.MineMineNoMi3.models.entities.mobs.humanoids.ModelChew;
@@ -178,7 +180,8 @@ public class ClientProxy extends CommonProxy
 		//TEMP
 		RenderingRegistry.registerEntityRenderingHandler(TempEntityDugong.class, new MobRenderer(new ModelKungFuDugong(), "kungfudugong"));
 		RenderingRegistry.registerEntityRenderingHandler(TempEntityLapahn.class, new MobRenderer(new ModelLapahn(), "lapahn"));
-
+		RenderingRegistry.registerEntityRenderingHandler(TempEntityYagaraBull.class, new MobRenderer(new ModelYagaraBull(), "yagarabull"));
+		
 		//Special Renderers
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDenDenMushi.class, new RenderBlockDenDenMushi());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWantedPoster.class, new RenderBlockWantedPoster());
