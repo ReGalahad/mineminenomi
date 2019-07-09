@@ -1,8 +1,13 @@
 package xyz.pixelatedw.MineMineNoMi3.models.entities.mobs.animals;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.MathHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.animals.EntityLapahn;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityLapahn;
 
 public class ModelLapahn extends ModelBiped
 {
@@ -113,6 +118,7 @@ public class ModelLapahn extends ModelBiped
 	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
 	{
+		this.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		this.tail.render(f5);
 		this.head.render(f5);
 		this.body3.render(f5);
@@ -124,6 +130,66 @@ public class ModelLapahn extends ModelBiped
 		this.rightLeg1.render(f5);
 		this.leftArm1.render(f5);
 		this.body2.render(f5);
+	}
+
+	@Override
+	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float headYaw, float headPitch, float scaleFactor, Entity ent)
+	{
+		boolean flagTempEntity = ent instanceof TempEntityLapahn;
+		if (Minecraft.getMinecraft().isGamePaused() || flagTempEntity)
+			return;
+
+		EntityLapahn entity = (EntityLapahn) ent;
+
+		// Jumping animation...could use some polish later on
+		if (ent.getDistance(ent.prevPosX, ent.prevPosY, ent.prevPosZ) > 0)
+		{
+			this.rightLeg1.rotateAngleX = 0.7F * (-0.2F + MathHelper.cos(ageInTicks * 0.45F));
+			this.leftLeg1.rotateAngleX = 0.7F * (-0.2F + MathHelper.cos(ageInTicks * 0.45F));
+
+			this.rightArm1.rotateAngleX = -0.4F * (-0.2F + MathHelper.sin(ageInTicks * 0.45F));
+			this.leftArm1.rotateAngleX = -0.4F * (-0.2F + MathHelper.sin(ageInTicks * 0.45F));
+
+			float formula = 0.5F * 0.0F - (0.9F + MathHelper.cos(ageInTicks * 0.45F));
+			this.leftArm1.offsetY = formula;
+			this.rightArm1.offsetY = formula;
+			this.head.offsetY = formula;
+			this.body1.offsetY = formula;
+			this.body2.offsetY = formula;
+			this.body3.offsetY = formula;
+			this.body4.offsetY = formula;
+			this.body5.offsetY = formula;
+			this.leftLeg1.offsetY = formula;
+			this.rightLeg1.offsetY = formula;
+			this.tail.offsetY = formula;
+		}
+		else
+		{
+			this.rightLeg1.rotateAngleX = WyMathHelper.degToRad(-17);
+			this.leftLeg1.rotateAngleX = WyMathHelper.degToRad(-17);
+
+			this.rightArm1.rotateAngleX = WyMathHelper.degToRad(0);
+			this.leftArm1.rotateAngleX = WyMathHelper.degToRad(0);
+			
+			float formula = 0;
+			this.leftArm1.offsetY = formula;
+			this.rightArm1.offsetY = formula;
+			this.head.offsetY = formula;
+			this.body1.offsetY = formula;
+			this.body2.offsetY = formula;
+			this.body3.offsetY = formula;
+			this.body4.offsetY = formula;
+			this.body5.offsetY = formula;
+			this.leftLeg1.offsetY = formula;
+			this.rightLeg1.offsetY = formula;
+			this.tail.offsetY = formula;
+				
+			if(ageInTicks % 300 > 0 && ageInTicks % 300 < 100)
+				this.leftEar.rotateAngleX = 0.1F * (0.3F + MathHelper.cos(ageInTicks * 0.55F));
+			else
+				this.leftEar.rotateAngleX = WyMathHelper.degToRad(0);
+
+		}
 	}
 
 	/**

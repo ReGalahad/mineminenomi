@@ -22,6 +22,7 @@ import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityWantedPoster;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityWantedPostersPackage;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.animals.EntityDenDenMushi;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.animals.EntityKungFuDugong;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.animals.EntityLapahn;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.arlongPirates.EntityArlong;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.arlongPirates.EntityChew;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.arlongPirates.EntityKuroobi;
@@ -176,6 +177,7 @@ public class ClientProxy extends CommonProxy
 		//Animals
 		RenderingRegistry.registerEntityRenderingHandler(EntityDenDenMushi.class, new MobRenderer(new ModelDenDenMushi(), "denden"));
 		RenderingRegistry.registerEntityRenderingHandler(EntityKungFuDugong.class, new MobRenderer(new ModelKungFuDugong(), "kungfudugong"));
+		RenderingRegistry.registerEntityRenderingHandler(EntityLapahn.class, new MobRenderer(new ModelLapahn(), "lapahn"));
 		
 		//TEMP
 		RenderingRegistry.registerEntityRenderingHandler(TempEntityDugong.class, new MobRenderer(new ModelKungFuDugong(), "kungfudugong"));
