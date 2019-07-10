@@ -18,6 +18,7 @@ public class EntityMorgan extends MarineData
 		this.tasks.addTask(0, new EntityAIMorganChop(this));
  	}
 	
+	@Override
 	public void applyEntityAttributes()
 	{
 		super.applyEntityAttributes(); 
@@ -50,6 +51,7 @@ public class EntityMorgan extends MarineData
 		return this.previousAttack;
 	}
 	
+	@Override
 	public boolean attackEntityAsMob(Entity ent)
     {
 		int i = 2;
@@ -77,6 +79,7 @@ public class EntityMorgan extends MarineData
 			this.theEntity = e;
 		}
 		
+		@Override
 		public boolean shouldExecute() 
 		{
 			if(theEntity.getAttackTarget() != null && this.theEntity.getCurrentAttackState() == null && theEntity.getDistanceToEntity(theEntity.getAttackTarget()) < 6)
@@ -105,7 +108,8 @@ public class EntityMorgan extends MarineData
 			return true;
 		}
 		
-	    public boolean continueExecuting()
+	    @Override
+		public boolean continueExecuting()
 	    {
 	    	boolean flag = canUseAttack;
 	    	
@@ -113,22 +117,24 @@ public class EntityMorgan extends MarineData
 	    	{
 	    		this.theEntity.setPreviousAttackState(this.theEntity.getCurrentAttackState());
 	    		this.theEntity.setCurrentAttackState(null);
-	    		theEntity.setState(0);
+	    		//theEntity.setState(0);
 	    	}
 	    	
 	    	return flag; //(theEntity.getAttackTarget() != null && theEntity.getDistanceSqToEntity(this.theEntity.getAttackTarget()) < 400) ||
 	    }
 		
+		@Override
 		public void startExecuting()
 		{
 			canUseAttack = true;
 			attackTimer = ATTACK_MAX_TIMER;
 			whileAttackTimer = 0;
 			this.theEntity.setCurrentAttackState(SpecialAttack.CHOP);
-			theEntity.setState(1);
+			//theEntity.setState(1);
 		}
 			
-        public void updateTask()
+        @Override
+		public void updateTask()
         { 
         	if(theEntity.getAttackTarget() != null && canUseAttack)
         	{

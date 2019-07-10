@@ -5,7 +5,6 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
 
 public class ModelMorgan extends ModelBiped
 {
@@ -150,7 +149,7 @@ public class ModelMorgan extends ModelBiped
 	    
 	    if(!Minecraft.getMinecraft().isGamePaused())
 	    {
-			if(((EntityNewMob) ent).getState() == 0)
+			/*if(((EntityNewMob) ent).getState() == 0)
 	    	{
 	    		this.body.rotateAngleY = 0;
 	    		this.leftarm1.rotateAngleX = this.rightarm1.rotateAngleX = 0;
@@ -174,7 +173,7 @@ public class ModelMorgan extends ModelBiped
 		    		if(frame == animationChopX.length - 1)
 		    			canAnimate = false;
 	    		}
-	    	}
+	    	}*/
 	    }
 		
 		leftleg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.0F * limbSwingAmount;

@@ -23,7 +23,6 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
-import xyz.pixelatedw.MineMineNoMi3.data.ExtendedNPCData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.MarineData;
 import xyz.pixelatedw.MineMineNoMi3.events.customevents.BountyEvent;
@@ -153,11 +152,13 @@ public class EventsOnGain
 
 				if (target instanceof EntityNewMob)
 				{
-					ExtendedNPCData targetprops = ExtendedNPCData.get(target);
+					//ExtendedNPCData targetprops = ExtendedNPCData.get(target);
 					
-					if ((props.getDoriki() / 100) > targetprops.getDoriki())
+					EntityNewMob entity = (EntityNewMob)target;
+					
+					if ((props.getDoriki() / 100) > entity.getDoriki())
 					{
-						int x = (props.getDoriki() / 100) - targetprops.getDoriki();
+						int x = (props.getDoriki() / 100) - entity.getDoriki();
 						if (x <= 0)
 							x = 1;
 
@@ -166,12 +167,12 @@ public class EventsOnGain
 							plusDoriki = 1;
 					}
 					else
-						plusDoriki = targetprops.getDoriki();
+						plusDoriki = entity.getDoriki();
 					
 					plusDoriki *= MainConfig.modifierDorikiReward;
 
-					plusBounty = (targetprops.getDoriki() * 2) + rng;
-					plusBelly = targetprops.getBelly() + rng;
+					plusBounty = (entity.getDoriki() * 2) + rng;
+					plusBelly = entity.getBelly() + rng;
 
 					if (!ID.DEV_EARLYACCESS && !player.worldObj.isRemote && !player.capabilities.isCreativeMode)
 						WyTelemetry.addStat("defeated_" + WyHelper.getFancyName(target.getClass().getSimpleName()).replace("entity", ""), 1);

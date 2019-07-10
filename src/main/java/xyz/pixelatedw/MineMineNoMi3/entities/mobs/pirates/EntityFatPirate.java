@@ -1,18 +1,14 @@
 package xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates;
 
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
-import xyz.pixelatedw.MineMineNoMi3.data.ExtendedNPCData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.EntityAIGapCloser;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.EntityAIHakiCombat;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.EntityAIKnockback;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.brawler.EntityAIHakaiHo;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.swordsman.EntityAIYakkodori;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
 public class EntityFatPirate extends PirateData
@@ -29,6 +25,7 @@ public class EntityFatPirate extends PirateData
 		this.tasks.addTask(1, new EntityAIHakaiHo(this));
  	}
 	
+	@Override
 	public void applyEntityAttributes()
 	{ 
 		super.applyEntityAttributes(); 
@@ -36,18 +33,16 @@ public class EntityFatPirate extends PirateData
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.20D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(6.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(40.0D);
-		
-		ExtendedNPCData props = ExtendedNPCData.get(this);
-		
-		props.setDoriki(15 + this.worldObj.rand.nextInt(15));
-		props.setBelly(10 + this.worldObj.rand.nextInt(20));
+			
+		this.setDoriki(15 + this.worldObj.rand.nextInt(15));
+		this.setBelly(10 + this.worldObj.rand.nextInt(20));
 
 		if(!this.worldObj.isRemote)
 		{
 			Item[] randomSword = new Item[] {ListMisc.MarineSword, null};
 			if(this.rand.nextInt(100) <= 20)
 			{
-				props.setBusoHaki(true);
+				this.setBusoHaki(true);
 
 				Item sword = randomSword[this.rand.nextInt(randomSword.length)];			
 				if(sword != null)
