@@ -1,19 +1,18 @@
 package xyz.pixelatedw.MineMineNoMi3.entities.mobs;
 
-import java.util.LinkedList;
-import java.util.Queue;
-
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketEntityNBTSync;
 
-public class EntityNewMob extends EntityMob implements IDynamicRenderer
+public class EntityNewMob extends EntityMob implements IDynamicRenderer, INBTEntity
 {
-
-	private int textureId, state;
 	protected String[] textures;
+	private int doriki, belly, textureId, state;
+	private boolean hasBusoHaki;
 	private EntityAIBase currentAI, previousAI;
 
 	public EntityNewMob(World worldIn) 
@@ -24,59 +23,128 @@ public class EntityNewMob extends EntityMob implements IDynamicRenderer
 	public EntityNewMob(World worldIn, String[] textures) 
 	{
 		super(worldIn);
-		addRandomArmor();
+		this.addRandomArmor();
 		this.textures = textures;
 	}
 
-	public String getTexture() { return textures[this.getDataWatcher().getWatchableObjectInt(28)]; }
-	public int getTextureId() { return this.getDataWatcher().getWatchableObjectInt(28); }
-	protected void setTexture(int texture) { this.getDataWatcher().updateObject(28, texture); }
+    @Override
+	protected void addRandomArmor() {}
 	
-    protected void addRandomArmor() {}
-	
-    public IEntityLivingData onSpawnWithEgg(IEntityLivingData data)
+    @Override
+	public IEntityLivingData onSpawnWithEgg(IEntityLivingData data)
     {
         super.onSpawnWithEgg(data);
         this.addRandomArmor();
 		if(this.textures != null && this.textures.length > 0)
 			this.setTexture(this.rand.nextInt(this.textures.length));
-        return data;
+
+		return data;
     }
-	
-    public void setState(int i) { this.getDataWatcher().updateObject(27, i); }
-    public int getState() { return this.getDataWatcher().getWatchableObjectInt(27); }
-    
+
+	@Override
 	protected void entityInit()
 	{
-		this.getDataWatcher().addObject(27, state);
-		this.getDataWatcher().addObject(28, textureId);
 		super.entityInit();
 	}
 	
+	@Override
 	public void writeEntityToNBT(NBTTagCompound nbt)
 	{
-		super.writeEntityToNBT(nbt);	
-		nbt.setInteger("Texture", this.getTextureId());
+		super.writeEntityToNBT(nbt);
+		nbt.setInteger("Texture", this.textureId);		
+		nbt.setInteger("Doriki", this.doriki);
+		nbt.setInteger("Belly", this.belly);
+		
+		nbt.setBoolean("HasBusoHaki", this.hasBusoHaki);
 	}
 	
+	@Override
+	public void readEntityFromExtraNBT(NBTTagCompound nbt)
+	{
+		this.readEntityFromNBT(nbt);
+	}
+	
+	@Override
 	public void readEntityFromNBT(NBTTagCompound nbt)
 	{
 		super.readEntityFromNBT(nbt);
-		this.setTexture(nbt.getInteger("Texture"));
+		this.textureId = nbt.getInteger("Texture");
+		this.doriki = nbt.getInteger("Doriki");
+		this.belly = nbt.getInteger("Belly");
+
+		this.hasBusoHaki = nbt.getBoolean("HasBusoHaki");
 	}
 	
+	public void updateNBT()
+	{
+		NBTTagCompound nbtClone = new NBTTagCompound();
+		this.writeEntityToNBT(nbtClone);
+
+		WyNetworkHelper.sendToAll(new PacketEntityNBTSync(this.getEntityId(), nbtClone));
+	}
+	
+	// Used mostly for debugging
+	@Override
+	public void onEntityUpdate()
+	{
+		super.onEntityUpdate();
+		
+		if (this.ticksExisted % 100 == 0)
+			this.updateNBT();
+		
+		//System.out.println(this.getEntityId() + " " + this.textureId);
+	}
+	
+	@Override
 	protected boolean isValidLightLevel()
 	{return true;} 
     
+	@Override
 	protected boolean canDespawn()
 	{return true;}
     
+	@Override
 	public boolean isAIEnabled()
 	{return true;}
 	
+	@Override
 	public boolean getCanSpawnHere()
 	{return true;}
 
+	public String getTexture() { return textures[this.textureId]; }
+	public int getTextureId() { return this.textureId; }
+	protected void setTexture(int texture) { this.textureId = texture; }	
+	
+	public int getDoriki()
+	{
+		return this.doriki;
+	}
+	
+	public void setDoriki(int value)
+	{
+		this.doriki = value;
+	}
+	
+	public int getBelly()
+	{
+		return this.belly;
+	}
+	
+	public void setBelly(int value)
+	{
+		this.belly = value;
+	}
+	
+	public boolean hasBusoHaki()
+	{
+		return this.hasBusoHaki;
+	}
+	
+	public void setBusoHaki(boolean value)
+	{
+		this.hasBusoHaki = value;
+	}
+	
 	public EntityAIBase getCurrentAI()
 	{
 		return this.currentAI;
@@ -97,14 +165,17 @@ public class EntityNewMob extends EntityMob implements IDynamicRenderer
 		this.previousAI = ai;
 	}
 	
+	@Override
 	public String getMobTexture()
 	{ return this.getTexture(); }
 
+	@Override
 	public double[] itemOffset() 
 	{
 		return new double[] {0, 0, 0};
 	}
 
+	@Override
 	public double[] itemScale() 
 	{
 		return new double[] {1, 1, 1};

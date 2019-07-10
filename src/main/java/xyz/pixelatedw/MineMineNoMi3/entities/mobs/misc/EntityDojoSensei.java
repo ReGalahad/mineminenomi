@@ -5,30 +5,19 @@ import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIOpenDoor;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import xyz.pixelatedw.MineMineNoMi3.MainMod;
-import xyz.pixelatedw.MineMineNoMi3.api.network.PacketQuestSync;
-import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
-import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestManager;
-import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
-import xyz.pixelatedw.MineMineNoMi3.data.ExtendedNPCData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.EntityAIGapCloser;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.EntityAIHakiCombat;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.swordsman.EntityAIOTasumaki;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.swordsman.EntityAIYakkodori;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.PirateData;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
-import xyz.pixelatedw.MineMineNoMi3.lists.ListQuests;
 
 public class EntityDojoSensei extends EntityNewMob
 {
@@ -52,6 +41,7 @@ public class EntityDojoSensei extends EntityNewMob
 		this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));
 	}
 
+	@Override
 	public void applyEntityAttributes()
 	{
 		super.applyEntityAttributes(); 
@@ -59,16 +49,14 @@ public class EntityDojoSensei extends EntityNewMob
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(12.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(150.0D);
 		
-		ExtendedNPCData props = ExtendedNPCData.get(this);
-		
-		props.setDoriki(50 + this.worldObj.rand.nextInt(5));
-		props.setBelly(10 + this.worldObj.rand.nextInt(50));
+		this.setDoriki(50 + this.worldObj.rand.nextInt(5));
+		this.setBelly(10 + this.worldObj.rand.nextInt(50));
 
 		if(!this.worldObj.isRemote)
 		{
 			Item[] randomSword = new Item[] {ListMisc.NidaiKitetsu, ListMisc.SandaiKitetsu, ListMisc.Shusui, ListMisc.Jitte, ListMisc.Kikoku, ListMisc.WadoIchimonji};
 
-			props.setBusoHaki(true);
+			this.setBusoHaki(true);
 
 			Item sword = randomSword[this.rand.nextInt(randomSword.length)];			
 			if(sword != null)
@@ -80,19 +68,23 @@ public class EntityDojoSensei extends EntityNewMob
 		}
 	}
 	
-    protected void addRandomArmor()
+    @Override
+	protected void addRandomArmor()
     {
     	if(swordStack != null)
     		this.setCurrentItemOrArmor(0, swordStack);
     }
     
-    protected void dropEquipment(boolean p_82160_1_, int p_82160_2_) {}
+    @Override
+	protected void dropEquipment(boolean p_82160_1_, int p_82160_2_) {}
     
+	@Override
 	public double[] itemOffset() 
 	{
 		return new double[] {0, -0.05, -0.1};
 	}
 
+	@Override
 	protected boolean canDespawn()
 	{return true;}
 }

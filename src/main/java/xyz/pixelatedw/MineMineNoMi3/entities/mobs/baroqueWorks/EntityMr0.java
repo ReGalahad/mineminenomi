@@ -1,10 +1,8 @@
 package xyz.pixelatedw.MineMineNoMi3.entities.mobs.baroqueWorks;
 
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
-import xyz.pixelatedw.MineMineNoMi3.data.ExtendedNPCData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.PirateData;
 
 public class EntityMr0 extends PirateData
@@ -15,6 +13,7 @@ public class EntityMr0 extends PirateData
 		super(worldIn);
 	}
 	
+	@Override
 	public void applyEntityAttributes()
 	{ 
 		super.applyEntityAttributes(); 
@@ -28,9 +27,7 @@ public class EntityMr0 extends PirateData
 		props.setUsedFruit("sunasuna");
 		props.setIsLogia(true);
 		
-		ExtendedNPCData npcProps = ExtendedNPCData.get(this);
-		
-		npcProps.setDoriki(500 + this.worldObj.rand.nextInt(50));
-		npcProps.setBelly(1000 + this.worldObj.rand.nextInt(100));
+		this.setDoriki(500 + this.worldObj.rand.nextInt(50));
+		this.setBelly(1000 + this.worldObj.rand.nextInt(100));
 	}
 }
