@@ -145,6 +145,7 @@ public class ID
 	EXTRAEFFECT_SPIDEROVERLAY = "spiderOverlay",	
 	EXTRAEFFECT_ORIBIND = "oriBind",
 	EXTRAEFFECT_ABAREHIMATSURI = "abareHimatsuri",
+	EXTRAEFFECT_LOGIA_OFF = "logiaOff",
 			
 	CREW_ARLONG = "Arlong Pirates",
 	CREW_BAROQUEWORKS = "Baroque Works",

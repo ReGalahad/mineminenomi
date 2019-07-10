@@ -15,7 +15,6 @@ import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilitySync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
-import xyz.pixelatedw.MineMineNoMi3.data.ExtendedWorldData;
 import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketShounenScream;
 
@@ -312,6 +311,7 @@ public class Ability
 			this.setName("ResetThread Thread for " + attr.getAttributeName());
 		}
 		
+		@Override
 		public void run()
 		{
 			while(isDisabled)
@@ -361,6 +361,7 @@ public class Ability
 			ticksForCharge = this.attr.getAbilityCharges();
 		}
 		
+		@Override
 		public void run()
 		{
 			if(passiveActive)

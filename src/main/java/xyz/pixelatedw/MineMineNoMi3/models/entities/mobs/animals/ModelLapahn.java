@@ -183,7 +183,8 @@ public class ModelLapahn extends ModelBiped
 			this.leftLeg1.offsetY = formula;
 			this.rightLeg1.offsetY = formula;
 			this.tail.offsetY = formula;
-				
+			
+			// Ear swing animation
 			if(ageInTicks % 300 > 0 && ageInTicks % 300 < 100)
 				this.leftEar.rotateAngleX = 0.1F * (0.3F + MathHelper.cos(ageInTicks * 0.55F));
 			else

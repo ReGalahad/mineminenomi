@@ -98,6 +98,9 @@ public class ItemsHelper
 	
 	public static boolean isSword(ItemStack itemStack)
 	{
+		if (itemStack == null)
+			return false;
+		
 		if (itemStack.getItem() instanceof ItemSword)
 			return true;
 

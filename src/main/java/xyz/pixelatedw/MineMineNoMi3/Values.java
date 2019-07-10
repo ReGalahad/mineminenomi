@@ -1,24 +1,23 @@
 package xyz.pixelatedw.MineMineNoMi3;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDojoSensei;
 import xyz.pixelatedw.MineMineNoMi3.items.AkumaNoMi;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.quests.EnumQuestlines;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 public class Values 
 {
-	public static List<AkumaNoMi> devilfruits = new ArrayList();
-	public static List<AkumaNoMi> logias = new ArrayList();
-	public static List<Item> miscItems = new ArrayList();
-	public static List<Block> miscBlocks = new ArrayList();
-	public static List<Object[]> customDFs = new ArrayList();
+	public static List<AkumaNoMi> devilfruits = new ArrayList<AkumaNoMi>();
+	public static List<AkumaNoMi> logias = new ArrayList<AkumaNoMi>();
+	public static List<Item> miscItems = new ArrayList<Item>();
+	public static List<Block> miscBlocks = new ArrayList<Block>();
+	public static List<Object[]> customDFs = new ArrayList<Object[]>();
 	
 	public static final int MAX_DORIKI = 10000;
 	public static final int MAX_ULTRACOLA = 10;
