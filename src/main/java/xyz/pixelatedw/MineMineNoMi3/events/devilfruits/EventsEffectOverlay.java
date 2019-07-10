@@ -39,6 +39,15 @@ public class EventsEffectOverlay
 
 			GL11.glPopMatrix();
 		}
+		else if(props.hasExtraEffects(ID.EXTRAEFFECT_LOGIA_OFF))
+		{
+			GL11.glPushMatrix();
+			
+			Color c = WyHelper.hexToRGB("#011F4B");
+			GL11.glColor3d((double) c.getRed() / 255, (double) c.getGreen() / 255, (double) c.getBlue() / 255);
+
+			GL11.glPopMatrix();
+		}
 		else if (props.hasExtraEffects(ID.EXTRAEFFECT_HIE))
 		{
 			GL11.glPushMatrix();

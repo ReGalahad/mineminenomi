@@ -68,7 +68,9 @@ public class DevilFruitsHelper
 		
 		map.put("core", Arrays.asList(new Block[]
 				{
-						Blocks.ice, Blocks.packed_ice, Blocks.stone, Blocks.grass, Blocks.dirt, Blocks.snow, Blocks.snow_layer, Blocks.sand, Blocks.sandstone, Blocks.sandstone_stairs, Blocks.wooden_door, Blocks.wooden_slab, Blocks.log, Blocks.log2, Blocks.carpet, Blocks.cake, ListMisc.Poison, ListMisc.DemonPoison, Blocks.torch, Blocks.redstone_torch, Blocks.redstone_wire, Blocks.cobblestone, Blocks.fence, Blocks.farmland, Blocks.fence_gate, Blocks.flower_pot, Blocks.clay, Blocks.gravel
+						Blocks.ice, Blocks.packed_ice, Blocks.stone, Blocks.grass, Blocks.dirt, Blocks.snow, Blocks.snow_layer, Blocks.sand, Blocks.sandstone, Blocks.sandstone_stairs, Blocks.wooden_door, 
+						Blocks.wooden_slab, Blocks.log, Blocks.log2, Blocks.carpet, Blocks.cake, ListMisc.Poison, ListMisc.DemonPoison, Blocks.torch, Blocks.redstone_torch, Blocks.redstone_wire, 
+						Blocks.cobblestone, Blocks.fence, Blocks.farmland, Blocks.fence_gate, Blocks.flower_pot, Blocks.clay, Blocks.gravel, ListMisc.SunaSand, ListMisc.WaxBlock
 				}));
 		
 		map.put("air", Arrays.asList(new Block[]
