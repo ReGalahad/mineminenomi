@@ -6,16 +6,9 @@ import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.ID;
-import xyz.pixelatedw.MineMineNoMi3.Values;
-import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityManager;
-import xyz.pixelatedw.MineMineNoMi3.api.network.PacketQuestSync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
-import xyz.pixelatedw.MineMineNoMi3.api.quests.Quest;
-import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestManager;
-import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
-import xyz.pixelatedw.MineMineNoMi3.lists.ListQuests;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 
 public class Cola extends ItemFood
@@ -27,6 +20,7 @@ public class Cola extends ItemFood
 		this.maxStackSize = 16;  
 	} 
 	
+	@Override
 	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
 	{
 		player.setItemInUse(itemStack, itemUseDuration);
@@ -34,6 +28,7 @@ public class Cola extends ItemFood
 	}
 	
 	
+	@Override
 	public void onFoodEaten(ItemStack itemStack, World world, EntityPlayer player) 
 	{
 		if(!world.isRemote)

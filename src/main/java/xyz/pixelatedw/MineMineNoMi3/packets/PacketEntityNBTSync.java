@@ -1,5 +1,6 @@
 package xyz.pixelatedw.MineMineNoMi3.packets;
 
+import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
@@ -51,10 +52,10 @@ public class PacketEntityNBTSync implements IMessage
 
 			if(message.entityId > 0)
 			{
-				Entity entity = world.getEntityByID(message.entityId);
-				
+				Entity entity = FMLClientHandler.instance().getWorldClient().getEntityByID(message.entityId);//world.getEntityByID(message.entityId);
+				//System.out.println(entity);
 				if(entity instanceof INBTEntity)
-				{
+				{					
 					((INBTEntity) entity).readEntityFromExtraNBT(message.data);
 				}
 			}

@@ -25,6 +25,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
 import xyz.pixelatedw.MineMineNoMi3.events.customevents.YomiTriggerEvent;
 
 public class EventsCore
@@ -147,6 +148,20 @@ public class EventsCore
 	@SubscribeEvent
 	public void onEntityJoinWorld(EntityJoinWorldEvent event)
 	{
+		if(event.entity instanceof EntityNewMob)
+		{
+			System.out.println(event.entity);
+			System.out.println(event.entity.getEntityId() + " " + event.world.getEntityByID(event.entity.getEntityId()));
+			if(!event.world.isRemote)
+			{
+				System.out.println("===================");
+				System.out.println(event.entity.getEntityId() + " " + event.world.getEntityByID(event.entity.getEntityId()));
+				EntityNewMob target = (EntityNewMob) event.entity;
+				System.out.println("" + target.getTextureId());
+				System.out.println("===================");
+				target.updateNBT();
+			}
+		}
 		if (event.entity instanceof EntityPlayer)
 		{
 			EntityPlayer player = (EntityPlayer) event.entity;

@@ -3,6 +3,7 @@ package xyz.pixelatedw.MineMineNoMi3.entities.mobs;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
@@ -25,6 +26,9 @@ public class EntityNewMob extends EntityMob implements IDynamicRenderer, INBTEnt
 		super(worldIn);
 		this.addRandomArmor();
 		this.textures = textures;
+		
+		if(this.textures != null && this.textures.length > 0)
+			this.setTexture(this.rand.nextInt(this.textures.length));
 	}
 
     @Override
@@ -45,6 +49,12 @@ public class EntityNewMob extends EntityMob implements IDynamicRenderer, INBTEnt
 	protected void entityInit()
 	{
 		super.entityInit();
+	}
+	
+	@Override
+	public ItemStack[] getLastActiveItems()
+	{
+		return new ItemStack[] {};
 	}
 	
 	@Override
@@ -73,6 +83,8 @@ public class EntityNewMob extends EntityMob implements IDynamicRenderer, INBTEnt
 		this.belly = nbt.getInteger("Belly");
 
 		this.hasBusoHaki = nbt.getBoolean("HasBusoHaki");
+		
+		System.out.println("" + this.textureId);
 	}
 	
 	public void updateNBT()
@@ -89,8 +101,8 @@ public class EntityNewMob extends EntityMob implements IDynamicRenderer, INBTEnt
 	{
 		super.onEntityUpdate();
 		
-		if (this.ticksExisted % 100 == 0)
-			this.updateNBT();
+		//if (this.ticksExisted % 100 == 0)
+		//	this.updateNBT();
 		
 		//System.out.println(this.getEntityId() + " " + this.textureId);
 	}
