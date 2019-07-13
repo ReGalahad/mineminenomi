@@ -140,7 +140,7 @@ public class ListMisc
 	public static Block AbilityProtectionBlock = new BlockAbilityProtection();
 	public static Block AbilityProtectionAreaBlock = new BlockAbilityProtectionArea();
 	public static Block AbilityProtectionCenterBlock = new BlockAbilityProtectionArea();
-
+	
 	public static Block DialEisenBlock = new BlockEisenDial();
 	public static Block DialFireBlock = new BlockFlameDial();
 	public static Block DialAxeBlock = new BlockAxeDial();

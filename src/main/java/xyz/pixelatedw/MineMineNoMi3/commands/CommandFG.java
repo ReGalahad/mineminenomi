@@ -130,7 +130,7 @@ public class CommandFG extends CommandBase
 
 			else if(str[0].equalsIgnoreCase("marinebase"))
 			{
-				WySchematicHelper.build(WySchematicHelper.load("largeMarineBase"), player.worldObj, (int)player.posX, (int)player.posY - 24, (int)player.posZ, Blocks.bedrock);
+				WySchematicHelper.build(WySchematicHelper.load("marineLargeBase"), player.worldObj, (int)player.posX, (int)player.posY - 21, (int)player.posZ, Blocks.bedrock);
 			}
 			
 			if(toSpawn != null)
