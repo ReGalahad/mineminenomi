@@ -84,7 +84,7 @@ public class EntityNewMob extends EntityMob implements IDynamicRenderer, INBTEnt
 
 		this.hasBusoHaki = nbt.getBoolean("HasBusoHaki");
 		
-		System.out.println("" + this.textureId);
+		//System.out.println("" + this.textureId);
 	}
 	
 	public void updateNBT()

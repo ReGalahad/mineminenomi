@@ -150,7 +150,7 @@ public class EventsCore
 	{
 		if(event.entity instanceof EntityNewMob)
 		{
-			System.out.println(event.entity);
+			/*System.out.println(event.entity);
 			System.out.println(event.entity.getEntityId() + " " + event.world.getEntityByID(event.entity.getEntityId()));
 			if(!event.world.isRemote)
 			{
@@ -160,7 +160,7 @@ public class EventsCore
 				System.out.println("" + target.getTextureId());
 				System.out.println("===================");
 				target.updateNBT();
-			}
+			}*/
 		}
 		if (event.entity instanceof EntityPlayer)
 		{

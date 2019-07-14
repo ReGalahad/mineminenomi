@@ -1,11 +1,8 @@
 package xyz.pixelatedw.MineMineNoMi3;
 
 import java.io.File;
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
 
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.config.Property;
 
 public class MainConfig 
 {
@@ -16,6 +13,7 @@ public class MainConfig
 	public static String[] statsToKeep;
 	public static boolean enableShips;
 	public static boolean enableCamps;
+	public static boolean enableBases;
 	public static boolean enableDFtoDrop;
 	public static boolean enableLogiaInvulnerability;	
 	public static boolean enableExtraHearts;
@@ -78,7 +76,9 @@ public class MainConfig
 		enableShips = config.get("structures", "Allow Ships to Spawn", true).getBoolean();
 		modifierShipsSpawn = config.get("structures", "Modifier for Spawning Ships", 5).getDouble();
 		maxDojoSpawn = config.get("structures", "Max Dojos to Spawn per World", 5).getInt();
-
+		enableCamps = config.get("structures", "Allow Camps to Spawn", true).getBoolean();
+		enableBases = config.get("structures", "Allow Bases to Spawn", true).getBoolean();
+		
 		enableQuests = config.get("quests", "Allow Quests", true, "Allows quests to be accepted / completed; true by default").getBoolean();
 		enableQuestProgression = config.get("quests", "Allow Quest Progression", false, "Allows quests to reward players with abilities, otherwise all abilities will be unlocked from the beginning; true by default").getBoolean();
 		

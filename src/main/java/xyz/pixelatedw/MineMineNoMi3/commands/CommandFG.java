@@ -132,6 +132,10 @@ public class CommandFG extends CommandBase
 			{
 				WySchematicHelper.build(WySchematicHelper.load("marineLargeBase"), player.worldObj, (int)player.posX, (int)player.posY - 21, (int)player.posZ, Blocks.bedrock);
 			}
+			else if(str[0].equalsIgnoreCase("marinecamp"))
+			{
+				WySchematicHelper.build(WySchematicHelper.load("marineCamp"), player.worldObj, (int)player.posX, (int)player.posY - 8, (int)player.posZ, Blocks.bedrock);
+			}
 			
 			if(toSpawn != null)
 			{
