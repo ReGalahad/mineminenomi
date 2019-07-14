@@ -53,7 +53,10 @@ public class MainWorldGen implements IWorldGenerator
 		this.addStructureSpawn(WySchematicHelper.load("dojo"), world, random, i, j, 1, 1, 25);
 		
 		if(MainConfig.enableCamps)
-			this.addStructureSpawn(WySchematicHelper.load("marineCamp"), world, random, i, j, 1, 1, 25);
+		{
+			this.addStructureSpawn(WySchematicHelper.load("marineCamp"), world, random, i, j, 1, 1, 15);
+			this.addStructureSpawn(WySchematicHelper.load("banditCamp"), world, random, i, j, 1, 1, 25);
+		}
 		
 		if(MainConfig.enableBases)
 			this.addStructureSpawn(WySchematicHelper.load("marineLargeBase"), world, random, i, j, 1, 1, 0.2);
@@ -88,8 +91,6 @@ public class MainWorldGen implements IWorldGenerator
 					return true;
 				}
 			}
-			//else
-			//	new WorldGenMinable(block.getDefaultState(), maxVeinSize).generate(world, random, new BlockPos(posX, posY, posZ));
 		}
 		
 		return false;
@@ -143,7 +144,7 @@ public class MainWorldGen implements IWorldGenerator
 					spawned = StructureLargeShip.build(sch, world, posX, posY, posZ, biome);
 				
 				// Camps
-				if(sch.getName().equals("marineCamp"))
+				if(sch.getName().equals("marineCamp") || sch.getName().equals("banditCamp"))
 					spawned = StructureCamp.build(sch, world, posX, posY, posZ, biome);
 				
 				// Bases

@@ -9,6 +9,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.Schematic;
 import xyz.pixelatedw.MineMineNoMi3.api.WySchematicHelper;
+import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityCustomSpawner;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.world.MainWorldGen;
 
@@ -26,28 +27,63 @@ public class StructureCamp extends Structure
 			return false;
 		
 		WySchematicHelper.build(sch, world, posX, posY - 7, posZ, Blocks.bedrock);
-		populate(posX, posY, posZ, world);
+		populate(posX, posY, posZ, world, sch.getName());
 
 		return true;
 	}
 	
-	private static void populate(int posX, int posY, int posZ, World world)
+	private static void populate(int posX, int posY, int posZ, World world, String faction)
 	{
-		String toSpawn1 = ID.PROJECT_ID + ".Marine with Sword";
-		String toSpawn2 = ID.PROJECT_ID + ".Marine with Gun";
-		String toSpawnCpt = ID.PROJECT_ID + ".Marine with Sword";
+		String trash01;
+		String trash02;
+		String boss;
+		if (faction.equals("marineCamp"))
+		{
+			trash01 = ID.PROJECT_ID + ".Marine with Sword";
+			trash02 = ID.PROJECT_ID + ".Marine with Gun";
+			boss = ID.PROJECT_ID + ".Marine Captain";
+		}
+		else
+		{
+			trash01 = ID.PROJECT_ID + ".Bandit with Sword";
+			trash02 = ID.PROJECT_ID + ".Bandit with Sword";
+			boss = ID.PROJECT_ID + ".Bandit with Sword";
+		}
 
+		// Spawners	
+		TileEntityCustomSpawner spawnTrash01 = new TileEntityCustomSpawner().setSpawnerMob(trash01).setSpawnerLimit(2);
+		TileEntityCustomSpawner spawnTrash02 = new TileEntityCustomSpawner().setSpawnerMob(trash01).setSpawnerLimit(2);
+		TileEntityCustomSpawner spawnTrash03 = new TileEntityCustomSpawner().setSpawnerMob(trash01).setSpawnerLimit(2);
+		TileEntityCustomSpawner spawnTrash04 = new TileEntityCustomSpawner().setSpawnerMob(trash02).setSpawnerLimit(2);
+		TileEntityCustomSpawner spawnBoss = new TileEntityCustomSpawner().setSpawnerMob(boss).setSpawnerLimit(1);
+		
+		world.setBlock(posX + 7, posY + 2, posZ + 17, ListMisc.CustomSpawner);
+		world.setTileEntity(posX + 7, posY + 2, posZ + 17, spawnTrash01);
+		
+		world.setBlock(posX + 7, posY + 2, posZ + 27, ListMisc.CustomSpawner);
+		world.setTileEntity(posX + 7, posY + 2, posZ + 27, spawnTrash02);
+		
+		world.setBlock(posX + 27, posY + 2, posZ + 17, ListMisc.CustomSpawner);
+		world.setTileEntity(posX + 27, posY + 2, posZ + 17, spawnTrash03);
+		
+		world.setBlock(posX + 27, posY + 2, posZ + 27, ListMisc.CustomSpawner);
+		world.setTileEntity(posX + 27, posY + 2, posZ + 27, spawnTrash04);
+		
+		world.setBlock(posX + 17, posY + 2, posZ + 7, ListMisc.CustomSpawner);
+		world.setTileEntity(posX + 17, posY + 2, posZ + 7, spawnBoss);
+			
+		// Chests		
 		TileEntityChest smallTentChest01 = new TileEntityChest();
-		world.setTileEntity(posX + 8, posY + 1, posZ + 20, smallTentChest01);
+		world.setTileEntity(posX + 5, posY + 1, posZ + 17, smallTentChest01);
 
 		TileEntityChest smallTentChest02 = new TileEntityChest();
-		world.setTileEntity(posX + 8, posY + 1, posZ + 30, smallTentChest02);
+		world.setTileEntity(posX + 5, posY + 1, posZ + 27, smallTentChest02);
 		
 		TileEntityChest smallTentChest03 = new TileEntityChest();
-		world.setTileEntity(posX + 32, posY + 1, posZ + 20, smallTentChest03);
+		world.setTileEntity(posX + 29, posY + 1, posZ + 17, smallTentChest03);
 		
 		TileEntityChest smallTentChest04 = new TileEntityChest();
-		world.setTileEntity(posX + 32, posY + 1, posZ + 30, smallTentChest04);
+		world.setTileEntity(posX + 29, posY + 1, posZ + 27, smallTentChest04);
 		
 		TileEntityChest[] smallTentChests = new TileEntityChest[] {smallTentChest01, smallTentChest02, smallTentChest03, smallTentChest04};	
 
@@ -59,11 +95,10 @@ public class StructureCamp extends Structure
 			addChestLoot(world, chest, 70, Items.cookie, 10, 20);
 			addChestLoot(world, chest, 50, ListMisc.BellyPouch, 1, 0);
 			addChestLoot(world, chest, 50, Items.gunpowder, 5, 10);
-			addChestLoot(world, chest, 30, ListMisc.Flintlock, 0, 1);
 		}
 		
 		TileEntityChest largeTentChest = new TileEntityChest();
-		world.setTileEntity(posX + 21, posY + 1, posZ + 7, largeTentChest);
+		world.setTileEntity(posX + 18, posY + 1, posZ + 4, largeTentChest);
 
 		addChestLoot(world, largeTentChest, 90, ListMisc.KairosekiBullets, 1, 7);
 		addChestLoot(world, largeTentChest, 70, Items.cooked_chicken, 2, 4);
@@ -73,5 +108,6 @@ public class StructureCamp extends Structure
 		addChestLoot(world, largeTentChest, 50, ListMisc.Cola, 0, 2);
 		addChestLoot(world, largeTentChest, 30, ListMisc.BellyPouch, 1, 2);
 		addChestLoot(world, largeTentChest, 10, ListMisc.UltraCola, 0, 1);
+		addChestLoot(world, largeTentChest, 30, ListMisc.Flintlock, 0, 1);
 	}
 }
