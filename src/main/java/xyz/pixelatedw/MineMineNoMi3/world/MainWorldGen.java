@@ -61,10 +61,15 @@ public class MainWorldGen implements IWorldGenerator
 		this.addDialSpawn(ListMisc.DialBreathBlock, world, random, i, j, 1, 1, 50);
 		this.addDialSpawn(ListMisc.DialFlashBlock, world, random, i, j, 1, 1, 45);
 		
-		/*if(MainConfig.enableCamps)
+		if(MainConfig.enableCamps)
 		{
-			this.addStructureSpawn(WySchematicHelper.load("marineCamp"), world, random, i * 3, j * 3, 1, 1, 50);
-		}*/
+			this.addStructureSpawn(WySchematicHelper.load("marineCamp"), world, random, i, j, 1, 1, 1.2);
+		}
+		
+		if(MainConfig.enableBases)
+		{
+			this.addStructureSpawn(WySchematicHelper.load("marineLargeBase"), world, random, i, j, 1, 1, 0.2);
+		}
 	}
 	 
 	public boolean addOreSpawn(Block block, World world, Random random, int blockXPos, int blockZPos, int maxX, int maxZ, int maxVeinSize, int chancesToSpawn, int minY, int maxY)
@@ -165,7 +170,7 @@ public class MainWorldGen implements IWorldGenerator
 					{
 						if( (biome == BiomeGenBase.beach || biome == BiomeGenBase.plains || biome == BiomeGenBase.desert || biome == BiomeGenBase.savanna
 								|| biome == BiomeGenBase.icePlains || biome == BiomeGenBase.swampland || biome == BiomeGenBase.taiga) 
-								&& checkForDojoSpawn(s, world, posX, posY, posZ))
+								&& checkCorners(s, world, posX, posY, posZ))
 						{		
 							WySchematicHelper.build(s, world, posX, posY, posZ);	
 							ListExtraStructures.buildDojo(posX, posY, posZ, world);
@@ -182,6 +187,40 @@ public class MainWorldGen implements IWorldGenerator
 						}
 					}
 				}
+				else if(s.getName().toLowerCase().contains("camp"))
+				{
+					if( (biome == BiomeGenBase.plains || biome == BiomeGenBase.taiga || biome == BiomeGenBase.savanna || biome == BiomeGenBase.swampland || biome == BiomeGenBase.forest || biome == BiomeGenBase.birchForest) 
+							&& checkCorners(s, world, posX, posY, posZ))
+					{
+						WySchematicHelper.build(s, world, posX, posY, posZ, Blocks.bedrock);
+						//ListExtraStructures.buildSmallShip(posX, posY, posZ, world, s.getName());
+						
+						if(WyDebug.isDebug())
+							System.out.println("" + s.getName() + " spawned at /tp @p " + posX + " " + posY + " " + posZ);
+	
+				    	if(!ID.DEV_EARLYACCESS )
+				    		WyTelemetry.addStat("spawnedStructure_" + s.getName(), 1);
+				    	
+				    	return true;
+					}				
+				}
+				else if(s.getName().toLowerCase().contains("base"))
+				{
+					if( (biome == BiomeGenBase.plains || biome == BiomeGenBase.taiga || biome == BiomeGenBase.savanna || biome == BiomeGenBase.swampland || biome == BiomeGenBase.forest || biome == BiomeGenBase.birchForest)
+							&& checkCorners(s, world, posX, posY, posZ))
+					{
+						WySchematicHelper.build(s, world, posX, posY, posZ, Blocks.bedrock);
+						//ListExtraStructures.buildSmallShip(posX, posY, posZ, world, s.getName());
+						
+						if(WyDebug.isDebug())
+							System.out.println("" + s.getName() + " spawned at /tp @p " + posX + " " + posY + " " + posZ);
+	
+				    	if(!ID.DEV_EARLYACCESS )
+				    		WyTelemetry.addStat("spawnedStructure_" + s.getName(), 1);
+				    	
+				    	return true;
+					}
+				}
 			}
 			else
 			{
@@ -192,7 +231,7 @@ public class MainWorldGen implements IWorldGenerator
 		return false;
 	}
 
-	private boolean checkForDojoSpawn(Schematic s, World world, int posX, int posY, int posZ)
+	private boolean checkCorners(Schematic s, World world, int posX, int posY, int posZ)
 	{
 		boolean corner1 = world.getBlock(posX, posY - 1, posZ) != Blocks.air && world.getBlock(posX, posY - 1, posZ) != Blocks.water;
 		boolean corner2 = world.getBlock(posX + s.getWidth(), posY - 1, posZ) != Blocks.air && world.getBlock(posX + s.getWidth(), posY - 1, posZ) != Blocks.water;
