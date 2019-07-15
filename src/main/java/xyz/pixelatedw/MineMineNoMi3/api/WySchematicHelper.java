@@ -11,6 +11,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 
@@ -54,9 +55,11 @@ public class WySchematicHelper
 		try
 		{
 			int i = 0;
-			List<Object[]> afterBlocks = new ArrayList<Object[]>();
+			List<TileEntity> tiles = new ArrayList<TileEntity>();
 			for (int sy = 0; sy < sch.getHeight(); sy++)
+			{
 				for (int sz = 0; sz < sch.getLength(); sz++)
+				{
 					for (int sx = 0; sx < sch.getWidth(); sx++)
 					{
 						Block b = Block.getBlockById(UnsignedBytes.toInt(sch.getBlocks()[i]));
@@ -78,6 +81,8 @@ public class WySchematicHelper
 						}
 						i++;
 					}
+				}
+			}
 		}
 		catch (Exception e)
 		{

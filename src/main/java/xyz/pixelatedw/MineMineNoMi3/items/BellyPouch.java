@@ -5,7 +5,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.ID;
-import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
@@ -21,6 +20,7 @@ public class BellyPouch extends Item
 		
 	} 
 
+	@Override
 	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
 	{
 		ExtendedEntityData props = ExtendedEntityData.get(player);
@@ -32,14 +32,15 @@ public class BellyPouch extends Item
 			if(props.getBelly() <= Values.MAX_GENERAL - amount)
 			{
 				props.alterBelly(amount);
-				WyHelper.sendMsgToPlayer(player, "You've obtained " + amount + " belly !");
-				WyHelper.removeStackFromInventory(player, itemStack);
+				WyHelper.sendMsgToPlayer(player, "You've obtained " + amount + " belly !");				
 			}
 			else
 				props.setBelly(Values.MAX_GENERAL);	
 			
 	    	if(!ID.DEV_EARLYACCESS && !player.capabilities.isCreativeMode)
 	    		WyTelemetry.addStat("bellyEarnedFromPouches", amount);
+	    	
+	    	--itemStack.stackSize;
 		}
 		
 		WyNetworkHelper.sendToServer(new PacketSync(props));

@@ -93,13 +93,13 @@ public class StructureSmallShip extends Structure
 			addChestLoot(world, foodChest, 10, Items.cooked_beef, 0, 2);
 		addChestLoot(world, foodChest, 10, ListMisc.Cola, 0, 5);
 
-		/*world.setBlock(posX + 11, posY + 2, posZ + 24, Blocks.air);
+		world.setBlock(posX + 11, posY + 2, posZ + 24, Blocks.air);
 		world.setBlock(posX + 8, posY + 2, posZ + 24, Blocks.air);
 
 		world.setBlock(posX + 11, posY + 2, posZ + 22, Blocks.air);
 		world.setBlock(posX + 8, posY + 2, posZ + 22, Blocks.air);
 		world.setBlock(posX + 11, posY + 2, posZ + 21, Blocks.air);
-		world.setBlock(posX + 8, posY + 2, posZ + 21, Blocks.air);*/
+		world.setBlock(posX + 8, posY + 2, posZ + 21, Blocks.air);
 
 	}
 
