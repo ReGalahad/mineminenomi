@@ -11,7 +11,7 @@ import xyz.pixelatedw.MineMineNoMi3.data.ExtendedWorldData;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.world.MainWorldGen;
 
-public class StructureDojo
+public class StructureDojo extends Structure
 {
 	public static boolean build(Schematic sch, World world, int posX, int posY, int posZ, BiomeGenBase biome)
 	{
@@ -33,9 +33,9 @@ public class StructureDojo
 	
 	private static void populate(int posX, int posY, int posZ, World world)
 	{			
-		TileEntityCustomSpawner spw1 = new TileEntityCustomSpawner().setSpawnerMob(ID.PROJECT_ID + ".Dojo Sensei").setSpawnerLimit(1);
+		TileEntityCustomSpawner spawnDojoMaster = new TileEntityCustomSpawner().setSpawnerMob(ID.PROJECT_ID + ".Dojo Sensei").setSpawnerLimit(1);
 		
 		world.setBlock(posX + 5, posY + 2, posZ + 11, ListMisc.CustomSpawner);
-		world.setTileEntity(posX + 5, posY + 2, posZ + 11, spw1);		
+		world.setTileEntity(posX + 5, posY + 2, posZ + 11, spawnDojoMaster);		
 	}
 }

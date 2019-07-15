@@ -7,7 +7,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.Schematic;
 import xyz.pixelatedw.MineMineNoMi3.api.WySchematicHelper;
 import xyz.pixelatedw.MineMineNoMi3.world.MainWorldGen;
 
-public class StructureLargeBase
+public class StructureLargeBase extends Structure
 {
 	public static boolean build(Schematic sch, World world, int posX, int posY, int posZ, BiomeGenBase biome)
 	{		

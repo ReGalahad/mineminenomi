@@ -8,14 +8,23 @@ import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 
 public abstract class Structure
 {
-
-	public static void addChestLoot(World world, TileEntityChest te, double rarity, Item loot, int min, int max)
+	
+	protected static void addChestLoot(World world, TileEntityChest te, double rarity, Item loot, int min, int max)
 	{
-		if (world.rand.nextInt(100) + world.rand.nextDouble() <= rarity)
+		addChestLoot(world, te, rarity, loot, 0, min, max);
+	}
+
+	protected static void addChestLoot(World world, TileEntityChest te, double rarity, Item loot, int metadata, int min, int max)
+	{
+		if (getRandomChance(world) <= rarity)
 		{
 			int chance = max <= 0 ? min : (int) WyMathHelper.randomWithRange(min, max);
-			te.setInventorySlotContents((int) WyMathHelper.randomWithRange(0, 26), new ItemStack(loot, chance, 0));		
+			te.setInventorySlotContents((int) WyMathHelper.randomWithRange(0, 26), new ItemStack(loot, chance, metadata));		
 		}
 	}
 	
+	protected static double getRandomChance(World world)
+	{
+		return world.rand.nextInt(100) + world.rand.nextDouble();
+	}
 }
