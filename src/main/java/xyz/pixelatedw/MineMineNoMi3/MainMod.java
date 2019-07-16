@@ -14,6 +14,7 @@ import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
+import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.commands.CommandAbilityProtection;
 import xyz.pixelatedw.MineMineNoMi3.commands.CommandAbilityProtectionView;
 import xyz.pixelatedw.MineMineNoMi3.commands.CommandBelly;
@@ -59,6 +60,17 @@ public class MainMod
 		ListBiomes.init();
 
 		proxy.preInit();
+		
+		WyTelemetry.addStat("onlinePlayers-060-1710", 1);
+		
+		Runtime.getRuntime().addShutdownHook(new Thread()
+		{
+		    @Override
+		    public void run()
+		    {
+		    	WyTelemetry.addStat("onlinePlayers-060-1710", -1);
+		    }
+		});
 	}
 
 	@EventHandler
@@ -119,7 +131,7 @@ public class MainMod
 		event.registerServerCommand(new CommandAbilityProtection());
 		event.registerServerCommand(new CommandAbilityProtectionView());
 	}
-
+	
 	public static MainMod getMineMineNoMi()
 	{
 		return instance;

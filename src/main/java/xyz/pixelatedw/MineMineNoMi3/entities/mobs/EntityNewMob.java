@@ -3,7 +3,6 @@ package xyz.pixelatedw.MineMineNoMi3.entities.mobs;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
@@ -50,13 +49,7 @@ public class EntityNewMob extends EntityMob implements IDynamicRenderer, INBTEnt
 	{
 		super.entityInit();
 	}
-	
-	@Override
-	public ItemStack[] getLastActiveItems()
-	{
-		return new ItemStack[] {};
-	}
-	
+
 	@Override
 	public void writeEntityToNBT(NBTTagCompound nbt)
 	{
@@ -176,7 +169,7 @@ public class EntityNewMob extends EntityMob implements IDynamicRenderer, INBTEnt
 	{
 		this.previousAI = ai;
 	}
-	
+
 	@Override
 	public String getMobTexture()
 	{ return this.getTexture(); }
