@@ -156,7 +156,7 @@ public class ListMisc
 	public static Item BlackMetal = new Item();
 	public static Item Shadow = new Shadow();
 	public static Item Heart = new Heart().setMaxStackSize(1);
-	public static Item BellyPouch = new BellyPouch().setMaxStackSize(1);
+	public static Item BellyPouch = new BellyPouch().setMaxStackSize(16);
 	public static Item Key = new Item();
 	public static Item Box1;
 	public static Item Box2;

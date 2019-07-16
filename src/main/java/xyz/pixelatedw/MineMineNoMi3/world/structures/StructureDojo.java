@@ -26,7 +26,7 @@ public class StructureDojo extends Structure
 			return false;
 		
 		WySchematicHelper.build(sch, world, posX, posY, posZ);
-		populate(posX, posY, posZ, world);
+		populate(posX, posY + 1, posZ, world);
 
 		return true;
 	}

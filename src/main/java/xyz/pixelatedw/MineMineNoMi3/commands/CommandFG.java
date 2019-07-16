@@ -29,7 +29,8 @@ import xyz.pixelatedw.MineMineNoMi3.helpers.ItemsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListQuests;
 import xyz.pixelatedw.MineMineNoMi3.world.TeleporterScenarioArena;
-import xyz.pixelatedw.MineMineNoMi3.world.structures.StructureLargeBase;
+import xyz.pixelatedw.MineMineNoMi3.world.structures.StructureBanditSmallBase;
+import xyz.pixelatedw.MineMineNoMi3.world.structures.StructureMarineLargeBase;
 
 public class CommandFG extends CommandBase
 {	
@@ -129,7 +130,9 @@ public class CommandFG extends CommandBase
 			}
 
 			else if(str[0].equalsIgnoreCase("marinebase"))
-				StructureLargeBase.build(WySchematicHelper.load("marineLargeBase"), player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ, player.worldObj.getBiomeGenForCoordsBody((int)player.posX, (int)player.posZ));
+				StructureMarineLargeBase.build(WySchematicHelper.load("marineLargeBase"), player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ, player.worldObj.getBiomeGenForCoordsBody((int)player.posX, (int)player.posZ));
+			else if(str[0].equalsIgnoreCase("banditbase"))
+				StructureBanditSmallBase.build(WySchematicHelper.load("banditBase"), player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ, player.worldObj.getBiomeGenForCoordsBody((int)player.posX, (int)player.posZ));
 
 			if(toSpawn != null)
 			{

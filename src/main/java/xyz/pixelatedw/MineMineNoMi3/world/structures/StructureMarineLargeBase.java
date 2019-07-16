@@ -14,15 +14,15 @@ import xyz.pixelatedw.MineMineNoMi3.api.WySchematicHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.world.MainWorldGen;
 
-public class StructureLargeBase extends Structure
+public class StructureMarineLargeBase extends Structure
 {
 	public static boolean build(Schematic sch, World world, int posX, int posY, int posZ, BiomeGenBase biome)
 	{		
 		boolean flagBiome = (biome != BiomeGenBase.savannaPlateau && biome != BiomeGenBase.plains && biome != BiomeGenBase.taiga && biome != BiomeGenBase.savanna && biome != BiomeGenBase.swampland 
-				&& biome != BiomeGenBase.forest && biome != BiomeGenBase.birchForest);
+				&& biome != BiomeGenBase.forest && biome != BiomeGenBase.birchForest && biome != BiomeGenBase.icePlains && biome != BiomeGenBase.coldTaiga && biome != BiomeGenBase.forestHills);
 		boolean flagSpecialCheck = !MainWorldGen.checkCorners(sch, world, posX, posY, posZ);
 		boolean flagAboveGround = !MainWorldGen.checkCornersAboveGround(sch, world, posX, posY, posZ);
-
+		
 		if(flagBiome || flagSpecialCheck || flagAboveGround)
 			return false;
 		
@@ -34,6 +34,44 @@ public class StructureLargeBase extends Structure
 	
 	private static void populate(Schematic sch, int posX, int posY, int posZ, World world)
 	{
+		// Spawners
+		int[][] trash01SpawnerPositions = new int[][]
+		{
+			{posX + 36, posY + 8, posZ + 30}, {posX + 19, posY + 8, posZ + 38}, {posX + 19, posY + 13, posZ + 38}, {posX + 37, posY + 13, posZ + 38}
+		};	
+		//addSpawnerTileEntity(world, trash01SpawnerPositions, "Marine with Sword", 4, 6);
+		
+		int[][] trash02SpawnerPositions = new int[][]
+		{
+			{posX + 37, posY + 13, posZ + 25}, {posX + 19, posY + 13, posZ + 20}
+		};
+		//addSpawnerTileEntity(world, trash02SpawnerPositions, "Marine with Gun", 3, 5);
+		
+		
+		
+		int[][] spawnerPositions = new int[][]
+		{
+			{posX + 36, posY + 8, posZ + 30}, {posX + 19, posY + 8, posZ + 38}
+		};	
+		addSpawnerTileEntity(world, spawnerPositions, "Marine with Sword", 3, 5);
+		/*
+		TileEntityCustomSpawner spawnTrash01 = new TileEntityCustomSpawner().setSpawnerMob(ID.PROJECT_ID + ".Marine with Sword").setSpawnerLimit(2);
+		world.setBlock(posX + 36, posY + 8, posZ + 30, ListMisc.CustomSpawner);
+		world.setTileEntity(posX + 36, posY + 8, posZ + 30, spawnTrash01);
+		
+		TileEntityCustomSpawner spawnTrash02 = new TileEntityCustomSpawner().setSpawnerMob(ID.PROJECT_ID + ".Marine with Sword").setSpawnerLimit(2);
+		world.setBlock(posX + 19, posY + 8, posZ + 38, ListMisc.CustomSpawner);
+		world.setTileEntity(posX + 19, posY + 8, posZ + 38, spawnTrash02);
+		*/
+		/*
+		world.setBlock(posX + 36, posY + 8, posZ + 30, Blocks.bedrock);	
+		world.setBlock(posX + 19, posY + 8, posZ + 38, Blocks.bedrock);	
+		world.setBlock(posX + 19, posY + 13, posZ + 38, Blocks.bedrock);
+		world.setBlock(posX + 37, posY + 13, posZ + 38, Blocks.bedrock);
+		world.setBlock(posX + 37, posY + 13, posZ + 25, Blocks.bedrock);
+		world.setBlock(posX + 19, posY + 13, posZ + 20, Blocks.bedrock);
+		*/
+		
 		// Chests
 		int[][] foodChestPositions = new int[][]
 		{
@@ -124,7 +162,9 @@ public class StructureLargeBase extends Structure
 		
 		Consumer<TileEntityChest> captainChestLoot = (chest) -> 
 		{
+			addChestLoot(world, chest, 50, Items.compass, 1, 0);
 			addChestLoot(world, chest, 40, ListMisc.Cola, 1, 5);
+			addChestLoot(world, chest, 40, Items.map, 1, 0);
 			addChestLoot(world, chest, 30, ListMisc.BellyPouch, 1, 2);
 			addChestLoot(world, chest, 20, Items.diamond, 0, 5);
 			addChestLoot(world, chest, 20, ListMisc.Flintlock, 1, 0);
@@ -143,6 +183,8 @@ public class StructureLargeBase extends Structure
 		
 		Consumer<TileEntityChest> commodoreChestLoot = (chest) -> 
 		{
+			addChestLoot(world, chest, 40, Items.clock, 1, 0);
+			addChestLoot(world, chest, 40, Items.map, 1, 0);
 			addChestLoot(world, chest, 30, ListMisc.UltraCola, 1, 0);
 			addChestLoot(world, chest, 20, ListMisc.Box1, 1, 0);
 			addChestLoot(world, chest, 10, ListMisc.Box2, 1, 0);

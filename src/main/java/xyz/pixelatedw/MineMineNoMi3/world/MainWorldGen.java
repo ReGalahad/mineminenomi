@@ -11,6 +11,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
+import net.minecraftforge.common.util.ForgeDirection;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.api.Schematic;
@@ -19,9 +20,11 @@ import xyz.pixelatedw.MineMineNoMi3.api.WySchematicHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
+import xyz.pixelatedw.MineMineNoMi3.world.structures.StructureBanditSmallBase;
 import xyz.pixelatedw.MineMineNoMi3.world.structures.StructureCamp;
-import xyz.pixelatedw.MineMineNoMi3.world.structures.StructureLargeBase;
+import xyz.pixelatedw.MineMineNoMi3.world.structures.StructureDojo;
 import xyz.pixelatedw.MineMineNoMi3.world.structures.StructureLargeShip;
+import xyz.pixelatedw.MineMineNoMi3.world.structures.StructureMarineLargeBase;
 import xyz.pixelatedw.MineMineNoMi3.world.structures.StructureSmallShip;
 
 public class MainWorldGen implements IWorldGenerator 
@@ -54,12 +57,15 @@ public class MainWorldGen implements IWorldGenerator
 		
 		if(MainConfig.enableCamps)
 		{
-			this.addStructureSpawn(WySchematicHelper.load("marineCamp"), world, random, i, j, 1, 1, 15);
-			this.addStructureSpawn(WySchematicHelper.load("banditCamp"), world, random, i, j, 1, 1, 25);
+			this.addStructureSpawn(WySchematicHelper.load("marineCamp"), world, random, i, j, 1, 1, 5);
+			this.addStructureSpawn(WySchematicHelper.load("banditCamp"), world, random, i, j, 1, 1, 10);
 		}
 		
 		if(MainConfig.enableBases)
-			this.addStructureSpawn(WySchematicHelper.load("marineLargeBase"), world, random, i, j, 1, 1, 0.2);
+		{
+			this.addStructureSpawn(WySchematicHelper.load("banditBase"), world, random, i, j, 1, 1, 3);
+			this.addStructureSpawn(WySchematicHelper.load("marineLargeBase"), world, random, i, j, 1, 1, 1);
+		}
 		
 		this.addDialSpawn(ListMisc.DialEisenBlock, world, random, i, j, 1, 1, 100);
 		this.addDialSpawn(ListMisc.DialFireBlock, world, random, i, j, 1, 1, 70);
@@ -149,11 +155,13 @@ public class MainWorldGen implements IWorldGenerator
 				
 				// Bases
 				if(sch.getName().equals("marineLargeBase"))
-					spawned = StructureLargeBase.build(sch, world, posX, posY, posZ, biome);
+					spawned = StructureMarineLargeBase.build(sch, world, posX, posY, posZ, biome);
+				if(sch.getName().equals("banditBase"))
+					spawned = StructureBanditSmallBase.build(sch, world, posX, posY, posZ, biome);
 				
 				// Quest Related
 				if(sch.getName().equals("dojo"))
-					spawned = StructureLargeShip.build(sch, world, posX, posY, posZ, biome);
+					spawned = StructureDojo.build(sch, world, posX, posY, posZ, biome);
 							
 				if(spawned)
 				{
@@ -177,12 +185,17 @@ public class MainWorldGen implements IWorldGenerator
 
 	public static boolean checkCorners(Schematic sch, World world, int posX, int posY, int posZ)
 	{
+		boolean corner1 = false, corner2 = false, corner3 = false, corner4 = false;
 		for(int i = 1; i < 4; i++)
 		{
-			boolean corner1 = world.getBlock(posX, posY - i, posZ) != Blocks.air && world.getBlock(posX, posY - i, posZ) != Blocks.water;
-			boolean corner2 = world.getBlock(posX + sch.getWidth(), posY - i, posZ) != Blocks.air && world.getBlock(posX + sch.getWidth(), posY - i, posZ) != Blocks.water;
-			boolean corner3 = world.getBlock(posX, posY - i, posZ + sch.getLength()) != Blocks.air && world.getBlock(posX, posY - i, posZ + sch.getLength()) != Blocks.water;
-			boolean corner4 = world.getBlock(posX + sch.getWidth(), posY - i, posZ + sch.getLength()) != Blocks.air && world.getBlock(posX + sch.getWidth(), posY - i, posZ + sch.getLength()) != Blocks.water;		
+			if(!corner1)
+				corner1 = world.getBlock(posX, posY - i, posZ).isSideSolid(world, posX, posY - i, posZ, ForgeDirection.DOWN);
+			if(!corner2)
+				corner2 = world.getBlock(posX + sch.getWidth(), posY - i, posZ).isSideSolid(world, posX + sch.getWidth(), posY - i, posZ, ForgeDirection.DOWN);
+			if(!corner3)
+				corner3 = world.getBlock(posX, posY - i, posZ + sch.getLength()).isSideSolid(world, posX, posY - i, posZ + sch.getLength(), ForgeDirection.DOWN);
+			if(!corner4)
+				corner4 = world.getBlock(posX + sch.getWidth(), posY - i, posZ + sch.getLength()).isSideSolid(world, posX + sch.getWidth(), posY - i, posZ + sch.getLength(), ForgeDirection.DOWN);		
 	
 			if((corner1?1:0) + (corner2?1:0) + (corner3?1:0) + (corner4?1:0) >= 3)
 			{
@@ -195,16 +208,24 @@ public class MainWorldGen implements IWorldGenerator
 
 	public static boolean checkCornersAboveGround(Schematic sch, World world, int posX, int posY, int posZ)
 	{
-		boolean corner1 = world.getBlock(posX, posY + 1, posZ) == Blocks.air;
-		boolean corner2 = world.getBlock(posX + sch.getWidth(), posY + 1, posZ) == Blocks.air;
-		boolean corner3 = world.getBlock(posX, posY + 1, posZ + sch.getLength()) == Blocks.air;
-		boolean corner4 = world.getBlock(posX + sch.getWidth(), posY + 1, posZ + sch.getLength()) == Blocks.air;		
-
-		if((corner1?1:0) + (corner2?1:0) + (corner3?1:0) + (corner4?1:0) >= 3)
+		boolean corner1 = false, corner2 = false, corner3 = false, corner4 = false;
+		for(int i = 0; i < 3; i++)
 		{
-			return true;
+			if(!corner1)
+				corner1 = world.getBlock(posX, posY + i, posZ) == Blocks.air;
+			if(!corner2)
+				corner2 = world.getBlock(posX + sch.getWidth(), posY + i, posZ) == Blocks.air;
+			if(!corner3)
+				corner3 = world.getBlock(posX, posY + i, posZ + sch.getLength()) == Blocks.air;
+			if(!corner4)
+				corner4 = world.getBlock(posX + sch.getWidth(), posY + i, posZ + sch.getLength()) == Blocks.air;		
+
+			if((corner1?1:0) + (corner2?1:0) + (corner3?1:0) + (corner4?1:0) >= 3)
+			{
+				return true;
+			}
 		}
-		
+
 		return false;
 	}
 	
@@ -213,7 +234,7 @@ public class MainWorldGen implements IWorldGenerator
 		for(int i = 0; i < s.getWidth(); i++)
 		for(int j = 0; j < s.getHeight(); j++)
 		for(int k = 0; k < s.getLength(); k++)
-		{			
+		{
 			if(world.getBlock(posX + i, posY + j, posZ + k) == Blocks.air) //|| world.getBlock(posX, posY, posZ) == Blocks.water || world.getBlock(posX + i, posY + j, posZ + k) == Blocks.flowing_water)
 			{
 				if( world.getBlock(posX, posY - 1, posZ) == Blocks.water || world.getBlock(posX, posY - 1, posZ) == Blocks.flowing_water )

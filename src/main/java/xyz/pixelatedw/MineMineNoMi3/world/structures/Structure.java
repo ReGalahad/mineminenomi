@@ -9,7 +9,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.world.World;
+import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
+import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityCustomSpawner;
+import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
 public abstract class Structure
 {
@@ -57,6 +60,20 @@ public abstract class Structure
 			lootList.accept(chest);
 			
 			index++;
+		}
+	}
+	
+	protected static void addSpawnerTileEntity(World world, int[][] positions, String mobName, int min, int max)
+	{
+		List<TileEntityCustomSpawner> spawners = new ArrayList<TileEntityCustomSpawner>();
+
+		for(int[] pos : positions)
+		{
+			int chance = max <= 0 ? min : (int) WyMathHelper.randomWithRange(min, max);		
+			mobName = ID.PROJECT_ID + "." + mobName;		
+			TileEntityCustomSpawner spawner = new TileEntityCustomSpawner().setSpawnerMob(mobName).setSpawnerLimit(chance);
+			world.setBlock(pos[0], pos[1], pos[2], ListMisc.CustomSpawner);
+			world.setTileEntity(pos[0], pos[1], pos[2], spawner);
 		}
 	}
 	
