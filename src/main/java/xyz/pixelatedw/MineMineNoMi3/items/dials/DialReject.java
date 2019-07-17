@@ -31,8 +31,8 @@ public class DialReject extends Item
 				user.attackEntityFrom(DamageSource.generic, Float.MAX_VALUE);
 				target.attackEntityFrom(DamageSource.generic, Float.MAX_VALUE);
 				
-		    	if(!ID.DEV_EARLYACCESS && user instanceof EntityPlayer && !((EntityPlayer)user).capabilities.isCreativeMode)
-		    		WyTelemetry.addStat("rejectDialsUsed", 1);
+		    	if(user instanceof EntityPlayer && !((EntityPlayer)user).capabilities.isCreativeMode)
+		    		WyTelemetry.sendMiscStat("rejectDialsUsed", "Reject Dials Used", 1);
 				
 				return true;
 	    	}	    
@@ -47,8 +47,8 @@ public class DialReject extends Item
     	if(!world.isRemote && player.isSneaking())
     	{
 	    	if(!ID.DEV_EARLYACCESS && !player.capabilities.isCreativeMode)
-	    		WyTelemetry.addStat("rejectDialsPlaced", 1);
-    		
+	    		WyTelemetry.sendMiscStat("rejectDialsPlaced", "Reject Dials Placed", 1);
+	    	
 	    	world.setBlock(i1, i2 + 1, i3, ListMisc.DialRejectBlock);
 	    	itemStack.stackSize--;
     	}

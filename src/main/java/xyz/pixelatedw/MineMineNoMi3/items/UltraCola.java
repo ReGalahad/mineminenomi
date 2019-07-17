@@ -23,6 +23,7 @@ public class UltraCola extends ItemFood
 		this.maxStackSize = 16;  
 	} 
 	
+	@Override
 	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
 	{
 		player.setItemInUse(itemStack, itemUseDuration);
@@ -30,6 +31,7 @@ public class UltraCola extends ItemFood
 	}
 	
 	
+	@Override
 	public void onFoodEaten(ItemStack itemStack, World world, EntityPlayer player) 
 	{
 		if(!world.isRemote)
@@ -62,8 +64,8 @@ public class UltraCola extends ItemFood
 				player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 250, 0));
 				
 	    	if(!ID.DEV_EARLYACCESS && !player.capabilities.isCreativeMode)
-	    		WyTelemetry.addStat("bottlesOfUltraColaDrank", 1);
-			
+	    		WyTelemetry.sendMiscStat("bottlesOfUltraColaDrank", "Bottles of Ultra Cola Drank", 1);
+
 			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
 		}			
 	}

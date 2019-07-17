@@ -31,8 +31,8 @@ public class DialMilky extends Item
 	    		world.spawnEntityInWorld(proj);
 				
 		    	if(!ID.DEV_EARLYACCESS && !player.capabilities.isCreativeMode)
-		    		WyTelemetry.addStat("milkyDialsUsed", 1);
-	    		
+		    		WyTelemetry.sendMiscStat("milkyDialsUsed", "Milky Dials Used", 1);
+		    	
 				itemStack.damageItem(2, player);
 	    	}	    
 		}
@@ -45,8 +45,8 @@ public class DialMilky extends Item
     {
     	if(!world.isRemote && player.isSneaking())
     	{
-	    	if(!ID.DEV_EARLYACCESS && !player.capabilities.isCreativeMode)
-	    		WyTelemetry.addStat("milkyDialsPlaced", 1);
+	    	if(!player.capabilities.isCreativeMode)
+	    		WyTelemetry.sendMiscStat("milkyDialsPlaced", "Milky Dials Placed", 1);
     		
 	    	world.setBlock(i1, i2 + 1, i3, ListMisc.DialMilkyBlock);
 	    	itemStack.stackSize--;

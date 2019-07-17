@@ -27,7 +27,6 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityExplosion;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
-import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDoppelman;
 import xyz.pixelatedw.MineMineNoMi3.events.customevents.YomiTriggerEvent;
@@ -178,9 +177,6 @@ public class EventsPassives
 					props.setMaxCola(props.getMaxCola() + 400);
 					props.setColaBackpack(true);
 
-					if (!ID.DEV_EARLYACCESS && !player.capabilities.isCreativeMode && !player.worldObj.isRemote)
-						WyTelemetry.addStat("colaBackpacksCurrentlyEquipped", 1);
-
 					if (!player.worldObj.isRemote)
 						WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
 				}
@@ -192,9 +188,6 @@ public class EventsPassives
 						props.setCola(props.getMaxCola());
 
 					props.setColaBackpack(false);
-
-					if (!ID.DEV_EARLYACCESS && !player.capabilities.isCreativeMode && !player.worldObj.isRemote)
-						WyTelemetry.addStat("colaBackpacksCurrentlyEquipped", -1);
 
 					if (!player.worldObj.isRemote)
 						WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);

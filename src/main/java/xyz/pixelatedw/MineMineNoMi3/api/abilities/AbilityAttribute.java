@@ -1,13 +1,13 @@
  package xyz.pixelatedw.MineMineNoMi3.api.abilities;
 
 import java.awt.Color;
-import java.lang.reflect.Field;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.EffectType;
 
 public class AbilityAttribute 
@@ -41,7 +41,7 @@ public class AbilityAttribute
 	{ 
 		this.attributeName = name; 
 		this.abilityDisplayName = this.attributeName;
-		this.abilityTexture = this.attributeName;
+		this.abilityTexture = WyHelper.getFancyName(this.attributeName);
 	}
 		
 	public AbilityAttribute(AbilityAttribute attr) 

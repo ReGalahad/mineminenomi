@@ -15,6 +15,7 @@ import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.abilities.FishKarateAbilities;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.WyRegistry;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilitySync;
@@ -112,9 +113,9 @@ public class AkumaNoMi extends ItemFood
 					abilityProps.addDevilFruitAbility(a);
 		
 		WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));
-		if (!ID.DEV_EARLYACCESS && !world.isRemote && !player.capabilities.isCreativeMode)
-			WyTelemetry.addStat("eaten_" + itemStack.getDisplayName(), 1);
-
+		if(!world.isRemote && !player.capabilities.isCreativeMode)		
+			WyTelemetry.sendDevilFruitStat(props.getUsedFruit(), (String) WyRegistry.getItemsMap().get(this), 1);
+		
 	} 
 
 	@Override
