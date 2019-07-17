@@ -61,14 +61,14 @@ public class MainMod
 
 		proxy.preInit();
 		
-		WyTelemetry.addStat("onlinePlayers-060-1710", 1);
+		WyTelemetry.sendMiscStat("onlinePlayers-060-1710", "Online Players for 0.6.0-1.7.10", 1);
 		
 		Runtime.getRuntime().addShutdownHook(new Thread()
 		{
 		    @Override
 		    public void run()
 		    {
-		    	WyTelemetry.addStat("onlinePlayers-060-1710", -1);
+		    	WyTelemetry.sendMiscStat("onlinePlayers-060-1710", "Online Players for 0.6.0-1.7.10", -1);
 		    }
 		});
 	}

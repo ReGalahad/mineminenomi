@@ -13,7 +13,6 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityExplosion;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
-import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilitySync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
@@ -48,11 +47,13 @@ public class GoroAbilities
 			super(ListAttributes.EL_THOR); 
 		}
 		
+		@Override
 		public void startCharging(EntityPlayer player)
 		{
 			super.startCharging(player);				
 		}
 		
+		@Override
 		public void duringCharging(EntityPlayer player, int currentCharge)
 		{
 			MovingObjectPosition mop = WyHelper.rayTraceBlocks(player);	
@@ -67,6 +68,7 @@ public class GoroAbilities
 			}
 		}
 		
+		@Override
 		public void endCharging(EntityPlayer player)
 		{						
 			MovingObjectPosition mop = WyHelper.rayTraceBlocks(player);	
@@ -108,6 +110,7 @@ public class GoroAbilities
 			super(ListAttributes.VOLT_VARI); 
 		}
 		
+		@Override
 		public void startCharging(EntityPlayer player)
 		{
 			if(!this.isOnCooldown)
@@ -117,6 +120,7 @@ public class GoroAbilities
 			}
 		}
 		
+		@Override
 		public void duringCharging(EntityPlayer player, int currentCharge)
 		{		
 			power = currentCharge;
@@ -155,6 +159,7 @@ public class GoroAbilities
 			}
 		}
 		
+		@Override
 		public void endCharging(EntityPlayer player)
 		{
 			double truePower = Math.abs(power - this.attr.getAbilityCharges());
@@ -214,7 +219,7 @@ public class GoroAbilities
 			WyNetworkHelper.sendTo(new PacketAbilitySync(AbilityProperties.get(player)), (EntityPlayerMP) player);
 
 	    	if(!ID.DEV_EARLYACCESS && !player.capabilities.isCreativeMode)
-	    		WyTelemetry.addStat("abilityUsed_" + this.getAttribute().getAttributeName(), 1);
+	    		WyTelemetry.sendAbilityStat(this.getAttribute().getAbilityTexture(), this.getAttribute().getAttributeName(), 1);
 
 			if(projectile != null)
 				player.worldObj.spawnEntityInWorld(projectile);
@@ -230,6 +235,7 @@ public class GoroAbilities
 			super(ListAttributes.RAIGO); 
 		}
 		
+		@Override
 		public void use(EntityPlayer player)
 		{			
 			if(!this.isOnCooldown)		
@@ -263,6 +269,7 @@ public class GoroAbilities
 			super(ListAttributes.KARI); 
 		}
 		
+		@Override
 		public void startCharging(EntityPlayer player)
 		{
 			if(!this.isOnCooldown)		
@@ -270,6 +277,7 @@ public class GoroAbilities
 			super.startCharging(player);				
 		}
 		
+		@Override
 		public void endCharging(EntityPlayer player)
 		{						
 			super.endCharging(player);
@@ -283,6 +291,7 @@ public class GoroAbilities
 			super(ListAttributes.SANGO); 
 		}
 		
+		@Override
 		public void use(EntityPlayer player)
 		{
 			this.projectile = new GoroProjectiles.Sango(player.worldObj, player, attr);
@@ -295,6 +304,7 @@ public class GoroAbilities
 		public SparkStep() {
 			super(ListAttributes.SPARK_STEP);
 		}
+		@Override
 		public void use(EntityPlayer player) {
 			if (!this.isOnCooldown) {
 				if(WyHelper.rayTraceBlocks(player) != null)

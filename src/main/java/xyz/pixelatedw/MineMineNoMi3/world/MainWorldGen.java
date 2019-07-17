@@ -12,7 +12,6 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.common.util.ForgeDirection;
-import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.api.Schematic;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
@@ -119,8 +118,7 @@ public class MainWorldGen implements IWorldGenerator
 				if(WyDebug.isDebug())
 					System.out.println("" + blockToSpawn.getLocalizedName() + " spawned at /tp @p " + posX + " " + (posY + 1) + " " + posZ);
 				
-		    	if(!ID.DEV_EARLYACCESS)
-		    		WyTelemetry.addStat("spawnedDial_" + WyHelper.getFancyName(blockToSpawn.getLocalizedName()), 1);
+				WyTelemetry.sendStructureStat(WyHelper.getFancyName(blockToSpawn.getLocalizedName()), blockToSpawn.getLocalizedName(), 1);
 		    	
 		    	return true;
 			}
@@ -168,8 +166,7 @@ public class MainWorldGen implements IWorldGenerator
 					if(WyDebug.isDebug())
 						System.out.println("" + sch.getName() + " spawned at /tp @p " + posX + " " + posY + " " + posZ);
 	
-					if(!ID.DEV_EARLYACCESS )
-						WyTelemetry.addStat("spawnedStructure_" + sch.getName(), 1);
+					WyTelemetry.sendStructureStat(WyHelper.getFancyName(sch.getName()), sch.getName(), 1);
 				}   	
 				
 				return spawned;

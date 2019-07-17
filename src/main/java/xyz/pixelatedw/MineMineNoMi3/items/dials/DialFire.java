@@ -6,7 +6,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
@@ -37,8 +36,8 @@ public class DialFire extends Item
 				fireball.accelerationZ = look.zCoord * 0.2;
 				world.spawnEntityInWorld(fireball);	
 				
-		    	if(!ID.DEV_EARLYACCESS && !player.capabilities.isCreativeMode)
-		    		WyTelemetry.addStat("fireDialsUsed", 1);
+		    	if(!player.capabilities.isCreativeMode)
+		    		WyTelemetry.sendMiscStat("fireDialsUsed", "Fire Dials Used", 1);
 				
 				itemStack.damageItem(2, player);
 	    	}	    
@@ -52,8 +51,8 @@ public class DialFire extends Item
     {
     	if(!world.isRemote && player.isSneaking())
     	{
-	    	if(!ID.DEV_EARLYACCESS && !player.capabilities.isCreativeMode)
-	    		WyTelemetry.addStat("fireDialsPlaced", 1);
+	    	if(!player.capabilities.isCreativeMode)
+	    		WyTelemetry.sendMiscStat("fireDialsPlaced", "Fire Dials Placed", 1);
     		
 	    	world.setBlock(i1, i2 + 1, i3, ListMisc.DialFireBlock);
 	    	itemStack.stackSize--;

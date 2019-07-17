@@ -8,7 +8,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.abilities.CyborgAbilities;
@@ -174,8 +173,8 @@ public class EventsOnGain
 					plusBounty = (entity.getDoriki() * 2) + rng;
 					plusBelly = entity.getBelly() + rng;
 
-					if (!ID.DEV_EARLYACCESS && !player.worldObj.isRemote && !player.capabilities.isCreativeMode)
-						WyTelemetry.addStat("defeated_" + WyHelper.getFancyName(target.getClass().getSimpleName()).replace("entity", ""), 1);
+					if (!player.worldObj.isRemote && !player.capabilities.isCreativeMode)
+						WyTelemetry.sendKillStat(WyHelper.getFancyName(target.getClass().getSimpleName()).replace("entity", ""), target.getClass().getSimpleName().replace("Entity", ""), 1);
 				}
 				else
 				{
@@ -224,23 +223,7 @@ public class EventsOnGain
 					props.alterBelly(plusBelly);
 
 			}
-
-			if (!ID.DEV_EARLYACCESS && !player.worldObj.isRemote && !player.capabilities.isCreativeMode)
-			{
-				if (!targetPlayer && MainConfig.enableMobRewards)
-				{
-					WyTelemetry.addStat("dorikiEarnedFromEntities", (int) Math.round(plusDoriki));
-					WyTelemetry.addStat("bellyEarnedFromEntities", plusBelly);
-					WyTelemetry.addStat("bountyEarnedFromEntities", plusBounty);
-				}
-				else
-				{
-					WyTelemetry.addStat("dorikiEarnedFromPlayers", Math.round((ExtendedEntityData.get(target).getDoriki() - ExtendedEntityData.get(target).getDorikiFromCommand()) / 4));
-					WyTelemetry.addStat("bellyEarnedFromPlayers", plusBelly - ExtendedEntityData.get(target).getBellyFromCommand());
-					WyTelemetry.addStat("bountyEarnedFromPlayers", Math.round((ExtendedEntityData.get(target).getBounty() - ExtendedEntityData.get(target).getBountyFromCommand()) / 2));
-				}
-			}
-
+			
 			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
 		}
 	}

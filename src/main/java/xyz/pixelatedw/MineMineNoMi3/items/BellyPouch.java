@@ -4,7 +4,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
@@ -37,8 +36,8 @@ public class BellyPouch extends Item
 			else
 				props.setBelly(Values.MAX_GENERAL);	
 			
-	    	if(!ID.DEV_EARLYACCESS && !player.capabilities.isCreativeMode)
-	    		WyTelemetry.addStat("bellyEarnedFromPouches", amount);
+	    	if(!player.capabilities.isCreativeMode)
+	    		WyTelemetry.sendMiscStat("bellyEarnedFromPouches", "Belly Earned From Pouches", amount);
 	    	
 	    	--itemStack.stackSize;
 		}

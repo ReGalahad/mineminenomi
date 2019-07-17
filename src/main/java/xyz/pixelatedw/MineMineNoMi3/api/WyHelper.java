@@ -330,6 +330,11 @@ public class WyHelper
 	{
 		player.addChatComponentMessage(new ChatComponentText(text));
 	}
+	
+	public static String upperCaseFirst(String text)
+	{
+		return Character.toUpperCase(text.charAt(0)) + text.substring(1) + " "; 
+	}
 
 	public static String getFancyName(String text)
 	{
