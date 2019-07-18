@@ -12,6 +12,7 @@ import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
@@ -30,7 +31,8 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketEntityNBTSync;
 public class EntityLapahn extends EntityNewMob implements INBTEntity
 {
 
-	private AttributeModifier rangeModeModifier = new AttributeModifier(UUID.randomUUID(), "Rage Mode", 10, 0);
+	private UUID rageModeUUID = UUID.randomUUID();
+	private AttributeModifier rageModeModifier = new AttributeModifier(rageModeUUID, "Rage Mode", 10, 0);
 	private boolean isEnraged;
 	
 	public EntityLapahn(World world)
@@ -116,10 +118,11 @@ public class EntityLapahn extends EntityNewMob implements INBTEntity
 	public void setEnraged(boolean value)
 	{
 		this.isEnraged = value;
-		if(value)
-			this.getEntityAttribute(SharedMonsterAttributes.attackDamage).applyModifier(rangeModeModifier);
-		else
-			this.getEntityAttribute(SharedMonsterAttributes.attackDamage).removeModifier(rangeModeModifier);
+		IAttributeInstance attackAttribute = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
+		if(value && attackAttribute.getModifier(this.rageModeUUID) == null)
+			attackAttribute.applyModifier(rageModeModifier);
+		else if(!value && attackAttribute.getModifier(this.rageModeUUID) != null)
+			attackAttribute.removeModifier(rageModeModifier);
 	}
 	
 	@Override

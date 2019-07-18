@@ -12,6 +12,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 
 import com.google.gson.Gson;
 
+import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
 
 public class WyTelemetry
@@ -60,24 +61,32 @@ public class WyTelemetry
 	
 	private static void sendData(String url, String json)
 	{
-		try
+		Thread httpThread = new Thread()
 		{
-			HttpPost post = new HttpPost(urlConnection + "" + url);
-			StringEntity postingString;
-			postingString = new StringEntity(json);
-			WyDebug.debug(json);
-			post.setEntity(postingString);
-			post.setHeader("Content-type", "application/json");
-			HttpResponse response = httpClient.execute(post);
-			WyDebug.debug(response);
-			ResponseHandler<String> handler = new BasicResponseHandler();
-			String body = handler.handleResponse(response);
-			WyDebug.debug(body);
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
+			@Override
+			public void run()
+			{
+				try
+				{					
+					HttpPost post = new HttpPost(urlConnection + "" + url);
+					StringEntity postingString;
+					postingString = new StringEntity(json);
+					String size = WyHelper.formatBytes(json.getBytes().length);
+					WyDebug.debug("\n JSON: " + json + "\n Size: " + size);
+					post.setEntity(postingString);
+					post.setHeader("Content-Type", "application/json");
+					HttpResponse response = httpClient.execute(post);
+					ResponseHandler<String> handler = new BasicResponseHandler();
+					String body = handler.handleResponse(response);
+				}
+				catch (IOException e)
+				{
+					e.printStackTrace();
+				}			
+			}
+		};
+		httpThread.setName("Mine Mine no Mi - Stats POST");
+		httpThread.start();
 	}
 
 	private static class StatData
