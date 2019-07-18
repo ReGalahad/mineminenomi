@@ -90,6 +90,7 @@ public class EntityLapahn extends EntityNewMob implements INBTEntity
 		return true;
 	}
 
+	@Override
 	public void updateNBT()
 	{
 		NBTTagCompound nbtClone = new NBTTagCompound();
