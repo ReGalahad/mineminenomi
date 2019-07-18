@@ -61,7 +61,7 @@ public class MainMod
 
 		proxy.preInit();
 		
-		if(!ID.DEV_EARLYACCESS)
+		if(!WyDebug.isDebug())
 		{
 			WyTelemetry.sendMiscStat("onlinePlayers-060-1710", "Online Players for 0.6.0-1.7.10", 1);
 			

@@ -23,7 +23,7 @@ public class WyTelemetry
 	static
 	{
 		if (WyDebug.isDebug())
-			urlConnection = "http://wynd.go.ro/mmnm-webserver/api";
+			urlConnection = "http://localhost/mmnm-webserver/api";
 		else
 			urlConnection = "http://pixelatedw.xyz/api";
 	}

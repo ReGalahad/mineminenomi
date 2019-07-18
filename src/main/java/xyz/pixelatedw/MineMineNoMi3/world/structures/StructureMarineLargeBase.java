@@ -132,6 +132,9 @@ public class StructureMarineLargeBase extends Structure
 			addChestLoot(world, chest, 35, Items.diamond, 2, 5);
 			addChestLoot(world, chest, 30, Items.enchanted_book.getEnchantedItemStack(new EnchantmentData(getEnchantment(), 2)));
 			addChestLoot(world, chest, 25, ListMisc.BlackMetal, 5, 7);
+			addChestLoot(world, chest, 20, ListMisc.Kairoseki, 15, 20);
+			addChestLoot(world, chest, 20, Items.gold_ingot, 10, 15);
+			addChestLoot(world, chest, 20, Items.iron_ingot, 7, 12);
 			addChestLoot(world, chest, 10, Items.diamond, 5, 6);
 			addChestLoot(world, chest, 10, ListMisc.BlackMetal, 6, 8);
 			addChestLoot(world, chest, 10, Items.enchanted_book.getEnchantedItemStack(new EnchantmentData(getEnchantment(), 3)));
@@ -154,6 +157,8 @@ public class StructureMarineLargeBase extends Structure
 			addChestLoot(world, chest, 20, ListMisc.Flintlock, 1, 0);
 			addChestLoot(world, chest, 20, ListMisc.UltraCola, 1, 0);
 			addChestLoot(world, chest, 20, ListMisc.BlackMetal, 1, 5);
+			addChestLoot(world, chest, 15, Items.enchanted_book.getEnchantedItemStack(new EnchantmentData(getEnchantment(), 2)));
+			addChestLoot(world, chest, 10, Items.diamond, 3, 7);
 			addChestLoot(world, chest, 10, ListMisc.Box1, 1, 0);
 			addChestLoot(world, chest, 5, ListMisc.Box2, 1, 0);
 		};
