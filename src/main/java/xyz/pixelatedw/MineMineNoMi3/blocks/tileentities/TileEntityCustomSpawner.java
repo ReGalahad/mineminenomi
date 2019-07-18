@@ -18,8 +18,8 @@ public class TileEntityCustomSpawner extends TileEntity
 	private int spawnLimit = 5;
 	private ArrayList<EntityLivingBase> spawnedEntities = new ArrayList<EntityLivingBase>();
 
-	public TileEntityCustomSpawner setSpawnerMob(String toSpawn) { entityToSpawn = toSpawn; return this; }
-	public TileEntityCustomSpawner setSpawnerLimit(int limit) { spawnLimit = limit; return this; }
+	public TileEntityCustomSpawner setSpawnerMob(String toSpawn) { this.entityToSpawn = toSpawn; return this; }
+	public TileEntityCustomSpawner setSpawnerLimit(int limit) { this.spawnLimit = limit; return this; }
 	
     @Override
 	public void updateEntity()
@@ -27,8 +27,8 @@ public class TileEntityCustomSpawner extends TileEntity
     	if(!this.worldObj.isRemote)
     	{
     		boolean flag = false;
-    		
-	    	if(!WyHelper.getEntitiesNear(this, 30, EntityPlayer.class).isEmpty())
+
+    		if(!WyHelper.getEntitiesNear(this, 30, EntityPlayer.class).isEmpty())
 	    	{
 	    		EntityLivingBase e = WyHelper.getEntitiesNear(this, 30, EntityPlayer.class).get(0);
 	    		

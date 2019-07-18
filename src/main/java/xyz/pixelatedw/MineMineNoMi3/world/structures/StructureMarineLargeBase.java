@@ -37,41 +37,25 @@ public class StructureMarineLargeBase extends Structure
 		// Spawners
 		int[][] trash01SpawnerPositions = new int[][]
 		{
-			{posX + 36, posY + 8, posZ + 30}, {posX + 19, posY + 8, posZ + 38}, {posX + 19, posY + 13, posZ + 38}, {posX + 37, posY + 13, posZ + 38}
+			{posX + 36, posY + 8, posZ + 30}, {posX + 19, posY + 8, posZ + 38}, {posX + 19, posY + 13, posZ + 38}, {posX + 37, posY + 13, posZ + 38}, {posX + 31, posY + 22, posZ + 25},
+			{posX + 31, posY + 28, posZ + 32}
 		};	
-		//addSpawnerTileEntity(world, trash01SpawnerPositions, "Marine with Sword", 4, 6);
+		addSpawnerTileEntity(world, trash01SpawnerPositions, "Marine with Sword", 5, 7);
 		
 		int[][] trash02SpawnerPositions = new int[][]
 		{
-			{posX + 37, posY + 13, posZ + 25}, {posX + 19, posY + 13, posZ + 20}
+			{posX + 37, posY + 13, posZ + 25}, {posX + 19, posY + 13, posZ + 20}, {posX + 21, posY + 28, posZ + 32}
 		};
-		//addSpawnerTileEntity(world, trash02SpawnerPositions, "Marine with Gun", 3, 5);
-		
-		
-		
-		int[][] spawnerPositions = new int[][]
+		addSpawnerTileEntity(world, trash02SpawnerPositions, "Marine with Gun", 3, 5);
+	
+		int[][] captainSpawnerPositions = new int[][]
 		{
-			{posX + 36, posY + 8, posZ + 30}, {posX + 19, posY + 8, posZ + 38}
-		};	
-		addSpawnerTileEntity(world, spawnerPositions, "Marine with Sword", 3, 5);
-		/*
-		TileEntityCustomSpawner spawnTrash01 = new TileEntityCustomSpawner().setSpawnerMob(ID.PROJECT_ID + ".Marine with Sword").setSpawnerLimit(2);
-		world.setBlock(posX + 36, posY + 8, posZ + 30, ListMisc.CustomSpawner);
-		world.setTileEntity(posX + 36, posY + 8, posZ + 30, spawnTrash01);
-		
-		TileEntityCustomSpawner spawnTrash02 = new TileEntityCustomSpawner().setSpawnerMob(ID.PROJECT_ID + ".Marine with Sword").setSpawnerLimit(2);
-		world.setBlock(posX + 19, posY + 8, posZ + 38, ListMisc.CustomSpawner);
-		world.setTileEntity(posX + 19, posY + 8, posZ + 38, spawnTrash02);
-		*/
-		/*
-		world.setBlock(posX + 36, posY + 8, posZ + 30, Blocks.bedrock);	
-		world.setBlock(posX + 19, posY + 8, posZ + 38, Blocks.bedrock);	
-		world.setBlock(posX + 19, posY + 13, posZ + 38, Blocks.bedrock);
-		world.setBlock(posX + 37, posY + 13, posZ + 38, Blocks.bedrock);
-		world.setBlock(posX + 37, posY + 13, posZ + 25, Blocks.bedrock);
-		world.setBlock(posX + 19, posY + 13, posZ + 20, Blocks.bedrock);
-		*/
-		
+			{posX + 18, posY + 22, posZ + 20}, {posX + 18, posY + 22, posZ + 33}
+		};
+		addSpawnerTileEntity(world, captainSpawnerPositions, "Marine Captain", 1, 0);
+
+		//world.setBlock(posX + 26, posY + 36, posZ + 22, Blocks.bedrock);
+
 		// Chests
 		int[][] foodChestPositions = new int[][]
 		{

@@ -77,68 +77,7 @@ public class WyTelemetry
 		catch (IOException e)
 		{
 			e.printStackTrace();
-		}		
-	}
-
-	@Deprecated
-	public static void addStat(final String statName, final long value)
-	{
-		WyDebug.error("Deprecated");
-		return;
-		
-		/*Thread newThread = new Thread()
-		{
-			@Override
-			public void run()
-			{
-				String data = "stats" + ID.PROJECT_VERSION.replace(".", "") + ":" + statName + "=" + value;
-
-				sendData(data);
-			}
-		};
-		newThread.setName("MMnM Stats Thread");
-		newThread.start();*/
-	}
-
-	@Deprecated
-	private static void sendData(String data)
-	{		
-		WyDebug.error("Deprecated");
-		return;
-		
-		/*if (MainConfig.enableTelemetry && !data.isEmpty() && data != null)
-		{
-			try
-			{
-				HttpURLConnection conn = (HttpURLConnection) (new URL(urlConnection)).openConnection();
-				conn.setRequestMethod("POST");
-				conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-				conn.setRequestProperty("Content-Length", "" + data.getBytes().length);
-				conn.setRequestProperty("Content-Language", "en-US");
-				conn.setUseCaches(false);
-				conn.setDoOutput(true);
-				DataOutputStream out = new DataOutputStream(conn.getOutputStream());
-				out.writeBytes(data);
-				out.flush();
-				out.close();
-
-				BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-				StringBuffer ret = new StringBuffer();
-				String line;
-
-				while ((line = in.readLine()) != null)
-				{
-					ret.append(line);
-					ret.append('\r');
-				}
-
-				in.close();
-			}
-			catch (IOException e)
-			{
-				e.printStackTrace();
-			}
-		}*/
+		}
 	}
 
 	private static class StatData

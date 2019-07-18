@@ -70,8 +70,8 @@ public abstract class Structure
 		for(int[] pos : positions)
 		{
 			int chance = max <= 0 ? min : (int) WyMathHelper.randomWithRange(min, max);		
-			mobName = ID.PROJECT_ID + "." + mobName;		
-			TileEntityCustomSpawner spawner = new TileEntityCustomSpawner().setSpawnerMob(mobName).setSpawnerLimit(chance);
+			String mob = ID.PROJECT_ID + "." + mobName;		
+			TileEntityCustomSpawner spawner = new TileEntityCustomSpawner().setSpawnerMob(mob).setSpawnerLimit(chance);
 			world.setBlock(pos[0], pos[1], pos[2], ListMisc.CustomSpawner);
 			world.setTileEntity(pos[0], pos[1], pos[2], spawner);
 		}
