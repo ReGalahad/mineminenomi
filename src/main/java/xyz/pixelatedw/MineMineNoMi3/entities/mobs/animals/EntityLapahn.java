@@ -1,5 +1,7 @@
 package xyz.pixelatedw.MineMineNoMi3.entities.mobs.animals;
 
+import java.util.UUID;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
@@ -9,6 +11,7 @@ import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
@@ -19,6 +22,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.INBTEntity;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.lapahn.EntityAILapahnJump;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.lapahn.EntityAILapahnRage;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.bandits.BanditData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.PirateData;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketEntityNBTSync;
@@ -26,13 +30,18 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketEntityNBTSync;
 public class EntityLapahn extends EntityNewMob implements INBTEntity
 {
 
+	private AttributeModifier rangeModeModifier = new AttributeModifier(UUID.randomUUID(), "Rage Mode", 10, 0);
+	private boolean isEnraged;
+	
 	public EntityLapahn(World world)
 	{
 		super(world);
+		
 		this.setSize(0.8F, 2.5F);
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(0, new EntityAIAttackOnCollide(this, 1.0D, false));
 		this.tasks.addTask(0, new EntityAILapahnJump(this));
+		this.tasks.addTask(0, new EntityAILapahnRage(this));
 		this.tasks.addTask(1, new EntityAILookIdle(this));
 		this.tasks.addTask(2, new EntityAIMoveTowardsRestriction(this, 1.0D));
 		this.tasks.addTask(3, new EntityAIWander(this, 1.0D));
@@ -58,7 +67,7 @@ public class EntityLapahn extends EntityNewMob implements INBTEntity
 		super.onEntityUpdate();
 		if (!this.worldObj.isRemote)
 		{
-			
+			//System.out.println(this.isEnraged);
 		}
 	}
 	
@@ -67,7 +76,7 @@ public class EntityLapahn extends EntityNewMob implements INBTEntity
 	{
 		super.writeEntityToNBT(nbt);
 
-		//nbt.setBoolean("IsTamed", this.isTamed);
+		nbt.setBoolean("IsEnraged", this.isEnraged);
 	}
 	
 	@Override
@@ -81,7 +90,7 @@ public class EntityLapahn extends EntityNewMob implements INBTEntity
 	{
 		super.readEntityFromNBT(nbt);
 
-		//this.isTamed = nbt.getBoolean("IsTamed");
+		this.isEnraged = nbt.getBoolean("IsEnraged");
 	}
 	
 	@Override
@@ -97,6 +106,20 @@ public class EntityLapahn extends EntityNewMob implements INBTEntity
 		this.writeEntityToNBT(nbtClone);
 
 		WyNetworkHelper.sendToAll(new PacketEntityNBTSync(this.getEntityId(), nbtClone));
+	}
+	
+	public boolean isEnraged()
+	{
+		return this.isEnraged;
+	}
+
+	public void setEnraged(boolean value)
+	{
+		this.isEnraged = value;
+		if(value)
+			this.getEntityAttribute(SharedMonsterAttributes.attackDamage).applyModifier(rangeModeModifier);
+		else
+			this.getEntityAttribute(SharedMonsterAttributes.attackDamage).removeModifier(rangeModeModifier);
 	}
 	
 	@Override
@@ -124,8 +147,11 @@ public class EntityLapahn extends EntityNewMob implements INBTEntity
 			
 			for(EntityLivingBase entity : WyHelper.getEntitiesNear(this, 5))
 			{
-				entity.attackEntityFrom(DamageSource.causeMobDamage(this), 6);			
-				entity.motionY = 0.5;
+				if(!(entity instanceof EntityLapahn))
+				{
+					entity.attackEntityFrom(DamageSource.causeMobDamage(this), 6);			
+					entity.motionY = 0.5;
+				}
 			}
 		}
 	}
