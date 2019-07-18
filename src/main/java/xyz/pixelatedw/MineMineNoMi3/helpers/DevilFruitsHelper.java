@@ -288,6 +288,7 @@ public class DevilFruitsHelper
 			else
 			{
 				verifyAndGiveAbility(WeatherAbilities.GUST_SWORD, abilityProps);
+				verifyAndGiveAbility(WeatherAbilities.WEATHER_EGG, abilityProps);
 			}
 		}
 	}

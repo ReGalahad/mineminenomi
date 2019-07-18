@@ -44,8 +44,38 @@ public class WeatherProjectiles
 		abilitiesClassesArray.add(new Object[] {CoolBall.class, ListAttributes.COOL_BALL});
 		abilitiesClassesArray.add(new Object[] {ThunderBall.class, ListAttributes.THUNDER_BALL});
 		abilitiesClassesArray.add(new Object[] {GustSword.class, ListAttributes.GUST_SWORD});
-
+		abilitiesClassesArray.add(new Object[] {WeatherEgg.class, ListAttributes.WEATHER_EGG});
+		
 		abilitiesClassesArray.add(new Object[] {EntityWeatherCloud.class, ListExtraAttributes.WEATHER_CLOUD});
+	}
+	
+	public static class WeatherEgg extends WeatherBall
+	{
+		public WeatherEgg(World world)
+		{super(world);}
+		
+		public WeatherEgg(World world, double x, double y, double z)
+		{super(world, x, y, z);}
+		
+		public WeatherEgg(World world, EntityLivingBase player, AbilityAttribute attr) 
+		{		
+			super(world, player, attr);
+			this.weaponUsed = player.getHeldItem() != null ? player.getHeldItem().getItem() : null;
+		}
+		
+		@Override
+		public void setDead()
+		{
+			if(!this.worldObj.isRemote)
+			{
+				EntityWeatherCloud weatherCloud = new EntityWeatherCloud(worldObj);
+				weatherCloud.setLife(200);
+				weatherCloud.setThrower((EntityPlayer) this.getThrower());
+				weatherCloud.setPositionAndRotation(this.posX, this.posY, this.posZ, 0, 0);
+				this.worldObj.spawnEntityInWorld(weatherCloud);
+			}
+			super.setDead();
+		}
 	}
 	
 	public static class GustSword extends AbilityProjectile
@@ -113,22 +143,6 @@ public class WeatherProjectiles
 				
 				hit.entityHit.motionX = mX;
 				hit.entityHit.motionZ = mZ;
-				
-				/*double newPosX = 0, newPosY = 0, newPosZ = 0;
-				
-				int range = 10;
-				newPosY += 1;
-				Direction dir = WyHelper.get4Directions(this.getThrower());
-				if(dir == WyHelper.Direction.SOUTH)
-					newPosX += WyMathHelper.randomWithRange(0, range);
-				else if(dir == WyHelper.Direction.EAST)
-					newPosX -= WyMathHelper.randomWithRange(0, range);
-				else if(dir == WyHelper.Direction.NORTH)
-					newPosZ += WyMathHelper.randomWithRange(0, range);
-				else if(dir == WyHelper.Direction.WEST)  
-					newPosZ -= WyMathHelper.randomWithRange(0, range);
-
-				((EntityLivingBase)hit.entityHit).setPositionAndUpdate(hit.entityHit.posX + newPosX, hit.entityHit.posY + newPosY, hit.entityHit.posZ + newPosZ);*/
 			}
 		}
 	}
