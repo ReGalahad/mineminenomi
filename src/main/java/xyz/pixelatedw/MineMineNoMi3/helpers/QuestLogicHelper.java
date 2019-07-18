@@ -51,7 +51,7 @@ public class QuestLogicHelper
 	public static Quest getQuestlineCurrentQuest(Quest[] questline, QuestProperties questProps)
 	{	
 		if(questProps.hasQuestCompleted(questline[questline.length - 1]))
-				return null;
+			return null;
 		
 		for(int i = 0; i < questline.length; i++)
 		{

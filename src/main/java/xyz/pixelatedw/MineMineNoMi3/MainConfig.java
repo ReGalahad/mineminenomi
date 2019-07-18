@@ -67,14 +67,14 @@ public class MainConfig
 		enableOneFruitPerWorld = config.get(Configuration.CATEGORY_GENERAL, "Allow Only One Fruit Per World", false, "Restricts the Devil Fruit spawns to only 1 of each type per world; false by default").getBoolean();
 		enableYamiSpecialPower = config.get(Configuration.CATEGORY_GENERAL, "Allow Yami Users to eat another Devil Fruit", true, "Allows Yami Yami no Mi users to eat an additional fruit; true by default").getBoolean();
 		enableDFtoDrop = config.get(Configuration.CATEGORY_GENERAL, "Allow Devil Fruits to drop from leaves", false).getBoolean();
-		rateDFDrops = config.get(Configuration.CATEGORY_GENERAL, "Rate at which Devil Fruits drop from leaves", 1).getDouble();
+		rateDFDrops = config.get(Configuration.CATEGORY_GENERAL, "Rate at which Devil Fruits drop from leaves", 1.0).getDouble();
 		enableLogiaInvulnerability = config.get(Configuration.CATEGORY_GENERAL, "Allow Logia Invulnerability", true, "Allows logia users to avoid physical attacks; true by default").getBoolean();
 		enableExtraHearts = config.get(Configuration.CATEGORY_GENERAL, "Receive Extra Hearts", true, "Allows players to receive extra hearts based on their doriki; true by default").getBoolean();
 		enableMobRewards = config.get(Configuration.CATEGORY_GENERAL, "Allow Mob Rewards", true, "Allows mobs to reward doriki, bounty or items; true by default").getBoolean();
-		modifierDorikiReward = config.get(Configuration.CATEGORY_GENERAL, "Modifier for Doriki Reward", 1, "Multiplier for the doriki reward when killing a mob").getDouble();
+		modifierDorikiReward = config.get(Configuration.CATEGORY_GENERAL, "Modifier for Doriki Reward", 1.0, "Multiplier for the doriki reward when killing a mob").getDouble();
 		
 		enableShips = config.get("structures", "Allow Ships to Spawn", true).getBoolean();
-		modifierShipsSpawn = config.get("structures", "Modifier for Spawning Ships", 5).getDouble();
+		modifierShipsSpawn = config.get("structures", "Modifier for Spawning Ships", 5.0).getDouble();
 		maxDojoSpawn = config.get("structures", "Max Dojos to Spawn per World", 5).getInt();
 		enableCamps = config.get("structures", "Allow Camps to Spawn", true).getBoolean();
 		enableBases = config.get("structures", "Allow Bases to Spawn", true).getBoolean();
