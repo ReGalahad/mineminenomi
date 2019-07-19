@@ -19,6 +19,7 @@ import xyz.pixelatedw.MineMineNoMi3.events.devilfruits.EventsAbilityValidation;
 import xyz.pixelatedw.MineMineNoMi3.events.devilfruits.EventsDFWeaknesses;
 import xyz.pixelatedw.MineMineNoMi3.events.devilfruits.EventsEffectOverlay;
 import xyz.pixelatedw.MineMineNoMi3.events.devilfruits.EventsLogiaInvulnerability;
+import xyz.pixelatedw.MineMineNoMi3.events.devilfruits.EventsOneDevilFruit;
 import xyz.pixelatedw.MineMineNoMi3.events.devilfruits.EventsPassives;
 import xyz.pixelatedw.MineMineNoMi3.events.devilfruits.EventsSpecialFlying;
 import xyz.pixelatedw.MineMineNoMi3.events.devilfruits.EventsZoanPassives;
@@ -56,6 +57,9 @@ public class ListForge
 		
 		// Handles the quest related stuff, accepting quests or progressing them throught different means
 		MinecraftForge.EVENT_BUS.register(new EventsQuestsProgress());
+		
+		// Handles the logic when the config option is true
+		MinecraftForge.EVENT_BUS.register(new EventsOneDevilFruit());
 		
 		// Core devil fruit events
 		MinecraftForge.EVENT_BUS.register(new EventsAbilityValidation());
