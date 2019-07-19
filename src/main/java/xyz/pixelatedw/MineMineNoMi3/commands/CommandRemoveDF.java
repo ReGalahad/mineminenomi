@@ -10,6 +10,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilitySync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedWorldData;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSyncInfo;
 
@@ -29,7 +30,10 @@ public class CommandRemoveDF extends CommandBase
 		
 		ExtendedEntityData props = ExtendedEntityData.get(player);
 		AbilityProperties abilityProps = AbilityProperties.get(player);
+		ExtendedWorldData worldProps = ExtendedWorldData.get(player.worldObj);
 
+		worldProps.removeDevilFruitFromWorld(props.getUsedFruit());
+		
 		props.setUsedFruit("N/A");
 		props.setYamiPower(false);
 		props.setIsLogia(false);
