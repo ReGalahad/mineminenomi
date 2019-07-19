@@ -43,7 +43,7 @@ public class Cola extends ItemFood
 			}
 			
 	    	if(!player.capabilities.isCreativeMode)
-	    		WyTelemetry.sendMiscStat("bottlesOfColaDrank", "Bottles of Cola Drank", 1);
+	    		WyTelemetry.addMiscStat("bottlesOfColaDrank", "Bottles of Cola Drank", 1);
 			
 			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
 		}			

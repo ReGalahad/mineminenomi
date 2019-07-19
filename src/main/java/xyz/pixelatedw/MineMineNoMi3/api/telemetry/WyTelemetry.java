@@ -1,6 +1,6 @@
 package xyz.pixelatedw.MineMineNoMi3.api.telemetry;
 
-import java.io.IOException;
+import java.util.HashMap;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -12,6 +12,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 
 import com.google.gson.Gson;
 
+import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
 
@@ -21,6 +22,13 @@ public class WyTelemetry
 	private static String urlConnection;
 	private static HttpClient httpClient = HttpClientBuilder.create().build();
 	private static Gson gson = new Gson();
+	
+	private static StatDataCompound structuresDataCompound = new StatDataCompound();
+	private static StatDataCompound killsDataCompound = new StatDataCompound();
+	private static StatDataCompound abilitiesDataCompound = new StatDataCompound();
+	private static StatDataCompound miscDataCompound = new StatDataCompound();
+	private static StatDataCompound devilFruitsDataCompound = new StatDataCompound();
+	
 	static
 	{
 		if (WyDebug.isDebug())
@@ -29,37 +37,37 @@ public class WyTelemetry
 			urlConnection = "http://pixelatedw.xyz/api";
 	}
 
-	public static void sendStructureStat(String id, String name, int value)
+	public static void addStructureStat(String id, String name, int value)
 	{
-		StatData data = new StatData(id, name, value, 0);
-		sendData("/addStructureStat", gson.toJson(data));
+		structuresDataCompound.put(id, name, value);
+		//debugJSON(structuresDataCompound);
 	}
 	
-	public static void sendKillStat(String id, String name, int value)
+	public static void addKillStat(String id, String name, int value)
 	{
-		StatData data = new StatData(id, name, value, 0);
-		sendData("/addKillStat", gson.toJson(data));
+		killsDataCompound.put(id, name, value);
+		//debugJSON(killsDataCompound);
 	}
 	
-	public static void sendAbilityStat(String id, String name, int value)
+	public static void addAbilityStat(String id, String name, int value)
 	{
-		StatData data = new StatData(id, name, value, 0);
-		sendData("/addAbilityStat", gson.toJson(data));
+		abilitiesDataCompound.put(id, name, value);
+		//debugJSON(abilitiesDataCompound);
 	}
 	
-	public static void sendMiscStat(String id, String name, int value)
+	public static void addMiscStat(String id, String name, int value)
 	{
-		StatData data = new StatData(id, name, value, 0);
-		sendData("/addMiscStat", gson.toJson(data));
+		miscDataCompound.put(id, name, value);
+		//debugJSON(miscDataCompound);
 	}
 	
-	public static void sendDevilFruitStat(String id, String name, int value)
+	public static void addDevilFruitStat(String id, String name, int value)
 	{
-		StatData data = new StatData(id, name, value, 0);
-		sendData("/addDFStat", gson.toJson(data));
+		devilFruitsDataCompound.put(id, name, value);
+		//debugJSON(devilFruitsDataCompound);
 	}
 	
-	private static void sendData(String url, String json)
+	public static void sendAllData()
 	{
 		Thread httpThread = new Thread()
 		{
@@ -67,19 +75,41 @@ public class WyTelemetry
 			public void run()
 			{
 				try
-				{					
-					HttpPost post = new HttpPost(urlConnection + "" + url);
-					StringEntity postingString;
-					postingString = new StringEntity(json);
-					String size = WyHelper.formatBytes(json.getBytes().length);
-					WyDebug.debug("\n JSON: " + json + "\n Size: " + size);
-					post.setEntity(postingString);
-					post.setHeader("Content-Type", "application/json");
-					HttpResponse response = httpClient.execute(post);
-					ResponseHandler<String> handler = new BasicResponseHandler();
-					String body = handler.handleResponse(response);
+				{		
+					Object[][] paths = new Object[][] 
+					{
+						{"/addStructureStat", structuresDataCompound},
+						{"/addKillStat", killsDataCompound},
+						{"/addAbilityStat", abilitiesDataCompound},
+						{"/addMiscStat", miscDataCompound},
+						{"/addDFStat", devilFruitsDataCompound}
+					};
+							
+					for(Object[] o : paths)
+					{
+						String url = (String) o[0];
+						StatDataCompound compound = (StatDataCompound) o[1];
+						
+						if(compound.data.isEmpty())
+							continue;
+						
+						String json = gson.toJson(compound);
+						HttpPost post = new HttpPost(urlConnection + "" + url);
+						StringEntity postingString;
+						postingString = new StringEntity(json);
+						String size = WyHelper.formatBytes(json.getBytes().length);
+						debugJSON(compound);
+						post.setEntity(postingString);
+						post.setHeader("Content-Type", "application/json");
+						HttpResponse response = httpClient.execute(post);
+						ResponseHandler<String> handler = new BasicResponseHandler();
+						String body = handler.handleResponse(response);
+						System.out.println(body.isEmpty() ? "Success" : body);
+						
+						compound.empty();
+					}
 				}
-				catch (IOException e)
+				catch (Exception e)
 				{
 					e.printStackTrace();
 				}			
@@ -89,19 +119,53 @@ public class WyTelemetry
 		httpThread.start();
 	}
 
+	private static void debugJSON(StatDataCompound compound)
+	{
+		String json = gson.toJson(compound);
+		String size = WyHelper.formatBytes(json.getBytes().length);
+		WyDebug.debug("\n JSON: " + json + "\n Size: " + size);
+	}
+	
+	private static class StatDataCompound
+	{
+		private String mcVersion;
+		private String modVersion;
+		private int source;
+		private HashMap<String, StatData> data = new HashMap<String, StatData>();
+		
+		public StatDataCompound()
+		{
+			this.mcVersion = ID.PROJECT_MCVERSION;
+			this.modVersion = ID.PROJECT_VERSION;
+			this.source = 0;
+		}
+		
+		public void put(String id, String name, int value)
+		{
+			if(data.containsKey(id))
+				data.get(id).value += value;
+			else
+			{
+				StatData newData = new StatData(name, value);
+				data.put(id, newData);
+			}
+		}
+		
+		public void empty()
+		{
+			data = new HashMap<String, StatData>(); 
+		}
+	}
+	
 	private static class StatData
 	{
-		private String id;
 		private String name;
 		private int value;
-		private int source;
 		
-		public StatData(String id, String name, int value, int source)
+		public StatData(String name, int value)
 		{
-			this.id = id;
 			this.name = name;
 			this.value = value;
-			this.source = source;
 		}
 	}
 }

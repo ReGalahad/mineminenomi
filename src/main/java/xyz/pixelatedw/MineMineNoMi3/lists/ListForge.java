@@ -30,6 +30,7 @@ public class ListForge
 	{
 		// Handles some core features of the mod, like IEEP registrations, update notifications or Early Access protection 		
 		MinecraftForge.EVENT_BUS.register(new EventsCore());
+		FMLCommonHandler.instance().bus().register(new EventsCore());
 		
 		// Handles different event driven logic about crew members
 		MinecraftForge.EVENT_BUS.register(new EventsCrew());

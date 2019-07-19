@@ -22,7 +22,7 @@ public class DialEisen extends Item
     	if(!world.isRemote && player.isSneaking())
     	{
 	    	if(!player.capabilities.isCreativeMode)
-	    		WyTelemetry.sendMiscStat("eisenDialsPlaced", "Eisen Dials Placed", 1);
+	    		WyTelemetry.addMiscStat("eisenDialsPlaced", "Eisen Dials Placed", 1);
     		
 	    	world.setBlock(i1, i2 + 1, i3, ListMisc.DialEisenBlock);
 	    	itemStack.stackSize--;

@@ -70,7 +70,7 @@ public class Ability
 			}
 			
 	    	if(!player.capabilities.isCreativeMode)
-	    		WyTelemetry.sendAbilityStat(this.getAttribute().getAbilityTexture(), this.getAttribute().getAttributeName(), 1);
+	    		WyTelemetry.addAbilityStat(this.getAttribute().getAbilityTexture(), this.getAttribute().getAttributeName(), 1);
 	    	
 	    	ExtendedEntityData props = ExtendedEntityData.get(player);
 	    	AbilityProperties abilityProps = AbilityProperties.get(player);
@@ -224,7 +224,7 @@ public class Ability
 			player.worldObj.newExplosion(player, player.posX, player.posY, player.posZ, this.attr.getAbilityExplosionPower(), this.attr.canAbilityExplosionSetFire(), MainConfig.enableGriefing ? this.attr.canAbilityExplosionDestroyBlocks() : false);		
 				
     	if(!ID.DEV_EARLYACCESS && !player.capabilities.isCreativeMode)
-    		WyTelemetry.sendAbilityStat(this.getAttribute().getAbilityTexture(), this.getAttribute().getAttributeName(), 1);
+    		WyTelemetry.addAbilityStat(this.getAttribute().getAbilityTexture(), this.getAttribute().getAttributeName(), 1);
 
 		(new Update(player, attr)).start();
 	}
