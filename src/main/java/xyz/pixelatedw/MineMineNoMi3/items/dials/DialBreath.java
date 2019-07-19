@@ -22,7 +22,7 @@ public class DialBreath extends Item
     	if(!world.isRemote && player.isSneaking())
     	{
 	    	if(!player.capabilities.isCreativeMode)
-	    		WyTelemetry.sendMiscStat("breathDialsPlaced", "Breath Dials Placed", 1);
+	    		WyTelemetry.addMiscStat("breathDialsPlaced", "Breath Dials Placed", 1);
     		
 	    	world.setBlock(i1, i2 + 1, i3, ListMisc.DialBreathBlock);
 	    	itemStack.stackSize--;

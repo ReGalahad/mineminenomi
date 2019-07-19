@@ -30,7 +30,7 @@ public class DialImpact extends Item
 				world.newExplosion(player, player.posX, player.posY, player.posZ, 3, false, MainConfig.enableGriefing);
 				
 		    	if(!player.capabilities.isCreativeMode)
-		    		WyTelemetry.sendMiscStat("impactDialsUsed", "Impact Dials Used", 1);
+		    		WyTelemetry.addMiscStat("impactDialsUsed", "Impact Dials Used", 1);
 		    	
 				itemStack.damageItem(2, player);
 	    	}	    
@@ -45,7 +45,7 @@ public class DialImpact extends Item
     	if(!world.isRemote && player.isSneaking())
     	{
 	    	if(!player.capabilities.isCreativeMode)
-	    		WyTelemetry.sendMiscStat("impactDialsPlaced", "Impact Dials Placed", 1);
+	    		WyTelemetry.addMiscStat("impactDialsPlaced", "Impact Dials Placed", 1);
 
 	    	world.setBlock(i1, i2 + 1, i3, ListMisc.DialImpactBlock);
 	    	itemStack.stackSize--;

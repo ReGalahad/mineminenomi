@@ -7,10 +7,8 @@ import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
-import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
-import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 
 public class BellyPouch extends Item
 {
@@ -37,13 +35,13 @@ public class BellyPouch extends Item
 				props.setBelly(Values.MAX_GENERAL);	
 			
 	    	if(!player.capabilities.isCreativeMode)
-	    		WyTelemetry.sendMiscStat("bellyEarnedFromPouches", "Belly Earned From Pouches", amount);
+	    		WyTelemetry.addMiscStat("bellyEarnedFromPouches", "Belly Earned From Pouches", amount);
 	    	
-	    	--itemStack.stackSize;
+	    	--itemStack.stackSize;		
 		}
 		
-		WyNetworkHelper.sendToServer(new PacketSync(props));
-		
+		//WyNetworkHelper.sendToServer(new PacketSync(props));
+
 		return itemStack;
 	}
 

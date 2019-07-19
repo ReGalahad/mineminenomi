@@ -30,7 +30,7 @@ public class DialAxe extends Item
 	    		world.spawnEntityInWorld(proj);
 	    		
 		    	if(!player.capabilities.isCreativeMode)
-		    		WyTelemetry.sendMiscStat("axeDialsUsed", "Axe Dials Used", 1);
+		    		WyTelemetry.addMiscStat("axeDialsUsed", "Axe Dials Used", 1);
 	    		
 				itemStack.damageItem(2, player);
 	    	}	    
@@ -46,7 +46,7 @@ public class DialAxe extends Item
     	{
     		
 	    	if(!player.capabilities.isCreativeMode)
-	    		WyTelemetry.sendMiscStat("axeDialsPlaced", "Axe Dials Placed", 1);
+	    		WyTelemetry.addMiscStat("axeDialsPlaced", "Axe Dials Placed", 1);
     		
 	    	world.setBlock(i1, i2 + 1, i3, ListMisc.DialAxeBlock);
 	    	itemStack.stackSize--;

@@ -37,7 +37,7 @@ public class DialFire extends Item
 				world.spawnEntityInWorld(fireball);	
 				
 		    	if(!player.capabilities.isCreativeMode)
-		    		WyTelemetry.sendMiscStat("fireDialsUsed", "Fire Dials Used", 1);
+		    		WyTelemetry.addMiscStat("fireDialsUsed", "Fire Dials Used", 1);
 				
 				itemStack.damageItem(2, player);
 	    	}	    
@@ -52,7 +52,7 @@ public class DialFire extends Item
     	if(!world.isRemote && player.isSneaking())
     	{
 	    	if(!player.capabilities.isCreativeMode)
-	    		WyTelemetry.sendMiscStat("fireDialsPlaced", "Fire Dials Placed", 1);
+	    		WyTelemetry.addMiscStat("fireDialsPlaced", "Fire Dials Placed", 1);
     		
 	    	world.setBlock(i1, i2 + 1, i3, ListMisc.DialFireBlock);
 	    	itemStack.stackSize--;

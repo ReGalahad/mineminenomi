@@ -118,7 +118,7 @@ public class MainWorldGen implements IWorldGenerator
 				if(WyDebug.isDebug())
 					System.out.println("" + blockToSpawn.getLocalizedName() + " spawned at /tp @p " + posX + " " + (posY + 1) + " " + posZ);
 				
-				WyTelemetry.sendStructureStat(WyHelper.getFancyName(blockToSpawn.getLocalizedName()), blockToSpawn.getLocalizedName(), 1);
+				WyTelemetry.addStructureStat(WyHelper.getFancyName(blockToSpawn.getLocalizedName()), blockToSpawn.getLocalizedName(), 1);
 		    	
 		    	return true;
 			}
@@ -166,7 +166,7 @@ public class MainWorldGen implements IWorldGenerator
 					if(WyDebug.isDebug())
 						System.out.println("" + sch.getName() + " spawned at /tp @p " + posX + " " + posY + " " + posZ);
 	
-					WyTelemetry.sendStructureStat(WyHelper.getFancyName(sch.getName()), sch.getName(), 1);
+					WyTelemetry.addStructureStat(WyHelper.getFancyName(sch.getName()), sch.getName(), 1);
 				}   	
 				
 				return spawned;

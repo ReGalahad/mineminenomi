@@ -54,7 +54,7 @@ public class Flintlock extends Item
 							player.worldObj.spawnEntityInWorld(proj);
 							
 							String id = (itemStack.getTagCompound().getInteger("bulletType") == 0 ? "normal" : "kairoseki");
-					    	WyTelemetry.sendMiscStat(id + "BulletsShot", WyHelper.upperCaseFirst(id) + " Bullets Shot", 1);
+					    	WyTelemetry.addMiscStat(id + "BulletsShot", WyHelper.upperCaseFirst(id) + " Bullets Shot", 1);
 						}
 	
 						itemStack.getTagCompound().setBoolean("canUse", false);

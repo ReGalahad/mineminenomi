@@ -5,6 +5,9 @@ import java.net.URL;
 import java.util.Scanner;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
+import cpw.mods.fml.common.gameevent.TickEvent.Phase;
+import cpw.mods.fml.relauncher.Side;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
@@ -24,6 +27,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
+import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
 import xyz.pixelatedw.MineMineNoMi3.events.customevents.YomiTriggerEvent;
@@ -206,6 +210,18 @@ public class EventsCore
 						e.printStackTrace();
 					}
 				}
+			}
+		}
+	}
+	
+	@SubscribeEvent
+	public void onPlayerTick(TickEvent.WorldTickEvent event)
+	{		
+		if(event.phase == Phase.END && event.side == Side.SERVER)
+		{
+			if(event.world.getWorldTime() % 12000 == 0)
+			{
+				WyTelemetry.sendAllData();
 			}
 		}
 	}

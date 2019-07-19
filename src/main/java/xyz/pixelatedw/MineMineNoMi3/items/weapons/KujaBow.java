@@ -74,7 +74,7 @@ public class KujaBow extends Item
 				if (!world.isRemote)
 				{
 					world.spawnEntityInWorld(entityarrow);
-					WyTelemetry.sendMiscStat("kujaArrowsShot", "Kuja Arrows Shot", 1);
+					WyTelemetry.addMiscStat("kujaArrowsShot", "Kuja Arrows Shot", 1);
 				}
 			}
 		}

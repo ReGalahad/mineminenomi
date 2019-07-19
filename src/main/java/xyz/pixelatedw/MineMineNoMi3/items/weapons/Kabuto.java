@@ -74,7 +74,7 @@ public class Kabuto extends Item
 				if (!world.isRemote)
 				{
 					world.spawnEntityInWorld(entityarrow);
-					WyTelemetry.sendMiscStat("popGreenShot", "Pop Greens Shot", 1);
+					WyTelemetry.addMiscStat("popGreenShot", "Pop Greens Shot", 1);
 		    		itemStack.getTagCompound().setBoolean("canUse", false);
 				}
 			}
