@@ -355,12 +355,14 @@ public class EventsPassives
 	{
 		if (event.oldPlayerData.getUsedFruit().equalsIgnoreCase("yomiyomi") && !event.oldPlayerData.getZoanPoint().equalsIgnoreCase("yomi"))
 		{
-
 			event.newPlayerData.setUsedFruit("yomiyomi");
 			event.newPlayerData.setZoanPoint("yomi");
 
 			EntityPlayer player = (EntityPlayer) event.entity;
-
+			EntityPlayer oldPlayer = (EntityPlayer) event.oldPlayerData.getEntity();
+			
+			player.setPosition(oldPlayer.posX, oldPlayer.posY, oldPlayer.posZ);
+			
 			WyNetworkHelper.sendTo(new PacketSync(event.newPlayerData), (EntityPlayerMP) player);
 			WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), event.newPlayerData));
 		}
