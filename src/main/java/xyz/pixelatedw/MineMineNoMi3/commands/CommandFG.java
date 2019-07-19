@@ -8,6 +8,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.WorldServer;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.api.Schematic;
 import xyz.pixelatedw.MineMineNoMi3.api.WySchematicHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketQuestSync;
@@ -30,6 +31,7 @@ import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListQuests;
 import xyz.pixelatedw.MineMineNoMi3.world.TeleporterScenarioArena;
 import xyz.pixelatedw.MineMineNoMi3.world.structures.StructureBanditSmallBase;
+import xyz.pixelatedw.MineMineNoMi3.world.structures.StructureLargeShip;
 import xyz.pixelatedw.MineMineNoMi3.world.structures.StructureMarineLargeBase;
 
 public class CommandFG extends CommandBase
@@ -133,7 +135,19 @@ public class CommandFG extends CommandBase
 				StructureMarineLargeBase.build(WySchematicHelper.load("marineLargeBase"), player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ, player.worldObj.getBiomeGenForCoordsBody((int)player.posX, (int)player.posZ));
 			else if(str[0].equalsIgnoreCase("banditbase"))
 				StructureBanditSmallBase.build(WySchematicHelper.load("banditBase"), player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ, player.worldObj.getBiomeGenForCoordsBody((int)player.posX, (int)player.posZ));
-
+			else if(str[0].equalsIgnoreCase("marineShip"))
+			{
+				Schematic sch = WySchematicHelper.load("marineLargeShip");
+				WySchematicHelper.build(sch, player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ);
+				StructureLargeShip.populate((int)player.posX, (int)player.posY, (int)player.posZ, player.worldObj, sch.getName());
+			}
+			else if(str[0].equalsIgnoreCase("pirateShip"))
+			{
+				Schematic sch = WySchematicHelper.load("pyrateLargeShip");
+				WySchematicHelper.build(sch, player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ);
+				StructureLargeShip.populate((int)player.posX, (int)player.posY, (int)player.posZ, player.worldObj, sch.getName());
+			}
+			
 			if(toSpawn != null)
 			{
 				toSpawn.setLocationAndAngles(player.posX, player.posY, player.posZ, 0, 0);
