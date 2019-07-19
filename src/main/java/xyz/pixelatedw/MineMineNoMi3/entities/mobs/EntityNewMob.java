@@ -75,9 +75,7 @@ public class EntityNewMob extends EntityMob implements IDynamicRenderer, INBTEnt
 		this.doriki = nbt.getInteger("Doriki");
 		this.belly = nbt.getInteger("Belly");
 
-		this.hasBusoHaki = nbt.getBoolean("HasBusoHaki");
-		
-		//System.out.println("" + this.textureId);
+		this.hasBusoHaki = nbt.getBoolean("HasBusoHaki");	
 	}
 	
 	public void updateNBT()
@@ -87,17 +85,14 @@ public class EntityNewMob extends EntityMob implements IDynamicRenderer, INBTEnt
 
 		WyNetworkHelper.sendToAll(new PacketEntityNBTSync(this.getEntityId(), nbtClone));
 	}
-	
-	// Used mostly for debugging
+
 	@Override
 	public void onEntityUpdate()
 	{
 		super.onEntityUpdate();
 		
-		//if (this.ticksExisted % 100 == 0)
-		//	this.updateNBT();
-		
-		//System.out.println(this.getEntityId() + " " + this.textureId);
+		if(this.ticksExisted < 10)
+			this.updateNBT();
 	}
 	
 	@Override

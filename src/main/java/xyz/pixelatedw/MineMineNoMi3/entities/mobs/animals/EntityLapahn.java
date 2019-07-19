@@ -19,14 +19,12 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
-import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.INBTEntity;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.lapahn.EntityAILapahnJump;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.lapahn.EntityAILapahnRage;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.bandits.BanditData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.PirateData;
-import xyz.pixelatedw.MineMineNoMi3.packets.PacketEntityNBTSync;
 
 public class EntityLapahn extends EntityNewMob implements INBTEntity
 {
@@ -69,7 +67,7 @@ public class EntityLapahn extends EntityNewMob implements INBTEntity
 		super.onEntityUpdate();
 		if (!this.worldObj.isRemote)
 		{
-			//System.out.println(this.isEnraged);
+			
 		}
 	}
 	
@@ -101,15 +99,6 @@ public class EntityLapahn extends EntityNewMob implements INBTEntity
 		return true;
 	}
 
-	@Override
-	public void updateNBT()
-	{
-		NBTTagCompound nbtClone = new NBTTagCompound();
-		this.writeEntityToNBT(nbtClone);
-
-		WyNetworkHelper.sendToAll(new PacketEntityNBTSync(this.getEntityId(), nbtClone));
-	}
-	
 	public boolean isEnraged()
 	{
 		return this.isEnraged;
