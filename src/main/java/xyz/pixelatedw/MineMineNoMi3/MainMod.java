@@ -61,8 +61,8 @@ public class MainMod
 
 		proxy.preInit();
 		
-		//if(!WyDebug.isDebug())
-		//{
+		if(!WyDebug.isDebug())
+		{
 			WyTelemetry.addMiscStat("onlinePlayers", "Online Players", 1);
 			WyTelemetry.sendAllData();
 			
@@ -83,7 +83,7 @@ public class MainMod
 					}
 			    }
 			});
-		//}
+		}
 	}
 
 	@EventHandler
