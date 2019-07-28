@@ -1,6 +1,5 @@
 package xyz.pixelatedw.MineMineNoMi3.items;
 
-import java.util.Arrays;
 import java.util.List;
 
 import net.minecraft.client.resources.I18n;
@@ -49,7 +48,6 @@ public class AkumaNoMi extends ItemFood
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
 	{
-		System.out.println(Arrays.toString(ExtendedWorldData.get(world).getDevilFruitsInWorld().toArray()));
 		player.setItemInUse(itemStack, itemUseDuration);
 		return itemStack;
 	}

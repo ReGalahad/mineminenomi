@@ -218,7 +218,7 @@ public class GoroAbilities
 			this.isOnCooldown = true;	
 			WyNetworkHelper.sendTo(new PacketAbilitySync(AbilityProperties.get(player)), (EntityPlayerMP) player);
 
-	    	if(!ID.DEV_EARLYACCESS && !player.capabilities.isCreativeMode)
+	    	if(!player.capabilities.isCreativeMode)
 	    		WyTelemetry.addAbilityStat(this.getAttribute().getAbilityTexture(), this.getAttribute().getAttributeName(), 1);
 
 			if(projectile != null)

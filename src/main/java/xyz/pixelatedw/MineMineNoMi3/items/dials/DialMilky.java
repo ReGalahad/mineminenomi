@@ -4,7 +4,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.ExtraProjectiles.MilkyDialProjectile;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListExtraAttributes;
@@ -30,7 +29,7 @@ public class DialMilky extends Item
 				
 	    		world.spawnEntityInWorld(proj);
 				
-		    	if(!ID.DEV_EARLYACCESS && !player.capabilities.isCreativeMode)
+		    	if(!player.capabilities.isCreativeMode)
 		    		WyTelemetry.addMiscStat("milkyDialsUsed", "Milky Dials Used", 1);
 		    	
 				itemStack.damageItem(2, player);

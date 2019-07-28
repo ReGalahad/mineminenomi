@@ -6,7 +6,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
@@ -46,7 +45,7 @@ public class DialReject extends Item
     {
     	if(!world.isRemote && player.isSneaking())
     	{
-	    	if(!ID.DEV_EARLYACCESS && !player.capabilities.isCreativeMode)
+	    	if(!player.capabilities.isCreativeMode)
 	    		WyTelemetry.addMiscStat("rejectDialsPlaced", "Reject Dials Placed", 1);
 	    	
 	    	world.setBlock(i1, i2 + 1, i3, ListMisc.DialRejectBlock);
