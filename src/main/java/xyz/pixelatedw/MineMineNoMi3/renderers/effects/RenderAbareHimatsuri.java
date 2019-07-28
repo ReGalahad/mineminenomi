@@ -1,4 +1,4 @@
-package xyz.pixelatedw.MineMineNoMi3.abilities.extra.renderers;
+package xyz.pixelatedw.MineMineNoMi3.renderers.effects;
 
 import org.lwjgl.opengl.GL11;
 
@@ -7,8 +7,8 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
-import xyz.pixelatedw.MineMineNoMi3.abilities.extra.models.ModelAbareHimatsuri;
-import xyz.pixelatedw.MineMineNoMi3.abilities.extra.models.ModelCandleLock;
+import xyz.pixelatedw.MineMineNoMi3.models.effects.ModelAbareHimatsuri;
+import xyz.pixelatedw.MineMineNoMi3.models.effects.ModelCandleLock;
 
 public class RenderAbareHimatsuri extends Render
 {

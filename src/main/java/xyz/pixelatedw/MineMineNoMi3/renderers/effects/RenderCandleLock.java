@@ -1,4 +1,4 @@
-package xyz.pixelatedw.MineMineNoMi3.abilities.extra.renderers;
+package xyz.pixelatedw.MineMineNoMi3.renderers.effects;
 
 import org.lwjgl.opengl.GL11;
 
@@ -9,7 +9,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import xyz.pixelatedw.MineMineNoMi3.ID;
-import xyz.pixelatedw.MineMineNoMi3.abilities.extra.models.ModelCandleLock;
+import xyz.pixelatedw.MineMineNoMi3.models.effects.ModelCandleLock;
 
 public class RenderCandleLock extends Render
 {

@@ -1,4 +1,4 @@
-package xyz.pixelatedw.MineMineNoMi3.abilities.extra.renderers;
+package xyz.pixelatedw.MineMineNoMi3.renderers.effects;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
@@ -7,7 +7,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import xyz.pixelatedw.MineMineNoMi3.ID;
-import xyz.pixelatedw.MineMineNoMi3.abilities.extra.models.ModelChains;
+import xyz.pixelatedw.MineMineNoMi3.models.effects.ModelChains;
 
 public class RenderChains extends Render
 {

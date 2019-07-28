@@ -1,4 +1,4 @@
-package xyz.pixelatedw.MineMineNoMi3.abilities.extra.effects;
+package xyz.pixelatedw.MineMineNoMi3.abilities.effects;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;

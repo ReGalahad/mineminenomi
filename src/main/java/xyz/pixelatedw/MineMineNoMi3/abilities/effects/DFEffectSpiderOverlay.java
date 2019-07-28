@@ -1,4 +1,4 @@
-package xyz.pixelatedw.MineMineNoMi3.abilities.extra.effects;
+package xyz.pixelatedw.MineMineNoMi3.abilities.effects;
 
 import org.lwjgl.opengl.GL11;
 

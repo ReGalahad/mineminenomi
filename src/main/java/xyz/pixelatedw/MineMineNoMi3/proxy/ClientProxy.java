@@ -59,13 +59,6 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityLucci;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityLucciL;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntitySpandam;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
-import xyz.pixelatedw.MineMineNoMi3.items.weapons.renderers.RenderCoreWeapon;
-import xyz.pixelatedw.MineMineNoMi3.items.weapons.renderers.RenderCoreWeapon2;
-import xyz.pixelatedw.MineMineNoMi3.items.weapons.renderers.RenderWeaponBisento;
-import xyz.pixelatedw.MineMineNoMi3.items.weapons.renderers.RenderWeaponDurandal;
-import xyz.pixelatedw.MineMineNoMi3.items.weapons.renderers.RenderWeaponKatana;
-import xyz.pixelatedw.MineMineNoMi3.items.weapons.renderers.RenderWeaponKiribachi;
-import xyz.pixelatedw.MineMineNoMi3.items.weapons.renderers.RenderWeaponPipe;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListDevilFruits;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.models.blocks.ModelFlameDial;
@@ -108,6 +101,13 @@ import xyz.pixelatedw.MineMineNoMi3.renderers.blocks.RenderBlockWantedPostersPac
 import xyz.pixelatedw.MineMineNoMi3.renderers.entities.MobRenderer;
 import xyz.pixelatedw.MineMineNoMi3.renderers.entities.mobs.humanoids.RenderBlackKnight;
 import xyz.pixelatedw.MineMineNoMi3.renderers.entities.mobs.humanoids.RenderDoppelman;
+import xyz.pixelatedw.MineMineNoMi3.renderers.items.RenderCoreWeapon;
+import xyz.pixelatedw.MineMineNoMi3.renderers.items.RenderCoreWeapon2;
+import xyz.pixelatedw.MineMineNoMi3.renderers.items.RenderWeaponBisento;
+import xyz.pixelatedw.MineMineNoMi3.renderers.items.RenderWeaponDurandal;
+import xyz.pixelatedw.MineMineNoMi3.renderers.items.RenderWeaponKatana;
+import xyz.pixelatedw.MineMineNoMi3.renderers.items.RenderWeaponKiribachi;
+import xyz.pixelatedw.MineMineNoMi3.renderers.items.RenderWeaponPipe;
 
 public class ClientProxy extends CommonProxy
 {

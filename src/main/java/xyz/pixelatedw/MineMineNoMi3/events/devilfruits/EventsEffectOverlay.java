@@ -11,13 +11,13 @@ import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import xyz.pixelatedw.MineMineNoMi3.ID;
-import xyz.pixelatedw.MineMineNoMi3.abilities.extra.models.ModelCandleLock;
-import xyz.pixelatedw.MineMineNoMi3.abilities.extra.models.ModelChains;
-import xyz.pixelatedw.MineMineNoMi3.abilities.extra.renderers.RenderCandleLock;
-import xyz.pixelatedw.MineMineNoMi3.abilities.extra.renderers.RenderChains;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyRenderHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
+import xyz.pixelatedw.MineMineNoMi3.models.effects.ModelCandleLock;
+import xyz.pixelatedw.MineMineNoMi3.models.effects.ModelChains;
+import xyz.pixelatedw.MineMineNoMi3.renderers.effects.RenderCandleLock;
+import xyz.pixelatedw.MineMineNoMi3.renderers.effects.RenderChains;
 
 public class EventsEffectOverlay
 {

@@ -14,7 +14,7 @@ import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.abilities.SukeAbilities.ShishaNoTe;
 import xyz.pixelatedw.MineMineNoMi3.abilities.SukeAbilities.Skatting;
 import xyz.pixelatedw.MineMineNoMi3.abilities.SukeAbilities.SukePunch;
-import xyz.pixelatedw.MineMineNoMi3.abilities.extra.effects.DFEffectSpiderOverlay;
+import xyz.pixelatedw.MineMineNoMi3.abilities.effects.DFEffectSpiderOverlay;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;

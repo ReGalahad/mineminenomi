@@ -12,7 +12,7 @@ import net.minecraft.util.MovingObjectPosition;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.Values;
-import xyz.pixelatedw.MineMineNoMi3.abilities.extra.effects.DFEffectLogiaOff;
+import xyz.pixelatedw.MineMineNoMi3.abilities.effects.DFEffectLogiaOff;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
