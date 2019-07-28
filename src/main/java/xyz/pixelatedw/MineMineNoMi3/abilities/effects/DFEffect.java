@@ -1,10 +1,10 @@
-package xyz.pixelatedw.MineMineNoMi3.abilities.extra.effects;
+package xyz.pixelatedw.MineMineNoMi3.abilities.effects;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayerMP;
 import xyz.pixelatedw.MineMineNoMi3.ID;
-import xyz.pixelatedw.MineMineNoMi3.abilities.extra.effects.DFEffect.Update;
+import xyz.pixelatedw.MineMineNoMi3.abilities.effects.DFEffect.Update;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;

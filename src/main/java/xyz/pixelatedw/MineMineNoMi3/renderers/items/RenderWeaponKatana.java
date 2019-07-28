@@ -1,4 +1,4 @@
-package xyz.pixelatedw.MineMineNoMi3.items.weapons.renderers;
+package xyz.pixelatedw.MineMineNoMi3.renderers.items;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
@@ -16,10 +16,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.client.IItemRenderer;
 
-public class RenderWeaponPipe implements IItemRenderer
+public class RenderWeaponKatana implements IItemRenderer
 {
 
-	public RenderWeaponPipe()
+	public RenderWeaponKatana()
 	{
 
 	}
@@ -115,10 +115,10 @@ public class RenderWeaponPipe implements IItemRenderer
 				GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 				GL11.glTranslatef(-f4, -f5, 0.0F);
 				float f6 = 1.6F;
-				GL11.glScalef(f6, f6 + 0.3F, f6);
+				GL11.glScalef(f6, f6, f6);
 				GL11.glRotatef(-5.0F, 0.0F, 1.0F, 0.0F);
 				GL11.glRotatef(345.0F, 0.0F, 0.0F, 1.0F);
-				GL11.glTranslatef(-0.25F, 0.05F, 0.0F);
+				GL11.glTranslatef(-0.45F, 0.25F, 0.0F);
 
 				boolean isFirstPerson = false;
 				if (data[1] != null && data[1] instanceof EntityPlayer)

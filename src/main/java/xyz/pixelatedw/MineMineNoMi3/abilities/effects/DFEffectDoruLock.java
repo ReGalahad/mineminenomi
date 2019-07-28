@@ -1,4 +1,4 @@
-package xyz.pixelatedw.MineMineNoMi3.abilities.extra.effects;
+package xyz.pixelatedw.MineMineNoMi3.abilities.effects;
 
 import org.lwjgl.opengl.GL11;
 
@@ -7,12 +7,12 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 
-public class DFEffectRustOverlay extends DFEffect
+public class DFEffectDoruLock extends DFEffect
 {
 
-	public DFEffectRustOverlay(EntityLivingBase entity, int timer)
+	public DFEffectDoruLock(EntityLivingBase entity, int timer)
 	{
-		super(entity, timer, ID.EXTRAEFFECT_RUSTOVERLAY);
+		super(entity, timer, ID.EXTRAEFFECT_DORULOCK);
 	}
 
 	public void onEffectStart(EntityLivingBase entity)

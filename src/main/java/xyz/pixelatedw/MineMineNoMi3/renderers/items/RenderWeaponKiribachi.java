@@ -1,4 +1,4 @@
-package xyz.pixelatedw.MineMineNoMi3.items.weapons.renderers;
+package xyz.pixelatedw.MineMineNoMi3.renderers.items;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
@@ -16,10 +16,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.client.IItemRenderer;
 
-public class RenderWeaponBisento implements IItemRenderer
+public class RenderWeaponKiribachi implements IItemRenderer
 {
 
-	public RenderWeaponBisento()
+	public RenderWeaponKiribachi()
 	{
 
 	}
@@ -115,10 +115,10 @@ public class RenderWeaponBisento implements IItemRenderer
 				GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 				GL11.glTranslatef(-f4, -f5, 0.0F);
 				float f6 = 2.2F;
-				GL11.glScalef(f6 + 0.5F, f6, f6);
+				GL11.glScalef(f6, f6, f6);
 				GL11.glRotatef(-5.0F, 0.0F, 1.0F, 0.0F);
-				GL11.glRotatef(395.0F, 0.0F, 0.0F, 1.0F);
-				GL11.glTranslatef(-0.25F, -0.35F, 0.0F);
+				GL11.glRotatef(345.0F, 0.0F, 0.0F, 1.0F);
+				GL11.glTranslatef(-0.57F, 0.18F, 0.0F);
 
 				boolean isFirstPerson = false;
 				if (data[1] != null && data[1] instanceof EntityPlayer)
@@ -129,8 +129,7 @@ public class RenderWeaponBisento implements IItemRenderer
 					}
 					else
 					{
-						GL11.glRotatef(300.0F, 0.0F, 0.0F, 1.0F);
-						GL11.glTranslatef(-0.6F, 0.5F, -0.1F);
+						GL11.glTranslatef(0.15F, 0.11F, -0.05F);
 						GL11.glScalef(0.6F, 0.6F, 0.6F);
 						isFirstPerson = true;
 					}

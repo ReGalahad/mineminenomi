@@ -1,4 +1,4 @@
-package xyz.pixelatedw.MineMineNoMi3.items.weapons.renderers;
+package xyz.pixelatedw.MineMineNoMi3.renderers.items;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
