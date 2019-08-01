@@ -1,8 +1,12 @@
 package xyz.pixelatedw.MineMineNoMi3.events;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.Scanner;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.BasicResponseHandler;
+
+import com.google.gson.internal.LinkedTreeMap;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
@@ -23,13 +27,13 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
+import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
 import xyz.pixelatedw.MineMineNoMi3.events.customevents.YomiTriggerEvent;
 
 public class EventsCore
@@ -152,20 +156,6 @@ public class EventsCore
 	@SubscribeEvent
 	public void onEntityJoinWorld(EntityJoinWorldEvent event)
 	{
-		if(event.entity instanceof EntityNewMob)
-		{
-			/*System.out.println(event.entity);
-			System.out.println(event.entity.getEntityId() + " " + event.world.getEntityByID(event.entity.getEntityId()));
-			if(!event.world.isRemote)
-			{
-				System.out.println("===================");
-				System.out.println(event.entity.getEntityId() + " " + event.world.getEntityByID(event.entity.getEntityId()));
-				EntityNewMob target = (EntityNewMob) event.entity;
-				System.out.println("" + target.getTextureId());
-				System.out.println("===================");
-				target.updateNBT();
-			}*/
-		}
 		if (event.entity instanceof EntityPlayer)
 		{
 			EntityPlayer player = (EntityPlayer) event.entity;
@@ -173,41 +163,51 @@ public class EventsCore
 			if (!player.worldObj.isRemote)
 			{
 				if(ID.DEV_EARLYACCESS && !WyDebug.isDebug())
-				{
 					WyHelper.isPatreon(player);
-				}
 				
 				if(MainConfig.enableUpdateMsg)
 				{
 					try 
 					{
-						URL url = new URL("https://dl.dropboxusercontent.com/s/3io0vaqiqaoabnh/version.txt?dl=0");
-						Scanner scanner = new Scanner(url.openStream());
-						
-						while(scanner.hasNextLine())
-						{
-							String[] parts = scanner.nextLine().split("\\-");
+						String[] version = ID.PROJECT_VERSION.split("\\.");
 	
-							if(ID.PROJECT_MCVERSION.equals(parts[0]))
-							{
-								String cloudVersion = parts[1].replace(".", "");
-								String localVersion = ID.PROJECT_VERSION.replace(".", "");
-								
-								if(Integer.parseInt(localVersion) < Integer.parseInt(cloudVersion))
-								{
-									ChatStyle updateStyle = new ChatStyle().setColor(EnumChatFormatting.GOLD).setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "http://pixelatedw.xyz/versions"));
-									
-									player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.RED + "" + EnumChatFormatting.BOLD + "[UPDATE]" + EnumChatFormatting.RED + " Mine Mine no Mi " + parts[1] + " is now available !").setChatStyle(updateStyle) );
-									player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.RED + "Download it from the official website : [http://pixelatedw.xyz/versions]").setChatStyle(updateStyle) );
-								}
-							}					
-						}
+						int x = Integer.parseInt(version[0]) * 100;
+						int y = Integer.parseInt(version[1]) * 10;
+						int z = Integer.parseInt(version[2]);
 						
-						scanner.close();
-					} 
-					catch (IOException e) 
+						int versionCode = x + y + z;
+						
+						String url = "/getNewestVersion";
+						String json = Values.gson.toJson(ID.PROJECT_MCVERSION);
+						
+						HttpPost post = new HttpPost(Values.urlConnection + "" + url);	
+						StringEntity postingString;
+						postingString = new StringEntity(json);
+						post.setEntity(postingString);
+						post.setHeader("Content-Type", "application/json");
+						
+						HttpResponse response = Values.httpClient.execute(post);
+						ResponseHandler<String> handler = new BasicResponseHandler();
+						String body = handler.handleResponse(response);
+						
+						if(!body.isEmpty())
+						{
+							LinkedTreeMap result = Values.gson.fromJson(body, LinkedTreeMap.class);
+							int highestVersion = ((Double) result.get("highestVersionCode")).intValue();
+							String highestName = (String) result.get("highestVersionName");
+							
+							if(highestVersion > versionCode)
+							{
+								ChatStyle updateStyle = new ChatStyle().setColor(EnumChatFormatting.GOLD).setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "http://pixelatedw.xyz/versions"));
+								
+								player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.RED + "" + EnumChatFormatting.BOLD + "[UPDATE]" + EnumChatFormatting.RED + " Mine Mine no Mi " + highestName + " is now available !").setChatStyle(updateStyle) );
+								player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.RED + "Download it from the official website : [http://pixelatedw.xyz/versions]").setChatStyle(updateStyle) );
+							}
+						}
+					}
+					catch(Exception e)
 					{
-						e.printStackTrace();
+						System.out.println("Connection failed !");
 					}
 				}
 			}
