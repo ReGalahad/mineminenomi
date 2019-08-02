@@ -20,13 +20,12 @@ import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.INBTEntity;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.lapahn.EntityAILapahnJump;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.lapahn.EntityAILapahnRage;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.bandits.BanditData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.PirateData;
 
-public class EntityLapahn extends EntityNewMob implements INBTEntity
+public class EntityLapahn extends EntityNewMob
 {
 
 	private UUID rageModeUUID = UUID.randomUUID();

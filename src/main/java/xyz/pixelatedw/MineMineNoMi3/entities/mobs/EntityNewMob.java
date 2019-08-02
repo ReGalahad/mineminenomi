@@ -5,6 +5,8 @@ import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketEntityNBTSync;
 
 public class EntityNewMob extends EntityMob implements IDynamicRenderer, INBTEntity
 {
@@ -78,6 +80,9 @@ public class EntityNewMob extends EntityMob implements IDynamicRenderer, INBTEnt
 	{
 		NBTTagCompound nbtClone = new NBTTagCompound();
 		this.writeEntityToNBT(nbtClone);
+		
+		if(!this.worldObj.isRemote)
+			WyNetworkHelper.sendToAll(new PacketEntityNBTSync(this.getEntityId(), nbtClone));
 	}
 
 	@Override
