@@ -5,7 +5,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.rokushiki.EntityAIRankyaku;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.EntityAIGapCloser;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.EntityAIHakiCombat;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.brawler.EntityAIHakaiHo;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.swordsman.EntityAIOTasumaki;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.swordsman.EntityAIYakkodori;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
 public class EntityMarineCaptain extends MarineData
@@ -15,12 +19,12 @@ public class EntityMarineCaptain extends MarineData
 	public EntityMarineCaptain(World world) 
 	{
 		super(world, new String[] {"marinec1", "marinec2", "marinec3", "marinec4", "marinec5"});
-		/*this.tasks.addTask(0, new EntityAIHakiCombat(this));
+		this.tasks.addTask(0, new EntityAIHakiCombat(this));
 		this.tasks.addTask(1, new EntityAIYakkodori(this));
 		this.tasks.addTask(1, new EntityAIOTasumaki(this));
 		this.tasks.addTask(1, new EntityAIGapCloser(this));
-		this.tasks.addTask(1, new EntityAIHakaiHo(this));*/
-		this.tasks.addTask(1, new EntityAIRankyaku(this));
+		this.tasks.addTask(1, new EntityAIHakaiHo(this));
+		this.addRokushikiAbilities(2);
  	}
 	
 	@Override
@@ -38,6 +42,7 @@ public class EntityMarineCaptain extends MarineData
 		if(!this.worldObj.isRemote)
 		{
 			Item[] randomSword = new Item[] {ListMisc.MarineSword, null};
+			
 			if(this.rand.nextInt(100) <= 60)
 			{
 				this.setBusoHaki(true);
