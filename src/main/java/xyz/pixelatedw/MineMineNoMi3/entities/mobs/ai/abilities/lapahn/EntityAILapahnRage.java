@@ -30,7 +30,7 @@ public class EntityAILapahnRage extends EntityAIBase
 	public void execute()
 	{
 		this.entity.setEnraged(true);
-		
+
 		for(EntityLivingBase entity : WyHelper.getEntitiesNear(this.entity, 10))
 		{
 			if(entity instanceof EntityLapahn)
