@@ -5,7 +5,12 @@ import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.rokushiki.EntityAIGeppo;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.rokushiki.EntityAIRankyaku;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.rokushiki.EntityAISoru;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.rokushiki.EntityAITekkai;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketEntityNBTSync;
 
 public class EntityNewMob extends EntityMob implements IDynamicRenderer, INBTEntity
@@ -155,6 +160,60 @@ public class EntityNewMob extends EntityMob implements IDynamicRenderer, INBTEnt
 		this.previousAI = ai;
 	}
 
+	public void addRokushikiAbilities(int max)
+	{
+		if(this.worldObj.isRemote)
+			return;
+		
+		int rokushikiCount = 0;
+		boolean hasSoru = false;
+		boolean hasTekkai = false;
+		boolean hasRankyaku = false;
+		boolean hasGeppo = false;
+		
+		while(rokushikiCount < max)
+		{
+			if(!hasSoru && WyMathHelper.randomWithRange(1, 10) >= 8)
+			{
+				this.tasks.addTask(1, new EntityAISoru(this));
+				hasSoru = true;
+				rokushikiCount++;
+				continue;
+			}
+	
+			if(!hasTekkai && WyMathHelper.randomWithRange(1, 10) >= 8)
+			{
+				this.tasks.addTask(1, new EntityAITekkai(this));
+				hasTekkai = true;
+				rokushikiCount++;
+				continue;
+			}
+			
+			if(!hasRankyaku && WyMathHelper.randomWithRange(1, 10) >= 5)
+			{
+				this.tasks.addTask(1, new EntityAIRankyaku(this));
+				hasRankyaku = true;
+				rokushikiCount++;
+				continue;
+			}
+			
+			if(!hasGeppo && WyMathHelper.randomWithRange(1, 10) >= 5)
+			{
+				this.tasks.addTask(1, new EntityAIGeppo(this));
+				hasGeppo = true;
+				rokushikiCount++;
+				continue;
+			}
+						
+			rokushikiCount++;
+		}
+		
+		System.out.println("Soru " + hasSoru);
+		System.out.println("Tekkai " + hasTekkai);
+		System.out.println("Rankyaku " + hasRankyaku);
+		System.out.println("Geppo " + hasGeppo);
+	}
+	
 	@Override
 	public String getMobTexture()
 	{ return this.getTexture(); }

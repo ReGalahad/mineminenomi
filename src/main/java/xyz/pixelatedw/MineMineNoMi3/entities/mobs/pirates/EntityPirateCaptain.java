@@ -25,6 +25,7 @@ public class EntityPirateCaptain extends PirateData
 		this.tasks.addTask(1, new EntityAIOTasumaki(this));
 		this.tasks.addTask(1, new EntityAIGapCloser(this));
 		this.tasks.addTask(1, new EntityAIHakaiHo(this));
+		this.addRokushikiAbilities(2);
  	} 
 	  
 	@Override
