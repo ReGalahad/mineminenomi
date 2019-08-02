@@ -25,7 +25,7 @@ public class PacketEntityNBTSync implements IMessage
 	public PacketEntityNBTSync(int entityId, NBTTagCompound nbt)
 	{
 		this.entityId = entityId;
-		this.data = nbt;
+		this.data = nbt;		
 	}
 
 	@Override
@@ -53,7 +53,7 @@ public class PacketEntityNBTSync implements IMessage
 			if(message.entityId > 0)
 			{
 				Entity entity = FMLClientHandler.instance().getWorldClient().getEntityByID(message.entityId);//world.getEntityByID(message.entityId);
-				//System.out.println(entity);
+
 				if(entity instanceof INBTEntity)
 				{					
 					((INBTEntity) entity).readEntityFromExtraNBT(message.data);

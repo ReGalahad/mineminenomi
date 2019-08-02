@@ -5,8 +5,6 @@ import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
-import xyz.pixelatedw.MineMineNoMi3.packets.PacketEntityNBTSync;
 
 public class EntityNewMob extends EntityMob implements IDynamicRenderer, INBTEntity
 {
@@ -25,9 +23,6 @@ public class EntityNewMob extends EntityMob implements IDynamicRenderer, INBTEnt
 		super(worldIn);
 		this.addRandomArmor();
 		this.textures = textures;
-		
-		if(this.textures != null && this.textures.length > 0)
-			this.setTexture(this.rand.nextInt(this.textures.length));
 	}
 
     @Override
@@ -48,13 +43,14 @@ public class EntityNewMob extends EntityMob implements IDynamicRenderer, INBTEnt
 	protected void entityInit()
 	{
 		super.entityInit();
+		this.dataWatcher.addObject(15, this.textureId);
 	}
 
 	@Override
 	public void writeEntityToNBT(NBTTagCompound nbt)
 	{
 		super.writeEntityToNBT(nbt);
-		nbt.setInteger("Texture", this.textureId);		
+		nbt.setInteger("Texture", this.getTextureId());		
 		nbt.setInteger("Doriki", this.doriki);
 		nbt.setInteger("Belly", this.belly);
 		
@@ -71,30 +67,19 @@ public class EntityNewMob extends EntityMob implements IDynamicRenderer, INBTEnt
 	public void readEntityFromNBT(NBTTagCompound nbt)
 	{
 		super.readEntityFromNBT(nbt);
-		this.textureId = nbt.getInteger("Texture");
+		this.setTexture(nbt.getInteger("Texture"));
 		this.doriki = nbt.getInteger("Doriki");
 		this.belly = nbt.getInteger("Belly");
 
-		this.hasBusoHaki = nbt.getBoolean("HasBusoHaki");	
+		this.hasBusoHaki = nbt.getBoolean("HasBusoHaki");
 	}
 	
 	public void updateNBT()
 	{
 		NBTTagCompound nbtClone = new NBTTagCompound();
 		this.writeEntityToNBT(nbtClone);
-
-		WyNetworkHelper.sendToAll(new PacketEntityNBTSync(this.getEntityId(), nbtClone));
 	}
 
-	@Override
-	public void onEntityUpdate()
-	{
-		super.onEntityUpdate();
-		
-		if(this.ticksExisted < 10)
-			this.updateNBT();
-	}
-	
 	@Override
 	protected boolean isValidLightLevel()
 	{return true;} 
@@ -111,9 +96,9 @@ public class EntityNewMob extends EntityMob implements IDynamicRenderer, INBTEnt
 	public boolean getCanSpawnHere()
 	{return true;}
 
-	public String getTexture() { return textures[this.textureId]; }
-	public int getTextureId() { return this.textureId; }
-	protected void setTexture(int texture) { this.textureId = texture; }	
+	public String getTexture() { return textures[this.getTextureId()]; }
+	public int getTextureId() { return this.dataWatcher.getWatchableObjectInt(15); }
+	protected void setTexture(int texture) { this.dataWatcher.updateObject(15, texture); }	
 	
 	public int getDoriki()
 	{

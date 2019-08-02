@@ -5,12 +5,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.rokushiki.EntityAISoru;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.rokushiki.EntityAIRankyaku;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
 public class EntityMarineCaptain extends MarineData
 { 
-
 	private ItemStack swordStack;
 	
 	public EntityMarineCaptain(World world) 
@@ -21,7 +20,7 @@ public class EntityMarineCaptain extends MarineData
 		this.tasks.addTask(1, new EntityAIOTasumaki(this));
 		this.tasks.addTask(1, new EntityAIGapCloser(this));
 		this.tasks.addTask(1, new EntityAIHakaiHo(this));*/
-		this.tasks.addTask(1, new EntityAISoru(this));
+		this.tasks.addTask(1, new EntityAIRankyaku(this));
  	}
 	
 	@Override
