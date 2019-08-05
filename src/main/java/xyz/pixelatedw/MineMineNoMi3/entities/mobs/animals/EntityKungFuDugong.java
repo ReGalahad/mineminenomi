@@ -119,7 +119,8 @@ public class EntityKungFuDugong extends EntityMob implements INBTEntity, IEntity
 		NBTTagCompound nbtClone = new NBTTagCompound();
 		this.writeEntityToNBT(nbtClone);
 
-		WyNetworkHelper.sendToAll(new PacketEntityNBTSync(this.getEntityId(), nbtClone));
+		if(!this.worldObj.isRemote)
+			WyNetworkHelper.sendToAll(new PacketEntityNBTSync(this.getEntityId(), nbtClone));
 	}
 
 	@Override

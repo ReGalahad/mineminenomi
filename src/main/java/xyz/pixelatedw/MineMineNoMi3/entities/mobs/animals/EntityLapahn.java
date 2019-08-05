@@ -27,7 +27,6 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.PirateData;
 
 public class EntityLapahn extends EntityNewMob
 {
-
 	private UUID rageModeUUID = UUID.randomUUID();
 	private AttributeModifier rageModeModifier = new AttributeModifier(rageModeUUID, "Rage Mode", 10, 0);
 	private boolean isEnraged;
