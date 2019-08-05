@@ -4,15 +4,22 @@ import java.util.Arrays;
 import java.util.Optional;
 import java.util.UUID;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityOwnable;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
@@ -22,19 +29,23 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
 public class EntityYagaraBull extends EntityNewMob implements IEntityOwnable
 {
 	private Item[] food = new Item[]
-			{
-					Items.cooked_fished, Items.fish
-			};
+		{
+				Items.cooked_fished, Items.fish
+		};
 	private boolean isTamed, isSaddled;
-	private boolean isEmpty;
+	private boolean is2ndSeatEmpty;
 	private EntityPlayer owner;
 	private UUID ownerUUID;
 	private int timesFed = 0;
-	
+	private double speedMultiplier = 1;
+
 	public EntityYagaraBull(World world)
 	{
 		super(world);
-		// this.tasks.addTask(0, new EntityAISwimming(this));
+		this.setSize(1.4F, 1.6F);
+		this.tasks.addTask(1, new EntityAIWander(this, 0.7D));
+        this.tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+        this.tasks.addTask(3, new EntityAILookIdle(this));
 	}
 
 	@Override
@@ -42,7 +53,7 @@ public class EntityYagaraBull extends EntityNewMob implements IEntityOwnable
 	{
 		super.applyEntityAttributes();
 		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(35.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.26D);
+		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.01D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(0.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(30.0D);
 	}
@@ -52,21 +63,53 @@ public class EntityYagaraBull extends EntityNewMob implements IEntityOwnable
 	{
 		super.entityInit();
 	}
-	
+
 	@Override
 	public void onUpdate()
 	{
 		super.onUpdate();
 
-		if(this.ticksExisted < 20)
+		if (this.ticksExisted < 20)
 			this.updateNBT();
-		
+
 		AxisAlignedBB aabb = AxisAlignedBB.getBoundingBox(this.boundingBox.minX, this.boundingBox.minY + 0.9, this.boundingBox.minZ, this.boundingBox.maxX, this.boundingBox.maxY, this.boundingBox.maxZ);
 
 		if (this.worldObj.isAABBInMaterial(aabb, Material.water))
-		{
 			this.motionY += 0.03;
-		}		
+		
+		if (!this.worldObj.isRemote)
+		{
+			if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityLivingBase)
+			{
+				EntityLivingBase entitylivingbase = (EntityLivingBase) this.riddenByEntity;
+				float f = this.riddenByEntity.rotationYaw + -entitylivingbase.moveStrafing * 90.0F;
+				this.motionX += -Math.sin(f * (float) Math.PI / 180.0F) * this.speedMultiplier * entitylivingbase.moveForward * 0.05000000074505806D;
+				this.motionZ += Math.cos(f * (float) Math.PI / 180.0F) * this.speedMultiplier * entitylivingbase.moveForward * 0.05000000074505806D;
+			}
+			
+			for (int l = 0; l < 4; ++l)
+            {
+                int i1 = MathHelper.floor_double(this.posX + (l % 2 - 0.5D) * 1.4D);
+                int j = MathHelper.floor_double(this.posZ + (l / 2 - 0.5D) * 1.4D);
+
+                for (int j1 = 0; j1 < 2; ++j1)
+                {
+                    int k = MathHelper.floor_double(this.posY) + j1;
+                    Block block = this.worldObj.getBlock(i1, k, j);
+
+                    if (block == Blocks.snow_layer)
+                    {
+                        this.worldObj.setBlockToAir(i1, k, j);
+                        this.isCollidedHorizontally = false;
+                    }
+                    else if (block == Blocks.waterlily)
+                    {
+                        this.worldObj.func_147480_a(i1, k, j, true);
+                        this.isCollidedHorizontally = false;
+                    }
+                }
+            }
+		}
 	}
 
 	@Override
@@ -74,11 +117,11 @@ public class EntityYagaraBull extends EntityNewMob implements IEntityOwnable
 	{
 		ItemStack heldStack = player.getHeldItem();
 
-		if(heldStack == null)
-			return false;
-		
 		if (!this.isTamed())
 		{
+			if (heldStack == null)
+				return false;
+
 			Optional<Item> foodItem = Arrays.stream(this.food).filter(x -> heldStack.getItem() == x).findFirst();
 
 			if (foodItem != null)
@@ -93,9 +136,8 @@ public class EntityYagaraBull extends EntityNewMob implements IEntityOwnable
 				}
 				this.timesFed++;
 			}
-			
-			
-			if(this.timesFed >= 5 + WyMathHelper.randomWithRange(2, 5))
+
+			if (this.timesFed >= 5 + WyMathHelper.randomWithRange(2, 5))
 			{
 				this.setTamed(true);
 				for (int i = 0; i < 10; ++i)
@@ -107,28 +149,90 @@ public class EntityYagaraBull extends EntityNewMob implements IEntityOwnable
 				}
 				this.updateNBT();
 			}
-			
+
 			return true;
 		}
 		else
 		{
-			if(heldStack.getItem() == Items.saddle)
+			if (!this.isSaddled())
 			{
-				--heldStack.stackSize;
-				this.setSaddled(true);
-				this.updateNBT();
+				if (heldStack == null)
+					return false;
+
+				if (heldStack.getItem() == Items.saddle)
+				{
+					--heldStack.stackSize;
+					this.setSaddled(true);
+					this.updateNBT();
+				}
+
+				return true;
 			}
-			
-			return true;
+			else
+			{
+				if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayer && this.riddenByEntity != player)				
+					return true;
+				else
+				{
+					if (!this.worldObj.isRemote)
+					{
+				        player.rotationYaw = this.rotationYaw;
+				        player.rotationPitch = this.rotationPitch;
+						player.mountEntity(this);
+					}
+
+					return true;
+				}
+			}
+		}
+	}
+
+	@Override
+	public void moveEntityWithHeading(float x, float y)
+	{
+		if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityLivingBase && this.isSaddled())
+		{
+			this.prevRotationYaw = this.rotationYaw = this.riddenByEntity.rotationYaw;
+			this.rotationPitch = this.riddenByEntity.rotationPitch * 0.5F;
+			this.setRotation(this.rotationYaw, this.rotationPitch);
+			this.rotationYawHead = this.renderYawOffset = this.rotationYaw;
+			y = ((EntityLivingBase) this.riddenByEntity).moveForward;
+
+			if (y <= 0.0F)
+			{
+				y *= 0.25F;
+			}
+
+			if (!this.worldObj.isRemote)
+				super.moveEntityWithHeading(x, y);
+		}
+		else
+			super.moveEntityWithHeading(x, y);
+	}
+
+	@Override
+	public void updateRiderPosition()
+	{
+		super.updateRiderPosition();
+
+		float f = MathHelper.sin(this.renderYawOffset * (float) Math.PI / 180.0F);
+		float f1 = MathHelper.cos(this.renderYawOffset * (float) Math.PI / 180.0F);
+		float f2 = -0.5F;
+		float f3 = 0.15F;
+		this.riddenByEntity.setPosition(this.posX + f2 * f, this.posY + this.getMountedYOffset() + this.riddenByEntity.getYOffset() + f3, this.posZ - f2 * f1);
+
+		if (this.riddenByEntity instanceof EntityLivingBase)
+		{
+			((EntityLivingBase) this.riddenByEntity).renderYawOffset = this.renderYawOffset;
 		}
 	}
 
 	@Override
 	public double getMountedYOffset()
 	{
-		return this.height * 0.0D - 0.30000001192092896D;
+		return this.height * 0.5D;
 	}
-	
+
 	@Override
 	public void writeEntityToNBT(NBTTagCompound nbt)
 	{
@@ -136,7 +240,7 @@ public class EntityYagaraBull extends EntityNewMob implements IEntityOwnable
 
 		nbt.setBoolean("IsTamed", this.isTamed);
 		nbt.setBoolean("IsSaddled", this.isSaddled);
-		
+
 		nbt.setString("OwnerUUID", this.ownerUUID != null ? this.ownerUUID.toString() : "");
 	}
 
@@ -153,7 +257,7 @@ public class EntityYagaraBull extends EntityNewMob implements IEntityOwnable
 
 		this.isTamed = nbt.getBoolean("IsTamed");
 		this.isSaddled = nbt.getBoolean("IsSaddled");
-		
+
 		String uuid = nbt.getString("OwnerUUID");
 
 		if (!WyHelper.isNullOrEmpty(uuid))
@@ -179,7 +283,7 @@ public class EntityYagaraBull extends EntityNewMob implements IEntityOwnable
 	{
 		this.isTamed = value;
 	}
-	
+
 	public boolean isSaddled()
 	{
 		return this.isSaddled;
@@ -208,7 +312,7 @@ public class EntityYagaraBull extends EntityNewMob implements IEntityOwnable
 	@Override
 	public String func_152113_b()
 	{
-		if(this.ownerUUID != null)
+		if (this.ownerUUID != null)
 			return this.ownerUUID.toString();
 		else
 			return "";
