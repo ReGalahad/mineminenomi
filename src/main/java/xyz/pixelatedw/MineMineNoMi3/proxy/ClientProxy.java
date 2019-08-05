@@ -23,6 +23,7 @@ import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityWantedPostersP
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.animals.EntityDenDenMushi;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.animals.EntityKungFuDugong;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.animals.EntityLapahn;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.animals.EntityYagaraBull;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.arlongPirates.EntityArlong;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.arlongPirates.EntityChew;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.arlongPirates.EntityKuroobi;
@@ -178,11 +179,12 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityDenDenMushi.class, new MobRenderer(new ModelDenDenMushi(), "denden"));
 		RenderingRegistry.registerEntityRenderingHandler(EntityKungFuDugong.class, new MobRenderer(new ModelKungFuDugong(), "kungfudugong"));
 		RenderingRegistry.registerEntityRenderingHandler(EntityLapahn.class, new MobRenderer(new ModelLapahn(), "lapahn"));
+		RenderingRegistry.registerEntityRenderingHandler(EntityYagaraBull.class, new MobRenderer(new ModelYagaraBull(), 1.5F, "yagarabull"));
 		
 		//TEMP
 		RenderingRegistry.registerEntityRenderingHandler(TempEntityDugong.class, new MobRenderer(new ModelKungFuDugong(), "kungfudugong"));
 		RenderingRegistry.registerEntityRenderingHandler(TempEntityLapahn.class, new MobRenderer(new ModelLapahn(), "lapahn"));
-		RenderingRegistry.registerEntityRenderingHandler(TempEntityYagaraBull.class, new MobRenderer(new ModelYagaraBull(), "yagarabull"));
+		RenderingRegistry.registerEntityRenderingHandler(TempEntityYagaraBull.class, new MobRenderer(new ModelYagaraBull(), 2F, "yagarabull"));
 		
 		//Special Renderers
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDenDenMushi.class, new RenderBlockDenDenMushi());

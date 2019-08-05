@@ -10,6 +10,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.animals.EntityDenDenMushi;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.animals.EntityKungFuDugong;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.animals.EntityLapahn;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.animals.EntityYagaraBull;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.arlongPirates.EntityArlong;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.arlongPirates.EntityChew;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.arlongPirates.EntityKuroobi;
@@ -122,6 +123,8 @@ public class ListEntities
 		WyRegistry.registerSpawnBiomesFor(EntityKungFuDugong.class, 30, 5, 7, dugongBiomes);
 		WyRegistry.registerMob("Lapahn", EntityLapahn.class, 0xaedbd7, 0x449a94);
 		WyRegistry.registerSpawnBiomesFor(EntityKungFuDugong.class, 30, 3, 5, Type.COLD);
+		WyRegistry.registerMob("Yagara Bull", EntityYagaraBull.class, 0xf0ad4e, 0x5CB85C);
+		WyRegistry.registerSpawnBiomesFor(EntityYagaraBull.class, 40, 1, 2, Type.WATER);
 		
 		//Temp
 		//WyRegistry.registerMob("TEMP_Dummy", TempEntityDummy.class);

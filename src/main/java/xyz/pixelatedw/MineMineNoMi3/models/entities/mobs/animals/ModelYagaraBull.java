@@ -1,8 +1,13 @@
 package xyz.pixelatedw.MineMineNoMi3.models.entities.mobs.animals;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.MathHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.animals.EntityYagaraBull;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityYagaraBull;
 
 public class ModelYagaraBull extends ModelBiped
 {
@@ -214,6 +219,10 @@ public class ModelYagaraBull extends ModelBiped
 	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
 	{
+		this.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+
+		EntityYagaraBull yagaraBull = ((EntityYagaraBull)entity);
+		
 		this.body1.render(f5);
 		this.rightfin1.render(f5);
 		this.leftfin1.render(f5);
@@ -223,8 +232,41 @@ public class ModelYagaraBull extends ModelBiped
 		this.belt1.render(f5);
 		this.rightfin2.render(f5);
 		this.body2.render(f5);
-		this.saddle.render(f5);
+		if(yagaraBull.isSaddled())
+			this.saddle.render(f5);
 		this.belt2.render(f5);
+	}
+	
+	@Override
+	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float headYaw, float headPitch, float scaleFactor, Entity ent)
+	{
+		boolean flagTempEntity = ent instanceof TempEntityYagaraBull;
+		if (Minecraft.getMinecraft().isGamePaused() || flagTempEntity)
+			return;
+
+		EntityYagaraBull entity = (EntityYagaraBull) ent;
+
+		this.tail1.rotateAngleY = 0.1F * (-0.2F + MathHelper.cos(ageInTicks * 0.15F));
+		this.tail2.rotateAngleY = 0.2F * (-0.2F + MathHelper.cos(ageInTicks * 0.15F));
+		this.tail3.rotateAngleY = 0.1F * (-0.2F + MathHelper.cos(ageInTicks * 0.15F));
+		this.tail4.rotateAngleY = 0.2F * (-0.2F + MathHelper.cos(ageInTicks * 0.15F));
+		this.tail5.rotateAngleY = 0.1F * (-0.2F + MathHelper.cos(ageInTicks * 0.15F));
+
+		this.leftfin1.rotateAngleY = 0.2F * -MathHelper.cos(ageInTicks * 0.15F);
+		this.leftfin1.rotateAngleX = 0.2F * -MathHelper.cos(ageInTicks * 0.15F);
+		this.leftfin2.rotateAngleY = 0.2F * MathHelper.cos(ageInTicks * 0.15F);
+		this.leftfin2.rotateAngleX = 0.2F * MathHelper.cos(ageInTicks * 0.15F);
+		
+		this.rightfin1.rotateAngleY = 0.2F * -MathHelper.cos(ageInTicks * 0.15F);
+		this.rightfin1.rotateAngleX = 0.2F * -MathHelper.cos(ageInTicks * 0.15F);		
+		this.rightfin2.rotateAngleY = 0.2F * MathHelper.cos(ageInTicks * 0.15F);
+		this.rightfin2.rotateAngleX = 0.2F * MathHelper.cos(ageInTicks * 0.15F);
+		
+		// Neck animation
+		if(ageInTicks % 300 > 0 && ageInTicks % 300 < 50)
+			this.neck4.rotateAngleZ = 0.4F * MathHelper.cos(ageInTicks * 0.25F);
+		else
+			this.neck4.rotateAngleZ = WyMathHelper.degToRad(0);
 	}
 
 	public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
