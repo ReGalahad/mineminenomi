@@ -233,6 +233,27 @@ public class EntityYagaraBull extends EntityNewMob implements IEntityOwnable
 		return this.height * 0.5D;
 	}
 
+    @Override
+	protected void dropFewItems(boolean flag, int looting)
+    {
+        int j = (int) (1 + WyMathHelper.randomWithRange(1 + looting, 5 + looting));
+
+        for (int k = 0; k < j; ++k)
+        {
+            if (this.isBurning())
+            {
+                this.dropItem(Items.cooked_fished, 1);
+            }
+            else
+            {
+                this.dropItem(Items.fish, 1);
+            }
+        }
+
+        if (this.isSaddled())
+            this.dropItem(Items.saddle, 1);
+    }
+	
 	@Override
 	public void writeEntityToNBT(NBTTagCompound nbt)
 	{

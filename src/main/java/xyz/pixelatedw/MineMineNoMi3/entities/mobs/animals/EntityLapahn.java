@@ -14,6 +14,7 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
@@ -30,11 +31,11 @@ public class EntityLapahn extends EntityNewMob
 	private UUID rageModeUUID = UUID.randomUUID();
 	private AttributeModifier rageModeModifier = new AttributeModifier(rageModeUUID, "Rage Mode", 10, 0);
 	private boolean isEnraged;
-	
+
 	public EntityLapahn(World world)
 	{
 		super(world);
-		
+
 		this.setSize(0.8F, 2.5F);
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(0, new EntityAIAttackOnCollide(this, 1.0D, false));
@@ -65,10 +66,10 @@ public class EntityLapahn extends EntityNewMob
 		super.onEntityUpdate();
 		if (!this.worldObj.isRemote)
 		{
-			
+
 		}
 	}
-	
+
 	@Override
 	public void writeEntityToNBT(NBTTagCompound nbt)
 	{
@@ -76,7 +77,7 @@ public class EntityLapahn extends EntityNewMob
 
 		nbt.setBoolean("IsEnraged", this.isEnraged);
 	}
-	
+
 	@Override
 	public void readEntityFromExtraNBT(NBTTagCompound nbt)
 	{
@@ -90,7 +91,7 @@ public class EntityLapahn extends EntityNewMob
 
 		this.isEnraged = nbt.getBoolean("IsEnraged");
 	}
-	
+
 	@Override
 	public boolean isAIEnabled()
 	{
@@ -106,40 +107,58 @@ public class EntityLapahn extends EntityNewMob
 	{
 		this.isEnraged = value;
 		IAttributeInstance attackAttribute = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
-		if(value && attackAttribute.getModifier(this.rageModeUUID) == null)
+		if (value && attackAttribute.getModifier(this.rageModeUUID) == null)
 			attackAttribute.applyModifier(rageModeModifier);
-		else if(!value && attackAttribute.getModifier(this.rageModeUUID) != null)
+		else if (!value && attackAttribute.getModifier(this.rageModeUUID) != null)
 			attackAttribute.removeModifier(rageModeModifier);
 	}
-	
+
+	@Override
+	protected void dropFewItems(boolean flag, int looting)
+	{
+        int j = (int) (2 + WyMathHelper.randomWithRange(3 + looting, 5 + looting));
+
+		for (int k = 0; k < j; ++k)
+		{
+			if (this.isBurning())
+			{
+				this.dropItem(Items.cooked_beef, 1);
+			}
+			else
+			{
+				this.dropItem(Items.beef, 1);
+			}
+		}
+	}
+
 	@Override
 	protected boolean canDespawn()
 	{
-		return false;
+		return true;
 	}
-	
+
 	@Override
-	public void fall(float distance) 
+	public void fall(float distance)
 	{
-		if(distance > 5)
+		if (distance > 5)
 		{
-			if(this.worldObj.isRemote)
+			if (this.worldObj.isRemote)
 			{
 				for (int i = 0; i < 256; i++)
 				{
 					double posX = this.posX + WyMathHelper.randomWithRange(-5, 5) + WyMathHelper.randomDouble();
 					double posZ = this.posZ + WyMathHelper.randomWithRange(-5, 5) + WyMathHelper.randomDouble();
-				
+
 					this.worldObj.spawnParticle("explode", posX, this.posY + 0.5, posZ, 0, 0.1, 0);
-					this.worldObj.spawnParticle("smoke", posX, this.posY + 0.5, posZ, 0, 0.1, 0);		            
+					this.worldObj.spawnParticle("smoke", posX, this.posY + 0.5, posZ, 0, 0.1, 0);
 				}
 			}
-			
-			for(EntityLivingBase entity : WyHelper.getEntitiesNear(this, 5))
+
+			for (EntityLivingBase entity : WyHelper.getEntitiesNear(this, 5))
 			{
-				if(!(entity instanceof EntityLapahn))
+				if (!(entity instanceof EntityLapahn))
 				{
-					entity.attackEntityFrom(DamageSource.causeMobDamage(this), 6);			
+					entity.attackEntityFrom(DamageSource.causeMobDamage(this), 6);
 					entity.motionY = 0.5;
 				}
 			}
