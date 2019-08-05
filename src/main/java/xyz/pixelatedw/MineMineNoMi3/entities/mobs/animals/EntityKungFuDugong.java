@@ -27,6 +27,7 @@ import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.INBTEntity;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketEntityNBTSync;
@@ -95,16 +96,16 @@ public class EntityKungFuDugong extends EntityMob implements INBTEntity, IEntity
 
 			if (this.getAttackTarget() == this.owner)
 				this.setAttackTarget(null);
-			
-			if(this.owner != null)
+
+			if (this.owner != null)
 			{
-				if(this.getDistanceToEntity(this.owner) > 10)
+				if (this.getDistanceToEntity(this.owner) > 10)
 					this.getNavigator().tryMoveToEntityLiving(this.owner, 1.5);
-				
-				if(this.getDistanceToEntity(this.owner) > 80)
-					this.setPositionAndUpdate(this.owner.posX, this.owner.posY, this.owner.posZ);			
+
+				if (this.getDistanceToEntity(this.owner) > 80)
+					this.setPositionAndUpdate(this.owner.posX, this.owner.posY, this.owner.posZ);
 			}
-			
+
 		}
 	}
 
@@ -119,7 +120,7 @@ public class EntityKungFuDugong extends EntityMob implements INBTEntity, IEntity
 		NBTTagCompound nbtClone = new NBTTagCompound();
 		this.writeEntityToNBT(nbtClone);
 
-		if(!this.worldObj.isRemote)
+		if (!this.worldObj.isRemote)
 			WyNetworkHelper.sendToAll(new PacketEntityNBTSync(this.getEntityId(), nbtClone));
 	}
 
@@ -232,8 +233,26 @@ public class EntityKungFuDugong extends EntityMob implements INBTEntity, IEntity
 			this.isWaiting = !this.isWaiting;
 			this.updateNBT();
 		}
-		
+
 		return false;
+	}
+
+	@Override
+	protected void dropFewItems(boolean flag, int looting)
+	{
+        int j = (int) (1 + WyMathHelper.randomWithRange(0 + looting, 1 + looting));
+
+		for (int k = 0; k < j; ++k)
+		{
+			if (this.isBurning())
+			{
+				this.dropItem(Items.cooked_fished, 1);
+			}
+			else
+			{
+				this.dropItem(Items.fish, 1);
+			}
+		}
 	}
 
 	public boolean isHappy()
@@ -286,7 +305,7 @@ public class EntityKungFuDugong extends EntityMob implements INBTEntity, IEntity
 	@Override
 	public String func_152113_b()
 	{
-		if(this.ownerUUID != null)
+		if (this.ownerUUID != null)
 			return this.ownerUUID.toString();
 		else
 			return "";

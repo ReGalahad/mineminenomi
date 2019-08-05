@@ -7,7 +7,6 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
@@ -23,7 +22,8 @@ public class EntityDenDenMushi extends EntityMob
         this.tasks.addTask(3, new EntityAIWander(this, 1.0D));
 	}
 	
-    protected void applyEntityAttributes()
+    @Override
+	protected void applyEntityAttributes()
     {
     	
         super.applyEntityAttributes();     
@@ -32,7 +32,8 @@ public class EntityDenDenMushi extends EntityMob
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(5.0D);  	
     }
     
-    public boolean interact(EntityPlayer player)
+    @Override
+	public boolean interact(EntityPlayer player)
     {
     	ItemStack heldItem = player.inventory.getCurrentItem();
     	if(heldItem != null && heldItem.getItem() == Items.iron_ingot)
@@ -45,23 +46,26 @@ public class EntityDenDenMushi extends EntityMob
 		return false;
     }
     
-    
-    protected void entityInit()
+    @Override
+	protected void entityInit()
     {
         super.entityInit();
     }
     
-    protected boolean isValidLightLevel()
+    @Override
+	protected boolean isValidLightLevel()
     {
     	return true; 
     } 
     
-    protected boolean canDespawn()
+    @Override
+	protected boolean canDespawn()
     {
         return true;
     }
     
-    public boolean getCanSpawnHere()
+    @Override
+	public boolean getCanSpawnHere()
     {
         return true;
     }
