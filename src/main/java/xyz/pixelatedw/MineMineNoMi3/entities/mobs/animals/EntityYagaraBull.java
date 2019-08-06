@@ -241,13 +241,9 @@ public class EntityYagaraBull extends EntityNewMob implements IEntityOwnable
         for (int k = 0; k < j; ++k)
         {
             if (this.isBurning())
-            {
                 this.dropItem(Items.cooked_fished, 1);
-            }
             else
-            {
                 this.dropItem(Items.fish, 1);
-            }
         }
 
         if (this.isSaddled())
