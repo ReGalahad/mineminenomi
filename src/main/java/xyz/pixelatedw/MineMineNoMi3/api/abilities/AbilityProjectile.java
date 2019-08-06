@@ -13,15 +13,11 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
-import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
-import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityExplosion;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
-import xyz.pixelatedw.MineMineNoMi3.data.ExtendedWorldData;
 import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
-import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 
 public class AbilityProjectile extends EntityThrowable
 {
@@ -53,10 +49,10 @@ public class AbilityProjectile extends EntityThrowable
 		
 		if (this.attr != null)
 		{
-			this.setLocationAndAngles(this.user.posX, this.user.posY + (double) this.user.getEyeHeight(), this.user.posZ, this.user.rotationYaw, this.user.rotationPitch);
-			this.motionX = (double) (-MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI) * 0.4);
-			this.motionZ = (double) (MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI) * 0.4);
-			this.motionY = (double) (-MathHelper.sin((this.rotationPitch + this.func_70183_g()) / 180.0F * (float) Math.PI) * 0.4);
+			this.setLocationAndAngles(this.user.posX, this.user.posY + this.user.getEyeHeight(), this.user.posZ, this.user.rotationYaw, this.user.rotationPitch);
+			this.motionX = -MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI) * 0.4;
+			this.motionZ = MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI) * 0.4;
+			this.motionY = -MathHelper.sin((this.rotationPitch + this.func_70183_g()) / 180.0F * (float) Math.PI) * 0.4;
 			this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, attr.getProjectileSpeed(), 1.0F);
 		}
 
@@ -71,6 +67,7 @@ public class AbilityProjectile extends EntityThrowable
 	{
 	};
 
+	@Override
 	public void onEntityUpdate()
 	{	
 		if (this.attr != null)
@@ -85,6 +82,7 @@ public class AbilityProjectile extends EntityThrowable
 		}
 	}
 
+	@Override
 	public void onUpdate()
 	{
 		super.onUpdate();
@@ -137,6 +135,7 @@ public class AbilityProjectile extends EntityThrowable
 		}
 	}
 
+	@Override
 	protected void onImpact(MovingObjectPosition hit)
 	{
 		if (!this.worldObj.isRemote)
@@ -165,8 +164,8 @@ public class AbilityProjectile extends EntityThrowable
 					}
 
 					if (this.attr.getProjectileDamage() > 0)
-						hit.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), this.attr.getProjectileDamage());
-
+						hit.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), this.attr.getProjectileDamage() * props.getDamageMultiplier());
+					
 					tasksImapct(hit);
 
 					this.setDead();
@@ -195,6 +194,7 @@ public class AbilityProjectile extends EntityThrowable
 		}
 	}
 
+	@Override
 	protected float getGravityVelocity()
 	{
 		return gravity;

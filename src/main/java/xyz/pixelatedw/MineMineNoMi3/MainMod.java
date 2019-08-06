@@ -18,6 +18,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.commands.CommandAbilityProtection;
 import xyz.pixelatedw.MineMineNoMi3.commands.CommandBelly;
 import xyz.pixelatedw.MineMineNoMi3.commands.CommandBounty;
+import xyz.pixelatedw.MineMineNoMi3.commands.CommandDamageMultiplier;
 import xyz.pixelatedw.MineMineNoMi3.commands.CommandDoriki;
 import xyz.pixelatedw.MineMineNoMi3.commands.CommandExtol;
 import xyz.pixelatedw.MineMineNoMi3.commands.CommandFG;
@@ -141,6 +142,7 @@ public class MainMod
 		event.registerServerCommand(new CommandIssueBounty());
 		event.registerServerCommand(new CommandGetWantedPoster());
 		event.registerServerCommand(new CommandAbilityProtection());
+		event.registerServerCommand(new CommandDamageMultiplier());
 	}
 	
 	public static MainMod getMineMineNoMi()
