@@ -254,7 +254,7 @@ public class Ability
 		startCooldown();
 		WyNetworkHelper.sendTo(new PacketAbilitySync(AbilityProperties.get(player)), (EntityPlayerMP) player);
 
-		target.attackEntityFrom(DamageSource.causePlayerDamage(player), this.attr.getPunchDamage());
+		target.attackEntityFrom(DamageSource.causePlayerDamage(player), this.attr.getPunchDamage() * ExtendedEntityData.get(player).getDamageMultiplier());
 		
 		(new Update(player, attr)).start();
 	}
