@@ -20,42 +20,32 @@ public class BlockAbilityProtection extends BlockContainer
 		this.setTickRandomly(true);
 	}
 
-    public void onBlockAdded(World world, int posX, int posY, int posZ) 
-    {
-		ExtendedWorldData worldData = ExtendedWorldData.get(world);
-		TileEntityAbilityProtection centerData = ((TileEntityAbilityProtection) world.getTileEntity(posX, posY, posZ));
-		System.out.println("2 : " + centerData.getRadius());
-		
-		int radius = centerData.getRadius();
-    	int minPosX = posX - radius;
-    	int minPosY = posY - radius;
-    	int minPosZ = posZ - radius;
-    	int maxPosX = posX + radius;
-    	int maxPosY = posY + radius;
-    	int maxPosZ = posZ + radius;
-    	
-    	worldData.addRestrictedArea(new int[] {minPosX, minPosY, minPosZ}, new int[] {maxPosX, maxPosY, maxPosZ});
-    }
-    
-    public void onBlockDestroyedByPlayer(World world, int posX, int posY, int posZ, int metaData) 
+    @Override
+	public void onBlockDestroyedByPlayer(World world, int posX, int posY, int posZ, int metaData) 
     {
     	ExtendedWorldData worldData = ExtendedWorldData.get(world);
 
     	worldData.removeRestrictedArea(posX, posY, posZ);
     }
 
-	public TileEntity createNewTileEntity(World world, int i) { return new TileEntityAbilityProtection();}
+	@Override
+	public TileEntity createNewTileEntity(World world, int i) { return new TileEntityAbilityProtection(); }
 	
     
+	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {return WyHelper.NULL_AABB;} 
 	
+	@Override
 	public boolean isOpaqueCube() {return false;}
 
-    @SideOnly(Side.CLIENT)
+    @Override
+	@SideOnly(Side.CLIENT)
     public int getRenderBlockPass() { return 1; }
 
-    public boolean renderAsNormalBlock() { return false; }
+    @Override
+	public boolean renderAsNormalBlock() { return false; }
       
-    public int getRenderType() { return 0; }
+    @Override
+	public int getRenderType() { return 0; }
 
 }

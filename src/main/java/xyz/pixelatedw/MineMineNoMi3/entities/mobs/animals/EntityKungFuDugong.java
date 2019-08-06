@@ -245,13 +245,9 @@ public class EntityKungFuDugong extends EntityMob implements INBTEntity, IEntity
 		for (int k = 0; k < j; ++k)
 		{
 			if (this.isBurning())
-			{
 				this.dropItem(Items.cooked_fished, 1);
-			}
 			else
-			{
 				this.dropItem(Items.fish, 1);
-			}
 		}
 	}
 

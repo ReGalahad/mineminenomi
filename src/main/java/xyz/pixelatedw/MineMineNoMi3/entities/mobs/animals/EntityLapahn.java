@@ -121,13 +121,9 @@ public class EntityLapahn extends EntityNewMob
 		for (int k = 0; k < j; ++k)
 		{
 			if (this.isBurning())
-			{
 				this.dropItem(Items.cooked_beef, 1);
-			}
 			else
-			{
 				this.dropItem(Items.beef, 1);
-			}
 		}
 	}
 
