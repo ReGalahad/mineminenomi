@@ -207,11 +207,6 @@ public class EntityNewMob extends EntityMob implements IDynamicRenderer, INBTEnt
 						
 			rokushikiCount++;
 		}
-		
-		System.out.println("Soru " + hasSoru);
-		System.out.println("Tekkai " + hasTekkai);
-		System.out.println("Rankyaku " + hasRankyaku);
-		System.out.println("Geppo " + hasGeppo);
 	}
 	
 	@Override

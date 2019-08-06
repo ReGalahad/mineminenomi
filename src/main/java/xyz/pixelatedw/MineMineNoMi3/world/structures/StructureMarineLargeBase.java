@@ -23,8 +23,8 @@ public class StructureMarineLargeBase extends Structure
 		boolean flagSpecialCheck = !MainWorldGen.checkCorners(sch, world, posX, posY, posZ);
 		boolean flagAboveGround = !MainWorldGen.checkCornersAboveGround(sch, world, posX, posY, posZ);
 		
-		if(flagBiome || flagSpecialCheck || flagAboveGround)
-			return false;
+		//if(flagBiome || flagSpecialCheck || flagAboveGround)
+		//	return false;
 		
 		WySchematicHelper.build(sch, world, posX, posY - 19, posZ, Blocks.bedrock);
 		populate(sch, posX, posY + 2, posZ, world);
@@ -32,7 +32,7 @@ public class StructureMarineLargeBase extends Structure
 		return true;
 	}
 	
-	private static void populate(Schematic sch, int posX, int posY, int posZ, World world)
+	public static void populate(Schematic sch, int posX, int posY, int posZ, World world)
 	{
 		// Spawners
 		int[][] trash01SpawnerPositions = new int[][]
@@ -54,7 +54,18 @@ public class StructureMarineLargeBase extends Structure
 		};
 		addSpawnerTileEntity(world, captainSpawnerPositions, "Marine Captain", 1, 0);
 
-		//world.setBlock(posX + 26, posY + 36, posZ + 22, Blocks.bedrock);
+		int[][] prisonPirateTrash01SpawnerPositions = new int[][]
+		{
+			{posX + 31, posY - 8, posZ + 42}, {posX + 20, posY - 8, posZ + 42}, {posX + 31, posY - 12, posZ + 42}, {posX + 31, posY - 19, posZ + 42}, {posX + 18, posY - 19, posZ + 42},
+			{posX + 31, posY - 8, posZ + 18}, {posX + 20, posY - 8, posZ + 18}, {posX + 19, posY - 12, posZ + 18}, {posX + 31, posY - 19, posZ + 18}, 
+		};
+		addSpawnerTileEntity(world, prisonPirateTrash01SpawnerPositions, "Pirate with Sword", 3, 5);
+
+		int[][] prisonBanditTrash01SpawnerPositions = new int[][]
+		{
+			{posX + 19, posY - 12, posZ + 42}, {posX + 26, posY - 12, posZ + 42}, {posX + 27, posY - 12, posZ + 18}, {posX + 34, posY - 12, posZ + 18}, {posX + 19, posY - 19, posZ + 18}
+		};
+		addSpawnerTileEntity(world, prisonBanditTrash01SpawnerPositions, "Bandit with Sword", 3, 5);
 
 		// Chests
 		int[][] foodChestPositions = new int[][]
