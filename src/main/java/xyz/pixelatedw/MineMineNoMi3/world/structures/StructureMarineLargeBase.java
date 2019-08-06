@@ -52,18 +52,17 @@ public class StructureMarineLargeBase extends Structure
 		{
 			{posX + 18, posY + 22, posZ + 20}, {posX + 18, posY + 22, posZ + 33}
 		};
-		addSpawnerTileEntity(world, captainSpawnerPositions, "Marine Captain", 1, 0);
+		addSpawnerTileEntity(world, captainSpawnerPositions, "Marine Captain", 1, 2);
 
 		int[][] prisonPirateTrash01SpawnerPositions = new int[][]
 		{
-			{posX + 31, posY - 8, posZ + 42}, {posX + 20, posY - 8, posZ + 42}, {posX + 31, posY - 12, posZ + 42}, {posX + 31, posY - 19, posZ + 42}, {posX + 18, posY - 19, posZ + 42},
-			{posX + 31, posY - 8, posZ + 18}, {posX + 20, posY - 8, posZ + 18}, {posX + 19, posY - 12, posZ + 18}, {posX + 31, posY - 19, posZ + 18}, 
+			{posX + 31, posY - 8, posZ + 42}, {posX + 18, posY - 19, posZ + 42}, {posX + 31, posY - 8, posZ + 18}, {posX + 19, posY - 12, posZ + 18}, 
 		};
 		addSpawnerTileEntity(world, prisonPirateTrash01SpawnerPositions, "Pirate with Sword", 3, 5);
 
 		int[][] prisonBanditTrash01SpawnerPositions = new int[][]
 		{
-			{posX + 19, posY - 12, posZ + 42}, {posX + 26, posY - 12, posZ + 42}, {posX + 27, posY - 12, posZ + 18}, {posX + 34, posY - 12, posZ + 18}, {posX + 19, posY - 19, posZ + 18}
+			{posX + 19, posY - 12, posZ + 42}, {posX + 34, posY - 12, posZ + 18}, {posX + 19, posY - 19, posZ + 18}
 		};
 		addSpawnerTileEntity(world, prisonBanditTrash01SpawnerPositions, "Bandit with Sword", 3, 5);
 
