@@ -5,10 +5,8 @@ import java.util.UUID;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.EntityAICooldown;
@@ -54,7 +52,7 @@ public class EntityAITekkai extends EntityAICooldown
 		}
 		
 		float distance = this.entity.getDistanceToEntity(this.entity.getAttackTarget());
-		if (distance > 5)
+		if (distance > 3)
 			return false;
 
 		if (this.hitCount < this.maxCount)
@@ -74,9 +72,6 @@ public class EntityAITekkai extends EntityAICooldown
 	
 	public void execute()
 	{
-		if(this.entity.getAttackTarget() instanceof EntityPlayer)
-			WyHelper.sendMsgToPlayer((EntityPlayer) this.entity.getAttackTarget(), "TEKKAI");
-		
 		this.entity.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).applyModifier(this.knockbackModifier);
 		
 		this.entity.addPotionEffect(new PotionEffect(Potion.resistance.id, 70, 100));
