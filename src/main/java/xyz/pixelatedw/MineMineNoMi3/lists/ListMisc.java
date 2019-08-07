@@ -191,6 +191,7 @@ public class ListMisc
 	public static Item PirateBoots = new ItemCoreArmor("pirate", ID.ARMORMAT_USELESS, 3);
 
 	public static Item ColaBackpack = new ItemCoreArmor("colabackpack", ID.ARMORMAT_COLABACKPACK, 1);
+	public static Item TomoeDrums = new ItemCoreArmor("tomoeDrums", ID.ARMORMAT_COLABACKPACK, 1);
 
 	public static Item Flintlock = new Flintlock().setMaxStackSize(1).setFull3D();
 	public static Item Kabuto = new Kabuto("kabuto").setMaxStackSize(1).setFull3D();
@@ -278,6 +279,7 @@ public class ListMisc
 		addITEM(PirateBoots, "Pirate Boots", ListCreativeTabs.tabWeapons);
 
 		addITEM(ColaBackpack, "Cola Backpack", ListCreativeTabs.tabWeapons);
+		addITEM(TomoeDrums, "Tomoe Drums", ListCreativeTabs.tabWeapons);
 
 		addITEM(GreenKujaBow, "Green Kuja Bow", ListCreativeTabs.tabWeapons);
 		addITEM(BlueKujaBow, "Blue Kuja Bow", ListCreativeTabs.tabWeapons);
@@ -411,7 +413,8 @@ public class ListMisc
 		WyRegistry.registerName("ability.60millionvoltvari.name", "60 Million Volt Vari");
 		WyRegistry.registerName("ability.100millionvoltvari.name", "100 Million Volt Vari");
 		WyRegistry.registerName("ability.max200millionvoltvari.name", "Max 200 Million Volt Vari");
-
+		WyRegistry.registerName("ability.mamaragan.name", "Mamaragan");
+		
 		WyRegistry.registerName("quest." + ListQuests.swordsmanProgression01.getQuestID() + ".started", "<Swordsman Master> You want to become a swordsman master, young one ? I do like the sparks in your eyes so how about this, show me your best sword and I'll see if you're fit or not to start training with me.");
 		WyRegistry.registerName("quest." + ListQuests.swordsmanProgression01.getQuestID() + ".completed", "<Swordsman Master> That's a really nice blade you have there, really strong indeed. Fine, I will train you, when you're ready come and talk with me again !");
 		WyRegistry.registerName("quest." + ListQuests.swordsmanProgression02.getQuestID() + ".started", "<Swordsman Master> First we'll test your determination, you must survive the night in the wilderness without dying !");

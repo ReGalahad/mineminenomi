@@ -13,6 +13,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityExplosion;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
+import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilitySync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
@@ -23,6 +24,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.GoroProjectiles.
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.GoroProjectiles.VoltVari60Million;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListExtraAttributes;
+import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 
@@ -50,6 +52,12 @@ public class GoroAbilities
 		@Override
 		public void startCharging(EntityPlayer player)
 		{
+			if(hasTomoeDrumsEquipped(player))
+			{
+				this.attr.setAbilityDisplayName("Mamaragan");
+				this.attr.setAbilityCooldown(20);			
+			}
+			
 			super.startCharging(player);				
 		}
 		
@@ -72,32 +80,39 @@ public class GoroAbilities
 		public void endCharging(EntityPlayer player)
 		{						
 			MovingObjectPosition mop = WyHelper.rayTraceBlocks(player);	
-			
+
 			if(mop != null)
 			{
 				double i = mop.blockX;
 				double j = mop.blockY;
 				double k = mop.blockZ;
 
-				WyNetworkHelper.sendTo(new PacketPlayer("ElThorThunder", i, j, k), (EntityPlayerMP) player);
-				AbilityExplosion exp = WyHelper.newExplosion(player, i, j, k, 10);
-				exp.setFireAfterExplosion(true);
-				exp.doExplosion();
+				if(hasTomoeDrumsEquipped(player))
+				{
+					for(int t = 0; t < 5; t++)
+					{
+						i += WyMathHelper.randomWithRange(-15, 15);
+						k += WyMathHelper.randomWithRange(-15, 15);
+
+						WyNetworkHelper.sendTo(new PacketPlayer("ElThorThunder", i, j, k), (EntityPlayerMP) player);
+						AbilityExplosion exp = WyHelper.newExplosion(player, i, j, k, 10);
+						exp.setFireAfterExplosion(true);
+						exp.doExplosion();
+					}
+				}
+				else
+				{
+					WyNetworkHelper.sendTo(new PacketPlayer("ElThorThunder", i, j, k), (EntityPlayerMP) player);
+					AbilityExplosion exp = WyHelper.newExplosion(player, i, j, k, 10);
+					exp.setFireAfterExplosion(true);
+					exp.doExplosion();
+				}
 			}
 			
-			/*for(int x = 0; x < 10; x++)
-			{
-				int i = (int) (player.posX + WyMathHelper.randomWithRange(-50, 50));
-				int j = (int) player.posY;
-				int k = (int) (player.posZ + WyMathHelper.randomWithRange(-50, 50));
-				
-				WyNetworkHelper.sendTo(new PacketPlayer("ElThorThunder", i, j, k), (EntityPlayerMP) player);
-				AbilityExplosion exp = WyHelper.newExplosion(player, i, j, k, 20);
-				exp.setFireAfterExplosion(true);
-				exp.doExplosion();
-			}*/
-			
 			super.endCharging(player);
+					
+			this.attr.setAbilityDisplayName("El Thor");
+			this.attr.setAbilityCooldown(8);
 		}
 	}
 	
@@ -327,4 +342,9 @@ public class GoroAbilities
 		}
 	}
 	
+	
+	private static boolean hasTomoeDrumsEquipped(EntityPlayer player)
+	{
+		return player.getEquipmentInSlot(3) != null && player.getEquipmentInSlot(3).getItem() == ListMisc.TomoeDrums;
+	}
 }
