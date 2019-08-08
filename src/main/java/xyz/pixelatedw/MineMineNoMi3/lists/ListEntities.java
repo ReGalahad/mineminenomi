@@ -118,7 +118,7 @@ public class ListEntities
 
 		//Animals
 		WyRegistry.registerMob("Den Den Mushi", EntityDenDenMushi.class, 0xFF00FF, 0x00FF00);
-		WyRegistry.registerSpawnBiomesFor(EntityDenDenMushi.class, 20, 1, 2, Type.PLAINS, Type.SAVANNA, Type.DRY, Type.SPARSE, Type.CONIFEROUS, Type.MOUNTAIN);
+		WyRegistry.registerSpawnBiomesFor(EntityDenDenMushi.class, 50, 1, 3, Type.PLAINS, Type.SAVANNA, Type.DRY, Type.SPARSE, Type.CONIFEROUS, Type.MOUNTAIN);
 		WyRegistry.registerMob("Kung Fu Dugong", EntityKungFuDugong.class, 0xdbac64, 0x26815a);
 		WyRegistry.registerSpawnBiomesFor(EntityKungFuDugong.class, 30, 5, 7, dugongBiomes);
 		WyRegistry.registerMob("Lapahn", EntityLapahn.class, 0xaedbd7, 0x449a94);
