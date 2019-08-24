@@ -32,8 +32,6 @@ public class StructureBanditSmallBase extends Structure
 		WySchematicHelper.build(sch, world, posX, posY - 33, posZ, Blocks.bedrock);
 		populate(sch, posX, posY, posZ, world);
 
-		System.out.println("Build");
-		
 		return true;
 	}
 	
