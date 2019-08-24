@@ -219,7 +219,7 @@ public class EventsCore
 	{		
 		if(event.phase == Phase.END && event.side == Side.SERVER)
 		{
-			if(event.world.getWorldTime() % 12000 == 0)
+			if(event.world.getWorldTime() % 1200 == 0)
 			{
 				WyTelemetry.sendAllData();
 			}

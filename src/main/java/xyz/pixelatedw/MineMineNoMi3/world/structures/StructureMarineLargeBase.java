@@ -23,8 +23,8 @@ public class StructureMarineLargeBase extends Structure
 		boolean flagSpecialCheck = !MainWorldGen.checkCorners(sch, world, posX, posY, posZ);
 		boolean flagAboveGround = !MainWorldGen.checkCornersAboveGround(sch, world, posX, posY, posZ);
 		
-		//if(flagBiome || flagSpecialCheck || flagAboveGround)
-		//	return false;
+		if(flagBiome || flagSpecialCheck || flagAboveGround)
+			return false;
 		
 		WySchematicHelper.build(sch, world, posX, posY - 19, posZ, Blocks.bedrock);
 		populate(sch, posX, posY + 2, posZ, world);

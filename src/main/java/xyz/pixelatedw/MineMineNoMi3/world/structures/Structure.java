@@ -39,41 +39,55 @@ public abstract class Structure
 	
 	protected static void addChestTileEntity(World world, int[][] positions, int maxChests, Consumer<TileEntityChest> lootList)
 	{
-		List<TileEntityChest> chests = new ArrayList<TileEntityChest>();
-		
-		for(int[] pos : positions)
+		try
 		{
-			TileEntityChest chest = new TileEntityChest();
-			world.setTileEntity(pos[0], pos[1], pos[2], chest);
-
-			chests.add(chest);
+			List<TileEntityChest> chests = new ArrayList<TileEntityChest>();
+			
+			for(int[] pos : positions)
+			{
+				TileEntityChest chest = new TileEntityChest();
+				world.setTileEntity(pos[0], pos[1], pos[2], chest);
+	
+				chests.add(chest);
+			}
+	
+			WyMathHelper.shuffle(chests);
+			
+			int index = 0;
+			for(TileEntityChest chest : chests)
+			{
+				if(maxChests > 0 && index > maxChests)
+					break;
+				
+				lootList.accept(chest);
+				
+				index++;
+			}
 		}
-
-		WyMathHelper.shuffle(chests);
-		
-		int index = 0;
-		for(TileEntityChest chest : chests)
+		catch(Exception e)
 		{
-			if(maxChests > 0 && index > maxChests)
-				break;
-			
-			lootList.accept(chest);
-			
-			index++;
+			e.printStackTrace();
 		}
 	}
 	
 	protected static void addSpawnerTileEntity(World world, int[][] positions, String mobName, int min, int max)
 	{
-		List<TileEntityCustomSpawner> spawners = new ArrayList<TileEntityCustomSpawner>();
-		String mob = ID.PROJECT_ID + "." + mobName;
-		
-		for(int[] pos : positions)
+		try
 		{
-			int chance = max <= 0 ? min : (int) WyMathHelper.randomWithRange(min, max);		
-			TileEntityCustomSpawner spawner = new TileEntityCustomSpawner().setSpawnerMob(mob).setSpawnerLimit(chance);
-			world.setBlock(pos[0], pos[1], pos[2], ListMisc.CustomSpawner);
-			world.setTileEntity(pos[0], pos[1], pos[2], spawner);
+			List<TileEntityCustomSpawner> spawners = new ArrayList<TileEntityCustomSpawner>();
+			String mob = ID.PROJECT_ID + "." + mobName;
+			
+			for(int[] pos : positions)
+			{
+				int chance = max <= 0 ? min : (int) WyMathHelper.randomWithRange(min, max);		
+				TileEntityCustomSpawner spawner = new TileEntityCustomSpawner().setSpawnerMob(mob).setSpawnerLimit(chance);
+				world.setBlock(pos[0], pos[1], pos[2], ListMisc.CustomSpawner);
+				world.setTileEntity(pos[0], pos[1], pos[2], spawner);
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
 		}
 	}
 	
