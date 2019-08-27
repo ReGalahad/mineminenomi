@@ -47,28 +47,37 @@ public class RokushikiAbilities
 	
 	public static class Tekkai extends Ability
 	{
+		private int threshold = 300;
+		
 		public Tekkai() 
 		{
 			super(ListAttributes.TEKKAI); 
 		}
-		
+
 		@Override
 		public void duringPassive(EntityPlayer player, int passiveTimer)
 		{
-			if(passiveTimer > 1200)
+			if(passiveTimer > 2400 || this.threshold <= 0)
 			{
 				this.setPassiveActive(false);
 				this.startCooldown();
 				this.startExtUpdate(player);
-				super.endPassive(player);
+				this.endPassive(player);
 			}
+			
+			if(player.hurtTime > 0)
+				this.threshold--;
+			
+			System.out.println(this.threshold);
 		}
 		
 		@Override
 		public void endPassive(EntityPlayer player)
 		{
 			this.startCooldown();
-			this.startExtUpdate(player);	
+			this.startExtUpdate(player);
+			this.threshold = 300;
+			super.endPassive(player);
 		}
 	}
 	

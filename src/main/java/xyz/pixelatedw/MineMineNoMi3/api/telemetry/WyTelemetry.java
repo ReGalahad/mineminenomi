@@ -95,7 +95,8 @@ public class WyTelemetry
 				}
 				catch (Exception e)
 				{
-					e.printStackTrace();
+					WyDebug.debug("Cannot connect to the server !");
+					//e.printStackTrace();
 				}			
 			}
 		};
