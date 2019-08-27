@@ -48,7 +48,7 @@ public class SwordsmanAbilities
 		@Override
 		public void use(EntityPlayer player)
 		{
-			if (!ItemsHelper.isSword(player.getHeldItem()) || !DevilFruitsHelper.canUseSwordsmanAbilities(player))
+			if (!ItemsHelper.isSword(player.getHeldItem()) && !DevilFruitsHelper.canUseSwordsmanAbilities(player))
 			{
 				WyHelper.sendMsgToPlayer(player, "You need a sword to use this ability !");
 				return;
@@ -81,7 +81,7 @@ public class SwordsmanAbilities
 		@Override
 		public void use(EntityPlayer player)
 		{
-			if (!ItemsHelper.isSword(player.getHeldItem()) || !DevilFruitsHelper.canUseSwordsmanAbilities(player))
+			if (!ItemsHelper.isSword(player.getHeldItem()) && !DevilFruitsHelper.canUseSwordsmanAbilities(player))
 			{
 				WyHelper.sendMsgToPlayer(player, "You need a sword to use this ability !");
 				return;
@@ -105,7 +105,7 @@ public class SwordsmanAbilities
 		@Override
 		public void use(EntityPlayer player)
 		{
-			if (!ItemsHelper.isSword(player.getHeldItem()) || !DevilFruitsHelper.canUseSwordsmanAbilities(player))
+			if (!ItemsHelper.isSword(player.getHeldItem()) && !DevilFruitsHelper.canUseSwordsmanAbilities(player))
 			{
 				WyHelper.sendMsgToPlayer(player, "You need a sword to use this ability !");
 				return;
@@ -154,7 +154,7 @@ public class SwordsmanAbilities
 		@Override
 		public void use(EntityPlayer player)
 		{
-			if (!ItemsHelper.isSword(player.getHeldItem()) || !DevilFruitsHelper.canUseSwordsmanAbilities(player))
+			if (!ItemsHelper.isSword(player.getHeldItem()) && !DevilFruitsHelper.canUseSwordsmanAbilities(player))
 			{
 				WyHelper.sendMsgToPlayer(player, "You need a sword to use this ability !");
 				return;

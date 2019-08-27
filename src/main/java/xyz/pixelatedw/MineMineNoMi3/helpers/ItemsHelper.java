@@ -107,7 +107,7 @@ public class ItemsHelper
 		Multimap multimap = itemStack.getAttributeModifiers();
 		if (multimap.containsKey(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName()))
 			return true;
-
+		
 		return false;
 	}
 	
