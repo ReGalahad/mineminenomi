@@ -103,6 +103,7 @@ public class MainMod
 		 */
 	}
 
+	@SuppressWarnings("unused")
 	@EventHandler
 	public void serverInit(FMLServerStartingEvent event)
 	{
