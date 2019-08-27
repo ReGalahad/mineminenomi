@@ -9,6 +9,8 @@ import org.apache.http.impl.client.BasicResponseHandler;
 import com.google.gson.internal.LinkedTreeMap;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.Phase;
 import cpw.mods.fml.relauncher.Side;
@@ -211,6 +213,26 @@ public class EventsCore
 					}
 				}
 			}
+		}
+	}
+	
+	@SubscribeEvent
+	public void onPlayerLoggedIn(PlayerLoggedInEvent event)
+	{
+		if(!WyDebug.isDebug())
+		{
+			WyTelemetry.addMiscStat("onlinePlayers", "Online Players", 1);
+			WyTelemetry.sendAllData();
+		}
+	}
+	
+	@SubscribeEvent
+	public void onPlayerLoggedIn(PlayerLoggedOutEvent event)
+	{
+		if(!WyDebug.isDebug())
+		{
+			WyTelemetry.addMiscStat("onlinePlayers", "Online Players", -1);
+			WyTelemetry.sendAllData();
 		}
 	}
 	
