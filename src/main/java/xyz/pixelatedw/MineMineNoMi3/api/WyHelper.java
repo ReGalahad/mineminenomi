@@ -70,9 +70,8 @@ public class WyHelper
 		catch (ParseException e)
 		{
 			e.printStackTrace();
+			return false;
 		}
-		
-		if(target == null) return false;
 		
 		Calendar now = Calendar.getInstance();
 		return now.after(target);
