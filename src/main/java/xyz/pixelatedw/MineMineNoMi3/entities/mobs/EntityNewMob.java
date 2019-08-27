@@ -19,7 +19,8 @@ public class EntityNewMob extends EntityMob implements IDynamicRenderer, INBTEnt
 	private int doriki, belly, textureId, state;
 	private boolean hasBusoHaki;
 	private EntityAIBase currentAI, previousAI;
-
+	protected int threat;
+	
 	public EntityNewMob(World worldIn) 
 	{
 		this(worldIn, null);
@@ -176,7 +177,7 @@ public class EntityNewMob extends EntityMob implements IDynamicRenderer, INBTEnt
 			if(!hasSoru && WyMathHelper.randomWithRange(1, 10) >= 8)
 			{
 				this.tasks.addTask(1, new EntityAISoru(this));
-				hasSoru = true;
+				this.threat += 2;
 				rokushikiCount++;
 				continue;
 			}
@@ -184,7 +185,7 @@ public class EntityNewMob extends EntityMob implements IDynamicRenderer, INBTEnt
 			if(!hasTekkai && WyMathHelper.randomWithRange(1, 10) >= 8)
 			{
 				this.tasks.addTask(1, new EntityAITekkai(this));
-				hasTekkai = true;
+				this.threat += 5;
 				rokushikiCount++;
 				continue;
 			}
@@ -192,7 +193,7 @@ public class EntityNewMob extends EntityMob implements IDynamicRenderer, INBTEnt
 			if(!hasRankyaku && WyMathHelper.randomWithRange(1, 10) >= 5)
 			{
 				this.tasks.addTask(1, new EntityAIRankyaku(this));
-				hasRankyaku = true;
+				this.threat += 20;
 				rokushikiCount++;
 				continue;
 			}
@@ -200,7 +201,7 @@ public class EntityNewMob extends EntityMob implements IDynamicRenderer, INBTEnt
 			if(!hasGeppo && WyMathHelper.randomWithRange(1, 10) >= 5)
 			{
 				this.tasks.addTask(1, new EntityAIGeppo(this));
-				hasGeppo = true;
+				this.threat += 10;
 				rokushikiCount++;
 				continue;
 			}

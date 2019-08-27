@@ -36,9 +36,6 @@ public class EntityPirateCaptain extends PirateData
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.23D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(6.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(50.0D);
-		
-		this.setDoriki(30 + this.worldObj.rand.nextInt(50));
-		this.setBelly(50 + this.worldObj.rand.nextInt(30));
 
 		if(!this.worldObj.isRemote)
 		{
@@ -46,6 +43,7 @@ public class EntityPirateCaptain extends PirateData
 			if(this.rand.nextInt(100) <= 60)
 			{
 				this.setBusoHaki(true);
+				this.threat += 20;
 
 				Item sword = randomSword[this.rand.nextInt(randomSword.length)];			
 				if(sword != null)
@@ -69,6 +67,12 @@ public class EntityPirateCaptain extends PirateData
 	{
     	if(swordStack != null)
     		this.setCurrentItemOrArmor(0, swordStack);
+    	
+		if(!this.worldObj.isRemote)
+		{
+			this.setDoriki(15 + this.worldObj.rand.nextInt(50) + this.threat);
+			this.setBelly(20 + this.worldObj.rand.nextInt(20) + (this.threat / 2));
+		}
 	}
 	    
 	@Override

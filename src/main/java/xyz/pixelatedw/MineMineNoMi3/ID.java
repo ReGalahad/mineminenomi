@@ -77,7 +77,7 @@ public class ID
 	
 	PROJECT_ID = "mineminenomi",
 	PROJECT_NAME = "Mine Mine no Mi",
-	PROJECT_VERSION = "0.6.0",
+	PROJECT_VERSION = "0.6.0a",
 	PROJECT_MCVERSION = "1.7.10",
 
 	PARTICLEFX_DOKUGOMU = "dokuGumo",
