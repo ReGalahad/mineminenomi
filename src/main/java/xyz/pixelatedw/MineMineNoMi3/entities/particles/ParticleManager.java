@@ -2,6 +2,7 @@ package xyz.pixelatedw.MineMineNoMi3.entities.particles;
 
 import java.util.HashMap;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
@@ -191,6 +192,9 @@ public class ParticleManager
 	
 	public boolean spawnFX(EntityPlayer player, double posX, double posY, double posZ, String id)
 	{
+		if(Math.abs(Minecraft.getMinecraft().gameSettings.particleSetting - 2) == 0)
+			return false;
+		
 		if(this.particleEffects.containsKey(id))
 		{
 			this.particleEffects.get(id).spawn(player, posX, posY, posZ);

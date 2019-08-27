@@ -8,6 +8,7 @@ import java.util.List;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -96,6 +97,23 @@ public class DevilFruitsHelper
 		return map;
 	}
 	
+	public static int getParticleSettingModifier(int defaultAmount)
+	{
+		int modifier = Math.abs(Minecraft.getMinecraft().gameSettings.particleSetting - 2);
+		
+		switch(modifier)
+		{
+			case 2:
+				return defaultAmount;
+			case 1:
+				return defaultAmount / 2;
+			case 0:
+				return 0;
+				
+			default:
+				return defaultAmount;
+		}
+	}
 	
 	public static void sendShounenScream(EntityPlayer player, String ability, int part)
 	{

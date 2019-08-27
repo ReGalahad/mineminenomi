@@ -59,7 +59,7 @@ public class HieProjectiles
 		{	
 			if(this.worldObj.isRemote)
 			{
-				for(int i = 0; i < 5; i++)
+				for(int i = 0; i < DevilFruitsHelper.getParticleSettingModifier(5); i++)
 				{
 					double offsetX = WyMathHelper.randomWithRange(-1, 1);
 					double offsetY = WyMathHelper.randomWithRange(-1, 1);

@@ -96,7 +96,7 @@ public class WeatherProjectiles
 		{
 			if(this.worldObj.isRemote)
 			{
-				for(int i = 0; i < 5; i++)
+				for(int i = 0; i < DevilFruitsHelper.getParticleSettingModifier(5); i++)
 				{
 					double offsetX = WyMathHelper.randomDouble() / 4;
 					double offsetY = WyMathHelper.randomDouble() / 4;
