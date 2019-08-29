@@ -157,12 +157,7 @@ public class EventsOnGain
 					
 					if ((props.getDoriki() / 100) > entity.getDoriki())
 					{
-						int x = (props.getDoriki() / 100) - entity.getDoriki();
-						if (x <= 0)
-							x = 1;
-
-						plusDoriki = 1 / x;
-						if (plusDoriki < 1)
+						if(MainConfig.enableMinimumDorikiPerKill)
 							plusDoriki = 1;
 					}
 					else
