@@ -80,7 +80,7 @@ public class MainConfig
 		maxDojoSpawn = config.get("structures", "Max Dojos to Spawn per World", 5).getInt();
 		enableCamps = config.get("structures", "Allow Camps to Spawn", true).getBoolean();
 		enableBases = config.get("structures", "Allow Bases to Spawn", true).getBoolean();
-		enableClouds = config.get("structures", "Allow Clouds to Spawn", true).getBoolean();
+		enableClouds = config.get("structures", "Allow Sky Islands to Spawn", true).getBoolean();
 				
 		enableQuests = config.get("quests", "Allow Quests", true, "Allows quests to be accepted / completed; true by default").getBoolean();
 		enableQuestProgression = config.get("quests", "Allow Quest Progression", false, "Allows quests to reward players with abilities, otherwise all abilities will be unlocked from the beginning; true by default").getBoolean();
