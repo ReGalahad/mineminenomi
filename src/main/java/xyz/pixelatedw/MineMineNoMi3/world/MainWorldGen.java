@@ -21,6 +21,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.world.structures.StructureBanditSmallBase;
 import xyz.pixelatedw.MineMineNoMi3.world.structures.StructureCamp;
+import xyz.pixelatedw.MineMineNoMi3.world.structures.StructureCloud;
 import xyz.pixelatedw.MineMineNoMi3.world.structures.StructureDojo;
 import xyz.pixelatedw.MineMineNoMi3.world.structures.StructureLargeShip;
 import xyz.pixelatedw.MineMineNoMi3.world.structures.StructureMarineLargeBase;
@@ -43,7 +44,16 @@ public class MainWorldGen implements IWorldGenerator
 	private void generateSurface(World world, Random random, int i, int j) 
 	{
 		this.addOreSpawn(ListMisc.KairosekiOre, world, random, i, j, 16, 16, 4 + random.nextInt(3), 10, 15, 50);	
-				
+		
+		if(MainConfig.enableClouds && random.nextInt(100) + random.nextDouble() <= 1)
+		{
+			int posX = i;
+			int posY = random.nextInt(128);
+			int posZ = j;
+			
+			StructureCloud.build(world, posX, posY, posZ);
+		}
+		
 		if(MainConfig.enableShips)
 		{
 			this.addStructureSpawn(WySchematicHelper.load("marineShip"), world, random, i, j, 1, 1, 1.5 * MainConfig.modifierShipsSpawn);
