@@ -2,6 +2,7 @@ package xyz.pixelatedw.MineMineNoMi3.world.structures;
 
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
@@ -24,6 +25,8 @@ public class StructureCloud extends Structure
 				
 			DevilFruitsHelper.placeBlockIfAllowed(world, newPosX, newPosY, newPosZ, ListMisc.SkyBlock, "air");			
 		}
+		
+		WyTelemetry.addStructureStat("sky_island", "Sky Island", 1);
 
 		return true;
 	}
