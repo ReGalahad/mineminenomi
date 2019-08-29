@@ -360,7 +360,7 @@ public class ListMisc
 		addBLOCK(KairosekiBlock, "Kairoseki Block", 3.5F, null, ListCreativeTabs.tabMisc);
 		addBLOCK(EnchantmentTable, "Kairoseki Table", 3.5F, null, ListCreativeTabs.tabMisc);
 		addBLOCK(DenDenMushi, "Den Den Mushi", 0.5F, TileEntityDenDenMushi.class, ListCreativeTabs.tabMisc);
-		addBLOCK(SkyBlock, "Sky Block", 0.8F, null, ListCreativeTabs.tabMisc);
+		addBLOCK(SkyBlock, "Sky Block", 0.6F, null, ListCreativeTabs.tabMisc);
 		addBLOCK(Barrier, "Crash Barrier", Float.POSITIVE_INFINITY, null, null);
 		addBLOCK(Poison, "Poison", 1.5F, null, null);
 		addBLOCK(DemonPoison, "Demon Poison", 1.5F, null, null);
