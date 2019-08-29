@@ -27,6 +27,7 @@ public class MainConfig
 	public static boolean enableOneFruitPerWorld;
 	public static boolean enableYamiSpecialPower;
 	public static boolean enableAmbushes;
+	public static boolean enableMinimumDorikiPerKill;
 	public static double rateDFDrops;
 	public static double modifierShipsSpawn;
 	public static double rateWantedPostersPackagesSpawn;
@@ -71,6 +72,7 @@ public class MainConfig
 		enableExtraHearts = config.get(Configuration.CATEGORY_GENERAL, "Receive Extra Hearts", true, "Allows players to receive extra hearts based on their doriki; true by default").getBoolean();
 		enableMobRewards = config.get(Configuration.CATEGORY_GENERAL, "Allow Mob Rewards", true, "Allows mobs to reward doriki, bounty or items; true by default").getBoolean();
 		modifierDorikiReward = config.get(Configuration.CATEGORY_GENERAL, "Modifier for Doriki Reward", 1.0, "Multiplier for the doriki reward when killing a mob").getDouble();
+		enableMinimumDorikiPerKill = config.get(Configuration.CATEGORY_GENERAL, "Minimum Doriki per Kill", false, "Ensures a minimum of 1 doriki is gained after each kill").getBoolean();
 		
 		enableShips = config.get("structures", "Allow Ships to Spawn", true).getBoolean();
 		modifierShipsSpawn = config.get("structures", "Modifier for Spawning Ships", 5.0).getDouble();
