@@ -1,11 +1,5 @@
 package xyz.pixelatedw.MineMineNoMi3.events;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.BasicResponseHandler;
-
 import com.google.gson.internal.LinkedTreeMap;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -18,6 +12,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.event.ClickEvent;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
@@ -165,38 +160,33 @@ public class EventsCore
 			if (!player.worldObj.isRemote)
 			{
 				if(ID.DEV_EARLYACCESS && !WyDebug.isDebug())
-					WyHelper.isPatreon(player);
+				{
+					if(!WyHelper.isPatreon(player))
+						((EntityPlayerMP)player).playerNetServerHandler.kickPlayerFromServer(EnumChatFormatting.BOLD + "" + EnumChatFormatting.RED + "WARNING! \n\n " + EnumChatFormatting.RESET + "You don't have access to this version yet!");
+				}
 				
 				if(MainConfig.enableUpdateMsg)
 				{
 					try 
 					{
 						String[] version = ID.PROJECT_VERSION.split("\\.");
-	
+						
 						int x = Integer.parseInt(version[0]) * 100;
 						int y = Integer.parseInt(version[1]) * 10;
 						int z = Integer.parseInt(version[2]);
 						
 						int versionCode = x + y + z;
 						
-						String url = "/getNewestVersion";
+						String apiURL = "/getNewestVersion";
 						String json = Values.gson.toJson(ID.PROJECT_MCVERSION);
 						
-						HttpPost post = new HttpPost(Values.urlConnection + "" + url);	
-						StringEntity postingString;
-						postingString = new StringEntity(json);
-						post.setEntity(postingString);
-						post.setHeader("Content-Type", "application/json");
+						String result = WyTelemetry.sendPOST(apiURL, json);
 						
-						HttpResponse response = Values.httpClient.execute(post);
-						ResponseHandler<String> handler = new BasicResponseHandler();
-						String body = handler.handleResponse(response);
-						
-						if(!body.isEmpty())
+						if(!WyHelper.isNullOrEmpty(result))
 						{
-							LinkedTreeMap result = Values.gson.fromJson(body, LinkedTreeMap.class);
-							int highestVersion = ((Double) result.get("highestVersionCode")).intValue();
-							String highestName = (String) result.get("highestVersionName");
+							LinkedTreeMap resultMap = Values.gson.fromJson(result, LinkedTreeMap.class);
+							int highestVersion = ((Double) resultMap.get("highestVersionCode")).intValue();
+							String highestName = (String) resultMap.get("highestVersionName");
 							
 							if(highestVersion > versionCode)
 							{
@@ -227,7 +217,7 @@ public class EventsCore
 	}
 	
 	@SubscribeEvent
-	public void onPlayerLoggedIn(PlayerLoggedOutEvent event)
+	public void onPlayerLoggedOut(PlayerLoggedOutEvent event)
 	{
 		if(!WyDebug.isDebug())
 		{
