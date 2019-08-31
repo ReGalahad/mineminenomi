@@ -1,12 +1,12 @@
 package xyz.pixelatedw.MineMineNoMi3.api.telemetry;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.HashMap;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.BasicResponseHandler;
 
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.Values;
@@ -57,54 +57,97 @@ public class WyTelemetry
 		{
 			@Override
 			public void run()
-			{
-				try
-				{		
-					Object[][] paths = new Object[][] 
-					{
-						{"/addStructureStat", structuresDataCompound},
-						{"/addKillStat", killsDataCompound},
-						{"/addAbilityStat", abilitiesDataCompound},
-						{"/addMiscStat", miscDataCompound},
-						{"/addDFStat", devilFruitsDataCompound}
-					};
-							
-					for(Object[] o : paths)
-					{
-						String url = (String) o[0];
-						StatDataCompound compound = (StatDataCompound) o[1];
-						
-						if(compound.data.isEmpty())
-							continue;
-						
-						String json = Values.gson.toJson(compound);
-						HttpPost post = new HttpPost(Values.urlConnection + "" + url);
-						StringEntity postingString;
-						postingString = new StringEntity(json);
-						String size = WyHelper.formatBytes(json.getBytes().length);
-						debugJSON(compound);
-						post.setEntity(postingString);
-						post.setHeader("Content-Type", "application/json");
-						HttpResponse response = Values.httpClient.execute(post);
-						ResponseHandler<String> handler = new BasicResponseHandler();
-						String body = handler.handleResponse(response);
-						System.out.println(body.isEmpty() ? "Success" : body);
-						
-						compound.empty();
-					}
-				}
-				catch (Exception e)
+			{	
+				Object[][] paths = new Object[][] 
 				{
-					WyDebug.debug("Cannot connect to the server !");
-					//e.printStackTrace();
-				}			
+					{"/addStructureStat", structuresDataCompound},
+					{"/addKillStat", killsDataCompound},
+					{"/addAbilityStat", abilitiesDataCompound},
+					{"/addMiscStat", miscDataCompound},
+					{"/addDFStat", devilFruitsDataCompound}
+				};
+							
+				for (Object[] o : paths)
+				{
+					String apiURL = (String) o[0];
+					StatDataCompound compound = (StatDataCompound) o[1];
+
+					if (compound.data.isEmpty())
+						continue;
+
+					// Turning the coumpound data into a nice json format
+					String json = Values.gson.toJson(compound);
+
+					String result = sendPOST(apiURL, json);
+
+					WyDebug.debug(result.isEmpty() ? "Success" : result);
+
+					compound.empty();
+				}
 			}
 		};
 		httpThread.setName("Mine Mine no Mi - Stats POST");
 		httpThread.start();
 	}
 
-	
+	public static String sendPOST(String sendUrl, String object)
+	{
+		BufferedReader reader = null;
+		String result = "";
+		
+		try
+		{
+			String json = object;
+
+			// Actual URL to the API
+			URL url = new URL(Values.urlConnection + "" + sendUrl);
+
+			// Opening a connection
+			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+			// Setting the properties for this connection
+			connection.setRequestMethod("POST");
+			connection.setRequestProperty("Content-Type", "application/json");
+			connection.setUseCaches(false);
+			connection.setDoOutput(true);
+			connection.connect();
+
+			// Writing the JSON in the stream
+			OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
+			writer.write(json);
+			writer.flush();
+
+			// Read the output from the server
+			reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+			StringBuilder stringBuilder = new StringBuilder();
+
+			String line = null;
+			while ((line = reader.readLine()) != null)
+			{
+				stringBuilder.append(line);
+			}
+
+			result = stringBuilder.toString();
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			try
+			{
+				if (reader != null)
+					reader.close();
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		
+		return result;
+	}
 	
 	private static void debugJSON(StatDataCompound compound)
 	{
