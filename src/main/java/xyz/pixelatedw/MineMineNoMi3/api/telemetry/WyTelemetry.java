@@ -1,80 +1,158 @@
 package xyz.pixelatedw.MineMineNoMi3.api.telemetry;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.util.HashMap;
 
-import net.minecraft.client.Minecraft;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.BasicResponseHandler;
+
 import xyz.pixelatedw.MineMineNoMi3.ID;
-import xyz.pixelatedw.MineMineNoMi3.MainConfig;
+import xyz.pixelatedw.MineMineNoMi3.Values;
+import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
 
-public class WyTelemetry 
-{
-	
-	private static String urlConnection;
-	
-	static
+public class WyTelemetry
+{	
+	private static StatDataCompound structuresDataCompound = new StatDataCompound();
+	private static StatDataCompound killsDataCompound = new StatDataCompound();
+	private static StatDataCompound abilitiesDataCompound = new StatDataCompound();
+	private static StatDataCompound miscDataCompound = new StatDataCompound();
+	private static StatDataCompound devilFruitsDataCompound = new StatDataCompound();
+
+	public static void addStructureStat(String id, String name, int value)
 	{
-		if(WyDebug.isDebug())
-			urlConnection = "http://wynd.go.ro/mineminenomi/globalstats.php";
-		else
-			urlConnection = "http://stats.pixelatedw.xyz/globalstats.php";
+		structuresDataCompound.put(id, name, value);
+		//debugJSON(structuresDataCompound);
 	}
 	
-	public static void addStat(final String statName, final long value) 
+	public static void addKillStat(String id, String name, int value)
 	{
-        Thread newThread = new Thread()
-        {
-            public void run()
-            {
-    			String data =  "stats" + ID.PROJECT_VERSION.replace(".", "") + ":" + statName + "=" + value;
-    			
-    			sendData(data);
-            }
-        };
-        newThread.setName("MMnM Stats Thread");
-        newThread.start();
+		killsDataCompound.put(id, name, value);
+		//debugJSON(killsDataCompound);
 	}
 	
-	private static void sendData(String data)
+	public static void addAbilityStat(String id, String name, int value)
 	{
-		if(MainConfig.enableTelemetry && !data.isEmpty() && data != null)
+		abilitiesDataCompound.put(id, name, value);
+		//debugJSON(abilitiesDataCompound);
+	}
+	
+	public static void addMiscStat(String id, String name, int value)
+	{
+		miscDataCompound.put(id, name, value);
+		//debugJSON(miscDataCompound);
+	}
+	
+	public static void addDevilFruitStat(String id, String name, int value)
+	{
+		devilFruitsDataCompound.put(id, name, value);
+		//debugJSON(devilFruitsDataCompound);
+	}
+	
+	public static void sendAllData()
+	{
+		Thread httpThread = new Thread()
 		{
-			try 
+			@Override
+			public void run()
 			{
-	            HttpURLConnection conn = (HttpURLConnection)(new URL(urlConnection)).openConnection();
-	            conn.setRequestMethod("POST");
-	            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-	            conn.setRequestProperty("Content-Length", "" + data.getBytes().length);
-	            conn.setRequestProperty("Content-Language", "en-US");
-	            conn.setUseCaches(false);
-	            conn.setDoOutput(true);
-	            DataOutputStream out = new DataOutputStream(conn.getOutputStream());
-	            out.writeBytes(data);
-	            out.flush();
-	            out.close();
-	 
-	            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-	            StringBuffer ret = new StringBuffer();
-	            String line;
-	 
-	            while ((line = in.readLine()) != null)
-	            {
-	                ret.append(line);
-	                ret.append('\r');
-	            }
-	
-	            in.close();
-			} 
-			catch (IOException e) 
-			{
-				e.printStackTrace();
+				try
+				{		
+					Object[][] paths = new Object[][] 
+					{
+						{"/addStructureStat", structuresDataCompound},
+						{"/addKillStat", killsDataCompound},
+						{"/addAbilityStat", abilitiesDataCompound},
+						{"/addMiscStat", miscDataCompound},
+						{"/addDFStat", devilFruitsDataCompound}
+					};
+							
+					for(Object[] o : paths)
+					{
+						String url = (String) o[0];
+						StatDataCompound compound = (StatDataCompound) o[1];
+						
+						if(compound.data.isEmpty())
+							continue;
+						
+						String json = Values.gson.toJson(compound);
+						HttpPost post = new HttpPost(Values.urlConnection + "" + url);
+						StringEntity postingString;
+						postingString = new StringEntity(json);
+						String size = WyHelper.formatBytes(json.getBytes().length);
+						debugJSON(compound);
+						post.setEntity(postingString);
+						post.setHeader("Content-Type", "application/json");
+						HttpResponse response = Values.httpClient.execute(post);
+						ResponseHandler<String> handler = new BasicResponseHandler();
+						String body = handler.handleResponse(response);
+						System.out.println(body.isEmpty() ? "Success" : body);
+						
+						compound.empty();
+					}
+				}
+				catch (Exception e)
+				{
+					WyDebug.debug("Cannot connect to the server !");
+					//e.printStackTrace();
+				}			
 			}
+		};
+		httpThread.setName("Mine Mine no Mi - Stats POST");
+		httpThread.start();
+	}
+
+	
+	
+	private static void debugJSON(StatDataCompound compound)
+	{
+		String json = Values.gson.toJson(compound);
+		String size = WyHelper.formatBytes(json.getBytes().length);
+		WyDebug.debug("\n JSON: " + json + "\n Size: " + size);
+	}
+	
+	private static class StatDataCompound
+	{
+		private String mcVersion;
+		private String modVersion;
+		private int source;
+		private HashMap<String, StatData> data = new HashMap<String, StatData>();
+		
+		public StatDataCompound()
+		{
+			this.mcVersion = ID.PROJECT_MCVERSION;
+			this.modVersion = ID.PROJECT_VERSION;
+			this.source = 0;
+		}
+		
+		public void put(String id, String name, int value)
+		{
+			if(data.containsKey(id))
+				data.get(id).value += value;
+			else
+			{
+				StatData newData = new StatData(name, value);
+				data.put(id, newData);
+			}
+		}
+		
+		public void empty()
+		{
+			data = new HashMap<String, StatData>(); 
 		}
 	}
 	
+	private static class StatData
+	{
+		private String name;
+		private int value;
+		
+		public StatData(String name, int value)
+		{
+			this.name = name;
+			this.value = value;
+		}
+	}
 }

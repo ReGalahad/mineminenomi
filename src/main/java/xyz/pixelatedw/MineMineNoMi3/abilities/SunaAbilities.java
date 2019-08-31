@@ -38,6 +38,7 @@ public class SunaAbilities
 			super(ListAttributes.DESERT_GIRASOLE); 
 		}
 		
+		@Override
 		public void startCharging(EntityPlayer player)
 		{
 			if(!this.isOnCooldown)
@@ -45,6 +46,7 @@ public class SunaAbilities
 			super.startCharging(player);
 		}
 		
+		@Override
 		public void endCharging(EntityPlayer player)
 		{		
 			if(!this.isOnCooldown)
@@ -78,6 +80,7 @@ public class SunaAbilities
 			super(ListAttributes.DESERT_ENCIERRO); 
 		}
 		
+		@Override
 		public void hitEntity(EntityPlayer player, EntityLivingBase target)
 		{
 			WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_DESERTENCIERRO, target), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
@@ -92,6 +95,7 @@ public class SunaAbilities
 			super(ListAttributes.BARJAN); 
 		}
 		
+		@Override
 		public void use(EntityPlayer player)
 		{		
 			this.projectile = new SunaProjectiles.Barjan(player.worldObj, player, attr);
@@ -106,6 +110,7 @@ public class SunaAbilities
 			super(ListAttributes.SABLES); 
 		}	
 		
+		@Override
 		public void hitEntity(EntityPlayer player, EntityLivingBase target) 
 		{	
 			double newPosX = 0, newPosY = 0, newPosZ = 0;
@@ -136,6 +141,7 @@ public class SunaAbilities
 			super(ListAttributes.GROUND_DEATH); 
 		}
 		
+		@Override
 		public void use(EntityPlayer player)
 		{	
 			if(!this.isOnCooldown())
@@ -144,7 +150,7 @@ public class SunaAbilities
 				{
 					for(EntityLivingBase entityLivingBase : WyHelper.getEntitiesNear(player, 25))
 					{
-						WyHelper.createFilledCube(entityLivingBase, new int[] {2, 2, 2}, Blocks.sand, "air");
+						WyHelper.createFilledCube(entityLivingBase, new int[] {2, 2, 2}, Blocks.sand, "air", "foliage");
 					}	
 					
 					WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_GROUNDDEATH, player.posX, player.posY, player.posZ), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);			
@@ -162,6 +168,7 @@ public class SunaAbilities
 			super(ListAttributes.DESERT_SPADA); 
 		}
 		
+		@Override
 		public void use(EntityPlayer player)
 		{		
 			if(!isOnCooldown)

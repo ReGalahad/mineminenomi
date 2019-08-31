@@ -3,21 +3,18 @@ package xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles;
 import java.util.ArrayList;
 import java.util.Random;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.EntityFireworkSparkFX;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
-import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
+import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 
 public class MeraProjectiles
@@ -48,11 +45,12 @@ public class MeraProjectiles
 			super(world, player, attr);		
 		}
 		
+		@Override
 		public void onUpdate()
 		{		
 			if(this.worldObj.isRemote)
-			{
-				for (int i = 0; i < 25; i++)
+			{			
+				for (int i = 0; i < DevilFruitsHelper.getParticleSettingModifier(25); i++)
 				{
 					double offsetX = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
 					double offsetY = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
@@ -68,7 +66,7 @@ public class MeraProjectiles
 					MainMod.proxy.spawnCustomParticles(this, particle);				
 				}
 				
-				for (int i = 0; i < 2; i++)
+				for (int i = 0; i < DevilFruitsHelper.getParticleSettingModifier(2); i++)
 				{
 					double offsetX = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
 					double offsetY = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
@@ -102,11 +100,13 @@ public class MeraProjectiles
 			super(world, player, attr);		
 		}
 		
+		@Override
 		public void tasksImapct(MovingObjectPosition hit)
 		{
 			this.worldObj.setBlock((int)this.posX, (int)this.posY, (int)this.posZ, Blocks.fire);
 		}
 		
+		@Override
 		public void onUpdate()
 		{	
 			if(this.worldObj.isRemote)
@@ -141,11 +141,12 @@ public class MeraProjectiles
 			super(world, player, attr);		
 		}
 		
+		@Override
 		public void onUpdate()
 		{	
 			if(this.worldObj.isRemote)
 			{
-				for (int i = 0; i < 75; i++)
+				for (int i = 0; i < DevilFruitsHelper.getParticleSettingModifier(75); i++)
 				{
 					double offsetX = (new Random().nextInt(40) + 2.0D - 20.0D) / 10.0D;
 					double offsetY = (new Random().nextInt(40) + 2.0D - 20.0D) / 10.0D;
@@ -161,7 +162,7 @@ public class MeraProjectiles
 					MainMod.proxy.spawnCustomParticles(this, particle);					
 				}
 				
-				for (int i = 0; i < 10; i++)
+				for (int i = 0; i < DevilFruitsHelper.getParticleSettingModifier(10); i++)
 				{
 					double offsetX = (new Random().nextInt(40) + 2.0D - 20.0D) / 10.0D;
 					double offsetY = (new Random().nextInt(40) + 2.0D - 20.0D) / 10.0D;
@@ -195,6 +196,7 @@ public class MeraProjectiles
 			super(world, player, attr);		
 		}
 		
+		@Override
 		public void tasksImapct(MovingObjectPosition hit)
 		{
 			if(hit.entityHit != null)
@@ -203,9 +205,10 @@ public class MeraProjectiles
 			this.worldObj.setBlock((int)this.posX, (int)this.posY, (int)this.posZ, Blocks.fire);
 		};
 		
+		@Override
 		public void onUpdate()
 		{	
-			for (int i = 0; i < 25; i++)
+			for (int i = 0; i < DevilFruitsHelper.getParticleSettingModifier(25); i++)
 			{
 				double offsetX = (new Random().nextInt(10) + 1.0D - 5.0D) / 10.0D;
 				double offsetY = (new Random().nextInt(10) + 1.0D - 5.0D) / 10.0D;
@@ -231,6 +234,7 @@ public class MeraProjectiles
 			super(world, player, attr);		
 		}
 		
+		@Override
 		public void tasksImapct(MovingObjectPosition hit)
 		{
 			if(hit.entityHit != null)

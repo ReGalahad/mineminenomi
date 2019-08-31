@@ -13,7 +13,7 @@ import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import xyz.pixelatedw.MineMineNoMi3.blocks.dials.tileentities.TileEntityMilkyDial;
+import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityMilkyDial;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
 public class BlockMilkyDial extends BlockContainer

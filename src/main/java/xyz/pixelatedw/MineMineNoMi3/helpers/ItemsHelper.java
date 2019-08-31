@@ -101,7 +101,7 @@ public class ItemsHelper
 	
 	public static boolean isSword(ItemStack itemStack)
 	{
-		if(itemStack == null)
+		if (itemStack == null)
 			return false;
 		
 		if (itemStack.getItem() instanceof ItemSword)
@@ -110,7 +110,7 @@ public class ItemsHelper
 		Multimap multimap = itemStack.getAttributeModifiers();
 		if (multimap.containsKey(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName()))
 			return true;
-
+		
 		return false;
 	}
 	

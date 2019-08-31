@@ -77,7 +77,7 @@ public class ID
 	
 	PROJECT_ID = "mineminenomi",
 	PROJECT_NAME = "Mine Mine no Mi",
-	PROJECT_VERSION = "0.6.0",
+	PROJECT_VERSION = "0.6.0a",
 	PROJECT_MCVERSION = "1.7.10",
 
 	PARTICLEFX_DOKUGOMU = "dokuGumo",
@@ -131,7 +131,10 @@ public class ID
 	PARTICLEFX_RUSTTOUCH = "rustTouch",
 	PARTICLEFX_CHLOROBALL = "chloroBall",
 	PARTICLEFX_CHLOROBALLCLOUD = "chloroBallCloud",
-			
+	PARTICLEFX_ABOVEHEAD_ANGRY = "aboveHeadAngry",
+	PARTICLEFX_ABOVEHEAD_HAPPY = "aboveHeadHappy",
+	PARTICLEFX_ABOVEHEAD_HEART = "aboveHeadHeart",
+	
 	EXTRAEFFECT_MERO = "mero",
 	EXTRAEFFECT_HIE = "hie",
 	EXTRAEFFECT_CHIYUHORMONE = "chiyuHormone",
@@ -142,6 +145,7 @@ public class ID
 	EXTRAEFFECT_SPIDEROVERLAY = "spiderOverlay",	
 	EXTRAEFFECT_ORIBIND = "oriBind",
 	EXTRAEFFECT_ABAREHIMATSURI = "abareHimatsuri",
+	EXTRAEFFECT_LOGIA_OFF = "logiaOff",
 			
 	CREW_ARLONG = "Arlong Pirates",
 	CREW_BAROQUEWORKS = "Baroque Works",

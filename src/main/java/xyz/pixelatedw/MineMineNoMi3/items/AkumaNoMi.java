@@ -3,6 +3,7 @@ package xyz.pixelatedw.MineMineNoMi3.items;
 import java.util.List;
 
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
@@ -15,12 +16,14 @@ import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.abilities.FishKarateAbilities;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.WyRegistry;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilitySync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedWorldData;
 import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListCreativeTabs;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSyncInfo;
@@ -49,14 +52,29 @@ public class AkumaNoMi extends ItemFood
 		return itemStack;
 	}
 
+    @Override
+	public boolean onEntityItemUpdate(EntityItem entityItem)
+    {
+    	ExtendedWorldData worldProps = ExtendedWorldData.get(entityItem.worldObj);
+    	
+    	if( entityItem.isBurning())
+    		worldProps.removeDevilFruitFromWorld(this);
+    	
+        return false;
+    }
+	
 	@Override
 	public void onFoodEaten(ItemStack itemStack, World world, EntityPlayer player)
 	{
 		ExtendedEntityData props = ExtendedEntityData.get(player);
 		AbilityProperties abilityProps = AbilityProperties.get(player);
+		ExtendedWorldData worldProps = ExtendedWorldData.get(world);
 
 		String eatenFruit = this.getUnlocalizedName().substring(5).replace("nomi", "").replace(":", "").replace(",", "").replace("model", "");
 
+		if(worldProps.isDevilFruitInWorld(eatenFruit))
+			return;
+		
 		boolean flag1 = !props.getUsedFruit().equalsIgnoreCase("n/a") && !props.hasYamiPower() && !eatenFruit.equalsIgnoreCase("yamiyami");
 		boolean flag2 = props.hasYamiPower() && !eatenFruit.equalsIgnoreCase(props.getUsedFruit()) && !props.getUsedFruit().equalsIgnoreCase("yamidummy");
 		boolean flag3 = !MainConfig.enableYamiSpecialPower && !props.getUsedFruit().equalsIgnoreCase("n/a") && (eatenFruit.equalsIgnoreCase("yamiyami") || !eatenFruit.equalsIgnoreCase(props.getUsedFruit()));
@@ -106,15 +124,17 @@ public class AkumaNoMi extends ItemFood
 			}
 		}
 
+		worldProps.addDevilFruitInWorld(eatenFruit);
+		
 		if(!props.getUsedFruit().equalsIgnoreCase("yomiyomi"))
 			for(Ability a : abilities)
 				if(!DevilFruitsHelper.verifyIfAbilityIsBanned(a) && !abilityProps.hasDevilFruitAbility(a))
 					abilityProps.addDevilFruitAbility(a);
 		
 		WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));
-		if (!ID.DEV_EARLYACCESS && !world.isRemote && !player.capabilities.isCreativeMode)
-			WyTelemetry.addStat("eaten_" + itemStack.getDisplayName(), 1);
-
+		if(!world.isRemote && !player.capabilities.isCreativeMode)		
+			WyTelemetry.addDevilFruitStat(props.getUsedFruit(), (String) WyRegistry.getItemsMap().get(this), 1);
+		
 	} 
 
 	@Override

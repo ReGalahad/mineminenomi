@@ -45,28 +45,29 @@ public class SwordsmanAbilities
 			super(ListAttributes.O_TATSUMAKI); 
 		}
 			
+		@Override
 		public void use(EntityPlayer player)
 		{
-			if((player.getHeldItem() != null && ItemsHelper.isSword(player.getHeldItem())) || DevilFruitsHelper.canUseSwordsmanAbilities(player))
-			{	
-				if(!this.isOnCooldown)
-				{
-					for(EntityLivingBase e : WyHelper.getEntitiesNear(player, 2.5))
-					{
-						e.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) player), 12);
-						
-						e.addPotionEffect(new PotionEffect(Potion.weakness.id, 10 * 20, 1, true));
-					}
-					
-					WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_KOKUTEICROSS, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
-					
-					if (player.worldObj instanceof WorldServer)
-						((WorldServer)player.worldObj).getEntityTracker().func_151248_b(player, new S0BPacketAnimation(player, 0));
-				}
-				super.use(player);
-			}
-			else
+			if (!ItemsHelper.isSword(player.getHeldItem()) && !DevilFruitsHelper.canUseSwordsmanAbilities(player))
+			{
 				WyHelper.sendMsgToPlayer(player, "You need a sword to use this ability !");
+				return;
+			}
+			
+			if(!this.isOnCooldown)
+			{
+				for(EntityLivingBase e : WyHelper.getEntitiesNear(player, 2.5))
+				{
+					e.attackEntityFrom(DamageSource.causePlayerDamage(player), 12);					
+					e.addPotionEffect(new PotionEffect(Potion.weakness.id, 10 * 20, 1, true));
+				}
+					
+				WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_KOKUTEICROSS, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
+					
+				if (player.worldObj instanceof WorldServer)
+					((WorldServer)player.worldObj).getEntityTracker().func_151248_b(player, new S0BPacketAnimation(player, 0));
+			}
+			super.use(player);
 		}
 	}
 	
@@ -77,18 +78,20 @@ public class SwordsmanAbilities
 			super(ListAttributes.YAKKODORI); 
 		}
 			
+		@Override
 		public void use(EntityPlayer player)
 		{
-			if((player.getHeldItem() != null && ItemsHelper.isSword(player.getHeldItem())) || DevilFruitsHelper.canUseSwordsmanAbilities(player))
+			if (!ItemsHelper.isSword(player.getHeldItem()) && !DevilFruitsHelper.canUseSwordsmanAbilities(player))
 			{
-				this.projectile = new SwordsmanProjectiles.Yakkodori(player.worldObj, player, ListAttributes.YAKKODORI);
-				if(!this.isOnCooldown)
-					if (player.worldObj instanceof WorldServer)
-						((WorldServer)player.worldObj).getEntityTracker().func_151248_b(player, new S0BPacketAnimation(player, 0));
-				super.use(player);
-			}
-			else
 				WyHelper.sendMsgToPlayer(player, "You need a sword to use this ability !");
+				return;
+			}
+			
+			this.projectile = new SwordsmanProjectiles.Yakkodori(player.worldObj, player, ListAttributes.YAKKODORI);
+			if(!this.isOnCooldown)
+				if (player.worldObj instanceof WorldServer)
+					((WorldServer)player.worldObj).getEntityTracker().func_151248_b(player, new S0BPacketAnimation(player, 0));
+			super.use(player);
 		}
 	}
 	
@@ -99,41 +102,44 @@ public class SwordsmanAbilities
 			super(ListAttributes.SHI_SHISHI_SONSON); 
 		}
 			
+		@Override
 		public void use(EntityPlayer player)
 		{
-			if((player.getHeldItem() != null && ItemsHelper.isSword(player.getHeldItem())) || DevilFruitsHelper.canUseSwordsmanAbilities(player))
+			if (!ItemsHelper.isSword(player.getHeldItem()) && !DevilFruitsHelper.canUseSwordsmanAbilities(player))
 			{
-				if(!this.isOnCooldown)
-				{
-					double mX = (double)(-MathHelper.sin(player.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(player.rotationPitch / 180.0F * (float)Math.PI) * 0.4);
-					double mZ = (double)(MathHelper.cos(player.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(player.rotationPitch / 180.0F * (float)Math.PI) * 0.4);
-						
-					double f2 = MathHelper.sqrt_double(mX * mX + player.motionY * player.motionY + mZ * mZ);
-					mX /= (double)f2;
-					mZ /= (double)f2;
-					mX += player.worldObj.rand.nextGaussian() * 0.007499999832361937D * 1.0;
-					mZ += player.worldObj.rand.nextGaussian() * 0.007499999832361937D * 1.0;
-					mX *= 3;
-					mZ *= 3;
-				
-					motion("=", mX, player.motionY, mZ, player);
-					
-					if (player.worldObj instanceof WorldServer)
-						((WorldServer)player.worldObj).getEntityTracker().func_151248_b(player, new S0BPacketAnimation(player, 0));
-				}
-				
-				super.use(player);
-			}
-			else
 				WyHelper.sendMsgToPlayer(player, "You need a sword to use this ability !");
+				return;
+			}
+			
+			if(!this.isOnCooldown)
+			{
+				double mX = -MathHelper.sin(player.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(player.rotationPitch / 180.0F * (float)Math.PI) * 0.4;
+				double mZ = MathHelper.cos(player.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(player.rotationPitch / 180.0F * (float)Math.PI) * 0.4;
+						
+				double f2 = MathHelper.sqrt_double(mX * mX + player.motionY * player.motionY + mZ * mZ);
+				mX /= f2;
+				mZ /= f2;
+				mX += player.worldObj.rand.nextGaussian() * 0.007499999832361937D * 1.0;
+				mZ += player.worldObj.rand.nextGaussian() * 0.007499999832361937D * 1.0;
+				mX *= 3;
+				mZ *= 3;
+				
+				motion("=", mX, player.motionY, mZ, player);
+					
+				if (player.worldObj instanceof WorldServer)
+					((WorldServer)player.worldObj).getEntityTracker().func_151248_b(player, new S0BPacketAnimation(player, 0));
+			}
+				
+			super.use(player);
 		}
 		
-	    public void duringCooldown(EntityPlayer player, int currentCooldown)
+	    @Override
+		public void duringCooldown(EntityPlayer player, int currentCooldown)
 	    {
 			if(currentCooldown > 4 * 20)
 			{
 				for(EntityLivingBase e : WyHelper.getEntitiesNear(player, 1.6))
-					e.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) player), 8);
+					e.attackEntityFrom(DamageSource.causePlayerDamage(player), 8);
 			}
 	    }
 	}
@@ -145,18 +151,20 @@ public class SwordsmanAbilities
 			super(ListAttributes.SANBYAKUROKUJU_POUND_HO); 
 		}
 			
+		@Override
 		public void use(EntityPlayer player)
 		{
-			if((player.getHeldItem() != null && ItemsHelper.isSword(player.getHeldItem())) || DevilFruitsHelper.canUseSwordsmanAbilities(player))
+			if (!ItemsHelper.isSword(player.getHeldItem()) && !DevilFruitsHelper.canUseSwordsmanAbilities(player))
 			{
-				this.projectile = new SwordsmanProjectiles.SanbyakurokujuPoundHo(player.worldObj, player, ListAttributes.SANBYAKUROKUJU_POUND_HO);
-				if(!this.isOnCooldown)
-					if (player.worldObj instanceof WorldServer)
-						((WorldServer)player.worldObj).getEntityTracker().func_151248_b(player, new S0BPacketAnimation(player, 0));
-				super.use(player);
-			}
-			else
 				WyHelper.sendMsgToPlayer(player, "You need a sword to use this ability !");
+				return;
+			}
+			
+			this.projectile = new SwordsmanProjectiles.SanbyakurokujuPoundHo(player.worldObj, player, ListAttributes.SANBYAKUROKUJU_POUND_HO);
+			if(!this.isOnCooldown)
+				if (player.worldObj instanceof WorldServer)
+					((WorldServer)player.worldObj).getEntityTracker().func_151248_b(player, new S0BPacketAnimation(player, 0));
+			super.use(player);
 		}
 	}
 	

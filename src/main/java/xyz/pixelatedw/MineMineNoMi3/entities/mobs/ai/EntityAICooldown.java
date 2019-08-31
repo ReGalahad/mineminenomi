@@ -7,15 +7,17 @@ public class EntityAICooldown extends EntityAIBase
 {
 	private EntityNewMob entity;
 	private boolean isOnCooldown = false;
-	private int maxCooldown, cooldown = 80, randomizer;
+	protected int maxCooldown, cooldown = 80, randomizer;
 	
 	public EntityAICooldown(EntityNewMob entity, int timer, int random)
 	{
 		this.entity = entity;
 		this.maxCooldown = timer;
+		this.cooldown = this.maxCooldown;
 		this.randomizer = random;
 	}
 	
+	@Override
 	public boolean shouldExecute()
 	{
 		if(this.isOnCooldown && this.cooldown <= 0)

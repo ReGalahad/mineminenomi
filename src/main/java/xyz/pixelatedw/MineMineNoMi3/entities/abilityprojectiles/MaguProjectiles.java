@@ -9,13 +9,10 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
-import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.SunaProjectiles.Barjan;
 import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
-import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
 public class MaguProjectiles 
 {
@@ -41,15 +38,17 @@ public class MaguProjectiles
 			super(world, player, attr);		
 		}
 		
+		@Override
 		public void tasksImapct(MovingObjectPosition hit)
 		{
 			if(hit.entityHit != null)
 				hit.entityHit.setFire(200);
 		};
 		
+		@Override
 		public void onUpdate()
 		{	
-			for (int i = 0; i < 20; i++)
+			for (int i = 0; i < DevilFruitsHelper.getParticleSettingModifier(20); i++)
 			{
 				double offsetX = (new Random().nextInt(40) + 1.0D - 20.0D) / 40.0D;
 				double offsetY = (new Random().nextInt(40) + 1.0D - 20.0D) / 40.0D;
@@ -74,6 +73,7 @@ public class MaguProjectiles
 			super(world, player, attr);		
 		}
 		
+		@Override
 		public void tasksImapct(MovingObjectPosition hit)
 		{
 			if(hit.entityHit != null)
@@ -83,9 +83,10 @@ public class MaguProjectiles
 				DevilFruitsHelper.placeBlockIfAllowed(worldObj, hit.blockX, hit.blockY, hit.blockZ, Blocks.flowing_lava, "core", "foliage");
 		};
 		
+		@Override
 		public void onUpdate()
 		{	
-			for (int i = 0; i < 13; i++)
+			for (int i = 0; i < DevilFruitsHelper.getParticleSettingModifier(13); i++)
 			{
 				double offsetX = (new Random().nextInt(40) + 1.0D - 20.0D) / 10.0D;
 				double offsetY = (new Random().nextInt(40) + 1.0D - 20.0D) / 10.0D;

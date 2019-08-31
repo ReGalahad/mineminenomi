@@ -38,18 +38,18 @@ import xyz.pixelatedw.MineMineNoMi3.blocks.dials.BlockFlashDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.dials.BlockImpactDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.dials.BlockMilkyDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.dials.BlockRejectDial;
-import xyz.pixelatedw.MineMineNoMi3.blocks.dials.tileentities.TileEntityAxeDial;
-import xyz.pixelatedw.MineMineNoMi3.blocks.dials.tileentities.TileEntityBreathDial;
-import xyz.pixelatedw.MineMineNoMi3.blocks.dials.tileentities.TileEntityEisenDial;
-import xyz.pixelatedw.MineMineNoMi3.blocks.dials.tileentities.TileEntityFlameDial;
-import xyz.pixelatedw.MineMineNoMi3.blocks.dials.tileentities.TileEntityFlashDial;
-import xyz.pixelatedw.MineMineNoMi3.blocks.dials.tileentities.TileEntityImpactDial;
-import xyz.pixelatedw.MineMineNoMi3.blocks.dials.tileentities.TileEntityMilkyDial;
-import xyz.pixelatedw.MineMineNoMi3.blocks.dials.tileentities.TileEntityRejectDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityAbilityProtection;
+import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityAxeDial;
+import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityBreathDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityCustomSpawner;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityDenDenMushi;
+import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityEisenDial;
+import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityFlameDial;
+import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityFlashDial;
+import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityImpactDial;
+import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityMilkyDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityOpe;
+import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityRejectDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityString;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityWantedPoster;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityWantedPostersPackage;
@@ -101,7 +101,24 @@ public class ListMisc
 	}.setHardness(10);
 	public static Block EnchantmentTable = new BlockEnchantmentTable2();
 	public static Block DenDenMushi = new BlockDenDenMushi();
-	public static Block SkyBlock = new NewBlock(Material.cloth).setLightLevel(0.75F).setLightOpacity(0);
+	public static Block SkyBlock = new NewBlock(Material.ground)
+	{
+		@Override
+		public int quantityDropped(Random random)
+		{
+			return 1 + random.nextInt(1);
+		}
+
+		@Override
+		public Item getItemDropped(int id, Random rand, int fortune)
+		{
+			Item[] dials = new Item[] { ListMisc.DialAxe, ListMisc.DialBreath, ListMisc.DialEisen, ListMisc.DialFire, ListMisc.DialFlash, ListMisc.DialImpact, ListMisc.DialMilky };
+			if(rand.nextDouble() < 0.25)
+				return dials[rand.nextInt(dials.length)];
+			else
+				return Item.getItemFromBlock(this);
+		}		
+	}.setLightLevel(0.75F).setLightOpacity(0);
 	public static Block Barrier = new BlockBarrier();
 	public static Block Poison = new BlockPoison();
 	public static Block DemonPoison = new BlockDemonPoison();
@@ -140,7 +157,7 @@ public class ListMisc
 	public static Block AbilityProtectionBlock = new BlockAbilityProtection();
 	public static Block AbilityProtectionAreaBlock = new BlockAbilityProtectionArea();
 	public static Block AbilityProtectionCenterBlock = new BlockAbilityProtectionArea();
-
+	
 	public static Block DialEisenBlock = new BlockEisenDial();
 	public static Block DialFireBlock = new BlockFlameDial();
 	public static Block DialAxeBlock = new BlockAxeDial();
@@ -156,7 +173,7 @@ public class ListMisc
 	public static Item BlackMetal = new Item();
 	public static Item Shadow = new Shadow();
 	public static Item Heart = new Heart().setMaxStackSize(1);
-	public static Item BellyPouch = new BellyPouch().setMaxStackSize(1);
+	public static Item BellyPouch = new BellyPouch().setMaxStackSize(16);
 	public static Item Key = new Item();
 	public static Item Box1;
 	public static Item Box2;
@@ -193,6 +210,7 @@ public class ListMisc
 	public static Item PirateBoots = new ItemCoreArmor("pirate", ID.ARMORMAT_USELESS, 3);
 
 	public static Item ColaBackpack = new ItemCoreArmor("colabackpack", ID.ARMORMAT_COLABACKPACK, 1);
+	public static Item TomoeDrums = new ItemCoreArmor("tomoeDrums", ID.ARMORMAT_COLABACKPACK, 1);
 
 	public static Item Flintlock = new Flintlock().setMaxStackSize(1).setFull3D();
 	public static Item Kabuto = new Kabuto("kabuto").setMaxStackSize(1).setFull3D();
@@ -280,6 +298,7 @@ public class ListMisc
 		addITEM(PirateBoots, "Pirate Boots", ListCreativeTabs.tabWeapons);
 
 		addITEM(ColaBackpack, "Cola Backpack", ListCreativeTabs.tabWeapons);
+		addITEM(TomoeDrums, "Tomoe Drums", ListCreativeTabs.tabWeapons);
 
 		addITEM(Note, "Note", ListCreativeTabs.tabMisc);
 		
@@ -345,7 +364,7 @@ public class ListMisc
 		addBLOCK(KairosekiBlock, "Kairoseki Block", 3.5F, null, ListCreativeTabs.tabMisc);
 		addBLOCK(EnchantmentTable, "Kairoseki Table", 3.5F, null, ListCreativeTabs.tabMisc);
 		addBLOCK(DenDenMushi, "Den Den Mushi", 0.5F, TileEntityDenDenMushi.class, ListCreativeTabs.tabMisc);
-		addBLOCK(SkyBlock, "Sky Block", 1.5F, null, ListCreativeTabs.tabMisc);
+		addBLOCK(SkyBlock, "Sky Block", 0.6F, null, ListCreativeTabs.tabMisc);
 		addBLOCK(Barrier, "Crash Barrier", Float.POSITIVE_INFINITY, null, null);
 		addBLOCK(Poison, "Poison", 1.5F, null, null);
 		addBLOCK(DemonPoison, "Demon Poison", 1.5F, null, null);
@@ -415,8 +434,10 @@ public class ListMisc
 		WyRegistry.registerName("ability.60millionvoltvari.name", "60 Million Volt Vari");
 		WyRegistry.registerName("ability.100millionvoltvari.name", "100 Million Volt Vari");
 		WyRegistry.registerName("ability.max200millionvoltvari.name", "Max 200 Million Volt Vari");
-
+		
 		// Swordsman Progression Questline
+		WyRegistry.registerName("ability.mamaragan.name", "Mamaragan");
+
 		WyRegistry.registerName("quest." + ListQuests.swordsmanProgression01.getQuestID() + ".started", "<Swordsman Master> You want to become a swordsman master, young one ? I do like the sparks in your eyes so how about this, show me your best sword and I'll see if you're fit or not to start training with me.");
 		WyRegistry.registerName("quest." + ListQuests.swordsmanProgression01.getQuestID() + ".completed", "<Swordsman Master> That's a really nice blade you have there, really strong indeed. Fine, I will train you, when you're ready come and talk with me again !");
 		WyRegistry.registerName("quest." + ListQuests.swordsmanProgression02.getQuestID() + ".started", "<Swordsman Master> First we'll test your determination, you must survive the night in the wilderness without dying !");

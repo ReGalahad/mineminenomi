@@ -2,31 +2,25 @@ package xyz.pixelatedw.MineMineNoMi3.items.weapons;
 
 import java.util.List;
 
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
-import xyz.pixelatedw.MineMineNoMi3.ID;
-import xyz.pixelatedw.MineMineNoMi3.MainKeys;
-import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
-import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.ExtraProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListExtraAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
-import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 
 public class Flintlock extends Item
 {
 
+	@Override
 	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
 	{
 		if (player.isSneaking())
@@ -58,8 +52,9 @@ public class Flintlock extends Item
 							if (itemStack.getTagCompound().getInteger("bulletType") == 0) proj = new ExtraProjectiles.NormalBullet(player.worldObj, player, ListExtraAttributes.NORMAL_BULLET);
 							else if (itemStack.getTagCompound().getInteger("bulletType") == 1) proj = new ExtraProjectiles.KairosekiBullet(player.worldObj, player, ListExtraAttributes.KAIROSEKI_BULLET);
 							player.worldObj.spawnEntityInWorld(proj);
-							if (!ID.DEV_EARLYACCESS)
-								WyTelemetry.addStat((itemStack.getTagCompound().getInteger("bulletType") == 0 ? "normal" : "kairoseki") + "BulletsShot", 1);
+							
+							String id = (itemStack.getTagCompound().getInteger("bulletType") == 0 ? "normal" : "kairoseki");
+					    	WyTelemetry.addMiscStat(id + "BulletsShot", WyHelper.upperCaseFirst(id) + " Bullets Shot", 1);
 						}
 	
 						itemStack.getTagCompound().setBoolean("canUse", false);
@@ -80,6 +75,7 @@ public class Flintlock extends Item
 		return itemStack;
 	}
 
+	@Override
 	public void onUpdate(ItemStack itemStack, World world, Entity entity, int par4, boolean par5)
 	{
 		if (!itemStack.hasTagCompound())
@@ -110,6 +106,7 @@ public class Flintlock extends Item
 		}
 	}
 	
+	@Override
 	public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean par4)
 	{
 		if (itemStack.hasTagCompound())

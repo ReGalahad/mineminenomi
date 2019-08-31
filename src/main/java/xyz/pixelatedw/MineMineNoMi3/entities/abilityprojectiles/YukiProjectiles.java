@@ -7,12 +7,10 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainMod;
-import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.GasuProjectiles.GasRobe;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.GasuProjectiles.Gastille;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
+import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 
 public class YukiProjectiles 
@@ -38,11 +36,12 @@ public class YukiProjectiles
 			super(world, player, attr);		
 		}	
 		
+		@Override
 		public void onUpdate()
 		{	
 			if(this.worldObj.isRemote)
 			{
-				for (int i = 0; i < 1; i++)
+				for (int i = 0; i < DevilFruitsHelper.getParticleSettingModifier(2); i++)
 				{
 					double offsetX = (new Random().nextInt(4) + 2.0D - 2.0D) / 2.0D;
 					double offsetY = (new Random().nextInt(4) + 2.0D - 2.0D) / 2.0D;

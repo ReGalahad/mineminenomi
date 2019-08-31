@@ -1,6 +1,5 @@
 package xyz.pixelatedw.MineMineNoMi3.abilities;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -10,10 +9,9 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.WorldServer;
-import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
-import xyz.pixelatedw.MineMineNoMi3.abilities.extra.effects.DFEffect;
-import xyz.pixelatedw.MineMineNoMi3.abilities.extra.effects.DFEffectZushiAbareHimatsuri;
+import xyz.pixelatedw.MineMineNoMi3.abilities.effects.DFEffect;
+import xyz.pixelatedw.MineMineNoMi3.abilities.effects.DFEffectZushiAbareHimatsuri;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
@@ -37,6 +35,7 @@ public class JuryoAbilities
 			super(ListAttributes.ABARE_HIMATSURI); 
 		}
 
+		@Override
 		public void passive(EntityPlayer player) 
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
@@ -63,11 +62,13 @@ public class JuryoAbilities
 			}
 		}
 		
+		@Override
 		public void startPassive(EntityPlayer player)
 		{
 			
 		}
 		
+		@Override
 		public void endPassive(EntityPlayer player)
 		{
 			
@@ -81,29 +82,31 @@ public class JuryoAbilities
 			super(ListAttributes.MOKO); 
 		}
 		
+		@Override
 		public void use(EntityPlayer player)
 		{
 			if(!this.isOnCooldown())
 			{
-				if(player.getHeldItem() != null && ItemsHelper.isSword(player.getHeldItem()))
-				{	
-					for(int j = 0; j < 50; j++)
-					{
-						AbilityProjectile proj = new JuryoProjectiles.Moko(player.worldObj, player, ListAttributes.MOKO);
-	
-						proj.setLocationAndAngles(
-								player.posX + WyMathHelper.randomWithRange(-5, 5) + player.worldObj.rand.nextDouble(), 
-								(player.posY + 0.3) + WyMathHelper.randomWithRange(0, 5) + player.worldObj.rand.nextDouble(), 
-								player.posZ + WyMathHelper.randomWithRange(-5, 5) + player.worldObj.rand.nextDouble(), 
-								0, 0);
-						player.worldObj.spawnEntityInWorld(proj);
-					}
-					if (player.worldObj instanceof WorldServer)
-						((WorldServer)player.worldObj).getEntityTracker().func_151248_b(player, new S0BPacketAnimation(player, 0));
-					super.use(player);
-				}
-				else
+				if (!ItemsHelper.isSword(player.getHeldItem()))
+				{
 					WyHelper.sendMsgToPlayer(player, "You need a sword to use this ability !");
+					return;
+				}
+				
+				for(int j = 0; j < 50; j++)
+				{
+					AbilityProjectile proj = new JuryoProjectiles.Moko(player.worldObj, player, ListAttributes.MOKO);
+	
+					proj.setLocationAndAngles(
+							player.posX + WyMathHelper.randomWithRange(-5, 5) + player.worldObj.rand.nextDouble(), 
+							(player.posY + 0.3) + WyMathHelper.randomWithRange(0, 5) + player.worldObj.rand.nextDouble(), 
+							player.posZ + WyMathHelper.randomWithRange(-5, 5) + player.worldObj.rand.nextDouble(), 
+							0, 0);
+					player.worldObj.spawnEntityInWorld(proj);
+				}
+				if (player.worldObj instanceof WorldServer)
+					((WorldServer)player.worldObj).getEntityTracker().func_151248_b(player, new S0BPacketAnimation(player, 0));
+				super.use(player);
 			}
 		}
 	}
@@ -115,6 +118,7 @@ public class JuryoAbilities
 			super(ListAttributes.JURYOKU); 
 		}
 
+		@Override
 		public void duringPassive(EntityPlayer player, int passiveTimer) 
 		{
 			if(passiveTimer > 400)
@@ -150,6 +154,7 @@ public class JuryoAbilities
 			}	
 		}
 		
+		@Override
 		public void endPassive(EntityPlayer player) 
 		{
 			this.startCooldown();
@@ -165,6 +170,7 @@ public class JuryoAbilities
 			super(ListAttributes.SAGARI_NO_RYUSEI); 
 		}
 		
+		@Override
 		public void use(EntityPlayer player)
 		{	
 			if(!this.isOnCooldown)		

@@ -1,17 +1,13 @@
 package xyz.pixelatedw.MineMineNoMi3.entities.particles;
 
-import java.util.Random;
-
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.EntityAuraFX;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import xyz.pixelatedw.MineMineNoMi3.ID;
 
 public class EntityParticleFX extends EntityFX
 {
@@ -76,13 +72,17 @@ public class EntityParticleFX extends EntityFX
 		GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
 	}
 	
-    public void onUpdate()
+    @Override
+	public void onUpdate()
     {
+    	if(Math.abs(Minecraft.getMinecraft().gameSettings.particleSetting - 2) == 0)
+    		this.setDead();
+    	
         this.prevPosX = this.posX;
         this.prevPosY = this.posY;
         this.prevPosZ = this.posZ;
         if(this.particleGravity != 0)
-        	this.motionY = -0.04D * (double)this.particleGravity; 
+        	this.motionY = -0.04D * this.particleGravity; 
         this.moveEntity(this.motionX, this.motionY, this.motionZ);
         this.motionX *= 0.99D;
         this.motionY *= 0.99D;
@@ -133,7 +133,8 @@ public class EntityParticleFX extends EntityFX
     	return clone;
     }
     
-    public int getFXLayer()
+    @Override
+	public int getFXLayer()
     {
     	int layer = 1;
     	
@@ -146,7 +147,8 @@ public class EntityParticleFX extends EntityFX
         return layer;
     }
     
-    public void setParticleTextureIndex(int i)
+    @Override
+	public void setParticleTextureIndex(int i)
     {
 
     }

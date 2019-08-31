@@ -8,9 +8,9 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.ModelCube;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.ModelSphere;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.EffectType;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelArrow;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelBazooka;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelFist;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.projectiles.ModelArrow;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.projectiles.ModelBazooka;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.projectiles.ModelFist;
 
 public class ListExtraAttributes
 {

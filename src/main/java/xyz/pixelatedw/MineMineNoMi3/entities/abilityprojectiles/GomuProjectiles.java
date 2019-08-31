@@ -15,6 +15,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
+import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListExtraAttributes;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
@@ -217,7 +218,7 @@ public class GomuProjectiles
 		@Override
 		public void onUpdate()
 		{
-			for (int i = 0; i < 2; i++)
+			for (int i = 0; i < DevilFruitsHelper.getParticleSettingModifier(2); i++)
 			{
 				double offsetX = (new Random().nextInt(5) + 1.0D - 2.5D) / 5.0D;
 				double offsetY = (new Random().nextInt(5) + 1.0D - 2.5D) / 5.0D;
@@ -354,7 +355,7 @@ public class GomuProjectiles
 		@Override
 		public void onUpdate()
 		{
-			for (int i = 0; i < 2; i++)
+			for (int i = 0; i < DevilFruitsHelper.getParticleSettingModifier(2); i++)
 			{
 				double offsetX = (new Random().nextInt(5) + 1.0D - 2.5D) / 5.0D;
 				double offsetY = (new Random().nextInt(5) + 1.0D - 2.5D) / 5.0D;
@@ -473,7 +474,7 @@ public class GomuProjectiles
 		@Override
 		public void onUpdate()
 		{
-			for (int i = 0; i < 2; i++)
+			for (int i = 0; i < DevilFruitsHelper.getParticleSettingModifier(2); i++)
 			{
 				double offsetX = (new Random().nextInt(5) + 1.0D - 2.5D) / 5.0D;
 				double offsetY = (new Random().nextInt(5) + 1.0D - 2.5D) / 5.0D;

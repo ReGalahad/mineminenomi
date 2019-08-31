@@ -3,7 +3,7 @@ package xyz.pixelatedw.MineMineNoMi3.items.devilfruitextras;
 import java.util.List;
 
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.boss.EntityDragon;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -20,6 +20,7 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 
 public class Heart extends Item
 {
+	@Override
 	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
 	{
 		if(itemStack.getTagCompound() != null && world.getEntityByID(itemStack.getTagCompound().getInteger("owner")) != null)
@@ -46,6 +47,24 @@ public class Heart extends Item
 		return itemStack;
 	}
 	
+    @Override
+	public boolean onEntityItemUpdate(EntityItem entityItem)
+    {
+    	ItemStack itemStack = entityItem.getEntityItem();
+    	World world = entityItem.worldObj;
+    	
+		if(itemStack.getTagCompound() != null)
+		{
+			EntityLivingBase target = ((EntityLivingBase) world.getEntityByID(itemStack.getTagCompound().getInteger("owner")));
+			
+			if(target != null)
+				target.attackEntityFrom(DamageSource.magic, Float.MAX_VALUE);
+		}
+    	
+        return false;
+    }
+	
+	@Override
 	public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean par4)
 	{
 		if(itemStack.getTagCompound() != null)

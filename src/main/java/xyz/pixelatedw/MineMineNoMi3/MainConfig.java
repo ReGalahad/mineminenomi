@@ -1,11 +1,8 @@
 package xyz.pixelatedw.MineMineNoMi3;
 
 import java.io.File;
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
 
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.config.Property;
 
 public class MainConfig 
 {
@@ -16,6 +13,7 @@ public class MainConfig
 	public static String[] statsToKeep;
 	public static boolean enableShips;
 	public static boolean enableCamps;
+	public static boolean enableBases;
 	public static boolean enableDFtoDrop;
 	public static boolean enableLogiaInvulnerability;	
 	public static boolean enableExtraHearts;
@@ -29,6 +27,8 @@ public class MainConfig
 	public static boolean enableOneFruitPerWorld;
 	public static boolean enableYamiSpecialPower;
 	public static boolean enableAmbushes;
+	public static boolean enableMinimumDorikiPerKill;
+	public static boolean enableClouds;
 	public static double rateDFDrops;
 	public static double modifierShipsSpawn;
 	public static double rateWantedPostersPackagesSpawn;
@@ -60,25 +60,28 @@ public class MainConfig
 		
 		config.load();
 		
-		enableKeepIEEPAfterDeath = config.get(Configuration.CATEGORY_GENERAL, "Keep stats after death", "auto").getString();
+		enableKeepIEEPAfterDeath = config.get(Configuration.CATEGORY_GENERAL, "Keep stats after death", "auto", "Responsible for how player stats are handled after death; \nnone - nothing is kept; \nauto - faction/race/fight style stats are kept everything else is reseted; \nfull - everything is kept; \ncustom - uses the Data to Keep option to determine what is kept and what is reseted; auto by default").getString();
 		statsToKeep = config.get(Configuration.CATEGORY_GENERAL, "Data to Keep", new String[] {"Doriki", "Bounty", "Belly", "Race", "Faction", "Fighting Style", "Devil Fruit"}).getStringList();		
-		//enableCamps = config.get(Configuration.CATEGORY_GENERAL, "Allow Camps to Spawn", true).getBoolean();
 		enableGriefing = config.get(Configuration.CATEGORY_GENERAL, "Allow Griefing in Worlds", true, "Allows abilities to break or replace blocks, this will make some abilities completly useless; true by default").getBoolean();
 		enableAnimeScreaming  = config.get(Configuration.CATEGORY_GENERAL, "Anime Screaming", false, "Will send a chat message to nearby players with the used ability's name; false by default").getBoolean();
 		enableSpecialFlying  = config.get(Configuration.CATEGORY_GENERAL, "Allow Special Flying", false, "Allows Gasu Gasu no Mi, Moku Moku no Mi and Suna Suna no Mi users to fly, this option does not affect flying Zoans which will be able to fly regardless; false by default").getBoolean();
 		enableOneFruitPerWorld = config.get(Configuration.CATEGORY_GENERAL, "Allow Only One Fruit Per World", false, "Restricts the Devil Fruit spawns to only 1 of each type per world; false by default").getBoolean();
 		enableYamiSpecialPower = config.get(Configuration.CATEGORY_GENERAL, "Allow Yami Users to eat another Devil Fruit", true, "Allows Yami Yami no Mi users to eat an additional fruit; true by default").getBoolean();
 		enableDFtoDrop = config.get(Configuration.CATEGORY_GENERAL, "Allow Devil Fruits to drop from leaves", false).getBoolean();
-		rateDFDrops = config.get(Configuration.CATEGORY_GENERAL, "Rate at which Devil Fruits drop from leaves", 1).getDouble();
+		rateDFDrops = config.get(Configuration.CATEGORY_GENERAL, "Rate at which Devil Fruits drop from leaves", 1.0).getDouble();
 		enableLogiaInvulnerability = config.get(Configuration.CATEGORY_GENERAL, "Allow Logia Invulnerability", true, "Allows logia users to avoid physical attacks; true by default").getBoolean();
 		enableExtraHearts = config.get(Configuration.CATEGORY_GENERAL, "Receive Extra Hearts", true, "Allows players to receive extra hearts based on their doriki; true by default").getBoolean();
 		enableMobRewards = config.get(Configuration.CATEGORY_GENERAL, "Allow Mob Rewards", true, "Allows mobs to reward doriki, bounty or items; true by default").getBoolean();
-		modifierDorikiReward = config.get(Configuration.CATEGORY_GENERAL, "Modifier for Doriki Reward", 1, "Multiplier for the doriki reward when killing a mob").getDouble();
+		modifierDorikiReward = config.get(Configuration.CATEGORY_GENERAL, "Modifier for Doriki Reward", 1.0, "Multiplier for the doriki reward when killing a mob").getDouble();
+		enableMinimumDorikiPerKill = config.get(Configuration.CATEGORY_GENERAL, "Minimum Doriki per Kill", false, "Ensures a minimum of 1 doriki is gained after each kill").getBoolean();
 		
 		enableShips = config.get("structures", "Allow Ships to Spawn", true).getBoolean();
-		modifierShipsSpawn = config.get("structures", "Modifier for Spawning Ships", 5).getDouble();
+		modifierShipsSpawn = config.get("structures", "Modifier for Spawning Ships", 5.0).getDouble();
 		maxDojoSpawn = config.get("structures", "Max Dojos to Spawn per World", 5).getInt();
-
+		enableCamps = config.get("structures", "Allow Camps to Spawn", true).getBoolean();
+		enableBases = config.get("structures", "Allow Bases to Spawn", true).getBoolean();
+		enableClouds = config.get("structures", "Allow Sky Islands to Spawn", true).getBoolean();
+				
 		enableQuests = config.get("quests", "Allow Quests", true, "Allows quests to be accepted / completed; true by default").getBoolean();
 		enableQuestProgression = config.get("quests", "Allow Quest Progression", false, "Allows quests to reward players with abilities, otherwise all abilities will be unlocked from the beginning; true by default").getBoolean();
 		

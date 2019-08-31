@@ -8,7 +8,7 @@ import xyz.pixelatedw.MineMineNoMi3.abilities.MeroAbilities.MeroMeroMellow;
 import xyz.pixelatedw.MineMineNoMi3.abilities.MeroAbilities.PerfumeFemur;
 import xyz.pixelatedw.MineMineNoMi3.abilities.MeroAbilities.PistolKiss;
 import xyz.pixelatedw.MineMineNoMi3.abilities.MeroAbilities.SlaveArrow;
-import xyz.pixelatedw.MineMineNoMi3.abilities.extra.effects.DFEffectMeroPetrification;
+import xyz.pixelatedw.MineMineNoMi3.abilities.effects.DFEffectMeroPetrification;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityExplosion;

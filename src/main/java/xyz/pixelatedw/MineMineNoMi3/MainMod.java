@@ -15,14 +15,15 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
 import xyz.pixelatedw.MineMineNoMi3.commands.CommandAbilityProtection;
-import xyz.pixelatedw.MineMineNoMi3.commands.CommandAbilityProtectionView;
 import xyz.pixelatedw.MineMineNoMi3.commands.CommandBelly;
 import xyz.pixelatedw.MineMineNoMi3.commands.CommandBounty;
+import xyz.pixelatedw.MineMineNoMi3.commands.CommandDamageMultiplier;
 import xyz.pixelatedw.MineMineNoMi3.commands.CommandDoriki;
 import xyz.pixelatedw.MineMineNoMi3.commands.CommandExtol;
 import xyz.pixelatedw.MineMineNoMi3.commands.CommandFG;
 import xyz.pixelatedw.MineMineNoMi3.commands.CommandGetWantedPoster;
 import xyz.pixelatedw.MineMineNoMi3.commands.CommandIssueBounty;
+import xyz.pixelatedw.MineMineNoMi3.commands.CommandPouch;
 import xyz.pixelatedw.MineMineNoMi3.commands.CommandRemoveDF;
 import xyz.pixelatedw.MineMineNoMi3.gui.GUIHandler;
 import xyz.pixelatedw.MineMineNoMi3.helpers.WebAppHelper;
@@ -102,6 +103,7 @@ public class MainMod
 		 */
 	}
 
+	@SuppressWarnings("unused")
 	@EventHandler
 	public void serverInit(FMLServerStartingEvent event)
 	{
@@ -117,9 +119,10 @@ public class MainMod
 		event.registerServerCommand(new CommandIssueBounty());
 		event.registerServerCommand(new CommandGetWantedPoster());
 		event.registerServerCommand(new CommandAbilityProtection());
-		event.registerServerCommand(new CommandAbilityProtectionView());
+		event.registerServerCommand(new CommandDamageMultiplier());
+		event.registerServerCommand(new CommandPouch());
 	}
-
+	
 	public static MainMod getMineMineNoMi()
 	{
 		return instance;

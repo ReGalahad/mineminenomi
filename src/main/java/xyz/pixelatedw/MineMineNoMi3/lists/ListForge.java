@@ -8,6 +8,7 @@ import xyz.pixelatedw.MineMineNoMi3.events.EventsBounty;
 import xyz.pixelatedw.MineMineNoMi3.events.EventsCombatMode;
 import xyz.pixelatedw.MineMineNoMi3.events.EventsCore;
 import xyz.pixelatedw.MineMineNoMi3.events.EventsCrafting;
+import xyz.pixelatedw.MineMineNoMi3.events.EventsCrew;
 import xyz.pixelatedw.MineMineNoMi3.events.EventsDrops;
 import xyz.pixelatedw.MineMineNoMi3.events.EventsEnchantments;
 import xyz.pixelatedw.MineMineNoMi3.events.EventsMorphs;
@@ -18,6 +19,7 @@ import xyz.pixelatedw.MineMineNoMi3.events.devilfruits.EventsAbilityValidation;
 import xyz.pixelatedw.MineMineNoMi3.events.devilfruits.EventsDFWeaknesses;
 import xyz.pixelatedw.MineMineNoMi3.events.devilfruits.EventsEffectOverlay;
 import xyz.pixelatedw.MineMineNoMi3.events.devilfruits.EventsLogiaInvulnerability;
+import xyz.pixelatedw.MineMineNoMi3.events.devilfruits.EventsOneDevilFruit;
 import xyz.pixelatedw.MineMineNoMi3.events.devilfruits.EventsPassives;
 import xyz.pixelatedw.MineMineNoMi3.events.devilfruits.EventsSpecialFlying;
 import xyz.pixelatedw.MineMineNoMi3.events.devilfruits.EventsZoanPassives;
@@ -29,6 +31,10 @@ public class ListForge
 	{
 		// Handles some core features of the mod, like IEEP registrations, update notifications or Early Access protection 		
 		MinecraftForge.EVENT_BUS.register(new EventsCore());
+		FMLCommonHandler.instance().bus().register(new EventsCore());
+		
+		// Handles different event driven logic about crew members
+		MinecraftForge.EVENT_BUS.register(new EventsCrew());
 		
 		// Handles any bounty/wanted poster related event
 		MinecraftForge.EVENT_BUS.register(new EventsBounty());
@@ -51,6 +57,9 @@ public class ListForge
 		
 		// Handles the quest related stuff, accepting quests or progressing them throught different means
 		MinecraftForge.EVENT_BUS.register(new EventsQuestsProgress());
+		
+		// Handles the logic when the config option is true
+		MinecraftForge.EVENT_BUS.register(new EventsOneDevilFruit());
 		
 		// Core devil fruit events
 		MinecraftForge.EVENT_BUS.register(new EventsAbilityValidation());

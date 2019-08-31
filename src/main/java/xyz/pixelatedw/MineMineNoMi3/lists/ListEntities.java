@@ -7,6 +7,10 @@ import net.minecraftforge.common.BiomeDictionary.Type;
 import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.WyRegistry;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.animals.EntityDenDenMushi;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.animals.EntityKungFuDugong;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.animals.EntityLapahn;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.animals.EntityYagaraBull;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.arlongPirates.EntityArlong;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.arlongPirates.EntityChew;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.arlongPirates.EntityKuroobi;
@@ -20,7 +24,6 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.EntityMarineCaptain;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.EntityMarineWithGun;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.EntityMorgan;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityBlackKnight;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDenDenMushi;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDoppelman;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityMirageClone;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityWantedPostersPackage;
@@ -30,6 +33,9 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirateCaptain;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirateWithGun;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.quest.givers.EntityDojoSensei;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.quest.objectives.EntitySniperTarget;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityDugong;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityLapahn;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityYagaraBull;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityBlueno;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityFukuro;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityJabra;
@@ -58,6 +64,8 @@ public class ListEntities
 		
 		Type[] generalBiomes = new Type[]
 				{Type.BEACH, Type.JUNGLE, Type.SWAMP, Type.SAVANNA, Type.FOREST, Type.HILLS, Type.CONIFEROUS};
+		Type[] dugongBiomes = new Type[]
+				{Type.BEACH, Type.SANDY};
 		
 		//Bandits
 		WyRegistry.registerMob("Bandit with Sword", EntityBandit.class, 0x5B2929, 0xFFFFFF);
@@ -106,13 +114,26 @@ public class ListEntities
 		WyRegistry.registerMob("Doppelman", EntityDoppelman.class);
 		WyRegistry.registerMob("Black Knight", EntityBlackKnight.class);
 		WyRegistry.registerMob("Mirage Clone", EntityMirageClone.class);
-		WyRegistry.registerMob("Den Den Mushi", EntityDenDenMushi.class, 0xFF00FF, 0x00FF00);
 		WyRegistry.registerMob("Dojo Sensei", EntityDojoSensei.class, 0xFF00FF, 0x00FF00);
 		WyRegistry.registerMob("Wanted Posters Package", EntityWantedPostersPackage.class);
 		WyRegistry.registerMob("Sniper Targets", EntitySniperTarget.class);
 		
+		//Animals
+		WyRegistry.registerMob("Den Den Mushi", EntityDenDenMushi.class, 0xFF00FF, 0x00FF00);
+		WyRegistry.registerSpawnBiomesFor(EntityDenDenMushi.class, 50, 1, 3, Type.PLAINS, Type.SAVANNA, Type.DRY, Type.SPARSE, Type.CONIFEROUS, Type.MOUNTAIN);
+		WyRegistry.registerMob("Kung Fu Dugong", EntityKungFuDugong.class, 0xdbac64, 0x26815a);
+		WyRegistry.registerSpawnBiomesFor(EntityKungFuDugong.class, 30, 5, 7, dugongBiomes);
+		WyRegistry.registerMob("Lapahn", EntityLapahn.class, 0xaedbd7, 0x449a94);
+		WyRegistry.registerSpawnBiomesFor(EntityKungFuDugong.class, 30, 3, 5, Type.COLD);
+		WyRegistry.registerMob("Yagara Bull", EntityYagaraBull.class, 0xf0ad4e, 0x5CB85C);
+		WyRegistry.registerSpawnBiomesFor(EntityYagaraBull.class, 40, 1, 2, Type.WATER);
+		
 		//Temp
 		//WyRegistry.registerMob("TEMP_Dummy", TempEntityDummy.class);
+		WyRegistry.registerMob("TEMP_Dugong", TempEntityDugong.class);
+		WyRegistry.registerMob("TEMP_Laphan", TempEntityLapahn.class);
+		WyRegistry.registerMob("TEMP_YagaraBull", TempEntityYagaraBull.class);
+
 	}
 	
 }

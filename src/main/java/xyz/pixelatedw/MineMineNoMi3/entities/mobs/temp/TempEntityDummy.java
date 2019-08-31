@@ -11,7 +11,9 @@ public class TempEntityDummy extends EntityLiving
 		super(world);
 	}
 
+	@Override
 	public void onLivingUpdate() {}
 	
-	public void onUpdate() {}
+	@Override
+	public void onUpdate() {super.onUpdate();}
 }

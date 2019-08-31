@@ -38,7 +38,7 @@ public class GomuAbilities
 	{
 		public GearForth() 
 		{
-			super(ListAttributes.GEARFOURTH); 
+			super(ListAttributes.GEAR_FOURTH); 
 		}
 		
 		@Override
@@ -93,7 +93,7 @@ public class GomuAbilities
 	{
 		public GearThird() 
 		{
-			super(ListAttributes.GEARTHIRD); 
+			super(ListAttributes.GEAR_THIRD); 
 		}
 		
 		@Override
@@ -135,7 +135,7 @@ public class GomuAbilities
 	{
 		public GearSecond() 
 		{
-			super(ListAttributes.GEARSECOND); 
+			super(ListAttributes.GEAR_SECOND); 
 		}
 		
 		@Override
@@ -152,9 +152,8 @@ public class GomuAbilities
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
 
-			player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 25, 1, false));
-			if(!player.worldObj.isRemote)
-	    		WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_GEARSECOND, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
+			player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 40, 6, false));
+	    	WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_GEARSECOND, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 			
 			if(passiveTimer >= 1200)
 			{

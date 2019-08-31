@@ -5,8 +5,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
-import xyz.pixelatedw.MineMineNoMi3.data.ExtendedNPCData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.EntityAIGapCloser;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.EntityAIHakiCombat;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.brawler.EntityAIHakaiHo;
@@ -27,8 +25,10 @@ public class EntityPirateCaptain extends PirateData
 		this.tasks.addTask(1, new EntityAIOTasumaki(this));
 		this.tasks.addTask(1, new EntityAIGapCloser(this));
 		this.tasks.addTask(1, new EntityAIHakaiHo(this));
+		this.addRokushikiAbilities(2);
  	} 
 	  
+	@Override
 	public void applyEntityAttributes()
 	{ 
 		super.applyEntityAttributes(); 
@@ -36,18 +36,14 @@ public class EntityPirateCaptain extends PirateData
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.23D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(6.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(50.0D);
-		
-		ExtendedNPCData props = ExtendedNPCData.get(this);
-			
-		props.setDoriki(30 + this.worldObj.rand.nextInt(50));
-		props.setBelly(50 + this.worldObj.rand.nextInt(30));
 
 		if(!this.worldObj.isRemote)
 		{
 			Item[] randomSword = new Item[] {ListMisc.PirateCutlass, null};
 			if(this.rand.nextInt(100) <= 60)
 			{
-				props.setBusoHaki(true);
+				this.setBusoHaki(true);
+				this.threat += 20;
 
 				Item sword = randomSword[this.rand.nextInt(randomSword.length)];			
 				if(sword != null)
@@ -66,12 +62,20 @@ public class EntityPirateCaptain extends PirateData
 		}
 	}
 	
+	@Override
 	protected void addRandomArmor()
 	{
     	if(swordStack != null)
     		this.setCurrentItemOrArmor(0, swordStack);
+    	
+		if(!this.worldObj.isRemote)
+		{
+			this.setDoriki(15 + this.worldObj.rand.nextInt(50) + this.threat);
+			this.setBelly(20 + this.worldObj.rand.nextInt(20) + (this.threat / 2));
+		}
 	}
 	    
+	@Override
 	public double[] itemOffset() 
 	{
 		return new double[] {0, 0, -0.1};

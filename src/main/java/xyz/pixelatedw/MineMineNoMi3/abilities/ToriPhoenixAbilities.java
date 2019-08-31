@@ -41,6 +41,7 @@ public class ToriPhoenixAbilities
 			super(ListAttributes.PHOENIX_HYBRID_POINT);
 		}
 
+		@Override
 		public void passive(EntityPlayer player)
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
@@ -51,6 +52,7 @@ public class ToriPhoenixAbilities
 			}
 		}
 		
+		@Override
 		public void startPassive(EntityPlayer player)
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
@@ -63,6 +65,7 @@ public class ToriPhoenixAbilities
 			WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));
 		}
 		
+		@Override
 		public void endPassive(EntityPlayer player)
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
@@ -82,6 +85,7 @@ public class ToriPhoenixAbilities
 			super(ListAttributes.TENSEI_NO_SOEN); 
 		}
 		
+		@Override
 		public void startCharging(EntityPlayer player)
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
@@ -101,6 +105,7 @@ public class ToriPhoenixAbilities
 				WyHelper.sendMsgToPlayer(player, "" + this.getAttribute().getAttributeName() + " can only be used while Phoenix Point is active !");
 		}
 		
+		@Override
 		public void endCharging(EntityPlayer player)
 		{
 			player.fallDistance = 0;
@@ -108,7 +113,8 @@ public class ToriPhoenixAbilities
 			super.endCharging(player);
 		}		
 		
-	    public void duringCooldown(EntityPlayer player, int currentCooldown)
+	    @Override
+		public void duringCooldown(EntityPlayer player, int currentCooldown)
 	    {
 			if(currentCooldown > 28 * 20)
 			{
@@ -120,7 +126,8 @@ public class ToriPhoenixAbilities
 				
 				for(EntityLivingBase e : WyHelper.getEntitiesNear(player, 20))
 				{
-					e.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) player), 30);
+					if(e.posY >= player.posY)
+						e.attackEntityFrom(DamageSource.causePlayerDamage(player), 30);
 				}
 			}
 	    }
@@ -133,6 +140,7 @@ public class ToriPhoenixAbilities
 			super(ListAttributes.PHOENIX_GOEN); 
 		}
 		
+		@Override
 		public void use(EntityPlayer player)
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
@@ -165,6 +173,7 @@ public class ToriPhoenixAbilities
 			super(ListAttributes.FLAME_OF_RESTORATION); 
 		}
 		
+		@Override
 		public void hitEntity(EntityPlayer player, EntityLivingBase target) 
 		{
 			super.hitEntity(player, target);
@@ -185,6 +194,7 @@ public class ToriPhoenixAbilities
 			super(ListAttributes.BLUE_FLAMES_OF_RESURRECTION); 
 		}
 		
+		@Override
 		public void use(EntityPlayer player)
 		{
 			if(!isOnCooldown)
@@ -202,6 +212,7 @@ public class ToriPhoenixAbilities
 			super(ListAttributes.PHOENIX_FULL_POINT);
 		}
 
+		@Override
 		public void passive(EntityPlayer player)
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
@@ -212,6 +223,7 @@ public class ToriPhoenixAbilities
 			}
 		}
 		
+		@Override
 		public void startPassive(EntityPlayer player)
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
@@ -224,6 +236,7 @@ public class ToriPhoenixAbilities
 			WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));
 		}
 		
+		@Override
 		public void endPassive(EntityPlayer player)
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);

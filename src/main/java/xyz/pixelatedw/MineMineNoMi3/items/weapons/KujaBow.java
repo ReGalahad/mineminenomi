@@ -39,6 +39,7 @@ public class KujaBow extends Item
 		this.bFull3D = true;		
 	}
 
+	@Override
 	public void onPlayerStoppedUsing(ItemStack itemStack, World world, EntityPlayer player, int time)
 	{
 		int j = this.getMaxItemUseDuration(itemStack) - time;
@@ -53,10 +54,10 @@ public class KujaBow extends Item
 
 		if (flag || player.inventory.hasItem(ListMisc.KujaArrow))
 		{
-			float f = (float) j / 20.0F;
+			float f = j / 20.0F;
 			f = (f * f + f * 2.0F) / 3.0F;
 
-			if ((double) f < 0.1D)
+			if (f < 0.1D)
 				return;
 
 			if (f > 1.0F)
@@ -73,12 +74,13 @@ public class KujaBow extends Item
 				if (!world.isRemote)
 				{
 					world.spawnEntityInWorld(entityarrow);
-		    		WyTelemetry.addStat("kujaArrowsShot", 1);
+					WyTelemetry.addMiscStat("kujaArrowsShot", "Kuja Arrows Shot", 1);
 				}
 			}
 		}
 	}
 
+	@Override
 	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
 	{
 		ArrowNockEvent event = new ArrowNockEvent(player, itemStack);
@@ -94,16 +96,19 @@ public class KujaBow extends Item
 		return itemStack;
 	}
 
+	@Override
 	public int getMaxItemUseDuration(ItemStack p_77626_1_)
 	{
 		return 72000;
 	}
 
+	@Override
 	public EnumAction getItemUseAction(ItemStack p_77661_1_)
 	{
 		return EnumAction.bow;
 	}
 
+	@Override
 	public void onUpdate(ItemStack itemStack, World world, Entity entity, int par4, boolean par5)
 	{
 		if (!itemStack.hasTagCompound())
@@ -128,6 +133,7 @@ public class KujaBow extends Item
 		}
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister par1IconRegister)
 	{
@@ -137,6 +143,7 @@ public class KujaBow extends Item
 			this.iconArray[i] = par1IconRegister.registerIcon(ID.PROJECT_ID + ":" + pullArray[i]);
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining)
 	{

@@ -24,6 +24,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.GoroProjectiles.
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.GoroProjectiles.VoltVari60Million;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListExtraAttributes;
+import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 
@@ -48,11 +49,19 @@ public class GoroAbilities
 			super(ListAttributes.EL_THOR); 
 		}
 		
+		@Override
 		public void startCharging(EntityPlayer player)
 		{
+			if(hasTomoeDrumsEquipped(player))
+			{
+				this.attr.setAbilityDisplayName("Mamaragan");
+				this.attr.setAbilityCooldown(20);			
+			}
+			
 			super.startCharging(player);				
 		}
 		
+		@Override
 		public void duringCharging(EntityPlayer player, int currentCharge)
 		{
 			MovingObjectPosition mop = WyHelper.rayTraceBlocks(player);	
@@ -67,35 +76,43 @@ public class GoroAbilities
 			}
 		}
 		
+		@Override
 		public void endCharging(EntityPlayer player)
 		{						
 			MovingObjectPosition mop = WyHelper.rayTraceBlocks(player);	
-			
+
 			if(mop != null)
 			{
 				double i = mop.blockX;
 				double j = mop.blockY;
 				double k = mop.blockZ;
 
-				WyNetworkHelper.sendTo(new PacketPlayer("ElThorThunder", i, j, k), (EntityPlayerMP) player);
-				AbilityExplosion exp = WyHelper.newExplosion(player, i, j, k, 10);
-				exp.setFireAfterExplosion(true);
-				exp.doExplosion();
+				if(hasTomoeDrumsEquipped(player))
+				{
+					for(int t = 0; t < 5; t++)
+					{
+						i += WyMathHelper.randomWithRange(-15, 15);
+						k += WyMathHelper.randomWithRange(-15, 15);
+
+						WyNetworkHelper.sendTo(new PacketPlayer("ElThorThunder", i, j, k), (EntityPlayerMP) player);
+						AbilityExplosion exp = WyHelper.newExplosion(player, i, j, k, 10);
+						exp.setFireAfterExplosion(true);
+						exp.doExplosion();
+					}
+				}
+				else
+				{
+					WyNetworkHelper.sendTo(new PacketPlayer("ElThorThunder", i, j, k), (EntityPlayerMP) player);
+					AbilityExplosion exp = WyHelper.newExplosion(player, i, j, k, 10);
+					exp.setFireAfterExplosion(true);
+					exp.doExplosion();
+				}
 			}
 			
-			/*for(int x = 0; x < 10; x++)
-			{
-				int i = (int) (player.posX + WyMathHelper.randomWithRange(-50, 50));
-				int j = (int) player.posY;
-				int k = (int) (player.posZ + WyMathHelper.randomWithRange(-50, 50));
-				
-				WyNetworkHelper.sendTo(new PacketPlayer("ElThorThunder", i, j, k), (EntityPlayerMP) player);
-				AbilityExplosion exp = WyHelper.newExplosion(player, i, j, k, 20);
-				exp.setFireAfterExplosion(true);
-				exp.doExplosion();
-			}*/
-			
 			super.endCharging(player);
+					
+			this.attr.setAbilityDisplayName("El Thor");
+			this.attr.setAbilityCooldown(8);
 		}
 	}
 	
@@ -108,6 +125,7 @@ public class GoroAbilities
 			super(ListAttributes.VOLT_VARI); 
 		}
 		
+		@Override
 		public void startCharging(EntityPlayer player)
 		{
 			if(!this.isOnCooldown)
@@ -117,6 +135,7 @@ public class GoroAbilities
 			}
 		}
 		
+		@Override
 		public void duringCharging(EntityPlayer player, int currentCharge)
 		{		
 			power = currentCharge;
@@ -155,6 +174,7 @@ public class GoroAbilities
 			}
 		}
 		
+		@Override
 		public void endCharging(EntityPlayer player)
 		{
 			double truePower = Math.abs(power - this.attr.getAbilityCharges());
@@ -213,8 +233,8 @@ public class GoroAbilities
 			this.isOnCooldown = true;	
 			WyNetworkHelper.sendTo(new PacketAbilitySync(AbilityProperties.get(player)), (EntityPlayerMP) player);
 
-	    	if(!ID.DEV_EARLYACCESS && !player.capabilities.isCreativeMode)
-	    		WyTelemetry.addStat("abilityUsed_" + this.getAttribute().getAttributeName(), 1);
+	    	if(!player.capabilities.isCreativeMode)
+	    		WyTelemetry.addAbilityStat(this.getAttribute().getAbilityTexture(), this.getAttribute().getAttributeName(), 1);
 
 			if(projectile != null)
 				player.worldObj.spawnEntityInWorld(projectile);
@@ -230,6 +250,7 @@ public class GoroAbilities
 			super(ListAttributes.RAIGO); 
 		}
 		
+		@Override
 		public void use(EntityPlayer player)
 		{			
 			if(!this.isOnCooldown)		
@@ -263,6 +284,7 @@ public class GoroAbilities
 			super(ListAttributes.KARI); 
 		}
 		
+		@Override
 		public void startCharging(EntityPlayer player)
 		{
 			if(!this.isOnCooldown)		
@@ -270,6 +292,7 @@ public class GoroAbilities
 			super.startCharging(player);				
 		}
 		
+		@Override
 		public void endCharging(EntityPlayer player)
 		{						
 			super.endCharging(player);
@@ -283,6 +306,7 @@ public class GoroAbilities
 			super(ListAttributes.SANGO); 
 		}
 		
+		@Override
 		public void use(EntityPlayer player)
 		{
 			this.projectile = new GoroProjectiles.Sango(player.worldObj, player, attr);
@@ -295,6 +319,7 @@ public class GoroAbilities
 		public SparkStep() {
 			super(ListAttributes.SPARK_STEP);
 		}
+		@Override
 		public void use(EntityPlayer player) {
 			if (!this.isOnCooldown) {
 				if(WyHelper.rayTraceBlocks(player) != null)
@@ -317,4 +342,9 @@ public class GoroAbilities
 		}
 	}
 	
+	
+	private static boolean hasTomoeDrumsEquipped(EntityPlayer player)
+	{
+		return player.getEquipmentInSlot(3) != null && player.getEquipmentInSlot(3).getItem() == ListMisc.TomoeDrums;
+	}
 }

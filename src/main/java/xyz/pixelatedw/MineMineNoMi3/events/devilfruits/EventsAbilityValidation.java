@@ -7,7 +7,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
-import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilityReset;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilitySync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketQuestSync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
@@ -15,7 +14,6 @@ import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.items.AkumaNoMi;
-import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 
 public class EventsAbilityValidation
@@ -32,8 +30,8 @@ public class EventsAbilityValidation
 			
 			if (!player.worldObj.isRemote)
 			{			
-				if (!props.hasRace() && !props.hasFaction() && !props.hasFightingStyle() && !player.inventory.hasItemStack(new ItemStack(ListMisc.CharacterCreator)))
-					player.inventory.addItemStackToInventory(new ItemStack(ListMisc.CharacterCreator, 1));
+				//if (!props.hasRace() && !props.hasFaction() && !props.hasFightingStyle() && !player.inventory.hasItemStack(new ItemStack(ListMisc.CharacterCreator)))
+				//	player.inventory.addItemStackToInventory(new ItemStack(ListMisc.CharacterCreator, 1));
 				
 				if(props.getUsedFruit() != null && !props.getUsedFruit().equalsIgnoreCase("n/a"))
 				{					
