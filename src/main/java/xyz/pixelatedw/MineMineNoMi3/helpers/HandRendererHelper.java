@@ -20,13 +20,13 @@ import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.RenderZoanMorph;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelBisonPower;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelBisonSpeed;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelPhoenixFull;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelPhoenixHybrid;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelVenomDemon;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.zoans.ModelBisonPower;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.zoans.ModelBisonSpeed;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.zoans.ModelPhoenixFull;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.zoans.ModelPhoenixHybrid;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.zoans.ModelVenomDemon;
+import xyz.pixelatedw.MineMineNoMi3.renderers.entities.zoans.RenderZoanMorph;
 
 public class HandRendererHelper
 {

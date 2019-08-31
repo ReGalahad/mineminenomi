@@ -12,7 +12,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import xyz.pixelatedw.MineMineNoMi3.data.ExtendedNPCData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.IQuestGiver;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.EntityAIGapCloser;
@@ -52,16 +51,14 @@ public class EntityDojoSensei extends EntityNewMob implements IQuestGiver
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(12.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(150.0D);
 		
-		ExtendedNPCData props = ExtendedNPCData.get(this);
-		
-		props.setDoriki(50 + this.worldObj.rand.nextInt(5));
-		props.setBelly(10 + this.worldObj.rand.nextInt(50));
+		this.setDoriki(50 + this.worldObj.rand.nextInt(5));
+		this.setBelly(10 + this.worldObj.rand.nextInt(50));
 
 		if(!this.worldObj.isRemote)
 		{
 			Item[] randomSword = new Item[] {ListMisc.NidaiKitetsu, ListMisc.SandaiKitetsu, ListMisc.Shusui, ListMisc.Jitte, ListMisc.Kikoku, ListMisc.WadoIchimonji};
 
-			props.setBusoHaki(true);
+			this.setBusoHaki(true);
 
 			Item sword = randomSword[this.rand.nextInt(randomSword.length)];			
 			if(sword != null)

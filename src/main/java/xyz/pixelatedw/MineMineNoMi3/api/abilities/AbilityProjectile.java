@@ -18,6 +18,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityExplosion;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
+
 public class AbilityProjectile extends EntityThrowable
 {
 	public int ticks, maxticks;
@@ -163,8 +164,8 @@ public class AbilityProjectile extends EntityThrowable
 					}
 
 					if (this.attr.getProjectileDamage() > 0)
-						hit.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), this.attr.getProjectileDamage());
-
+						hit.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), this.attr.getProjectileDamage() * props.getDamageMultiplier());
+					
 					tasksImapct(hit);
 
 					this.setDead();

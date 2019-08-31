@@ -18,7 +18,8 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 	private long bounty, bountyCmd;
 	private String akumaNoMiUsed = "n/a", faction = "n/a", race = "n/a", fightStyle = "n/a", crew = "n/a", zoanPoint = "n/a";
 	private boolean isLogia, hasShadow = true, hasHeart = true, firstTime = true, hasHakiActive = false, hasBusoHakiActive = false, hasKenHakiActive = false, kilo = false, hasYamiPower = false, hasColaBackpack = false, isInAirWorld= false;
-
+	private float damageMultiplier = 1;
+	
 	private String tempPreviousAbility = "";
 
 	private String[] extraEffects = new String[32];
@@ -58,6 +59,8 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 		props.setInteger("MaxCola", this.maxCola);	
 		props.setInteger("UltraCola", this.ultraCola);
 		props.setInteger("Gear", this.gear);
+		
+		props.setFloat("DamageMultiplier", this.damageMultiplier);
 		
 		props.setLong("Bounty", this.bounty);
 		props.setLong("BountyCmd", this.bountyCmd);
@@ -106,6 +109,8 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 		this.ultraCola = props.getInteger("UltraCola");
 		this.gear = props.getInteger("Gear");
 		
+		this.damageMultiplier = props.getFloat("DamageMultiplier");
+		
 		this.bounty = props.getLong("Bounty");
 		this.bountyCmd = props.getLong("BountyCmd");
 		
@@ -150,6 +155,8 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 		props.setInteger("MaxCola", 0);	
 		props.setInteger("UltraCola",0);
 		props.setInteger("Gear", 0);
+		
+		props.setFloat("DamageMultiplier", 1);
 		
 		props.setString("AkumaNoMi", "N/A");
 		props.setString("Faction", "N/A");
@@ -204,6 +211,9 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 
 	@Override
 	public void init(Entity entity, World world) {}
+	
+	public float getDamageMultiplier() {return this.damageMultiplier;}
+	public void setDamageMultiplier(float i) { this.damageMultiplier = i; }
 	
 	public void setCombatMode(boolean value) { this.isInCombatMode = value; }
 	public boolean isInCombatMode() { return this.isInCombatMode; }

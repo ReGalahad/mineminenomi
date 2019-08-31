@@ -1,7 +1,5 @@
 package xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities;
 
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -9,7 +7,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
-import xyz.pixelatedw.MineMineNoMi3.data.ExtendedNPCData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSyncInfo;
 
@@ -24,12 +21,12 @@ public class EntityAIHakiCombat extends EntityAIBase
         this.entity = entity;
     }
 
+	@Override
 	public boolean shouldExecute()
 	{
 		ExtendedEntityData props = ExtendedEntityData.get(this.entity);
-		ExtendedNPCData npcProps = ExtendedNPCData.get(this.entity);
 
-		if(!npcProps.getBusoHaki())
+		if(!entity.hasBusoHaki())
 			return false;
 		
 		if(!props.hasBusoHakiActive() && this.entity.getAttackTarget() != null)

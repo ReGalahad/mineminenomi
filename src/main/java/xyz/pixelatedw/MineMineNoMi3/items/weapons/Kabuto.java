@@ -7,7 +7,6 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -40,6 +39,7 @@ public class Kabuto extends Item
 		this.bFull3D = true;		
 	}
 
+	@Override
 	public void onPlayerStoppedUsing(ItemStack itemStack, World world, EntityPlayer player, int time)
 	{
 		int j = this.getMaxItemUseDuration(itemStack) - time;
@@ -54,10 +54,10 @@ public class Kabuto extends Item
 
 		if (flag || player.inventory.hasItem(ListMisc.PopGreen))
 		{
-			float f = (float) j / 20.0F;
+			float f = j / 20.0F;
 			f = (f * f + f * 2.0F) / 3.0F;
 
-			if ((double) f < 0.1D)
+			if (f < 0.1D)
 				return;
 
 			if (f > 1.0F)
@@ -74,13 +74,14 @@ public class Kabuto extends Item
 				if (!world.isRemote)
 				{
 					world.spawnEntityInWorld(entityarrow);
-		    		WyTelemetry.addStat("popGreenShot", 1);
+					WyTelemetry.addMiscStat("popGreenShot", "Pop Greens Shot", 1);
 		    		itemStack.getTagCompound().setBoolean("canUse", false);
 				}
 			}
 		}
 	}
 
+	@Override
 	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
 	{
 		ArrowNockEvent event = new ArrowNockEvent(player, itemStack);
@@ -96,16 +97,19 @@ public class Kabuto extends Item
 		return itemStack;
 	}
 
+	@Override
 	public int getMaxItemUseDuration(ItemStack p_77626_1_)
 	{
 		return 72000;
 	}
 
+	@Override
 	public EnumAction getItemUseAction(ItemStack p_77661_1_)
 	{
 		return EnumAction.bow;
 	}
 
+	@Override
 	public void onUpdate(ItemStack itemStack, World world, Entity entity, int par4, boolean par5)
 	{
 		if (!itemStack.hasTagCompound())
@@ -130,6 +134,7 @@ public class Kabuto extends Item
 		}
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister par1IconRegister)
 	{
@@ -139,6 +144,7 @@ public class Kabuto extends Item
 			this.iconArray[i] = par1IconRegister.registerIcon(ID.PROJECT_ID + ":" + pullArray[i]);
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining)
 	{

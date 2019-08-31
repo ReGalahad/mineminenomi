@@ -2,8 +2,11 @@ package xyz.pixelatedw.MineMineNoMi3.abilities;
 
 import java.util.List;
 
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
@@ -24,9 +27,26 @@ public class WeatherAbilities
 	public static final Ability COOL_BALL = new CoolBall();
 	public static final Ability THUNDER_BALL = new ThunderBall();
 	public static final Ability GUST_SWORD = new GustSword();
+	public static final Ability WEATHER_EGG = new WeatherEgg();
 	
-	public static Ability[] abilitiesArray = new Ability[] {HEAT_BALL, COOL_BALL, THUNDER_BALL, GUST_SWORD};	
+	public static Ability[] abilitiesArray = new Ability[] {HEAT_BALL, COOL_BALL, THUNDER_BALL, GUST_SWORD, WEATHER_EGG};	
 
+	public static class WeatherEgg extends Ability
+	{
+		public WeatherEgg() 
+		{
+			super(ListAttributes.WEATHER_EGG); 
+		}
+		
+		@Override
+		public void use(EntityPlayer player)
+		{
+			this.projectile = new WeatherProjectiles.WeatherEgg(player.worldObj, player, attr);
+			super.use(player);
+		}
+	}
+	
+	
 	public static class GustSword extends Ability
 	{
 		public GustSword() 
@@ -149,8 +169,27 @@ public class WeatherAbilities
 				{
 					String tempo = climaTact.checkCharge(stack);
 					
-					WyHelper.sendMsgToPlayer(player, "Failed Tempo");
-					WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_COMMONEXPLOSION , player.posX, player.posY - 1, player.posZ), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
+					if(tempo.equalsIgnoreCase("HHC"))
+					{
+						EntityMirageTempoCloud smokeCloud = new EntityMirageTempoCloud(player.worldObj);
+						smokeCloud.setLife(70);
+						smokeCloud.setLocationAndAngles(player.posX, (player.posY + 1), player.posZ, 0, 0);
+						smokeCloud.motionX = 0;
+						smokeCloud.motionZ = 0;
+						smokeCloud.motionY = 0;	
+						smokeCloud.setThrower(player);
+						player.worldObj.spawnEntityInWorld(smokeCloud);	
+						
+						for(EntityLivingBase entity : WyHelper.getEntitiesNear(player, 10))
+						{
+							entity.addPotionEffect(new PotionEffect(Potion.blindness.id, 200, 1));
+						}
+					}
+					else
+					{
+						WyHelper.sendMsgToPlayer(player, "Failed Tempo");
+						WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_COMMONEXPLOSION , player.posX, player.posY - 1, player.posZ), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
+					}
 					
 					climaTact.emptyCharge(stack);
 					super.use(player);

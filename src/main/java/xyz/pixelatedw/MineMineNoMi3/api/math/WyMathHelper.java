@@ -40,6 +40,11 @@ public class WyMathHelper
 		return String.valueOf(array);
 	}
 
+	public static float degToRad(double degrees)
+	{
+		return (float) (degrees * Math.PI / 180);
+	}
+	
 	public static double percentage(double i, double j)
 	{
 		return (i / 100) * j;

@@ -7,7 +7,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.WorldServer;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.api.Schematic;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.WySchematicHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketQuestSync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
@@ -17,11 +19,20 @@ import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityCustomSpawner;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedWorldData;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.baroqueWorks.EntityMr0;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.EntityMorgan;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityWantedPostersPackage;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityDugong;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityDummy;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityLapahn;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityYagaraBull;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListQuests;
 import xyz.pixelatedw.MineMineNoMi3.quests.EnumQuestlines;
 import xyz.pixelatedw.MineMineNoMi3.world.TeleporterScenarioArena;
+import xyz.pixelatedw.MineMineNoMi3.world.structures.StructureBanditSmallBase;
+import xyz.pixelatedw.MineMineNoMi3.world.structures.StructureLargeShip;
+import xyz.pixelatedw.MineMineNoMi3.world.structures.StructureMarineLargeBase;
 
 public class CommandFG extends CommandBase
 {	
@@ -38,12 +49,18 @@ public class CommandFG extends CommandBase
 			QuestProperties questProps = QuestProperties.get(player);
 			Entity toSpawn = null;
 
-			/*if(str[0].equalsIgnoreCase("dummy"))
+			if(str[0].equalsIgnoreCase("dummy"))
 				toSpawn = new TempEntityDummy(player.worldObj);
 			else if(str[0].equalsIgnoreCase("mr0"))
 				toSpawn = new EntityMr0(player.worldObj);
 			else if(str[0].equalsIgnoreCase("morgan"))
-				toSpawn = new EntityMorgan(player.worldObj);*/
+				toSpawn = new EntityMorgan(player.worldObj);
+			else if(str[0].equalsIgnoreCase("dugong"))
+				toSpawn = new TempEntityDugong(player.worldObj);
+			else if(str[0].equalsIgnoreCase("lapahn"))
+				toSpawn = new TempEntityLapahn(player.worldObj);
+			else if(str[0].equalsIgnoreCase("yagarabull"))
+				toSpawn = new TempEntityYagaraBull(player.worldObj);
 			
 			if(str[0].equalsIgnoreCase("package"))
 			{			
@@ -139,6 +156,23 @@ public class CommandFG extends CommandBase
 				WyNetworkHelper.sendTo(new PacketQuestSync(questProps), (EntityPlayerMP) player);
 			}
 
+			else if(str[0].equalsIgnoreCase("marinebase"))
+				StructureMarineLargeBase.build(WySchematicHelper.load("marineLargeBase"), player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ, player.worldObj.getBiomeGenForCoordsBody((int)player.posX, (int)player.posZ));
+			else if(str[0].equalsIgnoreCase("banditbase"))
+				StructureBanditSmallBase.build(WySchematicHelper.load("banditBase"), player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ, player.worldObj.getBiomeGenForCoordsBody((int)player.posX, (int)player.posZ));
+			else if(str[0].equalsIgnoreCase("marineShip"))
+			{
+				Schematic sch = WySchematicHelper.load("marineLargeShip");
+				WySchematicHelper.build(sch, player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ);
+				StructureLargeShip.populate((int)player.posX, (int)player.posY, (int)player.posZ, player.worldObj, sch.getName());
+			}
+			else if(str[0].equalsIgnoreCase("pirateShip"))
+			{
+				Schematic sch = WySchematicHelper.load("pyrateLargeShip");
+				WySchematicHelper.build(sch, player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ);
+				StructureLargeShip.populate((int)player.posX, (int)player.posY, (int)player.posZ, player.worldObj, sch.getName());
+			}
+			
 			if(toSpawn != null)
 			{
 				toSpawn.setLocationAndAngles(player.posX, player.posY, player.posZ, 0, 0);

@@ -8,7 +8,6 @@ import java.util.List;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldSavedData;
-import scala.actors.threadpool.Arrays;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.items.AkumaNoMi;
 
@@ -44,6 +43,7 @@ public class ExtendedWorldData extends WorldSavedData
 		return data;
 	}
 
+	@Override
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		this.isSwordsmanDojoSpawned = nbt.getBoolean("isSwordsmanDojoSpawned");
@@ -73,6 +73,7 @@ public class ExtendedWorldData extends WorldSavedData
 		}
 	}
 
+	@Override
 	public void writeToNBT(NBTTagCompound nbt)
 	{
 		nbt.setBoolean("isSwordsmanDojoSpawned", this.isSwordsmanDojoSpawned);
@@ -229,7 +230,32 @@ public class ExtendedWorldData extends WorldSavedData
 		this.isSwordsmanDojoSpawned = value;
 		markDirty();
 	}
+	
+	public List<String> getDevilFruitsInWorld()
+	{
+		return this.devilFruitsInWorld;
+	}
 
+	public void removeDevilFruitFromWorld(AkumaNoMi fruit)
+	{
+		String name = fruit.getUnlocalizedName().substring(5).replace("nomi", "").replace(":", "").replace(",", "").replace("model", "");
+
+		if (this.devilFruitsInWorld.contains(name))
+		{
+			this.devilFruitsInWorld.remove(name);
+			markDirty();
+		}
+	}
+	
+	public void removeDevilFruitFromWorld(String name)
+	{
+		if (this.devilFruitsInWorld.contains(name))
+		{
+			this.devilFruitsInWorld.remove(name);
+			markDirty();
+		}
+	}
+	
 	public void addDevilFruitInWorld(AkumaNoMi fruit)
 	{
 		String name = fruit.getUnlocalizedName().substring(5).replace("nomi", "").replace(":", "").replace(",", "").replace("model", "");

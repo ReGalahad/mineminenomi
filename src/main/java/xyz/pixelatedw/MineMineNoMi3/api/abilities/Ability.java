@@ -15,7 +15,6 @@ import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilitySync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
-import xyz.pixelatedw.MineMineNoMi3.data.ExtendedWorldData;
 import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketShounenScream;
 
@@ -70,8 +69,8 @@ public class Ability
 				explosion.doExplosion();
 			}
 			
-	    	if(!ID.DEV_EARLYACCESS && !player.capabilities.isCreativeMode)
-	    		WyTelemetry.addStat("abilityUsed_" + this.getAttribute().getAttributeName(), 1);
+	    	if(!player.capabilities.isCreativeMode)
+	    		WyTelemetry.addAbilityStat(this.getAttribute().getAbilityTexture(), this.getAttribute().getAttributeName(), 1);
 	    	
 	    	ExtendedEntityData props = ExtendedEntityData.get(player);
 	    	AbilityProperties abilityProps = AbilityProperties.get(player);
@@ -225,7 +224,7 @@ public class Ability
 			player.worldObj.newExplosion(player, player.posX, player.posY, player.posZ, this.attr.getAbilityExplosionPower(), this.attr.canAbilityExplosionSetFire(), MainConfig.enableGriefing ? this.attr.canAbilityExplosionDestroyBlocks() : false);		
 				
     	if(!ID.DEV_EARLYACCESS && !player.capabilities.isCreativeMode)
-    		WyTelemetry.addStat("abilityUsed_" + this.getAttribute().getAttributeName(), 1);
+    		WyTelemetry.addAbilityStat(this.getAttribute().getAbilityTexture(), this.getAttribute().getAttributeName(), 1);
 
 		(new Update(player, attr)).start();
 	}
@@ -255,7 +254,7 @@ public class Ability
 		startCooldown();
 		WyNetworkHelper.sendTo(new PacketAbilitySync(AbilityProperties.get(player)), (EntityPlayerMP) player);
 
-		target.attackEntityFrom(DamageSource.causePlayerDamage(player), this.attr.getPunchDamage());
+		target.attackEntityFrom(DamageSource.causePlayerDamage(player), this.attr.getPunchDamage() * ExtendedEntityData.get(player).getDamageMultiplier());
 		
 		(new Update(player, attr)).start();
 	}
@@ -312,6 +311,7 @@ public class Ability
 			this.setName("ResetThread Thread for " + attr.getAttributeName());
 		}
 		
+		@Override
 		public void run()
 		{
 			while(isDisabled)
@@ -361,6 +361,7 @@ public class Ability
 			ticksForCharge = this.attr.getAbilityCharges();
 		}
 		
+		@Override
 		public void run()
 		{
 			if(passiveActive)

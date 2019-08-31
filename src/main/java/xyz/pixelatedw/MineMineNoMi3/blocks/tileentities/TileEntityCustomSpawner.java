@@ -1,20 +1,15 @@
 package xyz.pixelatedw.MineMineNoMi3.blocks.tileentities;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntity;
-import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
-import xyz.pixelatedw.MineMineNoMi3.blocks.BlockCustomSpawner;
 
 public class TileEntityCustomSpawner extends TileEntity
 {
@@ -23,16 +18,17 @@ public class TileEntityCustomSpawner extends TileEntity
 	private int spawnLimit = 5;
 	private ArrayList<EntityLivingBase> spawnedEntities = new ArrayList<EntityLivingBase>();
 
-	public TileEntityCustomSpawner setSpawnerMob(String toSpawn) { entityToSpawn = toSpawn; return this; }
-	public TileEntityCustomSpawner setSpawnerLimit(int limit) { spawnLimit = limit; return this; }
+	public TileEntityCustomSpawner setSpawnerMob(String toSpawn) { this.entityToSpawn = toSpawn; return this; }
+	public TileEntityCustomSpawner setSpawnerLimit(int limit) { this.spawnLimit = limit; return this; }
 	
-    public void updateEntity()
+    @Override
+	public void updateEntity()
     {
     	if(!this.worldObj.isRemote)
     	{
     		boolean flag = false;
-    		
-	    	if(!WyHelper.getEntitiesNear(this, 30, EntityPlayer.class).isEmpty())
+
+    		if(!WyHelper.getEntitiesNear(this, 30, EntityPlayer.class).isEmpty())
 	    	{
 	    		EntityLivingBase e = WyHelper.getEntitiesNear(this, 30, EntityPlayer.class).get(0);
 	    		
@@ -73,14 +69,16 @@ public class TileEntityCustomSpawner extends TileEntity
     	}
     }
     
-    public void readFromNBT(NBTTagCompound nbtTag)
+    @Override
+	public void readFromNBT(NBTTagCompound nbtTag)
     {
         super.readFromNBT(nbtTag);
         this.entityToSpawn = nbtTag.getString("entityToSpawn");
         this.spawnLimit = nbtTag.getInteger("spawnLimit");
     }
 
-    public void writeToNBT(NBTTagCompound nbtTag)
+    @Override
+	public void writeToNBT(NBTTagCompound nbtTag)
     {
         super.writeToNBT(nbtTag);
         nbtTag.setInteger("spawnLimit", this.spawnLimit);

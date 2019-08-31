@@ -4,10 +4,8 @@ import java.awt.Color;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.net.URL;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -21,8 +19,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Scanner;
 import java.util.Set;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.BasicResponseHandler;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -67,9 +70,8 @@ public class WyHelper
 		catch (ParseException e)
 		{
 			e.printStackTrace();
+			return false;
 		}
-		
-		if(target == null) return false;
 		
 		Calendar now = Calendar.getInstance();
 		return now.after(target);
@@ -326,9 +328,23 @@ public class WyHelper
 			return Color.decode("#" + hexColor);
 	}
 
+	public static String formatBytes(long bytes)
+	{
+	    int unit = 1024;
+	    if (bytes < unit) return bytes + " B";
+	    int exp = (int) (Math.log(bytes) / Math.log(unit));
+	    String pre = ("KMGTPE").charAt(exp-1) + "";
+	    return String.format("%.1f %sB", bytes / Math.pow(unit, exp), pre);
+	}
+	
 	public static void sendMsgToPlayer(EntityPlayer player, String text)
 	{
 		player.addChatComponentMessage(new ChatComponentText(text));
+	}
+	
+	public static String upperCaseFirst(String text)
+	{
+		return Character.toUpperCase(text.charAt(0)) + text.substring(1) + " "; 
 	}
 
 	public static String getFancyName(String text)
@@ -600,30 +616,37 @@ public class WyHelper
 	{
 		boolean flag = false;
 		
-		try 
+		String url = "/isPatreon";
+
+		try
 		{
-			URL url = new URL("https://dl.dropboxusercontent.com/s/cs2cv9ezaatzgd3/earlyaccess.txt?dl=0");
-			Scanner scanner = new Scanner(url.openStream());
+			String uuid = player.getUniqueID().toString();
+			String json = Values.gson.toJson(uuid);
+						
+			HttpPost post = new HttpPost(Values.urlConnection + "" + url);	
+			StringEntity postingString;
+			postingString = new StringEntity(json);
+			post.setEntity(postingString);
+			post.setHeader("Content-Type", "application/json");
 			
-			while(scanner.hasNextLine())
+			HttpResponse response = Values.httpClient.execute(post);
+			ResponseHandler<String> handler = new BasicResponseHandler();
+
+			String body = handler.handleResponse(response);
+			if(body.isEmpty())
+				((EntityPlayerMP)player).playerNetServerHandler.kickPlayerFromServer(EnumChatFormatting.BOLD + "" + EnumChatFormatting.RED + "WARNING! \n\n " + EnumChatFormatting.RESET + "You don't have access to this version yet!");
+			else
 			{
-				String uuid = scanner.nextLine();
-				if(uuid.startsWith("$"))
-					continue;
-										
-				if(player.getUniqueID().toString().equals(uuid) || (uuid.startsWith("&") && player.getDisplayName().equalsIgnoreCase(uuid.replace("& ", ""))))
-				{
+				int patreonLevel = Integer.parseInt(body);
+				
+				if(patreonLevel <= 2)
+					((EntityPlayerMP)player).playerNetServerHandler.kickPlayerFromServer(EnumChatFormatting.BOLD + "" + EnumChatFormatting.RED + "WARNING! \n\n " + EnumChatFormatting.RESET + "You don't have access to this version yet!");
+				else
 					flag = true;
-					break;
-				}
 			}
 			
-			if(!flag)
-				((EntityPlayerMP)player).playerNetServerHandler.kickPlayerFromServer(EnumChatFormatting.BOLD + "" + EnumChatFormatting.RED + "WARNING! \n\n " + EnumChatFormatting.RESET + "You don't have access to this version yet!");														
-			
-			scanner.close();
-		} 
-		catch (IOException e) 
+		}
+		catch(Exception e)
 		{
 			((EntityPlayerMP)player).playerNetServerHandler.kickPlayerFromServer(EnumChatFormatting.BOLD + "" + EnumChatFormatting.RED + "WARNING! \n\n " + EnumChatFormatting.RESET + "You don't have access to this version yet!");						
 			e.printStackTrace();

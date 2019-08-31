@@ -2,12 +2,15 @@ package xyz.pixelatedw.MineMineNoMi3.entities.particles;
 
 import java.util.HashMap;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.ParticleEffect;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.baku.ParticleEffectBakuMunch;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.chiyu.ParticleEffectChiyupopo;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.chiyu.ParticleEffectHealingTouch;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.common.ParticleEffectAboveHead;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.common.ParticleEffectCommonExplosion;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.common.ParticleEffectWaterExplosion;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.doku.ParticleEffectChloroBall;
@@ -78,7 +81,10 @@ public class ParticleManager
 		
 		// Common
 		map.put(ID.PARTICLEFX_COMMONEXPLOSION, new ParticleEffectCommonExplosion());
-		map.put(ID.PARTICLEFX_WATEREXPLOSION, new ParticleEffectWaterExplosion());	
+		map.put(ID.PARTICLEFX_WATEREXPLOSION, new ParticleEffectWaterExplosion());
+		map.put(ID.PARTICLEFX_ABOVEHEAD_ANGRY, new ParticleEffectAboveHead(EnumParticleTypes.VILLAGER_ANGRY.getParticleName()));
+		map.put(ID.PARTICLEFX_ABOVEHEAD_HAPPY, new ParticleEffectAboveHead(EnumParticleTypes.VILLAGER_HAPPY.getParticleName()));
+		map.put(ID.PARTICLEFX_ABOVEHEAD_HEART, new ParticleEffectAboveHead(EnumParticleTypes.HEART.getParticleName()));
 
 		// Sabi
 		map.put(ID.PARTICLEFX_RUSTTOUCH, new ParticleEffectRustTouch());
@@ -186,6 +192,9 @@ public class ParticleManager
 	
 	public boolean spawnFX(EntityPlayer player, double posX, double posY, double posZ, String id)
 	{
+		if(Math.abs(Minecraft.getMinecraft().gameSettings.particleSetting - 2) == 0)
+			return false;
+		
 		if(this.particleEffects.containsKey(id))
 		{
 			this.particleEffects.get(id).spawn(player, posX, posY, posZ);

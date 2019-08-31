@@ -1,7 +1,5 @@
 package xyz.pixelatedw.MineMineNoMi3.packets;
 
-import java.util.Arrays;
-
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
@@ -10,13 +8,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.play.server.S02PacketChat;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.world.WorldServer;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
-import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
 
 public class PacketShounenScream implements IMessage
 {
@@ -38,6 +31,7 @@ public class PacketShounenScream implements IMessage
 		this.splitHalf = splitHalf;
 	}
 	
+	@Override
 	public void fromBytes(ByteBuf buf) 
 	{
 		this.senderName = ByteBufUtils.readUTF8String(buf);
@@ -45,6 +39,7 @@ public class PacketShounenScream implements IMessage
 		this.splitHalf = buf.readInt();
 	}
 
+	@Override
 	public void toBytes(ByteBuf buf) 
 	{
 		ByteBufUtils.writeUTF8String(buf, this.senderName);
@@ -54,6 +49,7 @@ public class PacketShounenScream implements IMessage
 	
 	public static class ClientHandler implements IMessageHandler<PacketShounenScream, IMessage>
 	{
+		@Override
 		@SideOnly(Side.CLIENT)
 		public IMessage onMessage(PacketShounenScream message, MessageContext ctx) 
 		{
@@ -64,7 +60,7 @@ public class PacketShounenScream implements IMessage
 			if(message.splitHalf > 0)
 			{
 				String[] abilityWords = localizedName.replaceAll(" [:]", "").split(" ");
-				int noOfWords = (int) Math.ceil((double)abilityWords.length / (abilityWords.length > 2 ? 1.5 : 2));
+				int noOfWords = (int) Math.ceil(abilityWords.length / (abilityWords.length > 2 ? 1.5 : 2));
 				
 				if(message.splitHalf == 1)
 				{		
@@ -74,7 +70,11 @@ public class PacketShounenScream implements IMessage
 						for(int i = 0; i < noOfWords; i++)
 							sb.append(abilityWords[i] + " ");
 						animeScream = sb.toString().substring(0, sb.toString().length() - 1) + "...";
+						
+						WyHelper.sendMsgToPlayer(player, "<" + message.senderName + "> " + animeScream);
 					}
+					else
+						WyHelper.sendMsgToPlayer(player, "<" + message.senderName + "> " + animeScream);
 				}
 				else if(message.splitHalf == 2)
 				{
@@ -84,11 +84,14 @@ public class PacketShounenScream implements IMessage
 						for(int i = noOfWords; i < abilityWords.length; i++)
 							sb.append(abilityWords[i] + " ");
 						animeScream = "..." + sb.toString();
+						
+						WyHelper.sendMsgToPlayer(player, "<" + message.senderName + "> " + animeScream);
 					}
 				}
 			}
+			else
+				WyHelper.sendMsgToPlayer(player, "<" + message.senderName + "> " + animeScream);
 			
-			WyHelper.sendMsgToPlayer(player, "<" + message.senderName + "> " + animeScream);
 
 			return null;
 		}

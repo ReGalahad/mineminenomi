@@ -1,7 +1,6 @@
 package xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
@@ -11,9 +10,8 @@ import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.HieProjectiles.IceBall;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.HieProjectiles.IceBlockPartisan;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
+import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListExtraAttributes;
 
@@ -60,11 +58,12 @@ public class GoroProjectiles
 			super(world, player, attr);		
 		}
 
+		@Override
 		public void onUpdate()
 		{	
 			if(this.worldObj.isRemote)
 			{
-				for (int i = 0; i < 2; i++)
+				for (int i = 0; i < DevilFruitsHelper.getParticleSettingModifier(2); i++)
 				{				    
 					ResourceLocation particleToUse = i % 2 == 0 ? ID.PARTICLE_ICON_GORO2 : ID.PARTICLE_ICON_GORO;
 					
@@ -96,11 +95,12 @@ public class GoroProjectiles
 			super(world, player, attr);		
 		}
 		
+		@Override
 		public void onUpdate()
 		{	
 			if(this.worldObj.isRemote)
 			{
-				for (int i = 0; i < 35; i++)
+				for (int i = 0; i < DevilFruitsHelper.getParticleSettingModifier(35); i++)
 				{
 					double offsetX = WyMathHelper.randomWithRange(-8, 8);
 					double offsetY = WyMathHelper.randomWithRange(-10, 20);
@@ -134,11 +134,12 @@ public class GoroProjectiles
 			super(world, player, attr);		
 		}
 		
+		@Override
 		public void onUpdate()
 		{	
 			if(this.worldObj.isRemote)
 			{
-				for (int i = 0; i < 2; i++)
+				for (int i = 0; i < DevilFruitsHelper.getParticleSettingModifier(2); i++)
 				{
 					EntityParticleFX particle = new EntityParticleFX(this.worldObj, ID.PARTICLE_ICON_GORO2, 
 							posX + this.worldObj.rand.nextDouble() - 0.5, 
@@ -168,11 +169,12 @@ public class GoroProjectiles
 			super(world, player, attr);		
 		}
 		
+		@Override
 		public void onUpdate()
 		{	
 			if(this.worldObj.isRemote)
 			{
-				for (int i = 0; i < 2; i++)
+				for (int i = 0; i < DevilFruitsHelper.getParticleSettingModifier(2); i++)
 				{
 					EntityParticleFX particle = new EntityParticleFX(this.worldObj, ID.PARTICLE_ICON_GORO2, 
 							posX + this.worldObj.rand.nextDouble() - 0.5, 
@@ -202,11 +204,12 @@ public class GoroProjectiles
 			super(world, player, attr);		
 		}
 		
+		@Override
 		public void onUpdate()
 		{	
 			if(this.worldObj.isRemote)
 			{
-				for (int i = 0; i < 2; i++)
+				for (int i = 0; i < DevilFruitsHelper.getParticleSettingModifier(2); i++)
 				{
 					EntityParticleFX particle = new EntityParticleFX(this.worldObj, ID.PARTICLE_ICON_GORO2, 
 							posX + this.worldObj.rand.nextDouble() - 0.5, 
@@ -236,11 +239,12 @@ public class GoroProjectiles
 			super(world, player, attr);		
 		}
 		
+		@Override
 		public void onUpdate()
 		{	
 			if(this.worldObj.isRemote)
 			{
-				for (int i = 0; i < 2; i++)
+				for (int i = 0; i < DevilFruitsHelper.getParticleSettingModifier(2); i++)
 				{
 					EntityParticleFX particle = new EntityParticleFX(this.worldObj, ID.PARTICLE_ICON_GORO2, 
 							posX + this.worldObj.rand.nextDouble() - 0.5, 

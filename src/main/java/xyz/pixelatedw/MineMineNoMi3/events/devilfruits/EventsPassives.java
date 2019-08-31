@@ -21,13 +21,12 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerUseItemEvent;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.abilities.RokushikiAbilities;
-import xyz.pixelatedw.MineMineNoMi3.abilities.extra.effects.DFEffectHieSlowness;
+import xyz.pixelatedw.MineMineNoMi3.abilities.effects.DFEffectHieSlowness;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityExplosion;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
-import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDoppelman;
 import xyz.pixelatedw.MineMineNoMi3.events.customevents.EventYomiTrigger;
@@ -178,9 +177,6 @@ public class EventsPassives
 					props.setMaxCola(props.getMaxCola() + 400);
 					props.setColaBackpack(true);
 
-					if (!ID.DEV_EARLYACCESS && !player.capabilities.isCreativeMode && !player.worldObj.isRemote)
-						WyTelemetry.addStat("colaBackpacksCurrentlyEquipped", 1);
-
 					if (!player.worldObj.isRemote)
 						WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
 				}
@@ -192,9 +188,6 @@ public class EventsPassives
 						props.setCola(props.getMaxCola());
 
 					props.setColaBackpack(false);
-
-					if (!ID.DEV_EARLYACCESS && !player.capabilities.isCreativeMode && !player.worldObj.isRemote)
-						WyTelemetry.addStat("colaBackpacksCurrentlyEquipped", -1);
 
 					if (!player.worldObj.isRemote)
 						WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
@@ -362,12 +355,14 @@ public class EventsPassives
 	{
 		if (event.oldPlayerData.getUsedFruit().equalsIgnoreCase("yomiyomi") && !event.oldPlayerData.getZoanPoint().equalsIgnoreCase("yomi"))
 		{
-
 			event.newPlayerData.setUsedFruit("yomiyomi");
 			event.newPlayerData.setZoanPoint("yomi");
 
 			EntityPlayer player = (EntityPlayer) event.entity;
-
+			EntityPlayer oldPlayer = (EntityPlayer) event.oldPlayerData.getEntity();
+			
+			player.setPosition(oldPlayer.posX, oldPlayer.posY, oldPlayer.posZ);
+			
 			WyNetworkHelper.sendTo(new PacketSync(event.newPlayerData), (EntityPlayerMP) player);
 			WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), event.newPlayerData));
 		}

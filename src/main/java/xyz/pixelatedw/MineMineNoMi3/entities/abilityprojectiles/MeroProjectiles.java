@@ -3,20 +3,16 @@ package xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles;
 import java.util.ArrayList;
 
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainMod;
-import xyz.pixelatedw.MineMineNoMi3.abilities.extra.effects.DFEffectMeroPetrification;
+import xyz.pixelatedw.MineMineNoMi3.abilities.effects.DFEffectMeroPetrification;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
-import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
-import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
+import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
-import xyz.pixelatedw.MineMineNoMi3.packets.PacketSyncInfo;
 
 public class MeroProjectiles
 {
@@ -42,6 +38,7 @@ public class MeroProjectiles
 			super(world, player, attr);		
 		}
 		
+		@Override
 		public void tasksImapct(MovingObjectPosition hit)
 		{
 			if(hit.entityHit != null && hit.entityHit instanceof EntityLivingBase)
@@ -52,11 +49,12 @@ public class MeroProjectiles
 			}
 		}
 		
+		@Override
 		public void onUpdate()
 		{		
 			if(this.worldObj.isRemote && this.ticksExisted > 5)
 			{		
-				for(int i = 0; i < 2; i++)
+				for(int i = 0; i < DevilFruitsHelper.getParticleSettingModifier(2); i++)
 				{
 					EntityParticleFX particle = new EntityParticleFX(this.worldObj, ID.PARTICLE_ICON_MERO, 
 							posX, 
@@ -84,6 +82,7 @@ public class MeroProjectiles
 			super(world, player, attr);		
 		}
 		
+		@Override
 		public void tasksImapct(MovingObjectPosition hit)
 		{
 			if(hit.entityHit != null && hit.entityHit instanceof EntityLivingBase)
@@ -108,6 +107,7 @@ public class MeroProjectiles
 			super(world, player, attr);		
 		}
 		
+		@Override
 		public void tasksImapct(MovingObjectPosition hit)
 		{
 			if(hit.entityHit != null && hit.entityHit instanceof EntityLivingBase)

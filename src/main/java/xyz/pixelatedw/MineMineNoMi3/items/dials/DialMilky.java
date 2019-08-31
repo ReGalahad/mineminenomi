@@ -1,13 +1,9 @@
 package xyz.pixelatedw.MineMineNoMi3.items.dials;
 
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import xyz.pixelatedw.MineMineNoMi3.ID;
-import xyz.pixelatedw.MineMineNoMi3.MainKeys;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.ExtraProjectiles.MilkyDialProjectile;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListExtraAttributes;
@@ -22,19 +18,20 @@ public class DialMilky extends Item
 		this.setMaxDamage(1);
 	}
 	
+	@Override
 	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
 	{		
 		if(!world.isRemote)
 		{
-	    	if(!player.isSneaking()) //GuiScreen.isShiftKeyDown()
+	    	if(!player.isSneaking())
 	    	{
 	    		MilkyDialProjectile proj = new MilkyDialProjectile(player.worldObj, player, ListExtraAttributes.DIAL_MILKY);
 				
 	    		world.spawnEntityInWorld(proj);
 				
-		    	if(!ID.DEV_EARLYACCESS && !player.capabilities.isCreativeMode)
-		    		WyTelemetry.addStat("milkyDialsUsed", 1);
-	    		
+		    	if(!player.capabilities.isCreativeMode)
+		    		WyTelemetry.addMiscStat("milkyDialsUsed", "Milky Dials Used", 1);
+		    	
 				itemStack.damageItem(2, player);
 	    	}	    
 		}
@@ -42,12 +39,13 @@ public class DialMilky extends Item
 		return itemStack;
 	}
 
-    public boolean onItemUse(ItemStack itemStack, EntityPlayer player, World world, int i1, int i2, int i3, int i4, float f1, float f2, float f3)
+    @Override
+	public boolean onItemUse(ItemStack itemStack, EntityPlayer player, World world, int i1, int i2, int i3, int i4, float f1, float f2, float f3)
     {
     	if(!world.isRemote && player.isSneaking())
     	{
-	    	if(!ID.DEV_EARLYACCESS && !player.capabilities.isCreativeMode)
-	    		WyTelemetry.addStat("milkyDialsPlaced", 1);
+	    	if(!player.capabilities.isCreativeMode)
+	    		WyTelemetry.addMiscStat("milkyDialsPlaced", "Milky Dials Placed", 1);
     		
 	    	world.setBlock(i1, i2 + 1, i3, ListMisc.DialMilkyBlock);
 	    	itemStack.stackSize--;

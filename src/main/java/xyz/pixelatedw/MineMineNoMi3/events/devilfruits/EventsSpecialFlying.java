@@ -1,12 +1,10 @@
 package xyz.pixelatedw.MineMineNoMi3.events.devilfruits;
 
 import java.util.Arrays;
-import java.util.Random;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import xyz.pixelatedw.MineMineNoMi3.ID;
@@ -46,7 +44,7 @@ public class EventsSpecialFlying
 			{
 				if(!event.entityLiving.worldObj.isRemote)
 				{
-					if((MainConfig.enableSpecialFlying && hasFlyingFruit) || hasToriFruit || hasAbareHimatsuri)		
+					if((MainConfig.enableSpecialFlying && hasFlyingFruit && !DevilFruitsHelper.isNearbyKairoseki(player)) || hasToriFruit || hasAbareHimatsuri)		
 					{
 						WyNetworkHelper.sendTo(new PacketSpecialFlying(true), (EntityPlayerMP) player);
 						player.fallDistance = 0;

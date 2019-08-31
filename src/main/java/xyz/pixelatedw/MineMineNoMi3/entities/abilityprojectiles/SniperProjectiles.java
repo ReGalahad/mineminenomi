@@ -17,7 +17,6 @@ import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.ExtraProjectiles.EntityCloud;
 import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
-import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 
 public class SniperProjectiles
@@ -46,9 +45,10 @@ public class SniperProjectiles
 			super(world, player, attr);		
 		}
 		
+		@Override
 		public void tasksImapct(MovingObjectPosition hit)
 		{
-			for(int i = 0; i < 8; i++)
+			for(int i = 0; i < DevilFruitsHelper.getParticleSettingModifier(8); i++)
 			{
 				int a1 = worldObj.rand.nextInt(10) - 5;
 				int a2 = worldObj.rand.nextInt(10) - 5;
@@ -90,6 +90,7 @@ public class SniperProjectiles
 			super(world, player, attr);		
 		}
 
+		@Override
 		public void tasksImapct(MovingObjectPosition hit)
 		{
 			EntityKemuriBoshiCloud smokeCloud = new EntityKemuriBoshiCloud(worldObj);
@@ -110,6 +111,7 @@ public class SniperProjectiles
 			super(world);
 		}
 		
+		@Override
 		public void onUpdate()
 		{
 			super.onUpdate();
@@ -135,12 +137,14 @@ public class SniperProjectiles
 			super(world, player, attr);		
 		}
 		
+		@Override
 		public void onUpdate()
 		{								
 			this.setFire(999);
 			super.onUpdate();
 		}
 		
+		@Override
 		public void tasksImapct(MovingObjectPosition hit)
 		{
 			if(hit.entityHit != null)

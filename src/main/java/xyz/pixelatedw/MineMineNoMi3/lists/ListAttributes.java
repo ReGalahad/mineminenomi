@@ -8,22 +8,22 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.ModelCube;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.ModelSphere;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.EffectType;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelArrow;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelBrickBat;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelFist;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelHeart;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelHydra;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelMeigo;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelMiniHollow;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelNegativeHollow;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelNoroNoroBeam;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelPaw;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelPheasant;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelShark;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelSpear;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelTokuHollow;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelTrident;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelYukiRabi;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.projectiles.ModelArrow;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.projectiles.ModelBrickBat;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.projectiles.ModelFist;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.projectiles.ModelHeart;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.projectiles.ModelHydra;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.projectiles.ModelMeigo;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.projectiles.ModelMiniHollow;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.projectiles.ModelNegativeHollow;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.projectiles.ModelNoroNoroBeam;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.projectiles.ModelPaw;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.projectiles.ModelPheasant;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.projectiles.ModelShark;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.projectiles.ModelSpear;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.projectiles.ModelTokuHollow;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.projectiles.ModelTrident;
+import xyz.pixelatedw.MineMineNoMi3.models.entities.projectiles.ModelYukiRabi;
 
 public class ListAttributes 
 {
@@ -207,9 +207,9 @@ public class ListAttributes
 	public static final AbilityAttribute SHISHA_NO_TE = new AbilityAttribute("Shisha no Te").setAbilityCooldown(3).setProjectileDamage(5).setProjectileModel(new ModelCube()).setProjectileSize(0, 0, 0).setProjectileExplosion(3, false);
 	public static final AbilityAttribute SKATTING = new AbilityAttribute("Skatting").addEffects(EffectType.USER, new PotionEffect(Potion.invisibility.id, 30, 5)).setAbilityPassive();  	
 	 
-	public static final AbilityAttribute GEARSECOND = new AbilityAttribute("Gear Second").setAbilityCooldown(60).setAbilityPassive();
-	public static final AbilityAttribute GEARTHIRD = new AbilityAttribute("Gear Third").setAbilityCooldown(90).setAbilityPassive();
-	public static final AbilityAttribute GEARFOURTH = new AbilityAttribute("Gear Fourth").setAbilityCooldown(300).setAbilityPassive();
+	public static final AbilityAttribute GEAR_SECOND = new AbilityAttribute("Gear Second").setAbilityCooldown(60).setAbilityPassive();
+	public static final AbilityAttribute GEAR_THIRD = new AbilityAttribute("Gear Third").setAbilityCooldown(90).setAbilityPassive();
+	public static final AbilityAttribute GEAR_FOURTH = new AbilityAttribute("Gear Fourth").setAbilityCooldown(300).setAbilityPassive();
 	public static final AbilityAttribute GOMU_GOMU_NO_ROCKET = new AbilityAttribute("Gomu Gomu no Rocket").setProjectileModel(new ModelFist()).setProjectileTexture("gomugomunopistol").setProjectileSize(3, 3, 3).setModelOffsets(0, 1, 0).setProjectileDamage(6).setAbilityCooldown(8).setProjectilePhysical().setProjectileSpeed(2.5F);
 	public static final AbilityAttribute GOMU_GOMU_NO_BAZOOKA = new AbilityAttribute("Gomu Gomu no Bazooka").setAbilityCharges(10);
 	public static final AbilityAttribute GOMU_GOMU_NO_GATLING = new AbilityAttribute("Gomu Gomu no Gatling").setProjectileTicks(10);
@@ -261,6 +261,7 @@ public class ListAttributes
 
 	public static final AbilityAttribute RUST_TOUCH = new AbilityAttribute("Rust Touch").setAbilityCooldown(19).setAbilityPunch().setAbilityPassive();
 	
+	public static final AbilityAttribute WEATHER_EGG = new AbilityAttribute("Weather Egg").setAbilityCooldown(10).setProjectileModel(new ModelSphere()).setProjectileColor("#BEBEBE").setProjectileAlpha(150).setProjectileSize(1.5, 1.5, 1.5);
 	public static final AbilityAttribute GUST_SWORD = new AbilityAttribute("Gust Sword").setAbilityCooldown(8).setProjectileTicks(5).setProjectileSize(.01, .01, .01).setAbilityRepeater(3).setProjectileDamage(2).setProjectileSpeed(5);
 	public static final AbilityAttribute THUNDER_BALL = new AbilityAttribute("Thunder Ball").setAbilityCooldown(5).setProjectileModel(new ModelSphere()).setProjectileColor("FFFF00").setProjectileAlpha(150).setProjectileSize(1.5, 1.5, 1.5).setProjectileTicks(300);
 	public static final AbilityAttribute COOL_BALL = new AbilityAttribute("Cool Ball").setAbilityCooldown(5).setProjectileModel(new ModelSphere()).setProjectileColor("0000FF").setProjectileAlpha(150).setProjectileSize(1.5, 1.5, 1.5).setProjectileTicks(300);

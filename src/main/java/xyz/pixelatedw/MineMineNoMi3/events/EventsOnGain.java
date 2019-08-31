@@ -8,7 +8,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.abilities.CyborgAbilities;
@@ -23,7 +22,6 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
-import xyz.pixelatedw.MineMineNoMi3.data.ExtendedNPCData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.MarineData;
 import xyz.pixelatedw.MineMineNoMi3.events.customevents.EventBounty;
@@ -153,28 +151,25 @@ public class EventsOnGain
 
 				if (target instanceof EntityNewMob)
 				{
-					ExtendedNPCData targetprops = ExtendedNPCData.get(target);
+					//ExtendedNPCData targetprops = ExtendedNPCData.get(target);
 					
-					if ((props.getDoriki() / 100) > targetprops.getDoriki())
+					EntityNewMob entity = (EntityNewMob)target;
+					
+					if ((props.getDoriki() / 100) > entity.getDoriki())
 					{
-						int x = (props.getDoriki() / 100) - targetprops.getDoriki();
-						if (x <= 0)
-							x = 1;
-
-						plusDoriki = 1 / x;
-						if (plusDoriki < 1)
+						if(MainConfig.enableMinimumDorikiPerKill)
 							plusDoriki = 1;
 					}
 					else
-						plusDoriki = targetprops.getDoriki();
+						plusDoriki = entity.getDoriki();
 					
 					plusDoriki *= MainConfig.modifierDorikiReward;
 
-					plusBounty = (targetprops.getDoriki() * 2) + rng;
-					plusBelly = targetprops.getBelly() + rng;
+					plusBounty = (entity.getDoriki() * 2) + rng;
+					plusBelly = entity.getBelly() + rng;
 
-					if (!ID.DEV_EARLYACCESS && !player.worldObj.isRemote && !player.capabilities.isCreativeMode)
-						WyTelemetry.addStat("defeated_" + WyHelper.getFancyName(target.getClass().getSimpleName()).replace("entity", ""), 1);
+					if (!player.worldObj.isRemote && !player.capabilities.isCreativeMode)
+						WyTelemetry.addKillStat(WyHelper.getFancyName(target.getClass().getSimpleName()).replace("entity", ""), target.getClass().getSimpleName().replace("Entity", ""), 1);
 				}
 				else
 				{
@@ -223,23 +218,7 @@ public class EventsOnGain
 					props.alterBelly(plusBelly);
 
 			}
-
-			if (!ID.DEV_EARLYACCESS && !player.worldObj.isRemote && !player.capabilities.isCreativeMode)
-			{
-				if (!targetPlayer && MainConfig.enableMobRewards)
-				{
-					WyTelemetry.addStat("dorikiEarnedFromEntities", (int) Math.round(plusDoriki));
-					WyTelemetry.addStat("bellyEarnedFromEntities", plusBelly);
-					WyTelemetry.addStat("bountyEarnedFromEntities", plusBounty);
-				}
-				else
-				{
-					WyTelemetry.addStat("dorikiEarnedFromPlayers", Math.round((ExtendedEntityData.get(target).getDoriki() - ExtendedEntityData.get(target).getDorikiFromCommand()) / 4));
-					WyTelemetry.addStat("bellyEarnedFromPlayers", plusBelly - ExtendedEntityData.get(target).getBellyFromCommand());
-					WyTelemetry.addStat("bountyEarnedFromPlayers", Math.round((ExtendedEntityData.get(target).getBounty() - ExtendedEntityData.get(target).getBountyFromCommand()) / 2));
-				}
-			}
-
+			
 			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
 		}
 	}

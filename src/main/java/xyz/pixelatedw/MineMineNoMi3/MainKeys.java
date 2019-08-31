@@ -66,7 +66,10 @@ public class MainKeys
 		{
         	WyNetworkHelper.sendToServer(new PacketPlayer("forcesync"));
 
-        	player.openGui(MainMod.getMineMineNoMi(), 1, world, (int)player.posX, (int)player.posY, (int)player.posZ);
+        	if(!props.hasRace() || !props.hasFaction() || !props.hasFightingStyle())
+        		player.openGui(MainMod.getMineMineNoMi(), 2, world, (int)player.posX, (int)player.posY, (int)player.posZ);
+        	else
+        		player.openGui(MainMod.getMineMineNoMi(), 1, world, (int)player.posX, (int)player.posY, (int)player.posZ);
         }
 		
 		if(enterCombatMode.isPressed()) 

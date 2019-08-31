@@ -6,17 +6,16 @@ import java.util.List;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MovingObjectPosition;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.Values;
+import xyz.pixelatedw.MineMineNoMi3.abilities.effects.DFEffectLogiaOff;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
-import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilityReset;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
@@ -48,6 +47,7 @@ public class YamiAbilities
 			super(ListAttributes.BLACK_WORLD); 
 		}
 		
+		@Override
 		public void use(EntityPlayer player)
 		{
 			if(!this.isOnCooldown)
@@ -100,6 +100,7 @@ public class YamiAbilities
 			super(ListAttributes.BLACKHOLE); 
 		}
 		
+		@Override
 		public void use(final EntityPlayer player)
 		{				
 			if(!this.isOnCooldown)
@@ -125,6 +126,7 @@ public class YamiAbilities
 		}
 		
 		/** TODO Explosion particles */
+		@Override
 		public void use(final EntityPlayer player)
 		{
 			int libCount = 0;
@@ -161,7 +163,7 @@ public class YamiAbilities
 					{
 						if( player.worldObj.getBlock((int) player.posX + x, (int) player.posY + y, (int) player.posZ + z) == ListMisc.Darkness)
 						{
-							player.worldObj.setBlockToAir((int)(int) player.posX + x, (int)(int) player.posY + y, (int)(int) player.posZ + z);
+							player.worldObj.setBlockToAir((int) player.posX + x, (int) player.posY + y, (int) player.posZ + z);
 							libCount++;
 							if(libCount % 10 == 0)
 								liberationCount++;
@@ -183,11 +185,13 @@ public class YamiAbilities
 			super(ListAttributes.KUROUZU); 
 		}
 		
+		@Override
 		public void startCharging(EntityPlayer player)
 		{
 			super.startCharging(player);				
 		}
 		
+		@Override
 		public void duringCharging(EntityPlayer player, int currentCharge)
 		{
 			MovingObjectPosition mop = WyHelper.rayTraceBlocks(player);	
@@ -208,6 +212,7 @@ public class YamiAbilities
 			}
 		}
 		
+		@Override
 		public void endCharging(EntityPlayer player)
 		{
 			if(this.entities.contains(player))
@@ -218,6 +223,7 @@ public class YamiAbilities
 				target.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 100, 5));
 				target.addPotionEffect(new PotionEffect(Potion.digSlowdown.id, 100, 5));
 				target.addPotionEffect(new PotionEffect(Potion.blindness.id, 100, 5));
+				new DFEffectLogiaOff(target, 100);
 				if(target instanceof EntityPlayer)
 				{
 					EntityPlayer playerTarget = (EntityPlayer)target;
@@ -235,6 +241,7 @@ public class YamiAbilities
 			super(ListAttributes.DARK_MATTER);
 		}
 		
+		@Override
 		public void use(final EntityPlayer player)
 		{				
 			this.projectile = new YamiProjectiles.DarkMatter(player.worldObj, player, attr);
