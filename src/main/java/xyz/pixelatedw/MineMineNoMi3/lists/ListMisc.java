@@ -120,6 +120,9 @@ public class ListMisc
 		}		
 	}.setLightLevel(0.75F).setLightOpacity(0);
 	public static Block Barrier = new BlockBarrier();
+	public static Block Poneglyph1 = new NewBlock(Material.dragonEgg);
+	public static Block Poneglyph2 = new NewBlock(Material.dragonEgg);
+	public static Block Poneglyph3 = new NewBlock(Material.dragonEgg);
 	public static Block Poison = new BlockPoison();
 	public static Block DemonPoison = new BlockDemonPoison();
 	public static BlockCustomSpawner CustomSpawner = new BlockCustomSpawner();
@@ -366,6 +369,9 @@ public class ListMisc
 		addBLOCK(DenDenMushi, "Den Den Mushi", 0.5F, TileEntityDenDenMushi.class, ListCreativeTabs.tabMisc);
 		addBLOCK(SkyBlock, "Sky Block", 0.6F, null, ListCreativeTabs.tabMisc);
 		addBLOCK(Barrier, "Crash Barrier", Float.POSITIVE_INFINITY, null, null);
+		addBLOCK(Poneglyph1, "Poneglyph 1", Float.POSITIVE_INFINITY, null, ListCreativeTabs.tabMisc);
+		addBLOCK(Poneglyph2, "Poneglyph 2", Float.POSITIVE_INFINITY, null, ListCreativeTabs.tabMisc);
+		addBLOCK(Poneglyph3, "Poneglyph 3", Float.POSITIVE_INFINITY, null, ListCreativeTabs.tabMisc);
 		addBLOCK(Poison, "Poison", 1.5F, null, null);
 		addBLOCK(DemonPoison, "Demon Poison", 1.5F, null, null);
 		addBLOCK(CustomSpawner, "Custom Spawner", Float.POSITIVE_INFINITY, TileEntityCustomSpawner.class, null);
