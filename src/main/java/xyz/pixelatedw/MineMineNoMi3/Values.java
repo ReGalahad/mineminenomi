@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.apache.http.client.HttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
-
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -34,8 +32,11 @@ public class Values
 	
 	// Network related stuff
 	public static String urlConnection;
-	public static HttpClient httpClient = HttpClientBuilder.create().build();
-	public static Gson gson = new Gson();
+	public static Gson gson = new GsonBuilder()
+            .disableHtmlEscaping()
+            .setPrettyPrinting()
+            .create();
+	
 	static
 	{
 		if (WyDebug.isDebug())

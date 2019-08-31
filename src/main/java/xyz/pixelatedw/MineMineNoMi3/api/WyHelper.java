@@ -21,22 +21,14 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.BasicResponseHandler;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
@@ -46,6 +38,7 @@ import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityExplosion;
 import xyz.pixelatedw.MineMineNoMi3.api.math.ISphere;
 import xyz.pixelatedw.MineMineNoMi3.api.math.Sphere;
+import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 
 public class WyHelper
@@ -616,40 +609,23 @@ public class WyHelper
 	{
 		boolean flag = false;
 		
-		String url = "/isPatreon";
+		String apiURL = "/isPatreon";
 
-		try
+		String uuid = player.getUniqueID().toString();
+		String json = Values.gson.toJson(uuid);
+
+		String result = WyTelemetry.sendPOST(apiURL, json);
+
+		if(WyHelper.isNullOrEmpty(result))
+			return flag;
+		else
 		{
-			String uuid = player.getUniqueID().toString();
-			String json = Values.gson.toJson(uuid);
-						
-			HttpPost post = new HttpPost(Values.urlConnection + "" + url);	
-			StringEntity postingString;
-			postingString = new StringEntity(json);
-			post.setEntity(postingString);
-			post.setHeader("Content-Type", "application/json");
-			
-			HttpResponse response = Values.httpClient.execute(post);
-			ResponseHandler<String> handler = new BasicResponseHandler();
-
-			String body = handler.handleResponse(response);
-			if(body.isEmpty())
-				((EntityPlayerMP)player).playerNetServerHandler.kickPlayerFromServer(EnumChatFormatting.BOLD + "" + EnumChatFormatting.RED + "WARNING! \n\n " + EnumChatFormatting.RESET + "You don't have access to this version yet!");
-			else
-			{
-				int patreonLevel = Integer.parseInt(body);
+			int patreonLevel = Integer.parseInt(result);
 				
-				if(patreonLevel <= 2)
-					((EntityPlayerMP)player).playerNetServerHandler.kickPlayerFromServer(EnumChatFormatting.BOLD + "" + EnumChatFormatting.RED + "WARNING! \n\n " + EnumChatFormatting.RESET + "You don't have access to this version yet!");
-				else
-					flag = true;
-			}
-			
-		}
-		catch(Exception e)
-		{
-			((EntityPlayerMP)player).playerNetServerHandler.kickPlayerFromServer(EnumChatFormatting.BOLD + "" + EnumChatFormatting.RED + "WARNING! \n\n " + EnumChatFormatting.RESET + "You don't have access to this version yet!");						
-			e.printStackTrace();
+			if(patreonLevel <= 2)
+				return flag;
+			else
+				flag = true;			
 		}
 		
 		return flag;
