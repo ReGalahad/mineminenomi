@@ -8,7 +8,9 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
+import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
+import xyz.pixelatedw.MineMineNoMi3.data.HistoryProperties;
 
 public class GUIHistory extends GuiScreen
 {
@@ -30,6 +32,11 @@ public class GUIHistory extends GuiScreen
 
 		int posX = (this.width - 256) / 2;
 		int posY = (this.height - 256) / 2;
+		
+		HistoryProperties historyProps = HistoryProperties.get(player);
+		QuestProperties questProps = QuestProperties.get(player);
+		
+		mc.fontRenderer.drawStringWithShadow("Has Crocodile: " + historyProps.hasUnlockedChallenge(ID.HISTORY_ENNTRY_NAME_CROCODILE), posX - 30, posY + 70, -1);
 		
 		super.drawScreen(x, y, f);
 	}

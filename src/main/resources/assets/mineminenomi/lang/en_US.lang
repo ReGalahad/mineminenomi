@@ -439,6 +439,7 @@ quest.bountylowlevel03.name=Common Bounty #3
 quest.item.decipherednote=Deciphered Note
 quest.item.mysteriousnote=Mysterious Note
 quest.none.name=None
+quest.poneglyph_challenge_crocodile.name=Decipher Poneglyph
 quest.sniperprogression01.name=Crack Shot
 quest.sniperprogression02.desc.0= Test Description1
 quest.sniperprogression02.desc.1=Test Description2
