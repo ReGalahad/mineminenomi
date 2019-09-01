@@ -31,6 +31,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
+import xyz.pixelatedw.MineMineNoMi3.data.HistoryProperties;
 import xyz.pixelatedw.MineMineNoMi3.events.customevents.EventYomiTrigger;
 
 public class EventsCore
@@ -49,6 +50,8 @@ public class EventsCore
 				QuestProperties.register((EntityPlayer) event.entity);
 			if(AbilityProperties.get((EntityPlayer) event.entity) == null)
 				AbilityProperties.register((EntityPlayer) event.entity);
+			if(HistoryProperties.get((EntityPlayer) event.entity) == null)
+				HistoryProperties.register((EntityPlayer) event.entity);
 		}
 	}
 	

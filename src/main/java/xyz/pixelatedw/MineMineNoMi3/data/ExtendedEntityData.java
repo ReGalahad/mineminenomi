@@ -6,7 +6,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
-public class ExtendedEntityData implements IExtendedEntityProperties 
+public class ExtendedEntityData implements IExtendedEntityProperties
 {
 
 	public final static String EXT_PROP_NAME = "IEEPShared";
