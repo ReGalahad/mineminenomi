@@ -14,6 +14,7 @@ public class GUIHistory extends GuiScreen
 {
 	private EntityPlayer player;
 	private ExtendedEntityData props;
+	private int currentScreen = 0;
 	
 	public GUIHistory(EntityPlayer player)
 	{
@@ -39,10 +40,9 @@ public class GUIHistory extends GuiScreen
 		int posX = (this.width - 256) / 2;
 		int posY = (this.height - 256) / 2;
 
-		if(MainConfig.enableQuests)
+		if(MainConfig.enableBossFights)
 			this.buttonList.add(new GuiButton(1, posX - 20, posY + 210, 70, 20, I18n.format(ID.LANG_GUI_CHALLENGES)));
-		
-		//this.buttonList.add(new GuiButton(2, posX + 63, posY + 210, 80, 20, I18n.format("gui.epithet.name")));
+
 	}
 	
 	@Override
@@ -50,7 +50,8 @@ public class GUIHistory extends GuiScreen
 	{
 		switch(button.id)
 		{
-
+			case 1:
+				this.currentScreen = 0; break;
 		}
 	}
 	
