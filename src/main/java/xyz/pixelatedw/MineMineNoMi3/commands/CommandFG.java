@@ -19,6 +19,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityCustomSpawner;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedWorldData;
+import xyz.pixelatedw.MineMineNoMi3.data.HistoryProperties;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.baroqueWorks.EntityMr0;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.EntityMorgan;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityWantedPostersPackage;
@@ -47,6 +48,7 @@ public class CommandFG extends CommandBase
 			EntityPlayer player = CommandBase.getCommandSenderAsPlayer(sender);
 			ExtendedEntityData props = ExtendedEntityData.get(player);
 			QuestProperties questProps = QuestProperties.get(player);
+			HistoryProperties historyProps = HistoryProperties.get(player);
 			Entity toSpawn = null;
 
 			if(str[0].equalsIgnoreCase("dummy"))
@@ -171,6 +173,10 @@ public class CommandFG extends CommandBase
 				Schematic sch = WySchematicHelper.load("pyrateLargeShip");
 				WySchematicHelper.build(sch, player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ);
 				StructureLargeShip.populate((int)player.posX, (int)player.posY, (int)player.posZ, player.worldObj, sch.getName());
+			}
+			else if(str[0].equalsIgnoreCase("reset_history"))
+			{
+				historyProps.removeUnlockedChallenge("crocodile");
 			}
 			
 			if(toSpawn != null)

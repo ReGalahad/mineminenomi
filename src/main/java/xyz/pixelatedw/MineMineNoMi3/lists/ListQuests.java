@@ -7,6 +7,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.quests.Quest;
 import xyz.pixelatedw.MineMineNoMi3.quests.bounties.lowlevel.BountyLowLevel01;
 import xyz.pixelatedw.MineMineNoMi3.quests.bounties.lowlevel.BountyLowLevel02;
 import xyz.pixelatedw.MineMineNoMi3.quests.bounties.lowlevel.BountyLowLevel03;
+import xyz.pixelatedw.MineMineNoMi3.quests.poneglyphs.QuestPoneglyphChallengeCrocodile;
 import xyz.pixelatedw.MineMineNoMi3.quests.questlines.sniperprogression.QuestSniperProgression01;
 import xyz.pixelatedw.MineMineNoMi3.quests.questlines.sniperprogression.QuestSniperProgression02;
 import xyz.pixelatedw.MineMineNoMi3.quests.questlines.swordsmanprogression.QuestSwordsmanProgression01;
@@ -38,7 +39,8 @@ public class ListQuests
 	public static Quest bountyLowLevel02 = new BountyLowLevel02();		
 	public static Quest bountyLowLevel03 = new BountyLowLevel03();		
 	
-
+	// Ponehlyphs
+	public static Quest poneglyphChallengeCrocodile = new QuestPoneglyphChallengeCrocodile();
 	
 	public static void init()
 	{
@@ -57,6 +59,9 @@ public class ListQuests
 		registerQuest(bountyLowLevel01);	
 		registerQuest(bountyLowLevel02);	
 		registerQuest(bountyLowLevel03);	
+		
+		// Poneglyphs
+		registerQuest(poneglyphChallengeCrocodile);
 		
 	}
 	
