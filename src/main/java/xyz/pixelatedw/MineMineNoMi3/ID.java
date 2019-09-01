@@ -169,6 +169,10 @@ public class ID
 	FSTYLE_ARTOFWEATHER = "Art of Weather",
 	FSTYLE_OKAMA = "Okama",
 	
+	HISTORY_ENTRY_TYPE_CHALLENGE = "challenge",
+	
+	HISTORY_ENNTRY_NAME_CROCODILE = "crocodile",
+	
 	LANG_KEYS_CATEGORY = "category.mmnmkeys", //Mine Mine no Mi Keys
 	LANG_KEY_PLAYER = "key.playerui", //Player UI
 	LANG_KEY_COMBATMODE = "key.combatmode", //Combat Mode
@@ -185,6 +189,8 @@ public class ID
 	LANG_GUI_STYLE = "gui.style.name",
 	LANG_GUI_ABILITIES = "gui.abilities.name",
 	LANG_GUI_QUESTS = "gui.quests.name",
+	LANG_GUI_HISTORY = "gui.history.name",
+	LANG_GUI_CHALLENGES = "gui.challenges.name",
 	LANG_GUI_QUESTS_PROGRESS = "gui.quests.progress.name",
 	LANG_GUI_QUESTS_ACCEPT = "gui.quests.accept.name",	
 	LANG_GUI_QUESTS_DECLINE = "gui.quests.decline.name",	

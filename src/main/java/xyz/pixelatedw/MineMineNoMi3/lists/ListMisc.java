@@ -25,6 +25,7 @@ import xyz.pixelatedw.MineMineNoMi3.blocks.BlockKage;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockOpe;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockOpeMid;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockPoison;
+import xyz.pixelatedw.MineMineNoMi3.blocks.BlockPoneglyph;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockStringMid;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockStringWall;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockSunaSand;
@@ -49,6 +50,7 @@ import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityFlashDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityImpactDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityMilkyDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityOpe;
+import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityPoneglyph;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityRejectDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityString;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityWantedPoster;
@@ -120,9 +122,9 @@ public class ListMisc
 		}		
 	}.setLightLevel(0.75F).setLightOpacity(0);
 	public static Block Barrier = new BlockBarrier();
-	public static Block Poneglyph1 = new NewBlock(Material.dragonEgg);
-	public static Block Poneglyph2 = new NewBlock(Material.dragonEgg);
-	public static Block Poneglyph3 = new NewBlock(Material.dragonEgg);
+	public static Block Poneglyph1 = new BlockPoneglyph();
+	public static Block Poneglyph2 = new BlockPoneglyph();
+	public static Block Poneglyph3 = new BlockPoneglyph();
 	public static Block Poison = new BlockPoison();
 	public static Block DemonPoison = new BlockDemonPoison();
 	public static BlockCustomSpawner CustomSpawner = new BlockCustomSpawner();
@@ -369,9 +371,9 @@ public class ListMisc
 		addBLOCK(DenDenMushi, "Den Den Mushi", 0.5F, TileEntityDenDenMushi.class, ListCreativeTabs.tabMisc);
 		addBLOCK(SkyBlock, "Sky Block", 0.6F, null, ListCreativeTabs.tabMisc);
 		addBLOCK(Barrier, "Crash Barrier", Float.POSITIVE_INFINITY, null, null);
-		addBLOCK(Poneglyph1, "Poneglyph 1", Float.POSITIVE_INFINITY, null, ListCreativeTabs.tabMisc);
-		addBLOCK(Poneglyph2, "Poneglyph 2", Float.POSITIVE_INFINITY, null, ListCreativeTabs.tabMisc);
-		addBLOCK(Poneglyph3, "Poneglyph 3", Float.POSITIVE_INFINITY, null, ListCreativeTabs.tabMisc);
+		addBLOCK(Poneglyph1, "Poneglyph 1", Float.POSITIVE_INFINITY, TileEntityPoneglyph.class, ListCreativeTabs.tabMisc);
+		addBLOCK(Poneglyph2, "Poneglyph 2", Float.POSITIVE_INFINITY, TileEntityPoneglyph.class, ListCreativeTabs.tabMisc);
+		addBLOCK(Poneglyph3, "Poneglyph 3", Float.POSITIVE_INFINITY, TileEntityPoneglyph.class, ListCreativeTabs.tabMisc);
 		addBLOCK(Poison, "Poison", 1.5F, null, null);
 		addBLOCK(DemonPoison, "Demon Poison", 1.5F, null, null);
 		addBLOCK(CustomSpawner, "Custom Spawner", Float.POSITIVE_INFINITY, TileEntityCustomSpawner.class, null);
@@ -463,6 +465,8 @@ public class ListMisc
 		WyRegistry.registerName("quest.item.mysteriousnote", "Mysterious Note");
 		WyRegistry.registerName("quest.item.decipherednote", "Deciphered Note");
 				
+		WyRegistry.registerName(ID.LANG_GUI_HISTORY, "History");
+		WyRegistry.registerName(ID.LANG_GUI_CHALLENGES, "Challenges");
 		WyRegistry.registerName(ID.LANG_GUI_FACTION, "Faction");
 		WyRegistry.registerName(ID.LANG_GUI_RACE, "Race");
 		WyRegistry.registerName(ID.LANG_GUI_STYLE, "Style");

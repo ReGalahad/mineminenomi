@@ -277,8 +277,10 @@ faction.pirate.name=Pirate
 faction.revolutionary.name=Revolutionary Army
 
 gui.abilities.name=Abilities
+gui.challenges.name=Challenges
 gui.epithet.name=Epithets
 gui.faction.name=Faction
+gui.history.name=History
 gui.quests.accept.name=Accept
 gui.quests.accepttext.name=Do you wish to accept this quest ?
 gui.quests.completed=has been completed !
