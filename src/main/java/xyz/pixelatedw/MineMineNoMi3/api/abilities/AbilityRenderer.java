@@ -8,11 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.util.ResourceLocation;
-import xyz.pixelatedw.MineMineNoMi3.ID;
-import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 
 @SideOnly(Side.CLIENT)
 public class AbilityRenderer extends Render
@@ -29,6 +25,7 @@ public class AbilityRenderer extends Render
 		this.texture = ablAttr.getProjectileTexture();	
 	}
 
+	@Override
 	public void doRender(Entity entity, double par2, double par4, double par6, float par8, float par9)
 	{
     	this.scaleX = ablAttr.getProjectileSize()[0];
@@ -56,7 +53,7 @@ public class AbilityRenderer extends Render
     	if(this.texture == null)
     		GL11.glDisable(GL11.GL_TEXTURE_2D);
     	GL11.glEnable(GL11.GL_BLEND);
-    	GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA); 
+    	GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
     	
     	GL11.glRotatef(entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * par9 - 180.0F, 0.0F, 1.0F, 0.0F);
     	GL11.glRotatef(entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * par9, 1.0F, 0.0F, 0.0F);

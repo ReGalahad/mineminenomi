@@ -39,7 +39,7 @@ public class RenderBlockCannon extends TileEntitySpecialRenderer
 			
 			GL11.glPushMatrix();
 				GL11.glRotatef(rotation * 90, 0F, 1F, 0F);
-				model.render(null, 0, 0, 0, 0, 0, 0.0625F);
+				this.model.render(null, 0, 0, 0, 0, 0, 0.0625F);
 			GL11.glPopMatrix();
 
 		GL11.glPopMatrix();

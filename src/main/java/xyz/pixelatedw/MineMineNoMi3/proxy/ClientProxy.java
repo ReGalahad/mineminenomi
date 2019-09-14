@@ -19,6 +19,7 @@ import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityFlashDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityImpactDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityMilkyDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityRejectDial;
+import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntitySakeFeast;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityWantedPoster;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityWantedPostersPackage;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.animals.EntityDenDenMushi;
@@ -99,6 +100,7 @@ import xyz.pixelatedw.MineMineNoMi3.models.entities.mobs.humanoids.ModelSpandam;
 import xyz.pixelatedw.MineMineNoMi3.renderers.blocks.RenderBlockCannon;
 import xyz.pixelatedw.MineMineNoMi3.renderers.blocks.RenderBlockDenDenMushi;
 import xyz.pixelatedw.MineMineNoMi3.renderers.blocks.RenderBlockDial;
+import xyz.pixelatedw.MineMineNoMi3.renderers.blocks.RenderBlockSakeFeast;
 import xyz.pixelatedw.MineMineNoMi3.renderers.blocks.RenderBlockWantedPoster;
 import xyz.pixelatedw.MineMineNoMi3.renderers.blocks.RenderBlockWantedPostersPackage;
 import xyz.pixelatedw.MineMineNoMi3.renderers.entities.MobRenderer;
@@ -193,6 +195,7 @@ public class ClientProxy extends CommonProxy
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWantedPoster.class, new RenderBlockWantedPoster());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWantedPostersPackage.class, new RenderBlockWantedPostersPackage());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCannon.class, new RenderBlockCannon());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySakeFeast.class, new RenderBlockSakeFeast());
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAxeDial.class, new RenderBlockDial(new ModelImpactDial(), "axedial"));
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityEisenDial.class, new RenderBlockDial(new ModelMilkyDial(), "eisendial"));
