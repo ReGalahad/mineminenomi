@@ -8,6 +8,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityCannon;
@@ -45,52 +46,61 @@ public class BlockCannon extends BlockContainer
 	@Override
 	public boolean onBlockActivated(World world, int posX, int posY, int posZ, EntityPlayer player, int par6, float par7, float par8, float par9)
 	{
-		if(!world.isRemote)
-		{
-			TileEntityCannon cannonTE = (TileEntityCannon) world.getTileEntity(posX, posY, posZ);
+		TileEntityCannon cannonTE = (TileEntityCannon) world.getTileEntity(posX, posY, posZ);
 
-			if(player.getHeldItem() != null)	
+		if (player.getHeldItem() != null)
+		{
+			if (cannonTE.getGunpowederLoaded() < 5 && player.getHeldItem().getItem() == Items.gunpowder)
 			{
-				if(!cannonTE.isHasGunpoweder() && player.getHeldItem().getItem() == Items.gunpowder)
-				{
-					player.getHeldItem().stackSize--;
-					cannonTE.setHasGunpoweder(true);
-					return true;
-				}
-				
-				if(!cannonTE.isHasCannonBall() && player.getHeldItem().getItem() == ListMisc.CannonBall)
-				{
-					player.getHeldItem().stackSize--;
-					cannonTE.setHasCannonBall(true);
-					return true;
-				}			
-			}
-			
-			if(cannonTE.isHasGunpoweder() && cannonTE.isHasCannonBall())
-			{
-				AbilityProjectile cannonBall = new ExtraProjectiles.CannonBall(world, player, ListExtraAttributes.CANNON_BALL);
-				cannonBall.setLocationAndAngles(posX + 0.5, posY + 1, posZ + 0.5, cannonTE.getBlockMetadata() * 90, 0);
-				cannonBall.motionX = 0;
-				cannonBall.motionZ = 0;
-				switch(cannonTE.blockMetadata)
-				{
-					case 0:
-						cannonBall.motionZ = -5; break;
-					case 1:
-						cannonBall.motionX = 5; break;
-					case 2:
-						cannonBall.motionZ = 5; break;
-					case 3:
-						cannonBall.motionX = -5; break;
-				}
-				cannonBall.motionY = 0;
-				world.spawnEntityInWorld(cannonBall);
-				
-				cannonTE.setHasGunpoweder(false);
-				cannonTE.setHasCannonBall(false);
-				
+				player.getHeldItem().stackSize--;
+				cannonTE.addGunpoweder();
 				return true;
 			}
+
+			if (!cannonTE.hasCannonBall() && player.getHeldItem().getItem() == ListMisc.CannonBall)
+			{
+				player.getHeldItem().stackSize--;
+				cannonTE.setHasCannonBall(true);
+				return true;
+			}
+		}
+
+		if (cannonTE.getGunpowederLoaded() > 0 && cannonTE.hasCannonBall())
+		{
+			int motion = 5 + cannonTE.getGunpowederLoaded();
+			int damage = 30 + (cannonTE.getGunpowederLoaded() * 2);
+			int life = 100 + (cannonTE.getGunpowederLoaded() * 20);
+
+			AbilityProjectile cannonBall = new ExtraProjectiles.CannonBall(world, player, ListExtraAttributes.CANNON_BALL.setProjectileDamage(damage).setProjectileTicks(life));
+			cannonBall.setLocationAndAngles(posX + 0.5, posY + 1, posZ + 0.5, cannonTE.getBlockMetadata() * 90, 0);
+			cannonBall.motionX = 0;
+			cannonBall.motionZ = 0;
+			switch (cannonTE.blockMetadata)
+			{
+				case 0:
+					cannonBall.motionZ = -motion;
+					break;
+				case 1:
+					cannonBall.motionX = motion;
+					break;
+				case 2:
+					cannonBall.motionZ = motion;
+					break;
+				case 3:
+					cannonBall.motionX = -motion;
+					break;
+			}
+			cannonBall.motionY = 0;
+			if(!world.isRemote)
+				world.spawnEntityInWorld(cannonBall);
+
+			for (int i = 0; i < 10; i++)
+				world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL.getParticleName(), posX, posY + 0.6, posZ, 0, 0.01, 0);
+			
+			cannonTE.emptyGunpoweder();
+			cannonTE.setHasCannonBall(false);
+
+			return true;
 		}
 		return true;
 	}
