@@ -225,7 +225,10 @@ public class ClientProxy extends CommonProxy
 		
 		MinecraftForgeClient.registerItemRenderer(ListMisc.Biseto, new RenderWeaponBisento());
 		MinecraftForgeClient.registerItemRenderer(ListMisc.BoStick, new RenderWeaponBisento());
-		
+		MinecraftForgeClient.registerItemRenderer(ListMisc.ClimaTact, new RenderWeaponBisento());
+		MinecraftForgeClient.registerItemRenderer(ListMisc.PerfectClimaTact, new RenderWeaponBisento());
+		MinecraftForgeClient.registerItemRenderer(ListMisc.SorceryClimaTact, new RenderWeaponBisento());
+
 		MinecraftForgeClient.registerItemRenderer(ListMisc.WadoIchimonji, new RenderWeaponKatana());
 		MinecraftForgeClient.registerItemRenderer(ListMisc.SandaiKitetsu, new RenderWeaponKatana());
 		MinecraftForgeClient.registerItemRenderer(ListMisc.NidaiKitetsu, new RenderWeaponKatana());

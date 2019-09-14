@@ -1,7 +1,5 @@
 package xyz.pixelatedw.MineMineNoMi3.entities.mobs.animals;
 
-import java.util.Arrays;
-import java.util.Optional;
 import java.util.UUID;
 
 import net.minecraft.block.Block;
@@ -122,21 +120,30 @@ public class EntityYagaraBull extends EntityNewMob implements IEntityOwnable
 			if (heldStack == null)
 				return false;
 
-			Optional<Item> foodItem = Arrays.stream(this.food).filter(x -> heldStack.getItem() == x).findFirst();
-
-			if (foodItem != null)
+			ItemStack foodItemStack = null;
+			
+			for(Item food : this.food)
 			{
-				--heldStack.stackSize;
-				for (int i = 0; i < 2; ++i)
+				if(player.getHeldItem().getItem() == food)
 				{
-					double d0 = this.rand.nextGaussian() * 0.02D;
-					double d1 = this.rand.nextGaussian() * 0.02D;
-					double d2 = this.rand.nextGaussian() * 0.02D;
-					this.worldObj.spawnParticle(EnumParticleTypes.HEART.getParticleName(), this.posX + this.rand.nextFloat() * this.width * 2.0F - this.width, this.posY + 0.5D + this.rand.nextFloat() * this.height, this.posZ + this.rand.nextFloat() * this.width * 2.0F - this.width, d0, d1, d2);
+					foodItemStack = new ItemStack(food);
+					break;
 				}
-				this.timesFed++;
 			}
-
+			
+			if(foodItemStack == null)
+				return false;
+			
+			--foodItemStack.stackSize;
+			for (int i = 0; i < 2; ++i)
+			{
+				double d0 = this.rand.nextGaussian() * 0.02D;
+				double d1 = this.rand.nextGaussian() * 0.02D;
+				double d2 = this.rand.nextGaussian() * 0.02D;
+				this.worldObj.spawnParticle(EnumParticleTypes.HEART.getParticleName(), this.posX + this.rand.nextFloat() * this.width * 2.0F - this.width, this.posY + 0.5D + this.rand.nextFloat() * this.height, this.posZ + this.rand.nextFloat() * this.width * 2.0F - this.width, d0, d1, d2);
+			}
+			this.timesFed++;
+				
 			if (this.timesFed >= 5 + WyMathHelper.randomWithRange(2, 5))
 			{
 				this.setTamed(true);
