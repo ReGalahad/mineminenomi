@@ -8,20 +8,25 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityCannon extends TileEntity
 {
-	private boolean hasGunpoweder = false;
+	private int gunpowderLoaded = 0;
 	private boolean hasCannonBall = false;
 
-	public boolean isHasGunpoweder()
+	public int getGunpowederLoaded()
 	{
-		return hasGunpoweder;
+		return gunpowderLoaded;
 	}
 
-	public void setHasGunpoweder(boolean hasGunpoweder)
+	public void addGunpoweder()
 	{
-		this.hasGunpoweder = hasGunpoweder;
+		this.gunpowderLoaded++;
 	}
 
-	public boolean isHasCannonBall()
+	public void emptyGunpoweder()
+	{
+		this.gunpowderLoaded = 0;
+	}
+	
+	public boolean hasCannonBall()
 	{
 		return hasCannonBall;
 	}
@@ -35,7 +40,7 @@ public class TileEntityCannon extends TileEntity
 	public void writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
-		nbt.setBoolean("HasGunpowder", this.hasGunpoweder);
+		nbt.setInteger("LoadedGunpowder", this.gunpowderLoaded);
 		nbt.setBoolean("HasCannonBall", this.hasCannonBall);
 	}
 
@@ -43,7 +48,7 @@ public class TileEntityCannon extends TileEntity
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
-		this.hasGunpoweder = nbt.getBoolean("HasGunpowder");
+		this.gunpowderLoaded = nbt.getInteger("LoadedGunpowder");
 		this.hasCannonBall = nbt.getBoolean("HasCannonBall");
 	}
 
