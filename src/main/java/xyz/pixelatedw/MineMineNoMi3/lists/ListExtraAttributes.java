@@ -55,4 +55,5 @@ public class ListExtraAttributes
 	public static final AbilityAttribute DIAL_AXE = new AbilityAttribute("Axe Dial").setProjectileModel(new ModelCube()).setProjectileDamage(5).setProjectileSize(6, 0.4, 1.5).setProjectileTicks(100).setProjectileColor("69E3FF");
 	public static final AbilityAttribute DIAL_MILKY = new AbilityAttribute("Milky Dial").setProjectileModel(new ModelSphere()).setProjectileSize(.1, .1, .1).setProjectileTicks(40).setProjectileColor("69E3FF").setProjectileMoveThroughBlocks(true);
 
+	public static final AbilityAttribute CANNON_BALL = new AbilityAttribute("Cannon Ball").setProjectileModel(new ModelSphere()).setProjectileSize(3, 3, 3).setProjectileTicks(100).setProjectileColor("0B2D41").setProjectileExplosion(3, false);
 }

@@ -15,6 +15,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.WyRegistry;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockAbilityProtection;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockAbilityProtectionArea;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockBarrier;
+import xyz.pixelatedw.MineMineNoMi3.blocks.BlockCannon;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockCustomBars;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockCustomSpawner;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockDarkness;
@@ -41,6 +42,7 @@ import xyz.pixelatedw.MineMineNoMi3.blocks.dials.BlockRejectDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityAbilityProtection;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityAxeDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityBreathDial;
+import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityCannon;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityCustomSpawner;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityDenDenMushi;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityEisenDial;
@@ -167,6 +169,8 @@ public class ListMisc
 	public static Block DialRejectBlock = new BlockRejectDial();
 	public static Block DialBreathBlock = new BlockBreathDial();
 	
+	public static Block Cannon = new BlockCannon();
+	
 	public static Item CharacterCreator = new CharacterCreator();
 	public static Item Kairoseki = new Item();
 	public static Item DenseKairoseki = new Item();
@@ -195,6 +199,7 @@ public class ListMisc
 	public static Item KairosekiBullets = new Item();
 	public static Item KujaArrow = new Item();
 	public static Item PopGreen = new Item();
+	public static Item CannonBall = new Item();
 	public static Item Cola = new Cola();
 	public static Item UltraCola = new UltraCola();
 
@@ -285,6 +290,7 @@ public class ListMisc
 		addITEM(PopGreen, "Pop Green", ListCreativeTabs.tabWeapons);
 		addITEM(Bullets, "Bullets", ListCreativeTabs.tabWeapons);
 		addITEM(KairosekiBullets, "Kairoseki Bullets", ListCreativeTabs.tabWeapons);
+		addITEM(CannonBall, "Cannon Ball", ListCreativeTabs.tabWeapons);
 
 		addITEM(MarineHelm, "Marine Helmet", ListCreativeTabs.tabWeapons);
 		addITEM(MarineChestplate, "Marine Chestplate", ListCreativeTabs.tabWeapons);
@@ -378,6 +384,7 @@ public class ListMisc
 		addBLOCK(AbilityProtectionBlock, "Ability Protection Block", Float.MAX_VALUE, null, ListCreativeTabs.tabMisc);
 		addBLOCK(AbilityProtectionAreaBlock, "Ability Protection Area Block", Float.MAX_VALUE, null, null);
 		addBLOCK(AbilityProtectionCenterBlock, "Ability Protection Center Block", Float.MAX_VALUE, TileEntityAbilityProtection.class, null);
+		addBLOCK(Cannon, "Cannon", 1.0F, TileEntityCannon.class, ListCreativeTabs.tabMisc);
 		
 		addBLOCK(DialEisenBlock, "Eisen Dial Block", .3F, TileEntityEisenDial.class, null);
 		addBLOCK(DialFireBlock, "Flame Dial Block", .3F, TileEntityFlameDial.class, null);
