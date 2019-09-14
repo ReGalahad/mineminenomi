@@ -11,6 +11,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityRenderer;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityAxeDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityBreathDial;
+import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityCannon;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityDenDenMushi;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityEisenDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityFlameDial;
@@ -95,6 +96,7 @@ import xyz.pixelatedw.MineMineNoMi3.models.entities.mobs.humanoids.ModelMorgan;
 import xyz.pixelatedw.MineMineNoMi3.models.entities.mobs.humanoids.ModelMr0;
 import xyz.pixelatedw.MineMineNoMi3.models.entities.mobs.humanoids.ModelPearl;
 import xyz.pixelatedw.MineMineNoMi3.models.entities.mobs.humanoids.ModelSpandam;
+import xyz.pixelatedw.MineMineNoMi3.renderers.blocks.RenderBlockCannon;
 import xyz.pixelatedw.MineMineNoMi3.renderers.blocks.RenderBlockDenDenMushi;
 import xyz.pixelatedw.MineMineNoMi3.renderers.blocks.RenderBlockDial;
 import xyz.pixelatedw.MineMineNoMi3.renderers.blocks.RenderBlockWantedPoster;
@@ -190,7 +192,8 @@ public class ClientProxy extends CommonProxy
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDenDenMushi.class, new RenderBlockDenDenMushi());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWantedPoster.class, new RenderBlockWantedPoster());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWantedPostersPackage.class, new RenderBlockWantedPostersPackage());
-		
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCannon.class, new RenderBlockCannon());
+
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAxeDial.class, new RenderBlockDial(new ModelImpactDial(), "axedial"));
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityEisenDial.class, new RenderBlockDial(new ModelMilkyDial(), "eisendial"));
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFlameDial.class, new RenderBlockDial(new ModelFlameDial(), "flamedial"));
