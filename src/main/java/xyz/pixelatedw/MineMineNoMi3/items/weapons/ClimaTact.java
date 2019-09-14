@@ -17,7 +17,7 @@ public class ClimaTact extends Item
 
 	public ClimaTact()
 	{
-		
+		this.setFull3D();
 	}
 	
 	public void emptyCharge(ItemStack itemStack)

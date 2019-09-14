@@ -1,5 +1,7 @@
 package xyz.pixelatedw.MineMineNoMi3.items;
 
+import java.util.List;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -46,5 +48,14 @@ public class BellyPouch extends Item
 		}
 
 		return itemStack;
+	}
+	
+	@Override
+	public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean par4)
+	{
+		if(itemStack.hasTagCompound())
+		{
+			list.add("Belly: " + itemStack.getTagCompound().getInteger("belly"));
+		}
 	}
 }
