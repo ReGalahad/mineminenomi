@@ -4,6 +4,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
@@ -15,7 +16,16 @@ import net.minecraft.util.ResourceLocation;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 
 public class WyRenderHelper
-{	
+{
+	public static void drawStringWithBorder(String text, int posX, int posY, int color)
+	{
+		FontRenderer font = Minecraft.getMinecraft().fontRenderer;
+		font.drawString(text	, posX		, posY - 1	, 1);
+		font.drawString(text	, posX		, posY + 1	, 1);
+		font.drawString(text	, posX + 1	, posY		, 1);
+		font.drawString(text	, posX - 1	, posY 		, 1);
+		font.drawString(text	, posX		, posY		, color);
+	}
 	
 	public static double[] generateAnimationArray(double startPos, double minPos, double maxPos, double frameSkip, int framesPerSlot)
 	{				

@@ -5,10 +5,13 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.WyRenderHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.gui.extra.GUIButtonNoTexture;
@@ -20,6 +23,7 @@ public class GUICC extends GuiScreen
 {
 	private EntityPlayer player;
 	private int page = 0, selectedOpt = 0, maxOpt, lastFac = 0, lastRace = 0, lastFStyle = 0;
+	private FontRenderer onePieceFontRenderer;
 	
 	public GUICC(EntityPlayer player)
 	{
@@ -29,8 +33,8 @@ public class GUICC extends GuiScreen
 	@Override
 	public void drawScreen(int x, int y, float f)
 	{
-		drawDefaultBackground();
-    
+		this.drawDefaultBackground();
+
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		ExtendedEntityData props = ExtendedEntityData.get(player);
     
@@ -40,51 +44,49 @@ public class GUICC extends GuiScreen
 		int posY = (this.height - 256) / 2;
 		
 		Minecraft.getMinecraft().getTextureManager().bindTexture(ID.TEXTURE_BLANK);
-		drawTexturedModalRect(posX, posY + 50, 0, 0, 256, 256);
+		this.drawTexturedModalRect(posX, posY + 50, 0, 0, 256, 256);
 		
 		Minecraft.getMinecraft().getTextureManager().bindTexture(ID.TEXTURE_COMBATMODE);
-		drawTexturedModalRect(posX + 15, posY + 75, 0, 92, 25, 100);	
-		drawTexturedModalRect(posX + 200, posY + 73, 26, 92, 30, 100);
+		this.drawTexturedModalRect(posX + 15, posY + 75, 0, 92, 25, 100);	
+		this.drawTexturedModalRect(posX + 200, posY + 73, 26, 92, 30, 100);
 		
-		drawTexturedModalRect(posX - 80, posY + 70, 0, 196, 96, 49);
-		drawTexturedModalRect(posX - 80, posY + (int)(70 * 1.6), 0, 196, 96, 49);
-		drawTexturedModalRect(posX - 80, posY + (int)(70 * 2.2), 0, 196, 96, 49);	
-		drawTexturedModalRect(posX + 75, posY + 200, 0, 196, 96, 49);
-		Minecraft.getMinecraft().getTextureManager().bindTexture(ID.TEXTURE_STRINGS1);
-		drawTexturedModalRect(posX - 78, posY + 80, 0, 232, 86, 22);
-		drawTexturedModalRect(posX - 70, posY + 121, 94, 230, 74, 22);
-		drawTexturedModalRect(posX - 75, posY + 148, 172, 210, 85, 52);		
-		drawTexturedModalRect(posX + 76, posY + 207, 110, 0, 85, 30);
-		
+		this.drawTexturedModalRect(posX - 80, posY + 70, 0, 196, 96, 49);
+		this.drawTexturedModalRect(posX - 80, posY + (int)(70 * 1.6), 0, 196, 96, 49);
+		this.drawTexturedModalRect(posX - 80, posY + (int)(70 * 2.2), 0, 196, 96, 49);	
+		this.drawTexturedModalRect(posX + 75, posY + 200, 0, 196, 96, 49);
+		this.drawCategory("Faction", posX + 70, posY + 225, 2.1);
+		this.drawCategory("Race", posX + 82, posY + 267, 2.1);
+		this.drawCategory("Fighting", posX - 5, posY + 227, 1.5);
+		this.drawCategory("Style", posX + 25, posY + 242, 1.5);
+		this.drawCategory("Create", posX + 225, posY + 356, 2.1);
+
 		if(this.page == 0) 
 		{
 			if(this.selectedOpt == 0)
 			{
 				Minecraft.getMinecraft().getTextureManager().bindTexture(ID.ICON_PIRATE);
-				drawTexturedModalRect(posX - 2, posY + 10, 0, 0, 256, 256);
-				Minecraft.getMinecraft().getTextureManager().bindTexture(ID.TEXTURE_STRINGS1);
-				drawTexturedModalRect(posX + 69, posY + 65, 0, 0, 118, 30);
+				this.drawTexturedModalRect(posX - 2, posY + 10, 0, 0, 256, 256);
+				this.drawCategory("Pirate", posX + 337, posY + 315, 3);
 			}
 			else if(this.selectedOpt == 1)
 			{
 				Minecraft.getMinecraft().getTextureManager().bindTexture(ID.ICON_MARINE);
-				drawTexturedModalRect(posX - 2, posY + 10, 0, 0, 256, 256);
-				Minecraft.getMinecraft().getTextureManager().bindTexture(ID.TEXTURE_STRINGS1);
-				drawTexturedModalRect(posX + 70, posY + 75, 0, 30, 129, 23);
+				this.drawTexturedModalRect(posX - 2, posY + 10, 0, 0, 256, 256);
+				this.drawCategory("Marine", posX + 337, posY + 315, 3);
 			}
 			else if(this.selectedOpt == 2)
 			{
 				Minecraft.getMinecraft().getTextureManager().bindTexture(ID.ICON_BOUNTYHUNTER);
-				drawTexturedModalRect(posX - 2, posY + 10, 0, 0, 256, 256);
-				Minecraft.getMinecraft().getTextureManager().bindTexture(ID.TEXTURE_STRINGS1);
-				drawTexturedModalRect(posX + 46, posY + 65, 0, 52, 170, 50);
+				this.drawTexturedModalRect(posX - 2, posY + 10, 0, 0, 256, 256);
+				this.drawCategory("Bounty", posX + 275, posY + 275, 2.7);
+				this.drawCategory("Hunter", posX + 330, posY + 300, 2.7);
 			}
 			else if(this.selectedOpt == 3)
 			{
 				Minecraft.getMinecraft().getTextureManager().bindTexture(ID.ICON_REVOLUTIONARY);
-				drawTexturedModalRect(posX - 2, posY + 10, 0, 0, 256, 256);
-				Minecraft.getMinecraft().getTextureManager().bindTexture(ID.TEXTURE_STRINGS1);
-				drawTexturedModalRect(posX + 46, posY + 65, 0, 52, 170, 50);
+				this.drawTexturedModalRect(posX - 2, posY + 10, 0, 0, 256, 256);
+				this.drawCategory("Revolutionary", posX + 210, posY + 230, 2.3);
+				this.drawCategory("Army", posX + 300, posY + 255, 2.3);
 			}
 		}
 		if(this.page == 1)
@@ -92,23 +94,20 @@ public class GUICC extends GuiScreen
 			if(this.selectedOpt == 0)
 			{
 				Minecraft.getMinecraft().getTextureManager().bindTexture(ID.ICON_HUMAN);
-				drawTexturedModalRect(posX - 2, posY + 10, 0, 0, 256, 256);
-				Minecraft.getMinecraft().getTextureManager().bindTexture(ID.TEXTURE_STRINGS1);
-				drawTexturedModalRect(posX + 75, posY + 65, 0, 102, 129, 30);
+				this.drawTexturedModalRect(posX - 2, posY + 10, 0, 0, 256, 256);
+				this.drawCategory("Human", posX + 337, posY + 315, 3);
 			}
 			else if(this.selectedOpt == 1)
 			{
 				Minecraft.getMinecraft().getTextureManager().bindTexture(ID.ICON_FISHMAN);
-				drawTexturedModalRect(posX - 2, posY + 10, 0, 0, 256, 256);
-				Minecraft.getMinecraft().getTextureManager().bindTexture(ID.TEXTURE_STRINGS1);
-				drawTexturedModalRect(posX + 65, posY + 70, 0, 130, 129, 26);
+				this.drawTexturedModalRect(posX - 2, posY + 10, 0, 0, 256, 256);
+				this.drawCategory("Fishman", posX + 328, posY + 315, 3);
 			}
 			else if(this.selectedOpt == 2)
 			{
 				Minecraft.getMinecraft().getTextureManager().bindTexture(ID.ICON_CYBORG);
-				drawTexturedModalRect(posX - 2, posY + 10, 0, 0, 256, 256);
-				Minecraft.getMinecraft().getTextureManager().bindTexture(ID.TEXTURE_STRINGS1);
-				drawTexturedModalRect(posX + 75, posY + 72, 0, 160, 110, 24);
+				this.drawTexturedModalRect(posX - 2, posY + 10, 0, 0, 256, 256);
+				this.drawCategory("Cyborg", posX + 328, posY + 315, 3);
 			}	
 		}
 		if(this.page == 2) 
@@ -116,30 +115,27 @@ public class GUICC extends GuiScreen
 			if(this.selectedOpt == 0)
 			{
 				Minecraft.getMinecraft().getTextureManager().bindTexture(ID.ICON_SWORDSMAN);
-				drawTexturedModalRect(posX - 2, posY + 10, 0, 0, 256, 256);
-				Minecraft.getMinecraft().getTextureManager().bindTexture(ID.TEXTURE_STRINGS1);
-				drawTexturedModalRect(posX + 38, posY + 72, 0, 185, 170, 24);
+				this.drawTexturedModalRect(posX - 2, posY + 10, 0, 0, 256, 256);
+				this.drawCategory("Swordsman", posX + 300, posY + 315, 3);
+
 			}
 			else if(this.selectedOpt == 1)
 			{
 				Minecraft.getMinecraft().getTextureManager().bindTexture(ID.ICON_SNIPER);
-				drawTexturedModalRect(posX - 2, posY + 10, 0, 0, 256, 256);
-				Minecraft.getMinecraft().getTextureManager().bindTexture(ID.TEXTURE_STRINGS1);
-				drawTexturedModalRect(posX + 80, posY + 72, 0, 209, 110, 23);
+				this.drawTexturedModalRect(posX - 2, posY + 10, 0, 0, 256, 256);
+				this.drawCategory("Sniper", posX + 335, posY + 315, 3);
 			}
 			else if(this.selectedOpt == 2)
 			{
 				Minecraft.getMinecraft().getTextureManager().bindTexture(ID.ICON_MEDIC);
-				drawTexturedModalRect(posX - 2, posY + 10, 0, 0, 256, 256);
-				Minecraft.getMinecraft().getTextureManager().bindTexture(ID.TEXTURE_STRINGS1);
-				drawTexturedModalRect(posX + 75, posY + 72, 109, 159, 86, 27);
+				this.drawTexturedModalRect(posX - 2, posY + 10, 0, 0, 256, 256);
+				this.drawCategory("Medic", posX + 340, posY + 315, 3);
 			}
 			else if(this.selectedOpt == 3)
 			{
 				Minecraft.getMinecraft().getTextureManager().bindTexture(ID.ICON_ARTOFWEATHER);
-				drawTexturedModalRect(posX - 2, posY + 10, 0, 0, 256, 256);
-				Minecraft.getMinecraft().getTextureManager().bindTexture(ID.TEXTURE_STRINGS1);
-				drawTexturedModalRect(posX + 75, posY + 72, 109, 159, 86, 27);
+				this.drawTexturedModalRect(posX - 2, posY + 10, 0, 0, 256, 256);
+				this.drawCategory("Art of Weather", posX + 200, posY + 220, 2.2);
 			}
 		}
 		
@@ -333,5 +329,20 @@ public class GUICC extends GuiScreen
 	public boolean doesGuiPauseGame()
 	{
 		return false;
+	}
+	
+	private void drawCategory(String text, int posX, int posY, double scale)
+	{
+		GL11.glPushMatrix();
+		
+			GL11.glTranslated(posX, posY, 0);
+	
+			GL11.glTranslated(128, 128, 0);
+			GL11.glScaled(scale, scale, scale);
+			GL11.glTranslated(-128, -128, 0);
+			
+			WyRenderHelper.drawStringWithBorder(text, 0, 0, WyHelper.hexToRGB("#FFFFFF").getRGB());
+			
+		GL11.glPopMatrix();
 	}
 }
