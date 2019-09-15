@@ -3,10 +3,10 @@ package xyz.pixelatedw.MineMineNoMi3.events;
 import com.google.gson.internal.LinkedTreeMap;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.Phase;
+import cpw.mods.fml.common.network.FMLNetworkEvent.ClientConnectedToServerEvent;
+import cpw.mods.fml.common.network.FMLNetworkEvent.ClientDisconnectionFromServerEvent;
 import cpw.mods.fml.relauncher.Side;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -214,7 +214,7 @@ public class EventsCore
 	}
 	
 	@SubscribeEvent
-	public void onPlayerLoggedIn(PlayerLoggedInEvent event)
+	public void onPlayerLoggedIn(ClientConnectedToServerEvent event)
 	{
 		if(!WyDebug.isDebug())
 		{
@@ -224,7 +224,7 @@ public class EventsCore
 	}
 	
 	@SubscribeEvent
-	public void onPlayerLoggedOut(PlayerLoggedOutEvent event)
+	public void onPlayerLoggedOut(ClientDisconnectionFromServerEvent event)
 	{
 		if(!WyDebug.isDebug())
 		{
