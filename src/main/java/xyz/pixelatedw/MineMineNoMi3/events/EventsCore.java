@@ -162,7 +162,14 @@ public class EventsCore
 				if(ID.DEV_EARLYACCESS && !WyDebug.isDebug())
 				{
 					if(!WyHelper.isPatreon(player))
+					{
 						((EntityPlayerMP)player).playerNetServerHandler.kickPlayerFromServer(EnumChatFormatting.BOLD + "" + EnumChatFormatting.RED + "WARNING! \n\n " + EnumChatFormatting.RESET + "You don't have access to this version yet!");
+						if(!WyDebug.isDebug())
+						{
+							WyTelemetry.addMiscStat("onlinePlayers", "Online Players", -1);
+							WyTelemetry.sendAllDataSync();
+						}
+					}
 				}
 				
 				if(MainConfig.enableUpdateMsg)
@@ -222,7 +229,7 @@ public class EventsCore
 		if(!WyDebug.isDebug())
 		{
 			WyTelemetry.addMiscStat("onlinePlayers", "Online Players", -1);
-			WyTelemetry.sendAllData();
+			WyTelemetry.sendAllDataSync();
 		}
 	}
 	

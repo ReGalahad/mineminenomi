@@ -243,6 +243,7 @@ public class ListMisc
 	public static ItemCoreWeapon Shusui = new ItemCoreWeapon(8);
 	public static ItemCoreWeapon SoulSolid = new ItemCoreWeapon(8);
 	public static ItemCoreWeapon Durandal = new ItemCoreWeapon(7);
+	public static ItemCoreWeapon Mace = new ItemCoreWeapon(6);
 	
 	public static ClimaTact ClimaTact = new ClimaTact();
 	public static ClimaTact PerfectClimaTact = new ClimaTact();
@@ -331,6 +332,7 @@ public class ListMisc
 		addITEM(Shusui, "Shusui", ListCreativeTabs.tabWeapons);
 		addITEM(SoulSolid, "Soul Solid", ListCreativeTabs.tabWeapons);
 		addITEM(Durandal, "Durandal", ListCreativeTabs.tabWeapons);
+		addITEM(Mace, "Mace", ListCreativeTabs.tabWeapons);
 		
 		addITEM(ClimaTact, "Clima Tact", ListCreativeTabs.tabWeapons);
 		addITEM(PerfectClimaTact, "Perfect Clima Tact", ListCreativeTabs.tabWeapons);
@@ -375,7 +377,7 @@ public class ListMisc
 		addBLOCK(OriBars, "Ori Bars", 40.0F, null, null);
 		addBLOCK(KairosekiBars, "Kairoseki Bars", 30.0F, null, ListCreativeTabs.tabMisc);
 		addBLOCK(WaxBlock, "Wax Block", 6.0F, null, null);
-		addBLOCK(AbilityProtectionBlock, "Ability Protection Block", Float.MAX_VALUE, null, ListCreativeTabs.tabMisc);
+		addBLOCK(AbilityProtectionBlock, "Ability Protection Block", Float.MAX_VALUE, null, null);
 		addBLOCK(AbilityProtectionAreaBlock, "Ability Protection Area Block", Float.MAX_VALUE, null, null);
 		addBLOCK(AbilityProtectionCenterBlock, "Ability Protection Center Block", Float.MAX_VALUE, TileEntityAbilityProtection.class, null);
 		

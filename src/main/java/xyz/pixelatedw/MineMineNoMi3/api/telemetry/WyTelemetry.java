@@ -89,6 +89,36 @@ public class WyTelemetry
 		httpThread.setName("Mine Mine no Mi - Stats POST");
 		httpThread.start();
 	}
+	
+	public static void sendAllDataSync()
+	{
+		Object[][] paths = new Object[][] 
+		{
+			{"/addStructureStat", structuresDataCompound},
+			{"/addKillStat", killsDataCompound},
+			{"/addAbilityStat", abilitiesDataCompound},
+			{"/addMiscStat", miscDataCompound},
+			{"/addDFStat", devilFruitsDataCompound}
+		};
+
+		for (Object[] o : paths)
+		{
+			String apiURL = (String) o[0];
+			StatDataCompound compound = (StatDataCompound) o[1];
+
+			if (compound.data.isEmpty())
+				continue;
+
+			// Turning the coumpound data into a nice json format
+			String json = Values.gson.toJson(compound);
+
+			String result = sendPOST(apiURL, json);
+
+			WyDebug.debug(result.isEmpty() ? "Success" : result);
+
+			compound.empty();
+		}
+	}
 
 	public static String sendPOST(String sendUrl, String object)
 	{
