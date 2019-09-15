@@ -179,7 +179,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityDenDenMushi.class, new MobRenderer(new ModelDenDenMushi(), "denden"));
 		RenderingRegistry.registerEntityRenderingHandler(EntityKungFuDugong.class, new MobRenderer(new ModelKungFuDugong(), "kungfudugong"));
 		RenderingRegistry.registerEntityRenderingHandler(EntityLapahn.class, new MobRenderer(new ModelLapahn(), "lapahn"));
-		RenderingRegistry.registerEntityRenderingHandler(EntityYagaraBull.class, new MobRenderer(new ModelYagaraBull(), 1.5F, "yagarabull"));
+		RenderingRegistry.registerEntityRenderingHandler(EntityYagaraBull.class, new MobRenderer(new ModelYagaraBull(), 1.5F, null));
 		
 		//TEMP
 		RenderingRegistry.registerEntityRenderingHandler(TempEntityDugong.class, new MobRenderer(new ModelKungFuDugong(), "kungfudugong"));
