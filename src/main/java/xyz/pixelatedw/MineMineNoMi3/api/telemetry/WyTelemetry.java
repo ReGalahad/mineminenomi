@@ -60,11 +60,11 @@ public class WyTelemetry
 			{	
 				Object[][] paths = new Object[][] 
 				{
-					{"/addStructureStat", structuresDataCompound},
-					{"/addKillStat", killsDataCompound},
-					{"/addAbilityStat", abilitiesDataCompound},
-					{"/addMiscStat", miscDataCompound},
-					{"/addDFStat", devilFruitsDataCompound}
+					{"/stats/structure", structuresDataCompound},
+					{"/stats/kill", killsDataCompound},
+					{"/stats/ability", abilitiesDataCompound},
+					{"/stats/misc", miscDataCompound},
+					{"/stats/devil-fruit", devilFruitsDataCompound}
 				};
 							
 				for (Object[] o : paths)
@@ -94,11 +94,11 @@ public class WyTelemetry
 	{
 		Object[][] paths = new Object[][] 
 		{
-			{"/addStructureStat", structuresDataCompound},
-			{"/addKillStat", killsDataCompound},
-			{"/addAbilityStat", abilitiesDataCompound},
-			{"/addMiscStat", miscDataCompound},
-			{"/addDFStat", devilFruitsDataCompound}
+			{"/stats/structure", structuresDataCompound},
+			{"/stats/kill", killsDataCompound},
+			{"/stats/ability", abilitiesDataCompound},
+			{"/stats/misc", miscDataCompound},
+			{"/stats/devil-fruit", devilFruitsDataCompound}
 		};
 
 		for (Object[] o : paths)
@@ -174,6 +174,47 @@ public class WyTelemetry
 			{
 				e.printStackTrace();
 			}
+		}
+		
+		return result;
+	}
+	
+	public static String sendGET(String sendUrl)
+	{
+		String result = "";
+		
+		try
+		{
+			// Actual URL to the API
+			URL url = new URL(Values.urlConnection + "" + sendUrl);
+
+			// Opening a connection
+			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+			// Setting the properties
+			connection.setRequestMethod("GET");
+			int responseCode = connection.getResponseCode();
+			if (responseCode == HttpURLConnection.HTTP_OK)
+			{
+				BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+				String inputLine;
+				StringBuffer response = new StringBuffer();
+
+				while ((inputLine = in.readLine()) != null)
+				{
+					response.append(inputLine);
+				}
+				
+				in.close();
+				
+				result = response.toString();
+			}
+			else
+				WyDebug.error("GET Request failed!");
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
 		}
 		
 		return result;

@@ -609,23 +609,19 @@ public class WyHelper
 	{
 		boolean flag = false;
 		
-		String apiURL = "/isPatreon";
-
-		String uuid = player.getUniqueID().toString();
-		String json = Values.gson.toJson(uuid);
-
-		String result = WyTelemetry.sendPOST(apiURL, json);
+		String apiURL = "/patreon?uuid=" + player.getUniqueID().toString();
+		String result = WyTelemetry.sendGET(apiURL);
 
 		if(WyHelper.isNullOrEmpty(result))
 			return flag;
 		else
 		{
 			int patreonLevel = Integer.parseInt(result);
-				
+			
 			if(patreonLevel <= 2)
 				return flag;
 			else
-				flag = true;			
+				flag = true;
 		}
 		
 		return flag;

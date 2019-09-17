@@ -1,7 +1,5 @@
 package xyz.pixelatedw.MineMineNoMi3.events;
 
-import com.google.gson.internal.LinkedTreeMap;
-
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.Phase;
@@ -24,7 +22,6 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
-import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
@@ -159,7 +156,7 @@ public class EventsCore
 
 			if (!player.worldObj.isRemote)
 			{
-				if(ID.DEV_EARLYACCESS && !WyDebug.isDebug())
+				if(ID.DEV_EARLYACCESS)
 				{
 					if(!WyHelper.isPatreon(player))
 					{
@@ -176,30 +173,33 @@ public class EventsCore
 				{
 					try 
 					{
-						String[] version = ID.PROJECT_VERSION.split("\\.");
+						String[] version = ID.PROJECT_VERSION.replaceAll("[^0-9.]", "").split("\\.");
 						
-						int x = Integer.parseInt(version[0]) * 100;
-						int y = Integer.parseInt(version[1]) * 10;
-						int z = Integer.parseInt(version[2]);
+						int currentX = Integer.parseInt(version[0]) * 100;
+						int currentY = Integer.parseInt(version[1]) * 10;
+						int currentZ = Integer.parseInt(version[2]);
 						
-						int versionCode = x + y + z;
+						int currentVersion = currentX + currentY + currentZ;
 						
-						String apiURL = "/getNewestVersion";
-						String json = Values.gson.toJson(ID.PROJECT_MCVERSION);
+						String apiURL = "/version?minecraft-version=" + ID.PROJECT_MCVERSION;
 						
-						String result = WyTelemetry.sendPOST(apiURL, json);
+						String result = WyTelemetry.sendGET(apiURL);
 						
 						if(!WyHelper.isNullOrEmpty(result))
 						{
-							LinkedTreeMap resultMap = Values.gson.fromJson(result, LinkedTreeMap.class);
-							int highestVersion = ((Double) resultMap.get("highestVersionCode")).intValue();
-							String highestName = (String) resultMap.get("highestVersionName");
+							String[] resultVersion = result.replaceAll("[^0-9.]", "").split("\\.");
 							
-							if(highestVersion > versionCode)
+							int latestX = Integer.parseInt(resultVersion[0]) * 100;
+							int latestY = Integer.parseInt(resultVersion[1]) * 10;
+							int latestZ = Integer.parseInt(resultVersion[2]);
+							
+							int latestVersion = latestX + latestY + latestZ;
+							
+							if(latestVersion > currentVersion)
 							{
 								ChatStyle updateStyle = new ChatStyle().setColor(EnumChatFormatting.GOLD).setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "http://pixelatedw.xyz/versions"));
 								
-								player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.RED + "" + EnumChatFormatting.BOLD + "[UPDATE]" + EnumChatFormatting.RED + " Mine Mine no Mi " + highestName + " is now available !").setChatStyle(updateStyle) );
+								player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.RED + "" + EnumChatFormatting.BOLD + "[UPDATE]" + EnumChatFormatting.RED + " Mine Mine no Mi " + result + " is now available !").setChatStyle(updateStyle) );
 								player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.RED + "Download it from the official website : [http://pixelatedw.xyz/versions]").setChatStyle(updateStyle) );
 							}
 						}
