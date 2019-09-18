@@ -6,7 +6,6 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityExplosion;
@@ -223,7 +222,7 @@ public class Ability
 		if(this.attr.getAbilityExplosionPower() > 0)
 			player.worldObj.newExplosion(player, player.posX, player.posY, player.posZ, this.attr.getAbilityExplosionPower(), this.attr.canAbilityExplosionSetFire(), MainConfig.enableGriefing ? this.attr.canAbilityExplosionDestroyBlocks() : false);		
 				
-    	if(!ID.DEV_EARLYACCESS && !player.capabilities.isCreativeMode)
+    	if(!WyHelper.isDevBuild() && !player.capabilities.isCreativeMode)
     		WyTelemetry.addAbilityStat(this.getAttribute().getAbilityTexture(), this.getAttribute().getAttributeName(), 1);
 
 		(new Update(player, attr)).start();

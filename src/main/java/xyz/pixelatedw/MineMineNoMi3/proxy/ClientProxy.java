@@ -108,6 +108,7 @@ import xyz.pixelatedw.MineMineNoMi3.renderers.items.RenderWeaponBisento;
 import xyz.pixelatedw.MineMineNoMi3.renderers.items.RenderWeaponDurandal;
 import xyz.pixelatedw.MineMineNoMi3.renderers.items.RenderWeaponKatana;
 import xyz.pixelatedw.MineMineNoMi3.renderers.items.RenderWeaponKiribachi;
+import xyz.pixelatedw.MineMineNoMi3.renderers.items.RenderWeaponMace;
 import xyz.pixelatedw.MineMineNoMi3.renderers.items.RenderWeaponPipe;
 
 public class ClientProxy extends CommonProxy
@@ -239,6 +240,9 @@ public class ClientProxy extends CommonProxy
 		MinecraftForgeClient.registerItemRenderer(ListMisc.Kiribachi, new RenderWeaponKiribachi());
 
 		MinecraftForgeClient.registerItemRenderer(ListMisc.Durandal, new RenderWeaponDurandal());
+		
+		MinecraftForgeClient.registerItemRenderer(ListMisc.Mace, new RenderWeaponMace());
+
 
 	}
 	
