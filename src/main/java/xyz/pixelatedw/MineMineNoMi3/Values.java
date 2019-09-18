@@ -9,7 +9,6 @@ import com.google.gson.GsonBuilder;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
-import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDojoSensei;
 import xyz.pixelatedw.MineMineNoMi3.items.AkumaNoMi;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
@@ -31,7 +30,7 @@ public class Values
 	public static final int MAX_ACTIVITIES = 4;
 	
 	// Network related stuff
-	public static String urlConnection = WyDebug.isDebug() && true ? "http://wynd.go.ro/mmnm-webserver/api" : "http://pixelatedw.xyz/api";
+	public static String urlConnection = "http://pixelatedw.xyz/api";
 	public static Gson gson = new GsonBuilder()
             .disableHtmlEscaping()
             .setPrettyPrinting()

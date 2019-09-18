@@ -103,12 +103,11 @@ public class MainMod
 		 */
 	}
 
-	@SuppressWarnings("unused")
 	@EventHandler
 	public void serverInit(FMLServerStartingEvent event)
 	{
 		// event.registerServerCommand(new CommandAbility());
-		if (ID.DEV_EARLYACCESS || WyDebug.isDebug())
+		if (WyHelper.isDevBuild() || WyDebug.isDebug())
 			event.registerServerCommand(new CommandFG());
 		
 		event.registerServerCommand(new CommandDoriki());

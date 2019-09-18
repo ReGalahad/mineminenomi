@@ -156,9 +156,9 @@ public class EventsCore
 
 			if (!player.worldObj.isRemote)
 			{
-				if(ID.DEV_EARLYACCESS)
+				if(!WyHelper.isReleaseBuild())
 				{
-					if(!WyHelper.isPatreon(player))
+					if(!WyHelper.hasPatreonAccess(player))
 					{
 						((EntityPlayerMP)player).playerNetServerHandler.kickPlayerFromServer(EnumChatFormatting.BOLD + "" + EnumChatFormatting.RED + "WARNING! \n\n " + EnumChatFormatting.RESET + "You don't have access to this version yet!");
 						if(!WyDebug.isDebug())
@@ -166,6 +166,8 @@ public class EventsCore
 							WyTelemetry.addMiscStat("onlinePlayers", "Online Players", -1);
 							WyTelemetry.sendAllDataSync();
 						}
+						event.setCanceled(true);
+						return;
 					}
 				}
 				
