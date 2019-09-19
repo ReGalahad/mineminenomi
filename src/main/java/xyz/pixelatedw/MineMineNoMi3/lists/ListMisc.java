@@ -57,10 +57,11 @@ import xyz.pixelatedw.MineMineNoMi3.items.AkumaNoMiBox;
 import xyz.pixelatedw.MineMineNoMi3.items.BellyPouch;
 import xyz.pixelatedw.MineMineNoMi3.items.CharacterCreator;
 import xyz.pixelatedw.MineMineNoMi3.items.Cola;
-import xyz.pixelatedw.MineMineNoMi3.items.ItemCoreArmor;
 import xyz.pixelatedw.MineMineNoMi3.items.SeaKingMeat;
 import xyz.pixelatedw.MineMineNoMi3.items.UltraCola;
 import xyz.pixelatedw.MineMineNoMi3.items.WantedPoster;
+import xyz.pixelatedw.MineMineNoMi3.items.armors.ItemCoreArmor;
+import xyz.pixelatedw.MineMineNoMi3.items.armors.ItemTomoeDrums;
 import xyz.pixelatedw.MineMineNoMi3.items.devilfruitextras.Heart;
 import xyz.pixelatedw.MineMineNoMi3.items.devilfruitextras.Shadow;
 import xyz.pixelatedw.MineMineNoMi3.items.devilfruitextras.WateringCan;
@@ -208,7 +209,7 @@ public class ListMisc
 	public static Item PirateBoots = new ItemCoreArmor("pirate", ID.ARMORMAT_USELESS, 3);
 
 	public static Item ColaBackpack = new ItemCoreArmor("colabackpack", ID.ARMORMAT_COLABACKPACK, 1);
-	public static Item TomoeDrums = new ItemCoreArmor("tomoeDrums", ID.ARMORMAT_COLABACKPACK, 1);
+	public static Item TomoeDrums = new ItemTomoeDrums();
 
 	public static Item Flintlock = new Flintlock().setMaxStackSize(1).setFull3D();
 	public static Item Kabuto = new Kabuto("kabuto").setMaxStackSize(1).setFull3D();
