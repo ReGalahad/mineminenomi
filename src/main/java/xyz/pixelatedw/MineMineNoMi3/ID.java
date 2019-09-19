@@ -196,7 +196,7 @@ public class ID
 	
 	SCENARIO_ROMANCEDAWN_CAPTAINMORGAN = "scenario_cptmorgan",
 	
-	//Auto assigned by the Deploy script, otherwise is treated as highest level patreon
+	//Auto assigned by the Deploy script
 	BUILD_MODE = "DEV",
 	NULL = "null";
 	
