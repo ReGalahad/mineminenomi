@@ -9,7 +9,14 @@ public class ListCraftingRecipes
 {
 	
 	public static void init()
-	{		
+	{
+		GameRegistry.addShapedRecipe(new ItemStack(ListMisc.ClimaTact, 1), new Object[]
+				{ "YXY", "YXY", "YXY", 'X', Items.stick, 'Y', new ItemStack(Items.dye, 1, 4) });
+		GameRegistry.addShapedRecipe(new ItemStack(ListMisc.PerfectClimaTact, 1), new Object[]
+				{ "EME", "BXI", "EFE", 'X', ListMisc.ClimaTact, 'E', ListMisc.DialEisen, 'F', ListMisc.DialFlash, 'I', ListMisc.DialFire, 'B', ListMisc.DialBreath, 'M', ListMisc.DialMilky });
+		GameRegistry.addShapedRecipe(new ItemStack(ListMisc.Mace, 1), new Object[]
+				{ ".X.", ".X.", ".Y.", 'X', Blocks.iron_block, 'Y', Items.iron_ingot });
+		
 		GameRegistry.addShapedRecipe(new ItemStack(ListMisc.KairosekiBars, 16), new Object[]
 				{ "...", "XXX", "XXX", 'X', ListMisc.DenseKairoseki });
 		GameRegistry.addShapedRecipe(new ItemStack(ListMisc.KairosekiBars, 16), new Object[]
