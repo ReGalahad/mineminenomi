@@ -19,7 +19,7 @@ apply plugin: 'forge'
 
 version = " 1.7.10 - 0.6.0 - DEV#" + getVersion()
 group= "xyz.pixelatedw.mineminenomi"
-archivesBaseName = "Mine Mine no Mi"
+archivesBaseName = "Mine Mine no Mi "
 
 sourceCompatibility = targetCompatibility = 1.8
 
