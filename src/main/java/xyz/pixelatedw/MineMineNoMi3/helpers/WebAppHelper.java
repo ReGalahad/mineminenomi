@@ -1,20 +1,11 @@
 package xyz.pixelatedw.MineMineNoMi3.helpers;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.nio.MappedByteBuffer;
-import java.nio.channels.FileChannel;
-import java.nio.charset.Charset;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -31,6 +22,7 @@ import xyz.pixelatedw.MineMineNoMi3.abilities.HakiAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.RokushikiAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.SniperAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.SwordsmanAbilities;
+import xyz.pixelatedw.MineMineNoMi3.abilities.WeatherAbilities;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
@@ -41,16 +33,16 @@ public class WebAppHelper
 	
 	public static void generateWebAppJSONs()
 	{
-		writeFancyAbilitiesList();
+		WebAppHelper.writeFancyAbilitiesList();
 
 		File folder = new File(Values.RESOURCES_FOLDER + "/assets/" + ID.PROJECT_ID + "/EXTRA_BOT_FILES/");
 		folder.mkdirs();
 
 		if (folder.exists())
 		{
-			writeDevilFruitsJSON();
+			WebAppHelper.writeDevilFruitsJSON();
 
-			writeSpecialAbilitiesJSON();
+			WebAppHelper.writeSpecialAbilitiesJSON();
 		}
 	}
 
@@ -69,7 +61,7 @@ public class WebAppHelper
 
 				devilFruitElements.put("name", "\"" + itemStack.getDisplayName() + "\"");
 				devilFruitElements.put("type", "\"" + fruit.getType().getName() + "\"");
-				devilFruitElements.put("abilities", "[ " + generateAbilitiesString(fruit.abilities) + " ]");
+				devilFruitElements.put("abilities", "[ " + WebAppHelper.generateAbilitiesString(fruit.abilities) + " ]");
 
 				writer.write("{ ");
 				for (String devilFruitKey : devilFruitElements.keySet())
@@ -102,22 +94,25 @@ public class WebAppHelper
 
 			// Human Collection
 			Ability[] humanAbilities = Stream.of(RokushikiAbilities.abilitiesArray, HakiAbilities.abilitiesArray).flatMap(Stream::of).toArray(Ability[]::new);
-			writer.write("{ \"name\": \"Human\", \"type\": \"n/a\", \"abilities\": [ " + generateAbilitiesString(humanAbilities) + " ]},\n");
+			writer.write("{ \"name\": \"Human\", \"type\": \"n/a\", \"abilities\": [ " + WebAppHelper.generateAbilitiesString(humanAbilities) + " ]},\n");
 
 			// Fishman Collection
 			Ability[] fishmanAbilities = Stream.of(FishKarateAbilities.abilitiesArray, HakiAbilities.abilitiesArray).flatMap(Stream::of).toArray(Ability[]::new);
-			writer.write("{ \"name\": \"Fishman\", \"type\": \"n/a\", \"abilities\": [ " + generateAbilitiesString(fishmanAbilities) + " ]},\n");
+			writer.write("{ \"name\": \"Fishman\", \"type\": \"n/a\", \"abilities\": [ " + WebAppHelper.generateAbilitiesString(fishmanAbilities) + " ]},\n");
 
 			// Cybord Collection
 			Ability[] cyborgAbilities = Stream.of(CyborgAbilities.abilitiesArray, HakiAbilities.abilitiesArray).flatMap(Stream::of).toArray(Ability[]::new);
-			writer.write("{ \"name\": \"Cyborg\", \"type\": \"n/a\", \"abilities\": [ " + generateAbilitiesString(cyborgAbilities) + " ]},\n");
+			writer.write("{ \"name\": \"Cyborg\", \"type\": \"n/a\", \"abilities\": [ " + WebAppHelper.generateAbilitiesString(cyborgAbilities) + " ]},\n");
 
 			// Swordsman Collection
-			writer.write("{ \"name\": \"Swordsman\", \"type\": \"n/a\", \"abilities\": [ " + generateAbilitiesString(SwordsmanAbilities.abilitiesArray) + " ]},\n");
+			writer.write("{ \"name\": \"Swordsman\", \"type\": \"n/a\", \"abilities\": [ " + WebAppHelper.generateAbilitiesString(SwordsmanAbilities.abilitiesArray) + " ]},\n");
 
 			// Sniper Collection
-			writer.write("{ \"name\": \"Sniper\", \"type\": \"n/a\", \"abilities\": [ " + generateAbilitiesString(SniperAbilities.abilitiesArray) + " ]},\n");
+			writer.write("{ \"name\": \"Sniper\", \"type\": \"n/a\", \"abilities\": [ " + WebAppHelper.generateAbilitiesString(SniperAbilities.abilitiesArray) + " ]},\n");
 
+			// Art of Weather Collection
+			writer.write("{ \"name\": \"Art of Weather\", \"type\": \"n/a\", \"abilities\": [ " + WebAppHelper.generateAbilitiesString(WeatherAbilities.abilitiesArray) + " ]},\n");
+		
 			writer.write("]}");
 
 			writer.close();
@@ -183,11 +178,11 @@ public class WebAppHelper
 				loadedParams.put("projectileExplosion", abilityAttribute.getProjectileExplosionPower());
 
 			if (abilityAttribute.getPotionEffectsForAoE() != null && abilityAttribute.getPotionEffectsForAoE().length > 0)
-				loadedParams.put("aoeEffects", "[" + getPotionEffectsFor(abilityAttribute.getPotionEffectsForAoE()) + "]");
+				loadedParams.put("aoeEffects", "[" + WebAppHelper.getPotionEffectsFor(abilityAttribute.getPotionEffectsForAoE()) + "]");
 			if (abilityAttribute.getPotionEffectsForProjectile() != null && abilityAttribute.getPotionEffectsForProjectile().length > 0)
-				loadedParams.put("onHitEffects", "[" + getPotionEffectsFor(abilityAttribute.getPotionEffectsForProjectile()) + "]");
+				loadedParams.put("onHitEffects", "[" + WebAppHelper.getPotionEffectsFor(abilityAttribute.getPotionEffectsForProjectile()) + "]");
 			if (abilityAttribute.getPotionEffectsForUser() != null && abilityAttribute.getPotionEffectsForUser().length > 0)
-				loadedParams.put("selfEffects", "[" + getPotionEffectsFor(abilityAttribute.getPotionEffectsForUser()) + "]");
+				loadedParams.put("selfEffects", "[" + WebAppHelper.getPotionEffectsFor(abilityAttribute.getPotionEffectsForUser()) + "]");
 
 			for (String manualParamKey : Values.abilityWebAppExtraParams.keySet())
 			{
