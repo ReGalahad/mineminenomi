@@ -119,7 +119,7 @@ public class ListMisc
 			else
 				return Item.getItemFromBlock(this);
 		}		
-	}.setLightLevel(0.75F).setLightOpacity(0);
+	} .setLightOpacity(0);
 	public static Block Barrier = new BlockBarrier();
 	public static Block Poison = new BlockPoison();
 	public static Block DemonPoison = new BlockDemonPoison();
