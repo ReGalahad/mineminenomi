@@ -246,9 +246,9 @@ public class ListMisc
 	public static ItemCoreWeapon Durandal = new ItemCoreWeapon(7);
 	public static ItemCoreWeapon Mace = new ItemCoreWeapon(6);
 	
-	public static ClimaTact ClimaTact = new ClimaTact();
-	public static ClimaTact PerfectClimaTact = new ClimaTact();
-	public static ClimaTact SorceryClimaTact = new ClimaTact();
+	public static ClimaTact ClimaTact = new ClimaTact().setDamage(1);
+	public static ClimaTact PerfectClimaTact = new ClimaTact().setDamage(3);
+	public static ClimaTact SorceryClimaTact = new ClimaTact().setDamage(6);
 	
 	public static ItemAbilityWeapon IceSaber = new ItemAbilityWeapon(9).setIsSlownessInducing();
 	public static ItemAbilityWeapon AmaNoMurakumo = new ItemAbilityWeapon(9);
