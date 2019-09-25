@@ -95,7 +95,7 @@ public class RenderWeaponMace implements IItemRenderer
 
 				TextureManager texturemanager = Minecraft.getMinecraft().getTextureManager();
 
-				texturemanager.bindTexture(new ResourceLocation(ID.PROJECT_ID, "/textures/models/items/mace.png"));
+				texturemanager.bindTexture(new ResourceLocation(ID.PROJECT_ID, "textures/models/items/mace.png"));
 
 				float f4 = 0.0F;
 				float f5 = 0.3F;
