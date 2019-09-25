@@ -41,6 +41,11 @@ public class WeatherAbilities
 		@Override
 		public void use(EntityPlayer player)
 		{
+			if(player.inventory.getCurrentItem() == null || (player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() != ListMisc.SorceryClimaTact))
+			{
+				WyHelper.sendMsgToPlayer(player, "Cannot use " + this.getAttribute().getAttributeName() + " without a Sorcery or better Clima Tact in hand!");
+				return;
+			}
 			this.projectile = new WeatherProjectiles.WeatherEgg(player.worldObj, player, attr);
 			super.use(player);
 		}
