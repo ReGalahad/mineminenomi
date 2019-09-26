@@ -67,31 +67,32 @@ public class StructureSmallShip extends Structure
 		world.setTileEntity(posX + 11, posY + 2, posZ + 25, combatChest);
 		
 		addChestLoot(world, combatChest, 100, ListMisc.Bullets, 5, 10);
-		addChestLoot(world, combatChest, 100, ListMisc.Bullets, 1, 5);	
-		addChestLoot(world, combatChest, 50, ListMisc.KairosekiBullets, 1, 5);
+		addChestLoot(world, combatChest, 100, ListMisc.Bullets, 3, 8);	
+		addChestLoot(world, combatChest, 65, ListMisc.Flintlock, 0, 1);
+		addChestLoot(world, combatChest, 65, ListMisc.BellyPouch, 2, 5);	
+		addChestLoot(world, combatChest, 50, ListMisc.KairosekiBullets, 2, 5);
 		addChestLoot(world, combatChest, 50, Items.boat, 1, 0);
 		addChestLoot(world, combatChest, 45, swordToSpawn, 0, 1);
-		addChestLoot(world, combatChest, 45, ListMisc.Flintlock, 0, 1);
-		addChestLoot(world, combatChest, 45, ListMisc.BellyPouch, 1, 0);	
-		addChestLoot(world, combatChest, 15, ListMisc.BellyPouch, 1, 0);
-		addChestLoot(world, combatChest, 10, ListMisc.Box1, 1, 0);
+		addChestLoot(world, combatChest, 35, ListMisc.BellyPouch, 3, 6);
+		addChestLoot(world, combatChest, 15, ListMisc.Box1, 1, 0);
 		addChestLoot(world, combatChest, 5, ListMisc.Box2, 1, 0);	
 
 		TileEntityChest foodChest = new TileEntityChest();
 		world.setTileEntity(posX + 8, posY + 2, posZ + 25, foodChest);
 		
-		addChestLoot(world, foodChest, 100, Items.bread, 1, 3);
-		addChestLoot(world, foodChest, 100, Items.bread, 0, 1);
-		addChestLoot(world, foodChest, 45, Items.baked_potato, 0, 5);
-		addChestLoot(world, foodChest, 45, Items.apple, 1, 4);
+		addChestLoot(world, foodChest, 100, Items.bread, 4, 6);
+		addChestLoot(world, foodChest, 100, Items.bread, 2, 3);
+		addChestLoot(world, foodChest, 100, Items.potato, 1, 5);
+		addChestLoot(world, foodChest, 85, Items.apple, 1, 4);
+		addChestLoot(world, foodChest, 45, Items.baked_potato, 1, 5);
 		if(getRandomChance(world) <= 70)
 			addChestLoot(world, foodChest, 45, Items.bread, 1, 3);
-		addChestLoot(world, foodChest, 10, ListMisc.Cola, 0, 3);
+		addChestLoot(world, foodChest, 20, ListMisc.Cola, 1, 3);
 		if(getRandomChance(world) <= 50)
-			addChestLoot(world, foodChest, 10, Items.cooked_chicken, 0, 2);
+			addChestLoot(world, foodChest, 60, Items.cooked_chicken, 3, 4);
 		else
-			addChestLoot(world, foodChest, 10, Items.cooked_beef, 0, 2);
-		addChestLoot(world, foodChest, 10, ListMisc.Cola, 0, 5);
+			addChestLoot(world, foodChest, 10, Items.cooked_beef, 5, 6);
+		addChestLoot(world, foodChest, 10, ListMisc.Cola, 1, 5);
 
 		world.setBlock(posX + 11, posY + 2, posZ + 24, Blocks.air);
 		world.setBlock(posX + 8, posY + 2, posZ + 24, Blocks.air);

@@ -72,14 +72,15 @@ public class StructureLargeShip extends Structure
 		world.setTileEntity(posX + 6, posY + 6, posZ + 39, combatChest);
 		
 		addChestLoot(world, combatChest, 100, ListMisc.Bullets, 5, 10);
-		addChestLoot(world, combatChest, 100, ListMisc.Bullets, 1, 5);
-		addChestLoot(world, combatChest, 60, Items.boat, 1, 0);
-		addChestLoot(world, combatChest, 50, ListMisc.BellyPouch, 1, 0);
-		addChestLoot(world, combatChest, 50, ListMisc.KairosekiBullets, 1, 5);
+		addChestLoot(world, combatChest, 100, ListMisc.Bullets, 10, 15);
+		addChestLoot(world, combatChest, 80, Items.boat, 1, 0);
+		addChestLoot(world, combatChest, 80, ListMisc.BellyPouch, 2, 6);
+		addChestLoot(world, combatChest, 50, ListMisc.BellyPouch, 6, 10);
+		addChestLoot(world, combatChest, 50, ListMisc.KairosekiBullets, 3, 5);
 		addChestLoot(world, combatChest, 45, swordToSpawn, 0, 1);
 		addChestLoot(world, combatChest, 45, ListMisc.Flintlock, 0, 1);
 		addChestLoot(world, combatChest, 20, ListMisc.BellyPouch, 1, 0);
-		addChestLoot(world, combatChest, 5, ListMisc.Box1, 1, 0);
+		addChestLoot(world, combatChest, 10, ListMisc.Box1, 1, 0);
 
 		TileEntityChest foodChest = new TileEntityChest();
 		world.setTileEntity(posX + 13, posY + 6, posZ + 39, foodChest);
@@ -108,14 +109,15 @@ public class StructureLargeShip extends Structure
 		TileEntityChest specialChest = new TileEntityChest();
 		world.setTileEntity(posX + 9, posY + 6, posZ + 42, specialChest);
 
-		addChestLoot(world, specialChest, 75, ListMisc.BellyPouch, 1, 0);
+		addChestLoot(world, specialChest, 75, ListMisc.BellyPouch, 1, 6);
 		addChestLoot(world, specialChest, 70, ListMisc.KairosekiBullets, 5, 10);
+		addChestLoot(world, specialChest, 65, ListMisc.BellyPouch, 3, 8);
 		addChestLoot(world, specialChest, 50, Items.boat, 1, 0);
-		addChestLoot(world, specialChest, 35, ListMisc.BellyPouch, 1, 0);
-		addChestLoot(world, specialChest, 25, ListMisc.BlackMetal, 1, 2);
+		addChestLoot(world, specialChest, 35, ListMisc.BellyPouch, 5, 6);
+		addChestLoot(world, specialChest, 35, ListMisc.BlackMetal, 1, 2);
 		addChestLoot(world, specialChest, 20, ListMisc.Box1, 1, 0);
+		addChestLoot(world, specialChest, 20, ListMisc.UltraCola, 1, 0);
 		addChestLoot(world, specialChest, 15, ListMisc.Box2, 1, 0);
-		addChestLoot(world, specialChest, 10, ListMisc.UltraCola, 1, 0);
 		addChestLoot(world, specialChest, 10, ListMisc.Box3, 1, 0);
 		
 	}
