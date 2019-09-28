@@ -619,7 +619,7 @@ public class WyHelper
 			return patreonLevel;
 		}
 		
-		return 4;
+		return 1;
 	}
 	
 	public static boolean isCelestialDragon(EntityPlayer player)
