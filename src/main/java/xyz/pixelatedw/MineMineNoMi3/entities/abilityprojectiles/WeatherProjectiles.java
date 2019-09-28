@@ -373,7 +373,7 @@ public class WeatherProjectiles
 					DevilFruitsHelper.sendShounenScream(getThrower(), "Thunderstorm Tempo", 0);
 				}
 
-				List weatherBallsNear = WyHelper.getEntitiesNear(this, new double[] {15, 4, 15}, WeatherBall.class);
+				List weatherBallsNear = WyHelper.getEntitiesNear(this, new double[] {15, 6, 15}, WeatherBall.class);
 					
 				if(weatherBallsNear.size() > 0)
 				{
@@ -383,7 +383,7 @@ public class WeatherProjectiles
 						
 						return ball instanceof ThunderBall;
 					}).collect(Collectors.toList());
-												
+
 					if(thunderBalls.size() > 0)
 					{
 						for(ThunderBall tb : thunderBalls)
