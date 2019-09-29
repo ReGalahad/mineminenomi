@@ -4,6 +4,7 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntitySakeFeast;
@@ -22,36 +23,35 @@ public class BlockSakeFeast extends BlockContainer
 	public boolean onBlockActivated(World world, int posX, int posY, int posZ, EntityPlayer player, int par6, float par7, float par8, float par9)
 	{
 		TileEntitySakeFeast sakeFeast = (TileEntitySakeFeast) world.getTileEntity(posX, posY, posZ);
-		
-		if(!world.isRemote)
+
+		if (world.isRemote)
+			return true;
+
+		boolean isItem = player.getHeldItem() != null && player.getHeldItem().getItem() == ListMisc.SakeCup;
+		boolean isFilledFlag = isItem && player.getHeldItem().getTagCompound() != null && player.getHeldItem().getTagCompound().getBoolean("IsFilled");
+		if (isItem && !isFilledFlag)
 		{
-			if (player.getHeldItem() != null && player.getHeldItem().getItem() == ListMisc.SakeCup)
+			if (sakeFeast.placeCup())
 			{
-				if(sakeFeast.placeCup())
-				{
-					player.getHeldItem().stackSize--;
-					return true;
-				}
-			}
-			else if(player.getHeldItem() == null || player.getHeldItem().getItem() != ListMisc.SakeCup)
-			{
-				if(sakeFeast.countPlacedCups() > 0)
-				{
-					sakeFeast.fillCup();
-					return true;
-				}
-				
-				if(sakeFeast.countFilledCups() > 0 && sakeFeast.removeCup())
-				{
-					player.inventory.addItemStackToInventory(new ItemStack(ListMisc.SakeCup));
-					return true;
-				}
+				player.getHeldItem().stackSize--;
+				return true;
 			}
 		}
-		
+		else if (player.getHeldItem() == null)
+		{
+			if (sakeFeast.countPlacedCups() > 0)
+			{
+				player.inventory.setInventorySlotContents(player.inventory.currentItem ,new ItemStack(ListMisc.SakeCup, 1, 0));
+				player.getHeldItem().setTagCompound(new NBTTagCompound());
+				player.getHeldItem().getTagCompound().setBoolean("IsFilled", true);
+				sakeFeast.removeCup();
+				return true;
+			}
+		}
+
 		return false;
 	}
-	
+
 	@Override
 	public boolean isOpaqueCube()
 	{
@@ -69,7 +69,7 @@ public class BlockSakeFeast extends BlockContainer
 	{
 		return false;
 	}
-    
+
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta)
 	{

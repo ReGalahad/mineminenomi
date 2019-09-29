@@ -57,14 +57,12 @@ public class RenderBlockSakeFeast extends TileEntitySpecialRenderer
 			GL11.glPushMatrix();
 				for(int i = 0; i < sakeFeast.countPlacedCups(); i++)
 				{
-					if(sakeFeast.getCupState(i) > 0)
-					{
-						GL11.glPushMatrix();
-							this.bindTexture(this.cupTexture);
-							GL11.glTranslated(this.cupPositions[0 + (i * 3)], this.cupPositions[1 + (i * 3)], this.cupPositions[2 + (i * 3)]);
-							this.cupModel.render(null, 0, 0, 0, 0, 0, 0.0625F);
-						GL11.glPopMatrix();
-					}
+					GL11.glPushMatrix();
+						this.bindTexture(this.cupTexture);
+						GL11.glTranslated(this.cupPositions[0 + (i * 3)], this.cupPositions[1 + (i * 3)], this.cupPositions[2 + (i * 3)]);
+						//((ModelRenderer)this.cupModel.boxList.get(2)).isHidden = !(sakeFeast.getCupState(i) == 2);
+						this.cupModel.render(null, 0, 0, 0, 0, 0, 0.0625F);
+					GL11.glPopMatrix();
 				}
 			GL11.glPopMatrix();
 

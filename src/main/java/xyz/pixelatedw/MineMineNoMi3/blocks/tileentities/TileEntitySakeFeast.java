@@ -52,7 +52,7 @@ public class TileEntitySakeFeast extends TileEntity
 	{
 		for(int i = 0; i < this.cups.length; i++)
 		{
-			if(this.cups[i] > 0)
+			if(this.cups[i] >= 1)
 			{
 				this.setCup(i, 0);
 				return true;
