@@ -60,11 +60,11 @@ public class WyTelemetry
 			{	
 				Object[][] paths = new Object[][] 
 				{
-					{"/addStructureStat", structuresDataCompound},
-					{"/addKillStat", killsDataCompound},
-					{"/addAbilityStat", abilitiesDataCompound},
-					{"/addMiscStat", miscDataCompound},
-					{"/addDFStat", devilFruitsDataCompound}
+					{"/stats/structure", structuresDataCompound},
+					{"/stats/kill", killsDataCompound},
+					{"/stats/ability", abilitiesDataCompound},
+					{"/stats/misc", miscDataCompound},
+					{"/stats/devil-fruit", devilFruitsDataCompound}
 				};
 							
 				for (Object[] o : paths)
@@ -88,6 +88,36 @@ public class WyTelemetry
 		};
 		httpThread.setName("Mine Mine no Mi - Stats POST");
 		httpThread.start();
+	}
+	
+	public static void sendAllDataSync()
+	{
+		Object[][] paths = new Object[][] 
+		{
+			{"/stats/structure", structuresDataCompound},
+			{"/stats/kill", killsDataCompound},
+			{"/stats/ability", abilitiesDataCompound},
+			{"/stats/misc", miscDataCompound},
+			{"/stats/devil-fruit", devilFruitsDataCompound}
+		};
+
+		for (Object[] o : paths)
+		{
+			String apiURL = (String) o[0];
+			StatDataCompound compound = (StatDataCompound) o[1];
+
+			if (compound.data.isEmpty())
+				continue;
+
+			// Turning the coumpound data into a nice json format
+			String json = Values.gson.toJson(compound);
+
+			String result = sendPOST(apiURL, json);
+
+			WyDebug.debug(result.isEmpty() ? "Success" : result);
+
+			compound.empty();
+		}
 	}
 
 	public static String sendPOST(String sendUrl, String object)
@@ -144,6 +174,47 @@ public class WyTelemetry
 			{
 				e.printStackTrace();
 			}
+		}
+		
+		return result;
+	}
+	
+	public static String sendGET(String sendUrl)
+	{
+		String result = "";
+		
+		try
+		{
+			// Actual URL to the API
+			URL url = new URL(Values.urlConnection + "" + sendUrl);
+
+			// Opening a connection
+			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+			// Setting the properties
+			connection.setRequestMethod("GET");
+			int responseCode = connection.getResponseCode();
+			if (responseCode == HttpURLConnection.HTTP_OK)
+			{
+				BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+				String inputLine;
+				StringBuffer response = new StringBuffer();
+
+				while ((inputLine = in.readLine()) != null)
+				{
+					response.append(inputLine);
+				}
+				
+				in.close();
+				
+				result = response.toString();
+			}
+			else
+				WyDebug.error("GET Request failed!");
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
 		}
 		
 		return result;

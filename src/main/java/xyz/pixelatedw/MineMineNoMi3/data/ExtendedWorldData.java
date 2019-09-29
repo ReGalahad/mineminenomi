@@ -142,7 +142,7 @@ public class ExtendedWorldData extends WorldSavedData
 				minPos, maxPos
 		});
 
-		markDirty();
+		this.markDirty();
 	}
 
 	public void removeRestrictedArea(int midX, int midY, int midZ)
@@ -165,7 +165,7 @@ public class ExtendedWorldData extends WorldSavedData
 				iterator.remove();
 		}
 
-		markDirty();
+		this.markDirty();
 	}
 	
 	public List<int[][]> getAllRestrictions()
@@ -196,7 +196,7 @@ public class ExtendedWorldData extends WorldSavedData
 		else
 			this.issuedBounties.put(name.toLowerCase(), bounty);
 
-		markDirty();
+		this.markDirty();
 	}
 
 	public int getTotalDojosSpawned()
@@ -209,7 +209,7 @@ public class ExtendedWorldData extends WorldSavedData
 		this.totalDojosSpawned++;
 		if (this.totalDojosSpawned >= MainConfig.maxDojoSpawn)
 			this.setSwordsmanDojoSpawned(true);
-		markDirty();
+		this.markDirty();
 	}
 
 	public void setDojoSpawned(int value)
@@ -217,7 +217,7 @@ public class ExtendedWorldData extends WorldSavedData
 		this.totalDojosSpawned = value;
 		if (this.totalDojosSpawned >= MainConfig.maxDojoSpawn)
 			this.setSwordsmanDojoSpawned(true);
-		markDirty();
+		this.markDirty();
 	}
 
 	public boolean isSwordsmanDojoSpawned()
@@ -228,7 +228,7 @@ public class ExtendedWorldData extends WorldSavedData
 	public void setSwordsmanDojoSpawned(boolean value)
 	{
 		this.isSwordsmanDojoSpawned = value;
-		markDirty();
+		this.markDirty();
 	}
 	
 	public List<String> getDevilFruitsInWorld()
@@ -243,7 +243,7 @@ public class ExtendedWorldData extends WorldSavedData
 		if (this.devilFruitsInWorld.contains(name))
 		{
 			this.devilFruitsInWorld.remove(name);
-			markDirty();
+			this.markDirty();
 		}
 	}
 	
@@ -252,7 +252,7 @@ public class ExtendedWorldData extends WorldSavedData
 		if (this.devilFruitsInWorld.contains(name))
 		{
 			this.devilFruitsInWorld.remove(name);
-			markDirty();
+			this.markDirty();
 		}
 	}
 	
@@ -263,7 +263,7 @@ public class ExtendedWorldData extends WorldSavedData
 		if (!this.devilFruitsInWorld.contains(name))
 		{
 			this.devilFruitsInWorld.add(name);
-			markDirty();
+			this.markDirty();
 		}
 	}
 
@@ -272,7 +272,7 @@ public class ExtendedWorldData extends WorldSavedData
 		if (!this.devilFruitsInWorld.contains(name))
 		{
 			this.devilFruitsInWorld.add(name);
-			markDirty();
+			this.markDirty();
 		}
 	}
 

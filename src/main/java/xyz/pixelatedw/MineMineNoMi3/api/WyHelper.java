@@ -604,30 +604,63 @@ public class WyHelper
 		if (player.inventory.mainInventory[index] != null)
 			player.inventory.mainInventory[index] = null;
 	}
-	
-	public static boolean isPatreon(EntityPlayer player)
+
+	public static int getPatreonLevel(EntityPlayer player)
 	{
 		boolean flag = false;
 		
-		String apiURL = "/isPatreon";
+		String apiURL = "/patreon?uuid=" + player.getUniqueID().toString();
+		String result = WyTelemetry.sendGET(apiURL);
 
-		String uuid = player.getUniqueID().toString();
-		String json = Values.gson.toJson(uuid);
-
-		String result = WyTelemetry.sendPOST(apiURL, json);
-
-		if(WyHelper.isNullOrEmpty(result))
-			return flag;
-		else
+		if(!WyHelper.isNullOrEmpty(result))
 		{
 			int patreonLevel = Integer.parseInt(result);
-				
-			if(patreonLevel <= 2)
-				return flag;
-			else
-				flag = true;			
+			
+			return patreonLevel;
 		}
 		
-		return flag;
+		return 1;
+	}
+	
+	public static boolean isCelestialDragon(EntityPlayer player)
+	{
+		return getPatreonLevel(player) == 4;
+	}
+	
+	public static boolean isSupernova(EntityPlayer player)
+	{
+		return getPatreonLevel(player) == 3;
+	}
+	
+	public static boolean isRookie(EntityPlayer player)
+	{
+		return getPatreonLevel(player) == 2;
+	}
+	
+	public static boolean isDevBuild()
+	{
+		return ID.BUILD_MODE.equalsIgnoreCase("DEV");
+	}
+	
+	public static boolean isEarlyAccessBuild()
+	{
+		return ID.BUILD_MODE.equalsIgnoreCase("EARLY_ACCESS");
+	}
+	
+	public static boolean isReleaseBuild()
+	{
+		return ID.BUILD_MODE.equalsIgnoreCase("RELEASE");
+	}
+	
+	public static boolean hasPatreonAccess(EntityPlayer player)
+	{
+		int patreon = getPatreonLevel(player);
+		
+		if(isDevBuild() && patreon >= 4)
+			return true;
+		else if(isEarlyAccessBuild() && patreon >= 3)
+			return true;
+		else
+			return false;
 	}
 }

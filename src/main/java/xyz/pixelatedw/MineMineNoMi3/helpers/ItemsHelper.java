@@ -88,6 +88,19 @@ public class ItemsHelper
 		return data;
 	}
 	
+	public static int getClimaTactLevel(Item item)
+	{
+
+		if(item == ListMisc.ClimaTact)
+			return 1;
+		else if(item == ListMisc.PerfectClimaTact)
+			return 2;
+		else if(item == ListMisc.SorceryClimaTact)
+			return 3;
+		
+		return 0;
+	}
+	
 	public static boolean isBow(ItemStack itemStack)
 	{	
 		if (itemStack.getItemUseAction() == EnumAction.bow)
