@@ -21,7 +21,7 @@ public class StructureMarineLargeBase extends Structure
 		boolean flagBiome = (biome != BiomeGenBase.savannaPlateau && biome != BiomeGenBase.plains && biome != BiomeGenBase.taiga && biome != BiomeGenBase.savanna && biome != BiomeGenBase.swampland 
 				&& biome != BiomeGenBase.forest && biome != BiomeGenBase.birchForest && biome != BiomeGenBase.icePlains && biome != BiomeGenBase.coldTaiga && biome != BiomeGenBase.forestHills);
 		boolean flagSpecialCheck = !MainWorldGen.checkCorners(sch, world, posX, posY, posZ);
-		boolean flagAboveGround = !MainWorldGen.checkCornersAboveGround(sch, world, posX, posY, posZ) && posY > 50;
+		boolean flagAboveGround = !MainWorldGen.checkCornersAboveGround(sch, world, posX, posY, posZ);
 		
 		if(flagBiome || flagSpecialCheck || flagAboveGround)
 			return false;
