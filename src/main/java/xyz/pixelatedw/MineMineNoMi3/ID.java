@@ -146,6 +146,7 @@ public class ID
 	EXTRAEFFECT_ORIBIND = "oriBind",
 	EXTRAEFFECT_ABAREHIMATSURI = "abareHimatsuri",
 	EXTRAEFFECT_LOGIA_OFF = "logiaOff",
+	EXTRAEFFECT_SAKE_DRUNK = "sakeDrunk",
 			
 	CREW_ARLONG = "Arlong Pirates",
 	CREW_BAROQUEWORKS = "Baroque Works",

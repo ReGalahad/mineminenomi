@@ -1,10 +1,7 @@
 package xyz.pixelatedw.MineMineNoMi3.abilities.effects;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayerMP;
-import xyz.pixelatedw.MineMineNoMi3.ID;
-import xyz.pixelatedw.MineMineNoMi3.abilities.effects.DFEffect.Update;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
@@ -13,28 +10,33 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketSyncInfo;
 public abstract class DFEffect
 {
 
-	private String effect;
-	private ExtendedEntityData props;
-	private EntityLivingBase entity;
-	private Update updateThread;
+	protected String effect;
+	protected ExtendedEntityData props;
+	protected EntityLivingBase entity;
+	protected Update updateThread;
 	
 	protected int timer;
 	
 	public DFEffect(EntityLivingBase entity, int timer, String effect)
+	{
+		this(entity, timer, effect, true);
+	}
+	
+	public DFEffect(EntityLivingBase entity, int timer, String effect, boolean check)
 	{
 		this.entity = entity;
 		this.effect = effect;
 		this.timer = timer;
 		this.props = ExtendedEntityData.get(entity);
 				
-		if(!props.hasExtraEffects(effect))
+		if(check && !props.hasExtraEffects(effect))
 		{
-			props.addExtraEffect(effect);
+			this.props.addExtraEffect(effect);
 			if(entity instanceof EntityPlayerMP)
-				WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) entity);
-			WyNetworkHelper.sendToAll(new PacketSyncInfo(entity.getEntityId(), props));
-			updateThread = (new Update(props, timer));
-			updateThread.start();
+				WyNetworkHelper.sendTo(new PacketSync(this.props), (EntityPlayerMP) entity);
+			WyNetworkHelper.sendToAll(new PacketSyncInfo(entity.getEntityId(), this.props));
+			this.updateThread = (new Update(this.props, timer));
+			this.updateThread.start();
 		}
 	}
 	
@@ -66,6 +68,12 @@ public abstract class DFEffect
 			this.timer = (timer * 2) + 100;
 		}
 		
+		public void updateTimer(int time)
+		{
+			this.timer = time;
+		}
+		
+		@Override
 		public void run()
 		{
 			onEffectStart(entity);

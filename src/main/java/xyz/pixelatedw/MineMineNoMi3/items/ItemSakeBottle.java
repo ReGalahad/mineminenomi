@@ -8,6 +8,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import xyz.pixelatedw.MineMineNoMi3.abilities.effects.DFEffectSakeDrunk;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
@@ -40,10 +41,12 @@ public class ItemSakeBottle extends ItemBlock
 			
 			itemStack.getTagCompound().setInteger("Amount", itemStack.getTagCompound().getInteger("Amount") - 1);
 			
+			new DFEffectSakeDrunk(player, 550);
+			
 			if(itemStack.getTagCompound().getInteger("Amount") <= 0)
 				itemStack.setStackDisplayName("Empty Sake Bottle");
 			
-			itemStack.getTagCompound().setInteger("Timer", 50);
+			itemStack.getTagCompound().setInteger("Timer", 100);
 		}
 		
 		return itemStack;
