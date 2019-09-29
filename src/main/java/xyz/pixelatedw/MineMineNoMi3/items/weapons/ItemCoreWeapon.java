@@ -51,6 +51,7 @@ public class ItemCoreWeapon extends Item
 		this.setFull3D();
 	}
 	
+	@Override
 	public void onUpdate(ItemStack itemStack, World world, Entity entity, int par4, boolean par5) 
 	{
 		if(!itemStack.hasTagCompound())
@@ -76,27 +77,32 @@ public class ItemCoreWeapon extends Item
 		}
 	}
 	
-    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
+    @Override
+	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
     {
         player.setItemInUse(itemStack, this.getMaxItemUseDuration(itemStack));
         return itemStack;
     }
 	
-    public int getMaxItemUseDuration(ItemStack itemStack)
+    @Override
+	public int getMaxItemUseDuration(ItemStack itemStack)
     {
         return 72000;
     }
 
-    public EnumAction getItemUseAction(ItemStack itemStack)
+    @Override
+	public EnumAction getItemUseAction(ItemStack itemStack)
     {
         return EnumAction.block;
     }
 	
-    public int getItemEnchantability()
+    @Override
+	public int getItemEnchantability()
     {
         return 14;
     }
 
+	@Override
 	public ItemCoreWeapon setMaxDamage(int maxDamage)
 	{
 		super.setMaxDamage(maxDamage);
@@ -108,6 +114,7 @@ public class ItemCoreWeapon extends Item
 		return this;
 	}
 
+	@Override
 	public boolean hitEntity(ItemStack itemStack, EntityLivingBase target, EntityLivingBase attacker)
 	{
 		ExtendedEntityData props = ExtendedEntityData.get(attacker);
@@ -188,18 +195,27 @@ public class ItemCoreWeapon extends Item
 		return this;
 	}
 		
+	@Override
 	public Multimap getAttributeModifiers(ItemStack stack)
 	{
 		Multimap multimap = super.getAttributeModifiers(stack);
-		double multiplier;
+		double multiplier = 0;
 		if( stack.getTagCompound() != null)
-			multiplier = stack.getTagCompound().getDouble("multiplier");
+		{
+			multiplier += stack.getTagCompound().getDouble("multiplier");
+			multiplier += stack.getTagCompound().getDouble("multiplier_black_metal");
+			multiplier += stack.getTagCompound().getDouble("multiplier_eisen");
+			System.out.println(multiplier);
+		}
 		else
+		{
 			multiplier = 1;
+		}
 		multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Weapon modifier", this.damage * multiplier, 0));
 		return multimap;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister ir)
 	{
@@ -221,6 +237,7 @@ public class ItemCoreWeapon extends Item
 			this.hakiImbuedIcon = ir.registerIcon(ID.PROJECT_ID + ":" + this.getUnlocalizedName().substring(5) + "_haki");
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining)
 	{	
@@ -242,20 +259,22 @@ public class ItemCoreWeapon extends Item
 			else
 			{
 				stack.getTagCompound().setInteger("metadata", 1);
-				return this.sheathedIcon;
+				return this.itemIcon;
 			}
     	}
 
 		return this.itemIcon;
 	}
 	
-    @SideOnly(Side.CLIENT)
+    @Override
+	@SideOnly(Side.CLIENT)
     public boolean isFull3D() 
     {
     	return true;
     }
 	
-    @SideOnly(Side.CLIENT)
+    @Override
+	@SideOnly(Side.CLIENT)
     public IIcon getIconIndex(ItemStack stack)
     {
     	if(stack.getTagCompound() != null)
@@ -271,7 +290,8 @@ public class ItemCoreWeapon extends Item
     	return itemIcon;
 	}
     
-    public float func_150893_a(ItemStack itemStack, Block block)
+    @Override
+	public float func_150893_a(ItemStack itemStack, Block block)
     {
         if (block == Blocks.web)
         {

@@ -1,12 +1,12 @@
 package xyz.pixelatedw.MineMineNoMi3.models.entities.mobs.animals;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
+import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.animals.EntityLapahn;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityLapahn;
@@ -130,13 +130,13 @@ public class ModelLapahn extends ModelBiped
 
 		if (lapahn.isEnraged())
 		{
-			GL11.glEnable(GL11.GL_BLEND);
-			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-			GL11.glAlphaFunc(GL11.GL_GREATER, 0.1f);
+			//GL11.glEnable(GL11.GL_BLEND);
+			//GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+			//GL11.glAlphaFunc(GL11.GL_GREATER, 0.1f);
+			Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation(ID.PROJECT_ID, "textures/models/lapahnangry.png"));
+			//GL11.glColor3f(0.6F, 0F, 0F);
 
-			GL11.glColor3f(0.5F, 0F, 0F);
-
-			GL11.glDisable(GL11.GL_BLEND);
+			//GL11.glDisable(GL11.GL_BLEND);
 		}
 
 		this.wiskers.render(f5);
@@ -175,6 +175,7 @@ public class ModelLapahn extends ModelBiped
 			this.leftArm1.offsetY = formula;
 			this.rightArm1.offsetY = formula;
 			this.head.offsetY = formula;
+			this.wiskers.offsetY = formula;
 			this.body1.offsetY = formula;
 			this.body2.offsetY = formula;
 			this.body3.offsetY = formula;
@@ -196,6 +197,7 @@ public class ModelLapahn extends ModelBiped
 			this.leftArm1.offsetY = formula;
 			this.rightArm1.offsetY = formula;
 			this.head.offsetY = formula;
+			this.wiskers.offsetY = formula;
 			this.body1.offsetY = formula;
 			this.body2.offsetY = formula;
 			this.body3.offsetY = formula;

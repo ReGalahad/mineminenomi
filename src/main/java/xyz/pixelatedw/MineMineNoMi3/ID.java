@@ -77,7 +77,7 @@ public class ID
 	
 	PROJECT_ID = "mineminenomi",
 	PROJECT_NAME = "Mine Mine no Mi",
-	PROJECT_VERSION = "0.6.0a",
+	PROJECT_VERSION = "0.6.0",
 	PROJECT_MCVERSION = "1.7.10",
 
 	PARTICLEFX_DOKUGOMU = "dokuGumo",
@@ -196,6 +196,8 @@ public class ID
 	
 	SCENARIO_ROMANCEDAWN_CAPTAINMORGAN = "scenario_cptmorgan",
 	
+	//Auto assigned by the Deploy script
+	BUILD_MODE = "EARLY_ACCESS",
 	NULL = "null";
 	
 	public static final int 
@@ -216,8 +218,4 @@ public class ID
 	public static int
 	
 	DIMENSION_ID_SCENARIOARENA;
-	
-	public static final boolean 
-	
-	DEV_EARLYACCESS = true;
 }

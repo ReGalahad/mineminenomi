@@ -61,11 +61,12 @@ import xyz.pixelatedw.MineMineNoMi3.items.AkumaNoMiBox;
 import xyz.pixelatedw.MineMineNoMi3.items.BellyPouch;
 import xyz.pixelatedw.MineMineNoMi3.items.CharacterCreator;
 import xyz.pixelatedw.MineMineNoMi3.items.Cola;
-import xyz.pixelatedw.MineMineNoMi3.items.ItemCoreArmor;
 import xyz.pixelatedw.MineMineNoMi3.items.SakeCup;
 import xyz.pixelatedw.MineMineNoMi3.items.SeaKingMeat;
 import xyz.pixelatedw.MineMineNoMi3.items.UltraCola;
 import xyz.pixelatedw.MineMineNoMi3.items.WantedPoster;
+import xyz.pixelatedw.MineMineNoMi3.items.armors.ItemCoreArmor;
+import xyz.pixelatedw.MineMineNoMi3.items.armors.ItemTomoeDrums;
 import xyz.pixelatedw.MineMineNoMi3.items.devilfruitextras.Heart;
 import xyz.pixelatedw.MineMineNoMi3.items.devilfruitextras.Shadow;
 import xyz.pixelatedw.MineMineNoMi3.items.devilfruitextras.WateringCan;
@@ -123,7 +124,7 @@ public class ListMisc
 			else
 				return Item.getItemFromBlock(this);
 		}		
-	}.setLightLevel(0.75F).setLightOpacity(0);
+	} .setLightOpacity(0);
 	public static Block Barrier = new BlockBarrier();
 	public static Block Poison = new BlockPoison();
 	public static Block DemonPoison = new BlockDemonPoison();
@@ -218,7 +219,7 @@ public class ListMisc
 	public static Item PirateBoots = new ItemCoreArmor("pirate", ID.ARMORMAT_USELESS, 3);
 
 	public static Item ColaBackpack = new ItemCoreArmor("colabackpack", ID.ARMORMAT_COLABACKPACK, 1);
-	public static Item TomoeDrums = new ItemCoreArmor("tomoeDrums", ID.ARMORMAT_COLABACKPACK, 1);
+	public static Item TomoeDrums = new ItemTomoeDrums();
 
 	public static Item Flintlock = new Flintlock().setMaxStackSize(1).setFull3D();
 	public static Item Kabuto = new Kabuto("kabuto").setMaxStackSize(1).setFull3D();
@@ -253,10 +254,11 @@ public class ListMisc
 	public static ItemCoreWeapon Shusui = new ItemCoreWeapon(8);
 	public static ItemCoreWeapon SoulSolid = new ItemCoreWeapon(8);
 	public static ItemCoreWeapon Durandal = new ItemCoreWeapon(7);
+	public static ItemCoreWeapon Mace = new ItemCoreWeapon(6);
 	
-	public static ClimaTact ClimaTact = new ClimaTact();
-	public static ClimaTact PerfectClimaTact = new ClimaTact();
-	public static ClimaTact SorceryClimaTact = new ClimaTact();
+	public static ClimaTact ClimaTact = new ClimaTact().setDamage(1);
+	public static ClimaTact PerfectClimaTact = new ClimaTact().setDamage(3);
+	public static ClimaTact SorceryClimaTact = new ClimaTact().setDamage(6);
 	
 	public static ItemAbilityWeapon IceSaber = new ItemAbilityWeapon(9).setIsSlownessInducing();
 	public static ItemAbilityWeapon AmaNoMurakumo = new ItemAbilityWeapon(9);
@@ -343,6 +345,7 @@ public class ListMisc
 		addITEM(Shusui, "Shusui", ListCreativeTabs.tabWeapons);
 		addITEM(SoulSolid, "Soul Solid", ListCreativeTabs.tabWeapons);
 		addITEM(Durandal, "Durandal", ListCreativeTabs.tabWeapons);
+		addITEM(Mace, "Mace", ListCreativeTabs.tabWeapons);
 		
 		addITEM(ClimaTact, "Clima Tact", ListCreativeTabs.tabWeapons);
 		addITEM(PerfectClimaTact, "Perfect Clima Tact", ListCreativeTabs.tabWeapons);
@@ -387,7 +390,7 @@ public class ListMisc
 		addBLOCK(OriBars, "Ori Bars", 40.0F, null, null);
 		addBLOCK(KairosekiBars, "Kairoseki Bars", 30.0F, null, ListCreativeTabs.tabMisc);
 		addBLOCK(WaxBlock, "Wax Block", 6.0F, null, null);
-		addBLOCK(AbilityProtectionBlock, "Ability Protection Block", Float.MAX_VALUE, null, ListCreativeTabs.tabMisc);
+		addBLOCK(AbilityProtectionBlock, "Ability Protection Block", Float.MAX_VALUE, null, null);
 		addBLOCK(AbilityProtectionAreaBlock, "Ability Protection Area Block", Float.MAX_VALUE, null, null);
 		addBLOCK(AbilityProtectionCenterBlock, "Ability Protection Center Block", Float.MAX_VALUE, TileEntityAbilityProtection.class, null);
 		addBLOCK(Cannon, "Cannon", 1.0F, TileEntityCannon.class, ListCreativeTabs.tabMisc);

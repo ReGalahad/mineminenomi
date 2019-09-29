@@ -28,9 +28,9 @@ import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.ExtraProjectiles.EntityCloud;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
 import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.MineMineNoMi3.helpers.ItemsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListExtraAttributes;
-import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 
@@ -231,8 +231,6 @@ public class WeatherProjectiles
 		}
 	}
 	
-	
-	
 	public static class WeatherBall extends AbilityProjectile
 	{
 		protected Item weaponUsed;
@@ -365,15 +363,15 @@ public class WeatherProjectiles
 					}
 				}
 		        
-				int perfectThunderBallsIn = (int) this.weatherBalls.stream().filter(x -> x instanceof ThunderBall && x.getWeaponUsed() == ListMisc.PerfectClimaTact).count();
-					
+				int perfectThunderBallsIn = (int) this.weatherBalls.stream().filter(x -> x instanceof ThunderBall && ItemsHelper.getClimaTactLevel(x.getWeaponUsed()) >= 2).count();
+
 				if(perfectThunderBallsIn >= 2 && !this.superCharged)
 				{
 					this.superCharged = true;
 					DevilFruitsHelper.sendShounenScream(getThrower(), "Thunderstorm Tempo", 0);
 				}
 
-				List weatherBallsNear = WyHelper.getEntitiesNear(this, new double[] {15, 4, 15}, WeatherBall.class);
+				List weatherBallsNear = WyHelper.getEntitiesNear(this, new double[] {15, 6, 15}, WeatherBall.class);
 					
 				if(weatherBallsNear.size() > 0)
 				{
@@ -383,7 +381,7 @@ public class WeatherProjectiles
 						
 						return ball instanceof ThunderBall;
 					}).collect(Collectors.toList());
-												
+
 					if(thunderBalls.size() > 0)
 					{
 						for(ThunderBall tb : thunderBalls)
@@ -399,12 +397,12 @@ public class WeatherProjectiles
 					{
 						WeatherBall ball = (WeatherBall)x;
 						
-						return ball instanceof CoolBall && ball.getWeaponUsed() == ListMisc.PerfectClimaTact;
+						return ball instanceof CoolBall && ItemsHelper.getClimaTactLevel(ball.getWeaponUsed()) >= 2;
 					}).collect(Collectors.toList());
 
 					if(coolBalls.size() >= 2)
 					{					
-						DevilFruitsHelper.sendShounenScream(getThrower(), "Rain Tempo", 0);				
+						DevilFruitsHelper.sendShounenScream(getThrower(), "Rain Tempo", 0);
 				        WorldInfo worldinfo = MinecraftServer.getServer().worldServers[0].getWorldInfo();
 				        worldinfo.setRaining(true);
 				        

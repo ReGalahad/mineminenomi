@@ -112,6 +112,7 @@ import xyz.pixelatedw.MineMineNoMi3.renderers.items.RenderWeaponBisento;
 import xyz.pixelatedw.MineMineNoMi3.renderers.items.RenderWeaponDurandal;
 import xyz.pixelatedw.MineMineNoMi3.renderers.items.RenderWeaponKatana;
 import xyz.pixelatedw.MineMineNoMi3.renderers.items.RenderWeaponKiribachi;
+import xyz.pixelatedw.MineMineNoMi3.renderers.items.RenderWeaponMace;
 import xyz.pixelatedw.MineMineNoMi3.renderers.items.RenderWeaponPipe;
 
 public class ClientProxy extends CommonProxy
@@ -183,7 +184,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityDenDenMushi.class, new MobRenderer(new ModelDenDenMushi(), "denden"));
 		RenderingRegistry.registerEntityRenderingHandler(EntityKungFuDugong.class, new MobRenderer(new ModelKungFuDugong(), "kungfudugong"));
 		RenderingRegistry.registerEntityRenderingHandler(EntityLapahn.class, new MobRenderer(new ModelLapahn(), "lapahn"));
-		RenderingRegistry.registerEntityRenderingHandler(EntityYagaraBull.class, new MobRenderer(new ModelYagaraBull(), 1.5F, "yagarabull"));
+		RenderingRegistry.registerEntityRenderingHandler(EntityYagaraBull.class, new MobRenderer(new ModelYagaraBull(), 1.5F, null));
 		
 		//TEMP
 		RenderingRegistry.registerEntityRenderingHandler(TempEntityDugong.class, new MobRenderer(new ModelKungFuDugong(), "kungfudugong"));
@@ -245,6 +246,9 @@ public class ClientProxy extends CommonProxy
 		MinecraftForgeClient.registerItemRenderer(ListMisc.Kiribachi, new RenderWeaponKiribachi());
 
 		MinecraftForgeClient.registerItemRenderer(ListMisc.Durandal, new RenderWeaponDurandal());
+		
+		MinecraftForgeClient.registerItemRenderer(ListMisc.Mace, new RenderWeaponMace());
+
 
 	}
 	
