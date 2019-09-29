@@ -199,11 +199,18 @@ public class ItemCoreWeapon extends Item
 	public Multimap getAttributeModifiers(ItemStack stack)
 	{
 		Multimap multimap = super.getAttributeModifiers(stack);
-		double multiplier;
+		double multiplier = 0;
 		if( stack.getTagCompound() != null)
-			multiplier = stack.getTagCompound().getDouble("multiplier");
+		{
+			multiplier += stack.getTagCompound().getDouble("multiplier");
+			multiplier += stack.getTagCompound().getDouble("multiplier_black_metal");
+			multiplier += stack.getTagCompound().getDouble("multiplier_eisen");
+			System.out.println(multiplier);
+		}
 		else
+		{
 			multiplier = 1;
+		}
 		multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Weapon modifier", this.damage * multiplier, 0));
 		return multimap;
 	}
