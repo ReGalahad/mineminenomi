@@ -39,7 +39,7 @@ public class EntityYagaraBull extends EntityNewMob implements IEntityOwnable
 
 	public EntityYagaraBull(World world)
 	{
-		super(world);
+		super(world, new String[] {"yagarabull1", "yagarabull2", "yagarabull3"});
 		this.setSize(1.4F, 1.6F);
 		this.tasks.addTask(1, new EntityAIWander(this, 0.7D));
         this.tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));

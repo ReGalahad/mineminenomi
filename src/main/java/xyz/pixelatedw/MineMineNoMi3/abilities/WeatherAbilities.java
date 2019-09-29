@@ -15,9 +15,10 @@ import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.WeatherProjectil
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.WeatherProjectiles.EntityMirageTempoCloud;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.WeatherProjectiles.EntityWeatherCloud;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityMirageClone;
+import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.MineMineNoMi3.helpers.ItemsHelper;
 import xyz.pixelatedw.MineMineNoMi3.items.weapons.ClimaTact;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
-import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 
 public class WeatherAbilities
@@ -41,6 +42,11 @@ public class WeatherAbilities
 		@Override
 		public void use(EntityPlayer player)
 		{
+			if(player.inventory.getCurrentItem() == null || (player.inventory.getCurrentItem() != null && ItemsHelper.getClimaTactLevel(player.inventory.getCurrentItem().getItem()) < 3))
+			{
+				WyHelper.sendMsgToPlayer(player, "Cannot use " + this.getAttribute().getAttributeName() + " without a Sorcery or better Clima Tact in hand!");
+				return;
+			}
 			this.projectile = new WeatherProjectiles.WeatherEgg(player.worldObj, player, attr);
 			super.use(player);
 		}
@@ -57,7 +63,7 @@ public class WeatherAbilities
 		@Override
 		public void use(EntityPlayer player)
 		{
-			if(player.inventory.getCurrentItem() == null || (player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() != ListMisc.SorceryClimaTact))
+			if(player.inventory.getCurrentItem() == null || (player.inventory.getCurrentItem() != null && ItemsHelper.getClimaTactLevel(player.inventory.getCurrentItem().getItem()) < 3))
 			{
 				WyHelper.sendMsgToPlayer(player, "Cannot use " + this.getAttribute().getAttributeName() + " without a Sorcery or better Clima Tact in hand!");
 				return;
@@ -116,6 +122,11 @@ public class WeatherAbilities
 								climaTact.setDamage(20);
 							}
 						}
+						
+						climaTact.emptyCharge(stack);
+						super.use(player);
+						DevilFruitsHelper.sendShounenScream(player, "Thunder Lance Tempo", 0);
+						return;
 					}
 					else
 					{
@@ -184,6 +195,11 @@ public class WeatherAbilities
 						{
 							entity.addPotionEffect(new PotionEffect(Potion.blindness.id, 200, 1));
 						}
+						
+						climaTact.emptyCharge(stack);
+						super.use(player);
+						DevilFruitsHelper.sendShounenScream(player, "Fog Tempo", 0);
+						return;
 					}
 					else
 					{
@@ -254,6 +270,11 @@ public class WeatherAbilities
 							mirageClone.setPositionAndRotation(player.posX, player.posY, player.posZ, 180, 0);
 							player.worldObj.spawnEntityInWorld(mirageClone);							
 						}
+						
+						climaTact.emptyCharge(stack);
+						super.use(player);
+						DevilFruitsHelper.sendShounenScream(player, "Mirage Tempo", 0);
+						return;
 					}
 					else
 					{

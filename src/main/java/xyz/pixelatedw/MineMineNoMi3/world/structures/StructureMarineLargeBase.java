@@ -21,7 +21,7 @@ public class StructureMarineLargeBase extends Structure
 		boolean flagBiome = (biome != BiomeGenBase.savannaPlateau && biome != BiomeGenBase.plains && biome != BiomeGenBase.taiga && biome != BiomeGenBase.savanna && biome != BiomeGenBase.swampland 
 				&& biome != BiomeGenBase.forest && biome != BiomeGenBase.birchForest && biome != BiomeGenBase.icePlains && biome != BiomeGenBase.coldTaiga && biome != BiomeGenBase.forestHills);
 		boolean flagSpecialCheck = !MainWorldGen.checkCorners(sch, world, posX, posY, posZ);
-		boolean flagAboveGround = !MainWorldGen.checkCornersAboveGround(sch, world, posX, posY, posZ);
+		boolean flagAboveGround = !MainWorldGen.checkCornersAboveGround(sch, world, posX, posY, posZ) && posY > 50;
 		
 		if(flagBiome || flagSpecialCheck || flagAboveGround)
 			return false;
@@ -188,7 +188,7 @@ public class StructureMarineLargeBase extends Structure
 			addChestLoot(world, chest, 20, ListMisc.Box1, 1, 0);
 			addChestLoot(world, chest, 10, ListMisc.Box2, 1, 0);
 			addChestLoot(world, chest, 10, ListMisc.UltraCola, 1, 0);
-			addChestLoot(world, chest, 5, ListMisc.Box3, 1, 0);
+			addChestLoot(world, chest, 10, ListMisc.Box3, 1, 0);
 		};
 		
 		addChestTileEntity(world, commodoreChestPositions, 0, commodoreChestLoot);

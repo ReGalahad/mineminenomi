@@ -6,7 +6,6 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityExplosion;
@@ -41,14 +40,14 @@ public class Ability
 	
 	public void use(EntityPlayer player)
 	{
-		if(!isOnCooldown)
+		if(!this.isOnCooldown)
 		{
-			if(projectile != null)
+			if(this.projectile != null)
 			{
 				if(this.attr.isRepeater())
 					startRepeater(player);
 				else
-					player.worldObj.spawnEntityInWorld(projectile);
+					player.worldObj.spawnEntityInWorld(this.projectile);
 			}
 			
 			if(this.attr.getPotionEffectsForUser() != null)
@@ -88,18 +87,18 @@ public class Ability
 	
 	public void duringRepeater(EntityPlayer player)
 	{
-		if(isRepeating)
+		if(this.isRepeating)
 		{	
 			try 
 			{
-				if(!player.worldObj.isRemote && currentSpawn % ticksForRepeaterFreq == 0)
-					player.worldObj.spawnEntityInWorld(projectile.getClass().getDeclaredConstructor(World.class, EntityLivingBase.class, AbilityAttribute.class).newInstance(player.worldObj, player, attr));
+				if(!player.worldObj.isRemote && this.currentSpawn % this.ticksForRepeaterFreq == 0)
+					player.worldObj.spawnEntityInWorld(this.projectile.getClass().getDeclaredConstructor(World.class, EntityLivingBase.class, AbilityAttribute.class).newInstance(player.worldObj, player, attr));
 			} 
 			catch (Exception e) 
 			{
 				e.printStackTrace();
 			}
-			currentSpawn++;
+			this.currentSpawn++;
 		}
 	}
 	
@@ -117,9 +116,9 @@ public class Ability
 	{
 		if(!isOnCooldown)
 		{
-			if(passiveActive)
+			if(this.passiveActive)
 			{
-				passiveActive = false;
+				this.passiveActive = false;
 				WyNetworkHelper.sendTo(new PacketAbilitySync(AbilityProperties.get(player)), (EntityPlayerMP) player);
 				if(this.attr.getPotionEffectsForUser() != null)
 					for(PotionEffect p : this.attr.getPotionEffectsForUser())	
@@ -129,7 +128,7 @@ public class Ability
 			}
 			else
 			{
-				passiveActive = true;
+				this.passiveActive = true;
 				WyNetworkHelper.sendTo(new PacketAbilitySync(AbilityProperties.get(player)), (EntityPlayerMP) player);
 				if(this.attr.getPotionEffectsForUser() != null)
 					for(PotionEffect p : this.attr.getPotionEffectsForUser())				
@@ -145,14 +144,14 @@ public class Ability
 	
 	public boolean isDisabled()
 	{
-		return isDisabled;
+		return this.isDisabled;
 	}
 	
 	public void disable(EntityPlayer player, boolean bool) 
 	{
 		//if(bool)
 		//	(new ResetDisable(player, attr)).start();
-		isDisabled = bool;
+		this.isDisabled = bool;
 		WyNetworkHelper.sendTo(new PacketAbilitySync(AbilityProperties.get(player)), (EntityPlayerMP) player);
 	}
 	
@@ -223,7 +222,7 @@ public class Ability
 		if(this.attr.getAbilityExplosionPower() > 0)
 			player.worldObj.newExplosion(player, player.posX, player.posY, player.posZ, this.attr.getAbilityExplosionPower(), this.attr.canAbilityExplosionSetFire(), MainConfig.enableGriefing ? this.attr.canAbilityExplosionDestroyBlocks() : false);		
 				
-    	if(!ID.DEV_EARLYACCESS && !player.capabilities.isCreativeMode)
+    	if(!WyHelper.isDevBuild() && !player.capabilities.isCreativeMode)
     		WyTelemetry.addAbilityStat(this.getAttribute().getAbilityTexture(), this.getAttribute().getAttributeName(), 1);
 
 		(new Update(player, attr)).start();

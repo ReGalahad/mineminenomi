@@ -1,7 +1,6 @@
 package xyz.pixelatedw.MineMineNoMi3.models.entities.mobs.humanoids;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -83,8 +82,11 @@ public class ModelFatPirate extends ModelBiped
 		}
 	}
 
+	@Override
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
 	{
+		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+		
 		// Basic movement and idle stuff, copies and modified version of ModelBiped's animaations
 		this.head.rotateAngleY = f3 / (180F / (float) Math.PI);
 		this.head.rotateAngleX = f4 / (180F / (float) Math.PI);
@@ -99,12 +101,12 @@ public class ModelFatPirate extends ModelBiped
 
 		if (this.heldItemLeft != 0)
 		{
-			this.leftarm.rotateAngleX = this.leftarm.rotateAngleX * 0.5F - ((float) Math.PI / 10F) * (float) this.heldItemLeft;
+			this.leftarm.rotateAngleX = this.leftarm.rotateAngleX * 0.5F - ((float) Math.PI / 10F) * this.heldItemLeft;
 		}
 
 		if (this.heldItemRight != 0)
 		{
-			this.rightarm.rotateAngleX = this.rightarm.rotateAngleX * 0.5F - ((float) Math.PI / 10F) * (float) this.heldItemRight;
+			this.rightarm.rotateAngleX = this.rightarm.rotateAngleX * 0.5F - ((float) Math.PI / 10F) * this.heldItemRight;
 		}
 
 		this.rightarm.rotateAngleY = 0.0F;

@@ -2,7 +2,6 @@ package xyz.pixelatedw.MineMineNoMi3.items.weapons;
 
 import com.google.common.collect.Multimap;
 
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.item.Item;
@@ -64,18 +63,12 @@ public class ClimaTact extends Item
 			itemStack.getTagCompound().setString("thirdSlot", ball);	
 	}
 	
-	public void setDamage(double damage)
+	public ClimaTact setDamage(double damage)
 	{
 		this.damage = damage;
+		return this;
 	}
-	
-	@Override
-	public boolean hitEntity(ItemStack itemStack, EntityLivingBase target, EntityLivingBase attacker)
-	{
-		this.setDamage(1);
-		return true;
-	}
-	
+
 	@Override
 	public Multimap getAttributeModifiers(ItemStack stack)
 	{
