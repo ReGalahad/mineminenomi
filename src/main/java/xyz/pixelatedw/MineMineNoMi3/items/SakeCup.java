@@ -29,7 +29,7 @@ public class SakeCup extends ItemFood
 	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
 	{
 		if(itemStack.getTagCompound() != null && itemStack.getTagCompound().getBoolean("IsFilled"))
-			player.setItemInUse(itemStack, itemUseDuration);
+			player.setItemInUse(itemStack, 32);
 		return itemStack;
 	}
 
@@ -43,7 +43,7 @@ public class SakeCup extends ItemFood
 			WyHelper.sendMsgToPlayer(player, "Stuff happens now");
 
 			if (!player.capabilities.isCreativeMode)
-				WyTelemetry.addMiscStat("sakeDrank", "Sake Cups Drank", 1);
+				WyTelemetry.addMiscStat("sakeCupsDrank", "Sake Cups Drank", 1);
 			
 			itemStack.getTagCompound().setBoolean("IsFilled", false);			
 		}

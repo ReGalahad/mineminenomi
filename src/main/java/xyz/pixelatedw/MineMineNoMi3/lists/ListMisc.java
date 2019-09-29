@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.DimensionManager;
 import xyz.pixelatedw.MineMineNoMi3.ID;
@@ -61,6 +62,7 @@ import xyz.pixelatedw.MineMineNoMi3.items.AkumaNoMiBox;
 import xyz.pixelatedw.MineMineNoMi3.items.BellyPouch;
 import xyz.pixelatedw.MineMineNoMi3.items.CharacterCreator;
 import xyz.pixelatedw.MineMineNoMi3.items.Cola;
+import xyz.pixelatedw.MineMineNoMi3.items.ItemSakeBottle;
 import xyz.pixelatedw.MineMineNoMi3.items.SakeCup;
 import xyz.pixelatedw.MineMineNoMi3.items.SeaKingMeat;
 import xyz.pixelatedw.MineMineNoMi3.items.UltraCola;
@@ -174,7 +176,7 @@ public class ListMisc
 	public static Block DialBreathBlock = new BlockBreathDial();
 	
 	public static Block Cannon = new BlockCannon();
-	public static Block SakeBottle = new BlockSakeFeast();
+	public static BlockSakeFeast SakeBottle = new BlockSakeFeast();
 	
 	public static Item CharacterCreator = new CharacterCreator();
 	public static Item Kairoseki = new Item();
@@ -394,7 +396,7 @@ public class ListMisc
 		addBLOCK(AbilityProtectionAreaBlock, "Ability Protection Area Block", Float.MAX_VALUE, null, null);
 		addBLOCK(AbilityProtectionCenterBlock, "Ability Protection Center Block", Float.MAX_VALUE, TileEntityAbilityProtection.class, null);
 		addBLOCK(Cannon, "Cannon", 1.0F, TileEntityCannon.class, ListCreativeTabs.tabMisc);
-		addBLOCK(SakeBottle, "Sake Bottle", 0.2F, TileEntitySakeFeast.class, ListCreativeTabs.tabMisc);
+		addBLOCK(SakeBottle, ItemSakeBottle.class, "Sake Bottle", 0.2F, TileEntitySakeFeast.class, ListCreativeTabs.tabMisc);
 		
 		addBLOCK(DialEisenBlock, "Eisen Dial Block", .3F, TileEntityEisenDial.class, null);
 		addBLOCK(DialFireBlock, "Flame Dial Block", .3F, TileEntityFlameDial.class, null);
@@ -485,7 +487,12 @@ public class ListMisc
 
 	private static void addBLOCK(Block block, String localizedName, float hard, Class<? extends TileEntity> tile, CreativeTabs tab)
 	{
-		WyRegistry.registerBlock(block, localizedName, hard, tab, tile);
+		addBLOCK(block, null, localizedName, hard, tile, tab);
+	}
+	
+	private static void addBLOCK(Block block, Class<? extends ItemBlock> itemBlock, String localizedName, float hard, Class<? extends TileEntity> tile, CreativeTabs tab)
+	{
+		WyRegistry.registerBlock(block, itemBlock, localizedName, hard, tab, tile);
 		Values.miscBlocks.add(block);
 	}
 }
