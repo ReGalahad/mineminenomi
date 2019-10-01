@@ -62,7 +62,7 @@ public class MainWorldGen implements IWorldGenerator
 			this.addStructureSpawn(WySchematicHelper.load("marineLargeShip"), world, random, i, j, 1, 1, 1.4 * MainConfig.modifierShipsSpawn);
 		}
 		
-		this.addStructureSpawn(WySchematicHelper.load("dojo"), world, random, i, j, 1, 1, 25);
+		this.addStructureSpawn(WySchematicHelper.load("dojo"), world, random, i, j, 1, 1, 15);
 		
 		if(MainConfig.enableCamps)
 		{
