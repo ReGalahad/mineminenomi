@@ -22,7 +22,6 @@ public class StructureDojo extends Structure
 		boolean flagSpecialCheck = !MainWorldGen.checkCorners(sch, world, posX, posY, posZ);
 		boolean flagMaxSpawned = worldData.getTotalDojosSpawned() > MainConfig.maxDojoSpawn || posY < 50 || world.getBlockLightValue(posX, posY, posZ) < 10;
 
-		System.out.println(worldData.getTotalDojosSpawned() + " " + MainConfig.maxDojoSpawn + " " + (worldData.getTotalDojosSpawned() > MainConfig.maxDojoSpawn));
 		if(flagBiome || flagSpecialCheck || flagMaxSpawned)
 			return false;
 		
