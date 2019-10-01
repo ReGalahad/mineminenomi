@@ -16,7 +16,7 @@ public class Cola extends ItemFood
 	public Cola()
 	{
 		super(0, false);
-		this.maxStackSize = 16;  
+		this.maxStackSize = 16;
 	} 
 	
 	@Override

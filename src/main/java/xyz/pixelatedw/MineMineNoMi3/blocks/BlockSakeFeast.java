@@ -1,7 +1,9 @@
 package xyz.pixelatedw.MineMineNoMi3.blocks;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -52,6 +54,13 @@ public class BlockSakeFeast extends BlockContainer
 		return false;
 	}
 
+    @Override
+	public void breakBlock(World world, int posX, int posY, int posZ, Block block, int i1)
+    {
+		ItemStack stack = new ItemStack(ListMisc.SakeBottle);
+    	world.spawnEntityInWorld(new EntityItem(world, posX, posY + 1, posZ, stack));
+    }
+    
 	@Override
 	public boolean isOpaqueCube()
 	{

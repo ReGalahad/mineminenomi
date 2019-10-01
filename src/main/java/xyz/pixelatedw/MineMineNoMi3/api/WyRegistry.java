@@ -56,7 +56,7 @@ public class WyRegistry
 			GameRegistry.registerBlock(block, truename);
 		else
 		{
-			if(block == ListMisc.SakeBottle)
+			if(block == ListMisc.SakeBottleBlock)
 			{
 				BlockSakeFeast blk = (BlockSakeFeast) block;
 				GameRegistry.registerBlock(blk, itemBlock, truename);

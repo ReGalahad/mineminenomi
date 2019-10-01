@@ -176,7 +176,7 @@ public class ListMisc
 	public static Block DialBreathBlock = new BlockBreathDial();
 	
 	public static Block Cannon = new BlockCannon();
-	public static BlockSakeFeast SakeBottle = new BlockSakeFeast();
+	public static Block SakeBottleBlock = new BlockSakeFeast();
 	
 	public static Item CharacterCreator = new CharacterCreator();
 	public static Item Kairoseki = new Item();
@@ -210,6 +210,7 @@ public class ListMisc
 	public static Item Cola = new Cola();
 	public static Item UltraCola = new UltraCola();
 	public static Item SakeCup = new SakeCup();
+	public static Item SakeBottle = new ItemSakeBottle();
 
 	public static Item MarineHelm = new ItemCoreArmor("marine", ID.ARMORMAT_USELESS, 0);
 	public static Item MarineChestplate = new ItemCoreArmor("marine", ID.ARMORMAT_USELESS, 1);
@@ -295,6 +296,7 @@ public class ListMisc
 		addITEM(SeaKingMeat, "Sea King Meat", ListCreativeTabs.tabMisc);
 		addITEM(WateringCan, "Watering Can", ListCreativeTabs.tabMisc);
 		addITEM(SakeCup, "Sake Cup", ListCreativeTabs.tabMisc);
+		addITEM(SakeBottle, "Sake Bottle", ListCreativeTabs.tabMisc);
 		
 		addITEM(KujaArrow, "Kuja Arrow", ListCreativeTabs.tabWeapons);
 		addITEM(PopGreen, "Pop Green", ListCreativeTabs.tabWeapons);
@@ -396,7 +398,7 @@ public class ListMisc
 		addBLOCK(AbilityProtectionAreaBlock, "Ability Protection Area Block", Float.MAX_VALUE, null, null);
 		addBLOCK(AbilityProtectionCenterBlock, "Ability Protection Center Block", Float.MAX_VALUE, TileEntityAbilityProtection.class, null);
 		addBLOCK(Cannon, "Cannon", 1.0F, TileEntityCannon.class, ListCreativeTabs.tabMisc);
-		addBLOCK(SakeBottle, ItemSakeBottle.class, "Sake Bottle", 0.2F, TileEntitySakeFeast.class, ListCreativeTabs.tabMisc);
+		addBLOCK(SakeBottleBlock, "Sake Bottle Block", 0.2F, TileEntitySakeFeast.class, null);
 		
 		addBLOCK(DialEisenBlock, "Eisen Dial Block", .3F, TileEntityEisenDial.class, null);
 		addBLOCK(DialFireBlock, "Flame Dial Block", .3F, TileEntityFlameDial.class, null);

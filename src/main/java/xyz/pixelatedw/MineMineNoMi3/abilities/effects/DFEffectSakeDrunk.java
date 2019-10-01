@@ -5,6 +5,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSyncInfo;
@@ -17,7 +18,7 @@ public class DFEffectSakeDrunk extends DFEffect
 	public DFEffectSakeDrunk(EntityLivingBase entity, int timer)
 	{
 		super(entity, timer, ID.EXTRAEFFECT_SAKE_DRUNK, false);
-
+			
 		this.props.addExtraEffect(effect);
 		if(entity instanceof EntityPlayerMP)
 			WyNetworkHelper.sendTo(new PacketSync(this.props), (EntityPlayerMP) entity);
@@ -27,15 +28,14 @@ public class DFEffectSakeDrunk extends DFEffect
 		
 		for(String str : this.props.getExtraEffects())
 		{
-			if(str.equalsIgnoreCase(ID.EXTRAEFFECT_SAKE_DRUNK))
+			if(!WyHelper.isNullOrEmpty(str) && str.equalsIgnoreCase(ID.EXTRAEFFECT_SAKE_DRUNK))
 				this.stacks++;
-		}				
+		}		
 	}
 
 	@Override
 	public void onEffectStart(EntityLivingBase entity)
 	{
-		System.out.println(this.stacks);
 		if(this.stacks >= 3)
 			entity.addPotionEffect(new PotionEffect(Potion.confusion.id, this.timer, 1));
 	}
@@ -43,7 +43,12 @@ public class DFEffectSakeDrunk extends DFEffect
 	@Override
 	public void onEffectEnd(EntityLivingBase entity)
 	{
-		System.out.println("####");
+		System.out.println("#####");
+		for(String str : this.props.getExtraEffects())
+		{
+			if(!WyHelper.isNullOrEmpty(str) && str.equalsIgnoreCase(ID.EXTRAEFFECT_SAKE_DRUNK))
+				props.removeExtraEffects(ID.EXTRAEFFECT_SAKE_DRUNK);
+		}
 	}
 
 }

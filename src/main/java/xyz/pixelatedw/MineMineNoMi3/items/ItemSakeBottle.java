@@ -1,26 +1,25 @@
 package xyz.pixelatedw.MineMineNoMi3.items;
 
-import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumAction;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.abilities.effects.DFEffectSakeDrunk;
-import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
-public class ItemSakeBottle extends ItemBlock
+public class ItemSakeBottle extends ItemFood
 {
 
-	public ItemSakeBottle(Block block)
+	public ItemSakeBottle()
 	{
-		super(ListMisc.SakeBottle);
+		super(1, true);
+		this.maxStackSize = 16;
 	}
 
+	
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
 	{
@@ -30,62 +29,42 @@ public class ItemSakeBottle extends ItemBlock
 			itemStack.getTagCompound().setInteger("Amount", 5);
 		}
 		
-		if(itemStack.getTagCompound() != null && itemStack.getTagCompound().getInteger("Amount") > 0 && itemStack.getTagCompound().getInteger("Timer") <= 0 && !world.isRemote)
-		{
-			player.setItemInUse(itemStack, 16);
-			
-			WyHelper.sendMsgToPlayer(player, "Stuff happens now too");
+		player.setItemInUse(itemStack, itemUseDuration);
+		return itemStack;
+	}
+	
+	@Override
+	public ItemStack onEaten(ItemStack itemStack, World world, EntityPlayer player) 
+	{
+		if(!world.isRemote)
+		{						
+			ExtendedEntityData props = ExtendedEntityData.get(player);
 
+			int amount = itemStack.getTagCompound().getInteger("Amount");
+			
+			itemStack.getTagCompound().setInteger("Amount", amount - 1);
+			
+			new DFEffectSakeDrunk(player, 500);
+			
+			if(amount - 1 <= 0)
+				itemStack.stackSize--;
+			
 			if (!player.capabilities.isCreativeMode)
-				WyTelemetry.addMiscStat("sakeBottlesDrank", "Sake Bottles Drank", 1);
-			
-			itemStack.getTagCompound().setInteger("Amount", itemStack.getTagCompound().getInteger("Amount") - 1);
-			
-			new DFEffectSakeDrunk(player, 550);
-			
-			if(itemStack.getTagCompound().getInteger("Amount") <= 0)
-				itemStack.setStackDisplayName("Empty Sake Bottle");
-			
-			itemStack.getTagCompound().setInteger("Timer", 100);
+				WyTelemetry.addMiscStat("sakeBottlesDrank", "Sake Bottles Drank", 1);			
 		}
 		
 		return itemStack;
 	}
-
-    @Override
-	public void onUpdate(ItemStack itemStack, World world, Entity entity, int i, boolean b) 
-    {
-		if(itemStack.getTagCompound() == null)
-			return;
-		
-		int timer = itemStack.getTagCompound().getInteger("Timer");
-
-		if(timer > 0)
-		{
-			timer--;		
-			itemStack.getTagCompound().setInteger("Timer", timer);
-		}
-    }
-
-    @Override
-	public boolean onItemUse(ItemStack itemStack, EntityPlayer player, World world, int posX, int posY, int posZ, int side, float hitX, float hitY, float hitZ)
-    {
-		if(itemStack.getTagCompound() == null)
-		{
-			itemStack.setTagCompound(new NBTTagCompound());
-			itemStack.getTagCompound().setInteger("Amount", 5);
-		}
-		
-    	if(itemStack.getTagCompound().getInteger("Amount") > 0)
-    		return super.onItemUse(itemStack, player, world, posX, posY, posZ, side, hitX, hitY, hitZ);
-    	else
-    		return false;
-    }
 	
-    @Override
-	public EnumAction getItemUseAction(ItemStack p_77661_1_)
-    {
-        return EnumAction.eat;
-    }
+	@Override
+	public boolean onItemUse(ItemStack itemStack, EntityPlayer player, World world, int posX, int posY, int posZ, int blockFace, float f1, float f2, float f3)
+	{
+		if (player.isSneaking())
+		{
+			world.setBlock(posX, posY + 1, posZ, ListMisc.SakeBottleBlock, blockFace, 2);
+		}
+		
+		return false;
+	}
 
 }
