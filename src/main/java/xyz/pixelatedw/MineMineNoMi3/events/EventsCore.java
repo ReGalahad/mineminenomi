@@ -248,11 +248,11 @@ public class EventsCore
 	}
 	
 	@SubscribeEvent
-	public void onPlayerTick(TickEvent.WorldTickEvent event)
-	{		
+	public void onPlayerTick(TickEvent.PlayerTickEvent event)
+	{
 		if(event.phase == Phase.END && event.side == Side.SERVER)
 		{
-			if(event.world.getWorldTime() % 1200 == 0)
+			if(event.player.worldObj.getWorldTime() % 1200 == 0)
 			{
 				WyTelemetry.sendAllData();
 			}
