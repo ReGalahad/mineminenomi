@@ -61,9 +61,7 @@ public class SunaAbilities
 						int posY = (int) player.posY + j;
 						int posZ = (int) (player.posZ + k + (k < -WyMathHelper.randomWithRange(8, 12) || k > WyMathHelper.randomWithRange(8, 12) ? WyMathHelper.randomWithRange(-5, 5) : 0));
 						
-						if(!player.worldObj.isAirBlock(posX, posY, posZ) && player.worldObj.getBlock(posX, posY, posZ) != ListMisc.Ope
-								&& player.worldObj.getBlock(posX, posY, posZ) != ListMisc.OpeMid && player.worldObj.getBlock(posX, posY, posZ) != Blocks.bedrock)
-							player.worldObj.setBlock(posX, posY, posZ, ListMisc.SunaSand);				
+						DevilFruitsHelper.placeBlockIfAllowed(player.worldObj, posX, posY, posZ, ListMisc.SunaSand, 2, "core");			
 					}
 					WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_DESERTGIRASOLE2, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 				}
