@@ -28,6 +28,8 @@ public class StructureDojo extends Structure
 		WySchematicHelper.build(sch, world, posX, posY, posZ);
 		populate(posX, posY + 1, posZ, world);
 
+		worldData.countUpDojoSpawned();
+		
 		return true;
 	}
 	
@@ -36,6 +38,6 @@ public class StructureDojo extends Structure
 		TileEntityCustomSpawner spawnDojoMaster = new TileEntityCustomSpawner().setSpawnerMob(ID.PROJECT_ID + ".Dojo Sensei").setSpawnerLimit(1);
 		
 		world.setBlock(posX + 5, posY + 2, posZ + 11, ListMisc.CustomSpawner);
-		world.setTileEntity(posX + 5, posY + 2, posZ + 11, spawnDojoMaster);		
+		world.setTileEntity(posX + 5, posY + 2, posZ + 11, spawnDojoMaster);
 	}
 }
