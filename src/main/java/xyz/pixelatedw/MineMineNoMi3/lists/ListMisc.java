@@ -63,6 +63,7 @@ import xyz.pixelatedw.MineMineNoMi3.items.SeaKingMeat;
 import xyz.pixelatedw.MineMineNoMi3.items.UltraCola;
 import xyz.pixelatedw.MineMineNoMi3.items.WantedPoster;
 import xyz.pixelatedw.MineMineNoMi3.items.armors.ItemCoreArmor;
+import xyz.pixelatedw.MineMineNoMi3.items.armors.ItemMedicBag;
 import xyz.pixelatedw.MineMineNoMi3.items.armors.ItemTomoeDrums;
 import xyz.pixelatedw.MineMineNoMi3.items.devilfruitextras.Heart;
 import xyz.pixelatedw.MineMineNoMi3.items.devilfruitextras.Shadow;
@@ -215,6 +216,7 @@ public class ListMisc
 
 	public static Item ColaBackpack = new ItemCoreArmor("colabackpack", ID.ARMORMAT_COLABACKPACK, 1);
 	public static Item TomoeDrums = new ItemTomoeDrums();
+	public static Item MedicBag = new ItemMedicBag();
 
 	public static Item Flintlock = new Flintlock().setMaxStackSize(1).setFull3D();
 	public static Item Kabuto = new Kabuto("kabuto").setMaxStackSize(1).setFull3D();
@@ -305,7 +307,8 @@ public class ListMisc
 
 		addITEM(ColaBackpack, "Cola Backpack", ListCreativeTabs.tabWeapons);
 		addITEM(TomoeDrums, "Tomoe Drums", ListCreativeTabs.tabWeapons);
-
+		addITEM(MedicBag, "Medic Bag", ListCreativeTabs.tabWeapons);
+		
 		addITEM(GreenKujaBow, "Green Kuja Bow", ListCreativeTabs.tabWeapons);
 		addITEM(BlueKujaBow, "Blue Kuja Bow", ListCreativeTabs.tabWeapons);
 		addITEM(RedKujaBow, "Red Kuja Bow", ListCreativeTabs.tabWeapons);
