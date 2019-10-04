@@ -197,7 +197,7 @@ public class ID
 	SCENARIO_ROMANCEDAWN_CAPTAINMORGAN = "scenario_cptmorgan",
 	
 	//Auto assigned by the Deploy script
-	BUILD_MODE = "EARLY_ACCESS",
+	BUILD_MODE = "RELEASE",
 	NULL = "null";
 	
 	public static final int 
