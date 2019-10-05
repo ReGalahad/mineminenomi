@@ -5,7 +5,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -99,6 +101,9 @@ public class DevilFruitsHelper
 	
 	public static int getParticleSettingModifier(int defaultAmount)
 	{
+		if(FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER)
+			return 0;
+		
 		int modifier = Math.abs(Minecraft.getMinecraft().gameSettings.particleSetting - 2);
 		
 		switch(modifier)
