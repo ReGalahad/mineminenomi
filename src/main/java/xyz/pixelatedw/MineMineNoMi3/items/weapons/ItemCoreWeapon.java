@@ -205,7 +205,6 @@ public class ItemCoreWeapon extends Item
 			multiplier += stack.getTagCompound().getDouble("multiplier");
 			multiplier += stack.getTagCompound().getDouble("multiplier_black_metal");
 			multiplier += stack.getTagCompound().getDouble("multiplier_eisen");
-			System.out.println(multiplier);
 		}
 		else
 		{

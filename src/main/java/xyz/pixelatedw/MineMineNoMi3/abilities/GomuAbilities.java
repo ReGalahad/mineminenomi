@@ -247,13 +247,13 @@ public class GomuAbilities
 	{
 		public GomuGomuNoRocket() 
 		{
-			super(ListAttributes.GOMU_GOMU_NO_BAZOOKA); 
+			super(ListAttributes.GOMU_GOMU_NO_ROCKET); 
 		}
 		
 		@Override
 		public void use(EntityPlayer player)
 		{
-			this.projectile = new GomuProjectiles.GomuGomuNoRocket(player.worldObj, player, ListAttributes.GOMU_GOMU_NO_BAZOOKA);
+			this.projectile = new GomuProjectiles.GomuGomuNoRocket(player.worldObj, player, ListAttributes.GOMU_GOMU_NO_ROCKET);
 			super.use(player);
 		} 
 	}
