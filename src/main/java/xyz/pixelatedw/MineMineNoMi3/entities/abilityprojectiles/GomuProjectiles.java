@@ -29,7 +29,7 @@ public class GomuProjectiles
 	{
 		abilitiesClassesArray.add(new Object[]
 		{
-				GomuGomuNoRocket.class, ListAttributes.GOMU_GOMU_NO_BAZOOKA
+				GomuGomuNoRocket.class, ListAttributes.GOMU_GOMU_NO_ROCKET
 		});
 
 		abilitiesClassesArray.add(new Object[]
