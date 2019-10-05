@@ -1,18 +1,15 @@
 package xyz.pixelatedw.MineMineNoMi3.abilities;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.living.EnderTeleportEvent;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.GasuProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
@@ -38,6 +35,7 @@ public class GasuAbilities
 			super(ListAttributes.BLUE_SWORD); 
 		}
 		
+		@Override
 		public void startPassive(EntityPlayer player) 
 		{
 			if(player.inventory.getCurrentItem() == null)
@@ -49,6 +47,7 @@ public class GasuAbilities
 			}
 		}
 		
+		@Override
 		public void endPassive(EntityPlayer player) 
 		{
 			player.inventory.clearInventory(ListMisc.BlueSword, -1);
@@ -62,6 +61,7 @@ public class GasuAbilities
 			super(ListAttributes.KARAKUNI); 
 		}
 		
+		@Override
 		public void use(EntityPlayer player)
 		{	
 			if(!player.worldObj.isRemote)
@@ -70,7 +70,7 @@ public class GasuAbilities
 				{
 					for(EntityLivingBase e : WyHelper.getEntitiesNear(player, 25))
 					{
-						e.attackEntityFrom(DamageSource.causePlayerDamage(player), 20);
+						e.attackEntityFrom(DamageSource.causePlayerDamage(player), 20 * ExtendedEntityData.get(player).getDamageMultiplier());
 						e.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1000, 2));
 					}
 					
@@ -87,6 +87,7 @@ public class GasuAbilities
 			super(ListAttributes.GASTANET); 
 		}
 		
+		@Override
 		public void use(EntityPlayer player)
 		{	
 			super.use(player);
@@ -100,6 +101,7 @@ public class GasuAbilities
 			super(ListAttributes.GASTILLE); 
 		}
 		
+		@Override
 		public void use(EntityPlayer player)
 		{	
 			this.projectile = new GasuProjectiles.Gastille(player.worldObj, player, attr);
@@ -114,6 +116,7 @@ public class GasuAbilities
 			super(ListAttributes.GAS_ROBE); 
 		}
 		
+		@Override
 		public void use(EntityPlayer player)
 		{	
 			this.projectile = new GasuProjectiles.GasRobe(player.worldObj, player, attr);
