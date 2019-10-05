@@ -1,7 +1,6 @@
 package xyz.pixelatedw.MineMineNoMi3.items;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
@@ -16,6 +15,7 @@ public class SeaKingMeat extends Item
 		
 	}
 
+	@Override
 	public ItemStack onEaten(ItemStack itemStack, World world, EntityPlayer player)
 	{
 		if (!world.isRemote)
@@ -30,17 +30,14 @@ public class SeaKingMeat extends Item
 		return itemStack;
 	}
 
-    public int getMaxItemUseDuration(ItemStack p_77626_1_)
+    @Override
+	public int getMaxItemUseDuration(ItemStack p_77626_1_)
     {
         return 32;
     }
     
-    public EnumAction getItemUseAction(ItemStack p_77661_1_)
-    {
-        return EnumAction.drink;
-    }
-    
-    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
+    @Override
+	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
     {
         player.setItemInUse(itemStack, this.getMaxItemUseDuration(itemStack));
         return itemStack;

@@ -20,6 +20,7 @@ import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 
 public class AbilityExplosion
@@ -182,7 +183,7 @@ public class AbilityExplosion
                 else
 	                damageSource = DamageSource.magic;
                 	
-                entity.attackEntityFrom(this.setExplosionSource(this), damage);
+                entity.attackEntityFrom(this.setExplosionSource(this), damage * ExtendedEntityData.get((EntityLivingBase) this.exploder).getDamageMultiplier());
 			}
 		}
 
