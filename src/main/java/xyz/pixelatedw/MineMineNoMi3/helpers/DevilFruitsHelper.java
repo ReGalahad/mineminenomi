@@ -129,8 +129,7 @@ public class DevilFruitsHelper
 		if(props.getUsedFruit().equalsIgnoreCase("supasupa") && sparClaw != null && sparClaw.isPassiveActive())
 		{
 			return true;
-		}
-		
+		}		
 		
 		return false;
 	}

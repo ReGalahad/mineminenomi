@@ -8,21 +8,21 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import xyz.pixelatedw.MineMineNoMi3.ID;
-import xyz.pixelatedw.MineMineNoMi3.models.armors.ModelTomoeDrums;
+import xyz.pixelatedw.MineMineNoMi3.models.armors.ModelMedicBag;
 
 public class ItemMedicBag extends ItemArmor
 {
 
 	public ItemMedicBag()
 	{
-		super(ArmorMaterial.CLOTH, 1, 1);
+		super(ArmorMaterial.CHAIN, 1, 1);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemstack, int armorSlot)
 	{
-		ModelTomoeDrums model = new ModelTomoeDrums();
+		ModelMedicBag model = new ModelMedicBag();
 
 		return model;
 	}
