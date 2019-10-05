@@ -72,9 +72,6 @@ public class AkumaNoMi extends ItemFood
 
 		String eatenFruit = this.getUnlocalizedName().substring(5).replace("nomi", "").replace(":", "").replace(",", "").replace("model", "");
 
-		if(worldProps.isDevilFruitInWorld(eatenFruit))
-			return;
-		
 		boolean flag1 = !props.getUsedFruit().equalsIgnoreCase("n/a") && !props.hasYamiPower() && !eatenFruit.equalsIgnoreCase("yamiyami");
 		boolean flag2 = props.hasYamiPower() && !eatenFruit.equalsIgnoreCase(props.getUsedFruit()) && !props.getUsedFruit().equalsIgnoreCase("yamidummy");
 		boolean flag3 = !MainConfig.enableYamiSpecialPower && !props.getUsedFruit().equalsIgnoreCase("n/a") && (eatenFruit.equalsIgnoreCase("yamiyami") || !eatenFruit.equalsIgnoreCase(props.getUsedFruit()));
@@ -124,15 +121,17 @@ public class AkumaNoMi extends ItemFood
 			}
 		}
 
-		worldProps.addDevilFruitInWorld(eatenFruit);
+		if(MainConfig.enableOneFruitPerWorld && !worldProps.isDevilFruitInWorld(eatenFruit))
+			worldProps.addDevilFruitInWorld(eatenFruit);
 		
 		if(!props.getUsedFruit().equalsIgnoreCase("yomiyomi"))
 			for(Ability a : abilities)
 				if(!DevilFruitsHelper.verifyIfAbilityIsBanned(a) && !abilityProps.hasDevilFruitAbility(a))
 					abilityProps.addDevilFruitAbility(a);
 		
-		WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));
-		if(!world.isRemote && !player.capabilities.isCreativeMode)		
+		if(!world.isRemote)
+			WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));
+		if(!world.isRemote && !player.capabilities.isCreativeMode)
 			WyTelemetry.addDevilFruitStat(props.getUsedFruit(), (String) WyRegistry.getItemsMap().get(this), 1);
 		
 	} 
