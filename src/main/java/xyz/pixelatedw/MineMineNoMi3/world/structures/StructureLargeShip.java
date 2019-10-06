@@ -77,8 +77,8 @@ public class StructureLargeShip extends Structure
 		addChestLoot(world, combatChest, 80, ListMisc.BellyPouch, 2, 6);
 		addChestLoot(world, combatChest, 50, ListMisc.BellyPouch, 6, 10);
 		addChestLoot(world, combatChest, 50, ListMisc.KairosekiBullets, 3, 5);
-		addChestLoot(world, combatChest, 45, swordToSpawn, 0, 1);
-		addChestLoot(world, combatChest, 45, ListMisc.Flintlock, 0, 1);
+		addChestLoot(world, combatChest, 45, swordToSpawn, 1, 0);
+		addChestLoot(world, combatChest, 45, ListMisc.Flintlock, 1, 0);
 		addChestLoot(world, combatChest, 20, ListMisc.BellyPouch, 1, 0);
 		addChestLoot(world, combatChest, 10, ListMisc.Box1, 1, 0);
 
