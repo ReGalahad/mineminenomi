@@ -15,7 +15,7 @@ import xyz.pixelatedw.MineMineNoMi3.abilities.DokuAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.DoruAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.FishKarateAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.GasuAbilities;
-import xyz.pixelatedw.MineMineNoMi3.abilities.GiraffeAbilities;
+import xyz.pixelatedw.MineMineNoMi3.abilities.UshiGiraffeAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.GoeAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.GomuAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.GoroAbilities;
@@ -123,7 +123,7 @@ public class ListDevilFruits
 				NoroAbilities.abilitiesArray, YamiAbilities.abilitiesArray, GomuAbilities.abilitiesArray, UshiBisonAbilities.abilitiesArray, ToriPhoenixAbilities.abilitiesArray,
 				KiloAbilities.abilitiesArray, BakuAbilities.abilitiesArray, JuryoAbilities.abilitiesArray, OriAbilities.abilitiesArray, YomiAbilities.abilitiesArray, ZouAbilities.abilitiesArray,
 				SabiAbilities.abilitiesArray, SupaAbilities.abilitiesArray, MeroAbilities.abilitiesArray, ChiyuAbilities.abilitiesArray, HoruAbilities.abilitiesArray, MoguAbilities.abilitiesArray,
-				DoaAbilities.abilitiesArray, KachiAbilities.abilitiesArray, MiniAbilities.abilitiesArray, GiraffeAbilities.abilitiesArray,
+				DoaAbilities.abilitiesArray, KachiAbilities.abilitiesArray, MiniAbilities.abilitiesArray, UshiGiraffeAbilities.abilitiesArray,
 				
 				// Special Abilities lists
 				RokushikiAbilities.abilitiesArray, FishKarateAbilities.abilitiesArray, CyborgAbilities.abilitiesArray, 
@@ -151,7 +151,7 @@ public class ListDevilFruits
 		DoaDoaNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, DoaAbilities.abilitiesArray);
 		addITEM(DoaDoaNoMi, "Doa Doa no Mi");
 		//if(WyHelper.afterDate("01.04.2019"))
-		UshiUshiNoMiGiraffe = new AkumaNoMi(EnumFruitType.ZOAN, GiraffeAbilities.abilitiesArray);
+		UshiUshiNoMiGiraffe = new AkumaNoMi(EnumFruitType.ZOAN, UshiGiraffeAbilities.abilitiesArray);
 		addITEM(UshiUshiNoMiGiraffe, "Ushi Ushi no Mi, Model Giraffe");
 		MoguMoguNoMi = new AkumaNoMi(EnumFruitType.ZOAN, MoguAbilities.abilitiesArray);
 		addITEM(MoguMoguNoMi, "Mogu Mogu no Mi");
