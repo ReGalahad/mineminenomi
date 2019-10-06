@@ -345,12 +345,17 @@ public class DevilFruitsHelper
 	 * nogrief is used for abilities that should place blocks even if griefing is disabled, room or torikago for example
 	 */
 	
-	public static boolean placeBlockIfAllowed(World world, int posX, int posY, int posZ, Block toPlace, String... rules)
+	public static boolean placeBlockIfAllowed(World world, int posX, int posY, int posZ, Block toPlace, int flag, String... rules)
 	{
-		return placeBlockIfAllowed(world, posX, posY, posZ, toPlace, 3, rules);
+		return placeBlockIfAllowed(world, posX, posY, posZ, toPlace, 0, flag, rules);
 	}
 	
-	public static boolean placeBlockIfAllowed(World world, int posX, int posY, int posZ, Block toPlace, int flag, String... rules)
+	public static boolean placeBlockIfAllowed(World world, int posX, int posY, int posZ, Block toPlace, String... rules)
+	{
+		return placeBlockIfAllowed(world, posX, posY, posZ, toPlace, 0, 3, rules);
+	}
+	
+	public static boolean placeBlockIfAllowed(World world, int posX, int posY, int posZ, Block toPlace, int meta, int flag, String... rules)
 	{
 		Block b = world.getBlock(posX, posY, posZ);
 		List<Block> bannedBlocks = new ArrayList<Block>();
@@ -415,7 +420,7 @@ public class DevilFruitsHelper
 			{
 				if (b == blk)
 				{
-					world.setBlock(posX, posY, posZ, toPlace, 0, flag);
+					world.setBlock(posX, posY, posZ, toPlace, meta, flag);
 					return true;
 				}
 			}

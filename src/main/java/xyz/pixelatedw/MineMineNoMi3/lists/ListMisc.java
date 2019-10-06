@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.DimensionManager;
 import xyz.pixelatedw.MineMineNoMi3.ID;
@@ -25,6 +26,7 @@ import xyz.pixelatedw.MineMineNoMi3.blocks.BlockKage;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockOpe;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockOpeMid;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockPoison;
+import xyz.pixelatedw.MineMineNoMi3.blocks.BlockSkyblock;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockStringMid;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockStringWall;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockSunaSand;
@@ -57,6 +59,7 @@ import xyz.pixelatedw.MineMineNoMi3.items.AkumaNoMiBox;
 import xyz.pixelatedw.MineMineNoMi3.items.BellyPouch;
 import xyz.pixelatedw.MineMineNoMi3.items.CharacterCreator;
 import xyz.pixelatedw.MineMineNoMi3.items.Cola;
+import xyz.pixelatedw.MineMineNoMi3.items.ItemSkyblock;
 import xyz.pixelatedw.MineMineNoMi3.items.SeaKingMeat;
 import xyz.pixelatedw.MineMineNoMi3.items.UltraCola;
 import xyz.pixelatedw.MineMineNoMi3.items.WantedPoster;
@@ -102,24 +105,7 @@ public class ListMisc
 	}.setHardness(10);
 	public static Block EnchantmentTable = new BlockEnchantmentTable2();
 	public static Block DenDenMushi = new BlockDenDenMushi();
-	public static Block SkyBlock = new NewBlock(Material.ground)
-	{
-		@Override
-		public int quantityDropped(Random random)
-		{
-			return 1 + random.nextInt(1);
-		}
-
-		@Override
-		public Item getItemDropped(int id, Random rand, int fortune)
-		{
-			Item[] dials = new Item[] { ListMisc.DialAxe, ListMisc.DialBreath, ListMisc.DialEisen, ListMisc.DialFire, ListMisc.DialFlash, ListMisc.DialImpact, ListMisc.DialMilky };
-			if(rand.nextDouble() < 0.25)
-				return dials[rand.nextInt(dials.length)];
-			else
-				return Item.getItemFromBlock(this);
-		}		
-	} .setLightOpacity(0);
+	public static Block SkyBlock = new BlockSkyblock();
 	public static Block Barrier = new BlockBarrier();
 	public static Block Poison = new BlockPoison();
 	public static Block DemonPoison = new BlockDemonPoison();
@@ -363,7 +349,7 @@ public class ListMisc
 		addBLOCK(KairosekiBlock, "Kairoseki Block", 3.5F, null, ListCreativeTabs.tabMisc);
 		addBLOCK(EnchantmentTable, "Kairoseki Table", 3.5F, null, ListCreativeTabs.tabMisc);
 		addBLOCK(DenDenMushi, "Den Den Mushi", 0.5F, TileEntityDenDenMushi.class, ListCreativeTabs.tabMisc);
-		addBLOCK(SkyBlock, "Sky Block", 0.6F, null, ListCreativeTabs.tabMisc);
+		addBLOCK(SkyBlock, ItemSkyblock.class, "Sky Block", 0.6F, null, ListCreativeTabs.tabMisc);
 		addBLOCK(Barrier, "Crash Barrier", Float.POSITIVE_INFINITY, null, null);
 		addBLOCK(Poison, "Poison", 1.5F, null, null);
 		addBLOCK(DemonPoison, "Demon Poison", 1.5F, null, null);
@@ -472,6 +458,12 @@ public class ListMisc
 	private static void addBLOCK(Block block, String localizedName, float hard, Class<? extends TileEntity> tile, CreativeTabs tab)
 	{
 		WyRegistry.registerBlock(block, localizedName, hard, tab, tile);
+		Values.miscBlocks.add(block);
+	}
+	
+	private static void addBLOCK(Block block, Class<? extends ItemBlock> itemBlock, String localizedName, float hard, Class<? extends TileEntity> tile, CreativeTabs tab)
+	{
+		WyRegistry.registerBlock(block, itemBlock, localizedName, hard, tab, tile);
 		Values.miscBlocks.add(block);
 	}
 }
