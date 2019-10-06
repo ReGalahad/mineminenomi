@@ -80,7 +80,6 @@ public class ItemCoreWeapon extends Item
     @Override
 	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
     {
-    	System.out.println("@@@@");
         player.setItemInUse(itemStack, this.getMaxItemUseDuration(itemStack));
         return itemStack;
     }
