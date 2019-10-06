@@ -14,6 +14,7 @@ import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.SwordsmanProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.helpers.ItemsHelper;
@@ -56,9 +57,11 @@ public class SwordsmanAbilities
 			
 			if(!this.isOnCooldown)
 			{
+		    	ExtendedEntityData props = ExtendedEntityData.get(player);
+
 				for(EntityLivingBase e : WyHelper.getEntitiesNear(player, 2.5))
 				{
-					e.attackEntityFrom(DamageSource.causePlayerDamage(player), 12);					
+					e.attackEntityFrom(DamageSource.causePlayerDamage(player), 12 * props.getDamageMultiplier());					
 					e.addPotionEffect(new PotionEffect(Potion.weakness.id, 10 * 20, 1, true));
 				}
 					
@@ -136,10 +139,12 @@ public class SwordsmanAbilities
 	    @Override
 		public void duringCooldown(EntityPlayer player, int currentCooldown)
 	    {
+	    	ExtendedEntityData props = ExtendedEntityData.get(player);
+
 			if(currentCooldown > 4 * 20)
 			{
 				for(EntityLivingBase e : WyHelper.getEntitiesNear(player, 1.6))
-					e.attackEntityFrom(DamageSource.causePlayerDamage(player), 8);
+					e.attackEntityFrom(DamageSource.causePlayerDamage(player), 8 * props.getDamageMultiplier());
 			}
 	    }
 	}
