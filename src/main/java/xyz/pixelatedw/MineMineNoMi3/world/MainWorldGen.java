@@ -76,13 +76,13 @@ public class MainWorldGen implements IWorldGenerator
 			this.addStructureSpawn(WySchematicHelper.load("marineLargeBase"), world, random, i, j, 1, 1, 1);
 		}
 		
-		this.addDialSpawn(ListMisc.DialEisenBlock, world, random, i, j, 1, 1, 100);
-		this.addDialSpawn(ListMisc.DialFireBlock, world, random, i, j, 1, 1, 70);
-		this.addDialSpawn(ListMisc.DialAxeBlock, world, random, i, j, 1, 1, 70);
-		this.addDialSpawn(ListMisc.DialMilkyBlock, world, random, i, j, 1, 1, 20);
-		this.addDialSpawn(ListMisc.DialRejectBlock, world, random, i, j, 1, 1, 10);
-		this.addDialSpawn(ListMisc.DialBreathBlock, world, random, i, j, 1, 1, 50);
-		this.addDialSpawn(ListMisc.DialFlashBlock, world, random, i, j, 1, 1, 45);
+		this.addDialSpawn(ListMisc.DialEisenBlock, "Eisen Dial", world, random, i, j, 1, 1, 100);
+		this.addDialSpawn(ListMisc.DialFireBlock, "Fire Dial", world, random, i, j, 1, 1, 70);
+		this.addDialSpawn(ListMisc.DialAxeBlock, "Axe Dial", world, random, i, j, 1, 1, 70);
+		this.addDialSpawn(ListMisc.DialMilkyBlock, "Milky Dial", world, random, i, j, 1, 1, 20);
+		this.addDialSpawn(ListMisc.DialRejectBlock, "Reject Dial", world, random, i, j, 1, 1, 10);
+		this.addDialSpawn(ListMisc.DialBreathBlock, "Breath Dial", world, random, i, j, 1, 1, 50);
+		this.addDialSpawn(ListMisc.DialFlashBlock, "Flash Dial", world, random, i, j, 1, 1, 45);
 		
 	}
 	 
@@ -112,7 +112,7 @@ public class MainWorldGen implements IWorldGenerator
 	}
 	
 	
-	public boolean addDialSpawn(Block blockToSpawn, World world, Random random, int blockXPos, int blockZPos, int maxX, int maxZ, double rarity)
+	public boolean addDialSpawn(Block blockToSpawn, String name, World world, Random random, int blockXPos, int blockZPos, int maxX, int maxZ, double rarity)
 	{
 		if(world.rand.nextInt(100) + world.rand.nextDouble() <= rarity)
 		{		
@@ -128,7 +128,7 @@ public class MainWorldGen implements IWorldGenerator
 				if(WyDebug.isDebug())
 					System.out.println("" + blockToSpawn.getLocalizedName() + " spawned at /tp @p " + posX + " " + (posY + 1) + " " + posZ);
 				
-				WyTelemetry.addStructureStat(WyHelper.getFancyName(blockToSpawn.getLocalizedName()), blockToSpawn.getLocalizedName(), 1);
+				WyTelemetry.addStructureStat(WyHelper.getFancyName(name), name, 1);
 		    	
 		    	return true;
 			}

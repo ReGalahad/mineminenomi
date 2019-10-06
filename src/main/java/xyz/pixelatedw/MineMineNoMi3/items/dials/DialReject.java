@@ -45,9 +45,6 @@ public class DialReject extends Item
     {
     	if(!world.isRemote && player.isSneaking())
     	{
-	    	if(!player.capabilities.isCreativeMode)
-	    		WyTelemetry.addMiscStat("rejectDialsPlaced", "Reject Dials Placed", 1);
-	    	
 	    	world.setBlock(i1, i2 + 1, i3, ListMisc.DialRejectBlock);
 	    	itemStack.stackSize--;
     	}
