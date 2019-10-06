@@ -56,8 +56,10 @@ public class Heart extends Item
 		if(itemStack.getTagCompound() != null)
 		{
 			EntityLivingBase target = ((EntityLivingBase) world.getEntityByID(itemStack.getTagCompound().getInteger("owner")));
+
+			boolean flagIsDead = entityItem.canRenderOnFire();
 			
-			if(target != null)
+			if(target != null && flagIsDead)
 				target.attackEntityFrom(DamageSource.magic, Float.MAX_VALUE);
 		}
     	
