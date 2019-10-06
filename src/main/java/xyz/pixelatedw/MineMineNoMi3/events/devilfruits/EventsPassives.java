@@ -13,6 +13,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
@@ -449,5 +450,29 @@ public class EventsPassives
 				event.entityPlayer.heal(4);
 			}
 		}
+	}
+	
+	@SubscribeEvent
+	public void onDeath(LivingDeathEvent event)
+	{
+		if(event.entityLiving instanceof EntityPlayer)
+		{
+			EntityPlayer player = (EntityPlayer) event.entityLiving;
+			ExtendedEntityData props = ExtendedEntityData.get(player);
+			
+			if(props.getUsedFruit().equalsIgnoreCase("yamiyami") || props.hasYamiPower())
+			{
+				for(int x = -128; x < 128; x++)
+				for(int y = -128; y < 128; y++)
+				for(int z = -128; z < 128; z++)
+				{
+					if( player.worldObj.getBlock((int) player.posX + x, (int) player.posY + y, (int) player.posZ + z) == ListMisc.Darkness)
+					{
+						player.worldObj.setBlockToAir((int) player.posX + x, (int) player.posY + y, (int) player.posZ + z);
+					}
+				}
+			}
+		}
+				
 	}
 }

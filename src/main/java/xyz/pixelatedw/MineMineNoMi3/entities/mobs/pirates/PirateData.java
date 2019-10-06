@@ -42,11 +42,12 @@ public class PirateData extends EntityNewMob
 		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, BanditData.class, 0, true));
 	}
 
+	@Override
 	public void onEntityUpdate() 
 	{
 		if(this.getAttackTarget() == null)
 		{
-			this.targetTasks.removeTask(entityAINonCrewPlayers);
+			this.targetTasks.removeTask(this.entityAINonCrewPlayers);
 			for(EntityLivingBase target : WyHelper.getEntitiesNear(this, 20))
 			{	
 				if(target instanceof EntityPlayer)
@@ -58,7 +59,7 @@ public class PirateData extends EntityNewMob
 						break;
 									
 					this.setTarget(targetP);
-					this.targetTasks.addTask(1, entityAINonCrewPlayers);
+					this.targetTasks.addTask(1, this.entityAINonCrewPlayers);
 				}
 			}
 		}
@@ -67,12 +68,16 @@ public class PirateData extends EntityNewMob
 	}
 
 	
+	@Override
 	protected boolean isValidLightLevel() { return true; }
 
+	@Override
 	protected boolean canDespawn() { return true; }
 
+	@Override
 	public boolean isAIEnabled() { return true; }
 
+	@Override
 	public boolean getCanSpawnHere() { return true; }
 
 	public String getCrew() { return "null"; }
