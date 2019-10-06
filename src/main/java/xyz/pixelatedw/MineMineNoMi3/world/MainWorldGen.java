@@ -62,7 +62,7 @@ public class MainWorldGen implements IWorldGenerator
 			this.addStructureSpawn(WySchematicHelper.load("marineLargeShip"), world, random, i, j, 1, 1, 1.4 * MainConfig.modifierShipsSpawn);
 		}
 		
-		this.addStructureSpawn(WySchematicHelper.load("dojo"), world, random, i, j, 1, 1, 15);
+		this.addStructureSpawn(WySchematicHelper.load("dojo"), world, random, i, j, 1, 1, 5);
 		
 		if(MainConfig.enableCamps)
 		{
@@ -192,8 +192,13 @@ public class MainWorldGen implements IWorldGenerator
 
 	public static boolean checkCorners(Schematic sch, World world, int posX, int posY, int posZ)
 	{
+		return checkCorners(sch, world, posX, posY, posZ, 4);
+	}
+	
+	public static boolean checkCorners(Schematic sch, World world, int posX, int posY, int posZ, int tolerance)
+	{
 		boolean corner1 = false, corner2 = false, corner3 = false, corner4 = false;
-		for(int i = 1; i < 4; i++)
+		for(int i = 1; i < tolerance; i++)
 		{
 			if(!corner1)
 				corner1 = world.getBlock(posX, posY - i, posZ).isSideSolid(world, posX, posY - i, posZ, ForgeDirection.DOWN);
@@ -219,13 +224,13 @@ public class MainWorldGen implements IWorldGenerator
 		for(int i = 0; i < 3; i++)
 		{
 			if(!corner1)
-				corner1 = world.getBlock(posX, posY + i, posZ) == Blocks.air;
+				corner1 = world.getBlock(posX, posY + i, posZ) == Blocks.air && world.canBlockSeeTheSky(posX, posY + i, posZ);
 			if(!corner2)
-				corner2 = world.getBlock(posX + sch.getWidth(), posY + i, posZ) == Blocks.air;
+				corner2 = world.getBlock(posX + sch.getWidth(), posY + i, posZ) == Blocks.air && world.canBlockSeeTheSky(posX + sch.getWidth(), posY + i, posZ);
 			if(!corner3)
-				corner3 = world.getBlock(posX, posY + i, posZ + sch.getLength()) == Blocks.air;
+				corner3 = world.getBlock(posX, posY + i, posZ + sch.getLength()) == Blocks.air && world.canBlockSeeTheSky(posX, posY + i, posZ + sch.getLength());
 			if(!corner4)
-				corner4 = world.getBlock(posX + sch.getWidth(), posY + i, posZ + sch.getLength()) == Blocks.air;		
+				corner4 = world.getBlock(posX + sch.getWidth(), posY + i, posZ + sch.getLength()) == Blocks.air && world.canBlockSeeTheSky(posX + sch.getWidth(), posY + i, posZ + sch.getLength());		
 
 			if((corner1?1:0) + (corner2?1:0) + (corner3?1:0) + (corner4?1:0) >= 3)
 			{
