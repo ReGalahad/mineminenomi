@@ -4,7 +4,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
 public class DialFlash extends Item
@@ -21,9 +20,6 @@ public class DialFlash extends Item
     {
     	if(!world.isRemote && player.isSneaking())
     	{
-	    	if(!player.capabilities.isCreativeMode)
-	    		WyTelemetry.addMiscStat("flashDialsPlaced", "Flash Dials Placed", 1);
-    		
 	    	world.setBlock(i1, i2 + 1, i3, ListMisc.DialFlashBlock);
 	    	itemStack.stackSize--;
     	}
