@@ -29,7 +29,6 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDoppelman;
-import xyz.pixelatedw.MineMineNoMi3.events.customevents.YomiTriggerEvent;
 import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.helpers.ItemsHelper;
 import xyz.pixelatedw.MineMineNoMi3.items.armors.ItemCoreArmor;
@@ -351,24 +350,6 @@ public class EventsPassives
 	}
 
 	@SubscribeEvent
-	public void onYomiDeath(YomiTriggerEvent event)
-	{
-		if (event.oldPlayerData.getUsedFruit().equalsIgnoreCase("yomiyomi") && !event.oldPlayerData.getZoanPoint().equalsIgnoreCase("yomi"))
-		{
-			event.newPlayerData.setUsedFruit("yomiyomi");
-			event.newPlayerData.setZoanPoint("yomi");
-
-			EntityPlayer player = (EntityPlayer) event.entity;
-			EntityPlayer oldPlayer = (EntityPlayer) event.oldPlayerData.getEntity();
-			
-			player.setPosition(oldPlayer.posX, oldPlayer.posY, oldPlayer.posZ);
-			
-			WyNetworkHelper.sendTo(new PacketSync(event.newPlayerData), (EntityPlayerMP) player);
-			WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), event.newPlayerData));
-		}
-	}
-
-	@SubscribeEvent
 	public void onPlayerAction(PlayerInteractEvent event)
 	{
 		ExtendedEntityData propz = ExtendedEntityData.get(event.entityPlayer);
@@ -404,12 +385,35 @@ public class EventsPassives
 	{
 		if (event.entityLiving instanceof EntityPlayer)
 		{
-			ExtendedEntityData props = ExtendedEntityData.get((EntityPlayer) event.entity);
+			EntityPlayer player = (EntityPlayer) event.entity;
+			ExtendedEntityData props = ExtendedEntityData.get(player);
+			
 			if (props.isInAirWorld())
 			{
 				event.setCanceled(true);
 			}
+			
+			if(player.getHealth() - event.ammount <= 0)
+			{			
+				if (props.getUsedFruit().equalsIgnoreCase("yomiyomi") && !props.getZoanPoint().equalsIgnoreCase("yomi"))
+				{
+					props.setUsedFruit("yomiyomi");
+					props.setZoanPoint("yomi");
 
+					AbilityExplosion explosion = WyHelper.newExplosion(player, player.posX, player.posY, player.posZ, 2);
+					explosion.setDamageOwner(false);
+					explosion.setDamageEntities(false);
+					explosion.setDestroyBlocks(false);
+					explosion.setSmokeParticles(ID.PARTICLEFX_SOULPARADE);
+					explosion.doExplosion();
+					
+					player.setHealth(player.getMaxHealth());
+					
+					WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
+					WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));
+				}
+			}
+			
 			if (event.source.getSourceOfDamage() instanceof EntityLivingBase)
 			{
 				if (event.entityLiving instanceof EntityPlayer)

@@ -17,7 +17,6 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -30,7 +29,6 @@ import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
-import xyz.pixelatedw.MineMineNoMi3.events.customevents.YomiTriggerEvent;
 
 public class EventsCore
 {
@@ -56,10 +54,10 @@ public class EventsCore
 	public void onClonePlayer(PlayerEvent.Clone e) 
 	{
 		if(e.wasDeath) 
-		{
+		{		
 			ExtendedEntityData oldPlayerProps = ExtendedEntityData.get(e.original);	
 			ExtendedEntityData newPlayerProps = ExtendedEntityData.get(e.entityPlayer);
-			
+
 			//WyNetworkHelper.sendTo(new PacketNewAABB(0.6F, 1.8F), (EntityPlayerMP) e.entityPlayer);
 			
 			if(MainConfig.enableKeepIEEPAfterDeath.equals("full"))
@@ -151,10 +149,6 @@ public class EventsCore
 			QuestProperties.get(e.original).saveNBTData(compound);
 			QuestProperties questProps = QuestProperties.get(e.entityPlayer);
 			questProps.loadNBTData(compound);
-			
-			YomiTriggerEvent yomiEvent = new YomiTriggerEvent(e.entityPlayer, oldPlayerProps, newPlayerProps);
-			if (MinecraftForge.EVENT_BUS.post(yomiEvent))
-				return;
 		}
 	}
 	
