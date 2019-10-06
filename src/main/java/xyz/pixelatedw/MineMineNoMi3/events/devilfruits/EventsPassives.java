@@ -326,7 +326,7 @@ public class EventsPassives
 			if (props.hasBusoHakiActive())
 			{
 				double power = props.getDoriki() / 500;
-				event.ammount += power;
+				event.ammount += power * props.getDamageMultiplier();
 			}
 		}
 	}
