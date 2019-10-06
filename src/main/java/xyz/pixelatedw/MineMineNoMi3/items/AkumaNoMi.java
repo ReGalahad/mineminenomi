@@ -56,7 +56,7 @@ public class AkumaNoMi extends ItemFood
 	public boolean onEntityItemUpdate(EntityItem entityItem)
     {
     	ExtendedWorldData worldProps = ExtendedWorldData.get(entityItem.worldObj);
-    	
+
     	if( entityItem.isBurning())
     		worldProps.removeDevilFruitFromWorld(this);
     	
@@ -134,8 +134,8 @@ public class AkumaNoMi extends ItemFood
 		if(!world.isRemote && !player.capabilities.isCreativeMode)
 			WyTelemetry.addDevilFruitStat(props.getUsedFruit(), (String) WyRegistry.getItemsMap().get(this), 1);
 		
-	} 
-
+	}
+	
 	@Override
 	public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean par4)
 	{
