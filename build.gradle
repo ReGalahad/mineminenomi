@@ -26,6 +26,7 @@ sourceCompatibility = targetCompatibility = 1.8
 def getVersion()
 {
     def versionPropsFile = file('version.properties')
+	String modVersion = "060"
 
     if (versionPropsFile.canRead()) 
 	{
@@ -33,9 +34,14 @@ def getVersion()
 
         versionProps.load(new FileInputStream(versionPropsFile))
 
-        def code = versionProps['VERSION_CODE'].toInteger() + 1
+		def prop = versionProps['VERSION_CODE_' + modVersion]
 
-        versionProps['VERSION_CODE']=code.toString()
+		if(prop == null)
+			prop = 0
+
+        int code = prop.toInteger() + 1
+
+        versionProps['VERSION_CODE_' + modVersion] = code.toString()
         versionProps.store(versionPropsFile.newWriter(), null)
 		
 		return String.format("%02d", code)
