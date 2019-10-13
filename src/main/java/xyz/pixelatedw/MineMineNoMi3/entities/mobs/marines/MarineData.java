@@ -63,6 +63,19 @@ public class MarineData extends EntityNewMob
 				}
 			}
 		}
+		else
+		{
+			if(this.getAttackTarget() instanceof EntityPlayer)
+			{
+				EntityPlayer targetP = (EntityPlayer) this.getAttackTarget();
+				ExtendedEntityData props = ExtendedEntityData.get(targetP);
+
+				if(props.isMarine() || props.isBountyHunter())
+				{
+					this.setAttackTarget(null);
+				}
+			}
+		}
 		
 		super.onEntityUpdate();
 	}
