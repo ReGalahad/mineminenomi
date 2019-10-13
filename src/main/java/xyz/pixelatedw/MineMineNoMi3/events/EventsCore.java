@@ -29,6 +29,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedWorldData;
 
 public class EventsCore
 {
@@ -55,6 +56,8 @@ public class EventsCore
 	{
 		if(e.wasDeath) 
 		{		
+	    	ExtendedWorldData worldProps = ExtendedWorldData.get(e.original.worldObj);
+
 			ExtendedEntityData oldPlayerProps = ExtendedEntityData.get(e.original);	
 			ExtendedEntityData newPlayerProps = ExtendedEntityData.get(e.entityPlayer);
 
@@ -101,6 +104,8 @@ public class EventsCore
 				int bounty = MathHelper.ceiling_double_int(WyMathHelper.percentage(MainConfig.bountyKeepPercentage, oldProps.getBounty()));
 				int belly = MathHelper.ceiling_double_int(WyMathHelper.percentage(MainConfig.bellyKeepPercentage, oldProps.getBelly()));
 
+				worldProps.removeDevilFruitFromWorld(oldProps.getUsedFruit());
+				
 				ExtendedEntityData props = ExtendedEntityData.get(e.entityPlayer);
 				props.setFaction(faction);
 				props.setRace(race);
@@ -111,6 +116,7 @@ public class EventsCore
 				props.setDoriki(doriki);
 				props.setBounty(bounty);
 				props.setBelly(belly);
+				
 			}
 			else if(MainConfig.enableKeepIEEPAfterDeath.equals("custom"))
 			{
@@ -143,8 +149,11 @@ public class EventsCore
 							props.setUsedFruit(oldProps.getUsedFruit()); break;
 					}
 				}
+				
+				if(WyHelper.isNullOrEmpty(props.getUsedFruit()))
+					worldProps.removeDevilFruitFromWorld(oldProps.getUsedFruit());
 			}
-					
+			
 			NBTTagCompound compound = new NBTTagCompound();
 			QuestProperties.get(e.original).saveNBTData(compound);
 			QuestProperties questProps = QuestProperties.get(e.entityPlayer);
