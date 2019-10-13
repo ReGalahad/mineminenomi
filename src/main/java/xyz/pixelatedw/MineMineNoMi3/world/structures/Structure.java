@@ -33,7 +33,8 @@ public abstract class Structure
 		if (getRandomChance(world) <= rarity)
 		{
 			int chance = max <= 0 ? min : (int) WyMathHelper.randomWithRange(min, max);
-			te.setInventorySlotContents((int) WyMathHelper.randomWithRange(0, 26), new ItemStack(loot, chance, metadata));		
+			if(chance > 0)
+				te.setInventorySlotContents((int) WyMathHelper.randomWithRange(0, 26), new ItemStack(loot, chance, metadata));		
 		}
 	}
 	

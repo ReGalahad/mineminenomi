@@ -68,11 +68,11 @@ public class StructureSmallShip extends Structure
 
 		addChestLoot(world, combatChest, 100, ListMisc.Bullets, 5, 10);
 		addChestLoot(world, combatChest, 100, ListMisc.Bullets, 3, 8);	
-		addChestLoot(world, combatChest, 65, ListMisc.Flintlock, 1, 0);
+		addChestLoot(world, combatChest, 65, ListMisc.Flintlock, 0, 1);
 		addChestLoot(world, combatChest, 65, ListMisc.BellyPouch, 2, 5);	
 		addChestLoot(world, combatChest, 50, ListMisc.KairosekiBullets, 2, 5);
 		addChestLoot(world, combatChest, 50, Items.boat, 1, 0);
-		addChestLoot(world, combatChest, 45, swordToSpawn, 1, 0);
+		addChestLoot(world, combatChest, 45, swordToSpawn, 0, 1);
 		addChestLoot(world, combatChest, 35, ListMisc.BellyPouch, 3, 6);
 		addChestLoot(world, combatChest, 15, ListMisc.Box1, 1, 0);
 		addChestLoot(world, combatChest, 5, ListMisc.Box2, 1, 0);

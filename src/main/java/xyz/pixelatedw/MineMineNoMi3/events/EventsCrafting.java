@@ -82,6 +82,10 @@ public class EventsCrafting
 				event.materialCost = 5 * level;
 				event.output = new ItemStack(event.left.getItem());
 				EnchantmentHelper.setEnchantments(EnchantmentHelper.getEnchantments(event.left), event.output);
+			
+				if(event.left.getTagCompound() == null)
+					event.left.setTagCompound(new NBTTagCompound());
+				
 				event.output.setTagCompound((NBTTagCompound) event.left.getTagCompound().copy());
 				if(event.output.getTagCompound().getDouble("multiplier_black_metal") >= 0.3 * level)
 					return;
@@ -107,6 +111,10 @@ public class EventsCrafting
 				event.materialCost = 3 * level;
 				event.output = new ItemStack(event.left.getItem());
 				EnchantmentHelper.setEnchantments(EnchantmentHelper.getEnchantments(event.left), event.output);
+				
+				if(event.left.getTagCompound() == null)
+					event.left.setTagCompound(new NBTTagCompound());
+				
 				event.output.setTagCompound((NBTTagCompound) event.left.getTagCompound().copy());
 				if(event.output.getTagCompound().getDouble("multiplier_eisen") >= 0.05 * level)
 					return;

@@ -22,6 +22,9 @@ public class EntityBandit extends BanditData
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.23D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(2.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20.0D);
+		
+		this.setDoriki(10 + this.worldObj.rand.nextInt(3));
+		this.setBelly(5 + this.worldObj.rand.nextInt(10));
 	}
 	
     @Override
