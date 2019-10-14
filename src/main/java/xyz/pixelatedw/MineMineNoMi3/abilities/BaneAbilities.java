@@ -9,8 +9,8 @@ import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper.Direction;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
-import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.BaneProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
@@ -35,6 +35,7 @@ public class BaneAbilities
 			super(ListAttributes.SPRING_DEATH_KNOCK); 
 		}
 		
+		@Override
 		public void use(EntityPlayer player)
 		{
 			this.projectile = new BaneProjectiles.SpringDeathKnock(player.worldObj, player, attr);
@@ -49,16 +50,17 @@ public class BaneAbilities
 			super(ListAttributes.SPRING_SNIPE); 
 		}	
 		
+		@Override
 		public void endCharging(EntityPlayer player)
 		{	
-			double mX = (double)(-MathHelper.sin(player.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(player.rotationPitch / 180.0F * (float)Math.PI) * 0.4);
-			double mZ = (double)(MathHelper.cos(player.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(player.rotationPitch / 180.0F * (float)Math.PI) * 0.4);
-			double mY = (double)(-MathHelper.sin((player.rotationPitch + 0) / 180.0F * (float)Math.PI) * 0.4);		        
+			double mX = -MathHelper.sin(player.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(player.rotationPitch / 180.0F * (float)Math.PI) * 0.4;
+			double mZ = MathHelper.cos(player.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(player.rotationPitch / 180.0F * (float)Math.PI) * 0.4;
+			double mY = -MathHelper.sin((player.rotationPitch + 0) / 180.0F * (float)Math.PI) * 0.4;		        
 				
 			double f2 = MathHelper.sqrt_double(mX * mX + mY * mY + mZ * mZ);
-			mX /= (double)f2;
-			mY /= (double)f2;
-			mZ /= (double)f2;
+			mX /= f2;
+			mY /= f2;
+			mZ /= f2;
 			mX += player.worldObj.rand.nextGaussian() * 0.007499999832361937D * 1.0;
 			mY += player.worldObj.rand.nextGaussian() * 0.007499999832361937D * 1.0;
 			mZ += player.worldObj.rand.nextGaussian() * 0.007499999832361937D * 1.0;
@@ -71,11 +73,14 @@ public class BaneAbilities
 			super.endCharging(player);
 	    }
 		
-	    public void duringCooldown(EntityPlayer player, int currentCooldown)
+	    @Override
+		public void duringCooldown(EntityPlayer player, int currentCooldown)
 	    {
+	    	ExtendedEntityData props = ExtendedEntityData.get(player);
+
 			if((currentCooldown / 20) > (ListAttributes.SPRING_SNIPE.getAbilityCooldown() / 20) - 3)
 				for(EntityLivingBase e : WyHelper.getEntitiesNear(player, 1.6))
-					e.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) player), 8);
+					e.attackEntityFrom(DamageSource.causePlayerDamage(player), 8 * props.getDamageMultiplier());
 	    }
 	}
 	
@@ -86,14 +91,15 @@ public class BaneAbilities
 			super(ListAttributes.SPRING_HOPPER); 
 		}
 
-	    public void endCharging(EntityPlayer player)
+	    @Override
+		public void endCharging(EntityPlayer player)
 	    {
 			Direction dir = WyHelper.get8Directions(player);
 
 			if(player.onGround)
-				motion("+", 0, 1.2 + (double)1/2, 0, (EntityPlayerMP) player);
+				motion("+", 0, 1.2 + (double)1/2, 0, player);
 			else
-				motion("+", 0, 1.36 + (double)1/7, 0, (EntityPlayerMP) player);
+				motion("+", 0, 1.36 + (double)1/7, 0, player);
 	
 			if(dir == WyHelper.Direction.NORTH) 		motion("-", 0, 0, 1.4 + (double)1/2, player);
 			if(dir == WyHelper.Direction.NORTH_WEST) {	motion("-", 1.4 + (double)1/2, 0, 1.4 + (double)1/2, player);}

@@ -177,13 +177,17 @@ public class AbilityExplosion
                 float damage = ((int)((d11 * d11 + d11) / 2.0D * 8.0D * this.explosionSize + 1.0D));
 
                 DamageSource damageSource;
+                float damageMultiplier = 1;
                 
-                if(this.exploder instanceof EntityLivingBase)       
+                if(this.exploder instanceof EntityLivingBase)
+                {
 	                damageSource = DamageSource.causeMobDamage((EntityLivingBase) this.exploder);
+	                damageMultiplier = ExtendedEntityData.get((EntityLivingBase) this.exploder).getDamageMultiplier();
+                }
                 else
 	                damageSource = DamageSource.magic;
                 	
-                entity.attackEntityFrom(this.setExplosionSource(this), damage * ExtendedEntityData.get((EntityLivingBase) this.exploder).getDamageMultiplier());
+                entity.attackEntityFrom(this.setExplosionSource(this), damage * damageMultiplier);
 			}
 		}
 

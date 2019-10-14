@@ -51,9 +51,6 @@ public class DialFire extends Item
     {
     	if(!world.isRemote && player.isSneaking())
     	{
-	    	if(!player.capabilities.isCreativeMode)
-	    		WyTelemetry.addMiscStat("fireDialsPlaced", "Fire Dials Placed", 1);
-    		
 	    	world.setBlock(i1, i2 + 1, i3, ListMisc.DialFireBlock);
 	    	itemStack.stackSize--;
     	}

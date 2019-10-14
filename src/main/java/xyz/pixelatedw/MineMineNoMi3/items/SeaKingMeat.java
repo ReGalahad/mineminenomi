@@ -1,6 +1,7 @@
 package xyz.pixelatedw.MineMineNoMi3.items;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
@@ -30,6 +31,12 @@ public class SeaKingMeat extends Item
 		return itemStack;
 	}
 
+    @Override
+	public EnumAction getItemUseAction(ItemStack itemStack)
+    {
+        return EnumAction.eat;
+    }
+	
     @Override
 	public int getMaxItemUseDuration(ItemStack p_77626_1_)
     {
