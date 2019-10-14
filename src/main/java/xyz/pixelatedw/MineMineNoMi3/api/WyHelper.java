@@ -36,6 +36,7 @@ import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityExplosion;
+import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
 import xyz.pixelatedw.MineMineNoMi3.api.math.ISphere;
 import xyz.pixelatedw.MineMineNoMi3.api.math.Sphere;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
@@ -655,6 +656,9 @@ public class WyHelper
 	public static boolean hasPatreonAccess(EntityPlayer player)
 	{
 		int patreon = getPatreonLevel(player);
+		
+		if(isDevBuild() && WyDebug.isDebug())
+			return true;
 		
 		if(isDevBuild() && patreon >= 4)
 			return true;

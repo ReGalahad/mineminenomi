@@ -1,14 +1,7 @@
 package xyz.pixelatedw.MineMineNoMi3.abilities;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.Values;
@@ -18,9 +11,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityExplosion;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.GuraProjectiles;
-import xyz.pixelatedw.MineMineNoMi3.items.devilfruitextras.Heart;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
-import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 
 public class GuraAbilities 
@@ -43,10 +34,12 @@ public class GuraAbilities
 			super(ListAttributes.GEKISHIN); 
 		}
 		
+		@Override
 		public void hitEntity(EntityPlayer player, EntityLivingBase target) 
 		{			
+			ExtendedEntityData props = ExtendedEntityData.get(player);
 			super.hitEntity(player, target);
-			target.attackEntityFrom(DamageSource.causePlayerDamage(player), 100);
+			target.attackEntityFrom(DamageSource.causePlayerDamage(player), 100 * props.getDamageMultiplier());
 			AbilityExplosion explosion = WyHelper.newExplosion(player, target.posX, target.posY, target.posZ, 3);
 			explosion.setDamageOwner(false);
 			explosion.setSmokeParticles("");
@@ -62,6 +55,7 @@ public class GuraAbilities
 			super(ListAttributes.KAISHIN); 
 		}
 		
+		@Override
 		public void use(EntityPlayer player)
 		{			
 			this.projectile = new GuraProjectiles.Kaishin(player.worldObj, player, attr);
@@ -76,6 +70,7 @@ public class GuraAbilities
 			super(ListAttributes.KABUTOWARI); 
 		}
 		
+		@Override
 		public void use(EntityPlayer player)
 		{			
 			super.use(player);
@@ -89,6 +84,7 @@ public class GuraAbilities
 			super(ListAttributes.SHIMA_YURASHI); 
 		}
 		
+		@Override
 		public void use(EntityPlayer player)
 		{	
 			this.projectile = new GuraProjectiles.ShimaYurashi(player.worldObj, player, attr);

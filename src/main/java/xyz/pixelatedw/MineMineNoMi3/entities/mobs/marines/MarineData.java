@@ -11,7 +11,6 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
@@ -43,13 +42,14 @@ public class MarineData extends EntityNewMob
 		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, BanditData.class, 0, true));
 	}
   
+	@Override
 	public void onEntityUpdate() 
 	{
 		if(this.getAttackTarget() == null)
 		{
-			this.targetTasks.removeTask(entityAIAttackNonMarine);
+			this.targetTasks.removeTask(this.entityAIAttackNonMarine);
 			for(EntityLivingBase target : WyHelper.getEntitiesNear(this, 20))
-			{	
+			{
 				if(target instanceof EntityPlayer)
 				{
 					EntityPlayer targetP = (EntityPlayer) target;
@@ -59,7 +59,20 @@ public class MarineData extends EntityNewMob
 						break;
 									
 					this.setTarget(targetP);
-					this.targetTasks.addTask(1, entityAIAttackNonMarine);
+					this.targetTasks.addTask(1, this.entityAIAttackNonMarine);
+				}
+			}
+		}
+		else
+		{
+			if(this.getAttackTarget() instanceof EntityPlayer)
+			{
+				EntityPlayer targetP = (EntityPlayer) this.getAttackTarget();
+				ExtendedEntityData props = ExtendedEntityData.get(targetP);
+
+				if(props.isMarine() || props.isBountyHunter())
+				{
+					this.setAttackTarget(null);
 				}
 			}
 		}
@@ -67,15 +80,19 @@ public class MarineData extends EntityNewMob
 		super.onEntityUpdate();
 	}
 
+	@Override
 	protected boolean isValidLightLevel()
 	{return true;} 
     
+	@Override
 	protected boolean canDespawn()
 	{return true;}
     
+	@Override
 	public boolean isAIEnabled()
 	{return true;}
 	
+	@Override
 	public boolean getCanSpawnHere()
 	{return true;}
 		

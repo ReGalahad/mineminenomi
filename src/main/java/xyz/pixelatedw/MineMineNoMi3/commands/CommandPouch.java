@@ -28,8 +28,16 @@ public class CommandPouch extends CommandBase
 		int amount = Integer.parseInt(str[0]);
 		ExtendedEntityData props = ExtendedEntityData.get(player);
 
-		if(props.getBelly() - amount > 0)
+		if(amount <= 0)
+			return;
+		
+		if(props.getBelly() - amount >= 0)
 			props.alterBelly(-amount);
+		else
+		{
+			amount = props.getBelly();		
+			props.alterBelly(-amount);
+		}
 		
 		if (!player.capabilities.isCreativeMode)
 			WyTelemetry.addMiscStat("bellyEarnedFromPouches", "Belly Earned From Pouches", -amount);
