@@ -129,7 +129,7 @@ public class GUICC extends GuiScreen
 			{
 				Minecraft.getMinecraft().getTextureManager().bindTexture(ID.ICON_MEDIC);
 				this.drawTexturedModalRect(posX - 2, posY + 10, 0, 0, 256, 256);
-				this.drawCategory("Medic", posX + 340, posY + 315, 3);
+				this.drawCategory("Doctor", posX + 340, posY + 315, 3);
 			}
 			else if(this.selectedOpt == 3)
 			{

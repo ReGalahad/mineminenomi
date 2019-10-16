@@ -402,7 +402,7 @@ public class ListMisc
 		
 		WyRegistry.registerName("style.swordsman.name", "Swordsman");
 		WyRegistry.registerName("style.sniper.name", "Sniper");
-		WyRegistry.registerName("style.doctor.name", "Medic");
+		WyRegistry.registerName("style.doctor.name", "Doctor");
 		WyRegistry.registerName("style.art of weather.name", "Art of Weather");
 		
 		WyRegistry.registerName("quest.none.name", "None");
