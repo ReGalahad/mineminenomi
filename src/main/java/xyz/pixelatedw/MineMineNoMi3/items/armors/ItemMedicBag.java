@@ -16,6 +16,7 @@ public class ItemMedicBag extends ItemArmor
 	public ItemMedicBag()
 	{
 		super(ArmorMaterial.CHAIN, 1, 1);
+		this.setMaxDamage(1000);
 	}
 
 	@Override
