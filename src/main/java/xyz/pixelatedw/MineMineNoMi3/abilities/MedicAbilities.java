@@ -33,6 +33,9 @@ public class MedicAbilities
 		@Override
 		public void use(EntityPlayer player)
 		{
+			if(this.isOnCooldown())
+				return;
+			
 			if(player.getCurrentArmor(2) == null || player.getCurrentArmor(2).getItem() != ListMisc.MedicBag)
 			{
 				WyHelper.sendMsgToPlayer(player, "You need a medic bag equipped to use this ability !");
@@ -64,7 +67,7 @@ public class MedicAbilities
 				}
 			}
 			
-			WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_CHIYUPOPO, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
+			WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_MEDIC_BAG_EXPLOSION, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 
 			int damage = player.getCurrentArmor(2).getItemDamage() + 500 <= player.getCurrentArmor(2).getMaxDamage() ? 500 : player.getCurrentArmor(2).getMaxDamage() - player.getCurrentArmor(2).getItemDamage();
 			
@@ -102,13 +105,12 @@ public class MedicAbilities
 			explosion.setDamageOwner(false);
 			explosion.setDestroyBlocks(false);
 			explosion.setDamageEntities(false);
-			explosion.setSmokeParticles(ID.PARTICLEFX_HEALINGTOUCH);
+			explosion.setSmokeParticles(ID.PARTICLEFX_FIRST_AID);
 			explosion.doExplosion();
 			
 			int damage = player.getCurrentArmor(2).getItemDamage() + 10 <= player.getCurrentArmor(2).getMaxDamage() ? 10 : player.getCurrentArmor(2).getMaxDamage() - player.getCurrentArmor(2).getItemDamage();
-			
 			player.getCurrentArmor(2).damageItem(damage, player);
-			if(player.getCurrentArmor(2).getItemDamage() <= 0)
+			if(player.getCurrentArmor(2).getItemDamage() >= player.getCurrentArmor(2).getMaxDamage())
 			{
 				WyNetworkHelper.sendTo(new PacketBrokenItemParticles(player.getCurrentArmor(2)), (EntityPlayerMP) player);
 				WyHelper.removeStackFromArmorSlots(player, player.getCurrentArmor(2));
