@@ -28,6 +28,8 @@ import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.ito.ParticleEffec
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.kachi.ParticleEffectEvaporate;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.kilo.ParticleEffectHeavyPunch;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.kilo.ParticleEffectKiloPress;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.medic.ParticleEffectFirstAid;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.medic.ParticleEffectMedicBagExplosion;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.mera.ParticleEffectDaiEnkai;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.mera.ParticleEffectDaiEnkai2;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.mero.ParticleEffectPerfumeFemur;
@@ -99,6 +101,10 @@ public class ParticleManager
 		// Mero
 		map.put(ID.PARTICLEFX_SLAVEARROW, new ParticleEffectSlaveArrow());	
 		map.put(ID.PARTICLEFX_PERFUMEFEMUR, new ParticleEffectPerfumeFemur());
+		
+		// Medic
+		map.put(ID.PARTICLEFX_FIRST_AID, new ParticleEffectFirstAid());	
+		map.put(ID.PARTICLEFX_MEDIC_BAG_EXPLOSION, new ParticleEffectMedicBagExplosion());	
 		
 		// Supa
 		map.put(ID.PARTICLEFX_ATOMICSPURT, new ParticleEffectAtomicSpurt());
