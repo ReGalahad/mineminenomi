@@ -24,6 +24,7 @@ import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.abilities.CyborgAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.FishKarateAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.HakiAbilities;
+import xyz.pixelatedw.MineMineNoMi3.abilities.MedicAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.RokushikiAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.SniperAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.SwordsmanAbilities;
@@ -265,7 +266,10 @@ public class DevilFruitsHelper
 		ExtendedEntityData props = ExtendedEntityData.get(player);
 		QuestProperties questProps = QuestProperties.get(player);
 		AbilityProperties abilityProps = AbilityProperties.get(player);
-				
+		
+		verifyAndGiveAbility(MedicAbilities.FIRST_AID, abilityProps);
+		verifyAndGiveAbility(MedicAbilities.MEDIC_BAG_EXPLOSION, abilityProps);
+
 		if (props.isSwordsman())
 		{
 			verifyAndGiveAbility(SwordsmanAbilities.SHI_SHISHI_SONSON, abilityProps);

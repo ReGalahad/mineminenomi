@@ -588,6 +588,19 @@ public class WyHelper
 		return blocks;
 	}
 	
+	public static void removeStackFromArmorSlots(EntityPlayer player, ItemStack stack)
+	{
+		int x = player.inventory.mainInventory.length;
+		for (int i = x; i < x + player.inventory.armorInventory.length; i++)
+		{
+			if (stack == player.inventory.getStackInSlot(i))
+			{
+				player.inventory.setInventorySlotContents(i, null);
+				break;
+			}
+		}
+	}
+	
 	public static void removeStackFromInventory(EntityPlayer player, ItemStack stack)
 	{
 		for (int i = 0; i < player.inventory.mainInventory.length; i++)
