@@ -59,8 +59,8 @@ public class GUICC extends GuiScreen
 		this.drawCategory("Fighting", posX - 5, posY + 227, 1.5);
 		this.drawCategory("Style", posX + 25, posY + 242, 1.5);
 		this.drawCategory("Create", posX + 225, posY + 356, 2.1);
-
-		if(this.page == 0) 
+		
+		if(this.page == 0)
 		{
 			if(this.selectedOpt == 0)
 			{
@@ -108,7 +108,7 @@ public class GUICC extends GuiScreen
 				Minecraft.getMinecraft().getTextureManager().bindTexture(ID.ICON_CYBORG);
 				this.drawTexturedModalRect(posX - 2, posY + 10, 0, 0, 256, 256);
 				this.drawCategory("Cyborg", posX + 328, posY + 315, 3);
-			}	
+			}
 		}
 		if(this.page == 2) 
 		{
