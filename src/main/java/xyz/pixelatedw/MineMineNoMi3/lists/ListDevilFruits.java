@@ -27,7 +27,7 @@ import xyz.pixelatedw.MineMineNoMi3.abilities.KachiAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.KageAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.KiloAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.MaguAbilities;
-import xyz.pixelatedw.MineMineNoMi3.abilities.MedicAbilities;
+import xyz.pixelatedw.MineMineNoMi3.abilities.DoctorAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.MeraAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.MeroAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.MiniAbilities;
@@ -125,7 +125,7 @@ public class ListDevilFruits
 				
 				// Special Abilities lists
 				RokushikiAbilities.abilitiesArray, FishKarateAbilities.abilitiesArray, CyborgAbilities.abilitiesArray, 
-				SniperAbilities.abilitiesArray, SwordsmanAbilities.abilitiesArray, MedicAbilities.abilitiesArray, WeatherAbilities.abilitiesArray, HakiAbilities.abilitiesArray};
+				SniperAbilities.abilitiesArray, SwordsmanAbilities.abilitiesArray, DoctorAbilities.abilitiesArray, WeatherAbilities.abilitiesArray, HakiAbilities.abilitiesArray};
 	
 	public static final Object[] ALL_ENTITIES = new Object[] 
 		{RokushikiProjectiles.abilitiesClassesArray, MeraProjectiles.abilitiesClassesArray, HieProjectiles.abilitiesClassesArray, BaneProjectiles.abilitiesClassesArray, PikaProjectiles.abilitiesClassesArray, 
