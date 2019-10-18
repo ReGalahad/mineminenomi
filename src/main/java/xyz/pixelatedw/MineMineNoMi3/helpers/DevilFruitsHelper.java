@@ -269,6 +269,7 @@ public class DevilFruitsHelper
 		
 		verifyAndGiveAbility(MedicAbilities.FIRST_AID, abilityProps);
 		verifyAndGiveAbility(MedicAbilities.MEDIC_BAG_EXPLOSION, abilityProps);
+		verifyAndGiveAbility(MedicAbilities.FAILED_EXPERIMENT, abilityProps);
 
 		if (props.isSwordsman())
 		{

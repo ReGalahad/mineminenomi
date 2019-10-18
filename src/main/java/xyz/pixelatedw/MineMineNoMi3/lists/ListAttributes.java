@@ -261,6 +261,7 @@ public class ListAttributes
 
 	public static final AbilityAttribute RUST_TOUCH = new AbilityAttribute("Rust Touch").setAbilityCooldown(19).setAbilityPunch().setAbilityPassive();
 	
+	public static final AbilityAttribute FAILED_EXPERIMENT = new AbilityAttribute("Failed Experiment").setAbilityCooldown(7).setAbilityCharges(2 * 20);
 	public static final AbilityAttribute MEDIC_BAG_EXPLOSION = new AbilityAttribute("Medic Bag Explosion").setAbilityCooldown(30);
 	public static final AbilityAttribute FIRST_AID = new AbilityAttribute("First Aid").setAbilityCooldown(10).setAbilityPunch();
 	
