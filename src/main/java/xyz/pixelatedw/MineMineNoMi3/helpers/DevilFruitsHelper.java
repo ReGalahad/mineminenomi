@@ -24,7 +24,7 @@ import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.abilities.CyborgAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.FishKarateAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.HakiAbilities;
-import xyz.pixelatedw.MineMineNoMi3.abilities.MedicAbilities;
+import xyz.pixelatedw.MineMineNoMi3.abilities.DoctorAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.RokushikiAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.SniperAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.SwordsmanAbilities;
@@ -267,9 +267,9 @@ public class DevilFruitsHelper
 		QuestProperties questProps = QuestProperties.get(player);
 		AbilityProperties abilityProps = AbilityProperties.get(player);
 		
-		verifyAndGiveAbility(MedicAbilities.FIRST_AID, abilityProps);
-		verifyAndGiveAbility(MedicAbilities.MEDIC_BAG_EXPLOSION, abilityProps);
-		verifyAndGiveAbility(MedicAbilities.FAILED_EXPERIMENT, abilityProps);
+		verifyAndGiveAbility(DoctorAbilities.FIRST_AID, abilityProps);
+		verifyAndGiveAbility(DoctorAbilities.MEDIC_BAG_EXPLOSION, abilityProps);
+		verifyAndGiveAbility(DoctorAbilities.FAILED_EXPERIMENT, abilityProps);
 
 		if (props.isSwordsman())
 		{

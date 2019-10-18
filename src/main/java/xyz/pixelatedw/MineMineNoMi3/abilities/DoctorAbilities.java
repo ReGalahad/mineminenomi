@@ -17,7 +17,7 @@ import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketBrokenItemParticles;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 
-public class MedicAbilities
+public class DoctorAbilities
 {
 	public static final Ability FIRST_AID = new FirstAid();
 	public static final Ability MEDIC_BAG_EXPLOSION = new MedicBagExplosion();
