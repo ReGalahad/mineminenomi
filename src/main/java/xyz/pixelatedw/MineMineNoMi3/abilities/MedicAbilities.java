@@ -3,6 +3,7 @@ package xyz.pixelatedw.MineMineNoMi3.abilities;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.projectile.EntityPotion;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import xyz.pixelatedw.MineMineNoMi3.ID;
@@ -20,9 +21,65 @@ public class MedicAbilities
 {
 	public static final Ability FIRST_AID = new FirstAid();
 	public static final Ability MEDIC_BAG_EXPLOSION = new MedicBagExplosion();
+	public static final Ability FAILED_EXPERIMENT = new FailedExperiment();
 
-	public static Ability[] abilitiesArray = new Ability[] {FIRST_AID, MEDIC_BAG_EXPLOSION};
+	public static Ability[] abilitiesArray = new Ability[] {FIRST_AID, MEDIC_BAG_EXPLOSION, FAILED_EXPERIMENT};
 
+	public static class FailedExperiment extends Ability
+	{
+		public FailedExperiment()
+		{
+			super(ListAttributes.FAILED_EXPERIMENT);
+		}
+		
+		@Override
+		public void startCharging(EntityPlayer player)
+		{
+			if(this.isOnCooldown())
+				return;
+			
+			if(player.getCurrentArmor(2) == null || player.getCurrentArmor(2).getItem() != ListMisc.MedicBag)
+			{
+				WyHelper.sendMsgToPlayer(player, "You need a medic bag equipped to use this ability !");
+				return;
+			}
+			
+			super.startCharging(player);
+		}
+		
+		@Override
+		public void endCharging(EntityPlayer player)
+		{
+			EntityPotion entitypotion = new EntityPotion(player.worldObj, player, 32732);
+			entitypotion.rotationPitch -= -20.0F;
+
+			int potionType = (int) WyMathHelper.randomWithRange(0, 3);
+			
+			switch(potionType)
+			{
+				case 0:
+					entitypotion.setPotionDamage(32698); break;
+				case 1:
+					entitypotion.setPotionDamage(32660); break;
+				case 2:
+					entitypotion.setPotionDamage(32696); break;
+			}
+			
+			player.worldObj.spawnEntityInWorld(entitypotion);
+
+			int damage = player.getCurrentArmor(2).getItemDamage() + 10 <= player.getCurrentArmor(2).getMaxDamage() ? 10 : player.getCurrentArmor(2).getMaxDamage() - player.getCurrentArmor(2).getItemDamage();
+			
+			player.getCurrentArmor(2).damageItem(damage, player);
+			if(player.getCurrentArmor(2).getItemDamage() >= player.getCurrentArmor(2).getMaxDamage())
+			{
+				WyNetworkHelper.sendTo(new PacketBrokenItemParticles(player.getCurrentArmor(2)), (EntityPlayerMP) player);
+				WyHelper.removeStackFromArmorSlots(player, player.getCurrentArmor(2));
+			}
+			
+			super.endCharging(player);
+		}
+	}
+	
 	public static class MedicBagExplosion extends Ability
 	{
 		public MedicBagExplosion() 
@@ -69,7 +126,7 @@ public class MedicAbilities
 			
 			WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_MEDIC_BAG_EXPLOSION, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 
-			int damage = player.getCurrentArmor(2).getItemDamage() + 500 <= player.getCurrentArmor(2).getMaxDamage() ? 500 : player.getCurrentArmor(2).getMaxDamage() - player.getCurrentArmor(2).getItemDamage();
+			int damage = player.getCurrentArmor(2).getItemDamage() + 100 <= player.getCurrentArmor(2).getMaxDamage() ? 100 : player.getCurrentArmor(2).getMaxDamage() - player.getCurrentArmor(2).getItemDamage();
 			
 			player.getCurrentArmor(2).damageItem(damage, player);
 			if(player.getCurrentArmor(2).getItemDamage() >= player.getCurrentArmor(2).getMaxDamage())
@@ -98,7 +155,7 @@ public class MedicAbilities
 				return;
 			}
 				
-			target.setHealth(target.getHealth() + 8);
+			target.setHealth(target.getHealth() + 10);
 
 			AbilityExplosion explosion = WyHelper.newExplosion(player, target.posX, target.posY, target.posZ, 2);
 			explosion.setExplosionSound(false);

@@ -77,7 +77,7 @@ public class EventsMorphs
 			fullBodyHaki.isSneak = event.entityPlayer.isSneaking();
 			fullBodyHaki.isChild = false;
 			event.renderer.setRenderPassModel(fullBodyHaki);
-			fullBodyHaki.render(event.entityPlayer, f7, f6, f4, f3 - f2, f13, 0.625F);
+			// fullBodyHaki.render(event.entityPlayer, f7, f6, f4, f3 - f2, f13, 0.625F);
 			
 		}
 		GL11.glPopMatrix();
