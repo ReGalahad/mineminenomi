@@ -11,6 +11,7 @@ import xyz.pixelatedw.MineMineNoMi3.events.EventsCrafting;
 import xyz.pixelatedw.MineMineNoMi3.events.EventsCrew;
 import xyz.pixelatedw.MineMineNoMi3.events.EventsDrops;
 import xyz.pixelatedw.MineMineNoMi3.events.EventsEnchantments;
+import xyz.pixelatedw.MineMineNoMi3.events.EventsHakiGain;
 import xyz.pixelatedw.MineMineNoMi3.events.EventsMorphs;
 import xyz.pixelatedw.MineMineNoMi3.events.EventsOnGain;
 import xyz.pixelatedw.MineMineNoMi3.events.EventsQuestsProgress;
@@ -52,6 +53,9 @@ public class ListForge
 		// Handles all the custom onGain events added by this mod
 		MinecraftForge.EVENT_BUS.register(new EventsOnGain());
 
+		// Handles the logic behind the new haki system, exp system and gaining abilities
+		MinecraftForge.EVENT_BUS.register(new EventsHakiGain());
+		
 		// Handles all the custom effects like kairoseki and dial related enchantments
 		MinecraftForge.EVENT_BUS.register(new EventsSpecialEffects());
 		
