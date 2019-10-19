@@ -22,6 +22,7 @@ public class Values
 	public static List<Block> miscBlocks = new ArrayList<Block>();
 	public static List<Object[]> customDFs = new ArrayList<Object[]>();
 	
+	public static final int MAX_HAKI_EXP = 1000;
 	public static final int MAX_DORIKI = 10000;
 	public static final int MAX_ULTRACOLA = 10;
 	public static final int MAX_GENERAL = 999999999;

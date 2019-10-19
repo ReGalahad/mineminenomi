@@ -5,6 +5,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
+import xyz.pixelatedw.MineMineNoMi3.Values;
 
 public class ExtendedEntityData implements IExtendedEntityProperties 
 {
@@ -159,14 +160,16 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 	public int getKingHakiExp() { return this.haoExp; }
 	public void addKingHakiExp(int i) 
 	{
+		if(this.haoExp + i >= Values.MAX_HAKI_EXP) return;	
 		if(this.haoExp + i < 0) this.haoExp = 0;
 		else this.haoExp = this.haoExp + i;
 	}
 	
 	
-	public int getVisionHakiExp() { return this.kenExp; }
-	public void addVisionHakiExp(int i) 
+	public int getObservationHakiExp() { return this.kenExp; }
+	public void addObservationHakiExp(int i) 
 	{
+		if(this.kenExp + i >= Values.MAX_HAKI_EXP) return;
 		if(this.kenExp + i < 0) this.kenExp = 0;
 		else this.kenExp = this.kenExp + i;
 	}
@@ -174,6 +177,7 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 	public int getImbuingHakiExp() { return this.itemBusoExp; }
 	public void addImbuingHakiExp(int i) 
 	{
+		if(this.itemBusoExp + i >= Values.MAX_HAKI_EXP) return;	
 		if(this.itemBusoExp + i < 0) this.itemBusoExp = 0;
 		else this.itemBusoExp = this.itemBusoExp + i;
 	}
@@ -181,6 +185,7 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 	public int getHardeningHakiExp() { return this.punchBusoExp; }
 	public void addHardeningHakiExp(int i) 
 	{
+		if(this.punchBusoExp + i >= Values.MAX_HAKI_EXP) return;	
 		if(this.punchBusoExp + i < 0) this.punchBusoExp = 0;
 		else this.punchBusoExp = this.punchBusoExp + i;
 	}
