@@ -1,9 +1,9 @@
 package xyz.pixelatedw.MineMineNoMi3.abilities;
 
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.DamageSource;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
@@ -19,10 +19,11 @@ public class HakiAbilities
 		Values.abilityWebAppExtraParams.put("kenbunshokuhaki", new String[] {"desc", "Allows the user to sense the presence of others, pointing them to the opponent, Can also locate invisible mobs and players.", "dorikiRequiredForHumans", "5000", "dorikiRequiredForFishman", "4000", "dorikiRequiredForCyborgs", "5500"});
 	}
 	
-	public static Ability KENBUNSHOKUHAKI = new KenbunshokuHakiAura();
-	public static Ability BUSOSHOKUHAKI = new BusoshokuHakiHardening();
+	public static final Ability KENBUNSHOKU_HAKI_AURA = new KenbunshokuHakiAura();
+	public static final Ability BUSOSHOKU_HAKI_HARDENING = new BusoshokuHakiHardening();
+	public static final Ability BUSOSHOKU_HAKI_FULL_BODY_HARDENING = new BusoshokuHakiFullBodyHardening();
 	
-	public static Ability[] abilitiesArray = new Ability[] {KENBUNSHOKUHAKI, BUSOSHOKUHAKI};
+	public static Ability[] abilitiesArray = new Ability[] {KENBUNSHOKU_HAKI_AURA, BUSOSHOKU_HAKI_HARDENING, BUSOSHOKU_HAKI_FULL_BODY_HARDENING};
 	
 	public static class KenbunshokuHakiAura extends Ability
 	{
@@ -54,6 +55,40 @@ public class HakiAbilities
 		}
 	}
 	
+	public static class BusoshokuHakiFullBodyHardening extends Ability
+	{
+		public BusoshokuHakiFullBodyHardening() 
+		{
+			super(ListAttributes.BUSOSHOKU_HAKI_FULL_BODY_HARDENING); 			
+		}
+		
+		@Override
+		public void startPassive(EntityPlayer player)
+		{
+			ExtendedEntityData props = ExtendedEntityData.get(player);
+			
+			props.triggerActiveHaki(true);
+			
+			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
+		}
+		
+		@Override
+		public void endPassive(EntityPlayer player)
+		{
+			ExtendedEntityData props = ExtendedEntityData.get(player);
+			
+			props.triggerActiveHaki(false);
+			
+			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
+		}
+		
+		@Override
+		public void duringPassive(EntityPlayer player, int timer)
+		{
+			player.addPotionEffect(new PotionEffect(Potion.resistance.id, 200, 99999, true));
+		}
+	}
+	
 	public static class BusoshokuHakiHardening extends Ability
 	{
 		public BusoshokuHakiHardening() 
@@ -81,19 +116,6 @@ public class HakiAbilities
 			props.triggerBusoHaki(false);
 			
 			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
-		}
-
-		@Override
-		public void hitEntity(EntityPlayer player, EntityLivingBase target) 
-		{
-			ExtendedEntityData props = ExtendedEntityData.get(player);
-			ExtendedEntityData propz = ExtendedEntityData.get(target);
-			int powerDifference = props.getDoriki() - propz.getDoriki();
-			float damageFromDoriki = 2;
-			if(powerDifference > 0)
-				damageFromDoriki = (float) (Math.sqrt(powerDifference) / 2);
-			super.hitEntity(player, target);
-			target.attackEntityFrom(DamageSource.causePlayerDamage(player), damageFromDoriki);
 		}
 	}
 }

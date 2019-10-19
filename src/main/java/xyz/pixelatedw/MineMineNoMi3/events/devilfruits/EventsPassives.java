@@ -323,9 +323,18 @@ public class EventsPassives
 			if (props.getUsedFruit().equalsIgnoreCase("dokudoku") && props.getZoanPoint().equalsIgnoreCase("venomDemon"))
 				attacked.addPotionEffect(new PotionEffect(Potion.poison.id, 60, 0));
 
-			if (props.hasBusoHakiActive())
+			Ability hardeningBuso = abilityProps.getAbilityFromName(ListAttributes.BUSOSHOKU_HAKI_HARDENING.getAttributeName());
+			Ability fullBodyHardeningBuso = abilityProps.getAbilityFromName(ListAttributes.BUSOSHOKU_HAKI_FULL_BODY_HARDENING.getAttributeName());
+
+			if (hardeningBuso != null && hardeningBuso.isPassiveActive())
 			{
 				double power = props.getDoriki() / 500;
+				event.ammount += power * props.getDamageMultiplier();
+			}
+			
+			if (fullBodyHardeningBuso != null && fullBodyHardeningBuso.isPassiveActive())
+			{
+				double power = props.getDoriki() / 700;
 				event.ammount += power * props.getDamageMultiplier();
 			}
 		}

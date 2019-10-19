@@ -55,32 +55,41 @@ public class EventsMorphs
 	@SubscribeEvent
 	public void onArmorRendering(SetArmorModel event)
 	{
-		GL11.glPushMatrix();
+		EntityPlayer player = event.entityPlayer;
+		ExtendedEntityData props = ExtendedEntityData.get(player);
+		AbilityProperties abilityProps = AbilityProperties.get(player);
+		
+		Ability fullBodyHakiAbility = abilityProps.getAbilityFromName(ListAttributes.BUSOSHOKU_HAKI_FULL_BODY_HARDENING.getAttributeName());
+
+		if (fullBodyHakiAbility != null && fullBodyHakiAbility.isPassiveActive())
 		{
-			GL11.glEnable(GL11.GL_BLEND);
-			GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE_MINUS_DST_COLOR);
-						
-            float f2 = this.interpolateRotation(event.entityPlayer.prevRenderYawOffset, event.entityPlayer.renderYawOffset, event.partialRenderTick);
-            float f3 = this.interpolateRotation(event.entityPlayer.prevRotationYawHead, event.entityPlayer.rotationYawHead, event.partialRenderTick);
-            float f4 = this.handleRotationFloat(event.entityPlayer, event.partialRenderTick);
-            
-            float f6 = event.entityPlayer.prevLimbSwingAmount + (event.entityPlayer.limbSwingAmount - event.entityPlayer.prevLimbSwingAmount) * event.partialRenderTick;
-            float f7 = event.entityPlayer.limbSwing - event.entityPlayer.limbSwingAmount * (1.0F - event.partialRenderTick);
-			
-            float f13 = event.entityPlayer.prevRotationPitch + (event.entityPlayer.rotationPitch - event.entityPlayer.prevRotationPitch) * event.partialRenderTick;
-            
-			ModelBiped fullBodyHaki = new ModelBiped(0.05F);
-			GL11.glScaled(0.1, 0.1, 0.1);
-			Minecraft.getMinecraft().getTextureManager().bindTexture(ID.HANDTEXTURE_ZOANMORPH_BUSO);
-			fullBodyHaki.bipedHead.isHidden = false;
-			fullBodyHaki.bipedHeadwear.isHidden = false;
-			fullBodyHaki.isSneak = event.entityPlayer.isSneaking();
-			fullBodyHaki.isChild = false;
-			event.renderer.setRenderPassModel(fullBodyHaki);
-			// fullBodyHaki.render(event.entityPlayer, f7, f6, f4, f3 - f2, f13, 0.625F);
-			
+			GL11.glPushMatrix();
+			{
+				GL11.glEnable(GL11.GL_BLEND);
+				GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE_MINUS_DST_COLOR);
+							
+	            float f2 = this.interpolateRotation(player.prevRenderYawOffset, player.renderYawOffset, event.partialRenderTick);
+	            float f3 = this.interpolateRotation(player.prevRotationYawHead, player.rotationYawHead, event.partialRenderTick);
+	            float f4 = this.handleRotationFloat(player, event.partialRenderTick);
+	            
+	            float f6 = player.prevLimbSwingAmount + (player.limbSwingAmount - player.prevLimbSwingAmount) * event.partialRenderTick;
+	            float f7 = player.limbSwing - player.limbSwingAmount * (1.0F - event.partialRenderTick);
+				
+	            float f13 = player.prevRotationPitch + (player.rotationPitch - player.prevRotationPitch) * event.partialRenderTick;
+	            
+				ModelBiped fullBodyHakiModel = new ModelBiped(0.05F);
+				GL11.glScaled(0.1, 0.1, 0.1);
+				Minecraft.getMinecraft().getTextureManager().bindTexture(ID.HANDTEXTURE_ZOANMORPH_BUSO);
+				fullBodyHakiModel.bipedHead.isHidden = false;
+				fullBodyHakiModel.bipedHeadwear.isHidden = false;
+				fullBodyHakiModel.isSneak = player.isSneaking();
+				fullBodyHakiModel.isChild = false;
+				event.renderer.setRenderPassModel(fullBodyHakiModel);
+				fullBodyHakiModel.render(player, f7, f6, f4, f3 - f2, f13, 0.625F);
+				
+			}
+			GL11.glPopMatrix();
 		}
-		GL11.glPopMatrix();
 	}
 	
     protected float handleRotationFloat(EntityLivingBase p_77044_1_, float p_77044_2_)
@@ -274,8 +283,13 @@ public class EventsMorphs
 		boolean renderHandEffectFlag = false;
 
 		Ability hotBoilingSpecial = abilityProps.getAbilityFromName(ListAttributes.HOT_BOILING_SPECIAL.getAttributeName());
+		Ability hardeningBuso = abilityProps.getAbilityFromName(ListAttributes.BUSOSHOKU_HAKI_HARDENING.getAttributeName());
+		Ability fullBodyHardeningBuso = abilityProps.getAbilityFromName(ListAttributes.BUSOSHOKU_HAKI_FULL_BODY_HARDENING.getAttributeName());
+
 		boolean hasHotBoilingSpecial = (hotBoilingSpecial != null && hotBoilingSpecial.isPassiveActive());
-		if (player.getHeldItem() == null && (props.hasBusoHakiActive() || hasHotBoilingSpecial))
+		boolean hasHardeningBuso = (hardeningBuso != null && hardeningBuso.isPassiveActive());
+		boolean hasFullBodyHardeningBuso = (fullBodyHardeningBuso != null && fullBodyHardeningBuso.isPassiveActive());
+		if (player.getHeldItem() == null && (hasFullBodyHardeningBuso || hasHardeningBuso || hasHotBoilingSpecial))
 		{
 			renderHandFlag = true;
 		}

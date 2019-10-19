@@ -12,6 +12,7 @@ import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.abilities.CyborgAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.FishKarateAbilities;
+import xyz.pixelatedw.MineMineNoMi3.abilities.HakiAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.RokushikiAbilities;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
@@ -32,6 +33,9 @@ public class EventsOnGain
 	@SubscribeEvent
 	public void onDorikiGained(DorikiEvent event)
 	{
+		this.gainAbility(event.player, 0, HakiAbilities.BUSOSHOKU_HAKI_HARDENING, true);
+		this.gainAbility(event.player, 0, HakiAbilities.BUSOSHOKU_HAKI_FULL_BODY_HARDENING, true);
+
 		if (event.props.isHuman())
 		{			
 			this.gainAbility(event.player, 500, RokushikiAbilities.SORU, false);

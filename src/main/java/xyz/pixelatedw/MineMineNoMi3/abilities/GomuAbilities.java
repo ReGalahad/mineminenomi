@@ -47,7 +47,7 @@ public class GomuAbilities
 			ExtendedEntityData props = ExtendedEntityData.get(player);
 			AbilityProperties abilityProps = AbilityProperties.get(player);
 			
-			if(abilityProps.hasHakiAbility(HakiAbilities.BUSOSHOKUHAKI))
+			if(abilityProps.hasHakiAbility(HakiAbilities.BUSOSHOKU_HAKI_HARDENING))
 				super.passive(player);
 			else
 				WyHelper.sendMsgToPlayer(player, "" + this.getAttribute().getAttributeName() + " can only be activated while Busoshoku Haki is active !");
