@@ -6,6 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import xyz.pixelatedw.MineMineNoMi3.abilities.HakiAbilities;
+import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
@@ -54,15 +55,15 @@ public class EventsHakiGain
 			
 			if(props.getDoriki() > 4000 && props.getImbuingHakiExp() > 400 + WyMathHelper.randomWithRange(10, 50))
 			{
-				this.giveHakiAbility(abilityProps, HakiAbilities.BUSOSHOKU_HAKI_IMBUING);
+				this.giveHakiAbility(abilityProps, HakiAbilities.BUSOSHOKU_HAKI_IMBUING, player);
 			}
 			
 			if(props.getDoriki() > 3000 && props.getHardeningHakiExp() > 500 + WyMathHelper.randomWithRange(10, 100))
 			{
-				this.giveHakiAbility(abilityProps, HakiAbilities.BUSOSHOKU_HAKI_HARDENING);
+				this.giveHakiAbility(abilityProps, HakiAbilities.BUSOSHOKU_HAKI_HARDENING, player);
 				if(props.getHardeningHakiExp() > 800 + WyMathHelper.randomWithRange(10, 100))
 				{
-					this.giveHakiAbility(abilityProps, HakiAbilities.BUSOSHOKU_HAKI_FULL_BODY_HARDENING);
+					this.giveHakiAbility(abilityProps, HakiAbilities.BUSOSHOKU_HAKI_FULL_BODY_HARDENING, player);
 				}
 			}
 			
@@ -73,10 +74,13 @@ public class EventsHakiGain
 		}
 	}
 	
-	private void giveHakiAbility(AbilityProperties abilityProps, Ability ability)
+	private void giveHakiAbility(AbilityProperties abilityProps, Ability ability, EntityPlayer player)
 	{
 		System.out.println(" " + (abilityProps.hasHakiAbility(ability)));
 		if(!abilityProps.hasHakiAbility(ability) && !DevilFruitsHelper.verifyIfAbilityIsBanned(ability))
+		{
 			abilityProps.addHakiAbility(ability);
+			WyHelper.sendMsgToPlayer(player, "Obtained " + ability.getAttribute().getAttributeName());
+		}
 	}
 }
