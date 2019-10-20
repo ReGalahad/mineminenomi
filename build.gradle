@@ -34,7 +34,7 @@ sourceCompatibility = targetCompatibility = 1.8
 def getVersion()
 {
     def versionPropsFile = file('version.properties')
-	String modVersion = "060"
+	String modVersion = "${mod_version_id}"
 
     if (versionPropsFile.canRead()) 
 	{
