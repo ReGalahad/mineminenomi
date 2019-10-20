@@ -15,14 +15,14 @@ public class EventsCrew
 {
 
 	// Lmao you got bamboozeled there is no crew only us, the Dugongs
-	// (ง •̀_•́)ง
+	// (ง •̀_•̀)ง
 	
 	@SubscribeEvent
 	public void onEntityAttack(LivingHurtEvent event)
 	{
 		if (event.source.getSourceOfDamage() instanceof EntityPlayer)
 		{
-			EntityPlayer attacker = (EntityPlayer) event.source.getEntity();
+			EntityPlayer attacker = (EntityPlayer) event.source.getSourceOfDamage();
 			EntityLivingBase attacked = event.entityLiving;
 			
 			// TODO Should be replaced by actual crew data from some NBT when the time comes !
