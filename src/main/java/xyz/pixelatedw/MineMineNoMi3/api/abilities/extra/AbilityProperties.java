@@ -20,7 +20,7 @@ public class AbilityProperties implements IExtendedEntityProperties
 	private final EntityPlayer thePlayer;
 	
 	private Ability[] hotbarAbilities = new Ability[8];
-	private Ability[] devilFruitAbilities = new Ability[128];
+	private Ability[] devilFruitAbilities = new Ability[32];
 	private Ability[] racialAbilities = new Ability[32];
 	private Ability[] styleAbilities = new Ability[32];
 	private Ability[] hakiAbilities = new Ability[16];
