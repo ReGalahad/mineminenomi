@@ -10,6 +10,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
+import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.helpers.ItemsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 
@@ -29,7 +30,10 @@ public class EventsHakiGain
 			
 			if(heldItem != null)
 			{
-				if(props.getImbuingHakiExp() <= 600)
+				Ability imbuingBuso = abilityProps.getAbilityFromName(ListAttributes.BUSOSHOKU_HAKI_IMBUING.getAttributeName());
+				boolean hasImbuingBusoActive = imbuingBuso != null && imbuingBuso.isPassiveActive();
+				
+				if(props.getImbuingHakiExp() <= 600 || hasImbuingBusoActive)
 				{
 					if(ItemsHelper.isSword(heldItem))
 						props.addImbuingHakiExp((int) (3 + WyMathHelper.randomWithRange(0, 3)));
@@ -48,12 +52,17 @@ public class EventsHakiGain
 				}
 			}
 			
+			if(props.getDoriki() > 4000 && props.getImbuingHakiExp() > 400 + WyMathHelper.randomWithRange(10, 50))
+			{
+				this.giveHakiAbility(abilityProps, HakiAbilities.BUSOSHOKU_HAKI_IMBUING);
+			}
+			
 			if(props.getDoriki() > 3000 && props.getHardeningHakiExp() > 500 + WyMathHelper.randomWithRange(10, 100))
 			{
-				abilityProps.addHakiAbility(HakiAbilities.BUSOSHOKU_HAKI_HARDENING);
+				this.giveHakiAbility(abilityProps, HakiAbilities.BUSOSHOKU_HAKI_HARDENING);
 				if(props.getHardeningHakiExp() > 800 + WyMathHelper.randomWithRange(10, 100))
 				{
-					abilityProps.addHakiAbility(HakiAbilities.BUSOSHOKU_HAKI_FULL_BODY_HARDENING);
+					this.giveHakiAbility(abilityProps, HakiAbilities.BUSOSHOKU_HAKI_FULL_BODY_HARDENING);
 				}
 			}
 			
@@ -62,5 +71,12 @@ public class EventsHakiGain
 			System.out.println("Observation : " + props.getObservationHakiExp());
 			System.out.println("King : " + props.getKingHakiExp());
 		}
+	}
+	
+	private void giveHakiAbility(AbilityProperties abilityProps, Ability ability)
+	{
+		System.out.println(" " + (abilityProps.hasHakiAbility(ability)));
+		if(!abilityProps.hasHakiAbility(ability) && !DevilFruitsHelper.verifyIfAbilityIsBanned(ability))
+			abilityProps.addHakiAbility(ability);
 	}
 }
