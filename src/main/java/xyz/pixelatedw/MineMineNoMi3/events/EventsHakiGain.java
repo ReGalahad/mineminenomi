@@ -1,10 +1,13 @@
 package xyz.pixelatedw.MineMineNoMi3.events;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import xyz.pixelatedw.MineMineNoMi3.abilities.HakiAbilities;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
@@ -17,6 +20,66 @@ import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 
 public class EventsHakiGain
 {
+	@SubscribeEvent
+	public void onEntityUpdate(LivingUpdateEvent event)
+	{
+		if (event.entityLiving instanceof EntityPlayer)
+		{
+			EntityPlayer player = (EntityPlayer) event.entityLiving;
+			ExtendedEntityData props = ExtendedEntityData.get(player);
+			AbilityProperties abilityProps = AbilityProperties.get(player);
+			ItemStack heldItem = player.getHeldItem();
+			
+			if(abilityProps.hasHakiAbility(HakiAbilities.KENBUNSHOKU_HAKI_AURA))
+			{
+				Ability auraKen = abilityProps.getAbilityFromName(ListAttributes.KENBUNSHOKU_HAKI_AURA.getAttributeName());
+				boolean hasAuraKenActive = auraKen != null && auraKen.isPassiveActive();
+				
+				if(props.getObservationHakiExp() >= 200 && hasAuraKenActive)
+				{
+					if(player.ticksExisted % 200 == 0)
+						props.addObservationHakiExp((int) (6 + WyMathHelper.randomWithRange(0, 10)));
+				}
+			}
+		}		
+	}
+	
+	@SubscribeEvent
+	public void onEntityAttack(LivingHurtEvent event)
+	{
+		if (event.entityLiving instanceof EntityPlayer)
+		{
+			Entity attacker = event.source.getSourceOfDamage();
+			EntityPlayer attacked = (EntityPlayer) event.entityLiving;
+			ExtendedEntityData props = ExtendedEntityData.get(attacked);
+			AbilityProperties abilityProps = AbilityProperties.get(attacked);
+			
+			if(props.getDoriki() > 1500 && props.getObservationHakiExp() <= 300)
+			{
+				int exp = (int) (event.ammount / 10);
+				if(exp <= 0)
+					exp = 1;
+				
+				props.addObservationHakiExp((int) (exp + WyMathHelper.randomWithRange(0, 2)));
+			}
+			
+			if(props.getObservationHakiExp() > 300 + WyMathHelper.randomWithRange(0, 50))
+			{
+				this.giveHakiAbility(abilityProps, HakiAbilities.KENBUNSHOKU_HAKI_AURA, attacked);
+			}
+			
+			if(props.getObservationHakiExp() > 600 + WyMathHelper.randomWithRange(0, 100))
+			{
+				this.giveHakiAbility(abilityProps, HakiAbilities.KENBUNSHOKU_HAKI_FUTURE_SIGHT, attacked);
+			}
+			
+			System.out.println("Imbuing : " + props.getImbuingHakiExp());
+			System.out.println("Hardening : " + props.getHardeningHakiExp());
+			System.out.println("Observation : " + props.getObservationHakiExp());
+			System.out.println("King : " + props.getKingHakiExp());
+		}
+	}
+	
 	@SubscribeEvent
 	public void onEntityDeath(LivingDeathEvent event)
 	{
