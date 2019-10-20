@@ -24,8 +24,41 @@ public class HakiAbilities
 	public static final Ability BUSOSHOKU_HAKI_HARDENING = new BusoshokuHakiHardening();
 	public static final Ability BUSOSHOKU_HAKI_FULL_BODY_HARDENING = new BusoshokuHakiFullBodyHardening();
 	public static final Ability BUSOSHOKU_HAKI_IMBUING = new BusoshokuHakiImbuing();
+	public static final Ability HAOSHOKU_HAKI = new HaoshokuHaki();
+
+	public static Ability[] abilitiesArray = new Ability[] {KENBUNSHOKU_HAKI_AURA, KENBUNSHOKU_HAKI_FUTURE_SIGHT, BUSOSHOKU_HAKI_HARDENING, BUSOSHOKU_HAKI_FULL_BODY_HARDENING, BUSOSHOKU_HAKI_IMBUING, HAOSHOKU_HAKI};
 	
-	public static Ability[] abilitiesArray = new Ability[] {KENBUNSHOKU_HAKI_AURA, KENBUNSHOKU_HAKI_FUTURE_SIGHT, BUSOSHOKU_HAKI_HARDENING, BUSOSHOKU_HAKI_FULL_BODY_HARDENING, BUSOSHOKU_HAKI_IMBUING};
+	public static class HaoshokuHaki extends Ability
+	{
+		public HaoshokuHaki() 
+		{
+			super(ListAttributes.HAOSHOKU_HAKI); 
+		}
+		
+		@Override
+		public void startCharging(EntityPlayer player)
+		{
+			ExtendedEntityData props = ExtendedEntityData.get(player);
+			
+			props.triggerActiveHaki(true);
+			
+			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
+			
+			super.startCharging(player);
+		}
+		
+		@Override
+		public void endPassive(EntityPlayer player)
+		{
+			ExtendedEntityData props = ExtendedEntityData.get(player);
+			
+			props.triggerActiveHaki(false);
+			
+			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
+			
+			super.endPassive(player);
+		}
+	}
 	
 	public static class KenbunshokuHakiAura extends Ability
 	{

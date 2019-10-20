@@ -12,7 +12,6 @@ import net.minecraftforge.common.IExtendedEntityProperties;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
-import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 
 public class AbilityProperties implements IExtendedEntityProperties 
 {
@@ -24,7 +23,7 @@ public class AbilityProperties implements IExtendedEntityProperties
 	private Ability[] devilFruitAbilities = new Ability[128];
 	private Ability[] racialAbilities = new Ability[32];
 	private Ability[] styleAbilities = new Ability[32];
-	private Ability[] hakiAbilities = new Ability[3];
+	private Ability[] hakiAbilities = new Ability[16];
 	
 	public AbilityProperties(EntityPlayer entity) 
 	{
@@ -41,6 +40,7 @@ public class AbilityProperties implements IExtendedEntityProperties
 		return (AbilityProperties) entity.getExtendedProperties(EXT_ABILITYPROP_NAME);
 	}
 
+	@Override
 	public void saveNBTData(NBTTagCompound compound)
 	{
 		NBTTagCompound props = new NBTTagCompound();
@@ -81,6 +81,7 @@ public class AbilityProperties implements IExtendedEntityProperties
 		return data;
 	}
 	
+	@Override
 	public void loadNBTData(NBTTagCompound compound)
 	{
 		NBTTagCompound props = (NBTTagCompound) compound.getTag(EXT_ABILITYPROP_NAME);
@@ -134,6 +135,7 @@ public class AbilityProperties implements IExtendedEntityProperties
 		return ability;
 	}
 	
+	@Override
 	public void init(Entity entity, World world) {}
 
 	
