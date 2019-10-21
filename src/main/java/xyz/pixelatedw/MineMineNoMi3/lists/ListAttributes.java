@@ -294,7 +294,7 @@ public class ListAttributes
 	public static final AbilityAttribute COUP_DE_VENT = new AbilityAttribute("Coup de Vent").setAbilityCooldown(10).setProjectileTicks(7).setProjectileSize(.01, .01, .01).setProjectileDamage(10).setAbilityCharges(30);
 	
 	public static final AbilityAttribute KENBUNSHOKU_HAKI_AURA = new AbilityAttribute("Kenbunshoku Haki: Aura").setAbilityPassive(true);
-	public static final AbilityAttribute KENBUNSHOKU_HAKI_FUTURE_SIGHT = new AbilityAttribute("Kenbunshoku Haki: Future Sight").setAbilityPassive(true);
+	public static final AbilityAttribute KENBUNSHOKU_HAKI_FUTURE_SIGHT = new AbilityAttribute("Kenbunshoku Haki: Future Sight").setAbilityPassive(true).setAbilityCooldown(60);
 	public static final AbilityAttribute BUSOSHOKU_HAKI_HARDENING = new AbilityAttribute("Busoshoku Haki: Hardening").setAbilityPassive(true);
 	public static final AbilityAttribute BUSOSHOKU_HAKI_FULL_BODY_HARDENING = new AbilityAttribute("Busoshoku Haki: Full-Body Hardening").setAbilityPassive(true);
 	public static final AbilityAttribute BUSOSHOKU_HAKI_IMBUING = new AbilityAttribute("Busoshoku Haki: Imbuing").setAbilityPassive(true);

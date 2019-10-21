@@ -21,6 +21,7 @@ import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerUseItemEvent;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.abilities.HakiAbilities.KenbunshokuHakiFutureSight;
 import xyz.pixelatedw.MineMineNoMi3.abilities.RokushikiAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.effects.DFEffectHieSlowness;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
@@ -293,6 +294,14 @@ public class EventsPassives
 					explosion.setSmokeParticles(ID.PARTICLEFX_SOULPARADE);
 					explosion.doExplosion();
 				}
+			}
+			
+			KenbunshokuHakiFutureSight futureSight = (KenbunshokuHakiFutureSight) abilityProps.getAbilityFromName(ListAttributes.KENBUNSHOKU_HAKI_FUTURE_SIGHT.getAttributeName());
+			
+			if(futureSight != null && futureSight.isPassiveActive())
+			{
+				futureSight.reduceProtection(event.ammount);
+				event.setCanceled(true);
 			}
 		}
 
