@@ -12,9 +12,6 @@ import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.abilities.CyborgAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.FishKarateAbilities;
-import xyz.pixelatedw.MineMineNoMi3.abilities.HakiAbilities;
-import xyz.pixelatedw.MineMineNoMi3.abilities.HakiAbilities.BusoshokuHaki;
-import xyz.pixelatedw.MineMineNoMi3.abilities.HakiAbilities.KenbunshokuHaki;
 import xyz.pixelatedw.MineMineNoMi3.abilities.RokushikiAbilities;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
@@ -37,35 +34,36 @@ public class EventsOnGain
 	{
 		if (event.props.isHuman())
 		{			
-			gainAbility(event.player, 500, RokushikiAbilities.SORU);
-			gainAbility(event.player, 1500, RokushikiAbilities.TEKKAI);
-			gainAbility(event.player, 3000, RokushikiAbilities.SHIGAN);
-			gainAbility(event.player, 4500, RokushikiAbilities.GEPPO);
-			gainAbility(event.player, 5000, HakiAbilities.KENBUNSHOKUHAKI);
-			gainAbility(event.player, 6000, RokushikiAbilities.KAMIE);
-			gainAbility(event.player, 8500, RokushikiAbilities.RANKYAKU);
-			gainAbility(event.player, 9000, HakiAbilities.BUSOSHOKUHAKI);
+			this.gainAbility(event.player, 500, RokushikiAbilities.SORU, false);
+			this.gainAbility(event.player, 1500, RokushikiAbilities.TEKKAI, false);
+			this.gainAbility(event.player, 3000, RokushikiAbilities.SHIGAN, false);
+			this.gainAbility(event.player, 4500, RokushikiAbilities.GEPPO, false);
+			//gainAbility(event.player, 5000, HakiAbilities.KENBUNSHOKUHAKI);
+			this.gainAbility(event.player, 6000, RokushikiAbilities.KAMIE, false);
+			this.gainAbility(event.player, 8500, RokushikiAbilities.RANKYAKU, false);
+			//gainAbility(event.player, 9000, HakiAbilities.BUSOSHOKUHAKI);
+
 			//HAOSHOKU - 9000 + other			
 		}
 		else if (event.props.isFishman())
 		{
-			gainAbility(event.player, 800, FishKarateAbilities.UCHIMIZU);
-			gainAbility(event.player, 2000, FishKarateAbilities.MURASAME);
-			gainAbility(event.player, 2500, FishKarateAbilities.KACHIAGE_HAISOKU);
-			gainAbility(event.player, 3000, FishKarateAbilities.SAMEHADA_SHOTEI);
-			gainAbility(event.player, 4000, HakiAbilities.KENBUNSHOKUHAKI);
-			gainAbility(event.player, 7500, FishKarateAbilities.KARAKUSAGAWARA_SEIKEN);
-			gainAbility(event.player, 9000, HakiAbilities.BUSOSHOKUHAKI);
+			this.gainAbility(event.player, 800, FishKarateAbilities.UCHIMIZU, false);
+			this.gainAbility(event.player, 2000, FishKarateAbilities.MURASAME, false);
+			this.gainAbility(event.player, 2500, FishKarateAbilities.KACHIAGE_HAISOKU, false);
+			this.gainAbility(event.player, 3000, FishKarateAbilities.SAMEHADA_SHOTEI, false);
+			//gainAbility(event.player, 4000, HakiAbilities.KENBUNSHOKUHAKI);
+			this.gainAbility(event.player, 7500, FishKarateAbilities.KARAKUSAGAWARA_SEIKEN, false);
+			//gainAbility(event.player, 9000, HakiAbilities.BUSOSHOKUHAKI);
 		}
 		else if(event.props.isCyborg())
 		{
-			gainAbility(event.player, 0, CyborgAbilities.FRESH_FIRE);
-			gainAbility(event.player, 0, CyborgAbilities.COLA_OVERDRIVE);
-			gainAbility(event.player, 0, CyborgAbilities.STRONG_RIGHT);
-			gainAbility(event.player, 0, CyborgAbilities.RADICAL_BEAM);
-			gainAbility(event.player, 0, CyborgAbilities.COUP_DE_VENT);
-			gainAbility(event.player, 5500, HakiAbilities.KENBUNSHOKUHAKI);
-			gainAbility(event.player, 8500, HakiAbilities.BUSOSHOKUHAKI);
+			this.gainAbility(event.player, 0, CyborgAbilities.FRESH_FIRE, false);
+			this.gainAbility(event.player, 0, CyborgAbilities.COLA_OVERDRIVE, false);
+			this.gainAbility(event.player, 0, CyborgAbilities.STRONG_RIGHT, false);
+			this.gainAbility(event.player, 0, CyborgAbilities.RADICAL_BEAM, false);
+			this.gainAbility(event.player, 0, CyborgAbilities.COUP_DE_VENT, false);
+			//gainAbility(event.player, 5500, HakiAbilities.KENBUNSHOKUHAKI);
+			//gainAbility(event.player, 8500, HakiAbilities.BUSOSHOKUHAKI);
 		}
 		
 		if(event.player != null && MainConfig.enableExtraHearts)		
@@ -79,12 +77,12 @@ public class EventsOnGain
 		}
 	}	
 
-	private void gainAbility(EntityPlayer player, int doriki, Ability ability)
+	private void gainAbility(EntityPlayer player, int doriki, Ability ability, boolean isHaki)
 	{
 		ExtendedEntityData props = ExtendedEntityData.get(player);
 		AbilityProperties abilityProps = AbilityProperties.get(player);
 
-		if(ability instanceof KenbunshokuHaki || ability instanceof BusoshokuHaki)
+		if(isHaki)
 		{
 			if (props.getDoriki() >= doriki && !abilityProps.hasHakiAbility(ability) && !DevilFruitsHelper.verifyIfAbilityIsBanned(ability))
 				abilityProps.addHakiAbility(ability);

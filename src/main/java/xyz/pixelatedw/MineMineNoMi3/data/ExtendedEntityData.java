@@ -5,6 +5,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
+import xyz.pixelatedw.MineMineNoMi3.Values;
 
 public class ExtendedEntityData implements IExtendedEntityProperties 
 {
@@ -22,6 +23,8 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 	
 	private String tempPreviousAbility = "";
 
+	private int punchBusoExp, itemBusoExp, kenExp, haoExp;
+	
 	private String[] extraEffects = new String[32];
 	
 	public ExtendedEntityData(EntityLivingBase entity) 
@@ -86,6 +89,12 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 		
 		props.setBoolean("isInCombatMode", this.isInCombatMode);		
 		
+		//Haki Exp
+		props.setInteger("PunchBusoExp", this.punchBusoExp);
+		props.setInteger("ItemBusoExp", this.itemBusoExp);
+		props.setInteger("KenExp", this.kenExp);
+		props.setInteger("HaoExp", this.haoExp);
+		
 		for(int i = 0; i < this.extraEffects.length; i++)
 			if(this.extraEffects[i] != null && !this.extraEffects[i].isEmpty())
 				props.setString("extraEffect_" + i, this.extraEffects[i]);
@@ -135,82 +144,51 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 		
 		this.isInCombatMode = props.getBoolean("isInCombatMode");
 		
+		//Haki Exp
+		this.punchBusoExp = props.getInteger("PunchBusoExp");
+		this.itemBusoExp = props.getInteger("ItemBusoExp");
+		this.kenExp = props.getInteger("KenExp");
+		this.haoExp = props.getInteger("HaoExp");
+		
 		for(int i = 0; i < this.extraEffects.length; i++)
 			this.extraEffects[i] = props.getString("extraEffect_" + i);
 	}
 
-	public void resetNBTData(NBTTagCompound compound) 
-	{
-		NBTTagCompound props = new NBTTagCompound();
-
-		props.setInteger("Doriki", 0);
-		props.setInteger("DorikiCmd", 0);
-		props.setInteger("Bounty", 0);
-		props.setInteger("BountyCmd", 0);
-		props.setInteger("Belly", 0);
-		props.setInteger("BellyCmd", 0);
-		props.setInteger("Extol", 0);
-		props.setInteger("ExtolCmd", 0);
-		props.setInteger("Cola", 0);
-		props.setInteger("MaxCola", 0);	
-		props.setInteger("UltraCola",0);
-		props.setInteger("Gear", 0);
-		
-		props.setFloat("DamageMultiplier", 1);
-		
-		props.setString("AkumaNoMi", "N/A");
-		props.setString("Faction", "N/A");
-		props.setString("Race", "N/A");
-		props.setString("FightStyle", "N/A");
-		props.setString("Crew", "N/A");
-		props.setString("ZoanPoint", "N/A");
-		
-		props.setBoolean("isLogia", false);
-		props.setBoolean("hasShadow", true);
-		props.setBoolean("hasHeart", true);
-		props.setBoolean("firstTime", false);
-		props.setBoolean("hasKiloActive", false);
-		props.setBoolean("hasHakiActive", false);
-		props.setBoolean("hasBusoHakiActive", false);
-		props.setBoolean("hasKenHakiActive", false);
-		props.setBoolean("hasYamiPower", false);
-		props.setBoolean("hasColaBackpack", false);
-		props.setBoolean("isCandleLocked", false);
-		props.setBoolean("isTaktBlocked", false);
-		props.setBoolean("isInAirWorld", false);
-		
-		props.setBoolean("isInCombatMode", false);		
-		
-		compound.setTag(EXT_PROP_NAME, props);
-	}
-	
-	public void printFancyData(NBTTagCompound compound)
-	{
-		NBTTagCompound props = (NBTTagCompound) compound.getTag(EXT_PROP_NAME);
-		
-		System.out.println("=====EXTENDED DATA");
-		System.out.println(" > Used Fruit : " + props.getString("AkumaNoMi"));
-		System.out.println(" > Faction : " + props.getString("Faction"));
-		System.out.println(" > Race : " + props.getString("Race"));
-		System.out.println(" > Style : " + props.getString("FightStyle"));
-		System.out.println(" > Zoan Point : " + props.getString("ZoanPoint"));
-		System.out.println("");
-		System.out.println(" > Is Logia : " + props.getBoolean("isLogia"));
-		System.out.println(" > Has Shadow : " + props.getBoolean("hasShadow"));
-		System.out.println(" > Has Heart : " + props.getBoolean("hasHeart"));
-		System.out.println(" > Has Yami Power : " + props.getBoolean("hasYamiPower"));
-		System.out.println(" > Has Haki Active : " + props.getBoolean("hasHakiActive"));
-		System.out.println(" > Has Buso Haki Active : " + props.getBoolean("hasBusoHakiActive"));
-		System.out.println(" > Has Ken Haki Active : " + props.getBoolean("hasKenHakiActive"));
-		System.out.println("");
-		System.out.println(" > Doriki : " + props.getInteger("Doriki"));
-		System.out.println(" > Bounty : " + props.getInteger("Bounty"));
-		System.out.println(" > Belly : " + props.getInteger("Belly"));
-		System.out.println("");
-	}
-
 	@Override
 	public void init(Entity entity, World world) {}
+	
+	public int getKingHakiExp() { return this.haoExp; }
+	public void addKingHakiExp(int i) 
+	{
+		if(this.haoExp + i >= Values.MAX_HAKI_EXP) return;	
+		if(this.haoExp + i < 0) this.haoExp = 0;
+		else this.haoExp = this.haoExp + i;
+	}
+	
+	
+	public int getObservationHakiExp() { return this.kenExp; }
+	public void addObservationHakiExp(int i) 
+	{
+		if(this.kenExp + i >= Values.MAX_HAKI_EXP) return;
+		if(this.kenExp + i < 0) this.kenExp = 0;
+		else this.kenExp = this.kenExp + i;
+	}
+	
+	public int getImbuingHakiExp() { return this.itemBusoExp; }
+	public void addImbuingHakiExp(int i) 
+	{
+		if(this.itemBusoExp + i >= Values.MAX_HAKI_EXP) return;	
+		if(this.itemBusoExp + i < 0) this.itemBusoExp = 0;
+		else this.itemBusoExp = this.itemBusoExp + i;
+	}
+	
+	public int getHardeningHakiExp() { return this.punchBusoExp; }
+	public void addHardeningHakiExp(int i) 
+	{
+		if(this.punchBusoExp + i >= Values.MAX_HAKI_EXP) return;	
+		if(this.punchBusoExp + i < 0) this.punchBusoExp = 0;
+		else this.punchBusoExp = this.punchBusoExp + i;
+	}
 	
 	public float getDamageMultiplier() {return this.damageMultiplier;}
 	public void setDamageMultiplier(float i) { this.damageMultiplier = i; }
