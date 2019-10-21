@@ -21,6 +21,7 @@ import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerUseItemEvent;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.abilities.HakiAbilities.KenbunshokuHakiFutureSight;
 import xyz.pixelatedw.MineMineNoMi3.abilities.RokushikiAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.effects.DFEffectHieSlowness;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
@@ -294,6 +295,14 @@ public class EventsPassives
 					explosion.doExplosion();
 				}
 			}
+			
+			KenbunshokuHakiFutureSight futureSight = (KenbunshokuHakiFutureSight) abilityProps.getAbilityFromName(ListAttributes.KENBUNSHOKU_HAKI_FUTURE_SIGHT.getAttributeName());
+			
+			if(futureSight != null && futureSight.isPassiveActive())
+			{
+				futureSight.reduceProtection(event.ammount);
+				event.setCanceled(true);
+			}
 		}
 
 		if (event.source.getSourceOfDamage() instanceof EntityPlayer)
@@ -323,9 +332,18 @@ public class EventsPassives
 			if (props.getUsedFruit().equalsIgnoreCase("dokudoku") && props.getZoanPoint().equalsIgnoreCase("venomDemon"))
 				attacked.addPotionEffect(new PotionEffect(Potion.poison.id, 60, 0));
 
-			if (props.hasBusoHakiActive())
+			Ability hardeningBuso = abilityProps.getAbilityFromName(ListAttributes.BUSOSHOKU_HAKI_HARDENING.getAttributeName());
+			Ability fullBodyHardeningBuso = abilityProps.getAbilityFromName(ListAttributes.BUSOSHOKU_HAKI_FULL_BODY_HARDENING.getAttributeName());
+
+			if (hardeningBuso != null && hardeningBuso.isPassiveActive())
 			{
 				double power = props.getDoriki() / 500;
+				event.ammount += power * props.getDamageMultiplier();
+			}
+			
+			if (fullBodyHardeningBuso != null && fullBodyHardeningBuso.isPassiveActive())
+			{
+				double power = props.getDoriki() / 700;
 				event.ammount += power * props.getDamageMultiplier();
 			}
 		}
