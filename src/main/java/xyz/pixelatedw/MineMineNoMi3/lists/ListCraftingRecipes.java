@@ -10,6 +10,9 @@ public class ListCraftingRecipes
 	
 	public static void init()
 	{
+		GameRegistry.addShapedRecipe(new ItemStack(ListMisc.MedicBag, 1), new Object[]
+				{ "Y.Y", "XZX", "XXX", 'X', Items.leather, 'Y', Items.string, 'Z', new ItemStack(Items.dye, 1, 4) });
+		
 		GameRegistry.addShapedRecipe(new ItemStack(ListMisc.ClimaTact, 1), new Object[]
 				{ "YXY", "YXY", "YXY", 'X', Items.stick, 'Y', new ItemStack(Items.dye, 1, 4) });
 		GameRegistry.addShapedRecipe(new ItemStack(ListMisc.PerfectClimaTact, 1), new Object[]
