@@ -8,8 +8,11 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.WorldServer;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.abilities.HakiAbilities;
 import xyz.pixelatedw.MineMineNoMi3.api.Schematic;
+import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WySchematicHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketQuestSync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
@@ -46,6 +49,7 @@ public class CommandFG extends CommandBase
 		{
 			EntityPlayer player = CommandBase.getCommandSenderAsPlayer(sender);
 			ExtendedEntityData props = ExtendedEntityData.get(player);
+			AbilityProperties abilityProps = AbilityProperties.get(player);
 			QuestProperties questProps = QuestProperties.get(player);
 			Entity toSpawn = null;
 
@@ -146,6 +150,35 @@ public class CommandFG extends CommandBase
 				Schematic sch = WySchematicHelper.load("pyrateLargeShip");
 				WySchematicHelper.build(sch, player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ);
 				StructureLargeShip.populate((int)player.posX, (int)player.posY, (int)player.posZ, player.worldObj, sch.getName());
+			}
+			
+			else if(str[0].equalsIgnoreCase("haki"))
+			{
+				if(str[1].equalsIgnoreCase("aura"))
+				{
+					abilityProps.addHakiAbility(HakiAbilities.KENBUNSHOKU_HAKI_AURA);
+					WyHelper.sendMsgToPlayer(player, "Kenbunshoku Haki: Aura Unlocked");
+				}
+				else if(str[1].equalsIgnoreCase("futuresight"))
+				{
+					abilityProps.addHakiAbility(HakiAbilities.KENBUNSHOKU_HAKI_FUTURE_SIGHT);
+					WyHelper.sendMsgToPlayer(player, "Kenbunshoku Haki: Future Sight Unlocked");
+				}
+				else if(str[1].equalsIgnoreCase("hardening"))
+				{
+					abilityProps.addHakiAbility(HakiAbilities.BUSOSHOKU_HAKI_HARDENING);
+					WyHelper.sendMsgToPlayer(player, "Busoshoku Haki: Hardening Unlocked");
+				}
+				else if(str[1].equalsIgnoreCase("fullbody"))
+				{
+					abilityProps.addHakiAbility(HakiAbilities.BUSOSHOKU_HAKI_FULL_BODY_HARDENING);
+					WyHelper.sendMsgToPlayer(player, "Busoshoku Haki: Full Body Hardening Unlocked");
+				}
+				else if(str[1].equalsIgnoreCase("imbuing"))
+				{
+					abilityProps.addHakiAbility(HakiAbilities.BUSOSHOKU_HAKI_IMBUING);
+					WyHelper.sendMsgToPlayer(player, "Busoshoku Haki: Imbuing Unlocked");
+				}
 			}
 			
 			if(toSpawn != null)
