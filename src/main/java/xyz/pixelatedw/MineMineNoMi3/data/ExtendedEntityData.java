@@ -295,7 +295,7 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 	public String getFightStyle() {return this.fightStyle;}
 	public boolean isSwordsman() { return this.fightStyle.equalsIgnoreCase("swordsman"); }
 	public boolean isSniper() { return this.fightStyle.equalsIgnoreCase("sniper"); }
-	public boolean isMedic() { return this.fightStyle.equalsIgnoreCase("medic"); }
+	public boolean isMedic() { return this.fightStyle.equalsIgnoreCase("doctor"); }
 	public boolean isWeatherWizard() { return this.fightStyle.equalsIgnoreCase("art of weather"); }
 	public boolean hasFightingStyle() { return !this.fightStyle.equalsIgnoreCase("n/a"); }
 	public void setFightStyle(String i) {this.fightStyle = i;}
