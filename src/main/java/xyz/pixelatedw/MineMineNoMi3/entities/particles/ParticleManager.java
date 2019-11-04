@@ -23,6 +23,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.goro.ParticleEffe
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.goro.ParticleEffectKari;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.goro.ParticleEffectRaigo;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.gura.ParticleEffectGekishin;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.haki.ParticleEffectHaoshokuHaki;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.hie.ParticleEffectIceAge;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.ito.ParticleEffectKumoNoSugaki;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.kachi.ParticleEffectEvaporate;
@@ -87,6 +88,9 @@ public class ParticleManager
 		map.put(ID.PARTICLEFX_ABOVEHEAD_ANGRY, new ParticleEffectAboveHead(EnumParticleTypes.VILLAGER_ANGRY.getParticleName()));
 		map.put(ID.PARTICLEFX_ABOVEHEAD_HAPPY, new ParticleEffectAboveHead(EnumParticleTypes.VILLAGER_HAPPY.getParticleName()));
 		map.put(ID.PARTICLEFX_ABOVEHEAD_HEART, new ParticleEffectAboveHead(EnumParticleTypes.HEART.getParticleName()));
+
+		// Haki
+		map.put(ID.PARTICLEFX_HAOSHOKU_HAKI, new ParticleEffectHaoshokuHaki());
 
 		// Sabi
 		map.put(ID.PARTICLEFX_RUSTTOUCH, new ParticleEffectRustTouch());
