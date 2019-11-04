@@ -298,5 +298,5 @@ public class ListAttributes
 	public static final AbilityAttribute BUSOSHOKU_HAKI_HARDENING = new AbilityAttribute("Busoshoku Haki: Hardening").setAbilityPassive(true);
 	public static final AbilityAttribute BUSOSHOKU_HAKI_FULL_BODY_HARDENING = new AbilityAttribute("Busoshoku Haki: Full-Body Hardening").setAbilityPassive(true);
 	public static final AbilityAttribute BUSOSHOKU_HAKI_IMBUING = new AbilityAttribute("Busoshoku Haki: Imbuing").setAbilityPassive(true);
-	public static final AbilityAttribute HAOSHOKU_HAKI = new AbilityAttribute("Haoshoku Haki").setAbilityCharges(1 * 20).setAbilityCooldown(90);
+	public static final AbilityAttribute HAOSHOKU_HAKI = new AbilityAttribute("Haoshoku Haki").setAbilityCharges(3 * 20).setAbilityCooldown(90);
 }
