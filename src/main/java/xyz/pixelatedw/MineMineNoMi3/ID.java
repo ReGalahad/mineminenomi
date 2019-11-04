@@ -136,7 +136,8 @@ public class ID
 	PARTICLEFX_ABOVEHEAD_HEART = "aboveHeadHeart",
 	PARTICLEFX_MEDIC_BAG_EXPLOSION = "medicBagExplosion",
 	PARTICLEFX_FIRST_AID = "firstAid",
-
+	PARTICLEFX_HAOSHOKU_HAKI = "haoshokuHaki",
+	
 	EXTRAEFFECT_MERO = "mero",
 	EXTRAEFFECT_HIE = "hie",
 	EXTRAEFFECT_CHIYUHORMONE = "chiyuHormone",
