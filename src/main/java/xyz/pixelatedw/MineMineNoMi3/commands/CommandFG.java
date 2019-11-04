@@ -179,6 +179,11 @@ public class CommandFG extends CommandBase
 					abilityProps.addHakiAbility(HakiAbilities.BUSOSHOKU_HAKI_IMBUING);
 					WyHelper.sendMsgToPlayer(player, "Busoshoku Haki: Imbuing Unlocked");
 				}
+				else if(str[1].equalsIgnoreCase("hao"))
+				{
+					abilityProps.addHakiAbility(HakiAbilities.HAOSHOKU_HAKI);
+					WyHelper.sendMsgToPlayer(player, "Haoshoku Haki");
+				}
 			}
 			
 			if(toSpawn != null)

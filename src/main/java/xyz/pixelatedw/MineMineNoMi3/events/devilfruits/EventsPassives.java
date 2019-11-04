@@ -28,6 +28,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityExplosion;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
+import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilitySync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDoppelman;
@@ -235,7 +236,45 @@ public class EventsPassives
 					// Integer.MAX_VALUE);
 				}
 			}
+			boolean updateDisabledAbilities = false;
 
+			if(!player.worldObj.isRemote)
+			{
+				if(props.hasExtraEffects(ID.EXTRAEFFECT_HAO) && player.isPotionActive(Potion.blindness))
+				{
+	
+					for (int i = 0; i < abilityProps.countAbilitiesInHotbar(); i++)
+					{
+						if (abilityProps.getAbilityFromSlot(i) != null && !abilityProps.getAbilityFromSlot(i).isDisabled() && !abilityProps.getAbilityFromSlot(i).isOnCooldown())
+						{						
+							abilityProps.getAbilityFromSlot(i).endPassive(player);
+							abilityProps.getAbilityFromSlot(i).setCooldownActive(true);
+							abilityProps.getAbilityFromSlot(i).disable(player, true);
+						}
+					}
+					
+					if(updateDisabledAbilities)
+						WyNetworkHelper.sendTo(new PacketAbilitySync(abilityProps), (EntityPlayerMP) player);
+				}
+				else
+				{			
+					for (int i = 0; i < abilityProps.countAbilitiesInHotbar(); i++)
+					{										
+						if (abilityProps.getAbilityFromSlot(i) != null && abilityProps.getAbilityFromSlot(i).isDisabled())
+						{
+							abilityProps.getAbilityFromSlot(i).setPassiveActive(false);
+							abilityProps.getAbilityFromSlot(i).disable(player, false);
+							abilityProps.getAbilityFromSlot(i).startUpdate(player);
+							updateDisabledAbilities = true;
+						}
+						
+					}
+			
+					if(updateDisabledAbilities)
+						WyNetworkHelper.sendTo(new PacketAbilitySync(abilityProps), (EntityPlayerMP) player);				
+				}
+			}
+			
 			if (props.getTempPreviousAbility().equals("geppo") || props.getTempPreviousAbility().equals("soranomichi"))
 			{
 				if (!player.onGround && player.worldObj.getBlock((int) player.posX, (int) player.posY - 1, (int) player.posZ) == Blocks.air)
