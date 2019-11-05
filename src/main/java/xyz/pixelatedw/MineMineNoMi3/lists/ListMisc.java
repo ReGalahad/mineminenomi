@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.DimensionManager;
 import xyz.pixelatedw.MineMineNoMi3.ID;
@@ -15,6 +16,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.WyRegistry;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockAbilityProtection;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockAbilityProtectionArea;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockBarrier;
+import xyz.pixelatedw.MineMineNoMi3.blocks.BlockCannon;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockCustomBars;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockCustomSpawner;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockDarkness;
@@ -26,6 +28,7 @@ import xyz.pixelatedw.MineMineNoMi3.blocks.BlockOpe;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockOpeMid;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockPoison;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockPoneglyph;
+import xyz.pixelatedw.MineMineNoMi3.blocks.BlockSkyblock;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockStringMid;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockStringWall;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockSunaSand;
@@ -42,6 +45,7 @@ import xyz.pixelatedw.MineMineNoMi3.blocks.dials.BlockRejectDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityAbilityProtection;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityAxeDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityBreathDial;
+import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityCannon;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityCustomSpawner;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityDenDenMushi;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityEisenDial;
@@ -59,10 +63,13 @@ import xyz.pixelatedw.MineMineNoMi3.items.AkumaNoMiBox;
 import xyz.pixelatedw.MineMineNoMi3.items.BellyPouch;
 import xyz.pixelatedw.MineMineNoMi3.items.CharacterCreator;
 import xyz.pixelatedw.MineMineNoMi3.items.Cola;
-import xyz.pixelatedw.MineMineNoMi3.items.ItemCoreArmor;
+import xyz.pixelatedw.MineMineNoMi3.items.ItemSkyblock;
 import xyz.pixelatedw.MineMineNoMi3.items.SeaKingMeat;
 import xyz.pixelatedw.MineMineNoMi3.items.UltraCola;
 import xyz.pixelatedw.MineMineNoMi3.items.WantedPoster;
+import xyz.pixelatedw.MineMineNoMi3.items.armors.ItemCoreArmor;
+import xyz.pixelatedw.MineMineNoMi3.items.armors.ItemMedicBag;
+import xyz.pixelatedw.MineMineNoMi3.items.armors.ItemTomoeDrums;
 import xyz.pixelatedw.MineMineNoMi3.items.devilfruitextras.Heart;
 import xyz.pixelatedw.MineMineNoMi3.items.devilfruitextras.Shadow;
 import xyz.pixelatedw.MineMineNoMi3.items.devilfruitextras.WateringCan;
@@ -103,24 +110,7 @@ public class ListMisc
 	}.setHardness(10);
 	public static Block EnchantmentTable = new BlockEnchantmentTable2();
 	public static Block DenDenMushi = new BlockDenDenMushi();
-	public static Block SkyBlock = new NewBlock(Material.ground)
-	{
-		@Override
-		public int quantityDropped(Random random)
-		{
-			return 1 + random.nextInt(1);
-		}
-
-		@Override
-		public Item getItemDropped(int id, Random rand, int fortune)
-		{
-			Item[] dials = new Item[] { ListMisc.DialAxe, ListMisc.DialBreath, ListMisc.DialEisen, ListMisc.DialFire, ListMisc.DialFlash, ListMisc.DialImpact, ListMisc.DialMilky };
-			if(rand.nextDouble() < 0.25)
-				return dials[rand.nextInt(dials.length)];
-			else
-				return Item.getItemFromBlock(this);
-		}		
-	}.setLightLevel(0.75F).setLightOpacity(0);
+	public static Block SkyBlock = new BlockSkyblock();
 	public static Block Barrier = new BlockBarrier();
 	public static Block Poneglyph1 = new BlockPoneglyph();
 	public static Block Poneglyph2 = new BlockPoneglyph();
@@ -172,6 +162,8 @@ public class ListMisc
 	public static Block DialRejectBlock = new BlockRejectDial();
 	public static Block DialBreathBlock = new BlockBreathDial();
 	
+	public static Block Cannon = new BlockCannon();
+	
 	public static Item CharacterCreator = new CharacterCreator();
 	public static Item Kairoseki = new Item();
 	public static Item DenseKairoseki = new Item();
@@ -202,6 +194,7 @@ public class ListMisc
 	public static Item KairosekiBullets = new Item();
 	public static Item KujaArrow = new Item();
 	public static Item PopGreen = new Item();
+	public static Item CannonBall = new Item();
 	public static Item Cola = new Cola();
 	public static Item UltraCola = new UltraCola();
 
@@ -215,7 +208,8 @@ public class ListMisc
 	public static Item PirateBoots = new ItemCoreArmor("pirate", ID.ARMORMAT_USELESS, 3);
 
 	public static Item ColaBackpack = new ItemCoreArmor("colabackpack", ID.ARMORMAT_COLABACKPACK, 1);
-	public static Item TomoeDrums = new ItemCoreArmor("tomoeDrums", ID.ARMORMAT_COLABACKPACK, 1);
+	public static Item TomoeDrums = new ItemTomoeDrums();
+	public static Item MedicBag = new ItemMedicBag();
 
 	public static Item Flintlock = new Flintlock().setMaxStackSize(1).setFull3D();
 	public static Item Kabuto = new Kabuto("kabuto").setMaxStackSize(1).setFull3D();
@@ -250,10 +244,11 @@ public class ListMisc
 	public static ItemCoreWeapon Shusui = new ItemCoreWeapon(8);
 	public static ItemCoreWeapon SoulSolid = new ItemCoreWeapon(8);
 	public static ItemCoreWeapon Durandal = new ItemCoreWeapon(7);
+	public static ItemCoreWeapon Mace = new ItemCoreWeapon(6);
 	
-	public static ClimaTact ClimaTact = new ClimaTact();
-	public static ClimaTact PerfectClimaTact = new ClimaTact();
-	public static ClimaTact SorceryClimaTact = new ClimaTact();
+	public static ClimaTact ClimaTact = new ClimaTact().setDamage(1);
+	public static ClimaTact PerfectClimaTact = new ClimaTact().setDamage(3);
+	public static ClimaTact SorceryClimaTact = new ClimaTact().setDamage(6);
 	
 	public static ItemAbilityWeapon IceSaber = new ItemAbilityWeapon(9).setIsSlownessInducing();
 	public static ItemAbilityWeapon AmaNoMurakumo = new ItemAbilityWeapon(9);
@@ -292,6 +287,7 @@ public class ListMisc
 		addITEM(PopGreen, "Pop Green", ListCreativeTabs.tabWeapons);
 		addITEM(Bullets, "Bullets", ListCreativeTabs.tabWeapons);
 		addITEM(KairosekiBullets, "Kairoseki Bullets", ListCreativeTabs.tabWeapons);
+		addITEM(CannonBall, "Cannon Ball", ListCreativeTabs.tabWeapons);
 
 		addITEM(MarineHelm, "Marine Helmet", ListCreativeTabs.tabWeapons);
 		addITEM(MarineChestplate, "Marine Chestplate", ListCreativeTabs.tabWeapons);
@@ -304,8 +300,8 @@ public class ListMisc
 
 		addITEM(ColaBackpack, "Cola Backpack", ListCreativeTabs.tabWeapons);
 		addITEM(TomoeDrums, "Tomoe Drums", ListCreativeTabs.tabWeapons);
-
 		addITEM(Note, "Note", ListCreativeTabs.tabMisc);
+		addITEM(MedicBag, "Medic Bag", ListCreativeTabs.tabWeapons);
 		
 		addITEM(GreenKujaBow, "Green Kuja Bow", ListCreativeTabs.tabWeapons);
 		addITEM(BlueKujaBow, "Blue Kuja Bow", ListCreativeTabs.tabWeapons);
@@ -340,6 +336,7 @@ public class ListMisc
 		addITEM(Shusui, "Shusui", ListCreativeTabs.tabWeapons);
 		addITEM(SoulSolid, "Soul Solid", ListCreativeTabs.tabWeapons);
 		addITEM(Durandal, "Durandal", ListCreativeTabs.tabWeapons);
+		addITEM(Mace, "Mace", ListCreativeTabs.tabWeapons);
 		
 		addITEM(ClimaTact, "Clima Tact", ListCreativeTabs.tabWeapons);
 		addITEM(PerfectClimaTact, "Perfect Clima Tact", ListCreativeTabs.tabWeapons);
@@ -369,7 +366,7 @@ public class ListMisc
 		addBLOCK(KairosekiBlock, "Kairoseki Block", 3.5F, null, ListCreativeTabs.tabMisc);
 		addBLOCK(EnchantmentTable, "Kairoseki Table", 3.5F, null, ListCreativeTabs.tabMisc);
 		addBLOCK(DenDenMushi, "Den Den Mushi", 0.5F, TileEntityDenDenMushi.class, ListCreativeTabs.tabMisc);
-		addBLOCK(SkyBlock, "Sky Block", 0.6F, null, ListCreativeTabs.tabMisc);
+		addBLOCK(SkyBlock, ItemSkyblock.class, "Sky Block", 0.6F, null, ListCreativeTabs.tabMisc);
 		addBLOCK(Barrier, "Crash Barrier", Float.POSITIVE_INFINITY, null, null);
 		addBLOCK(Poneglyph1, "Poneglyph 1", Float.POSITIVE_INFINITY, TileEntityPoneglyph.class, ListCreativeTabs.tabMisc);
 		addBLOCK(Poneglyph2, "Poneglyph 2", Float.POSITIVE_INFINITY, TileEntityPoneglyph.class, ListCreativeTabs.tabMisc);
@@ -387,9 +384,10 @@ public class ListMisc
 		addBLOCK(OriBars, "Ori Bars", 40.0F, null, null);
 		addBLOCK(KairosekiBars, "Kairoseki Bars", 30.0F, null, ListCreativeTabs.tabMisc);
 		addBLOCK(WaxBlock, "Wax Block", 6.0F, null, null);
-		addBLOCK(AbilityProtectionBlock, "Ability Protection Block", Float.MAX_VALUE, null, ListCreativeTabs.tabMisc);
+		addBLOCK(AbilityProtectionBlock, "Ability Protection Block", Float.MAX_VALUE, null, null);
 		addBLOCK(AbilityProtectionAreaBlock, "Ability Protection Area Block", Float.MAX_VALUE, null, null);
 		addBLOCK(AbilityProtectionCenterBlock, "Ability Protection Center Block", Float.MAX_VALUE, TileEntityAbilityProtection.class, null);
+		addBLOCK(Cannon, "Cannon", 1.0F, TileEntityCannon.class, ListCreativeTabs.tabMisc);
 		
 		addBLOCK(DialEisenBlock, "Eisen Dial Block", .3F, TileEntityEisenDial.class, null);
 		addBLOCK(DialFireBlock, "Flame Dial Block", .3F, TileEntityFlameDial.class, null);
@@ -415,7 +413,7 @@ public class ListMisc
 		
 		WyRegistry.registerName("style.swordsman.name", "Swordsman");
 		WyRegistry.registerName("style.sniper.name", "Sniper");
-		WyRegistry.registerName("style.doctor.name", "Medic");
+		WyRegistry.registerName("style.doctor.name", "Doctor");
 		WyRegistry.registerName("style.art of weather.name", "Art of Weather");
 		
 		WyRegistry.registerName("quest.none.name", "None");
@@ -495,6 +493,12 @@ public class ListMisc
 	private static void addBLOCK(Block block, String localizedName, float hard, Class<? extends TileEntity> tile, CreativeTabs tab)
 	{
 		WyRegistry.registerBlock(block, localizedName, hard, tab, tile);
+		Values.miscBlocks.add(block);
+	}
+	
+	private static void addBLOCK(Block block, Class<? extends ItemBlock> itemBlock, String localizedName, float hard, Class<? extends TileEntity> tile, CreativeTabs tab)
+	{
+		WyRegistry.registerBlock(block, itemBlock, localizedName, hard, tab, tile);
 		Values.miscBlocks.add(block);
 	}
 }

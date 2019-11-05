@@ -188,7 +188,7 @@ public class StructureMarineLargeBase extends Structure
 			addChestLoot(world, chest, 20, ListMisc.Box1, 1, 0);
 			addChestLoot(world, chest, 10, ListMisc.Box2, 1, 0);
 			addChestLoot(world, chest, 10, ListMisc.UltraCola, 1, 0);
-			addChestLoot(world, chest, 5, ListMisc.Box3, 1, 0);
+			addChestLoot(world, chest, 10, ListMisc.Box3, 1, 0);
 		};
 		
 		addChestTileEntity(world, commodoreChestPositions, 0, commodoreChestLoot);

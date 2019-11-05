@@ -34,6 +34,7 @@ public class ZouAbilities
 			super(ListAttributes.TRUNK_SHOT);
 		}
 		
+		@Override
 		public void use(EntityPlayer player)
 		{	
 			ExtendedEntityData props = ExtendedEntityData.get(player);
@@ -56,6 +57,7 @@ public class ZouAbilities
 			super(ListAttributes.GREAT_STOMP); 
 		}	
 		
+		@Override
 		public void use(EntityPlayer player) 
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
@@ -72,7 +74,7 @@ public class ZouAbilities
 
 				for(EntityLivingBase entity : WyHelper.getEntitiesNear(player, 10))
 				{
-					entity.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) player), 10);
+					entity.attackEntityFrom(DamageSource.causePlayerDamage(player), 10 * props.getDamageMultiplier());
 					entity.setPositionAndUpdate(entity.posX, entity.posY + 3, entity.posZ);
 				}
 				
@@ -88,6 +90,7 @@ public class ZouAbilities
 			super(ListAttributes.IVORY_STOMP); 
 		}	
 		
+		@Override
 		public void passive(EntityPlayer player)
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
@@ -98,6 +101,7 @@ public class ZouAbilities
 				super.passive(player);
 		}
 		
+		@Override
 		public void hitEntity(EntityPlayer player, EntityLivingBase target) 
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
@@ -105,19 +109,19 @@ public class ZouAbilities
 			if(props.getZoanPoint().equals("hybrid"))
 			{
 				super.hitEntity(player, target);
-				target.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) player), 20);
+				target.attackEntityFrom(DamageSource.causePlayerDamage(player), 20 * props.getDamageMultiplier());
 				AbilityExplosion explosion = WyHelper.newExplosion(target, target.posX, target.posY, target.posZ, 1);
 				explosion.setExplosionSound(false);
 				explosion.setDamageOwner(false);
 				explosion.setDestroyBlocks(false);
 				explosion.doExplosion();
 				
-				double mX = (double)(-MathHelper.sin(player.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(player.rotationPitch / 180.0F * (float)Math.PI) * 0.4);
-				double mZ = (double)(MathHelper.cos(player.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(player.rotationPitch / 180.0F * (float)Math.PI) * 0.4);
+				double mX = -MathHelper.sin(player.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(player.rotationPitch / 180.0F * (float)Math.PI) * 0.4;
+				double mZ = MathHelper.cos(player.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(player.rotationPitch / 180.0F * (float)Math.PI) * 0.4;
 					
 				double f2 = MathHelper.sqrt_double(mX * mX + player.motionY * player.motionY + mZ * mZ);
-				mX /= (double)f2;
-				mZ /= (double)f2;
+				mX /= f2;
+				mZ /= f2;
 				mX += player.worldObj.rand.nextGaussian() * 0.007499999832361937D * 1.0;
 				mZ += player.worldObj.rand.nextGaussian() * 0.007499999832361937D * 1.0;
 				mX *= -2.7;
@@ -142,20 +146,21 @@ public class ZouAbilities
 			super(ListAttributes.IVORY_DART); 
 		}
 		
+		@Override
 		public void use(EntityPlayer player)
 		{	
 			ExtendedEntityData props = ExtendedEntityData.get(player);
 
 			if(props.getZoanPoint().equals("full") && !this.isOnCooldown)
 			{
-				double mX = (double)(-MathHelper.sin(player.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(player.rotationPitch / 180.0F * (float)Math.PI) * 0.4);
-				double mZ = (double)(MathHelper.cos(player.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(player.rotationPitch / 180.0F * (float)Math.PI) * 0.4);
+				double mX = -MathHelper.sin(player.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(player.rotationPitch / 180.0F * (float)Math.PI) * 0.4;
+				double mZ = MathHelper.cos(player.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(player.rotationPitch / 180.0F * (float)Math.PI) * 0.4;
 				
 				this.initialY = (int) player.posY;
 				
 				double f2 = MathHelper.sqrt_double(mX * mX + player.motionY * player.motionY + mZ * mZ);
-				mX /= (double)f2;
-				mZ /= (double)f2;
+				mX /= f2;
+				mZ /= f2;
 				mX += player.worldObj.rand.nextGaussian() * 0.007499999832361937D * 1.0;
 				mZ += player.worldObj.rand.nextGaussian() * 0.007499999832361937D * 1.0;
 				mX *= 4;
@@ -171,12 +176,15 @@ public class ZouAbilities
 			}
 		}
 		
-	    public void duringCooldown(EntityPlayer player, int currentCooldown)
+	    @Override
+		public void duringCooldown(EntityPlayer player, int currentCooldown)
 	    {
+			ExtendedEntityData props = ExtendedEntityData.get(player);
+
 			if(currentCooldown > 180 && player.posY >= this.initialY)
 			{
 				for(EntityLivingBase e : WyHelper.getEntitiesNear(player, 1.6))
-					e.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) player), 12);
+					e.attackEntityFrom(DamageSource.causePlayerDamage(player), 12 * props.getDamageMultiplier());
 				
 				for(int[] location : WyHelper.getBlockLocationsNearby(player, 3))
 				{
@@ -199,6 +207,7 @@ public class ZouAbilities
 			super(ListAttributes.ZOU_FULL_POINT);
 		}
 		
+		@Override
 		public void passive(EntityPlayer player)
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
@@ -209,6 +218,7 @@ public class ZouAbilities
 			}
 		}
 		
+		@Override
 		public void startPassive(EntityPlayer player)
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
@@ -223,6 +233,7 @@ public class ZouAbilities
 			WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));
 		}
 		
+		@Override
 		public void endPassive(EntityPlayer player)
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
@@ -242,6 +253,7 @@ public class ZouAbilities
 			super(ListAttributes.ZOU_HYBRID_POINT);
 		}
 		
+		@Override
 		public void passive(EntityPlayer player)
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
@@ -252,6 +264,7 @@ public class ZouAbilities
 			}
 		}
 		
+		@Override
 		public void startPassive(EntityPlayer player)
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
@@ -266,6 +279,7 @@ public class ZouAbilities
 			WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));
 		}
 		
+		@Override
 		public void endPassive(EntityPlayer player)
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);

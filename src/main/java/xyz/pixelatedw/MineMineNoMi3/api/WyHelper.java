@@ -36,6 +36,7 @@ import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityExplosion;
+import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
 import xyz.pixelatedw.MineMineNoMi3.api.math.ISphere;
 import xyz.pixelatedw.MineMineNoMi3.api.math.Sphere;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
@@ -587,6 +588,19 @@ public class WyHelper
 		return blocks;
 	}
 	
+	public static void removeStackFromArmorSlots(EntityPlayer player, ItemStack stack)
+	{
+		int x = player.inventory.mainInventory.length;
+		for (int i = x; i < x + player.inventory.armorInventory.length; i++)
+		{
+			if (stack == player.inventory.getStackInSlot(i))
+			{
+				player.inventory.setInventorySlotContents(i, null);
+				break;
+			}
+		}
+	}
+	
 	public static void removeStackFromInventory(EntityPlayer player, ItemStack stack)
 	{
 		for (int i = 0; i < player.inventory.mainInventory.length; i++)
@@ -604,30 +618,66 @@ public class WyHelper
 		if (player.inventory.mainInventory[index] != null)
 			player.inventory.mainInventory[index] = null;
 	}
-	
-	public static boolean isPatreon(EntityPlayer player)
+
+	public static int getPatreonLevel(EntityPlayer player)
 	{
 		boolean flag = false;
 		
-		String apiURL = "/isPatreon";
+		String apiURL = "/patreon?uuid=" + player.getUniqueID().toString();
+		String result = WyTelemetry.sendGET(apiURL);
 
-		String uuid = player.getUniqueID().toString();
-		String json = Values.gson.toJson(uuid);
-
-		String result = WyTelemetry.sendPOST(apiURL, json);
-
-		if(WyHelper.isNullOrEmpty(result))
-			return flag;
-		else
+		if(!WyHelper.isNullOrEmpty(result))
 		{
 			int patreonLevel = Integer.parseInt(result);
-				
-			if(patreonLevel <= 2)
-				return flag;
-			else
-				flag = true;			
+			
+			return patreonLevel;
 		}
 		
-		return flag;
+		return 1;
+	}
+	
+	public static boolean isCelestialDragon(EntityPlayer player)
+	{
+		return getPatreonLevel(player) == 4;
+	}
+	
+	public static boolean isSupernova(EntityPlayer player)
+	{
+		return getPatreonLevel(player) == 3;
+	}
+	
+	public static boolean isRookie(EntityPlayer player)
+	{
+		return getPatreonLevel(player) == 2;
+	}
+	
+	public static boolean isDevBuild()
+	{
+		return ID.BUILD_MODE.equalsIgnoreCase("DEV");
+	}
+	
+	public static boolean isEarlyAccessBuild()
+	{
+		return ID.BUILD_MODE.equalsIgnoreCase("EARLY_ACCESS");
+	}
+	
+	public static boolean isReleaseBuild()
+	{
+		return ID.BUILD_MODE.equalsIgnoreCase("RELEASE");
+	}
+	
+	public static boolean hasPatreonAccess(EntityPlayer player)
+	{
+		int patreon = getPatreonLevel(player);
+		
+		if(isDevBuild() && WyDebug.isDebug())
+			return true;
+		
+		if(isDevBuild() && patreon >= 4)
+			return true;
+		else if(isEarlyAccessBuild() && patreon >= 3)
+			return true;
+		else
+			return false;
 	}
 }

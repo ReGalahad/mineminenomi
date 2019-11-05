@@ -71,10 +71,10 @@ public class EntityAISoru extends EntityAICooldown
 	public void execute(double level)
 	{
 		IAttributeInstance soruSpeed = this.entity.getEntityAttribute(SharedMonsterAttributes.movementSpeed);
-		if(soruSpeed.getModifier(soruSpeedUUID) != null)
+		if(soruSpeed.getModifier(this.soruSpeedUUID) != null && this.speedModifier != null)
 			soruSpeed.removeModifier(this.speedModifier);	
 		
-		speedModifier = new AttributeModifier(soruSpeedUUID, "Soru Speed", level, 0);
+		this.speedModifier = new AttributeModifier(this.soruSpeedUUID, "Soru Speed", level, 0);
 
 		this.entity.getEntityAttribute(SharedMonsterAttributes.movementSpeed).applyModifier(this.speedModifier);
 		

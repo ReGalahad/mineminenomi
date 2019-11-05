@@ -24,7 +24,10 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
+import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 
 public class ItemCoreWeapon extends Item
 {
@@ -64,16 +67,27 @@ public class ItemCoreWeapon extends Item
 		if(!world.isRemote)
 		{
 			ExtendedEntityData props = ExtendedEntityData.get((EntityLivingBase) entity);
-			
+
 			double multiplier = 1;
 			
-			if(props.hasBusoHakiActive())
-				multiplier += 0.5;
-			
+			if(entity instanceof EntityPlayer)
+			{
+				AbilityProperties abilityProps = AbilityProperties.get((EntityPlayer) entity);
+				Ability imbuingBuso = abilityProps.getAbilityFromName(ListAttributes.BUSOSHOKU_HAKI_IMBUING.getAttributeName());
+
+				if(imbuingBuso != null && imbuingBuso.isPassiveActive())
+					multiplier += 0.5;
+			}
+			else
+			{							
+				if(props.hasBusoHakiActive())
+					multiplier += 0.5;
+			}
+					
 			if(props.isSwordsman())
 				multiplier += 0.25;
 			
-			itemStack.getTagCompound().setDouble("multiplier", multiplier);
+			itemStack.getTagCompound().setDouble("multiplier", multiplier);			
 		}
 	}
 	
@@ -118,8 +132,16 @@ public class ItemCoreWeapon extends Item
 	public boolean hitEntity(ItemStack itemStack, EntityLivingBase target, EntityLivingBase attacker)
 	{
 		ExtendedEntityData props = ExtendedEntityData.get(attacker);
+		boolean damageSword = true;
+		if(attacker instanceof EntityPlayer)
+		{
+			AbilityProperties abilityProps = AbilityProperties.get((EntityPlayer) attacker);
+			Ability imbuingBuso = abilityProps.getAbilityFromName(ListAttributes.BUSOSHOKU_HAKI_IMBUING.getAttributeName());
+			if(imbuingBuso != null && imbuingBuso.isPassiveActive())
+				damageSword = false;
+		}
 
-		if(!props.hasBusoHakiActive())
+		if(damageSword)
 			itemStack.damageItem(1, attacker);
 		
 		if(isPoisonous)
@@ -199,11 +221,17 @@ public class ItemCoreWeapon extends Item
 	public Multimap getAttributeModifiers(ItemStack stack)
 	{
 		Multimap multimap = super.getAttributeModifiers(stack);
-		double multiplier;
+		double multiplier = 0;
 		if( stack.getTagCompound() != null)
-			multiplier = stack.getTagCompound().getDouble("multiplier");
+		{
+			multiplier += stack.getTagCompound().getDouble("multiplier");
+			multiplier += stack.getTagCompound().getDouble("multiplier_black_metal");
+			multiplier += stack.getTagCompound().getDouble("multiplier_eisen");
+		}
 		else
+		{
 			multiplier = 1;
+		}
 		multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Weapon modifier", this.damage * multiplier, 0));
 		return multimap;
 	}
@@ -235,12 +263,14 @@ public class ItemCoreWeapon extends Item
 	public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining)
 	{	
 		ExtendedEntityData props = ExtendedEntityData.get(player);
-
+		AbilityProperties abilityProps = AbilityProperties.get(player);
+		Ability imbuingBuso = abilityProps.getAbilityFromName(ListAttributes.BUSOSHOKU_HAKI_IMBUING.getAttributeName());
+		
 		if(stack.getTagCompound() != null)
     	{
 			if (player.getHeldItem() != null && player.getHeldItem().equals(stack))
 			{
-				if(props.hasBusoHakiActive())
+				if(imbuingBuso != null && imbuingBuso.isPassiveActive())
 				{
 					stack.getTagCompound().setInteger("metadata", 2);
 					return this.hakiImbuedIcon;
@@ -252,7 +282,7 @@ public class ItemCoreWeapon extends Item
 			else
 			{
 				stack.getTagCompound().setInteger("metadata", 1);
-				return this.sheathedIcon;
+				return this.itemIcon;
 			}
     	}
 

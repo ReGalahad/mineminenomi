@@ -17,7 +17,7 @@ public class EntityAITekkai extends EntityAICooldown
 	private int hitCount, maxCount;
 	private float prevHealth;
 	private UUID knockbackResistanceUUID = UUID.fromString("4929edc3-45e7-4763-aecc-d478f5eadc3b");
-	private AttributeModifier knockbackModifier = new AttributeModifier(knockbackResistanceUUID, "Knockback Resistance", 999, 0);
+	private AttributeModifier knockbackModifier = new AttributeModifier(this.knockbackResistanceUUID, "Knockback Resistance", 999, 0);
 	
 	public EntityAITekkai(EntityNewMob entity)
 	{
@@ -35,7 +35,7 @@ public class EntityAITekkai extends EntityAICooldown
 		if(this.isOnCooldown())
 		{
 			IAttributeInstance knockbackResistsance = this.entity.getEntityAttribute(SharedMonsterAttributes.knockbackResistance);
-			if(this.cooldown < this.maxCooldown / 2 && knockbackResistsance.getModifier(knockbackResistanceUUID) != null)
+			if(this.cooldown < this.maxCooldown / 2 && knockbackResistsance.getModifier(this.knockbackResistanceUUID) != null)
 				knockbackResistsance.removeModifier(this.knockbackModifier);
 			
 			this.countDownCooldown();
@@ -72,7 +72,8 @@ public class EntityAITekkai extends EntityAICooldown
 	
 	public void execute()
 	{
-		this.entity.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).applyModifier(this.knockbackModifier);
+		if(this.entity.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).getModifier(this.knockbackResistanceUUID) == null)
+			this.entity.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).applyModifier(this.knockbackModifier);
 		
 		this.entity.addPotionEffect(new PotionEffect(Potion.resistance.id, 70, 100));
 		this.entity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 70, 100));

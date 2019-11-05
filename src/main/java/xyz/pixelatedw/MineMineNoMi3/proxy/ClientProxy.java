@@ -11,6 +11,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityRenderer;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityAxeDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityBreathDial;
+import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityCannon;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityDenDenMushi;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityEisenDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityFlameDial;
@@ -97,6 +98,7 @@ import xyz.pixelatedw.MineMineNoMi3.models.entities.mobs.humanoids.ModelMorgan;
 import xyz.pixelatedw.MineMineNoMi3.models.entities.mobs.humanoids.ModelMr0;
 import xyz.pixelatedw.MineMineNoMi3.models.entities.mobs.humanoids.ModelPearl;
 import xyz.pixelatedw.MineMineNoMi3.models.entities.mobs.humanoids.ModelSpandam;
+import xyz.pixelatedw.MineMineNoMi3.renderers.blocks.RenderBlockCannon;
 import xyz.pixelatedw.MineMineNoMi3.renderers.blocks.RenderBlockDenDenMushi;
 import xyz.pixelatedw.MineMineNoMi3.renderers.blocks.RenderBlockDial;
 import xyz.pixelatedw.MineMineNoMi3.renderers.blocks.RenderBlockWantedPoster;
@@ -110,6 +112,7 @@ import xyz.pixelatedw.MineMineNoMi3.renderers.items.RenderWeaponBisento;
 import xyz.pixelatedw.MineMineNoMi3.renderers.items.RenderWeaponDurandal;
 import xyz.pixelatedw.MineMineNoMi3.renderers.items.RenderWeaponKatana;
 import xyz.pixelatedw.MineMineNoMi3.renderers.items.RenderWeaponKiribachi;
+import xyz.pixelatedw.MineMineNoMi3.renderers.items.RenderWeaponMace;
 import xyz.pixelatedw.MineMineNoMi3.renderers.items.RenderWeaponPipe;
 
 public class ClientProxy extends CommonProxy
@@ -182,7 +185,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityDenDenMushi.class, new MobRenderer(new ModelDenDenMushi(), "denden"));
 		RenderingRegistry.registerEntityRenderingHandler(EntityKungFuDugong.class, new MobRenderer(new ModelKungFuDugong(), "kungfudugong"));
 		RenderingRegistry.registerEntityRenderingHandler(EntityLapahn.class, new MobRenderer(new ModelLapahn(), "lapahn"));
-		RenderingRegistry.registerEntityRenderingHandler(EntityYagaraBull.class, new MobRenderer(new ModelYagaraBull(), 1.5F, "yagarabull"));
+		RenderingRegistry.registerEntityRenderingHandler(EntityYagaraBull.class, new MobRenderer(new ModelYagaraBull(), 1.5F, null));
 		
 		//TEMP
 		RenderingRegistry.registerEntityRenderingHandler(TempEntityDugong.class, new MobRenderer(new ModelKungFuDugong(), "kungfudugong"));
@@ -193,7 +196,8 @@ public class ClientProxy extends CommonProxy
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDenDenMushi.class, new RenderBlockDenDenMushi());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWantedPoster.class, new RenderBlockWantedPoster());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWantedPostersPackage.class, new RenderBlockWantedPostersPackage());
-		
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCannon.class, new RenderBlockCannon());
+
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAxeDial.class, new RenderBlockDial(new ModelImpactDial(), "axedial"));
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityEisenDial.class, new RenderBlockDial(new ModelMilkyDial(), "eisendial"));
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFlameDial.class, new RenderBlockDial(new ModelFlameDial(), "flamedial"));
@@ -228,7 +232,10 @@ public class ClientProxy extends CommonProxy
 		
 		MinecraftForgeClient.registerItemRenderer(ListMisc.Biseto, new RenderWeaponBisento());
 		MinecraftForgeClient.registerItemRenderer(ListMisc.BoStick, new RenderWeaponBisento());
-		
+		MinecraftForgeClient.registerItemRenderer(ListMisc.ClimaTact, new RenderWeaponBisento());
+		MinecraftForgeClient.registerItemRenderer(ListMisc.PerfectClimaTact, new RenderWeaponBisento());
+		MinecraftForgeClient.registerItemRenderer(ListMisc.SorceryClimaTact, new RenderWeaponBisento());
+
 		MinecraftForgeClient.registerItemRenderer(ListMisc.WadoIchimonji, new RenderWeaponKatana());
 		MinecraftForgeClient.registerItemRenderer(ListMisc.SandaiKitetsu, new RenderWeaponKatana());
 		MinecraftForgeClient.registerItemRenderer(ListMisc.NidaiKitetsu, new RenderWeaponKatana());
@@ -239,6 +246,9 @@ public class ClientProxy extends CommonProxy
 		MinecraftForgeClient.registerItemRenderer(ListMisc.Kiribachi, new RenderWeaponKiribachi());
 
 		MinecraftForgeClient.registerItemRenderer(ListMisc.Durandal, new RenderWeaponDurandal());
+		
+		MinecraftForgeClient.registerItemRenderer(ListMisc.Mace, new RenderWeaponMace());
+
 
 	}
 	

@@ -1,9 +1,8 @@
-package xyz.pixelatedw.MineMineNoMi3.items;
+package xyz.pixelatedw.MineMineNoMi3.items.armors;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,7 +14,6 @@ import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 
 public class ItemCoreArmor extends ItemArmor
 {
-
 	private String name;
 	private ArmorMaterial mat;
 
@@ -27,6 +25,7 @@ public class ItemCoreArmor extends ItemArmor
 		this.name = name;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemstack, int armorSlot)
 	{
@@ -78,12 +77,7 @@ public class ItemCoreArmor extends ItemArmor
 		return armorModel;
 	}
 
-	/*@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister iconRegister)
-	{
-		this.itemIcon = iconRegister.registerIcon(this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf('.') + 1));
-	}*/
-
+	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String layer)
 	{
 		return String.format("%s:textures/armor/%s_%d.png", ID.PROJECT_ID, name, slot == 2 ? 2 : 1);

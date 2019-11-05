@@ -127,6 +127,8 @@ public class EntityParticleFX extends EntityFX
     			motionX, motionY, motionZ)
     			.setParticleScale(this.particleScale).setParticleGravity(this.particleGravity).setParticleAge(this.particleMaxAge);
     	
+    	clone.setRBGColorF(this.particleRed, this.particleGreen, this.particleBlue);
+    	
     	if(this.hasZoom)
     		clone.setHasZoom();
 

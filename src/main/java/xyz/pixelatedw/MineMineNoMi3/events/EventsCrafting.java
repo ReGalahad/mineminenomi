@@ -4,6 +4,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.AnvilUpdateEvent;
 import xyz.pixelatedw.MineMineNoMi3.helpers.ItemsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListEffects;
@@ -76,12 +77,19 @@ public class EventsCrafting
 				
 				if(level > 3)
 					level = 3;
-				
+
 				event.cost = 1;
 				event.materialCost = 5 * level;
 				event.output = new ItemStack(event.left.getItem());
 				EnchantmentHelper.setEnchantments(EnchantmentHelper.getEnchantments(event.left), event.output);
-				event.output.addEnchantment(Enchantment.sharpness, 3 * level);
+			
+				if(event.left.getTagCompound() == null)
+					event.left.setTagCompound(new NBTTagCompound());
+				
+				event.output.setTagCompound((NBTTagCompound) event.left.getTagCompound().copy());
+				if(event.output.getTagCompound().getDouble("multiplier_black_metal") >= 0.3 * level)
+					return;
+				event.output.getTagCompound().setDouble("multiplier_black_metal", 0.3 * level);
 				event.output.getItem().setMaxDamage(event.output.getItem().getMaxDamage() + (3000 * level));
 			}
 			else if(event.right.getItem() == ListMisc.DialFire  && event.right.stackSize >= 3)
@@ -103,7 +111,14 @@ public class EventsCrafting
 				event.materialCost = 3 * level;
 				event.output = new ItemStack(event.left.getItem());
 				EnchantmentHelper.setEnchantments(EnchantmentHelper.getEnchantments(event.left), event.output);
-				event.output.addEnchantment(Enchantment.sharpness, level);
+				
+				if(event.left.getTagCompound() == null)
+					event.left.setTagCompound(new NBTTagCompound());
+				
+				event.output.setTagCompound((NBTTagCompound) event.left.getTagCompound().copy());
+				if(event.output.getTagCompound().getDouble("multiplier_eisen") >= 0.05 * level)
+					return;
+				event.output.getTagCompound().setDouble("multiplier_eisen", 0.05 * level);
 			}
 			else if(event.right.getItem() == ListMisc.DialFlash  && event.right.stackSize >= 3)
 			{

@@ -62,7 +62,7 @@ public class MainWorldGen implements IWorldGenerator
 			this.addStructureSpawn(WySchematicHelper.load("marineLargeShip"), world, random, i, j, 1, 1, 1.4 * MainConfig.modifierShipsSpawn);
 		}
 		
-		this.addStructureSpawn(WySchematicHelper.load("dojo"), world, random, i, j, 1, 1, 25);
+		this.addStructureSpawn(WySchematicHelper.load("dojo"), world, random, i, j, 1, 1, 5);
 		
 		if(MainConfig.enableCamps)
 		{
@@ -76,13 +76,13 @@ public class MainWorldGen implements IWorldGenerator
 			this.addStructureSpawn(WySchematicHelper.load("marineLargeBase"), world, random, i, j, 1, 1, 1);
 		}
 		
-		this.addDialSpawn(ListMisc.DialEisenBlock, world, random, i, j, 1, 1, 100);
-		this.addDialSpawn(ListMisc.DialFireBlock, world, random, i, j, 1, 1, 70);
-		this.addDialSpawn(ListMisc.DialAxeBlock, world, random, i, j, 1, 1, 70);
-		this.addDialSpawn(ListMisc.DialMilkyBlock, world, random, i, j, 1, 1, 20);
-		this.addDialSpawn(ListMisc.DialRejectBlock, world, random, i, j, 1, 1, 10);
-		this.addDialSpawn(ListMisc.DialBreathBlock, world, random, i, j, 1, 1, 50);
-		this.addDialSpawn(ListMisc.DialFlashBlock, world, random, i, j, 1, 1, 45);
+		this.addDialSpawn(ListMisc.DialEisenBlock, "Eisen Dial", world, random, i, j, 1, 1, 100);
+		this.addDialSpawn(ListMisc.DialFireBlock, "Fire Dial", world, random, i, j, 1, 1, 70);
+		this.addDialSpawn(ListMisc.DialAxeBlock, "Axe Dial", world, random, i, j, 1, 1, 70);
+		this.addDialSpawn(ListMisc.DialMilkyBlock, "Milky Dial", world, random, i, j, 1, 1, 20);
+		this.addDialSpawn(ListMisc.DialRejectBlock, "Reject Dial", world, random, i, j, 1, 1, 10);
+		this.addDialSpawn(ListMisc.DialBreathBlock, "Breath Dial", world, random, i, j, 1, 1, 50);
+		this.addDialSpawn(ListMisc.DialFlashBlock, "Flash Dial", world, random, i, j, 1, 1, 45);
 		
 	}
 	 
@@ -112,7 +112,7 @@ public class MainWorldGen implements IWorldGenerator
 	}
 	
 	
-	public boolean addDialSpawn(Block blockToSpawn, World world, Random random, int blockXPos, int blockZPos, int maxX, int maxZ, double rarity)
+	public boolean addDialSpawn(Block blockToSpawn, String name, World world, Random random, int blockXPos, int blockZPos, int maxX, int maxZ, double rarity)
 	{
 		if(world.rand.nextInt(100) + world.rand.nextDouble() <= rarity)
 		{		
@@ -128,7 +128,7 @@ public class MainWorldGen implements IWorldGenerator
 				if(WyDebug.isDebug())
 					System.out.println("" + blockToSpawn.getLocalizedName() + " spawned at /tp @p " + posX + " " + (posY + 1) + " " + posZ);
 				
-				WyTelemetry.addStructureStat(WyHelper.getFancyName(blockToSpawn.getLocalizedName()), blockToSpawn.getLocalizedName(), 1);
+				WyTelemetry.addStructureStat(WyHelper.getFancyName(name), name, 1);
 		    	
 		    	return true;
 			}
@@ -192,8 +192,13 @@ public class MainWorldGen implements IWorldGenerator
 
 	public static boolean checkCorners(Schematic sch, World world, int posX, int posY, int posZ)
 	{
+		return checkCorners(sch, world, posX, posY, posZ, 4);
+	}
+	
+	public static boolean checkCorners(Schematic sch, World world, int posX, int posY, int posZ, int tolerance)
+	{
 		boolean corner1 = false, corner2 = false, corner3 = false, corner4 = false;
-		for(int i = 1; i < 4; i++)
+		for(int i = 1; i < tolerance; i++)
 		{
 			if(!corner1)
 				corner1 = world.getBlock(posX, posY - i, posZ).isSideSolid(world, posX, posY - i, posZ, ForgeDirection.DOWN);
@@ -219,13 +224,13 @@ public class MainWorldGen implements IWorldGenerator
 		for(int i = 0; i < 3; i++)
 		{
 			if(!corner1)
-				corner1 = world.getBlock(posX, posY + i, posZ) == Blocks.air;
+				corner1 = world.getBlock(posX, posY + i, posZ) == Blocks.air && world.canBlockSeeTheSky(posX, posY + i, posZ);
 			if(!corner2)
-				corner2 = world.getBlock(posX + sch.getWidth(), posY + i, posZ) == Blocks.air;
+				corner2 = world.getBlock(posX + sch.getWidth(), posY + i, posZ) == Blocks.air && world.canBlockSeeTheSky(posX + sch.getWidth(), posY + i, posZ);
 			if(!corner3)
-				corner3 = world.getBlock(posX, posY + i, posZ + sch.getLength()) == Blocks.air;
+				corner3 = world.getBlock(posX, posY + i, posZ + sch.getLength()) == Blocks.air && world.canBlockSeeTheSky(posX, posY + i, posZ + sch.getLength());
 			if(!corner4)
-				corner4 = world.getBlock(posX + sch.getWidth(), posY + i, posZ + sch.getLength()) == Blocks.air;		
+				corner4 = world.getBlock(posX + sch.getWidth(), posY + i, posZ + sch.getLength()) == Blocks.air && world.canBlockSeeTheSky(posX + sch.getWidth(), posY + i, posZ + sch.getLength());		
 
 			if((corner1?1:0) + (corner2?1:0) + (corner3?1:0) + (corner4?1:0) >= 3)
 			{

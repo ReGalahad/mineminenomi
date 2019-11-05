@@ -261,6 +261,10 @@ public class ListAttributes
 
 	public static final AbilityAttribute RUST_TOUCH = new AbilityAttribute("Rust Touch").setAbilityCooldown(19).setAbilityPunch().setAbilityPassive();
 	
+	public static final AbilityAttribute FAILED_EXPERIMENT = new AbilityAttribute("Failed Experiment").setAbilityCooldown(7).setAbilityCharges(2 * 20);
+	public static final AbilityAttribute MEDIC_BAG_EXPLOSION = new AbilityAttribute("Medic Bag Explosion").setAbilityCooldown(30);
+	public static final AbilityAttribute FIRST_AID = new AbilityAttribute("First Aid").setAbilityCooldown(10).setAbilityPunch();
+	
 	public static final AbilityAttribute WEATHER_EGG = new AbilityAttribute("Weather Egg").setAbilityCooldown(10).setProjectileModel(new ModelSphere()).setProjectileColor("#BEBEBE").setProjectileAlpha(150).setProjectileSize(1.5, 1.5, 1.5);
 	public static final AbilityAttribute GUST_SWORD = new AbilityAttribute("Gust Sword").setAbilityCooldown(8).setProjectileTicks(5).setProjectileSize(.01, .01, .01).setAbilityRepeater(3).setProjectileDamage(2).setProjectileSpeed(5);
 	public static final AbilityAttribute THUNDER_BALL = new AbilityAttribute("Thunder Ball").setAbilityCooldown(5).setProjectileModel(new ModelSphere()).setProjectileColor("FFFF00").setProjectileAlpha(150).setProjectileSize(1.5, 1.5, 1.5).setProjectileTicks(300);
@@ -289,7 +293,10 @@ public class ListAttributes
 	public static final AbilityAttribute STRONG_RIGHT = new AbilityAttribute("Strong Right").setAbilityCooldown(2.5).setProjectileModel(new ModelCube()).setProjectileColor("F5DEB3").setProjectileTicks(5).setProjectileSize(1, 1, 1.5).setProjectileDamage(20);
 	public static final AbilityAttribute COUP_DE_VENT = new AbilityAttribute("Coup de Vent").setAbilityCooldown(10).setProjectileTicks(7).setProjectileSize(.01, .01, .01).setProjectileDamage(10).setAbilityCharges(30);
 	
-	public static final AbilityAttribute KENBUNSHOKU_HAKI = new AbilityAttribute("Kenbunshoku Haki").setAbilityPassive(true);
-	public static final AbilityAttribute BUSOSHOKU_HAKI = new AbilityAttribute("Busoshoku Haki").setAbilityPassive(true);
-	public static final AbilityAttribute HAOSHOKU_HAKI = new AbilityAttribute("Haoshoku Haki");
+	public static final AbilityAttribute KENBUNSHOKU_HAKI_AURA = new AbilityAttribute("Kenbunshoku Haki: Aura").setAbilityPassive(true);
+	public static final AbilityAttribute KENBUNSHOKU_HAKI_FUTURE_SIGHT = new AbilityAttribute("Kenbunshoku Haki: Future Sight").setAbilityPassive(true).setAbilityCooldown(60);
+	public static final AbilityAttribute BUSOSHOKU_HAKI_HARDENING = new AbilityAttribute("Busoshoku Haki: Hardening").setAbilityPassive(true);
+	public static final AbilityAttribute BUSOSHOKU_HAKI_FULL_BODY_HARDENING = new AbilityAttribute("Busoshoku Haki: Full-Body Hardening").setAbilityPassive(true);
+	public static final AbilityAttribute BUSOSHOKU_HAKI_IMBUING = new AbilityAttribute("Busoshoku Haki: Imbuing").setAbilityPassive(true);
+	public static final AbilityAttribute HAOSHOKU_HAKI = new AbilityAttribute("Haoshoku Haki").setAbilityCharges(3 * 20).setAbilityCooldown(90);
 }

@@ -245,7 +245,6 @@ public class YamiAbilities
 		public void use(final EntityPlayer player)
 		{				
 			this.projectile = new YamiProjectiles.DarkMatter(player.worldObj, player, attr);
-			attr.setAbilityCooldown(0);
 			super.use(player);
 		}
 	}

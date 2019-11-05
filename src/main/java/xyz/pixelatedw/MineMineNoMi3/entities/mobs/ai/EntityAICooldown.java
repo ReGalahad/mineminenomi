@@ -14,7 +14,7 @@ public class EntityAICooldown extends EntityAIBase
 		this.entity = entity;
 		this.maxCooldown = timer;
 		this.cooldown = this.maxCooldown;
-		this.randomizer = random;
+		this.randomizer = random + 1;
 	}
 	
 	@Override
