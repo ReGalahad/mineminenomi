@@ -50,7 +50,6 @@ public class HakiAbilities
 			props.triggerActiveHaki(true);
 			
 			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
-			WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_HAOSHOKU_HAKI, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 
 			super.startCharging(player);
 		}
@@ -63,7 +62,8 @@ public class HakiAbilities
 			props.triggerActiveHaki(false);
 
 			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
-			
+			WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_HAOSHOKU_HAKI, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
+
 			for(EntityLivingBase target : WyHelper.getEntitiesNear(player, 100))
 			{
 				double userDoriki = ExtendedEntityData.get(player).getDoriki();
