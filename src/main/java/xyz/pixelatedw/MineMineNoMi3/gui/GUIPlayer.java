@@ -130,7 +130,7 @@ public class GUIPlayer extends GuiScreen
 		this.buttonList.add(new GuiButton(1, posX - 20, posY + 210, 50, 20, I18n.format(ID.LANG_GUI_ABILITIES)));
 		if(MainConfig.enableQuests)
 			this.buttonList.add(new GuiButton(2, posX + 40, posY + 210, 50, 20, I18n.format(ID.LANG_GUI_QUESTS)));
-		this.buttonList.add(new GuiButton(3, posX + 100, posY + 210, 50, 20, I18n.format(ID.LANG_GUI_HISTORY)));
+		//this.buttonList.add(new GuiButton(3, posX + 100, posY + 210, 50, 20, I18n.format(ID.LANG_GUI_HISTORY)));
 		
 		//this.buttonList.add(new GuiButton(2, posX + 63, posY + 210, 80, 20, I18n.format("gui.epithet.name")));
 	}
