@@ -18,7 +18,7 @@ public class ParticleEffectHaoshokuHaki extends ParticleEffect
 	public void spawn(EntityPlayer player, double posX, double posY, double posZ)
 	{
 		Timer timer = new Timer(true);
-		
+
 		EntityParticleFX particle = new EntityParticleFX(player.worldObj, ID.PARTICLE_ICON_MOKU, 
 				posX * 1.25, 
 				posY + 0.5, 
@@ -32,6 +32,7 @@ public class ParticleEffectHaoshokuHaki extends ParticleEffect
 		particle.setParticleAge(-3);
 		
 		timer.schedule(ParticleTaskTornado2.Create(player, posX, posY, posZ, particle, 3.2, 2), 0);
+		
 		double t = 0;
 		double x, y, z;
 		Random rand = player.getRNG();
@@ -61,6 +62,22 @@ public class ParticleEffectHaoshokuHaki extends ParticleEffect
 					particle.setRBGColorF(0.7F, 0, 0.7F);
 					particle.setParticleScale(0.8F);
 					particle.setParticleAge(2);
+					
+					MainMod.proxy.spawnCustomParticles(player, particle);
+					
+					double motionY = (x / 12) + WyMathHelper.randomDouble();
+
+					particle = new EntityParticleFX(player.worldObj, ID.PARTICLE_ICON_YUKI, 
+							posX + (x * 1.25), 
+							posY + 1.5, 
+							posZ + (z * 1.25), 
+							motionX * 1.5, 
+							motionY * 1.5, 
+							motionZ * 1.5);
+					
+					particle.setRBGColorF(0.7F, 0, 0.7F);
+					particle.setParticleScale(1.2F);
+					particle.setParticleAge(5);
 					
 					MainMod.proxy.spawnCustomParticles(player, particle);
 				}

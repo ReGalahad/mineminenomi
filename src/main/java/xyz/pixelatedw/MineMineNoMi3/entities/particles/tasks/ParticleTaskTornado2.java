@@ -4,7 +4,6 @@ import java.util.TimerTask;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
-import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
 
 
@@ -33,6 +32,7 @@ public class ParticleTaskTornado2 extends TimerTask
 		this.posZ = posZ;
 	}
 	
+	@Override
 	public void run()
 	{
 		double phi = 0;
@@ -40,7 +40,7 @@ public class ParticleTaskTornado2 extends TimerTask
 		
 		while(phi < density * Math.PI)
 		{
-			phi += Math.PI / 16;
+			phi += Math.PI / 4;
 			for(double t = 0; t <= 2 * Math.PI; t += Math.PI / 16)
 			{
 				for(double i = 0; i <= 1; i += 1)
