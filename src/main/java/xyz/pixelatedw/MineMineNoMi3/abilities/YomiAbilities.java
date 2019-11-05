@@ -15,6 +15,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityExplosion;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.helpers.ItemsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
@@ -100,11 +101,12 @@ public class YomiAbilities
 	    @Override
 		public void duringCooldown(EntityPlayer player, int currentCooldown)
 	    {
+	    	ExtendedEntityData props = ExtendedEntityData.get(player);
 			if(currentCooldown > 6 * 20)
 			{			
 				for(EntityLivingBase e : WyHelper.getEntitiesNear(player, 1.6))
 				{
-					e.attackEntityFrom(DamageSource.causePlayerDamage(player), 8);
+					e.attackEntityFrom(DamageSource.causePlayerDamage(player), 8 * props.getDamageMultiplier());
 					e.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 100, 5));
 					e.addPotionEffect(new PotionEffect(Potion.digSlowdown.id, 100, 5));		
 					new DFEffectHieSlowness(e, 100);

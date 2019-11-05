@@ -4,6 +4,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
@@ -15,7 +16,16 @@ import net.minecraft.util.ResourceLocation;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 
 public class WyRenderHelper
-{	
+{
+	public static void drawStringWithBorder(String text, int posX, int posY, int color)
+	{
+		FontRenderer font = Minecraft.getMinecraft().fontRenderer;
+		font.drawString(text	, posX		, posY - 1	, 1);
+		font.drawString(text	, posX		, posY + 1	, 1);
+		font.drawString(text	, posX + 1	, posY		, 1);
+		font.drawString(text	, posX - 1	, posY 		, 1);
+		font.drawString(text	, posX		, posY		, color);
+	}
 	
 	public static double[] generateAnimationArray(double startPos, double minPos, double maxPos, double frameSkip, int framesPerSlot)
 	{				
@@ -74,19 +84,22 @@ public class WyRenderHelper
 		{
 			return;
 		}
-		GL11.glColorMask(true, false, false, true);
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
-		Tessellator tessellator = Tessellator.instance;
-		tessellator.startDrawingQuads();
-		// worldrenderer.startDrawingQuads();
-		tessellator.setColorRGBA(r, g, b, alpha);
-		tessellator.addVertex(posX, posY + height, zLevel);
-		tessellator.addVertex(posX + width, posY + height, zLevel);
-		tessellator.addVertex(posX + width, posY, zLevel);
-		tessellator.addVertex(posX, posY, zLevel);
-		tessellator.draw();
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
-		GL11.glColorMask(true, true, true, true);
+		GL11.glPushMatrix();
+		{
+			GL11.glColorMask(true, true, true, true);
+			GL11.glDisable(GL11.GL_TEXTURE_2D);
+			Tessellator tessellator = Tessellator.instance;
+			tessellator.startDrawingQuads();
+			// worldrenderer.startDrawingQuads();
+			tessellator.setColorRGBA(r, g, b, alpha);
+			tessellator.addVertex(posX, posY + height, zLevel);
+			tessellator.addVertex(posX + width, posY + height, zLevel);
+			tessellator.addVertex(posX + width, posY, zLevel);
+			tessellator.addVertex(posX, posY, zLevel);
+			tessellator.draw();
+			GL11.glEnable(GL11.GL_TEXTURE_2D);
+		}
+		GL11.glPopMatrix();
 	}
 
 	public static void renderTestStencil()

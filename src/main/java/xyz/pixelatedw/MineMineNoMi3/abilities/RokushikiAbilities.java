@@ -66,9 +66,7 @@ public class RokushikiAbilities
 			}
 			
 			if(player.hurtTime > 0)
-				this.threshold--;
-			
-			System.out.println(this.threshold);
+				this.threshold--;		
 		}
 		
 		@Override

@@ -31,5 +31,6 @@ resourcepacks
 saves
 options.txt
 usernamecache.json
-
-
+tools
+run
+*.properties

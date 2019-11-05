@@ -1,8 +1,6 @@
 package xyz.pixelatedw.MineMineNoMi3.api;
 
 import java.util.HashMap;
-import java.util.TreeMap;
-import java.util.TreeSet;
 
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -14,9 +12,9 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
@@ -43,14 +41,25 @@ public class WyRegistry
 	}  
 	 
 	public static void registerBlock(Block block, String localizedName, float hard, CreativeTabs tab, Class<? extends TileEntity> tile)
-	{	
+	{
+		registerBlock(block, null, localizedName, hard, tab, tile);
+	}
+	
+	public static void registerBlock(Block block, Class<? extends ItemBlock> itemBlock, String localizedName, float hard, CreativeTabs tab, Class<? extends TileEntity> tile)
+	{
 		String truename = WyHelper.getFancyName(localizedName);
 		block.setBlockName(truename).setBlockTextureName(ID.PROJECT_ID + ":" + truename).setHardness(hard).setResistance(hard);
-		GameRegistry.registerBlock(block, truename);
+		
+		if(itemBlock == null)
+			GameRegistry.registerBlock(block, truename);
+		else
+			GameRegistry.registerBlock(block, itemBlock, truename);
+		
 		if(tab != null)
 			block.setCreativeTab(tab);
 		if(tile != null)
-			GameRegistry.registerTileEntity(tile, truename);		
+			GameRegistry.registerTileEntity(tile, truename);	
+		
 		getItemsMap().put(block, localizedName);
 		registerName("tile." + truename + ".name", localizedName);
 	}

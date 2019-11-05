@@ -23,11 +23,14 @@ import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.goro.ParticleEffe
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.goro.ParticleEffectKari;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.goro.ParticleEffectRaigo;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.gura.ParticleEffectGekishin;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.haki.ParticleEffectHaoshokuHaki;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.hie.ParticleEffectIceAge;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.ito.ParticleEffectKumoNoSugaki;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.kachi.ParticleEffectEvaporate;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.kilo.ParticleEffectHeavyPunch;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.kilo.ParticleEffectKiloPress;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.medic.ParticleEffectFirstAid;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.medic.ParticleEffectMedicBagExplosion;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.mera.ParticleEffectDaiEnkai;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.mera.ParticleEffectDaiEnkai2;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.mero.ParticleEffectPerfumeFemur;
@@ -86,6 +89,9 @@ public class ParticleManager
 		map.put(ID.PARTICLEFX_ABOVEHEAD_HAPPY, new ParticleEffectAboveHead(EnumParticleTypes.VILLAGER_HAPPY.getParticleName()));
 		map.put(ID.PARTICLEFX_ABOVEHEAD_HEART, new ParticleEffectAboveHead(EnumParticleTypes.HEART.getParticleName()));
 
+		// Haki
+		map.put(ID.PARTICLEFX_HAOSHOKU_HAKI, new ParticleEffectHaoshokuHaki());
+
 		// Sabi
 		map.put(ID.PARTICLEFX_RUSTTOUCH, new ParticleEffectRustTouch());
 		
@@ -99,6 +105,10 @@ public class ParticleManager
 		// Mero
 		map.put(ID.PARTICLEFX_SLAVEARROW, new ParticleEffectSlaveArrow());	
 		map.put(ID.PARTICLEFX_PERFUMEFEMUR, new ParticleEffectPerfumeFemur());
+		
+		// Medic
+		map.put(ID.PARTICLEFX_FIRST_AID, new ParticleEffectFirstAid());	
+		map.put(ID.PARTICLEFX_MEDIC_BAG_EXPLOSION, new ParticleEffectMedicBagExplosion());	
 		
 		// Supa
 		map.put(ID.PARTICLEFX_ATOMICSPURT, new ParticleEffectAtomicSpurt());

@@ -11,6 +11,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.ParticleEffect;
 public class ParticleEffectChiyupopo extends ParticleEffect
 {
 
+	@Override
 	public void spawn(EntityPlayer player, double posX, double posY, double posZ)
 	{
 		double t = 0;

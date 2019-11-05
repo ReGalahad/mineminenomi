@@ -2,6 +2,7 @@ package xyz.pixelatedw.MineMineNoMi3.items;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
@@ -29,6 +30,11 @@ public class UltraCola extends ItemFood
 		return itemStack;
 	}
 	
+    @Override
+	public EnumAction getItemUseAction(ItemStack itemStack)
+    {
+        return EnumAction.drink;
+    }
 	
 	@Override
 	public void onFoodEaten(ItemStack itemStack, World world, EntityPlayer player) 

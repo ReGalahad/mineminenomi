@@ -7,24 +7,20 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.enchantment.EnchantmentProtection;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.ChunkPosition;
-import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
-import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 
 public class AbilityExplosion
@@ -115,9 +111,9 @@ public class AbilityExplosion
 				{
 					if (i == 0 || i == this.explosionGrab - 1 || j == 0 || j == this.explosionGrab - 1 || k == 0 || k == this.explosionGrab - 1)
 					{
-						double d0 = (double) ((float) i / ((float) this.explosionGrab - 1.0F) * 2.0F - 1.0F);
-						double d1 = (double) ((float) j / ((float) this.explosionGrab - 1.0F) * 2.0F - 1.0F);
-						double d2 = (double) ((float) k / ((float) this.explosionGrab - 1.0F) * 2.0F - 1.0F);
+						double d0 = i / (this.explosionGrab - 1.0F) * 2.0F - 1.0F;
+						double d1 = j / (this.explosionGrab - 1.0F) * 2.0F - 1.0F;
+						double d2 = k / (this.explosionGrab - 1.0F) * 2.0F - 1.0F;
 						double d3 = Math.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
 						d0 /= d3;
 						d1 /= d3;
@@ -143,9 +139,9 @@ public class AbilityExplosion
 							if (f1 > 0.0F)
 								blocksData.add(new ChunkPosition(j1, k1, l1));
 
-							newExplosionPosX += d0 * (double) f2;
-							newExplosionPosY += d1 * (double) f2;
-							newExplosionPosZ += d2 * (double) f2;
+							newExplosionPosX += d0 * f2;
+							newExplosionPosY += d1 * f2;
+							newExplosionPosZ += d2 * f2;
 						}
 					}
 				}
@@ -171,23 +167,27 @@ public class AbilityExplosion
 					continue;
 					
 				newExplosionPosX = entity.posX - this.explosionX;
-				newExplosionPosY = entity.posY + (double) entity.getEyeHeight() - this.explosionY;
+				newExplosionPosY = entity.posY + entity.getEyeHeight() - this.explosionY;
 				newExplosionPosZ = entity.posZ - this.explosionZ;
 
 				Vec3 vec3 = Vec3.createVectorHelper(this.explosionX, this.explosionY, this.explosionZ);
-				double d4 = entity.getDistance(this.explosionX, this.explosionY, this.explosionZ) / (double)this.explosionSize;
-				double d10 = (double)this.worldObj.getBlockDensity(vec3, entity.boundingBox);
+				double d4 = entity.getDistance(this.explosionX, this.explosionY, this.explosionZ) / this.explosionSize;
+				double d10 = this.worldObj.getBlockDensity(vec3, entity.boundingBox);
                 double d11 = (1.0D - d4) * d10;
-                float damage = (float)((int)((d11 * d11 + d11) / 2.0D * 8.0D * (double)this.explosionSize + 1.0D));
+                float damage = ((int)((d11 * d11 + d11) / 2.0D * 8.0D * this.explosionSize + 1.0D));
 
                 DamageSource damageSource;
+                float damageMultiplier = 1;
                 
-                if(this.exploder instanceof EntityLivingBase)       
+                if(this.exploder instanceof EntityLivingBase)
+                {
 	                damageSource = DamageSource.causeMobDamage((EntityLivingBase) this.exploder);
+	                damageMultiplier = ExtendedEntityData.get((EntityLivingBase) this.exploder).getDamageMultiplier();
+                }
                 else
 	                damageSource = DamageSource.magic;
                 	
-                entity.attackEntityFrom(this.setExplosionSource(this), damage);
+                entity.attackEntityFrom(this.setExplosionSource(this), damage * damageMultiplier);
 			}
 		}
 
@@ -203,7 +203,7 @@ public class AbilityExplosion
 				posZ = chunkposition.chunkPosZ;
 				block = this.worldObj.getBlock(posX, posY, posZ);
 
-				if (block.getMaterial() != Material.air) //&& block != ListMisc.KairosekiOre && block != ListMisc.KairosekiBlock)
+				if (block != null && block.getMaterial() != Material.air) //&& block != ListMisc.KairosekiOre && block != ListMisc.KairosekiBlock)
 				{
 					block.dropBlockAsItemWithChance(this.worldObj, posX, posY, posZ, this.worldObj.getBlockMetadata(posX, posY, posZ), 0, 0);
 					this.worldObj.setBlockToAir(posX, posY, posZ);
@@ -235,7 +235,7 @@ public class AbilityExplosion
 		}
 	}
 	
-    public static DamageSource setExplosionSource(AbilityExplosion explosion)
+    public DamageSource setExplosionSource(AbilityExplosion explosion)
     {
         return explosion != null && explosion.exploder != null ? (new EntityDamageSource("explosion.player", explosion.exploder)).setDifficultyScaled().setExplosion() : (new DamageSource("explosion")).setDifficultyScaled().setExplosion();
     }

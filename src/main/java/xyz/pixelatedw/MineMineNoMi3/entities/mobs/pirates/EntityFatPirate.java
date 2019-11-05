@@ -61,14 +61,16 @@ public class EntityFatPirate extends PirateData
 		}
 	}
 
-    /*protected void addRandomArmor()
+    @Override
+	protected void addRandomArmor()
     {
-    	Item[] randomSword = new Item[] {ListMisc.PirateCutlass, Items.iron_sword};
-        this.setCurrentItemOrArmor(0, new ItemStack(randomSword[this.rand.nextInt(randomSword.length)]));
+    	if(this.rand.nextInt(10) <= 2)
+    		this.setCurrentItemOrArmor(0, new ItemStack(ListMisc.Mace));
     }
     
+	@Override
 	public double[] itemOffset() 
 	{
-		return new double[] {0, 0, -0.1};
-	}*/
+		return new double[] {-0.2, 0, -0.1};
+	}
 }

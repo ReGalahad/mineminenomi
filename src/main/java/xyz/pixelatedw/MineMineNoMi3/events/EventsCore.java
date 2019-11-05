@@ -1,12 +1,10 @@
 package xyz.pixelatedw.MineMineNoMi3.events;
 
-import com.google.gson.internal.LinkedTreeMap;
-
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.Phase;
+import cpw.mods.fml.common.network.FMLNetworkEvent.ClientConnectedToServerEvent;
+import cpw.mods.fml.common.network.FMLNetworkEvent.ClientDisconnectionFromServerEvent;
 import cpw.mods.fml.relauncher.Side;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -18,21 +16,21 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraftforge.common.MinecraftForge;
+import net.minecraft.util.MathHelper;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
-import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
+import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedWorldData;
 import xyz.pixelatedw.MineMineNoMi3.data.HistoryProperties;
-import xyz.pixelatedw.MineMineNoMi3.events.customevents.EventYomiTrigger;
 
 public class EventsCore
 {
@@ -60,10 +58,12 @@ public class EventsCore
 	public void onClonePlayer(PlayerEvent.Clone e) 
 	{
 		if(e.wasDeath) 
-		{
+		{		
+	    	ExtendedWorldData worldProps = ExtendedWorldData.get(e.original.worldObj);
+
 			ExtendedEntityData oldPlayerProps = ExtendedEntityData.get(e.original);	
 			ExtendedEntityData newPlayerProps = ExtendedEntityData.get(e.entityPlayer);
-			
+
 			//WyNetworkHelper.sendTo(new PacketNewAABB(0.6F, 1.8F), (EntityPlayerMP) e.entityPlayer);
 			
 			if(MainConfig.enableKeepIEEPAfterDeath.equals("full"))
@@ -103,8 +103,12 @@ public class EventsCore
 				String race = oldProps.getRace();
 				String fightStyle = oldProps.getFightStyle();
 				String crew = oldProps.getCrew();
-				int doriki = oldProps.getDoriki() / 3;
+				int doriki = MathHelper.ceiling_double_int(WyMathHelper.percentage(MainConfig.dorikiKeepPercentage, oldProps.getDoriki()));
+				int bounty = MathHelper.ceiling_double_int(WyMathHelper.percentage(MainConfig.bountyKeepPercentage, oldProps.getBounty()));
+				int belly = MathHelper.ceiling_double_int(WyMathHelper.percentage(MainConfig.bellyKeepPercentage, oldProps.getBelly()));
 
+				worldProps.removeDevilFruitFromWorld(oldProps.getUsedFruit());
+				
 				ExtendedEntityData props = ExtendedEntityData.get(e.entityPlayer);
 				props.setFaction(faction);
 				props.setRace(race);
@@ -113,6 +117,9 @@ public class EventsCore
 				props.setMaxCola(100);
 				props.setCola(oldProps.getMaxCola());
 				props.setDoriki(doriki);
+				props.setBounty(bounty);
+				props.setBelly(belly);
+				
 			}
 			else if(MainConfig.enableKeepIEEPAfterDeath.equals("custom"))
 			{
@@ -124,11 +131,17 @@ public class EventsCore
 					switch(WyHelper.getFancyName(stat))
 					{
 						case "doriki":
-							props.setDoriki(oldProps.getDoriki()); break;
+							int doriki = MathHelper.ceiling_double_int(WyMathHelper.percentage(MainConfig.dorikiKeepPercentage, oldProps.getDoriki()));
+							props.setDoriki(doriki); 
+							break;
 						case "bounty":
-							props.setBounty(oldProps.getBounty()); break;
+							int bounty = MathHelper.ceiling_double_int(WyMathHelper.percentage(MainConfig.bountyKeepPercentage, oldProps.getBounty()));
+							props.setBounty(bounty); 
+							break;
 						case "belly":
-							props.setBelly(oldProps.getBelly()); break;
+							int belly = MathHelper.ceiling_double_int(WyMathHelper.percentage(MainConfig.bellyKeepPercentage, oldProps.getBelly()));
+							props.setBelly(belly); 
+							break;
 						case "race":
 							props.setRace(oldProps.getRace()); break;
 						case "faction":
@@ -139,16 +152,15 @@ public class EventsCore
 							props.setUsedFruit(oldProps.getUsedFruit()); break;
 					}
 				}
+				
+				if(WyHelper.isNullOrEmpty(props.getUsedFruit()))
+					worldProps.removeDevilFruitFromWorld(oldProps.getUsedFruit());
 			}
-					
+			
 			NBTTagCompound compound = new NBTTagCompound();
 			QuestProperties.get(e.original).saveNBTData(compound);
 			QuestProperties questProps = QuestProperties.get(e.entityPlayer);
 			questProps.loadNBTData(compound);
-			
-			EventYomiTrigger yomiEvent = new EventYomiTrigger(e.entityPlayer, oldPlayerProps, newPlayerProps);
-			if (MinecraftForge.EVENT_BUS.post(yomiEvent))
-				return;
 		}
 	}
 	
@@ -162,40 +174,52 @@ public class EventsCore
 
 			if (!player.worldObj.isRemote)
 			{
-				if(ID.DEV_EARLYACCESS && !WyDebug.isDebug())
+				if(!WyHelper.isReleaseBuild())
 				{
-					if(!WyHelper.isPatreon(player))
+					if(!WyHelper.hasPatreonAccess(player))
+					{
 						((EntityPlayerMP)player).playerNetServerHandler.kickPlayerFromServer(EnumChatFormatting.BOLD + "" + EnumChatFormatting.RED + "WARNING! \n\n " + EnumChatFormatting.RESET + "You don't have access to this version yet!");
+						if(!WyDebug.isDebug())
+						{
+							WyTelemetry.addMiscStat("onlinePlayers", "Online Players", -1);
+							WyTelemetry.sendAllDataSync();
+						}
+						event.setCanceled(true);
+						return;
+					}
 				}
 				
 				if(MainConfig.enableUpdateMsg)
 				{
 					try 
 					{
-						String[] version = ID.PROJECT_VERSION.split("\\.");
+						String[] version = ID.PROJECT_VERSION.replaceAll("[^0-9.]", "").split("\\.");
 						
-						int x = Integer.parseInt(version[0]) * 100;
-						int y = Integer.parseInt(version[1]) * 10;
-						int z = Integer.parseInt(version[2]);
+						int currentX = Integer.parseInt(version[0]) * 100;
+						int currentY = Integer.parseInt(version[1]) * 10;
+						int currentZ = Integer.parseInt(version[2]);
 						
-						int versionCode = x + y + z;
+						int currentVersion = currentX + currentY + currentZ;
 						
-						String apiURL = "/getNewestVersion";
-						String json = Values.gson.toJson(ID.PROJECT_MCVERSION);
+						String apiURL = "/version?minecraft-version=" + ID.PROJECT_MCVERSION;
 						
-						String result = WyTelemetry.sendPOST(apiURL, json);
+						String result = WyTelemetry.sendGET(apiURL);
 						
 						if(!WyHelper.isNullOrEmpty(result))
 						{
-							LinkedTreeMap resultMap = Values.gson.fromJson(result, LinkedTreeMap.class);
-							int highestVersion = ((Double) resultMap.get("highestVersionCode")).intValue();
-							String highestName = (String) resultMap.get("highestVersionName");
+							String[] resultVersion = result.replaceAll("[^0-9.]", "").split("\\.");
 							
-							if(highestVersion > versionCode)
+							int latestX = Integer.parseInt(resultVersion[0]) * 100;
+							int latestY = Integer.parseInt(resultVersion[1]) * 10;
+							int latestZ = Integer.parseInt(resultVersion[2]);
+							
+							int latestVersion = latestX + latestY + latestZ;
+							
+							if(latestVersion > currentVersion)
 							{
 								ChatStyle updateStyle = new ChatStyle().setColor(EnumChatFormatting.GOLD).setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "http://pixelatedw.xyz/versions"));
 								
-								player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.RED + "" + EnumChatFormatting.BOLD + "[UPDATE]" + EnumChatFormatting.RED + " Mine Mine no Mi " + highestName + " is now available !").setChatStyle(updateStyle) );
+								player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.RED + "" + EnumChatFormatting.BOLD + "[UPDATE]" + EnumChatFormatting.RED + " Mine Mine no Mi " + result + " is now available !").setChatStyle(updateStyle) );
 								player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.RED + "Download it from the official website : [http://pixelatedw.xyz/versions]").setChatStyle(updateStyle) );
 							}
 						}
@@ -210,7 +234,7 @@ public class EventsCore
 	}
 	
 	@SubscribeEvent
-	public void onPlayerLoggedIn(PlayerLoggedInEvent event)
+	public void onPlayerLoggedIn(ClientConnectedToServerEvent event)
 	{
 		if(!WyDebug.isDebug())
 		{
@@ -220,21 +244,21 @@ public class EventsCore
 	}
 	
 	@SubscribeEvent
-	public void onPlayerLoggedOut(PlayerLoggedOutEvent event)
+	public void onPlayerLoggedOut(ClientDisconnectionFromServerEvent event)
 	{
 		if(!WyDebug.isDebug())
 		{
 			WyTelemetry.addMiscStat("onlinePlayers", "Online Players", -1);
-			WyTelemetry.sendAllData();
+			WyTelemetry.sendAllDataSync();
 		}
 	}
 	
 	@SubscribeEvent
-	public void onPlayerTick(TickEvent.WorldTickEvent event)
-	{		
+	public void onPlayerTick(TickEvent.PlayerTickEvent event)
+	{
 		if(event.phase == Phase.END && event.side == Side.SERVER)
 		{
-			if(event.world.getWorldTime() % 1200 == 0)
+			if(event.player.worldObj.getWorldTime() % 1200 == 0)
 			{
 				WyTelemetry.sendAllData();
 			}

@@ -60,7 +60,7 @@ public class EventsDFWeaknesses
 							abilityProps.getAbilityFromSlot(i).disable(player, true);
 							updateDisabledAbilities = true;
 						}
-					}		
+					}
 					
 					if(updateDisabledAbilities)
 						WyNetworkHelper.sendTo(new PacketAbilitySync(abilityProps), (EntityPlayerMP) player);					

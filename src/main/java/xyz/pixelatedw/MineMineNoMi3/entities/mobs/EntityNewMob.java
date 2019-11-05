@@ -5,6 +5,7 @@ import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.rokushiki.EntityAIGeppo;
@@ -179,6 +180,7 @@ public class EntityNewMob extends EntityMob implements IDynamicRenderer, INBTEnt
 				this.tasks.addTask(1, new EntityAISoru(this));
 				this.threat += 2;
 				rokushikiCount++;
+				hasSoru = true;
 				continue;
 			}
 	
@@ -187,6 +189,7 @@ public class EntityNewMob extends EntityMob implements IDynamicRenderer, INBTEnt
 				this.tasks.addTask(1, new EntityAITekkai(this));
 				this.threat += 5;
 				rokushikiCount++;
+				hasTekkai = true;
 				continue;
 			}
 			
@@ -195,6 +198,7 @@ public class EntityNewMob extends EntityMob implements IDynamicRenderer, INBTEnt
 				this.tasks.addTask(1, new EntityAIRankyaku(this));
 				this.threat += 20;
 				rokushikiCount++;
+				hasRankyaku = true;
 				continue;
 			}
 			
@@ -203,10 +207,19 @@ public class EntityNewMob extends EntityMob implements IDynamicRenderer, INBTEnt
 				this.tasks.addTask(1, new EntityAIGeppo(this));
 				this.threat += 10;
 				rokushikiCount++;
+				hasGeppo = true;
 				continue;
 			}
-						
+
 			rokushikiCount++;
+		}
+		
+		if(WyDebug.isDebug())
+		{
+			System.out.println("Soru : " + hasSoru);
+			System.out.println("Tekkai : " + hasTekkai);
+			System.out.println("Rankyaku : " + hasRankyaku);
+			System.out.println("Geppo : " + hasGeppo);
 		}
 	}
 	

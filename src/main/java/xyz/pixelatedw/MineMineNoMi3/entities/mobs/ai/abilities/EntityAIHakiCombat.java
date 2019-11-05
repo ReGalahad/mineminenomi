@@ -1,5 +1,7 @@
 package xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities;
 
+import java.util.UUID;
+
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -15,7 +17,9 @@ public class EntityAIHakiCombat extends EntityAIBase
 
     private EntityNewMob entity;
     private EntityNewMob target;
-
+    private UUID hakiDamageUUID = UUID.fromString("79e4f166-dcd8-4295-8b28-d7dbe2e07ad4");
+    private AttributeModifier hakiDamageModifier = new AttributeModifier(this.hakiDamageUUID, "Extra Haki Damage", 2, 2);
+    
     public EntityAIHakiCombat(EntityNewMob entity)
     {
         this.entity = entity;
@@ -32,7 +36,7 @@ public class EntityAIHakiCombat extends EntityAIBase
 		if(!props.hasBusoHakiActive() && this.entity.getAttackTarget() != null)
 		{
 			props.triggerBusoHaki(true);
-			this.entity.getEntityAttribute(SharedMonsterAttributes.attackDamage).applyModifier(new AttributeModifier("Extra Haki Damage", 2, 2));
+			this.entity.getEntityAttribute(SharedMonsterAttributes.attackDamage).applyModifier(hakiDamageModifier);
 			
 			WyNetworkHelper.sendToAllAround(new PacketSyncInfo(this.entity.getEntityId(), props), this.entity.dimension, this.entity.posX, this.entity.posY, this.entity.posZ, 256);
 
@@ -51,7 +55,7 @@ public class EntityAIHakiCombat extends EntityAIBase
 		else if(props.hasBusoHakiActive() && this.entity.getAttackTarget() == null)
 		{
 			props.triggerBusoHaki(false);
-			this.entity.getEntityAttribute(SharedMonsterAttributes.attackDamage).removeAllModifiers();
+			this.entity.getEntityAttribute(SharedMonsterAttributes.attackDamage).removeModifier(hakiDamageModifier);
 
 			WyNetworkHelper.sendToAllAround(new PacketSyncInfo(this.entity.getEntityId(), props), this.entity.dimension, this.entity.posX, this.entity.posY, this.entity.posZ, 256);
 
