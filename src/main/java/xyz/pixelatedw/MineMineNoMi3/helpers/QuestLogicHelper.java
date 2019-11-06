@@ -3,31 +3,31 @@ package xyz.pixelatedw.MineMineNoMi3.helpers;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.item.ItemStack;
 import xyz.pixelatedw.MineMineNoMi3.Values;
-import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.Quest;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
-import xyz.pixelatedw.MineMineNoMi3.quests.EnumQuestlines;
 import xyz.pixelatedw.MineMineNoMi3.quests.ITimedQuest;
 
 public class QuestLogicHelper
 {
 	
-	public static EnumQuestlines getQuestlineFromSelectedEntity(EntityPlayer player, int posX, int posY, int posZ)
+	public static ItemStack getQuestItemStack(InventoryPlayer inventory, String forQuest)
 	{
-		for(EntityLivingBase entity : WyHelper.getEntitiesNear(player, 10))
+		for(int i = 0; i < inventory.mainInventory.length; i++)
 		{
-			if((int)entity.posX == posX && (int)entity.posY == posY && (int)entity.posZ == posZ)
+			ItemStack itemStack = inventory.getStackInSlot(i);
+			if(itemStack != null && itemStack.hasTagCompound())
 			{
-				if(Values.questGivers.containsKey(entity.getClass()))
-				{
-					return Values.questGivers.get(entity.getClass());
-				}
+				String nbtForQuest = itemStack.getTagCompound().getString("ForQuest");
+				
+				if(nbtForQuest.equalsIgnoreCase(forQuest))
+					return itemStack;
 			}
 		}
-				
+		
 		return null;
 	}
 	
@@ -40,6 +40,9 @@ public class QuestLogicHelper
 		{
 			if(questProps.getQuestIndexFromTracker(i) != null && questProps.getQuestIndexFromTracker(i).isFinished(player) && isQuestPartofQuestline(questProps.getQuestIndexFromTracker(i), questline))
 			{
+				if(player.worldObj.isRemote)
+					return 0;
+				
 				questProps.getQuestIndexFromTracker(i).finishQuest(player);
 				turnedInQuests++;
 			}

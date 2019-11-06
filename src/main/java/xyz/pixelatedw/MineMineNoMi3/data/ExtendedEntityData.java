@@ -7,7 +7,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 
-public class ExtendedEntityData implements IExtendedEntityProperties 
+public class ExtendedEntityData implements IExtendedEntityProperties
 {
 
 	public final static String EXT_PROP_NAME = "IEEPShared";

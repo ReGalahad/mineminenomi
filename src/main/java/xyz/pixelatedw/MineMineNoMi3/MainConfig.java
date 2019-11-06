@@ -29,6 +29,7 @@ public class MainConfig
 	public static boolean enableAmbushes;
 	public static boolean enableMinimumDorikiPerKill;
 	public static boolean enableClouds;
+	public static boolean enableBossFights;
 	public static double rateDFDrops;
 	public static double modifierShipsSpawn;
 	public static double rateWantedPostersPackagesSpawn;
@@ -77,6 +78,7 @@ public class MainConfig
 		enableMobRewards = config.get(Configuration.CATEGORY_GENERAL, "Allow Mob Rewards", true, "Allows mobs to reward doriki, bounty or items; true by default").getBoolean();
 		modifierDorikiReward = config.get(Configuration.CATEGORY_GENERAL, "Modifier for Doriki Reward", 1.0, "Multiplier for the doriki reward when killing a mob").getDouble();
 		enableMinimumDorikiPerKill = config.get(Configuration.CATEGORY_GENERAL, "Minimum Doriki per Kill", false, "Ensures a minimum of 1 doriki is gained after each kill").getBoolean();
+		enableBossFights = config.get(Configuration.CATEGORY_GENERAL, "Allow Boss Fights", true, "Allow boss entires to be added in the History tab and players to fight them").getBoolean();
 		dorikiKeepPercentage = config.get(Configuration.CATEGORY_GENERAL, "Percentage of doriki kept after death", 33, "Percentage of doriki kept after death; \n33% by default; \napplied for both 'auto' and 'custom' settings").getInt();
 		bountyKeepPercentage = config.get(Configuration.CATEGORY_GENERAL, "Percentage of bounty kept after death", 0, "Percentage of bounty kept after death; \n0% by default; \napplied for both 'auto' and 'custom' settings").getInt();
 		bellyKeepPercentage = config.get(Configuration.CATEGORY_GENERAL, "Percentage of belly kept after death", 0, "Percentage of belly kept after death; \n0% by default; \napplied for both 'auto' and 'custom' settings").getInt();

@@ -8,11 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.util.ResourceLocation;
-import xyz.pixelatedw.MineMineNoMi3.ID;
-import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 
 @SideOnly(Side.CLIENT)
 public class AbilityRenderer extends Render
@@ -29,6 +25,7 @@ public class AbilityRenderer extends Render
 		this.texture = ablAttr.getProjectileTexture();	
 	}
 
+	@Override
 	public void doRender(Entity entity, double par2, double par4, double par6, float par8, float par9)
 	{
     	this.scaleX = ablAttr.getProjectileSize()[0];
