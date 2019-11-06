@@ -5,6 +5,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -54,13 +55,18 @@ public class EventsHakiGain
 			ExtendedEntityData props = ExtendedEntityData.get(attacked);
 			AbilityProperties abilityProps = AbilityProperties.get(attacked);
 			
+			double hakiMultiplier = 1;
+			
+			if(attacked.isPotionActive(Potion.blindness.id) || attacked.isPotionActive(Potion.confusion.id))
+				hakiMultiplier = 1.25;
+			
 			if(props.getDoriki() > 1500 && props.getObservationHakiExp() <= 300)
 			{
 				int exp = (int) (event.ammount / 10);
 				if(exp <= 0)
 					exp = 1;
 				
-				props.addObservationHakiExp((int) (exp + WyMathHelper.randomWithRange(0, 2)));
+				props.addObservationHakiExp((int) ((exp + WyMathHelper.randomWithRange(0, 2)) * hakiMultiplier));
 			}
 			
 			if(props.getObservationHakiExp() > 300 + WyMathHelper.randomWithRange(0, 50))
@@ -88,9 +94,13 @@ public class EventsHakiGain
 			EntityPlayer player = (EntityPlayer) event.source.getEntity();
 			ExtendedEntityData props = ExtendedEntityData.get(player);
 			AbilityProperties abilityProps = AbilityProperties.get(player);
-			EntityLivingBase target = event.entityLiving;
-			
+			EntityLivingBase target = event.entityLiving;	
 			ItemStack heldItem = player.getHeldItem();
+			
+			double hakiMultiplier = 1;
+
+			if(target.isPotionActive(Potion.resistance.id))
+				hakiMultiplier = 1.25;
 			
 			if(heldItem != null)
 			{
@@ -100,7 +110,7 @@ public class EventsHakiGain
 				if(props.getImbuingHakiExp() <= 600 || hasImbuingBusoActive)
 				{
 					if(ItemsHelper.isSword(heldItem))
-						props.addImbuingHakiExp((int) (3 + WyMathHelper.randomWithRange(0, 3)));
+						props.addImbuingHakiExp((int) ((3 + WyMathHelper.randomWithRange(0, 3)) * hakiMultiplier));
 					else
 						props.addImbuingHakiExp(1);
 				}
@@ -112,7 +122,7 @@ public class EventsHakiGain
 				
 				if(props.getHardeningHakiExp() <= 600 || hasHardeningBusoActive)
 				{
-					props.addHardeningHakiExp((int) (6 + WyMathHelper.randomWithRange(0, 3)));
+					props.addHardeningHakiExp((int) ((6 + WyMathHelper.randomWithRange(0, 3)) * hakiMultiplier));
 				}
 			}
 			
