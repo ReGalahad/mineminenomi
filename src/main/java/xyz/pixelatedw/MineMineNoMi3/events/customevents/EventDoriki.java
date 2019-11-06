@@ -5,13 +5,13 @@ import net.minecraftforge.event.entity.EntityEvent;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 
-public class DorikiEvent extends EntityEvent
+public class EventDoriki extends EntityEvent
 {
 	public EntityPlayer player;
 	public ExtendedEntityData props;
 	public int doriki;
 	
-	public DorikiEvent(EntityPlayer entity) 
+	public EventDoriki(EntityPlayer entity) 
 	{
 		super(entity);
 		this.player = entity;

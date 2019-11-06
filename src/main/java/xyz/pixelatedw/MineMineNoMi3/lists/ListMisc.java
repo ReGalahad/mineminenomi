@@ -27,6 +27,7 @@ import xyz.pixelatedw.MineMineNoMi3.blocks.BlockKage;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockOpe;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockOpeMid;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockPoison;
+import xyz.pixelatedw.MineMineNoMi3.blocks.BlockPoneglyph;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockSkyblock;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockStringMid;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockStringWall;
@@ -53,6 +54,7 @@ import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityFlashDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityImpactDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityMilkyDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityOpe;
+import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityPoneglyph;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityRejectDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityString;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityWantedPoster;
@@ -110,6 +112,9 @@ public class ListMisc
 	public static Block DenDenMushi = new BlockDenDenMushi();
 	public static Block SkyBlock = new BlockSkyblock();
 	public static Block Barrier = new BlockBarrier();
+	public static Block Poneglyph1 = new BlockPoneglyph();
+	public static Block Poneglyph2 = new BlockPoneglyph();
+	public static Block Poneglyph3 = new BlockPoneglyph();
 	public static Block Poison = new BlockPoison();
 	public static Block DemonPoison = new BlockDemonPoison();
 	public static BlockCustomSpawner CustomSpawner = new BlockCustomSpawner();
@@ -173,6 +178,8 @@ public class ListMisc
 	public static WantedPoster WantedPoster = (WantedPoster) new WantedPoster().setMaxStackSize(1);
 	public static Item SeaKingMeat = new SeaKingMeat();
 	public static Item WateringCan = new WateringCan();
+	
+	public static Item Note = new Item().setMaxStackSize(1);
 	
 	public static Item DialEisen = new DialEisen();
 	public static Item DialFire = new DialFire();
@@ -293,6 +300,7 @@ public class ListMisc
 
 		addITEM(ColaBackpack, "Cola Backpack", ListCreativeTabs.tabWeapons);
 		addITEM(TomoeDrums, "Tomoe Drums", ListCreativeTabs.tabWeapons);
+		addITEM(Note, "Note", ListCreativeTabs.tabMisc);
 		addITEM(MedicBag, "Medic Bag", ListCreativeTabs.tabWeapons);
 		
 		addITEM(GreenKujaBow, "Green Kuja Bow", ListCreativeTabs.tabWeapons);
@@ -360,6 +368,9 @@ public class ListMisc
 		addBLOCK(DenDenMushi, "Den Den Mushi", 0.5F, TileEntityDenDenMushi.class, ListCreativeTabs.tabMisc);
 		addBLOCK(SkyBlock, ItemSkyblock.class, "Sky Block", 0.6F, null, ListCreativeTabs.tabMisc);
 		addBLOCK(Barrier, "Crash Barrier", Float.POSITIVE_INFINITY, null, null);
+		addBLOCK(Poneglyph1, "Poneglyph 1", Float.POSITIVE_INFINITY, TileEntityPoneglyph.class, ListCreativeTabs.tabMisc);
+		addBLOCK(Poneglyph2, "Poneglyph 2", Float.POSITIVE_INFINITY, TileEntityPoneglyph.class, ListCreativeTabs.tabMisc);
+		addBLOCK(Poneglyph3, "Poneglyph 3", Float.POSITIVE_INFINITY, TileEntityPoneglyph.class, ListCreativeTabs.tabMisc);
 		addBLOCK(Poison, "Poison", 1.5F, null, null);
 		addBLOCK(DemonPoison, "Demon Poison", 1.5F, null, null);
 		addBLOCK(CustomSpawner, "Custom Spawner", Float.POSITIVE_INFINITY, TileEntityCustomSpawner.class, null);
@@ -429,8 +440,10 @@ public class ListMisc
 		WyRegistry.registerName("ability.60millionvoltvari.name", "60 Million Volt Vari");
 		WyRegistry.registerName("ability.100millionvoltvari.name", "100 Million Volt Vari");
 		WyRegistry.registerName("ability.max200millionvoltvari.name", "Max 200 Million Volt Vari");
-		WyRegistry.registerName("ability.mamaragan.name", "Mamaragan");
 		
+		// Swordsman Progression Questline
+		WyRegistry.registerName("ability.mamaragan.name", "Mamaragan");
+
 		WyRegistry.registerName("quest." + ListQuests.swordsmanProgression01.getQuestID() + ".started", "<Swordsman Master> You want to become a swordsman master, young one ? I do like the sparks in your eyes so how about this, show me your best sword and I'll see if you're fit or not to start training with me.");
 		WyRegistry.registerName("quest." + ListQuests.swordsmanProgression01.getQuestID() + ".completed", "<Swordsman Master> That's a really nice blade you have there, really strong indeed. Fine, I will train you, when you're ready come and talk with me again !");
 		WyRegistry.registerName("quest." + ListQuests.swordsmanProgression02.getQuestID() + ".started", "<Swordsman Master> First we'll test your determination, you must survive the night in the wilderness without dying !");
@@ -439,7 +452,19 @@ public class ListMisc
 		WyRegistry.registerName("quest." + ListQuests.swordsmanProgression03.getQuestID() + ".completed", "<Swordsman Master> Impressive.");
 		WyRegistry.registerName("quest." + ListQuests.swordsmanProgression04.getQuestID() + ".started", "<Swordsman Master> Now for the last test we must train your movement during combat. Deal 25 critical hits.");
 		WyRegistry.registerName("quest." + ListQuests.swordsmanProgression04.getQuestID() + ".completed", "<Swordsman Master> I hope you've learned something from this. You're free for now, I will need some time to think how to challenge your skill even more.");
-
+		WyRegistry.registerName("quest." + ListQuests.swordsmanProgression05.getQuestID() + ".started", "<Swordsman Master> This can wait, we've got some bandit company outside kid, help me get rid of them.");
+		WyRegistry.registerName("quest." + ListQuests.swordsmanProgression05.getQuestID() + ".completed", "<Swordsman Master> With so much explosive power they are probably planning something big, better to investigate first.");
+		WyRegistry.registerName("quest." + ListQuests.swordsmanProgression05.getQuestID() + ".dialogue.01", "<Swordsman Master> There are still some bandits nearby!");
+		WyRegistry.registerName("quest." + ListQuests.swordsmanProgression05.getQuestID() + ".dialogue.02", "<Swordsman Master> No doubt they came here for this note. You must decipher it, a librarian will probably be able to crack this code.");
+		
+		// Sniper Progression Questline
+		
+		// Quest related items
+		WyRegistry.registerName("quest.item.mysteriousnote", "Mysterious Note");
+		WyRegistry.registerName("quest.item.decipherednote", "Deciphered Note");
+				
+		WyRegistry.registerName(ID.LANG_GUI_HISTORY, "History");
+		WyRegistry.registerName(ID.LANG_GUI_CHALLENGES, "Challenges");
 		WyRegistry.registerName(ID.LANG_GUI_FACTION, "Faction");
 		WyRegistry.registerName(ID.LANG_GUI_RACE, "Race");
 		WyRegistry.registerName(ID.LANG_GUI_STYLE, "Style");

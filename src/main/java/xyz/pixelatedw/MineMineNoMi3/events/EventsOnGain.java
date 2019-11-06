@@ -21,8 +21,8 @@ import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.MarineData;
-import xyz.pixelatedw.MineMineNoMi3.events.customevents.BountyEvent;
-import xyz.pixelatedw.MineMineNoMi3.events.customevents.DorikiEvent;
+import xyz.pixelatedw.MineMineNoMi3.events.customevents.EventBounty;
+import xyz.pixelatedw.MineMineNoMi3.events.customevents.EventDoriki;
 import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 
@@ -30,7 +30,7 @@ public class EventsOnGain
 {
 
 	@SubscribeEvent
-	public void onDorikiGained(DorikiEvent event)
+	public void onDorikiGained(EventDoriki event)
 	{
 		if (event.props.isHuman())
 		{			
@@ -196,7 +196,7 @@ public class EventsOnGain
 					if (props.getDoriki() + plusDoriki <= Values.MAX_DORIKI)
 					{
 						props.alterDoriki((int) Math.round(plusDoriki));
-						DorikiEvent e = new DorikiEvent(player);
+						EventDoriki e = new EventDoriki(player);
 						if (MinecraftForge.EVENT_BUS.post(e))
 							return;
 					}
@@ -207,7 +207,7 @@ public class EventsOnGain
 						if (props.getBounty() + plusBounty < Values.MAX_GENERAL)
 						{
 							props.alterBounty(plusBounty);
-							BountyEvent e = new BountyEvent(player, plusBounty);
+							EventBounty e = new EventBounty(player, plusBounty);
 							if (MinecraftForge.EVENT_BUS.post(e))
 								return;
 						}

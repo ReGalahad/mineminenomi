@@ -26,13 +26,13 @@ public class Cola extends ItemFood
 		player.setItemInUse(itemStack, this.itemUseDuration);
 		return itemStack;
 	}
-	
+
     @Override
 	public EnumAction getItemUseAction(ItemStack itemStack)
     {
         return EnumAction.drink;
     }
-	
+
 	@Override
 	public void onFoodEaten(ItemStack itemStack, World world, EntityPlayer player) 
 	{

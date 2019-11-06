@@ -91,7 +91,7 @@ public class QuestSwordsmanProgression04 extends Quest implements IHitCounterQue
 
 	public EnumQuestlines getQuestLine()
 	{
-		return EnumQuestlines.SWORDSMANPROGRESSION;
+		return EnumQuestlines.SWORDSMAN_PROGRESSION;
 	}
 
 	public boolean isRepeatable()

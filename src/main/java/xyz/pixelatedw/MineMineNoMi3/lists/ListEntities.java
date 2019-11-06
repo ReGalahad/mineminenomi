@@ -24,7 +24,6 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.EntityMarineCaptain;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.EntityMarineWithGun;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.EntityMorgan;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityBlackKnight;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDojoSensei;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDoppelman;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityMirageClone;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityWantedPostersPackage;
@@ -32,6 +31,8 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityFatPirate;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirate;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirateCaptain;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirateWithGun;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.quest.givers.EntityDojoSensei;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.quest.objectives.EntitySniperTarget;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityDugong;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityLapahn;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityYagaraBull;
@@ -115,7 +116,8 @@ public class ListEntities
 		WyRegistry.registerMob("Mirage Clone", EntityMirageClone.class);
 		WyRegistry.registerMob("Dojo Sensei", EntityDojoSensei.class, 0xFF00FF, 0x00FF00);
 		WyRegistry.registerMob("Wanted Posters Package", EntityWantedPostersPackage.class);
-
+		WyRegistry.registerMob("Sniper Targets", EntitySniperTarget.class);
+		
 		//Animals
 		WyRegistry.registerMob("Den Den Mushi", EntityDenDenMushi.class, 0xFF00FF, 0x00FF00);
 		WyRegistry.registerSpawnBiomesFor(EntityDenDenMushi.class, 50, 1, 3, Type.PLAINS, Type.SAVANNA, Type.DRY, Type.SPARSE, Type.CONIFEROUS, Type.MOUNTAIN);

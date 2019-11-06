@@ -171,7 +171,7 @@ public class PacketPlayer implements IMessage
 				
 				for(ItemStack is : player.inventory.mainInventory)
 					if(is != null && is.getItem() instanceof CharacterCreator)
-						WyHelper.removeStackFromInventory(player, is);	
+						WyHelper.removeStackFromInventory(player, is);
 				
 				WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
 				WyNetworkHelper.sendTo(new PacketAbilitySync(abilityProps), (EntityPlayerMP) player);

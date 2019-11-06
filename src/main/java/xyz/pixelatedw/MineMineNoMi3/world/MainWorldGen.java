@@ -25,6 +25,7 @@ import xyz.pixelatedw.MineMineNoMi3.world.structures.StructureCloud;
 import xyz.pixelatedw.MineMineNoMi3.world.structures.StructureDojo;
 import xyz.pixelatedw.MineMineNoMi3.world.structures.StructureLargeShip;
 import xyz.pixelatedw.MineMineNoMi3.world.structures.StructureMarineLargeBase;
+import xyz.pixelatedw.MineMineNoMi3.world.structures.StructurePoneglyph;
 import xyz.pixelatedw.MineMineNoMi3.world.structures.StructureSmallShip;
 
 public class MainWorldGen implements IWorldGenerator 
@@ -52,6 +53,11 @@ public class MainWorldGen implements IWorldGenerator
 			int posZ = j;
 			
 			StructureCloud.build(world, posX, posY, posZ);
+			
+			posY = random.nextInt(64);
+			
+			StructurePoneglyph.build(world, posX, posY, posZ);
+			System.out.println("Poneglyph spawned at /tp @p " + posX + " " + posY + " " + posZ);
 		}
 		
 		if(MainConfig.enableShips)
@@ -63,7 +69,7 @@ public class MainWorldGen implements IWorldGenerator
 		}
 		
 		this.addStructureSpawn(WySchematicHelper.load("dojo"), world, random, i, j, 1, 1, 5);
-		
+
 		if(MainConfig.enableCamps)
 		{
 			this.addStructureSpawn(WySchematicHelper.load("marineCamp"), world, random, i, j, 1, 1, 5);

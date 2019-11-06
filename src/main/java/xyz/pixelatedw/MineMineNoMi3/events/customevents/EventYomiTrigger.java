@@ -6,12 +6,12 @@ import net.minecraftforge.event.entity.EntityEvent;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 
 @Cancelable
-public class YomiTriggerEvent extends EntityEvent
+public class EventYomiTrigger extends EntityEvent
 {
 	public EntityLivingBase entity;
 	public ExtendedEntityData oldPlayerData, newPlayerData;
 	
-	public YomiTriggerEvent(EntityLivingBase entity, ExtendedEntityData oldPlayerData, ExtendedEntityData newPlayerData) 
+	public EventYomiTrigger(EntityLivingBase entity, ExtendedEntityData oldPlayerData, ExtendedEntityData newPlayerData) 
 	{
 		super(entity);
 		this.entity = entity;

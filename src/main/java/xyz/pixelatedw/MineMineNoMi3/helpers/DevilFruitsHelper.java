@@ -36,7 +36,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedWorldData;
-import xyz.pixelatedw.MineMineNoMi3.events.customevents.DorikiEvent;
+import xyz.pixelatedw.MineMineNoMi3.events.customevents.EventDoriki;
 import xyz.pixelatedw.MineMineNoMi3.items.AkumaNoMi;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
@@ -223,7 +223,7 @@ public class DevilFruitsHelper
 		ExtendedEntityData props = ExtendedEntityData.get(player);
 		AbilityProperties abilityProps = AbilityProperties.get(player);
 
-		DorikiEvent e = new DorikiEvent(player);
+		EventDoriki e = new EventDoriki(player);
 		if (MinecraftForge.EVENT_BUS.post(e))
 			return;
 

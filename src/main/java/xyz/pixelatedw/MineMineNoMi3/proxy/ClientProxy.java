@@ -38,7 +38,6 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.EntityMarineCaptain;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.EntityMarineWithGun;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.EntityMorgan;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityBlackKnight;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDojoSensei;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDoppelman;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityMirageClone;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityWantedPostersPackage;
@@ -46,6 +45,9 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityFatPirate;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirate;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirateCaptain;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirateWithGun;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.quest.givers.EntityDojoSensei;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.quest.objectives.EntitySniperTarget;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.quest.objectives.models.ModelSniperTarget;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityDugong;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityLapahn;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityYagaraBull;
@@ -177,6 +179,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityMirageClone.class, new RenderBlackKnight());
 		RenderingRegistry.registerEntityRenderingHandler(EntityDojoSensei.class, new MobRenderer(new ModelDojoSensei()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityWantedPostersPackage.class, new MobRenderer(new ModelWantedPostersPackage(), "wantedposterspackage"));
+		RenderingRegistry.registerEntityRenderingHandler(EntitySniperTarget.class, new MobRenderer(new ModelSniperTarget(), "snipertarget"));
 		
 		//Animals
 		RenderingRegistry.registerEntityRenderingHandler(EntityDenDenMushi.class, new MobRenderer(new ModelDenDenMushi(), "denden"));
