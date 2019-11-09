@@ -21,6 +21,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -55,7 +56,7 @@ public class WyHelper
 	
 	public static EntityLivingBase getEntityByUUID(World world, UUID uuid)
 	{
-		List<EntityLivingBase> entities = (List<EntityLivingBase>) world.loadedEntityList.stream().filter(x -> x instanceof EntityLivingBase);
+		List<EntityLivingBase> entities = (List<EntityLivingBase>) world.loadedEntityList.stream().filter(x -> x instanceof EntityLivingBase).collect(Collectors.toList());
 		for(EntityLivingBase entity : entities)
 		{
 			if(entity.getUniqueID().equals(uuid))

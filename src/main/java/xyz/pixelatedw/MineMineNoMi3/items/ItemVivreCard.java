@@ -26,7 +26,7 @@ public class ItemVivreCard extends Item
 			if(entity != null)
 			{
 				list.add(EnumChatFormatting.GOLD + "[Owner] " + EnumChatFormatting.RESET + entity.getCommandSenderName());
-				list.add(EnumChatFormatting.GOLD + "[Location] " + EnumChatFormatting.RESET + entity.posX + "X " + entity.posY + "Y " + entity.posZ +"Z");
+				list.add(EnumChatFormatting.GOLD + "[Location] " + EnumChatFormatting.RESET + (int)entity.posX + "X " + (int)entity.posY + "Y " + (int)entity.posZ +"Z");
 			}
 		}
 	}
@@ -35,6 +35,8 @@ public class ItemVivreCard extends Item
 	public void onCreated(ItemStack itemStack, World world, EntityPlayer player) 
     {
     	this.setOwner(itemStack, player);
+    	String itemName = itemStack.getDisplayName();
+    	itemStack.setStackDisplayName(player.getDisplayName() + "'s " + itemName);
     }
 
 	public void setOwner(ItemStack itemStack, EntityLivingBase e)

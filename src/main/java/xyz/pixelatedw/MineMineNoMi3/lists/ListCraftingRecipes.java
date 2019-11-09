@@ -10,6 +10,8 @@ public class ListCraftingRecipes
 	
 	public static void init()
 	{
+		GameRegistry.addShapelessRecipe(new ItemStack(ListMisc.VivreCard, 1), Items.paper);
+		
 		GameRegistry.addShapedRecipe(new ItemStack(ListMisc.MedicBag, 1), new Object[]
 				{ "Y.Y", "XZX", "XXX", 'X', Items.leather, 'Y', Items.string, 'Z', new ItemStack(Items.dye, 1, 4) });
 		
