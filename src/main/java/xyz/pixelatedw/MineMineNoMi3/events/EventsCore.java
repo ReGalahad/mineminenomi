@@ -16,7 +16,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraftforge.common.MinecraftForge;
+import net.minecraft.util.MathHelper;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -25,10 +25,12 @@ import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
+import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
-import xyz.pixelatedw.MineMineNoMi3.events.customevents.YomiTriggerEvent;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedWorldData;
+import xyz.pixelatedw.MineMineNoMi3.data.HistoryProperties;
 
 public class EventsCore
 {
@@ -46,6 +48,8 @@ public class EventsCore
 				QuestProperties.register((EntityPlayer) event.entity);
 			if(AbilityProperties.get((EntityPlayer) event.entity) == null)
 				AbilityProperties.register((EntityPlayer) event.entity);
+			if(HistoryProperties.get((EntityPlayer) event.entity) == null)
+				HistoryProperties.register((EntityPlayer) event.entity);
 		}
 	}
 	
@@ -54,10 +58,12 @@ public class EventsCore
 	public void onClonePlayer(PlayerEvent.Clone e) 
 	{
 		if(e.wasDeath) 
-		{
+		{		
+	    	ExtendedWorldData worldProps = ExtendedWorldData.get(e.original.worldObj);
+
 			ExtendedEntityData oldPlayerProps = ExtendedEntityData.get(e.original);	
 			ExtendedEntityData newPlayerProps = ExtendedEntityData.get(e.entityPlayer);
-			
+
 			//WyNetworkHelper.sendTo(new PacketNewAABB(0.6F, 1.8F), (EntityPlayerMP) e.entityPlayer);
 			
 			if(MainConfig.enableKeepIEEPAfterDeath.equals("full"))
@@ -97,8 +103,12 @@ public class EventsCore
 				String race = oldProps.getRace();
 				String fightStyle = oldProps.getFightStyle();
 				String crew = oldProps.getCrew();
-				int doriki = oldProps.getDoriki() / 3;
+				int doriki = MathHelper.ceiling_double_int(WyMathHelper.percentage(MainConfig.dorikiKeepPercentage, oldProps.getDoriki()));
+				int bounty = MathHelper.ceiling_double_int(WyMathHelper.percentage(MainConfig.bountyKeepPercentage, oldProps.getBounty()));
+				int belly = MathHelper.ceiling_double_int(WyMathHelper.percentage(MainConfig.bellyKeepPercentage, oldProps.getBelly()));
 
+				worldProps.removeDevilFruitFromWorld(oldProps.getUsedFruit());
+				
 				ExtendedEntityData props = ExtendedEntityData.get(e.entityPlayer);
 				props.setFaction(faction);
 				props.setRace(race);
@@ -107,6 +117,9 @@ public class EventsCore
 				props.setMaxCola(100);
 				props.setCola(oldProps.getMaxCola());
 				props.setDoriki(doriki);
+				props.setBounty(bounty);
+				props.setBelly(belly);
+				
 			}
 			else if(MainConfig.enableKeepIEEPAfterDeath.equals("custom"))
 			{
@@ -118,11 +131,17 @@ public class EventsCore
 					switch(WyHelper.getFancyName(stat))
 					{
 						case "doriki":
-							props.setDoriki(oldProps.getDoriki()); break;
+							int doriki = MathHelper.ceiling_double_int(WyMathHelper.percentage(MainConfig.dorikiKeepPercentage, oldProps.getDoriki()));
+							props.setDoriki(doriki); 
+							break;
 						case "bounty":
-							props.setBounty(oldProps.getBounty()); break;
+							int bounty = MathHelper.ceiling_double_int(WyMathHelper.percentage(MainConfig.bountyKeepPercentage, oldProps.getBounty()));
+							props.setBounty(bounty); 
+							break;
 						case "belly":
-							props.setBelly(oldProps.getBelly()); break;
+							int belly = MathHelper.ceiling_double_int(WyMathHelper.percentage(MainConfig.bellyKeepPercentage, oldProps.getBelly()));
+							props.setBelly(belly); 
+							break;
 						case "race":
 							props.setRace(oldProps.getRace()); break;
 						case "faction":
@@ -133,16 +152,15 @@ public class EventsCore
 							props.setUsedFruit(oldProps.getUsedFruit()); break;
 					}
 				}
+				
+				if(WyHelper.isNullOrEmpty(props.getUsedFruit()))
+					worldProps.removeDevilFruitFromWorld(oldProps.getUsedFruit());
 			}
-					
+			
 			NBTTagCompound compound = new NBTTagCompound();
 			QuestProperties.get(e.original).saveNBTData(compound);
 			QuestProperties questProps = QuestProperties.get(e.entityPlayer);
 			questProps.loadNBTData(compound);
-			
-			YomiTriggerEvent yomiEvent = new YomiTriggerEvent(e.entityPlayer, oldPlayerProps, newPlayerProps);
-			if (MinecraftForge.EVENT_BUS.post(yomiEvent))
-				return;
 		}
 	}
 	
@@ -236,11 +254,11 @@ public class EventsCore
 	}
 	
 	@SubscribeEvent
-	public void onPlayerTick(TickEvent.WorldTickEvent event)
-	{		
+	public void onPlayerTick(TickEvent.PlayerTickEvent event)
+	{
 		if(event.phase == Phase.END && event.side == Side.SERVER)
 		{
-			if(event.world.getWorldTime() % 1200 == 0)
+			if(event.player.worldObj.getWorldTime() % 1200 == 0)
 			{
 				WyTelemetry.sendAllData();
 			}

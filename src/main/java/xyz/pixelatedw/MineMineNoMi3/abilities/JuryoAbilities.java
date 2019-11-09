@@ -121,6 +121,7 @@ public class JuryoAbilities
 		@Override
 		public void duringPassive(EntityPlayer player, int passiveTimer) 
 		{
+			ExtendedEntityData props = ExtendedEntityData.get(player);
 			if(passiveTimer > 400)
 			{
 				this.setPassiveActive(false);
@@ -137,7 +138,7 @@ public class JuryoAbilities
 				
 				if(++passiveTimer % 100 == 0)
 				{
-					entity.attackEntityFrom(DamageSource.causePlayerDamage(player), 8);	
+					entity.attackEntityFrom(DamageSource.causePlayerDamage(player), 8 * props.getDamageMultiplier());	
 					if(MainConfig.enableGriefing)
 					{
 						for(int x = -2; x < 2; x++)

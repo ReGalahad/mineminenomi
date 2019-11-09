@@ -11,7 +11,7 @@ public class WyMathHelper
 	public static List shuffle(List ar)
 	{
 		Random rnd = new Random();
-		
+
 		for (int i = ar.size() - 1; i > 0; i--)
 		{
 			int index = rnd.nextInt(i + 1);
@@ -20,8 +20,24 @@ public class WyMathHelper
 			ar.set(index, ar.get(i));
 			ar.set(i, a);
 		}
-		
+
 		return ar;
+	}
+
+	public static String shuffleArray(String str)
+	{
+		char[] array = str.toCharArray();
+		Random rnd = new Random();
+		for (int i = array.length - 1; i > 0; i--)
+		{
+			int index = rnd.nextInt(i + 1);
+
+			char a = array[index];
+			array[index] = array[i];
+			array[i] = (char) (a + randomWithRange(1, 5));
+		}
+		
+		return String.valueOf(array);
 	}
 
 	public static float degToRad(double degrees)

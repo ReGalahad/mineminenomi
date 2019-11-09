@@ -77,7 +77,7 @@ public class ID
 	
 	PROJECT_ID = "mineminenomi",
 	PROJECT_NAME = "Mine Mine no Mi",
-	PROJECT_VERSION = "0.6.0",
+	PROJECT_VERSION = "0.6.1a",
 	PROJECT_MCVERSION = "1.7.10",
 
 	PARTICLEFX_DOKUGOMU = "dokuGumo",
@@ -134,6 +134,9 @@ public class ID
 	PARTICLEFX_ABOVEHEAD_ANGRY = "aboveHeadAngry",
 	PARTICLEFX_ABOVEHEAD_HAPPY = "aboveHeadHappy",
 	PARTICLEFX_ABOVEHEAD_HEART = "aboveHeadHeart",
+	PARTICLEFX_MEDIC_BAG_EXPLOSION = "medicBagExplosion",
+	PARTICLEFX_FIRST_AID = "firstAid",
+	PARTICLEFX_HAOSHOKU_HAKI = "haoshokuHaki",
 	
 	EXTRAEFFECT_MERO = "mero",
 	EXTRAEFFECT_HIE = "hie",
@@ -147,6 +150,7 @@ public class ID
 	EXTRAEFFECT_ABAREHIMATSURI = "abareHimatsuri",
 	EXTRAEFFECT_LOGIA_OFF = "logiaOff",
 	EXTRAEFFECT_SAKE_DRUNK = "sakeDrunk",
+	EXTRAEFFECT_HAO = "haoHaki",
 			
 	CREW_ARLONG = "Arlong Pirates",
 	CREW_BAROQUEWORKS = "Baroque Works",
@@ -170,6 +174,10 @@ public class ID
 	FSTYLE_ARTOFWEATHER = "Art of Weather",
 	FSTYLE_OKAMA = "Okama",
 	
+	HISTORY_ENTRY_TYPE_CHALLENGE = "challenge",
+	
+	HISTORY_ENNTRY_NAME_CROCODILE = "crocodile",
+	
 	LANG_KEYS_CATEGORY = "category.mmnmkeys", //Mine Mine no Mi Keys
 	LANG_KEY_PLAYER = "key.playerui", //Player UI
 	LANG_KEY_COMBATMODE = "key.combatmode", //Combat Mode
@@ -186,6 +194,8 @@ public class ID
 	LANG_GUI_STYLE = "gui.style.name",
 	LANG_GUI_ABILITIES = "gui.abilities.name",
 	LANG_GUI_QUESTS = "gui.quests.name",
+	LANG_GUI_HISTORY = "gui.history.name",
+	LANG_GUI_CHALLENGES = "gui.challenges.name",
 	LANG_GUI_QUESTS_PROGRESS = "gui.quests.progress.name",
 	LANG_GUI_QUESTS_ACCEPT = "gui.quests.accept.name",	
 	LANG_GUI_QUESTS_DECLINE = "gui.quests.decline.name",	
@@ -198,7 +208,7 @@ public class ID
 	SCENARIO_ROMANCEDAWN_CAPTAINMORGAN = "scenario_cptmorgan",
 	
 	//Auto assigned by the Deploy script
-	BUILD_MODE = "EARLY_ACCESS",
+	BUILD_MODE = "DEV",
 	NULL = "null";
 	
 	public static final int 

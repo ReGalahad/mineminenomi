@@ -13,6 +13,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
@@ -20,16 +21,17 @@ import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerUseItemEvent;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.abilities.HakiAbilities.KenbunshokuHakiFutureSight;
 import xyz.pixelatedw.MineMineNoMi3.abilities.RokushikiAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.effects.DFEffectHieSlowness;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityExplosion;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
+import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilitySync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDoppelman;
-import xyz.pixelatedw.MineMineNoMi3.events.customevents.YomiTriggerEvent;
 import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.helpers.ItemsHelper;
 import xyz.pixelatedw.MineMineNoMi3.items.armors.ItemCoreArmor;
@@ -234,7 +236,45 @@ public class EventsPassives
 					// Integer.MAX_VALUE);
 				}
 			}
+			boolean updateDisabledAbilities = false;
 
+			if(!player.worldObj.isRemote)
+			{
+				if(props.hasExtraEffects(ID.EXTRAEFFECT_HAO) && player.isPotionActive(Potion.blindness))
+				{
+	
+					for (int i = 0; i < abilityProps.countAbilitiesInHotbar(); i++)
+					{
+						if (abilityProps.getAbilityFromSlot(i) != null && !abilityProps.getAbilityFromSlot(i).isDisabled() && !abilityProps.getAbilityFromSlot(i).isOnCooldown())
+						{						
+							abilityProps.getAbilityFromSlot(i).endPassive(player);
+							abilityProps.getAbilityFromSlot(i).setCooldownActive(true);
+							abilityProps.getAbilityFromSlot(i).disable(player, true);
+						}
+					}
+					
+					if(updateDisabledAbilities)
+						WyNetworkHelper.sendTo(new PacketAbilitySync(abilityProps), (EntityPlayerMP) player);
+				}
+				else
+				{			
+					for (int i = 0; i < abilityProps.countAbilitiesInHotbar(); i++)
+					{										
+						if (abilityProps.getAbilityFromSlot(i) != null && abilityProps.getAbilityFromSlot(i).isDisabled())
+						{
+							abilityProps.getAbilityFromSlot(i).setPassiveActive(false);
+							abilityProps.getAbilityFromSlot(i).disable(player, false);
+							abilityProps.getAbilityFromSlot(i).startUpdate(player);
+							updateDisabledAbilities = true;
+						}
+						
+					}
+			
+					if(updateDisabledAbilities)
+						WyNetworkHelper.sendTo(new PacketAbilitySync(abilityProps), (EntityPlayerMP) player);				
+				}
+			}
+			
 			if (props.getTempPreviousAbility().equals("geppo") || props.getTempPreviousAbility().equals("soranomichi"))
 			{
 				if (!player.onGround && player.worldObj.getBlock((int) player.posX, (int) player.posY - 1, (int) player.posZ) == Blocks.air)
@@ -294,6 +334,14 @@ public class EventsPassives
 					explosion.doExplosion();
 				}
 			}
+			
+			KenbunshokuHakiFutureSight futureSight = (KenbunshokuHakiFutureSight) abilityProps.getAbilityFromName(ListAttributes.KENBUNSHOKU_HAKI_FUTURE_SIGHT.getAttributeName());
+			
+			if(futureSight != null && futureSight.isPassiveActive())
+			{
+				futureSight.reduceProtection(event.ammount);
+				event.setCanceled(true);
+			}
 		}
 
 		if (event.source.getSourceOfDamage() instanceof EntityPlayer)
@@ -323,10 +371,19 @@ public class EventsPassives
 			if (props.getUsedFruit().equalsIgnoreCase("dokudoku") && props.getZoanPoint().equalsIgnoreCase("venomDemon"))
 				attacked.addPotionEffect(new PotionEffect(Potion.poison.id, 60, 0));
 
-			if (props.hasBusoHakiActive())
+			Ability hardeningBuso = abilityProps.getAbilityFromName(ListAttributes.BUSOSHOKU_HAKI_HARDENING.getAttributeName());
+			Ability fullBodyHardeningBuso = abilityProps.getAbilityFromName(ListAttributes.BUSOSHOKU_HAKI_FULL_BODY_HARDENING.getAttributeName());
+
+			if (hardeningBuso != null && hardeningBuso.isPassiveActive())
 			{
 				double power = props.getDoriki() / 500;
-				event.ammount += power;
+				event.ammount += power * props.getDamageMultiplier();
+			}
+			
+			if (fullBodyHardeningBuso != null && fullBodyHardeningBuso.isPassiveActive())
+			{
+				double power = props.getDoriki() / 700;
+				event.ammount += power * props.getDamageMultiplier();
 			}
 		}
 	}
@@ -347,24 +404,6 @@ public class EventsPassives
 					event.setCanceled(true);
 				}
 			}
-		}
-	}
-
-	@SubscribeEvent
-	public void onYomiDeath(YomiTriggerEvent event)
-	{
-		if (event.oldPlayerData.getUsedFruit().equalsIgnoreCase("yomiyomi") && !event.oldPlayerData.getZoanPoint().equalsIgnoreCase("yomi"))
-		{
-			event.newPlayerData.setUsedFruit("yomiyomi");
-			event.newPlayerData.setZoanPoint("yomi");
-
-			EntityPlayer player = (EntityPlayer) event.entity;
-			EntityPlayer oldPlayer = (EntityPlayer) event.oldPlayerData.getEntity();
-			
-			player.setPosition(oldPlayer.posX, oldPlayer.posY, oldPlayer.posZ);
-			
-			WyNetworkHelper.sendTo(new PacketSync(event.newPlayerData), (EntityPlayerMP) player);
-			WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), event.newPlayerData));
 		}
 	}
 
@@ -404,12 +443,35 @@ public class EventsPassives
 	{
 		if (event.entityLiving instanceof EntityPlayer)
 		{
-			ExtendedEntityData props = ExtendedEntityData.get((EntityPlayer) event.entity);
+			EntityPlayer player = (EntityPlayer) event.entity;
+			ExtendedEntityData props = ExtendedEntityData.get(player);
+			
 			if (props.isInAirWorld())
 			{
 				event.setCanceled(true);
 			}
+			
+			if(player.getHealth() - event.ammount <= 0)
+			{			
+				if (props.getUsedFruit().equalsIgnoreCase("yomiyomi") && !props.getZoanPoint().equalsIgnoreCase("yomi"))
+				{
+					props.setUsedFruit("yomiyomi");
+					props.setZoanPoint("yomi");
 
+					AbilityExplosion explosion = WyHelper.newExplosion(player, player.posX, player.posY, player.posZ, 2);
+					explosion.setDamageOwner(false);
+					explosion.setDamageEntities(false);
+					explosion.setDestroyBlocks(false);
+					explosion.setSmokeParticles(ID.PARTICLEFX_SOULPARADE);
+					explosion.doExplosion();
+					
+					player.setHealth(player.getMaxHealth());
+					
+					WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
+					WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));
+				}
+			}
+			
 			if (event.source.getSourceOfDamage() instanceof EntityLivingBase)
 			{
 				if (event.entityLiving instanceof EntityPlayer)
@@ -446,4 +508,28 @@ public class EventsPassives
 			}
 		}
 	}
+	
+	@SubscribeEvent
+	public void onDeath(LivingDeathEvent event)
+	{
+		if(event.entityLiving instanceof EntityPlayer)
+		{
+			EntityPlayer player = (EntityPlayer) event.entityLiving;
+			ExtendedEntityData props = ExtendedEntityData.get(player);
+			
+			if(props.getUsedFruit().equalsIgnoreCase("yamiyami") || props.hasYamiPower())
+			{
+				for(int x = -128; x < 128; x++)
+				for(int y = -128; y < 128; y++)
+				for(int z = -128; z < 128; z++)
+				{
+					if( player.worldObj.getBlock((int) player.posX + x, (int) player.posY + y, (int) player.posZ + z) == ListMisc.Darkness)
+					{
+						player.worldObj.setBlockToAir((int) player.posX + x, (int) player.posY + y, (int) player.posZ + z);
+					}
+				}
+			}
+		}			
+	}
+
 }

@@ -44,9 +44,6 @@ public class DialImpact extends Item
     {
     	if(!world.isRemote && player.isSneaking())
     	{
-	    	if(!player.capabilities.isCreativeMode)
-	    		WyTelemetry.addMiscStat("impactDialsPlaced", "Impact Dials Placed", 1);
-
 	    	world.setBlock(i1, i2 + 1, i3, ListMisc.DialImpactBlock);
 	    	itemStack.stackSize--;
     	}

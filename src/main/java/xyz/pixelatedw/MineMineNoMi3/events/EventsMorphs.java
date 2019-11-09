@@ -1,50 +1,39 @@
 package xyz.pixelatedw.MineMineNoMi3.events;
 
+import java.util.Arrays;
+
+import org.lwjgl.opengl.GL11;
+
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
-import cpw.mods.fml.common.gameevent.TickEvent.Phase;
-import cpw.mods.fml.common.gameevent.TickEvent.Type;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
-import net.minecraft.client.gui.Gui;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.EntityRenderer;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.potion.Potion;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraftforge.client.event.RenderBlockOverlayEvent;
 import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
+import net.minecraftforge.client.event.RenderPlayerEvent.SetArmorModel;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import org.lwjgl.opengl.GL11;
-
 import xyz.pixelatedw.MineMineNoMi3.ID;
-import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
-import xyz.pixelatedw.MineMineNoMi3.api.WyRenderHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
-import xyz.pixelatedw.MineMineNoMi3.data.ExtendedWorldData;
 import xyz.pixelatedw.MineMineNoMi3.helpers.HandRendererHelper;
 import xyz.pixelatedw.MineMineNoMi3.helpers.MorphsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
-import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.models.effects.ModelAbareHimatsuri;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSyncInfo;
 import xyz.pixelatedw.MineMineNoMi3.renderers.effects.RenderAbareHimatsuri;
-import xyz.pixelatedw.MineMineNoMi3.renderers.effects.RenderCandleLock;
 import xyz.pixelatedw.MineMineNoMi3.renderers.entities.zoans.RenderZoanMorph;
-
-import java.util.Arrays;
 
 @SideOnly(Side.CLIENT)
 public class EventsMorphs
@@ -62,6 +51,69 @@ public class EventsMorphs
 		this.mc = mc;
 	}
 
+	
+	@SubscribeEvent
+	public void onArmorRendering(SetArmorModel event)
+	{
+		EntityPlayer player = event.entityPlayer;
+		ExtendedEntityData props = ExtendedEntityData.get(player);
+		AbilityProperties abilityProps = AbilityProperties.get(player);
+		
+		Ability fullBodyHakiAbility = abilityProps.getAbilityFromName(ListAttributes.BUSOSHOKU_HAKI_FULL_BODY_HARDENING.getAttributeName());
+
+		if (fullBodyHakiAbility != null && fullBodyHakiAbility.isPassiveActive())
+		{
+			GL11.glPushMatrix();
+			{
+				GL11.glEnable(GL11.GL_BLEND);
+				GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE_MINUS_DST_COLOR);
+							
+	            float f2 = this.interpolateRotation(player.prevRenderYawOffset, player.renderYawOffset, event.partialRenderTick);
+	            float f3 = this.interpolateRotation(player.prevRotationYawHead, player.rotationYawHead, event.partialRenderTick);
+	            float f4 = this.handleRotationFloat(player, event.partialRenderTick);
+	            
+	            float f6 = player.prevLimbSwingAmount + (player.limbSwingAmount - player.prevLimbSwingAmount) * event.partialRenderTick;
+	            float f7 = player.limbSwing - player.limbSwingAmount * (1.0F - event.partialRenderTick);
+				
+	            float f13 = player.prevRotationPitch + (player.rotationPitch - player.prevRotationPitch) * event.partialRenderTick;
+	            
+				ModelBiped fullBodyHakiModel = new ModelBiped(0.05F);
+				GL11.glScaled(0.1, 0.1, 0.1);
+				Minecraft.getMinecraft().getTextureManager().bindTexture(ID.HANDTEXTURE_ZOANMORPH_BUSO);
+				fullBodyHakiModel.bipedHead.isHidden = false;
+				fullBodyHakiModel.bipedHeadwear.isHidden = false;
+				fullBodyHakiModel.isSneak = player.isSneaking();
+				fullBodyHakiModel.isChild = false;
+				event.renderer.setRenderPassModel(fullBodyHakiModel);
+				fullBodyHakiModel.render(player, f7, f6, f4, f3 - f2, f13, 0.625F);
+				
+			}
+			GL11.glPopMatrix();
+		}
+	}
+	
+    protected float handleRotationFloat(EntityLivingBase p_77044_1_, float p_77044_2_)
+    {
+        return p_77044_1_.ticksExisted + p_77044_2_;
+    }
+	
+    private float interpolateRotation(float p_77034_1_, float p_77034_2_, float p_77034_3_)
+    {
+        float f3;
+
+        for (f3 = p_77034_2_ - p_77034_1_; f3 < -180.0F; f3 += 360.0F)
+        {
+            ;
+        }
+
+        while (f3 >= 180.0F)
+        {
+            f3 -= 360.0F;
+        }
+
+        return p_77034_1_ + p_77034_3_ * f3;
+    }
+	
 	@SubscribeEvent
 	public void onRenderTick(TickEvent.RenderTickEvent event)
 	{
@@ -71,7 +123,7 @@ public class EventsMorphs
 			return;
 
 		ExtendedEntityData props = ExtendedEntityData.get(this.mc.thePlayer);
-
+		
 		if (prevRenderer != null && props.getZoanPoint().equalsIgnoreCase("n/a"))
 		{
 			mc.entityRenderer = prevRenderer;
@@ -231,8 +283,13 @@ public class EventsMorphs
 		boolean renderHandEffectFlag = false;
 
 		Ability hotBoilingSpecial = abilityProps.getAbilityFromName(ListAttributes.HOT_BOILING_SPECIAL.getAttributeName());
+		Ability hardeningBuso = abilityProps.getAbilityFromName(ListAttributes.BUSOSHOKU_HAKI_HARDENING.getAttributeName());
+		Ability fullBodyHardeningBuso = abilityProps.getAbilityFromName(ListAttributes.BUSOSHOKU_HAKI_FULL_BODY_HARDENING.getAttributeName());
+
 		boolean hasHotBoilingSpecial = (hotBoilingSpecial != null && hotBoilingSpecial.isPassiveActive());
-		if (player.getHeldItem() == null && (props.hasBusoHakiActive() || hasHotBoilingSpecial))
+		boolean hasHardeningBuso = (hardeningBuso != null && hardeningBuso.isPassiveActive());
+		boolean hasFullBodyHardeningBuso = (fullBodyHardeningBuso != null && fullBodyHardeningBuso.isPassiveActive());
+		if (player.getHeldItem() == null && (hasFullBodyHardeningBuso || hasHardeningBuso || hasHotBoilingSpecial))
 		{
 			renderHandFlag = true;
 		}

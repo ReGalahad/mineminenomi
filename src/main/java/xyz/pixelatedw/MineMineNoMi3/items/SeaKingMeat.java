@@ -16,6 +16,7 @@ public class SeaKingMeat extends Item
 		
 	}
 
+	@Override
 	public ItemStack onEaten(ItemStack itemStack, World world, EntityPlayer player)
 	{
 		if (!world.isRemote)
@@ -30,17 +31,20 @@ public class SeaKingMeat extends Item
 		return itemStack;
 	}
 
-    public int getMaxItemUseDuration(ItemStack p_77626_1_)
+    @Override
+	public EnumAction getItemUseAction(ItemStack itemStack)
+    {
+        return EnumAction.eat;
+    }
+	
+    @Override
+	public int getMaxItemUseDuration(ItemStack p_77626_1_)
     {
         return 32;
     }
     
-    public EnumAction getItemUseAction(ItemStack p_77661_1_)
-    {
-        return EnumAction.drink;
-    }
-    
-    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
+    @Override
+	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
     {
         player.setItemInUse(itemStack, this.getMaxItemUseDuration(itemStack));
         return itemStack;

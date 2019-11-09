@@ -21,11 +21,6 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
-import xyz.pixelatedw.MineMineNoMi3.models.entities.zoans.ModelBisonPower;
-import xyz.pixelatedw.MineMineNoMi3.models.entities.zoans.ModelBisonSpeed;
-import xyz.pixelatedw.MineMineNoMi3.models.entities.zoans.ModelPhoenixFull;
-import xyz.pixelatedw.MineMineNoMi3.models.entities.zoans.ModelPhoenixHybrid;
-import xyz.pixelatedw.MineMineNoMi3.models.entities.zoans.ModelVenomDemon;
 import xyz.pixelatedw.MineMineNoMi3.renderers.entities.zoans.RenderZoanMorph;
 
 public class HandRendererHelper
@@ -53,7 +48,7 @@ public class HandRendererHelper
 		GL11.glMatrixMode(GL11.GL_PROJECTION);
 		GL11.glLoadIdentity();
 		
-		Project.gluPerspective(mc.gameSettings.fovSetting, (float) mc.displayWidth / (float) mc.displayHeight, 0.20F, (float) (mc.gameSettings.renderDistanceChunks * 16) * 2.0F);
+		Project.gluPerspective(mc.gameSettings.fovSetting, (float) mc.displayWidth / (float) mc.displayHeight, 0.20F, mc.gameSettings.renderDistanceChunks * 16 * 2.0F);
 		
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 		GL11.glLoadIdentity();
@@ -67,7 +62,7 @@ public class HandRendererHelper
         int i2 = mc.theWorld.getLightBrightnessForSkyBlocks(MathHelper.floor_double(player.posX), MathHelper.floor_double(player.posY), MathHelper.floor_double(player.posZ), 0);
         int j = i2 % 65536;
         int k = i2 / 65536;
-		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float)j / 1.0F, (float)k / 1.0F);
+		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, j / 1.0F, k / 1.0F);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		
 		if (mc.gameSettings.thirdPersonView == 0 && !mc.renderViewEntity.isPlayerSleeping() && !mc.gameSettings.hideGUI)
@@ -75,7 +70,7 @@ public class HandRendererHelper
 			if (player.inventory.getCurrentItem() != null)
 				Minecraft.getMinecraft().entityRenderer.itemRenderer.renderItemInFirstPerson(0.07F);
 			else			
-				renderCustomHand((EntityClientPlayerMP) player);
+				renderCustomHand(player);
 		}
 		
 		Minecraft.getMinecraft().entityRenderer.disableLightmap(0);
@@ -90,6 +85,12 @@ public class HandRendererHelper
 		
 		Ability hotBoilingSpecial = abilityProps.getAbilityFromName(ListAttributes.HOT_BOILING_SPECIAL.getAttributeName());
 		boolean hasHotBoilingSpecial = (hotBoilingSpecial != null && hotBoilingSpecial.isPassiveActive());
+		
+		Ability hardeningBuso = abilityProps.getAbilityFromName(ListAttributes.BUSOSHOKU_HAKI_HARDENING.getAttributeName());
+		boolean hasHardeningBuso = (hardeningBuso != null && hardeningBuso.isPassiveActive());
+		
+		Ability fullBodyHardeningBuso = abilityProps.getAbilityFromName(ListAttributes.BUSOSHOKU_HAKI_FULL_BODY_HARDENING.getAttributeName());
+		boolean hasFullBodyHardeningBuso = (fullBodyHardeningBuso != null && fullBodyHardeningBuso.isPassiveActive());
 		
 		float f5;
 		float f6;
@@ -109,7 +110,7 @@ public class HandRendererHelper
 		f7 = MathHelper.sin(MathHelper.sqrt_float(f5) * (float) Math.PI);
 		GL11.glRotatef(f7 * 70.0F, 0.0F, 1.0F, 0.0F);
 		GL11.glRotatef(-f6 * 20.0F, 0.0F, 0.0F, 1.0F);
-		if (props.hasBusoHakiActive())
+		if (hasHardeningBuso || hasFullBodyHardeningBuso)
 			mc.getTextureManager().bindTexture(ID.HANDTEXTURE_ZOANMORPH_BUSO);
 		else if(hasHotBoilingSpecial)
 			mc.getTextureManager().bindTexture(ID.HANDTEXTURE_ZOANMORPH_HOTBOILINGSPECIAL);

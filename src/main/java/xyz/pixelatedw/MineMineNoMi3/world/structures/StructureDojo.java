@@ -19,15 +19,18 @@ public class StructureDojo extends Structure
 		
 		boolean flagBiome = (biome != BiomeGenBase.beach && biome != BiomeGenBase.plains && biome != BiomeGenBase.desert && biome != BiomeGenBase.savanna && biome != BiomeGenBase.icePlains 
 				&& biome != BiomeGenBase.swampland && biome != BiomeGenBase.taiga && !biome.biomeName.equalsIgnoreCase(BiomeGenBase.plains.createMutation().biomeName));
-		boolean flagSpecialCheck = !MainWorldGen.checkCorners(sch, world, posX, posY, posZ);
-		boolean flagMaxSpawned = worldData.getTotalDojosSpawned() > MainConfig.maxDojoSpawn || posY < 50 || world.getBlockLightValue(posX, posY, posZ) < 10;
+		boolean flagSpecialCheck = !MainWorldGen.checkCorners(sch, world, posX, posY, posZ, 2);
+		boolean flagMaxSpawned = worldData.getTotalDojosSpawned() > MainConfig.maxDojoSpawn;
+		boolean flagAboveGround = !MainWorldGen.checkCornersAboveGround(sch, world, posX, posY, posZ);
 
-		if(flagBiome || flagSpecialCheck || flagMaxSpawned)
+		if(flagBiome || flagSpecialCheck || flagMaxSpawned || flagAboveGround)
 			return false;
 		
 		WySchematicHelper.build(sch, world, posX, posY, posZ);
 		populate(posX, posY + 1, posZ, world);
 
+		worldData.countUpDojoSpawned();
+		
 		return true;
 	}
 	
@@ -36,6 +39,6 @@ public class StructureDojo extends Structure
 		TileEntityCustomSpawner spawnDojoMaster = new TileEntityCustomSpawner().setSpawnerMob(ID.PROJECT_ID + ".Dojo Sensei").setSpawnerLimit(1);
 		
 		world.setBlock(posX + 5, posY + 2, posZ + 11, ListMisc.CustomSpawner);
-		world.setTileEntity(posX + 5, posY + 2, posZ + 11, spawnDojoMaster);		
+		world.setTileEntity(posX + 5, posY + 2, posZ + 11, spawnDojoMaster);
 	}
 }

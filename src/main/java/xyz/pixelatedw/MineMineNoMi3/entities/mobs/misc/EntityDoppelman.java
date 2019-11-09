@@ -58,6 +58,7 @@ public class EntityDoppelman extends EntityMob
 		super(worldIn); 
 	}
 
+	@Override
 	public void applyEntityAttributes()
 	{ 
 		super.applyEntityAttributes(); 
@@ -68,7 +69,8 @@ public class EntityDoppelman extends EntityMob
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(200.0D);
 	}
 	
-    public boolean attackEntityFrom(DamageSource damageSource, float damageValue)
+    @Override
+	public boolean attackEntityFrom(DamageSource damageSource, float damageValue)
     {
     	if(damageSource.getEntity() != null && damageSource.getEntity() instanceof EntityPlayer && damageSource.getEntity() == this.owner)
     		return false;
@@ -76,9 +78,11 @@ public class EntityDoppelman extends EntityMob
     	return super.attackEntityFrom(damageSource, damageValue);
     }
     
+	@Override
 	public boolean isAIEnabled()
 	{return true;}
     
+	@Override
 	public void onEntityUpdate()
 	{
 		if(!this.worldObj.isRemote && this.owner == null)
@@ -112,9 +116,9 @@ public class EntityDoppelman extends EntityMob
 					this.setAttackTarget(target);
 			}
 			
-			if(!forcedTargets.isEmpty())
+			if(!this.forcedTargets.isEmpty())
 			{
-				Iterator it = forcedTargets.iterator();
+				Iterator it = this.forcedTargets.iterator();
 				while(it.hasNext())
 				{
 					EntityLivingBase forcedTarget = (EntityLivingBase) it.next();
@@ -127,7 +131,8 @@ public class EntityDoppelman extends EntityMob
 		super.onEntityUpdate();
 	}
 	
-    public boolean attackEntityAsMob(Entity target)
+    @Override
+	public boolean attackEntityAsMob(Entity target)
     {
         float f = (float)this.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue() + (ExtendedEntityData.get(this).getDoriki() * 4);
         int i = 0;
@@ -144,7 +149,7 @@ public class EntityDoppelman extends EntityMob
         {
             if (i > 0)
             {
-                target.addVelocity((double)(-MathHelper.sin(this.rotationYaw * (float)Math.PI / 180.0F) * (float)i * 0.5F), 0.1D, (double)(MathHelper.cos(this.rotationYaw * (float)Math.PI / 180.0F) * (float)i * 0.5F));
+                target.addVelocity(-MathHelper.sin(this.rotationYaw * (float)Math.PI / 180.0F) * i * 0.5F, 0.1D, MathHelper.cos(this.rotationYaw * (float)Math.PI / 180.0F) * i * 0.5F);
                 this.motionX *= 0.6D;
                 this.motionZ *= 0.6D;
             }
@@ -153,7 +158,8 @@ public class EntityDoppelman extends EntityMob
         return flag;
     }
 	
-    public boolean interact(EntityPlayer player)
+    @Override
+	public boolean interact(EntityPlayer player)
     {
     	if(player == this.owner)
     	{

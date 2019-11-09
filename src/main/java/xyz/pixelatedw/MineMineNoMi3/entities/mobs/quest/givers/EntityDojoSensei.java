@@ -1,4 +1,4 @@
-package xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc;
+package xyz.pixelatedw.MineMineNoMi3.entities.mobs.quest.givers;
 
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
@@ -13,13 +13,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.IQuestGiver;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.EntityAIGapCloser;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.EntityAIHakiCombat;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.swordsman.EntityAIOTasumaki;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.abilities.swordsman.EntityAIYakkodori;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
+import xyz.pixelatedw.MineMineNoMi3.quests.EnumQuestlines;
 
-public class EntityDojoSensei extends EntityNewMob
+public class EntityDojoSensei extends EntityNewMob implements IQuestGiver
 {
 	private ItemStack swordStack;
 
@@ -87,4 +89,10 @@ public class EntityDojoSensei extends EntityNewMob
 	@Override
 	protected boolean canDespawn()
 	{return true;}
+
+	@Override
+	public EnumQuestlines getQuestline()
+	{
+		return EnumQuestlines.SWORDSMAN_PROGRESSION;
+	}
 }

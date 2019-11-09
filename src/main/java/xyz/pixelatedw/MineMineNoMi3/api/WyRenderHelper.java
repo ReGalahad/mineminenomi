@@ -84,19 +84,22 @@ public class WyRenderHelper
 		{
 			return;
 		}
-		GL11.glColorMask(true, false, false, true);
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
-		Tessellator tessellator = Tessellator.instance;
-		tessellator.startDrawingQuads();
-		// worldrenderer.startDrawingQuads();
-		tessellator.setColorRGBA(r, g, b, alpha);
-		tessellator.addVertex(posX, posY + height, zLevel);
-		tessellator.addVertex(posX + width, posY + height, zLevel);
-		tessellator.addVertex(posX + width, posY, zLevel);
-		tessellator.addVertex(posX, posY, zLevel);
-		tessellator.draw();
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
-		GL11.glColorMask(true, true, true, true);
+		GL11.glPushMatrix();
+		{
+			GL11.glColorMask(true, true, true, true);
+			GL11.glDisable(GL11.GL_TEXTURE_2D);
+			Tessellator tessellator = Tessellator.instance;
+			tessellator.startDrawingQuads();
+			// worldrenderer.startDrawingQuads();
+			tessellator.setColorRGBA(r, g, b, alpha);
+			tessellator.addVertex(posX, posY + height, zLevel);
+			tessellator.addVertex(posX + width, posY + height, zLevel);
+			tessellator.addVertex(posX + width, posY, zLevel);
+			tessellator.addVertex(posX, posY, zLevel);
+			tessellator.draw();
+			GL11.glEnable(GL11.GL_TEXTURE_2D);
+		}
+		GL11.glPopMatrix();
 	}
 
 	public static void renderTestStencil()

@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL13;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -17,7 +16,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import xyz.pixelatedw.MineMineNoMi3.ID;
-import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
@@ -39,6 +37,7 @@ public class GUIQuests extends GuiScreen
 		this.questProps = QuestProperties.get(player);
 	}
 
+	@Override
 	public void drawScreen(int x, int y, float f)
 	{
 		drawDefaultBackground();
@@ -118,7 +117,7 @@ public class GUIQuests extends GuiScreen
 			int i = 18;
 			for(int l = 0; l <  currentDescription.size(); l++)
 			{
-				mc.fontRenderer.drawString(I18n.format("quest." + questProps.getQuestIndexFromTracker(questIndex).getQuestID() + "_" + l + ".desc"), posX - 20, posY + 65 + i, WyHelper.hexToRGB("#161616").getRGB());
+				mc.fontRenderer.drawString(I18n.format("quest." + questProps.getQuestIndexFromTracker(questIndex).getQuestID() + ".desc." + l), posX - 20, posY + 65 + i, WyHelper.hexToRGB("#161616").getRGB());
 				i += 16;
 			}
 		}
@@ -127,6 +126,7 @@ public class GUIQuests extends GuiScreen
 		super.drawScreen(x, y, f);
 	}
 
+	@Override
 	public void initGui()
 	{
 		int posX = (this.width - 256) / 2;
@@ -136,6 +136,7 @@ public class GUIQuests extends GuiScreen
 		this.buttonList.add(new GUIButtonNoTexture(101, posX + 290, posY + 60, 24, 125, ""));
 	}
 	
+	@Override
 	public void actionPerformed(GuiButton button)
 	{
 		switch(button.id)
@@ -158,6 +159,7 @@ public class GUIQuests extends GuiScreen
 		}
 	}
 	
+	@Override
 	public boolean doesGuiPauseGame()
 	{
 		return false;

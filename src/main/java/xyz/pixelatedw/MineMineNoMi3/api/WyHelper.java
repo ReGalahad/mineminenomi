@@ -20,6 +20,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -36,6 +38,7 @@ import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityExplosion;
+import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
 import xyz.pixelatedw.MineMineNoMi3.api.math.ISphere;
 import xyz.pixelatedw.MineMineNoMi3.api.math.Sphere;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
@@ -50,6 +53,20 @@ public class WyHelper
 	}
 
 	public static AxisAlignedBB NULL_AABB = AxisAlignedBB.getBoundingBox(0, 0, 0, 0, 0, 0);
+	
+	public static EntityLivingBase getEntityByUUID(World world, UUID uuid)
+	{
+		List<EntityLivingBase> entities = (List<EntityLivingBase>) world.loadedEntityList.stream().filter(x -> x instanceof EntityLivingBase).collect(Collectors.toList());
+		for(EntityLivingBase entity : entities)
+		{
+			if(entity.getUniqueID().equals(uuid))
+			{
+				return entity;
+			}
+		}
+		
+		return null;
+	}
 	
 	public static boolean afterDate(String date)
 	{
@@ -587,6 +604,19 @@ public class WyHelper
 		return blocks;
 	}
 	
+	public static void removeStackFromArmorSlots(EntityPlayer player, ItemStack stack)
+	{
+		int x = player.inventory.mainInventory.length;
+		for (int i = x; i < x + player.inventory.armorInventory.length; i++)
+		{
+			if (stack == player.inventory.getStackInSlot(i))
+			{
+				player.inventory.setInventorySlotContents(i, null);
+				break;
+			}
+		}
+	}
+	
 	public static void removeStackFromInventory(EntityPlayer player, ItemStack stack)
 	{
 		for (int i = 0; i < player.inventory.mainInventory.length; i++)
@@ -655,6 +685,9 @@ public class WyHelper
 	public static boolean hasPatreonAccess(EntityPlayer player)
 	{
 		int patreon = getPatreonLevel(player);
+		
+		if(isDevBuild() && WyDebug.isDebug())
+			return true;
 		
 		if(isDevBuild() && patreon >= 4)
 			return true;

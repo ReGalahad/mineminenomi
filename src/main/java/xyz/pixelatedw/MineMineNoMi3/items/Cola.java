@@ -2,6 +2,7 @@ package xyz.pixelatedw.MineMineNoMi3.items;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -22,11 +23,16 @@ public class Cola extends ItemFood
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
 	{
-		player.setItemInUse(itemStack, itemUseDuration);
+		player.setItemInUse(itemStack, this.itemUseDuration);
 		return itemStack;
 	}
-	
-	
+
+    @Override
+	public EnumAction getItemUseAction(ItemStack itemStack)
+    {
+        return EnumAction.drink;
+    }
+
 	@Override
 	public void onFoodEaten(ItemStack itemStack, World world, EntityPlayer player) 
 	{

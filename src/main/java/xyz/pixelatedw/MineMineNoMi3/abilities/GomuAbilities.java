@@ -47,7 +47,7 @@ public class GomuAbilities
 			ExtendedEntityData props = ExtendedEntityData.get(player);
 			AbilityProperties abilityProps = AbilityProperties.get(player);
 			
-			if(abilityProps.hasHakiAbility(HakiAbilities.BUSOSHOKUHAKI))
+			if(abilityProps.hasHakiAbility(HakiAbilities.BUSOSHOKU_HAKI_HARDENING))
 				super.passive(player);
 			else
 				WyHelper.sendMsgToPlayer(player, "" + this.getAttribute().getAttributeName() + " can only be activated while Busoshoku Haki is active !");
@@ -247,13 +247,13 @@ public class GomuAbilities
 	{
 		public GomuGomuNoRocket() 
 		{
-			super(ListAttributes.GOMU_GOMU_NO_BAZOOKA); 
+			super(ListAttributes.GOMU_GOMU_NO_ROCKET); 
 		}
 		
 		@Override
 		public void use(EntityPlayer player)
 		{
-			this.projectile = new GomuProjectiles.GomuGomuNoRocket(player.worldObj, player, ListAttributes.GOMU_GOMU_NO_BAZOOKA);
+			this.projectile = new GomuProjectiles.GomuGomuNoRocket(player.worldObj, player, ListAttributes.GOMU_GOMU_NO_ROCKET);
 			super.use(player);
 		} 
 	}

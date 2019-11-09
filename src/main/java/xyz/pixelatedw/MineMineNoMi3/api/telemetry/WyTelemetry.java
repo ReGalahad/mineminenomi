@@ -80,7 +80,7 @@ public class WyTelemetry
 
 					String result = sendPOST(apiURL, json);
 
-					WyDebug.debug(result.isEmpty() ? "Success" : result);
+					WyDebug.debug("Path: " + apiURL + "Result: " + (result.isEmpty() ? "Success" : result));
 
 					compound.empty();
 				}
@@ -114,7 +114,7 @@ public class WyTelemetry
 
 			String result = sendPOST(apiURL, json);
 
-			WyDebug.debug(result.isEmpty() ? "Success" : result);
+			WyDebug.debug("Path: " + apiURL + "Result: " + (result.isEmpty() ? "Success" : result));
 
 			compound.empty();
 		}

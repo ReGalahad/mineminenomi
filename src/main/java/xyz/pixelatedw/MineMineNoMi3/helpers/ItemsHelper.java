@@ -102,7 +102,10 @@ public class ItemsHelper
 	}
 	
 	public static boolean isBow(ItemStack itemStack)
-	{	
+	{
+		if(itemStack == null)
+			return false;
+		
 		if (itemStack.getItemUseAction() == EnumAction.bow)
 			return true;
 		

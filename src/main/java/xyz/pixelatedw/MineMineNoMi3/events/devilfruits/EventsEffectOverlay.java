@@ -9,6 +9,7 @@ import cpw.mods.fml.common.gameevent.TickEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.potion.Potion;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
@@ -105,19 +106,26 @@ public class EventsEffectOverlay
 
 		ExtendedEntityData props = ExtendedEntityData.get(player);
 		ScaledResolution sr = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
-		
-		/*if (props.hasExtraEffects(ID.EXTRAEFFECT_MERO))
-			WyRenderHelper.drawColourOnScreen(WyHelper.hexToRGB("#5d6060").getRGB(), 100, 0, 0, sr.getScaledWidth_double(), sr.getScaledHeight_double(), 100);
+
+		if (props.hasExtraEffects(ID.EXTRAEFFECT_MERO))
+			WyRenderHelper.drawColourOnScreen(WyHelper.hexToRGB("#5d6060").getRGB(), 100, 0, 0, sr.getScaledWidth_double(), sr.getScaledHeight_double(), 200);
 		else if (props.hasExtraEffects(ID.EXTRAEFFECT_HIE))
-			WyRenderHelper.drawColourOnScreen(WyHelper.hexToRGB("#1be2e2").getRGB(), 100, 0, 0, sr.getScaledWidth_double(), sr.getScaledHeight_double(), 100);
+			WyRenderHelper.drawColourOnScreen(WyHelper.hexToRGB("#1be2e2").getRGB(), 100, 0, 0, sr.getScaledWidth_double(), sr.getScaledHeight_double(), 200);
 		else if (props.hasExtraEffects(ID.EXTRAEFFECT_NORO))
-			WyRenderHelper.drawColourOnScreen(WyHelper.hexToRGB("#ce83d3").getRGB(), 100, 0, 0, sr.getScaledWidth_double(), sr.getScaledHeight_double(), 100);
+			WyRenderHelper.drawColourOnScreen(WyHelper.hexToRGB("#ce83d3").getRGB(), 100, 0, 0, sr.getScaledWidth_double(), sr.getScaledHeight_double(), 200);
 		else if (props.hasExtraEffects(ID.EXTRAEFFECT_RUSTOVERLAY))
-			WyRenderHelper.drawColourOnScreen(WyHelper.hexToRGB("#a04921").getRGB(), 100, 0, 0, sr.getScaledWidth_double(), sr.getScaledHeight_double(), 100);
+			WyRenderHelper.drawColourOnScreen(WyHelper.hexToRGB("#a04921").getRGB(), 100, 0, 0, sr.getScaledWidth_double(), sr.getScaledHeight_double(), 200);
 		else if (props.hasExtraEffects(ID.EXTRAEFFECT_SPIDEROVERLAY))
-			WyRenderHelper.drawColourOnScreen(WyHelper.hexToRGB("#3e4247").getRGB(), 100, 0, 0, sr.getScaledWidth_double(), sr.getScaledHeight_double(), 200);*/
+			WyRenderHelper.drawColourOnScreen(WyHelper.hexToRGB("#3e4247").getRGB(), 100, 0, 0, sr.getScaledWidth_double(), sr.getScaledHeight_double(), 200);
+		else if (props.hasExtraEffects(ID.EXTRAEFFECT_HAO))
+		{
+			if(player.isPotionActive(Potion.blindness.id))
+				WyRenderHelper.drawColourOnScreen(WyHelper.hexToRGB("#000000").getRGB(), 240, 0, 0, sr.getScaledWidth_double(), sr.getScaledHeight_double(), 200);
+			else
+				WyRenderHelper.drawColourOnScreen(WyHelper.hexToRGB("#72399d").getRGB(), 100, 0, 0, sr.getScaledWidth_double(), sr.getScaledHeight_double(), 200);
+		}
 		if(props.isInAirWorld())
-			WyRenderHelper.drawColourOnScreen(0, 50, 0, 100, 0, 0, sr.getScaledWidth_double(), sr.getScaledHeight_double(), 100);
+			WyRenderHelper.drawColourOnScreen(0, 50, 0, 100, 0, 0, sr.getScaledWidth_double(), sr.getScaledHeight_double(), 200);
 	}
 	
 }

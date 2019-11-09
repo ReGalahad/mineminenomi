@@ -2,6 +2,7 @@ buildscript
 {
     repositories 
 	{
+		jcenter()
         mavenCentral()
         maven 
 		{
@@ -15,17 +16,25 @@ buildscript
     }
 }
 
+plugins 
+{
+    id 'org.ajoberstar.grgit' version '3.1.1'
+}
+
 apply plugin: 'forge'
 
-version = " 1.7.10 - 0.6.0 - DEV#" + getVersion()
-group= "xyz.pixelatedw.mineminenomi"
-archivesBaseName = "Mine Mine no Mi "
+final branch = "${grgit.branch.current().getName()}"
+
+version = " ${mc_version} - ${mod_version} - DEV#${getVersion()}"
+group= "${package_group}"
+archivesBaseName = "${mod_name} "
 
 sourceCompatibility = targetCompatibility = 1.8
 
 def getVersion()
 {
     def versionPropsFile = file('version.properties')
+	String modVersion = "${mod_version_id}"
 
     if (versionPropsFile.canRead()) 
 	{
@@ -33,9 +42,14 @@ def getVersion()
 
         versionProps.load(new FileInputStream(versionPropsFile))
 
-        def code = versionProps['VERSION_CODE'].toInteger() + 1
+		def prop = versionProps['VERSION_CODE_' + modVersion]
 
-        versionProps['VERSION_CODE']=code.toString()
+		if(prop == null)
+			prop = 0
+
+        int code = prop.toInteger() + 1
+
+        versionProps['VERSION_CODE_' + modVersion] = code.toString()
         versionProps.store(versionPropsFile.newWriter(), null)
 		
 		return String.format("%02d", code)

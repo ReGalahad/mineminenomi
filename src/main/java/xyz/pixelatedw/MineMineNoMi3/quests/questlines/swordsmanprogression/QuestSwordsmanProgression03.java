@@ -86,7 +86,7 @@ public class QuestSwordsmanProgression03 extends Quest implements IKillQuest, IP
 
 	public EnumQuestlines getQuestLine()
 	{
-		return EnumQuestlines.SWORDSMANPROGRESSION;
+		return EnumQuestlines.SWORDSMAN_PROGRESSION;
 	}
 
 	public boolean isRepeatable()

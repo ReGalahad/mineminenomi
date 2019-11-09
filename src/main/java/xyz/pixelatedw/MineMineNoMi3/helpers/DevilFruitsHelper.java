@@ -5,7 +5,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -20,6 +22,7 @@ import net.minecraftforge.common.MinecraftForge;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.abilities.CyborgAbilities;
+import xyz.pixelatedw.MineMineNoMi3.abilities.DoctorAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.FishKarateAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.HakiAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.RokushikiAbilities;
@@ -33,7 +36,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedWorldData;
-import xyz.pixelatedw.MineMineNoMi3.events.customevents.DorikiEvent;
+import xyz.pixelatedw.MineMineNoMi3.events.customevents.EventDoriki;
 import xyz.pixelatedw.MineMineNoMi3.items.AkumaNoMi;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
@@ -99,6 +102,9 @@ public class DevilFruitsHelper
 	
 	public static int getParticleSettingModifier(int defaultAmount)
 	{
+		if(FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER)
+			return 0;
+		
 		int modifier = Math.abs(Minecraft.getMinecraft().gameSettings.particleSetting - 2);
 		
 		switch(modifier)
@@ -129,8 +135,7 @@ public class DevilFruitsHelper
 		if(props.getUsedFruit().equalsIgnoreCase("supasupa") && sparClaw != null && sparClaw.isPassiveActive())
 		{
 			return true;
-		}
-		
+		}		
 		
 		return false;
 	}
@@ -218,7 +223,7 @@ public class DevilFruitsHelper
 		ExtendedEntityData props = ExtendedEntityData.get(player);
 		AbilityProperties abilityProps = AbilityProperties.get(player);
 
-		DorikiEvent e = new DorikiEvent(player);
+		EventDoriki e = new EventDoriki(player);
 		if (MinecraftForge.EVENT_BUS.post(e))
 			return;
 
@@ -261,7 +266,7 @@ public class DevilFruitsHelper
 		ExtendedEntityData props = ExtendedEntityData.get(player);
 		QuestProperties questProps = QuestProperties.get(player);
 		AbilityProperties abilityProps = AbilityProperties.get(player);
-				
+
 		if (props.isSwordsman())
 		{
 			verifyAndGiveAbility(SwordsmanAbilities.SHI_SHISHI_SONSON, abilityProps);
@@ -293,12 +298,18 @@ public class DevilFruitsHelper
 				verifyAndGiveAbility(SniperAbilities.SAKURETSU_SABOTEN_BOSHI, abilityProps);
 			}
 		}
+		else if (props.isMedic())
+		{
+			verifyAndGiveAbility(DoctorAbilities.FIRST_AID, abilityProps);
+			verifyAndGiveAbility(DoctorAbilities.MEDIC_BAG_EXPLOSION, abilityProps);
+			verifyAndGiveAbility(DoctorAbilities.FAILED_EXPERIMENT, abilityProps);
+		}
 		else if (props.isWeatherWizard())
 		{
 			verifyAndGiveAbility(WeatherAbilities.HEAT_BALL, abilityProps);
 			verifyAndGiveAbility(WeatherAbilities.COOL_BALL, abilityProps);
 			verifyAndGiveAbility(WeatherAbilities.THUNDER_BALL, abilityProps);
-			
+
 			if (MainConfig.enableQuestProgression)
 			{
 
@@ -340,12 +351,17 @@ public class DevilFruitsHelper
 	 * nogrief is used for abilities that should place blocks even if griefing is disabled, room or torikago for example
 	 */
 	
-	public static boolean placeBlockIfAllowed(World world, int posX, int posY, int posZ, Block toPlace, String... rules)
+	public static boolean placeBlockIfAllowed(World world, int posX, int posY, int posZ, Block toPlace, int flag, String... rules)
 	{
-		return placeBlockIfAllowed(world, posX, posY, posZ, toPlace, 3, rules);
+		return placeBlockIfAllowed(world, posX, posY, posZ, toPlace, 0, flag, rules);
 	}
 	
-	public static boolean placeBlockIfAllowed(World world, int posX, int posY, int posZ, Block toPlace, int flag, String... rules)
+	public static boolean placeBlockIfAllowed(World world, int posX, int posY, int posZ, Block toPlace, String... rules)
+	{
+		return placeBlockIfAllowed(world, posX, posY, posZ, toPlace, 0, 3, rules);
+	}
+	
+	public static boolean placeBlockIfAllowed(World world, int posX, int posY, int posZ, Block toPlace, int meta, int flag, String... rules)
 	{
 		Block b = world.getBlock(posX, posY, posZ);
 		List<Block> bannedBlocks = new ArrayList<Block>();
@@ -410,7 +426,7 @@ public class DevilFruitsHelper
 			{
 				if (b == blk)
 				{
-					world.setBlock(posX, posY, posZ, toPlace, 0, flag);
+					world.setBlock(posX, posY, posZ, toPlace, meta, flag);
 					return true;
 				}
 			}
