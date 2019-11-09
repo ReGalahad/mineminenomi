@@ -11,7 +11,6 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.ID;
-import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 
@@ -40,7 +39,7 @@ public class SakeCup extends ItemFood
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
 
-			WyHelper.sendMsgToPlayer(player, "Stuff happens now");
+			//WyHelper.sendMsgToPlayer(player, "Stuff happens now");
 
 			if (!player.capabilities.isCreativeMode)
 				WyTelemetry.addMiscStat("sakeCupsDrank", "Sake Cups Drank", 1);

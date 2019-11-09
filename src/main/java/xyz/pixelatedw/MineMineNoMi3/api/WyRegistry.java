@@ -67,11 +67,6 @@ public class WyRegistry
 			block.setCreativeTab(tab);
 		if (tile != null)
 			GameRegistry.registerTileEntity(tile, truename);
-		
-		if(itemBlock == null)
-			GameRegistry.registerBlock(block, truename);
-		else
-			GameRegistry.registerBlock(block, itemBlock, truename);
 
 		getItemsMap().put(block, localizedName);
 		registerName("tile." + truename + ".name", localizedName);

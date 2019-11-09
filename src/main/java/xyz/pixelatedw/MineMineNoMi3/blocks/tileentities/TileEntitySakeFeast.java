@@ -8,99 +8,30 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntitySakeFeast extends TileEntity
 {
-	private int[] cups = new int[] {0, 0, 0, 0};
+	private int amount = 10;
 	
-	public void setCup(int pos, int state)
+	public int getAmount()
 	{
-		this.cups[pos] = state;
-	}
-
-	public int getCupState(int pos)
-	{
-		return this.cups[pos];
+		return this.amount;
 	}
 	
-	public boolean placeCup()
+	public void reduceAmount()
 	{
-		for(int i = 0; i < this.cups.length; i++)
-		{
-			if(this.cups[i] == 0)
-			{
-				this.setCup(i, 1);
-				return true;
-			}
-		}
-		
-		return false;
+		this.amount--;
 	}
 	
-	public boolean fillCup()
-	{
-		for(int i = 0; i < this.cups.length; i++)
-		{
-			if(this.cups[i] == 1)
-			{
-				this.setCup(i, 2);
-				return true;
-			}
-		}
-		
-		return false;
-	}
-	
-	public boolean removeCup()
-	{
-		for(int i = 0; i < this.cups.length; i++)
-		{
-			if(this.cups[i] >= 1)
-			{
-				this.setCup(i, 0);
-				return true;
-			}
-		}
-		
-		return false;	
-	}
-	
-	public int countPlacedCups()
-	{
-		int placedCups = 0;
-		for(int i : this.cups)
-		{
-			if(i == 1)
-			{
-				placedCups++;
-			}
-		}
-		
-		return placedCups;
-	}
-	
-	public int countFilledCups()
-	{
-		int filledCups = 0;
-		for(int i : this.cups)
-		{
-			if(i == 2)
-			{
-				filledCups++;
-			}
-		}
-		
-		return filledCups;
-	}
 	@Override
 	public void writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
-		nbt.setIntArray("Cups", this.cups);
+		nbt.setInteger("Amount", this.amount);
 	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
-		this.cups = nbt.getIntArray("Cups");
+		this.amount = nbt.getInteger("Amount");
 	}
 
 	@Override
@@ -114,7 +45,7 @@ public class TileEntitySakeFeast extends TileEntity
 	@Override
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
 	{
-		readFromNBT(pkt.func_148857_g());
+		this.readFromNBT(pkt.func_148857_g());
 		this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
 	}
 }

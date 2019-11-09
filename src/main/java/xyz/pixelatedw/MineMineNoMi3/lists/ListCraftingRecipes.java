@@ -10,6 +10,9 @@ public class ListCraftingRecipes
 	
 	public static void init()
 	{
+		GameRegistry.addShapedRecipe(new ItemStack(ListMisc.SakeCup, 1), new Object[]
+				{ "...", "X.X", ".X.", 'X', Items.clay_ball });
+		
 		GameRegistry.addShapelessRecipe(new ItemStack(ListMisc.VivreCard, 1), Items.paper);
 		
 		GameRegistry.addShapedRecipe(new ItemStack(ListMisc.MedicBag, 1), new Object[]
