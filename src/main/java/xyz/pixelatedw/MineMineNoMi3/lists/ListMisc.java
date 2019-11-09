@@ -64,6 +64,7 @@ import xyz.pixelatedw.MineMineNoMi3.items.BellyPouch;
 import xyz.pixelatedw.MineMineNoMi3.items.CharacterCreator;
 import xyz.pixelatedw.MineMineNoMi3.items.Cola;
 import xyz.pixelatedw.MineMineNoMi3.items.ItemSkyblock;
+import xyz.pixelatedw.MineMineNoMi3.items.ItemVivreCard;
 import xyz.pixelatedw.MineMineNoMi3.items.SeaKingMeat;
 import xyz.pixelatedw.MineMineNoMi3.items.UltraCola;
 import xyz.pixelatedw.MineMineNoMi3.items.WantedPoster;
@@ -197,6 +198,7 @@ public class ListMisc
 	public static Item CannonBall = new Item();
 	public static Item Cola = new Cola();
 	public static Item UltraCola = new UltraCola();
+	public static Item VivreCard = new ItemVivreCard();
 
 	public static Item MarineHelm = new ItemCoreArmor("marine", ID.ARMORMAT_USELESS, 0);
 	public static Item MarineChestplate = new ItemCoreArmor("marine", ID.ARMORMAT_USELESS, 1);
@@ -302,6 +304,7 @@ public class ListMisc
 		addITEM(TomoeDrums, "Tomoe Drums", ListCreativeTabs.tabWeapons);
 		addITEM(Note, "Note", ListCreativeTabs.tabMisc);
 		addITEM(MedicBag, "Medic Bag", ListCreativeTabs.tabWeapons);
+		addITEM(VivreCard, "Vivre Card", null);
 		
 		addITEM(GreenKujaBow, "Green Kuja Bow", ListCreativeTabs.tabWeapons);
 		addITEM(BlueKujaBow, "Blue Kuja Bow", ListCreativeTabs.tabWeapons);

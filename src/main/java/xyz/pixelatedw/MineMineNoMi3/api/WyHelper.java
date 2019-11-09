@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.UUID;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -51,6 +52,20 @@ public class WyHelper
 	}
 
 	public static AxisAlignedBB NULL_AABB = AxisAlignedBB.getBoundingBox(0, 0, 0, 0, 0, 0);
+	
+	public static EntityLivingBase getEntityByUUID(World world, UUID uuid)
+	{
+		List<EntityLivingBase> entities = (List<EntityLivingBase>) world.loadedEntityList.stream().filter(x -> x instanceof EntityLivingBase);
+		for(EntityLivingBase entity : entities)
+		{
+			if(entity.getUniqueID().equals(uuid))
+			{
+				return entity;
+			}
+		}
+		
+		return null;
+	}
 	
 	public static boolean afterDate(String date)
 	{
