@@ -48,6 +48,15 @@ public class EventsHakiGain
 						props.addObservationHakiExp((int) (6 + WyMathHelper.randomWithRange(0, 10)));
 				}
 			}
+			
+			if(MainConfig.haoshokuHakiUnlockLogic.equalsIgnoreCase("exp") && !player.worldObj.isRemote)
+			{
+				int haoExp = (props.getHardeningHakiExp() + props.getImbuingHakiExp() + props.getObservationHakiExp()) / 3;
+				
+				if(haoExp >= 100 && player.getHealth() < WyMathHelper.percentage(20, player.getMaxHealth()) && player.ticksExisted % 200 == 0)
+					props.addKingHakiExp(1);
+
+			}
 		}		
 	}
 	
@@ -84,15 +93,17 @@ public class EventsHakiGain
 			{
 				this.giveHakiAbility(abilityProps, HakiAbilities.KENBUNSHOKU_HAKI_FUTURE_SIGHT, attacked);
 			}
-					
+								
 			if(MainConfig.haoshokuHakiUnlockLogic.equalsIgnoreCase("exp") && !attacked.worldObj.isRemote)
 			{
 				int haoExp = (props.getHardeningHakiExp() + props.getImbuingHakiExp() + props.getObservationHakiExp()) / 3;
+				
+				if(haoExp > 600 + WyMathHelper.randomWithRange(0, 100))
+					this.giveHakiAbility(abilityProps, HakiAbilities.HAOSHOKU_HAKI, attacked);
+				
 				boolean hasEnemiesNear = WyHelper.getEntitiesNear(attacked, 20, EntityCreature.class).size() > 0;
 				if(haoExp >= 100 && attacked.getHealth() < WyMathHelper.percentage(20, attacked.getMaxHealth()) && attacked.ticksExisted % 200 == 0 && hasEnemiesNear)
 				{
-					props.addKingHakiExp(1);
-					System.out.println(props.getKingHakiExp());
 					if(props.getKingHakiExp() >= 5 + WyMathHelper.randomWithRange(0, 2))
 					{
 						WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_HAOSHOKU_HAKI, attacked), attacked.dimension, attacked.posX, attacked.posY, attacked.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
@@ -189,6 +200,7 @@ public class EventsHakiGain
 			AbilityProperties abilityProps = AbilityProperties.get(player);
 			int isKing = (int) (player.getUniqueID().getMostSignificantBits() % 2);
 			
+			// That moment when your entire chance of getting haoshoku haki is based on the time when you bought minecraft. Design 101
 			if(isKing == 0)
 				this.giveHakiAbility(abilityProps, HakiAbilities.HAOSHOKU_HAKI, player);
 		}
