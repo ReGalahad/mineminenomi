@@ -9,15 +9,19 @@ import net.minecraft.potion.Potion;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.abilities.HakiAbilities;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.helpers.ItemsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 
 public class EventsHakiGain
 {
@@ -40,6 +44,24 @@ public class EventsHakiGain
 				{
 					if(player.ticksExisted % 200 == 0)
 						props.addObservationHakiExp((int) (6 + WyMathHelper.randomWithRange(0, 10)));
+				}
+			}
+			
+			if(MainConfig.haoshokuHakiUnlockLogic.equalsIgnoreCase("exp"))
+			{
+				int haoExp = (props.getHardeningHakiExp() + props.getImbuingHakiExp() + props.getObservationHakiExp()) / 3;
+				System.out.println(haoExp);
+				if(haoExp >= 300 && player.getHealth() < WyMathHelper.percentage(20, player.getMaxHealth()) && player.ticksExisted % 200 == 0)
+				{
+					props.addKingHakiExp(1);
+					
+					if(props.getKingHakiExp() >= 5)
+					{
+						WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_HAOSHOKU_HAKI, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
+						DevilFruitsHelper.haoAttackEntities(player);
+
+						props.addKingHakiExp(-props.getKingHakiExp());
+					}
 				}
 			}
 		}		

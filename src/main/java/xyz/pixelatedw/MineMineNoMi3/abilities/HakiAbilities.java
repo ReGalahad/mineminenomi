@@ -1,19 +1,15 @@
 package xyz.pixelatedw.MineMineNoMi3.abilities;
 
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.Values;
-import xyz.pixelatedw.MineMineNoMi3.abilities.effects.DFEffectHaoHaki;
-import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
+import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
@@ -64,44 +60,7 @@ public class HakiAbilities
 			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
 			WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_HAOSHOKU_HAKI, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 
-			for(EntityLivingBase target : WyHelper.getEntitiesNear(player, 100))
-			{
-				double userDoriki = ExtendedEntityData.get(player).getDoriki();
-				double targetDoriki = 0;
-				boolean hasBlindness = false;
-				
-				if(target instanceof EntityPlayer)
-					targetDoriki = ExtendedEntityData.get(target).getDoriki();
-				else if(target instanceof EntityNewMob)
-					targetDoriki = ((EntityNewMob) target).getDoriki();
-				else if(target.getEntityAttribute(SharedMonsterAttributes.attackDamage) != null)
-					targetDoriki = target.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
-				
-				if(targetDoriki < (userDoriki / 1.5))
-				{
-					int duration = (int) (((userDoriki / 1.5) - targetDoriki) * 20);
-					if(duration > 2000)
-						duration = 2000;
-					
-					target.addPotionEffect(new PotionEffect(Potion.weakness.id, duration, 1));
-					target.addPotionEffect(new PotionEffect(Potion.digSlowdown.id, duration, 1));
-					target.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, duration, 5));
-					target.addPotionEffect(new PotionEffect(Potion.confusion.id, duration, 1));
-					target.addPotionEffect(new PotionEffect(Potion.jump.id, duration, -5));
-
-					if(targetDoriki < (userDoriki / 2))
-					{
-						target.addPotionEffect(new PotionEffect(Potion.blindness.id, duration, 1));
-						target.addPotionEffect(new PotionEffect(Potion.hunger.id, duration, 1));
-						target.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, duration, 500));
-						hasBlindness = true;
-						new DFEffectHaoHaki(target, duration + 200);
-					}
-				}
-				
-				if(!hasBlindness)
-					new DFEffectHaoHaki(target, 100);				
-			}
+			DevilFruitsHelper.haoAttackEntities(player);
 			
 			super.endCharging(player);
 		}

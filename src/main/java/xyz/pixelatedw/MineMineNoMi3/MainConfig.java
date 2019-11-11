@@ -10,6 +10,7 @@ public class MainConfig
 	private static Configuration config;
 	
 	public static String enableKeepIEEPAfterDeath;
+	public static String haoshokuHakiUnlockLogic;
 	public static String[] statsToKeep;
 	public static boolean enableShips;
 	public static boolean enableCamps;
@@ -65,6 +66,7 @@ public class MainConfig
 		config.load();
 		
 		enableKeepIEEPAfterDeath = config.get(Configuration.CATEGORY_GENERAL, "Keep stats after death", "auto", "Responsible for how player stats are handled after death; \nnone - nothing is kept; \nauto - faction/race/fight style stats are kept everything else is reseted; \nfull - everything is kept; \ncustom - uses the Data to Keep option to determine what is kept and what is reseted; auto by default").getString();
+		haoshokuHakiUnlockLogic = config.get(Configuration.CATEGORY_GENERAL, "Haoshoku Haki Unlock Logic", "exp", "Responsible for how player unlock Haoshoku Haki; \nnone - Nobody can unlock it; \nexp - Based on the total haki experience earned, meaning mastering other haki forms will unlock it; \nrandom - Only a few chosen ones, randomlly selected, will unlock it; \nexp by default").getString();
 		statsToKeep = config.get(Configuration.CATEGORY_GENERAL, "Data to Keep", new String[] {"Doriki", "Bounty", "Belly", "Race", "Faction", "Fighting Style", "Devil Fruit"}).getStringList();		
 		enableGriefing = config.get(Configuration.CATEGORY_GENERAL, "Allow Griefing in Worlds", true, "Allows abilities to break or replace blocks, this will make some abilities completly useless; true by default").getBoolean();
 		enableAnimeScreaming  = config.get(Configuration.CATEGORY_GENERAL, "Anime Screaming", false, "Will send a chat message to nearby players with the used ability's name; false by default").getBoolean();

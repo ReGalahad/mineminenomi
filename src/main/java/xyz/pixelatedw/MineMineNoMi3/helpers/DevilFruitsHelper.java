@@ -12,11 +12,13 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import xyz.pixelatedw.MineMineNoMi3.ID;
@@ -29,6 +31,7 @@ import xyz.pixelatedw.MineMineNoMi3.abilities.RokushikiAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.SniperAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.SwordsmanAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.WeatherAbilities;
+import xyz.pixelatedw.MineMineNoMi3.abilities.effects.DFEffectHaoHaki;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
@@ -36,6 +39,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedWorldData;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
 import xyz.pixelatedw.MineMineNoMi3.events.customevents.EventDoriki;
 import xyz.pixelatedw.MineMineNoMi3.items.AkumaNoMi;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
@@ -98,6 +102,53 @@ public class DevilFruitsHelper
 				}));
 		
 		return map;
+	}
+	
+	public static void haoAttackEntities(EntityPlayer player)
+	{
+		ExtendedEntityData props = ExtendedEntityData.get(player);
+
+		for(EntityLivingBase target : WyHelper.getEntitiesNear(player, 100))
+		{
+			double userHakiExp = (props.getHardeningHakiExp() * 3) + (props.getImbuingHakiExp() * 3) + (props.getObservationHakiExp() * 3);
+			double targetHakiExp = 0;
+			boolean hasBlindness = false;
+			
+			if(target instanceof EntityPlayer)
+			{
+				ExtendedEntityData propz = ExtendedEntityData.get(target);
+				targetHakiExp = (propz.getHardeningHakiExp() * 3) + (propz.getImbuingHakiExp() * 3) + (propz.getObservationHakiExp() * 3);			
+			}
+			else if(target instanceof EntityNewMob)
+				targetHakiExp = ((EntityNewMob) target).getDoriki();
+			else if(target.getEntityAttribute(SharedMonsterAttributes.attackDamage) != null)
+				targetHakiExp = target.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
+			
+			if(targetHakiExp < (userHakiExp / 1.5))
+			{
+				int duration = (int) (((userHakiExp / 1.5) - targetHakiExp) * 20);
+				if(duration > 2000)
+					duration = 2000;
+				
+				target.addPotionEffect(new PotionEffect(Potion.weakness.id, duration, 1));
+				target.addPotionEffect(new PotionEffect(Potion.digSlowdown.id, duration, 1));
+				target.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, duration, 5));
+				target.addPotionEffect(new PotionEffect(Potion.confusion.id, duration, 1));
+				target.addPotionEffect(new PotionEffect(Potion.jump.id, duration, -5));
+
+				if(targetHakiExp < (userHakiExp / 2))
+				{
+					target.addPotionEffect(new PotionEffect(Potion.blindness.id, duration, 1));
+					target.addPotionEffect(new PotionEffect(Potion.hunger.id, duration, 1));
+					target.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, duration, 500));
+					hasBlindness = true;
+					new DFEffectHaoHaki(target, duration + 200);
+				}
+			}
+			
+			if(!hasBlindness)
+				new DFEffectHaoHaki(target, 100);				
+		}
 	}
 	
 	public static int getParticleSettingModifier(int defaultAmount)
