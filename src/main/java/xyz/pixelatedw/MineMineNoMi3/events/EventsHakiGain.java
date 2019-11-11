@@ -2,6 +2,7 @@ package xyz.pixelatedw.MineMineNoMi3.events;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -47,15 +48,15 @@ public class EventsHakiGain
 				}
 			}
 			
-			if(MainConfig.haoshokuHakiUnlockLogic.equalsIgnoreCase("exp"))
+			if(MainConfig.haoshokuHakiUnlockLogic.equalsIgnoreCase("exp") && !player.worldObj.isRemote)
 			{
 				int haoExp = (props.getHardeningHakiExp() + props.getImbuingHakiExp() + props.getObservationHakiExp()) / 3;
-				System.out.println(haoExp);
-				if(haoExp >= 300 && player.getHealth() < WyMathHelper.percentage(20, player.getMaxHealth()) && player.ticksExisted % 200 == 0)
+				boolean hasEnemiesNear = WyHelper.getEntitiesNear(player, 20, EntityCreature.class).size() > 0;
+				if(haoExp >= 100 && player.getHealth() < WyMathHelper.percentage(20, player.getMaxHealth()) && player.ticksExisted % 200 == 0 && hasEnemiesNear)
 				{
 					props.addKingHakiExp(1);
-					
-					if(props.getKingHakiExp() >= 5)
+					System.out.println(props.getKingHakiExp());
+					if(props.getKingHakiExp() >= 5 + WyMathHelper.randomWithRange(0, 2))
 					{
 						WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_HAOSHOKU_HAKI, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 						DevilFruitsHelper.haoAttackEntities(player);
