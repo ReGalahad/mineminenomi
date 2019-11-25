@@ -334,14 +334,6 @@ public class EventsPassives
 					explosion.doExplosion();
 				}
 			}
-			
-			KenbunshokuHakiFutureSight futureSight = (KenbunshokuHakiFutureSight) abilityProps.getAbilityFromName(ListAttributes.KENBUNSHOKU_HAKI_FUTURE_SIGHT.getAttributeName());
-			
-			if(futureSight != null && futureSight.isPassiveActive())
-			{
-				futureSight.reduceProtection(event.ammount);
-				event.setCanceled(true);
-			}
 		}
 
 		if (event.source.getSourceOfDamage() instanceof EntityPlayer)
@@ -422,6 +414,7 @@ public class EventsPassives
 	public void onAttack(AttackEntityEvent event)
 	{
 		ExtendedEntityData propz = ExtendedEntityData.get(event.entityPlayer);
+		
 		if (propz.isInAirWorld())
 		{
 			event.setCanceled(true);
@@ -443,7 +436,7 @@ public class EventsPassives
 	{
 		if (event.entityLiving instanceof EntityPlayer)
 		{
-			EntityPlayer player = (EntityPlayer) event.entity;
+			EntityPlayer player = (EntityPlayer) event.entityLiving;
 			ExtendedEntityData props = ExtendedEntityData.get(player);
 			
 			if (props.isInAirWorld())
@@ -479,7 +472,15 @@ public class EventsPassives
 					EntityLivingBase attacker = (EntityLivingBase) event.source.getSourceOfDamage();
 					EntityPlayer reciever = (EntityPlayer) event.entityLiving;
 					ExtendedEntityData propz = ExtendedEntityData.get(reciever);
+					AbilityProperties abilityProps = AbilityProperties.get(player);
 
+					KenbunshokuHakiFutureSight futureSight = (KenbunshokuHakiFutureSight) abilityProps.getAbilityFromName(ListAttributes.KENBUNSHOKU_HAKI_FUTURE_SIGHT.getAttributeName());			
+					if(futureSight != null && futureSight.isPassiveActive())
+					{
+						futureSight.reduceProtection(event.ammount);
+						event.setCanceled(true);
+					}
+					
 					if (attacker.getHeldItem() != null && ItemsHelper.isSword(attacker.getHeldItem()) && propz.getUsedFruit().equals("sabisabi") && !attacker.worldObj.isRemote)
 					{
 						event.setCanceled(true);

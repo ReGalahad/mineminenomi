@@ -98,7 +98,7 @@ public class HakiAbilities
 	
 	public static class KenbunshokuHakiFutureSight extends Ability
 	{
-		private int protection = 100;
+		private int protection = 500;
 		
 		public KenbunshokuHakiFutureSight() 
 		{
@@ -114,7 +114,7 @@ public class HakiAbilities
 			
 			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
 			
-			this.protection = 100;
+			this.protection = 500;
 		}
 		
 		@Override
@@ -172,7 +172,8 @@ public class HakiAbilities
 			ExtendedEntityData props = ExtendedEntityData.get(player);
 			
 			props.triggerActiveHaki(true);
-			
+			props.triggerBusoHaki(true);
+
 			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
 		}
 		
@@ -182,7 +183,8 @@ public class HakiAbilities
 			ExtendedEntityData props = ExtendedEntityData.get(player);
 			
 			props.triggerActiveHaki(false);
-			
+			props.triggerBusoHaki(false);
+
 			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
 		}
 		
@@ -236,6 +238,7 @@ public class HakiAbilities
 			ExtendedEntityData props = ExtendedEntityData.get(player);
 			
 			props.triggerActiveHaki(true);
+			props.triggerBusoHaki(true);
 
 			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
 		}
@@ -246,6 +249,7 @@ public class HakiAbilities
 			ExtendedEntityData props = ExtendedEntityData.get(player);
 			
 			props.triggerActiveHaki(false);
+			props.triggerBusoHaki(false);
 			
 			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
 		}
