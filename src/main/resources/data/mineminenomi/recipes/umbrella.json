@@ -1,0 +1,25 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		"www",
+		" s ",
+		" s "
+	],
+	"key": 
+	{
+		"w":
+		{
+			"item": "minecraft:orange_wool"
+		},
+		"s":
+		{
+			"item": "minecraft:stick"
+		}
+	},
+	"result": 
+	{
+		"item": "mineminenomi:umbrella",
+		"count": 1
+	}
+}

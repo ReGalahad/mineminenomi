@@ -1,0 +1,111 @@
+{
+	"type": "minecraft:chest",
+	"pools": [
+	{
+		"name": "mineminenomi:large_ship_combat",
+		"rolls": {
+			"min": 3.0,
+			"max": 4.0,
+			"type": "minecraft:uniform"
+		},
+		"entries": [
+		{
+			"type": "minecraft:item",
+			"name": "mineminenomi:bullet",
+			"weight": 100,
+			"functions": [
+			{
+				"function": "minecraft:set_count",
+				"count": {
+					"min": 5.0,
+					"max": 10.0,
+					"type": "minecraft:uniform"
+				}
+			}]
+		},
+		{
+			"type": "minecraft:item",
+			"name": "mineminenomi:bullet",
+			"weight": 100,
+			"functions": [{
+				"function": "minecraft:set_count",
+				"count": {
+					"min": 10.0,
+					"max": 15.0,
+					"type": "minecraft:uniform"
+				}
+			}]
+		},
+		{
+			"type": "minecraft:item",
+			"name": "minecraft:oak_boat",
+			"weight": 80
+		},
+		{
+			"type": "minecraft:item",
+			"name": "mineminenomi:bellypouch",
+			"weight": 80,
+			"functions": [{
+				"function": "minecraft:set_count",
+				"count": {
+					"min": 2.0,
+					"max": 6.0,
+					"type": "minecraft:uniform"
+				}
+			}]
+		},
+		{
+			"type": "minecraft:item",
+			"name": "mineminenomi:bellypouch",
+			"weight": 100,
+			"functions": [{
+				"function": "minecraft:set_count",
+				"count": {
+					"min": 6.0,
+					"max": 10.0,
+					"type": "minecraft:uniform"
+				}
+			}]
+		},
+		{
+			"type": "minecraft:item",
+			"name": "mineminenomi:kairosekibullet",
+			"weight": 50,
+			"functions": [{
+				"function": "minecraft:set_count",
+				"count": {
+					"min": 3.0,
+					"max": 5.0,
+					"type": "minecraft:uniform"
+				}
+			}]
+		},
+		{
+			"type": "minecraft:item",
+			"name": "mineminenomi:flintlock",
+			"weight": 45,
+			"functions": [{
+				"function": "minecraft:set_count",
+				"count": {
+					"min": 0.0,
+					"max": 1.0,
+					"type": "minecraft:uniform"
+				}
+			}]
+		},
+		{
+			"type": "minecraft:item",
+			"name": "mineminenomi:woodenbox",
+			"weight": 20,
+			"functions": [{
+				"function": "minecraft:set_count",
+				"count": {
+					"min": 1.0,
+					"max": 1.0,
+					"type": "minecraft:uniform"
+				}
+			}]
+		}
+		]
+	}]
+}

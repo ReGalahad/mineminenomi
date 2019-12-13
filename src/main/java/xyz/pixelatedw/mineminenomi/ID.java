@@ -1,0 +1,113 @@
+package xyz.pixelatedw.mineminenomi;
+
+public class ID
+{
+	public static final String
+	
+	PARTICLEFX_DOKUGOMU = "dokuGumo",
+	PARTICLEFX_DAIENKAI1 = "daiEnkai1",
+	PARTICLEFX_DAIENKAI2 = "daiEnkai2",			
+	PARTICLEFX_FUBUKI = "fubuki",	
+	PARTICLEFX_WHITELAUNCHER = "whiteLauncher",	
+	PARTICLEFX_SAMEHADA = "samehada",
+	PARTICLEFX_WATEREXPLOSION = "waterExplosion",
+	PARTICLEFX_SABLES = "sables",
+	PARTICLEFX_GROUNDDEATH = "groundDeath",
+	PARTICLEFX_KOKUTEICROSS = "kokuteiCross",
+	PARTICLEFX_GEARSECOND = "gearSecond",
+	PARTICLEFX_TENSEINOSOEN1 = "tenseiNoSoen1",
+	PARTICLEFX_TENSEINOSOEN2 = "tenseiNoSoen2",
+	PARTICLEFX_BLACKWORLD = "blackWorld",
+	PARTICLEFX_ELTHOR = "elThor",
+	PARTICLEFX_YATANOKAGAMI = "yatanNoKagami",
+	PARTICLEFX_AMATERASU = "amaterasu",
+	PARTICLEFX_DARKMATTER = "darkMatter",
+	PARTICLEFX_BLACKHOLE = "blackHole",
+	PARTICLEFX_KUMONOSUGAKI = "kumoNoSugaki",
+	PARTICLEFX_FLASH = "flash",
+	PARTICLEFX_GEKISHIN = "gekishin",
+	PARTICLEFX_KEMURIBOSHI = "kemuriBoshi",
+	PARTICLEFX_GEPPO = "geppo",
+	PARTICLEFX_BLUEFLAMES = "blueFlames",
+	PARTICLEFX_ICEAGE = "iceAge",
+	PARTICLEFX_VENOMDEMON = "venomDemon",
+	PARTICLEFX_WHITESTRIKE = "whiteStrike",
+	PARTICLEFX_DESERTGIRASOLE = "desertGirasole",
+	PARTICLEFX_DESERTGIRASOLE2 = "desertGirasole2",
+	PARTICLEFX_DESERTENCIERRO = "desertEncierro",
+	PARTICLEFX_DESERTSPADA = "desertSpada",
+	PARTICLEFX_KARI = "kari",
+	PARTICLEFX_RAIGO = "raigo",
+	PARTICLEFX_BAKUMUNCH = "bakuMunch",
+	PARTICLEFX_KOROUZU = "korouzu",
+	PARTICLEFX_KILO = "kilo",
+	PARTICLEFX_KILOPRESS = "kiloPress",
+	PARTICLEFX_GREATSTOMP = "greatStomp",
+	PARTICLEFX_KASURIUTAFUBUKIGIRI = "kasuriutaFubukiGiri",
+	PARTICLEFX_SOULPARADE = "soulParade",
+	PARTICLEFX_COMMONEXPLOSION = "commonExplosion",
+	PARTICLEFX_ATOMICSPURT = "atomicSpurt",
+	PARTICLEFX_SLAVEARROW = "slaveArrow",
+	PARTICLEFX_PERFUMEFEMUR = "perfumeFemur",
+	PARTICLEFX_CHIYUPOPO = "chiyupopo",
+	PARTICLEFX_EVAPORATE = "evaporate",
+	PARTICLEFX_HEALINGTOUCH = "healingTouch",
+	PARTICLEFX_RUSTTOUCH = "rustTouch",
+	PARTICLEFX_CHLOROBALL = "chloroBall",
+	PARTICLEFX_CHLOROBALLCLOUD = "chloroBallCloud",
+			
+	EXTRAEFFECT_MERO = "mero",
+	EXTRAEFFECT_HIE = "hie",
+	EXTRAEFFECT_CHIYUHORMONE = "chiyuHormone",
+	EXTRAEFFECT_TENSIONHORMONE = "tensionHormone",
+	EXTRAEFFECT_NORO = "noro",
+	EXTRAEFFECT_DORULOCK = "doruLock",
+	EXTRAEFFECT_RUSTOVERLAY = "rustOverlay",	
+	EXTRAEFFECT_SPIDEROVERLAY = "spiderOverlay",	
+	EXTRAEFFECT_ORIBIND = "oriBind",
+			
+	CREW_ARLONG = "Arlong Pirates",
+	CREW_BAROQUEWORKS = "Baroque Works",
+	CREW_ALVIDAPIRATES = "Alvida Pirates",
+	CREW_KRIEGPIRATES = "Krieg Pirates",
+	
+	FACTION_PIRATE = "Pirate",
+	FACTION_MARINE = "Marine",
+	FACTION_BOUNTYHUNTER = "Bounty Hunter",
+	FACTION_REVOLUTIONARY = "Revolutionary",
+	FACTION_BANDIT = "Bandit",
+	
+	RACE_HUMAN = "Human",
+	RACE_FISHMAN = "Fishman",
+	RACE_CYBORG = "Cyborg",
+	RACE_MINK = "Mink",
+	
+	FSTYLE_SWORDSMAN = "Swordsman",
+	FSTYLE_SNIPER = "Sniper",
+	FSTYLE_DOCTOR = "Doctor",
+	FSTYLE_ARTOFWEATHER = "Art of Weather",
+	FSTYLE_OKAMA = "Okama",
+						
+	DIMENSION_NAME_SCENARIOARENA = "scenarioarena",
+	
+	SCENARIO_ROMANCEDAWN_CAPTAINMORGAN = "scenario_cptmorgan",
+	
+	NULL = "null";
+	
+	public static final int 
+
+	ENTITY_STATE = 27,
+	
+	GUI_DIALTABLE = 0,
+	GUI_PLAYER = 1,
+	GUI_CHARACTERCREATOR = 2,
+	GUI_ABILITIES = 3;	
+
+	public static final int[]
+			
+	COORDS_SWORDSMANPROGRESSION05_DOJOAMBUSH = new int[] {-20000, 64, -20000};
+	
+	public static int
+	
+	DIMENSION_ID_SCENARIOARENA;
+}

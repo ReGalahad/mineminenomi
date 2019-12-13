@@ -1,0 +1,25 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		"ii ",
+		"ik ",
+		"   "
+	],
+	"key": 
+	{
+		"i":
+		{
+			"item": "minecraft:iron_ingot"
+		},
+		"k":
+		{
+			"item": "mineminenomi:kairoseki"
+		}	
+	},
+	"result": 
+	{
+		"item": "mineminenomi:bullet",
+		"count": 4
+	}
+}

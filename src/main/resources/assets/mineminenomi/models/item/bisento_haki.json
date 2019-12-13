@@ -1,0 +1,6 @@
+{
+	"parent": "mineminenomi:item/bisento",
+	"textures": {
+		"layer0": "mineminenomi:items/bisento_haki"
+	}
+}

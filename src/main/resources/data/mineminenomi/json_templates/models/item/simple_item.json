@@ -1,0 +1,6 @@
+{
+	"parent": "${parentItemName}",
+	"textures": {
+		"layer0": "${modid}:items/${texture}"
+	}
+}

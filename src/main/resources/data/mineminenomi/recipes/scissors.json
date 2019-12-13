@@ -1,0 +1,25 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		" ii",
+		"cii",
+		"cc "
+	],
+	"key": 
+	{
+		"i":
+		{
+			"item": "minecraft:iron_ingot"
+		},
+		"c":
+		{
+			"item": "minecraft:cobblestone"
+		}
+	},
+	"result": 
+	{
+		"item": "mineminenomi:scissors",
+		"count": 1
+	}
+}

@@ -1,0 +1,6 @@
+{
+	"parent": "mineminenomi:item/banditknife",
+	"textures": {
+		"layer0": "mineminenomi:items/banditknife_haki"
+	}
+}

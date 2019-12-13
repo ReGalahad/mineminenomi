@@ -1,0 +1,6 @@
+{
+	"parent": "mineminenomi:item/bostaff",
+	"textures": {
+		"layer0": "mineminenomi:items/bostaff_haki"
+	}
+}

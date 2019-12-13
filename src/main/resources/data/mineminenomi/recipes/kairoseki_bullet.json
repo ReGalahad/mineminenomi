@@ -1,0 +1,21 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		"kk ",
+		"kk ",
+		"   "
+	],
+	"key": 
+	{
+		"k":
+		{
+			"item": "mineminenomi:densekairoseki"
+		}	
+	},
+	"result": 
+	{
+		"item": "mineminenomi:kairosekibullet",
+		"count": 4
+	}
+}

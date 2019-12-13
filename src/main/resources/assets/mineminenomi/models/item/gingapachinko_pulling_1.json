@@ -1,0 +1,6 @@
+{
+	"parent": "mineminenomi:item/gingapachinko",
+	"textures": {
+		"layer0": "mineminenomi:items/gingapachinko_pulling_1"
+	}
+}

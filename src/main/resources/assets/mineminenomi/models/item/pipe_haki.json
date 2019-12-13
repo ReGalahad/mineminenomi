@@ -1,0 +1,6 @@
+{
+	"parent": "mineminenomi:item/pipe",
+	"textures": {
+		"layer0": "mineminenomi:items/pipe_haki"
+	}
+}

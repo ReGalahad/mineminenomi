@@ -1,0 +1,6 @@
+{
+	"parent": "mineminenomi:item/redkujabow",
+	"textures": {
+		"layer0": "mineminenomi:items/redkujabow_pulling_0"
+	}
+}

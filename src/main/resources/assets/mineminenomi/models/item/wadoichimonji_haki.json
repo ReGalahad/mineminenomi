@@ -1,0 +1,6 @@
+{
+	"parent": "mineminenomi:item/wadoichimonji",
+	"textures": {
+		"layer0": "mineminenomi:items/wadoichimonji_haki"
+	}
+}

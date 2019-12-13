@@ -1,0 +1,6 @@
+{
+	"parent": "mineminenomi:item/sandaikitetsu",
+	"textures": {
+		"layer0": "mineminenomi:items/sandaikitetsu_sheathed"
+	}
+}

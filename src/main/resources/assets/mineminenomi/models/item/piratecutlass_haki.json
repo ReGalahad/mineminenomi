@@ -1,0 +1,6 @@
+{
+	"parent": "mineminenomi:item/piratecutlass",
+	"textures": {
+		"layer0": "mineminenomi:items/piratecutlass_haki"
+	}
+}

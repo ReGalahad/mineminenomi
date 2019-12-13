@@ -1,0 +1,6 @@
+{
+	"parent": "mineminenomi:item/soulsolid",
+	"textures": {
+		"layer0": "mineminenomi:items/soulsolid_sheathed"
+	}
+}

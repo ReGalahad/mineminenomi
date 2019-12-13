@@ -1,0 +1,113 @@
+{
+	"type": "minecraft:chest",
+	"pools": [
+	{
+		"name": "mineminenomi:large_ship_treasure",
+		"rolls": {
+			"min": 1.0,
+			"max": 2.0,
+			"type": "minecraft:uniform"
+		},
+		"entries": [
+		{
+			"type": "minecraft:item",
+			"name": "mineminenomi:bellypouch",
+			"weight": 75,
+			"functions": [
+			{
+				"function": "minecraft:set_count",
+				"count": {
+					"min": 1.0,
+					"max": 6.0,
+					"type": "minecraft:uniform"
+				}
+			}]
+		},
+		{
+			"type": "minecraft:item",
+			"name": "mineminenomi:kairosekibullet",
+			"weight": 70,
+			"functions": [{
+				"function": "minecraft:set_count",
+				"count": {
+					"min": 5.0,
+					"max": 10.0,
+					"type": "minecraft:uniform"
+				}
+			}]
+		},
+		{
+			"type": "minecraft:item",
+			"name": "mineminenomi:bellypouch",
+			"weight": 65,
+			"functions": [{
+				"function": "minecraft:set_count",
+				"count": {
+					"min": 3.0,
+					"max": 8.0,
+					"type": "minecraft:uniform"
+				}
+			}]
+		},
+		{
+			"type": "minecraft:item",
+			"name": "minecraft:oak_boat",
+			"weight": 50,
+			"functions": [{
+				"function": "minecraft:set_count",
+				"count": {
+					"min": 1.0,
+					"max": 1.0,
+					"type": "minecraft:uniform"
+				}
+			}]
+		},
+		{
+			"type": "minecraft:item",
+			"name": "mineminenomi:bellypouch",
+			"weight": 35,
+			"functions": [{
+				"function": "minecraft:set_count",
+				"count": {
+					"min": 5.0,
+					"max": 6.0,
+					"type": "minecraft:uniform"
+				}
+			}]
+		},
+		{
+			"type": "minecraft:item",
+			"name": "mineminenomi:blackmetal",
+			"weight": 35,
+			"functions": [{
+				"function": "minecraft:set_count",
+				"count": {
+					"min": 1.0,
+					"max": 6.0,
+					"type": "minecraft:uniform"
+				}
+			}]
+		},
+		{
+			"type": "minecraft:item",
+			"name": "mineminenomi:ultracola",
+			"weight": 20
+		},
+		{
+			"type": "minecraft:item",
+			"name": "mineminenomi:woodenbox",
+			"weight": 20
+		},
+		{
+			"type": "minecraft:item",
+			"name": "mineminenomi:ironbox",
+			"weight": 15
+		},
+		{
+			"type": "minecraft:item",
+			"name": "mineminenomi:goldenbox",
+			"weight": 10
+		}
+		]
+	}]
+}

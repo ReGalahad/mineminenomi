@@ -1,0 +1,45 @@
+modLoader="javafml"
+loaderVersion="[28,)"
+issueTrackerURL="https://github.com/Wynd/MineMineNoMi3/issues"
+
+[[mods]]
+modId="mineminenomi"
+version="0.5.1"
+displayName="Mine Mine no Mi"
+displayURL="https://www.pixelatedw.xyz/"
+logoFile="examplemod.png"
+authors="Wynd"
+description='''
+Mine Mine no Mi is a minecraft mod inspired by the famous anime/manga series One Piece written and illustrated by Eiichiro Oda. It aims to be an adventure oriented mod where exploration is one of the key features.
+
+Dev Team :
+    Wynd - Programmer
+    FGpisces - 2D Artist, QA
+    DragonLuch - 3D Artist
+    Kenryuu - QA
+
+Patreons :
+
+
+Other Credits :
+    CalebBritannia - Helped a lot with a bunch of new fruits and abilities    	
+    Abelatox - Spanish translation
+    Ezequiel - Polish translation
+    Moore5859 (阿烩丶) - Simplified Chinese translation
+    Itz Nuk - Brazilian Portuguese translation
+    Ytekk - French translation
+
+'''
+
+[[dependencies.mineminenomi]]
+    modId="forge"
+    mandatory=true
+    versionRange="[28,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.mineminenomi]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.14.4]"
+    ordering="NONE"
+    side="BOTH"

@@ -1,0 +1,21 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		"   ",
+		" k ",
+		"   "
+	],
+	"key": 
+	{
+		"k":
+		{
+			"item": "mineminenomi:kairosekiblock"
+		}
+	},
+	"result": 
+	{
+		"item": "mineminenomi:kairoseki",
+		"count": 9
+	}
+}

@@ -1,0 +1,6 @@
+{
+	"parent": "mineminenomi:item/yoru",
+	"textures": {
+		"layer0": "mineminenomi:items/yoru_haki"
+	}
+}
