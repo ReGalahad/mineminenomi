@@ -7,6 +7,7 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.ModMain;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.data.abilitydata.AbilityDataCapability;
@@ -19,12 +20,14 @@ import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.packets.server.SSpecialFlyingPacket;
 import xyz.pixelatedw.mineminenomi.particles.CustomParticleData;
+import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
 import xyz.pixelatedw.mineminenomi.values.ModValuesParticles;
 
+@Mod.EventBusSubscriber(modid = ModValuesEnv.PROJECT_ID)
 public class EventsSpecialFlying
 {
 	@SubscribeEvent
-	public void onEntityUpdate(LivingUpdateEvent event)
+	public static void onEntityUpdate(LivingUpdateEvent event)
 	{
 		if (event.getEntityLiving() instanceof PlayerEntity)
 		{

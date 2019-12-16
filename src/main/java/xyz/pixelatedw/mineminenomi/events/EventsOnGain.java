@@ -8,6 +8,7 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.abilities.CyborgAbilities;
 import xyz.pixelatedw.mineminenomi.abilities.FishKarateAbilities;
 import xyz.pixelatedw.mineminenomi.abilities.HakiAbilities;
@@ -30,12 +31,14 @@ import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.packets.server.SEntityStatsSyncPacket;
 import xyz.pixelatedw.mineminenomi.values.ModValues;
+import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
 
+@Mod.EventBusSubscriber(modid = ModValuesEnv.PROJECT_ID)
 public class EventsOnGain
 {
 
 	@SubscribeEvent
-	public void onDorikiGained(DorikiEvent event)
+	public static void onDorikiGained(DorikiEvent event)
 	{
 		if (event.props.isHuman())
 		{
@@ -81,7 +84,7 @@ public class EventsOnGain
 		}
 	}
 
-	private void gainAbility(PlayerEntity player, int doriki, Ability ability)
+	private static void gainAbility(PlayerEntity player, int doriki, Ability ability)
 	{
 		IEntityStats props = EntityStatsCapability.get(player);
 		IAbilityData abilityProps = AbilityDataCapability.get(player);
@@ -103,7 +106,7 @@ public class EventsOnGain
 	}
 
 	@SubscribeEvent
-	public void onEntityDeath(LivingDeathEvent event)
+	public static void onEntityDeath(LivingDeathEvent event)
 	{
 		if (event.getEntity() instanceof PlayerEntity)
 		{

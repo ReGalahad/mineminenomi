@@ -6,14 +6,17 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoMoguMole;
+import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
 
+@Mod.EventBusSubscriber(modid = ModValuesEnv.PROJECT_ID)
 public class EventsZoanPassives
 {
 	@SubscribeEvent
-	public void onEntityAttack(LivingHurtEvent event)
+	public static void onEntityAttack(LivingHurtEvent event)
 	{
 		if (event.getSource().getTrueSource() instanceof PlayerEntity)
 		{
@@ -27,7 +30,7 @@ public class EventsZoanPassives
 	}
 	
 	@SubscribeEvent
-	public void onEntityUpdate(LivingUpdateEvent event)
+	public static void onEntityUpdate(LivingUpdateEvent event)
 	{
 		if (event.getEntityLiving() instanceof PlayerEntity)
 		{

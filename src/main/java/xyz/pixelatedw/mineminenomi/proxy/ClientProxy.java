@@ -15,8 +15,6 @@ import xyz.pixelatedw.mineminenomi.api.debug.WyDebug;
 import xyz.pixelatedw.mineminenomi.api.json.WyJSONHelper;
 import xyz.pixelatedw.mineminenomi.api.quests.Quest;
 import xyz.pixelatedw.mineminenomi.events.EventsCombatMode;
-import xyz.pixelatedw.mineminenomi.events.EventsMorphs;
-import xyz.pixelatedw.mineminenomi.events.abilities.common.EventsEffectOverlay;
 import xyz.pixelatedw.mineminenomi.helpers.MorphsHelper;
 import xyz.pixelatedw.mineminenomi.helpers.WebAppHelper;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
@@ -36,18 +34,11 @@ public class ClientProxy implements IProxy
 	public ClientProxy()
 	{
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientProxy::clientSetup);
-		
-		// Devil Fruit related client-sided events
-		MinecraftForge.EVENT_BUS.register(new EventsEffectOverlay());
 
-		// Morphing related code including both full body model and 1st person hand
-		MinecraftForge.EVENT_BUS.register(new EventsMorphs());
-		
 		// Handles Combat Mode GUI (including extra hearts, cola bar and obviously the ability slots) and the FOV remover
 		MinecraftForge.EVENT_BUS.register(new EventsCombatMode());
 
-		// Custom keybindings
-		MinecraftForge.EVENT_BUS.register(new ModKeybindings());	
+		//  Keybindings
 		ModKeybindings.init();	
 		
 		// Static strings

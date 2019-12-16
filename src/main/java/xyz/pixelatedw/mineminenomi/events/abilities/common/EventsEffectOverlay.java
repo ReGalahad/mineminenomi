@@ -6,9 +6,12 @@ import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.ID;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.WyRenderHelper;
@@ -21,14 +24,17 @@ import xyz.pixelatedw.mineminenomi.models.effects.CandleLockModel;
 import xyz.pixelatedw.mineminenomi.models.effects.ChainsModel;
 import xyz.pixelatedw.mineminenomi.renderers.effects.CandleLockRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.effects.ChainsRenderer;
+import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
 
+@OnlyIn(Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = ModValuesEnv.PROJECT_ID, value = Dist.CLIENT)
 public class EventsEffectOverlay
 {
-	private CandleLockRenderer candleLock = new CandleLockRenderer(new CandleLockModel());
-	private ChainsRenderer oriBind = new ChainsRenderer(new ChainsModel());
+	private static CandleLockRenderer candleLock = new CandleLockRenderer(new CandleLockModel());
+	private static ChainsRenderer oriBind = new ChainsRenderer(new ChainsModel());
 
 	@SubscribeEvent
-	public void onEntityRendered(RenderLivingEvent.Pre event)
+	public static void onEntityRendered(RenderLivingEvent.Pre event)
 	{
 		IExtraEffect props = ExtraEffectCapability.get(event.getEntity());
 
@@ -92,7 +98,7 @@ public class EventsEffectOverlay
 
 	@SuppressWarnings("resource")
 	@SubscribeEvent
-	public void onRenderTick(TickEvent.RenderTickEvent event)
+	public static void onRenderTick(TickEvent.RenderTickEvent event)
 	{
 		Minecraft mc = Minecraft.getInstance();
 		PlayerEntity player = mc.player;

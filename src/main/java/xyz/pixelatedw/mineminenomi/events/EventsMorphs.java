@@ -20,6 +20,7 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityEvent.EyeHeight;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.data.abilitydata.AbilityDataCapability;
 import xyz.pixelatedw.mineminenomi.api.data.abilitydata.IAbilityData;
@@ -38,8 +39,10 @@ import xyz.pixelatedw.mineminenomi.packets.server.SDevilFruitSyncPacket;
 import xyz.pixelatedw.mineminenomi.renderers.ZoanFirstPersonRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.effects.AbareHimatsuriRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer;
+import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
 
 @OnlyIn(Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = ModValuesEnv.PROJECT_ID, value = Dist.CLIENT)
 public class EventsMorphs
 {
 
@@ -49,11 +52,12 @@ public class EventsMorphs
 	 * You have been warned
 	 * 
 	 * Update 28-Aug-2019: Ok it's a bit better now...still not perfect
+	 * Update 17-Dec-2019: Nvm...after porting it to 1.14 it's absolute shit, ignore if possible
 	 */
 
 	private Minecraft mc;
 
-	private AbareHimatsuriRenderer abareHimatsuri = new AbareHimatsuriRenderer(new AbareHimatsuriModel());
+	private static AbareHimatsuriRenderer abareHimatsuri = new AbareHimatsuriRenderer(new AbareHimatsuriModel());
 
 	public EventsMorphs()
 	{
@@ -71,7 +75,7 @@ public class EventsMorphs
 //	}
 
 	@SubscribeEvent
-	public void onEntityRendered(RenderLivingEvent.Pre event)
+	public static void onEntityRendered(RenderLivingEvent.Pre event)
 	{
 		if (!(event.getEntity() instanceof PlayerEntity))
 			return;
@@ -126,7 +130,7 @@ public class EventsMorphs
 			if (info != null)
 			{
 				ZoanMorphRenderer render = info.getFactory().createRenderFor(Minecraft.getInstance().getRenderManager());
-				this.doRenderZoanMorph(render, event.getX(), event.getY(), event.getZ(), event.getEntity());
+				doRenderZoanMorph(render, event.getX(), event.getY(), event.getZ(), event.getEntity());
 			}
 		}
 
@@ -152,7 +156,7 @@ public class EventsMorphs
 		}
 	}
 
-	private void doRenderZoanMorph(ZoanMorphRenderer render, double x, double y, double z, LivingEntity entity)
+	private static void doRenderZoanMorph(ZoanMorphRenderer render, double x, double y, double z, LivingEntity entity)
 	{
 		if (Minecraft.getInstance().player.equals(entity))
 			render.doRender(entity, x, y, z, 0F, 0.0625F);
@@ -161,7 +165,7 @@ public class EventsMorphs
 	}
 
 	@SubscribeEvent
-	public void onEntityConstructing(EntityJoinWorldEvent event)
+	public static void onEntityConstructing(EntityJoinWorldEvent event)
 	{
 		if (event.getEntity() instanceof PlayerEntity)
 		{
@@ -178,7 +182,7 @@ public class EventsMorphs
 	}
 
 	@SubscribeEvent
-	public void morphHandRendering(RenderSpecificHandEvent event)
+	public static void morphHandRendering(RenderSpecificHandEvent event)
 	{
 		PlayerEntity player = Minecraft.getInstance().player;
 
@@ -210,7 +214,7 @@ public class EventsMorphs
 	}
 
 	@SubscribeEvent
-	public void onZoanSizeChange(EyeHeight event)
+	public static void onZoanSizeChange(EyeHeight event)
 	{
 		if (!(event.getEntity() instanceof PlayerEntity))
 			return;
@@ -239,7 +243,7 @@ public class EventsMorphs
 	}
 
 	@SubscribeEvent
-	public void onZoanSizeChange(TickEvent.PlayerTickEvent event)
+	public static void onZoanSizeChange(TickEvent.PlayerTickEvent event)
 	{
 		if (event.phase == TickEvent.Phase.END)
 		{
@@ -268,7 +272,7 @@ public class EventsMorphs
 		}
 	}
 
-	protected void rotateCorpse(LivingEntity entityLiving, float ageInTicks, float headYawOffset, float v)
+	protected static void rotateCorpse(LivingEntity entityLiving, float ageInTicks, float headYawOffset, float v)
 	{
 		GL11.glRotatef(180.0F + headYawOffset, 0.0F, 1.0F, 0.0F);
 
@@ -284,7 +288,7 @@ public class EventsMorphs
 		}
 	}
 
-	private float interpolateRotation(float lowerLimit, float upperLimit, float range)
+	private static float interpolateRotation(float lowerLimit, float upperLimit, float range)
 	{
 		float f3;
 

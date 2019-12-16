@@ -16,6 +16,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedOutEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
+import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.data.abilitydata.AbilityDataCapability;
 import xyz.pixelatedw.mineminenomi.api.data.abilitydata.IAbilityData;
@@ -31,11 +32,12 @@ import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.events.custom.YomiTriggerEvent;
 import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
 
+@Mod.EventBusSubscriber(modid = ModValuesEnv.PROJECT_ID)
 public class EventsCore
 {
 	// Cloning the player data to the new entity based on the config option
 	@SubscribeEvent
-	public void onClonePlayer(PlayerEvent.Clone event) 
+	public static void onClonePlayer(PlayerEvent.Clone event) 
 	{
 		if(event.isWasDeath()) 
 		{
@@ -126,7 +128,7 @@ public class EventsCore
 	
 	// Protection code and the update notification message
 	@SubscribeEvent
-	public void onEntityJoinWorld(EntityJoinWorldEvent event)
+	public static void onEntityJoinWorld(EntityJoinWorldEvent event)
 	{
 		if (event.getEntity() instanceof PlayerEntity)
 		{
@@ -192,7 +194,7 @@ public class EventsCore
 	}
 	
 	@SubscribeEvent
-	public void onPlayerLoggedIn(PlayerLoggedInEvent event)
+	public static void onPlayerLoggedIn(PlayerLoggedInEvent event)
 	{
 		if(!WyDebug.isDebug())
 		{
@@ -202,7 +204,7 @@ public class EventsCore
 	}
 	
 	@SubscribeEvent
-	public void onPlayerLoggedIn(PlayerLoggedOutEvent event)
+	public static void onPlayerLoggedIn(PlayerLoggedOutEvent event)
 	{
 		if(!WyDebug.isDebug())
 		{
@@ -212,7 +214,7 @@ public class EventsCore
 	}
 	
 	@SubscribeEvent
-	public void onPlayerTick(TickEvent.WorldTickEvent event)
+	public static void onPlayerTick(TickEvent.WorldTickEvent event)
 	{		
 		if(event.phase == Phase.END && event.side == LogicalSide.SERVER)
 		{
