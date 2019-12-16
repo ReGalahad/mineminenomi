@@ -48,11 +48,11 @@ public class EventsDFWeaknesses
 			
 			if (!player.world.isRemote)
 			{
-				if (ItemsHelper.hasKairosekiItem(player))
-					player.addPotionEffect(new EffectInstance(Effects.NAUSEA, 100, 0));
-				
 				if (props.hasDevilFruit() && DevilFruitsHelper.isNearbyKairoseki(player))
 				{
+					if (ItemsHelper.hasKairosekiItem(player))
+						player.addPotionEffect(new EffectInstance(Effects.NAUSEA, 100, 0));
+					
 					for (int i = 0; i < abilityProps.countAbilitiesInHotbar(); i++)
 					{
 						if (abilityProps.getHotbarAbilityFromSlot(i) != null && !abilityProps.getHotbarAbilityFromSlot(i).isDisabled() && !abilityProps.getHotbarAbilityFromSlot(i).isOnCooldown())
