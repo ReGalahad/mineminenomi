@@ -28,7 +28,6 @@ import xyz.pixelatedw.mineminenomi.events.EventsOnGain;
 import xyz.pixelatedw.mineminenomi.events.abilities.common.EventsAbilities;
 import xyz.pixelatedw.mineminenomi.events.abilities.common.EventsAbilityValidation;
 import xyz.pixelatedw.mineminenomi.events.abilities.common.EventsDFWeaknesses;
-import xyz.pixelatedw.mineminenomi.events.abilities.common.EventsLogiaInvulnerability;
 import xyz.pixelatedw.mineminenomi.events.abilities.common.EventsSpecialFlying;
 import xyz.pixelatedw.mineminenomi.events.abilities.common.EventsZoanPassives;
 import xyz.pixelatedw.mineminenomi.init.ModCapabilities;
@@ -87,7 +86,6 @@ public class ModMain
 		MinecraftForge.EVENT_BUS.register(new EventsAbilityValidation());
 		MinecraftForge.EVENT_BUS.register(new EventsDFWeaknesses());
 		MinecraftForge.EVENT_BUS.register(new EventsSpecialFlying());
-		MinecraftForge.EVENT_BUS.register(new EventsLogiaInvulnerability());
 		MinecraftForge.EVENT_BUS.register(new EventsZoanPassives());
 		MinecraftForge.EVENT_BUS.register(new EventsAbilities());
 		
