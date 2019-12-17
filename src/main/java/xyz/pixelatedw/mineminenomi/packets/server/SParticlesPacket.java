@@ -8,7 +8,6 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
 import xyz.pixelatedw.mineminenomi.ModMain;
-import xyz.pixelatedw.mineminenomi.api.debug.WyDebug;
 
 public class SParticlesPacket
 {
@@ -64,7 +63,7 @@ public class SParticlesPacket
 					
 				String fx = message.fx;
 				
-				boolean pass = ModMain.proxy.spawnParticleEffects(player, message.posX, message.posY, message.posZ, fx);
+				/*boolean pass = ModMain.proxy.spawnParticleEffects(player, message.posX, message.posY, message.posZ, fx);
 						
 				if(fx.contains("logiaEffect_"))
 				{
@@ -74,7 +73,7 @@ public class SParticlesPacket
 				}	
 				
 				if(!pass)
-					WyDebug.warn(message.fx + " is not an initialized particle effect !");
+					WyDebug.warn(message.fx + " is not an initialized particle effect !");*/
 			});
 		}
 		

@@ -1,27 +1,27 @@
 package xyz.pixelatedw.mineminenomi.particles.effects.baku;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particles.BlockParticleData;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 
 public class ParticleEffectBakuMunch extends ParticleEffect
 {
 
 	@Override
-	public void spawn(PlayerEntity player, double posX, double posY, double posZ)
+	public void spawn(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
 	{
 		for (int i = 0; i < 15; i++)
 		{
-			double offsetX = player.world.rand.nextDouble();
+			double offsetX = world.rand.nextDouble();
 			double offsetY = 1;
-			double offsetZ = player.world.rand.nextDouble();
+			double offsetZ = world.rand.nextDouble();
 
-			BlockState blockState = player.world.getBlockState(new BlockPos(posX, posY, posZ).down());
-			
-			player.world.addParticle(
+			BlockState blockState = world.getBlockState(new BlockPos(posX, posY, posZ).down());
+
+			world.addParticle(
 					new BlockParticleData(ParticleTypes.BLOCK, blockState), 
 					posX + offsetX, 
 					posY + offsetY, 

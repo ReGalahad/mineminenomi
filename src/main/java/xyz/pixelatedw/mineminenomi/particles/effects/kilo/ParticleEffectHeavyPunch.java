@@ -3,7 +3,7 @@ package xyz.pixelatedw.mineminenomi.particles.effects.kilo;
 import java.util.Random;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.particles.CustomParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.values.ModValuesParticles;
@@ -12,7 +12,7 @@ public class ParticleEffectHeavyPunch extends ParticleEffect
 {
 
     @Override
-	public void spawn(PlayerEntity player, double posX, double posY, double posZ)
+	public void spawn(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
     {
         for (int i = 0; i < 20; i++)
         {

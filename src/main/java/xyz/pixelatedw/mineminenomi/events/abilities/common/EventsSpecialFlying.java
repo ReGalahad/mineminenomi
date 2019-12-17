@@ -8,7 +8,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import xyz.pixelatedw.mineminenomi.ModMain;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.data.abilitydata.AbilityDataCapability;
 import xyz.pixelatedw.mineminenomi.api.data.abilitydata.IAbilityData;
@@ -93,7 +92,7 @@ public class EventsSpecialFlying
 							data.setGravity(-0.05F);
 							data.setScale(1.3F);
 							
-							ModMain.proxy.spawnParticles(player.world, data);
+							//ModMain.proxy.spawnParticles(player.world, data);
 						}
 					}
 				}

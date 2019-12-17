@@ -1,9 +1,9 @@
 package xyz.pixelatedw.mineminenomi.particles.effects.sabi;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
-import xyz.pixelatedw.mineminenomi.particles.CustomParticle;
+import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.values.ModValuesParticles;
 
@@ -11,22 +11,22 @@ public class ParticleEffectRustTouch extends ParticleEffect
 {
 
 	@Override
-	public void spawn(PlayerEntity player, double posX, double posY, double posZ)
-	{	
+	public void spawn(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
+	{
 		for (int i = 0; i < 64; i++)
 		{
-	        double motionX = WyMathHelper.randomWithRange(-3, 3) + player.world.rand.nextDouble();
-	        double motionY = WyMathHelper.randomWithRange(-3, 3) + player.world.rand.nextDouble();
-	        double motionZ = WyMathHelper.randomWithRange(-3, 3) + player.world.rand.nextDouble();
-	        
-            double middlePoint = 0.1;
-            middlePoint *= player.world.rand.nextFloat() * player.world.rand.nextFloat() + 0.3F;
-	        
-	        motionX *= middlePoint / 2;
-	        motionY *= middlePoint / 2;
-	        motionZ *= middlePoint / 2;
-			
-	        CustomParticle cp = new CustomParticle(player.world, ModValuesParticles.PARTICLE_ICON_RUST,
+			motionX = WyMathHelper.randomWithRange(-3, 3) + WyMathHelper.randomDouble();
+			motionY = WyMathHelper.randomWithRange(-3, 3) + WyMathHelper.randomDouble();
+			motionZ = WyMathHelper.randomWithRange(-3, 3) + WyMathHelper.randomDouble();
+
+			double middlePoint = 0.1;
+			middlePoint *= (WyMathHelper.randomDouble() * 2) + 0.3F;
+
+			motionX *= middlePoint / 2;
+			motionY *= middlePoint / 2;
+			motionZ *= middlePoint / 2;
+
+			SimpleParticle cp = new SimpleParticle(world, ModValuesParticles.PARTICLE_ICON_RUST,
 					posX, 
 					posY + 1,
 					posZ, 

@@ -4,8 +4,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Items;
-import net.minecraft.particles.BlockParticleData;
-import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
@@ -14,7 +12,6 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.ID;
-import xyz.pixelatedw.mineminenomi.ModMain;
 import xyz.pixelatedw.mineminenomi.abilities.effects.DFEffectHieSlowness;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.extra.AbilityExplosion;
@@ -74,7 +71,7 @@ public class YomiPassiveEvents
 					double newPosY = player.posY;
 					double newPosZ = player.posZ + WyMathHelper.randomDouble();
 
-					ModMain.proxy.spawnVanillaParticle(new BlockParticleData(ParticleTypes.BLOCK, blockState), newPosX, newPosY, newPosZ, 0, 0, 0);
+					//ModMain.proxy.spawnVanillaParticle(new BlockParticleData(ParticleTypes.BLOCK, blockState), newPosX, newPosY, newPosZ, 0, 0, 0);
 				}
 			}
 		}

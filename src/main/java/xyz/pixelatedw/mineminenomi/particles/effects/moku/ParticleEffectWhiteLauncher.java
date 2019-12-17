@@ -3,8 +3,8 @@ package xyz.pixelatedw.mineminenomi.particles.effects.moku;
 import java.util.Random;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.PlayerEntity;
-import xyz.pixelatedw.mineminenomi.particles.CustomParticle;
+import net.minecraft.world.World;
+import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.values.ModValuesParticles;
 
@@ -12,7 +12,7 @@ public class ParticleEffectWhiteLauncher extends ParticleEffect
 {
 
 	@Override
-	public void spawn(PlayerEntity player, double posX, double posY, double posZ)
+	public void spawn(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
 	{
 		for (int i = 0; i < 20; i++)
 		{
@@ -20,7 +20,7 @@ public class ParticleEffectWhiteLauncher extends ParticleEffect
 			double offsetY = (new Random().nextInt(20) + 1.0D - 10.0D) / 10.0D;
 			double offsetZ = (new Random().nextInt(20) + 1.0D - 10.0D) / 15.0D;
 	      
-			CustomParticle cp = new CustomParticle(player.world, ModValuesParticles.PARTICLE_ICON_MOKU,
+			SimpleParticle cp = new SimpleParticle(world, ModValuesParticles.PARTICLE_ICON_MOKU,
 					posX + offsetX, 
 					posY + 1 + offsetY,
 					posZ + offsetZ, 

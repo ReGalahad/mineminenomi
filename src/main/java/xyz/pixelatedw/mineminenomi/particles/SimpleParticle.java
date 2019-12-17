@@ -1,6 +1,8 @@
 package xyz.pixelatedw.mineminenomi.particles;
 
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.platform.GlStateManager.DestFactor;
+import com.mojang.blaze3d.platform.GlStateManager.SourceFactor;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.IParticleFactory;
@@ -19,15 +21,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import xyz.pixelatedw.mineminenomi.values.ModValuesParticles;
 
 @OnlyIn(Dist.CLIENT)
-public class CustomParticle extends TexturedParticle
+public class SimpleParticle extends TexturedParticle
 {
-	private ResourceLocation texture;
+	protected ResourceLocation texture;
 	private static final VertexFormat VERTEX_FORMAT = (new VertexFormat()).addElement(DefaultVertexFormats.POSITION_3F).addElement(DefaultVertexFormats.TEX_2F).addElement(DefaultVertexFormats.COLOR_4UB).addElement(DefaultVertexFormats.TEX_2S).addElement(DefaultVertexFormats.NORMAL_3B).addElement(DefaultVertexFormats.PADDING_1B);
 
-	public CustomParticle(World world, ResourceLocation texture, double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
+	public SimpleParticle(World world, ResourceLocation texture, double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
 	{
 		super(world, posX, posY, posZ, 0.0D, 0.0D, 0.0D);
 		this.texture = texture;
@@ -57,16 +58,19 @@ public class CustomParticle extends TexturedParticle
 		float z = (float) (this.prevPosZ + (this.posZ - this.prevPosZ) * partialTicks - interpPosZ);
 				
 		GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+		GlStateManager.enableBlend();
+		GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);
 		GlStateManager.disableLighting();
 		RenderHelper.disableStandardItemLighting();
 		buffer.begin(7, VERTEX_FORMAT);
-		buffer.pos(x - rotationX * scale - rotationXY * scale, y - rotationZ * scale, z - rotationYZ * scale - rotationXZ * scale).tex(1, 1).color(this.particleRed, this.particleGreen, this.particleBlue, 1.0F).lightmap(0, 240).normal(0.0F, 1.0F, 0.0F).endVertex();
-		buffer.pos(x - rotationX * scale + rotationXY * scale, y + rotationZ * scale, z - rotationYZ * scale + rotationXZ * scale).tex(1, 0).color(this.particleRed, this.particleGreen, this.particleBlue, 1.0F).lightmap(0, 240).normal(0.0F, 1.0F, 0.0F).endVertex();
-		buffer.pos(x + rotationX * scale + rotationXY * scale, y + rotationZ * scale, z + rotationYZ * scale + rotationXZ * scale).tex(0, 0).color(this.particleRed, this.particleGreen, this.particleBlue, 1.0F).lightmap(0, 240).normal(0.0F, 1.0F, 0.0F).endVertex();
-		buffer.pos(x + rotationX * scale - rotationXY * scale, y - rotationZ * scale, z + rotationYZ * scale - rotationXZ * scale).tex(0, 1).color(this.particleRed, this.particleGreen, this.particleBlue, 1.0F).lightmap(0, 240).normal(0.0F, 1.0F, 0.0F).endVertex();
+		buffer.pos(x - rotationX * scale - rotationXY * scale, y - rotationZ * scale, z - rotationYZ * scale - rotationXZ * scale).tex(1, 1).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(0, 240).normal(0.0F, 1.0F, 0.0F).endVertex();
+		buffer.pos(x - rotationX * scale + rotationXY * scale, y + rotationZ * scale, z - rotationYZ * scale + rotationXZ * scale).tex(1, 0).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(0, 240).normal(0.0F, 1.0F, 0.0F).endVertex();
+		buffer.pos(x + rotationX * scale + rotationXY * scale, y + rotationZ * scale, z + rotationYZ * scale + rotationXZ * scale).tex(0, 0).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(0, 240).normal(0.0F, 1.0F, 0.0F).endVertex();
+		buffer.pos(x + rotationX * scale - rotationXY * scale, y - rotationZ * scale, z + rotationYZ * scale - rotationXZ * scale).tex(0, 1).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(0, 240).normal(0.0F, 1.0F, 0.0F).endVertex();
 		Tessellator.getInstance().draw();
 		RenderHelper.enableStandardItemLighting();
 		GlStateManager.enableLighting();
+		GlStateManager.disableBlend();
 	}
 
 	@Override
@@ -83,15 +87,24 @@ public class CustomParticle extends TexturedParticle
         this.motionY *= 0.99D;
         this.motionZ *= 0.99D;
 
+        if(this.age + 5 >= this.maxAge)
+        {
+        	if(this.particleScale > 0)
+        		this.setParticleScale(this.particleScale -= 0.1);
+        	
+        	if(this.particleAlpha > 0)
+        		this.particleAlpha -= 0.15;
+        }
+        
         if (this.age++ >= this.maxAge || this.onGround)
             this.setExpired();	
 	}
 	
-	public CustomParticle setParticleAlpha(float f) { this.setAlphaF(f); return this; }
-	public CustomParticle setParticleScale(float f) { this.particleScale = f; return this; }
-    public CustomParticle setParticleGravity(float f) { this.particleGravity = f; return this; }
-    public CustomParticle setParticleAge(int i) { this.maxAge = i + this.rand.nextInt(10); return this; }
-    public CustomParticle setParticleTexture(ResourceLocation rs)
+	public SimpleParticle setParticleAlpha(float f) { this.setAlphaF(f); return this; }
+	public SimpleParticle setParticleScale(float f) { this.particleScale = f; return this; }
+    public SimpleParticle setParticleGravity(float f) { this.particleGravity = f; return this; }
+    public SimpleParticle setParticleAge(int i) { this.maxAge = i + this.rand.nextInt(10); return this; }
+    public SimpleParticle setParticleTexture(ResourceLocation rs)
     {
     	this.texture = rs;
     	return this;
@@ -102,14 +115,14 @@ public class CustomParticle extends TexturedParticle
     	return new BlockPos(this.posX, this.posY, this.posZ);
     }
     
-    public CustomParticle clone(double posX, double posY, double posZ)
+    public SimpleParticle clone(double posX, double posY, double posZ)
     {
     	return clone(posX, posY, posZ, 0, 0, 0);
     }
     
-    public CustomParticle clone(double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
+    public SimpleParticle clone(double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
     {
-    	CustomParticle clone = new CustomParticle(this.world, this.texture,
+    	SimpleParticle clone = new SimpleParticle(this.world, this.texture,
     			posX, posY, posZ,
     			motionX, motionY, motionZ)
     			.setParticleScale(this.particleScale).setParticleGravity(this.particleGravity).setParticleAge(this.maxAge);
@@ -153,7 +166,7 @@ public class CustomParticle extends TexturedParticle
 		@Override
 		public Particle makeParticle(IParticleData data, World world, double posX, double posY, double posZ, double velX, double velY, double velZ)
 		{
-			return new CustomParticle(world, ModValuesParticles.PARTICLE_ICON_MERA, velZ, velZ, velZ, velZ, velZ, velZ);
+			return new SimpleParticle(world, null, velZ, velZ, velZ, velZ, velZ, velZ);
 		}
 	}
 }

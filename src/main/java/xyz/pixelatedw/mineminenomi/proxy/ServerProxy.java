@@ -2,10 +2,10 @@ package xyz.pixelatedw.mineminenomi.proxy;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.particles.IParticleData;
 import net.minecraft.world.World;
+import xyz.pixelatedw.mineminenomi.ModMain;
 import xyz.pixelatedw.mineminenomi.api.quests.Quest;
-import xyz.pixelatedw.mineminenomi.particles.CustomParticleData;
+import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 
 public class ServerProxy implements IProxy
 {
@@ -22,18 +22,13 @@ public class ServerProxy implements IProxy
 		return null;
 	}
 
-	@Override
-	public void spawnLogiaParticles(World world, String fx, double posX, double posY, double posZ) {}
 
 	@Override
-	public void spawnParticles(World world, CustomParticleData data) {}
-
-	@Override
-	public boolean spawnParticleEffects(PlayerEntity player, double posX, double posY, double posZ, String fx)
+	public void spawnParticleEffect(ParticleEffect effect, World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
 	{
-		return false;
+		ModMain.LOGGER.warn("Can't spawn particles on server side !");
 	}
-
+	
 	@Override
 	public void openCharacterCreatorScreen(PlayerEntity player) {}
 	
@@ -45,8 +40,5 @@ public class ServerProxy implements IProxy
 	
 	@Override
 	public void updateEyeHeight(PlayerEntity player) {}
-
-	@Override
-	public void spawnVanillaParticle(IParticleData particle, double posX, double posY, double posZ, double motionX, double motionY, double motionZ) {}
 
 }

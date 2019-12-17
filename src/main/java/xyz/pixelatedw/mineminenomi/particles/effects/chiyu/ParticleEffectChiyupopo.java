@@ -3,9 +3,9 @@ package xyz.pixelatedw.mineminenomi.particles.effects.chiyu;
 import java.util.Random;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
-import xyz.pixelatedw.mineminenomi.particles.CustomParticle;
+import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.values.ModValuesParticles;
 
@@ -13,11 +13,11 @@ public class ParticleEffectChiyupopo extends ParticleEffect
 {
 
 	@Override
-	public void spawn(PlayerEntity player, double posX, double posY, double posZ)
+	public void spawn(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
 	{
 		double t = 0;
 		double x, y, z;
-		Random rand = player.getRNG();
+		Random rand = world.rand;
 
 		while(t < 1)
 		{
@@ -29,11 +29,11 @@ public class ParticleEffectChiyupopo extends ParticleEffect
 				y = 0.2 + rand.nextInt(1);
 				z = t * Math.sin(theta);
 										
-				double motionX = x / 4;
-				double motionY = 0.05 + (player.world.rand.nextDouble() / 7);
-				double motionZ = z / 4;
+				motionX = x / 4;
+				motionY = 0.05 + (rand.nextDouble() / 7);
+				motionZ = z / 4;
 				
-				CustomParticle cp = new CustomParticle(player.world, ModValuesParticles.PARTICLE_ICON_CHIYU,
+				SimpleParticle cp = new SimpleParticle(world, ModValuesParticles.PARTICLE_ICON_CHIYU,
 						posX + (x * 1.25) + WyMathHelper.randomDouble(), 
 						posY + y,
 						posZ + (z * 1.25) + WyMathHelper.randomDouble(), 
@@ -44,7 +44,7 @@ public class ParticleEffectChiyupopo extends ParticleEffect
 						.setParticleAge(-3);
 				Minecraft.getInstance().particles.addEffect(cp);
 
-				cp = new CustomParticle(player.world, ModValuesParticles.PARTICLE_ICON_CHIYU,
+				cp = new SimpleParticle(world, ModValuesParticles.PARTICLE_ICON_CHIYU,
 						posX + (x * 2.0) + WyMathHelper.randomDouble(), 
 						posY + y,
 						posZ + (z * 2.0) + WyMathHelper.randomDouble(), 
@@ -55,7 +55,7 @@ public class ParticleEffectChiyupopo extends ParticleEffect
 						.setParticleAge(1);
 				Minecraft.getInstance().particles.addEffect(cp);
 				
-				cp = new CustomParticle(player.world, ModValuesParticles.PARTICLE_ICON_CHIYU,
+				cp = new SimpleParticle(world, ModValuesParticles.PARTICLE_ICON_CHIYU,
 						posX + (x * 3.25) + WyMathHelper.randomDouble(), 
 						posY + y,
 						posZ + (z * 3.25) + WyMathHelper.randomDouble(), 

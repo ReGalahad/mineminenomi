@@ -3,10 +3,10 @@ package xyz.pixelatedw.mineminenomi.particles.effects.zou;
 import java.util.Timer;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particles.BlockParticleData;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.tasks.ParticleTaskWave;
 
@@ -14,7 +14,7 @@ public class ParticleEffectGreatStomp extends ParticleEffect
 {
 
 	@Override
-	public void spawn(PlayerEntity player, double posX, double posY, double posZ)
+	public void spawn(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
 	{
 		for(int i = 0; i < 5; i++)
 		{

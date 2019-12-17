@@ -3,7 +3,7 @@ package xyz.pixelatedw.mineminenomi.particles.effects.gura;
 import java.util.Random;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.particles.CustomParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
@@ -13,7 +13,7 @@ public class ParticleEffectGekishin extends ParticleEffect
 {
 
 	@Override
-	public void spawn(PlayerEntity player, double posX, double posY, double posZ)
+	public void spawn(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
 	{
 		double offsetX = 0;
 		double offsetZ = 0;

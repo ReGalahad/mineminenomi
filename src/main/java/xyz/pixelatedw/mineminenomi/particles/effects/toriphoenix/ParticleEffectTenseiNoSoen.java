@@ -2,7 +2,7 @@ package xyz.pixelatedw.mineminenomi.particles.effects.toriphoenix;
 
 import java.util.Timer;
 
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.particles.CustomParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.tasks.ParticleTaskTornado;
@@ -12,7 +12,7 @@ public class ParticleEffectTenseiNoSoen extends ParticleEffect
 {
 
 	@Override
-	public void spawn(PlayerEntity player, double posX, double posY, double posZ)
+	public void spawn(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
 	{
 		Timer timer = new Timer(true); 
 		

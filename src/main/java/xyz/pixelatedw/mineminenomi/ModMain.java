@@ -7,8 +7,11 @@ import com.mojang.brigadier.CommandDispatcher;
 
 import net.minecraft.world.storage.loot.functions.LootFunctionManager;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
 import xyz.pixelatedw.mineminenomi.api.debug.WyDebug;
 import xyz.pixelatedw.mineminenomi.commands.AbilityProtectionCommand;
@@ -32,40 +35,45 @@ import xyz.pixelatedw.mineminenomi.proxy.ServerProxy;
 import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
 
 @Mod(ModValuesEnv.PROJECT_ID)
+@Mod.EventBusSubscriber(modid = ModValuesEnv.PROJECT_ID, bus = Bus.MOD)
 public class ModMain
 {
 	public static ModMain instance;
 	public static IProxy proxy;
 	public static final Logger LOGGER = LogManager.getLogger();
-	
+
 	public ModMain()
 	{
-		if(WyDebug.isDebug())
+		if (WyDebug.isDebug())
 		{
 			String basicPath = System.getProperty("java.class.path");
 			ModValuesEnv.projectResourceFolder = basicPath.substring(0, basicPath.indexOf("\\bin")).replace("file:/", "").replace("%20", " ") + "/src/main/resources";
 		}
-		
+
 		instance = this;
 		proxy = DistExecutor.runForDist(() -> () -> new ClientProxy(), () -> () -> new ServerProxy());
-		
+
 		CommonConfig.init();
 		ModNetwork.init();
 		ModQuests.init();
 		ModEffects.init();
-		
+
+		MinecraftForge.EVENT_BUS.addListener(this::serverAboutToStart);
+	}
+
+	@SubscribeEvent
+	public static void commonSetup(final FMLCommonSetupEvent event)
+	{
 		ModFeatures.init();
 		LootFunctionManager.registerFunction(new RandomWantedPosterLootFunction.Serializer());
-	
-		ModCapabilities.init();
-			
-		MinecraftForge.EVENT_BUS.addListener(this::serverAboutToStart);
+		
+		ModCapabilities.init();	
 	}
 
 	private void serverAboutToStart(FMLServerAboutToStartEvent event)
 	{
 		CommandDispatcher dispatcher = event.getServer().getCommandManager().getDispatcher();
-		
+
 		AbilityProtectionCommand.register(dispatcher);
 		DorikiCommand.register(dispatcher);
 		BountyCommand.register(dispatcher);
