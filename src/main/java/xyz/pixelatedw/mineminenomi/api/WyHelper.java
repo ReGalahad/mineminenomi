@@ -1,6 +1,11 @@
 package xyz.pixelatedw.mineminenomi.api;
 
 import java.awt.Color;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,6 +19,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -63,7 +69,7 @@ public class WyHelper
 
 		map.put("core", Arrays.asList(new Block[]
 			{
-					Blocks.ANDESITE, Blocks.ICE, Blocks.PACKED_ICE, Blocks.STONE, Blocks.GRASS_BLOCK, Blocks.DIRT, Blocks.SNOW, Blocks.SNOW_BLOCK, Blocks.SAND, Blocks.SANDSTONE, Blocks.SANDSTONE_STAIRS, Blocks.ACACIA_DOOR, Blocks.BIRCH_DOOR, Blocks.DARK_OAK_DOOR, Blocks.JUNGLE_DOOR, Blocks.OAK_DOOR, Blocks.ACACIA_SLAB, Blocks.BIRCH_SLAB, Blocks.DARK_OAK_SLAB, Blocks.COBBLESTONE, Blocks.COBBLESTONE_SLAB, Blocks.ACACIA_LOG, Blocks.BIRCH_LOG, Blocks.DARK_OAK_LOG, Blocks.JUNGLE_LOG, Blocks.OAK_LOG, Blocks.SPRUCE_LOG, Blocks.CAKE, /*ModMiscBlocks.poison, ModMiscBlocks.demonPoison,*/ Blocks.TORCH, Blocks.REDSTONE_TORCH, Blocks.REDSTONE_WIRE, Blocks.FARMLAND, Blocks.FLOWER_POT, Blocks.CLAY, Blocks.GRAVEL, Blocks.DIORITE, Blocks.GRANITE, Blocks.RED_SAND
+					Blocks.ANDESITE, Blocks.ICE, Blocks.PACKED_ICE, Blocks.STONE, Blocks.GRASS_BLOCK, Blocks.DIRT, Blocks.SNOW, Blocks.SNOW_BLOCK, Blocks.SAND, Blocks.SANDSTONE, Blocks.SANDSTONE_STAIRS, Blocks.ACACIA_DOOR, Blocks.BIRCH_DOOR, Blocks.DARK_OAK_DOOR, Blocks.JUNGLE_DOOR, Blocks.OAK_DOOR, Blocks.ACACIA_SLAB, Blocks.BIRCH_SLAB, Blocks.DARK_OAK_SLAB, Blocks.COBBLESTONE, Blocks.COBBLESTONE_SLAB, Blocks.ACACIA_LOG, Blocks.BIRCH_LOG, Blocks.DARK_OAK_LOG, Blocks.JUNGLE_LOG, Blocks.OAK_LOG, Blocks.SPRUCE_LOG, Blocks.CAKE, /* ModMiscBlocks.poison, ModMiscBlocks.demonPoison, */ Blocks.TORCH, Blocks.REDSTONE_TORCH, Blocks.REDSTONE_WIRE, Blocks.FARMLAND, Blocks.FLOWER_POT, Blocks.CLAY, Blocks.GRAVEL, Blocks.DIORITE, Blocks.GRANITE, Blocks.RED_SAND
 			}));
 
 		map.put("air", Arrays.asList(new Block[]
@@ -78,18 +84,18 @@ public class WyHelper
 
 		map.put("ores", Arrays.asList(new Block[]
 			{
-					Blocks.COAL_ORE, Blocks.COAL_BLOCK, Blocks.DIAMOND_ORE, Blocks.DIAMOND_BLOCK, Blocks.IRON_ORE, Blocks.IRON_BLOCK, Blocks.LAPIS_ORE, Blocks.LAPIS_BLOCK, Blocks.REDSTONE_ORE, Blocks.REDSTONE_BLOCK, Blocks.GOLD_ORE, Blocks.GOLD_BLOCK, //ModMiscBlocks.kairosekiOre, ModMiscBlocks.kairosekiBlock
+					Blocks.COAL_ORE, Blocks.COAL_BLOCK, Blocks.DIAMOND_ORE, Blocks.DIAMOND_BLOCK, Blocks.IRON_ORE, Blocks.IRON_BLOCK, Blocks.LAPIS_ORE, Blocks.LAPIS_BLOCK, Blocks.REDSTONE_ORE, Blocks.REDSTONE_BLOCK, Blocks.GOLD_ORE, Blocks.GOLD_BLOCK, // ModMiscBlocks.kairosekiOre, ModMiscBlocks.kairosekiBlock
 			}));
 
 		map.put("liquids", Arrays.asList(new Block[]
 			{
 					Blocks.WATER, Blocks.LAVA
 			}));
-		
+
 		map.put("protection", Arrays.asList(new Block[]
-				{
+			{
 					Blocks.BLUE_STAINED_GLASS, Blocks.RED_STAINED_GLASS
-				}));
+			}));
 
 		return map;
 	}
@@ -118,9 +124,9 @@ public class WyHelper
 		List<Block> bannedBlocks = new ArrayList<Block>();
 		boolean noGriefFlag = Arrays.toString(rules).contains("nogrief");
 
-		 ExtendedWorldData worldData = ExtendedWorldData.get(world);
-		 if(worldData.isInsideRestrictedArea((int)posX, (int)posY, (int)posZ))
-			 return false;
+		ExtendedWorldData worldData = ExtendedWorldData.get(world);
+		if (worldData.isInsideRestrictedArea((int) posX, (int) posY, (int) posZ))
+			return false;
 
 		Arrays.stream(rules).forEach(rule ->
 		{
@@ -176,9 +182,10 @@ public class WyHelper
 			{
 				if (b == blk)
 				{
-		            ThreadTaskExecutor<?> executor = LogicalSidedProvider.WORKQUEUE.get(LogicalSide.SERVER);
+					ThreadTaskExecutor<?> executor = LogicalSidedProvider.WORKQUEUE.get(LogicalSide.SERVER);
 
-					executor.deferTask(() -> {
+					executor.deferTask(() ->
+					{
 						BlockPos pos = new BlockPos(posX, posY, posZ);
 						BlockState state = toPlace.getDefaultState();
 						world.setBlockState(pos, state, flag);
@@ -384,7 +391,22 @@ public class WyHelper
 		else
 			return Color.decode("#" + hexColor);
 	}
-
+	
+	public static float colorTolerance(float tolerance)
+	{
+		return colorTolerance(tolerance, false);
+	}
+	
+	public static float colorTolerance(float tolerance, boolean hasDisturbance)
+	{
+		float color = new Random().nextFloat();
+		
+		if(color <= tolerance || (!hasDisturbance && color >= tolerance + 0.3))
+			return tolerance;
+		
+		return color;
+	}
+	
 	public static String formatBytes(long bytes)
 	{
 		int unit = 1024;
@@ -397,7 +419,7 @@ public class WyHelper
 
 	public static String upperCaseFirst(String text)
 	{
-		return Character.toUpperCase(text.charAt(0)) + text.substring(1) + " "; 
+		return Character.toUpperCase(text.charAt(0)) + text.substring(1) + " ";
 	}
 
 	public static void sendMsgToPlayer(PlayerEntity player, String text)
@@ -520,7 +542,7 @@ public class WyHelper
 		float f9 = f3 * f5;
 		double d3 = 5000D;
 
-		Vec3d vec3 = vec3d.add(f7 * d3, f6 * d3, f9 * d3);		
+		Vec3d vec3 = vec3d.add(f7 * d3, f6 * d3, f9 * d3);
 		RayTraceResult ray = e.world.rayTraceBlocks(new RayTraceContext(vec3d, vec3, RayTraceContext.BlockMode.OUTLINE, RayTraceContext.FluidMode.ANY, e));
 
 		return ray;
@@ -584,9 +606,9 @@ public class WyHelper
 			{
 				placeBlockIfAllowed(world, x, y, z, block, blockRules);
 				blocks.add(new int[]
-				{
-					x, y, z
-				});
+					{
+							x, y, z
+					});
 			}
 		});
 
@@ -604,12 +626,12 @@ public class WyHelper
 			{
 				placeBlockIfAllowed(world, x, y, z, block, blockRules);
 				blocks.add(new int[]
-				{
-					x, y, z
-				});
+					{
+							x, y, z
+					});
 			}
 		});
-					
+
 		return blocks;
 	}
 
@@ -684,5 +706,21 @@ public class WyHelper
 			return true;
 		else
 			return false;
-	} 
+	}
+
+	public static byte[] serialize(Object obj) throws IOException
+	{
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		ObjectOutputStream os = new ObjectOutputStream(out);
+		os.writeObject(obj);
+		return out.toByteArray();
+	}
+
+	public static Object deserialize(byte[] data) throws IOException, ClassNotFoundException
+	{
+		ByteArrayInputStream in = new ByteArrayInputStream(data);
+		ObjectInputStream is = new ObjectInputStream(in);
+		return is.readObject();
+	}
+
 }

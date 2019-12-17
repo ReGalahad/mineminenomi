@@ -30,11 +30,10 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.storage.loot.LootContext;
 import net.minecraft.world.storage.loot.LootParameters;
-import xyz.pixelatedw.mineminenomi.ID;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.packets.server.SParticlesPacket;
+import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 
 public class AbilityExplosion extends Explosion
 {
@@ -45,7 +44,7 @@ public class AbilityExplosion extends Explosion
 	private double explosionY;
 	private double explosionZ;
 	private float explosionSize;
-	private String smokeParticles = ID.PARTICLEFX_COMMONEXPLOSION;
+	private ParticleEffect smokeParticles;
 
 	public List<BlockPos> affectedBlockPositions = new ArrayList<BlockPos>();
 	private final Map<PlayerEntity, Vec3d> playerKnockbackMap = Maps.newHashMap();
@@ -94,14 +93,14 @@ public class AbilityExplosion extends Explosion
 		this.canDestroyBlocks = canDestroyBlocks;
 	}
 
-	public void setSmokeParticles(String particle)
+	public void setSmokeParticles(ParticleEffect particle)
 	{
 		this.smokeParticles = particle;
 	}
 
 	public boolean hasSmokeParticles()
 	{
-		return !WyHelper.isNullOrEmpty(this.smokeParticles);
+		return this.smokeParticles != null;
 	}
 
 	public void setExplosionSound(boolean hasSound)
@@ -177,39 +176,42 @@ public class AbilityExplosion extends Explosion
 		net.minecraftforge.event.ForgeEventFactory.onExplosionDetonate(this.world, this, list, f3);
 		Vec3d vec3d = new Vec3d(this.explosionX, this.explosionY, this.explosionZ);
 
-		for (int k2 = 0; k2 < list.size(); ++k2)
+		if(this.canDamageEntities)
 		{
-			Entity entity = list.get(k2);
-			if (!entity.isImmuneToExplosions())
+			for (int k2 = 0; k2 < list.size(); ++k2)
 			{
-				double d12 = entity.getDistanceSq(this.explosionX, this.explosionY, this.explosionZ) / f3;
-				if (d12 <= 1.0D)
+				Entity entity = list.get(k2);
+				if (!entity.isImmuneToExplosions())
 				{
-					double d5 = entity.posX - this.explosionX;
-					double d7 = entity.posY + entity.getEyeHeight() - this.explosionY;
-					double d9 = entity.posZ - this.explosionZ;
-					double d13 = MathHelper.sqrt(d5 * d5 + d7 * d7 + d9 * d9);
-					if (d13 != 0.0D)
+					double d12 = entity.getDistanceSq(this.explosionX, this.explosionY, this.explosionZ) / f3;
+					if (d12 <= 1.0D)
 					{
-						d5 = d5 / d13;
-						d7 = d7 / d13;
-						d9 = d9 / d13;
-						double d14 = Explosion.func_222259_a(vec3d, entity);
-						double d10 = (1.0D - d12) * d14;
-						entity.attackEntityFrom(this.getDamageSource(), ((int) ((d10 * d10 + d10) / 2.0D * 7.0D * f3 + 1.0D)));
-						double d11 = d10;
-						if (entity instanceof LivingEntity)
+						double d5 = entity.posX - this.explosionX;
+						double d7 = entity.posY + entity.getEyeHeight() - this.explosionY;
+						double d9 = entity.posZ - this.explosionZ;
+						double d13 = MathHelper.sqrt(d5 * d5 + d7 * d7 + d9 * d9);
+						if (d13 != 0.0D)
 						{
-							d11 = ProtectionEnchantment.getBlastDamageReduction((LivingEntity) entity, d10);
-						}
-
-						//entity.setMotion(entity.getMotion().add(d5 * d11, d7 * d11, d9 * d11));
-						if (entity instanceof PlayerEntity)
-						{
-							PlayerEntity playerEntity = (PlayerEntity) entity;
-							if (!playerEntity.isSpectator() && (!playerEntity.isCreative() || !playerEntity.abilities.isFlying))
+							d5 = d5 / d13;
+							d7 = d7 / d13;
+							d9 = d9 / d13;
+							double d14 = Explosion.func_222259_a(vec3d, entity);
+							double d10 = (1.0D - d12) * d14;
+							entity.attackEntityFrom(this.getDamageSource(), ((int) ((d10 * d10 + d10) / 2.0D * 7.0D * f3 + 1.0D)));
+							double d11 = d10;
+							if (entity instanceof LivingEntity)
 							{
-								this.playerKnockbackMap.put(playerEntity, new Vec3d(d5 * d10, d7 * d10, d9 * d10));
+								d11 = ProtectionEnchantment.getBlastDamageReduction((LivingEntity) entity, d10);
+							}
+	
+							//entity.setMotion(entity.getMotion().add(d5 * d11, d7 * d11, d9 * d11));
+							if (entity instanceof PlayerEntity)
+							{
+								PlayerEntity playerEntity = (PlayerEntity) entity;
+								if (!playerEntity.isSpectator() && (!playerEntity.isCreative() || !playerEntity.abilities.isFlying))
+								{
+									this.playerKnockbackMap.put(playerEntity, new Vec3d(d5 * d10, d7 * d10, d9 * d10));
+								}
 							}
 						}
 					}

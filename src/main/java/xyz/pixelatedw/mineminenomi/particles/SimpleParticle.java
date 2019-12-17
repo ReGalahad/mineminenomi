@@ -90,7 +90,7 @@ public class SimpleParticle extends TexturedParticle
         if(this.age + 5 >= this.maxAge)
         {
         	if(this.particleScale > 0)
-        		this.setParticleScale(this.particleScale -= 0.1);
+        		this.setParticleScale(this.particleScale /= 1.01F);
         	
         	if(this.particleAlpha > 0)
         		this.particleAlpha -= 0.15;

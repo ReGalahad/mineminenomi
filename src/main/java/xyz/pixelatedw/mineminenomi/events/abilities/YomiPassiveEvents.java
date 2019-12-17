@@ -11,7 +11,6 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import xyz.pixelatedw.mineminenomi.ID;
 import xyz.pixelatedw.mineminenomi.abilities.effects.DFEffectHieSlowness;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.extra.AbilityExplosion;
@@ -100,7 +99,7 @@ public class YomiPassiveEvents
 			AbilityExplosion explosion = WyHelper.newExplosion(attacked, attacker.posX, attacker.posY, attacker.posZ, 2);
 			explosion.setDamageOwner(false);
 			explosion.setDestroyBlocks(false);
-			explosion.setSmokeParticles(ID.PARTICLEFX_SOULPARADE);
+			//explosion.setSmokeParticles(ID.PARTICLEFX_SOULPARADE);
 			explosion.doExplosion();
 		}
 	}

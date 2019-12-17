@@ -5,7 +5,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.DamageSource;
-import net.minecraft.world.Explosion.Mode;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.extra.AbilityExplosion;
@@ -13,9 +12,9 @@ import xyz.pixelatedw.mineminenomi.api.data.abilitydata.AbilityDataCapability;
 import xyz.pixelatedw.mineminenomi.api.data.abilitydata.IAbilityData;
 import xyz.pixelatedw.mineminenomi.api.network.packets.server.SAbilityDataSyncPacket;
 import xyz.pixelatedw.mineminenomi.api.telemetry.WyTelemetry;
-import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.init.ModNetwork;
+import xyz.pixelatedw.mineminenomi.particles.effects.common.CommonExplosionParticleEffect;
 
 public class Ability 
 {
@@ -69,6 +68,7 @@ public class Ability
 				explosion.setDamageOwner(false);
 				explosion.setFireAfterExplosion(this.attr.canAbilityExplosionSetFire());
 				explosion.setDestroyBlocks(this.attr.canAbilityExplosionDestroyBlocks());
+				explosion.setSmokeParticles(new CommonExplosionParticleEffect(this.attr.getAbilityExplosionPower()));
 				explosion.doExplosion();
 			}
 			
@@ -228,7 +228,14 @@ public class Ability
 		this.sendShounenScream(player, 2);
 		
 		if(this.attr.getAbilityExplosionPower() > 0)
-			player.world.createExplosion(player, player.posX, player.posY, player.posZ, this.attr.getAbilityExplosionPower(), this.attr.canAbilityExplosionSetFire(), CommonConfig.instance.isGriefingEnabled() ? Mode.DESTROY : Mode.NONE);		
+		{
+			AbilityExplosion explosion = WyHelper.newExplosion(player, player.posX, player.posY, player.posZ, this.attr.getAbilityExplosionPower());
+			explosion.setDamageOwner(false);
+			explosion.setFireAfterExplosion(this.attr.canAbilityExplosionSetFire());
+			explosion.setDestroyBlocks(this.attr.canAbilityExplosionDestroyBlocks());
+			explosion.setSmokeParticles(new CommonExplosionParticleEffect(this.attr.getAbilityExplosionPower()));
+			explosion.doExplosion();
+		}
 				
     	if(!player.abilities.isCreativeMode)
     		WyTelemetry.addAbilityStat(this.getAttribute().getAbilityTexture(), this.getAttribute().getAttributeName(), 1);
@@ -255,15 +262,22 @@ public class Ability
 				target.addPotionEffect(new EffectInstance(p.getPotion(), p.getDuration(), p.getAmplifier(), true, false)); 
 
 		if(this.attr.getAbilityExplosionPower() > 0)
-			player.world.createExplosion(target, target.posX, target.posY, target.posZ, this.attr.getAbilityExplosionPower(), this.attr.canAbilityExplosionSetFire(), CommonConfig.instance.isGriefingEnabled() ? Mode.DESTROY : Mode.NONE);		
-
-		passiveActive = false;
+		{
+			AbilityExplosion explosion = WyHelper.newExplosion(player, player.posX, player.posY, player.posZ, this.attr.getAbilityExplosionPower());
+			explosion.setDamageOwner(false);
+			explosion.setFireAfterExplosion(this.attr.canAbilityExplosionSetFire());
+			explosion.setDestroyBlocks(this.attr.canAbilityExplosionDestroyBlocks());
+			explosion.setSmokeParticles(new CommonExplosionParticleEffect(this.attr.getAbilityExplosionPower()));
+			explosion.doExplosion();
+		}
+		
+		this.passiveActive = false;
 		startCooldown();
 		ModNetwork.sendTo(new SAbilityDataSyncPacket(player.getEntityId(), AbilityDataCapability.get(player)), (ServerPlayerEntity) player);
 
 		target.attackEntityFrom(DamageSource.causePlayerDamage(player), this.attr.getPunchDamage());
 		
-		(new Update(player, attr)).start();
+		(new Update(player, this.attr)).start();
 	}
 	
 	protected void startCooldown()

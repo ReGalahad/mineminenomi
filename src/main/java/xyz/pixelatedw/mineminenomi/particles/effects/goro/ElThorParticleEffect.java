@@ -7,7 +7,7 @@ import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.values.ModValuesParticles;
 
-public class ParticleEffectElThor extends ParticleEffect
+public class ElThorParticleEffect extends ParticleEffect
 {
 
 	@Override

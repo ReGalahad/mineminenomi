@@ -11,10 +11,9 @@ import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
-import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModExtraAttributes;
-import xyz.pixelatedw.mineminenomi.particles.CustomParticleData;
+import xyz.pixelatedw.mineminenomi.particles.effects.common.ProjectileTrailParticleEffect;
 import xyz.pixelatedw.mineminenomi.values.ModValuesParticles;
 
 public class GoroProjectiles 
@@ -79,21 +78,8 @@ public class GoroProjectiles
 		{	
 			if(this.world.isRemote)
 			{
-				for (int i = 0; i < 2; i++)
-				{				    
-					ResourceLocation particleToUse = i % 2 == 0 ? ModValuesParticles.PARTICLE_ICON_GORO2 : ModValuesParticles.PARTICLE_ICON_GORO;
-					
-					CustomParticleData data = new CustomParticleData();
-					data.setTexture(particleToUse);
-					data.setPosX(posX + WyMathHelper.randomDouble());
-					data.setPosY(posY + WyMathHelper.randomDouble());
-					data.setPosZ(posZ + WyMathHelper.randomDouble());
-					
-					data.setMaxAge(5);
-					data.setScale(4F);
-					
-					ModMain.proxy.spawnParticles(world, data);
-				}			
+				ResourceLocation particleToUse = this.ticksExisted % 2 == 0 ? ModValuesParticles.PARTICLE_ICON_GORO2 : ModValuesParticles.PARTICLE_ICON_GORO;
+				ModMain.proxy.spawnParticleEffect(new ProjectileTrailParticleEffect(particleToUse, 4, 2, 2), this.world, this.posX, this.posY, this.posZ, 0, 0, 0);		
 			}
 			
 			super.tick();
@@ -119,26 +105,8 @@ public class GoroProjectiles
 		@Override
 		public void tick()
 		{	
-			if(this.world.isRemote)
-			{
-				for (int i = 0; i < 35; i++)
-				{
-					double offsetX = WyMathHelper.randomWithRange(-8, 8);
-					double offsetY = WyMathHelper.randomWithRange(-10, 20);
-					double offsetZ = WyMathHelper.randomWithRange(-8, 8);
-					
-					CustomParticleData data = new CustomParticleData();
-					data.setTexture(ModValuesParticles.PARTICLE_ICON_GORO2);
-					data.setPosX(posX + offsetX + WyMathHelper.randomDouble());
-					data.setPosY(posY + offsetY + WyMathHelper.randomDouble());
-					data.setPosZ(posZ + offsetZ + WyMathHelper.randomDouble());
-					
-					data.setMaxAge(10);
-					data.setScale(10F);
-					
-					ModMain.proxy.spawnParticles(world, data);			
-				}			
-			}
+			//if(this.world.isRemote)
+			//	ModMain.proxy.spawnParticleEffect(new ParticleEffectCommonExplosion(20), this.world, this.posX, this.posY, this.posZ, 0, 0, 0);
 			
 			super.tick();
 		}
@@ -164,21 +132,7 @@ public class GoroProjectiles
 		public void tick()
 		{	
 			if(this.world.isRemote)
-			{
-				for (int i = 0; i < 2; i++)
-				{
-					CustomParticleData data = new CustomParticleData();
-					data.setTexture(ModValuesParticles.PARTICLE_ICON_GORO2);
-					data.setPosX(posX + WyMathHelper.randomDouble());
-					data.setPosY(posY + WyMathHelper.randomDouble());
-					data.setPosZ(posZ + WyMathHelper.randomDouble());
-					
-					data.setMaxAge(10);
-					data.setScale(2);
-					
-					ModMain.proxy.spawnParticles(world, data);
-				}			
-			}
+				ModMain.proxy.spawnParticleEffect(new ProjectileTrailParticleEffect(ModValuesParticles.PARTICLE_ICON_GORO2, 10, 2, 2), this.world, this.posX, this.posY, this.posZ, 0, 0, 0);	
 			
 			super.tick();
 		}
@@ -204,21 +158,7 @@ public class GoroProjectiles
 		public void tick()
 		{	
 			if(this.world.isRemote)
-			{
-				for (int i = 0; i < 2; i++)
-				{
-					CustomParticleData data = new CustomParticleData();
-					data.setTexture(ModValuesParticles.PARTICLE_ICON_GORO2);
-					data.setPosX(posX + WyMathHelper.randomDouble());
-					data.setPosY(posY + WyMathHelper.randomDouble());
-					data.setPosZ(posZ + WyMathHelper.randomDouble());
-					
-					data.setMaxAge(10);
-					data.setScale(2);
-					
-					ModMain.proxy.spawnParticles(world, data);		
-				}			
-			}
+				ModMain.proxy.spawnParticleEffect(new ProjectileTrailParticleEffect(ModValuesParticles.PARTICLE_ICON_GORO2, 10, 2, 2), this.world, this.posX, this.posY, this.posZ, 0, 0, 0);
 			
 			super.tick();
 		}
@@ -244,21 +184,7 @@ public class GoroProjectiles
 		public void tick()
 		{	
 			if(this.world.isRemote)
-			{
-				for (int i = 0; i < 2; i++)
-				{
-					CustomParticleData data = new CustomParticleData();
-					data.setTexture(ModValuesParticles.PARTICLE_ICON_GORO2);
-					data.setPosX(posX + WyMathHelper.randomDouble());
-					data.setPosY(posY + WyMathHelper.randomDouble());
-					data.setPosZ(posZ + WyMathHelper.randomDouble());
-					
-					data.setMaxAge(10);
-					data.setScale(2);
-					
-					ModMain.proxy.spawnParticles(world, data);		
-				}			
-			}
+				ModMain.proxy.spawnParticleEffect(new ProjectileTrailParticleEffect(ModValuesParticles.PARTICLE_ICON_GORO2, 10, 2, 2), this.world, this.posX, this.posY, this.posZ, 0, 0, 0);
 			
 			super.tick();
 		}
@@ -284,21 +210,7 @@ public class GoroProjectiles
 		public void tick()
 		{	
 			if(this.world.isRemote)
-			{
-				for (int i = 0; i < 2; i++)
-				{
-					CustomParticleData data = new CustomParticleData();
-					data.setTexture(ModValuesParticles.PARTICLE_ICON_GORO2);
-					data.setPosX(posX + WyMathHelper.randomDouble());
-					data.setPosY(posY + WyMathHelper.randomDouble());
-					data.setPosZ(posZ + WyMathHelper.randomDouble());
-					
-					data.setMaxAge(10);
-					data.setScale(2);
-					
-					ModMain.proxy.spawnParticles(world, data);			
-				}			
-			}
+				ModMain.proxy.spawnParticleEffect(new ProjectileTrailParticleEffect(ModValuesParticles.PARTICLE_ICON_GORO2, 10, 2, 2), this.world, this.posX, this.posY, this.posZ, 0, 0, 0);
 			
 			super.tick();
 		}

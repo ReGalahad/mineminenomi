@@ -5,7 +5,7 @@ import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 
-public class ParticleEffectWaterExplosion extends ParticleEffect
+public class WaterExplosionParticleEffect extends ParticleEffect
 {
 
 	@Override

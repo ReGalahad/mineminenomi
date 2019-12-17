@@ -6,7 +6,6 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
-import xyz.pixelatedw.mineminenomi.ID;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
@@ -25,6 +24,9 @@ import xyz.pixelatedw.mineminenomi.init.ModExtraAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.packets.server.SParticlesPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SSpawnLightningPacket;
+import xyz.pixelatedw.mineminenomi.particles.effects.goro.ElThorParticleEffect;
+import xyz.pixelatedw.mineminenomi.particles.effects.goro.KariParticleEffect;
+import xyz.pixelatedw.mineminenomi.particles.effects.goro.RaigoParticleEffect;
 import xyz.pixelatedw.mineminenomi.values.ModValues;
 
 public class GoroAbilities
@@ -65,7 +67,8 @@ public class GoroAbilities
 				double j = mop.getHitVec().y;
 				double k = mop.getHitVec().z;
 
-				ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_ELTHOR, i, j, k), (ServerPlayerEntity) player);
+				if(currentCharge % 8 == 0)
+					ModNetwork.sendToAllAround(new SParticlesPacket(new ElThorParticleEffect(), i, j, k), (ServerPlayerEntity) player);
 			}
 		}
 		
@@ -239,9 +242,7 @@ public class GoroAbilities
 					double x = mop.getHitVec().x;
 					double y = mop.getHitVec().y;
 					double z = mop.getHitVec().z;
-					
-					ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_RAIGO, x, player.posY, z), (ServerPlayerEntity) player);
-					
+										
 					AbilityProjectile proj = new GoroProjectiles.Raigo(player.world, player, ModAttributes.RAIGO);	
 					proj.setLocationAndAngles(x, (y + 90), z, 0, 0);
 					proj.setMotion(0, -1.4, 0);
@@ -249,7 +250,14 @@ public class GoroAbilities
 				}
 			}
 			super.use(player);
-		} 
+		}
+		
+		@Override
+		public void duringCooldown(PlayerEntity player, int cooldown)
+		{
+			if(cooldown > 600 && cooldown % 20 == 0)
+				ModNetwork.sendToAllAround(new SParticlesPacket(new RaigoParticleEffect(), player.posX, player.posY, player.posZ), (ServerPlayerEntity) player);
+		}
 	}
 	
 	public static class Kari extends Ability
@@ -262,9 +270,14 @@ public class GoroAbilities
 		@Override
 		public void startCharging(PlayerEntity player)
 		{
-			if(!this.isOnCooldown)		
-				ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_KARI, player), (ServerPlayerEntity) player);
 			super.startCharging(player);				
+		}
+		
+		@Override
+		public void duringCharging(PlayerEntity player, int cooldown)
+		{
+			if(cooldown % 5 == 0)
+				ModNetwork.sendToAllAround(new SParticlesPacket(new KariParticleEffect(), player.posX, player.posY, player.posZ), (ServerPlayerEntity) player);
 		}
 		
 		@Override
@@ -309,9 +322,9 @@ public class GoroAbilities
 						blockLocation[1] += 1;
 					}
 					EnderTeleportEvent event = new EnderTeleportEvent(player, blockLocation[0], blockLocation[1], blockLocation[2], 0);
-					ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_ELTHOR, player), (ServerPlayerEntity) player);
+					ModNetwork.sendToAllAround(new SParticlesPacket(new ElThorParticleEffect(), player.posX, player.posY + 1, player.posZ), (ServerPlayerEntity) player);
 					player.setPositionAndUpdate(event.getTargetX(), event.getTargetY() + 1, event.getTargetZ());
-					ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_ELTHOR, player), (ServerPlayerEntity) player);
+					ModNetwork.sendToAllAround(new SParticlesPacket(new ElThorParticleEffect(), player.posX, player.posY + 1, player.posZ), (ServerPlayerEntity) player);
 					player.fallDistance = 0.0F;
 
 				}

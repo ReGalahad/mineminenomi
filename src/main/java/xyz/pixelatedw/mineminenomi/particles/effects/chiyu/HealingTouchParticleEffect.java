@@ -7,7 +7,7 @@ import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.values.ModValuesParticles;
 
-public class ParticleEffectHealingTouch extends ParticleEffect
+public class HealingTouchParticleEffect extends ParticleEffect
 {
 
 	@Override

@@ -9,7 +9,7 @@ import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.values.ModValuesParticles;
 
-public class ParticleEffectChiyupopo extends ParticleEffect
+public class ChiyupopoParticleEffect extends ParticleEffect
 {
 
 	@Override
@@ -23,7 +23,7 @@ public class ParticleEffectChiyupopo extends ParticleEffect
 		{
 			t += 0.5 * Math.PI;
 			
-			for(double theta = 0; theta <= 4 * Math.PI; theta += Math.PI / 32)
+			for(double theta = 0; theta <= 4 * Math.PI; theta += Math.PI / 10)
 			{
 				x = t * Math.cos(theta);
 				y = 0.2 + rand.nextInt(1);

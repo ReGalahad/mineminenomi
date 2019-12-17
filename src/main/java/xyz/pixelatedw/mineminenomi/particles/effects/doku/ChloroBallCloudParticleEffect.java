@@ -7,34 +7,31 @@ import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.values.ModValuesParticles;
 
-public class ParticleEffectChloroBall extends ParticleEffect
+public class ChloroBallCloudParticleEffect extends ParticleEffect
 {
 
 	@Override
 	public void spawn(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
-	{	
-		for (int i = 0; i < 256; i++)
+	{
+		for (int i = 0; i < 64; i++)
 		{
-	        motionX = WyMathHelper.randomWithRange(-7, 7) + WyMathHelper.randomDouble();
-	        motionY = WyMathHelper.randomWithRange(-7, 7) + WyMathHelper.randomDouble();
-	        motionZ = WyMathHelper.randomWithRange(-7, 7) + WyMathHelper.randomDouble();
-	        
-            double middlePoint = 0.05;
-            middlePoint *= (WyMathHelper.randomDouble() * 2) + 2.2F;
-	        
-	        motionX *= middlePoint / 2;
-	        motionY *= middlePoint / 2;
-	        motionZ *= middlePoint / 2;
+			double offsetX = WyMathHelper.randomWithRange(-2, 2) + WyMathHelper.randomDouble();
+			double offsetY = WyMathHelper.randomWithRange(-1, 2) + WyMathHelper.randomDouble();
+			double offsetZ = WyMathHelper.randomWithRange(-2, 2) + WyMathHelper.randomDouble();
+			
+			motionX = WyMathHelper.randomDouble() / 8;
+			motionZ = WyMathHelper.randomDouble() / 8;
 			
 			SimpleParticle cp = new SimpleParticle(world, ModValuesParticles.PARTICLE_ICON_DOKU,
-					posX, 
-					posY + 1,
-					posZ, 
+					posX + offsetX, 
+					posY + offsetY,
+					posZ + offsetZ, 
 					motionX,
-					motionY,
+					0.05D,
 					motionZ)
-					.setParticleAge(1).setParticleScale(2F);
+					.setParticleAge(5).setParticleGravity(0).setParticleScale(1.5F);
 			Minecraft.getInstance().particles.addEffect(cp);
-		}
+		}	
 	}
+
 }

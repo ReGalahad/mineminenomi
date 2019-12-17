@@ -7,13 +7,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 
-public class ParticleEffectBakuMunch extends ParticleEffect
+public class BakuMunchParticleEffect extends ParticleEffect
 {
-
 	@Override
 	public void spawn(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
 	{
-		for (int i = 0; i < 15; i++)
+		for (int i = 0; i < 6; i++)
 		{
 			double offsetX = world.rand.nextDouble();
 			double offsetY = 1;

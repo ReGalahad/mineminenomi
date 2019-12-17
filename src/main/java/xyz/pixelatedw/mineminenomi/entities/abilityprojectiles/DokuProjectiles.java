@@ -11,7 +11,6 @@ import net.minecraft.potion.Effects;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
-import xyz.pixelatedw.mineminenomi.ID;
 import xyz.pixelatedw.mineminenomi.ModMain;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
@@ -25,7 +24,8 @@ import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.packets.server.SParticlesPacket;
-import xyz.pixelatedw.mineminenomi.particles.CustomParticleData;
+import xyz.pixelatedw.mineminenomi.particles.effects.common.ProjectileTrailParticleEffect;
+import xyz.pixelatedw.mineminenomi.particles.effects.doku.ChloroBallCloudParticleEffect;
 import xyz.pixelatedw.mineminenomi.values.ModValuesParticles;
 
 public class DokuProjectiles 
@@ -110,7 +110,6 @@ public class DokuProjectiles
 				AbilityExplosion explosion = WyHelper.newExplosion(this.getThrower(), this.posX, this.posY, this.posZ, 2.2F);
 				explosion.setExplosionSound(false);
 				explosion.setDestroyBlocks(false);
-				explosion.setSmokeParticles(ID.PARTICLEFX_CHLOROBALL);
 				explosion.setDamageOwner(false);
 				explosion.doExplosion();
 				
@@ -126,23 +125,9 @@ public class DokuProjectiles
 		@Override
 		public void tick()
 		{	
-			if(this.world.isRemote)
-			{
-				double posXOffset = this.world.rand.nextGaussian() * 0.42D;
-				double posYOffset = this.world.rand.nextGaussian() * 0.22D;
-				double posZOffset = this.world.rand.nextGaussian() * 0.42D;		
-	
-				CustomParticleData data = new CustomParticleData();
-				data.setTexture(ModValuesParticles.PARTICLE_ICON_DOKU);
-				data.setPosX(posX + posXOffset);
-				data.setPosY(posY + posYOffset);
-				data.setPosZ(posZ + posZOffset);
-				
-				data.setMaxAge(6);
-				data.setScale(1.7F);
-				
-				ModMain.proxy.spawnParticles(world, data);
-			}
+			if(this.world.isRemote)		
+				ModMain.proxy.spawnParticleEffect(new ProjectileTrailParticleEffect(ModValuesParticles.PARTICLE_ICON_DOKU, 3, 2, 20), this.world, this.posX, this.posY, this.posZ, 0, 0, 0);
+
 			super.tick();
 		}
 	}
@@ -163,7 +148,7 @@ public class DokuProjectiles
 				for(LivingEntity target : WyHelper.getEntitiesNear(this, 4))
 					target.addPotionEffect(new EffectInstance(Effects.POISON, 200, 2));
 			}
-			ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_CHLOROBALLCLOUD, this.posX, this.posY, this.posZ), this.getThrower());
+			ModNetwork.sendToAllAround(new SParticlesPacket(new ChloroBallCloudParticleEffect(), this.posX, this.posY, this.posZ), this.getThrower());
 		}
 	}
 	

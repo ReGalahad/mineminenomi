@@ -12,7 +12,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
-import xyz.pixelatedw.mineminenomi.ID;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
@@ -22,6 +21,7 @@ import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.BakuProjectiles;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.packets.server.SParticlesPacket;
+import xyz.pixelatedw.mineminenomi.particles.effects.baku.BakuMunchParticleEffect;
 
 public class BakuAbilities
 {
@@ -183,7 +183,6 @@ public class BakuAbilities
 				{
 					if(CommonConfig.instance.isGriefingEnabled())
 					{
-						int i = 0;
 						for(int x = -2; x < 2; x++)
 						for(int y = 0; y < 3; y++)
 						for(int z = -2; z < 2; z++)
@@ -196,9 +195,10 @@ public class BakuAbilities
 							if(WyHelper.placeBlockIfAllowed(player.world, posX, posY, posZ, Blocks.AIR, "all", "restricted", "ignore liquids"))
 							{
 								player.inventory.addItemStackToInventory(new ItemStack(tempBlock));
-								ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_BAKUMUNCH, posX, posY, posZ), player);
+								ModNetwork.sendToAllAround(new SParticlesPacket(new BakuMunchParticleEffect(), posX, posY, posZ), player);
 							}
 						}
+
 						super.use(player);
 					}
 				}

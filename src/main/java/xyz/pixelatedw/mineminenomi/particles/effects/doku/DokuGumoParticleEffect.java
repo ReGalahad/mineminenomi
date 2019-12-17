@@ -7,7 +7,7 @@ import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.values.ModValuesParticles;
 
-public class ParticleEffectDokuGumo extends ParticleEffect
+public class DokuGumoParticleEffect extends ParticleEffect
 {
 
 	@Override
@@ -15,16 +15,16 @@ public class ParticleEffectDokuGumo extends ParticleEffect
 	{
 		for (int i = 0; i < 30; i++)
 		{
-			double offsetX = WyMathHelper.randomWithRange(-3, 3);
-			double offsetY = WyMathHelper.randomWithRange(-3, 3);
-			double offsetZ = WyMathHelper.randomWithRange(-3, 3);
+			double offsetX = WyMathHelper.randomWithRange(-3, 3) + WyMathHelper.randomDouble();
+			double offsetY = WyMathHelper.randomWithRange(-3, 3) + WyMathHelper.randomDouble();
+			double offsetZ = WyMathHelper.randomWithRange(-3, 3) + WyMathHelper.randomDouble();
 			
 			SimpleParticle cp = new SimpleParticle(world, ModValuesParticles.PARTICLE_ICON_DOKU,
 					posX - 1 + offsetX, 
 					posY + offsetY,
 					posZ - 1 + offsetZ, 
 					0, 0, 0)
-					.setParticleAge((int) (1 + WyMathHelper.randomWithRange(0, 2))).setParticleGravity(0).setParticleScale(1F);
+					.setParticleAge((int) (1 + WyMathHelper.randomWithRange(0, 2))).setParticleScale(1F);
 			Minecraft.getInstance().particles.addEffect(cp);
 		}
 	}

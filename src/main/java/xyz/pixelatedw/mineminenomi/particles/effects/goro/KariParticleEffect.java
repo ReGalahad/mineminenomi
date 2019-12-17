@@ -7,31 +7,26 @@ import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.values.ModValuesParticles;
 
-public class ParticleEffectRaigo extends ParticleEffect
+public class KariParticleEffect extends ParticleEffect
 {
 
 	@Override
 	public void spawn(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
 	{
-		for (int i = 0; i < 512; i++)
+		for (int i = 0; i < 20; i++)
 		{
-			double offsetX = WyMathHelper.randomWithRange(-55, 55);
-			double offsetY = WyMathHelper.randomWithRange(-5, 5);
-			double offsetZ = WyMathHelper.randomWithRange(-55, 55);
-
-			SimpleParticle cp = new SimpleParticle(world, ModValuesParticles.PARTICLE_ICON_GORO3,
-					posX + offsetX, 
-					posY + 40 + offsetY,
-					posZ + offsetZ, 
-					0, 0, 0)
-					.setParticleScale(100)
-					.setParticleAge(100);
+			double offsetX = WyMathHelper.randomWithRange(-5, 5) + WyMathHelper.randomDouble();
+			double offsetY = WyMathHelper.randomWithRange(0, 3) + WyMathHelper.randomDouble();
+			double offsetZ = WyMathHelper.randomWithRange(-5, 5) + WyMathHelper.randomDouble();
 			
-			if(i % 2 == 0)
-				cp.setColor(0.4F, 0.4F, 0.4F);
-			else
-				cp.setColor(0.3F, 0.3F, 0.3F);
-			
+			SimpleParticle cp = new SimpleParticle(world, ModValuesParticles.PARTICLE_ICON_GORO2,
+				posX + offsetX, 
+				posY + offsetY,
+				posZ + offsetZ, 
+				0, 0, 0)
+				.setParticleScale(3)
+				.setParticleAge(10);
+		
 			Minecraft.getInstance().particles.addEffect(cp);
 		}
 	}

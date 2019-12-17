@@ -29,6 +29,7 @@ import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.data.entity.haki.HakiDataCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.haki.IHakiData;
+import xyz.pixelatedw.mineminenomi.particles.effects.common.CommonExplosionParticleEffect;
 
 public class AbilityProjectile extends ThrowableEntity
 {
@@ -155,6 +156,7 @@ public class AbilityProjectile extends ThrowableEntity
 						explosion.setDamageOwner(false);
 						explosion.setDestroyBlocks(this.attr.canProjectileExplosionDestroyBlocks());
 						explosion.setFireAfterExplosion(this.attr.canProjectileExplosionSetFire());
+						explosion.setSmokeParticles(new CommonExplosionParticleEffect(this.attr.getProjectileExplosionPower()));
 						explosion.setDamageEntities(true);
 						explosion.doExplosion();						
 					}
@@ -178,6 +180,7 @@ public class AbilityProjectile extends ThrowableEntity
 					explosion.setDamageOwner(false);
 					explosion.setDestroyBlocks(this.attr.canProjectileExplosionDestroyBlocks());
 					explosion.setFireAfterExplosion(this.attr.canProjectileExplosionSetFire());
+					explosion.setSmokeParticles(new CommonExplosionParticleEffect(this.attr.getProjectileExplosionPower()));
 					explosion.setDamageEntities(true);
 					explosion.doExplosion();
 					
