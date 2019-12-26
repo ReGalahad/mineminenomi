@@ -23,6 +23,7 @@ import net.minecraftforge.event.entity.player.PlayerUseItemEvent;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.abilities.HakiAbilities.KenbunshokuHakiFutureSight;
 import xyz.pixelatedw.MineMineNoMi3.abilities.RokushikiAbilities;
+import xyz.pixelatedw.MineMineNoMi3.abilities.YomiAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.effects.DFEffectHieSlowness;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
@@ -438,7 +439,8 @@ public class EventsPassives
 		{
 			EntityPlayer player = (EntityPlayer) event.entityLiving;
 			ExtendedEntityData props = ExtendedEntityData.get(player);
-			
+			AbilityProperties abilityProps = AbilityProperties.get(player);
+
 			if (props.isInAirWorld())
 			{
 				event.setCanceled(true);
@@ -462,6 +464,10 @@ public class EventsPassives
 					
 					WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
 					WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));
+					
+					for(Ability a : YomiAbilities.abilitiesArray)
+						if(!DevilFruitsHelper.verifyIfAbilityIsBanned(a) && !abilityProps.hasDevilFruitAbility(a))
+							abilityProps.addDevilFruitAbility(a);
 				}
 			}
 			
@@ -472,7 +478,6 @@ public class EventsPassives
 					EntityLivingBase attacker = (EntityLivingBase) event.source.getSourceOfDamage();
 					EntityPlayer reciever = (EntityPlayer) event.entityLiving;
 					ExtendedEntityData propz = ExtendedEntityData.get(reciever);
-					AbilityProperties abilityProps = AbilityProperties.get(player);
 
 					KenbunshokuHakiFutureSight futureSight = (KenbunshokuHakiFutureSight) abilityProps.getAbilityFromName(ListAttributes.KENBUNSHOKU_HAKI_FUTURE_SIGHT.getAttributeName());			
 					if(futureSight != null && futureSight.isPassiveActive())
