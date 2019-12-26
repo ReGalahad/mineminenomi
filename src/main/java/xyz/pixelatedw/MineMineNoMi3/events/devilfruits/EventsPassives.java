@@ -23,6 +23,7 @@ import net.minecraftforge.event.entity.player.PlayerUseItemEvent;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.abilities.HakiAbilities.KenbunshokuHakiFutureSight;
 import xyz.pixelatedw.MineMineNoMi3.abilities.RokushikiAbilities;
+import xyz.pixelatedw.MineMineNoMi3.abilities.YomiAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.effects.DFEffectHieSlowness;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
@@ -334,14 +335,6 @@ public class EventsPassives
 					explosion.doExplosion();
 				}
 			}
-			
-			KenbunshokuHakiFutureSight futureSight = (KenbunshokuHakiFutureSight) abilityProps.getAbilityFromName(ListAttributes.KENBUNSHOKU_HAKI_FUTURE_SIGHT.getAttributeName());
-			
-			if(futureSight != null && futureSight.isPassiveActive())
-			{
-				futureSight.reduceProtection(event.ammount);
-				event.setCanceled(true);
-			}
 		}
 
 		if (event.source.getSourceOfDamage() instanceof EntityPlayer)
@@ -422,6 +415,7 @@ public class EventsPassives
 	public void onAttack(AttackEntityEvent event)
 	{
 		ExtendedEntityData propz = ExtendedEntityData.get(event.entityPlayer);
+		
 		if (propz.isInAirWorld())
 		{
 			event.setCanceled(true);
@@ -443,9 +437,10 @@ public class EventsPassives
 	{
 		if (event.entityLiving instanceof EntityPlayer)
 		{
-			EntityPlayer player = (EntityPlayer) event.entity;
+			EntityPlayer player = (EntityPlayer) event.entityLiving;
 			ExtendedEntityData props = ExtendedEntityData.get(player);
-			
+			AbilityProperties abilityProps = AbilityProperties.get(player);
+
 			if (props.isInAirWorld())
 			{
 				event.setCanceled(true);
@@ -469,6 +464,10 @@ public class EventsPassives
 					
 					WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
 					WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));
+					
+					for(Ability a : YomiAbilities.abilitiesArray)
+						if(!DevilFruitsHelper.verifyIfAbilityIsBanned(a) && !abilityProps.hasDevilFruitAbility(a))
+							abilityProps.addDevilFruitAbility(a);
 				}
 			}
 			
@@ -480,6 +479,13 @@ public class EventsPassives
 					EntityPlayer reciever = (EntityPlayer) event.entityLiving;
 					ExtendedEntityData propz = ExtendedEntityData.get(reciever);
 
+					KenbunshokuHakiFutureSight futureSight = (KenbunshokuHakiFutureSight) abilityProps.getAbilityFromName(ListAttributes.KENBUNSHOKU_HAKI_FUTURE_SIGHT.getAttributeName());			
+					if(futureSight != null && futureSight.isPassiveActive())
+					{
+						futureSight.reduceProtection(event.ammount);
+						event.setCanceled(true);
+					}
+					
 					if (attacker.getHeldItem() != null && ItemsHelper.isSword(attacker.getHeldItem()) && propz.getUsedFruit().equals("sabisabi") && !attacker.worldObj.isRemote)
 					{
 						event.setCanceled(true);

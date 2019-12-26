@@ -214,6 +214,16 @@ public class CommandFG extends CommandBase
 					abilityProps.addHakiAbility(HakiAbilities.HAOSHOKU_HAKI);
 					WyHelper.sendMsgToPlayer(player, "Haoshoku Haki");
 				}
+				else if(str[1].equalsIgnoreCase("all"))
+				{
+					abilityProps.addHakiAbility(HakiAbilities.KENBUNSHOKU_HAKI_AURA);
+					abilityProps.addHakiAbility(HakiAbilities.KENBUNSHOKU_HAKI_FUTURE_SIGHT);
+					abilityProps.addHakiAbility(HakiAbilities.BUSOSHOKU_HAKI_HARDENING);
+					abilityProps.addHakiAbility(HakiAbilities.BUSOSHOKU_HAKI_FULL_BODY_HARDENING);
+					abilityProps.addHakiAbility(HakiAbilities.BUSOSHOKU_HAKI_IMBUING);
+					abilityProps.addHakiAbility(HakiAbilities.HAOSHOKU_HAKI);
+					WyHelper.sendMsgToPlayer(player, "Unlocked All Haki Types");
+				}
 			}
 			
 			if(toSpawn != null)

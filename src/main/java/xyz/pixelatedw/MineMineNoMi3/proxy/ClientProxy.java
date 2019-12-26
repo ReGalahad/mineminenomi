@@ -6,6 +6,7 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.client.MinecraftForgeClient;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityRenderer;
@@ -64,6 +65,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityLucci;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityLucciL;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntitySpandam;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
+import xyz.pixelatedw.MineMineNoMi3.gui.GUIQuestYesNo;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListDevilFruits;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.models.blocks.ModelFlameDial;
@@ -99,6 +101,7 @@ import xyz.pixelatedw.MineMineNoMi3.models.entities.mobs.humanoids.ModelMorgan;
 import xyz.pixelatedw.MineMineNoMi3.models.entities.mobs.humanoids.ModelMr0;
 import xyz.pixelatedw.MineMineNoMi3.models.entities.mobs.humanoids.ModelPearl;
 import xyz.pixelatedw.MineMineNoMi3.models.entities.mobs.humanoids.ModelSpandam;
+import xyz.pixelatedw.MineMineNoMi3.quests.EnumQuestlines;
 import xyz.pixelatedw.MineMineNoMi3.renderers.blocks.RenderBlockCannon;
 import xyz.pixelatedw.MineMineNoMi3.renderers.blocks.RenderBlockDenDenMushi;
 import xyz.pixelatedw.MineMineNoMi3.renderers.blocks.RenderBlockDial;
@@ -261,4 +264,8 @@ public class ClientProxy extends CommonProxy
 		Minecraft.getMinecraft().effectRenderer.addEffect(particle);
 	}
 
+	public void openQuestYesOrNoWorkaround(EntityPlayer player, EnumQuestlines questline)
+	{
+		Minecraft.getMinecraft().displayGuiScreen(new GUIQuestYesNo(player, (int)player.posX, (int)player.posY, (int)player.posZ, questline));
+	}
 }

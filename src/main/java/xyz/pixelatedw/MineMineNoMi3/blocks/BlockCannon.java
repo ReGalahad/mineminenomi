@@ -11,6 +11,7 @@ import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
+import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityCannon;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.ExtraProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListExtraAttributes;
@@ -95,7 +96,7 @@ public class BlockCannon extends BlockContainer
 				world.spawnEntityInWorld(cannonBall);
 
 			for (int i = 0; i < 10; i++)
-				world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL.getParticleName(), posX, posY + 0.6, posZ, 0, 0.01, 0);
+				world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL.getParticleName(), posX + (WyMathHelper.randomDouble() / 5), posY + 0.6, posZ + (WyMathHelper.randomDouble() / 5), 0, 0.01, 0);
 			
 			cannonTE.emptyGunpoweder();
 			cannonTE.setHasCannonBall(false);

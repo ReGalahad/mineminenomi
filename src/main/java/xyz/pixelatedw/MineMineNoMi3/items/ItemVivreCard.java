@@ -27,6 +27,7 @@ public class ItemVivreCard extends Item
 			{
 				list.add(EnumChatFormatting.GOLD + "[Owner] " + EnumChatFormatting.RESET + entity.getCommandSenderName());
 				list.add(EnumChatFormatting.GOLD + "[Location] " + EnumChatFormatting.RESET + (int)entity.posX + "X " + (int)entity.posY + "Y " + (int)entity.posZ +"Z");
+				list.add(EnumChatFormatting.GOLD + "[HP] " + EnumChatFormatting.RESET + entity.getHealth());
 			}
 		}
 	}

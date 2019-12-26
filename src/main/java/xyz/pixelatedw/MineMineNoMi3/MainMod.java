@@ -107,7 +107,7 @@ public class MainMod
 	public void serverInit(FMLServerStartingEvent event)
 	{
 		// event.registerServerCommand(new CommandAbility());
-		if (WyHelper.isDevBuild() || WyDebug.isDebug())
+		if (WyHelper.isDevBuild() || WyHelper.isEarlyAccessBuild() || WyDebug.isDebug())
 			event.registerServerCommand(new CommandFG());
 		
 		event.registerServerCommand(new CommandDoriki());

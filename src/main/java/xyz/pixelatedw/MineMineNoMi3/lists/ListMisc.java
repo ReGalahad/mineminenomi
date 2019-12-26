@@ -65,6 +65,7 @@ import xyz.pixelatedw.MineMineNoMi3.items.AkumaNoMiBox;
 import xyz.pixelatedw.MineMineNoMi3.items.BellyPouch;
 import xyz.pixelatedw.MineMineNoMi3.items.CharacterCreator;
 import xyz.pixelatedw.MineMineNoMi3.items.Cola;
+import xyz.pixelatedw.MineMineNoMi3.items.ItemRumbleBall;
 import xyz.pixelatedw.MineMineNoMi3.items.ItemSakeBottle;
 import xyz.pixelatedw.MineMineNoMi3.items.ItemSkyblock;
 import xyz.pixelatedw.MineMineNoMi3.items.ItemVivreCard;
@@ -206,7 +207,8 @@ public class ListMisc
 	public static Item SakeCup = new SakeCup();
 	public static Item SakeBottle = new ItemSakeBottle();
 	public static Item VivreCard = new ItemVivreCard();
-	
+	public static Item RumbleBall = new ItemRumbleBall();
+
 	public static Item MarineHelm = new ItemCoreArmor("marine", ID.ARMORMAT_USELESS, 0);
 	public static Item MarineChestplate = new ItemCoreArmor("marine", ID.ARMORMAT_USELESS, 1);
 	public static Item MarineLeggings = new ItemCoreArmor("marine", ID.ARMORMAT_USELESS, 2);
@@ -311,10 +313,11 @@ public class ListMisc
 
 		addITEM(ColaBackpack, "Cola Backpack", ListCreativeTabs.tabWeapons);
 		addITEM(TomoeDrums, "Tomoe Drums", ListCreativeTabs.tabWeapons);
-		addITEM(Note, "Note", ListCreativeTabs.tabMisc);
+		addITEM(Note, "Note", null);
 		addITEM(MedicBag, "Medic Bag", ListCreativeTabs.tabWeapons);
 		addITEM(VivreCard, "Vivre Card", null);
-		
+		//addITEM(RumbleBall, "Rumble Ball", ListCreativeTabs.tabWeapons);
+
 		addITEM(GreenKujaBow, "Green Kuja Bow", ListCreativeTabs.tabWeapons);
 		addITEM(BlueKujaBow, "Blue Kuja Bow", ListCreativeTabs.tabWeapons);
 		addITEM(RedKujaBow, "Red Kuja Bow", ListCreativeTabs.tabWeapons);

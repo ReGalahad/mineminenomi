@@ -2,22 +2,28 @@ package xyz.pixelatedw.MineMineNoMi3.events;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.abilities.HakiAbilities;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.helpers.ItemsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 
 public class EventsHakiGain
 {
@@ -41,6 +47,15 @@ public class EventsHakiGain
 					if(player.ticksExisted % 200 == 0)
 						props.addObservationHakiExp((int) (6 + WyMathHelper.randomWithRange(0, 10)));
 				}
+			}
+			
+			if(MainConfig.haoshokuHakiUnlockLogic.equalsIgnoreCase("exp") && !player.worldObj.isRemote)
+			{
+				int haoExp = (props.getHardeningHakiExp() + props.getImbuingHakiExp() + props.getObservationHakiExp()) / 3;
+				
+				if(haoExp >= 100 && player.getHealth() < WyMathHelper.percentage(20, player.getMaxHealth()) && player.ticksExisted % 200 == 0)
+					props.addKingHakiExp(1);
+
 			}
 		}		
 	}
@@ -77,6 +92,26 @@ public class EventsHakiGain
 			if(props.getObservationHakiExp() > 600 + WyMathHelper.randomWithRange(0, 100))
 			{
 				this.giveHakiAbility(abilityProps, HakiAbilities.KENBUNSHOKU_HAKI_FUTURE_SIGHT, attacked);
+			}
+								
+			if(MainConfig.haoshokuHakiUnlockLogic.equalsIgnoreCase("exp") && !attacked.worldObj.isRemote)
+			{
+				int haoExp = (props.getHardeningHakiExp() + props.getImbuingHakiExp() + props.getObservationHakiExp()) / 3;
+				
+				if(haoExp > 600 + WyMathHelper.randomWithRange(0, 100))
+					this.giveHakiAbility(abilityProps, HakiAbilities.HAOSHOKU_HAKI, attacked);
+				
+				boolean hasEnemiesNear = WyHelper.getEntitiesNear(attacked, 20, EntityCreature.class).size() > 0;
+				if(haoExp >= 100 && attacked.getHealth() < WyMathHelper.percentage(20, attacked.getMaxHealth()) && attacked.ticksExisted % 200 == 0 && hasEnemiesNear)
+				{
+					if(props.getKingHakiExp() >= 5 + WyMathHelper.randomWithRange(0, 2))
+					{
+						WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_HAOSHOKU_HAKI, attacked), attacked.dimension, attacked.posX, attacked.posY, attacked.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
+						DevilFruitsHelper.haoAttackEntities(attacked);
+
+						props.addKingHakiExp(-props.getKingHakiExp());
+					}
+				}
 			}
 			
 			System.out.println("Imbuing : " + props.getImbuingHakiExp());
@@ -149,11 +184,25 @@ public class EventsHakiGain
 	
 	private void giveHakiAbility(AbilityProperties abilityProps, Ability ability, EntityPlayer player)
 	{
-		System.out.println(" " + (abilityProps.hasHakiAbility(ability)));
 		if(!abilityProps.hasHakiAbility(ability) && !DevilFruitsHelper.verifyIfAbilityIsBanned(ability))
 		{
 			abilityProps.addHakiAbility(ability);
 			WyHelper.sendMsgToPlayer(player, "Obtained " + ability.getAttribute().getAttributeName());
+		}
+	}
+	
+	@SubscribeEvent
+	public void onPlayerLoggedIn(EntityJoinWorldEvent event)
+	{
+		if(event.entity instanceof EntityPlayer && MainConfig.haoshokuHakiUnlockLogic.equalsIgnoreCase("random"))
+		{
+			EntityPlayer player = (EntityPlayer) event.entity;
+			AbilityProperties abilityProps = AbilityProperties.get(player);
+			int isKing = (int) (player.getUniqueID().getMostSignificantBits() % 4);
+			
+			// That moment when your entire chance of getting haoshoku haki is based on the time when you bought minecraft. Design 101
+			if(isKing == 0)
+				this.giveHakiAbility(abilityProps, HakiAbilities.HAOSHOKU_HAKI, player);
 		}
 	}
 }
