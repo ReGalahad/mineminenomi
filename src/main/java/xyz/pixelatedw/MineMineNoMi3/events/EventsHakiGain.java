@@ -198,7 +198,7 @@ public class EventsHakiGain
 		{
 			EntityPlayer player = (EntityPlayer) event.entity;
 			AbilityProperties abilityProps = AbilityProperties.get(player);
-			int isKing = (int) (player.getUniqueID().getMostSignificantBits() % 2);
+			int isKing = (int) (player.getUniqueID().getMostSignificantBits() % 4);
 			
 			// That moment when your entire chance of getting haoshoku haki is based on the time when you bought minecraft. Design 101
 			if(isKing == 0)
