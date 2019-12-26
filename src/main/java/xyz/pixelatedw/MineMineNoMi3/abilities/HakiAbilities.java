@@ -98,7 +98,7 @@ public class HakiAbilities
 	
 	public static class KenbunshokuHakiFutureSight extends Ability
 	{
-		private int protection = 500;
+		private int protection = 700;
 		
 		public KenbunshokuHakiFutureSight() 
 		{
@@ -114,7 +114,7 @@ public class HakiAbilities
 			
 			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
 			
-			this.protection = 500;
+			this.protection = 700;
 		}
 		
 		@Override

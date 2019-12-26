@@ -76,12 +76,12 @@ public class ItemCoreWeapon extends Item
 				Ability imbuingBuso = abilityProps.getAbilityFromName(ListAttributes.BUSOSHOKU_HAKI_IMBUING.getAttributeName());
 
 				if(imbuingBuso != null && imbuingBuso.isPassiveActive())
-					multiplier += 0.5;
+					multiplier += 1.5;
 			}
 			else
 			{							
 				if(props.hasBusoHakiActive())
-					multiplier += 0.5;
+					multiplier += 1.5;
 			}
 					
 			if(props.isSwordsman())
