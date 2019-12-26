@@ -10,6 +10,17 @@ public class ListCraftingRecipes
 	
 	public static void init()
 	{
+		GameRegistry.addShapedRecipe(new ItemStack(ListMisc.Cannon, 1), new Object[]
+				{ "...", "XXX", ".YY", 'X', Blocks.iron_block, 'Y', Blocks.planks });
+		GameRegistry.addShapedRecipe(new ItemStack(ListMisc.CannonBall, 1), new Object[]
+				{ "...", ".XX", ".XX", 'X', Items.iron_ingot });
+		GameRegistry.addShapedRecipe(new ItemStack(ListMisc.CannonBall, 1), new Object[]
+				{ ".XX", ".XX", "...", 'X', Items.iron_ingot });
+		GameRegistry.addShapedRecipe(new ItemStack(ListMisc.CannonBall, 1), new Object[]
+				{ "XX.", "XX.", "...", 'X', Items.iron_ingot });
+		GameRegistry.addShapedRecipe(new ItemStack(ListMisc.CannonBall, 1), new Object[]
+				{ "...", "XX.", "XX.", 'X', Items.iron_ingot });
+				
 		GameRegistry.addShapelessRecipe(new ItemStack(ListMisc.VivreCard, 1), Items.paper);
 		
 		GameRegistry.addShapedRecipe(new ItemStack(ListMisc.MedicBag, 1), new Object[]
