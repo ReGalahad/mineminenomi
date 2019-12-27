@@ -175,10 +175,12 @@ public class EventsHakiGain
 				}
 			}
 			
+			/*
 			System.out.println("Imbuing : " + props.getImbuingHakiExp());
 			System.out.println("Hardening : " + props.getHardeningHakiExp());
 			System.out.println("Observation : " + props.getObservationHakiExp());
 			System.out.println("King : " + props.getKingHakiExp());
+			*/
 		}
 	}
 	
