@@ -36,7 +36,6 @@ public class BlockSkyblock extends Block
 	@Override
 	public Item getItemDropped(int metadata, Random rand, int fortune)
 	{
-		System.out.println("" + metadata);
 		if(metadata == 1)
 			return null;
 		

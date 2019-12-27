@@ -66,12 +66,13 @@ public class EventsDrops
 						df = Values.devilfruits.get(rand.nextInt(Values.devilfruits.size()));
 						chanceForNewFruit++;
 					}
-					
+
 					if(isAvailable)
 						worldProps.addDevilFruitInWorld(df);
 				}
 				
-				event.getPlayer().inventory.addItemStackToInventory(new ItemStack(df));
+				if(isAvailable)
+					event.getPlayer().inventory.addItemStackToInventory(new ItemStack(df));
 			}
 			
 		}
