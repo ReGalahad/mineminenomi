@@ -15,12 +15,12 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.renderer.vertex.VertexFormat;
-import net.minecraft.particles.IParticleData;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import xyz.pixelatedw.mineminenomi.particles.data.GenericParticleData;
 
 @OnlyIn(Dist.CLIENT)
 public class SimpleParticle extends TexturedParticle
@@ -114,21 +114,6 @@ public class SimpleParticle extends TexturedParticle
     {
     	return new BlockPos(this.posX, this.posY, this.posZ);
     }
-    
-    public SimpleParticle clone(double posX, double posY, double posZ)
-    {
-    	return clone(posX, posY, posZ, 0, 0, 0);
-    }
-    
-    public SimpleParticle clone(double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
-    {
-    	SimpleParticle clone = new SimpleParticle(this.world, this.texture,
-    			posX, posY, posZ,
-    			motionX, motionY, motionZ)
-    			.setParticleScale(this.particleScale).setParticleGravity(this.particleGravity).setParticleAge(this.maxAge);
-
-    	return clone;
-    }
 
 	@Override
 	public IParticleRenderType getRenderType()
@@ -160,13 +145,22 @@ public class SimpleParticle extends TexturedParticle
 		return 0;
 	}
 
-	public static class Factory implements IParticleFactory
+	public static class Factory implements IParticleFactory<GenericParticleData>
 	{
+		public Factory()
+		{
+		}
 
 		@Override
-		public Particle makeParticle(IParticleData data, World world, double posX, double posY, double posZ, double velX, double velY, double velZ)
+		public Particle makeParticle(GenericParticleData data, World world, double posX, double posY, double posZ, double velX, double velY, double velZ)
 		{
-			return new SimpleParticle(world, null, velZ, velZ, velZ, velZ, velZ, velZ);
+			SimpleParticle particle = new SimpleParticle(world, data.getTexture(), posX, posY, posZ, data.getMotionX(), data.getMotionY(), data.getMotionZ());
+			particle.setColor(data.getRed(), data.getGreen(), data.getBlue());
+			particle.setParticleAlpha(data.getAlpha());
+			particle.setParticleScale(data.getSize());
+			particle.setParticleAge(data.getLife());
+			
+			return particle;
 		}
 	}
 }

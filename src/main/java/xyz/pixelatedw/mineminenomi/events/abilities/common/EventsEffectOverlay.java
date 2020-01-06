@@ -1,9 +1,5 @@
 package xyz.pixelatedw.mineminenomi.events.abilities.common;
 
-import java.awt.Color;
-
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.api.distmarker.Dist;
@@ -13,8 +9,6 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.Env;
-import xyz.pixelatedw.mineminenomi.ID;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.WyRenderHelper;
 import xyz.pixelatedw.mineminenomi.api.data.abilitydata.AbilityDataCapability;
 import xyz.pixelatedw.mineminenomi.api.data.abilitydata.IAbilityData;
@@ -41,7 +35,7 @@ public class EventsEffectOverlay
 		if(props == null)
 			return;
 		
-		if (props.hasExtraEffect(ID.EXTRAEFFECT_MERO))
+		/*if (props.hasExtraEffect(ID.EXTRAEFFECT_MERO))
 		{
 			GL11.glPushMatrix();
 
@@ -93,7 +87,7 @@ public class EventsEffectOverlay
 		else if (props.hasExtraEffect(ID.EXTRAEFFECT_ORIBIND))
 		{
 			oriBind.doRender(event.getEntity(), event.getX(), event.getY(), event.getZ(), 0F, 0.0625F);
-		}
+		}*/
 	}
 
 	@SuppressWarnings("resource")

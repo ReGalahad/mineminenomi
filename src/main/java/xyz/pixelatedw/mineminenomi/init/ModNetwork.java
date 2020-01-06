@@ -20,7 +20,8 @@ import xyz.pixelatedw.mineminenomi.packets.client.CUseAbilityPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SDevilFruitSyncPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SEntityStatsSyncPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SExtraEffectSyncPacket;
-import xyz.pixelatedw.mineminenomi.packets.server.SParticlesPacket;
+import xyz.pixelatedw.mineminenomi.packets.server.SOpenCharacterCreatorScreenPacket;
+import xyz.pixelatedw.mineminenomi.packets.server.SOpenWantedPosterScreenPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SRecalculateEyeHeightPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SSpawnLightningPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SSpecialFlyingPacket;
@@ -54,10 +55,11 @@ public class ModNetwork
 		channel.registerMessage(packet++, SSpawnLightningPacket.class, SSpawnLightningPacket::encode, SSpawnLightningPacket::decode, SSpawnLightningPacket::handle);
 		channel.registerMessage(packet++, SSpecialFlyingPacket.class, SSpecialFlyingPacket::encode, SSpecialFlyingPacket::decode, SSpecialFlyingPacket::handle);
 		channel.registerMessage(packet++, SRecalculateEyeHeightPacket.class, SRecalculateEyeHeightPacket::encode, SRecalculateEyeHeightPacket::decode, SRecalculateEyeHeightPacket::handle);
-		channel.registerMessage(packet++, SParticlesPacket.class, SParticlesPacket::encode, SParticlesPacket::decode, SParticlesPacket::handle);
 		channel.registerMessage(packet++, SUpdateMotionPacket.class, SUpdateMotionPacket::encode, SUpdateMotionPacket::decode, SUpdateMotionPacket::handle);
 		channel.registerMessage(packet++, SQuestDataSyncPacket.class, SQuestDataSyncPacket::encode, SQuestDataSyncPacket::decode, SQuestDataSyncPacket::handle);
 		channel.registerMessage(packet++, SViewProtectionPacket.class, SViewProtectionPacket::encode, SViewProtectionPacket::decode, SViewProtectionPacket::handle);
+		channel.registerMessage(packet++, SOpenCharacterCreatorScreenPacket.class, SOpenCharacterCreatorScreenPacket::encode, SOpenCharacterCreatorScreenPacket::decode, SOpenCharacterCreatorScreenPacket::handle);
+		channel.registerMessage(packet++, SOpenWantedPosterScreenPacket.class, SOpenWantedPosterScreenPacket::encode, SOpenWantedPosterScreenPacket::decode, SOpenWantedPosterScreenPacket::handle);
 
 	}
 	

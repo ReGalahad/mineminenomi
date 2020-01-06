@@ -36,6 +36,9 @@ public class ModValues
 	public static final int MAX_GENERAL = 999999999;
 	public static final int MAX_CREW = 50;
 	
+	public static final int CHARACTER_CREATOR = 0;
+	public static final int WANTED_POSTER = 1;
+	
 	public static final long MAX_BOUNTY = 100000000000L;
 	
 	public static final String PIRATE = "pirate";
@@ -49,6 +52,6 @@ public class ModValues
 	public static final String SWORDSMAN = "swordsman";
 	public static final String SNIPER = "sniper";
 	public static final String DOCTOR = "doctor";
-	public static final String ART_OF_WEATHER = "art_of_weather";
-	
+	public static final String ART_OF_WEATHER = "art_of_weather";	
+
 }

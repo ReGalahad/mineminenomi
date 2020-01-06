@@ -4,6 +4,7 @@ import java.text.DecimalFormat;
 
 import org.lwjgl.opengl.GL11;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.nbt.CompoundNBT;
@@ -19,10 +20,10 @@ public class WantedPosterScreen extends Screen
 {
 	private CompoundNBT wantedData;
 
-	public WantedPosterScreen(CompoundNBT nbtTagCompound)
+	public WantedPosterScreen()
 	{
 		super(new StringTextComponent(""));
-		this.wantedData = nbtTagCompound;
+		this.wantedData = Minecraft.getInstance().player.getHeldItemMainhand().getTag();
 	}
 
 	@Override
@@ -112,4 +113,9 @@ public class WantedPosterScreen extends Screen
 	{
 		return false;
 	}
+	
+    public static void open() 
+    {
+        Minecraft.getInstance().displayGuiScreen(new WantedPosterScreen());
+    }
 }

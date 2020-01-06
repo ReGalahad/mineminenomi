@@ -13,7 +13,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.Env;
-import xyz.pixelatedw.mineminenomi.ModMain;
 import xyz.pixelatedw.mineminenomi.api.data.questdata.IQuestData;
 import xyz.pixelatedw.mineminenomi.api.data.questdata.QuestDataCapability;
 import xyz.pixelatedw.mineminenomi.api.network.packets.server.SQuestDataSyncPacket;
@@ -107,7 +106,7 @@ public class EventsQuests
 
 				if (currentQuest != null && !questProps.hasCompletedQuest(currentQuest.getQuestId()) && !questProps.hasInProgressQuest(currentQuest))
 				{
-					ModMain.proxy.openQuestAcceptScreen(player, currentQuest);
+					//ModMain.proxy.openQuestAcceptScreen(player, currentQuest);
 					return;
 				}
 			}

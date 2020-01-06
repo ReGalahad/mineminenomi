@@ -4,6 +4,7 @@ import javax.annotation.Nullable;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.WallOrFloorItem;
 import net.minecraft.util.ActionResult;
@@ -11,9 +12,10 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.ModMain;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.WantedPosterTileEntity;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
+import xyz.pixelatedw.mineminenomi.init.ModNetwork;
+import xyz.pixelatedw.mineminenomi.packets.server.SOpenWantedPosterScreenPacket;
 
 public class WantedPosterItem extends WallOrFloorItem
 {
@@ -27,10 +29,7 @@ public class WantedPosterItem extends WallOrFloorItem
 	public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand)
 	{
 		if (player.getHeldItem(hand).hasTag())
-		{
-			if (world.isRemote)
-				ModMain.proxy.openWantedPosterScreen(player, player.getHeldItem(hand).getTag());
-		}
+			ModNetwork.sendTo(new SOpenWantedPosterScreenPacket(), (ServerPlayerEntity)player);
 		return new ActionResult<>(ActionResultType.SUCCESS, player.getHeldItem(hand));
 	}
 

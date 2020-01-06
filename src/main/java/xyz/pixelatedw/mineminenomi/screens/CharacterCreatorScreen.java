@@ -25,10 +25,10 @@ public class CharacterCreatorScreen extends Screen
 	private PlayerEntity player;
 	private int page = 0, selectedOpt = 0, maxOpt, lastFac = 0, lastRace = 0, lastFStyle = 0;
 	
-	public CharacterCreatorScreen(PlayerEntity player)
+	public CharacterCreatorScreen()
 	{
 		super(new StringTextComponent(""));
-		this.player = player;
+		this.player = Minecraft.getInstance().player;
 	}
 	
 	@Override
@@ -282,4 +282,9 @@ public class CharacterCreatorScreen extends Screen
 	{
 		return false;
 	}
+	
+    public static void open() 
+    {
+        Minecraft.getInstance().displayGuiScreen(new CharacterCreatorScreen());
+    }
 }
