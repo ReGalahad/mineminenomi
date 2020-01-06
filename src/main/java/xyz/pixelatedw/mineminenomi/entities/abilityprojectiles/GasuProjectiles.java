@@ -11,8 +11,8 @@ import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
+import xyz.pixelatedw.mineminenomi.init.ModParticleTextures;
 import xyz.pixelatedw.mineminenomi.particles.CustomParticleData;
-import xyz.pixelatedw.mineminenomi.values.ModValuesParticles;
 
 public class GasuProjectiles 
 {
@@ -71,7 +71,7 @@ public class GasuProjectiles
 				double posZOffset = this.world.rand.nextGaussian() * 0.42D;		
 				
 				CustomParticleData data = new CustomParticleData();
-				data.setTexture(ModValuesParticles.PARTICLE_ICON_GASU);
+				data.setTexture(ModParticleTextures.GASU);
 				data.setPosX(posX + posXOffset);
 				data.setPosY(posY + posYOffset);
 				data.setPosZ(posZ + posZOffset);
@@ -86,7 +86,7 @@ public class GasuProjectiles
 				posZOffset = this.world.rand.nextGaussian() * 0.12D;		
 				
 				data = new CustomParticleData();
-				data.setTexture(ModValuesParticles.PARTICLE_ICON_GASU2);
+				data.setTexture(ModParticleTextures.GASU2);
 				data.setPosX(posX + posXOffset);
 				data.setPosY(posY + posYOffset);
 				data.setPosZ(posZ + posZOffset);

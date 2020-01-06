@@ -11,6 +11,7 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.abilities.effects.DFEffectHieSlowness;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.extra.AbilityExplosion;
@@ -26,9 +27,8 @@ import xyz.pixelatedw.mineminenomi.events.custom.YomiTriggerEvent;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.packets.server.SDevilFruitSyncPacket;
-import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
 
-@Mod.EventBusSubscriber(modid = ModValuesEnv.PROJECT_ID)
+@Mod.EventBusSubscriber(modid = Env.PROJECT_ID)
 public class YomiPassiveEvents
 {
 

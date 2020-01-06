@@ -9,6 +9,7 @@ import net.minecraft.potion.Effects;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.api.data.abilitydata.AbilityDataCapability;
 import xyz.pixelatedw.mineminenomi.api.data.abilitydata.IAbilityData;
 import xyz.pixelatedw.mineminenomi.api.network.packets.server.SAbilityDataSyncPacket;
@@ -18,9 +19,8 @@ import xyz.pixelatedw.mineminenomi.entities.mobs.GenericNewEntity;
 import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.helpers.ItemsHelper;
 import xyz.pixelatedw.mineminenomi.init.ModNetwork;
-import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
 
-@Mod.EventBusSubscriber(modid = ModValuesEnv.PROJECT_ID)
+@Mod.EventBusSubscriber(modid = Env.PROJECT_ID)
 public class EventsDFWeaknesses
 {
 

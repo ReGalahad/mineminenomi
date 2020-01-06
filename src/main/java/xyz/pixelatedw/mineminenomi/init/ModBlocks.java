@@ -9,6 +9,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
+import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.json.loottables.block.JSONLootTableSimpleBlock;
 import xyz.pixelatedw.mineminenomi.api.json.models.block.JSONModelBars;
@@ -62,9 +63,8 @@ import xyz.pixelatedw.mineminenomi.items.dials.FlashDialItem;
 import xyz.pixelatedw.mineminenomi.items.dials.ImpactDialItem;
 import xyz.pixelatedw.mineminenomi.items.dials.MilkyDialItem;
 import xyz.pixelatedw.mineminenomi.items.dials.RejectDialItem;
-import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
 
-@Mod.EventBusSubscriber(modid = ModValuesEnv.PROJECT_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = Env.PROJECT_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModBlocks
 {
 

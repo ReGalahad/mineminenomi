@@ -5,9 +5,9 @@ import java.util.Random;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
+import xyz.pixelatedw.mineminenomi.init.ModParticleTextures;
 import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
-import xyz.pixelatedw.mineminenomi.values.ModValuesParticles;
 
 public class ParticleEffectDaiEnkai2 extends ParticleEffect
 {
@@ -33,7 +33,7 @@ public class ParticleEffectDaiEnkai2 extends ParticleEffect
 				motionY = 0.05 + (rand.nextDouble() / 10);
 				motionZ = z / 10;
 
-				SimpleParticle cp = new SimpleParticle(world, ModValuesParticles.PARTICLE_ICON_MERA,
+				SimpleParticle cp = new SimpleParticle(world, ModParticleTextures.MERA,
 						posX + (x * 1.25) + WyMathHelper.randomDouble(), 
 						posY + y,
 						posZ + (z * 1.25) + WyMathHelper.randomDouble(), 
@@ -44,7 +44,7 @@ public class ParticleEffectDaiEnkai2 extends ParticleEffect
 						.setParticleAge(-3);
 				Minecraft.getInstance().particles.addEffect(cp);
 
-				cp = new SimpleParticle(world, ModValuesParticles.PARTICLE_ICON_MERA,
+				cp = new SimpleParticle(world, ModParticleTextures.MERA,
 						posX + (x * 2.0) + WyMathHelper.randomDouble(), 
 						posY + y,
 						posZ + (z * 2.0) + WyMathHelper.randomDouble(), 
@@ -55,7 +55,7 @@ public class ParticleEffectDaiEnkai2 extends ParticleEffect
 						.setParticleAge(1);
 				Minecraft.getInstance().particles.addEffect(cp);
 				
-				cp = new SimpleParticle(world, ModValuesParticles.PARTICLE_ICON_MERA,
+				cp = new SimpleParticle(world, ModParticleTextures.MERA,
 						posX + (x * 3.25) + WyMathHelper.randomDouble(), 
 						posY + y,
 						posZ + (z * 3.25) + WyMathHelper.randomDouble(), 

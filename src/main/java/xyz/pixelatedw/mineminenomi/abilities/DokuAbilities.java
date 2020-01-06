@@ -13,10 +13,10 @@ import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.mineminenomi.init.ModNetwork;
+import xyz.pixelatedw.mineminenomi.init.ModValues;
 import xyz.pixelatedw.mineminenomi.packets.server.SParticlesPacket;
 import xyz.pixelatedw.mineminenomi.particles.effects.doku.DokuGumoParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.doku.VenomDemonParticleEffect;
-import xyz.pixelatedw.mineminenomi.values.ModValues;
 
 public class DokuAbilities 
 {

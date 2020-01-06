@@ -17,6 +17,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedOutEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
+import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.data.abilitydata.AbilityDataCapability;
 import xyz.pixelatedw.mineminenomi.api.data.abilitydata.IAbilityData;
@@ -30,9 +31,8 @@ import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.events.custom.YomiTriggerEvent;
-import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
 
-@Mod.EventBusSubscriber(modid = ModValuesEnv.PROJECT_ID)
+@Mod.EventBusSubscriber(modid = Env.PROJECT_ID)
 public class EventsCore
 {
 	// Cloning the player data to the new entity based on the config option
@@ -155,7 +155,7 @@ public class EventsCore
 				{
 					try 
 					{
-						String[] version = ModValuesEnv.PROJECT_VERSION.replaceAll("[^0-9.]", "").split("\\.");
+						String[] version = Env.PROJECT_VERSION.replaceAll("[^0-9.]", "").split("\\.");
 						
 						int currentX = Integer.parseInt(version[0]) * 100;
 						int currentY = Integer.parseInt(version[1]) * 10;
@@ -163,7 +163,7 @@ public class EventsCore
 						
 						int currentVersion = currentX + currentY + currentZ;
 						
-						String apiURL = "/version?minecraft-version=" + ModValuesEnv.PROJECT_MCVERSION;
+						String apiURL = "/version?minecraft-version=" + Env.PROJECT_MCVERSION;
 						
 						String result = WyTelemetry.sendGET(apiURL);
 						

@@ -3,9 +3,9 @@ package xyz.pixelatedw.mineminenomi.particles.effects.suna;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
+import xyz.pixelatedw.mineminenomi.init.ModParticleTextures;
 import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
-import xyz.pixelatedw.mineminenomi.values.ModValuesParticles;
 
 public class ParticleEffectDesertGirasole extends ParticleEffect
 {
@@ -18,7 +18,7 @@ public class ParticleEffectDesertGirasole extends ParticleEffect
 			double offsetX = WyMathHelper.randomWithRange(-15, 15);
 			double offsetZ = WyMathHelper.randomWithRange(-15, 15);
 			
-			SimpleParticle cp = new SimpleParticle(world, ModValuesParticles.PARTICLE_ICON_SUNA2,
+			SimpleParticle cp = new SimpleParticle(world, ModParticleTextures.SUNA2,
 					posX + offsetX + WyMathHelper.randomDouble(), 
 					posY + 0.5 - (0.15 * i),
 					posZ + offsetZ + WyMathHelper.randomDouble(), 

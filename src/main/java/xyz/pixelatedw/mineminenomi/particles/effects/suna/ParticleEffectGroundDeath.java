@@ -3,9 +3,9 @@ package xyz.pixelatedw.mineminenomi.particles.effects.suna;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
+import xyz.pixelatedw.mineminenomi.init.ModParticleTextures;
 import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
-import xyz.pixelatedw.mineminenomi.values.ModValuesParticles;
 
 public class ParticleEffectGroundDeath extends ParticleEffect
 {
@@ -30,7 +30,7 @@ public class ParticleEffectGroundDeath extends ParticleEffect
 				motionY = 0;
 				motionZ = z / 2 + WyMathHelper.randomDouble();
 
-				SimpleParticle cp = new SimpleParticle(world, ModValuesParticles.PARTICLE_ICON_SUNA2,
+				SimpleParticle cp = new SimpleParticle(world, ModParticleTextures.SUNA2,
 						posX + (x * 1.25), 
 						posY + 0.5 + y,
 						posZ + (z * 1.25), 

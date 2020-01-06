@@ -12,6 +12,7 @@ import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.ID;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.WyRenderHelper;
@@ -24,10 +25,9 @@ import xyz.pixelatedw.mineminenomi.models.effects.CandleLockModel;
 import xyz.pixelatedw.mineminenomi.models.effects.ChainsModel;
 import xyz.pixelatedw.mineminenomi.renderers.effects.CandleLockRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.effects.ChainsRenderer;
-import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
 
 @OnlyIn(Dist.CLIENT)
-@Mod.EventBusSubscriber(modid = ModValuesEnv.PROJECT_ID, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = Env.PROJECT_ID, value = Dist.CLIENT)
 public class EventsEffectOverlay
 {
 	private static CandleLockRenderer candleLock = new CandleLockRenderer(new CandleLockModel());

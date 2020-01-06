@@ -2,10 +2,10 @@ package xyz.pixelatedw.mineminenomi.packets.server;
 
 import java.util.function.Supplier;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
-import xyz.pixelatedw.mineminenomi.ModMain;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 
@@ -76,7 +76,7 @@ public class SParticlesPacket
 		{
 			ctx.get().enqueueWork(() ->
 			{
-				message.effect.spawn(ModMain.proxy.getClientWorld(), message.posX, message.posY, message.posZ, message.motionX, message.motionX, message.motionZ);
+				message.effect.spawn(Minecraft.getInstance().world, message.posX, message.posY, message.posZ, message.motionX, message.motionX, message.motionZ);
 			});
 		}
 

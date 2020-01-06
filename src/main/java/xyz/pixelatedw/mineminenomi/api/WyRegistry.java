@@ -16,9 +16,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Item.Properties;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.SpawnEggItem;
+import net.minecraft.particles.IParticleData.IDeserializer;
+import net.minecraft.particles.ParticleType;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.ModEnchantment;
+import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.api.json.loottables.IJSONLootTable;
 import xyz.pixelatedw.mineminenomi.api.json.models.JSONModelBlock;
 import xyz.pixelatedw.mineminenomi.api.json.models.JSONModelItem;
@@ -27,7 +29,7 @@ import xyz.pixelatedw.mineminenomi.api.json.models.item.JSONModelItemBlock;
 import xyz.pixelatedw.mineminenomi.api.json.models.item.JSONModelSimpleItem;
 import xyz.pixelatedw.mineminenomi.api.json.models.item.JSONModelSpawnEgg;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
-import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
+import xyz.pixelatedw.mineminenomi.particles.data.GenericParticleData;
 
 public class WyRegistry
 {
@@ -40,6 +42,16 @@ public class WyRegistry
 	public static HashMap<Object, IJSONLootTable> lootTables = new HashMap<Object, IJSONLootTable>();
 	public static HashMap<String, String> langMap = new HashMap<String, String>();
 
+	public static ParticleType registerGenericParticleType(String id)
+	{
+		return registerGenericParticleType(id, GenericParticleData.DESERIALIZER);
+	}
+	
+	public static ParticleType registerGenericParticleType(String id, IDeserializer<?> deserializer)
+	{
+		return new ParticleType<>(true, deserializer).setRegistryName(Env.PROJECT_ID, id);
+	}
+	
 	public static void registerLootTable(Object obj, IJSONLootTable json)
 	{
 		lootTables.put(obj, json);
@@ -86,8 +98,8 @@ public class WyRegistry
 	public static Block registerBlock(Block block, String localizedName, JSONModelBlock jsonType)
 	{
 		String truename = WyHelper.getFancyName(localizedName);
-		langMap.put("block." + ModValuesEnv.PROJECT_ID + "." + truename, localizedName);
-		block.setRegistryName(ModValuesEnv.PROJECT_ID, truename);
+		langMap.put("block." + Env.PROJECT_ID + "." + truename, localizedName);
+		block.setRegistryName(Env.PROJECT_ID, truename);
 		
 		blocks.put(block, jsonType);
 		
@@ -99,7 +111,7 @@ public class WyRegistry
 		String name = WyHelper.getFancyName(id);
 
 		TileEntityType<?> type = TileEntityType.Builder.create(factory, blocks).build(null);
-		type.setRegistryName(ModValuesEnv.PROJECT_ID, name);
+		type.setRegistryName(Env.PROJECT_ID, name);
 		
 		return type;
 	}
@@ -125,8 +137,8 @@ public class WyRegistry
 	public static Item registerItem(Item item, String localizedName, JSONModelItem jsonType)
 	{
 		String truename = WyHelper.getFancyName(localizedName);
-		langMap.put("item." + ModValuesEnv.PROJECT_ID + "." + truename, localizedName);
-		item.setRegistryName(ModValuesEnv.PROJECT_ID, truename);
+		langMap.put("item." + Env.PROJECT_ID + "." + truename, localizedName);
+		item.setRegistryName(Env.PROJECT_ID, truename);
 		
 		items.put(item, jsonType);
 
@@ -144,8 +156,8 @@ public class WyRegistry
 		String langKey = type.getRegistryName().getPath() + "_spawn_egg";
 		String localizedName = "Spawn " + builder.toString().trim();
 
-		langMap.put("item." + ModValuesEnv.PROJECT_ID + "." + langKey, localizedName);
-		egg.setRegistryName(ModValuesEnv.PROJECT_ID, langKey);
+		langMap.put("item." + Env.PROJECT_ID + "." + langKey, localizedName);
+		egg.setRegistryName(Env.PROJECT_ID, langKey);
 
 		items.put(egg, new JSONModelSpawnEgg(langKey));
 
@@ -168,13 +180,13 @@ public class WyRegistry
 			.setCustomClientFactory((entity, world) -> func.apply(world))
 			.size(width, height)
 			.build(name)
-			.setRegistryName(ModValuesEnv.PROJECT_ID, name);
+			.setRegistryName(Env.PROJECT_ID, name);
 		
 		StringBuilder builder = new StringBuilder();
 		String[] strs = name.split("_");
 		Arrays.stream(strs).forEach(x -> builder.append(WyHelper.upperCaseFirst(x)));	
 		
-		langMap.put("entity." + ModValuesEnv.PROJECT_ID + "." + name, builder.toString().trim());
+		langMap.put("entity." + Env.PROJECT_ID + "." + name, builder.toString().trim());
 		
 		return type;
 	}
@@ -182,8 +194,8 @@ public class WyRegistry
 	public static Enchantment registerEnchantment(String name)
 	{
 		String truename = name.toLowerCase().replace(" ", "_");
-		ModEnchantment ench = new ModEnchantment(truename, Enchantment.Rarity.RARE, EquipmentSlotType.MAINHAND);
-		registerName("enchantment." + ModValuesEnv.PROJECT_ID + "." + truename, name);
+		GenericEnchantment ench = new GenericEnchantment(truename, Enchantment.Rarity.RARE, EquipmentSlotType.MAINHAND);
+		registerName("enchantment." + Env.PROJECT_ID + "." + truename, name);
 		
 		return ench;
 	}

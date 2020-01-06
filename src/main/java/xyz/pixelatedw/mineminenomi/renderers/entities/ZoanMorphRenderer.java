@@ -20,17 +20,17 @@ import net.minecraft.util.HandSide;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
+import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfo;
 import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.models.entities.zoans.ZoanMorphModel;
-import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
 
 public class ZoanMorphRenderer extends LivingRenderer
 {
-	private ResourceLocation texture = new ResourceLocation(ModValuesEnv.PROJECT_ID, "textures/models/null.png");
+	private ResourceLocation texture = new ResourceLocation(Env.PROJECT_ID, "textures/models/null.png");
 	private EntityModel model;
 	private double scale;
 	private float offset[] = new float[3];
@@ -54,7 +54,7 @@ public class ZoanMorphRenderer extends LivingRenderer
 		this.shadowSize = 0;
 		this.model = model;
 		this.scale = scale;
-		this.texture = new ResourceLocation(ModValuesEnv.PROJECT_ID, "textures/models/zoanmorph/" + texture + ".png");
+		this.texture = new ResourceLocation(Env.PROJECT_ID, "textures/models/zoanmorph/" + texture + ".png");
 		this.offset = offset;
 		this.addLayer(new HeldItemLayer<>(this));
 	}

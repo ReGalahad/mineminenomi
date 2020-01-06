@@ -4,9 +4,9 @@ import java.util.Random;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
+import xyz.pixelatedw.mineminenomi.init.ModParticleTextures;
 import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
-import xyz.pixelatedw.mineminenomi.values.ModValuesParticles;
 
 public class ParticleEffectDesertEncierro extends ParticleEffect
 {
@@ -32,7 +32,7 @@ public class ParticleEffectDesertEncierro extends ParticleEffect
 				motionY = 0.1 + (rand.nextDouble() / 10);
 				motionZ = -z / 10;
 
-				SimpleParticle cp = new SimpleParticle(world, ModValuesParticles.PARTICLE_ICON_SUNA,
+				SimpleParticle cp = new SimpleParticle(world, ModParticleTextures.SUNA,
 						posX + (x * 1.25), 
 						posY + 0.5 + y,
 						posZ + (z * 1.25), 
@@ -42,7 +42,7 @@ public class ParticleEffectDesertEncierro extends ParticleEffect
 						.setParticleAge(-3).setParticleScale(3.3F);
 				Minecraft.getInstance().particles.addEffect(cp);
 				
-				cp = new SimpleParticle(world, ModValuesParticles.PARTICLE_ICON_SUNA,
+				cp = new SimpleParticle(world, ModParticleTextures.SUNA,
 						posX + (x * 1.25), 
 						posY + 2.5 + y,
 						posZ + (z * 1.25), 

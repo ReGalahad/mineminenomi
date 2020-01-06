@@ -5,9 +5,9 @@ import java.awt.Color;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
+import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.api.abilities.extra.EffectType;
 import xyz.pixelatedw.mineminenomi.api.abilities.extra.ModelType;
-import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
 
 public class AbilityAttribute 
 {	
@@ -127,7 +127,7 @@ public class AbilityAttribute
 	public AbilityAttribute setProjectileExplosion(int i, boolean fire) {this.projectileExplosionPower = i;this.projectileExplosionHasFire = fire;return this;}
 	public AbilityAttribute setProjectileExplosion(int i) {this.projectileExplosionPower = i;return this;}
 	public AbilityAttribute setProjectileSpeed(float speed) {this.projectileSpeed = speed; return this;}
-	public AbilityAttribute setProjectileTexture(String textureName) {this.projectileTexture = new ResourceLocation(ModValuesEnv.PROJECT_ID + ":textures/models/projectiles/" + textureName +".png"); return this;}
+	public AbilityAttribute setProjectileTexture(String textureName) {this.projectileTexture = new ResourceLocation(Env.PROJECT_ID + ":textures/models/projectiles/" + textureName +".png"); return this;}
 	public AbilityAttribute setProjectileXRotation(double angle) { projectileXRotation = angle; return this;}
 	public AbilityAttribute setProjectileYRotation(double angle) { projectileYRotation = angle; return this;}
 	public AbilityAttribute setProjectileZRotation(double angle) { projectileZRotation = angle; return this;}

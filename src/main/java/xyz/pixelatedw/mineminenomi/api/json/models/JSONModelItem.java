@@ -9,8 +9,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
 
 public abstract class JSONModelItem implements IJSONModel
 {
@@ -22,14 +22,14 @@ public abstract class JSONModelItem implements IJSONModel
 	{
 		this.itemName = WyHelper.getFancyName(itemName);
 		this.parentItemName = "item/generated";
-		this.template = new File(ModValuesEnv.projectResourceFolder + "/data/" + ModValuesEnv.PROJECT_ID + "/json_templates/models/item/" + template + ".json");
+		this.template = new File(Env.projectResourceFolder + "/data/" + Env.PROJECT_ID + "/json_templates/models/item/" + template + ".json");
 	}
 	
 	public JSONModelItem(String itemName, String template, String parentItemName)
 	{
 		this.itemName = WyHelper.getFancyName(itemName);
-		this.parentItemName = ModValuesEnv.PROJECT_ID + ":item/" + parentItemName;
-		this.template = new File(ModValuesEnv.projectResourceFolder + "/data/" + ModValuesEnv.PROJECT_ID + "/json_templates/models/item/" + template + ".json");
+		this.parentItemName = Env.PROJECT_ID + ":item/" + parentItemName;
+		this.template = new File(Env.projectResourceFolder + "/data/" + Env.PROJECT_ID + "/json_templates/models/item/" + template + ".json");
 	}
 	
 	public String[] replaceMarkedElements()
@@ -43,7 +43,7 @@ public abstract class JSONModelItem implements IJSONModel
 			{
 				String formattedLine = line;
 				if(line.contains("${modid}"))
-					formattedLine = formattedLine.replace("${modid}", ModValuesEnv.PROJECT_ID);
+					formattedLine = formattedLine.replace("${modid}", Env.PROJECT_ID);
 				
 				if(line.contains("${texture}"))
 					formattedLine = formattedLine.replace("${texture}", this.getItemName());

@@ -3,10 +3,10 @@ package xyz.pixelatedw.mineminenomi.particles.effects.yami;
 import java.util.Timer;
 
 import net.minecraft.world.World;
+import xyz.pixelatedw.mineminenomi.init.ModParticleTextures;
 import xyz.pixelatedw.mineminenomi.particles.CustomParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.tasks.ParticleTaskTornado;
-import xyz.pixelatedw.mineminenomi.values.ModValuesParticles;
 
 public class ParticleEffectDarkMatter extends ParticleEffect
 {
@@ -16,7 +16,7 @@ public class ParticleEffectDarkMatter extends ParticleEffect
 	{
 		Timer timer = new Timer(true); 
 		
-		CustomParticle particle = new CustomParticle(player.world, ModValuesParticles.PARTICLE_ICON_DARKNESS,
+		CustomParticle particle = new CustomParticle(player.world, ModParticleTextures.DARKNESS,
 				posX, 
 				posY + 1,
 				posZ, 

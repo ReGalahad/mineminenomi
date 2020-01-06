@@ -15,7 +15,7 @@ import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.GomuProjectiles;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModExtraAttributes;
-import xyz.pixelatedw.mineminenomi.values.ModValues;
+import xyz.pixelatedw.mineminenomi.init.ModValues;
 
 public class GomuAbilities 
 {

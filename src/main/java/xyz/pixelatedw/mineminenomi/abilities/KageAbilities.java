@@ -9,7 +9,7 @@ import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.KageProjectiles.T
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.EntityDoppelman;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModExtraAttributes;
-import xyz.pixelatedw.mineminenomi.values.ModValues;
+import xyz.pixelatedw.mineminenomi.init.ModValues;
 
 public class KageAbilities
 {

@@ -18,8 +18,8 @@ import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
 import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
+import xyz.pixelatedw.mineminenomi.init.ModParticleTextures;
 import xyz.pixelatedw.mineminenomi.particles.CustomParticleData;
-import xyz.pixelatedw.mineminenomi.values.ModValuesParticles;
 
 public class CyborgProjectiles 
 {
@@ -135,7 +135,7 @@ public class CyborgProjectiles
 			if(this.world.isRemote)
 			{
 				CustomParticleData data = new CustomParticleData();
-				data.setTexture(ModValuesParticles.PARTICLE_ICON_MERA);
+				data.setTexture(ModParticleTextures.MERA);
 				data.setPosX(posX);
 				data.setPosY(posY + 0.5);
 				data.setPosZ(posZ);

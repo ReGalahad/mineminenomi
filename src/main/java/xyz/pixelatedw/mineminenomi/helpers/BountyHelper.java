@@ -2,10 +2,10 @@ package xyz.pixelatedw.mineminenomi.helpers;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.ID;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
+import xyz.pixelatedw.mineminenomi.init.ModValues;
 
 public class BountyHelper
 {
@@ -15,7 +15,7 @@ public class BountyHelper
 		ExtendedWorldData worldData = ExtendedWorldData.get(player.world);
 		IEntityStats props = EntityStatsCapability.get(player);
 		
-		if(props.getFaction().equalsIgnoreCase(ID.FACTION_PIRATE) && props.getBounty() > 1000)
+		if(props.getFaction().equalsIgnoreCase(ModValues.PIRATE) && props.getBounty() > 1000)
 		{
 			worldData.issueBounty(player.getUniqueID().toString(), props.getBounty());		
 			return true;

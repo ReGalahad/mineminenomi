@@ -9,10 +9,10 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.config.GuiUtils;
-import xyz.pixelatedw.mineminenomi.ID;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.init.ModNetwork;
+import xyz.pixelatedw.mineminenomi.init.ModValues;
 import xyz.pixelatedw.mineminenomi.packets.client.CDeleteCCBookPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CEntityStatsSyncPacket;
 import xyz.pixelatedw.mineminenomi.screens.extra.NoTextureButton;
@@ -194,17 +194,17 @@ public class CharacterCreatorScreen extends Screen
 		// Finish button
 		this.addButton(new NoTextureButton(posX + 97, posY + 195, 90, 35, "", b -> 
 		{
-			if(lastFac == 0) props.setFaction(ID.FACTION_PIRATE);
-			else if(lastFac == 1) props.setFaction(ID.FACTION_MARINE);
-			else if(lastFac == 2) props.setFaction(ID.FACTION_BOUNTYHUNTER);
+			if(lastFac == 0) props.setFaction(ModValues.PIRATE);
+			else if(lastFac == 1) props.setFaction(ModValues.MARINE);
+			else if(lastFac == 2) props.setFaction(ModValues.BOUNTY_HUNTER);
 			
-			if(lastRace == 0) props.setRace(ID.RACE_HUMAN);
-			else if(lastRace == 1) props.setRace(ID.RACE_FISHMAN);
-			else if(lastRace == 2) props.setRace(ID.RACE_CYBORG);
+			if(lastRace == 0) props.setRace(ModValues.HUMAN);
+			else if(lastRace == 1) props.setRace(ModValues.FISHMAN);
+			else if(lastRace == 2) props.setRace(ModValues.CYBORG);
 			
-			if(lastFStyle == 0) props.setFightingStyle(ID.FSTYLE_SWORDSMAN);
-			else if(lastFStyle == 1) props.setFightingStyle(ID.FSTYLE_SNIPER);
-			else if(lastFStyle == 2) props.setFightingStyle(ID.FSTYLE_DOCTOR);
+			if(lastFStyle == 0) props.setFightingStyle(ModValues.SWORDSMAN);
+			else if(lastFStyle == 1) props.setFightingStyle(ModValues.SNIPER);
+			else if(lastFStyle == 2) props.setFightingStyle(ModValues.DOCTOR);
 			
 			switch(page)
 			{
@@ -213,13 +213,13 @@ public class CharacterCreatorScreen extends Screen
 					switch(selectedOpt)
 					{
 					case 0:
-						props.setFaction(ID.FACTION_PIRATE);
+						props.setFaction(ModValues.PIRATE);
 						break;
 					case 1:
-						props.setFaction(ID.FACTION_MARINE);
+						props.setFaction(ModValues.MARINE);
 						break;
 					case 2:
-						props.setFaction(ID.FACTION_BOUNTYHUNTER);
+						props.setFaction(ModValues.BOUNTY_HUNTER);
 						break;
 					}
 					break;
@@ -229,13 +229,13 @@ public class CharacterCreatorScreen extends Screen
 					switch(selectedOpt)
 					{
 					case 0:
-						props.setRace(ID.RACE_HUMAN);
+						props.setRace(ModValues.HUMAN);
 						break;
 					case 1:
-						props.setRace(ID.RACE_FISHMAN);
+						props.setRace(ModValues.FISHMAN);
 						break;
 					case 2:
-						props.setRace(ID.RACE_CYBORG);
+						props.setRace(ModValues.CYBORG);
 						break;
 					}
 					break;					
@@ -245,13 +245,13 @@ public class CharacterCreatorScreen extends Screen
 					switch(selectedOpt)
 					{
 					case 0:
-						props.setFightingStyle(ID.FSTYLE_SWORDSMAN);
+						props.setFightingStyle(ModValues.SWORDSMAN);
 						break;
 					case 1:
-						props.setFightingStyle(ID.FSTYLE_SNIPER);
+						props.setFightingStyle(ModValues.SNIPER);
 						break;
 					case 2:
-						props.setFightingStyle(ID.FSTYLE_DOCTOR);
+						props.setFightingStyle(ModValues.DOCTOR);
 						break;
 					}
 					break;					

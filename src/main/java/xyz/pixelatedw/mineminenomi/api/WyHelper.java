@@ -41,6 +41,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.LogicalSidedProvider;
 import net.minecraftforge.registries.ForgeRegistries;
+import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.api.abilities.extra.AbilityExplosion;
 import xyz.pixelatedw.mineminenomi.api.debug.WyDebug;
 import xyz.pixelatedw.mineminenomi.api.math.ISphere;
@@ -49,7 +50,6 @@ import xyz.pixelatedw.mineminenomi.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
-import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
 
 public class WyHelper
 {
@@ -680,17 +680,17 @@ public class WyHelper
 
 	public static boolean isDevBuild()
 	{
-		return ModValuesEnv.BUILD_MODE.equalsIgnoreCase("DEV");
+		return Env.BUILD_MODE.equalsIgnoreCase("DEV");
 	}
 
 	public static boolean isEarlyAccessBuild()
 	{
-		return ModValuesEnv.BUILD_MODE.equalsIgnoreCase("EARLY_ACCESS");
+		return Env.BUILD_MODE.equalsIgnoreCase("EARLY_ACCESS");
 	}
 
 	public static boolean isReleaseBuild()
 	{
-		return ModValuesEnv.BUILD_MODE.equalsIgnoreCase("RELEASE");
+		return Env.BUILD_MODE.equalsIgnoreCase("RELEASE");
 	}
 
 	public static boolean hasPatreonAccess(PlayerEntity player)

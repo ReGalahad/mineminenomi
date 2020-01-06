@@ -11,9 +11,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.init.ModArmors;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
-import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
 
 public class BasicArmorItem extends ArmorItem
 {
@@ -39,6 +39,6 @@ public class BasicArmorItem extends ArmorItem
 	@Nullable
 	public String getArmorTexture(ItemStack itemStack, Entity entity, EquipmentSlotType slot, String type)
 	{
-		return String.format("%s:textures/models/armor/%s_%d.png", ModValuesEnv.PROJECT_ID, this.name, slot == EquipmentSlotType.LEGS ? 2 : 1);
+		return String.format("%s:textures/models/armor/%s_%d.png", Env.PROJECT_ID, this.name, slot == EquipmentSlotType.LEGS ? 2 : 1);
 	}
 }

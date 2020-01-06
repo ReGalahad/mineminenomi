@@ -12,11 +12,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.init.ModArmors;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
 import xyz.pixelatedw.mineminenomi.models.CaptainCapeModel;
-import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
 
 public class CaptainCapeItem extends ArmorItem
 {
@@ -55,7 +55,7 @@ public class CaptainCapeItem extends ArmorItem
 		if(WyHelper.isNullOrEmpty(itemStack.getTag().getString("Type")))
 			itemStack.getTag().putString("Type", Type.JUSTICE.getType());
 			
-		return String.format("%s:textures/models/armor/capes/captain_cape_%s.png", ModValuesEnv.PROJECT_ID, itemStack.getTag().getString("Type"));
+		return String.format("%s:textures/models/armor/capes/captain_cape_%s.png", Env.PROJECT_ID, itemStack.getTag().getString("Type"));
 	}
 	
 	public static enum Type

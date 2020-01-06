@@ -5,6 +5,7 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
+import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.api.network.WyNetworkHelper;
 import xyz.pixelatedw.mineminenomi.api.network.packets.client.CAbilityDataSyncPacket;
 import xyz.pixelatedw.mineminenomi.api.network.packets.client.CQuestDataSyncPacket;
@@ -25,12 +26,11 @@ import xyz.pixelatedw.mineminenomi.packets.server.SSpawnLightningPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SSpecialFlyingPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SUpdateMotionPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SViewProtectionPacket;
-import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
 
 public class ModNetwork
 {
 	private static final String PROTOCOL_VERSION = Integer.toString(1);
-	public static SimpleChannel channel = NetworkRegistry.ChannelBuilder.named(new ResourceLocation(ModValuesEnv.PROJECT_ID, "main_channel")).clientAcceptedVersions(PROTOCOL_VERSION::equals).serverAcceptedVersions(PROTOCOL_VERSION::equals).networkProtocolVersion(() -> PROTOCOL_VERSION).simpleChannel();
+	public static SimpleChannel channel = NetworkRegistry.ChannelBuilder.named(new ResourceLocation(Env.PROJECT_ID, "main_channel")).clientAcceptedVersions(PROTOCOL_VERSION::equals).serverAcceptedVersions(PROTOCOL_VERSION::equals).networkProtocolVersion(() -> PROTOCOL_VERSION).simpleChannel();
 
 	public static void init() 
 	{

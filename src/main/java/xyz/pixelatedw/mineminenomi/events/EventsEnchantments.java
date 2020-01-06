@@ -8,12 +8,12 @@ import net.minecraft.potion.Effects;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.extra.AbilityExplosion;
-import xyz.pixelatedw.mineminenomi.init.ModEffects;
-import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
+import xyz.pixelatedw.mineminenomi.init.ModEnchantments;
 
-@Mod.EventBusSubscriber(modid = ModValuesEnv.PROJECT_ID)
+@Mod.EventBusSubscriber(modid = Env.PROJECT_ID)
 public class EventsEnchantments
 {
 
@@ -27,7 +27,7 @@ public class EventsEnchantments
 			
 			if(heldItem != null && heldItem.isEnchanted() && !player.world.isRemote)
 			{
-				int impactDialLevel = EnchantmentHelper.getEnchantmentLevel(ModEffects.dialImpact, heldItem);
+				int impactDialLevel = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.DIAL_IMPACT, heldItem);
 				if(impactDialLevel > 0)
 				{
 					AbilityExplosion explosion = WyHelper.newExplosion(player, event.getEntityLiving().posX, event.getEntityLiving().posY, event.getEntityLiving().posZ, impactDialLevel);
@@ -36,7 +36,7 @@ public class EventsEnchantments
 					explosion.doExplosion();
 				}
 				
-				int flashDialLevel = EnchantmentHelper.getEnchantmentLevel(ModEffects.dialFlash, heldItem);
+				int flashDialLevel = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.DIAL_FLASH, heldItem);
 				if(flashDialLevel > 0)
 				{
 					event.getEntityLiving().addPotionEffect(new EffectInstance(Effects.BLINDNESS, 200 * flashDialLevel, flashDialLevel));

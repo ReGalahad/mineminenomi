@@ -15,15 +15,15 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.client.config.GuiUtils;
+import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.blocks.WantedPosterBlock;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.WantedPosterTileEntity;
 import xyz.pixelatedw.mineminenomi.models.blocks.WantedPosterModel;
-import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
 
 public class WantedPosterTileEntityRenderer extends TileEntityRenderer<WantedPosterTileEntity>
 {
-	private final ResourceLocation texture = new ResourceLocation(ModValuesEnv.PROJECT_ID + ":textures/models/wantedposter.png");
+	private final ResourceLocation texture = new ResourceLocation(Env.PROJECT_ID + ":textures/models/wantedposter.png");
 	private WantedPosterModel posterModel;
 	private Minecraft minecraft;
 
@@ -90,7 +90,7 @@ public class WantedPosterTileEntityRenderer extends TileEntityRenderer<WantedPos
 
 				GlStateManager.pushMatrix();
 				{
-					rs = new ResourceLocation(ModValuesEnv.PROJECT_ID, "textures/gui/wantedposters/backgrounds/" + tileEntity.getBackground() + ".png");
+					rs = new ResourceLocation(Env.PROJECT_ID, "textures/gui/wantedposters/backgrounds/" + tileEntity.getBackground() + ".png");
 					this.bindTexture(rs);
 
 					GL11.glTranslated(50, -50, 0.015);

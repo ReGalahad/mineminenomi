@@ -13,7 +13,7 @@ import xyz.pixelatedw.mineminenomi.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
-import xyz.pixelatedw.mineminenomi.values.ModValues;
+import xyz.pixelatedw.mineminenomi.init.ModValues;
 
 public class BellyPouchItem extends Item
 {

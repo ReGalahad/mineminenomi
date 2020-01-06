@@ -15,13 +15,13 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.init.ModArmors;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
 import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.packets.server.SEntityStatsSyncPacket;
-import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
 
 public class ColaBackpackItem extends ArmorItem
 {
@@ -44,7 +44,7 @@ public class ColaBackpackItem extends ArmorItem
 	@Nullable
 	public String getArmorTexture(ItemStack itemStack, Entity entity, EquipmentSlotType slot, String type)
 	{
-		return String.format("%s:textures/models/armor/cola_backpack.png", ModValuesEnv.PROJECT_ID);
+		return String.format("%s:textures/models/armor/cola_backpack.png", Env.PROJECT_ID);
 	}
 
 	@Override

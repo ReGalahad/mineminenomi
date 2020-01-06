@@ -7,16 +7,11 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 
-public class ModEffects
-{
-	public static Enchantment dialImpact, dialFlash, kairoseki;
-
-	public static void init()
-	{		
-		dialImpact = WyRegistry.registerEnchantment("Impact Dial");
-		kairoseki  = WyRegistry.registerEnchantment("Kairoseki");
-		dialFlash = WyRegistry.registerEnchantment("Flash Dial");
-	}
+public class ModEnchantments
+{	
+	public static final Enchantment DIAL_IMPACT = WyRegistry.registerEnchantment("Impact Dial");
+	public static final Enchantment DIAL_FLASH = WyRegistry.registerEnchantment("Kairoseki");
+	public static final Enchantment KAIROSEKI = WyRegistry.registerEnchantment("Flash Dial");
 	
 	@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 	public static class Registry
@@ -29,9 +24,9 @@ public class ModEffects
 
 			event.getRegistry().registerAll
 			(
-				ModEffects.dialImpact, 
-				ModEffects.dialFlash, 
-				ModEffects.kairoseki
+				DIAL_IMPACT, DIAL_FLASH,
+				
+				KAIROSEKI
 			);
 		}	
 	}

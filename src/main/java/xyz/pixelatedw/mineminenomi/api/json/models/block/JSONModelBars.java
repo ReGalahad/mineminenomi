@@ -6,8 +6,8 @@ import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 
+import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.api.json.models.JSONModelBlock;
-import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
 
 public class JSONModelBars extends JSONModelBlock
 {
@@ -24,9 +24,9 @@ public class JSONModelBars extends JSONModelBlock
 	{
 		for(String component : this.paneComponents)
 		{
-			this.paneComponentTemplate = new File(ModValuesEnv.projectResourceFolder + "/data/" + ModValuesEnv.PROJECT_ID + "/json_templates/models/block/pane" + component + ".json");
+			this.paneComponentTemplate = new File(Env.projectResourceFolder + "/data/" + Env.PROJECT_ID + "/json_templates/models/block/pane" + component + ".json");
 
-			File jsonModel = new File(ModValuesEnv.projectResourceFolder + "/assets/" + ModValuesEnv.PROJECT_ID + "/models/block/" + this.getBlockName() + "" + component + ".json");
+			File jsonModel = new File(Env.projectResourceFolder + "/assets/" + Env.PROJECT_ID + "/models/block/" + this.getBlockName() + "" + component + ".json");
 			if (jsonModel.exists())
 				continue;
 			

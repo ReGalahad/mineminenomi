@@ -19,8 +19,8 @@ import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
 import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
+import xyz.pixelatedw.mineminenomi.init.ModParticleTextures;
 import xyz.pixelatedw.mineminenomi.particles.CustomParticleData;
-import xyz.pixelatedw.mineminenomi.values.ModValuesParticles;
 
 public class HieProjectiles 
 {
@@ -78,7 +78,7 @@ public class HieProjectiles
 					double offsetZ = WyMathHelper.randomWithRange(-1, 1) + WyMathHelper.randomDouble();
 				    
 					CustomParticleData data = new CustomParticleData();
-					data.setTexture(ModValuesParticles.PARTICLE_ICON_HIE);
+					data.setTexture(ModParticleTextures.HIE);
 					data.setPosX(posX + offsetX);
 					data.setPosY(posY + offsetY);
 					data.setPosZ(posZ + offsetZ);
@@ -134,7 +134,7 @@ public class HieProjectiles
 				double offsetZ = WyMathHelper.randomDouble();
 			    
 				CustomParticleData data = new CustomParticleData();
-				data.setTexture(ModValuesParticles.PARTICLE_ICON_HIE);
+				data.setTexture(ModParticleTextures.HIE);
 				data.setPosX(posX + offsetX);
 				data.setPosY(posY + offsetY);
 				data.setPosZ(posZ + offsetZ);

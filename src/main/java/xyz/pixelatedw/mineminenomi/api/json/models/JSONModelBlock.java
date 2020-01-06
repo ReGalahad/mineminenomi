@@ -9,8 +9,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
 
 public abstract class JSONModelBlock implements IJSONModel
 {
@@ -20,8 +20,8 @@ public abstract class JSONModelBlock implements IJSONModel
 	public JSONModelBlock(String blockName, String blockTemplate, String blockStateTemplate)
 	{
 		this.blockName = WyHelper.getFancyName(blockName);
-		this.blockTemplate = new File(ModValuesEnv.projectResourceFolder + "/data/" + ModValuesEnv.PROJECT_ID + "/json_templates/models/block/" + blockTemplate + ".json");
-		this.blockStateTemplate = new File(ModValuesEnv.projectResourceFolder + "/data/" + ModValuesEnv.PROJECT_ID + "/json_templates/models/blockstate/" + blockStateTemplate + ".json");
+		this.blockTemplate = new File(Env.projectResourceFolder + "/data/" + Env.PROJECT_ID + "/json_templates/models/block/" + blockTemplate + ".json");
+		this.blockStateTemplate = new File(Env.projectResourceFolder + "/data/" + Env.PROJECT_ID + "/json_templates/models/blockstate/" + blockStateTemplate + ".json");
 	}
 
 	public abstract String[] getBlockStateModel();
@@ -37,7 +37,7 @@ public abstract class JSONModelBlock implements IJSONModel
 			{
 				String formattedLine = line;
 				if(line.contains("${modid}"))
-					formattedLine = formattedLine.replace("${modid}", ModValuesEnv.PROJECT_ID);
+					formattedLine = formattedLine.replace("${modid}", Env.PROJECT_ID);
 				
 				if(line.contains("${texture}"))
 					formattedLine = formattedLine.replace("${texture}", this.getBlockName());

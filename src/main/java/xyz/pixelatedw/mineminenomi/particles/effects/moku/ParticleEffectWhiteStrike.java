@@ -4,10 +4,10 @@ import java.util.Timer;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
+import xyz.pixelatedw.mineminenomi.init.ModParticleTextures;
 import xyz.pixelatedw.mineminenomi.particles.CustomParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.tasks.ParticleTaskWave;
-import xyz.pixelatedw.mineminenomi.values.ModValuesParticles;
 
 public class ParticleEffectWhiteStrike extends ParticleEffect
 {
@@ -17,7 +17,7 @@ public class ParticleEffectWhiteStrike extends ParticleEffect
 	{
 		Timer timer = new Timer(true); 
 		
-		CustomParticle cp = new CustomParticle(player.world, ModValuesParticles.PARTICLE_ICON_MOKU,
+		CustomParticle cp = new CustomParticle(player.world, ModParticleTextures.MOKU,
 				posX, 
 				posY - 0.8, 
 				posZ, 

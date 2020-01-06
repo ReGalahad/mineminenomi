@@ -8,10 +8,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 
+import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.debug.WyDebug;
-import xyz.pixelatedw.mineminenomi.values.ModValues;
-import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
+import xyz.pixelatedw.mineminenomi.init.ModValues;
 
 public class WyTelemetry
 {	
@@ -236,8 +236,8 @@ public class WyTelemetry
 		
 		public StatDataCompound()
 		{
-			this.mcVersion = ModValuesEnv.PROJECT_MCVERSION;
-			this.modVersion = ModValuesEnv.PROJECT_VERSION;
+			this.mcVersion = Env.PROJECT_MCVERSION;
+			this.modVersion = Env.PROJECT_VERSION;
 			this.source = 0;
 		}
 		

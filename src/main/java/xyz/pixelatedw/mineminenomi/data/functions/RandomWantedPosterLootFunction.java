@@ -11,9 +11,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootContext;
 import net.minecraft.world.storage.loot.LootFunction;
 import net.minecraft.world.storage.loot.conditions.ILootCondition;
+import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.helpers.ItemsHelper;
-import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
 
 public class RandomWantedPosterLootFunction extends LootFunction
 {
@@ -56,7 +56,7 @@ public class RandomWantedPosterLootFunction extends LootFunction
 	{
 		public Serializer()
 		{
-			super(new ResourceLocation(ModValuesEnv.PROJECT_ID + ":random_wanted_poster"), RandomWantedPosterLootFunction.class);
+			super(new ResourceLocation(Env.PROJECT_ID + ":random_wanted_poster"), RandomWantedPosterLootFunction.class);
 		}
 
 		@Override

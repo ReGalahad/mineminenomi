@@ -20,8 +20,8 @@ import xyz.pixelatedw.mineminenomi.api.data.questdata.QuestDataCapability;
 import xyz.pixelatedw.mineminenomi.api.debug.WyDebug;
 import xyz.pixelatedw.mineminenomi.api.quests.Quest;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
+import xyz.pixelatedw.mineminenomi.init.ModValues;
 import xyz.pixelatedw.mineminenomi.screens.extra.NoTextureButton;
-import xyz.pixelatedw.mineminenomi.values.ModValues;
 import xyz.pixelatedw.mineminenomi.values.ModValuesGUI;
 
 @OnlyIn(Dist.CLIENT)

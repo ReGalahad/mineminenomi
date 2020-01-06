@@ -3,10 +3,10 @@ package xyz.pixelatedw.mineminenomi.particles.effects.suna;
 import java.util.Timer;
 
 import net.minecraft.entity.player.PlayerEntity;
+import xyz.pixelatedw.mineminenomi.init.ModParticleTextures;
 import xyz.pixelatedw.mineminenomi.particles.CustomParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.tasks.ParticleTaskTornado;
-import xyz.pixelatedw.mineminenomi.values.ModValuesParticles;
 
 public class ParticleEffectSables extends ParticleEffect
 {
@@ -16,7 +16,7 @@ public class ParticleEffectSables extends ParticleEffect
 	{
 		Timer timer = new Timer(true); 
 		
-		CustomParticle particle = new CustomParticle(player.world, ModValuesParticles.PARTICLE_ICON_SUNA2,
+		CustomParticle particle = new CustomParticle(player.world, ModParticleTextures.SUNA2,
 				posX, 
 				posY - 1,
 				posZ, 

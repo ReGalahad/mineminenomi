@@ -1,7 +1,7 @@
 package xyz.pixelatedw.mineminenomi.data.entity.entitystats;
 
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.values.ModValues;
+import xyz.pixelatedw.mineminenomi.init.ModValues;
 
 public class EntityStatsBase implements IEntityStats
 {

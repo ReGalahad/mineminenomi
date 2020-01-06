@@ -3,9 +3,9 @@ package xyz.pixelatedw.mineminenomi.particles.effects.kachi;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
+import xyz.pixelatedw.mineminenomi.init.ModParticleTextures;
 import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
-import xyz.pixelatedw.mineminenomi.values.ModValuesParticles;
 
 public class ParticleEffectEvaporate extends ParticleEffect
 {
@@ -30,7 +30,7 @@ public class ParticleEffectEvaporate extends ParticleEffect
 	        motionY *= middlePoint / 2;
 	        motionZ *= middlePoint / 2;
 			
-			SimpleParticle cp = new SimpleParticle(world, ModValuesParticles.PARTICLE_ICON_MOKU,
+			SimpleParticle cp = new SimpleParticle(world, ModParticleTextures.MOKU,
 					posX + offsetX, 
 					posY + 1.5 + offsetY,
 					posZ + offsetZ, 
@@ -41,7 +41,7 @@ public class ParticleEffectEvaporate extends ParticleEffect
 					.setParticleAge(10);
 			Minecraft.getInstance().particles.addEffect(cp);
 			
-			cp = new SimpleParticle(world, ModValuesParticles.PARTICLE_ICON_MERA,
+			cp = new SimpleParticle(world, ModParticleTextures.MERA,
 					posX + offsetX, 
 					posY + 1.5 + offsetY,
 					posZ + offsetZ, 

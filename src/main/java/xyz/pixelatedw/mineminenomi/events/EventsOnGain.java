@@ -9,6 +9,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.abilities.CyborgAbilities;
 import xyz.pixelatedw.mineminenomi.abilities.FishKarateAbilities;
 import xyz.pixelatedw.mineminenomi.abilities.HakiAbilities;
@@ -29,11 +30,10 @@ import xyz.pixelatedw.mineminenomi.events.custom.BountyEvent;
 import xyz.pixelatedw.mineminenomi.events.custom.DorikiEvent;
 import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.init.ModNetwork;
+import xyz.pixelatedw.mineminenomi.init.ModValues;
 import xyz.pixelatedw.mineminenomi.packets.server.SEntityStatsSyncPacket;
-import xyz.pixelatedw.mineminenomi.values.ModValues;
-import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
 
-@Mod.EventBusSubscriber(modid = ModValuesEnv.PROJECT_ID)
+@Mod.EventBusSubscriber(modid = Env.PROJECT_ID)
 public class EventsOnGain
 {
 

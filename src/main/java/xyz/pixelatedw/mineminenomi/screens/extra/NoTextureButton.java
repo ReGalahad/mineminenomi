@@ -7,8 +7,8 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.config.GuiUtils;
+import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
 
 public class NoTextureButton extends Button
 {
@@ -25,7 +25,7 @@ public class NoTextureButton extends Button
 		{
 			Minecraft minecraft = Minecraft.getInstance();
 			FontRenderer fontrenderer = minecraft.fontRenderer;
-			minecraft.getTextureManager().bindTexture(new ResourceLocation(ModValuesEnv.PROJECT_ID, "textures/gui/empty.png"));
+			minecraft.getTextureManager().bindTexture(new ResourceLocation(Env.PROJECT_ID, "textures/gui/empty.png"));
 			GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 			this.isHovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
 			GlStateManager.enableBlend();

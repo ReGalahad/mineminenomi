@@ -14,7 +14,7 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
-import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
+import xyz.pixelatedw.mineminenomi.Env;
 
 public class WyRenderHelper
 {	
@@ -130,7 +130,7 @@ public class WyRenderHelper
 		
 	public static void drawAbilityIcon(String iconName, int x, int y, int u, int v)
 	{
-        Minecraft.getInstance().getTextureManager().bindTexture(new ResourceLocation(ModValuesEnv.PROJECT_ID, "textures/abilities/" + WyHelper.getFancyName(iconName) + ".png"));        
+        Minecraft.getInstance().getTextureManager().bindTexture(new ResourceLocation(Env.PROJECT_ID, "textures/abilities/" + WyHelper.getFancyName(iconName) + ".png"));        
 		BufferBuilder bufferbuilder = Tessellator.getInstance().getBuffer();
 		bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX);
 		bufferbuilder.pos(x			, y + v			, 1).tex(0.0, 1.0).endVertex();
@@ -142,7 +142,7 @@ public class WyRenderHelper
 	
 	public static void drawDevilFruitIcon(String iconName, int x, int y, int u, int v)
 	{
-		Minecraft.getInstance().getTextureManager().bindTexture(new ResourceLocation(ModValuesEnv.PROJECT_ID, "textures/items/" + WyHelper.getFancyName(iconName) + ".png"));        
+		Minecraft.getInstance().getTextureManager().bindTexture(new ResourceLocation(Env.PROJECT_ID, "textures/items/" + WyHelper.getFancyName(iconName) + ".png"));        
 		BufferBuilder bufferbuilder = Tessellator.getInstance().getBuffer();
 		bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX);
 		bufferbuilder.pos(x			, y + v			, 1).tex(0.0, 1.0).endVertex();

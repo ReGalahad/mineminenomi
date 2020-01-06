@@ -9,8 +9,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
 
 public abstract class JSONLootTableBlock implements IJSONLootTable
 {
@@ -23,7 +23,7 @@ public abstract class JSONLootTableBlock implements IJSONLootTable
 		this.itemName = WyHelper.getFancyName(itemName);
 		this.min = min;
 		this.max = max;
-		this.template = new File(ModValuesEnv.projectResourceFolder + "/data/" + ModValuesEnv.PROJECT_ID + "/json_templates/loot_tables/block/" + templateName + ".json");
+		this.template = new File(Env.projectResourceFolder + "/data/" + Env.PROJECT_ID + "/json_templates/loot_tables/block/" + templateName + ".json");
 	}
 	
 	protected String[] replaceMarkedElements()
@@ -37,7 +37,7 @@ public abstract class JSONLootTableBlock implements IJSONLootTable
 			{
 				String formattedLine = line;
 				if(line.contains("${modid}"))
-					formattedLine = formattedLine.replace("${modid}", ModValuesEnv.PROJECT_ID);
+					formattedLine = formattedLine.replace("${modid}", Env.PROJECT_ID);
 				
 				if(line.contains("${item}"))
 					formattedLine = formattedLine.replace("${item}", this.getItemName());

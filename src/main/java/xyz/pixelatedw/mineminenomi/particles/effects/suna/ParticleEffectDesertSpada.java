@@ -6,9 +6,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
+import xyz.pixelatedw.mineminenomi.init.ModParticleTextures;
 import xyz.pixelatedw.mineminenomi.particles.CustomParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
-import xyz.pixelatedw.mineminenomi.values.ModValuesParticles;
 
 public class ParticleEffectDesertSpada extends ParticleEffect
 {
@@ -48,7 +48,7 @@ public class ParticleEffectDesertSpada extends ParticleEffect
 				z = WyMathHelper.randomWithRange(-4, 4) + WyMathHelper.randomDouble();
 			}
 			
-			CustomParticle cp = new CustomParticle(player.world, ModValuesParticles.PARTICLE_ICON_SUNA,
+			CustomParticle cp = new CustomParticle(player.world, ModParticleTextures.SUNA,
 					posX + x, 
 					posY + 0.1,
 					posZ + z, 

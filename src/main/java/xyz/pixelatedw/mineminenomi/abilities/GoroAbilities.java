@@ -22,12 +22,12 @@ import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.GoroProjectiles.V
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModExtraAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModNetwork;
+import xyz.pixelatedw.mineminenomi.init.ModValues;
 import xyz.pixelatedw.mineminenomi.packets.server.SParticlesPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SSpawnLightningPacket;
 import xyz.pixelatedw.mineminenomi.particles.effects.goro.ElThorParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.goro.KariParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.goro.RaigoParticleEffect;
-import xyz.pixelatedw.mineminenomi.values.ModValues;
 
 public class GoroAbilities
 {

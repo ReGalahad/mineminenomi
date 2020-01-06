@@ -13,6 +13,7 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.config.GuiUtils;
+import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.WyRenderHelper;
 import xyz.pixelatedw.mineminenomi.api.data.abilitydata.AbilityDataCapability;
@@ -27,7 +28,6 @@ import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.screens.extra.AbilitiesListScreenPanel;
 import xyz.pixelatedw.mineminenomi.screens.extra.NoTextureButton;
-import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
 import xyz.pixelatedw.mineminenomi.values.ModValuesGUI;
 
 @OnlyIn(Dist.CLIENT)
@@ -95,7 +95,7 @@ public class SelectHotbarAbilitiesScreen extends Screen
 			{
 				ItemStack df = DevilFruitsHelper.getDevilFruitItem(devilFruitProps.getDevilFruit());
 
-				WyRenderHelper.drawDevilFruitIcon(df.getTranslationKey().replace("item." + ModValuesEnv.PROJECT_ID + ".", ""), (posX - 268) / 2, (posY - 187) / 2, 16, 16);
+				WyRenderHelper.drawDevilFruitIcon(df.getTranslationKey().replace("item." + Env.PROJECT_ID + ".", ""), (posX - 268) / 2, (posY - 187) / 2, 16, 16);
 			}
 			this.minecraft.getTextureManager().bindTexture(ModValuesGUI.TEXTURE_COMBATMODE);
 		}

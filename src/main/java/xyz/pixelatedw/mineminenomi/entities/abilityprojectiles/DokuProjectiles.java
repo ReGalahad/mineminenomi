@@ -23,10 +23,10 @@ import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.ExtraProjectiles.
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.mineminenomi.init.ModNetwork;
+import xyz.pixelatedw.mineminenomi.init.ModParticleTextures;
 import xyz.pixelatedw.mineminenomi.packets.server.SParticlesPacket;
 import xyz.pixelatedw.mineminenomi.particles.effects.common.ProjectileTrailParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.doku.ChloroBallCloudParticleEffect;
-import xyz.pixelatedw.mineminenomi.values.ModValuesParticles;
 
 public class DokuProjectiles 
 {
@@ -126,7 +126,7 @@ public class DokuProjectiles
 		public void tick()
 		{	
 			if(this.world.isRemote)		
-				ModMain.proxy.spawnParticleEffect(new ProjectileTrailParticleEffect(ModValuesParticles.PARTICLE_ICON_DOKU, 3, 2, 20), this.world, this.posX, this.posY, this.posZ, 0, 0, 0);
+				ModMain.proxy.spawnParticleEffect(new ProjectileTrailParticleEffect(ModParticleTextures.DOKU, 3, 2, 20), this.world, this.posX, this.posY, this.posZ, 0, 0, 0);
 
 			super.tick();
 		}

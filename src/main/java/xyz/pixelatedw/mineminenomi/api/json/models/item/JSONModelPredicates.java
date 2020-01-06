@@ -10,9 +10,9 @@ import java.util.List;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.api.json.models.JSONModelItem;
 import xyz.pixelatedw.mineminenomi.api.json.models.JSONPredicateObject;
-import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
 
 public class JSONModelPredicates extends JSONModelItem
 {
@@ -31,7 +31,7 @@ public class JSONModelPredicates extends JSONModelItem
 		{
 			JSONModelSimpleItem predicateItem = new JSONModelSimpleItem(this.getItemName() + "_" + predicateObject.getName(), this.getItemName());
 
-			File jsonModel = new File(ModValuesEnv.projectResourceFolder + "/assets/" + ModValuesEnv.PROJECT_ID + "/models/item/" + this.getItemName() + "_" + predicateObject.getName() + ".json");
+			File jsonModel = new File(Env.projectResourceFolder + "/assets/" + Env.PROJECT_ID + "/models/item/" + this.getItemName() + "_" + predicateObject.getName() + ".json");
 			if (jsonModel.exists())
 				continue;
 
@@ -93,7 +93,7 @@ public class JSONModelPredicates extends JSONModelItem
 					j++;
 				}
 				sb.append("\t\t\t},\n");
-				sb.append("\t\t\t\"model\": \"" + ModValuesEnv.PROJECT_ID + ":item/" + this.getItemName() + "_" + predicateObject.getName() + "\"\n");
+				sb.append("\t\t\t\"model\": \"" + Env.PROJECT_ID + ":item/" + this.getItemName() + "_" + predicateObject.getName() + "\"\n");
 			sb.append("\t\t}" + (this.predicates.length > i + 1 ? "," : ""));
 			i++;
 		}

@@ -3,9 +3,9 @@ package xyz.pixelatedw.mineminenomi.particles.effects.goro;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
+import xyz.pixelatedw.mineminenomi.init.ModParticleTextures;
 import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
-import xyz.pixelatedw.mineminenomi.values.ModValuesParticles;
 
 public class RaigoParticleEffect extends ParticleEffect
 {
@@ -19,7 +19,7 @@ public class RaigoParticleEffect extends ParticleEffect
 			double offsetY = WyMathHelper.randomWithRange(-5, 5) + WyMathHelper.randomDouble();
 			double offsetZ = WyMathHelper.randomWithRange(-55, 55) + WyMathHelper.randomDouble();
 
-			SimpleParticle cp = new SimpleParticle(world, ModValuesParticles.PARTICLE_ICON_GORO3,
+			SimpleParticle cp = new SimpleParticle(world, ModParticleTextures.GORO3,
 					posX + offsetX, 
 					posY + 40 + offsetY,
 					posZ + offsetZ, 
@@ -41,7 +41,7 @@ public class RaigoParticleEffect extends ParticleEffect
 			double offsetY = WyMathHelper.randomWithRange(-5, 0) + WyMathHelper.randomDouble();
 			double offsetZ = WyMathHelper.randomWithRange(-55, 55) + WyMathHelper.randomDouble();
 			
-			SimpleParticle cp = new SimpleParticle(world, ModValuesParticles.PARTICLE_ICON_GORO2,
+			SimpleParticle cp = new SimpleParticle(world, ModParticleTextures.GORO2,
 				posX + offsetX, 
 				posY + 30 + offsetY,
 				posZ + offsetZ, 

@@ -8,6 +8,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.data.abilitydata.AbilityDataCapability;
 import xyz.pixelatedw.mineminenomi.api.data.abilitydata.IAbilityData;
@@ -17,12 +18,11 @@ import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModNetwork;
+import xyz.pixelatedw.mineminenomi.init.ModParticleTextures;
 import xyz.pixelatedw.mineminenomi.packets.server.SSpecialFlyingPacket;
 import xyz.pixelatedw.mineminenomi.particles.CustomParticleData;
-import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
-import xyz.pixelatedw.mineminenomi.values.ModValuesParticles;
 
-@Mod.EventBusSubscriber(modid = ModValuesEnv.PROJECT_ID)
+@Mod.EventBusSubscriber(modid = Env.PROJECT_ID)
 public class EventsSpecialFlying
 {
 	@SubscribeEvent
@@ -63,14 +63,14 @@ public class EventsSpecialFlying
 					
 					ResourceLocation particleToUse = null;
 					if(props.getDevilFruit().equalsIgnoreCase("mokumoku") )
-						particleToUse = ModValuesParticles.PARTICLE_ICON_MOKU;
+						particleToUse = ModParticleTextures.MOKU;
 					else if(props.getDevilFruit().equalsIgnoreCase("gasugasu") )
-						particleToUse = ModValuesParticles.PARTICLE_ICON_GASU;
+						particleToUse = ModParticleTextures.GASU;
 					else if(props.getDevilFruit().equalsIgnoreCase("sunasuna") )
-						particleToUse = ModValuesParticles.PARTICLE_ICON_SUNA2;
+						particleToUse = ModParticleTextures.SUNA2;
 					else if(props.getDevilFruit().equalsIgnoreCase("toritoriphoenix") )
 					{
-						particleToUse = ModValuesParticles.PARTICLE_ICON_BLUEFLAME;
+						particleToUse = ModParticleTextures.BLUE_FLAME;
 						extraOffset = 1;
 					}
 					

@@ -20,7 +20,6 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.EnumFruitType;
-import xyz.pixelatedw.mineminenomi.ID;
 import xyz.pixelatedw.mineminenomi.abilities.FishKarateAbilities;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
@@ -35,6 +34,7 @@ import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
+import xyz.pixelatedw.mineminenomi.init.ModValues;
 
 public class AkumaNoMiItem extends Item
 {
@@ -102,7 +102,7 @@ public class AkumaNoMiItem extends Item
 			WyHelper.sendMsgToPlayer(player, "You've gained some enlightenment");
 			if (entityStatsProps.isFishman())
 			{
-				entityStatsProps.setRace(ID.RACE_HUMAN);
+				entityStatsProps.setRace(ModValues.HUMAN);
 				
 				abilityDataProps.clearHotbarFromList(player, FishKarateAbilities.abilitiesArray);
 				DevilFruitsHelper.validateStyleMoves(player);

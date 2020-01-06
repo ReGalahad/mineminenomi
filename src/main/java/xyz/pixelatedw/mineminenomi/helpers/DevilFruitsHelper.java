@@ -16,6 +16,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.registries.ForgeRegistries;
+import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.abilities.CyborgAbilities;
 import xyz.pixelatedw.mineminenomi.abilities.FishKarateAbilities;
 import xyz.pixelatedw.mineminenomi.abilities.HakiAbilities;
@@ -40,7 +41,6 @@ import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.items.AkumaNoMiItem;
 import xyz.pixelatedw.mineminenomi.packets.server.SUpdateMotionPacket;
-import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
 
 public class DevilFruitsHelper
 {
@@ -330,7 +330,7 @@ public class DevilFruitsHelper
 		if (fullName.equals("yamidummy"))
 			fullName = "yamiyami";
 
-		return new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(ModValuesEnv.PROJECT_ID, fullName.replace(model, "") + "nomi" + fullModel)));
+		return new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(Env.PROJECT_ID, fullName.replace(model, "") + "nomi" + fullModel)));
 	}
 
 	public static boolean isEntityInRoom(LivingEntity entity)

@@ -14,8 +14,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
+import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.entities.mobs.IDynamicRenderer;
-import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
 
 @OnlyIn(Dist.CLIENT)
 public class GenericMobRenderer extends BipedRenderer
@@ -27,7 +27,7 @@ public class GenericMobRenderer extends BipedRenderer
 	{
 		super(EntityRendererManager, model, 0.0F);
 		this.scale = scale;
-		this.texture = new ResourceLocation(ModValuesEnv.PROJECT_ID, "textures/models/" + tex + ".png");
+		this.texture = new ResourceLocation(Env.PROJECT_ID, "textures/models/" + tex + ".png");
 		this.addLayer(new BipedArmorLayer<>(this, new BipedModel(0.5F), new BipedModel(1.0F)));
 	}
 
@@ -35,7 +35,7 @@ public class GenericMobRenderer extends BipedRenderer
 	{
 		super(EntityRendererManager, model, 0.0F);
 		this.scale = 1.0F;
-		this.texture = new ResourceLocation(ModValuesEnv.PROJECT_ID, "textures/models/" + tex + ".png");
+		this.texture = new ResourceLocation(Env.PROJECT_ID, "textures/models/" + tex + ".png");
 		this.addLayer(new BipedArmorLayer<>(this, new BipedModel(0.5F), new BipedModel(1.0F)));
 	}
 
@@ -85,8 +85,8 @@ public class GenericMobRenderer extends BipedRenderer
 
 	protected ResourceLocation getEntityTexture(Entity entity)
 	{
-		if ((this.texture == null && entity instanceof IDynamicRenderer) || this.texture.equals(new ResourceLocation(ModValuesEnv.PROJECT_ID + ":textures/models/null.png")))
-			return new ResourceLocation(ModValuesEnv.PROJECT_ID + ":textures/models/" + ((IDynamicRenderer) entity).getMobTexture() + ".png");
+		if ((this.texture == null && entity instanceof IDynamicRenderer) || this.texture.equals(new ResourceLocation(Env.PROJECT_ID + ":textures/models/null.png")))
+			return new ResourceLocation(Env.PROJECT_ID + ":textures/models/" + ((IDynamicRenderer) entity).getMobTexture() + ".png");
 		else
 			return this.texture;
 	}

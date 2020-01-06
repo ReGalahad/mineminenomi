@@ -8,6 +8,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 import xyz.pixelatedw.mineminenomi.EnumFruitType;
+import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.abilities.BakuAbilities;
 import xyz.pixelatedw.mineminenomi.abilities.BaneAbilities;
 import xyz.pixelatedw.mineminenomi.abilities.BariAbilities;
@@ -99,10 +100,8 @@ import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.YamiProjectiles;
 import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.YukiProjectiles;
 import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.ZouProjectiles;
 import xyz.pixelatedw.mineminenomi.items.AkumaNoMiItem;
-import xyz.pixelatedw.mineminenomi.values.ModValues;
-import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
 
-@Mod.EventBusSubscriber(modid = ModValuesEnv.PROJECT_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = Env.PROJECT_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModDevilFruits
 {
 

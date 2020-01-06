@@ -11,8 +11,8 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.storage.WorldSavedData;
+import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.items.AkumaNoMiItem;
-import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
 
 public class ExtendedWorldData extends WorldSavedData
 {
@@ -242,7 +242,7 @@ public class ExtendedWorldData extends WorldSavedData
 
 	public void addDevilFruitInWorld(AkumaNoMiItem fruit)
 	{
-		String name = fruit.getTranslationKey().replace("item." + ModValuesEnv.PROJECT_ID + ".", "").replace("nomi", "").replace(":", "").replace(",", "").replace("model", "");
+		String name = fruit.getTranslationKey().replace("item." + Env.PROJECT_ID + ".", "").replace("nomi", "").replace(":", "").replace(",", "").replace("model", "");
 
 		if (!this.devilFruitsInWorld.contains(name))
 		{

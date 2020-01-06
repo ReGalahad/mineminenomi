@@ -19,8 +19,8 @@ import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
+import xyz.pixelatedw.mineminenomi.init.ModParticleTextures;
 import xyz.pixelatedw.mineminenomi.particles.CustomParticleData;
-import xyz.pixelatedw.mineminenomi.values.ModValuesParticles;
 
 public class JuryoProjectiles
 {
@@ -61,7 +61,7 @@ public class JuryoProjectiles
 				double posZOffset = this.world.rand.nextGaussian() * 0.52D;		
 		
 				CustomParticleData data = new CustomParticleData();
-				data.setTexture(ModValuesParticles.PARTICLE_ICON_GASU);
+				data.setTexture(ModParticleTextures.GASU);
 				data.setPosX(posX + posXOffset);
 				data.setPosY(posY + posYOffset);
 				data.setPosZ(posZ + posZOffset);

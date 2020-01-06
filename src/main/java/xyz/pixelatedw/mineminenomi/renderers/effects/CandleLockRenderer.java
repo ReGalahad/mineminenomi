@@ -9,13 +9,13 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.models.effects.CandleLockModel;
-import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
 
 @OnlyIn(Dist.CLIENT)
 public class CandleLockRenderer extends EntityRenderer
 {
-	private ResourceLocation texture = new ResourceLocation(ModValuesEnv.PROJECT_ID, "textures/models/zoanmorph/candlelock.png");
+	private ResourceLocation texture = new ResourceLocation(Env.PROJECT_ID, "textures/models/zoanmorph/candlelock.png");
 	private CandleLockModel model;
 	private double scale;
 	private float offset[] = new float[3];

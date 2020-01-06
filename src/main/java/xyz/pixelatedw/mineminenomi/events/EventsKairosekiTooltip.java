@@ -8,10 +8,10 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import xyz.pixelatedw.mineminenomi.values.ModValues;
-import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
+import xyz.pixelatedw.mineminenomi.Env;
+import xyz.pixelatedw.mineminenomi.init.ModValues;
 
-@Mod.EventBusSubscriber(modid = ModValuesEnv.PROJECT_ID, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = Env.PROJECT_ID, value = Dist.CLIENT)
 public class EventsKairosekiTooltip
 {
 

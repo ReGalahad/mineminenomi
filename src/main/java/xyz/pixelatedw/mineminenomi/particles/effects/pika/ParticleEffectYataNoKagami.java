@@ -4,9 +4,9 @@ import java.util.Random;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
+import xyz.pixelatedw.mineminenomi.init.ModParticleTextures;
 import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
-import xyz.pixelatedw.mineminenomi.values.ModValuesParticles;
 
 public class ParticleEffectYataNoKagami extends ParticleEffect
 {
@@ -20,7 +20,7 @@ public class ParticleEffectYataNoKagami extends ParticleEffect
 			double offsetY = (new Random().nextInt(40) + 1.0D) / 20.0D;
 			double offsetZ = (new Random().nextInt(40) + 1.0D - 20.0D) / 20.0D;
 			
-			SimpleParticle cp = new SimpleParticle(world, ModValuesParticles.PARTICLE_ICON_PIKA,
+			SimpleParticle cp = new SimpleParticle(world, ModParticleTextures.PIKA,
 					posX + offsetX, 
 					posY + 0.5 + offsetY,
 					posZ + offsetZ, 

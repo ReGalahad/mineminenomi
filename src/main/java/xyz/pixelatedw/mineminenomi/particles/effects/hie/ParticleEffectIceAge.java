@@ -4,10 +4,10 @@ import java.util.Timer;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
+import xyz.pixelatedw.mineminenomi.init.ModParticleTextures;
 import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.tasks.ParticleTaskWave;
-import xyz.pixelatedw.mineminenomi.values.ModValuesParticles;
 
 public class ParticleEffectIceAge extends ParticleEffect
 {
@@ -19,7 +19,7 @@ public class ParticleEffectIceAge extends ParticleEffect
 		{
 			Timer timer = new Timer(true); 
 			
-			SimpleParticle cp = new SimpleParticle(world, ModValuesParticles.PARTICLE_ICON_HIE,
+			SimpleParticle cp = new SimpleParticle(world, ModParticleTextures.HIE,
 					posX, 
 					posY - 0.5,
 					posZ, 

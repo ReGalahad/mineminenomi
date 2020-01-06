@@ -6,13 +6,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.helpers.ItemsHelper;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
-import xyz.pixelatedw.mineminenomi.init.ModEffects;
+import xyz.pixelatedw.mineminenomi.init.ModEnchantments;
 import xyz.pixelatedw.mineminenomi.init.ModItems;
-import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
 
-@Mod.EventBusSubscriber(modid = ModValuesEnv.PROJECT_ID)
+@Mod.EventBusSubscriber(modid = Env.PROJECT_ID)
 public class EventsCrafting
 {
 
@@ -27,7 +27,7 @@ public class EventsCrafting
 				event.setMaterialCost(10);
 				event.setOutput(new ItemStack(event.getLeft().getItem()));
 				EnchantmentHelper.setEnchantments(EnchantmentHelper.getEnchantments(event.getLeft()), event.getOutput());
-				event.getOutput().addEnchantment(ModEffects.kairoseki, 1);
+				event.getOutput().addEnchantment(ModEnchantments.KAIROSEKI, 1);
 			}
 			else if(event.getRight().getItem() == ModItems.blackMetal  && event.getRight().getCount() >= 5)
 			{
@@ -69,7 +69,7 @@ public class EventsCrafting
 				event.setMaterialCost(3);
 				event.setOutput(new ItemStack(event.getLeft().getItem()));
 				EnchantmentHelper.setEnchantments(EnchantmentHelper.getEnchantments(event.getLeft()), event.getOutput());
-				event.getOutput().addEnchantment(ModEffects.dialFlash, 1);
+				event.getOutput().addEnchantment(ModEnchantments.DIAL_FLASH, 1);
 			}
 			else if(event.getRight().getItem() == ModBlocks.impactDialBlock.asItem()  && event.getRight().getCount() >= 3)
 			{
@@ -82,7 +82,7 @@ public class EventsCrafting
 				event.setMaterialCost(3 * level);
 				event.setOutput(new ItemStack(event.getLeft().getItem()));
 				EnchantmentHelper.setEnchantments(EnchantmentHelper.getEnchantments(event.getLeft()), event.getOutput());
-				event.getOutput().addEnchantment(ModEffects.dialImpact, level);
+				event.getOutput().addEnchantment(ModEnchantments.DIAL_IMPACT, level);
 			}
 			else if(event.getRight().getItem() == ModBlocks.breathDialBlock.asItem()  && event.getRight().getCount() >= 3)
 			{

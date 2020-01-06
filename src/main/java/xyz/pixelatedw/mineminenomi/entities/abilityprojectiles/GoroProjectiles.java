@@ -13,8 +13,8 @@ import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModExtraAttributes;
+import xyz.pixelatedw.mineminenomi.init.ModParticleTextures;
 import xyz.pixelatedw.mineminenomi.particles.effects.common.ProjectileTrailParticleEffect;
-import xyz.pixelatedw.mineminenomi.values.ModValuesParticles;
 
 public class GoroProjectiles 
 {
@@ -78,7 +78,7 @@ public class GoroProjectiles
 		{	
 			if(this.world.isRemote)
 			{
-				ResourceLocation particleToUse = this.ticksExisted % 2 == 0 ? ModValuesParticles.PARTICLE_ICON_GORO2 : ModValuesParticles.PARTICLE_ICON_GORO;
+				ResourceLocation particleToUse = this.ticksExisted % 2 == 0 ? ModParticleTextures.GORO2 : ModParticleTextures.GORO;
 				ModMain.proxy.spawnParticleEffect(new ProjectileTrailParticleEffect(particleToUse, 4, 2, 2), this.world, this.posX, this.posY, this.posZ, 0, 0, 0);		
 			}
 			
@@ -132,7 +132,7 @@ public class GoroProjectiles
 		public void tick()
 		{	
 			if(this.world.isRemote)
-				ModMain.proxy.spawnParticleEffect(new ProjectileTrailParticleEffect(ModValuesParticles.PARTICLE_ICON_GORO2, 10, 2, 2), this.world, this.posX, this.posY, this.posZ, 0, 0, 0);	
+				ModMain.proxy.spawnParticleEffect(new ProjectileTrailParticleEffect(ModParticleTextures.GORO2, 10, 2, 2), this.world, this.posX, this.posY, this.posZ, 0, 0, 0);	
 			
 			super.tick();
 		}
@@ -158,7 +158,7 @@ public class GoroProjectiles
 		public void tick()
 		{	
 			if(this.world.isRemote)
-				ModMain.proxy.spawnParticleEffect(new ProjectileTrailParticleEffect(ModValuesParticles.PARTICLE_ICON_GORO2, 10, 2, 2), this.world, this.posX, this.posY, this.posZ, 0, 0, 0);
+				ModMain.proxy.spawnParticleEffect(new ProjectileTrailParticleEffect(ModParticleTextures.GORO2, 10, 2, 2), this.world, this.posX, this.posY, this.posZ, 0, 0, 0);
 			
 			super.tick();
 		}
@@ -184,7 +184,7 @@ public class GoroProjectiles
 		public void tick()
 		{	
 			if(this.world.isRemote)
-				ModMain.proxy.spawnParticleEffect(new ProjectileTrailParticleEffect(ModValuesParticles.PARTICLE_ICON_GORO2, 10, 2, 2), this.world, this.posX, this.posY, this.posZ, 0, 0, 0);
+				ModMain.proxy.spawnParticleEffect(new ProjectileTrailParticleEffect(ModParticleTextures.GORO2, 10, 2, 2), this.world, this.posX, this.posY, this.posZ, 0, 0, 0);
 			
 			super.tick();
 		}
@@ -210,7 +210,7 @@ public class GoroProjectiles
 		public void tick()
 		{	
 			if(this.world.isRemote)
-				ModMain.proxy.spawnParticleEffect(new ProjectileTrailParticleEffect(ModValuesParticles.PARTICLE_ICON_GORO2, 10, 2, 2), this.world, this.posX, this.posY, this.posZ, 0, 0, 0);
+				ModMain.proxy.spawnParticleEffect(new ProjectileTrailParticleEffect(ModParticleTextures.GORO2, 10, 2, 2), this.world, this.posX, this.posY, this.posZ, 0, 0, 0);
 			
 			super.tick();
 		}

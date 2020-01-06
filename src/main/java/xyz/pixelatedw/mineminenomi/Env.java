@@ -1,6 +1,6 @@
-package xyz.pixelatedw.mineminenomi.values;
+package xyz.pixelatedw.mineminenomi;
 
-public class ModValuesEnv
+public class Env
 {
 	public static final String
 

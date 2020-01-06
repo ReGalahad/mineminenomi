@@ -4,15 +4,15 @@ import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.util.ResourceLocation;
+import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.WantedPosterPackageTileEntity;
 import xyz.pixelatedw.mineminenomi.models.blocks.WantedPosterPackageModel;
-import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
 
 public class WantedPostersPackageTileEntityRenderer extends TileEntityRenderer<WantedPosterPackageTileEntity>
 {
 	
 	private WantedPosterPackageModel model;
-	private static final ResourceLocation texture = new ResourceLocation(ModValuesEnv.PROJECT_ID + ":textures/models/wantedposterspackage.png");
+	private static final ResourceLocation texture = new ResourceLocation(Env.PROJECT_ID + ":textures/models/wantedposterspackage.png");
 
 	public WantedPostersPackageTileEntityRenderer()
 	{

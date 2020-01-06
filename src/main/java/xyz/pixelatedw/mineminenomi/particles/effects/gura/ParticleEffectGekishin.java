@@ -5,9 +5,9 @@ import java.util.Random;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
+import xyz.pixelatedw.mineminenomi.init.ModParticleTextures;
 import xyz.pixelatedw.mineminenomi.particles.CustomParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
-import xyz.pixelatedw.mineminenomi.values.ModValuesParticles;
 
 public class ParticleEffectGekishin extends ParticleEffect
 {
@@ -32,7 +32,7 @@ public class ParticleEffectGekishin extends ParticleEffect
 				break;
 		}
 		
-		CustomParticle cp = new CustomParticle(player.world, ModValuesParticles.PARTICLE_ICON_GURA,
+		CustomParticle cp = new CustomParticle(player.world, ModParticleTextures.GURA,
 				posX + offsetX , 
 				posY + 1.0,
 				posZ + offsetZ, 

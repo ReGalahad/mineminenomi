@@ -15,6 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistries;
+import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.abilities.CyborgAbilities;
 import xyz.pixelatedw.mineminenomi.abilities.FishKarateAbilities;
 import xyz.pixelatedw.mineminenomi.abilities.HakiAbilities;
@@ -25,9 +26,8 @@ import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.mineminenomi.api.debug.WyDebug;
+import xyz.pixelatedw.mineminenomi.init.ModValues;
 import xyz.pixelatedw.mineminenomi.items.AkumaNoMiItem;
-import xyz.pixelatedw.mineminenomi.values.ModValues;
-import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
 
 public class WebAppHelper
 {
@@ -39,7 +39,7 @@ public class WebAppHelper
 		
 		writeFancyAbilitiesList();
 
-		File folder = new File(ModValuesEnv.projectResourceFolder + "/assets/" + ModValuesEnv.PROJECT_ID + "/EXTRA_BOT_FILES/");
+		File folder = new File(Env.projectResourceFolder + "/assets/" + Env.PROJECT_ID + "/EXTRA_BOT_FILES/");
 		folder.mkdirs();
 
 		if (folder.exists())
@@ -52,7 +52,7 @@ public class WebAppHelper
 
 	private static void writeDevilFruitsJSON()
 	{
-		try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(ModValuesEnv.projectResourceFolder + "/assets/" + ModValuesEnv.PROJECT_ID + "/EXTRA_BOT_FILES/devilfruits.json"), "UTF-8")))
+		try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(Env.projectResourceFolder + "/assets/" + Env.PROJECT_ID + "/EXTRA_BOT_FILES/devilfruits.json"), "UTF-8")))
 		{
 			writer.write("{\n");
 			writer.write("\"devilfruits\" : [");
@@ -61,7 +61,7 @@ public class WebAppHelper
 			{
 				AkumaNoMiItem fruit = (AkumaNoMiItem) f;
 				String fullName = fruit.getName().getFormattedText();
-				ItemStack itemStack = new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(ModValuesEnv.PROJECT_ID, fullName)));
+				ItemStack itemStack = new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(Env.PROJECT_ID, fullName)));
 				Map<String, Object> devilFruitElements = new LinkedHashMap<String, Object>();
 
 				devilFruitElements.put("name", "\"" + itemStack.getDisplayName().getFormattedText() + "\"");
@@ -91,7 +91,7 @@ public class WebAppHelper
 
 	private static void writeSpecialAbilitiesJSON()
 	{
-		try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(ModValuesEnv.projectResourceFolder + "/assets/" + ModValuesEnv.PROJECT_ID + "/EXTRA_BOT_FILES/specialabilities.json"), "UTF-8")))
+		try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(Env.projectResourceFolder + "/assets/" + Env.PROJECT_ID + "/EXTRA_BOT_FILES/specialabilities.json"), "UTF-8")))
 		{
 
 			writer.write("{\n");
@@ -127,12 +127,12 @@ public class WebAppHelper
 
 	private static void writeFancyAbilitiesList()
 	{
-		File folder = new File(ModValuesEnv.projectResourceFolder + "/assets/" + ModValuesEnv.PROJECT_ID + "/EXTRA_BOT_FILES/");
+		File folder = new File(Env.projectResourceFolder + "/assets/" + Env.PROJECT_ID + "/EXTRA_BOT_FILES/");
 		folder.mkdirs();
 
 		if (folder.exists())
 		{
-			try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(ModValuesEnv.projectResourceFolder + "/assets/" + ModValuesEnv.PROJECT_ID + "/EXTRA_BOT_FILES/fancylist.txt"), "UTF-8")))
+			try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(Env.projectResourceFolder + "/assets/" + Env.PROJECT_ID + "/EXTRA_BOT_FILES/fancylist.txt"), "UTF-8")))
 			{
 				for (AkumaNoMiItem devilFruit : ModValues.devilfruits)
 				{

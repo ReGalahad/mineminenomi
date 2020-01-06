@@ -4,9 +4,9 @@ import java.util.Random;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
+import xyz.pixelatedw.mineminenomi.init.ModParticleTextures;
 import xyz.pixelatedw.mineminenomi.particles.CustomParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
-import xyz.pixelatedw.mineminenomi.values.ModValuesParticles;
 
 public class ParticleEffectHeavyPunch extends ParticleEffect
 {
@@ -20,7 +20,7 @@ public class ParticleEffectHeavyPunch extends ParticleEffect
             double offsetY = (new Random().nextInt(30) + 1.0D - 10.0D) / 10.0D;
             double offsetZ = (new Random().nextInt(10) + 1.0D - 10.0D) / 10.0D;
 
-            CustomParticle cp = new CustomParticle(player.world, ModValuesParticles.PARTICLE_ICON_KILO,
+            CustomParticle cp = new CustomParticle(player.world, ModParticleTextures.KILO,
                             posX + offsetX,
                             posY + offsetY,
                             posZ + offsetZ,

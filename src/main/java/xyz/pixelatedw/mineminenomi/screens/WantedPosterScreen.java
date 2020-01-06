@@ -11,8 +11,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.client.config.GuiUtils;
+import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
 import xyz.pixelatedw.mineminenomi.values.ModValuesGUI;
 
 public class WantedPosterScreen extends Screen
@@ -55,7 +55,7 @@ public class WantedPosterScreen extends Screen
 
 		GL11.glPushMatrix();
 		{
-			ResourceLocation rs = new ResourceLocation(ModValuesEnv.PROJECT_ID, "textures/gui/wantedposters/backgrounds/" + background + ".png");
+			ResourceLocation rs = new ResourceLocation(Env.PROJECT_ID, "textures/gui/wantedposters/backgrounds/" + background + ".png");
 			this.minecraft.getTextureManager().bindTexture(rs);
 
 			GL11.glScaled(0.34, 0.245, 0);

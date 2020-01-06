@@ -12,8 +12,8 @@ import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
+import xyz.pixelatedw.mineminenomi.init.ModParticleTextures;
 import xyz.pixelatedw.mineminenomi.particles.CustomParticleData;
-import xyz.pixelatedw.mineminenomi.values.ModValuesParticles;
 
 public class YukiProjectiles 
 {
@@ -55,7 +55,7 @@ public class YukiProjectiles
 					double offsetZ = (new Random().nextInt(4) + 2.0D - 2.0D) / 2.0D;
 	
 					CustomParticleData data = new CustomParticleData();
-					data.setTexture(ModValuesParticles.PARTICLE_ICON_YUKI);
+					data.setTexture(ModParticleTextures.YUKI);
 					data.setPosX(posX + offsetX);
 					data.setPosY(posY + offsetY);
 					data.setPosZ(posZ + offsetZ);

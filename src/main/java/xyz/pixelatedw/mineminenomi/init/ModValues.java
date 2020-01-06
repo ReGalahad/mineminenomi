@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.values;
+package xyz.pixelatedw.mineminenomi.init;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,8 +7,6 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import xyz.pixelatedw.mineminenomi.init.ModBlocks;
-import xyz.pixelatedw.mineminenomi.init.ModItems;
 import xyz.pixelatedw.mineminenomi.items.AkumaNoMiItem;
 
 public class ModValues
@@ -30,21 +28,27 @@ public class ModValues
             .setPrettyPrinting()
             .create();
 	
-	// Variables	
-	public static int
-	
-	MAX_QUESTS = 4;
 	
 	// Consts
-	public static final int 
+	public static final int MAX_QUESTS = 4;
+	public static final int MAX_DORIKI = 10000;
+	public static final int MAX_ULTRACOLA = 10;
+	public static final int MAX_GENERAL = 999999999;
+	public static final int MAX_CREW = 50;
 	
-	MAX_DORIKI = 10000,
-	MAX_ULTRACOLA = 10,
-	MAX_GENERAL = 999999999,
-	MAX_CREW = 50;
+	public static final long MAX_BOUNTY = 100000000000L;
 	
-	public static final long 
+	public static final String PIRATE = "pirate";
+	public static final String MARINE = "marine";
+	public static final String BOUNTY_HUNTER = "bounty_hunter";
 	
-	MAX_BOUNTY = 100000000000L;
-
+	public static final String HUMAN = "human";
+	public static final String FISHMAN = "fishman";
+	public static final String CYBORG = "cyborg";
+	
+	public static final String SWORDSMAN = "swordsman";
+	public static final String SNIPER = "sniper";
+	public static final String DOCTOR = "doctor";
+	public static final String ART_OF_WEATHER = "art_of_weather";
+	
 }

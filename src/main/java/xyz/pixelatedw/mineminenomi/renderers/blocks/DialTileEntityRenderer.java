@@ -6,11 +6,11 @@ import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.models.blocks.Dial01Model;
 import xyz.pixelatedw.mineminenomi.models.blocks.Dial02Model;
 import xyz.pixelatedw.mineminenomi.models.blocks.Dial03Model;
 import xyz.pixelatedw.mineminenomi.models.blocks.Dial04Model;
-import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
 
 public class DialTileEntityRenderer  extends TileEntityRenderer
 {
@@ -21,7 +21,7 @@ public class DialTileEntityRenderer  extends TileEntityRenderer
 	public DialTileEntityRenderer(EntityModel model, String texture)
 	{
 		this.model = model;
-		this.texture = new ResourceLocation(ModValuesEnv.PROJECT_ID + ":textures/models/blocks/" + texture + ".png");
+		this.texture = new ResourceLocation(Env.PROJECT_ID + ":textures/models/blocks/" + texture + ".png");
 	}
 	
 	@Override

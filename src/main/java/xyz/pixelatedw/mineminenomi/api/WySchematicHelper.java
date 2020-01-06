@@ -19,7 +19,7 @@ import net.minecraft.state.IProperty;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
-import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
+import xyz.pixelatedw.mineminenomi.Env;
 
 public class WySchematicHelper
 {
@@ -27,7 +27,7 @@ public class WySchematicHelper
 	{
 		try
 		{
-			InputStream is = WySchematicHelper.class.getClassLoader().getResourceAsStream("assets/" + ModValuesEnv.PROJECT_ID + "/schematics/" + name + ".schem");
+			InputStream is = WySchematicHelper.class.getClassLoader().getResourceAsStream("assets/" + Env.PROJECT_ID + "/schematics/" + name + ".schem");
 			CompoundNBT nbt = CompressedStreamTools.readCompressed(is);
 
 			short width = nbt.getShort("Width");

@@ -3,9 +3,9 @@ package xyz.pixelatedw.mineminenomi.particles.effects.mero;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
+import xyz.pixelatedw.mineminenomi.init.ModParticleTextures;
 import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
-import xyz.pixelatedw.mineminenomi.values.ModValuesParticles;
 
 public class ParticleEffectPerfumeFemur extends ParticleEffect
 {
@@ -26,7 +26,7 @@ public class ParticleEffectPerfumeFemur extends ParticleEffect
 	        motionY *= middlePoint / 2;
 	        motionZ *= middlePoint / 2;
 			
-			SimpleParticle cp = new SimpleParticle(world, ModValuesParticles.PARTICLE_ICON_MERO,
+			SimpleParticle cp = new SimpleParticle(world, ModParticleTextures.MERO,
 					posX, 
 					posY + 1,
 					posZ, 

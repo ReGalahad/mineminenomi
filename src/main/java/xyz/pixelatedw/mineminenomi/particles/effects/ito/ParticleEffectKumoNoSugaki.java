@@ -3,9 +3,9 @@ package xyz.pixelatedw.mineminenomi.particles.effects.ito;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
+import xyz.pixelatedw.mineminenomi.init.ModParticleTextures;
 import xyz.pixelatedw.mineminenomi.particles.CustomParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
-import xyz.pixelatedw.mineminenomi.values.ModValuesParticles;
 
 public class ParticleEffectKumoNoSugaki extends ParticleEffect
 {
@@ -30,7 +30,7 @@ public class ParticleEffectKumoNoSugaki extends ParticleEffect
 				break;
 		}
 		
-		CustomParticle cp = new CustomParticle(player.world, ModValuesParticles.PARTICLE_ICON_ITO,
+		CustomParticle cp = new CustomParticle(player.world, ModParticleTextures.ITO,
 				posX + offsetX, 
 				posY + 1,
 				posZ + offsetZ, 

@@ -21,6 +21,7 @@ import net.minecraftforge.event.entity.EntityEvent.EyeHeight;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.data.abilitydata.AbilityDataCapability;
 import xyz.pixelatedw.mineminenomi.api.data.abilitydata.IAbilityData;
@@ -39,10 +40,9 @@ import xyz.pixelatedw.mineminenomi.packets.server.SDevilFruitSyncPacket;
 import xyz.pixelatedw.mineminenomi.renderers.ZoanFirstPersonRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.effects.AbareHimatsuriRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer;
-import xyz.pixelatedw.mineminenomi.values.ModValuesEnv;
 
 @OnlyIn(Dist.CLIENT)
-@Mod.EventBusSubscriber(modid = ModValuesEnv.PROJECT_ID, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = Env.PROJECT_ID, value = Dist.CLIENT)
 public class EventsMorphs
 {
 

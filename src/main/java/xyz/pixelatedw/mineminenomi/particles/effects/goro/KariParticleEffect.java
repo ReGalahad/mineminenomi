@@ -3,9 +3,9 @@ package xyz.pixelatedw.mineminenomi.particles.effects.goro;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
+import xyz.pixelatedw.mineminenomi.init.ModParticleTextures;
 import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
-import xyz.pixelatedw.mineminenomi.values.ModValuesParticles;
 
 public class KariParticleEffect extends ParticleEffect
 {
@@ -19,7 +19,7 @@ public class KariParticleEffect extends ParticleEffect
 			double offsetY = WyMathHelper.randomWithRange(0, 3) + WyMathHelper.randomDouble();
 			double offsetZ = WyMathHelper.randomWithRange(-5, 5) + WyMathHelper.randomDouble();
 			
-			SimpleParticle cp = new SimpleParticle(world, ModValuesParticles.PARTICLE_ICON_GORO2,
+			SimpleParticle cp = new SimpleParticle(world, ModParticleTextures.GORO2,
 				posX + offsetX, 
 				posY + offsetY,
 				posZ + offsetZ, 

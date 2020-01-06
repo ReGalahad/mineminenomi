@@ -2,6 +2,7 @@ package xyz.pixelatedw.mineminenomi.packets.server;
 
 import java.util.function.Supplier;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -9,7 +10,6 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
-import xyz.pixelatedw.mineminenomi.ModMain;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 
 public class SSpawnLightningPacket
@@ -42,7 +42,7 @@ public class SSpawnLightningPacket
 		{
 			ctx.get().enqueueWork(() ->
 			{
-				PlayerEntity player = ModMain.proxy.getClientPlayer();
+				PlayerEntity player = Minecraft.getInstance().player;
 				ClientWorld world = ((ClientWorld) player.world);
 				RayTraceResult mop = WyHelper.rayTraceBlocks(player);
 				
