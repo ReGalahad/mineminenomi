@@ -13,7 +13,7 @@ import xyz.pixelatedw.mineminenomi.api.WyRenderHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.mineminenomi.api.abilities.extra.AbilityManager;
-import xyz.pixelatedw.mineminenomi.api.data.abilitydata.IAbilityData;
+import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
 import xyz.pixelatedw.mineminenomi.api.network.packets.client.CAbilityDataSyncPacket;
 import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.screens.SelectHotbarAbilitiesScreen;

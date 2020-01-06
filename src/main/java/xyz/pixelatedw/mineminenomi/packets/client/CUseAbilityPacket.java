@@ -1,37 +1,53 @@
 package xyz.pixelatedw.mineminenomi.packets.client;
 
+import java.io.IOException;
 import java.util.function.Supplier;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
+import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.data.abilitydata.AbilityDataCapability;
-import xyz.pixelatedw.mineminenomi.api.data.abilitydata.IAbilityData;
+import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
+import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
 import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
 
 public class CUseAbilityPacket
 {
 	
-	private int abilitySlot;
+	private Ability ability;
 	
 	public CUseAbilityPacket() {}
 	
-	public CUseAbilityPacket(int abilitySlot)
+	public CUseAbilityPacket(Ability ability)
 	{
-		this.abilitySlot = abilitySlot;
+		this.ability = ability;
 	}
 
 	public void encode(PacketBuffer buffer)
 	{
-		buffer.writeInt(this.abilitySlot);
+		try
+		{
+			buffer.writeByteArray(WyHelper.serialize(this.ability));
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	public static CUseAbilityPacket decode(PacketBuffer buffer)
 	{
 		CUseAbilityPacket msg = new CUseAbilityPacket();
-		msg.abilitySlot = buffer.readInt();
+		try
+		{
+			msg.ability = (Ability) WyHelper.deserialize(buffer.readByteArray());
+		}
+		catch (ClassNotFoundException | IOException e)
+		{
+			e.printStackTrace();
+		}
 		return msg;
 	}
 
@@ -49,7 +65,9 @@ public class CUseAbilityPacket
 				if(DevilFruitsHelper.checkForRestriction(player))
 					return;
 				
-				Ability currentAbility = abilityDataProps.getHotbarAbilityFromSlot(message.abilitySlot);
+				message.ability.use(player);
+				
+				/*Ability currentAbility = abilityDataProps.getHotbarAbilityFromSlot(message.abilitySlot);
 								
 				if (currentAbility != null)
 				{
@@ -86,7 +104,7 @@ public class CUseAbilityPacket
 						else
 							currentAbility.use(player);
 					//});
-				}
+				}*/
 			});
 		}
 		

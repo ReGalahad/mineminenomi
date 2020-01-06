@@ -1,24 +1,38 @@
 package xyz.pixelatedw.mineminenomi.events.abilities.common;
 
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
-import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.Env;
-import xyz.pixelatedw.mineminenomi.api.data.abilitydata.AbilityDataCapability;
-import xyz.pixelatedw.mineminenomi.api.data.abilitydata.IAbilityData;
-import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
-import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
-import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
-import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
-import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
+import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
+import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
 
 @Mod.EventBusSubscriber(modid = Env.PROJECT_ID)
-public class EventsAbilities
+public class AbilitiesEvents
 {
 	@SubscribeEvent
+	public static void onLivingUpdate(LivingUpdateEvent event)
+	{
+		if (event.getEntityLiving() instanceof PlayerEntity)
+		{
+			PlayerEntity player = (PlayerEntity) event.getEntityLiving();
+			IAbilityData props = AbilityDataCapability.get(player);
+
+			for (Ability ability : props.getPlayerAbilities())
+			{
+				if(ability == null)
+					continue;
+				//if (ability instanceof PassiveAbility)
+				//	((PassiveAbility) ability).tick(player);
+				//else
+				ability.cooldown(player);
+			}
+		}
+	}
+	
+/*	@SubscribeEvent
 	public static void onEntityUpdate(LivingUpdateEvent event)
 	{
 		if (event.getEntityLiving() instanceof PlayerEntity)
@@ -58,7 +72,7 @@ public class EventsAbilities
 				}
 			}
 		}
-	}
+	}*/
 /*
 	@SubscribeEvent
 	public void onPlayerAction(PlayerInteractEvent event)

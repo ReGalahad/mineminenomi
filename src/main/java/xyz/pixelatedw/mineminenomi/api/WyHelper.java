@@ -3,6 +3,7 @@ package xyz.pixelatedw.mineminenomi.api;
 import java.awt.Color;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -718,9 +719,15 @@ public class WyHelper
 
 	public static Object deserialize(byte[] data) throws IOException, ClassNotFoundException
 	{
-		ByteArrayInputStream in = new ByteArrayInputStream(data);
-		ObjectInputStream is = new ObjectInputStream(in);
-		return is.readObject();
+		try
+		{
+			ByteArrayInputStream in = new ByteArrayInputStream(data);
+			ObjectInputStream is = new ObjectInputStream(in);
+			is.close();
+			return is.readObject();
+		}
+		catch(EOFException e) {/*EOF Catch*/}
+		return null;
 	}
 
 }

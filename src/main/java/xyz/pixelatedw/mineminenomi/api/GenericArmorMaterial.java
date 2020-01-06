@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi;
+package xyz.pixelatedw.mineminenomi.api;
 
 import java.util.function.Supplier;
 
@@ -10,7 +10,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class ArmorMaterial implements IArmorMaterial
+public class GenericArmorMaterial implements IArmorMaterial
 {
 	private static final int[] MAX_DAMAGE = new int[]
 		{
@@ -21,7 +21,7 @@ public class ArmorMaterial implements IArmorMaterial
 	private final int[] damageReductionAmountArray;
 	private final int enchantability;
 
-	public ArmorMaterial(String name, int maxDamageFactor, int[] damageReductionAmountArray, int enchantability, SoundEvent soundEvent, float toughness, Supplier<Ingredient> supplier)
+	public GenericArmorMaterial(String name, int maxDamageFactor, int[] damageReductionAmountArray, int enchantability, SoundEvent soundEvent, float toughness, Supplier<Ingredient> supplier)
 	{
 		this.name = name;
 		this.maxDamageFactor = maxDamageFactor;

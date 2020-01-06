@@ -28,13 +28,11 @@ public class MeraAbilities
 		public Hiken()
 		{
 			super(ModAttributes.HIKEN);
-		}
-		
-		@Override
-		public void use(PlayerEntity player)
-		{	
-			this.projectile = new MeraProjectiles.Hiken(player.world, player, ModAttributes.HIKEN);			
-			super.use(player);		
+			
+			this.onUseEvent = (player, ability) -> 
+			{			
+				this.projectile = new MeraProjectiles.Hiken(player.world, player, ModAttributes.HIKEN);			
+			};
 		}
 	}
 	

@@ -8,8 +8,8 @@ import net.minecraft.util.SoundEvents;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import xyz.pixelatedw.mineminenomi.ArmorMaterial;
 import xyz.pixelatedw.mineminenomi.Env;
+import xyz.pixelatedw.mineminenomi.api.GenericArmorMaterial;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.items.armors.BasicArmorItem;
 import xyz.pixelatedw.mineminenomi.items.armors.CaptainCapeItem;
@@ -19,9 +19,9 @@ import xyz.pixelatedw.mineminenomi.items.armors.ColaBackpackItem;
 public class ModArmors
 {
 	// Materials
-    public static final ArmorMaterial BASIC_ARMOR_MATERIAL = new ArmorMaterial(Env.PROJECT_ID + ":basic_armor", 100, new int[] { 0, 0, 1, 0 }, 12, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 2.0F,() -> Ingredient.fromItems(Items.LEATHER));
-    public static final ArmorMaterial CAPTAIN_CAPE_MATERIAL = new ArmorMaterial(Env.PROJECT_ID + ":captain_cape", 100, new int[] { 0, 0, 2, 0 }, 12, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 2.0F,() -> Ingredient.fromItems(Items.LEATHER));
-    public static final ArmorMaterial COLA_BACKPACK_MATERIAL = new ArmorMaterial(Env.PROJECT_ID + ":cola_backpack", 100, new int[] { 0, 0, 1, 0 }, 12, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, 2.0F,() -> Ingredient.fromItems(ModItems.cola));
+    public static final GenericArmorMaterial BASIC_ARMOR_MATERIAL = new GenericArmorMaterial(Env.PROJECT_ID + ":basic_armor", 100, new int[] { 0, 0, 1, 0 }, 12, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 2.0F,() -> Ingredient.fromItems(Items.LEATHER));
+    public static final GenericArmorMaterial CAPTAIN_CAPE_MATERIAL = new GenericArmorMaterial(Env.PROJECT_ID + ":captain_cape", 100, new int[] { 0, 0, 2, 0 }, 12, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 2.0F,() -> Ingredient.fromItems(Items.LEATHER));
+    public static final GenericArmorMaterial COLA_BACKPACK_MATERIAL = new GenericArmorMaterial(Env.PROJECT_ID + ":cola_backpack", 100, new int[] { 0, 0, 1, 0 }, 12, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, 2.0F,() -> Ingredient.fromItems(ModItems.cola));
 
     // Armors
 	public static final Item PIRATE_HEAD = new BasicArmorItem("pirate", EquipmentSlotType.HEAD);

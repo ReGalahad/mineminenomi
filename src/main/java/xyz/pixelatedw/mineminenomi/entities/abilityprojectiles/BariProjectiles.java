@@ -12,8 +12,8 @@ import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
-import xyz.pixelatedw.mineminenomi.api.data.abilitydata.AbilityDataCapability;
-import xyz.pixelatedw.mineminenomi.api.data.abilitydata.IAbilityData;
+import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
+import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 

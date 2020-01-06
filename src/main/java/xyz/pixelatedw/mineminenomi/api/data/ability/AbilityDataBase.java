@@ -1,6 +1,8 @@
-package xyz.pixelatedw.mineminenomi.api.data.abilitydata;
+package xyz.pixelatedw.mineminenomi.api.data.ability;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import net.minecraft.entity.player.PlayerEntity;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
@@ -267,6 +269,18 @@ public class AbilityDataBase implements IAbilityData
 		}
 	}
 
+	@Override
+	public List<Ability> getPlayerAbilities()
+	{
+		List<Ability> abilities = new ArrayList<Ability>();
+		
+		abilities.addAll(Arrays.asList(this.getDevilFruitAbilities()));
+		abilities.addAll(Arrays.asList(this.getRacialAbilities()));
+		abilities.addAll(Arrays.asList(this.getHakiAbilities()));
+		
+		return abilities;
+	}
+	
 	@Override
 	public Ability getPreviouslyUsedAbility()
 	{

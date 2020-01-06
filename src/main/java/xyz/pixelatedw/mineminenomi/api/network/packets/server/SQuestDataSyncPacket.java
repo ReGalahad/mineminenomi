@@ -12,8 +12,8 @@ import net.minecraft.nbt.INBT;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
-import xyz.pixelatedw.mineminenomi.api.data.questdata.IQuestData;
-import xyz.pixelatedw.mineminenomi.api.data.questdata.QuestDataCapability;
+import xyz.pixelatedw.mineminenomi.api.data.quest.IQuestData;
+import xyz.pixelatedw.mineminenomi.api.data.quest.QuestDataCapability;
 import xyz.pixelatedw.mineminenomi.api.debug.WyDebug;
 
 public class SQuestDataSyncPacket

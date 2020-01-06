@@ -1,4 +1,6 @@
-package xyz.pixelatedw.mineminenomi.api.data.abilitydata;
+package xyz.pixelatedw.mineminenomi.api.data.ability;
+
+import java.util.List;
 
 import net.minecraft.entity.player.PlayerEntity;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
@@ -35,6 +37,8 @@ public interface IAbilityData
 	void clearHotbar(PlayerEntity player);
 	void clearHotbarFromList(PlayerEntity player, Ability[] list); 
 
+	List<Ability> getPlayerAbilities();
+	
 	Ability getPreviouslyUsedAbility();
 	void setPreviouslyUsedAbility(Ability abl);
 	

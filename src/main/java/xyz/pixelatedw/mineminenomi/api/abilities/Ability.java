@@ -1,5 +1,7 @@
 package xyz.pixelatedw.mineminenomi.api.abilities;
 
+import java.io.Serializable;
+
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -8,28 +10,29 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.extra.AbilityExplosion;
-import xyz.pixelatedw.mineminenomi.api.data.abilitydata.AbilityDataCapability;
-import xyz.pixelatedw.mineminenomi.api.data.abilitydata.IAbilityData;
+import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
+import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
 import xyz.pixelatedw.mineminenomi.api.network.packets.server.SAbilityDataSyncPacket;
 import xyz.pixelatedw.mineminenomi.api.telemetry.WyTelemetry;
-import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.particles.effects.common.CommonExplosionParticleEffect;
 
-public class Ability 
+public class Ability implements Serializable
 {
-	
+	protected State state = State.STANDBY;
 	protected AbilityProjectile projectile;
 	protected String originalDisplayName = "n/a";
 	protected AbilityAttribute attr;
 	protected boolean isOnCooldown = false, isCharging = false, isRepeating = false, passiveActive = false, isDisabled = false;
-	private int ticksForCooldown, ticksForCharge, ticksForRepeater, ticksForRepeaterFreq, currentSpawn = 0;
-	public Thread cooldownThread;
+	private int cooldownTicks, maxCooldownTicks, ticksForCharge, ticksForRepeater, ticksForRepeaterFreq, currentSpawn = 0;
+	protected IOnUse onUseEvent = (player, ability) -> {};
+	protected IDuringCooldown duringCooldownEvent = (player, ability, cooldown) -> {};
 
 	public Ability(AbilityAttribute attr)
 	{
 		this.attr = new AbilityAttribute(attr);
-		this.ticksForCooldown = this.attr.getAbilityCooldown();
+		this.cooldownTicks = this.attr.getAbilityCooldown();
+		this.maxCooldownTicks = this.attr.getAbilityCooldown();
 		this.ticksForCharge = this.attr.getAbilityCharges();
 		this.ticksForRepeater = this.attr.getAbilityCooldown();
 		this.ticksForRepeaterFreq = this.attr.getAbilityRepeaterFrequency();
@@ -40,18 +43,32 @@ public class Ability
 	
 	public void use(PlayerEntity player)
 	{
-		if(!this.isOnCooldown)
+		if(player.world.isRemote)
+			return;
+		
+		Ability abl = this.getOriginalAbility(player);
+		
+		if(abl == null || abl.getState() != Ability.State.STANDBY)
+			return;
+		
+		this.onUseEvent.onUse(player, abl);
+		
+		if(this.projectile != null)
 		{
-			if(this.projectile != null)
+			if(this.attr.isRepeater())
+				this.startRepeater(player);
+			else
 			{
-				if(this.attr.isRepeater())
-					this.startRepeater(player);
-				else
-				{
-					player.world.addEntity(this.projectile);
-					this.projectile.shoot(player, player.rotationPitch, player.rotationYaw, 0, 2f, 1);
-				}
+				player.world.addEntity(this.projectile);
+				this.projectile.shoot(player, player.rotationPitch, player.rotationYaw, 0, 2f, 1);
 			}
+		}
+		
+		abl.startCooldown();
+		
+		/*if(!this.isOnCooldown)
+		{
+
 			
 			if(this.attr.getPotionEffectsForUser() != null)
 				for(EffectInstance p : this.attr.getPotionEffectsForUser())				
@@ -84,9 +101,9 @@ public class Ability
 	    	this.duringRepeater(player);
 	    	this.startCooldown();
 			ModNetwork.sendToAllAround(new SAbilityDataSyncPacket(player.getEntityId(), abilityProps), (ServerPlayerEntity) player);
-			this.cooldownThread = new Update(player, attr);
-			this.cooldownThread.start();
-		}
+			//this.cooldownThread = new Update(player, attr);
+			//this.cooldownThread.start();
+		}*/
 	}
 	
 	public void tick(PlayerEntity player) {}
@@ -145,7 +162,7 @@ public class Ability
 				this.sendShounenScream(player);
 				
 				this.startPassive(player);
-				(new Update(player, this.attr)).start();
+				//(new Update(player, this.attr)).start();
 			}			
 		}
 	}
@@ -206,7 +223,7 @@ public class Ability
 			
 			isCharging = true;
 			ModNetwork.sendTo(new SAbilityDataSyncPacket(player.getEntityId(), AbilityDataCapability.get(player)), (ServerPlayerEntity) player);
-			(new Update(player, attr)).start();
+			//(new Update(player, attr)).start();
 		}
 	}
 	
@@ -240,7 +257,7 @@ public class Ability
     	if(!player.abilities.isCreativeMode)
     		WyTelemetry.addAbilityStat(this.getAttribute().getAbilityTexture(), this.getAttribute().getAttributeName(), 1);
 
-		(new Update(player, attr)).start();
+		//(new Update(player, attr)).start();
 	}
 	
 	public boolean isCharging()
@@ -277,7 +294,7 @@ public class Ability
 
 		target.attackEntityFrom(DamageSource.causePlayerDamage(player), this.attr.getPunchDamage());
 		
-		(new Update(player, this.attr)).start();
+		//(new Update(player, this.attr)).start();
 	}
 	
 	protected void startCooldown()
@@ -288,7 +305,7 @@ public class Ability
 	protected void startExtUpdate(PlayerEntity player)
 	{
 		ModNetwork.sendTo(new SAbilityDataSyncPacket(player.getEntityId(), AbilityDataCapability.get(player)), (ServerPlayerEntity) player);
-		(new Update(player, attr)).start();
+		//(new Update(player, attr)).start();
 	}
 	
 	public void startUpdate(PlayerEntity player)
@@ -296,7 +313,7 @@ public class Ability
 		this.setCooldownActive(true);
 		if(player instanceof ServerPlayerEntity)
 			ModNetwork.sendTo(new SAbilityDataSyncPacket(player.getEntityId(), AbilityDataCapability.get(player)), (ServerPlayerEntity) player);
-		(new Update(player, attr)).start();
+		//(new Update(player, attr)).start();
 	}
 	
 	protected void sendShounenScream(PlayerEntity player)
@@ -310,14 +327,53 @@ public class Ability
     	//	ModNetwork.sendToAllAround(new PacketShounenScream(player.getCommandSource().getDisplayName().toString(), this.attr.getAbilityDisplayName(), part), player.dimension, player.posX, player.posY, player.posZ, 15);
 	}
 	
-	public void reset()
+	
+	
+	public State getState()
 	{
-		isOnCooldown = false;
-		isCharging = false;
-		isRepeating = false;
-		passiveActive = false;			
+		return this.state;
 	}
 	
+	public void cooldown(PlayerEntity player)
+	{
+		if(player.world.isRemote)
+			return;
+		
+		if(this.state == State.COOLDOWN && this.cooldownTicks > 0)
+		{
+			this.cooldownTicks--;
+			this.duringCooldownEvent.duringCooldown(player, this.getOriginalAbility(player), this.cooldownTicks);
+		}
+		else
+		{
+			this.cooldownTicks = this.maxCooldownTicks;
+			this.state = State.STANDBY;
+		}
+	}
+	
+	private Ability getOriginalAbility(PlayerEntity player)
+	{
+		IAbilityData props = AbilityDataCapability.get(player);
+		return props.getPlayerAbilities().parallelStream().filter(ability -> ability.getAttribute().getAttributeName().equalsIgnoreCase(this.getAttribute().getAttributeName())).findFirst().orElse(null);
+	}
+	
+	public enum State
+	{
+		STANDBY,
+		COOLDOWN
+	}
+	
+	public interface IOnUse extends Serializable
+	{
+		void onUse(PlayerEntity player, Ability ability);
+	}
+	
+	public interface IDuringCooldown extends Serializable
+	{
+		void duringCooldown(PlayerEntity player, Ability ability, int cooldown);
+	}
+	
+/*	
 	class ResetDisable extends Thread
 	{
 		private PlayerEntity player;
@@ -463,5 +519,5 @@ public class Ability
 				}
 			}
 		}
-	}
+	}*/
 }

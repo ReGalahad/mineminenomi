@@ -10,7 +10,7 @@ import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.mineminenomi.api.abilities.extra.AbilityExplosion;
-import xyz.pixelatedw.mineminenomi.api.data.abilitydata.AbilityDataCapability;
+import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.mineminenomi.api.network.packets.server.SAbilityDataSyncPacket;
 import xyz.pixelatedw.mineminenomi.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;

@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.api.data.questdata;
+package xyz.pixelatedw.mineminenomi.api.data.quest;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.nbt.CompoundNBT;

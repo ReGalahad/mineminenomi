@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.api.data.questdata;
+package xyz.pixelatedw.mineminenomi.api.data.quest;
 
 import java.util.List;
 

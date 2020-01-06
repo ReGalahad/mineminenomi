@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.api.data.abilitydata;
+package xyz.pixelatedw.mineminenomi.api.data.ability;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

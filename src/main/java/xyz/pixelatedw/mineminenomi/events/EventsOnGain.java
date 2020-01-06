@@ -18,8 +18,8 @@ import xyz.pixelatedw.mineminenomi.abilities.HakiAbilities.KenbunshokuHaki;
 import xyz.pixelatedw.mineminenomi.abilities.RokushikiAbilities;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.data.abilitydata.AbilityDataCapability;
-import xyz.pixelatedw.mineminenomi.api.data.abilitydata.IAbilityData;
+import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
+import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
 import xyz.pixelatedw.mineminenomi.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
@@ -116,8 +116,8 @@ public class EventsOnGain
 
 			for (int i = 0; i < 8; i++)
 			{
-				if (abilityProps.getHotbarAbilityFromSlot(i) != null)
-					abilityProps.getHotbarAbilityFromSlot(i).reset();
+				//if (abilityProps.getHotbarAbilityFromSlot(i) != null)
+				//	abilityProps.getHotbarAbilityFromSlot(i).reset();
 			}
 
 			ModNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), props), (ServerPlayerEntity) player);
