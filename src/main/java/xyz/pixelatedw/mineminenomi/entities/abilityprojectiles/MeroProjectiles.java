@@ -14,7 +14,7 @@ import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
-import xyz.pixelatedw.mineminenomi.init.ModParticleTextures;
+import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.CustomParticleData;
 
 public class MeroProjectiles
@@ -68,7 +68,7 @@ public class MeroProjectiles
 				for(int i = 0; i < 2; i++)
 				{
 					CustomParticleData data = new CustomParticleData();
-					data.setTexture(ModParticleTextures.MERO);
+					data.setTexture(ModResources.MERO);
 					data.setPosX(posX);
 					data.setPosY(posY);
 					data.setPosZ(posZ);

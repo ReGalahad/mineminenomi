@@ -14,13 +14,13 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.structure.StructurePiece;
 import net.minecraft.world.gen.feature.template.TemplateManager;
-import xyz.pixelatedw.mineminenomi.api.WySchematicHelper;
 import xyz.pixelatedw.mineminenomi.api.debug.WyDebug;
+import xyz.pixelatedw.mineminenomi.api.schematic.WySchematicHelper;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.CustomSpawnerTileEntity;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.mineminenomi.init.ModFeatures;
-import xyz.pixelatedw.mineminenomi.values.ModValuesLoot;
+import xyz.pixelatedw.mineminenomi.init.ModResources;
 
 public class SmallShipPieces
 {
@@ -81,14 +81,14 @@ public class SmallShipPieces
 				
 			}
 			
-			LockableLootTileEntity.setLootTable(world, rand, pos.add(12, 2, 16), ModValuesLoot.CHESTS_SMALL_SHIP_COMBAT);
-			LockableLootTileEntity.setLootTable(world, rand, pos.add(12, 2, 15), ModValuesLoot.CHESTS_SMALL_SHIP_COMBAT);
+			LockableLootTileEntity.setLootTable(world, rand, pos.add(12, 2, 16), ModResources.SMALL_SHIP_COMBAT);
+			LockableLootTileEntity.setLootTable(world, rand, pos.add(12, 2, 15), ModResources.SMALL_SHIP_COMBAT);
 
-			LockableLootTileEntity.setLootTable(world, rand, pos.add(9, 2, 16), ModValuesLoot.CHESTS_SMALL_SHIP_FOOD);
-			LockableLootTileEntity.setLootTable(world, rand, pos.add(9, 2, 15), ModValuesLoot.CHESTS_SMALL_SHIP_FOOD);
+			LockableLootTileEntity.setLootTable(world, rand, pos.add(9, 2, 16), ModResources.SMALL_SHIP_FOOD);
+			LockableLootTileEntity.setLootTable(world, rand, pos.add(9, 2, 15), ModResources.SMALL_SHIP_FOOD);
 
-			LockableLootTileEntity.setLootTable(world, rand, pos.add(11, 2, 12), ModValuesLoot.CHESTS_SMALL_SHIP_COMBAT);
-			LockableLootTileEntity.setLootTable(world, rand, pos.add(10, 2, 12), ModValuesLoot.CHESTS_SMALL_SHIP_COMBAT);
+			LockableLootTileEntity.setLootTable(world, rand, pos.add(11, 2, 12), ModResources.SMALL_SHIP_COMBAT);
+			LockableLootTileEntity.setLootTable(world, rand, pos.add(10, 2, 12), ModResources.SMALL_SHIP_COMBAT);
 
 			return true;
 		}

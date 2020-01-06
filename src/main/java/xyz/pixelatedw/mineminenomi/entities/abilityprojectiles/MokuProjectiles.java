@@ -15,7 +15,7 @@ import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
 import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
-import xyz.pixelatedw.mineminenomi.init.ModParticleTextures;
+import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.CustomParticleData;
 
 public class MokuProjectiles 
@@ -60,7 +60,7 @@ public class MokuProjectiles
 					double offsetZ = (new Random().nextInt(20) + 1.0D - 10.0D) / 18.0D;
 				    
 					CustomParticleData data = new CustomParticleData();
-					data.setTexture(ModParticleTextures.MOKU);
+					data.setTexture(ModResources.MOKU);
 					data.setPosX(posX + offsetX);
 					data.setPosY(posY + offsetY);
 					data.setPosZ(posZ + offsetZ);
@@ -105,7 +105,7 @@ public class MokuProjectiles
 					double offsetZ = WyMathHelper.randomDouble();
 					
 					CustomParticleData data = new CustomParticleData();
-					data.setTexture(ModParticleTextures.MOKU);
+					data.setTexture(ModResources.MOKU);
 					data.setPosX(posX + offsetX);
 					data.setPosY(posY + offsetY);
 					data.setPosZ(posZ + offsetZ);

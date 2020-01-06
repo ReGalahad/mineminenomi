@@ -8,7 +8,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import xyz.pixelatedw.mineminenomi.api.CapabilityProviderSerializable;
+import xyz.pixelatedw.mineminenomi.api.data.CapabilityProviderSerializable;
 
 public class ExtraEffectCapability
 {

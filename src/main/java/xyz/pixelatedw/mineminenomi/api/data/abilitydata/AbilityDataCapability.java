@@ -11,10 +11,10 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import xyz.pixelatedw.mineminenomi.api.CapabilityProviderSerializable;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.abilities.extra.AbilityManager;
+import xyz.pixelatedw.mineminenomi.api.data.CapabilityProviderSerializable;
 
 public class AbilityDataCapability
 {

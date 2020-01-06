@@ -10,7 +10,7 @@ import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
-import xyz.pixelatedw.mineminenomi.init.ModParticleTextures;
+import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.CustomParticleData;
 
 public class ToriPhoenixProjectiles
@@ -47,7 +47,7 @@ public class ToriPhoenixProjectiles
 			if(this.world.isRemote)
 			{
 				CustomParticleData data = new CustomParticleData();
-				data.setTexture(ModParticleTextures.BLUE_FLAME);
+				data.setTexture(ModResources.BLUE_FLAME);
 				data.setPosX(posX);
 				data.setPosY(posY);
 				data.setPosZ(posZ);

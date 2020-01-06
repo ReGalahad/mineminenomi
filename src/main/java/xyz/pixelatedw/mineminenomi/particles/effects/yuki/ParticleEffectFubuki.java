@@ -5,7 +5,7 @@ import java.util.Random;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
-import xyz.pixelatedw.mineminenomi.init.ModParticleTextures;
+import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 
@@ -32,7 +32,7 @@ public class ParticleEffectFubuki extends ParticleEffect
 			motionY *= middlePoint / 2;
 			motionZ *= middlePoint / 2;
 
-			SimpleParticle cp = new SimpleParticle(world, ModParticleTextures.YUKI,
+			SimpleParticle cp = new SimpleParticle(world, ModResources.YUKI,
 					posX + offsetX, 
 					posY + offsetY,
 					posZ + offsetZ, 

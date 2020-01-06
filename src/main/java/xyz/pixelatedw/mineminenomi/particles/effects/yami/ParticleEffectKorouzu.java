@@ -3,7 +3,7 @@ package xyz.pixelatedw.mineminenomi.particles.effects.yami;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
-import xyz.pixelatedw.mineminenomi.init.ModParticleTextures;
+import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 
@@ -19,7 +19,7 @@ public class ParticleEffectKorouzu extends ParticleEffect
 			double offsetY = WyMathHelper.randomWithRange(-2, 2) + WyMathHelper.randomDouble();
 			double offsetZ = WyMathHelper.randomWithRange(-2, 2) + WyMathHelper.randomDouble();
 			
-			SimpleParticle cp = new SimpleParticle(world, ModParticleTextures.DARKNESS,
+			SimpleParticle cp = new SimpleParticle(world, ModResources.DARKNESS,
 					posX + offsetX , 
 					posY + offsetY,
 					posZ + offsetZ, 

@@ -23,7 +23,7 @@ import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.init.ModDevilFruits;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
-import xyz.pixelatedw.mineminenomi.values.ModValuesGUI;
+import xyz.pixelatedw.mineminenomi.init.ModResources;
 
 @OnlyIn(Dist.CLIENT)
 public class PlayerStatsScreen extends Screen
@@ -82,14 +82,14 @@ public class PlayerStatsScreen extends Screen
 		if (entityStatsProps.getBelly() > 0)
 		{
 			this.minecraft.fontRenderer.drawStringWithShadow("" + entityStatsProps.getBelly(), posX + 215, posY + 72, -1);
-			this.minecraft.textureManager.bindTexture(ModValuesGUI.TEXTURE_CURRENCIES);		
+			this.minecraft.textureManager.bindTexture(ModResources.CURRENCIES);		
 			GuiUtils.drawTexturedModalRect(posX + 190, posY + 60, 0, 32, 32, 64, 1);
 		}
 
 		if (entityStatsProps.getExtol() > 0)
 		{
 			this.minecraft.fontRenderer.drawStringWithShadow("" + entityStatsProps.getExtol(), posX + 215, posY + 102, -1);
-			this.minecraft.textureManager.bindTexture(ModValuesGUI.TEXTURE_CURRENCIES);
+			this.minecraft.textureManager.bindTexture(ModResources.CURRENCIES);
 			GuiUtils.drawTexturedModalRect(posX + 190, posY + 90, 34, 32, 64, 86, 1);
 		}
 

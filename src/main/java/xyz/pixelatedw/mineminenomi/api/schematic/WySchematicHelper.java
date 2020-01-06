@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.api;
+package xyz.pixelatedw.mineminenomi.api.schematic;
 
 import java.io.InputStream;
 import java.util.ArrayList;

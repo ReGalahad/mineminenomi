@@ -14,7 +14,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.client.config.GuiUtils;
 import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.values.ModValuesGUI;
+import xyz.pixelatedw.mineminenomi.init.ModResources;
 
 public class WantedPosterScreen extends Screen
 {
@@ -42,7 +42,7 @@ public class WantedPosterScreen extends Screen
 		GL11.glTranslated(-128, -128, -512);
 
 		// Bounty Poster Texture
-		this.minecraft.getTextureManager().bindTexture(ModValuesGUI.TEXTURE_BOUNTYPOSTER_LARGE);
+		this.minecraft.getTextureManager().bindTexture(ModResources.BOUNTY_POSTER_LARGE);
 		GuiUtils.drawTexturedModalRect(0, 0, 0, 0, 220, 250, 0);
 
 		// Scaling down the entire thing (with wanted poster texture and name) to x0.71
@@ -74,7 +74,7 @@ public class WantedPosterScreen extends Screen
 		}
 		GL11.glPopMatrix();
 
-		this.minecraft.getTextureManager().bindTexture(ModValuesGUI.TEXTURE_CURRENCIES);
+		this.minecraft.getTextureManager().bindTexture(ModResources.CURRENCIES);
 		GuiUtils.drawTexturedModalRect(-2, 63, 0, 0, 32, 32, 1);
 		DecimalFormat decimalFormat = new DecimalFormat("#,##0");
 

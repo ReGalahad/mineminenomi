@@ -20,9 +20,9 @@ import xyz.pixelatedw.mineminenomi.api.data.questdata.QuestDataCapability;
 import xyz.pixelatedw.mineminenomi.api.debug.WyDebug;
 import xyz.pixelatedw.mineminenomi.api.quests.Quest;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
+import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
 import xyz.pixelatedw.mineminenomi.screens.extra.NoTextureButton;
-import xyz.pixelatedw.mineminenomi.values.ModValuesGUI;
 
 @OnlyIn(Dist.CLIENT)
 public class QuestsTrackerScreen extends Screen
@@ -49,7 +49,7 @@ public class QuestsTrackerScreen extends Screen
 		int posY = (this.height - 256) / 2;
 			
 		// Background rendering
-		this.minecraft.getTextureManager().bindTexture(ModValuesGUI.TEXTURE_BLANK);
+		this.minecraft.getTextureManager().bindTexture(ModResources.BLANK);
 		GL11.glPushMatrix();
 		{
 			double scale = 1.4;
@@ -61,7 +61,7 @@ public class QuestsTrackerScreen extends Screen
 			
 			GuiUtils.drawTexturedModalRect(0, 0, 0, 0, 256, 256, 1);
 			
-			this.minecraft.getTextureManager().bindTexture(ModValuesGUI.TEXTURE_COMBATMODE);
+			this.minecraft.getTextureManager().bindTexture(ModResources.WIDGETS);
 			GuiUtils.drawTexturedModalRect(-20, 30, 0, 92, 25, 100, 1);
 			GuiUtils.drawTexturedModalRect(232, 30, 26, 92, 30, 100, 1);		
 		}

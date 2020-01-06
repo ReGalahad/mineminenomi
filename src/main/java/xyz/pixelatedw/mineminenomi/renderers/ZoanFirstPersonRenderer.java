@@ -28,8 +28,8 @@ import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfo;
 import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.helpers.MorphsHelper;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
+import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer;
-import xyz.pixelatedw.mineminenomi.values.ModValuesMorph;
 
 @OnlyIn(Dist.CLIENT)
 public class ZoanFirstPersonRenderer
@@ -61,9 +61,9 @@ public class ZoanFirstPersonRenderer
 			// mc.getTextureManager().bindTexture(abstractclientplayerentity.getLocationSkin());
 			
 			if (props.isPassiveActive(ModAttributes.BUSOSHOKU_HAKI))
-				mc.getTextureManager().bindTexture(ModValuesMorph.HANDTEXTURE_BUSO);
+				mc.getTextureManager().bindTexture(ModResources.BUSOSHOKU_HAKI_ARM);
 			else if (props.isPassiveActive(ModAttributes.HOT_BOILING_SPECIAL))
-				mc.getTextureManager().bindTexture(ModValuesMorph.HANDTEXTURE_HOT_BOILING_SPECIAL);
+				mc.getTextureManager().bindTexture(ModResources.HOT_BOILING_SPECIAL_ARM);
 			else
 				mc.getTextureManager().bindTexture(getTextureFromMorph(mc.player, renderManager));
 	

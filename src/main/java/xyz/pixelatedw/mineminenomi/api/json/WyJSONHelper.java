@@ -27,9 +27,6 @@ public class WyJSONHelper
 	
 	public static void runGenerators(boolean override)
 	{
-		if(!WyDebug.isDebug())
-			return;
-		
 		WyJSONHelper.generateJSONLangs();
 		WyJSONHelper.generateJSONModels(override);
 		WyJSONHelper.generateJSONLootTables(override);

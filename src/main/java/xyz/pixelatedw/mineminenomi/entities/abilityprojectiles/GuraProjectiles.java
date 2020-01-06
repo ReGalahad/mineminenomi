@@ -12,7 +12,7 @@ import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
 import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
-import xyz.pixelatedw.mineminenomi.init.ModParticleTextures;
+import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.CustomParticleData;
 
 public class GuraProjectiles 
@@ -57,7 +57,7 @@ public class GuraProjectiles
 					else
 					{
 						CustomParticleData data = new CustomParticleData();
-						data.setTexture(ModParticleTextures.GURA2);
+						data.setTexture(ModResources.GURA2);
 						data.setPosX(posX + (WyMathHelper.randomDouble() * 2));
 						data.setPosY(posY + (WyMathHelper.randomDouble() * 2));
 						data.setPosZ(posZ + (WyMathHelper.randomDouble() * 2));
@@ -112,7 +112,7 @@ public class GuraProjectiles
 					else
 					{
 						CustomParticleData data = new CustomParticleData();
-						data.setTexture(ModParticleTextures.GURA2);
+						data.setTexture(ModResources.GURA2);
 						data.setPosX(posX + (WyMathHelper.randomDouble() * 2));
 						data.setPosY(posY + (WyMathHelper.randomDouble() * 2));
 						data.setPosZ(posZ + (WyMathHelper.randomDouble() * 2));

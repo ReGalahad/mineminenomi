@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.api;
+package xyz.pixelatedw.mineminenomi.api.data;
 
 import javax.annotation.Nullable;
 

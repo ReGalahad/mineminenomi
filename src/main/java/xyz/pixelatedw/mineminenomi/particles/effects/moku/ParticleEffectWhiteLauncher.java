@@ -4,7 +4,7 @@ import java.util.Random;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.init.ModParticleTextures;
+import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 
@@ -20,7 +20,7 @@ public class ParticleEffectWhiteLauncher extends ParticleEffect
 			double offsetY = (new Random().nextInt(20) + 1.0D - 10.0D) / 10.0D;
 			double offsetZ = (new Random().nextInt(20) + 1.0D - 10.0D) / 15.0D;
 	      
-			SimpleParticle cp = new SimpleParticle(world, ModParticleTextures.MOKU,
+			SimpleParticle cp = new SimpleParticle(world, ModResources.MOKU,
 					posX + offsetX, 
 					posY + 1 + offsetY,
 					posZ + offsetZ, 

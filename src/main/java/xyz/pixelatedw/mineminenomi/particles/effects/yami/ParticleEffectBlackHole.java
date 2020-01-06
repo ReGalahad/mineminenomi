@@ -3,7 +3,7 @@ package xyz.pixelatedw.mineminenomi.particles.effects.yami;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
-import xyz.pixelatedw.mineminenomi.init.ModParticleTextures;
+import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 
@@ -18,7 +18,7 @@ public class ParticleEffectBlackHole extends ParticleEffect
 			double offsetX = WyMathHelper.randomWithRange(-10, 10) + WyMathHelper.randomDouble();
 			double offsetZ = WyMathHelper.randomWithRange(-10, 10) + WyMathHelper.randomDouble();
 			
-			SimpleParticle cp = new SimpleParticle(world, ModParticleTextures.DARKNESS,
+			SimpleParticle cp = new SimpleParticle(world, ModResources.DARKNESS,
 					posX - 1 + offsetX, 
 					posY - 0.5 + WyMathHelper.randomDouble(),
 					posZ - 1 + offsetZ, 

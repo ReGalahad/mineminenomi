@@ -12,7 +12,7 @@ import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModExtraAttributes;
-import xyz.pixelatedw.mineminenomi.init.ModParticleTextures;
+import xyz.pixelatedw.mineminenomi.init.ModResources;
 
 public class GoroProjectiles 
 {
@@ -76,7 +76,7 @@ public class GoroProjectiles
 		{	
 			if(this.world.isRemote)
 			{
-				ResourceLocation particleToUse = this.ticksExisted % 2 == 0 ? ModParticleTextures.GORO2 : ModParticleTextures.GORO;
+				ResourceLocation particleToUse = this.ticksExisted % 2 == 0 ? ModResources.GORO2 : ModResources.GORO;
 			//	ModMain.proxy.spawnParticleEffect(new ProjectileTrailParticleEffect(particleToUse, 4, 2, 2), this.world, this.posX, this.posY, this.posZ, 0, 0, 0);		
 			}
 			

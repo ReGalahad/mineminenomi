@@ -7,7 +7,7 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ParticleType;
 import net.minecraft.util.ResourceLocation;
-import xyz.pixelatedw.mineminenomi.init.ModParticleTextures;
+import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.init.ModParticleTypes;
 
 public class GenericParticleData implements IParticleData
@@ -73,7 +73,7 @@ public class GenericParticleData implements IParticleData
 	private float alpha = 1.0F;
 	private float size = 1;
 	private int life = 10;
-	private ResourceLocation texture = ModParticleTextures.MERA;
+	private ResourceLocation texture = ModResources.MERA;
 	
 	public GenericParticleData() {}
 

@@ -3,7 +3,7 @@ package xyz.pixelatedw.mineminenomi.particles.effects.doku;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
-import xyz.pixelatedw.mineminenomi.init.ModParticleTextures;
+import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 
@@ -22,7 +22,7 @@ public class ChloroBallCloudParticleEffect extends ParticleEffect
 			motionX = WyMathHelper.randomDouble() / 8;
 			motionZ = WyMathHelper.randomDouble() / 8;
 			
-			SimpleParticle cp = new SimpleParticle(world, ModParticleTextures.DOKU,
+			SimpleParticle cp = new SimpleParticle(world, ModResources.DOKU,
 					posX + offsetX, 
 					posY + offsetY,
 					posZ + offsetZ, 

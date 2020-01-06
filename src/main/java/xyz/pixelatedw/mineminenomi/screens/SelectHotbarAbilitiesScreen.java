@@ -26,9 +26,9 @@ import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.init.ModNetwork;
+import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.screens.extra.AbilitiesListScreenPanel;
 import xyz.pixelatedw.mineminenomi.screens.extra.NoTextureButton;
-import xyz.pixelatedw.mineminenomi.values.ModValuesGUI;
 
 @OnlyIn(Dist.CLIENT)
 public class SelectHotbarAbilitiesScreen extends Screen
@@ -59,14 +59,14 @@ public class SelectHotbarAbilitiesScreen extends Screen
 	{
 		this.renderBackground();
 
-		Minecraft.getInstance().getTextureManager().bindTexture(ModValuesGUI.TEXTURE_BLANK);
+		Minecraft.getInstance().getTextureManager().bindTexture(ModResources.BLANK);
 
 		int posX = this.width;
 		int posY = this.height;
 		GuiUtils.drawTexturedModalRect((posX - 250) / 2, (posY - 230) / 2, 0, 0, 256, 256, 0);
 		GuiUtils.drawTexturedModalRect((posX - 250) / 2, posY - 60, 0, 0, 256, 256, 0);
 
-		this.minecraft.getTextureManager().bindTexture(ModValuesGUI.TEXTURE_COMBATMODE);
+		this.minecraft.getTextureManager().bindTexture(ModResources.WIDGETS);
 
 		GL11.glEnable(GL11.GL_BLEND);
 
@@ -85,7 +85,7 @@ public class SelectHotbarAbilitiesScreen extends Screen
 				WyRenderHelper.drawAbilityIcon(WyHelper.getFancyName(this.abilityDataProps.getHotbarAbilityFromSlot(i).getAttribute().getAbilityTexture()), (posX - 192 + (i * 50)) / 2, posY - 29, 16, 16);
 		}
 
-		this.minecraft.getTextureManager().bindTexture(ModValuesGUI.TEXTURE_COMBATMODE);
+		this.minecraft.getTextureManager().bindTexture(ModResources.WIDGETS);
 		if (!WyHelper.isNullOrEmpty(devilFruitProps.getDevilFruit()))
 		{
 			GuiUtils.drawTexturedModalRect((posX - 280) / 2, (posY - 200) / 2, 0, 23, 27, 26, 0);
@@ -97,19 +97,19 @@ public class SelectHotbarAbilitiesScreen extends Screen
 
 				WyRenderHelper.drawDevilFruitIcon(df.getTranslationKey().replace("item." + Env.PROJECT_ID + ".", ""), (posX - 268) / 2, (posY - 187) / 2, 16, 16);
 			}
-			this.minecraft.getTextureManager().bindTexture(ModValuesGUI.TEXTURE_COMBATMODE);
+			this.minecraft.getTextureManager().bindTexture(ModResources.WIDGETS);
 		}
 		if (this.abilityDataProps.getRacialAbilities()[0] != null)
 		{
 			GuiUtils.drawTexturedModalRect((posX - 280) / 2, (posY - 140) / 2, 0, 23, 27, 26, 0);
 			WyRenderHelper.drawAbilityIcon(this.abilityDataProps.getRacialAbilities()[0].getAttribute().getAttributeName(), (posX - 268) / 2, (posY - 127) / 2, 16, 16);
-			this.minecraft.getTextureManager().bindTexture(ModValuesGUI.TEXTURE_COMBATMODE);
+			this.minecraft.getTextureManager().bindTexture(ModResources.WIDGETS);
 		}
 		if (this.abilityDataProps.getHakiAbilities()[0] != null)
 		{
 			GuiUtils.drawTexturedModalRect((posX - 280) / 2, (posY - 80) / 2, 0, 23, 27, 26, 0);
 			WyRenderHelper.drawAbilityIcon(this.abilityDataProps.getHakiAbilities()[0].getAttribute().getAttributeName(), (posX - 268) / 2, (posY - 67) / 2, 16, 16);
-			this.minecraft.getTextureManager().bindTexture(ModValuesGUI.TEXTURE_COMBATMODE);
+			this.minecraft.getTextureManager().bindTexture(ModResources.WIDGETS);
 		}
 
 		GL11.glDisable(GL11.GL_BLEND);

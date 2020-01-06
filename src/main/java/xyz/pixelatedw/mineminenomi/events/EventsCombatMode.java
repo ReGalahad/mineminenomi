@@ -39,7 +39,7 @@ import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.data.entity.haki.HakiDataCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.haki.IHakiData;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
-import xyz.pixelatedw.mineminenomi.values.ModValuesGUI;
+import xyz.pixelatedw.mineminenomi.init.ModResources;
 
 @OnlyIn(Dist.CLIENT)
 public class EventsCombatMode extends Screen
@@ -107,7 +107,7 @@ public class EventsCombatMode extends Screen
 			event.setCanceled(true);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			GL11.glDisable(GL11.GL_LIGHTING);
-			mc.getTextureManager().bindTexture(ModValuesGUI.TEXTURE_COMBATMODE);
+			mc.getTextureManager().bindTexture(ModResources.WIDGETS);
 
 			for (int i = 0; i < 8; i++)
 			{
@@ -179,7 +179,7 @@ public class EventsCombatMode extends Screen
 							
 							GlStateManager.pushMatrix();
 							{
-								Minecraft.getInstance().getTextureManager().bindTexture(ModValuesGUI.ICON_HARROW);
+								Minecraft.getInstance().getTextureManager().bindTexture(ModResources.WOOD_ARROW);
 
 								int posX2 = (posX - 256) / 2;
 								int posY2 = (posY - 256);

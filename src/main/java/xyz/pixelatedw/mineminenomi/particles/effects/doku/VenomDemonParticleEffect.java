@@ -3,7 +3,7 @@ package xyz.pixelatedw.mineminenomi.particles.effects.doku;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
-import xyz.pixelatedw.mineminenomi.init.ModParticleTextures;
+import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 
@@ -19,7 +19,7 @@ public class VenomDemonParticleEffect extends ParticleEffect
 			double offsetY = WyMathHelper.randomWithRange(-2, 0) + WyMathHelper.randomDouble();
 			double offsetZ = WyMathHelper.randomWithRange(-2, 2) + WyMathHelper.randomDouble();
 			
-			SimpleParticle cp = new SimpleParticle(world, ModParticleTextures.DOKU,
+			SimpleParticle cp = new SimpleParticle(world, ModResources.DOKU,
 					posX + offsetX, 
 					posY + 1 + offsetY,
 					posZ + offsetZ, 

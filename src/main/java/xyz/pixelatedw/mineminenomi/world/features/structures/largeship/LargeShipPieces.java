@@ -14,14 +14,14 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.structure.StructurePiece;
 import net.minecraft.world.gen.feature.template.TemplateManager;
-import xyz.pixelatedw.mineminenomi.api.WySchematicHelper;
 import xyz.pixelatedw.mineminenomi.api.debug.WyDebug;
 import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
+import xyz.pixelatedw.mineminenomi.api.schematic.WySchematicHelper;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.CustomSpawnerTileEntity;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.mineminenomi.init.ModFeatures;
-import xyz.pixelatedw.mineminenomi.values.ModValuesLoot;
+import xyz.pixelatedw.mineminenomi.init.ModResources;
 
 public class LargeShipPieces
 {
@@ -101,11 +101,11 @@ public class LargeShipPieces
 					((CustomSpawnerTileEntity) world.getTileEntity(pos.add(12, 12, 49))).setSpawnerMob(ModEntities.PIRATE_WITH_SWORD).setSpawnerLimit(2);
 				}
 				
-				LockableLootTileEntity.setLootTable(world, rand, pos.add(7, 6, 46), ModValuesLoot.CHESTS_LARGE_SHIP_COMBAT);
+				LockableLootTileEntity.setLootTable(world, rand, pos.add(7, 6, 46), ModResources.LARGE_SHIP_COMBAT);
 	
-				LockableLootTileEntity.setLootTable(world, rand, pos.add(14, 6, 46), ModValuesLoot.CHESTS_LARGE_SHIP_FOOD);
+				LockableLootTileEntity.setLootTable(world, rand, pos.add(14, 6, 46), ModResources.LARGE_SHIP_FOOD);
 				
-				LockableLootTileEntity.setLootTable(world, rand, pos.add(11, 6, 49), ModValuesLoot.CHESTS_LARGE_SHIP_TREASURE);
+				LockableLootTileEntity.setLootTable(world, rand, pos.add(11, 6, 49), ModResources.LARGE_SHIP_TREASURE);
 			}
 			catch(Exception e)
 			{

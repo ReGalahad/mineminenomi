@@ -18,8 +18,8 @@ import xyz.pixelatedw.mineminenomi.api.network.packets.client.CQuestDataSyncPack
 import xyz.pixelatedw.mineminenomi.api.quests.Quest;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.mineminenomi.init.ModNetwork;
+import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.screens.extra.NoTextureButton;
-import xyz.pixelatedw.mineminenomi.values.ModValuesGUI;
 
 @OnlyIn(Dist.CLIENT)
 public class QuestAcceptScreen extends Screen
@@ -46,7 +46,7 @@ public class QuestAcceptScreen extends Screen
 		int posX = (this.width - 256) / 2;
 		int posY = (this.height - 256) / 2;
 	
-		this.minecraft.getTextureManager().bindTexture(ModValuesGUI.TEXTURE_BLANK);
+		this.minecraft.getTextureManager().bindTexture(ModResources.BLANK);
 		
 		if(this.currentQuestToDisplay == null)
 			return;
@@ -81,7 +81,7 @@ public class QuestAcceptScreen extends Screen
 		}
 		GL11.glPopMatrix();
 
-		this.minecraft.getTextureManager().bindTexture(ModValuesGUI.TEXTURE_COMBATMODE);
+		this.minecraft.getTextureManager().bindTexture(ModResources.WIDGETS);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);	
 		
 		GuiUtils.drawTexturedModalRect(posX + 10, posY + 140, 0, 196, 96, 49, 0);

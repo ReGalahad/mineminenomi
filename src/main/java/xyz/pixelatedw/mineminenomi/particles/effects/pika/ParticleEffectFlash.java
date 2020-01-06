@@ -2,7 +2,7 @@ package xyz.pixelatedw.mineminenomi.particles.effects.pika;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.init.ModParticleTextures;
+import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 
@@ -12,7 +12,7 @@ public class ParticleEffectFlash extends ParticleEffect
 	@Override
 	public void spawn(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
 	{
-		SimpleParticle cp = new SimpleParticle(world, ModParticleTextures.PIKA,
+		SimpleParticle cp = new SimpleParticle(world, ModResources.PIKA,
 				posX, 
 				posY + 3.5,
 				posZ, 

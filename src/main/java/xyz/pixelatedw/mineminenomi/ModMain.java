@@ -6,6 +6,9 @@ import org.apache.logging.log4j.Logger;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.api.debug.WyDebug;
+import xyz.pixelatedw.mineminenomi.config.CommonConfig;
+import xyz.pixelatedw.mineminenomi.init.ModNetwork;
+import xyz.pixelatedw.mineminenomi.init.ModQuests;
 import xyz.pixelatedw.mineminenomi.proxy.ClientProxy;
 import xyz.pixelatedw.mineminenomi.proxy.IProxy;
 import xyz.pixelatedw.mineminenomi.proxy.ServerProxy;
@@ -27,5 +30,9 @@ public class ModMain
 
 		instance = this;
 		proxy = DistExecutor.runForDist(() -> () -> new ClientProxy(), () -> () -> new ServerProxy());
+		
+		CommonConfig.init();
+		ModNetwork.init();
+		ModQuests.init();
 	}
 }

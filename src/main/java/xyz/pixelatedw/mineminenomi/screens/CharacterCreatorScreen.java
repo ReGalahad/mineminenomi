@@ -12,11 +12,11 @@ import net.minecraftforge.fml.client.config.GuiUtils;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.init.ModNetwork;
+import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
 import xyz.pixelatedw.mineminenomi.packets.client.CDeleteCCBookPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CEntityStatsSyncPacket;
 import xyz.pixelatedw.mineminenomi.screens.extra.NoTextureButton;
-import xyz.pixelatedw.mineminenomi.values.ModValuesGUI;
 
 @OnlyIn(Dist.CLIENT)
 public class CharacterCreatorScreen extends Screen
@@ -43,10 +43,10 @@ public class CharacterCreatorScreen extends Screen
 		int posX = (this.width - 256) / 2;
 		int posY = (this.height - 256) / 2;
 		
-		Minecraft.getInstance().getTextureManager().bindTexture(ModValuesGUI.TEXTURE_BLANK);
+		Minecraft.getInstance().getTextureManager().bindTexture(ModResources.BLANK);
 		GuiUtils.drawTexturedModalRect(posX, posY + 50, 0, 0, 256, 256, 1);
 		
-		Minecraft.getInstance().getTextureManager().bindTexture(ModValuesGUI.TEXTURE_COMBATMODE);
+		Minecraft.getInstance().getTextureManager().bindTexture(ModResources.WIDGETS);
 		GuiUtils.drawTexturedModalRect(posX + 15, posY + 75, 0, 92, 25, 100, 1);	
 		GuiUtils.drawTexturedModalRect(posX + 200, posY + 73, 26, 92, 30, 100, 1);
 		
@@ -54,7 +54,7 @@ public class CharacterCreatorScreen extends Screen
 		GuiUtils.drawTexturedModalRect(posX - 80, posY + (int)(70 * 1.6), 0, 196, 96, 49, 1);
 		GuiUtils.drawTexturedModalRect(posX - 80, posY + (int)(70 * 2.2), 0, 196, 96, 49, 1);	
 		GuiUtils.drawTexturedModalRect(posX + 75, posY + 200, 0, 196, 96, 49, 1);
-		Minecraft.getInstance().getTextureManager().bindTexture(ModValuesGUI.TEXTURE_STRINGS1);
+		//Minecraft.getInstance().getTextureManager().bindTexture(ModResources.TEXTURE_STRINGS1);
 		GuiUtils.drawTexturedModalRect(posX - 78, posY + 80, 0, 232, 86, 22, 1);
 		GuiUtils.drawTexturedModalRect(posX - 70, posY + 121, 94, 230, 74, 22, 1);
 		GuiUtils.drawTexturedModalRect(posX - 75, posY + 148, 172, 210, 85, 52, 1);		
@@ -64,72 +64,54 @@ public class CharacterCreatorScreen extends Screen
 		{
 			if(this.selectedOpt == 0)
 			{
-				Minecraft.getInstance().getTextureManager().bindTexture(ModValuesGUI.ICON_PIRATE);
+				Minecraft.getInstance().getTextureManager().bindTexture(ModResources.PIRATE);
 				GuiUtils.drawTexturedModalRect(posX - 2, posY + 10, 0, 0, 256, 256, 1);
-				Minecraft.getInstance().getTextureManager().bindTexture(ModValuesGUI.TEXTURE_STRINGS1);
-				GuiUtils.drawTexturedModalRect(posX + 69, posY + 65, 0, 0, 118, 30, 1);
 			}
 			else if(this.selectedOpt == 1)
 			{
-				Minecraft.getInstance().getTextureManager().bindTexture(ModValuesGUI.ICON_MARINE);
+				Minecraft.getInstance().getTextureManager().bindTexture(ModResources.MARINE);
 				GuiUtils.drawTexturedModalRect(posX - 2, posY + 10, 0, 0, 256, 256, 1);
-				Minecraft.getInstance().getTextureManager().bindTexture(ModValuesGUI.TEXTURE_STRINGS1);
-				GuiUtils.drawTexturedModalRect(posX + 70, posY + 75, 0, 30, 129, 23, 1);
 			}
 			else if(this.selectedOpt == 2)
 			{
-				Minecraft.getInstance().getTextureManager().bindTexture(ModValuesGUI.ICON_BOUNTYHUNTER);
+				Minecraft.getInstance().getTextureManager().bindTexture(ModResources.BOUNTY_HUNTER);
 				GuiUtils.drawTexturedModalRect(posX - 2, posY + 10, 0, 0, 256, 256, 1);
-				Minecraft.getInstance().getTextureManager().bindTexture(ModValuesGUI.TEXTURE_STRINGS1);
-				GuiUtils.drawTexturedModalRect(posX + 46, posY + 65, 0, 52, 170, 50, 1);
 			}
 		}
 		if(this.page == 1)
 		{
 			if(this.selectedOpt == 0)
 			{
-				Minecraft.getInstance().getTextureManager().bindTexture(ModValuesGUI.ICON_HUMAN);
+				Minecraft.getInstance().getTextureManager().bindTexture(ModResources.HUMAN);
 				GuiUtils.drawTexturedModalRect(posX - 2, posY + 10, 0, 0, 256, 256, 1);
-				Minecraft.getInstance().getTextureManager().bindTexture(ModValuesGUI.TEXTURE_STRINGS1);
-				GuiUtils.drawTexturedModalRect(posX + 75, posY + 65, 0, 102, 129, 30, 1);
 			}
 			else if(this.selectedOpt == 1)
 			{
-				Minecraft.getInstance().getTextureManager().bindTexture(ModValuesGUI.ICON_FISHMAN);
+				Minecraft.getInstance().getTextureManager().bindTexture(ModResources.FISHMAN);
 				GuiUtils.drawTexturedModalRect(posX - 2, posY + 10, 0, 0, 256, 256, 1);
-				Minecraft.getInstance().getTextureManager().bindTexture(ModValuesGUI.TEXTURE_STRINGS1);
-				GuiUtils.drawTexturedModalRect(posX + 65, posY + 70, 0, 130, 129, 26, 1);
 			}
 			else if(this.selectedOpt == 2)
 			{
-				Minecraft.getInstance().getTextureManager().bindTexture(ModValuesGUI.ICON_CYBORG);
+				Minecraft.getInstance().getTextureManager().bindTexture(ModResources.CYBORG);
 				GuiUtils.drawTexturedModalRect(posX - 2, posY + 10, 0, 0, 256, 256, 1);
-				Minecraft.getInstance().getTextureManager().bindTexture(ModValuesGUI.TEXTURE_STRINGS1);
-				GuiUtils.drawTexturedModalRect(posX + 75, posY + 72, 0, 160, 110, 24, 1);
 			}	
 		}
 		if(this.page == 2) 
 		{
 			if(this.selectedOpt == 0)
 			{
-				Minecraft.getInstance().getTextureManager().bindTexture(ModValuesGUI.ICON_SWORDSMAN);
+				Minecraft.getInstance().getTextureManager().bindTexture(ModResources.SWORDSMAN);
 				GuiUtils.drawTexturedModalRect(posX - 2, posY + 10, 0, 0, 256, 256, 1);
-				Minecraft.getInstance().getTextureManager().bindTexture(ModValuesGUI.TEXTURE_STRINGS1);
-				GuiUtils.drawTexturedModalRect(posX + 38, posY + 72, 0, 185, 170, 24, 1);
 			}
 			else if(this.selectedOpt == 1)
 			{
-				Minecraft.getInstance().getTextureManager().bindTexture(ModValuesGUI.ICON_SNIPER);
+				Minecraft.getInstance().getTextureManager().bindTexture(ModResources.SNIPER);
 				GuiUtils.drawTexturedModalRect(posX - 2, posY + 10, 0, 0, 256, 256, 1);
-				Minecraft.getInstance().getTextureManager().bindTexture(ModValuesGUI.TEXTURE_STRINGS1);
-				GuiUtils.drawTexturedModalRect(posX + 80, posY + 72, 0, 209, 110, 23, 1);
 			}
 			else if(this.selectedOpt == 2)
 			{
-				Minecraft.getInstance().getTextureManager().bindTexture(ModValuesGUI.ICON_MEDIC);
+				Minecraft.getInstance().getTextureManager().bindTexture(ModResources.MEDIC);
 				GuiUtils.drawTexturedModalRect(posX - 2, posY + 10, 0, 0, 256, 256, 1);
-				Minecraft.getInstance().getTextureManager().bindTexture(ModValuesGUI.TEXTURE_STRINGS1);
-				GuiUtils.drawTexturedModalRect(posX + 75, posY + 72, 109, 159, 86, 27, 1);
 			}	
 		}
 		

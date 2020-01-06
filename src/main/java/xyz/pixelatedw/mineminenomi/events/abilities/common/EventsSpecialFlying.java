@@ -18,7 +18,7 @@ import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModNetwork;
-import xyz.pixelatedw.mineminenomi.init.ModParticleTextures;
+import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.packets.server.SSpecialFlyingPacket;
 import xyz.pixelatedw.mineminenomi.particles.CustomParticleData;
 
@@ -63,14 +63,14 @@ public class EventsSpecialFlying
 					
 					ResourceLocation particleToUse = null;
 					if(props.getDevilFruit().equalsIgnoreCase("mokumoku") )
-						particleToUse = ModParticleTextures.MOKU;
+						particleToUse = ModResources.MOKU;
 					else if(props.getDevilFruit().equalsIgnoreCase("gasugasu") )
-						particleToUse = ModParticleTextures.GASU;
+						particleToUse = ModResources.GASU;
 					else if(props.getDevilFruit().equalsIgnoreCase("sunasuna") )
-						particleToUse = ModParticleTextures.SUNA2;
+						particleToUse = ModResources.SUNA2;
 					else if(props.getDevilFruit().equalsIgnoreCase("toritoriphoenix") )
 					{
-						particleToUse = ModParticleTextures.BLUE_FLAME;
+						particleToUse = ModResources.BLUE_FLAME;
 						extraOffset = 1;
 					}
 					

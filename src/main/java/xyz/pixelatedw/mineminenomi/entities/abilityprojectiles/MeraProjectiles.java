@@ -17,7 +17,7 @@ import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
-import xyz.pixelatedw.mineminenomi.init.ModParticleTextures;
+import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.CustomParticleData;
 
 public class MeraProjectiles
@@ -67,7 +67,7 @@ public class MeraProjectiles
 					double offsetZ = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
 
 					CustomParticleData data = new CustomParticleData();
-					data.setTexture(ModParticleTextures.MERA);
+					data.setTexture(ModResources.MERA);
 					data.setPosX(posX + offsetX);
 					data.setPosY(posY + offsetY);
 					data.setPosZ(posZ + offsetZ);
@@ -85,7 +85,7 @@ public class MeraProjectiles
 					double offsetZ = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
 					
 					CustomParticleData data = new CustomParticleData();
-					data.setTexture(ModParticleTextures.MOKU);
+					data.setTexture(ModResources.MOKU);
 					data.setPosX(posX + offsetX);
 					data.setPosY(posY + offsetY);
 					data.setPosZ(posZ + offsetZ);
@@ -132,7 +132,7 @@ public class MeraProjectiles
 				double posZOffset = this.world.rand.nextGaussian() * 0.42D;		
 	
 				CustomParticleData data = new CustomParticleData();
-				data.setTexture(ModParticleTextures.MERA);
+				data.setTexture(ModResources.MERA);
 				data.setPosX(posX + posXOffset);
 				data.setPosY(posY + posYOffset);
 				data.setPosZ(posZ + posZOffset);
@@ -174,7 +174,7 @@ public class MeraProjectiles
 					double offsetZ = (new Random().nextInt(40) + 2.0D - 20.0D) / 10.0D;
 			      
 					CustomParticleData data = new CustomParticleData();
-					data.setTexture(ModParticleTextures.MERA);
+					data.setTexture(ModResources.MERA);
 					data.setPosX(posX + offsetX);
 					data.setPosY(posY + offsetY);
 					data.setPosZ(posZ + offsetZ);
@@ -192,7 +192,7 @@ public class MeraProjectiles
 					double offsetZ = (new Random().nextInt(40) + 2.0D - 20.0D) / 10.0D;
 			      
 					CustomParticleData data = new CustomParticleData();
-					data.setTexture(ModParticleTextures.MOKU);
+					data.setTexture(ModResources.MOKU);
 					data.setPosX(posX + offsetX);
 					data.setPosY(posY + offsetY);
 					data.setPosZ(posZ + offsetZ);
