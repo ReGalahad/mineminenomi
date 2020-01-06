@@ -23,11 +23,7 @@ import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModExtraAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
-import xyz.pixelatedw.mineminenomi.packets.server.SParticlesPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SSpawnLightningPacket;
-import xyz.pixelatedw.mineminenomi.particles.effects.goro.ElThorParticleEffect;
-import xyz.pixelatedw.mineminenomi.particles.effects.goro.KariParticleEffect;
-import xyz.pixelatedw.mineminenomi.particles.effects.goro.RaigoParticleEffect;
 
 public class GoroAbilities
 {
@@ -67,8 +63,8 @@ public class GoroAbilities
 				double j = mop.getHitVec().y;
 				double k = mop.getHitVec().z;
 
-				if(currentCharge % 8 == 0)
-					ModNetwork.sendToAllAround(new SParticlesPacket(new ElThorParticleEffect(), i, j, k), (ServerPlayerEntity) player);
+				//if(currentCharge % 8 == 0)
+				//	ModNetwork.sendToAllAround(new SParticlesPacket(new ElThorParticleEffect(), i, j, k), (ServerPlayerEntity) player);
 			}
 		}
 		
@@ -255,8 +251,8 @@ public class GoroAbilities
 		@Override
 		public void duringCooldown(PlayerEntity player, int cooldown)
 		{
-			if(cooldown > 600 && cooldown % 20 == 0)
-				ModNetwork.sendToAllAround(new SParticlesPacket(new RaigoParticleEffect(), player.posX, player.posY, player.posZ), (ServerPlayerEntity) player);
+			//if(cooldown > 600 && cooldown % 20 == 0)
+			//	ModNetwork.sendToAllAround(new SParticlesPacket(new RaigoParticleEffect(), player.posX, player.posY, player.posZ), (ServerPlayerEntity) player);
 		}
 	}
 	
@@ -276,8 +272,8 @@ public class GoroAbilities
 		@Override
 		public void duringCharging(PlayerEntity player, int cooldown)
 		{
-			if(cooldown % 5 == 0)
-				ModNetwork.sendToAllAround(new SParticlesPacket(new KariParticleEffect(), player.posX, player.posY, player.posZ), (ServerPlayerEntity) player);
+			//if(cooldown % 5 == 0)
+			//	ModNetwork.sendToAllAround(new SParticlesPacket(new KariParticleEffect(), player.posX, player.posY, player.posZ), (ServerPlayerEntity) player);
 		}
 		
 		@Override
@@ -322,9 +318,9 @@ public class GoroAbilities
 						blockLocation[1] += 1;
 					}
 					EnderTeleportEvent event = new EnderTeleportEvent(player, blockLocation[0], blockLocation[1], blockLocation[2], 0);
-					ModNetwork.sendToAllAround(new SParticlesPacket(new ElThorParticleEffect(), player.posX, player.posY + 1, player.posZ), (ServerPlayerEntity) player);
+					//ModNetwork.sendToAllAround(new SParticlesPacket(new ElThorParticleEffect(), player.posX, player.posY + 1, player.posZ), (ServerPlayerEntity) player);
 					player.setPositionAndUpdate(event.getTargetX(), event.getTargetY() + 1, event.getTargetZ());
-					ModNetwork.sendToAllAround(new SParticlesPacket(new ElThorParticleEffect(), player.posX, player.posY + 1, player.posZ), (ServerPlayerEntity) player);
+					//ModNetwork.sendToAllAround(new SParticlesPacket(new ElThorParticleEffect(), player.posX, player.posY + 1, player.posZ), (ServerPlayerEntity) player);
 					player.fallDistance = 0.0F;
 
 				}

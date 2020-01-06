@@ -2,18 +2,14 @@ package xyz.pixelatedw.mineminenomi.abilities;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.MathHelper;
-import xyz.pixelatedw.mineminenomi.ID;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.MokuProjectiles;
 import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
-import xyz.pixelatedw.mineminenomi.packets.server.SParticlesPacket;
 
 public class MokuAbilities 
 {
@@ -37,8 +33,8 @@ public class MokuAbilities
 		@Override
 		public void use(PlayerEntity player)
 		{	
-			if(!this.isOnCooldown())
-				ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_WHITESTRIKE, player), (ServerPlayerEntity) player);
+			//if(!this.isOnCooldown())
+			//	ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_WHITESTRIKE, player), (ServerPlayerEntity) player);
 			super.use(player);
 		}
 	}
@@ -80,7 +76,7 @@ public class MokuAbilities
 			{
 				for(LivingEntity e : WyHelper.getEntitiesNear(player, 1.6))
 					e.attackEntityFrom(DamageSource.causePlayerDamage(player), 2);
-		    	ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_WHITELAUNCHER, player), (ServerPlayerEntity) player);
+		    	//ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_WHITELAUNCHER, player), (ServerPlayerEntity) player);
 			}
 	    }
 	}

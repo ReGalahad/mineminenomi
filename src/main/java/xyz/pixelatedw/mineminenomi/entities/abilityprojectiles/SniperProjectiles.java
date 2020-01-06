@@ -12,7 +12,6 @@ import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.ID;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
@@ -20,8 +19,6 @@ import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
 import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.ExtraProjectiles.EntityCloud;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
-import xyz.pixelatedw.mineminenomi.packets.server.SParticlesPacket;
 
 public class SniperProjectiles
 {
@@ -138,7 +135,7 @@ public class SniperProjectiles
 				for(LivingEntity target : WyHelper.getEntitiesNear(this, 5))
 					target.addPotionEffect(new EffectInstance(Effects.POISON, 100, 1));
 			}
-			ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_KEMURIBOSHI, this.posX, this.posY, this.posZ), this.getThrower());
+		//	ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_KEMURIBOSHI, this.posX, this.posY, this.posZ), this.getThrower());
 		}
 	}
 	

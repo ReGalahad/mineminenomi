@@ -202,11 +202,11 @@ public class DevilFruitsHelper
 
 	public static boolean verifyIfAbilityIsBanned(Ability a)
 	{
-		for (String str : CommonConfig.instance.getBannedAbilities())
+		/*for (String str : CommonConfig.instance.getBannedAbilities())
 		{
 			if (WyHelper.getFancyName(str).contains(WyHelper.getFancyName(a.getAttribute().getAttributeName())))
 				return true;
-		}
+		}*/
 
 		return false;
 	}

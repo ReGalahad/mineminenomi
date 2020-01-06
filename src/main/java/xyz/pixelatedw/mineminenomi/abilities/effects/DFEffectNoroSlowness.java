@@ -2,14 +2,13 @@ package xyz.pixelatedw.mineminenomi.abilities.effects;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.potion.Effects;
-import xyz.pixelatedw.mineminenomi.ID;
 
 public class DFEffectNoroSlowness extends DFEffect
 {
 
 	public DFEffectNoroSlowness(LivingEntity entity, int timer)
 	{
-		super(entity, timer, ID.EXTRAEFFECT_NORO);
+		super(entity, timer, null);
 	}
 
 	@Override

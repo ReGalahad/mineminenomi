@@ -6,13 +6,11 @@ import java.util.Random;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.ModMain;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
@@ -77,7 +75,7 @@ public class MeraProjectiles
 					data.setMaxAge(10);
 					data.setScale(1.3F);
 					
-					ModMain.proxy.spawnParticles(world, data);
+					//ModMain.proxy.spawnParticles(world, data);
 				}
 				
 				for (int i = 0; i < 5; i++)
@@ -95,7 +93,7 @@ public class MeraProjectiles
 					data.setMaxAge(7);
 					data.setScale(1.2F);
 					
-					ModMain.proxy.spawnParticles(world, data);
+					//ModMain.proxy.spawnParticles(world, data);
 				}
 			}
 			super.tick();
@@ -142,7 +140,7 @@ public class MeraProjectiles
 				data.setMaxAge(6);
 				data.setScale(1.2F);
 				
-				ModMain.proxy.spawnParticles(world, data);
+				//ModMain.proxy.spawnParticles(world, data);
 			}
 			super.tick();
 		}
@@ -184,7 +182,7 @@ public class MeraProjectiles
 					data.setMaxAge(10);
 					data.setScale(1.3F);
 					
-					ModMain.proxy.spawnParticles(world, data);
+					//ModMain.proxy.spawnParticles(world, data);
 				}
 				
 				for (int i = 0; i < 10; i++)
@@ -202,7 +200,7 @@ public class MeraProjectiles
 					data.setMaxAge(7);
 					data.setScale(1.1F);
 					
-					ModMain.proxy.spawnParticles(world, data);
+					//ModMain.proxy.spawnParticles(world, data);
 				}
 			}
 			
@@ -248,7 +246,7 @@ public class MeraProjectiles
 				double offsetY = (new Random().nextInt(10) + 1.0D - 5.0D) / 10.0D;
 				double offsetZ = (new Random().nextInt(10) + 1.0D - 5.0D) / 10.0D;
 		      
-				ModMain.proxy.spawnVanillaParticle(ParticleTypes.HAPPY_VILLAGER, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ, 0.0D, 0.05D, 0.0D);			
+				//ModMain.proxy.spawnVanillaParticle(ParticleTypes.HAPPY_VILLAGER, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ, 0.0D, 0.05D, 0.0D);			
 			}
 			
 			super.tick();

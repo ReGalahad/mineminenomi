@@ -11,7 +11,6 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.server.ServerWorld;
-import xyz.pixelatedw.mineminenomi.ID;
 import xyz.pixelatedw.mineminenomi.abilities.extra.ZoanAbility;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
@@ -25,7 +24,6 @@ import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoMoguMole;
 import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModNetwork;
-import xyz.pixelatedw.mineminenomi.packets.server.SParticlesPacket;
 
 public class MoguAbilities
 {
@@ -76,7 +74,7 @@ public class MoguAbilities
 								if (WyHelper.placeBlockIfAllowed(player.world, posX, posY, posZ, Blocks.AIR, "all", "restricted", "ignore liquids"))
 								{
 									player.inventory.addItemStackToInventory(new ItemStack(tempBlock));
-									ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_BAKUMUNCH, posX, posY, posZ), player);
+								//	ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_BAKUMUNCH, posX, posY, posZ), player);
 								}
 							}
 					this.attr.setAbilityCooldown(2);
@@ -111,7 +109,7 @@ public class MoguAbilities
 						if (WyHelper.placeBlockIfAllowed(player.world, location[0], location[1], location[2], Blocks.AIR, "core", "foliage"))
 						{
 							player.inventory.addItemStackToInventory(new ItemStack(tempBlock));
-							ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_BAKUMUNCH, location[0], location[1], location[2]), player);
+						//	ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_BAKUMUNCH, location[0], location[1], location[2]), player);
 							if (player.world instanceof ServerWorld)
 								((ServerWorld) player.world).getChunkProvider().sendToTrackingAndSelf(player, new SAnimateHandPacket(player, 0));
 						}

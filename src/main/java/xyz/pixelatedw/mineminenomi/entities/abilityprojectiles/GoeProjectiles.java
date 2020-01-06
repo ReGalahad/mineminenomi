@@ -46,7 +46,7 @@ public class GoeProjectiles
 		{
 			AbilityExplosion explosion = WyHelper.newExplosion(this.getThrower(), this.posX, this.posY, this.posZ, 3);
 			explosion.setDamageOwner(false);
-			explosion.setSmokeParticles("");
+			//explosion.setSmokeParticles("");
 			explosion.doExplosion();
 		}	
 	}

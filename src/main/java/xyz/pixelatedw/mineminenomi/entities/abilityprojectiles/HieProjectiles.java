@@ -9,7 +9,6 @@ import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.ModMain;
 import xyz.pixelatedw.mineminenomi.abilities.effects.DFEffectHieSlowness;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
@@ -86,7 +85,7 @@ public class HieProjectiles
 					data.setMaxAge(5);
 					data.setScale(3F);
 					
-					ModMain.proxy.spawnParticles(world, data);
+					//ModMain.proxy.spawnParticles(world, data);
 				}
 			}
 			
@@ -142,7 +141,7 @@ public class HieProjectiles
 				data.setMaxAge(2);
 				data.setScale(1.5F);
 				
-				ModMain.proxy.spawnParticles(world, data);
+				//ModMain.proxy.spawnParticles(world, data);
 			}
 			
 			super.tick();

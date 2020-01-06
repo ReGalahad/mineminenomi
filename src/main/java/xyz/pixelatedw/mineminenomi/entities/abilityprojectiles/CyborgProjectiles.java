@@ -9,7 +9,6 @@ import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.ModMain;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.WyHelper.Direction;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
@@ -143,7 +142,7 @@ public class CyborgProjectiles
 				data.setMaxAge(10);
 				data.setScale(1.3F);
 				
-				ModMain.proxy.spawnParticles(world, data);
+			//	ModMain.proxy.spawnParticles(world, data);
 			}
 			super.tick();
 		}

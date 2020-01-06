@@ -1,12 +1,6 @@
 package xyz.pixelatedw.mineminenomi.particles.effects.gura;
 
-import java.util.Random;
-
-import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.init.ModParticleTextures;
-import xyz.pixelatedw.mineminenomi.particles.CustomParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 
 public class ParticleEffectGekishin extends ParticleEffect
@@ -18,7 +12,7 @@ public class ParticleEffectGekishin extends ParticleEffect
 		double offsetX = 0;
 		double offsetZ = 0;
 		
-		switch(WyHelper.get4Directions(player))
+		/*switch(WyHelper.get4Directions(player))
 		{
 			case NORTH:
 				offsetZ = -2.5; break;
@@ -46,7 +40,7 @@ public class ParticleEffectGekishin extends ParticleEffect
 			double offsetY = (new Random().nextInt(40) + 1.0D - 20.0D) / 10.0D;
 			offsetZ = (new Random().nextInt(40) + 1.0D - 20.0D) / 2.0D;
 			
-		}	
+		}*/
 	}
 
 }

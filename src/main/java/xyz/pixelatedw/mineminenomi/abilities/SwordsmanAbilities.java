@@ -7,16 +7,13 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.server.ServerWorld;
-import xyz.pixelatedw.mineminenomi.ID;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.SwordsmanProjectiles;
 import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.helpers.ItemsHelper;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
-import xyz.pixelatedw.mineminenomi.packets.server.SParticlesPacket;
 
 public class SwordsmanAbilities 
 {
@@ -55,7 +52,7 @@ public class SwordsmanAbilities
 						e.addPotionEffect(new EffectInstance(Effects.WEAKNESS, 10 * 20, 1, true, true));
 					}
 					
-					ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_KOKUTEICROSS, player), player);
+				//	ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_KOKUTEICROSS, player), player);
 					
 					if (player.world instanceof ServerWorld)
 						((ServerWorld)player.world).getChunkProvider().sendToTrackingAndSelf(player, new SAnimateHandPacket(player, 0));

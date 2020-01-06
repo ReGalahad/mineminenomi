@@ -3,14 +3,13 @@ package xyz.pixelatedw.mineminenomi.abilities.effects;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import xyz.pixelatedw.mineminenomi.ID;
 
 public class DFEffectMeroPetrification extends DFEffect
 {
 
 	public DFEffectMeroPetrification(LivingEntity entity, int timer)
 	{
-		super(entity, timer, ID.EXTRAEFFECT_MERO);
+		super(entity, timer, null);
 	}
 
 	@Override

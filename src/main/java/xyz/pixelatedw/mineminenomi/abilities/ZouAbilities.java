@@ -6,7 +6,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
-import xyz.pixelatedw.mineminenomi.ID;
 import xyz.pixelatedw.mineminenomi.abilities.extra.ZoanAbility;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
@@ -18,8 +17,6 @@ import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoZouGuard;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoZouHeavy;
 import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
-import xyz.pixelatedw.mineminenomi.packets.server.SParticlesPacket;
 
 public class ZouAbilities
 {
@@ -71,7 +68,7 @@ public class ZouAbilities
 			
 			if(!this.isOnCooldown)
 			{
-				ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_GREATSTOMP, player.posX, player.posY, player.posZ), player);
+			//	ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_GREATSTOMP, player.posX, player.posY, player.posZ), player);
 
 				for(LivingEntity entity : WyHelper.getEntitiesNear(player, 10))
 				{
@@ -176,7 +173,7 @@ public class ZouAbilities
 					{
 						if(WyHelper.placeBlockIfAllowed(player.world, location[0], location[1], location[2], Blocks.AIR, "core", "foliage"))
 						{
-							ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_BAKUMUNCH, location[0], location[1], location[2]), player);
+						//	ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_BAKUMUNCH, location[0], location[1], location[2]), player);
 						}
 					}
 				}

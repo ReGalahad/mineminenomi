@@ -7,11 +7,9 @@ import java.util.List;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.math.BlockPos;
-import xyz.pixelatedw.mineminenomi.ID;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.WyHelper.Direction;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
@@ -20,9 +18,7 @@ import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.SunaProjectiles;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
-import xyz.pixelatedw.mineminenomi.packets.server.SParticlesPacket;
 
 public class SunaAbilities 
 {
@@ -50,7 +46,7 @@ public class SunaAbilities
 		{
 			if(!this.isOnCooldown)
 			{
-				ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_DESERTGIRASOLE, player), (ServerPlayerEntity) player);
+				//ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_DESERTGIRASOLE, player), (ServerPlayerEntity) player);
 				
 				if(CommonConfig.instance.isGriefingEnabled())
 				{
@@ -79,7 +75,7 @@ public class SunaAbilities
 			{
 				if(CommonConfig.instance.isGriefingEnabled())
 				{
-					ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_DESERTGIRASOLE2, player), player);				
+					//ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_DESERTGIRASOLE2, player), player);				
 
 					Iterator<BlockPos> i = this.positions.iterator();
 						
@@ -107,7 +103,7 @@ public class SunaAbilities
 		@Override
 		public void hitEntity(PlayerEntity player, LivingEntity target)
 		{
-			ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_DESERTENCIERRO, target), player);
+			//ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_DESERTENCIERRO, target), player);
 			super.hitEntity(player, target);
 		}
 	}
@@ -151,7 +147,7 @@ public class SunaAbilities
 			else if(dir == WyHelper.Direction.WEST)  
 				newPosZ -= WyMathHelper.randomWithRange(-10, 10);
 
-			ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_SABLES, target), player);
+			//ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_SABLES, target), player);
 			target.setPositionAndUpdate(target.posX + newPosX, target.posY + newPosY, target.posZ + newPosZ);
 			
 			super.hitEntity(player, target);
@@ -177,7 +173,7 @@ public class SunaAbilities
 						WyHelper.createFilledCube(LivingEntity, new int[] {2, 2, 2}, Blocks.SAND, "air");
 					}	
 					
-					ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_GROUNDDEATH, player.posX, player.posY, player.posZ), player);			
+					//ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_GROUNDDEATH, player.posX, player.posY, player.posZ), player);			
 				}
 				
 				super.use(player);
@@ -252,7 +248,7 @@ public class SunaAbilities
 						}	
 					}
 					
-					ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_DESERTSPADA, player), player);			
+					//ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_DESERTSPADA, player), player);			
 
 				}
 				super.use(player);

@@ -10,7 +10,6 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
-import xyz.pixelatedw.mineminenomi.ID;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
@@ -18,11 +17,9 @@ import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.YamiProjectiles;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
-import xyz.pixelatedw.mineminenomi.init.ModExtraAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
+import xyz.pixelatedw.mineminenomi.init.ModExtraAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
-import xyz.pixelatedw.mineminenomi.packets.server.SParticlesPacket;
 
 public class YamiAbilities 
 {
@@ -50,7 +47,7 @@ public class YamiAbilities
 		{
 			if(!this.isOnCooldown)
 			{
-				ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_BLACKWORLD, player), player);
+			//	ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_BLACKWORLD, player), player);
 
 				if(CommonConfig.instance.isGriefingEnabled())
 				{	
@@ -106,7 +103,7 @@ public class YamiAbilities
 				if(CommonConfig.instance.isGriefingEnabled())
 				{
 					WyHelper.createFilledSphere(player.world, (int)player.posX, (int)player.posY, (int)player.posZ, 10, ModBlocks.darkness, "core", "foliage", "liquids", "ores");
-					ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_BLACKHOLE, player), player);
+				//	ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_BLACKHOLE, player), player);
 				}
 				
 				super.use(player);
@@ -199,7 +196,7 @@ public class YamiAbilities
 				double j = mop.getHitVec().y;
 				double k = mop.getHitVec().z;
 
-				ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_KOROUZU, i, j, k), player);
+			//	ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_KOROUZU, i, j, k), player);
 				
 				for(LivingEntity target : WyHelper.getEntitiesNear(new BlockPos(i, j, k), player.world, 5))
 				{

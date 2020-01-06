@@ -10,7 +10,6 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import xyz.pixelatedw.mineminenomi.ID;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.WyHelper.Direction;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
@@ -19,9 +18,7 @@ import xyz.pixelatedw.mineminenomi.entities.mobs.misc.EntityBlackKnight;
 import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
-import xyz.pixelatedw.mineminenomi.packets.server.SParticlesPacket;
 
 public class ItoAbilities 
 {
@@ -130,7 +127,7 @@ public class ItoAbilities
 		@Override
 		public void duringPassive(PlayerEntity player, int passiveTimer)
 		{		
-			ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_KUMONOSUGAKI, player), player);
+			//ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_KUMONOSUGAKI, player), player);
 			
 			if(passiveTimer >= 300)
 			{

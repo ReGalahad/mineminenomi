@@ -6,7 +6,6 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.ModMain;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
@@ -69,7 +68,7 @@ public class GuraProjectiles
 						data.setMaxAge(10);
 						data.setScale(3F);
 						
-						ModMain.proxy.spawnParticles(world, data);
+						//ModMain.proxy.spawnParticles(world, data);
 					}
 				}
 			}
@@ -121,7 +120,7 @@ public class GuraProjectiles
 						data.setMaxAge(10);
 						data.setScale(3F);
 						
-						ModMain.proxy.spawnParticles(world, data);
+						//ModMain.proxy.spawnParticles(world, data);
 					}
 				}
 			}

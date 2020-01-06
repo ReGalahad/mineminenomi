@@ -12,11 +12,7 @@ import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoVenomDemon;
 import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
-import xyz.pixelatedw.mineminenomi.packets.server.SParticlesPacket;
-import xyz.pixelatedw.mineminenomi.particles.effects.doku.DokuGumoParticleEffect;
-import xyz.pixelatedw.mineminenomi.particles.effects.doku.VenomDemonParticleEffect;
 
 public class DokuAbilities 
 {
@@ -49,7 +45,7 @@ public class DokuAbilities
 				this.startExtUpdate(player);
 			}
 
-			ModNetwork.sendToAllAround(new SParticlesPacket(new DokuGumoParticleEffect(), player.posX, player.posY, player.posZ), player);
+			//ModNetwork.sendToAllAround(new SParticlesPacket(new DokuGumoParticleEffect(), player.posX, player.posY, player.posZ), player);
 
 			for(LivingEntity enemy : WyHelper.getEntitiesNear(player, 10))
 			{
@@ -97,7 +93,7 @@ public class DokuAbilities
 				}
 			}
 			
-			ModNetwork.sendToAllAround(new SParticlesPacket(new VenomDemonParticleEffect(), player.posX, player.posY, player.posZ), player);
+			//ModNetwork.sendToAllAround(new SParticlesPacket(new VenomDemonParticleEffect(), player.posX, player.posY, player.posZ), player);
 		}		
 
 		@Override

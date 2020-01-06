@@ -5,7 +5,6 @@ import java.util.HashMap;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.ModMain;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
@@ -56,7 +55,7 @@ public class ToriPhoenixProjectiles
 				data.setMaxAge(1);
 				data.setScale(1.2F);
 				
-				ModMain.proxy.spawnParticles(world, data);
+			//	ModMain.proxy.spawnParticles(world, data);
 			}
 			super.tick();
 		}

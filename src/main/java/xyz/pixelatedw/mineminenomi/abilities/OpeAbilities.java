@@ -10,7 +10,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.server.SAnimateHandPacket;
 import net.minecraft.potion.EffectInstance;
@@ -21,7 +20,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.server.ServerWorld;
-import xyz.pixelatedw.mineminenomi.ID;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
@@ -32,10 +30,8 @@ import xyz.pixelatedw.mineminenomi.helpers.ItemsHelper;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.mineminenomi.init.ModItems;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
 import xyz.pixelatedw.mineminenomi.items.HeartItem;
-import xyz.pixelatedw.mineminenomi.packets.server.SParticlesPacket;
 
 public class OpeAbilities
 {
@@ -274,7 +270,7 @@ public class OpeAbilities
 		public void hitEntity(PlayerEntity player, LivingEntity target)
 		{
 			super.hitEntity(player, target);
-			ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_ELTHOR, target.posX, target.posY, target.posZ), (ServerPlayerEntity) player);
+		//	ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_ELTHOR, target.posX, target.posY, target.posZ), (ServerPlayerEntity) player);
 		}
 	}
 

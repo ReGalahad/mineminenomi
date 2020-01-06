@@ -1,13 +1,6 @@
 package xyz.pixelatedw.mineminenomi.particles.effects.suna;
 
-import java.util.Random;
-
-import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
-import xyz.pixelatedw.mineminenomi.init.ModParticleTextures;
-import xyz.pixelatedw.mineminenomi.particles.CustomParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 
 public class ParticleEffectDesertSpada extends ParticleEffect
@@ -16,6 +9,7 @@ public class ParticleEffectDesertSpada extends ParticleEffect
 	@Override
 	public void spawn(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
 	{
+		/*
 		Random rand = world.rand;
 		
 		for(int i = 0; i < 200; i++)
@@ -57,6 +51,8 @@ public class ParticleEffectDesertSpada extends ParticleEffect
 					motionZ)
 					.setParticleAge(10).setParticleScale(5);
 			Minecraft.getInstance().particles.addEffect(cp);
+			
 		}
+		*/
 	}
 }

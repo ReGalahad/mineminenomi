@@ -3,15 +3,11 @@ package xyz.pixelatedw.mineminenomi.abilities;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import xyz.pixelatedw.mineminenomi.ID;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.MeraProjectiles;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
-import xyz.pixelatedw.mineminenomi.packets.server.SParticlesPacket;
 
 public class MeraAbilities
 {
@@ -73,7 +69,7 @@ public class MeraAbilities
 		@Override
 		public void duringCharging(PlayerEntity player, int currentCharge)
 		{
-			ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_DAIENKAI2, player), (ServerPlayerEntity) player);
+			//ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_DAIENKAI2, player), (ServerPlayerEntity) player);
 		}
 		
 		@Override

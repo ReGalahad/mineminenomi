@@ -8,9 +8,6 @@ import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.abilities.extra.AbilityExplosion;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
-import xyz.pixelatedw.mineminenomi.packets.server.SParticlesPacket;
-import xyz.pixelatedw.mineminenomi.particles.effects.chiyu.ChiyupopoParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.chiyu.HealingTouchParticleEffect;
 
 public class ChiyuAbilities
@@ -34,7 +31,7 @@ public class ChiyuAbilities
 				{
 					entity.addPotionEffect(new EffectInstance(Effects.REGENERATION, 200, 0));
 				}
-				ModNetwork.sendToAllAround(new SParticlesPacket(new ChiyupopoParticleEffect(), player.posX, player.posY, player.posZ), player);
+				//ModNetwork.sendToAllAround(new SParticlesPacket(new ChiyupopoParticleEffect(), player.posX, player.posY, player.posZ), player);
 				
 				super.use(player);
 			}

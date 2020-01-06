@@ -8,7 +8,6 @@ import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.ModMain;
 import xyz.pixelatedw.mineminenomi.abilities.effects.DFEffectMeroPetrification;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
@@ -77,7 +76,7 @@ public class MeroProjectiles
 					data.setMaxAge(1);
 					data.setScale(1.3F);
 					
-					ModMain.proxy.spawnParticles(world, data);
+					//ModMain.proxy.spawnParticles(world, data);
 				}
 			}
 			super.tick();

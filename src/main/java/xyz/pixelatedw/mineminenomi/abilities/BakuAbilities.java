@@ -19,9 +19,6 @@ import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.BakuProjectiles;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
-import xyz.pixelatedw.mineminenomi.packets.server.SParticlesPacket;
-import xyz.pixelatedw.mineminenomi.particles.effects.baku.BakuMunchParticleEffect;
 
 public class BakuAbilities
 {
@@ -195,7 +192,7 @@ public class BakuAbilities
 							if(WyHelper.placeBlockIfAllowed(player.world, posX, posY, posZ, Blocks.AIR, "all", "restricted", "ignore liquids"))
 							{
 								player.inventory.addItemStackToInventory(new ItemStack(tempBlock));
-								ModNetwork.sendToAllAround(new SParticlesPacket(new BakuMunchParticleEffect(), posX, posY, posZ), player);
+								//ModNetwork.sendToAllAround(new SParticlesPacket(new BakuMunchParticleEffect(), posX, posY, posZ), player);
 							}
 						}
 

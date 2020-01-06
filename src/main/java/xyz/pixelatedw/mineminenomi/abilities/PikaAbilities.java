@@ -1,20 +1,16 @@
 package xyz.pixelatedw.mineminenomi.abilities;
 
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
-import xyz.pixelatedw.mineminenomi.ID;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.PikaProjectiles;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
 import xyz.pixelatedw.mineminenomi.init.ModWeapons;
-import xyz.pixelatedw.mineminenomi.packets.server.SParticlesPacket;
 
 public class PikaAbilities
 {
@@ -41,8 +37,8 @@ public class PikaAbilities
 		@Override
 		public void use(PlayerEntity player)
 		{
-			if(!this.isOnCooldown)
-				ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_FLASH, player), (ServerPlayerEntity) player);
+			//if(!this.isOnCooldown)
+			//	ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_FLASH, player), (ServerPlayerEntity) player);
 			super.use(player);
 		} 
 	}
@@ -83,8 +79,8 @@ public class PikaAbilities
 		@Override
 		public void startCharging(PlayerEntity player)
 		{
-			if(!this.isOnCooldown)
-				ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_AMATERASU, player), (ServerPlayerEntity) player);
+			//if(!this.isOnCooldown)
+			//	ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_AMATERASU, player), (ServerPlayerEntity) player);
 			super.startCharging(player);				
 		}
 
@@ -134,9 +130,9 @@ public class PikaAbilities
 					if (player.getRidingEntity() != null)
 						player.dismountEntity(player.getRidingEntity());
 					EnderTeleportEvent event = new EnderTeleportEvent(player, x, y, z, 5.0F);
-					ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_YATANOKAGAMI, player), (ServerPlayerEntity) player);
+					//ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_YATANOKAGAMI, player), (ServerPlayerEntity) player);
 	                player.setPositionAndUpdate(event.getTargetX(), event.getTargetY() + 1, event.getTargetZ());
-					ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_YATANOKAGAMI, player), (ServerPlayerEntity) player);
+					//ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_YATANOKAGAMI, player), (ServerPlayerEntity) player);
 	                player.fallDistance = 0.0F;
 				}
 				super.use(player);

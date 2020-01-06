@@ -5,7 +5,6 @@ import java.util.HashMap;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.ModMain;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
@@ -79,7 +78,7 @@ public class GasuProjectiles
 				data.setMaxAge(2);
 				data.setScale(2);
 				
-				ModMain.proxy.spawnParticles(world, data);
+				//ModMain.proxy.spawnParticles(world, data);
 
 				posXOffset = this.world.rand.nextGaussian() * 0.12D;
 				posYOffset = this.world.rand.nextGaussian() * 0.06D;
@@ -94,7 +93,7 @@ public class GasuProjectiles
 				data.setMaxAge(2);
 				data.setScale(2);
 				
-				ModMain.proxy.spawnParticles(world, data);
+				//ModMain.proxy.spawnParticles(world, data);
 			}
 			
 			super.tick();

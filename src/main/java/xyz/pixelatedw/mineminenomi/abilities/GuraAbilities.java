@@ -2,17 +2,13 @@ package xyz.pixelatedw.mineminenomi.abilities;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.DamageSource;
-import xyz.pixelatedw.mineminenomi.ID;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.abilities.extra.AbilityExplosion;
 import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.GuraProjectiles;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
-import xyz.pixelatedw.mineminenomi.packets.server.SParticlesPacket;
 
 public class GuraAbilities 
 {
@@ -41,9 +37,9 @@ public class GuraAbilities
 			target.attackEntityFrom(DamageSource.causePlayerDamage(player), 100);
 			AbilityExplosion explosion = WyHelper.newExplosion(player, target.posX, target.posY, target.posZ, 3);
 			explosion.setDamageOwner(false);
-			explosion.setSmokeParticles("");
+			//explosion.setSmokeParticles("");
 			explosion.doExplosion();
-			ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_GEKISHIN, player), (ServerPlayerEntity) player);
+			//ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_GEKISHIN, player), (ServerPlayerEntity) player);
 		}
 	}
 	

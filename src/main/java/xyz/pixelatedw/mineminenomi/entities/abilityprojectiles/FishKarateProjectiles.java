@@ -6,7 +6,6 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.ID;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
@@ -50,7 +49,7 @@ public class FishKarateProjectiles
 		{
 			AbilityExplosion explosion = WyHelper.newExplosion(this.getThrower(), this.posX, this.posY, this.posZ, 1.2F);
 			explosion.setExplosionSound(false);
-			explosion.setSmokeParticles(ID.PARTICLEFX_WATEREXPLOSION);
+			//explosion.setSmokeParticles(ID.PARTICLEFX_WATEREXPLOSION);
 			explosion.setDestroyBlocks(false);
 			explosion.setDamageOwner(false);
 			explosion.doExplosion();
@@ -78,7 +77,7 @@ public class FishKarateProjectiles
 		{
 			AbilityExplosion explosion = WyHelper.newExplosion(this.getThrower(), this.posX, this.posY, this.posZ, 2.2F);
 			explosion.setExplosionSound(false);
-			explosion.setSmokeParticles(ID.PARTICLEFX_WATEREXPLOSION);
+			//explosion.setSmokeParticles(ID.PARTICLEFX_WATEREXPLOSION);
 			explosion.setDamageOwner(false);
 			explosion.doExplosion();
 		}

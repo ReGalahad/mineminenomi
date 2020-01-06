@@ -31,8 +31,6 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.storage.loot.LootContext;
 import net.minecraft.world.storage.loot.LootParameters;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
-import xyz.pixelatedw.mineminenomi.packets.server.SParticlesPacket;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 
 public class AbilityExplosion extends Explosion
@@ -222,8 +220,8 @@ public class AbilityExplosion extends Explosion
 		if (this.canProduceExplosionSound)
 			this.world.playSound((PlayerEntity) null, this.explosionX, this.explosionY, this.explosionZ, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 4.0F, (1.0F + (this.world.rand.nextFloat() - this.world.rand.nextFloat()) * 0.2F) * 0.7F);
 
-		if (this.hasSmokeParticles())
-			ModNetwork.sendToAllAround(new SParticlesPacket(this.smokeParticles, this.explosionX, this.explosionY, this.explosionZ), (LivingEntity) this.exploder);
+		//if (this.hasSmokeParticles())
+		//	ModNetwork.sendToAllAround(new SParticlesPacket(this.smokeParticles, this.explosionX, this.explosionY, this.explosionZ), (LivingEntity) this.exploder);
 
 		if (this.canDestroyBlocks && CommonConfig.instance.isGriefingEnabled())
 		{

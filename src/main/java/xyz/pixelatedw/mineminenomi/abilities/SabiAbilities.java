@@ -4,12 +4,9 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import xyz.pixelatedw.mineminenomi.ID;
 import xyz.pixelatedw.mineminenomi.abilities.effects.DFEffectRustOverlay;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
-import xyz.pixelatedw.mineminenomi.packets.server.SParticlesPacket;
 
 public class SabiAbilities
 {
@@ -34,7 +31,7 @@ public class SabiAbilities
 				target.addPotionEffect(new EffectInstance(Effects.MINING_FATIGUE, 30 * 4, 4));
 				target.addPotionEffect(new EffectInstance(Effects.WITHER, 30 * 4, 1));
 				new DFEffectRustOverlay(target, 30 * 4);
-				ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_RUSTTOUCH, target), player);
+				//ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_RUSTTOUCH, target), player);
 
 				super.hitEntity(player, target);
 			}

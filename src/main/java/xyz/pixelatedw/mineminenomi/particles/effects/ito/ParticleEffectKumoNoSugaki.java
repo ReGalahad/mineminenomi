@@ -1,19 +1,15 @@
 package xyz.pixelatedw.mineminenomi.particles.effects.ito;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.PlayerEntity;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.init.ModParticleTextures;
-import xyz.pixelatedw.mineminenomi.particles.CustomParticle;
+import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 
 public class ParticleEffectKumoNoSugaki extends ParticleEffect
 {
 
 	@Override
-	public void spawn(PlayerEntity player, double posX, double posY, double posZ)
+	public void spawn(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
 	{
-		double offsetX = 0;
+		/*double offsetX = 0;
 		double offsetZ = 0;
 		
 		switch(WyHelper.get4Directions(player))
@@ -37,7 +33,7 @@ public class ParticleEffectKumoNoSugaki extends ParticleEffect
 				0, 0, 0)
 				.setParticleAge(10).setParticleGravity(0).setParticleScale(30F);
 		Minecraft.getInstance().particles.addEffect(cp);
-
+		*/
 	}
 
 }

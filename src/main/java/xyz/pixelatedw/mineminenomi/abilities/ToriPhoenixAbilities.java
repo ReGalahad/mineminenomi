@@ -4,9 +4,7 @@ import java.util.Random;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.DamageSource;
-import xyz.pixelatedw.mineminenomi.ID;
 import xyz.pixelatedw.mineminenomi.abilities.extra.ZoanAbility;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
@@ -20,7 +18,6 @@ import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
 import xyz.pixelatedw.mineminenomi.packets.server.SDevilFruitSyncPacket;
-import xyz.pixelatedw.mineminenomi.packets.server.SParticlesPacket;
 
 public class ToriPhoenixAbilities
 {
@@ -57,7 +54,7 @@ public class ToriPhoenixAbilities
 			{
 				if(!player.onGround)
 				{
-					ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_TENSEINOSOEN1, player), player);
+				//	ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_TENSEINOSOEN1, player), player);
 					super.startCharging(player);
 				}
 				else
@@ -82,7 +79,7 @@ public class ToriPhoenixAbilities
 			{
 				if(player.onGround && particlesSpawned < 10)
 				{
-					ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_TENSEINOSOEN2, player), player);
+				//	ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_TENSEINOSOEN2, player), player);
 					particlesSpawned++;
 				}			
 				
@@ -146,7 +143,7 @@ public class ToriPhoenixAbilities
 			else
 				target.setHealth(target.getMaxHealth());
 			
-			ModNetwork.sendTo(new SParticlesPacket(ID.PARTICLEFX_BLUEFLAMES, player), (ServerPlayerEntity) player);
+		//	ModNetwork.sendTo(new SParticlesPacket(ID.PARTICLEFX_BLUEFLAMES, player), (ServerPlayerEntity) player);
 		}
 	}	
 	
@@ -162,7 +159,7 @@ public class ToriPhoenixAbilities
 		{
 			if(!isOnCooldown)
 			{
-				ModNetwork.sendTo(new SParticlesPacket(ID.PARTICLEFX_BLUEFLAMES, player), (ServerPlayerEntity) player);
+		//		ModNetwork.sendTo(new SParticlesPacket(ID.PARTICLEFX_BLUEFLAMES, player), (ServerPlayerEntity) player);
 			}
 			super.use(player);
 		}

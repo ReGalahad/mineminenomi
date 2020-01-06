@@ -7,7 +7,6 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.server.ServerWorld;
-import xyz.pixelatedw.mineminenomi.ID;
 import xyz.pixelatedw.mineminenomi.abilities.effects.DFEffectHieSlowness;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
@@ -15,8 +14,6 @@ import xyz.pixelatedw.mineminenomi.api.abilities.extra.AbilityExplosion;
 import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.helpers.ItemsHelper;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
-import xyz.pixelatedw.mineminenomi.packets.server.SParticlesPacket;
 
 public class YomiAbilities
 {
@@ -89,10 +86,10 @@ public class YomiAbilities
 					explosion.setExplosionSound(false);
 					explosion.setDamageOwner(false);
 					explosion.setDestroyBlocks(false);
-					explosion.setSmokeParticles(ID.PARTICLEFX_SOULPARADE);
+				//	explosion.setSmokeParticles(ID.PARTICLEFX_SOULPARADE);
 					explosion.doExplosion(); 
 				}
-		    	ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_KASURIUTAFUBUKIGIRI, player), player);
+		    //	ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_KASURIUTAFUBUKIGIRI, player), player);
 			}
 	    }
 	}

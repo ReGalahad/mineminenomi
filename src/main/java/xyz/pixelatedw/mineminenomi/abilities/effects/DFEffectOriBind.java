@@ -1,14 +1,13 @@
 package xyz.pixelatedw.mineminenomi.abilities.effects;
 
 import net.minecraft.entity.LivingEntity;
-import xyz.pixelatedw.mineminenomi.ID;
 
 public class DFEffectOriBind extends DFEffect
 {
 
 	public DFEffectOriBind(LivingEntity entity, int timer)
 	{
-		super(entity, timer, ID.EXTRAEFFECT_ORIBIND);
+		super(entity, timer, null);
 	}
 
 	@Override

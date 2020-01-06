@@ -6,11 +6,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.ID;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
@@ -20,8 +18,6 @@ import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.mineminenomi.init.ModExtraAttributes;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
-import xyz.pixelatedw.mineminenomi.packets.server.SParticlesPacket;
 
 public class YamiProjectiles 
 {
@@ -84,7 +80,7 @@ public class YamiProjectiles
 			{
 				WyHelper.createFilledSphere(this.world, (int)this.posX, (int)this.posY, (int)this.posZ, 3, ModBlocks.darkness, "air", "foliage");
 					
-				ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_DARKMATTER, this.posX, this.posY, this.posZ), (PlayerEntity) this.getThrower());
+			//	ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_DARKMATTER, this.posX, this.posY, this.posZ), (PlayerEntity) this.getThrower());
 			}
 		}
 	}

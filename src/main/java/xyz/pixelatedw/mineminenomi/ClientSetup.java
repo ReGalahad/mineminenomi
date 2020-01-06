@@ -3,9 +3,12 @@ package xyz.pixelatedw.mineminenomi;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import xyz.pixelatedw.mineminenomi.api.json.WyJSONHelper;
+import xyz.pixelatedw.mineminenomi.events.EventsCombatMode;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.mineminenomi.init.ModKeybindings;
 import xyz.pixelatedw.mineminenomi.init.ModParticleTypes;
@@ -27,6 +30,10 @@ public class ClientSetup
 		
 		// Renderers
 		ModRenderers.registerRenderers();
+		
+		MinecraftForge.EVENT_BUS.register(new EventsCombatMode());
+		
+		WyJSONHelper.runGenerators(false);
 	}
 
 	@SubscribeEvent

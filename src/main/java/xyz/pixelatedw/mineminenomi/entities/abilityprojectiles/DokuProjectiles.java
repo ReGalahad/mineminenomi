@@ -11,7 +11,6 @@ import net.minecraft.potion.Effects;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
-import xyz.pixelatedw.mineminenomi.ModMain;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
@@ -22,11 +21,6 @@ import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.ExtraProjectiles.EntityCloud;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
-import xyz.pixelatedw.mineminenomi.init.ModParticleTextures;
-import xyz.pixelatedw.mineminenomi.packets.server.SParticlesPacket;
-import xyz.pixelatedw.mineminenomi.particles.effects.common.ProjectileTrailParticleEffect;
-import xyz.pixelatedw.mineminenomi.particles.effects.doku.ChloroBallCloudParticleEffect;
 
 public class DokuProjectiles 
 {
@@ -125,8 +119,8 @@ public class DokuProjectiles
 		@Override
 		public void tick()
 		{	
-			if(this.world.isRemote)		
-				ModMain.proxy.spawnParticleEffect(new ProjectileTrailParticleEffect(ModParticleTextures.DOKU, 3, 2, 20), this.world, this.posX, this.posY, this.posZ, 0, 0, 0);
+			//if(this.world.isRemote)		
+			//	ModMain.proxy.spawnParticleEffect(new ProjectileTrailParticleEffect(ModParticleTextures.DOKU, 3, 2, 20), this.world, this.posX, this.posY, this.posZ, 0, 0, 0);
 
 			super.tick();
 		}
@@ -148,7 +142,7 @@ public class DokuProjectiles
 				for(LivingEntity target : WyHelper.getEntitiesNear(this, 4))
 					target.addPotionEffect(new EffectInstance(Effects.POISON, 200, 2));
 			}
-			ModNetwork.sendToAllAround(new SParticlesPacket(new ChloroBallCloudParticleEffect(), this.posX, this.posY, this.posZ), this.getThrower());
+			//ModNetwork.sendToAllAround(new SParticlesPacket(new ChloroBallCloudParticleEffect(), this.posX, this.posY, this.posZ), this.getThrower());
 		}
 	}
 	

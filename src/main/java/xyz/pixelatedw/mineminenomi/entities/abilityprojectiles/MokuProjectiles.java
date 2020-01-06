@@ -9,7 +9,6 @@ import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.ModMain;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
@@ -70,7 +69,7 @@ public class MokuProjectiles
 					data.setScale(3F);
 					data.setColor(0.3F, 0.3F, 0.3F);
 					
-					ModMain.proxy.spawnParticles(world, data);		
+					//ModMain.proxy.spawnParticles(world, data);		
 				}
 			}
 
@@ -114,7 +113,7 @@ public class MokuProjectiles
 					data.setMaxAge(15);
 					data.setScale(3F);
 					
-					ModMain.proxy.spawnParticles(world, data);
+					//ModMain.proxy.spawnParticles(world, data);
 				}
 			}
 			

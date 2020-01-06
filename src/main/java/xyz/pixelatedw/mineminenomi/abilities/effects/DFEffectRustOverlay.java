@@ -1,14 +1,13 @@
 package xyz.pixelatedw.mineminenomi.abilities.effects;
 
 import net.minecraft.entity.LivingEntity;
-import xyz.pixelatedw.mineminenomi.ID;
 
 public class DFEffectRustOverlay extends DFEffect
 {
 
 	public DFEffectRustOverlay(LivingEntity entity, int timer)
 	{
-		super(entity, timer, ID.EXTRAEFFECT_RUSTOVERLAY);
+		super(entity, timer, null);
 	}
 
 	@Override

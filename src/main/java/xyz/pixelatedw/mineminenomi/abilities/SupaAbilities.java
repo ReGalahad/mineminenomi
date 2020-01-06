@@ -4,7 +4,6 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.DamageSource;
-import xyz.pixelatedw.mineminenomi.ID;
 import xyz.pixelatedw.mineminenomi.abilities.effects.DFEffectSpiderOverlay;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
@@ -15,7 +14,6 @@ import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.packets.server.SExtraEffectSyncPacket;
-import xyz.pixelatedw.mineminenomi.packets.server.SParticlesPacket;
 
 public class SupaAbilities
 {
@@ -63,7 +61,7 @@ public class SupaAbilities
 					{
 						if(WyHelper.placeBlockIfAllowed(player.world, location[0], location[1], location[2], Blocks.AIR, "core", "foliage", "ores"))
 						{
-							ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_BAKUMUNCH, location[0], location[1], location[2]), player);
+						//	ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_BAKUMUNCH, location[0], location[1], location[2]), player);
 						}
 					}
 				}
@@ -111,7 +109,7 @@ public class SupaAbilities
 				return;
 			}
 
-	    	ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_ATOMICSPURT, player), player);
+	    	//ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_ATOMICSPURT, player), player);
 		}
 		
 		@Override
@@ -153,7 +151,7 @@ public class SupaAbilities
 		public void endPassive(PlayerEntity player)
 		{
 			IExtraEffect extraEffectsData = ExtraEffectCapability.get(player);
-			extraEffectsData.removeExtraEffect(ID.EXTRAEFFECT_SPIDEROVERLAY);
+		//	extraEffectsData.removeExtraEffect(ID.EXTRAEFFECT_SPIDEROVERLAY);
 			ModNetwork.sendToAll(new SExtraEffectSyncPacket(player.getEntityId(), extraEffectsData));
 
 			super.endPassive(player);

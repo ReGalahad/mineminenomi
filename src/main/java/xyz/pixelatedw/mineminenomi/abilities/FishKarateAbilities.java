@@ -7,10 +7,7 @@ import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.FishKarateProjectiles;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
-import xyz.pixelatedw.mineminenomi.packets.server.SParticlesPacket;
-import xyz.pixelatedw.mineminenomi.particles.effects.fishkarate.SamehadaParticleEffect;
 
 public class FishKarateAbilities 
 {
@@ -95,8 +92,8 @@ public class FishKarateAbilities
 		@Override
 		public void duringPassive(PlayerEntity player, int passiveTimer) 
 		{
-			if(passiveTimer % 3 == 0)
-				ModNetwork.sendToAllAround(new SParticlesPacket(new SamehadaParticleEffect(), player.posX, player.posY, player.posZ), player);
+			//if(passiveTimer % 3 == 0)
+			//	ModNetwork.sendToAllAround(new SParticlesPacket(new SamehadaParticleEffect(), player.posX, player.posY, player.posZ), player);
 		}
 	}
 	

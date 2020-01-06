@@ -2,15 +2,12 @@ package xyz.pixelatedw.mineminenomi.abilities;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import xyz.pixelatedw.mineminenomi.ID;
 import xyz.pixelatedw.mineminenomi.abilities.effects.DFEffectMeroPetrification;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.abilities.extra.AbilityExplosion;
 import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.MeroProjectiles;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
-import xyz.pixelatedw.mineminenomi.packets.server.SParticlesPacket;
 
 public class MeroAbilities
 {
@@ -38,7 +35,7 @@ public class MeroAbilities
 			explosion.setExplosionSound(false);
 			explosion.setDamageOwner(false);
 			explosion.setDestroyBlocks(false);
-			explosion.setSmokeParticles(ID.PARTICLEFX_PERFUMEFEMUR);
+			//explosion.setSmokeParticles(ID.PARTICLEFX_PERFUMEFEMUR);
 			explosion.doExplosion();
 		}
 	}
@@ -53,8 +50,8 @@ public class MeroAbilities
 		@Override
 		public void startCharging(PlayerEntity player)
 		{
-			if(!this.isOnCooldown)
-				ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_SLAVEARROW, player), player);
+			//if(!this.isOnCooldown)
+			//	ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_SLAVEARROW, player), player);
 			super.startCharging(player);				
 		}
 

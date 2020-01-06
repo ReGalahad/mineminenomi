@@ -3,12 +3,10 @@ package xyz.pixelatedw.mineminenomi.abilities;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.ID;
 import xyz.pixelatedw.mineminenomi.abilities.effects.DFEffectHieSlowness;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
@@ -17,10 +15,8 @@ import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.HieProjectiles;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
 import xyz.pixelatedw.mineminenomi.init.ModWeapons;
-import xyz.pixelatedw.mineminenomi.packets.server.SParticlesPacket;
 
 public class HieAbilities
 {
@@ -107,7 +103,7 @@ public class HieAbilities
 							player.world.setBlockState(new BlockPos(posX, posY, posZ), Blocks.PACKED_ICE.getDefaultState());				
 					}
 					
-					ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_ICEAGE, player), (ServerPlayerEntity) player);
+					//ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_ICEAGE, player), (ServerPlayerEntity) player);
 				}
 				
 				for(LivingEntity target : WyHelper.getEntitiesNear(player, 15))

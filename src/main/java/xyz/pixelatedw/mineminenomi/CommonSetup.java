@@ -2,6 +2,7 @@ package xyz.pixelatedw.mineminenomi;
 
 import net.minecraft.world.storage.loot.functions.LootFunctionManager;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -16,7 +17,7 @@ import xyz.pixelatedw.mineminenomi.init.ModQuests;
 public class CommonSetup
 {
 
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public static void commonSetup(FMLCommonSetupEvent event)
 	{
 		CommonConfig.init();

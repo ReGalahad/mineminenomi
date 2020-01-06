@@ -3,16 +3,13 @@ package xyz.pixelatedw.mineminenomi.abilities;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.DamageSource;
-import xyz.pixelatedw.mineminenomi.ID;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.WyHelper.Direction;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.RokushikiProjectiles;
 import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
-import xyz.pixelatedw.mineminenomi.packets.server.SParticlesPacket;
 
 public class RokushikiAbilities 
 {
@@ -108,7 +105,7 @@ public class RokushikiAbilities
 				DevilFruitsHelper.changeMotion("=", mX, mY, mZ, player);
 				this.used = true;
 				
-				ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_GEPPO, player), player);
+				//ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_GEPPO, player), player);
 				
 				super.use(player);
 			}

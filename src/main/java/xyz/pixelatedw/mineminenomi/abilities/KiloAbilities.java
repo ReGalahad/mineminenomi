@@ -5,13 +5,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
-import xyz.pixelatedw.mineminenomi.ID;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
-import xyz.pixelatedw.mineminenomi.packets.server.SParticlesPacket;
 
 public class KiloAbilities
 {
@@ -277,7 +274,7 @@ public class KiloAbilities
 				}
 			}
 
-			ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_KILOPRESS, player.posX, player.posY, player.posZ), player);
+			//ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_KILOPRESS, player.posX, player.posY, player.posZ), player);
 			this.startExtUpdate(player);
 		}
 	}

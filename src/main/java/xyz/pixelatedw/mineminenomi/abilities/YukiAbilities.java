@@ -11,7 +11,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.ID;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.math.ISphere;
@@ -19,10 +18,8 @@ import xyz.pixelatedw.mineminenomi.api.math.Sphere;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.YukiProjectiles;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
 import xyz.pixelatedw.mineminenomi.init.ModWeapons;
-import xyz.pixelatedw.mineminenomi.packets.server.SParticlesPacket;
 
 public class YukiAbilities 
 {
@@ -145,7 +142,7 @@ public class YukiAbilities
 					e.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 200, 2));
 				}
 				
-				ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_FUBUKI, player.posX, player.posY, player.posZ), player);
+			//	ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_FUBUKI, player.posX, player.posY, player.posZ), player);
 				super.use(player);
 			}
 		}

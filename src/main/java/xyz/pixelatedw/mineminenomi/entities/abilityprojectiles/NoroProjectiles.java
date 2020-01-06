@@ -10,7 +10,6 @@ import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.ID;
 import xyz.pixelatedw.mineminenomi.abilities.effects.DFEffectNoroSlowness;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
@@ -75,8 +74,8 @@ public class NoroProjectiles
 						target.addPotionEffect(new EffectInstance(Effects.MINING_FATIGUE, newTimer, newAmplifier));
 						
 						IExtraEffect props = ExtraEffectCapability.get(target);
-						if(!props.hasExtraEffect(ID.EXTRAEFFECT_NORO))
-							new DFEffectNoroSlowness(target, newTimer);
+						//if(!props.hasExtraEffect(ID.EXTRAEFFECT_NORO))
+						//	new DFEffectNoroSlowness(target, newTimer);
 						
 					}
 					else
