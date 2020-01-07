@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "mineminenomi:items/kairoseki_bars"
+		"layer0": "mineminenomi:blocks/kairoseki_bars"
 	}
 }
