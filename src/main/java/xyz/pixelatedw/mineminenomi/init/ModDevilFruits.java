@@ -154,7 +154,7 @@ public class ModDevilFruits
 
 		//MiniMiniNoMi = new ItemAkumaNoMi(EnumFruitType.PARAMECIA, MiniAbilities.abilitiesArray);
 		//registerDevilFruit(MiniMiniNoMi, "Mini Mini no Mi");
-		KachiKachiNoMi = new AkumaNoMiItem(EnumFruitType.PARAMECIA, KachiAbilities.abilitiesArray);
+		/*KachiKachiNoMi = new AkumaNoMiItem(EnumFruitType.PARAMECIA, KachiAbilities.abilitiesArray);
 		registerDevilFruit(KachiKachiNoMi, "Kachi Kachi no Mi");
 		//DoaDoaNoMi = new AkumaNoMiItem(EnumFruitType.PARAMECIA, DoaAbilities.abilitiesArray);
 		//registerDevilFruit(DoaDoaNoMi, "Doa Doa no Mi");
@@ -237,7 +237,7 @@ public class ModDevilFruits
 		BaneBaneNoMi = new AkumaNoMiItem(EnumFruitType.PARAMECIA, BaneAbilities.abilitiesArray);
 		registerDevilFruit(BaneBaneNoMi, "Bane Bane no Mi");
 		HieHieNoMi = new AkumaNoMiItem(EnumFruitType.LOGIA, HieAbilities.abilitiesArray);
-		registerDevilFruit(HieHieNoMi, "Hie Hie no Mi");
+		registerDevilFruit(HieHieNoMi, "Hie Hie no Mi");*/
 		MeraMeraNoMi = new AkumaNoMiItem(EnumFruitType.LOGIA, MeraAbilities.abilitiesArray);
 		registerDevilFruit(MeraMeraNoMi, "Mera Mera no Mi");        
 		

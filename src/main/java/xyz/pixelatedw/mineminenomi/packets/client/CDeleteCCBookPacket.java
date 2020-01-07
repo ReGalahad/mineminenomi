@@ -12,6 +12,7 @@ import xyz.pixelatedw.mineminenomi.abilities.CyborgAbilities;
 import xyz.pixelatedw.mineminenomi.abilities.SniperAbilities;
 import xyz.pixelatedw.mineminenomi.abilities.SwordsmanAbilities;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
+import xyz.pixelatedw.mineminenomi.api.abilities.Ability.Category;
 import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
 import xyz.pixelatedw.mineminenomi.api.network.packets.server.SAbilityDataSyncPacket;
@@ -48,16 +49,16 @@ public class CDeleteCCBookPacket
 				IEntityStats entityProps = EntityStatsCapability.get(player);
 				IAbilityData abilityProps = AbilityDataCapability.get(player);
 				
-				abilityProps.clearHotbar(player);
-				abilityProps.clearRacialAbilities();
+				abilityProps.clearHotbar();
+				abilityProps.clearAbilities(Category.RACIAL);
 				
 				if(entityProps.isCyborg())
 				{										
-					abilityProps.addRacialAbility(CyborgAbilities.FRESH_FIRE);
-					abilityProps.addRacialAbility(CyborgAbilities.COLA_OVERDRIVE);
-					abilityProps.addRacialAbility(CyborgAbilities.RADICAL_BEAM);
-					abilityProps.addRacialAbility(CyborgAbilities.STRONG_RIGHT);
-					abilityProps.addRacialAbility(CyborgAbilities.COUP_DE_VENT);
+					abilityProps.addAbility(CyborgAbilities.FRESH_FIRE);
+					abilityProps.addAbility(CyborgAbilities.COLA_OVERDRIVE);
+					abilityProps.addAbility(CyborgAbilities.RADICAL_BEAM);
+					abilityProps.addAbility(CyborgAbilities.STRONG_RIGHT);
+					abilityProps.addAbility(CyborgAbilities.COUP_DE_VENT);
 					
 					entityProps.setMaxCola(100);
 					entityProps.setCola(entityProps.getMaxCola());
@@ -65,23 +66,23 @@ public class CDeleteCCBookPacket
 				
 				if(entityProps.isSwordsman())
 				{
-					abilityProps.addRacialAbility(SwordsmanAbilities.SHI_SHISHI_SONSON);
+					abilityProps.addAbility(SwordsmanAbilities.SHI_SHISHI_SONSON);
 					if(!CommonConfig.instance.isQuestProgressionEnabled())
 					{
-						abilityProps.addRacialAbility(SwordsmanAbilities.SANBYAKUROKUJU_POUND_HO);
-						abilityProps.addRacialAbility(SwordsmanAbilities.YAKKODORI);
-						abilityProps.addRacialAbility(SwordsmanAbilities.O_TATSUMAKI);
+						abilityProps.addAbility(SwordsmanAbilities.SANBYAKUROKUJU_POUND_HO);
+						abilityProps.addAbility(SwordsmanAbilities.YAKKODORI);
+						abilityProps.addAbility(SwordsmanAbilities.O_TATSUMAKI);
 					}
 				}
 	
 				if(entityProps.isSniper())		
 				{
-					abilityProps.addRacialAbility(SniperAbilities.KAENBOSHI);
+					abilityProps.addAbility(SniperAbilities.KAENBOSHI);
 					if(!CommonConfig.instance.isQuestProgressionEnabled())
 					{
-						abilityProps.addRacialAbility(SniperAbilities.KEMURIBOSHI);
-						abilityProps.addRacialAbility(SniperAbilities.RENPATSUNAMARIBOSHI);
-						abilityProps.addRacialAbility(SniperAbilities.SAKURETSUSABOTENBOSHI);
+						abilityProps.addAbility(SniperAbilities.KEMURIBOSHI);
+						abilityProps.addAbility(SniperAbilities.RENPATSUNAMARIBOSHI);
+						abilityProps.addAbility(SniperAbilities.SAKURETSUSABOTENBOSHI);
 					}
 				}
 				

@@ -96,7 +96,7 @@ public class SwordsmanProgression04Quest extends Quest implements IProgressionQu
 		WyHelper.sendMsgToPlayer(player, I18n.format(ModI18n.QUEST_SWORDSMAN_PROGRESSION_03_COMPLETE, questGiverName));
 		
 		if(CommonConfig.instance.isQuestProgressionEnabled())
-			abilityData.addRacialAbility(SwordsmanAbilities.SANBYAKUROKUJU_POUND_HO);
+			abilityData.addAbility(SwordsmanAbilities.SANBYAKUROKUJU_POUND_HO);
 	}
 	
 	@Override

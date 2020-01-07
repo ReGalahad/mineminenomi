@@ -20,7 +20,7 @@ public class AbilitiesEvents
 			PlayerEntity player = (PlayerEntity) event.getEntityLiving();
 			IAbilityData props = AbilityDataCapability.get(player);
 
-			for (Ability ability : props.getPlayerAbilities())
+			for (Ability ability : props.getHotbarAbilities())
 			{
 				if(ability == null)
 					continue;

@@ -12,6 +12,7 @@ import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.abilities.YomiAbilities;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
+import xyz.pixelatedw.mineminenomi.api.abilities.Ability.Category;
 import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
 import xyz.pixelatedw.mineminenomi.api.network.packets.server.SAbilityDataSyncPacket;
@@ -49,7 +50,7 @@ public class EventsAbilityValidation
 				{					
 					ItemStack df = DevilFruitsHelper.getDevilFruitItem(devilFruitProps.getDevilFruit());
 					
-					abilityProps.clearDevilFruitAbilities();
+					abilityProps.clearAbilities(Category.ALL);
 					if(!devilFruitProps.getZoanPoint().equalsIgnoreCase("yomi"))
 						devilFruitProps.setZoanPoint("");
 					
@@ -60,36 +61,32 @@ public class EventsAbilityValidation
 							ItemStack yami = DevilFruitsHelper.getDevilFruitItem("yamiyami");
 							for(Ability a : ((AkumaNoMiItem)yami.getItem()).abilities)
 								if(!DevilFruitsHelper.verifyIfAbilityIsBanned(a))
-									abilityProps.addDevilFruitAbility(a);
+									abilityProps.addAbility(a);
 						}
 						for(Ability a : ((AkumaNoMiItem)df.getItem()).abilities)
 							if(!DevilFruitsHelper.verifyIfAbilityIsBanned(a))
-								abilityProps.addDevilFruitAbility(a);
+								abilityProps.addAbility(a);
 					}
-					
-					for(Ability a : abilityProps.getAbilitiesInHotbar())
-						if(a != null && a.isOnCooldown())
-							a.startUpdate(player);
 				}
 				
 				DevilFruitsHelper.validateRacialMoves(player);
 				DevilFruitsHelper.validateStyleMoves(player);
 				
-				for(Ability a : abilityProps.getDevilFruitAbilities())
+				for(Ability a : abilityProps.getAbilities(Category.ALL))
 				{
 					if(Arrays.asList(YomiAbilities.abilitiesArray).contains(a))
 					{
 						if(!devilFruitProps.getZoanPoint().equalsIgnoreCase("yomi"))
-							abilityProps.removeDevilFruitAbility(a);
+							abilityProps.removeAbility(a);
 					}
 				}
 				
-				for(int i = 0; i < abilityProps.countAbilitiesInHotbar(); i++)
+				for(int i = 0; i < abilityProps.getHotbarAbilities().length; i++)
 				{
-					if(abilityProps.getHotbarAbilityFromSlot(i) != null)
+					if(abilityProps.getAbilityInSlot(i) != null)
 					{
-						if(DevilFruitsHelper.verifyIfAbilityIsBanned(abilityProps.getHotbarAbilityFromSlot(i)))
-							abilityProps.setAbilityInSlot(i, null);
+						if(DevilFruitsHelper.verifyIfAbilityIsBanned(abilityProps.getAbilityInSlot(i)))
+							abilityProps.setAbilityInHotbar(i, null);
 					}
 				}			
 				

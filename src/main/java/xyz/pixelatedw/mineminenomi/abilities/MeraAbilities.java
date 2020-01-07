@@ -1,9 +1,5 @@
 package xyz.pixelatedw.mineminenomi.abilities;
 
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.MeraProjectiles;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
@@ -21,22 +17,28 @@ public class MeraAbilities
 		ModValues.abilityWebAppExtraParams.put("daienkaientei", new String[] {"desc", "Amasses the user's flames into a gigantic fireball that the user hurls at the opponent."});
 	}
 	
-	public static Ability[] abilitiesArray = new Ability[] {new Hiken(), new Higan(), new DaiEnkaiEntei(), new Hidaruma(), new Jujika(), new Enjomo()};
+	public static Ability[] abilitiesArray = new Ability[] {new Hiken()};//, new Higan(), new DaiEnkaiEntei(), new Hidaruma(), new Jujika(), new Enjomo()};
 	
 	public static class Hiken extends Ability
 	{
 		public Hiken()
 		{
-			super(ModAttributes.HIKEN);
+			super("Hiken", Category.DEVIL_FRUIT);
+			this.setDescription("Turns the user's fist into flames and launches it towards the target.");
 			
 			this.onUseEvent = (player, ability) -> 
 			{			
 				this.projectile = new MeraProjectiles.Hiken(player.world, player, ModAttributes.HIKEN);			
 			};
+			
+			this.duringCooldownEvent = (player, ability, cooldown) -> 
+			{
+				System.out.println(cooldown);
+			};
 		}
 	}
 	
-	public static class Higan extends Ability
+/*	public static class Higan extends Ability
 	{
 		public Higan() 
 		{
@@ -132,6 +134,6 @@ public class MeraAbilities
 			}
 		}	
 	}
-
+*/
 }
 
