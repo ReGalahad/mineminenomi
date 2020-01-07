@@ -42,7 +42,7 @@ public class AbilityDataBase implements IAbilityData
 	{
 		for(int i = 0; i < devilFruitAbilities.length; i++)
 		{
-			if(this.devilFruitAbilities[i] != null && this.devilFruitAbilities[i].getAttribute().getAttributeName().equalsIgnoreCase(ablTemplate.getAttribute().getAttributeName()))
+			if(this.devilFruitAbilities[i] != null && this.devilFruitAbilities[i].getName().equalsIgnoreCase(ablTemplate.getName()))
 			{
 				this.devilFruitAbilities[i] = null;
 				break;
@@ -55,7 +55,7 @@ public class AbilityDataBase implements IAbilityData
 	{
 		for(int i = 0; i < devilFruitAbilities.length; i++)
 		{
-			if(this.devilFruitAbilities[i] != null && this.devilFruitAbilities[i].getAttribute().getAttributeName().equalsIgnoreCase(ablTemplate.getAttribute().getAttributeName()))
+			if(this.devilFruitAbilities[i] != null && this.devilFruitAbilities[i].getName().equalsIgnoreCase(ablTemplate.getName()))
 			{
 				return true;
 			}
@@ -102,7 +102,7 @@ public class AbilityDataBase implements IAbilityData
 	{
 		for(int i = 0; i < racialAbilities.length; i++)
 		{
-			if(this.racialAbilities[i] != null && this.racialAbilities[i].getAttribute().getAttributeName().equalsIgnoreCase(ablTemplate.getAttribute().getAttributeName()))
+			if(this.racialAbilities[i] != null && this.racialAbilities[i].getName().equalsIgnoreCase(ablTemplate.getName()))
 			{
 				this.racialAbilities[i] = null;
 				break;
@@ -117,7 +117,7 @@ public class AbilityDataBase implements IAbilityData
 		{
 			for(int i = 0; i < racialAbilities.length; i++)
 			{
-				if(this.racialAbilities[i] != null && this.racialAbilities[i].getAttribute().getAttributeName().equalsIgnoreCase(ablTemplate.getAttribute().getAttributeName()))
+				if(this.racialAbilities[i] != null && this.racialAbilities[i].getName().equalsIgnoreCase(ablTemplate.getName()))
 				{
 					return true;
 				}
@@ -165,7 +165,7 @@ public class AbilityDataBase implements IAbilityData
 	{
 		for(int i = 0; i < hakiAbilities.length; i++)
 		{
-			if(this.hakiAbilities[i] != null && this.hakiAbilities[i].getAttribute().getAttributeName().equalsIgnoreCase(ablTemplate.getAttribute().getAttributeName()))
+			if(this.hakiAbilities[i] != null && this.hakiAbilities[i].getName().equalsIgnoreCase(ablTemplate.getName()))
 			{
 				this.hakiAbilities[i] = null;
 				break;
@@ -176,7 +176,7 @@ public class AbilityDataBase implements IAbilityData
 	@Override
 	public boolean hasHakiAbility(Ability ablTemplate)
 	{
-		return Arrays.stream(this.hakiAbilities).filter(x -> x != null && x.getAttribute().getAttributeName().equalsIgnoreCase(ablTemplate.getAttribute().getAttributeName())).findFirst().orElse(null) != null;
+		return Arrays.stream(this.hakiAbilities).filter(x -> x != null && x.getName().equalsIgnoreCase(ablTemplate.getName())).findFirst().orElse(null) != null;
 	}
 	
 	@Override
@@ -206,13 +206,13 @@ public class AbilityDataBase implements IAbilityData
 	@Override
 	public boolean hasAbilityInHotbar(Ability ability)
 	{
-		return this.hasAbilityInHotbar(ability.getAttribute().getAttributeName());
+		return this.hasAbilityInHotbar(ability.getName());
 	}
 	
 	@Override
 	public boolean hasAbilityInHotbar(String abilityName)
 	{
-		return Arrays.stream(this.hotbarAbilities).filter(x -> x != null && x.getAttribute().getAttributeName().equalsIgnoreCase(abilityName)).findFirst().orElse(null) != null;
+		return Arrays.stream(this.hotbarAbilities).filter(x -> x != null && x.getName().equalsIgnoreCase(abilityName)).findFirst().orElse(null) != null;
 	}
 	
 	@Override
@@ -232,7 +232,7 @@ public class AbilityDataBase implements IAbilityData
 	{
 		return Arrays.stream(this.getAbilitiesInHotbar()).filter(x -> 
 		{
-			return x != null && x.getAttribute() != null && x.getAttribute().getAttributeName().equalsIgnoreCase(name);
+			return x != null && x.getAttribute() != null && x.getName().equalsIgnoreCase(name);
 		}).findFirst().orElse(null);     
 	}
 	
@@ -263,7 +263,7 @@ public class AbilityDataBase implements IAbilityData
 			Ability abilityToRemove = this.getHotbarAbilityFromSlot(i);
 			for (Ability ability : list)
 			{
-				if (abilityToRemove != null && abilityToRemove.getAttribute().getAttributeName().equalsIgnoreCase(ability.getAttribute().getAttributeName()))
+				if (abilityToRemove != null && abilityToRemove.getName().equalsIgnoreCase(ability.getName()))
 					this.setAbilityInSlot(i, null);
 			}
 		}

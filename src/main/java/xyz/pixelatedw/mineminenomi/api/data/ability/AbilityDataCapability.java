@@ -13,7 +13,6 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.abilities.extra.AbilityManager;
 import xyz.pixelatedw.mineminenomi.api.data.CapabilityProviderSerializable;
 
 public class AbilityDataCapability
@@ -33,14 +32,14 @@ public class AbilityDataCapability
 
 				props.putBoolean("combatMode", instance.isInCombatMode());
 
-				if (instance.getPreviouslyUsedAbility() != null)
-					props.put("previouslyUsedAbility", saveNLOBData(instance.getPreviouslyUsedAbility()));
+				//if (instance.getPreviouslyUsedAbility() != null)
+				//	props.put("previouslyUsedAbility", saveNLOBData(instance.getPreviouslyUsedAbility()));
 
 				for (int i = 0; i < instance.getAbilitiesInHotbar().length; i++)
 				{
 					Ability ability = instance.getAbilitiesInHotbar()[i];
 					if (ability != null)
-						props.put("hotbar_ability_" + i, saveNLOBData(ability));
+						props.putByteArray("hotbar_ability_" + i, WyHelper.serialize(ability));
 				}
 
 				for (int i = 0; i < instance.getDevilFruitAbilities().length; i++)
@@ -50,33 +49,7 @@ public class AbilityDataCapability
 						props.put("devilfruits_ability_" + i, saveNLOBData(ability));
 				}
 
-				for (int i = 0; i < instance.getRacialAbilities().length; i++)
-				{
-					Ability ability = instance.getRacialAbilities()[i];
-					if (ability != null)
-						props.put("racial_ability_" + i, saveNLOBData(ability));
-				}
-
-				for (int i = 0; i < instance.getHakiAbilities().length; i++)
-				{
-					Ability ability = instance.getHakiAbilities()[i];
-					if (ability != null)
-						props.put("haki_ability_" + i, saveNLOBData(ability));
-				}
-
 				return props;
-			}
-
-			private CompoundNBT saveNLOBData(Ability abl)
-			{
-				CompoundNBT data = new CompoundNBT();
-
-				data.putString("name", abl.getAttribute().getAttributeName());
-				data.putBoolean("isOnCooldown", abl.isOnCooldown());
-				data.putBoolean("isCharging", abl.isCharging());
-				data.putBoolean("isPassiveActive", abl.isPassiveActive());
-
-				return data;
 			}
 
 			@Override
@@ -88,51 +61,19 @@ public class AbilityDataCapability
 				{
 					instance.setCombatMode(props.getBoolean("combatMode"));
 
-					instance.setPreviouslyUsedAbility(this.loadAbilityFromNLOB(props.getCompound("previouslyUsedAbility")));
+					//instance.setPreviouslyUsedAbility(this.loadAbilityFromNLOB(props.getCompound("previouslyUsedAbility")));
 
 					for (int i = 0; i < instance.getAbilitiesInHotbar().length; i++)
 						instance.getAbilitiesInHotbar()[i] = this.loadAbilityFromNLOB(props.getCompound("hotbar_ability_" + i));
 
 					for (int i = 0; i < instance.getDevilFruitAbilities().length; i++)
 						instance.getDevilFruitAbilities()[i] = this.loadAbilityFromNLOB(props.getCompound("devilfruits_ability_" + i));
-
-					for (int i = 0; i < instance.getRacialAbilities().length; i++)
-						instance.getRacialAbilities()[i] = this.loadAbilityFromNLOB(props.getCompound("racial_ability_" + i));
-
-					for (int i = 0; i < instance.getHakiAbilities().length; i++)
-						instance.getHakiAbilities()[i] = this.loadAbilityFromNLOB(props.getCompound("haki_ability_" + i));
 				}
 				catch (Exception e)
 				{
 					Logger.getGlobal().log(Level.SEVERE, "Ability is not registered correctly or could not be found in the master list !");
 					e.printStackTrace();
 				}
-			}
-
-			private Ability loadAbilityFromNLOB(CompoundNBT props)
-			{
-				if (props == null)
-					return null;
-
-				String ablName = props.getString("name");
-
-				Ability ability = null;
-				try
-				{
-					if (AbilityManager.instance().getAbilityByName(WyHelper.getFancyName(ablName)) != null)
-					{
-						ability = AbilityManager.instance().getAbilityByName(WyHelper.getFancyName(ablName)).getClass().newInstance();
-						ability.setCooldownActive(props.getBoolean("isOnCooldown"));
-						ability.setChargeActive(props.getBoolean("isCharging"));
-						ability.setPassiveActive(props.getBoolean("isPassiveActive"));
-					}
-				}
-				catch (Exception e)
-				{
-					e.printStackTrace();
-				}
-
-				return ability;
 			}
 
 		}, AbilityDataBase::new);
