@@ -1,0 +1,6 @@
+{
+	"parent": "mineminenomi:item/marine_sword",
+	"textures": {
+		"layer0": "mineminenomi:items/marine_sword_haki"
+	}
+}

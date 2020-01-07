@@ -5,17 +5,13 @@ import java.util.HashMap;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.abilities.BariAbilities;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
 import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
-import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 
 public class BariProjectiles 
 {
@@ -55,7 +51,7 @@ public class BariProjectiles
 					return;
 				
 				IAbilityData abilityProps = AbilityDataCapability.get(this.getThrower());
-				Ability ability = abilityProps.getHotbarAbilityFromName(ModAttributes.BARRIERBILITY_STAIRS.getAttributeName());            
+				/*Ability ability = abilityProps.getHotbarAbilityFromName(ModAttributes.BARRIERBILITY_STAIRS.getAttributeName());            
 
 				if(ability != null)
 				{
@@ -66,7 +62,7 @@ public class BariProjectiles
 					}
 					
 					((BariAbilities.BarrierbilityStairs)ability).fillBlocksList(WyHelper.createFilledCube(this.world, this.posX, this.posY - 2, this.posZ, new int[] {1, 1, 1}, ModBlocks.barrier, "air", "nogrief"));
-				}
+				}*/
 
 			}
 			

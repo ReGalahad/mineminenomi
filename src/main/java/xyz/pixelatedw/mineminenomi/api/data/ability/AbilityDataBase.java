@@ -20,7 +20,7 @@ public class AbilityDataBase implements IAbilityData
 	@Override
 	public boolean addAbility(Ability abl)
 	{
-		Ability ogAbl = this.hasAbility(abl);
+		Ability ogAbl = this.getAbility(abl);
 		if(ogAbl == null)
 		{
 			this.abilities.add(abl);
@@ -32,13 +32,13 @@ public class AbilityDataBase implements IAbilityData
 	@Override
 	public void removeAbility(Ability abl)
 	{
-		Ability ogAbl = this.hasAbility(abl);
+		Ability ogAbl = this.getAbility(abl);
 		if(ogAbl != null)
 			this.abilities.remove(ogAbl);
 	}
 
 	@Override
-	public Ability hasAbility(Ability abl)
+	public Ability getAbility(Ability abl)
 	{
 		return this.abilities.parallelStream().filter(ability -> abl.equals(ability)).findFirst().orElse(null);
 	}

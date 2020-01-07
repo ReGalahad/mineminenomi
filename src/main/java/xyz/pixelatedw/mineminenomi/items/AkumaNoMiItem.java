@@ -20,7 +20,6 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.EnumFruitType;
-import xyz.pixelatedw.mineminenomi.abilities.FishKarateAbilities;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
@@ -104,7 +103,7 @@ public class AkumaNoMiItem extends Item
 			{
 				entityStatsProps.setRace(ModValues.HUMAN);
 				
-				abilityDataProps.clearHotbarFromList(player, FishKarateAbilities.abilitiesArray);
+				//abilityDataProps.clearHotbarFromList(player, FishKarateAbilities.abilitiesArray);
 				DevilFruitsHelper.validateStyleMoves(player);
 				DevilFruitsHelper.validateRacialMoves(player);
 				//ModNetwork.sendTo(new PacketAbilityDataSync(abilityDataProps), (ServerPlayerEntity) player);
@@ -113,8 +112,8 @@ public class AkumaNoMiItem extends Item
 
 		if(!eatenFruit.equalsIgnoreCase("yomiyomi"))
 			for(Ability a : abilities)
-				if(!DevilFruitsHelper.verifyIfAbilityIsBanned(a) && !abilityDataProps.hasDevilFruitAbility(a))
-					abilityDataProps.addDevilFruitAbility(a);
+				if(!DevilFruitsHelper.verifyIfAbilityIsBanned(a) && abilityDataProps.getAbility(a) != null)
+					abilityDataProps.addAbility(a);
 
 		//WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));
 		if (!world.isRemote && !player.isCreative())
@@ -129,7 +128,7 @@ public class AkumaNoMiItem extends Item
 	{
 		for (int i = 0; i < this.abilities.length; i++)
 			if (!DevilFruitsHelper.verifyIfAbilityIsBanned(this.abilities[i]) && this.abilities[i] != null)
-				list.add(new StringTextComponent(TextFormatting.GRAY + I18n.format("ability." + WyHelper.getResourceName(this.abilities[i].getAttribute().getAttributeName()) + ".name")));
+				list.add(new StringTextComponent(TextFormatting.GRAY + I18n.format("ability." + WyHelper.getResourceName(this.abilities[i].getName()) + ".name")));
 
 		list.add(new StringTextComponent(""));
 		list.add(new StringTextComponent(type.getColor() + type.getName()));

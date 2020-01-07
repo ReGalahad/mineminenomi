@@ -12,7 +12,6 @@ import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
-import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 
 @Mod.EventBusSubscriber(modid = Env.PROJECT_ID)
 public class HakiPassiveEvents
@@ -30,13 +29,13 @@ public class HakiPassiveEvents
 		LivingEntity attacked = event.getEntityLiving();
 		IEntityStats statPropz = EntityStatsCapability.get(attacked);
 
-		if (abilityProps.isPassiveActive(ModAttributes.BUSOSHOKU_HAKI))
+		/*if (abilityProps.isPassiveActive(ModAttributes.BUSOSHOKU_HAKI))
 		{
 			int powerDifference = statProps.getDoriki() - statPropz.getDoriki();
 			float damageFromDoriki = 2;
 			if(powerDifference > 0)
 				damageFromDoriki = (float) (Math.sqrt(powerDifference) / 2);
 			event.setAmount(damageFromDoriki);
-		}
+		}*/
 	}
 }

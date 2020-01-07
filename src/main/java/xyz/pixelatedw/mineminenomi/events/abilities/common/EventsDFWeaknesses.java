@@ -2,23 +2,17 @@ package xyz.pixelatedw.mineminenomi.events.abilities.common;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
-import xyz.pixelatedw.mineminenomi.api.network.packets.server.SAbilityDataSyncPacket;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.entities.mobs.GenericNewEntity;
 import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
-import xyz.pixelatedw.mineminenomi.helpers.ItemsHelper;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 
 @Mod.EventBusSubscriber(modid = Env.PROJECT_ID)
 public class EventsDFWeaknesses
@@ -49,20 +43,20 @@ public class EventsDFWeaknesses
 			ItemStack heldItem = player.getHeldItemMainhand();
 			boolean updateDisabledAbilities = false;
 			
-			if (!player.world.isRemote)
+			/*if (!player.world.isRemote)
 			{
 				if (props.hasDevilFruit() && DevilFruitsHelper.isNearbyKairoseki(player))
 				{
 					if (ItemsHelper.hasKairosekiItem(player))
 						player.addPotionEffect(new EffectInstance(Effects.NAUSEA, 100, 0));
 					
-					for (int i = 0; i < abilityProps.countAbilitiesInHotbar(); i++)
+					for (int i = 0; i < abilityProps.getHotbarAbilities().length; i++)
 					{
-						if (abilityProps.getHotbarAbilityFromSlot(i) != null && !abilityProps.getHotbarAbilityFromSlot(i).isDisabled() && !abilityProps.getHotbarAbilityFromSlot(i).isOnCooldown())
+						if (abilityProps.getAbilityInSlot(i) != null && !abilityProps.getAbilityInSlot(i).isDisabled() && !abilityProps.getAbilityInSlot(i).isOnCooldown())
 						{						
-							abilityProps.getHotbarAbilityFromSlot(i).endPassive(player);
-							abilityProps.getHotbarAbilityFromSlot(i).setCooldownActive(true);
-							abilityProps.getHotbarAbilityFromSlot(i).disable(player, true);
+							//abilityProps.getAbilityInSlot(i).endPassive(player);
+							//abilityProps.getAbilityInSlot(i).setCooldownActive(true);
+							//abilityProps.getAbilityInSlot(i).disable(player, true);
 							updateDisabledAbilities = true;
 						}
 					}		
@@ -94,7 +88,7 @@ public class EventsDFWeaknesses
 					if(updateDisabledAbilities)
 						ModNetwork.sendTo(new SAbilityDataSyncPacket(player.getEntityId(), abilityProps), (ServerPlayerEntity) player);
 				}
-			}
+			}*/
 		}
 	}
 }

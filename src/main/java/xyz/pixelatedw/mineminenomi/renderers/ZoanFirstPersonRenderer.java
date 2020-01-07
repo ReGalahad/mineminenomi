@@ -27,8 +27,6 @@ import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfo;
 import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.helpers.MorphsHelper;
-import xyz.pixelatedw.mineminenomi.init.ModAttributes;
-import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer;
 
 @OnlyIn(Dist.CLIENT)
@@ -59,13 +57,13 @@ public class ZoanFirstPersonRenderer
 			GlStateManager.rotatef(f * f5 * -20.0F, 0.0F, 0.0F, 1.0F);
 			AbstractClientPlayerEntity clientPlayer = mc.player;
 			// mc.getTextureManager().bindTexture(abstractclientplayerentity.getLocationSkin());
-			
-			if (props.isPassiveActive(ModAttributes.BUSOSHOKU_HAKI))
+
+			/*if (props.isPassiveActive(ModAttributes.BUSOSHOKU_HAKI))
 				mc.getTextureManager().bindTexture(ModResources.BUSOSHOKU_HAKI_ARM);
 			else if (props.isPassiveActive(ModAttributes.HOT_BOILING_SPECIAL))
 				mc.getTextureManager().bindTexture(ModResources.HOT_BOILING_SPECIAL_ARM);
 			else
-				mc.getTextureManager().bindTexture(getTextureFromMorph(mc.player, renderManager));
+				mc.getTextureManager().bindTexture(getTextureFromMorph(mc.player, renderManager));*/
 	
 			GlStateManager.translatef(f * -1.0F, 3.6F, 3.5F);
 			GlStateManager.rotatef(f * 120.0F, 0.0F, 0.0F, 1.0F);

@@ -17,12 +17,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.registries.ForgeRegistries;
 import xyz.pixelatedw.mineminenomi.Env;
-import xyz.pixelatedw.mineminenomi.abilities.CyborgAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.FishKarateAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.HakiAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.RokushikiAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.SniperAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.SwordsmanAbilities;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
@@ -36,7 +30,6 @@ import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfo;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoYomi;
 import xyz.pixelatedw.mineminenomi.events.custom.DorikiEvent;
-import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.items.AkumaNoMiItem;
@@ -93,7 +86,7 @@ public class DevilFruitsHelper
 			if (!info.getForm().equalsIgnoreCase(devilFruitProps.getZoanPoint()))
 				continue;
 
-			if (devilFruitProps.getZoanPoint().equalsIgnoreCase(ZoanInfoYomi.FORM) || abilityProps.isPassiveActive(info.getAttribute()))
+			if (devilFruitProps.getZoanPoint().equalsIgnoreCase(ZoanInfoYomi.FORM) || abilityProps.getAbility(info.getAbility()).isPassiveActive())
 			{
 				return info;
 			}
@@ -127,7 +120,7 @@ public class DevilFruitsHelper
 	{
 		IAbilityData abilityProps = AbilityDataCapability.get(player);
 		IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
-		Ability sparClaw = abilityProps.getHotbarAbilityFromName(ModAttributes.SPAR_CLAW.getAttributeName());
+		Ability sparClaw = null;//abilityProps.getHotbarAbilityFromName(ModAttributes.SPAR_CLAW.getAttributeName());
 		
 		if(devilFruitProps.getDevilFruit().equalsIgnoreCase("supasupa") && sparClaw != null && sparClaw.isPassiveActive())
 		{
@@ -204,7 +197,7 @@ public class DevilFruitsHelper
 	{
 		for (String str : CommonConfig.instance.getBannedAbilities())
 		{
-			if (WyHelper.getResourceName(str).contains(WyHelper.getResourceName(a.getAttribute().getAttributeName())))
+			if (WyHelper.getResourceName(str).contains(WyHelper.getResourceName(a.getName())))
 				return true;
 		}
 
@@ -222,7 +215,7 @@ public class DevilFruitsHelper
 
 		List<Ability> tempAblList = new ArrayList<Ability>();
 
-		if (props.isHuman())
+/*		if (props.isHuman())
 			for (Ability a : RokushikiAbilities.abilitiesArray)
 				if (abilityProps.hasRacialAbility(a) && !verifyIfAbilityIsBanned(a))
 					tempAblList.add(a);
@@ -251,13 +244,13 @@ public class DevilFruitsHelper
 		abilityProps.clearHakiAbilities();
 
 		for (Ability a : tempAblList)
-			abilityProps.addHakiAbility(a);
+			abilityProps.addHakiAbility(a);*/
 	}
 
 	public static void validateStyleMoves(PlayerEntity player)
 	{
 		//QuestProperties questProps = QuestProperties.get(player);
-		IEntityStats props = EntityStatsCapability.get(player);
+/*		IEntityStats props = EntityStatsCapability.get(player);
 		IAbilityData abilityProps = AbilityDataCapability.get(player);
 		
 		if (props.isSwordsman())
@@ -298,17 +291,18 @@ public class DevilFruitsHelper
 				if (!verifyIfAbilityIsBanned(SniperAbilities.SAKURETSUSABOTENBOSHI))
 					abilityProps.addRacialAbility(SniperAbilities.SAKURETSUSABOTENBOSHI);
 			}
-		}
+		}*/
 	}
 
 	public static boolean isSniperAbility(Ability abl)
 	{
-		for (Ability a : SniperAbilities.abilitiesArray)
+/*		for (Ability a : SniperAbilities.abilitiesArray)
 		{
 			if (abl.getAttribute().getAttributeName().equalsIgnoreCase(a.getAttribute().getAttributeName()))
 				return true;
 		}
 
+		return false;*/
 		return false;
 	}
 

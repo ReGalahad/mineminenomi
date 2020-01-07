@@ -15,7 +15,6 @@ import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.EnumFruitType;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.mineminenomi.api.debug.WyDebug;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
@@ -56,10 +55,8 @@ public class AkumaNoMiBoxItem extends Item
 			double totalPower = 0;
 			for (Ability a : df.abilities)
 			{
-				AbilityAttribute attr = a.getAttribute();
-
-				totalCooldown += attr.getAbilityCooldown() - attr.getAbilityCharges();
-				totalDamage += attr.getAbilityExplosionPower() + attr.getProjectileDamage() + attr.getProjectileExplosionPower();
+				totalCooldown += 1;
+				totalDamage += 1;
 
 				totalPower += (totalCooldown + totalDamage) / 2;
 			}

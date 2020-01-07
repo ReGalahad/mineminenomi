@@ -1,7 +1,6 @@
 package xyz.pixelatedw.mineminenomi.entities.zoan;
 
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
-import xyz.pixelatedw.mineminenomi.init.ModAttributes;
+import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.models.entities.zoans.BisonWalkModel;
 import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer.Factory;
@@ -30,9 +29,9 @@ public class ZoanInfoBisonWalk extends ZoanInfo
 	}
 
 	@Override
-	public AbilityAttribute getAttribute()
+	public Ability getAbility()
 	{
-		return ModAttributes.BISON_WALK_POINT;
+		return null;//ModAttributes.BISON_WALK_POINT;
 	}
 
 	@Override

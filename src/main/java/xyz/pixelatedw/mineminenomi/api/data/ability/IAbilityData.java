@@ -10,7 +10,7 @@ public interface IAbilityData
 
 	boolean addAbility(Ability abl);
 	void removeAbility(Ability abl);
-	Ability hasAbility(Ability abl);
+	Ability getAbility(Ability abl);
 	List<Ability> getAbilities(Category category);
 	void clearAbilities(Category category);
 	void clearAbilityFromList(Category category, List<Ability> list); 
@@ -28,17 +28,4 @@ public interface IAbilityData
 	
 	boolean isInCombatMode();
 	void setCombatMode(boolean value);
-	/*
-	public default boolean isPassiveActive(AbilityAttribute attr)
-	{
-		if(attr == null)
-			return false;
-		
-		Ability ability = this.getHotbarAbilityFromName(attr.getAttributeName());
-		if (ability != null && ability.isPassiveActive())
-			return true;
-
-		return false;
-	}
-	*/
 }

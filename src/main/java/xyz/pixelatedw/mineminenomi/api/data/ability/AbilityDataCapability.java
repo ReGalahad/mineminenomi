@@ -75,6 +75,7 @@ public class AbilityDataCapability
 						instance.setAbilityInHotbar(i, (Ability) WyHelper.deserialize(props.getByteArray("hotbar_ability_" + i)));
 
 					int total = props.getInt("abilitiesOwned");
+					instance.clearAbilities(Category.ALL);
 					
 					for (int i = 0; i < total; i++)
 						instance.addAbility((Ability) WyHelper.deserialize(props.getByteArray("ability_" + i)));

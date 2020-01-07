@@ -2,7 +2,6 @@ package xyz.pixelatedw.mineminenomi.events;
 
 import org.lwjgl.opengl.GL11;
 
-import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.LivingRenderer;
 import net.minecraft.entity.LivingEntity;
@@ -10,7 +9,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Hand;
 import net.minecraft.util.HandSide;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -33,7 +31,6 @@ import xyz.pixelatedw.mineminenomi.data.entity.extraeffects.ExtraEffectCapabilit
 import xyz.pixelatedw.mineminenomi.data.entity.extraeffects.IExtraEffect;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfo;
 import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
-import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.models.effects.AbareHimatsuriModel;
 import xyz.pixelatedw.mineminenomi.packets.server.SDevilFruitSyncPacket;
@@ -141,7 +138,7 @@ public class EventsMorphs
 
 		if (event.getEntity() instanceof PlayerEntity)
 		{
-			if (abilityProps.isPassiveActive(ModAttributes.ABARE_HIMATSURI))
+			/*if (abilityProps.isPassiveActive(ModAttributes.ABARE_HIMATSURI))
 			{
 				if (event.getEntity().onGround)
 				{
@@ -152,7 +149,7 @@ public class EventsMorphs
 
 				if (!event.getEntity().onGround)
 					abareHimatsuri.doRender(event.getEntity(), event.getX(), event.getY(), event.getZ(), 0F, 0.0625F);
-			}
+			}*/
 		}
 	}
 
@@ -194,8 +191,8 @@ public class EventsMorphs
 		boolean renderHandEffectFlag = false;
 		boolean hasEmptyHand = player.getHeldItemMainhand().isEmpty();
 
-		boolean hasHotBoilingSpecial = abilityDataProps.isPassiveActive(ModAttributes.HOT_BOILING_SPECIAL);
-		boolean hasBusoshokuHaki = abilityDataProps.isPassiveActive(ModAttributes.BUSOSHOKU_HAKI);
+		boolean hasHotBoilingSpecial = false;//abilityDataProps.isPassiveActive(ModAttributes.HOT_BOILING_SPECIAL);
+		boolean hasBusoshokuHaki = false;//abilityDataProps.isPassiveActive(ModAttributes.BUSOSHOKU_HAKI);
 
 		if (hasEmptyHand && (hasBusoshokuHaki || hasHotBoilingSpecial))
 		{

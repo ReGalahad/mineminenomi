@@ -28,7 +28,7 @@ import net.minecraftforge.fml.client.config.GuiUtils;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.WyHelper.Direction;
 import xyz.pixelatedw.mineminenomi.api.WyRenderHelper;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
+import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
@@ -38,7 +38,6 @@ import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.data.entity.haki.HakiDataCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.haki.IHakiData;
-import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 
 @OnlyIn(Dist.CLIENT)
@@ -114,13 +113,13 @@ public class EventsCombatMode extends Screen
 				// if(abilityProps.getAbilityFromSlot(0) != null)
 				// System.out.println("" + abilityProps.getAbilityFromSlot(0).isOnCooldown());
 				GL11.glEnable(GL11.GL_BLEND);
-				if (abilityDataProps.getHotbarAbilityFromSlot(i) != null && abilityDataProps.getHotbarAbilityFromSlot(i).isOnCooldown() && !abilityDataProps.getHotbarAbilityFromSlot(i).isDisabled())
+				if (abilityDataProps.getAbilityInSlot(i) != null && abilityDataProps.getAbilityInSlot(i).isOnCooldown() && !abilityDataProps.getAbilityInSlot(i).isDisabled())
 					GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 24, 0, 23, 23, 0);
-				else if (abilityDataProps.getHotbarAbilityFromSlot(i) != null && abilityDataProps.getHotbarAbilityFromSlot(i).isCharging())
+				else if (abilityDataProps.getAbilityInSlot(i) != null && abilityDataProps.getAbilityInSlot(i).isCharging())
 					GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 72, 0, 23, 23, 0);
-				else if (abilityDataProps.getHotbarAbilityFromSlot(i) != null && abilityDataProps.getHotbarAbilityFromSlot(i).isPassiveActive())
+				else if (abilityDataProps.getAbilityInSlot(i) != null && abilityDataProps.getAbilityInSlot(i).isPassiveActive())
 					GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 48, 0, 23, 23, 0);
-				else if (abilityDataProps.getHotbarAbilityFromSlot(i) != null && abilityDataProps.getHotbarAbilityFromSlot(i).isDisabled())
+				else if (abilityDataProps.getAbilityInSlot(i) != null && abilityDataProps.getAbilityInSlot(i).isDisabled())
 					GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 96, 0, 23, 23, 0);
 				else
 					GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 0, 0, 23, 23, 0);
@@ -143,15 +142,15 @@ public class EventsCombatMode extends Screen
 			for (int i = 0; i < 8; i++)
 			{
 				GLX.glBlendFuncSeparate(770, 771, 1, 0);
-				if (abilityDataProps.getHotbarAbilityFromSlot(i) != null)
+				Ability abl = abilityDataProps.getAbilityInSlot(i);
+				if (abl != null)
 				{
-					AbilityAttribute attr = abilityDataProps.getHotbarAbilityFromSlot(i).getAttribute();
-					WyRenderHelper.drawAbilityIcon(WyHelper.getResourceName(attr.getAbilityTexture()), (posX - 192 + (i * 50)) / 2, posY - 19, 16, 16);
+					WyRenderHelper.drawAbilityIcon(WyHelper.getResourceName(abl.getName()), (posX - 192 + (i * 50)) / 2, posY - 19, 16, 16);
 				}
 			}
 
 			int trackDistance = 15;
-			if (abilityDataProps.isPassiveActive(ModAttributes.KENBUNSHOKU_HAKI))
+			if (false) // Ken is Passive Check
 			{
 				List<LivingEntity> nearbyEnemies = WyHelper.getEntitiesNear(player, 15);
 				for (LivingEntity elb : nearbyEnemies)

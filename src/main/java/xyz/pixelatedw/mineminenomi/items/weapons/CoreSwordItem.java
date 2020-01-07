@@ -25,7 +25,6 @@ import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
-import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
 
 public class CoreSwordItem extends Item
@@ -46,7 +45,7 @@ public class CoreSwordItem extends Item
 		{
 			IAbilityData abilityData = AbilityDataCapability.get(livingEntity);
 			boolean mainHandFlag = livingEntity.getHeldItemMainhand() == itemStack;
-			boolean hakiActiveFlag = abilityData.isPassiveActive(ModAttributes.BUSOSHOKU_HAKI);
+			boolean hakiActiveFlag = false;//abilityData.isPassiveActive(ModAttributes.BUSOSHOKU_HAKI);
 			return mainHandFlag && hakiActiveFlag ? 1.0F : 0.0F;
 		}
 	};

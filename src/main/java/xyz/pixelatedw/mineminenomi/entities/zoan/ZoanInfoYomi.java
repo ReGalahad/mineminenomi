@@ -1,6 +1,6 @@
 package xyz.pixelatedw.mineminenomi.entities.zoan;
 
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
+import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.models.entities.zoans.YomiModel;
 import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer.Factory;
@@ -28,7 +28,7 @@ public class ZoanInfoYomi  extends ZoanInfo
 	}
 
 	@Override
-	public AbilityAttribute getAttribute()
+	public Ability getAbility()
 	{
 		return null;
 	}

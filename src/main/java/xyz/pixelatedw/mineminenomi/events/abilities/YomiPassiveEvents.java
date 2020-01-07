@@ -24,7 +24,6 @@ import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoYomi;
 import xyz.pixelatedw.mineminenomi.events.custom.YomiTriggerEvent;
-import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.packets.server.SDevilFruitSyncPacket;
 
@@ -91,7 +90,7 @@ public class YomiPassiveEvents
 		if (!devilFruitProps.getDevilFruit().equalsIgnoreCase("yomiyomi"))
 			return;
 
-		if (devilFruitProps.getZoanPoint().equalsIgnoreCase(ZoanInfoYomi.FORM) && abilityProps.isPassiveActive(ModAttributes.SOUL_PARADE))
+		if (devilFruitProps.getZoanPoint().equalsIgnoreCase(ZoanInfoYomi.FORM) )//&& abilityProps.isPassiveActive(ModAttributes.SOUL_PARADE))
 		{
 			attacker.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 100, 1));
 			attacker.addPotionEffect(new EffectInstance(Effects.MINING_FATIGUE, 100, 1));

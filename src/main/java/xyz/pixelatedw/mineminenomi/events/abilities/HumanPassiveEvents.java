@@ -5,7 +5,6 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.Env;
-import xyz.pixelatedw.mineminenomi.abilities.RokushikiAbilities;
 import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
@@ -31,8 +30,8 @@ public class HumanPassiveEvents
 		if (!statsProps.isHuman())
 			return;
 	
-		if(abilityProps.isPassiveActive(RokushikiAbilities.TEKKAI.getAttribute()))
-			player.setMotion(player.getMotion().x, player.getMotion().y - 5, player.getMotion().z);
+		//if(abilityProps.isPassiveActive(RokushikiAbilities.TEKKAI.getAttribute()))
+		//	player.setMotion(player.getMotion().x, player.getMotion().y - 5, player.getMotion().z);
 	}
 
 }

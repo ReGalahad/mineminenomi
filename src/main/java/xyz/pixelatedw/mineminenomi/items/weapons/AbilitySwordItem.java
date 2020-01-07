@@ -23,35 +23,31 @@ public class AbilitySwordItem extends CoreSwordItem
 	public void inventoryTick(ItemStack itemStack, World world, Entity entity, int itemSlot, boolean isSelected)
 	{
 		super.inventoryTick(itemStack, world, entity, itemSlot, isSelected);
-		if(entity instanceof PlayerEntity)
+		if (entity instanceof PlayerEntity)
 		{
-			PlayerEntity owner = (PlayerEntity) entity;		
+			PlayerEntity owner = (PlayerEntity) entity;
 			IDevilFruit devilFruitProps = DevilFruitCapability.get(owner);
 			IAbilityData abilityDataProps = AbilityDataCapability.get(owner);
 
-			if(devilFruitProps.getDevilFruit().equals("hiehie") || devilFruitProps.getDevilFruit().equals("pikapika") || devilFruitProps.getDevilFruit().equals("noronoro") 
-					|| devilFruitProps.getDevilFruit().equals("dorudoru") || devilFruitProps.getDevilFruit().equals("gasugasu") || devilFruitProps.getDevilFruit().equals("yukiyuki"))
+			if (devilFruitProps.getDevilFruit().equals("hiehie") || devilFruitProps.getDevilFruit().equals("pikapika") || devilFruitProps.getDevilFruit().equals("noronoro") || devilFruitProps.getDevilFruit().equals("dorudoru") || devilFruitProps.getDevilFruit().equals("gasugasu") || devilFruitProps.getDevilFruit().equals("yukiyuki"))
 			{
-				for(int i = 0; i < abilityDataProps.countAbilitiesInHotbar(); i++)
+				for (int i = 0; i < abilityDataProps.getHotbarAbilities().length; i++)
 				{
-					if(abilityDataProps.getHotbarAbilityFromSlot(i) != null && abilityDataProps.getHotbarAbilityFromSlot(i).getAttribute().isPassive())
+					if (abilityDataProps.getAbilityInSlot(i) != null && abilityDataProps.getAbilityInSlot(i).isPassiveActive())
 					{
-						if(!abilityDataProps.getHotbarAbilityFromSlot(i).isPassiveActive())
-						{
-							String ablName = WyHelper.getResourceName(abilityDataProps.getHotbarAbilityFromSlot(i).getAttribute().getAttributeName());
-							if(ablName.equals(WyHelper.getResourceName(ModAttributes.ICE_SABER.getAttributeName())))
-								WyHelper.removeStackFromInventory(owner, itemStack);
-							else if(ablName.equals(WyHelper.getResourceName(ModAttributes.AMA_NO_MURAKUMO.getAttributeName())))
-								WyHelper.removeStackFromInventory(owner, itemStack);
-							else if(ablName.equals(WyHelper.getResourceName(ModAttributes.NORO_NORO_BEAM_SWORD.getAttributeName())))
-								WyHelper.removeStackFromInventory(owner, itemStack);
-							else if(ablName.equals(WyHelper.getResourceName(ModAttributes.DORU_DORU_ARTS_KEN.getAttributeName())))
-								WyHelper.removeStackFromInventory(owner, itemStack);
-							else if(ablName.equals(WyHelper.getResourceName(ModAttributes.BLUE_SWORD.getAttributeName())))
-								WyHelper.removeStackFromInventory(owner, itemStack);
-							else if(ablName.equals(WyHelper.getResourceName(ModAttributes.TABIRA_YUKI.getAttributeName())))
-								WyHelper.removeStackFromInventory(owner, itemStack);
-						}
+						String ablName = WyHelper.getResourceName(abilityDataProps.getAbilityInSlot(i).getName());
+						if (ablName.equals(WyHelper.getResourceName(ModAttributes.ICE_SABER.getAttributeName())))
+							WyHelper.removeStackFromInventory(owner, itemStack);
+						else if (ablName.equals(WyHelper.getResourceName(ModAttributes.AMA_NO_MURAKUMO.getAttributeName())))
+							WyHelper.removeStackFromInventory(owner, itemStack);
+						else if (ablName.equals(WyHelper.getResourceName(ModAttributes.NORO_NORO_BEAM_SWORD.getAttributeName())))
+							WyHelper.removeStackFromInventory(owner, itemStack);
+						else if (ablName.equals(WyHelper.getResourceName(ModAttributes.DORU_DORU_ARTS_KEN.getAttributeName())))
+							WyHelper.removeStackFromInventory(owner, itemStack);
+						else if (ablName.equals(WyHelper.getResourceName(ModAttributes.BLUE_SWORD.getAttributeName())))
+							WyHelper.removeStackFromInventory(owner, itemStack);
+						else if (ablName.equals(WyHelper.getResourceName(ModAttributes.TABIRA_YUKI.getAttributeName())))
+							WyHelper.removeStackFromInventory(owner, itemStack);
 					}
 				}
 			}

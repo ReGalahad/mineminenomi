@@ -9,56 +9,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 import xyz.pixelatedw.mineminenomi.EnumFruitType;
 import xyz.pixelatedw.mineminenomi.Env;
-import xyz.pixelatedw.mineminenomi.abilities.BakuAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.BaneAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.BariAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.BomuAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.ChiyuAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.CyborgAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.DoaAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.DokuAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.DoruAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.FishKarateAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.GasuAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.GoeAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.GomuAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.GoroAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.GuraAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.HakiAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.HieAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.HoroAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.HoruAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.ItoAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.JuryoAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.KachiAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.KageAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.MaguAbilities;
 import xyz.pixelatedw.mineminenomi.abilities.MeraAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.MeroAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.MoguAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.MokuAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.NikyuAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.NoroAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.OpeAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.OriAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.PikaAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.RokushikiAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.SabiAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.SniperAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.SukeAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.SunaAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.SupaAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.SwordsmanAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.ToriPhoenixAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.UshiBisonAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.UshiGiraffeAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.YamiAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.YomiAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.YukiAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.ZouAbilities;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.debug.WyDebug;
 import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.BakuProjectiles;
 import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.BaneProjectiles;
 import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.BariProjectiles;
@@ -113,7 +65,7 @@ public class ModDevilFruits
 			SabiSabiNoMi, HitoHitoNoMi, ChiyuChiyuNoMi, MoguMoguNoMi, UshiUshiNoMiGiraffe, DoaDoaNoMi,
 			KachiKachiNoMi, MiniMiniNoMi;
 
-	private static final Ability[][] ALL_ABILITIES = 
+/*	private static final Ability[][] ALL_ABILITIES = 
 		{
 			// Devil Fruit Abilities lists
 			MeraAbilities.abilitiesArray, HieAbilities.abilitiesArray, BaneAbilities.abilitiesArray, PikaAbilities.abilitiesArray, SukeAbilities.abilitiesArray, 
@@ -121,7 +73,7 @@ public class ModDevilFruits
 			KageAbilities.abilitiesArray, SunaAbilities.abilitiesArray, MaguAbilities.abilitiesArray, DoruAbilities.abilitiesArray, DokuAbilities.abilitiesArray, GasuAbilities.abilitiesArray,
 			YukiAbilities.abilitiesArray, ItoAbilities.abilitiesArray, BariAbilities.abilitiesArray, HoroAbilities.abilitiesArray, YamiAbilities.abilitiesArray, GoeAbilities.abilitiesArray,
 			NoroAbilities.abilitiesArray, GomuAbilities.abilitiesArray, JuryoAbilities.abilitiesArray, UshiBisonAbilities.abilitiesArray, ToriPhoenixAbilities.abilitiesArray,
-			/*KiloAbilities.abilitiesArray,*/ BakuAbilities.abilitiesArray, OriAbilities.abilitiesArray, YomiAbilities.abilitiesArray, ZouAbilities.abilitiesArray,
+			/*KiloAbilities.abilitiesArray,/ BakuAbilities.abilitiesArray, OriAbilities.abilitiesArray, YomiAbilities.abilitiesArray, ZouAbilities.abilitiesArray,
 			SabiAbilities.abilitiesArray, SupaAbilities.abilitiesArray, MeroAbilities.abilitiesArray, ChiyuAbilities.abilitiesArray, HoruAbilities.abilitiesArray, MoguAbilities.abilitiesArray,
 			DoaAbilities.abilitiesArray, KachiAbilities.abilitiesArray, UshiGiraffeAbilities.abilitiesArray,
 
@@ -130,7 +82,7 @@ public class ModDevilFruits
 			SniperAbilities.abilitiesArray, SwordsmanAbilities.abilitiesArray, 
 			HakiAbilities.abilitiesArray
 		};
-	
+*/	
 	public static final HashMap[] ALL_PROJECTILES = new HashMap[] 
 		{
 			// Devil Fruit projectiles
@@ -241,7 +193,7 @@ public class ModDevilFruits
 		MeraMeraNoMi = new AkumaNoMiItem(EnumFruitType.LOGIA, MeraAbilities.abilitiesArray);
 		registerDevilFruit(MeraMeraNoMi, "Mera Mera no Mi");        
 		
-		if(WyDebug.isDebug())
+/*		if(WyDebug.isDebug())
 		{
 			for (int i = 0; i < ALL_ABILITIES.length; i++)
 			{		
@@ -255,7 +207,7 @@ public class ModDevilFruits
 			WyDebug.info("A total of " + ModValues.devilfruits.size() + " Devil Fruits have been registered");
 			WyDebug.info("A total of " + totalAbilities + " abilities have been registered");
 		}
-		
+*/		
 		event.getRegistry().registerAll(ModValues.devilfruits.toArray(new AkumaNoMiItem[0]));
     }
 	

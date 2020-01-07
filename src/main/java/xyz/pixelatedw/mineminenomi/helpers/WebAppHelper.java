@@ -7,7 +7,6 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.stream.Stream;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
@@ -16,15 +15,7 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistries;
 import xyz.pixelatedw.mineminenomi.Env;
-import xyz.pixelatedw.mineminenomi.abilities.CyborgAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.FishKarateAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.HakiAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.RokushikiAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.SniperAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.SwordsmanAbilities;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.mineminenomi.api.debug.WyDebug;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
 import xyz.pixelatedw.mineminenomi.items.AkumaNoMiItem;
@@ -91,7 +82,7 @@ public class WebAppHelper
 
 	private static void writeSpecialAbilitiesJSON()
 	{
-		try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(Env.projectResourceFolder + "/assets/" + Env.PROJECT_ID + "/EXTRA_BOT_FILES/specialabilities.json"), "UTF-8")))
+		/*try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(Env.projectResourceFolder + "/assets/" + Env.PROJECT_ID + "/EXTRA_BOT_FILES/specialabilities.json"), "UTF-8")))
 		{
 
 			writer.write("{\n");
@@ -122,7 +113,7 @@ public class WebAppHelper
 		catch (Exception e)
 		{
 			e.getStackTrace();
-		}
+		}*/
 	}
 
 	private static void writeFancyAbilitiesList()
@@ -153,7 +144,8 @@ public class WebAppHelper
 
 	private static String generateAbilitiesString(Ability[] abilities)
 	{
-		StringBuilder abilitiesString = new StringBuilder();
+		return "";
+/*		StringBuilder abilitiesString = new StringBuilder();
 
 		for (Ability ability : abilities)
 		{
@@ -232,7 +224,7 @@ public class WebAppHelper
 				System.out.println("Ability without description : " + ability.getName());
 		}
 
-		return abilitiesString.toString();
+		return abilitiesString.toString();*/
 	}
 
 	private static String getPotionEffectsFor(EffectInstance[] pe)

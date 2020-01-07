@@ -1,0 +1,6 @@
+{
+	"parent": "mineminenomi:item/bo_staff",
+	"textures": {
+		"layer0": "mineminenomi:items/bo_staff_haki"
+	}
+}

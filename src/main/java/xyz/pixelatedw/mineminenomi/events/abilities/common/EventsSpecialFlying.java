@@ -16,7 +16,6 @@ import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
-import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.packets.server.SSpecialFlyingPacket;
@@ -34,7 +33,7 @@ public class EventsSpecialFlying
 			IDevilFruit props = DevilFruitCapability.get(player);
 			IAbilityData abilityProps = AbilityDataCapability.get(player);
 
-			Ability abareHimatsuri = abilityProps.hasAbilityInHotbar(ModAttributes.ABARE_HIMATSURI.getAttributeName());
+			Ability abareHimatsuri = null;//abilityProps.hasAbilityInHotbar(ModAttributes.ABARE_HIMATSURI.getAttributeName());
 			boolean hasAbareHimatsuri = props.getDevilFruit().equalsIgnoreCase("zushizushi") && abareHimatsuri != null && abareHimatsuri.isPassiveActive();
 			
 			boolean hasToriFruit = props.getDevilFruit().equalsIgnoreCase("toritoriphoenix") && !props.getZoanPoint().toLowerCase().equals("n/a");

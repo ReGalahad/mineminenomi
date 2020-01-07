@@ -1,6 +1,6 @@
 package xyz.pixelatedw.mineminenomi.entities.zoan;
 
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
+import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer;
 
 public abstract class ZoanInfo
@@ -10,7 +10,7 @@ public abstract class ZoanInfo
 	
 	public abstract ZoanMorphRenderer.Factory getFactory();
 	
-	public abstract AbilityAttribute getAttribute();
+	public abstract Ability getAbility();
 	
 	public abstract double getWidth();
 	public abstract double getHeight();

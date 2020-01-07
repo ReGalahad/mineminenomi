@@ -9,12 +9,10 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.Env;
-import xyz.pixelatedw.mineminenomi.api.WyRenderHelper;
 import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
 import xyz.pixelatedw.mineminenomi.data.entity.extraeffects.ExtraEffectCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.extraeffects.IExtraEffect;
-import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.models.effects.CandleLockModel;
 import xyz.pixelatedw.mineminenomi.models.effects.ChainsModel;
 import xyz.pixelatedw.mineminenomi.renderers.effects.CandleLockRenderer;
@@ -115,8 +113,8 @@ public class EventsEffectOverlay
 		 * WyRenderHelper.drawColourOnScreen(WyHelper.hexToRGB("#3e4247").getRGB(), 100, 0, 0, sr.getScaledWidth_double(), sr.getScaledHeight_double(), 200);
 		 */
 		
-		if (abilityProps.isPassiveActive(ModAttributes.AIR_DOOR))
-			WyRenderHelper.drawColourOnScreen(0, 50, 0, 100, 0, 0, mc.mainWindow.getWidth(), mc.mainWindow.getHeight(), 100);
+		//if (abilityProps.isPassiveActive(ModAttributes.AIR_DOOR))
+		//	WyRenderHelper.drawColourOnScreen(0, 50, 0, 100, 0, 0, mc.mainWindow.getWidth(), mc.mainWindow.getHeight(), 100);
 	}
 
 }

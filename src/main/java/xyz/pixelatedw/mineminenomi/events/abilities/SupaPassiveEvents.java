@@ -9,7 +9,6 @@ import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
-import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 
 @Mod.EventBusSubscriber(modid = Env.PROJECT_ID)
 public class SupaPassiveEvents
@@ -28,11 +27,11 @@ public class SupaPassiveEvents
 		if (!devilFruitProps.getDevilFruit().equals("supasupa"))
 			return;
 
-		if (abilityProps.isPassiveActive(ModAttributes.ATOMIC_SPURT) && player.onGround)
+		/*if (abilityProps.isPassiveActive(ModAttributes.ATOMIC_SPURT) && player.onGround)
 		{
 			if(Math.abs(player.getMotion().getX()) < 0.2 || Math.abs( player.getMotion().getZ()) < 0.2)
 				player.setMotion(player.getMotion().getX() * 1.5, player.getMotion().getY(), player.getMotion().getZ() * 1.5);
-		}
+		}*/
 	}
 
 }

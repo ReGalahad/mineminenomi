@@ -8,15 +8,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
-import xyz.pixelatedw.mineminenomi.abilities.CyborgAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.SniperAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.SwordsmanAbilities;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability.Category;
 import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
 import xyz.pixelatedw.mineminenomi.api.network.packets.server.SAbilityDataSyncPacket;
-import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.init.ModNetwork;
@@ -52,7 +48,7 @@ public class CDeleteCCBookPacket
 				abilityProps.clearHotbar();
 				abilityProps.clearAbilities(Category.RACIAL);
 				
-				if(entityProps.isCyborg())
+				/*if(entityProps.isCyborg())
 				{										
 					abilityProps.addAbility(CyborgAbilities.FRESH_FIRE);
 					abilityProps.addAbility(CyborgAbilities.COLA_OVERDRIVE);
@@ -84,7 +80,7 @@ public class CDeleteCCBookPacket
 						abilityProps.addAbility(SniperAbilities.RENPATSUNAMARIBOSHI);
 						abilityProps.addAbility(SniperAbilities.SAKURETSUSABOTENBOSHI);
 					}
-				}
+				}*/
 				
 				for(ItemStack is : player.inventory.mainInventory)
 					if(is != null && is.getItem() instanceof CharacterCreatorItem)

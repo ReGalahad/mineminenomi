@@ -16,8 +16,9 @@ public class MeraAbilities
 		ModValues.abilityWebAppExtraParams.put("enjomo", new String[] {"desc", "Creates a circle of fire around the user, burning everyone inside of it."});
 		ModValues.abilityWebAppExtraParams.put("daienkaientei", new String[] {"desc", "Amasses the user's flames into a gigantic fireball that the user hurls at the opponent."});
 	}
+	public static final Ability HIKEN = new Hiken();
 	
-	public static Ability[] abilitiesArray = new Ability[] {new Hiken()};//, new Higan(), new DaiEnkaiEntei(), new Hidaruma(), new Jujika(), new Enjomo()};
+	public static Ability[] abilitiesArray = new Ability[] {HIKEN};//, new Higan(), new DaiEnkaiEntei(), new Hidaruma(), new Jujika(), new Enjomo()};
 	
 	public static class Hiken extends Ability
 	{

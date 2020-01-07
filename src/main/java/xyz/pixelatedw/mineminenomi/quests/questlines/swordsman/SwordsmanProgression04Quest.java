@@ -5,7 +5,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
-import xyz.pixelatedw.mineminenomi.abilities.SwordsmanAbilities;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
@@ -15,7 +14,6 @@ import xyz.pixelatedw.mineminenomi.api.quests.IHitCounterQuest;
 import xyz.pixelatedw.mineminenomi.api.quests.IProgressionQuest;
 import xyz.pixelatedw.mineminenomi.api.quests.Quest;
 import xyz.pixelatedw.mineminenomi.api.quests.extra.Questline;
-import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.helpers.ItemsHelper;
@@ -95,8 +93,8 @@ public class SwordsmanProgression04Quest extends Quest implements IProgressionQu
 		String questGiverName = I18n.format("entity.mineminenomi.dojo_sensei");
 		WyHelper.sendMsgToPlayer(player, I18n.format(ModI18n.QUEST_SWORDSMAN_PROGRESSION_03_COMPLETE, questGiverName));
 		
-		if(CommonConfig.instance.isQuestProgressionEnabled())
-			abilityData.addAbility(SwordsmanAbilities.SANBYAKUROKUJU_POUND_HO);
+		//if(CommonConfig.instance.isQuestProgressionEnabled())
+		//	abilityData.addAbility(SwordsmanAbilities.SANBYAKUROKUJU_POUND_HO);
 	}
 	
 	@Override

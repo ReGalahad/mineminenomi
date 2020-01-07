@@ -6,13 +6,9 @@ import java.util.List;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.client.gui.ScrollPanel;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.WyRenderHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
-import xyz.pixelatedw.mineminenomi.api.abilities.extra.AbilityManager;
 import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
 import xyz.pixelatedw.mineminenomi.api.network.packets.client.CAbilityDataSyncPacket;
 import xyz.pixelatedw.mineminenomi.init.ModNetwork;
@@ -66,8 +62,8 @@ public class AbilitiesListScreenPanel extends ScrollPanel
 				if(this.props.hasAbilityInHotbar(entry.ability))
 					flag = true;
 
-				Minecraft.getInstance().fontRenderer.drawStringWithShadow(I18n.format("ability." + WyHelper.getResourceName(entry.ability.getAttribute().getAttributeName()) + ".name"), x, y + 4, flag ? 0xFF0000 : 0xFFFFFF);
-				WyRenderHelper.drawAbilityIcon(WyHelper.getResourceName(entry.attribute.getAbilityTexture()), MathHelper.floor(x) - 30, MathHelper.floor(y), 16, 16);
+				Minecraft.getInstance().fontRenderer.drawStringWithShadow(I18n.format("ability." + WyHelper.getResourceName(entry.ability.getName()) + ".name"), x, y + 4, flag ? 0xFF0000 : 0xFFFFFF);
+				//WyRenderHelper.drawAbilityIcon(WyHelper.getResourceName(entry.attribute.getAbilityTexture()), MathHelper.floor(x) - 30, MathHelper.floor(y), 16, 16);
 			}
 
 			relativeY += ENTRY_HEIGHT * 1.25;
@@ -104,9 +100,9 @@ public class AbilitiesListScreenPanel extends ScrollPanel
 
 		boolean flag = true;
 		
-		for (int i = 0; i < this.props.countAbilitiesInHotbar(); i++)
+		for (int i = 0; i < this.props.getHotbarAbilities().length; i++)
 		{
-			if (this.props.getHotbarAbilityFromSlot(i) != null && this.props.getHotbarAbilityFromSlot(i).getAttribute().getAttributeName().equalsIgnoreCase(entry.ability.getAttribute().getAttributeName()))
+			if (this.props.getAbilityInSlot(i) != null && this.props.getAbilityInSlot(i).equals(entry.ability))
 			{
 				flag = false;
 			}
@@ -114,7 +110,7 @@ public class AbilitiesListScreenPanel extends ScrollPanel
 		
 		if (flag)
 		{
-			this.props.setAbilityInSlot(this.parent.slotSelected, AbilityManager.instance().getAbilityByName(WyHelper.getResourceName(entry.ability.getAttribute().getAttributeName())));
+			//this.props.setAbilityInSlot(this.parent.slotSelected, AbilityManager.instance().getAbilityByName(WyHelper.getResourceName(entry.ability.getAttribute().getAttributeName())));
 			ModNetwork.sendToServer(new CAbilityDataSyncPacket(this.props));
 		}
 
@@ -125,12 +121,10 @@ public class AbilitiesListScreenPanel extends ScrollPanel
 	{
 
 		private Ability ability;
-		private AbilityAttribute attribute;
 
 		public Entry(Ability ability)
 		{
 			this.ability = ability;
-			this.attribute = ability.getAttribute();
 		}
 
 	}

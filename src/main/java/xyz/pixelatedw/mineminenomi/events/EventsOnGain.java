@@ -10,12 +10,6 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.Env;
-import xyz.pixelatedw.mineminenomi.abilities.CyborgAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.FishKarateAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.HakiAbilities;
-import xyz.pixelatedw.mineminenomi.abilities.HakiAbilities.BusoshokuHaki;
-import xyz.pixelatedw.mineminenomi.abilities.HakiAbilities.KenbunshokuHaki;
-import xyz.pixelatedw.mineminenomi.abilities.RokushikiAbilities;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
@@ -28,7 +22,6 @@ import xyz.pixelatedw.mineminenomi.entities.mobs.GenericNewEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.marines.EntityGenericMarine;
 import xyz.pixelatedw.mineminenomi.events.custom.BountyEvent;
 import xyz.pixelatedw.mineminenomi.events.custom.DorikiEvent;
-import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
 import xyz.pixelatedw.mineminenomi.packets.server.SEntityStatsSyncPacket;
@@ -40,7 +33,7 @@ public class EventsOnGain
 	@SubscribeEvent
 	public static void onDorikiGained(DorikiEvent event)
 	{
-		if (event.props.isHuman())
+/*		if (event.props.isHuman())
 		{
 			gainAbility(event.player, 500, RokushikiAbilities.SORU);
 			gainAbility(event.player, 1500, RokushikiAbilities.TEKKAI);
@@ -71,7 +64,7 @@ public class EventsOnGain
 			gainAbility(event.player, 0, CyborgAbilities.COUP_DE_VENT);
 			gainAbility(event.player, 5500, HakiAbilities.KENBUNSHOKU_HAKI);
 			gainAbility(event.player, 8500, HakiAbilities.BUSOSHOKU_HAKI);
-		}
+		}*/
 
 		if (event.player != null && CommonConfig.instance.isExtraHeartsEnabled())
 		{
@@ -89,7 +82,7 @@ public class EventsOnGain
 		IEntityStats props = EntityStatsCapability.get(player);
 		IAbilityData abilityProps = AbilityDataCapability.get(player);
 
-		if (ability instanceof KenbunshokuHaki || ability instanceof BusoshokuHaki)
+/*		if (ability instanceof KenbunshokuHaki || ability instanceof BusoshokuHaki)
 		{
 			if (props.getDoriki() >= doriki && !abilityProps.hasHakiAbility(ability) && !DevilFruitsHelper.verifyIfAbilityIsBanned(ability))
 				abilityProps.addHakiAbility(ability);
@@ -102,7 +95,7 @@ public class EventsOnGain
 				abilityProps.addRacialAbility(ability);
 			if ((props.getDoriki() < doriki || DevilFruitsHelper.verifyIfAbilityIsBanned(ability)) && abilityProps.hasRacialAbility(ability))
 				abilityProps.removeRacialAbility(ability);
-		}
+		}*/
 	}
 
 	@SubscribeEvent

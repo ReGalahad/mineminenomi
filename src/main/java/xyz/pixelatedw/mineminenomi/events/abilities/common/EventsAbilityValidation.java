@@ -1,7 +1,5 @@
 package xyz.pixelatedw.mineminenomi.events.abilities.common;
 
-import java.util.Arrays;
-
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -9,7 +7,6 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.Env;
-import xyz.pixelatedw.mineminenomi.abilities.YomiAbilities;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability.Category;
@@ -74,11 +71,11 @@ public class EventsAbilityValidation
 				
 				for(Ability a : abilityProps.getAbilities(Category.ALL))
 				{
-					if(Arrays.asList(YomiAbilities.abilitiesArray).contains(a))
+					/*if(Arrays.asList(YomiAbilities.abilitiesArray).contains(a))
 					{
 						if(!devilFruitProps.getZoanPoint().equalsIgnoreCase("yomi"))
 							abilityProps.removeAbility(a);
-					}
+					}*/
 				}
 				
 				for(int i = 0; i < abilityProps.getHotbarAbilities().length; i++)

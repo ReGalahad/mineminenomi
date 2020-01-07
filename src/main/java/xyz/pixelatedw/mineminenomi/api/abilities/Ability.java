@@ -65,7 +65,7 @@ public abstract class Ability implements Serializable
 		return this.state == State.COOLDOWN;
 	}
 
-	public boolean isPassiveOn()
+	public boolean isPassiveActive()
 	{
 		return this.state == State.PASSIVE;
 	}
@@ -75,6 +75,11 @@ public abstract class Ability implements Serializable
 		return this.state == State.CHARGING;
 	}
 
+	public boolean isDisabled()
+	{
+		return this.state == State.DISABLED;
+	}
+	
 	public void startStandby()
 	{
 		this.state = State.STANDBY;
@@ -124,6 +129,11 @@ public abstract class Ability implements Serializable
 		return this.name;
 	}
 	
+	public Category getCategory()
+	{
+		return this.category;
+	}
+	
 	
 	/*
 	 * 	Methods
@@ -171,7 +181,7 @@ public abstract class Ability implements Serializable
 		COOLDOWN,
 		PASSIVE,
 		CHARGING,
-		BLOCKED
+		DISABLED
 	}
 	
 	public enum Category

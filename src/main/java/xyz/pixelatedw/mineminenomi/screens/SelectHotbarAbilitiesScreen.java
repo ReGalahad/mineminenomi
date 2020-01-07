@@ -16,6 +16,8 @@ import net.minecraftforge.fml.client.config.GuiUtils;
 import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.WyRenderHelper;
+import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
+import xyz.pixelatedw.mineminenomi.api.abilities.Ability.Category;
 import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
 import xyz.pixelatedw.mineminenomi.api.network.packets.client.CAbilityDataSyncPacket;
@@ -81,8 +83,8 @@ public class SelectHotbarAbilitiesScreen extends Screen
 		for (int i = 0; i < 8; i++)
 		{
 			GLX.glBlendFuncSeparate(770, 771, 1, 0);
-			if (this.abilityDataProps.getHotbarAbilityFromSlot(i) != null)
-				WyRenderHelper.drawAbilityIcon(WyHelper.getResourceName(this.abilityDataProps.getHotbarAbilityFromSlot(i).getAttribute().getAbilityTexture()), (posX - 192 + (i * 50)) / 2, posY - 29, 16, 16);
+			if (this.abilityDataProps.getAbilityInSlot(i) != null)
+				WyRenderHelper.drawAbilityIcon(WyHelper.getResourceName(this.abilityDataProps.getAbilityInSlot(i).getName()), (posX - 192 + (i * 50)) / 2, posY - 29, 16, 16);
 		}
 
 		this.minecraft.getTextureManager().bindTexture(ModResources.WIDGETS);
@@ -99,16 +101,18 @@ public class SelectHotbarAbilitiesScreen extends Screen
 			}
 			this.minecraft.getTextureManager().bindTexture(ModResources.WIDGETS);
 		}
-		if (this.abilityDataProps.getRacialAbilities()[0] != null)
+		Ability abl = this.abilityDataProps.getAbilities(Category.RACIAL).parallelStream().findFirst().orElse(null);
+		if (abl != null)
 		{
 			GuiUtils.drawTexturedModalRect((posX - 280) / 2, (posY - 140) / 2, 0, 23, 27, 26, 0);
-			WyRenderHelper.drawAbilityIcon(this.abilityDataProps.getRacialAbilities()[0].getAttribute().getAttributeName(), (posX - 268) / 2, (posY - 127) / 2, 16, 16);
+			WyRenderHelper.drawAbilityIcon(abl.getName(), (posX - 268) / 2, (posY - 127) / 2, 16, 16);
 			this.minecraft.getTextureManager().bindTexture(ModResources.WIDGETS);
 		}
-		if (this.abilityDataProps.getHakiAbilities()[0] != null)
+		abl = this.abilityDataProps.getAbilities(Category.HAKI).parallelStream().findFirst().orElse(null);
+		if (abl != null)
 		{
 			GuiUtils.drawTexturedModalRect((posX - 280) / 2, (posY - 80) / 2, 0, 23, 27, 26, 0);
-			WyRenderHelper.drawAbilityIcon(this.abilityDataProps.getHakiAbilities()[0].getAttribute().getAttributeName(), (posX - 268) / 2, (posY - 67) / 2, 16, 16);
+			WyRenderHelper.drawAbilityIcon(abl.getName(), (posX - 268) / 2, (posY - 67) / 2, 16, 16);
 			this.minecraft.getTextureManager().bindTexture(ModResources.WIDGETS);
 		}
 
@@ -144,7 +148,8 @@ public class SelectHotbarAbilitiesScreen extends Screen
 				updateScreen();
 			}));
 		}
-		if (this.abilityDataProps.getRacialAbilities()[0] != null)
+		Ability abl = this.abilityDataProps.getAbilities(Category.RACIAL).parallelStream().findFirst().orElse(null);
+		if (abl != null)
 		{
 			this.addButton(new NoTextureButton((posX - 280) / 2, (posY - 140) / 2, 27, 25, "", b -> 
 			{
@@ -152,7 +157,8 @@ public class SelectHotbarAbilitiesScreen extends Screen
 				updateScreen();
 			}));
 		}
-		if (this.abilityDataProps.getHakiAbilities()[0] != null)
+		abl = this.abilityDataProps.getAbilities(Category.HAKI).parallelStream().findFirst().orElse(null);
+		if (abl != null)
 		{
 			this.addButton(new NoTextureButton((posX - 280) / 2, (posY - 80) / 2, 27, 25, "", b ->
 			{
@@ -170,15 +176,15 @@ public class SelectHotbarAbilitiesScreen extends Screen
 					this.slotSelected = id;
 				else
 				{
-					this.abilityDataProps.setAbilityInSlot(this.slotSelected, null);
+					this.abilityDataProps.setAbilityInHotbar(this.slotSelected, null);
 					ModNetwork.sendToServer(new SAbilityDataSyncPacket(this.player.getEntityId(), this.abilityDataProps));
 				}
 			}));
 		}
 
-		this.devilFruitsAbilitiesList = new AbilitiesListScreenPanel(this, this.abilityDataProps, this.abilityDataProps.getDevilFruitAbilities());
-		this.racialAbilitiesList = new AbilitiesListScreenPanel(this, this.abilityDataProps, this.abilityDataProps.getRacialAbilities());	
-		this.hakiAbilitiesList = new AbilitiesListScreenPanel(this, this.abilityDataProps, this.abilityDataProps.getHakiAbilities());
+		this.devilFruitsAbilitiesList = new AbilitiesListScreenPanel(this, this.abilityDataProps, this.abilityDataProps.getAbilities(Category.DEVIL_FRUIT).toArray(new Ability[0]));
+		this.racialAbilitiesList = new AbilitiesListScreenPanel(this, this.abilityDataProps, this.abilityDataProps.getAbilities(Category.RACIAL).toArray(new Ability[0]));	
+		this.hakiAbilitiesList = new AbilitiesListScreenPanel(this, this.abilityDataProps, this.abilityDataProps.getAbilities(Category.HAKI).toArray(new Ability[0]));
 
 		this.updateScreen();
 	}
@@ -209,9 +215,9 @@ public class SelectHotbarAbilitiesScreen extends Screen
 	@Override
 	public boolean mouseClicked(double mouseX, double mouseY, int mouseButton)
 	{
-		if (mouseButton == 1 && this.slotSelected > -1 && this.abilityDataProps.getHotbarAbilityFromSlot(this.slotSelected) != null)
+		if (mouseButton == 1 && this.slotSelected > -1 && this.abilityDataProps.getAbilityInSlot(this.slotSelected) != null)
 		{
-			this.abilityDataProps.setAbilityInSlot(this.slotSelected, null);
+			this.abilityDataProps.setAbilityInHotbar(this.slotSelected, null);
 			ModNetwork.sendToServer(new CAbilityDataSyncPacket(this.abilityDataProps));
 		}
 		return super.mouseClicked(mouseX, mouseY, mouseButton);
