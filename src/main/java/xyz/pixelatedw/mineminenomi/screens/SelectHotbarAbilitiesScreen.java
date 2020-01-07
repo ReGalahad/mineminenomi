@@ -82,7 +82,7 @@ public class SelectHotbarAbilitiesScreen extends Screen
 		{
 			GLX.glBlendFuncSeparate(770, 771, 1, 0);
 			if (this.abilityDataProps.getHotbarAbilityFromSlot(i) != null)
-				WyRenderHelper.drawAbilityIcon(WyHelper.getFancyName(this.abilityDataProps.getHotbarAbilityFromSlot(i).getAttribute().getAbilityTexture()), (posX - 192 + (i * 50)) / 2, posY - 29, 16, 16);
+				WyRenderHelper.drawAbilityIcon(WyHelper.getResourceName(this.abilityDataProps.getHotbarAbilityFromSlot(i).getAttribute().getAbilityTexture()), (posX - 192 + (i * 50)) / 2, posY - 29, 16, 16);
 		}
 
 		this.minecraft.getTextureManager().bindTexture(ModResources.WIDGETS);

@@ -3,282 +3,104 @@ package xyz.pixelatedw.mineminenomi.api.data.ability;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import net.minecraft.entity.player.PlayerEntity;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
+import xyz.pixelatedw.mineminenomi.api.abilities.Ability.Category;
 
 public class AbilityDataBase implements IAbilityData
 {
 
 	private Ability[] hotbarAbilities = new Ability[8];
-	private Ability[] devilFruitAbilities = new Ability[128];
-	private Ability[] racialAbilities = new Ability[32];
-	private Ability[] styleAbilities = new Ability[32];
-	private Ability[] hakiAbilities = new Ability[3];
+	private List<Ability> abilities = new ArrayList<Ability>();
 	
 	private Ability previouslyUsedAbility;
 	private boolean isInCombatMode = false;
-	
-	/*
-	 * Devil Fruits
-	 */
+
 	@Override
-	public boolean addDevilFruitAbility(Ability abl)
+	public boolean addAbility(Ability abl)
 	{
-		for(int i = 0; i < devilFruitAbilities.length; i++)
+		Ability ogAbl = this.hasAbility(abl);
+		if(ogAbl == null)
 		{
-			if(this.devilFruitAbilities[i] == null && !this.hasDevilFruitAbility(abl))
-			{
-				this.devilFruitAbilities[i] = abl;
-				return true;
-			}
+			this.abilities.add(abl);
+			return true;
 		}
-		
 		return false;
-	}
-	
-	@Override
-	public void removeDevilFruitAbility(Ability ablTemplate)
-	{
-		for(int i = 0; i < devilFruitAbilities.length; i++)
-		{
-			if(this.devilFruitAbilities[i] != null && this.devilFruitAbilities[i].getName().equalsIgnoreCase(ablTemplate.getName()))
-			{
-				this.devilFruitAbilities[i] = null;
-				break;
-			}
-		}
-	}
-	
-	@Override
-	public boolean hasDevilFruitAbility(Ability ablTemplate)
-	{
-		for(int i = 0; i < devilFruitAbilities.length; i++)
-		{
-			if(this.devilFruitAbilities[i] != null && this.devilFruitAbilities[i].getName().equalsIgnoreCase(ablTemplate.getName()))
-			{
-				return true;
-			}
-		}
-		
-		return false;
-	}
-	
-	@Override
-	public Ability[] getDevilFruitAbilities()
-	{ 
-		return this.devilFruitAbilities; 
-	}
-	
-	@Override
-	public void clearDevilFruitAbilities()
-	{
-		for(int i = 0; i < this.devilFruitAbilities.length; i++)
-			if(this.devilFruitAbilities[i] != null)
-				this.devilFruitAbilities[i] = null;
-	}
-	
-	
-	/*
-	 * Racial
-	 */
-	@Override
-	public boolean addRacialAbility(Ability abl)
-	{
-		for(int i = 0; i < racialAbilities.length; i++)
-		{
-			if(this.racialAbilities[i] == null && !this.hasRacialAbility(abl))
-			{
-				this.racialAbilities[i] = abl;
-				return true;
-			}
-		}
-		
-		return false;
-	}
-	
-	@Override
-	public void removeRacialAbility(Ability ablTemplate)
-	{
-		for(int i = 0; i < racialAbilities.length; i++)
-		{
-			if(this.racialAbilities[i] != null && this.racialAbilities[i].getName().equalsIgnoreCase(ablTemplate.getName()))
-			{
-				this.racialAbilities[i] = null;
-				break;
-			}
-		}
-	}
-	
-	@Override
-	public boolean hasRacialAbility(Ability ablTemplate)
-	{
-		if(ablTemplate != null)
-		{
-			for(int i = 0; i < racialAbilities.length; i++)
-			{
-				if(this.racialAbilities[i] != null && this.racialAbilities[i].getName().equalsIgnoreCase(ablTemplate.getName()))
-				{
-					return true;
-				}
-			}
-		}
-		
-		return false;
-	}
-	
-	@Override
-	public Ability[] getRacialAbilities()
-	{ 
-		return this.racialAbilities; 
-	}
-	
-	@Override
-	public void clearRacialAbilities()
-	{
-		for(int i = 0; i < this.racialAbilities.length; i++)
-			if(this.racialAbilities[i] != null)
-				this.racialAbilities[i] = null;
-	}
-	
-	
-	/*
-	 * Haki
-	 */
-	@Override
-	public boolean addHakiAbility(Ability abl)
-	{
-		for(int i = 0; i < hakiAbilities.length; i++)
-		{
-			if(this.hakiAbilities[i] == null && !this.hasHakiAbility(abl))
-			{
-				this.hakiAbilities[i] = abl;
-				return true;
-			}
-		}
-		
-		return false;
-	}
-	
-	@Override
-	public void removeHakiAbility(Ability ablTemplate)
-	{
-		for(int i = 0; i < hakiAbilities.length; i++)
-		{
-			if(this.hakiAbilities[i] != null && this.hakiAbilities[i].getName().equalsIgnoreCase(ablTemplate.getName()))
-			{
-				this.hakiAbilities[i] = null;
-				break;
-			}
-		}
-	}
-	
-	@Override
-	public boolean hasHakiAbility(Ability ablTemplate)
-	{
-		return Arrays.stream(this.hakiAbilities).filter(x -> x != null && x.getName().equalsIgnoreCase(ablTemplate.getName())).findFirst().orElse(null) != null;
-	}
-	
-	@Override
-	public Ability[] getHakiAbilities()
-	{ 
-		return this.hakiAbilities; 
-	}
-	
-	@Override
-	public void clearHakiAbilities()
-	{
-		for(int i = 0; i < this.hakiAbilities.length; i++)
-			if(this.hakiAbilities[i] != null)
-				this.hakiAbilities[i] = null;
-	}
-	
-	
-	/*
-	 * Hotbar
-	 */
-	@Override
-	public Ability[] getAbilitiesInHotbar()
-	{
-		return this.hotbarAbilities;
-	}
-	
-	@Override
-	public boolean hasAbilityInHotbar(Ability ability)
-	{
-		return this.hasAbilityInHotbar(ability.getName());
-	}
-	
-	@Override
-	public boolean hasAbilityInHotbar(String abilityName)
-	{
-		return Arrays.stream(this.hotbarAbilities).filter(x -> x != null && x.getName().equalsIgnoreCase(abilityName)).findFirst().orElse(null) != null;
-	}
-	
-	@Override
-	public void setAbilityInSlot(int slot, Ability abl)
-	{
-		this.hotbarAbilities[slot] = abl;
-	}
-	
-	@Override
-	public Ability getHotbarAbilityFromSlot(int slot)
-	{
-		return this.hotbarAbilities[slot];
-	}
-	
-	@Override
-	public Ability getHotbarAbilityFromName(String name)
-	{
-		return Arrays.stream(this.getAbilitiesInHotbar()).filter(x -> 
-		{
-			return x != null && x.getAttribute() != null && x.getName().equalsIgnoreCase(name);
-		}).findFirst().orElse(null);     
-	}
-	
-	@Override
-	public int countAbilitiesInHotbar()
-	{
-		return this.hotbarAbilities.length;
-	}
-	
-	@Override
-	public void clearHotbar(PlayerEntity player)
-	{
-		for(int i = 0; i < this.hotbarAbilities.length; i++)
-			if(this.hotbarAbilities[i] != null)
-			{
-				if(this.hotbarAbilities[i].isPassiveActive())
-					this.hotbarAbilities[i].endPassive(player);
-				
-				this.hotbarAbilities[i] = null;
-			}
-	}
-	
-	@Override
-	public void clearHotbarFromList(PlayerEntity player, Ability[] list)
-	{
-		for (int i = 0; i < this.hotbarAbilities.length; i++)
-		{
-			Ability abilityToRemove = this.getHotbarAbilityFromSlot(i);
-			for (Ability ability : list)
-			{
-				if (abilityToRemove != null && abilityToRemove.getName().equalsIgnoreCase(ability.getName()))
-					this.setAbilityInSlot(i, null);
-			}
-		}
 	}
 
 	@Override
-	public List<Ability> getPlayerAbilities()
+	public void removeAbility(Ability abl)
 	{
-		List<Ability> abilities = new ArrayList<Ability>();
-		
-		abilities.addAll(Arrays.asList(this.getDevilFruitAbilities()));
-		abilities.addAll(Arrays.asList(this.getRacialAbilities()));
-		abilities.addAll(Arrays.asList(this.getHakiAbilities()));
-		
-		return abilities;
+		Ability ogAbl = this.hasAbility(abl);
+		if(ogAbl != null)
+			this.abilities.remove(ogAbl);
+	}
+
+	@Override
+	public Ability hasAbility(Ability abl)
+	{
+		return this.abilities.parallelStream().filter(ability -> abl.equals(ability)).findFirst().orElse(null);
+	}
+
+	@Override
+	public List<Ability> getAbilities(Category category)
+	{
+		return this.abilities.parallelStream().filter(ability -> ability.getCategory() != category).collect(Collectors.toList());
+	}
+
+	@Override
+	public void clearAbilities(Category category)
+	{
+		this.abilities = this.abilities.parallelStream().filter(ability -> ability.getCategory() != category).collect(Collectors.toList());
+	}
+
+	@Override
+	public void clearAbilityFromList(Category category, List<Ability> list)
+	{
+		this.abilities = this.abilities.parallelStream().filter(ability -> ability.getCategory() != category && !list.contains(ability)).collect(Collectors.toList());
+	}
+
+	@Override
+	public int countAbilities(Category category)
+	{
+		return this.abilities.parallelStream().filter(ability -> ability.getCategory() == category).collect(Collectors.toList()).size();
+	}
+
+	@Override
+	public void setAbilityInHotbar(int slot, Ability abl)
+	{
+		this.hotbarAbilities[slot] = abl;
+	}
+
+	@Override
+	public void removeAbilityFromHotbar(int slot)
+	{
+		this.hotbarAbilities[slot] = null;
+	}
+
+	@Override
+	public boolean hasAbilityInHotbar(Ability abl)
+	{
+		return Arrays.stream(this.hotbarAbilities).anyMatch(ability -> ability.equals(abl));
+	}
+	
+	@Override
+	public Ability getAbilityInSlot(int slot)
+	{
+		return this.hotbarAbilities[slot];
+	}
+
+	@Override
+	public Ability[] getHotbarAbilities()
+	{
+		return this.hotbarAbilities;
+	}
+
+	@Override
+	public void clearHotbar()
+	{
+		this.hotbarAbilities = new Ability[8];
 	}
 	
 	@Override

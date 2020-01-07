@@ -97,7 +97,7 @@ public class WyRegistry
 	
 	public static Block registerBlock(Block block, String localizedName, JSONModelBlock jsonType)
 	{
-		String truename = WyHelper.getFancyName(localizedName);
+		String truename = WyHelper.getResourceName(localizedName);
 		langMap.put("block." + Env.PROJECT_ID + "." + truename, localizedName);
 		block.setRegistryName(Env.PROJECT_ID, truename);
 		
@@ -108,7 +108,7 @@ public class WyRegistry
 	
 	public static TileEntityType<?> registerTileEntity(String id, Supplier factory, Block... blocks)
 	{
-		String name = WyHelper.getFancyName(id);
+		String name = WyHelper.getResourceName(id);
 
 		TileEntityType<?> type = TileEntityType.Builder.create(factory, blocks).build(null);
 		type.setRegistryName(Env.PROJECT_ID, name);
@@ -136,7 +136,7 @@ public class WyRegistry
 	
 	public static Item registerItem(Item item, String localizedName, JSONModelItem jsonType)
 	{
-		String truename = WyHelper.getFancyName(localizedName);
+		String truename = WyHelper.getResourceName(localizedName);
 		langMap.put("item." + Env.PROJECT_ID + "." + truename, localizedName);
 		item.setRegistryName(Env.PROJECT_ID, truename);
 		
@@ -171,7 +171,7 @@ public class WyRegistry
 	
 	public static <T extends Entity> EntityType<T> registerEntityType(String id, Function<World, T> func, float width, float height)
 	{
-		String name = WyHelper.getFancyName(id);
+		String name = WyHelper.getResourceName(id);
 		
 		EntityType type = EntityType.Builder.create((entityType, world) -> func.apply(world), EntityClassification.MISC)
 			.setTrackingRange(128)

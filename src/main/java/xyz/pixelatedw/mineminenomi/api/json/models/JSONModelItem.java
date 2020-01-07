@@ -20,14 +20,14 @@ public abstract class JSONModelItem implements IJSONModel
 	
 	public JSONModelItem(String itemName, String template)
 	{
-		this.itemName = WyHelper.getFancyName(itemName);
+		this.itemName = WyHelper.getResourceName(itemName);
 		this.parentItemName = "item/generated";
 		this.template = new File(Env.projectResourceFolder + "/data/" + Env.PROJECT_ID + "/json_templates/models/item/" + template + ".json");
 	}
 	
 	public JSONModelItem(String itemName, String template, String parentItemName)
 	{
-		this.itemName = WyHelper.getFancyName(itemName);
+		this.itemName = WyHelper.getResourceName(itemName);
 		this.parentItemName = Env.PROJECT_ID + ":item/" + parentItemName;
 		this.template = new File(Env.projectResourceFolder + "/data/" + Env.PROJECT_ID + "/json_templates/models/item/" + template + ".json");
 	}

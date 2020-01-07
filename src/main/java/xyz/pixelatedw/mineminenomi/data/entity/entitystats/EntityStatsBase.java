@@ -202,7 +202,7 @@ public class EntityStatsBase implements IEntityStats
 	@Override
 	public void setFaction(String value)
 	{
-		this.faction = WyHelper.getFancyName(value);
+		this.faction = WyHelper.getResourceName(value);
 	}
 
 	@Override
@@ -250,7 +250,7 @@ public class EntityStatsBase implements IEntityStats
 	@Override
 	public void setRace(String value)
 	{
-		this.race = WyHelper.getFancyName(value);
+		this.race = WyHelper.getResourceName(value);
 	}
 	
 	@Override

@@ -11,6 +11,7 @@ import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.command.arguments.EntityArgument;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import xyz.pixelatedw.mineminenomi.api.abilities.Ability.Category;
 import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
 import xyz.pixelatedw.mineminenomi.api.network.packets.server.SAbilityDataSyncPacket;
@@ -45,8 +46,8 @@ public class RemoveDFCommand
 			devilFruitProps.setZoanPoint("");
 			devilFruitProps.setYamiPower(false);
 			
-			abilityDataProps.clearDevilFruitAbilities();
-			abilityDataProps.clearHotbar(player);
+			abilityDataProps.clearAbilities(Category.ALL);
+			abilityDataProps.clearHotbar();
 
 			player.clearActivePotions();
 			

@@ -8,16 +8,19 @@ import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
 
 public abstract class Ability implements Serializable
 {
+	private int cooldown;
+	private int maxCooldown;
+	
 	protected State state = State.STANDBY;
 	protected Category category = Category.DEVIL_FRUIT;
-	protected int cooldown;
-	protected int maxCooldown;
+	
 	// Setting the defaults so that no crash occurs and so they will be null safe.
 	protected IOnUse onUseEvent = (player, ability) -> {};
 	protected IDuringCooldown duringCooldownEvent = (player, ability, cooldown) -> {};
 		
 	public abstract String getName();
-
+	public abstract String getDescription();
+	
 	public void use(PlayerEntity player)
 	{
 		if(player.world.isRemote)
@@ -81,6 +84,15 @@ public abstract class Ability implements Serializable
 		return props.getAbilities(Category.ALL).parallelStream().filter(ability -> ability.getName().equalsIgnoreCase(this.getName())).findFirst().orElse(null);
 	}
 	
+	@Override
+	public boolean equals(Object abl)
+	{
+		if(!(abl instanceof Ability))
+			return false;
+		
+		return this.getName().equalsIgnoreCase(((Ability) abl).getName());
+	}
+	
 	public enum State
 	{
 		STANDBY,
@@ -90,8 +102,6 @@ public abstract class Ability implements Serializable
 	public enum Category
 	{
 		ALL,
-		
-		HOTBAR,
 		
 		DEVIL_FRUIT,
 		RACIAL,

@@ -12,6 +12,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.Env;
+import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
 import xyz.pixelatedw.mineminenomi.packets.client.CCombatModeTriggerPacket;
@@ -129,8 +130,9 @@ public class ModKeybindings
 		{
 			if (keyBindsCombatbar[i].isPressed())
 			{
-				if (abilityDataProps.isInCombatMode())
-					ModNetwork.sendToServer(new CUseAbilityPacket(abilityDataProps.getHotbarAbilityFromSlot(i)));
+				Ability abl = abilityDataProps.getAbilityInSlot(i);
+				if (abilityDataProps.isInCombatMode() && abl != null)
+					ModNetwork.sendToServer(new CUseAbilityPacket(abl));
 				else
 					player.inventory.currentItem = i;
 			}

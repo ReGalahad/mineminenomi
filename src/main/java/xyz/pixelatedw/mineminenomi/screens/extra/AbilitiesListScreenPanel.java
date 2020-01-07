@@ -66,8 +66,8 @@ public class AbilitiesListScreenPanel extends ScrollPanel
 				if(this.props.hasAbilityInHotbar(entry.ability))
 					flag = true;
 
-				Minecraft.getInstance().fontRenderer.drawStringWithShadow(I18n.format("ability." + WyHelper.getFancyName(entry.ability.getAttribute().getAttributeName()) + ".name"), x, y + 4, flag ? 0xFF0000 : 0xFFFFFF);
-				WyRenderHelper.drawAbilityIcon(WyHelper.getFancyName(entry.attribute.getAbilityTexture()), MathHelper.floor(x) - 30, MathHelper.floor(y), 16, 16);
+				Minecraft.getInstance().fontRenderer.drawStringWithShadow(I18n.format("ability." + WyHelper.getResourceName(entry.ability.getAttribute().getAttributeName()) + ".name"), x, y + 4, flag ? 0xFF0000 : 0xFFFFFF);
+				WyRenderHelper.drawAbilityIcon(WyHelper.getResourceName(entry.attribute.getAbilityTexture()), MathHelper.floor(x) - 30, MathHelper.floor(y), 16, 16);
 			}
 
 			relativeY += ENTRY_HEIGHT * 1.25;
@@ -114,7 +114,7 @@ public class AbilitiesListScreenPanel extends ScrollPanel
 		
 		if (flag)
 		{
-			this.props.setAbilityInSlot(this.parent.slotSelected, AbilityManager.instance().getAbilityByName(WyHelper.getFancyName(entry.ability.getAttribute().getAttributeName())));
+			this.props.setAbilityInSlot(this.parent.slotSelected, AbilityManager.instance().getAbilityByName(WyHelper.getResourceName(entry.ability.getAttribute().getAttributeName())));
 			ModNetwork.sendToServer(new CAbilityDataSyncPacket(this.props));
 		}
 

@@ -66,7 +66,7 @@ public class AkumaNoMiBoxItem extends Item
 
 			totalPower *= typeModifier;
 
-			if (df.getType() == EnumFruitType.ANCIENTZOAN || df.getType() == EnumFruitType.MYTHICALZOAN || WyHelper.getFancyName(new TranslationTextComponent(df.getTranslationKey()).getFormattedText()).equalsIgnoreCase("guraguranomi"))
+			if (df.getType() == EnumFruitType.ANCIENTZOAN || df.getType() == EnumFruitType.MYTHICALZOAN || WyHelper.getResourceName(new TranslationTextComponent(df.getTranslationKey()).getFormattedText()).equalsIgnoreCase("guraguranomi"))
 			{
 				this.tier3Fruits.add(df);
 			}

@@ -64,7 +64,7 @@ public class WantedPosterScreen extends Screen
 			GL11.glDisable(GL11.GL_BLEND);
 
 			final String finalName = name;
-			AbstractClientPlayerEntity player = this.minecraft.world.getPlayers().stream().filter((entity) -> WyHelper.getFancyName(entity.getName().getFormattedText()).equalsIgnoreCase(finalName)).findFirst().orElse(this.minecraft.player);
+			AbstractClientPlayerEntity player = this.minecraft.world.getPlayers().stream().filter((entity) -> WyHelper.getResourceName(entity.getName().getFormattedText()).equalsIgnoreCase(finalName)).findFirst().orElse(this.minecraft.player);
 			rs = player.getLocationSkin();
 
 			this.minecraft.getTextureManager().bindTexture(rs);

@@ -9,13 +9,20 @@ public interface IAbilityData
 {
 
 	boolean addAbility(Ability abl);
-	void removeAbility(Ability ablTemplate);
-	boolean hasAbility(Ability ablTemplate);
+	void removeAbility(Ability abl);
+	Ability hasAbility(Ability abl);
 	List<Ability> getAbilities(Category category);
 	void clearAbilities(Category category);
-	void clearAbilityFromList(Category category, Ability[] list); 
+	void clearAbilityFromList(Category category, List<Ability> list); 
 	int countAbilities(Category category);
 
+	void setAbilityInHotbar(int slot, Ability abl);
+	void removeAbilityFromHotbar(int slot);
+	boolean hasAbilityInHotbar(Ability abl);
+	Ability getAbilityInSlot(int slot);
+	Ability[] getHotbarAbilities();
+	void clearHotbar();
+	
 	Ability getPreviouslyUsedAbility();
 	void setPreviouslyUsedAbility(Ability abl);
 	

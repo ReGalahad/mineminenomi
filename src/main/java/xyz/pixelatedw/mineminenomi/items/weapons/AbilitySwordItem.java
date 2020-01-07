@@ -38,18 +38,18 @@ public class AbilitySwordItem extends CoreSwordItem
 					{
 						if(!abilityDataProps.getHotbarAbilityFromSlot(i).isPassiveActive())
 						{
-							String ablName = WyHelper.getFancyName(abilityDataProps.getHotbarAbilityFromSlot(i).getAttribute().getAttributeName());
-							if(ablName.equals(WyHelper.getFancyName(ModAttributes.ICE_SABER.getAttributeName())))
+							String ablName = WyHelper.getResourceName(abilityDataProps.getHotbarAbilityFromSlot(i).getAttribute().getAttributeName());
+							if(ablName.equals(WyHelper.getResourceName(ModAttributes.ICE_SABER.getAttributeName())))
 								WyHelper.removeStackFromInventory(owner, itemStack);
-							else if(ablName.equals(WyHelper.getFancyName(ModAttributes.AMA_NO_MURAKUMO.getAttributeName())))
+							else if(ablName.equals(WyHelper.getResourceName(ModAttributes.AMA_NO_MURAKUMO.getAttributeName())))
 								WyHelper.removeStackFromInventory(owner, itemStack);
-							else if(ablName.equals(WyHelper.getFancyName(ModAttributes.NORO_NORO_BEAM_SWORD.getAttributeName())))
+							else if(ablName.equals(WyHelper.getResourceName(ModAttributes.NORO_NORO_BEAM_SWORD.getAttributeName())))
 								WyHelper.removeStackFromInventory(owner, itemStack);
-							else if(ablName.equals(WyHelper.getFancyName(ModAttributes.DORU_DORU_ARTS_KEN.getAttributeName())))
+							else if(ablName.equals(WyHelper.getResourceName(ModAttributes.DORU_DORU_ARTS_KEN.getAttributeName())))
 								WyHelper.removeStackFromInventory(owner, itemStack);
-							else if(ablName.equals(WyHelper.getFancyName(ModAttributes.BLUE_SWORD.getAttributeName())))
+							else if(ablName.equals(WyHelper.getResourceName(ModAttributes.BLUE_SWORD.getAttributeName())))
 								WyHelper.removeStackFromInventory(owner, itemStack);
-							else if(ablName.equals(WyHelper.getFancyName(ModAttributes.TABIRA_YUKI.getAttributeName())))
+							else if(ablName.equals(WyHelper.getResourceName(ModAttributes.TABIRA_YUKI.getAttributeName())))
 								WyHelper.removeStackFromInventory(owner, itemStack);
 						}
 					}

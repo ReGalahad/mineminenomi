@@ -1,7 +1,6 @@
 package xyz.pixelatedw.mineminenomi.api.data.ability;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.IOException;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.nbt.CompoundNBT;
@@ -13,6 +12,7 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
+import xyz.pixelatedw.mineminenomi.api.abilities.Ability.Category;
 import xyz.pixelatedw.mineminenomi.api.data.CapabilityProviderSerializable;
 
 public class AbilityDataCapability
@@ -32,21 +32,29 @@ public class AbilityDataCapability
 
 				props.putBoolean("combatMode", instance.isInCombatMode());
 
-				//if (instance.getPreviouslyUsedAbility() != null)
-				//	props.put("previouslyUsedAbility", saveNLOBData(instance.getPreviouslyUsedAbility()));
-
-				for (int i = 0; i < instance.getAbilitiesInHotbar().length; i++)
+				try
 				{
-					Ability ability = instance.getAbilitiesInHotbar()[i];
-					if (ability != null)
-						props.putByteArray("hotbar_ability_" + i, WyHelper.serialize(ability));
+					if (instance.getPreviouslyUsedAbility() != null)
+						props.putByteArray("previouslyUsedAbility", WyHelper.serialize(instance.getPreviouslyUsedAbility()));
+
+					for (int i = 0; i < instance.getHotbarAbilities().length; i++)
+					{
+						Ability ability = instance.getHotbarAbilities()[i];
+						if (ability != null)
+							props.putByteArray("hotbar_ability_" + i, WyHelper.serialize(ability));
+					}
+
+					int i = 0;
+					for (Ability abl : instance.getAbilities(Category.ALL))
+					{
+						props.putByteArray("ability_" + i, WyHelper.serialize(abl));
+						i++;
+					}
+					props.putInt("abilitiesOwned", i);
 				}
-
-				for (int i = 0; i < instance.getDevilFruitAbilities().length; i++)
+				catch (IOException e)
 				{
-					Ability ability = instance.getDevilFruitAbilities()[i];
-					if (ability != null)
-						props.put("devilfruits_ability_" + i, saveNLOBData(ability));
+					e.printStackTrace();
 				}
 
 				return props;
@@ -57,21 +65,22 @@ public class AbilityDataCapability
 			{
 				CompoundNBT props = (CompoundNBT) nbt;
 
+				instance.setCombatMode(props.getBoolean("combatMode"));
+
 				try
 				{
-					instance.setCombatMode(props.getBoolean("combatMode"));
+					instance.setPreviouslyUsedAbility((Ability) WyHelper.deserialize(props.getByteArray("previouslyUsedAbility")));
 
-					//instance.setPreviouslyUsedAbility(this.loadAbilityFromNLOB(props.getCompound("previouslyUsedAbility")));
+					for (int i = 0; i < instance.getHotbarAbilities().length; i++)
+						instance.setAbilityInHotbar(i, (Ability) WyHelper.deserialize(props.getByteArray("hotbar_ability_" + i)));
 
-					for (int i = 0; i < instance.getAbilitiesInHotbar().length; i++)
-						instance.getAbilitiesInHotbar()[i] = this.loadAbilityFromNLOB(props.getCompound("hotbar_ability_" + i));
-
-					for (int i = 0; i < instance.getDevilFruitAbilities().length; i++)
-						instance.getDevilFruitAbilities()[i] = this.loadAbilityFromNLOB(props.getCompound("devilfruits_ability_" + i));
+					int total = props.getInt("abilitiesOwned");
+					
+					for (int i = 0; i < total; i++)
+						instance.addAbility((Ability) WyHelper.deserialize(props.getByteArray("ability_" + i)));
 				}
-				catch (Exception e)
+				catch (ClassNotFoundException | IOException e)
 				{
-					Logger.getGlobal().log(Level.SEVERE, "Ability is not registered correctly or could not be found in the master list !");
 					e.printStackTrace();
 				}
 			}

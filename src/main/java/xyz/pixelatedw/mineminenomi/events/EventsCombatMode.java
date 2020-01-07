@@ -146,7 +146,7 @@ public class EventsCombatMode extends Screen
 				if (abilityDataProps.getHotbarAbilityFromSlot(i) != null)
 				{
 					AbilityAttribute attr = abilityDataProps.getHotbarAbilityFromSlot(i).getAttribute();
-					WyRenderHelper.drawAbilityIcon(WyHelper.getFancyName(attr.getAbilityTexture()), (posX - 192 + (i * 50)) / 2, posY - 19, 16, 16);
+					WyRenderHelper.drawAbilityIcon(WyHelper.getResourceName(attr.getAbilityTexture()), (posX - 192 + (i * 50)) / 2, posY - 19, 16, 16);
 				}
 			}
 

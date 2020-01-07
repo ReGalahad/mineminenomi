@@ -177,7 +177,7 @@ public class EventsOnGain
 					plusBelly = entity.getBelly() + rng;
 
 					if (!player.world.isRemote && !player.isCreative())
-						WyTelemetry.addKillStat(WyHelper.getFancyName(target.getClass().getSimpleName()).replace("entity", ""), target.getClass().getSimpleName().replace("Entity", ""), 1);
+						WyTelemetry.addKillStat(WyHelper.getResourceName(target.getClass().getSimpleName()).replace("entity", ""), target.getClass().getSimpleName().replace("Entity", ""), 1);
 				}
 				else
 				{

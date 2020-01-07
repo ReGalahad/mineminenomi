@@ -55,15 +55,15 @@ public class PlayerStatsScreen extends Screen
 		String raceGUI = I18n.format(ModI18n.RACE_NAME);
 		String styleGUI = I18n.format(ModI18n.STYLE_NAME);
 
-		String faction = WyHelper.getFancyName(entityStatsProps.getFaction().toLowerCase());
+		String faction = WyHelper.getResourceName(entityStatsProps.getFaction().toLowerCase());
 		if(WyHelper.isNullOrEmpty(faction))
 			faction = "empty";
 		
-		String race = WyHelper.getFancyName(entityStatsProps.getRace().toLowerCase());
+		String race = WyHelper.getResourceName(entityStatsProps.getRace().toLowerCase());
 		if(WyHelper.isNullOrEmpty(race))
 			race = "empty";
 		
-		String style = WyHelper.getFancyName(entityStatsProps.getFightingStyle().toLowerCase());
+		String style = WyHelper.getResourceName(entityStatsProps.getFightingStyle().toLowerCase());
 		if(WyHelper.isNullOrEmpty(style))
 			style = "empty";
 		

@@ -167,7 +167,7 @@ public class DevilFruitsHelper
 			return true;
 		
 		ExtendedWorldData worldData = ExtendedWorldData.get(world);
-		String name = WyHelper.getFancyName(devilFruit.getName().getFormattedText()).replace("nomi", "").replace(":", "").replace(",", "").replace("model", "");
+		String name = WyHelper.getResourceName(devilFruit.getName().getFormattedText()).replace("nomi", "").replace(":", "").replace(",", "").replace("model", "");
 		
 		if(worldData.isDevilFruitInWorld(name))
 			return true;
@@ -204,7 +204,7 @@ public class DevilFruitsHelper
 	{
 		for (String str : CommonConfig.instance.getBannedAbilities())
 		{
-			if (WyHelper.getFancyName(str).contains(WyHelper.getFancyName(a.getAttribute().getAttributeName())))
+			if (WyHelper.getResourceName(str).contains(WyHelper.getResourceName(a.getAttribute().getAttributeName())))
 				return true;
 		}
 

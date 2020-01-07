@@ -428,14 +428,9 @@ public class WyHelper
 		player.sendMessage(new StringTextComponent(text));
 	}
 
-	public static String getFancyName(String text)
+	public static String getResourceName(String text)
 	{
-		return text.replaceAll("\\s+", "").toLowerCase().replaceAll("'", "").replaceAll("-", "").replaceAll(":", "").replaceAll("#", "").replace(",", "");
-	}
-
-	public static String getFancyNameNoLowerCase(String text)
-	{
-		return text.replaceAll("\\s+", "").replaceAll("'", "").replaceAll("-", "").replaceAll(":", "").replaceAll("#", "").replace(",", "");
+		return text.replaceAll("[ \\t]+$", "").replaceAll("\\s+", "_").replaceAll("[\\'\\:\\-\\,\\#]", "").toLowerCase();
 	}
 
 	public static List<LivingEntity> getEntitiesNear(BlockPos pos, World world, double radius)

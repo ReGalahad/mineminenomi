@@ -139,7 +139,7 @@ public class WebAppHelper
 					writer.write(devilFruit.getDisplayName(new ItemStack(devilFruit)).getFormattedText() + "\n");
 					for (Ability ability : devilFruit.abilities)
 					{
-						writer.write("> " + ability.getAttribute().getAbilityDisplayName() + "\n");
+						writer.write("> " + ability.getName() + "\n");
 					}
 					writer.write("\n");
 				}
@@ -166,7 +166,7 @@ public class WebAppHelper
 
 			
 			loadedParams.put("name", abilityAttribute.getAbilityDisplayName());
-			loadedParams.put("texture", WyHelper.getFancyName(abilityAttribute.getAbilityTexture()));
+			loadedParams.put("texture", WyHelper.getResourceName(abilityAttribute.getAbilityTexture()));
 
 			if (abilityAttribute.getAbilityCooldown() > 0)
 				loadedParams.put("cooldown", abilityAttribute.getAbilityCooldown() / 20);
@@ -188,7 +188,7 @@ public class WebAppHelper
 
 			for (String manualParamKey : ModValues.abilityWebAppExtraParams.keySet())
 			{
-				if (WyHelper.getFancyName(abilityAttribute.getAttributeName()).equalsIgnoreCase(manualParamKey))
+				if (WyHelper.getResourceName(abilityAttribute.getAttributeName()).equalsIgnoreCase(manualParamKey))
 				{
 					String[] params = ModValues.abilityWebAppExtraParams.get(manualParamKey);
 
@@ -229,7 +229,7 @@ public class WebAppHelper
 			abilitiesString.append(abilityString.toString());
 			
 			if(!hasDescription)
-				System.out.println("Ability without description : " + ability.getAttribute().getAbilityDisplayName());
+				System.out.println("Ability without description : " + ability.getName());
 		}
 
 		return abilitiesString.toString();

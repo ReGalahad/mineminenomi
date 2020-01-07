@@ -94,7 +94,7 @@ public class EventsCore
 				
 				for(String stat : CommonConfig.instance.getStatsToKeep())
 				{
-					switch(WyHelper.getFancyName(stat))
+					switch(WyHelper.getResourceName(stat))
 					{
 						case "doriki":
 							newEntityStats.setDoriki(oldEntityStats.getDoriki()); break;

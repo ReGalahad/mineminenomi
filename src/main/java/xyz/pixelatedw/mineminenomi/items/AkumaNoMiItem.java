@@ -129,7 +129,7 @@ public class AkumaNoMiItem extends Item
 	{
 		for (int i = 0; i < this.abilities.length; i++)
 			if (!DevilFruitsHelper.verifyIfAbilityIsBanned(this.abilities[i]) && this.abilities[i] != null)
-				list.add(new StringTextComponent(TextFormatting.GRAY + I18n.format("ability." + WyHelper.getFancyName(this.abilities[i].getAttribute().getAttributeName()) + ".name")));
+				list.add(new StringTextComponent(TextFormatting.GRAY + I18n.format("ability." + WyHelper.getResourceName(this.abilities[i].getAttribute().getAttributeName()) + ".name")));
 
 		list.add(new StringTextComponent(""));
 		list.add(new StringTextComponent(type.getColor() + type.getName()));

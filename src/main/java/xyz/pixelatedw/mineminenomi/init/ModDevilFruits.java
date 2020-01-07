@@ -58,7 +58,6 @@ import xyz.pixelatedw.mineminenomi.abilities.YukiAbilities;
 import xyz.pixelatedw.mineminenomi.abilities.ZouAbilities;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.abilities.extra.AbilityManager;
 import xyz.pixelatedw.mineminenomi.api.debug.WyDebug;
 import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.BakuProjectiles;
 import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.BaneProjectiles;
@@ -242,21 +241,22 @@ public class ModDevilFruits
 		MeraMeraNoMi = new AkumaNoMiItem(EnumFruitType.LOGIA, MeraAbilities.abilitiesArray);
 		registerDevilFruit(MeraMeraNoMi, "Mera Mera no Mi");        
 		
-		for (int i = 0; i < ALL_ABILITIES.length; i++)
-		{		
-			totalFruits++;
-			for (Ability a : ALL_ABILITIES[i])
-				if (a != null)
-				{
-					totalAbilities++;
-					AbilityManager.instance().registerAbility(a);
-				}
+		if(WyDebug.isDebug())
+		{
+			for (int i = 0; i < ALL_ABILITIES.length; i++)
+			{		
+				totalFruits++;
+				for (Ability a : ALL_ABILITIES[i])
+					if (a != null)
+					{
+						totalAbilities++;
+					}
+			}
+			WyDebug.info("A total of " + ModValues.devilfruits.size() + " Devil Fruits have been registered");
+			WyDebug.info("A total of " + totalAbilities + " abilities have been registered");
 		}
 		
 		event.getRegistry().registerAll(ModValues.devilfruits.toArray(new AkumaNoMiItem[0]));
-		
-		WyDebug.info("A total of " + ModValues.devilfruits.size() + " Devil Fruits have been registered");
-		WyDebug.info("A total of " + totalAbilities + " abilities have been registered");
     }
 	
 	public static void registerDevilFruit(AkumaNoMiItem item, String localizedName) 
