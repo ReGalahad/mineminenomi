@@ -1,6 +1,0 @@
-{
-	"parent": "mineminenomi:item/nidaikitetsu",
-	"textures": {
-		"layer0": "mineminenomi:items/nidaikitetsu_sheathed"
-	}
-}

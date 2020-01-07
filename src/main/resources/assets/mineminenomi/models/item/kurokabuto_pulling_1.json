@@ -1,6 +1,0 @@
-{
-	"parent": "mineminenomi:item/kurokabuto",
-	"textures": {
-		"layer0": "mineminenomi:items/kurokabuto_pulling_1"
-	}
-}

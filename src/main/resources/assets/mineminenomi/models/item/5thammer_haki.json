@@ -1,6 +1,0 @@
-{
-	"parent": "mineminenomi:item/5thammer",
-	"textures": {
-		"layer0": "mineminenomi:items/5thammer_haki"
-	}
-}
