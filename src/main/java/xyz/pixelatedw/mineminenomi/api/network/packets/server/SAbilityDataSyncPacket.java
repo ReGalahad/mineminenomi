@@ -55,7 +55,7 @@ public class SAbilityDataSyncPacket
 					return;
 				
 				IAbilityData abilityDataProps = AbilityDataCapability.get((LivingEntity) target);
-				AbilityDataCapability.INSTANCE.getStorage().readNBT(AbilityDataCapability.INSTANCE, abilityDataProps, null, message.data);
+				AbilityDataCapability.INSTANCE.getStorage().readNBT(AbilityDataCapability.INSTANCE, abilityDataProps, null, message.data);			
 			});	
 		}
 		ctx.get().setPacketHandled(true);

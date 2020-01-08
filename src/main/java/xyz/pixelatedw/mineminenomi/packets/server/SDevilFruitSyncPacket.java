@@ -53,7 +53,7 @@ public class SDevilFruitSyncPacket
 				Entity target = player.world.getEntityByID(message.entityId);			
 				if(target == null || !(target instanceof LivingEntity))
 					return;
-
+				
 				IDevilFruit props = DevilFruitCapability.get((LivingEntity) target);
 				DevilFruitCapability.INSTANCE.getStorage().readNBT(DevilFruitCapability.INSTANCE, props, null, message.data);
 			});	

@@ -8,6 +8,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Foods;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -24,6 +25,7 @@ import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
+import xyz.pixelatedw.mineminenomi.api.network.packets.client.CAbilityDataSyncPacket;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
@@ -31,13 +33,13 @@ import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
+import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
 
 public class AkumaNoMiItem extends Item
 {
 
 	public EnumFruitType type;
-	public Item ability1, ability2, ability3, ability4;
 	public Ability[] abilities;
 
 	public AkumaNoMiItem(EnumFruitType type, Ability... abilitiesArray)
@@ -67,9 +69,7 @@ public class AkumaNoMiItem extends Item
 		IAbilityData abilityDataProps = AbilityDataCapability.get(player);
 
 		String eatenFruit = this.getDefaultTranslationKey().substring("item.mineminenomi.".length()).replace("nomi", "").replace(":", "").replace(".", "").replace(",", "").replace("model", "");
-		
-		System.out.println(eatenFruit);
-		
+
 		boolean flag1 = !WyHelper.isNullOrEmpty(devilFruitProps.getDevilFruit()) && !devilFruitProps.hasYamiPower() && !eatenFruit.equalsIgnoreCase("yamiyami");
 		boolean flag2 = devilFruitProps.hasYamiPower() && !eatenFruit.equalsIgnoreCase(devilFruitProps.getDevilFruit()) && !devilFruitProps.getDevilFruit().equalsIgnoreCase("yamidummy");
 		boolean flag3 = !CommonConfig.instance.isYamiPowerEnabled() && !WyHelper.isNullOrEmpty(devilFruitProps.getDevilFruit()) && (eatenFruit.equalsIgnoreCase("yamiyami") || !eatenFruit.equalsIgnoreCase(devilFruitProps.getDevilFruit()));
@@ -111,9 +111,12 @@ public class AkumaNoMiItem extends Item
 		}
 
 		if(!eatenFruit.equalsIgnoreCase("yomiyomi"))
+		{
 			for(Ability a : abilities)
 				if(!DevilFruitsHelper.verifyIfAbilityIsBanned(a) && abilityDataProps.getAbility(a) != null)
 					abilityDataProps.addAbility(a);
+			ModNetwork.sendTo(new CAbilityDataSyncPacket(abilityDataProps), (ServerPlayerEntity)player);
+		}
 		
 		itemStack.shrink(1);
 		return itemStack;

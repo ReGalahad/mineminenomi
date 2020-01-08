@@ -46,7 +46,7 @@ public class AbilityDataBase implements IAbilityData
 	@Override
 	public List<Ability> getAbilities(Category category)
 	{
-		return this.abilities.parallelStream().filter(ability -> ability.getCategory() != category).collect(Collectors.toList());
+		return this.abilities.parallelStream().filter(ability -> ability.getCategory() == category || category == Category.ALL).collect(Collectors.toList());
 	}
 
 	@Override
@@ -82,7 +82,7 @@ public class AbilityDataBase implements IAbilityData
 	@Override
 	public boolean hasAbilityInHotbar(Ability abl)
 	{
-		return Arrays.stream(this.hotbarAbilities).anyMatch(ability -> ability.equals(abl));
+		return Arrays.stream(this.hotbarAbilities).anyMatch(ability -> ability != null && ability.equals(abl));
 	}
 	
 	@Override

@@ -80,7 +80,7 @@ public class ModKeybindings
 		{
 			byte sync = 0b000100111;
 			ModNetwork.sendToServer(new CRequestSyncPacket(sync));
-
+			
 			Minecraft.getInstance().displayGuiScreen(new PlayerStatsScreen(player));
 		}
 

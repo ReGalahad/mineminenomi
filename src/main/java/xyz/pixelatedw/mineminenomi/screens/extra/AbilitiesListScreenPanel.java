@@ -6,8 +6,10 @@ import java.util.List;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.client.gui.ScrollPanel;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
+import xyz.pixelatedw.mineminenomi.api.WyRenderHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
 import xyz.pixelatedw.mineminenomi.api.network.packets.client.CAbilityDataSyncPacket;
@@ -29,11 +31,13 @@ public class AbilitiesListScreenPanel extends ScrollPanel
 		this.parent = parent;
 		this.props = abilityProps;
 
-		for (int i = 0; i < abilities.length - 1; i++)
+		for (int i = 0; i <= abilities.length - 1; i++)
 		{
+			System.out.println(i + " " + abilities[i]);
 			if (abilities[i] != null)
-				entries.add(new Entry(abilities[i]));
+				this.entries.add(new Entry(abilities[i]));
 		}
+		
 	}
 
 	@Override
@@ -63,7 +67,7 @@ public class AbilitiesListScreenPanel extends ScrollPanel
 					flag = true;
 
 				Minecraft.getInstance().fontRenderer.drawStringWithShadow(I18n.format("ability." + WyHelper.getResourceName(entry.ability.getName()) + ".name"), x, y + 4, flag ? 0xFF0000 : 0xFFFFFF);
-				//WyRenderHelper.drawAbilityIcon(WyHelper.getResourceName(entry.attribute.getAbilityTexture()), MathHelper.floor(x) - 30, MathHelper.floor(y), 16, 16);
+				WyRenderHelper.drawAbilityIcon(WyHelper.getResourceName(entry.ability.getName()), MathHelper.floor(x) - 30, MathHelper.floor(y), 16, 16);
 			}
 
 			relativeY += ENTRY_HEIGHT * 1.25;
@@ -110,7 +114,7 @@ public class AbilitiesListScreenPanel extends ScrollPanel
 		
 		if (flag)
 		{
-			//this.props.setAbilityInSlot(this.parent.slotSelected, AbilityManager.instance().getAbilityByName(WyHelper.getResourceName(entry.ability.getAttribute().getAttributeName())));
+			this.props.setAbilityInHotbar(this.parent.slotSelected, entry.ability);
 			ModNetwork.sendToServer(new CAbilityDataSyncPacket(this.props));
 		}
 

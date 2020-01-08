@@ -73,7 +73,7 @@ public class CRequestSyncPacket
 				IHakiData hakiDataProps = HakiDataCapability.get(player);
 				IExtraEffect extraEffectProps = ExtraEffectCapability.get(player);
 				IQuestData questDataProps = QuestDataCapability.get(player);
-
+				
 				if(((message.sync >> 0) & 1) == 1)
 					ModNetwork.sendTo(new SDevilFruitSyncPacket(player.getEntityId(), devilFruitProps), (ServerPlayerEntity) player);
 				

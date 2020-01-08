@@ -1,5 +1,7 @@
 package xyz.pixelatedw.mineminenomi.screens;
 
+import java.util.List;
+
 import org.lwjgl.opengl.GL11;
 
 import com.mojang.blaze3d.platform.GLX;
@@ -181,10 +183,28 @@ public class SelectHotbarAbilitiesScreen extends Screen
 				}
 			}));
 		}
-
-		this.devilFruitsAbilitiesList = new AbilitiesListScreenPanel(this, this.abilityDataProps, this.abilityDataProps.getAbilities(Category.DEVIL_FRUIT).toArray(new Ability[0]));
-		this.racialAbilitiesList = new AbilitiesListScreenPanel(this, this.abilityDataProps, this.abilityDataProps.getAbilities(Category.RACIAL).toArray(new Ability[0]));	
-		this.hakiAbilitiesList = new AbilitiesListScreenPanel(this, this.abilityDataProps, this.abilityDataProps.getAbilities(Category.HAKI).toArray(new Ability[0]));
+		
+		if (this.menuSelected == 0)
+		{
+			List<Ability> list = this.abilityDataProps.getAbilities(Category.DEVIL_FRUIT);
+			Ability[] arr = new Ability[list.size()];
+			arr = list.toArray(arr);
+			this.devilFruitsAbilitiesList = new AbilitiesListScreenPanel(this, this.abilityDataProps, arr);
+		}
+		else if (this.menuSelected == 1)
+		{
+			List<Ability> list = this.abilityDataProps.getAbilities(Category.RACIAL);
+			Ability[] arr = new Ability[list.size()];
+			arr = list.toArray(arr);
+			this.racialAbilitiesList = new AbilitiesListScreenPanel(this, this.abilityDataProps, arr);
+		}
+		else if (this.menuSelected == 2)
+		{
+			List<Ability> list = this.abilityDataProps.getAbilities(Category.HAKI);
+			Ability[] arr = new Ability[list.size()];
+			arr = list.toArray(arr);
+			this.hakiAbilitiesList = new AbilitiesListScreenPanel(this, this.abilityDataProps, arr);
+		}
 
 		this.updateScreen();
 	}
