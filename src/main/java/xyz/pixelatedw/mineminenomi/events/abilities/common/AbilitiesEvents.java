@@ -27,7 +27,7 @@ public class AbilitiesEvents
 				//if (ability instanceof PassiveAbility)
 				//	((PassiveAbility) ability).tick(player);
 				//else
-				ability.cooldown(player);
+				props.getAbility(ability).cooldown(player);
 			}
 		}
 	}

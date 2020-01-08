@@ -41,7 +41,7 @@ public class AbilityDataCapability
 					{
 						Ability ability = instance.getHotbarAbilities()[i];
 						if (ability != null)
-							props.putByteArray("hotbar_ability_" + i, WyHelper.serialize(ability));
+							props.putString("hotbar_ability_" + i, ability.getName());
 					}
 
 					int i = 0;
@@ -72,7 +72,7 @@ public class AbilityDataCapability
 					instance.setPreviouslyUsedAbility((Ability) WyHelper.deserialize(props.getByteArray("previouslyUsedAbility")));
 
 					for (int i = 0; i < instance.getHotbarAbilities().length; i++)
-						instance.setAbilityInHotbar(i, (Ability) WyHelper.deserialize(props.getByteArray("hotbar_ability_" + i)));
+						instance.setAbilityInHotbar(i, instance.getAbility(props.getString("hotbar_ability_" + i)));
 
 					int total = props.getInt("abilitiesOwned");
 					instance.clearAbilities(Category.ALL);

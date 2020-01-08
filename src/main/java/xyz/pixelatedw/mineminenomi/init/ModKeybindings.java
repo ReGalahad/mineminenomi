@@ -132,7 +132,7 @@ public class ModKeybindings
 			{
 				Ability abl = abilityDataProps.getAbilityInSlot(i);
 				if (abilityDataProps.isInCombatMode() && abl != null)
-					ModNetwork.sendToServer(new CUseAbilityPacket(abl));
+					ModNetwork.sendToServer(new CUseAbilityPacket(abl.getName()));
 				else
 					player.inventory.currentItem = i;
 			}

@@ -1,53 +1,35 @@
 package xyz.pixelatedw.mineminenomi.packets.client;
 
-import java.io.IOException;
 import java.util.function.Supplier;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
 import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
 
 public class CUseAbilityPacket
 {
-	
-	private Ability ability;
+	private String ability;
 	
 	public CUseAbilityPacket() {}
 	
-	public CUseAbilityPacket(Ability ability)
+	public CUseAbilityPacket(String ability)
 	{
 		this.ability = ability;
 	}
 
 	public void encode(PacketBuffer buffer)
 	{
-		try
-		{
-			buffer.writeByteArray(WyHelper.serialize(this.ability));
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
+		buffer.writeString(this.ability);
 	}
 	
 	public static CUseAbilityPacket decode(PacketBuffer buffer)
 	{
 		CUseAbilityPacket msg = new CUseAbilityPacket();
-		try
-		{
-			msg.ability = (Ability) WyHelper.deserialize(buffer.readByteArray());
-		}
-		catch (ClassNotFoundException | IOException e)
-		{
-			e.printStackTrace();
-		}
+		msg.ability = buffer.readString();
 		return msg;
 	}
 
@@ -65,8 +47,8 @@ public class CUseAbilityPacket
 				if(DevilFruitsHelper.checkForRestriction(player))
 					return;
 				
-				message.ability.use(player);
-				
+				abilityDataProps.getAbility(message.ability).use(player);
+								
 				/*Ability currentAbility = abilityDataProps.getHotbarAbilityFromSlot(message.abilitySlot);
 								
 				if (currentAbility != null)

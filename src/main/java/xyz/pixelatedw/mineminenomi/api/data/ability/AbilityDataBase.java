@@ -42,6 +42,12 @@ public class AbilityDataBase implements IAbilityData
 	{
 		return this.abilities.parallelStream().filter(ability -> abl.equals(ability)).findFirst().orElse(null);
 	}
+	
+	@Override
+	public Ability getAbility(String ablName)
+	{
+		return this.abilities.parallelStream().filter(ability -> ability.getName().equalsIgnoreCase(ablName)).findFirst().orElse(null);
+	}
 
 	@Override
 	public List<Ability> getAbilities(Category category)

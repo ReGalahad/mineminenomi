@@ -11,6 +11,7 @@ public interface IAbilityData
 	boolean addAbility(Ability abl);
 	void removeAbility(Ability abl);
 	Ability getAbility(Ability abl);
+	Ability getAbility(String ablName);
 	List<Ability> getAbilities(Category category);
 	void clearAbilities(Category category);
 	void clearAbilityFromList(Category category, List<Ability> list); 

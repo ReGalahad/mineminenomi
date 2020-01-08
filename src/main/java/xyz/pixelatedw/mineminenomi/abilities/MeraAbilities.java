@@ -1,5 +1,6 @@
 package xyz.pixelatedw.mineminenomi.abilities;
 
+import net.minecraft.entity.player.PlayerEntity;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.MeraProjectiles;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
@@ -25,17 +26,22 @@ public class MeraAbilities
 		public Hiken()
 		{
 			super("Hiken", Category.DEVIL_FRUIT);
+			this.setMaxCooldown(8);
 			this.setDescription("Turns the user's fist into flames and launches it towards the target.");
-			
-			this.onUseEvent = (player, ability) -> 
-			{			
-				this.projectile = new MeraProjectiles.Hiken(player.world, player, ModAttributes.HIKEN);			
-			};
+
+			this.onUseEvent = this::onUseEvent;
 			
 			this.duringCooldownEvent = (player, ability, cooldown) -> 
 			{
 				System.out.println(cooldown);
 			};
+		}
+		
+		private void onUseEvent(PlayerEntity player, Ability ability)
+		{
+			MeraProjectiles.Hiken proj = new MeraProjectiles.Hiken(player.world, player, ModAttributes.HIKEN);
+			player.world.addEntity(proj);
+			proj.shoot(player, player.rotationPitch, player.rotationYaw, 0, 2f, 1);		
 		}
 	}
 	

@@ -15,8 +15,6 @@ public abstract class Ability implements Serializable
 	private Category category = Category.DEVIL_FRUIT;
 	private State state = State.STANDBY;
 	
-	protected AbilityProjectile projectile;
-	
 	// Setting the defaults so that no crash occurs and so they will be null safe.
 	protected IOnUse onUseEvent = (player, ability) -> {};
 	protected IDuringCooldown duringCooldownEvent = (player, ability, cooldown) -> {};
@@ -35,20 +33,12 @@ public abstract class Ability implements Serializable
 		if(player.world.isRemote)
 			return;
 		
-		Ability abl = this.getOriginalAbility(player);
+		if(!this.isOnStandby())
+			return;			
 		
-		if(abl == null || !this.isOnStandby())
-			return;
-		
-		this.onUseEvent.onUse(player, abl);
-		
-		if(this.projectile != null)
-		{
-			player.world.addEntity(this.projectile);
-			this.projectile.shoot(player, player.rotationPitch, player.rotationYaw, 0, 2f, 1);
-		}
-		
-		abl.startCooldown();
+		this.onUseEvent.onUse(player, this);
+
+		this.startCooldown();
 	}
 	
 	
@@ -106,12 +96,13 @@ public abstract class Ability implements Serializable
 	 */
 	public void setMaxCooldown(int cooldown)
 	{
-		this.maxCooldown = cooldown;
+		this.maxCooldown = cooldown * 20;
+		this.cooldown = this.maxCooldown;
 	}
 	
 	public void setCooldown(int cooldown)
 	{
-		this.cooldown = cooldown;
+		this.cooldown = cooldown * 20;
 	}
 	
 	public void setDescription(String desc)
@@ -146,7 +137,7 @@ public abstract class Ability implements Serializable
 		if(this.isOnCooldown() && this.cooldown > 0)
 		{
 			this.cooldown--;
-			this.duringCooldownEvent.duringCooldown(player, this.getOriginalAbility(player), this.cooldown);
+			this.duringCooldownEvent.duringCooldown(player, this, this.cooldown);
 		}
 		else
 		{
@@ -159,6 +150,13 @@ public abstract class Ability implements Serializable
 	{
 		IAbilityData props = AbilityDataCapability.get(player);
 		return props.getAbilities(Category.ALL).parallelStream().filter(ability -> ability.getName().equalsIgnoreCase(this.getName())).findFirst().orElse(null);
+	}
+	
+	private Ability getSavedAbility(PlayerEntity player)
+	{
+		IAbilityData props = AbilityDataCapability.get(player);
+		Ability abl = props.getAbility(this.getOriginalAbility(player));
+		return abl;
 	}
 	
 	@Override
