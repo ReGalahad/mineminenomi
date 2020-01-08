@@ -129,7 +129,7 @@
 		},
 		{
 			"type": "minecraft:item",
-			"name": "mineminenomi:seakingmeat",
+			"name": "mineminenomi:sea_king_meat",
 			"weight": 10,
 			"functions": [{
 				"function": "minecraft:set_count",

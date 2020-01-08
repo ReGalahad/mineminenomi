@@ -14,7 +14,7 @@
 			[
 				{
 					"type": "minecraft:item",
-					"name": "mineminenomi:wantedposter",
+					"name": "mineminenomi:wanted_poster",
 					"functions": 
 					[
 						{

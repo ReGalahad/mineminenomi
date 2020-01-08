@@ -43,7 +43,7 @@
 		},
 		{
 			"type": "minecraft:item",
-			"name": "mineminenomi:bellypouch",
+			"name": "mineminenomi:belly_pouch",
 			"weight": 80,
 			"functions": [{
 				"function": "minecraft:set_count",
@@ -56,7 +56,7 @@
 		},
 		{
 			"type": "minecraft:item",
-			"name": "mineminenomi:bellypouch",
+			"name": "mineminenomi:belly_pouch",
 			"weight": 100,
 			"functions": [{
 				"function": "minecraft:set_count",
@@ -69,7 +69,7 @@
 		},
 		{
 			"type": "minecraft:item",
-			"name": "mineminenomi:kairosekibullet",
+			"name": "mineminenomi:kairoseki_bullet",
 			"weight": 50,
 			"functions": [{
 				"function": "minecraft:set_count",
@@ -95,7 +95,7 @@
 		},
 		{
 			"type": "minecraft:item",
-			"name": "mineminenomi:woodenbox",
+			"name": "mineminenomi:wooden_box",
 			"weight": 20,
 			"functions": [{
 				"function": "minecraft:set_count",

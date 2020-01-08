@@ -11,7 +11,7 @@
 		"entries": [
 		{
 			"type": "minecraft:item",
-			"name": "mineminenomi:bellypouch",
+			"name": "mineminenomi:belly_pouch",
 			"weight": 75,
 			"functions": [
 			{
@@ -25,7 +25,7 @@
 		},
 		{
 			"type": "minecraft:item",
-			"name": "mineminenomi:kairosekibullet",
+			"name": "mineminenomi:kairoseki_bullet",
 			"weight": 70,
 			"functions": [{
 				"function": "minecraft:set_count",
@@ -38,7 +38,7 @@
 		},
 		{
 			"type": "minecraft:item",
-			"name": "mineminenomi:bellypouch",
+			"name": "mineminenomi:belly_pouch",
 			"weight": 65,
 			"functions": [{
 				"function": "minecraft:set_count",
@@ -64,7 +64,7 @@
 		},
 		{
 			"type": "minecraft:item",
-			"name": "mineminenomi:bellypouch",
+			"name": "mineminenomi:belly_pouch",
 			"weight": 35,
 			"functions": [{
 				"function": "minecraft:set_count",
@@ -77,7 +77,7 @@
 		},
 		{
 			"type": "minecraft:item",
-			"name": "mineminenomi:blackmetal",
+			"name": "mineminenomi:black_metal",
 			"weight": 35,
 			"functions": [{
 				"function": "minecraft:set_count",
@@ -90,22 +90,22 @@
 		},
 		{
 			"type": "minecraft:item",
-			"name": "mineminenomi:ultracola",
+			"name": "mineminenomi:ultra_cola",
 			"weight": 20
 		},
 		{
 			"type": "minecraft:item",
-			"name": "mineminenomi:woodenbox",
+			"name": "mineminenomi:wooden_box",
 			"weight": 20
 		},
 		{
 			"type": "minecraft:item",
-			"name": "mineminenomi:ironbox",
+			"name": "mineminenomi:iron_box",
 			"weight": 15
 		},
 		{
 			"type": "minecraft:item",
-			"name": "mineminenomi:goldenbox",
+			"name": "mineminenomi:golden_box",
 			"weight": 10
 		}
 		]

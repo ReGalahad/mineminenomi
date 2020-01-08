@@ -10,12 +10,12 @@
 	{
 		"k":
 		{
-			"item": "mineminenomi:densekairoseki"
+			"item": "mineminenomi:dense_kairoseki"
 		}	
 	},
 	"result": 
 	{
-		"item": "mineminenomi:kairosekibullet",
+		"item": "mineminenomi:kairoseki_bullet",
 		"count": 4
 	}
 }
