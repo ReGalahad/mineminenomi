@@ -33,7 +33,6 @@ public class AbilitiesListScreenPanel extends ScrollPanel
 
 		for (int i = 0; i <= abilities.length - 1; i++)
 		{
-			System.out.println(i + " " + abilities[i]);
 			if (abilities[i] != null)
 				this.entries.add(new Entry(abilities[i]));
 		}

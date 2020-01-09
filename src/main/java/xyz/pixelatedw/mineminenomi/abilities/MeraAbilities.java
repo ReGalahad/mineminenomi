@@ -31,10 +31,10 @@ public class MeraAbilities
 
 			this.onUseEvent = this::onUseEvent;
 			
-			this.duringCooldownEvent = (player, ability, cooldown) -> 
-			{
-				System.out.println(cooldown);
-			};
+			//this.duringCooldownEvent = (player, ability, cooldown) -> 
+			//{
+			//	System.out.println(cooldown);
+			//};
 		}
 		
 		private void onUseEvent(PlayerEntity player, Ability ability)

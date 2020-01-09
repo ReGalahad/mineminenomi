@@ -3,8 +3,11 @@ package xyz.pixelatedw.mineminenomi.api.abilities;
 import java.io.Serializable;
 
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
+import xyz.pixelatedw.mineminenomi.init.ModNetwork;
+import xyz.pixelatedw.mineminenomi.packets.server.SUpdateHotbarStatePacket;
 
 public abstract class Ability implements Serializable
 {
@@ -39,6 +42,7 @@ public abstract class Ability implements Serializable
 		this.onUseEvent.onUse(player, this);
 
 		this.startCooldown();
+		ModNetwork.sendTo(new SUpdateHotbarStatePacket(AbilityDataCapability.get(player)), (ServerPlayerEntity)player);
 	}
 	
 	
@@ -90,6 +94,16 @@ public abstract class Ability implements Serializable
 		this.state = State.CHARGING;
 	}
 	
+	public void setState(State state)
+	{
+		this.state = state;
+	}
+	
+	public State getState()
+	{
+		return this.state;
+	}
+	
 	
 	/*
 	 * 	Setters/Getters
@@ -139,10 +153,11 @@ public abstract class Ability implements Serializable
 			this.cooldown--;
 			this.duringCooldownEvent.duringCooldown(player, this, this.cooldown);
 		}
-		else
+		else if(this.isOnCooldown() && this.cooldown <= 0)
 		{
 			this.cooldown = this.maxCooldown;
 			this.state = State.STANDBY;
+			ModNetwork.sendTo(new SUpdateHotbarStatePacket(AbilityDataCapability.get(player)), (ServerPlayerEntity)player);
 		}
 	}
 	

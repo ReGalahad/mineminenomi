@@ -35,8 +35,6 @@ public class CUseAbilityPacket
 
 	public static void handle(CUseAbilityPacket message, final Supplier<NetworkEvent.Context> ctx)
 	{
-		//Minecraft.getInstance().profiler.startSection("ability_use");
-
 		if(ctx.get().getDirection() == NetworkDirection.PLAY_TO_SERVER)
 		{
 			ctx.get().enqueueWork(() ->

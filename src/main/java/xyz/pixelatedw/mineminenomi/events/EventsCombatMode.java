@@ -110,16 +110,15 @@ public class EventsCombatMode extends Screen
 
 			for (int i = 0; i < 8; i++)
 			{
-				// if(abilityProps.getAbilityFromSlot(0) != null)
-				// System.out.println("" + abilityProps.getAbilityFromSlot(0).isOnCooldown());
+				Ability abl = abilityDataProps.getAbilityInSlot(i);
 				GL11.glEnable(GL11.GL_BLEND);
-				if (abilityDataProps.getAbilityInSlot(i) != null && abilityDataProps.getAbilityInSlot(i).isOnCooldown() && !abilityDataProps.getAbilityInSlot(i).isDisabled())
+				if (abl != null && abl.isOnCooldown() && !abl.isDisabled())
 					GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 24, 0, 23, 23, 0);
-				else if (abilityDataProps.getAbilityInSlot(i) != null && abilityDataProps.getAbilityInSlot(i).isCharging())
+				else if (abl != null && abl.isCharging())
 					GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 72, 0, 23, 23, 0);
-				else if (abilityDataProps.getAbilityInSlot(i) != null && abilityDataProps.getAbilityInSlot(i).isPassiveActive())
+				else if (abl != null && abl.isPassiveActive())
 					GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 48, 0, 23, 23, 0);
-				else if (abilityDataProps.getAbilityInSlot(i) != null && abilityDataProps.getAbilityInSlot(i).isDisabled())
+				else if (abl != null && abl.isDisabled())
 					GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 96, 0, 23, 23, 0);
 				else
 					GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 0, 0, 23, 23, 0);

@@ -25,6 +25,7 @@ import xyz.pixelatedw.mineminenomi.packets.server.SOpenWantedPosterScreenPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SRecalculateEyeHeightPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SSpawnLightningPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SSpecialFlyingPacket;
+import xyz.pixelatedw.mineminenomi.packets.server.SUpdateHotbarStatePacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SUpdateMotionPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SViewProtectionPacket;
 
@@ -60,6 +61,7 @@ public class ModNetwork
 		channel.registerMessage(packet++, SViewProtectionPacket.class, SViewProtectionPacket::encode, SViewProtectionPacket::decode, SViewProtectionPacket::handle);
 		channel.registerMessage(packet++, SOpenCharacterCreatorScreenPacket.class, SOpenCharacterCreatorScreenPacket::encode, SOpenCharacterCreatorScreenPacket::decode, SOpenCharacterCreatorScreenPacket::handle);
 		channel.registerMessage(packet++, SOpenWantedPosterScreenPacket.class, SOpenWantedPosterScreenPacket::encode, SOpenWantedPosterScreenPacket::decode, SOpenWantedPosterScreenPacket::handle);
+		channel.registerMessage(packet++, SUpdateHotbarStatePacket.class, SUpdateHotbarStatePacket::encode, SUpdateHotbarStatePacket::decode, SUpdateHotbarStatePacket::handle);
 
 	}
 	
