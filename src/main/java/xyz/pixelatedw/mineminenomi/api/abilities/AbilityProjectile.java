@@ -228,6 +228,7 @@ public class AbilityProjectile extends ThrowableEntity
 	{
 		private EntityType type;
 		private Class entityClass;
+		private AbilityRenderer.Factory factory;
 		
 		public Data(EntityType type, Class<? extends Entity> clz)
 		{
@@ -235,14 +236,26 @@ public class AbilityProjectile extends ThrowableEntity
 			this.entityClass = clz;
 		}
 		
+		public Data(EntityType type, Class<? extends Entity> clz, AbilityRenderer.Factory factory)
+		{
+			this.type = type;
+			this.entityClass = clz;
+			this.factory = factory;
+		}
+		
 		public EntityType getEntityType()
 		{
-			return type;
+			return this.type;
 		}
 		
 		public Class getEntityClass()
 		{
 			return this.entityClass;
+		}
+		
+		public AbilityRenderer.Factory getFactory()
+		{
+			return this.factory;
 		}
 	}
 

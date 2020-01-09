@@ -4,11 +4,11 @@ import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.entity.model.RendererModel;
 import net.minecraft.entity.Entity;
 
-public class ModelCube extends EntityModel
+public class CubeModel extends EntityModel
 {
 	RendererModel Shape1;
 
-	public ModelCube()
+	public CubeModel()
 	{
 		textureWidth = 64;
 		textureHeight = 64;

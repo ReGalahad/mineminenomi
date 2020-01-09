@@ -1,8 +1,8 @@
 package xyz.pixelatedw.mineminenomi.api.abilities;
 
-import org.lwjgl.opengl.GL11;
-
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.platform.GlStateManager.DestFactor;
+import com.mojang.blaze3d.platform.GlStateManager.SourceFactor;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -12,150 +12,70 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
-import xyz.pixelatedw.mineminenomi.models.entities.projectiles.ArrowModel;
-import xyz.pixelatedw.mineminenomi.models.entities.projectiles.BazookaModel;
-import xyz.pixelatedw.mineminenomi.models.entities.projectiles.BrickBatModel;
-import xyz.pixelatedw.mineminenomi.models.entities.projectiles.FistModel;
-import xyz.pixelatedw.mineminenomi.models.entities.projectiles.HeartModel;
-import xyz.pixelatedw.mineminenomi.models.entities.projectiles.HydraModel;
-import xyz.pixelatedw.mineminenomi.models.entities.projectiles.MeigoModel;
-import xyz.pixelatedw.mineminenomi.models.entities.projectiles.MiniHollowModel;
-import xyz.pixelatedw.mineminenomi.models.entities.projectiles.NegativeHollowModel;
-import xyz.pixelatedw.mineminenomi.models.entities.projectiles.NoroNoroBeamModel;
-import xyz.pixelatedw.mineminenomi.models.entities.projectiles.PawModel;
-import xyz.pixelatedw.mineminenomi.models.entities.projectiles.PheasantModel;
-import xyz.pixelatedw.mineminenomi.models.entities.projectiles.SharkModel;
-import xyz.pixelatedw.mineminenomi.models.entities.projectiles.SpearModel;
-import xyz.pixelatedw.mineminenomi.models.entities.projectiles.TokuHollowModel;
-import xyz.pixelatedw.mineminenomi.models.entities.projectiles.TridentModel;
-import xyz.pixelatedw.mineminenomi.models.entities.projectiles.YukiRabiModel;
+import xyz.pixelatedw.mineminenomi.Env;
 
 @OnlyIn(Dist.CLIENT)
 public class AbilityRenderer extends EntityRenderer<AbilityProjectile>
 {
-	private double scaleX, scaleY, scaleZ, rotAngle, rotX, rotY, rotZ, red, blue, green, renderPosX, renderPosY, renderPosZ;
-	private float alpha;
+	private double scale = 1, red, blue, green, alpha;
 	private EntityModel model;
-	private AbilityAttribute ablAttr;
 	private ResourceLocation texture;
 
-	public AbilityRenderer(EntityRendererManager renderManager, AbilityAttribute attr)
+	public AbilityRenderer(EntityRendererManager renderManager, EntityModel model)
 	{
 		super(renderManager);
-		this.ablAttr = attr;
-		this.texture = ablAttr.getProjectileTexture();
+		this.model = model;
+	}
+	
+	public void setTexture(ResourceLocation res)
+	{
+		this.texture = res;
+	}
+	
+	public void setColor(double red, double green, double blue, double alpha)
+	{
+		this.red = red;
+		this.green = green;
+		this.blue = blue;
+		this.alpha = alpha;
+	}
+
+	public void setScale(double scale)
+	{
+		this.scale = scale;
 	}
 
 	@Override
-	public void doRender(AbilityProjectile entity, double par2, double par4, double par6, float par8, float par9)
+	public void doRender(AbilityProjectile entity, double x, double y, double z, float entityYaw, float partialTicks)
 	{
 		GlStateManager.pushMatrix();
 		{
-			this.scaleX = this.ablAttr.getProjectileSize()[0];
-			this.scaleY = this.ablAttr.getProjectileSize()[1];
-			this.scaleZ = this.ablAttr.getProjectileSize()[2];
-	
-			this.red = this.ablAttr.getProjectileColor().getRed();
-			this.green = this.ablAttr.getProjectileColor().getGreen();
-			this.blue = this.ablAttr.getProjectileColor().getBlue();
-			this.alpha = this.ablAttr.getProjectileAlpha();
-	
-			this.rotX = this.ablAttr.getProjectileXRotation();
-			this.rotY = this.ablAttr.getProjectileYRotation();
-			this.rotZ = this.ablAttr.getProjectileZRotation();
-	
-			this.renderPosX = this.ablAttr.getModelOffsets()[0];
-			this.renderPosY = this.ablAttr.getModelOffsets()[1];
-			this.renderPosZ = this.ablAttr.getModelOffsets()[2];
-			
-			//System.out.println(this.model);
-			
-			if(this.ablAttr.getProjectileModel() != null)
-			{
-				switch(this.ablAttr.getProjectileModel())
-				{
-					case CUBE:
-						this.model = new ModelCube(); break;
-					case SPHERE:
-						this.model = new ModelSphere(); break;
-					case FIST:
-						this.model = new FistModel(); break;
-					case ARROW:
-						this.model = new ArrowModel(); break;	
-					case HEART:
-						this.model = new HeartModel(); break;	
-					case SPEAR:
-						this.model = new SpearModel(); break;	
-					case HYDRA:
-						this.model = new HydraModel(); break;	
-					case PAW:
-						this.model = new PawModel(); break;				
-					case TRIDENT:
-						this.model = new TridentModel(); break;	
-					case SHARK:
-						this.model = new SharkModel(); break;	
-					case PHEASANT:
-						this.model = new PheasantModel(); break;	
-						
-					case NORO_NORO_BEAM:
-						this.model = new NoroNoroBeamModel(); break;	
-					case MEIGO:
-						this.model = new MeigoModel(); break;	
-					case BRICK_BAT:
-						this.model = new BrickBatModel(); break;	
-					case NEGATIVE_HOLLOW:
-						this.model = new NegativeHollowModel(); break;	
-					case MINI_HOLLOW:
-						this.model = new MiniHollowModel(); break;	
-					case TOKU_HOLLOW:
-						this.model = new TokuHollowModel(); break;	
-					case YUKI_RABI:
-						this.model = new YukiRabiModel(); break;	
-					case BAZOOKA:
-						this.model = new BazookaModel(); break;
-						
-					default:
-						this.model = new ModelCube();
-		
-				}
-			}
-			
-			GlStateManager.pushMatrix();
-			{
-				GL11.glTranslated(par2 + renderPosX, par4 + renderPosY, par6 + renderPosZ);
-				if (this.texture == null)
-					GL11.glDisable(GL11.GL_TEXTURE_2D);
-				GL11.glEnable(GL11.GL_BLEND);
-				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		
-				GL11.glRotatef(entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * par9 - 180.0F, 0.0F, 1.0F, 0.0F);
-				GL11.glRotatef(entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * par9, 1.0F, 0.0F, 0.0F);
-		
-				GL11.glRotatef(180, 0, 0, 1);
-		
-				if (rotX != 0)
-					GL11.glRotated(rotX, 1, 0, 0);
-				if (rotY != 0)
-					GL11.glRotated(rotY, 0, 1, 0);
-				if (rotZ != 0)
-					GL11.glRotated(rotZ, 0, 0, 1);
-		
-				GL11.glColor4f((float) this.red / 255, (float) this.green / 255, (float) this.blue / 255, this.alpha / 255);
-				GL11.glScaled(this.scaleX, this.scaleY, this.scaleZ);
-		
-				if (this.texture != null)
-					Minecraft.getInstance().textureManager.bindTexture(this.getEntityTexture(entity));
-		
-				if (this.model != null)
-					this.model.render(entity, (float) par2, (float) par4, (float) par6, 0.0F, 0.0F, 0.0625F);
-		
-				GL11.glDisable(GL11.GL_BLEND);
-				if (this.texture == null)
-					GL11.glEnable(GL11.GL_TEXTURE_2D);
-			}
-			GlStateManager.popMatrix();
-		}
-		GL11.glColor4f(1, 1, 1, 1);
+			System.out.println(this.red);
+			GlStateManager.color4f(1, 1, 1, 1);
+			GlStateManager.translated(x, y + 0.25, z);
+			if (this.texture == null)
+				GlStateManager.disableTexture();
+			GlStateManager.enableBlend();
+			GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);
+
+			GlStateManager.rotatef(entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * partialTicks - 180.0F, 0.0F, 1.0F, 0.0F);
+			GlStateManager.rotatef(entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * partialTicks, 1.0F, 0.0F, 0.0F);
+
+			GlStateManager.rotatef(180, 0, 0, 1);
+
+			GlStateManager.color4f((float) this.red, (float) this.green, (float) this.blue, (float) this.alpha);
+			GlStateManager.scaled(this.scale, this.scale, this.scale);
+
+			if (this.texture != null)
+				Minecraft.getInstance().textureManager.bindTexture(this.getEntityTexture(entity));
+
+			if (this.model != null)
+				this.model.render(entity, (float) x, (float) y, (float) z, 0.0F, 0.0F, 0.0625F);
+
+			GlStateManager.disableBlend();
+			if (this.texture == null)
+				GlStateManager.enableTexture();
+		}	
 		GlStateManager.popMatrix();
 	}
 
@@ -167,19 +87,44 @@ public class AbilityRenderer extends EntityRenderer<AbilityProjectile>
 
 	public static class Factory implements IRenderFactory<AbilityProjectile>
 	{
-		private AbilityAttribute attr;
-		
-		public Factory() {}
-		
-		public Factory(AbilityAttribute attr)
+		private EntityModel model = new CubeModel();
+		private double scale = 1, red = 1, green = 1, blue = 1, alpha = 1;
+		private ResourceLocation texture;
+
+		public Factory(EntityModel model)
 		{
-			this.attr = attr;
+			this.model = model;
+		}
+
+		public Factory setTexture(String textureName)
+		{
+			this.texture = new ResourceLocation(Env.PROJECT_ID, "textures/models/projectiles/" + textureName + ".png");
+			return this;
+		}
+
+		public Factory setColor(double red, double green, double blue, double alpha)
+		{
+			this.red = red;
+			this.green = green;
+			this.blue = blue;
+			this.alpha = alpha;
+			return this;
+		}
+
+		public Factory setScale(double scale)
+		{
+			this.scale = scale;
+			return this;
 		}
 
 		@Override
 		public EntityRenderer<? super AbilityProjectile> createRenderFor(EntityRendererManager manager)
 		{
-			return new AbilityRenderer(manager, this.attr);
+			AbilityRenderer renderer = new AbilityRenderer(manager, this.model);
+			renderer.setTexture(this.texture);
+			renderer.setScale(this.scale);
+			renderer.setColor(this.red, this.green, this.blue, this.alpha);
+			return renderer;
 		}
 	}
 

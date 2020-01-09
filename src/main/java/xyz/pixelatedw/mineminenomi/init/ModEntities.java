@@ -1,6 +1,6 @@
 package xyz.pixelatedw.mineminenomi.init;
 
-import java.util.HashMap;
+import java.util.List;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
@@ -10,7 +10,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.mineminenomi.entities.WantedPosterPackageEntity;
 import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.ExtraProjectiles;
@@ -59,9 +58,9 @@ public class ModEntities
 				return;
 
 			// Register projectiles
-			for (HashMap<AbilityAttribute, AbilityProjectile.Data> map : ModDevilFruits.ALL_PROJECTILES)
+			for (List<AbilityProjectile.Data> list : ModDevilFruits.ALL_PROJECTILES)
 			{
-				map.forEach((key, value) ->
+				list.forEach((value) ->
 				{
 					event.getRegistry().register(value.getEntityType());
 				});

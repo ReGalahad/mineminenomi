@@ -1,12 +1,10 @@
 package xyz.pixelatedw.mineminenomi.init;
 
-import java.util.HashMap;
+import java.util.List;
 
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityRenderer;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.WantedPosterPackageTileEntity;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.WantedPosterTileEntity;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.dials.AxeDialTileEntity;
@@ -49,11 +47,11 @@ public class ModRenderers
     public static void registerRenderers() 
     {
     	// Projectiles
-    	for(HashMap<AbilityAttribute, AbilityProjectile.Data> map : ModDevilFruits.ALL_PROJECTILES)
+    	for(List<AbilityProjectile.Data> list : ModDevilFruits.ALL_PROJECTILES)
     	{
-    		map.forEach((key, value) -> 
+    		list.forEach((value) -> 
     		{
-    			RenderingRegistry.registerEntityRenderingHandler(value.getEntityClass(), new AbilityRenderer.Factory(key) );			
+    			RenderingRegistry.registerEntityRenderingHandler(value.getEntityClass(), value.getFactory() );			
     		});
     	}
     	

@@ -4,7 +4,7 @@ import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.entity.model.RendererModel;
 import net.minecraft.entity.Entity;
 
-public class ModelSphere extends EntityModel
+public class SphereModel extends EntityModel
 {
 	public RendererModel shape1;
 	public RendererModel shape2;
@@ -14,7 +14,7 @@ public class ModelSphere extends EntityModel
 	public RendererModel shape6;
 	public RendererModel shape7;
 
-	public ModelSphere()
+	public SphereModel()
 	{
 		this.textureWidth = 64;
 		this.textureHeight = 64;
