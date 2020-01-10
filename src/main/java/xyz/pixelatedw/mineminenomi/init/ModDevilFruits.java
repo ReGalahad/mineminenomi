@@ -10,7 +10,10 @@ import net.minecraftforge.registries.ForgeRegistries;
 import xyz.pixelatedw.mineminenomi.EnumFruitType;
 import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.abilities.MeraAbilities;
+import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
+import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
+import xyz.pixelatedw.mineminenomi.api.debug.WyDebug;
 import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.MeraProjectiles;
 import xyz.pixelatedw.mineminenomi.items.AkumaNoMiItem;
 
@@ -27,10 +30,10 @@ public class ModDevilFruits
 			SabiSabiNoMi, HitoHitoNoMi, ChiyuChiyuNoMi, MoguMoguNoMi, UshiUshiNoMiGiraffe, DoaDoaNoMi,
 			KachiKachiNoMi, MiniMiniNoMi;
 
-/*	private static final Ability[][] ALL_ABILITIES = 
+	private static final Ability[][] ALL_ABILITIES = 
 		{
 			// Devil Fruit Abilities lists
-			MeraAbilities.abilitiesArray, HieAbilities.abilitiesArray, BaneAbilities.abilitiesArray, PikaAbilities.abilitiesArray, SukeAbilities.abilitiesArray, 
+			MeraAbilities.abilitiesArray/*, HieAbilities.abilitiesArray, BaneAbilities.abilitiesArray, PikaAbilities.abilitiesArray, SukeAbilities.abilitiesArray, 
 			OpeAbilities.abilitiesArray, GoroAbilities.abilitiesArray, MokuAbilities.abilitiesArray, NikyuAbilities.abilitiesArray, BomuAbilities.abilitiesArray, GuraAbilities.abilitiesArray,
 			KageAbilities.abilitiesArray, SunaAbilities.abilitiesArray, MaguAbilities.abilitiesArray, DoruAbilities.abilitiesArray, DokuAbilities.abilitiesArray, GasuAbilities.abilitiesArray,
 			YukiAbilities.abilitiesArray, ItoAbilities.abilitiesArray, BariAbilities.abilitiesArray, HoroAbilities.abilitiesArray, YamiAbilities.abilitiesArray, GoeAbilities.abilitiesArray,
@@ -42,9 +45,9 @@ public class ModDevilFruits
 			// Special Abilities lists
 			RokushikiAbilities.abilitiesArray, FishKarateAbilities.abilitiesArray, CyborgAbilities.abilitiesArray, 
 			SniperAbilities.abilitiesArray, SwordsmanAbilities.abilitiesArray, 
-			HakiAbilities.abilitiesArray
+			HakiAbilities.abilitiesArray*/
 		};
-*/	
+
 	public static final List[] ALL_PROJECTILES = new List[] 
 		{
 			// Devil Fruit projectiles
@@ -155,21 +158,21 @@ public class ModDevilFruits
 		MeraMeraNoMi = new AkumaNoMiItem(EnumFruitType.LOGIA, MeraAbilities.abilitiesArray);
 		registerDevilFruit(MeraMeraNoMi, "Mera Mera no Mi");        
 		
-/*		if(WyDebug.isDebug())
+		for (int i = 0; i < ALL_ABILITIES.length; i++)
 		{
-			for (int i = 0; i < ALL_ABILITIES.length; i++)
-			{		
-				totalFruits++;
-				for (Ability a : ALL_ABILITIES[i])
-					if (a != null)
-					{
-						totalAbilities++;
-					}
+			totalFruits++;
+			for (Ability abl : ALL_ABILITIES[i])
+			{
+				if (abl != null)
+				{
+					totalAbilities++;
+					WyRegistry.registerName("ability." + WyHelper.getResourceName(abl.getName()) + ".name", abl.getName());
+				}
 			}
-			WyDebug.info("A total of " + ModValues.devilfruits.size() + " Devil Fruits have been registered");
-			WyDebug.info("A total of " + totalAbilities + " abilities have been registered");
 		}
-*/		
+		WyDebug.info("A total of " + ModValues.devilfruits.size() + " Devil Fruits have been registered");
+		WyDebug.info("A total of " + totalAbilities + " abilities have been registered");
+		
 		event.getRegistry().registerAll(ModValues.devilfruits.toArray(new AkumaNoMiItem[0]));
     }
 	

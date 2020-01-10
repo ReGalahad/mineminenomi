@@ -9,13 +9,11 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.event.ClickEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.TickEvent.Phase;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedOutEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
@@ -196,32 +194,32 @@ public class EventsCore
 	@SubscribeEvent
 	public static void onPlayerLoggedIn(PlayerLoggedInEvent event)
 	{
-		if(!WyDebug.isDebug())
+		/*if(!WyDebug.isDebug())
 		{
 			WyTelemetry.addMiscStat("onlinePlayers", "Online Players", 1);
 			WyTelemetry.sendAllDataAsync();
-		}
+		}*/
 	}
 	
 	@SubscribeEvent
 	public static void onPlayerLoggedIn(PlayerLoggedOutEvent event)
 	{
-		if(!WyDebug.isDebug())
+	/*	if(!WyDebug.isDebug())
 		{
 			WyTelemetry.addMiscStat("onlinePlayers", "Online Players", -1);
 			WyTelemetry.sendAllDataSync();
-		}
+		}*/
 	}
 	
 	@SubscribeEvent
 	public static void onPlayerTick(TickEvent.WorldTickEvent event)
 	{		
-		if(event.phase == Phase.END && event.side == LogicalSide.SERVER)
+		/*if(event.phase == Phase.END && event.side == LogicalSide.SERVER)
 		{
 			if(event.world.getGameTime() % 1200 == 0)
 			{
-				WyTelemetry.sendAllDataAsync();
+			//	WyTelemetry.sendAllDataAsync();
 			}
-		}
+		}*/
 	}
 }

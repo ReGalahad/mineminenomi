@@ -44,7 +44,7 @@ public class EventsAbilityValidation
 					player.inventory.addItemStackToInventory(new ItemStack(ModItems.characterCreator, 1));
 				
 				if(!WyHelper.isNullOrEmpty(devilFruitProps.getDevilFruit()))
-				{					
+				{
 					ItemStack df = DevilFruitsHelper.getDevilFruitItem(devilFruitProps.getDevilFruit());
 					
 					abilityProps.clearAbilities(Category.ALL);
@@ -80,6 +80,7 @@ public class EventsAbilityValidation
 				
 				for(int i = 0; i < abilityProps.getHotbarAbilities().length; i++)
 				{
+					System.out.println(abilityProps.getAbilityInSlot(i));
 					if(abilityProps.getAbilityInSlot(i) != null)
 					{
 						if(DevilFruitsHelper.verifyIfAbilityIsBanned(abilityProps.getAbilityInSlot(i)))

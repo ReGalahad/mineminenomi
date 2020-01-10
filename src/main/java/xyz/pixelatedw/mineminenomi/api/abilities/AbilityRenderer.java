@@ -50,7 +50,6 @@ public class AbilityRenderer extends EntityRenderer<AbilityProjectile>
 	{
 		GlStateManager.pushMatrix();
 		{
-			System.out.println(this.red);
 			GlStateManager.color4f(1, 1, 1, 1);
 			GlStateManager.translated(x, y + 0.25, z);
 			if (this.texture == null)

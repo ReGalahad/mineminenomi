@@ -58,7 +58,7 @@ public class AbilityDataBase implements IAbilityData
 	@Override
 	public void clearAbilities(Category category)
 	{
-		this.abilities = this.abilities.parallelStream().filter(ability -> ability.getCategory() != category).collect(Collectors.toList());
+		this.abilities = this.abilities.parallelStream().filter(ability -> ability.getCategory() != category || category == Category.ALL).collect(Collectors.toList());
 	}
 
 	@Override
@@ -70,7 +70,7 @@ public class AbilityDataBase implements IAbilityData
 	@Override
 	public int countAbilities(Category category)
 	{
-		return this.abilities.parallelStream().filter(ability -> ability.getCategory() == category).collect(Collectors.toList()).size();
+		return this.abilities.parallelStream().filter(ability -> ability.getCategory() == category || category == Category.ALL).collect(Collectors.toList()).size();
 	}
 
 	@Override
