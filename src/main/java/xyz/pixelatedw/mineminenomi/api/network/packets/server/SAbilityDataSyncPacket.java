@@ -54,8 +54,8 @@ public class SAbilityDataSyncPacket
 				if(target == null || !(target instanceof LivingEntity))
 					return;
 				
-				IAbilityData abilityDataProps = AbilityDataCapability.get((LivingEntity) target);
-				AbilityDataCapability.INSTANCE.getStorage().readNBT(AbilityDataCapability.INSTANCE, abilityDataProps, null, message.data);			
+				IAbilityData abilityDataProps = AbilityDataCapability.get(player);
+				AbilityDataCapability.INSTANCE.getStorage().readNBT(AbilityDataCapability.INSTANCE, abilityDataProps, null, message.data);
 			});	
 		}
 		ctx.get().setPacketHandled(true);

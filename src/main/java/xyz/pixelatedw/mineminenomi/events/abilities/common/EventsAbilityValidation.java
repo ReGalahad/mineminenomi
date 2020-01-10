@@ -39,7 +39,7 @@ public class EventsAbilityValidation
 			IAbilityData abilityProps = AbilityDataCapability.get(player);
 			
 			if (!player.world.isRemote)
-			{			
+			{
 				if (!entityStatsProps.hasRace() && !entityStatsProps.hasFaction() && !entityStatsProps.hasFightingStyle() && !player.inventory.hasItemStack(new ItemStack(ModItems.characterCreator)))
 					player.inventory.addItemStackToInventory(new ItemStack(ModItems.characterCreator, 1));
 				
@@ -80,19 +80,19 @@ public class EventsAbilityValidation
 				
 				for(int i = 0; i < abilityProps.getHotbarAbilities().length; i++)
 				{
-					System.out.println(abilityProps.getAbilityInSlot(i));
-					if(abilityProps.getAbilityInSlot(i) != null)
+					//System.out.println(abilityProps.getAbilityInSlot(i));
+					/*if(abilityProps.getAbilityInSlot(i) != null)
 					{
 						if(DevilFruitsHelper.verifyIfAbilityIsBanned(abilityProps.getAbilityInSlot(i)))
 							abilityProps.setAbilityInHotbar(i, null);
-					}
+					}*/
 				}			
-				
+								
 				ModNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), entityStatsProps), (ServerPlayerEntity) player);
 				ModNetwork.sendTo(new SDevilFruitSyncPacket(player.getEntityId(), devilFruitProps), (ServerPlayerEntity) player);
 				//ModNetwork.sendTo(new PacketQuestSync(questProps), (ServerPlayerEntity) player);
 				ModNetwork.sendTo(new SAbilityDataSyncPacket(player.getEntityId(), abilityProps), (ServerPlayerEntity) player);		
-			}		
+			}
 		}
 	}
 }

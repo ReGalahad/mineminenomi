@@ -40,7 +40,6 @@ public class AbilityDataCapability
 					for (int i = 0; i < instance.getHotbarAbilities().length; i++)
 					{
 						Ability ability = instance.getHotbarAbilities()[i];
-						System.out.println(ability);
 						if (ability != null)
 							props.putString("hotbar_ability_" + i, ability.getName());
 					}
@@ -65,24 +64,23 @@ public class AbilityDataCapability
 			public void readNBT(Capability<IAbilityData> capability, IAbilityData instance, Direction side, INBT nbt)
 			{
 				CompoundNBT props = (CompoundNBT) nbt;
-
+				
 				instance.setCombatMode(props.getBoolean("combatMode"));
 
 				try
 				{
 					instance.setPreviouslyUsedAbility((Ability) WyHelper.deserialize(props.getByteArray("previouslyUsedAbility")));
 
-					for (int i = 0; i < instance.getHotbarAbilities().length; i++)
-					{
-						System.out.println(instance.getAbility(props.getString("hotbar_ability_" + i)));
-						instance.setAbilityInHotbar(i, instance.getAbility(props.getString("hotbar_ability_" + i)));
-					}
-
 					int total = props.getInt("abilitiesOwned");
 					instance.clearAbilities(Category.ALL);
 					
 					for (int i = 0; i < total; i++)
-						instance.addAbility((Ability) WyHelper.deserialize(props.getByteArray("ability_" + i)));					
+						instance.addAbility((Ability) WyHelper.deserialize(props.getByteArray("ability_" + i)));	
+					
+					for (int i = 0; i < instance.getHotbarAbilities().length; i++)
+					{
+						instance.setAbilityInHotbar(i, instance.getAbility(props.getString("hotbar_ability_" + i)));
+					}
 				}
 				catch (ClassNotFoundException | IOException e)
 				{
