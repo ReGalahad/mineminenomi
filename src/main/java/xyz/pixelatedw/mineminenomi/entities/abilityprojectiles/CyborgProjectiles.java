@@ -125,7 +125,7 @@ public class CyborgProjectiles
 		public void tasksImapct(RayTraceResult hit)
 		{
 			if(hit.hitInfo != null && hit.getType() == Type.ENTITY && hit.hitInfo instanceof LivingEntity)
-				((LivingEntity) hit.hitInfo).setFire(this.ticks);
+				((LivingEntity) hit.hitInfo).setFire(this.getMaxLife());
 		}
 		
 		@Override

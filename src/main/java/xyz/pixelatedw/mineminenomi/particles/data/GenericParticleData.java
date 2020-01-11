@@ -7,8 +7,8 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ParticleType;
 import net.minecraft.util.ResourceLocation;
-import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.init.ModParticleTypes;
+import xyz.pixelatedw.mineminenomi.init.ModResources;
 
 public class GenericParticleData implements IParticleData
 {
@@ -68,7 +68,7 @@ public class GenericParticleData implements IParticleData
 		}
 	};
 
-	private float red, green, blue;
+	private float red = 1, green = 1, blue = 1;
 	private double motionX, motionY, motionZ;
 	private float alpha = 1.0F;
 	private float size = 1;

@@ -12,15 +12,21 @@ import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
+import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityRenderer;
+import xyz.pixelatedw.mineminenomi.api.abilities.extra.AbilityExplosion;
+import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.models.entities.projectiles.FistModel;
 import xyz.pixelatedw.mineminenomi.particles.CustomParticleData;
+import xyz.pixelatedw.mineminenomi.particles.data.GenericParticleData;
+import xyz.pixelatedw.mineminenomi.particles.effects.common.CommonExplosionParticleEffect;
 
 public class MeraProjectiles
 {
@@ -54,53 +60,57 @@ public class MeraProjectiles
 		public Hiken(World world, double x, double y, double z)
 		{super(HIKEN, world, x, y, z);}
 		
-		public Hiken(World world, LivingEntity player, AbilityAttribute attr) 
+		public Hiken(World world, LivingEntity player) 
 		{		
-			super(HIKEN, world, player, attr);		
+			super(HIKEN, world, player);
+			
+			this.onImpactEvent = this::onImpactEvent;
+			
+			this.onTickEvent = this::onTickEvent;
 		}
 		
-		@Override
-		public void tick()
+		private void onImpactEvent(RayTraceResult hit)
+		{
+			AbilityExplosion explosion = WyHelper.newExplosion(this.getThrower(), this.posX, this.posY, this.posZ, 2);
+			explosion.setExplosionSound(true);
+			explosion.setDamageOwner(false);
+			explosion.setDestroyBlocks(true);
+			explosion.setFireAfterExplosion(true);
+			explosion.setSmokeParticles(new CommonExplosionParticleEffect(2));
+			explosion.setDamageEntities(true);
+			explosion.doExplosion();
+		}
+		
+		private void onTickEvent()
 		{		
-			if(this.world.isRemote)
+			if(!this.world.isRemote)
 			{
-				for (int i = 0; i < 25; i++)
+				for (int i = 0; i < 15; i++)
 				{
-					double offsetX = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
-					double offsetY = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
-					double offsetZ = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
+					double offsetX = WyMathHelper.randomDouble() / 2;
+					double offsetY = WyMathHelper.randomDouble() / 2;
+					double offsetZ = WyMathHelper.randomDouble() / 2;
 
-					CustomParticleData data = new CustomParticleData();
-					data.setTexture(ModResources.MERA);
-					data.setPosX(posX + offsetX);
-					data.setPosY(posY + offsetY);
-					data.setPosZ(posZ + offsetZ);
-					
-					data.setMaxAge(10);
-					data.setScale(1.3F);
-					
-					//ModMain.proxy.spawnParticles(world, data);
+					GenericParticleData data = new GenericParticleData();
+					data.setTexture(ModResources.MERA);				
+					data.setLife(10);
+					data.setSize(1.3F);
+					((ServerWorld) world).spawnParticle(data, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ, 1, 0, 0, 0, 0.0D);
 				}
 				
 				for (int i = 0; i < 5; i++)
 				{
-					double offsetX = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
-					double offsetY = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
-					double offsetZ = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
+					double offsetX = WyMathHelper.randomDouble() / 2;
+					double offsetY = WyMathHelper.randomDouble() / 2;
+					double offsetZ = WyMathHelper.randomDouble() / 2;
 					
-					CustomParticleData data = new CustomParticleData();
+					GenericParticleData data = new GenericParticleData();
 					data.setTexture(ModResources.MOKU);
-					data.setPosX(posX + offsetX);
-					data.setPosY(posY + offsetY);
-					data.setPosZ(posZ + offsetZ);
-					
-					data.setMaxAge(7);
-					data.setScale(1.2F);
-					
-					//ModMain.proxy.spawnParticles(world, data);
+					data.setLife(7);
+					data.setSize(1.2F);
+					((ServerWorld) world).spawnParticle(data, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ, 1, 0, 0, 0, 0.0D);
 				}
 			}
-			super.tick();
 		}
 	}
 	
@@ -235,7 +245,7 @@ public class MeraProjectiles
 			{
 				EntityRayTraceResult entityHit = (EntityRayTraceResult) hit;
 
-				entityHit.getEntity().setFire(this.ticks);
+				entityHit.getEntity().setFire(this.getMaxLife());
 			}
 
 			this.world.setBlockState(new BlockPos(this.posX, this.posY, this.posZ), Blocks.FIRE.getDefaultState());

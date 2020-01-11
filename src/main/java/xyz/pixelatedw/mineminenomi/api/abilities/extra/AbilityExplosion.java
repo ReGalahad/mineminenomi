@@ -42,7 +42,7 @@ public class AbilityExplosion extends Explosion
 	private double explosionY;
 	private double explosionZ;
 	private float explosionSize;
-	private ParticleEffect smokeParticles;
+	private ParticleEffect particles;
 
 	public List<BlockPos> affectedBlockPositions = new ArrayList<BlockPos>();
 	private final Map<PlayerEntity, Vec3d> playerKnockbackMap = Maps.newHashMap();
@@ -93,12 +93,12 @@ public class AbilityExplosion extends Explosion
 
 	public void setSmokeParticles(ParticleEffect particle)
 	{
-		this.smokeParticles = particle;
+		this.particles = particle;
 	}
 
 	public boolean hasSmokeParticles()
 	{
-		return this.smokeParticles != null;
+		return this.particles != null;
 	}
 
 	public void setExplosionSound(boolean hasSound)
@@ -220,7 +220,8 @@ public class AbilityExplosion extends Explosion
 		if (this.canProduceExplosionSound)
 			this.world.playSound((PlayerEntity) null, this.explosionX, this.explosionY, this.explosionZ, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 4.0F, (1.0F + (this.world.rand.nextFloat() - this.world.rand.nextFloat()) * 0.2F) * 0.7F);
 
-		//if (this.hasSmokeParticles())
+		if (this.hasSmokeParticles())
+			this.particles.spawn(this.world, this.explosionX, this.explosionY, this.explosionZ, 0, 0, 0);
 		//	ModNetwork.sendToAllAround(new SParticlesPacket(this.smokeParticles, this.explosionX, this.explosionY, this.explosionZ), (LivingEntity) this.exploder);
 
 		if (this.canDestroyBlocks && CommonConfig.instance.isGriefingEnabled())

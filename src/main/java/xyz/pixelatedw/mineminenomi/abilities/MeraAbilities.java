@@ -3,7 +3,6 @@ package xyz.pixelatedw.mineminenomi.abilities;
 import net.minecraft.entity.player.PlayerEntity;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.MeraProjectiles;
-import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
 
 public class MeraAbilities
@@ -30,16 +29,11 @@ public class MeraAbilities
 			this.setDescription("Turns the user's fist into flames and launches it towards the target.");
 
 			this.onUseEvent = this::onUseEvent;
-			
-			//this.duringCooldownEvent = (player, ability, cooldown) -> 
-			//{
-			//	System.out.println(cooldown);
-			//};
 		}
 		
 		private void onUseEvent(PlayerEntity player, Ability ability)
 		{
-			MeraProjectiles.Hiken proj = new MeraProjectiles.Hiken(player.world, player, ModAttributes.HIKEN);
+			MeraProjectiles.Hiken proj = new MeraProjectiles.Hiken(player.world, player);
 			player.world.addEntity(proj);
 			proj.shoot(player, player.rotationPitch, player.rotationYaw, 0, 2f, 1);		
 		}

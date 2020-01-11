@@ -2,6 +2,7 @@ package xyz.pixelatedw.mineminenomi.particles.effects.common;
 
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 
@@ -39,9 +40,9 @@ public class CommonExplosionParticleEffect extends ParticleEffect
 	        motionX *= middlePoint / 2;
 	        motionY *= middlePoint / 2;
 	        motionZ *= middlePoint / 2;
-			
-	        world.addParticle(ParticleTypes.EXPLOSION, x, y, z, 0, 0, 0);
-            world.addParticle(ParticleTypes.POOF, posX, posY + 1, posZ, motionX, motionY, motionZ);
+
+	        ((ServerWorld) world).spawnParticle(ParticleTypes.EXPLOSION, x, y, z, 1, 0, 0, 0, 1);
+	        ((ServerWorld) world).spawnParticle(ParticleTypes.POOF, posX, posY + 1, posZ, 1, motionX, motionY, motionZ, .5);
 		}
 	}
 
