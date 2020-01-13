@@ -100,7 +100,7 @@ public class WyHelper
 
 		return map;
 	}
-
+	
 	public static boolean isNullOrEmpty(String str)
 	{
 		if (str != null && !str.isEmpty() && !str.equalsIgnoreCase("n/a"))

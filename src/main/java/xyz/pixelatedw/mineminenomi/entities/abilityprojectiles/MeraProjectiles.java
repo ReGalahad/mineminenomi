@@ -12,21 +12,15 @@ import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityRenderer;
-import xyz.pixelatedw.mineminenomi.api.abilities.extra.AbilityExplosion;
-import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.models.entities.projectiles.FistModel;
 import xyz.pixelatedw.mineminenomi.particles.CustomParticleData;
-import xyz.pixelatedw.mineminenomi.particles.data.GenericParticleData;
-import xyz.pixelatedw.mineminenomi.particles.effects.common.CommonExplosionParticleEffect;
 
 public class MeraProjectiles
 {
@@ -39,11 +33,12 @@ public class MeraProjectiles
 	public static final EntityType JUJIKA = WyRegistry.registerEntityType("jujika", Jujika::new);
 	
 	private static final AbilityRenderer.Factory HIKEN_FACTORY = new AbilityRenderer.Factory(new FistModel()).setTexture("hiken").setScale(1.5);
-	
+//	private static final AbilityRenderer.Factory HIGAN_FACTORY = new AbilityRenderer.Factory(new CubeModel()).setTexture("hiken").setScale(1.5);
+
 	static
 	{
 		projectiles.add(new Data(HIKEN, Hiken.class, HIKEN_FACTORY));
-		/*projectiles.put(ModAttributes.HIGAN, new Data(HIGAN, Higan.class));
+		/*projectiles.add(new Data(HIGAN, Higan.class, HIKEN_FACTORY));
 		projectiles.put(ModAttributes.DAI_ENKAI_ENTEI, new Data(DAI_ENKAI_ENTEI, DaiEnkaiEntei.class));
 		projectiles.put(ModAttributes.HIDARUMA, new Data(HIDARUMA, Hidaruma.class));
 		projectiles.put(ModAttributes.JUJIKA, new Data(JUJIKA, Jujika.class));*/
@@ -63,54 +58,6 @@ public class MeraProjectiles
 		public Hiken(World world, LivingEntity player) 
 		{		
 			super(HIKEN, world, player);
-			
-			this.onImpactEvent = this::onImpactEvent;
-			
-			this.onTickEvent = this::onTickEvent;
-		}
-		
-		private void onImpactEvent(RayTraceResult hit)
-		{
-			AbilityExplosion explosion = WyHelper.newExplosion(this.getThrower(), this.posX, this.posY, this.posZ, 2);
-			explosion.setExplosionSound(true);
-			explosion.setDamageOwner(false);
-			explosion.setDestroyBlocks(true);
-			explosion.setFireAfterExplosion(true);
-			explosion.setSmokeParticles(new CommonExplosionParticleEffect(2));
-			explosion.setDamageEntities(true);
-			explosion.doExplosion();
-		}
-		
-		private void onTickEvent()
-		{		
-			if(!this.world.isRemote)
-			{
-				for (int i = 0; i < 15; i++)
-				{
-					double offsetX = WyMathHelper.randomDouble() / 2;
-					double offsetY = WyMathHelper.randomDouble() / 2;
-					double offsetZ = WyMathHelper.randomDouble() / 2;
-
-					GenericParticleData data = new GenericParticleData();
-					data.setTexture(ModResources.MERA);				
-					data.setLife(10);
-					data.setSize(1.3F);
-					((ServerWorld) world).spawnParticle(data, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ, 1, 0, 0, 0, 0.0D);
-				}
-				
-				for (int i = 0; i < 5; i++)
-				{
-					double offsetX = WyMathHelper.randomDouble() / 2;
-					double offsetY = WyMathHelper.randomDouble() / 2;
-					double offsetZ = WyMathHelper.randomDouble() / 2;
-					
-					GenericParticleData data = new GenericParticleData();
-					data.setTexture(ModResources.MOKU);
-					data.setLife(7);
-					data.setSize(1.2F);
-					((ServerWorld) world).spawnParticle(data, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ, 1, 0, 0, 0, 0.0D);
-				}
-			}
 		}
 	}
 	
@@ -125,39 +72,11 @@ public class MeraProjectiles
 		public Higan(World world, double x, double y, double z)
 		{super(HIGAN, world, x, y, z);}
 		
-		public Higan(World world, LivingEntity player, AbilityAttribute attr) 
+		public Higan(World world, LivingEntity player) 
 		{		
-			super(HIGAN, world, player, attr);		
+			super(HIGAN, world, player);
 		}
 		
-		@Override
-		public void tasksImapct(RayTraceResult hit)
-		{
-			this.world.setBlockState(new BlockPos(this.posX, this.posY, this.posZ), Blocks.FIRE.getDefaultState());
-		}
-		
-		@Override
-		public void tick()
-		{	
-			if(this.world.isRemote)
-			{
-				double posXOffset = this.world.rand.nextGaussian() * 0.42D;
-				double posYOffset = this.world.rand.nextGaussian() * 0.22D;
-				double posZOffset = this.world.rand.nextGaussian() * 0.42D;		
-	
-				CustomParticleData data = new CustomParticleData();
-				data.setTexture(ModResources.MERA);
-				data.setPosX(posX + posXOffset);
-				data.setPosY(posY + posYOffset);
-				data.setPosZ(posZ + posZOffset);
-				
-				data.setMaxAge(6);
-				data.setScale(1.2F);
-				
-				//ModMain.proxy.spawnParticles(world, data);
-			}
-			super.tick();
-		}
 	}
 	
 	public static class DaiEnkaiEntei extends AbilityProjectile
@@ -195,8 +114,6 @@ public class MeraProjectiles
 					
 					data.setMaxAge(10);
 					data.setScale(1.3F);
-					
-					//ModMain.proxy.spawnParticles(world, data);
 				}
 				
 				for (int i = 0; i < 10; i++)
@@ -213,8 +130,6 @@ public class MeraProjectiles
 					
 					data.setMaxAge(7);
 					data.setScale(1.1F);
-					
-					//ModMain.proxy.spawnParticles(world, data);
 				}
 			}
 			

@@ -12,7 +12,6 @@ import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.mineminenomi.entities.WantedPosterPackageEntity;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.ExtraProjectiles;
 import xyz.pixelatedw.mineminenomi.entities.mobs.bandits.EntityBanditWithSword;
 import xyz.pixelatedw.mineminenomi.entities.mobs.marines.EntityMarineCaptain;
 import xyz.pixelatedw.mineminenomi.entities.mobs.marines.EntityMarineWithGun;
@@ -82,7 +81,7 @@ public class ModEntities
 				DOJO_SENSEI,
 				
 				// Other
-				DOPPELMAN, BLACK_KNIGHT, ExtraProjectiles.CLOUD, WANTED_POSTER_PACKAGE
+				DOPPELMAN, BLACK_KNIGHT, WANTED_POSTER_PACKAGE
 			);
 		}
 		

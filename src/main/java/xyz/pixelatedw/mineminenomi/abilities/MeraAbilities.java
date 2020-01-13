@@ -16,45 +16,27 @@ public class MeraAbilities
 		ModValues.abilityWebAppExtraParams.put("enjomo", new String[] {"desc", "Creates a circle of fire around the user, burning everyone inside of it."});
 		ModValues.abilityWebAppExtraParams.put("daienkaientei", new String[] {"desc", "Amasses the user's flames into a gigantic fireball that the user hurls at the opponent."});
 	}
-	public static final Ability HIKEN = new Hiken();
-	
-	public static Ability[] abilitiesArray = new Ability[] {HIKEN};//, new Higan(), new DaiEnkaiEntei(), new Hidaruma(), new Jujika(), new Enjomo()};
-	
-	public static class Hiken extends Ability
+
+	public static class Higan extends Ability
 	{
-		public Hiken()
+		public Higan() 
 		{
-			super("Hiken", Category.DEVIL_FRUIT);
-			this.setMaxCooldown(8);
-			this.setDescription("Turns the user's fist into flames and launches it towards the target.");
+			super("Higan", Category.DEVIL_FRUIT);
+			this.setMaxCooldown(4);
+			this.setDescription("Turns the user's fingertips into flames and shoots bullets made of fire from them.");
 
 			this.onUseEvent = this::onUseEvent;
 		}
 		
 		private void onUseEvent(PlayerEntity player, Ability ability)
 		{
-			MeraProjectiles.Hiken proj = new MeraProjectiles.Hiken(player.world, player);
+			MeraProjectiles.Higan proj = new MeraProjectiles.Higan(player.world, player);
 			player.world.addEntity(proj);
 			proj.shoot(player, player.rotationPitch, player.rotationYaw, 0, 2f, 1);		
 		}
 	}
-	
-/*	public static class Higan extends Ability
-	{
-		public Higan() 
-		{
-			super(ModAttributes.HIGAN); 
-		}
-		
-		@Override
-		public void use(PlayerEntity player)
-		{
-			this.projectile = new MeraProjectiles.Higan(player.world, player, ModAttributes.HIGAN);
-			super.use(player);
-		};			
-	}
 
-	public static class DaiEnkaiEntei extends Ability
+/*	public static class DaiEnkaiEntei extends Ability
 	{
 		public DaiEnkaiEntei() 
 		{

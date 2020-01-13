@@ -34,8 +34,8 @@ public class AbilityProjectile extends ThrowableEntity
 	private boolean canPassThroughBlocks = false;
 	
 	// Setting the defaults so that no crash occurs and so they will be null safe.
-	protected IOnImpact onImpactEvent = (hit) -> {};
-	protected IOnTick onTickEvent = () -> {};
+	private IOnImpact onImpactEvent = (projectile, hit) -> {};
+	private IOnTick onTickEvent = (projectile) -> {};
 
 	public AbilityProjectile(EntityType type, World world)
 	{
@@ -110,7 +110,7 @@ public class AbilityProjectile extends ThrowableEntity
 		if (hit.getType() == RayTraceResult.Type.ENTITY && ((EntityRayTraceResult) hit).getEntity() instanceof LivingEntity)
 			this.onImpact(hit);
 		
-		this.onTickEvent.onTick();
+		this.getOnTickEvent().onTick(this);
 	}
 
 	@Override
@@ -131,7 +131,7 @@ public class AbilityProjectile extends ThrowableEntity
 					if(hitDevilFruitProps.isLogia() && this.isPhysical && !throwerHakiDataProps.hasBusoHakiActive())
 						return;
 											
-					this.onImpactEvent.onImpact(entityHit);
+					this.getOnImpactEvent().onImpact(this, entityHit);
 					this.remove();
 				}
 			}
@@ -141,7 +141,7 @@ public class AbilityProjectile extends ThrowableEntity
 	
 				if (!this.canPassThroughBlocks)
 				{										
-					this.onImpactEvent.onImpact(blockHit);
+					this.getOnImpactEvent().onImpact(this, blockHit);
 					this.remove();
 				}
 			}
@@ -238,17 +238,37 @@ public class AbilityProjectile extends ThrowableEntity
 	}
 	
 	
+	public IOnImpact getOnImpactEvent()
+	{
+		return onImpactEvent;
+	}
+
+	public void setOnImpactEvent(IOnImpact onImpactEvent)
+	{
+		this.onImpactEvent = onImpactEvent;
+	}
+
+	public IOnTick getOnTickEvent()
+	{
+		return onTickEvent;
+	}
+
+	public void setOnTickEvent(IOnTick onTickEvent)
+	{
+		this.onTickEvent = onTickEvent;
+	}
+
 	/*
 	 *	Interfaces
 	 */
 	public interface IOnImpact extends Serializable
 	{
-		void onImpact(RayTraceResult hit);
+		void onImpact(AbilityProjectile projectile, RayTraceResult hit);
 	}
 	
 	public interface IOnTick extends Serializable
 	{
-		void onTick();
+		void onTick(AbilityProjectile projectile);
 	}
 	
 }
