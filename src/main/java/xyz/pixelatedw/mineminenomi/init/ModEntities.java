@@ -11,6 +11,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
+import xyz.pixelatedw.mineminenomi.entities.VivreCardEntity;
 import xyz.pixelatedw.mineminenomi.entities.WantedPosterPackageEntity;
 import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.ExtraProjectiles;
 import xyz.pixelatedw.mineminenomi.entities.mobs.bandits.EntityBanditWithSword;
@@ -47,6 +48,8 @@ public class ModEntities
 	public static final EntityType DOPPELMAN = WyRegistry.registerEntityType("doppelman", EntityDoppelman::new);
 	public static final EntityType BLACK_KNIGHT = WyRegistry.registerEntityType("black_knight", EntityBlackKnight::new);
 	public static final EntityType WANTED_POSTER_PACKAGE = WyRegistry.registerEntityType("wanted_poster_package", WantedPosterPackageEntity::new, 1.5F, 1.5F);
+	public static final EntityType VIVRE_CARD = WyRegistry.registerEntityType("vivre_card", VivreCardEntity::new);
+
 
 	@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 	public static class Registry
@@ -82,7 +85,7 @@ public class ModEntities
 				DOJO_SENSEI,
 				
 				// Other
-				DOPPELMAN, BLACK_KNIGHT, ExtraProjectiles.CLOUD, WANTED_POSTER_PACKAGE
+				DOPPELMAN, BLACK_KNIGHT, ExtraProjectiles.CLOUD, WANTED_POSTER_PACKAGE, VIVRE_CARD
 			);
 		}
 		

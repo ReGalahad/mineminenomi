@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		"p"
+	],
+	"key": 
+	{
+		"p":
+		{
+			"item": "minecraft:paper"
+		}
+	},
+	"result": 
+	{
+		"item": "mineminenomi:vivre_card",
+		"count": 1
+	}
+}

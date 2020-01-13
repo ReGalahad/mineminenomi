@@ -37,7 +37,7 @@ public abstract class Ability implements Serializable
 			return;
 		
 		if(!this.isOnStandby())
-			return;			
+			return;
 		
 		this.onUseEvent.onUse(player, this);
 

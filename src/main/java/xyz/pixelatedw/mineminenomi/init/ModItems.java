@@ -15,6 +15,7 @@ import xyz.pixelatedw.mineminenomi.items.ColaItem;
 import xyz.pixelatedw.mineminenomi.items.HeartItem;
 import xyz.pixelatedw.mineminenomi.items.SeaKingMeatItem;
 import xyz.pixelatedw.mineminenomi.items.UltraColaItem;
+import xyz.pixelatedw.mineminenomi.items.VivreCardItem;
 
 @Mod.EventBusSubscriber(modid = Env.PROJECT_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModItems
@@ -29,6 +30,7 @@ public class ModItems
 	public static Item heart = new HeartItem();
 	public static Item bellyPouch = new BellyPouchItem();
 	public static Item key = new Item(new Properties().group(ModCreativeTabs.MISC));
+	public static Item vivreCard = new VivreCardItem();
 	
 	// Devil Fruit Boxes
 	public static Item woodBox;
@@ -74,7 +76,8 @@ public class ModItems
         	WyRegistry.registerItem(popGreen, "Pop Green"),
         	WyRegistry.registerItem(woodBox, "Wooden Box"),
         	WyRegistry.registerItem(ironBox, "Iron Box"),
-        	WyRegistry.registerItem(goldBox, "Golden Box")
+        	WyRegistry.registerItem(goldBox, "Golden Box"),
+        	WyRegistry.registerItem(vivreCard, "Vivre Card")
         );
     }
 }

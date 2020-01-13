@@ -130,12 +130,12 @@ public class AkumaNoMiItem extends Item
 				list.add(new StringTextComponent(TextFormatting.GRAY + I18n.format("ability." + WyHelper.getResourceName(this.abilities[i].getName()) + ".name")));
 
 		list.add(new StringTextComponent(""));
-		list.add(new StringTextComponent(type.getColor() + type.getName()));
+		list.add(new StringTextComponent(this.type.getColor() + this.type.getName()));
 	}
 
 	public EnumFruitType getType()
 	{
-		return type;
+		return this.type;
 	}
 
 }
