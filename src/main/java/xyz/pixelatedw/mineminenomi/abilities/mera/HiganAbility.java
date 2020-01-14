@@ -11,9 +11,10 @@ public class HiganAbility extends Ability
 	public HiganAbility() 
 	{
 		super("Higan", Category.DEVIL_FRUIT);
-		this.setMaxCooldown(4);
 		this.setDescription("Turns the user's fingertips into flames and shoots bullets made of fire from them.");
-
+		this.setMaxCooldown(4);
+		this.setMaxRepearCount(5, 2);
+		
 		this.onUseEvent = this::onUseEvent;
 	}
 	

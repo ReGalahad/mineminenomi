@@ -15,6 +15,9 @@ public abstract class Ability implements Serializable
 	private String desc = "";
 	private int cooldown;
 	private int maxCooldown;
+	private int repeaterCount;
+	private int maxRepeaterCount;
+	private int repeaterInterval;
 	private Category category = Category.DEVIL_FRUIT;
 	private State state = State.STANDBY;
 	
@@ -108,6 +111,17 @@ public abstract class Ability implements Serializable
 	/*
 	 * 	Setters/Getters
 	 */
+	
+	public void setMaxRepearCount(int count, int interval)
+	{
+		this.maxRepeaterCount = count;
+		this.repeaterCount = this.maxRepeaterCount;
+		this.repeaterInterval = interval;
+		
+		this.maxCooldown += (this.maxRepeaterCount * this.repeaterInterval);
+		this.cooldown = this.maxCooldown;	
+	}
+	
 	public void setMaxCooldown(int cooldown)
 	{
 		this.maxCooldown = cooldown * 20;
@@ -147,15 +161,23 @@ public abstract class Ability implements Serializable
 	{
 		if(player.world.isRemote)
 			return;
-				
+
 		if(this.isOnCooldown() && this.cooldown > 0)
 		{
 			this.cooldown--;
+			
+			if(this.repeaterCount > 0 && this.cooldown % this.repeaterInterval == 0)
+			{
+				this.onUseEvent.onUse(player, this);
+				this.repeaterCount--;
+			}
+
 			this.duringCooldownEvent.duringCooldown(player, this, this.cooldown);
 		}
 		else if(this.isOnCooldown() && this.cooldown <= 0)
 		{
-			this.cooldown = this.maxCooldown;
+			this.cooldown = this.maxCooldown;				
+			this.repeaterCount = this.maxRepeaterCount;
 			this.state = State.STANDBY;
 			ModNetwork.sendTo(new SUpdateHotbarStatePacket(AbilityDataCapability.get(player)), (ServerPlayerEntity)player);
 		}

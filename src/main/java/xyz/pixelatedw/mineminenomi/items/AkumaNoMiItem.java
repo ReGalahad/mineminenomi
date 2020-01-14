@@ -115,7 +115,8 @@ public class AkumaNoMiItem extends Item
 			for(Ability a : abilities)
 				if(!DevilFruitsHelper.verifyIfAbilityIsBanned(a) && abilityDataProps.getAbility(a) != null)
 					abilityDataProps.addAbility(a);
-			ModNetwork.sendTo(new CAbilityDataSyncPacket(abilityDataProps), (ServerPlayerEntity)player);
+			if(player instanceof ServerPlayerEntity)
+				ModNetwork.sendTo(new CAbilityDataSyncPacket(abilityDataProps), (ServerPlayerEntity)player);
 		}
 		
 		itemStack.shrink(1);
