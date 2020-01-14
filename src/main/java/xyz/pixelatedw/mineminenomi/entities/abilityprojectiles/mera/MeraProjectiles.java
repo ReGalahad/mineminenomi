@@ -18,10 +18,9 @@ import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityRenderer;
 import xyz.pixelatedw.mineminenomi.api.abilities.CubeModel;
+import xyz.pixelatedw.mineminenomi.api.abilities.SphereModel;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
-import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.models.entities.projectiles.FistModel;
-import xyz.pixelatedw.mineminenomi.particles.CustomParticleData;
 
 public class MeraProjectiles
 {
@@ -29,78 +28,21 @@ public class MeraProjectiles
 	
 	public static final EntityType HIKEN = WyRegistry.registerEntityType("hiken", HikenProjectile::new);
 	public static final EntityType HIGAN = WyRegistry.registerEntityType("higan", HiganProjectile::new);
-	public static final EntityType DAI_ENKAI_ENTEI = WyRegistry.registerEntityType("dai_enkai_entei", DaiEnkaiEntei::new);
+	public static final EntityType DAI_ENKAI_ENTEI = WyRegistry.registerEntityType("dai_enkai_entei", DaiEnkaiEnteiProjectile::new);
 	public static final EntityType HIDARUMA = WyRegistry.registerEntityType("hidaruma", Hidaruma::new);
 	public static final EntityType JUJIKA = WyRegistry.registerEntityType("jujika", Jujika::new);
 	
 	private static final AbilityRenderer.Factory HIKEN_FACTORY = new AbilityRenderer.Factory(new FistModel()).setTexture("hiken").setScale(1.5);
 	private static final AbilityRenderer.Factory HIGAN_FACTORY = new AbilityRenderer.Factory(new CubeModel()).setColor(255, 0, 0, 100).setScale(.5);
+	private static final AbilityRenderer.Factory DAI_ENKAI_ENTEI_FACTORY = new AbilityRenderer.Factory(new SphereModel()).setColor(255, 0, 0, 100).setScale(9);
 
 	static
 	{
 		projectiles.add(new Data(HIKEN, HikenProjectile.class, HIKEN_FACTORY));
 		projectiles.add(new Data(HIGAN, HiganProjectile.class, HIGAN_FACTORY));
-		/*projectiles.put(ModAttributes.DAI_ENKAI_ENTEI, new Data(DAI_ENKAI_ENTEI, DaiEnkaiEntei.class));
-		projectiles.put(ModAttributes.HIDARUMA, new Data(HIDARUMA, Hidaruma.class));
+		projectiles.add(new Data(DAI_ENKAI_ENTEI, DaiEnkaiEnteiProjectile.class, DAI_ENKAI_ENTEI_FACTORY));
+		/*projectiles.put(ModAttributes.HIDARUMA, new Data(HIDARUMA, Hidaruma.class));
 		projectiles.put(ModAttributes.JUJIKA, new Data(JUJIKA, Jujika.class));*/
-	}
-	
-	public static class DaiEnkaiEntei extends AbilityProjectile
-	{
-		public DaiEnkaiEntei(World world)
-		{ super(DAI_ENKAI_ENTEI, world); }
-		
-		public DaiEnkaiEntei(EntityType type, World world)
-		{ super(type, world); }
-		
-		public DaiEnkaiEntei(World world, double x, double y, double z)
-		{ super(DAI_ENKAI_ENTEI, world, x, y, z); }
-		
-		public DaiEnkaiEntei(World world, LivingEntity player, AbilityAttribute attr) 
-		{		
-			super(DAI_ENKAI_ENTEI, world, player, attr);		
-		}
-		
-		@Override
-		public void tick()
-		{	
-			if(this.world.isRemote)
-			{
-				for (int i = 0; i < 75; i++)
-				{
-					double offsetX = (new Random().nextInt(40) + 2.0D - 20.0D) / 10.0D;
-					double offsetY = (new Random().nextInt(40) + 2.0D - 20.0D) / 10.0D;
-					double offsetZ = (new Random().nextInt(40) + 2.0D - 20.0D) / 10.0D;
-			      
-					CustomParticleData data = new CustomParticleData();
-					data.setTexture(ModResources.MERA);
-					data.setPosX(posX + offsetX);
-					data.setPosY(posY + offsetY);
-					data.setPosZ(posZ + offsetZ);
-					
-					data.setMaxAge(10);
-					data.setScale(1.3F);
-				}
-				
-				for (int i = 0; i < 10; i++)
-				{
-					double offsetX = (new Random().nextInt(40) + 2.0D - 20.0D) / 10.0D;
-					double offsetY = (new Random().nextInt(40) + 2.0D - 20.0D) / 10.0D;
-					double offsetZ = (new Random().nextInt(40) + 2.0D - 20.0D) / 10.0D;
-			      
-					CustomParticleData data = new CustomParticleData();
-					data.setTexture(ModResources.MOKU);
-					data.setPosX(posX + offsetX);
-					data.setPosY(posY + offsetY);
-					data.setPosZ(posZ + offsetZ);
-					
-					data.setMaxAge(7);
-					data.setScale(1.1F);
-				}
-			}
-			
-			super.tick();
-		}
 	}
 	
 	public static class Hidaruma extends AbilityProjectile

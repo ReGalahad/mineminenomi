@@ -34,7 +34,8 @@ public class AbilityProjectile extends ThrowableEntity
 	private boolean canPassThroughBlocks = false;
 	
 	// Setting the defaults so that no crash occurs and so they will be null safe.
-	protected IOnImpact onImpactEvent = (hit) -> {};
+	protected IOnEntityImpact onEntityImpactEvent = (hitEntity) -> {};
+	protected IOnBlockImpact onBlockImpactEvent = (hit) -> {};
 	protected IOnTick onTickEvent = () -> {};
 
 	public AbilityProjectile(EntityType type, World world)
@@ -121,8 +122,8 @@ public class AbilityProjectile extends ThrowableEntity
 			if(hit.getType() == RayTraceResult.Type.ENTITY)
 			{
 				EntityRayTraceResult entityHit = (EntityRayTraceResult) hit;
-	
-				if(entityHit.getEntity() instanceof LivingEntity)
+
+				if(entityHit.getEntity() instanceof LivingEntity && this.getThrower() != null)
 				{
 					LivingEntity hitEntity = (LivingEntity) entityHit.getEntity();
 					IDevilFruit hitDevilFruitProps = DevilFruitCapability.get(hitEntity);
@@ -130,8 +131,8 @@ public class AbilityProjectile extends ThrowableEntity
 					
 					if(hitDevilFruitProps.isLogia() && this.isPhysical && !throwerHakiDataProps.hasBusoHakiActive())
 						return;
-											
-					this.onImpactEvent.onImpact(entityHit);
+
+					this.onEntityImpactEvent.onImpact(hitEntity);
 					this.remove();
 				}
 			}
@@ -141,7 +142,7 @@ public class AbilityProjectile extends ThrowableEntity
 	
 				if (!this.canPassThroughBlocks)
 				{										
-					this.onImpactEvent.onImpact(blockHit);
+					this.onBlockImpactEvent.onImpact(blockHit);
 					this.remove();
 				}
 			}
@@ -241,9 +242,14 @@ public class AbilityProjectile extends ThrowableEntity
 	/*
 	 *	Interfaces
 	 */
-	public interface IOnImpact extends Serializable
+	public interface IOnEntityImpact extends Serializable
 	{
-		void onImpact(RayTraceResult hit);
+		void onImpact(LivingEntity hitEntity);
+	}
+	
+	public interface IOnBlockImpact extends Serializable
+	{
+		void onImpact(BlockRayTraceResult hit);
 	}
 	
 	public interface IOnTick extends Serializable

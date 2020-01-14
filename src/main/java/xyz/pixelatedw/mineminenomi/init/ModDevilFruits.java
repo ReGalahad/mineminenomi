@@ -9,6 +9,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 import xyz.pixelatedw.mineminenomi.EnumFruitType;
 import xyz.pixelatedw.mineminenomi.Env;
+import xyz.pixelatedw.mineminenomi.abilities.mera.DaiEnkaiEnteiAbility;
 import xyz.pixelatedw.mineminenomi.abilities.mera.HiganAbility;
 import xyz.pixelatedw.mineminenomi.abilities.mera.HikenAbility;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
@@ -138,7 +139,7 @@ public class ModDevilFruits
 		registerDevilFruit(BaneBaneNoMi, "Bane Bane no Mi");
 		HieHieNoMi = new AkumaNoMiItem(EnumFruitType.LOGIA, HieAbilities.abilitiesArray);
 		registerDevilFruit(HieHieNoMi, "Hie Hie no Mi");*/
-		MeraMeraNoMi = new AkumaNoMiItem(EnumFruitType.LOGIA, HikenAbility.INSTANCE, HiganAbility.INSTANCE);
+		MeraMeraNoMi = new AkumaNoMiItem(EnumFruitType.LOGIA, HikenAbility.INSTANCE, HiganAbility.INSTANCE, DaiEnkaiEnteiAbility.INSTANCE);
 		registerDevilFruit(MeraMeraNoMi, "Mera Mera no Mi");        
 		
 		for(AkumaNoMiItem df : ModValues.devilfruits)

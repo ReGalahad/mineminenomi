@@ -2,7 +2,6 @@ package xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.mera;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
@@ -14,26 +13,26 @@ import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.data.GenericParticleData;
 import xyz.pixelatedw.mineminenomi.particles.effects.common.CommonExplosionParticleEffect;
 
-public class HikenProjectile extends AbilityProjectile
+public class DaiEnkaiEnteiProjectile extends AbilityProjectile
 {
-	public HikenProjectile(World world)
+	public DaiEnkaiEnteiProjectile(World world)
 	{
-		super(MeraProjectiles.HIKEN, world);
+		super(MeraProjectiles.DAI_ENKAI_ENTEI, world);
 	}
 
-	public HikenProjectile(EntityType type, World world)
+	public DaiEnkaiEnteiProjectile(EntityType type, World world)
 	{
 		super(type, world);
 	}
 
-	public HikenProjectile(World world, double x, double y, double z)
+	public DaiEnkaiEnteiProjectile(World world, double x, double y, double z)
 	{
-		super(MeraProjectiles.HIKEN, world, x, y, z);
+		super(MeraProjectiles.DAI_ENKAI_ENTEI, world, x, y, z);
 	}
 
-	public HikenProjectile(World world, LivingEntity player)
+	public DaiEnkaiEnteiProjectile(World world, LivingEntity player)
 	{
-		super(MeraProjectiles.HIKEN, world, player);
+		super(MeraProjectiles.DAI_ENKAI_ENTEI, world, player);
 
 		this.onEntityImpactEvent = this::onEntityImpactEvent;
 		this.onBlockImpactEvent = this::onBlockImpactEvent;
@@ -42,48 +41,47 @@ public class HikenProjectile extends AbilityProjectile
 
 	private void onEntityImpactEvent(LivingEntity hitEntity)
 	{
-		hitEntity.attackEntityFrom(DamageSource.causeMobDamage(this.getThrower()), 20);
 		this.onBlockImpactEvent.onImpact(null);
 	}
 	
 	private void onBlockImpactEvent(BlockRayTraceResult hit)
-	{		
-		AbilityExplosion explosion = WyHelper.newExplosion(this.getThrower(), this.posX, this.posY, this.posZ, 2);
+	{
+		AbilityExplosion explosion = WyHelper.newExplosion(this.getThrower(), this.posX, this.posY, this.posZ, 7);
 		explosion.setExplosionSound(true);
 		explosion.setDamageOwner(false);
 		explosion.setDestroyBlocks(true);
 		explosion.setFireAfterExplosion(true);
-		explosion.setSmokeParticles(new CommonExplosionParticleEffect(2));
+		explosion.setSmokeParticles(new CommonExplosionParticleEffect(7));
 		explosion.setDamageEntities(true);
 		explosion.doExplosion();
 	}
-
+	
 	private void onTickEvent()
 	{
 		if (!this.world.isRemote)
 		{
-			for (int i = 0; i < 15; i++)
+			for (int i = 0; i < 20; i++)
 			{
-				double offsetX = WyMathHelper.randomDouble() / 2;
-				double offsetY = WyMathHelper.randomDouble() / 2;
-				double offsetZ = WyMathHelper.randomDouble() / 2;
+				double offsetX = WyMathHelper.randomDouble();
+				double offsetY = WyMathHelper.randomDouble();
+				double offsetZ = WyMathHelper.randomDouble();
 
 				GenericParticleData data = new GenericParticleData();
 				data.setTexture(ModResources.MERA);
-				data.setLife(10);
+				data.setLife(6);
 				data.setSize(1.3F);
 				((ServerWorld) this.world).spawnParticle(data, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ, 1, 0, 0, 0, 0.0D);
 			}
 
-			for (int i = 0; i < 5; i++)
+			for (int i = 0; i < 2; i++)
 			{
-				double offsetX = WyMathHelper.randomDouble() / 2;
-				double offsetY = WyMathHelper.randomDouble() / 2;
-				double offsetZ = WyMathHelper.randomDouble() / 2;
+				double offsetX = WyMathHelper.randomDouble();
+				double offsetY = WyMathHelper.randomDouble();
+				double offsetZ = WyMathHelper.randomDouble();
 
 				GenericParticleData data = new GenericParticleData();
 				data.setTexture(ModResources.MOKU);
-				data.setLife(7);
+				data.setLife(4);
 				data.setSize(1.2F);
 				((ServerWorld) this.world).spawnParticle(data, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ, 1, 0, 0, 0, 0.0D);
 			}
