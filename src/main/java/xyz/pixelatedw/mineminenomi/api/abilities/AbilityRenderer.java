@@ -1,5 +1,7 @@
 package xyz.pixelatedw.mineminenomi.api.abilities;
 
+import java.awt.Color;
+
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.platform.GlStateManager.DestFactor;
 import com.mojang.blaze3d.platform.GlStateManager.SourceFactor;
@@ -13,11 +15,13 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import xyz.pixelatedw.mineminenomi.Env;
+import xyz.pixelatedw.mineminenomi.api.WyHelper;
 
 @OnlyIn(Dist.CLIENT)
 public class AbilityRenderer extends EntityRenderer<AbilityProjectile>
 {
-	private double scale = 1, red, blue, green, alpha;
+	private double scaleX = 1, scaleY = 1, scaleZ = 1;
+	private double red, blue, green, alpha;
 	private EntityModel model;
 	private ResourceLocation texture;
 
@@ -40,9 +44,11 @@ public class AbilityRenderer extends EntityRenderer<AbilityProjectile>
 		this.alpha = alpha;
 	}
 
-	public void setScale(double scale)
+	public void setScale(double scaleX, double scaleY, double scaleZ)
 	{
-		this.scale = scale;
+		this.scaleX = scaleX;
+		this.scaleY = scaleY;
+		this.scaleZ = scaleZ;
 	}
 
 	@Override
@@ -63,7 +69,7 @@ public class AbilityRenderer extends EntityRenderer<AbilityProjectile>
 			GlStateManager.rotatef(180, 0, 0, 1);
 
 			GlStateManager.color4f((float) this.red, (float) this.green, (float) this.blue, (float) this.alpha);
-			GlStateManager.scaled(this.scale, this.scale, this.scale);
+			GlStateManager.scaled(this.scaleX, this.scaleY, this.scaleZ);
 
 			if (this.texture != null)
 				Minecraft.getInstance().textureManager.bindTexture(this.getEntityTexture(entity));
@@ -87,7 +93,8 @@ public class AbilityRenderer extends EntityRenderer<AbilityProjectile>
 	public static class Factory implements IRenderFactory<AbilityProjectile>
 	{
 		private EntityModel model = new CubeModel();
-		private double scale = 1, red = 1, green = 1, blue = 1, alpha = 1;
+		private double scaleX = 1, scaleY = 1, scaleZ = 1;
+		private double red = 1, green = 1, blue = 1, alpha = 1;
 		private ResourceLocation texture;
 
 		public Factory(EntityModel model)
@@ -109,10 +116,28 @@ public class AbilityRenderer extends EntityRenderer<AbilityProjectile>
 			this.alpha = alpha;
 			return this;
 		}
+		
+		public Factory setColor(String hex)
+		{
+			Color color = WyHelper.hexToRGB(hex);
+			this.red = color.getRed();
+			this.green = color.getGreen();
+			this.blue = color.getBlue();
+			this.alpha = color.getAlpha();
+			return this;
+		}
 
 		public Factory setScale(double scale)
 		{
-			this.scale = scale;
+			this.scaleX = this.scaleY = this.scaleZ = scale;
+			return this;
+		}
+		
+		public Factory setScale(double scaleX, double scaleY, double scaleZ)
+		{
+			this.scaleX = scaleX;
+			this.scaleY = scaleY;
+			this.scaleZ = scaleZ;
 			return this;
 		}
 
@@ -121,7 +146,7 @@ public class AbilityRenderer extends EntityRenderer<AbilityProjectile>
 		{
 			AbilityRenderer renderer = new AbilityRenderer(manager, this.model);
 			renderer.setTexture(this.texture);
-			renderer.setScale(this.scale);
+			renderer.setScale(this.scaleX, this.scaleY, this.scaleZ);
 			renderer.setColor(this.red, this.green, this.blue, this.alpha);
 			return renderer;
 		}

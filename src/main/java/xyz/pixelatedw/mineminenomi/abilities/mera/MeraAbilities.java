@@ -1,8 +1,5 @@
-package xyz.pixelatedw.mineminenomi.abilities;
+package xyz.pixelatedw.mineminenomi.abilities.mera;
 
-import net.minecraft.entity.player.PlayerEntity;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.MeraProjectiles;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
 
 public class MeraAbilities
@@ -17,24 +14,6 @@ public class MeraAbilities
 		ModValues.abilityWebAppExtraParams.put("daienkaientei", new String[] {"desc", "Amasses the user's flames into a gigantic fireball that the user hurls at the opponent."});
 	}
 
-	public static class Higan extends Ability
-	{
-		public Higan() 
-		{
-			super("Higan", Category.DEVIL_FRUIT);
-			this.setMaxCooldown(4);
-			this.setDescription("Turns the user's fingertips into flames and shoots bullets made of fire from them.");
-
-			this.onUseEvent = this::onUseEvent;
-		}
-		
-		private void onUseEvent(PlayerEntity player, Ability ability)
-		{
-			MeraProjectiles.Higan proj = new MeraProjectiles.Higan(player.world, player);
-			player.world.addEntity(proj);
-			proj.shoot(player, player.rotationPitch, player.rotationYaw, 0, 2f, 1);		
-		}
-	}
 
 /*	public static class DaiEnkaiEntei extends Ability
 	{

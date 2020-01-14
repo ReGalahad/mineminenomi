@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.entities.abilityprojectiles;
+package xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.mera;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +17,7 @@ import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityRenderer;
+import xyz.pixelatedw.mineminenomi.api.abilities.CubeModel;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.models.entities.projectiles.FistModel;
@@ -26,57 +27,22 @@ public class MeraProjectiles
 {
 	public static List<AbilityProjectile.Data> projectiles = new ArrayList<AbilityProjectile.Data>();
 	
-	public static final EntityType HIKEN = WyRegistry.registerEntityType("hiken", Hiken::new);
-	public static final EntityType HIGAN = WyRegistry.registerEntityType("higan", Higan::new);
+	public static final EntityType HIKEN = WyRegistry.registerEntityType("hiken", HikenProjectile::new);
+	public static final EntityType HIGAN = WyRegistry.registerEntityType("higan", HiganProjectile::new);
 	public static final EntityType DAI_ENKAI_ENTEI = WyRegistry.registerEntityType("dai_enkai_entei", DaiEnkaiEntei::new);
 	public static final EntityType HIDARUMA = WyRegistry.registerEntityType("hidaruma", Hidaruma::new);
 	public static final EntityType JUJIKA = WyRegistry.registerEntityType("jujika", Jujika::new);
 	
 	private static final AbilityRenderer.Factory HIKEN_FACTORY = new AbilityRenderer.Factory(new FistModel()).setTexture("hiken").setScale(1.5);
-//	private static final AbilityRenderer.Factory HIGAN_FACTORY = new AbilityRenderer.Factory(new CubeModel()).setTexture("hiken").setScale(1.5);
+	private static final AbilityRenderer.Factory HIGAN_FACTORY = new AbilityRenderer.Factory(new CubeModel()).setColor(255, 0, 0, 100).setScale(.5);
 
 	static
 	{
-		projectiles.add(new Data(HIKEN, Hiken.class, HIKEN_FACTORY));
-		/*projectiles.add(new Data(HIGAN, Higan.class, HIKEN_FACTORY));
-		projectiles.put(ModAttributes.DAI_ENKAI_ENTEI, new Data(DAI_ENKAI_ENTEI, DaiEnkaiEntei.class));
+		projectiles.add(new Data(HIKEN, HikenProjectile.class, HIKEN_FACTORY));
+		projectiles.add(new Data(HIGAN, HiganProjectile.class, HIGAN_FACTORY));
+		/*projectiles.put(ModAttributes.DAI_ENKAI_ENTEI, new Data(DAI_ENKAI_ENTEI, DaiEnkaiEntei.class));
 		projectiles.put(ModAttributes.HIDARUMA, new Data(HIDARUMA, Hidaruma.class));
 		projectiles.put(ModAttributes.JUJIKA, new Data(JUJIKA, Jujika.class));*/
-	}
-
-	public static class Hiken extends AbilityProjectile
-	{
-		public Hiken(World world)
-		{super(HIKEN, world);}
-		
-		public Hiken(EntityType type, World world)
-		{super(type, world);}
-		
-		public Hiken(World world, double x, double y, double z)
-		{super(HIKEN, world, x, y, z);}
-		
-		public Hiken(World world, LivingEntity player) 
-		{		
-			super(HIKEN, world, player);
-		}
-	}
-	
-	public static class Higan extends AbilityProjectile
-	{
-		public Higan(World world)
-		{super(HIGAN, world);}
-		
-		public Higan(EntityType type, World world)
-		{super(type, world);}
-		
-		public Higan(World world, double x, double y, double z)
-		{super(HIGAN, world, x, y, z);}
-		
-		public Higan(World world, LivingEntity player) 
-		{		
-			super(HIGAN, world, player);
-		}
-		
 	}
 	
 	public static class DaiEnkaiEntei extends AbilityProjectile

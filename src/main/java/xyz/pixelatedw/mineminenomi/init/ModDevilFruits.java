@@ -9,12 +9,13 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 import xyz.pixelatedw.mineminenomi.EnumFruitType;
 import xyz.pixelatedw.mineminenomi.Env;
+import xyz.pixelatedw.mineminenomi.abilities.mera.HiganAbility;
 import xyz.pixelatedw.mineminenomi.abilities.mera.HikenAbility;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.debug.WyDebug;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.MeraProjectiles;
+import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.mera.MeraProjectiles;
 import xyz.pixelatedw.mineminenomi.items.AkumaNoMiItem;
 
 @Mod.EventBusSubscriber(modid = Env.PROJECT_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -137,7 +138,7 @@ public class ModDevilFruits
 		registerDevilFruit(BaneBaneNoMi, "Bane Bane no Mi");
 		HieHieNoMi = new AkumaNoMiItem(EnumFruitType.LOGIA, HieAbilities.abilitiesArray);
 		registerDevilFruit(HieHieNoMi, "Hie Hie no Mi");*/
-		MeraMeraNoMi = new AkumaNoMiItem(EnumFruitType.LOGIA, HikenAbility.INSTANCE);
+		MeraMeraNoMi = new AkumaNoMiItem(EnumFruitType.LOGIA, HikenAbility.INSTANCE, HiganAbility.INSTANCE);
 		registerDevilFruit(MeraMeraNoMi, "Mera Mera no Mi");        
 		
 		for(AkumaNoMiItem df : ModValues.devilfruits)

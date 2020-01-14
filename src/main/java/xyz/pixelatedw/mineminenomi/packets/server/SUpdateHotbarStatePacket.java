@@ -47,27 +47,26 @@ public class SUpdateHotbarStatePacket
 			{	
 				PlayerEntity player = Minecraft.getInstance().player;
 				IAbilityData props = AbilityDataCapability.get(player);
-				Ability sAbl = null;
-				try
-				{
-					sAbl = (Ability) WyHelper.deserialize(((CompoundNBT)message.data).getByteArray("ability_0"));
-				}
-				catch (ClassNotFoundException | IOException e)
-				{
-					e.printStackTrace();
-				}
-				
+
 				for(int i = 0; i < 8; i++)
 				{
 					if(props.getHotbarAbilities()[i] ==  null)
 						continue;
 					
-					Ability cAbl = props.getAbility(props.getHotbarAbilities()[i]);
-					
-					if(cAbl == null)
-						continue;
-					
-					cAbl.setState(sAbl.getState());
+					try
+					{
+						Ability sAbl = (Ability) WyHelper.deserialize(((CompoundNBT)message.data).getByteArray("ability_" + i));
+						Ability cAbl = props.getAbility(props.getHotbarAbilities()[i]);
+						
+						if(cAbl == null)
+							continue;
+						
+						cAbl.setState(sAbl.getState());
+					}
+					catch (ClassNotFoundException | IOException e)
+					{
+						e.printStackTrace();
+					}
 				}
 			});
 		}

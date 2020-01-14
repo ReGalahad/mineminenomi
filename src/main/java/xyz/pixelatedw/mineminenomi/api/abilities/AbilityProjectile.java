@@ -34,8 +34,8 @@ public class AbilityProjectile extends ThrowableEntity
 	private boolean canPassThroughBlocks = false;
 	
 	// Setting the defaults so that no crash occurs and so they will be null safe.
-	private IOnImpact onImpactEvent = (projectile, hit) -> {};
-	private IOnTick onTickEvent = (projectile) -> {};
+	protected IOnImpact onImpactEvent = (hit) -> {};
+	protected IOnTick onTickEvent = () -> {};
 
 	public AbilityProjectile(EntityType type, World world)
 	{
@@ -110,7 +110,7 @@ public class AbilityProjectile extends ThrowableEntity
 		if (hit.getType() == RayTraceResult.Type.ENTITY && ((EntityRayTraceResult) hit).getEntity() instanceof LivingEntity)
 			this.onImpact(hit);
 		
-		this.getOnTickEvent().onTick(this);
+		this.onTickEvent.onTick();
 	}
 
 	@Override
@@ -131,7 +131,7 @@ public class AbilityProjectile extends ThrowableEntity
 					if(hitDevilFruitProps.isLogia() && this.isPhysical && !throwerHakiDataProps.hasBusoHakiActive())
 						return;
 											
-					this.getOnImpactEvent().onImpact(this, entityHit);
+					this.onImpactEvent.onImpact(entityHit);
 					this.remove();
 				}
 			}
@@ -141,7 +141,7 @@ public class AbilityProjectile extends ThrowableEntity
 	
 				if (!this.canPassThroughBlocks)
 				{										
-					this.getOnImpactEvent().onImpact(this, blockHit);
+					this.onImpactEvent.onImpact(blockHit);
 					this.remove();
 				}
 			}
@@ -236,39 +236,19 @@ public class AbilityProjectile extends ThrowableEntity
 	{
 		this.canPassThroughBlocks = true;
 	}
-	
-	
-	public IOnImpact getOnImpactEvent()
-	{
-		return onImpactEvent;
-	}
 
-	public void setOnImpactEvent(IOnImpact onImpactEvent)
-	{
-		this.onImpactEvent = onImpactEvent;
-	}
-
-	public IOnTick getOnTickEvent()
-	{
-		return onTickEvent;
-	}
-
-	public void setOnTickEvent(IOnTick onTickEvent)
-	{
-		this.onTickEvent = onTickEvent;
-	}
 
 	/*
 	 *	Interfaces
 	 */
 	public interface IOnImpact extends Serializable
 	{
-		void onImpact(AbilityProjectile projectile, RayTraceResult hit);
+		void onImpact(RayTraceResult hit);
 	}
 	
 	public interface IOnTick extends Serializable
 	{
-		void onTick(AbilityProjectile projectile);
+		void onTick();
 	}
 	
 }
