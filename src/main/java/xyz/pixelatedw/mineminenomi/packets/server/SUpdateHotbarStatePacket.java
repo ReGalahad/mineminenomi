@@ -60,7 +60,7 @@ public class SUpdateHotbarStatePacket
 						
 						if(cAbl == null)
 							continue;
-						
+
 						cAbl.setState(sAbl.getState());
 					}
 					catch (ClassNotFoundException | IOException e)

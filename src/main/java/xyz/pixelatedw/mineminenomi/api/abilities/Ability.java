@@ -110,8 +110,7 @@ public abstract class Ability implements Serializable
 	
 	/*
 	 * 	Setters/Getters
-	 */
-	
+	 */	
 	public void setMaxRepearCount(int count, int interval)
 	{
 		this.maxRepeaterCount = count;
@@ -157,6 +156,7 @@ public abstract class Ability implements Serializable
 	/*
 	 * 	Methods
 	 */
+	
 	public void cooldown(PlayerEntity player)
 	{
 		if(player.world.isRemote)
@@ -165,7 +165,7 @@ public abstract class Ability implements Serializable
 		if(this.isOnCooldown() && this.cooldown > 0)
 		{
 			this.cooldown--;
-			
+
 			if(this.repeaterCount > 0 && this.cooldown % this.repeaterInterval == 0)
 			{
 				this.onUseEvent.onUse(player, this);

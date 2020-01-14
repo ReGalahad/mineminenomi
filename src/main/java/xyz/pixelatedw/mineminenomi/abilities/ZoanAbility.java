@@ -1,3 +1,4 @@
+package xyz.pixelatedw.mineminenomi.abilities;
 /*
  * package xyz.pixelatedw.mineminenomi.abilities.extra;
  * import net.minecraft.entity.player.PlayerEntity;

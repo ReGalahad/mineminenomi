@@ -5,6 +5,7 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.Env;
+import xyz.pixelatedw.mineminenomi.abilities.ChargeableAbility;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
@@ -24,10 +25,12 @@ public class AbilitiesEvents
 			{
 				if(ability == null)
 					continue;
-				//if (ability instanceof PassiveAbility)
-				//	((PassiveAbility) ability).tick(player);
-				//else
-				props.getAbility(ability).cooldown(player);
+
+				if(ability instanceof ChargeableAbility && ability.isCharging())
+					((ChargeableAbility) props.getAbility(ability)).charging(player);
+				
+				if(ability.isOnCooldown())
+					props.getAbility(ability).cooldown(player);
 			}
 		}
 	}
