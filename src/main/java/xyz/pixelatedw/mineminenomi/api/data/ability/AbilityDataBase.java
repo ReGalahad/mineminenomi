@@ -71,7 +71,7 @@ public class AbilityDataBase implements IAbilityData
 	@Override
 	public void clearAbilities(Category category)
 	{
-		this.abilities = this.abilities.parallelStream().filter(ability -> ability.getCategory() != category || category == Category.ALL).collect(Collectors.toList());
+		this.abilities = this.abilities.stream().filter(ability -> ability.getCategory() != category && category != Category.ALL).collect(Collectors.toList());
 	}
 
 	@Override

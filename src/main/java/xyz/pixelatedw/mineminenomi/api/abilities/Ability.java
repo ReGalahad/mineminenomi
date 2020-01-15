@@ -162,7 +162,7 @@ public abstract class Ability implements Serializable
 	{
 		if(player.world.isRemote)
 			return;
-
+		
 		if(this.isOnCooldown() && this.cooldown > 0)
 		{
 			this.cooldown--;

@@ -60,6 +60,7 @@ public class EventsAbilityValidation
 								if(!DevilFruitsHelper.verifyIfAbilityIsBanned(a))
 									abilityProps.addAbility(a);
 						}
+						
 						for(Ability a : ((AkumaNoMiItem)df.getItem()).abilities)
 							if(!DevilFruitsHelper.verifyIfAbilityIsBanned(a))
 								abilityProps.addAbility(a);

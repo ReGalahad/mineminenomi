@@ -23,7 +23,7 @@ public class ParticleEffectDaiEnkai2 extends ParticleEffect
 		{
 			t += 0.5 * Math.PI;
 			
-			for(double theta = 0; theta <= 4 * Math.PI; theta += Math.PI / 32)
+			for(double theta = 0; theta <= 4 * Math.PI; theta += Math.PI / 16)
 			{
 				x = t * Math.cos(theta);
 				y = rand.nextInt(1);
@@ -35,23 +35,23 @@ public class ParticleEffectDaiEnkai2 extends ParticleEffect
 
 				GenericParticleData data = new GenericParticleData();
 				data.setTexture(ModResources.MERA);
-				data.setLife(-3);
+				data.setLife(1);
 				data.setSize(1.3F);
 				data.setMotion(motionX, motionY, motionZ);
 				((ServerWorld) world).spawnParticle(data, posX + (x * 1.25) + WyMathHelper.randomDouble(), posY + y, posZ + (z * 1.25) + WyMathHelper.randomDouble(), 1, 0, 0, 0, 0.0D);	
 				
 				data = new GenericParticleData();
 				data.setTexture(ModResources.MERA);
-				data.setLife(1);
+				data.setLife(3);
 				data.setSize(1.3F);
-				data.setMotion(motionX, motionY + 0.05, motionZ);
+				data.setMotion(motionX, motionY + 0.15, motionZ);
 				((ServerWorld) world).spawnParticle(data, posX + (x * 2.0) + WyMathHelper.randomDouble(), posY + y, posZ + (z * 2.0) + WyMathHelper.randomDouble(), 1, 0, 0, 0, 0.0D);	
 
 				data = new GenericParticleData();
 				data.setTexture(ModResources.MERA);
-				data.setLife(3);
+				data.setLife(5);
 				data.setSize(1.3F);
-				data.setMotion(motionX, motionY + 0.05, motionZ);
+				data.setMotion(motionX, motionY + 0.25, motionZ);
 				((ServerWorld) world).spawnParticle(data, posX + (x * 3.25) + WyMathHelper.randomDouble(), posY + y, posZ + (z * 3.25) + WyMathHelper.randomDouble(), 1, 0, 0, 0, 0.0D);	
 			}
 		}

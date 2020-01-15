@@ -35,6 +35,7 @@ import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
 import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
+import xyz.pixelatedw.mineminenomi.packets.client.CDevilFruitSyncPacket;
 
 public class AkumaNoMiItem extends Item
 {
@@ -113,10 +114,13 @@ public class AkumaNoMiItem extends Item
 		if(!eatenFruit.equalsIgnoreCase("yomiyomi"))
 		{
 			for(Ability a : abilities)
-				if(!DevilFruitsHelper.verifyIfAbilityIsBanned(a) && abilityDataProps.getAbility(a) != null)
+				if(!DevilFruitsHelper.verifyIfAbilityIsBanned(a) && abilityDataProps.getAbility(a) == null)
 					abilityDataProps.addAbility(a);
 			if(player instanceof ServerPlayerEntity)
+			{
+				ModNetwork.sendTo(new CDevilFruitSyncPacket(devilFruitProps), (ServerPlayerEntity) player);
 				ModNetwork.sendTo(new CAbilityDataSyncPacket(abilityDataProps), (ServerPlayerEntity)player);
+			}		
 		}
 		
 		itemStack.shrink(1);
