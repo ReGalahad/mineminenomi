@@ -1,10 +1,10 @@
 package xyz.pixelatedw.mineminenomi.particles.effects.mera;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
-import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
+import xyz.pixelatedw.mineminenomi.particles.data.GenericParticleData;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 
 public class ParticleEffectDaiEnkai extends ParticleEffect
@@ -30,17 +30,12 @@ public class ParticleEffectDaiEnkai extends ParticleEffect
 	        motionY *= middlePoint / 2;
 	        motionZ *= middlePoint / 2;
 			
-			SimpleParticle cp = new SimpleParticle(world, ModResources.MERA,
-					posX + offsetX, 
-					posY + 1.5 + offsetY,
-					posZ + offsetZ, 
-					motionX,
-					motionY + 0.05,
-					motionZ)
-					.setParticleScale(1.3F)
-					.setParticleAge(10);
-			Minecraft.getInstance().particles.addEffect(cp);
-	
+			GenericParticleData data = new GenericParticleData();
+			data.setTexture(ModResources.MERA);
+			data.setLife(10);
+			data.setSize(1.3F);
+			data.setMotion(motionX, motionY + 0.05, motionZ);
+			((ServerWorld) world).spawnParticle(data, posX + offsetX, posY + 1.5 + offsetY, posZ + offsetZ, 1, 0, 0, 0, 0.0D);	
 		}
 	}
 

@@ -64,11 +64,11 @@ public class ChargeableAbility extends Ability
 	{
 		if(player.world.isRemote)
 			return;
-		
+				
 		if(this.isCharging() && this.chargeTime > 0)
 		{
 			this.chargeTime--;
-			
+
 			this.duringChargingEvent.duringCharging(player, this.chargeTime);
 		}
 		else if(this.isCharging() && this.chargeTime <= 0)

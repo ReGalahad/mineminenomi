@@ -2,11 +2,11 @@ package xyz.pixelatedw.mineminenomi.particles.effects.mera;
 
 import java.util.Random;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
-import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
+import xyz.pixelatedw.mineminenomi.particles.data.GenericParticleData;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 
 public class ParticleEffectDaiEnkai2 extends ParticleEffect
@@ -33,38 +33,26 @@ public class ParticleEffectDaiEnkai2 extends ParticleEffect
 				motionY = 0.05 + (rand.nextDouble() / 10);
 				motionZ = z / 10;
 
-				SimpleParticle cp = new SimpleParticle(world, ModResources.MERA,
-						posX + (x * 1.25) + WyMathHelper.randomDouble(), 
-						posY + y,
-						posZ + (z * 1.25) + WyMathHelper.randomDouble(), 
-						motionX,
-						motionY,
-						motionZ)
-						.setParticleScale(1.3F)
-						.setParticleAge(-3);
-				Minecraft.getInstance().particles.addEffect(cp);
-
-				cp = new SimpleParticle(world, ModResources.MERA,
-						posX + (x * 2.0) + WyMathHelper.randomDouble(), 
-						posY + y,
-						posZ + (z * 2.0) + WyMathHelper.randomDouble(), 
-						motionX,
-						motionY,
-						motionZ)
-						.setParticleScale(1.3F)
-						.setParticleAge(1);
-				Minecraft.getInstance().particles.addEffect(cp);
+				GenericParticleData data = new GenericParticleData();
+				data.setTexture(ModResources.MERA);
+				data.setLife(-3);
+				data.setSize(1.3F);
+				data.setMotion(motionX, motionY, motionZ);
+				((ServerWorld) world).spawnParticle(data, posX + (x * 1.25) + WyMathHelper.randomDouble(), posY + y, posZ + (z * 1.25) + WyMathHelper.randomDouble(), 1, 0, 0, 0, 0.0D);	
 				
-				cp = new SimpleParticle(world, ModResources.MERA,
-						posX + (x * 3.25) + WyMathHelper.randomDouble(), 
-						posY + y,
-						posZ + (z * 3.25) + WyMathHelper.randomDouble(), 
-						motionX,
-						motionY + 0.1,
-						motionZ)
-						.setParticleScale(1.3F)
-						.setParticleAge(3);
-				Minecraft.getInstance().particles.addEffect(cp);
+				data = new GenericParticleData();
+				data.setTexture(ModResources.MERA);
+				data.setLife(1);
+				data.setSize(1.3F);
+				data.setMotion(motionX, motionY + 0.05, motionZ);
+				((ServerWorld) world).spawnParticle(data, posX + (x * 2.0) + WyMathHelper.randomDouble(), posY + y, posZ + (z * 2.0) + WyMathHelper.randomDouble(), 1, 0, 0, 0, 0.0D);	
+
+				data = new GenericParticleData();
+				data.setTexture(ModResources.MERA);
+				data.setLife(3);
+				data.setSize(1.3F);
+				data.setMotion(motionX, motionY + 0.05, motionZ);
+				((ServerWorld) world).spawnParticle(data, posX + (x * 3.25) + WyMathHelper.randomDouble(), posY + y, posZ + (z * 3.25) + WyMathHelper.randomDouble(), 1, 0, 0, 0, 0.0D);	
 			}
 		}
 	}

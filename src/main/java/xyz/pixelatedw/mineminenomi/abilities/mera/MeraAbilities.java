@@ -15,34 +15,7 @@ public class MeraAbilities
 	}
 
 
-/*	public static class DaiEnkaiEntei extends Ability
-	{
-		public DaiEnkaiEntei() 
-		{
-			super(ModAttributes.DAI_ENKAI_ENTEI); 
-		}
-		
-		@Override
-		public void startCharging(PlayerEntity player)
-		{
-			super.startCharging(player);
-		}
-		
-		@Override
-		public void duringCharging(PlayerEntity player, int currentCharge)
-		{
-			//ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_DAIENKAI2, player), (ServerPlayerEntity) player);
-		}
-		
-		@Override
-		public void endCharging(PlayerEntity player)
-		{						
-			this.projectile = new MeraProjectiles.DaiEnkaiEntei(player.world, player, ModAttributes.DAI_ENKAI_ENTEI);
-			super.endCharging(player);
-		}
-	
-	}
-
+/*
 	public static class Hidaruma extends Ability
 	{
 		public Hidaruma() 
