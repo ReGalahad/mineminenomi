@@ -45,7 +45,8 @@ public abstract class Ability implements Serializable
 		this.onUseEvent.onUse(player, this);
 
 		this.startCooldown();
-		ModNetwork.sendTo(new SUpdateHotbarStatePacket(AbilityDataCapability.get(player)), (ServerPlayerEntity)player);
+		IAbilityData props = AbilityDataCapability.get(player);
+		ModNetwork.sendTo(new SUpdateHotbarStatePacket(props, props.getAbilityPosition(this.getSavedAbility(player))), (ServerPlayerEntity)player);
 	}
 	
 	
@@ -179,7 +180,8 @@ public abstract class Ability implements Serializable
 			this.cooldown = this.maxCooldown;				
 			this.repeaterCount = this.maxRepeaterCount;
 			this.state = State.STANDBY;
-			ModNetwork.sendTo(new SUpdateHotbarStatePacket(AbilityDataCapability.get(player)), (ServerPlayerEntity)player);
+			IAbilityData props = AbilityDataCapability.get(player);
+			ModNetwork.sendTo(new SUpdateHotbarStatePacket(props, props.getAbilityPosition(this.getSavedAbility(player))), (ServerPlayerEntity)player);
 		}
 	}
 	

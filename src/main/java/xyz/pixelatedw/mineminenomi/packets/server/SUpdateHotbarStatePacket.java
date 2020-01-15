@@ -18,59 +18,71 @@ import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
 public class SUpdateHotbarStatePacket
 {
 	private INBT data;
-	
-	public SUpdateHotbarStatePacket() {}
+	private int slotNumber;
 
-	public SUpdateHotbarStatePacket(IAbilityData props)
+	public SUpdateHotbarStatePacket()
+	{
+	}
+
+	public SUpdateHotbarStatePacket(IAbilityData props, int slotNumber)
 	{
 		this.data = new CompoundNBT();
 		this.data = AbilityDataCapability.INSTANCE.getStorage().writeNBT(AbilityDataCapability.INSTANCE, props, null);
+
+		this.slotNumber = slotNumber;
 	}
 
 	public void encode(PacketBuffer buffer)
 	{
 		buffer.writeCompoundTag((CompoundNBT) this.data);
+		buffer.writeInt(this.slotNumber);
 	}
-	
+
 	public static SUpdateHotbarStatePacket decode(PacketBuffer buffer)
 	{
 		SUpdateHotbarStatePacket msg = new SUpdateHotbarStatePacket();
 		msg.data = buffer.readCompoundTag();
+		msg.slotNumber = buffer.readInt();
 		return msg;
 	}
-	
+
 	public static void handle(SUpdateHotbarStatePacket message, final Supplier<NetworkEvent.Context> ctx)
 	{
-		if(ctx.get().getDirection() == NetworkDirection.PLAY_TO_CLIENT)
+		if (ctx.get().getDirection() == NetworkDirection.PLAY_TO_CLIENT)
 		{
 			ctx.get().enqueueWork(() ->
-			{	
+			{
 				PlayerEntity player = Minecraft.getInstance().player;
 				IAbilityData props = AbilityDataCapability.get(player);
+				Ability sAbl = null;
 
-				for(int i = 0; i < 8; i++)
+				try
 				{
-					if(props.getHotbarAbilities()[i] ==  null)
-						continue;
-					
-					try
-					{
-						Ability sAbl = (Ability) WyHelper.deserialize(((CompoundNBT)message.data).getByteArray("ability_" + i));
-						Ability cAbl = props.getAbility(props.getHotbarAbilities()[i]);
-						
-						if(cAbl == null)
-							continue;
+					sAbl = (Ability) WyHelper.deserialize(((CompoundNBT) message.data).getByteArray("ability_" + message.slotNumber));
+				}
+				catch (ClassNotFoundException | IOException e)
+				{
+					e.printStackTrace();
+				}
 
-						cAbl.setState(sAbl.getState());
-					}
-					catch (ClassNotFoundException | IOException e)
-					{
-						e.printStackTrace();
-					}
+				if (sAbl == null)
+					return;
+
+				for (int i = 0; i < 8; i++)
+				{
+					if (props.getHotbarAbilities()[i] == null)
+						continue;
+
+					Ability cAbl = props.getAbility(props.getHotbarAbilities()[i]);
+
+					if (cAbl == null || !cAbl.equals(sAbl))
+						continue;
+
+					cAbl.setState(sAbl.getState());
 				}
 			});
 		}
-		
+
 		ctx.get().setPacketHandled(true);
 	}
 }

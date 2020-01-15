@@ -12,6 +12,8 @@ public interface IAbilityData
 	void removeAbility(Ability abl);
 	Ability getAbility(Ability abl);
 	Ability getAbility(String ablName);
+	int getAbilityPosition(Ability abl);
+	int getAbilityPosition(String ablName);
 	List<Ability> getAbilities(Category category);
 	void clearAbilities(Category category);
 	void clearAbilityFromList(Category category, List<Ability> list); 

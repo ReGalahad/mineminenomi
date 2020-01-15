@@ -6,6 +6,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
+import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
 import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.packets.server.SUpdateHotbarStatePacket;
 
@@ -39,7 +40,8 @@ public class ChargeableAbility extends Ability
 		this.onStartChargingEvent.onStartCharging(player);
 
 		this.startCharging();
-		ModNetwork.sendTo(new SUpdateHotbarStatePacket(AbilityDataCapability.get(player)), (ServerPlayerEntity)player);
+		IAbilityData props = AbilityDataCapability.get(player);
+		ModNetwork.sendTo(new SUpdateHotbarStatePacket(props, props.getAbilityPosition(this)), (ServerPlayerEntity)player);
 	}
 	
 	/*
@@ -74,7 +76,8 @@ public class ChargeableAbility extends Ability
 			this.chargeTime = this.maxChargeTime;				
 			this.startCooldown();
 			this.onEndChargingEvent.onEndCharging(player);
-			ModNetwork.sendTo(new SUpdateHotbarStatePacket(AbilityDataCapability.get(player)), (ServerPlayerEntity)player);
+			IAbilityData props = AbilityDataCapability.get(player);
+			ModNetwork.sendTo(new SUpdateHotbarStatePacket(props, props.getAbilityPosition(this)), (ServerPlayerEntity)player);
 		}
 	}
 	

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability.Category;
@@ -47,6 +48,18 @@ public class AbilityDataBase implements IAbilityData
 	public Ability getAbility(String ablName)
 	{
 		return this.abilities.parallelStream().filter(ability -> ability.getName().equalsIgnoreCase(ablName)).findFirst().orElse(null);
+	}
+	
+	@Override
+	public int getAbilityPosition(Ability abl)
+	{
+		return IntStream.range(0, this.abilities.size()).filter(i -> abilities.get(i).equals(abl)).findFirst().orElse(-1);
+	}
+	
+	@Override
+	public int getAbilityPosition(String ablName)
+	{
+		return IntStream.range(0, this.abilities.size()).filter(i -> abilities.get(i).getName().equalsIgnoreCase(ablName)).findFirst().orElse(-1);
 	}
 
 	@Override
