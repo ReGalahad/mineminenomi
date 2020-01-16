@@ -70,24 +70,24 @@ public class EventsAbilityValidation
 				DevilFruitsHelper.validateRacialMoves(player);
 				DevilFruitsHelper.validateStyleMoves(player);
 				
-				for(Ability a : abilityProps.getAbilities(Category.ALL))
+				/*for(Ability a : abilityProps.getAbilities(Category.ALL))
 				{
-					/*if(Arrays.asList(YomiAbilities.abilitiesArray).contains(a))
+					if(Arrays.asList(YomiAbilities.abilitiesArray).contains(a))
 					{
 						if(!devilFruitProps.getZoanPoint().equalsIgnoreCase("yomi"))
 							abilityProps.removeAbility(a);
-					}*/
-				}
+					}
+				}*/
 				
-				for(int i = 0; i < abilityProps.getHotbarAbilities().length; i++)
+				/*for(int i = 0; i < abilityProps.getHotbarAbilities().length; i++)
 				{
 					//System.out.println(abilityProps.getAbilityInSlot(i));
-					/*if(abilityProps.getAbilityInSlot(i) != null)
+					if(abilityProps.getAbilityInSlot(i) != null)
 					{
 						if(DevilFruitsHelper.verifyIfAbilityIsBanned(abilityProps.getAbilityInSlot(i)))
 							abilityProps.setAbilityInHotbar(i, null);
-					}*/
-				}			
+					}
+				}*/
 								
 				ModNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), entityStatsProps), (ServerPlayerEntity) player);
 				ModNetwork.sendTo(new SDevilFruitSyncPacket(player.getEntityId(), devilFruitProps), (ServerPlayerEntity) player);

@@ -13,6 +13,8 @@ import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
 import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
+import xyz.pixelatedw.mineminenomi.api.network.packets.client.CAbilityDataSyncPacket;
+import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 
 public class SAbilityDataSyncPacket
 {
@@ -56,6 +58,8 @@ public class SAbilityDataSyncPacket
 				
 				IAbilityData abilityDataProps = AbilityDataCapability.get(player);
 				AbilityDataCapability.INSTANCE.getStorage().readNBT(AbilityDataCapability.INSTANCE, abilityDataProps, null, message.data);
+				
+				ModNetwork.sendToServer(new CAbilityDataSyncPacket(abilityDataProps));
 			});	
 		}
 		ctx.get().setPacketHandled(true);

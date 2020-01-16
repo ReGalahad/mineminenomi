@@ -41,7 +41,7 @@ public class AbilityDataBase implements IAbilityData
 	@Override
 	public Ability getAbility(Ability abl)
 	{
-		return this.abilities.parallelStream().filter(ability -> abl.equals(ability)).findFirst().orElse(null);
+		return this.getAbility(abl.getName());
 	}
 	
 	@Override
@@ -53,7 +53,7 @@ public class AbilityDataBase implements IAbilityData
 	@Override
 	public int getAbilityPosition(Ability abl)
 	{
-		return IntStream.range(0, this.abilities.size()).filter(i -> abilities.get(i).equals(abl)).findFirst().orElse(-1);
+		return this.getAbilityPosition(abl.getName());
 	}
 	
 	@Override

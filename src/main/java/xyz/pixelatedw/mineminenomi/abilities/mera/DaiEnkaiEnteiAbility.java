@@ -23,15 +23,9 @@ public class DaiEnkaiEnteiAbility extends ChargeableAbility
 		this.setMaxChargeTime(2);
 		
 		this.duringChargingEvent = this::duringChargingEvent;
-		//this.onStartChargingEvent = this::onStartChargingEvent;
 		this.onEndChargingEvent = this::onEndChargingEvent;
 	}
-/*
-	private void onStartChargingEvent(PlayerEntity player)
-	{
-		System.out.println("@@@@@@");
-	}
-*/
+
 	private void duringChargingEvent(PlayerEntity player, int chargeTime)
 	{
 		if(chargeTime % 2 == 0)

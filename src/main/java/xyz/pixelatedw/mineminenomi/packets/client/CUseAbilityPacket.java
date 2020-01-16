@@ -46,7 +46,7 @@ public class CUseAbilityPacket
 					return;
 				
 				abilityDataProps.getAbility(message.ability).use(player);
-								
+				
 				/*Ability currentAbility = abilityDataProps.getHotbarAbilityFromSlot(message.abilitySlot);
 								
 				if (currentAbility != null)

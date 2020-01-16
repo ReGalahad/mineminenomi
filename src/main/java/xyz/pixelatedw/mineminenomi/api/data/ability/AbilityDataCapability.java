@@ -72,8 +72,8 @@ public class AbilityDataCapability
 					instance.setPreviouslyUsedAbility((Ability) WyHelper.deserialize(props.getByteArray("previouslyUsedAbility")));
 
 					int total = props.getInt("abilitiesOwned");
-					instance.clearAbilities(Category.ALL);
 					
+					instance.clearAbilities(Category.ALL);
 					for (int i = 0; i < total; i++)
 						instance.addAbility((Ability) WyHelper.deserialize(props.getByteArray("ability_" + i)));	
 					
