@@ -7,13 +7,13 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility.Data;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 
 public class SwordsmanProjectiles
 {
-	public static HashMap<AbilityAttribute, AbilityProjectile.Data> projectiles = new HashMap<AbilityAttribute, AbilityProjectile.Data>();
+	public static HashMap<AbilityAttribute, ProjectileAbility.Data> projectiles = new HashMap<AbilityAttribute, ProjectileAbility.Data>();
 	
 	public static final EntityType SANBYAKUROKUJU_POUND_HO = WyRegistry.registerEntityType("sanbyakurokuju_pound_ho", SanbyakurokujuPoundHo::new);
 	public static final EntityType YAKKODORI = WyRegistry.registerEntityType("yakkodori", Yakkodori::new);
@@ -24,7 +24,7 @@ public class SwordsmanProjectiles
 		projectiles.put(ModAttributes.YAKKODORI, new Data(YAKKODORI, Yakkodori.class));
 	}
 	
-	public static class Yakkodori extends AbilityProjectile
+	public static class Yakkodori extends ProjectileAbility
 	{
 		public Yakkodori(World world)
 		{super(YAKKODORI, world);}
@@ -41,7 +41,7 @@ public class SwordsmanProjectiles
 		}
 	}
 	
-	public static class SanbyakurokujuPoundHo extends AbilityProjectile
+	public static class SanbyakurokujuPoundHo extends ProjectileAbility
 	{
 		public SanbyakurokujuPoundHo(World world)
 		{super(SANBYAKUROKUJU_POUND_HO, world);}

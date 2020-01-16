@@ -7,7 +7,7 @@ import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 
 public class BreathDialTileEntity extends TileEntity
 {
-	public static final TileEntityType TILE_ENTITY = WyRegistry.registerTileEntity("breath_dial_block", BreathDialTileEntity::new, ModBlocks.breathDialBlock);
+	public static final TileEntityType TILE_ENTITY = WyRegistry.registerTileEntity("breath_dial_block", BreathDialTileEntity::new, ModBlocks.BREATH_DIAL);
 	
 	public BreathDialTileEntity()
 	{

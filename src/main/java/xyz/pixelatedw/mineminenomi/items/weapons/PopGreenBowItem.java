@@ -42,7 +42,7 @@ public class PopGreenBowItem extends BowItem
 			if (!arrowStack.isEmpty() || flag)
 			{
 				if (arrowStack.isEmpty())
-					arrowStack = new ItemStack(ModItems.popGreen);
+					arrowStack = new ItemStack(ModItems.POP_GREEN);
 
 				float f = getArrowVelocity(i);
 				if (!(f < 0.1D))
@@ -69,7 +69,7 @@ public class PopGreenBowItem extends BowItem
 	@Override
 	public Predicate<ItemStack> getInventoryAmmoPredicate()
 	{
-		return itemStack -> itemStack.getItem() == ModItems.popGreen;
+		return itemStack -> itemStack.getItem() == ModItems.POP_GREEN;
 	}
 
 }

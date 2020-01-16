@@ -13,8 +13,8 @@ import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.abilities.effects.DFEffectNoroSlowness;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility.Data;
 import xyz.pixelatedw.mineminenomi.data.entity.extraeffects.ExtraEffectCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.extraeffects.IExtraEffect;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
@@ -22,7 +22,7 @@ import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 public class NoroProjectiles 
 {
 
-	public static HashMap<AbilityAttribute, AbilityProjectile.Data> projectiles = new HashMap<AbilityAttribute, AbilityProjectile.Data>();
+	public static HashMap<AbilityAttribute, ProjectileAbility.Data> projectiles = new HashMap<AbilityAttribute, ProjectileAbility.Data>();
 	
 	public static final EntityType NORO_NORO_BEAM = WyRegistry.registerEntityType("noro_noro_beam", NoroNoroBeam::new);
 	
@@ -31,7 +31,7 @@ public class NoroProjectiles
 		projectiles.put(ModAttributes.NORO_NORO_BEAM, new Data(NORO_NORO_BEAM, NoroNoroBeam.class));
 	}
 	
-	public static class NoroNoroBeam extends AbilityProjectile
+	public static class NoroNoroBeam extends ProjectileAbility
 	{
 		public NoroNoroBeam(World world)
 		{super(NORO_NORO_BEAM, world);}

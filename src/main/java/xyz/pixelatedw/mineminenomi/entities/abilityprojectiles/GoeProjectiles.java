@@ -9,14 +9,14 @@ import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
-import xyz.pixelatedw.mineminenomi.api.abilities.extra.AbilityExplosion;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility.Data;
+import xyz.pixelatedw.mineminenomi.api.abilities.extra.ExplosionAbility;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 
 public class GoeProjectiles 
 {
-	public static HashMap<AbilityAttribute, AbilityProjectile.Data> projectiles = new HashMap<AbilityAttribute, AbilityProjectile.Data>();
+	public static HashMap<AbilityAttribute, ProjectileAbility.Data> projectiles = new HashMap<AbilityAttribute, ProjectileAbility.Data>();
 		
 	public static final EntityType TODOROKI = WyRegistry.registerEntityType("todoroki", Todoroki::new);
 	
@@ -25,7 +25,7 @@ public class GoeProjectiles
 		projectiles.put(ModAttributes.TODOROKI, new Data(TODOROKI, Todoroki.class));
 	}
 	
-	public static class Todoroki extends AbilityProjectile
+	public static class Todoroki extends ProjectileAbility
 	{
 		public Todoroki(World world)
 		{super(TODOROKI, world);}
@@ -44,7 +44,7 @@ public class GoeProjectiles
 		@Override
 		public void tasksImapct(RayTraceResult hit)
 		{
-			AbilityExplosion explosion = WyHelper.newExplosion(this.getThrower(), this.posX, this.posY, this.posZ, 3);
+			ExplosionAbility explosion = WyHelper.newExplosion(this.getThrower(), this.posX, this.posY, this.posZ, 3);
 			explosion.setDamageOwner(false);
 			//explosion.setSmokeParticles("");
 			explosion.doExplosion();

@@ -7,14 +7,14 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility.Data;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 
 public class SukeProjectiles 
 {
 
-	public static HashMap<AbilityAttribute, AbilityProjectile.Data> projectiles = new HashMap<AbilityAttribute, AbilityProjectile.Data>();
+	public static HashMap<AbilityAttribute, ProjectileAbility.Data> projectiles = new HashMap<AbilityAttribute, ProjectileAbility.Data>();
 
 	public static final EntityType SHISA_NO_TE = WyRegistry.registerEntityType("shisha_no_te", ShishaNoTe::new);
 	
@@ -23,7 +23,7 @@ public class SukeProjectiles
 		projectiles.put(ModAttributes.SHISHA_NO_TE, new Data(SHISA_NO_TE, ShishaNoTe.class));
 	}
 	
-	public static class ShishaNoTe extends AbilityProjectile
+	public static class ShishaNoTe extends ProjectileAbility
 	{
 		public ShishaNoTe(World world)
 		{super(SHISA_NO_TE, world);}

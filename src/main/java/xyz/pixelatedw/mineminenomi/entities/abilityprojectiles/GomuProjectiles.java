@@ -16,8 +16,8 @@ import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.WyHelper.Direction;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility.Data;
 import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
 import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
@@ -26,7 +26,7 @@ import xyz.pixelatedw.mineminenomi.init.ModExtraAttributes;
 public class GomuProjectiles
 {
 
-	public static HashMap<AbilityAttribute, AbilityProjectile.Data> projectiles = new HashMap<AbilityAttribute, AbilityProjectile.Data>();
+	public static HashMap<AbilityAttribute, ProjectileAbility.Data> projectiles = new HashMap<AbilityAttribute, ProjectileAbility.Data>();
 
 	public static final EntityType GOMU_GOMU_NO_ROCKET = WyRegistry.registerEntityType("gomu_gomu_no_rocket", GomuGomuNoRocket::new);
 	
@@ -65,7 +65,7 @@ public class GomuProjectiles
 		projectiles.put(ModExtraAttributes.GOMU_GOMU_NO_KONG_ORGAN, new Data(GOMU_GOMU_NO_KONG_ORGAN, GomuGomuNoKongOrgan.class));
 	}
 
-	public static class GomuGomuNoRocket extends AbilityProjectile
+	public static class GomuGomuNoRocket extends ProjectileAbility
 	{
 		public GomuGomuNoRocket(World world)
 		{
@@ -139,7 +139,7 @@ public class GomuProjectiles
 		}
 	}
 
-	public static class GomuGomuNoKongOrgan extends AbilityProjectile
+	public static class GomuGomuNoKongOrgan extends ProjectileAbility
 	{
 		public GomuGomuNoKongOrgan(World world)
 		{
@@ -160,7 +160,7 @@ public class GomuProjectiles
 		}
 	}
 
-	public static class GomuGomuNoElephantGatling extends AbilityProjectile
+	public static class GomuGomuNoElephantGatling extends ProjectileAbility
 	{
 		public GomuGomuNoElephantGatling(World world)
 		{
@@ -181,7 +181,7 @@ public class GomuProjectiles
 		}
 	}
 
-	public static class GomuGomuNoJetGatling extends AbilityProjectile
+	public static class GomuGomuNoJetGatling extends ProjectileAbility
 	{
 		public GomuGomuNoJetGatling(World world)
 		{
@@ -217,7 +217,7 @@ public class GomuProjectiles
 		}
 	}
 
-	public static class GomuGomuNoGatling extends AbilityProjectile
+	public static class GomuGomuNoGatling extends ProjectileAbility
 	{
 		public GomuGomuNoGatling(World world)
 		{
@@ -238,7 +238,7 @@ public class GomuProjectiles
 		}
 	}
 
-	public static class GomuGomuNoLeoBazooka extends AbilityProjectile
+	public static class GomuGomuNoLeoBazooka extends ProjectileAbility
 	{
 		public GomuGomuNoLeoBazooka(World world)
 		{
@@ -286,7 +286,7 @@ public class GomuProjectiles
 		}
 	}
 
-	public static class GomuGomuNoGrizzlyMagnum extends AbilityProjectile
+	public static class GomuGomuNoGrizzlyMagnum extends ProjectileAbility
 	{
 		public GomuGomuNoGrizzlyMagnum(World world)
 		{
@@ -334,7 +334,7 @@ public class GomuProjectiles
 		}
 	}
 
-	public static class GomuGomuNoJetBazooka extends AbilityProjectile
+	public static class GomuGomuNoJetBazooka extends ProjectileAbility
 	{
 		public GomuGomuNoJetBazooka(World world)
 		{
@@ -397,7 +397,7 @@ public class GomuProjectiles
 		}
 	}
 
-	public static class GomuGomuNoBazooka extends AbilityProjectile
+	public static class GomuGomuNoBazooka extends ProjectileAbility
 	{
 		public GomuGomuNoBazooka(World world)
 		{
@@ -445,7 +445,7 @@ public class GomuProjectiles
 		}
 	}
 
-	public static class GomuGomuNoPistol extends AbilityProjectile
+	public static class GomuGomuNoPistol extends ProjectileAbility
 	{
 		public GomuGomuNoPistol(World world)
 		{
@@ -466,7 +466,7 @@ public class GomuProjectiles
 		}
 	}
 
-	public static class GomuGomuNoJetPistol extends AbilityProjectile
+	public static class GomuGomuNoJetPistol extends ProjectileAbility
 	{
 		public GomuGomuNoJetPistol(World world)
 		{
@@ -502,7 +502,7 @@ public class GomuProjectiles
 		}
 	}
 
-	public static class GomuGomuNoElephantGun extends AbilityProjectile
+	public static class GomuGomuNoElephantGun extends ProjectileAbility
 	{
 		public GomuGomuNoElephantGun(World world)
 		{
@@ -523,7 +523,7 @@ public class GomuProjectiles
 		}
 	}
 
-	public static class GomuGomuNoKongGun extends AbilityProjectile
+	public static class GomuGomuNoKongGun extends ProjectileAbility
 	{
 		public GomuGomuNoKongGun(World world)
 		{

@@ -15,15 +15,15 @@ import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility.Data;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.CustomParticleData;
 
 public class JuryoProjectiles
 {
-	public static HashMap<AbilityAttribute, AbilityProjectile.Data> projectiles = new HashMap<AbilityAttribute, AbilityProjectile.Data>();
+	public static HashMap<AbilityAttribute, ProjectileAbility.Data> projectiles = new HashMap<AbilityAttribute, ProjectileAbility.Data>();
 	
 	public static final EntityType SAGARI_NO_RYUSEI = WyRegistry.registerEntityType("sagari_no_ryusei", SagariNoRyusei::new);
 	public static final EntityType MOKO = WyRegistry.registerEntityType("moko", Moko::new);
@@ -34,7 +34,7 @@ public class JuryoProjectiles
 		projectiles.put(ModAttributes.MOKO, new Data(MOKO, Moko.class));
 	}
 	
-	public static class Moko extends AbilityProjectile
+	public static class Moko extends ProjectileAbility
 	{
 		public Moko(World world)
 		{super(MOKO, world);}
@@ -108,7 +108,7 @@ public class JuryoProjectiles
 	}
 	
 	/**FORGOLD Some particle effects, maybe some dark smoke */
-	public static class SagariNoRyusei extends AbilityProjectile
+	public static class SagariNoRyusei extends ProjectileAbility
 	{
 		public SagariNoRyusei(World world)
 		{super(SAGARI_NO_RYUSEI, world);}

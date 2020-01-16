@@ -20,7 +20,7 @@ public class RejectDialItem extends BlockItem
 
 	public RejectDialItem()
 	{
-		super(ModBlocks.rejectDialBlock, new Properties().group(ModCreativeTabs.MISC).maxStackSize(16));
+		super(ModBlocks.REJECT_DIAL, new Properties().group(ModCreativeTabs.MISC).maxStackSize(16));
 	}
 
 	@Override

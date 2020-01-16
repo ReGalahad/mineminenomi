@@ -14,9 +14,9 @@ import net.minecraftforge.event.entity.living.EnderTeleportEvent;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
-import xyz.pixelatedw.mineminenomi.api.abilities.extra.AbilityExplosion;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility.Data;
+import xyz.pixelatedw.mineminenomi.api.abilities.extra.ExplosionAbility;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.ExtraProjectiles.EntityCloud;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
@@ -25,7 +25,7 @@ import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 public class DokuProjectiles 
 {
 
-	public static HashMap<AbilityAttribute, AbilityProjectile.Data> projectiles = new HashMap<AbilityAttribute, AbilityProjectile.Data>();
+	public static HashMap<AbilityAttribute, ProjectileAbility.Data> projectiles = new HashMap<AbilityAttribute, ProjectileAbility.Data>();
 	
 	public static final EntityType CHLORO_BALL = WyRegistry.registerEntityType("chloro_ball", ChloroBall::new);
 	public static final EntityType HYDRA = WyRegistry.registerEntityType("hydra", Hydra::new);
@@ -38,7 +38,7 @@ public class DokuProjectiles
 		projectiles.put(ModAttributes.VENOM_ROAD, new Data(VENOM_ROAD, VenomRoad.class));
 	}
 		
-	public static class VenomRoad extends AbilityProjectile
+	public static class VenomRoad extends ProjectileAbility
 	{
 		public VenomRoad(World world)
 		{super(VENOM_ROAD, world);}
@@ -72,7 +72,7 @@ public class DokuProjectiles
 		}
 	}
 	
-	public static class ChloroBall extends AbilityProjectile
+	public static class ChloroBall extends ProjectileAbility
 	{
 		public ChloroBall(World world)
 		{super(CHLORO_BALL, world);}
@@ -98,10 +98,10 @@ public class DokuProjectiles
 					double offsetX = new Random().nextInt(5) - 3;
 					double offsetZ = new Random().nextInt(5) - 3;
 					
-					WyHelper.placeBlockIfAllowed(world, (this.posX + offsetX), this.posY, (this.posZ + offsetZ), ModBlocks.poison, "air", "foliage");
+					WyHelper.placeBlockIfAllowed(world, (this.posX + offsetX), this.posY, (this.posZ + offsetZ), ModBlocks.POISON, "air", "foliage");
 				}
 				
-				AbilityExplosion explosion = WyHelper.newExplosion(this.getThrower(), this.posX, this.posY, this.posZ, 2.2F);
+				ExplosionAbility explosion = WyHelper.newExplosion(this.getThrower(), this.posX, this.posY, this.posZ, 2.2F);
 				explosion.setExplosionSound(false);
 				explosion.setDestroyBlocks(false);
 				explosion.setDamageOwner(false);
@@ -146,7 +146,7 @@ public class DokuProjectiles
 		}
 	}
 	
-	public static class Hydra extends AbilityProjectile
+	public static class Hydra extends ProjectileAbility
 	{
 		public Hydra(World world)
 		{super(HYDRA, world);}

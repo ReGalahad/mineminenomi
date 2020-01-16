@@ -19,7 +19,7 @@ import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 public class TorikagoTileEntity extends TileEntity implements ITickableTileEntity
 {
 
-	public static final TileEntityType TILE_ENTITY = WyRegistry.registerTileEntity("torikago", TorikagoTileEntity::new, ModBlocks.stringMid);
+	public static final TileEntityType TILE_ENTITY = WyRegistry.registerTileEntity("torikago", TorikagoTileEntity::new, ModBlocks.STRING_MID);
 
 	public TorikagoTileEntity()
 	{
@@ -51,7 +51,7 @@ public class TorikagoTileEntity extends TileEntity implements ITickableTileEntit
 		for (int i = -22; i < 22; i++)
 			for (int k = -21; k < 21; k++)
 				for (int j = -22; j < 22; j++)
-					if (world.getBlockState(new BlockPos(this.getPos().getX() + i, this.getPos().getY() + k, this.getPos().getZ() + j)).getBlock() == ModBlocks.stringWall)
+					if (world.getBlockState(new BlockPos(this.getPos().getX() + i, this.getPos().getY() + k, this.getPos().getZ() + j)).getBlock() == ModBlocks.STRING_WALL)
 						world.setBlockState(new BlockPos(this.getPos().getX() + i, this.getPos().getY() + k, this.getPos().getZ() + j), Blocks.AIR.getDefaultState());
 		world.setBlockState(new BlockPos(this.getPos().getX(), this.getPos().getY(), this.getPos().getZ()), Blocks.AIR.getDefaultState());
 	}

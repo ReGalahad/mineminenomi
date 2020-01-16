@@ -7,13 +7,13 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility.Data;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 
 public class SupaProjectiles
 {
-	public static HashMap<AbilityAttribute, AbilityProjectile.Data> projectiles = new HashMap<AbilityAttribute, AbilityProjectile.Data>();
+	public static HashMap<AbilityAttribute, ProjectileAbility.Data> projectiles = new HashMap<AbilityAttribute, ProjectileAbility.Data>();
 	
 	public static final EntityType SPIRAL_HOLLOW = WyRegistry.registerEntityType("spiral_hollow", SpiralHollow::new);
 	
@@ -22,7 +22,7 @@ public class SupaProjectiles
 		projectiles.put(ModAttributes.SPIRAL_HOLLOW, new Data(SPIRAL_HOLLOW, SpiralHollow.class));
 	}
 	
-	public static class SpiralHollow extends AbilityProjectile
+	public static class SpiralHollow extends ProjectileAbility
 	{
 		public SpiralHollow(World world)
 		{super(SPIRAL_HOLLOW, world);}

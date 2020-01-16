@@ -4,7 +4,7 @@ import java.util.List;
 
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.WantedPosterPackageTileEntity;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.WantedPosterTileEntity;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.dials.AxeDialTileEntity;
@@ -47,7 +47,7 @@ public class ModRenderers
     public static void registerRenderers() 
     {
     	// Projectiles
-    	for(List<AbilityProjectile.Data> list : ModDevilFruits.ALL_PROJECTILES)
+    	for(List<ProjectileAbility.Data> list : ModDevilFruits.ALL_PROJECTILES)
     	{
     		list.forEach((value) -> 
     		{

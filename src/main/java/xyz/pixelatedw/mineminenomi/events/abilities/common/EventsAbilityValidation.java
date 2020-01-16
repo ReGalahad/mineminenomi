@@ -40,8 +40,8 @@ public class EventsAbilityValidation
 			
 			if (!player.world.isRemote)
 			{
-				if (!entityStatsProps.hasRace() && !entityStatsProps.hasFaction() && !entityStatsProps.hasFightingStyle() && !player.inventory.hasItemStack(new ItemStack(ModItems.characterCreator)))
-					player.inventory.addItemStackToInventory(new ItemStack(ModItems.characterCreator, 1));
+				if (!entityStatsProps.hasRace() && !entityStatsProps.hasFaction() && !entityStatsProps.hasFightingStyle() && !player.inventory.hasItemStack(new ItemStack(ModItems.CHARACTER_CREATOR)))
+					player.inventory.addItemStackToInventory(new ItemStack(ModItems.CHARACTER_CREATOR, 1));
 				
 				if(!WyHelper.isNullOrEmpty(devilFruitProps.getDevilFruit()))
 				{

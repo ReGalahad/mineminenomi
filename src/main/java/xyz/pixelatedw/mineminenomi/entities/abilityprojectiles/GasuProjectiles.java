@@ -7,8 +7,8 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility.Data;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.CustomParticleData;
@@ -16,7 +16,7 @@ import xyz.pixelatedw.mineminenomi.particles.CustomParticleData;
 public class GasuProjectiles 
 {
 
-	public static HashMap<AbilityAttribute, AbilityProjectile.Data> projectiles = new HashMap<AbilityAttribute, AbilityProjectile.Data>();
+	public static HashMap<AbilityAttribute, ProjectileAbility.Data> projectiles = new HashMap<AbilityAttribute, ProjectileAbility.Data>();
 	
 	public static final EntityType GASTILLE = WyRegistry.registerEntityType("gastille", Gastille::new);
 	public static final EntityType GAS_ROBE = WyRegistry.registerEntityType("gas_robe", GasRobe::new);
@@ -27,7 +27,7 @@ public class GasuProjectiles
 		projectiles.put(ModAttributes.GAS_ROBE, new Data(GAS_ROBE, GasRobe.class));
 	}
 	
-	public static class Gastille extends AbilityProjectile
+	public static class Gastille extends ProjectileAbility
 	{
 		public Gastille(World world)
 		{super(GAS_ROBE, world);}
@@ -44,7 +44,7 @@ public class GasuProjectiles
 		}	
 	}
 	
-	public static class GasRobe extends AbilityProjectile
+	public static class GasRobe extends ProjectileAbility
 	{
 		public GasRobe(World world)
 		{super(GASTILLE, world);}

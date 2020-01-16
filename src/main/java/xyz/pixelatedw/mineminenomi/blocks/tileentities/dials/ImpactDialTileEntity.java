@@ -7,7 +7,7 @@ import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 
 public class ImpactDialTileEntity extends TileEntity
 {
-	public static final TileEntityType TILE_ENTITY = WyRegistry.registerTileEntity("impact_dial_block", ImpactDialTileEntity::new, ModBlocks.impactDialBlock);
+	public static final TileEntityType TILE_ENTITY = WyRegistry.registerTileEntity("impact_dial_block", ImpactDialTileEntity::new, ModBlocks.IMPACT_DIAL);
 	
 	public ImpactDialTileEntity()
 	{

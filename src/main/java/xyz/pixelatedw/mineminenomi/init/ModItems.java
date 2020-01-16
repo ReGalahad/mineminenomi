@@ -21,60 +21,56 @@ public class ModItems
 {
 
 	// Random stuff
-	public static Item characterCreator = new CharacterCreatorItem();
-	public static Item kairoseki = new Item(new Properties().group(ModCreativeTabs.MISC));
-	public static Item denseKairoseki = new Item(new Properties().group(ModCreativeTabs.MISC));
-	public static Item blackMetal = new Item(new Properties().group(ModCreativeTabs.MISC));
-	public static Item shadow = new Item(new Properties().group(ModCreativeTabs.MISC));
-	public static Item heart = new HeartItem();
-	public static Item bellyPouch = new BellyPouchItem();
-	public static Item key = new Item(new Properties().group(ModCreativeTabs.MISC));
+	public static final Item CHARACTER_CREATOR = new CharacterCreatorItem();
+	public static final Item KAIROSEKI = new Item(new Properties().group(ModCreativeTabs.MISC));
+	public static final Item DENSE_KAIROSEKI = new Item(new Properties().group(ModCreativeTabs.MISC));
+	public static final Item BLACK_METAL = new Item(new Properties().group(ModCreativeTabs.MISC));
+	public static final Item SHADOW = new Item(new Properties().group(ModCreativeTabs.MISC));
+	public static final Item HEART = new HeartItem();
+	public static final Item BELLY_POUCH = new BellyPouchItem();
+	public static final Item KEY = new Item(new Properties().group(ModCreativeTabs.MISC));
 	
 	// Devil Fruit Boxes
-	public static Item woodBox;
-	public static Item ironBox;
-	public static Item goldBox;
+	public static final Item TIER_1_BOX = new AkumaNoMiBoxItem(1);
+	public static final Item TIER_2_BOX = new AkumaNoMiBoxItem(2);
+	public static final Item TIER_3_BOX = new AkumaNoMiBoxItem(3);
 	
 	// Food
-	public static Item seaKingMeat = new SeaKingMeatItem();
-	public static Item cola = new ColaItem();
-	public static Item ultraCola = new UltraColaItem();
+	public static final Item SEA_KING_MEAT = new SeaKingMeatItem();
+	public static final Item COLA = new ColaItem();
+	public static final Item ULTRA_COLA = new UltraColaItem();
 		
 	// Ammo
-	public static Item bullets = new Item(new Properties().group(ModCreativeTabs.MISC));
-	public static Item kairosekiBullets = new Item(new Properties().group(ModCreativeTabs.MISC));
-	public static Item kujaArrow = new Item(new Properties().group(ModCreativeTabs.MISC));
-	public static Item popGreen = new Item(new Properties().group(ModCreativeTabs.MISC));
+	public static final Item BULLET = new Item(new Properties().group(ModCreativeTabs.MISC));
+	public static final Item KAIROSEKI_BULLET = new Item(new Properties().group(ModCreativeTabs.MISC));
+	public static final Item KUJA_ARROW = new Item(new Properties().group(ModCreativeTabs.MISC));
+	public static final Item POP_GREEN = new Item(new Properties().group(ModCreativeTabs.MISC));
 
 	@SubscribeEvent
     public static void registerItems(final RegistryEvent.Register<Item> event)
     {
 		if (!event.getName().equals(ForgeRegistries.ITEMS.getRegistryName())) return;
-		
-		woodBox = new AkumaNoMiBoxItem(1);
-		ironBox = new AkumaNoMiBoxItem(2);
-		goldBox = new AkumaNoMiBoxItem(3);
 
         event.getRegistry().registerAll
         (
-        	WyRegistry.registerItem(kairoseki, "Kairoseki"),
-        	WyRegistry.registerItem(denseKairoseki, "Dense Kairoseki"),
-        	WyRegistry.registerItem(blackMetal, "Black Metal"),
-        	WyRegistry.registerItem(shadow, "Shadow"),
-        	WyRegistry.registerItem(key, "Key"),
-        	WyRegistry.registerItem(characterCreator, "Character Creator"),
-        	WyRegistry.registerItem(bellyPouch, "Belly Pouch"),
-        	WyRegistry.registerItem(seaKingMeat, "Sea King Meat"),
-        	WyRegistry.registerItem(cola, "Cola"),
-        	WyRegistry.registerItem(ultraCola, "Ultra Cola"),
-        	WyRegistry.registerItem(heart, "Heart"),
-        	WyRegistry.registerItem(bullets, "Bullet"),
-        	WyRegistry.registerItem(kairosekiBullets, "Kairoseki Bullet"),
-        	WyRegistry.registerItem(kujaArrow, "Kuja Arrow"),
-        	WyRegistry.registerItem(popGreen, "Pop Green"),
-        	WyRegistry.registerItem(woodBox, "Wooden Box"),
-        	WyRegistry.registerItem(ironBox, "Iron Box"),
-        	WyRegistry.registerItem(goldBox, "Golden Box")
+        	WyRegistry.registerItem(KAIROSEKI, "Kairoseki"),
+        	WyRegistry.registerItem(DENSE_KAIROSEKI, "Dense Kairoseki"),
+        	WyRegistry.registerItem(BLACK_METAL, "Black Metal"),
+        	WyRegistry.registerItem(SHADOW, "Shadow"),
+        	WyRegistry.registerItem(KEY, "Key"),
+        	WyRegistry.registerItem(CHARACTER_CREATOR, "Character Creator"),
+        	WyRegistry.registerItem(BELLY_POUCH, "Belly Pouch"),
+        	WyRegistry.registerItem(SEA_KING_MEAT, "Sea King Meat"),
+        	WyRegistry.registerItem(COLA, "Cola"),
+        	WyRegistry.registerItem(ULTRA_COLA, "Ultra Cola"),
+        	WyRegistry.registerItem(HEART, "Heart"),
+        	WyRegistry.registerItem(BULLET, "Bullet"),
+        	WyRegistry.registerItem(KAIROSEKI_BULLET, "Kairoseki Bullet"),
+        	WyRegistry.registerItem(KUJA_ARROW, "Kuja Arrow"),
+        	WyRegistry.registerItem(POP_GREEN, "Pop Green"),
+        	WyRegistry.registerItem(TIER_1_BOX, "Wooden Box"),
+        	WyRegistry.registerItem(TIER_2_BOX, "Iron Box"),
+        	WyRegistry.registerItem(TIER_3_BOX, "Golden Box")
         );
     }
 }

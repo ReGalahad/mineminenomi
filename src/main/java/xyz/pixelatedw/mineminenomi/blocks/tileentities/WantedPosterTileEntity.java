@@ -11,7 +11,7 @@ import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 
 public class WantedPosterTileEntity extends TileEntity
 {
-	public static final TileEntityType TILE_ENTITY = WyRegistry.registerTileEntity("wanted_poster", WantedPosterTileEntity::new, ModBlocks.wantedPoster);
+	public static final TileEntityType TILE_ENTITY = WyRegistry.registerTileEntity("wanted_poster", WantedPosterTileEntity::new, ModBlocks.WANTED_POSTER);
 
 	private String uuid = "";
 	private String entityName = "";

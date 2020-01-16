@@ -7,7 +7,7 @@ import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 
 public class MilkyDialTileEntity extends TileEntity
 {
-	public static final TileEntityType TILE_ENTITY = WyRegistry.registerTileEntity("milky_dial_block", MilkyDialTileEntity::new, ModBlocks.milkyDialBlock);
+	public static final TileEntityType TILE_ENTITY = WyRegistry.registerTileEntity("milky_dial_block", MilkyDialTileEntity::new, ModBlocks.MILKY_DIAL);
 	
 	public MilkyDialTileEntity()
 	{

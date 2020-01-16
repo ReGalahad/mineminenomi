@@ -7,7 +7,7 @@ import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 
 public class AxeDialTileEntity extends TileEntity
 {
-	public static final TileEntityType TILE_ENTITY = WyRegistry.registerTileEntity("axe_dial_block", AxeDialTileEntity::new, ModBlocks.axeDialBlock);
+	public static final TileEntityType TILE_ENTITY = WyRegistry.registerTileEntity("axe_dial_block", AxeDialTileEntity::new, ModBlocks.AXE_DIAL);
 	
 	public AxeDialTileEntity()
 	{

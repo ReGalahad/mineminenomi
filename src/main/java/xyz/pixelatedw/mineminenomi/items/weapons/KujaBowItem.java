@@ -42,7 +42,7 @@ public class KujaBowItem extends BowItem
 			if (!arrowStack.isEmpty() || flag)
 			{
 				if (arrowStack.isEmpty())
-					arrowStack = new ItemStack(ModItems.kujaArrow);
+					arrowStack = new ItemStack(ModItems.KUJA_ARROW);
 
 				float f = getArrowVelocity(i);
 				if (!(f < 0.1D))
@@ -69,7 +69,7 @@ public class KujaBowItem extends BowItem
 	@Override
 	public Predicate<ItemStack> getInventoryAmmoPredicate()
 	{
-		return itemStack -> itemStack.getItem() == ModItems.kujaArrow;
+		return itemStack -> itemStack.getItem() == ModItems.KUJA_ARROW;
 	}
 
 }

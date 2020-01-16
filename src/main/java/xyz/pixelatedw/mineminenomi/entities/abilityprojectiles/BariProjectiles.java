@@ -7,15 +7,15 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility.Data;
 import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 
 public class BariProjectiles 
 {
-	public static HashMap<AbilityAttribute, AbilityProjectile.Data> projectiles = new HashMap<AbilityAttribute, AbilityProjectile.Data>();
+	public static HashMap<AbilityAttribute, ProjectileAbility.Data> projectiles = new HashMap<AbilityAttribute, ProjectileAbility.Data>();
 	
 	public static final EntityType BARRIER_CRASH = WyRegistry.registerEntityType("barrier_crash", BarrierCrash::new);
 	public static final EntityType BARRIERBILITY_STAIRS = WyRegistry.registerEntityType("barrierbility_stairs", BarrierbilityStairs::new);
@@ -26,7 +26,7 @@ public class BariProjectiles
 		projectiles.put(ModAttributes.BARRIERBILITY_STAIRS, new Data(BARRIERBILITY_STAIRS, BarrierbilityStairs.class));
 	}
 	
-	public static class BarrierbilityStairs extends AbilityProjectile
+	public static class BarrierbilityStairs extends ProjectileAbility
 	{
 		public BarrierbilityStairs(World world)
 		{super(BARRIERBILITY_STAIRS, world);}
@@ -70,7 +70,7 @@ public class BariProjectiles
 		}
 	}	
 	
-	public static class BarrierCrash extends AbilityProjectile
+	public static class BarrierCrash extends ProjectileAbility
 	{
 		public BarrierCrash(World world)
 		{super(BARRIER_CRASH, world);}

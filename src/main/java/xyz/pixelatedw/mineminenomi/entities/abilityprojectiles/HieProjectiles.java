@@ -13,8 +13,8 @@ import xyz.pixelatedw.mineminenomi.abilities.effects.DFEffectHieSlowness;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility.Data;
 import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
@@ -24,7 +24,7 @@ import xyz.pixelatedw.mineminenomi.particles.CustomParticleData;
 public class HieProjectiles 
 {
 
-	public static HashMap<AbilityAttribute, AbilityProjectile.Data> projectiles = new HashMap<AbilityAttribute, AbilityProjectile.Data>();
+	public static HashMap<AbilityAttribute, ProjectileAbility.Data> projectiles = new HashMap<AbilityAttribute, ProjectileAbility.Data>();
 	
 	public static final EntityType ICE_BALL = WyRegistry.registerEntityType("ice_ball", IceBall::new);
 	public static final EntityType ICE_BLOCK_PARTISAN = WyRegistry.registerEntityType("ice_block_partisan", IceBlockPartisan::new);
@@ -37,7 +37,7 @@ public class HieProjectiles
 		projectiles.put(ModAttributes.ICE_BLOCK_PHEASANT, new Data(ICE_BLOCK_PHEASANT, IceBlockPheasant.class));
 	}
 	
-	public static class IceBlockPheasant extends AbilityProjectile
+	public static class IceBlockPheasant extends ProjectileAbility
 	{
 		public IceBlockPheasant(World world)
 		{super(ICE_BLOCK_PHEASANT, world);}
@@ -93,7 +93,7 @@ public class HieProjectiles
 		}
 	}	
 	
-	public static class IceBlockPartisan extends AbilityProjectile
+	public static class IceBlockPartisan extends ProjectileAbility
 	{
 		public IceBlockPartisan(World world)
 		{super(ICE_BLOCK_PARTISAN, world);}
@@ -148,7 +148,7 @@ public class HieProjectiles
 		}
 	}
 	
-	public static class IceBall extends AbilityProjectile
+	public static class IceBall extends ProjectileAbility
 	{
 		public IceBall(World world)
 		{super(ICE_BALL, world);}

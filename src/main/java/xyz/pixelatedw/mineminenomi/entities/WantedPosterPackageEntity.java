@@ -35,12 +35,12 @@ public class WantedPosterPackageEntity extends MobEntity
 		{
 			if(this.world.isAirBlock(pos))
 			{
-				this.world.setBlockState(pos, ModBlocks.wantedPosterPackage.getDefaultState());
+				this.world.setBlockState(pos, ModBlocks.WANTED_POSTER_PACKAGE.getDefaultState());
 				this.remove();
 			}
 			else if(this.world.isAirBlock(pos.up()))
 			{
-				this.world.setBlockState(pos.up(), ModBlocks.wantedPosterPackage.getDefaultState());
+				this.world.setBlockState(pos.up(), ModBlocks.WANTED_POSTER_PACKAGE.getDefaultState());
 				this.remove();
 			}
 		}

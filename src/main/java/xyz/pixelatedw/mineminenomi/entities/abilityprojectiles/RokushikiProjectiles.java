@@ -7,14 +7,14 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility.Data;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 
 public class RokushikiProjectiles 
 {
 
-	public static HashMap<AbilityAttribute, AbilityProjectile.Data> projectiles = new HashMap<AbilityAttribute, AbilityProjectile.Data>();
+	public static HashMap<AbilityAttribute, ProjectileAbility.Data> projectiles = new HashMap<AbilityAttribute, ProjectileAbility.Data>();
 	
 	public static final EntityType RANKYAKU = WyRegistry.registerEntityType("rankyaku", Rankyaku::new);
 	
@@ -23,7 +23,7 @@ public class RokushikiProjectiles
 		projectiles.put(ModAttributes.RANKYAKU, new Data(RANKYAKU, Rankyaku.class));
 	}
 	
-	public static class Rankyaku extends AbilityProjectile
+	public static class Rankyaku extends ProjectileAbility
 	{
 		public Rankyaku(World world)
 		{super(RANKYAKU, world);}

@@ -12,8 +12,8 @@ import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility.Data;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
@@ -21,7 +21,7 @@ import xyz.pixelatedw.mineminenomi.init.ModExtraAttributes;
 
 public class YamiProjectiles 
 {
-	public static HashMap<AbilityAttribute, AbilityProjectile.Data> projectiles = new HashMap<AbilityAttribute, AbilityProjectile.Data>();
+	public static HashMap<AbilityAttribute, ProjectileAbility.Data> projectiles = new HashMap<AbilityAttribute, ProjectileAbility.Data>();
 	
 	public static final EntityType LIBERATION = WyRegistry.registerEntityType("liberation", Liberation::new);
 	public static final EntityType DARK_MATTER = WyRegistry.registerEntityType("dark_matter", DarkMatter::new);
@@ -32,7 +32,7 @@ public class YamiProjectiles
 		projectiles.put(ModAttributes.DARK_MATTER, new Data(DARK_MATTER, DarkMatter.class));
 	}
 	
-	public static class Liberation extends AbilityProjectile
+	public static class Liberation extends ProjectileAbility
 	{
 		private Block[] randomBlocks = new Block[] {Blocks.COBBLESTONE, Blocks.RED_SAND, Blocks.SAND, Blocks.GRASS_BLOCK, Blocks.DIRT, Blocks.COARSE_DIRT, Blocks.GRAVEL, Blocks.CLAY, Blocks.STONE, Blocks.GRANITE, Blocks.DIORITE, Blocks.ANDESITE};
 		
@@ -57,7 +57,7 @@ public class YamiProjectiles
 		}
 	}	
 	
-	public static class DarkMatter extends AbilityProjectile
+	public static class DarkMatter extends ProjectileAbility
 	{
 		public DarkMatter(World world)
 		{super(DARK_MATTER, world);}
@@ -78,7 +78,7 @@ public class YamiProjectiles
 		{
 			if(CommonConfig.instance.isGriefingEnabled())
 			{
-				WyHelper.createFilledSphere(this.world, (int)this.posX, (int)this.posY, (int)this.posZ, 3, ModBlocks.darkness, "air", "foliage");
+				WyHelper.createFilledSphere(this.world, (int)this.posX, (int)this.posY, (int)this.posZ, 3, ModBlocks.DARKNESS, "air", "foliage");
 					
 			//	ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_DARKMATTER, this.posX, this.posY, this.posZ), (PlayerEntity) this.getThrower());
 			}

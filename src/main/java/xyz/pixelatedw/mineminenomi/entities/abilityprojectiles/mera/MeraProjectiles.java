@@ -14,9 +14,9 @@ import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityRenderer;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility.Data;
+import xyz.pixelatedw.mineminenomi.api.abilities.RendererAbility;
 import xyz.pixelatedw.mineminenomi.api.abilities.CubeModel;
 import xyz.pixelatedw.mineminenomi.api.abilities.SphereModel;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
@@ -24,7 +24,7 @@ import xyz.pixelatedw.mineminenomi.models.entities.projectiles.FistModel;
 
 public class MeraProjectiles
 {
-	public static List<AbilityProjectile.Data> projectiles = new ArrayList<AbilityProjectile.Data>();
+	public static List<ProjectileAbility.Data> projectiles = new ArrayList<ProjectileAbility.Data>();
 	
 	public static final EntityType HIKEN = WyRegistry.registerEntityType("hiken", HikenProjectile::new);
 	public static final EntityType HIGAN = WyRegistry.registerEntityType("higan", HiganProjectile::new);
@@ -32,9 +32,9 @@ public class MeraProjectiles
 	public static final EntityType HIDARUMA = WyRegistry.registerEntityType("hidaruma", Hidaruma::new);
 	public static final EntityType JUJIKA = WyRegistry.registerEntityType("jujika", Jujika::new);
 	
-	private static final AbilityRenderer.Factory HIKEN_FACTORY = new AbilityRenderer.Factory(new FistModel()).setTexture("hiken").setScale(1.5);
-	private static final AbilityRenderer.Factory HIGAN_FACTORY = new AbilityRenderer.Factory(new CubeModel()).setColor(255, 0, 0, 100).setScale(.5);
-	private static final AbilityRenderer.Factory DAI_ENKAI_ENTEI_FACTORY = new AbilityRenderer.Factory(new SphereModel()).setColor(255, 0, 0, 100).setScale(9);
+	private static final RendererAbility.Factory HIKEN_FACTORY = new RendererAbility.Factory(new FistModel()).setTexture("hiken").setScale(1.5);
+	private static final RendererAbility.Factory HIGAN_FACTORY = new RendererAbility.Factory(new CubeModel()).setColor(255, 0, 0, 100).setScale(.5);
+	private static final RendererAbility.Factory DAI_ENKAI_ENTEI_FACTORY = new RendererAbility.Factory(new SphereModel()).setColor(255, 0, 0, 100).setScale(9);
 
 	static
 	{
@@ -45,7 +45,7 @@ public class MeraProjectiles
 		projectiles.put(ModAttributes.JUJIKA, new Data(JUJIKA, Jujika.class));*/
 	}
 	
-	public static class Hidaruma extends AbilityProjectile
+	public static class Hidaruma extends ProjectileAbility
 	{
 		public Hidaruma(World world)
 		{super(HIDARUMA, world);}
@@ -90,7 +90,7 @@ public class MeraProjectiles
 		}
 	}
 	
-	public static class Jujika extends AbilityProjectile
+	public static class Jujika extends ProjectileAbility
 	{
 		public Jujika(World world)
 		{super(JUJIKA, world);}

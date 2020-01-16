@@ -7,13 +7,13 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility.Data;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 
 public class ZouProjectiles
 {
-	public static HashMap<AbilityAttribute, AbilityProjectile.Data> projectiles = new HashMap<AbilityAttribute, AbilityProjectile.Data>();
+	public static HashMap<AbilityAttribute, ProjectileAbility.Data> projectiles = new HashMap<AbilityAttribute, ProjectileAbility.Data>();
 	
 	public static final EntityType TRUNK_SHOT = WyRegistry.registerEntityType("trunk_shot", TrunkShot::new);
 	
@@ -22,7 +22,7 @@ public class ZouProjectiles
 		projectiles.put(ModAttributes.TRUNK_SHOT, new Data(TRUNK_SHOT, TrunkShot.class));
 	}
 	
-	public static class TrunkShot extends AbilityProjectile
+	public static class TrunkShot extends ProjectileAbility
 	{
 		public TrunkShot(World world)
 		{super(TRUNK_SHOT, world);}

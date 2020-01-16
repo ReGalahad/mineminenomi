@@ -1,8 +1,8 @@
 package xyz.pixelatedw.mineminenomi.abilities.mera;
 
 import net.minecraft.entity.player.PlayerEntity;
-import xyz.pixelatedw.mineminenomi.abilities.ChargeableAbility;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
+import xyz.pixelatedw.mineminenomi.api.abilities.ChargeableAbility;
 import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.mera.DaiEnkaiEnteiProjectile;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.mera.ParticleEffectDaiEnkai;

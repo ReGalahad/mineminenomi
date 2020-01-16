@@ -7,13 +7,13 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility.Data;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 
 public class PikaProjectiles 
 {
-	public static HashMap<AbilityAttribute, AbilityProjectile.Data> projectiles = new HashMap<AbilityAttribute, AbilityProjectile.Data>();
+	public static HashMap<AbilityAttribute, ProjectileAbility.Data> projectiles = new HashMap<AbilityAttribute, ProjectileAbility.Data>();
 
 	public static final EntityType AMATERASU = WyRegistry.registerEntityType("amaterasu", Amaterasu::new);
 	public static final EntityType YASAKANI_NO_MAGATAMA = WyRegistry.registerEntityType("yasakani_no_magatama", YasakaniNoMagatama::new);
@@ -24,7 +24,7 @@ public class PikaProjectiles
 		projectiles.put(ModAttributes.YASAKANI_NO_MAGATAMA, new Data(YASAKANI_NO_MAGATAMA, YasakaniNoMagatama.class));
 	}
 	
-	public static class YasakaniNoMagatama extends AbilityProjectile
+	public static class YasakaniNoMagatama extends ProjectileAbility
 	{
 		public YasakaniNoMagatama(World world)
 		{super(YASAKANI_NO_MAGATAMA, world);}
@@ -41,7 +41,7 @@ public class PikaProjectiles
 		}
 	}
 	
-	public static class Amaterasu extends AbilityProjectile
+	public static class Amaterasu extends ProjectileAbility
 	{
 		public Amaterasu(World world)
 		{super(AMATERASU, world);}

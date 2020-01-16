@@ -7,15 +7,15 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility.Data;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.CustomParticleData;
 
 public class ToriPhoenixProjectiles
 {
-	public static HashMap<AbilityAttribute, AbilityProjectile.Data> projectiles = new HashMap<AbilityAttribute, AbilityProjectile.Data>();
+	public static HashMap<AbilityAttribute, ProjectileAbility.Data> projectiles = new HashMap<AbilityAttribute, ProjectileAbility.Data>();
 	
 	public static final EntityType PHOENIX_GOEN = WyRegistry.registerEntityType("phoenix_goen", PhoenixGoen::new);
 
@@ -25,7 +25,7 @@ public class ToriPhoenixProjectiles
 	}
 	
 	
-	public static class PhoenixGoen extends AbilityProjectile
+	public static class PhoenixGoen extends ProjectileAbility
 	{
 		public PhoenixGoen(World world)
 		{super(PHOENIX_GOEN, world);}

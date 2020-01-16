@@ -23,7 +23,7 @@ public class AxeDialItem extends BlockItem
 
 	public AxeDialItem()
 	{
-		super(ModBlocks.axeDialBlock, new Properties().group(ModCreativeTabs.MISC).maxStackSize(16));
+		super(ModBlocks.AXE_DIAL, new Properties().group(ModCreativeTabs.MISC).maxStackSize(16));
 	}
 
 	@Override

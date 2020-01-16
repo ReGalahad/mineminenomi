@@ -15,14 +15,14 @@ import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility.Data;
 import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.ExtraProjectiles.EntityCloud;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 
 public class SniperProjectiles
 {
-	public static HashMap<AbilityAttribute, AbilityProjectile.Data> projectiles = new HashMap<AbilityAttribute, AbilityProjectile.Data>();
+	public static HashMap<AbilityAttribute, ProjectileAbility.Data> projectiles = new HashMap<AbilityAttribute, ProjectileAbility.Data>();
 	
 	public static final EntityType KAEN_BOSHI = WyRegistry.registerEntityType("kaen_boshi", KaenBoshi::new);
 	public static final EntityType KEMURI_BOSHI = WyRegistry.registerEntityType("kemuri_boshi", KemuriBoshi::new);
@@ -37,7 +37,7 @@ public class SniperProjectiles
 		projectiles.put(ModAttributes.SAKURETSU_SABOTEN_BOSHI, new Data(SAKURESTU_SABOTEN_BOSHI, SakuretsuSabotenBoshi.class));
 	}
 	
-	public static class SakuretsuSabotenBoshi extends AbilityProjectile
+	public static class SakuretsuSabotenBoshi extends ProjectileAbility
 	{
 		public SakuretsuSabotenBoshi(World world)
 		{super(SAKURESTU_SABOTEN_BOSHI, world);}
@@ -74,7 +74,7 @@ public class SniperProjectiles
 		}
 	}
 	
-	public static class RenpatsuNamariBoshi extends AbilityProjectile
+	public static class RenpatsuNamariBoshi extends ProjectileAbility
 	{
 		public RenpatsuNamariBoshi(World world)
 		{super(RENPATSU_NAMARI_BOSHI, world);}
@@ -91,7 +91,7 @@ public class SniperProjectiles
 		}
 	}
 	
-	public static class KemuriBoshi extends AbilityProjectile
+	public static class KemuriBoshi extends ProjectileAbility
 	{
 		public KemuriBoshi(World world)
 		{super(KEMURI_BOSHI, world);}
@@ -139,7 +139,7 @@ public class SniperProjectiles
 		}
 	}
 	
-	public static class KaenBoshi extends AbilityProjectile
+	public static class KaenBoshi extends ProjectileAbility
 	{
 		public KaenBoshi(World world)
 		{super(KAEN_BOSHI, world);}

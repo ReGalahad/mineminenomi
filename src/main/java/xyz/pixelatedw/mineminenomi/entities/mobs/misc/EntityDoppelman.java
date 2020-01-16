@@ -178,7 +178,7 @@ public class EntityDoppelman extends CreatureEntity
         	ItemStack itemStack = player.getHeldItem(hand);
     		IEntityStats props = EntityStatsCapability.get(this);
 
-    		if(itemStack != null && itemStack.getItem() == ModItems.shadow && itemStack.getCount() >= 10 && props.getDoriki() < 6)
+    		if(itemStack != null && itemStack.getItem() == ModItems.SHADOW && itemStack.getCount() >= 10 && props.getDoriki() < 6)
     		{
     			itemStack.setCount(itemStack.getCount() - 10);
     			props.alterDoriki(1);

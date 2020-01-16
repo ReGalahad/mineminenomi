@@ -60,44 +60,44 @@ public class LargeShipPieces
 				{
 					WySchematicHelper.build(WySchematicHelper.load("marineLargeShip"), world, pos, Blocks.BEDROCK);
 									
-					world.setBlockState(pos.add(11, 6, 35), ModBlocks.customSpawner.getDefaultState(), 2);
+					world.setBlockState(pos.add(11, 6, 35), ModBlocks.CUSTOM_SPAWNER.getDefaultState(), 2);
 					((CustomSpawnerTileEntity) world.getTileEntity(pos.add(11, 6, 35))).setSpawnerMob(ModEntities.MARINE_WITH_SWORD).setSpawnerLimit(spawnLimit);
 					
-					world.setBlockState(pos.add(11, 6, 26), ModBlocks.customSpawner.getDefaultState(), 2);
+					world.setBlockState(pos.add(11, 6, 26), ModBlocks.CUSTOM_SPAWNER.getDefaultState(), 2);
 					((CustomSpawnerTileEntity) world.getTileEntity(pos.add(11, 6, 26))).setSpawnerMob(ModEntities.MARINE_WITH_GUN).setSpawnerLimit(spawnLimit);
 					
-					world.setBlockState(pos.add(11, 12, 20), ModBlocks.customSpawner.getDefaultState(), 2);
+					world.setBlockState(pos.add(11, 12, 20), ModBlocks.CUSTOM_SPAWNER.getDefaultState(), 2);
 					((CustomSpawnerTileEntity) world.getTileEntity(pos.add(11, 12, 20))).setSpawnerMob(ModEntities.MARINE_WITH_SWORD).setSpawnerLimit(spawnLimit);
 	
-					world.setBlockState(pos.add(8, 12, 49), ModBlocks.customSpawner.getDefaultState(), 2);
+					world.setBlockState(pos.add(8, 12, 49), ModBlocks.CUSTOM_SPAWNER.getDefaultState(), 2);
 					((CustomSpawnerTileEntity) world.getTileEntity(pos.add(8, 12, 49))).setSpawnerMob(ModEntities.MARINE_WITH_GUN).setSpawnerLimit(2);
 					
-					world.setBlockState(pos.add(10, 12, 49), ModBlocks.customSpawner.getDefaultState(), 2);
+					world.setBlockState(pos.add(10, 12, 49), ModBlocks.CUSTOM_SPAWNER.getDefaultState(), 2);
 					((CustomSpawnerTileEntity) world.getTileEntity(pos.add(10, 12, 49))).setSpawnerMob(ModEntities.MARINE_CAPTAIN).setSpawnerLimit(1);
 					
-					world.setBlockState(pos.add(12, 12, 49), ModBlocks.customSpawner.getDefaultState(), 2);
+					world.setBlockState(pos.add(12, 12, 49), ModBlocks.CUSTOM_SPAWNER.getDefaultState(), 2);
 					((CustomSpawnerTileEntity) world.getTileEntity(pos.add(12, 12, 49))).setSpawnerMob(ModEntities.MARINE_WITH_SWORD).setSpawnerLimit(2);
 				}
 				else
 				{
 					WySchematicHelper.build(WySchematicHelper.load("pyrateLargeShip"), world, pos, Blocks.BEDROCK);
 					
-					world.setBlockState(pos.add(11, 6, 35), ModBlocks.customSpawner.getDefaultState(), 2);
+					world.setBlockState(pos.add(11, 6, 35), ModBlocks.CUSTOM_SPAWNER.getDefaultState(), 2);
 					((CustomSpawnerTileEntity) world.getTileEntity(pos.add(11, 6, 35))).setSpawnerMob(ModEntities.PIRATE_WITH_SWORD).setSpawnerLimit(spawnLimit);
 					
-					world.setBlockState(pos.add(11, 6, 26), ModBlocks.customSpawner.getDefaultState(), 2);
+					world.setBlockState(pos.add(11, 6, 26), ModBlocks.CUSTOM_SPAWNER.getDefaultState(), 2);
 					((CustomSpawnerTileEntity) world.getTileEntity(pos.add(11, 6, 26))).setSpawnerMob(ModEntities.PIRATE_WITH_GUN).setSpawnerLimit(spawnLimit);
 					
-					world.setBlockState(pos.add(11, 12, 20), ModBlocks.customSpawner.getDefaultState(), 2);
+					world.setBlockState(pos.add(11, 12, 20), ModBlocks.CUSTOM_SPAWNER.getDefaultState(), 2);
 					((CustomSpawnerTileEntity) world.getTileEntity(pos.add(11, 12, 20))).setSpawnerMob(ModEntities.PIRATE_WITH_SWORD).setSpawnerLimit(spawnLimit);
 					
-					world.setBlockState(pos.add(8, 12, 49), ModBlocks.customSpawner.getDefaultState(), 2);
+					world.setBlockState(pos.add(8, 12, 49), ModBlocks.CUSTOM_SPAWNER.getDefaultState(), 2);
 					((CustomSpawnerTileEntity) world.getTileEntity(pos.add(8, 12, 49))).setSpawnerMob(ModEntities.PIRATE_WITH_GUN).setSpawnerLimit(2);
 					
-					world.setBlockState(pos.add(10, 12, 49), ModBlocks.customSpawner.getDefaultState(), 2);
+					world.setBlockState(pos.add(10, 12, 49), ModBlocks.CUSTOM_SPAWNER.getDefaultState(), 2);
 					((CustomSpawnerTileEntity) world.getTileEntity(pos.add(10, 12, 49))).setSpawnerMob(ModEntities.PIRATE_CAPTAIN).setSpawnerLimit(1);
 					
-					world.setBlockState(pos.add(12, 12, 49), ModBlocks.customSpawner.getDefaultState(), 2);
+					world.setBlockState(pos.add(12, 12, 49), ModBlocks.CUSTOM_SPAWNER.getDefaultState(), 2);
 					((CustomSpawnerTileEntity) world.getTileEntity(pos.add(12, 12, 49))).setSpawnerMob(ModEntities.PIRATE_WITH_SWORD).setSpawnerLimit(2);
 				}
 				

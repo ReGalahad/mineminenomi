@@ -25,7 +25,7 @@ import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.data.entity.haki.HakiDataCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.haki.IHakiData;
 
-public class AbilityProjectile extends ThrowableEntity
+public class ProjectileAbility extends ThrowableEntity
 {
 	private int life = 60;
 	private int maxLife = 60;
@@ -38,17 +38,17 @@ public class AbilityProjectile extends ThrowableEntity
 	protected IOnBlockImpact onBlockImpactEvent = (hit) -> {};
 	protected IOnTick onTickEvent = () -> {};
 
-	public AbilityProjectile(EntityType type, World world)
+	public ProjectileAbility(EntityType type, World world)
 	{
 		super(type, world);
 	}
 
-	public AbilityProjectile(EntityType type, World world, double x, double y, double z)
+	public ProjectileAbility(EntityType type, World world, double x, double y, double z)
 	{
 		super(type, x, y, z, world);
 	}
 
-	public AbilityProjectile(EntityType type, World world, LivingEntity player)
+	public ProjectileAbility(EntityType type, World world, LivingEntity player)
 	{
 		super(type, player, world);
 		this.maxLife = life;
@@ -61,7 +61,7 @@ public class AbilityProjectile extends ThrowableEntity
 		this.shoot(player, player.rotationPitch, player.rotationYaw, 0, 2f, 1);
 	}
 	
-	public AbilityProjectile(EntityType type, World world, LivingEntity player, AbilityAttribute attr) 
+	public ProjectileAbility(EntityType type, World world, LivingEntity player, AbilityAttribute attr) 
 	{
 		super(type, player, world);
 		WyDebug.error("Wrong constructor when spawning " + type.getName());
@@ -177,7 +177,7 @@ public class AbilityProjectile extends ThrowableEntity
 	{
 		private EntityType type;
 		private Class entityClass;
-		private AbilityRenderer.Factory factory;
+		private RendererAbility.Factory factory;
 		
 		public Data(EntityType type, Class<? extends Entity> clz)
 		{
@@ -185,7 +185,7 @@ public class AbilityProjectile extends ThrowableEntity
 			this.entityClass = clz;
 		}
 		
-		public Data(EntityType type, Class<? extends Entity> clz, AbilityRenderer.Factory factory)
+		public Data(EntityType type, Class<? extends Entity> clz, RendererAbility.Factory factory)
 		{
 			this.type = type;
 			this.entityClass = clz;
@@ -202,7 +202,7 @@ public class AbilityProjectile extends ThrowableEntity
 			return this.entityClass;
 		}
 		
-		public AbilityRenderer.Factory getFactory()
+		public RendererAbility.Factory getFactory()
 		{
 			return this.factory;
 		}

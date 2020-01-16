@@ -75,9 +75,9 @@ public class EventsBounty
 	@SubscribeEvent
 	public static void onBlockBreak(BlockEvent.BreakEvent event)
 	{
-		if(event.getState().getBlock() == ModBlocks.wantedPoster)
+		if(event.getState().getBlock() == ModBlocks.WANTED_POSTER)
 		{
-    		ItemStack stack = new ItemStack(ModBlocks.wantedPoster.asItem());
+    		ItemStack stack = new ItemStack(ModBlocks.WANTED_POSTER.asItem());
     		
 			WantedPosterTileEntity tileEntity = (WantedPosterTileEntity) event.getWorld().getTileEntity(event.getPos());
 			

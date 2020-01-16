@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility;
 import xyz.pixelatedw.mineminenomi.entities.WantedPosterPackageEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.bandits.EntityBanditWithSword;
 import xyz.pixelatedw.mineminenomi.entities.mobs.marines.EntityMarineCaptain;
@@ -57,7 +57,7 @@ public class ModEntities
 				return;
 
 			// Register projectiles
-			for (List<AbilityProjectile.Data> list : ModDevilFruits.ALL_PROJECTILES)
+			for (List<ProjectileAbility.Data> list : ModDevilFruits.ALL_PROJECTILES)
 			{
 				list.forEach((value) ->
 				{

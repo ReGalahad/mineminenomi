@@ -14,15 +14,15 @@ import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility.Data;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 
 public class MaguProjectiles 
 {
 
-	public static HashMap<AbilityAttribute, AbilityProjectile.Data> projectiles = new HashMap<AbilityAttribute, AbilityProjectile.Data>();
+	public static HashMap<AbilityAttribute, ProjectileAbility.Data> projectiles = new HashMap<AbilityAttribute, ProjectileAbility.Data>();
 	
 	public static final EntityType MEIGO = WyRegistry.registerEntityType("meigo", Meigo::new);
 	public static final EntityType DAI_FUNKA = WyRegistry.registerEntityType("dai_funka", DaiFunka::new);
@@ -33,7 +33,7 @@ public class MaguProjectiles
 		projectiles.put(ModAttributes.DAI_FUNKA, new Data(DAI_FUNKA, DaiFunka.class));
 	}
 	
-	public static class Meigo extends AbilityProjectile
+	public static class Meigo extends ProjectileAbility
 	{
 		public Meigo(World world)
 		{super(MEIGO, world);}
@@ -75,7 +75,7 @@ public class MaguProjectiles
 		}
 	}
 	
-	public static class DaiFunka extends AbilityProjectile
+	public static class DaiFunka extends ProjectileAbility
 	{
 		public DaiFunka(World world)
 		{super(DAI_FUNKA, world);}

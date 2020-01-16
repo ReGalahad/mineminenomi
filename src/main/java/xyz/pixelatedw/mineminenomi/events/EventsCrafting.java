@@ -21,7 +21,7 @@ public class EventsCrafting
 	{	
 		if(ItemsHelper.isSword(event.getLeft()))
 		{
-			if(event.getRight().getItem() == ModItems.kairoseki && event.getRight().getCount() >= 10)
+			if(event.getRight().getItem() == ModItems.KAIROSEKI && event.getRight().getCount() >= 10)
 			{
 				event.setCost(1);
 				event.setMaterialCost(10);
@@ -29,7 +29,7 @@ public class EventsCrafting
 				EnchantmentHelper.setEnchantments(EnchantmentHelper.getEnchantments(event.getLeft()), event.getOutput());
 				event.getOutput().addEnchantment(ModEnchantments.KAIROSEKI, 1);
 			}
-			else if(event.getRight().getItem() == ModItems.blackMetal  && event.getRight().getCount() >= 5)
+			else if(event.getRight().getItem() == ModItems.BLACK_METAL  && event.getRight().getCount() >= 5)
 			{
 				int level = event.getRight().getCount() / 5;
 				
@@ -42,7 +42,7 @@ public class EventsCrafting
 				EnchantmentHelper.setEnchantments(EnchantmentHelper.getEnchantments(event.getLeft()), event.getOutput());
 				event.getOutput().addEnchantment(Enchantments.SHARPNESS, 3 * level);
 			}
-			else if(event.getRight().getItem() == ModBlocks.flameDialBlock.asItem() && event.getRight().getCount() >= 3)
+			else if(event.getRight().getItem() == ModBlocks.FLAME_DIAL.asItem() && event.getRight().getCount() >= 3)
 			{
 				event.setCost(1);
 				event.setMaterialCost(3);
@@ -50,7 +50,7 @@ public class EventsCrafting
 				EnchantmentHelper.setEnchantments(EnchantmentHelper.getEnchantments(event.getLeft()), event.getOutput());
 				event.getOutput().addEnchantment(Enchantments.FIRE_ASPECT, 1);
 			}
-			else if(event.getRight().getItem() == ModBlocks.eisenDialBlock.asItem()  && event.getRight().getCount() >= 3)
+			else if(event.getRight().getItem() == ModBlocks.EISEN_DIAL.asItem()  && event.getRight().getCount() >= 3)
 			{
 				int level = event.getRight().getCount() / 3;
 				
@@ -63,7 +63,7 @@ public class EventsCrafting
 				EnchantmentHelper.setEnchantments(EnchantmentHelper.getEnchantments(event.getLeft()), event.getOutput());
 				event.getOutput().addEnchantment(Enchantments.SHARPNESS, level);
 			}
-			else if(event.getRight().getItem() == ModBlocks.flashDialBlock.asItem()  && event.getRight().getCount() >= 3)
+			else if(event.getRight().getItem() == ModBlocks.FLASH_DIAL.asItem()  && event.getRight().getCount() >= 3)
 			{
 				event.setCost(1);
 				event.setMaterialCost(3);
@@ -71,7 +71,7 @@ public class EventsCrafting
 				EnchantmentHelper.setEnchantments(EnchantmentHelper.getEnchantments(event.getLeft()), event.getOutput());
 				event.getOutput().addEnchantment(ModEnchantments.DIAL_FLASH, 1);
 			}
-			else if(event.getRight().getItem() == ModBlocks.impactDialBlock.asItem()  && event.getRight().getCount() >= 3)
+			else if(event.getRight().getItem() == ModBlocks.IMPACT_DIAL.asItem()  && event.getRight().getCount() >= 3)
 			{
 				int level = event.getRight().getCount() / 3;
 				
@@ -84,7 +84,7 @@ public class EventsCrafting
 				EnchantmentHelper.setEnchantments(EnchantmentHelper.getEnchantments(event.getLeft()), event.getOutput());
 				event.getOutput().addEnchantment(ModEnchantments.DIAL_IMPACT, level);
 			}
-			else if(event.getRight().getItem() == ModBlocks.breathDialBlock.asItem()  && event.getRight().getCount() >= 3)
+			else if(event.getRight().getItem() == ModBlocks.BREATH_DIAL.asItem()  && event.getRight().getCount() >= 3)
 			{
 				int level = event.getRight().getCount() / 3;
 				

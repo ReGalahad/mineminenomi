@@ -43,7 +43,7 @@ import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.LogicalSidedProvider;
 import net.minecraftforge.registries.ForgeRegistries;
 import xyz.pixelatedw.mineminenomi.Env;
-import xyz.pixelatedw.mineminenomi.api.abilities.extra.AbilityExplosion;
+import xyz.pixelatedw.mineminenomi.api.abilities.extra.ExplosionAbility;
 import xyz.pixelatedw.mineminenomi.api.debug.WyDebug;
 import xyz.pixelatedw.mineminenomi.api.math.ISphere;
 import xyz.pixelatedw.mineminenomi.api.math.Sphere;
@@ -168,11 +168,11 @@ public class WyHelper
 			else if (rule.equalsIgnoreCase("restricted"))
 			{
 				bannedBlocks.remove(Blocks.BEDROCK);
-				bannedBlocks.remove(ModBlocks.ope);
-				bannedBlocks.remove(ModBlocks.opeMid);
-				bannedBlocks.remove(ModBlocks.stringMid);
-				bannedBlocks.remove(ModBlocks.stringWall);
-				bannedBlocks.remove(ModBlocks.darkness);
+				bannedBlocks.remove(ModBlocks.OPE);
+				bannedBlocks.remove(ModBlocks.OPE_MID);
+				bannedBlocks.remove(ModBlocks.STRING_MID);
+				bannedBlocks.remove(ModBlocks.STRING_WALL);
+				bannedBlocks.remove(ModBlocks.DARKNESS);
 			}
 
 		});
@@ -219,15 +219,15 @@ public class WyHelper
 		return now.after(target);
 	}
 
-	public static AbilityExplosion newExplosion(Entity entity, double posX, double posY, double posZ, float size)
+	public static ExplosionAbility newExplosion(Entity entity, double posX, double posY, double posZ, float size)
 	{
-		AbilityExplosion explosion = new AbilityExplosion(entity, posX, posY, posZ, size);
+		ExplosionAbility explosion = new ExplosionAbility(entity, posX, posY, posZ, size);
 		return explosion;
 	}
 
 	public static void doExplosion(Entity entity, double posX, double posY, double posZ, float size)
 	{
-		AbilityExplosion explosion = new AbilityExplosion(entity, posX, posY, posZ, size);
+		ExplosionAbility explosion = new ExplosionAbility(entity, posX, posY, posZ, size);
 		explosion.doExplosion();
 	}
 

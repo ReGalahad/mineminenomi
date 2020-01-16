@@ -18,14 +18,14 @@ import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 
 @OnlyIn(Dist.CLIENT)
-public class AbilityRenderer extends EntityRenderer<AbilityProjectile>
+public class RendererAbility extends EntityRenderer<ProjectileAbility>
 {
 	private double scaleX = 1, scaleY = 1, scaleZ = 1;
 	private double red, blue, green, alpha;
 	private EntityModel model;
 	private ResourceLocation texture;
 
-	public AbilityRenderer(EntityRendererManager renderManager, EntityModel model)
+	public RendererAbility(EntityRendererManager renderManager, EntityModel model)
 	{
 		super(renderManager);
 		this.model = model;
@@ -52,7 +52,7 @@ public class AbilityRenderer extends EntityRenderer<AbilityProjectile>
 	}
 
 	@Override
-	public void doRender(AbilityProjectile entity, double x, double y, double z, float entityYaw, float partialTicks)
+	public void doRender(ProjectileAbility entity, double x, double y, double z, float entityYaw, float partialTicks)
 	{
 		GlStateManager.pushMatrix();
 		{
@@ -85,12 +85,12 @@ public class AbilityRenderer extends EntityRenderer<AbilityProjectile>
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(AbilityProjectile entity)
+	protected ResourceLocation getEntityTexture(ProjectileAbility entity)
 	{
 		return this.texture;
 	}
 
-	public static class Factory implements IRenderFactory<AbilityProjectile>
+	public static class Factory implements IRenderFactory<ProjectileAbility>
 	{
 		private EntityModel model = new CubeModel();
 		private double scaleX = 1, scaleY = 1, scaleZ = 1;
@@ -142,9 +142,9 @@ public class AbilityRenderer extends EntityRenderer<AbilityProjectile>
 		}
 
 		@Override
-		public EntityRenderer<? super AbilityProjectile> createRenderFor(EntityRendererManager manager)
+		public EntityRenderer<? super ProjectileAbility> createRenderFor(EntityRendererManager manager)
 		{
-			AbilityRenderer renderer = new AbilityRenderer(manager, this.model);
+			RendererAbility renderer = new RendererAbility(manager, this.model);
 			renderer.setTexture(this.texture);
 			renderer.setScale(this.scaleX, this.scaleY, this.scaleZ);
 			renderer.setColor(this.red, this.green, this.blue, this.alpha);

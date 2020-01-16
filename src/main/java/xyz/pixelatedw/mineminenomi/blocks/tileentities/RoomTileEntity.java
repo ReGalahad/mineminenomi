@@ -19,7 +19,7 @@ import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 public class RoomTileEntity extends TileEntity implements ITickableTileEntity
 {
 
-	public static final TileEntityType TILE_ENTITY = WyRegistry.registerTileEntity("room", RoomTileEntity::new, ModBlocks.opeMid);
+	public static final TileEntityType TILE_ENTITY = WyRegistry.registerTileEntity("room", RoomTileEntity::new, ModBlocks.OPE_MID);
 
 	public RoomTileEntity()
 	{
@@ -51,7 +51,7 @@ public class RoomTileEntity extends TileEntity implements ITickableTileEntity
 		for (int i = -22; i < 22; i++)
 			for (int k = -21; k < 21; k++)
 				for (int j = -22; j < 22; j++)
-					if (world.getBlockState(new BlockPos(this.getPos().getX() + i, this.getPos().getY() + k, this.getPos().getZ() + j)).getBlock() == ModBlocks.ope)
+					if (world.getBlockState(new BlockPos(this.getPos().getX() + i, this.getPos().getY() + k, this.getPos().getZ() + j)).getBlock() == ModBlocks.OPE)
 						world.setBlockState(new BlockPos(this.getPos().getX() + i, this.getPos().getY() + k, this.getPos().getZ() + j), Blocks.AIR.getDefaultState());
 		world.setBlockState(new BlockPos(this.getPos().getX(), this.getPos().getY(), this.getPos().getZ()), Blocks.AIR.getDefaultState());
 	}

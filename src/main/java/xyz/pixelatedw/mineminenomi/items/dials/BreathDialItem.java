@@ -17,7 +17,7 @@ public class BreathDialItem extends BlockItem
 
 	public BreathDialItem()
 	{
-		super(ModBlocks.breathDialBlock, new Properties().group(ModCreativeTabs.MISC).maxStackSize(16));
+		super(ModBlocks.BREATH_DIAL, new Properties().group(ModCreativeTabs.MISC).maxStackSize(16));
 	}
 
 	@Override

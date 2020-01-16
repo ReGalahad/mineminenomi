@@ -13,8 +13,8 @@ import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.WyHelper.Direction;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility.Data;
 import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
@@ -23,7 +23,7 @@ import xyz.pixelatedw.mineminenomi.particles.CustomParticleData;
 public class CyborgProjectiles 
 {
 	
-	public static HashMap<AbilityAttribute, AbilityProjectile.Data> projectiles = new HashMap<AbilityAttribute, AbilityProjectile.Data>();
+	public static HashMap<AbilityAttribute, ProjectileAbility.Data> projectiles = new HashMap<AbilityAttribute, ProjectileAbility.Data>();
 	
 	public static final EntityType FRESH_FIRE = WyRegistry.registerEntityType("fresh_fire", FreshFire::new);
 	public static final EntityType RADICAL_BEAM = WyRegistry.registerEntityType("radical_beam", RadicalBeam::new);
@@ -38,7 +38,7 @@ public class CyborgProjectiles
 		projectiles.put(ModAttributes.COUP_DE_VENT, new Data(COUP_DE_VENT, CoupDeVent.class));
 	}
 	
-	public static class CoupDeVent extends AbilityProjectile
+	public static class CoupDeVent extends ProjectileAbility
 	{
 		public CoupDeVent(World world)
 		{super(COUP_DE_VENT, world);}
@@ -87,7 +87,7 @@ public class CyborgProjectiles
 		}
 	}
 	
-	public static class StrongRight extends AbilityProjectile
+	public static class StrongRight extends ProjectileAbility
 	{
 		public StrongRight(World world)
 		{super(STRONG_RIGHT, world);}
@@ -105,7 +105,7 @@ public class CyborgProjectiles
 
 	}
 	
-	public static class FreshFire extends AbilityProjectile
+	public static class FreshFire extends ProjectileAbility
 	{
 		public FreshFire(World world)
 		{super(FRESH_FIRE, world);}
@@ -148,7 +148,7 @@ public class CyborgProjectiles
 		}
 	}
 	
-	public static class RadicalBeam extends AbilityProjectile
+	public static class RadicalBeam extends ProjectileAbility
 	{
 		public RadicalBeam(World world)
 		{super(RADICAL_BEAM, world);}

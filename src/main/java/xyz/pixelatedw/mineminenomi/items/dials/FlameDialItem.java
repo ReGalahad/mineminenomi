@@ -23,7 +23,7 @@ public class FlameDialItem extends BlockItem
 
 	public FlameDialItem()
 	{
-		super(ModBlocks.flameDialBlock, new Properties().group(ModCreativeTabs.MISC).maxStackSize(16));
+		super(ModBlocks.FLAME_DIAL, new Properties().group(ModCreativeTabs.MISC).maxStackSize(16));
 	}
 
 	@Override

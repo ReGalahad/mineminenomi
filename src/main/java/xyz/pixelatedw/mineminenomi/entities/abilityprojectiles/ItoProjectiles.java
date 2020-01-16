@@ -7,14 +7,14 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility.Data;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 
 public class ItoProjectiles 
 {
 	
-	public static HashMap<AbilityAttribute, AbilityProjectile.Data> projectiles = new HashMap<AbilityAttribute, AbilityProjectile.Data>();
+	public static HashMap<AbilityAttribute, ProjectileAbility.Data> projectiles = new HashMap<AbilityAttribute, ProjectileAbility.Data>();
 	
 	public static final EntityType TAMAITO = WyRegistry.registerEntityType("tamaito", Tamaito::new);
 	public static final EntityType OVERHEAT = WyRegistry.registerEntityType("overheat", Overheat::new);
@@ -25,7 +25,7 @@ public class ItoProjectiles
 		projectiles.put(ModAttributes.OVERHEAT, new Data(OVERHEAT, Overheat.class));
 	}
 	
-	public static class Tamaito extends AbilityProjectile
+	public static class Tamaito extends ProjectileAbility
 	{
 		public Tamaito(World world)
 		{super(TAMAITO, world);}
@@ -42,7 +42,7 @@ public class ItoProjectiles
 		}
 	}
 	
-	public static class Overheat extends AbilityProjectile
+	public static class Overheat extends ProjectileAbility
 	{
 		public Overheat(World world)
 		{super(OVERHEAT, world);}

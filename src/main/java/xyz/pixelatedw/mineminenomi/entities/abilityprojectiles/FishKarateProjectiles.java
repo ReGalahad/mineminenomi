@@ -9,15 +9,15 @@ import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
-import xyz.pixelatedw.mineminenomi.api.abilities.extra.AbilityExplosion;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility.Data;
+import xyz.pixelatedw.mineminenomi.api.abilities.extra.ExplosionAbility;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 
 public class FishKarateProjectiles 
 {
 
-	public static HashMap<AbilityAttribute, AbilityProjectile.Data> projectiles = new HashMap<AbilityAttribute, AbilityProjectile.Data>();
+	public static HashMap<AbilityAttribute, ProjectileAbility.Data> projectiles = new HashMap<AbilityAttribute, ProjectileAbility.Data>();
 	
 	public static final EntityType UCHIMIZU = WyRegistry.registerEntityType("uchimizu", Uchimizu::new);
 	public static final EntityType MURASAME = WyRegistry.registerEntityType("murasame", Murasame::new);
@@ -28,7 +28,7 @@ public class FishKarateProjectiles
 		projectiles.put(ModAttributes.MURASAME, new Data(MURASAME, Murasame.class));
 	}
 	
-	public static class Uchimizu extends AbilityProjectile
+	public static class Uchimizu extends ProjectileAbility
 	{
 		public Uchimizu(World world)
 		{super(UCHIMIZU, world);}
@@ -47,7 +47,7 @@ public class FishKarateProjectiles
 		@Override
 		public void tasksImapct(RayTraceResult hit)
 		{
-			AbilityExplosion explosion = WyHelper.newExplosion(this.getThrower(), this.posX, this.posY, this.posZ, 1.2F);
+			ExplosionAbility explosion = WyHelper.newExplosion(this.getThrower(), this.posX, this.posY, this.posZ, 1.2F);
 			explosion.setExplosionSound(false);
 			//explosion.setSmokeParticles(ID.PARTICLEFX_WATEREXPLOSION);
 			explosion.setDestroyBlocks(false);
@@ -56,7 +56,7 @@ public class FishKarateProjectiles
 		}
 	}
 
-	public static class Murasame extends AbilityProjectile
+	public static class Murasame extends ProjectileAbility
 	{
 		public Murasame(World world)
 		{super(MURASAME, world);}
@@ -75,7 +75,7 @@ public class FishKarateProjectiles
 		@Override
 		public void tasksImapct(RayTraceResult hit)
 		{
-			AbilityExplosion explosion = WyHelper.newExplosion(this.getThrower(), this.posX, this.posY, this.posZ, 2.2F);
+			ExplosionAbility explosion = WyHelper.newExplosion(this.getThrower(), this.posX, this.posY, this.posZ, 2.2F);
 			explosion.setExplosionSound(false);
 			//explosion.setSmokeParticles(ID.PARTICLEFX_WATEREXPLOSION);
 			explosion.setDamageOwner(false);

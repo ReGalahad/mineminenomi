@@ -95,7 +95,7 @@ public class PlayerStatsScreen extends Screen
 
 		if (!WyHelper.isNullOrEmpty(devilFruitProps.getDevilFruit()))
 		{
-			ItemStack yamiFruit = new ItemStack(ModDevilFruits.YamiYamiNoMi);
+			ItemStack yamiFruit = new ItemStack(ModDevilFruits.YAMI_YAMI_NO_MI);
 			ItemStack df;
 			if (!devilFruitProps.getDevilFruit().equals("yamidummy"))
 			{

@@ -10,7 +10,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.abilities.extra.AbilityExplosion;
+import xyz.pixelatedw.mineminenomi.api.abilities.extra.ExplosionAbility;
 import xyz.pixelatedw.mineminenomi.init.ModEnchantments;
 
 @Mod.EventBusSubscriber(modid = Env.PROJECT_ID)
@@ -30,7 +30,7 @@ public class EventsEnchantments
 				int impactDialLevel = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.DIAL_IMPACT, heldItem);
 				if(impactDialLevel > 0)
 				{
-					AbilityExplosion explosion = WyHelper.newExplosion(player, event.getEntityLiving().posX, event.getEntityLiving().posY, event.getEntityLiving().posZ, impactDialLevel);
+					ExplosionAbility explosion = WyHelper.newExplosion(player, event.getEntityLiving().posX, event.getEntityLiving().posY, event.getEntityLiving().posZ, impactDialLevel);
 					explosion.setDamageOwner(false);
 					explosion.setDestroyBlocks(false);
 					explosion.doExplosion();

@@ -11,8 +11,8 @@ import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility.Data;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
@@ -20,7 +20,7 @@ import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 public class OriProjectiles
 {
 
-	public static HashMap<AbilityAttribute, AbilityProjectile.Data> projectiles = new HashMap<AbilityAttribute, AbilityProjectile.Data>();
+	public static HashMap<AbilityAttribute, ProjectileAbility.Data> projectiles = new HashMap<AbilityAttribute, ProjectileAbility.Data>();
 
 	public static final EntityType AWASE_BAORI = WyRegistry.registerEntityType("awase_baori", AwaseBaori::new);
 	
@@ -29,7 +29,7 @@ public class OriProjectiles
 		projectiles.put(ModAttributes.AWASE_BAORI, new Data(AWASE_BAORI, AwaseBaori.class));
 	}
 
-	public static class AwaseBaori extends AbilityProjectile
+	public static class AwaseBaori extends ProjectileAbility
 	{
 		public AwaseBaori(World world)
 		{
@@ -60,7 +60,7 @@ public class OriProjectiles
 					WyHelper.createEmptyCube(entityHit.getEntity(), new int[]
 					{
 							2, 3, 2
-					}, ModBlocks.oriBars, "air", "foliage", "liquids");
+					}, ModBlocks.ORI_BARS, "air", "foliage", "liquids");
 				}
 			}
 		}

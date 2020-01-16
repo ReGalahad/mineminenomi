@@ -69,46 +69,46 @@ public class ModBlocks
 {
 
 	// Devil Fruit created blocks	
-	public static Block ope = new OpeBlock();
-	public static Block opeMid = new OpeMidBlock();
-	public static Block kageBlock = new KageBlock();
-	public static Block sunaSand = new SunaSandBlock();
-	public static Block waxBlock = new Block(Properties.create(Material.CLAY).hardnessAndResistance(2));
-	public static Block poison = new PoisonBlock();
-	public static Block demonPoison = new DemonPoisonBlock();
-	public static Block stringWall = new StringWallBlock();
-	public static Block stringMid = new StringMidBlock();
-	public static Block barrier = new BarrierBlock();
-	public static Block darkness = new DarknessBlock();
-	public static Block oriBars = new CustomBarsBlock();
+	public static final Block OPE = new OpeBlock();
+	public static final Block OPE_MID = new OpeMidBlock();
+	public static final Block KAGE = new KageBlock();
+	public static final Block SUNA_SAND = new SunaSandBlock();
+	public static final Block WAX = new Block(Properties.create(Material.CLAY).hardnessAndResistance(2));
+	public static final Block POISON = new PoisonBlock();
+	public static final Block DEMON_POISON = new DemonPoisonBlock();
+	public static final Block STRING_WALL = new StringWallBlock();
+	public static final Block STRING_MID = new StringMidBlock();
+	public static final Block BARRIER = new BarrierBlock();
+	public static final Block DARKNESS = new DarknessBlock();
+	public static final Block ORI_BARS = new CustomBarsBlock();
 
 	// Other blocks
-	public static Block kairosekiBlock = new Block(Properties.create(Material.ROCK).hardnessAndResistance(10));
-	public static Block kairosekiOre = new KairosekiOreBlock();
-	public static Block kairosekiBars = new CustomBarsBlock();	
-	public static Block skyBlock = new SkyBlockBlock();
-	public static Block wantedPoster = new WantedPosterBlock();
-	public static Block wantedPosterPackage = new WantedPosterPackageBlock();
+	public static final Block KAIROSEKI = new Block(Properties.create(Material.ROCK).hardnessAndResistance(10));
+	public static final Block KAIROSEKI_ORE = new KairosekiOreBlock();
+	public static final Block KAIROSEKI_BARS = new CustomBarsBlock();	
+	public static final Block SKY_BLOCK = new SkyBlockBlock();
+	public static final Block WANTED_POSTER = new WantedPosterBlock();
+	public static final Block WANTED_POSTER_PACKAGE = new WantedPosterPackageBlock();
 
-	//public static Block DenDenMushi = new BlockDenDenMushi();
+	//public static final Block DenDenMushi = new BlockDenDenMushi();
 	
-	public static CustomSpawnerBlock customSpawner = new CustomSpawnerBlock();
+	public static final CustomSpawnerBlock CUSTOM_SPAWNER = new CustomSpawnerBlock();
 
 	// Dials
-	public static Block axeDialBlock = new AxeDialBlock();
-	public static Block impactDialBlock = new ImpactDialBlock();
-	public static Block flashDialBlock = new FlashDialBlock();
-	public static Block breathDialBlock = new BreathDialBlock();
-	public static Block eisenDialBlock = new EisenDialBlock();
-	public static Block milkyDialBlock = new MilkyDialBlock();
-	public static Block flameDialBlock = new FlameDialBlock();
-	public static Block rejectDialBlock = new RejectDialBlock();
+	public static final Block AXE_DIAL = new AxeDialBlock();
+	public static final Block IMPACT_DIAL = new ImpactDialBlock();
+	public static final Block FLASH_DIAL = new FlashDialBlock();
+	public static final Block BREATH_DIAL = new BreathDialBlock();
+	public static final Block EISEN_DIAL = new EisenDialBlock();
+	public static final Block MILKY_DIAL = new MilkyDialBlock();
+	public static final Block FLAME_DIAL = new FlameDialBlock();
+	public static final Block REJECT_DIAL = new RejectDialBlock();
 
 	// Ability Protection
-	public static Block abilityProtection = new AblProtectionBlock();
+	public static final Block ABILITY_PROTECTION = new AblProtectionBlock();
 	/*
-	public static Block AbilityProtectionAreaBlock = new BlockAbilityProtectionArea();
-	public static Block AbilityProtectionCenterBlock = new BlockAbilityProtectionArea();
+	public static final Block AbilityProtectionAreaBlock = new BlockAbilityProtectionArea();
+	public static final Block AbilityProtectionCenterBlock = new BlockAbilityProtectionArea();
 	*/
 
 	@SubscribeEvent
@@ -117,51 +117,51 @@ public class ModBlocks
 		// Register the blocks themselves
         event.getRegistry().registerAll
         (
-        	WyRegistry.registerBlock(ope, "Ope"),
-        	WyRegistry.registerBlock(opeMid, "Ope Mid"),
-        	WyRegistry.registerBlock(kairosekiBlock, "Kairoseki Block"),
-        	WyRegistry.registerBlock(kairosekiOre, "Kairoseki Ore"),
-        	WyRegistry.registerBlock(skyBlock, "Sky Block"),
-        	WyRegistry.registerBlock(kairosekiBars, "Kairoseki Bars", new JSONModelBars("Kairoseki Bars")),
-        	WyRegistry.registerBlock(kageBlock, "Kage Block"),
-        	WyRegistry.registerBlock(sunaSand, "Suna Sand"),
-        	WyRegistry.registerBlock(waxBlock, "Wax Block"),
-        	WyRegistry.registerBlock(poison, "Poison", new JSONModelThinBlock("Poison")),
-        	WyRegistry.registerBlock(demonPoison, "Demon Poison", new JSONModelThinBlock("Demon Poison")),
-        	WyRegistry.registerBlock(stringWall, "String Wall"),
-        	WyRegistry.registerBlock(stringMid, "String Mid"),
-        	WyRegistry.registerBlock(barrier, "Barrier"),
-        	WyRegistry.registerBlock(darkness, "Darkness"),
-        	WyRegistry.registerBlock(oriBars, "Ori Bars", new JSONModelBars("Ori Bars")),
-        	WyRegistry.registerBlock(customSpawner, "Custom Spawner"),
-        	WyRegistry.registerBlock(wantedPosterPackage, "Wanted Poster Package"),
-        	WyRegistry.registerBlock(wantedPoster, "Wanted Poster"),
-        	WyRegistry.registerBlock(axeDialBlock, "Axe Dial"),
-        	WyRegistry.registerBlock(breathDialBlock, "Breath Dial"),
-        	WyRegistry.registerBlock(flameDialBlock, "Flame Dial"),
-        	WyRegistry.registerBlock(rejectDialBlock, "Reject Dial"),
-        	WyRegistry.registerBlock(impactDialBlock, "Impact Dial"),
-        	WyRegistry.registerBlock(flashDialBlock, "Flash Dial"),
-        	WyRegistry.registerBlock(eisenDialBlock, "Eisen Dial"),
-        	WyRegistry.registerBlock(milkyDialBlock, "Milky Dial"),
-        	WyRegistry.registerBlock(abilityProtection, "Ability Protection")
+        	WyRegistry.registerBlock(OPE, "Ope"),
+        	WyRegistry.registerBlock(OPE_MID, "Ope Mid"),
+        	WyRegistry.registerBlock(KAIROSEKI, "Kairoseki Block"),
+        	WyRegistry.registerBlock(KAIROSEKI_ORE, "Kairoseki Ore"),
+        	WyRegistry.registerBlock(SKY_BLOCK, "Sky Block"),
+        	WyRegistry.registerBlock(KAIROSEKI_BARS, "Kairoseki Bars", new JSONModelBars("Kairoseki Bars")),
+        	WyRegistry.registerBlock(KAGE, "Kage Block"),
+        	WyRegistry.registerBlock(SUNA_SAND, "Suna Sand"),
+        	WyRegistry.registerBlock(WAX, "Wax Block"),
+        	WyRegistry.registerBlock(POISON, "Poison", new JSONModelThinBlock("Poison")),
+        	WyRegistry.registerBlock(DEMON_POISON, "Demon Poison", new JSONModelThinBlock("Demon Poison")),
+        	WyRegistry.registerBlock(STRING_WALL, "String Wall"),
+        	WyRegistry.registerBlock(STRING_MID, "String Mid"),
+        	WyRegistry.registerBlock(BARRIER, "Barrier"),
+        	WyRegistry.registerBlock(DARKNESS, "Darkness"),
+        	WyRegistry.registerBlock(ORI_BARS, "Ori Bars", new JSONModelBars("Ori Bars")),
+        	WyRegistry.registerBlock(CUSTOM_SPAWNER, "Custom Spawner"),
+        	WyRegistry.registerBlock(WANTED_POSTER_PACKAGE, "Wanted Poster Package"),
+        	WyRegistry.registerBlock(WANTED_POSTER, "Wanted Poster"),
+        	WyRegistry.registerBlock(AXE_DIAL, "Axe Dial"),
+        	WyRegistry.registerBlock(BREATH_DIAL, "Breath Dial"),
+        	WyRegistry.registerBlock(FLAME_DIAL, "Flame Dial"),
+        	WyRegistry.registerBlock(REJECT_DIAL, "Reject Dial"),
+        	WyRegistry.registerBlock(IMPACT_DIAL, "Impact Dial"),
+        	WyRegistry.registerBlock(FLASH_DIAL, "Flash Dial"),
+        	WyRegistry.registerBlock(EISEN_DIAL, "Eisen Dial"),
+        	WyRegistry.registerBlock(MILKY_DIAL, "Milky Dial"),
+        	WyRegistry.registerBlock(ABILITY_PROTECTION, "Ability Protection")
         );
 
         // Register loot tables
         //Ore
-        WyRegistry.registerLootTable(kairosekiOre, new JSONLootTableSimpleBlock("Kairoseki", 3, 6));
+        WyRegistry.registerLootTable(KAIROSEKI_ORE, new JSONLootTableSimpleBlock("Kairoseki", 3, 6));
         
         //Self Drop
-        WyRegistry.registerLootTable(kairosekiBlock, new JSONLootTableSimpleBlock("Kairoseki Block"));
-        WyRegistry.registerLootTable(kairosekiBars, new JSONLootTableSimpleBlock("Kairoseki Bars"));
-        WyRegistry.registerLootTable(axeDialBlock, new JSONLootTableSimpleBlock("Axe Dial"));
-        WyRegistry.registerLootTable(breathDialBlock, new JSONLootTableSimpleBlock("Breath Dial"));
-        WyRegistry.registerLootTable(flameDialBlock, new JSONLootTableSimpleBlock("Flame Dial"));    
-        WyRegistry.registerLootTable(rejectDialBlock, new JSONLootTableSimpleBlock("Reject Dial"));
-        WyRegistry.registerLootTable(impactDialBlock, new JSONLootTableSimpleBlock("Impact Dial"));
-        WyRegistry.registerLootTable(flashDialBlock, new JSONLootTableSimpleBlock("Flash Dial"));
-        WyRegistry.registerLootTable(eisenDialBlock, new JSONLootTableSimpleBlock("Eisen Dial"));
-        WyRegistry.registerLootTable(milkyDialBlock, new JSONLootTableSimpleBlock("Milky Dial"));
+        WyRegistry.registerLootTable(KAIROSEKI, new JSONLootTableSimpleBlock("Kairoseki Block"));
+        WyRegistry.registerLootTable(KAIROSEKI_BARS, new JSONLootTableSimpleBlock("Kairoseki Bars"));
+        WyRegistry.registerLootTable(AXE_DIAL, new JSONLootTableSimpleBlock("Axe Dial"));
+        WyRegistry.registerLootTable(BREATH_DIAL, new JSONLootTableSimpleBlock("Breath Dial"));
+        WyRegistry.registerLootTable(FLAME_DIAL, new JSONLootTableSimpleBlock("Flame Dial"));    
+        WyRegistry.registerLootTable(REJECT_DIAL, new JSONLootTableSimpleBlock("Reject Dial"));
+        WyRegistry.registerLootTable(IMPACT_DIAL, new JSONLootTableSimpleBlock("Impact Dial"));
+        WyRegistry.registerLootTable(FLASH_DIAL, new JSONLootTableSimpleBlock("Flash Dial"));
+        WyRegistry.registerLootTable(EISEN_DIAL, new JSONLootTableSimpleBlock("Eisen Dial"));
+        WyRegistry.registerLootTable(MILKY_DIAL, new JSONLootTableSimpleBlock("Milky Dial"));
     }
 	
 	@SubscribeEvent
@@ -195,33 +195,33 @@ public class ModBlocks
     {
         event.getRegistry().registerAll
         (
-        	WyRegistry.registerItemBlock(ope, false),
-        	WyRegistry.registerItemBlock(opeMid, false),
-        	WyRegistry.registerItemBlock(kairosekiBlock, true),
-        	WyRegistry.registerItemBlock(kairosekiOre, true),
-        	WyRegistry.registerItemBlock(skyBlock, true),
-        	WyRegistry.registerItemBlock(kairosekiBars, true, new JSONModelSimpleItem("Kairoseki Bars")),
-        	WyRegistry.registerItemBlock(kageBlock, false),
-        	WyRegistry.registerItemBlock(sunaSand, false),
-        	WyRegistry.registerItemBlock(waxBlock, false),
-        	WyRegistry.registerItemBlock(poison, false),
-        	WyRegistry.registerItemBlock(demonPoison , false),
-        	WyRegistry.registerItemBlock(stringWall, false),
-        	WyRegistry.registerItemBlock(stringMid, false),
-        	WyRegistry.registerItemBlock(barrier, false),
-        	WyRegistry.registerItemBlock(darkness, false),
-        	WyRegistry.registerItemBlock(oriBars, false, new JSONModelSimpleItem("Ori Bars")),
-        	WyRegistry.registerItemBlock(customSpawner, false),
-        	WyRegistry.registerItemBlock(wantedPosterPackage, true, new JSONModelSimpleItem("Wanted Poster Package")),
-        	WyRegistry.registerCustomItemBlock(wantedPoster, new WantedPosterItem()),
-        	WyRegistry.registerCustomItemBlock(axeDialBlock, new AxeDialItem()),
-        	WyRegistry.registerCustomItemBlock(breathDialBlock, new BreathDialItem()),
-        	WyRegistry.registerCustomItemBlock(flameDialBlock, new FlameDialItem()),
-        	WyRegistry.registerCustomItemBlock(rejectDialBlock, new RejectDialItem()),
-        	WyRegistry.registerCustomItemBlock(impactDialBlock, new ImpactDialItem()),
-        	WyRegistry.registerCustomItemBlock(flashDialBlock, new FlashDialItem()),
-        	WyRegistry.registerCustomItemBlock(eisenDialBlock, new EisenDialItem()),
-        	WyRegistry.registerCustomItemBlock(milkyDialBlock, new MilkyDialItem())
+        	WyRegistry.registerItemBlock(OPE, false),
+        	WyRegistry.registerItemBlock(OPE_MID, false),
+        	WyRegistry.registerItemBlock(KAIROSEKI, true),
+        	WyRegistry.registerItemBlock(KAIROSEKI_ORE, true),
+        	WyRegistry.registerItemBlock(SKY_BLOCK, true),
+        	WyRegistry.registerItemBlock(KAIROSEKI_BARS, true, new JSONModelSimpleItem("Kairoseki Bars")),
+        	WyRegistry.registerItemBlock(KAGE, false),
+        	WyRegistry.registerItemBlock(SUNA_SAND, false),
+        	WyRegistry.registerItemBlock(WAX, false),
+        	WyRegistry.registerItemBlock(POISON, false),
+        	WyRegistry.registerItemBlock(DEMON_POISON , false),
+        	WyRegistry.registerItemBlock(STRING_WALL, false),
+        	WyRegistry.registerItemBlock(STRING_MID, false),
+        	WyRegistry.registerItemBlock(BARRIER, false),
+        	WyRegistry.registerItemBlock(DARKNESS, false),
+        	WyRegistry.registerItemBlock(ORI_BARS, false, new JSONModelSimpleItem("Ori Bars")),
+        	WyRegistry.registerItemBlock(CUSTOM_SPAWNER, false),
+        	WyRegistry.registerItemBlock(WANTED_POSTER_PACKAGE, true, new JSONModelSimpleItem("Wanted Poster Package")),
+        	WyRegistry.registerCustomItemBlock(WANTED_POSTER, new WantedPosterItem()),
+        	WyRegistry.registerCustomItemBlock(AXE_DIAL, new AxeDialItem()),
+        	WyRegistry.registerCustomItemBlock(BREATH_DIAL, new BreathDialItem()),
+        	WyRegistry.registerCustomItemBlock(FLAME_DIAL, new FlameDialItem()),
+        	WyRegistry.registerCustomItemBlock(REJECT_DIAL, new RejectDialItem()),
+        	WyRegistry.registerCustomItemBlock(IMPACT_DIAL, new ImpactDialItem()),
+        	WyRegistry.registerCustomItemBlock(FLASH_DIAL, new FlashDialItem()),
+        	WyRegistry.registerCustomItemBlock(EISEN_DIAL, new EisenDialItem()),
+        	WyRegistry.registerCustomItemBlock(MILKY_DIAL, new MilkyDialItem())
 
         );
     }

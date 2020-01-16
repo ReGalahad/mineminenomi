@@ -67,7 +67,7 @@ public class ItemsHelper
     	// Spawning the wanted posters
     	bountiesInPackage.stream().forEach(x -> 
     	{
-    		ItemStack stack = new ItemStack(ModBlocks.wantedPoster.asItem());
+    		ItemStack stack = new ItemStack(ModBlocks.WANTED_POSTER.asItem());
 	    	stack.setTag(setWantedData(world, x.getKey(), x.getValue()));
 	    	world.addEntity(new ItemEntity(world, posX, posY + 1, posZ, stack));
     	});

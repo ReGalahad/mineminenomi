@@ -21,7 +21,7 @@ public class CustomSpawnerTileEntity extends TileEntity implements ITickableTile
 	private int spawnLimit = 5;
 	private ArrayList<LivingEntity> spawnedEntities = new ArrayList<LivingEntity>();
 
-	public static final TileEntityType TILE_ENTITY = WyRegistry.registerTileEntity("custom_spawner", CustomSpawnerTileEntity::new, ModBlocks.customSpawner);
+	public static final TileEntityType TILE_ENTITY = WyRegistry.registerTileEntity("custom_spawner", CustomSpawnerTileEntity::new, ModBlocks.CUSTOM_SPAWNER);
 
 	public CustomSpawnerTileEntity()
 	{

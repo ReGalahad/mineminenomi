@@ -17,7 +17,7 @@ public class EisenDialItem extends BlockItem
 
 	public EisenDialItem()
 	{
-		super(ModBlocks.eisenDialBlock, new Properties().group(ModCreativeTabs.MISC).maxStackSize(16));
+		super(ModBlocks.EISEN_DIAL, new Properties().group(ModCreativeTabs.MISC).maxStackSize(16));
 	}
 	
 	@Override

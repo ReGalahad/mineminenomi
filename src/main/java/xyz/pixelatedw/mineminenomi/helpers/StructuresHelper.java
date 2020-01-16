@@ -74,7 +74,7 @@ public class StructuresHelper
 		{
 			int chance = max <= 0 ? min : (int) WyMathHelper.randomWithRange(min, max);		
 			CustomSpawnerTileEntity spawner = new CustomSpawnerTileEntity().setSpawnerMob(mobType).setSpawnerLimit(chance);
-			world.setBlockState(new BlockPos(pos[0], pos[1], pos[2]), ModBlocks.customSpawner.getDefaultState());
+			world.setBlockState(new BlockPos(pos[0], pos[1], pos[2]), ModBlocks.CUSTOM_SPAWNER.getDefaultState());
 			world.setTileEntity(new BlockPos(pos[0], pos[1], pos[2]), spawner);
 		}
 	}

@@ -7,13 +7,13 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility.Data;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 
 public class HoroProjectiles 
 {
-	public static HashMap<AbilityAttribute, AbilityProjectile.Data> projectiles = new HashMap<AbilityAttribute, AbilityProjectile.Data>();
+	public static HashMap<AbilityAttribute, ProjectileAbility.Data> projectiles = new HashMap<AbilityAttribute, ProjectileAbility.Data>();
 	
 	public static final EntityType NEGATIVE_HOLLOW = WyRegistry.registerEntityType("negative_hollow", NegativeHollow::new);
 	public static final EntityType MINI_HOLLOW = WyRegistry.registerEntityType("mini_hollow", MiniHollow::new);
@@ -27,7 +27,7 @@ public class HoroProjectiles
 		projectiles.put(ModAttributes.TOKU_HOLLOW, new Data(TOKU_HOLLOW, TokuHollow.class));
 	}
 	
-	public static class TokuHollow extends AbilityProjectile
+	public static class TokuHollow extends ProjectileAbility
 	{
 		public TokuHollow(World world)
 		{super(TOKU_HOLLOW, world);}
@@ -44,7 +44,7 @@ public class HoroProjectiles
 		}
 	}	
 	
-	public static class MiniHollow extends AbilityProjectile
+	public static class MiniHollow extends ProjectileAbility
 	{
 		public MiniHollow(World world)
 		{super(MINI_HOLLOW, world);}
@@ -61,7 +61,7 @@ public class HoroProjectiles
 		}
 	}	
 	
-	public static class NegativeHollow extends AbilityProjectile
+	public static class NegativeHollow extends ProjectileAbility
 	{
 		public NegativeHollow(World world)
 		{super(NEGATIVE_HOLLOW, world);}

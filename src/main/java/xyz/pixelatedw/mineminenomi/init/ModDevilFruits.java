@@ -22,15 +22,54 @@ import xyz.pixelatedw.mineminenomi.items.AkumaNoMiItem;
 @Mod.EventBusSubscriber(modid = Env.PROJECT_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModDevilFruits
 {
-
-	public static AkumaNoMiItem  MeraMeraNoMi, HieHieNoMi, BaneBaneNoMi, PikaPikaNoMi, GomuGomuNoMi, SukeSukeNoMi,
-			OpeOpeNoMi, NoroNoroNoMi, GoroGoroNoMi, MokuMokuNoMi, NikyuNikyuNoMi, BomuBomuNoMi, GuraGuraNoMi,
-			KageKageNoMi, SunaSunaNoMi, MaguMaguNoMi, DoruDoruNoMi, DokuDokuNoMi, BariBariNoMi, GasuGasuNoMi,
-			YukiYukiNoMi, JuryoJuryoNoMi, YamiYamiNoMi, ItoItoNoMi, HoroHoroNoMi, SupaSupaNoMi, OriOriNoMi, 
-			MeroMeroNoMi, GoeGoeNoMi, KiloKiloNoMi, HanaHanaNoMi, HoruHoruNoMi, BetaBetaNoMi, IshiIshiNoMi, 
-			PamuPamuNoMi, UshiUshiNoMiBison, ToriToriNoMiPhoenix, BakuBakuNoMi, YomiYomiNoMi, ZouZouNoMi,
-			SabiSabiNoMi, HitoHitoNoMi, ChiyuChiyuNoMi, MoguMoguNoMi, UshiUshiNoMiGiraffe, DoaDoaNoMi,
-			KachiKachiNoMi, MiniMiniNoMi;
+	
+	//public static final AkumaNoMiItem MINI_MINI_NO_MI = new AkumaNoMiItem("Mini Mini no Mi", EnumFruitType.PARAMECIA);
+	public static final AkumaNoMiItem KACHI_KACHI_NO_MI = new AkumaNoMiItem("Kachi Kachi no Mi", EnumFruitType.PARAMECIA);
+	public static final AkumaNoMiItem DOA_DOA_NO_MI = new AkumaNoMiItem("Doa Doa no Mi", EnumFruitType.PARAMECIA);
+	public static final AkumaNoMiItem USHI_USHI_NO_MI_GIRAFFE = new AkumaNoMiItem("Ushi Ushi no Mi, Model Giraffe", EnumFruitType.ZOAN);
+	public static final AkumaNoMiItem MOGU_MOGU_NO_MI = new AkumaNoMiItem("Mogu Mogu no Mi", EnumFruitType.ZOAN);
+	public static final AkumaNoMiItem CHIYU_CHIYU_NO_MI = new AkumaNoMiItem("Chiyu Chiyu no Mi", EnumFruitType.PARAMECIA);
+	public static final AkumaNoMiItem HITO_HITO_NO_MI = new AkumaNoMiItem("Hito Hito no Mi", EnumFruitType.ZOAN);
+	public static final AkumaNoMiItem SABI_SABI_NO_MI = new AkumaNoMiItem("Sabi Sabi no Mi", EnumFruitType.PARAMECIA);
+	public static final AkumaNoMiItem ZOU_ZOU_NO_MI = new AkumaNoMiItem("Zou Zou no Mi", EnumFruitType.ZOAN);
+	public static final AkumaNoMiItem YOMI_YOMI_NO_MI = new AkumaNoMiItem("Yomi Yomi no Mi", EnumFruitType.PARAMECIA);
+	public static final AkumaNoMiItem BAKU_BAKU_NO_MI = new AkumaNoMiItem("Baku Baku no Mi", EnumFruitType.PARAMECIA);
+	public static final AkumaNoMiItem TORI_TORI_NO_MI_PHOENIX = new AkumaNoMiItem("Tori Tori no Mi, Model: Phoenix", EnumFruitType.ZOAN);
+	public static final AkumaNoMiItem USHI_USHI_NO_MI_BISON = new AkumaNoMiItem("Ushi Ushi no Mi, Model: Bison", EnumFruitType.ZOAN);
+	//public static final AkumaNoMiItem PAMU_PAMU_NO_MI = new AkumaNoMiItem("Pamu Pamu no Mi", EnumFruitType.PARAMECIA);
+	//public static final AkumaNoMiItem ISHI_ISHI_NO_MI = new AkumaNoMiItem("Ishi Ishi no Mi", EnumFruitType.PARAMECIA);
+	//public static final AkumaNoMiItem BETA_BETA_NO_MI = new AkumaNoMiItem("Beta Beta no Mi", EnumFruitType.PARAMECIA);
+	public static final AkumaNoMiItem HORU_HORU_NO_MI = new AkumaNoMiItem("Horu Horu no Mi", EnumFruitType.PARAMECIA);
+	//public static final AkumaNoMiItem HANA_HANA_NO_MI = new AkumaNoMiItem("Hana Hana no Mi", EnumFruitType.PARAMECIA);
+	public static final AkumaNoMiItem KILO_KILO_NO_MI = new AkumaNoMiItem("Kilo Kilo no Mi", EnumFruitType.PARAMECIA);
+	public static final AkumaNoMiItem GOE_GOE_NO_MI = new AkumaNoMiItem("Goe Goe no Mi", EnumFruitType.PARAMECIA);
+	public static final AkumaNoMiItem MERO_MERO_NO_MI = new AkumaNoMiItem("Mero Mero no Mi", EnumFruitType.PARAMECIA);
+	public static final AkumaNoMiItem ORI_ORI_NO_MI = new AkumaNoMiItem("Ori Ori no Mi", EnumFruitType.PARAMECIA);
+	public static final AkumaNoMiItem SUPA_SUPA_NO_MI = new AkumaNoMiItem("Supa Supa no Mi", EnumFruitType.PARAMECIA);
+	public static final AkumaNoMiItem HORO_HORO_NO_MI = new AkumaNoMiItem("Horo Horo no Mi", EnumFruitType.PARAMECIA);
+	public static final AkumaNoMiItem ITO_ITO_NO_MI = new AkumaNoMiItem("Ito Ito no Mi", EnumFruitType.PARAMECIA);
+	public static final AkumaNoMiItem YAMI_YAMI_NO_MI = new AkumaNoMiItem("Yami Yami no Mi", EnumFruitType.LOGIA);
+	public static final AkumaNoMiItem JURYO_JURYO_NO_MI = new AkumaNoMiItem("Juryo Juryo no Mi", EnumFruitType.PARAMECIA);
+	public static final AkumaNoMiItem YUKI_YUKI_NO_MI = new AkumaNoMiItem("Yuki Yuki no Mi", EnumFruitType.LOGIA);
+	public static final AkumaNoMiItem GASU_GASU_NO_MI = new AkumaNoMiItem("Gasu Gasu no Mi", EnumFruitType.LOGIA);
+	public static final AkumaNoMiItem BARI_BARI_NO_MI = new AkumaNoMiItem("Bari Bari no Mi", EnumFruitType.PARAMECIA);
+	public static final AkumaNoMiItem DOKU_DOKU_NO_MI = new AkumaNoMiItem("Doku Doku no Mi", EnumFruitType.PARAMECIA);
+	public static final AkumaNoMiItem DORU_DORU_NO_MI = new AkumaNoMiItem("Doru Doru no Mi", EnumFruitType.PARAMECIA);
+	public static final AkumaNoMiItem MAGU_MAGU_NO_MI = new AkumaNoMiItem("Magu Magu no Mi", EnumFruitType.LOGIA);
+	public static final AkumaNoMiItem SUNA_SUNA_NO_MI = new AkumaNoMiItem("Suna Suna no Mi", EnumFruitType.LOGIA);
+	public static final AkumaNoMiItem KAGE_KAGE_NO_MI = new AkumaNoMiItem("Kage Kage no Mi", EnumFruitType.PARAMECIA);
+	public static final AkumaNoMiItem GURA_GURA_NO_MI = new AkumaNoMiItem("Gura Gura no Mi", EnumFruitType.PARAMECIA);
+	public static final AkumaNoMiItem BOMU_BOMU_NO_MI = new AkumaNoMiItem("Bomu Bomu no Mi", EnumFruitType.PARAMECIA);
+	public static final AkumaNoMiItem NIKYU_NIKYU_NO_MI = new AkumaNoMiItem("Nikyu Nikyu no Mi", EnumFruitType.PARAMECIA);
+	public static final AkumaNoMiItem MOKU_MOKU_NO_MI = new AkumaNoMiItem("Moku Moku no Mi", EnumFruitType.LOGIA);
+	public static final AkumaNoMiItem GORO_GORO_NO_MI = new AkumaNoMiItem("Goro Goro no Mi", EnumFruitType.LOGIA);
+	public static final AkumaNoMiItem NORO_NORO_NO_MI = new AkumaNoMiItem("Noro Noro no Mi", EnumFruitType.PARAMECIA);
+	public static final AkumaNoMiItem OPE_OPE_NO_MI = new AkumaNoMiItem("Ope Ope no Mi", EnumFruitType.PARAMECIA);
+	public static final AkumaNoMiItem SUKE_SUKE_NO_MI = new AkumaNoMiItem("Suke Suke no Mi", EnumFruitType.PARAMECIA);
+	public static final AkumaNoMiItem GOMU_GOMU_NO_MI = new AkumaNoMiItem("Gomu Gomu no Mi", EnumFruitType.PARAMECIA);
+	public static final AkumaNoMiItem PIKA_PIKA_NO_MI = new AkumaNoMiItem("Pika Pika no Mi", EnumFruitType.LOGIA);
+	public static final AkumaNoMiItem HIE_HIE_NO_MI = new AkumaNoMiItem("Hie Hie no Mi", EnumFruitType.LOGIA);
+	public static final AkumaNoMiItem MERA_MERA_NO_MI = new AkumaNoMiItem("Mera Mera no Mi", EnumFruitType.LOGIA, HikenAbility.INSTANCE, HiganAbility.INSTANCE, DaiEnkaiEnteiAbility.INSTANCE);
 
 	public static final List[] ALL_PROJECTILES = new List[] 
 		{
@@ -52,95 +91,6 @@ public class ModDevilFruits
         if (!event.getName().equals(ForgeRegistries.ITEMS.getRegistryName())) return;
     	
 		int totalFruits = 0, totalAbilities = 0;	
-
-		//MiniMiniNoMi = new ItemAkumaNoMi(EnumFruitType.PARAMECIA, MiniAbilities.abilitiesArray);
-		//registerDevilFruit(MiniMiniNoMi, "Mini Mini no Mi");
-		/*KachiKachiNoMi = new AkumaNoMiItem(EnumFruitType.PARAMECIA, KachiAbilities.abilitiesArray);
-		registerDevilFruit(KachiKachiNoMi, "Kachi Kachi no Mi");
-		//DoaDoaNoMi = new AkumaNoMiItem(EnumFruitType.PARAMECIA, DoaAbilities.abilitiesArray);
-		//registerDevilFruit(DoaDoaNoMi, "Doa Doa no Mi");
-		UshiUshiNoMiGiraffe = new AkumaNoMiItem(EnumFruitType.ZOAN, UshiGiraffeAbilities.abilitiesArray);
-		registerDevilFruit(UshiUshiNoMiGiraffe, "Ushi Ushi no Mi, Model Giraffe");
-		MoguMoguNoMi = new AkumaNoMiItem(EnumFruitType.ZOAN, MoguAbilities.abilitiesArray);
-		registerDevilFruit(MoguMoguNoMi, "Mogu Mogu no Mi");
-		HoruHoruNoMi = new AkumaNoMiItem(EnumFruitType.PARAMECIA, HoruAbilities.abilitiesArray);
-		registerDevilFruit(HoruHoruNoMi, "Horu Horu no Mi");
-		ChiyuChiyuNoMi = new AkumaNoMiItem(EnumFruitType.PARAMECIA, ChiyuAbilities.abilitiesArray);
-		registerDevilFruit(ChiyuChiyuNoMi, "Chiyu Chiyu no Mi");
-		MeroMeroNoMi = new AkumaNoMiItem(EnumFruitType.PARAMECIA, MeroAbilities.abilitiesArray);
-		registerDevilFruit(MeroMeroNoMi, "Mero Mero no Mi");
-		SupaSupaNoMi = new AkumaNoMiItem(EnumFruitType.PARAMECIA, SupaAbilities.abilitiesArray);
-		registerDevilFruit(SupaSupaNoMi, "Supa Supa no Mi");
-		HitoHitoNoMi = new AkumaNoMiItem(EnumFruitType.ZOAN, new Ability[] {});
-		registerDevilFruit(HitoHitoNoMi, "Hito Hito no Mi");
-		SabiSabiNoMi = new AkumaNoMiItem(EnumFruitType.PARAMECIA, SabiAbilities.abilitiesArray);
-		registerDevilFruit(SabiSabiNoMi, "Sabi Sabi no Mi");
-		ZouZouNoMi = new AkumaNoMiItem(EnumFruitType.ZOAN, ZouAbilities.abilitiesArray);
-		registerDevilFruit(ZouZouNoMi, "Zou Zou no Mi");
-		YomiYomiNoMi = new AkumaNoMiItem(EnumFruitType.PARAMECIA, YomiAbilities.abilitiesArray);
-		registerDevilFruit(YomiYomiNoMi, "Yomi Yomi no Mi");
-		BakuBakuNoMi = new AkumaNoMiItem(EnumFruitType.PARAMECIA, BakuAbilities.abilitiesArray);
-		registerDevilFruit(BakuBakuNoMi, "Baku Baku no Mi");
-		//KiloKiloNoMi = new AkumaNoMiItem(EnumFruitType.PARAMECIA, KiloAbilities.abilitiesArray);
-		//registerDevilFruit(KiloKiloNoMi, "Kilo Kilo no Mi");
-		OriOriNoMi = new AkumaNoMiItem(EnumFruitType.PARAMECIA, OriAbilities.abilitiesArray);
-		registerDevilFruit(OriOriNoMi, "Ori Ori no Mi");
-		ToriToriNoMiPhoenix = new AkumaNoMiItem(EnumFruitType.MYTHICALZOAN, ToriPhoenixAbilities.abilitiesArray);
-		registerDevilFruit(ToriToriNoMiPhoenix, "Tori Tori no Mi, Model Phoenix");
-		UshiUshiNoMiBison = new AkumaNoMiItem(EnumFruitType.ZOAN, UshiBisonAbilities.abilitiesArray);
-		registerDevilFruit(UshiUshiNoMiBison, "Ushi Ushi no Mi, Model Bison");
-		JuryoJuryoNoMi = new AkumaNoMiItem(EnumFruitType.PARAMECIA, JuryoAbilities.abilitiesArray);
-		registerDevilFruit(JuryoJuryoNoMi, "Zushi Zushi no Mi");
-		YamiYamiNoMi = new AkumaNoMiItem(EnumFruitType.LOGIA, YamiAbilities.abilitiesArray);
-		registerDevilFruit(YamiYamiNoMi, "Yami Yami no Mi");
-		GoeGoeNoMi = new AkumaNoMiItem(EnumFruitType.PARAMECIA, GoeAbilities.abilitiesArray);
-		registerDevilFruit(GoeGoeNoMi, "Goe Goe no Mi");
-		HoroHoroNoMi = new AkumaNoMiItem(EnumFruitType.PARAMECIA, HoroAbilities.abilitiesArray);
-		registerDevilFruit(HoroHoroNoMi, "Horo Horo no Mi");
-		BariBariNoMi = new AkumaNoMiItem(EnumFruitType.PARAMECIA, BariAbilities.abilitiesArray);
-		registerDevilFruit(BariBariNoMi, "Bari Bari no Mi");
-		ItoItoNoMi = new AkumaNoMiItem(EnumFruitType.PARAMECIA, ItoAbilities.abilitiesArray);
-		registerDevilFruit(ItoItoNoMi, "Ito Ito no Mi");
-		YukiYukiNoMi = new AkumaNoMiItem(EnumFruitType.LOGIA, YukiAbilities.abilitiesArray);
-		registerDevilFruit(YukiYukiNoMi, "Yuki Yuki no Mi");
-		GasuGasuNoMi = new AkumaNoMiItem(EnumFruitType.LOGIA, GasuAbilities.abilitiesArray);
-		registerDevilFruit(GasuGasuNoMi, "Gasu Gasu no Mi");
-		DokuDokuNoMi = new AkumaNoMiItem(EnumFruitType.PARAMECIA, DokuAbilities.abilitiesArray);
-		registerDevilFruit(DokuDokuNoMi, "Doku Doku no Mi");
-		DoruDoruNoMi = new AkumaNoMiItem(EnumFruitType.PARAMECIA, DoruAbilities.abilitiesArray);
-		registerDevilFruit(DoruDoruNoMi, "Doru Doru no Mi");
-		MaguMaguNoMi = new AkumaNoMiItem(EnumFruitType.LOGIA, MaguAbilities.abilitiesArray);
-		registerDevilFruit(MaguMaguNoMi, "Magu Magu no Mi");
-		SunaSunaNoMi = new AkumaNoMiItem(EnumFruitType.LOGIA, SunaAbilities.abilitiesArray);
-		registerDevilFruit(SunaSunaNoMi, "Suna Suna no Mi");
-		KageKageNoMi = new AkumaNoMiItem(EnumFruitType.PARAMECIA, KageAbilities.abilitiesArray);
-		registerDevilFruit(KageKageNoMi, "Kage Kage no Mi");
-		GuraGuraNoMi = new AkumaNoMiItem(EnumFruitType.PARAMECIA, GuraAbilities.abilitiesArray);
-		registerDevilFruit(GuraGuraNoMi, "Gura Gura no Mi");
-		BomuBomuNoMi = new AkumaNoMiItem(EnumFruitType.PARAMECIA, BomuAbilities.abilitiesArray);
-		registerDevilFruit(BomuBomuNoMi, "Bomu Bomu no Mi");
-		NikyuNikyuNoMi = new AkumaNoMiItem(EnumFruitType.PARAMECIA, NikyuAbilities.abilitiesArray);
-		registerDevilFruit(NikyuNikyuNoMi, "Nikyu Nikyu no Mi");
-		MokuMokuNoMi = new AkumaNoMiItem(EnumFruitType.LOGIA, MokuAbilities.abilitiesArray);
-		registerDevilFruit(MokuMokuNoMi, "Moku Moku no Mi");
-		GoroGoroNoMi = new AkumaNoMiItem(EnumFruitType.LOGIA, GoroAbilities.abilitiesArray);
-		registerDevilFruit(GoroGoroNoMi, "Goro Goro no Mi");
-		OpeOpeNoMi = new AkumaNoMiItem(EnumFruitType.PARAMECIA, OpeAbilities.abilitiesArray);
-		registerDevilFruit(OpeOpeNoMi, "Ope Ope no Mi");
-		NoroNoroNoMi = new AkumaNoMiItem(EnumFruitType.PARAMECIA, NoroAbilities.abilitiesArray);
-		registerDevilFruit(NoroNoroNoMi, "Noro Noro no Mi");
-		SukeSukeNoMi = new AkumaNoMiItem(EnumFruitType.PARAMECIA, SukeAbilities.abilitiesArray);
-		registerDevilFruit(SukeSukeNoMi, "Suke Suke no Mi");
-		PikaPikaNoMi = new AkumaNoMiItem(EnumFruitType.LOGIA, PikaAbilities.abilitiesArray);
-		registerDevilFruit(PikaPikaNoMi, "Pika Pika no Mi");
-		GomuGomuNoMi = new AkumaNoMiItem(EnumFruitType.PARAMECIA, GomuAbilities.abilitiesArray);
-		registerDevilFruit(GomuGomuNoMi, "Gomu Gomu no Mi");
-		BaneBaneNoMi = new AkumaNoMiItem(EnumFruitType.PARAMECIA, BaneAbilities.abilitiesArray);
-		registerDevilFruit(BaneBaneNoMi, "Bane Bane no Mi");
-		HieHieNoMi = new AkumaNoMiItem(EnumFruitType.LOGIA, HieAbilities.abilitiesArray);
-		registerDevilFruit(HieHieNoMi, "Hie Hie no Mi");*/
-		MeraMeraNoMi = new AkumaNoMiItem(EnumFruitType.LOGIA, HikenAbility.INSTANCE, HiganAbility.INSTANCE, DaiEnkaiEnteiAbility.INSTANCE);
-		registerDevilFruit(MeraMeraNoMi, "Mera Mera no Mi");        
 		
 		for(AkumaNoMiItem df : ModValues.devilfruits)
 		{
@@ -159,13 +109,4 @@ public class ModDevilFruits
 		
 		event.getRegistry().registerAll(ModValues.devilfruits.toArray(new AkumaNoMiItem[0]));
     }
-	
-	private static void registerDevilFruit(AkumaNoMiItem item, String localizedName) 
-	{
-		if (item.type == EnumFruitType.LOGIA)
-			ModValues.logias.add(item);
-		ModValues.devilfruits.add(item);
-		WyRegistry.registerItem(item, localizedName);
-	}
-
 }

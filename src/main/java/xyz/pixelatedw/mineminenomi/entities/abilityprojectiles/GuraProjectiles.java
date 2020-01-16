@@ -8,8 +8,8 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility.Data;
 import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
@@ -18,7 +18,7 @@ import xyz.pixelatedw.mineminenomi.particles.CustomParticleData;
 public class GuraProjectiles 
 {
 
-	public static HashMap<AbilityAttribute, AbilityProjectile.Data> projectiles = new HashMap<AbilityAttribute, AbilityProjectile.Data>();
+	public static HashMap<AbilityAttribute, ProjectileAbility.Data> projectiles = new HashMap<AbilityAttribute, ProjectileAbility.Data>();
 	
 	public static final EntityType SHIMA_YURASHI = WyRegistry.registerEntityType("shima_yurashi", ShimaYurashi::new);
 	public static final EntityType KAISHIN = WyRegistry.registerEntityType("kaishin", Kaishin::new);
@@ -29,7 +29,7 @@ public class GuraProjectiles
 		projectiles.put(ModAttributes.KAISHIN, new Data(KAISHIN, Kaishin.class));
 	}
 	
-	public static class ShimaYurashi extends AbilityProjectile
+	public static class ShimaYurashi extends ProjectileAbility
 	{
 		public ShimaYurashi(World world)
 		{super(SHIMA_YURASHI, world);}
@@ -77,7 +77,7 @@ public class GuraProjectiles
 		}
 	}	
 	
-	public static class Kaishin extends AbilityProjectile
+	public static class Kaishin extends ProjectileAbility
 	{
 		public Kaishin(World world)
 		{super(KAISHIN, world);}

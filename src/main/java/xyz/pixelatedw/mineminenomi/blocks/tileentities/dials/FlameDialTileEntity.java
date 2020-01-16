@@ -7,7 +7,7 @@ import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 
 public class FlameDialTileEntity extends TileEntity
 {
-	public static final TileEntityType TILE_ENTITY = WyRegistry.registerTileEntity("flame_dial_block", FlameDialTileEntity::new, ModBlocks.flameDialBlock);
+	public static final TileEntityType TILE_ENTITY = WyRegistry.registerTileEntity("flame_dial_block", FlameDialTileEntity::new, ModBlocks.FLAME_DIAL);
 	
 	public FlameDialTileEntity()
 	{

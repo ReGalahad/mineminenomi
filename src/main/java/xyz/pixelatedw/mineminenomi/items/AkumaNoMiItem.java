@@ -22,6 +22,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.EnumFruitType;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
+import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
@@ -39,15 +40,18 @@ import xyz.pixelatedw.mineminenomi.packets.client.CDevilFruitSyncPacket;
 
 public class AkumaNoMiItem extends Item
 {
-
+	private String name;
 	public EnumFruitType type;
 	public Ability[] abilities;
 
-	public AkumaNoMiItem(EnumFruitType type, Ability... abilitiesArray)
+	public AkumaNoMiItem(String name, EnumFruitType type, Ability... abilitiesArray)
 	{
 		super(new Item.Properties().group(ModCreativeTabs.DEVIL_FRUITS).maxStackSize(1).food(Foods.APPLE));
+		this.name = name;
 		this.type = type;
 		this.abilities = abilitiesArray;
+		
+		this.registerDevilFruit();
 	}
 
 	@Override
@@ -143,4 +147,11 @@ public class AkumaNoMiItem extends Item
 		return type;
 	}
 
+	private void registerDevilFruit() 
+	{
+		if (this.type == EnumFruitType.LOGIA)
+			ModValues.logias.add(this);
+		ModValues.devilfruits.add(this);
+		WyRegistry.registerItem(this, this.name);
+	}
 }

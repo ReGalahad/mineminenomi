@@ -7,14 +7,14 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility.Data;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 
 public class BomuProjectiles 
 {
 
-	public static HashMap<AbilityAttribute, AbilityProjectile.Data> projectiles = new HashMap<AbilityAttribute, AbilityProjectile.Data>();
+	public static HashMap<AbilityAttribute, ProjectileAbility.Data> projectiles = new HashMap<AbilityAttribute, ProjectileAbility.Data>();
 	
 	public static final EntityType NOSE_FANCY_CANNON = WyRegistry.registerEntityType("nose_fancy_cannon", NoseFancyCannon::new);
 	
@@ -23,7 +23,7 @@ public class BomuProjectiles
 		projectiles.put(ModAttributes.NOSE_FANCY_CANNON, new Data(NOSE_FANCY_CANNON, NoseFancyCannon.class));
 	}
 	
-	public static class NoseFancyCannon extends AbilityProjectile
+	public static class NoseFancyCannon extends ProjectileAbility
 	{
 		public NoseFancyCannon(World world)
 		{super(NOSE_FANCY_CANNON, world);}

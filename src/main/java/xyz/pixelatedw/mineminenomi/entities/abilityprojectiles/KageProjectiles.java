@@ -14,8 +14,8 @@ import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility.Data;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.mineminenomi.init.ModExtraAttributes;
@@ -23,7 +23,7 @@ import xyz.pixelatedw.mineminenomi.init.ModExtraAttributes;
 public class KageProjectiles 
 {
 	
-	public static HashMap<AbilityAttribute, AbilityProjectile.Data> projectiles = new HashMap<AbilityAttribute, AbilityProjectile.Data>();
+	public static HashMap<AbilityAttribute, ProjectileAbility.Data> projectiles = new HashMap<AbilityAttribute, ProjectileAbility.Data>();
 	
 	public static final EntityType TSUNOTOKAGE_PILLAR = WyRegistry.registerEntityType("tsunotokage_pillar", TsunotokagePillar::new);
 	public static final EntityType BLACK_BOX = WyRegistry.registerEntityType("black_box", BlackBox::new);
@@ -36,7 +36,7 @@ public class KageProjectiles
 		projectiles.put(ModAttributes.BRICK_BAT, new Data(BRICK_BAT, BrickBat.class));
 	}
 	
-	public static class BrickBat extends AbilityProjectile
+	public static class BrickBat extends ProjectileAbility
 	{
 		public BrickBat(World world)
 		{super(BRICK_BAT, world);}
@@ -53,7 +53,7 @@ public class KageProjectiles
 		}
 	}	
 
-	public static class BlackBox extends AbilityProjectile
+	public static class BlackBox extends ProjectileAbility
 	{
 		public BlackBox(World world)
 		{super(BLACK_BOX, world);}
@@ -77,12 +77,12 @@ public class KageProjectiles
 				EntityRayTraceResult entityHit = (EntityRayTraceResult) hit;
 				LivingEntity entity = (LivingEntity) entityHit.getEntity();
 						
-				WyHelper.createFilledCube(entity, new int[] {2, 2, 2}, ModBlocks.kageBlock, "air", "foliage");
+				WyHelper.createFilledCube(entity, new int[] {2, 2, 2}, ModBlocks.KAGE, "air", "foliage");
 			}
 		}
 	}	
 	
-	public static class TsunotokagePillar extends AbilityProjectile
+	public static class TsunotokagePillar extends ProjectileAbility
 	{
 		public TsunotokagePillar(World world)
 		{super(TSUNOTOKAGE_PILLAR, world);}

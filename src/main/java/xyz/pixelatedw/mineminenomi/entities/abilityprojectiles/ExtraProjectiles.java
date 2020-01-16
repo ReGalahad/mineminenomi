@@ -14,14 +14,14 @@ import net.minecraftforge.fml.network.NetworkHooks;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility.Data;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.mineminenomi.init.ModExtraAttributes;
 
 public class ExtraProjectiles 
 {
-	public static HashMap<AbilityAttribute, AbilityProjectile.Data> projectiles = new HashMap<AbilityAttribute, AbilityProjectile.Data>();
+	public static HashMap<AbilityAttribute, ProjectileAbility.Data> projectiles = new HashMap<AbilityAttribute, ProjectileAbility.Data>();
 	
 	public static final EntityType NORMAL_BULLET = WyRegistry.registerEntityType("normal_bullet", NormalBullet::new);
 	public static final EntityType KAIROSEKI_BULLET = WyRegistry.registerEntityType("kairoseki_bullet", KairosekiBullet::new);
@@ -97,7 +97,7 @@ public class ExtraProjectiles
 		public IPacket<?> createSpawnPacket() { return NetworkHooks.getEntitySpawningPacket(this); }
 	}
 	
-	public static class MilkyDialProjectile extends AbilityProjectile
+	public static class MilkyDialProjectile extends ProjectileAbility
 	{
 		public MilkyDialProjectile(World world)
 		{super(MILKY_DIAL_PROJECTILE, world);}
@@ -116,22 +116,22 @@ public class ExtraProjectiles
 		@Override
 		public void tick()
 		{
-			WyHelper.placeBlockIfAllowed(this.world, (int)this.posX, (int)this.posY - 1, (int)this.posZ, ModBlocks.skyBlock, "air");
-			WyHelper.placeBlockIfAllowed(this.world, (int)this.posX + 1, (int)this.posY - 1, (int)this.posZ, ModBlocks.skyBlock, "air");
-			WyHelper.placeBlockIfAllowed(this.world, (int)this.posX - 1, (int)this.posY - 1, (int)this.posZ, ModBlocks.skyBlock, "air");
-			WyHelper.placeBlockIfAllowed(this.world, (int)this.posX + 1, (int)this.posY - 1, (int)this.posZ + 1, ModBlocks.skyBlock, "air");
-			WyHelper.placeBlockIfAllowed(this.world, (int)this.posX + 1, (int)this.posY - 1, (int)this.posZ - 1, ModBlocks.skyBlock, "air");
-			WyHelper.placeBlockIfAllowed(this.world, (int)this.posX - 1, (int)this.posY - 1, (int)this.posZ + 1, ModBlocks.skyBlock, "air");
-			WyHelper.placeBlockIfAllowed(this.world, (int)this.posX, (int)this.posY - 1, (int)this.posZ + 1, ModBlocks.skyBlock, "air");
-			WyHelper.placeBlockIfAllowed(this.world, (int)this.posX, (int)this.posY - 1, (int)this.posZ - 1, ModBlocks.skyBlock, "air");
-			WyHelper.placeBlockIfAllowed(this.world, (int)this.posX - 1, (int)this.posY - 1, (int)this.posZ - 1, ModBlocks.skyBlock, "air");
-			WyHelper.placeBlockIfAllowed(this.world, (int)this.posX, (int)this.posY - 2, (int)this.posZ, ModBlocks.skyBlock, "air");
+			WyHelper.placeBlockIfAllowed(this.world, (int)this.posX, (int)this.posY - 1, (int)this.posZ, ModBlocks.SKY_BLOCK, "air");
+			WyHelper.placeBlockIfAllowed(this.world, (int)this.posX + 1, (int)this.posY - 1, (int)this.posZ, ModBlocks.SKY_BLOCK, "air");
+			WyHelper.placeBlockIfAllowed(this.world, (int)this.posX - 1, (int)this.posY - 1, (int)this.posZ, ModBlocks.SKY_BLOCK, "air");
+			WyHelper.placeBlockIfAllowed(this.world, (int)this.posX + 1, (int)this.posY - 1, (int)this.posZ + 1, ModBlocks.SKY_BLOCK, "air");
+			WyHelper.placeBlockIfAllowed(this.world, (int)this.posX + 1, (int)this.posY - 1, (int)this.posZ - 1, ModBlocks.SKY_BLOCK, "air");
+			WyHelper.placeBlockIfAllowed(this.world, (int)this.posX - 1, (int)this.posY - 1, (int)this.posZ + 1, ModBlocks.SKY_BLOCK, "air");
+			WyHelper.placeBlockIfAllowed(this.world, (int)this.posX, (int)this.posY - 1, (int)this.posZ + 1, ModBlocks.SKY_BLOCK, "air");
+			WyHelper.placeBlockIfAllowed(this.world, (int)this.posX, (int)this.posY - 1, (int)this.posZ - 1, ModBlocks.SKY_BLOCK, "air");
+			WyHelper.placeBlockIfAllowed(this.world, (int)this.posX - 1, (int)this.posY - 1, (int)this.posZ - 1, ModBlocks.SKY_BLOCK, "air");
+			WyHelper.placeBlockIfAllowed(this.world, (int)this.posX, (int)this.posY - 2, (int)this.posZ, ModBlocks.SKY_BLOCK, "air");
 			
 			super.tick();
 		}
 	}	
 	
-	public static class AxeDialProjectile extends AbilityProjectile
+	public static class AxeDialProjectile extends ProjectileAbility
 	{
 		public AxeDialProjectile(World world)
 		{super(AXE_DIAL_PROJECTILE, world);}
@@ -154,7 +154,7 @@ public class ExtraProjectiles
 		}	
 	}	
 	
-	public static class PopGreen extends AbilityProjectile
+	public static class PopGreen extends ProjectileAbility
 	{
 		public PopGreen(World world)
 		{super(POP_GREEN, world);}
@@ -171,7 +171,7 @@ public class ExtraProjectiles
 		}
 	}	
 	
-	public static class KujaArrow extends AbilityProjectile
+	public static class KujaArrow extends ProjectileAbility
 	{
 		public KujaArrow(World world)
 		{super(KUJA_ARROW, world);}
@@ -188,7 +188,7 @@ public class ExtraProjectiles
 		}
 	}	
 	
-	public static class NormalBullet extends AbilityProjectile
+	public static class NormalBullet extends ProjectileAbility
 	{
 		public NormalBullet(World world)
 		{super(NORMAL_BULLET, world);}
@@ -205,7 +205,7 @@ public class ExtraProjectiles
 		}
 	}	
 	
-	public static class KairosekiBullet extends AbilityProjectile
+	public static class KairosekiBullet extends ProjectileAbility
 	{
 		public KairosekiBullet(World world)
 		{super(KAIROSEKI_BULLET, world);}

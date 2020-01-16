@@ -14,7 +14,7 @@ import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 
 public class AblProtectionTileEntity extends TileEntity
 {
-	public static final TileEntityType TILE_ENTITY = WyRegistry.registerTileEntity("ability_protection", AblProtectionTileEntity::new, ModBlocks.abilityProtection);
+	public static final TileEntityType TILE_ENTITY = WyRegistry.registerTileEntity("ability_protection", AblProtectionTileEntity::new, ModBlocks.ABILITY_PROTECTION);
 	private int protectedSize = 100;
 	
 	public AblProtectionTileEntity()

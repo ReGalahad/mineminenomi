@@ -8,8 +8,8 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility.Data;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.CustomParticleData;
@@ -17,7 +17,7 @@ import xyz.pixelatedw.mineminenomi.particles.CustomParticleData;
 public class YukiProjectiles 
 {
 	
-	public static HashMap<AbilityAttribute, AbilityProjectile.Data> projectiles = new HashMap<AbilityAttribute, AbilityProjectile.Data>();
+	public static HashMap<AbilityAttribute, ProjectileAbility.Data> projectiles = new HashMap<AbilityAttribute, ProjectileAbility.Data>();
 	
 	public static final EntityType YUKI_RABI = WyRegistry.registerEntityType("yuki_rabi", YukiRabi::new);
 	
@@ -26,7 +26,7 @@ public class YukiProjectiles
 		projectiles.put(ModAttributes.YUKI_RABI, new Data(YUKI_RABI, YukiRabi.class));
 	}
 	
-	public static class YukiRabi extends AbilityProjectile
+	public static class YukiRabi extends ProjectileAbility
 	{
 		public YukiRabi(World world)
 		{super(YUKI_RABI, world);}

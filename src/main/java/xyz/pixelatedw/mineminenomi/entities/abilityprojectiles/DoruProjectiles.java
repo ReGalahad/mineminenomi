@@ -11,14 +11,14 @@ import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.abilities.effects.DFEffectDoruLock;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility.Data;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 
 public class DoruProjectiles 
 {
 
-	public static HashMap<AbilityAttribute, AbilityProjectile.Data> projectiles = new HashMap<AbilityAttribute, AbilityProjectile.Data>();
+	public static HashMap<AbilityAttribute, ProjectileAbility.Data> projectiles = new HashMap<AbilityAttribute, ProjectileAbility.Data>();
 	
 	public static final EntityType DORU_DORU_ARTS_MORI = WyRegistry.registerEntityType("doru_doru_arts_mori", DoruDoruArtsMori::new);
 	public static final EntityType CANDLE_LOCK = WyRegistry.registerEntityType("candle_lock", CandleLock::new);
@@ -29,7 +29,7 @@ public class DoruProjectiles
 		projectiles.put(ModAttributes.CANDLE_LOCK, new Data(CANDLE_LOCK, CandleLock.class));
 	}
 	
-	public static class DoruDoruArtsMori extends AbilityProjectile
+	public static class DoruDoruArtsMori extends ProjectileAbility
 	{
 		public DoruDoruArtsMori(World world)
 		{super(DORU_DORU_ARTS_MORI, world);}
@@ -46,7 +46,7 @@ public class DoruProjectiles
 		}
 	}
 	
-	public static class CandleLock extends AbilityProjectile
+	public static class CandleLock extends ProjectileAbility
 	{
 		public CandleLock(World world)
 		{super(CANDLE_LOCK, world);}

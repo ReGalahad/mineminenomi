@@ -47,7 +47,7 @@ public class AkumaNoMiBoxItem extends Item
 				typeModifier = 1.4;
 			else if (df.getType() == EnumFruitType.ZOAN)
 				typeModifier = 1.1;
-			else if (df.getType() == EnumFruitType.MYTHICALZOAN || df.getType() == EnumFruitType.ANCIENTZOAN)
+			else if (df.getType() == EnumFruitType.MYTHICAL_ZOAN || df.getType() == EnumFruitType.ANCIENT_ZOAN)
 				typeModifier = 1.5;
 
 			double totalDamage = 0;
@@ -63,7 +63,7 @@ public class AkumaNoMiBoxItem extends Item
 
 			totalPower *= typeModifier;
 
-			if (df.getType() == EnumFruitType.ANCIENTZOAN || df.getType() == EnumFruitType.MYTHICALZOAN || WyHelper.getResourceName(new TranslationTextComponent(df.getTranslationKey()).getFormattedText()).equalsIgnoreCase("guraguranomi"))
+			if (df.getType() == EnumFruitType.ANCIENT_ZOAN || df.getType() == EnumFruitType.MYTHICAL_ZOAN || WyHelper.getResourceName(new TranslationTextComponent(df.getTranslationKey()).getFormattedText()).equalsIgnoreCase("guraguranomi"))
 			{
 				this.tier3Fruits.add(df);
 			}
@@ -113,13 +113,13 @@ public class AkumaNoMiBoxItem extends Item
 		{
 			ItemStack itemStack = player.getHeldItemMainhand();
 
-			if(!player.inventory.hasItemStack(new ItemStack(ModItems.key)))
+			if(!player.inventory.hasItemStack(new ItemStack(ModItems.KEY)))
 			{
 				WyHelper.sendMsgToPlayer(player, "You need a key !");
 				return new ActionResult<>(ActionResultType.FAIL, player.getHeldItem(hand));
 			}
 			
-			int i = player.inventory.getSlotFor(new ItemStack(ModItems.key));
+			int i = player.inventory.getSlotFor(new ItemStack(ModItems.KEY));
 			player.inventory.decrStackSize(i, 1);
 			
 			WyHelper.removeStackFromInventory(player, itemStack);

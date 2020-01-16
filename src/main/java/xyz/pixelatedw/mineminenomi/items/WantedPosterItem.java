@@ -22,7 +22,7 @@ public class WantedPosterItem extends WallOrFloorItem
 
 	public WantedPosterItem()
 	{
-		super(ModBlocks.wantedPoster, ModBlocks.wantedPoster, new Properties().maxStackSize(1));
+		super(ModBlocks.WANTED_POSTER, ModBlocks.WANTED_POSTER, new Properties().maxStackSize(1));
 	}
 
 	@Override

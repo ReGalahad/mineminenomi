@@ -25,7 +25,7 @@ public class ImpactDialItem extends BlockItem
 
 	public ImpactDialItem()
 	{
-		super(ModBlocks.impactDialBlock, new Properties().group(ModCreativeTabs.MISC).maxStackSize(16));
+		super(ModBlocks.IMPACT_DIAL, new Properties().group(ModCreativeTabs.MISC).maxStackSize(16));
 	}
 
 	@Override

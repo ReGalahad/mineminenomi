@@ -12,15 +12,15 @@ import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.WyHelper.Direction;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility.Data;
 import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 
 public class NikyuProjectiles 
 {
 
-	public static HashMap<AbilityAttribute, AbilityProjectile.Data> projectiles = new HashMap<AbilityAttribute, AbilityProjectile.Data>();
+	public static HashMap<AbilityAttribute, ProjectileAbility.Data> projectiles = new HashMap<AbilityAttribute, ProjectileAbility.Data>();
 
 	public static final EntityType PAD_HO = WyRegistry.registerEntityType("pad_ho", PadHo::new);
 	public static final EntityType URSUS_SHOCK = WyRegistry.registerEntityType("ursus_shock", UrsusShock::new);
@@ -31,7 +31,7 @@ public class NikyuProjectiles
 		projectiles.put(ModAttributes.URSUS_SHOCK, new Data(URSUS_SHOCK, UrsusShock.class));
 	}
 	
-	public static class PadHo extends AbilityProjectile
+	public static class PadHo extends ProjectileAbility
 	{
 		public PadHo(World world)
 		{super(PAD_HO, world);}
@@ -72,7 +72,7 @@ public class NikyuProjectiles
 		}
 	}	
 	
-	public static class UrsusShock extends AbilityProjectile
+	public static class UrsusShock extends ProjectileAbility
 	{
 		public UrsusShock(World world)
 		{super(URSUS_SHOCK, world);}

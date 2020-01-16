@@ -7,7 +7,7 @@ import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 
 public class RejectDialTileEntity extends TileEntity
 {
-	public static final TileEntityType TILE_ENTITY = WyRegistry.registerTileEntity("reject_dial_block", RejectDialTileEntity::new, ModBlocks.rejectDialBlock);
+	public static final TileEntityType TILE_ENTITY = WyRegistry.registerTileEntity("reject_dial_block", RejectDialTileEntity::new, ModBlocks.REJECT_DIAL);
 	
 	public RejectDialTileEntity()
 	{

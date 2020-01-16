@@ -11,8 +11,8 @@ import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility.Data;
 import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
@@ -21,7 +21,7 @@ import xyz.pixelatedw.mineminenomi.particles.CustomParticleData;
 public class MokuProjectiles 
 {
 
-	public static HashMap<AbilityAttribute, AbilityProjectile.Data> projectiles = new HashMap<AbilityAttribute, AbilityProjectile.Data>();
+	public static HashMap<AbilityAttribute, ProjectileAbility.Data> projectiles = new HashMap<AbilityAttribute, ProjectileAbility.Data>();
 	
 	public static final EntityType WHITE_SNAKE = WyRegistry.registerEntityType("white_snake", WhiteSnake::new);
 	public static final EntityType WHITE_OUT = WyRegistry.registerEntityType("white_out", WhiteOut::new);
@@ -32,7 +32,7 @@ public class MokuProjectiles
 		projectiles.put(ModAttributes.WHITE_OUT, new Data(WHITE_OUT, WhiteOut.class));
 	}
 	
-	public static class WhiteSnake extends AbilityProjectile
+	public static class WhiteSnake extends ProjectileAbility
 	{
 		public WhiteSnake(World world)
 		{super(WHITE_SNAKE, world);}
@@ -77,7 +77,7 @@ public class MokuProjectiles
 		}
 	}	
 	
-	public static class WhiteOut extends AbilityProjectile
+	public static class WhiteOut extends ProjectileAbility
 	{
 		public WhiteOut(World world)
 		{super(WHITE_OUT, world);}

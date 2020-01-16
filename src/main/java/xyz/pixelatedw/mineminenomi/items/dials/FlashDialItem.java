@@ -17,7 +17,7 @@ public class FlashDialItem extends BlockItem
 
 	public FlashDialItem()
 	{
-		super(ModBlocks.flashDialBlock, new Properties().group(ModCreativeTabs.MISC).maxStackSize(16));
+		super(ModBlocks.FLASH_DIAL, new Properties().group(ModCreativeTabs.MISC).maxStackSize(16));
 	}
 
 

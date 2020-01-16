@@ -14,7 +14,7 @@ import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.abilities.effects.DFEffectHieSlowness;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.abilities.extra.AbilityExplosion;
+import xyz.pixelatedw.mineminenomi.api.abilities.extra.ExplosionAbility;
 import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
 import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
@@ -95,7 +95,7 @@ public class YomiPassiveEvents
 			attacker.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 100, 1));
 			attacker.addPotionEffect(new EffectInstance(Effects.MINING_FATIGUE, 100, 1));
 			new DFEffectHieSlowness(attacker, 100);
-			AbilityExplosion explosion = WyHelper.newExplosion(attacked, attacker.posX, attacker.posY, attacker.posZ, 2);
+			ExplosionAbility explosion = WyHelper.newExplosion(attacked, attacker.posX, attacker.posY, attacker.posZ, 2);
 			explosion.setDamageOwner(false);
 			explosion.setDestroyBlocks(false);
 			//explosion.setSmokeParticles(ID.PARTICLEFX_SOULPARADE);

@@ -53,7 +53,7 @@ public class DojoPieces
 			
 			try
 			{
-				world.setBlockState(pos.add(4, 2, 10), ModBlocks.customSpawner.getDefaultState(), 2);
+				world.setBlockState(pos.add(4, 2, 10), ModBlocks.CUSTOM_SPAWNER.getDefaultState(), 2);
 				((CustomSpawnerTileEntity) world.getTileEntity(pos.add(4, 2, 10))).setSpawnerMob(ModEntities.DOJO_SENSEI).setSpawnerLimit(1);
 			}
 			catch(Exception e) {}

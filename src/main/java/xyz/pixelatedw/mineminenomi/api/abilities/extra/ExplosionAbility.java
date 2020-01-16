@@ -33,7 +33,7 @@ import net.minecraft.world.storage.loot.LootParameters;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 
-public class AbilityExplosion extends Explosion
+public class ExplosionAbility extends Explosion
 {
 
 	private World world;
@@ -55,7 +55,7 @@ public class AbilityExplosion extends Explosion
 	private boolean canDamageOwner = true;
 	private boolean canProduceExplosionSound = true;
 
-	public AbilityExplosion(Entity entity, double posX, double posY, double posZ, float power)
+	public ExplosionAbility(Entity entity, double posX, double posY, double posZ, float power)
 	{
 		super(entity.world, entity, power, power, power, power, false, Mode.DESTROY);
 		this.world = entity.world;

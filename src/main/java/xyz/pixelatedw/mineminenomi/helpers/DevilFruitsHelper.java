@@ -183,7 +183,7 @@ public class DevilFruitsHelper
 	
 	public static boolean isNearbyKairoseki(PlayerEntity player)
 	{
-		if (WyHelper.isBlockNearby(player, 4, ModBlocks.kairosekiBlock, ModBlocks.kairosekiOre, ModBlocks.kairosekiBars)
+		if (WyHelper.isBlockNearby(player, 4, ModBlocks.KAIROSEKI, ModBlocks.KAIROSEKI_ORE, ModBlocks.KAIROSEKI_BARS)
 				|| ItemsHelper.hasKairosekiItem(player) 
 				|| isAffectedByWater(player))
 		{
@@ -333,7 +333,7 @@ public class DevilFruitsHelper
 			for (int j = -20; j < 20; j++)
 				for (int k = -20; k < 20; k++)
 				{
-					if (entity.world.getBlockState(new BlockPos(entity.posX + i, entity.posY + j, entity.posZ + k)).getBlock() == 	ModBlocks.opeMid)
+					if (entity.world.getBlockState(new BlockPos(entity.posX + i, entity.posY + j, entity.posZ + k)).getBlock() == 	ModBlocks.OPE_MID)
 						return true;
 				}
 		

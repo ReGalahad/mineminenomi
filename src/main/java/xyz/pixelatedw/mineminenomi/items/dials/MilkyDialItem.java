@@ -23,7 +23,7 @@ public class MilkyDialItem extends BlockItem
 
 	public MilkyDialItem()
 	{
-		super(ModBlocks.milkyDialBlock, new Properties().group(ModCreativeTabs.MISC).maxStackSize(16));
+		super(ModBlocks.MILKY_DIAL, new Properties().group(ModCreativeTabs.MISC).maxStackSize(16));
 	}
 
 	@Override

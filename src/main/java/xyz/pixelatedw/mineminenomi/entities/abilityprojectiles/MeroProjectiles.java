@@ -11,15 +11,15 @@ import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.abilities.effects.DFEffectMeroPetrification;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility.Data;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.CustomParticleData;
 
 public class MeroProjectiles
 {
-	public static HashMap<AbilityAttribute, AbilityProjectile.Data> projectiles = new HashMap<AbilityAttribute, AbilityProjectile.Data>();
+	public static HashMap<AbilityAttribute, ProjectileAbility.Data> projectiles = new HashMap<AbilityAttribute, ProjectileAbility.Data>();
 	
 	public static final EntityType MERO_MERO_MELLOW = WyRegistry.registerEntityType("mero_mero_mellow", MeroMeroMellow::new);
 	public static final EntityType PISTOL_KISS = WyRegistry.registerEntityType("pistol_kiss", PistolKiss::new);
@@ -32,7 +32,7 @@ public class MeroProjectiles
 		projectiles.put(ModAttributes.SLAVE_ARROW, new Data(SLAVE_ARROW, SlaveArrow.class));
 	}
 	
-	public static class SlaveArrow extends AbilityProjectile
+	public static class SlaveArrow extends ProjectileAbility
 	{
 		public SlaveArrow(World world)
 		{super(SLAVE_ARROW, world);}
@@ -83,7 +83,7 @@ public class MeroProjectiles
 		}
 	}	
 	
-	public static class PistolKiss extends AbilityProjectile
+	public static class PistolKiss extends ProjectileAbility
 	{
 		public PistolKiss(World world)
 		{super(PISTOL_KISS, world);}
@@ -112,7 +112,7 @@ public class MeroProjectiles
 		}
 	}	
 	
-	public static class MeroMeroMellow extends AbilityProjectile
+	public static class MeroMeroMellow extends ProjectileAbility
 	{
 		public MeroMeroMellow(World world)
 		{super(MERO_MERO_MELLOW, world);}

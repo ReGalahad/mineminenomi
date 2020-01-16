@@ -8,12 +8,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility;
 import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.data.GenericParticleData;
 
-public class HiganProjectile extends AbilityProjectile
+public class HiganProjectile extends ProjectileAbility
 {
 	public HiganProjectile(World world)
 	{super(MeraProjectiles.HIGAN, world);}

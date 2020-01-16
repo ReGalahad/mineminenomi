@@ -8,8 +8,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility;
+import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility.Data;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModExtraAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
@@ -17,7 +17,7 @@ import xyz.pixelatedw.mineminenomi.init.ModResources;
 public class GoroProjectiles 
 {
 
-	public static HashMap<AbilityAttribute, AbilityProjectile.Data> projectiles = new HashMap<AbilityAttribute, AbilityProjectile.Data>();
+	public static HashMap<AbilityAttribute, ProjectileAbility.Data> projectiles = new HashMap<AbilityAttribute, ProjectileAbility.Data>();
 	
 	public static final EntityType EL_THOR_THUNDER = WyRegistry.registerEntityType("el_thor_thunder", ElThorThunder::new);
 	public static final EntityType SANGO = WyRegistry.registerEntityType("sango", Sango::new);
@@ -38,7 +38,7 @@ public class GoroProjectiles
 		projectiles.put(ModExtraAttributes.VOLT_VARI_200_MILLION, new Data(VOLT_VARI_200_MILLION, VoltVari200Million.class));
 	}
 	
-	public static class ElThorThunder extends AbilityProjectile
+	public static class ElThorThunder extends ProjectileAbility
 	{
 		public ElThorThunder(World world)
 		{super(EL_THOR_THUNDER, world);}
@@ -55,7 +55,7 @@ public class GoroProjectiles
 		}
 	}	
 	
-	public static class Sango extends AbilityProjectile
+	public static class Sango extends ProjectileAbility
 	{
 		public Sango(World world)
 		{super(SANGO, world);}
@@ -84,7 +84,7 @@ public class GoroProjectiles
 		}
 	}	
 	
-	public static class Raigo extends AbilityProjectile
+	public static class Raigo extends ProjectileAbility
 	{
 		public Raigo(World world)
 		{super(RAIGO, world);}
@@ -110,7 +110,7 @@ public class GoroProjectiles
 		}
 	}
 	
-	public static class VoltVari5Million extends AbilityProjectile
+	public static class VoltVari5Million extends ProjectileAbility
 	{
 		public VoltVari5Million(World world)
 		{super(VOLT_VARI_5_MILLION, world);}
@@ -136,7 +136,7 @@ public class GoroProjectiles
 		}
 	}
 	
-	public static class VoltVari20Million extends AbilityProjectile
+	public static class VoltVari20Million extends ProjectileAbility
 	{
 		public VoltVari20Million(World world)
 		{super(VOLT_VARI_20_MILLION, world);}
@@ -162,7 +162,7 @@ public class GoroProjectiles
 		}
 	}
 	
-	public static class VoltVari60Million extends AbilityProjectile
+	public static class VoltVari60Million extends ProjectileAbility
 	{
 		public VoltVari60Million(World world)
 		{super(VOLT_VARI_60_MILLION, world);}
@@ -188,7 +188,7 @@ public class GoroProjectiles
 		}
 	}
 	
-	public static class VoltVari200Million extends AbilityProjectile
+	public static class VoltVari200Million extends ProjectileAbility
 	{
 		public VoltVari200Million(World world)
 		{super(VOLT_VARI_200_MILLION, world);}
