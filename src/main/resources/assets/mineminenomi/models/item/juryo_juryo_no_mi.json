@@ -1,0 +1,6 @@
+{
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "mineminenomi:items/juryo_juryo_no_mi"
+	}
+}
