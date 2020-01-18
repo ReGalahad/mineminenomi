@@ -37,22 +37,22 @@ public class AbilitySwordItem extends CoreSwordItem
 					{
 						String ablName = WyHelper.getResourceName(abilityDataProps.getAbilityInSlot(i).getName());
 						if (ablName.equals(WyHelper.getResourceName(ModAttributes.ICE_SABER.getAttributeName())))
-							WyHelper.removeStackFromInventory(owner, itemStack);
+							owner.inventory.deleteStack(itemStack);
 						else if (ablName.equals(WyHelper.getResourceName(ModAttributes.AMA_NO_MURAKUMO.getAttributeName())))
-							WyHelper.removeStackFromInventory(owner, itemStack);
+							owner.inventory.deleteStack(itemStack);
 						else if (ablName.equals(WyHelper.getResourceName(ModAttributes.NORO_NORO_BEAM_SWORD.getAttributeName())))
-							WyHelper.removeStackFromInventory(owner, itemStack);
+							owner.inventory.deleteStack(itemStack);
 						else if (ablName.equals(WyHelper.getResourceName(ModAttributes.DORU_DORU_ARTS_KEN.getAttributeName())))
-							WyHelper.removeStackFromInventory(owner, itemStack);
+							owner.inventory.deleteStack(itemStack);
 						else if (ablName.equals(WyHelper.getResourceName(ModAttributes.BLUE_SWORD.getAttributeName())))
-							WyHelper.removeStackFromInventory(owner, itemStack);
+							owner.inventory.deleteStack(itemStack);
 						else if (ablName.equals(WyHelper.getResourceName(ModAttributes.TABIRA_YUKI.getAttributeName())))
-							WyHelper.removeStackFromInventory(owner, itemStack);
+							owner.inventory.deleteStack(itemStack);
 					}
 				}
 			}
 			else
-				WyHelper.removeStackFromInventory(owner, itemStack);
+				owner.inventory.deleteStack(itemStack);
 		}
 	}
 

@@ -8,7 +8,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability.Category;
 import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
@@ -84,7 +83,7 @@ public class CDeleteCCBookPacket
 				
 				for(ItemStack is : player.inventory.mainInventory)
 					if(is != null && is.getItem() instanceof CharacterCreatorItem)
-						WyHelper.removeStackFromInventory(player, is);
+						player.inventory.deleteStack(is);
 				
 				ModNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), entityProps), (ServerPlayerEntity) player);
 				ModNetwork.sendTo(new SAbilityDataSyncPacket(player.getEntityId(), abilityProps), (ServerPlayerEntity) player);				

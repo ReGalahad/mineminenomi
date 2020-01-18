@@ -8,7 +8,6 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.Env;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
@@ -40,7 +39,7 @@ public class SabiPassiveEvents
 			event.setCanceled(true);
 			attacker.getHeldItemMainhand().damageItem(50, attacker, (entity) -> {});
 			if (attacker instanceof PlayerEntity && attacker.getHeldItemMainhand().getDamage() <= 0)
-				WyHelper.removeStackFromInventory((PlayerEntity) attacker, attacker.getHeldItemMainhand());
+				((PlayerEntity)attacker).inventory.deleteStack(attacker.getHeldItemMainhand());
 			else if(!(attacker instanceof PlayerEntity) && attacker.getHeldItemMainhand().getDamage() <= 0)
 				attacker.setItemStackToSlot(EquipmentSlotType.MAINHAND, ItemStack.EMPTY);
 		}

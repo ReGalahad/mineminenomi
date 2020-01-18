@@ -36,7 +36,7 @@ public class BellyPouchItem extends Item
 			{
 				props.alterBelly(amount);
 				WyHelper.sendMsgToPlayer(player, "You've obtained " + amount + " belly !");
-				WyHelper.removeStackFromInventory(player, player.getHeldItem(hand));
+				player.inventory.deleteStack(player.getHeldItemMainhand());
 			}
 			else
 				props.setBelly(ModValues.MAX_GENERAL);	

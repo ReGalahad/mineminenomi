@@ -122,7 +122,7 @@ public class AkumaNoMiBoxItem extends Item
 			int i = player.inventory.getSlotFor(new ItemStack(ModItems.KEY));
 			player.inventory.decrStackSize(i, 1);
 			
-			WyHelper.removeStackFromInventory(player, itemStack);
+			player.inventory.deleteStack(itemStack);
 			AkumaNoMiItem randomFruit = roulette();
 			boolean isAvailable = true;
 
@@ -157,7 +157,7 @@ public class AkumaNoMiBoxItem extends Item
 			}
 			else
 			{
-				WyHelper.removeStackFromInventory(player, itemStack);
+				player.inventory.deleteStack(itemStack);
 				return new ActionResult<>(ActionResultType.SUCCESS, player.getHeldItem(hand));
 			}			
 		}
