@@ -135,7 +135,7 @@ public class EntityDoppelman extends CreatureEntity
 			
 			IEntityStats ownerProps = EntityStatsCapability.get(this.owner);
 			IDevilFruit ownerDFProps = DevilFruitCapability.get(this.owner);		
-			List<LivingEntity> doppelmanAttackList = this.isAggressive ? WyHelper.getEntitiesNear(this, 10, PlayerEntity.class, EntityGenericMarine.class, EntityGenericPirate.class) : !forcedTargets.isEmpty() ? forcedTargets : new ArrayList<LivingEntity>();
+			List<LivingEntity> doppelmanAttackList = this.isAggressive ? WyHelper.getEntitiesNear(this.getPosition(), this.world, 10, PlayerEntity.class, EntityGenericMarine.class, EntityGenericPirate.class) : !forcedTargets.isEmpty() ? forcedTargets : new ArrayList<LivingEntity>();
 			LivingEntity target = null;
 
 			if(!ownerDFProps.getDevilFruit().equalsIgnoreCase("kagekage"))

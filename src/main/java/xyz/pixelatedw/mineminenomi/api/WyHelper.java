@@ -29,7 +29,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.concurrent.ThreadTaskExecutor;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -433,51 +432,19 @@ public class WyHelper
 		return text.replaceAll("[ \\t]+$", "").replaceAll("\\s+", "_").replaceAll("[\\'\\:\\-\\,\\#]", "").toLowerCase();
 	}
 
-	public static List<LivingEntity> getEntitiesNear(BlockPos pos, World world, double radius)
+	public static <T extends Entity> List<T> getEntitiesNear(BlockPos pos, World world, double radius)
 	{
-		return getEntitiesNear(pos, world, radius, LivingEntity.class);
+		return (List<T>) getEntitiesNear(pos, world, radius, LivingEntity.class);
 	}
 
-	public static List<LivingEntity> getEntitiesNear(BlockPos pos, World world, double radius, Class<? extends Entity> classEntity)
+	public static <T extends Entity> List<T> getEntitiesNear(BlockPos pos, World world, double radius, Class<? extends T>... classEntities)
 	{
 		AxisAlignedBB aabb = new AxisAlignedBB(pos.add(1, 1, 1)).grow(radius, radius, radius);
-		List list = world.getEntitiesWithinAABB(classEntity, aabb);
-		return list;
-	}
-
-	public static List<LivingEntity> getEntitiesNear(Entity e, double radius)
-	{
-		return getEntitiesNear(e, radius, LivingEntity.class);
-	}
-
-	public static List<LivingEntity> getEntitiesNear(Entity e, double radius, Class<? extends Entity>... classEntities)
-	{
-		try
+		List<T> list = new ArrayList<T>();
+		for(Class<? extends T> clzz : classEntities)
 		{
-			AxisAlignedBB aabb = new AxisAlignedBB(e.posX, e.posY, e.posZ, e.posX + 1, e.posY + 1, e.posZ + 1).grow(radius, radius, radius);
-			List list = new ArrayList();
-			for (Class<? extends Entity> clz : classEntities)
-				list.addAll(e.world.getEntitiesWithinAABB(clz, aabb));
-			list.remove(e);
-			return list;
+			list.addAll(world.getEntitiesWithinAABB(clzz, aabb));
 		}
-		catch (Exception exception)
-		{
-			exception.printStackTrace();
-		}
-
-		return null;
-	}
-
-	public static List<LivingEntity> getEntitiesNear(TileEntity e, double radius)
-	{
-		return getEntitiesNear(e, radius, LivingEntity.class);
-	}
-
-	public static List<LivingEntity> getEntitiesNear(TileEntity e, double radius, Class<? extends Entity> classEntity)
-	{
-		AxisAlignedBB aabb = new AxisAlignedBB(e.getPos().getX(), e.getPos().getY(), e.getPos().getZ(), e.getPos().getX() + 1, e.getPos().getY() + 1, e.getPos().getZ() + 1).grow(radius, radius, radius);
-		List list = e.getWorld().getEntitiesWithinAABB(classEntity, aabb);
 		return list;
 	}
 

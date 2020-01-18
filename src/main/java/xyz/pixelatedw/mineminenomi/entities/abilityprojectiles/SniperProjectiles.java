@@ -132,7 +132,7 @@ public class SniperProjectiles
 			super.tick();
 			if(!this.world.isRemote)
 			{				
-				for(LivingEntity target : WyHelper.getEntitiesNear(this, 5))
+				for(LivingEntity target : WyHelper.<LivingEntity>getEntitiesNear(this.getPosition(), this.world, 5))
 					target.addPotionEffect(new EffectInstance(Effects.POISON, 100, 1));
 			}
 		//	ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_KEMURIBOSHI, this.posX, this.posY, this.posZ), this.getThrower());

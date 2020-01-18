@@ -50,7 +50,7 @@ public class YomiPassiveEvents
 
 			player.addPotionEffect(new EffectInstance(Effects.SPEED, 100, 0, true, true));
 
-			if (WyHelper.getEntitiesNear(player, 100, PlayerEntity.class).size() > 0 && player.ticksExisted % 500 == 0)
+			if (WyHelper.getEntitiesNear(player.getPosition(), player.world, 100, PlayerEntity.class).size() > 0 && player.ticksExisted % 500 == 0)
 				ModNetwork.sendToAllAround(new SDevilFruitSyncPacket(player.getEntityId(), devilFruitProps), player);
 			
 			if (player.world.getBlockState(player.getPosition().down()).getFluidState().isSource() && player.isSprinting())

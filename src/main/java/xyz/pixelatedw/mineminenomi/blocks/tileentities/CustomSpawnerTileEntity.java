@@ -1,6 +1,7 @@
 package xyz.pixelatedw.mineminenomi.blocks.tileentities;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -47,9 +48,11 @@ public class CustomSpawnerTileEntity extends TileEntity implements ITickableTile
 		{
 			boolean flag = false;
 
-			if (!WyHelper.getEntitiesNear(this, 30, PlayerEntity.class).isEmpty())
+			List<PlayerEntity> nearbyEntities = WyHelper.getEntitiesNear(this.getPos(), this.world, 30, PlayerEntity.class);
+			
+			if (!nearbyEntities.isEmpty())
 			{
-				LivingEntity e = WyHelper.getEntitiesNear(this, 30, PlayerEntity.class).get(0);
+				LivingEntity e = nearbyEntities.get(0);
 
 				if (e != null && e instanceof PlayerEntity)
 				{

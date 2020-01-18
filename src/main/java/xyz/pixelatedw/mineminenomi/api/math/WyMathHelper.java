@@ -8,7 +8,7 @@ import xyz.pixelatedw.mineminenomi.api.WyHelper;
 
 public class WyMathHelper
 {	
-	public static List shuffle(List ar)
+	public static <T> List<T> shuffle(List<T> ar)
 	{
 		Random rnd = new Random();
 		
@@ -16,7 +16,7 @@ public class WyMathHelper
 		{
 			int index = rnd.nextInt(i + 1);
 			// Simple swap
-			Object a = ar.get(index);
+			T a = ar.get(index);
 			ar.set(index, ar.get(i));
 			ar.set(i, a);
 		}

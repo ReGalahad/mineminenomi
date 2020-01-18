@@ -48,10 +48,12 @@ public class ItemsHelper
     	
     	// Populating the list with wanted posters
     	List<Entry<String, Long>> bountiesInPackage = new ArrayList<Entry<String, Long>>();
-    	    	
-    	if(!WyHelper.getEntitiesNear(new BlockPos(posX, posY, posZ), world, 10).isEmpty())
+    	
+    	List<PlayerEntity> nearbyPlayers = WyHelper.getEntitiesNear(new BlockPos(posX, posY, posZ), world, 10);
+    	
+    	if(!nearbyPlayers.isEmpty())
     	{
-    		WyHelper.getEntitiesNear(new BlockPos(posX, posY, posZ), world, 10).stream().filter(x -> 
+    		nearbyPlayers.stream().filter(x -> 
     		{
     			return x instanceof PlayerEntity && EntityStatsCapability.get(x).isPirate() && worldData.getBounty(x.getName().getFormattedText()) != 0;
     		}).forEach(x -> 

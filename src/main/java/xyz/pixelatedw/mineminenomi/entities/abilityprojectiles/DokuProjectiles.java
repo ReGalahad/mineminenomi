@@ -139,7 +139,7 @@ public class DokuProjectiles
 			super.tick();
 			if(!this.world.isRemote)
 			{				
-				for(LivingEntity target : WyHelper.getEntitiesNear(this, 4))
+				for(LivingEntity target : WyHelper.<LivingEntity>getEntitiesNear(this.getPosition(), this.world, 4))
 					target.addPotionEffect(new EffectInstance(Effects.POISON, 200, 2));
 			}
 			//ModNetwork.sendToAllAround(new SParticlesPacket(new ChloroBallCloudParticleEffect(), this.posX, this.posY, this.posZ), this.getThrower());

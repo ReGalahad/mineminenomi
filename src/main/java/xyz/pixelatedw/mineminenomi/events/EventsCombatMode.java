@@ -151,7 +151,7 @@ public class EventsCombatMode extends Screen
 			int trackDistance = 15;
 			if (false) // Ken is Passive Check
 			{
-				List<LivingEntity> nearbyEnemies = WyHelper.getEntitiesNear(player, 15);
+				List<LivingEntity> nearbyEnemies = WyHelper.getEntitiesNear(player.getPosition(), player.world, 15);
 				for (LivingEntity elb : nearbyEnemies)
 				{
 					if (trackMob == null)

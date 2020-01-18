@@ -49,7 +49,7 @@ public class KagePassiveEvents
 		if (!devilFruitProps.getDevilFruit().equalsIgnoreCase("kagekage"))
 			return;
 
-		EntityDoppelman doppelman = (EntityDoppelman) WyHelper.getEntitiesNear(attacker, 20, EntityDoppelman.class).stream().findFirst().orElse(null);
+		EntityDoppelman doppelman = WyHelper.getEntitiesNear(attacker.getPosition(), attacker.world, 20, EntityDoppelman.class).stream().findFirst().orElse(null);
 
 		if (doppelman != null)
 			doppelman.forcedTargets.add(attacked);

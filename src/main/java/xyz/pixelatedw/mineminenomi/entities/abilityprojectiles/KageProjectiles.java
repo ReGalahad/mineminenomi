@@ -102,7 +102,7 @@ public class KageProjectiles
 		@Override
 		public void tick()
 		{
-			for(LivingEntity e : WyHelper.getEntitiesNear(this, 2))
+			for(LivingEntity e : WyHelper.<LivingEntity>getEntitiesNear(this.getPosition(), this.world, 2))
 				e.attackEntityFrom(DamageSource.causePlayerDamage((PlayerEntity) this.getThrower()), 30);
 			super.tick();
 		}
