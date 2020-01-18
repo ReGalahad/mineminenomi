@@ -34,5 +34,7 @@ public class ModMain
 		CommonConfig.init();
 		ModNetwork.init();
 		ModQuests.init();
+		
+		//MinecraftForge.EVENT_BUS.addListener(this::serverStarting);
 	}
 }

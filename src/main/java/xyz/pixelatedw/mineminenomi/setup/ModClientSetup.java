@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi;
+package xyz.pixelatedw.mineminenomi.setup;
 
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
@@ -7,6 +7,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.api.json.WyJSONHelper;
 import xyz.pixelatedw.mineminenomi.events.EventsCombatMode;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
@@ -16,7 +17,7 @@ import xyz.pixelatedw.mineminenomi.init.ModRenderers;
 import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
 
 @Mod.EventBusSubscriber(modid = Env.PROJECT_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-public class ClientSetup
+public class ModClientSetup
 {
 	
 	@SubscribeEvent
