@@ -48,7 +48,7 @@ public class ModEntities
 	public static final EntityType DOPPELMAN = WyRegistry.registerEntityType("doppelman", EntityDoppelman::new);
 	public static final EntityType BLACK_KNIGHT = WyRegistry.registerEntityType("black_knight", EntityBlackKnight::new);
 	public static final EntityType WANTED_POSTER_PACKAGE = WyRegistry.registerEntityType("wanted_poster_package", WantedPosterPackageEntity::new, 1.5F, 1.5F);
-	public static final EntityType VIVRE_CARD = WyRegistry.registerEntityType("vivre_card", VivreCardEntity::new);
+	public static final EntityType VIVRE_CARD = WyRegistry.registerEntityType("vivre_card", VivreCardEntity::new, 0.4F, 0.4F);
 
 
 	@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)

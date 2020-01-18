@@ -15,6 +15,7 @@ import xyz.pixelatedw.mineminenomi.blocks.tileentities.dials.FlashDialTileEntity
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.dials.ImpactDialTileEntity;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.dials.MilkyDialTileEntity;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.dials.RejectDialTileEntity;
+import xyz.pixelatedw.mineminenomi.entities.VivreCardEntity;
 import xyz.pixelatedw.mineminenomi.entities.WantedPosterPackageEntity;
 import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.ExtraProjectiles.EntityCloud;
 import xyz.pixelatedw.mineminenomi.entities.mobs.bandits.EntityBanditWithSword;
@@ -40,6 +41,7 @@ import xyz.pixelatedw.mineminenomi.renderers.entities.BlackKnightRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.CloudRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.DoppelmanRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.GenericMobRenderer;
+import xyz.pixelatedw.mineminenomi.renderers.entities.VivreCardRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.WantedPosterPackageRenderer;
 
 public class ModRenderers
@@ -92,5 +94,6 @@ public class ModRenderers
 		RenderingRegistry.registerEntityRenderingHandler(EntityBlackKnight.class, new BlackKnightRenderer.Factory());
 		RenderingRegistry.registerEntityRenderingHandler(EntityCloud.class, new CloudRenderer.Factory());
 		RenderingRegistry.registerEntityRenderingHandler(WantedPosterPackageEntity.class, new WantedPosterPackageRenderer.Factory());
+		RenderingRegistry.registerEntityRenderingHandler(VivreCardEntity.class, new VivreCardRenderer.Factory());
     }
 }
