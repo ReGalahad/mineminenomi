@@ -37,12 +37,9 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.registries.ForgeRegistries;
-import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.api.abilities.extra.ExplosionAbility;
-import xyz.pixelatedw.mineminenomi.api.debug.WyDebug;
 import xyz.pixelatedw.mineminenomi.api.math.ISphere;
 import xyz.pixelatedw.mineminenomi.api.math.Sphere;
-import xyz.pixelatedw.mineminenomi.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
@@ -625,70 +622,6 @@ public class WyHelper
 		});
 
 		return blocks;
-	}
-
-
-	
-	public static int getPatreonLevel(PlayerEntity player)
-	{
-		boolean flag = false;
-
-		String apiURL = "/patreon?uuid=" + player.getUniqueID().toString();
-		String result = WyTelemetry.sendGET(apiURL);
-
-		if (!WyHelper.isNullOrEmpty(result))
-		{
-			int patreonLevel = Integer.parseInt(result);
-
-			return patreonLevel;
-		}
-
-		return 1;
-	}
-
-	public static boolean isCelestialDragon(PlayerEntity player)
-	{
-		return getPatreonLevel(player) == 4;
-	}
-
-	public static boolean isSupernova(PlayerEntity player)
-	{
-		return getPatreonLevel(player) == 3;
-	}
-
-	public static boolean isRookie(PlayerEntity player)
-	{
-		return getPatreonLevel(player) == 2;
-	}
-
-	public static boolean isDevBuild()
-	{
-		return Env.BUILD_MODE.equalsIgnoreCase("DEV");
-	}
-
-	public static boolean isEarlyAccessBuild()
-	{
-		return Env.BUILD_MODE.equalsIgnoreCase("EARLY_ACCESS");
-	}
-
-	public static boolean isReleaseBuild()
-	{
-		return Env.BUILD_MODE.equalsIgnoreCase("RELEASE");
-	}
-
-	public static boolean hasPatreonAccess(PlayerEntity player)
-	{
-		int patreon = getPatreonLevel(player);
-
-		if (isDevBuild() && WyDebug.isDebug())
-			return true;
-
-		if (isDevBuild() && patreon >= 4)
-			return true;
-		else if (isEarlyAccessBuild() && patreon >= 3)
-			return true;
-		else
-			return false;
 	}
 
 	public static byte[] serialize(Object obj) throws IOException

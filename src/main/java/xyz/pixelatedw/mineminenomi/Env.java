@@ -5,7 +5,7 @@ public class Env
 	public static final String
 
 	//Auto assigned by the Deploy script
-	BUILD_MODE = "RELEASE",
+	BUILD_MODE = "DEV",
 	
 	PROJECT_ID = "mineminenomi",
 	PROJECT_NAME = "Mine Mine no Mi",

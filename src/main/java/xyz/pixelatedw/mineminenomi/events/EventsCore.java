@@ -1,18 +1,14 @@
 package xyz.pixelatedw.mineminenomi.events;
 
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.event.ClickEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedOutEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.Env;
@@ -21,7 +17,6 @@ import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
 import xyz.pixelatedw.mineminenomi.api.data.quest.IQuestData;
 import xyz.pixelatedw.mineminenomi.api.data.quest.QuestDataCapability;
-import xyz.pixelatedw.mineminenomi.api.debug.WyDebug;
 import xyz.pixelatedw.mineminenomi.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
@@ -134,21 +129,6 @@ public class EventsCore
 
 			if (!player.world.isRemote)
 			{
-				if(!WyHelper.isReleaseBuild())
-				{
-					if(!WyHelper.hasPatreonAccess(player))
-					{ 
-						((ServerPlayerEntity)player).connection.disconnect(new StringTextComponent(TextFormatting.BOLD + "" + TextFormatting.RED + "WARNING! \n\n " + TextFormatting.RESET + "You don't have access to this version yet!"));
-						if(!WyDebug.isDebug())
-						{
-							WyTelemetry.addMiscStat("onlinePlayers", "Online Players", -1);
-							WyTelemetry.sendAllDataSync();
-						}
-						event.setCanceled(true);
-						return;
-					}
-				}
-				
 				if(CommonConfig.instance.isUpdateMessageEnabled())
 				{
 					try 
@@ -189,37 +169,5 @@ public class EventsCore
 				}
 			}
 		}
-	}
-	
-	@SubscribeEvent
-	public static void onPlayerLoggedIn(PlayerLoggedInEvent event)
-	{
-		/*if(!WyDebug.isDebug())
-		{
-			WyTelemetry.addMiscStat("onlinePlayers", "Online Players", 1);
-			WyTelemetry.sendAllDataAsync();
-		}*/
-	}
-	
-	@SubscribeEvent
-	public static void onPlayerLoggedIn(PlayerLoggedOutEvent event)
-	{
-	/*	if(!WyDebug.isDebug())
-		{
-			WyTelemetry.addMiscStat("onlinePlayers", "Online Players", -1);
-			WyTelemetry.sendAllDataSync();
-		}*/
-	}
-	
-	@SubscribeEvent
-	public static void onPlayerTick(TickEvent.WorldTickEvent event)
-	{		
-		/*if(event.phase == Phase.END && event.side == LogicalSide.SERVER)
-		{
-			if(event.world.getGameTime() % 1200 == 0)
-			{
-			//	WyTelemetry.sendAllDataAsync();
-			}
-		}*/
 	}
 }
