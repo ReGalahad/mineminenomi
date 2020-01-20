@@ -18,7 +18,7 @@ import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 
 @OnlyIn(Dist.CLIENT)
-public class RendererAbility extends EntityRenderer<ProjectileAbility>
+public class RendererAbility extends EntityRenderer<AbilityProjectileEntity>
 {
 	private double scaleX = 1, scaleY = 1, scaleZ = 1;
 	private double red, blue, green, alpha;
@@ -52,7 +52,7 @@ public class RendererAbility extends EntityRenderer<ProjectileAbility>
 	}
 
 	@Override
-	public void doRender(ProjectileAbility entity, double x, double y, double z, float entityYaw, float partialTicks)
+	public void doRender(AbilityProjectileEntity entity, double x, double y, double z, float entityYaw, float partialTicks)
 	{
 		GlStateManager.pushMatrix();
 		{
@@ -85,12 +85,12 @@ public class RendererAbility extends EntityRenderer<ProjectileAbility>
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(ProjectileAbility entity)
+	protected ResourceLocation getEntityTexture(AbilityProjectileEntity entity)
 	{
 		return this.texture;
 	}
 
-	public static class Factory implements IRenderFactory<ProjectileAbility>
+	public static class Factory implements IRenderFactory<AbilityProjectileEntity>
 	{
 		private EntityModel model = new CubeModel();
 		private double scaleX = 1, scaleY = 1, scaleZ = 1;
@@ -142,7 +142,7 @@ public class RendererAbility extends EntityRenderer<ProjectileAbility>
 		}
 
 		@Override
-		public EntityRenderer<? super ProjectileAbility> createRenderFor(EntityRendererManager manager)
+		public EntityRenderer<? super AbilityProjectileEntity> createRenderFor(EntityRendererManager manager)
 		{
 			RendererAbility renderer = new RendererAbility(manager, this.model);
 			renderer.setTexture(this.texture);

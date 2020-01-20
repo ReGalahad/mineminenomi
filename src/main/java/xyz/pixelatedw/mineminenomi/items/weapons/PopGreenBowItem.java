@@ -12,7 +12,7 @@ import net.minecraft.stats.Stats;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.ExtraProjectiles;
+import xyz.pixelatedw.mineminenomi.entities.projectiles.ExtraProjectiles;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
 import xyz.pixelatedw.mineminenomi.init.ModExtraAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModItems;

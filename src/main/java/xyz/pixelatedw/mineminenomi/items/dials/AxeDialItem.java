@@ -13,7 +13,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.telemetry.WyTelemetry;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.ExtraProjectiles.AxeDialProjectile;
+import xyz.pixelatedw.mineminenomi.entities.projectiles.ExtraProjectiles.AxeDialProjectile;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
 import xyz.pixelatedw.mineminenomi.init.ModExtraAttributes;

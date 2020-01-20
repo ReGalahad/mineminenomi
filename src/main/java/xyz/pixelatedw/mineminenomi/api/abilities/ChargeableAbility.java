@@ -46,11 +46,15 @@ public class ChargeableAbility extends Ability
 	/*
 	 *  Setters / Getters
 	 */
-	
 	public void setMaxChargeTime(int time)
 	{
 		this.maxChargeTime = time * 20;
 		this.chargeTime = this.maxChargeTime;
+	}
+	
+	public void startCharging()
+	{
+		this.setState(State.CHARGING);
 	}
 
 	
@@ -58,7 +62,6 @@ public class ChargeableAbility extends Ability
 	/*
 	 *  Methods
 	 */
-
 	public void charging(PlayerEntity player)
 	{
 		if(player.world.isRemote)

@@ -4,7 +4,7 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.ExtraProjectiles.EntityCloud;
+import xyz.pixelatedw.mineminenomi.entities.projectiles.ExtraProjectiles.EntityCloud;
 
 public class CloudRenderer extends EntityRenderer<EntityCloud>
 {

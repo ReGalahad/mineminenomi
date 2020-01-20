@@ -19,9 +19,9 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility;
+import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectileEntity;
 import xyz.pixelatedw.mineminenomi.api.telemetry.WyTelemetry;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.ExtraProjectiles;
+import xyz.pixelatedw.mineminenomi.entities.projectiles.ExtraProjectiles;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
 import xyz.pixelatedw.mineminenomi.init.ModExtraAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModItems;
@@ -60,7 +60,7 @@ public class FlintlockItem extends Item
 					if ((player.inventory.hasItemStack(new ItemStack(ModItems.BULLET)) && itemStack.getTag().getInt("bulletType") == 0) 
 							|| (player.inventory.hasItemStack(new ItemStack(ModItems.KAIROSEKI_BULLET)) && itemStack.getTag().getInt("bulletType") == 1))
 					{
-						ProjectileAbility proj = null;
+						AbilityProjectileEntity proj = null;
 						int powder = itemStack.getTag().getInt("gunPowder");
 						if (!world.isRemote)
 						{

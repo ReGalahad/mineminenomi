@@ -46,45 +46,6 @@ public class CUseAbilityPacket
 					return;
 				
 				abilityDataProps.getAbility(message.ability).use(player);
-				
-				/*Ability currentAbility = abilityDataProps.getHotbarAbilityFromSlot(message.abilitySlot);
-								
-				if (currentAbility != null)
-				{
-					//ThreadTaskExecutor<?> executor = LogicalSidedProvider.WORKQUEUE.get(LogicalSide.SERVER);
-					
-					//executor.runAsync(() -> 
-					//{
-						for (int j = 0; j < 8; j++)
-						{
-							Ability testAbility = abilityDataProps.getHotbarAbilityFromSlot(j);
-							if (testAbility != null)
-							{
-								if (testAbility.isCharging() && testAbility == currentAbility && currentAbility.getAttribute().canStopChargeEarly())
-									currentAbility.endCharging(player);
-								
-								if (testAbility.isCharging())
-									return;
-								
-								if (currentAbility != testAbility && testAbility.isPassiveActive() && currentAbility.getAttribute().isPassive())
-								{
-									if(currentAbility.getAttribute().isAbilityFreePassive())
-										currentAbility.passive(player);
-									else if(!currentAbility.getAttribute().isAbilityFreePassive() && testAbility.getAttribute().isAbilityFreePassive() && testAbility.isPassiveActive())
-										currentAbility.passive(player);								
-									return;
-								}
-							}
-						}
-						
-						if (currentAbility.getAttribute().isPassive())
-							currentAbility.passive(player);
-						else if (currentAbility.getAttribute().getAbilityCharges() > 0)
-							currentAbility.startCharging(player);
-						else
-							currentAbility.use(player);
-					//});
-				}*/
 			});
 		}
 		

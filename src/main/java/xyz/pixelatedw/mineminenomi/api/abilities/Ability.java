@@ -13,11 +13,8 @@ public abstract class Ability implements Serializable
 {
 	private String name = "";
 	private String desc = "";
-	private int cooldown;
-	private int maxCooldown;
-	private int repeaterCount;
-	private int maxRepeaterCount;
-	private int repeaterInterval;
+	protected int cooldown;
+	protected int maxCooldown;
 	private Category category = Category.DEVIL_FRUIT;
 	private State state = State.STANDBY;
 	
@@ -51,7 +48,7 @@ public abstract class Ability implements Serializable
 	
 	
 	/*
-	 * 	States
+	 * 	Setters/Getters
 	 */
 	public boolean isOnStandby()
 	{
@@ -88,16 +85,6 @@ public abstract class Ability implements Serializable
 		this.state = State.COOLDOWN;
 	}
 	
-	public void startPassive()
-	{
-		this.state = State.PASSIVE;
-	}
-	
-	public void startCharging()
-	{
-		this.state = State.CHARGING;
-	}
-	
 	public void setState(State state)
 	{
 		this.state = state;
@@ -107,21 +94,7 @@ public abstract class Ability implements Serializable
 	{
 		return this.state;
 	}
-	
-	
-	/*
-	 * 	Setters/Getters
-	 */	
-	public void setMaxRepearCount(int count, int interval)
-	{
-		this.maxRepeaterCount = count;
-		this.repeaterCount = this.maxRepeaterCount;
-		this.repeaterInterval = interval;
 		
-		this.maxCooldown += (this.maxRepeaterCount * this.repeaterInterval);
-		this.cooldown = this.maxCooldown;	
-	}
-	
 	public void setMaxCooldown(int cooldown)
 	{
 		this.maxCooldown = cooldown * 20;
@@ -157,7 +130,6 @@ public abstract class Ability implements Serializable
 	/*
 	 * 	Methods
 	 */
-	
 	public void cooldown(PlayerEntity player)
 	{
 		if(player.world.isRemote)
@@ -166,19 +138,11 @@ public abstract class Ability implements Serializable
 		if(this.isOnCooldown() && this.cooldown > 0)
 		{
 			this.cooldown--;
-
-			if(this.repeaterCount > 0 && this.cooldown % this.repeaterInterval == 0)
-			{
-				this.onUseEvent.onUse(player, this);
-				this.repeaterCount--;
-			}
-
 			this.duringCooldownEvent.duringCooldown(player, this, this.cooldown);
 		}
 		else if(this.isOnCooldown() && this.cooldown <= 0)
 		{
 			this.cooldown = this.maxCooldown;				
-			this.repeaterCount = this.maxRepeaterCount;
 			this.state = State.STANDBY;
 			IAbilityData props = AbilityDataCapability.get(player);
 			ModNetwork.sendTo(new SUpdateHotbarStatePacket(props, props.getAbilityPosition(this.getSavedAbility(player))), (ServerPlayerEntity)player);
@@ -191,7 +155,7 @@ public abstract class Ability implements Serializable
 		return props.getAbilities(Category.ALL).parallelStream().filter(ability -> ability.getName().equalsIgnoreCase(this.getName())).findFirst().orElse(null);
 	}
 	
-	private Ability getSavedAbility(PlayerEntity player)
+	protected Ability getSavedAbility(PlayerEntity player)
 	{
 		IAbilityData props = AbilityDataCapability.get(player);
 		Ability abl = props.getAbility(this.getOriginalAbility(player));

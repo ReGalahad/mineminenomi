@@ -15,8 +15,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.ExtraProjectiles;
+import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectileEntity;
+import xyz.pixelatedw.mineminenomi.entities.projectiles.ExtraProjectiles;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.mineminenomi.init.ModExtraAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModWeapons;
@@ -69,7 +69,7 @@ public class EntityPirateWithGun extends EntityGenericPirate implements IRangedA
 	@Override
 	public void attackEntityWithRangedAttack(LivingEntity target, float distance)
 	{
-		ProjectileAbility proj = new ExtraProjectiles.NormalBullet(this.world, this, ModExtraAttributes.NORMAL_BULLET);
+		AbilityProjectileEntity proj = new ExtraProjectiles.NormalBullet(this.world, this, ModExtraAttributes.NORMAL_BULLET);
 		
 		double velX = target.posX - this.posX;
 		double velY = target.getBoundingBox().minY + this.getAttackTarget().getHeight() / 3.0F - (this.posY + this.getHeight());

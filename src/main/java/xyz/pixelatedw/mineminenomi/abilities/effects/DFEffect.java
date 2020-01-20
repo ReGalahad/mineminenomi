@@ -2,7 +2,6 @@ package xyz.pixelatedw.mineminenomi.abilities.effects;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import xyz.pixelatedw.mineminenomi.data.entity.extraeffects.ExtraEffectCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.extraeffects.IExtraEffect;
 import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.packets.server.SExtraEffectSyncPacket;
@@ -19,7 +18,7 @@ public abstract class DFEffect
 	
 	public DFEffect(LivingEntity entity, int timer, String effect)
 	{
-		this.entity = entity;
+/*		this.entity = entity;
 		this.effect = effect;
 		this.timer = timer;
 		this.props = ExtraEffectCapability.get(entity);
@@ -35,7 +34,7 @@ public abstract class DFEffect
 			ModNetwork.sendToAll(new SExtraEffectSyncPacket(entity.getEntityId(), props));
 			updateThread = (new Update(props, timer));
 			updateThread.start();
-		}
+		}*/
 	}
 	
 	public abstract void onEffectStart(LivingEntity entity);

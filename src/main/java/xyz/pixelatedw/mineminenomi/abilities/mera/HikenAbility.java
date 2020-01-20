@@ -2,7 +2,7 @@ package xyz.pixelatedw.mineminenomi.abilities.mera;
 
 import net.minecraft.entity.player.PlayerEntity;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.mera.HikenProjectile;
+import xyz.pixelatedw.mineminenomi.entities.projectiles.mera.HikenProjectile;
 
 public class HikenAbility extends Ability
 {

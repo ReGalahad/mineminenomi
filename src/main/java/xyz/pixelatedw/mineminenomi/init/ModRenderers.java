@@ -4,7 +4,7 @@ import java.util.List;
 
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import xyz.pixelatedw.mineminenomi.api.abilities.ProjectileAbility;
+import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectileEntity;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.WantedPosterPackageTileEntity;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.WantedPosterTileEntity;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.dials.AxeDialTileEntity;
@@ -16,7 +16,6 @@ import xyz.pixelatedw.mineminenomi.blocks.tileentities.dials.ImpactDialTileEntit
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.dials.MilkyDialTileEntity;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.dials.RejectDialTileEntity;
 import xyz.pixelatedw.mineminenomi.entities.WantedPosterPackageEntity;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.ExtraProjectiles.EntityCloud;
 import xyz.pixelatedw.mineminenomi.entities.mobs.bandits.EntityBanditWithSword;
 import xyz.pixelatedw.mineminenomi.entities.mobs.marines.EntityMarineCaptain;
 import xyz.pixelatedw.mineminenomi.entities.mobs.marines.EntityMarineWithGun;
@@ -27,6 +26,7 @@ import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityPirateCaptain;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityPirateWithGun;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityPirateWithSword;
 import xyz.pixelatedw.mineminenomi.entities.mobs.quest.givers.DojoSenseiEntity;
+import xyz.pixelatedw.mineminenomi.entities.projectiles.ExtraProjectiles.EntityCloud;
 import xyz.pixelatedw.mineminenomi.models.blocks.Dial01Model;
 import xyz.pixelatedw.mineminenomi.models.blocks.Dial02Model;
 import xyz.pixelatedw.mineminenomi.models.blocks.Dial03Model;
@@ -47,7 +47,7 @@ public class ModRenderers
     public static void registerRenderers() 
     {
     	// Projectiles
-    	for(List<ProjectileAbility.Data> list : ModDevilFruits.ALL_PROJECTILES)
+    	for(List<AbilityProjectileEntity.Data> list : ModDevilFruits.ALL_PROJECTILES)
     	{
     		list.forEach((value) -> 
     		{

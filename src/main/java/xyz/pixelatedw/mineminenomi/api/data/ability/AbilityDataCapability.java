@@ -75,7 +75,7 @@ public class AbilityDataCapability
 					
 					instance.clearAbilities(Category.ALL);
 					for (int i = 0; i < total; i++)
-						instance.addAbility((Ability) WyHelper.deserialize(props.getByteArray("ability_" + i)));	
+						instance.addAbility((Ability) WyHelper.deserialize(props.getByteArray("ability_" + i)));
 					
 					for (int i = 0; i < instance.getHotbarAbilities().length; i++)
 					{

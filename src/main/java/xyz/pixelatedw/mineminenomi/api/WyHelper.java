@@ -111,7 +111,7 @@ public class WyHelper
 					Blocks.BAMBOO_SAPLING, Blocks.BIRCH_SAPLING, Blocks.DARK_OAK_SAPLING, Blocks.JUNGLE_SAPLING, Blocks.OAK_SAPLING, Blocks.BAMBOO
 			}));
 
-		map.put("ores", Arrays.asList(new Block[]
+		map.put("ore", Arrays.asList(new Block[]
 			{
 					Blocks.COAL_ORE, Blocks.IRON_ORE, Blocks.GOLD_ORE, Blocks.DIAMOND_ORE, Blocks.EMERALD_ORE, Blocks.REDSTONE_ORE, Blocks.LAPIS_ORE, Blocks.NETHER_QUARTZ_ORE
 			}));
@@ -122,7 +122,7 @@ public class WyHelper
 					Blocks.SMOOTH_QUARTZ, Blocks.SMOOTH_QUARTZ_SLAB, Blocks.SMOOTH_QUARTZ_STAIRS
 			}));
 		
-		map.put("liquids", Arrays.asList(new Block[]
+		map.put("liquid", Arrays.asList(new Block[]
 			{
 					Blocks.WATER, Blocks.LAVA
 			}));
@@ -164,7 +164,7 @@ public class WyHelper
 		boolean noGriefFlag = Arrays.toString(rules).contains("nogrief");
 
 		ExtendedWorldData worldData = ExtendedWorldData.get(world);
-		if (worldData.isInsideRestrictedArea((int) posX, (int) posY, (int) posZ))
+		if (worldData.isInsideRestrictedArea((int) posX, (int) posY, (int) posZ) || !CommonConfig.instance.isGriefingEnabled())
 			return false;
 
 		Arrays.stream(rules).forEach(rule ->

@@ -1,5 +1,7 @@
 package xyz.pixelatedw.mineminenomi.models.entities.projectiles;
 
+import com.mojang.blaze3d.platform.GlStateManager;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.entity.model.RendererModel;
@@ -199,33 +201,37 @@ public class PheasantModel extends EntityModel
     }
 
 	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+	public void render(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
 	{
-		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-		this.body3.render(f5);
-		this.tuft3.render(f5);
-		this.rightleg2.render(f5);
-		this.body1.render(f5);
-		this.beak4.render(f5);
-		this.beak1.render(f5);
-		this.leftfoot1.render(f5);
-		this.rightleg1.render(f5);
-		this.tuft2.render(f5);
-		this.leftleg1.render(f5);
-		this.head.render(f5);
-		this.beak2.render(f5);
-		this.beak3.render(f5);
-		this.rightfoot1.render(f5);
-		this.body2.render(f5);
-		this.tail3.render(f5);
-		this.tail1.render(f5);
-		this.tail2.render(f5);
-		this.leftleg2.render(f5);
-		this.tuft1.render(f5);
-		this.rightWing1.render(f5);
-		this.body4.render(f5);
-		this.body5.render(f5);
-		this.leftWing1.render(f5);
+		super.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+		this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entity);
+		
+		GlStateManager.translated(0, -0.75, 0);
+		
+		this.body3.render(scale);
+		this.tuft3.render(scale);
+		this.rightleg2.render(scale);
+		this.body1.render(scale);
+		this.beak4.render(scale);
+		this.beak1.render(scale);
+		this.leftfoot1.render(scale);
+		this.rightleg1.render(scale);
+		this.tuft2.render(scale);
+		this.leftleg1.render(scale);
+		this.head.render(scale);
+		this.beak2.render(scale);
+		this.beak3.render(scale);
+		this.rightfoot1.render(scale);
+		this.body2.render(scale);
+		this.tail3.render(scale);
+		this.tail1.render(scale);
+		this.tail2.render(scale);
+		this.leftleg2.render(scale);
+		this.tuft1.render(scale);
+		this.rightWing1.render(scale);
+		this.body4.render(scale);
+		this.body5.render(scale);
+		this.leftWing1.render(scale);
 	}
 
 	/**
