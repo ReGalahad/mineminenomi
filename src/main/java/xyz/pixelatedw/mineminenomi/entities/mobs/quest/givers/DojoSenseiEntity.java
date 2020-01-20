@@ -31,7 +31,7 @@ import xyz.pixelatedw.mineminenomi.init.ModWeapons;
 
 public class DojoSenseiEntity extends GenericNewEntity implements IQuestGiver
 {
-	protected Item[] swords = new Item[] {ModWeapons.sandaiKitetsu, ModWeapons.nidaiKitetsu, ModWeapons.wadoIchimonji, Items.DIAMOND_SWORD};
+	protected Item[] swords = new Item[] {ModWeapons.SANDAI_KITETSU, ModWeapons.NIDAI_KITESTU, ModWeapons.WADO_ICHIMONJI, Items.DIAMOND_SWORD};
 	
 	public DojoSenseiEntity(World worldIn)
 	{

@@ -61,7 +61,7 @@ public class EntityMarineWithGun extends EntityGenericMarine implements IRangedA
 	{
 		spawnData = super.onInitialSpawn(world, difficulty, reason, spawnData, dataTag);
 		
-		this.setItemStackToSlot(EquipmentSlotType.MAINHAND, new ItemStack(ModWeapons.flintlock));
+		this.setItemStackToSlot(EquipmentSlotType.MAINHAND, new ItemStack(ModWeapons.FLINTLOCK));
 
 		return spawnData;
 	}

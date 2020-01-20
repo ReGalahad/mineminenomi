@@ -23,7 +23,7 @@ public class IceSaberAbility extends PassiveAbility
 	private void onStartPassiveEvent(PlayerEntity player)
 	{
 		if (player.getHeldItemMainhand().isEmpty())
-			player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(ModWeapons.iceSaber));
+			player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(ModWeapons.ICE_SABER));
 		else
 		{
 			WyHelper.sendMsgToPlayer(player, "Cannot equip " + this.getName() + " while holding another item in hand !");
@@ -33,6 +33,6 @@ public class IceSaberAbility extends PassiveAbility
 	
 	private void onEndPassiveEvent(PlayerEntity player)
 	{
-		player.inventory.deleteStack(new ItemStack(ModWeapons.iceSaber));
+		player.inventory.deleteStack(new ItemStack(ModWeapons.ICE_SABER));
 	}
 }

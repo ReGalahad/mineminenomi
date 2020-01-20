@@ -23,7 +23,7 @@ public class ModCreativeTabs
 		@OnlyIn(Dist.CLIENT)
 		public ItemStack createIcon()
 		{
-			return new ItemStack(ModWeapons.yoru);
+			return new ItemStack(ModWeapons.YORU);
 		}
 	};
 
