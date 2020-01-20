@@ -251,7 +251,6 @@ public class WyHelper
 		return now.after(target);
 	}
 
-	@Deprecated
 	public static ExplosionAbility newExplosion(Entity entity, double posX, double posY, double posZ, float size)
 	{
 		ExplosionAbility explosion = new ExplosionAbility(entity, posX, posY, posZ, size);

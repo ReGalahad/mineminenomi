@@ -213,13 +213,6 @@ public class ModAttributes
 	public static AbilityAttribute ICE_BLOCK_PARTISAN = new AbilityAttribute("Ice Block : Partisan").setAbilityCooldown(7).setProjectileDamage(10).setProjectileModel(ModelType.TRIDENT).setProjectileTexture("iceblockpartisan").setProjectileSize(1.5, 1.5, 1.5).setModelOffsets(0, 1.0, 0).setAbilityRepeater().addEffects(EffectType.PROJECTILE, new EffectInstance(Effects.SLOWNESS, 100, 0), new EffectInstance(Effects.MINING_FATIGUE, 100, 0));
 	public static AbilityAttribute ICE_BLOCK_PHEASANT = new AbilityAttribute("Ice Block : Pheasant").setAbilityCooldown(20).setProjectileDamage(45).setProjectileModel(ModelType.PHEASANT).setProjectileTexture("iceblockpheasant").setProjectileSize(5, 5, 5).setModelOffsets(0, 2.5, 0).addEffects(EffectType.PROJECTILE, new EffectInstance(Effects.SLOWNESS, 200, 100), new EffectInstance(Effects.MINING_FATIGUE, 200, 100)).setProjectileCollisionSizes(1.75, 1.5, 1.75);
 
-	public static AbilityAttribute ENJOMO  = new AbilityAttribute("Enjomo").setAbilityCooldown(10);
-	public static AbilityAttribute JUJIKA = new AbilityAttribute("Jujika").setAbilityCooldown(6).setProjectileDamage(5).setProjectileModel(ModelType.SPHERE).setProjectileColor("FF0000").setProjectileSize(.2, .2, .2);
-	public static AbilityAttribute HIDARUMA = new AbilityAttribute("Hidaruma").setAbilityCooldown(6).setProjectileModel(ModelType.CUBE).setProjectileSize(0, 0, 0);
-	public static AbilityAttribute DAI_ENKAI_ENTEI = new AbilityAttribute("Dai Enkai : Entei").setAbilityCooldown(25).setProjectileModel(ModelType.SPHERE).setProjectileDamage(45).setProjectileColor("FF0000").setProjectileSize(9, 9, 9).setProjectileExplosion(7).setAbilityCharges(4 * 20).setProjectileCollisionSizes(2);
-	public static AbilityAttribute HIGAN = new AbilityAttribute("Higan").setAbilityCooldown(4).setProjectileModel(ModelType.CUBE).setProjectileDamage(5).setProjectileColor("FF0000").setProjectileSize(.3, .3, .3).setAbilityRepeater(4);
-	public static AbilityAttribute HIKEN = new AbilityAttribute("Hiken").setAbilityCooldown(8).setProjectileModel(ModelType.FIST).setProjectileTexture("hiken").setModelOffsets(0, 0.5, 0).setProjectileDamage(20).setProjectileSize(1.5, 1.5, 1.5).setProjectileExplosion(2);
-
 	public static AbilityAttribute GREAT_CAGE = new AbilityAttribute("Great Cage").setAbilityCooldown(20);
 	public static AbilityAttribute PRISON_BREAK = new AbilityAttribute("Prison Break").setAbilityCooldown(3).setAbilityPassive();
 	public static AbilityAttribute AWASE_BAORI = new AbilityAttribute("Awase Baori").setAbilityCooldown(12).setProjectileModel(ModelType.SPHERE).setProjectileColor("000000").setProjectileSize(7, 7, 7);

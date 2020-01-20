@@ -10,8 +10,10 @@ import net.minecraftforge.registries.ForgeRegistries;
 import xyz.pixelatedw.mineminenomi.EnumFruitType;
 import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.abilities.mera.DaiEnkaiEnteiAbility;
+import xyz.pixelatedw.mineminenomi.abilities.mera.HidarumaAbility;
 import xyz.pixelatedw.mineminenomi.abilities.mera.HiganAbility;
 import xyz.pixelatedw.mineminenomi.abilities.mera.HikenAbility;
+import xyz.pixelatedw.mineminenomi.abilities.mera.JujikaAbility;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
@@ -69,7 +71,7 @@ public class ModDevilFruits
 	public static final AkumaNoMiItem GOMU_GOMU_NO_MI = new AkumaNoMiItem("Gomu Gomu no Mi", EnumFruitType.PARAMECIA);
 	public static final AkumaNoMiItem PIKA_PIKA_NO_MI = new AkumaNoMiItem("Pika Pika no Mi", EnumFruitType.LOGIA);
 	public static final AkumaNoMiItem HIE_HIE_NO_MI = new AkumaNoMiItem("Hie Hie no Mi", EnumFruitType.LOGIA);
-	public static final AkumaNoMiItem MERA_MERA_NO_MI = new AkumaNoMiItem("Mera Mera no Mi", EnumFruitType.LOGIA, HikenAbility.INSTANCE, HiganAbility.INSTANCE, DaiEnkaiEnteiAbility.INSTANCE);
+	public static final AkumaNoMiItem MERA_MERA_NO_MI = new AkumaNoMiItem("Mera Mera no Mi", EnumFruitType.LOGIA, HikenAbility.INSTANCE, HiganAbility.INSTANCE, DaiEnkaiEnteiAbility.INSTANCE, HidarumaAbility.INSTANCE, JujikaAbility.INSTANCE);
 
 	public static final List[] ALL_PROJECTILES = new List[] 
 		{
