@@ -1,0 +1,6 @@
+{
+	"parent": "mineminenomi:item/murakumogiri",
+	"textures": {
+		"layer0": "mineminenomi:items/murakumogiri_haki"
+	}
+}

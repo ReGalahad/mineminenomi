@@ -73,7 +73,7 @@ public class AkumaNoMiItem extends Item
 		IEntityStats entityStatsProps = EntityStatsCapability.get(player);
 		IAbilityData abilityDataProps = AbilityDataCapability.get(player);
 
-		String eatenFruit = this.getDefaultTranslationKey().substring("item.mineminenomi.".length()).replace("nomi", "").replace(":", "").replace(".", "").replace(",", "").replace("model", "");
+		String eatenFruit = this.getDefaultTranslationKey().substring("item.mineminenomi.".length()).replace("_no_mi", "").replace(":", "").replace(".", "").replace(",", "").replace("model", "");
 
 		boolean flag1 = !WyHelper.isNullOrEmpty(devilFruitProps.getDevilFruit()) && !devilFruitProps.hasYamiPower() && !eatenFruit.equalsIgnoreCase("yamiyami");
 		boolean flag2 = devilFruitProps.hasYamiPower() && !eatenFruit.equalsIgnoreCase(devilFruitProps.getDevilFruit()) && !devilFruitProps.getDevilFruit().equalsIgnoreCase("yamidummy");

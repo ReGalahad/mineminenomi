@@ -9,6 +9,7 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.config.GuiUtils;
+import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.init.ModNetwork;
@@ -240,7 +241,7 @@ public class CharacterCreatorScreen extends Screen
 				}
 			}
 			
-			if(!props.getRace().equals("N/A") && !props.getFaction().equals("N/A") && !props.getFightingStyle().equals("N/A"))
+			if(!WyHelper.isNullOrEmpty(props.getRace()) && !!WyHelper.isNullOrEmpty(props.getFaction()) && !!WyHelper.isNullOrEmpty(props.getFightingStyle()))
 			{
 				Minecraft.getInstance().displayGuiScreen(null);
 				ModNetwork.sendToServer(new CEntityStatsSyncPacket(props));

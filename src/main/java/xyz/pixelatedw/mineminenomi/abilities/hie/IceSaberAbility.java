@@ -2,37 +2,32 @@ package xyz.pixelatedw.mineminenomi.abilities.hie;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.abilities.PassiveAbility;
+import xyz.pixelatedw.mineminenomi.api.abilities.ItemAbility;
+import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
+import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.init.ModWeapons;
 
-public class IceSaberAbility extends PassiveAbility
+public class IceSaberAbility extends ItemAbility
 {
 	public static final Ability INSTANCE = new IceSaberAbility();
 	
 	public IceSaberAbility()
 	{
 		super("Ice Saber", Category.DEVIL_FRUIT);
-		this.setDescription("Creates a sharp blade made of solid ice.");
-		
-		this.onStartPassiveEvent = this::onStartPassiveEvent;
-		this.onEndPassiveEvent = this::onEndPassiveEvent;
+		this.setDescription("Creates a sharp blade made of solid ice.");	
 	}
 
-	private void onStartPassiveEvent(PlayerEntity player)
+	@Override
+	public boolean canBeActive(PlayerEntity player)
 	{
-		if (player.getHeldItemMainhand().isEmpty())
-			player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(ModWeapons.ICE_SABER));
-		else
-		{
-			WyHelper.sendMsgToPlayer(player, "Cannot equip " + this.getName() + " while holding another item in hand !");
-			this.onEndPassiveEvent.onEndPassive(player);
-		}
+		IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
+		return devilFruitProps.getDevilFruit().equalsIgnoreCase("hie_hie") ;
 	}
-	
-	private void onEndPassiveEvent(PlayerEntity player)
+
+	@Override
+	public ItemStack getItemStack()
 	{
-		player.inventory.deleteStack(new ItemStack(ModWeapons.ICE_SABER));
+		return new ItemStack(ModWeapons.ICE_SABER);
 	}
 }

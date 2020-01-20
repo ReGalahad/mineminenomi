@@ -12,11 +12,11 @@ import xyz.pixelatedw.mineminenomi.packets.server.SUpdateHotbarStatePacket;
 public class PassiveAbility extends Ability
 {
 	private int threshold = 0;
-	private int passiveTime = 0;
+	protected int passiveTime = 0;
 	
 	// Setting the defaults so that no crash occurs and so they will be null safe.
-	protected IOnStartPassive onStartPassiveEvent = (player) -> {};
-	protected IOnEndPassive onEndPassiveEvent = (player) -> {};
+	protected IOnStartPassive onStartPassiveEvent = (player) -> { return true; };
+	protected IOnEndPassive onEndPassiveEvent = (player) -> { return true; };
 	protected IDuringActivePassive duringPassiveEvent = (player, passiveTime) -> {};
 	
 	public PassiveAbility(String name, Category category)
@@ -24,7 +24,6 @@ public class PassiveAbility extends Ability
 		super(name, category);
 	}
 
-	
 	
 	/*
 	 *  Event Starters
@@ -37,19 +36,22 @@ public class PassiveAbility extends Ability
 		
 		if(!this.isPassiveActive())
 		{
-			this.onStartPassiveEvent.onStartPassive(player);
-	
-			this.startPassive();
-			IAbilityData props = AbilityDataCapability.get(player);
-			ModNetwork.sendTo(new SUpdateHotbarStatePacket(props, props.getAbilityPosition(this)), (ServerPlayerEntity)player);
+			if(this.onStartPassiveEvent.onStartPassive(player))
+			{
+				this.startPassive();
+				IAbilityData props = AbilityDataCapability.get(player);
+				ModNetwork.sendTo(new SUpdateHotbarStatePacket(props, props.getAbilityPosition(this)), (ServerPlayerEntity)player);
+			}
 		}
 		else
 		{
-			this.onEndPassiveEvent.onEndPassive(player);
-			
-			this.startStandby();
-			IAbilityData props = AbilityDataCapability.get(player);
-			ModNetwork.sendTo(new SUpdateHotbarStatePacket(props, props.getAbilityPosition(this)), (ServerPlayerEntity)player);
+			if(this.onEndPassiveEvent.onEndPassive(player))
+			{
+				this.passiveTime = 0;
+				this.startCooldown();
+				IAbilityData props = AbilityDataCapability.get(player);
+				ModNetwork.sendTo(new SUpdateHotbarStatePacket(props, props.getAbilityPosition(this)), (ServerPlayerEntity)player);				
+			}
 		}
 	}
 	
@@ -74,7 +76,7 @@ public class PassiveAbility extends Ability
 	 * 	Methods
 	 */
 	public void passive(PlayerEntity player)
-	{	
+	{
 		if(player.world.isRemote)
 			return;
 		
@@ -84,7 +86,7 @@ public class PassiveAbility extends Ability
 			
 			this.duringPassiveEvent.duringActivePassive(player, this.passiveTime);
 			
-			if(this.passiveTime >= this.threshold)
+			if(this.threshold > 0 && this.passiveTime >= this.threshold)
 			{
 				this.passiveTime = 0;
 				this.startCooldown();
@@ -106,11 +108,11 @@ public class PassiveAbility extends Ability
 	
 	public interface IOnStartPassive extends Serializable
 	{
-		void onStartPassive(PlayerEntity player);
+		boolean onStartPassive(PlayerEntity player);
 	}
 	
 	public interface IOnEndPassive extends Serializable
 	{
-		void onEndPassive(PlayerEntity player);
+		boolean onEndPassive(PlayerEntity player);
 	}
 }

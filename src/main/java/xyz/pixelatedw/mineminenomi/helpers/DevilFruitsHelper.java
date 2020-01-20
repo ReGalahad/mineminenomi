@@ -324,7 +324,7 @@ public class DevilFruitsHelper
 		if (fullName.equals("yamidummy"))
 			fullName = "yamiyami";
 
-		return new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(Env.PROJECT_ID, fullName.replace(model, "") + fullModel)));
+		return new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(Env.PROJECT_ID, fullName.replace(model, "") + "_no_mi" + fullModel)));
 	}
 
 	public static boolean isEntityInRoom(LivingEntity entity)
