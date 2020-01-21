@@ -12,7 +12,6 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability.Category;
 import xyz.pixelatedw.mineminenomi.api.data.CapabilityProviderSerializable;
 
 public class AbilityDataCapability
@@ -99,5 +98,14 @@ public class AbilityDataCapability
 	public static ICapabilityProvider createProvider(final IAbilityData data)
 	{
 		return new CapabilityProviderSerializable<>(INSTANCE, null, data);
+	}
+	
+	public enum Category
+	{
+		ALL,
+		
+		DEVIL_FRUIT,
+		RACIAL,
+		HAKI,
 	}
 }

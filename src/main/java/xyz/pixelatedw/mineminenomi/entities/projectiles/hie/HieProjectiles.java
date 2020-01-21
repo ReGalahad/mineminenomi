@@ -5,10 +5,10 @@ import java.util.List;
 
 import net.minecraft.entity.EntityType;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectileEntity;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectileEntity.Data;
-import xyz.pixelatedw.mineminenomi.api.abilities.RendererAbility;
-import xyz.pixelatedw.mineminenomi.api.abilities.SphereModel;
+import xyz.pixelatedw.mineminenomi.api.abilities.models.SphereModel;
+import xyz.pixelatedw.mineminenomi.api.abilities.projectiles.AbilityProjectileEntity;
+import xyz.pixelatedw.mineminenomi.api.abilities.projectiles.AbilityProjectileEntity.Data;
+import xyz.pixelatedw.mineminenomi.api.abilities.renderers.RendererAbility;
 import xyz.pixelatedw.mineminenomi.models.entities.projectiles.PheasantModel;
 import xyz.pixelatedw.mineminenomi.models.entities.projectiles.TridentModel;
 

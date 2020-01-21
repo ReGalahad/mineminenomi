@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.api.abilities;
+package xyz.pixelatedw.mineminenomi.api.abilities.projectiles;
 
 import java.io.Serializable;
 import java.util.List;
@@ -23,6 +23,8 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
+import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
+import xyz.pixelatedw.mineminenomi.api.abilities.renderers.RendererAbility;
 import xyz.pixelatedw.mineminenomi.api.debug.WyDebug;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;

@@ -206,13 +206,6 @@ public class ModAttributes
 	public static AbilityAttribute SPRING_SNIPE = new AbilityAttribute("Spring Snipe").setAbilityCooldown(5).setAbilityCharges(20);
 	public static AbilityAttribute SPRING_HOPPER = new AbilityAttribute("Spring Hopper").setAbilityCooldown(0.6).setAbilityCharges(10);
 
-	public static AbilityAttribute ICE_TIME_CAPSULE = new AbilityAttribute("Ice Time Capsule").setAbilityCooldown(15);
-	public static AbilityAttribute ICE_SABER = new AbilityAttribute("Ice Saber").setAbilityPassive(true);
-	public static AbilityAttribute ICE_BALL = new AbilityAttribute("Ice Ball").setAbilityCooldown(6).setProjectileDamage(5).setProjectileModel(ModelType.SPHERE).setProjectileColor("00FFFF").setProjectileSize(5, 5, 5).addEffects(EffectType.PROJECTILE, new EffectInstance(Effects.SLOWNESS, 100, 0), new EffectInstance(Effects.MINING_FATIGUE, 100, 0));
-	public static AbilityAttribute ICE_AGE = new AbilityAttribute("Ice Age").setAbilityCooldown(15).addEffects(EffectType.AOE, new EffectInstance(Effects.SLOWNESS, 200, 100), new EffectInstance(Effects.MINING_FATIGUE, 200, 100)).setEffectRadius(20);
-	public static AbilityAttribute ICE_BLOCK_PARTISAN = new AbilityAttribute("Ice Block : Partisan").setAbilityCooldown(7).setProjectileDamage(10).setProjectileModel(ModelType.TRIDENT).setProjectileTexture("iceblockpartisan").setProjectileSize(1.5, 1.5, 1.5).setModelOffsets(0, 1.0, 0).setAbilityRepeater().addEffects(EffectType.PROJECTILE, new EffectInstance(Effects.SLOWNESS, 100, 0), new EffectInstance(Effects.MINING_FATIGUE, 100, 0));
-	public static AbilityAttribute ICE_BLOCK_PHEASANT = new AbilityAttribute("Ice Block : Pheasant").setAbilityCooldown(20).setProjectileDamage(45).setProjectileModel(ModelType.PHEASANT).setProjectileTexture("iceblockpheasant").setProjectileSize(5, 5, 5).setModelOffsets(0, 2.5, 0).addEffects(EffectType.PROJECTILE, new EffectInstance(Effects.SLOWNESS, 200, 100), new EffectInstance(Effects.MINING_FATIGUE, 200, 100)).setProjectileCollisionSizes(1.75, 1.5, 1.75);
-
 	public static AbilityAttribute GREAT_CAGE = new AbilityAttribute("Great Cage").setAbilityCooldown(20);
 	public static AbilityAttribute PRISON_BREAK = new AbilityAttribute("Prison Break").setAbilityCooldown(3).setAbilityPassive();
 	public static AbilityAttribute AWASE_BAORI = new AbilityAttribute("Awase Baori").setAbilityCooldown(12).setProjectileModel(ModelType.SPHERE).setProjectileColor("000000").setProjectileSize(7, 7, 7);

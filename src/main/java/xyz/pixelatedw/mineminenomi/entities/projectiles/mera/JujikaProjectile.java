@@ -6,7 +6,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectileEntity;
+import xyz.pixelatedw.mineminenomi.api.abilities.projectiles.AbilityProjectileEntity;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 
 public class JujikaProjectile extends AbilityProjectileEntity

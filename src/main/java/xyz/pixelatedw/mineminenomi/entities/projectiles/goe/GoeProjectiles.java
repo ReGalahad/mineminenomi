@@ -9,9 +9,9 @@ import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectileEntity;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectileEntity.Data;
 import xyz.pixelatedw.mineminenomi.api.abilities.extra.ExplosionAbility;
+import xyz.pixelatedw.mineminenomi.api.abilities.projectiles.AbilityProjectileEntity;
+import xyz.pixelatedw.mineminenomi.api.abilities.projectiles.AbilityProjectileEntity.Data;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 
 public class GoeProjectiles 

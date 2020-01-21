@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.api.abilities;
+package xyz.pixelatedw.mineminenomi.api.abilities.models;
 
 import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.entity.model.RendererModel;

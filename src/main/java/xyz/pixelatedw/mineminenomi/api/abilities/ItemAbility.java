@@ -3,6 +3,7 @@ package xyz.pixelatedw.mineminenomi.api.abilities;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
+import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability.Category;
 
 public abstract class ItemAbility extends PassiveAbility
 {	

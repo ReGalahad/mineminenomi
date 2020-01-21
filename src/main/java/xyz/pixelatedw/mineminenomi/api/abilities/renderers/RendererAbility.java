@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.api.abilities;
+package xyz.pixelatedw.mineminenomi.api.abilities.renderers;
 
 import java.awt.Color;
 
@@ -16,6 +16,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
+import xyz.pixelatedw.mineminenomi.api.abilities.models.CubeModel;
+import xyz.pixelatedw.mineminenomi.api.abilities.projectiles.AbilityProjectileEntity;
 
 @OnlyIn(Dist.CLIENT)
 public class RendererAbility extends EntityRenderer<AbilityProjectileEntity>

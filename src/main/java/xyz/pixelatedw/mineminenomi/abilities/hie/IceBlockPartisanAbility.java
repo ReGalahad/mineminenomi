@@ -3,6 +3,7 @@ package xyz.pixelatedw.mineminenomi.abilities.hie;
 import net.minecraft.entity.player.PlayerEntity;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.abilities.RepeaterAbility;
+import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability.Category;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.hie.IceBlockPartisanProjectile;
 
 public class IceBlockPartisanAbility extends RepeaterAbility

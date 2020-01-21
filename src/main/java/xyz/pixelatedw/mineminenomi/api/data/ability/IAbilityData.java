@@ -3,7 +3,7 @@ package xyz.pixelatedw.mineminenomi.api.data.ability;
 import java.util.List;
 
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability.Category;
+import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability.Category;
 
 public interface IAbilityData
 {

@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability.Category;
+import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability.Category;
 
 public class AbilityDataBase implements IAbilityData
 {
