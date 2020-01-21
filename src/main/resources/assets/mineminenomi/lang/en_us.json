@@ -10,6 +10,9 @@
 	"ability.ice_saber.name": "Ice Saber",
 	"ability.ice_time_capsule.name": "Ice Time Capsule",
 	"ability.jujika.name": "Jujika",
+	"ability.spring_death_knock.name": "Spring Death Knock",
+	"ability.spring_hopper.name": "Spring Hopper",
+	"ability.spring_snipe.name": "Spring Snipe",
 
 	"block.mineminenomi.ability_protection": "Ability Protection",
 	"block.mineminenomi.axe_dial": "Axe Dial",
@@ -63,6 +66,7 @@
 	"entity.mineminenomi.pirate_captain": "Pirate Captain",
 	"entity.mineminenomi.pirate_with_gun": "Pirate With Gun",
 	"entity.mineminenomi.pirate_with_sword": "Pirate With Sword",
+	"entity.mineminenomi.spring_death_knock": "Spring Death Knock",
 	"entity.mineminenomi.wanted_poster_package": "Wanted Poster Package",
 
 	"faction.bountyhunter": "Bounty Hunter",
@@ -87,6 +91,7 @@
 	"item.mineminenomi.baku_baku_no_mi": "Baku Baku no Mi",
 	"item.mineminenomi.bandit_knife": "Bandit Knife",
 	"item.mineminenomi.bandit_with_sword_spawn_egg": "Spawn Bandit With Sword",
+	"item.mineminenomi.bane_bane_no_mi": "Bane Bane no Mi",
 	"item.mineminenomi.bari_bari_no_mi": "Bari Bari no Mi",
 	"item.mineminenomi.belly_pouch": "Belly Pouch",
 	"item.mineminenomi.black_metal": "Black Metal",

@@ -54,7 +54,7 @@ public class RepeaterAbility extends Ability
 				this.repeaterCount--;
 			}
 
-			this.duringCooldownEvent.duringCooldown(player, this, this.cooldown);
+			this.duringCooldownEvent.duringCooldown(player, this, (int) this.cooldown);
 		}
 		else if(this.isOnCooldown() && this.cooldown <= 0)
 		{

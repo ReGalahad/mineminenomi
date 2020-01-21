@@ -14,8 +14,8 @@ public abstract class Ability implements Serializable
 {
 	private String name = "";
 	private String desc = "";
-	protected int cooldown;
-	protected int maxCooldown;
+	protected double cooldown;
+	protected double maxCooldown;
 	private Category category = Category.DEVIL_FRUIT;
 	private State state = State.STANDBY;
 	
@@ -96,7 +96,7 @@ public abstract class Ability implements Serializable
 		return this.state;
 	}
 		
-	public void setMaxCooldown(int cooldown)
+	public void setMaxCooldown(double cooldown)
 	{
 		this.maxCooldown = cooldown * 20;
 		this.cooldown = this.maxCooldown;
@@ -139,7 +139,7 @@ public abstract class Ability implements Serializable
 		if(this.isOnCooldown() && this.cooldown > 0)
 		{
 			this.cooldown--;
-			this.duringCooldownEvent.duringCooldown(player, this, this.cooldown);
+			this.duringCooldownEvent.duringCooldown(player, this, (int) this.cooldown);
 		}
 		else if(this.isOnCooldown() && this.cooldown <= 0)
 		{

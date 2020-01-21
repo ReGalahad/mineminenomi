@@ -9,6 +9,9 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 import xyz.pixelatedw.mineminenomi.EnumFruitType;
 import xyz.pixelatedw.mineminenomi.Env;
+import xyz.pixelatedw.mineminenomi.abilities.bane.SpringDeathKnockAbility;
+import xyz.pixelatedw.mineminenomi.abilities.bane.SpringHopperAbility;
+import xyz.pixelatedw.mineminenomi.abilities.bane.SpringSnipeAbility;
 import xyz.pixelatedw.mineminenomi.abilities.hie.IceAgeAbility;
 import xyz.pixelatedw.mineminenomi.abilities.hie.IceBallAbility;
 import xyz.pixelatedw.mineminenomi.abilities.hie.IceBlockPartisanAbility;
@@ -24,6 +27,7 @@ import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.debug.WyDebug;
+import xyz.pixelatedw.mineminenomi.entities.projectiles.bane.BaneProjectiles;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.hie.HieProjectiles;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.mera.MeraProjectiles;
 import xyz.pixelatedw.mineminenomi.items.AkumaNoMiItem;
@@ -77,13 +81,14 @@ public class ModDevilFruits
 	public static final AkumaNoMiItem SUKE_SUKE_NO_MI = new AkumaNoMiItem("Suke Suke no Mi", EnumFruitType.PARAMECIA);
 	public static final AkumaNoMiItem GOMU_GOMU_NO_MI = new AkumaNoMiItem("Gomu Gomu no Mi", EnumFruitType.PARAMECIA);
 	public static final AkumaNoMiItem PIKA_PIKA_NO_MI = new AkumaNoMiItem("Pika Pika no Mi", EnumFruitType.LOGIA);
+	public static final AkumaNoMiItem BANE_BANE_NO_MI = new AkumaNoMiItem("Bane Bane no Mi", EnumFruitType.PARAMECIA, SpringHopperAbility.INSTANCE, SpringSnipeAbility.INSTANCE, SpringDeathKnockAbility.INSTANCE);
 	public static final AkumaNoMiItem HIE_HIE_NO_MI = new AkumaNoMiItem("Hie Hie no Mi", EnumFruitType.LOGIA, IceBlockPartisanAbility.INSTANCE, IceAgeAbility.INSTANCE, IceBallAbility.INSTANCE, IceSaberAbility.INSTANCE, IceTimeCapsuleAbility.INSTANCE, IceBlockPheasantAbility.INSTANCE);
 	public static final AkumaNoMiItem MERA_MERA_NO_MI = new AkumaNoMiItem("Mera Mera no Mi", EnumFruitType.LOGIA, HikenAbility.INSTANCE, HiganAbility.INSTANCE, DaiEnkaiEnteiAbility.INSTANCE, HidarumaAbility.INSTANCE, JujikaAbility.INSTANCE);
 
 	public static final List[] ALL_PROJECTILES = new List[] 
 		{
 			// Devil Fruit projectiles
-			MeraProjectiles.projectiles, HieProjectiles.projectiles, /*BaneProjectiles.projectiles, PikaProjectiles.projectiles, NoroProjectiles.projectiles, SukeProjectiles.projectiles, OpeProjectiles.projectiles,
+			MeraProjectiles.projectiles, HieProjectiles.projectiles, BaneProjectiles.projectiles, /*PikaProjectiles.projectiles, NoroProjectiles.projectiles, SukeProjectiles.projectiles, OpeProjectiles.projectiles,
 			GoroProjectiles.projectiles, MokuProjectiles.projectiles, NikyuProjectiles.projectiles, BomuProjectiles.projectiles, GuraProjectiles.projectiles, KageProjectiles.projectiles, SunaProjectiles.projectiles,
 			MaguProjectiles.projectiles, DoruProjectiles.projectiles, DokuProjectiles.projectiles, GasuProjectiles.projectiles, YukiProjectiles.projectiles, ItoProjectiles.projectiles, BariProjectiles.projectiles,
 			HoroProjectiles.projectiles, YamiProjectiles.projectiles, GoeProjectiles.projectiles, GomuProjectiles.projectiles, JuryoProjectiles.projectiles, ToriPhoenixProjectiles.projectiles,

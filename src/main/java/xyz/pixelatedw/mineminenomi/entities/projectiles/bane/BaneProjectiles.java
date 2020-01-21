@@ -1,44 +1,25 @@
 package xyz.pixelatedw.mineminenomi.entities.projectiles.bane;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.mineminenomi.api.abilities.projectiles.AbilityProjectileEntity;
 import xyz.pixelatedw.mineminenomi.api.abilities.projectiles.AbilityProjectileEntity.Data;
-import xyz.pixelatedw.mineminenomi.init.ModAttributes;
+import xyz.pixelatedw.mineminenomi.api.abilities.renderers.RendererAbility;
+import xyz.pixelatedw.mineminenomi.models.entities.projectiles.FistModel;
 
 public class BaneProjectiles 
 {
+	public static List<AbilityProjectileEntity.Data> projectiles = new ArrayList<AbilityProjectileEntity.Data>();
+	
+	public static final EntityType SPRING_DEATH_KNOCK = WyRegistry.registerEntityType("spring_death_knock", SpringDeathKnockProjectile::new);
+	
+	private static final RendererAbility.Factory SPRING_DEATH_KNOCK_FACTORY = new RendererAbility.Factory(new FistModel()).setTexture("springdeathknock").setScale(7, 5, 5);
 
-	public static HashMap<AbilityAttribute, AbilityProjectileEntity.Data> projectiles = new HashMap<AbilityAttribute, AbilityProjectileEntity.Data>();
-	
-	public static final EntityType SPRING_DEATH_KNOCK = WyRegistry.registerEntityType("spring_death_knock", SpringDeathKnock::new);
-	
 	static
 	{
-		projectiles.put(ModAttributes.SPRING_DEATH_KNOCK, new Data(SPRING_DEATH_KNOCK, SpringDeathKnock.class));
-	}
-	
-	public static class SpringDeathKnock extends AbilityProjectileEntity
-	{
-		public SpringDeathKnock(World world)
-		{super(SPRING_DEATH_KNOCK, world);}
-		
-		public SpringDeathKnock(EntityType type, World world)
-		{super(type, world);}
-		
-		public SpringDeathKnock(World world, double x, double y, double z)
-		{super(SPRING_DEATH_KNOCK, world, x, y, z);}
-		
-		public SpringDeathKnock(World world, LivingEntity player, AbilityAttribute attr) 
-		{		
-			super(SPRING_DEATH_KNOCK, world, player, attr);		
-		}
+		projectiles.add(new Data(SPRING_DEATH_KNOCK, SpringDeathKnockProjectile.class, SPRING_DEATH_KNOCK_FACTORY));
 	}	
-	
-	
 }

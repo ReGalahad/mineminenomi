@@ -140,6 +140,22 @@ public class WyHelper
 		return map;
 	}
 
+	public static double[] propulsion(LivingEntity entity, double extraVelX, double extraVelZ)
+	{
+		double mX = -MathHelper.sin(entity.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(entity.rotationPitch / 180.0F * (float)Math.PI) * 0.4;
+		double mZ = MathHelper.cos(entity.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(entity.rotationPitch / 180.0F * (float)Math.PI) * 0.4;
+			
+		double f2 = MathHelper.sqrt(mX * mX + entity.getMotion().y * entity.getMotion().y + mZ * mZ);
+		mX /= f2;
+		mZ /= f2;
+		mX += entity.world.rand.nextGaussian() * 0.007499999832361937D * 1.0;
+		mZ += entity.world.rand.nextGaussian() * 0.007499999832361937D * 1.0;
+		mX *= extraVelX;
+		mZ *= extraVelZ;
+		
+		return new double[] {mX, mZ};
+	}
+	
 	public static boolean isNullOrEmpty(String str)
 	{
 		if (str != null && !str.isEmpty() && !str.equalsIgnoreCase("n/a"))
