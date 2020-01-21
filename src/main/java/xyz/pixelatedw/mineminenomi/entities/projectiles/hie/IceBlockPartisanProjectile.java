@@ -3,6 +3,8 @@ package xyz.pixelatedw.mineminenomi.entities.projectiles.hie;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
@@ -37,6 +39,13 @@ public class IceBlockPartisanProjectile extends AbilityProjectileEntity
 		
 		this.onBlockImpactEvent = this::onBlockImpactEvent;
 		this.onTickEvent = this::onTickEvent;
+		
+		this.withEffects = () -> {
+			return new EffectInstance[] {
+					new EffectInstance(Effects.SLOWNESS, 100, 0),
+					new EffectInstance(Effects.MINING_FATIGUE, 100, 0)
+			};		
+		};
 	}
 	
 	private void onBlockImpactEvent(BlockRayTraceResult hit)

@@ -18,7 +18,7 @@ public class HieProjectiles
 
 	public static final EntityType ICE_BLOCK_PARTISAN = WyRegistry.registerEntityType("ice_block_partisan", IceBlockPartisanProjectile::new);
 	public static final EntityType ICE_BALL = WyRegistry.registerEntityType("ice_ball", IceBallProjectile::new);
-	public static final EntityType ICE_BLOCK_PHEASANT = WyRegistry.registerEntityType("ice_block_pheasant", IceBlockPheasantProjectile::new);
+	public static final EntityType ICE_BLOCK_PHEASANT = WyRegistry.registerEntityType("ice_block_pheasant", IceBlockPheasantProjectile::new, 1.75F, 1.75F);
 
 	private static final RendererAbility.Factory ICE_BLOCK_PARTISAN_FACTORY = new RendererAbility.Factory(new TridentModel()).setTexture("iceblockpartisan").setScale(1.5);
 	private static final RendererAbility.Factory ICE_BALL_FACTORY = new RendererAbility.Factory(new SphereModel()).setColor("#0055FF").setScale(5);

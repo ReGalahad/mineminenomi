@@ -10,6 +10,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.ThrowableEntity;
 import net.minecraft.network.IPacket;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockRayTraceResult;
@@ -41,6 +42,7 @@ public class AbilityProjectileEntity extends ThrowableEntity
 	protected IOnEntityImpact onEntityImpactEvent = (hitEntity) -> { this.onBlockImpactEvent.onImpact(null); };
 	protected IOnBlockImpact onBlockImpactEvent = (hit) -> {};
 	protected IOnTick onTickEvent = () -> {};
+	protected IWithEffects withEffects = () -> { return new EffectInstance[0]; };
 
 	public AbilityProjectileEntity(EntityType type, World world)
 	{
@@ -138,6 +140,14 @@ public class AbilityProjectileEntity extends ThrowableEntity
 
 					hitEntity.attackEntityFrom(DamageSource.causeMobDamage(this.getThrower()), this.damage);
 					
+					if(this.withEffects.getEffects().length > 0)
+					{
+						for(EffectInstance instance : this.withEffects.getEffects())
+						{
+							hitEntity.addPotionEffect(instance);
+						}
+					}
+					
 					this.onEntityImpactEvent.onImpact(hitEntity);
 					this.remove();
 				}
@@ -214,7 +224,7 @@ public class AbilityProjectileEntity extends ThrowableEntity
 	{
 		this.damage = damage;
 	}
-
+	
 	/*
 	 *	Interfaces
 	 */
@@ -231,6 +241,11 @@ public class AbilityProjectileEntity extends ThrowableEntity
 	public interface IOnTick extends Serializable
 	{
 		void onTick();
+	}
+	
+	public interface IWithEffects extends Serializable
+	{
+		EffectInstance[] getEffects();
 	}
 	
 	
