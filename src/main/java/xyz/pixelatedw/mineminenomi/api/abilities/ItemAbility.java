@@ -5,19 +5,19 @@ import net.minecraft.item.ItemStack;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability.Category;
 
-public abstract class ItemAbility extends PassiveAbility
+public abstract class ItemAbility extends ContinuousAbility
 {	
 	public ItemAbility(String name, Category category)
 	{
 		super(name, category);
 		
-		this.onStartPassiveEvent = this::onStartPassiveEvent;
+		this.onStartContinuityEvent = this::onStartContinuityEvent;
 	}
 
 	/*
 	 *  Event Consumers
 	 */
-	private boolean onStartPassiveEvent(PlayerEntity player)
+	private boolean onStartContinuityEvent(PlayerEntity player)
 	{
 		if (player.getHeldItemMainhand().isEmpty() && !this.getItemStack().isEmpty())
 		{

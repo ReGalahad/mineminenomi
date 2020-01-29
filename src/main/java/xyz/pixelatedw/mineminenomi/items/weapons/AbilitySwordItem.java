@@ -35,7 +35,7 @@ public class AbilitySwordItem extends CoreSwordItem
 				if(ability == null || !(ability instanceof ItemAbility))
 					continue;
 
-				if(!(ability instanceof ItemAbility) || !ability.isPassiveActive() || !((ItemAbility) ability).canBeActive(owner))
+				if(!(ability instanceof ItemAbility) || !ability.isContinuous() || !((ItemAbility) ability).canBeActive(owner))
 					owner.inventory.deleteStack(itemStack);
 			}
 		}

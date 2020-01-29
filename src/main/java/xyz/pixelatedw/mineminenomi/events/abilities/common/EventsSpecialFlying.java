@@ -34,7 +34,7 @@ public class EventsSpecialFlying
 			IAbilityData abilityProps = AbilityDataCapability.get(player);
 
 			Ability abareHimatsuri = null;//abilityProps.hasAbilityInHotbar(ModAttributes.ABARE_HIMATSURI.getAttributeName());
-			boolean hasAbareHimatsuri = props.getDevilFruit().equalsIgnoreCase("zushizushi") && abareHimatsuri != null && abareHimatsuri.isPassiveActive();
+			boolean hasAbareHimatsuri = props.getDevilFruit().equalsIgnoreCase("zushizushi") && abareHimatsuri != null && abareHimatsuri.isContinuous();
 			
 			boolean hasToriFruit = props.getDevilFruit().equalsIgnoreCase("toritoriphoenix") && !props.getZoanPoint().toLowerCase().equals("n/a");
 			

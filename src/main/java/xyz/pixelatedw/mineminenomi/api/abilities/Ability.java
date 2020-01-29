@@ -66,6 +66,11 @@ public abstract class Ability implements Serializable
 		return this.state == State.PASSIVE;
 	}
 	
+	public boolean isContinuous()
+	{
+		return this.state == State.CONTINUOUS;
+	}
+	
 	public boolean isCharging()
 	{
 		return this.state == State.CHARGING;
@@ -182,6 +187,7 @@ public abstract class Ability implements Serializable
 		STANDBY,
 		COOLDOWN,
 		PASSIVE,
+		CONTINUOUS,
 		CHARGING,
 		DISABLED
 	}

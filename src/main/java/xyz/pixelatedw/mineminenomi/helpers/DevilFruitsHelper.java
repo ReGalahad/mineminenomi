@@ -86,7 +86,7 @@ public class DevilFruitsHelper
 			if (!info.getForm().equalsIgnoreCase(devilFruitProps.getZoanPoint()))
 				continue;
 
-			if (devilFruitProps.getZoanPoint().equalsIgnoreCase(ZoanInfoYomi.FORM) || abilityProps.getAbility(info.getAbility()).isPassiveActive())
+			if (devilFruitProps.getZoanPoint().equalsIgnoreCase(ZoanInfoYomi.FORM) || abilityProps.getAbility(info.getAbility()).isContinuous())
 			{
 				return info;
 			}
@@ -122,7 +122,7 @@ public class DevilFruitsHelper
 		IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
 		Ability sparClaw = null;//abilityProps.getHotbarAbilityFromName(ModAttributes.SPAR_CLAW.getAttributeName());
 		
-		if(devilFruitProps.getDevilFruit().equalsIgnoreCase("supasupa") && sparClaw != null && sparClaw.isPassiveActive())
+		if(devilFruitProps.getDevilFruit().equalsIgnoreCase("supasupa") && sparClaw != null && sparClaw.isContinuous())
 		{
 			return true;
 		}

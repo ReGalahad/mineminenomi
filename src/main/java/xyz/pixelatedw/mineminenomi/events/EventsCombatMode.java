@@ -116,7 +116,7 @@ public class EventsCombatMode extends Screen
 					GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 24, 0, 23, 23, 0);
 				else if (abl != null && abl.isCharging())
 					GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 72, 0, 23, 23, 0);
-				else if (abl != null && abl.isPassiveActive())
+				else if (abl != null && abl.isContinuous())
 					GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 48, 0, 23, 23, 0);
 				else if (abl != null && abl.isDisabled())
 					GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 96, 0, 23, 23, 0);

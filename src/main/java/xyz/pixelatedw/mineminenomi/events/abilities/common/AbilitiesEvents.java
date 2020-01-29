@@ -7,6 +7,7 @@ import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.abilities.ChargeableAbility;
+import xyz.pixelatedw.mineminenomi.api.abilities.ContinuousAbility;
 import xyz.pixelatedw.mineminenomi.api.abilities.PassiveAbility;
 import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
@@ -30,8 +31,11 @@ public class AbilitiesEvents
 				if(ability instanceof ChargeableAbility && ability.isCharging())
 					((ChargeableAbility) props.getAbility(ability)).charging(player);
 				
-				if(ability instanceof PassiveAbility && ability.isPassiveActive())
-					((PassiveAbility) props.getAbility(ability)).passive(player);
+				if(ability instanceof ContinuousAbility && ability.isContinuous())
+					((ContinuousAbility) props.getAbility(ability)).tick(player);
+				
+				if(ability instanceof PassiveAbility)
+					((PassiveAbility) props.getAbility(ability)).tick(player);
 				
 				if(ability.isOnCooldown())
 					props.getAbility(ability).cooldown(player);
