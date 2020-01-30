@@ -22,15 +22,15 @@ public class HiePassiveEvents
 	{
 		if (!(event.getEntityLiving() instanceof PlayerEntity))
 			return;	
-		
+
 		PlayerEntity player = (PlayerEntity) event.getEntityLiving();
 		IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
 		IAbilityData abilityProps = AbilityDataCapability.get(player);
-		
-		if (!devilFruitProps.getDevilFruit().equals("hiehie"))
+				
+		if (!devilFruitProps.getDevilFruit().equals("hie_hie"))
 			return;
-		
+				
 		if (!DevilFruitsHelper.isNearbyKairoseki(player) && (player.getHealth() > player.getMaxHealth() / 5 || player.abilities.isCreativeMode))
-			WyHelper.createFilledSphere(player.world, (int) player.posX - 1, (int) player.posY, (int) player.posZ - 1, 2, Blocks.ICE, "liquids");
+			WyHelper.createFilledSphere(player.world, (int) player.posX - 1, (int) player.posY, (int) player.posZ - 1, 2, Blocks.ICE, "liquid");
 	}
 }
