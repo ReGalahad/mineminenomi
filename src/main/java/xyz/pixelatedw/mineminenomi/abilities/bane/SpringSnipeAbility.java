@@ -4,6 +4,8 @@ import java.util.List;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.network.play.server.SEntityVelocityPacket;
 import net.minecraft.util.DamageSource;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
@@ -21,14 +23,16 @@ public class SpringSnipeAbility  extends ChargeableAbility
 		this.setMaxChargeTime(1);
 		this.setDescription("Turning the user's forelegs into springs, they can launch themselves directly at the opponent.");
 
-		this.onUseEvent = this::onUseEvent;
+		this.onEndChargingEvent = this::onEndChargingEvent;
 		this.duringCooldownEvent = this::duringCooldown;
 	}
 	
-	private void onUseEvent(PlayerEntity player, Ability ability)
+	private boolean onEndChargingEvent(PlayerEntity player)
 	{
-		double[] speed = WyHelper.propulsion(player, 8.5, 8.5);
-		player.setMotion(speed[0], 1.0, speed[1]);	
+		double[] speed = WyHelper.propulsion(player, 12.5, 12.5);
+		player.setMotion(speed[0], 0.2, speed[1]);
+		((ServerPlayerEntity)player).connection.sendPacket(new SEntityVelocityPacket(player));
+		return true;
 	}
 	
 	private void duringCooldown(PlayerEntity player, Ability ability, int cooldownTimer)

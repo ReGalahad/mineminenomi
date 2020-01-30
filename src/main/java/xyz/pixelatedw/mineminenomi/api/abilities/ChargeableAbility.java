@@ -16,8 +16,8 @@ public class ChargeableAbility extends Ability
 	private int maxChargeTime;
 	
 	// Setting the defaults so that no crash occurs and so they will be null safe.
-	protected IOnStartCharging onStartChargingEvent = (player) -> {};
-	protected IOnEndCharging onEndChargingEvent = (player) -> {};
+	protected IOnStartCharging onStartChargingEvent = (player) -> { return true; };
+	protected IOnEndCharging onEndChargingEvent = (player) -> { return true; };
 	protected IDuringCharging duringChargingEvent = (player, chargeTime) -> {};
 
 	public ChargeableAbility(String name, Category category)
@@ -37,11 +37,12 @@ public class ChargeableAbility extends Ability
 		if(!this.isOnStandby())
 			return;			
 		
-		this.onStartChargingEvent.onStartCharging(player);
-
-		this.startCharging();
-		IAbilityData props = AbilityDataCapability.get(player);
-		ModNetwork.sendTo(new SUpdateHotbarStatePacket(props, props.getAbilityPosition(this)), (ServerPlayerEntity)player);
+		if(this.onStartChargingEvent.onStartCharging(player))
+		{	
+			this.startCharging();
+			IAbilityData props = AbilityDataCapability.get(player);
+			ModNetwork.sendTo(new SUpdateHotbarStatePacket(props, props.getAbilityPosition(this)), (ServerPlayerEntity)player);			
+		}
 	}
 	
 	/*
@@ -76,11 +77,13 @@ public class ChargeableAbility extends Ability
 		}
 		else if(this.isCharging() && this.chargeTime <= 0)
 		{
-			this.chargeTime = this.maxChargeTime;				
-			this.startCooldown();
-			this.onEndChargingEvent.onEndCharging(player);
-			IAbilityData props = AbilityDataCapability.get(player);
-			ModNetwork.sendTo(new SUpdateHotbarStatePacket(props, props.getAbilityPosition(this)), (ServerPlayerEntity)player);
+			if(this.onEndChargingEvent.onEndCharging(player))
+			{
+				this.chargeTime = this.maxChargeTime;				
+				this.startCooldown();			
+				IAbilityData props = AbilityDataCapability.get(player);
+				ModNetwork.sendTo(new SUpdateHotbarStatePacket(props, props.getAbilityPosition(this)), (ServerPlayerEntity)player);				
+			}
 		}
 	}
 	
@@ -95,11 +98,11 @@ public class ChargeableAbility extends Ability
 	
 	public interface IOnStartCharging extends Serializable
 	{
-		void onStartCharging(PlayerEntity player);
+		boolean onStartCharging(PlayerEntity player);
 	}
 	
 	public interface IOnEndCharging extends Serializable
 	{
-		void onEndCharging(PlayerEntity player);
+		boolean onEndCharging(PlayerEntity player);
 	}
 }

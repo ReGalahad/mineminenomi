@@ -33,12 +33,13 @@ public class DaiEnkaiEnteiAbility extends ChargeableAbility
 			DAI_ENKAI_ENTEI_2.spawn(player.world, player.posX, player.posY, player.posZ, 0, 0, 0);
 	}
 	
-	private void onEndChargingEvent(PlayerEntity player)
+	private boolean onEndChargingEvent(PlayerEntity player)
 	{
 		DaiEnkaiEnteiProjectile proj = new DaiEnkaiEnteiProjectile(player.world, player);
 		player.world.addEntity(proj);
 		proj.shoot(player, player.rotationPitch, player.rotationYaw, 0, 2f, 1);	
 		
 		DAI_ENKAI_ENTEI_1.spawn(player.world, player.posX, player.posY, player.posZ, 0, 0, 0);
+		return true;
 	}
 }

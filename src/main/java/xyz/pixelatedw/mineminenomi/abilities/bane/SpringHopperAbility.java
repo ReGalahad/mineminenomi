@@ -1,6 +1,8 @@
 package xyz.pixelatedw.mineminenomi.abilities.bane;
 
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.network.play.server.SEntityVelocityPacket;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.abilities.ChargeableAbility;
@@ -17,12 +19,20 @@ public class SpringHopperAbility extends ChargeableAbility
 		this.setMaxChargeTime(1);
 		this.setDescription("Turning the user's legs into springs, which launches them into the air.");
 
-		this.onUseEvent = this::onUseEvent;
+		this.onStartChargingEvent = this::onStartChargingEvent;
+		this.onEndChargingEvent = this::onEndChargingEvent;
 	}
 	
-	private void onUseEvent(PlayerEntity player, Ability ability)
+	private boolean onStartChargingEvent(PlayerEntity player)
 	{
-		double[] speed = WyHelper.propulsion(player, 2.5, 2.5);
-		player.setMotion(speed[0], 5.0, speed[1]);	
+		return player.onGround;
+	}
+	
+	private boolean onEndChargingEvent(PlayerEntity player)
+	{
+		double[] speed = WyHelper.propulsion(player, 5.5, 5.5);
+		player.setMotion(speed[0], 3.0, speed[1]);
+		((ServerPlayerEntity)player).connection.sendPacket(new SEntityVelocityPacket(player));
+		return true;
 	}
 }
