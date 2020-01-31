@@ -1,60 +1,30 @@
 package xyz.pixelatedw.mineminenomi.entities.projectiles.pika;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
+import xyz.pixelatedw.mineminenomi.api.abilities.models.CubeModel;
+import xyz.pixelatedw.mineminenomi.api.abilities.models.SphereModel;
 import xyz.pixelatedw.mineminenomi.api.abilities.projectiles.AbilityProjectileEntity;
 import xyz.pixelatedw.mineminenomi.api.abilities.projectiles.AbilityProjectileEntity.Data;
-import xyz.pixelatedw.mineminenomi.init.ModAttributes;
+import xyz.pixelatedw.mineminenomi.api.abilities.renderers.RendererAbility;
 
-public class PikaProjectiles 
+public class PikaProjectiles
 {
-	public static HashMap<AbilityAttribute, AbilityProjectileEntity.Data> projectiles = new HashMap<AbilityAttribute, AbilityProjectileEntity.Data>();
+	public static List<AbilityProjectileEntity.Data> projectiles = new ArrayList<AbilityProjectileEntity.Data>();
 
-	public static final EntityType AMATERASU = WyRegistry.registerEntityType("amaterasu", Amaterasu::new);
-	public static final EntityType YASAKANI_NO_MAGATAMA = WyRegistry.registerEntityType("yasakani_no_magatama", YasakaniNoMagatama::new);
-	
+	public static final EntityType AMATERASU = WyRegistry.registerEntityType("amaterasu", AmaterasuProjectile::new);
+	public static final EntityType YASAKANI_NO_MAGATAMA = WyRegistry.registerEntityType("yasakani_no_magatama", YasakaniNoMagatamaProjectile::new);
+
+	private static final RendererAbility.Factory AMATERASU_FACTORY = new RendererAbility.Factory(new CubeModel()).setColor("#FFFF00").setScale(1, 1, 2);
+	private static final RendererAbility.Factory YASAKANI_NO_MAGATAMA_FACTORY = new RendererAbility.Factory(new SphereModel()).setColor("#FFFF00").setScale(.5, .5, .5);
+
 	static
 	{
-		projectiles.put(ModAttributes.AMATERASU, new Data(AMATERASU, Amaterasu.class));
-		projectiles.put(ModAttributes.YASAKANI_NO_MAGATAMA, new Data(YASAKANI_NO_MAGATAMA, YasakaniNoMagatama.class));
-	}
-	
-	public static class YasakaniNoMagatama extends AbilityProjectileEntity
-	{
-		public YasakaniNoMagatama(World world)
-		{super(YASAKANI_NO_MAGATAMA, world);}
-		
-		public YasakaniNoMagatama(EntityType type, World world)
-		{super(type, world);}
-		
-		public YasakaniNoMagatama(World world, double x, double y, double z)
-		{super(YASAKANI_NO_MAGATAMA, world, x, y, z);}
-		
-		public YasakaniNoMagatama(World world, LivingEntity player, AbilityAttribute attr) 
-		{		
-			super(YASAKANI_NO_MAGATAMA, world, player, attr);		
-		}
-	}
-	
-	public static class Amaterasu extends AbilityProjectileEntity
-	{
-		public Amaterasu(World world)
-		{super(AMATERASU, world);}
-		
-		public Amaterasu(EntityType type, World world)
-		{super(type, world);}
-		
-		public Amaterasu(World world, double x, double y, double z)
-		{super(AMATERASU, world, x, y, z);}
-		
-		public Amaterasu(World world, LivingEntity player, AbilityAttribute attr) 
-		{		
-			super(AMATERASU, world, player, attr);		
-		}
+		projectiles.add(new Data(AMATERASU, AmaterasuProjectile.class, AMATERASU_FACTORY));
+		projectiles.add(new Data(YASAKANI_NO_MAGATAMA, YasakaniNoMagatamaProjectile.class, YASAKANI_NO_MAGATAMA_FACTORY));
+
 	}
 }

@@ -1,5 +1,8 @@
 {
+	"ability.ama_no_murakumo.name": "Ama no Murakumo",
+	"ability.amaterasu.name": "Amaterasu",
 	"ability.dai_enkai_entei.name": "Dai Enkai: Entei",
+	"ability.flash.name": "Flash",
 	"ability.hidaruma.name": "Hidaruma",
 	"ability.higan.name": "Higan",
 	"ability.hiken.name": "Hiken",
@@ -13,6 +16,8 @@
 	"ability.spring_death_knock.name": "Spring Death Knock",
 	"ability.spring_hopper.name": "Spring Hopper",
 	"ability.spring_snipe.name": "Spring Snipe",
+	"ability.yasakani_no_magatama.name": "Yasakani no Magatama",
+	"ability.yata_no_kagami.name": "Yata no Kagami",
 
 	"block.mineminenomi.ability_protection": "Ability Protection",
 	"block.mineminenomi.axe_dial": "Axe Dial",
@@ -48,6 +53,7 @@
 	"enchantment.mineminenomi.flash_dial": "Flash Dial",
 	"enchantment.mineminenomi.impact_dial": "Impact Dial",
 	"enchantment.mineminenomi.kairoseki": "Kairoseki",
+	"entity.mineminenomi.amaterasu": "Amaterasu",
 	"entity.mineminenomi.bandit_with_sword": "Bandit With Sword",
 	"entity.mineminenomi.black_knight": "Black Knight",
 	"entity.mineminenomi.dai_enkai_entei": "Dai Enkai Entei",
@@ -68,6 +74,7 @@
 	"entity.mineminenomi.pirate_with_sword": "Pirate With Sword",
 	"entity.mineminenomi.spring_death_knock": "Spring Death Knock",
 	"entity.mineminenomi.wanted_poster_package": "Wanted Poster Package",
+	"entity.mineminenomi.yasakani_no_magatama": "Yasakani No Magatama",
 
 	"faction.bountyhunter": "Bounty Hunter",
 	"faction.empty": "No Faction",

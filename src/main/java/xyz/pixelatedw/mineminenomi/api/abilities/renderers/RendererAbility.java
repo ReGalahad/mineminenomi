@@ -32,12 +32,12 @@ public class RendererAbility extends EntityRenderer<AbilityProjectileEntity>
 		super(renderManager);
 		this.model = model;
 	}
-	
+
 	public void setTexture(ResourceLocation res)
 	{
 		this.texture = res;
 	}
-	
+
 	public void setColor(double red, double green, double blue, double alpha)
 	{
 		this.red = red;
@@ -82,7 +82,7 @@ public class RendererAbility extends EntityRenderer<AbilityProjectileEntity>
 			GlStateManager.disableBlend();
 			if (this.texture == null)
 				GlStateManager.enableTexture();
-		}	
+		}
 		GlStateManager.popMatrix();
 	}
 
@@ -118,7 +118,7 @@ public class RendererAbility extends EntityRenderer<AbilityProjectileEntity>
 			this.alpha = alpha;
 			return this;
 		}
-		
+
 		public Factory setColor(String hex)
 		{
 			Color color = WyHelper.hexToRGB(hex);
@@ -134,7 +134,7 @@ public class RendererAbility extends EntityRenderer<AbilityProjectileEntity>
 			this.scaleX = this.scaleY = this.scaleZ = scale;
 			return this;
 		}
-		
+
 		public Factory setScale(double scaleX, double scaleY, double scaleZ)
 		{
 			this.scaleX = scaleX;

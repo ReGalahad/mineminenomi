@@ -44,7 +44,7 @@ public class WantedPosterPackageRenderer extends EntityRenderer<WantedPosterPack
 	@Override
 	protected ResourceLocation getEntityTexture(WantedPosterPackageEntity entity)
 	{
-		return texture;
+		return this.texture;
 	}
 	
 	public static class Factory implements IRenderFactory<WantedPosterPackageEntity>
