@@ -6,15 +6,15 @@ import xyz.pixelatedw.mineminenomi.api.abilities.ChargeableAbility;
 import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability.Category;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.mera.DaiEnkaiEnteiProjectile;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
-import xyz.pixelatedw.mineminenomi.particles.effects.mera.ParticleEffectDaiEnkai;
-import xyz.pixelatedw.mineminenomi.particles.effects.mera.ParticleEffectDaiEnkai2;
+import xyz.pixelatedw.mineminenomi.particles.effects.mera.DaiEnkaiParticleEffect;
+import xyz.pixelatedw.mineminenomi.particles.effects.mera.DaiEnkai2ParticleEffect;
 
 public class DaiEnkaiEnteiAbility extends ChargeableAbility
 {
 	public static final Ability INSTANCE = new DaiEnkaiEnteiAbility();
 	
-	private static final ParticleEffect PARTICLES_1 = new ParticleEffectDaiEnkai();
-	private static final ParticleEffect PARTICLES_2 = new ParticleEffectDaiEnkai2();
+	private static final ParticleEffect PARTICLES_1 = new DaiEnkaiParticleEffect();
+	private static final ParticleEffect PARTICLES_2 = new DaiEnkai2ParticleEffect();
 
 	public DaiEnkaiEnteiAbility()
 	{

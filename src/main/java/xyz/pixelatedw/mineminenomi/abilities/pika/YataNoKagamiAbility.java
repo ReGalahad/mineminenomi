@@ -7,13 +7,13 @@ import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability.Category;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
-import xyz.pixelatedw.mineminenomi.particles.effects.pika.ParticleEffectYataNoKagami;
+import xyz.pixelatedw.mineminenomi.particles.effects.pika.YataNoKagamiParticleEffect;
 
 public class YataNoKagamiAbility extends Ability
 {
 	public static final Ability INSTANCE = new YataNoKagamiAbility();
 	
-	private static final ParticleEffect PARTICLES = new ParticleEffectYataNoKagami();
+	private static final ParticleEffect PARTICLES = new YataNoKagamiParticleEffect();
 	
 	public YataNoKagamiAbility()
 	{

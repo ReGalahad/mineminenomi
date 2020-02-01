@@ -6,13 +6,13 @@ import xyz.pixelatedw.mineminenomi.api.abilities.ChargeableAbility;
 import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability.Category;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.pika.AmaterasuProjectile;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
-import xyz.pixelatedw.mineminenomi.particles.effects.pika.ParticleEffectAmaterasu;
+import xyz.pixelatedw.mineminenomi.particles.effects.pika.AmaterasuParticleEffect;
 
 public class AmaterasuAbility extends ChargeableAbility
 {
 	public static final Ability INSTANCE = new AmaterasuAbility();
 	
-	private static final ParticleEffect PARTICLES = new ParticleEffectAmaterasu();
+	private static final ParticleEffect PARTICLES = new AmaterasuParticleEffect();
 
 	public AmaterasuAbility()
 	{

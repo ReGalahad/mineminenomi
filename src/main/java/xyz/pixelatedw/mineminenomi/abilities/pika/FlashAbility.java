@@ -10,13 +10,13 @@ import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability.Category;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
-import xyz.pixelatedw.mineminenomi.particles.effects.pika.ParticleEffectFlash;
+import xyz.pixelatedw.mineminenomi.particles.effects.pika.FlashParticleEffect;
 
 public class FlashAbility extends Ability
 {
 	public static final Ability INSTANCE = new FlashAbility();
 	
-	private static final ParticleEffect PARTICLES = new ParticleEffectFlash();
+	private static final ParticleEffect PARTICLES = new FlashParticleEffect();
 
 	public FlashAbility()
 	{

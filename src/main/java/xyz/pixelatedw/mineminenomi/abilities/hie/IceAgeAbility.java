@@ -11,13 +11,13 @@ import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability.Category;
 import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
-import xyz.pixelatedw.mineminenomi.particles.effects.hie.ParticleEffectIceAge;
+import xyz.pixelatedw.mineminenomi.particles.effects.hie.IceAgeParticleEffect;
 
 public class IceAgeAbility extends Ability
 {
 	public static final Ability INSTANCE = new IceAgeAbility();
 
-	private static final ParticleEffect PARTICLES = new ParticleEffectIceAge();
+	private static final ParticleEffect PARTICLES = new IceAgeParticleEffect();
 
 	public IceAgeAbility()
 	{
