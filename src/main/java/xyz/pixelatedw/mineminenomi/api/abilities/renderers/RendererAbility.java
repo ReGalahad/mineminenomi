@@ -23,6 +23,7 @@ import xyz.pixelatedw.mineminenomi.api.abilities.projectiles.AbilityProjectileEn
 public class RendererAbility extends EntityRenderer<AbilityProjectileEntity>
 {
 	private double scaleX = 1, scaleY = 1, scaleZ = 1;
+	private double offsetX = 0, offsetY = 0, offsetZ = 0;
 	private double red, blue, green, alpha;
 	private EntityModel model;
 	private ResourceLocation texture;
@@ -53,17 +54,25 @@ public class RendererAbility extends EntityRenderer<AbilityProjectileEntity>
 		this.scaleZ = scaleZ;
 	}
 
+	public void setOffset(double offsetX, double offsetY, double offsetZ)
+	{
+		this.offsetX = offsetX;
+		this.offsetY = offsetY;
+		this.offsetZ = offsetZ;
+	}
+	
 	@Override
 	public void doRender(AbilityProjectileEntity entity, double x, double y, double z, float entityYaw, float partialTicks)
 	{
+		GlStateManager.color4f(1, 1, 1, 1);
 		GlStateManager.pushMatrix();
 		{
-			GlStateManager.color4f(1, 1, 1, 1);
 			GlStateManager.translated(x, y + 0.25, z);
 			if (this.texture == null)
 				GlStateManager.disableTexture();
 			GlStateManager.enableBlend();
 			GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);
+			GlStateManager.enableRescaleNormal();
 
 			GlStateManager.rotatef(entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * partialTicks - 180.0F, 0.0F, 1.0F, 0.0F);
 			GlStateManager.rotatef(entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * partialTicks, 1.0F, 0.0F, 0.0F);
@@ -72,6 +81,7 @@ public class RendererAbility extends EntityRenderer<AbilityProjectileEntity>
 
 			GlStateManager.color4f((float) this.red, (float) this.green, (float) this.blue, (float) this.alpha);
 			GlStateManager.scaled(this.scaleX, this.scaleY, this.scaleZ);
+			GlStateManager.translated(this.offsetX, this.offsetY, this.offsetZ);
 
 			if (this.texture != null)
 				Minecraft.getInstance().textureManager.bindTexture(this.getEntityTexture(entity));
@@ -79,6 +89,7 @@ public class RendererAbility extends EntityRenderer<AbilityProjectileEntity>
 			if (this.model != null)
 				this.model.render(entity, (float) x, (float) y, (float) z, 0.0F, 0.0F, 0.0625F);
 
+			GlStateManager.disableRescaleNormal();
 			GlStateManager.disableBlend();
 			if (this.texture == null)
 				GlStateManager.enableTexture();
@@ -96,6 +107,7 @@ public class RendererAbility extends EntityRenderer<AbilityProjectileEntity>
 	{
 		private EntityModel model = new CubeModel();
 		private double scaleX = 1, scaleY = 1, scaleZ = 1;
+		private double offsetX = 0, offsetY = 0, offsetZ = 0;
 		private double red = 1, green = 1, blue = 1, alpha = 1;
 		private ResourceLocation texture;
 
@@ -142,6 +154,14 @@ public class RendererAbility extends EntityRenderer<AbilityProjectileEntity>
 			this.scaleZ = scaleZ;
 			return this;
 		}
+		
+		public Factory setOffset(double offsetX, double offsetY, double offsetZ)
+		{
+			this.offsetX = offsetX;
+			this.offsetY = offsetY;
+			this.offsetZ = offsetZ;
+			return this;
+		}
 
 		@Override
 		public EntityRenderer<? super AbilityProjectileEntity> createRenderFor(EntityRendererManager manager)
@@ -149,6 +169,7 @@ public class RendererAbility extends EntityRenderer<AbilityProjectileEntity>
 			RendererAbility renderer = new RendererAbility(manager, this.model);
 			renderer.setTexture(this.texture);
 			renderer.setScale(this.scaleX, this.scaleY, this.scaleZ);
+			renderer.setOffset(this.offsetX, this.offsetY, this.offsetZ);
 			renderer.setColor(this.red, this.green, this.blue, this.alpha);
 			return renderer;
 		}

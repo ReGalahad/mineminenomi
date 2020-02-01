@@ -16,8 +16,8 @@ public class HieProjectiles
 {
 	public static List<AbilityProjectileEntity.Data> projectiles = new ArrayList<AbilityProjectileEntity.Data>();
 
-	public static final EntityType ICE_BLOCK_PARTISAN = WyRegistry.registerEntityType("ice_block_partisan", IceBlockPartisanProjectile::new);
-	public static final EntityType ICE_BALL = WyRegistry.registerEntityType("ice_ball", IceBallProjectile::new);
+	public static final EntityType ICE_BLOCK_PARTISAN = WyRegistry.registerEntityType("ice_block_partisan", IceBlockPartisanProjectile::new, 0.5F, 0.5F);
+	public static final EntityType ICE_BALL = WyRegistry.registerEntityType("ice_ball", IceBallProjectile::new, 0.7F, 0.7F);
 	public static final EntityType ICE_BLOCK_PHEASANT = WyRegistry.registerEntityType("ice_block_pheasant", IceBlockPheasantProjectile::new, 1.75F, 1.75F);
 
 	private static final RendererAbility.Factory ICE_BLOCK_PARTISAN_FACTORY = new RendererAbility.Factory(new TridentModel()).setTexture("iceblockpartisan").setScale(1.5);
