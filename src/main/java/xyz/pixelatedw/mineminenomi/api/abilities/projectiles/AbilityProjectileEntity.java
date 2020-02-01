@@ -24,7 +24,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
-import xyz.pixelatedw.mineminenomi.api.abilities.renderers.RendererAbility;
+import xyz.pixelatedw.mineminenomi.api.abilities.renderers.AbilityProjectileRenderer;
 import xyz.pixelatedw.mineminenomi.api.debug.WyDebug;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
@@ -255,7 +255,7 @@ public class AbilityProjectileEntity extends ThrowableEntity
 	{
 		private EntityType type;
 		private Class entityClass;
-		private RendererAbility.Factory factory;
+		private AbilityProjectileRenderer.Factory factory;
 		
 		public Data(EntityType type, Class<? extends Entity> clz)
 		{
@@ -263,7 +263,7 @@ public class AbilityProjectileEntity extends ThrowableEntity
 			this.entityClass = clz;
 		}
 		
-		public Data(EntityType type, Class<? extends Entity> clz, RendererAbility.Factory factory)
+		public Data(EntityType type, Class<? extends Entity> clz, AbilityProjectileRenderer.Factory factory)
 		{
 			this.type = type;
 			this.entityClass = clz;
@@ -280,7 +280,7 @@ public class AbilityProjectileEntity extends ThrowableEntity
 			return this.entityClass;
 		}
 		
-		public RendererAbility.Factory getFactory()
+		public AbilityProjectileRenderer.Factory getFactory()
 		{
 			return this.factory;
 		}

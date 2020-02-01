@@ -20,7 +20,7 @@ import xyz.pixelatedw.mineminenomi.api.abilities.models.CubeModel;
 import xyz.pixelatedw.mineminenomi.api.abilities.projectiles.AbilityProjectileEntity;
 
 @OnlyIn(Dist.CLIENT)
-public class RendererAbility extends EntityRenderer<AbilityProjectileEntity>
+public class AbilityProjectileRenderer extends EntityRenderer<AbilityProjectileEntity>
 {
 	private double scaleX = 1, scaleY = 1, scaleZ = 1;
 	private double offsetX = 0, offsetY = 0, offsetZ = 0;
@@ -28,7 +28,7 @@ public class RendererAbility extends EntityRenderer<AbilityProjectileEntity>
 	private EntityModel model;
 	private ResourceLocation texture;
 
-	public RendererAbility(EntityRendererManager renderManager, EntityModel model)
+	public AbilityProjectileRenderer(EntityRendererManager renderManager, EntityModel model)
 	{
 		super(renderManager);
 		this.model = model;
@@ -166,7 +166,7 @@ public class RendererAbility extends EntityRenderer<AbilityProjectileEntity>
 		@Override
 		public EntityRenderer<? super AbilityProjectileEntity> createRenderFor(EntityRendererManager manager)
 		{
-			RendererAbility renderer = new RendererAbility(manager, this.model);
+			AbilityProjectileRenderer renderer = new AbilityProjectileRenderer(manager, this.model);
 			renderer.setTexture(this.texture);
 			renderer.setScale(this.scaleX, this.scaleY, this.scaleZ);
 			renderer.setOffset(this.offsetX, this.offsetY, this.offsetZ);

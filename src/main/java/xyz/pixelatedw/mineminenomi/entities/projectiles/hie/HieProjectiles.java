@@ -8,7 +8,7 @@ import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.models.SphereModel;
 import xyz.pixelatedw.mineminenomi.api.abilities.projectiles.AbilityProjectileEntity;
 import xyz.pixelatedw.mineminenomi.api.abilities.projectiles.AbilityProjectileEntity.Data;
-import xyz.pixelatedw.mineminenomi.api.abilities.renderers.RendererAbility;
+import xyz.pixelatedw.mineminenomi.api.abilities.renderers.AbilityProjectileRenderer;
 import xyz.pixelatedw.mineminenomi.models.entities.projectiles.PheasantModel;
 import xyz.pixelatedw.mineminenomi.models.entities.projectiles.TridentModel;
 
@@ -20,9 +20,9 @@ public class HieProjectiles
 	public static final EntityType ICE_BALL = WyRegistry.registerEntityType("ice_ball", IceBallProjectile::new, 0.7F, 0.7F);
 	public static final EntityType ICE_BLOCK_PHEASANT = WyRegistry.registerEntityType("ice_block_pheasant", IceBlockPheasantProjectile::new, 1.75F, 1.75F);
 
-	private static final RendererAbility.Factory ICE_BLOCK_PARTISAN_FACTORY = new RendererAbility.Factory(new TridentModel()).setTexture("iceblockpartisan").setScale(1.5);
-	private static final RendererAbility.Factory ICE_BALL_FACTORY = new RendererAbility.Factory(new SphereModel()).setColor("#0055FF").setScale(5);
-	private static final RendererAbility.Factory ICE_BLOCK_PHEASANT_FACTORY = new RendererAbility.Factory(new PheasantModel()).setTexture("iceblockpheasant").setScale(5);
+	private static final AbilityProjectileRenderer.Factory ICE_BLOCK_PARTISAN_FACTORY = new AbilityProjectileRenderer.Factory(new TridentModel()).setTexture("iceblockpartisan").setScale(1.5);
+	private static final AbilityProjectileRenderer.Factory ICE_BALL_FACTORY = new AbilityProjectileRenderer.Factory(new SphereModel()).setColor("#0055FF").setScale(5);
+	private static final AbilityProjectileRenderer.Factory ICE_BLOCK_PHEASANT_FACTORY = new AbilityProjectileRenderer.Factory(new PheasantModel()).setTexture("iceblockpheasant").setScale(5);
 
 	static
 	{
