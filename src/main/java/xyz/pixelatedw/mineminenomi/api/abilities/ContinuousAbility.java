@@ -88,16 +88,18 @@ public class ContinuousAbility extends Ability
 			this.duringContinuity.duringContinuity(player, this.continueTime);
 			
 			if(this.threshold > 0 && this.continueTime >= this.threshold)
-			{
-				this.continueTime = 0;
-				this.startCooldown();
-				this.onEndContinuityEvent.onEndContinuity(player);
-				IAbilityData props = AbilityDataCapability.get(player);
-				ModNetwork.sendTo(new SUpdateHotbarStatePacket(props, props.getAbilityPosition(this)), (ServerPlayerEntity)player);
-			}
+				this.stopContinuity(player);
 		}
 	}
 	
+	public void stopContinuity(PlayerEntity player)
+	{
+		this.continueTime = 0;
+		this.startCooldown();
+		this.onEndContinuityEvent.onEndContinuity(player);
+		IAbilityData props = AbilityDataCapability.get(player);
+		ModNetwork.sendTo(new SUpdateHotbarStatePacket(props, props.getAbilityPosition(this)), (ServerPlayerEntity)player);
+	}
 	
 	/*
 	 *	Interfaces

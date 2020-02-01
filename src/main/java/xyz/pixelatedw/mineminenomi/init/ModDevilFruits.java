@@ -28,6 +28,9 @@ import xyz.pixelatedw.mineminenomi.abilities.pika.AmaterasuAbility;
 import xyz.pixelatedw.mineminenomi.abilities.pika.FlashAbility;
 import xyz.pixelatedw.mineminenomi.abilities.pika.YasakaniNoMagatamaAbility;
 import xyz.pixelatedw.mineminenomi.abilities.pika.YataNoKagamiAbility;
+import xyz.pixelatedw.mineminenomi.abilities.suke.ShishaNoTeAbility;
+import xyz.pixelatedw.mineminenomi.abilities.suke.SkattingAbility;
+import xyz.pixelatedw.mineminenomi.abilities.suke.SukePunchAbility;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
@@ -36,6 +39,7 @@ import xyz.pixelatedw.mineminenomi.entities.projectiles.bane.BaneProjectiles;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.hie.HieProjectiles;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.mera.MeraProjectiles;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.pika.PikaProjectiles;
+import xyz.pixelatedw.mineminenomi.entities.projectiles.suke.SukeProjectiles;
 import xyz.pixelatedw.mineminenomi.items.AkumaNoMiItem;
 
 @Mod.EventBusSubscriber(modid = Env.PROJECT_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -84,7 +88,7 @@ public class ModDevilFruits
 	public static final AkumaNoMiItem GORO_GORO_NO_MI = new AkumaNoMiItem("Goro Goro no Mi", EnumFruitType.LOGIA);
 	public static final AkumaNoMiItem NORO_NORO_NO_MI = new AkumaNoMiItem("Noro Noro no Mi", EnumFruitType.PARAMECIA);
 	public static final AkumaNoMiItem OPE_OPE_NO_MI = new AkumaNoMiItem("Ope Ope no Mi", EnumFruitType.PARAMECIA);
-	public static final AkumaNoMiItem SUKE_SUKE_NO_MI = new AkumaNoMiItem("Suke Suke no Mi", EnumFruitType.PARAMECIA);
+	public static final AkumaNoMiItem SUKE_SUKE_NO_MI = new AkumaNoMiItem("Suke Suke no Mi", EnumFruitType.PARAMECIA, SkattingAbility.INSTANCE, ShishaNoTeAbility.INSTANCE, SukePunchAbility.INSTANCE);
 	public static final AkumaNoMiItem GOMU_GOMU_NO_MI = new AkumaNoMiItem("Gomu Gomu no Mi", EnumFruitType.PARAMECIA);
 	public static final AkumaNoMiItem PIKA_PIKA_NO_MI = new AkumaNoMiItem("Pika Pika no Mi", EnumFruitType.LOGIA, YataNoKagamiAbility.INSTANCE, YasakaniNoMagatamaAbility.INSTANCE, AmaNoMurakumoAbility.INSTANCE, AmaterasuAbility.INSTANCE, FlashAbility.INSTANCE);
 	public static final AkumaNoMiItem BANE_BANE_NO_MI = new AkumaNoMiItem("Bane Bane no Mi", EnumFruitType.PARAMECIA, SpringHopperAbility.INSTANCE, SpringSnipeAbility.INSTANCE, SpringDeathKnockAbility.INSTANCE);
@@ -94,7 +98,7 @@ public class ModDevilFruits
 	public static final List[] ALL_PROJECTILES = new List[] 
 		{
 			// Devil Fruit projectiles
-			MeraProjectiles.projectiles, HieProjectiles.projectiles, BaneProjectiles.projectiles, PikaProjectiles.projectiles/*, NoroProjectiles.projectiles, SukeProjectiles.projectiles, OpeProjectiles.projectiles,
+			MeraProjectiles.projectiles, HieProjectiles.projectiles, BaneProjectiles.projectiles, PikaProjectiles.projectiles/*, NoroProjectiles.projectiles*/, SukeProjectiles.projectiles/*, OpeProjectiles.projectiles,
 			GoroProjectiles.projectiles, MokuProjectiles.projectiles, NikyuProjectiles.projectiles, BomuProjectiles.projectiles, GuraProjectiles.projectiles, KageProjectiles.projectiles, SunaProjectiles.projectiles,
 			MaguProjectiles.projectiles, DoruProjectiles.projectiles, DokuProjectiles.projectiles, GasuProjectiles.projectiles, YukiProjectiles.projectiles, ItoProjectiles.projectiles, BariProjectiles.projectiles,
 			HoroProjectiles.projectiles, YamiProjectiles.projectiles, GoeProjectiles.projectiles, GomuProjectiles.projectiles, JuryoProjectiles.projectiles, ToriPhoenixProjectiles.projectiles,

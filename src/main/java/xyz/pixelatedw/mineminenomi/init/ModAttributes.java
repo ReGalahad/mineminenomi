@@ -184,10 +184,6 @@ public class ModAttributes
 	public static AbilityAttribute AIR_DOOR = new AbilityAttribute("Air Door").setAbilityPassive(true).setAbilityCooldown(40);
 	public static AbilityAttribute DOOR = new AbilityAttribute("Door").setAbilityCooldown(8);
 
-	public static AbilityAttribute SUKE_PUNCH = new AbilityAttribute("Suke Punch").setAbilityPassive().setAbilityPunch();
-	public static AbilityAttribute SHISHA_NO_TE = new AbilityAttribute("Shisha no Te").setAbilityCooldown(3).setProjectileDamage(5).setProjectileModel(ModelType.CUBE).setProjectileSize(0, 0, 0).setProjectileExplosion(3, false);
-	public static AbilityAttribute SKATTING = new AbilityAttribute("Skatting").addEffects(EffectType.USER, new EffectInstance(Effects.INVISIBILITY, 30, 5)).setAbilityPassive();  	
-	 
 	public static AbilityAttribute GEAR_SECOND = new AbilityAttribute("Gear Second").setAbilityCooldown(60).setAbilityPassive();
 	public static AbilityAttribute GEAR_THIRD = new AbilityAttribute("Gear Third").setAbilityCooldown(90).setAbilityPassive();
 	public static AbilityAttribute GEAR_FOURTH = new AbilityAttribute("Gear Fourth").setAbilityCooldown(300).setAbilityPassive();
