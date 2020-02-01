@@ -13,8 +13,8 @@ public class DaiEnkaiEnteiAbility extends ChargeableAbility
 {
 	public static final Ability INSTANCE = new DaiEnkaiEnteiAbility();
 	
-	private static final ParticleEffect DAI_ENKAI_ENTEI_1 = new ParticleEffectDaiEnkai();
-	private static final ParticleEffect DAI_ENKAI_ENTEI_2 = new ParticleEffectDaiEnkai2();
+	private static final ParticleEffect PARTICLES_1 = new ParticleEffectDaiEnkai();
+	private static final ParticleEffect PARTICLES_2 = new ParticleEffectDaiEnkai2();
 
 	public DaiEnkaiEnteiAbility()
 	{
@@ -30,7 +30,7 @@ public class DaiEnkaiEnteiAbility extends ChargeableAbility
 	private void duringChargingEvent(PlayerEntity player, int chargeTime)
 	{
 		if(chargeTime % 2 == 0)
-			DAI_ENKAI_ENTEI_2.spawn(player.world, player.posX, player.posY, player.posZ, 0, 0, 0);
+			PARTICLES_2.spawn(player.world, player.posX, player.posY, player.posZ, 0, 0, 0);
 	}
 	
 	private boolean onEndChargingEvent(PlayerEntity player)
@@ -39,7 +39,7 @@ public class DaiEnkaiEnteiAbility extends ChargeableAbility
 		player.world.addEntity(proj);
 		proj.shoot(player, player.rotationPitch, player.rotationYaw, 0, 2f, 1);	
 		
-		DAI_ENKAI_ENTEI_1.spawn(player.world, player.posX, player.posY, player.posZ, 0, 0, 0);
+		PARTICLES_1.spawn(player.world, player.posX, player.posY, player.posZ, 0, 0, 0);
 		return true;
 	}
 }

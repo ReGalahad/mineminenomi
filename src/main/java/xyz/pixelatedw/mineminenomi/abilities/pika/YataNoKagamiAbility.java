@@ -6,10 +6,14 @@ import net.minecraftforge.event.entity.living.EnderTeleportEvent;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability.Category;
+import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
+import xyz.pixelatedw.mineminenomi.particles.effects.pika.ParticleEffectYataNoKagami;
 
 public class YataNoKagamiAbility extends Ability
 {
 	public static final Ability INSTANCE = new YataNoKagamiAbility();
+	
+	private static final ParticleEffect PARTICLES = new ParticleEffectYataNoKagami();
 	
 	public YataNoKagamiAbility()
 	{
@@ -34,9 +38,9 @@ public class YataNoKagamiAbility extends Ability
 				player.dismountEntity(player.getRidingEntity());
 			
 			EnderTeleportEvent event = new EnderTeleportEvent(player, x, y, z, 5.0F);
-			// ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_YATANOKAGAMI, player), (ServerPlayerEntity) player);
+			PARTICLES.spawn(player.world, player.posX, player.posY, player.posZ, 0, 0, 0);
 			player.setPositionAndUpdate(event.getTargetX(), event.getTargetY() + 1, event.getTargetZ());
-			// ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_YATANOKAGAMI, player), (ServerPlayerEntity) player);
+			PARTICLES.spawn(player.world, player.posX, player.posY, player.posZ, 0, 0, 0);
 			player.fallDistance = 0.0F;
 		}
 	}

@@ -1,6 +1,13 @@
 package xyz.pixelatedw.mineminenomi.particles.effects.hie;
 
+import java.util.Random;
+
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
+import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
+import xyz.pixelatedw.mineminenomi.init.ModResources;
+import xyz.pixelatedw.mineminenomi.particles.data.GenericParticleData;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 
 public class ParticleEffectIceAge extends ParticleEffect
@@ -9,22 +16,32 @@ public class ParticleEffectIceAge extends ParticleEffect
 	@Override
 	public void spawn(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
 	{
-		/*for(int i = 0; i < 5; i++)
-		{
-			Timer timer = new Timer(true); 
-			
-			SimpleParticle cp = new SimpleParticle(world, ModParticleTextures.HIE,
-					posX, 
-					posY - 0.5,
-					posZ, 
-					0,
-					0,
-					0)
-					.setParticleScale(1 + world.rand.nextFloat());
-			Minecraft.getInstance().particles.addEffect(cp);
+		double t = 0;
+		double x, y, z;
+		Random rand = world.rand;
 
-			timer.schedule(ParticleTaskWave.Create(player, cp.getPos().getX(), cp.getPos().getY(), cp.getPos().getZ(), cp, 20), 0);
-		}*/
+		while(t < 3)
+		{
+			t += 0.1 * Math.PI;
+			
+			for(double theta = 0; theta <= 4 * Math.PI; theta += Math.PI / 16)
+			{
+				x = t * Math.cos(theta);
+				y = rand.nextInt(1);
+				z = t * Math.sin(theta);
+										
+				motionX = x / 4;
+				motionY = 0.05 + (MathHelper.abs((float) WyMathHelper.randomDouble() / 12));
+				motionZ = z / 4;
+
+				GenericParticleData data = new GenericParticleData();
+				data.setTexture(ModResources.HIE);
+				data.setLife(20);
+				data.setSize(2F);
+				data.setMotion(motionX, motionY, motionZ);
+				((ServerWorld) world).spawnParticle(data, posX + (x * 1.25) + WyMathHelper.randomDouble(), posY + y, posZ + (z * 1.25) + WyMathHelper.randomDouble(), 1, 0, 0, 0, 0.0D);	
+			}
+		}
 	}
 
 }

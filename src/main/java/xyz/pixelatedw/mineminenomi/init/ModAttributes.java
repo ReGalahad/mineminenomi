@@ -195,13 +195,7 @@ public class ModAttributes
 	public static AbilityAttribute GOMU_GOMU_NO_BAZOOKA = new AbilityAttribute("Gomu Gomu no Bazooka").setAbilityCharges(10);
 	public static AbilityAttribute GOMU_GOMU_NO_GATLING = new AbilityAttribute("Gomu Gomu no Gatling").setProjectileTicks(10);
 	public static AbilityAttribute GOMU_GOMU_NO_PISTOL = new AbilityAttribute("Gomu Gomu no Pistol");
-	
-	public static AbilityAttribute FLASH = new AbilityAttribute("Flash").setAbilityCooldown(5).addEffects(EffectType.AOE, new EffectInstance(Effects.BLINDNESS, 7 * 20, 3), new EffectInstance(Effects.SLOWNESS, 7 * 20, 1)).setEffectRadius(10);
-	public static AbilityAttribute AMA_NO_MURAKUMO = new AbilityAttribute("Ama no Murakumo").setAbilityPassive(true);
-	public static AbilityAttribute AMATERASU = new AbilityAttribute("Amaterasu").setAbilityCooldown(15).setProjectileTicks(150).setProjectileModel(ModelType.CUBE).setProjectileSize(1, 1, 1).setProjectileColor("FFFF00").setProjectileSpeed(5).setProjectileDamage(35).setProjectileExplosion(6, false).setAbilityCharges(2 * 20);
-	public static AbilityAttribute YASAKANI_NO_MAGATAMA = new AbilityAttribute("Yasakani no Magatama").setAbilityCooldown(2.5).setProjectileModel(ModelType.SPHERE).setProjectileSize(.5, .5, .5).setProjectileColor("FFFF00").setAbilityRepeater(2).setProjectileDamage(2).setProjectileExplosion(1, false).setProjectileSpeed(5);
-	public static AbilityAttribute YATA_NO_KAGAMI = new AbilityAttribute("Yata no Kagami").setAbilityCooldown(4);
-	 
+
 	public static AbilityAttribute SPRING_DEATH_KNOCK = new AbilityAttribute("Spring Death Knock").setAbilityCooldown(6).setProjectileDamage(20).setProjectileModel(ModelType.FIST).setProjectileTexture("springdeathknock").setModelOffsets(0, 1.5, 0).setProjectileSize(7, 5, 5).setProjectileTicks(3).setProjectilePhysical();
 	public static AbilityAttribute SPRING_SNIPE = new AbilityAttribute("Spring Snipe").setAbilityCooldown(5).setAbilityCharges(20);
 	public static AbilityAttribute SPRING_HOPPER = new AbilityAttribute("Spring Hopper").setAbilityCooldown(0.6).setAbilityCharges(10);

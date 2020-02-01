@@ -2,10 +2,10 @@ package xyz.pixelatedw.mineminenomi.particles.effects.pika;
 
 import java.util.Random;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
-import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
+import xyz.pixelatedw.mineminenomi.particles.data.GenericParticleData;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 
 public class ParticleEffectYataNoKagami extends ParticleEffect
@@ -20,18 +20,13 @@ public class ParticleEffectYataNoKagami extends ParticleEffect
 			double offsetY = (new Random().nextInt(40) + 1.0D) / 20.0D;
 			double offsetZ = (new Random().nextInt(40) + 1.0D - 20.0D) / 20.0D;
 			
-			SimpleParticle cp = new SimpleParticle(world, ModResources.PIKA,
-					posX + offsetX, 
-					posY + 0.5 + offsetY,
-					posZ + offsetZ, 
-					0,
-					0,
-					0)
-					.setParticleScale(4F)
-					.setParticleGravity(0)
-					.setParticleAge(20);
-			Minecraft.getInstance().particles.addEffect(cp);
-		}	
+			GenericParticleData data = new GenericParticleData();
+			data.setTexture(ModResources.PIKA);
+			data.setLife(20);
+			data.setSize(4F);
+			data.setHasRotation();
+			((ServerWorld) world).spawnParticle(data, posX + offsetX, posY + 0.5 + offsetY, posZ + offsetZ, 1, 0, 0, 0, 0.0D);	
+		}
 	}
 
 }

@@ -27,7 +27,8 @@ public class SimpleParticle extends TexturedParticle
 {
 	protected ResourceLocation texture;
 	private static final VertexFormat VERTEX_FORMAT = (new VertexFormat()).addElement(DefaultVertexFormats.POSITION_3F).addElement(DefaultVertexFormats.TEX_2F).addElement(DefaultVertexFormats.COLOR_4UB).addElement(DefaultVertexFormats.TEX_2S).addElement(DefaultVertexFormats.NORMAL_3B).addElement(DefaultVertexFormats.PADDING_1B);
-
+	private boolean hasRotation = false;
+	
 	public SimpleParticle(World world, ResourceLocation texture, double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
 	{
 		super(world, posX, posY, posZ, 0.0D, 0.0D, 0.0D);
@@ -56,7 +57,13 @@ public class SimpleParticle extends TexturedParticle
 		float x = (float) (this.prevPosX + (this.posX - this.prevPosX) * partialTicks - interpPosX);
 		float y = (float) (this.prevPosY + (this.posY - this.prevPosY) * partialTicks - interpPosY);
 		float z = (float) (this.prevPosZ + (this.posZ - this.prevPosZ) * partialTicks - interpPosZ);
-				
+		
+		if(this.hasRotation)
+		{
+			float rotation = (float) (this.age * 2) / this.maxAge;
+			rotationYZ = rotation - 1;
+		}
+		
 		GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 		GlStateManager.enableBlend();
 		GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);
@@ -104,6 +111,7 @@ public class SimpleParticle extends TexturedParticle
 	public SimpleParticle setParticleScale(float f) { this.particleScale = f; return this; }
     public SimpleParticle setParticleGravity(float f) { this.particleGravity = f; return this; }
     public SimpleParticle setParticleAge(int i) { this.maxAge = i + this.rand.nextInt(10); return this; }
+    public SimpleParticle setHasRotation() { this.hasRotation = true; return this; }
     public SimpleParticle setParticleTexture(ResourceLocation rs)
     {
     	this.texture = rs;
@@ -159,6 +167,8 @@ public class SimpleParticle extends TexturedParticle
 			particle.setParticleAlpha(data.getAlpha());
 			particle.setParticleScale(data.getSize());
 			particle.setParticleAge(data.getLife());
+			
+			if(data.hasRotation()) particle.setHasRotation();
 			
 			return particle;
 		}

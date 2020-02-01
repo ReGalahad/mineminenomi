@@ -25,17 +25,18 @@ public class GenericParticleData implements IParticleData
 			float alpha = stringReader.readFloat();
 			float size = stringReader.readFloat();
 			int life = stringReader.readInt();
+			boolean hasRotation = stringReader.readBoolean();
 			
 			double motionX = stringReader.readDouble();
 			double motionY = stringReader.readDouble();
 			double motionZ = stringReader.readDouble();
-			
-			
+					
 			GenericParticleData data = new GenericParticleData();
 			data.setColor(red, green, blue, alpha);
 			data.setMotion(motionX, motionY, motionZ);
 			data.setSize(size);
 			data.setLife(life);
+			if(hasRotation) data.setHasRotation();
 			//data.setTexture(texture);
 			
 			return data;
@@ -50,6 +51,7 @@ public class GenericParticleData implements IParticleData
 			float alpha = packetBuffer.readFloat();
 			float size = packetBuffer.readFloat();
 			int life = packetBuffer.readInt();
+			boolean hasRotation = packetBuffer.readBoolean();
 			
 			double motionX = packetBuffer.readDouble();
 			double motionY = packetBuffer.readDouble();
@@ -63,6 +65,7 @@ public class GenericParticleData implements IParticleData
 			data.setSize(size);
 			data.setLife(life);
 			data.setTexture(texture);
+			if(hasRotation) data.setHasRotation();
 			
 			return data;
 		}
@@ -73,6 +76,7 @@ public class GenericParticleData implements IParticleData
 	private float alpha = 1.0F;
 	private float size = 1;
 	private int life = 10;
+	private boolean hasRotation = false;
 	private ResourceLocation texture = ModResources.MERA;
 	
 	public GenericParticleData() {}
@@ -92,6 +96,7 @@ public class GenericParticleData implements IParticleData
 		buffer.writeFloat(this.alpha);
 		buffer.writeFloat(this.size);
 		buffer.writeInt(this.life);
+		buffer.writeBoolean(this.hasRotation);
 		
 		buffer.writeDouble(this.motionX);
 		buffer.writeDouble(this.motionY);
@@ -133,6 +138,11 @@ public class GenericParticleData implements IParticleData
 	public void setTexture(ResourceLocation texture)
 	{
 		this.texture = texture;
+	}
+	
+	public void setHasRotation()
+	{
+		this.hasRotation = true;
 	}
 	
 	@Override
@@ -189,5 +199,10 @@ public class GenericParticleData implements IParticleData
 	public ResourceLocation getTexture()
 	{
 		return this.texture;
+	}
+	
+	public boolean hasRotation()
+	{
+		return this.hasRotation;
 	}
 }

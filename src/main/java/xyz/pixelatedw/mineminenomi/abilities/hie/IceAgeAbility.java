@@ -10,10 +10,14 @@ import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability.Category;
 import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
+import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
+import xyz.pixelatedw.mineminenomi.particles.effects.hie.ParticleEffectIceAge;
 
 public class IceAgeAbility extends Ability
 {
 	public static final Ability INSTANCE = new IceAgeAbility();
+
+	private static final ParticleEffect PARTICLES = new ParticleEffectIceAge();
 
 	public IceAgeAbility()
 	{
@@ -48,5 +52,7 @@ public class IceAgeAbility extends Ability
 		{
 			new DFEffectHieSlowness(target, 200);
 		}
+		
+		PARTICLES.spawn(player.world, player.posX, player.posY, player.posZ, 0, 0, 0);
 	}
 }

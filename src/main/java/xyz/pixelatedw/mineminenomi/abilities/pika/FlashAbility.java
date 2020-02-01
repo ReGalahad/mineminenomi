@@ -9,11 +9,15 @@ import net.minecraft.potion.Effects;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability.Category;
+import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
+import xyz.pixelatedw.mineminenomi.particles.effects.pika.ParticleEffectFlash;
 
 public class FlashAbility extends Ability
 {
 	public static final Ability INSTANCE = new FlashAbility();
 	
+	private static final ParticleEffect PARTICLES = new ParticleEffectFlash();
+
 	public FlashAbility()
 	{
 		super("Flash", Category.DEVIL_FRUIT);
@@ -32,6 +36,7 @@ public class FlashAbility extends Ability
 		{
 			entity.addPotionEffect(new EffectInstance(Effects.BLINDNESS, 7 * 20, 3));
 			entity.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 7 * 20, 1));
+			PARTICLES.spawn(player.world, entity.posX, entity.posY + entity.getEyeHeight(), entity.posZ, 0, 0, 0);
 		});
 	}
 }
