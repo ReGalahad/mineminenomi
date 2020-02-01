@@ -168,15 +168,7 @@ public class ModAttributes
 	public static AbilityAttribute VOLT_VARI = new AbilityAttribute("Volt Vari").setAbilityCooldown(3).setAbilityCharges(10 * 20, true);
 	public static AbilityAttribute EL_THOR = new AbilityAttribute("El Thor").setAbilityCooldown(8).setAbilityCharges(6 * 20);
 	public static AbilityAttribute SPARK_STEP = new AbilityAttribute("Spark Step").setAbilityCooldown(3);
-	
-	public static AbilityAttribute INJECTION_SHOT = new AbilityAttribute("Injection Shot").setAbilityCooldown(15);
-	public static AbilityAttribute SHAMBLES = new AbilityAttribute("Shambles").setAbilityCooldown(8);
-	public static AbilityAttribute TAKT = new AbilityAttribute("Takt").setAbilityCooldown(10).setAbilityPassive();
-	public static AbilityAttribute GAMMA_KNIFE = new AbilityAttribute("Gamma Knife").setAbilityCooldown(30).setProjectileTicks(20).setProjectileModel(ModelType.CUBE).setProjectileColor("00AB66").setProjectileDamage(100).setProjectileSize(1, 1, 5);
-	public static AbilityAttribute MES = new AbilityAttribute("Mes").setAbilityCooldown(5).setAbilityPassive().setAbilityPunch(1); 
-	public static AbilityAttribute COUNTER_SHOCK = new AbilityAttribute("Counter Shock").setAbilityCooldown(10).setAbilityPassive().setAbilityPunch(40).setAbilityExplosion(1, false);
-	public static AbilityAttribute ROOM = new AbilityAttribute("Room").setAbilityCooldown(1).setAbilityPassive(true);
-	
+
 	public static AbilityAttribute NORO_NORO_BEAM = new AbilityAttribute("Noro Noro Beam").setAbilityCooldown(5).setProjectileTicks(10).setProjectileModel(ModelType.NORO_NORO_BEAM).setProjectileTexture("noronorobeam").setProjectileSize(5, 5, 5).setProjectileSpeed(1.6F).setProjectileCollisionSizes(1);
 	public static AbilityAttribute KYUBI_RUSH = new AbilityAttribute("Kyubi Rush").setAbilityCooldown(7).setAbilityPassive().setAbilityPunch();
 	public static AbilityAttribute NORO_NORO_BEAM_SWORD = new AbilityAttribute("Noro Noro Beam Sword").setAbilityPassive(true);

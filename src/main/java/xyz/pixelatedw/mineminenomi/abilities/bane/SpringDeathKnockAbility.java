@@ -8,7 +8,7 @@ import xyz.pixelatedw.mineminenomi.entities.projectiles.bane.SpringDeathKnockPro
 public class SpringDeathKnockAbility extends Ability
 {
 	public static final Ability INSTANCE = new SpringDeathKnockAbility();
-	
+
 	public SpringDeathKnockAbility()
 	{
 		super("Spring Death Knock", Category.DEVIL_FRUIT);
@@ -17,11 +17,13 @@ public class SpringDeathKnockAbility extends Ability
 
 		this.onUseEvent = this::onUseEvent;
 	}
-	
-	private void onUseEvent(PlayerEntity player, Ability ability)
+
+	private boolean onUseEvent(PlayerEntity player)
 	{
 		SpringDeathKnockProjectile proj = new SpringDeathKnockProjectile(player.world, player);
 		player.world.addEntity(proj);
-		proj.shoot(player, player.rotationPitch, player.rotationYaw, 0, 2f, 1);		
+		proj.shoot(player, player.rotationPitch, player.rotationYaw, 0, 2f, 1);
+
+		return true;
 	}
 }

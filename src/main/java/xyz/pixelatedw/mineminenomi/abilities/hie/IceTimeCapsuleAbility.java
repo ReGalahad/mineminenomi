@@ -22,7 +22,7 @@ public class IceTimeCapsuleAbility extends Ability
 		this.onUseEvent = this::onUseEvent;
 	}
 
-	private void onUseEvent(PlayerEntity player, Ability ability)
+	private boolean onUseEvent(PlayerEntity player)
 	{
 		List<LivingEntity> list = WyHelper.<LivingEntity>getEntitiesNear(player.getPosition(), player.world, 25);
 		list.remove(player);
@@ -31,5 +31,7 @@ public class IceTimeCapsuleAbility extends Ability
 		{
 			WyHelper.createFilledCube(target, new int[] { 2, 4, 2 }, Blocks.PACKED_ICE, "air", "foliage");
 		}
+
+		return true;
 	}
 }

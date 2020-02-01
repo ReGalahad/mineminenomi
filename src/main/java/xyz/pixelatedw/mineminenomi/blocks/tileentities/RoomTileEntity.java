@@ -33,7 +33,7 @@ public class RoomTileEntity extends TileEntity implements ITickableTileEntity
 		{
 			List<LivingEntity> nearbyPlayers = WyHelper.<LivingEntity>getEntitiesNear(this.getPos(), this.world, 28).stream().filter(x ->
 			{
-				if (x instanceof PlayerEntity && DevilFruitCapability.get(x).getDevilFruit().equalsIgnoreCase("opeope"))
+				if (x instanceof PlayerEntity && DevilFruitCapability.get(x).getDevilFruit().equalsIgnoreCase("ope_ope"))
 					return true;
 
 				return false;

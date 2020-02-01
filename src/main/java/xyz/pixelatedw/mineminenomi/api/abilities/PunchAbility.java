@@ -10,7 +10,7 @@ public class PunchAbility extends ContinuousAbility
 {
 
 	// Setting the defaults so that no crash occurs and so they will be null safe.
-	protected IOnHitEntity onHitEntity = (player, target) -> { };
+	protected IOnHitEntity onHitEntity = (player, target) -> { return 0; };
 	
 	public PunchAbility(String name, Category category)
 	{
@@ -22,10 +22,10 @@ public class PunchAbility extends ContinuousAbility
 	/*
 	 *  Methods 
 	 */
-	public void hitEntity(PlayerEntity player, LivingEntity target)
+	public float hitEntity(PlayerEntity player, LivingEntity target)
 	{
-		this.onHitEntity.onHitEntity(player, target);
 		this.stopContinuity(player);
+		return this.onHitEntity.onHitEntity(player, target);
 	}
 	
 	
@@ -35,6 +35,6 @@ public class PunchAbility extends ContinuousAbility
 	 */
 	public interface IOnHitEntity extends Serializable
 	{
-		void onHitEntity(PlayerEntity player, LivingEntity target);
+		float onHitEntity(PlayerEntity player, LivingEntity target);
 	}
 }

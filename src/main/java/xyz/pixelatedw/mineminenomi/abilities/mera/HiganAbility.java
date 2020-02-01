@@ -9,21 +9,23 @@ import xyz.pixelatedw.mineminenomi.entities.projectiles.mera.HiganProjectile;
 public class HiganAbility extends RepeaterAbility
 {
 	public static final Ability INSTANCE = new HiganAbility();
-	
-	public HiganAbility() 
+
+	public HiganAbility()
 	{
 		super("Higan", Category.DEVIL_FRUIT);
 		this.setDescription("Turns the user's fingertips into flames and shoots bullets made of fire from them.");
 		this.setMaxCooldown(4);
 		this.setMaxRepearCount(5, 2);
-		
+
 		this.onUseEvent = this::onUseEvent;
 	}
-	
-	private void onUseEvent(PlayerEntity player, Ability ability)
+
+	private boolean onUseEvent(PlayerEntity player)
 	{
 		HiganProjectile proj = new HiganProjectile(player.world, player);
 		player.world.addEntity(proj);
-		proj.shoot(player, player.rotationPitch, player.rotationYaw, 0, 2f, 1);		
+		proj.shoot(player, player.rotationPitch, player.rotationYaw, 0, 2f, 1);
+
+		return true;
 	}
 }

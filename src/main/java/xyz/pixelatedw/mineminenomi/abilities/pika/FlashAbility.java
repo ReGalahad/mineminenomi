@@ -27,7 +27,7 @@ public class FlashAbility extends Ability
 		this.onUseEvent = this::onUseEvent;
 	}
 	
-	private void onUseEvent(PlayerEntity player, Ability ability)
+	private boolean onUseEvent(PlayerEntity player)
 	{
 		List<LivingEntity> list = WyHelper.<LivingEntity>getEntitiesNear(player.getPosition(), player.world, 10);
 		list.remove(player);
@@ -38,5 +38,7 @@ public class FlashAbility extends Ability
 			entity.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 7 * 20, 1));
 			PARTICLES.spawn(player.world, entity.posX, entity.posY + entity.getEyeHeight(), entity.posZ, 0, 0, 0);
 		});
+		
+		return true;
 	}
 }

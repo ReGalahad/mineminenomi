@@ -20,10 +20,12 @@ public class YasakaniNoMagatamaAbility extends RepeaterAbility
 		this.onUseEvent = this::onUseEvent;
 	}
 	
-	private void onUseEvent(PlayerEntity player, Ability ability)
+	private boolean onUseEvent(PlayerEntity player)
 	{
 		YasakaniNoMagatamaProjectile proj = new YasakaniNoMagatamaProjectile(player.world, player);
 		player.world.addEntity(proj);
 		proj.shoot(player, player.rotationPitch, player.rotationYaw, 0, 2f, 1);		
+		
+		return true;
 	}
 }

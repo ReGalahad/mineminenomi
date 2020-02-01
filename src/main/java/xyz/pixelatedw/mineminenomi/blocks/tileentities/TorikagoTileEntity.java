@@ -33,7 +33,7 @@ public class TorikagoTileEntity extends TileEntity implements ITickableTileEntit
 		{
 			List<LivingEntity> nearbyPlayers = WyHelper.<LivingEntity>getEntitiesNear(this.getPos(), this.world, 28).stream().filter(x ->
 			{
-				if (x instanceof PlayerEntity && DevilFruitCapability.get(x).getDevilFruit().equalsIgnoreCase("itoito"))
+				if (x instanceof PlayerEntity && DevilFruitCapability.get(x).getDevilFruit().equalsIgnoreCase("ito_ito"))
 					return true;
 
 				return false;

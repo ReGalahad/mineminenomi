@@ -24,7 +24,7 @@ public class YataNoKagamiAbility extends Ability
 		this.onUseEvent = this::onUseEvent;
 	}
 	
-	private void onUseEvent(PlayerEntity player, Ability ability)
+	private boolean onUseEvent(PlayerEntity player)
 	{
 		if (WyHelper.rayTraceBlocks(player) != null)
 		{
@@ -43,5 +43,7 @@ public class YataNoKagamiAbility extends Ability
 			PARTICLES.spawn(player.world, player.posX, player.posY, player.posZ, 0, 0, 0);
 			player.fallDistance = 0.0F;
 		}
+		
+		return true;
 	}
 }

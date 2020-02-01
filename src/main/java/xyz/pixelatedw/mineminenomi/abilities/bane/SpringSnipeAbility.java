@@ -35,7 +35,7 @@ public class SpringSnipeAbility  extends ChargeableAbility
 		return true;
 	}
 	
-	private void duringCooldown(PlayerEntity player, Ability ability, int cooldownTimer)
+	private void duringCooldown(PlayerEntity player, int cooldownTimer)
 	{
 		if ((cooldownTimer / 20) > (this.maxCooldown / 20) - 3)
 		{

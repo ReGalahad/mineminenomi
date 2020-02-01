@@ -1,45 +1,25 @@
 package xyz.pixelatedw.mineminenomi.entities.projectiles.ope;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
+import xyz.pixelatedw.mineminenomi.api.abilities.models.CubeModel;
 import xyz.pixelatedw.mineminenomi.api.abilities.projectiles.AbilityProjectileEntity;
 import xyz.pixelatedw.mineminenomi.api.abilities.projectiles.AbilityProjectileEntity.Data;
-import xyz.pixelatedw.mineminenomi.init.ModAttributes;
+import xyz.pixelatedw.mineminenomi.api.abilities.renderers.AbilityProjectileRenderer;
 
 public class OpeProjectiles 
 {
+	public static List<AbilityProjectileEntity.Data> projectiles = new ArrayList<AbilityProjectileEntity.Data>();
+	
+	public static final EntityType GAMMA_KNIFE = WyRegistry.registerEntityType("gamma_knife", GammaKnifeProjectile::new, 0.5F, 0.5F);
+	
+	private static final AbilityProjectileRenderer.Factory GAMMA_KNIFE_FACTORY = new AbilityProjectileRenderer.Factory(new CubeModel()).setColor("#00AB66").setScale(1, 1, 5);
 
-	public static HashMap<AbilityAttribute, AbilityProjectileEntity.Data> projectiles = new HashMap<AbilityAttribute, AbilityProjectileEntity.Data>();
-	
-	public static final EntityType GAMMA_KNIFE = WyRegistry.registerEntityType("gamma_knife", GammaKnife::new);
-	
 	static
 	{
-		projectiles.put(ModAttributes.GAMMA_KNIFE, new Data(GAMMA_KNIFE, GammaKnife.class));
-	}
-	
-	
-	public static class GammaKnife extends AbilityProjectileEntity
-	{
-		public GammaKnife(World world)
-		{super(GAMMA_KNIFE, world);}
-		
-		public GammaKnife(EntityType type, World world)
-		{super(type, world);}
-		
-		public GammaKnife(World world, double x, double y, double z)
-		{super(GAMMA_KNIFE, world, x, y, z);}
-		
-		public GammaKnife(World world, LivingEntity player, AbilityAttribute attr) 
-		{		
-			super(GAMMA_KNIFE, world, player, attr);		
-		}
+		projectiles.add(new Data(GAMMA_KNIFE, GammaKnifeProjectile.class, GAMMA_KNIFE_FACTORY));
 	}	
-	
-	
 }

@@ -20,8 +20,8 @@ public abstract class Ability implements Serializable
 	private State state = State.STANDBY;
 	
 	// Setting the defaults so that no crash occurs and so they will be null safe.
-	protected IOnUse onUseEvent = (player, ability) -> {};
-	protected IDuringCooldown duringCooldownEvent = (player, ability, cooldown) -> {};
+	protected IOnUse onUseEvent = (player) -> { return true; };
+	protected IDuringCooldown duringCooldownEvent = (player, cooldown) -> {};
 	
 	public Ability(String name, Category category)
 	{
@@ -40,11 +40,12 @@ public abstract class Ability implements Serializable
 		if(!this.isOnStandby())
 			return;			
 		
-		this.onUseEvent.onUse(player, this);
-
-		this.startCooldown();
-		IAbilityData props = AbilityDataCapability.get(player);
-		ModNetwork.sendTo(new SUpdateHotbarStatePacket(props, props.getAbilityPosition(this.getSavedAbility(player))), (ServerPlayerEntity)player);
+		if(this.onUseEvent.onUse(player))
+		{
+			this.startCooldown();
+			IAbilityData props = AbilityDataCapability.get(player);
+			ModNetwork.sendTo(new SUpdateHotbarStatePacket(props, props.getAbilityPosition(this.getSavedAbility(player))), (ServerPlayerEntity)player);			
+		}
 	}
 	
 	
@@ -144,7 +145,7 @@ public abstract class Ability implements Serializable
 		if(this.isOnCooldown() && this.cooldown > 0)
 		{
 			this.cooldown--;
-			this.duringCooldownEvent.duringCooldown(player, this, (int) this.cooldown);
+			this.duringCooldownEvent.duringCooldown(player, (int) this.cooldown);
 		}
 		else if(this.isOnCooldown() && this.cooldown <= 0)
 		{
@@ -198,11 +199,11 @@ public abstract class Ability implements Serializable
 	 */
 	public interface IOnUse extends Serializable
 	{
-		void onUse(PlayerEntity player, Ability ability);
+		boolean onUse(PlayerEntity player);
 	}
 	
 	public interface IDuringCooldown extends Serializable
 	{
-		void duringCooldown(PlayerEntity player, Ability ability, int cooldown);
+		void duringCooldown(PlayerEntity player, int cooldown);
 	}
 }

@@ -20,11 +20,13 @@ public class SukePunchAbility extends PunchAbility
 		this.onHitEntity = this::onHitEntity;
 	}
 	
-	private void onHitEntity(PlayerEntity player, LivingEntity target)
+	private float onHitEntity(PlayerEntity player, LivingEntity target)
 	{
 		if(target.isPotionActive(Effects.INVISIBILITY))
 			target.removePotionEffect(Effects.INVISIBILITY);
 		else
 			target.addPotionEffect(new EffectInstance(Effects.INVISIBILITY, Integer.MAX_VALUE, 1, false, false));
+		
+		return 1;
 	}
 }

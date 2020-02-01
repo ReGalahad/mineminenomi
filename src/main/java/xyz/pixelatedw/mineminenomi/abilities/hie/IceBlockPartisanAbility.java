@@ -9,7 +9,7 @@ import xyz.pixelatedw.mineminenomi.entities.projectiles.hie.IceBlockPartisanProj
 public class IceBlockPartisanAbility extends RepeaterAbility
 {
 	public static final Ability INSTANCE = new IceBlockPartisanAbility();
-	
+
 	public IceBlockPartisanAbility()
 	{
 		super("Ice Block: Partisan", Category.DEVIL_FRUIT);
@@ -19,11 +19,13 @@ public class IceBlockPartisanAbility extends RepeaterAbility
 
 		this.onUseEvent = this::onUseEvent;
 	}
-	
-	private void onUseEvent(PlayerEntity player, Ability ability)
+
+	private boolean onUseEvent(PlayerEntity player)
 	{
 		IceBlockPartisanProjectile proj = new IceBlockPartisanProjectile(player.world, player);
 		player.world.addEntity(proj);
-		proj.shoot(player, player.rotationPitch, player.rotationYaw, 0, 2f, 1);		
+		proj.shoot(player, player.rotationPitch, player.rotationYaw, 0, 2f, 1);
+
+		return true;
 	}
 }

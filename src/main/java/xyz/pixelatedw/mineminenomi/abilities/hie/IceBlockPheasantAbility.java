@@ -8,7 +8,7 @@ import xyz.pixelatedw.mineminenomi.entities.projectiles.hie.IceBlockPheasantProj
 public class IceBlockPheasantAbility extends Ability
 {
 	public static final Ability INSTANCE = new IceBlockPheasantAbility();
-	
+
 	public IceBlockPheasantAbility()
 	{
 		super("Ice Block: Pheasant", Category.DEVIL_FRUIT);
@@ -17,11 +17,13 @@ public class IceBlockPheasantAbility extends Ability
 
 		this.onUseEvent = this::onUseEvent;
 	}
-	
-	private void onUseEvent(PlayerEntity player, Ability ability)
+
+	private boolean onUseEvent(PlayerEntity player)
 	{
 		IceBlockPheasantProjectile proj = new IceBlockPheasantProjectile(player.world, player);
 		player.world.addEntity(proj);
-		proj.shoot(player, player.rotationPitch, player.rotationYaw, 0, 2f, 1);		
+		proj.shoot(player, player.rotationPitch, player.rotationYaw, 0, 2f, 1);
+
+		return true;
 	}
 }

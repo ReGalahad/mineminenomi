@@ -50,11 +50,11 @@ public class RepeaterAbility extends Ability
 
 			if(this.repeaterCount > 0 && this.cooldown % this.repeaterInterval == 0)
 			{
-				this.onUseEvent.onUse(player, this);
+				this.onUseEvent.onUse(player);
 				this.repeaterCount--;
 			}
 
-			this.duringCooldownEvent.duringCooldown(player, this, (int) this.cooldown);
+			this.duringCooldownEvent.duringCooldown(player, (int) this.cooldown);
 		}
 		else if(this.isOnCooldown() && this.cooldown <= 0)
 		{

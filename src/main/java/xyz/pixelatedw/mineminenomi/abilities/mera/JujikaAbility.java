@@ -8,7 +8,7 @@ import xyz.pixelatedw.mineminenomi.entities.projectiles.mera.JujikaProjectile;
 public class JujikaAbility extends Ability
 {
 	public static final Ability INSTANCE = new JujikaAbility();
-	
+
 	public JujikaAbility()
 	{
 		super("Jujika", Category.DEVIL_FRUIT);
@@ -17,11 +17,13 @@ public class JujikaAbility extends Ability
 
 		this.onUseEvent = this::onUseEvent;
 	}
-	
-	private void onUseEvent(PlayerEntity player, Ability ability)
+
+	private boolean onUseEvent(PlayerEntity player)
 	{
 		JujikaProjectile proj = new JujikaProjectile(player.world, player);
 		player.world.addEntity(proj);
-		proj.shoot(player, player.rotationPitch, player.rotationYaw, 0, 2f, 1);		
+		proj.shoot(player, player.rotationPitch, player.rotationYaw, 0, 2f, 1);
+
+		return true;
 	}
 }

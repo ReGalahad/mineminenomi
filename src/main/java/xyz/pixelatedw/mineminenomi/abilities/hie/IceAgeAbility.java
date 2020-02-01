@@ -28,7 +28,7 @@ public class IceAgeAbility extends Ability
 		this.onUseEvent = this::onUseEvent;
 	}
 
-	private void onUseEvent(PlayerEntity player, Ability ability)
+	private boolean onUseEvent(PlayerEntity player)
 	{
 		for (int i = -15; i < 15; i++)
 		{
@@ -39,20 +39,22 @@ public class IceAgeAbility extends Ability
 					double posX = player.posX + i + (i < -WyMathHelper.randomWithRange(8, 12) || i > WyMathHelper.randomWithRange(8, 12) ? WyMathHelper.randomWithRange(-5, 5) : 0);
 					double posY = player.posY + j;
 					double posZ = player.posZ + k + (k < -WyMathHelper.randomWithRange(8, 12) || k > WyMathHelper.randomWithRange(8, 12) ? WyMathHelper.randomWithRange(-5, 5) : 0);
-					
+
 					WyHelper.placeBlockIfAllowed(player.world, posX, posY, posZ, Blocks.PACKED_ICE, "core", "foliage");
 				}
 			}
 		}
-		
+
 		List<LivingEntity> list = WyHelper.<LivingEntity>getEntitiesNear(player.getPosition(), player.world, 15);
 		list.remove(player);
-		
+
 		for (LivingEntity target : list)
 		{
 			new DFEffectHieSlowness(target, 200);
 		}
-		
+
 		PARTICLES.spawn(player.world, player.posX, player.posY, player.posZ, 0, 0, 0);
+
+		return true;
 	}
 }
