@@ -29,24 +29,24 @@ public class AbilitiesEvents
 
 			for (Ability ability : props.getHotbarAbilities())
 			{
-				if(ability == null)
+				if (ability == null)
 					continue;
 
-				if(ability instanceof ChargeableAbility && ability.isCharging())
+				if (ability instanceof ChargeableAbility && ability.isCharging())
 					((ChargeableAbility) props.getAbility(ability)).charging(player);
-				
-				if(ability instanceof ContinuousAbility && ability.isContinuous())
+
+				if (ability instanceof ContinuousAbility && ability.isContinuous())
 					((ContinuousAbility) props.getAbility(ability)).tick(player);
-				
-				if(ability instanceof PassiveAbility)
+
+				if (ability instanceof PassiveAbility)
 					((PassiveAbility) props.getAbility(ability)).tick(player);
-				
-				if(ability.isOnCooldown())
+
+				if (ability.isOnCooldown())
 					props.getAbility(ability).cooldown(player);
 			}
 		}
 	}
-	
+
 	@SubscribeEvent
 	public static void onLivingDamage(LivingDamageEvent event)
 	{
@@ -56,18 +56,18 @@ public class AbilitiesEvents
 			IAbilityData props = AbilityDataCapability.get(player);
 			LivingEntity target = event.getEntityLiving();
 			ItemStack heldItem = player.getHeldItemMainhand();
-			
+
 			for (Ability ability : props.getHotbarAbilities())
 			{
-				if(ability == null)
+				if (ability == null)
 					continue;
 
-				if(ability instanceof PunchAbility && ability.isContinuous() && heldItem.isEmpty())
+				if (ability instanceof PunchAbility && ability.isContinuous() && heldItem.isEmpty())
 				{
 					float damage = ((PunchAbility) props.getAbility(ability)).hitEntity(player, target);
 					event.setAmount(damage);
 				}
 			}
-		}	
+		}
 	}
 }

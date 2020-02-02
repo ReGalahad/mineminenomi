@@ -1,10 +1,10 @@
 package xyz.pixelatedw.mineminenomi.particles.effects.goro;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
-import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
+import xyz.pixelatedw.mineminenomi.particles.data.GenericParticleData;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 
 public class ElThorParticleEffect extends ParticleEffect
@@ -19,15 +19,11 @@ public class ElThorParticleEffect extends ParticleEffect
 			double offsetY = WyMathHelper.randomDouble();
 			double offsetZ = WyMathHelper.randomDouble();
 			
-			SimpleParticle cp = new SimpleParticle(world, ModResources.GORO2,
-					posX + offsetX, 
-					posY + offsetY,
-					posZ +offsetZ, 
-					0, 0, 0)
-					.setParticleScale(3)
-					.setParticleGravity(0)
-					.setParticleAge(1);
-			Minecraft.getInstance().particles.addEffect(cp);
+			GenericParticleData data = new GenericParticleData();
+			data.setTexture(ModResources.GORO2);
+			data.setLife(1);
+			data.setSize(7);
+			((ServerWorld) world).spawnParticle(data, posX + offsetX, posY + offsetY, posZ + offsetZ, 1, 0, 0, 0, 0.0D);
 		}
 	}
 

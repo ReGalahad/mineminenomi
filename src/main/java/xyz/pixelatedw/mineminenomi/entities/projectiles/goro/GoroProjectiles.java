@@ -1,217 +1,42 @@
 package xyz.pixelatedw.mineminenomi.entities.projectiles.goro;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
+import xyz.pixelatedw.mineminenomi.api.abilities.models.CubeModel;
+import xyz.pixelatedw.mineminenomi.api.abilities.models.SphereModel;
 import xyz.pixelatedw.mineminenomi.api.abilities.projectiles.AbilityProjectileEntity;
 import xyz.pixelatedw.mineminenomi.api.abilities.projectiles.AbilityProjectileEntity.Data;
-import xyz.pixelatedw.mineminenomi.init.ModAttributes;
-import xyz.pixelatedw.mineminenomi.init.ModExtraAttributes;
-import xyz.pixelatedw.mineminenomi.init.ModResources;
+import xyz.pixelatedw.mineminenomi.api.abilities.renderers.AbilityProjectileRenderer;
 
 public class GoroProjectiles 
 {
 
-	public static HashMap<AbilityAttribute, AbilityProjectileEntity.Data> projectiles = new HashMap<AbilityAttribute, AbilityProjectileEntity.Data>();
+	public static List<AbilityProjectileEntity.Data> projectiles = new ArrayList<AbilityProjectileEntity.Data>();
 	
-	public static final EntityType EL_THOR_THUNDER = WyRegistry.registerEntityType("el_thor_thunder", ElThorThunder::new);
-	public static final EntityType SANGO = WyRegistry.registerEntityType("sango", Sango::new);
-	public static final EntityType RAIGO = WyRegistry.registerEntityType("raigo", Raigo::new);
-	public static final EntityType VOLT_VARI_5_MILLION = WyRegistry.registerEntityType("volt_vari_5_million", VoltVari5Million::new);
-	public static final EntityType VOLT_VARI_20_MILLION = WyRegistry.registerEntityType("volt_vari_20_million", VoltVari20Million::new);
-	public static final EntityType VOLT_VARI_60_MILLION = WyRegistry.registerEntityType("volt_vari_60_million", VoltVari60Million::new);
-	public static final EntityType VOLT_VARI_200_MILLION = WyRegistry.registerEntityType("volt_vari_200_million", VoltVari200Million::new);
+	public static final EntityType SANGO = WyRegistry.registerEntityType("sango", SangoProjectile::new, 0.5F, 0.5F);
+	public static final EntityType RAIGO = WyRegistry.registerEntityType("raigo", RaigoProjectile::new, 2, 2);
+	public static final EntityType VOLT_VARI_5_MILLION = WyRegistry.registerEntityType("volt_vari_5_million", VoltVari5MillionProjectile::new, 0.5F, 0.5F);
+	public static final EntityType VOLT_VARI_20_MILLION = WyRegistry.registerEntityType("volt_vari_20_million", VoltVari20MillionProjectile::new, 0.5F, 0.5F);
+	public static final EntityType VOLT_VARI_60_MILLION = WyRegistry.registerEntityType("volt_vari_60_million", VoltVari60MillionProjectile::new, 0.5F, 0.5F);
+	public static final EntityType VOLT_VARI_200_MILLION = WyRegistry.registerEntityType("volt_vari_200_million", VoltVari200MillionProjectile::new, 1, 1);
 
+	private static final AbilityProjectileRenderer.Factory SANGO_FACTORY = new AbilityProjectileRenderer.Factory(new CubeModel()).setScale(0);
+	private static final AbilityProjectileRenderer.Factory RAIGO_FACTORY = new AbilityProjectileRenderer.Factory(new SphereModel()).setColor("#5D8AA8").setScale(50);
+	private static final AbilityProjectileRenderer.Factory VOLT_VARI_5_MILLION_FACTORY = new AbilityProjectileRenderer.Factory(new SphereModel()).setColor("#92C1E5").setScale(1);
+	private static final AbilityProjectileRenderer.Factory VOLT_VARI_20_MILLION_FACTORY = new AbilityProjectileRenderer.Factory(new SphereModel()).setColor("#7CB9E8").setScale(3);
+	private static final AbilityProjectileRenderer.Factory VOLT_VARI_60_MILLION_FACTORY = new AbilityProjectileRenderer.Factory(new SphereModel()).setColor("#6BB0E5").setScale(5);
+	private static final AbilityProjectileRenderer.Factory VOLT_VARI_200_MILLION_FACTORY = new AbilityProjectileRenderer.Factory(new SphereModel()).setColor("#3170A0").setScale(7);
+	
 	static
 	{
-		projectiles.put(ModExtraAttributes.EL_THOR_THUNDER, new Data(EL_THOR_THUNDER, ElThorThunder.class));
-		projectiles.put(ModAttributes.SANGO, new Data(SANGO, Sango.class));
-		projectiles.put(ModAttributes.RAIGO, new Data(RAIGO, Raigo.class));
-		projectiles.put(ModExtraAttributes.VOLT_VARI_5_MILLION, new Data(VOLT_VARI_5_MILLION, VoltVari5Million.class));
-		projectiles.put(ModExtraAttributes.VOLT_VARI_20_MILLION, new Data(VOLT_VARI_20_MILLION, VoltVari20Million.class));
-		projectiles.put(ModExtraAttributes.VOLT_VARI_60_MILLION, new Data(VOLT_VARI_60_MILLION, VoltVari60Million.class));
-		projectiles.put(ModExtraAttributes.VOLT_VARI_200_MILLION, new Data(VOLT_VARI_200_MILLION, VoltVari200Million.class));
-	}
-	
-	public static class ElThorThunder extends AbilityProjectileEntity
-	{
-		public ElThorThunder(World world)
-		{super(EL_THOR_THUNDER, world);}
-		
-		public ElThorThunder(EntityType type, World world)
-		{super(type, world);}
-		
-		public ElThorThunder(World world, double x, double y, double z)
-		{super(EL_THOR_THUNDER, world, x, y, z);}
-		
-		public ElThorThunder(World world, LivingEntity player, AbilityAttribute attr) 
-		{		
-			super(EL_THOR_THUNDER, world, player, attr);		
-		}
+		projectiles.add(new Data(SANGO, SangoProjectile.class, SANGO_FACTORY));
+		projectiles.add(new Data(RAIGO, RaigoProjectile.class, RAIGO_FACTORY));
+		projectiles.add(new Data(VOLT_VARI_5_MILLION, VoltVari5MillionProjectile.class, VOLT_VARI_5_MILLION_FACTORY));
+		projectiles.add(new Data(VOLT_VARI_20_MILLION, VoltVari20MillionProjectile.class, VOLT_VARI_20_MILLION_FACTORY));
+		projectiles.add(new Data(VOLT_VARI_60_MILLION, VoltVari60MillionProjectile.class, VOLT_VARI_60_MILLION_FACTORY));
+		projectiles.add(new Data(VOLT_VARI_200_MILLION, VoltVari200MillionProjectile.class, VOLT_VARI_200_MILLION_FACTORY));
 	}	
-	
-	public static class Sango extends AbilityProjectileEntity
-	{
-		public Sango(World world)
-		{super(SANGO, world);}
-		
-		public Sango(EntityType type, World world)
-		{super(type, world);}
-		
-		public Sango(World world, double x, double y, double z)
-		{super(SANGO, world, x, y, z);}
-		
-		public Sango(World world, LivingEntity player, AbilityAttribute attr) 
-		{		
-			super(SANGO, world, player, attr);		
-		}
-
-		@Override
-		public void tick()
-		{	
-			if(this.world.isRemote)
-			{
-				ResourceLocation particleToUse = this.ticksExisted % 2 == 0 ? ModResources.GORO2 : ModResources.GORO;
-			//	ModMain.proxy.spawnParticleEffect(new ProjectileTrailParticleEffect(particleToUse, 4, 2, 2), this.world, this.posX, this.posY, this.posZ, 0, 0, 0);		
-			}
-			
-			super.tick();
-		}
-	}	
-	
-	public static class Raigo extends AbilityProjectileEntity
-	{
-		public Raigo(World world)
-		{super(RAIGO, world);}
-		
-		public Raigo(EntityType type, World world)
-		{super(type, world);}
-		
-		public Raigo(World world, double x, double y, double z)
-		{super(RAIGO, world, x, y, z);}
-		
-		public Raigo(World world, LivingEntity player, AbilityAttribute attr) 
-		{		
-			super(RAIGO, world, player, attr);		
-		}
-		
-		@Override
-		public void tick()
-		{	
-			//if(this.world.isRemote)
-			//	ModMain.proxy.spawnParticleEffect(new ParticleEffectCommonExplosion(20), this.world, this.posX, this.posY, this.posZ, 0, 0, 0);
-			
-			super.tick();
-		}
-	}
-	
-	public static class VoltVari5Million extends AbilityProjectileEntity
-	{
-		public VoltVari5Million(World world)
-		{super(VOLT_VARI_5_MILLION, world);}
-		
-		public VoltVari5Million(EntityType type, World world)
-		{super(type, world);}
-		
-		public VoltVari5Million(World world, double x, double y, double z)
-		{super(VOLT_VARI_5_MILLION, world, x, y, z);}
-		
-		public VoltVari5Million(World world, LivingEntity player, AbilityAttribute attr) 
-		{		
-			super(VOLT_VARI_5_MILLION, world, player, attr);		
-		}
-		
-		@Override
-		public void tick()
-		{	
-			//if(this.world.isRemote)
-			//	ModMain.proxy.spawnParticleEffect(new ProjectileTrailParticleEffect(ModParticleTextures.GORO2, 10, 2, 2), this.world, this.posX, this.posY, this.posZ, 0, 0, 0);	
-			
-			super.tick();
-		}
-	}
-	
-	public static class VoltVari20Million extends AbilityProjectileEntity
-	{
-		public VoltVari20Million(World world)
-		{super(VOLT_VARI_20_MILLION, world);}
-		
-		public VoltVari20Million(EntityType type, World world)
-		{super(type, world);}
-		
-		public VoltVari20Million(World world, double x, double y, double z)
-		{super(VOLT_VARI_20_MILLION, world, x, y, z);}
-		
-		public VoltVari20Million(World world, LivingEntity player, AbilityAttribute attr) 
-		{		
-			super(VOLT_VARI_20_MILLION, world, player, attr);		
-		}
-		
-		@Override
-		public void tick()
-		{	
-			//if(this.world.isRemote)
-			//	ModMain.proxy.spawnParticleEffect(new ProjectileTrailParticleEffect(ModParticleTextures.GORO2, 10, 2, 2), this.world, this.posX, this.posY, this.posZ, 0, 0, 0);
-			
-			super.tick();
-		}
-	}
-	
-	public static class VoltVari60Million extends AbilityProjectileEntity
-	{
-		public VoltVari60Million(World world)
-		{super(VOLT_VARI_60_MILLION, world);}
-		
-		public VoltVari60Million(EntityType type, World world)
-		{super(type, world);}
-		
-		public VoltVari60Million(World world, double x, double y, double z)
-		{super(VOLT_VARI_60_MILLION, world, x, y, z);}
-		
-		public VoltVari60Million(World world, LivingEntity player, AbilityAttribute attr) 
-		{		
-			super(VOLT_VARI_60_MILLION, world, player, attr);		
-		}
-		
-		@Override
-		public void tick()
-		{	
-			//if(this.world.isRemote)
-			//	ModMain.proxy.spawnParticleEffect(new ProjectileTrailParticleEffect(ModParticleTextures.GORO2, 10, 2, 2), this.world, this.posX, this.posY, this.posZ, 0, 0, 0);
-			
-			super.tick();
-		}
-	}
-	
-	public static class VoltVari200Million extends AbilityProjectileEntity
-	{
-		public VoltVari200Million(World world)
-		{super(VOLT_VARI_200_MILLION, world);}
-		
-		public VoltVari200Million(EntityType type, World world)
-		{super(type, world);}
-		
-		public VoltVari200Million(World world, double x, double y, double z)
-		{super(VOLT_VARI_200_MILLION, world, x, y, z);}
-		
-		public VoltVari200Million(World world, LivingEntity player, AbilityAttribute attr) 
-		{		
-			super(VOLT_VARI_200_MILLION, world, player, attr);		
-		}
-		
-		@Override
-		public void tick()
-		{	
-			//if(this.world.isRemote)
-			//	ModMain.proxy.spawnParticleEffect(new ProjectileTrailParticleEffect(ModParticleTextures.GORO2, 10, 2, 2), this.world, this.posX, this.posY, this.posZ, 0, 0, 0);
-			
-			super.tick();
-		}
-	}
-	
 }

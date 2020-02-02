@@ -161,17 +161,6 @@ public class ModAttributes
 	public static AbilityAttribute WHITE_LAUNCHER = new AbilityAttribute("White Launcher").setAbilityCooldown(5).setAbilityCharges(20);
 	public static AbilityAttribute WHITE_SNAKE = new AbilityAttribute("White Snake").setAbilityCooldown(5).setProjectileTicks(120).setProjectileModel(ModelType.CUBE).setProjectileSpeed(5).setProjectileSize(0, 0, 0).setProjectileDamage(30).addEffects(EffectType.PROJECTILE, new EffectInstance(Effects.POISON, 120, 0));
 	public static AbilityAttribute WHITE_OUT = new AbilityAttribute("White Out").setAbilityCooldown(4).setProjectileModel(ModelType.CUBE).setProjectileSpeed(5).setProjectileSize(0, 0, 0).setProjectileDamage(5).addEffects(EffectType.PROJECTILE, new EffectInstance(Effects.SLOWNESS, 240, 1), new EffectInstance(Effects.MINING_FATIGUE, 240, 1), new EffectInstance(Effects.JUMP_BOOST, 240, -10));
-	
-	public static AbilityAttribute SANGO = new AbilityAttribute("Sango").setAbilityCooldown(10).setProjectileTicks(128).setProjectileModel(ModelType.CUBE).setProjectileSize(0, 0, 0).setProjectileColor("7CB9E8").setProjectileDamage(15).setAbilityRepeater();
-	public static AbilityAttribute KARI = new AbilityAttribute("Kari").setAbilityCharges(7 * 20).setAbilityCooldown(15).setAbilityExplosion(10, false, false);
-	public static AbilityAttribute RAIGO = new AbilityAttribute("Raigo").setAbilityCooldown(45).setProjectileTicks(256).setProjectileModel(ModelType.SPHERE).setProjectileColor("5D8AA8").setProjectileSize(50, 50, 50).setProjectileDamage(120).setProjectileExplosion(30, false).setProjectileCollisionSizes(2);
-	public static AbilityAttribute VOLT_VARI = new AbilityAttribute("Volt Vari").setAbilityCooldown(3).setAbilityCharges(10 * 20, true);
-	public static AbilityAttribute EL_THOR = new AbilityAttribute("El Thor").setAbilityCooldown(8).setAbilityCharges(6 * 20);
-	public static AbilityAttribute SPARK_STEP = new AbilityAttribute("Spark Step").setAbilityCooldown(3);
-
-	public static AbilityAttribute NORO_NORO_BEAM = new AbilityAttribute("Noro Noro Beam").setAbilityCooldown(5).setProjectileTicks(10).setProjectileModel(ModelType.NORO_NORO_BEAM).setProjectileTexture("noronorobeam").setProjectileSize(5, 5, 5).setProjectileSpeed(1.6F).setProjectileCollisionSizes(1);
-	public static AbilityAttribute KYUBI_RUSH = new AbilityAttribute("Kyubi Rush").setAbilityCooldown(7).setAbilityPassive().setAbilityPunch();
-	public static AbilityAttribute NORO_NORO_BEAM_SWORD = new AbilityAttribute("Noro Noro Beam Sword").setAbilityPassive(true);
 
 	public static AbilityAttribute AIR_DOOR = new AbilityAttribute("Air Door").setAbilityPassive(true).setAbilityCooldown(40);
 	public static AbilityAttribute DOOR = new AbilityAttribute("Door").setAbilityCooldown(8);

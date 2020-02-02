@@ -33,8 +33,8 @@ import xyz.pixelatedw.mineminenomi.data.entity.haki.IHakiData;
 
 public class AbilityProjectileEntity extends ThrowableEntity
 {
-	private int life = 60;
-	private int maxLife = 60;
+	private int life = 64;
+	private int maxLife = 64;
 	private double collisionSize = 1;
 	private float damage = 1;
 	private boolean isPhysical = false;

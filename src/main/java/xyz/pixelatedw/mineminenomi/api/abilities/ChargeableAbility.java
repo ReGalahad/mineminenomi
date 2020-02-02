@@ -58,6 +58,11 @@ public class ChargeableAbility extends Ability
 	{
 		this.setState(State.CHARGING);
 	}
+	
+	public int getMaxChargeTime()
+	{
+		return this.maxChargeTime;
+	}
 
 	
 	

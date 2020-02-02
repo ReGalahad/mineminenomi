@@ -12,6 +12,12 @@ import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.abilities.bane.SpringDeathKnockAbility;
 import xyz.pixelatedw.mineminenomi.abilities.bane.SpringHopperAbility;
 import xyz.pixelatedw.mineminenomi.abilities.bane.SpringSnipeAbility;
+import xyz.pixelatedw.mineminenomi.abilities.goro.ElThorAbility;
+import xyz.pixelatedw.mineminenomi.abilities.goro.KariAbility;
+import xyz.pixelatedw.mineminenomi.abilities.goro.RaigoAbility;
+import xyz.pixelatedw.mineminenomi.abilities.goro.SangoAbility;
+import xyz.pixelatedw.mineminenomi.abilities.goro.SparkStepAbility;
+import xyz.pixelatedw.mineminenomi.abilities.goro.VoltVariAbility;
 import xyz.pixelatedw.mineminenomi.abilities.hie.IceAgeAbility;
 import xyz.pixelatedw.mineminenomi.abilities.hie.IceBallAbility;
 import xyz.pixelatedw.mineminenomi.abilities.hie.IceBlockPartisanAbility;
@@ -46,6 +52,7 @@ import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.debug.WyDebug;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.bane.BaneProjectiles;
+import xyz.pixelatedw.mineminenomi.entities.projectiles.goro.GoroProjectiles;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.hie.HieProjectiles;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.mera.MeraProjectiles;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.noro.NoroProjectiles;
@@ -97,7 +104,7 @@ public class ModDevilFruits
 	public static final AkumaNoMiItem BOMU_BOMU_NO_MI = new AkumaNoMiItem("Bomu Bomu no Mi", EnumFruitType.PARAMECIA);
 	public static final AkumaNoMiItem NIKYU_NIKYU_NO_MI = new AkumaNoMiItem("Nikyu Nikyu no Mi", EnumFruitType.PARAMECIA);
 	public static final AkumaNoMiItem MOKU_MOKU_NO_MI = new AkumaNoMiItem("Moku Moku no Mi", EnumFruitType.LOGIA);
-	public static final AkumaNoMiItem GORO_GORO_NO_MI = new AkumaNoMiItem("Goro Goro no Mi", EnumFruitType.LOGIA);
+	public static final AkumaNoMiItem GORO_GORO_NO_MI = new AkumaNoMiItem("Goro Goro no Mi", EnumFruitType.LOGIA, ElThorAbility.INSTANCE, VoltVariAbility.INSTANCE, KariAbility.INSTANCE, SangoAbility.INSTANCE, RaigoAbility.INSTANCE, SparkStepAbility.INSTANCE);
 	public static final AkumaNoMiItem NORO_NORO_NO_MI = new AkumaNoMiItem("Noro Noro no Mi", EnumFruitType.PARAMECIA, NoroNoroBeamAbility.INSTANCE, NoroNoroBeamSwordAbility.INSTANCE, KyubiRushAbility.INSTANCE);
 	public static final AkumaNoMiItem OPE_OPE_NO_MI = new AkumaNoMiItem("Ope Ope no Mi", EnumFruitType.PARAMECIA, RoomAbility.INSTANCE, CounterShockAbility.INSTANCE, MesAbility.INSTANCE, ShamblesAbility.INSTANCE, TaktAbility.INSTANCE, InjectionShotAbility.INSTANCE, GammaKnifeAbility.INSTANCE);
 	public static final AkumaNoMiItem SUKE_SUKE_NO_MI = new AkumaNoMiItem("Suke Suke no Mi", EnumFruitType.PARAMECIA, SkattingAbility.INSTANCE, ShishaNoTeAbility.INSTANCE, SukePunchAbility.INSTANCE);
@@ -110,8 +117,8 @@ public class ModDevilFruits
 	public static final List[] ALL_PROJECTILES = new List[] 
 		{
 			// Devil Fruit projectiles
-			MeraProjectiles.projectiles, HieProjectiles.projectiles, BaneProjectiles.projectiles, PikaProjectiles.projectiles, NoroProjectiles.projectiles, SukeProjectiles.projectiles, OpeProjectiles.projectiles/*,
-			GoroProjectiles.projectiles, MokuProjectiles.projectiles, NikyuProjectiles.projectiles, BomuProjectiles.projectiles, GuraProjectiles.projectiles, KageProjectiles.projectiles, SunaProjectiles.projectiles,
+			MeraProjectiles.projectiles, HieProjectiles.projectiles, BaneProjectiles.projectiles, PikaProjectiles.projectiles, NoroProjectiles.projectiles, SukeProjectiles.projectiles, OpeProjectiles.projectiles,
+			GoroProjectiles.projectiles/*, MokuProjectiles.projectiles, NikyuProjectiles.projectiles, BomuProjectiles.projectiles, GuraProjectiles.projectiles, KageProjectiles.projectiles, SunaProjectiles.projectiles,
 			MaguProjectiles.projectiles, DoruProjectiles.projectiles, DokuProjectiles.projectiles, GasuProjectiles.projectiles, YukiProjectiles.projectiles, ItoProjectiles.projectiles, BariProjectiles.projectiles,
 			HoroProjectiles.projectiles, YamiProjectiles.projectiles, GoeProjectiles.projectiles, GomuProjectiles.projectiles, JuryoProjectiles.projectiles, ToriPhoenixProjectiles.projectiles,
 			BakuProjectiles.projectiles, SupaProjectiles.projectiles, MeroProjectiles.projectiles, OriProjectiles.projectiles, UshiGiraffeProjectiles.projectiles, ZouProjectiles.projectiles,

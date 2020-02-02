@@ -18,24 +18,24 @@ public class DaiEnkaiParticleEffect extends ParticleEffect
 			double offsetX = WyMathHelper.randomWithRange(-2, 2) + WyMathHelper.randomDouble();
 			double offsetY = WyMathHelper.randomWithRange(-2, 2) + WyMathHelper.randomDouble();
 			double offsetZ = WyMathHelper.randomWithRange(-2, 2) + WyMathHelper.randomDouble();
-			
-	        motionX = WyMathHelper.randomWithRange(-1, 1) + WyMathHelper.randomDouble();
-	        motionY = WyMathHelper.randomWithRange(-1, 1) + WyMathHelper.randomDouble();
-	        motionZ = WyMathHelper.randomWithRange(-1, 1) + WyMathHelper.randomDouble();
-	        
-            double middlePoint = 0.5D / (5 / 0.5);
-            middlePoint *= (WyMathHelper.randomDouble() * 2) + 0.3F;
-	        
-	        motionX *= middlePoint / 2;
-	        motionY *= middlePoint / 2;
-	        motionZ *= middlePoint / 2;
-			
+
+			motionX = WyMathHelper.randomWithRange(-1, 1) + WyMathHelper.randomDouble();
+			motionY = WyMathHelper.randomWithRange(-1, 1) + WyMathHelper.randomDouble();
+			motionZ = WyMathHelper.randomWithRange(-1, 1) + WyMathHelper.randomDouble();
+
+			double middlePoint = 0.5D / (5 / 0.5);
+			middlePoint *= (WyMathHelper.randomDouble() * 2) + 0.3F;
+
+			motionX *= middlePoint / 2;
+			motionY *= middlePoint / 2;
+			motionZ *= middlePoint / 2;
+
 			GenericParticleData data = new GenericParticleData();
 			data.setTexture(ModResources.MERA);
 			data.setLife(20);
 			data.setSize(1.3F);
 			data.setMotion(motionX, motionY + 0.05, motionZ);
-			((ServerWorld) world).spawnParticle(data, posX + offsetX, posY + 1.5 + offsetY, posZ + offsetZ, 1, 0, 0, 0, 0.0D);	
+			((ServerWorld) world).spawnParticle(data, posX + offsetX, posY + 1.5 + offsetY, posZ + offsetZ, 1, 0, 0, 0, 0.0D);
 		}
 	}
 
