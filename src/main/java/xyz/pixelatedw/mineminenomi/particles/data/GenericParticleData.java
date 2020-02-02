@@ -7,6 +7,7 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ParticleType;
 import net.minecraft.util.ResourceLocation;
+import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.init.ModParticleTypes;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 
@@ -30,14 +31,16 @@ public class GenericParticleData implements IParticleData
 			double motionX = stringReader.readDouble();
 			double motionY = stringReader.readDouble();
 			double motionZ = stringReader.readDouble();
-					
+
+			ResourceLocation texture = new ResourceLocation(Env.PROJECT_ID, "textures/particles/" + stringReader.readString() + ".png");
+			
 			GenericParticleData data = new GenericParticleData();
 			data.setColor(red, green, blue, alpha);
 			data.setMotion(motionX, motionY, motionZ);
 			data.setSize(size);
 			data.setLife(life);
+			data.setTexture(texture);
 			if(hasRotation) data.setHasRotation();
-			//data.setTexture(texture);
 			
 			return data;
 		}
@@ -57,7 +60,7 @@ public class GenericParticleData implements IParticleData
 			double motionY = packetBuffer.readDouble();
 			double motionZ = packetBuffer.readDouble();
 			
-			ResourceLocation texture = packetBuffer.readResourceLocation();
+			ResourceLocation texture = new ResourceLocation(Env.PROJECT_ID, "textures/particles/" + packetBuffer.readString() + ".png");
 			
 			GenericParticleData data = new GenericParticleData();
 			data.setColor(red, green, blue, alpha);
@@ -102,7 +105,7 @@ public class GenericParticleData implements IParticleData
 		buffer.writeDouble(this.motionY);
 		buffer.writeDouble(this.motionZ);
 		
-		buffer.writeResourceLocation(texture);
+		buffer.writeString(this.texture.getPath().replaceAll(".*/", "").replace(".png", ""));
 	}
 
 	public void setMotion(double motionX, double motionY, double motionZ)

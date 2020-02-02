@@ -62,15 +62,16 @@ public class RaigoProjectile extends AbilityProjectileEntity
 			{
 				ResourceLocation particleToUse = this.ticksExisted % 2 == 0 ? ModResources.GORO2 : ModResources.GORO;
 				
-				double offsetX = WyMathHelper.randomDouble();
+				double offsetX = WyMathHelper.randomDouble() * 5;
 				double offsetY = WyMathHelper.randomDouble();
-				double offsetZ = WyMathHelper.randomDouble();
+				double offsetZ = WyMathHelper.randomDouble() * 5;
 
 				GenericParticleData data = new GenericParticleData();
 				data.setTexture(particleToUse);
 				data.setLife(20);
-				data.setSize(3);
-				((ServerWorld) this.world).spawnParticle(data, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ, 1, 0, 0, 0, 0.0D);
+				data.setSize(7);
+				
+				WyHelper.spawnParticles(data, (ServerWorld) this.world, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ);
 			}
 		}
 	}

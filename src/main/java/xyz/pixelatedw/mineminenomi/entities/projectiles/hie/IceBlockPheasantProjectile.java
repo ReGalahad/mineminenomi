@@ -6,6 +6,7 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.projectiles.AbilityProjectileEntity;
 import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
@@ -58,7 +59,7 @@ public class IceBlockPheasantProjectile  extends AbilityProjectileEntity
 				data.setTexture(ModResources.HIE);
 				data.setLife(8);
 				data.setSize(2.0F);
-				((ServerWorld) this.world).spawnParticle(data, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ, 1, 0, 0, 0, 0.0D);
+				WyHelper.spawnParticles(data, (ServerWorld) this.world, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ);
 			}
 		}
 	}

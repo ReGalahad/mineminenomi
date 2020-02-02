@@ -69,7 +69,7 @@ public class VoltVari200MillionProjectile extends AbilityProjectileEntity
 				data.setTexture(particleToUse);
 				data.setLife(5);
 				data.setSize(2);
-				((ServerWorld) this.world).spawnParticle(data, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ, 1, 0, 0, 0, 0.0D);
+				WyHelper.spawnParticles(data, (ServerWorld) this.world, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ);
 			}
 		}
 	}

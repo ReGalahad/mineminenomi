@@ -2,6 +2,7 @@ package xyz.pixelatedw.mineminenomi.particles.effects.mera;
 
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.data.GenericParticleData;
@@ -35,7 +36,7 @@ public class DaiEnkaiParticleEffect extends ParticleEffect
 			data.setLife(20);
 			data.setSize(1.3F);
 			data.setMotion(motionX, motionY + 0.05, motionZ);
-			((ServerWorld) world).spawnParticle(data, posX + offsetX, posY + 1.5 + offsetY, posZ + offsetZ, 1, 0, 0, 0, 0.0D);
+			WyHelper.spawnParticles(data, (ServerWorld) world, posX + offsetX, posY + 1.5 + offsetY, posZ + offsetZ);
 		}
 	}
 

@@ -2,6 +2,7 @@ package xyz.pixelatedw.mineminenomi.particles.effects.goro;
 
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.data.GenericParticleData;
@@ -23,7 +24,7 @@ public class KariParticleEffect extends ParticleEffect
 			data.setTexture(ModResources.GORO2);
 			data.setLife(10);
 			data.setSize(7);
-			((ServerWorld) world).spawnParticle(data, posX + offsetX, posY + offsetY, posZ + offsetZ, 1, 0, 0, 0, 0.0D);
+			WyHelper.spawnParticles(data, (ServerWorld) world, posX + offsetX, posY + offsetY, posZ + offsetZ);
 		}
 	}
 	

@@ -5,6 +5,7 @@ import java.util.Random;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.data.GenericParticleData;
@@ -39,7 +40,7 @@ public class IceAgeParticleEffect extends ParticleEffect
 				data.setLife(20);
 				data.setSize(2F);
 				data.setMotion(motionX, motionY, motionZ);
-				((ServerWorld) world).spawnParticle(data, posX + (x * 1.25) + WyMathHelper.randomDouble(), posY + y, posZ + (z * 1.25) + WyMathHelper.randomDouble(), 1, 0, 0, 0, 0.0D);	
+				WyHelper.spawnParticles(data, (ServerWorld) world, posX + (x * 1.25) + WyMathHelper.randomDouble(), posY + y, posZ + (z * 1.25) + WyMathHelper.randomDouble());
 			}
 		}
 	}

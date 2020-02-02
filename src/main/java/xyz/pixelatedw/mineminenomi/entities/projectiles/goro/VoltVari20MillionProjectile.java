@@ -5,6 +5,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.abilities.projectiles.AbilityProjectileEntity;
 import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
@@ -53,7 +54,7 @@ public class VoltVari20MillionProjectile extends AbilityProjectileEntity
 				data.setTexture(particleToUse);
 				data.setLife(5);
 				data.setSize(2);
-				((ServerWorld) this.world).spawnParticle(data, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ, 1, 0, 0, 0, 0.0D);
+				WyHelper.spawnParticles(data, (ServerWorld) this.world, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ);
 			}
 		}
 	}

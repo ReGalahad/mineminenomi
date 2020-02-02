@@ -82,13 +82,17 @@ public class AbilityProjectileEntity extends ThrowableEntity
 	public void tick()
 	{
 		super.tick();
-		if (this.life <= 0)
+
+		if(!this.world.isRemote)
 		{
-			this.life = maxLife;
-			this.remove();
+			if (this.life <= 0)
+			{
+				this.life = this.maxLife;
+				this.remove();
+			}
+			else
+				this.life--;
 		}
-		else
-			this.life--;
 
 		Vec3d vec31 = new Vec3d(this.posX, this.posY, this.posZ);
 		Vec3d vec3 = new Vec3d(this.posX + this.getMotion().x, this.posY + this.getMotion().y, this.posZ + this.getMotion().z);

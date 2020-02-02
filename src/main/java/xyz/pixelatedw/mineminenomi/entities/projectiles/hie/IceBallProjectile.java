@@ -67,7 +67,7 @@ public class IceBallProjectile extends AbilityProjectileEntity
 				data.setTexture(ModResources.HIE);
 				data.setLife(3);
 				data.setSize(1.5F);
-				((ServerWorld) this.world).spawnParticle(data, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ, 1, 0, 0, 0, 0.0D);
+				WyHelper.spawnParticles(data, (ServerWorld) this.world, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ);
 			}
 		}
 	}

@@ -16,6 +16,10 @@ public class RaigoAbility extends Ability
 	
 	private static final ParticleEffect PARTICLES = new RaigoParticleEffect();
 	
+	private double posX;
+	private double posY;
+	private double posZ;
+	
 	public RaigoAbility()
 	{
 		super("Raigo", Category.DEVIL_FRUIT);
@@ -36,6 +40,10 @@ public class RaigoAbility extends Ability
 			double y = mop.getHitVec().y;
 			double z = mop.getHitVec().z;
 			
+			this.posX = x;
+			this.posY = y;
+			this.posZ = z;
+			
 			AbilityProjectileEntity proj = new RaigoProjectile(player.world, player);
 			proj.setLocationAndAngles(x, (y + 90), z, 0, 0);
 			proj.setMotion(0, -1.4, 0);
@@ -47,7 +55,7 @@ public class RaigoAbility extends Ability
 	
 	private void duringCooldownEvent(PlayerEntity player, int cooldown)
 	{
-		if(cooldown > 20 && cooldown % 20 == 0)
-			PARTICLES.spawn(player.world, player.posX, player.posY, player.posZ, 0, 0, 0);
+		if(cooldown > (35 * 20) && cooldown % 10 == 0)
+			PARTICLES.spawn(player.world, this.posX, this.posY + 40, this.posZ, 0, 0, 0);
 	}
 }

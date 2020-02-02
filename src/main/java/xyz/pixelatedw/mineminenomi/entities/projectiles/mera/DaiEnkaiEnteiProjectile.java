@@ -64,7 +64,7 @@ public class DaiEnkaiEnteiProjectile extends AbilityProjectileEntity
 				data.setTexture(ModResources.MERA);
 				data.setLife(6);
 				data.setSize(1.3F);
-				((ServerWorld) this.world).spawnParticle(data, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ, 1, 0, 0, 0, 0.0D);
+				WyHelper.spawnParticles(data, (ServerWorld) this.world, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ);
 			}
 
 			for (int i = 0; i < 2; i++)
@@ -77,7 +77,7 @@ public class DaiEnkaiEnteiProjectile extends AbilityProjectileEntity
 				data.setTexture(ModResources.MOKU);
 				data.setLife(4);
 				data.setSize(1.2F);
-				((ServerWorld) this.world).spawnParticle(data, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ, 1, 0, 0, 0, 0.0D);
+				WyHelper.spawnParticles(data, (ServerWorld) this.world, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ);
 			}
 		}
 	}

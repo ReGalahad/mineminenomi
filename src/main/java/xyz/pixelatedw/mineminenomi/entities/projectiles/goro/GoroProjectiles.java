@@ -17,7 +17,7 @@ public class GoroProjectiles
 	public static List<AbilityProjectileEntity.Data> projectiles = new ArrayList<AbilityProjectileEntity.Data>();
 	
 	public static final EntityType SANGO = WyRegistry.registerEntityType("sango", SangoProjectile::new, 0.5F, 0.5F);
-	public static final EntityType RAIGO = WyRegistry.registerEntityType("raigo", RaigoProjectile::new, 2, 2);
+	public static final EntityType RAIGO = WyRegistry.registerEntityType("raigo", RaigoProjectile::new, 5, 5);
 	public static final EntityType VOLT_VARI_5_MILLION = WyRegistry.registerEntityType("volt_vari_5_million", VoltVari5MillionProjectile::new, 0.5F, 0.5F);
 	public static final EntityType VOLT_VARI_20_MILLION = WyRegistry.registerEntityType("volt_vari_20_million", VoltVari20MillionProjectile::new, 0.5F, 0.5F);
 	public static final EntityType VOLT_VARI_60_MILLION = WyRegistry.registerEntityType("volt_vari_60_million", VoltVari60MillionProjectile::new, 0.5F, 0.5F);

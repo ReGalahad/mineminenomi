@@ -4,6 +4,7 @@ import java.util.Random;
 
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.data.GenericParticleData;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
@@ -25,7 +26,7 @@ public class YataNoKagamiParticleEffect extends ParticleEffect
 			data.setLife(20);
 			data.setSize(4F);
 			data.setHasRotation();
-			((ServerWorld) world).spawnParticle(data, posX + offsetX, posY + 0.5 + offsetY, posZ + offsetZ, 1, 0, 0, 0, 0.0D);	
+			WyHelper.spawnParticles(data, (ServerWorld) world, posX + offsetX, posY + 0.5 + offsetY, posZ + offsetZ);	
 		}
 	}
 

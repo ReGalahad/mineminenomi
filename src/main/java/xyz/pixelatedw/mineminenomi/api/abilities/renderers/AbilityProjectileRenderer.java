@@ -41,10 +41,10 @@ public class AbilityProjectileRenderer extends EntityRenderer<AbilityProjectileE
 
 	public void setColor(double red, double green, double blue, double alpha)
 	{
-		this.red = red;
-		this.green = green;
-		this.blue = blue;
-		this.alpha = alpha;
+		this.red = red / 255;
+		this.green = green / 255;
+		this.blue = blue / 255;
+		this.alpha = alpha / 255;
 	}
 
 	public void setScale(double scaleX, double scaleY, double scaleZ)
@@ -72,7 +72,6 @@ public class AbilityProjectileRenderer extends EntityRenderer<AbilityProjectileE
 				GlStateManager.disableTexture();
 			GlStateManager.enableBlend();
 			GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);
-			GlStateManager.enableRescaleNormal();
 
 			GlStateManager.rotatef(entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * partialTicks - 180.0F, 0.0F, 1.0F, 0.0F);
 			GlStateManager.rotatef(entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * partialTicks, 1.0F, 0.0F, 0.0F);
@@ -89,7 +88,6 @@ public class AbilityProjectileRenderer extends EntityRenderer<AbilityProjectileE
 			if (this.model != null)
 				this.model.render(entity, (float) x, (float) y, (float) z, 0.0F, 0.0F, 0.0625F);
 
-			GlStateManager.disableRescaleNormal();
 			GlStateManager.disableBlend();
 			if (this.texture == null)
 				GlStateManager.enableTexture();
@@ -108,7 +106,7 @@ public class AbilityProjectileRenderer extends EntityRenderer<AbilityProjectileE
 		private EntityModel model = new CubeModel();
 		private double scaleX = 1, scaleY = 1, scaleZ = 1;
 		private double offsetX = 0, offsetY = 0, offsetZ = 0;
-		private double red = 1, green = 1, blue = 1, alpha = 1;
+		private double red = 255, green = 255, blue = 255, alpha = 255;
 		private ResourceLocation texture;
 
 		public Factory(EntityModel model)

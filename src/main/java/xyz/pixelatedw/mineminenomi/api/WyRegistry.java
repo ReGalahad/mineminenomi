@@ -49,7 +49,9 @@ public class WyRegistry
 	
 	public static ParticleType registerGenericParticleType(String id, IDeserializer<?> deserializer)
 	{
-		return new ParticleType<>(true, deserializer).setRegistryName(Env.PROJECT_ID, id);
+		ParticleType type = new ParticleType<>(true, deserializer);
+		type.setRegistryName(Env.PROJECT_ID, id);
+		return type;
 	}
 	
 	public static void registerLootTable(Object obj, IJSONLootTable json)

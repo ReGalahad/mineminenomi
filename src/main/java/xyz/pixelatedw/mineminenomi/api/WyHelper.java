@@ -28,6 +28,10 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.network.IPacket;
+import net.minecraft.network.play.server.SSpawnParticlePacket;
+import net.minecraft.particles.IParticleData;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -36,6 +40,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.registries.ForgeRegistries;
 import xyz.pixelatedw.mineminenomi.api.abilities.extra.ExplosionAbility;
 import xyz.pixelatedw.mineminenomi.api.math.ISphere;
@@ -140,6 +145,21 @@ public class WyHelper
 		return map;
 	}
 
+	public static void spawnParticles(IParticleData data, ServerWorld world, double posX, double posY, double posZ)
+	{
+		IPacket<?> ipacket = new SSpawnParticlePacket(data, true, (float) posX, (float) posY, (float) posZ, 0, 0, 0, 0, 1);
+
+		for (int j = 0; j < world.getPlayers().size(); ++j)
+		{
+			ServerPlayerEntity player = world.getPlayers().get(j);
+			BlockPos blockpos = new BlockPos(player.posX, player.posY, player.posZ);
+			if (blockpos.withinDistance(new Vec3d(posX, posY, posZ), 512))
+			{
+				player.connection.sendPacket(ipacket);
+			}
+		}
+	}
+	
 	public static double[] propulsion(LivingEntity entity, double extraVelX, double extraVelZ)
 	{
 		double mX = -MathHelper.sin(entity.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(entity.rotationPitch / 180.0F * (float)Math.PI) * 0.4;

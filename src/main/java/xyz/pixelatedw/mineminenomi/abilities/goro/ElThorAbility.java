@@ -40,7 +40,7 @@ public class ElThorAbility extends ChargeableAbility
 			double j = mop.getHitVec().y;
 			double k = mop.getHitVec().z;
 			
-			if(chargeTimer % 8 == 0)
+			if(chargeTimer % 5 == 0)
 				PARTICLES.spawn(player.world, i, j, k, 0, 0, 0);
 		}
 	}
