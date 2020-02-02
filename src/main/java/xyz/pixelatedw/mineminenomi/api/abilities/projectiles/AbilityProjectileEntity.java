@@ -205,10 +205,10 @@ public class AbilityProjectileEntity extends ThrowableEntity
 	{
 		return this.maxLife;
 	}
-	
-	public void setMaxCooldown(int cooldown)
+
+	public void setMaxLife(int life)
 	{
-		this.maxLife = cooldown * 20;
+		this.maxLife = life;
 		this.life = this.maxLife;
 	}
 	

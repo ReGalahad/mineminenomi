@@ -27,6 +27,7 @@ public class SpringDeathKnockProjectile extends AbilityProjectileEntity
 		super(BaneProjectiles.SPRING_DEATH_KNOCK, world, player);
 
 		this.setDamage(20);
+		this.setMaxLife(5);
 		this.setPhysical();
 	}
 }
