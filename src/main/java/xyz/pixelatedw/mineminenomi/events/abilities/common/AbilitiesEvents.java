@@ -2,6 +2,7 @@ package xyz.pixelatedw.mineminenomi.events.abilities.common;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -54,13 +55,14 @@ public class AbilitiesEvents
 			PlayerEntity player = (PlayerEntity) event.getSource().getTrueSource();
 			IAbilityData props = AbilityDataCapability.get(player);
 			LivingEntity target = event.getEntityLiving();
-
+			ItemStack heldItem = player.getHeldItemMainhand();
+			
 			for (Ability ability : props.getHotbarAbilities())
 			{
 				if(ability == null)
 					continue;
 
-				if(ability instanceof PunchAbility && ability.isContinuous())
+				if(ability instanceof PunchAbility && ability.isContinuous() && heldItem.isEmpty())
 				{
 					float damage = ((PunchAbility) props.getAbility(ability)).hitEntity(player, target);
 					event.setAmount(damage);
