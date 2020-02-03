@@ -44,7 +44,7 @@ public class InjectionShotAbility extends Ability
 		}
 
 		double[] speed = WyHelper.propulsion(player, 3, 3);
-		player.setMotion(speed[0], 0.2, speed[1]);
+		player.setMotion(speed[0], 0.2, speed[2]);
 		((ServerPlayerEntity)player).connection.sendPacket(new SEntityVelocityPacket(player));
 		
 		return true;

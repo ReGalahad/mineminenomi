@@ -162,18 +162,20 @@ public class WyHelper
 	
 	public static double[] propulsion(LivingEntity entity, double extraVelX, double extraVelZ)
 	{
-		double mX = -MathHelper.sin(entity.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(entity.rotationPitch / 180.0F * (float)Math.PI) * 0.4;
-		double mZ = MathHelper.cos(entity.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(entity.rotationPitch / 180.0F * (float)Math.PI) * 0.4;
-			
-		double f2 = MathHelper.sqrt(mX * mX + entity.getMotion().y * entity.getMotion().y + mZ * mZ);
-		mX /= f2;
-		mZ /= f2;
-		mX += entity.world.rand.nextGaussian() * 0.007499999832361937D * 1.0;
-		mZ += entity.world.rand.nextGaussian() * 0.007499999832361937D * 1.0;
+		return propulsion(entity, extraVelX, 0, extraVelZ);
+	}
+	
+	public static double[] propulsion(LivingEntity entity, double extraVelX, double extraVelY, double extraVelZ)
+	{
+		double mX = entity.getLook(0).x;
+		double mZ = entity.getLook(0).z;
+		double mY = entity.getLook(0).y;		 
+
 		mX *= extraVelX;
+		mY *= extraVelY;
 		mZ *= extraVelZ;
 		
-		return new double[] {mX, mZ};
+		return new double[] {mX, mY, mZ};
 	}
 	
 	public static boolean isNullOrEmpty(String str)

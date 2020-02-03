@@ -29,8 +29,8 @@ public class SpringSnipeAbility  extends ChargeableAbility
 	
 	private boolean onEndChargingEvent(PlayerEntity player)
 	{
-		double[] speed = WyHelper.propulsion(player, 12.5, 12.5);
-		player.setMotion(speed[0], 0.2, speed[1]);
+		double[] speed = WyHelper.propulsion(player, 12, 3, 12);
+		player.setMotion(speed[0], 0.5 + speed[1], speed[2]);
 		((ServerPlayerEntity)player).connection.sendPacket(new SEntityVelocityPacket(player));
 		return true;
 	}
