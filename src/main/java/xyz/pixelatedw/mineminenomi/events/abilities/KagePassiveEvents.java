@@ -46,7 +46,7 @@ public class KagePassiveEvents
 		LivingEntity attacked = event.getEntityLiving();
 		IEntityStats statPropz = EntityStatsCapability.get(attacked);
 
-		if (!devilFruitProps.getDevilFruit().equalsIgnoreCase("kagekage"))
+		if (!devilFruitProps.getDevilFruit().equalsIgnoreCase("kage_kage"))
 			return;
 
 		EntityDoppelman doppelman = WyHelper.getEntitiesNear(attacker.getPosition(), attacker.world, 20, EntityDoppelman.class).stream().findFirst().orElse(null);

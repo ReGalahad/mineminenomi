@@ -24,7 +24,7 @@ public class BanePassiveEvents
 		IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
 		IAbilityData abilityProps = AbilityDataCapability.get(player);
 		
-		if (!devilFruitProps.getDevilFruit().equals("banebane"))
+		if (!devilFruitProps.getDevilFruit().equals("bane_bane"))
 			return;
 		
 		player.fallDistance = 0;

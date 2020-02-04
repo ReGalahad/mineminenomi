@@ -24,7 +24,7 @@ public class GomuPassiveEvents
 		IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
 		IAbilityData abilityProps = AbilityDataCapability.get(player);
 		
-		if (!devilFruitProps.getDevilFruit().equals("gomugomu"))
+		if (!devilFruitProps.getDevilFruit().equals("gomu_gomu"))
 			return;
 		
 		player.fallDistance = 0;

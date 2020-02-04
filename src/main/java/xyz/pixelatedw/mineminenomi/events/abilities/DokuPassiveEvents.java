@@ -30,7 +30,7 @@ public class DokuPassiveEvents
 		IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
 		IAbilityData abilityProps = AbilityDataCapability.get(player);
 		
-		if (!devilFruitProps.getDevilFruit().equals("dokudoku"))
+		if (!devilFruitProps.getDevilFruit().equals("doku_doku"))
 			return;
 		
 		if (player.isPotionActive(Effects.POISON))
@@ -59,7 +59,7 @@ public class DokuPassiveEvents
 		LivingEntity attacked = event.getEntityLiving();
 		IEntityStats statPropz = EntityStatsCapability.get(attacked);
 
-		if (!devilFruitProps.getDevilFruit().equalsIgnoreCase("dokudoku"))
+		if (!devilFruitProps.getDevilFruit().equalsIgnoreCase("doku_doku"))
 			return;
 		
 		if(devilFruitProps.getZoanPoint().equalsIgnoreCase(ZoanInfoVenomDemon.FORM))

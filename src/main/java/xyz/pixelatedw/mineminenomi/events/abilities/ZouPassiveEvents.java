@@ -24,7 +24,7 @@ public class ZouPassiveEvents
 		IDevilFruit props = DevilFruitCapability.get(attacker);
 		LivingEntity attacked = event.getEntityLiving();
 
-		if (!props.getDevilFruit().equalsIgnoreCase("zouzou"))
+		if (!props.getDevilFruit().equalsIgnoreCase("zou_zou"))
 			return;
 
 		if (props.getZoanPoint().equalsIgnoreCase(ZoanInfoZouHeavy.FORM))

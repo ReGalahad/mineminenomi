@@ -31,7 +31,7 @@ public class SabiPassiveEvents
 		IEntityStats statProps = EntityStatsCapability.get(attacked);
 		IAbilityData abilityProps = AbilityDataCapability.get(attacked);
 
-		if (!devilFruitProps.getDevilFruit().equalsIgnoreCase("sabisabi"))
+		if (!devilFruitProps.getDevilFruit().equalsIgnoreCase("sabi_sabi"))
 			return;
 
 		if (attacker.getHeldItemMainhand() != null && ItemsHelper.isSword(attacker.getHeldItemMainhand()) && !attacker.world.isRemote)

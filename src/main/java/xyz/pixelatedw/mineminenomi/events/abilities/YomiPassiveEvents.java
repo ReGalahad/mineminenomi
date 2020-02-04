@@ -41,7 +41,7 @@ public class YomiPassiveEvents
 		IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
 		IAbilityData abilityProps = AbilityDataCapability.get(player);
 
-		if (!devilFruitProps.getDevilFruit().equals("yomiyomi"))
+		if (!devilFruitProps.getDevilFruit().equals("yomi_yomi"))
 			return;
 
 		if (devilFruitProps.getZoanPoint().equalsIgnoreCase(ZoanInfoYomi.FORM))
@@ -87,7 +87,7 @@ public class YomiPassiveEvents
 		IEntityStats statProps = EntityStatsCapability.get(attacked);
 		IAbilityData abilityProps = AbilityDataCapability.get(attacked);
 
-		if (!devilFruitProps.getDevilFruit().equalsIgnoreCase("yomiyomi"))
+		if (!devilFruitProps.getDevilFruit().equalsIgnoreCase("yomi_yomi"))
 			return;
 
 		if (devilFruitProps.getZoanPoint().equalsIgnoreCase(ZoanInfoYomi.FORM) )//&& abilityProps.isPassiveActive(ModAttributes.SOUL_PARADE))
@@ -111,7 +111,7 @@ public class YomiPassiveEvents
 
 		IDevilFruit devilFruitProps = DevilFruitCapability.get(event.getEntityLiving());
 
-		if (!devilFruitProps.getDevilFruit().equals("yomiyomi"))
+		if (!devilFruitProps.getDevilFruit().equals("yomi_yomi"))
 			return;
 
 		if (event.getItem().getItem() == Items.MILK_BUCKET && devilFruitProps.getZoanPoint().equalsIgnoreCase(ZoanInfoYomi.FORM))
@@ -121,9 +121,9 @@ public class YomiPassiveEvents
 	@SubscribeEvent
 	public static void onYomiDeath(YomiTriggerEvent event)
 	{
-		if (event.oldPlayerData.getDevilFruit().equalsIgnoreCase("yomiyomi") && !event.oldPlayerData.getZoanPoint().equalsIgnoreCase(ZoanInfoYomi.FORM))
+		if (event.oldPlayerData.getDevilFruit().equalsIgnoreCase("yomi_yomi") && !event.oldPlayerData.getZoanPoint().equalsIgnoreCase(ZoanInfoYomi.FORM))
 		{
-			event.newPlayerData.setDevilFruit("yomiyomi");
+			event.newPlayerData.setDevilFruit("yomi_yomi");
 			event.newPlayerData.setZoanPoint(ZoanInfoYomi.FORM);
 
 			PlayerEntity player = (PlayerEntity) event.entity;

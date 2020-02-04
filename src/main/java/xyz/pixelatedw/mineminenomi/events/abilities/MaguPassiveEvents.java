@@ -25,7 +25,7 @@ public class MaguPassiveEvents
 		IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
 		IAbilityData abilityProps = AbilityDataCapability.get(player);
 		
-		if (!devilFruitProps.getDevilFruit().equals("magumagu"))
+		if (!devilFruitProps.getDevilFruit().equals("magu_magu"))
 			return;
 
 		if (player.isInLava())

@@ -24,7 +24,7 @@ public class UshiBisonPassiveEvents
 		IDevilFruit props = DevilFruitCapability.get(attacker);
 		LivingEntity attacked = event.getEntityLiving();
 
-		if (!props.getDevilFruit().equalsIgnoreCase("ushiushibison"))
+		if (!props.getDevilFruit().equalsIgnoreCase("ushi_ushi_bison"))
 			return;
 
 		if (props.getZoanPoint().equalsIgnoreCase(ZoanInfoBisonHeavy.FORM))
