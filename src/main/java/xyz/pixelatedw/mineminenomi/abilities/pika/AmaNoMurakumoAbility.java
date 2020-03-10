@@ -2,12 +2,12 @@ package xyz.pixelatedw.mineminenomi.abilities.pika;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.abilities.ItemAbility;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability.Category;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.init.ModWeapons;
+import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
+import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.abilities.ItemAbility;
 
 public class AmaNoMurakumoAbility extends ItemAbility
 {
@@ -15,7 +15,7 @@ public class AmaNoMurakumoAbility extends ItemAbility
 	
 	public AmaNoMurakumoAbility()
 	{
-		super("Ama no Murakumo", Category.DEVIL_FRUIT);
+		super("Ama no Murakumo", AbilityCategory.DEVIL_FRUIT);
 		this.setDescription("Focuses light in the user's hand to create a sword.");	
 	}
 

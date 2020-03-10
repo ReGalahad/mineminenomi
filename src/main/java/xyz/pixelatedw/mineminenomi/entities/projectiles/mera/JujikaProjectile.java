@@ -4,10 +4,9 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.api.abilities.projectiles.AbilityProjectileEntity;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
+import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 
 public class JujikaProjectile extends AbilityProjectileEntity
 {
@@ -33,19 +32,19 @@ public class JujikaProjectile extends AbilityProjectileEntity
 		this.onBlockImpactEvent = this::onBlockImpactEvent;
 	}
 
-	private void onBlockImpactEvent(BlockRayTraceResult hit)
+	private void onBlockImpactEvent(BlockPos hit)
 	{
 		if(CommonConfig.instance.isGriefingEnabled())
 		{
 			for(int j = -2; j <= 2; j++)
 			{
 				for(int i = -5; i <= 5; i++)
-					if(this.world.isAirBlock(new BlockPos(this.posX + i, this.posY + j, this.posZ)))
-						this.world.setBlockState(new BlockPos(this.posX + i, this.posY + j, this.posZ), Blocks.FIRE.getDefaultState());
+					if(this.world.isAirBlock(new BlockPos(hit.getX() + i, hit.getY() + j, hit.getZ())))
+						this.world.setBlockState(new BlockPos(hit.getX() + i, hit.getY() + j, hit.getZ()), Blocks.FIRE.getDefaultState());
 					
 				for(int i = -5; i <= 5; i++)
-					if(this.world.isAirBlock(new BlockPos(this.posX, this.posY + j, this.posZ + i)))
-						this.world.setBlockState(new BlockPos(this.posX, this.posY + j, this.posZ + i), Blocks.FIRE.getDefaultState());
+					if(this.world.isAirBlock(new BlockPos(hit.getX(), hit.getY() + j, hit.getZ() + i)))
+						this.world.setBlockState(new BlockPos(hit.getX(), hit.getY() + j, hit.getZ() + i), Blocks.FIRE.getDefaultState());
 			}
 		}	
 	}

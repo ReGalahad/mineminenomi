@@ -2,8 +2,8 @@ package xyz.pixelatedw.mineminenomi.blocks.tileentities.dials;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
-import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
+import xyz.pixelatedw.wypi.WyRegistry;
 
 public class AxeDialTileEntity extends TileEntity
 {

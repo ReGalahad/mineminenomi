@@ -11,7 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
 
@@ -38,7 +37,6 @@ public class RejectDialItem extends BlockItem
 				
 	    	if(!((PlayerEntity) attacker).isCreative())
 	    	{
-	    		WyTelemetry.addMiscStat("rejectDialsUsed", "Reject Dials Used", 1);
 	    		attacker.getHeldItem(attacker.getActiveHand()).shrink(1);
 	    		attacker.sendBreakAnimation(EquipmentSlotType.MAINHAND);
 			}	
@@ -52,8 +50,6 @@ public class RejectDialItem extends BlockItem
 	@Override
 	protected boolean onBlockPlaced(BlockPos pos, World world, @Nullable PlayerEntity player, ItemStack itemStack, BlockState state)
 	{
-    	if(!player.isCreative())
-    		WyTelemetry.addMiscStat("rejectDialsPlaced", "Reject Dials Placed", 1);
 		return super.onBlockPlaced(pos, world, player, itemStack, state);
 	}
 }

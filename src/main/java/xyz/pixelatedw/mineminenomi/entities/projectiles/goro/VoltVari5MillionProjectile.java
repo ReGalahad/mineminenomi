@@ -5,11 +5,10 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.abilities.projectiles.AbilityProjectileEntity;
-import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.data.GenericParticleData;
+import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 
 public class VoltVari5MillionProjectile extends AbilityProjectileEntity
 {
@@ -46,9 +45,9 @@ public class VoltVari5MillionProjectile extends AbilityProjectileEntity
 			{
 				ResourceLocation particleToUse = this.ticksExisted % 2 == 0 ? ModResources.GORO2 : ModResources.GORO;
 				
-				double offsetX = WyMathHelper.randomDouble() / 2;
-				double offsetY = WyMathHelper.randomDouble() / 2;
-				double offsetZ = WyMathHelper.randomDouble() / 2;
+				double offsetX = WyHelper.randomDouble() / 2;
+				double offsetY = WyHelper.randomDouble() / 2;
+				double offsetZ = WyHelper.randomDouble() / 2;
 
 				GenericParticleData data = new GenericParticleData();
 				data.setTexture(particleToUse);

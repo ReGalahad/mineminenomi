@@ -8,15 +8,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability.Category;
-import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
-import xyz.pixelatedw.mineminenomi.api.network.packets.server.SAbilityDataSyncPacket;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.items.CharacterCreatorItem;
 import xyz.pixelatedw.mineminenomi.packets.server.SEntityStatsSyncPacket;
+import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
+import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
+import xyz.pixelatedw.wypi.data.ability.IAbilityData;
+import xyz.pixelatedw.wypi.network.WyNetwork;
+import xyz.pixelatedw.wypi.network.packets.server.SSyncAbilityDataPacket;
 
 public class CDeleteCCBookPacket
 {
@@ -44,8 +44,8 @@ public class CDeleteCCBookPacket
 				IEntityStats entityProps = EntityStatsCapability.get(player);
 				IAbilityData abilityProps = AbilityDataCapability.get(player);
 				
-				abilityProps.clearHotbar();
-				abilityProps.clearAbilities(Category.RACIAL);
+				abilityProps.clearEquippedAbilities(AbilityCategory.RACIAL);
+				abilityProps.clearUnlockedAbilities(AbilityCategory.RACIAL);
 				
 				/*if(entityProps.isCyborg())
 				{										
@@ -85,8 +85,8 @@ public class CDeleteCCBookPacket
 					if(is != null && is.getItem() instanceof CharacterCreatorItem)
 						player.inventory.deleteStack(is);
 				
-				ModNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), entityProps), (ServerPlayerEntity) player);
-				ModNetwork.sendTo(new SAbilityDataSyncPacket(player.getEntityId(), abilityProps), (ServerPlayerEntity) player);				
+				WyNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), entityProps), (ServerPlayerEntity) player);
+				WyNetwork.sendTo(new SSyncAbilityDataPacket(abilityProps), (ServerPlayerEntity) player);				
 			});			
 		}
 

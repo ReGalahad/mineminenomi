@@ -1,9 +1,9 @@
 package xyz.pixelatedw.mineminenomi.entities.zoan;
 
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.models.entities.zoans.BisonWalkModel;
 import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer.Factory;
+import xyz.pixelatedw.wypi.abilities.Ability;
 
 public class ZoanInfoBisonWalk extends ZoanInfo
 {

@@ -12,7 +12,7 @@
  * import xyz.pixelatedw.mineminenomi.api.WyHelper;
  * import xyz.pixelatedw.mineminenomi.api.WyHelper.Direction;
  * import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
- * import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
+ * import xyz.pixelatedw.mineminenomi.api.math.WyHelper;
  * import xyz.pixelatedw.mineminenomi.config.CommonConfig;
  * import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.SunaProjectiles;
  * import xyz.pixelatedw.mineminenomi.init.ModAttributes;
@@ -47,9 +47,9 @@
  * for(int j = -5; j < 5; j++)
  * for(int k = -15; k < 15; k++)
  * {
- * int posX = (int) (player.posX + i + (i < -WyMathHelper.randomWithRange(8, 12) || i > WyMathHelper.randomWithRange(8, 12) ? WyMathHelper.randomWithRange(-5, 5) : 0));
+ * int posX = (int) (player.posX + i + (i < -WyHelper.randomWithRange(8, 12) || i > WyHelper.randomWithRange(8, 12) ? WyHelper.randomWithRange(-5, 5) : 0));
  * int posY = (int) player.posY + j;
- * int posZ = (int) (player.posZ + k + (k < -WyMathHelper.randomWithRange(8, 12) || k > WyMathHelper.randomWithRange(8, 12) ? WyMathHelper.randomWithRange(-5, 5) : 0));
+ * int posZ = (int) (player.posZ + k + (k < -WyHelper.randomWithRange(8, 12) || k > WyHelper.randomWithRange(8, 12) ? WyHelper.randomWithRange(-5, 5) : 0));
  * BlockPos pos = new BlockPos(posX, posY, posZ);
  * this.positions.add(pos);
  * }
@@ -116,13 +116,13 @@
  * target.addPotionEffect(new EffectInstance(Effects.HUNGER, 500, 1));
  * Direction dir = WyHelper.get4Directions(player);
  * if(dir == WyHelper.Direction.SOUTH)
- * newPosX += WyMathHelper.randomWithRange(-10, 10);
+ * newPosX += WyHelper.randomWithRange(-10, 10);
  * else if(dir == WyHelper.Direction.EAST)
- * newPosX -= WyMathHelper.randomWithRange(-10, 10);
+ * newPosX -= WyHelper.randomWithRange(-10, 10);
  * else if(dir == WyHelper.Direction.NORTH)
- * newPosZ += WyMathHelper.randomWithRange(-10, 10);
+ * newPosZ += WyHelper.randomWithRange(-10, 10);
  * else if(dir == WyHelper.Direction.WEST)
- * newPosZ -= WyMathHelper.randomWithRange(-10, 10);
+ * newPosZ -= WyHelper.randomWithRange(-10, 10);
  * //ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_SABLES, target), player);
  * target.setPositionAndUpdate(target.posX + newPosX, target.posY + newPosY, target.posZ + newPosZ);
  * super.hitEntity(player, target);

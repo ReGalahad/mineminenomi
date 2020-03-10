@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.entity.EntityType;
-import xyz.pixelatedw.mineminenomi.api.WyRegistry;
-import xyz.pixelatedw.mineminenomi.api.abilities.projectiles.AbilityProjectileEntity;
-import xyz.pixelatedw.mineminenomi.api.abilities.projectiles.AbilityProjectileEntity.Data;
-import xyz.pixelatedw.mineminenomi.api.abilities.renderers.AbilityProjectileRenderer;
 import xyz.pixelatedw.mineminenomi.models.entities.projectiles.NoroNoroBeamModel;
+import xyz.pixelatedw.wypi.WyRegistry;
+import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
+import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity.Data;
+import xyz.pixelatedw.wypi.abilities.renderers.AbilityProjectileRenderer;
 
 public class NoroProjectiles 
 {

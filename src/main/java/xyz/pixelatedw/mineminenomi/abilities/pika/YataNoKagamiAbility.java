@@ -3,11 +3,11 @@ package xyz.pixelatedw.mineminenomi.abilities.pika;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability.Category;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.pika.YataNoKagamiParticleEffect;
+import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
+import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.abilities.Ability;
 
 public class YataNoKagamiAbility extends Ability
 {
@@ -17,7 +17,7 @@ public class YataNoKagamiAbility extends Ability
 	
 	public YataNoKagamiAbility()
 	{
-		super("Yata no Kagami", Category.DEVIL_FRUIT);
+		super("Yata no Kagami", AbilityCategory.DEVIL_FRUIT);
 		this.setMaxCooldown(4);
 		this.setDescription("Uses light to instantly teleport the user to their desired location.");
 

@@ -6,7 +6,7 @@
  * import net.minecraft.util.math.RayTraceResult;
  * import xyz.pixelatedw.mineminenomi.api.WyHelper;
  * import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
- * import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
+ * import xyz.pixelatedw.mineminenomi.api.math.WyHelper;
  * import xyz.pixelatedw.mineminenomi.init.ModAttributes;
  * public class DoaAbilities
  * {
@@ -75,14 +75,14 @@
  * int timer = 0;
  * while (!isBlock(coords, player))
  * {
- * coords = WyMathHelper.moveAway(player, coords);
+ * coords = WyHelper.moveAway(player, coords);
  * timer += 1;
  * if (timer >= 100)
  * {
  * break;
  * }
  * }
- * WyMathHelper.moveAway(player, coords);
+ * WyHelper.moveAway(player, coords);
  * if (timer < 100)
  * {
  * player.setPositionAndUpdate(coords[0], coords[1], coords[2]);

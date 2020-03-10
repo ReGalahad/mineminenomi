@@ -2,11 +2,10 @@ package xyz.pixelatedw.mineminenomi.particles.effects.goro;
 
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.data.GenericParticleData;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
+import xyz.pixelatedw.wypi.WyHelper;
 
 public class RaigoParticleEffect extends ParticleEffect
 {
@@ -16,9 +15,9 @@ public class RaigoParticleEffect extends ParticleEffect
 	{
 		for (int i = 0; i < 55; i++)
 		{
-			double offsetX = WyMathHelper.randomWithRange(-55, 55) + WyMathHelper.randomDouble();
-			double offsetY = 40 + (WyMathHelper.randomWithRange(-5, 5) + WyMathHelper.randomDouble());
-			double offsetZ = WyMathHelper.randomWithRange(-55, 55) + WyMathHelper.randomDouble();
+			double offsetX = WyHelper.randomWithRange(-55, 55) + WyHelper.randomDouble();
+			double offsetY = 40 + (WyHelper.randomWithRange(-5, 5) + WyHelper.randomDouble());
+			double offsetZ = WyHelper.randomWithRange(-55, 55) + WyHelper.randomDouble();
 
 			GenericParticleData data = new GenericParticleData();
 			data.setTexture(ModResources.GORO3);
@@ -34,9 +33,9 @@ public class RaigoParticleEffect extends ParticleEffect
 
 		for (int i = 0; i < 25; i++)
 		{
-			double offsetX = WyMathHelper.randomWithRange(-55, 55) + WyMathHelper.randomDouble();
-			double offsetY = 30 + (WyMathHelper.randomWithRange(-5, 0) + WyMathHelper.randomDouble());
-			double offsetZ = WyMathHelper.randomWithRange(-55, 55) + WyMathHelper.randomDouble();
+			double offsetX = WyHelper.randomWithRange(-55, 55) + WyHelper.randomDouble();
+			double offsetY = 30 + (WyHelper.randomWithRange(-5, 0) + WyHelper.randomDouble());
+			double offsetZ = WyHelper.randomWithRange(-55, 55) + WyHelper.randomDouble();
 
 			GenericParticleData data = new GenericParticleData();
 			data.setTexture(ModResources.GORO2);

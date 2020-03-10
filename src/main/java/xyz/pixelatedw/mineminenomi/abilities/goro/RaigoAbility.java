@@ -2,13 +2,13 @@ package xyz.pixelatedw.mineminenomi.abilities.goro;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.RayTraceResult;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.abilities.projectiles.AbilityProjectileEntity;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability.Category;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.goro.RaigoProjectile;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.goro.RaigoParticleEffect;
+import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
+import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 
 public class RaigoAbility extends Ability
 {
@@ -22,7 +22,7 @@ public class RaigoAbility extends Ability
 	
 	public RaigoAbility()
 	{
-		super("Raigo", Category.DEVIL_FRUIT);
+		super("Raigo", AbilityCategory.DEVIL_FRUIT);
 		this.setMaxCooldown(45);
 		this.setDescription("Creates a huge cloud filled with electricity, which causes massive damage");
 

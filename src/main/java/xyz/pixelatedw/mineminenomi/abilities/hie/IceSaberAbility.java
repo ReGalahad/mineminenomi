@@ -2,12 +2,12 @@ package xyz.pixelatedw.mineminenomi.abilities.hie;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.abilities.ItemAbility;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability.Category;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.init.ModWeapons;
+import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
+import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.abilities.ItemAbility;
 
 public class IceSaberAbility extends ItemAbility
 {
@@ -15,7 +15,7 @@ public class IceSaberAbility extends ItemAbility
 	
 	public IceSaberAbility()
 	{
-		super("Ice Saber", Category.DEVIL_FRUIT);
+		super("Ice Saber", AbilityCategory.DEVIL_FRUIT);
 		this.setDescription("Creates a sharp blade made of solid ice.");	
 	}
 

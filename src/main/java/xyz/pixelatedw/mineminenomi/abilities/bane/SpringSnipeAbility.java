@@ -7,10 +7,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.play.server.SEntityVelocityPacket;
 import net.minecraft.util.DamageSource;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.abilities.ChargeableAbility;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability.Category;
+import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
+import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.abilities.ChargeableAbility;
 
 public class SpringSnipeAbility  extends ChargeableAbility
 {
@@ -18,7 +18,7 @@ public class SpringSnipeAbility  extends ChargeableAbility
 	
 	public SpringSnipeAbility()
 	{
-		super("Spring Snipe", Category.DEVIL_FRUIT);
+		super("Spring Snipe", AbilityCategory.DEVIL_FRUIT);
 		this.setMaxCooldown(5);
 		this.setMaxChargeTime(1);
 		this.setDescription("Turning the user's forelegs into springs, they can launch themselves directly at the opponent.");

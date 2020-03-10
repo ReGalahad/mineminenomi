@@ -12,13 +12,12 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
 import xyz.pixelatedw.mineminenomi.packets.server.SEntityStatsSyncPacket;
+import xyz.pixelatedw.wypi.network.WyNetwork;
 
 public class UltraColaItem extends Item
 {
@@ -67,11 +66,8 @@ public class UltraColaItem extends Item
 			}
 			else
 				player.addPotionEffect(new EffectInstance(Effects.SPEED, 250, 0));
-				
-	    	if(!player.abilities.isCreativeMode)
-	    		WyTelemetry.addMiscStat("bottlesOfUltraColaDrank", "Bottles of Ultra Cola Drank", 1);
-			
-			ModNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), props), (ServerPlayerEntity) player);
+
+			WyNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), props), (ServerPlayerEntity) player);
 		}
 		
 		itemStack.shrink(1);

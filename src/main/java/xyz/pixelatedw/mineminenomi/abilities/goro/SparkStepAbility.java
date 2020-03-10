@@ -3,11 +3,11 @@ package xyz.pixelatedw.mineminenomi.abilities.goro;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability.Category;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.goro.ElThorParticleEffect;
+import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
+import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.abilities.Ability;
 
 public class SparkStepAbility extends Ability
 {
@@ -17,7 +17,7 @@ public class SparkStepAbility extends Ability
 	
 	public SparkStepAbility()
 	{
-		super("Spark Step", Category.DEVIL_FRUIT);
+		super("Spark Step", AbilityCategory.DEVIL_FRUIT);
 		this.setMaxCooldown(3);
 		this.setDescription("Instantly teleport the user to their desired location.");
 

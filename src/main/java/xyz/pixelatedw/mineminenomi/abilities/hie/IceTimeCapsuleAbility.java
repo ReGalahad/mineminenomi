@@ -5,9 +5,10 @@ import java.util.List;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability.Category;
+import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
+import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.abilities.Ability;
 
 public class IceTimeCapsuleAbility extends Ability
 {
@@ -15,7 +16,7 @@ public class IceTimeCapsuleAbility extends Ability
 
 	public IceTimeCapsuleAbility()
 	{
-		super("Ice Time Capsule", Category.DEVIL_FRUIT);
+		super("Ice Time Capsule", AbilityCategory.DEVIL_FRUIT);
 		this.setMaxCooldown(15);
 		this.setDescription("A wave of ice is sent along the ground and freezes every enemy it hits, locking them in an ice capsule.");
 
@@ -29,7 +30,7 @@ public class IceTimeCapsuleAbility extends Ability
 		
 		for (LivingEntity target : list)
 		{
-			WyHelper.createFilledCube(target, new int[] { 2, 4, 2 }, Blocks.PACKED_ICE, "air", "foliage");
+			DevilFruitsHelper.createFilledCube(target, new int[] { 2, 4, 2 }, Blocks.PACKED_ICE, "air", "foliage");
 		}
 
 		return true;

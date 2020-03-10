@@ -5,10 +5,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.abilities.effects.DFEffectNoroSlowness;
-import xyz.pixelatedw.mineminenomi.api.abilities.projectiles.AbilityProjectileEntity;
-import xyz.pixelatedw.mineminenomi.data.entity.extraeffects.ExtraEffectCapability;
-import xyz.pixelatedw.mineminenomi.data.entity.extraeffects.IExtraEffect;
+import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 
 public class NoroNoroBeamProjectile extends AbilityProjectileEntity
 {
@@ -53,7 +50,7 @@ public class NoroNoroBeamProjectile extends AbilityProjectileEntity
 			hitEntity.addPotionEffect(new EffectInstance(Effects.SLOWNESS, newTimer, newAmplifier));
 			hitEntity.addPotionEffect(new EffectInstance(Effects.MINING_FATIGUE, newTimer, newAmplifier));
 			
-			IExtraEffect props = ExtraEffectCapability.get(hitEntity);
+			//IExtraEffect props = ExtraEffectCapability.get(hitEntity);
 			//if(!props.hasExtraEffect(ID.EXTRAEFFECT_NORO))
 			//	new DFEffectNoroSlowness(target, newTimer);
 			
@@ -62,7 +59,7 @@ public class NoroNoroBeamProjectile extends AbilityProjectileEntity
 		{
 			hitEntity.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 240, 10));
 			hitEntity.addPotionEffect(new EffectInstance(Effects.MINING_FATIGUE, 240, 10));
-			new DFEffectNoroSlowness(hitEntity, 240);					
+			//new DFEffectNoroSlowness(hitEntity, 240);					
 		}	
 	}
 	

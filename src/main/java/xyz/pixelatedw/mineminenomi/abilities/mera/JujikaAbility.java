@@ -1,9 +1,9 @@
 package xyz.pixelatedw.mineminenomi.abilities.mera;
 
 import net.minecraft.entity.player.PlayerEntity;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability.Category;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.mera.JujikaProjectile;
+import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
+import xyz.pixelatedw.wypi.abilities.Ability;
 
 public class JujikaAbility extends Ability
 {
@@ -11,7 +11,7 @@ public class JujikaAbility extends Ability
 
 	public JujikaAbility()
 	{
-		super("Jujika", Category.DEVIL_FRUIT);
+		super("Jujika", AbilityCategory.DEVIL_FRUIT);
 		this.setMaxCooldown(6);
 		this.setDescription("Launches a cross-shaped column of fire at the opponent, leaving a cross of fire.");
 

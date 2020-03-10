@@ -1,9 +1,9 @@
 package xyz.pixelatedw.mineminenomi.abilities.mera;
 
 import net.minecraft.entity.player.PlayerEntity;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability.Category;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.mera.HidarumaProjectile;
+import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
+import xyz.pixelatedw.wypi.abilities.Ability;
 
 public class HidarumaAbility extends Ability
 {
@@ -11,7 +11,7 @@ public class HidarumaAbility extends Ability
 
 	public HidarumaAbility()
 	{
-		super("Hidaruma", Category.DEVIL_FRUIT);
+		super("Hidaruma", AbilityCategory.DEVIL_FRUIT);
 		this.setMaxCooldown(6);
 		this.setDescription("Creates small green fireballs that set the target on fire.");
 

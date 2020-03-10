@@ -13,15 +13,14 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.EnumFruitType;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.debug.WyDebug;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
-import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
 import xyz.pixelatedw.mineminenomi.init.ModItems;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
+import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.debug.WyDebug;
 
 public class AkumaNoMiBoxItem extends Item
 {
@@ -125,12 +124,12 @@ public class AkumaNoMiBoxItem extends Item
 			player.inventory.deleteStack(itemStack);
 			AkumaNoMiItem randomFruit = roulette();
 			boolean isAvailable = true;
-
+			
 			if (CommonConfig.instance.isOneFruitPerWorldEnabled())
 			{
 				ExtendedWorldData worldProps = ExtendedWorldData.get(world);
 				int chanceForNewFruit = 0;
-				while (DevilFruitsHelper.isDevilFruitInWorld(world, randomFruit))
+				while (worldProps.isDevilFruitInWorld(WyHelper.getResourceName(randomFruit.getName().getFormattedText())))
 				{
 					final AkumaNoMiItem inContextFruit = randomFruit;
 					this.tier1Fruits.removeIf(x -> x == inContextFruit);

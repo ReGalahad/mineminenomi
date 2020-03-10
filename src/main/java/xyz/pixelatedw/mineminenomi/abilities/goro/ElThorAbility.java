@@ -2,16 +2,17 @@ package xyz.pixelatedw.mineminenomi.abilities.goro;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.RayTraceResult;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.abilities.ChargeableAbility;
-import xyz.pixelatedw.mineminenomi.api.abilities.extra.ExplosionAbility;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability.Category;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
+import xyz.pixelatedw.mineminenomi.api.abilities.ExplosionAbility;
+import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.packets.server.SSpawnLightningPacket;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.common.CommonExplosionParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.goro.ElThorParticleEffect;
+import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
+import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.abilities.ChargeableAbility;
+import xyz.pixelatedw.wypi.network.WyNetwork;
 
 public class ElThorAbility extends ChargeableAbility
 {
@@ -21,7 +22,7 @@ public class ElThorAbility extends ChargeableAbility
 
 	public ElThorAbility()
 	{
-		super("El Thor", Category.DEVIL_FRUIT);
+		super("El Thor", AbilityCategory.DEVIL_FRUIT);
 		this.setDescription("Focuses the user's electricity to strike the opponent with lightning from above");
 		this.setMaxCooldown(8);
 		this.setMaxChargeTime(6);
@@ -54,9 +55,9 @@ public class ElThorAbility extends ChargeableAbility
 			double i = mop.getHitVec().x;
 			double j = mop.getHitVec().y;
 			double k = mop.getHitVec().z;
-			ModNetwork.sendToAllAround(new SSpawnLightningPacket(1), player);
+			WyNetwork.sendToAllAround(new SSpawnLightningPacket(1), player);
 
-			ExplosionAbility explosion = WyHelper.newExplosion(player, i, j, k, 10);
+			ExplosionAbility explosion = DevilFruitsHelper.newExplosion(player, i, j, k, 10);
 			explosion.setExplosionSound(true);
 			explosion.setDamageOwner(false);
 			explosion.setDestroyBlocks(true);

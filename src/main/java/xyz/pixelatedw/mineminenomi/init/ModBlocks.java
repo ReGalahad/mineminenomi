@@ -3,18 +3,13 @@ package xyz.pixelatedw.mineminenomi.init;
 import net.minecraft.block.Block;
 import net.minecraft.block.Block.Properties;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
-import xyz.pixelatedw.mineminenomi.Env;
-import xyz.pixelatedw.mineminenomi.api.WyRegistry;
-import xyz.pixelatedw.mineminenomi.api.json.loottables.block.JSONLootTableSimpleBlock;
-import xyz.pixelatedw.mineminenomi.api.json.models.block.JSONModelBars;
-import xyz.pixelatedw.mineminenomi.api.json.models.block.JSONModelThinBlock;
-import xyz.pixelatedw.mineminenomi.api.json.models.item.JSONModelSimpleItem;
 import xyz.pixelatedw.mineminenomi.blocks.AblProtectionBlock;
 import xyz.pixelatedw.mineminenomi.blocks.BarrierBlock;
 import xyz.pixelatedw.mineminenomi.blocks.CustomBarsBlock;
@@ -63,8 +58,16 @@ import xyz.pixelatedw.mineminenomi.items.dials.FlashDialItem;
 import xyz.pixelatedw.mineminenomi.items.dials.ImpactDialItem;
 import xyz.pixelatedw.mineminenomi.items.dials.MilkyDialItem;
 import xyz.pixelatedw.mineminenomi.items.dials.RejectDialItem;
+import xyz.pixelatedw.wypi.APIConfig;
+import xyz.pixelatedw.wypi.WyRegistry;
+import xyz.pixelatedw.wypi.json.loottables.block.JSONLootTableSimpleBlock;
+import xyz.pixelatedw.wypi.json.models.JSONModelItem;
+import xyz.pixelatedw.wypi.json.models.block.JSONModelBars;
+import xyz.pixelatedw.wypi.json.models.block.JSONModelThinBlock;
+import xyz.pixelatedw.wypi.json.models.item.JSONModelItemBlock;
+import xyz.pixelatedw.wypi.json.models.item.JSONModelSimpleItem;
 
-@Mod.EventBusSubscriber(modid = Env.PROJECT_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModBlocks
 {
 
@@ -195,34 +198,54 @@ public class ModBlocks
     {
         event.getRegistry().registerAll
         (
-        	WyRegistry.registerItemBlock(OPE, false),
-        	WyRegistry.registerItemBlock(OPE_MID, false),
-        	WyRegistry.registerItemBlock(KAIROSEKI, true),
-        	WyRegistry.registerItemBlock(KAIROSEKI_ORE, true),
-        	WyRegistry.registerItemBlock(SKY_BLOCK, true),
-        	WyRegistry.registerItemBlock(KAIROSEKI_BARS, true, new JSONModelSimpleItem("Kairoseki Bars")),
-        	WyRegistry.registerItemBlock(KAGE, false),
-        	WyRegistry.registerItemBlock(SUNA_SAND, false),
-        	WyRegistry.registerItemBlock(WAX, false),
-        	WyRegistry.registerItemBlock(POISON, false),
-        	WyRegistry.registerItemBlock(DEMON_POISON , false),
-        	WyRegistry.registerItemBlock(STRING_WALL, false),
-        	WyRegistry.registerItemBlock(STRING_MID, false),
-        	WyRegistry.registerItemBlock(BARRIER, false),
-        	WyRegistry.registerItemBlock(DARKNESS, false),
-        	WyRegistry.registerItemBlock(ORI_BARS, false, new JSONModelSimpleItem("Ori Bars")),
-        	WyRegistry.registerItemBlock(CUSTOM_SPAWNER, false),
-        	WyRegistry.registerItemBlock(WANTED_POSTER_PACKAGE, true, new JSONModelSimpleItem("Wanted Poster Package")),
-        	WyRegistry.registerCustomItemBlock(WANTED_POSTER, new WantedPosterItem()),
-        	WyRegistry.registerCustomItemBlock(AXE_DIAL, new AxeDialItem()),
-        	WyRegistry.registerCustomItemBlock(BREATH_DIAL, new BreathDialItem()),
-        	WyRegistry.registerCustomItemBlock(FLAME_DIAL, new FlameDialItem()),
-        	WyRegistry.registerCustomItemBlock(REJECT_DIAL, new RejectDialItem()),
-        	WyRegistry.registerCustomItemBlock(IMPACT_DIAL, new ImpactDialItem()),
-        	WyRegistry.registerCustomItemBlock(FLASH_DIAL, new FlashDialItem()),
-        	WyRegistry.registerCustomItemBlock(EISEN_DIAL, new EisenDialItem()),
-        	WyRegistry.registerCustomItemBlock(MILKY_DIAL, new MilkyDialItem())
+        	registerItemBlock(OPE, false),
+        	registerItemBlock(OPE_MID, false),
+        	registerItemBlock(KAIROSEKI, true),
+        	registerItemBlock(KAIROSEKI_ORE, true),
+        	registerItemBlock(SKY_BLOCK, true),
+        	registerItemBlock(KAIROSEKI_BARS, true, new JSONModelSimpleItem("Kairoseki Bars")),
+        	registerItemBlock(KAGE, false),
+        	registerItemBlock(SUNA_SAND, false),
+        	registerItemBlock(WAX, false),
+        	registerItemBlock(POISON, false),
+        	registerItemBlock(DEMON_POISON , false),
+        	registerItemBlock(STRING_WALL, false),
+        	registerItemBlock(STRING_MID, false),
+        	registerItemBlock(BARRIER, false),
+        	registerItemBlock(DARKNESS, false),
+        	registerItemBlock(ORI_BARS, false, new JSONModelSimpleItem("Ori Bars")),
+        	registerItemBlock(CUSTOM_SPAWNER, false),
+        	registerItemBlock(WANTED_POSTER_PACKAGE, true, new JSONModelSimpleItem("Wanted Poster Package")),
+        	registerCustomItemBlock(WANTED_POSTER, new WantedPosterItem()),
+        	registerCustomItemBlock(AXE_DIAL, new AxeDialItem()),
+        	registerCustomItemBlock(BREATH_DIAL, new BreathDialItem()),
+        	registerCustomItemBlock(FLAME_DIAL, new FlameDialItem()),
+        	registerCustomItemBlock(REJECT_DIAL, new RejectDialItem()),
+        	registerCustomItemBlock(IMPACT_DIAL, new ImpactDialItem()),
+        	registerCustomItemBlock(FLASH_DIAL, new FlashDialItem()),
+        	registerCustomItemBlock(EISEN_DIAL, new EisenDialItem()),
+        	registerCustomItemBlock(MILKY_DIAL, new MilkyDialItem())
 
         );
     }
+	
+	public static Item registerItemBlock(Block block, boolean isInCreative)
+	{
+		return registerItemBlock(block, isInCreative, new JSONModelItemBlock(block.getRegistryName().getPath()));
+	}
+	
+	private static Item registerItemBlock(Block block, boolean isInCreative, JSONModelItem jsonType)
+	{
+		if(isInCreative)
+			return WyRegistry.registerItem(new BlockItem(block, new Item.Properties().group(ModCreativeTabs.MISC)), block.getRegistryName().getPath(), jsonType);
+		else
+			return WyRegistry.registerItem(new BlockItem(block, new Item.Properties()), block.getRegistryName().getPath(), jsonType);
+	}
+	
+	public static <T extends BlockItem> T registerCustomItemBlock(Block block, T itemBlock)
+	{
+		WyRegistry.registerItem(itemBlock, block.getRegistryName().getPath(), new JSONModelSimpleItem(block.getRegistryName().getPath()));
+		
+		return itemBlock;		
+	}
 }

@@ -4,11 +4,11 @@ import java.util.List;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.abilities.ContinuousAbility;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability.Category;
-import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
+import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.abilities.ContinuousAbility;
 
 public class TaktAbility extends ContinuousAbility
 {
@@ -16,7 +16,7 @@ public class TaktAbility extends ContinuousAbility
 	
 	public TaktAbility()
 	{
-		super("Takt", Category.DEVIL_FRUIT);
+		super("Takt", AbilityCategory.DEVIL_FRUIT);
 		this.setMaxCooldown(10);
 		this.setThreshold(5);
 		this.setDescription("Lifts all entities inside ROOM, making them unable to move.");

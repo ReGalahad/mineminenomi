@@ -6,11 +6,11 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability.Category;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.pika.FlashParticleEffect;
+import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
+import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.abilities.Ability;
 
 public class FlashAbility extends Ability
 {
@@ -20,7 +20,7 @@ public class FlashAbility extends Ability
 
 	public FlashAbility()
 	{
-		super("Flash", Category.DEVIL_FRUIT);
+		super("Flash", AbilityCategory.DEVIL_FRUIT);
 		this.setMaxCooldown(10);
 		this.setDescription("The user creates a bright flash of light, blinding their opponents.");
 

@@ -6,19 +6,17 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import xyz.pixelatedw.mineminenomi.Env;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataBase;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
-import xyz.pixelatedw.mineminenomi.api.data.quest.QuestDataBase;
-import xyz.pixelatedw.mineminenomi.api.data.quest.QuestDataCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitBase;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
+import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitProvider;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsBase;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
-import xyz.pixelatedw.mineminenomi.data.entity.extraeffects.ExtraEffectBase;
-import xyz.pixelatedw.mineminenomi.data.entity.extraeffects.ExtraEffectCapability;
+import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsProvider;
 import xyz.pixelatedw.mineminenomi.data.entity.haki.HakiDataBase;
 import xyz.pixelatedw.mineminenomi.data.entity.haki.HakiDataCapability;
+import xyz.pixelatedw.mineminenomi.data.entity.haki.HakiDataProvider;
+import xyz.pixelatedw.wypi.APIConfig;
+import xyz.pixelatedw.wypi.APIDefaults;
 
 public class ModCapabilities
 {
@@ -26,17 +24,15 @@ public class ModCapabilities
 	public static void init()
 	{
 		// API Capabilities
-		AbilityDataCapability.register();
+		APIDefaults.initCapabilities();
 			
 		// Mod Capabilities
 		DevilFruitCapability.register();
 		EntityStatsCapability.register();
 		HakiDataCapability.register();
-		ExtraEffectCapability.register();
-		QuestDataCapability.register();
 	}
 	
-	@Mod.EventBusSubscriber(modid = Env.PROJECT_ID)
+	@Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 	public static class Registry
 	{
 		@SubscribeEvent
@@ -44,23 +40,14 @@ public class ModCapabilities
 		{
 			if(event.getObject() instanceof PlayerEntity)
 			{
-				final AbilityDataBase abilityData = new AbilityDataBase();
-				event.addCapability(new ResourceLocation(Env.PROJECT_ID, "ability_data"), AbilityDataCapability.createProvider(abilityData));
-				
 				final DevilFruitBase devilFruitData = new DevilFruitBase();
-				event.addCapability(new ResourceLocation(Env.PROJECT_ID, "devil_fruit"), DevilFruitCapability.createProvider(devilFruitData));
+				event.addCapability(new ResourceLocation(APIConfig.PROJECT_ID, "devil_fruit"), new DevilFruitProvider());
 				
 				final EntityStatsBase entityStatsData = new EntityStatsBase();
-				event.addCapability(new ResourceLocation(Env.PROJECT_ID, "entity_stats"), EntityStatsCapability.createProvider(entityStatsData));
+				event.addCapability(new ResourceLocation(APIConfig.PROJECT_ID, "entity_stats"), new EntityStatsProvider());
 				
 				final HakiDataBase hakiData = new HakiDataBase();
-				event.addCapability(new ResourceLocation(Env.PROJECT_ID, "haki_data"), HakiDataCapability.createProvider(hakiData));
-				
-				final ExtraEffectBase extraEffectData = new ExtraEffectBase();
-				event.addCapability(new ResourceLocation(Env.PROJECT_ID, "extra_effect"), ExtraEffectCapability.createProvider(extraEffectData));
-				
-				final QuestDataBase questData = new QuestDataBase();
-				event.addCapability(new ResourceLocation(Env.PROJECT_ID, "quest_data"), QuestDataCapability.createProvider(questData));
+				event.addCapability(new ResourceLocation(APIConfig.PROJECT_ID, "haki_data"), new HakiDataProvider());
 			}
 		}
 	}

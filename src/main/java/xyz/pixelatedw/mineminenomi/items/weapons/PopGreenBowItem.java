@@ -12,9 +12,8 @@ import net.minecraft.stats.Stats;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.entities.projectiles.ExtraProjectiles;
+import xyz.pixelatedw.mineminenomi.entities.projectiles.extra.PopGreenProjectile;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
-import xyz.pixelatedw.mineminenomi.init.ModExtraAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModItems;
 
 public class PopGreenBowItem extends BowItem
@@ -49,7 +48,7 @@ public class PopGreenBowItem extends BowItem
 				{
 					if (!world.isRemote)
 					{
-						ExtraProjectiles.PopGreen proj = new ExtraProjectiles.PopGreen(world, entityLiving, ModExtraAttributes.POP_GREEN);
+						PopGreenProjectile proj = new PopGreenProjectile(world, entityLiving);
 						proj.shoot(playerentity, playerentity.rotationPitch, playerentity.rotationYaw, 0.0F, f * 3.0F, 1.0F);
 
 						if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, itemStack) > 0)

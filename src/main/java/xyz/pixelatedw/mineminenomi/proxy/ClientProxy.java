@@ -1,7 +1,7 @@
 package xyz.pixelatedw.mineminenomi.proxy;
 
 import net.minecraft.entity.player.PlayerEntity;
-import xyz.pixelatedw.mineminenomi.helpers.MorphsHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.MorphsHelper;
 
 public class ClientProxy implements IProxy
 {

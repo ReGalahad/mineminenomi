@@ -2,10 +2,10 @@ package xyz.pixelatedw.mineminenomi.particles.effects.suna;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
+import xyz.pixelatedw.wypi.WyHelper;
 
 public class GroundDeathParticleEffect extends ParticleEffect
 {
@@ -23,12 +23,12 @@ public class GroundDeathParticleEffect extends ParticleEffect
 			for(double theta = 0; theta <= 4 * Math.PI; theta += Math.PI / 32)
 			{
 				x = t * Math.cos(theta);
-				y = WyMathHelper.randomDouble();
+				y = WyHelper.randomDouble();
 				z = t * Math.sin(theta);
 										
-				motionX = x / 2 + WyMathHelper.randomDouble();
+				motionX = x / 2 + WyHelper.randomDouble();
 				motionY = 0;
-				motionZ = z / 2 + WyMathHelper.randomDouble();
+				motionZ = z / 2 + WyHelper.randomDouble();
 
 				SimpleParticle cp = new SimpleParticle(world, ModResources.SUNA2,
 						posX + (x * 1.25), 

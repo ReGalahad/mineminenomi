@@ -15,7 +15,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
@@ -38,7 +37,6 @@ public class ImpactDialItem extends BlockItem
 
 			if (!player.isCreative())
 			{
-				WyTelemetry.addMiscStat("impactDialsUsed", "Impact Dials Used", 1);
 				player.getHeldItem(hand).shrink(1);
 				player.sendBreakAnimation(EquipmentSlotType.MAINHAND);
 			}
@@ -50,8 +48,6 @@ public class ImpactDialItem extends BlockItem
 	@Override
 	protected boolean onBlockPlaced(BlockPos pos, World world, @Nullable PlayerEntity player, ItemStack itemStack, BlockState state)
 	{
-    	if(!player.isCreative())
-    		WyTelemetry.addMiscStat("impactDialsPlaced", "Impact Dials Placed", 1);
 		return super.onBlockPlaced(pos, world, player, itemStack, state);
 	}
 }

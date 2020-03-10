@@ -1,9 +1,9 @@
 package xyz.pixelatedw.mineminenomi.abilities.noro;
 
 import net.minecraft.entity.player.PlayerEntity;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability.Category;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.noro.NoroNoroBeamProjectile;
+import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
+import xyz.pixelatedw.wypi.abilities.Ability;
 
 public class NoroNoroBeamAbility extends Ability
 {
@@ -11,7 +11,7 @@ public class NoroNoroBeamAbility extends Ability
 
 	public NoroNoroBeamAbility()
 	{
-		super("Noro Noro Beam", Category.DEVIL_FRUIT);
+		super("Noro Noro Beam", AbilityCategory.DEVIL_FRUIT);
 		this.setMaxCooldown(5);
 		this.setDescription("Shoots a beam of photons at the opponent, completely slowing them down");
 

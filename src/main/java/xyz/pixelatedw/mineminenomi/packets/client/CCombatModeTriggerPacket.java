@@ -6,8 +6,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
-import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
+import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
+import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 
 public class CCombatModeTriggerPacket
 {
@@ -35,7 +35,7 @@ public class CCombatModeTriggerPacket
 			ctx.get().enqueueWork(() ->
 			{
 				PlayerEntity player = ctx.get().getSender();
-				IAbilityData props = AbilityDataCapability.get(player);
+				IEntityStats props = EntityStatsCapability.get(player);
 				
 				props.setCombatMode(!props.isInCombatMode());							
 			});			

@@ -3,7 +3,7 @@ package xyz.pixelatedw.mineminenomi.entities.projectiles.ope;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.api.abilities.projectiles.AbilityProjectileEntity;
+import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 
 public class GammaKnifeProjectile extends AbilityProjectileEntity
 {

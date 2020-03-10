@@ -2,10 +2,10 @@ package xyz.pixelatedw.mineminenomi.particles.effects.yomi;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
+import xyz.pixelatedw.wypi.WyHelper;
 
 public class SoulParadeParticleEffect extends ParticleEffect
 {
@@ -15,12 +15,12 @@ public class SoulParadeParticleEffect extends ParticleEffect
 	{	
 		for (int i = 0; i < 64; i++)
 		{
-			motionX = WyMathHelper.randomWithRange(-3, 3) + WyMathHelper.randomDouble();
-			motionY = WyMathHelper.randomWithRange(-3, 3) + WyMathHelper.randomDouble();
-			motionZ = WyMathHelper.randomWithRange(-3, 3) + WyMathHelper.randomDouble();
+			motionX = WyHelper.randomWithRange(-3, 3) + WyHelper.randomDouble();
+			motionY = WyHelper.randomWithRange(-3, 3) + WyHelper.randomDouble();
+			motionZ = WyHelper.randomWithRange(-3, 3) + WyHelper.randomDouble();
 
 			double middlePoint = 0.1;
-			middlePoint *= (WyMathHelper.randomDouble() * 2) + 0.3F;
+			middlePoint *= (WyHelper.randomDouble() * 2) + 0.3F;
 
 			motionX *= middlePoint / 2;
 			motionY *= middlePoint / 2;

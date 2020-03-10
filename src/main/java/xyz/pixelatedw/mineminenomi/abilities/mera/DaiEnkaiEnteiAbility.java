@@ -1,13 +1,13 @@
 package xyz.pixelatedw.mineminenomi.abilities.mera;
 
 import net.minecraft.entity.player.PlayerEntity;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.abilities.ChargeableAbility;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability.Category;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.mera.DaiEnkaiEnteiProjectile;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
-import xyz.pixelatedw.mineminenomi.particles.effects.mera.DaiEnkaiParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.mera.DaiEnkai2ParticleEffect;
+import xyz.pixelatedw.mineminenomi.particles.effects.mera.DaiEnkaiParticleEffect;
+import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
+import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.abilities.ChargeableAbility;
 
 public class DaiEnkaiEnteiAbility extends ChargeableAbility
 {
@@ -18,7 +18,7 @@ public class DaiEnkaiEnteiAbility extends ChargeableAbility
 
 	public DaiEnkaiEnteiAbility()
 	{
-		super("Dai Enkai: Entei", Category.DEVIL_FRUIT);
+		super("Dai Enkai: Entei", AbilityCategory.DEVIL_FRUIT);
 		this.setDescription("Amasses the user's flames into a gigantic fireball that the user hurls at the opponent.");
 		this.setMaxCooldown(25);
 		this.setMaxChargeTime(2);

@@ -2,10 +2,10 @@ package xyz.pixelatedw.mineminenomi.particles.effects.yomi;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
+import xyz.pixelatedw.wypi.WyHelper;
 
 public class KasuriutaFubukiGiriParticleEffect extends ParticleEffect
 {
@@ -15,9 +15,9 @@ public class KasuriutaFubukiGiriParticleEffect extends ParticleEffect
 	{
 		for (int i = 0; i < 2; i++)
 		{
-			double offsetX = WyMathHelper.randomWithRange(-1, 1) + WyMathHelper.randomDouble();
-			double offsetY = WyMathHelper.randomWithRange(-1, 1) + WyMathHelper.randomDouble();
-			double offsetZ = WyMathHelper.randomWithRange(-1, 1) + WyMathHelper.randomDouble();
+			double offsetX = WyHelper.randomWithRange(-1, 1) + WyHelper.randomDouble();
+			double offsetY = WyHelper.randomWithRange(-1, 1) + WyHelper.randomDouble();
+			double offsetZ = WyHelper.randomWithRange(-1, 1) + WyHelper.randomDouble();
 	      
 			SimpleParticle cp = new SimpleParticle(world, ModResources.HIE, 
 							posX + offsetX, 

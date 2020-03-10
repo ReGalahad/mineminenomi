@@ -2,7 +2,6 @@ package xyz.pixelatedw.mineminenomi.world.features.structures.dojo;
 
 import java.util.Random;
 
-import net.minecraft.block.Blocks;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;
@@ -13,12 +12,11 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.structure.StructurePiece;
 import net.minecraft.world.gen.feature.template.TemplateManager;
-import xyz.pixelatedw.mineminenomi.api.debug.WyDebug;
-import xyz.pixelatedw.mineminenomi.api.schematic.WySchematicHelper;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.CustomSpawnerTileEntity;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.mineminenomi.init.ModFeatures;
+import xyz.pixelatedw.wypi.debug.WyDebug;
 
 public class DojoPieces
 {
@@ -49,7 +47,7 @@ public class DojoPieces
 			int i = world.getHeight(Heightmap.Type.WORLD_SURFACE_WG, this.boundingBox.minX, this.boundingBox.minZ);
 			BlockPos pos = new BlockPos.MutableBlockPos(this.boundingBox.minX, i, this.boundingBox.minZ);
 			
-			WySchematicHelper.build(WySchematicHelper.load("dojo"), world, pos, Blocks.BEDROCK);
+			//WySchematicHelper.build(WySchematicHelper.load("dojo"), world, pos, Blocks.BEDROCK);
 			
 			try
 			{

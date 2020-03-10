@@ -12,9 +12,8 @@ import net.minecraft.stats.Stats;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.entities.projectiles.ExtraProjectiles;
+import xyz.pixelatedw.mineminenomi.entities.projectiles.extra.KujaArrowProjectile;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
-import xyz.pixelatedw.mineminenomi.init.ModExtraAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModItems;
 
 public class KujaBowItem extends BowItem
@@ -49,7 +48,7 @@ public class KujaBowItem extends BowItem
 				{
 					if (!world.isRemote)
 					{
-						ExtraProjectiles.KujaArrow proj = new ExtraProjectiles.KujaArrow(world, entityLiving, ModExtraAttributes.KUJA_ARROW);
+						KujaArrowProjectile proj = new KujaArrowProjectile(world, entityLiving);
 						proj.shoot(playerentity, playerentity.rotationPitch, playerentity.rotationYaw, 0.0F, f * 3.0F, 1.0F);
 
 						if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, itemStack) > 0)

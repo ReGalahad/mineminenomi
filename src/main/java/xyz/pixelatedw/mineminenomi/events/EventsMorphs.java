@@ -19,27 +19,25 @@ import net.minecraftforge.event.entity.EntityEvent.EyeHeight;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import xyz.pixelatedw.mineminenomi.Env;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
-import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
+import xyz.pixelatedw.mineminenomi.api.helpers.MorphsHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
-import xyz.pixelatedw.mineminenomi.data.entity.extraeffects.ExtraEffectCapability;
-import xyz.pixelatedw.mineminenomi.data.entity.extraeffects.IExtraEffect;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfo;
-import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.models.effects.AbareHimatsuriModel;
 import xyz.pixelatedw.mineminenomi.packets.server.SDevilFruitSyncPacket;
 import xyz.pixelatedw.mineminenomi.renderers.ZoanFirstPersonRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.effects.AbareHimatsuriRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer;
+import xyz.pixelatedw.wypi.APIConfig;
+import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
+import xyz.pixelatedw.wypi.data.ability.IAbilityData;
+import xyz.pixelatedw.wypi.network.WyNetwork;
 
 @OnlyIn(Dist.CLIENT)
-@Mod.EventBusSubscriber(modid = Env.PROJECT_ID, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID, value = Dist.CLIENT)
 public class EventsMorphs
 {
 
@@ -123,7 +121,7 @@ public class EventsMorphs
 
 			event.setCanceled(true);
 
-			ZoanInfo info = DevilFruitsHelper.getZoanInfo((PlayerEntity) entity);
+			ZoanInfo info = MorphsHelper.getZoanInfo((PlayerEntity) entity);
 			if (info != null)
 			{
 				ZoanMorphRenderer render = info.getFactory().createRenderFor(Minecraft.getInstance().getRenderManager());
@@ -134,7 +132,7 @@ public class EventsMorphs
 		if (props.getDevilFruit().equalsIgnoreCase("sukesuke") && event.getEntity().isInvisible())
 			event.setCanceled(true);
 
-		IExtraEffect extraEffectProps = ExtraEffectCapability.get(event.getEntity());
+		//IExtraEffect extraEffectProps = ExtraEffectCapability.get(event.getEntity());
 
 		if (event.getEntity() instanceof PlayerEntity)
 		{
@@ -173,7 +171,7 @@ public class EventsMorphs
 			{
 				props.setZoanPoint("");
 
-				ModNetwork.sendToAll(new SDevilFruitSyncPacket(owner.getEntityId(), props));
+				WyNetwork.sendToAll(new SDevilFruitSyncPacket(owner.getEntityId(), props));
 			}
 		}
 	}
@@ -199,7 +197,7 @@ public class EventsMorphs
 			renderHandFlag = true;
 		}
 
-		ZoanInfo info = DevilFruitsHelper.getZoanInfo(player);
+		ZoanInfo info = MorphsHelper.getZoanInfo(player);
 		if (info != null)
 			renderHandFlag = true;
 
@@ -228,7 +226,7 @@ public class EventsMorphs
 
 		if (!WyHelper.isNullOrEmpty(props.getZoanPoint()))
 		{
-			ZoanInfo info = DevilFruitsHelper.getZoanInfo(player);
+			ZoanInfo info = MorphsHelper.getZoanInfo(player);
 			if (info != null)
 			{
 				eyeHeight = (float) (1.62 * (info.getHeight() / 1.75));
@@ -258,7 +256,7 @@ public class EventsMorphs
 			double width = 0.6F / 2;
 			double height = 1.8F;
 
-			ZoanInfo info = DevilFruitsHelper.getZoanInfo(player);
+			ZoanInfo info = MorphsHelper.getZoanInfo(player);
 			if (info != null)
 			{
 				width = info.getWidth() / 2;

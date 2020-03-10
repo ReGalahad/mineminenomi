@@ -1,15 +1,15 @@
 package xyz.pixelatedw.mineminenomi.abilities.goro;
 
 import net.minecraft.entity.player.PlayerEntity;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.abilities.ChargeableAbility;
-import xyz.pixelatedw.mineminenomi.api.abilities.projectiles.AbilityProjectileEntity;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability.Category;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.goro.VoltVari200MillionProjectile;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.goro.VoltVari20MillionProjectile;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.goro.VoltVari5MillionProjectile;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.goro.VoltVari60MillionProjectile;
+import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
+import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.abilities.ChargeableAbility;
+import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 
 public class VoltVariAbility extends ChargeableAbility
 {
@@ -19,7 +19,7 @@ public class VoltVariAbility extends ChargeableAbility
 	
 	public VoltVariAbility()
 	{
-		super("Volt Vari", Category.DEVIL_FRUIT);
+		super("Volt Vari", AbilityCategory.DEVIL_FRUIT);
 		this.setDescription("Creates a concentrated ball of lightning, which varies in power");
 		this.setMaxCooldown(3);
 		this.setMaxChargeTime(10);

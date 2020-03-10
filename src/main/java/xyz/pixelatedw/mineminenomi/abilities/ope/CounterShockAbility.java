@@ -2,12 +2,12 @@ package xyz.pixelatedw.mineminenomi.abilities.ope;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.abilities.PunchAbility;
-import xyz.pixelatedw.mineminenomi.api.abilities.extra.ExplosionAbility;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability.Category;
+import xyz.pixelatedw.mineminenomi.api.abilities.ExplosionAbility;
+import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.particles.effects.common.CommonExplosionParticleEffect;
+import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
+import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.abilities.PunchAbility;
 
 public class CounterShockAbility extends PunchAbility
 {
@@ -15,7 +15,7 @@ public class CounterShockAbility extends PunchAbility
 	
 	public CounterShockAbility()
 	{
-		super("Counter Shock", Category.DEVIL_FRUIT);
+		super("Counter Shock", AbilityCategory.DEVIL_FRUIT);
 		this.setMaxCooldown(10);
 		this.setDescription("Releases a strong electrical current which shocks the opponent");
 		
@@ -24,7 +24,7 @@ public class CounterShockAbility extends PunchAbility
 	
 	private float onHitEntity(PlayerEntity player, LivingEntity target)
 	{		
-		ExplosionAbility explosion = WyHelper.newExplosion(player, target.posX, target.posY, target.posZ, 1);
+		ExplosionAbility explosion = DevilFruitsHelper.newExplosion(player, target.posX, target.posY, target.posZ, 1);
 		explosion.setExplosionSound(true);
 		explosion.setDamageOwner(false);
 		explosion.setDestroyBlocks(false);

@@ -11,16 +11,19 @@ import net.minecraftforge.client.event.InputEvent.KeyInputEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
-import xyz.pixelatedw.mineminenomi.Env;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
-import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
+import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
+import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.packets.client.CCombatModeTriggerPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CRequestSyncPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CUseAbilityPacket;
 import xyz.pixelatedw.mineminenomi.screens.PlayerStatsScreen;
+import xyz.pixelatedw.wypi.APIConfig;
+import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
+import xyz.pixelatedw.wypi.data.ability.IAbilityData;
+import xyz.pixelatedw.wypi.network.WyNetwork;
 
-@Mod.EventBusSubscriber(modid = Env.PROJECT_ID)
+@Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class ModKeybindings
 {
 	public static KeyBinding guiPlayer, enterCombatMode, combatSlot1, combatSlot2, combatSlot3, combatSlot4, combatSlot5, combatSlot6, combatSlot7, combatSlot8;
@@ -75,19 +78,20 @@ public class ModKeybindings
 			return;
 
 		IAbilityData abilityDataProps = AbilityDataCapability.get(player);
-
+		IEntityStats entityStatsProps = EntityStatsCapability.get(player);
+		
 		if (guiPlayer.isPressed())
 		{
 			byte sync = 0b000100111;
-			ModNetwork.sendToServer(new CRequestSyncPacket(sync));
+			WyNetwork.sendToServer(new CRequestSyncPacket(sync));
 			
 			Minecraft.getInstance().displayGuiScreen(new PlayerStatsScreen(player));
 		}
 
 		if (enterCombatMode.isPressed())
 		{
-			abilityDataProps.setCombatMode(!abilityDataProps.isInCombatMode());
-			if (abilityDataProps.isInCombatMode())
+			entityStatsProps.setCombatMode(!entityStatsProps.isInCombatMode());
+			if (entityStatsProps.isInCombatMode())
 			{
 				for (KeyBinding kb : Minecraft.getInstance().gameSettings.keyBindsHotbar)
 				{
@@ -121,7 +125,7 @@ public class ModKeybindings
 
 				KeyBinding.resetKeyBindingArrayAndHash();
 			}
-			ModNetwork.sendToServer(new CCombatModeTriggerPacket());
+			WyNetwork.sendToServer(new CCombatModeTriggerPacket());
 		}
 
 		int j = keyBindsCombatbar.length;
@@ -130,9 +134,9 @@ public class ModKeybindings
 		{
 			if (keyBindsCombatbar[i].isPressed())
 			{
-				Ability abl = abilityDataProps.getAbilityInSlot(i);
-				if (abilityDataProps.isInCombatMode() && abl != null)
-					ModNetwork.sendToServer(new CUseAbilityPacket(abl.getName()));
+				Ability abl = abilityDataProps.getEquippedAbility(i);
+				if (entityStatsProps.isInCombatMode() && abl != null)
+					WyNetwork.sendToServer(new CUseAbilityPacket(i));
 				else
 					player.inventory.currentItem = i;
 			}

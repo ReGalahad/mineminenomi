@@ -8,13 +8,14 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.client.gui.ScrollPanel;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.WyRenderHelper;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
-import xyz.pixelatedw.mineminenomi.api.network.packets.client.CAbilityDataSyncPacket;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
+import xyz.pixelatedw.mineminenomi.api.helpers.ModRendererHelper;
 import xyz.pixelatedw.mineminenomi.screens.SelectHotbarAbilitiesScreen;
+import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
+import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.data.ability.IAbilityData;
+import xyz.pixelatedw.wypi.network.WyNetwork;
+import xyz.pixelatedw.wypi.network.packets.client.CSyncAbilityDataPacket;
 
 public class AbilitiesListScreenPanel extends ScrollPanel
 {
@@ -62,11 +63,11 @@ public class AbilitiesListScreenPanel extends ScrollPanel
 
 			if (entry != null)
 			{
-				if(this.props.hasAbilityInHotbar(entry.ability))
+				if(this.props.hasEquippedAbility(entry.ability))
 					flag = true;
 
 				Minecraft.getInstance().fontRenderer.drawStringWithShadow(I18n.format("ability." + WyHelper.getResourceName(entry.ability.getName()) + ".name"), x, y + 4, flag ? 0xFF0000 : 0xFFFFFF);
-				WyRenderHelper.drawAbilityIcon(WyHelper.getResourceName(entry.ability.getName()), MathHelper.floor(x) - 30, MathHelper.floor(y), 16, 16);
+				ModRendererHelper.drawAbilityIcon(WyHelper.getResourceName(entry.ability.getName()), MathHelper.floor(x) - 30, MathHelper.floor(y), 16, 16);
 			}
 
 			relativeY += ENTRY_HEIGHT * 1.25;
@@ -103,9 +104,9 @@ public class AbilitiesListScreenPanel extends ScrollPanel
 
 		boolean flag = true;
 		
-		for (int i = 0; i < this.props.getHotbarAbilities().length; i++)
+		for (int i = 0; i < this.props.getEquippedAbilities(AbilityCategory.ALL).size(); i++)
 		{
-			if (this.props.getAbilityInSlot(i) != null && this.props.getAbilityInSlot(i).equals(entry.ability))
+			if (this.props.getEquippedAbility(i) != null && this.props.getEquippedAbility(i).equals(entry.ability))
 			{
 				flag = false;
 			}
@@ -113,8 +114,8 @@ public class AbilitiesListScreenPanel extends ScrollPanel
 		
 		if (flag)
 		{
-			this.props.setAbilityInHotbar(this.parent.slotSelected, entry.ability);
-			ModNetwork.sendToServer(new CAbilityDataSyncPacket(this.props));
+			this.props.setEquippedAbility(this.parent.slotSelected, entry.ability);
+			WyNetwork.sendToServer(new CSyncAbilityDataPacket(this.props));
 		}
 
 		return super.mouseClicked(mouseX, mouseY, button);

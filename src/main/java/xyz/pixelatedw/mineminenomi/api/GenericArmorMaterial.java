@@ -70,12 +70,12 @@ public class GenericArmorMaterial implements IArmorMaterial
 	@Override
 	public String getName()
 	{
-		return name;
+		return this.name;
 	}
 
 	@Override
 	public float getToughness()
 	{
-		return toughness;
+		return this.toughness;
 	}
 }

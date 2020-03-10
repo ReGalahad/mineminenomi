@@ -14,8 +14,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.WantedPosterTileEntity;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.packets.server.SOpenWantedPosterScreenPacket;
+import xyz.pixelatedw.wypi.network.WyNetwork;
 
 public class WantedPosterItem extends WallOrFloorItem
 {
@@ -29,7 +29,7 @@ public class WantedPosterItem extends WallOrFloorItem
 	public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand)
 	{
 		if (player.getHeldItem(hand).hasTag())
-			ModNetwork.sendTo(new SOpenWantedPosterScreenPacket(), (ServerPlayerEntity)player);
+			WyNetwork.sendTo(new SOpenWantedPosterScreenPacket(), (ServerPlayerEntity)player);
 		return new ActionResult<>(ActionResultType.SUCCESS, player.getHeldItem(hand));
 	}
 

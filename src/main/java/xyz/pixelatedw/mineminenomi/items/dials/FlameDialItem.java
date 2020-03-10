@@ -14,7 +14,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
 
@@ -46,7 +45,6 @@ public class FlameDialItem extends BlockItem
 	    		
 		    	if(!player.isCreative())
 		    	{
-		    		WyTelemetry.addMiscStat("flameDialsUsed", "Flame Dials Used", 1);
 					player.getHeldItem(hand).shrink(1);
 					player.sendBreakAnimation(EquipmentSlotType.MAINHAND);
 				}
@@ -59,8 +57,6 @@ public class FlameDialItem extends BlockItem
 	@Override
 	protected boolean onBlockPlaced(BlockPos pos, World world, @Nullable PlayerEntity player, ItemStack itemStack, BlockState state)
 	{
-    	if(!player.isCreative())
-    		WyTelemetry.addMiscStat("flameDialsPlaced", "Flame Dials Placed", 1);
 		return super.onBlockPlaced(pos, world, player, itemStack, state);
 	}
 }

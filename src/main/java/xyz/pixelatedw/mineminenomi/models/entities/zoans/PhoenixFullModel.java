@@ -3,7 +3,6 @@ package xyz.pixelatedw.mineminenomi.models.entities.zoans;
 import net.minecraft.client.renderer.entity.model.RendererModel;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
-import xyz.pixelatedw.mineminenomi.api.WyRenderHelper;
 
 public class PhoenixFullModel extends ZoanMorphModel
 {
@@ -43,8 +42,8 @@ public class PhoenixFullModel extends ZoanMorphModel
 
 	public PhoenixFullModel()
 	{
-		wingAnimationArray = WyRenderHelper.generateAnimationArray(0, -20, 20, 0.9, 1);
-		tailAnimationArray = WyRenderHelper.generateAnimationArray(0, -5, 5, 0.5, 1);
+		//wingAnimationArray = WyRenderHelper.generateAnimationArray(0, -20, 20, 0.9, 1);
+		//tailAnimationArray = WyRenderHelper.generateAnimationArray(0, -5, 5, 0.5, 1);
 
 		this.textureWidth = 128;
 		this.textureHeight = 64;

@@ -1,10 +1,10 @@
 package xyz.pixelatedw.mineminenomi.abilities.goro;
 
 import net.minecraft.entity.player.PlayerEntity;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.abilities.RepeaterAbility;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability.Category;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.goro.SangoProjectile;
+import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
+import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.abilities.RepeaterAbility;
 
 public class SangoAbility extends RepeaterAbility
 {
@@ -12,7 +12,7 @@ public class SangoAbility extends RepeaterAbility
 
 	public SangoAbility()
 	{
-		super("Sango", Category.DEVIL_FRUIT);
+		super("Sango", AbilityCategory.DEVIL_FRUIT);
 		this.setDescription("Launches a huge concentrated chunk of electricity at the opponent");
 		this.setMaxCooldown(10);
 		this.setMaxRepearCount(5, 3);

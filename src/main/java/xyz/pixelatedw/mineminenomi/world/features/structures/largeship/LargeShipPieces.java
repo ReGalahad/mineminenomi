@@ -2,7 +2,6 @@ package xyz.pixelatedw.mineminenomi.world.features.structures.largeship;
 
 import java.util.Random;
 
-import net.minecraft.block.Blocks;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.LockableLootTileEntity;
 import net.minecraft.util.ResourceLocation;
@@ -14,14 +13,13 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.structure.StructurePiece;
 import net.minecraft.world.gen.feature.template.TemplateManager;
-import xyz.pixelatedw.mineminenomi.api.debug.WyDebug;
-import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
-import xyz.pixelatedw.mineminenomi.api.schematic.WySchematicHelper;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.CustomSpawnerTileEntity;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.mineminenomi.init.ModFeatures;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
+import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.debug.WyDebug;
 
 public class LargeShipPieces
 {
@@ -52,13 +50,13 @@ public class LargeShipPieces
 			int i = world.getHeight(Heightmap.Type.WORLD_SURFACE_WG, this.boundingBox.minX, this.boundingBox.minZ);
 			BlockPos pos = new BlockPos.MutableBlockPos(this.boundingBox.minX, i, this.boundingBox.minZ).down(4);
 			
-			int spawnLimit = (int) WyMathHelper.randomWithRange(4, 6);
+			int spawnLimit = (int) WyHelper.randomWithRange(4, 6);
 
 			try
 			{
 				if(rand.nextDouble() < 0.4)
 				{
-					WySchematicHelper.build(WySchematicHelper.load("marineLargeShip"), world, pos, Blocks.BEDROCK);
+				//	WySchematicHelper.build(WySchematicHelper.load("marineLargeShip"), world, pos, Blocks.BEDROCK);
 									
 					world.setBlockState(pos.add(11, 6, 35), ModBlocks.CUSTOM_SPAWNER.getDefaultState(), 2);
 					((CustomSpawnerTileEntity) world.getTileEntity(pos.add(11, 6, 35))).setSpawnerMob(ModEntities.MARINE_WITH_SWORD).setSpawnerLimit(spawnLimit);
@@ -80,7 +78,7 @@ public class LargeShipPieces
 				}
 				else
 				{
-					WySchematicHelper.build(WySchematicHelper.load("pyrateLargeShip"), world, pos, Blocks.BEDROCK);
+				//	WySchematicHelper.build(WySchematicHelper.load("pyrateLargeShip"), world, pos, Blocks.BEDROCK);
 					
 					world.setBlockState(pos.add(11, 6, 35), ModBlocks.CUSTOM_SPAWNER.getDefaultState(), 2);
 					((CustomSpawnerTileEntity) world.getTileEntity(pos.add(11, 6, 35))).setSpawnerMob(ModEntities.PIRATE_WITH_SWORD).setSpawnerLimit(spawnLimit);

@@ -1,6 +1,6 @@
 package xyz.pixelatedw.mineminenomi.init;
 
-import xyz.pixelatedw.mineminenomi.api.WyRegistry;
+import xyz.pixelatedw.wypi.WyRegistry;
 
 public class ModI18n
 {

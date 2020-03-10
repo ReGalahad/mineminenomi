@@ -1,31 +1,23 @@
 package xyz.pixelatedw.mineminenomi.events;
 
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.event.ClickEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import xyz.pixelatedw.mineminenomi.Env;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
-import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
-import xyz.pixelatedw.mineminenomi.api.data.quest.IQuestData;
-import xyz.pixelatedw.mineminenomi.api.data.quest.QuestDataCapability;
-import xyz.pixelatedw.mineminenomi.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.events.custom.YomiTriggerEvent;
+import xyz.pixelatedw.wypi.APIConfig;
+import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
+import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 
-@Mod.EventBusSubscriber(modid = Env.PROJECT_ID)
+@Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class EventsCore
 {
 	// Cloning the player data to the new entity based on the config option
@@ -108,66 +100,14 @@ public class EventsCore
 			}
 		
 			// Keep the quests no matter the config
-			IQuestData oldQuestData = QuestDataCapability.get(event.getOriginal());
-			CompoundNBT nbt = (CompoundNBT) QuestDataCapability.INSTANCE.writeNBT(oldQuestData, null);
-			IQuestData newQuestData = QuestDataCapability.get(event.getPlayer());
-			QuestDataCapability.INSTANCE.readNBT(newQuestData, null, nbt);
+			//IQuestData oldQuestData = QuestDataCapability.get(event.getOriginal());
+			//CompoundNBT nbt = (CompoundNBT) QuestDataCapability.INSTANCE.writeNBT(oldQuestData, null);
+			//IQuestData newQuestData = QuestDataCapability.get(event.getPlayer());
+			//QuestDataCapability.INSTANCE.readNBT(newQuestData, null, nbt);
 			
 			YomiTriggerEvent yomiEvent = new YomiTriggerEvent(event.getPlayer(), oldPlayerProps, newPlayerProps);
 			if (MinecraftForge.EVENT_BUS.post(yomiEvent))
 				return;
-		}
-	}
-	
-	// Protection code and the update notification message
-	@SubscribeEvent
-	public static void onEntityJoinWorld(EntityJoinWorldEvent event)
-	{
-		if (event.getEntity() instanceof PlayerEntity)
-		{
-			PlayerEntity player = (PlayerEntity) event.getEntity();
-
-			if (!player.world.isRemote)
-			{
-				if(CommonConfig.instance.isUpdateMessageEnabled())
-				{
-					try 
-					{
-						String[] version = Env.PROJECT_VERSION.replaceAll("[^0-9.]", "").split("\\.");
-						
-						int currentX = Integer.parseInt(version[0]) * 100;
-						int currentY = Integer.parseInt(version[1]) * 10;
-						int currentZ = Integer.parseInt(version[2]);
-						
-						int currentVersion = currentX + currentY + currentZ;
-						
-						String apiURL = "/version?minecraft-version=" + Env.PROJECT_MCVERSION;
-						
-						String result = WyTelemetry.sendGET(apiURL);
-						
-						if(!WyHelper.isNullOrEmpty(result))
-						{
-							String[] resultVersion = result.replaceAll("[^0-9.]", "").split("\\.");
-							
-							int latestX = Integer.parseInt(resultVersion[0]) * 100;
-							int latestY = Integer.parseInt(resultVersion[1]) * 10;
-							int latestZ = Integer.parseInt(resultVersion[2]);
-							
-							int latestVersion = latestX + latestY + latestZ;
-
-							if(latestVersion > currentVersion)
-							{
-								player.sendMessage(new StringTextComponent(TextFormatting.RED + "" + TextFormatting.BOLD + "[UPDATE]" + TextFormatting.RED + " Mine Mine no Mi " + result + " is now available !").applyTextStyle((style) -> { style.setColor(TextFormatting.GOLD).setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "http://pixelatedw.xyz/versions")); }) );
-								player.sendMessage(new StringTextComponent(TextFormatting.RED + "Download it from the official website : [http://pixelatedw.xyz/versions]").applyTextStyle((style) -> { style.setColor(TextFormatting.GOLD).setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "http://pixelatedw.xyz/versions")); })  );
-							}
-						}
-					}
-					catch(Exception e)
-					{
-						System.out.println("Connection failed !");
-					}
-				}
-			}
 		}
 	}
 }

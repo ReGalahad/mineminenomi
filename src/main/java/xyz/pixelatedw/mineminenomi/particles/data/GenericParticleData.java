@@ -7,9 +7,9 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ParticleType;
 import net.minecraft.util.ResourceLocation;
-import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.init.ModParticleTypes;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
+import xyz.pixelatedw.wypi.APIConfig;
 
 public class GenericParticleData implements IParticleData
 {
@@ -32,7 +32,7 @@ public class GenericParticleData implements IParticleData
 			double motionY = stringReader.readDouble();
 			double motionZ = stringReader.readDouble();
 
-			ResourceLocation texture = new ResourceLocation(Env.PROJECT_ID, "textures/particles/" + stringReader.readString() + ".png");
+			ResourceLocation texture = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/" + stringReader.readString() + ".png");
 			
 			GenericParticleData data = new GenericParticleData();
 			data.setColor(red, green, blue, alpha);
@@ -60,7 +60,7 @@ public class GenericParticleData implements IParticleData
 			double motionY = packetBuffer.readDouble();
 			double motionZ = packetBuffer.readDouble();
 			
-			ResourceLocation texture = new ResourceLocation(Env.PROJECT_ID, "textures/particles/" + packetBuffer.readString() + ".png");
+			ResourceLocation texture = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/" + packetBuffer.readString() + ".png");
 			
 			GenericParticleData data = new GenericParticleData();
 			data.setColor(red, green, blue, alpha);

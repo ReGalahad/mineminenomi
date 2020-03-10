@@ -19,15 +19,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
-import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
+import xyz.pixelatedw.mineminenomi.api.helpers.MorphsHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfo;
-import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
-import xyz.pixelatedw.mineminenomi.helpers.MorphsHelper;
 import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer;
+import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
+import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 
 @OnlyIn(Dist.CLIENT)
 public class ZoanFirstPersonRenderer
@@ -91,7 +90,7 @@ public class ZoanFirstPersonRenderer
 			{
 				ZoanMorphRenderer render = MorphsHelper.getZoanInfoList().get(0).getFactory().createRenderFor(renderManager);
 	
-				ZoanInfo info = DevilFruitsHelper.getZoanInfo(clientPlayer);
+				ZoanInfo info = MorphsHelper.getZoanInfo(clientPlayer);
 				if(info != null)
 					render = info.getFactory().createRenderFor(renderManager);
 	
@@ -121,7 +120,7 @@ public class ZoanFirstPersonRenderer
 		IAbilityData abilityProps = AbilityDataCapability.get(player);
 		ZoanMorphRenderer render = null;
 
-		ZoanInfo info = DevilFruitsHelper.getZoanInfo(player);
+		ZoanInfo info = MorphsHelper.getZoanInfo(player);
 		if(info != null)
 			render = info.getFactory().createRenderFor(renderManager);
 

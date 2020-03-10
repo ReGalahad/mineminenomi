@@ -3,9 +3,9 @@ package xyz.pixelatedw.mineminenomi.abilities.suke;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.abilities.ContinuousAbility;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability.Category;
+import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
+import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.abilities.ContinuousAbility;
 
 public class SkattingAbility extends ContinuousAbility
 {
@@ -13,7 +13,7 @@ public class SkattingAbility extends ContinuousAbility
 
 	public SkattingAbility()
 	{
-		super("Skatting", Category.DEVIL_FRUIT);
+		super("Skatting", AbilityCategory.DEVIL_FRUIT);
 		this.setDescription("Turns the user's entire body invisible.");
 		
 		this.duringContinuity = this::duringContinuity;

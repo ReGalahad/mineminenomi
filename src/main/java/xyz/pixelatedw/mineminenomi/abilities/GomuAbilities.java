@@ -8,7 +8,7 @@
  * import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
  * import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
  * import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
- * import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
+ * import xyz.pixelatedw.mineminenomi.api.math.WyHelper;
  * import xyz.pixelatedw.mineminenomi.config.CommonConfig;
  * import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
  * import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
@@ -175,9 +175,9 @@
  * else if(type == 3)
  * proj = new GomuProjectiles.GomuGomuNoKongOrgan(player.world, player, ModExtraAttributes.GOMU_GOMU_NO_KONG_ORGAN);
  * proj.setLocationAndAngles(
- * player.posX + WyMathHelper.randomWithRange(-projectileSpace, projectileSpace) + player.world.rand.nextDouble(),
- * (player.posY + 0.3) + WyMathHelper.randomWithRange(0, projectileSpace) + player.world.rand.nextDouble(),
- * player.posZ + WyMathHelper.randomWithRange(-projectileSpace, projectileSpace) + player.world.rand.nextDouble(),
+ * player.posX + WyHelper.randomWithRange(-projectileSpace, projectileSpace) + player.world.rand.nextDouble(),
+ * (player.posY + 0.3) + WyHelper.randomWithRange(0, projectileSpace) + player.world.rand.nextDouble(),
+ * player.posZ + WyHelper.randomWithRange(-projectileSpace, projectileSpace) + player.world.rand.nextDouble(),
  * 0, 0);
  * player.world.addEntity(proj);
  * proj.shoot(player, player.rotationPitch, player.rotationYaw, 0, 2f, 1);

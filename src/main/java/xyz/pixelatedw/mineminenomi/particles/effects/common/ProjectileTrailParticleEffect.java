@@ -3,9 +3,9 @@ package xyz.pixelatedw.mineminenomi.particles.effects.common;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
 import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
+import xyz.pixelatedw.wypi.WyHelper;
 
 public class ProjectileTrailParticleEffect extends ParticleEffect
 {
@@ -35,9 +35,9 @@ public class ProjectileTrailParticleEffect extends ParticleEffect
 	{	
 		for (int i = 0; i < this.density; i++)
 		{
-			posX +=  WyMathHelper.randomDouble() / 3;
-			posY +=  WyMathHelper.randomDouble() / 3;
-			posZ +=  WyMathHelper.randomDouble() / 3;
+			posX +=  WyHelper.randomDouble() / 3;
+			posY +=  WyHelper.randomDouble() / 3;
+			posZ +=  WyHelper.randomDouble() / 3;
 			
 			SimpleParticle cp = new SimpleParticle(world, this.particleTexture,
 					posX, 

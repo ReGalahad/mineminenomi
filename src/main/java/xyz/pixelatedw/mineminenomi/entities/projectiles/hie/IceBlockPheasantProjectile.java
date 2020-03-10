@@ -6,11 +6,10 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.abilities.projectiles.AbilityProjectileEntity;
-import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.data.GenericParticleData;
+import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 
 public class IceBlockPheasantProjectile  extends AbilityProjectileEntity
 {
@@ -51,9 +50,9 @@ public class IceBlockPheasantProjectile  extends AbilityProjectileEntity
 		{
 			for (int i = 0; i < 5; i++)
 			{
-				double offsetX = WyMathHelper.randomDouble();
-				double offsetY = WyMathHelper.randomDouble();
-				double offsetZ = WyMathHelper.randomDouble();
+				double offsetX = WyHelper.randomDouble();
+				double offsetY = WyHelper.randomDouble();
+				double offsetZ = WyHelper.randomDouble();
 
 				GenericParticleData data = new GenericParticleData();
 				data.setTexture(ModResources.HIE);

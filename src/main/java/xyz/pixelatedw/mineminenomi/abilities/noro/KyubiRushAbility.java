@@ -4,9 +4,9 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.abilities.PunchAbility;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability.Category;
+import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
+import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.abilities.PunchAbility;
 
 public class KyubiRushAbility extends PunchAbility
 {
@@ -14,7 +14,7 @@ public class KyubiRushAbility extends PunchAbility
 
 	public KyubiRushAbility()
 	{
-		super("Kyubi Rush", Category.DEVIL_FRUIT);
+		super("Kyubi Rush", AbilityCategory.DEVIL_FRUIT);
 		this.setMaxCooldown(5);
 		this.setDescription("While the opponent is slowed, the user delivers a series of punches, which hits the opponent all at once");
 

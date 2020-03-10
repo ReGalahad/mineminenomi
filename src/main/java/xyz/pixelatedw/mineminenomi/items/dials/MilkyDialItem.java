@@ -12,11 +12,9 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.api.telemetry.WyTelemetry;
-import xyz.pixelatedw.mineminenomi.entities.projectiles.ExtraProjectiles.MilkyDialProjectile;
+import xyz.pixelatedw.mineminenomi.entities.projectiles.extra.MilkyDialProjectile;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
-import xyz.pixelatedw.mineminenomi.init.ModExtraAttributes;
 
 public class MilkyDialItem extends BlockItem
 {
@@ -31,13 +29,12 @@ public class MilkyDialItem extends BlockItem
 	{
 		if (!world.isRemote)
 		{
-    		MilkyDialProjectile proj = new MilkyDialProjectile(player.world, player, ModExtraAttributes.DIAL_MILKY);
+    		MilkyDialProjectile proj = new MilkyDialProjectile(player.world, player);
 			
     		world.addEntity(proj);
     		
 			if (!player.isCreative())
 			{
-				WyTelemetry.addMiscStat("milkytDialsUsed", "Milky Dials Used", 1);
 				player.getHeldItem(hand).shrink(1);
 				player.sendBreakAnimation(EquipmentSlotType.MAINHAND);
 			}
@@ -49,8 +46,6 @@ public class MilkyDialItem extends BlockItem
 	@Override
 	protected boolean onBlockPlaced(BlockPos pos, World world, @Nullable PlayerEntity player, ItemStack itemStack, BlockState state)
 	{
-    	if(!player.isCreative())
-    		WyTelemetry.addMiscStat("milkyDialsPlaced", "Milky Dials Placed", 1);
 		return super.onBlockPlaced(pos, world, player, itemStack, state);
 	}
 }

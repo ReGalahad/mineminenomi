@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.entity.EntityType;
-import xyz.pixelatedw.mineminenomi.api.WyRegistry;
-import xyz.pixelatedw.mineminenomi.api.abilities.models.CubeModel;
-import xyz.pixelatedw.mineminenomi.api.abilities.models.SphereModel;
-import xyz.pixelatedw.mineminenomi.api.abilities.projectiles.AbilityProjectileEntity;
-import xyz.pixelatedw.mineminenomi.api.abilities.projectiles.AbilityProjectileEntity.Data;
-import xyz.pixelatedw.mineminenomi.api.abilities.renderers.AbilityProjectileRenderer;
+import xyz.pixelatedw.wypi.WyRegistry;
+import xyz.pixelatedw.wypi.abilities.models.CubeModel;
+import xyz.pixelatedw.wypi.abilities.models.SphereModel;
+import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
+import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity.Data;
+import xyz.pixelatedw.wypi.abilities.renderers.AbilityProjectileRenderer;
 
 public class PikaProjectiles
 {

@@ -18,28 +18,28 @@ public class DesertSpadaParticleEffect extends ParticleEffect
 			double z = 0;
 
 			motionX = 0;
-			motionY = 0.05 + (WyMathHelper.randomDouble() / 50);
+			motionY = 0.05 + (WyHelper.randomDouble() / 50);
 			motionZ = 0;
 			
 			if(WyHelper.get4Directions(player) == WyHelper.Direction.NORTH)
 			{
-				x = WyMathHelper.randomWithRange(-4, 4) + WyMathHelper.randomDouble();
+				x = WyHelper.randomWithRange(-4, 4) + WyHelper.randomDouble();
 				z = -i * 0.2;
 			}
 			else if(WyHelper.get4Directions(player) == WyHelper.Direction.EAST)
 			{
 				x = i * 0.2;
-				z = WyMathHelper.randomWithRange(-4, 4) + WyMathHelper.randomDouble();
+				z = WyHelper.randomWithRange(-4, 4) + WyHelper.randomDouble();
 			}
 			else if(WyHelper.get4Directions(player) == WyHelper.Direction.SOUTH)
 			{
-				x = WyMathHelper.randomWithRange(-4, 4) + WyMathHelper.randomDouble();
+				x = WyHelper.randomWithRange(-4, 4) + WyHelper.randomDouble();
 				z = i * 0.2;
 			}
 			else if(WyHelper.get4Directions(player) == WyHelper.Direction.WEST)
 			{
 				x = -i * 0.2;
-				z = WyMathHelper.randomWithRange(-4, 4) + WyMathHelper.randomDouble();
+				z = WyHelper.randomWithRange(-4, 4) + WyHelper.randomDouble();
 			}
 			
 			CustomParticle cp = new CustomParticle(player.world, ModParticleTextures.SUNA,

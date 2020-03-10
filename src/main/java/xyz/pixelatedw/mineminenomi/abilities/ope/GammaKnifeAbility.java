@@ -1,11 +1,11 @@
 package xyz.pixelatedw.mineminenomi.abilities.ope;
 
 import net.minecraft.entity.player.PlayerEntity;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability.Category;
+import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.ope.GammaKnifeProjectile;
-import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
+import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.abilities.Ability;
 
 public class GammaKnifeAbility extends Ability
 {
@@ -13,7 +13,7 @@ public class GammaKnifeAbility extends Ability
 
 	public GammaKnifeAbility()
 	{
-		super("Gamma Knife", Category.DEVIL_FRUIT);
+		super("Gamma Knife", AbilityCategory.DEVIL_FRUIT);
 		this.setMaxCooldown(30);
 		this.setDescription("Creates a blade of gamma radiation which massively damages the opponent's organs");
 

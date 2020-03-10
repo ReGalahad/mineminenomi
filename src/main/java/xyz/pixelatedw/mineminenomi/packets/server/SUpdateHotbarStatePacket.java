@@ -10,10 +10,10 @@ import net.minecraft.nbt.INBT;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
-import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
+import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
+import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 
 public class SUpdateHotbarStatePacket
 {
@@ -70,10 +70,10 @@ public class SUpdateHotbarStatePacket
 
 				for (int i = 0; i < 8; i++)
 				{
-					if (props.getHotbarAbilities()[i] == null)
+					if (props.getEquippedAbility(i) == null)
 						continue;
 
-					Ability cAbl = props.getAbility(props.getHotbarAbilities()[i]);
+					Ability cAbl = props.getEquippedAbility(i);
 
 					if (cAbl == null || !cAbl.equals(sAbl))
 						continue;

@@ -18,13 +18,11 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.abilities.projectiles.AbilityProjectileEntity;
-import xyz.pixelatedw.mineminenomi.api.telemetry.WyTelemetry;
-import xyz.pixelatedw.mineminenomi.entities.projectiles.ExtraProjectiles;
+import xyz.pixelatedw.mineminenomi.entities.projectiles.extra.KairosekiBulletProjectile;
+import xyz.pixelatedw.mineminenomi.entities.projectiles.extra.NormalBulletProjectile;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
-import xyz.pixelatedw.mineminenomi.init.ModExtraAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModItems;
+import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 
 public class FlintlockItem extends Item
 {
@@ -64,12 +62,9 @@ public class FlintlockItem extends Item
 						int powder = itemStack.getTag().getInt("gunPowder");
 						if (!world.isRemote)
 						{
-							if (itemStack.getTag().getInt("bulletType") == 0) proj = new ExtraProjectiles.NormalBullet(player.world, player, ModExtraAttributes.NORMAL_BULLET);
-							else if (itemStack.getTag().getInt("bulletType") == 1) proj = new ExtraProjectiles.KairosekiBullet(player.world, player, ModExtraAttributes.KAIROSEKI_BULLET);
+							if (itemStack.getTag().getInt("bulletType") == 0) proj = new NormalBulletProjectile(player.world, player);
+							else if (itemStack.getTag().getInt("bulletType") == 1) proj = new KairosekiBulletProjectile(player.world, player);
 							player.world.addEntity(proj);
-							
-							String id = (itemStack.getTag().getInt("bulletType") == 0 ? "normal" : "kairoseki");
-					    	WyTelemetry.addMiscStat(id + "BulletsShot", WyHelper.upperCaseFirst(id) + " Bullets Shot", 1);
 						}
 	
 						itemStack.getTag().putBoolean("canUse", false);

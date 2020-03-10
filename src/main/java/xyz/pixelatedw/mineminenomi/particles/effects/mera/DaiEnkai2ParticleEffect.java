@@ -4,11 +4,10 @@ import java.util.Random;
 
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.data.GenericParticleData;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
+import xyz.pixelatedw.wypi.WyHelper;
 
 public class DaiEnkai2ParticleEffect extends ParticleEffect
 {
@@ -39,21 +38,21 @@ public class DaiEnkai2ParticleEffect extends ParticleEffect
 				data.setLife(1);
 				data.setSize(1.3F);
 				data.setMotion(motionX, motionY, motionZ);
-				WyHelper.spawnParticles(data, (ServerWorld) world, posX + (x * 1.25) + WyMathHelper.randomDouble(), posY + y, posZ + (z * 1.25) + WyMathHelper.randomDouble());
+				WyHelper.spawnParticles(data, (ServerWorld) world, posX + (x * 1.25) + WyHelper.randomDouble(), posY + y, posZ + (z * 1.25) + WyHelper.randomDouble());
 				
 				data = new GenericParticleData();
 				data.setTexture(ModResources.MERA);
 				data.setLife(3);
 				data.setSize(1.3F);
 				data.setMotion(motionX, motionY + 0.15, motionZ);
-				WyHelper.spawnParticles(data, (ServerWorld) world, posX + (x * 2.0) + WyMathHelper.randomDouble(), posY + y, posZ + (z * 2.0) + WyMathHelper.randomDouble());
+				WyHelper.spawnParticles(data, (ServerWorld) world, posX + (x * 2.0) + WyHelper.randomDouble(), posY + y, posZ + (z * 2.0) + WyHelper.randomDouble());
 
 				data = new GenericParticleData();
 				data.setTexture(ModResources.MERA);
 				data.setLife(5);
 				data.setSize(1.3F);
 				data.setMotion(motionX, motionY + 0.25, motionZ);
-				WyHelper.spawnParticles(data, (ServerWorld) world, posX + (x * 3.25) + WyMathHelper.randomDouble(), posY + y, posZ + (z * 3.25) + WyMathHelper.randomDouble());
+				WyHelper.spawnParticles(data, (ServerWorld) world, posX + (x * 3.25) + WyHelper.randomDouble(), posY + y, posZ + (z * 3.25) + WyHelper.randomDouble());
 			}
 		}
 	}

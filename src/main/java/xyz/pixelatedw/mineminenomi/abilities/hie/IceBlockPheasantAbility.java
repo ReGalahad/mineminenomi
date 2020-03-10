@@ -1,9 +1,9 @@
 package xyz.pixelatedw.mineminenomi.abilities.hie;
 
 import net.minecraft.entity.player.PlayerEntity;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability.Category;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.hie.IceBlockPheasantProjectile;
+import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
+import xyz.pixelatedw.wypi.abilities.Ability;
 
 public class IceBlockPheasantAbility extends Ability
 {
@@ -11,7 +11,7 @@ public class IceBlockPheasantAbility extends Ability
 
 	public IceBlockPheasantAbility()
 	{
-		super("Ice Block: Pheasant", Category.DEVIL_FRUIT);
+		super("Ice Block: Pheasant", AbilityCategory.DEVIL_FRUIT);
 		this.setMaxCooldown(20);
 		this.setDescription("Releases a massive wave of ice in the shape of a pheasant.");
 

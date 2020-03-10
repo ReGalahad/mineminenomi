@@ -9,15 +9,15 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.config.GuiUtils;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
 import xyz.pixelatedw.mineminenomi.packets.client.CDeleteCCBookPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CEntityStatsSyncPacket;
 import xyz.pixelatedw.mineminenomi.screens.extra.NoTextureButton;
+import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.network.WyNetwork;
 
 @OnlyIn(Dist.CLIENT)
 public class CharacterCreatorScreen extends Screen
@@ -244,8 +244,8 @@ public class CharacterCreatorScreen extends Screen
 			if(!WyHelper.isNullOrEmpty(props.getRace()) && !!WyHelper.isNullOrEmpty(props.getFaction()) && !!WyHelper.isNullOrEmpty(props.getFightingStyle()))
 			{
 				Minecraft.getInstance().displayGuiScreen(null);
-				ModNetwork.sendToServer(new CEntityStatsSyncPacket(props));
-				ModNetwork.sendToServer(new CDeleteCCBookPacket());
+				WyNetwork.sendToServer(new CEntityStatsSyncPacket(props));
+				WyNetwork.sendToServer(new CDeleteCCBookPacket());
 			}
 		}));
 	}

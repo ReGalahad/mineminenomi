@@ -4,13 +4,13 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.abilities.ItemAbility;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability.Category;
-import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
+import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
+import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.abilities.ItemAbility;
+import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
+import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 
 public class AbilitySwordItem extends CoreSwordItem
 {
@@ -30,7 +30,7 @@ public class AbilitySwordItem extends CoreSwordItem
 			IDevilFruit devilFruitProps = DevilFruitCapability.get(owner);
 			IAbilityData abilityDataProps = AbilityDataCapability.get(owner);
 
-			for(Ability ability : abilityDataProps.getAbilities(Category.ALL))
+			for(Ability ability : abilityDataProps.getEquippedAbilities(AbilityCategory.ALL))
 			{
 				if(ability == null || !(ability instanceof ItemAbility))
 					continue;

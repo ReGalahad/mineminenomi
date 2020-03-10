@@ -4,13 +4,13 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.StringTextComponent;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.abilities.PunchAbility;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability.Category;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.init.ModItems;
 import xyz.pixelatedw.mineminenomi.items.HeartItem;
+import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
+import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.abilities.PunchAbility;
 
 public class MesAbility extends PunchAbility
 {
@@ -18,7 +18,7 @@ public class MesAbility extends PunchAbility
 	
 	public MesAbility()
 	{
-		super("MES", Category.DEVIL_FRUIT);
+		super("MES", AbilityCategory.DEVIL_FRUIT);
 		this.setMaxCooldown(5);
 		this.setDescription("Removes the heart of the user's target which they can then damage to hurt the opponent");
 		

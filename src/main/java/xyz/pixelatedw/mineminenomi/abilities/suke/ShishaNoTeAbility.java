@@ -1,9 +1,9 @@
 package xyz.pixelatedw.mineminenomi.abilities.suke;
 
 import net.minecraft.entity.player.PlayerEntity;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability.Category;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.suke.ShishaNoTeProjectile;
+import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
+import xyz.pixelatedw.wypi.abilities.Ability;
 
 public class ShishaNoTeAbility extends Ability
 {
@@ -11,7 +11,7 @@ public class ShishaNoTeAbility extends Ability
 
 	public ShishaNoTeAbility()
 	{
-		super("Shisha no Te", Category.DEVIL_FRUIT);
+		super("Shisha no Te", AbilityCategory.DEVIL_FRUIT);
 		this.setMaxCooldown(8);
 		this.setDescription("Shoots invisible projectiles that explode upon impact.");
 

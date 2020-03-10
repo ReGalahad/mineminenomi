@@ -1,10 +1,10 @@
 package xyz.pixelatedw.mineminenomi.abilities.mera;
 
 import net.minecraft.entity.player.PlayerEntity;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.abilities.RepeaterAbility;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability.Category;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.mera.HiganProjectile;
+import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
+import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.abilities.RepeaterAbility;
 
 public class HiganAbility extends RepeaterAbility
 {
@@ -12,7 +12,7 @@ public class HiganAbility extends RepeaterAbility
 
 	public HiganAbility()
 	{
-		super("Higan", Category.DEVIL_FRUIT);
+		super("Higan", AbilityCategory.DEVIL_FRUIT);
 		this.setDescription("Turns the user's fingertips into flames and shoots bullets made of fire from them.");
 		this.setMaxCooldown(4);
 		this.setMaxRepearCount(5, 2);

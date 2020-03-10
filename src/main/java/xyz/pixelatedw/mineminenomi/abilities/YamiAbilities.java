@@ -12,7 +12,7 @@
  * import xyz.pixelatedw.mineminenomi.api.WyHelper;
  * import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
  * import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
- * import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
+ * import xyz.pixelatedw.mineminenomi.api.math.WyHelper;
  * import xyz.pixelatedw.mineminenomi.config.CommonConfig;
  * import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.YamiProjectiles;
  * import xyz.pixelatedw.mineminenomi.init.ModAttributes;
@@ -119,7 +119,7 @@
 									 * while(liberationCount > 0)
 									 * {
 									 * AbilityProjectile proj = new YamiProjectiles.Liberation(player.world, player, ModExtraAttributes.LIBERATION_BLOCK);
-									 * proj.setLocationAndAngles(x + WyMathHelper.randomWithRange(-3, 3), (y + 14) + WyMathHelper.randomWithRange(0, 4), z + WyMathHelper.randomWithRange(-3, 3), 0, 0);
+									 * proj.setLocationAndAngles(x + WyHelper.randomWithRange(-3, 3), (y + 14) + WyHelper.randomWithRange(0, 4), z + WyHelper.randomWithRange(-3, 3), 0, 0);
 									 * proj.setMotion(0, -0.7 - player.world.rand.nextDouble(), 0);
 									 * player.world.addEntity(proj);
 									 * liberationCount--;

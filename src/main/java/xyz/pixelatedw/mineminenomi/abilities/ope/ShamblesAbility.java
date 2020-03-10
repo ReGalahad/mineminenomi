@@ -4,10 +4,10 @@ import java.util.List;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability.Category;
-import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
+import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.abilities.Ability;
 
 public class ShamblesAbility extends Ability
 {
@@ -15,7 +15,7 @@ public class ShamblesAbility extends Ability
 
 	public ShamblesAbility()
 	{
-		super("Shambles", Category.DEVIL_FRUIT);
+		super("Shambles", AbilityCategory.DEVIL_FRUIT);
 		this.setMaxCooldown(8);
 		this.setDescription("The user swaps place with the closest entity within the ROOM");
 

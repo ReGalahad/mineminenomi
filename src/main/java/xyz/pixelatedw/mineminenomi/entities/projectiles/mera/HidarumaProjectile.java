@@ -5,12 +5,10 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.abilities.projectiles.AbilityProjectileEntity;
-import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
+import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 
 public class HidarumaProjectile extends AbilityProjectileEntity
 {
@@ -45,9 +43,9 @@ public class HidarumaProjectile extends AbilityProjectileEntity
 		hitEntity.setFire(200);
 	}
 	
-	private void onBlockImpactEvent(BlockRayTraceResult hit)
+	private void onBlockImpactEvent(BlockPos hit)
 	{		
-		this.world.setBlockState(new BlockPos(this.posX, this.posY, this.posZ), Blocks.FIRE.getDefaultState());
+		this.world.setBlockState(new BlockPos(hit.getX(), hit.getY(), hit.getZ()), Blocks.FIRE.getDefaultState());
 	}
 
 	private void onTickEvent()
@@ -56,9 +54,9 @@ public class HidarumaProjectile extends AbilityProjectileEntity
 		{
 			for (int i = 0; i < 5; i++)
 			{
-				double offsetX = WyMathHelper.randomDouble() / 2;
-				double offsetY = WyMathHelper.randomDouble() / 2;
-				double offsetZ = WyMathHelper.randomDouble() / 2;
+				double offsetX = WyHelper.randomDouble() / 2;
+				double offsetY = WyHelper.randomDouble() / 2;
+				double offsetZ = WyHelper.randomDouble() / 2;
 				WyHelper.spawnParticles(ParticleTypes.HAPPY_VILLAGER, (ServerWorld) this.world, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ);
 			}
 		}

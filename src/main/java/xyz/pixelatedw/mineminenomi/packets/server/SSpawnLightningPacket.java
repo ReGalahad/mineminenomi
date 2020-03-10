@@ -10,7 +10,7 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
+import xyz.pixelatedw.wypi.WyHelper;
 
 public class SSpawnLightningPacket
 {

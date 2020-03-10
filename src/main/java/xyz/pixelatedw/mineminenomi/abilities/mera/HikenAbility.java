@@ -1,9 +1,9 @@
 package xyz.pixelatedw.mineminenomi.abilities.mera;
 
 import net.minecraft.entity.player.PlayerEntity;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability.Category;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.mera.HikenProjectile;
+import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
+import xyz.pixelatedw.wypi.abilities.Ability;
 
 public class HikenAbility extends Ability
 {
@@ -11,7 +11,7 @@ public class HikenAbility extends Ability
 
 	public HikenAbility()
 	{
-		super("Hiken", Category.DEVIL_FRUIT);
+		super("Hiken", AbilityCategory.DEVIL_FRUIT);
 		this.setMaxCooldown(8);
 		this.setDescription("Turns the user's fist into flames and launches it towards the target.");
 

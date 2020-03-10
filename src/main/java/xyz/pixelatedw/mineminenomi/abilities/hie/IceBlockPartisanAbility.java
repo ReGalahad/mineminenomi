@@ -1,10 +1,10 @@
 package xyz.pixelatedw.mineminenomi.abilities.hie;
 
 import net.minecraft.entity.player.PlayerEntity;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.abilities.RepeaterAbility;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability.Category;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.hie.IceBlockPartisanProjectile;
+import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
+import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.abilities.RepeaterAbility;
 
 public class IceBlockPartisanAbility extends RepeaterAbility
 {
@@ -12,9 +12,9 @@ public class IceBlockPartisanAbility extends RepeaterAbility
 
 	public IceBlockPartisanAbility()
 	{
-		super("Ice Block: Partisan", Category.DEVIL_FRUIT);
+		super("Ice Block: Partisan", AbilityCategory.DEVIL_FRUIT);
 		this.setMaxCooldown(7);
-		this.setMaxRepearCount(5, 1);
+		this.setMaxRepearCount(5, 3);
 		this.setDescription("Creates several spears of ice that the user hurls at the enemy.");
 
 		this.onUseEvent = this::onUseEvent;

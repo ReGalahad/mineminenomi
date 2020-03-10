@@ -4,10 +4,10 @@ import java.util.Random;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
+import xyz.pixelatedw.wypi.WyHelper;
 
 public class FubukiParticleEffect extends ParticleEffect
 {
@@ -21,12 +21,12 @@ public class FubukiParticleEffect extends ParticleEffect
 			double offsetY = (new Random().nextInt(50) + 1.0D - 25.0D) / 1.0D;
 			double offsetZ = (new Random().nextInt(50) + 1.0D - 25.0D) / 1.0D;
 
-			motionX = WyMathHelper.randomWithRange(-1, 1) + WyMathHelper.randomDouble();
-			motionY = WyMathHelper.randomWithRange(-1, 1) + WyMathHelper.randomDouble();
-			motionZ = WyMathHelper.randomWithRange(-1, 1) + WyMathHelper.randomDouble();
+			motionX = WyHelper.randomWithRange(-1, 1) + WyHelper.randomDouble();
+			motionY = WyHelper.randomWithRange(-1, 1) + WyHelper.randomDouble();
+			motionZ = WyHelper.randomWithRange(-1, 1) + WyHelper.randomDouble();
 
 			double middlePoint = 0.2D;
-			middlePoint *= (WyMathHelper.randomDouble() * 2) + 0.3F;
+			middlePoint *= (WyHelper.randomDouble() * 2) + 0.3F;
 
 			motionX *= middlePoint / 2;
 			motionY *= middlePoint / 2;
@@ -39,7 +39,7 @@ public class FubukiParticleEffect extends ParticleEffect
 					motionX, 
 					0, 
 					motionZ)
-					.setParticleAge(300).setParticleGravity(3).setParticleScale((float) (1 + WyMathHelper.randomWithRange(0, 2)));
+					.setParticleAge(300).setParticleGravity(3).setParticleScale((float) (1 + WyHelper.randomWithRange(0, 2)));
 			Minecraft.getInstance().particles.addEffect(cp);
 		}		
 	}

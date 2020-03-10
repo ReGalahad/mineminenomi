@@ -5,7 +5,7 @@
  * import xyz.pixelatedw.mineminenomi.api.WyHelper;
  * import xyz.pixelatedw.mineminenomi.api.WyHelper.Direction;
  * import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
- * import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
+ * import xyz.pixelatedw.mineminenomi.api.math.WyHelper;
  * import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.NikyuProjectiles;
  * import xyz.pixelatedw.mineminenomi.init.ModAttributes;
  * import xyz.pixelatedw.mineminenomi.init.ModValues;
@@ -32,13 +32,13 @@
  * newPosY += 55;
  * Direction dir = WyHelper.get4Directions(player);
  * if(dir == WyHelper.Direction.SOUTH)
- * newPosX += WyMathHelper.randomWithRange(-200, 200);
+ * newPosX += WyHelper.randomWithRange(-200, 200);
  * else if(dir == WyHelper.Direction.EAST)
- * newPosX -= WyMathHelper.randomWithRange(-200, 200);
+ * newPosX -= WyHelper.randomWithRange(-200, 200);
  * else if(dir == WyHelper.Direction.NORTH)
- * newPosZ += WyMathHelper.randomWithRange(-200, 200);
+ * newPosZ += WyHelper.randomWithRange(-200, 200);
  * else if(dir == WyHelper.Direction.WEST)
- * newPosZ -= WyMathHelper.randomWithRange(-200, 200);
+ * newPosZ -= WyHelper.randomWithRange(-200, 200);
  * target.setPositionAndUpdate(target.posX + newPosX, target.posY + newPosY, target.posZ + newPosZ);
  * super.hitEntity(player, target);
  * }

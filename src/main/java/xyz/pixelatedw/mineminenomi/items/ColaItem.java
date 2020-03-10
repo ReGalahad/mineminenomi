@@ -10,12 +10,11 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.packets.server.SEntityStatsSyncPacket;
+import xyz.pixelatedw.wypi.network.WyNetwork;
 
 public class ColaItem extends Item
 {
@@ -47,11 +46,8 @@ public class ColaItem extends Item
 				else 
 					props.setCola(props.getMaxCola());
 			}
-			
-	    	if(!player.abilities.isCreativeMode)
-	    		WyTelemetry.addMiscStat("bottlesOfColaDrank", "Bottles of Cola Drank", 1);
-			
-			ModNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), props), (ServerPlayerEntity) player);
+
+			WyNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), props), (ServerPlayerEntity) player);
 		}
 		
 		itemStack.shrink(1);

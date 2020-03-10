@@ -1,13 +1,13 @@
 package xyz.pixelatedw.mineminenomi.abilities.goro;
 
 import net.minecraft.entity.player.PlayerEntity;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.abilities.ChargeableAbility;
-import xyz.pixelatedw.mineminenomi.api.abilities.extra.ExplosionAbility;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability.Category;
+import xyz.pixelatedw.mineminenomi.api.abilities.ExplosionAbility;
+import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.goro.KariParticleEffect;
+import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
+import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.abilities.ChargeableAbility;
 
 public class KariAbility extends ChargeableAbility
 {
@@ -17,7 +17,7 @@ public class KariAbility extends ChargeableAbility
 
 	public KariAbility()
 	{
-		super("Kari", Category.DEVIL_FRUIT);
+		super("Kari", AbilityCategory.DEVIL_FRUIT);
 		this.setDescription("Creates an electrical current around the user, which then explodes");
 		this.setMaxCooldown(15);
 		this.setMaxChargeTime(7);
@@ -34,7 +34,7 @@ public class KariAbility extends ChargeableAbility
 	
 	private boolean onEndChargingEvent(PlayerEntity player)
 	{	
-		ExplosionAbility explosion = WyHelper.newExplosion(player, player.posX, player.posY, player.posZ, 10);
+		ExplosionAbility explosion = DevilFruitsHelper.newExplosion(player, player.posX, player.posY, player.posZ, 10);
 		explosion.setExplosionSound(false);
 		explosion.setDamageOwner(false);
 		explosion.setDestroyBlocks(false);

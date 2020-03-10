@@ -3,16 +3,16 @@ package xyz.pixelatedw.mineminenomi.entities.projectiles.goro;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.abilities.extra.ExplosionAbility;
-import xyz.pixelatedw.mineminenomi.api.abilities.projectiles.AbilityProjectileEntity;
-import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
+import xyz.pixelatedw.mineminenomi.api.abilities.ExplosionAbility;
+import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.data.GenericParticleData;
 import xyz.pixelatedw.mineminenomi.particles.effects.common.CommonExplosionParticleEffect;
+import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 
 public class RaigoProjectile extends AbilityProjectileEntity
 {
@@ -42,9 +42,9 @@ public class RaigoProjectile extends AbilityProjectileEntity
 		this.onTickEvent = this::onTickEvent;
 	}
 	
-	private void onBlockImpactEvent(BlockRayTraceResult hit)
+	private void onBlockImpactEvent(BlockPos hit)
 	{		
-		ExplosionAbility explosion = WyHelper.newExplosion(this.getThrower(), this.posX, this.posY, this.posZ, 30);
+		ExplosionAbility explosion = DevilFruitsHelper.newExplosion(this.getThrower(), this.posX, this.posY, this.posZ, 30);
 		explosion.setExplosionSound(true);
 		explosion.setDamageOwner(false);
 		explosion.setDestroyBlocks(true);
@@ -62,9 +62,9 @@ public class RaigoProjectile extends AbilityProjectileEntity
 			{
 				ResourceLocation particleToUse = this.ticksExisted % 2 == 0 ? ModResources.GORO2 : ModResources.GORO;
 				
-				double offsetX = WyMathHelper.randomDouble() * 5;
-				double offsetY = WyMathHelper.randomDouble();
-				double offsetZ = WyMathHelper.randomDouble() * 5;
+				double offsetX = WyHelper.randomDouble() * 5;
+				double offsetY = WyHelper.randomDouble();
+				double offsetZ = WyHelper.randomDouble() * 5;
 
 				GenericParticleData data = new GenericParticleData();
 				data.setTexture(particleToUse);

@@ -9,11 +9,11 @@ import net.minecraft.network.play.server.SEntityVelocityPacket;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability.Category;
-import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
-import xyz.pixelatedw.mineminenomi.helpers.ItemsHelper;
+import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
+import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.ItemsHelper;
+import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.abilities.Ability;
 
 public class InjectionShotAbility extends Ability
 {
@@ -21,7 +21,7 @@ public class InjectionShotAbility extends Ability
 
 	public InjectionShotAbility()
 	{
-		super("Injection Shot", Category.DEVIL_FRUIT);
+		super("Injection Shot", AbilityCategory.DEVIL_FRUIT);
 		this.setMaxCooldown(15);
 		this.setDescription("While holding a weapon, the user charges at the enemy, leaving them poisoned and confused");
 

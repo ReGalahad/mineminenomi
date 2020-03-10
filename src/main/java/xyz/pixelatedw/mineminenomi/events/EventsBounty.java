@@ -13,15 +13,15 @@ import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
-import xyz.pixelatedw.mineminenomi.Env;
-import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.BountyHelper;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.WantedPosterTileEntity;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.entities.WantedPosterPackageEntity;
-import xyz.pixelatedw.mineminenomi.helpers.BountyHelper;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
+import xyz.pixelatedw.wypi.APIConfig;
+import xyz.pixelatedw.wypi.WyHelper;
 
-@Mod.EventBusSubscriber(modid = Env.PROJECT_ID)
+@Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class EventsBounty
 {
 	private static HashMap<PlayerEntity, double[]> cachedPositions = new HashMap<PlayerEntity, double[]>();
@@ -60,7 +60,7 @@ public class EventsBounty
 						if(BountyHelper.issueBountyForPlayer(event.player))
 						{				
 							WantedPosterPackageEntity pkg = new WantedPosterPackageEntity(player.world);
-							pkg.setLocationAndAngles(player.posX + WyMathHelper.randomWithRange(-10, 10), player.posY + 30, player.posZ + WyMathHelper.randomWithRange(-10, 10), 0, 0);
+							pkg.setLocationAndAngles(player.posX + WyHelper.randomWithRange(-10, 10), player.posY + 30, player.posZ + WyHelper.randomWithRange(-10, 10), 0, 0);
 							player.world.addEntity(pkg);
 						}
 						

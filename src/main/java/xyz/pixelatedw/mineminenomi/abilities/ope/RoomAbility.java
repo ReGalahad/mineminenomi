@@ -8,11 +8,11 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.abilities.ContinuousAbility;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability.Category;
+import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
+import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
+import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.abilities.ContinuousAbility;
 
 public class RoomAbility extends ContinuousAbility
 {
@@ -22,7 +22,7 @@ public class RoomAbility extends ContinuousAbility
 
 	public RoomAbility()
 	{
-		super("ROOM", Category.DEVIL_FRUIT);
+		super("ROOM", AbilityCategory.DEVIL_FRUIT);
 		this.setMaxCooldown(1);
 		this.setDescription("Creates a spherical space around the user in which they can manipulate anything or use other skills");
 
@@ -34,7 +34,7 @@ public class RoomAbility extends ContinuousAbility
 	{
 		if (this.blockList.isEmpty())
 		{
-			this.blockList.addAll(WyHelper.createEmptySphere(player.world, (int) player.posX, (int) player.posY, (int) player.posZ, 20, ModBlocks.OPE, "air", "foliage", "liquid", "nogrief"));
+			this.blockList.addAll(DevilFruitsHelper.createEmptySphere(player.world, (int) player.posX, (int) player.posY, (int) player.posZ, 20, ModBlocks.OPE, "air", "foliage", "liquid", "nogrief"));
 			player.world.setBlockState(new BlockPos(player.posX, player.posY, player.posZ), ModBlocks.OPE_MID.getDefaultState());
 			this.blockList.add(new int[]
 				{

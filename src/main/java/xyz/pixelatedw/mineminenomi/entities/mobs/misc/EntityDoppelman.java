@@ -21,7 +21,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
@@ -31,8 +30,9 @@ import xyz.pixelatedw.mineminenomi.entities.mobs.marines.EntityGenericMarine;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityGenericPirate;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.mineminenomi.init.ModItems;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.packets.server.SEntityStatsSyncPacket;
+import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.network.WyNetwork;
 
 public class EntityDoppelman extends CreatureEntity
 {
@@ -182,7 +182,7 @@ public class EntityDoppelman extends CreatureEntity
     		{
     			itemStack.setCount(itemStack.getCount() - 10);
     			props.alterDoriki(1);
-    			ModNetwork.sendToAll(new SEntityStatsSyncPacket(player.getEntityId(), props));
+    			WyNetwork.sendToAll(new SEntityStatsSyncPacket(player.getEntityId(), props));
     		}
     	}
     	

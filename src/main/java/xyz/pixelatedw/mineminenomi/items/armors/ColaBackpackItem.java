@@ -15,13 +15,13 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.init.ModArmors;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.packets.server.SEntityStatsSyncPacket;
+import xyz.pixelatedw.wypi.APIConfig;
+import xyz.pixelatedw.wypi.network.WyNetwork;
 
 public class ColaBackpackItem extends ArmorItem
 {
@@ -44,7 +44,7 @@ public class ColaBackpackItem extends ArmorItem
 	@Nullable
 	public String getArmorTexture(ItemStack itemStack, Entity entity, EquipmentSlotType slot, String type)
 	{
-		return String.format("%s:textures/models/armor/cola_backpack.png", Env.PROJECT_ID);
+		return String.format("%s:textures/models/armor/cola_backpack.png", APIConfig.PROJECT_ID);
 	}
 
 	@Override
@@ -75,7 +75,7 @@ public class ColaBackpackItem extends ArmorItem
 						if(player.ticksExisted % 100 == 0)
 						{
 							props.alterCola(10);
-							ModNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), props), (ServerPlayerEntity) player);
+							WyNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), props), (ServerPlayerEntity) player);
 						}
 					}
 				}
@@ -90,7 +90,7 @@ public class ColaBackpackItem extends ArmorItem
 						if (props.getCola() >= props.getMaxCola())
 							props.setCola(props.getMaxCola());
 						
-						ModNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), props), (ServerPlayerEntity) player);
+						WyNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), props), (ServerPlayerEntity) player);
 					}
 				}
 			}

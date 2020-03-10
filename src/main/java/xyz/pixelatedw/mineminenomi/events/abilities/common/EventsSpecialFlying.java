@@ -8,20 +8,20 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import xyz.pixelatedw.mineminenomi.Env;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
-import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
+import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
-import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.packets.server.SSpecialFlyingPacket;
 import xyz.pixelatedw.mineminenomi.particles.CustomParticleData;
+import xyz.pixelatedw.wypi.APIConfig;
+import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
+import xyz.pixelatedw.wypi.data.ability.IAbilityData;
+import xyz.pixelatedw.wypi.network.WyNetwork;
 
-@Mod.EventBusSubscriber(modid = Env.PROJECT_ID)
+@Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class EventsSpecialFlying
 {
 	@SubscribeEvent
@@ -49,11 +49,11 @@ public class EventsSpecialFlying
 				{
 					if((CommonConfig.instance.isSpecialFlyingEnabled() && hasFlyingFruit) || hasToriFruit || hasAbareHimatsuri)		
 					{
-						ModNetwork.sendTo(new SSpecialFlyingPacket(true), (ServerPlayerEntity) player);
+						WyNetwork.sendTo(new SSpecialFlyingPacket(true), (ServerPlayerEntity) player);
 						player.fallDistance = 0;
 					}
 					else
-						ModNetwork.sendTo(new SSpecialFlyingPacket(false), (ServerPlayerEntity) player);
+						WyNetwork.sendTo(new SSpecialFlyingPacket(false), (ServerPlayerEntity) player);
 				}
 			
 				if(player.abilities.isFlying && player.world.isRemote)

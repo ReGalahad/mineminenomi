@@ -8,7 +8,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 import xyz.pixelatedw.mineminenomi.EnumFruitType;
-import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.abilities.bane.SpringDeathKnockAbility;
 import xyz.pixelatedw.mineminenomi.abilities.bane.SpringHopperAbility;
 import xyz.pixelatedw.mineminenomi.abilities.bane.SpringSnipeAbility;
@@ -47,10 +46,6 @@ import xyz.pixelatedw.mineminenomi.abilities.pika.YataNoKagamiAbility;
 import xyz.pixelatedw.mineminenomi.abilities.suke.ShishaNoTeAbility;
 import xyz.pixelatedw.mineminenomi.abilities.suke.SkattingAbility;
 import xyz.pixelatedw.mineminenomi.abilities.suke.SukePunchAbility;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.WyRegistry;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.debug.WyDebug;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.bane.BaneProjectiles;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.goro.GoroProjectiles;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.hie.HieProjectiles;
@@ -60,8 +55,12 @@ import xyz.pixelatedw.mineminenomi.entities.projectiles.ope.OpeProjectiles;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.pika.PikaProjectiles;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.suke.SukeProjectiles;
 import xyz.pixelatedw.mineminenomi.items.AkumaNoMiItem;
+import xyz.pixelatedw.wypi.APIConfig;
+import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.WyRegistry;
+import xyz.pixelatedw.wypi.abilities.Ability;
 
-@Mod.EventBusSubscriber(modid = Env.PROJECT_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModDevilFruits
 {
 	
@@ -147,8 +146,8 @@ public class ModDevilFruits
 				}
 			}
 		}
-		WyDebug.info("A total of " + ModValues.devilfruits.size() + " Devil Fruits have been registered");
-		WyDebug.info("A total of " + totalAbilities + " abilities have been registered");
+		//WyDebug.info("A total of " + ModValues.devilfruits.size() + " Devil Fruits have been registered");
+		//WyDebug.info("A total of " + totalAbilities + " abilities have been registered");
 		
 		event.getRegistry().registerAll(ModValues.devilfruits.toArray(new AkumaNoMiItem[0]));
     }

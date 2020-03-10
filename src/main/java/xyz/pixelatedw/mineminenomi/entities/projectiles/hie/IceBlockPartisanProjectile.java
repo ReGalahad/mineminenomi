@@ -5,14 +5,14 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.abilities.projectiles.AbilityProjectileEntity;
-import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.data.GenericParticleData;
+import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 
 public class IceBlockPartisanProjectile extends AbilityProjectileEntity
 {
@@ -48,9 +48,9 @@ public class IceBlockPartisanProjectile extends AbilityProjectileEntity
 		};
 	}
 	
-	private void onBlockImpactEvent(BlockRayTraceResult hit)
+	private void onBlockImpactEvent(BlockPos hit)
 	{		
-		WyHelper.placeBlockIfAllowed(this.world, (int)posX, (int)posY, (int)posZ, Blocks.PACKED_ICE, "core", "liquid", "foliage");
+		DevilFruitsHelper.placeBlockIfAllowed(this.world, hit.getX(), hit.getY(), hit.getZ(), Blocks.PACKED_ICE, "core", "liquid", "foliage");
 	}
 
 	private void onTickEvent()
@@ -59,9 +59,9 @@ public class IceBlockPartisanProjectile extends AbilityProjectileEntity
 		{
 			for (int i = 0; i < 5; i++)
 			{
-				double offsetX = WyMathHelper.randomDouble() / 2;
-				double offsetY = WyMathHelper.randomDouble() / 2;
-				double offsetZ = WyMathHelper.randomDouble() / 2;
+				double offsetX = WyHelper.randomDouble() / 2;
+				double offsetY = WyHelper.randomDouble() / 2;
+				double offsetZ = WyHelper.randomDouble() / 2;
 
 				GenericParticleData data = new GenericParticleData();
 				data.setTexture(ModResources.HIE);
