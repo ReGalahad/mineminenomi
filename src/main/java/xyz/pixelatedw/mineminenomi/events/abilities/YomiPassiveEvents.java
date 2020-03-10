@@ -19,7 +19,7 @@ import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoYomi;
 import xyz.pixelatedw.mineminenomi.events.custom.YomiTriggerEvent;
-import xyz.pixelatedw.mineminenomi.packets.server.SDevilFruitSyncPacket;
+import xyz.pixelatedw.mineminenomi.packets.server.SSyncDevilFruitPacket;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
@@ -50,7 +50,7 @@ public class YomiPassiveEvents
 			player.addPotionEffect(new EffectInstance(Effects.SPEED, 100, 0, true, true));
 
 			if (WyHelper.getEntitiesNear(player.getPosition(), player.world, 100, PlayerEntity.class).size() > 0 && player.ticksExisted % 500 == 0)
-				WyNetwork.sendToAllAround(new SDevilFruitSyncPacket(player.getEntityId(), devilFruitProps), player);
+				WyNetwork.sendToAllAround(new SSyncDevilFruitPacket(player.getEntityId(), devilFruitProps), player);
 			
 			if (player.world.getBlockState(player.getPosition().down()).getFluidState().isSource() && player.isSprinting())
 			{
@@ -127,7 +127,7 @@ public class YomiPassiveEvents
 
 			PlayerEntity player = (PlayerEntity) event.entity;
 
-			WyNetwork.sendToAll(new SDevilFruitSyncPacket(player.getEntityId(), event.newPlayerData));
+			WyNetwork.sendToAll(new SSyncDevilFruitPacket(player.getEntityId(), event.newPlayerData));
 		}
 	}
 }

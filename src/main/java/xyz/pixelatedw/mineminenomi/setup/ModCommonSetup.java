@@ -8,6 +8,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import xyz.pixelatedw.mineminenomi.data.functions.RandomWantedPosterLootFunction;
 import xyz.pixelatedw.mineminenomi.init.ModCapabilities;
 import xyz.pixelatedw.mineminenomi.init.ModFeatures;
+import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.wypi.APIConfig;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = { Dist.CLIENT, Dist.DEDICATED_SERVER })
@@ -15,10 +16,12 @@ public class ModCommonSetup
 {
 	@SubscribeEvent
 	public static void commonSetup(FMLCommonSetupEvent event)
-	{
-		ModFeatures.init();
-		LootFunctionManager.registerFunction(new RandomWantedPosterLootFunction.Serializer());
-			
+	{		
 		ModCapabilities.init();
+		
+		ModNetwork.init();
+		
+		ModFeatures.init();
+		LootFunctionManager.registerFunction(new RandomWantedPosterLootFunction.Serializer());		
 	}
 }

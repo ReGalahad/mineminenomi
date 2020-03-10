@@ -13,7 +13,7 @@ import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.init.ModItems;
 import xyz.pixelatedw.mineminenomi.items.AkumaNoMiItem;
-import xyz.pixelatedw.mineminenomi.packets.server.SDevilFruitSyncPacket;
+import xyz.pixelatedw.mineminenomi.packets.server.SSyncDevilFruitPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SEntityStatsSyncPacket;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
@@ -90,7 +90,7 @@ public class EventsAbilityValidation
 				}*/
 								
 				WyNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), entityStatsProps), (ServerPlayerEntity) player);
-				WyNetwork.sendTo(new SDevilFruitSyncPacket(player.getEntityId(), devilFruitProps), (ServerPlayerEntity) player);
+				WyNetwork.sendTo(new SSyncDevilFruitPacket(player.getEntityId(), devilFruitProps), (ServerPlayerEntity) player);
 				//ModNetwork.sendTo(new PacketQuestSync(questProps), (ServerPlayerEntity) player);
 				WyNetwork.sendTo(new SSyncAbilityDataPacket(abilityProps), (ServerPlayerEntity) player);		
 			}

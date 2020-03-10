@@ -13,7 +13,7 @@ import net.minecraft.command.arguments.EntityArgument;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
-import xyz.pixelatedw.mineminenomi.packets.server.SDevilFruitSyncPacket;
+import xyz.pixelatedw.mineminenomi.packets.server.SSyncDevilFruitPacket;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
@@ -51,7 +51,7 @@ public class RemoveDFCommand
 
 			player.clearActivePotions();
 			
-			WyNetwork.sendTo(new SDevilFruitSyncPacket(player.getEntityId(), devilFruitProps), player);
+			WyNetwork.sendTo(new SSyncDevilFruitPacket(player.getEntityId(), devilFruitProps), player);
 			WyNetwork.sendTo(new SSyncAbilityDataPacket(abilityDataProps), player);
 		}
 

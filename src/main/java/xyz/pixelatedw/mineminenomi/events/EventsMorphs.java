@@ -26,7 +26,7 @@ import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfo;
 import xyz.pixelatedw.mineminenomi.models.effects.AbareHimatsuriModel;
-import xyz.pixelatedw.mineminenomi.packets.server.SDevilFruitSyncPacket;
+import xyz.pixelatedw.mineminenomi.packets.server.SSyncDevilFruitPacket;
 import xyz.pixelatedw.mineminenomi.renderers.ZoanFirstPersonRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.effects.AbareHimatsuriRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer;
@@ -171,7 +171,7 @@ public class EventsMorphs
 			{
 				props.setZoanPoint("");
 
-				WyNetwork.sendToAll(new SDevilFruitSyncPacket(owner.getEntityId(), props));
+				WyNetwork.sendToAll(new SSyncDevilFruitPacket(owner.getEntityId(), props));
 			}
 		}
 	}

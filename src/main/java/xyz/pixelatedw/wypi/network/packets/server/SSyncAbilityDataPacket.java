@@ -1,5 +1,6 @@
 package xyz.pixelatedw.wypi.network.packets.server;
 
+import java.util.Arrays;
 import java.util.function.Supplier;
 
 import net.minecraft.entity.player.PlayerEntity;
@@ -8,6 +9,7 @@ import net.minecraft.nbt.INBT;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
+import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.APIDefaults;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
@@ -47,7 +49,11 @@ public class SSyncAbilityDataPacket
 				PlayerEntity player = APIDefaults.PROXY.getPlayer();
 				IAbilityData props = AbilityDataCapability.get(player);
 
+				System.out.println(Arrays.toString(props.getUnlockedAbilities(AbilityCategory.DEVIL_FRUIT).toArray()));
+
 				AbilityDataCapability.INSTANCE.getStorage().readNBT(AbilityDataCapability.INSTANCE, props, null, message.data);
+				
+				System.out.println(Arrays.toString(props.getUnlockedAbilities(AbilityCategory.DEVIL_FRUIT).toArray()));
 			});
 		}
 		ctx.get().setPacketHandled(true);

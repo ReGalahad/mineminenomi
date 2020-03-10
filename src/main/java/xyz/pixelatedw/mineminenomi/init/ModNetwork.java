@@ -6,7 +6,7 @@ import xyz.pixelatedw.mineminenomi.packets.client.CDevilFruitSyncPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CEntityStatsSyncPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CRequestSyncPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CUseAbilityPacket;
-import xyz.pixelatedw.mineminenomi.packets.server.SDevilFruitSyncPacket;
+import xyz.pixelatedw.mineminenomi.packets.server.SSyncDevilFruitPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SEntityStatsSyncPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SOpenCharacterCreatorScreenPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SOpenWantedPosterScreenPacket;
@@ -37,7 +37,7 @@ public class ModNetwork
 		WyNetwork.registerPacket(CSyncAbilityDataPacket.class, CSyncAbilityDataPacket::encode, CSyncAbilityDataPacket::decode, CSyncAbilityDataPacket::handle);
 
 		// Server
-		WyNetwork.registerPacket(SDevilFruitSyncPacket.class, SDevilFruitSyncPacket::encode, SDevilFruitSyncPacket::decode, SDevilFruitSyncPacket::handle);
+		WyNetwork.registerPacket(SSyncDevilFruitPacket.class, SSyncDevilFruitPacket::encode, SSyncDevilFruitPacket::decode, SSyncDevilFruitPacket::handle);
 		WyNetwork.registerPacket(SSyncAbilityDataPacket.class, SSyncAbilityDataPacket::encode, SSyncAbilityDataPacket::decode, SSyncAbilityDataPacket::handle);
 		WyNetwork.registerPacket(SEntityStatsSyncPacket.class, SEntityStatsSyncPacket::encode, SEntityStatsSyncPacket::decode, SEntityStatsSyncPacket::handle);
 		WyNetwork.registerPacket(SSpawnLightningPacket.class, SSpawnLightningPacket::encode, SSpawnLightningPacket::decode, SSpawnLightningPacket::handle);

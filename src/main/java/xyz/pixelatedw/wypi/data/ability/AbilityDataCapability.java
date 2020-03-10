@@ -20,6 +20,7 @@ import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.abilities.PassiveAbility;
+import xyz.pixelatedw.wypi.debug.WyDebug;
 
 public class AbilityDataCapability
 {
@@ -83,7 +84,14 @@ public class AbilityDataCapability
 					{
 						CompoundNBT abilities = unlockedAbilities.getCompound(i);
 						Ability ability = GameRegistry.findRegistry(Ability.class).getValue(new ResourceLocation(APIConfig.PROJECT_ID, abilities.getString("unlocked_ability_" + i)));
-						instance.addUnlockedAbility(ability.create());
+						try
+						{
+							instance.addUnlockedAbility(ability.create());
+						}
+						catch(Exception e)
+						{
+							WyDebug.debug("Unregistered ability " + (abilities.getString("unlocked_ability_" + i)) + " found !");
+						}
 					}
 	
 					ListNBT equippedAbilities = props.getList("equipped_abilities", Constants.NBT.TAG_COMPOUND);

@@ -1,5 +1,6 @@
 package xyz.pixelatedw.mineminenomi.items;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.Nullable;
@@ -8,7 +9,6 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Foods;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -29,14 +29,15 @@ import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
-import xyz.pixelatedw.mineminenomi.packets.client.CDevilFruitSyncPacket;
+import xyz.pixelatedw.mineminenomi.packets.server.SSyncDevilFruitPacket;
+import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.WyRegistry;
 import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 import xyz.pixelatedw.wypi.network.WyNetwork;
-import xyz.pixelatedw.wypi.network.packets.client.CSyncAbilityDataPacket;
+import xyz.pixelatedw.wypi.network.packets.server.SSyncAbilityDataPacket;
 
 public class AkumaNoMiItem extends Item
 {
@@ -120,10 +121,11 @@ public class AkumaNoMiItem extends Item
 			for(Ability a : abilities)
 				if(!DevilFruitsHelper.verifyIfAbilityIsBanned(a) && abilityDataProps.getUnlockedAbility(a) == null)
 					abilityDataProps.addUnlockedAbility(a);
-			if(player instanceof ServerPlayerEntity)
+			if(!player.world.isRemote)
 			{
-				WyNetwork.sendTo(new CDevilFruitSyncPacket(devilFruitProps), (ServerPlayerEntity) player);
-				WyNetwork.sendTo(new CSyncAbilityDataPacket(abilityDataProps), (ServerPlayerEntity)player);
+				System.out.println(Arrays.toString(abilityDataProps.getUnlockedAbilities(AbilityCategory.DEVIL_FRUIT).toArray()));
+				WyNetwork.sendTo(new SSyncDevilFruitPacket(player.getEntityId(), devilFruitProps), player);
+				WyNetwork.sendTo(new SSyncAbilityDataPacket(abilityDataProps), player);
 			}		
 		}
 		

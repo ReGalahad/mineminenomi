@@ -7,7 +7,6 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
-import xyz.pixelatedw.wypi.data.ability.AbilityDataBase;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataProvider;
 import xyz.pixelatedw.wypi.network.WyNetwork;
@@ -51,7 +50,6 @@ public class APIDefaults
 		{
 			if (event.getObject() instanceof PlayerEntity)
 			{
-				final AbilityDataBase abilityData = new AbilityDataBase();
 				event.addCapability(new ResourceLocation(APIConfig.PROJECT_ID, "ability_data"), new AbilityDataProvider());
 			}
 		}

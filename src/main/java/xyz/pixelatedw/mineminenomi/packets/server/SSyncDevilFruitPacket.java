@@ -2,26 +2,25 @@ package xyz.pixelatedw.mineminenomi.packets.server;
 
 import java.util.function.Supplier;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
+import xyz.pixelatedw.mineminenomi.ModMain;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 
-public class SDevilFruitSyncPacket
+public class SSyncDevilFruitPacket
 {
 	private int entityId;
 	private INBT data;
 
-	public SDevilFruitSyncPacket() {}
+	public SSyncDevilFruitPacket() {}
 	
-	public SDevilFruitSyncPacket(int entityId, IDevilFruit props)
+	public SSyncDevilFruitPacket(int entityId, IDevilFruit props)
 	{
 		this.data = new CompoundNBT();
 		this.data = DevilFruitCapability.INSTANCE.getStorage().writeNBT(DevilFruitCapability.INSTANCE, props, null);
@@ -34,23 +33,21 @@ public class SDevilFruitSyncPacket
 		buffer.writeCompoundTag((CompoundNBT) this.data);
 	}
 	
-	public static SDevilFruitSyncPacket decode(PacketBuffer buffer)
+	public static SSyncDevilFruitPacket decode(PacketBuffer buffer)
 	{
-		SDevilFruitSyncPacket msg = new SDevilFruitSyncPacket();
+		SSyncDevilFruitPacket msg = new SSyncDevilFruitPacket();
 		msg.entityId = buffer.readInt();
 		msg.data = buffer.readCompoundTag();
 		return msg;
 	}
 
-	public static void handle(SDevilFruitSyncPacket message, final Supplier<NetworkEvent.Context> ctx)
+	public static void handle(SSyncDevilFruitPacket message, final Supplier<NetworkEvent.Context> ctx)
 	{
 		if(ctx.get().getDirection() == NetworkDirection.PLAY_TO_CLIENT)
 		{
 			ctx.get().enqueueWork(() ->
 			{
-				PlayerEntity player = Minecraft.getInstance().player;
-
-				Entity target = player.world.getEntityByID(message.entityId);			
+				Entity target = ModMain.PROXY.getWorld().getEntityByID(message.entityId);			
 				if(target == null || !(target instanceof LivingEntity))
 					return;
 				
