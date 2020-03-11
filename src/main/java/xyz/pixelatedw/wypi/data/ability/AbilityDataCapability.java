@@ -44,9 +44,9 @@ public class AbilityDataCapability
 					{
 						Ability ability = instance.getUnlockedAbilities(AbilityCategory.ALL).get(i);
 						String name = WyHelper.getResourceName(ability.getName());
-						CompoundNBT abilities = new CompoundNBT();
-						abilities.putString("unlocked_ability_" + i, name);
-						unlockedAbilities.add(abilities);
+						CompoundNBT nbtAbility = new CompoundNBT();
+						nbtAbility.putString("name", name);
+						unlockedAbilities.add(nbtAbility);
 					}
 					props.put("unlocked_abilities", unlockedAbilities);
 	
@@ -55,9 +55,10 @@ public class AbilityDataCapability
 					{
 						Ability ability = instance.getEquippedAbilities(AbilityCategory.ALL).get(i);
 						String name = WyHelper.getResourceName(ability.getName());
-						CompoundNBT abilities = new CompoundNBT();
-						abilities.putString("equipped_ability_" + i, name);
-						equippedAbilities.add(abilities);
+						CompoundNBT nbtAbility = new CompoundNBT();
+						nbtAbility.putString("name", name);
+						nbtAbility.putString("state", ability.getState().toString());
+						equippedAbilities.add(nbtAbility);
 					}
 					props.put("equipped_abilities", equippedAbilities);
 				}
@@ -82,15 +83,15 @@ public class AbilityDataCapability
 					ListNBT unlockedAbilities = props.getList("unlocked_abilities", Constants.NBT.TAG_COMPOUND);
 					for (int i = 0; i < unlockedAbilities.size(); i++)
 					{
-						CompoundNBT abilities = unlockedAbilities.getCompound(i);
-						Ability ability = GameRegistry.findRegistry(Ability.class).getValue(new ResourceLocation(APIConfig.PROJECT_ID, abilities.getString("unlocked_ability_" + i)));
+						CompoundNBT nbtAbility = unlockedAbilities.getCompound(i);
+						Ability ability = GameRegistry.findRegistry(Ability.class).getValue(new ResourceLocation(APIConfig.PROJECT_ID, nbtAbility.getString("name")));
 						try
 						{
 							instance.addUnlockedAbility(ability.create());
 						}
 						catch(Exception e)
 						{
-							WyDebug.debug("Unregistered ability: " + (abilities.getString("unlocked_ability_" + i)));
+							WyDebug.debug("Unregistered ability: " + nbtAbility.getString("name"));
 						}
 					}
 	
@@ -98,12 +99,19 @@ public class AbilityDataCapability
 					List<Ability> activeAbilitiesUnlocked = instance.getUnlockedAbilities(AbilityCategory.ALL).parallelStream().filter(ability -> !(ability instanceof PassiveAbility)).collect(Collectors.toList());
 					for (int i = 0; i < equippedAbilities.size(); i++)
 					{
-						CompoundNBT abilities = equippedAbilities.getCompound(i);
-						Ability ability = GameRegistry.findRegistry(Ability.class).getValue(new ResourceLocation(APIConfig.PROJECT_ID, abilities.getString("equipped_ability_" + i)));
+						CompoundNBT nbtAbility = equippedAbilities.getCompound(i);
+						Ability ability = GameRegistry.findRegistry(Ability.class).getValue(new ResourceLocation(APIConfig.PROJECT_ID, nbtAbility.getString("name" + i)));
 						activeAbilitiesUnlocked.forEach(abl -> 
 						{
 							if(abl.equals(ability))
+							{
+								Ability.State state = Ability.State.valueOf(nbtAbility.getString("state"));
+								if(state == null)
+									state = Ability.State.STANDBY;
+								abl.setState(state);
+								
 								instance.addEquippedAbility(abl);
+							}
 						});			
 					}
 				}

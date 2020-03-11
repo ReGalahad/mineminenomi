@@ -46,8 +46,8 @@ public class SSyncAbilityDataPacket
 			{
 				PlayerEntity player = APIDefaults.PROXY.getPlayer();
 				IAbilityData props = AbilityDataCapability.get(player);
-
-				AbilityDataCapability.INSTANCE.getStorage().readNBT(AbilityDataCapability.INSTANCE, props, null, message.data);			
+				
+				AbilityDataCapability.INSTANCE.getStorage().readNBT(AbilityDataCapability.INSTANCE, props, null, message.data);		
 			});
 		}
 		ctx.get().setPacketHandled(true);

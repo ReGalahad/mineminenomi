@@ -1,6 +1,5 @@
 package xyz.pixelatedw.mineminenomi.items;
 
-import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.Nullable;
@@ -30,7 +29,6 @@ import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
 import xyz.pixelatedw.mineminenomi.packets.server.SSyncDevilFruitPacket;
-import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
@@ -124,7 +122,6 @@ public class AkumaNoMiItem extends Item
 					abilityDataProps.addUnlockedAbility(a);
 			if(!player.world.isRemote)
 			{
-				System.out.println(Arrays.toString(abilityDataProps.getUnlockedAbilities(AbilityCategory.DEVIL_FRUIT).toArray()));
 				WyNetwork.sendTo(new SSyncDevilFruitPacket(player.getEntityId(), devilFruitProps), player);
 				WyNetwork.sendTo(new SSyncAbilityDataPacket(abilityDataProps), player);
 			}		
