@@ -32,7 +32,6 @@ import xyz.pixelatedw.mineminenomi.init.ModValues;
 import xyz.pixelatedw.mineminenomi.packets.server.SSyncDevilFruitPacket;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
-import xyz.pixelatedw.wypi.WyRegistry;
 import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
@@ -52,7 +51,9 @@ public class AkumaNoMiItem extends Item
 		this.type = type;
 		this.abilities = abilitiesArray;
 		
-		this.registerDevilFruit();
+		if (this.type == EnumFruitType.LOGIA)
+			ModValues.logias.add(this);
+		ModValues.devilfruits.add(this);
 	}
 
 	@Override
@@ -149,11 +150,8 @@ public class AkumaNoMiItem extends Item
 		return type;
 	}
 
-	private void registerDevilFruit() 
+	public String getDevilFruitName()
 	{
-		if (this.type == EnumFruitType.LOGIA)
-			ModValues.logias.add(this);
-		ModValues.devilfruits.add(this);
-		WyRegistry.registerItem(this, this.name);
+		return this.name;
 	}
 }

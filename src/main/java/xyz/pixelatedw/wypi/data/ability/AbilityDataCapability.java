@@ -90,7 +90,7 @@ public class AbilityDataCapability
 						}
 						catch(Exception e)
 						{
-							WyDebug.debug("Unregistered ability " + (abilities.getString("unlocked_ability_" + i)) + " found !");
+							WyDebug.debug("Unregistered ability: " + (abilities.getString("unlocked_ability_" + i)));
 						}
 					}
 	

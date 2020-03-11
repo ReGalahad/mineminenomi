@@ -102,7 +102,7 @@ public class WyRegistry
 	{
 		String truename = WyHelper.getResourceName(ability.getName());
 		ability.setRegistryName(APIConfig.PROJECT_ID, truename);
-
+		
 		langMap.put("ability." + APIConfig.PROJECT_ID + "." + truename, ability.getName());
 
 		return ability;

@@ -6,11 +6,8 @@ import javax.annotation.Nullable;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistryEntry;
-import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
-import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 import xyz.pixelatedw.wypi.network.WyNetwork;
@@ -34,8 +31,6 @@ public abstract class Ability extends ForgeRegistryEntry<Ability>
 	{
 		this.name = name;
 		this.category = category;
-		
-		this.setRegistryName(new ResourceLocation(APIConfig.PROJECT_ID, WyHelper.getResourceName(name)));
 	}
 	
 	/*

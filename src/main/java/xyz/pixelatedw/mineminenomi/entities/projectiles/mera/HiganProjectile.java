@@ -40,7 +40,7 @@ public class HiganProjectile extends AbilityProjectileEntity
 	
 	private void onBlockImpactEvent(BlockPos hit)
 	{
-		this.world.setBlockState(new BlockPos(hit.getX(), hit.getY(), hit.getZ()), Blocks.FIRE.getDefaultState());
+		this.world.setBlockState(new BlockPos(hit.getX(), hit.getY(), hit.getZ()).up(), Blocks.FIRE.getDefaultState());
 	}
 	
 	private void onTickEvent()
