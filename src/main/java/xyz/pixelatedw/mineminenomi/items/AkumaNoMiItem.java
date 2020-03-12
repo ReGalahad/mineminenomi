@@ -29,6 +29,7 @@ import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
 import xyz.pixelatedw.mineminenomi.packets.server.SSyncDevilFruitPacket;
+import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
@@ -136,7 +137,7 @@ public class AkumaNoMiItem extends Item
 	{
 		for (int i = 0; i < this.abilities.length; i++)
 			if (!DevilFruitsHelper.verifyIfAbilityIsBanned(this.abilities[i]) && this.abilities[i] != null)
-				list.add(new StringTextComponent(TextFormatting.GRAY + I18n.format("ability." + WyHelper.getResourceName(this.abilities[i].getName()) + ".name")));
+				list.add(new StringTextComponent(TextFormatting.GRAY + I18n.format("ability." + APIConfig.PROJECT_ID + "." + WyHelper.getResourceName(this.abilities[i].getName()))));
 
 		list.add(new StringTextComponent(""));
 		list.add(new StringTextComponent(type.getColor() + type.getName()));
