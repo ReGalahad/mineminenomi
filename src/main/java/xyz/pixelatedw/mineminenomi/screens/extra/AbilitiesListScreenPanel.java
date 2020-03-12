@@ -10,6 +10,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.client.gui.ScrollPanel;
 import xyz.pixelatedw.mineminenomi.api.helpers.ModRendererHelper;
 import xyz.pixelatedw.mineminenomi.screens.SelectHotbarAbilitiesScreen;
+import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.Ability;
@@ -66,7 +67,7 @@ public class AbilitiesListScreenPanel extends ScrollPanel
 				if(this.props.hasEquippedAbility(entry.ability))
 					flag = true;
 
-				Minecraft.getInstance().fontRenderer.drawStringWithShadow(I18n.format("ability." + WyHelper.getResourceName(entry.ability.getName()) + ".name"), x, y + 4, flag ? 0xFF0000 : 0xFFFFFF);
+				Minecraft.getInstance().fontRenderer.drawStringWithShadow(I18n.format("ability." + APIConfig.PROJECT_ID + "." + WyHelper.getResourceName(entry.ability.getName())), x, y + 4, flag ? 0xFF0000 : 0xFFFFFF);
 				ModRendererHelper.drawAbilityIcon(WyHelper.getResourceName(entry.ability.getName()), MathHelper.floor(x) - 30, MathHelper.floor(y), 16, 16);
 			}
 

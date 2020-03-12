@@ -28,7 +28,7 @@ public class CSyncAbilityDataPacket
 
 	public void encode(PacketBuffer buffer)
 	{
-		buffer.writeCompoundTag((CompoundNBT) data);
+		buffer.writeCompoundTag((CompoundNBT) this.data);
 	}
 
 	public static CSyncAbilityDataPacket decode(PacketBuffer buffer)
@@ -48,7 +48,7 @@ public class CSyncAbilityDataPacket
 				IAbilityData props = AbilityDataCapability.get(player);
 				
 				AbilityDataCapability.INSTANCE.getStorage().readNBT(AbilityDataCapability.INSTANCE, props, null, message.data);
-				
+								
 				WyNetwork.sendTo(new SSyncAbilityDataPacket(props), (ServerPlayerEntity) player);
 			});
 		}

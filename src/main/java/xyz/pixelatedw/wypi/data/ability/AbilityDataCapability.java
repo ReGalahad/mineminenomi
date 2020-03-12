@@ -100,7 +100,7 @@ public class AbilityDataCapability
 					for (int i = 0; i < equippedAbilities.size(); i++)
 					{
 						CompoundNBT nbtAbility = equippedAbilities.getCompound(i);
-						Ability ability = GameRegistry.findRegistry(Ability.class).getValue(new ResourceLocation(APIConfig.PROJECT_ID, nbtAbility.getString("name" + i)));
+						Ability ability = GameRegistry.findRegistry(Ability.class).getValue(new ResourceLocation(APIConfig.PROJECT_ID, nbtAbility.getString("name")));
 						activeAbilitiesUnlocked.forEach(abl -> 
 						{
 							if(abl.equals(ability))
