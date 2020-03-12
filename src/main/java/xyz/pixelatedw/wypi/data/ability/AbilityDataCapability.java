@@ -49,7 +49,7 @@ public class AbilityDataCapability
 						unlockedAbilities.add(nbtAbility);
 					}
 					props.put("unlocked_abilities", unlockedAbilities);
-	
+
 					ListNBT equippedAbilities = new ListNBT();
 					for (int i = 0; i < instance.getEquippedAbilities().length; i++)
 					{
@@ -116,7 +116,6 @@ public class AbilityDataCapability
 							if (ability != null && abl.equals(ability))
 							{
 								Ability.State state = Ability.State.valueOf(nbtAbility.getString("state"));
-								System.out.println(state);
 								int pos = nbtAbility.getInt("pos");
 								if (state == null)
 									state = Ability.State.STANDBY;

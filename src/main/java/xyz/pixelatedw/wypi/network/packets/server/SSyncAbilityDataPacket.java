@@ -25,9 +25,6 @@ public class SSyncAbilityDataPacket
 	{
 		this.data = new CompoundNBT();
 		this.data = AbilityDataCapability.INSTANCE.getStorage().writeNBT(AbilityDataCapability.INSTANCE, abiltiyDataProps, null);
-		
-		System.out.println(abiltiyDataProps.getEquippedAbility(HikenAbility.INSTANCE).getState());
-		System.out.println(abiltiyDataProps.getEquippedAbility(0).getState());
 	}
 
 	public void encode(PacketBuffer buffer)
@@ -52,9 +49,6 @@ public class SSyncAbilityDataPacket
 				IAbilityData props = AbilityDataCapability.get(player);
 				
 				AbilityDataCapability.INSTANCE.getStorage().readNBT(AbilityDataCapability.INSTANCE, props, null, message.data);
-				
-				System.out.println(props.getEquippedAbility(HikenAbility.INSTANCE).getState());
-				System.out.println(props.getEquippedAbility(0).getState());
 			});
 		}
 		ctx.get().setPacketHandled(true);
