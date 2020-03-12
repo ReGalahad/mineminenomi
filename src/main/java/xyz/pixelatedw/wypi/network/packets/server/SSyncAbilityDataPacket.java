@@ -8,6 +8,7 @@ import net.minecraft.nbt.INBT;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
+import xyz.pixelatedw.mineminenomi.abilities.mera.HikenAbility;
 import xyz.pixelatedw.wypi.APIDefaults;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
@@ -24,6 +25,9 @@ public class SSyncAbilityDataPacket
 	{
 		this.data = new CompoundNBT();
 		this.data = AbilityDataCapability.INSTANCE.getStorage().writeNBT(AbilityDataCapability.INSTANCE, abiltiyDataProps, null);
+		
+		System.out.println(abiltiyDataProps.getEquippedAbility(HikenAbility.INSTANCE).getState());
+		System.out.println(abiltiyDataProps.getEquippedAbility(0).getState());
 	}
 
 	public void encode(PacketBuffer buffer)
@@ -47,7 +51,10 @@ public class SSyncAbilityDataPacket
 				PlayerEntity player = APIDefaults.PROXY.getPlayer();
 				IAbilityData props = AbilityDataCapability.get(player);
 				
-				AbilityDataCapability.INSTANCE.getStorage().readNBT(AbilityDataCapability.INSTANCE, props, null, message.data);		
+				AbilityDataCapability.INSTANCE.getStorage().readNBT(AbilityDataCapability.INSTANCE, props, null, message.data);
+				
+				System.out.println(props.getEquippedAbility(HikenAbility.INSTANCE).getState());
+				System.out.println(props.getEquippedAbility(0).getState());
 			});
 		}
 		ctx.get().setPacketHandled(true);

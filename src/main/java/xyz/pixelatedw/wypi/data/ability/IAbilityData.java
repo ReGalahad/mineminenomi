@@ -18,13 +18,14 @@ public interface IAbilityData
 	void clearUnlockedAbilityFromList(AbilityCategory category, List<Ability> list); 
 	int countUnlockedAbilities(AbilityCategory category);
 
-	boolean addEquippedAbility(Ability abl);
+//	boolean addEquippedAbility(Ability abl);
 	boolean setEquippedAbility(int slot, Ability abl);
 	boolean removeEquippedAbility(Ability abl);
 	boolean hasEquippedAbility(Ability abl);
 	Ability getEquippedAbility(Ability abl);
 	Ability getEquippedAbility(int slot);
-	List<Ability> getEquippedAbilities(AbilityCategory category);
+	Ability[] getEquippedAbilities();
+	Ability[] getEquippedAbilities(AbilityCategory category);
 	void clearEquippedAbilities(AbilityCategory category);
 	void clearEquippedAbilityFromList(AbilityCategory category, List<Ability> list); 
 	int countEquippedAbilities(AbilityCategory category);

@@ -47,7 +47,7 @@ public class CUseAbilityPacket
 					return;
 				
 				Ability abl = abilityDataProps.getEquippedAbility(message.slot);
-				
+
 				if(abl != null)
 					abl.use(player);
 			});

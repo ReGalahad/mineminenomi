@@ -51,14 +51,24 @@ public class AbilityDataCapability
 					props.put("unlocked_abilities", unlockedAbilities);
 	
 					ListNBT equippedAbilities = new ListNBT();
-					for (int i = 0; i < instance.getEquippedAbilities(AbilityCategory.ALL).size(); i++)
+					for (int i = 0; i < instance.getEquippedAbilities().length; i++)
 					{
-						Ability ability = instance.getEquippedAbilities(AbilityCategory.ALL).get(i);
-						String name = WyHelper.getResourceName(ability.getName());
-						CompoundNBT nbtAbility = new CompoundNBT();
-						nbtAbility.putString("name", name);
-						nbtAbility.putString("state", ability.getState().toString());
-						equippedAbilities.add(nbtAbility);
+						Ability ability = instance.getEquippedAbilities()[i];
+						if(ability != null)
+						{
+							String name = WyHelper.getResourceName(ability.getName());
+							CompoundNBT nbtAbility = new CompoundNBT();
+							nbtAbility.putString("name", name);
+							nbtAbility.putInt("pos", i);
+							nbtAbility.putString("state", ability.getState().toString());
+							equippedAbilities.add(nbtAbility);						
+						}
+						else
+						{
+							CompoundNBT nbtAbility = new CompoundNBT();
+							nbtAbility.putInt("pos", i);
+							equippedAbilities.add(nbtAbility);
+						}
 					}
 					props.put("equipped_abilities", equippedAbilities);
 				}
@@ -101,18 +111,25 @@ public class AbilityDataCapability
 					{
 						CompoundNBT nbtAbility = equippedAbilities.getCompound(i);
 						Ability ability = GameRegistry.findRegistry(Ability.class).getValue(new ResourceLocation(APIConfig.PROJECT_ID, nbtAbility.getString("name")));
-						activeAbilitiesUnlocked.forEach(abl -> 
+						activeAbilitiesUnlocked.forEach(abl ->
 						{
-							if(abl.equals(ability))
+							if (ability != null && abl.equals(ability))
 							{
 								Ability.State state = Ability.State.valueOf(nbtAbility.getString("state"));
-								if(state == null)
+								System.out.println(state);
+								int pos = nbtAbility.getInt("pos");
+								if (state == null)
 									state = Ability.State.STANDBY;
 								abl.setState(state);
-								
-								instance.addEquippedAbility(abl);
+
+								instance.setEquippedAbility(pos, abl);
 							}
-						});			
+							else if(ability == null)
+							{
+								int pos = nbtAbility.getInt("pos");
+								instance.setEquippedAbility(pos, null);
+							}
+						});
 					}
 				}
 				catch(Exception ex)

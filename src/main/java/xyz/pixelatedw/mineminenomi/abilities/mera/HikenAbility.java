@@ -23,7 +23,7 @@ public class HikenAbility extends Ability
 		HikenProjectile proj = new HikenProjectile(player.world, player);
 		player.world.addEntity(proj);
 		proj.shoot(player, player.rotationPitch, player.rotationYaw, 0, 2f, 1);
-
+		
 		return true;
 	}
 }

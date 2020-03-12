@@ -46,10 +46,10 @@ public class CSyncAbilityDataPacket
 			{
 				PlayerEntity player = ctx.get().getSender();
 				IAbilityData props = AbilityDataCapability.get(player);
-				
+
 				AbilityDataCapability.INSTANCE.getStorage().readNBT(AbilityDataCapability.INSTANCE, props, null, message.data);
-								
-				WyNetwork.sendTo(new SSyncAbilityDataPacket(props), (ServerPlayerEntity) player);
+				
+				WyNetwork.sendTo(new SSyncAbilityDataPacket(props), (ServerPlayerEntity) player);				
 			});
 		}
 		ctx.get().setPacketHandled(true);

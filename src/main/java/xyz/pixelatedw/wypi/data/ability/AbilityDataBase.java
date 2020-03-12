@@ -1,6 +1,7 @@
 package xyz.pixelatedw.wypi.data.ability;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -10,10 +11,10 @@ import xyz.pixelatedw.wypi.abilities.Ability;
 
 public class AbilityDataBase implements IAbilityData
 {
-
 	private List<Ability> unlockedAbilities = new ArrayList<Ability>();
-	private List<Ability> equippedAbilities = new ArrayList<Ability>(APIConfig.MAX_SELECTED_ABILITIES);
+	private Ability[] equippedAbilities = new Ability[APIConfig.MAX_SELECTED_ABILITIES];
 
+	
 	private Ability previouslyUsedAbility;
 
 	/*
@@ -109,7 +110,7 @@ public class AbilityDataBase implements IAbilityData
 	/*
 	 * Equipped Abilities
 	 */
-
+/*
 	@Override
 	public boolean addEquippedAbility(Ability abl)
 	{
@@ -121,17 +122,14 @@ public class AbilityDataBase implements IAbilityData
 		}
 		return false;
 	}
-
+*/
 	@Override
 	public boolean setEquippedAbility(int slot, Ability abl)
 	{
 		Ability ogAbl = this.getEquippedAbility(abl);
-		if (ogAbl == null)
+		if (ogAbl == null && slot <= APIConfig.MAX_SELECTED_ABILITIES)
 		{
-			if(this.equippedAbilities.size() > slot)
-				this.equippedAbilities.set(slot, abl);
-			else
-				this.equippedAbilities.add(slot, abl);
+			this.equippedAbilities[slot] = abl;
 			return true;
 		}
 		return false;
@@ -142,9 +140,16 @@ public class AbilityDataBase implements IAbilityData
 	{
 		Ability ogAbl = this.getUnlockedAbility(abl);
 		if (ogAbl != null)
-		{
-			this.equippedAbilities.remove(ogAbl);
-			return true;
+		{		
+			for(int i = 0; i < this.equippedAbilities.length; i++)
+			{
+				Ability ability = this.equippedAbilities[i];
+				if(ability != null)
+				{
+					 this.equippedAbilities[i] = null;
+					 return true;
+				}
+			}
 		}
 		return false;
 	}
@@ -152,48 +157,77 @@ public class AbilityDataBase implements IAbilityData
 	@Override
 	public boolean hasEquippedAbility(Ability abl)
 	{
-		this.equippedAbilities.removeIf(ability -> ability == null);
-		return this.equippedAbilities.parallelStream().anyMatch(ability -> ability.equals(abl));
+		return Arrays.stream(this.equippedAbilities)
+				.parallel()
+				.filter(ability -> ability != null)
+				.anyMatch(ability -> ability.equals(abl));
 	}
 
 	@Override
 	public Ability getEquippedAbility(Ability abl)
 	{
-		this.equippedAbilities.removeIf(ability -> ability == null);
-		return this.equippedAbilities.parallelStream().filter(ability -> ability.equals(abl)).findFirst().orElse(null);
+		return Arrays.stream(this.equippedAbilities)
+				.parallel()
+				.filter(ability -> ability != null)
+				.filter(ability -> ability.equals(abl))
+				.findFirst().orElse(null);
 	}
 
 	@Override
 	public Ability getEquippedAbility(int slot)
 	{
-		this.equippedAbilities.removeIf(ability -> ability == null);
-		return this.equippedAbilities.size() > slot ? this.equippedAbilities.get(slot) : null;
+		return this.equippedAbilities[slot];
 	}
 
 	@Override
-	public List<Ability> getEquippedAbilities(AbilityCategory category)
+	public Ability[] getEquippedAbilities()
 	{
-		this.equippedAbilities.removeIf(ability -> ability == null);
-		return this.equippedAbilities.parallelStream().filter(ability -> ability.getCategory() == category || category == AbilityCategory.ALL).collect(Collectors.toList());
+		return this.equippedAbilities;
+	}
+	
+	@Override
+	public Ability[] getEquippedAbilities(AbilityCategory category)
+	{
+		return this.equippedAbilities;
 	}
 
 	@Override
 	public void clearEquippedAbilities(AbilityCategory category)
 	{
-		this.equippedAbilities.removeIf(ability -> ability == null || ability.getCategory() == category || category == AbilityCategory.ALL);
+		for(int i = 0; i < this.equippedAbilities.length; i++)
+		{
+			Ability ability = this.equippedAbilities[i];
+			if((ability != null && ability.getCategory() != category) || category == AbilityCategory.ALL)
+			{
+				this.equippedAbilities[i] = null;
+				break;
+			}
+		}
 	}
 
 	@Override
 	public void clearEquippedAbilityFromList(AbilityCategory category, List<Ability> list)
 	{
-		this.equippedAbilities.removeIf(ability -> (ability == null || ability.getCategory() == category || category == AbilityCategory.ALL) && list.contains(ability));
+		for(int i = 0; i < this.equippedAbilities.length; i++)
+		{
+			Ability ability = this.equippedAbilities[i];
+			if((ability != null && ability.getCategory() != category && !list.contains(ability)) || category != AbilityCategory.ALL)
+			{
+				this.equippedAbilities[i] = null;
+				break;
+			}
+		}
 	}
 
 	@Override
 	public int countEquippedAbilities(AbilityCategory category)
 	{
-		this.equippedAbilities.removeIf(ability -> ability == null);
-		return this.equippedAbilities.parallelStream().filter(ability -> ability.getCategory() == category || category == AbilityCategory.ALL).collect(Collectors.toList()).size();
+		return Arrays.stream(this.equippedAbilities)
+				.parallel()
+				.filter(ability -> ability != null)
+				.filter(ability -> ability.getCategory() == category || category == AbilityCategory.ALL)
+				.collect(Collectors.toList())
+				.size();
 	}
 
 	/*

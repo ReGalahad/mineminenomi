@@ -11,7 +11,6 @@ import net.minecraftforge.client.gui.ScrollPanel;
 import xyz.pixelatedw.mineminenomi.api.helpers.ModRendererHelper;
 import xyz.pixelatedw.mineminenomi.screens.SelectHotbarAbilitiesScreen;
 import xyz.pixelatedw.wypi.APIConfig;
-import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
@@ -105,7 +104,7 @@ public class AbilitiesListScreenPanel extends ScrollPanel
 
 		boolean flag = true;
 		
-		for (int i = 0; i < this.props.getEquippedAbilities(AbilityCategory.ALL).size(); i++)
+		for (int i = 0; i < this.props.getEquippedAbilities().length; i++)
 		{
 			if (this.props.getEquippedAbility(i) != null && this.props.getEquippedAbility(i).equals(entry.ability))
 			{
