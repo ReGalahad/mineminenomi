@@ -18,7 +18,7 @@ public interface IAbilityData
 	void clearUnlockedAbilityFromList(AbilityCategory category, List<Ability> list); 
 	int countUnlockedAbilities(AbilityCategory category);
 
-//	boolean addEquippedAbility(Ability abl);
+	boolean addEquippedAbility(Ability abl);
 	boolean setEquippedAbility(int slot, Ability abl);
 	boolean removeEquippedAbility(Ability abl);
 	boolean hasEquippedAbility(Ability abl);

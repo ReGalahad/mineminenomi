@@ -110,19 +110,22 @@ public class AbilityDataBase implements IAbilityData
 	/*
 	 * Equipped Abilities
 	 */
-/*
+
 	@Override
 	public boolean addEquippedAbility(Ability abl)
 	{
-		Ability ogAbl = this.getEquippedAbility(abl);
-		if (ogAbl == null)
+		for(int i = 0; i < this.equippedAbilities.length; i++)
 		{
-			this.equippedAbilities.add(abl);
-			return true;
+			Ability ability = this.equippedAbilities[i];
+			if(ability == null)
+			{
+				 this.equippedAbilities[i] = abl;
+				 return true;
+			}
 		}
 		return false;
 	}
-*/
+
 	@Override
 	public boolean setEquippedAbility(int slot, Ability abl)
 	{
