@@ -84,49 +84,48 @@ public class ModWeapons
 	@SubscribeEvent
     public static void registerItems(final RegistryEvent.Register<Item> event)
     {
-        event.getRegistry().registerAll
-        (
-        	registerSword(MARINE_SWORD, "Marine Sword", HAKI_PREDICATE),
-        	registerSword(PIRATE_CUTLASS, "Pirate Cutlass", HAKI_PREDICATE),
-        	registerSword(PIPE, "Pipe", HAKI_PREDICATE),
-        	registerSword(SCISSORS, "Scissors", HAKI_PREDICATE),
-        	registerSword(KIKOKU, "Kikoku", HAKI_PREDICATE),
-        	registerSword(KIRIBACHI, "Kiribachi", HAKI_PREDICATE),
-        	registerSword(YORU, "Yoru", HAKI_PREDICATE),
-        	registerRod(MURAKUMOGIRI, "Murakumogiri", HAKI_PREDICATE),     	
-        	registerSword(HOOK, "Hook", HAKI_PREDICATE, SHEATHED_PREDICATE),
-        	registerSword(UMBRELLA, "Umbrella"),
-        	registerSword(JITTE, "Jitte", HAKI_PREDICATE),
-        	registerRod(BO_STICK, "Bo Staff", HAKI_PREDICATE),
-        	registerSword(HAMMER_5T, "5t Hammer", HAKI_PREDICATE),
-        	registerSword(HAMMER_10T, "10t Hammer", HAKI_PREDICATE),
-        	registerSword(HAMMER_100T, "100t Hammer", HAKI_PREDICATE),
-        	registerSword(TONFA, "Tonfa", HAKI_PREDICATE),      	
-        	registerSword(BANDIT_KNIFE, "Bandit Knife", HAKI_PREDICATE),
-        	//registerSword(knife2, "Knife"),
-        	//registerSword(knife3, "Knife"),
-        	registerSword(WADO_ICHIMONJI, "Wado Ichimonji", HAKI_PREDICATE, SHEATHED_PREDICATE),
-        	registerSword(SANDAI_KITETSU, "Sandai Kitetsu", HAKI_PREDICATE, SHEATHED_PREDICATE),
-        	registerSword(NIDAI_KITESTU, "Nidai Kitetsu", HAKI_PREDICATE, SHEATHED_PREDICATE),
-        	registerSword(SHUSUI, "Shusui", HAKI_PREDICATE, SHEATHED_PREDICATE),
-        	registerSword(SOUL_SOLID, "Soul Solid", HAKI_PREDICATE, SHEATHED_PREDICATE),
-        	registerSword(DURANDAL, "Durandal", HAKI_PREDICATE),
-        	
-        	registerSimple3DItem(FLINTLOCK, "Flintlock"),     	
-        	registerCustom3DItem(GREEN_KUJA_BOW, "Green Kuja Bow", GREEN_KUJA_BOW_MODEL),
-        	registerCustom3DItem(RED_KUJA_BOW, "Red Kuja Bow", RED_KUJA_BOW_MODEL),
-        	registerCustom3DItem(BLUE_KUJA_BOW, "Blue Kuja Bow", BLUE_KUJA_BOW_MODEL),
-        	registerCustom3DItem(KABUTO, "Kabuto", KABUTO_MODEL),
-        	registerCustom3DItem(BLACK_KABUTO, "Kuro Kabuto", BLACK_KABUTO_MODEL),
-        	registerCustom3DItem(GINGA_PACHINKO, "Ginga Pachinko", GINGA_PACHINKO_MODEL),
+		WyRegistry.setupItemsRegistry(event.getRegistry());
+		
+		registerSword(MARINE_SWORD, "Marine Sword", HAKI_PREDICATE);
+		registerSword(PIRATE_CUTLASS, "Pirate Cutlass", HAKI_PREDICATE);
+		registerSword(PIPE, "Pipe", HAKI_PREDICATE);
+		registerSword(SCISSORS, "Scissors", HAKI_PREDICATE);
+		registerSword(KIKOKU, "Kikoku", HAKI_PREDICATE);
+		registerSword(KIRIBACHI, "Kiribachi", HAKI_PREDICATE);
+		registerSword(YORU, "Yoru", HAKI_PREDICATE);
+		registerRod(MURAKUMOGIRI, "Murakumogiri", HAKI_PREDICATE);
+		registerSword(HOOK, "Hook", HAKI_PREDICATE, SHEATHED_PREDICATE);
+		registerSword(UMBRELLA, "Umbrella");
+		registerSword(JITTE, "Jitte", HAKI_PREDICATE);
+		registerRod(BO_STICK, "Bo Staff", HAKI_PREDICATE);
+		registerSword(HAMMER_5T, "5t Hammer", HAKI_PREDICATE);
+		registerSword(HAMMER_10T, "10t Hammer", HAKI_PREDICATE);
+		registerSword(HAMMER_100T, "100t Hammer", HAKI_PREDICATE);
+		registerSword(TONFA, "Tonfa", HAKI_PREDICATE);
+		registerSword(BANDIT_KNIFE, "Bandit Knife", HAKI_PREDICATE);
+		// registerSword(knife2, "Knife");
+		// registerSword(knife3, "Knife");
+		registerSword(WADO_ICHIMONJI, "Wado Ichimonji", HAKI_PREDICATE, SHEATHED_PREDICATE);
+		registerSword(SANDAI_KITETSU, "Sandai Kitetsu", HAKI_PREDICATE, SHEATHED_PREDICATE);
+		registerSword(NIDAI_KITESTU, "Nidai Kitetsu", HAKI_PREDICATE, SHEATHED_PREDICATE);
+		registerSword(SHUSUI, "Shusui", HAKI_PREDICATE, SHEATHED_PREDICATE);
+		registerSword(SOUL_SOLID, "Soul Solid", HAKI_PREDICATE, SHEATHED_PREDICATE);
+		registerSword(DURANDAL, "Durandal", HAKI_PREDICATE);
 
-        	registerSword(ICE_SABER, "Ice Saber"),
-        	registerSword(AMA_NO_MURAKUMO, "Ama no Murakumo"),
-        	registerSword(NORO_NORO_BEAM_SWORD, "Noro Noro Beam Sword"),
-        	registerSword(DORU_DORU_ARTS_KEN, "Doru Doru Arts: Ken"),
-        	registerSword(BLUE_SWORD, "Blue Sword"),
-        	registerSword(TABIRA_YUKI, "Tabira Yuki")
-        );
+		registerSimple3DItem(FLINTLOCK, "Flintlock");
+		registerCustom3DItem(GREEN_KUJA_BOW, "Green Kuja Bow", GREEN_KUJA_BOW_MODEL);
+		registerCustom3DItem(RED_KUJA_BOW, "Red Kuja Bow", RED_KUJA_BOW_MODEL);
+		registerCustom3DItem(BLUE_KUJA_BOW, "Blue Kuja Bow", BLUE_KUJA_BOW_MODEL);
+		registerCustom3DItem(KABUTO, "Kabuto", KABUTO_MODEL);
+		registerCustom3DItem(BLACK_KABUTO, "Kuro Kabuto", BLACK_KABUTO_MODEL);
+		registerCustom3DItem(GINGA_PACHINKO, "Ginga Pachinko", GINGA_PACHINKO_MODEL);
+
+		registerSword(ICE_SABER, "Ice Saber");
+		registerSword(AMA_NO_MURAKUMO, "Ama no Murakumo");
+		registerSword(NORO_NORO_BEAM_SWORD, "Noro Noro Beam Sword");
+		registerSword(DORU_DORU_ARTS_KEN, "Doru Doru Arts: Ken");
+		registerSword(BLUE_SWORD, "Blue Sword");
+		registerSword(TABIRA_YUKI, "Tabira Yuki");
     }
 	
 	private static Item registerSword(Item item, String localizedName, JSONPredicateObject... predicate)

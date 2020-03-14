@@ -18,7 +18,6 @@ import net.minecraft.potion.Effect;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.json.loottables.IJSONLootTable;
@@ -67,6 +66,23 @@ public class WyRegistry
 		effectsRegistry = registry;
 	}
 	
+	private static IForgeRegistry<Ability> abilitiesRegistry;
+	public static void setupAbilitiesRegistry(IForgeRegistry<Ability> registry)
+	{
+		abilitiesRegistry = registry;
+	}
+	
+	private static IForgeRegistry<Item> itemsRegistry;
+	public static void setupItemsRegistry(IForgeRegistry<Item> registry)
+	{
+		itemsRegistry = registry;
+	}
+
+	private static IForgeRegistry<Block> blocksRegistry;
+	public static void setupBlocksRegistry(IForgeRegistry<Block> registry)
+	{
+		blocksRegistry = registry;
+	}
 
 	/*
 	 * Register Helpers
@@ -97,21 +113,14 @@ public class WyRegistry
 	{
 		langMap.put(key, localizedName);
 	}
-
-	public static void registerAbilities(RegistryEvent.Register<Ability> event, Ability... abilities)
-	{
-		for(Ability ability : abilities)
-		{
-			event.getRegistry().register(registerAbility(ability));
-		}
-	}
 	
 	public static Ability registerAbility(Ability ability)
 	{
-		String truename = WyHelper.getResourceName(ability.getName());
-		ability.setRegistryName(APIConfig.PROJECT_ID, truename);
+		String resourceName = WyHelper.getResourceName(ability.getName());
+		langMap.put("ability." + APIConfig.PROJECT_ID + "." + resourceName, ability.getName());
+		ability.setRegistryName(APIConfig.PROJECT_ID, resourceName);
 		
-		langMap.put("ability." + APIConfig.PROJECT_ID + "." + truename, ability.getName());
+		abilitiesRegistry.register(ability);
 
 		return ability;
 	}
@@ -123,11 +132,12 @@ public class WyRegistry
 
 	public static Item registerItem(Item item, String localizedName, JSONModelItem jsonType)
 	{
-		String truename = WyHelper.getResourceName(localizedName);
-		item.setRegistryName(APIConfig.PROJECT_ID, truename);
-
-		langMap.put("item." + APIConfig.PROJECT_ID + "." + truename, localizedName);
+		String resourceName = WyHelper.getResourceName(localizedName);
+		langMap.put("item." + APIConfig.PROJECT_ID + "." + resourceName, localizedName);
+		item.setRegistryName(APIConfig.PROJECT_ID, resourceName);
 		items.put(item, jsonType);
+
+		itemsRegistry.register(item);
 
 		return item;
 	}
@@ -145,8 +155,9 @@ public class WyRegistry
 
 		langMap.put("item." + APIConfig.PROJECT_ID + "." + langKey, localizedName);
 		egg.setRegistryName(APIConfig.PROJECT_ID, langKey);
-
 		items.put(egg, new JSONModelSpawnEgg(langKey));
+
+		itemsRegistry.register(egg);
 
 		return egg;
 	}
@@ -158,21 +169,22 @@ public class WyRegistry
 
 	public static Block registerBlock(Block block, String localizedName, JSONModelBlock jsonType)
 	{
-		String truename = WyHelper.getResourceName(localizedName);
-		block.setRegistryName(new ResourceLocation(APIConfig.PROJECT_ID, truename));
-		
-		langMap.put("block." + APIConfig.PROJECT_ID + "." + truename, localizedName);
+		String resourceName = WyHelper.getResourceName(localizedName);
+		langMap.put("block." + APIConfig.PROJECT_ID + "." + resourceName, localizedName);
+		block.setRegistryName(new ResourceLocation(APIConfig.PROJECT_ID, resourceName));
 		blocks.put(block, jsonType);
 
+		blocksRegistry.register(block);
+		
 		return block;
 	}
 	
 	public static TileEntityType<?> registerTileEntity(String id, Supplier factory, Block... blocks)
 	{
-		String name = WyHelper.getResourceName(id);
+		String resourceName = WyHelper.getResourceName(id);
 
 		TileEntityType<?> type = TileEntityType.Builder.create(factory, blocks).build(null);
-		type.setRegistryName(APIConfig.PROJECT_ID, name);
+		type.setRegistryName(APIConfig.PROJECT_ID, resourceName);
 		
 		return type;
 	}
@@ -184,21 +196,21 @@ public class WyRegistry
 
 	public static <T extends Entity> EntityType<T> registerEntityType(String id, Function<World, T> func, float width, float height)
 	{
-		String name = WyHelper.getResourceName(id);
+		String resourceName = WyHelper.getResourceName(id);
 
 		EntityType type = EntityType.Builder.create((entityType, world) -> func.apply(world), EntityClassification.MISC)
 				.setTrackingRange(128)
 				.setShouldReceiveVelocityUpdates(true)
 				.setUpdateInterval(1)
 				.setCustomClientFactory((entity, world) -> func.apply(world))
-				.size(width, height).build(name)
-				.setRegistryName(APIConfig.PROJECT_ID, name);
+				.size(width, height).build(resourceName)
+				.setRegistryName(APIConfig.PROJECT_ID, resourceName);
 
 		StringBuilder builder = new StringBuilder();
-		String[] strs = name.split("_");
+		String[] strs = resourceName.split("_");
 		Arrays.stream(strs).forEach(x -> builder.append(WyHelper.upperCaseFirst(x)));
 
-		langMap.put("entity." + APIConfig.PROJECT_ID + "." + name, builder.toString().trim());
+		langMap.put("entity." + APIConfig.PROJECT_ID + "." + resourceName, builder.toString().trim());
 
 		return type;
 	}

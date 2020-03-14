@@ -38,22 +38,21 @@ public class ModArmors
 	public static final Item COLA_BACKPACK = new ColaBackpackItem();
 
 	@SubscribeEvent
-	public static void registerItems(final RegistryEvent.Register<Item> event)
+	public static void registerItems(RegistryEvent.Register<Item> event)
 	{
-		event.getRegistry().registerAll
-		(
-			WyRegistry.registerItem(PIRATE_HEAD, "Pirate Bandana"),
-			WyRegistry.registerItem(PIRATE_CHEST, "Pirate Chest"),
-			WyRegistry.registerItem(PIRATE_LEGS, "Pirate Pants"),
-			WyRegistry.registerItem(PIRATE_FEET, "Pirate Boots"),
+		WyRegistry.setupItemsRegistry(event.getRegistry());
+		
+		WyRegistry.registerItem(PIRATE_HEAD, "Pirate Bandana");
+		WyRegistry.registerItem(PIRATE_CHEST, "Pirate Chest");
+		WyRegistry.registerItem(PIRATE_LEGS, "Pirate Pants");
+		WyRegistry.registerItem(PIRATE_FEET, "Pirate Boots");
 
-			WyRegistry.registerItem(MARINE_HEAD, "Marine Hat"),
-			WyRegistry.registerItem(MARINE_CHEST, "Marine Chest"),
-			WyRegistry.registerItem(MARINE_LEGS, "Marine Pants"),
-			WyRegistry.registerItem(MARINE_FEET, "Marine Boots"),
+		WyRegistry.registerItem(MARINE_HEAD, "Marine Hat");
+		WyRegistry.registerItem(MARINE_CHEST, "Marine Chest");
+		WyRegistry.registerItem(MARINE_LEGS, "Marine Pants");
+		WyRegistry.registerItem(MARINE_FEET, "Marine Boots");
 			
-			WyRegistry.registerItem(CAPTAIN_CAPE, "Captain Cape"),
-			WyRegistry.registerItem(COLA_BACKPACK, "Cola Backpack")
-		);
+		WyRegistry.registerItem(CAPTAIN_CAPE, "Captain Cape");
+		WyRegistry.registerItem(COLA_BACKPACK, "Cola Backpack");
 	}
 }

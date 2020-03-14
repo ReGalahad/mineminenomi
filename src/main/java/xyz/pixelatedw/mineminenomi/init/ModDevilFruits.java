@@ -128,16 +128,20 @@ public class ModDevilFruits
 
 	@SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event)
-    {	
+    {
+		WyRegistry.setupItemsRegistry(event.getRegistry());
+		
 		ModValues.devilfruits.forEach(item -> 
 		{
-			event.getRegistry().register(WyRegistry.registerItem(item, item.getDevilFruitName()));			
+			WyRegistry.registerItem(item, item.getDevilFruitName());			
 		});
     }
 	
 	@SubscribeEvent
     public static void registerAbilities(RegistryEvent.Register<Ability> event)
     {
+		WyRegistry.setupAbilitiesRegistry(event.getRegistry());
+
 		int totalFruits = 0, totalAbilities = 0;	
 		
 		for(AkumaNoMiItem df : ModValues.devilfruits)
@@ -148,7 +152,7 @@ public class ModDevilFruits
 				if (abl != null)
 				{
 					totalAbilities++;
-					event.getRegistry().register(WyRegistry.registerAbility(abl));
+					WyRegistry.registerAbility(abl);
 				}
 			}
 		}
