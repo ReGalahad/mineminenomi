@@ -31,7 +31,8 @@ public class SpringHopperAbility extends ChargeableAbility
 	private boolean onEndChargingEvent(PlayerEntity player)
 	{
 		double[] speed = WyHelper.propulsion(player, 5.5, 5.5);
-		player.setMotion(speed[0], 3.0, speed[2]);
+		player.setMotion(speed[0], 2.0, speed[2]);
+
 		((ServerPlayerEntity)player).connection.sendPacket(new SEntityVelocityPacket(player));
 		return true;
 	}

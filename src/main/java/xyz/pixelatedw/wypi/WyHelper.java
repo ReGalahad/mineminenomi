@@ -205,11 +205,11 @@ public class WyHelper
 		double mX = entity.getLook(0).x;
 		double mZ = entity.getLook(0).z;
 		double mY = entity.getLook(0).y;
-
+		
 		mX *= extraVelX;
 		mY *= extraVelY;
 		mZ *= extraVelZ;
-
+		
 		return new double[]
 			{
 					mX, mY, mZ

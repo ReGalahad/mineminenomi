@@ -64,6 +64,9 @@ public class AbilityProjectileRenderer extends EntityRenderer<AbilityProjectileE
 	@Override
 	public void doRender(AbilityProjectileEntity entity, double x, double y, double z, float entityYaw, float partialTicks)
 	{
+		if(entity.ticksExisted < 2)
+			return;
+
 		GlStateManager.color4f(1, 1, 1, 1);
 		GlStateManager.pushMatrix();
 		{
