@@ -16,7 +16,7 @@ public class BaneProjectiles
 	
 	public static final EntityType SPRING_DEATH_KNOCK = WyRegistry.registerEntityType("spring_death_knock", SpringDeathKnockProjectile::new, 1.5F, 1.5F);
 	
-	private static final AbilityProjectileRenderer.Factory SPRING_DEATH_KNOCK_FACTORY = new AbilityProjectileRenderer.Factory(new FistModel()).setTexture("springdeathknock").setScale(5, 5, 7).setOffset(0.15, -0.5, 0);
+	private static final AbilityProjectileRenderer.Factory SPRING_DEATH_KNOCK_FACTORY = new AbilityProjectileRenderer.Factory(new FistModel()).setTexture("springdeathknock").setScale(5, 5, 7);
 
 	static
 	{

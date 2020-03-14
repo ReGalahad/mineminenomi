@@ -203,7 +203,6 @@ public class AbilityDataBase implements IAbilityData
 			if((ability != null && ability.getCategory() != category) || category == AbilityCategory.ALL)
 			{
 				this.equippedAbilities[i] = null;
-				break;
 			}
 		}
 	}
@@ -217,7 +216,6 @@ public class AbilityDataBase implements IAbilityData
 			if((ability != null && ability.getCategory() != category && !list.contains(ability)) || category != AbilityCategory.ALL)
 			{
 				this.equippedAbilities[i] = null;
-				break;
 			}
 		}
 	}

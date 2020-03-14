@@ -81,7 +81,7 @@ public class AbilityProjectileRenderer extends EntityRenderer<AbilityProjectileE
 
 			GlStateManager.color4f((float) this.red, (float) this.green, (float) this.blue, (float) this.alpha);
 			GlStateManager.scaled(this.scaleX, this.scaleY, this.scaleZ);
-			GlStateManager.translated(0, -(this.scaleY / 10), 0);
+			//GlStateManager.translated(0, -(this.scaleY / 10), 0);
 
 			if (this.texture != null)
 				Minecraft.getInstance().textureManager.bindTexture(this.getEntityTexture(entity));

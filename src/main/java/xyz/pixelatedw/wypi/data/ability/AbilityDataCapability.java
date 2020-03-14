@@ -111,24 +111,27 @@ public class AbilityDataCapability
 					{
 						CompoundNBT nbtAbility = equippedAbilities.getCompound(i);
 						Ability ability = GameRegistry.findRegistry(Ability.class).getValue(new ResourceLocation(APIConfig.PROJECT_ID, nbtAbility.getString("name")));
-						activeAbilitiesUnlocked.forEach(abl ->
+						if (ability != null)
 						{
-							if (ability != null && abl.equals(ability))
+							for(Ability abl : activeAbilitiesUnlocked)
 							{
-								Ability.State state = Ability.State.valueOf(nbtAbility.getString("state"));
-								int pos = nbtAbility.getInt("pos");
-								if (state == null)
-									state = Ability.State.STANDBY;
-								abl.setState(state);
-
-								instance.setEquippedAbility(pos, abl);
+								if(abl.equals(ability))
+								{
+									Ability.State state = Ability.State.valueOf(nbtAbility.getString("state"));
+									int pos = nbtAbility.getInt("pos");
+									if (state == null)
+										state = Ability.State.STANDBY;
+									abl.setState(state);
+	
+									instance.setEquippedAbility(pos, abl);
+								}
 							}
-							else if(ability == null)
-							{
-								int pos = nbtAbility.getInt("pos");
-								instance.setEquippedAbility(pos, null);
-							}
-						});
+						}
+						else if(ability == null)
+						{
+							int pos = nbtAbility.getInt("pos");
+							instance.setEquippedAbility(pos, null);
+						}
 					}
 				}
 				catch(Exception ex)
