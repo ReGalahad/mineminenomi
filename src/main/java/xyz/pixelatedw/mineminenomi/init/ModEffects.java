@@ -18,9 +18,8 @@ public class ModEffects
 	@SubscribeEvent
 	public static void registerEffects(RegistryEvent.Register<Effect> event)
 	{
-		event.getRegistry().registerAll
-		(
-			WyRegistry.registerEffect("Bubbly Coral", new BubblyCoralEffect())
-		);
+		WyRegistry.setupEffectsRegistry(event.getRegistry());
+
+		WyRegistry.registerEffect(new BubblyCoralEffect(), "Bubbly Coral");
 	}
 }

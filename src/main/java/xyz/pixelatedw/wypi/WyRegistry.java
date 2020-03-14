@@ -19,6 +19,7 @@ import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.registries.IForgeRegistry;
 import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.json.loottables.IJSONLootTable;
 import xyz.pixelatedw.wypi.json.models.JSONModelBlock;
@@ -34,44 +35,51 @@ public class WyRegistry
 	 */
 
 	private static HashMap<Item, JSONModelItem> items = new HashMap<Item, JSONModelItem>();
-	private static HashMap<Block, JSONModelBlock> blocks = new HashMap<Block, JSONModelBlock>();
-	private static HashMap<Object, IJSONLootTable> lootTables = new HashMap<Object, IJSONLootTable>();
-	private static HashMap<String, String> langMap = new HashMap<String, String>();
-
-	/*
-	 * Getters
-	 */
-
 	public static HashMap<Item, JSONModelItem> getItems()
 	{
 		return items;
 	}
-
+	
+	private static HashMap<Block, JSONModelBlock> blocks = new HashMap<Block, JSONModelBlock>();
 	public static HashMap<Block, JSONModelBlock> getBlocks()
 	{
 		return blocks;
 	}
-
+	
+	private static HashMap<Object, IJSONLootTable> lootTables = new HashMap<Object, IJSONLootTable>();
+	public static HashMap<Object, IJSONLootTable> getLootTables()
+	{
+		return lootTables;
+	}
+	
+	private static HashMap<String, String> langMap = new HashMap<String, String>();
 	public static HashMap<String, String> getLangMap()
 	{
 		return langMap;
 	}
 
-	public static HashMap<Object, IJSONLootTable> getLootTables()
+	/*
+	 * Static Registries
+	 */
+	private static IForgeRegistry<Effect> effectsRegistry;
+	public static void setupEffectsRegistry(IForgeRegistry<Effect> registry)
 	{
-		return lootTables;
+		effectsRegistry = registry;
 	}
+	
 
 	/*
 	 * Register Helpers
 	 */
 
-	public static Effect registerEffect(String localizedName, Effect effect)
+	public static Effect registerEffect(Effect effect, String localizedName)
 	{
-		String truename = WyHelper.getResourceName(localizedName);
-		langMap.put("effect." + APIConfig.PROJECT_ID + "." + truename, localizedName);
-		effect.setRegistryName(APIConfig.PROJECT_ID, truename);
+		String resourceName = WyHelper.getResourceName(localizedName);
+		langMap.put("effect." + APIConfig.PROJECT_ID + "." + resourceName, localizedName);
+		effect.setRegistryName(APIConfig.PROJECT_ID, resourceName);
 
+		effectsRegistry.register(effect);
+		
 		return effect;
 	}
 
