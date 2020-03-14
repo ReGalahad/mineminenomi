@@ -25,7 +25,7 @@ import xyz.pixelatedw.wypi.network.WyNetwork;
 import xyz.pixelatedw.wypi.network.packets.server.SSyncAbilityDataPacket;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
-public class EventsAbilityValidation
+public class AbilityValidationEvents
 {
 	@SubscribeEvent
 	public static void onEntityJoinWorld(EntityJoinWorldEvent event)

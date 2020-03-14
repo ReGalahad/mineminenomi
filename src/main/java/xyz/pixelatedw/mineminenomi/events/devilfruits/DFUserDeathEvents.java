@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.events;
+package xyz.pixelatedw.mineminenomi.events.devilfruits;
 
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
@@ -18,7 +18,7 @@ import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
-public class EventsCore
+public class DFUserDeathEvents
 {
 	// Cloning the player data to the new entity based on the config option
 	@SubscribeEvent

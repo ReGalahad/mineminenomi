@@ -8,6 +8,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 import xyz.pixelatedw.mineminenomi.items.AkumaNoMiBoxItem;
 import xyz.pixelatedw.mineminenomi.items.BellyPouchItem;
+import xyz.pixelatedw.mineminenomi.items.BubblyCoralItem;
 import xyz.pixelatedw.mineminenomi.items.CharacterCreatorItem;
 import xyz.pixelatedw.mineminenomi.items.ColaItem;
 import xyz.pixelatedw.mineminenomi.items.HeartItem;
@@ -29,6 +30,7 @@ public class ModItems
 	public static final Item HEART = new HeartItem();
 	public static final Item BELLY_POUCH = new BellyPouchItem();
 	public static final Item KEY = new Item(new Properties().group(ModCreativeTabs.MISC));
+	public static final Item BUBBLY_CORAL = new BubblyCoralItem();
 	
 	// Devil Fruit Boxes
 	public static final Item TIER_1_BOX = new AkumaNoMiBoxItem(1);
@@ -70,7 +72,8 @@ public class ModItems
         	WyRegistry.registerItem(POP_GREEN, "Pop Green"),
         	WyRegistry.registerItem(TIER_1_BOX, "Wooden Box"),
         	WyRegistry.registerItem(TIER_2_BOX, "Iron Box"),
-        	WyRegistry.registerItem(TIER_3_BOX, "Golden Box")
+        	WyRegistry.registerItem(TIER_3_BOX, "Golden Box"),
+        	WyRegistry.registerItem(BUBBLY_CORAL, "Bubbly Coral")
         );
     }
 }

@@ -19,7 +19,7 @@ public class PikaProjectiles
 	public static final EntityType YASAKANI_NO_MAGATAMA = WyRegistry.registerEntityType("yasakani_no_magatama", YasakaniNoMagatamaProjectile::new, 0.2F, 0.2F);
 
 	private static final AbilityProjectileRenderer.Factory AMATERASU_FACTORY = new AbilityProjectileRenderer.Factory(new CubeModel()).setColor("#FFFF00").setScale(1, 1, 2);
-	private static final AbilityProjectileRenderer.Factory YASAKANI_NO_MAGATAMA_FACTORY = new AbilityProjectileRenderer.Factory(new SphereModel()).setColor("#FFFF00").setScale(.5, .5, .5).setOffset(0, 0.3, 0);
+	private static final AbilityProjectileRenderer.Factory YASAKANI_NO_MAGATAMA_FACTORY = new AbilityProjectileRenderer.Factory(new SphereModel()).setColor("#FFFF00").setScale(.5, .5, .5);
 
 	static
 	{

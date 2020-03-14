@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.events.abilities.common;
+package xyz.pixelatedw.mineminenomi.events.devilfruits;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -10,12 +10,13 @@ import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.entities.mobs.GenericNewEntity;
+import xyz.pixelatedw.mineminenomi.init.ModEffects;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
-public class EventsDFWeaknesses
+public class DFWeaknessesEvents
 {
 
 	@SubscribeEvent
@@ -26,8 +27,8 @@ public class EventsDFWeaknesses
 			LivingEntity entity = event.getEntityLiving();
 			IDevilFruit props = DevilFruitCapability.get(entity);
 			
-			if(props.hasDevilFruit() && DevilFruitsHelper.isAffectedByWater(entity))
-			{			
+			if(props.hasDevilFruit() && DevilFruitsHelper.isAffectedByWater(entity) && !entity.isPotionActive(ModEffects.BUBBLY_CORAL))
+			{				
 				if(entity instanceof PlayerEntity && !((PlayerEntity) entity).abilities.isCreativeMode)
 					entity.setMotion(entity.getMotion().x, entity.getMotion().y - 5, entity.getMotion().z);
 				else if(entity instanceof GenericNewEntity)

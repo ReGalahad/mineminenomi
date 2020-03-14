@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.events.abilities.common;
+package xyz.pixelatedw.mineminenomi.events.devilfruits;
 
 import java.util.Arrays;
 
@@ -22,7 +22,7 @@ import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 import xyz.pixelatedw.wypi.network.WyNetwork;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
-public class EventsSpecialFlying
+public class SpecialFlyingEvents
 {
 	@SubscribeEvent
 	public static void onEntityUpdate(LivingUpdateEvent event)

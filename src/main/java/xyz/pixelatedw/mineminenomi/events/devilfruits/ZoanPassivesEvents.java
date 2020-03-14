@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.events.abilities.common;
+package xyz.pixelatedw.mineminenomi.events.devilfruits;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -13,7 +13,7 @@ import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoMoguMole;
 import xyz.pixelatedw.wypi.APIConfig;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
-public class EventsZoanPassives
+public class ZoanPassivesEvents
 {
 	@SubscribeEvent
 	public static void onEntityAttack(LivingHurtEvent event)

@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.events;
+package xyz.pixelatedw.mineminenomi.events.items;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -12,7 +12,7 @@ import xyz.pixelatedw.mineminenomi.init.ModValues;
 import xyz.pixelatedw.wypi.APIConfig;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID, value = Dist.CLIENT)
-public class EventsKairosekiTooltip
+public class KairosekiTooltipEvents
 {
 
 	@SubscribeEvent
