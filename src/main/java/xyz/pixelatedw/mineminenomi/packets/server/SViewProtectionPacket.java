@@ -2,10 +2,10 @@ package xyz.pixelatedw.mineminenomi.packets.server;
 
 import java.util.function.Supplier;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkEvent;
+import xyz.pixelatedw.mineminenomi.ModMain;
 
 public class SViewProtectionPacket
 {
@@ -45,7 +45,7 @@ public class SViewProtectionPacket
 	{
 		ctx.get().enqueueWork(() ->
 		{
-			PlayerEntity player = Minecraft.getInstance().player;
+			PlayerEntity player = ModMain.PROXY.getPlayer();
 
 			if(message.state)
 			{

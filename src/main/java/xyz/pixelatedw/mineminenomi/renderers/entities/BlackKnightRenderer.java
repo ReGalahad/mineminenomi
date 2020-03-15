@@ -25,7 +25,6 @@ public class BlackKnightRenderer extends GenericMobRenderer
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) 
 	{
-		System.out.println( ((EntityBlackKnight)entity).getOwner() );
         Minecraft minecraft = Minecraft.getInstance();
         ResourceLocation rs = ((AbstractClientPlayerEntity)minecraft.player).getLocationSkin();
         

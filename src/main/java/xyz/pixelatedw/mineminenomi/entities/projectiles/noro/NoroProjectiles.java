@@ -1,26 +1,34 @@
 package xyz.pixelatedw.mineminenomi.entities.projectiles.noro;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.minecraft.entity.EntityType;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import xyz.pixelatedw.mineminenomi.models.entities.projectiles.NoroNoroBeamModel;
 import xyz.pixelatedw.wypi.WyRegistry;
-import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
-import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity.Data;
 import xyz.pixelatedw.wypi.abilities.renderers.AbilityProjectileRenderer;
 
-public class NoroProjectiles 
+@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
+public class NoroProjectiles
 {
+	public static final EntityType NORO_NORO_BEAM = WyRegistry.createEntityType(NoroNoroBeamProjectile::new).size(1.5F, 1.5F).build("noro_noro_beam");
 
-	public static List<AbilityProjectileEntity.Data> projectiles = new ArrayList<AbilityProjectileEntity.Data>();
-	
-	public static final EntityType NORO_NORO_BEAM = WyRegistry.registerEntityType("noro_noro_beam", NoroNoroBeamProjectile::new, 1.5F, 1.5F);
-	
-	private static final AbilityProjectileRenderer.Factory NORO_NORO_BEAM_FACTORY = new AbilityProjectileRenderer.Factory(new NoroNoroBeamModel()).setTexture("noronorobeam").setScale(5);
-
-	static
+	@SubscribeEvent
+	public static void registerEntityTypes(RegistryEvent.Register<EntityType<?>> event)
 	{
-		projectiles.add(new Data(NORO_NORO_BEAM, NoroNoroBeamProjectile.class, NORO_NORO_BEAM_FACTORY));
+		WyRegistry.setupEntityTypeRegistry(event.getRegistry());
+
+		WyRegistry.registerEntityType(NORO_NORO_BEAM, "Noro Noro Beam");
+	}
+
+	@OnlyIn(Dist.CLIENT)
+	@SubscribeEvent
+	public static void registerEntityRenderers(FMLClientSetupEvent event)
+	{
+		RenderingRegistry.registerEntityRenderingHandler(NoroNoroBeamProjectile.class, new AbilityProjectileRenderer.Factory(new NoroNoroBeamModel()).setTexture("noronorobeam").setScale(5));
 	}
 }

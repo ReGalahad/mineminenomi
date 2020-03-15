@@ -3,13 +3,13 @@ package xyz.pixelatedw.mineminenomi.packets.server;
 import java.io.IOException;
 import java.util.function.Supplier;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
+import xyz.pixelatedw.mineminenomi.ModMain;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
@@ -52,7 +52,7 @@ public class SUpdateHotbarStatePacket
 		{
 			ctx.get().enqueueWork(() ->
 			{
-				PlayerEntity player = Minecraft.getInstance().player;
+				PlayerEntity player = ModMain.PROXY.getPlayer();
 				IAbilityData props = AbilityDataCapability.get(player);
 				Ability sAbl = null;
 

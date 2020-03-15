@@ -6,15 +6,17 @@ import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import xyz.pixelatedw.mineminenomi.models.blocks.Dial01Model;
 import xyz.pixelatedw.mineminenomi.models.blocks.Dial02Model;
 import xyz.pixelatedw.mineminenomi.models.blocks.Dial03Model;
 import xyz.pixelatedw.mineminenomi.models.blocks.Dial04Model;
 import xyz.pixelatedw.wypi.APIConfig;
 
+@OnlyIn(Dist.CLIENT)
 public class DialTileEntityRenderer  extends TileEntityRenderer
 {
-	
 	private EntityModel model;
 	private ResourceLocation texture;
 

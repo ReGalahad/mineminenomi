@@ -3,7 +3,10 @@ package xyz.pixelatedw.mineminenomi.models;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.client.renderer.entity.model.RendererModel;
 import net.minecraft.entity.LivingEntity;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
+@OnlyIn(Dist.CLIENT)
 public class CaptainCapeModel extends BipedModel 
 {
     public RendererModel capeback;

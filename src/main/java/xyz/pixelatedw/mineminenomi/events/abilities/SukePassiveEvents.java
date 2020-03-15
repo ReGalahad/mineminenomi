@@ -1,6 +1,8 @@
 package xyz.pixelatedw.mineminenomi.events.abilities;
 
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -15,6 +17,7 @@ import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 public class SukePassiveEvents
 {
 	@SubscribeEvent
+	@OnlyIn(Dist.CLIENT)
 	public static void onEntityRendered(RenderLivingEvent.Pre event)
 	{
 		if (!(event.getEntity() instanceof PlayerEntity))

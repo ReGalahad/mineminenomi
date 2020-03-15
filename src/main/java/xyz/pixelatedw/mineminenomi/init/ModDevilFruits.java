@@ -45,14 +45,6 @@ import xyz.pixelatedw.mineminenomi.abilities.pika.YataNoKagamiAbility;
 import xyz.pixelatedw.mineminenomi.abilities.suke.ShishaNoTeAbility;
 import xyz.pixelatedw.mineminenomi.abilities.suke.SkattingAbility;
 import xyz.pixelatedw.mineminenomi.abilities.suke.SukePunchAbility;
-import xyz.pixelatedw.mineminenomi.entities.projectiles.bane.BaneProjectiles;
-import xyz.pixelatedw.mineminenomi.entities.projectiles.goro.GoroProjectiles;
-import xyz.pixelatedw.mineminenomi.entities.projectiles.hie.HieProjectiles;
-import xyz.pixelatedw.mineminenomi.entities.projectiles.mera.MeraProjectiles;
-import xyz.pixelatedw.mineminenomi.entities.projectiles.noro.NoroProjectiles;
-import xyz.pixelatedw.mineminenomi.entities.projectiles.ope.OpeProjectiles;
-import xyz.pixelatedw.mineminenomi.entities.projectiles.pika.PikaProjectiles;
-import xyz.pixelatedw.mineminenomi.entities.projectiles.suke.SukeProjectiles;
 import xyz.pixelatedw.mineminenomi.items.AkumaNoMiItem;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyRegistry;
@@ -115,8 +107,8 @@ public class ModDevilFruits
 	public static final List[] ALL_PROJECTILES = new List[] 
 		{
 			// Devil Fruit projectiles
-			MeraProjectiles.projectiles, HieProjectiles.projectiles, BaneProjectiles.projectiles, PikaProjectiles.projectiles, NoroProjectiles.projectiles, SukeProjectiles.projectiles, OpeProjectiles.projectiles,
-			GoroProjectiles.projectiles/*, MokuProjectiles.projectiles, NikyuProjectiles.projectiles, BomuProjectiles.projectiles, GuraProjectiles.projectiles, KageProjectiles.projectiles, SunaProjectiles.projectiles,
+			/*MeraProjectiles.projectiles, HieProjectiles.projectiles, BaneProjectiles.projectiles, PikaProjectiles.projectiles, NoroProjectiles.projectiles, SukeProjectiles.projectiles, OpeProjectiles.projectiles,
+			GoroProjectiles.projectiles*//*, MokuProjectiles.projectiles, NikyuProjectiles.projectiles, BomuProjectiles.projectiles, GuraProjectiles.projectiles, KageProjectiles.projectiles, SunaProjectiles.projectiles,
 			MaguProjectiles.projectiles, DoruProjectiles.projectiles, DokuProjectiles.projectiles, GasuProjectiles.projectiles, YukiProjectiles.projectiles, ItoProjectiles.projectiles, BariProjectiles.projectiles,
 			HoroProjectiles.projectiles, YamiProjectiles.projectiles, GoeProjectiles.projectiles, GomuProjectiles.projectiles, JuryoProjectiles.projectiles, ToriPhoenixProjectiles.projectiles,
 			BakuProjectiles.projectiles, SupaProjectiles.projectiles, MeroProjectiles.projectiles, OriProjectiles.projectiles, UshiGiraffeProjectiles.projectiles, ZouProjectiles.projectiles,

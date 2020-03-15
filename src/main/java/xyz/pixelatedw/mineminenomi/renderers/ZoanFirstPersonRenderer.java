@@ -1,7 +1,5 @@
 package xyz.pixelatedw.mineminenomi.renderers;
 
-import org.lwjgl.opengl.GL11;
-
 import com.mojang.blaze3d.platform.GLX;
 import com.mojang.blaze3d.platform.GlStateManager;
 
@@ -88,13 +86,13 @@ public class ZoanFirstPersonRenderer
 			}
 			else
 			{
-				ZoanMorphRenderer render = MorphsHelper.getZoanInfoList().get(0).getFactory().createRenderFor(renderManager);
+				//ZoanMorphRenderer render = MorphsHelper.getZoanInfoList().get(0).getFactory().createRenderFor(renderManager);
 	
 				ZoanInfo info = MorphsHelper.getZoanInfo(clientPlayer);
-				if(info != null)
-					render = info.getFactory().createRenderFor(renderManager);
+				//if(info != null)
+				//	render = info.getFactory().createRenderFor(renderManager);
 	
-				if (render != null)
+				/*if (render != null)
 				{
 					ZoanMorphRenderer renderZoan = render;
 					float i = 1.0F;
@@ -103,7 +101,7 @@ public class ZoanFirstPersonRenderer
 					GL11.glRotatef(60.0F, 0.0F, 1.0F, 0.0F);
 					GL11.glTranslatef(0.2f, 0.0f, -0.5f);
 					renderZoan.renderFirstPersonArm(mc.player);
-				}
+				}*/
 			}
 			
 			RenderHelper.disableStandardItemLighting();
@@ -121,8 +119,8 @@ public class ZoanFirstPersonRenderer
 		ZoanMorphRenderer render = null;
 
 		ZoanInfo info = MorphsHelper.getZoanInfo(player);
-		if(info != null)
-			render = info.getFactory().createRenderFor(renderManager);
+		//if(info != null)
+		//	render = info.getFactory().createRenderFor(renderManager);
 
 		if (render != null)
 			return render.getEntityTexture(null);

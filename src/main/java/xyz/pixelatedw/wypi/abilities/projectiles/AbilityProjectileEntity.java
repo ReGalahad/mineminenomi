@@ -20,6 +20,8 @@ import net.minecraft.util.math.RayTraceContext.FluidMode;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.network.NetworkHooks;
 import xyz.pixelatedw.wypi.abilities.events.AbilityProjectileEvents;
@@ -271,6 +273,7 @@ public class AbilityProjectileEntity extends ThrowableEntity
 	{
 		private EntityType type;
 		private Class entityClass;
+		@OnlyIn(Dist.CLIENT)
 		private AbilityProjectileRenderer.Factory factory;
 		
 		public Data(EntityType type, Class<? extends Entity> clz)
@@ -296,6 +299,7 @@ public class AbilityProjectileEntity extends ThrowableEntity
 			return this.entityClass;
 		}
 		
+		@OnlyIn(Dist.CLIENT)
 		public AbilityProjectileRenderer.Factory getFactory()
 		{
 			return this.factory;

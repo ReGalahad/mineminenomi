@@ -9,6 +9,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.EntityType.Builder;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.SpawnEggItem;
@@ -32,7 +33,6 @@ public class WyRegistry
 	/*
 	 * Maps
 	 */
-
 	private static HashMap<Item, JSONModelItem> items = new HashMap<Item, JSONModelItem>();
 	public static HashMap<Item, JSONModelItem> getItems()
 	{
@@ -58,7 +58,7 @@ public class WyRegistry
 	}
 
 	/*
-	 * Static Registries
+	 * Registries
 	 */
 	private static IForgeRegistry<Effect> effectsRegistry;
 	public static void setupEffectsRegistry(IForgeRegistry<Effect> registry)
@@ -82,6 +82,12 @@ public class WyRegistry
 	public static void setupBlocksRegistry(IForgeRegistry<Block> registry)
 	{
 		blocksRegistry = registry;
+	}
+	
+	private static IForgeRegistry<EntityType<?>> entityTypesRegistry;
+	public static void setupEntityTypeRegistry(IForgeRegistry<EntityType<?>> registry)
+	{
+		entityTypesRegistry = registry;
 	}
 
 	/*
@@ -138,7 +144,7 @@ public class WyRegistry
 		items.put(item, jsonType);
 
 		itemsRegistry.register(item);
-
+		
 		return item;
 	}
 
@@ -189,29 +195,28 @@ public class WyRegistry
 		return type;
 	}
 
-	public static <T extends Entity> EntityType<T> registerEntityType(String id, Function<World, T> func)
+	public static <T extends Entity> Builder<T> createEntityType(Function<World, T> func)
 	{
-		return registerEntityType(id, func, 0.6F, 1.8F);
+		Builder<T> builder = EntityType.Builder.create((entityType, world) -> func.apply(world), EntityClassification.MISC);
+		
+		builder.setTrackingRange(128)
+			.setShouldReceiveVelocityUpdates(true)
+			.setUpdateInterval(1)
+			.setCustomClientFactory((entity, world) -> func.apply(world))
+			.size(0.6F, 1.8F);
+		
+		return builder;
 	}
 
-	public static <T extends Entity> EntityType<T> registerEntityType(String id, Function<World, T> func, float width, float height)
+	public static <T extends Entity> EntityType<T> registerEntityType(EntityType type, String localizedName)
 	{
-		String resourceName = WyHelper.getResourceName(id);
+		String resourceName = WyHelper.getResourceName(localizedName);
 
-		EntityType type = EntityType.Builder.create((entityType, world) -> func.apply(world), EntityClassification.MISC)
-				.setTrackingRange(128)
-				.setShouldReceiveVelocityUpdates(true)
-				.setUpdateInterval(1)
-				.setCustomClientFactory((entity, world) -> func.apply(world))
-				.size(width, height).build(resourceName)
-				.setRegistryName(APIConfig.PROJECT_ID, resourceName);
+		type.setRegistryName(APIConfig.PROJECT_ID, resourceName);
+		langMap.put("entity." + APIConfig.PROJECT_ID + "." + resourceName, localizedName);
 
-		StringBuilder builder = new StringBuilder();
-		String[] strs = resourceName.split("_");
-		Arrays.stream(strs).forEach(x -> builder.append(WyHelper.upperCaseFirst(x)));
-
-		langMap.put("entity." + APIConfig.PROJECT_ID + "." + resourceName, builder.toString().trim());
-
+		entityTypesRegistry.register(type);
+		
 		return type;
 	}
 }

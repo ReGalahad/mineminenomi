@@ -5,17 +5,19 @@ import net.minecraft.item.Item;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
 import xyz.pixelatedw.wypi.APIConfig;
 
-@Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class KairosekiTooltipEvents
 {
 
 	@SubscribeEvent
+	@OnlyIn(Dist.CLIENT)
 	public static void onKairosekiCheck(ItemTooltipEvent event)
 	{
 		for (Object obj : ModValues.KAIROSEKI_ITEMS)

@@ -1,7 +1,5 @@
 package xyz.pixelatedw.mineminenomi.init;
 
-import java.util.List;
-
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.WantedPosterPackageTileEntity;
@@ -25,7 +23,7 @@ import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityPirateCaptain;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityPirateWithGun;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityPirateWithSword;
 import xyz.pixelatedw.mineminenomi.entities.mobs.quest.givers.DojoSenseiEntity;
-import xyz.pixelatedw.mineminenomi.entities.projectiles.ExtraProjectiles.EntityCloud;
+import xyz.pixelatedw.mineminenomi.entities.projectiles.extra.EntityCloud;
 import xyz.pixelatedw.mineminenomi.models.blocks.Dial01Model;
 import xyz.pixelatedw.mineminenomi.models.blocks.Dial02Model;
 import xyz.pixelatedw.mineminenomi.models.blocks.Dial03Model;
@@ -40,21 +38,11 @@ import xyz.pixelatedw.mineminenomi.renderers.entities.CloudRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.DoppelmanRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.GenericMobRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.WantedPosterPackageRenderer;
-import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 
 public class ModRenderers
 {
     public static void registerRenderers() 
     {
-    	// Projectiles
-    	for(List<AbilityProjectileEntity.Data> list : ModDevilFruits.ALL_PROJECTILES)
-    	{
-    		list.forEach((value) -> 
-    		{
-    			RenderingRegistry.registerEntityRenderingHandler(value.getEntityClass(), value.getFactory() );			
-    		});
-    	}
-    	
     	//TESRs
     	// Dials
     	ClientRegistry.bindTileEntitySpecialRenderer(AxeDialTileEntity.class, new DialTileEntityRenderer(new Dial01Model(), "axe"));

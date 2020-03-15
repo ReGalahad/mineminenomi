@@ -3,7 +3,10 @@ package xyz.pixelatedw.wypi.abilities.models;
 import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.entity.model.RendererModel;
 import net.minecraft.entity.Entity;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
+@OnlyIn(Dist.CLIENT)
 public class CubeModel extends EntityModel
 {
 	public RendererModel Shape1;

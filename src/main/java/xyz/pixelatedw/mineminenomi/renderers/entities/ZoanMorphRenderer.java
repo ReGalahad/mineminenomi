@@ -19,6 +19,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.HandSide;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import xyz.pixelatedw.mineminenomi.api.helpers.MorphsHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
@@ -28,6 +30,7 @@ import xyz.pixelatedw.mineminenomi.models.entities.zoans.ZoanMorphModel;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
 
+@OnlyIn(Dist.CLIENT)
 public class ZoanMorphRenderer extends LivingRenderer
 {
 	private ResourceLocation texture = new ResourceLocation(APIConfig.PROJECT_ID, "textures/models/null.png");

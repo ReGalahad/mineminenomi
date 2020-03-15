@@ -33,7 +33,7 @@ public class ModClientSetup
 		ModRenderers.registerRenderers();
 		
 		MinecraftForge.EVENT_BUS.register(new EventsCombatMode());
-		
+
 		WyJSON.runGenerators(false);
 	}
 

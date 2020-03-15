@@ -124,8 +124,8 @@ public class EventsMorphs
 			ZoanInfo info = MorphsHelper.getZoanInfo((PlayerEntity) entity);
 			if (info != null)
 			{
-				ZoanMorphRenderer render = info.getFactory().createRenderFor(Minecraft.getInstance().getRenderManager());
-				doRenderZoanMorph(render, event.getX(), event.getY(), event.getZ(), event.getEntity());
+				//ZoanMorphRenderer render = info.getFactory().createRenderFor(Minecraft.getInstance().getRenderManager());
+				//doRenderZoanMorph(render, event.getX(), event.getY(), event.getZ(), event.getEntity());
 			}
 		}
 

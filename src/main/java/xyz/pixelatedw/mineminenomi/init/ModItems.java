@@ -39,7 +39,7 @@ public class ModItems
 	public static final Item SEA_KING_MEAT = new SeaKingMeatItem();
 	public static final Item COLA = new ColaItem();
 	public static final Item ULTRA_COLA = new UltraColaItem();
-
+	
 	// Ammo
 	public static final Item BULLET = new Item(new Properties().group(ModCreativeTabs.MISC));
 	public static final Item KAIROSEKI_BULLET = new Item(new Properties().group(ModCreativeTabs.MISC));
