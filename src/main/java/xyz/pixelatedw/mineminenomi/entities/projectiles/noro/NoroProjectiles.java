@@ -3,7 +3,6 @@ package xyz.pixelatedw.mineminenomi.entities.projectiles.noro;
 import net.minecraft.entity.EntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -17,11 +16,8 @@ public class NoroProjectiles
 {
 	public static final EntityType NORO_NORO_BEAM = WyRegistry.createEntityType(NoroNoroBeamProjectile::new).size(1.5F, 1.5F).build("noro_noro_beam");
 
-	@SubscribeEvent
-	public static void registerEntityTypes(RegistryEvent.Register<EntityType<?>> event)
+	static
 	{
-		WyRegistry.setupEntityTypeRegistry(event.getRegistry());
-
 		WyRegistry.registerEntityType(NORO_NORO_BEAM, "Noro Noro Beam");
 	}
 

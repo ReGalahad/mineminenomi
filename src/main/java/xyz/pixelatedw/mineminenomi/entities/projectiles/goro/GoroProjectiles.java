@@ -3,7 +3,6 @@ package xyz.pixelatedw.mineminenomi.entities.projectiles.goro;
 import net.minecraft.entity.EntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -23,11 +22,8 @@ public class GoroProjectiles
 	public static final EntityType VOLT_VARI_60_MILLION = WyRegistry.createEntityType(VoltVari60MillionProjectile::new).size(0.5F, 0.5F).build("volt_vari_60_million");
 	public static final EntityType VOLT_VARI_200_MILLION = WyRegistry.createEntityType(VoltVari200MillionProjectile::new).size(1, 1).build("volt_vari_200_million");
 
-	@SubscribeEvent
-	public static void registerEntityTypes(RegistryEvent.Register<EntityType<?>> event)
+	static
 	{
-		WyRegistry.setupEntityTypeRegistry(event.getRegistry());
-
 		WyRegistry.registerEntityType(SANGO, "Sango");
 		WyRegistry.registerEntityType(RAIGO, "Raigo");
 		WyRegistry.registerEntityType(VOLT_VARI_5_MILLION, "Volt Vari 5 Million");

@@ -3,7 +3,6 @@ package xyz.pixelatedw.mineminenomi.entities.projectiles.hie;
 import net.minecraft.entity.EntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -21,11 +20,8 @@ public class HieProjectiles
 	public static final EntityType ICE_BALL = WyRegistry.createEntityType(IceBallProjectile::new).size(0.7F, 0.7F).build("ice_ball");
 	public static final EntityType ICE_BLOCK_PHEASANT = WyRegistry.createEntityType(IceBlockPheasantProjectile::new).size(1.75F, 1.75F).build("ice_block_pheasant");
 
-	@SubscribeEvent
-	public static void registerEntityTypes(RegistryEvent.Register<EntityType<?>> event)
+	static
 	{
-		WyRegistry.setupEntityTypeRegistry(event.getRegistry());
-
 		WyRegistry.registerEntityType(ICE_BLOCK_PARTISAN, "Ice Block: Partisan");
 		WyRegistry.registerEntityType(ICE_BALL, "Ice Ball");
 		WyRegistry.registerEntityType(ICE_BLOCK_PHEASANT, "Ice Block: Pheasant");

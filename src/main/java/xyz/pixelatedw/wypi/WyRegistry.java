@@ -19,6 +19,8 @@ import net.minecraft.potion.Effect;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.json.loottables.IJSONLootTable;
@@ -60,6 +62,8 @@ public class WyRegistry
 	/*
 	 * Registries
 	 */
+	public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = new DeferredRegister<>(ForgeRegistries.ENTITIES, APIConfig.PROJECT_ID);
+	
 	private static IForgeRegistry<Effect> effectsRegistry;
 	public static void setupEffectsRegistry(IForgeRegistry<Effect> registry)
 	{
@@ -84,12 +88,6 @@ public class WyRegistry
 		blocksRegistry = registry;
 	}
 	
-	private static IForgeRegistry<EntityType<?>> entityTypesRegistry;
-	public static void setupEntityTypeRegistry(IForgeRegistry<EntityType<?>> registry)
-	{
-		entityTypesRegistry = registry;
-	}
-
 	/*
 	 * Register Helpers
 	 */
@@ -208,15 +206,11 @@ public class WyRegistry
 		return builder;
 	}
 
-	public static <T extends Entity> EntityType<T> registerEntityType(EntityType type, String localizedName)
+	public static <T extends Entity> void registerEntityType(EntityType<?> type, String localizedName)
 	{
 		String resourceName = WyHelper.getResourceName(localizedName);
-
-		type.setRegistryName(APIConfig.PROJECT_ID, resourceName);
 		langMap.put("entity." + APIConfig.PROJECT_ID + "." + resourceName, localizedName);
-
-		entityTypesRegistry.register(type);
 		
-		return type;
+		ENTITY_TYPES.register(resourceName, () -> type);
 	}
 }

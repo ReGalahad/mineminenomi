@@ -3,7 +3,6 @@ package xyz.pixelatedw.mineminenomi.entities.projectiles;
 import net.minecraft.entity.EntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -32,11 +31,8 @@ public class ExtraProjectiles
 	public static final EntityType KUJA_ARROW = WyRegistry.createEntityType(KujaArrowProjectile::new).size(0.5F, 0.5F).build("kuja_arrow");
 	public static final EntityType CLOUD = WyRegistry.createEntityType(EntityCloud::new).build("cloud");
 
-	@SubscribeEvent
-	public static void registerEntityTypes(RegistryEvent.Register<EntityType<?>> event)
+	static
 	{
-		WyRegistry.setupEntityTypeRegistry(event.getRegistry());
-
 		WyRegistry.registerEntityType(NORMAL_BULLET, "Normal Bullet");
 		WyRegistry.registerEntityType(KAIROSEKI_BULLET, "Kairoseki Bullet");
 		WyRegistry.registerEntityType(AXE_DIAL_PROJECTILE, "Axe Dial Projectile");

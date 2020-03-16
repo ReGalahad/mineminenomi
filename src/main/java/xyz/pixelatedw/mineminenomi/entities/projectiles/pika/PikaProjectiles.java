@@ -3,7 +3,6 @@ package xyz.pixelatedw.mineminenomi.entities.projectiles.pika;
 import net.minecraft.entity.EntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -19,11 +18,8 @@ public class PikaProjectiles
 	public static final EntityType AMATERASU = WyRegistry.createEntityType(AmaterasuProjectile::new).size(0.5F, 0.5F).build("amaterasu");
 	public static final EntityType YASAKANI_NO_MAGATAMA = WyRegistry.createEntityType(YasakaniNoMagatamaProjectile::new).size(0.2F, 0.2F).build("yasakani_no_magatama");
 
-	@SubscribeEvent
-	public static void registerEntityTypes(RegistryEvent.Register<EntityType<?>> event)
+	static
 	{
-		WyRegistry.setupEntityTypeRegistry(event.getRegistry());
-
 		WyRegistry.registerEntityType(AMATERASU, "Amaterasu");
 		WyRegistry.registerEntityType(YASAKANI_NO_MAGATAMA, "Yasakani no Magatama");
 	}

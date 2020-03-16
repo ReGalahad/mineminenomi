@@ -2,8 +2,6 @@ package xyz.pixelatedw.mineminenomi.init;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.entities.WantedPosterPackageEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.bandits.EntityBanditWithSword;
@@ -44,11 +42,8 @@ public class ModEntities
 	public static final EntityType BLACK_KNIGHT = WyRegistry.createEntityType(EntityBlackKnight::new).build("black_knight");
 	public static final EntityType WANTED_POSTER_PACKAGE = WyRegistry.createEntityType(WantedPosterPackageEntity::new).size(1.5F, 1.5F).build("wanted_poster_package");
 
-	@SubscribeEvent
-	public static void registerEntityTypes(RegistryEvent.Register<EntityType<?>> event)
+	static
 	{
-		WyRegistry.setupEntityTypeRegistry(event.getRegistry());
-
 		// Marines
 		WyRegistry.registerEntityType(MARINE_WITH_SWORD, "Marine with Sword");
 		WyRegistry.registerEntityType(MARINE_WITH_GUN, "Marine with Gun");
@@ -70,6 +65,7 @@ public class ModEntities
 		WyRegistry.registerEntityType(BLACK_KNIGHT, "Black Knight");
 		WyRegistry.registerEntityType(WANTED_POSTER_PACKAGE, "Wanted Poster Package");
 	}
+	
 /*
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void onPostRegisterEntities(final RegistryEvent.Register<EntityType<?>> event)

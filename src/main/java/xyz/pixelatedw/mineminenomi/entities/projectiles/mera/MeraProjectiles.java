@@ -3,7 +3,6 @@ package xyz.pixelatedw.mineminenomi.entities.projectiles.mera;
 import net.minecraft.entity.EntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -23,11 +22,8 @@ public class MeraProjectiles
 	public static final EntityType HIDARUMA = WyRegistry.createEntityType(HidarumaProjectile::new).size(0.5F, 0.5F).build("hidaruma");
 	public static final EntityType JUJIKA = WyRegistry.createEntityType(JujikaProjectile::new).size(0.5F, 0.5F).build("jujika");
 	
-	@SubscribeEvent
-	public static void registerEntityTypes(RegistryEvent.Register<EntityType<?>> event)
+	static
 	{
-		WyRegistry.setupEntityTypeRegistry(event.getRegistry());
-		
 		WyRegistry.registerEntityType(HIKEN, "Hiken");
 		WyRegistry.registerEntityType(HIGAN, "Higan");
 		WyRegistry.registerEntityType(DAI_ENKAI_ENTEI, "Dai Enkai: Entei");
