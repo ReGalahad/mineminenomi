@@ -8,22 +8,19 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
+import xyz.pixelatedw.mineminenomi.init.ModTileEntities;
 import xyz.pixelatedw.wypi.WyHelper;
-import xyz.pixelatedw.wypi.WyRegistry;
 
 public class RoomTileEntity extends TileEntity implements ITickableTileEntity
 {
 
-	public static final TileEntityType TILE_ENTITY = WyRegistry.registerTileEntity("room", RoomTileEntity::new, ModBlocks.OPE_MID);
-
 	public RoomTileEntity()
 	{
-		super(TILE_ENTITY);
+		super(ModTileEntities.ROOM);
 	}
 
 	@Override

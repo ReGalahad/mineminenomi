@@ -5,9 +5,6 @@ import net.minecraft.block.Block.Properties;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.blocks.AblProtectionBlock;
 import xyz.pixelatedw.mineminenomi.blocks.BarrierBlock;
@@ -34,20 +31,6 @@ import xyz.pixelatedw.mineminenomi.blocks.dials.FlashDialBlock;
 import xyz.pixelatedw.mineminenomi.blocks.dials.ImpactDialBlock;
 import xyz.pixelatedw.mineminenomi.blocks.dials.MilkyDialBlock;
 import xyz.pixelatedw.mineminenomi.blocks.dials.RejectDialBlock;
-import xyz.pixelatedw.mineminenomi.blocks.tileentities.AblProtectionTileEntity;
-import xyz.pixelatedw.mineminenomi.blocks.tileentities.CustomSpawnerTileEntity;
-import xyz.pixelatedw.mineminenomi.blocks.tileentities.RoomTileEntity;
-import xyz.pixelatedw.mineminenomi.blocks.tileentities.TorikagoTileEntity;
-import xyz.pixelatedw.mineminenomi.blocks.tileentities.WantedPosterPackageTileEntity;
-import xyz.pixelatedw.mineminenomi.blocks.tileentities.WantedPosterTileEntity;
-import xyz.pixelatedw.mineminenomi.blocks.tileentities.dials.AxeDialTileEntity;
-import xyz.pixelatedw.mineminenomi.blocks.tileentities.dials.BreathDialTileEntity;
-import xyz.pixelatedw.mineminenomi.blocks.tileentities.dials.EisenDialTileEntity;
-import xyz.pixelatedw.mineminenomi.blocks.tileentities.dials.FlameDialTileEntity;
-import xyz.pixelatedw.mineminenomi.blocks.tileentities.dials.FlashDialTileEntity;
-import xyz.pixelatedw.mineminenomi.blocks.tileentities.dials.ImpactDialTileEntity;
-import xyz.pixelatedw.mineminenomi.blocks.tileentities.dials.MilkyDialTileEntity;
-import xyz.pixelatedw.mineminenomi.blocks.tileentities.dials.RejectDialTileEntity;
 import xyz.pixelatedw.mineminenomi.items.WantedPosterItem;
 import xyz.pixelatedw.mineminenomi.items.dials.AxeDialItem;
 import xyz.pixelatedw.mineminenomi.items.dials.BreathDialItem;
@@ -113,14 +96,7 @@ public class ModBlocks
 	 * public static final Block AbilityProtectionCenterBlock = new BlockAbilityProtectionArea();
 	 */
 
-	@SubscribeEvent
-	public static void registerTileEntities(RegistryEvent.Register<TileEntityType<?>> event)
-	{
-		event.getRegistry().registerAll(RoomTileEntity.TILE_ENTITY, TorikagoTileEntity.TILE_ENTITY, CustomSpawnerTileEntity.TILE_ENTITY, WantedPosterPackageTileEntity.TILE_ENTITY, WantedPosterTileEntity.TILE_ENTITY, AxeDialTileEntity.TILE_ENTITY, BreathDialTileEntity.TILE_ENTITY, FlameDialTileEntity.TILE_ENTITY, RejectDialTileEntity.TILE_ENTITY, ImpactDialTileEntity.TILE_ENTITY, FlashDialTileEntity.TILE_ENTITY, EisenDialTileEntity.TILE_ENTITY, MilkyDialTileEntity.TILE_ENTITY, AblProtectionTileEntity.TILE_ENTITY
-
-		);
-	}
-
+	
 	static
 	{
 		// Blocks

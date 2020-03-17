@@ -10,11 +10,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.text.ITextComponent;
-import xyz.pixelatedw.mineminenomi.init.ModBlocks;
+import xyz.pixelatedw.mineminenomi.init.ModTileEntities;
 import xyz.pixelatedw.wypi.WyHelper;
-import xyz.pixelatedw.wypi.WyRegistry;
 
 public class CustomSpawnerTileEntity extends TileEntity implements ITickableTileEntity
 {
@@ -22,11 +20,9 @@ public class CustomSpawnerTileEntity extends TileEntity implements ITickableTile
 	private int spawnLimit = 5;
 	private ArrayList<LivingEntity> spawnedEntities = new ArrayList<LivingEntity>();
 
-	public static final TileEntityType TILE_ENTITY = WyRegistry.registerTileEntity("custom_spawner", CustomSpawnerTileEntity::new, ModBlocks.CUSTOM_SPAWNER);
-
 	public CustomSpawnerTileEntity()
 	{
-		super(TILE_ENTITY);
+		super(ModTileEntities.CUSTOM_SPAWNER);
 	}
 	
 	public CustomSpawnerTileEntity setSpawnerMob(EntityType toSpawn)

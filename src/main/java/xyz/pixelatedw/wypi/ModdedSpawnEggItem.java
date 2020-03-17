@@ -18,6 +18,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.util.NonNullSupplier;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
+
 /**
  * Exists to work around a limitation with Spawn Eggs:
  * Spawn Eggs require an EntityType, but EntityTypes are created AFTER Items.

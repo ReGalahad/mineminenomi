@@ -11,9 +11,9 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EntityType.Builder;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.particles.IParticleData.IDeserializer;
 import net.minecraft.particles.ParticleType;
 import net.minecraft.potion.Effect;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.world.World;
 import net.minecraftforge.registries.DeferredRegister;
@@ -32,24 +32,28 @@ public class WyRegistry
 	 * Maps
 	 */
 	private static HashMap<Item, JSONModelItem> items = new HashMap<Item, JSONModelItem>();
+
 	public static HashMap<Item, JSONModelItem> getItems()
 	{
 		return items;
 	}
-	
+
 	private static HashMap<Block, JSONModelBlock> blocks = new HashMap<Block, JSONModelBlock>();
+
 	public static HashMap<Block, JSONModelBlock> getBlocks()
 	{
 		return blocks;
 	}
-	
+
 	private static HashMap<Object, IJSONLootTable> lootTables = new HashMap<Object, IJSONLootTable>();
+
 	public static HashMap<Object, IJSONLootTable> getLootTables()
 	{
 		return lootTables;
 	}
-	
+
 	private static HashMap<String, String> langMap = new HashMap<String, String>();
+
 	public static HashMap<String, String> getLangMap()
 	{
 		return langMap;
@@ -63,25 +67,12 @@ public class WyRegistry
 	public static final DeferredRegister<Ability> ABILITIES = new DeferredRegister<>(APIRegistries.ABILITIES, APIConfig.PROJECT_ID);
 	public static final DeferredRegister<Effect> EFFECTS = new DeferredRegister<>(ForgeRegistries.POTIONS, APIConfig.PROJECT_ID);
 	public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = new DeferredRegister<>(ForgeRegistries.ENTITIES, APIConfig.PROJECT_ID);
+	public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES = new DeferredRegister<>(ForgeRegistries.TILE_ENTITIES, APIConfig.PROJECT_ID);
+	public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES = new DeferredRegister<>(ForgeRegistries.PARTICLE_TYPES, APIConfig.PROJECT_ID);
 
 	/*
 	 * Register Helpers
 	 */
-
-	public static Effect registerEffect(Effect effect, String localizedName)
-	{
-		String resourceName = WyHelper.getResourceName(localizedName);
-		langMap.put("effect." + APIConfig.PROJECT_ID + "." + resourceName, localizedName);
-
-		EFFECTS.register(resourceName, () -> effect);
-		
-		return effect;
-	}
-
-	public static ParticleType registerGenericParticleType(String id, IDeserializer<?> deserializer)
-	{
-		return new ParticleType<>(true, deserializer).setRegistryName(APIConfig.PROJECT_ID, id);
-	}
 
 	public static void registerLootTable(Object obj, IJSONLootTable json)
 	{
@@ -92,12 +83,29 @@ public class WyRegistry
 	{
 		langMap.put(key, localizedName);
 	}
-	
+
+	public static void registerParticleType(ParticleType<?> type, String localizedName)
+	{
+		String resourceName = WyHelper.getResourceName(localizedName);
+
+		PARTICLE_TYPES.register(resourceName, () -> type);
+	}
+
+	public static Effect registerEffect(Effect effect, String localizedName)
+	{
+		String resourceName = WyHelper.getResourceName(localizedName);
+		langMap.put("effect." + APIConfig.PROJECT_ID + "." + resourceName, localizedName);
+
+		EFFECTS.register(resourceName, () -> effect);
+
+		return effect;
+	}
+
 	public static Ability registerAbility(Ability ability)
 	{
 		String resourceName = WyHelper.getResourceName(ability.getName());
 		langMap.put("ability." + APIConfig.PROJECT_ID + "." + resourceName, ability.getName());
-		
+
 		ABILITIES.register(resourceName, () -> ability);
 
 		return ability;
@@ -115,7 +123,7 @@ public class WyRegistry
 		items.put(item, jsonType);
 
 		ITEMS.register(resourceName, () -> item);
-		
+
 		return item;
 	}
 
@@ -126,26 +134,11 @@ public class WyRegistry
 
 		String resourceName = entityResName + "_spawn_egg";
 		String localizedName = "Spawn " + localizedEntityName;
-		
+
 		langMap.put("item." + APIConfig.PROJECT_ID + "." + resourceName, localizedName);
 		items.put(egg, new JSONModelSpawnEgg(resourceName));
-		
+
 		ITEMS.register(resourceName, () -> egg);
-		
-		/*SpawnEggItem egg = new SpawnEggItem(type, backgroundColor, foregroundColor, (new Item.Properties()).group(ItemGroup.MISC));
-
-		StringBuilder builder = new StringBuilder();
-		String[] strs = type.getRegistryName().getPath().split("_");
-		Arrays.stream(strs).forEach(x -> builder.append(WyHelper.upperCaseFirst(x)));
-
-		String langKey = type.getRegistryName().getPath() + "_spawn_egg";
-		String localizedName = "Spawn " + builder.toString().trim();
-
-		langMap.put("item." + APIConfig.PROJECT_ID + "." + langKey, localizedName);
-		egg.setRegistryName(APIConfig.PROJECT_ID, langKey);
-		items.put(egg, new JSONModelSpawnEgg(langKey));*/
-
-		//itemsRegistry.register(egg);
 
 		return egg;
 	}
@@ -162,30 +155,30 @@ public class WyRegistry
 		blocks.put(block, jsonType);
 
 		BLOCKS.register(resourceName, () -> block);
-		
+
 		return block;
 	}
-	
-	public static TileEntityType<?> registerTileEntity(String id, Supplier factory, Block... blocks)
-	{
-		String resourceName = WyHelper.getResourceName(id);
 
-		TileEntityType<?> type = TileEntityType.Builder.create(factory, blocks).build(null);
-		type.setRegistryName(APIConfig.PROJECT_ID, resourceName);
-		
+	public static <T extends TileEntity> TileEntityType.Builder<T> createTileEntity(Supplier<T> factory, Block... blocks)
+	{
+		TileEntityType.Builder<T> type = TileEntityType.Builder.create(factory, blocks);
+
 		return type;
 	}
 
-	public static <T extends Entity> Builder<T> createEntityType(Function<World, T> func)
+	public static <T extends TileEntity> void registerTileEntity(TileEntityType<T> type, String localizedName)
+	{
+		String resourceName = WyHelper.getResourceName(localizedName);
+
+		TILE_ENTITIES.register(resourceName, () -> type);
+	}
+
+	public static <T extends Entity> EntityType.Builder<T> createEntityType(Function<World, T> func)
 	{
 		Builder<T> builder = EntityType.Builder.create((entityType, world) -> func.apply(world), EntityClassification.MISC);
-		
-		builder.setTrackingRange(128)
-			.setShouldReceiveVelocityUpdates(true)
-			.setUpdateInterval(1)
-			.setCustomClientFactory((entity, world) -> func.apply(world))
-			.size(0.6F, 1.8F);
-		
+
+		builder.setTrackingRange(128).setShouldReceiveVelocityUpdates(true).setUpdateInterval(1).setCustomClientFactory((entity, world) -> func.apply(world)).size(0.6F, 1.8F);
+
 		return builder;
 	}
 
@@ -193,7 +186,7 @@ public class WyRegistry
 	{
 		String resourceName = WyHelper.getResourceName(localizedName);
 		langMap.put("entity." + APIConfig.PROJECT_ID + "." + resourceName, localizedName);
-		
+
 		ENTITY_TYPES.register(resourceName, () -> type);
 	}
 }

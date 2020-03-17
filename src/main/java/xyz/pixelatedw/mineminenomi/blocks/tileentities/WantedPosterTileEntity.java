@@ -5,13 +5,10 @@ import javax.annotation.Nullable;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
-import xyz.pixelatedw.mineminenomi.init.ModBlocks;
-import xyz.pixelatedw.wypi.WyRegistry;
+import xyz.pixelatedw.mineminenomi.init.ModTileEntities;
 
 public class WantedPosterTileEntity extends TileEntity
 {
-	public static final TileEntityType TILE_ENTITY = WyRegistry.registerTileEntity("wanted_poster", WantedPosterTileEntity::new, ModBlocks.WANTED_POSTER);
 
 	private String uuid = "";
 	private String entityName = "";
@@ -21,7 +18,7 @@ public class WantedPosterTileEntity extends TileEntity
 
 	public WantedPosterTileEntity()
 	{
-		super(TILE_ENTITY);
+		super(ModTileEntities.WANTED_POSTER);
 	}
 
 	public String getUUID()

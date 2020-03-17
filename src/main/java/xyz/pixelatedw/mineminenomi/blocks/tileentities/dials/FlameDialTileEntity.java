@@ -1,17 +1,14 @@
 package xyz.pixelatedw.mineminenomi.blocks.tileentities.dials;
 
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
-import xyz.pixelatedw.mineminenomi.init.ModBlocks;
-import xyz.pixelatedw.wypi.WyRegistry;
+import xyz.pixelatedw.mineminenomi.init.ModTileEntities;
 
 public class FlameDialTileEntity extends TileEntity
 {
-	public static final TileEntityType TILE_ENTITY = WyRegistry.registerTileEntity("flame_dial_block", FlameDialTileEntity::new, ModBlocks.FLAME_DIAL);
 	
 	public FlameDialTileEntity()
 	{
-		super(TILE_ENTITY);
+		super(ModTileEntities.FLAME_DIAL);
 	}
 
 }
