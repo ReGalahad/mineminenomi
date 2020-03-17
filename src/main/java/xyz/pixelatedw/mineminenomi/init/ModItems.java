@@ -2,8 +2,6 @@ package xyz.pixelatedw.mineminenomi.init;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.Properties;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.items.AkumaNoMiBoxItem;
 import xyz.pixelatedw.mineminenomi.items.BellyPouchItem;
@@ -46,11 +44,8 @@ public class ModItems
 	public static final Item KUJA_ARROW = new Item(new Properties().group(ModCreativeTabs.MISC));
 	public static final Item POP_GREEN = new Item(new Properties().group(ModCreativeTabs.MISC));
 
-	@SubscribeEvent
-	public static void registerItems(final RegistryEvent.Register<Item> event)
+	static
 	{
-		WyRegistry.setupItemsRegistry(event.getRegistry());
-		
 		WyRegistry.registerItem(KAIROSEKI, "Kairoseki");
 		WyRegistry.registerItem(DENSE_KAIROSEKI, "Dense Kairoseki");
 		WyRegistry.registerItem(BLACK_METAL, "Black Metal");

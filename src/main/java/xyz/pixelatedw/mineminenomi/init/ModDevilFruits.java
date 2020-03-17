@@ -2,9 +2,6 @@ package xyz.pixelatedw.mineminenomi.init;
 
 import java.util.List;
 
-import net.minecraft.item.Item;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.EnumFruitType;
 import xyz.pixelatedw.mineminenomi.abilities.bane.SpringDeathKnockAbility;
@@ -54,8 +51,8 @@ import xyz.pixelatedw.wypi.debug.WyDebug;
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModDevilFruits
 {
-	
-	//public static final AkumaNoMiItem MINI_MINI_NO_MI = new AkumaNoMiItem("Mini Mini no Mi", EnumFruitType.PARAMECIA);
+
+	// public static final AkumaNoMiItem MINI_MINI_NO_MI = new AkumaNoMiItem("Mini Mini no Mi", EnumFruitType.PARAMECIA);
 	public static final AkumaNoMiItem KACHI_KACHI_NO_MI = new AkumaNoMiItem("Kachi Kachi no Mi", EnumFruitType.PARAMECIA);
 	public static final AkumaNoMiItem DOA_DOA_NO_MI = new AkumaNoMiItem("Doa Doa no Mi", EnumFruitType.PARAMECIA);
 	public static final AkumaNoMiItem USHI_USHI_NO_MI_GIRAFFE = new AkumaNoMiItem("Ushi Ushi no Mi, Model Giraffe", EnumFruitType.ZOAN);
@@ -68,11 +65,11 @@ public class ModDevilFruits
 	public static final AkumaNoMiItem BAKU_BAKU_NO_MI = new AkumaNoMiItem("Baku Baku no Mi", EnumFruitType.PARAMECIA);
 	public static final AkumaNoMiItem TORI_TORI_NO_MI_PHOENIX = new AkumaNoMiItem("Tori Tori no Mi, Model: Phoenix", EnumFruitType.ZOAN);
 	public static final AkumaNoMiItem USHI_USHI_NO_MI_BISON = new AkumaNoMiItem("Ushi Ushi no Mi, Model: Bison", EnumFruitType.ZOAN);
-	//public static final AkumaNoMiItem PAMU_PAMU_NO_MI = new AkumaNoMiItem("Pamu Pamu no Mi", EnumFruitType.PARAMECIA);
-	//public static final AkumaNoMiItem ISHI_ISHI_NO_MI = new AkumaNoMiItem("Ishi Ishi no Mi", EnumFruitType.PARAMECIA);
-	//public static final AkumaNoMiItem BETA_BETA_NO_MI = new AkumaNoMiItem("Beta Beta no Mi", EnumFruitType.PARAMECIA);
+	// public static final AkumaNoMiItem PAMU_PAMU_NO_MI = new AkumaNoMiItem("Pamu Pamu no Mi", EnumFruitType.PARAMECIA);
+	// public static final AkumaNoMiItem ISHI_ISHI_NO_MI = new AkumaNoMiItem("Ishi Ishi no Mi", EnumFruitType.PARAMECIA);
+	// public static final AkumaNoMiItem BETA_BETA_NO_MI = new AkumaNoMiItem("Beta Beta no Mi", EnumFruitType.PARAMECIA);
 	public static final AkumaNoMiItem HORU_HORU_NO_MI = new AkumaNoMiItem("Horu Horu no Mi", EnumFruitType.PARAMECIA);
-	//public static final AkumaNoMiItem HANA_HANA_NO_MI = new AkumaNoMiItem("Hana Hana no Mi", EnumFruitType.PARAMECIA);
+	// public static final AkumaNoMiItem HANA_HANA_NO_MI = new AkumaNoMiItem("Hana Hana no Mi", EnumFruitType.PARAMECIA);
 	public static final AkumaNoMiItem KILO_KILO_NO_MI = new AkumaNoMiItem("Kilo Kilo no Mi", EnumFruitType.PARAMECIA);
 	public static final AkumaNoMiItem GOE_GOE_NO_MI = new AkumaNoMiItem("Goe Goe no Mi", EnumFruitType.PARAMECIA);
 	public static final AkumaNoMiItem MERO_MERO_NO_MI = new AkumaNoMiItem("Mero Mero no Mi", EnumFruitType.PARAMECIA);
@@ -104,39 +101,33 @@ public class ModDevilFruits
 	public static final AkumaNoMiItem HIE_HIE_NO_MI = new AkumaNoMiItem("Hie Hie no Mi", EnumFruitType.LOGIA, IceBlockPartisanAbility.INSTANCE, IceAgeAbility.INSTANCE, IceBallAbility.INSTANCE, IceSaberAbility.INSTANCE, IceTimeCapsuleAbility.INSTANCE, IceBlockPheasantAbility.INSTANCE);
 	public static final AkumaNoMiItem MERA_MERA_NO_MI = new AkumaNoMiItem("Mera Mera no Mi", EnumFruitType.LOGIA, HikenAbility.INSTANCE, HiganAbility.INSTANCE, DaiEnkaiEnteiAbility.INSTANCE, HidarumaAbility.INSTANCE, JujikaAbility.INSTANCE);
 
-	public static final List[] ALL_PROJECTILES = new List[] 
+	public static final List[] ALL_PROJECTILES = new List[]
 		{
-			// Devil Fruit projectiles
-			/*MeraProjectiles.projectiles, HieProjectiles.projectiles, BaneProjectiles.projectiles, PikaProjectiles.projectiles, NoroProjectiles.projectiles, SukeProjectiles.projectiles, OpeProjectiles.projectiles,
-			GoroProjectiles.projectiles*//*, MokuProjectiles.projectiles, NikyuProjectiles.projectiles, BomuProjectiles.projectiles, GuraProjectiles.projectiles, KageProjectiles.projectiles, SunaProjectiles.projectiles,
-			MaguProjectiles.projectiles, DoruProjectiles.projectiles, DokuProjectiles.projectiles, GasuProjectiles.projectiles, YukiProjectiles.projectiles, ItoProjectiles.projectiles, BariProjectiles.projectiles,
-			HoroProjectiles.projectiles, YamiProjectiles.projectiles, GoeProjectiles.projectiles, GomuProjectiles.projectiles, JuryoProjectiles.projectiles, ToriPhoenixProjectiles.projectiles,
-			BakuProjectiles.projectiles, SupaProjectiles.projectiles, MeroProjectiles.projectiles, OriProjectiles.projectiles, UshiGiraffeProjectiles.projectiles, ZouProjectiles.projectiles,
-
-			// Special Abilities projectiles
-			RokushikiProjectiles.projectiles, FishKarateProjectiles.projectiles, CyborgProjectiles.projectiles, ExtraProjectiles.projectiles, 
-			SwordsmanProjectiles.projectiles, SniperProjectiles.projectiles*/
+				// Devil Fruit projectiles
+				/*
+				 * MeraProjectiles.projectiles, HieProjectiles.projectiles, BaneProjectiles.projectiles, PikaProjectiles.projectiles, NoroProjectiles.projectiles, SukeProjectiles.projectiles, OpeProjectiles.projectiles,
+				 * GoroProjectiles.projectiles
+				 *//*
+					 * , MokuProjectiles.projectiles, NikyuProjectiles.projectiles, BomuProjectiles.projectiles, GuraProjectiles.projectiles, KageProjectiles.projectiles, SunaProjectiles.projectiles,
+					 * MaguProjectiles.projectiles, DoruProjectiles.projectiles, DokuProjectiles.projectiles, GasuProjectiles.projectiles, YukiProjectiles.projectiles, ItoProjectiles.projectiles, BariProjectiles.projectiles,
+					 * HoroProjectiles.projectiles, YamiProjectiles.projectiles, GoeProjectiles.projectiles, GomuProjectiles.projectiles, JuryoProjectiles.projectiles, ToriPhoenixProjectiles.projectiles,
+					 * BakuProjectiles.projectiles, SupaProjectiles.projectiles, MeroProjectiles.projectiles, OriProjectiles.projectiles, UshiGiraffeProjectiles.projectiles, ZouProjectiles.projectiles,
+					 * // Special Abilities projectiles
+					 * RokushikiProjectiles.projectiles, FishKarateProjectiles.projectiles, CyborgProjectiles.projectiles, ExtraProjectiles.projectiles,
+					 * SwordsmanProjectiles.projectiles, SniperProjectiles.projectiles
+					 */
 		};
 
-	@SubscribeEvent
-    public static void registerItems(RegistryEvent.Register<Item> event)
-    {
-		WyRegistry.setupItemsRegistry(event.getRegistry());
-		
-		ModValues.devilfruits.forEach(item -> 
+	static
+	{
+		ModValues.devilfruits.forEach(item ->
 		{
-			WyRegistry.registerItem(item, item.getDevilFruitName());			
+			WyRegistry.registerItem(item, item.getDevilFruitName());
 		});
-    }
-	
-	@SubscribeEvent
-    public static void registerAbilities(RegistryEvent.Register<Ability> event)
-    {
-		WyRegistry.setupAbilitiesRegistry(event.getRegistry());
 
-		int totalFruits = 0, totalAbilities = 0;	
-		
-		for(AkumaNoMiItem df : ModValues.devilfruits)
+		int totalFruits = 0, totalAbilities = 0;
+
+		for (AkumaNoMiItem df : ModValues.devilfruits)
 		{
 			totalFruits++;
 			for (Ability abl : df.abilities)
@@ -148,8 +139,8 @@ public class ModDevilFruits
 				}
 			}
 		}
-		
+
 		WyDebug.debug("A total of " + ModValues.devilfruits.size() + " Devil Fruits have been registered");
-		WyDebug.debug("A total of " + totalAbilities + " abilities have been registered");		
-    }
+		WyDebug.debug("A total of " + totalAbilities + " abilities have been registered");
+	}
 }

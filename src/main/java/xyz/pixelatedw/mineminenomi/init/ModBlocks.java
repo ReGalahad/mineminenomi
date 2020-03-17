@@ -58,6 +58,7 @@ import xyz.pixelatedw.mineminenomi.items.dials.ImpactDialItem;
 import xyz.pixelatedw.mineminenomi.items.dials.MilkyDialItem;
 import xyz.pixelatedw.mineminenomi.items.dials.RejectDialItem;
 import xyz.pixelatedw.wypi.APIConfig;
+import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.WyRegistry;
 import xyz.pixelatedw.wypi.json.loottables.block.JSONLootTableSimpleBlock;
 import xyz.pixelatedw.wypi.json.models.JSONModelItem;
@@ -69,7 +70,7 @@ import xyz.pixelatedw.wypi.json.models.item.JSONModelSimpleItem;
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModBlocks
 {
-	// Devil Fruit created blocks	
+	// Devil Fruit created blocks
 	public static final Block OPE = new OpeBlock();
 	public static final Block OPE_MID = new OpeMidBlock();
 	public static final Block KAGE = new KageBlock();
@@ -86,13 +87,13 @@ public class ModBlocks
 	// Other blocks
 	public static final Block KAIROSEKI = new Block(Properties.create(Material.ROCK).hardnessAndResistance(10));
 	public static final Block KAIROSEKI_ORE = new KairosekiOreBlock();
-	public static final Block KAIROSEKI_BARS = new CustomBarsBlock();	
+	public static final Block KAIROSEKI_BARS = new CustomBarsBlock();
 	public static final Block SKY_BLOCK = new SkyBlockBlock();
 	public static final Block WANTED_POSTER = new WantedPosterBlock();
 	public static final Block WANTED_POSTER_PACKAGE = new WantedPosterPackageBlock();
 
-	//public static final Block DenDenMushi = new BlockDenDenMushi();
-	
+	// public static final Block DenDenMushi = new BlockDenDenMushi();
+
 	public static final CustomSpawnerBlock CUSTOM_SPAWNER = new CustomSpawnerBlock();
 
 	// Dials
@@ -108,15 +109,21 @@ public class ModBlocks
 	// Ability Protection
 	public static final Block ABILITY_PROTECTION = new AblProtectionBlock();
 	/*
-	public static final Block AbilityProtectionAreaBlock = new BlockAbilityProtectionArea();
-	public static final Block AbilityProtectionCenterBlock = new BlockAbilityProtectionArea();
-	*/
+	 * public static final Block AbilityProtectionAreaBlock = new BlockAbilityProtectionArea();
+	 * public static final Block AbilityProtectionCenterBlock = new BlockAbilityProtectionArea();
+	 */
 
 	@SubscribeEvent
-    public static void registerBlocks(final RegistryEvent.Register<Block> event)
-    {
-		WyRegistry.setupBlocksRegistry(event.getRegistry());
+	public static void registerTileEntities(RegistryEvent.Register<TileEntityType<?>> event)
+	{
+		event.getRegistry().registerAll(RoomTileEntity.TILE_ENTITY, TorikagoTileEntity.TILE_ENTITY, CustomSpawnerTileEntity.TILE_ENTITY, WantedPosterPackageTileEntity.TILE_ENTITY, WantedPosterTileEntity.TILE_ENTITY, AxeDialTileEntity.TILE_ENTITY, BreathDialTileEntity.TILE_ENTITY, FlameDialTileEntity.TILE_ENTITY, RejectDialTileEntity.TILE_ENTITY, ImpactDialTileEntity.TILE_ENTITY, FlashDialTileEntity.TILE_ENTITY, EisenDialTileEntity.TILE_ENTITY, MilkyDialTileEntity.TILE_ENTITY, AblProtectionTileEntity.TILE_ENTITY
 
+		);
+	}
+
+	static
+	{
+		// Blocks
 		WyRegistry.registerBlock(OPE, "Ope");
 		WyRegistry.registerBlock(OPE_MID, "Ope Mid");
 		WyRegistry.registerBlock(KAIROSEKI, "Kairoseki Block");
@@ -146,97 +153,72 @@ public class ModBlocks
 		WyRegistry.registerBlock(MILKY_DIAL, "Milky Dial");
 		WyRegistry.registerBlock(ABILITY_PROTECTION, "Ability Protection");
 
-        // Register loot tables
-        //Ore
-        WyRegistry.registerLootTable(KAIROSEKI_ORE, new JSONLootTableSimpleBlock("Kairoseki", 3, 6));
-        
-        //Self Drop
-        WyRegistry.registerLootTable(KAIROSEKI, new JSONLootTableSimpleBlock("Kairoseki Block"));
-        WyRegistry.registerLootTable(KAIROSEKI_BARS, new JSONLootTableSimpleBlock("Kairoseki Bars"));
-        WyRegistry.registerLootTable(AXE_DIAL, new JSONLootTableSimpleBlock("Axe Dial"));
-        WyRegistry.registerLootTable(BREATH_DIAL, new JSONLootTableSimpleBlock("Breath Dial"));
-        WyRegistry.registerLootTable(FLAME_DIAL, new JSONLootTableSimpleBlock("Flame Dial"));    
-        WyRegistry.registerLootTable(REJECT_DIAL, new JSONLootTableSimpleBlock("Reject Dial"));
-        WyRegistry.registerLootTable(IMPACT_DIAL, new JSONLootTableSimpleBlock("Impact Dial"));
-        WyRegistry.registerLootTable(FLASH_DIAL, new JSONLootTableSimpleBlock("Flash Dial"));
-        WyRegistry.registerLootTable(EISEN_DIAL, new JSONLootTableSimpleBlock("Eisen Dial"));
-        WyRegistry.registerLootTable(MILKY_DIAL, new JSONLootTableSimpleBlock("Milky Dial"));
-    }
-	
-	@SubscribeEvent
-	public static void registerTileEntities(RegistryEvent.Register<TileEntityType<?>> event) 
-	{
-		event.getRegistry().registerAll
-		(
-			RoomTileEntity.TILE_ENTITY,
-			TorikagoTileEntity.TILE_ENTITY,
-			CustomSpawnerTileEntity.TILE_ENTITY,
-			WantedPosterPackageTileEntity.TILE_ENTITY,
-			WantedPosterTileEntity.TILE_ENTITY,
-			AxeDialTileEntity.TILE_ENTITY,
-			BreathDialTileEntity.TILE_ENTITY,
-			FlameDialTileEntity.TILE_ENTITY,
-			RejectDialTileEntity.TILE_ENTITY,
-			ImpactDialTileEntity.TILE_ENTITY,
-			FlashDialTileEntity.TILE_ENTITY,
-			EisenDialTileEntity.TILE_ENTITY,
-			MilkyDialTileEntity.TILE_ENTITY,
-			AblProtectionTileEntity.TILE_ENTITY
+		// Item Blocks
+		registerItemBlock(OPE, "Ope", false);
+		registerItemBlock(OPE_MID, "Ope Mid", false);
+		registerItemBlock(KAIROSEKI, "Kairoseki Block", true);
+		registerItemBlock(KAIROSEKI_ORE, "Kairoseki Ore", true);
+		registerItemBlock(SKY_BLOCK, "Sky Block", true);
+		registerItemBlock(KAIROSEKI_BARS, "Kairoseki Bars", true, new JSONModelSimpleItem("Kairoseki Bars"));
+		registerItemBlock(KAGE, "Kage Block", false);
+		registerItemBlock(SUNA_SAND, "Suna Sand", false);
+		registerItemBlock(WAX, "Wax Block", false);
+		registerItemBlock(POISON, "Poison", false);
+		registerItemBlock(DEMON_POISON, "Demon Poison", false);
+		registerItemBlock(STRING_WALL, "String Wall", false);
+		registerItemBlock(STRING_MID, "String Mid", false);
+		registerItemBlock(BARRIER, "Barrier", false);
+		registerItemBlock(DARKNESS, "Darkness", false);
+		registerItemBlock(ORI_BARS, "Ori Bars", false, new JSONModelSimpleItem("Ori Bars"));
+		registerItemBlock(CUSTOM_SPAWNER, "Custom Spawner", false);
+		registerItemBlock(WANTED_POSTER_PACKAGE, "Wanted Poster Package", true, new JSONModelSimpleItem("Wanted Poster Package"));
+		registerCustomItemBlock(WANTED_POSTER, "Wanted Poster", new WantedPosterItem());
+		registerCustomItemBlock(AXE_DIAL, "Axe Dial", new AxeDialItem());
+		registerCustomItemBlock(BREATH_DIAL, "Breath Dial", new BreathDialItem());
+		registerCustomItemBlock(FLAME_DIAL, "Flame Dial", new FlameDialItem());
+		registerCustomItemBlock(REJECT_DIAL, "Reject Dial", new RejectDialItem());
+		registerCustomItemBlock(IMPACT_DIAL, "Impact Dial", new ImpactDialItem());
+		registerCustomItemBlock(FLASH_DIAL, "Flash Dial", new FlashDialItem());
+		registerCustomItemBlock(EISEN_DIAL, "Eisen Dial", new EisenDialItem());
+		registerCustomItemBlock(MILKY_DIAL, "Milky Dial", new MilkyDialItem());
 
-		);
-	}
-	
-	@SubscribeEvent
-    public static void registerItems(final RegistryEvent.Register<Item> event)
-    {
-		WyRegistry.setupItemsRegistry(event.getRegistry());
+		// Register loot tables
+		// Ore
+		WyRegistry.registerLootTable(KAIROSEKI_ORE, new JSONLootTableSimpleBlock("Kairoseki", 3, 6));
 
-		registerItemBlock(OPE, false);
-		registerItemBlock(OPE_MID, false);
-		registerItemBlock(KAIROSEKI, true);
-		registerItemBlock(KAIROSEKI_ORE, true);
-		registerItemBlock(SKY_BLOCK, true);
-		registerItemBlock(KAIROSEKI_BARS, true, new JSONModelSimpleItem("Kairoseki Bars"));
-		registerItemBlock(KAGE, false);
-		registerItemBlock(SUNA_SAND, false);
-		registerItemBlock(WAX, false);
-		registerItemBlock(POISON, false);
-		registerItemBlock(DEMON_POISON, false);
-		registerItemBlock(STRING_WALL, false);
-		registerItemBlock(STRING_MID, false);
-		registerItemBlock(BARRIER, false);
-		registerItemBlock(DARKNESS, false);
-		registerItemBlock(ORI_BARS, false, new JSONModelSimpleItem("Ori Bars"));
-		registerItemBlock(CUSTOM_SPAWNER, false);
-		registerItemBlock(WANTED_POSTER_PACKAGE, true, new JSONModelSimpleItem("Wanted Poster Package"));
-		registerCustomItemBlock(WANTED_POSTER, new WantedPosterItem());
-		registerCustomItemBlock(AXE_DIAL, new AxeDialItem());
-		registerCustomItemBlock(BREATH_DIAL, new BreathDialItem());
-		registerCustomItemBlock(FLAME_DIAL, new FlameDialItem());
-		registerCustomItemBlock(REJECT_DIAL, new RejectDialItem());
-		registerCustomItemBlock(IMPACT_DIAL, new ImpactDialItem());
-		registerCustomItemBlock(FLASH_DIAL, new FlashDialItem());
-		registerCustomItemBlock(EISEN_DIAL, new EisenDialItem());
-		registerCustomItemBlock(MILKY_DIAL, new MilkyDialItem());
-    }
-	
-	public static Item registerItemBlock(Block block, boolean isInCreative)
-	{
-		return registerItemBlock(block, isInCreative, new JSONModelItemBlock(block.getRegistryName().getPath()));
+		// Self Drop
+		WyRegistry.registerLootTable(KAIROSEKI, new JSONLootTableSimpleBlock("Kairoseki Block"));
+		WyRegistry.registerLootTable(KAIROSEKI_BARS, new JSONLootTableSimpleBlock("Kairoseki Bars"));
+		WyRegistry.registerLootTable(AXE_DIAL, new JSONLootTableSimpleBlock("Axe Dial"));
+		WyRegistry.registerLootTable(BREATH_DIAL, new JSONLootTableSimpleBlock("Breath Dial"));
+		WyRegistry.registerLootTable(FLAME_DIAL, new JSONLootTableSimpleBlock("Flame Dial"));
+		WyRegistry.registerLootTable(REJECT_DIAL, new JSONLootTableSimpleBlock("Reject Dial"));
+		WyRegistry.registerLootTable(IMPACT_DIAL, new JSONLootTableSimpleBlock("Impact Dial"));
+		WyRegistry.registerLootTable(FLASH_DIAL, new JSONLootTableSimpleBlock("Flash Dial"));
+		WyRegistry.registerLootTable(EISEN_DIAL, new JSONLootTableSimpleBlock("Eisen Dial"));
+		WyRegistry.registerLootTable(MILKY_DIAL, new JSONLootTableSimpleBlock("Milky Dial"));
 	}
-	
-	private static Item registerItemBlock(Block block, boolean isInCreative, JSONModelItem jsonType)
+
+	public static Item registerItemBlock(Block block, String localizedName, boolean isInCreative)
 	{
-		if(isInCreative)
-			return WyRegistry.registerItem(new BlockItem(block, new Item.Properties().group(ModCreativeTabs.MISC)), block.getRegistryName().getPath(), jsonType);
+		String resourceName = WyHelper.getResourceName(localizedName);
+		return registerItemBlock(block, localizedName, isInCreative, new JSONModelItemBlock(resourceName));
+	}
+
+	private static Item registerItemBlock(Block block, String localizedName, boolean isInCreative, JSONModelItem jsonType)
+	{
+		String resourceName = WyHelper.getResourceName(localizedName);
+		if (isInCreative)
+			return WyRegistry.registerItem(new BlockItem(block, new Item.Properties().group(ModCreativeTabs.MISC)), resourceName, jsonType);
 		else
-			return WyRegistry.registerItem(new BlockItem(block, new Item.Properties()), block.getRegistryName().getPath(), jsonType);
+			return WyRegistry.registerItem(new BlockItem(block, new Item.Properties()), resourceName, jsonType);
 	}
-	
-	public static <T extends BlockItem> T registerCustomItemBlock(Block block, T itemBlock)
+
+	public static <T extends BlockItem> T registerCustomItemBlock(Block block, String localizedName, T itemBlock)
 	{
-		WyRegistry.registerItem(itemBlock, block.getRegistryName().getPath(), new JSONModelSimpleItem(block.getRegistryName().getPath()));
-		
-		return itemBlock;		
+		String resourceName = WyHelper.getResourceName(localizedName);
+		WyRegistry.registerItem(itemBlock, resourceName, new JSONModelSimpleItem(resourceName));
+
+		return itemBlock;
 	}
 }

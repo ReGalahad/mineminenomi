@@ -30,6 +30,9 @@ public class ModMain
 		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 		
 		WyRegistry.ENTITY_TYPES.register(modEventBus);
+		WyRegistry.BLOCKS.register(modEventBus);
+		WyRegistry.ITEMS.register(modEventBus);
+		WyRegistry.ABILITIES.register(modEventBus);
 		
 		CommonConfig.init();
 	}

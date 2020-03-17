@@ -5,8 +5,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.SoundEvents;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.api.GenericArmorMaterial;
 import xyz.pixelatedw.mineminenomi.items.armors.BasicArmorItem;
@@ -37,11 +35,8 @@ public class ModArmors
 	public static final Item CAPTAIN_CAPE = new CaptainCapeItem();
 	public static final Item COLA_BACKPACK = new ColaBackpackItem();
 
-	@SubscribeEvent
-	public static void registerItems(RegistryEvent.Register<Item> event)
+	static
 	{
-		WyRegistry.setupItemsRegistry(event.getRegistry());
-		
 		WyRegistry.registerItem(PIRATE_HEAD, "Pirate Bandana");
 		WyRegistry.registerItem(PIRATE_CHEST, "Pirate Chest");
 		WyRegistry.registerItem(PIRATE_LEGS, "Pirate Pants");

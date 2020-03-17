@@ -17,11 +17,9 @@ import net.minecraft.particles.IParticleData.IDeserializer;
 import net.minecraft.particles.ParticleType;
 import net.minecraft.potion.Effect;
 import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.IForgeRegistry;
 import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.json.loottables.IJSONLootTable;
 import xyz.pixelatedw.wypi.json.models.JSONModelBlock;
@@ -62,32 +60,12 @@ public class WyRegistry
 	/*
 	 * Registries
 	 */
+	public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, APIConfig.PROJECT_ID);
+	public static final DeferredRegister<Block> BLOCKS = new DeferredRegister<>(ForgeRegistries.BLOCKS, APIConfig.PROJECT_ID);
+	public static final DeferredRegister<Ability> ABILITIES = new DeferredRegister<>(APIRegistries.ABILITIES, APIConfig.PROJECT_ID);
+	public static final DeferredRegister<Effect> EFFECTS = new DeferredRegister<>(ForgeRegistries.POTIONS, APIConfig.PROJECT_ID);
 	public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = new DeferredRegister<>(ForgeRegistries.ENTITIES, APIConfig.PROJECT_ID);
-	
-	private static IForgeRegistry<Effect> effectsRegistry;
-	public static void setupEffectsRegistry(IForgeRegistry<Effect> registry)
-	{
-		effectsRegistry = registry;
-	}
-	
-	private static IForgeRegistry<Ability> abilitiesRegistry;
-	public static void setupAbilitiesRegistry(IForgeRegistry<Ability> registry)
-	{
-		abilitiesRegistry = registry;
-	}
-	
-	private static IForgeRegistry<Item> itemsRegistry;
-	public static void setupItemsRegistry(IForgeRegistry<Item> registry)
-	{
-		itemsRegistry = registry;
-	}
 
-	private static IForgeRegistry<Block> blocksRegistry;
-	public static void setupBlocksRegistry(IForgeRegistry<Block> registry)
-	{
-		blocksRegistry = registry;
-	}
-	
 	/*
 	 * Register Helpers
 	 */
@@ -96,9 +74,8 @@ public class WyRegistry
 	{
 		String resourceName = WyHelper.getResourceName(localizedName);
 		langMap.put("effect." + APIConfig.PROJECT_ID + "." + resourceName, localizedName);
-		effect.setRegistryName(APIConfig.PROJECT_ID, resourceName);
 
-		effectsRegistry.register(effect);
+		EFFECTS.register(resourceName, () -> effect);
 		
 		return effect;
 	}
@@ -122,9 +99,8 @@ public class WyRegistry
 	{
 		String resourceName = WyHelper.getResourceName(ability.getName());
 		langMap.put("ability." + APIConfig.PROJECT_ID + "." + resourceName, ability.getName());
-		ability.setRegistryName(APIConfig.PROJECT_ID, resourceName);
 		
-		abilitiesRegistry.register(ability);
+		ABILITIES.register(resourceName, () -> ability);
 
 		return ability;
 	}
@@ -138,10 +114,9 @@ public class WyRegistry
 	{
 		String resourceName = WyHelper.getResourceName(localizedName);
 		langMap.put("item." + APIConfig.PROJECT_ID + "." + resourceName, localizedName);
-		item.setRegistryName(APIConfig.PROJECT_ID, resourceName);
 		items.put(item, jsonType);
 
-		itemsRegistry.register(item);
+		ITEMS.register(resourceName, () -> item);
 		
 		return item;
 	}
@@ -161,7 +136,7 @@ public class WyRegistry
 		egg.setRegistryName(APIConfig.PROJECT_ID, langKey);
 		items.put(egg, new JSONModelSpawnEgg(langKey));
 
-		itemsRegistry.register(egg);
+		//itemsRegistry.register(egg);
 
 		return egg;
 	}
@@ -175,10 +150,9 @@ public class WyRegistry
 	{
 		String resourceName = WyHelper.getResourceName(localizedName);
 		langMap.put("block." + APIConfig.PROJECT_ID + "." + resourceName, localizedName);
-		block.setRegistryName(new ResourceLocation(APIConfig.PROJECT_ID, resourceName));
 		blocks.put(block, jsonType);
 
-		blocksRegistry.register(block);
+		BLOCKS.register(resourceName, () -> block);
 		
 		return block;
 	}

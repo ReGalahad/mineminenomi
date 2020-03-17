@@ -3,8 +3,6 @@ package xyz.pixelatedw.mineminenomi.init;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import net.minecraft.item.Item;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.items.weapons.AbilitySwordItem;
 import xyz.pixelatedw.mineminenomi.items.weapons.CoreSwordItem;
@@ -81,11 +79,8 @@ public class ModWeapons
 	public static final JSONModelSimple3DItem BLACK_KABUTO_MODEL = new JSONModelSimple3DItem("Kuro Kabuto", PULLING_0_PREDICATE, PULLING_1_PREDICATE, PULLING_2_PREDICATE).isBow().setThirdPersonTranslations(-1.0, 1.0, 2.5).setThirdPersonScales( 1.9, 1.9, 1.9);
 	public static final JSONModelSimple3DItem GINGA_PACHINKO_MODEL = new JSONModelSimple3DItem("Ginga Pachinko", PULLING_0_PREDICATE, PULLING_1_PREDICATE, PULLING_2_PREDICATE).isBow().setThirdPersonTranslations(-1.0, 3.5, 2.5).setThirdPersonScales(1.0, 1.0, 1.0);
 
-	@SubscribeEvent
-    public static void registerItems(final RegistryEvent.Register<Item> event)
-    {
-		WyRegistry.setupItemsRegistry(event.getRegistry());
-		
+	static
+	{
 		registerSword(MARINE_SWORD, "Marine Sword", HAKI_PREDICATE);
 		registerSword(PIRATE_CUTLASS, "Pirate Cutlass", HAKI_PREDICATE);
 		registerSword(PIPE, "Pipe", HAKI_PREDICATE);
@@ -126,7 +121,7 @@ public class ModWeapons
 		registerSword(DORU_DORU_ARTS_KEN, "Doru Doru Arts: Ken");
 		registerSword(BLUE_SWORD, "Blue Sword");
 		registerSword(TABIRA_YUKI, "Tabira Yuki");
-    }
+	}
 	
 	private static Item registerSword(Item item, String localizedName, JSONPredicateObject... predicate)
 	{
