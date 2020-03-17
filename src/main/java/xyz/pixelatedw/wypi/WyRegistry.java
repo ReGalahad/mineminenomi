@@ -1,6 +1,5 @@
 package xyz.pixelatedw.wypi;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -12,7 +11,6 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EntityType.Builder;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.item.SpawnEggItem;
 import net.minecraft.particles.IParticleData.IDeserializer;
 import net.minecraft.particles.ParticleType;
 import net.minecraft.potion.Effect;
@@ -121,9 +119,20 @@ public class WyRegistry
 		return item;
 	}
 
-	public static Item registerSpawnEggItem(EntityType type, int backgroundColor, int foregroundColor)
+	public static Item registerSpawnEggItem(EntityType type, String localizedEntityName, int backgroundColor, int foregroundColor)
 	{
-		SpawnEggItem egg = new SpawnEggItem(type, backgroundColor, foregroundColor, (new Item.Properties()).group(ItemGroup.MISC));
+		String entityResName = WyHelper.getResourceName(localizedEntityName);
+		ModdedSpawnEggItem egg = new ModdedSpawnEggItem(() -> type, backgroundColor, foregroundColor, (new Item.Properties()).group(ItemGroup.MISC));
+
+		String resourceName = entityResName + "_spawn_egg";
+		String localizedName = "Spawn " + localizedEntityName;
+		
+		langMap.put("item." + APIConfig.PROJECT_ID + "." + resourceName, localizedName);
+		items.put(egg, new JSONModelSpawnEgg(resourceName));
+		
+		ITEMS.register(resourceName, () -> egg);
+		
+		/*SpawnEggItem egg = new SpawnEggItem(type, backgroundColor, foregroundColor, (new Item.Properties()).group(ItemGroup.MISC));
 
 		StringBuilder builder = new StringBuilder();
 		String[] strs = type.getRegistryName().getPath().split("_");
@@ -134,7 +143,7 @@ public class WyRegistry
 
 		langMap.put("item." + APIConfig.PROJECT_ID + "." + langKey, localizedName);
 		egg.setRegistryName(APIConfig.PROJECT_ID, langKey);
-		items.put(egg, new JSONModelSpawnEgg(langKey));
+		items.put(egg, new JSONModelSpawnEgg(langKey));*/
 
 		//itemsRegistry.register(egg);
 

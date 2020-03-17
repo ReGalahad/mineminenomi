@@ -2,6 +2,9 @@ package xyz.pixelatedw.mineminenomi.init;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.entities.WantedPosterPackageEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.bandits.EntityBanditWithSword;
@@ -14,6 +17,7 @@ import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityPirateCaptain;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityPirateWithGun;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityPirateWithSword;
 import xyz.pixelatedw.mineminenomi.entities.mobs.quest.givers.DojoSenseiEntity;
+import xyz.pixelatedw.wypi.ModdedSpawnEggItem;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.WyRegistry;
 
@@ -45,74 +49,55 @@ public class ModEntities
 	static
 	{
 		// Marines
-		WyRegistry.registerEntityType(MARINE_WITH_SWORD, "Marine with Sword");
-		WyRegistry.registerEntityType(MARINE_WITH_GUN, "Marine with Gun");
-		WyRegistry.registerEntityType(MARINE_CAPTAIN, "Marine Captain");
+		registerMarineWithSpawnEgg(MARINE_WITH_SWORD, "Marine with Sword");
+		registerMarineWithSpawnEgg(MARINE_WITH_GUN, "Marine with Gun");
+		registerMarineWithSpawnEgg(MARINE_CAPTAIN, "Marine Captain");
 
 		// Pirates
-		WyRegistry.registerEntityType(PIRATE_WITH_SWORD, "Pirate with Sword");
-		WyRegistry.registerEntityType(PIRATE_WITH_GUN, "Pirate with Gun");
-		WyRegistry.registerEntityType(PIRATE_CAPTAIN, "Pirate Captain");
+		registerPirateWithSpawnEgg(PIRATE_WITH_SWORD, "Pirate with Sword");
+		registerPirateWithSpawnEgg(PIRATE_WITH_GUN, "Pirate with Gun");
+		registerPirateWithSpawnEgg(PIRATE_CAPTAIN, "Pirate Captain");
 
 		// Bandits
-		WyRegistry.registerEntityType(BANDIT_WITH_SWORD, "Bandit with Sword");
+		registerBanditWithSpawnEgg(BANDIT_WITH_SWORD, "Bandit with Sword");
 
 		// Factionless
-		WyRegistry.registerEntityType(DOJO_SENSEI, "Dojo Sensei");
+		registerFactionlessWithSpawnEgg(DOJO_SENSEI, "Dojo Sensei");
 
 		// Other
 		WyRegistry.registerEntityType(DOPPELMAN, "Doppelman");
 		WyRegistry.registerEntityType(BLACK_KNIGHT, "Black Knight");
 		WyRegistry.registerEntityType(WANTED_POSTER_PACKAGE, "Wanted Poster Package");
 	}
-	
-/*
+
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void onPostRegisterEntities(final RegistryEvent.Register<EntityType<?>> event)
 	{
 		ModdedSpawnEggItem.initUnaddedEggs();
 	}
 
-	@SubscribeEvent
-	public static void registerItems(RegistryEvent.Register<Item> event)
+	private static Item registerMarineWithSpawnEgg(EntityType type, String name)
 	{
-		WyRegistry.setupItemsRegistry(event.getRegistry());
-
-		// Marines
-		registerMarineSpawnEgg(MARINE_WITH_SWORD);
-		registerMarineSpawnEgg(MARINE_WITH_GUN);
-		registerMarineSpawnEgg(MARINE_CAPTAIN);
-
-		// Pirates
-		registerPirateSpawnEgg(PIRATE_WITH_SWORD);
-		registerPirateSpawnEgg(PIRATE_WITH_GUN);
-		registerPirateSpawnEgg(PIRATE_CAPTAIN);
-
-		// Bandits
-		registerBanditSpawnEgg(BANDIT_WITH_SWORD);
-
-		// Factionless
-		registerFactionlessSpawnEgg(DOJO_SENSEI);
-	}
-*/
-	private static Item registerMarineSpawnEgg(EntityType type)
-	{
-		return WyRegistry.registerSpawnEggItem(type, WyHelper.hexToRGB("#024a81").getRGB(), WyHelper.hexToRGB("#F7F7F7").getRGB());
+		WyRegistry.registerEntityType(type, name);
+		return WyRegistry.registerSpawnEggItem(type, name, WyHelper.hexToRGB("#024a81").getRGB(), WyHelper.hexToRGB("#F7F7F7").getRGB());
 	}
 
-	private static Item registerPirateSpawnEgg(EntityType type)
+	private static Item registerPirateWithSpawnEgg(EntityType type, String name)
 	{
-		return WyRegistry.registerSpawnEggItem(type, WyHelper.hexToRGB("#c11c1c").getRGB(), WyHelper.hexToRGB("#F7F7F7").getRGB());
+		WyRegistry.registerEntityType(type, name);
+		return WyRegistry.registerSpawnEggItem(type, name, WyHelper.hexToRGB("#c11c1c").getRGB(), WyHelper.hexToRGB("#F7F7F7").getRGB());
 	}
 
-	private static Item registerBanditSpawnEgg(EntityType type)
+	private static Item registerBanditWithSpawnEgg(EntityType type, String name)
 	{
-		return WyRegistry.registerSpawnEggItem(type, WyHelper.hexToRGB("#785355").getRGB(), WyHelper.hexToRGB("#F7F7F7").getRGB());
+		WyRegistry.registerEntityType(type, name);
+		return WyRegistry.registerSpawnEggItem(type, name, WyHelper.hexToRGB("#785355").getRGB(), WyHelper.hexToRGB("#F7F7F7").getRGB());
 	}
 
-	private static Item registerFactionlessSpawnEgg(EntityType type)
+	private static Item registerFactionlessWithSpawnEgg(EntityType type, String name)
 	{
-		return WyRegistry.registerSpawnEggItem(type, WyHelper.hexToRGB("#fbbf4c").getRGB(), WyHelper.hexToRGB("#F7F7F7").getRGB());
+		WyRegistry.registerEntityType(type, name);
+		return WyRegistry.registerSpawnEggItem(type, name, WyHelper.hexToRGB("#fbbf4c").getRGB(), WyHelper.hexToRGB("#F7F7F7").getRGB());
 	}
 
 }
