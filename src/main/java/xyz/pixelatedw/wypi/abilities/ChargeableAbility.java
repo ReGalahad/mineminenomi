@@ -14,6 +14,7 @@ public abstract class ChargeableAbility extends Ability
 {
 	private int chargeTime;
 	private int maxChargeTime;
+	private boolean isCancelable;
 	
 	// Setting the defaults so that no crash occurs and so they will be null safe.
 	protected IOnStartCharging onStartChargingEvent = (player) -> { return true; };
@@ -34,14 +35,24 @@ public abstract class ChargeableAbility extends Ability
 		if(player.world.isRemote)
 			return;
 		
-		if(!this.isOnStandby())
-			return;			
-		
-		if(this.onStartChargingEvent.onStartCharging(player))
-		{	
-			this.startCharging();
-			IAbilityData props = AbilityDataCapability.get(player);
-			WyNetwork.sendTo(new SSyncAbilityDataPacket(props), (ServerPlayerEntity)player);
+		if(this.isCharging() && this.chargeTime > 0)
+		{
+			if(this.onEndChargingEvent.onEndCharging(player))
+			{
+				this.chargeTime = this.maxChargeTime;
+				this.startCooldown();
+				IAbilityData props = AbilityDataCapability.get(player);
+				WyNetwork.sendTo(new SSyncAbilityDataPacket(props), (ServerPlayerEntity) player);
+			}
+		}
+		else if(this.isOnStandby())
+		{
+			if(this.onStartChargingEvent.onStartCharging(player))
+			{
+				this.startCharging();
+				IAbilityData props = AbilityDataCapability.get(player);
+				WyNetwork.sendTo(new SSyncAbilityDataPacket(props), (ServerPlayerEntity)player);
+			}
 		}
 	}
 	
@@ -63,8 +74,16 @@ public abstract class ChargeableAbility extends Ability
 	{
 		return this.maxChargeTime;
 	}
-
 	
+	public void setCancelable()
+	{
+		this.isCancelable = true;
+	}
+
+	public boolean isCancelable()
+	{
+		return this.isCancelable;
+	}
 	
 	/*
 	 *  Methods

@@ -95,7 +95,6 @@ public class ModBlocks
 	 * public static final Block AbilityProtectionAreaBlock = new BlockAbilityProtectionArea();
 	 * public static final Block AbilityProtectionCenterBlock = new BlockAbilityProtectionArea();
 	 */
-
 	
 	static
 	{

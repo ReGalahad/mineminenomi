@@ -23,6 +23,7 @@ public class VoltVariAbility extends ChargeableAbility
 		this.setDescription("Creates a concentrated ball of lightning, which varies in power");
 		this.setMaxCooldown(3);
 		this.setMaxChargeTime(10);
+		this.setCancelable();
 		
 		this.duringChargingEvent = this::duringChargingEvent;
 		this.onEndChargingEvent = this::onEndChargingEvent;
