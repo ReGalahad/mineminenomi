@@ -342,9 +342,9 @@ public class WyHelper
 		return (float) (degrees * Math.PI / 180);
 	}
 
-	public static double percentage(double i, double j)
+	public static double percentage(double percent, double value)
 	{
-		return (i / 100) * j;
+		return (percent / 100) * value;
 	}
 
 	public static double randomWithRange(int min, int max)

@@ -35,6 +35,10 @@
 	"ability.mineminenomi.suke_punch": "Suke Punch",
 	"ability.mineminenomi.takt": "Takt",
 	"ability.mineminenomi.volt_vari": "Volt Vari",
+	"ability.mineminenomi.white_launcher": "White Launcher",
+	"ability.mineminenomi.white_out": "White Out",
+	"ability.mineminenomi.white_snake": "White Snake",
+	"ability.mineminenomi.white_strike": "White Strike",
 	"ability.mineminenomi.yasakani_no_magatama": "Yasakani no Magatama",
 	"ability.mineminenomi.yata_no_kagami": "Yata no Kagami",
 
@@ -108,6 +112,8 @@
 	"entity.mineminenomi.volt_vari_5_million": "Volt Vari 5 Million",
 	"entity.mineminenomi.volt_vari_60_million": "Volt Vari 60 Million",
 	"entity.mineminenomi.wanted_poster_package": "Wanted Poster Package",
+	"entity.mineminenomi.white_out": "White Out",
+	"entity.mineminenomi.white_snake": "White Snake",
 	"entity.mineminenomi.yasakani_no_magatama": "Yasakani no Magatama",
 
 	"faction.bountyhunter": "Bounty Hunter",

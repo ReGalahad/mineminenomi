@@ -1,12 +1,11 @@
 package xyz.pixelatedw.mineminenomi.particles.effects.moku;
 
-import java.util.Random;
-
-import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
-import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
+import xyz.pixelatedw.mineminenomi.particles.data.GenericParticleData;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
+import xyz.pixelatedw.wypi.WyHelper;
 
 public class WhiteLauncherParticleEffect extends ParticleEffect
 {
@@ -16,17 +15,16 @@ public class WhiteLauncherParticleEffect extends ParticleEffect
 	{
 		for (int i = 0; i < 20; i++)
 		{
-			double offsetX = (new Random().nextInt(20) + 1.0D - 10.0D) / 15.0D;
-			double offsetY = (new Random().nextInt(20) + 1.0D - 10.0D) / 10.0D;
-			double offsetZ = (new Random().nextInt(20) + 1.0D - 10.0D) / 15.0D;
+			double offsetX = WyHelper.randomDouble() / 5;
+			double offsetY = WyHelper.randomDouble() / 5;
+			double offsetZ = WyHelper.randomDouble() / 5;
 	      
-			SimpleParticle cp = new SimpleParticle(world, ModResources.MOKU,
-					posX + offsetX, 
-					posY + 1 + offsetY,
-					posZ + offsetZ, 
-					0, 0, 0)
-					.setParticleAge(20).setParticleGravity(0).setParticleScale(1.3F);
-			Minecraft.getInstance().particles.addEffect(cp);
+			GenericParticleData data = new GenericParticleData();
+			data.setTexture(ModResources.MOKU);
+			data.setLife(20);
+			data.setSize(1.3F);
+			data.setMotion(0, 0.05, 0);
+			WyHelper.spawnParticles(data, (ServerWorld) world, posX + offsetX, posY + 1.5 + offsetY, posZ + offsetZ);
 		}
 	}
 
