@@ -15,7 +15,7 @@ import xyz.pixelatedw.mineminenomi.models.blocks.Dial04Model;
 import xyz.pixelatedw.wypi.APIConfig;
 
 @OnlyIn(Dist.CLIENT)
-public class DialTileEntityRenderer  extends TileEntityRenderer
+public class DialTileEntityRenderer extends TileEntityRenderer
 {
 	private EntityModel model;
 	private ResourceLocation texture;

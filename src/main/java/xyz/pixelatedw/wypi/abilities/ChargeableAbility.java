@@ -36,15 +36,7 @@ public abstract class ChargeableAbility extends Ability
 			return;
 		
 		if(this.isCharging() && this.chargeTime > 0)
-		{
-			if(this.onEndChargingEvent.onEndCharging(player))
-			{
-				this.chargeTime = this.maxChargeTime;
-				this.startCooldown();
-				IAbilityData props = AbilityDataCapability.get(player);
-				WyNetwork.sendTo(new SSyncAbilityDataPacket(props), (ServerPlayerEntity) player);
-			}
-		}
+			this.stopCharging(player);
 		else if(this.isOnStandby())
 		{
 			if(this.onStartChargingEvent.onStartCharging(player))
@@ -68,6 +60,17 @@ public abstract class ChargeableAbility extends Ability
 	public void startCharging()
 	{
 		this.setState(State.CHARGING);
+	}
+	
+	public void stopCharging(PlayerEntity player)
+	{
+		if (this.onEndChargingEvent.onEndCharging(player))
+		{
+			this.chargeTime = this.maxChargeTime;
+			this.startCooldown();
+			IAbilityData props = AbilityDataCapability.get(player);
+			WyNetwork.sendTo(new SSyncAbilityDataPacket(props), (ServerPlayerEntity) player);
+		}
 	}
 	
 	public int getMaxChargeTime()
@@ -101,13 +104,7 @@ public abstract class ChargeableAbility extends Ability
 		}
 		else if(this.isCharging() && this.chargeTime <= 0)
 		{
-			if(this.onEndChargingEvent.onEndCharging(player))
-			{
-				this.chargeTime = this.maxChargeTime;
-				this.startCooldown();
-				IAbilityData props = AbilityDataCapability.get(player);
-				WyNetwork.sendTo(new SSyncAbilityDataPacket(props), (ServerPlayerEntity) player);
-			}
+			this.stopCharging(player);
 		}
 	}
 	

@@ -156,7 +156,16 @@ public class WyHelper
 	public static Color hexToRGB(String hexColor)
 	{
 		if (hexColor.startsWith("#"))
-			return Color.decode(hexColor);
+			hexColor = hexColor.substring(1);
+
+		if (hexColor.length() == 8)
+		{
+			int r = Integer.parseInt(hexColor.substring(0, 2), 16);
+			int g = Integer.parseInt(hexColor.substring(2, 4), 16);
+			int b = Integer.parseInt(hexColor.substring(4, 6), 16);
+			int a = Integer.parseInt(hexColor.substring(6, 8), 16);
+			return new Color(r, g, b, a);
+		}
 		else
 			return Color.decode("#" + hexColor);
 	}
