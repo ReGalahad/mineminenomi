@@ -63,7 +63,7 @@ public class SimpleParticle extends TexturedParticle
 			float rotation = (float) (this.age * 2) / this.maxAge;
 			rotationYZ = rotation - 1;
 		}
-		
+
 		GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 		GlStateManager.enableBlend();
 		GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);
