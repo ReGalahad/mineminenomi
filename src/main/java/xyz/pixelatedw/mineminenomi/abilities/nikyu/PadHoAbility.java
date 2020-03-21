@@ -12,7 +12,7 @@ public class PadHoAbility extends Ability
 	public PadHoAbility()
 	{
 		super("Pad Ho", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(8);
+		this.setMaxCooldown(6);
 		this.setDescription("Launches a paw-shaped shockwave at the opponent.");
 
 		this.onUseEvent = this::onUseEvent;

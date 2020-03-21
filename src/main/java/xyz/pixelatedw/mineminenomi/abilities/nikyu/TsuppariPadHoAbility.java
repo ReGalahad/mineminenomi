@@ -14,7 +14,7 @@ public class TsuppariPadHoAbility extends RepeaterAbility
 	{
 		super("Tsuppari Pad Ho", AbilityCategory.DEVIL_FRUIT);
 		this.setMaxCooldown(13);
-		this.setMaxRepearCount(3, 5);
+		this.setMaxRepearCount(5, 7);
 		this.setDescription("Launches a barrage of paw-shaped shockwaves at the opponent.");
 
 		this.onUseEvent = this::onUseEvent;
