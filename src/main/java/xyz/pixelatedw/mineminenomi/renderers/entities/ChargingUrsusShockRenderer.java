@@ -33,13 +33,25 @@ public class ChargingUrsusShockRenderer extends EntityRenderer<ChargingUrsusShoc
 		GL11.glRotatef(180.0F, 0.0F, 1.0F, 0.0F);
 		GL11.glRotatef(entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * v - 180.0F, 0.0F, 1.0F, 0.0F);
 
-		double size = entity.getCharge();
+		double size = 1 + (entity.getCharge() / 2);
 
 		GL11.glScaled(size, size, size);
 
 		GlStateManager.disableTexture();
 		GlStateManager.enableBlend();
 		GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);
+		GlStateManager.disableDepthTest();
+
+		GlStateManager.pushMatrix();
+		{
+			double t = entity.ticksExisted * 3 % 100;
+			double mirageSize = t >= 50 ? 2 - (t / 100.0D) : 1 + (t / 100.0D);
+			double scale = mirageSize;
+			GL11.glColor4d(1, 1, 1, 0.2);
+			GlStateManager.scaled(scale, scale, scale);
+			this.model.render(entity, 0.0F, 0.0F, 0F, 0.0F, 0.0F, 0.0625F);
+		}
+		GlStateManager.popMatrix();
 
 		GL11.glColor4d(1, 1, 1, 0.6);
 
@@ -47,6 +59,7 @@ public class ChargingUrsusShockRenderer extends EntityRenderer<ChargingUrsusShoc
 
 		GL11.glColor4d(1, 1, 1, 1);
 		
+		GlStateManager.enableDepthTest();
 		GlStateManager.disableBlend();
 		GlStateManager.enableTexture();
 		

@@ -42,7 +42,7 @@ public class ChargingUrsusShockEntity extends Entity
 			}
 			
 			this.setPosition(this.owner.posX, this.owner.posY + 1.5, this.owner.posZ);
-			this.setRotation(this.owner.rotationYaw, 0);
+			this.setRotation(this.owner.rotationYawHead, 0);
 		}
 	}
 	

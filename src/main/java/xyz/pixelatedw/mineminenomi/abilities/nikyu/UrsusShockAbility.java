@@ -49,7 +49,7 @@ public class UrsusShockAbility extends ChargeableAbility
 		}
 		else
 		{
-			currentCharge -= 0.01;
+			currentCharge -= 0.03;
 			this.ursusShockEntity.setCharge(currentCharge);
 		}
 	}
@@ -70,17 +70,17 @@ public class UrsusShockAbility extends ChargeableAbility
 		AbilityProjectileEntity projectile = null;
 		
 		System.out.println(truePower);
-		if (truePower > 0 && truePower <= 100)
+		if (truePower > 0 && truePower <= 70)
 		{
 			projectile = new UrsusShock25Projectile(player.world, player);
 			this.setMaxCooldown(10);
 		}
-		else if (truePower > 100 && truePower <= 200)
+		else if (truePower > 70 && truePower <= 250)
 		{
 			projectile = new UrsusShock50Projectile(player.world, player);
 			this.setMaxCooldown(20);
 		}
-		else if (truePower > 200 && truePower <= 300)
+		else if (truePower > 250 && truePower <= 300)
 		{
 			projectile = new UrsusShock75Projectile(player.world, player);
 			this.setMaxCooldown(30);
