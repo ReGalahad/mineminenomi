@@ -7,6 +7,7 @@ import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.wypi.WyHelper;
 
+@Deprecated
 public class ProjectileTrailParticleEffect extends ParticleEffect
 {
 	private ResourceLocation particleTexture;

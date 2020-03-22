@@ -38,7 +38,6 @@ public class SablesAbility extends PunchAbility
 		
 		target.setMotion(xPower, 2, zPower);
 		target.velocityChanged = true;
-		target.fallDistance = 0;
 
 		return 0;
 	}

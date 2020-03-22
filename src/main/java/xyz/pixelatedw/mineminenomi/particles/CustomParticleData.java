@@ -2,6 +2,7 @@ package xyz.pixelatedw.mineminenomi.particles;
 
 import net.minecraft.util.ResourceLocation;
 
+@Deprecated
 public class CustomParticleData
 {
 

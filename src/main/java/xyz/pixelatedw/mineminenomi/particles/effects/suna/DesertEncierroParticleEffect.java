@@ -2,11 +2,12 @@ package xyz.pixelatedw.mineminenomi.particles.effects.suna;
 
 import java.util.Random;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
-import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
+import xyz.pixelatedw.mineminenomi.particles.data.GenericParticleData;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
+import xyz.pixelatedw.wypi.WyHelper;
 
 public class DesertEncierroParticleEffect extends ParticleEffect
 {
@@ -25,32 +26,25 @@ public class DesertEncierroParticleEffect extends ParticleEffect
 			for (double theta = 0; theta <= 4 * Math.PI; theta += Math.PI / 32)
 			{
 				x = t * Math.cos(theta);
-				y = rand.nextInt(1);
 				z = t * Math.sin(theta);
 
-				motionX = -x / 10;
-				motionY = 0.1 + (rand.nextDouble() / 10);
-				motionZ = -z / 10;
+				motionX = -x / 6;
+				motionY = -0.1 + (rand.nextDouble() / 10);
+				motionZ = -z / 6;
 
-				SimpleParticle cp = new SimpleParticle(world, ModResources.SUNA,
-						posX + (x * 1.25), 
-						posY + 0.5 + y,
-						posZ + (z * 1.25), 
-						motionX, 
-						motionY, 
-						motionZ)
-						.setParticleAge(-3).setParticleScale(3.3F);
-				Minecraft.getInstance().particles.addEffect(cp);
+				GenericParticleData data = new GenericParticleData();
+				data.setTexture(ModResources.SUNA);
+				data.setLife(-1);
+				data.setSize(3.3F);
+				data.setMotion(motionX, motionY, motionZ);
+				WyHelper.spawnParticles(data, (ServerWorld) world, posX + (x * 1.25), posY + 1.2, posZ + (z * 1.25));
 				
-				cp = new SimpleParticle(world, ModResources.SUNA,
-						posX + (x * 1.25), 
-						posY + 2.5 + y,
-						posZ + (z * 1.25), 
-						motionX, 
-						-motionY, 
-						motionZ)
-						.setParticleAge(-3).setParticleScale(3.3F);
-				Minecraft.getInstance().particles.addEffect(cp);
+				data = new GenericParticleData();
+				data.setTexture(ModResources.SUNA);
+				data.setLife(-1);
+				data.setSize(3.3F);
+				data.setMotion(motionX, motionY, motionZ);
+				WyHelper.spawnParticles(data, (ServerWorld) world, posX + (x * 1.25), posY + 2.2, posZ + (z * 1.25));
 			}
 		}
 	}

@@ -235,6 +235,11 @@ public class AbilityProjectileEntity extends ThrowableEntity
 		this.damage = damage;
 	}
 	
+	public float getDamage()
+	{
+		return this.damage;
+	}
+	
 	public void setGravity(float gravity)
 	{
 		this.gravity = gravity;

@@ -41,7 +41,7 @@ public class DarknessBlock extends Block
 		{
 			IDevilFruit dfProps = DevilFruitCapability.get((LivingEntity) entity);
 		
-			if(dfProps.getDevilFruit().equalsIgnoreCase("yamiyami") || dfProps.getDevilFruit().equalsIgnoreCase("yamidummy") )
+			if(dfProps.getDevilFruit().equalsIgnoreCase("yami_yami") || dfProps.getDevilFruit().equalsIgnoreCase("yamidummy") )
 				world.setBlockState(pos, state.with(USER_ON_TOP, true));
 			else
 			{

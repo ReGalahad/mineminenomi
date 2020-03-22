@@ -18,7 +18,7 @@ public class CubeModel extends EntityModel
 		
 		this.Shape1 = new RendererModel(this, 0, 0);
 		this.Shape1.addBox(-4.0F, -4.0F, -4.0F, 8, 8, 8);
-		this.Shape1.setRotationPoint(-5.3F, 7F, -0.1F);
+		this.Shape1.setRotationPoint(0.0F, 0.0F, 0.0F);
 		this.Shape1.setTextureSize(64, 64);
 		this.Shape1.mirror = true;
 		this.setRotation(this.Shape1, 0F, 0F, 0F);

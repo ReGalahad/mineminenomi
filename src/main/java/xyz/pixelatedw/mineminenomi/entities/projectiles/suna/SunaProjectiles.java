@@ -15,7 +15,7 @@ import xyz.pixelatedw.wypi.abilities.renderers.AbilityProjectileRenderer;
 public class SunaProjectiles
 {
 	public static final EntityType BARJAN = WyRegistry.createEntityType(BarjanProjectile::new).size(2.0F, 2.0F).build("barjan");
-	public static final EntityType DESERT_SPADA = WyRegistry.createEntityType(DesertSpadaProjectile::new).size(3.0F, 3.0F).build("desert_spada");
+	public static final EntityType DESERT_SPADA = WyRegistry.createEntityType(DesertSpadaProjectile::new).size(1.0F, 1.0F).build("desert_spada");
 
 	static
 	{

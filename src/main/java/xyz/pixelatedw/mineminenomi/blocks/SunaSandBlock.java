@@ -48,7 +48,7 @@ public class SunaSandBlock extends FallingBlock
 		{
 			IDevilFruit dfProps = DevilFruitCapability.get((LivingEntity) entity);
 
-			if (dfProps.getDevilFruit().equalsIgnoreCase("sunasuna"))
+			if (dfProps.getDevilFruit().equalsIgnoreCase("suna_suna"))
 				world.setBlockState(pos, state.with(USER_ON_TOP, false));
 			else
 			{
