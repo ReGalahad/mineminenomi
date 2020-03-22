@@ -36,8 +36,6 @@ public class WyPatreon
 
 	private static int getPatreonLevel(PlayerEntity player)
 	{
-		boolean flag = false;
-
 		String apiURL = "/patreon/" + player.getUniqueID().toString();
 		String result = sendGET(apiURL);
 
@@ -58,6 +56,9 @@ public class WyPatreon
 
 				if (formattedGroupName.equalsIgnoreCase("patreon_celestial_dragon"))
 					patreonLevel = 3;
+				
+				if(patreonLevel > 0)
+					break;
 			}
 
 			return patreonLevel;
