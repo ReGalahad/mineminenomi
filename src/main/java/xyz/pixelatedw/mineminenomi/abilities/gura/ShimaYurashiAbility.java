@@ -1,8 +1,10 @@
 package xyz.pixelatedw.mineminenomi.abilities.gura;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
@@ -13,6 +15,7 @@ import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
+import xyz.pixelatedw.mineminenomi.api.helpers.ItemsHelper;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.gura.TenchiMeidoParticleEffect;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
@@ -56,8 +59,9 @@ public class ShimaYurashiAbility extends ChargeableAbility
 					BlockState state = player.world.getBlockState(pos);
 					
 					boolean airBlocksAbove = player.world.getBlockState(pos.up()).getBlock() == Blocks.AIR && player.world.getBlockState(pos.up(2)).getBlock() == Blocks.AIR;
+					boolean isAllowedToMove = !Arrays.<Block>asList(ItemsHelper.RESTRICTED_BLOCKS).contains(state.getBlock());
 					
-					if(airBlocksAbove && state.isSolid() && !this.blocks.contains(pos))
+					if(airBlocksAbove && isAllowedToMove && state.isSolid() && !this.blocks.contains(pos))
 					{
 						this.blocks.add(pos);
 					}

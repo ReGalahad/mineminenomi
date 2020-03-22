@@ -173,12 +173,7 @@ public class DevilFruitsHelper
 			}
 			else if (rule.equalsIgnoreCase("restricted"))
 			{
-				bannedBlocks.remove(Blocks.BEDROCK);
-				bannedBlocks.remove(ModBlocks.OPE);
-				bannedBlocks.remove(ModBlocks.OPE_MID);
-				bannedBlocks.remove(ModBlocks.STRING_MID);
-				bannedBlocks.remove(ModBlocks.STRING_WALL);
-				bannedBlocks.remove(ModBlocks.DARKNESS);
+				bannedBlocks.removeAll(Arrays.asList(ItemsHelper.RESTRICTED_BLOCKS));
 			}
 
 		});

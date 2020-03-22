@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 import com.google.common.collect.Multimap;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.item.ItemEntity;
@@ -32,6 +33,7 @@ import xyz.pixelatedw.wypi.WyHelper;
 
 public class ItemsHelper
 {
+	public static final Block[] RESTRICTED_BLOCKS = new Block[] { Blocks.BEDROCK, ModBlocks.OPE, ModBlocks.OPE_MID, ModBlocks.STRING_MID, ModBlocks.STRING_WALL, ModBlocks.DARKNESS };
 	private static String[] wantedPostersBackgrounds = new String[] 
 			{
 					"forest1", "forest2", 
