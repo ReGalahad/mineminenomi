@@ -24,7 +24,6 @@ public class ShimaYurashiAbility extends ChargeableAbility
 	public static final Ability INSTANCE = new ShimaYurashiAbility();
 
 	private static final ParticleEffect PARTICLES = new TenchiMeidoParticleEffect();
-	private final int areaSize = 20;
 	private List<BlockPos> blocks = new ArrayList<BlockPos>();
 
 	public ShimaYurashiAbility()
@@ -48,7 +47,11 @@ public class ShimaYurashiAbility extends ChargeableAbility
 			{
 				for(int k = -areaSize; k <= areaSize; k++)
 				{
-					BlockPos pos = new BlockPos(player.posX + i, player.posY + j, player.posZ + k);
+					double posX = player.posX + i + (i < -WyHelper.randomWithRange(15, 20) || i > WyHelper.randomWithRange(15, 20) ? WyHelper.randomWithRange(-10, 10) : 0);
+					double posY = player.posY + j;
+					double posZ = player.posZ + k + (k < -WyHelper.randomWithRange(15, 20) || k > WyHelper.randomWithRange(15, 20) ? WyHelper.randomWithRange(-10, 10) : 0);
+					
+					BlockPos pos = new BlockPos(posX, posY, posZ);
 					BlockState state = player.world.getBlockState(pos);
 					
 					boolean airBlocksAbove = player.world.getBlockState(pos.up()).getBlock() == Blocks.AIR && player.world.getBlockState(pos.up(2)).getBlock() == Blocks.AIR;
@@ -89,8 +92,7 @@ public class ShimaYurashiAbility extends ChargeableAbility
 				FallingBlockEntity fallingBlock = new FallingBlockEntity(player.world, pos.getX(), pos.getY(), pos.getZ(), state);
 				fallingBlock.setMotion(0, 0.5 + (WyHelper.randomDouble() / 2), 0);
 				fallingBlock.velocityChanged = true;
-				player.world.addEntity(fallingBlock);
-				
+				player.world.addEntity(fallingBlock);			
 			}
 		}
 		
@@ -99,14 +101,13 @@ public class ShimaYurashiAbility extends ChargeableAbility
 		List<LivingEntity> targets = WyHelper.<LivingEntity>getEntitiesNear(player.getPosition(), player.world, 20);
 		targets.removeIf(entity -> !entity.onGround);
 		targets.remove(player);
-		
-		targets.parallelStream().forEach(target -> 
+
+		targets.parallelStream().filter(target -> target != null && target.isAlive()).forEach(target ->
 		{
-			//target.attackEntityFrom(DamageSource.MAGIC, 10);
 			target.setMotion(0, 2, 0);
-			target.velocityChanged = true;
+			target.velocityChanged = true;			
 		});
-		
+
 		return true;
 	}
 }
