@@ -54,6 +54,9 @@ import xyz.pixelatedw.mineminenomi.abilities.pika.YataNoKagamiAbility;
 import xyz.pixelatedw.mineminenomi.abilities.suke.ShishaNoTeAbility;
 import xyz.pixelatedw.mineminenomi.abilities.suke.SkattingAbility;
 import xyz.pixelatedw.mineminenomi.abilities.suke.SukePunchAbility;
+import xyz.pixelatedw.mineminenomi.abilities.suna.BarjanAbility;
+import xyz.pixelatedw.mineminenomi.abilities.suna.DesertSpadaAbility;
+import xyz.pixelatedw.mineminenomi.abilities.suna.SablesAbility;
 import xyz.pixelatedw.mineminenomi.items.AkumaNoMiItem;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyRegistry;
@@ -97,7 +100,7 @@ public class ModDevilFruits
 	public static final AkumaNoMiItem DOKU_DOKU_NO_MI = new AkumaNoMiItem("Doku Doku no Mi", EnumFruitType.PARAMECIA);
 	public static final AkumaNoMiItem DORU_DORU_NO_MI = new AkumaNoMiItem("Doru Doru no Mi", EnumFruitType.PARAMECIA);
 	public static final AkumaNoMiItem MAGU_MAGU_NO_MI = new AkumaNoMiItem("Magu Magu no Mi", EnumFruitType.LOGIA);
-	public static final AkumaNoMiItem SUNA_SUNA_NO_MI = new AkumaNoMiItem("Suna Suna no Mi", EnumFruitType.LOGIA);
+	public static final AkumaNoMiItem SUNA_SUNA_NO_MI = new AkumaNoMiItem("Suna Suna no Mi", EnumFruitType.LOGIA, DesertSpadaAbility.INSTANCE, SablesAbility.INSTANCE, BarjanAbility.INSTANCE);
 	public static final AkumaNoMiItem KAGE_KAGE_NO_MI = new AkumaNoMiItem("Kage Kage no Mi", EnumFruitType.PARAMECIA);
 	public static final AkumaNoMiItem GURA_GURA_NO_MI = new AkumaNoMiItem("Gura Gura no Mi", EnumFruitType.PARAMECIA, KaishinAbility.INSTANCE, GekishinAbility.INSTANCE, TenchiMeidoAbility.INSTANCE, ShimaYurashiAbility.INSTANCE);
 	public static final AkumaNoMiItem BOMU_BOMU_NO_MI = new AkumaNoMiItem("Bomu Bomu no Mi", EnumFruitType.PARAMECIA, NoseFancyCannonAbility.INSTANCE, KickBombAbility.INSTANCE);

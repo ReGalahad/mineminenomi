@@ -155,7 +155,7 @@ public class AbilityProjectileEntity extends ThrowableEntity
 					return;
 				
 				if (!this.canPassThroughBlocks)
-				{										
+				{
 					this.onBlockImpactEvent.onImpact(blockHit.getPos());
 					if(!this.canGetStuckInGround)
 						this.remove();
