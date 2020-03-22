@@ -14,10 +14,10 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fml.network.NetworkHooks;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.mineminenomi.init.ModItems;
 import xyz.pixelatedw.mineminenomi.items.VivreCardItem;
+import xyz.pixelatedw.wypi.WyHelper;
 
 public class VivreCardEntity extends Entity
 {
@@ -76,11 +76,11 @@ public class VivreCardEntity extends Entity
 		
 		if(this.ticksExisted > 40)
 		{
-			for(LivingEntity player : WyHelper.getEntitiesNear(this, 0.2))
+			for(LivingEntity player : WyHelper.<LivingEntity>getEntitiesNear(this.getPosition(), this.world, 0.2))
 			{
 				if(player instanceof PlayerEntity)
 				{
-					ItemStack stack = new ItemStack(ModItems.vivreCard);
+					ItemStack stack = new ItemStack(ModItems.VIVRE_CARD);
 					
 					((VivreCardItem) stack.getItem()).setOwner(stack, owner);
 					
