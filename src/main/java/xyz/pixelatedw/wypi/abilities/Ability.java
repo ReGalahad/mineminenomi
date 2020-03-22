@@ -173,7 +173,7 @@ public abstract class Ability extends ForgeRegistryEntry<Ability>
 	private Ability getOriginalAbility(PlayerEntity player)
 	{
 		IAbilityData props = AbilityDataCapability.get(player);
-		return props.getUnlockedAbilities(AbilityCategory.ALL).parallelStream().filter(ability -> ability.getName().equalsIgnoreCase(this.getName())).findFirst().orElse(null);
+		return props.getUnlockedAbilities(AbilityCategory.ALL).stream().filter(ability -> ability.getName().equalsIgnoreCase(this.getName())).findFirst().orElse(null);
 	}
 	
 	protected Ability getSavedAbility(PlayerEntity player)

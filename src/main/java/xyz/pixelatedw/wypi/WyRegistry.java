@@ -169,7 +169,7 @@ public class WyRegistry
 	public static <T extends TileEntity> void registerTileEntity(TileEntityType<T> type, String localizedName)
 	{
 		String resourceName = WyHelper.getResourceName(localizedName);
-
+		
 		TILE_ENTITIES.register(resourceName, () -> type);
 	}
 

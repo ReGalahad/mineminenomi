@@ -22,7 +22,6 @@ import xyz.pixelatedw.wypi.WyRegistry;
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModTileEntities
 {
-
 	public static final TileEntityType ROOM = WyRegistry.createTileEntity(RoomTileEntity::new, ModBlocks.OPE_MID).build(null);
 	public static final TileEntityType TORIKAGO = WyRegistry.createTileEntity(TorikagoTileEntity::new, ModBlocks.STRING_MID).build(null);
 	public static final TileEntityType CUSTOM_SPAWNER = WyRegistry.createTileEntity(CustomSpawnerTileEntity::new, ModBlocks.CUSTOM_SPAWNER).build(null);

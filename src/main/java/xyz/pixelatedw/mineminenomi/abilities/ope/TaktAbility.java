@@ -4,8 +4,8 @@ import java.util.List;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.abilities.ContinuousAbility;
@@ -50,7 +50,7 @@ public class TaktAbility extends ContinuousAbility
 		list.remove(player);
 		list.removeIf(entity -> !DevilFruitsHelper.isEntityInRoom(entity));
 		
-		list.parallelStream().forEach(entity -> 
+		list.stream().forEach(entity -> 
 		{
 			if(entity.posY <= player.posY + 5)
 				entity.setPositionAndUpdate(entity.posX, entity.posY + 0.5, entity.posZ);

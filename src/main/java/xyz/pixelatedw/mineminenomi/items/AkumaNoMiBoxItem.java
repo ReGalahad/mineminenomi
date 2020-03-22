@@ -118,9 +118,18 @@ public class AkumaNoMiBoxItem extends Item
 				return new ActionResult<>(ActionResultType.FAIL, player.getHeldItem(hand));
 			}
 			
-			int i = player.inventory.getSlotFor(new ItemStack(ModItems.KEY));
-			player.inventory.decrStackSize(i, 1);
+			int slot = -1;
+			for(int i = 0; i < player.inventory.getSizeInventory(); ++i)
+			{
+				ItemStack s = player.inventory.getStackInSlot(i);
+				if(s.getItem() == ModItems.KEY)
+					slot = i;
+			}
 			
+			if(slot < 0)
+				return new ActionResult<>(ActionResultType.FAIL, player.getHeldItem(hand));
+			
+			player.inventory.decrStackSize(slot, 1);
 			player.inventory.deleteStack(itemStack);
 			AkumaNoMiItem randomFruit = roulette();
 			boolean isAvailable = true;

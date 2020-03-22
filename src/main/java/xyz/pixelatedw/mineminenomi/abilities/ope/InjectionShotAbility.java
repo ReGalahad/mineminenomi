@@ -9,9 +9,9 @@ import net.minecraft.network.play.server.SEntityVelocityPacket;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
-import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.api.helpers.ItemsHelper;
+import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.Ability;
 
@@ -57,7 +57,7 @@ public class InjectionShotAbility extends Ability
 			List<LivingEntity> list = WyHelper.getEntitiesNear(player.getPosition(), player.world, 1.6);
 			list.remove(player);
 
-			list.parallelStream().forEach(entity ->
+			list.stream().forEach(entity ->
 			{
 				entity.attackEntityFrom(DamageSource.causePlayerDamage(player), 20);
 				entity.addPotionEffect(new EffectInstance(Effects.POISON, 10 * 20, 0));

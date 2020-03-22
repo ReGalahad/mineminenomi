@@ -33,7 +33,7 @@ public class WhiteStrikeAbility extends Ability
 		List<LivingEntity> targets = WyHelper.<LivingEntity>getEntitiesNear(player.getPosition(), player.world, 10, LivingEntity.class);
 		targets.remove(player);
 		
-		targets.parallelStream().forEach(entity -> 
+		targets.stream().forEach(entity -> 
 		{
 			entity.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 350, 2));
 			entity.addPotionEffect(new EffectInstance(Effects.WEAKNESS, 350, 2));

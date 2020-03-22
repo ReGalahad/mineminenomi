@@ -10,6 +10,7 @@ import net.minecraft.entity.item.FallingBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
@@ -102,8 +103,9 @@ public class ShimaYurashiAbility extends ChargeableAbility
 		targets.removeIf(entity -> !entity.onGround);
 		targets.remove(player);
 
-		targets.parallelStream().filter(target -> target != null && target.isAlive()).forEach(target ->
+		targets.stream().filter(target -> target != null && target.isAlive()).forEach(target ->
 		{
+			target.attackEntityFrom(DamageSource.MAGIC, 10);
 			target.setMotion(0, 2, 0);
 			target.velocityChanged = true;			
 		});

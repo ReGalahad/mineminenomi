@@ -150,7 +150,7 @@ public class SelectHotbarAbilitiesScreen extends Screen
 				updateScreen();
 			}));
 		}
-		Ability abl = this.abilityDataProps.getUnlockedAbilities(AbilityCategory.RACIAL).parallelStream().findFirst().orElse(null);
+		Ability abl = this.abilityDataProps.getUnlockedAbilities(AbilityCategory.RACIAL).stream().findFirst().orElse(null);
 		if (abl != null)
 		{
 			this.addButton(new NoTextureButton((posX - 280) / 2, (posY - 140) / 2, 27, 25, "", b ->
@@ -159,7 +159,7 @@ public class SelectHotbarAbilitiesScreen extends Screen
 				updateScreen();
 			}));
 		}
-		abl = this.abilityDataProps.getUnlockedAbilities(AbilityCategory.HAKI).parallelStream().findFirst().orElse(null);
+		abl = this.abilityDataProps.getUnlockedAbilities(AbilityCategory.HAKI).stream().findFirst().orElse(null);
 		if (abl != null)
 		{
 			this.addButton(new NoTextureButton((posX - 280) / 2, (posY - 80) / 2, 27, 25, "", b ->

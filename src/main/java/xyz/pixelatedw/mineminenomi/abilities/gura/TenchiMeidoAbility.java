@@ -45,7 +45,7 @@ public class TenchiMeidoAbility extends ChargeableAbility
 		targets.removeIf(entity -> !entity.onGround);
 		targets.remove(player);
 		
-		targets.parallelStream().filter(target -> target != null && target.isAlive()).forEach(target -> 
+		targets.stream().filter(target -> target != null && target.isAlive()).forEach(target -> 
 		{
 			target.setMotion(0, 3, 0);
 			target.velocityChanged = true;

@@ -32,7 +32,7 @@ public class FlashAbility extends Ability
 		List<LivingEntity> list = WyHelper.<LivingEntity>getEntitiesNear(player.getPosition(), player.world, 10);
 		list.remove(player);
 		
-		list.parallelStream().forEach(entity -> 
+		list.stream().forEach(entity -> 
 		{
 			entity.addPotionEffect(new EffectInstance(Effects.BLINDNESS, 7 * 20, 3));
 			entity.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 7 * 20, 1));
