@@ -4,10 +4,10 @@ import java.util.Random;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
+import xyz.pixelatedw.wypi.WyHelper;
 
 public class ChiyupopoParticleEffect extends ParticleEffect
 {
@@ -34,9 +34,9 @@ public class ChiyupopoParticleEffect extends ParticleEffect
 				motionZ = z / 4;
 				
 				SimpleParticle cp = new SimpleParticle(world, ModResources.CHIYU,
-						posX + (x * 1.25) + WyMathHelper.randomDouble(), 
+						posX + (x * 1.25) + WyHelper.randomDouble(), 
 						posY + y,
-						posZ + (z * 1.25) + WyMathHelper.randomDouble(), 
+						posZ + (z * 1.25) + WyHelper.randomDouble(), 
 						motionX,
 						motionY,
 						motionZ)
@@ -45,9 +45,9 @@ public class ChiyupopoParticleEffect extends ParticleEffect
 				Minecraft.getInstance().particles.addEffect(cp);
 
 				cp = new SimpleParticle(world, ModResources.CHIYU,
-						posX + (x * 2.0) + WyMathHelper.randomDouble(), 
+						posX + (x * 2.0) + WyHelper.randomDouble(), 
 						posY + y,
-						posZ + (z * 2.0) + WyMathHelper.randomDouble(), 
+						posZ + (z * 2.0) + WyHelper.randomDouble(), 
 						motionX,
 						motionY,
 						motionZ)
@@ -56,9 +56,9 @@ public class ChiyupopoParticleEffect extends ParticleEffect
 				Minecraft.getInstance().particles.addEffect(cp);
 				
 				cp = new SimpleParticle(world, ModResources.CHIYU,
-						posX + (x * 3.25) + WyMathHelper.randomDouble(), 
+						posX + (x * 3.25) + WyHelper.randomDouble(), 
 						posY + y,
-						posZ + (z * 3.25) + WyMathHelper.randomDouble(), 
+						posZ + (z * 3.25) + WyHelper.randomDouble(), 
 						motionX,
 						motionY + 0.1,
 						motionZ)

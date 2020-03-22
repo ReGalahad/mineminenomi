@@ -54,7 +54,7 @@ public class ModFeatures
 						new OreFeatureConfig
 						(
 							OreFeatureConfig.FillerBlockType.NATURAL_STONE,
-							ModBlocks.kairosekiOre.getDefaultState(),
+							ModBlocks.KAIROSEKI_ORE.getDefaultState(),
 							6
 						),
 						Placement.COUNT_RANGE,

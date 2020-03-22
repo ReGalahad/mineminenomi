@@ -14,7 +14,7 @@
  * import xyz.pixelatedw.mineminenomi.api.WyHelper;
  * import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
  * import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
- * import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
+ * import xyz.pixelatedw.mineminenomi.api.math.WyHelper;
  * import xyz.pixelatedw.mineminenomi.config.CommonConfig;
  * import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.BakuProjectiles;
  * import xyz.pixelatedw.mineminenomi.init.ModAttributes;
@@ -98,9 +98,9 @@
  * AbilityProjectile proj = new BakuProjectiles.BeroCannon(player.world, player, ModAttributes.BERO_CANNON);
  * int distanceBetweenProjectiles = this.loadedProjectiles.size() / 7;
  * proj.setLocationAndAngles(
- * player.posX + WyMathHelper.randomWithRange(-distanceBetweenProjectiles, distanceBetweenProjectiles) + player.world.rand.nextDouble(),
- * (player.posY + 0.3) + WyMathHelper.randomWithRange(0, distanceBetweenProjectiles) + player.world.rand.nextDouble(),
- * player.posZ + WyMathHelper.randomWithRange(-distanceBetweenProjectiles, distanceBetweenProjectiles) + player.world.rand.nextDouble(),
+ * player.posX + WyHelper.randomWithRange(-distanceBetweenProjectiles, distanceBetweenProjectiles) + player.world.rand.nextDouble(),
+ * (player.posY + 0.3) + WyHelper.randomWithRange(0, distanceBetweenProjectiles) + player.world.rand.nextDouble(),
+ * player.posZ + WyHelper.randomWithRange(-distanceBetweenProjectiles, distanceBetweenProjectiles) + player.world.rand.nextDouble(),
  * 0, 0);
  * player.world.addEntity(proj);
  * proj.shoot(player, player.rotationPitch, player.rotationYaw, 0, 2f, 1);

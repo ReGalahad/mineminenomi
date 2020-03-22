@@ -9,12 +9,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import xyz.pixelatedw.mineminenomi.Env;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
-import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
-import xyz.pixelatedw.mineminenomi.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
@@ -22,11 +16,15 @@ import xyz.pixelatedw.mineminenomi.entities.mobs.GenericNewEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.marines.EntityGenericMarine;
 import xyz.pixelatedw.mineminenomi.events.custom.BountyEvent;
 import xyz.pixelatedw.mineminenomi.events.custom.DorikiEvent;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
 import xyz.pixelatedw.mineminenomi.packets.server.SEntityStatsSyncPacket;
+import xyz.pixelatedw.wypi.APIConfig;
+import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
+import xyz.pixelatedw.wypi.data.ability.IAbilityData;
+import xyz.pixelatedw.wypi.network.WyNetwork;
 
-@Mod.EventBusSubscriber(modid = Env.PROJECT_ID)
+@Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class EventsOnGain
 {
 
@@ -113,7 +111,7 @@ public class EventsOnGain
 				//	abilityProps.getHotbarAbilityFromSlot(i).reset();
 			}
 
-			ModNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), props), (ServerPlayerEntity) player);
+			WyNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), props), (ServerPlayerEntity) player);
 		}
 
 		if (event.getSource().getTrueSource() instanceof PlayerEntity)
@@ -168,9 +166,6 @@ public class EventsOnGain
 
 					plusBounty = (entity.getDoriki() * 2) + rng;
 					plusBelly = entity.getBelly() + rng;
-
-					if (!player.world.isRemote && !player.isCreative())
-						WyTelemetry.addKillStat(WyHelper.getResourceName(target.getClass().getSimpleName()).replace("entity", ""), target.getClass().getSimpleName().replace("Entity", ""), 1);
 				}
 				else
 				{
@@ -220,7 +215,7 @@ public class EventsOnGain
 
 			}
 
-			ModNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), props), (ServerPlayerEntity) player);
+			WyNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), props), (ServerPlayerEntity) player);
 		}
 	}
 

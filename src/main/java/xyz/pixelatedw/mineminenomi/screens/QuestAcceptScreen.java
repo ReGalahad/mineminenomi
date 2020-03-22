@@ -1,29 +1,12 @@
 package xyz.pixelatedw.mineminenomi.screens;
 
-import org.lwjgl.opengl.GL11;
-
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.client.config.GuiUtils;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.data.quest.IQuestData;
-import xyz.pixelatedw.mineminenomi.api.data.quest.QuestDataCapability;
-import xyz.pixelatedw.mineminenomi.api.network.packets.client.CQuestDataSyncPacket;
-import xyz.pixelatedw.mineminenomi.api.quests.Quest;
-import xyz.pixelatedw.mineminenomi.init.ModI18n;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
-import xyz.pixelatedw.mineminenomi.init.ModResources;
-import xyz.pixelatedw.mineminenomi.screens.extra.NoTextureButton;
 
 @OnlyIn(Dist.CLIENT)
-public class QuestAcceptScreen extends Screen
+public class QuestAcceptScreen
 {
+	/*
 	private PlayerEntity player;
 	private IQuestData questProps;
 	private Quest currentQuestToDisplay;
@@ -120,4 +103,5 @@ public class QuestAcceptScreen extends Screen
 	{
 		return false;
 	}
+	*/
 }

@@ -1,10 +1,7 @@
 package xyz.pixelatedw.mineminenomi.init;
 
-import java.util.List;
-
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.WantedPosterPackageTileEntity;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.WantedPosterTileEntity;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.dials.AxeDialTileEntity;
@@ -15,9 +12,9 @@ import xyz.pixelatedw.mineminenomi.blocks.tileentities.dials.FlashDialTileEntity
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.dials.ImpactDialTileEntity;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.dials.MilkyDialTileEntity;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.dials.RejectDialTileEntity;
+import xyz.pixelatedw.mineminenomi.entities.ChargingUrsusShockEntity;
 import xyz.pixelatedw.mineminenomi.entities.VivreCardEntity;
 import xyz.pixelatedw.mineminenomi.entities.WantedPosterPackageEntity;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.ExtraProjectiles.EntityCloud;
 import xyz.pixelatedw.mineminenomi.entities.mobs.bandits.EntityBanditWithSword;
 import xyz.pixelatedw.mineminenomi.entities.mobs.marines.EntityMarineCaptain;
 import xyz.pixelatedw.mineminenomi.entities.mobs.marines.EntityMarineWithGun;
@@ -28,6 +25,7 @@ import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityPirateCaptain;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityPirateWithGun;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityPirateWithSword;
 import xyz.pixelatedw.mineminenomi.entities.mobs.quest.givers.DojoSenseiEntity;
+import xyz.pixelatedw.mineminenomi.entities.projectiles.extra.EntityCloud;
 import xyz.pixelatedw.mineminenomi.models.blocks.Dial01Model;
 import xyz.pixelatedw.mineminenomi.models.blocks.Dial02Model;
 import xyz.pixelatedw.mineminenomi.models.blocks.Dial03Model;
@@ -38,6 +36,7 @@ import xyz.pixelatedw.mineminenomi.renderers.blocks.DialTileEntityRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.blocks.WantedPosterTileEntityRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.blocks.WantedPostersPackageTileEntityRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.BlackKnightRenderer;
+import xyz.pixelatedw.mineminenomi.renderers.entities.ChargingUrsusShockRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.CloudRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.DoppelmanRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.GenericMobRenderer;
@@ -48,15 +47,6 @@ public class ModRenderers
 {
     public static void registerRenderers() 
     {
-    	// Projectiles
-    	for(List<AbilityProjectile.Data> list : ModDevilFruits.ALL_PROJECTILES)
-    	{
-    		list.forEach((value) -> 
-    		{
-    			RenderingRegistry.registerEntityRenderingHandler(value.getEntityClass(), value.getFactory() );			
-    		});
-    	}
-    	
     	//TESRs
     	// Dials
     	ClientRegistry.bindTileEntitySpecialRenderer(AxeDialTileEntity.class, new DialTileEntityRenderer(new Dial01Model(), "axe"));
@@ -72,7 +62,7 @@ public class ModRenderers
     	ClientRegistry.bindTileEntitySpecialRenderer(WantedPosterPackageTileEntity.class, new WantedPostersPackageTileEntityRenderer());
     	ClientRegistry.bindTileEntitySpecialRenderer(WantedPosterTileEntity.class, new WantedPosterTileEntityRenderer());
 
-    	// Mobs
+    	// Entities
     	// Marines
 		RenderingRegistry.registerEntityRenderingHandler(EntityMarineWithSword.class, new GenericMobRenderer.Factory(new SimpleHumanModel(), 1, null));
 		RenderingRegistry.registerEntityRenderingHandler(EntityMarineWithGun.class, new GenericMobRenderer.Factory(new SimpleHumanModel(), 1, null));
@@ -95,5 +85,6 @@ public class ModRenderers
 		RenderingRegistry.registerEntityRenderingHandler(EntityCloud.class, new CloudRenderer.Factory());
 		RenderingRegistry.registerEntityRenderingHandler(WantedPosterPackageEntity.class, new WantedPosterPackageRenderer.Factory());
 		RenderingRegistry.registerEntityRenderingHandler(VivreCardEntity.class, new VivreCardRenderer.Factory());
+		RenderingRegistry.registerEntityRenderingHandler(ChargingUrsusShockEntity.class, new ChargingUrsusShockRenderer.Factory());
     }
 }

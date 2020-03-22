@@ -11,7 +11,6 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
 
 public class SeaKingMeatItem extends Item
@@ -38,9 +37,6 @@ public class SeaKingMeatItem extends Item
 			player.addPotionEffect(new EffectInstance(Effects.REGENERATION, 100, 0));
 			
 			player.heal(player.getMaxHealth() / 3.0F);
-			
-	    	if(!player.abilities.isCreativeMode)
-	    		WyTelemetry.addMiscStat("seaKingMeatEaten", "Sea King Meat Eaten", 1);
 		}
 		
 		itemStack.shrink(1);

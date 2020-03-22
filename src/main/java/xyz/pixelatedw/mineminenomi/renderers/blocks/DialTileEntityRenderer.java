@@ -6,22 +6,24 @@ import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-import xyz.pixelatedw.mineminenomi.Env;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import xyz.pixelatedw.mineminenomi.models.blocks.Dial01Model;
 import xyz.pixelatedw.mineminenomi.models.blocks.Dial02Model;
 import xyz.pixelatedw.mineminenomi.models.blocks.Dial03Model;
 import xyz.pixelatedw.mineminenomi.models.blocks.Dial04Model;
+import xyz.pixelatedw.wypi.APIConfig;
 
-public class DialTileEntityRenderer  extends TileEntityRenderer
+@OnlyIn(Dist.CLIENT)
+public class DialTileEntityRenderer extends TileEntityRenderer
 {
-	
 	private EntityModel model;
 	private ResourceLocation texture;
 
 	public DialTileEntityRenderer(EntityModel model, String texture)
 	{
 		this.model = model;
-		this.texture = new ResourceLocation(Env.PROJECT_ID + ":textures/models/blocks/" + texture + ".png");
+		this.texture = new ResourceLocation(APIConfig.PROJECT_ID + ":textures/models/blocks/" + texture + ".png");
 	}
 	
 	@Override

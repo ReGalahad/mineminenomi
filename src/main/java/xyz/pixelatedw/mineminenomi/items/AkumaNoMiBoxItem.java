@@ -13,15 +13,14 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.EnumFruitType;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.debug.WyDebug;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
-import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
 import xyz.pixelatedw.mineminenomi.init.ModItems;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
+import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.debug.WyDebug;
 
 public class AkumaNoMiBoxItem extends Item
 {
@@ -47,7 +46,7 @@ public class AkumaNoMiBoxItem extends Item
 				typeModifier = 1.4;
 			else if (df.getType() == EnumFruitType.ZOAN)
 				typeModifier = 1.1;
-			else if (df.getType() == EnumFruitType.MYTHICALZOAN || df.getType() == EnumFruitType.ANCIENTZOAN)
+			else if (df.getType() == EnumFruitType.MYTHICAL_ZOAN || df.getType() == EnumFruitType.ANCIENT_ZOAN)
 				typeModifier = 1.5;
 
 			double totalDamage = 0;
@@ -63,7 +62,7 @@ public class AkumaNoMiBoxItem extends Item
 
 			totalPower *= typeModifier;
 
-			if (df.getType() == EnumFruitType.ANCIENTZOAN || df.getType() == EnumFruitType.MYTHICALZOAN || WyHelper.getResourceName(new TranslationTextComponent(df.getTranslationKey()).getFormattedText()).equalsIgnoreCase("guraguranomi"))
+			if (df.getType() == EnumFruitType.ANCIENT_ZOAN || df.getType() == EnumFruitType.MYTHICAL_ZOAN || WyHelper.getResourceName(new TranslationTextComponent(df.getTranslationKey()).getFormattedText()).equalsIgnoreCase("guraguranomi"))
 			{
 				this.tier3Fruits.add(df);
 			}
@@ -113,24 +112,24 @@ public class AkumaNoMiBoxItem extends Item
 		{
 			ItemStack itemStack = player.getHeldItemMainhand();
 
-			if(!player.inventory.hasItemStack(new ItemStack(ModItems.key)))
+			if(!player.inventory.hasItemStack(new ItemStack(ModItems.KEY)))
 			{
 				WyHelper.sendMsgToPlayer(player, "You need a key !");
 				return new ActionResult<>(ActionResultType.FAIL, player.getHeldItem(hand));
 			}
 			
-			int i = player.inventory.getSlotFor(new ItemStack(ModItems.key));
+			int i = player.inventory.getSlotFor(new ItemStack(ModItems.KEY));
 			player.inventory.decrStackSize(i, 1);
 			
-			WyHelper.removeStackFromInventory(player, itemStack);
+			player.inventory.deleteStack(itemStack);
 			AkumaNoMiItem randomFruit = roulette();
 			boolean isAvailable = true;
-
+			
 			if (CommonConfig.instance.isOneFruitPerWorldEnabled())
 			{
 				ExtendedWorldData worldProps = ExtendedWorldData.get(world);
 				int chanceForNewFruit = 0;
-				while (DevilFruitsHelper.isDevilFruitInWorld(world, randomFruit))
+				while (worldProps.isDevilFruitInWorld(WyHelper.getResourceName(randomFruit.getName().getFormattedText())))
 				{
 					final AkumaNoMiItem inContextFruit = randomFruit;
 					this.tier1Fruits.removeIf(x -> x == inContextFruit);
@@ -157,7 +156,7 @@ public class AkumaNoMiBoxItem extends Item
 			}
 			else
 			{
-				WyHelper.removeStackFromInventory(player, itemStack);
+				player.inventory.deleteStack(itemStack);
 				return new ActionResult<>(ActionResultType.SUCCESS, player.getHeldItem(hand));
 			}			
 		}

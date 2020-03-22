@@ -9,8 +9,8 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.packets.server.SOpenCharacterCreatorScreenPacket;
+import xyz.pixelatedw.wypi.network.WyNetwork;
 
 public class CharacterCreatorItem extends Item
 {
@@ -24,7 +24,7 @@ public class CharacterCreatorItem extends Item
 	public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand)
     {
 		if(!world.isRemote)
-			ModNetwork.sendTo(new SOpenCharacterCreatorScreenPacket(), (ServerPlayerEntity)player);
+			WyNetwork.sendTo(new SOpenCharacterCreatorScreenPacket(), (ServerPlayerEntity)player);
 		return new ActionResult<>(ActionResultType.SUCCESS, player.getHeldItem(hand));
 	}
 

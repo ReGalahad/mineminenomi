@@ -5,12 +5,12 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoBisonHeavy;
+import xyz.pixelatedw.wypi.APIConfig;
 
-@Mod.EventBusSubscriber(modid = Env.PROJECT_ID)
+@Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class UshiBisonPassiveEvents
 {
 
@@ -24,7 +24,7 @@ public class UshiBisonPassiveEvents
 		IDevilFruit props = DevilFruitCapability.get(attacker);
 		LivingEntity attacked = event.getEntityLiving();
 
-		if (!props.getDevilFruit().equalsIgnoreCase("ushiushibison"))
+		if (!props.getDevilFruit().equalsIgnoreCase("ushi_ushi_bison"))
 			return;
 
 		if (props.getZoanPoint().equalsIgnoreCase(ZoanInfoBisonHeavy.FORM))

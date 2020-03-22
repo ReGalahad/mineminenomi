@@ -12,9 +12,8 @@ import net.minecraft.stats.Stats;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.ExtraProjectiles;
+import xyz.pixelatedw.mineminenomi.entities.projectiles.extra.PopGreenProjectile;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
-import xyz.pixelatedw.mineminenomi.init.ModExtraAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModItems;
 
 public class PopGreenBowItem extends BowItem
@@ -42,14 +41,14 @@ public class PopGreenBowItem extends BowItem
 			if (!arrowStack.isEmpty() || flag)
 			{
 				if (arrowStack.isEmpty())
-					arrowStack = new ItemStack(ModItems.popGreen);
+					arrowStack = new ItemStack(ModItems.POP_GREEN);
 
 				float f = getArrowVelocity(i);
 				if (!(f < 0.1D))
 				{
 					if (!world.isRemote)
 					{
-						ExtraProjectiles.PopGreen proj = new ExtraProjectiles.PopGreen(world, entityLiving, ModExtraAttributes.POP_GREEN);
+						PopGreenProjectile proj = new PopGreenProjectile(world, entityLiving);
 						proj.shoot(playerentity, playerentity.rotationPitch, playerentity.rotationYaw, 0.0F, f * 3.0F, 1.0F);
 
 						if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, itemStack) > 0)
@@ -69,7 +68,7 @@ public class PopGreenBowItem extends BowItem
 	@Override
 	public Predicate<ItemStack> getInventoryAmmoPredicate()
 	{
-		return itemStack -> itemStack.getItem() == ModItems.popGreen;
+		return itemStack -> itemStack.getItem() == ModItems.POP_GREEN;
 	}
 
 }

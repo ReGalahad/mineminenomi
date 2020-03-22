@@ -1,9 +1,9 @@
 package xyz.pixelatedw.mineminenomi.entities.zoan;
 
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.models.entities.zoans.PhoenixFullModel;
 import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer.Factory;
+import xyz.pixelatedw.wypi.abilities.Ability;
 
 public class ZoanInfoPhoenixFull extends ZoanInfo
 {

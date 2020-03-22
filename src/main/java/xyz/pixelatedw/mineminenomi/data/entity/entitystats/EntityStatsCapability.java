@@ -7,8 +7,6 @@ import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import xyz.pixelatedw.mineminenomi.api.data.CapabilityProviderSerializable;
 
 public class EntityStatsCapability
 {
@@ -37,7 +35,8 @@ public class EntityStatsCapability
 				props.putString("fightingStyle", instance.getFightingStyle());				
 				props.putBoolean("hasShadow", instance.hasShadow());
 				props.putBoolean("hasHeart", instance.hasHeart());
-				
+				props.putBoolean("isInCombatMode", instance.isInCombatMode());
+
 				return props;
 			}
 
@@ -58,6 +57,8 @@ public class EntityStatsCapability
 				instance.setFightingStyle(props.getString("fightingStyle"));
 				instance.setShadow(props.getBoolean("hasShadow"));
 				instance.setHeart(props.getBoolean("hasHeart"));
+				instance.setCombatMode(props.getBoolean("isInCombatMode"));			
+
 			}
 
 		}, () -> new EntityStatsBase());
@@ -66,10 +67,5 @@ public class EntityStatsCapability
 	public static IEntityStats get(final LivingEntity entity)
 	{
 		return entity.getCapability(INSTANCE, null).orElse(new EntityStatsBase());
-	}
-
-	public static ICapabilityProvider createProvider(final IEntityStats data)
-	{
-		return new CapabilityProviderSerializable<>(INSTANCE, null, data);
 	}
 }

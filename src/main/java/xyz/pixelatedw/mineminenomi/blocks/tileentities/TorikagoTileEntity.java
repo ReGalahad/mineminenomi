@@ -8,22 +8,19 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
+import xyz.pixelatedw.mineminenomi.init.ModTileEntities;
+import xyz.pixelatedw.wypi.WyHelper;
 
 public class TorikagoTileEntity extends TileEntity implements ITickableTileEntity
 {
 
-	public static final TileEntityType TILE_ENTITY = WyRegistry.registerTileEntity("torikago", TorikagoTileEntity::new, ModBlocks.stringMid);
-
 	public TorikagoTileEntity()
 	{
-		super(TILE_ENTITY);
+		super(ModTileEntities.TORIKAGO);
 	}
 
 	@Override
@@ -31,9 +28,9 @@ public class TorikagoTileEntity extends TileEntity implements ITickableTileEntit
 	{
 		if (!this.world.isRemote)
 		{
-			List<LivingEntity> nearbyPlayers = WyHelper.getEntitiesNear(this, 28).stream().filter(x ->
+			List<LivingEntity> nearbyPlayers = WyHelper.<LivingEntity>getEntitiesNear(this.getPos(), this.world, 28).stream().filter(x ->
 			{
-				if (x instanceof PlayerEntity && DevilFruitCapability.get(x).getDevilFruit().equalsIgnoreCase("itoito"))
+				if (x instanceof PlayerEntity && DevilFruitCapability.get(x).getDevilFruit().equalsIgnoreCase("ito_ito"))
 					return true;
 
 				return false;
@@ -51,7 +48,7 @@ public class TorikagoTileEntity extends TileEntity implements ITickableTileEntit
 		for (int i = -22; i < 22; i++)
 			for (int k = -21; k < 21; k++)
 				for (int j = -22; j < 22; j++)
-					if (world.getBlockState(new BlockPos(this.getPos().getX() + i, this.getPos().getY() + k, this.getPos().getZ() + j)).getBlock() == ModBlocks.stringWall)
+					if (world.getBlockState(new BlockPos(this.getPos().getX() + i, this.getPos().getY() + k, this.getPos().getZ() + j)).getBlock() == ModBlocks.STRING_WALL)
 						world.setBlockState(new BlockPos(this.getPos().getX() + i, this.getPos().getY() + k, this.getPos().getZ() + j), Blocks.AIR.getDefaultState());
 		world.setBlockState(new BlockPos(this.getPos().getX(), this.getPos().getY(), this.getPos().getZ()), Blocks.AIR.getDefaultState());
 	}

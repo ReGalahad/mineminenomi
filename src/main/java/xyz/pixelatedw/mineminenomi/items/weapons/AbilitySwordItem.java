@@ -4,12 +4,13 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
-import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
-import xyz.pixelatedw.mineminenomi.init.ModAttributes;
+import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
+import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.abilities.ItemAbility;
+import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
+import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 
 public class AbilitySwordItem extends CoreSwordItem
 {
@@ -29,30 +30,14 @@ public class AbilitySwordItem extends CoreSwordItem
 			IDevilFruit devilFruitProps = DevilFruitCapability.get(owner);
 			IAbilityData abilityDataProps = AbilityDataCapability.get(owner);
 
-			if (devilFruitProps.getDevilFruit().equals("hiehie") || devilFruitProps.getDevilFruit().equals("pikapika") || devilFruitProps.getDevilFruit().equals("noronoro") || devilFruitProps.getDevilFruit().equals("dorudoru") || devilFruitProps.getDevilFruit().equals("gasugasu") || devilFruitProps.getDevilFruit().equals("yukiyuki"))
+			for(Ability ability : abilityDataProps.getEquippedAbilities(AbilityCategory.ALL))
 			{
-				for (int i = 0; i < abilityDataProps.getHotbarAbilities().length; i++)
-				{
-					if (abilityDataProps.getAbilityInSlot(i) != null && abilityDataProps.getAbilityInSlot(i).isPassiveActive())
-					{
-						String ablName = WyHelper.getResourceName(abilityDataProps.getAbilityInSlot(i).getName());
-						if (ablName.equals(WyHelper.getResourceName(ModAttributes.ICE_SABER.getAttributeName())))
-							WyHelper.removeStackFromInventory(owner, itemStack);
-						else if (ablName.equals(WyHelper.getResourceName(ModAttributes.AMA_NO_MURAKUMO.getAttributeName())))
-							WyHelper.removeStackFromInventory(owner, itemStack);
-						else if (ablName.equals(WyHelper.getResourceName(ModAttributes.NORO_NORO_BEAM_SWORD.getAttributeName())))
-							WyHelper.removeStackFromInventory(owner, itemStack);
-						else if (ablName.equals(WyHelper.getResourceName(ModAttributes.DORU_DORU_ARTS_KEN.getAttributeName())))
-							WyHelper.removeStackFromInventory(owner, itemStack);
-						else if (ablName.equals(WyHelper.getResourceName(ModAttributes.BLUE_SWORD.getAttributeName())))
-							WyHelper.removeStackFromInventory(owner, itemStack);
-						else if (ablName.equals(WyHelper.getResourceName(ModAttributes.TABIRA_YUKI.getAttributeName())))
-							WyHelper.removeStackFromInventory(owner, itemStack);
-					}
-				}
+				if(ability == null || !(ability instanceof ItemAbility))
+					continue;
+
+				if(!(ability instanceof ItemAbility) || !ability.isContinuous() || !((ItemAbility) ability).canBeActive(owner))
+					owner.inventory.deleteStack(itemStack);
 			}
-			else
-				WyHelper.removeStackFromInventory(owner, itemStack);
 		}
 	}
 

@@ -21,17 +21,15 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.api.quests.extra.Questline;
 import xyz.pixelatedw.mineminenomi.entities.mobs.GenericNewEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.bandits.EntityGenericBandit;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityGenericPirate;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
-import xyz.pixelatedw.mineminenomi.init.ModQuestlines;
 import xyz.pixelatedw.mineminenomi.init.ModWeapons;
 
 public class DojoSenseiEntity extends GenericNewEntity implements IQuestGiver
 {
-	protected Item[] swords = new Item[] {ModWeapons.sandaiKitetsu, ModWeapons.nidaiKitetsu, ModWeapons.wadoIchimonji, Items.DIAMOND_SWORD};
+	protected Item[] swords = new Item[] {ModWeapons.SANDAI_KITETSU, ModWeapons.NIDAI_KITESTU, ModWeapons.WADO_ICHIMONJI, Items.DIAMOND_SWORD};
 	
 	public DojoSenseiEntity(World worldIn)
 	{
@@ -99,10 +97,10 @@ public class DojoSenseiEntity extends GenericNewEntity implements IQuestGiver
 
 		return spawnData;
 	}
-
+/*
 	@Override
 	public Questline getQuestline()
 	{
 		return ModQuestlines.SWORDSMAN_PROGRESSION;
-	}
+	}*/
 }

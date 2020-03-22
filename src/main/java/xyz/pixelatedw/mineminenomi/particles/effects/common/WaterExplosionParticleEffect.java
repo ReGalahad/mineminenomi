@@ -2,8 +2,8 @@ package xyz.pixelatedw.mineminenomi.particles.effects.common;
 
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
+import xyz.pixelatedw.wypi.WyHelper;
 
 public class WaterExplosionParticleEffect extends ParticleEffect
 {
@@ -13,12 +13,12 @@ public class WaterExplosionParticleEffect extends ParticleEffect
 	{	
 		for (int i = 0; i < 512; i++)
 		{
-	        motionX = WyMathHelper.randomWithRange(-5, 5) + WyMathHelper.randomDouble();
-	        motionY = WyMathHelper.randomWithRange(-5, 5) + WyMathHelper.randomDouble();
-			motionZ = WyMathHelper.randomWithRange(-5, 5) + WyMathHelper.randomDouble();
+	        motionX = WyHelper.randomWithRange(-5, 5) + WyHelper.randomDouble();
+	        motionY = WyHelper.randomWithRange(-5, 5) + WyHelper.randomDouble();
+			motionZ = WyHelper.randomWithRange(-5, 5) + WyHelper.randomDouble();
 	        
             double middlePoint = 0.25;
-            middlePoint *= (WyMathHelper.randomDouble() * 2) + 0.3F;
+            middlePoint *= (WyHelper.randomDouble() * 2) + 0.3F;
 	        
 	        motionX *= middlePoint / 2;
 	        motionY *= middlePoint / 2;

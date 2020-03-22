@@ -10,8 +10,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
-import xyz.pixelatedw.mineminenomi.api.abilities.CubeModel;
 import xyz.pixelatedw.mineminenomi.entities.VivreCardEntity;
+import xyz.pixelatedw.wypi.abilities.models.CubeModel;
 
 @OnlyIn(Dist.CLIENT)
 public class VivreCardRenderer extends EntityRenderer<VivreCardEntity>

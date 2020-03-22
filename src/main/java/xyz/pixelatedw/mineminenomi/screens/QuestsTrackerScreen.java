@@ -1,32 +1,12 @@
 package xyz.pixelatedw.mineminenomi.screens;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.lwjgl.opengl.GL11;
-
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.client.config.GuiUtils;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.data.quest.IQuestData;
-import xyz.pixelatedw.mineminenomi.api.data.quest.QuestDataCapability;
-import xyz.pixelatedw.mineminenomi.api.debug.WyDebug;
-import xyz.pixelatedw.mineminenomi.api.quests.Quest;
-import xyz.pixelatedw.mineminenomi.init.ModI18n;
-import xyz.pixelatedw.mineminenomi.init.ModResources;
-import xyz.pixelatedw.mineminenomi.init.ModValues;
-import xyz.pixelatedw.mineminenomi.screens.extra.NoTextureButton;
 
 @OnlyIn(Dist.CLIENT)
-public class QuestsTrackerScreen extends Screen
+public class QuestsTrackerScreen
 {
+	/*
 	private PlayerEntity player;
 	private IQuestData questProps;
 	private int questIndex = 0;
@@ -170,4 +150,5 @@ public class QuestsTrackerScreen extends Screen
 	{
 		return false;
 	}
+	*/
 }

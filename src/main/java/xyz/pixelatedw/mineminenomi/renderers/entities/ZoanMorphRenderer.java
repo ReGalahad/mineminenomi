@@ -19,18 +19,21 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.HandSide;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
-import xyz.pixelatedw.mineminenomi.Env;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.MorphsHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfo;
-import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.models.entities.zoans.ZoanMorphModel;
+import xyz.pixelatedw.wypi.APIConfig;
+import xyz.pixelatedw.wypi.WyHelper;
 
+@OnlyIn(Dist.CLIENT)
 public class ZoanMorphRenderer extends LivingRenderer
 {
-	private ResourceLocation texture = new ResourceLocation(Env.PROJECT_ID, "textures/models/null.png");
+	private ResourceLocation texture = new ResourceLocation(APIConfig.PROJECT_ID, "textures/models/null.png");
 	private EntityModel model;
 	private double scale;
 	private float offset[] = new float[3];
@@ -54,7 +57,7 @@ public class ZoanMorphRenderer extends LivingRenderer
 		this.shadowSize = 0;
 		this.model = model;
 		this.scale = scale;
-		this.texture = new ResourceLocation(Env.PROJECT_ID, "textures/models/zoanmorph/" + texture + ".png");
+		this.texture = new ResourceLocation(APIConfig.PROJECT_ID, "textures/models/zoanmorph/" + texture + ".png");
 		this.offset = offset;
 		this.addLayer(new HeldItemLayer<>(this));
 	}
@@ -108,7 +111,7 @@ public class ZoanMorphRenderer extends LivingRenderer
 		{
 			GL11.glDisable(GL11.GL_CULL_FACE);
 			RendererModel arm = ((ZoanMorphModel) this.model).getArmRenderer();
-			ZoanInfo info = DevilFruitsHelper.getZoanInfo((PlayerEntity) entity);
+			ZoanInfo info = MorphsHelper.getZoanInfo((PlayerEntity) entity);
 
 			if (arm != null)
 			{
@@ -147,7 +150,7 @@ public class ZoanMorphRenderer extends LivingRenderer
 				if (props == null || WyHelper.isNullOrEmpty(props.getZoanPoint()))
 					return;
 
-				ZoanInfo info = DevilFruitsHelper.getZoanInfo((PlayerEntity) entity);
+				ZoanInfo info = MorphsHelper.getZoanInfo((PlayerEntity) entity);
 
 				//this.translateToHand(HandSide.LEFT);
 				GlStateManager.rotatef(-180.0F, 1.0F, 0.0F, 0.0F);

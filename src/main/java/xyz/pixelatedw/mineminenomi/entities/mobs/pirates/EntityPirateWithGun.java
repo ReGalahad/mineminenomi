@@ -15,11 +15,10 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.ExtraProjectiles;
+import xyz.pixelatedw.mineminenomi.entities.projectiles.extra.NormalBulletProjectile;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
-import xyz.pixelatedw.mineminenomi.init.ModExtraAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModWeapons;
+import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 
 public class EntityPirateWithGun extends EntityGenericPirate implements IRangedAttackMob
 {
@@ -61,7 +60,7 @@ public class EntityPirateWithGun extends EntityGenericPirate implements IRangedA
 	{
 		spawnData = super.onInitialSpawn(world, difficulty, reason, spawnData, dataTag);
 		
-		this.setItemStackToSlot(EquipmentSlotType.MAINHAND, new ItemStack(ModWeapons.flintlock));
+		this.setItemStackToSlot(EquipmentSlotType.MAINHAND, new ItemStack(ModWeapons.FLINTLOCK));
 
 		return spawnData;
 	}
@@ -69,7 +68,7 @@ public class EntityPirateWithGun extends EntityGenericPirate implements IRangedA
 	@Override
 	public void attackEntityWithRangedAttack(LivingEntity target, float distance)
 	{
-		AbilityProjectile proj = new ExtraProjectiles.NormalBullet(this.world, this, ModExtraAttributes.NORMAL_BULLET);
+		AbilityProjectileEntity proj = new NormalBulletProjectile(this.world, this);
 		
 		double velX = target.posX - this.posX;
 		double velY = target.getBoundingBox().minY + this.getAttackTarget().getHeight() / 3.0F - (this.posY + this.getHeight());

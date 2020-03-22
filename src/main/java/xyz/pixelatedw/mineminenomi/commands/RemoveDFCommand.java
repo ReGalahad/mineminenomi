@@ -11,14 +11,14 @@ import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.command.arguments.EntityArgument;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability.Category;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
-import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
-import xyz.pixelatedw.mineminenomi.api.network.packets.server.SAbilityDataSyncPacket;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
-import xyz.pixelatedw.mineminenomi.packets.server.SDevilFruitSyncPacket;
+import xyz.pixelatedw.mineminenomi.packets.server.SSyncDevilFruitPacket;
+import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
+import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
+import xyz.pixelatedw.wypi.data.ability.IAbilityData;
+import xyz.pixelatedw.wypi.network.WyNetwork;
+import xyz.pixelatedw.wypi.network.packets.server.SSyncAbilityDataPacket;
 
 public class RemoveDFCommand
 {
@@ -46,13 +46,13 @@ public class RemoveDFCommand
 			devilFruitProps.setZoanPoint("");
 			devilFruitProps.setYamiPower(false);
 			
-			abilityDataProps.clearAbilities(Category.ALL);
-			abilityDataProps.clearHotbar();
+			abilityDataProps.clearUnlockedAbilities(AbilityCategory.ALL);
+			abilityDataProps.clearEquippedAbilities(AbilityCategory.ALL);
 
 			player.clearActivePotions();
 			
-			ModNetwork.sendTo(new SDevilFruitSyncPacket(player.getEntityId(), devilFruitProps), player);
-			ModNetwork.sendTo(new SAbilityDataSyncPacket(player.getEntityId(), abilityDataProps), player);
+			WyNetwork.sendTo(new SSyncDevilFruitPacket(player.getEntityId(), devilFruitProps), player);
+			WyNetwork.sendTo(new SSyncAbilityDataPacket(abilityDataProps), player);
 		}
 
 		return 1;		

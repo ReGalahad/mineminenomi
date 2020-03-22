@@ -16,8 +16,8 @@ import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.AblProtectionTileEntity;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.packets.server.SViewProtectionPacket;
+import xyz.pixelatedw.wypi.network.WyNetwork;
 
 public class AbilityProtectionCommand
 {
@@ -72,7 +72,7 @@ public class AbilityProtectionCommand
 			if (te == null || !(te instanceof AblProtectionTileEntity))
 				continue;
 
-			ModNetwork.sendTo(new SViewProtectionPacket(state, midPoint, te.getSize()), player);
+			WyNetwork.sendTo(new SViewProtectionPacket(state, midPoint, te.getSize()), player);
 		}
 		return 1;
 	}
@@ -85,7 +85,7 @@ public class AbilityProtectionCommand
 		BlockPos pos = new BlockPos(vec);
 		
 		//world.setBlockState(pos, Blocks.BLUE_STAINED_GLASS.getDefaultState());
-		world.setBlockState(pos, ModBlocks.abilityProtection.getDefaultState());
+		world.setBlockState(pos, ModBlocks.ABILITY_PROTECTION.getDefaultState());
 		((AblProtectionTileEntity)world.getTileEntity(pos)).setupProtection(world, pos, size);
 		
 		return 1;

@@ -1,6 +1,6 @@
 package xyz.pixelatedw.mineminenomi.data.entity.devilfruit;
 
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
+import xyz.pixelatedw.wypi.WyHelper;
 
 public class DevilFruitBase implements IDevilFruit
 {
@@ -61,5 +61,4 @@ public class DevilFruitBase implements IDevilFruit
 	{
 		this.zoanPoint = value;
 	}
-
 }

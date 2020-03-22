@@ -20,6 +20,9 @@ public class GenericArmorMaterial implements IArmorMaterial
 	private final int maxDamageFactor;
 	private final int[] damageReductionAmountArray;
 	private final int enchantability;
+	private final SoundEvent soundEvent;
+	private final float toughness;
+	private final LazyLoadBase<Ingredient> repairMaterial;
 
 	public GenericArmorMaterial(String name, int maxDamageFactor, int[] damageReductionAmountArray, int enchantability, SoundEvent soundEvent, float toughness, Supplier<Ingredient> supplier)
 	{
@@ -32,50 +35,46 @@ public class GenericArmorMaterial implements IArmorMaterial
 		this.repairMaterial = new LazyLoadBase<Ingredient>(supplier);
 	}
 
-	private final SoundEvent soundEvent;
-	private final float toughness;
-	private final LazyLoadBase<Ingredient> repairMaterial;
-
 	@Override
 	public int getDurability(EquipmentSlotType slotIn)
 	{
-		return MAX_DAMAGE[slotIn.getIndex()] * maxDamageFactor;
+		return MAX_DAMAGE[slotIn.getIndex()] * this.maxDamageFactor;
 	}
 
 	@Override
 	public int getDamageReductionAmount(EquipmentSlotType slotIn)
 	{
-		return damageReductionAmountArray[slotIn.getIndex()];
+		return this.damageReductionAmountArray[slotIn.getIndex()];
 	}
 
 	@Override
 	public int getEnchantability()
 	{
-		return enchantability;
+		return this.enchantability;
 	}
 
 	@Override
 	public SoundEvent getSoundEvent()
 	{
-		return soundEvent;
+		return this.soundEvent;
 	}
 
 	@Override
 	public Ingredient getRepairMaterial()
 	{
-		return repairMaterial.getValue();
+		return this.repairMaterial.getValue();
 	}
 
 	@OnlyIn(Dist.CLIENT)
 	@Override
 	public String getName()
 	{
-		return name;
+		return this.name;
 	}
 
 	@Override
 	public float getToughness()
 	{
-		return toughness;
+		return this.toughness;
 	}
 }

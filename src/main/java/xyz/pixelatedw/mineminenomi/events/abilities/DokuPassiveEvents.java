@@ -8,16 +8,16 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import xyz.pixelatedw.mineminenomi.Env;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
-import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoVenomDemon;
+import xyz.pixelatedw.wypi.APIConfig;
+import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
+import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 
-@Mod.EventBusSubscriber(modid = Env.PROJECT_ID)
+@Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class DokuPassiveEvents 
 {
 	@SubscribeEvent
@@ -30,7 +30,7 @@ public class DokuPassiveEvents
 		IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
 		IAbilityData abilityProps = AbilityDataCapability.get(player);
 		
-		if (!devilFruitProps.getDevilFruit().equals("dokudoku"))
+		if (!devilFruitProps.getDevilFruit().equals("doku_doku"))
 			return;
 		
 		if (player.isPotionActive(Effects.POISON))
@@ -59,7 +59,7 @@ public class DokuPassiveEvents
 		LivingEntity attacked = event.getEntityLiving();
 		IEntityStats statPropz = EntityStatsCapability.get(attacked);
 
-		if (!devilFruitProps.getDevilFruit().equalsIgnoreCase("dokudoku"))
+		if (!devilFruitProps.getDevilFruit().equalsIgnoreCase("doku_doku"))
 			return;
 		
 		if(devilFruitProps.getZoanPoint().equalsIgnoreCase(ZoanInfoVenomDemon.FORM))

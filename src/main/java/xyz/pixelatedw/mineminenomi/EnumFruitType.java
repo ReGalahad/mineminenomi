@@ -5,14 +5,14 @@ import net.minecraft.util.text.TextFormatting;
 public enum EnumFruitType 
 {
 
-	PARAMECIA		(TextFormatting.RED			, "Paramecia"),
-	LOGIA			(TextFormatting.YELLOW		, "Logia"),
-	ZOAN			(TextFormatting.GREEN		, "Zoan"),
-	MYTHICALZOAN	(TextFormatting.AQUA		, "Mythical Zoan"),
-	ANCIENTZOAN		(TextFormatting.AQUA		, "Ancient Zoan"),
-	ARTIFICIALLOGIA	(TextFormatting.GOLD		, "Artificial Logia"),
-	ARTIFICIALPARAM	(TextFormatting.GOLD		, "Artificial Paramecia"),
-	ARTIFICIALZOAN	(TextFormatting.GOLD		, "Artificial Zoan");
+	PARAMECIA				(TextFormatting.RED			, "Paramecia"),
+	LOGIA					(TextFormatting.YELLOW		, "Logia"),
+	ZOAN					(TextFormatting.GREEN		, "Zoan"),
+	MYTHICAL_ZOAN			(TextFormatting.AQUA		, "Mythical Zoan"),
+	ANCIENT_ZOAN			(TextFormatting.AQUA		, "Ancient Zoan"),
+	ARTIFICIAL_LOGIA		(TextFormatting.GOLD		, "Artificial Logia"),
+	ARTIFICIAL_PARAMECIA	(TextFormatting.GOLD		, "Artificial Paramecia"),
+	ARTIFICIAL_ZOAN			(TextFormatting.GOLD		, "Artificial Zoan");
 	
 	private TextFormatting color;
 	private String name;

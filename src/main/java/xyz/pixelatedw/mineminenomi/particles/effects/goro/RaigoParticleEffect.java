@@ -1,11 +1,11 @@
 package xyz.pixelatedw.mineminenomi.particles.effects.goro;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
+import net.minecraft.world.server.ServerWorld;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
-import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
+import xyz.pixelatedw.mineminenomi.particles.data.GenericParticleData;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
+import xyz.pixelatedw.wypi.WyHelper;
 
 public class RaigoParticleEffect extends ParticleEffect
 {
@@ -13,44 +13,36 @@ public class RaigoParticleEffect extends ParticleEffect
 	@Override
 	public void spawn(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
 	{
-		for (int i = 0; i < 75; i++)
+		for (int i = 0; i < 55; i++)
 		{
-			double offsetX = WyMathHelper.randomWithRange(-55, 55) + WyMathHelper.randomDouble();
-			double offsetY = WyMathHelper.randomWithRange(-5, 5) + WyMathHelper.randomDouble();
-			double offsetZ = WyMathHelper.randomWithRange(-55, 55) + WyMathHelper.randomDouble();
+			double offsetX = WyHelper.randomWithRange(-55, 55) + WyHelper.randomDouble();
+			double offsetY = 40 + (WyHelper.randomWithRange(-5, 5) + WyHelper.randomDouble());
+			double offsetZ = WyHelper.randomWithRange(-55, 55) + WyHelper.randomDouble();
 
-			SimpleParticle cp = new SimpleParticle(world, ModResources.GORO3,
-					posX + offsetX, 
-					posY + 40 + offsetY,
-					posZ + offsetZ, 
-					0, 0, 0)
-					.setParticleScale(100)
-					.setParticleAge(100);
-			
-			if(i % 2 == 0)
-				cp.setColor(0.4F, 0.4F, 0.4F);
+			GenericParticleData data = new GenericParticleData();
+			data.setTexture(ModResources.GORO3);
+			data.setLife(100);
+			data.setSize(100);
+			WyHelper.spawnParticles(data, (ServerWorld) world, posX + offsetX, posY + offsetY, posZ + offsetZ);
+
+			if (i % 2 == 0)
+				data.setColor(0.4F, 0.4F, 0.4F);
 			else
-				cp.setColor(0.3F, 0.3F, 0.3F);
-			
-			Minecraft.getInstance().particles.addEffect(cp);
+				data.setColor(0.3F, 0.3F, 0.3F);
 		}
-		
+
 		for (int i = 0; i < 25; i++)
 		{
-			double offsetX = WyMathHelper.randomWithRange(-55, 55) + WyMathHelper.randomDouble();
-			double offsetY = WyMathHelper.randomWithRange(-5, 0) + WyMathHelper.randomDouble();
-			double offsetZ = WyMathHelper.randomWithRange(-55, 55) + WyMathHelper.randomDouble();
-			
-			SimpleParticle cp = new SimpleParticle(world, ModResources.GORO2,
-				posX + offsetX, 
-				posY + 30 + offsetY,
-				posZ + offsetZ, 
-				0, 0, 0)
-				.setParticleScale(40)
-				.setParticleAge(10);
-		
-			Minecraft.getInstance().particles.addEffect(cp);
+			double offsetX = WyHelper.randomWithRange(-55, 55) + WyHelper.randomDouble();
+			double offsetY = 30 + (WyHelper.randomWithRange(-5, 0) + WyHelper.randomDouble());
+			double offsetZ = WyHelper.randomWithRange(-55, 55) + WyHelper.randomDouble();
+
+			GenericParticleData data = new GenericParticleData();
+			data.setTexture(ModResources.GORO2);
+			data.setLife(10);
+			data.setSize(40);
+			WyHelper.spawnParticles(data, (ServerWorld) world, posX + offsetX, posY + offsetY, posZ + offsetZ);
 		}
 	}
-	
+
 }

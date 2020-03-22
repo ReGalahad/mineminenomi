@@ -13,7 +13,7 @@ public class ModCreativeTabs
 		@OnlyIn(Dist.CLIENT)
 		public ItemStack createIcon()
 		{
-			return new ItemStack(ModDevilFruits.MeraMeraNoMi);
+			return new ItemStack(ModDevilFruits.MERA_MERA_NO_MI);
 		}
 	};
 
@@ -23,7 +23,7 @@ public class ModCreativeTabs
 		@OnlyIn(Dist.CLIENT)
 		public ItemStack createIcon()
 		{
-			return new ItemStack(ModWeapons.yoru);
+			return new ItemStack(ModWeapons.YORU);
 		}
 	};
 
@@ -33,7 +33,7 @@ public class ModCreativeTabs
 		@OnlyIn(Dist.CLIENT)
 		public ItemStack createIcon()
 		{
-			return new ItemStack(ModItems.kairoseki);
+			return new ItemStack(ModItems.KAIROSEKI);
 		}
 	};
 }

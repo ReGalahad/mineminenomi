@@ -1,15 +1,23 @@
 package xyz.pixelatedw.mineminenomi.events.abilities.common;
 
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import xyz.pixelatedw.mineminenomi.Env;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
-import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
+import xyz.pixelatedw.wypi.APIConfig;
+import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
+import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.abilities.ChargeableAbility;
+import xyz.pixelatedw.wypi.abilities.ContinuousAbility;
+import xyz.pixelatedw.wypi.abilities.PassiveAbility;
+import xyz.pixelatedw.wypi.abilities.PunchAbility;
+import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
+import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 
-@Mod.EventBusSubscriber(modid = Env.PROJECT_ID)
+@Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class AbilitiesEvents
 {
 	@SubscribeEvent
@@ -20,96 +28,47 @@ public class AbilitiesEvents
 			PlayerEntity player = (PlayerEntity) event.getEntityLiving();
 			IAbilityData props = AbilityDataCapability.get(player);
 
-			for (Ability ability : props.getHotbarAbilities())
+			for (Ability ability : props.getEquippedAbilities(AbilityCategory.ALL))
 			{
-				if(ability == null)
+				if (ability == null)
 					continue;
-				//if (ability instanceof PassiveAbility)
-				//	((PassiveAbility) ability).tick(player);
-				//else
-				props.getAbility(ability).cooldown(player);
+
+				if (ability instanceof ChargeableAbility && ability.isCharging())
+					((ChargeableAbility) props.getEquippedAbility(ability)).charging(player);
+
+				if (ability instanceof ContinuousAbility && ability.isContinuous())
+					((ContinuousAbility) props.getEquippedAbility(ability)).tick(player);
+
+				if (ability instanceof PassiveAbility)
+					((PassiveAbility) props.getEquippedAbility(ability)).tick(player);
+
+				if (ability.isOnCooldown())
+					props.getEquippedAbility(ability).cooldown(player);
 			}
 		}
 	}
-	
-/*	@SubscribeEvent
-	public static void onEntityUpdate(LivingUpdateEvent event)
+
+	@SubscribeEvent
+	public static void onLivingDamage(LivingDamageEvent event)
 	{
-		if (event.getEntityLiving() instanceof PlayerEntity)
+		if (event.getSource().getTrueSource() instanceof PlayerEntity)
 		{
-			PlayerEntity player = (PlayerEntity) event.getEntityLiving();
-			IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
-			IEntityStats statProps = EntityStatsCapability.get(player);
-			IAbilityData abilityProps = AbilityDataCapability.get(player);
+			PlayerEntity player = (PlayerEntity) event.getSource().getTrueSource();
+			IAbilityData props = AbilityDataCapability.get(player);
+			LivingEntity target = event.getEntityLiving();
 			ItemStack heldItem = player.getHeldItemMainhand();
-			
-			for (int i = 0; i < abilityProps.countAbilitiesInHotbar(); i++)
+
+			for (Ability ability : props.getEquippedAbilities(AbilityCategory.ALL))
 			{
-				if (abilityProps.getHotbarAbilityFromSlot(i) != null && !abilityProps.getHotbarAbilityFromSlot(i).isOnCooldown() && !abilityProps.getHotbarAbilityFromSlot(i).isPassiveActive() && !abilityProps.getHotbarAbilityFromSlot(i).isCharging())
+				if (ability == null)
+					continue;
+
+				if (ability instanceof PunchAbility && ability.isContinuous() && heldItem.isEmpty())
 				{
-					abilityProps.getHotbarAbilityFromSlot(i).tick(player);
+					float damage = ((PunchAbility) props.getEquippedAbility(ability)).hitEntity(player, target);
+					event.setAmount(damage);
 				}
 			}
 		}
 	}
-
-	@SubscribeEvent
-	public static void onEntityShootProjectile(ArrowLooseEvent event)
-	{
-		if (event.getPlayer() != null)
-		{
-			PlayerEntity player = event.getPlayer();
-			IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
-			IEntityStats statProps = EntityStatsCapability.get(player);
-			IAbilityData abilityProps = AbilityDataCapability.get(player);
-
-			for (int i = 0; i < abilityProps.countAbilitiesInHotbar(); i++)
-			{
-				if (abilityProps.getHotbarAbilityFromSlot(i) != null && !abilityProps.getHotbarAbilityFromSlot(i).isOnCooldown() && abilityProps.getHotbarAbilityFromSlot(i).getAttribute().isPassive() && abilityProps.getHotbarAbilityFromSlot(i).isPassiveActive() && DevilFruitsHelper.isSniperAbility(abilityProps.getHotbarAbilityFromSlot(i)))
-				{
-					abilityProps.getHotbarAbilityFromSlot(i).use(player);
-					event.setCanceled(true);
-				}
-			}
-		}
-	}*/
-/*
-	@SubscribeEvent
-	public void onPlayerAction(PlayerInteractEvent event)
-	{
-		IAbilityData abilityProps = AbilityDataCapability.get(event.getPlayer());
-
-		if(abilityProps.isPassiveActive(ModAttributes.AIR_DOOR))
-			event.setCanceled(true);
-	}
-
-	@SubscribeEvent
-	public void onAttack(AttackEntityEvent event)
-	{
-		IDevilFruit devilFruitProps = DevilFruitCapability.get(event.getPlayer());
-		IAbilityData abilityProps = AbilityDataCapability.get(event.getPlayer());
-
-		if(abilityProps.isPassiveActive(ModAttributes.AIR_DOOR))
-			event.setCanceled(true);
-		
-		if (devilFruitProps.getDevilFruit().equalsIgnoreCase("kachikachi"))
-		{			
-			if(abilityProps.isPassiveActive(ModAttributes.HOT_BOILING_SPECIAL))
-				event.getTarget().setFire(4);
-		}
-
-	}
-
-	@SubscribeEvent
-	public void onDamage(LivingAttackEvent event)
-	{
-		if (event.getEntityLiving() instanceof PlayerEntity)
-		{
-			IAbilityData abilityProps = AbilityDataCapability.get(event.getEntityLiving());
-
-			if(abilityProps.isPassiveActive(ModAttributes.AIR_DOOR))
-				event.setCanceled(true);
-		}
-	}
-*/
 }

@@ -1,11 +1,11 @@
 package xyz.pixelatedw.mineminenomi.particles.effects.goro;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
+import net.minecraft.world.server.ServerWorld;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
-import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
+import xyz.pixelatedw.mineminenomi.particles.data.GenericParticleData;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
+import xyz.pixelatedw.wypi.WyHelper;
 
 public class KariParticleEffect extends ParticleEffect
 {
@@ -15,19 +15,15 @@ public class KariParticleEffect extends ParticleEffect
 	{
 		for (int i = 0; i < 20; i++)
 		{
-			double offsetX = WyMathHelper.randomWithRange(-5, 5) + WyMathHelper.randomDouble();
-			double offsetY = WyMathHelper.randomWithRange(0, 3) + WyMathHelper.randomDouble();
-			double offsetZ = WyMathHelper.randomWithRange(-5, 5) + WyMathHelper.randomDouble();
+			double offsetX = WyHelper.randomWithRange(-5, 5) + WyHelper.randomDouble();
+			double offsetY = WyHelper.randomWithRange(0, 3) + WyHelper.randomDouble();
+			double offsetZ = WyHelper.randomWithRange(-5, 5) + WyHelper.randomDouble();
 			
-			SimpleParticle cp = new SimpleParticle(world, ModResources.GORO2,
-				posX + offsetX, 
-				posY + offsetY,
-				posZ + offsetZ, 
-				0, 0, 0)
-				.setParticleScale(3)
-				.setParticleAge(10);
-		
-			Minecraft.getInstance().particles.addEffect(cp);
+			GenericParticleData data = new GenericParticleData();
+			data.setTexture(ModResources.GORO2);
+			data.setLife(10);
+			data.setSize(7);
+			WyHelper.spawnParticles(data, (ServerWorld) world, posX + offsetX, posY + offsetY, posZ + offsetZ);
 		}
 	}
 	

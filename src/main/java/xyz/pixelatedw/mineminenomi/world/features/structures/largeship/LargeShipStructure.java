@@ -15,16 +15,16 @@ import net.minecraft.world.gen.feature.structure.StructureStart;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.minecraft.world.gen.placement.IPlacementConfig;
 import net.minecraft.world.gen.placement.Placement;
-import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.init.ModFeatures;
+import xyz.pixelatedw.wypi.APIConfig;
 
 public class LargeShipStructure extends ScatteredStructure<NoFeatureConfig>
 {
 	public LargeShipStructure()
 	{
 		super(NoFeatureConfig::deserialize);
-		this.setRegistryName(Env.PROJECT_ID, "large_ship");
+		this.setRegistryName(APIConfig.PROJECT_ID, "large_ship");
 	}
 
 	@Override

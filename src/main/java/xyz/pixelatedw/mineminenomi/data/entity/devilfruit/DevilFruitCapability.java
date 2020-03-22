@@ -7,8 +7,6 @@ import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import xyz.pixelatedw.mineminenomi.api.data.CapabilityProviderSerializable;
 
 public class DevilFruitCapability
 {
@@ -50,10 +48,5 @@ public class DevilFruitCapability
 	public static IDevilFruit get(final LivingEntity entity)
 	{
 		return entity.getCapability(INSTANCE, null).orElse(new DevilFruitBase());
-	}
-
-	public static ICapabilityProvider createProvider(final IDevilFruit data)
-	{
-		return new CapabilityProviderSerializable<>(INSTANCE, null, data);
 	}
 }

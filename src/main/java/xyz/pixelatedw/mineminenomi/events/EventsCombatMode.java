@@ -25,12 +25,7 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.config.GuiUtils;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.WyHelper.Direction;
-import xyz.pixelatedw.mineminenomi.api.WyRenderHelper;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
-import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
+import xyz.pixelatedw.mineminenomi.api.helpers.ModRendererHelper;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
@@ -39,6 +34,10 @@ import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.data.entity.haki.HakiDataCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.haki.IHakiData;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
+import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
+import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 
 @OnlyIn(Dist.CLIENT)
 public class EventsCombatMode extends Screen
@@ -101,7 +100,7 @@ public class EventsCombatMode extends Screen
 			}
 		}
 
-		if (abilityDataProps.isInCombatMode() && event.getType() == ElementType.HOTBAR)
+		if (entityStatsProps.isInCombatMode() && event.getType() == ElementType.HOTBAR)
 		{
 			event.setCanceled(true);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -110,13 +109,13 @@ public class EventsCombatMode extends Screen
 
 			for (int i = 0; i < 8; i++)
 			{
-				Ability abl = abilityDataProps.getAbilityInSlot(i);
+				Ability abl = abilityDataProps.getEquippedAbility(i);
 				GL11.glEnable(GL11.GL_BLEND);
 				if (abl != null && abl.isOnCooldown() && !abl.isDisabled())
 					GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 24, 0, 23, 23, 0);
 				else if (abl != null && abl.isCharging())
 					GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 72, 0, 23, 23, 0);
-				else if (abl != null && abl.isPassiveActive())
+				else if (abl != null && abl.isContinuous())
 					GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 48, 0, 23, 23, 0);
 				else if (abl != null && abl.isDisabled())
 					GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 96, 0, 23, 23, 0);
@@ -141,17 +140,17 @@ public class EventsCombatMode extends Screen
 			for (int i = 0; i < 8; i++)
 			{
 				GLX.glBlendFuncSeparate(770, 771, 1, 0);
-				Ability abl = abilityDataProps.getAbilityInSlot(i);
+				Ability abl = abilityDataProps.getEquippedAbility(i);
 				if (abl != null)
 				{
-					WyRenderHelper.drawAbilityIcon(WyHelper.getResourceName(abl.getName()), (posX - 192 + (i * 50)) / 2, posY - 19, 16, 16);
+					ModRendererHelper.drawAbilityIcon(WyHelper.getResourceName(abl.getName()), (posX - 192 + (i * 50)) / 2, posY - 19, 16, 16);
 				}
 			}
 
 			int trackDistance = 15;
 			if (false) // Ken is Passive Check
 			{
-				List<LivingEntity> nearbyEnemies = WyHelper.getEntitiesNear(player, 15);
+				List<LivingEntity> nearbyEnemies = WyHelper.getEntitiesNear(player.getPosition(), player.world, 15);
 				for (LivingEntity elb : nearbyEnemies)
 				{
 					if (trackMob == null)
@@ -172,7 +171,7 @@ public class EventsCombatMode extends Screen
 
 							text += trackDistance + " blocks";
 													
-							WyRenderHelper.drawEntityOnScreen((posX + 320) / 2, posY - 42, 40, 40, 0, trackMob);
+							WyHelper.drawEntityOnScreen((posX + 320) / 2, posY - 42, 40, 40, 0, trackMob);
 							this.drawCenteredString(mc.fontRenderer, text, (posX + 320) / 2, posY - 32, Color.WHITE.getRGB());
 							
 							GlStateManager.pushMatrix();
@@ -186,7 +185,7 @@ public class EventsCombatMode extends Screen
 	
 								GL11.glTranslated(128, 128, 128);
 								GL11.glScaled(0.2, 0.2, 0);
-	
+	/*
 								Direction playerDir = WyHelper.get8Directions(player);
 	
 								if (playerDir == Direction.SOUTH)
@@ -205,7 +204,7 @@ public class EventsCombatMode extends Screen
 									GL11.glRotated(angle + 180, 0.0, 0.0, 1.0);
 								else if (playerDir == Direction.SOUTH_WEST)
 									GL11.glRotated(angle + 225, 0.0, 0.0, 1.0);
-	
+	*/
 								GL11.glTranslated(-128, -128, -128);
 								GuiUtils.drawTexturedModalRect(0, 0, 0, 0, 256, 256, 0);
 							}

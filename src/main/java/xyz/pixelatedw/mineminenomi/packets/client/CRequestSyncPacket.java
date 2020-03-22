@@ -7,25 +7,19 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
-import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
-import xyz.pixelatedw.mineminenomi.api.data.quest.IQuestData;
-import xyz.pixelatedw.mineminenomi.api.data.quest.QuestDataCapability;
-import xyz.pixelatedw.mineminenomi.api.network.packets.server.SAbilityDataSyncPacket;
-import xyz.pixelatedw.mineminenomi.api.network.packets.server.SQuestDataSyncPacket;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
-import xyz.pixelatedw.mineminenomi.data.entity.extraeffects.ExtraEffectCapability;
-import xyz.pixelatedw.mineminenomi.data.entity.extraeffects.IExtraEffect;
 import xyz.pixelatedw.mineminenomi.data.entity.haki.HakiDataCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.haki.IHakiData;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
-import xyz.pixelatedw.mineminenomi.packets.server.SDevilFruitSyncPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SEntityStatsSyncPacket;
-import xyz.pixelatedw.mineminenomi.packets.server.SExtraEffectSyncPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SHakiDataSyncPacket;
+import xyz.pixelatedw.mineminenomi.packets.server.SSyncDevilFruitPacket;
+import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
+import xyz.pixelatedw.wypi.data.ability.IAbilityData;
+import xyz.pixelatedw.wypi.network.WyNetwork;
+import xyz.pixelatedw.wypi.network.packets.server.SSyncAbilityDataPacket;
 
 public class CRequestSyncPacket
 {
@@ -38,8 +32,8 @@ public class CRequestSyncPacket
 	 	Second Byte = Entity Stats
 	 	Third Byte = Ability Data
 	 	Forth Byte = Haki Data
-	 	Fifth Byte = Extra Effects
-	 	Sixth Byte = Quest Data
+	 	Fifth Byte = 
+	 	Sixth Byte = 
 	 	Seventh Byte = 
 	 	Eight Byte = 
 	 */
@@ -71,26 +65,18 @@ public class CRequestSyncPacket
 				IEntityStats entityStatsProps = EntityStatsCapability.get(player);
 				IAbilityData abilityDataProps = AbilityDataCapability.get(player);
 				IHakiData hakiDataProps = HakiDataCapability.get(player);
-				IExtraEffect extraEffectProps = ExtraEffectCapability.get(player);
-				IQuestData questDataProps = QuestDataCapability.get(player);
 				
 				if(((message.sync >> 0) & 1) == 1)
-					ModNetwork.sendTo(new SDevilFruitSyncPacket(player.getEntityId(), devilFruitProps), (ServerPlayerEntity) player);
+					WyNetwork.sendTo(new SSyncDevilFruitPacket(player.getEntityId(), devilFruitProps), (ServerPlayerEntity) player);
 				
 				if(((message.sync >> 1) & 1) == 1)
-					ModNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), entityStatsProps), (ServerPlayerEntity) player);
+					WyNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), entityStatsProps), (ServerPlayerEntity) player);
 				
 				if(((message.sync >> 2) & 1) == 1)
-					ModNetwork.sendTo(new SAbilityDataSyncPacket(player.getEntityId(), abilityDataProps), (ServerPlayerEntity) player);
+					WyNetwork.sendTo(new SSyncAbilityDataPacket(abilityDataProps), (ServerPlayerEntity) player);
 				
 				if(((message.sync >> 3) & 1) == 1)
-					ModNetwork.sendTo(new SHakiDataSyncPacket(player.getEntityId(), hakiDataProps), (ServerPlayerEntity) player);
-				
-				if(((message.sync >> 4) & 1) == 1)
-					ModNetwork.sendTo(new SExtraEffectSyncPacket(player.getEntityId(), extraEffectProps), (ServerPlayerEntity) player);
-				
-				if(((message.sync >> 5) & 1) == 1)
-					ModNetwork.sendTo(new SQuestDataSyncPacket(player.getEntityId(), questDataProps), (ServerPlayerEntity) player);
+					WyNetwork.sendTo(new SHakiDataSyncPacket(player.getEntityId(), hakiDataProps), (ServerPlayerEntity) player);
 			});			
 		}
 		ctx.get().setPacketHandled(true);

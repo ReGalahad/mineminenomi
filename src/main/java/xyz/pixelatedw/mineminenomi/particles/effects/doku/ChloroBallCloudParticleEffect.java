@@ -2,10 +2,10 @@ package xyz.pixelatedw.mineminenomi.particles.effects.doku;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
+import xyz.pixelatedw.wypi.WyHelper;
 
 public class ChloroBallCloudParticleEffect extends ParticleEffect
 {
@@ -15,12 +15,12 @@ public class ChloroBallCloudParticleEffect extends ParticleEffect
 	{
 		for (int i = 0; i < 64; i++)
 		{
-			double offsetX = WyMathHelper.randomWithRange(-2, 2) + WyMathHelper.randomDouble();
-			double offsetY = WyMathHelper.randomWithRange(-1, 2) + WyMathHelper.randomDouble();
-			double offsetZ = WyMathHelper.randomWithRange(-2, 2) + WyMathHelper.randomDouble();
+			double offsetX = WyHelper.randomWithRange(-2, 2) + WyHelper.randomDouble();
+			double offsetY = WyHelper.randomWithRange(-1, 2) + WyHelper.randomDouble();
+			double offsetZ = WyHelper.randomWithRange(-2, 2) + WyHelper.randomDouble();
 			
-			motionX = WyMathHelper.randomDouble() / 8;
-			motionZ = WyMathHelper.randomDouble() / 8;
+			motionX = WyHelper.randomDouble() / 8;
+			motionZ = WyHelper.randomDouble() / 8;
 			
 			SimpleParticle cp = new SimpleParticle(world, ModResources.DOKU,
 					posX + offsetX, 

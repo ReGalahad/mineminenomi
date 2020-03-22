@@ -1,7 +1,7 @@
 package xyz.pixelatedw.mineminenomi.data.entity.entitystats;
 
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
+import xyz.pixelatedw.wypi.WyHelper;
 
 public class EntityStatsBase implements IEntityStats
 {
@@ -9,7 +9,7 @@ public class EntityStatsBase implements IEntityStats
 	private int doriki, belly, extol, cola = 100, maxCola = 100, ultraCola = 0;
 	private long bounty;
 	private String faction = "", race = "", fightingStyle = "";
-	private boolean hasShadow = true, hasHeart = true;
+	private boolean hasShadow = true, hasHeart = true, inCombatMode = false;
 	
 	@Override
 	public int getDoriki()
@@ -330,5 +330,18 @@ public class EntityStatsBase implements IEntityStats
 	{
 		this.hasHeart = value;
 	}
+	
+	@Override
+	public boolean isInCombatMode()
+	{
+		return this.inCombatMode;
+	}
+
+	@Override
+	public void setCombatMode(boolean value)
+	{
+		this.inCombatMode = value;
+	}
+
 
 }

@@ -12,7 +12,7 @@
  * import xyz.pixelatedw.mineminenomi.api.WyHelper;
  * import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
  * import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
- * import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
+ * import xyz.pixelatedw.mineminenomi.api.math.WyHelper;
  * import xyz.pixelatedw.mineminenomi.config.CommonConfig;
  * import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.JuryoProjectiles;
  * import xyz.pixelatedw.mineminenomi.helpers.ItemsHelper;
@@ -44,9 +44,9 @@
  * {
  * AbilityProjectile proj = new JuryoProjectiles.Moko(player.world, player, ModAttributes.MOKO);
  * proj.setLocationAndAngles(
- * player.posX + WyMathHelper.randomWithRange(-5, 5) + player.world.rand.nextDouble(),
- * (player.posY + 0.3) + WyMathHelper.randomWithRange(0, 5) + player.world.rand.nextDouble(),
- * player.posZ + WyMathHelper.randomWithRange(-5, 5) + player.world.rand.nextDouble(),
+ * player.posX + WyHelper.randomWithRange(-5, 5) + player.world.rand.nextDouble(),
+ * (player.posY + 0.3) + WyHelper.randomWithRange(0, 5) + player.world.rand.nextDouble(),
+ * player.posZ + WyHelper.randomWithRange(-5, 5) + player.world.rand.nextDouble(),
  * 0, 0);
  * player.world.addEntity(proj);
  * }

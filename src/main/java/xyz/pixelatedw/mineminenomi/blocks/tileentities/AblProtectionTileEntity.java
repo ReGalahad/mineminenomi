@@ -5,21 +5,18 @@ import javax.annotation.Nullable;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
-import xyz.pixelatedw.mineminenomi.init.ModBlocks;
+import xyz.pixelatedw.mineminenomi.init.ModTileEntities;
 
 public class AblProtectionTileEntity extends TileEntity
 {
-	public static final TileEntityType TILE_ENTITY = WyRegistry.registerTileEntity("ability_protection", AblProtectionTileEntity::new, ModBlocks.abilityProtection);
 	private int protectedSize = 100;
 	
 	public AblProtectionTileEntity()
 	{
-		super(TILE_ENTITY);
+		super(ModTileEntities.ABILITY_PROTECTION);
 	}
 
 	public void setupProtection(World world, BlockPos pos, int size)

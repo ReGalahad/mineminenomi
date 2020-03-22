@@ -4,9 +4,12 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import xyz.pixelatedw.mineminenomi.models.entities.zoans.YomiModel;
 
+@OnlyIn(Dist.CLIENT)
 public class YomiMorphRenderer extends ZoanMorphRenderer
 {
 

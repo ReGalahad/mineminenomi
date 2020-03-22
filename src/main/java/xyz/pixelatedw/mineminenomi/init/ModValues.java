@@ -18,7 +18,7 @@ public class ModValues
 	public static HashMap<String, String[]> abilityWebAppExtraParams = new HashMap<String, String[]>();
 	public static Object[] KAIROSEKI_ITEMS = new Object[]
 		{
-				ModItems.kairoseki, ModItems.kairosekiBullets, ModItems.denseKairoseki, ModBlocks.kairosekiBlock, ModBlocks.kairosekiOre, ModBlocks.kairosekiBars
+				ModItems.KAIROSEKI, ModItems.KAIROSEKI_BULLET, ModItems.DENSE_KAIROSEKI, ModBlocks.KAIROSEKI, ModBlocks.KAIROSEKI_ORE, ModBlocks.KAIROSEKI_BARS
 		};
 	
 	// Network related stuff

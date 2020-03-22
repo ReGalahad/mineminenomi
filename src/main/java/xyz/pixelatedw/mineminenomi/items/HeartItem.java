@@ -20,11 +20,10 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.packets.server.SEntityStatsSyncPacket;
+import xyz.pixelatedw.wypi.network.WyNetwork;
 
 public class HeartItem extends Item
 {
@@ -46,8 +45,8 @@ public class HeartItem extends Item
 			{
 				IEntityStats props = EntityStatsCapability.get(player);
 				props.setHeart(true);
-				ModNetwork.sendToServer(new SEntityStatsSyncPacket(player.getEntityId(), props));
-				WyHelper.removeStackFromInventory(player, itemStack);
+				WyNetwork.sendToServer(new SEntityStatsSyncPacket(player.getEntityId(), props));
+				player.inventory.deleteStack(itemStack);
 			}
 			else
 			{
@@ -55,7 +54,7 @@ public class HeartItem extends Item
 				owner.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 250, 1));
 				owner.addPotionEffect(new EffectInstance(Effects.NAUSEA, 250, 1));
 				if(owner.getHealth() <= 0)
-					WyHelper.removeStackFromInventory(player, itemStack);
+					player.inventory.deleteStack(itemStack);
 			}
 		}
 		

@@ -12,18 +12,16 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.api.telemetry.WyTelemetry;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.ExtraProjectiles.AxeDialProjectile;
+import xyz.pixelatedw.mineminenomi.entities.projectiles.extra.AxeDialProjectile;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
-import xyz.pixelatedw.mineminenomi.init.ModExtraAttributes;
 
 public class AxeDialItem extends BlockItem
 {
 
 	public AxeDialItem()
 	{
-		super(ModBlocks.axeDialBlock, new Properties().group(ModCreativeTabs.MISC).maxStackSize(16));
+		super(ModBlocks.AXE_DIAL, new Properties().group(ModCreativeTabs.MISC).maxStackSize(16));
 	}
 
 	@Override
@@ -31,13 +29,12 @@ public class AxeDialItem extends BlockItem
 	{
 		if (!world.isRemote)
 		{
-			AxeDialProjectile proj = new AxeDialProjectile(player.world, player, ModExtraAttributes.DIAL_AXE);
+			AxeDialProjectile proj = new AxeDialProjectile(player.world, player);
 
 			world.addEntity(proj);
 
 			if (!player.isCreative())
 			{
-				WyTelemetry.addMiscStat("axeDialsUsed", "Axe Dials Used", 1);
 				player.getHeldItem(hand).shrink(1);
 				player.sendBreakAnimation(EquipmentSlotType.MAINHAND);
 			}
@@ -49,8 +46,6 @@ public class AxeDialItem extends BlockItem
 	@Override
 	protected boolean onBlockPlaced(BlockPos pos, World world, @Nullable PlayerEntity player, ItemStack itemStack, BlockState state)
 	{
-		if (!player.isCreative())
-			WyTelemetry.addMiscStat("axeDialsPlaced", "Axe Dials Placed", 1);
 		return super.onBlockPlaced(pos, world, player, itemStack, state);
 	}
 }

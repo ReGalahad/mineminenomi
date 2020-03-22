@@ -1,35 +1,12 @@
 package xyz.pixelatedw.mineminenomi.events;
 
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Hand;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
-import xyz.pixelatedw.mineminenomi.Env;
-import xyz.pixelatedw.mineminenomi.api.data.quest.IQuestData;
-import xyz.pixelatedw.mineminenomi.api.data.quest.QuestDataCapability;
-import xyz.pixelatedw.mineminenomi.api.network.packets.server.SQuestDataSyncPacket;
-import xyz.pixelatedw.mineminenomi.api.quests.IHitCounterQuest;
-import xyz.pixelatedw.mineminenomi.api.quests.IInteractQuest;
-import xyz.pixelatedw.mineminenomi.api.quests.IKillQuest;
-import xyz.pixelatedw.mineminenomi.api.quests.ITimedQuest;
-import xyz.pixelatedw.mineminenomi.api.quests.Quest;
-import xyz.pixelatedw.mineminenomi.api.quests.extra.Questline;
-import xyz.pixelatedw.mineminenomi.config.CommonConfig;
-import xyz.pixelatedw.mineminenomi.entities.mobs.quest.givers.IQuestGiver;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
+import xyz.pixelatedw.wypi.APIConfig;
 
-@Mod.EventBusSubscriber(modid = Env.PROJECT_ID)
+@Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class EventsQuests
 {
-
+/*
 	@SubscribeEvent
 	public static void onEntityUpdate(LivingUpdateEvent event)
 	{
@@ -162,4 +139,5 @@ public class EventsQuests
 				ModNetwork.sendTo(new SQuestDataSyncPacket(player.getEntityId(), questProps), (ServerPlayerEntity) player);
 		}
 	}
+	*/
 }

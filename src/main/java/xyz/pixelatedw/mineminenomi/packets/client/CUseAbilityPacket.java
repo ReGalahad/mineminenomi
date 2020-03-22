@@ -6,30 +6,31 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
-import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
-import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
+import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 
 public class CUseAbilityPacket
 {
-	private String ability;
+	private int slot;
 	
 	public CUseAbilityPacket() {}
 	
-	public CUseAbilityPacket(String ability)
+	public CUseAbilityPacket(int slot)
 	{
-		this.ability = ability;
+		this.slot = slot;
 	}
 
 	public void encode(PacketBuffer buffer)
 	{
-		buffer.writeString(this.ability);
+		buffer.writeInt(this.slot);
 	}
 	
 	public static CUseAbilityPacket decode(PacketBuffer buffer)
 	{
 		CUseAbilityPacket msg = new CUseAbilityPacket();
-		msg.ability = buffer.readString();
+		msg.slot = buffer.readInt();
 		return msg;
 	}
 
@@ -45,46 +46,10 @@ public class CUseAbilityPacket
 				if(DevilFruitsHelper.checkForRestriction(player))
 					return;
 				
-				abilityDataProps.getAbility(message.ability).use(player);
-								
-				/*Ability currentAbility = abilityDataProps.getHotbarAbilityFromSlot(message.abilitySlot);
-								
-				if (currentAbility != null)
-				{
-					//ThreadTaskExecutor<?> executor = LogicalSidedProvider.WORKQUEUE.get(LogicalSide.SERVER);
-					
-					//executor.runAsync(() -> 
-					//{
-						for (int j = 0; j < 8; j++)
-						{
-							Ability testAbility = abilityDataProps.getHotbarAbilityFromSlot(j);
-							if (testAbility != null)
-							{
-								if (testAbility.isCharging() && testAbility == currentAbility && currentAbility.getAttribute().canStopChargeEarly())
-									currentAbility.endCharging(player);
-								
-								if (testAbility.isCharging())
-									return;
-								
-								if (currentAbility != testAbility && testAbility.isPassiveActive() && currentAbility.getAttribute().isPassive())
-								{
-									if(currentAbility.getAttribute().isAbilityFreePassive())
-										currentAbility.passive(player);
-									else if(!currentAbility.getAttribute().isAbilityFreePassive() && testAbility.getAttribute().isAbilityFreePassive() && testAbility.isPassiveActive())
-										currentAbility.passive(player);								
-									return;
-								}
-							}
-						}
-						
-						if (currentAbility.getAttribute().isPassive())
-							currentAbility.passive(player);
-						else if (currentAbility.getAttribute().getAbilityCharges() > 0)
-							currentAbility.startCharging(player);
-						else
-							currentAbility.use(player);
-					//});
-				}*/
+				Ability abl = abilityDataProps.getEquippedAbility(message.slot);
+				
+				if(abl != null)
+					abl.use(player);
 			});
 		}
 		

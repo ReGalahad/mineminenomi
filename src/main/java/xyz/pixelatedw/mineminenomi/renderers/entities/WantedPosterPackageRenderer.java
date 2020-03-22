@@ -7,13 +7,13 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
-import xyz.pixelatedw.mineminenomi.Env;
 import xyz.pixelatedw.mineminenomi.entities.WantedPosterPackageEntity;
 import xyz.pixelatedw.mineminenomi.models.blocks.WantedPosterPackageModel;
+import xyz.pixelatedw.wypi.APIConfig;
 
 public class WantedPosterPackageRenderer extends EntityRenderer<WantedPosterPackageEntity>
 {
-	private ResourceLocation texture = new ResourceLocation(Env.PROJECT_ID, "textures/models/wantedposterspackage.png");;
+	private ResourceLocation texture = new ResourceLocation(APIConfig.PROJECT_ID, "textures/models/wantedposterspackage.png");;
 	private WantedPosterPackageModel model = new WantedPosterPackageModel();
 	
 	protected WantedPosterPackageRenderer(EntityRendererManager manager)
@@ -44,7 +44,7 @@ public class WantedPosterPackageRenderer extends EntityRenderer<WantedPosterPack
 	@Override
 	protected ResourceLocation getEntityTexture(WantedPosterPackageEntity entity)
 	{
-		return texture;
+		return this.texture;
 	}
 	
 	public static class Factory implements IRenderFactory<WantedPosterPackageEntity>

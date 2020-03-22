@@ -3,6 +3,9 @@ package xyz.pixelatedw.mineminenomi.data.entity.entitystats;
 public interface IEntityStats
 {
 
+	boolean isInCombatMode();
+	void setCombatMode(boolean value);
+	
 	int getDoriki();
 	void alterDoriki(int value);
 	void setDoriki(int value);

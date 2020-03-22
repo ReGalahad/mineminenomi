@@ -7,8 +7,6 @@ import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import xyz.pixelatedw.mineminenomi.api.data.CapabilityProviderSerializable;
 
 public class HakiDataCapability
 {
@@ -46,10 +44,5 @@ public class HakiDataCapability
 	public static IHakiData get(final LivingEntity entity)
 	{
 		return entity.getCapability(INSTANCE, null).orElse(new HakiDataBase());
-	}
-
-	public static ICapabilityProvider createProvider(final IHakiData data)
-	{
-		return new CapabilityProviderSerializable<>(INSTANCE, null, data);
 	}
 }

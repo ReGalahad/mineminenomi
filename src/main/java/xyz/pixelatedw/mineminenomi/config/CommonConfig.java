@@ -16,7 +16,7 @@ import net.minecraftforge.common.ForgeConfigSpec.EnumValue;
 import net.minecraftforge.common.ForgeConfigSpec.IntValue;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
+import xyz.pixelatedw.wypi.WyHelper;
 
 public class CommonConfig
 {

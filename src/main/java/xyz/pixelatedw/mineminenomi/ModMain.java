@@ -3,36 +3,37 @@ package xyz.pixelatedw.mineminenomi;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
-import xyz.pixelatedw.mineminenomi.api.debug.WyDebug;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
-import xyz.pixelatedw.mineminenomi.init.ModQuests;
-import xyz.pixelatedw.mineminenomi.proxy.ClientProxy;
-import xyz.pixelatedw.mineminenomi.proxy.IProxy;
-import xyz.pixelatedw.mineminenomi.proxy.ServerProxy;
+import xyz.pixelatedw.mineminenomi.proxy.IModProxy;
+import xyz.pixelatedw.mineminenomi.proxy.ModClientProxy;
+import xyz.pixelatedw.mineminenomi.proxy.ModServerProxy;
+import xyz.pixelatedw.wypi.APIConfig;
+import xyz.pixelatedw.wypi.WyRegistry;
 
-@Mod(Env.PROJECT_ID)
+@Mod(APIConfig.PROJECT_ID)
 public class ModMain
 {
 	public static ModMain instance;
-	public static IProxy proxy;
-	public static final Logger LOGGER = LogManager.getLogger();
+	public static final IModProxy PROXY = DistExecutor.runForDist(() -> () -> new ModClientProxy(), () -> () -> new ModServerProxy());;
+	public static final Logger LOGGER = LogManager.getLogger(APIConfig.PROJECT_ID);
 
 	public ModMain()
-	{
-		if (WyDebug.isDebug())
-		{
-			String basicPath = System.getProperty("java.class.path");
-			Env.projectResourceFolder = basicPath.substring(0, basicPath.indexOf("\\bin")).replace("file:/", "").replace("%20", " ") + "/src/main/resources";
-		}
+	{	
+		APIConfig.setupResourceFolderPath();
 
 		instance = this;
-		proxy = DistExecutor.runForDist(() -> () -> new ClientProxy(), () -> () -> new ServerProxy());
+		
+		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+		
+		WyRegistry.ENTITY_TYPES.register(modEventBus);
+		WyRegistry.BLOCKS.register(modEventBus);
+		WyRegistry.ITEMS.register(modEventBus);
+		WyRegistry.ABILITIES.register(modEventBus);
 		
 		CommonConfig.init();
-		ModNetwork.init();
-		ModQuests.init();
 	}
 }

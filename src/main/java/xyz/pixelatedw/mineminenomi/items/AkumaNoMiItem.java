@@ -8,7 +8,6 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Foods;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -21,32 +20,39 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.EnumFruitType;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
-import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
-import xyz.pixelatedw.mineminenomi.api.network.packets.client.CAbilityDataSyncPacket;
+import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
-import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
+import xyz.pixelatedw.mineminenomi.packets.server.SSyncDevilFruitPacket;
+import xyz.pixelatedw.wypi.APIConfig;
+import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
+import xyz.pixelatedw.wypi.data.ability.IAbilityData;
+import xyz.pixelatedw.wypi.network.WyNetwork;
+import xyz.pixelatedw.wypi.network.packets.server.SSyncAbilityDataPacket;
 
 public class AkumaNoMiItem extends Item
 {
-
+	private String name;
 	public EnumFruitType type;
 	public Ability[] abilities;
 
-	public AkumaNoMiItem(EnumFruitType type, Ability... abilitiesArray)
+	public AkumaNoMiItem(String name, EnumFruitType type, Ability... abilitiesArray)
 	{
 		super(new Item.Properties().group(ModCreativeTabs.DEVIL_FRUITS).maxStackSize(1).food(Foods.APPLE));
+		this.name = name;
 		this.type = type;
 		this.abilities = abilitiesArray;
+		
+		if (this.type == EnumFruitType.LOGIA)
+			ModValues.logias.add(this);
+		ModValues.devilfruits.add(this);
 	}
 
 	@Override
@@ -68,7 +74,7 @@ public class AkumaNoMiItem extends Item
 		IEntityStats entityStatsProps = EntityStatsCapability.get(player);
 		IAbilityData abilityDataProps = AbilityDataCapability.get(player);
 
-		String eatenFruit = this.getDefaultTranslationKey().substring("item.mineminenomi.".length()).replace("nomi", "").replace(":", "").replace(".", "").replace(",", "").replace("model", "");
+		String eatenFruit = this.getDefaultTranslationKey().substring("item.mineminenomi.".length()).replace("_no_mi", "").replace(":", "").replace(".", "").replace(",", "").replace("model", "");
 
 		boolean flag1 = !WyHelper.isNullOrEmpty(devilFruitProps.getDevilFruit()) && !devilFruitProps.hasYamiPower() && !eatenFruit.equalsIgnoreCase("yamiyami");
 		boolean flag2 = devilFruitProps.hasYamiPower() && !eatenFruit.equalsIgnoreCase(devilFruitProps.getDevilFruit()) && !devilFruitProps.getDevilFruit().equalsIgnoreCase("yamidummy");
@@ -113,9 +119,13 @@ public class AkumaNoMiItem extends Item
 		if(!eatenFruit.equalsIgnoreCase("yomiyomi"))
 		{
 			for(Ability a : abilities)
-				if(!DevilFruitsHelper.verifyIfAbilityIsBanned(a) && abilityDataProps.getAbility(a) != null)
-					abilityDataProps.addAbility(a);
-			ModNetwork.sendTo(new CAbilityDataSyncPacket(abilityDataProps), (ServerPlayerEntity)player);
+				if(!DevilFruitsHelper.verifyIfAbilityIsBanned(a) && abilityDataProps.getUnlockedAbility(a) == null)
+					abilityDataProps.addUnlockedAbility(a);
+			if(!player.world.isRemote)
+			{
+				WyNetwork.sendTo(new SSyncDevilFruitPacket(player.getEntityId(), devilFruitProps), player);
+				WyNetwork.sendTo(new SSyncAbilityDataPacket(abilityDataProps), player);
+			}		
 		}
 		
 		itemStack.shrink(1);
@@ -127,7 +137,7 @@ public class AkumaNoMiItem extends Item
 	{
 		for (int i = 0; i < this.abilities.length; i++)
 			if (!DevilFruitsHelper.verifyIfAbilityIsBanned(this.abilities[i]) && this.abilities[i] != null)
-				list.add(new StringTextComponent(TextFormatting.GRAY + I18n.format("ability." + WyHelper.getResourceName(this.abilities[i].getName()) + ".name")));
+				list.add(new StringTextComponent(TextFormatting.GRAY + I18n.format("ability." + APIConfig.PROJECT_ID + "." + WyHelper.getResourceName(this.abilities[i].getName()))));
 
 		list.add(new StringTextComponent(""));
 		list.add(new StringTextComponent(this.type.getColor() + this.type.getName()));
@@ -138,4 +148,8 @@ public class AkumaNoMiItem extends Item
 		return this.type;
 	}
 
+	public String getDevilFruitName()
+	{
+		return this.name;
+	}
 }

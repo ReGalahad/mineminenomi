@@ -1,17 +1,14 @@
 package xyz.pixelatedw.mineminenomi.blocks.tileentities.dials;
 
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
-import xyz.pixelatedw.mineminenomi.api.WyRegistry;
-import xyz.pixelatedw.mineminenomi.init.ModBlocks;
+import xyz.pixelatedw.mineminenomi.init.ModTileEntities;
 
 public class RejectDialTileEntity extends TileEntity
 {
-	public static final TileEntityType TILE_ENTITY = WyRegistry.registerTileEntity("reject_dial_block", RejectDialTileEntity::new, ModBlocks.rejectDialBlock);
 	
 	public RejectDialTileEntity()
 	{
-		super(TILE_ENTITY);
+		super(ModTileEntities.REJECT_DIAL);
 	}
 
 }

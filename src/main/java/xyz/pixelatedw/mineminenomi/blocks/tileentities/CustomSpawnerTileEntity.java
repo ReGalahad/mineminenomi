@@ -1,6 +1,7 @@
 package xyz.pixelatedw.mineminenomi.blocks.tileentities;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -9,11 +10,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.text.ITextComponent;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.WyRegistry;
-import xyz.pixelatedw.mineminenomi.init.ModBlocks;
+import xyz.pixelatedw.mineminenomi.init.ModTileEntities;
+import xyz.pixelatedw.wypi.WyHelper;
 
 public class CustomSpawnerTileEntity extends TileEntity implements ITickableTileEntity
 {
@@ -21,11 +20,9 @@ public class CustomSpawnerTileEntity extends TileEntity implements ITickableTile
 	private int spawnLimit = 5;
 	private ArrayList<LivingEntity> spawnedEntities = new ArrayList<LivingEntity>();
 
-	public static final TileEntityType TILE_ENTITY = WyRegistry.registerTileEntity("custom_spawner", CustomSpawnerTileEntity::new, ModBlocks.customSpawner);
-
 	public CustomSpawnerTileEntity()
 	{
-		super(TILE_ENTITY);
+		super(ModTileEntities.CUSTOM_SPAWNER);
 	}
 	
 	public CustomSpawnerTileEntity setSpawnerMob(EntityType toSpawn)
@@ -47,9 +44,11 @@ public class CustomSpawnerTileEntity extends TileEntity implements ITickableTile
 		{
 			boolean flag = false;
 
-			if (!WyHelper.getEntitiesNear(this, 30, PlayerEntity.class).isEmpty())
+			List<PlayerEntity> nearbyEntities = WyHelper.getEntitiesNear(this.getPos(), this.world, 30, PlayerEntity.class);
+			
+			if (!nearbyEntities.isEmpty())
 			{
-				LivingEntity e = WyHelper.getEntitiesNear(this, 30, PlayerEntity.class).get(0);
+				LivingEntity e = nearbyEntities.get(0);
 
 				if (e != null && e instanceof PlayerEntity)
 				{

@@ -21,7 +21,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
@@ -31,8 +30,9 @@ import xyz.pixelatedw.mineminenomi.entities.mobs.marines.EntityGenericMarine;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityGenericPirate;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.mineminenomi.init.ModItems;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.packets.server.SEntityStatsSyncPacket;
+import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.network.WyNetwork;
 
 public class EntityDoppelman extends CreatureEntity
 {
@@ -135,7 +135,7 @@ public class EntityDoppelman extends CreatureEntity
 			
 			IEntityStats ownerProps = EntityStatsCapability.get(this.owner);
 			IDevilFruit ownerDFProps = DevilFruitCapability.get(this.owner);		
-			List<LivingEntity> doppelmanAttackList = this.isAggressive ? WyHelper.getEntitiesNear(this, 10, PlayerEntity.class, EntityGenericMarine.class, EntityGenericPirate.class) : !forcedTargets.isEmpty() ? forcedTargets : new ArrayList<LivingEntity>();
+			List<LivingEntity> doppelmanAttackList = this.isAggressive ? WyHelper.getEntitiesNear(this.getPosition(), this.world, 10, PlayerEntity.class, EntityGenericMarine.class, EntityGenericPirate.class) : !forcedTargets.isEmpty() ? forcedTargets : new ArrayList<LivingEntity>();
 			LivingEntity target = null;
 
 			if(!ownerDFProps.getDevilFruit().equalsIgnoreCase("kagekage"))
@@ -178,11 +178,11 @@ public class EntityDoppelman extends CreatureEntity
         	ItemStack itemStack = player.getHeldItem(hand);
     		IEntityStats props = EntityStatsCapability.get(this);
 
-    		if(itemStack != null && itemStack.getItem() == ModItems.shadow && itemStack.getCount() >= 10 && props.getDoriki() < 6)
+    		if(itemStack != null && itemStack.getItem() == ModItems.SHADOW && itemStack.getCount() >= 10 && props.getDoriki() < 6)
     		{
     			itemStack.setCount(itemStack.getCount() - 10);
     			props.alterDoriki(1);
-    			ModNetwork.sendToAll(new SEntityStatsSyncPacket(player.getEntityId(), props));
+    			WyNetwork.sendToAll(new SEntityStatsSyncPacket(player.getEntityId(), props));
     		}
     	}
     	

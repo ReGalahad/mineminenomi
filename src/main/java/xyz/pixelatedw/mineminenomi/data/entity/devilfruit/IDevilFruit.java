@@ -15,4 +15,5 @@ public interface IDevilFruit
 	
 	String getZoanPoint();
 	void setZoanPoint(String value);
+		
 }

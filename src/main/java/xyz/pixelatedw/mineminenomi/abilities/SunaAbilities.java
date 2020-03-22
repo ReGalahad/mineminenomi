@@ -12,7 +12,7 @@
  * import xyz.pixelatedw.mineminenomi.api.WyHelper;
  * import xyz.pixelatedw.mineminenomi.api.WyHelper.Direction;
  * import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
- * import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
+ * import xyz.pixelatedw.mineminenomi.api.math.WyHelper;
  * import xyz.pixelatedw.mineminenomi.config.CommonConfig;
  * import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.SunaProjectiles;
  * import xyz.pixelatedw.mineminenomi.init.ModAttributes;
@@ -22,12 +22,27 @@
  * {
  * static
  * {
- * ModValues.abilityWebAppExtraParams.put("barjan", new String[] {"desc", "Launches a crescent-shaped wave of sand at the opponent, that dehydrates them."});
- * ModValues.abilityWebAppExtraParams.put("grounddeath", new String[] {"desc", "Dries out the surroundings and suffucates all nearby opponents in sand."});
- * ModValues.abilityWebAppExtraParams.put("sables", new String[] {"desc", "The user launches a compressed sandstorm at the opponent, which sends them flying."});
- * ModValues.abilityWebAppExtraParams.put("desertspada", new String[] {"desc", "The user extends their sand along the ground, splitting it and suffocating everything it its path. "});
+ * ModValues.abilityWebAppExtraParams.put("barjan", new String[]
+ * {
+ * "desc", "Launches a crescent-shaped wave of sand at the opponent, that dehydrates them."
+ * });
+ * ModValues.abilityWebAppExtraParams.put("grounddeath", new String[]
+ * {
+ * "desc", "Dries out the surroundings and suffucates all nearby opponents in sand."
+ * });
+ * ModValues.abilityWebAppExtraParams.put("sables", new String[]
+ * {
+ * "desc", "The user launches a compressed sandstorm at the opponent, which sends them flying."
+ * });
+ * ModValues.abilityWebAppExtraParams.put("desertspada", new String[]
+ * {
+ * "desc", "The user extends their sand along the ground, splitting it and suffocating everything it its path. "
+ * });
  * }
- * public static Ability[] abilitiesArray = new Ability[] {new Barjan(), new Sables(), new GroundDeath(), new DesertSpada(), new DesertEncierro(), new DesertGirasole()};
+ * public static Ability[] abilitiesArray = new Ability[]
+ * {
+ * new Barjan(), new Sables(), new GroundDeath(), new DesertSpada(), new DesertEncierro(), new DesertGirasole()
+ * };
  * public static class DesertGirasole extends Ability
  * {
  * private List<BlockPos> positions = new ArrayList<BlockPos>();
@@ -38,18 +53,18 @@
  * @Override
  * public void startCharging(PlayerEntity player)
  * {
- * if(!this.isOnCooldown)
+ * if (!this.isOnCooldown)
  * {
- * //ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_DESERTGIRASOLE, player), (ServerPlayerEntity) player);
- * if(CommonConfig.instance.isGriefingEnabled())
+ * // ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_DESERTGIRASOLE, player), (ServerPlayerEntity) player);
+ * if (CommonConfig.instance.isGriefingEnabled())
  * {
- * for(int i = -15; i < 15; i++)
- * for(int j = -5; j < 5; j++)
- * for(int k = -15; k < 15; k++)
+ * for (int i = -15; i < 15; i++)
+ * for (int j = -5; j < 5; j++)
+ * for (int k = -15; k < 15; k++)
  * {
- * int posX = (int) (player.posX + i + (i < -WyMathHelper.randomWithRange(8, 12) || i > WyMathHelper.randomWithRange(8, 12) ? WyMathHelper.randomWithRange(-5, 5) : 0));
+ * int posX = (int) (player.posX + i + (i < -WyHelper.randomWithRange(8, 12) || i > WyHelper.randomWithRange(8, 12) ? WyHelper.randomWithRange(-5, 5) : 0));
  * int posY = (int) player.posY + j;
- * int posZ = (int) (player.posZ + k + (k < -WyMathHelper.randomWithRange(8, 12) || k > WyMathHelper.randomWithRange(8, 12) ? WyMathHelper.randomWithRange(-5, 5) : 0));
+ * int posZ = (int) (player.posZ + k + (k < -WyHelper.randomWithRange(8, 12) || k > WyHelper.randomWithRange(8, 12) ? WyHelper.randomWithRange(-5, 5) : 0));
  * BlockPos pos = new BlockPos(posX, posY, posZ);
  * this.positions.add(pos);
  * }
@@ -60,13 +75,13 @@
  * @Override
  * public void endCharging(PlayerEntity player)
  * {
- * if(!this.isOnCooldown)
+ * if (!this.isOnCooldown)
  * {
- * if(CommonConfig.instance.isGriefingEnabled())
+ * if (CommonConfig.instance.isGriefingEnabled())
  * {
- * //ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_DESERTGIRASOLE2, player), player);
+ * // ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_DESERTGIRASOLE2, player), player);
  * Iterator<BlockPos> i = this.positions.iterator();
- * while(i.hasNext())
+ * while (i.hasNext())
  * {
  * BlockPos pos = i.next();
  * WyHelper.placeBlockIfAllowed(player.world, pos.getX(), pos.getY(), pos.getZ(), ModBlocks.sunaSand, "core", "ores", "liquids", "foliage");
@@ -85,7 +100,7 @@
  * @Override
  * public void hitEntity(PlayerEntity player, LivingEntity target)
  * {
- * //ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_DESERTENCIERRO, target), player);
+ * // ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_DESERTENCIERRO, target), player);
  * super.hitEntity(player, target);
  * }
  * }
@@ -115,15 +130,15 @@
  * newPosY += 25;
  * target.addPotionEffect(new EffectInstance(Effects.HUNGER, 500, 1));
  * Direction dir = WyHelper.get4Directions(player);
- * if(dir == WyHelper.Direction.SOUTH)
- * newPosX += WyMathHelper.randomWithRange(-10, 10);
- * else if(dir == WyHelper.Direction.EAST)
- * newPosX -= WyMathHelper.randomWithRange(-10, 10);
- * else if(dir == WyHelper.Direction.NORTH)
- * newPosZ += WyMathHelper.randomWithRange(-10, 10);
- * else if(dir == WyHelper.Direction.WEST)
- * newPosZ -= WyMathHelper.randomWithRange(-10, 10);
- * //ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_SABLES, target), player);
+ * if (dir == WyHelper.Direction.SOUTH)
+ * newPosX += WyHelper.randomWithRange(-10, 10);
+ * else if (dir == WyHelper.Direction.EAST)
+ * newPosX -= WyHelper.randomWithRange(-10, 10);
+ * else if (dir == WyHelper.Direction.NORTH)
+ * newPosZ += WyHelper.randomWithRange(-10, 10);
+ * else if (dir == WyHelper.Direction.WEST)
+ * newPosZ -= WyHelper.randomWithRange(-10, 10);
+ * // ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_SABLES, target), player);
  * target.setPositionAndUpdate(target.posX + newPosX, target.posY + newPosY, target.posZ + newPosZ);
  * super.hitEntity(player, target);
  * }
@@ -137,15 +152,18 @@
  * @Override
  * public void use(PlayerEntity player)
  * {
- * if(!this.isOnCooldown())
+ * if (!this.isOnCooldown())
  * {
- * if(CommonConfig.instance.isGriefingEnabled())
+ * if (CommonConfig.instance.isGriefingEnabled())
  * {
- * for(LivingEntity LivingEntity : WyHelper.getEntitiesNear(player, 25))
+ * for (LivingEntity LivingEntity : WyHelper.getEntitiesNear(player, 25))
  * {
- * WyHelper.createFilledCube(LivingEntity, new int[] {2, 2, 2}, Blocks.SAND, "air");
+ * WyHelper.createFilledCube(LivingEntity, new int[]
+ * {
+ * 2, 2, 2
+ * }, Blocks.SAND, "air");
  * }
- * //ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_GROUNDDEATH, player.posX, player.posY, player.posZ), player);
+ * // ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_GROUNDDEATH, player.posX, player.posY, player.posZ), player);
  * }
  * super.use(player);
  * }
@@ -160,15 +178,15 @@
  * @Override
  * public void use(PlayerEntity player)
  * {
- * if(!isOnCooldown)
+ * if (!isOnCooldown)
  * {
- * if(CommonConfig.instance.isGriefingEnabled())
+ * if (CommonConfig.instance.isGriefingEnabled())
  * {
- * if(WyHelper.get4Directions(player) == WyHelper.Direction.NORTH)
+ * if (WyHelper.get4Directions(player) == WyHelper.Direction.NORTH)
  * {
- * for(int i = -4; i < 6; i++)
- * for(int j = 0; j < 5; j++)
- * for(int k = 0; k < 30; k++)
+ * for (int i = -4; i < 6; i++)
+ * for (int j = 0; j < 5; j++)
+ * for (int k = 0; k < 30; k++)
  * {
  * int posX = (int) player.posX + i;
  * int posY = (int) player.posY - (j + 1);
@@ -176,11 +194,11 @@
  * WyHelper.placeBlockIfAllowed(player.world, posX, posY, posZ, ModBlocks.sunaSand, "core");
  * }
  * }
- * else if(WyHelper.get4Directions(player) == WyHelper.Direction.SOUTH)
+ * else if (WyHelper.get4Directions(player) == WyHelper.Direction.SOUTH)
  * {
- * for(int i = -4; i < 6; i++)
- * for(int j = 0; j < 5; j++)
- * for(int k = 0; k < 30; k++)
+ * for (int i = -4; i < 6; i++)
+ * for (int j = 0; j < 5; j++)
+ * for (int k = 0; k < 30; k++)
  * {
  * int posX = (int) player.posX + i;
  * int posY = (int) player.posY - (j + 1);
@@ -188,11 +206,11 @@
  * WyHelper.placeBlockIfAllowed(player.world, posX, posY, posZ, ModBlocks.sunaSand, "core");
  * }
  * }
- * else if(WyHelper.get4Directions(player) == WyHelper.Direction.EAST)
+ * else if (WyHelper.get4Directions(player) == WyHelper.Direction.EAST)
  * {
- * for(int i = 0; i < 30; i++)
- * for(int j = 0; j < 5; j++)
- * for(int k = -4; k < 6; k++)
+ * for (int i = 0; i < 30; i++)
+ * for (int j = 0; j < 5; j++)
+ * for (int k = -4; k < 6; k++)
  * {
  * int posX = (int) player.posX + (i + 2);
  * int posY = (int) player.posY - (j + 1);
@@ -200,11 +218,11 @@
  * WyHelper.placeBlockIfAllowed(player.world, posX, posY, posZ, ModBlocks.sunaSand, "core");
  * }
  * }
- * else if(WyHelper.get4Directions(player) == WyHelper.Direction.WEST)
+ * else if (WyHelper.get4Directions(player) == WyHelper.Direction.WEST)
  * {
- * for(int i = 0; i < 30; i++)
- * for(int j = 0; j < 5; j++)
- * for(int k = -4; k < 6; k++)
+ * for (int i = 0; i < 30; i++)
+ * for (int j = 0; j < 5; j++)
+ * for (int k = -4; k < 6; k++)
  * {
  * int posX = (int) player.posX - (i + 2);
  * int posY = (int) player.posY - (j + 1);
@@ -212,7 +230,7 @@
  * WyHelper.placeBlockIfAllowed(player.world, posX, posY, posZ, ModBlocks.sunaSand, "core");
  * }
  * }
- * //ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_DESERTSPADA, player), player);
+ * // ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_DESERTSPADA, player), player);
  * }
  * super.use(player);
  * }

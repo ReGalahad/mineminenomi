@@ -7,17 +7,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import xyz.pixelatedw.mineminenomi.Env;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
-import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
+import xyz.pixelatedw.mineminenomi.api.helpers.ItemsHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
-import xyz.pixelatedw.mineminenomi.helpers.ItemsHelper;
+import xyz.pixelatedw.wypi.APIConfig;
+import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
+import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 
-@Mod.EventBusSubscriber(modid = Env.PROJECT_ID)
+@Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class SabiPassiveEvents
 {
 	@SubscribeEvent
@@ -32,7 +31,7 @@ public class SabiPassiveEvents
 		IEntityStats statProps = EntityStatsCapability.get(attacked);
 		IAbilityData abilityProps = AbilityDataCapability.get(attacked);
 
-		if (!devilFruitProps.getDevilFruit().equalsIgnoreCase("sabisabi"))
+		if (!devilFruitProps.getDevilFruit().equalsIgnoreCase("sabi_sabi"))
 			return;
 
 		if (attacker.getHeldItemMainhand() != null && ItemsHelper.isSword(attacker.getHeldItemMainhand()) && !attacker.world.isRemote)
@@ -40,7 +39,7 @@ public class SabiPassiveEvents
 			event.setCanceled(true);
 			attacker.getHeldItemMainhand().damageItem(50, attacker, (entity) -> {});
 			if (attacker instanceof PlayerEntity && attacker.getHeldItemMainhand().getDamage() <= 0)
-				WyHelper.removeStackFromInventory((PlayerEntity) attacker, attacker.getHeldItemMainhand());
+				((PlayerEntity)attacker).inventory.deleteStack(attacker.getHeldItemMainhand());
 			else if(!(attacker instanceof PlayerEntity) && attacker.getHeldItemMainhand().getDamage() <= 0)
 				attacker.setItemStackToSlot(EquipmentSlotType.MAINHAND, ItemStack.EMPTY);
 		}

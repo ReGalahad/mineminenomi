@@ -1,33 +1,27 @@
 package xyz.pixelatedw.mineminenomi.init;
 
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.ForgeRegistries;
-import xyz.pixelatedw.mineminenomi.api.WyRegistry;
+import xyz.pixelatedw.mineminenomi.api.GenericEnchantment;
 
+@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModEnchantments
 {	
-	public static final Enchantment DIAL_IMPACT = WyRegistry.registerEnchantment("Impact Dial");
-	public static final Enchantment DIAL_FLASH = WyRegistry.registerEnchantment("Kairoseki");
-	public static final Enchantment KAIROSEKI = WyRegistry.registerEnchantment("Flash Dial");
-	
-	@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-	public static class Registry
-	{
-		@SubscribeEvent
-		public static void registerEntityTypes(RegistryEvent.Register<Enchantment> event)
-		{
-			if (!event.getName().equals(ForgeRegistries.ENCHANTMENTS.getRegistryName()))
-				return;
+	public static final Enchantment DIAL_IMPACT = new GenericEnchantment("Impact Dial", Enchantment.Rarity.UNCOMMON, EquipmentSlotType.MAINHAND);
+	public static final Enchantment DIAL_FLASH = new GenericEnchantment("Flash Dial", Enchantment.Rarity.UNCOMMON, EquipmentSlotType.MAINHAND);
+	public static final Enchantment KAIROSEKI = new GenericEnchantment("Kairoseki", Enchantment.Rarity.UNCOMMON, EquipmentSlotType.MAINHAND);
 
-			event.getRegistry().registerAll
-			(
-				DIAL_IMPACT, DIAL_FLASH,
-				
-				KAIROSEKI
-			);
-		}	
-	}
+	@SubscribeEvent
+	public static void registerEnchantments(RegistryEvent.Register<Enchantment> event)
+	{
+		event.getRegistry().registerAll
+		(
+			DIAL_IMPACT, DIAL_FLASH,
+			
+			KAIROSEKI
+		);
+	}	
 }

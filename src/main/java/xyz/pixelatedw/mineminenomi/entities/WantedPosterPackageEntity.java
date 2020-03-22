@@ -3,7 +3,7 @@ package xyz.pixelatedw.mineminenomi.entities;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.helpers.ItemsHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.ItemsHelper;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 
@@ -35,12 +35,12 @@ public class WantedPosterPackageEntity extends MobEntity
 		{
 			if(this.world.isAirBlock(pos))
 			{
-				this.world.setBlockState(pos, ModBlocks.wantedPosterPackage.getDefaultState());
+				this.world.setBlockState(pos, ModBlocks.WANTED_POSTER_PACKAGE.getDefaultState());
 				this.remove();
 			}
 			else if(this.world.isAirBlock(pos.up()))
 			{
-				this.world.setBlockState(pos.up(), ModBlocks.wantedPosterPackage.getDefaultState());
+				this.world.setBlockState(pos.up(), ModBlocks.WANTED_POSTER_PACKAGE.getDefaultState());
 				this.remove();
 			}
 		}

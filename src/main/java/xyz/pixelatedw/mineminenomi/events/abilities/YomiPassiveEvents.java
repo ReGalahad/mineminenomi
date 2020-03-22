@@ -11,23 +11,22 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import xyz.pixelatedw.mineminenomi.Env;
-import xyz.pixelatedw.mineminenomi.abilities.effects.DFEffectHieSlowness;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.abilities.extra.AbilityExplosion;
-import xyz.pixelatedw.mineminenomi.api.data.ability.AbilityDataCapability;
-import xyz.pixelatedw.mineminenomi.api.data.ability.IAbilityData;
-import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
+import xyz.pixelatedw.mineminenomi.api.abilities.ExplosionAbility;
+import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoYomi;
 import xyz.pixelatedw.mineminenomi.events.custom.YomiTriggerEvent;
-import xyz.pixelatedw.mineminenomi.init.ModNetwork;
-import xyz.pixelatedw.mineminenomi.packets.server.SDevilFruitSyncPacket;
+import xyz.pixelatedw.mineminenomi.packets.server.SSyncDevilFruitPacket;
+import xyz.pixelatedw.wypi.APIConfig;
+import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
+import xyz.pixelatedw.wypi.data.ability.IAbilityData;
+import xyz.pixelatedw.wypi.network.WyNetwork;
 
-@Mod.EventBusSubscriber(modid = Env.PROJECT_ID)
+@Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class YomiPassiveEvents
 {
 
@@ -41,7 +40,7 @@ public class YomiPassiveEvents
 		IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
 		IAbilityData abilityProps = AbilityDataCapability.get(player);
 
-		if (!devilFruitProps.getDevilFruit().equals("yomiyomi"))
+		if (!devilFruitProps.getDevilFruit().equals("yomi_yomi"))
 			return;
 
 		if (devilFruitProps.getZoanPoint().equalsIgnoreCase(ZoanInfoYomi.FORM))
@@ -50,8 +49,8 @@ public class YomiPassiveEvents
 
 			player.addPotionEffect(new EffectInstance(Effects.SPEED, 100, 0, true, true));
 
-			if (WyHelper.getEntitiesNear(player, 100, PlayerEntity.class).size() > 0 && player.ticksExisted % 500 == 0)
-				ModNetwork.sendToAllAround(new SDevilFruitSyncPacket(player.getEntityId(), devilFruitProps), player);
+			if (WyHelper.getEntitiesNear(player.getPosition(), player.world, 100, PlayerEntity.class).size() > 0 && player.ticksExisted % 500 == 0)
+				WyNetwork.sendToAllAround(new SSyncDevilFruitPacket(player.getEntityId(), devilFruitProps), player);
 			
 			if (player.world.getBlockState(player.getPosition().down()).getFluidState().isSource() && player.isSprinting())
 			{
@@ -65,9 +64,9 @@ public class YomiPassiveEvents
 				BlockState blockState = player.world.getBlockState(player.getPosition().down());
 				for (int i = 0; i < 10; i++)
 				{
-					double newPosX = player.posX + WyMathHelper.randomDouble();
+					double newPosX = player.posX + WyHelper.randomDouble();
 					double newPosY = player.posY;
-					double newPosZ = player.posZ + WyMathHelper.randomDouble();
+					double newPosZ = player.posZ + WyHelper.randomDouble();
 
 					//ModMain.proxy.spawnVanillaParticle(new BlockParticleData(ParticleTypes.BLOCK, blockState), newPosX, newPosY, newPosZ, 0, 0, 0);
 				}
@@ -87,15 +86,15 @@ public class YomiPassiveEvents
 		IEntityStats statProps = EntityStatsCapability.get(attacked);
 		IAbilityData abilityProps = AbilityDataCapability.get(attacked);
 
-		if (!devilFruitProps.getDevilFruit().equalsIgnoreCase("yomiyomi"))
+		if (!devilFruitProps.getDevilFruit().equalsIgnoreCase("yomi_yomi"))
 			return;
 
 		if (devilFruitProps.getZoanPoint().equalsIgnoreCase(ZoanInfoYomi.FORM) )//&& abilityProps.isPassiveActive(ModAttributes.SOUL_PARADE))
 		{
 			attacker.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 100, 1));
 			attacker.addPotionEffect(new EffectInstance(Effects.MINING_FATIGUE, 100, 1));
-			new DFEffectHieSlowness(attacker, 100);
-			AbilityExplosion explosion = WyHelper.newExplosion(attacked, attacker.posX, attacker.posY, attacker.posZ, 2);
+			//new DFEffectHieSlowness(attacker, 100);
+			ExplosionAbility explosion = DevilFruitsHelper.newExplosion(attacked, attacker.posX, attacker.posY, attacker.posZ, 2);
 			explosion.setDamageOwner(false);
 			explosion.setDestroyBlocks(false);
 			//explosion.setSmokeParticles(ID.PARTICLEFX_SOULPARADE);
@@ -111,7 +110,7 @@ public class YomiPassiveEvents
 
 		IDevilFruit devilFruitProps = DevilFruitCapability.get(event.getEntityLiving());
 
-		if (!devilFruitProps.getDevilFruit().equals("yomiyomi"))
+		if (!devilFruitProps.getDevilFruit().equals("yomi_yomi"))
 			return;
 
 		if (event.getItem().getItem() == Items.MILK_BUCKET && devilFruitProps.getZoanPoint().equalsIgnoreCase(ZoanInfoYomi.FORM))
@@ -121,14 +120,14 @@ public class YomiPassiveEvents
 	@SubscribeEvent
 	public static void onYomiDeath(YomiTriggerEvent event)
 	{
-		if (event.oldPlayerData.getDevilFruit().equalsIgnoreCase("yomiyomi") && !event.oldPlayerData.getZoanPoint().equalsIgnoreCase(ZoanInfoYomi.FORM))
+		if (event.oldPlayerData.getDevilFruit().equalsIgnoreCase("yomi_yomi") && !event.oldPlayerData.getZoanPoint().equalsIgnoreCase(ZoanInfoYomi.FORM))
 		{
-			event.newPlayerData.setDevilFruit("yomiyomi");
+			event.newPlayerData.setDevilFruit("yomi_yomi");
 			event.newPlayerData.setZoanPoint(ZoanInfoYomi.FORM);
 
 			PlayerEntity player = (PlayerEntity) event.entity;
 
-			ModNetwork.sendToAll(new SDevilFruitSyncPacket(player.getEntityId(), event.newPlayerData));
+			WyNetwork.sendToAll(new SSyncDevilFruitPacket(player.getEntityId(), event.newPlayerData));
 		}
 	}
 }
