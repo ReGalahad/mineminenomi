@@ -43,6 +43,9 @@ public class CUseAbilityPacket
 				PlayerEntity player = ctx.get().getSender();
 				IAbilityData abilityDataProps = AbilityDataCapability.get(player);
 				
+				if(player.isSpectator())
+					return;
+				
 				if(DevilFruitsHelper.checkForRestriction(player))
 					return;
 				
