@@ -34,7 +34,7 @@ public class AmaterasuAbility extends ChargeableAbility
 	{
 		AmaterasuProjectile proj = new AmaterasuProjectile(player.world, player);
 		player.world.addEntity(proj);
-		proj.shoot(player, player.rotationPitch, player.rotationYaw, 0, 2f, 1);	
+		proj.shoot(player, player.rotationPitch, player.rotationYaw, 0, 4f, 1);	
 		
 		return true;
 	}
