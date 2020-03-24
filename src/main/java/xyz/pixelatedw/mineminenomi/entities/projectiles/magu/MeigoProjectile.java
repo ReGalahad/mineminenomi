@@ -35,6 +35,7 @@ public class MeigoProjectile extends AbilityProjectileEntity
 
 		this.setDamage(40);
 		this.setMaxLife(3);
+		this.setPassThroughEntities();
 		
 		this.onEntityImpactEvent = this::onEntityImpactEvent;
 		this.onBlockImpactEvent = this::onBlockImpactEvent;

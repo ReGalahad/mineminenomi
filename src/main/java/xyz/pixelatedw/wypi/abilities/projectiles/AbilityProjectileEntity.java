@@ -36,6 +36,7 @@ public class AbilityProjectileEntity extends ThrowableEntity
 	private float gravity = 0.0001F;
 	private boolean isPhysical = false;
 	private boolean canPassThroughBlocks = false;
+	private boolean canPassThroughEntities = false;
 	private boolean canGetStuckInGround = false;
 	protected boolean stuckInGround = false;
 	
@@ -143,7 +144,8 @@ public class AbilityProjectileEntity extends ThrowableEntity
 					}
 							
 					this.onEntityImpactEvent.onImpact(hitEntity);
-					this.remove();
+					if(!this.canPassThroughEntities)
+						this.remove();
 				}
 			}
 			else if(hit.getType() == RayTraceResult.Type.BLOCK)
@@ -223,6 +225,11 @@ public class AbilityProjectileEntity extends ThrowableEntity
 	public void setPassThroughBlocks()
 	{
 		this.canPassThroughBlocks = true;
+	}
+	
+	public void setPassThroughEntities()
+	{
+		this.canPassThroughEntities = true;
 	}
 
 	public void setCanGetStuckInGround()
