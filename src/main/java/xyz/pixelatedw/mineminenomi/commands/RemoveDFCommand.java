@@ -15,6 +15,7 @@ import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.packets.server.SSyncDevilFruitPacket;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
+import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 import xyz.pixelatedw.wypi.network.WyNetwork;
@@ -45,6 +46,12 @@ public class RemoveDFCommand
 			devilFruitProps.setLogia(false);
 			devilFruitProps.setZoanPoint("");
 			devilFruitProps.setYamiPower(false);
+			
+			for(Ability ability : abilityDataProps.getEquippedAbilities(AbilityCategory.ALL))
+			{
+				if(ability != null)
+					ability.stopCooldown(player);
+			}
 			
 			abilityDataProps.clearUnlockedAbilities(AbilityCategory.ALL);
 			abilityDataProps.clearEquippedAbilities(AbilityCategory.ALL);

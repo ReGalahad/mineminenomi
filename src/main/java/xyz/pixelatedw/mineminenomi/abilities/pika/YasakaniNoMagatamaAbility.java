@@ -24,7 +24,7 @@ public class YasakaniNoMagatamaAbility extends RepeaterAbility
 	{
 		YasakaniNoMagatamaProjectile proj = new YasakaniNoMagatamaProjectile(player.world, player);
 		player.world.addEntity(proj);
-		proj.shoot(player, player.rotationPitch, player.rotationYaw, 0, 4f, 10);		
+		proj.shoot(player, player.rotationPitch, player.rotationYaw, 0, 4f, 7);		
 		
 		return true;
 	}

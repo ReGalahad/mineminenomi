@@ -22,13 +22,11 @@ public class HanpatsuAbility extends PunchAbility
 
 	private float onHitEntity(PlayerEntity player, LivingEntity target)
 	{
-		double[] speed = WyHelper.propulsion(player, 20, 20);
-
-		double xPower = WyHelper.randomWithRange((int)-speed[0], (int)speed[0]);
+		double xPower = WyHelper.randomWithRange(-20, 20);
 		if(xPower >= 0) xPower += 30;
 		else xPower -= 30;
 		
-		double zPower = WyHelper.randomWithRange((int)-speed[2], (int)speed[2]);
+		double zPower = WyHelper.randomWithRange(-20, 20);
 		if(zPower >= 0) zPower += 30;
 		else zPower -= 30;
 		

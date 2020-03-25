@@ -96,6 +96,15 @@ public abstract class Ability extends ForgeRegistryEntry<Ability>
 		this.state = State.COOLDOWN;
 	}
 	
+	public void stopCooldown(PlayerEntity player)
+	{
+		this.cooldown = this.maxCooldown;				
+		this.state = State.STANDBY;
+		this.onEndCooldown.onEndCooldown(player);
+		IAbilityData props = AbilityDataCapability.get(player);
+		WyNetwork.sendTo(new SSyncAbilityDataPacket(props), (ServerPlayerEntity)player);
+	}
+	
 	public void setState(State state)
 	{
 		this.state = state;
@@ -162,11 +171,7 @@ public abstract class Ability extends ForgeRegistryEntry<Ability>
 		}
 		else if(this.isOnCooldown() && this.cooldown <= 0)
 		{
-			this.cooldown = this.maxCooldown;				
-			this.state = State.STANDBY;
-			this.onEndCooldown.onEndCooldown(player);
-			IAbilityData props = AbilityDataCapability.get(player);
-			WyNetwork.sendTo(new SSyncAbilityDataPacket(props), (ServerPlayerEntity)player);
+			this.stopCooldown(player);
 		}
 	}
 	
