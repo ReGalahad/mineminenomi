@@ -49,7 +49,7 @@ public class AbilityProtectionCommand
 	@SuppressWarnings("resource")
 	private static int viewProtection(CommandContext<CommandSource> context, boolean state) throws CommandSyntaxException
 	{
-		World world = context.getSource().getWorld();	
+		World world = context.getSource().getWorld();
 		ServerPlayerEntity player = context.getSource().asPlayer();
 		
 		ExtendedWorldData worldData = ExtendedWorldData.get(world);

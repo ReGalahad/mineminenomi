@@ -193,7 +193,7 @@ public class ExplosionAbility extends Explosion
 							d5 = d5 / d13;
 							d7 = d7 / d13;
 							d9 = d9 / d13;
-							double d14 = Explosion.func_222259_a(vec3d, entity);
+							double d14 = Explosion.getBlockDensity(vec3d, entity);
 							double d10 = (1.0D - d12) * d14;
 							entity.attackEntityFrom(this.getDamageSource(), ((int) ((d10 * d10 + d10) / 2.0D * 7.0D * f3 + 1.0D)));
 							double d11 = d10;
