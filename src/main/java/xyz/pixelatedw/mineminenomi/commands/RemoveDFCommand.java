@@ -27,41 +27,43 @@ public class RemoveDFCommand
 	public static void register(CommandDispatcher<CommandSource> dispatcher)
 	{
 		LiteralArgumentBuilder<CommandSource> builder = Commands.literal("removedf").requires(source -> source.hasPermissionLevel(2));
-		
+
 		builder
-			.then(Commands.argument("targets", EntityArgument.players())
-					.executes(context -> { return removesDF(context, EntityArgument.getPlayers(context, "targets")); }));
-		
+			.then(Commands.argument("targets", EntityArgument.players()).executes(context ->
+			{
+				return removesDF(context, EntityArgument.getPlayers(context, "targets"));
+			}));
+
 		dispatcher.register(builder);
 	}
-	
-	private static int removesDF(CommandContext<CommandSource> context, Collection<ServerPlayerEntity> targets) throws CommandSyntaxException 
+
+	private static int removesDF(CommandContext<CommandSource> context, Collection<ServerPlayerEntity> targets) throws CommandSyntaxException
 	{
 		for (ServerPlayerEntity player : targets)
 		{
 			IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
 			IAbilityData abilityDataProps = AbilityDataCapability.get(player);
-			
+
 			devilFruitProps.setDevilFruit("");
 			devilFruitProps.setLogia(false);
 			devilFruitProps.setZoanPoint("");
 			devilFruitProps.setYamiPower(false);
-			
-			for(Ability ability : abilityDataProps.getEquippedAbilities(AbilityCategory.ALL))
+
+			for (Ability ability : abilityDataProps.getEquippedAbilities(AbilityCategory.ALL))
 			{
-				if(ability != null)
+				if (ability != null)
 					ability.stopCooldown(player);
 			}
-			
+
 			abilityDataProps.clearUnlockedAbilities(AbilityCategory.ALL);
 			abilityDataProps.clearEquippedAbilities(AbilityCategory.ALL);
 
 			player.clearActivePotions();
-			
+
 			WyNetwork.sendTo(new SSyncDevilFruitPacket(player.getEntityId(), devilFruitProps), player);
 			WyNetwork.sendTo(new SSyncAbilityDataPacket(abilityDataProps), player);
 		}
 
-		return 1;		
+		return 1;
 	}
 }

@@ -1,125 +1,153 @@
 package xyz.pixelatedw.mineminenomi.models;
 
+import com.mojang.blaze3d.platform.GlStateManager;
+
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.client.renderer.entity.model.RendererModel;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import xyz.pixelatedw.wypi.WyHelper;
 
 @OnlyIn(Dist.CLIENT)
-public class CaptainCapeModel extends BipedModel 
+public class CaptainCapeModel extends BipedModel
 {
-    public RendererModel capeback;
-    public RendererModel caperight;
-    public RendererModel caperightsholder;
-    public RendererModel caperightarm;
-    public RendererModel caperightsholderpad1;
-    public RendererModel caperightsholderpad2;
-    public RendererModel capeleft;
-    public RendererModel capeleftsholder;
-    public RendererModel capeleftarm;
-    public RendererModel capeleftsholderpad1;
-    public RendererModel capeleftsholderpad2;
-    public RendererModel capefrontright;
-    public RendererModel capefrontleft;
-    public RendererModel capeleftcollar1;
-    public RendererModel capeleftcollar2;
-    public RendererModel caperightcollar1;
-    public RendererModel caperightcollar2;
+	public RendererModel capeback;
+	public RendererModel caperight;
+	public RendererModel caperightsholder;
+	public RendererModel caperightarm;
+	public RendererModel caperightsholderpad1;
+	public RendererModel caperightsholderpad2;
+	public RendererModel capeleft;
+	public RendererModel capeleftsholder;
+	public RendererModel capeleftarm;
+	public RendererModel capeleftsholderpad1;
+	public RendererModel capeleftsholderpad2;
+	public RendererModel capefrontright;
+	public RendererModel capefrontleft;
+	public RendererModel capeleftcollar1;
+	public RendererModel capeleftcollar2;
+	public RendererModel caperightcollar1;
+	public RendererModel caperightcollar2;
 
-    public CaptainCapeModel() 
-    {
-		super(0, 0, 128, 128);
-		this.bipedHeadwear.showModel = false;
-        this.textureWidth = 128;
-        this.textureHeight = 128;
-        this.capeleftsholderpad1 = new RendererModel(this, 5, 98);
-        this.capeleftsholderpad1.setRotationPoint(6.0F, -0.75F, -3.0F);
-        this.capeleftsholderpad1.addBox(0.0F, 0.0F, 1.9000000000000006F, 5, 1, 6, 0.0F);
-        this.setRotateAngle(capeleftsholderpad1, 0.0F, 0.0F, 0.17453292012214658F);
-        this.caperightcollar2 = new RendererModel(this, 51, 90);
-        this.caperightcollar2.setRotationPoint(-5.199999809265137F, -3.0F, -2.299999952316284F);
-        this.caperightcollar2.addBox(0.0F, 0.0F, 1.9000000000000006F, 0, 2, 5, 0.0F);
-        this.setRotateAngle(caperightcollar2, 0.020315480286447005F, 0.1909214923392362F, 0.106665067667416F);
-        this.capeleftsholderpad2 = new RendererModel(this, 5, 106);
-        this.capeleftsholderpad2.setRotationPoint(5.900000095367432F, 0.20000000298023224F, -3.0F);
-        this.capeleftsholderpad2.addBox(0.0F, 0.0F, 1.9000000000000006F, 5, 3, 6, 0.0F);
-        this.capefrontright = new RendererModel(this, 28, 98);
-        this.capefrontright.setRotationPoint(-8.5F, 0.0F, -2.5F);
-        this.capefrontright.addBox(0.0F, 0.0F, 1.9000000000000006F, 3, 22, 0, 0.0F);
-        this.caperightarm = new RendererModel(this, 35, 98);
-        this.caperightarm.setRotationPoint(-8.5F, 1.0F, -2.0F);
-        this.caperightarm.addBox(-2.0F, 0.0F, 1.9000000000000006F, 2, 12, 4, 0.0F);
-        this.capeleftsholder = new RendererModel(this, 51, 75);
-        this.capeleftsholder.setRotationPoint(3.5F, -0.009999999776482582F, -2.5F);
-        this.capeleftsholder.addBox(0.0F, 0.0F, 1.9000000000000006F, 6, 0, 5, 0.0F);
-        this.capeleftcollar1 = new RendererModel(this, 51, 81);
-        this.capeleftcollar1.setRotationPoint(5.199999809265137F, -3.0F, -2.299999952316284F);
-        this.capeleftcollar1.addBox(0.0F, 0.0F, 1.9000000000000006F, 0, 3, 5, 0.0F);
-        this.setRotateAngle(capeleftcollar1, -0.016939739261814083F, -0.19124659547468556F, 0.08889128756736413F);
-        this.capeleftcollar2 = new RendererModel(this, 51, 90);
-        this.capeleftcollar2.setRotationPoint(5.199999809265137F, -3.0F, -2.299999952316284F);
-        this.capeleftcollar2.addBox(0.0F, 0.0F, 1.9000000000000006F, 0, 2, 5, 0.0F);
-        this.setRotateAngle(capeleftcollar2, 0.020315480286447005F, -0.1909214923392362F, -0.106665067667416F);
-        this.caperightsholderpad1 = new RendererModel(this, 5, 98);
-        this.caperightsholderpad1.setRotationPoint(-6.0F, -0.75F, -3.0F);
-        this.caperightsholderpad1.addBox(-5.0F, 0.0F, 1.9000000000000006F, 5, 1, 6, 0.0F);
-        this.setRotateAngle(caperightsholderpad1, 0.0F, 0.0F, -0.17453292012214658F);
-        this.capeback = new RendererModel(this, 5, 75);
-        this.capeback.setRotationPoint(-8.5F, 0.0F, 2.5F);
-        this.capeback.addBox(0.0F, 0.0F, 1.9000000000000006F, 17, 22, 0, 0.0F);
-        this.capefrontleft = new RendererModel(this, 28, 98);
-        this.capefrontleft.setRotationPoint(8.5F, 0.0F, -2.5F);
-        this.capefrontleft.addBox(-3.0F, 0.0F, 1.9000000000000006F, 3, 22, 0, 0.0F);
-        this.caperightcollar1 = new RendererModel(this, 51, 81);
-        this.caperightcollar1.setRotationPoint(-5.199999809265137F, -3.0F, -2.299999952316284F);
-        this.caperightcollar1.addBox(0.0F, 0.0F, 1.9000000000000006F, 0, 3, 5, 0.0F);
-        this.setRotateAngle(caperightcollar1, -0.016939739261814083F, 0.19124659547468556F, -0.08889128756736413F);
-        this.caperightsholder = new RendererModel(this, 51, 75);
-        this.caperightsholder.setRotationPoint(-3.5F, -0.009999999776482582F, -2.5F);
-        this.caperightsholder.addBox(-6.0F, 0.0F, 1.9000000000000006F, 6, 0, 5, 0.0F);
-        this.caperight = new RendererModel(this, 40, 70);
-        this.caperight.setRotationPoint(-8.5F, 0.0F, -2.5F);
-        this.caperight.addBox(0.0F, 0.0F, 1.9000000000000006F, 0, 22, 5, 0.0F);
-        this.caperightsholderpad2 = new RendererModel(this, 5, 106);
-        this.caperightsholderpad2.setRotationPoint(-5.900000095367432F, 0.15000000596046448F, -3.0F);
-        this.caperightsholderpad2.addBox(-5.0F, 0.0F, 1.9000000000000006F, 5, 3, 6, 0.0F);
-        this.capeleft = new RendererModel(this, 40, 70);
-        this.capeleft.setRotationPoint(8.5F, 0.0F, -2.5F);
-        this.capeleft.addBox(0.0F, 0.0F, 1.9000000000000006F, 0, 22, 5, 0.0F);
-        this.capeleftarm = new RendererModel(this, 35, 98);
-        this.capeleftarm.setRotationPoint(8.5F, 1.0F, -2.0F);
-        this.capeleftarm.addBox(0.0F, 0.0F, 1.9000000000000006F, 2, 12, 4, 0.0F);
-    }
+	public CaptainCapeModel()
+	{
+		this.textureWidth = 128;
+		this.textureHeight = 128;
+		this.capeleftsholderpad2 = new RendererModel(this, 5, 106);
+		this.capeleftsholderpad2.setRotationPoint(6.4F, 0.0F, 0.0F);
+		this.capeleftsholderpad2.addBox(0.0F, 0.0F, -5.5F, 5, 3, 6, 0.0F);
+		this.caperightcollar1 = new RendererModel(this, 51, 81);
+		this.caperightcollar1.setRotationPoint(-5.2F, -3.0F, -2.3F);
+		this.caperightcollar1.addBox(0.0F, 0.0F, 0.0F, 0, 3, 5, 0.0F);
+		this.setRotateAngle(caperightcollar1, -0.016929693744344994F, 0.19128808601857852F, -0.08883725892651137F);
+		this.capeleft = new RendererModel(this, 40, 70);
+		this.capeleft.setRotationPoint(9.0F, 0.0F, 0.0F);
+		this.capeleft.addBox(0.0F, 0.0F, -5.0F, 0, 22, 5, 0.0F);
+		this.capeleftsholder = new RendererModel(this, 51, 75);
+		this.capeleftsholder.setRotationPoint(3.5F, -0.01F, -2.5F);
+		this.capeleftsholder.addBox(0.0F, 0.0F, 0.0F, 6, 0, 5, 0.0F);
+		this.capeleftcollar2 = new RendererModel(this, 51, 90);
+		this.capeleftcollar2.setRotationPoint(5.2F, -3.0F, -2.3F);
+		this.capeleftcollar2.addBox(0.0F, 0.0F, 0.0F, 0, 2, 5, 0.0F);
+		this.setRotateAngle(capeleftcollar2, 0.02024581932313422F, -0.19093902016817965F, -0.10663961729685353F);
+		this.capefrontleft = new RendererModel(this, 28, 98);
+		this.capefrontleft.setRotationPoint(0.0F, 0.0F, -5.0F);
+		this.capefrontleft.addBox(-3.0F, 0.0F, 0.0F, 3, 22, 0, 0.0F);
+		this.caperightarm = new RendererModel(this, 35, 98);
+		this.caperightarm.setRotationPoint(0.0F, 0.0F, 0.0F);
+		this.caperightarm.addBox(-3.5F, 1.0F, -5.0F, 2, 12, 4, 0.0F);
+		this.capeleftsholderpad1 = new RendererModel(this, 5, 98);
+		this.capeleftsholderpad1.setRotationPoint(0.0F, 0.0F, 0.0F);
+		this.capeleftsholderpad1.addBox(-0.0F, -1.0F, -5.5F, 5, 1, 6, 0.0F);
+		this.setRotateAngle(capeleftsholderpad1, 0.0F, -0.0F, 0.17453292519943295F);
+		this.caperightsholderpad1 = new RendererModel(this, 5, 98);
+		this.caperightsholderpad1.setRotationPoint(0.0F, 0.0F, 0.0F);
+		this.caperightsholderpad1.addBox(-4.0F, -0.8F, -5.5F, 5, 1, 6, 0.0F);
+		this.setRotateAngle(caperightsholderpad1, 0.0F, -0.0F, -0.17453292519943295F);
+		this.capeleftcollar1 = new RendererModel(this, 51, 81);
+		this.capeleftcollar1.setRotationPoint(5.2F, -3.0F, -2.3F);
+		this.capeleftcollar1.addBox(0.0F, 0.0F, 0.0F, 0, 3, 5, 0.0F);
+		this.setRotateAngle(capeleftcollar1, -0.016929693744344994F, -0.19128808601857852F, 0.08883725892651137F);
+		this.caperightcollar2 = new RendererModel(this, 51, 90);
+		this.caperightcollar2.setRotationPoint(-5.2F, -3.0F, -2.3F);
+		this.caperightcollar2.addBox(0.0F, 0.0F, 0.0F, 0, 2, 5, 0.0F);
+		this.setRotateAngle(caperightcollar2, 0.02024581932313422F, 0.19093902016817965F, 0.10663961729685353F);
+		this.caperightsholderpad2 = new RendererModel(this, 5, 106);
+		this.caperightsholderpad2.setRotationPoint(-6.4F, 0.0F, 0.0F);
+		this.caperightsholderpad2.addBox(-4.0F, 0.0F, -5.5F, 5, 3, 6, 0.0F);
+		this.caperight = new RendererModel(this, 40, 70);
+		this.caperight.setRotationPoint(-8.0F, 0.0F, 0.0F);
+		this.caperight.addBox(0.0F, 0.0F, -5.0F, 0, 22, 5, 0.0F);
+		this.capeleftarm = new RendererModel(this, 35, 98);
+		this.capeleftarm.setRotationPoint(0.0F, 0.0F, 0.0F);
+		this.capeleftarm.addBox(2.5F, 1.0F, -5.0F, 2, 12, 4, 0.0F);
+		this.capefrontright = new RendererModel(this, 28, 98);
+		this.capefrontright.setRotationPoint(0.0F, 0.0F, -5.0F);
+		this.capefrontright.addBox(0.0F, 0.0F, 0.0F, 3, 22, 0, 0.0F);
+		this.capeback = new RendererModel(this, 5, 75);
+		this.capeback.setRotationPoint(-0.5F, 0.0F, 2.5F);
+		this.capeback.addBox(-8.0F, 0.0F, 0.0F, 17, 22, 0, 0.0F);
+		this.caperightsholder = new RendererModel(this, 51, 75);
+		this.caperightsholder.setRotationPoint(-3.5F, -0.01F, -2.5F);
+		this.caperightsholder.addBox(-6.0F, 0.0F, 0.0F, 6, 0, 5, 0.0F);
+		this.capeback.addChild(this.capeleftsholderpad2);
+		this.capeback.addChild(this.capeleft);
+		this.capeleft.addChild(this.capefrontleft);
+		this.caperightsholderpad2.addChild(this.caperightarm);
+		this.capeleftsholderpad2.addChild(this.capeleftsholderpad1);
+		this.caperightsholderpad2.addChild(this.caperightsholderpad1);
+		this.capeback.addChild(this.caperightsholderpad2);
+		this.capeback.addChild(this.caperight);
+		this.capeleftsholderpad2.addChild(this.capeleftarm);
+		this.caperight.addChild(this.capefrontright);
+	}
 
-    @Override
-	public void render(LivingEntity entity, float f, float f1, float f2, float f3, float f4, float f5) 
-    { 
-    	super.setRotationAngles(entity, f1, f2, f3, f4, f5, f);
-    	
-		this.capeleftsholderpad1.render(f5);
-        this.caperightcollar2.render(f5);
-        this.capeleftsholderpad2.render(f5);
-        this.capefrontright.render(f5);
-        this.caperightarm.render(f5);
-        this.capeleftsholder.render(f5);
-        this.capeleftcollar1.render(f5);
-        this.capeleftcollar2.render(f5);
-        this.caperightsholderpad1.render(f5);
-        this.capeback.render(f5);
-        this.capefrontleft.render(f5);
-        this.caperightcollar1.render(f5);
-        this.caperightsholder.render(f5);
-        this.caperight.render(f5);
-        this.caperightsholderpad2.render(f5);
-        this.capeleft.render(f5);
-        this.capeleftarm.render(f5);
-    }
+	@Override
+	public void render(LivingEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
+	{
+		this.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
-    public void setRotateAngle(RendererModel RendererModel, float x, float y, float z) 
-    {
-        RendererModel.rotateAngleX = x;
-        RendererModel.rotateAngleY = y;
-        RendererModel.rotateAngleZ = z;
-    }
+		this.capeback.render(scale);
+		this.caperightsholder.render(scale);
+		this.capeleftcollar1.render(scale);
+		this.capeleftcollar2.render(scale);
+		this.caperightcollar2.render(scale);
+		this.capeleftsholder.render(scale);
+		this.caperightcollar1.render(scale);
+	}
+
+	@Override
+	public void setRotationAngles(LivingEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float headYaw, float headPitch, float scaleFactor)
+	{
+		if (entity.shouldRenderSneaking())
+		{
+			GlStateManager.rotatef(30.0F, 1.0F, 0.0F, 0.0F);
+		}
+
+		double dist = entity.getDistanceSq(entity.prevPosX, entity.prevPosY, entity.prevPosZ);
+		if(dist > 0 && dist <= 0.02)
+			dist += 0.02;
+		
+		double angle = MathHelper.clamp((dist * 1000) - 1, 0, 70);
+
+		boolean isMoving = dist > 0.02;
+		
+		if(isMoving)
+			angle = angle + MathHelper.sin(MathHelper.lerp(limbSwing, entity.prevDistanceWalkedModified, entity.distanceWalkedModified)) * 4.0F;
+		
+		this.capeback.rotateAngleX = WyHelper.degToRad(angle);
+		this.caperightsholderpad2.rotateAngleX = WyHelper.degToRad(-angle);
+		this.capeleftsholderpad2.rotateAngleX = WyHelper.degToRad(-angle);
+		this.caperightarm.rotateAngleX = WyHelper.degToRad(angle - (!isMoving ? 0 : 20));
+		this.capeleftarm.rotateAngleX = WyHelper.degToRad(angle - (!isMoving ? 0 : 20));
+	}
+
+	public void setRotateAngle(RendererModel model, float x, float y, float z)
+	{
+		model.rotateAngleX = x;
+		model.rotateAngleY = y;
+		model.rotateAngleZ = z;
+	}
 }

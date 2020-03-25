@@ -4,7 +4,7 @@ issueTrackerURL="https://github.com/Wynd/MineMineNoMi3/issues"
 
 [[mods]]
 modId="mineminenomi"
-version="0.5.1"
+version="0.6.2"
 displayName="Mine Mine no Mi"
 displayURL="https://www.pixelatedw.xyz/"
 logoFile="examplemod.png"
