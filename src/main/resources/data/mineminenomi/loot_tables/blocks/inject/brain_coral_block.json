@@ -1,0 +1,19 @@
+{
+    "pools": [
+        {
+            "name": "bubbly_coral",
+            "rolls": 1,
+            "entries": [
+                {
+                    "type": "item",
+                    "name": "mineminenomi:bubbly_coral",
+                    "weight": 95
+                },
+                {
+                    "type": "empty",
+                    "weight": 5
+                }
+            ]
+        }
+    ]
+}
