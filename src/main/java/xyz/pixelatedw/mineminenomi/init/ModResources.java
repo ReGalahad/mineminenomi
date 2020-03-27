@@ -39,15 +39,17 @@ public class ModResources
 	public static final ResourceLocation PIRATE = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/icons/pirate.png");
 	public static final ResourceLocation MARINE = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/icons/marine.png");
 	public static final ResourceLocation BOUNTY_HUNTER = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/icons/bounty_hunter.png");
-			
+	public static final ResourceLocation REVOLUTIONARY_ARMY = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/icons/revolutionary.png");
+
 	public static final ResourceLocation HUMAN = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/icons/human.png");
 	public static final ResourceLocation FISHMAN = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/icons/fishman.png");
 	public static final ResourceLocation CYBORG = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/icons/cyborg.png");
 			
 	public static final ResourceLocation SWORDSMAN = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/icons/swordsman.png");
 	public static final ResourceLocation SNIPER = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/icons/sniper.png");
-	public static final ResourceLocation MEDIC = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/icons/medic.png");
-									
+	public static final ResourceLocation DOCTOR = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/icons/doctor.png");
+	public static final ResourceLocation ART_OF_WEATHER = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/icons/art_of_weather.png");
+
 	public static final ResourceLocation BOUNTY_POSTER = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/bounty_poster.png");
 	public static final ResourceLocation BOUNTY_POSTER_LARGE = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/bounty_poster_large.png");
 	public static final ResourceLocation CURRENCIES = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/currencies.png");

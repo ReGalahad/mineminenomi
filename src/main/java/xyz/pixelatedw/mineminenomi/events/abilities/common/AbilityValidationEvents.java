@@ -11,7 +11,6 @@ import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
-import xyz.pixelatedw.mineminenomi.init.ModItems;
 import xyz.pixelatedw.mineminenomi.items.AkumaNoMiItem;
 import xyz.pixelatedw.mineminenomi.packets.server.SEntityStatsSyncPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SSyncDevilFruitPacket;
@@ -40,8 +39,8 @@ public class AbilityValidationEvents
 			
 			if (!player.world.isRemote)
 			{
-				if (!entityStatsProps.hasRace() && !entityStatsProps.hasFaction() && !entityStatsProps.hasFightingStyle() && !player.inventory.hasItemStack(new ItemStack(ModItems.CHARACTER_CREATOR)))
-					player.inventory.addItemStackToInventory(new ItemStack(ModItems.CHARACTER_CREATOR, 1));
+				//if (!entityStatsProps.hasRace() && !entityStatsProps.hasFaction() && !entityStatsProps.hasFightingStyle() && !player.inventory.hasItemStack(new ItemStack(ModItems.CHARACTER_CREATOR)))
+				//	player.inventory.addItemStackToInventory(new ItemStack(ModItems.CHARACTER_CREATOR, 1));
 				
 				if(!WyHelper.isNullOrEmpty(devilFruitProps.getDevilFruit()))
 				{

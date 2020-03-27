@@ -44,6 +44,7 @@ public class ModValues
 	public static final String PIRATE = "pirate";
 	public static final String MARINE = "marine";
 	public static final String BOUNTY_HUNTER = "bounty_hunter";
+	public static final String REVOLUTIONARY = "revolutionary";
 	
 	public static final String HUMAN = "human";
 	public static final String FISHMAN = "fishman";
