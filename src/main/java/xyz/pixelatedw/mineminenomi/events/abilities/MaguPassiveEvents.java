@@ -66,6 +66,10 @@ public class MaguPassiveEvents
 	public static void onEntityBurning(RenderBlockOverlayEvent event)
 	{
 		PlayerEntity player = Minecraft.getInstance().player;
+		IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
+
+		if (!devilFruitProps.getDevilFruit().equals("magu_magu"))
+			return;
 
 		if(player.isBurning() && player.areEyesInFluid(FluidTags.LAVA))
 		{
@@ -78,6 +82,10 @@ public class MaguPassiveEvents
 	public static void onEntityInLava(EntityViewRenderEvent.FogDensity event)
 	{
 		PlayerEntity player = Minecraft.getInstance().player;
+		IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
+
+		if (!devilFruitProps.getDevilFruit().equals("magu_magu"))
+			return;
 		
 		if(player.areEyesInFluid(FluidTags.LAVA))
 		{
