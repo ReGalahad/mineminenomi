@@ -2,14 +2,16 @@ package xyz.pixelatedw.mineminenomi.packets.server;
 
 import java.util.function.Supplier;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.network.PacketBuffer;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
-import xyz.pixelatedw.mineminenomi.ModMain;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 
@@ -47,15 +49,23 @@ public class SSyncDevilFruitPacket
 		{
 			ctx.get().enqueueWork(() ->
 			{
-				Entity target = ModMain.PROXY.getWorld().getEntityByID(message.entityId);			
-				if(target == null || !(target instanceof LivingEntity))
-					return;
-				
-				IDevilFruit props = DevilFruitCapability.get((LivingEntity) target);
-				DevilFruitCapability.INSTANCE.getStorage().readNBT(DevilFruitCapability.INSTANCE, props, null, message.data);
+				ClientHandler.handle(message);
 			});	
 		}
 		ctx.get().setPacketHandled(true);
 	}
 
+	public static class ClientHandler
+	{
+		@OnlyIn(Dist.CLIENT)
+		public static void handle(SSyncDevilFruitPacket message)
+		{
+			Entity target = Minecraft.getInstance().world.getEntityByID(message.entityId);			
+			if(target == null || !(target instanceof LivingEntity))
+				return;
+			
+			IDevilFruit props = DevilFruitCapability.get((LivingEntity) target);
+			DevilFruitCapability.INSTANCE.getStorage().readNBT(DevilFruitCapability.INSTANCE, props, null, message.data);
+		}
+	}
 }

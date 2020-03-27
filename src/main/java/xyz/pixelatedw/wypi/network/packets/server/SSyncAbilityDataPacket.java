@@ -2,14 +2,15 @@ package xyz.pixelatedw.wypi.network.packets.server;
 
 import java.util.function.Supplier;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.network.PacketBuffer;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
-import xyz.pixelatedw.mineminenomi.abilities.mera.HikenAbility;
-import xyz.pixelatedw.wypi.APIDefaults;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 
@@ -45,13 +46,21 @@ public class SSyncAbilityDataPacket
 		{
 			ctx.get().enqueueWork(() ->
 			{
-				PlayerEntity player = APIDefaults.PROXY.getPlayer();
-				IAbilityData props = AbilityDataCapability.get(player);
-				
-				AbilityDataCapability.INSTANCE.getStorage().readNBT(AbilityDataCapability.INSTANCE, props, null, message.data);
+				ClientHandler.handle(message);
 			});
 		}
 		ctx.get().setPacketHandled(true);
 	}
 
+	public static class ClientHandler
+	{
+		@OnlyIn(Dist.CLIENT)
+		public static void handle(SSyncAbilityDataPacket message)
+		{
+			PlayerEntity player = Minecraft.getInstance().player;
+			IAbilityData props = AbilityDataCapability.get(player);
+			
+			AbilityDataCapability.INSTANCE.getStorage().readNBT(AbilityDataCapability.INSTANCE, props, null, message.data);
+		}
+	}
 }

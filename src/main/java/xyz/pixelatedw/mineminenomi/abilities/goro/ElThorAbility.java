@@ -1,10 +1,11 @@
 package xyz.pixelatedw.mineminenomi.abilities.goro;
 
+import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.world.server.ServerWorld;
 import xyz.pixelatedw.mineminenomi.api.abilities.ExplosionAbility;
 import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
-import xyz.pixelatedw.mineminenomi.packets.server.SSpawnLightningPacket;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.common.CommonExplosionParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.goro.ElThorParticleEffect;
@@ -12,7 +13,6 @@ import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.abilities.ChargeableAbility;
-import xyz.pixelatedw.wypi.network.WyNetwork;
 
 public class ElThorAbility extends ChargeableAbility
 {
@@ -49,13 +49,23 @@ public class ElThorAbility extends ChargeableAbility
 	private boolean onEndChargingEvent(PlayerEntity player)
 	{
 		RayTraceResult mop = WyHelper.rayTraceBlocks(player);
+		ServerWorld world = (ServerWorld) player.world;
 		
 		if (mop != null)
 		{
 			double i = mop.getHitVec().x;
 			double j = mop.getHitVec().y;
 			double k = mop.getHitVec().z;
-			WyNetwork.sendToAllAround(new SSpawnLightningPacket(1), player);
+			
+			int f = 0;
+			while( f < 1 )
+			{
+				world.addLightningBolt(new LightningBoltEntity(player.world, i + f, j, k + f, false));
+				world.addLightningBolt(new LightningBoltEntity(player.world, i + f, j, k - f, false));
+				world.addLightningBolt(new LightningBoltEntity(player.world, i - f, j, k - f, false));
+				world.addLightningBolt(new LightningBoltEntity(player.world, i - f, j, k + f, false));
+				f++;
+			}		
 
 			ExplosionAbility explosion = DevilFruitsHelper.newExplosion(player, i, j, k, 10);
 			explosion.setExplosionSound(true);

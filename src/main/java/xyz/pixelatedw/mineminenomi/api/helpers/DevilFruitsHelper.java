@@ -11,7 +11,6 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Effects;
 import net.minecraft.tags.FluidTags;
@@ -30,7 +29,6 @@ import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.events.custom.DorikiEvent;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
-import xyz.pixelatedw.mineminenomi.packets.server.SUpdateMotionPacket;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.Ability;
@@ -38,7 +36,6 @@ import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 import xyz.pixelatedw.wypi.math.ISphere;
 import xyz.pixelatedw.wypi.math.Sphere;
-import xyz.pixelatedw.wypi.network.WyNetwork;
 
 public class DevilFruitsHelper
 {
@@ -312,11 +309,6 @@ public class DevilFruitsHelper
 	{
 		ExplosionAbility explosion = new ExplosionAbility(entity, posX, posY, posZ, size);
 		explosion.doExplosion();
-	}
-
-	public static void changeMotion(String c, double x, double y, double z, PlayerEntity p)
-	{
-		WyNetwork.sendTo(new SUpdateMotionPacket(c, x, y, z), (ServerPlayerEntity) p);
 	}
 
 	public static boolean canUseSwordsmanAbilities(PlayerEntity player)

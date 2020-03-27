@@ -2,7 +2,6 @@ package xyz.pixelatedw.mineminenomi.setup;
 
 import com.mojang.brigadier.CommandDispatcher;
 
-import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
@@ -16,8 +15,8 @@ import xyz.pixelatedw.mineminenomi.commands.IssueBountyCommand;
 import xyz.pixelatedw.mineminenomi.commands.RemoveDFCommand;
 import xyz.pixelatedw.wypi.APIConfig;
 
-@Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = { Dist.CLIENT, Dist.DEDICATED_SERVER })
-public class ForgeCommonSetup
+@Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+public class ForgeSetup
 {
 	@SubscribeEvent
 	public static void serverStarting(FMLServerStartingEvent event)

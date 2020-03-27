@@ -2,10 +2,15 @@ package xyz.pixelatedw.mineminenomi.packets.server;
 
 import java.util.function.Supplier;
 
+import net.minecraft.block.Blocks;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketBuffer;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
-import xyz.pixelatedw.mineminenomi.ModMain;
+import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
 
 public class SViewProtectionPacket
 {
@@ -43,22 +48,34 @@ public class SViewProtectionPacket
 	
 	public static void handle(SViewProtectionPacket message, final Supplier<NetworkEvent.Context> ctx)
 	{
-		ctx.get().enqueueWork(() ->
+		if(ctx.get().getDirection() == NetworkDirection.PLAY_TO_CLIENT)
 		{
-			PlayerEntity player = ModMain.PROXY.getPlayer();
+			ctx.get().enqueueWork(() ->
+			{
+	
+			});
+		}
+
+		ctx.get().setPacketHandled(true);
+	}
+	
+	public static class ClientHandler
+	{
+		@OnlyIn(Dist.CLIENT)
+		public static void handle(SViewProtectionPacket message)
+		{
+			PlayerEntity player = Minecraft.getInstance().player;
 
 			if(message.state)
 			{
-			//	WyHelper.createEmptyCube(player.world, message.midPoint[0], message.midPoint[1], message.midPoint[2], new int[] { message.size, message.size, message.size }, Blocks.BLUE_STAINED_GLASS, "air", "liquids", "foliage");
-			//	WyHelper.createEmptySphere(player.world, message.midPoint[0], message.midPoint[1], message.midPoint[2], 1, Blocks.RED_STAINED_GLASS, "air", "liquids", "foliage");
+				DevilFruitsHelper.createEmptyCube(player.world, message.midPoint[0], message.midPoint[1], message.midPoint[2], new int[] { message.size, message.size, message.size }, Blocks.BLUE_STAINED_GLASS, "air", "liquids", "foliage");
+				DevilFruitsHelper.createEmptySphere(player.world, message.midPoint[0], message.midPoint[1], message.midPoint[2], 1, Blocks.RED_STAINED_GLASS, "air", "liquids", "foliage");
 			}
 			else
 			{
-			//	WyHelper.createEmptyCube(player.world, message.midPoint[0], message.midPoint[1], message.midPoint[2], new int[] { message.size, message.size, message.size }, Blocks.AIR, "protection");
-			//	WyHelper.createEmptySphere(player.world, message.midPoint[0], message.midPoint[1], message.midPoint[2], 1, Blocks.AIR, "protection");
+				DevilFruitsHelper.createEmptyCube(player.world, message.midPoint[0], message.midPoint[1], message.midPoint[2], new int[] { message.size, message.size, message.size }, Blocks.AIR, "protection");
+				DevilFruitsHelper.createEmptySphere(player.world, message.midPoint[0], message.midPoint[1], message.midPoint[2], 1, Blocks.AIR, "protection");
 			}
-		});
-
-		ctx.get().setPacketHandled(true);
+		}
 	}
 }

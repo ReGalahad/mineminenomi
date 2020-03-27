@@ -2,11 +2,13 @@ package xyz.pixelatedw.mineminenomi.packets.server;
 
 import java.util.function.Supplier;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketBuffer;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
-import xyz.pixelatedw.mineminenomi.ModMain;
 
 public class SRecalculateEyeHeightPacket
 {
@@ -26,11 +28,20 @@ public class SRecalculateEyeHeightPacket
 		{
 			ctx.get().enqueueWork(() ->
 			{
-				PlayerEntity player = ModMain.PROXY.getPlayer();
-				
-				player.recalculateSize();
+				ClientHandler.handle(message);
 			});
 		}
 		ctx.get().setPacketHandled(true);
+	}
+	
+	public static class ClientHandler
+	{
+		@OnlyIn(Dist.CLIENT)
+		public static void handle(SRecalculateEyeHeightPacket message)
+		{
+			PlayerEntity player = Minecraft.getInstance().player;
+			
+			player.recalculateSize();
+		}
 	}
 }
