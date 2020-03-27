@@ -11,7 +11,6 @@ import xyz.pixelatedw.wypi.data.ability.AbilityDataProvider;
 import xyz.pixelatedw.wypi.network.WyNetwork;
 import xyz.pixelatedw.wypi.network.packets.client.CSyncAbilityDataPacket;
 import xyz.pixelatedw.wypi.network.packets.server.SSyncAbilityDataPacket;
-import xyz.pixelatedw.wypi.network.packets.server.SUpdateAbilityStatePacket;
 
 public class APIDefaults
 {	
@@ -28,7 +27,6 @@ public class APIDefaults
 
 		// Server
 		WyNetwork.registerPacket(SSyncAbilityDataPacket.class, SSyncAbilityDataPacket::encode, SSyncAbilityDataPacket::decode, SSyncAbilityDataPacket::handle);
-		WyNetwork.registerPacket(SUpdateAbilityStatePacket.class, SUpdateAbilityStatePacket::encode, SUpdateAbilityStatePacket::decode, SUpdateAbilityStatePacket::handle);
 	}
 
 	public static void initCapabilities()
