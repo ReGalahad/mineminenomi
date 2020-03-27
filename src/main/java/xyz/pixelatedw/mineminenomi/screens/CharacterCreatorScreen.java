@@ -272,7 +272,7 @@ public class CharacterCreatorScreen extends Screen
 				}
 			}
 			
-			if(!WyHelper.isNullOrEmpty(props.getRace()) && !!WyHelper.isNullOrEmpty(props.getFaction()) && !!WyHelper.isNullOrEmpty(props.getFightingStyle()))
+			if(!WyHelper.isNullOrEmpty(props.getRace()) && !WyHelper.isNullOrEmpty(props.getFaction()) && !WyHelper.isNullOrEmpty(props.getFightingStyle()))
 			{
 				Minecraft.getInstance().displayGuiScreen(null);
 				WyNetwork.sendToServer(new CEntityStatsSyncPacket(props));

@@ -153,6 +153,7 @@
 	"faction.marine": "Marine",
 	"faction.name": "Faction",
 	"faction.pirate": "Pirate",
+	"faction.revolutionary": "Revolutionary",
 
 	"gui.abilities": "Abilities",
 	"gui.accept": "Accept",
@@ -344,6 +345,7 @@
 	"race.human": "Human",
 	"race.name": "Race",
 
+	"style.art_of_weather": "Art of Weather",
 	"style.doctor": "Doctor",
 	"style.empty": "No Fighting Style",
 	"style.name": "Fighting Style",

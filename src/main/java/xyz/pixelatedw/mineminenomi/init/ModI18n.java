@@ -37,7 +37,8 @@ public class ModI18n
 	STYLE_SWORDSMAN = "style.swordsman",
 	STYLE_SNIPER = "style.sniper",
 	STYLE_DOCTOR = "style.doctor",
-	
+	STYLE_ART_OF_WEATHER = "style.art_of_weather",
+			
 	GUI_ABILITIES = "gui.abilities",
 	GUI_COLA = "gui.cola",
 	GUI_DORIKI = "gui.doriki",
@@ -119,7 +120,8 @@ public class ModI18n
 		WyRegistry.registerName(FACTION_PIRATE, "Pirate");
 		WyRegistry.registerName(FACTION_MARINE, "Marine");
 		WyRegistry.registerName(FACTION_BOUNTY_HUNTER, "Bounty Hunter");
-		
+		WyRegistry.registerName(FACTION_REVOLUTIONARY, "Revolutionary");
+
 		WyRegistry.registerName(RACE_HUMAN, "Human");
 		WyRegistry.registerName(RACE_FISHMAN, "Fishman");
 		WyRegistry.registerName(RACE_CYBORG, "Cyborg");
@@ -127,7 +129,8 @@ public class ModI18n
 		WyRegistry.registerName(STYLE_SWORDSMAN, "Swordsman");
 		WyRegistry.registerName(STYLE_SNIPER, "Sniper");
 		WyRegistry.registerName(STYLE_DOCTOR, "Doctor");
-		
+		WyRegistry.registerName(STYLE_ART_OF_WEATHER, "Art of Weather");
+
 		// Keys
 		WyRegistry.registerName(CATEGORY_GENERAL, "Mine Mine no Mi Keys");
 		WyRegistry.registerName(KEY_COMBATMODE, "Combat Mode");
