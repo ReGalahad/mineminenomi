@@ -4,6 +4,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.abilities.rokushiki.GeppoAbility;
+import xyz.pixelatedw.mineminenomi.abilities.rokushiki.KamieAbility;
+import xyz.pixelatedw.mineminenomi.abilities.rokushiki.RankyakuAbility;
+import xyz.pixelatedw.mineminenomi.abilities.rokushiki.ShiganAbility;
 import xyz.pixelatedw.mineminenomi.abilities.rokushiki.SoruAbility;
 import xyz.pixelatedw.mineminenomi.abilities.rokushiki.TekkaiAbility;
 import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
@@ -26,13 +29,10 @@ public class AbilityProgressionEvents
 		{
 			gainAbility(event.player, 500, SoruAbility.INSTANCE);
 			gainAbility(event.player, 1500, TekkaiAbility.INSTANCE);
-			//gainAbility(event.player, 3000, RokushikiAbilities.SHIGAN);
+			gainAbility(event.player, 3000, ShiganAbility.INSTANCE);
 			gainAbility(event.player, 4500, GeppoAbility.INSTANCE);
-			/*gainAbility(event.player, 5000, HakiAbilities.KENBUNSHOKU_HAKI);
-			gainAbility(event.player, 6000, RokushikiAbilities.KAMIE);
-			gainAbility(event.player, 8500, RokushikiAbilities.RANKYAKU);
-			gainAbility(event.player, 9000, HakiAbilities.BUSOSHOKU_HAKI);*/
-			// HAOSHOKU - 9000 + other
+			gainAbility(event.player, 6000, KamieAbility.INSTANCE);
+			gainAbility(event.player, 8500, RankyakuAbility.INSTANCE);
 		}
 /*		else if (event.props.isFishman())
 		{

@@ -26,13 +26,11 @@ public class TekkaiAbility extends ContinuousAbility
 		player.addPotionEffect(new EffectInstance(Effects.RESISTANCE, 20, 6, false, false));
 		player.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 20, 100, false, false));
 		player.addPotionEffect(new EffectInstance(Effects.MINING_FATIGUE, 20, 5, false, false));
-		player.setMotion(0, -0.2, 0);
-		player.velocityChanged = true;
 	}
 
 	private boolean onEndContinuityEvent(PlayerEntity player)
 	{
-		int cooldown = (int) Math.round(this.continueTime / 20.0);
+		int cooldown = (int) Math.round(this.continueTime / 15.0);
 		this.setMaxCooldown(cooldown);
 		player.removePotionEffect(Effects.RESISTANCE);
 		player.removePotionEffect(Effects.SLOWNESS);

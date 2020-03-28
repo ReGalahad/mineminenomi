@@ -56,6 +56,9 @@ import xyz.pixelatedw.mineminenomi.abilities.pika.FlashAbility;
 import xyz.pixelatedw.mineminenomi.abilities.pika.YasakaniNoMagatamaAbility;
 import xyz.pixelatedw.mineminenomi.abilities.pika.YataNoKagamiAbility;
 import xyz.pixelatedw.mineminenomi.abilities.rokushiki.GeppoAbility;
+import xyz.pixelatedw.mineminenomi.abilities.rokushiki.KamieAbility;
+import xyz.pixelatedw.mineminenomi.abilities.rokushiki.RankyakuAbility;
+import xyz.pixelatedw.mineminenomi.abilities.rokushiki.ShiganAbility;
 import xyz.pixelatedw.mineminenomi.abilities.rokushiki.SoruAbility;
 import xyz.pixelatedw.mineminenomi.abilities.rokushiki.TekkaiAbility;
 import xyz.pixelatedw.mineminenomi.abilities.suke.ShishaNoTeAbility;
@@ -155,7 +158,10 @@ public class ModAbilities
 
 		WyRegistry.registerAbility(SoruAbility.INSTANCE);
 		WyRegistry.registerAbility(TekkaiAbility.INSTANCE);
+		WyRegistry.registerAbility(ShiganAbility.INSTANCE);
 		WyRegistry.registerAbility(GeppoAbility.INSTANCE);
+		WyRegistry.registerAbility(RankyakuAbility.INSTANCE);
+		WyRegistry.registerAbility(KamieAbility.INSTANCE);
 		totalAbilities += 3;
 
 		WyDebug.debug("A total of " + ModValues.devilfruits.size() + " Devil Fruits have been registered");
