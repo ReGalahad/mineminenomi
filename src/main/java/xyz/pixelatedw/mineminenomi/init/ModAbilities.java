@@ -55,6 +55,9 @@ import xyz.pixelatedw.mineminenomi.abilities.pika.AmaterasuAbility;
 import xyz.pixelatedw.mineminenomi.abilities.pika.FlashAbility;
 import xyz.pixelatedw.mineminenomi.abilities.pika.YasakaniNoMagatamaAbility;
 import xyz.pixelatedw.mineminenomi.abilities.pika.YataNoKagamiAbility;
+import xyz.pixelatedw.mineminenomi.abilities.rokushiki.GeppoAbility;
+import xyz.pixelatedw.mineminenomi.abilities.rokushiki.SoruAbility;
+import xyz.pixelatedw.mineminenomi.abilities.rokushiki.TekkaiAbility;
 import xyz.pixelatedw.mineminenomi.abilities.suke.ShishaNoTeAbility;
 import xyz.pixelatedw.mineminenomi.abilities.suke.SkattingAbility;
 import xyz.pixelatedw.mineminenomi.abilities.suke.SukePunchAbility;
@@ -71,7 +74,7 @@ import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.debug.WyDebug;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class ModDevilFruits
+public class ModAbilities
 {
 
 	// public static final AkumaNoMiItem MINI_MINI_NO_MI = new AkumaNoMiItem("Mini Mini no Mi", EnumFruitType.PARAMECIA);
@@ -123,6 +126,11 @@ public class ModDevilFruits
 	public static final AkumaNoMiItem HIE_HIE_NO_MI = new AkumaNoMiItem("Hie Hie no Mi", EnumFruitType.LOGIA, IceBlockPartisanAbility.INSTANCE, IceAgeAbility.INSTANCE, IceBallAbility.INSTANCE, IceSaberAbility.INSTANCE, IceTimeCapsuleAbility.INSTANCE, IceBlockPheasantAbility.INSTANCE);
 	public static final AkumaNoMiItem MERA_MERA_NO_MI = new AkumaNoMiItem("Mera Mera no Mi", EnumFruitType.LOGIA, HikenAbility.INSTANCE, HiganAbility.INSTANCE, DaiEnkaiEnteiAbility.INSTANCE, HidarumaAbility.INSTANCE, JujikaAbility.INSTANCE);
 
+	private static final Ability[] ROKUSHIKI_ABILITIES = new Ability[]
+		{
+				SoruAbility.INSTANCE
+		};
+
 	static
 	{
 		ModValues.devilfruits.forEach(item ->
@@ -144,6 +152,11 @@ public class ModDevilFruits
 				}
 			}
 		}
+
+		WyRegistry.registerAbility(SoruAbility.INSTANCE);
+		WyRegistry.registerAbility(TekkaiAbility.INSTANCE);
+		WyRegistry.registerAbility(GeppoAbility.INSTANCE);
+		totalAbilities += 3;
 
 		WyDebug.debug("A total of " + ModValues.devilfruits.size() + " Devil Fruits have been registered");
 		WyDebug.debug("A total of " + totalAbilities + " abilities have been registered");

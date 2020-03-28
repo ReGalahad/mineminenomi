@@ -41,6 +41,12 @@ public class AbilitiesListScreenPanel extends ScrollPanel
 	}
 
 	@Override
+	public boolean mouseReleased(double p_mouseReleased_1_, double p_mouseReleased_3_, int p_mouseReleased_5_)
+	{
+		return true;
+	}
+	
+	@Override
 	protected int getContentHeight()
 	{
 		return (this.entries.size()) * ENTRY_HEIGHT + 46;

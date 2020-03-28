@@ -13,7 +13,7 @@ public class ModCreativeTabs
 		@OnlyIn(Dist.CLIENT)
 		public ItemStack createIcon()
 		{
-			return new ItemStack(ModDevilFruits.MERA_MERA_NO_MI);
+			return new ItemStack(ModAbilities.MERA_MERA_NO_MI);
 		}
 	};
 

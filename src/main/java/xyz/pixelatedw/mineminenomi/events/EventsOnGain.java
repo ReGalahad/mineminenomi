@@ -19,7 +19,6 @@ import xyz.pixelatedw.mineminenomi.events.custom.DorikiEvent;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
 import xyz.pixelatedw.mineminenomi.packets.server.SEntityStatsSyncPacket;
 import xyz.pixelatedw.wypi.APIConfig;
-import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 import xyz.pixelatedw.wypi.network.WyNetwork;
@@ -31,39 +30,6 @@ public class EventsOnGain
 	@SubscribeEvent
 	public static void onDorikiGained(DorikiEvent event)
 	{
-/*		if (event.props.isHuman())
-		{
-			gainAbility(event.player, 500, RokushikiAbilities.SORU);
-			gainAbility(event.player, 1500, RokushikiAbilities.TEKKAI);
-			gainAbility(event.player, 3000, RokushikiAbilities.SHIGAN);
-			gainAbility(event.player, 4500, RokushikiAbilities.GEPPO);
-			gainAbility(event.player, 5000, HakiAbilities.KENBUNSHOKU_HAKI);
-			gainAbility(event.player, 6000, RokushikiAbilities.KAMIE);
-			gainAbility(event.player, 8500, RokushikiAbilities.RANKYAKU);
-			gainAbility(event.player, 9000, HakiAbilities.BUSOSHOKU_HAKI);
-			// HAOSHOKU - 9000 + other
-		}
-		else if (event.props.isFishman())
-		{
-			gainAbility(event.player, 800, FishKarateAbilities.UCHIMIZU);
-			gainAbility(event.player, 2000, FishKarateAbilities.MURASAME);
-			gainAbility(event.player, 2500, FishKarateAbilities.KACHIAGE_HAISOKU);
-			gainAbility(event.player, 3000, FishKarateAbilities.SAMEHADA_SHOTEI);
-			gainAbility(event.player, 4000, HakiAbilities.KENBUNSHOKU_HAKI);
-			gainAbility(event.player, 7500, FishKarateAbilities.KARAKUSAGAWARA_SEIKEN);
-			gainAbility(event.player, 9000, HakiAbilities.BUSOSHOKU_HAKI);
-		}
-		else if (event.props.isCyborg())
-		{
-			gainAbility(event.player, 0, CyborgAbilities.FRESH_FIRE);
-			gainAbility(event.player, 0, CyborgAbilities.COLA_OVERDRIVE);
-			gainAbility(event.player, 0, CyborgAbilities.STRONG_RIGHT);
-			gainAbility(event.player, 0, CyborgAbilities.RADICAL_BEAM);
-			gainAbility(event.player, 0, CyborgAbilities.COUP_DE_VENT);
-			gainAbility(event.player, 5500, HakiAbilities.KENBUNSHOKU_HAKI);
-			gainAbility(event.player, 8500, HakiAbilities.BUSOSHOKU_HAKI);
-		}*/
-
 		if (event.player != null && CommonConfig.instance.isExtraHeartsEnabled())
 		{
 			IAttributeInstance maxHpAttribute = event.player.getAttribute(SharedMonsterAttributes.MAX_HEALTH);
@@ -73,27 +39,6 @@ public class EventsOnGain
 			else
 				maxHpAttribute.setBaseValue(event.props.getDoriki() / 100);
 		}
-	}
-
-	private static void gainAbility(PlayerEntity player, int doriki, Ability ability)
-	{
-		IEntityStats props = EntityStatsCapability.get(player);
-		IAbilityData abilityProps = AbilityDataCapability.get(player);
-
-/*		if (ability instanceof KenbunshokuHaki || ability instanceof BusoshokuHaki)
-		{
-			if (props.getDoriki() >= doriki && !abilityProps.hasHakiAbility(ability) && !DevilFruitsHelper.verifyIfAbilityIsBanned(ability))
-				abilityProps.addHakiAbility(ability);
-			if ((props.getDoriki() < doriki || DevilFruitsHelper.verifyIfAbilityIsBanned(ability)) && abilityProps.hasHakiAbility(ability))
-				abilityProps.removeHakiAbility(ability);
-		}
-		else
-		{
-			if (props.getDoriki() >= doriki && !abilityProps.hasRacialAbility(ability) && !DevilFruitsHelper.verifyIfAbilityIsBanned(ability))
-				abilityProps.addRacialAbility(ability);
-			if ((props.getDoriki() < doriki || DevilFruitsHelper.verifyIfAbilityIsBanned(ability)) && abilityProps.hasRacialAbility(ability))
-				abilityProps.removeRacialAbility(ability);
-		}*/
 	}
 
 	@SubscribeEvent

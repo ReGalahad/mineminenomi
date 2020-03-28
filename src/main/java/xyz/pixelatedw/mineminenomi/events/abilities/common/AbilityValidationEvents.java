@@ -78,15 +78,14 @@ public class AbilityValidationEvents
 					}
 				}*/
 				
-				/*for(int i = 0; i < abilityProps.getHotbarAbilities().length; i++)
+				for(int i = 0; i < abilityProps.getEquippedAbilities().length; i++)
 				{
-					//System.out.println(abilityProps.getAbilityInSlot(i));
-					if(abilityProps.getAbilityInSlot(i) != null)
+					if(abilityProps.getEquippedAbility(i) != null)
 					{
-						if(DevilFruitsHelper.verifyIfAbilityIsBanned(abilityProps.getAbilityInSlot(i)))
-							abilityProps.setAbilityInHotbar(i, null);
+						if(DevilFruitsHelper.verifyIfAbilityIsBanned(abilityProps.getEquippedAbility(i)))
+							abilityProps.setEquippedAbility(i, null);
 					}
-				}*/
+				}
 								
 				WyNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), entityStatsProps), (ServerPlayerEntity) player);
 				WyNetwork.sendTo(new SSyncDevilFruitPacket(player.getEntityId(), devilFruitProps), (ServerPlayerEntity) player);

@@ -20,7 +20,7 @@ import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
-import xyz.pixelatedw.mineminenomi.init.ModDevilFruits;
+import xyz.pixelatedw.mineminenomi.init.ModAbilities;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.wypi.WyHelper;
@@ -95,7 +95,7 @@ public class PlayerStatsScreen extends Screen
 
 		if (!WyHelper.isNullOrEmpty(devilFruitProps.getDevilFruit()))
 		{
-			ItemStack yamiFruit = new ItemStack(ModDevilFruits.YAMI_YAMI_NO_MI);
+			ItemStack yamiFruit = new ItemStack(ModAbilities.YAMI_YAMI_NO_MI);
 			ItemStack df;
 			if (!devilFruitProps.getDevilFruit().equals("yamidummy"))
 			{

@@ -35,7 +35,7 @@ public class TenchiMeidoAbility extends ChargeableAbility
 		if(chargeTime % 2 == 0)
 			PARTICLES.spawn(player.world, player.posX, player.posY, player.posZ, 0, 0, 0);
 		player.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 10, 2000));
-		player.setMotion(0, 0, 0);
+		player.setMotion(0, -0.2, 0);
 		player.velocityChanged = true;
 	}
 	

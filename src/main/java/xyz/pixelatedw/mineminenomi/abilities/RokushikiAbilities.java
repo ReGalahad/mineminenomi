@@ -14,12 +14,30 @@
  * {
  * static
  * {
- * ModValues.abilityWebAppExtraParams.put("soru", new String[] {"desc", "Allows the user to move at an extremely high speed.", "dorikiRequiredForHumans", "500"});
- * ModValues.abilityWebAppExtraParams.put("tekkai", new String[] {"desc", "Hardens the user's body to protect themselves, but they're unable to move.", "dorikiRequiredForHumans", "1500"});
- * ModValues.abilityWebAppExtraParams.put("geppo", new String[] {"desc", "The user kicks the air beneath them to launch themselves into the air.", "dorikiRequiredForHumans", "4500"});
- * ModValues.abilityWebAppExtraParams.put("rankyaku", new String[] {"desc", "By kicking at a very high speed, the user launches an air blade at the opponent.", "dorikiRequiredForHumans", "8500"});
- * ModValues.abilityWebAppExtraParams.put("shigan", new String[] {"desc", "The user thrusts their finger at the opponent, to pierce them.", "dorikiRequiredForHumans", "3000"});
- * ModValues.abilityWebAppExtraParams.put("kamie", new String[] {"desc", "Maked the user's body flexible in order to avoid attacks.", "dorikiRequiredForHumans", "6000"});
+ * ModValues.abilityWebAppExtraParams.put("soru", new String[]
+ * {
+ * "desc", "Allows the user to move at an extremely high speed.", "dorikiRequiredForHumans", "500"
+ * });
+ * ModValues.abilityWebAppExtraParams.put("tekkai", new String[]
+ * {
+ * "desc", "Hardens the user's body to protect themselves, but they're unable to move.", "dorikiRequiredForHumans", "1500"
+ * });
+ * ModValues.abilityWebAppExtraParams.put("geppo", new String[]
+ * {
+ * "desc", "The user kicks the air beneath them to launch themselves into the air.", "dorikiRequiredForHumans", "4500"
+ * });
+ * ModValues.abilityWebAppExtraParams.put("rankyaku", new String[]
+ * {
+ * "desc", "By kicking at a very high speed, the user launches an air blade at the opponent.", "dorikiRequiredForHumans", "8500"
+ * });
+ * ModValues.abilityWebAppExtraParams.put("shigan", new String[]
+ * {
+ * "desc", "The user thrusts their finger at the opponent, to pierce them.", "dorikiRequiredForHumans", "3000"
+ * });
+ * ModValues.abilityWebAppExtraParams.put("kamie", new String[]
+ * {
+ * "desc", "Maked the user's body flexible in order to avoid attacks.", "dorikiRequiredForHumans", "6000"
+ * });
  * }
  * public static Ability SORU = new Soru();
  * public static Ability TEKKAI = new Tekkai();
@@ -27,7 +45,10 @@
  * public static Ability RANKYAKU = new Rankyaku();
  * public static Ability SHIGAN = new Shigan();
  * public static Ability KAMIE = new Kamie();
- * public static Ability[] abilitiesArray = new Ability[] {SORU, TEKKAI, GEPPO, RANKYAKU, SHIGAN, KAMIE};
+ * public static Ability[] abilitiesArray = new Ability[]
+ * {
+ * SORU, TEKKAI, GEPPO, RANKYAKU, SHIGAN, KAMIE
+ * };
  * public static class Soru extends Ability
  * {
  * public Soru()
@@ -44,7 +65,7 @@
  * @Override
  * public void duringPassive(PlayerEntity player, int passiveTimer)
  * {
- * if(passiveTimer > 1200)
+ * if (passiveTimer > 1200)
  * {
  * this.setPassiveActive(false);
  * this.startCooldown();
@@ -69,37 +90,57 @@
  * @Override
  * public void use(PlayerEntity player)
  * {
- * if(!this.isOnCooldown)
+ * if (!this.isOnCooldown)
  * {
  * Direction dir = WyHelper.get8Directions(player);
  * double mX = 0;
  * double mY = 0;
  * double mZ = 0;
- * if(player.onGround)
+ * if (player.onGround)
  * mY += 1.7;
  * else
  * mY += 1.86;
- * if(dir == WyHelper.Direction.NORTH) mZ -= 1;
- * if(dir == WyHelper.Direction.NORTH_WEST) {mZ -= 1; mX -= 1;}
- * if(dir == WyHelper.Direction.SOUTH) mZ += 1;
- * if(dir == WyHelper.Direction.NORTH_EAST) {mZ -= 1; mX += 1;}
- * if(dir == WyHelper.Direction.WEST) mX -= 1;
- * if(dir == WyHelper.Direction.SOUTH_WEST) {mZ += 1; mX -= 1;}
- * if(dir == WyHelper.Direction.EAST) mX += 1;
- * if(dir == WyHelper.Direction.SOUTH_EAST) {mZ += 1; mX += 1;}
+ * if (dir == WyHelper.Direction.NORTH)
+ * mZ -= 1;
+ * if (dir == WyHelper.Direction.NORTH_WEST)
+ * {
+ * mZ -= 1;
+ * mX -= 1;
+ * }
+ * if (dir == WyHelper.Direction.SOUTH)
+ * mZ += 1;
+ * if (dir == WyHelper.Direction.NORTH_EAST)
+ * {
+ * mZ -= 1;
+ * mX += 1;
+ * }
+ * if (dir == WyHelper.Direction.WEST)
+ * mX -= 1;
+ * if (dir == WyHelper.Direction.SOUTH_WEST)
+ * {
+ * mZ += 1;
+ * mX -= 1;
+ * }
+ * if (dir == WyHelper.Direction.EAST)
+ * mX += 1;
+ * if (dir == WyHelper.Direction.SOUTH_EAST)
+ * {
+ * mZ += 1;
+ * mX += 1;
+ * }
  * DevilFruitsHelper.changeMotion("=", mX, mY, mZ, player);
  * this.used = true;
- * //ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_GEPPO, player), player);
+ * // ModNetwork.sendToAllAround(new SParticlesPacket(ID.PARTICLEFX_GEPPO, player), player);
  * super.use(player);
  * }
  * }
  * @Override
  * public void tick(PlayerEntity player)
  * {
- * if(!player.world.isRemote && this.used)
+ * if (!player.world.isRemote && this.used)
  * {
  * player.fallDistance = 0;
- * if(player.world.getBlockState(player.getPosition().down()).isSolid())
+ * if (player.world.getBlockState(player.getPosition().down()).isSolid())
  * this.used = false;
  * }
  * }
@@ -139,7 +180,7 @@
  * @Override
  * public void duringPassive(PlayerEntity player, int passiveTimer)
  * {
- * if(passiveTimer > 400)
+ * if (passiveTimer > 400)
  * {
  * this.setPassiveActive(false);
  * this.startCooldown();

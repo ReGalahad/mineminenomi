@@ -97,11 +97,13 @@ public abstract class ContinuousAbility extends Ability
 	
 	public void stopContinuity(PlayerEntity player)
 	{
-		this.continueTime = 0;
-		this.startCooldown();
-		this.onEndContinuityEvent.onEndContinuity(player);
-		IAbilityData props = AbilityDataCapability.get(player);
-		WyNetwork.sendTo(new SSyncAbilityDataPacket(props), (ServerPlayerEntity) player);
+		if(this.onEndContinuityEvent.onEndContinuity(player))
+		{
+			this.continueTime = 0;
+			this.startCooldown();		
+			IAbilityData props = AbilityDataCapability.get(player);
+			WyNetwork.sendTo(new SSyncAbilityDataPacket(props), (ServerPlayerEntity) player);			
+		}
 	}
 	
 	/*

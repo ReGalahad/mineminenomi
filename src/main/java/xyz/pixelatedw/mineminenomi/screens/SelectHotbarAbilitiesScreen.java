@@ -52,6 +52,7 @@ public class SelectHotbarAbilitiesScreen extends Screen
 	{
 		super(new StringTextComponent(""));
 		this.player = player;
+		this.minecraft = Minecraft.getInstance();
 
 		this.entityStatsProps = EntityStatsCapability.get(player);
 		this.abilityDataProps = AbilityDataCapability.get(player);
@@ -122,11 +123,11 @@ public class SelectHotbarAbilitiesScreen extends Screen
 
 		// WyHelper.startGlScissor((posX - 220) / 2, (posY - 200) / 2, 215, 130);
 
-		if (this.menuSelected == 0)
+		if (this.menuSelected == 0 && this.devilFruitsAbilitiesList != null)
 			this.devilFruitsAbilitiesList.render(x, y, f);
-		else if (this.menuSelected == 1)
+		else if (this.menuSelected == 1 && this.racialAbilitiesList != null)
 			this.racialAbilitiesList.render(x, y, f);
-		else if (this.menuSelected == 2)
+		else if (this.menuSelected == 2 && this.hakiAbilitiesList != null)
 			this.hakiAbilitiesList.render(x, y, f);
 
 		// WyHelper.endGlScissor();
@@ -139,15 +140,15 @@ public class SelectHotbarAbilitiesScreen extends Screen
 	{
 		int posX = this.width;
 		int posY = this.height;
-		relativePosX = posX;
-		relativePosY = posY;
-
-		if (!WyHelper.isNullOrEmpty(devilFruitProps.getDevilFruit()))
+		this.relativePosX = posX;
+		this.relativePosY = posY;
+		
+		if (!WyHelper.isNullOrEmpty(this.devilFruitProps.getDevilFruit()))
 		{
 			this.addButton(new NoTextureButton((posX - 280) / 2, (posY - 200) / 2, 27, 25, "", b ->
 			{
 				this.menuSelected = 0;
-				updateScreen();
+				this.updateScreen();
 			}));
 		}
 		Ability abl = this.abilityDataProps.getUnlockedAbilities(AbilityCategory.RACIAL).stream().findFirst().orElse(null);
@@ -156,7 +157,7 @@ public class SelectHotbarAbilitiesScreen extends Screen
 			this.addButton(new NoTextureButton((posX - 280) / 2, (posY - 140) / 2, 27, 25, "", b ->
 			{
 				this.menuSelected = 1;
-				updateScreen();
+				this.updateScreen();
 			}));
 		}
 		abl = this.abilityDataProps.getUnlockedAbilities(AbilityCategory.HAKI).stream().findFirst().orElse(null);
@@ -165,7 +166,7 @@ public class SelectHotbarAbilitiesScreen extends Screen
 			this.addButton(new NoTextureButton((posX - 280) / 2, (posY - 80) / 2, 27, 25, "", b ->
 			{
 				this.menuSelected = 2;
-				updateScreen();
+				this.updateScreen();
 			}));
 		}
 		for (int i = 0; i < 8; i++)
@@ -183,29 +184,7 @@ public class SelectHotbarAbilitiesScreen extends Screen
 				}
 			}));
 		}
-
-		if (this.menuSelected == 0)
-		{
-			List<Ability> list = this.abilityDataProps.getUnlockedAbilities(AbilityCategory.DEVIL_FRUIT);
-			Ability[] arr = new Ability[list.size()];
-			arr = list.toArray(arr);
-			this.devilFruitsAbilitiesList = new AbilitiesListScreenPanel(this, this.abilityDataProps, arr);
-		}
-		else if (this.menuSelected == 1)
-		{
-			List<Ability> list = this.abilityDataProps.getUnlockedAbilities(AbilityCategory.RACIAL);
-			Ability[] arr = new Ability[list.size()];
-			arr = list.toArray(arr);
-			this.racialAbilitiesList = new AbilitiesListScreenPanel(this, this.abilityDataProps, arr);
-		}
-		else if (this.menuSelected == 2)
-		{
-			List<Ability> list = this.abilityDataProps.getUnlockedAbilities(AbilityCategory.HAKI);
-			Ability[] arr = new Ability[list.size()];
-			arr = list.toArray(arr);
-			this.hakiAbilitiesList = new AbilitiesListScreenPanel(this, this.abilityDataProps, arr);
-		}
-
+		
 		this.updateScreen();
 	}
 
@@ -217,16 +196,31 @@ public class SelectHotbarAbilitiesScreen extends Screen
 
 		if (this.menuSelected == 0)
 		{
+			List<Ability> list = this.abilityDataProps.getUnlockedAbilities(AbilityCategory.DEVIL_FRUIT);
+			Ability[] arr = new Ability[list.size()];
+			arr = list.toArray(arr);
+			this.devilFruitsAbilitiesList = new AbilitiesListScreenPanel(this, this.abilityDataProps, arr);
+			
 			this.children.add(this.devilFruitsAbilitiesList);
-			this.setFocused(this.devilFruitsAbilitiesList);
+			this.setFocused(this.devilFruitsAbilitiesList);		
 		}
 		else if (this.menuSelected == 1)
-		{
+		{			
+			List<Ability> list = this.abilityDataProps.getUnlockedAbilities(AbilityCategory.RACIAL);
+			Ability[] arr = new Ability[list.size()];
+			arr = list.toArray(arr);
+			this.racialAbilitiesList = new AbilitiesListScreenPanel(this, this.abilityDataProps, arr);
+			
 			this.children.add(this.racialAbilitiesList);
 			this.setFocused(this.racialAbilitiesList);
 		}
 		else if (this.menuSelected == 2)
-		{
+		{			
+			List<Ability> list = this.abilityDataProps.getUnlockedAbilities(AbilityCategory.HAKI);
+			Ability[] arr = new Ability[list.size()];
+			arr = list.toArray(arr);
+			this.hakiAbilitiesList = new AbilitiesListScreenPanel(this, this.abilityDataProps, arr);
+			
 			this.children.add(this.hakiAbilitiesList);
 			this.setFocused(this.hakiAbilitiesList);
 		}
@@ -248,7 +242,6 @@ public class SelectHotbarAbilitiesScreen extends Screen
 	{
 		WyNetwork.sendToServer(new CSyncAbilityDataPacket(this.abilityDataProps));
 		super.onClose();
-		// WyNetworkHelper.sendToServer(new PacketAbilityReset(true));
 	}
 
 	@Override
