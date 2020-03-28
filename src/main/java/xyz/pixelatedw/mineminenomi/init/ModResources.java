@@ -66,5 +66,9 @@ public class ModResources
 	
 	// Zoan / Morphing
 	public static final ResourceLocation BUSOSHOKU_HAKI_ARM = new ResourceLocation(APIConfig.PROJECT_ID, "textures/models/zoanmorph/buso.png");
-	public static final ResourceLocation HOT_BOILING_SPECIAL_ARM = new ResourceLocation(APIConfig.PROJECT_ID, "textures/models/zoanmorph/hot_boiling_special.png");	
+	public static final ResourceLocation HOT_BOILING_SPECIAL_ARM = new ResourceLocation(APIConfig.PROJECT_ID, "textures/models/zoanmorph/hot_boiling_special.png");
+	
+	// Overlays
+	public static final ResourceLocation BUBBLY_CORAL = new ResourceLocation(APIConfig.PROJECT_ID, "textures/misc/bubbly_coral.png");	
+
 }
