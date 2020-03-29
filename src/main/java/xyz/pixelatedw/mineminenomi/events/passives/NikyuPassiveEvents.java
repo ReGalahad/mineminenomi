@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.events.abilities;
+package xyz.pixelatedw.mineminenomi.events.passives;
 
 import net.minecraft.client.renderer.entity.PlayerRenderer;
 import net.minecraft.client.renderer.entity.model.BipedModel.ArmPose;

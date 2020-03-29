@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.events.abilities;
+package xyz.pixelatedw.mineminenomi.events.passives;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
@@ -11,7 +11,7 @@ import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
-public class BanePassiveEvents
+public class GomuPassiveEvents
 {
 
 	@SubscribeEvent
@@ -24,7 +24,7 @@ public class BanePassiveEvents
 		IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
 		IAbilityData abilityProps = AbilityDataCapability.get(player);
 		
-		if (!devilFruitProps.getDevilFruit().equals("bane_bane"))
+		if (!devilFruitProps.getDevilFruit().equals("gomu_gomu"))
 			return;
 		
 		player.fallDistance = 0;

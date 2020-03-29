@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.events.abilities;
+package xyz.pixelatedw.mineminenomi.events.passives;
 
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

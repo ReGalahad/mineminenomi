@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.events.abilities;
+package xyz.pixelatedw.mineminenomi.events.passives;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 

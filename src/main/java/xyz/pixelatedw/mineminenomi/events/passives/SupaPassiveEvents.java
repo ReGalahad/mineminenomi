@@ -1,11 +1,9 @@
-package xyz.pixelatedw.mineminenomi.events.abilities;
+package xyz.pixelatedw.mineminenomi.events.passives;
 
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.wypi.APIConfig;
@@ -13,7 +11,7 @@ import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
-public class HiePassiveEvents
+public class SupaPassiveEvents
 {
 
 	@SubscribeEvent
@@ -21,15 +19,19 @@ public class HiePassiveEvents
 	{
 		if (!(event.getEntityLiving() instanceof PlayerEntity))
 			return;	
-
+		
 		PlayerEntity player = (PlayerEntity) event.getEntityLiving();
 		IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
 		IAbilityData abilityProps = AbilityDataCapability.get(player);
-				
-		if (!devilFruitProps.getDevilFruit().equals("hie_hie"))
+		
+		if (!devilFruitProps.getDevilFruit().equals("supa_supa"))
 			return;
-				
-		if (!DevilFruitsHelper.isNearbyKairoseki(player) && (player.getHealth() > player.getMaxHealth() / 5 || player.abilities.isCreativeMode))
-			DevilFruitsHelper.createFilledSphere(player.world, (int) player.posX - 1, (int) player.posY, (int) player.posZ - 1, 2, Blocks.ICE, "liquid");
+
+		/*if (abilityProps.isPassiveActive(ModAttributes.ATOMIC_SPURT) && player.onGround)
+		{
+			if(Math.abs(player.getMotion().getX()) < 0.2 || Math.abs( player.getMotion().getZ()) < 0.2)
+				player.setMotion(player.getMotion().getX() * 1.5, player.getMotion().getY(), player.getMotion().getZ() * 1.5);
+		}*/
 	}
+
 }

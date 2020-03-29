@@ -1,9 +1,7 @@
-package xyz.pixelatedw.mineminenomi.events.abilities;
+package xyz.pixelatedw.mineminenomi.events.passives;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -12,40 +10,29 @@ import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
-import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoVenomDemon;
+import xyz.pixelatedw.mineminenomi.entities.mobs.misc.EntityDoppelman;
 import xyz.pixelatedw.wypi.APIConfig;
+import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
-public class DokuPassiveEvents 
+public class KagePassiveEvents
 {
+
 	@SubscribeEvent
 	public static void onEntityUpdate(LivingUpdateEvent event)
 	{
-		if (!(event.getEntityLiving() instanceof PlayerEntity))
-			return;	
-		
-		PlayerEntity player = (PlayerEntity) event.getEntityLiving();
-		IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
-		IAbilityData abilityProps = AbilityDataCapability.get(player);
-		
-		if (!devilFruitProps.getDevilFruit().equals("doku_doku"))
+		if (!(event.getEntityLiving() instanceof LivingEntity))
 			return;
-		
-		if (player.isPotionActive(Effects.POISON))
-		{
-			EffectInstance eff = player.getActivePotionEffect(Effects.POISON);
-			
-			int duration = eff.getDuration();
-			int multiplier = eff.getAmplifier();
-			
-			player.removePotionEffect(Effects.POISON);
-			
-			player.addPotionEffect(new EffectInstance(Effects.REGENERATION, duration, multiplier, false, false));
-		}
+
+		LivingEntity entity = event.getEntityLiving();
+		IEntityStats statsProps = EntityStatsCapability.get(entity);
+
+		if (!statsProps.hasShadow() && entity.getBrightness() > 0.8F)
+			entity.setFire(3);
 	}
-	
+
 	@SubscribeEvent
 	public static void onEntityAttack(LivingHurtEvent event)
 	{
@@ -59,10 +46,12 @@ public class DokuPassiveEvents
 		LivingEntity attacked = event.getEntityLiving();
 		IEntityStats statPropz = EntityStatsCapability.get(attacked);
 
-		if (!devilFruitProps.getDevilFruit().equalsIgnoreCase("doku_doku"))
+		if (!devilFruitProps.getDevilFruit().equalsIgnoreCase("kage_kage"))
 			return;
-		
-		if(devilFruitProps.getZoanPoint().equalsIgnoreCase(ZoanInfoVenomDemon.FORM))
-			attacked.addPotionEffect(new EffectInstance(Effects.POISON, 60, 0));
+
+		EntityDoppelman doppelman = WyHelper.getEntitiesNear(attacker.getPosition(), attacker.world, 20, EntityDoppelman.class).stream().findFirst().orElse(null);
+
+		if (doppelman != null)
+			doppelman.forcedTargets.add(attacked);
 	}
 }

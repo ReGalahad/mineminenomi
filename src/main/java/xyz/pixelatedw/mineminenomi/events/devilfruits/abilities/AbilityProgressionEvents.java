@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.events.abilities.common;
+package xyz.pixelatedw.mineminenomi.events.devilfruits.abilities;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
