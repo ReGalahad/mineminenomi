@@ -2,6 +2,7 @@ package xyz.pixelatedw.mineminenomi.particles.effects.common;
 
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.wypi.WyHelper;
 
@@ -11,11 +12,11 @@ public class WaterExplosionParticleEffect extends ParticleEffect
 	@Override
 	public void spawn(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
 	{	
-		for (int i = 0; i < 512; i++)
+		for (int i = 0; i < 12; i++)
 		{
-	        motionX = WyHelper.randomWithRange(-5, 5) + WyHelper.randomDouble();
-	        motionY = WyHelper.randomWithRange(-5, 5) + WyHelper.randomDouble();
-			motionZ = WyHelper.randomWithRange(-5, 5) + WyHelper.randomDouble();
+	        motionX = WyHelper.randomWithRange(-3, 3) + WyHelper.randomDouble();
+	        motionY = WyHelper.randomWithRange(-3, 3) + WyHelper.randomDouble();
+			motionZ = WyHelper.randomWithRange(-3, 3) + WyHelper.randomDouble();
 	        
             double middlePoint = 0.25;
             middlePoint *= (WyHelper.randomDouble() * 2) + 0.3F;
@@ -24,8 +25,8 @@ public class WaterExplosionParticleEffect extends ParticleEffect
 	        motionY *= middlePoint / 2;
 	        motionZ *= middlePoint / 2;
 			
-            world.addParticle(ParticleTypes.FISHING, posX, posY, posZ, motionX, motionY, motionZ);
-            world.addParticle(ParticleTypes.FISHING, posX, posY, posZ, motionX, motionY, motionZ);
+	        ((ServerWorld)world).spawnParticle(ParticleTypes.FISHING, posX, posY, posZ, 1, motionX, motionY, motionZ, 0.1);
+	        ((ServerWorld)world).spawnParticle(ParticleTypes.FISHING, posX, posY, posZ, 1, motionX, motionY, motionZ, 0.1);
 		}
 	}
 }

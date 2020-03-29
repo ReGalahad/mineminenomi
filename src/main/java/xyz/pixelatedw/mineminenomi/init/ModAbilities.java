@@ -7,6 +7,11 @@ import xyz.pixelatedw.mineminenomi.abilities.bane.SpringHopperAbility;
 import xyz.pixelatedw.mineminenomi.abilities.bane.SpringSnipeAbility;
 import xyz.pixelatedw.mineminenomi.abilities.bomu.KickBombAbility;
 import xyz.pixelatedw.mineminenomi.abilities.bomu.NoseFancyCannonAbility;
+import xyz.pixelatedw.mineminenomi.abilities.fishmankarate.KachiageHaisokuAbility;
+import xyz.pixelatedw.mineminenomi.abilities.fishmankarate.KarakusagawaraSeikenAbility;
+import xyz.pixelatedw.mineminenomi.abilities.fishmankarate.MurasameAbility;
+import xyz.pixelatedw.mineminenomi.abilities.fishmankarate.SamehadaShoteiAbility;
+import xyz.pixelatedw.mineminenomi.abilities.fishmankarate.UchimizuAbility;
 import xyz.pixelatedw.mineminenomi.abilities.goro.ElThorAbility;
 import xyz.pixelatedw.mineminenomi.abilities.goro.KariAbility;
 import xyz.pixelatedw.mineminenomi.abilities.goro.RaigoAbility;
@@ -72,6 +77,7 @@ import xyz.pixelatedw.mineminenomi.abilities.suna.GroundDeathAbility;
 import xyz.pixelatedw.mineminenomi.abilities.suna.SablesAbility;
 import xyz.pixelatedw.mineminenomi.items.AkumaNoMiItem;
 import xyz.pixelatedw.wypi.APIConfig;
+import xyz.pixelatedw.wypi.APIRegistries;
 import xyz.pixelatedw.wypi.WyRegistry;
 import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.debug.WyDebug;
@@ -136,23 +142,13 @@ public class ModAbilities
 
 	static
 	{
-		ModValues.devilfruits.forEach(item ->
-		{
-			WyRegistry.registerItem(item, item.getDevilFruitName());
-		});
-
-		int totalFruits = 0, totalAbilities = 0;
-
 		for (AkumaNoMiItem df : ModValues.devilfruits)
 		{
-			totalFruits++;
+			WyRegistry.registerItem(df, df.getDevilFruitName());
 			for (Ability abl : df.abilities)
 			{
 				if (abl != null)
-				{
-					totalAbilities++;
 					WyRegistry.registerAbility(abl);
-				}
 			}
 		}
 
@@ -162,9 +158,14 @@ public class ModAbilities
 		WyRegistry.registerAbility(GeppoAbility.INSTANCE);
 		WyRegistry.registerAbility(RankyakuAbility.INSTANCE);
 		WyRegistry.registerAbility(KamieAbility.INSTANCE);
-		totalAbilities += 3;
-
+		
+		WyRegistry.registerAbility(UchimizuAbility.INSTANCE);
+		WyRegistry.registerAbility(MurasameAbility.INSTANCE);
+		WyRegistry.registerAbility(KachiageHaisokuAbility.INSTANCE);
+		WyRegistry.registerAbility(SamehadaShoteiAbility.INSTANCE);
+		WyRegistry.registerAbility(KarakusagawaraSeikenAbility.INSTANCE);
+		
 		WyDebug.debug("A total of " + ModValues.devilfruits.size() + " Devil Fruits have been registered");
-		WyDebug.debug("A total of " + totalAbilities + " abilities have been registered");
+		WyDebug.debug("A total of " + APIRegistries.ABILITIES.getEntries().size() + " abilities have been registered");
 	}
 }

@@ -3,6 +3,11 @@ package xyz.pixelatedw.mineminenomi.events.abilities.common;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import xyz.pixelatedw.mineminenomi.abilities.fishmankarate.KachiageHaisokuAbility;
+import xyz.pixelatedw.mineminenomi.abilities.fishmankarate.KarakusagawaraSeikenAbility;
+import xyz.pixelatedw.mineminenomi.abilities.fishmankarate.MurasameAbility;
+import xyz.pixelatedw.mineminenomi.abilities.fishmankarate.SamehadaShoteiAbility;
+import xyz.pixelatedw.mineminenomi.abilities.fishmankarate.UchimizuAbility;
 import xyz.pixelatedw.mineminenomi.abilities.rokushiki.GeppoAbility;
 import xyz.pixelatedw.mineminenomi.abilities.rokushiki.KamieAbility;
 import xyz.pixelatedw.mineminenomi.abilities.rokushiki.RankyakuAbility;
@@ -34,17 +39,15 @@ public class AbilityProgressionEvents
 			gainAbility(event.player, 6000, KamieAbility.INSTANCE);
 			gainAbility(event.player, 8500, RankyakuAbility.INSTANCE);
 		}
-/*		else if (event.props.isFishman())
+		else if (event.props.isFishman())
 		{
-			gainAbility(event.player, 800, FishKarateAbilities.UCHIMIZU);
-			gainAbility(event.player, 2000, FishKarateAbilities.MURASAME);
-			gainAbility(event.player, 2500, FishKarateAbilities.KACHIAGE_HAISOKU);
-			gainAbility(event.player, 3000, FishKarateAbilities.SAMEHADA_SHOTEI);
-			gainAbility(event.player, 4000, HakiAbilities.KENBUNSHOKU_HAKI);
-			gainAbility(event.player, 7500, FishKarateAbilities.KARAKUSAGAWARA_SEIKEN);
-			gainAbility(event.player, 9000, HakiAbilities.BUSOSHOKU_HAKI);
+			gainAbility(event.player, 800, UchimizuAbility.INSTANCE);
+			gainAbility(event.player, 1500, KachiageHaisokuAbility.INSTANCE);
+			gainAbility(event.player, 3000, SamehadaShoteiAbility.INSTANCE);
+			gainAbility(event.player, 5000, MurasameAbility.INSTANCE);
+			gainAbility(event.player, 7500, KarakusagawaraSeikenAbility.INSTANCE);
 		}
-		else if (event.props.isCyborg())
+/*		else if (event.props.isCyborg())
 		{
 			gainAbility(event.player, 0, CyborgAbilities.FRESH_FIRE);
 			gainAbility(event.player, 0, CyborgAbilities.COLA_OVERDRIVE);
