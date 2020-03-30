@@ -80,6 +80,10 @@ import xyz.pixelatedw.mineminenomi.abilities.suna.DesertGirasoleAbility;
 import xyz.pixelatedw.mineminenomi.abilities.suna.DesertSpadaAbility;
 import xyz.pixelatedw.mineminenomi.abilities.suna.GroundDeathAbility;
 import xyz.pixelatedw.mineminenomi.abilities.suna.SablesAbility;
+import xyz.pixelatedw.mineminenomi.abilities.swordsman.OTatsumakiAbility;
+import xyz.pixelatedw.mineminenomi.abilities.swordsman.SanbyakurokujuPoundHoAbility;
+import xyz.pixelatedw.mineminenomi.abilities.swordsman.ShiShishiSonsonAbility;
+import xyz.pixelatedw.mineminenomi.abilities.swordsman.YakkodoriAbility;
 import xyz.pixelatedw.mineminenomi.items.AkumaNoMiItem;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.APIRegistries;
@@ -176,6 +180,11 @@ public class ModAbilities
 		WyRegistry.registerAbility(RadicalBeamAbility.INSTANCE);
 		WyRegistry.registerAbility(CoupDeVentAbility.INSTANCE);
 		
+		WyRegistry.registerAbility(ShiShishiSonsonAbility.INSTANCE);
+		WyRegistry.registerAbility(YakkodoriAbility.INSTANCE);
+		WyRegistry.registerAbility(SanbyakurokujuPoundHoAbility.INSTANCE);
+		WyRegistry.registerAbility(OTatsumakiAbility.INSTANCE);
+
 		WyDebug.debug("A total of " + ModValues.devilfruits.size() + " Devil Fruits have been registered");
 		WyDebug.debug("A total of " + APIRegistries.ABILITIES.getEntries().size() + " abilities have been registered");
 	}

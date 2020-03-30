@@ -4,18 +4,17 @@ import xyz.pixelatedw.wypi.WyRegistry;
 
 public class ModI18n
 {
-
 	public static final String CATEGORY_GENERAL = WyRegistry.registerName("category.mmnmkeys", "Mine Mine no Mi Keys");
 	public static final String KEY_PLAYER = WyRegistry.registerName("key.playerui", "Player Stats");
 	public static final String KEY_COMBATMODE = WyRegistry.registerName("key.combatmode", "Combat Mode");
 	public static final String KEY_COMBATSLOT1 = WyRegistry.registerName("key.combatslot.1", "Ability Slot 1");
-	public static final String KEY_COMBATSLOT2 = WyRegistry.registerName("key.combatslot.1", "Ability Slot 2");
-	public static final String KEY_COMBATSLOT3 = WyRegistry.registerName("key.combatslot.1", "Ability Slot 3");
-	public static final String KEY_COMBATSLOT4 = WyRegistry.registerName("key.combatslot.1", "Ability Slot 4");
-	public static final String KEY_COMBATSLOT5 = WyRegistry.registerName("key.combatslot.1", "Ability Slot 5");
-	public static final String KEY_COMBATSLOT6 = WyRegistry.registerName("key.combatslot.1", "Ability Slot 6");
-	public static final String KEY_COMBATSLOT7 = WyRegistry.registerName("key.combatslot.1", "Ability Slot 7");
-	public static final String KEY_COMBATSLOT8 = WyRegistry.registerName("key.combatslot.1", "Ability Slot 8");
+	public static final String KEY_COMBATSLOT2 = WyRegistry.registerName("key.combatslot.2", "Ability Slot 2");
+	public static final String KEY_COMBATSLOT3 = WyRegistry.registerName("key.combatslot.3", "Ability Slot 3");
+	public static final String KEY_COMBATSLOT4 = WyRegistry.registerName("key.combatslot.4", "Ability Slot 4");
+	public static final String KEY_COMBATSLOT5 = WyRegistry.registerName("key.combatslot.5", "Ability Slot 5");
+	public static final String KEY_COMBATSLOT6 = WyRegistry.registerName("key.combatslot.6", "Ability Slot 6");
+	public static final String KEY_COMBATSLOT7 = WyRegistry.registerName("key.combatslot.7", "Ability Slot 7");
+	public static final String KEY_COMBATSLOT8 = WyRegistry.registerName("key.combatslot.8", "Ability Slot 8");
 
 	public static final String FACTION_NAME = WyRegistry.registerName("faction.name", "Faction");
 	public static final String FACTION_EMPTY = WyRegistry.registerName("faction.empty", "No Faction");

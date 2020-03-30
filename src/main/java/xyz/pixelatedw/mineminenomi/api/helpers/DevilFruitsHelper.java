@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import com.google.common.collect.Lists;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -20,6 +22,26 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.registries.ForgeRegistries;
+import xyz.pixelatedw.mineminenomi.abilities.cyborg.ColaOverdriveAbility;
+import xyz.pixelatedw.mineminenomi.abilities.cyborg.CoupDeVentAbility;
+import xyz.pixelatedw.mineminenomi.abilities.cyborg.FreshFireAbility;
+import xyz.pixelatedw.mineminenomi.abilities.cyborg.RadicalBeamAbility;
+import xyz.pixelatedw.mineminenomi.abilities.cyborg.StrongRightAbility;
+import xyz.pixelatedw.mineminenomi.abilities.fishmankarate.KachiageHaisokuAbility;
+import xyz.pixelatedw.mineminenomi.abilities.fishmankarate.KarakusagawaraSeikenAbility;
+import xyz.pixelatedw.mineminenomi.abilities.fishmankarate.MurasameAbility;
+import xyz.pixelatedw.mineminenomi.abilities.fishmankarate.SamehadaShoteiAbility;
+import xyz.pixelatedw.mineminenomi.abilities.fishmankarate.UchimizuAbility;
+import xyz.pixelatedw.mineminenomi.abilities.rokushiki.GeppoAbility;
+import xyz.pixelatedw.mineminenomi.abilities.rokushiki.KamieAbility;
+import xyz.pixelatedw.mineminenomi.abilities.rokushiki.RankyakuAbility;
+import xyz.pixelatedw.mineminenomi.abilities.rokushiki.ShiganAbility;
+import xyz.pixelatedw.mineminenomi.abilities.rokushiki.SoruAbility;
+import xyz.pixelatedw.mineminenomi.abilities.rokushiki.TekkaiAbility;
+import xyz.pixelatedw.mineminenomi.abilities.swordsman.OTatsumakiAbility;
+import xyz.pixelatedw.mineminenomi.abilities.swordsman.SanbyakurokujuPoundHoAbility;
+import xyz.pixelatedw.mineminenomi.abilities.swordsman.ShiShishiSonsonAbility;
+import xyz.pixelatedw.mineminenomi.abilities.swordsman.YakkodoriAbility;
 import xyz.pixelatedw.mineminenomi.api.abilities.ExplosionAbility;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
@@ -30,6 +52,7 @@ import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.events.custom.DorikiEvent;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.wypi.APIConfig;
+import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
@@ -317,7 +340,10 @@ public class DevilFruitsHelper
 		IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
 		Ability sparClaw = null;// abilityProps.getHotbarAbilityFromName(ModAttributes.SPAR_CLAW.getAttributeName());
 
-		if (devilFruitProps.getDevilFruit().equalsIgnoreCase("supasupa") && sparClaw != null && sparClaw.isContinuous())
+		boolean hasSwordInHand = ItemsHelper.isSword(player.getHeldItemMainhand());
+		boolean hasSparClaw = devilFruitProps.getDevilFruit().equalsIgnoreCase("supa_supa") && sparClaw != null && sparClaw.isContinuous();
+		
+		if (hasSwordInHand || hasSparClaw)
 		{
 			return true;
 		}
@@ -393,75 +419,81 @@ public class DevilFruitsHelper
 
 		List<Ability> tempAblList = new ArrayList<Ability>();
 
+		List<Ability> rokushikiAbilities = Lists.newArrayList(SoruAbility.INSTANCE, TekkaiAbility.INSTANCE, ShiganAbility.INSTANCE, RankyakuAbility.INSTANCE, KamieAbility.INSTANCE, GeppoAbility.INSTANCE);
+		List<Ability> fishmanKarateAbilities = Lists.newArrayList(UchimizuAbility.INSTANCE, SamehadaShoteiAbility.INSTANCE, MurasameAbility.INSTANCE, KarakusagawaraSeikenAbility.INSTANCE, KachiageHaisokuAbility.INSTANCE);
+		List<Ability> cyborgAbilities = Lists.newArrayList(StrongRightAbility.INSTANCE, RadicalBeamAbility.INSTANCE, FreshFireAbility.INSTANCE, CoupDeVentAbility.INSTANCE, ColaOverdriveAbility.INSTANCE);
+
+		if (props.isHuman())
+			for (Ability a : rokushikiAbilities)
+				if (abilityProps.hasUnlockedAbility(a) && !verifyIfAbilityIsBanned(a))
+					tempAblList.add(a);
+		if (props.isFishman())
+			for (Ability a : fishmanKarateAbilities)
+				if (abilityProps.hasUnlockedAbility(a) && !verifyIfAbilityIsBanned(a))
+					tempAblList.add(a);
+		if (props.isCyborg())
+			for (Ability a : cyborgAbilities)
+				if (abilityProps.hasUnlockedAbility(a) && !verifyIfAbilityIsBanned(a))
+					tempAblList.add(a);
+		
+		abilityProps.clearUnlockedAbilities(AbilityCategory.RACIAL);
+		
+		for (Ability a : tempAblList)
+			abilityProps.addUnlockedAbility(a);
+		tempAblList.clear();
 		/*
-		 * if (props.isHuman())
-		 * for (Ability a : RokushikiAbilities.abilitiesArray)
-		 * if (abilityProps.hasRacialAbility(a) && !verifyIfAbilityIsBanned(a))
-		 * tempAblList.add(a);
-		 * if (props.isFishman())
-		 * for (Ability a : FishKarateAbilities.abilitiesArray)
-		 * if (abilityProps.hasRacialAbility(a) && !verifyIfAbilityIsBanned(a))
-		 * tempAblList.add(a);
-		 * if (props.isCyborg())
-		 * for (Ability a : CyborgAbilities.abilitiesArray)
-		 * if (abilityProps.hasRacialAbility(a) && !verifyIfAbilityIsBanned(a))
-		 * tempAblList.add(a);
-		 * abilityProps.clearRacialAbilities();
-		 * for (Ability a : tempAblList)
-		 * abilityProps.addRacialAbility(a);
-		 * tempAblList.clear();
-		 * for (Ability a : HakiAbilities.abilitiesArray)
-		 * if (abilityProps.hasHakiAbility(a) && !verifyIfAbilityIsBanned(a))
-		 * tempAblList.add(a);
-		 * abilityProps.clearHakiAbilities();
-		 * for (Ability a : tempAblList)
-		 * abilityProps.addHakiAbility(a);
-		 */
+		for (Ability a : HakiAbilities.abilitiesArray)
+			if (abilityProps.hasHakiAbility(a) && !verifyIfAbilityIsBanned(a))
+				tempAblList.add(a);
+		abilityProps.clearHakiAbilities();
+		for (Ability a : tempAblList)
+			abilityProps.addHakiAbility(a);*/
+
 	}
 
 	public static void validateStyleMoves(PlayerEntity player)
 	{
 		// QuestProperties questProps = QuestProperties.get(player);
-		/*
-		 * IEntityStats props = EntityStatsCapability.get(player);
-		 * IAbilityData abilityProps = AbilityDataCapability.get(player);
-		 * if (props.isSwordsman())
-		 * {
-		 * if (!verifyIfAbilityIsBanned(SwordsmanAbilities.SHI_SHISHI_SONSON))
-		 * abilityProps.addRacialAbility(SwordsmanAbilities.SHI_SHISHI_SONSON);
-		 * if (CommonConfig.instance.isQuestProgressionEnabled())
-		 * {
-		 * //if (questProps.hasQuestCompleted(ListQuests.swordsmanProgression04) && !verifyIfAbilityIsBanned(SwordsmanAbilities.SANBYAKUROKUJUPOUNDHO))
-		 * // abilityProps.addRacialAbility(SwordsmanAbilities.SANBYAKUROKUJUPOUNDHO);
-		 * }
-		 * else
-		 * {
-		 * if (!verifyIfAbilityIsBanned(SwordsmanAbilities.SANBYAKUROKUJU_POUND_HO))
-		 * abilityProps.addRacialAbility(SwordsmanAbilities.SANBYAKUROKUJU_POUND_HO);
-		 * if (!verifyIfAbilityIsBanned(SwordsmanAbilities.YAKKODORI))
-		 * abilityProps.addRacialAbility(SwordsmanAbilities.YAKKODORI);
-		 * if (!verifyIfAbilityIsBanned(SwordsmanAbilities.O_TATSUMAKI))
-		 * abilityProps.addRacialAbility(SwordsmanAbilities.O_TATSUMAKI);
-		 * }
-		 * }
-		 * else if (props.isSniper())
-		 * {
-		 * if (!verifyIfAbilityIsBanned(SniperAbilities.KAENBOSHI))
-		 * abilityProps.addRacialAbility(SniperAbilities.KAENBOSHI);
-		 * if (CommonConfig.instance.isQuestProgressionEnabled())
-		 * {
-		 * }
-		 * else
-		 * {
-		 * if (!verifyIfAbilityIsBanned(SniperAbilities.KEMURIBOSHI))
-		 * abilityProps.addRacialAbility(SniperAbilities.KEMURIBOSHI);
-		 * if (!verifyIfAbilityIsBanned(SniperAbilities.RENPATSUNAMARIBOSHI))
-		 * abilityProps.addRacialAbility(SniperAbilities.RENPATSUNAMARIBOSHI);
-		 * if (!verifyIfAbilityIsBanned(SniperAbilities.SAKURETSUSABOTENBOSHI))
-		 * abilityProps.addRacialAbility(SniperAbilities.SAKURETSUSABOTENBOSHI);
-		 * }
-		 * }
-		 */
+
+		IEntityStats props = EntityStatsCapability.get(player);
+		IAbilityData abilityProps = AbilityDataCapability.get(player);
+		if (props.isSwordsman())
+		{
+			if (!verifyIfAbilityIsBanned(ShiShishiSonsonAbility.INSTANCE))
+				abilityProps.addUnlockedAbility(ShiShishiSonsonAbility.INSTANCE);
+			if (CommonConfig.instance.isQuestProgressionEnabled())
+			{
+				// if (questProps.hasQuestCompleted(ListQuests.swordsmanProgression04) && !verifyIfAbilityIsBanned(SwordsmanAbilities.SANBYAKUROKUJUPOUNDHO))
+				// abilityProps.addRacialAbility(SwordsmanAbilities.SANBYAKUROKUJUPOUNDHO);
+			}
+			else
+			{
+				if (!verifyIfAbilityIsBanned(SanbyakurokujuPoundHoAbility.INSTANCE))
+					abilityProps.addUnlockedAbility(SanbyakurokujuPoundHoAbility.INSTANCE);
+				if (!verifyIfAbilityIsBanned(YakkodoriAbility.INSTANCE))
+					abilityProps.addUnlockedAbility(YakkodoriAbility.INSTANCE);
+				if (!verifyIfAbilityIsBanned(OTatsumakiAbility.INSTANCE))
+					abilityProps.addUnlockedAbility(OTatsumakiAbility.INSTANCE);
+			}
+		}
+/*		else if (props.isSniper())
+		{
+			if (!verifyIfAbilityIsBanned(SniperAbilities.KAENBOSHI))
+				abilityProps.addRacialAbility(SniperAbilities.KAENBOSHI);
+			if (CommonConfig.instance.isQuestProgressionEnabled())
+			{
+			}
+			else
+			{
+				if (!verifyIfAbilityIsBanned(SniperAbilities.KEMURIBOSHI))
+					abilityProps.addRacialAbility(SniperAbilities.KEMURIBOSHI);
+				if (!verifyIfAbilityIsBanned(SniperAbilities.RENPATSUNAMARIBOSHI))
+					abilityProps.addRacialAbility(SniperAbilities.RENPATSUNAMARIBOSHI);
+				if (!verifyIfAbilityIsBanned(SniperAbilities.SAKURETSUSABOTENBOSHI))
+					abilityProps.addRacialAbility(SniperAbilities.SAKURETSUSABOTENBOSHI);
+			}
+		}
+*/
 	}
 
 	public static boolean isSniperAbility(Ability abl)
