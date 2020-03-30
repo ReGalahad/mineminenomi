@@ -60,11 +60,13 @@ public class CoupDeVentProjectile extends AbilityProjectileEntity
 	{
 		for (int i = 0; i < 25; i++)
 		{
-			double offsetX = WyHelper.randomDouble() / 5;
-			double offsetY = WyHelper.randomDouble() / 5;
-			double offsetZ = WyHelper.randomDouble() / 5;
+			double offsetX = WyHelper.randomDouble() * 1.2;
+			double offsetY = WyHelper.randomDouble() * 1.2;
+			double offsetZ = WyHelper.randomDouble() * 1.2;
 
-			((ServerWorld)this.world).spawnParticle(ParticleTypes.CRIT, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ, 1, 0, 0, 0, -0.1);
+			((ServerWorld)this.world).spawnParticle(ParticleTypes.END_ROD, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ, 1, 0, 0, 0, -0.1);
+			if(i % 5 == 0)
+				((ServerWorld)this.world).spawnParticle(ParticleTypes.FLASH, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ, 1, 0, 0, 0, -0.1);
 		}
 	}
 }

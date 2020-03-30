@@ -37,7 +37,7 @@ public class CoupDeVentAbility extends Ability
 		player.world.addEntity(proj);
 		proj.shoot(player, player.rotationPitch, player.rotationYaw, 0, 3f, 1);
 				
-		props.alterCola(-25);
+		props.alterCola(-30);
 		WyNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), props), player);
 		
 		return true;

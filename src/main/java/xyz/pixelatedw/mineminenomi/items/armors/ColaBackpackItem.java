@@ -72,7 +72,7 @@ public class ColaBackpackItem extends ArmorItem
 					
 					if(props.getCola() + 10 <= props.getMaxCola())
 					{
-						if(player.ticksExisted % 100 == 0)
+						if(player.ticksExisted % 20 == 0)
 						{
 							props.alterCola(10);
 							WyNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), props), (ServerPlayerEntity) player);
