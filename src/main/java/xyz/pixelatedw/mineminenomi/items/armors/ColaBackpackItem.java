@@ -70,11 +70,16 @@ public class ColaBackpackItem extends ArmorItem
 						props.setMaxCola(props.getMaxCola() + 400);
 					}
 					
-					if(props.getCola() + 10 <= props.getMaxCola())
+					if(player.ticksExisted % 40 == 0)
 					{
-						if(player.ticksExisted % 20 == 0)
+						if(props.getCola() + 10 <= props.getMaxCola())
 						{
 							props.alterCola(10);
+							WyNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), props), (ServerPlayerEntity) player);
+						}
+						else
+						{
+							props.setCola(props.getMaxCola());
 							WyNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), props), (ServerPlayerEntity) player);
 						}
 					}
