@@ -79,9 +79,10 @@ public class WyRegistry
 		lootTables.put(obj, json);
 	}
 
-	public static void registerName(String key, String localizedName)
+	public static String registerName(String key, String localizedName)
 	{
 		langMap.put(key, localizedName);
+		return key;
 	}
 
 	public static void registerParticleType(ParticleType<?> type, String localizedName)

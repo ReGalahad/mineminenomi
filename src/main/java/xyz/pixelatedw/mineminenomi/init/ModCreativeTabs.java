@@ -7,7 +7,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class ModCreativeTabs
 {
-	public static final ItemGroup DEVIL_FRUITS = new ItemGroup("devilfruits")
+	public static final ItemGroup DEVIL_FRUITS = new ItemGroup("devil_fruits")
 	{
 		@Override
 		@OnlyIn(Dist.CLIENT)
