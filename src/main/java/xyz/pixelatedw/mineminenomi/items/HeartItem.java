@@ -6,6 +6,7 @@ import javax.annotation.Nullable;
 
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -57,10 +58,30 @@ public class HeartItem extends Item
 					player.inventory.deleteStack(itemStack);
 			}
 		}
+		else
+		{
+			player.inventory.deleteStack(itemStack);
+		}
 		
 		return new ActionResult<>(ActionResultType.SUCCESS, player.getHeldItem(hand));
 	}
 
+    @Override
+	public boolean onEntityItemUpdate(ItemStack itemStack, ItemEntity entityItem)
+    {
+		if(itemStack.getTag() != null)
+		{
+			LivingEntity target = ((LivingEntity) entityItem.getEntityWorld().getEntityByID(itemStack.getTag().getInt("owner")));
+
+			boolean isBurning = target != null && entityItem.isBurning();
+			
+			if(isBurning)
+				target.attackEntityFrom(DamageSource.MAGIC, Float.MAX_VALUE);
+		}
+    	
+        return false;
+    }
+	
 	@Override
 	public void addInformation(ItemStack itemStack, @Nullable World world, List<ITextComponent> list, ITooltipFlag flag)
 	{
@@ -75,7 +96,7 @@ public class HeartItem extends Item
 				list.add(new StringTextComponent(TextFormatting.GOLD + "[Location] " + TextFormatting.RESET + (int)entity.posX + "X " + (int)entity.posY + "Y " + (int)entity.posZ +"Z"));
 			}
 			else
-				list.add(new StringTextComponent(TextFormatting.GOLD + itemStack.getDisplayName().toString().replace("'s Heart", "") + " is dead !"));
+				list.add(new StringTextComponent(TextFormatting.GOLD + itemStack.getDisplayName().getFormattedText().toString().replace("'s Heart", "") + " is dead !"));
 		}
 		else
 			list.add(new StringTextComponent(TextFormatting.RED + "U JUST GOT BAMBOOZLED!"));

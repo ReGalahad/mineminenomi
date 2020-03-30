@@ -22,7 +22,7 @@ public class EntityStatsCapability
 			public INBT writeNBT(Capability<IEntityStats> capability, IEntityStats instance, Direction side)
 			{
 				CompoundNBT props = new CompoundNBT();
-				
+
 				props.putInt("doriki", instance.getDoriki());
 				props.putInt("belly", instance.getBelly());
 				props.putInt("extol", instance.getExtol());
@@ -32,7 +32,7 @@ public class EntityStatsCapability
 				props.putInt("ultraCola", instance.getUltraCola());
 				props.putString("faction", instance.getFaction());
 				props.putString("race", instance.getRace());
-				props.putString("fightingStyle", instance.getFightingStyle());				
+				props.putString("fightingStyle", instance.getFightingStyle());
 				props.putBoolean("hasShadow", instance.hasShadow());
 				props.putBoolean("hasHeart", instance.hasHeart());
 				props.putBoolean("isInCombatMode", instance.isInCombatMode());
@@ -57,13 +57,12 @@ public class EntityStatsCapability
 				instance.setFightingStyle(props.getString("fightingStyle"));
 				instance.setShadow(props.getBoolean("hasShadow"));
 				instance.setHeart(props.getBoolean("hasHeart"));
-				instance.setCombatMode(props.getBoolean("isInCombatMode"));			
-
+				instance.setCombatMode(props.getBoolean("isInCombatMode"));
 			}
 
 		}, () -> new EntityStatsBase());
 	}
-	
+
 	public static IEntityStats get(final LivingEntity entity)
 	{
 		return entity.getCapability(INSTANCE, null).orElse(new EntityStatsBase());

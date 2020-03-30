@@ -1,6 +1,7 @@
 package xyz.pixelatedw.mineminenomi.init;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -33,11 +34,18 @@ public class ModCapabilities
 	@SubscribeEvent
 	public static void attachCapabilities(AttachCapabilitiesEvent<Entity> event)
 	{
+		if(event.getObject() == null)
+			return;
+		
 		if (event.getObject() instanceof PlayerEntity)
 		{
 			event.addCapability(new ResourceLocation(APIConfig.PROJECT_ID, "devil_fruit"), new DevilFruitProvider());
-			event.addCapability(new ResourceLocation(APIConfig.PROJECT_ID, "entity_stats"), new EntityStatsProvider());
 			event.addCapability(new ResourceLocation(APIConfig.PROJECT_ID, "haki_data"), new HakiDataProvider());
+		}
+		
+		if(event.getObject() instanceof LivingEntity)
+		{
+			event.addCapability(new ResourceLocation(APIConfig.PROJECT_ID, "entity_stats"), new EntityStatsProvider());
 		}
 	}
 
