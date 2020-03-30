@@ -48,9 +48,10 @@ public class ColaItem extends Item
 			}
 
 			WyNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), props), (ServerPlayerEntity) player);
+			if(!player.isCreative())
+				itemStack.shrink(1);
 		}
 		
-		itemStack.shrink(1);
 		return itemStack;
 	}
 }

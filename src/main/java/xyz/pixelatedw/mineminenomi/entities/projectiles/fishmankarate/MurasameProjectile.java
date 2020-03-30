@@ -54,14 +54,17 @@ public class MurasameProjectile extends AbilityProjectileEntity
 	
 	private void onTickEvent()
 	{
-		for(int i = 0; i < 2; i++)
+		if (!this.world.isRemote)
 		{
-			double offsetX = WyHelper.randomDouble() / 2;
-			double offsetY = WyHelper.randomDouble() / 2;
-			double offsetZ = WyHelper.randomDouble() / 2;
-
-			((ServerWorld)this.world).spawnParticle(ParticleTypes.FISHING, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ, 1, 0, 0, 0, -0.1);
-			((ServerWorld)this.world).spawnParticle(ParticleTypes.BUBBLE, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ, 1, 0, 0, 0, 0.1);
+			for(int i = 0; i < 2; i++)
+			{
+				double offsetX = WyHelper.randomDouble() / 2;
+				double offsetY = WyHelper.randomDouble() / 2;
+				double offsetZ = WyHelper.randomDouble() / 2;
+	
+				((ServerWorld)this.world).spawnParticle(ParticleTypes.FISHING, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ, 1, 0, 0, 0, -0.1);
+				((ServerWorld)this.world).spawnParticle(ParticleTypes.BUBBLE, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ, 1, 0, 0, 0, 0.1);
+			}
 		}
 	}
 }

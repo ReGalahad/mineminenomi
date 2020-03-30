@@ -34,7 +34,6 @@ public abstract class RepeaterAbility extends Ability
 	}
 		
 	
-	
 	/*
 	 * 	Methods
 	 */

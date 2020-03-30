@@ -1,8 +1,13 @@
-package xyz.pixelatedw.mineminenomi.events.devilfruits.abilities;
+package xyz.pixelatedw.mineminenomi.events.abilities;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import xyz.pixelatedw.mineminenomi.abilities.cyborg.ColaOverdriveAbility;
+import xyz.pixelatedw.mineminenomi.abilities.cyborg.CoupDeVentAbility;
+import xyz.pixelatedw.mineminenomi.abilities.cyborg.FreshFireAbility;
+import xyz.pixelatedw.mineminenomi.abilities.cyborg.RadicalBeamAbility;
+import xyz.pixelatedw.mineminenomi.abilities.cyborg.StrongRightAbility;
 import xyz.pixelatedw.mineminenomi.abilities.fishmankarate.KachiageHaisokuAbility;
 import xyz.pixelatedw.mineminenomi.abilities.fishmankarate.KarakusagawaraSeikenAbility;
 import xyz.pixelatedw.mineminenomi.abilities.fishmankarate.MurasameAbility;
@@ -47,19 +52,15 @@ public class AbilityProgressionEvents
 			gainAbility(event.player, 5000, MurasameAbility.INSTANCE);
 			gainAbility(event.player, 7500, KarakusagawaraSeikenAbility.INSTANCE);
 		}
-/*		else if (event.props.isCyborg())
+		else if (event.props.isCyborg())
 		{
-			gainAbility(event.player, 0, CyborgAbilities.FRESH_FIRE);
-			gainAbility(event.player, 0, CyborgAbilities.COLA_OVERDRIVE);
-			gainAbility(event.player, 0, CyborgAbilities.STRONG_RIGHT);
-			gainAbility(event.player, 0, CyborgAbilities.RADICAL_BEAM);
-			gainAbility(event.player, 0, CyborgAbilities.COUP_DE_VENT);
-			gainAbility(event.player, 5500, HakiAbilities.KENBUNSHOKU_HAKI);
-			gainAbility(event.player, 8500, HakiAbilities.BUSOSHOKU_HAKI);
-		}*/
-
+			gainAbility(event.player, 0, FreshFireAbility.INSTANCE);
+			gainAbility(event.player, 0, ColaOverdriveAbility.INSTANCE);
+			gainAbility(event.player, 0, StrongRightAbility.INSTANCE);
+			gainAbility(event.player, 0, RadicalBeamAbility.INSTANCE);
+			gainAbility(event.player, 0, CoupDeVentAbility.INSTANCE);
+		}
 	}
-	
 
 	private static void gainAbility(PlayerEntity player, int doriki, Ability ability)
 	{
@@ -70,17 +71,5 @@ public class AbilityProgressionEvents
 			abilityProps.addUnlockedAbility(ability);
 		if ((props.getDoriki() < doriki || DevilFruitsHelper.verifyIfAbilityIsBanned(ability)) && abilityProps.hasUnlockedAbility(ability))
 			abilityProps.removeUnlockedAbility(ability);
-		
-/*		if (ability instanceof KenbunshokuHaki || ability instanceof BusoshokuHaki)
-		{
-			if (props.getDoriki() >= doriki && !abilityProps.hasHakiAbility(ability) && !DevilFruitsHelper.verifyIfAbilityIsBanned(ability))
-				abilityProps.addHakiAbility(ability);
-			if ((props.getDoriki() < doriki || DevilFruitsHelper.verifyIfAbilityIsBanned(ability)) && abilityProps.hasHakiAbility(ability))
-				abilityProps.removeHakiAbility(ability);
-		}
-		else
-		{
-			
-		}*/
 	}
 }

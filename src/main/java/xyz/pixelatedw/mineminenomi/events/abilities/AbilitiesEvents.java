@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.events.devilfruits.abilities;
+package xyz.pixelatedw.mineminenomi.events.abilities;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;

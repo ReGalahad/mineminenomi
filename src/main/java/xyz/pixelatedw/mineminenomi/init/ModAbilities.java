@@ -7,6 +7,11 @@ import xyz.pixelatedw.mineminenomi.abilities.bane.SpringHopperAbility;
 import xyz.pixelatedw.mineminenomi.abilities.bane.SpringSnipeAbility;
 import xyz.pixelatedw.mineminenomi.abilities.bomu.KickBombAbility;
 import xyz.pixelatedw.mineminenomi.abilities.bomu.NoseFancyCannonAbility;
+import xyz.pixelatedw.mineminenomi.abilities.cyborg.ColaOverdriveAbility;
+import xyz.pixelatedw.mineminenomi.abilities.cyborg.CoupDeVentAbility;
+import xyz.pixelatedw.mineminenomi.abilities.cyborg.FreshFireAbility;
+import xyz.pixelatedw.mineminenomi.abilities.cyborg.RadicalBeamAbility;
+import xyz.pixelatedw.mineminenomi.abilities.cyborg.StrongRightAbility;
 import xyz.pixelatedw.mineminenomi.abilities.fishmankarate.KachiageHaisokuAbility;
 import xyz.pixelatedw.mineminenomi.abilities.fishmankarate.KarakusagawaraSeikenAbility;
 import xyz.pixelatedw.mineminenomi.abilities.fishmankarate.MurasameAbility;
@@ -164,6 +169,12 @@ public class ModAbilities
 		WyRegistry.registerAbility(KachiageHaisokuAbility.INSTANCE);
 		WyRegistry.registerAbility(SamehadaShoteiAbility.INSTANCE);
 		WyRegistry.registerAbility(KarakusagawaraSeikenAbility.INSTANCE);
+		
+		WyRegistry.registerAbility(FreshFireAbility.INSTANCE);
+		WyRegistry.registerAbility(ColaOverdriveAbility.INSTANCE);
+		WyRegistry.registerAbility(StrongRightAbility.INSTANCE);
+		WyRegistry.registerAbility(RadicalBeamAbility.INSTANCE);
+		WyRegistry.registerAbility(CoupDeVentAbility.INSTANCE);
 		
 		WyDebug.debug("A total of " + ModValues.devilfruits.size() + " Devil Fruits have been registered");
 		WyDebug.debug("A total of " + APIRegistries.ABILITIES.getEntries().size() + " abilities have been registered");

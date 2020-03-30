@@ -68,9 +68,10 @@ public class UltraColaItem extends Item
 				player.addPotionEffect(new EffectInstance(Effects.SPEED, 250, 0));
 
 			WyNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), props), (ServerPlayerEntity) player);
+			if(!player.isCreative())
+				itemStack.shrink(1);
 		}
 		
-		itemStack.shrink(1);
 		return itemStack;
 	}
 }
