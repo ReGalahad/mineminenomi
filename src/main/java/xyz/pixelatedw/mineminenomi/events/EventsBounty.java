@@ -33,8 +33,7 @@ public class EventsBounty
 			return;
 		
 		PlayerEntity player = event.player;
-			
-		
+					
 		// Bounty poster drops
 		if(CommonConfig.instance.isWantedPosterPackagesEnabled())
 		{

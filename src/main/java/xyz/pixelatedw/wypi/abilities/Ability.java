@@ -96,6 +96,11 @@ public abstract class Ability extends ForgeRegistryEntry<Ability>
 		this.state = State.COOLDOWN;
 	}
 	
+	public void startDisable()
+	{
+		this.state = State.DISABLED;
+	}
+	
 	public void stopCooldown(PlayerEntity player)
 	{
 		this.cooldown = this.maxCooldown;				

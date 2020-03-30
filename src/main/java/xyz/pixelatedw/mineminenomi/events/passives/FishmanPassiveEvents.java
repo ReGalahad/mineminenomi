@@ -13,7 +13,6 @@ import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.wypi.APIConfig;
-import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
@@ -36,7 +35,7 @@ public class FishmanPassiveEvents
 		if (!statsProps.isFishman())
 			return;
 
-		if (DevilFruitsHelper.isAffectedByWater(player) && WyHelper.isNullOrEmpty(devilFruitProps.getDevilFruit()))
+		if (DevilFruitsHelper.isAffectedByWater(player))
 		{
 			player.setAir(300);
 			player.addPotionEffect(new EffectInstance(Effects.NIGHT_VISION, 220, 1));		

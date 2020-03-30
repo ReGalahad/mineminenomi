@@ -118,7 +118,11 @@ public class EventsCombatMode extends Screen
 				else if (abl != null && abl.isContinuous())
 					GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 48, 0, 23, 23, 0);
 				else if (abl != null && abl.isDisabled())
+				{
 					GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 96, 0, 23, 23, 0);
+					ModRendererHelper.drawAbilityIcon("disabled_status", (posX - 192 + (i * 50)) / 2, posY - 19, 3, 16, 16);
+					mc.getTextureManager().bindTexture(ModResources.WIDGETS);
+				}
 				else
 					GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 0, 0, 23, 23, 0);
 			}

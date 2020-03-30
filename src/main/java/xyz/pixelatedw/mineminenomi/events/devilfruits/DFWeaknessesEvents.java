@@ -3,6 +3,8 @@ package xyz.pixelatedw.mineminenomi.events.devilfruits;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -44,52 +46,34 @@ public class DFWeaknessesEvents
 			ItemStack heldItem = player.getHeldItemMainhand();
 			boolean updateDisabledAbilities = false;
 			
-			/*if (!player.world.isRemote)
+			if(player.isServerWorld())
 			{
-				if (props.hasDevilFruit() && DevilFruitsHelper.isNearbyKairoseki(player))
+				if (props.hasDevilFruit())
 				{
-					if (ItemsHelper.hasKairosekiItem(player))
+					if (DevilFruitsHelper.isNearbyKairoseki(player))
+					{
 						player.addPotionEffect(new EffectInstance(Effects.NAUSEA, 100, 0));
-					
-					for (int i = 0; i < abilityProps.getHotbarAbilities().length; i++)
-					{
-						if (abilityProps.getAbilityInSlot(i) != null && !abilityProps.getAbilityInSlot(i).isDisabled() && !abilityProps.getAbilityInSlot(i).isOnCooldown())
-						{						
-							//abilityProps.getAbilityInSlot(i).endPassive(player);
-							//abilityProps.getAbilityInSlot(i).setCooldownActive(true);
-							//abilityProps.getAbilityInSlot(i).disable(player, true);
-							updateDisabledAbilities = true;
-						}
-					}		
-					
-					if(updateDisabledAbilities)
-						ModNetwork.sendTo(new SAbilityDataSyncPacket(player.getEntityId(), abilityProps), (ServerPlayerEntity) player);					
-					player.addPotionEffect(new EffectInstance(Effects.NAUSEA, 100, 0));
-				}
-				else
-				{
-					for (int i = 0; i < abilityProps.countAbilitiesInHotbar(); i++)
-					{										
-						if (abilityProps.getHotbarAbilityFromSlot(i) != null && abilityProps.getHotbarAbilityFromSlot(i).isDisabled())
-						{
-							abilityProps.getHotbarAbilityFromSlot(i).setPassiveActive(false);
-							abilityProps.getHotbarAbilityFromSlot(i).disable(player, false);
-							abilityProps.getHotbarAbilityFromSlot(i).startUpdate(player);
-							updateDisabledAbilities = true;
-						}
 						
+						for (int i = 0; i < abilityProps.getEquippedAbilities().length; i++)
+						{
+							if (abilityProps.getEquippedAbility(i) != null && !abilityProps.getEquippedAbility(i).isDisabled())
+							{			
+								abilityProps.getEquippedAbility(i).startDisable();
+							}
+						}
 					}
-
-					for(int i = 0; i < abilityProps.countAbilitiesInHotbar(); i++)
+					else
 					{
-						if(abilityProps.getHotbarAbilityFromSlot(i) != null && abilityProps.getHotbarAbilityFromSlot(i).isRepeating())			
-							abilityProps.getHotbarAbilityFromSlot(i).duringRepeater(player);
+						for (int i = 0; i < abilityProps.getEquippedAbilities().length; i++)
+						{
+							if(abilityProps.getEquippedAbility(i) != null && abilityProps.getEquippedAbility(i).isDisabled())
+							{
+								abilityProps.getEquippedAbility(i).startStandby();
+							}
+						}
 					}
-
-					if(updateDisabledAbilities)
-						ModNetwork.sendTo(new SAbilityDataSyncPacket(player.getEntityId(), abilityProps), (ServerPlayerEntity) player);
 				}
-			}*/
+			}
 		}
 	}
 }
