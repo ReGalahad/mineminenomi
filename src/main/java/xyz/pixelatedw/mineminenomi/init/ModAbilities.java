@@ -71,6 +71,10 @@ import xyz.pixelatedw.mineminenomi.abilities.rokushiki.RankyakuAbility;
 import xyz.pixelatedw.mineminenomi.abilities.rokushiki.ShiganAbility;
 import xyz.pixelatedw.mineminenomi.abilities.rokushiki.SoruAbility;
 import xyz.pixelatedw.mineminenomi.abilities.rokushiki.TekkaiAbility;
+import xyz.pixelatedw.mineminenomi.abilities.sniper.KaenBoshiAbility;
+import xyz.pixelatedw.mineminenomi.abilities.sniper.KemuriBoshiAbility;
+import xyz.pixelatedw.mineminenomi.abilities.sniper.RenpatsuNamariBoshiAbility;
+import xyz.pixelatedw.mineminenomi.abilities.sniper.SakuretsuSabotenBoshiAbility;
 import xyz.pixelatedw.mineminenomi.abilities.suke.ShishaNoTeAbility;
 import xyz.pixelatedw.mineminenomi.abilities.suke.SkattingAbility;
 import xyz.pixelatedw.mineminenomi.abilities.suke.SukePunchAbility;
@@ -185,6 +189,11 @@ public class ModAbilities
 		WyRegistry.registerAbility(SanbyakurokujuPoundHoAbility.INSTANCE);
 		WyRegistry.registerAbility(OTatsumakiAbility.INSTANCE);
 
+		WyRegistry.registerAbility(KaenBoshiAbility.INSTANCE);
+		WyRegistry.registerAbility(KemuriBoshiAbility.INSTANCE);
+		WyRegistry.registerAbility(RenpatsuNamariBoshiAbility.INSTANCE);
+		WyRegistry.registerAbility(SakuretsuSabotenBoshiAbility.INSTANCE);
+		
 		WyDebug.debug("A total of " + ModValues.devilfruits.size() + " Devil Fruits have been registered");
 		WyDebug.debug("A total of " + APIRegistries.ABILITIES.getEntries().size() + " abilities have been registered");
 	}

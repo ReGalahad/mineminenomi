@@ -38,6 +38,10 @@ import xyz.pixelatedw.mineminenomi.abilities.rokushiki.RankyakuAbility;
 import xyz.pixelatedw.mineminenomi.abilities.rokushiki.ShiganAbility;
 import xyz.pixelatedw.mineminenomi.abilities.rokushiki.SoruAbility;
 import xyz.pixelatedw.mineminenomi.abilities.rokushiki.TekkaiAbility;
+import xyz.pixelatedw.mineminenomi.abilities.sniper.KaenBoshiAbility;
+import xyz.pixelatedw.mineminenomi.abilities.sniper.KemuriBoshiAbility;
+import xyz.pixelatedw.mineminenomi.abilities.sniper.RenpatsuNamariBoshiAbility;
+import xyz.pixelatedw.mineminenomi.abilities.sniper.SakuretsuSabotenBoshiAbility;
 import xyz.pixelatedw.mineminenomi.abilities.swordsman.OTatsumakiAbility;
 import xyz.pixelatedw.mineminenomi.abilities.swordsman.SanbyakurokujuPoundHoAbility;
 import xyz.pixelatedw.mineminenomi.abilities.swordsman.ShiShishiSonsonAbility;
@@ -476,24 +480,23 @@ public class DevilFruitsHelper
 					abilityProps.addUnlockedAbility(OTatsumakiAbility.INSTANCE);
 			}
 		}
-/*		else if (props.isSniper())
+		else if (props.isSniper())
 		{
-			if (!verifyIfAbilityIsBanned(SniperAbilities.KAENBOSHI))
-				abilityProps.addRacialAbility(SniperAbilities.KAENBOSHI);
+			if (!verifyIfAbilityIsBanned(KaenBoshiAbility.INSTANCE))
+				abilityProps.addUnlockedAbility(KaenBoshiAbility.INSTANCE);
 			if (CommonConfig.instance.isQuestProgressionEnabled())
 			{
 			}
 			else
 			{
-				if (!verifyIfAbilityIsBanned(SniperAbilities.KEMURIBOSHI))
-					abilityProps.addRacialAbility(SniperAbilities.KEMURIBOSHI);
-				if (!verifyIfAbilityIsBanned(SniperAbilities.RENPATSUNAMARIBOSHI))
-					abilityProps.addRacialAbility(SniperAbilities.RENPATSUNAMARIBOSHI);
-				if (!verifyIfAbilityIsBanned(SniperAbilities.SAKURETSUSABOTENBOSHI))
-					abilityProps.addRacialAbility(SniperAbilities.SAKURETSUSABOTENBOSHI);
+				if (!verifyIfAbilityIsBanned(KemuriBoshiAbility.INSTANCE))
+					abilityProps.addUnlockedAbility(KemuriBoshiAbility.INSTANCE);
+				if (!verifyIfAbilityIsBanned(RenpatsuNamariBoshiAbility.INSTANCE))
+					abilityProps.addUnlockedAbility(RenpatsuNamariBoshiAbility.INSTANCE);
+				if (!verifyIfAbilityIsBanned(SakuretsuSabotenBoshiAbility.INSTANCE))
+					abilityProps.addUnlockedAbility(SakuretsuSabotenBoshiAbility.INSTANCE);
 			}
 		}
-*/
 	}
 
 	public static boolean isSniperAbility(Ability abl)

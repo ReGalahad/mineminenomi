@@ -2,6 +2,7 @@ package xyz.pixelatedw.mineminenomi.particles.effects.sniper;
 
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.wypi.WyHelper;
 
@@ -17,7 +18,7 @@ public class KemuriBoshiParticleEffect extends ParticleEffect
 			double offsetY = WyHelper.randomWithRange(-2, 3) + WyHelper.randomDouble();
 			double offsetZ = WyHelper.randomWithRange(-4, 4) + WyHelper.randomDouble();
 			
-			world.addParticle(ParticleTypes.CLOUD, posX + offsetX + WyHelper.randomWithRange(-7, 7), (posY + 0.5) + offsetY + WyHelper.randomWithRange(-1, 3), posZ + offsetZ + WyHelper.randomWithRange(-7, 7), 0.0D, 0.1D, 0.0D);
+			((ServerWorld) world).spawnParticle(ParticleTypes.CLOUD, posX + offsetX + WyHelper.randomWithRange(-7, 7), (posY + 0.5) + offsetY + WyHelper.randomWithRange(-1, 3), posZ + offsetZ + WyHelper.randomWithRange(-7, 7), 1, 0.0D, 0, 0.0D, 0.05);
 		}	
 	}
 

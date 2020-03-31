@@ -30,8 +30,8 @@ public class OTatsumakiParticleEffect extends ParticleEffect
 				motionY = -0.1 + (rand.nextDouble() / 10);
 				motionZ = z / 6;
 
-				((ServerWorld)world).spawnParticle(ParticleTypes.SNEEZE, posX + (x * 1.85), posY + 1.2, posZ + (z * 1.85), 1, motionX, motionY, motionZ, 0.03);			
-				((ServerWorld)world).spawnParticle(ParticleTypes.SNEEZE, posX + (x * 1.85), posY + 2.2, posZ + (z * 1.85), 1, motionX, motionY, motionZ, 0.03);
+				((ServerWorld) world).spawnParticle(ParticleTypes.SNEEZE, posX + (x * 1.85), posY + 1.2, posZ + (z * 1.85), 1, motionX, motionY, motionZ, 0.03);
+				((ServerWorld) world).spawnParticle(ParticleTypes.SNEEZE, posX + (x * 1.85), posY + 2.2, posZ + (z * 1.85), 1, motionX, motionY, motionZ, 0.03);
 			}
 		}
 	}
