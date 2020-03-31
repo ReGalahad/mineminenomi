@@ -1,4 +1,8 @@
 {
+	"ability.item.message.another_item_in_hand": "Cannot equip while holding another item in hand!",
+	"ability.item.message.empty_stack": "Cannot equip because it's an empty stack!",
+	"ability.item.message.need_sword": "You need a sword to use this ability!",
+	"ability.item.message.only_in_room": "%s can only be used inside ROOM!",
 	"ability.mineminenomi.ama_no_murakumo": "Ama no Murakumo",
 	"ability.mineminenomi.amaterasu": "Amaterasu",
 	"ability.mineminenomi.bakuretsu_kazan": "Bakuretsu Kazan",

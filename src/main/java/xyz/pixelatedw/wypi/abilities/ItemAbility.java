@@ -4,6 +4,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TranslationTextComponent;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
+import xyz.pixelatedw.wypi.APIDefaults;
 
 public abstract class ItemAbility extends ContinuousAbility
 {	
@@ -27,9 +28,9 @@ public abstract class ItemAbility extends ContinuousAbility
 		else
 		{
 			if(this.getItemStack().isEmpty())
-				player.sendMessage(new TranslationTextComponent("ability.item.empty_stack"));
+				player.sendMessage(new TranslationTextComponent(APIDefaults.ABILITY_MESSAGE_EMPTY_STACK));
 			else
-				player.sendMessage(new TranslationTextComponent("ability.item.another_item_in_hand"));
+				player.sendMessage(new TranslationTextComponent(APIDefaults.ABILITY_MESSAGE_ANOTHER_ITEM_IN_HAND));
 			return false;
 		}
 	}

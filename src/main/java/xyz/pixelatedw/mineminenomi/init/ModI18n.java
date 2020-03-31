@@ -68,6 +68,9 @@ public class ModI18n
 	public static final String QUEST_ALREADY_COMPLETED = WyRegistry.registerName("quest.already_completed", "Started %s");
 	public static final String QUEST_IN_PROGRESS = WyRegistry.registerName("quest.in_progress", "Completed %s");
 
+	public static final String ABILITY_MESSAGE_NEED_SWORD = WyRegistry.registerName("ability.item.message.need_sword", "You need a sword to use this ability!");
+	public static final String ABILITY_MESSAGE_ONLY_IN_ROOM = WyRegistry.registerName("ability.item.message.only_in_room", "%s can only be used inside ROOM!");
+
 	public static void init()
 	{
 		// ItemGroups

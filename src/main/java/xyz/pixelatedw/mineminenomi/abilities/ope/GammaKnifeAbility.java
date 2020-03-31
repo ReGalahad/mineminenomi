@@ -1,8 +1,10 @@
 package xyz.pixelatedw.mineminenomi.abilities.ope;
 
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.text.TranslationTextComponent;
 import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.ope.GammaKnifeProjectile;
+import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.Ability;
@@ -24,7 +26,7 @@ public class GammaKnifeAbility extends Ability
 	{
 		if (!DevilFruitsHelper.isEntityInRoom(player))
 		{
-			WyHelper.sendMsgToPlayer(player, "" + this.getName() + " can only be used inside ROOM !");
+			WyHelper.sendMsgToPlayer(player, new TranslationTextComponent(ModI18n.ABILITY_MESSAGE_ONLY_IN_ROOM, this.getName()).getFormattedText());
 			return false;
 		}
 

@@ -5,7 +5,9 @@ import java.util.List;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.text.TranslationTextComponent;
 import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.swordsman.OTatsumakiParticleEffect;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
@@ -31,7 +33,7 @@ public class OTatsumakiAbility extends Ability
 	{
 		if (!DevilFruitsHelper.canUseSwordsmanAbilities(player))
 		{
-			WyHelper.sendMsgToPlayer(player, "You need a sword to use this ability !");
+			WyHelper.sendMsgToPlayer(player, new TranslationTextComponent(ModI18n.ABILITY_MESSAGE_NEED_SWORD).getFormattedText());
 			return false;
 		}
 

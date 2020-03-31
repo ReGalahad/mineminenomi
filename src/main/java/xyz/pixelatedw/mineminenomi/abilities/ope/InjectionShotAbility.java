@@ -9,8 +9,10 @@ import net.minecraft.network.play.server.SEntityVelocityPacket;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.text.TranslationTextComponent;
 import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.api.helpers.ItemsHelper;
+import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.Ability;
@@ -33,13 +35,13 @@ public class InjectionShotAbility extends Ability
 	{
 		if (!DevilFruitsHelper.isEntityInRoom(player))
 		{
-			WyHelper.sendMsgToPlayer(player, "" + this.getName() + " can only be used inside ROOM !");
+			WyHelper.sendMsgToPlayer(player, new TranslationTextComponent(ModI18n.ABILITY_MESSAGE_ONLY_IN_ROOM, this.getName()).getFormattedText());
 			return false;
 		}
 		
 		if (!ItemsHelper.isSword(player.getHeldItemMainhand()))
 		{
-			WyHelper.sendMsgToPlayer(player, "You need a sword to use this ability !");
+			WyHelper.sendMsgToPlayer(player, new TranslationTextComponent(ModI18n.ABILITY_MESSAGE_NEED_SWORD).getFormattedText());
 			return false;
 		}
 
@@ -52,7 +54,7 @@ public class InjectionShotAbility extends Ability
 	
 	private void duringCooldown(PlayerEntity player, int cooldownTimer)
 	{
-		if (cooldownTimer > 13)
+		if (cooldownTimer > 13 * 20)
 		{
 			List<LivingEntity> list = WyHelper.getEntitiesNear(player.getPosition(), player.world, 1.6);
 			list.remove(player);

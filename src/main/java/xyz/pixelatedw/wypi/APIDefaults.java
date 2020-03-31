@@ -14,11 +14,8 @@ import xyz.pixelatedw.wypi.network.packets.server.SSyncAbilityDataPacket;
 
 public class APIDefaults
 {	
-	public static void initI18n()
-	{
-		WyRegistry.registerName("ability.item.empty_stack", "Cannot equip because it's an empty stack!");
-		WyRegistry.registerName("ability.item.another_item_in_hand", "Cannot equip while holding another item in hand!");
-	}
+	public static final String ABILITY_MESSAGE_EMPTY_STACK = WyRegistry.registerName("ability.item.message.empty_stack", "Cannot equip because it's an empty stack!");
+	public static final String ABILITY_MESSAGE_ANOTHER_ITEM_IN_HAND = WyRegistry.registerName("ability.item.message.another_item_in_hand", "Cannot equip while holding another item in hand!");
 
 	public static void initPackets()
 	{
