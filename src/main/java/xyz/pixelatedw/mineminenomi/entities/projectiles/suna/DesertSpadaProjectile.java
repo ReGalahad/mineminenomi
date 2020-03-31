@@ -6,16 +6,11 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.EntityRayTraceResult;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
 import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.suna.DesertSpadaParticleEffect;
-import xyz.pixelatedw.wypi.abilities.events.AbilityProjectileEvents;
 import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 
 public class DesertSpadaProjectile extends AbilityProjectileEntity
@@ -43,6 +38,7 @@ public class DesertSpadaProjectile extends AbilityProjectileEntity
 
 		this.setDamage(15);
 		this.setMaxLife(30);
+		this.setPassThroughEntities();
 		
 		this.withEffects = () -> {
 			return new EffectInstance[] {
@@ -51,40 +47,6 @@ public class DesertSpadaProjectile extends AbilityProjectileEntity
 		};
 		
 		this.onTickEvent = this::onTickEvent;
-	}
-	
-	@Override
-	protected void onImpact(RayTraceResult hit)
-	{
-		if(!this.world.isRemote)
-		{
-			if(hit.getType() == RayTraceResult.Type.ENTITY)
-			{
-				EntityRayTraceResult entityHit = (EntityRayTraceResult) hit;
-
-				if(entityHit.getEntity() instanceof LivingEntity && this.getThrower() != null)
-				{
-					LivingEntity hitEntity = (LivingEntity) entityHit.getEntity();
-
-					if(hitEntity == this.getThrower())
-						return;
-					
-					AbilityProjectileEvents.Hit event = new AbilityProjectileEvents.Hit(this, hit);
-					if(MinecraftForge.EVENT_BUS.post(event))
-						return;
-
-					hitEntity.attackEntityFrom(DamageSource.causeMobDamage(this.getThrower()), this.getDamage());
-						
-					if(this.withEffects.getEffects().length > 0)
-					{
-						for(EffectInstance instance : this.withEffects.getEffects())
-						{
-							hitEntity.addPotionEffect(instance);
-						}
-					}
-				}
-			}
-		}
 	}
 	
 	private void onTickEvent()

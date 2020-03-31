@@ -6,7 +6,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.abilities.ExplosionAbility;
 import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
-import xyz.pixelatedw.mineminenomi.entities.projectiles.ExtraProjectiles;
 import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 
 public class AxeDialProjectile extends AbilityProjectileEntity

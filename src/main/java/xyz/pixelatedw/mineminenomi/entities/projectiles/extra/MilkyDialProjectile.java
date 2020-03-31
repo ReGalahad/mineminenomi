@@ -5,7 +5,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
-import xyz.pixelatedw.mineminenomi.entities.projectiles.ExtraProjectiles;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 

@@ -6,8 +6,10 @@ import java.util.List;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.entity.projectile.ThrowableEntity;
 import net.minecraft.network.IPacket;
+import net.minecraft.network.play.server.SPlayEntityEffectPacket;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -140,6 +142,8 @@ public class AbilityProjectileEntity extends ThrowableEntity
 						for(EffectInstance instance : this.withEffects.getEffects())
 						{
 							hitEntity.addPotionEffect(instance);
+							if(this.getThrower() instanceof ServerPlayerEntity)
+								((ServerPlayerEntity)this.getThrower()).connection.sendPacket(new SPlayEntityEffectPacket(hitEntity.getEntityId(), instance));
 						}
 					}
 							

@@ -12,6 +12,11 @@ import xyz.pixelatedw.mineminenomi.abilities.cyborg.CoupDeVentAbility;
 import xyz.pixelatedw.mineminenomi.abilities.cyborg.FreshFireAbility;
 import xyz.pixelatedw.mineminenomi.abilities.cyborg.RadicalBeamAbility;
 import xyz.pixelatedw.mineminenomi.abilities.cyborg.StrongRightAbility;
+import xyz.pixelatedw.mineminenomi.abilities.doru.CandleHouseAbility;
+import xyz.pixelatedw.mineminenomi.abilities.doru.CandleLockAbility;
+import xyz.pixelatedw.mineminenomi.abilities.doru.CandleWallAbility;
+import xyz.pixelatedw.mineminenomi.abilities.doru.DoruDoruArtsKenAbility;
+import xyz.pixelatedw.mineminenomi.abilities.doru.DoruDoruArtsMoriAbility;
 import xyz.pixelatedw.mineminenomi.abilities.fishmankarate.KachiageHaisokuAbility;
 import xyz.pixelatedw.mineminenomi.abilities.fishmankarate.KarakusagawaraSeikenAbility;
 import xyz.pixelatedw.mineminenomi.abilities.fishmankarate.MurasameAbility;
@@ -130,7 +135,7 @@ public class ModAbilities
 	public static final AkumaNoMiItem GASU_GASU_NO_MI = new AkumaNoMiItem("Gasu Gasu no Mi", EnumFruitType.LOGIA);
 	public static final AkumaNoMiItem BARI_BARI_NO_MI = new AkumaNoMiItem("Bari Bari no Mi", EnumFruitType.PARAMECIA);
 	public static final AkumaNoMiItem DOKU_DOKU_NO_MI = new AkumaNoMiItem("Doku Doku no Mi", EnumFruitType.PARAMECIA);
-	public static final AkumaNoMiItem DORU_DORU_NO_MI = new AkumaNoMiItem("Doru Doru no Mi", EnumFruitType.PARAMECIA);
+	public static final AkumaNoMiItem DORU_DORU_NO_MI = new AkumaNoMiItem("Doru Doru no Mi", EnumFruitType.PARAMECIA, CandleWallAbility.INSTANCE, CandleHouseAbility.INSTANCE, DoruDoruArtsMoriAbility.INSTANCE, DoruDoruArtsKenAbility.INSTANCE, CandleLockAbility.INSTANCE);
 	public static final AkumaNoMiItem MAGU_MAGU_NO_MI = new AkumaNoMiItem("Magu Magu no Mi", EnumFruitType.LOGIA, DaiFunkaAbility.INSTANCE, RyuseiKazanAbility.INSTANCE, MeigoAbility.INSTANCE, BakuretsuKazanAbility.INSTANCE);
 	public static final AkumaNoMiItem SUNA_SUNA_NO_MI = new AkumaNoMiItem("Suna Suna no Mi", EnumFruitType.LOGIA, DesertSpadaAbility.INSTANCE, SablesAbility.INSTANCE, BarjanAbility.INSTANCE, DesertEncierroAbility.INSTANCE, GroundDeathAbility.INSTANCE, DesertGirasoleAbility.INSTANCE);
 	public static final AkumaNoMiItem KAGE_KAGE_NO_MI = new AkumaNoMiItem("Kage Kage no Mi", EnumFruitType.PARAMECIA);
@@ -147,11 +152,6 @@ public class ModAbilities
 	public static final AkumaNoMiItem BANE_BANE_NO_MI = new AkumaNoMiItem("Bane Bane no Mi", EnumFruitType.PARAMECIA, SpringHopperAbility.INSTANCE, SpringSnipeAbility.INSTANCE, SpringDeathKnockAbility.INSTANCE);
 	public static final AkumaNoMiItem HIE_HIE_NO_MI = new AkumaNoMiItem("Hie Hie no Mi", EnumFruitType.LOGIA, IceBlockPartisanAbility.INSTANCE, IceAgeAbility.INSTANCE, IceBallAbility.INSTANCE, IceSaberAbility.INSTANCE, IceTimeCapsuleAbility.INSTANCE, IceBlockPheasantAbility.INSTANCE);
 	public static final AkumaNoMiItem MERA_MERA_NO_MI = new AkumaNoMiItem("Mera Mera no Mi", EnumFruitType.LOGIA, HikenAbility.INSTANCE, HiganAbility.INSTANCE, DaiEnkaiEnteiAbility.INSTANCE, HidarumaAbility.INSTANCE, JujikaAbility.INSTANCE);
-
-	private static final Ability[] ROKUSHIKI_ABILITIES = new Ability[]
-		{
-				SoruAbility.INSTANCE
-		};
 
 	static
 	{

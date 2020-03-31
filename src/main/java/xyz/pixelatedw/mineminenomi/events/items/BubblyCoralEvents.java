@@ -15,14 +15,10 @@ import xyz.pixelatedw.mineminenomi.init.ModEffects;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
-import xyz.pixelatedw.wypi.abilities.models.SphereModel;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class BubblyCoralEvents
 {
-	@OnlyIn(Dist.CLIENT)
-	private static final SphereModel SPHERE = new SphereModel();
-
 	@SubscribeEvent
 	public static void onBubblyCoralCheck(LivingUpdateEvent event)
 	{

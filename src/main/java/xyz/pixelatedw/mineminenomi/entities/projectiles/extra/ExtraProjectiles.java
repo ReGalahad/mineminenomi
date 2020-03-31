@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.entities.projectiles;
+package xyz.pixelatedw.mineminenomi.entities.projectiles.extra;
 
 import net.minecraft.entity.EntityType;
 import net.minecraftforge.api.distmarker.Dist;
@@ -7,13 +7,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import xyz.pixelatedw.mineminenomi.entities.projectiles.extra.AxeDialProjectile;
-import xyz.pixelatedw.mineminenomi.entities.projectiles.extra.EntityCloud;
-import xyz.pixelatedw.mineminenomi.entities.projectiles.extra.KairosekiBulletProjectile;
-import xyz.pixelatedw.mineminenomi.entities.projectiles.extra.KujaArrowProjectile;
-import xyz.pixelatedw.mineminenomi.entities.projectiles.extra.MilkyDialProjectile;
-import xyz.pixelatedw.mineminenomi.entities.projectiles.extra.NormalBulletProjectile;
-import xyz.pixelatedw.mineminenomi.entities.projectiles.extra.PopGreenProjectile;
 import xyz.pixelatedw.mineminenomi.models.entities.projectiles.ArrowModel;
 import xyz.pixelatedw.wypi.WyRegistry;
 import xyz.pixelatedw.wypi.abilities.models.CubeModel;
