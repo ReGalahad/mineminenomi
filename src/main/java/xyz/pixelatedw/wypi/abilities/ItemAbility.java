@@ -3,10 +3,11 @@ package xyz.pixelatedw.wypi.abilities;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TranslationTextComponent;
+import xyz.pixelatedw.mineminenomi.api.abilities.IParallelContinuousAbility;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.APIDefaults;
 
-public abstract class ItemAbility extends ContinuousAbility
+public abstract class ItemAbility extends ContinuousAbility implements IParallelContinuousAbility
 {	
 	public ItemAbility(String name, AbilityCategory category)
 	{
