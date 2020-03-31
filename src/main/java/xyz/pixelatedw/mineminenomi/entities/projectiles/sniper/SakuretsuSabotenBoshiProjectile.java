@@ -52,17 +52,20 @@ public class SakuretsuSabotenBoshiProjectile extends AbilityProjectileEntity
 		explosion.setDamageEntities(true);
 		explosion.doExplosion();
 		
-		for(int i = 0; i < 8; i++)
+		int flag = 2 | 16 | 32;
+		String[] rules = new String[] {"air", "foliage"};
+		
+		for (int i = 0; i < 8; i++)
 		{
 			int a1 = (int) WyHelper.randomWithRange(-5, 5);
 			int a2 = (int) WyHelper.randomWithRange(-5, 5);
-			
-			DevilFruitsHelper.placeBlockIfAllowed(this.world, (int)posX + a1, (int)posY - 3 , (int)posZ + a2, Blocks.CACTUS, 2, "air");
-			DevilFruitsHelper.placeBlockIfAllowed(this.world, (int)posX + a1, (int)posY - 2 , (int)posZ + a2, Blocks.CACTUS, 2, "air");	
-			DevilFruitsHelper.placeBlockIfAllowed(this.world, (int)posX + a1, (int)posY - 1 , (int)posZ + a2, Blocks.CACTUS, 2, "air");	
-			DevilFruitsHelper.placeBlockIfAllowed(this.world, (int)posX + a1, (int)posY , (int)posZ + a2, Blocks.CACTUS, 2, "air");		
-			DevilFruitsHelper.placeBlockIfAllowed(this.world, (int)posX + a1, (int)posY + 1, (int)posZ + a2, Blocks.CACTUS, 2, "air");		
-			DevilFruitsHelper.placeBlockIfAllowed(this.world, (int)posX + a1, (int)posY + 2, (int)posZ + a2, Blocks.CACTUS, 2, "air");	
-		}		
+
+			DevilFruitsHelper.placeBlockIfAllowed(world, (int) posX + a1, (int) posY - 3, (int) posZ + a2, Blocks.CACTUS, flag, rules);
+			DevilFruitsHelper.placeBlockIfAllowed(world, (int) posX + a1, (int) posY - 2, (int) posZ + a2, Blocks.CACTUS, flag, rules);
+			DevilFruitsHelper.placeBlockIfAllowed(world, (int) posX + a1, (int) posY - 1, (int) posZ + a2, Blocks.CACTUS, flag, rules);
+			DevilFruitsHelper.placeBlockIfAllowed(world, (int) posX + a1, (int) posY, (int) posZ + a2, Blocks.CACTUS, flag, rules);
+			DevilFruitsHelper.placeBlockIfAllowed(world, (int) posX + a1, (int) posY + 1, (int) posZ + a2, Blocks.CACTUS, flag, rules);
+			DevilFruitsHelper.placeBlockIfAllowed(world, (int) posX + a1, (int) posY + 2, (int) posZ + a2, Blocks.CACTUS, flag, rules);
+		}	
 	}
 }

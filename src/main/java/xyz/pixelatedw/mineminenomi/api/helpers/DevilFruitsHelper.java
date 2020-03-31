@@ -499,19 +499,6 @@ public class DevilFruitsHelper
 		}
 	}
 
-	public static boolean isSniperAbility(Ability abl)
-	{
-		/*
-		 * for (Ability a : SniperAbilities.abilitiesArray)
-		 * {
-		 * if (abl.getAttribute().getAttributeName().equalsIgnoreCase(a.getAttribute().getAttributeName()))
-		 * return true;
-		 * }
-		 * return false;
-		 */
-		return false;
-	}
-
 	public static ItemStack getDevilFruitItem(String fullName)
 	{
 		String model = "";

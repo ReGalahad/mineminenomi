@@ -9,8 +9,7 @@ public class AbilityProjectileEvents
 {
 	@Cancelable
 	public static class Hit extends Event
-	{
-		
+	{	
 		private AbilityProjectileEntity projectile;
 		private RayTraceResult hit;
 		
@@ -29,5 +28,5 @@ public class AbilityProjectileEvents
 		{
 			return this.hit;
 		}
-	}	
+	}
 }
