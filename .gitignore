@@ -32,5 +32,4 @@ options.txt
 usernamecache.json
 run
 .env*
-*.properties
 *~$*
