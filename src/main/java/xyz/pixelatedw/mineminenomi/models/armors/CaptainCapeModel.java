@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.models;
+package xyz.pixelatedw.mineminenomi.models.armors;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 
