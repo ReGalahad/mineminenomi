@@ -227,9 +227,9 @@ public class DevilFruitsHelper
 	public static List<int[]> createEmptyCube(World world, double posX, double posY, double posZ, int[] sizes, Block blockToPlace, String... blockRules)
 	{
 		List<int[]> blocks = new ArrayList<int[]>();
-		for (int x = (sizes[0] * 0) - sizes[0]; x <= sizes[0]; x++)
-			for (int y = (sizes[1] * 0) - sizes[1]; y <= sizes[1]; y++)
-				for (int z = (sizes[2] * 0) - sizes[2]; z <= sizes[2]; z++)
+		for (int x = -sizes[0]; x <= sizes[0]; x++)
+			for (int y = -sizes[1]; y <= sizes[1]; y++)
+				for (int z = -sizes[2]; z <= sizes[2]; z++)
 				{
 					if (x == -sizes[0] || x == sizes[0] || y == -sizes[1] || y == sizes[1] || z == -sizes[2] || z == sizes[2])
 					{
@@ -252,9 +252,9 @@ public class DevilFruitsHelper
 	public static List<int[]> createFilledCube(World world, double posX, double posY, double posZ, int[] sizes, Block blockToPlace, String... blockRules)
 	{
 		List<int[]> blocks = new ArrayList<int[]>();
-		for (int x = (sizes[0] * 0) - sizes[0]; x <= sizes[0]; x++)
-			for (int y = (sizes[1] * 0) - sizes[1]; y <= sizes[1]; y++)
-				for (int z = (sizes[2] * 0) - sizes[2]; z <= sizes[2]; z++)
+		for (int x = -sizes[0]; x <= sizes[0]; x++)
+			for (int y = -sizes[1]; y <= sizes[1]; y++)
+				for (int z = -sizes[2]; z <= sizes[2]; z++)
 				{
 					placeBlockIfAllowed(world, (int) posX + x, (int) posY + y, (int) posZ + z, blockToPlace, blockRules);
 					blocks.add(new int[]
