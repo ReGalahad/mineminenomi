@@ -20,7 +20,7 @@ public class MedicBagItem extends ArmorItem
 {
 	public MedicBagItem()
 	{
-		super(ModArmors.MEDIC_BAG_MATERIAL, EquipmentSlotType.CHEST, (new Item.Properties()).group(ModCreativeTabs.WEAPONS));
+		super(ModArmors.MEDIC_BAG_MATERIAL, EquipmentSlotType.CHEST, (new Item.Properties()).group(ModCreativeTabs.WEAPONS).maxDamage(1000));
 	}
 
 	@Override

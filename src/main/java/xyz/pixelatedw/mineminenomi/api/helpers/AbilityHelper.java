@@ -27,6 +27,9 @@ import xyz.pixelatedw.mineminenomi.abilities.cyborg.CoupDeVentAbility;
 import xyz.pixelatedw.mineminenomi.abilities.cyborg.FreshFireAbility;
 import xyz.pixelatedw.mineminenomi.abilities.cyborg.RadicalBeamAbility;
 import xyz.pixelatedw.mineminenomi.abilities.cyborg.StrongRightAbility;
+import xyz.pixelatedw.mineminenomi.abilities.doctor.FailedExperimentAbility;
+import xyz.pixelatedw.mineminenomi.abilities.doctor.FirstAidAbility;
+import xyz.pixelatedw.mineminenomi.abilities.doctor.MedicBagExplosionAbility;
 import xyz.pixelatedw.mineminenomi.abilities.fishmankarate.KachiageHaisokuAbility;
 import xyz.pixelatedw.mineminenomi.abilities.fishmankarate.KarakusagawaraSeikenAbility;
 import xyz.pixelatedw.mineminenomi.abilities.fishmankarate.MurasameAbility;
@@ -495,6 +498,21 @@ public class AbilityHelper
 					abilityProps.addUnlockedAbility(RenpatsuNamariBoshiAbility.INSTANCE);
 				if (!verifyIfAbilityIsBanned(SakuretsuSabotenBoshiAbility.INSTANCE))
 					abilityProps.addUnlockedAbility(SakuretsuSabotenBoshiAbility.INSTANCE);
+			}
+		}
+		else if (props.isDoctor())
+		{
+			if (!verifyIfAbilityIsBanned(FirstAidAbility.INSTANCE))
+				abilityProps.addUnlockedAbility(FirstAidAbility.INSTANCE);
+			if (CommonConfig.instance.isQuestProgressionEnabled())
+			{
+			}
+			else
+			{
+				if (!verifyIfAbilityIsBanned(MedicBagExplosionAbility.INSTANCE))
+					abilityProps.addUnlockedAbility(MedicBagExplosionAbility.INSTANCE);
+				if (!verifyIfAbilityIsBanned(FailedExperimentAbility.INSTANCE))
+					abilityProps.addUnlockedAbility(FailedExperimentAbility.INSTANCE);
 			}
 		}
 	}
