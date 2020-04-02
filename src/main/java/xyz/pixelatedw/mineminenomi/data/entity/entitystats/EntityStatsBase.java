@@ -283,7 +283,7 @@ public class EntityStatsBase implements IEntityStats
 		if (WyHelper.isNullOrEmpty(this.fightingStyle))
 			return false;
 
-		return this.fightingStyle.equalsIgnoreCase("medic");
+		return this.fightingStyle.equalsIgnoreCase("doctor");
 	}
 
 	@Override

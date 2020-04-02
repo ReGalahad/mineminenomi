@@ -28,10 +28,10 @@ public class FailedExperimentAbility extends ChargeableAbility
 		this.setMaxChargeTime(2);
 		this.setDescription("Throws a random splash potion with a debuff effect at the enemy");
 		
-		this.onUseEvent = this::onUseEvent;
+		this.onEndChargingEvent = this::onEndChargingEvent;
 	}
 	
-	private boolean onUseEvent(PlayerEntity player)
+	private boolean onEndChargingEvent(PlayerEntity player)
 	{		
 		ItemStack medicBag = player.inventory.armorInventory.get(2);
 		boolean hasMedicBag = medicBag != null && medicBag.getItem() == ModArmors.MEDIC_BAG;
@@ -43,9 +43,8 @@ public class FailedExperimentAbility extends ChargeableAbility
 		}
 		
 		PotionEntity potion = new PotionEntity(player.world, player);
-		potion.rotationPitch -= -20.0F;
-
-		int potionType = (int) WyHelper.randomWithRange(0, 4);
+		
+		int potionType = (int) WyHelper.randomWithRange(0, 3);
 		ItemStack stack = new ItemStack(Items.SPLASH_POTION);
 		
 		switch(potionType)
@@ -54,20 +53,20 @@ public class FailedExperimentAbility extends ChargeableAbility
 				stack = PotionUtils.appendEffects(stack, Lists.newArrayList(new EffectInstance(Effects.NAUSEA, 200, 1)));
 				break;
 			case 1:
-				stack = PotionUtils.appendEffects(stack, Lists.newArrayList(new EffectInstance(Effects.WEAKNESS, 200, 1)));
-				break;
-			case 2:
 				stack = PotionUtils.appendEffects(stack, Lists.newArrayList(new EffectInstance(Effects.MINING_FATIGUE, 200, 1)));
 				break;
-			case 3:
+			case 2:
 				stack = PotionUtils.appendEffects(stack, Lists.newArrayList(new EffectInstance(Effects.POISON, 200, 1)));
 				break;
-			case 4:
+			case 3:
 				stack = PotionUtils.appendEffects(stack, Lists.newArrayList(new EffectInstance(Effects.HUNGER, 200, 1)));
 				break;
 		}
 		potion.setItem(stack);
 		
+		potion.shoot(player, player.rotationPitch, player.rotationYaw, -20.0F, 0.8F, 1.0F);
+		player.world.addEntity(potion);
+
 		int damage = medicBag.getDamage() + 10 <= medicBag.getMaxDamage() ? 10 : medicBag.getMaxDamage() - medicBag.getDamage();
 		medicBag.damageItem(damage, player, (user) -> {});
 		if(medicBag.getDamage() >= medicBag.getMaxDamage())

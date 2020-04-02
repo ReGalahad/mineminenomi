@@ -22,15 +22,16 @@ public class FirstAidParticleEffect extends ParticleEffect
 			double middlePoint = 0.1;
 			middlePoint *= (world.rand.nextFloat() * 2) + 0.3F;
 
-			motionX *= middlePoint / 2;
-			motionY *= middlePoint / 2;
-			motionZ *= middlePoint / 2;
+			motionX *= middlePoint / 5;
+			motionY *= middlePoint / 5;
+			motionZ *= middlePoint / 5;
 
 			GenericParticleData data = new GenericParticleData();
 			data.setTexture(ModResources.YUKI);
 			data.setLife(10);
 			data.setSize(1.5F);
-			data.setColor(0, 0, 0.8F);
+			data.setColor(0, 0.8F, 0);
+			data.setMotion(motionX, motionY, motionZ);
 			WyHelper.spawnParticles(data, (ServerWorld) world, posX, posY + 1, posZ);
 		}
 	}

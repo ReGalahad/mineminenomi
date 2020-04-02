@@ -1,5 +1,7 @@
 package xyz.pixelatedw.mineminenomi.abilities.doctor;
 
+import java.util.List;
+
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -42,7 +44,9 @@ public class MedicBagExplosionAbility extends Ability
 		
 		player.heal(player.getMaxHealth());
 
-		for(LivingEntity entity : WyHelper.<LivingEntity>getEntitiesNear(player.getPosition(), player.world, 10))
+		List<LivingEntity> targets = WyHelper.<LivingEntity>getEntitiesNear(player.getPosition(), player.world, 10);
+		targets.remove(player);
+		for(LivingEntity entity : targets)
 		{
 			int effect = (int) WyHelper.randomWithRange(0, 6);
 			

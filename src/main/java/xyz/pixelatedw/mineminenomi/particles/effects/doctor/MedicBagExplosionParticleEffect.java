@@ -38,7 +38,7 @@ public class MedicBagExplosionParticleEffect extends ParticleEffect
 				data.setLife(4);
 				data.setSize(2F);
 				data.setMotion(motionX, motionY, motionZ);
-				data.setColor(0, 0, 0.8F);
+				data.setColor(0, 0.8F, 0);
 				WyHelper.spawnParticles(data, (ServerWorld) world, posX + (x * 0.75) + WyHelper.randomDouble(), posY + y, posZ + (z * 0.75) + WyHelper.randomDouble());
 				
 				data = new GenericParticleData();
@@ -46,7 +46,7 @@ public class MedicBagExplosionParticleEffect extends ParticleEffect
 				data.setLife(7);
 				data.setSize(2.5F);
 				data.setMotion(motionX, motionY, motionZ);
-				data.setColor(0, 0, 0.8F);
+				data.setColor(0, 0.8F, 0);
 				WyHelper.spawnParticles(data, (ServerWorld) world, posX + (x * 2.0) + WyHelper.randomDouble(), posY + y, posZ + (z * 2.0) + WyHelper.randomDouble());
 
 				data = new GenericParticleData();
@@ -54,7 +54,7 @@ public class MedicBagExplosionParticleEffect extends ParticleEffect
 				data.setLife(10);
 				data.setSize(4.5F);
 				data.setMotion(motionX, motionY * 2.25, motionZ);
-				data.setColor(0, 0, 0.8F);
+				data.setColor(0, 0.8F, 0);
 				WyHelper.spawnParticles(data, (ServerWorld) world, posX + (x * 3.25) + WyHelper.randomDouble(), posY + y, posZ + (z * 3.25) + WyHelper.randomDouble());
 			}
 		}
