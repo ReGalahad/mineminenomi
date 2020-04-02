@@ -4,7 +4,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.server.ServerWorld;
 import xyz.pixelatedw.mineminenomi.api.abilities.ExplosionAbility;
-import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.data.GenericParticleData;
 import xyz.pixelatedw.mineminenomi.particles.effects.common.CommonExplosionParticleEffect;
@@ -28,7 +28,7 @@ public class GekishinAbility extends PunchAbility
 
 	private float onHitEntity(PlayerEntity player, LivingEntity target)
 	{
-		ExplosionAbility explosion = DevilFruitsHelper.newExplosion(target, target.posX, target.posY, target.posZ, 3);
+		ExplosionAbility explosion = AbilityHelper.newExplosion(target, target.posX, target.posY, target.posZ, 3);
 		explosion.setExplosionSound(true);
 		explosion.setDamageOwner(false);
 		explosion.setDestroyBlocks(false);

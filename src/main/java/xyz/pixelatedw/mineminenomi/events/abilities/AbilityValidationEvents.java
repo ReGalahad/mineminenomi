@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
@@ -44,7 +44,7 @@ public class AbilityValidationEvents
 				
 				if(!WyHelper.isNullOrEmpty(devilFruitProps.getDevilFruit()))
 				{
-					ItemStack df = DevilFruitsHelper.getDevilFruitItem(devilFruitProps.getDevilFruit());
+					ItemStack df = AbilityHelper.getDevilFruitItem(devilFruitProps.getDevilFruit());
 					
 					abilityProps.clearUnlockedAbilities(AbilityCategory.ALL);
 					if(!devilFruitProps.getZoanPoint().equalsIgnoreCase("yomi"))
@@ -54,20 +54,20 @@ public class AbilityValidationEvents
 					{
 						if(devilFruitProps.hasYamiPower())
 						{
-							ItemStack yami = DevilFruitsHelper.getDevilFruitItem("yamiyami");
+							ItemStack yami = AbilityHelper.getDevilFruitItem("yamiyami");
 							for(Ability a : ((AkumaNoMiItem)yami.getItem()).abilities)
-								if(!DevilFruitsHelper.verifyIfAbilityIsBanned(a))
+								if(!AbilityHelper.verifyIfAbilityIsBanned(a))
 									abilityProps.addUnlockedAbility(a);
 						}
 						
 						for(Ability a : ((AkumaNoMiItem)df.getItem()).abilities)
-							if(!DevilFruitsHelper.verifyIfAbilityIsBanned(a))
+							if(!AbilityHelper.verifyIfAbilityIsBanned(a))
 								abilityProps.addUnlockedAbility(a);
 					}
 				}
 				
-				DevilFruitsHelper.validateRacialMoves(player);
-				DevilFruitsHelper.validateStyleMoves(player);
+				AbilityHelper.validateRacialMoves(player);
+				AbilityHelper.validateStyleMoves(player);
 				
 				/*for(Ability a : abilityProps.getAbilities(Category.ALL))
 				{
@@ -82,7 +82,7 @@ public class AbilityValidationEvents
 				{
 					if(abilityProps.getEquippedAbility(i) != null)
 					{
-						if(DevilFruitsHelper.verifyIfAbilityIsBanned(abilityProps.getEquippedAbility(i)))
+						if(AbilityHelper.verifyIfAbilityIsBanned(abilityProps.getEquippedAbility(i)))
 							abilityProps.setEquippedAbility(i, null);
 					}
 				}

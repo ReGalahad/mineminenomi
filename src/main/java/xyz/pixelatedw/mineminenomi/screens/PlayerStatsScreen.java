@@ -14,7 +14,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.config.GuiUtils;
-import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
@@ -99,7 +99,7 @@ public class PlayerStatsScreen extends Screen
 			ItemStack df;
 			if (!devilFruitProps.getDevilFruit().equals("yamidummy"))
 			{
-				df = DevilFruitsHelper.getDevilFruitItem(devilFruitProps.getDevilFruit());
+				df = AbilityHelper.getDevilFruitItem(devilFruitProps.getDevilFruit());
 
 				if (devilFruitProps.hasYamiPower())
 					this.minecraft.fontRenderer.drawStringWithShadow(TextFormatting.BOLD + "" + yamiFruit.getDisplayName().getFormattedText() + " + " + df.getDisplayName().getFormattedText(), posX - 28, posY + 194, -1);

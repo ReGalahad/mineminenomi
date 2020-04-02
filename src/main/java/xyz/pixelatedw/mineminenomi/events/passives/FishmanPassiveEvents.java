@@ -7,7 +7,7 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.abilities.fishmankarate.SamehadaShoteiAbility;
-import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
@@ -35,7 +35,7 @@ public class FishmanPassiveEvents
 		if (!statsProps.isFishman())
 			return;
 
-		if (DevilFruitsHelper.isAffectedByWater(player))
+		if (AbilityHelper.isAffectedByWater(player))
 		{
 			player.setAir(300);
 			player.addPotionEffect(new EffectInstance(Effects.NIGHT_VISION, 220, 1));		

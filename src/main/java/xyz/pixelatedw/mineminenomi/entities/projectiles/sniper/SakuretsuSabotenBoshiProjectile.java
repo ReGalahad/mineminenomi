@@ -6,7 +6,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.abilities.ExplosionAbility;
-import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.common.CommonExplosionParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.sniper.KemuriBoshiParticleEffect;
@@ -43,7 +43,7 @@ public class SakuretsuSabotenBoshiProjectile extends AbilityProjectileEntity
 
 	private void onBlockImpactEvent(BlockPos hit)
 	{
-		ExplosionAbility explosion = DevilFruitsHelper.newExplosion(this.getThrower(), hit.getX(), hit.getY(), hit.getZ(), 5);
+		ExplosionAbility explosion = AbilityHelper.newExplosion(this.getThrower(), hit.getX(), hit.getY(), hit.getZ(), 5);
 		explosion.setExplosionSound(true);
 		explosion.setDamageOwner(false);
 		explosion.setDestroyBlocks(false);
@@ -60,12 +60,12 @@ public class SakuretsuSabotenBoshiProjectile extends AbilityProjectileEntity
 			int a1 = (int) WyHelper.randomWithRange(-5, 5);
 			int a2 = (int) WyHelper.randomWithRange(-5, 5);
 
-			DevilFruitsHelper.placeBlockIfAllowed(world, (int) posX + a1, (int) posY - 3, (int) posZ + a2, Blocks.CACTUS, flag, rules);
-			DevilFruitsHelper.placeBlockIfAllowed(world, (int) posX + a1, (int) posY - 2, (int) posZ + a2, Blocks.CACTUS, flag, rules);
-			DevilFruitsHelper.placeBlockIfAllowed(world, (int) posX + a1, (int) posY - 1, (int) posZ + a2, Blocks.CACTUS, flag, rules);
-			DevilFruitsHelper.placeBlockIfAllowed(world, (int) posX + a1, (int) posY, (int) posZ + a2, Blocks.CACTUS, flag, rules);
-			DevilFruitsHelper.placeBlockIfAllowed(world, (int) posX + a1, (int) posY + 1, (int) posZ + a2, Blocks.CACTUS, flag, rules);
-			DevilFruitsHelper.placeBlockIfAllowed(world, (int) posX + a1, (int) posY + 2, (int) posZ + a2, Blocks.CACTUS, flag, rules);
+			AbilityHelper.placeBlockIfAllowed(world, (int) posX + a1, (int) posY - 3, (int) posZ + a2, Blocks.CACTUS, flag, rules);
+			AbilityHelper.placeBlockIfAllowed(world, (int) posX + a1, (int) posY - 2, (int) posZ + a2, Blocks.CACTUS, flag, rules);
+			AbilityHelper.placeBlockIfAllowed(world, (int) posX + a1, (int) posY - 1, (int) posZ + a2, Blocks.CACTUS, flag, rules);
+			AbilityHelper.placeBlockIfAllowed(world, (int) posX + a1, (int) posY, (int) posZ + a2, Blocks.CACTUS, flag, rules);
+			AbilityHelper.placeBlockIfAllowed(world, (int) posX + a1, (int) posY + 1, (int) posZ + a2, Blocks.CACTUS, flag, rules);
+			AbilityHelper.placeBlockIfAllowed(world, (int) posX + a1, (int) posY + 2, (int) posZ + a2, Blocks.CACTUS, flag, rules);
 		}	
 	}
 }

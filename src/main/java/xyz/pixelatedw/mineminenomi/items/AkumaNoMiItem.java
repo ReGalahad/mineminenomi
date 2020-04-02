@@ -20,7 +20,7 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.EnumFruitType;
-import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
@@ -110,8 +110,8 @@ public class AkumaNoMiItem extends Item
 				entityStatsProps.setRace(ModValues.HUMAN);
 				
 				//abilityDataProps.clearHotbarFromList(player, FishKarateAbilities.abilitiesArray);
-				DevilFruitsHelper.validateStyleMoves(player);
-				DevilFruitsHelper.validateRacialMoves(player);
+				AbilityHelper.validateStyleMoves(player);
+				AbilityHelper.validateRacialMoves(player);
 				//ModNetwork.sendTo(new PacketAbilityDataSync(abilityDataProps), (ServerPlayerEntity) player);
 			}
 		}
@@ -119,7 +119,7 @@ public class AkumaNoMiItem extends Item
 		if(!eatenFruit.equalsIgnoreCase("yomiyomi"))
 		{
 			for(Ability a : abilities)
-				if(!DevilFruitsHelper.verifyIfAbilityIsBanned(a) && abilityDataProps.getUnlockedAbility(a) == null)
+				if(!AbilityHelper.verifyIfAbilityIsBanned(a) && abilityDataProps.getUnlockedAbility(a) == null)
 					abilityDataProps.addUnlockedAbility(a);
 			if(!player.world.isRemote)
 			{
@@ -136,7 +136,7 @@ public class AkumaNoMiItem extends Item
 	public void addInformation(ItemStack itemStack, @Nullable World world, List<ITextComponent> list, ITooltipFlag par4)
 	{
 		for (int i = 0; i < this.abilities.length; i++)
-			if (!DevilFruitsHelper.verifyIfAbilityIsBanned(this.abilities[i]) && this.abilities[i] != null)
+			if (!AbilityHelper.verifyIfAbilityIsBanned(this.abilities[i]) && this.abilities[i] != null)
 				list.add(new StringTextComponent(TextFormatting.GRAY + I18n.format("ability." + APIConfig.PROJECT_ID + "." + WyHelper.getResourceName(this.abilities[i].getName()))));
 
 		list.add(new StringTextComponent(""));

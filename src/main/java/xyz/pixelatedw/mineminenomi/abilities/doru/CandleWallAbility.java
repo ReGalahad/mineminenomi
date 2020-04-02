@@ -2,7 +2,7 @@ package xyz.pixelatedw.mineminenomi.abilities.doru;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Direction;
-import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.abilities.Ability;
@@ -25,13 +25,13 @@ public class CandleWallAbility extends Ability
 		Direction dir = Direction.getFacingDirections(player)[0];
 
 		if (dir == Direction.NORTH)
-			DevilFruitsHelper.createFilledCube(player.world, player.posX - 1, player.posY, player.posZ - 4, new int[] { 3, 4, 1 }, ModBlocks.WAX, "air", "foliage");
+			AbilityHelper.createFilledCube(player.world, player.posX - 1, player.posY, player.posZ - 4, new int[] { 3, 4, 1 }, ModBlocks.WAX, "air", "foliage");
 		if (dir == Direction.SOUTH)
-			DevilFruitsHelper.createFilledCube(player.world, player.posX - 1, player.posY, player.posZ + 2, new int[] { 3, 4, 1 }, ModBlocks.WAX, "air", "foliage");
+			AbilityHelper.createFilledCube(player.world, player.posX - 1, player.posY, player.posZ + 2, new int[] { 3, 4, 1 }, ModBlocks.WAX, "air", "foliage");
 		if (dir == Direction.EAST)
-			DevilFruitsHelper.createFilledCube(player.world, player.posX + 2, player.posY, player.posZ - 1, new int[] { 1, 4, 3 }, ModBlocks.WAX, "air", "foliage");
+			AbilityHelper.createFilledCube(player.world, player.posX + 2, player.posY, player.posZ - 1, new int[] { 1, 4, 3 }, ModBlocks.WAX, "air", "foliage");
 		if (dir == Direction.WEST)
-			DevilFruitsHelper.createFilledCube(player.world, player.posX - 4, player.posY, player.posZ - 1, new int[] { 1, 4, 3 }, ModBlocks.WAX, "air", "foliage");
+			AbilityHelper.createFilledCube(player.world, player.posX - 4, player.posY, player.posZ - 1, new int[] { 1, 4, 3 }, ModBlocks.WAX, "air", "foliage");
 
 		return true;
 	}

@@ -19,7 +19,7 @@ import xyz.pixelatedw.mineminenomi.abilities.rokushiki.RankyakuAbility;
 import xyz.pixelatedw.mineminenomi.abilities.rokushiki.ShiganAbility;
 import xyz.pixelatedw.mineminenomi.abilities.rokushiki.SoruAbility;
 import xyz.pixelatedw.mineminenomi.abilities.rokushiki.TekkaiAbility;
-import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.events.custom.DorikiEvent;
@@ -67,9 +67,9 @@ public class AbilityProgressionEvents
 		IEntityStats props = EntityStatsCapability.get(player);
 		IAbilityData abilityProps = AbilityDataCapability.get(player);
 
-		if (props.getDoriki() >= doriki && !abilityProps.hasUnlockedAbility(ability) && !DevilFruitsHelper.verifyIfAbilityIsBanned(ability))
+		if (props.getDoriki() >= doriki && !abilityProps.hasUnlockedAbility(ability) && !AbilityHelper.verifyIfAbilityIsBanned(ability))
 			abilityProps.addUnlockedAbility(ability);
-		if ((props.getDoriki() < doriki || DevilFruitsHelper.verifyIfAbilityIsBanned(ability)) && abilityProps.hasUnlockedAbility(ability))
+		if ((props.getDoriki() < doriki || AbilityHelper.verifyIfAbilityIsBanned(ability)) && abilityProps.hasUnlockedAbility(ability))
 			abilityProps.removeUnlockedAbility(ability);
 	}
 }

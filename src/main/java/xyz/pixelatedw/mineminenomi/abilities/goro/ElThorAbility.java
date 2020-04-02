@@ -5,7 +5,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.server.ServerWorld;
 import xyz.pixelatedw.mineminenomi.api.abilities.ExplosionAbility;
-import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.init.ModArmors;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.common.CommonExplosionParticleEffect;
@@ -82,7 +82,7 @@ public class ElThorAbility extends ChargeableAbility
 				world.addLightningBolt(new LightningBoltEntity(player.world, (i + x) - f, j, (k + z) - f, false));
 				world.addLightningBolt(new LightningBoltEntity(player.world, (i + x) - f, j, (k + z) + f, false));
 
-				ExplosionAbility explosion = DevilFruitsHelper.newExplosion(player, i + x, j, k + z, hasTomoeDrums ? 10 : 7);
+				ExplosionAbility explosion = AbilityHelper.newExplosion(player, i + x, j, k + z, hasTomoeDrums ? 10 : 7);
 				explosion.setExplosionSound(true);
 				explosion.setDamageOwner(false);
 				explosion.setDestroyBlocks(true);

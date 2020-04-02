@@ -8,7 +8,7 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.suna.DesertSpadaParticleEffect;
 import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
@@ -73,7 +73,7 @@ public class DesertSpadaProjectile extends AbilityProjectileEntity
 		if(pos == null)
 			return;
 		
-		DevilFruitsHelper.createFilledSphere(this.world, pos.getX(), pos.getY(), pos.getZ(), 2, Blocks.SAND, "core");
+		AbilityHelper.createFilledSphere(this.world, pos.getX(), pos.getY(), pos.getZ(), 2, Blocks.SAND, "core");
 
 		PARTICLES.spawn(world, pos.getX(), pos.getY(), pos.getZ(), 0, 0, 0);
 	}

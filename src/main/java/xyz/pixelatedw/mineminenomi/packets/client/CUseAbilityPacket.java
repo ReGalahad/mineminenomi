@@ -7,7 +7,7 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
 import xyz.pixelatedw.mineminenomi.api.abilities.IParallelContinuousAbility;
-import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.abilities.ContinuousAbility;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
@@ -48,7 +48,7 @@ public class CUseAbilityPacket
 				if(player.isSpectator())
 					return;
 				
-				if(DevilFruitsHelper.checkForRestriction(player))
+				if(AbilityHelper.checkForRestriction(player))
 					return;
 				
 				Ability abl = abilityDataProps.getEquippedAbility(message.slot);

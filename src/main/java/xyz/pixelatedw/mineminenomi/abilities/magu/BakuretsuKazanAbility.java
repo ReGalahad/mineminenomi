@@ -2,7 +2,7 @@ package xyz.pixelatedw.mineminenomi.abilities.magu;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
-import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.abilities.Ability;
 
@@ -21,7 +21,7 @@ public class BakuretsuKazanAbility extends Ability
 
 	private boolean onUseEvent(PlayerEntity player)
 	{
-		DevilFruitsHelper.createFilledSphere(player.world, (int) player.posX, (int) player.posY, (int) player.posZ, 10, Blocks.LAVA, "core", "ores");
+		AbilityHelper.createFilledSphere(player.world, (int) player.posX, (int) player.posY, (int) player.posZ, 10, Blocks.LAVA, "core", "ores");
 		
 		return true;
 	}

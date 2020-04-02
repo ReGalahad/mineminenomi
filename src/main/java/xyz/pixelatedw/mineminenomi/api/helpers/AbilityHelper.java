@@ -64,7 +64,7 @@ import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 import xyz.pixelatedw.wypi.math.ISphere;
 import xyz.pixelatedw.wypi.math.Sphere;
 
-public class DevilFruitsHelper
+public class AbilityHelper
 {
 
 	private static HashMap<String, List<Block>> blockRules = createBlockRulesMap();
