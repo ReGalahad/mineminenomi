@@ -25,6 +25,7 @@ import xyz.pixelatedw.mineminenomi.abilities.fishmankarate.KarakusagawaraSeikenA
 import xyz.pixelatedw.mineminenomi.abilities.fishmankarate.MurasameAbility;
 import xyz.pixelatedw.mineminenomi.abilities.fishmankarate.SamehadaShoteiAbility;
 import xyz.pixelatedw.mineminenomi.abilities.fishmankarate.UchimizuAbility;
+import xyz.pixelatedw.mineminenomi.abilities.goe.TodorokiAbility;
 import xyz.pixelatedw.mineminenomi.abilities.goro.ElThorAbility;
 import xyz.pixelatedw.mineminenomi.abilities.goro.KariAbility;
 import xyz.pixelatedw.mineminenomi.abilities.goro.RaigoAbility;
@@ -127,7 +128,7 @@ public class ModAbilities
 	public static final AkumaNoMiItem HORU_HORU_NO_MI = new AkumaNoMiItem("Horu Horu no Mi", EnumFruitType.PARAMECIA);
 	// public static final AkumaNoMiItem HANA_HANA_NO_MI = new AkumaNoMiItem("Hana Hana no Mi", EnumFruitType.PARAMECIA);
 	public static final AkumaNoMiItem KILO_KILO_NO_MI = new AkumaNoMiItem("Kilo Kilo no Mi", EnumFruitType.PARAMECIA);
-	public static final AkumaNoMiItem GOE_GOE_NO_MI = new AkumaNoMiItem("Goe Goe no Mi", EnumFruitType.PARAMECIA);
+	public static final AkumaNoMiItem GOE_GOE_NO_MI = new AkumaNoMiItem("Goe Goe no Mi", EnumFruitType.PARAMECIA, TodorokiAbility.INSTANCE);
 	public static final AkumaNoMiItem MERO_MERO_NO_MI = new AkumaNoMiItem("Mero Mero no Mi", EnumFruitType.PARAMECIA);
 	public static final AkumaNoMiItem ORI_ORI_NO_MI = new AkumaNoMiItem("Ori Ori no Mi", EnumFruitType.PARAMECIA);
 	public static final AkumaNoMiItem SUPA_SUPA_NO_MI = new AkumaNoMiItem("Supa Supa no Mi", EnumFruitType.PARAMECIA);
