@@ -19,7 +19,7 @@ public class RoomAbility extends ContinuousAbility implements IParallelContinuou
 {
 	public static final Ability INSTANCE = new RoomAbility();
 	
-	private List<int[]> blockList = new ArrayList<int[]>();
+	private List<BlockPos> blockList = new ArrayList<BlockPos>();
 
 	public RoomAbility()
 	{
@@ -37,10 +37,7 @@ public class RoomAbility extends ContinuousAbility implements IParallelContinuou
 		{
 			this.blockList.addAll(AbilityHelper.createEmptySphere(player.world, (int) player.posX, (int) player.posY, (int) player.posZ, 20, ModBlocks.OPE, "air", "foliage", "liquid", "nogrief"));
 			player.world.setBlockState(new BlockPos(player.posX, player.posY, player.posZ), ModBlocks.OPE_MID.getDefaultState());
-			this.blockList.add(new int[]
-				{
-					MathHelper.floor(player.posX), MathHelper.floor(player.posY), MathHelper.floor(player.posZ)
-				});
+			this.blockList.add(new BlockPos(MathHelper.floor(player.posX), MathHelper.floor(player.posY), MathHelper.floor(player.posZ)));
 		}
 		
 		return true;
@@ -48,13 +45,13 @@ public class RoomAbility extends ContinuousAbility implements IParallelContinuou
 	
 	private boolean onEndContinuityEvent(PlayerEntity player)
 	{
-		for (int[] blockPos : this.blockList)
+		for (BlockPos pos : this.blockList)
 		{
-			Block currentBlock = player.world.getBlockState(new BlockPos(blockPos[0], blockPos[1], blockPos[2])).getBlock();
+			Block currentBlock = player.world.getBlockState(pos).getBlock();
 			if (currentBlock == ModBlocks.OPE || currentBlock == ModBlocks.OPE_MID)
-				player.world.setBlockState(new BlockPos(blockPos[0], blockPos[1], blockPos[2]), Blocks.AIR.getDefaultState());
+				player.world.setBlockState(pos, Blocks.AIR.getDefaultState());
 		}
-		this.blockList = new ArrayList<int[]>();
+		this.blockList = new ArrayList<BlockPos>();
 		
 		return true;
 	}

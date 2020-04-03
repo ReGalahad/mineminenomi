@@ -222,14 +222,14 @@ public class AbilityHelper
 		return false;
 	}
 
-	public static List<int[]> createEmptyCube(Entity entity, int[] sizes, Block blockToPlace, String... blockRules)
+	public static List<BlockPos> createEmptyCube(Entity entity, int[] sizes, Block blockToPlace, String... blockRules)
 	{
 		return createEmptyCube(entity.world, (int) entity.posX, (int) entity.posY, (int) entity.posZ, sizes, blockToPlace, blockRules);
 	}
 
-	public static List<int[]> createEmptyCube(World world, double posX, double posY, double posZ, int[] sizes, Block blockToPlace, String... blockRules)
+	public static List<BlockPos> createEmptyCube(World world, double posX, double posY, double posZ, int[] sizes, Block blockToPlace, String... blockRules)
 	{
-		List<int[]> blocks = new ArrayList<int[]>();
+		List<BlockPos> blockPositions = new ArrayList<BlockPos>();
 		for (int x = -sizes[0]; x <= sizes[0]; x++)
 			for (int y = -sizes[1]; y <= sizes[1]; y++)
 				for (int z = -sizes[2]; z <= sizes[2]; z++)
@@ -237,41 +237,35 @@ public class AbilityHelper
 					if (x == -sizes[0] || x == sizes[0] || y == -sizes[1] || y == sizes[1] || z == -sizes[2] || z == sizes[2])
 					{
 						placeBlockIfAllowed(world, (int) posX + x, (int) posY + y, (int) posZ + z, blockToPlace, blockRules);
-						blocks.add(new int[]
-							{
-									(int) posX + x, (int) posY + y, (int) posZ + z
-							});
+						blockPositions.add(new BlockPos(posX + x, posY + y, posZ + z));
 					}
 				}
 
-		return blocks;
+		return blockPositions;
 	}
 
-	public static List<int[]> createFilledCube(Entity entity, int[] sizes, Block blockToPlace, String... blockRules)
+	public static List<BlockPos> createFilledCube(Entity entity, int[] sizes, Block blockToPlace, String... blockRules)
 	{
 		return createFilledCube(entity.world, (int) entity.posX, (int) entity.posY, (int) entity.posZ, sizes, blockToPlace, blockRules);
 	}
 
-	public static List<int[]> createFilledCube(World world, double posX, double posY, double posZ, int[] sizes, Block blockToPlace, String... blockRules)
+	public static List<BlockPos> createFilledCube(World world, double posX, double posY, double posZ, int[] sizes, Block blockToPlace, String... blockRules)
 	{
-		List<int[]> blocks = new ArrayList<int[]>();
+		List<BlockPos> blockPositions = new ArrayList<BlockPos>();
 		for (int x = -sizes[0]; x <= sizes[0]; x++)
 			for (int y = -sizes[1]; y <= sizes[1]; y++)
 				for (int z = -sizes[2]; z <= sizes[2]; z++)
 				{
 					placeBlockIfAllowed(world, (int) posX + x, (int) posY + y, (int) posZ + z, blockToPlace, blockRules);
-					blocks.add(new int[]
-						{
-								(int) posX + x, (int) posY + y, (int) posZ + z
-						});
+					blockPositions.add(new BlockPos(posX + x, posY + y, posZ + z));
 				}
 
-		return blocks;
+		return blockPositions;
 	}
 
-	public static List<int[]> createEmptySphere(World world, int posX, int posY, int posZ, int size, final Block block, String... blockRules)
+	public static List<BlockPos> createEmptySphere(World world, int posX, int posY, int posZ, int size, final Block block, String... blockRules)
 	{
-		List<int[]> blocks = new ArrayList<int[]>();
+		List<BlockPos> blockPositions = new ArrayList<BlockPos>();
 
 		Sphere.generate(posX, posY, posZ, size, new ISphere()
 		{
@@ -279,19 +273,16 @@ public class AbilityHelper
 			public void call(int x, int y, int z)
 			{
 				placeBlockIfAllowed(world, x, y, z, block, blockRules);
-				blocks.add(new int[]
-					{
-							x, y, z
-					});
+				blockPositions.add(new BlockPos(x, y, z));
 			}
 		});
 
-		return blocks;
+		return blockPositions;
 	}
 
-	public static List<int[]> createFilledSphere(World world, int posX, int posY, int posZ, int size, final Block block, String... blockRules)
+	public static List<BlockPos> createFilledSphere(World world, int posX, int posY, int posZ, int size, final Block block, String... blockRules)
 	{
-		List<int[]> blocks = new ArrayList<int[]>();
+		List<BlockPos> blockPositions = new ArrayList<BlockPos>();
 
 		Sphere.generateFilled(posX, posY, posZ, size, new ISphere()
 		{
@@ -299,14 +290,11 @@ public class AbilityHelper
 			public void call(int x, int y, int z)
 			{
 				placeBlockIfAllowed(world, x, y, z, block, blockRules);
-				blocks.add(new int[]
-					{
-							x, y, z
-					});
+				blockPositions.add(new BlockPos(x, y, z));
 			}
 		});
 
-		return blocks;
+		return blockPositions;
 	}
 
 	public static double[] propulsion(LivingEntity entity, double extraMX, double extraMZ)

@@ -68,17 +68,17 @@ public class AbilityDataBase implements IAbilityData
 	}
 
 	@Override
-	public Ability getUnlockedAbility(Ability abl)
+	public <T extends Ability> T getUnlockedAbility(T abl)
 	{
 		this.unlockedAbilities.removeIf(ability -> ability == null);
-		return this.unlockedAbilities.parallelStream().filter(ability -> ability.equals(abl)).findFirst().orElse(null);
+		return (T) this.unlockedAbilities.parallelStream().filter(ability -> ability.equals(abl)).findFirst().orElse(null);
 	}
 
 	@Override
-	public Ability getUnlockedAbility(int slot)
+	public <T extends Ability> T getUnlockedAbility(int slot)
 	{
 		this.unlockedAbilities.removeIf(ability -> ability == null);
-		return this.unlockedAbilities.size() > slot ? this.unlockedAbilities.get(slot) : null;
+		return this.unlockedAbilities.size() > slot ? (T) this.unlockedAbilities.get(slot) : null;
 	}
 
 	@Override
@@ -167,9 +167,9 @@ public class AbilityDataBase implements IAbilityData
 	}
 
 	@Override
-	public Ability getEquippedAbility(Ability abl)
+	public <T extends Ability> T getEquippedAbility(T abl)
 	{
-		return Arrays.stream(this.equippedAbilities)
+		return (T) Arrays.stream(this.equippedAbilities)
 				.parallel()
 				.filter(ability -> ability != null)
 				.filter(ability -> ability.equals(abl))
@@ -177,21 +177,21 @@ public class AbilityDataBase implements IAbilityData
 	}
 
 	@Override
-	public Ability getEquippedAbility(int slot)
+	public <T extends Ability> T getEquippedAbility(int slot)
 	{
-		return this.equippedAbilities[slot];
+		return (T) this.equippedAbilities[slot];
 	}
 
 	@Override
-	public Ability[] getEquippedAbilities()
+	public<T extends Ability> T[] getEquippedAbilities()
 	{
-		return this.equippedAbilities;
+		return (T[]) this.equippedAbilities;
 	}
 	
 	@Override
-	public Ability[] getEquippedAbilities(AbilityCategory category)
+	public <T extends Ability> T[] getEquippedAbilities(AbilityCategory category)
 	{
-		return this.equippedAbilities;
+		return (T[]) this.equippedAbilities;
 	}
 
 	@Override
@@ -236,9 +236,9 @@ public class AbilityDataBase implements IAbilityData
 	 */
 
 	@Override
-	public Ability getPreviouslyUsedAbility()
+	public <T extends Ability> T getPreviouslyUsedAbility()
 	{
-		return this.previouslyUsedAbility;
+		return (T) this.previouslyUsedAbility;
 	}
 
 	@Override
