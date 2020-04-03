@@ -41,7 +41,7 @@ public class AbilityProjectileEntity extends ThrowableEntity
 	private boolean canPassThroughEntities = false;
 	private boolean canGetStuckInGround = false;
 	protected boolean stuckInGround = false;
-	
+
 	// Setting the defaults so that no crash occurs and so they will be null safe.
 	public IOnEntityImpact onEntityImpactEvent = (hitEntity) -> { this.onBlockImpactEvent.onImpact(hitEntity.getPosition()); };
 	public IOnBlockImpact onBlockImpactEvent = (hit) -> { };

@@ -2,7 +2,11 @@ package xyz.pixelatedw.mineminenomi.entities.projectiles.extra;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import xyz.pixelatedw.mineminenomi.api.abilities.ExplosionAbility;
+import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.mineminenomi.particles.effects.common.CommonExplosionParticleEffect;
 import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 
 public class KairosekiBulletProjectile extends AbilityProjectileEntity
@@ -28,4 +32,6 @@ public class KairosekiBulletProjectile extends AbilityProjectileEntity
 		
 		this.setDamage(6);
 	}
+
+
 }
