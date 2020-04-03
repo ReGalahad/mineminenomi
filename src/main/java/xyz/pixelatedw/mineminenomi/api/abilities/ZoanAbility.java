@@ -1,6 +1,7 @@
 package xyz.pixelatedw.mineminenomi.api.abilities;
 
 import net.minecraft.entity.player.PlayerEntity;
+import xyz.pixelatedw.mineminenomi.api.helpers.MorphHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.packets.server.SSyncDevilFruitPacket;
@@ -34,11 +35,13 @@ public class ZoanAbility extends ContinuousAbility
 		if (props.getZoanPoint().isEmpty())
 			props.setZoanPoint("");
 		
+		// Need to set this before the updateEyeView method is called to ensure the ability is active
+		this.setState(State.CONTINUOUS);
+		
 		props.setZoanPoint(this.zoanForm);
 		WyNetwork.sendToAll(new SSyncDevilFruitPacket(player.getEntityId(), props));
 		WyNetwork.sendToAll(new SSyncAbilityDataPacket(abilityProps));
-//		ModMain.proxy.updateEyeHeight(player);
-//		ModNetwork.sendTo(new SRecalculateEyeHeightPacket(), (ServerPlayerEntity) player);
+		MorphHelper.updateEyeView(player);
 		
 		return true;
 	}
@@ -50,7 +53,8 @@ public class ZoanAbility extends ContinuousAbility
 		props.setZoanPoint("");
 		
 		WyNetwork.sendToAll(new SSyncDevilFruitPacket(player.getEntityId(), props));
-		
+		MorphHelper.updateEyeView(player);
+
 		return true;
 	}
 	

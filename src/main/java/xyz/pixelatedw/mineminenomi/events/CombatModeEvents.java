@@ -40,12 +40,12 @@ import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 
 @OnlyIn(Dist.CLIENT)
-public class EventsCombatMode extends Screen
+public class CombatModeEvents extends Screen
 {
 	private int trackDistance = 15;
 	private LivingEntity trackMob = null;
 	
-	public EventsCombatMode()
+	public CombatModeEvents()
 	{
 		super(new StringTextComponent(""));
 	}

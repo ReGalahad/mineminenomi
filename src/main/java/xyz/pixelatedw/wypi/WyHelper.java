@@ -21,6 +21,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
 
+import org.lwjgl.opengl.GL11;
+
 import com.mojang.blaze3d.platform.GLX;
 import com.mojang.blaze3d.platform.GlStateManager;
 
@@ -480,6 +482,8 @@ public class WyHelper
 			{
 				f3 = 1.0F;
 			}
+			
+			GL11.glRotatef(f3 * 90, 0.0F, 0.0F, 1.0F);
 		}
 	}
 

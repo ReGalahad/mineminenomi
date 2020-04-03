@@ -18,11 +18,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.HandSide;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
-import xyz.pixelatedw.mineminenomi.api.helpers.MorphsHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.MorphHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfo;
@@ -92,12 +91,12 @@ public class ZoanMorphRenderer extends LivingRenderer
 
 		float ageInTicks = entity.ticksExisted + v;
 
-		float headYawOffset = this.interpolateRotation(entity.prevRenderYawOffset, entity.renderYawOffset, v);
-		float headYaw = this.interpolateRotation(entity.prevRotationYawHead, entity.rotationYawHead, v);
+		float headYawOffset = WyHelper.interpolateRotation(entity.prevRenderYawOffset, entity.renderYawOffset, v);
+		float headYaw = WyHelper.interpolateRotation(entity.prevRotationYawHead, entity.rotationYawHead, v);
 
 		float headPitch = entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * v;
 
-		this.rotateCorpse(entity, ageInTicks, headYawOffset, v);
+		WyHelper.rotateCorpse(entity, ageInTicks, headYawOffset, v);
 
 		float limbSwingAmount = entity.prevLimbSwingAmount + (entity.limbSwingAmount - entity.prevLimbSwingAmount) * v;
 		float limbSwing = entity.limbSwing - entity.limbSwingAmount * (1.0F - v);
@@ -111,14 +110,10 @@ public class ZoanMorphRenderer extends LivingRenderer
 		{
 			GL11.glDisable(GL11.GL_CULL_FACE);
 			RendererModel arm = ((ZoanMorphModel) this.model).getArmRenderer();
-			ZoanInfo info = MorphsHelper.getZoanInfo((PlayerEntity) entity);
+			ZoanInfo info = MorphHelper.getZoanInfo((PlayerEntity) entity);
 
 			if (arm != null)
 			{
-				/*GL11.glRotated(arm.rotateAngleX * 80, 1, 0, 0);
-				GL11.glRotated(arm.rotateAngleY * 80, 0, 1, 0);
-				GL11.glRotated(arm.rotateAngleZ * 80, 0, 0, 1);*/
-				
 				double rotation = info.getHeldItemRotation();
 				
 				GL11.glRotated(arm.rotateAngleX * rotation, 1, 0, 0);
@@ -143,66 +138,30 @@ public class ZoanMorphRenderer extends LivingRenderer
 
 		if (!itemstack.isEmpty())
 		{
-			//GlStateManager.pushMatrix();
-			//{
+			GlStateManager.pushMatrix();
+			{
 				IDevilFruit props = DevilFruitCapability.get(entity);
 
 				if (props == null || WyHelper.isNullOrEmpty(props.getZoanPoint()))
 					return;
 
-				ZoanInfo info = MorphsHelper.getZoanInfo((PlayerEntity) entity);
+				ZoanInfo info = MorphHelper.getZoanInfo((PlayerEntity) entity);
 
-				//this.translateToHand(HandSide.LEFT);
+				this.translateToHand(HandSide.LEFT);
 				GlStateManager.rotatef(-180.0F, 1.0F, 0.0F, 0.0F);
 				GlStateManager.rotatef(180.0F, 0.0F, 1.0F, 0.0F);
 				GlStateManager.rotatef(180.0F, 0.0F, 0.0F, 1.0F);
 				GlStateManager.translated(info.getHeldItemOffset()[0], info.getHeldItemOffset()[1], info.getHeldItemOffset()[2]);
 
 				Minecraft.getInstance().getFirstPersonRenderer().renderItemSide(entity, itemstack, TransformType.FIRST_PERSON_LEFT_HAND, false);
-			//}
-			//GlStateManager.popMatrix();
+			}
+			GlStateManager.popMatrix();
 		}
 	}
 
 	private void translateToHand(HandSide side)
 	{
 		((IHasArm) this.getEntityModel()).postRenderArm(0.0625F, side);
-	}
-
-	private float interpolateRotation(float lowerLimit, float upperLimit, float range)
-	{
-		float f3;
-
-		for (f3 = upperLimit - lowerLimit; f3 < -180.0F; f3 += 360.0F)
-		{
-			;
-		}
-
-		while (f3 >= 180.0F)
-		{
-			f3 -= 360.0F;
-		}
-
-		return lowerLimit + range * f3;
-	}
-
-	protected void rotateCorpse(LivingEntity entityLiving, float ageInTicks, float headYawOffset, float v)
-	{
-		GL11.glRotatef(180.0F + headYawOffset, 0.0F, 1.0F, 0.0F);
-
-		if (entityLiving.deathTime > 0)
-		{
-			float f3 = (entityLiving.deathTime + v - 1.0F) / 20.0F * 1.6F;
-			f3 = MathHelper.sqrt(f3);
-
-			if (f3 > 1.0F)
-			{
-				f3 = 1.0F;
-			}
-
-			// GL11.glRotatef(f3 * this.getDeathMaxRotation(p_77043_1_), 0.0F,
-			// 0.0F, 1.0F);
-		}
 	}
 
 	@Override
