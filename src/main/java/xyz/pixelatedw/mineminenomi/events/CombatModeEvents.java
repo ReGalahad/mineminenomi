@@ -1,22 +1,17 @@
 package xyz.pixelatedw.mineminenomi.events;
 
 import java.awt.Color;
-import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
 import com.mojang.blaze3d.platform.GLX;
-import com.mojang.blaze3d.platform.GlStateManager;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.Widget;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.ForgeIngameGui;
@@ -25,41 +20,33 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.config.GuiUtils;
+import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.api.helpers.ModRendererHelper;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
-import xyz.pixelatedw.mineminenomi.data.entity.haki.HakiDataCapability;
-import xyz.pixelatedw.mineminenomi.data.entity.haki.IHakiData;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
+import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 
 @OnlyIn(Dist.CLIENT)
-public class CombatModeEvents extends Screen
+@Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID, value = Dist.CLIENT)
+public class CombatModeEvents
 {
-	private int trackDistance = 15;
-	private LivingEntity trackMob = null;
-	
-	public CombatModeEvents()
-	{
-		super(new StringTextComponent(""));
-	}
-
 	@SuppressWarnings("resource")
 	@SubscribeEvent
-	public void onRenderUI(RenderGameOverlayEvent event)
+	public static void onRenderOverlay(RenderGameOverlayEvent event)
 	{
 		Minecraft mc = Minecraft.getInstance();
 		PlayerEntity player = mc.player;
 		IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
 		IAbilityData abilityDataProps = AbilityDataCapability.get(player);
 		IEntityStats entityStatsProps = EntityStatsCapability.get(player);
-		IHakiData hakiDataProps = HakiDataCapability.get(player);
 
 		ForgeIngameGui.left_height += 1;
 		
@@ -69,8 +56,8 @@ public class CombatModeEvents extends Screen
 		if (abilityDataProps == null)
 			return;
 
-		if (event.getType() == ElementType.FOOD && devilFruitProps.getDevilFruit().equalsIgnoreCase("yomiyomi") && devilFruitProps.getZoanPoint().equalsIgnoreCase("yomi"))
-			event.setCanceled(true);
+		//if (event.getType() == ElementType.FOOD && devilFruitProps.getDevilFruit().equalsIgnoreCase("yomi_yomi") && devilFruitProps.getZoanPoint().equalsIgnoreCase("yomi"))
+		//	event.setCanceled(true);
 
 		if (event.getType() == ElementType.HEALTH)
 		{
@@ -78,7 +65,7 @@ public class CombatModeEvents extends Screen
 			double maxHealth = player.getAttribute(SharedMonsterAttributes.MAX_HEALTH).getValue();
 			double health = player.getHealth();
 
-			this.drawCenteredString(mc.fontRenderer, (int) health + "", posX / 2 - 20, posY - 39, Color.RED.getRGB());
+			WyHelper.drawCenteredString((int) health + "", posX / 2 - 20, posY - 39, Color.RED.getRGB());
 
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
@@ -100,7 +87,10 @@ public class CombatModeEvents extends Screen
 			}
 		}
 
-		if (entityStatsProps.isInCombatMode() && event.getType() == ElementType.HOTBAR)
+		if(!entityStatsProps.isInCombatMode())
+			return;
+		
+		if (event.getType() == ElementType.HOTBAR)
 		{
 			event.setCanceled(true);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -127,20 +117,6 @@ public class CombatModeEvents extends Screen
 					GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 0, 0, 23, 23, 0);
 			}
 
-			if (entityStatsProps.isCyborg())
-			{
-				GuiUtils.drawTexturedModalRect((posX - 260) / 2, posY - 42, 0, 52, 23, 40, 0);
-				int barHeight = (int) (((float) entityStatsProps.getCola() / entityStatsProps.getMaxCola()) * 30) + 23;
-
-				if (barHeight > 0 && barHeight < 24)
-					barHeight = 24;
-				else if (barHeight > 52)
-					barHeight = 52;
-
-				GuiUtils.drawTexturedModalRect((posX - 252) / 2, posY - 42, 32, barHeight, 16, 32, 0);
-				this.drawCenteredString(mc.fontRenderer, entityStatsProps.getCola() + "", (posX - 237) / 2, posY - 12, Color.WHITE.getRGB());
-			}
-
 			for (int i = 0; i < 8; i++)
 			{
 				GLX.glBlendFuncSeparate(770, 771, 1, 0);
@@ -151,79 +127,12 @@ public class CombatModeEvents extends Screen
 				}
 			}
 
-			int trackDistance = 15;
-			if (false) // Ken is Passive Check
-			{
-				List<LivingEntity> nearbyEnemies = WyHelper.getEntitiesNear(player.getPosition(), player.world, 15);
-				for (LivingEntity elb : nearbyEnemies)
-				{
-					if (trackMob == null)
-					{
-						trackMob = elb;
-					}
-					else
-					{
-						if (player.getDistance(elb) <= player.getDistance(trackMob))
-							trackMob = elb;
-						else if (trackMob.getHealth() <= 0 || !trackMob.isAlive())
-							trackMob = null;
-						if (trackMob != null && player.getDistance(trackMob) < trackDistance)
-						{
-							trackDistance = (int) player.getDistance(trackMob);
-							float angle = (float) Math.toDegrees(Math.atan2(trackMob.posZ - player.posZ, trackMob.posX - player.posX));
-							String text = "";
-
-							text += trackDistance + " blocks";
-													
-							WyHelper.drawEntityOnScreen((posX + 320) / 2, posY - 42, 40, 40, 0, trackMob);
-							this.drawCenteredString(mc.fontRenderer, text, (posX + 320) / 2, posY - 32, Color.WHITE.getRGB());
-							
-							GlStateManager.pushMatrix();
-							{
-								Minecraft.getInstance().getTextureManager().bindTexture(ModResources.WOOD_ARROW);
-
-								int posX2 = (posX - 256) / 2;
-								int posY2 = (posY - 256);
-	
-								GL11.glTranslated(posX2 + 190, posY2 + 60, 0);
-	
-								GL11.glTranslated(128, 128, 128);
-								GL11.glScaled(0.2, 0.2, 0);
-	/*
-								Direction playerDir = WyHelper.get8Directions(player);
-	
-								if (playerDir == Direction.SOUTH)
-									GL11.glRotated(angle - 90, 0.0, 0.0, 1.0);
-								else if (playerDir == Direction.SOUTH_EAST)
-									GL11.glRotated(angle - 45, 0.0, 0.0, 1.0);
-								if (playerDir == Direction.EAST)
-									GL11.glRotated(angle, 0.0, 0.0, 1.0);
-								else if (playerDir == Direction.NORTH_EAST)
-									GL11.glRotated(angle + 45, 0.0, 0.0, 1.0);
-								else if (playerDir == Direction.NORTH)
-									GL11.glRotated(angle + 90, 0.0, 0.0, 1.0);
-								else if (playerDir == Direction.NORTH_WEST)
-									GL11.glRotated(angle + 135, 0.0, 0.0, 1.0);
-								else if (playerDir == Direction.WEST)
-									GL11.glRotated(angle + 180, 0.0, 0.0, 1.0);
-								else if (playerDir == Direction.SOUTH_WEST)
-									GL11.glRotated(angle + 225, 0.0, 0.0, 1.0);
-	*/
-								GL11.glTranslated(-128, -128, -128);
-								GuiUtils.drawTexturedModalRect(0, 0, 0, 0, 256, 256, 0);
-							}
-							GlStateManager.popMatrix();
-						}
-					}
-				}
-			}
-
 			GL11.glDisable(GL11.GL_BLEND);
 		}
 	}
 
 	@SubscribeEvent
-	public void updateFOV(FOVUpdateEvent event)
+	public static void updateFOV(FOVUpdateEvent event)
 	{
 		if (CommonConfig.instance.isFOVRemoved())
 		{
