@@ -8,12 +8,12 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import xyz.pixelatedw.mineminenomi.api.abilities.IParallelContinuousAbility;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.abilities.ContinuousAbility;
+import xyz.pixelatedw.wypi.abilities.IParallelContinuousAbility;
 
 public class RoomAbility extends ContinuousAbility implements IParallelContinuousAbility
 {

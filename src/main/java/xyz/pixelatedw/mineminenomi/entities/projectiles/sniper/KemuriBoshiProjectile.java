@@ -43,7 +43,7 @@ public class KemuriBoshiProjectile extends AbilityProjectileEntity
 
 	private void onBlockImpactEvent(BlockPos hit)
 	{
-		EntityKemuriBoshiCloud smokeCloud = new EntityKemuriBoshiCloud(this.world);
+		KemuriBoshiCloudEntity smokeCloud = new KemuriBoshiCloudEntity(this.world);
 		smokeCloud.setLife(100);
 		smokeCloud.setLocationAndAngles(this.posX, (this.posY + 1), this.posZ, 0, 0);
 		smokeCloud.setMotion(0, 0, 0);
@@ -51,9 +51,9 @@ public class KemuriBoshiProjectile extends AbilityProjectileEntity
 		this.world.addEntity(smokeCloud);		
 	}
 	
-	public static class EntityKemuriBoshiCloud extends EntityCloud
+	public static class KemuriBoshiCloudEntity extends EntityCloud
 	{
-		public EntityKemuriBoshiCloud(World world)
+		public KemuriBoshiCloudEntity(World world)
 		{
 			super(world);
 		}

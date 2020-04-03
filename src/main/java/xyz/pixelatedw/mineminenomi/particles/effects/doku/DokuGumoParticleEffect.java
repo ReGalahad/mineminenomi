@@ -1,9 +1,9 @@
 package xyz.pixelatedw.mineminenomi.particles.effects.doku;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
-import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
+import xyz.pixelatedw.mineminenomi.particles.data.GenericParticleData;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.wypi.WyHelper;
 
@@ -19,13 +19,13 @@ public class DokuGumoParticleEffect extends ParticleEffect
 			double offsetY = WyHelper.randomWithRange(-3, 3) + WyHelper.randomDouble();
 			double offsetZ = WyHelper.randomWithRange(-3, 3) + WyHelper.randomDouble();
 			
-			SimpleParticle cp = new SimpleParticle(world, ModResources.DOKU,
-					posX - 1 + offsetX, 
-					posY + offsetY,
-					posZ - 1 + offsetZ, 
-					0, 0, 0)
-					.setParticleAge((int) (1 + WyHelper.randomWithRange(0, 2))).setParticleScale(1F);
-			Minecraft.getInstance().particles.addEffect(cp);
+			int age = (int) (1 + WyHelper.randomWithRange(0, 2));
+			
+			GenericParticleData data = new GenericParticleData();
+			data.setTexture(ModResources.DOKU);
+			data.setLife(age);
+			data.setSize(1F);
+			WyHelper.spawnParticles(data, (ServerWorld) world, posX + offsetX, posY + offsetY, posZ + offsetZ);
 		}
 	}
 
