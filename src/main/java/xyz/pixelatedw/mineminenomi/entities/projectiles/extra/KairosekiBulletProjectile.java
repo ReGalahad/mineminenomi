@@ -28,4 +28,6 @@ public class KairosekiBulletProjectile extends AbilityProjectileEntity
 		
 		this.setDamage(6);
 	}
+
+
 }
