@@ -50,7 +50,7 @@ public class HumanPassiveEvents
 		
 		if (!statsProps.isHuman())
 			return;
-	
+
 		Ability kamieAbility = abilityProps.getEquippedAbility(KamieAbility.INSTANCE);
 		boolean isKamiEActive = kamieAbility != null && kamieAbility.isContinuous();
 		if(isKamiEActive)

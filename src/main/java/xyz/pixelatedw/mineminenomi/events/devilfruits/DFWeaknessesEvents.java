@@ -8,7 +8,7 @@ import net.minecraft.potion.Effects;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.entities.mobs.GenericNewEntity;
@@ -29,7 +29,7 @@ public class DFWeaknessesEvents
 			LivingEntity entity = event.getEntityLiving();
 			IDevilFruit props = DevilFruitCapability.get(entity);
 			
-			if(props.hasDevilFruit() && DevilFruitsHelper.isAffectedByWater(entity) && !entity.isPotionActive(ModEffects.BUBBLY_CORAL))
+			if(props.hasDevilFruit() && AbilityHelper.isAffectedByWater(entity) && !entity.isPotionActive(ModEffects.BUBBLY_CORAL))
 			{				
 				if(entity instanceof PlayerEntity && !((PlayerEntity) entity).abilities.isCreativeMode)
 					entity.setMotion(entity.getMotion().x, entity.getMotion().y - 5, entity.getMotion().z);
@@ -50,7 +50,7 @@ public class DFWeaknessesEvents
 			{
 				if (props.hasDevilFruit())
 				{
-					if (DevilFruitsHelper.isNearbyKairoseki(player))
+					if (AbilityHelper.isNearbyKairoseki(player))
 					{
 						player.addPotionEffect(new EffectInstance(Effects.NAUSEA, 100, 0));
 						

@@ -50,7 +50,7 @@ public interface IEntityStats
 	
 	boolean isSwordsman();
 	boolean isSniper();
-	boolean isMedic();
+	boolean isDoctor();
 	boolean hasFightingStyle();
 	void setFightingStyle(String value);
 	String getFightingStyle();

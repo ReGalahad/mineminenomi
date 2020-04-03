@@ -5,7 +5,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.server.ServerWorld;
 import xyz.pixelatedw.mineminenomi.api.abilities.ExplosionAbility;
-import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
+import xyz.pixelatedw.mineminenomi.init.ModArmors;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.common.CommonExplosionParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.goro.ElThorParticleEffect;
@@ -51,30 +52,47 @@ public class ElThorAbility extends ChargeableAbility
 		RayTraceResult mop = WyHelper.rayTraceBlocks(player);
 		ServerWorld world = (ServerWorld) player.world;
 		
+		boolean hasTomoeDrums = player.inventory.armorInventory.get(2) != null && player.inventory.armorInventory.get(2).getItem() == ModArmors.TOMOE_DRUMS;
+		
 		if (mop != null)
 		{
 			double i = mop.getHitVec().x;
 			double j = mop.getHitVec().y;
 			double k = mop.getHitVec().z;
-			
+						
 			int f = 0;
-			while( f < 1 )
+			int max = 1;
+			
+			if(hasTomoeDrums)
+				max = 5;
+			
+			int x = 0;
+			int z = 0;
+			
+			while (f < 5)
 			{
-				world.addLightningBolt(new LightningBoltEntity(player.world, i + f, j, k + f, false));
-				world.addLightningBolt(new LightningBoltEntity(player.world, i + f, j, k - f, false));
-				world.addLightningBolt(new LightningBoltEntity(player.world, i - f, j, k - f, false));
-				world.addLightningBolt(new LightningBoltEntity(player.world, i - f, j, k + f, false));
-				f++;
-			}		
+				if(hasTomoeDrums)
+				{
+					x = (int) WyHelper.randomWithRange(-15, 15);
+					z = (int) WyHelper.randomWithRange(-15, 15);
+				}
 
-			ExplosionAbility explosion = DevilFruitsHelper.newExplosion(player, i, j, k, 10);
-			explosion.setExplosionSound(true);
-			explosion.setDamageOwner(false);
-			explosion.setDestroyBlocks(true);
-			explosion.setFireAfterExplosion(true);
-			explosion.setSmokeParticles(new CommonExplosionParticleEffect(10));
-			explosion.setDamageEntities(true);
-			explosion.doExplosion();
+				world.addLightningBolt(new LightningBoltEntity(player.world, (i + x) + f, j, (k + z) + f, false));
+				world.addLightningBolt(new LightningBoltEntity(player.world, (i + x) + f, j, (k + z) - f, false));
+				world.addLightningBolt(new LightningBoltEntity(player.world, (i + x) - f, j, (k + z) - f, false));
+				world.addLightningBolt(new LightningBoltEntity(player.world, (i + x) - f, j, (k + z) + f, false));
+
+				ExplosionAbility explosion = AbilityHelper.newExplosion(player, i + x, j, k + z, hasTomoeDrums ? 10 : 7);
+				explosion.setExplosionSound(true);
+				explosion.setDamageOwner(false);
+				explosion.setDestroyBlocks(true);
+				explosion.setFireAfterExplosion(true);
+				explosion.setSmokeParticles(new CommonExplosionParticleEffect(10));
+				explosion.setDamageEntities(true);
+				explosion.doExplosion();
+				
+				f++;
+			}
 		}
 		
 		return true;

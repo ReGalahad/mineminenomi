@@ -10,7 +10,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
-import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 
 public class SViewProtectionPacket
 {
@@ -68,13 +68,13 @@ public class SViewProtectionPacket
 
 			if(message.state)
 			{
-				DevilFruitsHelper.createEmptyCube(player.world, message.midPoint[0], message.midPoint[1], message.midPoint[2], new int[] { message.size, message.size, message.size }, Blocks.BLUE_STAINED_GLASS, "air", "liquids", "foliage");
-				DevilFruitsHelper.createEmptySphere(player.world, message.midPoint[0], message.midPoint[1], message.midPoint[2], 1, Blocks.RED_STAINED_GLASS, "air", "liquids", "foliage");
+				AbilityHelper.createEmptyCube(player.world, message.midPoint[0], message.midPoint[1], message.midPoint[2], new int[] { message.size, message.size, message.size }, Blocks.BLUE_STAINED_GLASS, "air", "liquids", "foliage");
+				AbilityHelper.createEmptySphere(player.world, message.midPoint[0], message.midPoint[1], message.midPoint[2], 1, Blocks.RED_STAINED_GLASS, "air", "liquids", "foliage");
 			}
 			else
 			{
-				DevilFruitsHelper.createEmptyCube(player.world, message.midPoint[0], message.midPoint[1], message.midPoint[2], new int[] { message.size, message.size, message.size }, Blocks.AIR, "protection");
-				DevilFruitsHelper.createEmptySphere(player.world, message.midPoint[0], message.midPoint[1], message.midPoint[2], 1, Blocks.AIR, "protection");
+				AbilityHelper.createEmptyCube(player.world, message.midPoint[0], message.midPoint[1], message.midPoint[2], new int[] { message.size, message.size, message.size }, Blocks.AIR, "protection");
+				AbilityHelper.createEmptySphere(player.world, message.midPoint[0], message.midPoint[1], message.midPoint[2], 1, Blocks.AIR, "protection");
 			}
 		}
 	}

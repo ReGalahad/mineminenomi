@@ -3,7 +3,7 @@ package xyz.pixelatedw.mineminenomi.abilities.ope;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import xyz.pixelatedw.mineminenomi.api.abilities.ExplosionAbility;
-import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.common.CommonExplosionParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.ope.CounterShockParticleEffect;
@@ -28,7 +28,7 @@ public class CounterShockAbility extends PunchAbility
 	
 	private float onHitEntity(PlayerEntity player, LivingEntity target)
 	{		
-		ExplosionAbility explosion = DevilFruitsHelper.newExplosion(player, target.posX, target.posY, target.posZ, 1);
+		ExplosionAbility explosion = AbilityHelper.newExplosion(player, target.posX, target.posY, target.posZ, 1);
 		explosion.setExplosionSound(true);
 		explosion.setDamageOwner(false);
 		explosion.setDestroyBlocks(false);

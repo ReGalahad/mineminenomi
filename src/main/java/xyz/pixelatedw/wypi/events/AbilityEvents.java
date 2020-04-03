@@ -72,6 +72,10 @@ public class AbilityEvents
 				if (ability instanceof PunchAbility && ability.isContinuous() && heldItem.isEmpty())
 				{
 					float damage = ((PunchAbility) props.getEquippedAbility(ability)).hitEntity(player, target);
+					
+					if(damage < 0)
+						event.setCanceled(true);
+					
 					event.setAmount(damage);
 				}
 			}

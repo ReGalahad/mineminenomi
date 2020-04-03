@@ -2,18 +2,8 @@ package xyz.pixelatedw.mineminenomi.entities.projectiles.extra;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.abilities.bomu.BreezeBreathBombAbility;
-import xyz.pixelatedw.mineminenomi.api.abilities.ExplosionAbility;
-import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
-import xyz.pixelatedw.mineminenomi.particles.effects.common.CommonExplosionParticleEffect;
-import xyz.pixelatedw.wypi.abilities.Ability;
-import xyz.pixelatedw.wypi.abilities.ContinuousAbility;
 import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
-import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
-import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 
 public class NormalBulletProjectile extends AbilityProjectileEntity {
 

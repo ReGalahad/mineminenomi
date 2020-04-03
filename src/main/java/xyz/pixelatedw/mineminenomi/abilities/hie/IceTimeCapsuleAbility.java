@@ -5,7 +5,7 @@ import java.util.List;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.Ability;
@@ -30,7 +30,7 @@ public class IceTimeCapsuleAbility extends Ability
 		
 		for (LivingEntity target : list)
 		{
-			DevilFruitsHelper.createFilledCube(target, new int[] { 2, 4, 2 }, Blocks.PACKED_ICE, "air", "foliage");
+			AbilityHelper.createFilledCube(target, new int[] { 2, 4, 2 }, Blocks.PACKED_ICE, "air", "foliage");
 		}
 
 		return true;

@@ -1,6 +1,9 @@
 package xyz.pixelatedw.mineminenomi.abilities.doru;
 
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.Direction;
+import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
+import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.abilities.Ability;
 
@@ -19,28 +22,17 @@ public class CandleWallAbility extends Ability
 	
 	private boolean onUseEvent(PlayerEntity player)
 	{
-		/*
-		 * if (WyHelper.get4Directions(player) == WyHelper.Direction.NORTH)
-		 * WyHelper.createFilledCube(player.world, player.posX, player.posY, player.posZ - 3, new int[]
-		 * {
-		 * 3, 4, 1
-		 * }, ModBlocks.waxBlock, "air", "foliage");
-		 * if (WyHelper.get4Directions(player) == WyHelper.Direction.SOUTH)
-		 * WyHelper.createFilledCube(player.world, player.posX, player.posY, player.posZ + 3, new int[]
-		 * {
-		 * 3, 4, 1
-		 * }, ModBlocks.waxBlock, "air", "foliage");
-		 * if (WyHelper.get4Directions(player) == WyHelper.Direction.EAST)
-		 * WyHelper.createFilledCube(player.world, player.posX + 3, player.posY, player.posZ, new int[]
-		 * {
-		 * 1, 4, 3
-		 * }, ModBlocks.waxBlock, "air", "foliage");
-		 * if (WyHelper.get4Directions(player) == WyHelper.Direction.WEST)
-		 * WyHelper.createFilledCube(player.world, player.posX - 3, player.posY, player.posZ, new int[]
-		 * {
-		 * 1, 4, 3
-		 * }, ModBlocks.waxBlock, "air", "foliage");
-		 */
+		Direction dir = Direction.getFacingDirections(player)[0];
+
+		if (dir == Direction.NORTH)
+			AbilityHelper.createFilledCube(player.world, player.posX - 1, player.posY, player.posZ - 4, new int[] { 3, 4, 1 }, ModBlocks.WAX, "air", "foliage");
+		if (dir == Direction.SOUTH)
+			AbilityHelper.createFilledCube(player.world, player.posX - 1, player.posY, player.posZ + 2, new int[] { 3, 4, 1 }, ModBlocks.WAX, "air", "foliage");
+		if (dir == Direction.EAST)
+			AbilityHelper.createFilledCube(player.world, player.posX + 2, player.posY, player.posZ - 1, new int[] { 1, 4, 3 }, ModBlocks.WAX, "air", "foliage");
+		if (dir == Direction.WEST)
+			AbilityHelper.createFilledCube(player.world, player.posX - 4, player.posY, player.posZ - 1, new int[] { 1, 4, 3 }, ModBlocks.WAX, "air", "foliage");
+
 		return true;
 	}
 }

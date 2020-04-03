@@ -5,7 +5,7 @@ import java.util.List;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.hie.IceAgeParticleEffect;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
@@ -39,7 +39,7 @@ public class IceAgeAbility extends Ability
 					double posY = player.posY + j;
 					double posZ = player.posZ + k + (k < -WyHelper.randomWithRange(8, 12) || k > WyHelper.randomWithRange(8, 12) ? WyHelper.randomWithRange(-5, 5) : 0);
 
-					DevilFruitsHelper.placeBlockIfAllowed(player.world, posX, posY, posZ, Blocks.PACKED_ICE, "core", "foliage");
+					AbilityHelper.placeBlockIfAllowed(player.world, posX, posY, posZ, Blocks.PACKED_ICE, "core", "foliage");
 				}
 			}
 		}

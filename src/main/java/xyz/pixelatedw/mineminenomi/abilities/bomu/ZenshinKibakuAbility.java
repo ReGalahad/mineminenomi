@@ -2,7 +2,7 @@ package xyz.pixelatedw.mineminenomi.abilities.bomu;
 
 import net.minecraft.entity.player.PlayerEntity;
 import xyz.pixelatedw.mineminenomi.api.abilities.ExplosionAbility;
-import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.particles.effects.common.CommonExplosionParticleEffect;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.abilities.ChargeableAbility;
@@ -31,7 +31,7 @@ public class ZenshinKibakuAbility extends ChargeableAbility{
 	
 	private boolean onEndChargingEvent(PlayerEntity player)
 	{
-		ExplosionAbility explosion = DevilFruitsHelper.newExplosion(player, player.posX, player.posY, player.posZ, ((this.getMaxChargeTime() - this.power) / 20) * 4);
+		ExplosionAbility explosion = AbilityHelper.newExplosion(player, player.posX, player.posY, player.posZ, ((this.getMaxChargeTime() - this.power) / 20) * 4);
 		explosion.setExplosionSound(true);
 		explosion.setDamageOwner(false);
 		explosion.setDestroyBlocks(true);

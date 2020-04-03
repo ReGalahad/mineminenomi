@@ -4,7 +4,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 
@@ -40,7 +40,7 @@ public class MilkyDialProjectile extends AbilityProjectileEntity
 		{
 			int k = this.getPosition().getX() - blockpos.getX();
 			int l = this.getPosition().getZ() - blockpos.getZ();
-			DevilFruitsHelper.placeBlockIfAllowed(this.world, blockpos, ModBlocks.SKY_BLOCK, 4, "air");
+			AbilityHelper.placeBlockIfAllowed(this.world, blockpos, ModBlocks.SKY_BLOCK, 4, "air");
 		}
 	}
 }

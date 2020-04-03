@@ -2,7 +2,7 @@ package xyz.pixelatedw.mineminenomi.abilities.bomu;
 
 import net.minecraft.entity.player.PlayerEntity;
 import xyz.pixelatedw.mineminenomi.api.abilities.ExplosionAbility;
-import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.particles.effects.common.CommonExplosionParticleEffect;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.abilities.Ability;
@@ -22,7 +22,7 @@ public class KickBombAbility extends Ability
 
 	private boolean onUseEvent(PlayerEntity player)
 	{
-		ExplosionAbility explosion = DevilFruitsHelper.newExplosion(player, player.posX, player.posY, player.posZ, 7);
+		ExplosionAbility explosion = AbilityHelper.newExplosion(player, player.posX, player.posY, player.posZ, 7);
 		explosion.setExplosionSound(true);
 		explosion.setDamageOwner(false);
 		explosion.setDestroyBlocks(true);

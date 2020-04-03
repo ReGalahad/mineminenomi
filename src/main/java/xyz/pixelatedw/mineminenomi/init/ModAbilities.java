@@ -15,6 +15,9 @@ import xyz.pixelatedw.mineminenomi.abilities.cyborg.CoupDeVentAbility;
 import xyz.pixelatedw.mineminenomi.abilities.cyborg.FreshFireAbility;
 import xyz.pixelatedw.mineminenomi.abilities.cyborg.RadicalBeamAbility;
 import xyz.pixelatedw.mineminenomi.abilities.cyborg.StrongRightAbility;
+import xyz.pixelatedw.mineminenomi.abilities.doctor.FailedExperimentAbility;
+import xyz.pixelatedw.mineminenomi.abilities.doctor.FirstAidAbility;
+import xyz.pixelatedw.mineminenomi.abilities.doctor.MedicBagExplosionAbility;
 import xyz.pixelatedw.mineminenomi.abilities.doru.CandleHouseAbility;
 import xyz.pixelatedw.mineminenomi.abilities.doru.CandleLockAbility;
 import xyz.pixelatedw.mineminenomi.abilities.doru.CandleWallAbility;
@@ -197,6 +200,10 @@ public class ModAbilities
 		WyRegistry.registerAbility(RenpatsuNamariBoshiAbility.INSTANCE);
 		WyRegistry.registerAbility(SakuretsuSabotenBoshiAbility.INSTANCE);
 		
+		WyRegistry.registerAbility(FirstAidAbility.INSTANCE);
+		WyRegistry.registerAbility(MedicBagExplosionAbility.INSTANCE);
+		WyRegistry.registerAbility(FailedExperimentAbility.INSTANCE);
+
 		WyDebug.debug("A total of " + ModValues.devilfruits.size() + " Devil Fruits have been registered");
 		WyDebug.debug("A total of " + APIRegistries.ABILITIES.getEntries().size() + " abilities have been registered");
 	}

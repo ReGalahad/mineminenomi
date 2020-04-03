@@ -5,7 +5,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.abilities.ExplosionAbility;
-import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.particles.effects.common.CommonExplosionParticleEffect;
 import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 
@@ -48,7 +48,7 @@ public class ExplosivePunchProjectile extends AbilityProjectileEntity {
 	}
 	//to not reuse code so i can save 2 bits of ram :)
 	private void doPunchExplosion(BlockPos pos) {
-		ExplosionAbility explosion = DevilFruitsHelper.newExplosion(this.getThrower(), pos.getX(), pos.getY(), pos.getZ(), 3);
+		ExplosionAbility explosion = AbilityHelper.newExplosion(this.getThrower(), pos.getX(), pos.getY(), pos.getZ(), 3);
 		explosion.setExplosionSound(true);
 		explosion.setDamageOwner(false);
 		explosion.setDestroyBlocks(true);

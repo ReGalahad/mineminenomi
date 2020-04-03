@@ -27,6 +27,9 @@ import xyz.pixelatedw.mineminenomi.abilities.cyborg.CoupDeVentAbility;
 import xyz.pixelatedw.mineminenomi.abilities.cyborg.FreshFireAbility;
 import xyz.pixelatedw.mineminenomi.abilities.cyborg.RadicalBeamAbility;
 import xyz.pixelatedw.mineminenomi.abilities.cyborg.StrongRightAbility;
+import xyz.pixelatedw.mineminenomi.abilities.doctor.FailedExperimentAbility;
+import xyz.pixelatedw.mineminenomi.abilities.doctor.FirstAidAbility;
+import xyz.pixelatedw.mineminenomi.abilities.doctor.MedicBagExplosionAbility;
 import xyz.pixelatedw.mineminenomi.abilities.fishmankarate.KachiageHaisokuAbility;
 import xyz.pixelatedw.mineminenomi.abilities.fishmankarate.KarakusagawaraSeikenAbility;
 import xyz.pixelatedw.mineminenomi.abilities.fishmankarate.MurasameAbility;
@@ -64,7 +67,7 @@ import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 import xyz.pixelatedw.wypi.math.ISphere;
 import xyz.pixelatedw.wypi.math.Sphere;
 
-public class DevilFruitsHelper
+public class AbilityHelper
 {
 
 	private static HashMap<String, List<Block>> blockRules = createBlockRulesMap();
@@ -227,9 +230,9 @@ public class DevilFruitsHelper
 	public static List<int[]> createEmptyCube(World world, double posX, double posY, double posZ, int[] sizes, Block blockToPlace, String... blockRules)
 	{
 		List<int[]> blocks = new ArrayList<int[]>();
-		for (int x = (sizes[0] * 0) - sizes[0]; x <= sizes[0]; x++)
-			for (int y = (sizes[1] * 0) - sizes[1]; y <= sizes[1]; y++)
-				for (int z = (sizes[2] * 0) - sizes[2]; z <= sizes[2]; z++)
+		for (int x = -sizes[0]; x <= sizes[0]; x++)
+			for (int y = -sizes[1]; y <= sizes[1]; y++)
+				for (int z = -sizes[2]; z <= sizes[2]; z++)
 				{
 					if (x == -sizes[0] || x == sizes[0] || y == -sizes[1] || y == sizes[1] || z == -sizes[2] || z == sizes[2])
 					{
@@ -252,9 +255,9 @@ public class DevilFruitsHelper
 	public static List<int[]> createFilledCube(World world, double posX, double posY, double posZ, int[] sizes, Block blockToPlace, String... blockRules)
 	{
 		List<int[]> blocks = new ArrayList<int[]>();
-		for (int x = (sizes[0] * 0) - sizes[0]; x <= sizes[0]; x++)
-			for (int y = (sizes[1] * 0) - sizes[1]; y <= sizes[1]; y++)
-				for (int z = (sizes[2] * 0) - sizes[2]; z <= sizes[2]; z++)
+		for (int x = -sizes[0]; x <= sizes[0]; x++)
+			for (int y = -sizes[1]; y <= sizes[1]; y++)
+				for (int z = -sizes[2]; z <= sizes[2]; z++)
 				{
 					placeBlockIfAllowed(world, (int) posX + x, (int) posY + y, (int) posZ + z, blockToPlace, blockRules);
 					blocks.add(new int[]
@@ -495,6 +498,21 @@ public class DevilFruitsHelper
 					abilityProps.addUnlockedAbility(RenpatsuNamariBoshiAbility.INSTANCE);
 				if (!verifyIfAbilityIsBanned(SakuretsuSabotenBoshiAbility.INSTANCE))
 					abilityProps.addUnlockedAbility(SakuretsuSabotenBoshiAbility.INSTANCE);
+			}
+		}
+		else if (props.isDoctor())
+		{
+			if (!verifyIfAbilityIsBanned(FirstAidAbility.INSTANCE))
+				abilityProps.addUnlockedAbility(FirstAidAbility.INSTANCE);
+			if (CommonConfig.instance.isQuestProgressionEnabled())
+			{
+			}
+			else
+			{
+				if (!verifyIfAbilityIsBanned(MedicBagExplosionAbility.INSTANCE))
+					abilityProps.addUnlockedAbility(MedicBagExplosionAbility.INSTANCE);
+				if (!verifyIfAbilityIsBanned(FailedExperimentAbility.INSTANCE))
+					abilityProps.addUnlockedAbility(FailedExperimentAbility.INSTANCE);
 			}
 		}
 	}

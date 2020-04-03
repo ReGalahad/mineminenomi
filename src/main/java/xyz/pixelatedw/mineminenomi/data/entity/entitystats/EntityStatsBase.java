@@ -278,12 +278,12 @@ public class EntityStatsBase implements IEntityStats
 	}
 
 	@Override
-	public boolean isMedic()
+	public boolean isDoctor()
 	{
 		if (WyHelper.isNullOrEmpty(this.fightingStyle))
 			return false;
 
-		return this.fightingStyle.equalsIgnoreCase("medic");
+		return this.fightingStyle.equalsIgnoreCase("doctor");
 	}
 
 	@Override
@@ -292,7 +292,7 @@ public class EntityStatsBase implements IEntityStats
 		if (WyHelper.isNullOrEmpty(this.fightingStyle))
 			return false;
 
-		return isSwordsman() || isSniper() || isMedic();
+		return isSwordsman() || isSniper() || isDoctor();
 	}
 	
 	@Override
