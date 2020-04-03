@@ -34,11 +34,11 @@ import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 
-@OnlyIn(Dist.CLIENT)
-@Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class CombatModeEvents
 {
 	@SuppressWarnings("resource")
+	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
 	public static void onRenderOverlay(RenderGameOverlayEvent event)
 	{

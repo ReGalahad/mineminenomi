@@ -6,6 +6,8 @@ import com.mojang.blaze3d.platform.GlStateManager;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -20,8 +22,8 @@ import xyz.pixelatedw.wypi.WyHelper;
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class CyborgPassiveEvents
 {
-
 	@SuppressWarnings("resource")
+	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
 	public static void onRenderOverlay(RenderGameOverlayEvent event)
 	{
