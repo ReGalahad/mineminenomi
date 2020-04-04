@@ -13,16 +13,14 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import xyz.pixelatedw.mineminenomi.init.ModArmors;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
+import xyz.pixelatedw.mineminenomi.models.armors.SniperGogglesModel;
 import xyz.pixelatedw.wypi.APIConfig;
 
-public class BasicArmorItem extends ArmorItem
+public class SniperGogglesItem extends ArmorItem
 {
-	private String name;
-	
-	public BasicArmorItem(String name, EquipmentSlotType type)
+	public SniperGogglesItem()
 	{
-		super(ModArmors.BASIC_ARMOR_MATERIAL, type, (new Item.Properties()).group(ModCreativeTabs.WEAPONS));
-		this.name = name;
+		super(ModArmors.MEDIC_BAG_MATERIAL, EquipmentSlotType.HEAD, (new Item.Properties()).group(ModCreativeTabs.WEAPONS).maxDamage(1000));
 	}
 
 	@Override
@@ -30,7 +28,7 @@ public class BasicArmorItem extends ArmorItem
 	@Nullable
 	public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, A _default)
 	{
-		A armorModel = (A) new BipedModel(0.5F);
+		A armorModel = (A) new SniperGogglesModel();
 
 		return armorModel;
 	}
@@ -39,6 +37,6 @@ public class BasicArmorItem extends ArmorItem
 	@Nullable
 	public String getArmorTexture(ItemStack itemStack, Entity entity, EquipmentSlotType slot, String type)
 	{
-		return String.format("%s:textures/models/armor/%s_%d.png", APIConfig.PROJECT_ID, this.name, slot == EquipmentSlotType.LEGS ? 2 : 1);
+		return String.format("%s:textures/models/armor/sniper_goggles.png", APIConfig.PROJECT_ID);
 	}
 }
