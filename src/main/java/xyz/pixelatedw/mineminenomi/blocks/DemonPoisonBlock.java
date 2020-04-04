@@ -20,7 +20,7 @@ public class DemonPoisonBlock extends PoisonBlock
     	{
     		IDevilFruit props = DevilFruitCapability.get((LivingEntity) entity);
     		
-    		if(!props.getDevilFruit().equals("dokudoku"))
+    		if(!props.getDevilFruit().equals("doku_doku"))
     		{
     			if(!((LivingEntity)entity).isPotionActive(Effects.POISON))
     			{

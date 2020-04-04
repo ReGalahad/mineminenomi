@@ -1,5 +1,7 @@
 package xyz.pixelatedw.mineminenomi.renderers;
 
+import org.lwjgl.opengl.GL11;
+
 import com.mojang.blaze3d.platform.GLX;
 import com.mojang.blaze3d.platform.GlStateManager;
 
@@ -17,7 +19,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import xyz.pixelatedw.mineminenomi.api.helpers.MorphsHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.MorphHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfo;
@@ -53,15 +55,9 @@ public class ZoanFirstPersonRenderer
 			GlStateManager.rotatef(f * f6 * 70.0F, 0.0F, 1.0F, 0.0F);
 			GlStateManager.rotatef(f * f5 * -20.0F, 0.0F, 0.0F, 1.0F);
 			AbstractClientPlayerEntity clientPlayer = mc.player;
-			// mc.getTextureManager().bindTexture(abstractclientplayerentity.getLocationSkin());
-
-			/*if (props.isPassiveActive(ModAttributes.BUSOSHOKU_HAKI))
-				mc.getTextureManager().bindTexture(ModResources.BUSOSHOKU_HAKI_ARM);
-			else if (props.isPassiveActive(ModAttributes.HOT_BOILING_SPECIAL))
-				mc.getTextureManager().bindTexture(ModResources.HOT_BOILING_SPECIAL_ARM);
-			else
-				mc.getTextureManager().bindTexture(getTextureFromMorph(mc.player, renderManager));*/
-	
+			
+			mc.getTextureManager().bindTexture(getTextureFromMorph(mc.player, renderManager));
+			
 			GlStateManager.translatef(f * -1.0F, 3.6F, 3.5F);
 			GlStateManager.rotatef(f * 120.0F, 0.0F, 0.0F, 1.0F);
 			GlStateManager.rotatef(200.0F, 1.0F, 0.0F, 0.0F);
@@ -75,7 +71,7 @@ public class ZoanFirstPersonRenderer
 				return;
 				
 			RenderHelper.enableStandardItemLighting();
-			//mc.gameRenderer.enableLightmap();
+			mc.gameRenderer.enableLightmap();
 
 			if (WyHelper.isNullOrEmpty(dfProps.getZoanPoint()))
 			{
@@ -86,13 +82,13 @@ public class ZoanFirstPersonRenderer
 			}
 			else
 			{
-				//ZoanMorphRenderer render = MorphsHelper.getZoanInfoList().get(0).getFactory().createRenderFor(renderManager);
+				ZoanMorphRenderer render = MorphHelper.getZoanInfoList().get(0).getFactory().createRenderFor(renderManager);
 	
-				ZoanInfo info = MorphsHelper.getZoanInfo(clientPlayer);
-				//if(info != null)
-				//	render = info.getFactory().createRenderFor(renderManager);
+				ZoanInfo info = MorphHelper.getZoanInfo(clientPlayer);
+				if(info != null)
+					render = info.getFactory().createRenderFor(renderManager);
 	
-				/*if (render != null)
+				if (render != null)
 				{
 					ZoanMorphRenderer renderZoan = render;
 					float i = 1.0F;
@@ -101,11 +97,11 @@ public class ZoanFirstPersonRenderer
 					GL11.glRotatef(60.0F, 0.0F, 1.0F, 0.0F);
 					GL11.glTranslatef(0.2f, 0.0f, -0.5f);
 					renderZoan.renderFirstPersonArm(mc.player);
-				}*/
+				}
 			}
 			
 			RenderHelper.disableStandardItemLighting();
-			//mc.gameRenderer.disableLightmap();
+			mc.gameRenderer.disableLightmap();
 	
 			GlStateManager.enableCull();
 		}
@@ -118,9 +114,9 @@ public class ZoanFirstPersonRenderer
 		IAbilityData abilityProps = AbilityDataCapability.get(player);
 		ZoanMorphRenderer render = null;
 
-		ZoanInfo info = MorphsHelper.getZoanInfo(player);
-		//if(info != null)
-		//	render = info.getFactory().createRenderFor(renderManager);
+		ZoanInfo info = MorphHelper.getZoanInfo(player);
+		if(info != null)
+			render = info.getFactory().createRenderFor(renderManager);
 
 		if (render != null)
 			return render.getEntityTexture(null);

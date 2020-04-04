@@ -1,18 +1,19 @@
 package xyz.pixelatedw.mineminenomi.entities.zoan;
 
+import xyz.pixelatedw.mineminenomi.abilities.doku.VenomDemonAbility;
 import xyz.pixelatedw.mineminenomi.models.entities.zoans.VenomDemonModel;
 import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer.Factory;
 import xyz.pixelatedw.wypi.abilities.Ability;
 
-public class ZoanInfoVenomDemon  extends ZoanInfo
+public class VenomDemonZoanInfo extends ZoanInfo
 {
 	public static final String FORM = "venom_demon";
 
 	@Override
 	public String getDevilFruit()
 	{
-		return "dokudoku";
+		return "doku_doku";
 	}
 
 	@Override
@@ -30,7 +31,7 @@ public class ZoanInfoVenomDemon  extends ZoanInfo
 	@Override
 	public Ability getAbility()
 	{
-		return null;//ModAttributes.VENOM_DEMON;
+		return VenomDemonAbility.INSTANCE;
 	}
 
 	@Override

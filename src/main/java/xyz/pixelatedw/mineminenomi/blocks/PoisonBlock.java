@@ -91,7 +91,7 @@ public class PoisonBlock extends Block
 		{
 			IDevilFruit props = DevilFruitCapability.get((LivingEntity) entity);
 
-			if (!props.getDevilFruit().equals("dokudoku"))
+			if (!props.getDevilFruit().equals("doku_doku"))
 			{
 				if (!((LivingEntity) entity).isPotionActive(Effects.POISON))
 				{
@@ -117,14 +117,14 @@ public class PoisonBlock extends Block
 	@Override
 	public void tick(BlockState state, World world, BlockPos pos, Random random)
 	{
-		if (ticks > 0)
+		if (this.ticks > 0)
 		{
-			ticks--;
+			this.ticks--;
 		}
 		else
 		{
 			world.setBlockState(pos, Blocks.AIR.getDefaultState());
-			ticks = 100 + random.nextInt(10);
+			this.ticks = 100 + random.nextInt(10);
 		}
 
 		world.getPendingBlockTicks().scheduleTick(pos, this, 1, TickPriority.EXTREMELY_HIGH);

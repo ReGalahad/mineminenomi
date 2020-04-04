@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import xyz.pixelatedw.mineminenomi.data.functions.RandomWantedPosterLootFunction;
-import xyz.pixelatedw.mineminenomi.events.EventsCombatMode;
+import xyz.pixelatedw.mineminenomi.events.CombatModeEvents;
 import xyz.pixelatedw.mineminenomi.init.ModCapabilities;
 import xyz.pixelatedw.mineminenomi.init.ModFeatures;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
@@ -46,7 +46,7 @@ public class ModSetup
 		// Renderers
 		ModRenderers.registerRenderers();
 		
-		MinecraftForge.EVENT_BUS.register(new EventsCombatMode());
+		MinecraftForge.EVENT_BUS.register(new CombatModeEvents());
 
 		WyJSON.runGenerators(false);
 	}

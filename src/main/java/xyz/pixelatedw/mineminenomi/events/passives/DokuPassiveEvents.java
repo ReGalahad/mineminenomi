@@ -12,7 +12,7 @@ import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
-import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoVenomDemon;
+import xyz.pixelatedw.mineminenomi.entities.zoan.VenomDemonZoanInfo;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
@@ -62,7 +62,7 @@ public class DokuPassiveEvents
 		if (!devilFruitProps.getDevilFruit().equalsIgnoreCase("doku_doku"))
 			return;
 		
-		if(devilFruitProps.getZoanPoint().equalsIgnoreCase(ZoanInfoVenomDemon.FORM))
+		if(devilFruitProps.getZoanPoint().equalsIgnoreCase(VenomDemonZoanInfo.FORM))
 			attacked.addPotionEffect(new EffectInstance(Effects.POISON, 60, 0));
 	}
 }

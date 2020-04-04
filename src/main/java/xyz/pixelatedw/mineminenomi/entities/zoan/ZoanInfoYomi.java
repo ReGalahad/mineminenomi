@@ -5,7 +5,7 @@ import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer.Factory;
 import xyz.pixelatedw.wypi.abilities.Ability;
 
-public class ZoanInfoYomi  extends ZoanInfo
+public class ZoanInfoYomi extends ZoanInfo
 {
 	public static final String FORM = "yomi";
 

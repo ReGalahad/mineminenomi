@@ -9,6 +9,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityEvent;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
+import xyz.pixelatedw.mineminenomi.entities.zoan.VenomDemonZoanInfo;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfo;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoBisonHeavy;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoBisonWalk;
@@ -17,16 +18,16 @@ import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoGiraffeWalk;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoMoguMole;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoPhoenixFull;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoPhoenixHybrid;
-import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoVenomDemon;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoYomi;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoZouGuard;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoZouHeavy;
 import xyz.pixelatedw.mineminenomi.packets.server.SRecalculateEyeHeightPacket;
+import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 import xyz.pixelatedw.wypi.network.WyNetwork;
 
-public class MorphsHelper
+public class MorphHelper
 {
 	
 	private static List<ZoanInfo> zoanInfoList = new ArrayList<ZoanInfo>();
@@ -53,18 +54,19 @@ public class MorphsHelper
 		IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
 		IAbilityData abilityProps = AbilityDataCapability.get(player);
 		
-		for (ZoanInfo info : MorphsHelper.getZoanInfoList())
+		if (WyHelper.isNullOrEmpty(devilFruitProps.getDevilFruit()) || WyHelper.isNullOrEmpty(devilFruitProps.getZoanPoint()))
+			return null;
+		
+		for (ZoanInfo info : MorphHelper.getZoanInfoList())
 		{
 			if (!info.getDevilFruit().equalsIgnoreCase(devilFruitProps.getDevilFruit()))
 				continue;
-
+			
 			if (!info.getForm().equalsIgnoreCase(devilFruitProps.getZoanPoint()))
 				continue;
 
 			if (devilFruitProps.getZoanPoint().equalsIgnoreCase(ZoanInfoYomi.FORM) || abilityProps.getEquippedAbility(info.getAbility()).isContinuous())
-			{
 				return info;
-			}
 		}
 		
 		return null;
@@ -103,7 +105,7 @@ public class MorphsHelper
 		zoanInfoList.add(new ZoanInfoGiraffeWalk());
 		
 		// Non-zoan Morphs
-		zoanInfoList.add(new ZoanInfoVenomDemon());
+		zoanInfoList.add(new VenomDemonZoanInfo());
 		zoanInfoList.add(new ZoanInfoYomi());
 	}
 	

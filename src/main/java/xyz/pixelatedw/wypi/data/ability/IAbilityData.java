@@ -11,8 +11,8 @@ public interface IAbilityData
 	boolean setUnlockedAbility(int slot, Ability abl);
 	boolean removeUnlockedAbility(Ability abl);
 	boolean hasUnlockedAbility(Ability abl);
-	Ability getUnlockedAbility(Ability abl);
-	Ability getUnlockedAbility(int slot);
+	<T extends Ability> T getUnlockedAbility(T abl);
+	<T extends Ability> T getUnlockedAbility(int slot);
 	List<Ability> getUnlockedAbilities(AbilityCategory category);
 	void clearUnlockedAbilities(AbilityCategory category);
 	void clearUnlockedAbilityFromList(AbilityCategory category, List<Ability> list); 
@@ -22,14 +22,14 @@ public interface IAbilityData
 	boolean setEquippedAbility(int slot, Ability abl);
 	boolean removeEquippedAbility(Ability abl);
 	boolean hasEquippedAbility(Ability abl);
-	Ability getEquippedAbility(Ability abl);
-	Ability getEquippedAbility(int slot);
-	Ability[] getEquippedAbilities();
-	Ability[] getEquippedAbilities(AbilityCategory category);
+	<T extends Ability> T getEquippedAbility(T abl);
+	<T extends Ability> T getEquippedAbility(int slot);
+	<T extends Ability> T[] getEquippedAbilities();
+	<T extends Ability> T[] getEquippedAbilities(AbilityCategory category);
 	void clearEquippedAbilities(AbilityCategory category);
 	void clearEquippedAbilityFromList(AbilityCategory category, List<Ability> list); 
 	int countEquippedAbilities(AbilityCategory category);
 	
-	Ability getPreviouslyUsedAbility();
+	<T extends Ability> T getPreviouslyUsedAbility();
 	void setPreviouslyUsedAbility(Ability abl);
 }

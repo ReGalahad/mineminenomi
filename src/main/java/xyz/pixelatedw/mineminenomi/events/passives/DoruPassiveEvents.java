@@ -8,7 +8,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -17,13 +16,11 @@ import xyz.pixelatedw.mineminenomi.init.ModEffects;
 import xyz.pixelatedw.mineminenomi.models.effects.CandleLockModel;
 import xyz.pixelatedw.wypi.APIConfig;
 
-@Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
+@Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID, value = Dist.CLIENT)
 public class DoruPassiveEvents {
-	@OnlyIn(Dist.CLIENT)
 	private static final CandleLockModel CANDLE_LOCK = new CandleLockModel();
 
 	@SubscribeEvent
-	@OnlyIn(Dist.CLIENT)
 	public static void onEntityRendered(RenderLivingEvent.Pre event) {
 		LivingEntity entity = event.getEntity();
 		LivingRenderer renderer = event.getRenderer();
@@ -55,11 +52,13 @@ public class DoruPassiveEvents {
 
 	@SubscribeEvent
 	public static void playerRender(RenderPlayerEvent e) {
-	
+
 		double rotateAngleX = e.getRenderer().getEntityModel().bipedHead.rotateAngleX;
 		double rotateAngleY = e.getRenderer().getEntityModel().bipedHead.rotateAngleY;
-	    double rotateAngleZ = e.getRenderer().getEntityModel().bipedHead.rotateAngleZ;
-	    e.getPlayer().world.addParticle(ParticleTypes.FLAME, e.getPlayer().posX + rotateAngleX / 180, e.getPlayer().posY + e.getPlayer().getEyeHeight() + 0.3 + rotateAngleY / 180, e.getPlayer().posZ + rotateAngleZ / 180, 0, 0.01, 0);
-	    
+		double rotateAngleZ = e.getRenderer().getEntityModel().bipedHead.rotateAngleZ;
+		e.getPlayer().world.addParticle(ParticleTypes.FLAME, e.getPlayer().posX + rotateAngleX / 180,
+				e.getPlayer().posY + e.getPlayer().getEyeHeight() + 0.3 + rotateAngleY / 180,
+				e.getPlayer().posZ + rotateAngleZ / 180, 0, 0.01, 0);
+
 	}
 }
