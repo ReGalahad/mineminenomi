@@ -17,6 +17,7 @@ public class ZenshinKibakuAbility extends ChargeableAbility{
 		this.setMaxCooldown(5);
 		this.setDescription("The user creates a massive explosion from his body.");
 		this.setMaxChargeTime(5);
+		this.setCancelable();
 		this.duringChargingEvent = this::duringChargingEvent;
 		this.onEndChargingEvent = this::onEndChargingEvent;
 		
