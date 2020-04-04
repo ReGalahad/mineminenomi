@@ -9,7 +9,6 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Rarity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import xyz.pixelatedw.mineminenomi.init.ModArmors;
@@ -39,11 +38,5 @@ public class TomoeDrumsItem extends ArmorItem
 	public String getArmorTexture(ItemStack itemStack, Entity entity, EquipmentSlotType slot, String type)
 	{
 		return String.format("%s:textures/models/armor/tomoe_drums.png", APIConfig.PROJECT_ID);
-	}
-	
-	@Override
-	public Rarity getRarity(ItemStack stack)
-	{
-		return Rarity.EPIC;
 	}
 }
