@@ -39,6 +39,11 @@ import xyz.pixelatedw.mineminenomi.abilities.fishmankarate.KarakusagawaraSeikenA
 import xyz.pixelatedw.mineminenomi.abilities.fishmankarate.MurasameAbility;
 import xyz.pixelatedw.mineminenomi.abilities.fishmankarate.SamehadaShoteiAbility;
 import xyz.pixelatedw.mineminenomi.abilities.fishmankarate.UchimizuAbility;
+import xyz.pixelatedw.mineminenomi.abilities.gasu.BlueSwordAbility;
+import xyz.pixelatedw.mineminenomi.abilities.gasu.GasRobeAbility;
+import xyz.pixelatedw.mineminenomi.abilities.gasu.GastanetAbility;
+import xyz.pixelatedw.mineminenomi.abilities.gasu.GastilleAbility;
+import xyz.pixelatedw.mineminenomi.abilities.gasu.KarakuniAbility;
 import xyz.pixelatedw.mineminenomi.abilities.goe.TodorokiAbility;
 import xyz.pixelatedw.mineminenomi.abilities.goro.ElThorAbility;
 import xyz.pixelatedw.mineminenomi.abilities.goro.KariAbility;
@@ -151,7 +156,7 @@ public class ModAbilities
 	public static final AkumaNoMiItem YAMI_YAMI_NO_MI = new AkumaNoMiItem("Yami Yami no Mi", EnumFruitType.LOGIA);
 	public static final AkumaNoMiItem JURYO_JURYO_NO_MI = new AkumaNoMiItem("Juryo Juryo no Mi", EnumFruitType.PARAMECIA);
 	public static final AkumaNoMiItem YUKI_YUKI_NO_MI = new AkumaNoMiItem("Yuki Yuki no Mi", EnumFruitType.LOGIA);
-	public static final AkumaNoMiItem GASU_GASU_NO_MI = new AkumaNoMiItem("Gasu Gasu no Mi", EnumFruitType.LOGIA);
+	public static final AkumaNoMiItem GASU_GASU_NO_MI = new AkumaNoMiItem("Gasu Gasu no Mi", EnumFruitType.LOGIA, GasRobeAbility.INSTANCE, GastanetAbility.INSTANCE, GastilleAbility.INSTANCE, BlueSwordAbility.INSTANCE, KarakuniAbility.INSTANCE);
 	public static final AkumaNoMiItem BARI_BARI_NO_MI = new AkumaNoMiItem("Bari Bari no Mi", EnumFruitType.PARAMECIA, BarrierAbility.INSTANCE, BarrierBallAbility.INSTANCE, BarrierCrashAbility.INSTANCE, BariBariNoPistolAbility.INSTANCE, BarrierbilityStairsAbility.INSTANCE);
 	public static final AkumaNoMiItem DOKU_DOKU_NO_MI = new AkumaNoMiItem("Doku Doku no Mi", EnumFruitType.PARAMECIA, HydraAbility.INSTANCE, ChloroBallAbility.INSTANCE, DokuFuguAbility.INSTANCE, VenomRoadAbility.INSTANCE, DokuGumoAbility.INSTANCE, VenomDemonAbility.INSTANCE);
 	public static final AkumaNoMiItem DORU_DORU_NO_MI = new AkumaNoMiItem("Doru Doru no Mi", EnumFruitType.PARAMECIA, CandleWallAbility.INSTANCE, CandleHouseAbility.INSTANCE, DoruDoruArtsMoriAbility.INSTANCE, DoruDoruArtsKenAbility.INSTANCE, CandleLockAbility.INSTANCE);
