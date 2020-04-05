@@ -119,11 +119,14 @@ public class SniperGogglesModel extends BipedModel
 	public void render(LivingEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
 	{
 		this.bipedHeadwear = this.base;
-
+		
 		this.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
 		this.left_eye.offsetY = -0.1F;
 		this.right_eye.offsetY = -0.1F;
+		
+		if(this.isSneak)
+			this.base.offsetY = 0.2F;
 		
 		this.base.render(scale);
 	}

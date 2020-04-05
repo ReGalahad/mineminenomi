@@ -33,8 +33,16 @@ public class MedicBagModel extends BipedModel
 	@Override
 	public void render(LivingEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
 	{
+		this.bipedBody = this.backpack;
+		
 		this.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
+		if(this.isSneak)
+		{
+			this.backpack.offsetZ = 0.1F;
+			this.backpack.offsetY = 0.1F;
+		}
+		
 		this.backpack.render(scale);
 	}
 
