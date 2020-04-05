@@ -8,6 +8,7 @@ import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.abilities.ChargeableAbility;
 import xyz.pixelatedw.wypi.abilities.ContinuousAbility;
 import xyz.pixelatedw.wypi.abilities.IParallelContinuousAbility;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
@@ -53,6 +54,11 @@ public class CUseAbilityPacket
 				
 				Ability abl = abilityDataProps.getEquippedAbility(message.slot);
 				
+				// Only allows cancelable chargeables to be canceled early
+				if(abl instanceof ChargeableAbility && abl.isCharging() && !((ChargeableAbility) abl).isCancelable())
+					return;
+				
+				// Stops multiple continuous abilities from being activated if they're not parallel continuous
 				if(abl instanceof ContinuousAbility && !abl.isContinuous() && !(abl instanceof IParallelContinuousAbility))
 				{
 					for(Ability ability : abilityDataProps.getEquippedAbilities())
