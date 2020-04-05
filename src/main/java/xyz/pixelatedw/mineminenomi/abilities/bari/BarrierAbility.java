@@ -36,13 +36,13 @@ public class BarrierAbility extends ContinuousAbility
 		if (this.posList.isEmpty())
 		{
 			if (dir == Direction.NORTH)
-				this.posList = AbilityHelper.createFilledCube(player.world, player.posX - 1, player.posY, player.posZ - 4, new int[] { 3, 4, 1 }, ModBlocks.BARRIER, "air", "nogrief");
+				this.posList = AbilityHelper.createFilledCube(player.world, player.posX, player.posY, player.posZ - 4, new int[] { 3, 4, 1 }, ModBlocks.BARRIER, "air", "nogrief");
 			if (dir == Direction.SOUTH)
-				this.posList = AbilityHelper.createFilledCube(player.world, player.posX - 1, player.posY, player.posZ + 2, new int[] { 3, 4, 1 }, ModBlocks.BARRIER, "air", "nogrief");
+				this.posList = AbilityHelper.createFilledCube(player.world, player.posX, player.posY, player.posZ + 4, new int[] { 3, 4, 1 }, ModBlocks.BARRIER, "air", "nogrief");
 			if (dir == Direction.EAST)
-				this.posList = AbilityHelper.createFilledCube(player.world, player.posX + 2, player.posY, player.posZ - 1, new int[] { 1, 4, 3 }, ModBlocks.BARRIER, "air", "nogrief");
+				this.posList = AbilityHelper.createFilledCube(player.world, player.posX + 4, player.posY, player.posZ, new int[] { 1, 4, 3 }, ModBlocks.BARRIER, "air", "nogrief");
 			if (dir == Direction.WEST)
-				this.posList = AbilityHelper.createFilledCube(player.world, player.posX - 4, player.posY, player.posZ - 1, new int[] { 1, 4, 3 }, ModBlocks.BARRIER, "air", "nogrief");
+				this.posList = AbilityHelper.createFilledCube(player.world, player.posX - 4, player.posY, player.posZ, new int[] { 1, 4, 3 }, ModBlocks.BARRIER, "air", "nogrief");
 		}
 		
 		return true;	

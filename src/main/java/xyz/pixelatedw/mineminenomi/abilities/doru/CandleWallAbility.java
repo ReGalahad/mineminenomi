@@ -25,13 +25,13 @@ public class CandleWallAbility extends Ability
 		Direction dir = Direction.getFacingDirections(player)[0];
 
 		if (dir == Direction.NORTH)
-			AbilityHelper.createFilledCube(player.world, player.posX - 1, player.posY, player.posZ - 4, new int[] { 3, 4, 1 }, ModBlocks.WAX, "air", "foliage");
+			AbilityHelper.createFilledCube(player.world, player.posX, player.posY, player.posZ - 4, new int[] { 3, 4, 1 }, ModBlocks.WAX, "air", "foliage");
 		if (dir == Direction.SOUTH)
-			AbilityHelper.createFilledCube(player.world, player.posX - 1, player.posY, player.posZ + 2, new int[] { 3, 4, 1 }, ModBlocks.WAX, "air", "foliage");
+			AbilityHelper.createFilledCube(player.world, player.posX, player.posY, player.posZ + 4, new int[] { 3, 4, 1 }, ModBlocks.WAX, "air", "foliage");
 		if (dir == Direction.EAST)
-			AbilityHelper.createFilledCube(player.world, player.posX + 2, player.posY, player.posZ - 1, new int[] { 1, 4, 3 }, ModBlocks.WAX, "air", "foliage");
+			AbilityHelper.createFilledCube(player.world, player.posX + 4, player.posY, player.posZ, new int[] { 1, 4, 3 }, ModBlocks.WAX, "air", "foliage");
 		if (dir == Direction.WEST)
-			AbilityHelper.createFilledCube(player.world, player.posX - 4, player.posY, player.posZ - 1, new int[] { 1, 4, 3 }, ModBlocks.WAX, "air", "foliage");
+			AbilityHelper.createFilledCube(player.world, player.posX - 4, player.posY, player.posZ, new int[] { 1, 4, 3 }, ModBlocks.WAX, "air", "foliage");
 
 		return true;
 	}

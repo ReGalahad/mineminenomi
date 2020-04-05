@@ -9,7 +9,7 @@ import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.particles.effects.common.CommonExplosionParticleEffect;
 import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 
-public class ShishaNoTeProjectile  extends AbilityProjectileEntity
+public class ShishaNoTeProjectile extends AbilityProjectileEntity
 {
 	public ShishaNoTeProjectile(World world)
 	{
