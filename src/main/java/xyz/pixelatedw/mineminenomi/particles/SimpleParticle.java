@@ -28,6 +28,7 @@ public class SimpleParticle extends TexturedParticle
 	protected ResourceLocation texture;
 	private static final VertexFormat VERTEX_FORMAT = (new VertexFormat()).addElement(DefaultVertexFormats.POSITION_3F).addElement(DefaultVertexFormats.TEX_2F).addElement(DefaultVertexFormats.COLOR_4UB).addElement(DefaultVertexFormats.TEX_2S).addElement(DefaultVertexFormats.NORMAL_3B).addElement(DefaultVertexFormats.PADDING_1B);
 	private boolean hasRotation = false;
+	private boolean hasMotionDecay = true;
 	
 	public SimpleParticle(World world, ResourceLocation texture, double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
 	{
@@ -90,9 +91,12 @@ public class SimpleParticle extends TexturedParticle
         	this.motionY = -0.04D * this.particleGravity; 
         
         this.move(this.motionX, this.motionY, this.motionZ);
-        this.motionX *= 0.99D;
-        this.motionY *= 0.99D;
-        this.motionZ *= 0.99D;
+        if(this.hasMotionDecay)
+        {
+	        this.motionX *= 0.99D;
+	        this.motionY *= 0.99D;
+	        this.motionZ *= 0.99D;
+        }
 
         if(this.age + 5 >= this.maxAge)
         {
@@ -112,6 +116,7 @@ public class SimpleParticle extends TexturedParticle
     public SimpleParticle setParticleGravity(float f) { this.particleGravity = f; return this; }
     public SimpleParticle setParticleAge(int i) { this.maxAge = i + this.rand.nextInt(10); return this; }
     public SimpleParticle setHasRotation() { this.hasRotation = true; return this; }
+    public SimpleParticle setHasMotionDecay(boolean flag) { this.hasMotionDecay = flag; return this; }
     public SimpleParticle setParticleTexture(ResourceLocation rs)
     {
     	this.texture = rs;
@@ -167,6 +172,7 @@ public class SimpleParticle extends TexturedParticle
 			particle.setParticleAlpha(data.getAlpha());
 			particle.setParticleScale(data.getSize());
 			particle.setParticleAge(data.getLife());
+			particle.setHasMotionDecay(data.hasMotionDecay());
 			
 			if(data.hasRotation()) particle.setHasRotation();
 			

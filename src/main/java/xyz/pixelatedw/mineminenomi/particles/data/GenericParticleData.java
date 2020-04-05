@@ -27,6 +27,7 @@ public class GenericParticleData implements IParticleData
 			float size = stringReader.readFloat();
 			int life = stringReader.readInt();
 			boolean hasRotation = stringReader.readBoolean();
+			boolean hasMotionDecat = stringReader.readBoolean();
 			
 			double motionX = stringReader.readDouble();
 			double motionY = stringReader.readDouble();
@@ -41,6 +42,7 @@ public class GenericParticleData implements IParticleData
 			data.setLife(life);
 			data.setTexture(texture);
 			if(hasRotation) data.setHasRotation();
+			data.setHasMotionDecay(hasMotionDecat);
 			
 			return data;
 		}
@@ -55,6 +57,7 @@ public class GenericParticleData implements IParticleData
 			float size = packetBuffer.readFloat();
 			int life = packetBuffer.readInt();
 			boolean hasRotation = packetBuffer.readBoolean();
+			boolean hasMotionDecat = packetBuffer.readBoolean();
 			
 			double motionX = packetBuffer.readDouble();
 			double motionY = packetBuffer.readDouble();
@@ -69,7 +72,8 @@ public class GenericParticleData implements IParticleData
 			data.setLife(life);
 			data.setTexture(texture);
 			if(hasRotation) data.setHasRotation();
-			
+			data.setHasMotionDecay(hasMotionDecat);
+						
 			return data;
 		}
 	};
@@ -80,6 +84,7 @@ public class GenericParticleData implements IParticleData
 	private float size = 1;
 	private int life = 10;
 	private boolean hasRotation = false;
+	private boolean hasMotionDecay = true;
 	private ResourceLocation texture = ModResources.MERA;
 	
 	public GenericParticleData() {}
@@ -100,7 +105,8 @@ public class GenericParticleData implements IParticleData
 		buffer.writeFloat(this.size);
 		buffer.writeInt(this.life);
 		buffer.writeBoolean(this.hasRotation);
-		
+		buffer.writeBoolean(this.hasMotionDecay);
+
 		buffer.writeDouble(this.motionX);
 		buffer.writeDouble(this.motionY);
 		buffer.writeDouble(this.motionZ);
@@ -146,6 +152,11 @@ public class GenericParticleData implements IParticleData
 	public void setHasRotation()
 	{
 		this.hasRotation = true;
+	}
+	
+	public void setHasMotionDecay(boolean flag)
+	{
+		this.hasMotionDecay = flag;
 	}
 	
 	@Override
@@ -207,5 +218,10 @@ public class GenericParticleData implements IParticleData
 	public boolean hasRotation()
 	{
 		return this.hasRotation;
+	}
+	
+	public boolean hasMotionDecay()
+	{
+		return this.hasMotionDecay;
 	}
 }
