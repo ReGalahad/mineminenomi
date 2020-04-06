@@ -2,6 +2,7 @@ package xyz.pixelatedw.mineminenomi.init;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.Properties;
+import net.minecraft.item.PickaxeItem;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.items.AkumaNoMiBoxItem;
 import xyz.pixelatedw.mineminenomi.items.BellyPouchItem;
@@ -9,6 +10,7 @@ import xyz.pixelatedw.mineminenomi.items.BubblyCoralItem;
 import xyz.pixelatedw.mineminenomi.items.CharacterCreatorItem;
 import xyz.pixelatedw.mineminenomi.items.ColaItem;
 import xyz.pixelatedw.mineminenomi.items.HeartItem;
+import xyz.pixelatedw.mineminenomi.items.MItemTier;
 import xyz.pixelatedw.mineminenomi.items.SeaKingMeatItem;
 import xyz.pixelatedw.mineminenomi.items.UltraColaItem;
 import xyz.pixelatedw.mineminenomi.items.VivreCardItem;
@@ -30,6 +32,7 @@ public class ModItems
 	public static final Item KEY = new Item(new Properties().group(ModCreativeTabs.MISC));
 	public static final Item VIVRE_CARD = new VivreCardItem();
 	public static final Item BUBBLY_CORAL = new BubblyCoralItem();
+	public static final Item DORU_PICKAXE = new PickaxeItem(MItemTier.DORU, 1, -2.8f, new Item.Properties());
 
 	// Devil Fruit Boxes
 	public static final Item TIER_1_BOX = new AkumaNoMiBoxItem(1);
@@ -69,5 +72,6 @@ public class ModItems
 		WyRegistry.registerItem(TIER_3_BOX, "Golden Box");
 		WyRegistry.registerItem(BUBBLY_CORAL, "Bubbly Coral");
 		WyRegistry.registerItem(VIVRE_CARD, "Vivre Card");
+		WyRegistry.registerItem(DORU_PICKAXE, "Doru Doru Arts: Pickaxe");
 	}
 }

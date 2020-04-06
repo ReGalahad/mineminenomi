@@ -15,6 +15,7 @@ import xyz.pixelatedw.mineminenomi.entities.mobs.marines.EntityMarineWithGun;
 import xyz.pixelatedw.mineminenomi.entities.mobs.marines.EntityMarineWithSword;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.EntityBlackKnight;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.EntityDoppelman;
+import xyz.pixelatedw.mineminenomi.entities.mobs.misc.WaxPlayerEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityPirateCaptain;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityPirateWithGun;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityPirateWithSword;
@@ -45,6 +46,7 @@ public class ModEntities
 
 	// Other
 	public static final EntityType DOPPELMAN = WyRegistry.createEntityType(EntityDoppelman::new).build("doppelman");
+	public static final EntityType WAX_PLAYER = WyRegistry.createEntityType(WaxPlayerEntity::new).build("wax_player");
 	public static final EntityType BLACK_KNIGHT = WyRegistry.createEntityType(EntityBlackKnight::new).build("black_knight");
 	public static final EntityType WANTED_POSTER_PACKAGE = WyRegistry.createEntityType(WantedPosterPackageEntity::new).size(1.5F, 1.5F).build("wanted_poster_package");
 	public static final EntityType VIVRE_CARD = WyRegistry.createEntityType(VivreCardEntity::new).size(0.4F, 0.4F).build("vivre_card");
@@ -70,6 +72,7 @@ public class ModEntities
 
 		// Other
 		WyRegistry.registerEntityType(DOPPELMAN, "Doppelman");
+		WyRegistry.registerEntityType(WAX_PLAYER, "Wax Player");
 		WyRegistry.registerEntityType(BLACK_KNIGHT, "Black Knight");
 		WyRegistry.registerEntityType(WANTED_POSTER_PACKAGE, "Wanted Poster Package");
 		WyRegistry.registerEntityType(VIVRE_CARD, "Vivre Card");
