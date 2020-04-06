@@ -1,10 +1,9 @@
 package xyz.pixelatedw.mineminenomi.abilities.zushi;
 
 import net.minecraft.entity.player.PlayerEntity;
-import xyz.pixelatedw.mineminenomi.packets.server.SSpecialFlyingPacket;
+import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.abilities.ContinuousAbility;
-import xyz.pixelatedw.wypi.network.WyNetwork;
 
 public class AbareHimatsuriAbility extends ContinuousAbility
 {
@@ -25,9 +24,9 @@ public class AbareHimatsuriAbility extends ContinuousAbility
 	private boolean onStartContinuityEvent(PlayerEntity player)
 	{
 		if(player.isCreative() || player.isSpectator())
-			return true;
-
-		WyNetwork.sendTo(new SSpecialFlyingPacket(true), player);
+			return false;
+				
+		player.abilities.allowFlying = true;	
 		
 		return true;
 	}
@@ -39,10 +38,8 @@ public class AbareHimatsuriAbility extends ContinuousAbility
 	
 	private boolean onEndContinuityEvent(PlayerEntity player)
 	{
-		if(player.isCreative() || player.isSpectator())
-			return true;
-		
-		WyNetwork.sendTo(new SSpecialFlyingPacket(false), player);
+		player.abilities.allowFlying = false;	
+		player.abilities.isFlying = false;
 		
 		return true;
 	}

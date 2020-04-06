@@ -61,6 +61,9 @@ import xyz.pixelatedw.mineminenomi.abilities.hie.IceBlockPartisanAbility;
 import xyz.pixelatedw.mineminenomi.abilities.hie.IceBlockPheasantAbility;
 import xyz.pixelatedw.mineminenomi.abilities.hie.IceSaberAbility;
 import xyz.pixelatedw.mineminenomi.abilities.hie.IceTimeCapsuleAbility;
+import xyz.pixelatedw.mineminenomi.abilities.horo.MiniHollowAbility;
+import xyz.pixelatedw.mineminenomi.abilities.horo.NegativeHollowAbility;
+import xyz.pixelatedw.mineminenomi.abilities.horo.TokuHollowAbility;
 import xyz.pixelatedw.mineminenomi.abilities.magu.BakuretsuKazanAbility;
 import xyz.pixelatedw.mineminenomi.abilities.magu.DaiFunkaAbility;
 import xyz.pixelatedw.mineminenomi.abilities.magu.MeigoAbility;
@@ -156,7 +159,7 @@ public class ModAbilities
 	public static final AkumaNoMiItem MERO_MERO_NO_MI = new AkumaNoMiItem("Mero Mero no Mi", EnumFruitType.PARAMECIA);
 	public static final AkumaNoMiItem ORI_ORI_NO_MI = new AkumaNoMiItem("Ori Ori no Mi", EnumFruitType.PARAMECIA);
 	public static final AkumaNoMiItem SUPA_SUPA_NO_MI = new AkumaNoMiItem("Supa Supa no Mi", EnumFruitType.PARAMECIA);
-	public static final AkumaNoMiItem HORO_HORO_NO_MI = new AkumaNoMiItem("Horo Horo no Mi", EnumFruitType.PARAMECIA);
+	public static final AkumaNoMiItem HORO_HORO_NO_MI = new AkumaNoMiItem("Horo Horo no Mi", EnumFruitType.PARAMECIA, NegativeHollowAbility.INSTANCE, MiniHollowAbility.INSTANCE, TokuHollowAbility.INSTANCE);
 	public static final AkumaNoMiItem ITO_ITO_NO_MI = new AkumaNoMiItem("Ito Ito no Mi", EnumFruitType.PARAMECIA);
 	public static final AkumaNoMiItem YAMI_YAMI_NO_MI = new AkumaNoMiItem("Yami Yami no Mi", EnumFruitType.LOGIA);
 	public static final AkumaNoMiItem ZUSHI_ZUSHI_NO_MI = new AkumaNoMiItem("Zushi Zushi no Mi", EnumFruitType.PARAMECIA, JigokuTabiAbility.INSTANCE, SagariNoRyuseiAbility.INSTANCE, MokoAbility.INSTANCE, AbareHimatsuriAbility.INSTANCE);
