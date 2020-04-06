@@ -64,6 +64,5 @@ public class BubblyCoralEvents
 			renderer.getEntityModel().render(entity, limbSwing, limbSwingAmount, ageInTicks, headYaw - headYawOffset, headPitch, 0.0625F);
 		}
 		GlStateManager.popMatrix();
-
 	}
 }

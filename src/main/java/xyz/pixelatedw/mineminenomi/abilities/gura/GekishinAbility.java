@@ -23,7 +23,7 @@ public class GekishinAbility extends PunchAbility
 		this.setMaxCooldown(20);
 		this.setDescription("The user cracks the air, which launches a small but powerful shockwave towards the opponent.");
 
-		this.onHitEntity = this::onHitEntity;
+		this.onHitEntityEvent = this::onHitEntity;
 	}
 
 	private float onHitEntity(PlayerEntity player, LivingEntity target)

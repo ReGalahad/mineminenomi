@@ -16,7 +16,7 @@ public class KachiageHaisokuAbility extends PunchAbility
 		this.setMaxCooldown(8);
 		this.setDescription("The user delivers a powerful kick to the opponent's chin.");
 
-		this.onHitEntity = this::onHitEntity;
+		this.onHitEntityEvent = this::onHitEntity;
 	}
 	
 	private float onHitEntity(PlayerEntity player, LivingEntity target)

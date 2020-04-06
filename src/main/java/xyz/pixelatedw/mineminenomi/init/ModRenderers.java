@@ -13,6 +13,7 @@ import xyz.pixelatedw.mineminenomi.blocks.tileentities.dials.ImpactDialTileEntit
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.dials.MilkyDialTileEntity;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.dials.RejectDialTileEntity;
 import xyz.pixelatedw.mineminenomi.entities.ChargingUrsusShockEntity;
+import xyz.pixelatedw.mineminenomi.entities.PhysicalBodyEntity;
 import xyz.pixelatedw.mineminenomi.entities.VivreCardEntity;
 import xyz.pixelatedw.mineminenomi.entities.WantedPosterPackageEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.bandits.EntityBanditWithSword;
@@ -40,6 +41,7 @@ import xyz.pixelatedw.mineminenomi.renderers.entities.ChargingUrsusShockRenderer
 import xyz.pixelatedw.mineminenomi.renderers.entities.CloudRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.DoppelmanRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.GenericMobRenderer;
+import xyz.pixelatedw.mineminenomi.renderers.entities.PhysicalBodyRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.VivreCardRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.WantedPosterPackageRenderer;
 
@@ -86,5 +88,6 @@ public class ModRenderers
 		RenderingRegistry.registerEntityRenderingHandler(WantedPosterPackageEntity.class, new WantedPosterPackageRenderer.Factory());
 		RenderingRegistry.registerEntityRenderingHandler(VivreCardEntity.class, new VivreCardRenderer.Factory());
 		RenderingRegistry.registerEntityRenderingHandler(ChargingUrsusShockEntity.class, new ChargingUrsusShockRenderer.Factory());
+		RenderingRegistry.registerEntityRenderingHandler(PhysicalBodyEntity.class, new PhysicalBodyRenderer.Factory());
     }
 }

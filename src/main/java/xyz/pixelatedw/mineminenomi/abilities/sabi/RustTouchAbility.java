@@ -27,7 +27,7 @@ public class RustTouchAbility extends PunchAbility
 		this.setMaxCooldown(15);
 		this.setDescription("Rusts the enemy and the items equipped on them");
 		
-		this.onHitEntity = this::onHitEntity;
+		this.onHitEntityEvent = this::onHitEntity;
 	}
 	
 	private float onHitEntity(PlayerEntity player, LivingEntity target)

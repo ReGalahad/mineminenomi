@@ -22,7 +22,7 @@ public class MesAbility extends PunchAbility
 		this.setMaxCooldown(5);
 		this.setDescription("Removes the heart of the user's target which they can then damage to hurt the opponent");
 
-		this.onHitEntity = this::onHitEntity;
+		this.onHitEntityEvent = this::onHitEntity;
 	}
 
 	private float onHitEntity(PlayerEntity player, LivingEntity target)

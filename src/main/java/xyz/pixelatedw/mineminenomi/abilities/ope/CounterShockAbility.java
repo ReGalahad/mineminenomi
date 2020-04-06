@@ -23,7 +23,7 @@ public class CounterShockAbility extends PunchAbility
 		this.setMaxCooldown(10);
 		this.setDescription("Releases a strong electrical current which shocks the opponent");
 		
-		this.onHitEntity = this::onHitEntity;
+		this.onHitEntityEvent = this::onHitEntity;
 	}
 	
 	private float onHitEntity(PlayerEntity player, LivingEntity target)

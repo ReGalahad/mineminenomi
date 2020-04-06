@@ -17,7 +17,7 @@ public class HanpatsuAbility extends PunchAbility
 		this.setMaxCooldown(4);
 		this.setDescription("Anyone the user punches gets sent flying far into the air.");
 
-		this.onHitEntity = this::onHitEntity;
+		this.onHitEntityEvent = this::onHitEntity;
 	}
 
 	private float onHitEntity(PlayerEntity player, LivingEntity target)
