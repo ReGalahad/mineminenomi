@@ -51,18 +51,23 @@ public class SphereModel extends EntityModel
 	}
 
 	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+	public void render(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
 	{
-		this.shape1.render(f5);
+		this.shape1.render(scale);
 	}
 
 	/**
 	 * This is a helper function from Tabula to set the rotation of model parts
 	 */
-	public void setRotateAngle(RendererModel RendererModel, float x, float y, float z)
+	public void setRotateAngle(RendererModel model, float x, float y, float z)
 	{
-		RendererModel.rotateAngleX = x;
-		RendererModel.rotateAngleY = y;
-		RendererModel.rotateAngleZ = z;
+		model.rotateAngleX = x;
+		model.rotateAngleY = y;
+		model.rotateAngleZ = z;
+	}
+	
+	public RendererModel getModel()
+	{
+		return this.shape1;
 	}
 }

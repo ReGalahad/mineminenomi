@@ -1,11 +1,9 @@
 package xyz.pixelatedw.mineminenomi.particles.effects.yuki;
 
-import java.util.Random;
-
-import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
-import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
+import xyz.pixelatedw.mineminenomi.particles.data.GenericParticleData;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.wypi.WyHelper;
 
@@ -17,30 +15,27 @@ public class FubukiParticleEffect extends ParticleEffect
 	{
 		for (int i = 0; i < 1024; i++)
 		{
-			double offsetX = (new Random().nextInt(50) + 1.0D - 25.0D) / 1.0D;
-			double offsetY = (new Random().nextInt(50) + 1.0D - 25.0D) / 1.0D;
-			double offsetZ = (new Random().nextInt(50) + 1.0D - 25.0D) / 1.0D;
+			double offsetX = WyHelper.randomWithRange(-15, 15) + WyHelper.randomDouble();
+			double offsetY = WyHelper.randomWithRange(0, 20) + WyHelper.randomDouble();
+			double offsetZ = WyHelper.randomWithRange(-15, 15) + WyHelper.randomDouble();
 
 			motionX = WyHelper.randomWithRange(-1, 1) + WyHelper.randomDouble();
-			motionY = WyHelper.randomWithRange(-1, 1) + WyHelper.randomDouble();
 			motionZ = WyHelper.randomWithRange(-1, 1) + WyHelper.randomDouble();
 
-			double middlePoint = 0.2D;
-			middlePoint *= (WyHelper.randomDouble() * 2) + 0.3F;
+			double middlePoint = 1.2D;
 
-			motionX *= middlePoint / 2;
-			motionY *= middlePoint / 2;
-			motionZ *= middlePoint / 2;
-
-			SimpleParticle cp = new SimpleParticle(world, ModResources.YUKI,
-					posX + offsetX, 
-					posY + offsetY,
-					posZ + offsetZ, 
-					motionX, 
-					0, 
-					motionZ)
-					.setParticleAge(300).setParticleGravity(3).setParticleScale((float) (1 + WyHelper.randomWithRange(0, 2)));
-			Minecraft.getInstance().particles.addEffect(cp);
+			motionX *= middlePoint / 25;
+			motionZ *= middlePoint / 25;
+		
+			float scale = (float) (1 + WyHelper.randomWithRange(0, 3));
+			
+			GenericParticleData data = new GenericParticleData();
+			data.setTexture(ModResources.YUKI);
+			data.setLife(300);
+			data.setSize(scale);
+			data.setMotion(motionX, -0.05, motionY);
+			data.setHasMotionDecay(false);
+			WyHelper.spawnParticles(data, (ServerWorld) world, posX + offsetX, posY + offsetY, posZ + offsetZ);
 		}		
 	}
 

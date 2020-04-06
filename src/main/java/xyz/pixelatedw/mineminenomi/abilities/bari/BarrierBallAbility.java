@@ -37,7 +37,6 @@ public class BarrierBallAbility extends ContinuousAbility
 		{
 			RayTraceResult mop = WyHelper.rayTraceBlocks(player);
 			World world = player.world;
-			System.out.println(player.isSneaking());
 			if (player.isSneaking())
 				this.posList.addAll(AbilityHelper.createEmptySphere(world, (int) player.posX, (int) player.posY, (int) player.posZ, 5, ModBlocks.BARRIER, "air", "nogrief"));
 			else if (mop != null)

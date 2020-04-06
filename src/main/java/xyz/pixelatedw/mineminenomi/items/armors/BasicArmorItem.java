@@ -30,7 +30,7 @@ public class BasicArmorItem extends ArmorItem
 	@Nullable
 	public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, A _default)
 	{
-		A armorModel = (A) new BipedModel(0.1F);
+		A armorModel = (A) new BipedModel(0.5F);
 
 		return armorModel;
 	}
