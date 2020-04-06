@@ -17,7 +17,7 @@ public class SoruAbility extends ContinuousAbility
 		this.setThreshold(20);
 		this.setDescription("Allows the user to move at an extremely high speed.");
 
-		this.duringContinuity = this::duringContinuity;
+		this.duringContinuityEvent = this::duringContinuity;
 		this.onEndContinuityEvent = this::onEndContinuityEvent;
 	}
 

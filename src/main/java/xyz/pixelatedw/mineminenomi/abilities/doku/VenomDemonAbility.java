@@ -23,7 +23,7 @@ public class VenomDemonAbility extends ZoanAbility
 		this.setThreshold(60);
 		this.setDescription("The user coats himself in layers of strong corrosive venom, becoming a Venom Demon and leaving a highly poisonous trail.");
 
-		this.duringContinuity = this::duringContinuity;
+		this.duringContinuityEvent = this::duringContinuity;
 	}
 	
 	private void duringContinuity(PlayerEntity player, int timer)

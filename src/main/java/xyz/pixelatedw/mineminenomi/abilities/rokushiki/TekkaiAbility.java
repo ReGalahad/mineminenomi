@@ -17,7 +17,7 @@ public class TekkaiAbility extends ContinuousAbility
 		this.setThreshold(10);
 		this.setDescription("Hardens the user's body to protect themselves, but they're unable to move.");
 
-		this.duringContinuity = this::duringContinuity;
+		this.duringContinuityEvent = this::duringContinuity;
 		this.onEndContinuityEvent = this::onEndContinuityEvent;
 	}
 

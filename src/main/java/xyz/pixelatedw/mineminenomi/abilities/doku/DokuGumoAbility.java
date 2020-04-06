@@ -26,7 +26,7 @@ public class DokuGumoAbility extends ContinuousAbility
 		this.setThreshold(20);
 		this.setDescription("Creates a dense cloud of poisonous smoke, which moves along with the user and poisons and blinds everyone inside.");
 
-		this.duringContinuity = this::duringContinuity;
+		this.duringContinuityEvent = this::duringContinuity;
 	}
 	
 	private void duringContinuity(PlayerEntity player, int timer)

@@ -1,25 +1,9 @@
 package xyz.pixelatedw.mineminenomi.events.devilfruits;
 
-import java.util.Arrays;
-
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
-import xyz.pixelatedw.mineminenomi.config.CommonConfig;
-import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
-import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
-import xyz.pixelatedw.mineminenomi.init.ModResources;
-import xyz.pixelatedw.mineminenomi.packets.server.SSpecialFlyingPacket;
-import xyz.pixelatedw.mineminenomi.particles.CustomParticleData;
 import xyz.pixelatedw.wypi.APIConfig;
-import xyz.pixelatedw.wypi.abilities.Ability;
-import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
-import xyz.pixelatedw.wypi.data.ability.IAbilityData;
-import xyz.pixelatedw.wypi.network.WyNetwork;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class SpecialFlyingEvents
@@ -27,7 +11,7 @@ public class SpecialFlyingEvents
 	@SubscribeEvent
 	public static void onEntityUpdate(LivingUpdateEvent event)
 	{
-		if (event.getEntityLiving() instanceof PlayerEntity)
+		/*if (event.getEntityLiving() instanceof PlayerEntity)
 		{
 			PlayerEntity player = (PlayerEntity) event.getEntityLiving();
 			IDevilFruit props = DevilFruitCapability.get(player);
@@ -96,6 +80,6 @@ public class SpecialFlyingEvents
 					}
 				}
 			}
-		}
+		}*/
 	}
 }

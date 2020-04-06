@@ -20,7 +20,7 @@ public abstract class ContinuousAbility extends Ability
 	// Setting the defaults so that no crash occurs and so they will be null safe.
 	protected IOnStartContinuity onStartContinuityEvent = (player) -> { return true; };
 	protected IOnEndContinuity onEndContinuityEvent = (player) -> { return true; };
-	protected IDuringContinuity duringContinuity = (player, passiveTime) -> {};
+	protected IDuringContinuity duringContinuityEvent = (player, passiveTime) -> {};
 	
 	public ContinuousAbility(String name, AbilityCategory category)
 	{
@@ -94,7 +94,7 @@ public abstract class ContinuousAbility extends Ability
 		{
 			this.continueTime++;		
 			
-			this.duringContinuity.duringContinuity(player, this.continueTime);
+			this.duringContinuityEvent.duringContinuity(player, this.continueTime);
 			
 			if(this.threshold > 0 && this.continueTime >= this.threshold)
 				this.stopContinuity(player);

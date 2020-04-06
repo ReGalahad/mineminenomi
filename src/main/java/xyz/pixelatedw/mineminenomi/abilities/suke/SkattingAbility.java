@@ -16,7 +16,7 @@ public class SkattingAbility extends ContinuousAbility
 		super("Skatting", AbilityCategory.DEVIL_FRUIT);
 		this.setDescription("Turns the user's entire body invisible.");
 		
-		this.duringContinuity = this::duringContinuity;
+		this.duringContinuityEvent = this::duringContinuity;
 		this.onEndContinuityEvent = this::onEndContinuityEvent;
 	}
 
