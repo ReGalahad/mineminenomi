@@ -45,6 +45,8 @@ import xyz.pixelatedw.mineminenomi.abilities.sniper.KaenBoshiAbility;
 import xyz.pixelatedw.mineminenomi.abilities.sniper.KemuriBoshiAbility;
 import xyz.pixelatedw.mineminenomi.abilities.sniper.RenpatsuNamariBoshiAbility;
 import xyz.pixelatedw.mineminenomi.abilities.sniper.SakuretsuSabotenBoshiAbility;
+import xyz.pixelatedw.mineminenomi.abilities.supa.AtomicSpurtAbility;
+import xyz.pixelatedw.mineminenomi.abilities.supa.SparClawAbility;
 import xyz.pixelatedw.mineminenomi.abilities.swordsman.OTatsumakiAbility;
 import xyz.pixelatedw.mineminenomi.abilities.swordsman.SanbyakurokujuPoundHoAbility;
 import xyz.pixelatedw.mineminenomi.abilities.swordsman.ShiShishiSonsonAbility;
@@ -333,10 +335,10 @@ public class AbilityHelper
 	{
 		IAbilityData abilityProps = AbilityDataCapability.get(player);
 		IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
-		Ability sparClaw = null;// abilityProps.getHotbarAbilityFromName(ModAttributes.SPAR_CLAW.getAttributeName());
-
+		Ability sparClawAbility = abilityProps.getEquippedAbility(SparClawAbility.INSTANCE);
+		
 		boolean hasSwordInHand = ItemsHelper.isSword(player.getHeldItemMainhand());
-		boolean hasSparClaw = devilFruitProps.getDevilFruit().equalsIgnoreCase("supa_supa") && sparClaw != null && sparClaw.isContinuous();
+		boolean hasSparClaw = devilFruitProps.getDevilFruit().equalsIgnoreCase("supa_supa") && sparClawAbility != null && sparClawAbility.isContinuous();
 		
 		if (hasSwordInHand || hasSparClaw)
 		{

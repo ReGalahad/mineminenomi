@@ -1,7 +1,6 @@
 package xyz.pixelatedw.mineminenomi.abilities.zushi;
 
 import net.minecraft.entity.player.PlayerEntity;
-import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.abilities.ContinuousAbility;
 

@@ -68,7 +68,6 @@ public class VoltVariAbility extends ChargeableAbility
 	private boolean onEndChargingEvent(PlayerEntity player)
 	{
 		double truePower = Math.abs(this.power - this.getMaxChargeTime());
-		double trueCooldown = (truePower / 20) * 3;
 		AbilityProjectileEntity projectile = null;
 		
 		if (truePower > 0 && truePower <= 50)
