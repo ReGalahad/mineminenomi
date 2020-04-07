@@ -1,6 +1,5 @@
 package xyz.pixelatedw.wypi;
 
-import io.netty.util.internal.StringUtil;
 import net.minecraft.util.Util;
 import xyz.pixelatedw.wypi.debug.WyDebug;
 

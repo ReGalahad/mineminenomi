@@ -12,7 +12,6 @@ import xyz.pixelatedw.mineminenomi.items.HeartItem;
 import xyz.pixelatedw.mineminenomi.items.SeaKingMeatItem;
 import xyz.pixelatedw.mineminenomi.items.UltraColaItem;
 import xyz.pixelatedw.mineminenomi.items.VivreCardItem;
-import xyz.pixelatedw.mineminenomi.items.VivreCardItem;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyRegistry;
 

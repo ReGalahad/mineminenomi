@@ -45,7 +45,6 @@ import xyz.pixelatedw.mineminenomi.abilities.sniper.KaenBoshiAbility;
 import xyz.pixelatedw.mineminenomi.abilities.sniper.KemuriBoshiAbility;
 import xyz.pixelatedw.mineminenomi.abilities.sniper.RenpatsuNamariBoshiAbility;
 import xyz.pixelatedw.mineminenomi.abilities.sniper.SakuretsuSabotenBoshiAbility;
-import xyz.pixelatedw.mineminenomi.abilities.supa.AtomicSpurtAbility;
 import xyz.pixelatedw.mineminenomi.abilities.supa.SparClawAbility;
 import xyz.pixelatedw.mineminenomi.abilities.swordsman.OTatsumakiAbility;
 import xyz.pixelatedw.mineminenomi.abilities.swordsman.SanbyakurokujuPoundHoAbility;
