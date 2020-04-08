@@ -33,15 +33,15 @@ import xyz.pixelatedw.mineminenomi.models.blocks.Dial03Model;
 import xyz.pixelatedw.mineminenomi.models.blocks.Dial04Model;
 import xyz.pixelatedw.mineminenomi.models.entities.mobs.humanoids.DojoSenseiModel;
 import xyz.pixelatedw.mineminenomi.models.entities.mobs.humanoids.SimpleHumanModel;
+import xyz.pixelatedw.mineminenomi.renderers.abilities.ChargingUrsusShockRenderer;
+import xyz.pixelatedw.mineminenomi.renderers.abilities.PhysicalBodyRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.blocks.DialTileEntityRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.blocks.WantedPosterTileEntityRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.blocks.WantedPostersPackageTileEntityRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.BlackKnightRenderer;
-import xyz.pixelatedw.mineminenomi.renderers.entities.ChargingUrsusShockRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.CloudRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.DoppelmanRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.GenericMobRenderer;
-import xyz.pixelatedw.mineminenomi.renderers.entities.PhysicalBodyRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.VivreCardRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.WantedPosterPackageRenderer;
 

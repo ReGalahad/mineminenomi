@@ -15,7 +15,7 @@ import xyz.pixelatedw.wypi.abilities.renderers.AbilityProjectileRenderer;
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class MeroProjectiles
 {
-	public static final EntityType MERO_MERO_MELLOW = WyRegistry.createEntityType(MeroMeroMellowProjectile::new).size(1.5F, 1.5F).build("mero_mero_mellow");
+	public static final EntityType MERO_MERO_MELLOW = WyRegistry.createEntityType(MeroMeroMellowProjectile::new).size(3.5F, 3.5F).build("mero_mero_mellow");
 	public static final EntityType PISTOL_KISS = WyRegistry.createEntityType(PistolKissProjectile::new).size(0.5F, 0.5F).build("pistol_kiss");
 	public static final EntityType SLAVE_ARROW = WyRegistry.createEntityType(SlaveArrowProjectile::new).size(0.5F, 0.5F).build("slave_arrow");
 

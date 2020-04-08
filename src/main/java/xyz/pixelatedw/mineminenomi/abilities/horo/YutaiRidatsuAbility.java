@@ -9,7 +9,7 @@ public class YutaiRidatsuAbility extends ContinuousAbility
 {
 	public static final YutaiRidatsuAbility INSTANCE = new YutaiRidatsuAbility();
 
-	private int posX, posY, posZ;
+	private double posX, posY, posZ;
 	private PhysicalBodyEntity body;
 	
 	public YutaiRidatsuAbility()
@@ -31,11 +31,12 @@ public class YutaiRidatsuAbility extends ContinuousAbility
 		player.setMotion(0, 5, 0);
 		player.velocityChanged = true;
 		
-		this.posX = player.getPosition().getX();
-		this.posY = player.getPosition().getY();
-		this.posZ = player.getPosition().getZ();
+		this.posX = player.getPositionVec().getX();
+		this.posY = player.getPositionVec().getY();
+		this.posZ = player.getPositionVec().getZ();
 		
 		this.body = new PhysicalBodyEntity(player.world);
+		this.body.setPositionAndRotation(player.posX, player.posY, player.posZ, player.rotationYaw, player.rotationPitch);
 		this.body.setOwner(player.getUniqueID());
 		player.world.addEntity(this.body);
 		

@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.renderers.entities;
+package xyz.pixelatedw.mineminenomi.renderers.abilities;
 
 import org.lwjgl.opengl.GL11;
 

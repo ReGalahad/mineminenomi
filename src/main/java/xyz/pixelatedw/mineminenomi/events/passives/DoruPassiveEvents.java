@@ -11,7 +11,7 @@ import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.init.ModEffects;
-import xyz.pixelatedw.mineminenomi.models.effects.CandleLockModel;
+import xyz.pixelatedw.mineminenomi.models.abilities.CandleLockModel;
 import xyz.pixelatedw.wypi.APIConfig;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID, value = Dist.CLIENT)

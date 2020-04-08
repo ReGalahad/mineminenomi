@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.renderers.effects;
+package xyz.pixelatedw.mineminenomi.renderers.abilities;
 
 import org.lwjgl.opengl.GL11;
 
@@ -9,7 +9,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import xyz.pixelatedw.mineminenomi.models.effects.AbareHimatsuriModel;
+import xyz.pixelatedw.mineminenomi.models.abilities.AbareHimatsuriModel;
 
 @OnlyIn(Dist.CLIENT)
 public class AbareHimatsuriRenderer extends EntityRenderer
