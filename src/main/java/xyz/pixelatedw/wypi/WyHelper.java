@@ -296,7 +296,7 @@ public class WyHelper
 			}
 		}
 		
-		return null;
+		return new EntityRayTraceResult(null, endVec);
 	}
 
 	public static void sendMsgToPlayer(PlayerEntity player, String text)

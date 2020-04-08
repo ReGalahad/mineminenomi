@@ -11,7 +11,7 @@ public class AtomicSpurtAbility extends ContinuousAbility
 	{
 		super("Atomic Spurt", AbilityCategory.DEVIL_FRUIT);
 		this.setMaxCooldown(15);
-		this.setThreshold(10);
+		this.setThreshold(30);
 		this.setDescription("Allows the user to skate around using blades in their feet");
 	}
 }
