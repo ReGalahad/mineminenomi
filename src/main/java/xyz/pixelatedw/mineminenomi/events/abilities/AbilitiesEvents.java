@@ -5,6 +5,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedOutEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.wypi.APIConfig;
@@ -69,6 +70,26 @@ public class AbilitiesEvents
 					event.setAmount(damage);
 				}
 			}
+		}
+	}
+
+	@SubscribeEvent
+	public static void onPlayarLogsOut(PlayerLoggedOutEvent event)
+	{
+		PlayerEntity player = event.getPlayer();
+
+		IAbilityData props = AbilityDataCapability.get(player);
+
+		for (Ability ability : props.getEquippedAbilities(AbilityCategory.ALL))
+		{
+			if (ability == null)
+				continue;
+
+			if (ability instanceof ChargeableAbility && ability.isCharging())
+				((ChargeableAbility) props.getEquippedAbility(ability)).stopCharging(player);
+
+			if (ability instanceof ContinuousAbility && ability.isContinuous())
+				((ContinuousAbility) props.getEquippedAbility(ability)).stopContinuity(player);
 		}
 	}
 }

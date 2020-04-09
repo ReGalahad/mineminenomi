@@ -33,6 +33,7 @@ public class PhysicalBodyRenderer extends EntityRenderer<PhysicalBodyEntity>
 			GlStateManager.color4f(1, 1, 1, 1);
 			GlStateManager.translated(x, y + 1.5, z);
 			GlStateManager.rotated(180, 0, 0, 1);
+			GlStateManager.rotated(entity.rotationYaw + 180, 0, 1, 0);
 			
 			GlStateManager.enableBlend();
 			GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);
