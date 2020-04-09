@@ -12,6 +12,7 @@ import xyz.pixelatedw.mineminenomi.abilities.nikyu.UrsusShockAbility;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.wypi.APIConfig;
+import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 
@@ -34,9 +35,12 @@ public class NikyuPassiveEvents
 		IAbilityData abilityProps = AbilityDataCapability.get(player);
 		PlayerRenderer renderer = (PlayerRenderer) event.getRenderer();
 
-		if (abilityProps.getEquippedAbility(UrsusShockAbility.INSTANCE).isCharging())
-		{
-			renderer.getEntityModel().rightArmPose = ArmPose.THROW_SPEAR;
-		}
+		Ability ability = abilityProps.getEquippedAbility(UrsusShockAbility.INSTANCE);
+		boolean isActive = ability != null && ability.isCharging();
+
+		if (!isActive)
+			return;
+
+		renderer.getEntityModel().rightArmPose = ArmPose.THROW_SPEAR;
 	}
 }

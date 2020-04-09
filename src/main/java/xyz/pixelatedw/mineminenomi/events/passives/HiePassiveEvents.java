@@ -9,8 +9,6 @@ import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.wypi.APIConfig;
-import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
-import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class HiePassiveEvents
@@ -24,7 +22,6 @@ public class HiePassiveEvents
 
 		PlayerEntity player = (PlayerEntity) event.getEntityLiving();
 		IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
-		IAbilityData abilityProps = AbilityDataCapability.get(player);
 				
 		if (!devilFruitProps.getDevilFruit().equals("hie_hie"))
 			return;

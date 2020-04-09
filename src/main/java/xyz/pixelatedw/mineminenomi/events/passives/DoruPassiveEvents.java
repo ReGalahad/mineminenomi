@@ -3,7 +3,6 @@ package xyz.pixelatedw.mineminenomi.events.passives;
 import com.mojang.blaze3d.platform.GlStateManager;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.LivingRenderer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -20,10 +19,9 @@ public class DoruPassiveEvents
 	private static final CandleLockModel CANDLE_LOCK = new CandleLockModel();
 
 	@SubscribeEvent
-	public static void onEntityRendered(RenderLivingEvent.Pre event)
+	public static void onEntityRendered(RenderLivingEvent.Post event)
 	{
 		LivingEntity entity = event.getEntity();
-		LivingRenderer renderer = event.getRenderer();
 
 		if (!entity.isPotionActive(ModEffects.CANDLE_LOCK))
 			return;

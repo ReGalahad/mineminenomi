@@ -4,7 +4,6 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.platform.GlStateManager.DestFactor;
 import com.mojang.blaze3d.platform.GlStateManager.SourceFactor;
 
-import net.minecraft.client.renderer.entity.LivingRenderer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraftforge.api.distmarker.Dist;
@@ -70,7 +69,6 @@ public class HoroPassiveEvents
 			return;	
 		
 		PlayerEntity player = (PlayerEntity) event.getEntity();
-		LivingRenderer renderer = event.getRenderer();
 
 		if(!isSpirit(player))
 			return;

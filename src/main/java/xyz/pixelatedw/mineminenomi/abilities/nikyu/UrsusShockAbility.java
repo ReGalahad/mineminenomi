@@ -69,7 +69,6 @@ public class UrsusShockAbility extends ChargeableAbility
 		double truePower = Math.abs(this.power - this.getMaxChargeTime());
 		AbilityProjectileEntity projectile = null;
 		
-		System.out.println(truePower);
 		if (truePower > 0 && truePower <= 70)
 		{
 			projectile = new UrsusShock25Projectile(player.world, player);
