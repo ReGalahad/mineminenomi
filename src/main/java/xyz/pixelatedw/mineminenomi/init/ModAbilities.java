@@ -15,6 +15,8 @@ import xyz.pixelatedw.mineminenomi.abilities.bomu.ExplosivePunchAbility;
 import xyz.pixelatedw.mineminenomi.abilities.bomu.KickBombAbility;
 import xyz.pixelatedw.mineminenomi.abilities.bomu.NoseFancyCannonAbility;
 import xyz.pixelatedw.mineminenomi.abilities.bomu.ZenshinKibakuAbility;
+import xyz.pixelatedw.mineminenomi.abilities.chiyu.ChiyupopoAbility;
+import xyz.pixelatedw.mineminenomi.abilities.chiyu.HealingTouchAbility;
 import xyz.pixelatedw.mineminenomi.abilities.cyborg.ColaOverdriveAbility;
 import xyz.pixelatedw.mineminenomi.abilities.cyborg.CoupDeVentAbility;
 import xyz.pixelatedw.mineminenomi.abilities.cyborg.FreshFireAbility;
@@ -159,7 +161,7 @@ public class ModAbilities
 	public static final AkumaNoMiItem DOA_DOA_NO_MI = new AkumaNoMiItem("Doa Doa no Mi", EnumFruitType.PARAMECIA);
 	public static final AkumaNoMiItem USHI_USHI_NO_MI_GIRAFFE = new AkumaNoMiItem("Ushi Ushi no Mi, Model Giraffe", EnumFruitType.ZOAN);
 	public static final AkumaNoMiItem MOGU_MOGU_NO_MI = new AkumaNoMiItem("Mogu Mogu no Mi", EnumFruitType.ZOAN);
-	public static final AkumaNoMiItem CHIYU_CHIYU_NO_MI = new AkumaNoMiItem("Chiyu Chiyu no Mi", EnumFruitType.PARAMECIA);
+	public static final AkumaNoMiItem CHIYU_CHIYU_NO_MI = new AkumaNoMiItem("Chiyu Chiyu no Mi", EnumFruitType.PARAMECIA, HealingTouchAbility.INSTANCE, ChiyupopoAbility.INSTANCE);
 	public static final AkumaNoMiItem HITO_HITO_NO_MI = new AkumaNoMiItem("Hito Hito no Mi", EnumFruitType.ZOAN);
 	public static final AkumaNoMiItem SABI_SABI_NO_MI = new AkumaNoMiItem("Sabi Sabi no Mi", EnumFruitType.PARAMECIA, RustTouchAbility.INSTANCE);
 	public static final AkumaNoMiItem ZOU_ZOU_NO_MI = new AkumaNoMiItem("Zou Zou no Mi", EnumFruitType.ZOAN);

@@ -12,6 +12,7 @@ import xyz.pixelatedw.mineminenomi.items.HeartItem;
 import xyz.pixelatedw.mineminenomi.items.SeaKingMeatItem;
 import xyz.pixelatedw.mineminenomi.items.UltraColaItem;
 import xyz.pixelatedw.mineminenomi.items.VivreCardItem;
+import xyz.pixelatedw.mineminenomi.items.WateringCanItem;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyRegistry;
 
@@ -29,6 +30,7 @@ public class ModItems
 	public static final Item KEY = new Item(new Properties().group(ModCreativeTabs.MISC));
 	public static final Item VIVRE_CARD = new VivreCardItem();
 	public static final Item BUBBLY_CORAL = new BubblyCoralItem();
+	public static final Item WATERING_CAN = new WateringCanItem();
 
 	// Devil Fruit Boxes
 	public static final Item TIER_1_BOX = new AkumaNoMiBoxItem(1);
@@ -68,5 +70,6 @@ public class ModItems
 		WyRegistry.registerItem(TIER_3_BOX, "Golden Box");
 		WyRegistry.registerItem(BUBBLY_CORAL, "Bubbly Coral");
 		WyRegistry.registerItem(VIVRE_CARD, "Vivre Card");
+		WyRegistry.registerItem(WATERING_CAN, "Watering Can");
 	}
 }

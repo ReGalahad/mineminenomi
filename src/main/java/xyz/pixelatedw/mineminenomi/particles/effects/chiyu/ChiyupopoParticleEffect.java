@@ -2,10 +2,10 @@ package xyz.pixelatedw.mineminenomi.particles.effects.chiyu;
 
 import java.util.Random;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
-import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
+import xyz.pixelatedw.mineminenomi.particles.data.GenericParticleData;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.wypi.WyHelper;
 
@@ -33,38 +33,26 @@ public class ChiyupopoParticleEffect extends ParticleEffect
 				motionY = 0.05 + (rand.nextDouble() / 7);
 				motionZ = z / 4;
 				
-				SimpleParticle cp = new SimpleParticle(world, ModResources.CHIYU,
-						posX + (x * 1.25) + WyHelper.randomDouble(), 
-						posY + y,
-						posZ + (z * 1.25) + WyHelper.randomDouble(), 
-						motionX,
-						motionY,
-						motionZ)
-						.setParticleScale(2F)
-						.setParticleAge(-3);
-				Minecraft.getInstance().particles.addEffect(cp);
+				GenericParticleData data = new GenericParticleData();
+				data.setTexture(ModResources.CHIYU);
+				data.setLife(4);
+				data.setSize(2F);
+				data.setMotion(motionX, motionY, motionZ);
+				WyHelper.spawnParticles(data, (ServerWorld) world, posX + (x * 0.75) + WyHelper.randomDouble(), posY + y, posZ + (z * 0.75) + WyHelper.randomDouble());
 
-				cp = new SimpleParticle(world, ModResources.CHIYU,
-						posX + (x * 2.0) + WyHelper.randomDouble(), 
-						posY + y,
-						posZ + (z * 2.0) + WyHelper.randomDouble(), 
-						motionX,
-						motionY,
-						motionZ)
-						.setParticleScale(2.5F)
-						.setParticleAge(1);
-				Minecraft.getInstance().particles.addEffect(cp);
-				
-				cp = new SimpleParticle(world, ModResources.CHIYU,
-						posX + (x * 3.25) + WyHelper.randomDouble(), 
-						posY + y,
-						posZ + (z * 3.25) + WyHelper.randomDouble(), 
-						motionX,
-						motionY + 0.1,
-						motionZ)
-						.setParticleScale(5F)
-						.setParticleAge(3);
-				Minecraft.getInstance().particles.addEffect(cp);
+				data = new GenericParticleData();
+				data.setTexture(ModResources.CHIYU);
+				data.setLife(7);
+				data.setSize(2.5F);
+				data.setMotion(motionX, motionY, motionZ);
+				WyHelper.spawnParticles(data, (ServerWorld) world, posX + (x * 2.0) + WyHelper.randomDouble(), posY + y, posZ + (z * 2.0) + WyHelper.randomDouble());
+
+				data = new GenericParticleData();
+				data.setTexture(ModResources.CHIYU);
+				data.setLife(10);
+				data.setSize(4.5F);
+				data.setMotion(motionX, motionY * 2.25, motionZ);
+				WyHelper.spawnParticles(data, (ServerWorld) world, posX + (x * 3.25) + WyHelper.randomDouble(), posY + y, posZ + (z * 3.25) + WyHelper.randomDouble());
 			}
 		}
 	}
