@@ -31,7 +31,6 @@ public class AbilityDataCapability
 	{
 		CapabilityManager.INSTANCE.register(IAbilityData.class, new Capability.IStorage<IAbilityData>()
 		{
-
 			@Override
 			public INBT writeNBT(Capability<IAbilityData> capability, IAbilityData instance, Direction side)
 			{
