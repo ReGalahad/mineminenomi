@@ -2,9 +2,11 @@ package xyz.pixelatedw.mineminenomi.events.passives;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 
-import net.minecraft.client.renderer.entity.LivingRenderer;
+import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
+import net.minecraft.client.renderer.entity.PlayerRenderer;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraftforge.api.distmarker.Dist;
@@ -47,52 +49,25 @@ public class HoruPassiveEvents
 
 	@SubscribeEvent
 	@OnlyIn(Dist.CLIENT)
-	public static void onEntityRendered(RenderLivingEvent.Pre event)
-	{
-		LivingEntity entity = event.getEntity();
-		LivingRenderer renderer = event.getRenderer();
-
-		if (!(renderer.getEntityModel() instanceof BipedModel))
-			return;
-
-		BipedModel model = (BipedModel) renderer.getEntityModel();
-
-		if (!entity.isPotionActive(ModEffects.GANMEN_SEICHO_HORMONE))
-			return;
-
-		if (entity.getActivePotionEffect(ModEffects.GANMEN_SEICHO_HORMONE).getDuration() <= 0)
-			entity.removePotionEffect(ModEffects.GANMEN_SEICHO_HORMONE);
-
-		GlStateManager.pushMatrix();
-
-		GlStateManager.scaled(0, 0, 0);
-
-		// renderer.getEntityModel().boxList.get(0).showModel = false;
-		// renderer.getEntityModel().boxList.get(1).showModel = false;
-	}
-
-	@SubscribeEvent
-	@OnlyIn(Dist.CLIENT)
 	public static void onEntityRendered(RenderLivingEvent.Post event)
 	{
-		LivingEntity entity = event.getEntity();
-		LivingRenderer renderer = event.getRenderer();
-
-		if (!(renderer.getEntityModel() instanceof BipedModel))
+		if (!(event.getEntity() instanceof PlayerEntity))
 			return;
+		
+		PlayerEntity entity = (PlayerEntity) event.getEntity();
+		PlayerRenderer renderer = (PlayerRenderer) event.getRenderer();
 
-		BipedModel model = (BipedModel) renderer.getEntityModel();
+		AbstractClientPlayerEntity abstractOwner = (AbstractClientPlayerEntity) entity;
+		BipedModel model = renderer.getEntityModel();
 
 		if (!entity.isPotionActive(ModEffects.GANMEN_SEICHO_HORMONE))
 			return;
 
 		if (entity.getActivePotionEffect(ModEffects.GANMEN_SEICHO_HORMONE).getDuration() <= 0)
 			entity.removePotionEffect(ModEffects.GANMEN_SEICHO_HORMONE);
-
-		GlStateManager.popMatrix();
-
+		
 		GlStateManager.pushMatrix();
-		{
+		{	
 			GlStateManager.translatef((float) event.getX(), (float) event.getY() + 1.5F, (float) event.getZ());
 			GlStateManager.rotatef(180.0F, 1.0F, 0.0F, 0.0F);
 			GlStateManager.rotatef(180.0F, 0.0F, 1.0F, 0.0F);
@@ -107,17 +82,17 @@ public class HoruPassiveEvents
 			float limbSwingAmount = entity.prevLimbSwingAmount + (entity.limbSwingAmount - entity.prevLimbSwingAmount) * event.getPartialRenderTick();
 			float limbSwing = entity.limbSwing - entity.limbSwingAmount * (1.0F - event.getPartialRenderTick());
 			
+			renderer.bindTexture(renderer.getEntityTexture(abstractOwner));			
 			model.swingProgress = entity.getSwingProgress(event.getPartialRenderTick());
-			model.render(entity, limbSwing, limbSwingAmount, ageInTicks, headYaw - headYawOffset, headPitch, 0.06F);
-
+			
 			GlStateManager.scaled(3.5, 3.5, 3.5);
 
 			model.setVisible(false);
 			model.bipedHead.showModel = true;
 			if (model.isSneak)
-			{
 				GlStateManager.translated(0, -0.17, 0);
-			}
+			else
+				GlStateManager.translated(0, 0.02, 0);
 			model.render(entity, limbSwing, limbSwingAmount, ageInTicks, headYaw - headYawOffset, headPitch, 0.06F);
 		}
 		GlStateManager.popMatrix();
