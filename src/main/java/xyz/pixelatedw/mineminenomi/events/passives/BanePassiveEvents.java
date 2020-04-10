@@ -7,8 +7,6 @@ import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.wypi.APIConfig;
-import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
-import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class BanePassiveEvents
@@ -22,7 +20,6 @@ public class BanePassiveEvents
 		
 		PlayerEntity player = (PlayerEntity) event.getEntityLiving();
 		IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
-		IAbilityData abilityProps = AbilityDataCapability.get(player);
 		
 		if (!devilFruitProps.getDevilFruit().equals("bane_bane"))
 			return;

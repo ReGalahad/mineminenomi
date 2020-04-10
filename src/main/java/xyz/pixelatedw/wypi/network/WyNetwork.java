@@ -40,6 +40,9 @@ public class WyNetwork
 
 	public static <MSG> void sendTo(MSG msg, PlayerEntity player)
 	{
+		if(!(player instanceof ServerPlayerEntity))
+			return;
+		
 		INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), msg);
 	}
 

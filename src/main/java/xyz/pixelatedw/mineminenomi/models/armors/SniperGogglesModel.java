@@ -1,10 +1,16 @@
 package xyz.pixelatedw.mineminenomi.models.armors;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.client.renderer.entity.model.RendererModel;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import xyz.pixelatedw.mineminenomi.abilities.ZoomAbility;
+import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
+import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 
 @OnlyIn(Dist.CLIENT)
 public class SniperGogglesModel extends BipedModel
@@ -122,9 +128,23 @@ public class SniperGogglesModel extends BipedModel
 		
 		this.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
-		this.left_eye.offsetY = -0.1F;
-		this.right_eye.offsetY = -0.1F;
-		
+		if(entity instanceof PlayerEntity)
+		{
+			PlayerEntity player = Minecraft.getInstance().player;		
+			IAbilityData aprops = AbilityDataCapability.get(player);
+			
+			if(aprops.getEquippedAbility(ZoomAbility.INSTANCE) != null)
+			{
+				Ability ability = aprops.getEquippedAbility(ZoomAbility.INSTANCE);
+				
+				if(!ability.isContinuous())
+				{
+					this.left_eye.offsetY = -0.1F;
+					this.right_eye.offsetY = -0.1F;
+				}
+			}
+		}
+				
 		if(this.isSneak)
 			this.base.offsetY = 0.2F;
 		
