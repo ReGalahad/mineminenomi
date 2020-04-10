@@ -5,6 +5,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.world.World;
+import xyz.pixelatedw.mineminenomi.init.ModEffects;
 import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 
 public class NegativeHollowProjectile extends AbilityProjectileEntity
@@ -30,11 +31,14 @@ public class NegativeHollowProjectile extends AbilityProjectileEntity
 
 		this.setDamage(10);
 		
-		this.withEffects = () -> {
-			return new EffectInstance[] {
-					new EffectInstance(Effects.NAUSEA, 200, 1),
-					new EffectInstance(Effects.SLOWNESS, 200, 1)
-			};		
+		this.withEffects = () ->
+		{
+			return new EffectInstance[]
+			{
+				new EffectInstance(Effects.NAUSEA, 200, 1),
+				new EffectInstance(Effects.SLOWNESS, 200, 1), 
+				new EffectInstance(ModEffects.NEGATIVE, 300, 1)
+			};
 		};
 	}
 }
