@@ -12,7 +12,9 @@ import xyz.pixelatedw.wypi.data.quest.QuestDataCapability;
 import xyz.pixelatedw.wypi.data.quest.QuestDataProvider;
 import xyz.pixelatedw.wypi.network.WyNetwork;
 import xyz.pixelatedw.wypi.network.packets.client.CSyncAbilityDataPacket;
+import xyz.pixelatedw.wypi.network.packets.client.CSyncQuestDataPacket;
 import xyz.pixelatedw.wypi.network.packets.server.SSyncAbilityDataPacket;
+import xyz.pixelatedw.wypi.network.packets.server.SSyncQuestDataPacket;
 
 public class APIDefaults
 {	
@@ -23,9 +25,11 @@ public class APIDefaults
 	{
 		// Client
 		WyNetwork.registerPacket(CSyncAbilityDataPacket.class, CSyncAbilityDataPacket::encode, CSyncAbilityDataPacket::decode, CSyncAbilityDataPacket::handle);
+		WyNetwork.registerPacket(CSyncQuestDataPacket.class, CSyncQuestDataPacket::encode, CSyncQuestDataPacket::decode, CSyncQuestDataPacket::handle);
 
 		// Server
 		WyNetwork.registerPacket(SSyncAbilityDataPacket.class, SSyncAbilityDataPacket::encode, SSyncAbilityDataPacket::decode, SSyncAbilityDataPacket::handle);
+		WyNetwork.registerPacket(SSyncQuestDataPacket.class, SSyncQuestDataPacket::encode, SSyncQuestDataPacket::decode, SSyncQuestDataPacket::handle);
 	}
 
 	public static void initCapabilities()
