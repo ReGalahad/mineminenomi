@@ -17,7 +17,7 @@ public class SukePunchAbility extends PunchAbility
 		super("Suke Punch", AbilityCategory.DEVIL_FRUIT);
 		this.setDescription("Turns an entity's entire body invisible after hitting them.");
 
-		this.onHitEntity = this::onHitEntity;
+		this.onHitEntityEvent = this::onHitEntity;
 	}
 	
 	private float onHitEntity(PlayerEntity player, LivingEntity target)

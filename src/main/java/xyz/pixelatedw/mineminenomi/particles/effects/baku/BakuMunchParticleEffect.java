@@ -5,6 +5,7 @@ import net.minecraft.particles.BlockParticleData;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 
 public class BakuMunchParticleEffect extends ParticleEffect
@@ -12,7 +13,7 @@ public class BakuMunchParticleEffect extends ParticleEffect
 	@Override
 	public void spawn(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
 	{
-		for (int i = 0; i < 6; i++)
+		for (int i = 0; i < 3; i++)
 		{
 			double offsetX = world.rand.nextDouble();
 			double offsetY = 1;
@@ -20,12 +21,11 @@ public class BakuMunchParticleEffect extends ParticleEffect
 
 			BlockState blockState = world.getBlockState(new BlockPos(posX, posY, posZ).down());
 
-			world.addParticle(
-					new BlockParticleData(ParticleTypes.BLOCK, blockState), 
-					posX + offsetX, 
-					posY + offsetY, 
-					posZ + offsetZ, 
-					0, 0, 0);
+			((ServerWorld) world).spawnParticle(new BlockParticleData(ParticleTypes.BLOCK, blockState), 
+					posX + offsetX,
+					posY + offsetY,
+					posZ + offsetZ,
+					1, 0, 0, 0, 0);
 		}
 	}
 

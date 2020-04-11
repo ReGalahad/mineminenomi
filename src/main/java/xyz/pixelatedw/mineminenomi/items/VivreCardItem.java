@@ -38,7 +38,6 @@ public class VivreCardItem extends Item
 			return true;
 		vivreCard.setPositionAndRotation(player.posX, player.posY, player.posZ, player.rotationYaw, player.rotationPitch);
 
-		float f7 = 0.3F;
 		float f8 = MathHelper.sin(player.rotationPitch * ((float) Math.PI / 180F));
 		float f2 = MathHelper.cos(player.rotationPitch * ((float) Math.PI / 180F));
 		float f3 = MathHelper.sin(player.rotationYaw * ((float) Math.PI / 180F));

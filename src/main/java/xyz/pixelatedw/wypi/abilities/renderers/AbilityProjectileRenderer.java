@@ -142,6 +142,12 @@ public class AbilityProjectileRenderer extends EntityRenderer<AbilityProjectileE
 			this.alpha = color.getAlpha();
 			return this;
 		}
+		
+		public Factory setAlpha(double alpha)
+		{
+			this.alpha = alpha;
+			return this;
+		}
 
 		public Factory setScale(double scale)
 		{

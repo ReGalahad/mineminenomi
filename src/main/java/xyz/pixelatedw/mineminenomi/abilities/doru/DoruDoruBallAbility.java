@@ -15,7 +15,7 @@ public class DoruDoruBallAbility extends ContinuousAbility {
 		this.setThreshold(15);
 		this.setCooldown(5);
 		this.setDescription("Puts the user into a hardened wax ball for max defense.");
-		this.duringContinuity = this::duringContinuity;
+		this.duringContinuityEvent = this::duringContinuity;
 		this.onEndContinuityEvent = this::onEndContinuityEvent;
 	}
 	private void duringContinuity(PlayerEntity p, int passiveTime) {

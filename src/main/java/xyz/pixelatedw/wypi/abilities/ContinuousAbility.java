@@ -4,9 +4,7 @@ import java.io.Serializable;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraftforge.common.MinecraftForge;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
-import xyz.pixelatedw.wypi.abilities.events.AbilityUseEvent;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 import xyz.pixelatedw.wypi.network.WyNetwork;
@@ -20,7 +18,7 @@ public abstract class ContinuousAbility extends Ability
 	// Setting the defaults so that no crash occurs and so they will be null safe.
 	protected IOnStartContinuity onStartContinuityEvent = (player) -> { return true; };
 	protected IOnEndContinuity onEndContinuityEvent = (player) -> { return true; };
-	protected IDuringContinuity duringContinuity = (player, passiveTime) -> {};
+	protected IDuringContinuity duringContinuityEvent = (player, passiveTime) -> {};
 	
 	public ContinuousAbility(String name, AbilityCategory category)
 	{
@@ -36,11 +34,7 @@ public abstract class ContinuousAbility extends Ability
 	{
 		if(player.world.isRemote)
 			return;	
-		
-		AbilityUseEvent event = new AbilityUseEvent(this, player);
-		if(MinecraftForge.EVENT_BUS.post(event))
-			return;
-		
+
 		if(!this.isContinuous())
 		{
 			if(!this.isOnStandby())
@@ -75,6 +69,11 @@ public abstract class ContinuousAbility extends Ability
 		this.threshold = threshold * 20;
 	}
 	
+	public int getThreshold()
+	{
+		return this.threshold;
+	}
+	
 	public void startContinuity()
 	{
 		this.setState(State.CONTINUOUS);
@@ -94,7 +93,7 @@ public abstract class ContinuousAbility extends Ability
 		{
 			this.continueTime++;		
 			
-			this.duringContinuity.duringContinuity(player, this.continueTime);
+			this.duringContinuityEvent.duringContinuity(player, this.continueTime);
 			
 			if(this.threshold > 0 && this.continueTime >= this.threshold)
 				this.stopContinuity(player);

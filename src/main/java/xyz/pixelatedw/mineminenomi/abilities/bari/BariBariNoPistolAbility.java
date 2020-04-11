@@ -15,7 +15,7 @@ public class BariBariNoPistolAbility extends PunchAbility
 		this.setDescription("The user shapes a barrier aroud their fist, which greatly increases the power of a punch.");
 
 		this.setMaxCooldown(5);
-		this.onHitEntity = this::onHitEntity;
+		this.onHitEntityEvent = this::onHitEntity;
 	}
 	
 	private float onHitEntity(PlayerEntity player, LivingEntity target)

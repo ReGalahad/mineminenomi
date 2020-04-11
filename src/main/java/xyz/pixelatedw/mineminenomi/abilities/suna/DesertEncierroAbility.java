@@ -22,7 +22,7 @@ public class DesertEncierroAbility extends PunchAbility
 		this.setMaxCooldown(10);
 		this.setDescription("Quickly drains the enemy of their moisture leaving them weak for a few seconds.");
 
-		this.onHitEntity = this::onHitEntity;
+		this.onHitEntityEvent = this::onHitEntity;
 	}
 
 	private float onHitEntity(PlayerEntity player, LivingEntity target)

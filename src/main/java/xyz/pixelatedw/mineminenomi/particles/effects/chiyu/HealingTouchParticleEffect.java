@@ -1,9 +1,9 @@
 package xyz.pixelatedw.mineminenomi.particles.effects.chiyu;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
-import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
+import xyz.pixelatedw.mineminenomi.particles.data.GenericParticleData;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.wypi.WyHelper;
 
@@ -26,16 +26,12 @@ public class HealingTouchParticleEffect extends ParticleEffect
 	        motionY *= middlePoint / 2;
 	        motionZ *= middlePoint / 2;
 			
-			SimpleParticle cp = new SimpleParticle(world, ModResources.CHIYU,
-					posX , 
-					posY + 1,
-					posZ, 
-					motionX,
-					motionY,
-					motionZ)
-					.setParticleScale(1.5F)
-					.setParticleAge(10);
-			Minecraft.getInstance().particles.addEffect(cp);
+			GenericParticleData data = new GenericParticleData();
+			data.setTexture(ModResources.CHIYU);
+			data.setLife(10);
+			data.setSize(1.5F);
+			data.setMotion(motionX, motionY, motionZ);
+			WyHelper.spawnParticles(data, (ServerWorld) world, posX, posY + 1, posZ);
 		}
 	}
 }

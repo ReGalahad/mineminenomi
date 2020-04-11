@@ -17,7 +17,7 @@ public class SamehadaShoteiAbility extends ContinuousAbility
 		this.setThreshold(10);
 		this.setDescription("The user concentrates their power to their palms, protecting themselves from attacks.");
 
-		this.duringContinuity = this::duringContinuity;
+		this.duringContinuityEvent = this::duringContinuity;
 		this.onEndContinuityEvent = this::onEndContinuityEvent;
 	}
 

@@ -4,14 +4,10 @@ import java.awt.Color;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.LivingRenderer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
@@ -22,7 +18,7 @@ import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.abilities.doru.DoruDoruBallAbility;
 import xyz.pixelatedw.mineminenomi.init.ModEffects;
 import xyz.pixelatedw.mineminenomi.init.ModItems;
-import xyz.pixelatedw.mineminenomi.models.effects.CandleLockModel;
+import xyz.pixelatedw.mineminenomi.models.abilities.CandleLockModel;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.abilities.models.SphereModel;

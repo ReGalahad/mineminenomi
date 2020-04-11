@@ -16,7 +16,7 @@ public class ShiganAbility extends PunchAbility
 		this.setMaxCooldown(5);
 		this.setDescription("The user thrusts their finger at the opponent, to pierce them.");
 		
-		this.onHitEntity = this::onHitEntity;
+		this.onHitEntityEvent = this::onHitEntity;
 	}
 
 	private float onHitEntity(PlayerEntity player, LivingEntity target)

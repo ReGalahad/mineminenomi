@@ -6,10 +6,8 @@ import javax.annotation.Nullable;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
-import xyz.pixelatedw.wypi.abilities.events.AbilityUseEvent;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 import xyz.pixelatedw.wypi.network.WyNetwork;
@@ -45,11 +43,7 @@ public abstract class Ability extends ForgeRegistryEntry<Ability>
 				
 		if(!this.isOnStandby())
 			return;
-		
-		AbilityUseEvent event = new AbilityUseEvent(this, player);
-		if(MinecraftForge.EVENT_BUS.post(event))
-			return;
-		
+				
 		if(this.onUseEvent.onUse(player))
 		{
 			this.startCooldown();

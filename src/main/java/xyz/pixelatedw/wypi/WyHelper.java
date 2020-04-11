@@ -27,6 +27,7 @@ import com.mojang.blaze3d.platform.GLX;
 import com.mojang.blaze3d.platform.GlStateManager;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -295,7 +296,7 @@ public class WyHelper
 			}
 		}
 		
-		return null;
+		return new EntityRayTraceResult(null, endVec);
 	}
 
 	public static void sendMsgToPlayer(PlayerEntity player, String text)
@@ -307,9 +308,9 @@ public class WyHelper
 	{
 		for (Block b : blocks)
 		{
-			for (int x = -radius; x < radius; x++)
-				for (int y = -radius; y < radius; y++)
-					for (int z = -radius; z < radius; z++)
+			for (int x = -radius; x <= radius; x++)
+				for (int y = -radius; y <= radius; y++)
+					for (int z = -radius; z <= radius; z++)
 					{
 						if (player.world.getBlockState(new BlockPos((int) player.posX + x, (int) player.posY + y, (int) player.posZ + z)).getBlock() == b)
 						{
@@ -319,6 +320,27 @@ public class WyHelper
 		}
 
 		return false;
+	}
+	
+	public static List<BlockPos> getNearbyBlocks(LivingEntity player, int radius)
+	{
+		List<BlockPos> blockLocations = new ArrayList<BlockPos>();
+		for (int x = -radius; x <= radius; x++)
+		{
+			for (int y = -radius; y <= radius; y++)
+			{
+				for (int z = -radius; z <= radius; z++)
+				{
+					BlockPos pos = new BlockPos(player.posX + x, player.posY + y, player.posZ + z);
+					if (player.world.getBlockState(pos).getBlock() != Blocks.AIR)
+					{
+						blockLocations.add(pos);
+					}
+				}
+			}
+		}
+			
+		return blockLocations;
 	}
 
 	/*

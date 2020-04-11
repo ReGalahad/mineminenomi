@@ -25,7 +25,7 @@ public class FirstAidAbility extends PunchAbility
 		this.setMaxCooldown(10);
 		this.setDescription("Allows the user to heal its target.");
 		
-		this.onHitEntity = this::onHitEntity;
+		this.onHitEntityEvent = this::onHitEntity;
 	}
 	
 	private float onHitEntity(PlayerEntity player, LivingEntity target)

@@ -69,7 +69,7 @@ public class ElThorAbility extends ChargeableAbility
 			int x = 0;
 			int z = 0;
 			
-			while (f < 5)
+			while (f < max)
 			{
 				if(hasTomoeDrums)
 				{

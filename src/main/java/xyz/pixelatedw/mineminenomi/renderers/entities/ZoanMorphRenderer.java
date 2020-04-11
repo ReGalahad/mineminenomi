@@ -74,8 +74,6 @@ public class ZoanMorphRenderer extends LivingRenderer
 	{
 		GL11.glPushMatrix();
 
-		float clinetBuffer = 1.2F;
-
 		if (entity != Minecraft.getInstance().player)
 			GL11.glTranslatef((float) x + this.offset[0], (float) y + 1.3F + this.offset[1] - 1.2F, (float) z + this.offset[2]);
 		else

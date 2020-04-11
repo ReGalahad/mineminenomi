@@ -15,6 +15,8 @@ import xyz.pixelatedw.mineminenomi.abilities.bomu.ExplosivePunchAbility;
 import xyz.pixelatedw.mineminenomi.abilities.bomu.KickBombAbility;
 import xyz.pixelatedw.mineminenomi.abilities.bomu.NoseFancyCannonAbility;
 import xyz.pixelatedw.mineminenomi.abilities.bomu.ZenshinKibakuAbility;
+import xyz.pixelatedw.mineminenomi.abilities.chiyu.ChiyupopoAbility;
+import xyz.pixelatedw.mineminenomi.abilities.chiyu.HealingTouchAbility;
 import xyz.pixelatedw.mineminenomi.abilities.cyborg.ColaOverdriveAbility;
 import xyz.pixelatedw.mineminenomi.abilities.cyborg.CoupDeVentAbility;
 import xyz.pixelatedw.mineminenomi.abilities.cyborg.FreshFireAbility;
@@ -64,6 +66,14 @@ import xyz.pixelatedw.mineminenomi.abilities.hie.IceBlockPartisanAbility;
 import xyz.pixelatedw.mineminenomi.abilities.hie.IceBlockPheasantAbility;
 import xyz.pixelatedw.mineminenomi.abilities.hie.IceSaberAbility;
 import xyz.pixelatedw.mineminenomi.abilities.hie.IceTimeCapsuleAbility;
+import xyz.pixelatedw.mineminenomi.abilities.horo.MiniHollowAbility;
+import xyz.pixelatedw.mineminenomi.abilities.horo.NegativeHollowAbility;
+import xyz.pixelatedw.mineminenomi.abilities.horo.TokuHollowAbility;
+import xyz.pixelatedw.mineminenomi.abilities.horo.YutaiRidatsuAbility;
+import xyz.pixelatedw.mineminenomi.abilities.horu.ChiyuHormoneAbility;
+import xyz.pixelatedw.mineminenomi.abilities.horu.GanmenSeichoHormoneAbility;
+import xyz.pixelatedw.mineminenomi.abilities.horu.OnnaHormoneAbility;
+import xyz.pixelatedw.mineminenomi.abilities.horu.TensionHormoneAbility;
 import xyz.pixelatedw.mineminenomi.abilities.magu.BakuretsuKazanAbility;
 import xyz.pixelatedw.mineminenomi.abilities.magu.DaiFunkaAbility;
 import xyz.pixelatedw.mineminenomi.abilities.magu.MeigoAbility;
@@ -73,6 +83,10 @@ import xyz.pixelatedw.mineminenomi.abilities.mera.HidarumaAbility;
 import xyz.pixelatedw.mineminenomi.abilities.mera.HiganAbility;
 import xyz.pixelatedw.mineminenomi.abilities.mera.HikenAbility;
 import xyz.pixelatedw.mineminenomi.abilities.mera.JujikaAbility;
+import xyz.pixelatedw.mineminenomi.abilities.mero.MeroMeroMellowAbility;
+import xyz.pixelatedw.mineminenomi.abilities.mero.PerfumeFemurAbility;
+import xyz.pixelatedw.mineminenomi.abilities.mero.PistolKissAbility;
+import xyz.pixelatedw.mineminenomi.abilities.mero.SlaveArrowAbility;
 import xyz.pixelatedw.mineminenomi.abilities.moku.WhiteLauncherAbility;
 import xyz.pixelatedw.mineminenomi.abilities.moku.WhiteOutAbility;
 import xyz.pixelatedw.mineminenomi.abilities.moku.WhiteSnakeAbility;
@@ -116,6 +130,11 @@ import xyz.pixelatedw.mineminenomi.abilities.suna.DesertGirasoleAbility;
 import xyz.pixelatedw.mineminenomi.abilities.suna.DesertSpadaAbility;
 import xyz.pixelatedw.mineminenomi.abilities.suna.GroundDeathAbility;
 import xyz.pixelatedw.mineminenomi.abilities.suna.SablesAbility;
+import xyz.pixelatedw.mineminenomi.abilities.supa.AtomicSpurtAbility;
+import xyz.pixelatedw.mineminenomi.abilities.supa.SparClawAbility;
+import xyz.pixelatedw.mineminenomi.abilities.supa.SparklingDaisyAbility;
+import xyz.pixelatedw.mineminenomi.abilities.supa.SpiderAbility;
+import xyz.pixelatedw.mineminenomi.abilities.supa.SpiralHollowAbility;
 import xyz.pixelatedw.mineminenomi.abilities.swordsman.OTatsumakiAbility;
 import xyz.pixelatedw.mineminenomi.abilities.swordsman.SanbyakurokujuPoundHoAbility;
 import xyz.pixelatedw.mineminenomi.abilities.swordsman.ShiShishiSonsonAbility;
@@ -126,6 +145,10 @@ import xyz.pixelatedw.mineminenomi.abilities.yuki.KamakuraJussoshiAbility;
 import xyz.pixelatedw.mineminenomi.abilities.yuki.TabiraYukiAbility;
 import xyz.pixelatedw.mineminenomi.abilities.yuki.YukiGakiAbility;
 import xyz.pixelatedw.mineminenomi.abilities.yuki.YukiRabiAbility;
+import xyz.pixelatedw.mineminenomi.abilities.zushi.AbareHimatsuriAbility;
+import xyz.pixelatedw.mineminenomi.abilities.zushi.JigokuTabiAbility;
+import xyz.pixelatedw.mineminenomi.abilities.zushi.MokoAbility;
+import xyz.pixelatedw.mineminenomi.abilities.zushi.SagariNoRyuseiAbility;
 import xyz.pixelatedw.mineminenomi.items.AkumaNoMiItem;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.APIRegistries;
@@ -137,12 +160,11 @@ import xyz.pixelatedw.wypi.debug.WyDebug;
 public class ModAbilities
 {
 
-	// public static final AkumaNoMiItem MINI_MINI_NO_MI = new AkumaNoMiItem("Mini Mini no Mi", EnumFruitType.PARAMECIA);
 	public static final AkumaNoMiItem KACHI_KACHI_NO_MI = new AkumaNoMiItem("Kachi Kachi no Mi", EnumFruitType.PARAMECIA);
 	public static final AkumaNoMiItem DOA_DOA_NO_MI = new AkumaNoMiItem("Doa Doa no Mi", EnumFruitType.PARAMECIA);
 	public static final AkumaNoMiItem USHI_USHI_NO_MI_GIRAFFE = new AkumaNoMiItem("Ushi Ushi no Mi, Model Giraffe", EnumFruitType.ZOAN);
 	public static final AkumaNoMiItem MOGU_MOGU_NO_MI = new AkumaNoMiItem("Mogu Mogu no Mi", EnumFruitType.ZOAN);
-	public static final AkumaNoMiItem CHIYU_CHIYU_NO_MI = new AkumaNoMiItem("Chiyu Chiyu no Mi", EnumFruitType.PARAMECIA);
+	public static final AkumaNoMiItem CHIYU_CHIYU_NO_MI = new AkumaNoMiItem("Chiyu Chiyu no Mi", EnumFruitType.PARAMECIA, HealingTouchAbility.INSTANCE, ChiyupopoAbility.INSTANCE);
 	public static final AkumaNoMiItem HITO_HITO_NO_MI = new AkumaNoMiItem("Hito Hito no Mi", EnumFruitType.ZOAN);
 	public static final AkumaNoMiItem SABI_SABI_NO_MI = new AkumaNoMiItem("Sabi Sabi no Mi", EnumFruitType.PARAMECIA, RustTouchAbility.INSTANCE);
 	public static final AkumaNoMiItem ZOU_ZOU_NO_MI = new AkumaNoMiItem("Zou Zou no Mi", EnumFruitType.ZOAN);
@@ -150,20 +172,16 @@ public class ModAbilities
 	public static final AkumaNoMiItem BAKU_BAKU_NO_MI = new AkumaNoMiItem("Baku Baku no Mi", EnumFruitType.PARAMECIA);
 	public static final AkumaNoMiItem TORI_TORI_NO_MI_PHOENIX = new AkumaNoMiItem("Tori Tori no Mi, Model: Phoenix", EnumFruitType.ZOAN);
 	public static final AkumaNoMiItem USHI_USHI_NO_MI_BISON = new AkumaNoMiItem("Ushi Ushi no Mi, Model: Bison", EnumFruitType.ZOAN);
-	// public static final AkumaNoMiItem PAMU_PAMU_NO_MI = new AkumaNoMiItem("Pamu Pamu no Mi", EnumFruitType.PARAMECIA);
-	// public static final AkumaNoMiItem ISHI_ISHI_NO_MI = new AkumaNoMiItem("Ishi Ishi no Mi", EnumFruitType.PARAMECIA);
-	// public static final AkumaNoMiItem BETA_BETA_NO_MI = new AkumaNoMiItem("Beta Beta no Mi", EnumFruitType.PARAMECIA);
-	public static final AkumaNoMiItem HORU_HORU_NO_MI = new AkumaNoMiItem("Horu Horu no Mi", EnumFruitType.PARAMECIA);
-	// public static final AkumaNoMiItem HANA_HANA_NO_MI = new AkumaNoMiItem("Hana Hana no Mi", EnumFruitType.PARAMECIA);
+	public static final AkumaNoMiItem HORU_HORU_NO_MI = new AkumaNoMiItem("Horu Horu no Mi", EnumFruitType.PARAMECIA, OnnaHormoneAbility.INSTANCE, ChiyuHormoneAbility.INSTANCE, TensionHormoneAbility.INSTANCE, GanmenSeichoHormoneAbility.INSTANCE);
 	public static final AkumaNoMiItem KILO_KILO_NO_MI = new AkumaNoMiItem("Kilo Kilo no Mi", EnumFruitType.PARAMECIA);
 	public static final AkumaNoMiItem GOE_GOE_NO_MI = new AkumaNoMiItem("Goe Goe no Mi", EnumFruitType.PARAMECIA, TodorokiAbility.INSTANCE);
-	public static final AkumaNoMiItem MERO_MERO_NO_MI = new AkumaNoMiItem("Mero Mero no Mi", EnumFruitType.PARAMECIA);
+	public static final AkumaNoMiItem MERO_MERO_NO_MI = new AkumaNoMiItem("Mero Mero no Mi", EnumFruitType.PARAMECIA, MeroMeroMellowAbility.INSTANCE, PistolKissAbility.INSTANCE, SlaveArrowAbility.INSTANCE, PerfumeFemurAbility.INSTANCE);
 	public static final AkumaNoMiItem ORI_ORI_NO_MI = new AkumaNoMiItem("Ori Ori no Mi", EnumFruitType.PARAMECIA);
-	public static final AkumaNoMiItem SUPA_SUPA_NO_MI = new AkumaNoMiItem("Supa Supa no Mi", EnumFruitType.PARAMECIA);
-	public static final AkumaNoMiItem HORO_HORO_NO_MI = new AkumaNoMiItem("Horo Horo no Mi", EnumFruitType.PARAMECIA);
+	public static final AkumaNoMiItem SUPA_SUPA_NO_MI = new AkumaNoMiItem("Supa Supa no Mi", EnumFruitType.PARAMECIA, SpiderAbility.INSTANCE, SparClawAbility.INSTANCE, SpiralHollowAbility.INSTANCE, SparklingDaisyAbility.INSTANCE, AtomicSpurtAbility.INSTANCE);
+	public static final AkumaNoMiItem HORO_HORO_NO_MI = new AkumaNoMiItem("Horo Horo no Mi", EnumFruitType.PARAMECIA, NegativeHollowAbility.INSTANCE, MiniHollowAbility.INSTANCE, TokuHollowAbility.INSTANCE, YutaiRidatsuAbility.INSTANCE);
 	public static final AkumaNoMiItem ITO_ITO_NO_MI = new AkumaNoMiItem("Ito Ito no Mi", EnumFruitType.PARAMECIA);
 	public static final AkumaNoMiItem YAMI_YAMI_NO_MI = new AkumaNoMiItem("Yami Yami no Mi", EnumFruitType.LOGIA);
-	public static final AkumaNoMiItem JURYO_JURYO_NO_MI = new AkumaNoMiItem("Juryo Juryo no Mi", EnumFruitType.PARAMECIA);
+	public static final AkumaNoMiItem ZUSHI_ZUSHI_NO_MI = new AkumaNoMiItem("Zushi Zushi no Mi", EnumFruitType.PARAMECIA, JigokuTabiAbility.INSTANCE, SagariNoRyuseiAbility.INSTANCE, MokoAbility.INSTANCE, AbareHimatsuriAbility.INSTANCE);
 	public static final AkumaNoMiItem YUKI_YUKI_NO_MI = new AkumaNoMiItem("Yuki Yuki no Mi", EnumFruitType.LOGIA, KamakuraAbility.INSTANCE, YukiRabiAbility.INSTANCE, KamakuraJussoshiAbility.INSTANCE, TabiraYukiAbility.INSTANCE, YukiGakiAbility.INSTANCE, FubukiAbility.INSTANCE);
 	public static final AkumaNoMiItem GASU_GASU_NO_MI = new AkumaNoMiItem("Gasu Gasu no Mi", EnumFruitType.LOGIA, GasRobeAbility.INSTANCE, GastanetAbility.INSTANCE, GastilleAbility.INSTANCE, BlueSwordAbility.INSTANCE, KarakuniAbility.INSTANCE);
 	public static final AkumaNoMiItem BARI_BARI_NO_MI = new AkumaNoMiItem("Bari Bari no Mi", EnumFruitType.PARAMECIA, BarrierAbility.INSTANCE, BarrierBallAbility.INSTANCE, BarrierCrashAbility.INSTANCE, BariBariNoPistolAbility.INSTANCE, BarrierbilityStairsAbility.INSTANCE);
@@ -198,6 +216,7 @@ public class ModAbilities
 			}
 		}
 
+		// Human
 		WyRegistry.registerAbility(SoruAbility.INSTANCE);
 		WyRegistry.registerAbility(TekkaiAbility.INSTANCE);
 		WyRegistry.registerAbility(ShiganAbility.INSTANCE);
@@ -205,28 +224,33 @@ public class ModAbilities
 		WyRegistry.registerAbility(RankyakuAbility.INSTANCE);
 		WyRegistry.registerAbility(KamieAbility.INSTANCE);
 		
+		// Fishman
 		WyRegistry.registerAbility(UchimizuAbility.INSTANCE);
 		WyRegistry.registerAbility(MurasameAbility.INSTANCE);
 		WyRegistry.registerAbility(KachiageHaisokuAbility.INSTANCE);
 		WyRegistry.registerAbility(SamehadaShoteiAbility.INSTANCE);
 		WyRegistry.registerAbility(KarakusagawaraSeikenAbility.INSTANCE);
 		
+		// Cyborg
 		WyRegistry.registerAbility(FreshFireAbility.INSTANCE);
 		WyRegistry.registerAbility(ColaOverdriveAbility.INSTANCE);
 		WyRegistry.registerAbility(StrongRightAbility.INSTANCE);
 		WyRegistry.registerAbility(RadicalBeamAbility.INSTANCE);
 		WyRegistry.registerAbility(CoupDeVentAbility.INSTANCE);
 		
+		// Swordsman
 		WyRegistry.registerAbility(ShiShishiSonsonAbility.INSTANCE);
 		WyRegistry.registerAbility(YakkodoriAbility.INSTANCE);
 		WyRegistry.registerAbility(SanbyakurokujuPoundHoAbility.INSTANCE);
 		WyRegistry.registerAbility(OTatsumakiAbility.INSTANCE);
 
+		// Sniper
 		WyRegistry.registerAbility(KaenBoshiAbility.INSTANCE);
 		WyRegistry.registerAbility(KemuriBoshiAbility.INSTANCE);
 		WyRegistry.registerAbility(RenpatsuNamariBoshiAbility.INSTANCE);
 		WyRegistry.registerAbility(SakuretsuSabotenBoshiAbility.INSTANCE);
 		
+		// Doctor
 		WyRegistry.registerAbility(FirstAidAbility.INSTANCE);
 		WyRegistry.registerAbility(MedicBagExplosionAbility.INSTANCE);
 		WyRegistry.registerAbility(FailedExperimentAbility.INSTANCE);

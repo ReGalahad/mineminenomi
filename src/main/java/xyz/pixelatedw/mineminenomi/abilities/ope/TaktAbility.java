@@ -24,7 +24,7 @@ public class TaktAbility extends ContinuousAbility
 		this.setDescription("Lifts all entities inside ROOM, making them unable to move.");
 		
 		this.onStartContinuityEvent = this::onStartContinuityEvent;
-		this.duringContinuity = this::duringContinuity; 
+		this.duringContinuityEvent = this::duringContinuity; 
 	}
 	
 	private boolean onStartContinuityEvent(PlayerEntity player)

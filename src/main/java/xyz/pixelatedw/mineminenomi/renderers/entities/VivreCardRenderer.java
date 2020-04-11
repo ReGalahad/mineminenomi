@@ -44,8 +44,7 @@ public class VivreCardRenderer extends EntityRenderer<VivreCardEntity>
 			
 			GlStateManager.color4f(1F, 1F, 1F, 1.0F);
 			GlStateManager.scaled(0.4, 0.1, 0.5);
-			
-			
+
 			this.model.render(entity, (float) x, (float) y, (float) z, 0.0F, 0.0F, 0.0625F);
 			
 			GlStateManager.enableTexture();

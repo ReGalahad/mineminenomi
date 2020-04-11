@@ -21,7 +21,7 @@ public class SablesAbility extends PunchAbility
 		this.setMaxCooldown(3);
 		this.setDescription("The user launches a compressed sandstorm at the opponent, which sends them flying.");
 
-		this.onHitEntity = this::onHitEntity;
+		this.onHitEntityEvent = this::onHitEntity;
 	}
 
 	private float onHitEntity(PlayerEntity player, LivingEntity target)

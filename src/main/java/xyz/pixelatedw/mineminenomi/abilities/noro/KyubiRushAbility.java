@@ -18,7 +18,7 @@ public class KyubiRushAbility extends PunchAbility
 		this.setMaxCooldown(5);
 		this.setDescription("While the opponent is slowed, the user delivers a series of punches, which hits the opponent all at once");
 
-		this.onHitEntity = this::onHitEntity;
+		this.onHitEntityEvent = this::onHitEntity;
 	}
 	
 	private float onHitEntity(PlayerEntity player, LivingEntity target)
