@@ -43,6 +43,7 @@ import xyz.pixelatedw.mineminenomi.renderers.entities.DoppelmanRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.GenericMobRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.VivreCardRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.WantedPosterPackageRenderer;
+import xyz.pixelatedw.mineminenomi.renderers.entities.WaxPlayerRenderer;
 
 public class ModRenderers
 {
@@ -82,7 +83,7 @@ public class ModRenderers
 
 		// Others
 		RenderingRegistry.registerEntityRenderingHandler(EntityDoppelman.class, new DoppelmanRenderer.Factory());
-	    RenderingRegistry.registerEntityRenderingHandler(WaxPlayerEntity.class, new GenericMobRenderer.Factory(new SimpleHumanModel(), 1, "wax_player"));
+	    RenderingRegistry.registerEntityRenderingHandler(WaxPlayerEntity.class, new WaxPlayerRenderer.Factory());
 		RenderingRegistry.registerEntityRenderingHandler(EntityBlackKnight.class, new BlackKnightRenderer.Factory());
 		RenderingRegistry.registerEntityRenderingHandler(EntityCloud.class, new CloudRenderer.Factory());
 		RenderingRegistry.registerEntityRenderingHandler(WantedPosterPackageEntity.class, new WantedPosterPackageRenderer.Factory());

@@ -14,6 +14,7 @@ public class DoruDoruBallAbility extends ContinuousAbility {
 		// TODO Auto-generated constructor stub
 		this.setThreshold(15);
 		this.setCooldown(5);
+		this.setDescription("Puts the user into a hardened wax ball for max defense.");
 		this.duringContinuity = this::duringContinuity;
 		this.onEndContinuityEvent = this::onEndContinuityEvent;
 	}

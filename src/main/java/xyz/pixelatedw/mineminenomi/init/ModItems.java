@@ -9,6 +9,7 @@ import xyz.pixelatedw.mineminenomi.items.BellyPouchItem;
 import xyz.pixelatedw.mineminenomi.items.BubblyCoralItem;
 import xyz.pixelatedw.mineminenomi.items.CharacterCreatorItem;
 import xyz.pixelatedw.mineminenomi.items.ColaItem;
+import xyz.pixelatedw.mineminenomi.items.ColorPaletteItem;
 import xyz.pixelatedw.mineminenomi.items.HeartItem;
 import xyz.pixelatedw.mineminenomi.items.MItemTier;
 import xyz.pixelatedw.mineminenomi.items.SeaKingMeatItem;
@@ -33,7 +34,7 @@ public class ModItems
 	public static final Item VIVRE_CARD = new VivreCardItem();
 	public static final Item BUBBLY_CORAL = new BubblyCoralItem();
 	public static final Item DORU_PICKAXE = new PickaxeItem(MItemTier.DORU, 1, -2.8f, new Item.Properties());
-
+    public static final Item COLOR_PALETTE = new ColorPaletteItem(new Item.Properties().group(ModCreativeTabs.MISC));
 	// Devil Fruit Boxes
 	public static final Item TIER_1_BOX = new AkumaNoMiBoxItem(1);
 	public static final Item TIER_2_BOX = new AkumaNoMiBoxItem(2);
@@ -72,6 +73,7 @@ public class ModItems
 		WyRegistry.registerItem(TIER_3_BOX, "Golden Box");
 		WyRegistry.registerItem(BUBBLY_CORAL, "Bubbly Coral");
 		WyRegistry.registerItem(VIVRE_CARD, "Vivre Card");
+		WyRegistry.registerItem(COLOR_PALETTE, "Color Palette");
 		WyRegistry.registerItem(DORU_PICKAXE, "Doru Doru Arts: Pickaxe");
 	}
 }
