@@ -5,10 +5,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import xyz.pixelatedw.mineminenomi.api.helpers.ItemsHelper;
-import xyz.pixelatedw.wypi.quests.objectives.IEntityKillObjective;
+import xyz.pixelatedw.wypi.quests.objectives.IKillEntityObjective;
 import xyz.pixelatedw.wypi.quests.objectives.Objective;
 
-public class KillWithCriticalObjective extends Objective implements IEntityKillObjective
+public class KillWithCriticalObjective extends Objective implements IKillEntityObjective
 {	
 	public KillWithCriticalObjective(String title, int count)
 	{

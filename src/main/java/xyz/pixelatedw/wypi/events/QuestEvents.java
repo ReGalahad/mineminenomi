@@ -1,10 +1,90 @@
 package xyz.pixelatedw.wypi.events;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.wypi.APIConfig;
+import xyz.pixelatedw.wypi.data.quest.IQuestData;
+import xyz.pixelatedw.wypi.data.quest.QuestDataCapability;
+import xyz.pixelatedw.wypi.network.WyNetwork;
+import xyz.pixelatedw.wypi.network.packets.server.SSyncQuestDataPacket;
+import xyz.pixelatedw.wypi.quests.Quest;
+import xyz.pixelatedw.wypi.quests.objectives.IKillEntityObjective;
+import xyz.pixelatedw.wypi.quests.objectives.IObtainItemObjective;
+import xyz.pixelatedw.wypi.quests.objectives.Objective;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class QuestEvents
 {
+
+	@SubscribeEvent
+	public static void onEntityDies(LivingDeathEvent event)
+	{
+		if (!(event.getSource().getTrueSource() instanceof PlayerEntity) || !event.getEntityLiving().isServerWorld())
+			return;
+
+		PlayerEntity player = (PlayerEntity) event.getSource().getTrueSource();
+		LivingEntity target = event.getEntityLiving();
+
+		IQuestData questProps = QuestDataCapability.get(player);
+
+		for (Objective obj : getObjectives(questProps))
+		{
+			if (obj instanceof IKillEntityObjective)
+			{
+				if (((IKillEntityObjective) obj).checkKill(player, target, event.getSource()))
+				{
+					obj.alterProgress(1);
+					WyNetwork.sendTo(new SSyncQuestDataPacket(questProps), player);
+				}
+			}
+		}
+	}
+
+	@SubscribeEvent
+	public static void onItemPickedUp(EntityItemPickupEvent event)
+	{
+		PlayerEntity player = event.getPlayer();
+		IQuestData questProps = QuestDataCapability.get(player);
+
+		for (Objective obj : getObjectives(questProps))
+		{
+			if (obj instanceof IObtainItemObjective)
+			{
+				if (((IObtainItemObjective) obj).checkItem(event.getItem().getItem()))
+				{
+					obj.alterProgress(1);
+					WyNetwork.sendTo(new SSyncQuestDataPacket(questProps), player);
+				}
+			}
+		}
+	}
+
+	private static List<Objective> getObjectives(IQuestData questProps)
+	{
+		List<Objective> objectives = new ArrayList<Objective>();
+
+		for (Quest quest : questProps.getInProgressQuests())
+		{
+			if (!quest.isCompleted())
+			{
+				for (Objective obj : quest.getObjectives())
+				{
+					if (!obj.isHidden() && !obj.isLocked() && !obj.isComplete())
+					{
+						objectives.add(obj);
+					}
+				}
+			}
+		}
+
+		return objectives;
+	}
 
 }

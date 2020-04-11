@@ -9,6 +9,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnchantmentNameParts;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -23,7 +24,10 @@ import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.data.quest.IQuestData;
 import xyz.pixelatedw.wypi.data.quest.QuestDataCapability;
 import xyz.pixelatedw.wypi.debug.WyDebug;
+import xyz.pixelatedw.wypi.network.WyNetwork;
+import xyz.pixelatedw.wypi.network.packets.client.CSyncQuestDataPacket;
 import xyz.pixelatedw.wypi.quests.Quest;
+import xyz.pixelatedw.wypi.quests.objectives.IObtainItemObjective;
 import xyz.pixelatedw.wypi.quests.objectives.Objective;
 
 @OnlyIn(Dist.CLIENT)
@@ -74,25 +78,25 @@ public class QuestsTrackerScreen extends Screen
 
 		try
 		{
-			currentQuest = this.qprops.getInProgressQuests().get(this.questIndex);
+			this.currentQuest = this.qprops.getInProgressQuests().get(this.questIndex);
 		}
 		catch (Exception e)
 		{
 			if(this.qprops.getInProgressQuests().size() > 0)
 			{
-				currentQuest = this.qprops.getInProgressQuests().get(0);
+				this.currentQuest = this.qprops.getInProgressQuests().get(0);
 				WyDebug.debug(String.format("\n[ArrayOutOfBounds] \n Max possible index is : %s \n But the index requested is : %s", this.qprops.getInProgressQuests().size() - 1, this.questIndex));
 			}
 			else
-				currentQuest = null;		
+				this.currentQuest = null;		
 			this.questIndex = 0;
 		}
 		
-		String currentQuestName = currentQuest != null ? new TranslationTextComponent(String.format("quest." + APIConfig.PROJECT_ID + ".%s", currentQuest.getId())).getFormattedText() : "None";
-		double currentQuestProgress = currentQuest != null ? currentQuest.getProgress() : -1;
+		String currentQuestName = this.currentQuest != null ? new TranslationTextComponent(String.format("quest." + APIConfig.PROJECT_ID + ".%s", this.currentQuest.getId())).getFormattedText() : "None";
+		double currentQuestProgress = this.currentQuest != null ? this.currentQuest.getProgress() * 100 : -1;
 		
-		if(currentQuest != null)
-		{			
+		if(this.currentQuest != null)
+		{
 			// Quest name
 			GlStateManager.pushMatrix();
 			{
@@ -118,13 +122,13 @@ public class QuestsTrackerScreen extends Screen
 			GlStateManager.pushMatrix();
 			{
 				int yOffset = -20;
-				for(Objective obj : currentQuest.getObjectives())
+				for(Objective obj : this.currentQuest.getObjectives())
 				{
 					String objectiveName = new TranslationTextComponent(String.format("quest.objective." + APIConfig.PROJECT_ID + ".%s", obj.getId())).getFormattedText();
 					String progress = "";
 					double objectiveProgress = (obj.getProgress() / obj.getMaxProgress()) * 100;
 					yOffset += 20;
-					
+
 					String textColor = "#FFFFFF";
 					if(obj.isLocked())
 						textColor = "#505050";
@@ -141,7 +145,7 @@ public class QuestsTrackerScreen extends Screen
 						WyHelper.drawStringWithBorder(galacticFont, this.hiddenTexts.get((int) WyHelper.randomWithRange(0, this.hiddenTexts.size() - 1)), posX - 82, posY - 45 + yOffset, WyHelper.hexToRGB(textColor).getRGB(), false);
 					}
 					else
-						WyHelper.drawStringWithBorder(obj.isComplete() ? TextFormatting.STRIKETHROUGH + "" : "" + "• " + objectiveName + progress, posX - 90, posY - 45 + yOffset, WyHelper.hexToRGB(textColor).getRGB(), false);
+						WyHelper.drawStringWithBorder((obj.isComplete() ? TextFormatting.STRIKETHROUGH + "" : "") + "• " + objectiveName + progress, posX - 90, posY - 45 + yOffset, WyHelper.hexToRGB(textColor).getRGB(), false);
 				}
 			}
 			GlStateManager.popMatrix();
@@ -158,19 +162,22 @@ public class QuestsTrackerScreen extends Screen
 				
 		try
 		{
-			currentQuest = this.qprops.getInProgressQuests().get(this.questIndex);
+			this.currentQuest = this.qprops.getInProgressQuests().get(this.questIndex);
 		}
 		catch (Exception e)
 		{
 			if(this.qprops.getInProgressQuests().size() > 0)
 			{
-				currentQuest = this.qprops.getInProgressQuests().get(0);
+				this.currentQuest = this.qprops.getInProgressQuests().get(0);
 				WyDebug.debug(String.format("\n[ArrayOutOfBounds] \n Max possible index is : %s \n But the index requested is : %s", this.qprops.getInProgressQuests().size() - 1, this.questIndex));
 			}
 			else
-				currentQuest = null;		
+				this.currentQuest = null;		
 			this.questIndex = 0;
 		}
+		
+		if(this.currentQuest == null)
+			return;
 		
 		this.hiddenTexts.clear();
 		for(Objective obj : this.currentQuest.getObjectives())
@@ -178,6 +185,18 @@ public class QuestsTrackerScreen extends Screen
 			if(obj.isHidden())
 			{
 				this.hiddenTexts.add(EnchantmentNameParts.getInstance().generateNewRandomName(Minecraft.getInstance().fontRenderer, obj.getTitle().length() * 2));
+			}
+			
+			if (!obj.isHidden() && !obj.isLocked() && !obj.isComplete() && obj instanceof IObtainItemObjective)
+			{
+				for(ItemStack stack : this.player.inventory.mainInventory)
+				{
+					if (((IObtainItemObjective) obj).checkItem(stack))
+					{
+						obj.alterProgress(1);
+						WyNetwork.sendToServer(new CSyncQuestDataPacket(QuestDataCapability.get(this.player)));
+					}
+				}
 			}
 		}
 	}
