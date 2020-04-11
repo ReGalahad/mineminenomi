@@ -56,23 +56,29 @@ public class QuestsTrackerScreen extends Screen
 		int posY = this.height / 2;
 		
 		// Background
-		Minecraft.getInstance().getTextureManager().bindTexture(ModResources.BLANK);
+		Minecraft.getInstance().getTextureManager().bindTexture(ModResources.SCROLL);
 		GlStateManager.pushMatrix();
 		{
-			double scale = 1.4;
-			GlStateManager.translated(posX - 72, posY - 15, 0);
+			double scale = 1.1;
+			GlStateManager.translated(posX - 45, posY - 110, 0);
 			GlStateManager.translated(256, 256, 0);
 			
-			GlStateManager.scaled(scale, scale, 0);
+			GlStateManager.scaled(scale * 1.5, scale, 0);
 			GlStateManager.translated(-256, -256, 0);
 			
 			// Background
 			GuiUtils.drawTexturedModalRect(0, 0, 0, 0, 256, 256, 1);
 			
+			GlStateManager.translated(-30, 50, 0);
+			GlStateManager.translated(256, 256, 0);
+			
+			GlStateManager.scaled(scale * 0.7, scale * 0.9, 0);
+			GlStateManager.translated(-256, -256, 0);
+			
 			// Next / Previous buttons
 			this.minecraft.getTextureManager().bindTexture(ModResources.WIDGETS);
 			GuiUtils.drawTexturedModalRect(-20, 30, 0, 92, 25, 100, 1);
-			GuiUtils.drawTexturedModalRect(232, 30, 26, 92, 30, 100, 1);		
+			GuiUtils.drawTexturedModalRect(240, 30, 26, 92, 30, 100, 1);		
 		}
 		GlStateManager.popMatrix();
 
@@ -94,6 +100,8 @@ public class QuestsTrackerScreen extends Screen
 		
 		String currentQuestName = this.currentQuest != null ? new TranslationTextComponent(String.format("quest." + APIConfig.PROJECT_ID + ".%s", this.currentQuest.getId())).getFormattedText() : "None";
 		double currentQuestProgress = this.currentQuest != null ? this.currentQuest.getProgress() * 100 : -1;
+		
+		GlStateManager.translated(0, 30, 0);
 		
 		if(this.currentQuest != null)
 		{
@@ -139,7 +147,7 @@ public class QuestsTrackerScreen extends Screen
 						progress = " - " + String.format("%.1f", objectiveProgress) + "%";
 					
 					if(obj.isComplete())
-						textColor = "#00FF55";
+						progress =  "";
 					
 					if(obj.isHidden())
 					{
