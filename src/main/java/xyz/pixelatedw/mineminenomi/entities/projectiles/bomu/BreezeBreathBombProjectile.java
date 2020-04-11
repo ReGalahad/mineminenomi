@@ -11,6 +11,7 @@ import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 
 public class BreezeBreathBombProjectile extends AbilityProjectileEntity{
 
+	private int tick = 0;
 	public BreezeBreathBombProjectile(World world)
 	{
 		super(BomuProjectiles.BREEZE_BREATH_BOMB, world);
@@ -32,9 +33,12 @@ public class BreezeBreathBombProjectile extends AbilityProjectileEntity{
 
 		this.setDamage(6);
 		this.onTickEvent = this::onTickEvent;
+		this.setMaxLife(32);
+		this.setPassThroughEntities();
 		
 	}
 	private void onTickEvent() {
+		if(tick > 5) {
 		BlockPos pos = this.getPosition();
 		ExplosionAbility explosion = AbilityHelper.newExplosion(this.getThrower(), pos.getX(), pos.getY(), pos.getZ(), 3);
 		explosion.setExplosionSound(true);
@@ -44,5 +48,7 @@ public class BreezeBreathBombProjectile extends AbilityProjectileEntity{
 		explosion.setSmokeParticles(new CommonExplosionParticleEffect(3));
 		explosion.setDamageEntities(true);
 		explosion.doExplosion();
+		}
+		tick++;
 	}
 }

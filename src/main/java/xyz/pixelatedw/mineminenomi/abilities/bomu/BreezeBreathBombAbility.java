@@ -10,6 +10,7 @@ public class BreezeBreathBombAbility extends ContinuousAbility{
 	public BreezeBreathBombAbility() {
 		super("Breeze Breath Bomb", AbilityCategory.DEVIL_FRUIT);
 		// TODO Auto-generated constructor stub
+		this.setMaxCooldown(4);
 	}
 
 }
