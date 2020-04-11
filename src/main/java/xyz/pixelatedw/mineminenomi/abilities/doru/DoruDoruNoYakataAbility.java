@@ -25,9 +25,9 @@ public class DoruDoruNoYakataAbility extends Ability {
 	private boolean onUseEvent(PlayerEntity p) {
 		if (!p.world.isRemote) {
 			if (p.inventory.hasItemStack(new ItemStack(ModItems.COLOR_PALETTE))) {
-				WaxPlayerEntity waxplayer = new WaxPlayerEntity(p.world, 1);
-				WaxPlayerEntity waxplayer2 = new WaxPlayerEntity(p.world, 1);
-				WaxPlayerEntity waxplayer3 = new WaxPlayerEntity(p.world, 1);
+				WaxPlayerEntity waxplayer = new WaxPlayerEntity(p.world, 1, p.getUUID(p.getGameProfile()));
+				WaxPlayerEntity waxplayer2 = new WaxPlayerEntity(p.world, 1,p.getUUID(p.getGameProfile()));
+				WaxPlayerEntity waxplayer3 = new WaxPlayerEntity(p.world, 1, p.getUUID(p.getGameProfile()));
 
 				BlockPos pos1 = new BlockPos(p.posX + 5, p.posY, p.posZ + 5);
 				BlockPos pos2 = new BlockPos(p.posX, p.posY, p.posZ + 5);
@@ -47,9 +47,9 @@ public class DoruDoruNoYakataAbility extends Ability {
 				return true;
 
 			} else {
-				WaxPlayerEntity waxplayer = new WaxPlayerEntity(p.world, 0);
-				WaxPlayerEntity waxplayer2 = new WaxPlayerEntity(p.world, 0);
-				WaxPlayerEntity waxplayer3 = new WaxPlayerEntity(p.world, 0);
+				WaxPlayerEntity waxplayer = new WaxPlayerEntity(p.world, 0, null);
+				WaxPlayerEntity waxplayer2 = new WaxPlayerEntity(p.world, 0, null);
+				WaxPlayerEntity waxplayer3 = new WaxPlayerEntity(p.world, 0, null);
 
 				BlockPos pos1 = new BlockPos(p.posX + 5, p.posY, p.posZ + 5);
 				BlockPos pos2 = new BlockPos(p.posX, p.posY, p.posZ + 5);

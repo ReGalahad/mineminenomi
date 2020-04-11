@@ -1,9 +1,11 @@
 package xyz.pixelatedw.mineminenomi.renderers.entities;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
+import java.util.UUID;
+
+import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
@@ -20,17 +22,16 @@ public class WaxPlayerRenderer extends GenericMobRenderer {
 		super(EntityRendererManager, new SimpleHumanModel());
 	}
 		
-	@SuppressWarnings("resource")
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) 
 	{
-		if(((WaxPlayerEntity)entity).getTextureId() == 0) {
+		if(((WaxPlayerEntity)entity).getTextureId() == null) {
 			return WAX_LOCATION;
 		} else {
-        Minecraft minecraft = Minecraft.getInstance();
-        ResourceLocation rs = ((AbstractClientPlayerEntity)minecraft.player).getLocationSkin();
+        ClientWorld world = (ClientWorld) entity.world;
+        ClientPlayerEntity p =	(ClientPlayerEntity) world.getPlayerByUuid(((WaxPlayerEntity)entity).getTextureId().get());
         
-		return rs;
+		return p.getLocationSkin();
 		}
 	}
 	
