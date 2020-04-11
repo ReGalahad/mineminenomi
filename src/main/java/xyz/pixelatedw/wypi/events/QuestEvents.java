@@ -6,6 +6,7 @@ import java.util.List;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteractSpecific;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -17,6 +18,7 @@ import xyz.pixelatedw.wypi.network.WyNetwork;
 import xyz.pixelatedw.wypi.network.packets.server.SSyncQuestDataPacket;
 import xyz.pixelatedw.wypi.quests.Quest;
 import xyz.pixelatedw.wypi.quests.objectives.IEntityInteractObjective;
+import xyz.pixelatedw.wypi.quests.objectives.IHitEntityObjective;
 import xyz.pixelatedw.wypi.quests.objectives.IKillEntityObjective;
 import xyz.pixelatedw.wypi.quests.objectives.IObtainItemObjective;
 import xyz.pixelatedw.wypi.quests.objectives.Objective;
@@ -33,7 +35,6 @@ public class QuestEvents
 
 		PlayerEntity player = (PlayerEntity) event.getSource().getTrueSource();
 		LivingEntity target = event.getEntityLiving();
-
 		IQuestData questProps = QuestDataCapability.get(player);
 
 		for (Objective obj : getObjectives(questProps))
@@ -50,11 +51,37 @@ public class QuestEvents
 	}
 
 	@SubscribeEvent
+	public static void onHitEntity(LivingHurtEvent event)
+	{
+		if (!(event.getSource().getTrueSource() instanceof PlayerEntity) || !event.getEntityLiving().isServerWorld())
+			return;
+		
+		PlayerEntity player = (PlayerEntity) event.getSource().getTrueSource();
+		LivingEntity target = event.getEntityLiving();
+		IQuestData questProps = QuestDataCapability.get(player);
+
+		for (Objective obj : getObjectives(questProps))
+		{
+			if (obj instanceof IHitEntityObjective)
+			{
+				if (((IHitEntityObjective) obj).checkHit(player, target, event.getSource()))
+				{
+					obj.alterProgress(1);
+					WyNetwork.sendTo(new SSyncQuestDataPacket(questProps), player);
+				}
+			}
+		}
+	}
+	
+	@SubscribeEvent
 	public static void onItemPickedUp(EntityItemPickupEvent event)
 	{
 		PlayerEntity player = event.getPlayer();
 		IQuestData questProps = QuestDataCapability.get(player);
 
+		if(!player.isServerWorld())
+			return;
+		
 		for (Objective obj : getObjectives(questProps))
 		{
 			if (obj instanceof IObtainItemObjective)
@@ -74,6 +101,9 @@ public class QuestEvents
 		PlayerEntity player = event.getPlayer();
 		IQuestData questProps = QuestDataCapability.get(player);
 
+		if(!player.isServerWorld())
+			return;
+		
 		for (Objective obj : getObjectives(questProps))
 		{
 			if (obj instanceof IEntityInteractObjective)
