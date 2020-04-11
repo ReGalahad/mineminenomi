@@ -2,6 +2,7 @@ package xyz.pixelatedw.mineminenomi.init;
 
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.EnumFruitType;
+import xyz.pixelatedw.mineminenomi.abilities.ZoomAbility;
 import xyz.pixelatedw.mineminenomi.abilities.bane.SpringDeathKnockAbility;
 import xyz.pixelatedw.mineminenomi.abilities.bane.SpringHopperAbility;
 import xyz.pixelatedw.mineminenomi.abilities.bane.SpringSnipeAbility;
@@ -255,6 +256,9 @@ public class ModAbilities
 		WyRegistry.registerAbility(MedicBagExplosionAbility.INSTANCE);
 		WyRegistry.registerAbility(FailedExperimentAbility.INSTANCE);
 
+		// Sniper Googles
+		WyRegistry.registerAbility(ZoomAbility.INSTANCE);
+		
 		WyDebug.debug("A total of " + ModValues.devilfruits.size() + " Devil Fruits have been registered");
 		WyDebug.debug("A total of " + APIRegistries.ABILITIES.getEntries().size() + " abilities have been registered");
 	}

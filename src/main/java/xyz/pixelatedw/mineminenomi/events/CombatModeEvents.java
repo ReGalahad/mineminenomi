@@ -13,7 +13,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.ForgeIngameGui;
 import net.minecraftforge.client.event.FOVUpdateEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -23,8 +22,6 @@ import net.minecraftforge.fml.client.config.GuiUtils;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.api.helpers.ModRendererHelper;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
-import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
-import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
@@ -34,17 +31,14 @@ import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 
-@Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
+@Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID, value = Dist.CLIENT)
 public class CombatModeEvents
 {
-	@SuppressWarnings("resource")
-	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
 	public static void onRenderOverlay(RenderGameOverlayEvent event)
 	{
 		Minecraft mc = Minecraft.getInstance();
 		PlayerEntity player = mc.player;
-		IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
 		IAbilityData abilityDataProps = AbilityDataCapability.get(player);
 		IEntityStats entityStatsProps = EntityStatsCapability.get(player);
 
@@ -70,7 +64,6 @@ public class CombatModeEvents
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
 			mc.getTextureManager().bindTexture(Widget.GUI_ICONS_LOCATION);
-			double f2 = player.getAbsorptionAmount();
 
 			for (int i = MathHelper.ceil((maxHealth) / 2.0F) - 1; i >= 0; i--)
 			{
@@ -143,8 +136,7 @@ public class CombatModeEvents
 				event.setNewfov(1.0F);
 
 			if ((event.getEntity().isPotionActive(Effects.SPEED)) && (event.getEntity().isSprinting()))
-				event.setNewfov(1.1F);
+				event.setNewfov(1.1F);			
 		}
 	}
-
 }

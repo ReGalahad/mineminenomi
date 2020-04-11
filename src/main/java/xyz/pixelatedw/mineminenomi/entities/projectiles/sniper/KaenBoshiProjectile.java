@@ -64,7 +64,7 @@ public class KaenBoshiProjectile extends AbilityProjectileEntity
 				data.setTexture(ModResources.MERA);
 				data.setLife(10);
 				data.setSize(0.5F);
-				WyHelper.spawnParticles(data, (ServerWorld) this.world, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ);
+				WyHelper.spawnParticles(data, (ServerWorld) this.world, this.posX + offsetX, this.posY + 0.2 + offsetY, this.posZ + offsetZ);
 			}
 		}
 	}
