@@ -36,7 +36,7 @@ public class AbilityValidationEvents
 			IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
 			//QuestProperties questProps = QuestProperties.get(player);
 			IAbilityData abilityProps = AbilityDataCapability.get(player);
-			
+
 			if (!player.world.isRemote)
 			{
 				//if (!entityStatsProps.hasRace() && !entityStatsProps.hasFaction() && !entityStatsProps.hasFightingStyle() && !player.inventory.hasItemStack(new ItemStack(ModItems.CHARACTER_CREATOR)))
@@ -89,7 +89,6 @@ public class AbilityValidationEvents
 								
 				WyNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), entityStatsProps), (ServerPlayerEntity) player);
 				WyNetwork.sendTo(new SSyncDevilFruitPacket(player.getEntityId(), devilFruitProps), (ServerPlayerEntity) player);
-				//ModNetwork.sendTo(new PacketQuestSync(questProps), (ServerPlayerEntity) player);
 				WyNetwork.sendTo(new SSyncAbilityDataPacket(abilityProps), (ServerPlayerEntity) player);		
 			}
 		}

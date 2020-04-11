@@ -53,6 +53,14 @@ public abstract class Quest extends ForgeRegistryEntry<Quest>
 		return null;
 	}
 	
+	@Override
+	public boolean equals(Object quest)
+	{
+		if(!(quest instanceof Quest))
+			return false;
+		
+		return this.getId().equalsIgnoreCase(((Quest) quest).getId());
+	}
 	
 	/*
 	 *  Setters and Getters

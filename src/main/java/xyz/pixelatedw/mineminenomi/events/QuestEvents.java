@@ -1,11 +1,34 @@
 package xyz.pixelatedw.mineminenomi.events;
 
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.wypi.APIConfig;
+import xyz.pixelatedw.wypi.data.quest.IQuestData;
+import xyz.pixelatedw.wypi.data.quest.QuestDataCapability;
+import xyz.pixelatedw.wypi.network.WyNetwork;
+import xyz.pixelatedw.wypi.network.packets.server.SSyncQuestDataPacket;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
-public class EventsQuests
+public class QuestEvents
 {
+	@SubscribeEvent
+	public static void onEntityJoinWorld(EntityJoinWorldEvent event)
+	{
+		if (!(event.getEntity() instanceof PlayerEntity))
+			return;
+		
+		PlayerEntity player = (PlayerEntity) event.getEntity();
+		IQuestData questProps = QuestDataCapability.get(player);
+		
+		if (player.world.isRemote)
+			return;
+			
+		WyNetwork.sendTo(new SSyncQuestDataPacket(questProps), (ServerPlayerEntity) player);		
+	}
+	
 /*
 	@SubscribeEvent
 	public static void onEntityUpdate(LivingUpdateEvent event)

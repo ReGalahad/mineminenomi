@@ -1,7 +1,7 @@
 package xyz.pixelatedw.mineminenomi.init;
 
 import net.minecraftforge.fml.common.Mod;
-import xyz.pixelatedw.mineminenomi.quests.swordsman.SwordsmanTrial01;
+import xyz.pixelatedw.mineminenomi.quests.swordsman.SwordsmanTrial01Quest;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyRegistry;
 import xyz.pixelatedw.wypi.quests.Quest;
@@ -10,7 +10,7 @@ import xyz.pixelatedw.wypi.quests.Quest;
 public class ModQuests
 {
 
-	public static final Quest SWORDSMAN_TRIAL_01 = new SwordsmanTrial01();
+	public static final Quest SWORDSMAN_TRIAL_01 = new SwordsmanTrial01Quest();
 
 	
 	static

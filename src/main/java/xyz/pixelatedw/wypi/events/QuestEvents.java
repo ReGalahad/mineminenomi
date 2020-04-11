@@ -7,6 +7,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteractSpecific;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.wypi.APIConfig;
@@ -15,6 +16,7 @@ import xyz.pixelatedw.wypi.data.quest.QuestDataCapability;
 import xyz.pixelatedw.wypi.network.WyNetwork;
 import xyz.pixelatedw.wypi.network.packets.server.SSyncQuestDataPacket;
 import xyz.pixelatedw.wypi.quests.Quest;
+import xyz.pixelatedw.wypi.quests.objectives.IEntityInteractObjective;
 import xyz.pixelatedw.wypi.quests.objectives.IKillEntityObjective;
 import xyz.pixelatedw.wypi.quests.objectives.IObtainItemObjective;
 import xyz.pixelatedw.wypi.quests.objectives.Objective;
@@ -58,6 +60,25 @@ public class QuestEvents
 			if (obj instanceof IObtainItemObjective)
 			{
 				if (((IObtainItemObjective) obj).checkItem(event.getItem().getItem()))
+				{
+					obj.alterProgress(1);
+					WyNetwork.sendTo(new SSyncQuestDataPacket(questProps), player);
+				}
+			}
+		}
+	}
+	
+	@SubscribeEvent
+	public static void onEntityInteract(EntityInteractSpecific event)
+	{
+		PlayerEntity player = event.getPlayer();
+		IQuestData questProps = QuestDataCapability.get(player);
+
+		for (Objective obj : getObjectives(questProps))
+		{
+			if (obj instanceof IEntityInteractObjective)
+			{
+				if (((IEntityInteractObjective) obj).checkInteraction(player, event.getTarget()))
 				{
 					obj.alterProgress(1);
 					WyNetwork.sendTo(new SSyncQuestDataPacket(questProps), player);
