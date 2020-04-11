@@ -1,6 +1,11 @@
 package xyz.pixelatedw.mineminenomi.entities.mobs.quest.givers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Nullable;
+
+import com.google.common.collect.ImmutableList;
 
 import net.minecraft.entity.ILivingEntityData;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -21,11 +26,15 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
+import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.entities.mobs.GenericNewEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.bandits.EntityGenericBandit;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityGenericPirate;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
+import xyz.pixelatedw.mineminenomi.init.ModQuests;
 import xyz.pixelatedw.mineminenomi.init.ModWeapons;
+import xyz.pixelatedw.wypi.quests.Quest;
 
 public class DojoSenseiEntity extends GenericNewEntity implements IQuestGiver
 {
@@ -97,10 +106,17 @@ public class DojoSenseiEntity extends GenericNewEntity implements IQuestGiver
 
 		return spawnData;
 	}
-/*
+
 	@Override
-	public Questline getQuestline()
+	public Quest[] getAvailableQuests(PlayerEntity player)
 	{
-		return ModQuestlines.SWORDSMAN_PROGRESSION;
-	}*/
+		IEntityStats entityProps = EntityStatsCapability.get(player);		
+		List<Quest> availableQuests = new ArrayList<Quest>();
+		
+		if(entityProps.isSwordsman())
+			availableQuests.addAll(ImmutableList.of(ModQuests.SWORDSMAN_TRIAL_01));
+		
+		Quest[] quests = new Quest[availableQuests.size()];	
+		return availableQuests.toArray(quests);
+	}
 }

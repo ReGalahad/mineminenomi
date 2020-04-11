@@ -56,6 +56,7 @@ public class ModResources
 	public static final ResourceLocation BLANK = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/blank.png");
 	public static final ResourceLocation WIDGETS = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/widgets.png");
 	public static final ResourceLocation SCROLL = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/quest_scroll.png");
+	public static final ResourceLocation BLANK_SLIM = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/blank_slim.png");
 
 	// Loot Tables
 	public static final ResourceLocation SMALL_SHIP_COMBAT = new ResourceLocation(APIConfig.PROJECT_ID, "chests/small_ship/combat");

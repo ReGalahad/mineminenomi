@@ -10,8 +10,16 @@ import xyz.pixelatedw.wypi.quests.Quest;
 public class ModQuests
 {
 
+	// Swordsman
 	public static final Quest SWORDSMAN_TRIAL_01 = new SwordsmanTrial01Quest();
 
+	
+	// Sniper
+	
+	
+	// Medic
+	
+	
 	
 	static
 	{

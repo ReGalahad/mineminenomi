@@ -55,7 +55,6 @@ public class QuestsTrackerScreen extends Screen
 		int posX = this.width / 2;
 		int posY = this.height / 2;
 		
-		// Background
 		Minecraft.getInstance().getTextureManager().bindTexture(ModResources.SCROLL);
 		GlStateManager.pushMatrix();
 		{
