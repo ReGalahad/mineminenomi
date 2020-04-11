@@ -26,6 +26,7 @@ import xyz.pixelatedw.wypi.json.models.block.JSONModelSimpleBlock;
 import xyz.pixelatedw.wypi.json.models.item.JSONModelSimpleItem;
 import xyz.pixelatedw.wypi.json.models.item.JSONModelSpawnEgg;
 import xyz.pixelatedw.wypi.quests.Quest;
+import xyz.pixelatedw.wypi.quests.objectives.Objective;
 
 public class WyRegistry
 {
@@ -107,8 +108,13 @@ public class WyRegistry
 	public static Quest registerQuest(Quest quest)
 	{
 		String resourceName = WyHelper.getResourceName(quest.getId());
-		langMap.put("quest." + APIConfig.PROJECT_ID + "." + resourceName, quest.getId());
+		langMap.put("quest." + APIConfig.PROJECT_ID + "." + resourceName, quest.getTitle());
 
+		for(Objective obj : quest.getObjectives())
+		{
+			langMap.put("quest.objective." + APIConfig.PROJECT_ID + "." + obj.getId(), obj.getTitle());
+		}
+		
 		QUESTS.register(resourceName, () -> quest);
 
 		return quest;

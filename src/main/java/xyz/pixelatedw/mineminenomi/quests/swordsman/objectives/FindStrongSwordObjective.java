@@ -12,12 +12,12 @@ import xyz.pixelatedw.mineminenomi.api.helpers.ItemsHelper;
 import xyz.pixelatedw.wypi.quests.objectives.IObtainItemObjective;
 import xyz.pixelatedw.wypi.quests.objectives.Objective;
 
-public class StrongSwordObjective extends Objective implements IObtainItemObjective
-{
-
-	public StrongSwordObjective()
+public class FindStrongSwordObjective extends Objective implements IObtainItemObjective
+{	
+	public FindStrongSwordObjective()
 	{
 		super("Find a sword that has over 7 damage");
+		this.setMaxProgress(1);
 	}
 
 	@Override

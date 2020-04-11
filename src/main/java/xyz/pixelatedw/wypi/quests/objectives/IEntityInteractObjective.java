@@ -5,5 +5,5 @@ import net.minecraft.entity.player.PlayerEntity;
 
 public interface IEntityInteractObjective
 {
-	void onInteractWith(PlayerEntity player, LivingEntity entity);
+	void checkInteraction(PlayerEntity player, LivingEntity entity);
 }

@@ -312,7 +312,7 @@ public class CharacterCreatorScreen extends Screen
 			GL11.glScaled(scale, scale, scale);
 			GL11.glTranslated(-128, -128, 0);
 			
-			WyHelper.drawStringWithBorder(text, 0, 0, WyHelper.hexToRGB("#FFFFFF").getRGB());
+			WyHelper.drawStringWithBorder(text, 0, 0, WyHelper.hexToRGB("#FFFFFF").getRGB(), true);
 			
 		GL11.glPopMatrix();
 	}

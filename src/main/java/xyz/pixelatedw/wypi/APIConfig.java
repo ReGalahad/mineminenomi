@@ -72,4 +72,11 @@ public class APIConfig
 		HAKI
 	}
 
+	
+	/*
+	 * Quest Constants
+	 */
+
+	public static final int MAX_IN_PROGRESS_QUESTS = 4;
+
 }

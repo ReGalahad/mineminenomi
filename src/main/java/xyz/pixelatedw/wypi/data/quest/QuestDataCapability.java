@@ -32,9 +32,9 @@ public class QuestDataCapability
 				CompoundNBT props = new CompoundNBT();
 
 				ListNBT questsInTracker = new ListNBT();
-				for (int i = 0; i < instance.getQuestsInTracker().size(); i++)
+				for (int i = 0; i < instance.getInProgressQuests().size(); i++)
 				{
-					Quest quest = instance.getQuestsInTracker().get(i);
+					Quest quest = instance.getInProgressQuests().get(i);
 					questsInTracker.add(quest.save());
 				}
 				props.put("quests_in_tracker", questsInTracker);
@@ -57,7 +57,7 @@ public class QuestDataCapability
 			{
 				CompoundNBT props = (CompoundNBT) nbt;
 
-				instance.clearTracker();
+				instance.clearInProgressQuests();
 				instance.clearFinishedQuests();
 				
 				ListNBT trackerQuests = props.getList("quests_in_tracker", Constants.NBT.TAG_COMPOUND);
@@ -69,7 +69,7 @@ public class QuestDataCapability
 					{
 						Quest newQuest = quest.create();
 						newQuest.load(nbtQuests);
-						instance.addQuestInTracker(newQuest);
+						instance.addInProgressQuest(newQuest);
 					}
 					catch(Exception e)
 					{

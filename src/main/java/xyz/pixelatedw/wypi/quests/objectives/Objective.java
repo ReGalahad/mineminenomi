@@ -8,7 +8,6 @@ import xyz.pixelatedw.wypi.WyHelper;
 
 public abstract class Objective
 {
-	private String id;
 	private String title;
 	private String description;
 	private boolean isHidden;
@@ -21,7 +20,6 @@ public abstract class Objective
 	public Objective(String title)
 	{
 		this.title = title;
-		this.id = WyHelper.getResourceName(title);
 	}
 	
 	
@@ -61,30 +59,45 @@ public abstract class Objective
 		return this.maxProgress;
 	}
 	
-	public void addRequirement(Objective objective)
+	public Objective addRequirements(Objective... objectives)
+	{
+		for(Objective obj : objectives)
+		{
+			if(!this.requirements.contains(obj))
+				this.requirements.add(obj);
+		}
+		
+		return this;
+	}
+	
+	public Objective addRequirement(Objective objective)
 	{
 		if(!this.requirements.contains(objective))
 			this.requirements.add(objective);
+		
+		return this;
 	}
 	
-	public void setDescription(String desc)
+	public Objective setDescription(String desc)
 	{
 		this.description = desc;
+		return this;
 	}
 
-	public void markHidden()
+	public Objective markHidden()
 	{
 		this.isHidden = true;
+		return this;
 	}
 	
 	public String getId()
 	{
-		return this.id;
+		return WyHelper.getResourceName(this.title);
 	}
 	
 	public boolean isHidden()
 	{
-		return this.isHidden;
+		return this.isHidden && this.isLocked();
 	}
 	
 	public String getTitle()
@@ -128,5 +141,11 @@ public abstract class Objective
 		nbt.putDouble("progress", this.progress);
 
 		return nbt;
+	}
+	
+	public void load(CompoundNBT nbt)
+	{	
+		this.isHidden = nbt.getBoolean("isHidden");
+		this.progress = nbt.getDouble("progress");
 	}
 }

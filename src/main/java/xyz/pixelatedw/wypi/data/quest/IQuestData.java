@@ -6,13 +6,13 @@ import xyz.pixelatedw.wypi.quests.Quest;
 
 public interface IQuestData
 {
-	boolean addQuestInTracker(Quest quest);
-	boolean removeQuestFromTracker(Quest quest);
-	boolean hasQuestInTracker(Quest quest);
-	<T extends Quest> T getQuestInTracker(T quest);
-	List<Quest> getQuestsInTracker();
-	void clearTracker(); 
-	int countQuestsInTracker();
+	boolean addInProgressQuest(Quest quest);
+	boolean removeInProgressQuest(Quest quest);
+	boolean hasInProgressQuest(Quest quest);
+	<T extends Quest> T getInProgressQuest(T quest);
+	List<Quest> getInProgressQuests();
+	void clearInProgressQuests(); 
+	int countInProgressQuests();
 	
 	boolean addFinishedQuest(Quest quest);
 	boolean removeFinishedQuest(Quest quest);

@@ -9,66 +9,65 @@ import xyz.pixelatedw.wypi.quests.Quest;
 public class QuestDataBase implements IQuestData
 {
 	
-	private List<Quest> questsInTracker = new ArrayList<Quest>();
+	private List<Quest> inProgressQuests = new ArrayList<Quest>();
 	private List<Quest> finishedQuests = new ArrayList<Quest>();
 
-
 	@Override
-	public boolean addQuestInTracker(Quest quest)
+	public boolean addInProgressQuest(Quest quest)
 	{
-		Quest ogQuest = this.getQuestInTracker(quest);
+		Quest ogQuest = this.getInProgressQuest(quest);
 		if (ogQuest == null)
 		{
-			this.questsInTracker.add(ogQuest);
+			this.inProgressQuests.add(quest);
 			return true;
 		}
 		return false;
 	}
 
 	@Override
-	public boolean removeQuestFromTracker(Quest quest)
+	public boolean removeInProgressQuest(Quest quest)
 	{
-		Quest ogQuest = this.getQuestInTracker(quest);
+		Quest ogQuest = this.getInProgressQuest(quest);
 		if (ogQuest != null)
 		{
-			this.questsInTracker.remove(ogQuest);
+			this.inProgressQuests.remove(ogQuest);
 			return true;
 		}
 		return false;
 	}
 
 	@Override
-	public boolean hasQuestInTracker(Quest quest)
+	public boolean hasInProgressQuest(Quest quest)
 	{
-		this.questsInTracker.removeIf(qst -> qst == null);
-		return this.questsInTracker.parallelStream().anyMatch(qst -> qst.equals(quest));
+		this.inProgressQuests.removeIf(qst -> qst == null);
+		return this.inProgressQuests.parallelStream().anyMatch(qst -> qst.equals(quest));
 	}
 
 	@Override
-	public <T extends Quest> T getQuestInTracker(T quest)
+	public <T extends Quest> T getInProgressQuest(T quest)
 	{
-		this.questsInTracker.removeIf(qst -> qst == null);
-		return (T) this.questsInTracker.parallelStream().filter(qst -> qst.equals(quest)).findFirst().orElse(null);
+		this.inProgressQuests.removeIf(qst -> qst == null);
+		return (T) this.inProgressQuests.parallelStream().filter(qst -> qst.equals(quest)).findFirst().orElse(null);
 	}
 
 	@Override
-	public List<Quest> getQuestsInTracker()
+	public List<Quest> getInProgressQuests()
 	{
-		this.questsInTracker.removeIf(qst -> qst == null);
-		return this.questsInTracker.parallelStream().collect(Collectors.toList());
+		this.inProgressQuests.removeIf(qst -> qst == null);
+		return this.inProgressQuests.parallelStream().collect(Collectors.toList());
 	}
 
 	@Override
-	public void clearTracker()
+	public void clearInProgressQuests()
 	{
-		this.questsInTracker.removeIf(qst -> qst == null);
+		this.inProgressQuests.removeIf(qst -> qst == null);
 	}
 
 	@Override
-	public int countQuestsInTracker()
+	public int countInProgressQuests()
 	{
-		this.questsInTracker.removeIf(qst -> qst == null);
-		return this.questsInTracker.size();
+		this.inProgressQuests.removeIf(qst -> qst == null);
+		return this.inProgressQuests.size();
 	}
 
 	@Override
@@ -77,7 +76,7 @@ public class QuestDataBase implements IQuestData
 		Quest ogQuest = this.getFinishedQuest(quest);
 		if (ogQuest == null)
 		{
-			this.finishedQuests.add(ogQuest);
+			this.finishedQuests.add(quest);
 			return true;
 		}
 		return false;

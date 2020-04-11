@@ -473,17 +473,75 @@ public class WyHelper
 
 	public static void drawCenteredString(String text, int x, int y, int color)
 	{
-		FontRenderer fontObj = Minecraft.getInstance().fontRenderer;
-		fontObj.drawStringWithShadow(text, x - fontObj.getStringWidth(text) / 2, y, color);
+		drawCenteredString(Minecraft.getInstance().fontRenderer, text, x, y, color);
 	}
 	
-	public static void drawStringWithBorder(String text, int posX, int posY, int color)
+	public static void drawCenteredString(FontRenderer font, String text, int x, int y, int color)
 	{
-		drawCenteredString(text	, posX		, posY - 1	, 1);
-		drawCenteredString(text	, posX		, posY + 1	, 1);
-		drawCenteredString(text	, posX + 1	, posY		, 1);
-		drawCenteredString(text	, posX - 1	, posY 		, 1);
-		drawCenteredString(text	, posX		, posY		, color);
+		font.drawStringWithShadow(text, x - font.getStringWidth(text) / 2, y, color);
+	}
+
+	public static void drawStringWithBorder(String text, int posX, int posY, int color, boolean isCentered)
+	{
+		drawStringWithBorder(Minecraft.getInstance().fontRenderer, text, posX, posY, color, isCentered);
+	}
+	
+	public static void drawStringWithBorder(FontRenderer font, String text, int posX, int posY, int color, boolean isCentered)
+	{
+		if(isCentered)
+		{
+			drawCenteredString(font, text, posX		, posY - 1	, 1);
+			drawCenteredString(font, text, posX		, posY + 1	, 1);
+			drawCenteredString(font, text, posX + 1	, posY		, 1);
+			drawCenteredString(font, text, posX - 1	, posY 		, 1);
+			drawCenteredString(font, text, posX		, posY		, color);
+		}
+		else
+		{
+			font.drawStringWithShadow(text, posX, posY - 1, 1);
+			font.drawStringWithShadow(text, posX, posY + 1, 1);
+			font.drawStringWithShadow(text, posX + 1, posY, 1);
+			font.drawStringWithShadow(text, posX - 1, posY, 1);
+			font.drawStringWithShadow(text, posX, posY, color);
+		}
+	}
+	
+	public static void drawHiddenString(String text, int posX, int posY, int color, boolean isCentered)
+	{
+		drawHiddenString(Minecraft.getInstance().fontRenderer, text, posX, posY, color, isCentered);
+	}
+	
+	public static void drawHiddenString(FontRenderer font, String text, int posX, int posY, int color, boolean isCentered)
+	{
+		if(isCentered)
+		{
+			drawCenteredString(font, text, 	posX, 		posY - 1, color);
+			drawCenteredString(font, text, 	posX, 		posY + 1, color);
+			drawCenteredString(font, text, 	posX + 1, 	posY + 1, color);
+			drawCenteredString(font, text, 	posX + 1, 	posY, color);
+			drawCenteredString(font, text, 	posX - 1, 	posY, color);
+			drawCenteredString(font, text, 	posX + 2, 	posY, color);
+			drawCenteredString(font, text, 	posX - 2, 	posY, color);
+			drawCenteredString(font, text, 	posX - 1, 	posY - 1, color);
+			drawCenteredString(font, text, 	posX - 1, 	posY + 1, color);
+			drawCenteredString(font, text, 	posX + 1, 	posY - 1, color);
+			drawCenteredString(font, text, 	posX, 		posY, color);
+		}
+		else
+		{
+			for(int i = 1; i <= 2; i++)			
+			{
+				font.drawString(text, 	posX, 		posY - i, color);
+				font.drawString(text, 	posX, 		posY + i, color);
+				font.drawString(text, 	posX + i, 	posY + i, color);
+				font.drawString(text, 	posX + i, 	posY, color);
+				font.drawString(text, 	posX - i, 	posY, color);
+				font.drawString(text, 	posX - i, 	posY - i, color);
+				font.drawString(text, 	posX - i, 	posY + i, color);
+				font.drawString(text, 	posX + i, 	posY - i, color);
+			}
+			font.drawString(text, posX, posY, color);
+		}
 	}
 	
 	public static float handleRotationFloat(LivingEntity entity, float partialTicks)

@@ -139,7 +139,7 @@ public class PlayerStatsScreen extends Screen
 		{
 			this.addButton(new Button(posX + 63, posY + 210, 80, 20, I18n.format(ModI18n.GUI_QUESTS), b ->
 			{
-				//Minecraft.getInstance().displayGuiScreen(new QuestsTrackerScreen(player));
+				Minecraft.getInstance().displayGuiScreen(new QuestsTrackerScreen(player));
 			}));
 		}
 	}
