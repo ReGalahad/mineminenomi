@@ -498,6 +498,7 @@ public class WyHelper
 		}
 		else
 		{
+			//font.drawSplitString(text, posX, posY - 1, 140, 1);
 			font.drawStringWithShadow(text, posX, posY - 1, 1);
 			font.drawStringWithShadow(text, posX, posY + 1, 1);
 			font.drawStringWithShadow(text, posX + 1, posY, 1);

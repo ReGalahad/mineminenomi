@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.quests.objectives;
+package xyz.pixelatedw.mineminenomi.quests.swordsman.objectives;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -8,9 +8,9 @@ import xyz.pixelatedw.mineminenomi.api.helpers.ItemsHelper;
 import xyz.pixelatedw.wypi.quests.objectives.IKillEntityObjective;
 import xyz.pixelatedw.wypi.quests.objectives.Objective;
 
-public class KillWithCriticalObjective extends Objective implements IKillEntityObjective
+public class SwordKillObjective extends Objective implements IKillEntityObjective
 {	
-	public KillWithCriticalObjective(String title, int count)
+	public SwordKillObjective(String title, int count)
 	{
 		super(title);
 		this.setMaxProgress(count);
@@ -21,10 +21,9 @@ public class KillWithCriticalObjective extends Objective implements IKillEntityO
 	{
 		ItemStack heldItem = player.getHeldItemMainhand();
 
-		boolean criticalFlag = player.fallDistance > 0.0F && !player.onGround && !player.isOnLadder() && !player.isInWater() && !player.isPassenger();
 		boolean swordFlag = ItemsHelper.isSword(heldItem);
 				
-		return criticalFlag && swordFlag;
+		return swordFlag;
 	}
 
 }

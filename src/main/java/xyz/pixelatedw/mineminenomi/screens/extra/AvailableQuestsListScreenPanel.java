@@ -40,7 +40,7 @@ public class AvailableQuestsListScreenPanel extends ScrollPanel
 				this.availableQuests.add(quests[i]);
 			}
 		}
-		this.scrollDistance = (float) (-ENTRY_HEIGHT * 2.5);
+		this.scrollDistance = -10;
 	}
 
 	@Override
@@ -86,22 +86,24 @@ public class AvailableQuestsListScreenPanel extends ScrollPanel
 	{
 		for (Quest quest : this.availableQuests)
 		{
+			if(quest == null)
+				continue;
+			
 			float y = relativeY;
 			float x = (this.parent.width / 2 - 109) + 40;
 
 			String formattedQuestName = I18n.format("quest." + APIConfig.PROJECT_ID + "." + WyHelper.getResourceName(quest.getId()));
 			String questColor = "#FFFFFF";
 
-			if(this.props.getInProgressQuest(quest).isComplete())
+			Quest inProgressQuest = this.props.getInProgressQuest(quest);
+			if(inProgressQuest != null && inProgressQuest.isComplete())
 			{
 				questColor = "#00FF55";
 			}
 			
-			if(this.isMouseOver(mouseX, mouseY))
+			if(this.isMouseOverQuest(mouseX, mouseY, quest))
 			{
-				formattedQuestName = "Quest already in progress!";
-				if(this.props.getInProgressQuest(quest).isComplete())
-					formattedQuestName = "Can be turned in!";
+				GlStateManager.color3f(0.9f, 0.9f, 0.9f);
 			}
 			
 			GlStateManager.pushMatrix();
@@ -119,9 +121,15 @@ public class AvailableQuestsListScreenPanel extends ScrollPanel
 			}
 			GlStateManager.popMatrix();
 
-			WyHelper.drawStringWithBorder(formattedQuestName, (int) x - 80, (int) y + 16, WyHelper.hexToRGB(questColor).getRGB(), false);
+			GlStateManager.color3f(1f, 1f, 1f);
+			
+			if(formattedQuestName.length() > 25)
+			{
 
-			relativeY += ENTRY_HEIGHT * 1.25;
+			}
+			WyHelper.drawStringWithBorder(formattedQuestName, (int) x - 80, (int) y + 16, WyHelper.hexToRGB(questColor).getRGB(), false);
+			
+			relativeY += ENTRY_HEIGHT * 2.75;
 		}	
 	}
 	
@@ -130,20 +138,18 @@ public class AvailableQuestsListScreenPanel extends ScrollPanel
 	{		
 		Quest quest = this.findQuestEntry((int) mouseX, (int) mouseY);
 
-		if(!this.isMouseOver(mouseX, mouseY))
-			return false;
+		
 		
 		return super.mouseClicked(mouseX, mouseY, button);
 	}
 
-	@Override
-	public boolean isMouseOver(double mouseX, double mouseY)
+	public boolean isMouseOverQuest(double mouseX, double mouseY, Quest overQuest)
 	{
 		Quest quest = this.findQuestEntry((int) mouseX, (int) mouseY);
 		
-		if(quest != null)
+		if(quest != null && quest.equals(overQuest))
 		{
-			return true;
+			return super.isMouseOver(mouseX, mouseY);
 		}
 		
 		return false;
