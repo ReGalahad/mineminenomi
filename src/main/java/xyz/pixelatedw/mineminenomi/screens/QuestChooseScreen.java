@@ -12,6 +12,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.config.GuiUtils;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
+import xyz.pixelatedw.mineminenomi.screens.extra.AvailableQuestsListScreenPanel;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.data.quest.IQuestData;
 import xyz.pixelatedw.wypi.data.quest.QuestDataCapability;
@@ -25,6 +26,8 @@ public class QuestChooseScreen extends Screen
 	private Quest[] availableQuests = new Quest[0];
 	private Entity questGiver;
 	
+	private AvailableQuestsListScreenPanel availableQuestsPanel;
+	
 	public QuestChooseScreen(PlayerEntity player, Entity questGiver, Quest[] availableQuests)
 	{
 		super(new StringTextComponent(""));
@@ -35,7 +38,7 @@ public class QuestChooseScreen extends Screen
 	}
 
 	@Override
-	public void render(int x, int y, float f)
+	public void render(int mouseX, int mouseY, float partialTicks)
 	{
 		this.renderBackground();
 		GlStateManager.color4f(1F, 1F, 1F, 1F);
@@ -59,6 +62,7 @@ public class QuestChooseScreen extends Screen
 		}
 		GlStateManager.popMatrix();
 		
+		// Quest Giver model
 		GlStateManager.pushMatrix();
 		{
 			if(this.questGiver instanceof LivingEntity)
@@ -66,6 +70,22 @@ public class QuestChooseScreen extends Screen
 		}
 		GlStateManager.popMatrix();
 		
-		super.render(x, y, f);
+		// Quest Giver
+		GlStateManager.pushMatrix();
+		{
+			this.availableQuestsPanel.render(mouseX, mouseY, partialTicks);
+			this.availableQuestsPanel.isMouseOver(mouseX, mouseY);
+		}
+		GlStateManager.popMatrix();
+		
+		super.render(mouseX, mouseY, partialTicks);
+	}
+	
+	@Override
+	public void init()
+	{
+		this.availableQuestsPanel = new AvailableQuestsListScreenPanel(this, this.qprops, this.availableQuests);
+		this.children.add(this.availableQuestsPanel);
+		this.setFocused(this.availableQuestsPanel);
 	}
 }

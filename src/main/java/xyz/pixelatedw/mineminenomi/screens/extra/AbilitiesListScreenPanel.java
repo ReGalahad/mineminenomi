@@ -55,7 +55,7 @@ public class AbilitiesListScreenPanel extends ScrollPanel
 	@Override
 	protected int getScrollAmount()
 	{
-		return 10;
+		return 12;
 	}
 
 	@Override

@@ -10,7 +10,7 @@ import xyz.pixelatedw.wypi.quests.Quest;
 import xyz.pixelatedw.wypi.quests.objectives.Objective;
 
 public class SwordsmanTrial01Quest extends Quest
-{	
+{
 	private Objective objective01 = new FindStrongSwordObjective();
 	private Objective objective02 = new KillWithCriticalObjective("Kill 5 enemies with critical hits", 5).addRequirement(this.objective01);
 	private Objective objective03 = new TalkWithSwordsmanSenseiObjective().addRequirement(this.objective02);
@@ -27,5 +27,4 @@ public class SwordsmanTrial01Quest extends Quest
 		IEntityStats eprops = EntityStatsCapability.get(player);
 		return eprops.isSwordsman();
 	}
-
 }

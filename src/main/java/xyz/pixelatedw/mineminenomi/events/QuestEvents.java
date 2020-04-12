@@ -40,10 +40,8 @@ public class QuestEvents
 			return;
 		
 		PlayerEntity player = event.getPlayer();
-		IQuestData questProps = QuestDataCapability.get(player);
 		IQuestGiver questGiver = (IQuestGiver) event.getTarget();
 		
-		System.out.println(questGiver.getAvailableQuests(player));
 		Minecraft.getInstance().displayGuiScreen(new QuestChooseScreen(player, event.getTarget(), questGiver.getAvailableQuests(player)));
 	}
 	
