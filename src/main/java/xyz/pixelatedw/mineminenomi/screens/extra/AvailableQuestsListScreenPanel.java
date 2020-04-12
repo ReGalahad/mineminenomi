@@ -92,7 +92,7 @@ public class AvailableQuestsListScreenPanel extends ScrollPanel
 			String formattedQuestName = I18n.format("quest." + APIConfig.PROJECT_ID + "." + WyHelper.getResourceName(quest.getId()));
 			String questColor = "#FFFFFF";
 
-			if(this.props.getInProgressQuest(quest).isCompleted())
+			if(this.props.getInProgressQuest(quest).isComplete())
 			{
 				questColor = "#00FF55";
 			}
@@ -100,7 +100,7 @@ public class AvailableQuestsListScreenPanel extends ScrollPanel
 			if(this.isMouseOver(mouseX, mouseY))
 			{
 				formattedQuestName = "Quest already in progress!";
-				if(this.props.getInProgressQuest(quest).isCompleted())
+				if(this.props.getInProgressQuest(quest).isComplete())
 					formattedQuestName = "Can be turned in!";
 			}
 			

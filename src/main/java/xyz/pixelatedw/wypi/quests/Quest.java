@@ -12,6 +12,7 @@ import net.minecraft.nbt.ListNBT;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.data.quest.IQuestData;
 import xyz.pixelatedw.wypi.quests.objectives.Objective;
 
 public abstract class Quest extends ForgeRegistryEntry<Quest>
@@ -20,7 +21,8 @@ public abstract class Quest extends ForgeRegistryEntry<Quest>
 	private String description;
 	
 	private List<Objective> objectives = new ArrayList<Objective>();
-	
+	private List<Quest> requirements = new ArrayList<Quest>();
+
 	public Quest(String id, String title)
 	{
 		this.title = title;
@@ -65,13 +67,23 @@ public abstract class Quest extends ForgeRegistryEntry<Quest>
 	/*
 	 *  Setters and Getters
 	 */
+	public void addRequirements(Quest... requirements)
+	{
+		for(Quest req : requirements)
+			this.addRequirement(req);
+
+	}
+	
+	public void addRequirement(Quest req)
+	{
+		if(!this.requirements.contains(req))
+			this.requirements.add(req);
+	}
+	
 	public void addObjectives(Objective... objectives)
 	{
 		for(Objective obj : objectives)
-		{
-			if(!this.objectives.contains(obj))
-				this.objectives.add(obj);
-		}
+			this.addObjective(obj);
 	}
 	
 	public void addObjective(Objective objective)
@@ -85,7 +97,7 @@ public abstract class Quest extends ForgeRegistryEntry<Quest>
 		return this.objectives;
 	}
 	
-	public boolean isCompleted()
+	public boolean isComplete()
 	{
 		return this.objectives.stream().allMatch(objective -> objective.isComplete());
 	}
@@ -118,6 +130,24 @@ public abstract class Quest extends ForgeRegistryEntry<Quest>
 	public String getTitle()
 	{
 		return this.title;
+	}
+	
+	public boolean isLocked(IQuestData props)
+	{
+		if(this.requirements.size() <= 0)
+			return false;
+		
+		boolean isLocked = false;
+		for(Quest quest : this.requirements)
+		{
+			if(!props.hasFinishedQuest(quest))
+			{
+				isLocked = true;
+				break;
+			}
+		}
+
+		return isLocked;
 	}
 	
 	

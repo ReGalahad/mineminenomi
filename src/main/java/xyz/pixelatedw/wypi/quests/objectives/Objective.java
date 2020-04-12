@@ -62,10 +62,7 @@ public abstract class Objective
 	public Objective addRequirements(Objective... objectives)
 	{
 		for(Objective obj : objectives)
-		{
-			if(!this.requirements.contains(obj))
-				this.requirements.add(obj);
-		}
+			this.addRequirement(obj);
 		
 		return this;
 	}

@@ -123,7 +123,7 @@ public class QuestEvents
 
 		for (Quest quest : questProps.getInProgressQuests())
 		{
-			if (!quest.isCompleted())
+			if (!quest.isComplete())
 			{
 				for (Objective obj : quest.getObjectives())
 				{

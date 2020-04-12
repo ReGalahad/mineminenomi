@@ -122,7 +122,7 @@ public class QuestsTrackerScreen extends Screen
 			if(currentQuestProgress != -1)
 			{
 				String textColor = "#FFFFFF";
-				if(this.currentQuest.isCompleted())
+				if(this.currentQuest.isComplete())
 					textColor = "#00FF55";
 				String progress = TextFormatting.BOLD + new TranslationTextComponent(ModI18n.GUI_QUEST_PROGRESS).getFormattedText() + " : " + String.format("%.1f", currentQuestProgress) + "%";
 				WyHelper.drawStringWithBorder(progress, posX - 90, posY - 65, WyHelper.hexToRGB(textColor).getRGB(), false);
