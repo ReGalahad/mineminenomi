@@ -114,7 +114,8 @@ public class QuestsTrackerScreen extends Screen
 				GlStateManager.scaled(scale, scale, 0);
 				GlStateManager.translated(-256, -256, 0);
 
-				WyHelper.drawStringWithBorder(currentQuestName, 0, 0, WyHelper.hexToRGB("#FFFFFF").getRGB(), true);
+				WyHelper.centerString(this.font, currentQuestName, 0, 0);
+				WyHelper.drawStringWithBorder(this.font, currentQuestName, 0, 0, WyHelper.hexToRGB("#FFFFFF").getRGB());
 			}
 			GlStateManager.popMatrix();
 			
@@ -125,7 +126,7 @@ public class QuestsTrackerScreen extends Screen
 				if(this.currentQuest.isComplete())
 					textColor = "#00FF55";
 				String progress = TextFormatting.BOLD + new TranslationTextComponent(ModI18n.GUI_QUEST_PROGRESS).getFormattedText() + " : " + String.format("%.1f", currentQuestProgress) + "%";
-				WyHelper.drawStringWithBorder(progress, posX - 90, posY - 65, WyHelper.hexToRGB(textColor).getRGB(), false);
+				WyHelper.drawStringWithBorder(this.font, progress, posX - 90, posY - 65, WyHelper.hexToRGB(textColor).getRGB());
 			}
 			
 			// Quest Objective
@@ -151,11 +152,11 @@ public class QuestsTrackerScreen extends Screen
 					if(obj.isHidden())
 					{
 			            FontRenderer galacticFont = this.minecraft.getFontResourceManager().getFontRenderer(Minecraft.standardGalacticFontRenderer);
-			            WyHelper.drawStringWithBorder("• ", posX - 90, posY - 45 + yOffset, WyHelper.hexToRGB(textColor).getRGB(), false);
-						WyHelper.drawStringWithBorder(galacticFont, this.hiddenTexts.get((int) WyHelper.randomWithRange(0, this.hiddenTexts.size() - 1)), posX - 82, posY - 45 + yOffset, WyHelper.hexToRGB(textColor).getRGB(), false);
+			            WyHelper.drawStringWithBorder(this.font, "• ", posX - 90, posY - 45 + yOffset, WyHelper.hexToRGB(textColor).getRGB());
+						WyHelper.drawStringWithBorder(galacticFont, this.hiddenTexts.get((int) WyHelper.randomWithRange(0, this.hiddenTexts.size() - 1)), posX - 82, posY - 45 + yOffset, WyHelper.hexToRGB(textColor).getRGB());
 					}
 					else
-						WyHelper.drawStringWithBorder((obj.isComplete() ? TextFormatting.STRIKETHROUGH + "" : "") + "• " + objectiveName + progress, posX - 90, posY - 45 + yOffset, WyHelper.hexToRGB(textColor).getRGB(), false);
+						WyHelper.drawStringWithBorder(this.font, (obj.isComplete() ? TextFormatting.STRIKETHROUGH + "" : "") + "• " + objectiveName + progress, posX - 90, posY - 45 + yOffset, WyHelper.hexToRGB(textColor).getRGB());
 				}
 			}
 			GlStateManager.popMatrix();

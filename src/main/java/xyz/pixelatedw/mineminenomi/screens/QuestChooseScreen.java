@@ -2,7 +2,6 @@ package xyz.pixelatedw.mineminenomi.screens;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -10,8 +9,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.client.config.GuiUtils;
-import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.screens.extra.AvailableQuestsListScreenPanel;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.data.quest.IQuestData;
@@ -45,23 +42,7 @@ public class QuestChooseScreen extends Screen
 		
 		int posX = this.width / 2;
 		int posY = this.height / 2;
-		
-		// Background
-		Minecraft.getInstance().getTextureManager().bindTexture(ModResources.BLANK_SLIM);
-		GlStateManager.pushMatrix();
-		{
-			double scale = 1.4;
-			GlStateManager.translated(posX - 65, posY - 15, 0);
-			GlStateManager.translated(256, 256, 0);
-			
-			GlStateManager.scaled(scale  * 1.1, scale, 0);
-			GlStateManager.translated(-256, -256, 0);
-			
-			// Background
-			GuiUtils.drawTexturedModalRect(0, 0, 0, 0, 256, 256, 1);
-		}
-		GlStateManager.popMatrix();
-		
+
 		// Quest Giver model
 		GlStateManager.pushMatrix();
 		{

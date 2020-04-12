@@ -8,6 +8,7 @@ import org.lwjgl.opengl.GL11;
 import com.mojang.blaze3d.platform.GlStateManager;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.resources.I18n;
@@ -26,12 +27,14 @@ public class AvailableQuestsListScreenPanel extends ScrollPanel
 	private IQuestData props;
 	private List<Quest> availableQuests = new ArrayList<Quest>();
 	private static final int ENTRY_HEIGHT = 20;
-
+	private FontRenderer font;
+	
 	public AvailableQuestsListScreenPanel(QuestChooseScreen parent, IQuestData abilityProps, Quest[] quests)
 	{
 		super(parent.getMinecraft(), 200, 180, parent.height / 2 - 90, parent.width / 2 - 190);
 		this.parent = parent;
 		this.props = abilityProps;
+		this.font = parent.getMinecraft().fontRenderer;
 
 		for (int i = 0; i <= quests.length - 1; i++)
 		{
@@ -70,8 +73,6 @@ public class AvailableQuestsListScreenPanel extends ScrollPanel
 		double scale = this.parent.getMinecraft().mainWindow.getGuiScaleFactor();
 		GL11.glEnable(GL11.GL_SCISSOR_TEST);
 		GL11.glScissor((int) (left * scale), (int) (this.parent.getMinecraft().mainWindow.getFramebufferHeight() - (bottom * scale)), (int) (width * scale), (int) (height * scale));
-
-		this.drawGradientRect(this.left, this.top, this.right, this.bottom, WyHelper.hexToRGB("#ceae7877").getRGB(), WyHelper.hexToRGB("#ceae7877").getRGB());
 
 		int baseY = this.top + border - (int) this.scrollDistance;
 		this.drawPanel(right, baseY, tess, mouseX, mouseY);
@@ -123,11 +124,24 @@ public class AvailableQuestsListScreenPanel extends ScrollPanel
 
 			GlStateManager.color3f(1f, 1f, 1f);
 			
-			if(formattedQuestName.length() > 25)
+			if(this.font.getStringWidth(formattedQuestName) > 140)
 			{
-
+				GlStateManager.pushMatrix();
+				{
+					List<String> splittedText = WyHelper.splitString(this.font, formattedQuestName, (int) x - 80, (int) y + 16, 140);
+					GlStateManager.translated(0, -((splittedText.size() - 1) * 5), 0);
+					for(String string : splittedText)
+					{
+						WyHelper.drawStringWithBorder(this.font, string, (int) x - 80, (int) y + 16, WyHelper.hexToRGB(questColor).getRGB());
+						y += 10;
+					}
+				}
+				GlStateManager.popMatrix();
 			}
-			WyHelper.drawStringWithBorder(formattedQuestName, (int) x - 80, (int) y + 16, WyHelper.hexToRGB(questColor).getRGB(), false);
+			else
+			{
+				WyHelper.drawStringWithBorder(this.font, formattedQuestName, (int) x - 80, (int) y + 16, WyHelper.hexToRGB(questColor).getRGB());
+			}
 			
 			relativeY += ENTRY_HEIGHT * 2.75;
 		}	

@@ -471,40 +471,39 @@ public class WyHelper
 		GlStateManager.activeTexture(GLX.GL_TEXTURE0);
 	}
 
-	public static void drawCenteredString(String text, int x, int y, int color)
+	public static void drawStringWithBorder(FontRenderer font, String text, int posX, int posY, int color)
 	{
-		drawCenteredString(Minecraft.getInstance().fontRenderer, text, x, y, color);
+		font.drawStringWithShadow(text, posX, posY - 1, 1);
+		font.drawStringWithShadow(text, posX, posY + 1, 1);
+		font.drawStringWithShadow(text, posX + 1, posY, 1);
+		font.drawStringWithShadow(text, posX - 1, posY, 1);
+		font.drawStringWithShadow(text, posX, posY, color);
 	}
 	
-	public static void drawCenteredString(FontRenderer font, String text, int x, int y, int color)
+	public static void centerString(FontRenderer font, String text, int posX, int posY)
 	{
-		font.drawStringWithShadow(text, x - font.getStringWidth(text) / 2, y, color);
+		posX = posX - font.getStringWidth(text) / 2;
 	}
+	
+	public static List<String> splitString(FontRenderer font, String text, int posX, int posY, int wrapWidth)
+	{
+		while (text != null && text.endsWith("\n"))
+		{
+			text = text.substring(0, text.length() - 1);
+		}
 
-	public static void drawStringWithBorder(String text, int posX, int posY, int color, boolean isCentered)
-	{
-		drawStringWithBorder(Minecraft.getInstance().fontRenderer, text, posX, posY, color, isCentered);
-	}
-	
-	public static void drawStringWithBorder(FontRenderer font, String text, int posX, int posY, int color, boolean isCentered)
-	{
-		if(isCentered)
+		List<String> newText = new ArrayList<String>();
+		for (String s : font.listFormattedStringToWidth(text, wrapWidth))
 		{
-			drawCenteredString(font, text, posX		, posY - 1	, 1);
-			drawCenteredString(font, text, posX		, posY + 1	, 1);
-			drawCenteredString(font, text, posX + 1	, posY		, 1);
-			drawCenteredString(font, text, posX - 1	, posY 		, 1);
-			drawCenteredString(font, text, posX		, posY		, color);
+			if (font.getBidiFlag())
+			{
+				int i = font.getStringWidth(font.bidiReorder(s));
+				posX += wrapWidth - i;
+			}
+
+			newText.add(s);
 		}
-		else
-		{
-			//font.drawSplitString(text, posX, posY - 1, 140, 1);
-			font.drawStringWithShadow(text, posX, posY - 1, 1);
-			font.drawStringWithShadow(text, posX, posY + 1, 1);
-			font.drawStringWithShadow(text, posX + 1, posY, 1);
-			font.drawStringWithShadow(text, posX - 1, posY, 1);
-			font.drawStringWithShadow(text, posX, posY, color);
-		}
+		return newText;
 	}
 
 	public static float handleRotationFloat(LivingEntity entity, float partialTicks)
