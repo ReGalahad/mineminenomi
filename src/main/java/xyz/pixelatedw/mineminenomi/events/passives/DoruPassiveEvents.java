@@ -31,7 +31,7 @@ public class DoruPassiveEvents {
 
 	@SubscribeEvent
 	public static void onEntityRendered(RenderLivingEvent.Pre event) {
-		 CandleLockModel CANDLE_LOCK = new CandleLockModel();
+		CandleLockModel candleLock = new CandleLockModel();
 		LivingEntity entity = event.getEntity();
 		LivingRenderer renderer = event.getRenderer();
 		Color color = Color.WHITE;
@@ -57,7 +57,7 @@ public class DoruPassiveEvents {
 
 			GlStateManager.scaled(0.1, 0.1, 0.15);
 
-			CANDLE_LOCK.render(entity, 0, 0, 0, 0, 0, 0.625F);
+			candleLock.render(entity, 0, 0, 0, 0, 0, 0.625F);
 			GlStateManager.enableTexture();
 			GlStateManager.color3f(1f,1f,1f);
 		}

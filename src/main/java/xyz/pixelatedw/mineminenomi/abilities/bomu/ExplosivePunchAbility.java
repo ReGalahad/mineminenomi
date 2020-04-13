@@ -12,7 +12,6 @@ public class ExplosivePunchAbility extends Ability{
 		super("Explosive Punch", AbilityCategory.DEVIL_FRUIT);
 		this.setMaxCooldown(3);
 		this.setDescription("User punches and creates an explosion around his fist");
-		// TODO Auto-generated constructor stub
 		this.onUseEvent = this::onUseEvent;
 	}
 

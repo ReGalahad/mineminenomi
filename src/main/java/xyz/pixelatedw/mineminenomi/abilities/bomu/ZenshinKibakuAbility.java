@@ -13,7 +13,6 @@ public class ZenshinKibakuAbility extends ChargeableAbility{
 	private int power = 0;
 	public ZenshinKibakuAbility() {
 		super("Zenshin Kibaku", AbilityCategory.DEVIL_FRUIT);
-		// TODO Auto-generated constructor stub
 		this.setMaxCooldown(5);
 		this.setDescription("The user creates a massive explosion from his body.");
 		this.setMaxChargeTime(5);

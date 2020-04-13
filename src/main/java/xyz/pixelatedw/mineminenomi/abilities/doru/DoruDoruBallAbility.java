@@ -11,7 +11,6 @@ public class DoruDoruBallAbility extends ContinuousAbility {
 	public static final DoruDoruBallAbility INSTANCE = new DoruDoruBallAbility();
 	public DoruDoruBallAbility() {
 		super("Doru Doru Ball", AbilityCategory.DEVIL_FRUIT);
-		// TODO Auto-generated constructor stub
 		this.setThreshold(15);
 		this.setCooldown(5);
 		this.setDescription("Puts the user into a hardened wax ball for max defense.");
