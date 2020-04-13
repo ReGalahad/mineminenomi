@@ -8,6 +8,7 @@ import net.minecraft.item.Foods;
 import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.UseAction;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
@@ -77,5 +78,11 @@ public class SakeCupItem extends Item
 		if(!WyHelper.isNullOrEmpty(leaderUUID))
 			return world.getPlayerByUuid(UUID.fromString(leaderUUID));
 		return null;
+	}
+	
+	@Override
+	public UseAction getUseAction(ItemStack stack)
+	{
+		return UseAction.DRINK;
 	}
 }

@@ -5,6 +5,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Foods;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.UseAction;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
@@ -27,24 +28,24 @@ public class SakeBottleItem extends Item
 		player.setActiveHand(hand);
 		return new ActionResult<>(ActionResultType.SUCCESS, player.getHeldItem(hand));
 	}
-	
+
 	@Override
 	public ItemStack onItemUseFinish(ItemStack itemStack, World world, LivingEntity entity)
 	{
-		if(!world.isRemote && entity instanceof PlayerEntity)
-		{		
+		if (!world.isRemote && entity instanceof PlayerEntity)
+		{
 			PlayerEntity player = (PlayerEntity) entity;
-			
+
 			if (entity.isPotionActive(ModEffects.DRUNK))
 			{
 				EffectInstance effect = entity.getActivePotionEffect(ModEffects.DRUNK);
-					
+
 				int amp = effect.getAmplifier();
 				int duration = effect.getDuration();
-				
-				if(amp < 4)
+
+				if (amp < 4)
 					amp += 1;
-				
+
 				entity.removePotionEffect(ModEffects.DRUNK);
 				entity.addPotionEffect(new EffectInstance(ModEffects.DRUNK, duration + 200, amp));
 			}
@@ -52,11 +53,17 @@ public class SakeBottleItem extends Item
 			{
 				entity.addPotionEffect(new EffectInstance(ModEffects.DRUNK, 400, 0));
 			}
-			
-			if(!player.isCreative())
+
+			if (!player.isCreative())
 				itemStack.shrink(1);
 		}
-		
+
 		return itemStack;
+	}
+
+	@Override
+	public UseAction getUseAction(ItemStack stack)
+	{
+		return UseAction.DRINK;
 	}
 }
