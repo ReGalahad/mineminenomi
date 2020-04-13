@@ -102,9 +102,14 @@ public class AvailableQuestsListScreenPanel extends ScrollPanel
 				questColor = "#00FF55";
 			}
 			
+			if(quest.isLocked(this.props))
+			{
+				questColor = "#505050";
+			}
+			
 			if(this.isMouseOverQuest(mouseX, mouseY, quest))
 			{
-				GlStateManager.color3f(0.9f, 0.9f, 0.9f);
+				GlStateManager.color3f(0.8f, 0.8f, 0.8f);
 			}
 			
 			GlStateManager.pushMatrix();

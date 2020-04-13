@@ -16,7 +16,7 @@ import xyz.pixelatedw.wypi.abilities.Ability;
 
 public class ShiShishiSonsonAbility extends Ability
 {
-	public static final Ability INSTANCE = new ShiShishiSonsonAbility();
+	public static final ShiShishiSonsonAbility INSTANCE = new ShiShishiSonsonAbility();
 
 	public ShiShishiSonsonAbility()
 	{
@@ -46,7 +46,7 @@ public class ShiShishiSonsonAbility extends Ability
 	
 	private void duringCooldown(PlayerEntity player, int cooldownTimer)
 	{
-		if (cooldownTimer > 6 * 20)
+		if (this.canDealDamage())
 		{
 			List<LivingEntity> list = WyHelper.getEntitiesNear(player.getPosition(), player.world, 1.6);
 			list.remove(player);
@@ -56,5 +56,15 @@ public class ShiShishiSonsonAbility extends Ability
 				entity.attackEntityFrom(DamageSource.causePlayerDamage(player), 10);
 			});
 		}
+	}
+	
+	// Cooldown = 8*20 = 160 
+	// Damage Frame = 6*20 = 120
+	// 160-120=40 ticks or 2 seconds of damage frames
+	public boolean canDealDamage()
+	{
+		if(this.cooldown > 6 * 20) 
+			return true;
+		return false;
 	}
 }
