@@ -22,6 +22,8 @@ public class QuestChooseScreen extends Screen
 	private IQuestData qprops;
 	private Quest[] availableQuests = new Quest[0];
 	private Entity questGiver;
+	private float animationTime = 0;
+	private float animationTranslation = 100;
 	
 	private AvailableQuestsListScreenPanel availableQuestsPanel;
 	
@@ -31,7 +33,7 @@ public class QuestChooseScreen extends Screen
 		this.player = player;
 		this.qprops = QuestDataCapability.get(player);
 		this.availableQuests = availableQuests;
-		this.questGiver = questGiver;
+		this.questGiver = questGiver;		
 	}
 
 	@Override
@@ -43,17 +45,32 @@ public class QuestChooseScreen extends Screen
 		int posX = this.width / 2;
 		int posY = this.height / 2;
 
+		if(this.animationTime < 10)
+		{
+			this.animationTime += 0.1;
+		}
+		if(this.animationTranslation > 0)
+		{
+			this.animationTranslation = 100 - this.animationTime * 40;
+		}
+
 		// Quest Giver model
 		GlStateManager.pushMatrix();
 		{
-			if(this.questGiver instanceof LivingEntity)
-				WyHelper.drawEntityOnScreen(posX + 150, posY + 150, 100, 40, 5, (LivingEntity)this.questGiver);
+			GlStateManager.translatef(this.animationTranslation, 0, 0);
+			GlStateManager.color4f(1, 1, 1, 0.1F + this.animationTime / 4);
+			GlStateManager.enableBlend();
+			if (this.questGiver instanceof LivingEntity)
+				WyHelper.drawEntityOnScreen(posX + 150, posY + 150, 100, 40, 5, (LivingEntity) this.questGiver);
 		}
 		GlStateManager.popMatrix();
 		
-		// Quest Giver
+		// Quests
 		GlStateManager.pushMatrix();
 		{
+			GlStateManager.translatef(-this.animationTranslation, 0, 0);
+			GlStateManager.color4f(1, 1, 1, 0.1F + this.animationTime / 5);
+			GlStateManager.enableBlend();
 			this.availableQuestsPanel.render(mouseX, mouseY, partialTicks);
 			this.availableQuestsPanel.isMouseOver(mouseX, mouseY);
 		}
@@ -68,5 +85,12 @@ public class QuestChooseScreen extends Screen
 		this.availableQuestsPanel = new AvailableQuestsListScreenPanel(this, this.qprops, this.availableQuests);
 		this.children.add(this.availableQuestsPanel);
 		this.setFocused(this.availableQuestsPanel);
+	}
+	
+	public boolean isAnimationComplete()
+	{
+		if(this.animationTime >= 5)
+			return true;
+		return false;
 	}
 }

@@ -72,10 +72,10 @@ public class AvailableQuestsListScreenPanel extends ScrollPanel
 
 		double scale = this.parent.getMinecraft().mainWindow.getGuiScaleFactor();
 		GL11.glEnable(GL11.GL_SCISSOR_TEST);
-		GL11.glScissor((int) (left * scale), (int) (this.parent.getMinecraft().mainWindow.getFramebufferHeight() - (bottom * scale)), (int) (width * scale), (int) (height * scale));
+		GL11.glScissor((int) (this.left * scale), (int) (this.parent.getMinecraft().mainWindow.getFramebufferHeight() - (this.bottom * scale)), (int) (this.width * scale), (int) (this.height * scale));
 
 		int baseY = this.top + border - (int) this.scrollDistance;
-		this.drawPanel(right, baseY, tess, mouseX, mouseY);
+		this.drawPanel(this.right, baseY, tess, mouseX, mouseY);
 
 		GL11.glDisable(GL11.GL_SCISSOR_TEST);
 		
@@ -107,7 +107,7 @@ public class AvailableQuestsListScreenPanel extends ScrollPanel
 				questColor = "#505050";
 			}
 			
-			if(this.isMouseOverQuest(mouseX, mouseY, quest))
+			if(this.parent.isAnimationComplete() && this.isMouseOverQuest(mouseX, mouseY, quest))
 			{
 				GlStateManager.color3f(0.8f, 0.8f, 0.8f);
 			}
@@ -127,7 +127,8 @@ public class AvailableQuestsListScreenPanel extends ScrollPanel
 			}
 			GlStateManager.popMatrix();
 
-			GlStateManager.color3f(1f, 1f, 1f);
+			if(this.parent.isAnimationComplete())
+				GlStateManager.color3f(1f, 1f, 1f);
 			
 			if(this.font.getStringWidth(formattedQuestName) > 140)
 			{
