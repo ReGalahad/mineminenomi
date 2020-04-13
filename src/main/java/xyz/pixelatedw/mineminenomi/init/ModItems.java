@@ -1,5 +1,7 @@
 package xyz.pixelatedw.mineminenomi.init;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
+
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.Properties;
 import net.minecraft.item.PickaxeItem;
@@ -20,6 +22,8 @@ import xyz.pixelatedw.mineminenomi.items.VivreCardItem;
 import xyz.pixelatedw.mineminenomi.items.WateringCanItem;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyRegistry;
+import xyz.pixelatedw.wypi.json.models.JSONPredicateObject;
+import xyz.pixelatedw.wypi.json.models.item.JSONModelSimple3DItem;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModItems
@@ -57,6 +61,12 @@ public class ModItems
 	public static final Item KUJA_ARROW = new Item(new Properties().group(ModCreativeTabs.MISC));
 	public static final Item POP_GREEN = new Item(new Properties().group(ModCreativeTabs.MISC));
 
+	// JSON Predicates
+	public static final JSONPredicateObject FILLED_PREDICATE = new JSONPredicateObject("filled", new ImmutablePair("filled", 1));
+	
+	// JSON 3D Custom Models
+	public static final JSONModelSimple3DItem FILLED_CUP_MODEL = new JSONModelSimple3DItem("sake_cup", FILLED_PREDICATE).setThirdPersonRotations(0, 0, 0);
+
 	static
 	{
 		WyRegistry.registerItem(KAIROSEKI, "Kairoseki");
@@ -83,6 +93,6 @@ public class ModItems
 		WyRegistry.registerItem(DORU_PICKAXE, "Doru Doru Arts: Pickaxe");
 		WyRegistry.registerItem(WATERING_CAN, "Watering Can");
 		WyRegistry.registerItem(SAKE_BOTTLE, "Sake Bottle");
-		WyRegistry.registerItem(SAKE_CUP, "Sake Cup");
+		WyRegistry.registerItem(SAKE_CUP, "Sake Cup", FILLED_CUP_MODEL);
 	}
 }

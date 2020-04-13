@@ -49,6 +49,7 @@ public class CoreSwordItem extends Item
 			return mainHandFlag && hakiActiveFlag ? 1.0F : 0.0F;
 		}
 	};
+	
 	private IItemPropertyGetter sheathedProperty = (itemStack, world, livingEntity) ->
 	{
 		if (livingEntity == null || !(livingEntity instanceof PlayerEntity))

@@ -30,7 +30,6 @@ public class DrunkEffect extends Effect
 		if(this.oldHealth == 0)
 			this.oldHealth = entity.getHealth();
 		
-		System.out.println(this.oldHealth);
 		if(entity.getHealth() < this.oldHealth)
 		{
 			double damage = this.oldHealth - entity.getHealth();
