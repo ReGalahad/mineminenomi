@@ -12,6 +12,8 @@ import xyz.pixelatedw.mineminenomi.items.CharacterCreatorItem;
 import xyz.pixelatedw.mineminenomi.items.ColaItem;
 import xyz.pixelatedw.mineminenomi.items.ColorPaletteItem;
 import xyz.pixelatedw.mineminenomi.items.HeartItem;
+import xyz.pixelatedw.mineminenomi.items.SakeBottleItem;
+import xyz.pixelatedw.mineminenomi.items.SakeCupItem;
 import xyz.pixelatedw.mineminenomi.items.SeaKingMeatItem;
 import xyz.pixelatedw.mineminenomi.items.UltraColaItem;
 import xyz.pixelatedw.mineminenomi.items.VivreCardItem;
@@ -36,6 +38,7 @@ public class ModItems
 	public static final Item DORU_PICKAXE = new PickaxeItem(AbilityItemTier.DORU, 1, -2.8f, new Item.Properties());
     public static final Item COLOR_PALETTE = new ColorPaletteItem(new Item.Properties().group(ModCreativeTabs.MISC));
 	public static final Item WATERING_CAN = new WateringCanItem();
+	
 	// Devil Fruit Boxes
 	public static final Item TIER_1_BOX = new AkumaNoMiBoxItem(1);
 	public static final Item TIER_2_BOX = new AkumaNoMiBoxItem(2);
@@ -45,7 +48,9 @@ public class ModItems
 	public static final Item SEA_KING_MEAT = new SeaKingMeatItem();
 	public static final Item COLA = new ColaItem();
 	public static final Item ULTRA_COLA = new UltraColaItem();
-	
+	public static final Item SAKE_BOTTLE = new SakeBottleItem();
+	public static final Item SAKE_CUP = new SakeCupItem();
+
 	// Ammo
 	public static final Item BULLET = new Item(new Properties().group(ModCreativeTabs.MISC));
 	public static final Item KAIROSEKI_BULLET = new Item(new Properties().group(ModCreativeTabs.MISC));
@@ -77,5 +82,7 @@ public class ModItems
 		WyRegistry.registerItem(COLOR_PALETTE, "Color Palette");
 		WyRegistry.registerItem(DORU_PICKAXE, "Doru Doru Arts: Pickaxe");
 		WyRegistry.registerItem(WATERING_CAN, "Watering Can");
+		WyRegistry.registerItem(SAKE_BOTTLE, "Sake Bottle");
+		WyRegistry.registerItem(SAKE_CUP, "Sake Cup");
 	}
 }

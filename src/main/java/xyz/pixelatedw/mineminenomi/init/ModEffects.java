@@ -7,6 +7,7 @@ import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.effects.BubblyCoralEffect;
 import xyz.pixelatedw.mineminenomi.effects.CandleLockEffect;
 import xyz.pixelatedw.mineminenomi.effects.ChiyuHormoneEffect;
+import xyz.pixelatedw.mineminenomi.effects.DrunkEffect;
 import xyz.pixelatedw.mineminenomi.effects.GanmenSeichoHormoneEffect;
 import xyz.pixelatedw.mineminenomi.effects.LovestruckEffect;
 import xyz.pixelatedw.mineminenomi.effects.NegativeEffect;
@@ -32,6 +33,8 @@ public class ModEffects
 		.addAttributesModifier(SharedMonsterAttributes.KNOCKBACK_RESISTANCE, "7d355019-7ef9-4beb-bcba-8b2608a73380", 2, AttributeModifier.Operation.MULTIPLY_TOTAL);
 	public static final Effect GANMEN_SEICHO_HORMONE = new GanmenSeichoHormoneEffect()
 		.addAttributesModifier(SharedMonsterAttributes.MOVEMENT_SPEED, "7107DE5E-7CE8-4030-940E-514C1F160890", -0.01, AttributeModifier.Operation.ADDITION);
+	public static final Effect DRUNK = new DrunkEffect()
+		.addAttributesModifier(SharedMonsterAttributes.MOVEMENT_SPEED, "7107DE5E-7CE8-4030-940E-514C1F160890", -0.005, AttributeModifier.Operation.ADDITION);
 
 	static
 	{
@@ -42,5 +45,6 @@ public class ModEffects
 		WyRegistry.registerEffect(CHIYU_HORMONE, "Chiyu Hormone");
 		WyRegistry.registerEffect(TENSION_HORMONE, "Tension Hormone");
 		WyRegistry.registerEffect(GANMEN_SEICHO_HORMONE, "Genmen Seicho Hormone");
+		WyRegistry.registerEffect(DRUNK, "Drunk");
 	}
 }
