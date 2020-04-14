@@ -20,7 +20,7 @@ import xyz.pixelatedw.mineminenomi.entities.mobs.bandits.EntityBanditWithSword;
 import xyz.pixelatedw.mineminenomi.entities.mobs.marines.EntityMarineCaptain;
 import xyz.pixelatedw.mineminenomi.entities.mobs.marines.EntityMarineWithGun;
 import xyz.pixelatedw.mineminenomi.entities.mobs.marines.EntityMarineWithSword;
-import xyz.pixelatedw.mineminenomi.entities.mobs.misc.EntityBlackKnight;
+import xyz.pixelatedw.mineminenomi.entities.mobs.misc.BlackKnightEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.EntityDoppelman;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.WaxPlayerEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityPirateCaptain;
@@ -86,7 +86,7 @@ public class ModRenderers
 		// Others
 		RenderingRegistry.registerEntityRenderingHandler(EntityDoppelman.class, new DoppelmanRenderer.Factory());
 	    RenderingRegistry.registerEntityRenderingHandler(WaxPlayerEntity.class, new WaxPlayerRenderer.Factory());
-		RenderingRegistry.registerEntityRenderingHandler(EntityBlackKnight.class, new BlackKnightRenderer.Factory());
+		RenderingRegistry.registerEntityRenderingHandler(BlackKnightEntity.class, new BlackKnightRenderer.Factory());
 		RenderingRegistry.registerEntityRenderingHandler(EntityCloud.class, new CloudRenderer.Factory());
 		RenderingRegistry.registerEntityRenderingHandler(WantedPosterPackageEntity.class, new WantedPosterPackageRenderer.Factory());
 		RenderingRegistry.registerEntityRenderingHandler(VivreCardEntity.class, new VivreCardRenderer.Factory());

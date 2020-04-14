@@ -4,7 +4,7 @@ import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
@@ -14,7 +14,7 @@ import xyz.pixelatedw.mineminenomi.entities.mobs.misc.EntityDoppelman;
 import xyz.pixelatedw.mineminenomi.models.entities.mobs.humanoids.SimpleHumanModel;
 
 @OnlyIn(Dist.CLIENT)
-public class DoppelmanRenderer extends GenericMobRenderer
+public class DoppelmanRenderer extends GenericMobRenderer<EntityDoppelman, BipedModel<EntityDoppelman>>
 {
 
 	public DoppelmanRenderer(EntityRendererManager renderManager)
@@ -23,7 +23,7 @@ public class DoppelmanRenderer extends GenericMobRenderer
 	}
 	
 	@Override
-	protected void preRenderCallback(LivingEntity livingBase, float f) 
+	protected void preRenderCallback(EntityDoppelman livingBase, float f) 
 	{
 		IEntityStats props = EntityStatsCapability.get(livingBase);
 		float scale = 1 + ((float)props.getDoriki() / 7);
