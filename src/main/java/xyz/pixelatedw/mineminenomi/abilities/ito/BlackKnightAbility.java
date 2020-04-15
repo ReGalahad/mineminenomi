@@ -25,7 +25,8 @@ public class BlackKnightAbility extends ContinuousAbility implements IParallelCo
 	}
 
 	private boolean onStartContinuityEvent(PlayerEntity player)
-	{		
+	{
+		this.setMaxCooldown(1);
 		this.knight = new BlackKnightEntity(player.world);
 		this.knight.setPositionAndRotation(player.posX, player.posY, player.posZ, player.rotationYaw, player.rotationPitch);
 		this.knight.setOwner(player.getUniqueID());
@@ -38,17 +39,14 @@ public class BlackKnightAbility extends ContinuousAbility implements IParallelCo
 	{
 		if(this.knight != null)
 		{
-			if(player.isSneaking())
+			if(player.onGround && player.isSneaking())
 			{
 				this.knight.isAggressive = !this.knight.isAggressive;
 				WyHelper.sendMsgToPlayer(player, "Your Black Knight is now " + (this.knight.isAggressive ? "Agressive" : "Defensive"));
 				return false;
 			}
-			else
-			{
-				this.knight.remove();
-				return true;
-			}
+
+			this.knight.remove();
 		}
 				
 		return true;

@@ -8,8 +8,6 @@ import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
-import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
-import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.DoppelmanEntity;
 import xyz.pixelatedw.mineminenomi.models.entities.mobs.humanoids.SimpleHumanModel;
 
@@ -23,10 +21,9 @@ public class DoppelmanRenderer extends GenericMobRenderer<DoppelmanEntity, Biped
 	}
 	
 	@Override
-	protected void preRenderCallback(DoppelmanEntity livingBase, float f) 
+	protected void preRenderCallback(DoppelmanEntity entity, float f) 
 	{
-		IEntityStats props = EntityStatsCapability.get(livingBase);
-		float scale = 1 + ((float)props.getDoriki() / 7);
+		float scale = 1 + ((float)entity.getShadows() / 7);
 
 		if(scale < 1)
 			scale = 1;

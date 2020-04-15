@@ -3,6 +3,7 @@ package xyz.pixelatedw.mineminenomi.events.passives;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -63,5 +64,34 @@ public class ItoPassiveEvents
 
 		if (knight != null && knight.getOwner() == attacker)
 			knight.forcedTargets.add(attacked);
+	}
+	
+	@SubscribeEvent
+	public static void onEntityDamaged(LivingDamageEvent event)
+	{
+		if(!(event.getEntityLiving() instanceof BlackKnightEntity))
+			return;
+		
+		BlackKnightEntity entity = (BlackKnightEntity) event.getEntityLiving();
+		PlayerEntity owner = entity.getOwner();
+		
+		if(owner == null)
+			return;
+		
+		IDevilFruit props = DevilFruitCapability.get(owner);
+		
+		if(!props.getDevilFruit().equalsIgnoreCase("ito_ito") || entity.getHealth() - event.getAmount() >= 0)
+			return;
+		
+		IAbilityData abilityProps = AbilityDataCapability.get(owner);
+		
+		BlackKnightAbility ability = abilityProps.getEquippedAbility(BlackKnightAbility.INSTANCE);
+		boolean isActive = ability != null && ability.isContinuous();
+		
+		if(!isActive)
+			return;
+		
+		ability.setMaxCooldown(60);
+		ability.stopContinuity(owner);
 	}
 }

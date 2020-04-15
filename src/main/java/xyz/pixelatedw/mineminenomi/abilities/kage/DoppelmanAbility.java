@@ -25,7 +25,8 @@ public class DoppelmanAbility extends ContinuousAbility implements IParallelCont
 	}
 
 	private boolean onStartContinuityEvent(PlayerEntity player)
-	{		
+	{
+		this.setMaxCooldown(1);
 		this.doppelman = new DoppelmanEntity(player.world);
 		this.doppelman.setPositionAndRotation(player.posX, player.posY, player.posZ, player.rotationYaw, player.rotationPitch);
 		this.doppelman.setOwner(player.getUniqueID());
@@ -38,17 +39,14 @@ public class DoppelmanAbility extends ContinuousAbility implements IParallelCont
 	{
 		if(this.doppelman != null)
 		{
-			if(player.isSneaking())
+			if(player.onGround && player.isSneaking())
 			{
 				this.doppelman.isAggressive = !this.doppelman.isAggressive;
 				WyHelper.sendMsgToPlayer(player, "Your Doppelman is now " + (this.doppelman.isAggressive ? "Agressive" : "Defensive"));
 				return false;
 			}
-			else
-			{
-				this.doppelman.remove();
-				return true;
-			}
+			
+			this.doppelman.remove();
 		}
 				
 		return true;

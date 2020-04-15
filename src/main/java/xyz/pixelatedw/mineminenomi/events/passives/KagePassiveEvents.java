@@ -3,6 +3,7 @@ package xyz.pixelatedw.mineminenomi.events.passives;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -58,5 +59,34 @@ public class KagePassiveEvents
 
 		if (doppelman != null && doppelman.getOwner() == attacker)
 			doppelman.forcedTargets.add(attacked);
+	}
+	
+	@SubscribeEvent
+	public static void onEntityDamaged(LivingDamageEvent event)
+	{
+		if(!(event.getEntityLiving() instanceof DoppelmanEntity))
+			return;
+		
+		DoppelmanEntity entity = (DoppelmanEntity) event.getEntityLiving();
+		PlayerEntity owner = entity.getOwner();
+		
+		if(owner == null)
+			return;
+		
+		IDevilFruit props = DevilFruitCapability.get(owner);
+		
+		if(!props.getDevilFruit().equalsIgnoreCase("kage_kage") || entity.getHealth() - event.getAmount() >= 0)
+			return;
+		
+		IAbilityData abilityProps = AbilityDataCapability.get(owner);
+		
+		DoppelmanAbility ability = abilityProps.getEquippedAbility(DoppelmanAbility.INSTANCE);
+		boolean isActive = ability != null && ability.isContinuous();
+		
+		if(!isActive)
+			return;
+		
+		ability.setMaxCooldown(60);
+		ability.stopContinuity(owner);
 	}
 }
