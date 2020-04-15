@@ -9,6 +9,7 @@ import xyz.pixelatedw.mineminenomi.items.weapons.CoreSwordItem;
 import xyz.pixelatedw.mineminenomi.items.weapons.FlintlockItem;
 import xyz.pixelatedw.mineminenomi.items.weapons.KujaBowItem;
 import xyz.pixelatedw.mineminenomi.items.weapons.PopGreenBowItem;
+import xyz.pixelatedw.mineminenomi.items.weapons.ScissorsItem;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyRegistry;
 import xyz.pixelatedw.wypi.json.models.JSONModelItem;
@@ -24,7 +25,7 @@ public class ModWeapons
 	public static final CoreSwordItem MARINE_SWORD = new CoreSwordItem(5, 300);
 	public static final CoreSwordItem PIRATE_CUTLASS = new CoreSwordItem(5, 300);
 	public static final CoreSwordItem PIPE = new CoreSwordItem(4, 200);
-	public static final CoreSwordItem SCISSORS = new CoreSwordItem(6, 500);
+	public static final CoreSwordItem SCISSORS = new ScissorsItem();
 	public static final CoreSwordItem KIKOKU = new CoreSwordItem(8, 500);
 	public static final CoreSwordItem KIRIBACHI = new CoreSwordItem(6, 500);
 	public static final CoreSwordItem YORU = new CoreSwordItem(10, 500);

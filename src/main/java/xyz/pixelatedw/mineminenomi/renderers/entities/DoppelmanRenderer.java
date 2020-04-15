@@ -10,11 +10,11 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
-import xyz.pixelatedw.mineminenomi.entities.mobs.misc.EntityDoppelman;
+import xyz.pixelatedw.mineminenomi.entities.mobs.misc.DoppelmanEntity;
 import xyz.pixelatedw.mineminenomi.models.entities.mobs.humanoids.SimpleHumanModel;
 
 @OnlyIn(Dist.CLIENT)
-public class DoppelmanRenderer extends GenericMobRenderer<EntityDoppelman, BipedModel<EntityDoppelman>>
+public class DoppelmanRenderer extends GenericMobRenderer<DoppelmanEntity, BipedModel<DoppelmanEntity>>
 {
 
 	public DoppelmanRenderer(EntityRendererManager renderManager)
@@ -23,7 +23,7 @@ public class DoppelmanRenderer extends GenericMobRenderer<EntityDoppelman, Biped
 	}
 	
 	@Override
-	protected void preRenderCallback(EntityDoppelman livingBase, float f) 
+	protected void preRenderCallback(DoppelmanEntity livingBase, float f) 
 	{
 		IEntityStats props = EntityStatsCapability.get(livingBase);
 		float scale = 1 + ((float)props.getDoriki() / 7);
@@ -34,12 +34,12 @@ public class DoppelmanRenderer extends GenericMobRenderer<EntityDoppelman, Biped
 		GL11.glScalef(scale, scale, scale);
 	}
 	
-	public static class Factory implements IRenderFactory<EntityDoppelman>
+	public static class Factory implements IRenderFactory<DoppelmanEntity>
 	{
 		public Factory() {}
 		
 		@Override
-		public EntityRenderer<? super EntityDoppelman> createRenderFor(EntityRendererManager manager)
+		public EntityRenderer<? super DoppelmanEntity> createRenderFor(EntityRendererManager manager)
 		{
 			return new DoppelmanRenderer(manager);
 		}

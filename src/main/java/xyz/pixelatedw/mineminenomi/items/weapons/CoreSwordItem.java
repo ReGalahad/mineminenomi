@@ -136,15 +136,15 @@ public class CoreSwordItem extends Item
 		//if (!props.hasBusoHakiActive())
 		//	itemStack.damageItem(1, attacker);
 
-		if (isPoisonous)
+		if (this.isPoisonous)
 			target.addPotionEffect(new EffectInstance(Effects.POISON, this.poisonTimer, 0));
 
-		if (isFireAspect)
+		if (this.isFireAspect)
 			target.setFire(this.fireAspectTimer);
 
-		if (isSlownessInducing)
+		if (this.isSlownessInducing)
 		{
-			if (isStackable)
+			if (this.isStackable)
 			{
 				if (target.isPotionActive(Effects.SLOWNESS))
 				{
