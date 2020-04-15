@@ -3,6 +3,7 @@ package xyz.pixelatedw.mineminenomi.abilities.ito;
 import net.minecraft.entity.player.PlayerEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.BlackKnightEntity;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
+import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.ContinuousAbility;
 import xyz.pixelatedw.wypi.abilities.IParallelContinuousAbility;
 
@@ -22,10 +23,9 @@ public class BlackKnightAbility extends ContinuousAbility implements IParallelCo
 		this.onStartContinuityEvent = this::onStartContinuityEvent;
 		this.onEndContinuityEvent = this::onEndContinuityEvent;
 	}
-	
-	
+
 	private boolean onStartContinuityEvent(PlayerEntity player)
-	{
+	{		
 		this.knight = new BlackKnightEntity(player.world);
 		this.knight.setPositionAndRotation(player.posX, player.posY, player.posZ, player.rotationYaw, player.rotationPitch);
 		this.knight.setOwner(player.getUniqueID());
@@ -37,8 +37,20 @@ public class BlackKnightAbility extends ContinuousAbility implements IParallelCo
 	private boolean onEndContinuityEvent(PlayerEntity player)
 	{
 		if(this.knight != null)
-			this.knight.remove();
-		
+		{
+			if(player.isSneaking())
+			{
+				this.knight.isAggressive = !this.knight.isAggressive;
+				WyHelper.sendMsgToPlayer(player, "Your Black Knight is now " + (this.knight.isAggressive ? "Agressive" : "Defensive"));
+				return false;
+			}
+			else
+			{
+				this.knight.remove();
+				return true;
+			}
+		}
+				
 		return true;
 	}
 }

@@ -18,6 +18,7 @@ import net.minecraft.entity.ai.goal.LookRandomlyGoal;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
+import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
@@ -133,21 +134,21 @@ public class BlackKnightEntity extends CreatureEntity
 			
 			IEntityStats ownerProps = EntityStatsCapability.get(owner);
 			IDevilFruit ownerDFProps = DevilFruitCapability.get(owner);		
-			List<LivingEntity> doppelmanAttackList = this.isAggressive ? WyHelper.getEntitiesNear(this.getPosition(), this.world, 10, PlayerEntity.class, EntityGenericMarine.class, EntityGenericPirate.class) : !this.forcedTargets.isEmpty() ? this.forcedTargets : new ArrayList<LivingEntity>();
+			List<LivingEntity> targetsList = this.isAggressive ? WyHelper.getEntitiesNear(this.getPosition(), this.world, 10, PlayerEntity.class, EntityGenericMarine.class, EntityGenericPirate.class, MonsterEntity.class) : !this.forcedTargets.isEmpty() ? this.forcedTargets : new ArrayList<LivingEntity>();
 			LivingEntity target = null;
 
 			if(!ownerDFProps.getDevilFruit().equalsIgnoreCase("ito_ito"))
 				this.remove();
 			
-			if(!doppelmanAttackList.isEmpty())
+			if(!targetsList.isEmpty())
 			{
-				if(doppelmanAttackList.contains(owner))
-					doppelmanAttackList.remove(owner);
+				if(targetsList.contains(owner))
+					targetsList.remove(owner);
 				
 				if(ownerProps.isMarine())
-					doppelmanAttackList = doppelmanAttackList.stream().filter(x -> !(x instanceof EntityGenericMarine)).collect(Collectors.toList());
+					targetsList = targetsList.stream().filter(x -> !(x instanceof EntityGenericMarine)).collect(Collectors.toList());
 								
-				target = doppelmanAttackList.stream().findFirst().orElse(null);	
+				target = targetsList.stream().findFirst().orElse(null);	
 			}
 
 			if(target != null)

@@ -78,6 +78,7 @@ import xyz.pixelatedw.mineminenomi.abilities.horu.TensionHormoneAbility;
 import xyz.pixelatedw.mineminenomi.abilities.ito.BlackKnightAbility;
 import xyz.pixelatedw.mineminenomi.abilities.ito.KumoNoSugakiAbility;
 import xyz.pixelatedw.mineminenomi.abilities.ito.OverheatAbility;
+import xyz.pixelatedw.mineminenomi.abilities.ito.ParasiteAbility;
 import xyz.pixelatedw.mineminenomi.abilities.ito.SoraNoMichiAbility;
 import xyz.pixelatedw.mineminenomi.abilities.ito.TamaitoAbility;
 import xyz.pixelatedw.mineminenomi.abilities.ito.TorikagoAbility;
@@ -186,7 +187,7 @@ public class ModAbilities
 	public static final AkumaNoMiItem ORI_ORI_NO_MI = new AkumaNoMiItem("Ori Ori no Mi", EnumFruitType.PARAMECIA);
 	public static final AkumaNoMiItem SUPA_SUPA_NO_MI = new AkumaNoMiItem("Supa Supa no Mi", EnumFruitType.PARAMECIA, SpiderAbility.INSTANCE, SparClawAbility.INSTANCE, SpiralHollowAbility.INSTANCE, SparklingDaisyAbility.INSTANCE, AtomicSpurtAbility.INSTANCE);
 	public static final AkumaNoMiItem HORO_HORO_NO_MI = new AkumaNoMiItem("Horo Horo no Mi", EnumFruitType.PARAMECIA, NegativeHollowAbility.INSTANCE, MiniHollowAbility.INSTANCE, TokuHollowAbility.INSTANCE, YutaiRidatsuAbility.INSTANCE);
-	public static final AkumaNoMiItem ITO_ITO_NO_MI = new AkumaNoMiItem("Ito Ito no Mi", EnumFruitType.PARAMECIA, SoraNoMichiAbility.INSTANCE, TamaitoAbility.INSTANCE, OverheatAbility.INSTANCE, KumoNoSugakiAbility.INSTANCE, TorikagoAbility.INSTANCE, BlackKnightAbility.INSTANCE);
+	public static final AkumaNoMiItem ITO_ITO_NO_MI = new AkumaNoMiItem("Ito Ito no Mi", EnumFruitType.PARAMECIA, ParasiteAbility.INSTANCE, SoraNoMichiAbility.INSTANCE, TamaitoAbility.INSTANCE, OverheatAbility.INSTANCE, KumoNoSugakiAbility.INSTANCE, TorikagoAbility.INSTANCE, BlackKnightAbility.INSTANCE);
 	public static final AkumaNoMiItem YAMI_YAMI_NO_MI = new AkumaNoMiItem("Yami Yami no Mi", EnumFruitType.LOGIA);
 	public static final AkumaNoMiItem ZUSHI_ZUSHI_NO_MI = new AkumaNoMiItem("Zushi Zushi no Mi", EnumFruitType.PARAMECIA, JigokuTabiAbility.INSTANCE, SagariNoRyuseiAbility.INSTANCE, MokoAbility.INSTANCE, AbareHimatsuriAbility.INSTANCE);
 	public static final AkumaNoMiItem YUKI_YUKI_NO_MI = new AkumaNoMiItem("Yuki Yuki no Mi", EnumFruitType.LOGIA, KamakuraAbility.INSTANCE, YukiRabiAbility.INSTANCE, KamakuraJussoshiAbility.INSTANCE, TabiraYukiAbility.INSTANCE, YukiGakiAbility.INSTANCE, FubukiAbility.INSTANCE);
