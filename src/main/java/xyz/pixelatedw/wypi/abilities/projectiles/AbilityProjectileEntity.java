@@ -109,10 +109,12 @@ public class AbilityProjectileEntity extends ThrowableEntity
 		if (entity != null)
 			hit = new EntityRayTraceResult(entity);
 
-		if (hit.getType() == RayTraceResult.Type.ENTITY && ((EntityRayTraceResult) hit).getEntity() instanceof LivingEntity)
+		if (hit.getType() == RayTraceResult.Type.ENTITY && ((EntityRayTraceResult) hit).getEntity() instanceof LivingEntity) 
 			this.onImpact(hit);
+			
 		
 		this.onTickEvent.onTick();
+		
 	}
 
 	@Override
@@ -205,6 +207,12 @@ public class AbilityProjectileEntity extends ThrowableEntity
 	/*
 	 * 	Setters/Getters
 	 */
+	public double getCollisionSize() {
+		return this.collisionSize;
+	}
+	public void setCollisionSize(double val) {
+		this.collisionSize = val;
+	}
 	public int getLife()
 	{
 		return this.life;

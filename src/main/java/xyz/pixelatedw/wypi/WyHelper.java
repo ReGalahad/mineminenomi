@@ -267,6 +267,16 @@ public class WyHelper
 		return ray;
 	}
 
+	public static BlockRayTraceResult rayTraceBlocksWithDistance(Entity source, double distance) {
+		
+		Vec3d lookVec = source.getLook(1.0F);
+		Vec3d startVec = source.getEyePosition(1.0F);
+		Vec3d endVec = startVec.add(lookVec.x * distance, lookVec.y * distance, lookVec.z * distance);
+
+		BlockRayTraceResult ray = source.world.rayTraceBlocks(new RayTraceContext(startVec, endVec, RayTraceContext.BlockMode.OUTLINE, RayTraceContext.FluidMode.ANY, source));
+
+		return ray;
+	}
 	public static EntityRayTraceResult rayTraceEntities(Entity source, double distance)
 	{
 		Vec3d lookVec = source.getLook(1.0F);

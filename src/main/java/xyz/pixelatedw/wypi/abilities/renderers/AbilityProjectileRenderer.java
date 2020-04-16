@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
@@ -52,6 +53,9 @@ public class AbilityProjectileRenderer extends EntityRenderer<AbilityProjectileE
 		this.scaleX = scaleX;
 		this.scaleY = scaleY;
 		this.scaleZ = scaleZ;
+	}
+	public Vec3d getScale() {
+		return new Vec3d(this.scaleX, this.scaleY, this.scaleZ);
 	}
 
 	public void setOffset(double offsetX, double offsetY, double offsetZ)
