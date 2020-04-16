@@ -40,23 +40,28 @@ public abstract class RepeaterAbility extends Ability
 	@Override
 	public void cooldown(PlayerEntity player)
 	{
-		if(player.world.isRemote)
-			return;
-		
+		//if(player.world.isRemote)
+		//	return;
+
 		if(this.isOnCooldown() && this.cooldown > 0)
 		{
 			this.cooldown--;
 
-			if(this.repeaterCount > 0 && this.cooldown % this.repeaterInterval == 0)
+			if(!player.world.isRemote)
 			{
-				this.onUseEvent.onUse(player);
-				this.repeaterCount--;
+				if(this.repeaterCount > 0 && this.cooldown % this.repeaterInterval == 0)
+				{
+					this.onUseEvent.onUse(player);
+					this.repeaterCount--;
+				}
+				
+				this.duringCooldownEvent.duringCooldown(player, (int) this.cooldown);			
 			}
-
-			this.duringCooldownEvent.duringCooldown(player, (int) this.cooldown);
 		}
 		else if(this.isOnCooldown() && this.cooldown <= 0)
 		{
+			if(player.world.isRemote)
+				return;
 			this.cooldown = this.maxCooldown;				
 			this.repeaterCount = this.maxRepeaterCount;
 			this.startStandby();
