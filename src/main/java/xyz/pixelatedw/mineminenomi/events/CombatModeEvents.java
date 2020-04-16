@@ -28,14 +28,14 @@ import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.abilities.ChargeableAbility;
+import xyz.pixelatedw.wypi.abilities.ContinuousAbility;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID, value = Dist.CLIENT)
 public class CombatModeEvents
 {
-	private static int animationTime = 0;
-	
 	@SubscribeEvent
 	public static void onRenderOverlay(RenderGameOverlayEvent event)
 	{
@@ -93,8 +93,8 @@ public class CombatModeEvents
 				GlStateManager.color4f(1, 1, 1, 1);
 				GlStateManager.disableLighting();
 				GlStateManager.enableBlend();
-				mc.getTextureManager().bindTexture(ModResources.WIDGETS);
-	
+				mc.getTextureManager().bindTexture(ModResources.WIDGETS);			
+				
 				for (int i = 0; i < 8; i++)
 				{
 					Ability abl = abilityDataProps.getEquippedAbility(i);
@@ -105,15 +105,23 @@ public class CombatModeEvents
 						continue;
 					}
 					
-					float cooldown = 1 - (float) (abl.getCooldown() / abl.getMaxCooldown());
+					float cooldown = 23 - (float) (((abl.getCooldown() - 10) / abl.getMaxCooldown()) * 23);
+					float threshold = 23;
+					float charge = 23;
+					
+					if(abl instanceof ContinuousAbility)
+						threshold = (((ContinuousAbility)abl).getContinueTime() / (float) ((ContinuousAbility)abl).getThreshold()) * 23;
+				
+					if(abl instanceof ChargeableAbility)
+						charge = (((ChargeableAbility)abl).getChargeTime() / (float) ((ChargeableAbility)abl).getMaxChargeTime()) * 23;
 
 					// Setting their color based on their state
 					if (abl.isOnCooldown() && !abl.isDisabled())
-						GlStateManager.color4f(1, cooldown, cooldown, 1);
+						GlStateManager.color4f(1, 0, 0, 1);
 					else if (abl.isCharging())
-						GlStateManager.color4f(1, 1, cooldown, 1);
+						GlStateManager.color4f(1, 1, 0, 1);
 					else if (abl.isContinuous())
-						GlStateManager.color4f(cooldown, cooldown, 1, 1);
+						GlStateManager.color4f(0, 0, 1, 1);
 					else if (abl.isDisabled())
 						GlStateManager.color4f(0, 0, 0, 1);
 
@@ -128,8 +136,18 @@ public class CombatModeEvents
 						ModRendererHelper.drawAbilityIcon("disabled_status", (posX - 192 + (i * 50)) / 2, posY - 19, 3, 16, 16);
 						mc.getTextureManager().bindTexture(ModResources.WIDGETS);
 					}
+					else if(abl.isContinuous())
+					{
+						GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 0, 0, 23, (int) threshold, 0);
+					}
+					else if(abl.isCharging())
+					{
+						GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 0, 0, 23, (int) charge, 0);
+					}
 					else if(abl.isOnCooldown() && !abl.isDisabled())
 					{
+						GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 0, 0, 23, (int) cooldown, 0);
+						
 						if(abl.getCooldown() < 10)
 						{
 							// Ready animation
@@ -144,15 +162,6 @@ public class CombatModeEvents
 								GuiUtils.drawTexturedModalRect(0, 0, 0, 0, 23, 23, -1);							
 							}
 							GlStateManager.popMatrix();
-						}
-						else
-						{
-							GlStateManager.pushMatrix();
-							{
-								GlStateManager.color4f(0, 0, 0, 0.8f);
-								GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 0, 0, 23, 23, 2);
-							}
-							GlStateManager.popMatrix();							
 						}
 					}
 					

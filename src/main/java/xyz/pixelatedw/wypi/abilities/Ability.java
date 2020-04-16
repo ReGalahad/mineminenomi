@@ -187,7 +187,8 @@ public abstract class Ability extends ForgeRegistryEntry<Ability>
 		if(this.isOnCooldown() && this.cooldown > 0)
 		{
 			this.cooldown--;
-			this.duringCooldownEvent.duringCooldown(player, (int) this.cooldown);
+			if(!player.world.isRemote)
+				this.duringCooldownEvent.duringCooldown(player, (int) this.cooldown);
 		}
 		else if(this.isOnCooldown() && this.cooldown <= 0)
 		{

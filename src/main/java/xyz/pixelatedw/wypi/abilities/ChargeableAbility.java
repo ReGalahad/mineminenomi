@@ -35,6 +35,9 @@ public abstract class ChargeableAbility extends Ability
 		if(player.world.isRemote)
 			return;
 		
+		if(this.isOnCooldown() && this.getCooldown() <= 10)
+			this.stopCooldown(player);
+		
 		if(this.isCharging() && this.chargeTime > 0)
 			this.stopCharging(player);
 		else if(this.isOnStandby())
@@ -62,20 +65,19 @@ public abstract class ChargeableAbility extends Ability
 		this.setState(State.CHARGING);
 	}
 	
-	public void stopCharging(PlayerEntity player)
-	{
-		if (this.onEndChargingEvent.onEndCharging(player))
-		{
-			this.chargeTime = this.maxChargeTime;
-			this.startCooldown();
-			IAbilityData props = AbilityDataCapability.get(player);
-			WyNetwork.sendTo(new SSyncAbilityDataPacket(props), (ServerPlayerEntity) player);
-		}
-	}
-	
 	public int getMaxChargeTime()
 	{
 		return this.maxChargeTime;
+	}
+	
+	public int getChargeTime()
+	{
+		return this.chargeTime;
+	}
+	
+	public void setChargeTime(int time)
+	{
+		this.chargeTime = time * 20;
 	}
 	
 	public void setCancelable()
@@ -88,25 +90,41 @@ public abstract class ChargeableAbility extends Ability
 		return this.isCancelable;
 	}
 	
+	
+	
 	/*
 	 *  Methods
 	 */
 	public void charging(PlayerEntity player)
 	{
-		if(player.world.isRemote)
-			return;
+		//if(player.world.isRemote)
+		//	return;
 				
 		if(this.isCharging() && this.chargeTime > 0)
 		{
 			this.chargeTime--;
-
-			this.duringChargingEvent.duringCharging(player, this.chargeTime);
+			if(!player.world.isRemote)
+				this.duringChargingEvent.duringCharging(player, this.chargeTime);
 		}
 		else if(this.isCharging() && this.chargeTime <= 0)
 		{
 			this.stopCharging(player);
 		}
 	}
+	
+	public void stopCharging(PlayerEntity player)
+	{
+		if(player.world.isRemote)
+			return;
+		if (this.onEndChargingEvent.onEndCharging(player))
+		{
+			this.chargeTime = this.maxChargeTime;
+			this.startCooldown();
+			IAbilityData props = AbilityDataCapability.get(player);
+			WyNetwork.sendTo(new SSyncAbilityDataPacket(props), (ServerPlayerEntity) player);
+		}
+	}
+	
 	
 	
 	/*
