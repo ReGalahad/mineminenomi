@@ -61,6 +61,7 @@ public class AbilityDataCapability
 							nbtAbility.putString("name", name);
 							nbtAbility.putInt("pos", i);
 							nbtAbility.putString("state", ability.getState().toString());
+							nbtAbility.putDouble("cooldown", ability.getCooldown());
 							equippedAbilities.add(nbtAbility);						
 						}
 						else
@@ -118,10 +119,12 @@ public class AbilityDataCapability
 								if(abl.equals(ability))
 								{
 									Ability.State state = Ability.State.valueOf(nbtAbility.getString("state"));
+									int cooldown = (int) (nbtAbility.getDouble("cooldown") / 20);
 									int pos = nbtAbility.getInt("pos");
 									if (state == null)
 										state = Ability.State.STANDBY;
 									abl.setState(state);
+									abl.setCooldown(cooldown);
 									
 									instance.setEquippedAbility(pos, abl);
 								}

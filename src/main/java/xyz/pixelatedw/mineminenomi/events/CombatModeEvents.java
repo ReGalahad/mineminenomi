@@ -106,17 +106,17 @@ public class CombatModeEvents
 					}
 					
 					float cooldown = 1 - (float) (abl.getCooldown() / abl.getMaxCooldown());
-					
+
 					// Setting their color based on their state
 					if (abl.isOnCooldown() && !abl.isDisabled())
 						GlStateManager.color4f(1, cooldown, cooldown, 1);
 					else if (abl.isCharging())
-						GlStateManager.color4f(1, 1, 0, 1);
+						GlStateManager.color4f(1, 1, cooldown, 1);
 					else if (abl.isContinuous())
-						GlStateManager.color4f(0, 0, 1, 1);
+						GlStateManager.color4f(cooldown, cooldown, 1, 1);
 					else if (abl.isDisabled())
 						GlStateManager.color4f(0, 0, 0, 1);
-					
+
 					// Drawing the slot
 					GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 0, 0, 23, 23, 0);
 					// Reverting the color back to avoid future slots being wrongly colored
@@ -128,7 +128,7 @@ public class CombatModeEvents
 						ModRendererHelper.drawAbilityIcon("disabled_status", (posX - 192 + (i * 50)) / 2, posY - 19, 3, 16, 16);
 						mc.getTextureManager().bindTexture(ModResources.WIDGETS);
 					}
-					else if(abl.isOnCooldown() && abl.getCooldown() < 10)
+					else if(abl.isOnCooldown() && !abl.isDisabled() && abl.getCooldown() < 10)
 					{
 						// Ready animation
 						GlStateManager.pushMatrix();
@@ -139,11 +139,13 @@ public class CombatModeEvents
 							GlStateManager.translated(12, 12, 0);
 							GlStateManager.scaled(scale, scale, 1);
 							GlStateManager.translated(-12, -12, 0);
-							GuiUtils.drawTexturedModalRect(0, 0, 0, 0, 23, 23, -1);	
-							GlStateManager.color4f(1, 1, 1, 1);
+							GuiUtils.drawTexturedModalRect(0, 0, 0, 0, 23, 23, -1);							
 						}
 						GlStateManager.popMatrix();
 					}
+					
+					// Reverting the color back to avoid future slots being wrongly colored
+					GlStateManager.color4f(1, 1, 1, 1);
 										
 					// Drawing the ability icons
 					ModRendererHelper.drawAbilityIcon(WyHelper.getResourceName(abl.getName()), (posX - 192 + (i * 50)) / 2, posY - 19, 16, 16);
