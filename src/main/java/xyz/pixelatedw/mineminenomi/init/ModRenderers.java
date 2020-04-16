@@ -12,7 +12,6 @@ import xyz.pixelatedw.mineminenomi.blocks.tileentities.dials.FlashDialTileEntity
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.dials.ImpactDialTileEntity;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.dials.MilkyDialTileEntity;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.dials.RejectDialTileEntity;
-import xyz.pixelatedw.mineminenomi.entities.ChargingUrsusShockEntity;
 import xyz.pixelatedw.mineminenomi.entities.PhysicalBodyEntity;
 import xyz.pixelatedw.mineminenomi.entities.VivreCardEntity;
 import xyz.pixelatedw.mineminenomi.entities.WantedPosterPackageEntity;
@@ -20,14 +19,15 @@ import xyz.pixelatedw.mineminenomi.entities.mobs.bandits.EntityBanditWithSword;
 import xyz.pixelatedw.mineminenomi.entities.mobs.marines.EntityMarineCaptain;
 import xyz.pixelatedw.mineminenomi.entities.mobs.marines.EntityMarineWithGun;
 import xyz.pixelatedw.mineminenomi.entities.mobs.marines.EntityMarineWithSword;
-import xyz.pixelatedw.mineminenomi.entities.mobs.misc.EntityBlackKnight;
-import xyz.pixelatedw.mineminenomi.entities.mobs.misc.EntityDoppelman;
+import xyz.pixelatedw.mineminenomi.entities.mobs.misc.BlackKnightEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.misc.DoppelmanEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.WaxPlayerEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityPirateCaptain;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityPirateWithGun;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityPirateWithSword;
 import xyz.pixelatedw.mineminenomi.entities.mobs.quest.givers.DojoSenseiEntity;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.extra.EntityCloud;
+import xyz.pixelatedw.mineminenomi.entities.projectiles.nikyu.ChargingUrsusShockEntity;
 import xyz.pixelatedw.mineminenomi.models.blocks.Dial01Model;
 import xyz.pixelatedw.mineminenomi.models.blocks.Dial02Model;
 import xyz.pixelatedw.mineminenomi.models.blocks.Dial03Model;
@@ -84,9 +84,9 @@ public class ModRenderers
 		RenderingRegistry.registerEntityRenderingHandler(DojoSenseiEntity.class, new GenericMobRenderer.Factory(new DojoSenseiModel(), 1, null));
 
 		// Others
-		RenderingRegistry.registerEntityRenderingHandler(EntityDoppelman.class, new DoppelmanRenderer.Factory());
+		RenderingRegistry.registerEntityRenderingHandler(DoppelmanEntity.class, new DoppelmanRenderer.Factory());
 	    RenderingRegistry.registerEntityRenderingHandler(WaxPlayerEntity.class, new WaxPlayerRenderer.Factory());
-		RenderingRegistry.registerEntityRenderingHandler(EntityBlackKnight.class, new BlackKnightRenderer.Factory());
+		RenderingRegistry.registerEntityRenderingHandler(BlackKnightEntity.class, new BlackKnightRenderer.Factory());
 		RenderingRegistry.registerEntityRenderingHandler(EntityCloud.class, new CloudRenderer.Factory());
 		RenderingRegistry.registerEntityRenderingHandler(WantedPosterPackageEntity.class, new WantedPosterPackageRenderer.Factory());
 		RenderingRegistry.registerEntityRenderingHandler(VivreCardEntity.class, new VivreCardRenderer.Factory());

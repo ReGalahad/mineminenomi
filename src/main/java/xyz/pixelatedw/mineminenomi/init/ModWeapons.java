@@ -4,11 +4,18 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.Mod;
+import xyz.pixelatedw.mineminenomi.abilities.doru.DoruDoruArtsKenAbility;
+import xyz.pixelatedw.mineminenomi.abilities.gasu.BlueSwordAbility;
+import xyz.pixelatedw.mineminenomi.abilities.hie.IceSaberAbility;
+import xyz.pixelatedw.mineminenomi.abilities.noro.NoroNoroBeamSwordAbility;
+import xyz.pixelatedw.mineminenomi.abilities.pika.AmaNoMurakumoAbility;
+import xyz.pixelatedw.mineminenomi.abilities.yuki.TabiraYukiAbility;
 import xyz.pixelatedw.mineminenomi.items.weapons.AbilitySwordItem;
 import xyz.pixelatedw.mineminenomi.items.weapons.CoreSwordItem;
 import xyz.pixelatedw.mineminenomi.items.weapons.FlintlockItem;
 import xyz.pixelatedw.mineminenomi.items.weapons.KujaBowItem;
 import xyz.pixelatedw.mineminenomi.items.weapons.PopGreenBowItem;
+import xyz.pixelatedw.mineminenomi.items.weapons.ScissorsItem;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyRegistry;
 import xyz.pixelatedw.wypi.json.models.JSONModelItem;
@@ -24,7 +31,7 @@ public class ModWeapons
 	public static final CoreSwordItem MARINE_SWORD = new CoreSwordItem(5, 300);
 	public static final CoreSwordItem PIRATE_CUTLASS = new CoreSwordItem(5, 300);
 	public static final CoreSwordItem PIPE = new CoreSwordItem(4, 200);
-	public static final CoreSwordItem SCISSORS = new CoreSwordItem(6, 500);
+	public static final CoreSwordItem SCISSORS = new ScissorsItem();
 	public static final CoreSwordItem KIKOKU = new CoreSwordItem(8, 500);
 	public static final CoreSwordItem KIRIBACHI = new CoreSwordItem(6, 500);
 	public static final CoreSwordItem YORU = new CoreSwordItem(10, 500);
@@ -57,12 +64,12 @@ public class ModWeapons
 	public static final PopGreenBowItem GINGA_PACHINKO = new PopGreenBowItem();
 
 	// Devil Fruit Weapons
-	public static final AbilitySwordItem ICE_SABER = new AbilitySwordItem(9).setIsSlownessInducing();
-	public static final AbilitySwordItem AMA_NO_MURAKUMO = new AbilitySwordItem(9);
-	public static final AbilitySwordItem NORO_NORO_BEAM_SWORD = new AbilitySwordItem(5).setIsSlownessInducing(75, true);
-	public static final AbilitySwordItem DORU_DORU_ARTS_KEN = new AbilitySwordItem(6);
-	public static final AbilitySwordItem BLUE_SWORD = new AbilitySwordItem(8).setIsFireAspect();
-	public static final AbilitySwordItem TABIRA_YUKI = new AbilitySwordItem(8).setIsSlownessInducing(50);
+	public static final AbilitySwordItem ICE_SABER = new AbilitySwordItem(IceSaberAbility.INSTANCE, 9).setIsSlownessInducing();
+	public static final AbilitySwordItem AMA_NO_MURAKUMO = new AbilitySwordItem(AmaNoMurakumoAbility.INSTANCE, 9);
+	public static final AbilitySwordItem NORO_NORO_BEAM_SWORD = new AbilitySwordItem(NoroNoroBeamSwordAbility.INSTANCE, 5).setIsSlownessInducing(75, true);
+	public static final AbilitySwordItem DORU_DORU_ARTS_KEN = new AbilitySwordItem(DoruDoruArtsKenAbility.INSTANCE, 6);
+	public static final AbilitySwordItem BLUE_SWORD = new AbilitySwordItem(BlueSwordAbility.INSTANCE, 8).setIsFireAspect();
+	public static final AbilitySwordItem TABIRA_YUKI = new AbilitySwordItem(TabiraYukiAbility.INSTANCE, 8).setIsSlownessInducing(50);
 	
 	// JSON Predicates
 	public static final JSONPredicateObject HAKI_PREDICATE = new JSONPredicateObject("haki", new ImmutablePair("haki", 1));

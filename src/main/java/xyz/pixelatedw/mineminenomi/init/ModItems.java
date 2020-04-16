@@ -4,8 +4,8 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.Properties;
-import net.minecraft.item.PickaxeItem;
 import net.minecraftforge.fml.common.Mod;
+import xyz.pixelatedw.mineminenomi.abilities.doru.DoruDoruArtsPickaxeAbility;
 import xyz.pixelatedw.mineminenomi.api.AbilityItemTier;
 import xyz.pixelatedw.mineminenomi.items.AkumaNoMiBoxItem;
 import xyz.pixelatedw.mineminenomi.items.BellyPouchItem;
@@ -20,6 +20,7 @@ import xyz.pixelatedw.mineminenomi.items.SeaKingMeatItem;
 import xyz.pixelatedw.mineminenomi.items.UltraColaItem;
 import xyz.pixelatedw.mineminenomi.items.VivreCardItem;
 import xyz.pixelatedw.mineminenomi.items.WateringCanItem;
+import xyz.pixelatedw.mineminenomi.items.weapons.AbilityPickaxeItem;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyRegistry;
 import xyz.pixelatedw.wypi.json.models.JSONPredicateObject;
@@ -39,7 +40,7 @@ public class ModItems
 	public static final Item KEY = new Item(new Properties().group(ModCreativeTabs.MISC));
 	public static final Item VIVRE_CARD = new VivreCardItem();
 	public static final Item BUBBLY_CORAL = new BubblyCoralItem();
-	public static final Item DORU_PICKAXE = new PickaxeItem(AbilityItemTier.DORU, 1, -2.8f, new Item.Properties());
+	public static final Item DORU_PICKAXE = new AbilityPickaxeItem(DoruDoruArtsPickaxeAbility.INSTANCE, AbilityItemTier.DORU, 1, -2.8f);
     public static final Item COLOR_PALETTE = new ColorPaletteItem(new Item.Properties().group(ModCreativeTabs.MISC));
 	public static final Item WATERING_CAN = new WateringCanItem();
 	

@@ -28,7 +28,7 @@ public class TorikagoTileEntity extends TileEntity implements ITickableTileEntit
 	{
 		if (!this.world.isRemote)
 		{
-			List<LivingEntity> nearbyPlayers = WyHelper.<LivingEntity>getEntitiesNear(this.getPos(), this.world, 28).stream().filter(x ->
+			List<LivingEntity> nearbyPlayers = WyHelper.<LivingEntity>getEntitiesNear(this.getPos(), this.world, 32).stream().filter(x ->
 			{
 				if (x instanceof PlayerEntity && DevilFruitCapability.get(x).getDevilFruit().equalsIgnoreCase("ito_ito"))
 					return true;
@@ -45,9 +45,11 @@ public class TorikagoTileEntity extends TileEntity implements ITickableTileEntit
 	{
 		World world = this.world;
 
-		for (int i = -22; i < 22; i++)
-			for (int k = -21; k < 21; k++)
-				for (int j = -22; j < 22; j++)
+		int range = 28;
+		
+		for (int i = -range; i < range; i++)
+			for (int k = -range; k < range; k++)
+				for (int j = -range; j < range; j++)
 					if (world.getBlockState(new BlockPos(this.getPos().getX() + i, this.getPos().getY() + k, this.getPos().getZ() + j)).getBlock() == ModBlocks.STRING_WALL)
 						world.setBlockState(new BlockPos(this.getPos().getX() + i, this.getPos().getY() + k, this.getPos().getZ() + j), Blocks.AIR.getDefaultState());
 		world.setBlockState(new BlockPos(this.getPos().getX(), this.getPos().getY(), this.getPos().getZ()), Blocks.AIR.getDefaultState());

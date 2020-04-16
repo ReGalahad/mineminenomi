@@ -4,39 +4,44 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import xyz.pixelatedw.mineminenomi.abilities.kage.DoppelmanAbility;
+import xyz.pixelatedw.mineminenomi.abilities.ito.BlackKnightAbility;
+import xyz.pixelatedw.mineminenomi.abilities.ito.KumoNoSugakiAbility;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
-import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
-import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
-import xyz.pixelatedw.mineminenomi.entities.mobs.misc.DoppelmanEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.misc.BlackKnightEntity;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
-public class KagePassiveEvents
+public class ItoPassiveEvents
 {
-
 	@SubscribeEvent
-	public static void onEntityUpdate(LivingUpdateEvent event)
-	{
-		if (!(event.getEntityLiving() instanceof LivingEntity))
+	public static void onEntityAttackEvent(LivingAttackEvent event)
+	{	
+		if (!(event.getEntityLiving() instanceof PlayerEntity))
+			return;	
+				
+		PlayerEntity player = (PlayerEntity) event.getEntityLiving();
+		IDevilFruit devilProps = DevilFruitCapability.get(player);
+		IAbilityData abilityProps = AbilityDataCapability.get(player);
+		
+		if (!devilProps.getDevilFruit().equalsIgnoreCase("ito_ito"))
 			return;
-
-		LivingEntity entity = event.getEntityLiving();
-		IEntityStats statsProps = EntityStatsCapability.get(entity);
-
-		if (!statsProps.hasShadow() && entity.getBrightness() > 0.8F)
-			entity.setFire(3);
+	
+		KumoNoSugakiAbility ability = abilityProps.getEquippedAbility(KumoNoSugakiAbility.INSTANCE);
+		boolean isActive = ability != null && ability.isContinuous();
+		if(isActive)
+			event.setCanceled(true);
 	}
 	
+
 	@SubscribeEvent
-	public static void onEntityHurt(LivingAttackEvent event)
+	public static void onEntityAttack(LivingHurtEvent event)
 	{
 		if (!(event.getSource().getTrueSource() instanceof PlayerEntity))
 			return;
@@ -46,28 +51,28 @@ public class KagePassiveEvents
 		IAbilityData abilityProps = AbilityDataCapability.get(attacker);
 		LivingEntity attacked = event.getEntityLiving();
 
-		if (!devilFruitProps.getDevilFruit().equalsIgnoreCase("kage_kage"))
+		if (!devilFruitProps.getDevilFruit().equalsIgnoreCase("ito_ito"))
 			return;
 
-		DoppelmanAbility ability = abilityProps.getEquippedAbility(DoppelmanAbility.INSTANCE);
+		BlackKnightAbility ability = abilityProps.getEquippedAbility(BlackKnightAbility.INSTANCE);
 		boolean isActive = ability != null && ability.isContinuous();
 		
 		if(!isActive)
 			return;
 		
-		DoppelmanEntity doppelman = WyHelper.getEntitiesNear(attacker.getPosition(), attacker.world, 20, DoppelmanEntity.class).stream().findFirst().orElse(null);
+		BlackKnightEntity knight = WyHelper.getEntitiesNear(attacker.getPosition(), attacker.world, 20, BlackKnightEntity.class).stream().findFirst().orElse(null);
 
-		if (doppelman != null && doppelman.getOwner() == attacker)
-			doppelman.forcedTargets.add(attacked);
+		if (knight != null && knight.getOwner() == attacker)
+			knight.forcedTargets.add(attacked);
 	}
 	
 	@SubscribeEvent
 	public static void onEntityDamaged(LivingDamageEvent event)
 	{
-		if(!(event.getEntityLiving() instanceof DoppelmanEntity))
+		if(!(event.getEntityLiving() instanceof BlackKnightEntity))
 			return;
 		
-		DoppelmanEntity entity = (DoppelmanEntity) event.getEntityLiving();
+		BlackKnightEntity entity = (BlackKnightEntity) event.getEntityLiving();
 		PlayerEntity owner = entity.getOwner();
 		
 		if(owner == null)
@@ -75,12 +80,12 @@ public class KagePassiveEvents
 		
 		IDevilFruit props = DevilFruitCapability.get(owner);
 		
-		if(!props.getDevilFruit().equalsIgnoreCase("kage_kage") || entity.getHealth() - event.getAmount() >= 0)
+		if(!props.getDevilFruit().equalsIgnoreCase("ito_ito") || entity.getHealth() - event.getAmount() >= 0)
 			return;
 		
 		IAbilityData abilityProps = AbilityDataCapability.get(owner);
 		
-		DoppelmanAbility ability = abilityProps.getEquippedAbility(DoppelmanAbility.INSTANCE);
+		BlackKnightAbility ability = abilityProps.getEquippedAbility(BlackKnightAbility.INSTANCE);
 		boolean isActive = ability != null && ability.isContinuous();
 		
 		if(!isActive)

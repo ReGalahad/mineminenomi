@@ -19,12 +19,17 @@ public class NikyuProjectiles
 	public static final EntityType URSUS_SHOCK_50 = WyRegistry.createEntityType(UrsusShock50Projectile::new).size(3.0F, 3.0F).build("ursus_shock_50");
 	public static final EntityType URSUS_SHOCK_75 = WyRegistry.createEntityType(UrsusShock75Projectile::new).size(1.0F, 1.0F).build("ursus_shock_75");
 
+	// Extras
+	public static final EntityType CHARGING_URSUS_SHOCK = WyRegistry.createEntityType(ChargingUrsusShockEntity::new).size(1.0F, 1.0F).build("charging_ursus_shock");
+	
 	static
 	{
 		WyRegistry.registerEntityType(PAD_HO, "Pad Ho");
 		WyRegistry.registerEntityType(URSUS_SHOCK_25, "Ursus Shock 25");
 		WyRegistry.registerEntityType(URSUS_SHOCK_50, "Ursus Shock 50");
 		WyRegistry.registerEntityType(URSUS_SHOCK_75, "Ursus Shock 75");
+		
+		WyRegistry.registerEntityType(CHARGING_URSUS_SHOCK, "Charging Ursus Shock");
 	}
 	
 	@OnlyIn(Dist.CLIENT)
