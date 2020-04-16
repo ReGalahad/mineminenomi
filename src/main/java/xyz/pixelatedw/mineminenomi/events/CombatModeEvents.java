@@ -116,7 +116,7 @@ public class CombatModeEvents
 						charge = (((ChargeableAbility)abl).getChargeTime() / (float) ((ChargeableAbility)abl).getMaxChargeTime()) * 23;
 
 					// Setting their color based on their state
-					if (abl.isOnCooldown() && !abl.isDisabled())
+					if (abl.isOnCooldown() && !abl.isDisabled() && abl.getCooldown() > 10)
 						GlStateManager.color4f(1, 0, 0, 1);
 					else if (abl.isCharging())
 						GlStateManager.color4f(1, 1, 0, 1);
@@ -138,15 +138,15 @@ public class CombatModeEvents
 					}
 					else if(abl.isContinuous())
 					{
-						GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 0, 0, 23, (int) threshold, 0);
+						GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 24, 0, 23, (int) threshold, 0);
 					}
 					else if(abl.isCharging())
 					{
-						GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 0, 0, 23, (int) charge, 0);
+						GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 24, 0, 23, (int) charge, 0);
 					}
 					else if(abl.isOnCooldown() && !abl.isDisabled())
 					{
-						GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 0, 0, 23, (int) cooldown, 0);
+						GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 24, 0, 23, (int) cooldown, 0);
 						
 						if(abl.getCooldown() < 10)
 						{
