@@ -122,7 +122,7 @@ public class AbilityDataCapability
 									if (state == null)
 										state = Ability.State.STANDBY;
 									abl.setState(state);
-	
+									
 									instance.setEquippedAbility(pos, abl);
 								}
 							}

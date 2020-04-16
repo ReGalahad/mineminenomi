@@ -40,7 +40,10 @@ public abstract class Ability extends ForgeRegistryEntry<Ability>
 	{
 		if(player.world.isRemote)
 			return;
-				
+
+		if(this.isOnCooldown() && this.getCooldown() <= 10)
+			this.stopCooldown(player);
+		
 		if(!this.isOnStandby())
 			return;
 				
@@ -103,11 +106,13 @@ public abstract class Ability extends ForgeRegistryEntry<Ability>
 	
 	public void stopCooldown(PlayerEntity player)
 	{
+		if(player.world.isRemote)
+			return;
 		this.cooldown = this.maxCooldown;				
 		this.state = State.STANDBY;
 		this.onEndCooldown.onEndCooldown(player);
 		IAbilityData props = AbilityDataCapability.get(player);
-		WyNetwork.sendTo(new SSyncAbilityDataPacket(props), (ServerPlayerEntity)player);
+		WyNetwork.sendTo(new SSyncAbilityDataPacket(props), player);
 	}
 	
 	public void setState(State state)
@@ -130,9 +135,19 @@ public abstract class Ability extends ForgeRegistryEntry<Ability>
 		this.cooldown = this.maxCooldown;
 	}
 	
+	public double getMaxCooldown()
+	{
+		return this.maxCooldown;
+	}
+	
 	public void setCooldown(int cooldown)
 	{
 		this.cooldown = cooldown * 20;
+	}
+	
+	public double getCooldown()
+	{
+		return this.cooldown;
 	}
 	
 	public void setDescription(String desc)
@@ -166,8 +181,8 @@ public abstract class Ability extends ForgeRegistryEntry<Ability>
 	 */
 	public void cooldown(PlayerEntity player)
 	{
-		if(player.world.isRemote)
-			return;
+		//if(player.world.isRemote)
+		//	return;
 				
 		if(this.isOnCooldown() && this.cooldown > 0)
 		{
