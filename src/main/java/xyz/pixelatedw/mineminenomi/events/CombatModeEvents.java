@@ -128,20 +128,32 @@ public class CombatModeEvents
 						ModRendererHelper.drawAbilityIcon("disabled_status", (posX - 192 + (i * 50)) / 2, posY - 19, 3, 16, 16);
 						mc.getTextureManager().bindTexture(ModResources.WIDGETS);
 					}
-					else if(abl.isOnCooldown() && !abl.isDisabled() && abl.getCooldown() < 10)
+					else if(abl.isOnCooldown() && !abl.isDisabled())
 					{
-						// Ready animation
-						GlStateManager.pushMatrix();
+						if(abl.getCooldown() < 10)
 						{
-							double scale = 2.5 - (abl.getCooldown() / 10.0);
-							GlStateManager.color4f(0.2f, 0.8f, 0.4f, (float)(abl.getCooldown() / 10));
-							GlStateManager.translated((posX - 200 + (i * 50)) / 2, posY - 23, 1);
-							GlStateManager.translated(12, 12, 0);
-							GlStateManager.scaled(scale, scale, 1);
-							GlStateManager.translated(-12, -12, 0);
-							GuiUtils.drawTexturedModalRect(0, 0, 0, 0, 23, 23, -1);							
+							// Ready animation
+							GlStateManager.pushMatrix();
+							{
+								double scale = 2.5 - (abl.getCooldown() / 10.0);
+								GlStateManager.color4f(0.2f, 0.8f, 0.4f, (float)(abl.getCooldown() / 10));
+								GlStateManager.translated((posX - 200 + (i * 50)) / 2, posY - 23, 1);
+								GlStateManager.translated(12, 12, 0);
+								GlStateManager.scaled(scale, scale, 1);
+								GlStateManager.translated(-12, -12, 0);
+								GuiUtils.drawTexturedModalRect(0, 0, 0, 0, 23, 23, -1);							
+							}
+							GlStateManager.popMatrix();
 						}
-						GlStateManager.popMatrix();
+						else
+						{
+							GlStateManager.pushMatrix();
+							{
+								GlStateManager.color4f(0, 0, 0, 0.8f);
+								GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 0, 0, 23, 23, 2);
+							}
+							GlStateManager.popMatrix();							
+						}
 					}
 					
 					// Reverting the color back to avoid future slots being wrongly colored
