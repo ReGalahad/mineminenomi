@@ -19,6 +19,8 @@ import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.abilities.ChargeableAbility;
+import xyz.pixelatedw.wypi.abilities.ContinuousAbility;
 import xyz.pixelatedw.wypi.abilities.PassiveAbility;
 import xyz.pixelatedw.wypi.debug.WyDebug;
 
@@ -61,7 +63,12 @@ public class AbilityDataCapability
 							nbtAbility.putString("name", name);
 							nbtAbility.putInt("pos", i);
 							nbtAbility.putString("state", ability.getState().toString());
-							equippedAbilities.add(nbtAbility);						
+							nbtAbility.putDouble("cooldown", ability.getCooldown());
+							if(ability instanceof ContinuousAbility)
+								nbtAbility.putDouble("continueTimer", ((ContinuousAbility)ability).getContinueTime());
+							if(ability instanceof ChargeableAbility)
+								nbtAbility.putDouble("chargeTimer", ((ChargeableAbility)ability).getChargeTime());
+							equippedAbilities.add(nbtAbility);
 						}
 						else
 						{
@@ -118,11 +125,23 @@ public class AbilityDataCapability
 								if(abl.equals(ability))
 								{
 									Ability.State state = Ability.State.valueOf(nbtAbility.getString("state"));
+									int cooldown = (int) (nbtAbility.getDouble("cooldown") / 20);
 									int pos = nbtAbility.getInt("pos");
 									if (state == null)
 										state = Ability.State.STANDBY;
 									abl.setState(state);
-	
+									abl.setCooldown(cooldown);
+									if(ability instanceof ContinuousAbility)
+									{
+										int continueTime = (int) (nbtAbility.getDouble("continueTime") / 20);
+										((ContinuousAbility)ability).setContinueTime(continueTime);
+									}
+									if(ability instanceof ChargeableAbility)
+									{
+										int chargeTime = (int) (nbtAbility.getDouble("chargeTime") / 20);
+										((ChargeableAbility)ability).setChargeTime(chargeTime);
+									}
+									
 									instance.setEquippedAbility(pos, abl);
 								}
 							}
