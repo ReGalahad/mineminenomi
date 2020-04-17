@@ -8,7 +8,6 @@ import com.mojang.blaze3d.platform.GLX;
 import com.mojang.blaze3d.platform.GlStateManager;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -251,19 +250,4 @@ public class SelectHotbarAbilitiesScreen extends Screen
 	{
 		return false;
 	}
-
-	@SuppressWarnings("resource")
-	private void drawItemStack(ItemStack itemStack, int x, int y, String string)
-	{
-		GL11.glTranslatef(0.0F, 0.0F, 32.0F);
-		this.itemRenderer.zLevel = 200.0F;
-		FontRenderer font = null;
-		if (itemStack != null)
-			font = itemStack.getItem().getFontRenderer(itemStack);
-		if (font == null)
-			font = this.font;
-		this.itemRenderer.renderItemAndEffectIntoGUI(itemStack, x, y);
-		this.itemRenderer.zLevel = 0.0F;
-	}
-
 }

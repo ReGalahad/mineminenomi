@@ -9,6 +9,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
+import xyz.pixelatedw.mineminenomi.api.protection.BlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.AirBlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.FoliageBlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.LiquidBlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.abilities.ContinuousAbility;
@@ -18,6 +22,7 @@ public class TorikagoAbility extends ContinuousAbility implements IParallelConti
 {
 	public static final TorikagoAbility INSTANCE = new TorikagoAbility();
 	
+	private static final BlockProtectionRule GRIEF_RULE = new BlockProtectionRule(AirBlockProtectionRule.INSTANCE, FoliageBlockProtectionRule.INSTANCE, LiquidBlockProtectionRule.INSTANCE).setBypassGriefRule();
 	private List<BlockPos> blockList = new ArrayList<BlockPos>();
 
 	public TorikagoAbility()
@@ -34,7 +39,7 @@ public class TorikagoAbility extends ContinuousAbility implements IParallelConti
 	{
 		if (this.blockList.isEmpty())
 		{
-			this.blockList.addAll(AbilityHelper.createEmptySphere(player.world, (int) player.posX, (int) player.posY, (int) player.posZ, 25, ModBlocks.STRING_WALL, "air", "foliage", "liquid", "nogrief"));
+			this.blockList.addAll(AbilityHelper.createEmptySphere(player.world, (int) player.posX, (int) player.posY, (int) player.posZ, 25, ModBlocks.STRING_WALL, GRIEF_RULE));
 			player.world.setBlockState(new BlockPos(player.posX, player.posY, player.posZ), ModBlocks.STRING_MID.getDefaultState());
 			this.blockList.add(new BlockPos(MathHelper.floor(player.posX), MathHelper.floor(player.posY), MathHelper.floor(player.posZ)));
 		}

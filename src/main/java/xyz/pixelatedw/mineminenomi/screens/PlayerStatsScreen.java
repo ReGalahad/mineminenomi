@@ -150,7 +150,6 @@ public class PlayerStatsScreen extends Screen
 		return false;
 	}
 
-	@SuppressWarnings("resource")
 	private void drawItemStack(ItemStack itemStack, int x, int y, String string)
 	{
 		GL11.glTranslatef(0.0F, 0.0F, 32.0F);

@@ -11,6 +11,11 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
+import xyz.pixelatedw.mineminenomi.api.protection.BlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.AirBlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.ClientBlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.FoliageBlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.LiquidBlockProtectionRule;
 
 public class SViewProtectionPacket
 {
@@ -61,6 +66,9 @@ public class SViewProtectionPacket
 	
 	public static class ClientHandler
 	{
+		private static final BlockProtectionRule GRIEF_RULE1 = new BlockProtectionRule(AirBlockProtectionRule.INSTANCE, LiquidBlockProtectionRule.INSTANCE, FoliageBlockProtectionRule.INSTANCE).setBypassGriefRule(); 
+		private static final BlockProtectionRule GRIEF_RULE2 = new BlockProtectionRule(ClientBlockProtectionRule.INSTANCE).setBypassGriefRule(); 
+
 		@OnlyIn(Dist.CLIENT)
 		public static void handle(SViewProtectionPacket message)
 		{
@@ -68,13 +76,13 @@ public class SViewProtectionPacket
 
 			if(message.state)
 			{
-				AbilityHelper.createEmptyCube(player.world, message.midPoint[0], message.midPoint[1], message.midPoint[2], new int[] { message.size, message.size, message.size }, Blocks.BLUE_STAINED_GLASS, "air", "liquids", "foliage");
-				AbilityHelper.createEmptySphere(player.world, message.midPoint[0], message.midPoint[1], message.midPoint[2], 1, Blocks.RED_STAINED_GLASS, "air", "liquids", "foliage");
+				AbilityHelper.createEmptyCube(player.world, message.midPoint[0], message.midPoint[1], message.midPoint[2], message.size, message.size, message.size, Blocks.BLUE_STAINED_GLASS, GRIEF_RULE1);
+				AbilityHelper.createEmptySphere(player.world, message.midPoint[0], message.midPoint[1], message.midPoint[2], 1, Blocks.RED_STAINED_GLASS, GRIEF_RULE1);
 			}
 			else
 			{
-				AbilityHelper.createEmptyCube(player.world, message.midPoint[0], message.midPoint[1], message.midPoint[2], new int[] { message.size, message.size, message.size }, Blocks.AIR, "protection");
-				AbilityHelper.createEmptySphere(player.world, message.midPoint[0], message.midPoint[1], message.midPoint[2], 1, Blocks.AIR, "protection");
+				AbilityHelper.createEmptyCube(player.world, message.midPoint[0], message.midPoint[1], message.midPoint[2], message.size, message.size, message.size, Blocks.AIR, GRIEF_RULE2);
+				AbilityHelper.createEmptySphere(player.world, message.midPoint[0], message.midPoint[1], message.midPoint[2], 1, Blocks.AIR, GRIEF_RULE2);
 			}
 		}
 	}

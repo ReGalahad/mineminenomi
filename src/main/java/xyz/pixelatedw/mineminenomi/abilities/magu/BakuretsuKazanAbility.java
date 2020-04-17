@@ -3,12 +3,17 @@ package xyz.pixelatedw.mineminenomi.abilities.magu;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
+import xyz.pixelatedw.mineminenomi.api.protection.BlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.CoreBlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.OreBlockProtectionRule;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.abilities.Ability;
 
 public class BakuretsuKazanAbility extends Ability
 {
 	public static final Ability INSTANCE = new BakuretsuKazanAbility();
+
+	private static final BlockProtectionRule GRIEF_RULE = new BlockProtectionRule(CoreBlockProtectionRule.INSTANCE, OreBlockProtectionRule.INSTANCE); 
 
 	public BakuretsuKazanAbility()
 	{
@@ -21,7 +26,7 @@ public class BakuretsuKazanAbility extends Ability
 
 	private boolean onUseEvent(PlayerEntity player)
 	{
-		AbilityHelper.createFilledSphere(player.world, (int) player.posX, (int) player.posY, (int) player.posZ, 10, Blocks.LAVA, "core", "ores");
+		AbilityHelper.createFilledSphere(player.world, (int) player.posX, (int) player.posY, (int) player.posZ, 10, Blocks.LAVA, GRIEF_RULE);
 		
 		return true;
 	}

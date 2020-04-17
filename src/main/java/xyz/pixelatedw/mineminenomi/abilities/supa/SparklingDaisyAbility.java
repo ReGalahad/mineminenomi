@@ -8,6 +8,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
+import xyz.pixelatedw.mineminenomi.api.protection.BlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.CoreBlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.FoliageBlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.OreBlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.baku.BakuMunchParticleEffect;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
@@ -19,7 +23,8 @@ public class SparklingDaisyAbility extends Ability
 	public static final SparklingDaisyAbility INSTANCE = new SparklingDaisyAbility();
 	
 	private static final ParticleEffect PARTICLES = new BakuMunchParticleEffect();
-	
+	private static final BlockProtectionRule GRIEF_RULE = new BlockProtectionRule(CoreBlockProtectionRule.INSTANCE, OreBlockProtectionRule.INSTANCE, FoliageBlockProtectionRule.INSTANCE); 
+
 	private int initialY;
 
 	public SparklingDaisyAbility()
@@ -54,7 +59,7 @@ public class SparklingDaisyAbility extends Ability
 			{
 				if (location.getY() >= player.posY) 
 				{
-					if (AbilityHelper.placeBlockIfAllowed(player.world, location.getX(), location.getY(), location.getZ(), Blocks.AIR, "core", "foliage", "ores")) 
+					if (AbilityHelper.placeBlockIfAllowed(player.world, location.getX(), location.getY(), location.getZ(), Blocks.AIR, GRIEF_RULE)) 
 					{
 						PARTICLES.spawn(player.world, location.getX(), location.getY(), location.getZ(), 0, 0, 0);
 					}

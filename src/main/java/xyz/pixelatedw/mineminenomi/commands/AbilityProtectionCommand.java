@@ -46,7 +46,6 @@ public class AbilityProtectionCommand
 		dispatcher.register(builder);
 	}
 	
-	@SuppressWarnings("resource")
 	private static int viewProtection(CommandContext<CommandSource> context, boolean state) throws CommandSyntaxException
 	{
 		World world = context.getSource().getWorld();
@@ -77,7 +76,6 @@ public class AbilityProtectionCommand
 		return 1;
 	}
 	
-	@SuppressWarnings("resource")
 	private static int createProtection(CommandContext<CommandSource> context, int size) throws CommandSyntaxException
 	{
 		World world = context.getSource().getWorld();

@@ -6,6 +6,9 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
+import xyz.pixelatedw.mineminenomi.api.protection.BlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.CoreBlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.FoliageBlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.hie.IceAgeParticleEffect;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
@@ -17,7 +20,8 @@ public class IceAgeAbility extends Ability
 	public static final Ability INSTANCE = new IceAgeAbility();
 
 	private static final ParticleEffect PARTICLES = new IceAgeParticleEffect();
-
+	private static final BlockProtectionRule GRIEF_RULE = new BlockProtectionRule(CoreBlockProtectionRule.INSTANCE, FoliageBlockProtectionRule.INSTANCE); 
+	
 	public IceAgeAbility()
 	{
 		super("Ice Age", AbilityCategory.DEVIL_FRUIT);
@@ -39,7 +43,7 @@ public class IceAgeAbility extends Ability
 					double posY = player.posY + j;
 					double posZ = player.posZ + k + (k < -WyHelper.randomWithRange(8, 12) || k > WyHelper.randomWithRange(8, 12) ? WyHelper.randomWithRange(-5, 5) : 0);
 
-					AbilityHelper.placeBlockIfAllowed(player.world, posX, posY, posZ, Blocks.PACKED_ICE, "core", "foliage");
+					AbilityHelper.placeBlockIfAllowed(player.world, posX, posY, posZ, Blocks.PACKED_ICE, GRIEF_RULE);
 				}
 			}
 		}

@@ -6,6 +6,9 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
+import xyz.pixelatedw.mineminenomi.api.protection.BlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.AirBlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.FoliageBlockProtectionRule;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.Ability;
@@ -13,6 +16,8 @@ import xyz.pixelatedw.wypi.abilities.Ability;
 public class IceTimeCapsuleAbility extends Ability
 {
 	public static final Ability INSTANCE = new IceTimeCapsuleAbility();
+	
+	private static final BlockProtectionRule GRIEF_RULE = new BlockProtectionRule(AirBlockProtectionRule.INSTANCE, FoliageBlockProtectionRule.INSTANCE); 
 
 	public IceTimeCapsuleAbility()
 	{
@@ -30,7 +35,7 @@ public class IceTimeCapsuleAbility extends Ability
 		
 		for (LivingEntity target : list)
 		{
-			AbilityHelper.createFilledCube(target, new int[] { 2, 4, 2 }, Blocks.PACKED_ICE, "air", "foliage");
+			AbilityHelper.createFilledCube(target.world, target.posX, target.posY, target.posZ, 2, 4, 2, Blocks.PACKED_ICE, GRIEF_RULE);
 		}
 
 		return true;

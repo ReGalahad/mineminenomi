@@ -8,6 +8,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
+import xyz.pixelatedw.mineminenomi.api.protection.BlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.AllBlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.LiquidBlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.RestrictedBlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.particles.effects.baku.BakuMunchParticleEffect;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
@@ -18,7 +22,8 @@ public class BakuMunchAbility extends Ability
 	public static final BakuMunchAbility INSTANCE = new BakuMunchAbility();
 
 	private static final BakuMunchParticleEffect PARTICLES = new BakuMunchParticleEffect();
-	
+	private static final BlockProtectionRule GRIEF_RULE = new BlockProtectionRule(AllBlockProtectionRule.INSTANCE, RestrictedBlockProtectionRule.INSTANCE, new BlockProtectionRule(LiquidBlockProtectionRule.INSTANCE).setBanListedBlocks()); 
+
 	public BakuMunchAbility()
 	{
 		super("Baku Munch", AbilityCategory.DEVIL_FRUIT);
@@ -43,7 +48,7 @@ public class BakuMunchAbility extends Ability
 						int posY = (int) mop.getHitVec().y - y;
 						int posZ = (int) mop.getHitVec().z + z;
 						Block tempBlock = player.world.getBlockState(new BlockPos(posX, posY, posZ)).getBlock();
-						if (AbilityHelper.placeBlockIfAllowed(player.world, posX, posY, posZ, Blocks.AIR, "all", "restricted", "ignore liquids"))
+						if (AbilityHelper.placeBlockIfAllowed(player.world, posX, posY, posZ, Blocks.AIR, GRIEF_RULE))
 						{
 							player.inventory.addItemStackToInventory(new ItemStack(tempBlock));
 							PARTICLES.spawn(player.world, posX, posY, posZ, 0, 0, 0);
