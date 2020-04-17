@@ -3,6 +3,7 @@ package xyz.pixelatedw.mineminenomi.abilities.bari;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Direction;
@@ -39,13 +40,13 @@ public class BarrierAbility extends ContinuousAbility
 		if (this.posList.isEmpty())
 		{
 			if (dir == Direction.NORTH)
-				this.posList = AbilityHelper.createFilledCube(player.world, player.posX, player.posY, player.posZ - 4, 3, 4, 1, ModBlocks.BARRIER, GRIEF_RULE);
+				this.posList.addAll(AbilityHelper.createFilledCube(player.world, player.posX, player.posY, player.posZ - 4, 3, 4, 1, ModBlocks.BARRIER, GRIEF_RULE));
 			if (dir == Direction.SOUTH)
-				this.posList = AbilityHelper.createFilledCube(player.world, player.posX, player.posY, player.posZ + 4, 3, 4, 1, ModBlocks.BARRIER, GRIEF_RULE);
+				this.posList.addAll(AbilityHelper.createFilledCube(player.world, player.posX, player.posY, player.posZ + 4, 3, 4, 1, ModBlocks.BARRIER, GRIEF_RULE));
 			if (dir == Direction.EAST)
-				this.posList = AbilityHelper.createFilledCube(player.world, player.posX + 4, player.posY, player.posZ, 1, 4, 3, ModBlocks.BARRIER, GRIEF_RULE);
+				this.posList.addAll(AbilityHelper.createFilledCube(player.world, player.posX + 4, player.posY, player.posZ, 1, 4, 3, ModBlocks.BARRIER, GRIEF_RULE));
 			if (dir == Direction.WEST)
-				this.posList = AbilityHelper.createFilledCube(player.world, player.posX - 4, player.posY, player.posZ, 1, 4, 3, ModBlocks.BARRIER, GRIEF_RULE);
+				this.posList.addAll(AbilityHelper.createFilledCube(player.world, player.posX - 4, player.posY, player.posZ, 1, 4, 3, ModBlocks.BARRIER, GRIEF_RULE));
 		}
 		
 		return true;	
@@ -55,11 +56,12 @@ public class BarrierAbility extends ContinuousAbility
 	{
 		for (BlockPos pos : this.posList)
 		{
-			if (player.world.getBlockState(pos).getBlock() == ModBlocks.BARRIER)
+			Block currentBlock = player.world.getBlockState(pos).getBlock();
+			if (currentBlock == ModBlocks.BARRIER)
 				player.world.setBlockState(pos, Blocks.AIR.getDefaultState());
 		}
 		this.posList = new ArrayList<BlockPos>();
-		
+
 		return true;
 	}
 }

@@ -128,7 +128,7 @@ public class AbilityHelper
 				{
 					if (x == -sizeX || x == sizeX || y == -sizeY || y == sizeY || z == -sizeZ || z == sizeZ)
 					{
-						placeBlockIfAllowed(world, (int) posX + x, (int) posY + y, (int) posZ + z, blockToPlace, rule);
+						placeBlockIfAllowed(world, posX + x, posY + y, posZ + z, blockToPlace, rule);
 						blockPositions.add(new BlockPos(posX + x, posY + y, posZ + z));
 					}
 				}
@@ -143,7 +143,7 @@ public class AbilityHelper
 			for (int y = -sizeY; y <= sizeY; y++)
 				for (int z = -sizeZ; z <= sizeZ; z++)
 				{
-					placeBlockIfAllowed(world, (int) posX + x, (int) posY + y, (int) posZ + z, blockToPlace, rule);
+					placeBlockIfAllowed(world, posX + x, posY + y, posZ + z, blockToPlace, rule);
 					blockPositions.add(new BlockPos(posX + x, posY + y, posZ + z));
 				}
 
