@@ -5,6 +5,7 @@ import java.util.List;
 import org.lwjgl.opengl.GL11;
 
 import com.mojang.blaze3d.platform.GLX;
+import com.mojang.blaze3d.platform.GlStateManager;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -78,9 +79,10 @@ public class SelectHotbarAbilitiesScreen extends Screen
 		for (int i = 0; i < 8; i++)
 		{
 			if (this.slotSelected == i)
-				GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 33, 48, 0, 23, 23, 1);
-			else
-				GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 33, 0, 0, 23, 23, 1);
+				GlStateManager.color4f(0, 0, 1, 1);
+			
+			GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 33, 0, 0, 23, 23, 1);
+			GlStateManager.color4f(1, 1, 1, 1);
 		}
 
 		for (int i = 0; i < 8; i++)
