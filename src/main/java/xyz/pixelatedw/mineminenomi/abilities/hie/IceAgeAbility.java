@@ -16,7 +16,7 @@ public class IceAgeAbility extends Ability
 {
 	public static final Ability INSTANCE = new IceAgeAbility();
 
-	private static final ParticleEffect PARTICLES = new IceAgeParticleEffect();
+	public static final ParticleEffect PARTICLES = new IceAgeParticleEffect();
 
 	public IceAgeAbility()
 	{

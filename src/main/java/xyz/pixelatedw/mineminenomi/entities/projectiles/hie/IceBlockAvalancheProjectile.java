@@ -12,7 +12,10 @@ import net.minecraft.potion.Effects;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import xyz.pixelatedw.mineminenomi.abilities.hie.IceAgeAbility;
+import xyz.pixelatedw.mineminenomi.abilities.hie.IceBlockAvalancheAbility;
 import xyz.pixelatedw.mineminenomi.init.ModEffects;
+import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 
 public class IceBlockAvalancheProjectile extends AbilityProjectileEntity{
@@ -37,7 +40,7 @@ public class IceBlockAvalancheProjectile extends AbilityProjectileEntity{
 	{
 		super(HieProjectiles.ICE_BLOCK_AVALANCHE, world, player);
 		this.setDamage(30);
-		this.setMaxLife(150);
+		this.setMaxLife(100);
 		this.setPassThroughEntities();
 		this.setCanGetStuckInGround();
 		this.onTickEvent = this::onTickEvent;
@@ -53,6 +56,9 @@ public class IceBlockAvalancheProjectile extends AbilityProjectileEntity{
 	private void onTickEvent() {
 		if (this.getFinalized() == false) {
 			this.setCollisionSize(this.ticksExisted / 10);
+		}
+		if(this.isStuckInGround()) {
+			this.setMotion(0, 0, 0);
 		}
 	}
 	
@@ -87,6 +93,9 @@ public class IceBlockAvalancheProjectile extends AbilityProjectileEntity{
 	public void onBlockImpactEvent(BlockPos pos) {
 		this.setCollisionSize(0);
 		this.setMotion(0, 0, 0);
+		if(!world.isRemote) {
+			IceAgeAbility.PARTICLES.spawn(world, posX, posY, posZ, 0, 0, 0);
+		}
 	}
 	
 	//to make it so that only the entities hit by the avalanche move and not the avalanche itself

@@ -36,6 +36,6 @@ public class HieProjectiles
 		RenderingRegistry.registerEntityRenderingHandler(IceBlockPartisanProjectile.class, new AbilityProjectileRenderer.Factory(new TridentModel()).setTexture("iceblockpartisan").setScale(1.5));
 		RenderingRegistry.registerEntityRenderingHandler(IceBallProjectile.class, new AbilityProjectileRenderer.Factory(new SphereModel()).setColor("#36648B").setScale(5));
 		RenderingRegistry.registerEntityRenderingHandler(IceBlockPheasantProjectile.class, new AbilityProjectileRenderer.Factory(new PheasantModel()).setTexture("iceblockpheasant").setScale(5));
-        RenderingRegistry.registerEntityRenderingHandler(IceBlockAvalancheProjectile.class, new IceBlockAvalancheRenderer.Factory(new SphereModel()).setColor("#36648B").setScale(8));
+        RenderingRegistry.registerEntityRenderingHandler(IceBlockAvalancheProjectile.class, new IceBlockAvalancheRenderer.Factory(new SphereModel()).setColor("#54f7ff").setScale(8));
 	}
 }
