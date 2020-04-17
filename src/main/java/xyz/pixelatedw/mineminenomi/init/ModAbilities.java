@@ -63,6 +63,7 @@ import xyz.pixelatedw.mineminenomi.abilities.gura.ShimaYurashiAbility;
 import xyz.pixelatedw.mineminenomi.abilities.gura.TenchiMeidoAbility;
 import xyz.pixelatedw.mineminenomi.abilities.hie.IceAgeAbility;
 import xyz.pixelatedw.mineminenomi.abilities.hie.IceBallAbility;
+import xyz.pixelatedw.mineminenomi.abilities.hie.IceBlockAvalancheAbility;
 import xyz.pixelatedw.mineminenomi.abilities.hie.IceBlockPartisanAbility;
 import xyz.pixelatedw.mineminenomi.abilities.hie.IceBlockPheasantAbility;
 import xyz.pixelatedw.mineminenomi.abilities.hie.IceSaberAbility;
@@ -214,7 +215,7 @@ public class ModAbilities
 	public static final AkumaNoMiItem GOMU_GOMU_NO_MI = new AkumaNoMiItem("Gomu Gomu no Mi", EnumFruitType.PARAMECIA);
 	public static final AkumaNoMiItem PIKA_PIKA_NO_MI = new AkumaNoMiItem("Pika Pika no Mi", EnumFruitType.LOGIA, YataNoKagamiAbility.INSTANCE, YasakaniNoMagatamaAbility.INSTANCE, AmaNoMurakumoAbility.INSTANCE, AmaterasuAbility.INSTANCE, FlashAbility.INSTANCE);
 	public static final AkumaNoMiItem BANE_BANE_NO_MI = new AkumaNoMiItem("Bane Bane no Mi", EnumFruitType.PARAMECIA, SpringHopperAbility.INSTANCE, SpringSnipeAbility.INSTANCE, SpringDeathKnockAbility.INSTANCE);
-	public static final AkumaNoMiItem HIE_HIE_NO_MI = new AkumaNoMiItem("Hie Hie no Mi", EnumFruitType.LOGIA, IceBlockPartisanAbility.INSTANCE, IceAgeAbility.INSTANCE, IceBallAbility.INSTANCE, IceSaberAbility.INSTANCE, IceTimeCapsuleAbility.INSTANCE, IceBlockPheasantAbility.INSTANCE);
+	public static final AkumaNoMiItem HIE_HIE_NO_MI = new AkumaNoMiItem("Hie Hie no Mi", EnumFruitType.LOGIA, IceBlockPartisanAbility.INSTANCE, IceAgeAbility.INSTANCE, IceBallAbility.INSTANCE, IceSaberAbility.INSTANCE, IceTimeCapsuleAbility.INSTANCE, IceBlockPheasantAbility.INSTANCE, IceBlockAvalancheAbility.INSTANCE);
 	public static final AkumaNoMiItem MERA_MERA_NO_MI = new AkumaNoMiItem("Mera Mera no Mi", EnumFruitType.LOGIA, HikenAbility.INSTANCE, HiganAbility.INSTANCE, DaiEnkaiEnteiAbility.INSTANCE, HidarumaAbility.INSTANCE, JujikaAbility.INSTANCE);
 
 	static

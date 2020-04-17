@@ -15,7 +15,7 @@ public class DoruDoruNoYakataAbility extends Ability {
 	public DoruDoruNoYakataAbility() {
 		super("Doru Doru no Yakata", AbilityCategory.DEVIL_FRUIT);
 
-		this.setMaxCooldown(6);
+		this.setMaxCooldown(15);
 		this.setDescription("The user creates a few wax copies of himself.");
 
 		this.onUseEvent = this::onUseEvent;
