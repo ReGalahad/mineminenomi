@@ -31,7 +31,7 @@ public class AbilitySwordItem extends CoreSwordItem
 
 			for(Ability ability : abilityDataProps.getEquippedAbilities(AbilityCategory.ALL))
 			{
-				if(ability == null || !(ability instanceof ItemAbility) || this.ability.equals(ability))
+				if(ability == null || !(ability instanceof ItemAbility) || !this.ability.equals(ability))
 					continue;
 
 				if(!(ability instanceof ItemAbility) || !ability.isContinuous() || !((ItemAbility) ability).canBeActive(owner))
