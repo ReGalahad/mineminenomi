@@ -2,9 +2,11 @@ package xyz.pixelatedw.mineminenomi.particles.effects.hie;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.data.GenericParticleData;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
+import xyz.pixelatedw.wypi.WyHelper;
 
 public class IceBlockAvalancheParticleEffect extends ParticleEffect {
 
@@ -24,21 +26,23 @@ public class IceBlockAvalancheParticleEffect extends ParticleEffect {
 			phi += Math.PI / 4;
 
 			for (double theta = 0; theta <= 2 * Math.PI; theta += Math.PI / 6) {
-				double radius = e.ticksExisted  / 10;
-				if(radius > 8) {
-					radius = 8;
-				}
-				double x = radius * Math.cos(theta) * Math.sin(phi);
-				double y = posY - radius - 1;
-				double z = radius * Math.sin(theta) * Math.sin(phi); 
-				motionX = x / 20;
-				motionY = 0.001;
-				motionZ = z / 20;
+				double x = 3 * Math.cos(theta) * Math.sin(phi);
+				double y = posY - 3 - 1;
+				double z = 3 * Math.sin(theta) * Math.sin(phi);
+				motionX = x / 40;
+				motionY = 0.1;
+				motionZ = z / 40;
 
 				GenericParticleData data = new GenericParticleData();
 				data.setTexture(ModResources.HIE);
-				data.setLife(400);
-				world.addParticle(data, posX + x, y, posZ + z, motionX, motionY, motionZ);
+				data.setLife(8);
+				data.setSize(3f);
+
+				data.setMotion(-motionX, motionY, -motionZ);
+				if (Math.random() > 0.7) {
+					WyHelper.spawnParticles(data, (ServerWorld) world, posX + x, y, posZ + z);
+				}
+
 			}
 		}
 	}

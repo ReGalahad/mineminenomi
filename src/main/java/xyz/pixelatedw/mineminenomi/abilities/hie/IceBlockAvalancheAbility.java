@@ -15,7 +15,7 @@ public class IceBlockAvalancheAbility extends ChargeableAbility {
 	public static final IceBlockAvalancheAbility INSTANCE = new IceBlockAvalancheAbility();
 	private IceBlockAvalancheProjectile proj;
 	private int dmg = 0;
-	private static final IceBlockAvalancheParticleEffect PARTICLES = new IceBlockAvalancheParticleEffect();
+	public static final IceBlockAvalancheParticleEffect PARTICLES = new IceBlockAvalancheParticleEffect();
 
 	public IceBlockAvalancheAbility() {
 		super("Ice Block: Avalanche", AbilityCategory.DEVIL_FRUIT);
@@ -36,7 +36,6 @@ public class IceBlockAvalancheAbility extends ChargeableAbility {
 		} else {
 			proj.setPosition(ray.getPos().getX(), ray.getPos().getY() + 15, ray.getPos().getZ());
 		}
-		BlockPos debug = ray.getPos();
 		proj.setMotion(0, 0, 0);
 		p.world.addEntity(proj);
 		return true;

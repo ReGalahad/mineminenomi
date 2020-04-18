@@ -25,6 +25,7 @@ public class IceBlockAvalancheRenderer extends AbilityProjectileRenderer {
 	public void doRender(AbilityProjectileEntity entity, double x, double y, double z, float entityYaw,
 			float partialTicks) {
 
+		if(entity.ticksExisted > 12) {
 		if (entity instanceof IceBlockAvalancheProjectile) {
 			IceBlockAvalancheProjectile e = (IceBlockAvalancheProjectile) entity;
 			if (e.getFinalized() == false) {
@@ -34,6 +35,7 @@ public class IceBlockAvalancheRenderer extends AbilityProjectileRenderer {
 			}
 		}
 		super.doRender(entity, x, y, z, entityYaw, partialTicks);
+		}
 	}
 
 	public static class Factory implements IRenderFactory<AbilityProjectileEntity> {

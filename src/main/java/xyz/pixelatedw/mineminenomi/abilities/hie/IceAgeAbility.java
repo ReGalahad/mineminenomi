@@ -21,7 +21,7 @@ public class IceAgeAbility extends Ability
 
 	private static final ParticleEffect PARTICLES = new IceAgeParticleEffect();
 	private static final BlockProtectionRule GRIEF_RULE = new BlockProtectionRule(CoreBlockProtectionRule.INSTANCE, FoliageBlockProtectionRule.INSTANCE); 
-	
+
 	public IceAgeAbility()
 	{
 		super("Ice Age", AbilityCategory.DEVIL_FRUIT);
