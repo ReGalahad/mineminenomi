@@ -9,8 +9,9 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.api.protection.BlockProtectionRule;
-import xyz.pixelatedw.mineminenomi.api.protection.block.AllBlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.CoreBlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.api.protection.block.LiquidBlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.OreBlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.api.protection.block.RestrictedBlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.particles.effects.baku.BakuMunchParticleEffect;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
@@ -20,9 +21,9 @@ import xyz.pixelatedw.wypi.abilities.Ability;
 public class BakuMunchAbility extends Ability
 {
 	public static final BakuMunchAbility INSTANCE = new BakuMunchAbility();
+	public static final BlockProtectionRule GRIEF_RULE = new BlockProtectionRule(CoreBlockProtectionRule.INSTANCE, OreBlockProtectionRule.INSTANCE, RestrictedBlockProtectionRule.INSTANCE, new BlockProtectionRule(LiquidBlockProtectionRule.INSTANCE).setBanListedBlocks()); 
 
 	private static final BakuMunchParticleEffect PARTICLES = new BakuMunchParticleEffect();
-	private static final BlockProtectionRule GRIEF_RULE = new BlockProtectionRule(AllBlockProtectionRule.INSTANCE, RestrictedBlockProtectionRule.INSTANCE, new BlockProtectionRule(LiquidBlockProtectionRule.INSTANCE).setBanListedBlocks()); 
 
 	public BakuMunchAbility()
 	{
