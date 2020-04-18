@@ -1,7 +1,6 @@
 package xyz.pixelatedw.mineminenomi.abilities.hie;
 
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.EntityRayTraceResult;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.hie.IceBlockAvalancheProjectile;
@@ -20,6 +19,7 @@ public class IceBlockAvalancheAbility extends ChargeableAbility {
 	public IceBlockAvalancheAbility() {
 		super("Ice Block: Avalanche", AbilityCategory.DEVIL_FRUIT);
 		this.setMaxChargeTime(6);
+		this.setMaxCooldown(15);
 		this.onStartChargingEvent = this::onStartChargingEvent;
 		this.duringChargingEvent = this::duringChargingEvent;
 		this.onEndChargingEvent = this::onEndChargingEvent;
@@ -30,39 +30,39 @@ public class IceBlockAvalancheAbility extends ChargeableAbility {
 		BlockRayTraceResult ray = WyHelper.rayTraceBlocksWithDistance(p, 100);
 		EntityRayTraceResult eray = WyHelper.rayTraceEntities(p, 100);
 		this.removeDuplicate();
-		proj = new IceBlockAvalancheProjectile(p.world, p);
+		this.proj = new IceBlockAvalancheProjectile(p.world, p);
 		if (eray.getEntity() != null) {
-			proj.setPosition(eray.getEntity().posX, eray.getEntity().posY + 15, eray.getEntity().posZ);
+			this.proj.setPosition(eray.getEntity().posX, eray.getEntity().posY + 15, eray.getEntity().posZ);
 		} else {
-			proj.setPosition(ray.getPos().getX(), ray.getPos().getY() + 15, ray.getPos().getZ());
+			this.proj.setPosition(ray.getPos().getX(), ray.getPos().getY() + 15, ray.getPos().getZ());
 		}
-		proj.setMotion(0, 0, 0);
-		p.world.addEntity(proj);
+		this.proj.setMotion(0, 0, 0);
+		p.world.addEntity(this.proj);
 		return true;
 	}
 
 	private void duringChargingEvent(PlayerEntity p, int ticks) {
 		this.dmg = ticks;
 
-		if (p != null && proj != null) {
-			PARTICLES.spawnWithRadius(p.world, proj.posX, proj.posY, proj.posZ, 0, 0, 0, proj);
+		if (p != null && this.proj != null) {
+			PARTICLES.spawn(p.world, this.proj.posX, this.proj.posY, this.proj.posZ, 0, 0, 0);
 		}
 	}
 
 	private boolean onEndChargingEvent(PlayerEntity p) {
 
-		if (proj == null)
+		if (this.proj == null)
 			return false;
-		proj.setFinalized(true);
-		proj.setDamage((this.getMaxChargeTime() - this.dmg) / 20 * 2);
-		proj.setMotion(0, -2, 0);
+		this.proj.setFinalized(true);
+		this.proj.setDamage((this.getMaxChargeTime() - this.dmg) / 20 * 2);
+		this.proj.setMotion(0, -2, 0);
 		return true;
 	}
 
 	private void removeDuplicate() {
-		if (proj != null) {
-			if (proj.isAddedToWorld()) {
-				proj.remove();
+		if (this.proj != null) {
+			if (this.proj.isAddedToWorld()) {
+				this.proj.remove();
 			}
 		}
 	}

@@ -13,6 +13,7 @@ import xyz.pixelatedw.mineminenomi.api.protection.BlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.api.protection.block.AirBlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.api.protection.block.FoliageBlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.api.protection.block.LiquidBlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.init.ModEffects;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.data.GenericParticleData;
 import xyz.pixelatedw.wypi.WyHelper;
@@ -48,6 +49,7 @@ public class IceBallProjectile extends AbilityProjectileEntity
 		
 		this.withEffects = () -> {
 			return new EffectInstance[] {
+					new EffectInstance(ModEffects.FROZEN, 200, 0),
 					new EffectInstance(Effects.SLOWNESS, 100, 0),
 					new EffectInstance(Effects.MINING_FATIGUE, 100, 0)
 			};		

@@ -6,6 +6,7 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import xyz.pixelatedw.mineminenomi.init.ModEffects;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.data.GenericParticleData;
 import xyz.pixelatedw.wypi.WyHelper;
@@ -38,6 +39,7 @@ public class IceBlockPheasantProjectile  extends AbilityProjectileEntity
 		
 		this.withEffects = () -> {
 			return new EffectInstance[] {
+					new EffectInstance(ModEffects.FROZEN, 200, 1),
 					new EffectInstance(Effects.SLOWNESS, 200, 100),
 					new EffectInstance(Effects.MINING_FATIGUE, 200, 100)
 			};		

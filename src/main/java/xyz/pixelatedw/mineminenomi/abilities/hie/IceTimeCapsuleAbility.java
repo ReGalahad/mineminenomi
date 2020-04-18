@@ -5,10 +5,12 @@ import java.util.List;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.potion.EffectInstance;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.api.protection.BlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.api.protection.block.AirBlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.api.protection.block.FoliageBlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.init.ModEffects;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.Ability;
@@ -35,6 +37,7 @@ public class IceTimeCapsuleAbility extends Ability
 		
 		for (LivingEntity target : list)
 		{
+			target.addPotionEffect(new EffectInstance(ModEffects.FROZEN, 400, 1));
 			AbilityHelper.createFilledCube(target.world, target.posX, target.posY, target.posZ, 2, 4, 2, Blocks.PACKED_ICE, GRIEF_RULE);
 		}
 
