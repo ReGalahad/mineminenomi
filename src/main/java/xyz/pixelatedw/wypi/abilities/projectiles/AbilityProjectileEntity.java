@@ -8,9 +8,11 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.entity.projectile.ThrowableEntity;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.network.IPacket;
 import net.minecraft.network.play.server.SPlayEntityEffectPacket;
 import net.minecraft.potion.EffectInstance;
+import net.minecraft.tags.Tag;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -115,6 +117,14 @@ public class AbilityProjectileEntity extends ThrowableEntity
 		
 		this.onTickEvent.onTick();
 		
+	}
+
+	@Override
+	public boolean handleFluidAcceleration(Tag<Fluid> fluidTag)
+	{
+		if(this.inWater)
+			this.doWaterSplashEffect();
+		return false;
 	}
 
 	@Override
