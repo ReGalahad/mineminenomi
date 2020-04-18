@@ -27,8 +27,8 @@ public class IceBlockAvalancheAbility extends ChargeableAbility {
 	}
 
 	private boolean onStartChargingEvent(PlayerEntity p) {
-		BlockRayTraceResult ray = WyHelper.rayTraceBlocksWithDistance(p, 100);
-		EntityRayTraceResult eray = WyHelper.rayTraceEntities(p, 100);
+		BlockRayTraceResult ray = WyHelper.rayTraceBlocksWithDistance(p, 20);
+		EntityRayTraceResult eray = WyHelper.rayTraceEntities(p, 50);
 		this.removeDuplicate();
 		this.proj = new IceBlockAvalancheProjectile(p.world, p);
 		if (eray.getEntity() != null) {

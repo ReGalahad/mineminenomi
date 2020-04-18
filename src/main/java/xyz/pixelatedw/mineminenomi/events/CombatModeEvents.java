@@ -20,7 +20,7 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.config.GuiUtils;
 import net.minecraftforge.fml.common.Mod;
-import xyz.pixelatedw.mineminenomi.api.helpers.ModRendererHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.RendererHelper;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
@@ -133,7 +133,7 @@ public class CombatModeEvents
 					// Setting up addition effects based on the ability's state
 					if (abl.isDisabled())
 					{
-						ModRendererHelper.drawAbilityIcon("disabled_status", (posX - 192 + (i * 50)) / 2, posY - 19, 3, 16, 16);
+						RendererHelper.drawAbilityIcon("disabled_status", (posX - 192 + (i * 50)) / 2, posY - 19, 3, 16, 16);
 						mc.getTextureManager().bindTexture(ModResources.WIDGETS);
 					}
 					else if(abl.isContinuous())
@@ -169,7 +169,7 @@ public class CombatModeEvents
 					GlStateManager.color4f(1, 1, 1, 1);
 										
 					// Drawing the ability icons
-					ModRendererHelper.drawAbilityIcon(WyHelper.getResourceName(abl.getName()), (posX - 192 + (i * 50)) / 2, posY - 19, 16, 16);
+					RendererHelper.drawAbilityIcon(WyHelper.getResourceName(abl.getName()), (posX - 192 + (i * 50)) / 2, posY - 19, 16, 16);
 					mc.getTextureManager().bindTexture(ModResources.WIDGETS);								
 				}
 				
