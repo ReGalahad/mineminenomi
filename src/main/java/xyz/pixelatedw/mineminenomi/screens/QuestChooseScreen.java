@@ -47,7 +47,7 @@ public class QuestChooseScreen extends Screen
 
 		if(this.animationTime < 10)
 		{
-			this.animationTime += 0.1;
+			this.animationTime += 0.2;
 		}
 		if(this.animationTranslation > 0)
 		{
