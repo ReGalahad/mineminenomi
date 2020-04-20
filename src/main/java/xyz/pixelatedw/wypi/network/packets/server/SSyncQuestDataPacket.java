@@ -59,8 +59,8 @@ public class SSyncQuestDataPacket
 		{
 			PlayerEntity player = Minecraft.getInstance().player;
 			IQuestData props = QuestDataCapability.get(player);
-			
-			QuestDataCapability.INSTANCE.getStorage().readNBT(QuestDataCapability.INSTANCE, props, null, message.data);
+						
+			QuestDataCapability.INSTANCE.getStorage().readNBT(QuestDataCapability.INSTANCE, props, null, message.data);		
 		}
 	}
 }

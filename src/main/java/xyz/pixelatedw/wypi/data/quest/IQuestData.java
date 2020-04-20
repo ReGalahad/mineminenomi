@@ -7,10 +7,12 @@ import xyz.pixelatedw.wypi.quests.Quest;
 public interface IQuestData
 {
 	boolean addInProgressQuest(Quest quest);
+	boolean setInProgressQuest(int slot, Quest quest);
 	boolean removeInProgressQuest(Quest quest);
 	boolean hasInProgressQuest(Quest quest);
 	<T extends Quest> T getInProgressQuest(T quest);
-	List<Quest> getInProgressQuests();
+	<T extends Quest> T getInProgressQuest(int slot);
+	Quest[] getInProgressQuests();
 	void clearInProgressQuests(); 
 	int countInProgressQuests();
 	

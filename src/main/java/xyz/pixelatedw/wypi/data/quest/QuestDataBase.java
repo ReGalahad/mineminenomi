@@ -1,24 +1,41 @@
 package xyz.pixelatedw.wypi.data.quest;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.quests.Quest;
 
 public class QuestDataBase implements IQuestData
 {
 	
-	private List<Quest> inProgressQuests = new ArrayList<Quest>();
+	private Quest[] inProgressQuests = new Quest[APIConfig.MAX_IN_PROGRESS_QUESTS];
 	private List<Quest> finishedQuests = new ArrayList<Quest>();
 
 	@Override
 	public boolean addInProgressQuest(Quest quest)
 	{
-		Quest ogQuest = this.getInProgressQuest(quest);
-		if (ogQuest == null)
+		for(int i = 0; i < this.inProgressQuests.length; i++)
 		{
-			this.inProgressQuests.add(quest);
+			Quest ogQuest = this.inProgressQuests[i];
+			if(ogQuest == null)
+			{
+				 this.inProgressQuests[i] = quest;
+				 return true;
+			}
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean setInProgressQuest(int slot, Quest quest)
+	{
+		Quest ogQuest = this.getInProgressQuest(quest);
+		if (ogQuest == null && slot <= APIConfig.MAX_IN_PROGRESS_QUESTS)
+		{
+			this.inProgressQuests[slot] = quest;
 			return true;
 		}
 		return false;
@@ -29,9 +46,16 @@ public class QuestDataBase implements IQuestData
 	{
 		Quest ogQuest = this.getInProgressQuest(quest);
 		if (ogQuest != null)
-		{
-			this.inProgressQuests.remove(ogQuest);
-			return true;
+		{		
+			for(int i = 0; i < this.inProgressQuests.length; i++)
+			{
+				Quest inProgressQuest = this.inProgressQuests[i];
+				if(inProgressQuest != null)
+				{
+					 this.inProgressQuests[i] = null;
+					 return true;
+				}
+			}
 		}
 		return false;
 	}
@@ -39,35 +63,55 @@ public class QuestDataBase implements IQuestData
 	@Override
 	public boolean hasInProgressQuest(Quest quest)
 	{
-		this.inProgressQuests.removeIf(qst -> qst == null);
-		return this.inProgressQuests.parallelStream().anyMatch(qst -> qst.equals(quest));
+		return Arrays.stream(this.inProgressQuests)
+			.parallel()
+			.filter(qst -> qst != null)
+			.anyMatch(qst -> qst.equals(quest));
 	}
 
 	@Override
 	public <T extends Quest> T getInProgressQuest(T quest)
 	{
-		this.inProgressQuests.removeIf(qst -> qst == null);
-		return (T) this.inProgressQuests.parallelStream().filter(qst -> qst.equals(quest)).findFirst().orElse(null);
+		return (T) Arrays.stream(this.inProgressQuests)
+			.parallel()
+			.filter(qst -> qst != null)
+			.filter(qst -> qst.equals(quest))
+			.findFirst().orElse(null);
 	}
 
 	@Override
-	public List<Quest> getInProgressQuests()
+	public <T extends Quest> T getInProgressQuest(int slot)
 	{
-		this.inProgressQuests.removeIf(qst -> qst == null);
-		return this.inProgressQuests.parallelStream().collect(Collectors.toList());
+		return (T) this.inProgressQuests[slot];
+	}
+	
+	@Override
+	public Quest[] getInProgressQuests()
+	{
+		return this.inProgressQuests;
 	}
 
 	@Override
 	public void clearInProgressQuests()
 	{
-		this.inProgressQuests.removeIf(qst -> qst == null);
+		for(int i = 0; i < this.inProgressQuests.length; i++)
+		{
+			Quest quest = this.inProgressQuests[i];
+			if(quest != null)
+			{
+				this.inProgressQuests[i] = null;
+			}
+		}	
 	}
 
 	@Override
 	public int countInProgressQuests()
 	{
-		this.inProgressQuests.removeIf(qst -> qst == null);
-		return this.inProgressQuests.size();
+		return Arrays.stream(this.inProgressQuests)
+			.parallel()
+			.filter(quest -> quest != null)
+			.collect(Collectors.toList())
+			.size();
 	}
 
 	@Override

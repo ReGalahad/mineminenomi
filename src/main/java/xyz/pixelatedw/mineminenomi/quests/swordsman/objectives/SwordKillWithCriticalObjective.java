@@ -23,7 +23,7 @@ public class SwordKillWithCriticalObjective extends Objective implements IKillEn
 
 		boolean criticalFlag = player.fallDistance > 0.0F && !player.onGround && !player.isOnLadder() && !player.isInWater() && !player.isPassenger();
 		boolean swordFlag = ItemsHelper.isSword(heldItem);
-				
+		
 		return criticalFlag && swordFlag;
 	}
 

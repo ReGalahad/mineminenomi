@@ -32,10 +32,11 @@ public class QuestDataCapability
 				CompoundNBT props = new CompoundNBT();
 
 				ListNBT questsInTracker = new ListNBT();
-				for (int i = 0; i < instance.getInProgressQuests().size(); i++)
+				for (int i = 0; i < instance.getInProgressQuests().length; i++)
 				{
-					Quest quest = instance.getInProgressQuests().get(i);
-					questsInTracker.add(quest.save());
+					Quest quest = instance.getInProgressQuests()[i];
+					if(quest != null)
+						questsInTracker.add(quest.save());
 				}
 				props.put("quests_in_tracker", questsInTracker);
 				
@@ -69,7 +70,7 @@ public class QuestDataCapability
 					{
 						Quest newQuest = quest.create();
 						newQuest.load(nbtQuests);
-						instance.addInProgressQuest(newQuest);
+						instance.setInProgressQuest(i, newQuest);
 					}
 					catch(Exception e)
 					{

@@ -83,18 +83,19 @@ public class QuestsTrackerScreen extends Screen
 
 		try
 		{
-			this.currentQuest = this.qprops.getInProgressQuests().get(this.questIndex);
+			this.currentQuest = this.qprops.getInProgressQuests()[this.questIndex];
 		}
 		catch (Exception e)
 		{
-			if(this.qprops.getInProgressQuests().size() > 0)
+			if(this.qprops.getInProgressQuests().length > 0)
 			{
-				this.currentQuest = this.qprops.getInProgressQuests().get(0);
-				WyDebug.debug(String.format("\n[ArrayOutOfBounds] \n Max possible index is : %s \n But the index requested is : %s", this.qprops.getInProgressQuests().size() - 1, this.questIndex));
+				this.currentQuest = this.qprops.getInProgressQuests()[0];
+				WyDebug.debug(String.format("\n[ArrayOutOfBounds] \n Max possible index is : %s \n But the index requested is : %s", this.qprops.getInProgressQuests().length - 1, this.questIndex));
 			}
 			else
 				this.currentQuest = null;		
 			this.questIndex = 0;
+			e.printStackTrace();
 		}
 		
 		String currentQuestName = this.currentQuest != null ? new TranslationTextComponent(String.format("quest." + APIConfig.PROJECT_ID + ".%s", this.currentQuest.getId())).getFormattedText() : "None";
@@ -172,18 +173,19 @@ public class QuestsTrackerScreen extends Screen
 				
 		try
 		{
-			this.currentQuest = this.qprops.getInProgressQuests().get(this.questIndex);
+			this.currentQuest = this.qprops.getInProgressQuests()[this.questIndex];
 		}
 		catch (Exception e)
 		{
-			if(this.qprops.getInProgressQuests().size() > 0)
+			if(this.qprops.getInProgressQuests().length > 0)
 			{
-				this.currentQuest = this.qprops.getInProgressQuests().get(0);
-				WyDebug.debug(String.format("\n[ArrayOutOfBounds] \n Max possible index is : %s \n But the index requested is : %s", this.qprops.getInProgressQuests().size() - 1, this.questIndex));
+				this.currentQuest = this.qprops.getInProgressQuests()[0];
+				WyDebug.debug(String.format("\n[ArrayOutOfBounds] \n Max possible index is : %s \n But the index requested is : %s", this.qprops.getInProgressQuests().length - 1, this.questIndex));
 			}
 			else
 				this.currentQuest = null;		
 			this.questIndex = 0;
+			e.printStackTrace();
 		}
 		
 		if(this.currentQuest == null)

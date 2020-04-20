@@ -58,8 +58,8 @@ public class AvailableQuestsListScreenPanel extends ScrollPanel
 			Quest quest = quests[i];
 			boolean exists = quest != null;
 			boolean isNotFinished = exists && !this.props.hasFinishedQuest(quest);
-			boolean isNotInProgress = exists && this.props.getInProgressQuest(quest) == null && !(this.props.getInProgressQuest(quest) != null && this.props.getInProgressQuest(quest).isComplete());
-
+			boolean isNotInProgress = exists && (this.props.getInProgressQuest(quest) == null || (this.props.getInProgressQuest(quest) != null && this.props.getInProgressQuest(quest).isComplete()));
+			
 			if (isNotFinished && isNotInProgress)
 			{
 				this.availableQuests.add(quests[i]);

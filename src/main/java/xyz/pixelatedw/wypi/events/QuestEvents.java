@@ -9,6 +9,7 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteractSpecific;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.wypi.APIConfig;
@@ -30,7 +31,7 @@ public class QuestEvents
 	@SubscribeEvent
 	public static void onEntityDies(LivingDeathEvent event)
 	{
-		if (!(event.getSource().getTrueSource() instanceof PlayerEntity) || !event.getEntityLiving().isServerWorld())
+		if (!(event.getSource().getTrueSource() instanceof PlayerEntity) || event.getSource().getTrueSource().world.isRemote)
 			return;
 
 		PlayerEntity player = (PlayerEntity) event.getSource().getTrueSource();
@@ -53,7 +54,7 @@ public class QuestEvents
 	@SubscribeEvent
 	public static void onHitEntity(LivingHurtEvent event)
 	{
-		if (!(event.getSource().getTrueSource() instanceof PlayerEntity) || !event.getEntityLiving().isServerWorld())
+		if (!(event.getSource().getTrueSource() instanceof PlayerEntity) || event.getSource().getTrueSource().world.isRemote)
 			return;
 		
 		PlayerEntity player = (PlayerEntity) event.getSource().getTrueSource();
@@ -79,7 +80,7 @@ public class QuestEvents
 		PlayerEntity player = event.getPlayer();
 		IQuestData questProps = QuestDataCapability.get(player);
 
-		if(!player.isServerWorld())
+		if(player.world.isRemote)
 			return;
 		
 		for (Objective obj : getObjectives(questProps))
@@ -95,13 +96,13 @@ public class QuestEvents
 		}
 	}
 	
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public static void onEntityInteract(EntityInteractSpecific event)
 	{
 		PlayerEntity player = event.getPlayer();
 		IQuestData questProps = QuestDataCapability.get(player);
 
-		if(!player.isServerWorld())
+		if(player.world.isRemote)
 			return;
 		
 		for (Objective obj : getObjectives(questProps))
@@ -123,6 +124,9 @@ public class QuestEvents
 
 		for (Quest quest : questProps.getInProgressQuests())
 		{
+			if(quest == null)
+				continue;
+			
 			if (!quest.isComplete())
 			{
 				for (Objective obj : quest.getObjectives())
