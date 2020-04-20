@@ -19,6 +19,8 @@ import xyz.pixelatedw.mineminenomi.screens.QuestChooseScreen;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.data.quest.IQuestData;
+import xyz.pixelatedw.wypi.network.WyNetwork;
+import xyz.pixelatedw.wypi.network.packets.client.CSyncQuestDataPacket;
 import xyz.pixelatedw.wypi.quests.Quest;
 
 public class AvailableQuestsListScreenPanel extends ScrollPanel
@@ -36,16 +38,35 @@ public class AvailableQuestsListScreenPanel extends ScrollPanel
 		this.props = abilityProps;
 		this.font = parent.getMinecraft().fontRenderer;
 
+		this.updateAvailableQuests(quests);
+		
+		this.scrollDistance = -10;
+	}
+
+	public void updateAvailableQuests(List<Quest> quests)
+	{
+		Quest[] arr = new Quest[quests.size()];
+		Quest[] questsArray = quests.toArray(arr);
+		this.updateAvailableQuests(questsArray);
+	}
+	
+	public void updateAvailableQuests(Quest[] quests)
+	{
+		this.availableQuests.clear();
 		for (int i = 0; i <= quests.length - 1; i++)
 		{
-			if (quests[i] != null && !this.props.hasFinishedQuest(quests[i]))
+			Quest quest = quests[i];
+			boolean exists = quest != null;
+			boolean isNotFinished = exists && !this.props.hasFinishedQuest(quest);
+			boolean isNotInProgress = exists && this.props.getInProgressQuest(quest) == null && !(this.props.getInProgressQuest(quest) != null && this.props.getInProgressQuest(quest).isComplete());
+
+			if (isNotFinished && isNotInProgress)
 			{
 				this.availableQuests.add(quests[i]);
 			}
 		}
-		this.scrollDistance = -10;
 	}
-
+	
 	@Override
 	public boolean mouseReleased(double p_mouseReleased_1_, double p_mouseReleased_3_, int p_mouseReleased_5_)
 	{
@@ -97,9 +118,17 @@ public class AvailableQuestsListScreenPanel extends ScrollPanel
 			String questColor = "#FFFFFF";
 
 			Quest inProgressQuest = this.props.getInProgressQuest(quest);
-			if(inProgressQuest != null && inProgressQuest.isComplete())
-			{
-				questColor = "#00FF55";
+			if(inProgressQuest != null)
+			{				
+				if(this.isMouseOverQuest(mouseX, mouseY, inProgressQuest))
+				{
+					formattedQuestName = "Already in progress!";
+				}
+				
+				if(inProgressQuest.isComplete())
+				{
+					questColor = "#00FF55";
+				}
 			}
 			
 			if(quest.isLocked(this.props))
@@ -157,8 +186,24 @@ public class AvailableQuestsListScreenPanel extends ScrollPanel
 	public boolean mouseClicked(final double mouseX, final double mouseY, final int button)
 	{		
 		Quest quest = this.findQuestEntry((int) mouseX, (int) mouseY);
+		Quest inProgressQuest = this.props.getInProgressQuest(quest);
 
-		
+		if(inProgressQuest != null && inProgressQuest.isComplete())
+		{
+			this.props.addFinishedQuest(inProgressQuest);
+			this.props.removeInProgressQuest(inProgressQuest);
+			WyNetwork.sendToServer(new CSyncQuestDataPacket(this.props));
+			this.updateAvailableQuests(this.availableQuests);
+		}
+		else if(quest != null && inProgressQuest == null)
+		{
+			if(!quest.isLocked(props))
+			{
+				this.props.addInProgressQuest(quest);
+				WyNetwork.sendToServer(new CSyncQuestDataPacket(this.props));
+				this.updateAvailableQuests(this.availableQuests);
+			}
+		}
 		
 		return super.mouseClicked(mouseX, mouseY, button);
 	}
@@ -166,7 +211,7 @@ public class AvailableQuestsListScreenPanel extends ScrollPanel
 	public boolean isMouseOverQuest(double mouseX, double mouseY, Quest overQuest)
 	{
 		Quest quest = this.findQuestEntry((int) mouseX, (int) mouseY);
-		
+
 		if(quest != null && quest.equals(overQuest))
 		{
 			return super.isMouseOver(mouseX, mouseY);

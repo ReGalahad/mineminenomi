@@ -108,13 +108,12 @@ public class QuestsTrackerScreen extends Screen
 			GlStateManager.pushMatrix();
 			{
 				double scale = 1.4;
-				GlStateManager.translated(posX + 100, posY + 15, 0);
+				GlStateManager.translated(posX + 40, posY + 15, 0);
 				GlStateManager.translated(256, 256, 0);
 				
 				GlStateManager.scaled(scale, scale, 0);
 				GlStateManager.translated(-256, -256, 0);
 
-				WyHelper.centerString(this.font, currentQuestName, 0, 0);
 				WyHelper.drawStringWithBorder(this.font, currentQuestName, 0, 0, WyHelper.hexToRGB("#FFFFFF").getRGB());
 			}
 			GlStateManager.popMatrix();
