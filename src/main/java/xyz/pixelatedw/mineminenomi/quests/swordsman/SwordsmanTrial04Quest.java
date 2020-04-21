@@ -12,7 +12,7 @@ import xyz.pixelatedw.wypi.quests.objectives.Objective;
 public class SwordsmanTrial04Quest extends Quest
 {
 	private Objective objective01 = new FindStrongSwordObjective();
-	private Objective objective02 = new SwordKillInSecondsObjective("Kill 3 enemies in less than 10 seconds", 3).addRequirement(this.objective01);
+	private Objective objective02 = new SwordKillInSecondsObjective("Kill 3 enemies in less than 5 seconds", 3).addRequirement(this.objective01);
 	
 	public SwordsmanTrial04Quest()
 	{

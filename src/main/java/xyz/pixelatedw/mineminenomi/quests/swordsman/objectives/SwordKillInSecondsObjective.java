@@ -22,13 +22,8 @@ public class SwordKillInSecondsObjective extends SwordKillObjective implements I
 			this.lastKill = player.world.getGameTime();
 		
 		long killTime = player.world.getGameTime();
-		
-		System.out.println("+===============+");
-		System.out.println(killTime);
-		System.out.println(this.lastKill);
-		System.out.println("+===============+");
-		
-		if(killTime - 10 <= this.lastKill)
+
+		if(killTime - 100 <= this.lastKill)
 		{
 			this.lastKill = killTime;
 			return super.checkKill(player, target, source);			
