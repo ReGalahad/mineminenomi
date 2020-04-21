@@ -467,7 +467,7 @@
 	"quest.not_completed": "%s does not meet the completion requirements.",
 	"quest.objective.mineminenomi.find_a_sword_that_has_over_7_damage": "Find a sword that has over 7 damage",
 	"quest.objective.mineminenomi.kill_10_enemies_using_shi_shishi_sonson": "Kill 10 enemies using Shi Shishi Sonson",
-	"quest.objective.mineminenomi.kill_3_enemies_in_less_than_10_seconds": "Kill 3 enemies in less than 10 seconds",
+	"quest.objective.mineminenomi.kill_3_enemies_in_less_than_5_seconds": "Kill 3 enemies in less than 5 seconds",
 	"quest.objective.mineminenomi.kill_5_enemies_with_critical_hits": "Kill 5 enemies with critical hits",
 	"quest.objective.mineminenomi.kill_5_enemies_with_running_towards_them": "Kill 5 enemies with running towards them",
 	"quest.started": "%s is already in progress!",

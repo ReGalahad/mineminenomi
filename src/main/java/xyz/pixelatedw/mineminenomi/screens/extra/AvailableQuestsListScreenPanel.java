@@ -195,6 +195,7 @@ public class AvailableQuestsListScreenPanel extends ScrollPanel
 		{
 			this.props.addFinishedQuest(inProgressQuest);
 			this.props.removeInProgressQuest(inProgressQuest);
+			inProgressQuest.giveReward(Minecraft.getInstance().player);
 			WyNetwork.sendToServer(new CSyncQuestDataPacket(this.props));
 			this.updateAvailableQuests(this.availableQuests);
 		}

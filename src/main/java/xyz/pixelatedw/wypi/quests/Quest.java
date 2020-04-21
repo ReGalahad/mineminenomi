@@ -33,9 +33,8 @@ public abstract class Quest extends ForgeRegistryEntry<Quest>
 	/*
 	 *  Abstract methods
 	 */
-	
-	public abstract boolean canStart(PlayerEntity player);
-	
+
+	public abstract void giveReward(PlayerEntity player);
 	
 	/*
 	 *  Methods
