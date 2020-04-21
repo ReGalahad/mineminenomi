@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.quests.swordsman.objectives;
+package xyz.pixelatedw.mineminenomi.quests.objectives;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;

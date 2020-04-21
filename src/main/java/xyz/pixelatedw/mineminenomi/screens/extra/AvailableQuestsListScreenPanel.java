@@ -76,7 +76,7 @@ public class AvailableQuestsListScreenPanel extends ScrollPanel
 	@Override
 	protected int getContentHeight()
 	{
-		return ((this.availableQuests.size()) * ENTRY_HEIGHT) + 50;
+		return (this.availableQuests.size()) * ENTRY_HEIGHT * 3 - 30;
 	}
 
 	@Override
@@ -188,6 +188,9 @@ public class AvailableQuestsListScreenPanel extends ScrollPanel
 		Quest quest = this.findQuestEntry((int) mouseX, (int) mouseY);
 		Quest inProgressQuest = this.props.getInProgressQuest(quest);
 
+		if(button != 0)
+			return false;
+		
 		if(inProgressQuest != null && inProgressQuest.isComplete())
 		{
 			this.props.addFinishedQuest(inProgressQuest);

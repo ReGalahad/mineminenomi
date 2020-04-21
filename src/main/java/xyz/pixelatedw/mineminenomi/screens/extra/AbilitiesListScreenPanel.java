@@ -49,7 +49,7 @@ public class AbilitiesListScreenPanel extends ScrollPanel
 	@Override
 	protected int getContentHeight()
 	{
-		return (this.entries.size()) * ENTRY_HEIGHT + 46;
+		return (this.entries.size()) * ENTRY_HEIGHT + 16;
 	}
 
 	@Override
