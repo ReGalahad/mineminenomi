@@ -12,8 +12,10 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.client.gui.ScrollPanel;
 import net.minecraftforge.fml.client.config.GuiUtils;
+import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.screens.QuestChooseScreen;
 import xyz.pixelatedw.wypi.APIConfig;
@@ -120,9 +122,9 @@ public class AvailableQuestsListScreenPanel extends ScrollPanel
 			Quest inProgressQuest = this.props.getInProgressQuest(quest);
 			if(inProgressQuest != null)
 			{				
-				if(this.isMouseOverQuest(mouseX, mouseY, inProgressQuest))
+				if(this.isMouseOverQuest(mouseX, mouseY, inProgressQuest) && !inProgressQuest.isComplete())
 				{
-					formattedQuestName = "Already in progress!";
+					formattedQuestName = new TranslationTextComponent(ModI18n.QUEST_NO_QUESTS_AVAILABLE).getFormattedText();
 				}
 				
 				if(inProgressQuest.isComplete())

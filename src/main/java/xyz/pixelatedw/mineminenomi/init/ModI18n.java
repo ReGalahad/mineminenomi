@@ -47,27 +47,10 @@ public class ModI18n
 	public static final String GUI_ACCEPT = WyRegistry.registerName("gui.accept", "Accept");
 	public static final String GUI_DECLINE = WyRegistry.registerName("gui.decline", "Decline");
 	
-	public static final String QUEST_SWORDSMAN_PROGRESSION_01_START = WyRegistry.registerName("quest.swordsman_progression_01.start", "<%s> If you want to be trained here you'll need a strong blade to fight with. Show me your best blade you've got.");
-	public static final String QUEST_SWORDSMAN_PROGRESSION_01_WEAK_SWORD = WyRegistry.registerName("quest.swordsman_progression_01.weak_sword", "<%s> That weapon is a joke. You'll need something stronger than that.");
-	public static final String QUEST_SWORDSMAN_PROGRESSION_01_STRONG_SWORD = WyRegistry.registerName("quest.swordsman_progression_01.strong_sword", "<%s> This one will do for my training.");
+	public static final String QUEST_NO_QUESTS_AVAILABLE = WyRegistry.registerName("quest.no_quests_available", "<%s> I don't have any trials for you at the moment, come back when you get stronger.");
+	public static final String QUEST_TOO_MANY = WyRegistry.registerName("quest.too_many", "<%s> You cannot accept any more quests");
+	public static final String QUEST_ALREADY_IN_PROGRESS = WyRegistry.registerName("quest.already_in_progress", "Already in progress!");
 	
-	public static final String QUEST_SWORDSMAN_PROGRESSION_02_SUNSET_START = WyRegistry.registerName("quest.swordsman_progression_02.sunset_start", "<%s> We're starting when the sun sets, you're free to do as you please until then.");
-	public static final String QUEST_SWORDSMAN_PROGRESSION_02_START = WyRegistry.registerName("quest.swordsman_progression_02.start", "<%s> Your first test will be to survive the night. Good luck.");
-	public static final String QUEST_SWORDSMAN_PROGRESSION_02_SURVIVED = WyRegistry.registerName("quest.swordsman_progression_02.survived", "<%s> Congratulations you've survived the night, let's proceed then.");
-	public static final String QUEST_SWORDSMAN_PROGRESSION_02_THREE_DAYS_LATER = WyRegistry.registerName("quest.swordsman_progression_02.three_days_later", "<%s> I was starting to wonder if you died out there. But nonetheless you did survive the night like asked.");
-	
-	public static final String QUEST_SWORDSMAN_PROGRESSION_03_START = WyRegistry.registerName("quest.swordsman_progression_03.start", "<%s> Let the real training commmence then. Show me how proficient you are with your blade, go to any mountainous area and kill 20 creatures.");
-	public static final String QUEST_SWORDSMAN_PROGRESSION_03_COMPLETE = WyRegistry.registerName("quest.swordsman_progression_03.complete", "<%s> Very good work there. I reckon that you have some talent with that sword.");
-			
-	public static final String QUEST_SWORDSMAN_PROGRESSION_04_START = WyRegistry.registerName("quest.swordsman_progression_04.start", "<%s> So you can kill things without a problem, congratulations, how well can you handle hitting you enemy with precision then ?");
-
-	public static final String QUEST_NOT_COMPLETED = WyRegistry.registerName("quest.not_completed", "%s does not meet the completion requirements.");
-	public static final String QUEST_TOO_MANY = WyRegistry.registerName("quest.too_many", "Cannot accept any more quests");
-	public static final String QUEST_COMPLETED = WyRegistry.registerName("quest.completed", "%s was completed and cannot be started again!");
-	public static final String QUEST_STARTED = WyRegistry.registerName("quest.started", "%s is already in progress!");
-	public static final String QUEST_ALREADY_COMPLETED = WyRegistry.registerName("quest.already_completed", "Started %s");
-	public static final String QUEST_IN_PROGRESS = WyRegistry.registerName("quest.in_progress", "Completed %s");
-
 	public static final String ABILITY_MESSAGE_NEED_SWORD = WyRegistry.registerName("ability.item.message.need_sword", "You need a sword to use this ability!");
 	public static final String ABILITY_MESSAGE_ONLY_IN_ROOM = WyRegistry.registerName("ability.item.message.only_in_room", "%s can only be used inside ROOM!");
 	public static final String ABILITY_MESSAGE_NEED_MEDIC_BAG = WyRegistry.registerName("ability.item.message.need_medic_bag", "You need a medic bag equipped to use this ability!");

@@ -3,13 +3,16 @@ package xyz.pixelatedw.mineminenomi.events;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteractSpecific;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.entities.mobs.quest.givers.IQuestGiver;
+import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.mineminenomi.screens.QuestChooseScreen;
 import xyz.pixelatedw.wypi.APIConfig;
+import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.data.quest.IQuestData;
 import xyz.pixelatedw.wypi.data.quest.QuestDataCapability;
 import xyz.pixelatedw.wypi.network.WyNetwork;
@@ -40,8 +43,22 @@ public class QuestEvents
 			return;
 		
 		PlayerEntity player = event.getPlayer();
+		IQuestData questProps = QuestDataCapability.get(player);
 		IQuestGiver questGiver = (IQuestGiver) event.getTarget();
+		boolean hasQuests = false;
 		
-		Minecraft.getInstance().displayGuiScreen(new QuestChooseScreen(player, event.getTarget(), questGiver.getAvailableQuests(player)));
+		for (int i = 0; i <= questGiver.getAvailableQuests(player).length - 1; i++)
+		{
+			if(questProps.hasFinishedQuest(questGiver.getAvailableQuests(player)[i]))
+				continue;
+			
+			hasQuests = true;
+			break;
+		}
+		
+		if(hasQuests)
+			Minecraft.getInstance().displayGuiScreen(new QuestChooseScreen(player, event.getTarget(), questGiver.getAvailableQuests(player)));
+		else
+			WyHelper.sendMsgToPlayer(player, new TranslationTextComponent(ModI18n.QUEST_NO_QUESTS_AVAILABLE, event.getTarget().getDisplayName().getFormattedText()).getFormattedText());
 	}
 }
