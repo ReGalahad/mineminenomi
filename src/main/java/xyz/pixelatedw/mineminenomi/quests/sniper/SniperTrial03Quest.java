@@ -6,7 +6,7 @@ import java.util.List;
 import net.minecraft.entity.player.PlayerEntity;
 import xyz.pixelatedw.mineminenomi.abilities.sniper.RenpatsuNamariBoshiAbility;
 import xyz.pixelatedw.mineminenomi.entities.mobs.quest.objectives.SniperTargetEntity;
-import xyz.pixelatedw.mineminenomi.init.ModQuests;
+import xyz.pixelatedw.mineminenomi.packets.server.SDespawnQuestObjectivePacket;
 import xyz.pixelatedw.mineminenomi.quests.sniper.objectives.ArrowKillSniperTargetObjective;
 import xyz.pixelatedw.mineminenomi.quests.sniper.objectives.HoldBowObjective;
 import xyz.pixelatedw.wypi.WyHelper;
@@ -27,7 +27,7 @@ public class SniperTrial03Quest extends Quest
 	public SniperTrial03Quest()
 	{
 		super("sniper_trial_03", "Trial: Renpatsu Namari Boshi");
-		this.addRequirements(ModQuests.SNIPER_TRIAL_01);
+		//this.addRequirements(ModQuests.SNIPER_TRIAL_01, ModQuests.SNIPER_TRIAL_02);
 		this.addObjectives(this.objective01, this.objective02);
 		
 		this.onStartEvent = this::spawnTargets;
@@ -73,13 +73,12 @@ public class SniperTrial03Quest extends Quest
 			double posX = player.posX + WyHelper.randomWithRange(-10, 10);
 			double posY = player.posY + 30;
 			double posZ = player.posZ + WyHelper.randomWithRange(-10, 10);
-
 			target.setLocationAndAngles(posX, posY, posZ, 0, 0);
-			target.setOwner(player);
-			target.setActive(true);
 			
 			player.world.addEntity(target);			
 			this.targets.add(target);
+			
+			WyNetwork.sendToAll(new SDespawnQuestObjectivePacket(player.getUniqueID(), target.getEntityId()));
 		}
 		WyHelper.sendMsgToPlayer(player, "<Sniper Master> Heads up kid!");
 	}

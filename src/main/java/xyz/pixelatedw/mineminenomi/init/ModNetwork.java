@@ -7,6 +7,7 @@ import xyz.pixelatedw.mineminenomi.packets.client.CEntityStatsSyncPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CRequestQuestDataSyncPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CRequestSyncPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CUseAbilityPacket;
+import xyz.pixelatedw.mineminenomi.packets.server.SDespawnQuestObjectivePacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SEntityStatsSyncPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SOpenCharacterCreatorScreenPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SOpenWantedPosterScreenPacket;
@@ -44,6 +45,7 @@ public class ModNetwork
 		WyNetwork.registerPacket(SViewProtectionPacket.class, SViewProtectionPacket::encode, SViewProtectionPacket::decode, SViewProtectionPacket::handle);
 		WyNetwork.registerPacket(SOpenCharacterCreatorScreenPacket.class, SOpenCharacterCreatorScreenPacket::encode, SOpenCharacterCreatorScreenPacket::decode, SOpenCharacterCreatorScreenPacket::handle);
 		WyNetwork.registerPacket(SOpenWantedPosterScreenPacket.class, SOpenWantedPosterScreenPacket::encode, SOpenWantedPosterScreenPacket::decode, SOpenWantedPosterScreenPacket::handle);
+		WyNetwork.registerPacket(SDespawnQuestObjectivePacket.class, SDespawnQuestObjectivePacket::encode, SDespawnQuestObjectivePacket::decode, SDespawnQuestObjectivePacket::handle);
 
 	}
 }

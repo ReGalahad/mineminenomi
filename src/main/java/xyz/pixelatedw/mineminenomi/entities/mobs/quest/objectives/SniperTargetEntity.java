@@ -6,7 +6,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 
-public class SniperTargetEntity extends MobEntity implements IQuestObjective
+public class SniperTargetEntity extends MobEntity
 {
 	private PlayerEntity owner;
 	private boolean active = false;
@@ -35,29 +35,5 @@ public class SniperTargetEntity extends MobEntity implements IQuestObjective
 			this.remove();
 
 		super.tick();
-	}
-
-	@Override
-	public void setOwner(PlayerEntity player)
-	{
-		this.owner = player;
-	}
-
-	@Override
-	public PlayerEntity getOwner()
-	{
-		return this.owner;
-	}
-
-	@Override
-	public void setActive(boolean active)
-	{
-		this.active = active;
-	}
-
-	@Override
-	public boolean isActive()
-	{
-		return this.active;
 	}
 }
