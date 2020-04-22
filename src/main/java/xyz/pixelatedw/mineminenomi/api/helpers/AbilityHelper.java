@@ -59,12 +59,15 @@ import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.events.custom.DorikiEvent;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
+import xyz.pixelatedw.mineminenomi.init.ModQuests;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
+import xyz.pixelatedw.wypi.data.quest.IQuestData;
+import xyz.pixelatedw.wypi.data.quest.QuestDataCapability;
 import xyz.pixelatedw.wypi.math.ISphere;
 import xyz.pixelatedw.wypi.math.Sphere;
 
@@ -449,18 +452,24 @@ public class AbilityHelper
 
 	public static void validateStyleMoves(PlayerEntity player)
 	{
-		// QuestProperties questProps = QuestProperties.get(player);
-
 		IEntityStats props = EntityStatsCapability.get(player);
 		IAbilityData abilityProps = AbilityDataCapability.get(player);
+		IQuestData questProps = QuestDataCapability.get(player);
+		
 		if (props.isSwordsman())
 		{
 			if (!verifyIfAbilityIsBanned(ShiShishiSonsonAbility.INSTANCE))
 				abilityProps.addUnlockedAbility(ShiShishiSonsonAbility.INSTANCE);
 			if (CommonConfig.instance.isQuestProgressionEnabled())
 			{
-				// if (questProps.hasQuestCompleted(ListQuests.swordsmanProgression04) && !verifyIfAbilityIsBanned(SwordsmanAbilities.SANBYAKUROKUJUPOUNDHO))
-				// abilityProps.addRacialAbility(SwordsmanAbilities.SANBYAKUROKUJUPOUNDHO);
+				if (questProps.hasFinishedQuest(ModQuests.SWORDSMAN_TRIAL_01) && !verifyIfAbilityIsBanned(ShiShishiSonsonAbility.INSTANCE))
+					abilityProps.addUnlockedAbility(ShiShishiSonsonAbility.INSTANCE);
+				if (questProps.hasFinishedQuest(ModQuests.SWORDSMAN_TRIAL_02) && !verifyIfAbilityIsBanned(YakkodoriAbility.INSTANCE))
+					abilityProps.addUnlockedAbility(YakkodoriAbility.INSTANCE);
+				if (questProps.hasFinishedQuest(ModQuests.SWORDSMAN_TRIAL_03) && !verifyIfAbilityIsBanned(SanbyakurokujuPoundHoAbility.INSTANCE))
+					abilityProps.addUnlockedAbility(SanbyakurokujuPoundHoAbility.INSTANCE);
+				if (questProps.hasFinishedQuest(ModQuests.SWORDSMAN_TRIAL_04) && !verifyIfAbilityIsBanned(OTatsumakiAbility.INSTANCE))
+					abilityProps.addUnlockedAbility(OTatsumakiAbility.INSTANCE);
 			}
 			else
 			{

@@ -135,7 +135,7 @@ public class CommonConfig
 		builder.push("Quests");
 		
 		this.quests = builder.comment("Allows quests to be accepted / completed; true by default").define("Quests", true);
-		this.questProgression = builder.comment("Allows quests to reward players with abilities, otherwise all abilities will be unlocked from the beginning; true by default").define("Quest Progression", false);
+		this.questProgression = builder.comment("Allows quests to reward players with abilities, otherwise all abilities will be unlocked from the beginning; true by default").define("Quest Progression", true);
 		
 		builder.pop();
 		
