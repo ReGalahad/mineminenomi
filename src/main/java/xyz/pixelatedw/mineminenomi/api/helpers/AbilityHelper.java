@@ -70,6 +70,7 @@ import xyz.pixelatedw.wypi.data.quest.IQuestData;
 import xyz.pixelatedw.wypi.data.quest.QuestDataCapability;
 import xyz.pixelatedw.wypi.math.ISphere;
 import xyz.pixelatedw.wypi.math.Sphere;
+import xyz.pixelatedw.wypi.quests.Quest;
 
 public class AbilityHelper
 {
@@ -453,68 +454,46 @@ public class AbilityHelper
 	public static void validateStyleMoves(PlayerEntity player)
 	{
 		IEntityStats props = EntityStatsCapability.get(player);
-		IAbilityData abilityProps = AbilityDataCapability.get(player);
-		IQuestData questProps = QuestDataCapability.get(player);
 		
 		if (props.isSwordsman())
 		{
-			if (!verifyIfAbilityIsBanned(ShiShishiSonsonAbility.INSTANCE))
-				abilityProps.addUnlockedAbility(ShiShishiSonsonAbility.INSTANCE);
-			if (CommonConfig.instance.isQuestProgressionEnabled())
-			{
-				if (questProps.hasFinishedQuest(ModQuests.SWORDSMAN_TRIAL_01) && !verifyIfAbilityIsBanned(ShiShishiSonsonAbility.INSTANCE))
-					abilityProps.addUnlockedAbility(ShiShishiSonsonAbility.INSTANCE);
-				if (questProps.hasFinishedQuest(ModQuests.SWORDSMAN_TRIAL_02) && !verifyIfAbilityIsBanned(YakkodoriAbility.INSTANCE))
-					abilityProps.addUnlockedAbility(YakkodoriAbility.INSTANCE);
-				if (questProps.hasFinishedQuest(ModQuests.SWORDSMAN_TRIAL_03) && !verifyIfAbilityIsBanned(SanbyakurokujuPoundHoAbility.INSTANCE))
-					abilityProps.addUnlockedAbility(SanbyakurokujuPoundHoAbility.INSTANCE);
-				if (questProps.hasFinishedQuest(ModQuests.SWORDSMAN_TRIAL_04) && !verifyIfAbilityIsBanned(OTatsumakiAbility.INSTANCE))
-					abilityProps.addUnlockedAbility(OTatsumakiAbility.INSTANCE);
-			}
-			else
-			{
-				if (!verifyIfAbilityIsBanned(SanbyakurokujuPoundHoAbility.INSTANCE))
-					abilityProps.addUnlockedAbility(SanbyakurokujuPoundHoAbility.INSTANCE);
-				if (!verifyIfAbilityIsBanned(YakkodoriAbility.INSTANCE))
-					abilityProps.addUnlockedAbility(YakkodoriAbility.INSTANCE);
-				if (!verifyIfAbilityIsBanned(OTatsumakiAbility.INSTANCE))
-					abilityProps.addUnlockedAbility(OTatsumakiAbility.INSTANCE);
-			}
+			validateQuestAbility(player, ModQuests.SWORDSMAN_TRIAL_01, ShiShishiSonsonAbility.INSTANCE);
+			validateQuestAbility(player, ModQuests.SWORDSMAN_TRIAL_02, YakkodoriAbility.INSTANCE);
+			validateQuestAbility(player, ModQuests.SWORDSMAN_TRIAL_03, SanbyakurokujuPoundHoAbility.INSTANCE);
+			validateQuestAbility(player, ModQuests.SWORDSMAN_TRIAL_04, OTatsumakiAbility.INSTANCE);
 		}
 		else if (props.isSniper())
 		{
-			if (!verifyIfAbilityIsBanned(KaenBoshiAbility.INSTANCE))
-				abilityProps.addUnlockedAbility(KaenBoshiAbility.INSTANCE);
-			if (CommonConfig.instance.isQuestProgressionEnabled())
-			{
-			}
-			else
-			{
-				if (!verifyIfAbilityIsBanned(KemuriBoshiAbility.INSTANCE))
-					abilityProps.addUnlockedAbility(KemuriBoshiAbility.INSTANCE);
-				if (!verifyIfAbilityIsBanned(RenpatsuNamariBoshiAbility.INSTANCE))
-					abilityProps.addUnlockedAbility(RenpatsuNamariBoshiAbility.INSTANCE);
-				if (!verifyIfAbilityIsBanned(SakuretsuSabotenBoshiAbility.INSTANCE))
-					abilityProps.addUnlockedAbility(SakuretsuSabotenBoshiAbility.INSTANCE);
-			}
+			validateQuestAbility(player, ModQuests.SWORDSMAN_TRIAL_01, KaenBoshiAbility.INSTANCE);
+			validateQuestAbility(player, ModQuests.SWORDSMAN_TRIAL_02, KemuriBoshiAbility.INSTANCE);
+			validateQuestAbility(player, ModQuests.SWORDSMAN_TRIAL_03, RenpatsuNamariBoshiAbility.INSTANCE);
+			validateQuestAbility(player, ModQuests.SWORDSMAN_TRIAL_04, SakuretsuSabotenBoshiAbility.INSTANCE);
 		}
 		else if (props.isDoctor())
 		{
-			if (!verifyIfAbilityIsBanned(FirstAidAbility.INSTANCE))
-				abilityProps.addUnlockedAbility(FirstAidAbility.INSTANCE);
-			if (CommonConfig.instance.isQuestProgressionEnabled())
-			{
-			}
-			else
-			{
-				if (!verifyIfAbilityIsBanned(MedicBagExplosionAbility.INSTANCE))
-					abilityProps.addUnlockedAbility(MedicBagExplosionAbility.INSTANCE);
-				if (!verifyIfAbilityIsBanned(FailedExperimentAbility.INSTANCE))
-					abilityProps.addUnlockedAbility(FailedExperimentAbility.INSTANCE);
-			}
+			validateQuestAbility(player, ModQuests.SWORDSMAN_TRIAL_01, FirstAidAbility.INSTANCE);
+			validateQuestAbility(player, ModQuests.SWORDSMAN_TRIAL_02, MedicBagExplosionAbility.INSTANCE);
+			validateQuestAbility(player, ModQuests.SWORDSMAN_TRIAL_03, FailedExperimentAbility.INSTANCE);
 		}
 	}
 
+	private static void validateQuestAbility(PlayerEntity player, Quest quest, Ability ability)
+	{
+		IAbilityData abilityProps = AbilityDataCapability.get(player);
+		IQuestData questProps = QuestDataCapability.get(player);
+		
+		if(CommonConfig.instance.isQuestProgressionEnabled())
+		{
+			if (questProps.hasFinishedQuest(quest) && !verifyIfAbilityIsBanned(ability))
+				abilityProps.addUnlockedAbility(ability);
+		}
+		else
+		{
+			if(!verifyIfAbilityIsBanned(ability))
+				abilityProps.addUnlockedAbility(ability);
+		}
+	}
+	
 	public static ItemStack getDevilFruitItem(String fullName)
 	{
 		String model = "";
