@@ -25,7 +25,7 @@ public class ModQuests
 	
 	// Sniper
 	public static final Quest SNIPER_TRIAL_01 = new SniperTrial01Quest();
-	public static final Quest SNIPER_TRIAL_02 = null;
+	public static final Quest SNIPER_TRIAL_02 = new SniperTrial01Quest(); // TODO Make a 2nd sniper quest
 	public static final Quest SNIPER_TRIAL_03 = new SniperTrial03Quest();
 	public static final Quest SNIPER_TRIAL_04 = new SniperTrial04Quest();
 

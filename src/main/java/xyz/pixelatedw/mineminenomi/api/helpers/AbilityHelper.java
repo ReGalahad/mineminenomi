@@ -464,10 +464,10 @@ public class AbilityHelper
 		}
 		else if (props.isSniper())
 		{
-			validateQuestAbility(player, ModQuests.SWORDSMAN_TRIAL_01, KaenBoshiAbility.INSTANCE);
-			validateQuestAbility(player, ModQuests.SWORDSMAN_TRIAL_02, KemuriBoshiAbility.INSTANCE);
-			validateQuestAbility(player, ModQuests.SWORDSMAN_TRIAL_03, RenpatsuNamariBoshiAbility.INSTANCE);
-			validateQuestAbility(player, ModQuests.SWORDSMAN_TRIAL_04, SakuretsuSabotenBoshiAbility.INSTANCE);
+			validateQuestAbility(player, ModQuests.SNIPER_TRIAL_01, KaenBoshiAbility.INSTANCE);
+			validateQuestAbility(player, ModQuests.SNIPER_TRIAL_02, KemuriBoshiAbility.INSTANCE);
+			validateQuestAbility(player, ModQuests.SNIPER_TRIAL_03, RenpatsuNamariBoshiAbility.INSTANCE);
+			validateQuestAbility(player, ModQuests.SNIPER_TRIAL_04, SakuretsuSabotenBoshiAbility.INSTANCE);
 		}
 		else if (props.isDoctor())
 		{
