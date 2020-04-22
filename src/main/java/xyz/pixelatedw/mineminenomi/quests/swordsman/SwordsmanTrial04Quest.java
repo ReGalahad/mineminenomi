@@ -22,9 +22,10 @@ public class SwordsmanTrial04Quest extends Quest
 		super("swordsman_trial_04", "Trial: O Tatsumaki");
 		this.addRequirements(ModQuests.SWORDSMAN_TRIAL_03);
 		this.addObjectives(this.objective01, this.objective02);
+		
+		this.onCompleteEvent = this::giveReward;
 	}
 	
-	@Override
 	public void giveReward(PlayerEntity player)
 	{
 		IAbilityData props = AbilityDataCapability.get(player);

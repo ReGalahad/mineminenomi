@@ -20,6 +20,7 @@ import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityPirateCaptain;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityPirateWithGun;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityPirateWithSword;
 import xyz.pixelatedw.mineminenomi.entities.mobs.quest.givers.DojoSenseiEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.quest.objectives.SniperTargetEntity;
 import xyz.pixelatedw.wypi.ModdedSpawnEggItem;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.WyRegistry;
@@ -51,6 +52,7 @@ public class ModEntities
 	public static final EntityType VIVRE_CARD = WyRegistry.createEntityType(VivreCardEntity::new).size(0.4F, 0.4F).build("vivre_card");
 	public static final EntityType CHARGING_URSUS_SHOCK = WyRegistry.createEntityType(ChargingUrsusShockEntity::new).size(1.0F, 1.0F).build("charging_ursus_shock");
 	public static final EntityType PHYSICAL_BODY = WyRegistry.createEntityType(PhysicalBodyEntity::new).build("physical_body");
+	public static final EntityType SNIPER_TARGET = WyRegistry.createEntityType(SniperTargetEntity::new).build("sniper_target");
 
 	static
 	{
@@ -77,6 +79,7 @@ public class ModEntities
 		WyRegistry.registerEntityType(VIVRE_CARD, "Vivre Card");
 		WyRegistry.registerEntityType(CHARGING_URSUS_SHOCK, "Charging Ursus Shock");
 		WyRegistry.registerEntityType(PHYSICAL_BODY, "Physical Body");
+		WyRegistry.registerEntityType(SNIPER_TARGET, "Sniper Target");
 	}
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)

@@ -105,6 +105,25 @@ public class QuestEvents
 		if(player.world.isRemote)
 			return;
 		
+		boolean restartQuest = false;
+		
+		for(Quest quest : questProps.getInProgressQuests())
+		{
+			if(quest != null && quest.checkRestart(player))
+			{
+				for (Objective obj : getObjectives(questProps))
+				{
+					obj.setProgress(0);
+				}
+				quest.triggerStartEvent(player);
+				restartQuest = true;
+				break;
+			}
+		}
+		
+		if(restartQuest)
+			return;
+		
 		for (Objective obj : getObjectives(questProps))
 		{
 			if (obj instanceof IEntityInteractObjective)

@@ -113,8 +113,11 @@ public class DojoSenseiEntity extends GenericNewEntity implements IQuestGiver
 		IEntityStats entityProps = EntityStatsCapability.get(player);		
 		List<Quest> availableQuests = new ArrayList<Quest>();
 		
-		if(entityProps.isSwordsman())
-			availableQuests.addAll(ImmutableList.of(ModQuests.SWORDSMAN_TRIAL_01, ModQuests.SWORDSMAN_TRIAL_02, ModQuests.SWORDSMAN_TRIAL_03, ModQuests.SWORDSMAN_TRIAL_04));
+		//if(entityProps.isSwordsman())
+		//	availableQuests.addAll(ImmutableList.of(ModQuests.SWORDSMAN_TRIAL_01, ModQuests.SWORDSMAN_TRIAL_02, ModQuests.SWORDSMAN_TRIAL_03, ModQuests.SWORDSMAN_TRIAL_04));
+		
+		if(entityProps.isSniper())
+			availableQuests.addAll(ImmutableList.of(ModQuests.SNIPER_TRIAL_01, ModQuests.SNIPER_TRIAL_03, ModQuests.SNIPER_TRIAL_04));
 		
 		Quest[] quests = new Quest[availableQuests.size()];	
 		return availableQuests.toArray(quests);

@@ -39,7 +39,7 @@ public class QuestEvents
 	@SubscribeEvent
 	public static void onEntityInteract(EntityInteractSpecific event)
 	{
-		if(!(event.getTarget() instanceof IQuestGiver) || !event.getPlayer().world.isRemote)
+		if(!(event.getTarget() instanceof IQuestGiver) || !event.getWorld().isRemote)
 			return;
 		
 		PlayerEntity player = event.getPlayer();
@@ -55,10 +55,10 @@ public class QuestEvents
 			hasQuests = true;
 			break;
 		}
-		
+
 		if(hasQuests)
 			Minecraft.getInstance().displayGuiScreen(new QuestChooseScreen(player, event.getTarget(), questGiver.getAvailableQuests(player)));
 		else
-			WyHelper.sendMsgToPlayer(player, new TranslationTextComponent(ModI18n.QUEST_NO_QUESTS_AVAILABLE, event.getTarget().getDisplayName().getFormattedText()).getFormattedText());
+			WyHelper.sendMsgToPlayer(player, new TranslationTextComponent(ModI18n.QUEST_NO_TRIALS_AVAILABLE, event.getTarget().getDisplayName().getFormattedText()).getFormattedText());
 	}
 }

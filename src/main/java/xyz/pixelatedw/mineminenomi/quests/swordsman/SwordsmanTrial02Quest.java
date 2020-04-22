@@ -20,9 +20,10 @@ public class SwordsmanTrial02Quest extends Quest
 	{
 		super("swordsman_trial_02", "Trial: Yakkodori");
 		this.addObjectives(this.objective01, this.objective02);
+		
+		this.onCompleteEvent = this::giveReward;
 	}
 
-	@Override
 	public void giveReward(PlayerEntity player)
 	{
 		IAbilityData props = AbilityDataCapability.get(player);

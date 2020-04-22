@@ -1,5 +1,6 @@
 package xyz.pixelatedw.wypi.quests;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,18 +24,15 @@ public abstract class Quest extends ForgeRegistryEntry<Quest>
 	private List<Objective> objectives = new ArrayList<Objective>();
 	private List<Quest> requirements = new ArrayList<Quest>();
 
+	// Setting the defaults so that no crash occurs and so they will be null safe.
+	protected IAfterStarting onStartEvent = (player) -> {};
+	protected IAfterCompleting onCompleteEvent = (player) -> {};
+	protected IShouldRestart shouldRestartEvent = (player) -> { return false; };
+
 	public Quest(String id, String title)
 	{
 		this.title = title;
 	}
-	
-	
-	
-	/*
-	 *  Abstract methods
-	 */
-
-	public abstract void giveReward(PlayerEntity player);
 	
 	/*
 	 *  Methods
@@ -66,6 +64,22 @@ public abstract class Quest extends ForgeRegistryEntry<Quest>
 	/*
 	 *  Setters and Getters
 	 */
+	
+	public boolean checkRestart(PlayerEntity player)
+	{
+		return this.shouldRestartEvent.shouldRestart(player);
+	}
+	
+	public void triggerCompleteEvent(PlayerEntity player)
+	{
+		this.onCompleteEvent.onComplete(player);
+	}
+	
+	public void triggerStartEvent(PlayerEntity player)
+	{
+		this.onStartEvent.onStart(player);
+	}
+	
 	public void addRequirements(Quest... requirements)
 	{
 		for(Quest req : requirements)
@@ -177,5 +191,25 @@ public abstract class Quest extends ForgeRegistryEntry<Quest>
 			CompoundNBT questData = objectivesData.getCompound(i);
 			this.getObjectives().get(i).load(questData);
 		}
+	}
+	
+	
+	/*
+	 *  Interfaces
+	 */
+	
+	public interface IShouldRestart extends Serializable
+	{
+		boolean shouldRestart(PlayerEntity player);
+	}
+	
+	public interface IAfterStarting extends Serializable
+	{
+		void onStart(PlayerEntity player);
+	}
+	
+	public interface IAfterCompleting extends Serializable
+	{
+		void onComplete(PlayerEntity player);
 	}
 }
