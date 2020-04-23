@@ -181,7 +181,7 @@ public class AvailableQuestsListScreenPanel extends ScrollPanel
 			}
 			
 			relativeY += ENTRY_HEIGHT * 2.75;
-		}	
+		}
 	}
 	
 	@Override
