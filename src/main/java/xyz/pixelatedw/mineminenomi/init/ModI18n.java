@@ -51,7 +51,7 @@ public class ModI18n
 	public static final String QUEST_NO_TRIALS_AVAILABLE = WyRegistry.registerName("quest.no_trials_available", "<%s> I don't have any trials for you at the moment.");
 	public static final String QUEST_TOO_MANY = WyRegistry.registerName("quest.too_many", "<%s> You cannot accept any more quests");
 	public static final String QUEST_ALREADY_IN_PROGRESS = WyRegistry.registerName("quest.already_in_progress", "Already in progress!");
-	
+		
 	public static final String ABILITY_MESSAGE_NEED_SWORD = WyRegistry.registerName("ability.item.message.need_sword", "You need a sword to use this ability!");
 	public static final String ABILITY_MESSAGE_ONLY_IN_ROOM = WyRegistry.registerName("ability.item.message.only_in_room", "%s can only be used inside ROOM!");
 	public static final String ABILITY_MESSAGE_NEED_MEDIC_BAG = WyRegistry.registerName("ability.item.message.need_medic_bag", "You need a medic bag equipped to use this ability!");

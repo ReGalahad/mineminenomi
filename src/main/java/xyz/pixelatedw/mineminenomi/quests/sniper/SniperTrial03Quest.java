@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.text.TranslationTextComponent;
 import xyz.pixelatedw.mineminenomi.abilities.sniper.RenpatsuNamariBoshiAbility;
 import xyz.pixelatedw.mineminenomi.entities.mobs.quest.objectives.SniperTargetEntity;
 import xyz.pixelatedw.mineminenomi.packets.server.SDespawnQuestObjectivePacket;
 import xyz.pixelatedw.mineminenomi.quests.sniper.objectives.ArrowKillSniperTargetObjective;
 import xyz.pixelatedw.mineminenomi.quests.sniper.objectives.HoldBowObjective;
 import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.WyRegistry;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 import xyz.pixelatedw.wypi.network.WyNetwork;
@@ -23,7 +25,8 @@ public class SniperTrial03Quest extends Quest
 	private Objective objective02 = new ArrowKillSniperTargetObjective("Hit all 10 targets before they hit the ground", 10).addRequirement(this.objective01);
 
 	private List<SniperTargetEntity> targets = new ArrayList<SniperTargetEntity>();
-	
+	private static final String RESET_DIALOGUE = WyRegistry.registerName("quest.sniper_trial_03.reset_dialogue", "<Bow Master> Look out for those targets!");
+
 	public SniperTrial03Quest()
 	{
 		super("sniper_trial_03", "Trial: Renpatsu Namari Boshi");
@@ -80,7 +83,7 @@ public class SniperTrial03Quest extends Quest
 			
 			WyNetwork.sendToAll(new SDespawnQuestObjectivePacket(player.getUniqueID(), target.getEntityId()));
 		}
-		WyHelper.sendMsgToPlayer(player, "<Sniper Master> Heads up kid!");
+		WyHelper.sendMsgToPlayer(player, new TranslationTextComponent(RESET_DIALOGUE).getFormattedText());
 	}
 	
 	private void giveReward(PlayerEntity player)

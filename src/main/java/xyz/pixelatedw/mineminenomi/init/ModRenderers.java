@@ -24,6 +24,7 @@ import xyz.pixelatedw.mineminenomi.entities.mobs.misc.EntityDoppelman;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityPirateCaptain;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityPirateWithGun;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityPirateWithSword;
+import xyz.pixelatedw.mineminenomi.entities.mobs.quest.givers.BowMasterEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.quest.givers.DojoSenseiEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.quest.objectives.SniperTargetEntity;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.extra.EntityCloud;
@@ -80,6 +81,7 @@ public class ModRenderers
 
 		// Factionless
 		RenderingRegistry.registerEntityRenderingHandler(DojoSenseiEntity.class, new GenericMobRenderer.Factory(new DojoSenseiModel(), 1, null));
+		RenderingRegistry.registerEntityRenderingHandler(BowMasterEntity.class, new GenericMobRenderer.Factory(new SimpleHumanModel(), 1, null));
 
 		// Others
 		RenderingRegistry.registerEntityRenderingHandler(EntityDoppelman.class, new DoppelmanRenderer.Factory());

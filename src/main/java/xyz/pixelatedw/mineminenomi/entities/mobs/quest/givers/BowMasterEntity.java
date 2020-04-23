@@ -19,7 +19,6 @@ import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
@@ -33,16 +32,13 @@ import xyz.pixelatedw.mineminenomi.entities.mobs.bandits.EntityGenericBandit;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityGenericPirate;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.mineminenomi.init.ModQuests;
-import xyz.pixelatedw.mineminenomi.init.ModWeapons;
 import xyz.pixelatedw.wypi.quests.Quest;
 
-public class DojoSenseiEntity extends GenericNewEntity implements IQuestGiver
+public class BowMasterEntity extends GenericNewEntity implements IQuestGiver
 {
-	protected Item[] swords = new Item[] {ModWeapons.SANDAI_KITETSU, ModWeapons.NIDAI_KITESTU, ModWeapons.WADO_ICHIMONJI, Items.DIAMOND_SWORD};
-	
-	public DojoSenseiEntity(World worldIn)
+	public BowMasterEntity(World worldIn)
 	{
-		super(ModEntities.DOJO_SENSEI, worldIn, new String[] {"dojosensei1", "dojosensei2", "dojosensei3"});
+		super(ModEntities.BOW_MASTER, worldIn, new String[] {"bowmaster1", "bowmaster2", "bowmaster3"});
 	}
 
 	@Override
@@ -65,9 +61,9 @@ public class DojoSenseiEntity extends GenericNewEntity implements IQuestGiver
 	{
 		super.registerAttributes();
 		this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(35.0D);
-		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.20F);
-		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(10.0D);
-		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(80.0D);
+		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.26F);
+		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(2.0D);
+		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(70.0D);
 		this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
 		
 		this.setDoriki(20);
@@ -101,7 +97,7 @@ public class DojoSenseiEntity extends GenericNewEntity implements IQuestGiver
 	{
 		spawnData = super.onInitialSpawn(world, difficulty, reason, spawnData, dataTag);
 
-		ItemStack randomSword = new ItemStack(this.swords[this.rand.nextInt(this.swords.length)]);
+		ItemStack randomSword = new ItemStack(Items.BOW);
 		this.setItemStackToSlot(EquipmentSlotType.MAINHAND, randomSword);
 
 		return spawnData;
@@ -112,10 +108,10 @@ public class DojoSenseiEntity extends GenericNewEntity implements IQuestGiver
 	{
 		IEntityStats entityProps = EntityStatsCapability.get(player);		
 		List<Quest> availableQuests = new ArrayList<Quest>();
-		
-		if(entityProps.isSwordsman())
-			availableQuests.addAll(ImmutableList.of(ModQuests.SWORDSMAN_TRIAL_01, ModQuests.SWORDSMAN_TRIAL_02, ModQuests.SWORDSMAN_TRIAL_03, ModQuests.SWORDSMAN_TRIAL_04));
 
+		if(entityProps.isSniper())
+			availableQuests.addAll(ImmutableList.of(ModQuests.SNIPER_TRIAL_01, ModQuests.SNIPER_TRIAL_03, ModQuests.SNIPER_TRIAL_04));
+		
 		Quest[] quests = new Quest[availableQuests.size()];	
 		return availableQuests.toArray(quests);
 	}

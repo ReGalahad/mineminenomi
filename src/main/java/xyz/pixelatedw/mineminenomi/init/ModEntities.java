@@ -19,6 +19,7 @@ import xyz.pixelatedw.mineminenomi.entities.mobs.misc.EntityDoppelman;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityPirateCaptain;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityPirateWithGun;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityPirateWithSword;
+import xyz.pixelatedw.mineminenomi.entities.mobs.quest.givers.BowMasterEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.quest.givers.DojoSenseiEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.quest.objectives.SniperTargetEntity;
 import xyz.pixelatedw.wypi.ModdedSpawnEggItem;
@@ -44,6 +45,7 @@ public class ModEntities
 
 	// Factionless
 	public static final EntityType DOJO_SENSEI = WyRegistry.createEntityType(DojoSenseiEntity::new).build("dojo_sensei");
+	public static final EntityType BOW_MASTER = WyRegistry.createEntityType(BowMasterEntity::new).build("bow_master");
 
 	// Other
 	public static final EntityType DOPPELMAN = WyRegistry.createEntityType(EntityDoppelman::new).build("doppelman");
@@ -71,6 +73,7 @@ public class ModEntities
 
 		// Factionless
 		registerFactionlessWithSpawnEgg(DOJO_SENSEI, "Dojo Sensei");
+		registerFactionlessWithSpawnEgg(BOW_MASTER, "Bow Master");
 
 		// Other
 		WyRegistry.registerEntityType(DOPPELMAN, "Doppelman");
