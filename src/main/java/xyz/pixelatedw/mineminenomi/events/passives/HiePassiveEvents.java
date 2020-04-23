@@ -1,20 +1,23 @@
 package xyz.pixelatedw.mineminenomi.events.passives;
 
-import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.platform.GlStateManager.DestFactor;
-import com.mojang.blaze3d.platform.GlStateManager.SourceFactor;
+import java.awt.Color;
 
 import net.minecraft.block.Blocks;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.LivingRenderer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderLivingEvent;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import xyz.pixelatedw.mineminenomi.api.IHasOverlay;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.RendererHelper;
+import xyz.pixelatedw.mineminenomi.api.protection.BlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.init.ModEffects;
@@ -24,6 +27,7 @@ import xyz.pixelatedw.wypi.WyHelper;
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class HiePassiveEvents
 {
+	private static final BlockProtectionRule GRIEF_RULE = new BlockProtectionRule().addApprovedBlocks(Blocks.WATER); 
 
 	@SubscribeEvent
 	public static void onEntityUpdate(LivingUpdateEvent event)
@@ -38,7 +42,7 @@ public class HiePassiveEvents
 			return;
 				
 		if (!AbilityHelper.isNearbyKairoseki(player) && (player.getHealth() > player.getMaxHealth() / 5 || player.abilities.isCreativeMode))
-			AbilityHelper.createFilledSphere(player.world, (int) player.posX - 1, (int) player.posY, (int) player.posZ - 1, 2, Blocks.ICE, "liquid");
+			AbilityHelper.createFilledSphere(player.world, (int) player.posX - 1, (int) player.posY, (int) player.posZ - 1, 2, Blocks.ICE, GRIEF_RULE);
 	}
 	
 	
@@ -55,38 +59,27 @@ public class HiePassiveEvents
 		if (entity.getActivePotionEffect(ModEffects.FROZEN).getDuration() <= 0)
 			entity.removePotionEffect(ModEffects.FROZEN);
 
-		GlStateManager.pushMatrix();
-		{
-			GlStateManager.translatef((float) event.getX(), (float) event.getY() + 1.5F, (float) event.getZ());
+		RendererHelper.renderEffectOverlay((float) event.getX(), (float) event.getY(), (float) event.getZ(), event.getPartialRenderTick(), entity, renderer, (IHasOverlay) ModEffects.FROZEN);
+	}
+	
+	@SubscribeEvent
+	@OnlyIn(Dist.CLIENT)
+	public static void onFirstPersonViewRendered(TickEvent.RenderTickEvent event)
+	{
+		Minecraft mc = Minecraft.getInstance();
+		PlayerEntity player = mc.player;
 
-			GlStateManager.disableTexture();
-			GlStateManager.enableBlend();
-			GlStateManager.disableCull();
-			GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);
+		if (player == null)
+			return;
+		
+		if (!player.isPotionActive(ModEffects.FROZEN))
+			return;
 
-			GlStateManager.color4f(0.3f,0.92f, 0.87f, 0.9f);
-
-			GlStateManager.rotatef(180.0F, 1.0F, 0.0F, 0.0F);
-			GlStateManager.rotatef(180.0F, 0.0F, 1.0F, 0.0F);
-
-			GlStateManager.scaled(1.05, 1.04, 1.05);
-
-			float ageInTicks = entity.ticksExisted + event.getPartialRenderTick();
-			float headYawOffset = WyHelper.interpolateRotation(entity.prevRenderYawOffset, entity.renderYawOffset, event.getPartialRenderTick());
-			float headYaw = WyHelper.interpolateRotation(entity.prevRotationYawHead, entity.rotationYawHead, event.getPartialRenderTick());
-			float headPitch = entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * event.getPartialRenderTick();
-
-			WyHelper.rotateCorpse(entity, ageInTicks, headYawOffset, event.getPartialRenderTick());
-			float limbSwingAmount = entity.prevLimbSwingAmount + (entity.limbSwingAmount - entity.prevLimbSwingAmount) * event.getPartialRenderTick();
-			float limbSwing = entity.limbSwing - entity.limbSwingAmount * (1.0F - event.getPartialRenderTick());
-
-			renderer.getEntityModel().swingProgress = entity.getSwingProgress(event.getPartialRenderTick());
-			renderer.getEntityModel().render(entity, limbSwing, limbSwingAmount, ageInTicks, headYaw - headYawOffset, headPitch, 0.06F);
-
-			GlStateManager.enableTexture();
-			GlStateManager.enableCull();
-			GlStateManager.disableBlend();
-		}
-		GlStateManager.popMatrix();
+		if (player.getActivePotionEffect(ModEffects.FROZEN).getDuration() <= 0)
+			player.removePotionEffect(ModEffects.FROZEN);
+		
+		float[] colors = ((IHasOverlay) ModEffects.FROZEN).getOverlayColor();
+		Color color = new Color(colors[0], colors[1], colors[2]);
+		WyHelper.drawColourOnScreen(color.getRGB(), 200, 0, 0, mc.mainWindow.getScaledWidth(), mc.mainWindow.getScaledHeight(), 500);
 	}
 }

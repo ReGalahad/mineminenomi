@@ -4,6 +4,11 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
+import xyz.pixelatedw.mineminenomi.api.protection.BlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.CoreBlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.FoliageBlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.LiquidBlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.OreBlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.suna.DesertGirasole2ParticleEffect;
@@ -19,7 +24,8 @@ public class DesertGirasoleAbility extends ChargeableAbility
 
 	private static final ParticleEffect PARTICLES1 = new DesertGirasoleParticleEffect();
 	private static final ParticleEffect PARTICLES2 = new DesertGirasole2ParticleEffect();
-	
+	private static final BlockProtectionRule GRIEF_RULE = new BlockProtectionRule(CoreBlockProtectionRule.INSTANCE, OreBlockProtectionRule.INSTANCE, LiquidBlockProtectionRule.INSTANCE, FoliageBlockProtectionRule.INSTANCE); 
+
 	public DesertGirasoleAbility()
 	{
 		super("Desert Girasole", AbilityCategory.DEVIL_FRUIT);
@@ -60,7 +66,7 @@ public class DesertGirasoleAbility extends ChargeableAbility
 					double posY = player.posY + j;
 					double posZ = player.posZ + k + (k < -WyHelper.randomWithRange(15, 20) || k > WyHelper.randomWithRange(15, 20) ? WyHelper.randomWithRange(-10, 10) : 0);
 
-					AbilityHelper.placeBlockIfAllowed(player.world, posX, posY - 1, posZ, ModBlocks.SUNA_SAND, "core", "ores", "liquids", "foliage");
+					AbilityHelper.placeBlockIfAllowed(player.world, posX, posY - 1, posZ, ModBlocks.SUNA_SAND, GRIEF_RULE);
 				}
 			}
 		}

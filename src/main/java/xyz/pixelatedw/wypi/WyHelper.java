@@ -277,6 +277,7 @@ public class WyHelper
 
 		return ray;
 	}
+	
 	public static EntityRayTraceResult rayTraceEntities(Entity source, double distance)
 	{
 		Vec3d lookVec = source.getLook(1.0F);
@@ -416,7 +417,7 @@ public class WyHelper
 	{
 		if (width <= 0 || height <= 0)
 			return;
-		GlStateManager.colorMask(true, false, false, true);
+		GlStateManager.enableBlend();
 		GlStateManager.disableTexture();
 		BufferBuilder bufferbuilder = Tessellator.getInstance().getBuffer();
 		bufferbuilder.begin(7, DefaultVertexFormats.POSITION_COLOR);
@@ -426,7 +427,7 @@ public class WyHelper
 		bufferbuilder.pos(posX, posY, zLevel).color(red, green, blue, alpha).endVertex();
 		Tessellator.getInstance().draw();
 		GlStateManager.enableTexture();
-		GlStateManager.colorMask(true, true, true, true);
+		GlStateManager.disableBlend();
 	}
 
 	public static void drawIcon(ResourceLocation rs, int x, int y, int u, int v)

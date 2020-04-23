@@ -5,11 +5,16 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
+import xyz.pixelatedw.mineminenomi.api.protection.BlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.AirBlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.FoliageBlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 
 public class BlackBoxProjectile extends AbilityProjectileEntity
 {
+	private static final BlockProtectionRule GRIEF_RULE = new BlockProtectionRule(AirBlockProtectionRule.INSTANCE, FoliageBlockProtectionRule.INSTANCE); 
+
 	public BlackBoxProjectile(World world)
 	{
 		super(KageProjectiles.BLACK_BOX, world);
@@ -36,6 +41,6 @@ public class BlackBoxProjectile extends AbilityProjectileEntity
 	
 	private void onBlockImpactEvent(BlockPos pos)
 	{
-		AbilityHelper.createFilledCube(this.world, pos.getX(), pos.getY(), pos.getZ(), new int[] {2, 2, 2}, ModBlocks.KAGE, "air", "foliage");
+		AbilityHelper.createFilledCube(this.world, pos.getX(), pos.getY(), pos.getZ(), 2, 2, 2, ModBlocks.KAGE, GRIEF_RULE);
 	}
 }

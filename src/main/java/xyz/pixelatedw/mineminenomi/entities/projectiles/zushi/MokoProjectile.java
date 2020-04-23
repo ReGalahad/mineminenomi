@@ -8,6 +8,10 @@ import net.minecraft.potion.Effects;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
+import xyz.pixelatedw.mineminenomi.api.protection.BlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.AllBlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.LiquidBlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.RestrictedBlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.data.GenericParticleData;
 import xyz.pixelatedw.wypi.WyHelper;
@@ -15,6 +19,8 @@ import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 
 public class MokoProjectile extends AbilityProjectileEntity
 {
+	private static final BlockProtectionRule GRIEF_RULE = new BlockProtectionRule(AllBlockProtectionRule.INSTANCE, RestrictedBlockProtectionRule.INSTANCE, new BlockProtectionRule(LiquidBlockProtectionRule.INSTANCE).setBanListedBlocks()); 
+
 	public MokoProjectile(World world)
 	{
 		super(ZushiProjectiles.MOKO, world);
@@ -51,7 +57,7 @@ public class MokoProjectile extends AbilityProjectileEntity
 				int posY = (int) target.posY - 1;
 				int posZ = (int) target.posZ + z;
 
-				if (AbilityHelper.placeBlockIfAllowed(this.world, posX, posY, posZ, Blocks.AIR, "all", "restricted", "ignore liquid"))
+				if (AbilityHelper.placeBlockIfAllowed(this.world, posX, posY, posZ, Blocks.AIR, GRIEF_RULE))
 				{
 					target.setMotion(0, -5, 0);
 					target.velocityChanged = true;

@@ -14,8 +14,13 @@ import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.entities.mobs.GenericNewEntity;
 import xyz.pixelatedw.mineminenomi.init.ModEffects;
 import xyz.pixelatedw.wypi.APIConfig;
+import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.abilities.ChargeableAbility;
+import xyz.pixelatedw.wypi.abilities.ContinuousAbility;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
+import xyz.pixelatedw.wypi.network.WyNetwork;
+import xyz.pixelatedw.wypi.network.packets.server.SSyncAbilityDataPacket;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class DFWeaknessesEvents
@@ -57,8 +62,17 @@ public class DFWeaknessesEvents
 						for (int i = 0; i < abilityProps.getEquippedAbilities().length; i++)
 						{
 							if (abilityProps.getEquippedAbility(i) != null && !abilityProps.getEquippedAbility(i).isDisabled())
-							{			
-								abilityProps.getEquippedAbility(i).startDisable();
+							{		
+								Ability ability = abilityProps.getEquippedAbility(i);
+								if(ability instanceof ContinuousAbility)
+									((ContinuousAbility) ability).stopContinuity(player);
+								if(ability instanceof ChargeableAbility)
+								{
+									((ChargeableAbility) ability).setChargeTime(((ChargeableAbility) ability).getMaxChargeTime() / 20);
+									ability.startCooldown();
+									WyNetwork.sendTo(new SSyncAbilityDataPacket(abilityProps), player);
+								}
+								ability.startDisable();
 							}
 						}
 					}
@@ -68,7 +82,7 @@ public class DFWeaknessesEvents
 						{
 							if(abilityProps.getEquippedAbility(i) != null && abilityProps.getEquippedAbility(i).isDisabled())
 							{
-								abilityProps.getEquippedAbility(i).startStandby();
+								abilityProps.getEquippedAbility(i).startCooldown();
 							}
 						}
 					}

@@ -7,6 +7,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.abilities.ExplosionAbility;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
+import xyz.pixelatedw.mineminenomi.api.protection.BlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.AirBlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.FoliageBlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.common.CommonExplosionParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.sniper.KemuriBoshiParticleEffect;
@@ -16,7 +19,8 @@ import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 public class SakuretsuSabotenBoshiProjectile extends AbilityProjectileEntity
 {
 	private static final ParticleEffect PARTICLES = new KemuriBoshiParticleEffect();
-	
+	private static final BlockProtectionRule GRIEF_RULE = new BlockProtectionRule(AirBlockProtectionRule.INSTANCE, FoliageBlockProtectionRule.INSTANCE); 
+
 	public SakuretsuSabotenBoshiProjectile(World world)
 	{
 		super(SniperProjectiles.SAKURETSU_SABOTEN_BOSHI, world);
@@ -53,19 +57,18 @@ public class SakuretsuSabotenBoshiProjectile extends AbilityProjectileEntity
 		explosion.doExplosion();
 		
 		int flag = 2 | 16 | 32;
-		String[] rules = new String[] {"air", "foliage"};
 		
 		for (int i = 0; i < 8; i++)
 		{
 			int a1 = (int) WyHelper.randomWithRange(-5, 5);
 			int a2 = (int) WyHelper.randomWithRange(-5, 5);
 
-			AbilityHelper.placeBlockIfAllowed(world, (int) posX + a1, (int) posY - 3, (int) posZ + a2, Blocks.CACTUS, flag, rules);
-			AbilityHelper.placeBlockIfAllowed(world, (int) posX + a1, (int) posY - 2, (int) posZ + a2, Blocks.CACTUS, flag, rules);
-			AbilityHelper.placeBlockIfAllowed(world, (int) posX + a1, (int) posY - 1, (int) posZ + a2, Blocks.CACTUS, flag, rules);
-			AbilityHelper.placeBlockIfAllowed(world, (int) posX + a1, (int) posY, (int) posZ + a2, Blocks.CACTUS, flag, rules);
-			AbilityHelper.placeBlockIfAllowed(world, (int) posX + a1, (int) posY + 1, (int) posZ + a2, Blocks.CACTUS, flag, rules);
-			AbilityHelper.placeBlockIfAllowed(world, (int) posX + a1, (int) posY + 2, (int) posZ + a2, Blocks.CACTUS, flag, rules);
+			AbilityHelper.placeBlockIfAllowed(world, (int) posX + a1, (int) posY - 3, (int) posZ + a2, Blocks.CACTUS, flag, GRIEF_RULE);
+			AbilityHelper.placeBlockIfAllowed(world, (int) posX + a1, (int) posY - 2, (int) posZ + a2, Blocks.CACTUS, flag, GRIEF_RULE);
+			AbilityHelper.placeBlockIfAllowed(world, (int) posX + a1, (int) posY - 1, (int) posZ + a2, Blocks.CACTUS, flag, GRIEF_RULE);
+			AbilityHelper.placeBlockIfAllowed(world, (int) posX + a1, (int) posY, (int) posZ + a2, Blocks.CACTUS, flag, GRIEF_RULE);
+			AbilityHelper.placeBlockIfAllowed(world, (int) posX + a1, (int) posY + 1, (int) posZ + a2, Blocks.CACTUS, flag, GRIEF_RULE);
+			AbilityHelper.placeBlockIfAllowed(world, (int) posX + a1, (int) posY + 2, (int) posZ + a2, Blocks.CACTUS, flag, GRIEF_RULE);
 		}	
 	}
 }

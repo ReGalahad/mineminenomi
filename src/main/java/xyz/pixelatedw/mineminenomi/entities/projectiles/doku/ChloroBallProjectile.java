@@ -9,6 +9,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
+import xyz.pixelatedw.mineminenomi.api.protection.BlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.AirBlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.FoliageBlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.extra.EntityCloud;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
@@ -23,6 +26,7 @@ public class ChloroBallProjectile extends AbilityProjectileEntity
 {
 	private static final ParticleEffect PARTICLES1 = new ChloroBallParticleEffect();
 	private static final ParticleEffect PARTICLES2 = new ChloroBallCloudParticleEffect();
+	private static final BlockProtectionRule GRIEF_RULE = new BlockProtectionRule(AirBlockProtectionRule.INSTANCE, FoliageBlockProtectionRule.INSTANCE); 
 
 	public ChloroBallProjectile(World world)
 	{
@@ -66,7 +70,7 @@ public class ChloroBallProjectile extends AbilityProjectileEntity
 			BlockPos location = new BlockPos(this.posX + offsetX, this.posY, this.posZ + offsetZ);
 
 			if (this.world.getBlockState(location.down()).isSolid())
-				AbilityHelper.placeBlockIfAllowed(this.world, location.getX(), location.getY(), location.getZ(), ModBlocks.POISON, "air", "foliage");
+				AbilityHelper.placeBlockIfAllowed(this.world, location.getX(), location.getY(), location.getZ(), ModBlocks.POISON, GRIEF_RULE);
 		}
 
 		PARTICLES1.spawn(this.world, this.posX, this.posY + 1, this.posZ, 0, 0, 0);

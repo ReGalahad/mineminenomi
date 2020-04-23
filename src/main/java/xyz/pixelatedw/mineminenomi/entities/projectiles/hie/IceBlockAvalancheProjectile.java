@@ -13,9 +13,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.abilities.hie.IceAgeAbility;
-import xyz.pixelatedw.mineminenomi.abilities.hie.IceBlockAvalancheAbility;
 import xyz.pixelatedw.mineminenomi.init.ModEffects;
-import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 
 public class IceBlockAvalancheProjectile extends AbilityProjectileEntity{
@@ -105,8 +103,8 @@ public class IceBlockAvalancheProjectile extends AbilityProjectileEntity{
 		            double d0 = entityIn.posX - this.posX;
 		            double d1 = entityIn.posZ - this.posZ;
 		            double d2 = MathHelper.absMax(d0, d1);
-		            if (d2 >= (double)0.01F) {
-		               d2 = (double)MathHelper.sqrt(d2);
+		            if (d2 >= 0.01F) {
+		               d2 = MathHelper.sqrt(d2);
 		               d0 = d0 / d2;
 		               d1 = d1 / d2;
 		               double d3 = 1.0D / d2;
@@ -116,10 +114,10 @@ public class IceBlockAvalancheProjectile extends AbilityProjectileEntity{
 
 		               d0 = d0 * d3;
 		               d1 = d1 * d3;
-		               d0 = d0 * (double)0.05F;
-		               d1 = d1 * (double)0.05F;
-		               d0 = d0 * (double)(1.0F - this.entityCollisionReduction);
-		               d1 = d1 * (double)(1.0F - this.entityCollisionReduction);
+		               d0 = d0 * 0.05F;
+		               d1 = d1 * 0.05F;
+		               d0 = d0 * (1.0F - this.entityCollisionReduction);
+		               d1 = d1 * (1.0F - this.entityCollisionReduction);
 		               if (!entityIn.isBeingRidden()) {
 		                  entityIn.addVelocity(d0, 0.0D, d1);
 		               }

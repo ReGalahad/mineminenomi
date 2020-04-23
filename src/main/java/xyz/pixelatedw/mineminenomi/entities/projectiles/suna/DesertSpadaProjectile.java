@@ -9,6 +9,8 @@ import net.minecraft.potion.Effects;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
+import xyz.pixelatedw.mineminenomi.api.protection.BlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.CoreBlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.suna.DesertSpadaParticleEffect;
 import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
@@ -16,7 +18,8 @@ import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 public class DesertSpadaProjectile extends AbilityProjectileEntity
 {
 	private static final ParticleEffect PARTICLES = new DesertSpadaParticleEffect();
-	
+	private static final BlockProtectionRule GRIEF_RULE = new BlockProtectionRule(CoreBlockProtectionRule.INSTANCE); 
+
 	public DesertSpadaProjectile(World world)
 	{
 		super(SunaProjectiles.DESERT_SPADA, world);
@@ -73,7 +76,7 @@ public class DesertSpadaProjectile extends AbilityProjectileEntity
 		if(pos == null)
 			return;
 		
-		AbilityHelper.createFilledSphere(this.world, pos.getX(), pos.getY(), pos.getZ(), 2, Blocks.SAND, "core");
+		AbilityHelper.createFilledSphere(this.world, pos.getX(), pos.getY(), pos.getZ(), 2, Blocks.SAND, GRIEF_RULE);
 
 		PARTICLES.spawn(world, pos.getX(), pos.getY(), pos.getZ(), 0, 0, 0);
 	}

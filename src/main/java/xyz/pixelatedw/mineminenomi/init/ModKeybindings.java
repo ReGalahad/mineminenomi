@@ -5,7 +5,6 @@ import org.lwjgl.glfw.GLFW;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.client.util.InputMappings;
-import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent.KeyInputEvent;
@@ -67,13 +66,11 @@ public class ModKeybindings
 		return InputMappings.isKeyDown(Minecraft.getInstance().mainWindow.getHandle(), GLFW.GLFW_KEY_LEFT_SHIFT) || InputMappings.isKeyDown(Minecraft.getInstance().mainWindow.getHandle(), GLFW.GLFW_KEY_RIGHT_SHIFT);
 	}
 
-	@SuppressWarnings("resource")
 	@SubscribeEvent
 	public static void onKeyInput(KeyInputEvent event)
 	{
 		Minecraft minecraft = Minecraft.getInstance();
 		PlayerEntity player = minecraft.player;
-		ClientWorld world = minecraft.world;
 
 		if (player == null)
 			return;

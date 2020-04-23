@@ -3,6 +3,9 @@ package xyz.pixelatedw.mineminenomi.init;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.EnumFruitType;
 import xyz.pixelatedw.mineminenomi.abilities.ZoomAbility;
+import xyz.pixelatedw.mineminenomi.abilities.baku.BakuMunchAbility;
+import xyz.pixelatedw.mineminenomi.abilities.baku.BakuTsuihoAbility;
+import xyz.pixelatedw.mineminenomi.abilities.baku.BeroCannonAbility;
 import xyz.pixelatedw.mineminenomi.abilities.bane.SpringDeathKnockAbility;
 import xyz.pixelatedw.mineminenomi.abilities.bane.SpringHopperAbility;
 import xyz.pixelatedw.mineminenomi.abilities.bane.SpringSnipeAbility;
@@ -183,7 +186,7 @@ public class ModAbilities
 	public static final AkumaNoMiItem SABI_SABI_NO_MI = new AkumaNoMiItem("Sabi Sabi no Mi", EnumFruitType.PARAMECIA, RustTouchAbility.INSTANCE);
 	public static final AkumaNoMiItem ZOU_ZOU_NO_MI = new AkumaNoMiItem("Zou Zou no Mi", EnumFruitType.ZOAN);
 	public static final AkumaNoMiItem YOMI_YOMI_NO_MI = new AkumaNoMiItem("Yomi Yomi no Mi", EnumFruitType.PARAMECIA);
-	public static final AkumaNoMiItem BAKU_BAKU_NO_MI = new AkumaNoMiItem("Baku Baku no Mi", EnumFruitType.PARAMECIA);
+	public static final AkumaNoMiItem BAKU_BAKU_NO_MI = new AkumaNoMiItem("Baku Baku no Mi", EnumFruitType.PARAMECIA, BakuMunchAbility.INSTANCE, BeroCannonAbility.INSTANCE, BakuTsuihoAbility.INSTANCE);
 	public static final AkumaNoMiItem TORI_TORI_NO_MI_PHOENIX = new AkumaNoMiItem("Tori Tori no Mi, Model: Phoenix", EnumFruitType.ZOAN);
 	public static final AkumaNoMiItem USHI_USHI_NO_MI_BISON = new AkumaNoMiItem("Ushi Ushi no Mi, Model: Bison", EnumFruitType.ZOAN);
 	public static final AkumaNoMiItem HORU_HORU_NO_MI = new AkumaNoMiItem("Horu Horu no Mi", EnumFruitType.PARAMECIA, OnnaHormoneAbility.INSTANCE, ChiyuHormoneAbility.INSTANCE, TensionHormoneAbility.INSTANCE, GanmenSeichoHormoneAbility.INSTANCE);

@@ -20,7 +20,7 @@ public class HieProjectiles
 	public static final EntityType ICE_BLOCK_PARTISAN = WyRegistry.createEntityType(IceBlockPartisanProjectile::new).size(0.5F, 0.5F).build("ice_block_partisan");
 	public static final EntityType ICE_BALL = WyRegistry.createEntityType(IceBallProjectile::new).size(0.7F, 0.7F).build("ice_ball");
 	public static final EntityType ICE_BLOCK_PHEASANT = WyRegistry.createEntityType(IceBlockPheasantProjectile::new).size(1.75F, 1.75F).build("ice_block_pheasant");
-    public static final EntityType ICE_BLOCK_AVALANCHE = WyRegistry.createEntityType(IceBlockAvalancheProjectile::new).size(8.2f, 8.2f).build("ice_block_avalanche");
+    public static final EntityType ICE_BLOCK_AVALANCHE = WyRegistry.createEntityType(IceBlockAvalancheProjectile::new).size(9f, 9f).build("ice_block_avalanche");
 	static
 	{
 		WyRegistry.registerEntityType(ICE_BLOCK_PARTISAN, "Ice Block: Partisan");

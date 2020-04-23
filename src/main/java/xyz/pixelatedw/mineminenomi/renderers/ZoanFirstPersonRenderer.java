@@ -31,7 +31,6 @@ import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 @OnlyIn(Dist.CLIENT)
 public class ZoanFirstPersonRenderer
 {
-	@SuppressWarnings("resource")
 	public static void renderArmFirstPerson(float equippedProgress, float swingProgress, HandSide side)
 	{
 		Minecraft mc = Minecraft.getInstance();
