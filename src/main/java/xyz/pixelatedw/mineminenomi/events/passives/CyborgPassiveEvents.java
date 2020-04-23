@@ -22,7 +22,6 @@ import xyz.pixelatedw.wypi.WyHelper;
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class CyborgPassiveEvents
 {
-	@SuppressWarnings("resource")
 	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
 	public static void onRenderOverlay(RenderGameOverlayEvent event)

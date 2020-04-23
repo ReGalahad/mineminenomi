@@ -78,6 +78,16 @@ public abstract class ContinuousAbility extends Ability
 	{
 		this.setState(State.CONTINUOUS);
 	}
+	
+	public void setContinueTime(int time)
+	{
+		this.continueTime = time * 20;;
+	}
+	
+	public int getContinueTime()
+	{
+		return this.continueTime;
+	}
 
 	
 	
@@ -86,14 +96,14 @@ public abstract class ContinuousAbility extends Ability
 	 */
 	public void tick(PlayerEntity player)
 	{
-		if(player.world.isRemote)
-			return;
+		//if(player.world.isRemote)
+		//	return;
 
 		if(this.isContinuous())
 		{
-			this.continueTime++;		
-			
-			this.duringContinuityEvent.duringContinuity(player, this.continueTime);
+			this.continueTime++;
+			if(!player.world.isRemote)
+				this.duringContinuityEvent.duringContinuity(player, this.continueTime);
 			
 			if(this.threshold > 0 && this.continueTime >= this.threshold)
 				this.stopContinuity(player);
@@ -102,6 +112,8 @@ public abstract class ContinuousAbility extends Ability
 	
 	public void stopContinuity(PlayerEntity player)
 	{
+		if(player.world.isRemote)
+			return;
 		if(this.onEndContinuityEvent.onEndContinuity(player))
 		{
 			this.continueTime = 0;

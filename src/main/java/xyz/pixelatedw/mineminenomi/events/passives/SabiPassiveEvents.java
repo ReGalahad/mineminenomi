@@ -16,13 +16,9 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
-import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
-import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.init.ModEnchantments;
 import xyz.pixelatedw.mineminenomi.init.ModWeapons;
 import xyz.pixelatedw.wypi.APIConfig;
-import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
-import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class SabiPassiveEvents
@@ -38,8 +34,6 @@ public class SabiPassiveEvents
 		LivingEntity attacker = (LivingEntity) event.getSource().getTrueSource();
 		PlayerEntity attacked = (PlayerEntity) event.getEntityLiving();
 		IDevilFruit devilFruitProps = DevilFruitCapability.get(attacked);
-		IEntityStats statProps = EntityStatsCapability.get(attacked);
-		IAbilityData abilityProps = AbilityDataCapability.get(attacked);
 
 		if (!devilFruitProps.getDevilFruit().equalsIgnoreCase("sabi_sabi"))
 			return;

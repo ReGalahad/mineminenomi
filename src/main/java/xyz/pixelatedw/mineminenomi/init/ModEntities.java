@@ -6,7 +6,6 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import xyz.pixelatedw.mineminenomi.entities.ChargingUrsusShockEntity;
 import xyz.pixelatedw.mineminenomi.entities.PhysicalBodyEntity;
 import xyz.pixelatedw.mineminenomi.entities.VivreCardEntity;
 import xyz.pixelatedw.mineminenomi.entities.WantedPosterPackageEntity;
@@ -14,8 +13,9 @@ import xyz.pixelatedw.mineminenomi.entities.mobs.bandits.EntityBanditWithSword;
 import xyz.pixelatedw.mineminenomi.entities.mobs.marines.EntityMarineCaptain;
 import xyz.pixelatedw.mineminenomi.entities.mobs.marines.EntityMarineWithGun;
 import xyz.pixelatedw.mineminenomi.entities.mobs.marines.EntityMarineWithSword;
-import xyz.pixelatedw.mineminenomi.entities.mobs.misc.EntityBlackKnight;
-import xyz.pixelatedw.mineminenomi.entities.mobs.misc.EntityDoppelman;
+import xyz.pixelatedw.mineminenomi.entities.mobs.misc.BlackKnightEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.misc.DoppelmanEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.misc.WaxPlayerEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityPirateCaptain;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityPirateWithGun;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityPirateWithSword;
@@ -48,11 +48,11 @@ public class ModEntities
 	public static final EntityType BOW_MASTER = WyRegistry.createEntityType(BowMasterEntity::new).build("bow_master");
 
 	// Other
-	public static final EntityType DOPPELMAN = WyRegistry.createEntityType(EntityDoppelman::new).build("doppelman");
-	public static final EntityType BLACK_KNIGHT = WyRegistry.createEntityType(EntityBlackKnight::new).build("black_knight");
+	public static final EntityType DOPPELMAN = WyRegistry.createEntityType(DoppelmanEntity::new).build("doppelman");
+	public static final EntityType WAX_PLAYER = WyRegistry.createEntityType(WaxPlayerEntity::new).build("wax_player");
+	public static final EntityType BLACK_KNIGHT = WyRegistry.createEntityType(BlackKnightEntity::new).build("black_knight");
 	public static final EntityType WANTED_POSTER_PACKAGE = WyRegistry.createEntityType(WantedPosterPackageEntity::new).size(1.5F, 1.5F).build("wanted_poster_package");
 	public static final EntityType VIVRE_CARD = WyRegistry.createEntityType(VivreCardEntity::new).size(0.4F, 0.4F).build("vivre_card");
-	public static final EntityType CHARGING_URSUS_SHOCK = WyRegistry.createEntityType(ChargingUrsusShockEntity::new).size(1.0F, 1.0F).build("charging_ursus_shock");
 	public static final EntityType PHYSICAL_BODY = WyRegistry.createEntityType(PhysicalBodyEntity::new).build("physical_body");
 	public static final EntityType SNIPER_TARGET = WyRegistry.createEntityType(SniperTargetEntity::new).build("sniper_target");
 
@@ -77,10 +77,10 @@ public class ModEntities
 
 		// Other
 		WyRegistry.registerEntityType(DOPPELMAN, "Doppelman");
+		WyRegistry.registerEntityType(WAX_PLAYER, "Wax Player");
 		WyRegistry.registerEntityType(BLACK_KNIGHT, "Black Knight");
 		WyRegistry.registerEntityType(WANTED_POSTER_PACKAGE, "Wanted Poster Package");
 		WyRegistry.registerEntityType(VIVRE_CARD, "Vivre Card");
-		WyRegistry.registerEntityType(CHARGING_URSUS_SHOCK, "Charging Ursus Shock");
 		WyRegistry.registerEntityType(PHYSICAL_BODY, "Physical Body");
 		WyRegistry.registerEntityType(SNIPER_TARGET, "Sniper Target");
 	}

@@ -5,6 +5,8 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.abilities.bari.BarrierbilityStairsAbility;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
+import xyz.pixelatedw.mineminenomi.api.protection.BlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.AirBlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
@@ -12,6 +14,8 @@ import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 
 public class BarrierbilityStairsProjectile extends AbilityProjectileEntity
 {
+	private static final BlockProtectionRule GRIEF_RULE = new BlockProtectionRule(AirBlockProtectionRule.INSTANCE).setBypassGriefRule(); 
+
 	public BarrierbilityStairsProjectile(World world)
 	{
 		super(BariProjectiles.BARRIERBILITY_STAIRS, world);
@@ -43,7 +47,7 @@ public class BarrierbilityStairsProjectile extends AbilityProjectileEntity
 		BarrierbilityStairsAbility ability = abilityProps.getEquippedAbility(BarrierbilityStairsAbility.INSTANCE);
 
 		if (ability != null && ability.isContinuous())
-			ability.fillBlocksList(AbilityHelper.createFilledCube(this.world, this.posX, this.posY - 2, this.posZ, new int[] {1, 1, 1}, ModBlocks.BARRIER, "air", "nogrief"));
+			ability.fillBlocksList(AbilityHelper.createFilledCube(this.world, this.posX, this.posY - 2, this.posZ, 1, 1, 1, ModBlocks.BARRIER, GRIEF_RULE));
 	}
 
 }

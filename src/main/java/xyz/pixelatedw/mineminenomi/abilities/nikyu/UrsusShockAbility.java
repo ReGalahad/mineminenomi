@@ -1,7 +1,7 @@
 package xyz.pixelatedw.mineminenomi.abilities.nikyu;
 
 import net.minecraft.entity.player.PlayerEntity;
-import xyz.pixelatedw.mineminenomi.entities.ChargingUrsusShockEntity;
+import xyz.pixelatedw.mineminenomi.entities.projectiles.nikyu.ChargingUrsusShockEntity;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.nikyu.UrsusShock25Projectile;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.nikyu.UrsusShock50Projectile;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.nikyu.UrsusShock75Projectile;

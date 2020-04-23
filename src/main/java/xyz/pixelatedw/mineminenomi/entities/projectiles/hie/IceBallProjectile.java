@@ -9,6 +9,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
+import xyz.pixelatedw.mineminenomi.api.protection.BlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.AirBlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.FoliageBlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.LiquidBlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.init.ModEffects;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.data.GenericParticleData;
 import xyz.pixelatedw.wypi.WyHelper;
@@ -16,6 +21,8 @@ import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 
 public class IceBallProjectile extends AbilityProjectileEntity
 {
+	private static final BlockProtectionRule GRIEF_RULE = new BlockProtectionRule(AirBlockProtectionRule.INSTANCE, LiquidBlockProtectionRule.INSTANCE, FoliageBlockProtectionRule.INSTANCE); 
+
 	public IceBallProjectile(World world)
 	{
 		super(HieProjectiles.ICE_BALL, world);
@@ -42,6 +49,7 @@ public class IceBallProjectile extends AbilityProjectileEntity
 		
 		this.withEffects = () -> {
 			return new EffectInstance[] {
+					new EffectInstance(ModEffects.FROZEN, 200, 0),
 					new EffectInstance(Effects.SLOWNESS, 100, 0),
 					new EffectInstance(Effects.MINING_FATIGUE, 100, 0)
 			};		
@@ -50,7 +58,7 @@ public class IceBallProjectile extends AbilityProjectileEntity
 
 	private void onBlockImpactEvent(BlockPos hit)
 	{		
-		AbilityHelper.createEmptySphere(this.world, hit.getX(), hit.getY(), hit.getZ(), 6, Blocks.PACKED_ICE, "air", "liquid", "foliage");
+		AbilityHelper.createEmptySphere(this.world, hit.getX(), hit.getY(), hit.getZ(), 6, Blocks.PACKED_ICE, GRIEF_RULE);
 	}
 
 	private void onTickEvent()

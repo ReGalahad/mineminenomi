@@ -3,8 +3,11 @@ package xyz.pixelatedw.mineminenomi.entities.mobs.misc;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -15,8 +18,13 @@ import net.minecraft.entity.ai.goal.LookRandomlyGoal;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
+import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.MathHelper;
@@ -30,18 +38,17 @@ import xyz.pixelatedw.mineminenomi.entities.mobs.marines.EntityGenericMarine;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityGenericPirate;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.mineminenomi.init.ModItems;
-import xyz.pixelatedw.mineminenomi.packets.server.SEntityStatsSyncPacket;
 import xyz.pixelatedw.wypi.WyHelper;
-import xyz.pixelatedw.wypi.network.WyNetwork;
 
-public class EntityDoppelman extends CreatureEntity
+public class DoppelmanEntity extends CreatureEntity
 {
 
-	private PlayerEntity owner;
+	private static final DataParameter<Optional<UUID>> OWNER = EntityDataManager.createKey(DoppelmanEntity.class, DataSerializers.OPTIONAL_UNIQUE_ID);
+	private static final DataParameter<Integer> SHADOWS = EntityDataManager.createKey(DoppelmanEntity.class, DataSerializers.VARINT);
 	public boolean isAggressive = true;
 	public List<LivingEntity> forcedTargets = new ArrayList<LivingEntity>();
 	
-	public EntityDoppelman(World world)
+	public DoppelmanEntity(World world)
 	{
 		super(ModEntities.DOPPELMAN, world);
 	}
@@ -65,10 +72,9 @@ public class EntityDoppelman extends CreatureEntity
 	protected void registerAttributes()
 	{
 		super.registerAttributes();
-		this.getAttributes().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0D);
+		this.getAttributes().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0D);
 		this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(35.0D);
 		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23F);
-		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0D);
 		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(200.0D);
 		this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(10.0D);
 		this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
@@ -78,12 +84,14 @@ public class EntityDoppelman extends CreatureEntity
 	protected void registerData()
 	{
 		super.registerData();
+		this.dataManager.register(OWNER, null);
+		this.dataManager.register(SHADOWS, 0);
 	}
 	
     @Override
 	public boolean attackEntityFrom(DamageSource damageSource, float damageValue)
     {
-    	if(damageSource.getTrueSource() != null && damageSource.getTrueSource() instanceof PlayerEntity && damageSource.getTrueSource() == this.owner)
+    	if(damageSource.getTrueSource() != null && damageSource.getTrueSource() instanceof PlayerEntity && damageSource.getTrueSource() == this.getOwner())
     		return false;
     	
     	return super.attackEntityFrom(damageSource, damageValue);
@@ -92,22 +100,22 @@ public class EntityDoppelman extends CreatureEntity
     @Override
 	public boolean attackEntityAsMob(Entity target)
     {
-        float f = (float)this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getValue() + (EntityStatsCapability.get(this).getDoriki() * 4);
-        int i = 0;
+        float damage = (float)this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getValue() + (this.getShadows() * 4);
+        int knockback = 0;
 
-       /* if (target instanceof LivingEntity)
-        {
-            f += EnchantmentHelper.getEnchantmentModifierDamage(this, (LivingEntity)target);
-            i += EnchantmentHelper.getKnockbackModifier(this, (EntityLivingBase)target);
-        }*/
-
-        boolean flag = target.attackEntityFrom(DamageSource.causeMobDamage(this), f);
+		if (target instanceof LivingEntity)
+		{
+			damage += EnchantmentHelper.getModifierForCreature(this.getHeldItemMainhand(), ((LivingEntity) target).getCreatureAttribute());
+			knockback += (float) EnchantmentHelper.getKnockbackModifier(this);
+		}
+		
+        boolean flag = target.attackEntityFrom(DamageSource.causeMobDamage(this), damage);
 
         if (flag)
         {
-            if (i > 0)
+            if (knockback > 0)
             {
-                target.addVelocity(-MathHelper.sin(this.rotationYaw * (float)Math.PI / 180.0F) * i * 0.5F, 0.1D, MathHelper.cos(this.rotationYaw * (float)Math.PI / 180.0F) * i * 0.5F);
+                target.addVelocity(-MathHelper.sin(this.rotationYaw * (float)Math.PI / 180.0F) * knockback * 0.5F, 0.1D, MathHelper.cos(this.rotationYaw * (float)Math.PI / 180.0F) * knockback * 0.5F);
                 this.setMotion(this.getMotion().mul(0.6D, 1, 0.6D));
             }
         }
@@ -118,33 +126,32 @@ public class EntityDoppelman extends CreatureEntity
 	@Override
 	public void tick()
 	{
-		//System.out.println(EntityStatsCapability.get(this).getDoriki());
 		if(!this.world.isRemote)
 		{
-			if(this.owner == null)
+			if(this.getOwner() == null)
 			{
 				this.remove();
 				return;
 			}
 				
-			if(this.getDistance(this.owner) > 10)
-				this.getNavigator().tryMoveToEntityLiving(owner, 1.5);
+			if(this.getDistance(this.getOwner()) > 10)
+				this.getNavigator().tryMoveToEntityLiving(this.getOwner(), 1.5);
 			
-			if(this.getDistance(this.owner) > 80)
-				this.setPositionAndUpdate(this.owner.posX, this.owner.posY, this.owner.posZ);
+			if(this.getDistance(this.getOwner()) > 80)
+				this.setPositionAndUpdate(this.getOwner().posX, this.getOwner().posY, this.getOwner().posZ);
 			
-			IEntityStats ownerProps = EntityStatsCapability.get(this.owner);
-			IDevilFruit ownerDFProps = DevilFruitCapability.get(this.owner);		
-			List<LivingEntity> doppelmanAttackList = this.isAggressive ? WyHelper.getEntitiesNear(this.getPosition(), this.world, 10, PlayerEntity.class, EntityGenericMarine.class, EntityGenericPirate.class) : !forcedTargets.isEmpty() ? forcedTargets : new ArrayList<LivingEntity>();
+			IEntityStats ownerProps = EntityStatsCapability.get(this.getOwner());
+			IDevilFruit ownerDFProps = DevilFruitCapability.get(this.getOwner());		
+			List<LivingEntity> doppelmanAttackList = this.isAggressive ? WyHelper.getEntitiesNear(this.getPosition(), this.world, 10, PlayerEntity.class, EntityGenericMarine.class, EntityGenericPirate.class, MonsterEntity.class) : !forcedTargets.isEmpty() ? forcedTargets : new ArrayList<LivingEntity>();
 			LivingEntity target = null;
 
-			if(!ownerDFProps.getDevilFruit().equalsIgnoreCase("kagekage"))
+			if(!ownerDFProps.getDevilFruit().equalsIgnoreCase("kage_kage"))
 				this.remove();
 			
 			if(!doppelmanAttackList.isEmpty())
 			{
-				if(doppelmanAttackList.contains(this.owner))
-					doppelmanAttackList.remove(this.owner);
+				if(doppelmanAttackList.contains(this.getOwner()))
+					doppelmanAttackList.remove(this.getOwner());
 				
 				if(ownerProps.isMarine())
 					doppelmanAttackList = doppelmanAttackList.stream().filter(x -> !(x instanceof EntityGenericMarine)).collect(Collectors.toList());
@@ -173,22 +180,59 @@ public class EntityDoppelman extends CreatureEntity
     @Override
 	public boolean processInteract(PlayerEntity player, Hand hand)
     {
-    	if(player == this.owner)
+    	if(player == this.getOwner())
     	{
         	ItemStack itemStack = player.getHeldItem(hand);
-    		IEntityStats props = EntityStatsCapability.get(this);
 
-    		if(itemStack != null && itemStack.getItem() == ModItems.SHADOW && itemStack.getCount() >= 10 && props.getDoriki() < 6)
+    		if(itemStack != null && itemStack.getItem() == ModItems.SHADOW && itemStack.getCount() >= 10 && this.getShadows() < 6)
     		{
     			itemStack.setCount(itemStack.getCount() - 10);
-    			props.alterDoriki(1);
-    			WyNetwork.sendToAll(new SEntityStatsSyncPacket(player.getEntityId(), props));
+    			this.addShadow();
     		}
     	}
     	
     	return false;
     }
 
-	public void setOwner(PlayerEntity player) {this.owner = player;}
-	public PlayerEntity getOwner() {return this.owner;}
+	@Override
+	public void writeAdditional(CompoundNBT compound)
+	{
+		super.writeAdditional(compound);
+		if (this.dataManager.get(OWNER) != null)
+			compound.putString("OwnerUUID", this.dataManager.get(OWNER).get().toString());
+		compound.putInt("ShadowsAte", this.dataManager.get(SHADOWS));
+	}
+
+	@Override
+	public void readAdditional(CompoundNBT compound)
+	{
+		super.readAdditional(compound);
+		this.dataManager.set(OWNER, Optional.of(UUID.fromString(compound.getString("OwnerUUID"))));
+		this.dataManager.set(SHADOWS, compound.getInt("ShadowsAte"));
+	}
+
+	public void setOwner(UUID uuid)
+	{
+		this.dataManager.set(OWNER, Optional.of(uuid));
+	}
+
+	public PlayerEntity getOwner()
+	{
+		return this.getDataManager().get(OWNER).isPresent() ? this.world.getPlayerByUuid(this.getDataManager().get(OWNER).get()) : null;
+	}
+	
+	public void addShadow()
+	{
+		this.dataManager.set(SHADOWS, this.dataManager.get(SHADOWS) + 1);
+	}
+	
+	public void setShadow(int value)
+	{
+		this.dataManager.set(SHADOWS, value);
+	}
+	
+	public int getShadows()
+	{
+		return this.dataManager.get(SHADOWS);
+	}
 }

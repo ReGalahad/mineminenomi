@@ -9,6 +9,10 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
+import xyz.pixelatedw.mineminenomi.api.protection.BlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.AllBlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.LiquidBlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.RestrictedBlockProtectionRule;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.ContinuousAbility;
@@ -16,6 +20,7 @@ import xyz.pixelatedw.wypi.abilities.ContinuousAbility;
 public class JigokuTabiAbility extends ContinuousAbility
 {
 	public static final JigokuTabiAbility INSTANCE = new JigokuTabiAbility();
+	private static final BlockProtectionRule GRIEF_RULE = new BlockProtectionRule(AllBlockProtectionRule.INSTANCE, RestrictedBlockProtectionRule.INSTANCE, new BlockProtectionRule(LiquidBlockProtectionRule.INSTANCE).setBanListedBlocks()); 
 
 	public JigokuTabiAbility()
 	{
@@ -48,7 +53,7 @@ public class JigokuTabiAbility extends ContinuousAbility
 						int posY = (int) entity.posY - 1;
 						int posZ = (int) entity.posZ + z;
 
-						AbilityHelper.placeBlockIfAllowed(player.world, posX, posY, posZ, Blocks.AIR, "all", "restricted", "ignore liquid");
+						AbilityHelper.placeBlockIfAllowed(player.world, posX, posY, posZ, Blocks.AIR, GRIEF_RULE);
 					}
 				}
 			}

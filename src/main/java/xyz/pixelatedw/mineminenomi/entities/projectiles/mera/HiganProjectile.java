@@ -7,6 +7,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
+import xyz.pixelatedw.mineminenomi.api.protection.BlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.AirBlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.data.GenericParticleData;
 import xyz.pixelatedw.wypi.WyHelper;
@@ -14,6 +16,8 @@ import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 
 public class HiganProjectile extends AbilityProjectileEntity
 {
+	private static final BlockProtectionRule GRIEF_RULE = new BlockProtectionRule(AirBlockProtectionRule.INSTANCE); 
+
 	public HiganProjectile(World world)
 	{super(MeraProjectiles.HIGAN, world);}
 	
@@ -41,7 +45,7 @@ public class HiganProjectile extends AbilityProjectileEntity
 	
 	private void onBlockImpactEvent(BlockPos hit)
 	{
-		AbilityHelper.placeBlockIfAllowed(this.world, hit.up(), Blocks.FIRE, "air");
+		AbilityHelper.placeBlockIfAllowed(this.world, hit.getX(), hit.getY() + 1, hit.getZ(), Blocks.FIRE, GRIEF_RULE);
 	}
 	
 	private void onTickEvent()

@@ -9,6 +9,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
+import xyz.pixelatedw.mineminenomi.api.protection.BlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.AirBlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
@@ -18,6 +20,7 @@ public class BarrierBallAbility extends ContinuousAbility
 {
 	public static final BarrierBallAbility INSTANCE = new BarrierBallAbility();
 
+	private static final BlockProtectionRule GRIEF_RULE = new BlockProtectionRule(AirBlockProtectionRule.INSTANCE).setBypassGriefRule(); 
 	private List<BlockPos> posList = new ArrayList<BlockPos>();
 	
 	public BarrierBallAbility()
@@ -38,9 +41,9 @@ public class BarrierBallAbility extends ContinuousAbility
 			RayTraceResult mop = WyHelper.rayTraceBlocks(player);
 			World world = player.world;
 			if (player.isSneaking())
-				this.posList.addAll(AbilityHelper.createEmptySphere(world, (int) player.posX, (int) player.posY, (int) player.posZ, 5, ModBlocks.BARRIER, "air", "nogrief"));
+				this.posList.addAll(AbilityHelper.createEmptySphere(world, (int) player.posX, (int) player.posY, (int) player.posZ, 5, ModBlocks.BARRIER, GRIEF_RULE));
 			else if (mop != null)
-				this.posList.addAll(AbilityHelper.createEmptySphere(world, (int) mop.getHitVec().x, (int) mop.getHitVec().y, (int) mop.getHitVec().z, 5, ModBlocks.BARRIER, "air", "nogrief"));
+				this.posList.addAll(AbilityHelper.createEmptySphere(world, (int) mop.getHitVec().x, (int) mop.getHitVec().y, (int) mop.getHitVec().z, 5, ModBlocks.BARRIER, GRIEF_RULE));
 		}
 		
 		return true;

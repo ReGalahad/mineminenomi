@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
-import xyz.pixelatedw.mineminenomi.entities.ChargingUrsusShockEntity;
+import xyz.pixelatedw.mineminenomi.entities.projectiles.nikyu.ChargingUrsusShockEntity;
 import xyz.pixelatedw.mineminenomi.models.entities.projectiles.PawModel;
 
 public class ChargingUrsusShockRenderer extends EntityRenderer<ChargingUrsusShockEntity>

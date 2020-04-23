@@ -3,7 +3,6 @@ package xyz.pixelatedw.mineminenomi.screens.extra;
 import com.mojang.blaze3d.platform.GlStateManager;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.config.GuiUtils;
@@ -17,14 +16,12 @@ public class NoTextureButton extends Button
 		super(posX, posY, width, height, string, onPress);
 	}
 
-	@SuppressWarnings("resource")
 	@Override
 	public void render(int mouseX, int mouseY, float partialTicks)
 	{
 		if (this.visible)
 		{
 			Minecraft minecraft = Minecraft.getInstance();
-			FontRenderer fontrenderer = minecraft.fontRenderer;
 			minecraft.getTextureManager().bindTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/empty.png"));
 			GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 			this.isHovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;

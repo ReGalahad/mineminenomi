@@ -6,6 +6,7 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Foods;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.UseAction;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
@@ -53,5 +54,11 @@ public class ColaItem extends Item
 		}
 		
 		return itemStack;
+	}
+	
+	@Override
+	public UseAction getUseAction(ItemStack stack)
+	{
+		return UseAction.DRINK;
 	}
 }

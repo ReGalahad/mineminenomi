@@ -8,9 +8,11 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.entity.projectile.ThrowableEntity;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.network.IPacket;
 import net.minecraft.network.play.server.SPlayEntityEffectPacket;
 import net.minecraft.potion.EffectInstance;
+import net.minecraft.tags.Tag;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.IndirectEntityDamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -110,10 +112,20 @@ public class AbilityProjectileEntity extends ThrowableEntity
 		if (entity != null)
 			hit = new EntityRayTraceResult(entity);
 
-		if (hit.getType() == RayTraceResult.Type.ENTITY && ((EntityRayTraceResult) hit).getEntity() instanceof LivingEntity)
+		if (hit.getType() == RayTraceResult.Type.ENTITY && ((EntityRayTraceResult) hit).getEntity() instanceof LivingEntity) 
 			this.onImpact(hit);
+			
 		
 		this.onTickEvent.onTick();
+		
+	}
+
+	@Override
+	public boolean handleFluidAcceleration(Tag<Fluid> fluidTag)
+	{
+		if(this.inWater)
+			this.doWaterSplashEffect();
+		return false;
 	}
 
 	@Override
@@ -211,6 +223,12 @@ public class AbilityProjectileEntity extends ThrowableEntity
 	/*
 	 * 	Setters/Getters
 	 */
+	public double getCollisionSize() {
+		return this.collisionSize;
+	}
+	public void setCollisionSize(double val) {
+		this.collisionSize = val;
+	}
 	public int getLife()
 	{
 		return this.life;

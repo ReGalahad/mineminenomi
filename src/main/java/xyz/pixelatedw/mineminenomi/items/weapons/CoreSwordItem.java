@@ -49,6 +49,7 @@ public class CoreSwordItem extends Item
 			return mainHandFlag && hakiActiveFlag ? 1.0F : 0.0F;
 		}
 	};
+	
 	private IItemPropertyGetter sheathedProperty = (itemStack, world, livingEntity) ->
 	{
 		if (livingEntity == null || !(livingEntity instanceof PlayerEntity))
@@ -135,15 +136,15 @@ public class CoreSwordItem extends Item
 		//if (!props.hasBusoHakiActive())
 		//	itemStack.damageItem(1, attacker);
 
-		if (isPoisonous)
+		if (this.isPoisonous)
 			target.addPotionEffect(new EffectInstance(Effects.POISON, this.poisonTimer, 0));
 
-		if (isFireAspect)
+		if (this.isFireAspect)
 			target.setFire(this.fireAspectTimer);
 
-		if (isSlownessInducing)
+		if (this.isSlownessInducing)
 		{
-			if (isStackable)
+			if (this.isStackable)
 			{
 				if (target.isPotionActive(Effects.SLOWNESS))
 				{
@@ -160,53 +161,53 @@ public class CoreSwordItem extends Item
 		return true;
 	}
 
-	public CoreSwordItem setIsPoisonous()
+	public <T extends CoreSwordItem> T setIsPoisonous()
 	{
 		this.isPoisonous = true;
 		this.poisonTimer = 100;
-		return this;
+		return (T) this;
 	}
 
-	public CoreSwordItem setIsPoisonous(int timer)
+	public <T extends CoreSwordItem> T setIsPoisonous(int timer)
 	{
 		this.isPoisonous = true;
 		this.poisonTimer = timer;
-		return this;
+		return (T) this;
 	}
 
-	public CoreSwordItem setIsFireAspect()
+	public <T extends CoreSwordItem> T setIsFireAspect()
 	{
 		this.isFireAspect = true;
-		return this;
+		return (T) this;
 	}
 
-	public CoreSwordItem setIsFireAspect(int timer)
+	public <T extends CoreSwordItem> T setIsFireAspect(int timer)
 	{
 		this.isFireAspect = true;
 		this.fireAspectTimer = timer;
-		return this;
+		return (T) this;
 	}
 
-	public CoreSwordItem setIsSlownessInducing()
+	public <T extends CoreSwordItem> T setIsSlownessInducing()
 	{
 		this.isSlownessInducing = true;
-		return this;
+		return (T) this;
 	}
 
-	public CoreSwordItem setIsSlownessInducing(int timer)
+	public <T extends CoreSwordItem> T setIsSlownessInducing(int timer)
 	{
 		this.isSlownessInducing = true;
 		this.slownessTimer = timer;
-		return this;
+		return (T) this;
 	}
 
-	public CoreSwordItem setIsSlownessInducing(int timer, boolean isStackable)
+	public <T extends CoreSwordItem> T setIsSlownessInducing(int timer, boolean isStackable)
 	{
 		this.isSlownessInducing = true;
 		this.slownessTimer = timer;
 		this.isStackable = isStackable;
 
-		return this;
+		return (T) this;
 	}
 
 	@Override

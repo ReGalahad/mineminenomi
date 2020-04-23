@@ -1,20 +1,30 @@
 package xyz.pixelatedw.mineminenomi.init;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
+
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.Properties;
 import net.minecraftforge.fml.common.Mod;
+import xyz.pixelatedw.mineminenomi.abilities.doru.DoruDoruArtsPickaxeAbility;
+import xyz.pixelatedw.mineminenomi.api.AbilityItemTier;
 import xyz.pixelatedw.mineminenomi.items.AkumaNoMiBoxItem;
 import xyz.pixelatedw.mineminenomi.items.BellyPouchItem;
 import xyz.pixelatedw.mineminenomi.items.BubblyCoralItem;
 import xyz.pixelatedw.mineminenomi.items.CharacterCreatorItem;
 import xyz.pixelatedw.mineminenomi.items.ColaItem;
+import xyz.pixelatedw.mineminenomi.items.ColorPaletteItem;
 import xyz.pixelatedw.mineminenomi.items.HeartItem;
+import xyz.pixelatedw.mineminenomi.items.SakeBottleItem;
+import xyz.pixelatedw.mineminenomi.items.SakeCupItem;
 import xyz.pixelatedw.mineminenomi.items.SeaKingMeatItem;
 import xyz.pixelatedw.mineminenomi.items.UltraColaItem;
 import xyz.pixelatedw.mineminenomi.items.VivreCardItem;
 import xyz.pixelatedw.mineminenomi.items.WateringCanItem;
+import xyz.pixelatedw.mineminenomi.items.weapons.AbilityPickaxeItem;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyRegistry;
+import xyz.pixelatedw.wypi.json.models.JSONPredicateObject;
+import xyz.pixelatedw.wypi.json.models.item.JSONModelSimple3DItem;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModItems
@@ -30,8 +40,10 @@ public class ModItems
 	public static final Item KEY = new Item(new Properties().group(ModCreativeTabs.MISC));
 	public static final Item VIVRE_CARD = new VivreCardItem();
 	public static final Item BUBBLY_CORAL = new BubblyCoralItem();
+	public static final Item DORU_PICKAXE = new AbilityPickaxeItem(DoruDoruArtsPickaxeAbility.INSTANCE, AbilityItemTier.DORU, 1, -2.8f);
+    public static final Item COLOR_PALETTE = new ColorPaletteItem(new Item.Properties().group(ModCreativeTabs.MISC));
 	public static final Item WATERING_CAN = new WateringCanItem();
-
+	
 	// Devil Fruit Boxes
 	public static final Item TIER_1_BOX = new AkumaNoMiBoxItem(1);
 	public static final Item TIER_2_BOX = new AkumaNoMiBoxItem(2);
@@ -41,12 +53,20 @@ public class ModItems
 	public static final Item SEA_KING_MEAT = new SeaKingMeatItem();
 	public static final Item COLA = new ColaItem();
 	public static final Item ULTRA_COLA = new UltraColaItem();
-	
+	public static final Item SAKE_BOTTLE = new SakeBottleItem();
+	public static final Item SAKE_CUP = new SakeCupItem();
+
 	// Ammo
 	public static final Item BULLET = new Item(new Properties().group(ModCreativeTabs.MISC));
 	public static final Item KAIROSEKI_BULLET = new Item(new Properties().group(ModCreativeTabs.MISC));
 	public static final Item KUJA_ARROW = new Item(new Properties().group(ModCreativeTabs.MISC));
 	public static final Item POP_GREEN = new Item(new Properties().group(ModCreativeTabs.MISC));
+
+	// JSON Predicates
+	public static final JSONPredicateObject FILLED_PREDICATE = new JSONPredicateObject("filled", new ImmutablePair("filled", 1));
+	
+	// JSON 3D Custom Models
+	public static final JSONModelSimple3DItem FILLED_CUP_MODEL = new JSONModelSimple3DItem("sake_cup", FILLED_PREDICATE).setThirdPersonRotations(0, 0, 0);
 
 	static
 	{
@@ -70,6 +90,10 @@ public class ModItems
 		WyRegistry.registerItem(TIER_3_BOX, "Golden Box");
 		WyRegistry.registerItem(BUBBLY_CORAL, "Bubbly Coral");
 		WyRegistry.registerItem(VIVRE_CARD, "Vivre Card");
+		WyRegistry.registerItem(COLOR_PALETTE, "Color Palette");
+		WyRegistry.registerItem(DORU_PICKAXE, "Doru Doru Arts: Pickaxe");
 		WyRegistry.registerItem(WATERING_CAN, "Watering Can");
+		WyRegistry.registerItem(SAKE_BOTTLE, "Sake Bottle");
+		WyRegistry.registerItem(SAKE_CUP, "Sake Cup", FILLED_CUP_MODEL);
 	}
 }

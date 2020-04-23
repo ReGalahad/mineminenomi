@@ -6,6 +6,7 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Foods;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.UseAction;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.ActionResult;
@@ -73,5 +74,11 @@ public class UltraColaItem extends Item
 		}
 		
 		return itemStack;
+	}
+	
+	@Override
+	public UseAction getUseAction(ItemStack stack)
+	{
+		return UseAction.DRINK;
 	}
 }

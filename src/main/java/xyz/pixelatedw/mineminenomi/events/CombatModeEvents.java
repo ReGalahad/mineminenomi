@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import org.lwjgl.opengl.GL11;
 
-import com.mojang.blaze3d.platform.GLX;
+import com.mojang.blaze3d.platform.GlStateManager;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.widget.Widget;
@@ -20,7 +20,7 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.config.GuiUtils;
 import net.minecraftforge.fml.common.Mod;
-import xyz.pixelatedw.mineminenomi.api.helpers.ModRendererHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.RendererHelper;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
@@ -28,6 +28,8 @@ import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.abilities.ChargeableAbility;
+import xyz.pixelatedw.wypi.abilities.ContinuousAbility;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 
@@ -86,41 +88,94 @@ public class CombatModeEvents
 		if (event.getType() == ElementType.HOTBAR)
 		{
 			event.setCanceled(true);
-			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			GL11.glDisable(GL11.GL_LIGHTING);
-			mc.getTextureManager().bindTexture(ModResources.WIDGETS);
-
-			for (int i = 0; i < 8; i++)
+			GlStateManager.pushMatrix();	
 			{
-				Ability abl = abilityDataProps.getEquippedAbility(i);
-				GL11.glEnable(GL11.GL_BLEND);
-				if (abl != null && abl.isOnCooldown() && !abl.isDisabled())
-					GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 24, 0, 23, 23, 0);
-				else if (abl != null && abl.isCharging())
-					GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 72, 0, 23, 23, 0);
-				else if (abl != null && abl.isContinuous())
-					GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 48, 0, 23, 23, 0);
-				else if (abl != null && abl.isDisabled())
+				GlStateManager.color4f(1, 1, 1, 1);
+				GlStateManager.disableLighting();
+				GlStateManager.enableBlend();
+				mc.getTextureManager().bindTexture(ModResources.WIDGETS);			
+				
+				for (int i = 0; i < 8; i++)
 				{
-					GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 96, 0, 23, 23, 0);
-					ModRendererHelper.drawAbilityIcon("disabled_status", (posX - 192 + (i * 50)) / 2, posY - 19, 3, 16, 16);
-					mc.getTextureManager().bindTexture(ModResources.WIDGETS);
-				}
-				else
+					Ability abl = abilityDataProps.getEquippedAbility(i);
+					
+					if(abl == null)
+					{
+						GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 0, 0, 23, 23, 0);
+						continue;
+					}
+					
+					float cooldown = 23 - (float) (((abl.getCooldown() - 10) / abl.getMaxCooldown()) * 23);
+					float threshold = 23;
+					float charge = 23;
+					
+					if(abl instanceof ContinuousAbility)
+						threshold = (((ContinuousAbility)abl).getContinueTime() / (float) ((ContinuousAbility)abl).getThreshold()) * 23;
+				
+					if(abl instanceof ChargeableAbility)
+						charge = (((ChargeableAbility)abl).getChargeTime() / (float) ((ChargeableAbility)abl).getMaxChargeTime()) * 23;
+
+					// Setting their color based on their state
+					if (abl.isOnCooldown() && !abl.isDisabled() && abl.getCooldown() > 10)
+						GlStateManager.color4f(1, 0, 0, 1);
+					else if (abl.isCharging())
+						GlStateManager.color4f(1, 1, 0, 1);
+					else if (abl.isContinuous())
+						GlStateManager.color4f(0, 0, 1, 1);
+					else if (abl.isDisabled())
+						GlStateManager.color4f(0, 0, 0, 1);
+
+					// Drawing the slot
 					GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 0, 0, 23, 23, 0);
-			}
+					// Reverting the color back to avoid future slots being wrongly colored
+					GlStateManager.color4f(1, 1, 1, 1);
 
-			for (int i = 0; i < 8; i++)
-			{
-				GLX.glBlendFuncSeparate(770, 771, 1, 0);
-				Ability abl = abilityDataProps.getEquippedAbility(i);
-				if (abl != null)
-				{
-					ModRendererHelper.drawAbilityIcon(WyHelper.getResourceName(abl.getName()), (posX - 192 + (i * 50)) / 2, posY - 19, 16, 16);
+					// Setting up addition effects based on the ability's state
+					if (abl.isDisabled())
+					{
+						RendererHelper.drawAbilityIcon("disabled_status", (posX - 192 + (i * 50)) / 2, posY - 19, 3, 16, 16);
+						mc.getTextureManager().bindTexture(ModResources.WIDGETS);
+					}
+					else if(abl.isContinuous())
+					{
+						GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 24, 0, 23, (int) threshold, 0);
+					}
+					else if(abl.isCharging())
+					{
+						GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 24, 0, 23, (int) charge, 0);
+					}
+					else if(abl.isOnCooldown() && !abl.isDisabled())
+					{
+						GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 24, 0, 23, (int) cooldown, 0);
+						
+						if(abl.getCooldown() < 10)
+						{
+							// Ready animation
+							GlStateManager.pushMatrix();
+							{
+								double scale = 2.5 - (abl.getCooldown() / 10.0);
+								GlStateManager.color4f(0.2f, 0.8f, 0.4f, (float)(abl.getCooldown() / 10));
+								GlStateManager.translated((posX - 200 + (i * 50)) / 2, posY - 23, 1);
+								GlStateManager.translated(12, 12, 0);
+								GlStateManager.scaled(scale, scale, 1);
+								GlStateManager.translated(-12, -12, 0);
+								GuiUtils.drawTexturedModalRect(0, 0, 0, 0, 23, 23, -1);							
+							}
+							GlStateManager.popMatrix();
+						}
+					}
+					
+					// Reverting the color back to avoid future slots being wrongly colored
+					GlStateManager.color4f(1, 1, 1, 1);
+										
+					// Drawing the ability icons
+					RendererHelper.drawAbilityIcon(WyHelper.getResourceName(abl.getName()), (posX - 192 + (i * 50)) / 2, posY - 19, 16, 16);
+					mc.getTextureManager().bindTexture(ModResources.WIDGETS);								
 				}
+				
+				GlStateManager.disableBlend();
 			}
-
-			GL11.glDisable(GL11.GL_BLEND);
+			GlStateManager.popMatrix();
 		}
 	}
 

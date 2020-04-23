@@ -5,9 +5,9 @@ import java.util.List;
 import org.lwjgl.opengl.GL11;
 
 import com.mojang.blaze3d.platform.GLX;
+import com.mojang.blaze3d.platform.GlStateManager;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -16,7 +16,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.config.GuiUtils;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
-import xyz.pixelatedw.mineminenomi.api.helpers.ModRendererHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.RendererHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
@@ -78,16 +78,17 @@ public class SelectHotbarAbilitiesScreen extends Screen
 		for (int i = 0; i < 8; i++)
 		{
 			if (this.slotSelected == i)
-				GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 33, 48, 0, 23, 23, 1);
-			else
-				GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 33, 0, 0, 23, 23, 1);
+				GlStateManager.color4f(0, 0, 1, 1);
+			
+			GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 33, 0, 0, 23, 23, 1);
+			GlStateManager.color4f(1, 1, 1, 1);
 		}
 
 		for (int i = 0; i < 8; i++)
 		{
 			GLX.glBlendFuncSeparate(770, 771, 1, 0);
 			if (this.abilityDataProps.getEquippedAbility(i) != null)
-				ModRendererHelper.drawAbilityIcon(WyHelper.getResourceName(this.abilityDataProps.getEquippedAbility(i).getName()), (posX - 192 + (i * 50)) / 2, posY - 29, 16, 16);
+				RendererHelper.drawAbilityIcon(WyHelper.getResourceName(this.abilityDataProps.getEquippedAbility(i).getName()), (posX - 192 + (i * 50)) / 2, posY - 29, 16, 16);
 		}
 
 		this.minecraft.getTextureManager().bindTexture(ModResources.WIDGETS);
@@ -95,12 +96,12 @@ public class SelectHotbarAbilitiesScreen extends Screen
 		{
 			GuiUtils.drawTexturedModalRect((posX - 280) / 2, (posY - 200) / 2, 0, 23, 27, 26, 0);
 			if (devilFruitProps.hasYamiPower())
-				ModRendererHelper.drawDevilFruitIcon("yamiyaminomi", (posX - 268) / 2, (posY - 187) / 2, 16, 16);
+				RendererHelper.drawDevilFruitIcon("yamiyaminomi", (posX - 268) / 2, (posY - 187) / 2, 16, 16);
 			else
 			{
 				ItemStack df = AbilityHelper.getDevilFruitItem(devilFruitProps.getDevilFruit());
 
-				ModRendererHelper.drawDevilFruitIcon(df.getTranslationKey().replace("item." + APIConfig.PROJECT_ID + ".", ""), (posX - 268) / 2, (posY - 187) / 2, 16, 16);
+				RendererHelper.drawDevilFruitIcon(df.getTranslationKey().replace("item." + APIConfig.PROJECT_ID + ".", ""), (posX - 268) / 2, (posY - 187) / 2, 16, 16);
 			}
 			this.minecraft.getTextureManager().bindTexture(ModResources.WIDGETS);
 		}
@@ -108,14 +109,14 @@ public class SelectHotbarAbilitiesScreen extends Screen
 		if (abl != null)
 		{
 			GuiUtils.drawTexturedModalRect((posX - 280) / 2, (posY - 140) / 2, 0, 23, 27, 26, 0);
-			ModRendererHelper.drawAbilityIcon(abl.getName(), (posX - 268) / 2, (posY - 127) / 2, 16, 16);
+			RendererHelper.drawAbilityIcon(abl.getName(), (posX - 268) / 2, (posY - 127) / 2, 16, 16);
 			this.minecraft.getTextureManager().bindTexture(ModResources.WIDGETS);
 		}
 		abl = this.abilityDataProps.getUnlockedAbilities(AbilityCategory.HAKI).parallelStream().findFirst().orElse(null);
 		if (abl != null)
 		{
 			GuiUtils.drawTexturedModalRect((posX - 280) / 2, (posY - 80) / 2, 0, 23, 27, 26, 0);
-			ModRendererHelper.drawAbilityIcon(abl.getName(), (posX - 268) / 2, (posY - 67) / 2, 16, 16);
+			RendererHelper.drawAbilityIcon(abl.getName(), (posX - 268) / 2, (posY - 67) / 2, 16, 16);
 			this.minecraft.getTextureManager().bindTexture(ModResources.WIDGETS);
 		}
 
@@ -249,19 +250,4 @@ public class SelectHotbarAbilitiesScreen extends Screen
 	{
 		return false;
 	}
-
-	@SuppressWarnings("resource")
-	private void drawItemStack(ItemStack itemStack, int x, int y, String string)
-	{
-		GL11.glTranslatef(0.0F, 0.0F, 32.0F);
-		this.itemRenderer.zLevel = 200.0F;
-		FontRenderer font = null;
-		if (itemStack != null)
-			font = itemStack.getItem().getFontRenderer(itemStack);
-		if (font == null)
-			font = this.font;
-		this.itemRenderer.renderItemAndEffectIntoGUI(itemStack, x, y);
-		this.itemRenderer.zLevel = 0.0F;
-	}
-
 }

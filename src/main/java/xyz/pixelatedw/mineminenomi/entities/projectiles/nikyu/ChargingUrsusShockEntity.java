@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.entities;
+package xyz.pixelatedw.mineminenomi.entities.projectiles.nikyu;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -10,7 +10,6 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
-import xyz.pixelatedw.mineminenomi.init.ModEntities;
 
 public class ChargingUrsusShockEntity extends Entity
 {
@@ -20,7 +19,7 @@ public class ChargingUrsusShockEntity extends Entity
 	
 	public ChargingUrsusShockEntity(World worldIn)
 	{
-		super(ModEntities.CHARGING_URSUS_SHOCK, worldIn);
+		super(NikyuProjectiles.CHARGING_URSUS_SHOCK, worldIn);
 	}
 	
 	public ChargingUrsusShockEntity(EntityType<?> entityTypeIn, World worldIn)

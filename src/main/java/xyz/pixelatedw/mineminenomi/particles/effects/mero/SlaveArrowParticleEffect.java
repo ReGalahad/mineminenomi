@@ -32,5 +32,4 @@ public class SlaveArrowParticleEffect extends ParticleEffect
 		data.setMotion(motionX, motionY, motionZ);
 		WyHelper.spawnParticles(data, (ServerWorld) world, posX, posY + 1.5, posZ);
 	}
-
 }

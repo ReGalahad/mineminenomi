@@ -9,6 +9,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
+import xyz.pixelatedw.mineminenomi.api.protection.BlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.AirBlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.FoliageBlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.LiquidBlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.abilities.Ability;
@@ -19,6 +23,7 @@ public class RoomAbility extends ContinuousAbility implements IParallelContinuou
 {
 	public static final Ability INSTANCE = new RoomAbility();
 	
+	private static final BlockProtectionRule GRIEF_RULE = new BlockProtectionRule(AirBlockProtectionRule.INSTANCE, FoliageBlockProtectionRule.INSTANCE, LiquidBlockProtectionRule.INSTANCE).setBypassGriefRule();
 	private List<BlockPos> blockList = new ArrayList<BlockPos>();
 
 	public RoomAbility()
@@ -35,7 +40,7 @@ public class RoomAbility extends ContinuousAbility implements IParallelContinuou
 	{
 		if (this.blockList.isEmpty())
 		{
-			this.blockList.addAll(AbilityHelper.createEmptySphere(player.world, (int) player.posX, (int) player.posY, (int) player.posZ, 20, ModBlocks.OPE, "air", "foliage", "liquid", "nogrief"));
+			this.blockList.addAll(AbilityHelper.createEmptySphere(player.world, (int) player.posX, (int) player.posY, (int) player.posZ, 20, ModBlocks.OPE, GRIEF_RULE));
 			player.world.setBlockState(new BlockPos(player.posX, player.posY, player.posZ), ModBlocks.OPE_MID.getDefaultState());
 			this.blockList.add(new BlockPos(MathHelper.floor(player.posX), MathHelper.floor(player.posY), MathHelper.floor(player.posZ)));
 		}
