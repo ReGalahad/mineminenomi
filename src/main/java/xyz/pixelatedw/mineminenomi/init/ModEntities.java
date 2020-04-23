@@ -15,6 +15,7 @@ import xyz.pixelatedw.mineminenomi.entities.mobs.marines.EntityMarineWithGun;
 import xyz.pixelatedw.mineminenomi.entities.mobs.marines.EntityMarineWithSword;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.BlackKnightEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.DoppelmanEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.misc.TraderEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.WaxPlayerEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityPirateCaptain;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityPirateWithGun;
@@ -46,7 +47,8 @@ public class ModEntities
 	// Factionless
 	public static final EntityType DOJO_SENSEI = WyRegistry.createEntityType(DojoSenseiEntity::new).build("dojo_sensei");
 	public static final EntityType BOW_MASTER = WyRegistry.createEntityType(BowMasterEntity::new).build("bow_master");
-
+    public static final EntityType TRADER = WyRegistry.createEntityType(TraderEntity::new).build("trader");
+    
 	// Other
 	public static final EntityType DOPPELMAN = WyRegistry.createEntityType(DoppelmanEntity::new).build("doppelman");
 	public static final EntityType WAX_PLAYER = WyRegistry.createEntityType(WaxPlayerEntity::new).build("wax_player");
@@ -74,6 +76,7 @@ public class ModEntities
 		// Factionless
 		registerFactionlessWithSpawnEgg(DOJO_SENSEI, "Dojo Sensei");
 		registerFactionlessWithSpawnEgg(BOW_MASTER, "Bow Master");
+		registerFactionlessWithSpawnEgg(TRADER, "Trader");
 
 		// Other
 		WyRegistry.registerEntityType(DOPPELMAN, "Doppelman");
