@@ -17,6 +17,7 @@ import xyz.pixelatedw.wypi.data.quest.IQuestData;
 import xyz.pixelatedw.wypi.data.quest.QuestDataCapability;
 import xyz.pixelatedw.wypi.network.WyNetwork;
 import xyz.pixelatedw.wypi.network.packets.server.SSyncQuestDataPacket;
+import xyz.pixelatedw.wypi.quests.Quest;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class QuestEvents
@@ -39,26 +40,40 @@ public class QuestEvents
 	@SubscribeEvent
 	public static void onEntityInteract(EntityInteractSpecific event)
 	{
-		if(!(event.getTarget() instanceof IQuestGiver) || !event.getWorld().isRemote)
-			return;
+		if(!(event.getTarget() instanceof IQuestGiver))
+			return;		
 		
 		PlayerEntity player = event.getPlayer();
 		IQuestData questProps = QuestDataCapability.get(player);
 		IQuestGiver questGiver = (IQuestGiver) event.getTarget();
 		boolean hasQuests = false;
+		boolean hasReset = false;
+		
+		for(Quest quest : questProps.getInProgressQuests())
+		{
+			if(quest != null && quest.checkRestart(player))
+			{
+				hasReset = true;
+				break;
+			}
+		}
 		
 		for (int i = 0; i <= questGiver.getAvailableQuests(player).length - 1; i++)
 		{
-			if(questProps.hasFinishedQuest(questGiver.getAvailableQuests(player)[i]))
-				continue;
-			
-			hasQuests = true;
-			break;
+			Quest quest = questGiver.getAvailableQuests(player)[i];			
+			if(!questProps.hasFinishedQuest(quest))
+			{
+				hasQuests = true;
+				break;
+			}
 		}
 
-		if(hasQuests)
-			Minecraft.getInstance().displayGuiScreen(new QuestChooseScreen(player, event.getTarget(), questGiver.getAvailableQuests(player)));
-		else
-			WyHelper.sendMsgToPlayer(player, new TranslationTextComponent(ModI18n.QUEST_NO_TRIALS_AVAILABLE, event.getTarget().getDisplayName().getFormattedText()).getFormattedText());
+		if(player.world.isRemote && !hasReset)
+		{
+			if(hasQuests)
+				Minecraft.getInstance().displayGuiScreen(new QuestChooseScreen(player, event.getTarget(), questGiver.getAvailableQuests(player)));
+			else
+				WyHelper.sendMsgToPlayer(player, new TranslationTextComponent(ModI18n.QUEST_NO_TRIALS_AVAILABLE, event.getTarget().getDisplayName().getFormattedText()).getFormattedText());
+		}
 	}
 }

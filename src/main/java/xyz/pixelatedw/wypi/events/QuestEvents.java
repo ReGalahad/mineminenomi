@@ -105,7 +105,7 @@ public class QuestEvents
 		if(player.world.isRemote)
 			return;
 		
-		boolean restartQuest = false;
+		boolean restartQuest = false; 
 		
 		for(Quest quest : questProps.getInProgressQuests())
 		{
@@ -120,10 +120,10 @@ public class QuestEvents
 				break;
 			}
 		}
-		
+
 		if(restartQuest)
 			return;
-		
+					
 		for (Objective obj : getObjectives(questProps))
 		{
 			if (obj instanceof IEntityInteractObjective)

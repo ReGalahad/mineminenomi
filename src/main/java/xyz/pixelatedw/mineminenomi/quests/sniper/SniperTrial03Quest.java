@@ -39,7 +39,7 @@ public class SniperTrial03Quest extends Quest
 	{
 		if(this.isComplete())
 			return false;
-		
+				
 		if(this.targets.size() <= 0)
 			return true;
 		
