@@ -30,7 +30,6 @@ public class SniperTrial03Quest extends Quest
 	public SniperTrial03Quest()
 	{
 		super("sniper_trial_03", "Trial: Renpatsu Namari Boshi");
-		//this.addRequirements(ModQuests.SNIPER_TRIAL_01, ModQuests.SNIPER_TRIAL_02);
 		this.addObjectives(this.objective01, this.objective02);
 		
 		this.onStartEvent = this::spawnTargets;

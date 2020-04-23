@@ -110,7 +110,7 @@ public class BowMasterEntity extends GenericNewEntity implements IQuestGiver
 		List<Quest> availableQuests = new ArrayList<Quest>();
 
 		if(entityProps.isSniper())
-			availableQuests.addAll(ImmutableList.of(ModQuests.SNIPER_TRIAL_01, ModQuests.SNIPER_TRIAL_03, ModQuests.SNIPER_TRIAL_04));
+			availableQuests.addAll(ImmutableList.of(ModQuests.SNIPER_TRIAL_01, ModQuests.SNIPER_TRIAL_02, ModQuests.SNIPER_TRIAL_03, ModQuests.SNIPER_TRIAL_04));
 		
 		Quest[] quests = new Quest[availableQuests.size()];	
 		return availableQuests.toArray(quests);

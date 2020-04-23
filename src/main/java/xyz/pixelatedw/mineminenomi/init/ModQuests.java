@@ -2,6 +2,7 @@ package xyz.pixelatedw.mineminenomi.init;
 
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.quests.sniper.SniperTrial01Quest;
+import xyz.pixelatedw.mineminenomi.quests.sniper.SniperTrial02Quest;
 import xyz.pixelatedw.mineminenomi.quests.sniper.SniperTrial03Quest;
 import xyz.pixelatedw.mineminenomi.quests.sniper.SniperTrial04Quest;
 import xyz.pixelatedw.mineminenomi.quests.swordsman.SwordsmanTrial01Quest;
@@ -25,7 +26,7 @@ public class ModQuests
 	
 	// Sniper
 	public static final Quest SNIPER_TRIAL_01 = new SniperTrial01Quest();
-	public static final Quest SNIPER_TRIAL_02 = new SniperTrial01Quest(); // TODO Make a 2nd sniper quest
+	public static final Quest SNIPER_TRIAL_02 = new SniperTrial02Quest();
 	public static final Quest SNIPER_TRIAL_03 = new SniperTrial03Quest();
 	public static final Quest SNIPER_TRIAL_04 = new SniperTrial04Quest();
 
@@ -44,6 +45,7 @@ public class ModQuests
 		
 		// Sniper
 		WyRegistry.registerQuest(SNIPER_TRIAL_01);
+		WyRegistry.registerQuest(SNIPER_TRIAL_02);
 		WyRegistry.registerQuest(SNIPER_TRIAL_03);
 		WyRegistry.registerQuest(SNIPER_TRIAL_04);
 	}

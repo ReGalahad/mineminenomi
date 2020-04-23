@@ -462,6 +462,7 @@
 
 	"quest.already_in_progress": "Already in progress!",
 	"quest.mineminenomi.trial_kaen_boshi": "Trial: Kaen Boshi",
+	"quest.mineminenomi.trial_kemuri_boshi": "Trial: Kemuri Boshi",
 	"quest.mineminenomi.trial_o_tatsumaki": "Trial: O Tatsumaki",
 	"quest.mineminenomi.trial_renpatsu_namari_boshi": "Trial: Renpatsu Namari Boshi",
 	"quest.mineminenomi.trial_sakuretsu_saboten_boshi": "Trial: Sakuretsu Saboten Boshi",
@@ -479,6 +480,8 @@
 	"quest.objective.mineminenomi.kill_5_enemies_with_critical_hits": "Kill 5 enemies with critical hits",
 	"quest.objective.mineminenomi.kill_5_enemies_with_running_towards_them": "Kill 5 enemies with running towards them",
 	"quest.objective.mineminenomi.kill_an_enemy_from_30_blocks_away": "Kill an enemy from 30 blocks away",
+	"quest.objective.mineminenomi.set_10_enemies_on_fire_using_kaen_boshi": "Set 10 enemies on fire using Kaen Boshi",
+	"quest.sniper_trial_03.reset_dialogue": "<Bow Master> Look out for those targets!",
 	"quest.too_many": "<%s> You cannot accept any more quests",
 
 	"race.cyborg": "Cyborg",

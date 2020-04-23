@@ -4,9 +4,8 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.DamageSource;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.sniper.RenpatsuNamariBoshiProjectile;
-import xyz.pixelatedw.wypi.quests.objectives.IKillEntityObjective;
 
-public class RenpatsuKillInSecondsObjective extends ArrowKillInSecondsObjective implements IKillEntityObjective
+public class RenpatsuKillInSecondsObjective extends ArrowKillInSecondsObjective
 {	
 	public RenpatsuKillInSecondsObjective(String title, int count, int threshold)
 	{
