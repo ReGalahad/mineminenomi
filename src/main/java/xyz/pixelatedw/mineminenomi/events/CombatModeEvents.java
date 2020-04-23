@@ -59,8 +59,7 @@ public class CombatModeEvents
 			double maxHealth = player.getAttribute(SharedMonsterAttributes.MAX_HEALTH).getValue();
 			double health = player.getHealth();
 
-			WyHelper.centerString(Minecraft.getInstance().fontRenderer, health + "", posX / 2 - 20, posY - 39);
-			WyHelper.drawStringWithBorder(Minecraft.getInstance().fontRenderer, (int) health + "", posX / 2 - 20, posY - 39, Color.RED.getRGB());
+			WyHelper.drawStringWithBorder(Minecraft.getInstance().fontRenderer, (int) health + "", posX / 2 - 27, posY - 39, Color.RED.getRGB());
 
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 

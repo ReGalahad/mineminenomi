@@ -479,12 +479,7 @@ public class WyHelper
 		font.drawStringWithShadow(text, posX - 1, posY, 1);
 		font.drawStringWithShadow(text, posX, posY, color);
 	}
-	
-	public static void centerString(FontRenderer font, String text, int posX, int posY)
-	{
-		posX = posX - font.getStringWidth(text) / 2;
-	}
-	
+
 	public static List<String> splitString(FontRenderer font, String text, int posX, int posY, int wrapWidth)
 	{
 		while (text != null && text.endsWith("\n"))

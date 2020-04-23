@@ -52,8 +52,8 @@ public class CyborgPassiveEvents
 				barHeight = 52;
 	
 			GuiUtils.drawTexturedModalRect((posX - 252) / 2, posY - 42, 32, barHeight, 16, 32, 0);
-			WyHelper.centerString(Minecraft.getInstance().fontRenderer, entityStatsProps.getCola() + "", (posX - 237) / 2, posY - 12);
-			WyHelper.drawStringWithBorder(Minecraft.getInstance().fontRenderer, entityStatsProps.getCola() + "", (posX - 237) / 2, posY - 12, Color.WHITE.getRGB());
+			String cola = entityStatsProps.getCola() + "";
+			WyHelper.drawStringWithBorder(Minecraft.getInstance().fontRenderer, cola, ((posX - 235) / 2) - mc.fontRenderer.getStringWidth(cola) / 2, posY - 12, Color.WHITE.getRGB());
 			
 			GlStateManager.disableBlend();
 		}
