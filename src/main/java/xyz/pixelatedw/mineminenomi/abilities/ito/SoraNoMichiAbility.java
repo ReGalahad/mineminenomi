@@ -2,6 +2,7 @@ package xyz.pixelatedw.mineminenomi.abilities.ito;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.play.server.SAnimateHandPacket;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.server.ServerWorld;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
@@ -24,17 +25,17 @@ public class SoraNoMichiAbility extends Ability
 	
 	private boolean onUseEvent(PlayerEntity player)
 	{		
-		double[] speed;
+		Vec3d speed;
 		if(player.onGround)
 		{
 			speed = WyHelper.propulsion(player, 1.0, 1.0);
-			player.setMotion(speed[0], 1.9, speed[2]);
+			player.setMotion(speed.x, 1.9, speed.z);
 			this.airJumps = 0;
 		}
 		else
 		{
 			speed = WyHelper.propulsion(player, 1.5, 1.5);
-			player.setMotion(speed[0], 1.3, speed[2]);
+			player.setMotion(speed.x, 1.3, speed.z);
 			this.airJumps++;
 		}
 

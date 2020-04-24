@@ -207,25 +207,14 @@ public class WyHelper
 		}
 	}
 
-	public static double[] propulsion(LivingEntity entity, double extraVelX, double extraVelZ)
+	public static Vec3d propulsion(LivingEntity entity, double extraVelX, double extraVelZ)
 	{
 		return propulsion(entity, extraVelX, 0, extraVelZ);
 	}
 
-	public static double[] propulsion(LivingEntity entity, double extraVelX, double extraVelY, double extraVelZ)
+	public static Vec3d propulsion(LivingEntity entity, double extraVelX, double extraVelY, double extraVelZ)
 	{
-		double mX = entity.getLook(0).x;
-		double mZ = entity.getLook(0).z;
-		double mY = entity.getLook(0).y;
-		
-		mX *= extraVelX;
-		mY *= extraVelY;
-		mZ *= extraVelZ;
-		
-		return new double[]
-			{
-					mX, mY, mZ
-			};
+		return entity.getLook(1).mul(extraVelX, extraVelY, extraVelZ);
 	}
 
 	public static <T extends Entity> List<T> getEntitiesNear(BlockPos pos, World world, double radius)

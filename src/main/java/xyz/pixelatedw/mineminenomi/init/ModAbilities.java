@@ -96,10 +96,12 @@ import xyz.pixelatedw.mineminenomi.abilities.magu.DaiFunkaAbility;
 import xyz.pixelatedw.mineminenomi.abilities.magu.MeigoAbility;
 import xyz.pixelatedw.mineminenomi.abilities.magu.RyuseiKazanAbility;
 import xyz.pixelatedw.mineminenomi.abilities.mera.DaiEnkaiEnteiAbility;
+import xyz.pixelatedw.mineminenomi.abilities.mera.HeatDashAbility;
 import xyz.pixelatedw.mineminenomi.abilities.mera.HidarumaAbility;
 import xyz.pixelatedw.mineminenomi.abilities.mera.HiganAbility;
 import xyz.pixelatedw.mineminenomi.abilities.mera.HikenAbility;
 import xyz.pixelatedw.mineminenomi.abilities.mera.JujikaAbility;
+import xyz.pixelatedw.mineminenomi.abilities.mera.KyokaenAbility;
 import xyz.pixelatedw.mineminenomi.abilities.mero.MeroMeroMellowAbility;
 import xyz.pixelatedw.mineminenomi.abilities.mero.PerfumeFemurAbility;
 import xyz.pixelatedw.mineminenomi.abilities.mero.PistolKissAbility;
@@ -219,7 +221,7 @@ public class ModAbilities
 	public static final AkumaNoMiItem PIKA_PIKA_NO_MI = new AkumaNoMiItem("Pika Pika no Mi", EnumFruitType.LOGIA, YataNoKagamiAbility.INSTANCE, YasakaniNoMagatamaAbility.INSTANCE, AmaNoMurakumoAbility.INSTANCE, AmaterasuAbility.INSTANCE, FlashAbility.INSTANCE);
 	public static final AkumaNoMiItem BANE_BANE_NO_MI = new AkumaNoMiItem("Bane Bane no Mi", EnumFruitType.PARAMECIA, SpringHopperAbility.INSTANCE, SpringSnipeAbility.INSTANCE, SpringDeathKnockAbility.INSTANCE);
 	public static final AkumaNoMiItem HIE_HIE_NO_MI = new AkumaNoMiItem("Hie Hie no Mi", EnumFruitType.LOGIA, IceBlockPartisanAbility.INSTANCE, IceAgeAbility.INSTANCE, IceBallAbility.INSTANCE, IceSaberAbility.INSTANCE, IceTimeCapsuleAbility.INSTANCE, IceBlockPheasantAbility.INSTANCE, IceBlockAvalancheAbility.INSTANCE);
-	public static final AkumaNoMiItem MERA_MERA_NO_MI = new AkumaNoMiItem("Mera Mera no Mi", EnumFruitType.LOGIA, HikenAbility.INSTANCE, HiganAbility.INSTANCE, DaiEnkaiEnteiAbility.INSTANCE, HidarumaAbility.INSTANCE, JujikaAbility.INSTANCE);
+	public static final AkumaNoMiItem MERA_MERA_NO_MI = new AkumaNoMiItem("Mera Mera no Mi", EnumFruitType.LOGIA, HikenAbility.INSTANCE, HiganAbility.INSTANCE, DaiEnkaiEnteiAbility.INSTANCE, HidarumaAbility.INSTANCE, JujikaAbility.INSTANCE, HeatDashAbility.INSTANCE, KyokaenAbility.INSTANCE);
 
 	static
 	{

@@ -6,6 +6,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.play.server.SAnimateHandPacket;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.server.ServerWorld;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
@@ -36,8 +37,8 @@ public class ShiShishiSonsonAbility extends Ability
 			return false;
 		}
 
-		double[] speed = WyHelper.propulsion(player, 3, 3);
-		player.setMotion(speed[0], 0.2, speed[2]);
+		Vec3d speed = WyHelper.propulsion(player, 3, 3);
+		player.setMotion(speed.x, 0.2, speed.z);
 		player.velocityChanged = true;
 		((ServerWorld) player.world).getChunkProvider().sendToTrackingAndSelf(player, new SAnimateHandPacket(player, 0));
 		
