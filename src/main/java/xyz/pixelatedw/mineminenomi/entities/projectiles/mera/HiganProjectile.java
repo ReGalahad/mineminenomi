@@ -62,7 +62,7 @@ public class HiganProjectile extends AbilityProjectileEntity
 				data.setTexture(ModResources.MERA);
 				data.setLife(10);
 				data.setSize(1.3F);
-				WyHelper.spawnParticles(data, (ServerWorld) this.world, this.posX + offsetX, this.posY + offsetY, this.posZ + offsetZ);
+				WyHelper.spawnParticles(data, (ServerWorld) this.world, this.posX + offsetX, this.posY + 0.25 + offsetY, this.posZ + offsetZ);
 			}
 		}
 	}

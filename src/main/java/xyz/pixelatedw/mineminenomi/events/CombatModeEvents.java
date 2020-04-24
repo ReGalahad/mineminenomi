@@ -105,15 +105,30 @@ public class CombatModeEvents
 						continue;
 					}
 					
+					String number = "";
+										
 					float cooldown = 23 - (float) (((abl.getCooldown() - 10) / abl.getMaxCooldown()) * 23);
 					float threshold = 23;
 					float charge = 23;
 					
+					if(abl.isOnCooldown() && abl.getCooldown() - 10 > 0)
+						number = (int) abl.getCooldown() - 10 + " ";
+					
 					if(abl instanceof ContinuousAbility)
-						threshold = (((ContinuousAbility)abl).getContinueTime() / (float) ((ContinuousAbility)abl).getThreshold()) * 23;
+					{
+						ContinuousAbility cAbility = (ContinuousAbility)abl;
+						threshold = cAbility.getContinueTime() / (float) cAbility.getThreshold() * 23;
+						if(cAbility.getThreshold() > 0 && abl.isContinuous() && cAbility.getContinueTime() > 0)
+							number = cAbility.getThreshold() - cAbility.getContinueTime() + " ";
+					}
 				
 					if(abl instanceof ChargeableAbility)
-						charge = (((ChargeableAbility)abl).getChargeTime() / (float) ((ChargeableAbility)abl).getMaxChargeTime()) * 23;
+					{
+						ChargeableAbility cAbility = (ChargeableAbility)abl;
+						charge = cAbility.getChargeTime() / (float) cAbility.getMaxChargeTime() * 23;
+						if(abl.isCharging() && cAbility.getChargeTime() > 0)
+							number = cAbility.getChargeTime() + " ";
+					}
 
 					// Setting their color based on their state
 					if (abl.isOnCooldown() && !abl.isDisabled() && abl.getCooldown() > 10)
@@ -169,8 +184,10 @@ public class CombatModeEvents
 					GlStateManager.color4f(1, 1, 1, 1);
 										
 					// Drawing the ability icons
-					RendererHelper.drawAbilityIcon(WyHelper.getResourceName(abl.getName()), (posX - 192 + (i * 50)) / 2, posY - 19, 16, 16);
-					mc.getTextureManager().bindTexture(ModResources.WIDGETS);								
+					RendererHelper.drawAbilityIcon(WyHelper.getResourceName(abl.getName()), (posX - 192 + (i * 50)) / 2, posY - 19, 16, 16);	
+					GlStateManager.translated(0, 0, 2);
+					WyHelper.drawStringWithBorder(mc.fontRenderer, number, (posX - 172 + (i * 50)) / 2 - mc.fontRenderer.getStringWidth(number) / 2, posY - 14, WyHelper.hexToRGB("#FFFFFF").getRGB());
+					mc.getTextureManager().bindTexture(ModResources.WIDGETS);
 				}
 				
 				GlStateManager.disableBlend();

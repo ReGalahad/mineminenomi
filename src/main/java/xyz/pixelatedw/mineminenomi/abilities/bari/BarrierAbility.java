@@ -25,7 +25,6 @@ public class BarrierAbility extends ContinuousAbility
 	public BarrierAbility()
 	{
 		super("Barrier", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(2);
 		this.setThreshold(30);
 		this.setDescription("The user creates an impenetrable wall that shields them from attacks.");
 		
@@ -62,6 +61,9 @@ public class BarrierAbility extends ContinuousAbility
 		}
 		this.posList = new ArrayList<BlockPos>();
 
+		int cooldown = (int) Math.round(this.continueTime / 50.0);
+		this.setMaxCooldown(cooldown);
+		
 		return true;
 	}
 }
