@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.entities.mobs.pirates;
+package xyz.pixelatedw.mineminenomi.entities.mobs.marines;
 
 import javax.annotation.Nullable;
 
@@ -14,12 +14,12 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 
-public class EntityPirateWithSword extends EntityGenericPirate
+public class MarineWithSwordEntity extends GenericMarineEntity
 {
 
-	public EntityPirateWithSword(World world)
+	public MarineWithSwordEntity(World world)
 	{
-		super(ModEntities.PIRATE_WITH_SWORD, world, new String[] {"pirate1", "pirate2", "pirate3", "pirate4", "pirate5"});
+		super(ModEntities.MARINE_WITH_SWORD, world, new String[] {"marine1", "marine2", "marine3", "marine4", "marine5"});
 	}
 	
 	@Override
@@ -55,7 +55,7 @@ public class EntityPirateWithSword extends EntityGenericPirate
 	{
 		spawnData = super.onInitialSpawn(world, difficulty, reason, spawnData, dataTag);
 		
-		ItemStack randomSword = new ItemStack(this.pirateSwords[this.rand.nextInt(this.pirateSwords.length)]);
+		ItemStack randomSword = new ItemStack(this.marineSwords[this.rand.nextInt(this.marineSwords.length)]);
 		this.setItemStackToSlot(EquipmentSlotType.MAINHAND, randomSword);
 
 		return spawnData;

@@ -11,8 +11,8 @@ import xyz.pixelatedw.wypi.abilities.Ability;
 public class GeppoAbility extends Ability
 {
 	public static final Ability INSTANCE = new GeppoAbility();
+	public static final ParticleEffect PARTICLES = new GeppoParticleEffect();
 	
-	private static final ParticleEffect PARTICLES = new GeppoParticleEffect();
 	private int airJumps = 0;
 	
 	public GeppoAbility()

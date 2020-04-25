@@ -7,6 +7,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -20,15 +21,16 @@ public class GenericNewEntity extends CreatureEntity implements IDynamicRenderer
 
 	protected String[] textures;
 	private static final DataParameter<Integer> TEXTURE_ID = EntityDataManager.createKey(GenericNewEntity.class, DataSerializers.VARINT);
-	private int doriki, belly, state;
+	private int doriki, belly;
 	private boolean hasBusoHaki;
-	// private EntityAIBase currentAI, previousAI;
-
+	protected int threat;
+	private Goal currentGoal, previousGoal;
+	
 	public GenericNewEntity(EntityType type, World worldIn, String[] textures)
 	{
 		super(type, worldIn);
 		this.textures = textures;
-		this.experienceValue = 5;
+		this.experienceValue = this.threat;
 	}
 
 	@Override
@@ -125,4 +127,38 @@ public class GenericNewEntity extends CreatureEntity implements IDynamicRenderer
 		this.hasBusoHaki = value;
 	}
 
+	public Goal getCurrentGoal()
+	{
+		return this.currentGoal;
+	}
+	
+	public Goal getPreviousGoal()
+	{
+		return this.previousGoal;
+	}
+	
+	public void setCurrentGoal(Goal goal)
+	{
+		this.currentGoal = goal;
+	}
+	
+	public void setPreviousGoal(Goal goal)
+	{
+		this.previousGoal = goal;
+	}
+	
+	public void addThreat(int threat)
+	{
+		this.threat += threat;
+	}
+	
+	public int getThreat()
+	{
+		return this.threat;
+	}
+	
+	public void setThreat(int threat)
+	{
+		this.threat = threat;
+	}
 }

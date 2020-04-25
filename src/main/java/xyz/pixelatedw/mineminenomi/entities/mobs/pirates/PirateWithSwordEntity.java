@@ -14,12 +14,12 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 
-public class EntityPirateCaptain extends EntityGenericPirate
+public class PirateWithSwordEntity extends GenericPirateEntity
 {
 
-	public EntityPirateCaptain(World world)
+	public PirateWithSwordEntity(World world)
 	{
-		super(ModEntities.PIRATE_CAPTAIN, world, new String[] {"pirate_captain1", "pirate_captain2", "pirate_captain3", "pirate_captain4", "pirate_captain5"});
+		super(ModEntities.PIRATE_WITH_SWORD, world, new String[] {"pirate1", "pirate2", "pirate3", "pirate4", "pirate5"});
 	}
 	
 	@Override
@@ -35,12 +35,12 @@ public class EntityPirateCaptain extends EntityGenericPirate
 		super.registerAttributes();
 		this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(35.0D);
 		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23F);
-		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0D);
-		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(50.0D);
+		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(2.0D);
+		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D);
 		this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
 		
-		this.setDoriki(20);
-		this.setBelly(20);
+		this.setDoriki(10);
+		this.setBelly(5);
 	}
 
 	@Override
@@ -54,13 +54,10 @@ public class EntityPirateCaptain extends EntityGenericPirate
 	public ILivingEntityData onInitialSpawn(IWorld world, DifficultyInstance difficulty, SpawnReason reason, @Nullable ILivingEntityData spawnData, @Nullable CompoundNBT dataTag) 
 	{
 		spawnData = super.onInitialSpawn(world, difficulty, reason, spawnData, dataTag);
-
+		
 		ItemStack randomSword = new ItemStack(this.pirateSwords[this.rand.nextInt(this.pirateSwords.length)]);
 		this.setItemStackToSlot(EquipmentSlotType.MAINHAND, randomSword);
 
-		if(this.rand.nextDouble() < 0.1)
-			this.setItemStackToSlot(EquipmentSlotType.OFFHAND, randomSword);
-		
 		return spawnData;
 	}
 }

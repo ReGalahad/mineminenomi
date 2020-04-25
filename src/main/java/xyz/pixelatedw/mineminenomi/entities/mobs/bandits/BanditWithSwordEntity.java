@@ -1,37 +1,32 @@
-package xyz.pixelatedw.mineminenomi.entities.mobs.marines;
+package xyz.pixelatedw.mineminenomi.entities.mobs.bandits;
 
 import javax.annotation.Nullable;
 
 import net.minecraft.entity.ILivingEntityData;
-import net.minecraft.entity.IRangedAttackMob;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.ai.goal.RangedAttackGoal;
+import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.entities.projectiles.extra.NormalBulletProjectile;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
-import xyz.pixelatedw.mineminenomi.init.ModWeapons;
-import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 
-public class EntityMarineWithGun extends EntityGenericMarine implements IRangedAttackMob
+public class BanditWithSwordEntity extends GenericBanditEntity
 {
-	public EntityMarineWithGun(World world)
+
+	public BanditWithSwordEntity(World world)
 	{
-		super(ModEntities.MARINE_WITH_GUN, world, new String[] {"marine1", "marine2", "marine3", "marine4", "marine5"});
+		super(ModEntities.BANDIT_WITH_SWORD, world, new String[] {"bandit1", "bandit2", "bandit3"});
 	}
 	
 	@Override
 	protected void registerGoals()
 	{
 		super.registerGoals();
-		this.goalSelector.addGoal(1, new RangedAttackGoal(this, 1.0D, 40, 15.0F));
+		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1, true));
 	}
 	
 	@Override
@@ -60,22 +55,9 @@ public class EntityMarineWithGun extends EntityGenericMarine implements IRangedA
 	{
 		spawnData = super.onInitialSpawn(world, difficulty, reason, spawnData, dataTag);
 		
-		this.setItemStackToSlot(EquipmentSlotType.MAINHAND, new ItemStack(ModWeapons.FLINTLOCK));
+		ItemStack randomSword = new ItemStack(this.banditSwords[this.rand.nextInt(this.banditSwords.length)]);
+		this.setItemStackToSlot(EquipmentSlotType.MAINHAND, randomSword);
 
 		return spawnData;
-	}
-
-	@Override
-	public void attackEntityWithRangedAttack(LivingEntity target, float distance)
-	{
-		AbilityProjectileEntity proj = new NormalBulletProjectile(this.world, this);
-		
-		double velX = target.posX - this.posX;
-		double velY = target.getBoundingBox().minY + this.getAttackTarget().getHeight() / 3.0F - (this.posY + this.getHeight());
-		double velZ = target.posZ - this.posZ;
-		double x = MathHelper.sqrt(velX * velX + velZ * velZ);
-		
-		proj.shoot(velX, velY + x * 0.2F, velZ, 1.6F, 14 - this.world.getDifficulty().getId() * 4);
-		this.world.addEntity(proj);
 	}
 }

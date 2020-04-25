@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.entities.mobs.marines;
+package xyz.pixelatedw.mineminenomi.entities.mobs.pirates;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
@@ -15,16 +15,16 @@ import net.minecraft.item.Items;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.entities.mobs.GenericNewEntity;
-import xyz.pixelatedw.mineminenomi.entities.mobs.bandits.EntityGenericBandit;
-import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityGenericPirate;
+import xyz.pixelatedw.mineminenomi.entities.mobs.bandits.GenericBanditEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.marines.GenericMarineEntity;
 import xyz.pixelatedw.mineminenomi.init.ModWeapons;
 
-public class EntityGenericMarine extends GenericNewEntity
+public class GenericPirateEntity extends GenericNewEntity
 {
 
-	protected Item[] marineSwords = new Item[] {ModWeapons.MARINE_SWORD, Items.IRON_SWORD};
+	protected Item[] pirateSwords = new Item[] {ModWeapons.PIRATE_CUTLASS, Items.IRON_SWORD};
 	
-	protected EntityGenericMarine(EntityType<? extends MobEntity> type, World worldIn, String[] textures)
+	protected GenericPirateEntity(EntityType<? extends MobEntity> type, World worldIn, String[] textures)
 	{
 		super(type, worldIn, textures);
 	}
@@ -38,8 +38,8 @@ public class EntityGenericMarine extends GenericNewEntity
 		this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
 
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
-		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityGenericPirate.class, true));
-		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityGenericBandit.class, true));
+		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, GenericMarineEntity.class, true));
+		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, GenericBanditEntity.class, true));
 		this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
 	}
 	

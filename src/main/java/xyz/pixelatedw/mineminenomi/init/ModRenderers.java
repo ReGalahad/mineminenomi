@@ -14,17 +14,17 @@ import xyz.pixelatedw.mineminenomi.blocks.tileentities.dials.MilkyDialTileEntity
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.dials.RejectDialTileEntity;
 import xyz.pixelatedw.mineminenomi.entities.VivreCardEntity;
 import xyz.pixelatedw.mineminenomi.entities.WantedPosterPackageEntity;
-import xyz.pixelatedw.mineminenomi.entities.mobs.bandits.EntityBanditWithSword;
-import xyz.pixelatedw.mineminenomi.entities.mobs.marines.EntityMarineCaptain;
-import xyz.pixelatedw.mineminenomi.entities.mobs.marines.EntityMarineWithGun;
-import xyz.pixelatedw.mineminenomi.entities.mobs.marines.EntityMarineWithSword;
+import xyz.pixelatedw.mineminenomi.entities.mobs.bandits.BanditWithSwordEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.marines.MarineCaptainEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.marines.MarineWithGunEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.marines.MarineWithSwordEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.BlackKnightEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.DoppelmanEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.TraderEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.WaxPlayerEntity;
-import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityPirateCaptain;
-import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityPirateWithGun;
-import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityPirateWithSword;
+import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.PirateCaptainEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.PirateWithGunEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.PirateWithSwordEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.quest.givers.BowMasterEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.quest.givers.DojoSenseiEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.quest.objectives.SniperTargetEntity;
@@ -70,17 +70,17 @@ public class ModRenderers
 
     	// Entities
     	// Marines
-		RenderingRegistry.registerEntityRenderingHandler(EntityMarineWithSword.class, new GenericMobRenderer.Factory(new SimpleHumanModel(), 1, null));
-		RenderingRegistry.registerEntityRenderingHandler(EntityMarineWithGun.class, new GenericMobRenderer.Factory(new SimpleHumanModel(), 1, null));
-		RenderingRegistry.registerEntityRenderingHandler(EntityMarineCaptain.class, new GenericMobRenderer.Factory(new SimpleHumanModel(), 1, null));
+		RenderingRegistry.registerEntityRenderingHandler(MarineWithSwordEntity.class, new GenericMobRenderer.Factory(new SimpleHumanModel(), 1, null));
+		RenderingRegistry.registerEntityRenderingHandler(MarineWithGunEntity.class, new GenericMobRenderer.Factory(new SimpleHumanModel(), 1, null));
+		RenderingRegistry.registerEntityRenderingHandler(MarineCaptainEntity.class, new GenericMobRenderer.Factory(new SimpleHumanModel(), 1, null));
 
 		// Pirates
-		RenderingRegistry.registerEntityRenderingHandler(EntityPirateWithSword.class, new GenericMobRenderer.Factory(new SimpleHumanModel(), 1, null));
-		RenderingRegistry.registerEntityRenderingHandler(EntityPirateWithGun.class, new GenericMobRenderer.Factory(new SimpleHumanModel(), 1, null));
-		RenderingRegistry.registerEntityRenderingHandler(EntityPirateCaptain.class, new GenericMobRenderer.Factory(new SimpleHumanModel(), 1, null));
+		RenderingRegistry.registerEntityRenderingHandler(PirateWithSwordEntity.class, new GenericMobRenderer.Factory(new SimpleHumanModel(), 1, null));
+		RenderingRegistry.registerEntityRenderingHandler(PirateWithGunEntity.class, new GenericMobRenderer.Factory(new SimpleHumanModel(), 1, null));
+		RenderingRegistry.registerEntityRenderingHandler(PirateCaptainEntity.class, new GenericMobRenderer.Factory(new SimpleHumanModel(), 1, null));
 
 		// Bandits
-		RenderingRegistry.registerEntityRenderingHandler(EntityBanditWithSword.class, new GenericMobRenderer.Factory(new SimpleHumanModel(), 1, null));
+		RenderingRegistry.registerEntityRenderingHandler(BanditWithSwordEntity.class, new GenericMobRenderer.Factory(new SimpleHumanModel(), 1, null));
 
 		// Factionless
 		RenderingRegistry.registerEntityRenderingHandler(DojoSenseiEntity.class, new GenericMobRenderer.Factory(new DojoSenseiModel(), 1, null));

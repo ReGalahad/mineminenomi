@@ -15,16 +15,16 @@ import net.minecraft.item.Items;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.entities.mobs.GenericNewEntity;
-import xyz.pixelatedw.mineminenomi.entities.mobs.marines.EntityGenericMarine;
-import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityGenericPirate;
+import xyz.pixelatedw.mineminenomi.entities.mobs.marines.GenericMarineEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.GenericPirateEntity;
 import xyz.pixelatedw.mineminenomi.init.ModWeapons;
 
-public class EntityGenericBandit extends GenericNewEntity
+public class GenericBanditEntity extends GenericNewEntity
 {
 
 	protected Item[] banditSwords = new Item[] {ModWeapons.BANDIT_KNIFE, ModWeapons.PIRATE_CUTLASS, Items.IRON_SWORD};
 	
-	protected EntityGenericBandit(EntityType<? extends MobEntity> type, World worldIn, String[] textures)
+	protected GenericBanditEntity(EntityType<? extends MobEntity> type, World worldIn, String[] textures)
 	{
 		super(type, worldIn, textures);
 	}
@@ -38,8 +38,8 @@ public class EntityGenericBandit extends GenericNewEntity
 		this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
 
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
-		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityGenericPirate.class, true));
-		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityGenericMarine.class, true));
+		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, GenericPirateEntity.class, true));
+		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, GenericMarineEntity.class, true));
 		this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
 	}
 	

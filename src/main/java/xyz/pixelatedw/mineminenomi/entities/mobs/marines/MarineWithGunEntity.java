@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.entities.mobs.pirates;
+package xyz.pixelatedw.mineminenomi.entities.mobs.marines;
 
 import javax.annotation.Nullable;
 
@@ -20,11 +20,11 @@ import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.mineminenomi.init.ModWeapons;
 import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 
-public class EntityPirateWithGun extends EntityGenericPirate implements IRangedAttackMob
+public class MarineWithGunEntity extends GenericMarineEntity implements IRangedAttackMob
 {
-	public EntityPirateWithGun(World world)
+	public MarineWithGunEntity(World world)
 	{
-		super(ModEntities.PIRATE_WITH_GUN, world, new String[] {"pirate1", "pirate2", "pirate3", "pirate4", "pirate5"});
+		super(ModEntities.MARINE_WITH_GUN, world, new String[] {"marine1", "marine2", "marine3", "marine4", "marine5"});
 	}
 	
 	@Override

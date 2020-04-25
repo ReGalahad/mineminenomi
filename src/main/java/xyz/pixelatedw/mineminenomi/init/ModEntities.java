@@ -9,17 +9,17 @@ import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.entities.PhysicalBodyEntity;
 import xyz.pixelatedw.mineminenomi.entities.VivreCardEntity;
 import xyz.pixelatedw.mineminenomi.entities.WantedPosterPackageEntity;
-import xyz.pixelatedw.mineminenomi.entities.mobs.bandits.EntityBanditWithSword;
-import xyz.pixelatedw.mineminenomi.entities.mobs.marines.EntityMarineCaptain;
-import xyz.pixelatedw.mineminenomi.entities.mobs.marines.EntityMarineWithGun;
-import xyz.pixelatedw.mineminenomi.entities.mobs.marines.EntityMarineWithSword;
+import xyz.pixelatedw.mineminenomi.entities.mobs.bandits.BanditWithSwordEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.marines.MarineCaptainEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.marines.MarineWithGunEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.marines.MarineWithSwordEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.BlackKnightEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.DoppelmanEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.TraderEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.WaxPlayerEntity;
-import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityPirateCaptain;
-import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityPirateWithGun;
-import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityPirateWithSword;
+import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.PirateCaptainEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.PirateWithGunEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.PirateWithSwordEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.quest.givers.BowMasterEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.quest.givers.DojoSenseiEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.quest.objectives.SniperTargetEntity;
@@ -32,17 +32,17 @@ public class ModEntities
 {
 	// Mobs
 	// Marines
-	public static final EntityType MARINE_WITH_SWORD = WyRegistry.createEntityType(EntityMarineWithSword::new).build("marine_with_sword");
-	public static final EntityType MARINE_WITH_GUN = WyRegistry.createEntityType(EntityMarineWithGun::new).build("marine_with_gun");
-	public static final EntityType MARINE_CAPTAIN = WyRegistry.createEntityType(EntityMarineCaptain::new).build("marine_captain");
+	public static final EntityType MARINE_WITH_SWORD = WyRegistry.createEntityType(MarineWithSwordEntity::new).build("marine_with_sword");
+	public static final EntityType MARINE_WITH_GUN = WyRegistry.createEntityType(MarineWithGunEntity::new).build("marine_with_gun");
+	public static final EntityType MARINE_CAPTAIN = WyRegistry.createEntityType(MarineCaptainEntity::new).build("marine_captain");
 
 	// Pirates
-	public static final EntityType PIRATE_WITH_SWORD = WyRegistry.createEntityType(EntityPirateWithSword::new).build("pirate_with_sword");
-	public static final EntityType PIRATE_WITH_GUN = WyRegistry.createEntityType(EntityPirateWithGun::new).build("pirate_with_gun");
-	public static final EntityType PIRATE_CAPTAIN = WyRegistry.createEntityType(EntityPirateCaptain::new).build("pirate_captain");
+	public static final EntityType PIRATE_WITH_SWORD = WyRegistry.createEntityType(PirateWithSwordEntity::new).build("pirate_with_sword");
+	public static final EntityType PIRATE_WITH_GUN = WyRegistry.createEntityType(PirateWithGunEntity::new).build("pirate_with_gun");
+	public static final EntityType PIRATE_CAPTAIN = WyRegistry.createEntityType(PirateCaptainEntity::new).build("pirate_captain");
 
 	// Bandits
-	public static final EntityType BANDIT_WITH_SWORD = WyRegistry.createEntityType(EntityBanditWithSword::new).build("bandit_with_sword");
+	public static final EntityType BANDIT_WITH_SWORD = WyRegistry.createEntityType(BanditWithSwordEntity::new).build("bandit_with_sword");
 
 	// Factionless
 	public static final EntityType DOJO_SENSEI = WyRegistry.createEntityType(DojoSenseiEntity::new).build("dojo_sensei");
