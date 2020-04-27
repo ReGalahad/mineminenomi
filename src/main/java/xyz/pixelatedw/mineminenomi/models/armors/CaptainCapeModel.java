@@ -107,8 +107,9 @@ public class CaptainCapeModel extends BipedModel
 	@Override
 	public void render(LivingEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
 	{
+		GlStateManager.pushMatrix();
 		this.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
-
+		
 		this.capeback.render(scale);
 		this.caperightsholder.render(scale);
 		this.capeleftcollar1.render(scale);
@@ -116,15 +117,14 @@ public class CaptainCapeModel extends BipedModel
 		this.caperightcollar2.render(scale);
 		this.capeleftsholder.render(scale);
 		this.caperightcollar1.render(scale);
+		GlStateManager.popMatrix();
 	}
 
 	@Override
 	public void setRotationAngles(LivingEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float headYaw, float headPitch, float scaleFactor)
 	{
 		if (entity.shouldRenderSneaking())
-		{
 			GlStateManager.rotatef(30.0F, 1.0F, 0.0F, 0.0F);
-		}
 
 		double dist = entity.getDistanceSq(entity.prevPosX, entity.prevPosY, entity.prevPosZ);
 		if(dist > 0 && dist <= 0.02)

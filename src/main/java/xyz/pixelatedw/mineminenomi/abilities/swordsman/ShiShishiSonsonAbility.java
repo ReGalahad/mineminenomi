@@ -6,6 +6,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.play.server.SAnimateHandPacket;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.server.ServerWorld;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
@@ -16,7 +17,7 @@ import xyz.pixelatedw.wypi.abilities.Ability;
 
 public class ShiShishiSonsonAbility extends Ability
 {
-	public static final Ability INSTANCE = new ShiShishiSonsonAbility();
+	public static final ShiShishiSonsonAbility INSTANCE = new ShiShishiSonsonAbility();
 
 	public ShiShishiSonsonAbility()
 	{
@@ -36,8 +37,8 @@ public class ShiShishiSonsonAbility extends Ability
 			return false;
 		}
 
-		double[] speed = WyHelper.propulsion(player, 3, 3);
-		player.setMotion(speed[0], 0.2, speed[2]);
+		Vec3d speed = WyHelper.propulsion(player, 3, 3);
+		player.setMotion(speed.x, 0.2, speed.z);
 		player.velocityChanged = true;
 		((ServerWorld) player.world).getChunkProvider().sendToTrackingAndSelf(player, new SAnimateHandPacket(player, 0));
 		
@@ -46,7 +47,7 @@ public class ShiShishiSonsonAbility extends Ability
 	
 	private void duringCooldown(PlayerEntity player, int cooldownTimer)
 	{
-		if (cooldownTimer > 6 * 20)
+		if (this.canDealDamage())
 		{
 			List<LivingEntity> list = WyHelper.getEntitiesNear(player.getPosition(), player.world, 1.6);
 			list.remove(player);
@@ -56,5 +57,15 @@ public class ShiShishiSonsonAbility extends Ability
 				entity.attackEntityFrom(DamageSource.causePlayerDamage(player), 10);
 			});
 		}
+	}
+	
+	// Cooldown = 8*20 = 160 
+	// Damage Frame = 6*20 = 120
+	// 160-120=40 ticks or 2 seconds of damage frames
+	public boolean canDealDamage()
+	{
+		if(this.cooldown > 6 * 20) 
+			return true;
+		return false;
 	}
 }

@@ -26,6 +26,7 @@ public class CommonConfig
 	// General
 	private EnumValue keepStatsAfterDeath;
 	private Map<String, ForgeConfigSpec.BooleanValue> statsToKeep;
+	private Map<String, ForgeConfigSpec.BooleanValue> cooldownVisual;
 	private List<String> bannedAbilities;
 
 	private BooleanValue logiaInvulnerability;
@@ -84,7 +85,7 @@ public class CommonConfig
 			this.devilFruitDropsFromLeaves = builder.comment("Allows Devil Fruits to drop from leaves; false by default").define("Devil Fruit drops from leaves", false);
 			this.extraHearts = builder.comment("Allows players to receive extra hearts based on their doriki; true by default").define("Extra Hearts", true);
 			this.mobRewards = builder.comment("Allows mobs to reward doriki, bounty or items; true by default").define("Mob Rewards", true);
-			this.griefing = builder.comment("Allows abilities to break or replace blocks, this will make some abilities completly useless; true by default").define("Griefing", true);
+			this.griefing = builder.comment("Allows abilities to break or replace blocks; if turned OFF it will make some abilities completly useless; true by default").define("Griefing", true);
 			this.animeScreaming = builder.comment("Will send a chat message to nearby players with the used ability's name; false by default").define("Anime Scream", false);
 			this.specialFlying = builder.comment("Allows Gasu Gasu no Mi, Moku Moku no Mi and Suna Suna no Mi users to fly, this option does not affect flying Zoans which will be able to fly regardless; false by default").define("Special Flying", false);
 			this.oneFruitPerWorld = builder.comment("Restricts the Devil Fruit spawns to only 1 of each type per world; false by default").define("One Devil Fruit per World", false);
@@ -109,6 +110,7 @@ public class CommonConfig
 			builder.comment("List with ability names that are banned, the names can be written in any case with or without spaces").defineList("Banned Abilities", this.bannedAbilities, bannedAbilitiesTest);
 			
 			this.keepStatsAfterDeath = builder.comment("Defines which logic to apply after a player's death \n NONE - nothing is kept \n AUTO (default) - only the faction/race/fighting style stats are kept \n FULL - everything is kept \n CUSTOM - will use the 'Stats to Keep' section to determine which stats to keep").defineEnum("Keep Stats after Death", KeepStatsLogic.AUTO, KeepStatsLogic.values());
+			
 			builder.push("Stats to Keep");
 			{
 				String[] statsToKeepNames = new String[] {"Doriki", "Bounty", "Belly", "Race", "Faction", "Fighting Style", "Devil Fruit"};
@@ -116,6 +118,16 @@ public class CommonConfig
 				
 				for(String stat : statsToKeepNames) 
 					this.statsToKeep.put(stat, builder.define(stat, true));
+			}
+			builder.pop();
+			
+			builder.push("Cooldown Visuals");
+			{
+				String[] cooldownVisuals = new String[] {"Text", "Color"};
+				this.cooldownVisual = new HashMap<String, ForgeConfigSpec.BooleanValue>();
+				
+				for(String mode : cooldownVisuals) 
+					this.cooldownVisual.put(mode, builder.define(mode, true));
 			}
 			builder.pop();
 
@@ -135,7 +147,7 @@ public class CommonConfig
 		builder.push("Quests");
 		
 		this.quests = builder.comment("Allows quests to be accepted / completed; true by default").define("Quests", true);
-		this.questProgression = builder.comment("Allows quests to reward players with abilities, otherwise all abilities will be unlocked from the beginning; true by default").define("Quest Progression", false);
+		this.questProgression = builder.comment("Allows quests to reward players with abilities, otherwise all abilities will be unlocked from the beginning; true by default").define("Quest Progression", true);
 		
 		builder.pop();
 		
@@ -158,6 +170,12 @@ public class CommonConfig
 		builder.pop();
 	}
 
+	public String[] getCooldownVisuals()
+	{
+		String[] newArray = new String[] {};
+		return this.cooldownVisual.keySet().toArray(newArray);
+	}
+	
 	public boolean getAnimeScreaming()
 	{
 		return this.animeScreaming.get();

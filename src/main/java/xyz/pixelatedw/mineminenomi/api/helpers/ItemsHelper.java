@@ -20,6 +20,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ShootableItem;
 import net.minecraft.item.SwordItem;
 import net.minecraft.item.UseAction;
 import net.minecraft.nbt.CompoundNBT;
@@ -99,8 +100,14 @@ public class ItemsHelper
 	}
 	
 	public static boolean isBow(ItemStack itemStack)
-	{	
+	{
+		if(itemStack.isEmpty())
+			return false;
+		
 		if (itemStack.getUseAction() == UseAction.BOW)
+			return true;
+		
+		if(itemStack.getItem() instanceof ShootableItem)
 			return true;
 		
 		return false;

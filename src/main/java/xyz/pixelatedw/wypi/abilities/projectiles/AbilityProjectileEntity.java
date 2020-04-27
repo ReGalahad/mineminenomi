@@ -14,6 +14,7 @@ import net.minecraft.network.play.server.SPlayEntityEffectPacket;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.tags.Tag;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.IndirectEntityDamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
@@ -146,8 +147,8 @@ public class AbilityProjectileEntity extends ThrowableEntity
 					AbilityProjectileEvents.Hit event = new AbilityProjectileEvents.Hit(this, hit);
 					if(MinecraftForge.EVENT_BUS.post(event))
 						return;
-
-					hitEntity.attackEntityFrom(DamageSource.causeMobDamage(this.getThrower()), this.damage);
+					
+					hitEntity.attackEntityFrom(this.causeAbilityProjectileDamage(), this.damage);
 						
 					if(this.withEffects.getEffects().length > 0)
 					{
@@ -180,6 +181,11 @@ public class AbilityProjectileEntity extends ThrowableEntity
 				}
 			}
 		}
+	}
+	
+	public DamageSource causeAbilityProjectileDamage()
+	{
+		return new IndirectEntityDamageSource("ability_projectile", this, this.getThrower()).setProjectile();
 	}
 	
 	@Override

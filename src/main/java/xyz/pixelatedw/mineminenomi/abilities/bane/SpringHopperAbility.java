@@ -3,6 +3,7 @@ package xyz.pixelatedw.mineminenomi.abilities.bane;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.play.server.SEntityVelocityPacket;
+import net.minecraft.util.math.Vec3d;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.Ability;
@@ -30,8 +31,8 @@ public class SpringHopperAbility extends ChargeableAbility
 	
 	private boolean onEndChargingEvent(PlayerEntity player)
 	{
-		double[] speed = WyHelper.propulsion(player, 5.5, 5.5);
-		player.setMotion(speed[0], 2.0, speed[2]);
+		Vec3d speed = WyHelper.propulsion(player, 5.5, 5.5);
+		player.setMotion(speed.x, 2.0, speed.z);
 
 		((ServerPlayerEntity)player).connection.sendPacket(new SEntityVelocityPacket(player));
 		return true;

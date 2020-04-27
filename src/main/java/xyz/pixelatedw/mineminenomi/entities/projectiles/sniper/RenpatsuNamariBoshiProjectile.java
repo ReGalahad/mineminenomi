@@ -6,15 +6,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.abilities.ExplosionAbility;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
-import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.common.CommonExplosionParticleEffect;
-import xyz.pixelatedw.mineminenomi.particles.effects.sniper.KemuriBoshiParticleEffect;
 import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 
 public class RenpatsuNamariBoshiProjectile extends AbilityProjectileEntity
-{
-	private static final ParticleEffect PARTICLES = new KemuriBoshiParticleEffect();
-	
+{	
 	public RenpatsuNamariBoshiProjectile(World world)
 	{
 		super(SniperProjectiles.RENPATSU_NAMARI_BOSHI, world);
@@ -48,6 +44,7 @@ public class RenpatsuNamariBoshiProjectile extends AbilityProjectileEntity
 		explosion.setFireAfterExplosion(false);
 		explosion.setSmokeParticles(new CommonExplosionParticleEffect(4));
 		explosion.setDamageEntities(true);
+		explosion.setDamageSource(this.causeAbilityProjectileDamage());
 		explosion.doExplosion();
 	}
 }

@@ -31,6 +31,7 @@ public class ModMain
 		WyRegistry.TILE_ENTITIES.register(modEventBus);
 		WyRegistry.EFFECTS.register(modEventBus);
 		WyRegistry.PARTICLE_TYPES.register(modEventBus);
+		WyRegistry.QUESTS.register(modEventBus);
 		
 		CommonConfig.init();
 	}

@@ -1,7 +1,6 @@
 package xyz.pixelatedw.mineminenomi.events.passives;
 
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -46,7 +45,6 @@ public class HumanPassiveEvents
 		PlayerEntity player = (PlayerEntity) event.getEntityLiving();
 		IEntityStats statsProps = EntityStatsCapability.get(player);
 		IAbilityData abilityProps = AbilityDataCapability.get(player);
-		DamageSource damageSource = event.getSource();
 		
 		if (!statsProps.isHuman())
 			return;

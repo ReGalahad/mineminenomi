@@ -31,8 +31,8 @@ import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
-import xyz.pixelatedw.mineminenomi.entities.mobs.marines.EntityGenericMarine;
-import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityGenericPirate;
+import xyz.pixelatedw.mineminenomi.entities.mobs.marines.GenericMarineEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.GenericPirateEntity;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.wypi.WyHelper;
 
@@ -134,7 +134,7 @@ public class BlackKnightEntity extends CreatureEntity
 			
 			IEntityStats ownerProps = EntityStatsCapability.get(owner);
 			IDevilFruit ownerDFProps = DevilFruitCapability.get(owner);		
-			List<LivingEntity> targetsList = this.isAggressive ? WyHelper.getEntitiesNear(this.getPosition(), this.world, 10, PlayerEntity.class, EntityGenericMarine.class, EntityGenericPirate.class, MonsterEntity.class) : !this.forcedTargets.isEmpty() ? this.forcedTargets : new ArrayList<LivingEntity>();
+			List<LivingEntity> targetsList = this.isAggressive ? WyHelper.getEntitiesNear(this.getPosition(), this.world, 10, PlayerEntity.class, GenericMarineEntity.class, GenericPirateEntity.class, MonsterEntity.class) : !this.forcedTargets.isEmpty() ? this.forcedTargets : new ArrayList<LivingEntity>();
 			LivingEntity target = null;
 
 			if(!ownerDFProps.getDevilFruit().equalsIgnoreCase("ito_ito"))
@@ -146,7 +146,7 @@ public class BlackKnightEntity extends CreatureEntity
 					targetsList.remove(owner);
 				
 				if(ownerProps.isMarine())
-					targetsList = targetsList.stream().filter(x -> !(x instanceof EntityGenericMarine)).collect(Collectors.toList());
+					targetsList = targetsList.stream().filter(x -> !(x instanceof GenericMarineEntity)).collect(Collectors.toList());
 								
 				target = targetsList.stream().findFirst().orElse(null);	
 			}

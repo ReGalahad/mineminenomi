@@ -207,25 +207,14 @@ public class WyHelper
 		}
 	}
 
-	public static double[] propulsion(LivingEntity entity, double extraVelX, double extraVelZ)
+	public static Vec3d propulsion(LivingEntity entity, double extraVelX, double extraVelZ)
 	{
 		return propulsion(entity, extraVelX, 0, extraVelZ);
 	}
 
-	public static double[] propulsion(LivingEntity entity, double extraVelX, double extraVelY, double extraVelZ)
+	public static Vec3d propulsion(LivingEntity entity, double extraVelX, double extraVelY, double extraVelZ)
 	{
-		double mX = entity.getLook(0).x;
-		double mZ = entity.getLook(0).z;
-		double mY = entity.getLook(0).y;
-		
-		mX *= extraVelX;
-		mY *= extraVelY;
-		mZ *= extraVelZ;
-		
-		return new double[]
-			{
-					mX, mY, mZ
-			};
+		return entity.getLook(1).mul(extraVelX, extraVelY, extraVelZ);
 	}
 
 	public static <T extends Entity> List<T> getEntitiesNear(BlockPos pos, World world, double radius)
@@ -482,21 +471,36 @@ public class WyHelper
 		GlStateManager.activeTexture(GLX.GL_TEXTURE0);
 	}
 
-	public static void drawCenteredString(String text, int x, int y, int color)
+	public static void drawStringWithBorder(FontRenderer font, String text, int posX, int posY, int color)
 	{
-		FontRenderer fontObj = Minecraft.getInstance().fontRenderer;
-		fontObj.drawStringWithShadow(text, x - fontObj.getStringWidth(text) / 2, y, color);
+		font.drawStringWithShadow(text, posX, posY - 1, 1);
+		font.drawStringWithShadow(text, posX, posY + 1, 1);
+		font.drawStringWithShadow(text, posX + 1, posY, 1);
+		font.drawStringWithShadow(text, posX - 1, posY, 1);
+		font.drawStringWithShadow(text, posX, posY, color);
 	}
-	
-	public static void drawStringWithBorder(String text, int posX, int posY, int color)
+
+	public static List<String> splitString(FontRenderer font, String text, int posX, int posY, int wrapWidth)
 	{
-		drawCenteredString(text	, posX		, posY - 1	, 1);
-		drawCenteredString(text	, posX		, posY + 1	, 1);
-		drawCenteredString(text	, posX + 1	, posY		, 1);
-		drawCenteredString(text	, posX - 1	, posY 		, 1);
-		drawCenteredString(text	, posX		, posY		, color);
+		while (text != null && text.endsWith("\n"))
+		{
+			text = text.substring(0, text.length() - 1);
+		}
+
+		List<String> newText = new ArrayList<String>();
+		for (String s : font.listFormattedStringToWidth(text, wrapWidth))
+		{
+			if (font.getBidiFlag())
+			{
+				int i = font.getStringWidth(font.bidiReorder(s));
+				posX += wrapWidth - i;
+			}
+
+			newText.add(s);
+		}
+		return newText;
 	}
-	
+
 	public static float handleRotationFloat(LivingEntity entity, float partialTicks)
     {
         return entity.ticksExisted + partialTicks;

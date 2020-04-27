@@ -17,8 +17,7 @@ import xyz.pixelatedw.wypi.abilities.Ability;
 public class OTatsumakiAbility extends Ability
 {
 	public static final Ability INSTANCE = new OTatsumakiAbility();
-
-	private static final ParticleEffect PARTICLES = new OTatsumakiParticleEffect();
+	public static final ParticleEffect PARTICLES = new OTatsumakiParticleEffect();
 	
 	public OTatsumakiAbility()
 	{

@@ -33,7 +33,6 @@ public class AbilityDataCapability
 	{
 		CapabilityManager.INSTANCE.register(IAbilityData.class, new Capability.IStorage<IAbilityData>()
 		{
-
 			@Override
 			public INBT writeNBT(Capability<IAbilityData> capability, IAbilityData instance, Direction side)
 			{
@@ -64,6 +63,7 @@ public class AbilityDataCapability
 							nbtAbility.putInt("pos", i);
 							nbtAbility.putString("state", ability.getState().toString());
 							nbtAbility.putDouble("cooldown", ability.getCooldown());
+							nbtAbility.putDouble("maxCooldown", ability.getMaxCooldown());
 							if(ability instanceof ContinuousAbility)
 								nbtAbility.putDouble("continueTimer", ((ContinuousAbility)ability).getContinueTime());
 							if(ability instanceof ChargeableAbility)
@@ -126,10 +126,12 @@ public class AbilityDataCapability
 								{
 									Ability.State state = Ability.State.valueOf(nbtAbility.getString("state"));
 									int cooldown = (int) (nbtAbility.getDouble("cooldown") / 20);
+									int maxCooldown = (int) (nbtAbility.getDouble("maxCooldown") / 20);
 									int pos = nbtAbility.getInt("pos");
 									if (state == null)
 										state = Ability.State.STANDBY;
 									abl.setState(state);
+									abl.setMaxCooldown(maxCooldown);
 									abl.setCooldown(cooldown);
 									if(ability instanceof ContinuousAbility)
 									{

@@ -33,9 +33,9 @@ import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
-import xyz.pixelatedw.mineminenomi.entities.mobs.bandits.EntityGenericBandit;
-import xyz.pixelatedw.mineminenomi.entities.mobs.marines.EntityGenericMarine;
-import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.EntityGenericPirate;
+import xyz.pixelatedw.mineminenomi.entities.mobs.bandits.GenericBanditEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.marines.GenericMarineEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.GenericPirateEntity;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.mineminenomi.init.ModItems;
 import xyz.pixelatedw.wypi.WyHelper;
@@ -60,9 +60,9 @@ public class DoppelmanEntity extends CreatureEntity
 		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1, true));
 		this.goalSelector.addGoal(3, new WaterAvoidingRandomWalkingGoal(this, 0.8D));
 		this.goalSelector.addGoal(5, new LookAtGoal(this, PlayerEntity.class, 8.0F));
-		this.goalSelector.addGoal(5, new LookAtGoal(this, EntityGenericMarine.class, 8.0F));
-		this.goalSelector.addGoal(5, new LookAtGoal(this, EntityGenericPirate.class, 8.0F));
-		this.goalSelector.addGoal(5, new LookAtGoal(this, EntityGenericBandit.class, 8.0F));
+		this.goalSelector.addGoal(5, new LookAtGoal(this, GenericMarineEntity.class, 8.0F));
+		this.goalSelector.addGoal(5, new LookAtGoal(this, GenericPirateEntity.class, 8.0F));
+		this.goalSelector.addGoal(5, new LookAtGoal(this, GenericBanditEntity.class, 8.0F));
 		this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
 
 		this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
@@ -142,7 +142,7 @@ public class DoppelmanEntity extends CreatureEntity
 			
 			IEntityStats ownerProps = EntityStatsCapability.get(this.getOwner());
 			IDevilFruit ownerDFProps = DevilFruitCapability.get(this.getOwner());		
-			List<LivingEntity> doppelmanAttackList = this.isAggressive ? WyHelper.getEntitiesNear(this.getPosition(), this.world, 10, PlayerEntity.class, EntityGenericMarine.class, EntityGenericPirate.class, MonsterEntity.class) : !forcedTargets.isEmpty() ? forcedTargets : new ArrayList<LivingEntity>();
+			List<LivingEntity> doppelmanAttackList = this.isAggressive ? WyHelper.getEntitiesNear(this.getPosition(), this.world, 10, PlayerEntity.class, GenericMarineEntity.class, GenericPirateEntity.class, MonsterEntity.class) : !forcedTargets.isEmpty() ? forcedTargets : new ArrayList<LivingEntity>();
 			LivingEntity target = null;
 
 			if(!ownerDFProps.getDevilFruit().equalsIgnoreCase("kage_kage"))
@@ -154,7 +154,7 @@ public class DoppelmanEntity extends CreatureEntity
 					doppelmanAttackList.remove(this.getOwner());
 				
 				if(ownerProps.isMarine())
-					doppelmanAttackList = doppelmanAttackList.stream().filter(x -> !(x instanceof EntityGenericMarine)).collect(Collectors.toList());
+					doppelmanAttackList = doppelmanAttackList.stream().filter(x -> !(x instanceof GenericMarineEntity)).collect(Collectors.toList());
 								
 				target = doppelmanAttackList.stream().findFirst().orElse(null);	
 			}

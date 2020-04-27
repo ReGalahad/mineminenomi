@@ -1,6 +1,8 @@
 package xyz.pixelatedw.mineminenomi.events;
 
 import java.awt.Color;
+import java.util.Arrays;
+import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
@@ -61,7 +63,7 @@ public class CombatModeEvents
 			double maxHealth = player.getAttribute(SharedMonsterAttributes.MAX_HEALTH).getValue();
 			double health = player.getHealth();
 
-			WyHelper.drawCenteredString((int) health + "", posX / 2 - 20, posY - 39, Color.RED.getRGB());
+			WyHelper.drawStringWithBorder(Minecraft.getInstance().fontRenderer, (int) health + "", posX / 2 - 27, posY - 39, Color.RED.getRGB());
 
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
@@ -87,6 +89,11 @@ public class CombatModeEvents
 		
 		if (event.getType() == ElementType.HOTBAR)
 		{
+			List<String> visuals = Arrays.asList(CommonConfig.instance.getCooldownVisuals());
+
+			boolean hasNumberVisual = visuals.contains("Text");
+			boolean hasColorVisual = visuals.contains("Color");
+
 			event.setCanceled(true);
 			GlStateManager.pushMatrix();	
 			{
@@ -105,15 +112,30 @@ public class CombatModeEvents
 						continue;
 					}
 					
+					String number = "";
+										
 					float cooldown = 23 - (float) (((abl.getCooldown() - 10) / abl.getMaxCooldown()) * 23);
 					float threshold = 23;
 					float charge = 23;
 					
+					if(abl.isOnCooldown() && abl.getCooldown() - 10 > 0)
+						number = (int) abl.getCooldown() - 10 + " ";
+					
 					if(abl instanceof ContinuousAbility)
-						threshold = (((ContinuousAbility)abl).getContinueTime() / (float) ((ContinuousAbility)abl).getThreshold()) * 23;
+					{
+						ContinuousAbility cAbility = (ContinuousAbility)abl;
+						threshold = cAbility.getContinueTime() / (float) cAbility.getThreshold() * 23;
+						if(cAbility.getThreshold() > 0 && abl.isContinuous() && cAbility.getContinueTime() > 0)
+							number = cAbility.getThreshold() - cAbility.getContinueTime() + " ";
+					}
 				
 					if(abl instanceof ChargeableAbility)
-						charge = (((ChargeableAbility)abl).getChargeTime() / (float) ((ChargeableAbility)abl).getMaxChargeTime()) * 23;
+					{
+						ChargeableAbility cAbility = (ChargeableAbility)abl;
+						charge = cAbility.getChargeTime() / (float) cAbility.getMaxChargeTime() * 23;
+						if(abl.isCharging() && cAbility.getChargeTime() > 0)
+							number = cAbility.getChargeTime() + " ";
+					}
 
 					// Setting their color based on their state
 					if (abl.isOnCooldown() && !abl.isDisabled() && abl.getCooldown() > 10)
@@ -131,37 +153,40 @@ public class CombatModeEvents
 					GlStateManager.color4f(1, 1, 1, 1);
 
 					// Setting up addition effects based on the ability's state
-					if (abl.isDisabled())
+					if(hasColorVisual)
 					{
-						RendererHelper.drawAbilityIcon("disabled_status", (posX - 192 + (i * 50)) / 2, posY - 19, 3, 16, 16);
-						mc.getTextureManager().bindTexture(ModResources.WIDGETS);
-					}
-					else if(abl.isContinuous())
-					{
-						GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 24, 0, 23, (int) threshold, 0);
-					}
-					else if(abl.isCharging())
-					{
-						GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 24, 0, 23, (int) charge, 0);
-					}
-					else if(abl.isOnCooldown() && !abl.isDisabled())
-					{
-						GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 24, 0, 23, (int) cooldown, 0);
-						
-						if(abl.getCooldown() < 10)
+						if (abl.isDisabled())
 						{
-							// Ready animation
-							GlStateManager.pushMatrix();
+							RendererHelper.drawAbilityIcon("disabled_status", (posX - 192 + (i * 50)) / 2, posY - 19, 3, 16, 16);
+							mc.getTextureManager().bindTexture(ModResources.WIDGETS);
+						}
+						else if(abl.isContinuous())
+						{
+							GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 24, 0, 23, (int) threshold, 0);
+						}
+						else if(abl.isCharging())
+						{
+							GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 24, 0, 23, (int) charge, 0);
+						}
+						else if(abl.isOnCooldown() && !abl.isDisabled())
+						{
+							GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 24, 0, 23, (int) cooldown, 0);
+							
+							if(abl.getCooldown() < 10)
 							{
-								double scale = 2.5 - (abl.getCooldown() / 10.0);
-								GlStateManager.color4f(0.2f, 0.8f, 0.4f, (float)(abl.getCooldown() / 10));
-								GlStateManager.translated((posX - 200 + (i * 50)) / 2, posY - 23, 1);
-								GlStateManager.translated(12, 12, 0);
-								GlStateManager.scaled(scale, scale, 1);
-								GlStateManager.translated(-12, -12, 0);
-								GuiUtils.drawTexturedModalRect(0, 0, 0, 0, 23, 23, -1);							
+								// Ready animation
+								GlStateManager.pushMatrix();
+								{
+									double scale = 2.5 - (abl.getCooldown() / 10.0);
+									GlStateManager.color4f(0.2f, 0.8f, 0.4f, (float)(abl.getCooldown() / 10));
+									GlStateManager.translated((posX - 200 + (i * 50)) / 2, posY - 23, 1);
+									GlStateManager.translated(12, 12, 0);
+									GlStateManager.scaled(scale, scale, 1);
+									GlStateManager.translated(-12, -12, 0);
+									GuiUtils.drawTexturedModalRect(0, 0, 0, 0, 23, 23, -1);							
+								}
+								GlStateManager.popMatrix();
 							}
-							GlStateManager.popMatrix();
 						}
 					}
 					
@@ -169,8 +194,11 @@ public class CombatModeEvents
 					GlStateManager.color4f(1, 1, 1, 1);
 										
 					// Drawing the ability icons
-					RendererHelper.drawAbilityIcon(WyHelper.getResourceName(abl.getName()), (posX - 192 + (i * 50)) / 2, posY - 19, 16, 16);
-					mc.getTextureManager().bindTexture(ModResources.WIDGETS);								
+					RendererHelper.drawAbilityIcon(WyHelper.getResourceName(abl.getName()), (posX - 192 + (i * 50)) / 2, posY - 19, 16, 16);	
+					GlStateManager.translated(0, 0, 2);
+					if(hasNumberVisual)
+						WyHelper.drawStringWithBorder(mc.fontRenderer, number, (posX - 172 + (i * 50)) / 2 - mc.fontRenderer.getStringWidth(number) / 2, posY - 14, WyHelper.hexToRGB("#FFFFFF").getRGB());
+					mc.getTextureManager().bindTexture(ModResources.WIDGETS);
 				}
 				
 				GlStateManager.disableBlend();

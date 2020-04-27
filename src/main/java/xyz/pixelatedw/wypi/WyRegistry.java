@@ -25,6 +25,8 @@ import xyz.pixelatedw.wypi.json.models.JSONModelItem;
 import xyz.pixelatedw.wypi.json.models.block.JSONModelSimpleBlock;
 import xyz.pixelatedw.wypi.json.models.item.JSONModelSimpleItem;
 import xyz.pixelatedw.wypi.json.models.item.JSONModelSpawnEgg;
+import xyz.pixelatedw.wypi.quests.Quest;
+import xyz.pixelatedw.wypi.quests.objectives.Objective;
 
 public class WyRegistry
 {
@@ -69,6 +71,7 @@ public class WyRegistry
 	public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = new DeferredRegister<>(ForgeRegistries.ENTITIES, APIConfig.PROJECT_ID);
 	public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES = new DeferredRegister<>(ForgeRegistries.TILE_ENTITIES, APIConfig.PROJECT_ID);
 	public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES = new DeferredRegister<>(ForgeRegistries.PARTICLE_TYPES, APIConfig.PROJECT_ID);
+	public static final DeferredRegister<Quest> QUESTS = new DeferredRegister<>(APIRegistries.QUESTS, APIConfig.PROJECT_ID);
 
 	/*
 	 * Register Helpers
@@ -102,6 +105,21 @@ public class WyRegistry
 		return effect;
 	}
 
+	public static Quest registerQuest(Quest quest)
+	{
+		String resourceName = WyHelper.getResourceName(quest.getId());
+		langMap.put("quest." + APIConfig.PROJECT_ID + "." + resourceName, quest.getTitle());
+
+		for(Objective obj : quest.getObjectives())
+		{
+			langMap.put("quest.objective." + APIConfig.PROJECT_ID + "." + obj.getId(), obj.getTitle());
+		}
+		
+		QUESTS.register(resourceName, () -> quest);
+
+		return quest;
+	}
+	
 	public static Ability registerAbility(Ability ability)
 	{
 		String resourceName = WyHelper.getResourceName(ability.getName());
