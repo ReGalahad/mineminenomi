@@ -9,7 +9,15 @@ import javax.annotation.Nullable;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.ILivingEntityData;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.ai.goal.HurtByTargetGoal;
+import net.minecraft.entity.ai.goal.LookAtGoal;
+import net.minecraft.entity.ai.goal.LookRandomlyGoal;
+import net.minecraft.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
+import net.minecraft.entity.ai.goal.SwimGoal;
+import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -27,10 +35,13 @@ import net.minecraft.world.storage.loot.LootParameterSets;
 import net.minecraft.world.storage.loot.LootTable;
 import net.minecraftforge.registries.ForgeRegistries;
 import xyz.pixelatedw.mineminenomi.entities.mobs.GenericNewEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.bandits.GenericBanditEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.GenericPirateEntity;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.mineminenomi.init.ModItems;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.screens.TraderScreen;
+import xyz.pixelatedw.wypi.WyHelper;
 
 public class TraderEntity extends GenericNewEntity {
 
@@ -40,13 +51,35 @@ public class TraderEntity extends GenericNewEntity {
 	public static List<Item> DISPOSABLES = new ArrayList<Item>(Arrays.asList(ModItems.BULLET, ModItems.KAIROSEKI_BULLET,
 			ModItems.BLACK_METAL, ModItems.COLA, ModItems.DENSE_KAIROSEKI, ModItems.KAIROSEKI, ModItems.KUJA_ARROW,
 			ModItems.ULTRA_COLA, ModItems.BUBBLY_CORAL));
-
+    public static String[] FACTIONS = new String[] {"pirate","marine", "bountyhunter"};
 	public TraderEntity(World worldIn) {
 		super(ModEntities.TRADER, worldIn, null);
 
 		this.textures = new String[] { "weapontrader", "dialtrader", "clothingtrader", "resourcetrader" };
 
 	}
+
+	@Override
+	protected void registerGoals()
+	{
+		super.registerGoals();
+		this.goalSelector.addGoal(1, new SwimGoal(this));
+		this.goalSelector.addGoal(3, new WaterAvoidingRandomWalkingGoal(this, 0.8D));
+		this.goalSelector.addGoal(5, new LookAtGoal(this, PlayerEntity.class, 8.0F));
+		this.goalSelector.addGoal(5, new LookRandomlyGoal(this));	
+		
+	}
+	
+	@Override
+	protected void registerAttributes()
+	{
+		super.registerAttributes();
+		this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(25.0D);
+		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.20F);
+		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
+		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40.0D);
+		this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
+		}
 
 	@Override
 	protected void registerData() {
@@ -74,7 +107,7 @@ public class TraderEntity extends GenericNewEntity {
 		Iterator<String> iterator = nbt.keySet().iterator();
 		while (iterator.hasNext()) {
 			String str = iterator.next();
-			if (!str.contains("price") && !str.contains("isopened")) {
+			if (!str.contains("price") && !str.contains("isopened") && !str.contains("faction")) {
 				iterator.remove();
 			}
 		}
@@ -82,8 +115,9 @@ public class TraderEntity extends GenericNewEntity {
 	}
 
 	public CompoundNBT getNBT() {
-		return this.getDataManager().get(ITEMS);
+		CompoundNBT nbt =  this.getDataManager().get(ITEMS);
 
+		return nbt;
 	}
 	
 	public void setIsOpened(CompoundNBT nbt, boolean bool) {
@@ -94,6 +128,16 @@ public class TraderEntity extends GenericNewEntity {
 	public boolean getIsOpened() {
 		CompoundNBT nbt = this.getNBT();
 		return nbt.getBoolean("isopened");
+	}
+	public void setFaction(CompoundNBT nbt, String fac) {
+		nbt.remove("faction");
+		nbt.putString("faction", fac);
+		System.out.println("bruh");
+	}
+	
+	public String getFaction() {
+		CompoundNBT nbt = this.getNBT();
+	return	nbt.getString("faction");
 	}
 	public void setNBT(CompoundNBT val) {
 		this.getDataManager().set(ITEMS, val);
@@ -162,7 +206,6 @@ public class TraderEntity extends GenericNewEntity {
 			}
 
 		}
-		System.out.println("yuh");
 	}
 
 	public boolean checkForDuplicate(List<ItemStack> stacks) {
@@ -196,6 +239,10 @@ public class TraderEntity extends GenericNewEntity {
 
 		if (this.STACKS.isEmpty()) {
 			this.generate();
+		}
+		int rand = (int) WyHelper.randomWithRange(1, 10);
+		if(rand < 4) {
+			this.setFaction(this.getNBT(), FACTIONS[rand - 1]);
 		}
 
 		return spawnData;

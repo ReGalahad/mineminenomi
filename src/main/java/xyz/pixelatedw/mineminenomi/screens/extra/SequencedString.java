@@ -1,9 +1,11 @@
 package xyz.pixelatedw.mineminenomi.screens.extra;
 
 import java.awt.Color;
+import java.util.List;
 
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.util.math.MathHelper;
+import xyz.pixelatedw.wypi.WyHelper;
 
 public class SequencedString {
 
@@ -36,12 +38,16 @@ public class SequencedString {
 	public void render() {
 		String tempStr = "";
 		for(int i = 0; i < chars.length; i++) {
-			int yLevel = posY + 8 * this.getLevel(i);
 			if(this.ticksExisted >= this.calculateTicksNeeded(i) && this.ticksExisted < this.delayTicks) {
 				tempStr = tempStr + chars[i];
 			}
-			parent.drawString(parent.getMinecraft().fontRenderer, tempStr, this.posX, yLevel, color);
 		}
+		List<String> strings = WyHelper.splitString(parent.getMinecraft().fontRenderer, tempStr, this.posX, 0, maxLength);
+		for(int b = 0; b < strings.size(); b++) {
+			parent.drawString(parent.getMinecraft().fontRenderer, strings.get(b), this.posX, posY + 10 * b, color);
+
+		}
+
 		
 			this.ticksExisted++;
 		
