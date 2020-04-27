@@ -156,6 +156,7 @@ public class WantedPosterBlock extends Block
 		}
 		else
 		{
+			//lol
 			System.out.println("TEST");
 		}
 

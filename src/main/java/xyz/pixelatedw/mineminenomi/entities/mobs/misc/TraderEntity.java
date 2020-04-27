@@ -1,6 +1,7 @@
 package xyz.pixelatedw.mineminenomi.entities.mobs.misc;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -27,6 +28,7 @@ import net.minecraft.world.storage.loot.LootTable;
 import net.minecraftforge.registries.ForgeRegistries;
 import xyz.pixelatedw.mineminenomi.entities.mobs.GenericNewEntity;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
+import xyz.pixelatedw.mineminenomi.init.ModItems;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.screens.TraderScreen;
 
@@ -35,6 +37,9 @@ public class TraderEntity extends GenericNewEntity {
 	private static final DataParameter<CompoundNBT> ITEMS = EntityDataManager.createKey(TraderEntity.class,
 			DataSerializers.COMPOUND_NBT);
 	public List<ItemStack> STACKS = new ArrayList<ItemStack>();
+	public static List<Item> DISPOSABLES = new ArrayList<Item>(Arrays.asList(ModItems.BULLET, ModItems.KAIROSEKI_BULLET,
+			ModItems.BLACK_METAL, ModItems.COLA, ModItems.DENSE_KAIROSEKI, ModItems.KAIROSEKI, ModItems.KUJA_ARROW,
+			ModItems.ULTRA_COLA, ModItems.BUBBLY_CORAL));
 
 	public TraderEntity(World worldIn) {
 		super(ModEntities.TRADER, worldIn, null);
@@ -52,6 +57,7 @@ public class TraderEntity extends GenericNewEntity {
 	@Override
 	public void writeAdditional(CompoundNBT nbt) {
 		super.writeAdditional(nbt);
+		this.updateNbtFromStacks(false);
 		nbt.put("itemstacks", this.getNBT());
 
 	}
@@ -64,46 +70,60 @@ public class TraderEntity extends GenericNewEntity {
 	}
 
 	public CompoundNBT clear(CompoundNBT nbt) {
-		
+
 		Iterator<String> iterator = nbt.keySet().iterator();
-		while(iterator.hasNext()) {
+		while (iterator.hasNext()) {
 			String str = iterator.next();
-			iterator.remove();
+			if (!str.contains("price") && !str.contains("isopened")) {
+				iterator.remove();
+			}
 		}
 		return nbt;
 	}
 
 	public CompoundNBT getNBT() {
-		CompoundNBT nbt = this.getDataManager().get(ITEMS);
-		this.clear(nbt);
-		for (ItemStack stack : this.STACKS) {
-
-			nbt.putInt(stack.getItem().getRegistryName().getPath(), stack.getCount());
-
-		}
 		return this.getDataManager().get(ITEMS);
 
 	}
+	
+	public void setIsOpened(CompoundNBT nbt, boolean bool) {
+		nbt.remove("isopened");
+		nbt.putBoolean("isopened", bool);
+	}
 
+	public boolean getIsOpened() {
+		CompoundNBT nbt = this.getNBT();
+		return nbt.getBoolean("isopened");
+	}
 	public void setNBT(CompoundNBT val) {
 		this.getDataManager().set(ITEMS, val);
 		this.setStacksFromNBT(this.getNBT());
+	}
+
+	public void setPrice(ItemStack stack, int price) {
+		this.getNBT().remove(stack.getItem().getRegistryName().getPath() + "price");
+		this.getNBT().putInt(stack.getItem().getRegistryName().getPath() + "price", price);
+	}
+
+	public int getPrice(ItemStack stack) {
+		return this.getNBT().getInt(stack.getItem().getRegistryName().getPath() + "price");
 	}
 
 	public void setStacksFromNBT(CompoundNBT nbt) {
 
 		this.STACKS.clear();
 		for (Item item : ForgeRegistries.ITEMS.getValues()) {
-			if (nbt.contains(item.getRegistryName().getPath())) {
+			if (nbt.contains(item.getRegistryName().getPath()) && nbt.getInt(item.getRegistryName().getPath()) > 0) {
 				ItemStack stack = new ItemStack(item);
 				stack.setCount(nbt.getInt(item.getRegistryName().getPath()));
-				this.STACKS.add(new ItemStack(item));
+				this.STACKS.add(stack);
 			}
 		}
 	}
+
 	public void changeStackCount(ItemStack stack, int newCount) {
-		for(ItemStack tempStack : this.STACKS) {
-			if(tempStack.getItem() == stack.getItem()) {
+		for (ItemStack tempStack : this.STACKS) {
+			if (tempStack.getItem() == stack.getItem()) {
 				tempStack.setCount(newCount);
 				break;
 			}
@@ -124,9 +144,25 @@ public class TraderEntity extends GenericNewEntity {
 
 			} else {
 				this.STACKS = stacks;
+				this.updateNbtFromStacks(true);
 			}
 
 		}
+	}
+
+	public void updateNbtFromStacks(boolean initialUpdate) {
+		CompoundNBT nbt = this.getNBT();
+		this.clear(nbt);
+		for (ItemStack stack : this.STACKS) {
+
+			nbt.putInt(stack.getItem().getRegistryName().getPath(), stack.getCount());
+
+			if (initialUpdate) {
+				this.setPrice(stack, stack.getTag().getInt("price"));
+			}
+
+		}
+		System.out.println("yuh");
 	}
 
 	public boolean checkForDuplicate(List<ItemStack> stacks) {
@@ -141,28 +177,51 @@ public class TraderEntity extends GenericNewEntity {
 		}
 		return false;
 	}
+
+	// Gui Helper Method
+	public ItemStack getStackFromPath(String path) {
+		for (ItemStack stack : this.STACKS) {
+			if (stack.getItem().getRegistryName().getPath() == path) {
+				return stack;
+			}
+		}
+		return ItemStack.EMPTY;
+	}
+
 	@Override
 	@Nullable
-	public ILivingEntityData onInitialSpawn(IWorld world, DifficultyInstance difficulty, SpawnReason reason, @Nullable ILivingEntityData spawnData, @Nullable CompoundNBT dataTag) 
-	{
+	public ILivingEntityData onInitialSpawn(IWorld world, DifficultyInstance difficulty, SpawnReason reason,
+			@Nullable ILivingEntityData spawnData, @Nullable CompoundNBT dataTag) {
 		spawnData = super.onInitialSpawn(world, difficulty, reason, spawnData, dataTag);
-		
-	
-		this.generate();
-		
+
+		if (this.STACKS.isEmpty()) {
+			this.generate();
+		}
+
 		return spawnData;
 	}
 
 	@Override
-	   protected boolean processInteract(PlayerEntity player, Hand hand) {
-	      if(world.isRemote()) {
-	    	  if(Minecraft.getInstance().currentScreen == null) {
-	    	  Minecraft.getInstance().displayGuiScreen(new TraderScreen(this));
-	    	  return true;
-	    	  }
-	      }
+	protected boolean processInteract(PlayerEntity player, Hand hand) {
+		if (world.isRemote()) {
+			if (!this.getIsOpened()) {
+				if (Minecraft.getInstance().currentScreen == null) {
+					Minecraft.getInstance().displayGuiScreen(new TraderScreen(this, player));
+					this.setIsOpened(this.getNBT(), true);
+					return true;
+				}
+			}
+		}
 		return false;
-	   }
+	}
 
-	
+	public void removeStackFromList(ItemStack stack) {
+		for (int i = 0; i < this.STACKS.size(); i++) {
+			if (this.STACKS.get(i).getItem() == stack.getItem()) {
+				this.STACKS.remove(i);
+			}
+		}
+	}
+
+
 }
