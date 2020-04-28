@@ -2,6 +2,9 @@ package xyz.pixelatedw.mineminenomi.init;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biomes;
+import net.minecraft.world.biome.Biome.SpawnListEntry;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -48,7 +51,7 @@ public class ModEntities
 	public static final EntityType DOJO_SENSEI = WyRegistry.createEntityType(DojoSenseiEntity::new).build("dojo_sensei");
 	public static final EntityType BOW_MASTER = WyRegistry.createEntityType(BowMasterEntity::new).build("bow_master");
     public static final EntityType TRADER = WyRegistry.createEntityType(TraderEntity::new).build("trader");
-    
+   
 	// Other
 	public static final EntityType DOPPELMAN = WyRegistry.createEntityType(DoppelmanEntity::new).build("doppelman");
 	public static final EntityType WAX_PLAYER = WyRegistry.createEntityType(WaxPlayerEntity::new).build("wax_player");
@@ -77,7 +80,7 @@ public class ModEntities
 		registerFactionlessWithSpawnEgg(DOJO_SENSEI, "Dojo Sensei");
 		registerFactionlessWithSpawnEgg(BOW_MASTER, "Bow Master");
 		registerFactionlessWithSpawnEgg(TRADER, "Trader");
-
+        registerEntityWorldSpawn(TRADER, 2, 1, Biomes.PLAINS, Biomes.FOREST, Biomes.JUNGLE, Biomes.DESERT, Biomes.BEACH, Biomes.MOUNTAINS);
 		// Other
 		WyRegistry.registerEntityType(DOPPELMAN, "Doppelman");
 		WyRegistry.registerEntityType(WAX_PLAYER, "Wax Player");
@@ -88,6 +91,14 @@ public class ModEntities
 		WyRegistry.registerEntityType(SNIPER_TARGET, "Sniper Target");
 	}
 
+	  public static void registerEntityWorldSpawn(EntityType<?> type, int weight, int maxGroup, Biome... biomes) {
+		  for(Biome biome : biomes) {
+			  if(biome != null) {
+				  biome.getSpawns(type.getClassification()).add(new SpawnListEntry(type, weight, 1, maxGroup));
+				  
+			  }
+		  }
+	  }
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void onPostRegisterEntities(final RegistryEvent.Register<EntityType<?>> event)
 	{

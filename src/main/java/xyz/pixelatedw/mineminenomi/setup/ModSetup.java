@@ -10,6 +10,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import xyz.pixelatedw.mineminenomi.data.functions.RandomWantedPosterLootFunction;
+import xyz.pixelatedw.mineminenomi.data.functions.SetPriceFunction;
 import xyz.pixelatedw.mineminenomi.init.ModArmors;
 import xyz.pixelatedw.mineminenomi.init.ModCapabilities;
 import xyz.pixelatedw.mineminenomi.init.ModFeatures;
@@ -31,7 +32,8 @@ public class ModSetup
 		ModNetwork.init();
 		
 		ModFeatures.init();
-		LootFunctionManager.registerFunction(new RandomWantedPosterLootFunction.Serializer());		
+		LootFunctionManager.registerFunction(new RandomWantedPosterLootFunction.Serializer());
+		LootFunctionManager.registerFunction(new SetPriceFunction.Serializer());
 	}
 	
 	@OnlyIn(Dist.CLIENT)
