@@ -5,13 +5,11 @@ import net.minecraft.item.IDyeableArmorItem;
 import net.minecraft.world.storage.loot.functions.LootFunctionManager;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import xyz.pixelatedw.mineminenomi.data.functions.RandomWantedPosterLootFunction;
-import xyz.pixelatedw.mineminenomi.events.CombatModeEvents;
 import xyz.pixelatedw.mineminenomi.init.ModArmors;
 import xyz.pixelatedw.mineminenomi.init.ModCapabilities;
 import xyz.pixelatedw.mineminenomi.init.ModFeatures;
@@ -48,8 +46,6 @@ public class ModSetup
 				
 		// Renderers
 		ModRenderers.registerRenderers();
-		
-		MinecraftForge.EVENT_BUS.register(new CombatModeEvents());
 
 		WyJSON.runGenerators(false);
 		
