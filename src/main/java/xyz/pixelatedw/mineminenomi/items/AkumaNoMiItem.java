@@ -19,7 +19,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.EnumFruitType;
+import xyz.pixelatedw.mineminenomi.api.EnumFruitType;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;

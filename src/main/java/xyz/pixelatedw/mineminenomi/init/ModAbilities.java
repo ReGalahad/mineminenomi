@@ -1,7 +1,6 @@
 package xyz.pixelatedw.mineminenomi.init;
 
 import net.minecraftforge.fml.common.Mod;
-import xyz.pixelatedw.mineminenomi.EnumFruitType;
 import xyz.pixelatedw.mineminenomi.abilities.ZoomAbility;
 import xyz.pixelatedw.mineminenomi.abilities.baku.BakuMunchAbility;
 import xyz.pixelatedw.mineminenomi.abilities.baku.BakuTsuihoAbility;
@@ -168,6 +167,7 @@ import xyz.pixelatedw.mineminenomi.abilities.zushi.AbareHimatsuriAbility;
 import xyz.pixelatedw.mineminenomi.abilities.zushi.JigokuTabiAbility;
 import xyz.pixelatedw.mineminenomi.abilities.zushi.MokoAbility;
 import xyz.pixelatedw.mineminenomi.abilities.zushi.SagariNoRyuseiAbility;
+import xyz.pixelatedw.mineminenomi.api.EnumFruitType;
 import xyz.pixelatedw.mineminenomi.items.AkumaNoMiItem;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.APIRegistries;

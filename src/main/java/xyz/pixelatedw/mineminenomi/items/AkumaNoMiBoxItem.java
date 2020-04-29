@@ -12,7 +12,7 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.EnumFruitType;
+import xyz.pixelatedw.mineminenomi.api.EnumFruitType;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
