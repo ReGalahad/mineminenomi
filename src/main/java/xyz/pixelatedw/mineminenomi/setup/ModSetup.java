@@ -1,6 +1,7 @@
 package xyz.pixelatedw.mineminenomi.setup;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.item.IDyeableArmorItem;
 import net.minecraft.world.storage.loot.functions.LootFunctionManager;
 import net.minecraftforge.api.distmarker.Dist;
@@ -9,15 +10,18 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import xyz.pixelatedw.mineminenomi.data.functions.RandomWantedPosterLootFunction;
+import xyz.pixelatedw.mineminenomi.data.functions.RandomWantedPosterFunction;
+import xyz.pixelatedw.mineminenomi.data.functions.SetInfiniteStockFunction;
 import xyz.pixelatedw.mineminenomi.data.functions.SetPriceFunction;
 import xyz.pixelatedw.mineminenomi.init.ModArmors;
 import xyz.pixelatedw.mineminenomi.init.ModCapabilities;
+import xyz.pixelatedw.mineminenomi.init.ModContainers;
 import xyz.pixelatedw.mineminenomi.init.ModFeatures;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.mineminenomi.init.ModKeybindings;
 import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.init.ModRenderers;
+import xyz.pixelatedw.mineminenomi.screens.TraderScreen;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.json.WyJSON;
 
@@ -32,8 +36,9 @@ public class ModSetup
 		ModNetwork.init();
 		
 		ModFeatures.init();
-		LootFunctionManager.registerFunction(new RandomWantedPosterLootFunction.Serializer());
+		LootFunctionManager.registerFunction(new RandomWantedPosterFunction.Serializer());
 		LootFunctionManager.registerFunction(new SetPriceFunction.Serializer());
+		LootFunctionManager.registerFunction(new SetInfiniteStockFunction.Serializer());
 	}
 	
 	@OnlyIn(Dist.CLIENT)
@@ -55,5 +60,8 @@ public class ModSetup
 		Minecraft.getInstance().getItemColors().register((itemStack, i) -> {
 	         return i > 0 ? -1 : ((IDyeableArmorItem)itemStack.getItem()).getColor(itemStack);
 		}, ModArmors.CAPTAIN_CAPE);
+		
+		// Registering Containers and Screens together so when the container is opened the screen will also be shown
+		ScreenManager.registerFactory(ModContainers.TRADER, TraderScreen::new);
 	}
 }

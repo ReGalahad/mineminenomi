@@ -4,14 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.lwjgl.opengl.GL11;
-
-import com.mojang.blaze3d.platform.GlStateManager;
-
-import net.minecraft.client.gui.AbstractGui;
-import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.client.gui.ScrollPanel;
@@ -75,7 +68,7 @@ public class ItemListScreenPanel extends ScrollPanel {
 						MathHelper.floor(y), 0.8f, -1);
 
 			}
-			parent.drawSizedString(Integer.toString(parent.entity.getPrice(entry.stack)), MathHelper.floor(x) + 122, MathHelper.floor(y), 0.8f, -1);
+			//parent.drawSizedString(Integer.toString(parent.entity.getPrice(entry.stack)), MathHelper.floor(x) + 122, MathHelper.floor(y), 0.8f, -1);
 			relativeY += ENTRY_HEIGHT * 1.25;
 		}
 	}

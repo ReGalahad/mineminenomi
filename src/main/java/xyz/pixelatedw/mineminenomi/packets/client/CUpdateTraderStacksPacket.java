@@ -23,7 +23,7 @@ public class CUpdateTraderStacksPacket {
 	
 	public CUpdateTraderStacksPacket(TraderEntity e)
 	{
-		this.stacks = e.STACKS;
+		//this.stacks = e.STACKS;
 		this.size = stacks.size();
 		this.trader = e;
 		this.entityId = e.getEntityId();
@@ -58,7 +58,7 @@ public class CUpdateTraderStacksPacket {
 			{
 				PlayerEntity player = ctx.get().getSender();
 				message.trader = (TraderEntity) player.world.getEntityByID(message.entityId);
-				message.trader.STACKS = message.stacks;
+				//message.trader.STACKS = message.stacks;
 			});	
 		}
 		ctx.get().setPacketHandled(true);

@@ -9,6 +9,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EntityType.Builder;
+import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.particles.ParticleType;
@@ -66,6 +67,7 @@ public class WyRegistry
 	 */
 	public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, APIConfig.PROJECT_ID);
 	public static final DeferredRegister<Block> BLOCKS = new DeferredRegister<>(ForgeRegistries.BLOCKS, APIConfig.PROJECT_ID);
+	public static final DeferredRegister<ContainerType<?>> CONTAINER_TYPES = new DeferredRegister<>(ForgeRegistries.CONTAINERS, APIConfig.PROJECT_ID);
 	public static final DeferredRegister<Ability> ABILITIES = new DeferredRegister<>(APIRegistries.ABILITIES, APIConfig.PROJECT_ID);
 	public static final DeferredRegister<Effect> EFFECTS = new DeferredRegister<>(ForgeRegistries.POTIONS, APIConfig.PROJECT_ID);
 	public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = new DeferredRegister<>(ForgeRegistries.ENTITIES, APIConfig.PROJECT_ID);
@@ -201,11 +203,19 @@ public class WyRegistry
 		return builder;
 	}
 
-	public static <T extends Entity> void registerEntityType(EntityType<?> type, String localizedName)
+	public static <T extends Entity> void registerEntityType(EntityType<T> type, String localizedName)
 	{
 		String resourceName = WyHelper.getResourceName(localizedName);
 		langMap.put("entity." + APIConfig.PROJECT_ID + "." + resourceName, localizedName);
 
 		ENTITY_TYPES.register(resourceName, () -> type);
+	}
+	
+	public static void registerContainerType(ContainerType<?> type, String localizedName)
+	{
+		String resourceName = WyHelper.getResourceName(localizedName);
+		langMap.put("container." + APIConfig.PROJECT_ID + "." + resourceName, localizedName);
+
+		CONTAINER_TYPES.register(resourceName, () -> type);
 	}
 }
