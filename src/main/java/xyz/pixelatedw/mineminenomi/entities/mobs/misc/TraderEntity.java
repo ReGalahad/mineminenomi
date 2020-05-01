@@ -16,9 +16,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.container.SimpleNamedContainerProvider;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.nbt.ListNBT;
 import net.minecraft.util.Hand;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.DifficultyInstance;
@@ -28,17 +26,17 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.storage.loot.LootContext;
 import net.minecraft.world.storage.loot.LootParameterSets;
 import net.minecraft.world.storage.loot.LootTable;
+import net.minecraftforge.common.util.Constants;
 import xyz.pixelatedw.mineminenomi.api.TradeEntry;
 import xyz.pixelatedw.mineminenomi.containers.TraderContainer;
 import xyz.pixelatedw.mineminenomi.entities.mobs.GenericNewEntity;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
-import xyz.pixelatedw.mineminenomi.packets.server.SSyncTraderOffersPacket;
+import xyz.pixelatedw.mineminenomi.packets.server.SUpdateTraderOffersPacket;
 import xyz.pixelatedw.wypi.network.WyNetwork;
 
 public class TraderEntity extends GenericNewEntity
 {
-	private static final DataParameter<CompoundNBT> ITEMS = EntityDataManager.createKey(TraderEntity.class, DataSerializers.COMPOUND_NBT);
 	private List<TradeEntry> tradeEntries = new ArrayList<TradeEntry>();
 
 	public TraderEntity(World world)
@@ -73,7 +71,6 @@ public class TraderEntity extends GenericNewEntity
 	protected void registerData()
 	{
 		super.registerData();
-		this.dataManager.register(ITEMS, new CompoundNBT());
 	}
 
 	@Override
@@ -81,7 +78,14 @@ public class TraderEntity extends GenericNewEntity
 	{
 		super.writeAdditional(nbt);
 
-		nbt.put("Items", this.getItems());
+		ListNBT items = new ListNBT();
+		for(TradeEntry stack : this.tradeEntries)
+		{
+			CompoundNBT nbtTrade = new CompoundNBT();
+			nbtTrade = stack.getItemStack().write(nbtTrade);
+			items.add(nbtTrade);
+		}
+		nbt.put("Items", items);
 	}
 
 	@Override
@@ -89,33 +93,12 @@ public class TraderEntity extends GenericNewEntity
 	{
 		super.readAdditional(nbt);
 
-		this.setItems((CompoundNBT) nbt.get("Items"));
-	}
-
-	public CompoundNBT getItems()
-	{
-		return this.getDataManager().get(ITEMS);
-	}
-
-	protected void setItems(CompoundNBT nbt)
-	{
-		this.getDataManager().set(ITEMS, nbt);
-	}
-
-	public void generate()
-	{
-		if (!this.world.isRemote)
+		ListNBT tradeList = nbt.getList("Items", Constants.NBT.TAG_COMPOUND);
+		for (int i = 0; i < tradeList.size(); i++)
 		{
-			LootTable lootTable = this.world.getServer().getLootTableManager().getLootTableFromLocation(ModResources.TRADER_WEAPONS);
-			LootContext.Builder builder = (new LootContext.Builder((ServerWorld) this.world));
-
-			LootContext context = builder.build(LootParameterSets.EMPTY);
-			List<ItemStack> stacks = lootTable.generate(context);
-
-			for (ItemStack stack : stacks)
-			{
-				this.tradeEntries.add(new TradeEntry(stack));
-			}
+			CompoundNBT nbtTrade = tradeList.getCompound(i);
+			ItemStack stack = ItemStack.read(nbtTrade);
+			this.tradeEntries.add(new TradeEntry(stack));
 		}
 	}
 
@@ -140,6 +123,11 @@ public class TraderEntity extends GenericNewEntity
 		return spawnData;
 	}
 
+	public void setTradingItems(List<TradeEntry> entries)
+	{
+		this.tradeEntries = entries;
+	}
+	
 	@Override
 	protected boolean processInteract(PlayerEntity player, Hand hand)
 	{
@@ -149,7 +137,7 @@ public class TraderEntity extends GenericNewEntity
 			{
 				return new TraderContainer(i, inventory, playerUser, this, this.tradeEntries);
 			}, new StringTextComponent("")));
-			WyNetwork.sendTo(new SSyncTraderOffersPacket(this.getEntityId(), this.tradeEntries), player);
+			WyNetwork.sendTo(new SUpdateTraderOffersPacket(this.getEntityId(), this.tradeEntries), player);
 			return true;
 		}
 		return false;

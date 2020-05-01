@@ -52,12 +52,12 @@ public class ItemListScreenPanel extends ScrollPanel
 			int y = relativeY;
 			int x = (this.parent.width / 2 - 109) + 40;
 
-			WyHelper.drawIcon(this.parent.getTexture(entry.getItemStack().getItem()), x - 30, y - 2, 16, 16);
-			if (this.parent.selectedStack != null && entry.getItemStack().getItem() == this.parent.selectedStack.getItemStack().getItem())
+			this.parent.renderItem(entry.getItemStack(), x - 30, y - 1);
+			if (this.parent.getSelectedStack() != null && entry.getItemStack().getItem() == this.parent.getSelectedStack().getItemStack().getItem())
 				WyHelper.drawColourOnScreen(Color.WHITE.getRGB(), 100, x - 40, y - 4, this.width, 24, 0);
 			
-			this.parent.drawSizedString(entry.getItemStack().getDisplayName().getFormattedText(), x + 64, y + 3, 0.8f, -1);
-			this.parent.drawSizedString(entry.getPrice() + "", x + 122, y + 3, 0.8f, -1);
+			this.parent.drawSizedString(entry.getItemStack().getDisplayName().getFormattedText(), x + 50, y + 4, 0.8f, -1);
+			this.parent.drawSizedString(entry.getPrice() + "", x + 122, y + 4, 0.8f, -1);
 			relativeY += ENTRY_HEIGHT * 1.25;
 		}
 	}
@@ -87,8 +87,8 @@ public class ItemListScreenPanel extends ScrollPanel
 
 		if (entry != null)
 		{
-			this.parent.selectedStack = entry;
-			this.parent.wantedAmount = 1;
+			this.parent.setSelectedStack(entry);
+			this.parent.setWantedAmount(1);
 		}
 
 		return super.mouseClicked(mouseX, mouseY, button);

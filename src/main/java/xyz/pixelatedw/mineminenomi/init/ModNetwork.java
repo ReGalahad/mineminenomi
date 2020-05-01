@@ -7,7 +7,7 @@ import xyz.pixelatedw.mineminenomi.packets.client.CEntityStatsSyncPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CGiveItemStackPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CRequestQuestDataSyncPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CRequestSyncPacket;
-import xyz.pixelatedw.mineminenomi.packets.client.CUpdateTraderStacksPacket;
+import xyz.pixelatedw.mineminenomi.packets.client.CUpdateTraderOffersPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CUseAbilityPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SDespawnQuestObjectivePacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SEntityStatsSyncPacket;
@@ -16,7 +16,7 @@ import xyz.pixelatedw.mineminenomi.packets.server.SOpenWantedPosterScreenPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SRecalculateEyeHeightPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SSpecialFlyingPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SSyncDevilFruitPacket;
-import xyz.pixelatedw.mineminenomi.packets.server.SSyncTraderOffersPacket;
+import xyz.pixelatedw.mineminenomi.packets.server.SUpdateTraderOffersPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SViewProtectionPacket;
 import xyz.pixelatedw.wypi.APIDefaults;
 import xyz.pixelatedw.wypi.network.WyNetwork;
@@ -38,7 +38,7 @@ public class ModNetwork
 		WyNetwork.registerPacket(CDevilFruitSyncPacket.class, CDevilFruitSyncPacket::encode, CDevilFruitSyncPacket::decode, CDevilFruitSyncPacket::handle);
 		WyNetwork.registerPacket(CSyncAbilityDataPacket.class, CSyncAbilityDataPacket::encode, CSyncAbilityDataPacket::decode, CSyncAbilityDataPacket::handle);
 		WyNetwork.registerPacket(CGiveItemStackPacket.class, CGiveItemStackPacket::encode, CGiveItemStackPacket::decode, CGiveItemStackPacket::handle);
-		WyNetwork.registerPacket(CUpdateTraderStacksPacket.class, CUpdateTraderStacksPacket::encode, CUpdateTraderStacksPacket::decode, CUpdateTraderStacksPacket::handle);
+		WyNetwork.registerPacket(CUpdateTraderOffersPacket.class, CUpdateTraderOffersPacket::encode, CUpdateTraderOffersPacket::decode, CUpdateTraderOffersPacket::handle);
 		WyNetwork.registerPacket(CRequestQuestDataSyncPacket.class, CRequestQuestDataSyncPacket::encode, CRequestQuestDataSyncPacket::decode, CRequestQuestDataSyncPacket::handle);
 
 		// From Server to Client
@@ -51,7 +51,7 @@ public class ModNetwork
 		WyNetwork.registerPacket(SOpenCharacterCreatorScreenPacket.class, SOpenCharacterCreatorScreenPacket::encode, SOpenCharacterCreatorScreenPacket::decode, SOpenCharacterCreatorScreenPacket::handle);
 		WyNetwork.registerPacket(SOpenWantedPosterScreenPacket.class, SOpenWantedPosterScreenPacket::encode, SOpenWantedPosterScreenPacket::decode, SOpenWantedPosterScreenPacket::handle);
 		WyNetwork.registerPacket(SDespawnQuestObjectivePacket.class, SDespawnQuestObjectivePacket::encode, SDespawnQuestObjectivePacket::decode, SDespawnQuestObjectivePacket::handle);
-		WyNetwork.registerPacket(SSyncTraderOffersPacket.class, SSyncTraderOffersPacket::encode, SSyncTraderOffersPacket::decode, SSyncTraderOffersPacket::handle);
+		WyNetwork.registerPacket(SUpdateTraderOffersPacket.class, SUpdateTraderOffersPacket::encode, SUpdateTraderOffersPacket::decode, SUpdateTraderOffersPacket::handle);
 
 	}
 }

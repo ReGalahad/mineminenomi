@@ -35,7 +35,9 @@ public class ModResources
 
 	// UI
 	public static final ResourceLocation WOOD_ARROW = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/icons/arrow.png");
-			
+	public static final ResourceLocation BRIGHT_WOOD_ARROW = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/icons/arrow2.png");
+	public static final ResourceLocation BRIGHT_WOOD_ARROW_DOWN = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/icons/arrow2_down.png");
+
 	public static final ResourceLocation PIRATE = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/icons/pirate.png");
 	public static final ResourceLocation MARINE = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/icons/marine.png");
 	public static final ResourceLocation BOUNTY_HUNTER = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/icons/bounty_hunter.png");

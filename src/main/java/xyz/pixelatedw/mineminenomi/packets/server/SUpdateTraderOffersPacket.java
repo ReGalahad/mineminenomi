@@ -15,16 +15,16 @@ import net.minecraftforge.fml.network.NetworkEvent;
 import xyz.pixelatedw.mineminenomi.api.TradeEntry;
 import xyz.pixelatedw.mineminenomi.containers.TraderContainer;
 
-public class SSyncTraderOffersPacket
+public class SUpdateTraderOffersPacket
 {
 	private int traderEntity;
 	private List<TradeEntry> tradeEntries;
 
-	public SSyncTraderOffersPacket()
+	public SUpdateTraderOffersPacket()
 	{
 	}
 
-	public SSyncTraderOffersPacket(int traderEntity, List<TradeEntry> tradeEntries)
+	public SUpdateTraderOffersPacket(int traderEntity, List<TradeEntry> tradeEntries)
 	{
 		this.traderEntity = traderEntity;
 		this.tradeEntries = tradeEntries;
@@ -40,9 +40,9 @@ public class SSyncTraderOffersPacket
 		}
 	}
 
-	public static SSyncTraderOffersPacket decode(PacketBuffer buffer)
+	public static SUpdateTraderOffersPacket decode(PacketBuffer buffer)
 	{
-		SSyncTraderOffersPacket msg = new SSyncTraderOffersPacket();
+		SUpdateTraderOffersPacket msg = new SUpdateTraderOffersPacket();
 		msg.traderEntity = buffer.readInt();
 		int size = buffer.readInt();
 		List<TradeEntry> entries = new ArrayList<TradeEntry>();
@@ -54,7 +54,7 @@ public class SSyncTraderOffersPacket
 		return msg;
 	}
 
-	public static void handle(SSyncTraderOffersPacket message, final Supplier<NetworkEvent.Context> ctx)
+	public static void handle(SUpdateTraderOffersPacket message, final Supplier<NetworkEvent.Context> ctx)
 	{
 		if (ctx.get().getDirection() == NetworkDirection.PLAY_TO_CLIENT)
 		{
@@ -69,7 +69,7 @@ public class SSyncTraderOffersPacket
 	public static class ClientHandler
 	{
 		@OnlyIn(Dist.CLIENT)
-		public static void handle(SSyncTraderOffersPacket message)
+		public static void handle(SUpdateTraderOffersPacket message)
 		{
 			Container container = Minecraft.getInstance().player.openContainer;
 			Entity entity = Minecraft.getInstance().world.getEntityByID(message.traderEntity);

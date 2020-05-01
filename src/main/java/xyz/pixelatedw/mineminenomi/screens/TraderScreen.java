@@ -6,14 +6,11 @@ import java.util.List;
 import com.mojang.blaze3d.platform.GlStateManager;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -26,37 +23,38 @@ import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
+import xyz.pixelatedw.mineminenomi.packets.client.CEntityStatsSyncPacket;
+import xyz.pixelatedw.mineminenomi.packets.client.CGiveItemStackPacket;
+import xyz.pixelatedw.mineminenomi.packets.client.CUpdateTraderOffersPacket;
 import xyz.pixelatedw.mineminenomi.screens.extra.ItemListScreenPanel;
 import xyz.pixelatedw.mineminenomi.screens.extra.SequencedString;
 import xyz.pixelatedw.mineminenomi.screens.extra.TexturedIconButton;
 import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.network.WyNetwork;
 
 @OnlyIn(Dist.CLIENT)
 public class TraderScreen extends ContainerScreen<TraderContainer>
 {
-	public int guiState = 0;
-	public boolean shouldTrade = true;
-	public int wantedAmount = 1;
-	public ItemListScreenPanel listPanel;
-	public TradeEntry selectedStack;
-	public TradeEntry hoveredStack;
-	public PlayerEntity player;
-	public IEntityStats stats;
-	public SequencedString startMessage;
+	private int guiState = 0;
+	private int wantedAmount = 1;
+	private ItemListScreenPanel listPanel;
+	private TradeEntry selectedStack;
+	private TradeEntry hoveredStack;
+	private PlayerEntity player;
+	private IEntityStats props;
+	private SequencedString startMessage;
 
 	public TraderScreen(TraderContainer container, PlayerInventory inventory, ITextComponent text)
 	{
 		super(container, inventory, text);
 		this.player = Minecraft.getInstance().player;
-		this.stats = EntityStatsCapability.get(player);
+		this.props = EntityStatsCapability.get(player);
 	}
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
 	{
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
-		
-		
 	}
 	
 	@Override
@@ -79,13 +77,15 @@ public class TraderScreen extends ContainerScreen<TraderContainer>
 		this.startMessage.render();
 		if (this.startMessage.ticksExisted > this.startMessage.delayTicks)
 		{
-			if (this.shouldTrade)
+			this.guiState = 1;
+			this.init(this.getMinecraft(), this.width, this.height);
+			/*if (this.shouldTrade)
 			{
 				this.guiState = 1;
 				this.init(this.getMinecraft(), this.width, this.height);
 			}
 			else
-				this.onClose();
+				this.onClose();*/
 		}
 
 		int posX = this.width / 2;
@@ -120,7 +120,7 @@ public class TraderScreen extends ContainerScreen<TraderContainer>
 		
 		this.renderUpperColumn();
 		
-		this.drawSizedString("Name", posX - 5, posY - 63, 0.9f, -1);
+		this.drawSizedString("Name", posX - 20, posY - 63, 0.9f, -1);
 		this.drawSizedString("Price", posX + 50, posY - 63, 0.9f, -1);
 		this.getMinecraft().getTextureManager().bindTexture(ModResources.CURRENCIES);
 		GuiUtils.drawTexturedModalRect(posX + 53, posY - 76, 0, 32, 32, 64, 1);
@@ -128,10 +128,13 @@ public class TraderScreen extends ContainerScreen<TraderContainer>
 		this.listPanel.render(mouseX, mouseY, partialTicks);
 
 		this.hover(mouseX, mouseY);
-		this.buttons.forEach((b) ->
+		
+		if(this.selectedStack != null)
 		{
-			b.render(mouseX, mouseY, partialTicks);
-		});
+			this.buttons.forEach(button -> {
+				button.render(mouseX, mouseY, partialTicks);
+			});
+		}
 	}
 
 	public void renderUpperColumn()
@@ -142,21 +145,23 @@ public class TraderScreen extends ContainerScreen<TraderContainer>
 		
 		if (this.hoveredStack != null)
 		{
-			WyHelper.drawIcon(this.getTexture(this.hoveredStack.getItemStack().getItem()), posX - 110, posY - 100, 16, 16);
-			amount = this.wantedAmount + "/" + this.hoveredStack.getCount();
+			WyHelper.drawIcon(ModResources.BLANK, posX - 117, posY - 105, 32, 42);
+			this.renderItem(this.hoveredStack.getItemStack(), posX - 110, posY - 100);
+			amount = this.getWantedAmount() + "/" + this.hoveredStack.getCount();
 			if (this.hoveredStack.hasInfiniteStock())
-				amount = this.wantedAmount + "/∞";
+				amount = this.getWantedAmount() + "/∞";
 		}
-		else if (this.selectedStack != null)
+		else if (this.getSelectedStack() != null)
 		{
-			WyHelper.drawIcon(this.getTexture(this.selectedStack.getItemStack().getItem()), posX - 110, posY - 100, 16, 16);
-			amount = this.wantedAmount + "/" + this.selectedStack.getCount();
-			if (this.selectedStack.hasInfiniteStock())
-				amount = this.wantedAmount + "/∞";
+			WyHelper.drawIcon(ModResources.BLANK, posX - 117, posY - 105, 32, 42);
+			this.renderItem(this.getSelectedStack().getItemStack(), posX - 110, posY - 100);
+			amount = this.getWantedAmount() + "/" + this.getSelectedStack().getCount();
+			if (this.getSelectedStack().hasInfiniteStock())
+				amount = this.getWantedAmount() + "/∞";
 		}
 		
 		this.drawSizedString(amount, posX - 70, posY - 100, 0.9f, -1);
-		this.drawSizedString(this.stats.getBelly() + "", posX + 85, posY - 100, 0.9f, -1);
+		this.drawSizedString(this.props.getBelly() + "", posX + 85, posY - 100, 0.9f, -1);
 		this.getMinecraft().getTextureManager().bindTexture(ModResources.CURRENCIES);
 		GuiUtils.drawTexturedModalRect(posX + 102, posY - 113, 0, 32, 32, 64, 1);
 	}
@@ -178,73 +183,78 @@ public class TraderScreen extends ContainerScreen<TraderContainer>
 			this.children.add(this.listPanel);
 			
 			// Increase Quantity
-			this.addButton(new TexturedIconButton(ModResources.WOOD_ARROW, posX - 85, posY - 90, 16, 16, "positive_arrow", this::onIncreaseQuantity));
+			TexturedIconButton incQtyBtn = new TexturedIconButton(ModResources.BRIGHT_WOOD_ARROW, posX - 50, posY - 105, 10, 32, "", this::onIncreaseQuantity);
+			incQtyBtn = incQtyBtn.setTextureInfo(posX - 62, posY - 105, 32, 32);
+			this.addButton(incQtyBtn);
 			// Decrease Quantity
-			this.addButton(new TexturedIconButton(ModResources.WOOD_ARROW, posX - 70, posY - 90, 16, 16, "negative_arrow", this::onDecreaseQuantity));
-			/*
-			this.addButton(new TexturedIconButton(ModResources.WOOD_ARROW, this.baseWidth + 200, this.baseHeight - 20, 16, 16, "buy", new Button.IPressable()
-			{
-
-				@Override
-				public void onPress(Button p_onPress_1_)
-				{
-
-					TraderScreen scr = (TraderScreen) Minecraft.getInstance().currentScreen;
-					if (scr.selectedStack != null)
-					{
-						if (scr.wantedAmount <= scr.selectedStack.getCount() || TraderEntity.DISPOSABLES.contains(scr.selectedStack.getItem()))
-						{
-							if (scr.getEmptySlots() >= scr.calculateSlotsFromCount(scr.wantedAmount))
-							{
-								List<Integer> list = scr.getStacks(scr.wantedAmount);
-								if (scr.stats.getBelly() >= scr.entity.getPrice(scr.selectedStack) * scr.wantedAmount)
-								{
-									for (int i : list)
-									{
-										ItemStack stack = new ItemStack(scr.selectedStack.getItem());
-										stack.setCount(i);
-										WyNetwork.sendToServer(new CGiveItemStackPacket(stack));
-										player.inventory.addItemStackToInventory(stack);
-
-									}
-									scr.stats.alterBelly(-(scr.entity.getPrice(scr.selectedStack) * scr.wantedAmount));
-									if (!TraderEntity.DISPOSABLES.contains(scr.selectedStack.getItem()))
-									{
-										if (scr.selectedStack.getCount() - scr.wantedAmount <= 0)
-										{
-											scr.entity.removeStackFromList(scr.selectedStack);
-										}
-
-										scr.entity.changeStackCount(scr.selectedStack, scr.selectedStack.getCount() - scr.wantedAmount);
-										scr.entity.updateNbtFromStacks(false);
-										scr.listPanel.removeEntry(scr.selectedStack);
-										WyNetwork.sendToServer(new CEntityStatsSyncPacket(scr.stats));
-									}
-								}
-							}
-						}
-					}
-				}
-			}));*/
-
+			TexturedIconButton decQtyBtn = new TexturedIconButton(ModResources.BRIGHT_WOOD_ARROW_DOWN, posX - 30, posY - 109, 10, 32, "", this::onDecreaseQuantity);
+			decQtyBtn = decQtyBtn.setTextureInfo(posX - 42, posY - 109, 32, 32);
+			this.addButton(decQtyBtn);
+			// Buy
+			TexturedIconButton buyBtn = new TexturedIconButton(ModResources.BLANK, posX - 10, posY - 100, 64, 22, "Buy", this::onBuy);
+			buyBtn = buyBtn.setTextureInfo(posX - 10, posY - 100, 64, 32);
+			this.addButton(buyBtn);
 		}
 	}
 
+	public void onBuy(Button btn)
+	{
+		if (this.getSelectedStack() == null)
+			return;
+		
+		if(this.getWantedAmount() > this.getSelectedStack().getCount() && !this.getSelectedStack().hasInfiniteStock())
+			return;
+		
+		if (this.getEmptySlots() < this.calculateSlotsFromCount(this.getWantedAmount()))
+			return;
+		
+		int totalPrice = this.getSelectedStack().getPrice() * this.getWantedAmount();
+		
+		if(this.props.getBelly() < totalPrice)
+			return;
+		
+		ItemStack stack = new ItemStack(this.getSelectedStack().getItemStack().getItem());
+		stack.setCount(this.getWantedAmount());
+		
+		// Reduce the available stacks if its not infinite stock
+		if(!this.getSelectedStack().hasInfiniteStock())
+		{
+			int count = this.getSelectedStack().getCount() - 1;
+			
+			if(count <= 0)
+				this.container.getTradingItems().remove(this.getSelectedStack());
+			else		
+				this.getSelectedStack().setCount(count);
+						
+			WyNetwork.sendToServer(new CUpdateTraderOffersPacket(this.container.getTrader().getEntityId(), this.container.getTradingItems()));
+		}
+			
+		// Give the item
+		WyNetwork.sendToServer(new CGiveItemStackPacket(stack));
+		this.player.inventory.addItemStackToInventory(stack);
+		
+		// Reduce belly from the user
+		this.props.alterBelly(-totalPrice);
+		WyNetwork.sendToServer(new CEntityStatsSyncPacket(this.props));
+		
+		this.setSelectedStack(null);
+	}
+	
 	public void onIncreaseQuantity(Button btn)
 	{
-		if (this.selectedStack != null && (this.wantedAmount < this.selectedStack.getCount() || this.selectedStack.hasInfiniteStock()))
-			this.wantedAmount += 1;
+		if (this.getSelectedStack() != null && (this.getWantedAmount() < this.getSelectedStack().getCount() || this.getSelectedStack().hasInfiniteStock()))
+			this.setWantedAmount(this.getWantedAmount() + 1);
 	}
 	
 	public void onDecreaseQuantity(Button btn)
 	{
-		if (this.selectedStack != null && this.wantedAmount > 1)
-			this.wantedAmount -= 1;
+		if (this.getSelectedStack() != null && this.getWantedAmount() > 1)
+			this.setWantedAmount(this.getWantedAmount() - 1);
 	}
 	
-	public ResourceLocation getTexture(Item item)
+	public void renderItem(ItemStack stack, int posX, int posY)
 	{	
-		return new ResourceLocation(item.getRegistryName().getNamespace(), "textures/items/" + item.getRegistryName().getPath() + ".png");
+		Minecraft.getInstance().getItemRenderer().renderItemAndEffectIntoGUI(stack, posX, posY);
 	}
 
 	public void drawSizedString(String txt, int x, int y, float scale, int color)
@@ -267,7 +277,7 @@ public class TraderScreen extends ContainerScreen<TraderContainer>
 		if (entry != null)
 		{
 			this.hoveredStack = entry;
-			this.wantedAmount = 1;
+			this.setWantedAmount(1);
 		}
 		else
 		{
@@ -315,15 +325,7 @@ public class TraderScreen extends ContainerScreen<TraderContainer>
 
 	public void drawCenteredString(String txt, int posX, int posY, int color)
 	{
-		this.drawString(this.font, txt, posX - font.getStringWidth(txt) / 2, posY, color);
-	}
-
-	@Override
-	public void onClose()
-	{
-		//this.entity.setIsOpened(this.entity.getNBT(), false);
-		//WyNetwork.sendToServer(new CUpdateTraderStacksPacket(this.entity));
-		this.minecraft.displayGuiScreen((Screen) null);
+		WyHelper.drawStringWithBorder(this.font, txt, posX - font.getStringWidth(txt) / 2, posY, color);
 	}
 
 	@Override
@@ -337,7 +339,10 @@ public class TraderScreen extends ContainerScreen<TraderContainer>
 				this.startMessage.ticksExisted = this.startMessage.maxTicks;
 			else
 			{
-				if (this.shouldTrade)
+				this.guiState = 1;
+				this.init(this.getMinecraft(), this.width, this.height);
+				
+				/*if (this.shouldTrade)
 				{
 					this.guiState = 1;
 					this.init(this.getMinecraft(), this.width, this.height);
@@ -345,10 +350,30 @@ public class TraderScreen extends ContainerScreen<TraderContainer>
 				else
 				{
 					this.onClose();
-				}
+				}*/
 			}
 		}
 
 		return flag;
+	}
+
+	public TradeEntry getSelectedStack()
+	{
+		return selectedStack;
+	}
+
+	public void setSelectedStack(TradeEntry selectedStack)
+	{
+		this.selectedStack = selectedStack;
+	}
+
+	public int getWantedAmount()
+	{
+		return wantedAmount;
+	}
+
+	public void setWantedAmount(int wantedAmount)
+	{
+		this.wantedAmount = wantedAmount;
 	}
 }
