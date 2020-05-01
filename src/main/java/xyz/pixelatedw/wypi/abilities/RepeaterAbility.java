@@ -46,7 +46,7 @@ public abstract class RepeaterAbility extends Ability
 		if(this.isOnCooldown() && this.cooldown > 0)
 		{
 			this.cooldown--;
-
+			
 			if(!player.world.isRemote)
 			{
 				if(this.repeaterCount > 0 && this.cooldown % this.repeaterInterval == 0)

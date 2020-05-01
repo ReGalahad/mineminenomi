@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.function.Supplier;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.api.distmarker.Dist;
@@ -16,19 +17,22 @@ import xyz.pixelatedw.mineminenomi.containers.TraderContainer;
 
 public class SSyncTraderOffersPacket
 {
+	private int traderEntity;
 	private List<TradeEntry> tradeEntries;
 
 	public SSyncTraderOffersPacket()
 	{
 	}
 
-	public SSyncTraderOffersPacket(List<TradeEntry> tradeEntries)
+	public SSyncTraderOffersPacket(int traderEntity, List<TradeEntry> tradeEntries)
 	{
+		this.traderEntity = traderEntity;
 		this.tradeEntries = tradeEntries;
 	}
 
 	public void encode(PacketBuffer buffer)
 	{
+		buffer.writeInt(this.traderEntity);
 		buffer.writeInt(this.tradeEntries.size());
 		for (TradeEntry entry : this.tradeEntries)
 		{
@@ -39,6 +43,7 @@ public class SSyncTraderOffersPacket
 	public static SSyncTraderOffersPacket decode(PacketBuffer buffer)
 	{
 		SSyncTraderOffersPacket msg = new SSyncTraderOffersPacket();
+		msg.traderEntity = buffer.readInt();
 		int size = buffer.readInt();
 		List<TradeEntry> entries = new ArrayList<TradeEntry>();
 		for (int i = 0; i < size; i++)
@@ -67,9 +72,11 @@ public class SSyncTraderOffersPacket
 		public static void handle(SSyncTraderOffersPacket message)
 		{
 			Container container = Minecraft.getInstance().player.openContainer;
+			Entity entity = Minecraft.getInstance().world.getEntityByID(message.traderEntity);
 			if (container instanceof TraderContainer)
 			{
 				((TraderContainer)container).setTradingItems(message.tradeEntries);
+				((TraderContainer)container).setTrader(entity);
 			}
 		}
 	}

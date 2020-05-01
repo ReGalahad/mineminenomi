@@ -2,6 +2,7 @@ package xyz.pixelatedw.mineminenomi.containers;
 
 import java.util.List;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
@@ -45,6 +46,12 @@ public class TraderContainer extends Container
 	public List<TradeEntry> getTradingItems()
 	{
 		return this.entries;
+	}
+	
+	public void setTrader(Entity entity)
+	{
+		if(entity instanceof TraderEntity)			
+			this.trader = (TraderEntity) entity;
 	}
 	
 	public TraderEntity getTrader()

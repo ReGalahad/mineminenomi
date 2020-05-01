@@ -149,7 +149,7 @@ public class TraderEntity extends GenericNewEntity
 			{
 				return new TraderContainer(i, inventory, playerUser, this, this.tradeEntries);
 			}, new StringTextComponent("")));
-			WyNetwork.sendTo(new SSyncTraderOffersPacket(this.tradeEntries), player);
+			WyNetwork.sendTo(new SSyncTraderOffersPacket(this.getEntityId(), this.tradeEntries), player);
 			return true;
 		}
 		return false;

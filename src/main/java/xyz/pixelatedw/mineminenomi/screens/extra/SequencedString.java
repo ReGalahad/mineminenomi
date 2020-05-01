@@ -8,7 +8,6 @@ import xyz.pixelatedw.wypi.WyHelper;
 
 public class SequencedString
 {
-
 	public String string;
 	public int posX;
 	public int posY;
@@ -22,7 +21,6 @@ public class SequencedString
 
 	public SequencedString(String str, Screen parent, int posX, int posY, int maxLength, int maxTicks)
 	{
-
 		this.parent = parent;
 		this.string = str;
 		this.posX = posX;

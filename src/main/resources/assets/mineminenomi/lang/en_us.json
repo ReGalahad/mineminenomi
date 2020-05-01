@@ -537,5 +537,9 @@
 	"style.empty": "No Fighting Style",
 	"style.name": "Fighting Style",
 	"style.sniper": "Sniper",
-	"style.swordsman": "Swordsman"
+	"style.swordsman": "Swordsman",
+
+	"trader.no_marine": "I don't support the Marines.",
+	"trader.no_pirate": "I don't trade to Pirate Scum",
+	"trader.welcome_message": "Welcome to my humble Shop! Fine traveler, please take whatever you need. I sell to all who need it."
 }
