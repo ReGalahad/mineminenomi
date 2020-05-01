@@ -120,8 +120,8 @@ public class TraderScreen extends Screen
 		
 		this.renderUpperColumn();
 		
-		this.drawSizedString("Name", posX - 20, posY - 63, 0.9f, -1);
-		this.drawSizedString("Price", posX + 50, posY - 63, 0.9f, -1);
+		this.drawSizedString(new TranslationTextComponent(ModI18n.GUI_NAME).getFormattedText(), posX - 20, posY - 63, 0.9f, -1);
+		this.drawSizedString(new TranslationTextComponent(ModI18n.GUI_PRICE).getFormattedText(), posX + 50, posY - 63, 0.9f, -1);
 		this.getMinecraft().getTextureManager().bindTexture(ModResources.CURRENCIES);
 		GuiUtils.drawTexturedModalRect(posX + 53, posY - 76, 0, 32, 32, 64, 1);
 
@@ -186,7 +186,7 @@ public class TraderScreen extends Screen
 		}
 		
 		if(this.skipMessage == null)
-			this.skipMessage = new FlickeringString("- Click to Skip -", 20);
+			this.skipMessage = new FlickeringString("- " + new TranslationTextComponent(ModI18n.GUI_CLICK_TO_SKIP).getFormattedText() + " -", 20);
 		
 		if (this.guiState == 1)
 		{
@@ -202,7 +202,7 @@ public class TraderScreen extends Screen
 			decQtyBtn = decQtyBtn.setTextureInfo(posX - 42, posY - 109, 32, 32);
 			this.addButton(decQtyBtn);
 			// Buy
-			TexturedIconButton buyBtn = new TexturedIconButton(ModResources.BLANK, posX - 10, posY - 100, 64, 22, "Buy", this::onBuy);
+			TexturedIconButton buyBtn = new TexturedIconButton(ModResources.BLANK, posX - 10, posY - 100, 64, 22, new TranslationTextComponent(ModI18n.GUI_BUY).getFormattedText(), this::onBuy);
 			buyBtn = buyBtn.setTextureInfo(posX - 10, posY - 100, 64, 32);
 			this.addButton(buyBtn);
 		}

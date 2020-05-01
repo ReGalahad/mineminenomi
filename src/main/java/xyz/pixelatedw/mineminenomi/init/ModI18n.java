@@ -46,7 +46,12 @@ public class ModI18n
 	
 	public static final String GUI_ACCEPT = WyRegistry.registerName("gui.accept", "Accept");
 	public static final String GUI_DECLINE = WyRegistry.registerName("gui.decline", "Decline");
+	public static final String GUI_BUY = WyRegistry.registerName("gui.buy", "Buy");
+	public static final String GUI_NAME = WyRegistry.registerName("gui.name", "Name");	
+	public static final String GUI_PRICE = WyRegistry.registerName("gui.price", "Price");
 	
+	public static final String GUI_CLICK_TO_SKIP = WyRegistry.registerName("gui.click_to_skip", "Click to Skip");
+
 	public static final String QUEST_NO_QUESTS_AVAILABLE = WyRegistry.registerName("quest.no_quests_available", "<%s> I don't have any quests for you at the moment.");
 	public static final String QUEST_NO_TRIALS_AVAILABLE = WyRegistry.registerName("quest.no_trials_available", "<%s> I don't have any trials for you at the moment.");
 	public static final String QUEST_TOO_MANY = WyRegistry.registerName("quest.too_many", "<%s> You cannot accept any more quests");

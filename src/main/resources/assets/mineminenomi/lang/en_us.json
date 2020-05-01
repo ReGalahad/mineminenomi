@@ -325,9 +325,13 @@
 
 	"gui.abilities": "Abilities",
 	"gui.accept": "Accept",
+	"gui.buy": "Buy",
+	"gui.click_to_skip": "Click to Skip",
 	"gui.cola": "Cola",
 	"gui.decline": "Decline",
 	"gui.doriki": "Doriki",
+	"gui.name": "Name",
+	"gui.price": "Price",
 	"gui.quests": "Quests",
 	"gui.quests.accept": "Accept this quest ?",
 	"gui.quests.progress": "Progress",
