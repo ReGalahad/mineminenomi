@@ -25,6 +25,7 @@ import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.packets.client.CEntityStatsSyncPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CGiveItemStackPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CUpdateTraderOffersPacket;
+import xyz.pixelatedw.mineminenomi.screens.extra.FlickeringString;
 import xyz.pixelatedw.mineminenomi.screens.extra.ItemListScreenPanel;
 import xyz.pixelatedw.mineminenomi.screens.extra.SequencedString;
 import xyz.pixelatedw.mineminenomi.screens.extra.TexturedIconButton;
@@ -43,6 +44,7 @@ public class TraderScreen extends Screen
 	private TraderEntity trader;
 	private IEntityStats props;
 	private SequencedString startMessage;
+	private FlickeringString skipMessage;
 
 	public TraderScreen(TraderEntity entity)
 	{
@@ -69,7 +71,13 @@ public class TraderScreen extends Screen
 	public void renderEntryGui(int x, int y)
 	{
 		this.renderBackground();
-		this.startMessage.render();
+		
+		int posX = this.width / 2;
+		int posY = this.height / 2;
+		
+		this.startMessage.render(posX - 200, posY - 50);
+		this.skipMessage.render(posX - 100, posY + 60);
+		
 		if (this.startMessage.ticksExisted > this.startMessage.delayTicks)
 		{
 			this.guiState = 1;
@@ -82,10 +90,7 @@ public class TraderScreen extends Screen
 			else
 				this.onClose();
 		}
-
-		int posX = this.width / 2;
-		int posY = this.height / 2;
-		
+	
 		// Trader model
 		GlStateManager.pushMatrix();
 		{
@@ -177,8 +182,11 @@ public class TraderScreen extends Screen
 			else
 				message = this.trader.getTradeFailMessage();
 			
-			this.startMessage = new SequencedString(message, this, posX - 200, posY - 50, 250, (int) (this.font.getStringWidth(message) / 1.5));
+			this.startMessage = new SequencedString(message, 250, this.font.getStringWidth(message) / 2);
 		}
+		
+		if(this.skipMessage == null)
+			this.skipMessage = new FlickeringString("- Click to Skip -", 20);
 		
 		if (this.guiState == 1)
 		{
