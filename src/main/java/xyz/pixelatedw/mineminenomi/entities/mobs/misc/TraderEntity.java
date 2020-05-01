@@ -13,12 +13,10 @@ import net.minecraft.entity.ai.goal.LookRandomlyGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.container.SimpleNamedContainerProvider;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.util.Hand;
-import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
@@ -28,10 +26,10 @@ import net.minecraft.world.storage.loot.LootParameterSets;
 import net.minecraft.world.storage.loot.LootTable;
 import net.minecraftforge.common.util.Constants;
 import xyz.pixelatedw.mineminenomi.api.TradeEntry;
-import xyz.pixelatedw.mineminenomi.containers.TraderContainer;
 import xyz.pixelatedw.mineminenomi.entities.mobs.GenericNewEntity;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
+import xyz.pixelatedw.mineminenomi.packets.server.SOpenTraderScreenPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SUpdateTraderOffersPacket;
 import xyz.pixelatedw.wypi.network.WyNetwork;
 
@@ -123,6 +121,11 @@ public class TraderEntity extends GenericNewEntity
 		return spawnData;
 	}
 
+	public List<TradeEntry> getTradingItems()
+	{
+		return this.tradeEntries;
+	}
+	
 	public void setTradingItems(List<TradeEntry> entries)
 	{
 		this.tradeEntries = entries;
@@ -133,10 +136,7 @@ public class TraderEntity extends GenericNewEntity
 	{
 		if (!player.world.isRemote)
 		{
-			player.openContainer(new SimpleNamedContainerProvider((i, inventory, playerUser) ->
-			{
-				return new TraderContainer(i, inventory, playerUser, this, this.tradeEntries);
-			}, new StringTextComponent("")));
+			WyNetwork.sendTo(new SOpenTraderScreenPacket(this.getEntityId()), player);
 			WyNetwork.sendTo(new SUpdateTraderOffersPacket(this.getEntityId(), this.tradeEntries), player);
 			return true;
 		}

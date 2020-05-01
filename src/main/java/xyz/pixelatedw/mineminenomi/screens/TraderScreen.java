@@ -6,21 +6,20 @@ import java.util.List;
 import com.mojang.blaze3d.platform.GlStateManager;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screen.inventory.ContainerScreen;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.config.GuiUtils;
 import xyz.pixelatedw.mineminenomi.api.TradeEntry;
-import xyz.pixelatedw.mineminenomi.containers.TraderContainer;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
+import xyz.pixelatedw.mineminenomi.entities.mobs.misc.TraderEntity;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.packets.client.CEntityStatsSyncPacket;
@@ -33,7 +32,7 @@ import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.network.WyNetwork;
 
 @OnlyIn(Dist.CLIENT)
-public class TraderScreen extends ContainerScreen<TraderContainer>
+public class TraderScreen extends Screen
 {
 	private int guiState = 0;
 	private int wantedAmount = 1;
@@ -41,22 +40,18 @@ public class TraderScreen extends ContainerScreen<TraderContainer>
 	private TradeEntry selectedStack;
 	private TradeEntry hoveredStack;
 	private PlayerEntity player;
+	private TraderEntity trader;
 	private IEntityStats props;
 	private SequencedString startMessage;
 
-	public TraderScreen(TraderContainer container, PlayerInventory inventory, ITextComponent text)
+	public TraderScreen(TraderEntity entity)
 	{
-		super(container, inventory, text);
+		super(new StringTextComponent(""));
+		this.trader = entity;
 		this.player = Minecraft.getInstance().player;
 		this.props = EntityStatsCapability.get(player);
 	}
 
-	@Override
-	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
-	{
-		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
-	}
-	
 	@Override
 	public void render(int mouseX, int mouseY, float partialTicks)
 	{
@@ -96,7 +91,7 @@ public class TraderScreen extends ContainerScreen<TraderContainer>
 		{
 			GlStateManager.color4f(1, 1, 1, 1);
 			GlStateManager.enableBlend();
-			WyHelper.drawEntityOnScreen(posX + 150, posY + 150, 100, 40, 5, this.container.getTrader());
+			WyHelper.drawEntityOnScreen(posX + 150, posY + 150, 100, 40, 5, this.trader);
 		}
 		GlStateManager.popMatrix();
 
@@ -179,7 +174,7 @@ public class TraderScreen extends ContainerScreen<TraderContainer>
 		
 		if (this.guiState == 1)
 		{
-			this.listPanel = new ItemListScreenPanel(this, this.container.getTradingItems());
+			this.listPanel = new ItemListScreenPanel(this, this.trader.getTradingItems());
 			this.children.add(this.listPanel);
 			
 			// Increase Quantity
@@ -222,11 +217,11 @@ public class TraderScreen extends ContainerScreen<TraderContainer>
 			int count = this.getSelectedStack().getCount() - 1;
 			
 			if(count <= 0)
-				this.container.getTradingItems().remove(this.getSelectedStack());
+				this.trader.getTradingItems().remove(this.getSelectedStack());
 			else		
 				this.getSelectedStack().setCount(count);
 						
-			WyNetwork.sendToServer(new CUpdateTraderOffersPacket(this.container.getTrader().getEntityId(), this.container.getTradingItems()));
+			WyNetwork.sendToServer(new CUpdateTraderOffersPacket(this.trader.getEntityId(), this.trader.getTradingItems()));
 		}
 			
 		// Give the item
@@ -376,4 +371,9 @@ public class TraderScreen extends ContainerScreen<TraderContainer>
 	{
 		this.wantedAmount = wantedAmount;
 	}
+	
+    public static void open(TraderEntity entity) 
+    {
+        Minecraft.getInstance().displayGuiScreen(new TraderScreen(entity));
+    }
 }

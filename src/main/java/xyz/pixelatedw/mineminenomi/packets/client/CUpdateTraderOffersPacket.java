@@ -14,7 +14,6 @@ import xyz.pixelatedw.mineminenomi.entities.mobs.misc.TraderEntity;
 
 public class CUpdateTraderOffersPacket
 {
-
 	private int traderEntity;
 	private List<TradeEntry> tradeEntries;
 

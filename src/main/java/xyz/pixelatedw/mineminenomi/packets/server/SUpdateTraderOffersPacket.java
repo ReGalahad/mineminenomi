@@ -6,14 +6,13 @@ import java.util.function.Supplier;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
-import net.minecraft.inventory.container.Container;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
 import xyz.pixelatedw.mineminenomi.api.TradeEntry;
-import xyz.pixelatedw.mineminenomi.containers.TraderContainer;
+import xyz.pixelatedw.mineminenomi.entities.mobs.misc.TraderEntity;
 
 public class SUpdateTraderOffersPacket
 {
@@ -71,12 +70,10 @@ public class SUpdateTraderOffersPacket
 		@OnlyIn(Dist.CLIENT)
 		public static void handle(SUpdateTraderOffersPacket message)
 		{
-			Container container = Minecraft.getInstance().player.openContainer;
 			Entity entity = Minecraft.getInstance().world.getEntityByID(message.traderEntity);
-			if (container instanceof TraderContainer)
+			if (entity instanceof TraderEntity)
 			{
-				((TraderContainer)container).setTradingItems(message.tradeEntries);
-				((TraderContainer)container).setTrader(entity);
+				((TraderEntity)entity).setTradingItems(message.tradeEntries);
 			}
 		}
 	}
