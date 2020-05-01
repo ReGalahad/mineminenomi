@@ -53,7 +53,7 @@ public class ItemListScreenPanel extends ScrollPanel
 			int x = (this.parent.width / 2 - 109) + 40;
 
 			this.parent.renderItem(entry.getItemStack(), x - 30, y - 1);
-			if (this.parent.getSelectedStack() != null && entry.getItemStack().getItem() == this.parent.getSelectedStack().getItemStack().getItem())
+			if (this.parent.getSelectedStack() != null && entry.getItemStack().hashCode() == this.parent.getSelectedStack().getItemStack().hashCode())
 				WyHelper.drawColourOnScreen(Color.WHITE.getRGB(), 100, x - 40, y - 4, this.width, 24, 0);
 			
 			this.parent.drawSizedString(entry.getItemStack().getDisplayName().getFormattedText(), x + 50, y + 4, 0.8f, -1);

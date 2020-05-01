@@ -3,8 +3,8 @@ package xyz.pixelatedw.mineminenomi.init;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.biome.Biome.SpawnListEntry;
+import net.minecraft.world.biome.Biomes;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -14,13 +14,14 @@ import xyz.pixelatedw.mineminenomi.entities.VivreCardEntity;
 import xyz.pixelatedw.mineminenomi.entities.WantedPosterPackageEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.bandits.BanditWithSwordEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.marines.MarineCaptainEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.marines.MarineTraderEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.marines.MarineWithGunEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.marines.MarineWithSwordEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.BlackKnightEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.DoppelmanEntity;
-import xyz.pixelatedw.mineminenomi.entities.mobs.misc.TraderEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.WaxPlayerEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.PirateCaptainEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.PirateTraderEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.PirateWithGunEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.PirateWithSwordEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.quest.givers.BowMasterEntity;
@@ -38,11 +39,13 @@ public class ModEntities
 	public static final EntityType MARINE_WITH_SWORD = WyRegistry.createEntityType(MarineWithSwordEntity::new).build("marine_with_sword");
 	public static final EntityType MARINE_WITH_GUN = WyRegistry.createEntityType(MarineWithGunEntity::new).build("marine_with_gun");
 	public static final EntityType MARINE_CAPTAIN = WyRegistry.createEntityType(MarineCaptainEntity::new).build("marine_captain");
+    public static final EntityType MARINE_TRADER = WyRegistry.createEntityType(MarineTraderEntity::new).build("marine_trader");
 
 	// Pirates
 	public static final EntityType PIRATE_WITH_SWORD = WyRegistry.createEntityType(PirateWithSwordEntity::new).build("pirate_with_sword");
 	public static final EntityType PIRATE_WITH_GUN = WyRegistry.createEntityType(PirateWithGunEntity::new).build("pirate_with_gun");
 	public static final EntityType PIRATE_CAPTAIN = WyRegistry.createEntityType(PirateCaptainEntity::new).build("pirate_captain");
+    public static final EntityType PIRATE_TRADER = WyRegistry.createEntityType(PirateTraderEntity::new).build("pirate_trader");
 
 	// Bandits
 	public static final EntityType BANDIT_WITH_SWORD = WyRegistry.createEntityType(BanditWithSwordEntity::new).build("bandit_with_sword");
@@ -50,7 +53,6 @@ public class ModEntities
 	// Factionless
 	public static final EntityType DOJO_SENSEI = WyRegistry.createEntityType(DojoSenseiEntity::new).build("dojo_sensei");
 	public static final EntityType BOW_MASTER = WyRegistry.createEntityType(BowMasterEntity::new).build("bow_master");
-    public static final EntityType TRADER = WyRegistry.createEntityType(TraderEntity::new).build("trader");
    
 	// Other
 	public static final EntityType DOPPELMAN = WyRegistry.createEntityType(DoppelmanEntity::new).build("doppelman");
@@ -67,11 +69,15 @@ public class ModEntities
 		registerMarineWithSpawnEgg(MARINE_WITH_SWORD, "Marine with Sword");
 		registerMarineWithSpawnEgg(MARINE_WITH_GUN, "Marine with Gun");
 		registerMarineWithSpawnEgg(MARINE_CAPTAIN, "Marine Captain");
+		registerMarineWithSpawnEgg(MARINE_TRADER, "Marine Trader");
+        registerEntityWorldSpawn(MARINE_TRADER, 2, 1, Biomes.PLAINS, Biomes.FOREST, Biomes.JUNGLE, Biomes.DESERT, Biomes.BEACH, Biomes.MOUNTAINS);
 
 		// Pirates
 		registerPirateWithSpawnEgg(PIRATE_WITH_SWORD, "Pirate with Sword");
 		registerPirateWithSpawnEgg(PIRATE_WITH_GUN, "Pirate with Gun");
 		registerPirateWithSpawnEgg(PIRATE_CAPTAIN, "Pirate Captain");
+		registerPirateWithSpawnEgg(PIRATE_TRADER, "Pirate Trader");
+        registerEntityWorldSpawn(PIRATE_TRADER, 2, 1, Biomes.PLAINS, Biomes.FOREST, Biomes.JUNGLE, Biomes.DESERT, Biomes.BEACH, Biomes.MOUNTAINS);
 
 		// Bandits
 		registerBanditWithSpawnEgg(BANDIT_WITH_SWORD, "Bandit with Sword");
@@ -79,8 +85,7 @@ public class ModEntities
 		// Factionless
 		registerFactionlessWithSpawnEgg(DOJO_SENSEI, "Dojo Sensei");
 		registerFactionlessWithSpawnEgg(BOW_MASTER, "Bow Master");
-		registerFactionlessWithSpawnEgg(TRADER, "Trader");
-        registerEntityWorldSpawn(TRADER, 2, 1, Biomes.PLAINS, Biomes.FOREST, Biomes.JUNGLE, Biomes.DESERT, Biomes.BEACH, Biomes.MOUNTAINS);
+
 		// Other
 		WyRegistry.registerEntityType(DOPPELMAN, "Doppelman");
 		WyRegistry.registerEntityType(WAX_PLAYER, "Wax Player");

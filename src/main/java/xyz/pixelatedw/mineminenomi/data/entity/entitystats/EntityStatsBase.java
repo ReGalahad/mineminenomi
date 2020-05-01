@@ -169,7 +169,7 @@ public class EntityStatsBase implements IEntityStats
 		if (WyHelper.isNullOrEmpty(this.faction))
 			return false;
 
-		return this.faction.equalsIgnoreCase("pirate");
+		return this.faction.equalsIgnoreCase(ModValues.PIRATE);
 	}
 
 	@Override
@@ -178,7 +178,7 @@ public class EntityStatsBase implements IEntityStats
 		if (WyHelper.isNullOrEmpty(this.faction))
 			return false;
 
-		return this.faction.equalsIgnoreCase("marine");
+		return this.faction.equalsIgnoreCase(ModValues.MARINE);
 	}
 
 	@Override
@@ -187,9 +187,27 @@ public class EntityStatsBase implements IEntityStats
 		if (WyHelper.isNullOrEmpty(this.faction))
 			return false;
 
-		return this.faction.equalsIgnoreCase("bountyhunter");
+		return this.faction.equalsIgnoreCase(ModValues.BOUNTY_HUNTER);
 	}
 
+	@Override
+	public boolean isRevolutionary()
+	{
+		if (WyHelper.isNullOrEmpty(this.faction))
+			return false;
+
+		return this.faction.equalsIgnoreCase(ModValues.REVOLUTIONARY);
+	}
+	
+	@Override
+	public boolean isBandit()
+	{
+		if (WyHelper.isNullOrEmpty(this.faction))
+			return false;
+
+		return this.faction.equalsIgnoreCase(ModValues.BANDIT);
+	}
+	
 	@Override
 	public boolean hasFaction()
 	{
@@ -217,7 +235,7 @@ public class EntityStatsBase implements IEntityStats
 		if (WyHelper.isNullOrEmpty(this.race))
 			return false;
 
-		return this.race.equalsIgnoreCase("human");
+		return this.race.equalsIgnoreCase(ModValues.HUMAN);
 	}
 
 	@Override
@@ -226,7 +244,7 @@ public class EntityStatsBase implements IEntityStats
 		if (WyHelper.isNullOrEmpty(this.race))
 			return false;
 
-		return this.race.equalsIgnoreCase("fishman");
+		return this.race.equalsIgnoreCase(ModValues.FISHMAN);
 	}
 
 	@Override
@@ -235,7 +253,7 @@ public class EntityStatsBase implements IEntityStats
 		if (WyHelper.isNullOrEmpty(this.race))
 			return false;
 
-		return this.race.equalsIgnoreCase("cyborg");
+		return this.race.equalsIgnoreCase(ModValues.CYBORG);
 	}
 
 	@Override
@@ -265,7 +283,7 @@ public class EntityStatsBase implements IEntityStats
 		if (WyHelper.isNullOrEmpty(this.fightingStyle))
 			return false;
 
-		return this.fightingStyle.equalsIgnoreCase("swordsman");
+		return this.fightingStyle.equalsIgnoreCase(ModValues.SWORDSMAN);
 	}
 
 	@Override
@@ -274,7 +292,7 @@ public class EntityStatsBase implements IEntityStats
 		if (WyHelper.isNullOrEmpty(this.fightingStyle))
 			return false;
 
-		return this.fightingStyle.equalsIgnoreCase("sniper");
+		return this.fightingStyle.equalsIgnoreCase(ModValues.SNIPER);
 	}
 
 	@Override
@@ -283,9 +301,18 @@ public class EntityStatsBase implements IEntityStats
 		if (WyHelper.isNullOrEmpty(this.fightingStyle))
 			return false;
 
-		return this.fightingStyle.equalsIgnoreCase("doctor");
+		return this.fightingStyle.equalsIgnoreCase(ModValues.DOCTOR);
 	}
+	
+	@Override
+	public boolean isWeatherWizard()
+	{
+		if (WyHelper.isNullOrEmpty(this.fightingStyle))
+			return false;
 
+		return this.fightingStyle.equalsIgnoreCase(ModValues.ART_OF_WEATHER);
+	}
+	
 	@Override
 	public boolean hasFightingStyle()
 	{

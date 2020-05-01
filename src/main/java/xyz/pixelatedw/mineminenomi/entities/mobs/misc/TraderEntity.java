@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.SpawnReason;
@@ -17,6 +18,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.util.Hand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
@@ -27,21 +29,17 @@ import net.minecraft.world.storage.loot.LootTable;
 import net.minecraftforge.common.util.Constants;
 import xyz.pixelatedw.mineminenomi.api.TradeEntry;
 import xyz.pixelatedw.mineminenomi.entities.mobs.GenericNewEntity;
-import xyz.pixelatedw.mineminenomi.init.ModEntities;
-import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.packets.server.SOpenTraderScreenPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SUpdateTraderOffersPacket;
 import xyz.pixelatedw.wypi.network.WyNetwork;
 
-public class TraderEntity extends GenericNewEntity
+public abstract class TraderEntity extends GenericNewEntity
 {
 	private List<TradeEntry> tradeEntries = new ArrayList<TradeEntry>();
 
-	public TraderEntity(World world)
+	public TraderEntity(EntityType type, World world)
 	{
-		super(ModEntities.TRADER, world, null);
-
-		this.textures = new String[] { "trader1", "trader1", "trader1" };
+		super(type, world, null);
 	}
 
 	@Override
@@ -71,6 +69,12 @@ public class TraderEntity extends GenericNewEntity
 		super.registerData();
 	}
 
+	public abstract boolean canTrade(PlayerEntity player);
+	
+	public abstract String getTradeFailMessage();
+	
+	public abstract ResourceLocation getTradeTable();
+	
 	@Override
 	public void writeAdditional(CompoundNBT nbt)
 	{
@@ -107,7 +111,7 @@ public class TraderEntity extends GenericNewEntity
 		spawnData = super.onInitialSpawn(world, difficulty, reason, spawnData, dataTag);
 
 		// Generates the trade entries from a loot table json file
-		LootTable lootTable = this.world.getServer().getLootTableManager().getLootTableFromLocation(ModResources.TRADER_WEAPONS);
+		LootTable lootTable = this.world.getServer().getLootTableManager().getLootTableFromLocation(this.getTradeTable());
 		LootContext.Builder builder = (new LootContext.Builder((ServerWorld) this.world));
 
 		LootContext context = builder.build(LootParameterSets.EMPTY);

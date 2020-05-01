@@ -74,13 +74,13 @@ public class TraderScreen extends Screen
 		{
 			this.guiState = 1;
 			this.init(this.getMinecraft(), this.width, this.height);
-			/*if (this.shouldTrade)
+			if (this.trader.canTrade(this.player))
 			{
 				this.guiState = 1;
 				this.init(this.getMinecraft(), this.width, this.height);
 			}
 			else
-				this.onClose();*/
+				this.onClose();
 		}
 
 		int posX = this.width / 2;
@@ -170,7 +170,15 @@ public class TraderScreen extends Screen
 		int posY = this.height / 2;
 		
 		if (this.startMessage == null)
-			this.startMessage = new SequencedString(new TranslationTextComponent(ModI18n.TRADER_WELCOME_MESSAGE).getFormattedText(), this, posX - 200, posY - 50, 250, 14 * 20);
+		{
+			String message = "";
+			if(this.trader.canTrade(this.player))
+				message = new TranslationTextComponent(ModI18n.TRADER_WELCOME_MESSAGE).getFormattedText();
+			else
+				message = this.trader.getTradeFailMessage();
+			
+			this.startMessage = new SequencedString(message, this, posX - 200, posY - 50, 250, (int) (this.font.getStringWidth(message) / 1.5));
+		}
 		
 		if (this.guiState == 1)
 		{
@@ -334,10 +342,7 @@ public class TraderScreen extends Screen
 				this.startMessage.ticksExisted = this.startMessage.maxTicks;
 			else
 			{
-				this.guiState = 1;
-				this.init(this.getMinecraft(), this.width, this.height);
-				
-				/*if (this.shouldTrade)
+				if (this.trader.canTrade(this.player))
 				{
 					this.guiState = 1;
 					this.init(this.getMinecraft(), this.width, this.height);
@@ -345,7 +350,7 @@ public class TraderScreen extends Screen
 				else
 				{
 					this.onClose();
-				}*/
+				}
 			}
 		}
 
