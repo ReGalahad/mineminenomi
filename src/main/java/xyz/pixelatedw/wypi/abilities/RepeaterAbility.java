@@ -32,7 +32,12 @@ public abstract class RepeaterAbility extends Ability
 		this.maxCooldown += (this.maxRepeaterCount * this.repeaterInterval);
 		this.cooldown = this.maxCooldown;	
 	}
-		
+	
+	public void setRepeaterCount(int count)
+	{
+		this.repeaterCount = count;
+	}
+	
 	
 	/*
 	 * 	Methods
