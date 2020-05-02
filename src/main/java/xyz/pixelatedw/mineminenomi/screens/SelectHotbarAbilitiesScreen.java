@@ -19,8 +19,6 @@ import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.api.helpers.RendererHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
-import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
-import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.screens.extra.AbilitiesListScreenPanel;
 import xyz.pixelatedw.mineminenomi.screens.extra.NoTextureButton;
@@ -44,7 +42,6 @@ public class SelectHotbarAbilitiesScreen extends Screen
 	public int relativePosX, relativePosY;
 	public int abilitySelected = -1;
 
-	private IEntityStats entityStatsProps;
 	private IAbilityData abilityDataProps;
 	private IDevilFruit devilFruitProps;
 
@@ -54,7 +51,6 @@ public class SelectHotbarAbilitiesScreen extends Screen
 		this.player = player;
 		this.minecraft = Minecraft.getInstance();
 
-		this.entityStatsProps = EntityStatsCapability.get(player);
 		this.abilityDataProps = AbilityDataCapability.get(player);
 		this.devilFruitProps = DevilFruitCapability.get(player);
 	}
@@ -92,20 +88,29 @@ public class SelectHotbarAbilitiesScreen extends Screen
 		}
 
 		this.minecraft.getTextureManager().bindTexture(ModResources.WIDGETS);
-		if (!WyHelper.isNullOrEmpty(devilFruitProps.getDevilFruit()))
+		Ability abl = this.abilityDataProps.getUnlockedAbilities(AbilityCategory.DEVIL_FRUIT).parallelStream().findFirst().orElse(null);
+		if (abl != null || this.devilFruitProps.hasDevilFruit())
 		{
-			GuiUtils.drawTexturedModalRect((posX - 280) / 2, (posY - 200) / 2, 0, 23, 27, 26, 0);
-			if (devilFruitProps.hasYamiPower())
-				RendererHelper.drawDevilFruitIcon("yamiyaminomi", (posX - 268) / 2, (posY - 187) / 2, 16, 16);
+			if(this.devilFruitProps.hasDevilFruit())
+			{
+				GuiUtils.drawTexturedModalRect((posX - 280) / 2, (posY - 200) / 2, 0, 23, 27, 26, 0);
+				if (this.devilFruitProps.hasYamiPower())
+					RendererHelper.drawDevilFruitIcon("yamiyaminomi", (posX - 268) / 2, (posY - 187) / 2, 16, 16);
+				else
+				{
+					ItemStack df = AbilityHelper.getDevilFruitItem(this.devilFruitProps.getDevilFruit());
+	
+					RendererHelper.drawDevilFruitIcon(df.getTranslationKey().replace("item." + APIConfig.PROJECT_ID + ".", ""), (posX - 268) / 2, (posY - 187) / 2, 16, 16);
+				}
+			}
 			else
 			{
-				ItemStack df = AbilityHelper.getDevilFruitItem(devilFruitProps.getDevilFruit());
-
-				RendererHelper.drawDevilFruitIcon(df.getTranslationKey().replace("item." + APIConfig.PROJECT_ID + ".", ""), (posX - 268) / 2, (posY - 187) / 2, 16, 16);
+				GuiUtils.drawTexturedModalRect((posX - 280) / 2, (posY - 200) / 2, 0, 23, 27, 26, 0);
+				RendererHelper.drawAbilityIcon(abl.getName(), (posX - 268) / 2, (posY - 187) / 2, 16, 16);
 			}
 			this.minecraft.getTextureManager().bindTexture(ModResources.WIDGETS);
 		}
-		Ability abl = this.abilityDataProps.getUnlockedAbilities(AbilityCategory.RACIAL).parallelStream().findFirst().orElse(null);
+		abl = this.abilityDataProps.getUnlockedAbilities(AbilityCategory.RACIAL).parallelStream().findFirst().orElse(null);
 		if (abl != null)
 		{
 			GuiUtils.drawTexturedModalRect((posX - 280) / 2, (posY - 140) / 2, 0, 23, 27, 26, 0);
@@ -144,7 +149,8 @@ public class SelectHotbarAbilitiesScreen extends Screen
 		this.relativePosX = posX;
 		this.relativePosY = posY;
 		
-		if (!WyHelper.isNullOrEmpty(this.devilFruitProps.getDevilFruit()))
+		Ability abl = this.abilityDataProps.getUnlockedAbilities(AbilityCategory.DEVIL_FRUIT).stream().findFirst().orElse(null);
+		if (abl != null || this.devilFruitProps.hasDevilFruit())
 		{
 			this.addButton(new NoTextureButton((posX - 280) / 2, (posY - 200) / 2, 27, 25, "", b ->
 			{
@@ -152,7 +158,7 @@ public class SelectHotbarAbilitiesScreen extends Screen
 				this.updateScreen();
 			}));
 		}
-		Ability abl = this.abilityDataProps.getUnlockedAbilities(AbilityCategory.RACIAL).stream().findFirst().orElse(null);
+		abl = this.abilityDataProps.getUnlockedAbilities(AbilityCategory.RACIAL).stream().findFirst().orElse(null);
 		if (abl != null)
 		{
 			this.addButton(new NoTextureButton((posX - 280) / 2, (posY - 140) / 2, 27, 25, "", b ->
