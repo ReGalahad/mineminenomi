@@ -43,12 +43,19 @@ public class AkumaNoMiItem extends Item
 	public EnumFruitType type;
 	public Ability[] abilities;
 
-	public AkumaNoMiItem(String name, EnumFruitType type, Ability... abilitiesArray)
+	public AkumaNoMiItem(String name, int tier, EnumFruitType type, Ability... abilitiesArray)
 	{
 		super(new Item.Properties().group(ModCreativeTabs.DEVIL_FRUITS).maxStackSize(1).food(Foods.APPLE));
 		this.name = name;
 		this.type = type;
 		this.abilities = abilitiesArray;
+		
+		if(tier == 1)
+			AbilityHelper.tier1Fruits.add(this);
+		else if(tier == 2)
+			AbilityHelper.tier2Fruits.add(this);
+		else if(tier == 3)
+			AbilityHelper.tier3Fruits.add(this);
 		
 		if (this.type == EnumFruitType.LOGIA)
 			ModValues.logias.add(this);
@@ -142,7 +149,7 @@ public class AkumaNoMiItem extends Item
 		list.add(new StringTextComponent(""));
 		list.add(new StringTextComponent(this.type.getColor() + this.type.getName()));
 	}
-
+	
 	public EnumFruitType getType()
 	{
 		return this.type;

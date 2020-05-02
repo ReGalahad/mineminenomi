@@ -59,6 +59,7 @@ import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.events.custom.DorikiEvent;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.mineminenomi.init.ModQuests;
+import xyz.pixelatedw.mineminenomi.items.AkumaNoMiItem;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
@@ -73,6 +74,10 @@ import xyz.pixelatedw.wypi.quests.Quest;
 
 public class AbilityHelper
 {
+	public static List<AkumaNoMiItem> tier1Fruits = new ArrayList<AkumaNoMiItem>();
+	public static List<AkumaNoMiItem> tier2Fruits = new ArrayList<AkumaNoMiItem>();
+	public static List<AkumaNoMiItem> tier3Fruits = new ArrayList<AkumaNoMiItem>();
+
 	private static String[][] zoanModels = new String[][]
 		{
 				{
