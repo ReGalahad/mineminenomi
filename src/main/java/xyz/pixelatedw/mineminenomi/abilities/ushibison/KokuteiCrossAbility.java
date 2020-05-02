@@ -10,6 +10,8 @@ import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.entities.zoan.BisonHeavyZoanInfo;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
+import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
+import xyz.pixelatedw.mineminenomi.particles.effects.ushibison.KokuteiCrossParticleEffect;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.PunchAbility;
@@ -18,6 +20,8 @@ public class KokuteiCrossAbility extends PunchAbility
 {
 	public static final KokuteiCrossAbility INSTANCE = new KokuteiCrossAbility();
 
+	private static final ParticleEffect PARTICLES = new KokuteiCrossParticleEffect();
+	
 	public KokuteiCrossAbility()
 	{
 		super("Kokutei Cross", AbilityCategory.DEVIL_FRUIT);
@@ -47,6 +51,8 @@ public class KokuteiCrossAbility extends PunchAbility
 		target.setMotion(speed.x, player.getMotion().getY(), speed.z);
 		if(target instanceof PlayerEntity)
 			((ServerPlayerEntity)target).connection.sendPacket(new SEntityVelocityPacket(target));
+		
+		PARTICLES.spawn(player.world, target.posX, target.posY, target.posZ, 0, 0, 0);
 		
 		return 20;
 	}
