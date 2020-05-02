@@ -105,6 +105,9 @@ import xyz.pixelatedw.mineminenomi.abilities.mero.MeroMeroMellowAbility;
 import xyz.pixelatedw.mineminenomi.abilities.mero.PerfumeFemurAbility;
 import xyz.pixelatedw.mineminenomi.abilities.mero.PistolKissAbility;
 import xyz.pixelatedw.mineminenomi.abilities.mero.SlaveArrowAbility;
+import xyz.pixelatedw.mineminenomi.abilities.mogu.MoguHeavyPointAbility;
+import xyz.pixelatedw.mineminenomi.abilities.mogu.MoguraBananaAbility;
+import xyz.pixelatedw.mineminenomi.abilities.mogu.MoguraTonpoAbility;
 import xyz.pixelatedw.mineminenomi.abilities.moku.WhiteLauncherAbility;
 import xyz.pixelatedw.mineminenomi.abilities.moku.WhiteOutAbility;
 import xyz.pixelatedw.mineminenomi.abilities.moku.WhiteSnakeAbility;
@@ -186,7 +189,7 @@ public class ModAbilities
 	public static final AkumaNoMiItem KACHI_KACHI_NO_MI = new AkumaNoMiItem("Kachi Kachi no Mi", EnumFruitType.PARAMECIA);
 	public static final AkumaNoMiItem DOA_DOA_NO_MI = new AkumaNoMiItem("Doa Doa no Mi", EnumFruitType.PARAMECIA);
 	public static final AkumaNoMiItem USHI_USHI_NO_MI_GIRAFFE = new AkumaNoMiItem("Ushi Ushi no Mi, Model Giraffe", EnumFruitType.ZOAN);
-	public static final AkumaNoMiItem MOGU_MOGU_NO_MI = new AkumaNoMiItem("Mogu Mogu no Mi", EnumFruitType.ZOAN);
+	public static final AkumaNoMiItem MOGU_MOGU_NO_MI = new AkumaNoMiItem("Mogu Mogu no Mi", EnumFruitType.ZOAN, MoguHeavyPointAbility.INSTANCE, MoguraBananaAbility.INSTANCE, MoguraTonpoAbility.INSTANCE);
 	public static final AkumaNoMiItem CHIYU_CHIYU_NO_MI = new AkumaNoMiItem("Chiyu Chiyu no Mi", EnumFruitType.PARAMECIA, HealingTouchAbility.INSTANCE, ChiyupopoAbility.INSTANCE);
 	public static final AkumaNoMiItem HITO_HITO_NO_MI = new AkumaNoMiItem("Hito Hito no Mi", EnumFruitType.ZOAN);
 	public static final AkumaNoMiItem SABI_SABI_NO_MI = new AkumaNoMiItem("Sabi Sabi no Mi", EnumFruitType.PARAMECIA, RustTouchAbility.INSTANCE);

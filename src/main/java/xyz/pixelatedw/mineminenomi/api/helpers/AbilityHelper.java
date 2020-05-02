@@ -398,7 +398,7 @@ public class AbilityHelper
 		if (fullName.equals("yamidummy"))
 			fullName = "yamiyami";
 
-		String finalName = fullName.replace("_" + model, "") + "_no_mi" + fullModel;
+		String finalName = (!WyHelper.isNullOrEmpty(model) ? fullName.replace("_" + model, "") : fullName) + "_no_mi" + fullModel;
 				
 		return new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(APIConfig.PROJECT_ID, finalName)));
 	}

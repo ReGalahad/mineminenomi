@@ -93,7 +93,7 @@ public class PlayerStatsScreen extends Screen
 			this.minecraft.textureManager.bindTexture(ModResources.CURRENCIES);
 			GuiUtils.drawTexturedModalRect(posX + 190, posY + 90, 34, 32, 64, 86, 1);
 		}
-
+		
 		if (!WyHelper.isNullOrEmpty(devilFruitProps.getDevilFruit()))
 		{
 			ItemStack yamiFruit = new ItemStack(ModAbilities.YAMI_YAMI_NO_MI);
