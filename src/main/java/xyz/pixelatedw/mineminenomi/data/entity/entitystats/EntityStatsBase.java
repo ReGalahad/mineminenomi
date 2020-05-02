@@ -214,7 +214,7 @@ public class EntityStatsBase implements IEntityStats
 		if (WyHelper.isNullOrEmpty(this.faction))
 			return false;
 
-		return isPirate() || isMarine() || isBountyHunter();
+		return true;
 	}
 
 	@Override
@@ -262,7 +262,7 @@ public class EntityStatsBase implements IEntityStats
 		if (WyHelper.isNullOrEmpty(this.race))
 			return false;
 
-		return isHuman() || isFishman() || isCyborg();
+		return true;
 	}
 
 	@Override
@@ -319,7 +319,7 @@ public class EntityStatsBase implements IEntityStats
 		if (WyHelper.isNullOrEmpty(this.fightingStyle))
 			return false;
 
-		return isSwordsman() || isSniper() || isDoctor();
+		return true;
 	}
 	
 	@Override
