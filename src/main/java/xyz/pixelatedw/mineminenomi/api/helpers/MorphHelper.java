@@ -11,8 +11,8 @@ import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.entities.zoan.VenomDemonZoanInfo;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfo;
-import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoBisonHeavy;
-import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoBisonWalk;
+import xyz.pixelatedw.mineminenomi.entities.zoan.BisonHeavyZoanInfo;
+import xyz.pixelatedw.mineminenomi.entities.zoan.BisonWalkZoanInfo;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoGiraffeHeavy;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoGiraffeWalk;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoMoguMole;
@@ -86,8 +86,8 @@ public class MorphHelper
 	static
 	{
 		// Bison Zoan Points
-		zoanInfoList.add(new ZoanInfoBisonHeavy());
-		zoanInfoList.add(new ZoanInfoBisonWalk());
+		zoanInfoList.add(new BisonHeavyZoanInfo());
+		zoanInfoList.add(new BisonWalkZoanInfo());
 		
 		// Phoenix Zoan Points
 		zoanInfoList.add(new ZoanInfoPhoenixFull());

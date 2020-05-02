@@ -145,13 +145,16 @@ public class ZoanMorphRenderer extends LivingRenderer
 
 				ZoanInfo info = MorphHelper.getZoanInfo((PlayerEntity) entity);
 
-				this.translateToHand(HandSide.LEFT);
-				GlStateManager.rotatef(-180.0F, 1.0F, 0.0F, 0.0F);
-				GlStateManager.rotatef(180.0F, 0.0F, 1.0F, 0.0F);
-				GlStateManager.rotatef(180.0F, 0.0F, 0.0F, 1.0F);
-				GlStateManager.translated(info.getHeldItemOffset()[0], info.getHeldItemOffset()[1], info.getHeldItemOffset()[2]);
-
-				Minecraft.getInstance().getFirstPersonRenderer().renderItemSide(entity, itemstack, TransformType.FIRST_PERSON_LEFT_HAND, false);
+				if(this.getEntityModel() instanceof IHasArm)
+				{
+					this.translateToHand(HandSide.LEFT);
+					GlStateManager.rotatef(-180.0F, 1.0F, 0.0F, 0.0F);
+					GlStateManager.rotatef(180.0F, 0.0F, 1.0F, 0.0F);
+					GlStateManager.rotatef(180.0F, 0.0F, 0.0F, 1.0F);
+					GlStateManager.translated(info.getHeldItemOffset()[0], info.getHeldItemOffset()[1], info.getHeldItemOffset()[2]);
+	
+					Minecraft.getInstance().getFirstPersonRenderer().renderItemSide(entity, itemstack, TransformType.FIRST_PERSON_LEFT_HAND, false);
+				}
 			}
 			GlStateManager.popMatrix();
 		}

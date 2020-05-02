@@ -1,19 +1,19 @@
 package xyz.pixelatedw.mineminenomi.entities.zoan;
 
-import xyz.pixelatedw.mineminenomi.models.entities.zoans.BisonWalkModel;
+import xyz.pixelatedw.mineminenomi.abilities.ushibison.BisonHeavyPointAbility;
+import xyz.pixelatedw.mineminenomi.models.entities.zoans.BisonHeavyModel;
 import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer.Factory;
 import xyz.pixelatedw.wypi.abilities.Ability;
 
-public class ZoanInfoBisonWalk extends ZoanInfo
+public class BisonHeavyZoanInfo extends ZoanInfo
 {
-
-	public static final String FORM = "walk";
+	public static final String FORM = "heavy";
 	
 	@Override
 	public String getDevilFruit()
 	{
-		return "ushiushibison";
+		return "ushi_ushi_bison";
 	}
 
 	@Override
@@ -25,37 +25,37 @@ public class ZoanInfoBisonWalk extends ZoanInfo
 	@Override
 	public Factory getFactory()
 	{
-		return new ZoanMorphRenderer.Factory(new BisonWalkModel(), "bisonspeed", 1.4, new float[] { 0, 0.8f, 0 });
+		return new ZoanMorphRenderer.Factory(new BisonHeavyModel(), "bisonpower", 1.4, new float[] { 0, 0.7f, 0 });
 	}
 
 	@Override
 	public Ability getAbility()
 	{
-		return null;//ModAttributes.BISON_WALK_POINT;
+		return BisonHeavyPointAbility.INSTANCE;
 	}
 
 	@Override
 	public double getWidth()
 	{
-		return 1.3;
+		return 1.5;
 	}
 
 	@Override
 	public double getHeight()
 	{
-		return 1.5;
+		return 2.5;
 	}
 
 	@Override
 	public double[] getHeldItemOffset()
 	{
-		return new double[] {0, 0, 0};
+		return new double[] {-0.37, 0.6, -0.325};
 	}
 
 	@Override
 	public double getHeldItemRotation()
 	{
-		return 0;
+		return 50;
 	}
 
 }

@@ -39,9 +39,6 @@ public class AbilityValidationEvents
 
 			if (!player.world.isRemote)
 			{
-				//if (!entityStatsProps.hasRace() && !entityStatsProps.hasFaction() && !entityStatsProps.hasFightingStyle() && !player.inventory.hasItemStack(new ItemStack(ModItems.CHARACTER_CREATOR)))
-				//	player.inventory.addItemStackToInventory(new ItemStack(ModItems.CHARACTER_CREATOR, 1));
-				
 				if(!WyHelper.isNullOrEmpty(devilFruitProps.getDevilFruit()))
 				{
 					ItemStack df = AbilityHelper.getDevilFruitItem(devilFruitProps.getDevilFruit());
@@ -50,11 +47,11 @@ public class AbilityValidationEvents
 					if(!devilFruitProps.getZoanPoint().equalsIgnoreCase("yomi"))
 						devilFruitProps.setZoanPoint("");
 					
-					if(df != null && df.getItem() != null)
+					if(df != null && !df.isEmpty())
 					{
 						if(devilFruitProps.hasYamiPower())
 						{
-							ItemStack yami = AbilityHelper.getDevilFruitItem("yamiyami");
+							ItemStack yami = AbilityHelper.getDevilFruitItem("yami_yami");
 							for(Ability a : ((AkumaNoMiItem)yami.getItem()).abilities)
 								if(!AbilityHelper.verifyIfAbilityIsBanned(a))
 									abilityProps.addUnlockedAbility(a);

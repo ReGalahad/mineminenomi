@@ -6,6 +6,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
+import xyz.pixelatedw.mineminenomi.api.abilities.ZoanAbility;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.abilities.ChargeableAbility;
@@ -63,7 +64,19 @@ public class CUseAbilityPacket
 				{
 					for(Ability ability : abilityDataProps.getEquippedAbilities())
 					{
-						if(ability instanceof ContinuousAbility && ability.isContinuous())
+						if(ability instanceof ContinuousAbility && ability.isContinuous() && !(ability instanceof IParallelContinuousAbility))
+						{
+							return;
+						}
+					}
+				}
+				
+				// Stops multiple zoan abilities from getting triggered at the same time
+				if(abl instanceof ZoanAbility && !abl.isContinuous())
+				{
+					for(Ability ability : abilityDataProps.getEquippedAbilities())
+					{
+						if(ability instanceof ZoanAbility && ability.isContinuous())
 						{
 							return;
 						}

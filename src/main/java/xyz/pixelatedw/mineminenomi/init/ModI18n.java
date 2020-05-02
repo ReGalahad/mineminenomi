@@ -66,6 +66,8 @@ public class ModI18n
 	public static final String ABILITY_MESSAGE_NEED_MEDIC_BAG = WyRegistry.registerName("ability.item.message.need_medic_bag", "You need a medic bag equipped to use this ability!");
 	public static final String ABILITY_MESSAGE_NOT_ENOUGH_COLA = WyRegistry.registerName("ability.message.not_enough_cola", "Not enough Cola!");
 	public static final String ABILITY_MESSAGE_NOT_ENOUGH_BLOCKS = WyRegistry.registerName("ability.message.not_enough_blocks", "Not enough blocks in the inventory!");
+	public static final String ABILITY_MESSAGE_NOT_ZOAN_FORM_SINGLE = WyRegistry.registerName("ability.message.not_zoan_form_single", "%s can only be used while %s is active !");
+	public static final String ABILITY_MESSAGE_NOT_ZOAN_FORM_DOUBLE = WyRegistry.registerName("ability.message.not_zoan_form_double", "%s can only be used while %s or %s is active !");
 
 	public static void init()
 	{

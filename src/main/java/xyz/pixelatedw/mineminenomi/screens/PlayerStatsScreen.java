@@ -73,7 +73,6 @@ public class PlayerStatsScreen extends Screen
 		String raceActual = I18n.format("race." + race);
 		String styleActual = I18n.format("style." + style);
 
-		// TODO DORIKI and COLA I18n strings
 		if (entityStatsProps.isCyborg())
 			this.minecraft.fontRenderer.drawStringWithShadow(TextFormatting.BOLD + colaGUI + ": " + TextFormatting.RESET + entityStatsProps.getCola() + " / " + entityStatsProps.getMaxCola(), posX - 30, posY + 50, -1);
 		this.minecraft.fontRenderer.drawStringWithShadow(TextFormatting.BOLD + dorikiGUI + ": " + TextFormatting.RESET + entityStatsProps.getDoriki(), posX - 30, posY + 70, -1);

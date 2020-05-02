@@ -76,13 +76,13 @@ public class AbilityHelper
 	private static String[][] zoanModels = new String[][]
 		{
 				{
-						"ushiushibison", "bison"
+						"ushi_ushi_bison", "bison"
 				},
 				{
-						"toritoriphoenix", "phoenix"
+						"tori_tori_phoenix", "phoenix"
 				},
 				{
-						"ushiushigiraffe", "giraffe"
+						"ushi_ushi_giraffe", "giraffe"
 				},
 		};
 
@@ -390,7 +390,7 @@ public class AbilityHelper
 			if (fullName.equals(s[0]))
 			{
 				model = s[1];
-				fullModel = "model" + model;
+				fullModel = "_model_" + model;
 				break;
 			}
 		}
@@ -398,7 +398,9 @@ public class AbilityHelper
 		if (fullName.equals("yamidummy"))
 			fullName = "yamiyami";
 
-		return new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(APIConfig.PROJECT_ID, fullName.replace(model, "") + "_no_mi" + fullModel)));
+		String finalName = fullName.replace("_" + model, "") + "_no_mi" + fullModel;
+				
+		return new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(APIConfig.PROJECT_ID, finalName)));
 	}
 
 	public static boolean isEntityInRoom(LivingEntity entity)
