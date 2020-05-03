@@ -39,6 +39,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.IPacket;
 import net.minecraft.network.play.server.SSpawnParticlePacket;
 import net.minecraft.particles.IParticleData;
@@ -607,4 +609,12 @@ public class WyHelper
 		return null;
 	}
 
+	public static final int getIndexOfItemStack(ItemStack stack, IInventory inven) {
+		for(int i = 0; i < inven.getSizeInventory(); i++) {
+			if(inven.getStackInSlot(i).getItem() == stack.getItem()) {
+				return i;
+			}
+		}
+		return -1;
+	}
 }
