@@ -21,23 +21,6 @@ import xyz.pixelatedw.wypi.WyHelper;
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class MeroPassiveEvents
 {
-
-	@SubscribeEvent
-	@OnlyIn(Dist.CLIENT)
-	public static void onEntityRendered(RenderLivingEvent.Post event)
-	{
-		LivingEntity entity = event.getEntity();
-		LivingRenderer renderer = event.getRenderer();
-
-		if (!entity.isPotionActive(ModEffects.LOVESTRUCK))
-			return;
-
-		if (entity.getActivePotionEffect(ModEffects.LOVESTRUCK).getDuration() <= 0)
-			entity.removePotionEffect(ModEffects.LOVESTRUCK);
-
-		RendererHelper.renderEffectOverlay((float) event.getX(), (float) event.getY(), (float) event.getZ(), event.getPartialRenderTick(), entity, renderer, (IHasOverlay) ModEffects.LOVESTRUCK);
-	}
-	
 	@SubscribeEvent
 	@OnlyIn(Dist.CLIENT)
 	public static void onFirstPersonViewRendered(TickEvent.RenderTickEvent event)
