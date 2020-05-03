@@ -12,12 +12,14 @@ import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.PlayerRenderer;
+import net.minecraft.client.renderer.entity.model.IHasArm;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.HandSide;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityEvent;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
@@ -37,6 +39,7 @@ import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoZouHeavy;
 import xyz.pixelatedw.mineminenomi.packets.server.SRecalculateEyeHeightPacket;
 import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer;
 import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.abilities.models.CubeModel;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 import xyz.pixelatedw.wypi.network.WyNetwork;
@@ -44,7 +47,52 @@ import xyz.pixelatedw.wypi.network.WyNetwork;
 public class MorphHelper
 {
 	private static List<ZoanInfo> zoanInfoList = new ArrayList<ZoanInfo>();
+	
+	private static final CubeModel COATED_ARM = new CubeModel();
 
+	public static void renderArmThirdPerson(RenderLivingEvent.Post event, PlayerEntity player, ResourceLocation texture)
+	{
+		GlStateManager.pushMatrix();
+		{
+			GlStateManager.translatef((float) event.getX(), (float) event.getY(), (float) event.getZ());
+
+			GlStateManager.rotatef(180.0F, 1.0F, 0.0F, 0.0F);
+			GlStateManager.rotatef(180.0F, 0.0F, 1.0F, 0.0F);
+
+			float ageInTicks = player.ticksExisted + event.getPartialRenderTick();
+			float headYawOffset = WyHelper.interpolateRotation(player.prevRenderYawOffset, player.renderYawOffset, event.getPartialRenderTick());
+
+			WyHelper.rotateCorpse(player, ageInTicks, headYawOffset, event.getPartialRenderTick());
+
+			if (player.shouldRenderSneaking())
+				GlStateManager.translatef(0.0F, 0.2F, 0.0F);
+
+			GlStateManager.translatef(0.02F, -1.45F, 0F);
+			
+			((IHasArm) event.getRenderer().getEntityModel()).postRenderArm(0.0625F, HandSide.RIGHT);
+			GlStateManager.rotatef(-90.0F, 1.0F, 0.0F, 0.0F);
+			GlStateManager.rotatef(180.0F, 0.0F, 1.0F, 0.0F);
+			GlStateManager.translatef(1 / 16.0F, 0.125F, -0.625F);
+
+			GlStateManager.rotatef(90.0F, 1.0F, 0.0F, 0.0F);
+			
+			double sizeXZ = 0.057;
+			double sizeY = 0.10;
+			GlStateManager.scaled(sizeXZ - 0.003, sizeY, sizeXZ + 0.002);
+			
+			float zTranslate = 2.1F;
+			
+			if(!player.getHeldItemMainhand().isEmpty())
+				zTranslate = 2.4F;
+			
+			GlStateManager.translatef(0F, 2.4F, zTranslate);
+
+			Minecraft.getInstance().getTextureManager().bindTexture(texture);
+			COATED_ARM.render(player, 0, 0, 0, 0, 0, 0.625F);
+		}
+		GlStateManager.popMatrix();
+	}
+	
 	public static void renderArmFirstPerson(float equippedProgress, float swingProgress, HandSide side, ResourceLocation texture)
 	{
 		Minecraft mc = Minecraft.getInstance();
