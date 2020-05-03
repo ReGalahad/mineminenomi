@@ -32,7 +32,12 @@ public abstract class RepeaterAbility extends Ability
 		this.maxCooldown += (this.maxRepeaterCount * this.repeaterInterval);
 		this.cooldown = this.maxCooldown;	
 	}
-		
+	
+	public void setRepeaterCount(int count)
+	{
+		this.repeaterCount = count;
+	}
+	
 	
 	/*
 	 * 	Methods
@@ -46,7 +51,7 @@ public abstract class RepeaterAbility extends Ability
 		if(this.isOnCooldown() && this.cooldown > 0)
 		{
 			this.cooldown--;
-
+			
 			if(!player.world.isRemote)
 			{
 				if(this.repeaterCount > 0 && this.cooldown % this.repeaterInterval == 0)

@@ -1,0 +1,143 @@
+{
+	"type": "minecraft:chest",
+	"pools": [
+		{
+			"name": "mineminenomi:projectiles",
+			"rolls": 1,
+			"entries": [
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:bullet",
+					"weight": 100,
+					"functions": [
+						{
+							"function": "mineminenomi:infinite_stock"
+						},
+						{
+							"function": "mineminenomi:set_price",
+							"price_range": {
+								"min": 10.0,
+								"max": 20.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:kairoseki_bullet",
+					"weight": 90,
+					"functions": [
+						{
+							"function": "mineminenomi:infinite_stock"
+						},
+						{
+							"function": "mineminenomi:set_price",
+							"price_range": {
+								"min": 40.0,
+								"max": 60.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "minecraft:arrow",
+					"weight": 90,
+					"functions": [
+						{
+							"function": "mineminenomi:infinite_stock"
+						},
+						{
+							"function": "mineminenomi:set_price",
+							"price_range": {
+								"min": 5.0,
+								"max": 15.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "mineminenomi:guns",
+			"rolls": 1,
+			"entries": [
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:flintlock",
+					"weight": 100,
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"min": 1.0,
+								"max": 3.0,
+								"type": "minecraft:uniform"
+							}
+						},
+						{
+							"function": "mineminenomi:set_price",
+							"price_range": {
+								"min": 100.0,
+								"max": 150.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "minecraft:bow",
+					"weight": 100,
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"min": 1.0,
+								"max": 2.0,
+								"type": "minecraft:uniform"
+							}
+						},
+						{
+							"function": "mineminenomi:set_price",
+							"price_range": {
+								"min": 80.0,
+								"max": 120.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:senriku",
+					"weight": 20,
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"min": 1.0,
+								"max": 2.0,
+								"type": "minecraft:uniform"
+							}
+						},
+						{
+							"function": "mineminenomi:set_price",
+							"price_range": {
+								"min": 1000.0,
+								"max": 2000.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				}
+
+			]
+		}
+
+
+	]
+}

@@ -9,7 +9,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
-import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoMoguMole;
+import xyz.pixelatedw.mineminenomi.entities.zoan.MoguHeavyZoanInfo;
 import xyz.pixelatedw.wypi.APIConfig;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
@@ -24,7 +24,7 @@ public class ZoanPassivesEvents
 			IDevilFruit props = DevilFruitCapability.get(attacker);
 			LivingEntity attacked = event.getEntityLiving();
 
-			if(props.getDevilFruit().equalsIgnoreCase("mogumogu") && props.getZoanPoint().equalsIgnoreCase(ZoanInfoMoguMole.FORM))
+			if(props.getDevilFruit().equalsIgnoreCase("mogumogu") && props.getZoanPoint().equalsIgnoreCase(MoguHeavyZoanInfo.FORM))
 				event.setAmount(3);
 		}
 	}
@@ -38,7 +38,7 @@ public class ZoanPassivesEvents
 			IDevilFruit props = DevilFruitCapability.get(player);
 			ItemStack heldItem = player.getHeldItemMainhand();
 			
-			if(props.getDevilFruit().equalsIgnoreCase("mogumogu") && props.getZoanPoint().equalsIgnoreCase(ZoanInfoMoguMole.FORM))
+			if(props.getDevilFruit().equalsIgnoreCase("mogumogu") && props.getZoanPoint().equalsIgnoreCase(MoguHeavyZoanInfo.FORM))
 			{
 
 			}

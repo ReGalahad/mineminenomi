@@ -10,19 +10,22 @@ import net.minecraft.world.storage.loot.IRandomRange;
 import net.minecraft.world.storage.loot.LootContext;
 import net.minecraft.world.storage.loot.LootFunction;
 import net.minecraft.world.storage.loot.RandomRanges;
-import net.minecraft.world.storage.loot.RandomValueRange;
 import net.minecraft.world.storage.loot.conditions.ILootCondition;
 import xyz.pixelatedw.wypi.APIConfig;
 
-public class SetPriceFunction extends LootFunction{
+public class SetPriceFunction extends LootFunction
+{
+	private IRandomRange range;
 
-	IRandomRange range;
-	protected SetPriceFunction(ILootCondition[] conditionsIn, IRandomRange rang) {
+	protected SetPriceFunction(ILootCondition[] conditionsIn, IRandomRange rang)
+	{
 		super(conditionsIn);
 		this.range = rang;
 	}
+
 	@Override
-	protected ItemStack doApply(ItemStack stack, LootContext context) {
+	protected ItemStack doApply(ItemStack stack, LootContext context)
+	{
 		stack.getOrCreateTag().putInt("price", this.range.generateInt(context.getRandom()));
 		return stack;
 	}

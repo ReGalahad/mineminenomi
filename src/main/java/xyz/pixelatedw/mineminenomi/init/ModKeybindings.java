@@ -16,6 +16,7 @@ import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.packets.client.CCombatModeTriggerPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CRequestSyncPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CUseAbilityPacket;
+import xyz.pixelatedw.mineminenomi.screens.CharacterCreatorScreen;
 import xyz.pixelatedw.mineminenomi.screens.PlayerStatsScreen;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.abilities.Ability;
@@ -83,7 +84,10 @@ public class ModKeybindings
 			byte sync = 0b000100111;
 			WyNetwork.sendToServer(new CRequestSyncPacket(sync));
 			
-			Minecraft.getInstance().displayGuiScreen(new PlayerStatsScreen(player));
+			if(!entityStatsProps.hasRace() || !entityStatsProps.hasFaction() || !entityStatsProps.hasFightingStyle())
+				Minecraft.getInstance().displayGuiScreen(new CharacterCreatorScreen());
+			else
+				Minecraft.getInstance().displayGuiScreen(new PlayerStatsScreen(player));
 		}
 
 		if (enterCombatMode.isPressed())

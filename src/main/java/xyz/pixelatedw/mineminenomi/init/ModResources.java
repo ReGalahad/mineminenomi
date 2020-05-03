@@ -35,7 +35,9 @@ public class ModResources
 
 	// UI
 	public static final ResourceLocation WOOD_ARROW = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/icons/arrow.png");
-			
+	public static final ResourceLocation BRIGHT_WOOD_ARROW = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/icons/arrow2.png");
+	public static final ResourceLocation BRIGHT_WOOD_ARROW_DOWN = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/icons/arrow2_down.png");
+
 	public static final ResourceLocation PIRATE = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/icons/pirate.png");
 	public static final ResourceLocation MARINE = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/icons/marine.png");
 	public static final ResourceLocation BOUNTY_HUNTER = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/icons/bounty_hunter.png");
@@ -57,6 +59,7 @@ public class ModResources
 	public static final ResourceLocation WIDGETS = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/widgets.png");
 	public static final ResourceLocation SCROLL = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/quest_scroll.png");
 	public static final ResourceLocation BLANK_SLIM = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/blank_slim.png");
+	public static final ResourceLocation BLANK2 = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/blank2.png");
 
 	// Loot Tables
 	public static final ResourceLocation SMALL_SHIP_COMBAT = new ResourceLocation(APIConfig.PROJECT_ID, "chests/small_ship/combat");
@@ -66,7 +69,7 @@ public class ModResources
 	public static final ResourceLocation LARGE_SHIP_FOOD = new ResourceLocation(APIConfig.PROJECT_ID, "chests/large_ship/food");
 	public static final ResourceLocation LARGE_SHIP_COMBAT = new ResourceLocation(APIConfig.PROJECT_ID, "chests/large_ship/combat");
 	
-	public static final ResourceLocation TRADER_WEAPON = new ResourceLocation(APIConfig.PROJECT_ID, "entities/trader/weapon");
+	public static final ResourceLocation TRADER_WEAPONS = new ResourceLocation(APIConfig.PROJECT_ID, "entities/trader/weapons");
 	
 	// Zoan / Morphing
 	public static final ResourceLocation BUSOSHOKU_HAKI_ARM = new ResourceLocation(APIConfig.PROJECT_ID, "textures/models/zoanmorph/buso.png");

@@ -46,18 +46,31 @@ public class ModI18n
 	
 	public static final String GUI_ACCEPT = WyRegistry.registerName("gui.accept", "Accept");
 	public static final String GUI_DECLINE = WyRegistry.registerName("gui.decline", "Decline");
+	public static final String GUI_BUY = WyRegistry.registerName("gui.buy", "Buy");
+	public static final String GUI_NAME = WyRegistry.registerName("gui.name", "Name");	
+	public static final String GUI_PRICE = WyRegistry.registerName("gui.price", "Price");
 	
+	public static final String GUI_CLICK_TO_SKIP = WyRegistry.registerName("gui.click_to_skip", "Click to Skip");
+
 	public static final String QUEST_NO_QUESTS_AVAILABLE = WyRegistry.registerName("quest.no_quests_available", "<%s> I don't have any quests for you at the moment.");
 	public static final String QUEST_NO_TRIALS_AVAILABLE = WyRegistry.registerName("quest.no_trials_available", "<%s> I don't have any trials for you at the moment.");
 	public static final String QUEST_TOO_MANY = WyRegistry.registerName("quest.too_many", "<%s> You cannot accept any more quests");
 	public static final String QUEST_ALREADY_IN_PROGRESS = WyRegistry.registerName("quest.already_in_progress", "Already in progress!");
 		
+	public static final String TRADER_WELCOME_MESSAGE = WyRegistry.registerName("trader.welcome_message", "Welcome to my humble Shop! Fine traveler, please take whatever you need. I sell to all who need it.");
+	public static final String TRADER_NO_PIRATE = WyRegistry.registerName("trader.no_pirate", "I don't trade to Pirate Scum");
+	public static final String TRADER_NO_MARINE = WyRegistry.registerName("trader.no_marine", "I don't support the Marines.");
+	
 	public static final String ABILITY_MESSAGE_NEED_SWORD = WyRegistry.registerName("ability.item.message.need_sword", "You need a sword to use this ability!");
 	public static final String ABILITY_MESSAGE_ONLY_IN_ROOM = WyRegistry.registerName("ability.item.message.only_in_room", "%s can only be used inside ROOM!");
 	public static final String ABILITY_MESSAGE_NEED_MEDIC_BAG = WyRegistry.registerName("ability.item.message.need_medic_bag", "You need a medic bag equipped to use this ability!");
 	public static final String ABILITY_MESSAGE_NOT_ENOUGH_COLA = WyRegistry.registerName("ability.message.not_enough_cola", "Not enough Cola!");
 	public static final String ABILITY_MESSAGE_NOT_ENOUGH_BLOCKS = WyRegistry.registerName("ability.message.not_enough_blocks", "Not enough blocks in the inventory!");
+	public static final String ABILITY_MESSAGE_NOT_ZOAN_FORM_SINGLE = WyRegistry.registerName("ability.message.not_zoan_form_single", "%s can only be used while %s is active !");
+	public static final String ABILITY_MESSAGE_NOT_ZOAN_FORM_DOUBLE = WyRegistry.registerName("ability.message.not_zoan_form_double", "%s can only be used while %s or %s is active !");
 
+	public static final String ITEM_MESSAGE_NEED_KEY = WyRegistry.registerName("item.message.need_key", "You need a key!");
+	
 	public static void init()
 	{
 		// ItemGroups

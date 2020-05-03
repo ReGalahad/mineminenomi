@@ -15,12 +15,12 @@ import xyz.pixelatedw.mineminenomi.api.helpers.ItemsHelper;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.wypi.APIConfig;
 
-public class RandomWantedPosterLootFunction extends LootFunction
+public class RandomWantedPosterFunction extends LootFunction
 {
 	private HashMap<String, ItemStack> wantedPosters = new HashMap<String, ItemStack>();
 	private long lastPackageOpened = 0;
 	
-	protected RandomWantedPosterLootFunction(ILootCondition[] conditionsIn)
+	protected RandomWantedPosterFunction(ILootCondition[] conditionsIn)
 	{
 		super(conditionsIn);
 	}
@@ -52,23 +52,23 @@ public class RandomWantedPosterLootFunction extends LootFunction
 		return stack;
 	}
 
-	public static class Serializer extends LootFunction.Serializer<RandomWantedPosterLootFunction>
+	public static class Serializer extends LootFunction.Serializer<RandomWantedPosterFunction>
 	{
 		public Serializer()
 		{
-			super(new ResourceLocation(APIConfig.PROJECT_ID + ":random_wanted_poster"), RandomWantedPosterLootFunction.class);
+			super(new ResourceLocation(APIConfig.PROJECT_ID + ":random_wanted_poster"), RandomWantedPosterFunction.class);
 		}
 
 		@Override
-		public void serialize(JsonObject object, RandomWantedPosterLootFunction functionClazz, JsonSerializationContext serializationContext)
+		public void serialize(JsonObject object, RandomWantedPosterFunction functionClazz, JsonSerializationContext serializationContext)
 		{
 			super.serialize(object, functionClazz, serializationContext);
 		}
 
 		@Override
-		public RandomWantedPosterLootFunction deserialize(JsonObject object, JsonDeserializationContext deserializationContext, ILootCondition[] conditionsIn)
+		public RandomWantedPosterFunction deserialize(JsonObject object, JsonDeserializationContext deserializationContext, ILootCondition[] conditionsIn)
 		{
-			return new RandomWantedPosterLootFunction(conditionsIn);
+			return new RandomWantedPosterFunction(conditionsIn);
 		}
 	}
 }

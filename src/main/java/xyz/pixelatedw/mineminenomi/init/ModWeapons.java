@@ -12,7 +12,7 @@ import xyz.pixelatedw.mineminenomi.abilities.pika.AmaNoMurakumoAbility;
 import xyz.pixelatedw.mineminenomi.abilities.yuki.TabiraYukiAbility;
 import xyz.pixelatedw.mineminenomi.items.weapons.AbilitySwordItem;
 import xyz.pixelatedw.mineminenomi.items.weapons.CoreSwordItem;
-import xyz.pixelatedw.mineminenomi.items.weapons.FlintlockItem;
+import xyz.pixelatedw.mineminenomi.items.weapons.GunItem;
 import xyz.pixelatedw.mineminenomi.items.weapons.KujaBowItem;
 import xyz.pixelatedw.mineminenomi.items.weapons.PopGreenBowItem;
 import xyz.pixelatedw.mineminenomi.items.weapons.ScissorsItem;
@@ -55,13 +55,14 @@ public class ModWeapons
 	public static final CoreSwordItem DURANDAL = new CoreSwordItem(7, 500);
 	
 	// Normal Ranged Weapons
-	public static final FlintlockItem FLINTLOCK = new FlintlockItem();
+	public static final GunItem FLINTLOCK = new GunItem(15, 2, 2);
 	public static final KujaBowItem GREEN_KUJA_BOW = new KujaBowItem();
 	public static final KujaBowItem RED_KUJA_BOW = new KujaBowItem();
 	public static final KujaBowItem BLUE_KUJA_BOW = new KujaBowItem();
 	public static final PopGreenBowItem KABUTO = new PopGreenBowItem();
 	public static final PopGreenBowItem BLACK_KABUTO = new PopGreenBowItem();
 	public static final PopGreenBowItem GINGA_PACHINKO = new PopGreenBowItem();
+	public static final GunItem SENRIKU = new GunItem(25, 4, 0);
 
 	// Devil Fruit Weapons
 	public static final AbilitySwordItem ICE_SABER = new AbilitySwordItem(IceSaberAbility.INSTANCE, 9).setIsSlownessInducing();
@@ -121,6 +122,7 @@ public class ModWeapons
 		registerCustom3DItem(KABUTO, "Kabuto", KABUTO_MODEL);
 		registerCustom3DItem(BLACK_KABUTO, "Kuro Kabuto", BLACK_KABUTO_MODEL);
 		registerCustom3DItem(GINGA_PACHINKO, "Ginga Pachinko", GINGA_PACHINKO_MODEL);
+		registerSimple3DItem(SENRIKU, "Senriku");
 
 		registerSword(ICE_SABER, "Ice Saber");
 		registerSword(AMA_NO_MURAKUMO, "Ama no Murakumo");

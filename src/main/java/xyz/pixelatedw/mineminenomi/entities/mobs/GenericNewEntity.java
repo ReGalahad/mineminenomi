@@ -84,7 +84,7 @@ public class GenericNewEntity extends CreatureEntity implements IDynamicRenderer
 	@Override
 	public String getMobTexture()
 	{
-		return textures[this.getTextureId()];
+		return this.textures[this.getTextureId()];
 	}
 
 	public int getTextureId()

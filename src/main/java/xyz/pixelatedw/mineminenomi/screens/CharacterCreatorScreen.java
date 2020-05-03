@@ -205,7 +205,8 @@ public class CharacterCreatorScreen extends Screen
 			if(this.lastFac == 0) props.setFaction(ModValues.PIRATE);
 			else if(this.lastFac == 1) props.setFaction(ModValues.MARINE);
 			else if(this.lastFac == 2) props.setFaction(ModValues.BOUNTY_HUNTER);
-			
+			else if(this.lastFac == 3) props.setFaction(ModValues.REVOLUTIONARY);
+
 			if(this.lastRace == 0) props.setRace(ModValues.HUMAN);
 			else if(this.lastRace == 1) props.setRace(ModValues.FISHMAN);
 			else if(this.lastRace == 2) props.setRace(ModValues.CYBORG);
@@ -213,7 +214,8 @@ public class CharacterCreatorScreen extends Screen
 			if(this.lastFStyle == 0) props.setFightingStyle(ModValues.SWORDSMAN);
 			else if(this.lastFStyle == 1) props.setFightingStyle(ModValues.SNIPER);
 			else if(this.lastFStyle == 2) props.setFightingStyle(ModValues.DOCTOR);
-			
+			else if(this.lastFStyle == 3) props.setFightingStyle(ModValues.ART_OF_WEATHER);
+
 			switch(this.page)
 			{
 				case 0:

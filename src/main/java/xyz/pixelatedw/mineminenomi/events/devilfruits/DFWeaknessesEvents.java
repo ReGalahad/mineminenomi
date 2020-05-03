@@ -2,7 +2,6 @@ package xyz.pixelatedw.mineminenomi.events.devilfruits;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
@@ -17,6 +16,7 @@ import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.abilities.ChargeableAbility;
 import xyz.pixelatedw.wypi.abilities.ContinuousAbility;
+import xyz.pixelatedw.wypi.abilities.RepeaterAbility;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 import xyz.pixelatedw.wypi.network.WyNetwork;
@@ -48,8 +48,6 @@ public class DFWeaknessesEvents
 			PlayerEntity player = (PlayerEntity) event.getEntityLiving();
 			IDevilFruit props = DevilFruitCapability.get(player);
 			IAbilityData abilityProps = AbilityDataCapability.get(player);
-			ItemStack heldItem = player.getHeldItemMainhand();
-			boolean updateDisabledAbilities = false;
 			
 			if(player.isServerWorld())
 			{
@@ -66,6 +64,8 @@ public class DFWeaknessesEvents
 								Ability ability = abilityProps.getEquippedAbility(i);
 								if(ability instanceof ContinuousAbility)
 									((ContinuousAbility) ability).stopContinuity(player);
+								if(ability instanceof RepeaterAbility)
+									((RepeaterAbility) ability).setRepeaterCount(0);
 								if(ability instanceof ChargeableAbility)
 								{
 									((ChargeableAbility) ability).setChargeTime(((ChargeableAbility) ability).getMaxChargeTime() / 20);

@@ -59,6 +59,7 @@ import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.events.custom.DorikiEvent;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.mineminenomi.init.ModQuests;
+import xyz.pixelatedw.mineminenomi.items.AkumaNoMiItem;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
@@ -73,16 +74,20 @@ import xyz.pixelatedw.wypi.quests.Quest;
 
 public class AbilityHelper
 {
+	public static List<AkumaNoMiItem> tier1Fruits = new ArrayList<AkumaNoMiItem>();
+	public static List<AkumaNoMiItem> tier2Fruits = new ArrayList<AkumaNoMiItem>();
+	public static List<AkumaNoMiItem> tier3Fruits = new ArrayList<AkumaNoMiItem>();
+
 	private static String[][] zoanModels = new String[][]
 		{
 				{
-						"ushiushibison", "bison"
+						"ushi_ushi_bison", "bison"
 				},
 				{
-						"toritoriphoenix", "phoenix"
+						"tori_tori_phoenix", "phoenix"
 				},
 				{
-						"ushiushigiraffe", "giraffe"
+						"ushi_ushi_giraffe", "giraffe"
 				},
 		};
 
@@ -390,7 +395,7 @@ public class AbilityHelper
 			if (fullName.equals(s[0]))
 			{
 				model = s[1];
-				fullModel = "model" + model;
+				fullModel = "_model_" + model;
 				break;
 			}
 		}
@@ -398,7 +403,9 @@ public class AbilityHelper
 		if (fullName.equals("yamidummy"))
 			fullName = "yamiyami";
 
-		return new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(APIConfig.PROJECT_ID, fullName.replace(model, "") + "_no_mi" + fullModel)));
+		String finalName = (!WyHelper.isNullOrEmpty(model) ? fullName.replace("_" + model, "") : fullName) + "_no_mi" + fullModel;
+				
+		return new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(APIConfig.PROJECT_ID, finalName)));
 	}
 
 	public static boolean isEntityInRoom(LivingEntity entity)

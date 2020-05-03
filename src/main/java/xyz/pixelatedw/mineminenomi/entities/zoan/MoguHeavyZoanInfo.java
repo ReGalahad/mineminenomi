@@ -1,18 +1,19 @@
 package xyz.pixelatedw.mineminenomi.entities.zoan;
 
+import xyz.pixelatedw.mineminenomi.abilities.mogu.MoguHeavyPointAbility;
 import xyz.pixelatedw.mineminenomi.models.entities.zoans.MoguMoleModel;
 import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer.Factory;
 import xyz.pixelatedw.wypi.abilities.Ability;
 
-public class ZoanInfoMoguMole extends ZoanInfo
+public class MoguHeavyZoanInfo extends ZoanInfo
 {
-	public static final String FORM = "mole";
+	public static final String FORM = "heavy";
 
 	@Override
 	public String getDevilFruit()
 	{
-		return "mogumogu";
+		return "mogu_mogu";
 	}
 
 	@Override
@@ -30,7 +31,7 @@ public class ZoanInfoMoguMole extends ZoanInfo
 	@Override
 	public Ability getAbility()
 	{
-		return null;//ModAttributes.MOGU_MOLE_POINT;
+		return MoguHeavyPointAbility.INSTANCE;
 	}
 
 	@Override

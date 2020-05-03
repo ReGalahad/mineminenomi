@@ -5,14 +5,13 @@ import net.minecraft.item.IDyeableArmorItem;
 import net.minecraft.world.storage.loot.functions.LootFunctionManager;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import xyz.pixelatedw.mineminenomi.data.functions.RandomWantedPosterLootFunction;
+import xyz.pixelatedw.mineminenomi.data.functions.RandomWantedPosterFunction;
+import xyz.pixelatedw.mineminenomi.data.functions.SetInfiniteStockFunction;
 import xyz.pixelatedw.mineminenomi.data.functions.SetPriceFunction;
-import xyz.pixelatedw.mineminenomi.events.CombatModeEvents;
 import xyz.pixelatedw.mineminenomi.init.ModArmors;
 import xyz.pixelatedw.mineminenomi.init.ModCapabilities;
 import xyz.pixelatedw.mineminenomi.init.ModFeatures;
@@ -34,8 +33,9 @@ public class ModSetup
 		ModNetwork.init();
 		
 		ModFeatures.init();
-		LootFunctionManager.registerFunction(new RandomWantedPosterLootFunction.Serializer());
+		LootFunctionManager.registerFunction(new RandomWantedPosterFunction.Serializer());
 		LootFunctionManager.registerFunction(new SetPriceFunction.Serializer());
+		LootFunctionManager.registerFunction(new SetInfiniteStockFunction.Serializer());
 	}
 	
 	@OnlyIn(Dist.CLIENT)
@@ -50,8 +50,6 @@ public class ModSetup
 				
 		// Renderers
 		ModRenderers.registerRenderers();
-		
-		MinecraftForge.EVENT_BUS.register(new CombatModeEvents());
 
 		WyJSON.runGenerators(false);
 		
@@ -59,5 +57,8 @@ public class ModSetup
 		Minecraft.getInstance().getItemColors().register((itemStack, i) -> {
 	         return i > 0 ? -1 : ((IDyeableArmorItem)itemStack.getItem()).getColor(itemStack);
 		}, ModArmors.CAPTAIN_CAPE);
+		
+		// Registering Containers and Screens together so when the container is opened the screen will also be shown
+		// ScreenManager.registerFactory(ModContainers.TRADER, TraderScreen::new);
 	}
 }

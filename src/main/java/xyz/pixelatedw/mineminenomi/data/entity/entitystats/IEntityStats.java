@@ -37,6 +37,8 @@ public interface IEntityStats
 	boolean isPirate();
 	boolean isMarine();
 	boolean isBountyHunter();
+	boolean isRevolutionary();
+	boolean isBandit();
 	boolean hasFaction();
 	void setFaction(String value);
 	String getFaction();
@@ -51,6 +53,7 @@ public interface IEntityStats
 	boolean isSwordsman();
 	boolean isSniper();
 	boolean isDoctor();
+	boolean isWeatherWizard();
 	boolean hasFightingStyle();
 	void setFightingStyle(String value);
 	String getFightingStyle();

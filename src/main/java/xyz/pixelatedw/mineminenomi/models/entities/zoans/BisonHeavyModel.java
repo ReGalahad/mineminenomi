@@ -2,12 +2,14 @@ package xyz.pixelatedw.mineminenomi.models.entities.zoans;
 
 import org.lwjgl.opengl.GL11;
 
+import net.minecraft.client.renderer.entity.model.IHasArm;
 import net.minecraft.client.renderer.entity.model.RendererModel;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.util.HandSide;
 import net.minecraft.util.math.MathHelper;
 
-public class BisonHeavyModel extends ZoanMorphModel
+public class BisonHeavyModel extends ZoanMorphModel implements IHasArm
 {
 	public RendererModel rightarm1;
 	public RendererModel leftarm1;
@@ -240,5 +242,11 @@ public class BisonHeavyModel extends ZoanMorphModel
 	public RendererModel getArmRenderer()
 	{
 		return this.rightarm1;
+	}
+
+	@Override
+	public void postRenderArm(float scale, HandSide side)
+	{
+		
 	}
 }

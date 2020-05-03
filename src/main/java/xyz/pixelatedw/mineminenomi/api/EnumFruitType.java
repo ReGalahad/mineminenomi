@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi;
+package xyz.pixelatedw.mineminenomi.api;
 
 import net.minecraft.util.text.TextFormatting;
 

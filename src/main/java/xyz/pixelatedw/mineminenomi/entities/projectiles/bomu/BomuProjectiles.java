@@ -10,6 +10,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import xyz.pixelatedw.mineminenomi.models.entities.projectiles.FistModel;
 import xyz.pixelatedw.wypi.WyRegistry;
 import xyz.pixelatedw.wypi.abilities.models.CubeModel;
+import xyz.pixelatedw.wypi.abilities.models.SphereModel;
 import xyz.pixelatedw.wypi.abilities.renderers.AbilityProjectileRenderer;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -31,7 +32,7 @@ public class BomuProjectiles
 	public static void registerEntityRenderers(FMLClientSetupEvent event)
 	{
 		RenderingRegistry.registerEntityRenderingHandler(NoseFancyCannonProjectile.class, new AbilityProjectileRenderer.Factory(new CubeModel()).setColor("3D2B1F").setScale(.4, .4, .4));
-		RenderingRegistry.registerEntityRenderingHandler(BreezeBreathBombProjectile.class, new AbilityProjectileRenderer.Factory(new CubeModel()).setColor("3D2B1F").setScale(0, 0, 0));
+		RenderingRegistry.registerEntityRenderingHandler(BreezeBreathBombProjectile.class, new AbilityProjectileRenderer.Factory(new SphereModel()).setColor("3D2B1F").setScale(1, 1, 1));
 
 		RenderingRegistry.registerEntityRenderingHandler(ExplosivePunchProjectile.class, new AbilityProjectileRenderer.Factory(new FistModel()).setColor("3D2B1F").setScale(0.8));
 	}

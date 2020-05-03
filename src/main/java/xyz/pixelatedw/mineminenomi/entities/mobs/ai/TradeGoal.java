@@ -12,11 +12,13 @@ public class TradeGoal extends Goal{
 	}
 	@Override
 	public boolean shouldExecute() {
-		if(this.trader.getIsOpened()) {
+/*		if(this.trader.getIsOpened()) {
 			this.trader.setMotion(0, this.trader.getMotion().y, 0);
 		return true;
 		}
+		*/
 		return false;
+		
 	}
 
 }

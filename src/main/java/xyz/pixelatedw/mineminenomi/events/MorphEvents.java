@@ -3,11 +3,12 @@ package xyz.pixelatedw.mineminenomi.events;
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.LivingRenderer;
+import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Hand;
 import net.minecraft.util.HandSide;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -21,16 +22,11 @@ import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.api.helpers.MorphHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
-import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
-import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfo;
 import xyz.pixelatedw.mineminenomi.packets.server.SSyncDevilFruitPacket;
-import xyz.pixelatedw.mineminenomi.renderers.ZoanFirstPersonRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
-import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
-import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 import xyz.pixelatedw.wypi.network.WyNetwork;
 
 @OnlyIn(Dist.CLIENT)
@@ -56,7 +52,6 @@ public class MorphEvents
 
 		LivingEntity entity = event.getEntity();
 		IDevilFruit props = DevilFruitCapability.get(entity);
-		LivingRenderer renderer = event.getRenderer();
 
 		if (!WyHelper.isNullOrEmpty(props.getZoanPoint()))
 		{
@@ -103,10 +98,6 @@ public class MorphEvents
 	{
 		PlayerEntity player = Minecraft.getInstance().player;
 
-		IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
-		IEntityStats entityStatsProps = EntityStatsCapability.get(player);
-		IAbilityData abilityDataProps = AbilityDataCapability.get(player);
-
 		boolean renderHandFlag = false;
 		boolean hasEmptyHand = player.getHeldItemMainhand().isEmpty();
 
@@ -117,7 +108,8 @@ public class MorphEvents
 		if (event.getHand() == Hand.MAIN_HAND && hasEmptyHand && renderHandFlag)
 		{
 			event.setCanceled(true);
-			ZoanFirstPersonRenderer.renderArmFirstPerson(event.getEquipProgress(), event.getSwingProgress(), HandSide.RIGHT);
+			ResourceLocation texture = MorphHelper.getTextureFromMorph((ClientPlayerEntity) player, Minecraft.getInstance().getRenderManager());
+			MorphHelper.renderArmFirstPerson(event.getEquipProgress(), event.getSwingProgress(), HandSide.RIGHT, texture);
 		}
 	}
 
@@ -129,11 +121,6 @@ public class MorphEvents
 
 		PlayerEntity player = (PlayerEntity) event.getEntity();
 		IDevilFruit props = DevilFruitCapability.get(player);
-		IAbilityData abilityProps = AbilityDataCapability.get(player);
-
-		double posX = player.posX;
-		double posY = player.posY;
-		double posZ = player.posZ;
 
 		float eyeHeight = player.getEyeHeight(player.getPose());
 
@@ -158,7 +145,6 @@ public class MorphEvents
 		{
 			PlayerEntity player = event.player;
 			IDevilFruit props = DevilFruitCapability.get(player);
-			IAbilityData abilityProps = AbilityDataCapability.get(player);
 
 			if (WyHelper.isNullOrEmpty(props.getDevilFruit()) || WyHelper.isNullOrEmpty(props.getZoanPoint()))
 				return;

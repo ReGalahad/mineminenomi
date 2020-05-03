@@ -19,8 +19,8 @@ public class BakuMunchParticleEffect extends ParticleEffect
 			double offsetY = 1;
 			double offsetZ = world.rand.nextDouble();
 
-			BlockState blockState = world.getBlockState(new BlockPos(posX, posY, posZ).down());
-
+			BlockState blockState = world.getBlockState(new BlockPos(posX + offsetX, posY, posZ + offsetZ).down());
+			
 			((ServerWorld) world).spawnParticle(new BlockParticleData(ParticleTypes.BLOCK, blockState), 
 					posX + offsetX,
 					posY + offsetY,
