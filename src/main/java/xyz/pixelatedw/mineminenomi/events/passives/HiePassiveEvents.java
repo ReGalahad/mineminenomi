@@ -44,23 +44,7 @@ public class HiePassiveEvents
 		if (!AbilityHelper.isNearbyKairoseki(player) && (player.getHealth() > player.getMaxHealth() / 5 || player.abilities.isCreativeMode))
 			AbilityHelper.createFilledSphere(player.world, (int) player.posX - 1, (int) player.posY, (int) player.posZ - 1, 2, Blocks.ICE, GRIEF_RULE);
 	}
-	
-	
-	@SubscribeEvent
-	@OnlyIn(Dist.CLIENT)
-	public static void onEntityRendered(RenderLivingEvent.Post event)
-	{
-		LivingEntity entity = event.getEntity();
-		LivingRenderer renderer = event.getRenderer();
 
-		if (!entity.isPotionActive(ModEffects.FROZEN))
-			return;
-
-		if (entity.getActivePotionEffect(ModEffects.FROZEN).getDuration() <= 0)
-			entity.removePotionEffect(ModEffects.FROZEN);
-
-		RendererHelper.renderEffectOverlay((float) event.getX(), (float) event.getY(), (float) event.getZ(), event.getPartialRenderTick(), entity, renderer, (IHasOverlay) ModEffects.FROZEN);
-	}
 	
 	@SubscribeEvent
 	@OnlyIn(Dist.CLIENT)
