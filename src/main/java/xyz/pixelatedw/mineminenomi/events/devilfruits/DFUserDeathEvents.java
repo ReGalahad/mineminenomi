@@ -1,11 +1,18 @@
 package xyz.pixelatedw.mineminenomi.events.devilfruits;
 
+import java.util.List;
+
+import net.minecraft.block.ChestBlock;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
@@ -109,5 +116,18 @@ public class DFUserDeathEvents
 			if (MinecraftForge.EVENT_BUS.post(yomiEvent))
 				return;
 		}
-	}
+		
+		//Apple replacement logic
+		double chance = WyHelper.randomWithRange(1, 10);
+		if(chance > 0) {
+			IDevilFruit oldDevilFruit = DevilFruitCapability.get(event.getOriginal());
+
+			List<ItemEntity> list = WyHelper.getEntitiesNear(event.getOriginal().getPosition(), event.getOriginal().world, 30,  ItemEntity.class);
+			if(list.isEmpty())
+				return;
+			if(list.get(0).getItem().getItem() == Items.APPLE) {
+			list.get(0).setItem(AbilityHelper.getDevilFruitItem(oldDevilFruit.getDevilFruit()));
+
+		}
+	}}
 }

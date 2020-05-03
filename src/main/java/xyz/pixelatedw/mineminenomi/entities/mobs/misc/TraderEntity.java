@@ -11,11 +11,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.ILivingEntityData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.ai.goal.HurtByTargetGoal;
 import net.minecraft.entity.ai.goal.LookAtGoal;
 import net.minecraft.entity.ai.goal.LookRandomlyGoal;
-import net.minecraft.entity.ai.goal.MeleeAttackGoal;
-import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.player.PlayerEntity;
@@ -35,8 +32,7 @@ import net.minecraft.world.storage.loot.LootParameterSets;
 import net.minecraft.world.storage.loot.LootTable;
 import net.minecraftforge.registries.ForgeRegistries;
 import xyz.pixelatedw.mineminenomi.entities.mobs.GenericNewEntity;
-import xyz.pixelatedw.mineminenomi.entities.mobs.bandits.GenericBanditEntity;
-import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.GenericPirateEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.ai.TradeGoal;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.mineminenomi.init.ModItems;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
@@ -67,6 +63,7 @@ public class TraderEntity extends GenericNewEntity {
 		this.goalSelector.addGoal(3, new WaterAvoidingRandomWalkingGoal(this, 0.8D));
 		this.goalSelector.addGoal(5, new LookAtGoal(this, PlayerEntity.class, 8.0F));
 		this.goalSelector.addGoal(5, new LookRandomlyGoal(this));	
+		this.goalSelector.addGoal(0, new TradeGoal(this));
 		
 	}
 	
@@ -132,7 +129,6 @@ public class TraderEntity extends GenericNewEntity {
 	public void setFaction(CompoundNBT nbt, String fac) {
 		nbt.remove("faction");
 		nbt.putString("faction", fac);
-		System.out.println("bruh");
 	}
 	
 	public String getFaction() {
