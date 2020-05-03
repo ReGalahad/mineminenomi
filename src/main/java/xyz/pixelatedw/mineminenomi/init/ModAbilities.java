@@ -85,6 +85,8 @@ import xyz.pixelatedw.mineminenomi.abilities.ito.ParasiteAbility;
 import xyz.pixelatedw.mineminenomi.abilities.ito.SoraNoMichiAbility;
 import xyz.pixelatedw.mineminenomi.abilities.ito.TamaitoAbility;
 import xyz.pixelatedw.mineminenomi.abilities.ito.TorikagoAbility;
+import xyz.pixelatedw.mineminenomi.abilities.kachi.EvaporateAbility;
+import xyz.pixelatedw.mineminenomi.abilities.kachi.HotBoilingSpecialAbility;
 import xyz.pixelatedw.mineminenomi.abilities.kage.BlackBoxAbility;
 import xyz.pixelatedw.mineminenomi.abilities.kage.BrickBatAbility;
 import xyz.pixelatedw.mineminenomi.abilities.kage.DoppelmanAbility;
@@ -186,7 +188,7 @@ import xyz.pixelatedw.wypi.debug.WyDebug;
 public class ModAbilities
 {
 
-	public static final AkumaNoMiItem KACHI_KACHI_NO_MI = new AkumaNoMiItem("Kachi Kachi no Mi", 1, EnumFruitType.PARAMECIA);
+	public static final AkumaNoMiItem KACHI_KACHI_NO_MI = new AkumaNoMiItem("Kachi Kachi no Mi", 1, EnumFruitType.PARAMECIA, EvaporateAbility.INSTANCE, HotBoilingSpecialAbility.INSTANCE);
 	public static final AkumaNoMiItem DOA_DOA_NO_MI = new AkumaNoMiItem("Doa Doa no Mi", 2, EnumFruitType.PARAMECIA);
 	public static final AkumaNoMiItem USHI_USHI_NO_MI_GIRAFFE = new AkumaNoMiItem("Ushi Ushi no Mi, Model Giraffe", 2, EnumFruitType.ZOAN);
 	public static final AkumaNoMiItem MOGU_MOGU_NO_MI = new AkumaNoMiItem("Mogu Mogu no Mi", 2, EnumFruitType.ZOAN, MoguHeavyPointAbility.INSTANCE, MoguraBananaAbility.INSTANCE, MoguraTonpoAbility.INSTANCE);
