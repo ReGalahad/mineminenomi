@@ -77,5 +77,5 @@ public class ModResources
 	
 	// Overlays
 	public static final ResourceLocation BUBBLY_CORAL = new ResourceLocation(APIConfig.PROJECT_ID, "textures/misc/bubbly_coral.png");	
-
+	public static final ResourceLocation CANDLE_LOCK = new ResourceLocation(APIConfig.PROJECT_ID, "textures/models/zoanmorph/candle_lock.png");
 }
