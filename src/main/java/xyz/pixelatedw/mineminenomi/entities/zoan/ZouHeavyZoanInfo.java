@@ -1,18 +1,19 @@
 package xyz.pixelatedw.mineminenomi.entities.zoan;
 
+import xyz.pixelatedw.mineminenomi.abilities.zou.ZouHeavyPointAbility;
 import xyz.pixelatedw.mineminenomi.models.entities.zoans.ZouHeavyModel;
 import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer.Factory;
 import xyz.pixelatedw.wypi.abilities.Ability;
 
-public class ZoanInfoZouHeavy extends ZoanInfo
+public class ZouHeavyZoanInfo extends ZoanInfo
 {
 	public static final String FORM = "heavy";
 
 	@Override
 	public String getDevilFruit()
 	{
-		return "zouzou";
+		return "zou_zou";
 	}
 
 	@Override
@@ -30,7 +31,7 @@ public class ZoanInfoZouHeavy extends ZoanInfo
 	@Override
 	public Ability getAbility()
 	{
-		return null;//ModAttributes.ZOU_HEAVY_POINT;
+		return ZouHeavyPointAbility.INSTANCE;
 	}
 
 	@Override

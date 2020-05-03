@@ -3,9 +3,8 @@ package xyz.pixelatedw.mineminenomi.abilities.mogu;
 import xyz.pixelatedw.mineminenomi.api.abilities.ZoanAbility;
 import xyz.pixelatedw.mineminenomi.entities.zoan.MoguHeavyZoanInfo;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
-import xyz.pixelatedw.wypi.abilities.IParallelContinuousAbility;
 
-public class MoguHeavyPointAbility extends ZoanAbility implements IParallelContinuousAbility
+public class MoguHeavyPointAbility extends ZoanAbility
 {
 	public static final MoguHeavyPointAbility INSTANCE = new MoguHeavyPointAbility();
 

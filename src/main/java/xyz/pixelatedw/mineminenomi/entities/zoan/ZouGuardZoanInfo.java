@@ -1,18 +1,19 @@
 package xyz.pixelatedw.mineminenomi.entities.zoan;
 
+import xyz.pixelatedw.mineminenomi.abilities.zou.ZouGuardPointAbility;
 import xyz.pixelatedw.mineminenomi.models.entities.zoans.ZouGuardModel;
 import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer.Factory;
 import xyz.pixelatedw.wypi.abilities.Ability;
 
-public class ZoanInfoZouGuard extends ZoanInfo
+public class ZouGuardZoanInfo extends ZoanInfo
 {
 	public static final String FORM = "guard";
 
 	@Override
 	public String getDevilFruit()
 	{
-		return "zouzou";
+		return "zou_zou";
 	}
 
 	@Override
@@ -30,7 +31,7 @@ public class ZoanInfoZouGuard extends ZoanInfo
 	@Override
 	public Ability getAbility()
 	{
-		return null;//ModAttributes.ZOU_GUARD_POINT;
+		return ZouGuardPointAbility.INSTANCE;
 	}
 
 	@Override

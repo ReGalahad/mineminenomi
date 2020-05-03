@@ -34,8 +34,8 @@ import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoGiraffeWalk;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoPhoenixFull;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoPhoenixHybrid;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoYomi;
-import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoZouGuard;
-import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoZouHeavy;
+import xyz.pixelatedw.mineminenomi.entities.zoan.ZouGuardZoanInfo;
+import xyz.pixelatedw.mineminenomi.entities.zoan.ZouHeavyZoanInfo;
 import xyz.pixelatedw.mineminenomi.packets.server.SRecalculateEyeHeightPacket;
 import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer;
 import xyz.pixelatedw.wypi.WyHelper;
@@ -237,8 +237,8 @@ public class MorphHelper
 		zoanInfoList.add(new ZoanInfoPhoenixHybrid());
 		
 		// Zou Zoan Points
-		zoanInfoList.add(new ZoanInfoZouGuard());
-		zoanInfoList.add(new ZoanInfoZouHeavy());
+		zoanInfoList.add(new ZouGuardZoanInfo());
+		zoanInfoList.add(new ZouHeavyZoanInfo());
 		
 		// Mogu Zoan Points
 		zoanInfoList.add(new MoguHeavyZoanInfo());

@@ -3,9 +3,8 @@ package xyz.pixelatedw.mineminenomi.abilities.ushibison;
 import xyz.pixelatedw.mineminenomi.api.abilities.ZoanAbility;
 import xyz.pixelatedw.mineminenomi.entities.zoan.BisonWalkZoanInfo;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
-import xyz.pixelatedw.wypi.abilities.IParallelContinuousAbility;
 
-public class BisonWalkPointAbility extends ZoanAbility implements IParallelContinuousAbility
+public class BisonWalkPointAbility extends ZoanAbility
 {
 	public static final BisonWalkPointAbility INSTANCE = new BisonWalkPointAbility();
 
