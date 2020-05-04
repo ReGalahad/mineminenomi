@@ -133,10 +133,13 @@ public class DoruPassiveEvents
 			if (event.getPlayer().inventory.hasItemStack(new ItemStack(ModItems.COLOR_PALETTE)))
 				color = randomColor2;
 
+			DoruDoruBallAbility abl = (DoruDoruBallAbility) ability;
+			abl.rotateAngleX += player.getMotion().z;
+			abl.rotateAngleZ -= player.getMotion().x;
 			GlStateManager.pushMatrix();
 			GlStateManager.disableLighting();
 			GlStateManager.translated(event.getX(), event.getY() + player.getEyeHeight(), event.getZ());
-			DORU_BALL.setRotateAngle(DORU_BALL.shape1, DORU_BALL.shape1.rotateAngleX + (float) (player.getMotion().z), 0f, DORU_BALL.shape1.rotateAngleZ + (float) (-(player.getMotion().x)));
+			DORU_BALL.setRotateAngle(DORU_BALL.shape1, (float) abl.rotateAngleX, 0f, (float) abl.rotateAngleZ);
 			GlStateManager.color3f(color.getRed() / 255.0F, color.getGreen() / 255.0F, color.getBlue() / 255.0F);
 			Minecraft.getInstance().getTextureManager().bindTexture(ModResources.CANDLE_LOCK);
 			DORU_BALL.render(player, 0, 0, 0, 0, 0, 0.5625f);
@@ -144,10 +147,7 @@ public class DoruPassiveEvents
 			GlStateManager.enableLighting();
 			GlStateManager.popMatrix();
 		}
-		else
-		{
-			DORU_BALL.setRotateAngle(DORU_BALL.shape1, 0f, 0f, 0f);
-		}
+
 	}
 
 	@SubscribeEvent
