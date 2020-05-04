@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.abilities.horo;
+package xyz.pixelatedw.mineminenomi.abilities.yomi;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -7,18 +7,18 @@ import xyz.pixelatedw.mineminenomi.entities.PhysicalBodyEntity;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.abilities.ContinuousAbility;
 
-public class YutaiRidatsuAbility extends ContinuousAbility
+public class YomiNoReikiAbility extends ContinuousAbility
 {
-	public static final YutaiRidatsuAbility INSTANCE = new YutaiRidatsuAbility();
+	public static final YomiNoReikiAbility INSTANCE = new YomiNoReikiAbility();
 
 	private double posX, posY, posZ;
 	private PhysicalBodyEntity body;
 	
-	public YutaiRidatsuAbility()
+	public YomiNoReikiAbility()
 	{
-		super("Yutai Ridatsu", AbilityCategory.DEVIL_FRUIT);
+		super("Yomi no Reiki", AbilityCategory.DEVIL_FRUIT);
 		this.setDescription("The user's spirit leaves their body. Allowing them to freely explore the nearby areas.");
-		this.setThreshold(60);
+		this.setThreshold(200);
 		
 		this.onStartContinuityEvent = this::onStartContinuityEvent;
 		this.duringContinuityEvent = this::duringContinuityEvent;
@@ -48,7 +48,7 @@ public class YutaiRidatsuAbility extends ContinuousAbility
 	
 	private void duringContinuityEvent(PlayerEntity player, int continueTime)
 	{
-		if(Math.sqrt(player.getDistanceSq(this.posX, this.posY, this.posZ)) > 40)
+		if(Math.sqrt(player.getDistanceSq(this.posX, this.posY, this.posZ)) > 60)
 		{
 			this.stopContinuity(player);
 		}

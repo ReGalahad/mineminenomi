@@ -8,12 +8,17 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.model.SkeletonModel;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
+import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
+import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.entities.PhysicalBodyEntity;
+import xyz.pixelatedw.mineminenomi.entities.zoan.YomiZoanInfo;
 import xyz.pixelatedw.mineminenomi.models.abilities.PhysicalBodyModel;
+import xyz.pixelatedw.wypi.APIConfig;
 
 @OnlyIn(Dist.CLIENT)
 public class PhysicalBodyRenderer extends EntityRenderer<PhysicalBodyEntity>
@@ -27,7 +32,11 @@ public class PhysicalBodyRenderer extends EntityRenderer<PhysicalBodyEntity>
 	
 	@Override
 	public void doRender(PhysicalBodyEntity entity, double x, double y, double z, float entityYaw, float partialTicks)
-	{		
+	{
+		IDevilFruit devilFruitProps = DevilFruitCapability.get(entity.getOwner());
+
+		boolean isSkeleton = devilFruitProps.getDevilFruit().equals("yomi_yomi") && devilFruitProps.getZoanPoint().equalsIgnoreCase(YomiZoanInfo.FORM);
+
 		GlStateManager.pushMatrix();
 		{
 			GlStateManager.color4f(1, 1, 1, 1);
@@ -40,7 +49,11 @@ public class PhysicalBodyRenderer extends EntityRenderer<PhysicalBodyEntity>
 			
 			GlStateManager.scaled(1, 1, 1);
 
-			Minecraft.getInstance().getTextureManager().bindTexture(this.getEntityTexture(entity));
+			if(isSkeleton)
+				Minecraft.getInstance().getTextureManager().bindTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/models/zoanmorph/yomi_skeleton.png"));
+			
+			else
+				Minecraft.getInstance().getTextureManager().bindTexture(this.getEntityTexture(entity));
 			this.model.render(entity, (float) x, (float) y, (float) z, 0.0F, 0.0F, 0.0625F);
 		}
 		GlStateManager.popMatrix();

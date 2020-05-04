@@ -1,7 +1,10 @@
 package xyz.pixelatedw.mineminenomi.events.passives;
 
+import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.platform.GlStateManager.DestFactor;
+import com.mojang.blaze3d.platform.GlStateManager.SourceFactor;
+
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -13,12 +16,23 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.RenderLivingEvent;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.player.AttackEntityEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent.LeftClickBlock;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
+import net.minecraftforge.event.world.BlockEvent.BreakEvent;
+import net.minecraftforge.event.world.BlockEvent.EntityPlaceEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import xyz.pixelatedw.mineminenomi.abilities.horo.YutaiRidatsuAbility;
 import xyz.pixelatedw.mineminenomi.abilities.yomi.SoulParadeAbility;
+import xyz.pixelatedw.mineminenomi.abilities.yomi.YomiNoReikiAbility;
 import xyz.pixelatedw.mineminenomi.api.abilities.ExplosionAbility;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
@@ -44,56 +58,165 @@ public class YomiPassiveEvents
 			return;
 
 		PlayerEntity player = (PlayerEntity) event.getEntityLiving();
-		
-		if(player.world.isRemote)
+
+		if (player.world.isRemote)
 			return;
-		
+
 		IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
-		IAbilityData abilityProps = AbilityDataCapability.get(player);
 
-		if (!devilFruitProps.getDevilFruit().equals("yomi_yomi"))
+		if (!devilFruitProps.getDevilFruit().equals("yomi_yomi") || !devilFruitProps.getZoanPoint().equalsIgnoreCase(YomiZoanInfo.FORM))
 			return;
 
-		if (devilFruitProps.getZoanPoint().equalsIgnoreCase(YomiZoanInfo.FORM))
+		player.getFoodStats().addStats(9999, 9999);
+
+		player.addPotionEffect(new EffectInstance(Effects.SPEED, 100, 0, false, false));
+
+		if (WyHelper.getEntitiesNear(player.getPosition(), player.world, 100, PlayerEntity.class).size() > 0 && player.ticksExisted % 500 == 0)
+			WyNetwork.sendToAllAround(new SSyncDevilFruitPacket(player.getEntityId(), devilFruitProps), player);
+
+		if (player.world.getBlockState(player.getPosition().down()).getFluidState().isSource() && player.isSprinting())
 		{
-			player.getFoodStats().addStats(9999, 9999);
-
-			player.addPotionEffect(new EffectInstance(Effects.SPEED, 100, 0, false, false));
-
-			if (WyHelper.getEntitiesNear(player.getPosition(), player.world, 100, PlayerEntity.class).size() > 0 && player.ticksExisted % 500 == 0)
-				WyNetwork.sendToAllAround(new SSyncDevilFruitPacket(player.getEntityId(), devilFruitProps), player);
-
-			if (player.world.getBlockState(player.getPosition().down()).getFluidState().isSource() && player.isSprinting())
+			player.onGround = true;
+			if (player.getMotion().y <= 0.0D && player.getMotion().y < 0.009)
 			{
-				player.onGround = true;
-				if (player.getMotion().y <= 0.0D && player.getMotion().y < 0.009)
-				{
-					Vec3d speed = WyHelper.propulsion(player, 0.4, 0.4);
-					double ySpeed = 0 - player.getMotion().y;
-					if(ySpeed > 0.008)
-						ySpeed = 0.008;
-					player.setMotion(speed.x, ySpeed, speed.z);
-					((ServerPlayerEntity)player).connection.sendPacket(new SEntityVelocityPacket(player));
-					player.fallDistance = 0.0F;
-				}
+				Vec3d speed = WyHelper.propulsion(player, 0.4, 0.4);
+				double ySpeed = 0 - player.getMotion().y;
+				if (ySpeed > 0.008)
+					ySpeed = 0.008;
+				player.setMotion(speed.x, ySpeed, speed.z);
+				((ServerPlayerEntity) player).connection.sendPacket(new SEntityVelocityPacket(player));
+				player.fallDistance = 0.0F;
+			}
 
-				BlockState blockState = player.world.getBlockState(player.getPosition().down());
-				for (int i = 0; i < 10; i++)
-				{
-					double newPosX = player.posX + WyHelper.randomDouble();
-					double newPosY = player.posY;
-					double newPosZ = player.posZ + WyHelper.randomDouble();
+			BlockState blockState = player.world.getBlockState(player.getPosition().down());
+			for (int i = 0; i < 10; i++)
+			{
+				double newPosX = player.posX + WyHelper.randomDouble();
+				double newPosY = player.posY;
+				double newPosZ = player.posZ + WyHelper.randomDouble();
 
-					((ServerWorld) player.world).spawnParticle(new BlockParticleData(ParticleTypes.BLOCK, blockState), 
-							newPosX,
-							newPosY,
-							newPosZ,
-							1, 0, 0, 0, 0);
-				}
+				((ServerWorld) player.world).spawnParticle(new BlockParticleData(ParticleTypes.BLOCK, blockState), newPosX, newPosY, newPosZ, 1, 0, 0, 0, 0);
 			}
 		}
 	}
 
+	@SubscribeEvent
+	public static void onSpiritUpdate(LivingUpdateEvent event)
+	{
+		if (!(event.getEntityLiving() instanceof PlayerEntity))
+			return;	
+		
+		PlayerEntity player = (PlayerEntity) event.getEntityLiving();
+		IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
+				
+		if (!devilFruitProps.getDevilFruit().equals("yomi_yomi") || player.isCreative() || player.isSpectator())
+			return;
+
+		if(!isSpirit(player))
+		{
+			player.noClip = false;
+			player.abilities.isFlying = false;
+			if(player instanceof ServerPlayerEntity)
+				((ServerPlayerEntity)player).sendPlayerAbilities();
+			return;
+		}
+		
+		player.onGround = false;
+		player.noClip = true;
+		player.abilities.isFlying = true;
+		if(player instanceof ServerPlayerEntity)
+			((ServerPlayerEntity)player).sendPlayerAbilities();
+	}
+	
+	@OnlyIn(Dist.CLIENT)
+	@SubscribeEvent
+	public static void onEntityRendered(RenderLivingEvent.Pre event)
+	{
+		if (!(event.getEntity() instanceof PlayerEntity))
+			return;	
+		
+		PlayerEntity player = (PlayerEntity) event.getEntity();
+
+		if(!isSpirit(player))
+			return;
+
+		GlStateManager.color4f(0.3F, 0.9F, 0.5F, 0.6F);
+		GlStateManager.enableBlend();
+		GlStateManager.blendFunc(SourceFactor.DST_COLOR, DestFactor.ONE_MINUS_CONSTANT_COLOR);
+	}
+	
+	@SubscribeEvent
+	public static void onEntityHits(AttackEntityEvent event)
+	{
+		PlayerEntity player = event.getPlayer();
+
+		if(!isSpirit(player))
+			return;
+		
+		event.setCanceled(true);
+	}
+	
+	@SubscribeEvent
+	public static void onEntityLeftClickBlocks(LeftClickBlock event)
+	{
+		PlayerEntity player = event.getPlayer();
+
+		if(!isSpirit(player))
+			return;
+
+		event.setCanceled(true);
+	}
+	
+	@SubscribeEvent
+	public static void onEntityRightClickBlocks(RightClickBlock event)
+	{
+		PlayerEntity player = event.getPlayer();
+
+		if(!isSpirit(player))
+			return;
+
+		event.setCanceled(true);
+	}
+	
+	@SubscribeEvent
+	public static void onEntityBreaksBlocks(BreakEvent event)
+	{
+		PlayerEntity player = event.getPlayer();
+
+		if(!isSpirit(player))
+			return;
+
+		event.setCanceled(true);
+	}
+	
+	@SubscribeEvent
+	public static void onEntityPlaceBlocks(EntityPlaceEvent event)
+	{
+		if (!(event.getEntity() instanceof PlayerEntity))
+			return;	
+		
+		PlayerEntity player = (PlayerEntity) event.getEntity();
+
+		if(!isSpirit(player))
+			return;
+		
+		event.setCanceled(true);
+	}
+	
+	@SubscribeEvent
+	public static void onEntityAttackEvent(LivingAttackEvent event)
+	{	
+		if (!(event.getEntity() instanceof PlayerEntity))
+			return;	
+		
+		PlayerEntity player = (PlayerEntity) event.getEntity();
+
+		if(!isSpirit(player))
+			return;
+		
+		event.setCanceled(true);
+	}
+	
 	@SubscribeEvent
 	public static void onEntityAttack(LivingHurtEvent event)
 	{
@@ -104,7 +227,7 @@ public class YomiPassiveEvents
 		PlayerEntity attacked = (PlayerEntity) event.getEntityLiving();
 		IDevilFruit devilFruitProps = DevilFruitCapability.get(attacked);
 		IAbilityData abilityProps = AbilityDataCapability.get(attacked);
-		
+
 		if (!devilFruitProps.getDevilFruit().equalsIgnoreCase("yomi_yomi"))
 			return;
 
@@ -115,7 +238,7 @@ public class YomiPassiveEvents
 		{
 			attacker.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 100, 1));
 			attacker.addPotionEffect(new EffectInstance(Effects.MINING_FATIGUE, 100, 1));
-			//new DFEffectHieSlowness(attacker, 100);
+			// new DFEffectHieSlowness(attacker, 100);
 			ExplosionAbility explosion = AbilityHelper.newExplosion(attacked, attacker.posX, attacker.posY, attacker.posZ, 2);
 			explosion.setDamageOwner(false);
 			explosion.setDestroyBlocks(false);
@@ -151,5 +274,22 @@ public class YomiPassiveEvents
 
 			WyNetwork.sendToAll(new SSyncDevilFruitPacket(player.getEntityId(), event.newPlayerData));
 		}
+	}
+	
+	private static boolean isSpirit(PlayerEntity player)
+	{
+		IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
+		IAbilityData abilityProps = AbilityDataCapability.get(player);
+		
+		if (!devilFruitProps.getDevilFruit().equals("yomi_yomi") || player.isCreative() || player.isSpectator())
+			return false;
+		
+		Ability ability = abilityProps.getEquippedAbility(YomiNoReikiAbility.INSTANCE);
+		boolean isActive = ability != null && ability.isContinuous();
+		
+		if(!isActive)
+			return false;	
+		
+		return true;
 	}
 }
