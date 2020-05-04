@@ -25,7 +25,7 @@ public class TodorokiAbility extends RepeaterAbility
 		TodorokiProjectile proj = new TodorokiProjectile(player.world, player);
 		player.world.addEntity(proj);
 		proj.shoot(player, player.rotationPitch, player.rotationYaw, 0, 3.5f, 1);
-
+		
 		return true;
 	}
 }

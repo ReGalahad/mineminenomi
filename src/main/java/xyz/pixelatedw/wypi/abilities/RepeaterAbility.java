@@ -42,19 +42,33 @@ public abstract class RepeaterAbility extends Ability
 	/*
 	 * 	Methods
 	 */
+	
+	@Override
+	public void stopCooldown(PlayerEntity player)
+	{
+		if(player.world.isRemote)
+			return;
+		this.cooldown = this.maxCooldown;		
+		this.repeaterCount = this.maxRepeaterCount;
+		this.setState(State.STANDBY);
+		this.onEndCooldown.onEndCooldown(player);
+		IAbilityData props = AbilityDataCapability.get(player);
+		WyNetwork.sendTo(new SSyncAbilityDataPacket(props), player);
+	}
+	
 	@Override
 	public void cooldown(PlayerEntity player)
 	{
 		//if(player.world.isRemote)
 		//	return;
-
+		
 		if(this.isOnCooldown() && this.cooldown > 0)
 		{
 			this.cooldown--;
 			
 			if(!player.world.isRemote)
 			{
-				if(this.repeaterCount > 0 && this.cooldown % this.repeaterInterval == 0)
+				if(this.repeaterCount > 0 && (this.cooldown - 10) % this.repeaterInterval == 0)
 				{
 					this.onUseEvent.onUse(player);
 					this.repeaterCount--;
@@ -67,7 +81,7 @@ public abstract class RepeaterAbility extends Ability
 		{
 			if(player.world.isRemote)
 				return;
-			this.cooldown = this.maxCooldown;				
+			this.cooldown = this.maxCooldown;
 			this.repeaterCount = this.maxRepeaterCount;
 			this.startStandby();
 			IAbilityData props = AbilityDataCapability.get(player);
