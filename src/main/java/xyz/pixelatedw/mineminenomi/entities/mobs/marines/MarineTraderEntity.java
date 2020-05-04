@@ -17,7 +17,7 @@ public class MarineTraderEntity extends TraderEntity
 	{
 		super(ModEntities.MARINE_TRADER, world);
 		
-		this.textures = new String[] { "trader1", "trader1", "trader1" };
+		this.textures = new String[] { "pirate_trader1", "pirate_trader1", "pirate_trader1" };
 	}
 
 	@Override

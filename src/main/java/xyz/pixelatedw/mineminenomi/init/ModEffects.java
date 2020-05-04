@@ -30,7 +30,9 @@ public class ModEffects
 		.addAttributesModifier(SharedMonsterAttributes.ATTACK_SPEED, "7d355019-7ef9-4beb-bcba-8b2608a73380", -1.5, AttributeModifier.Operation.MULTIPLY_TOTAL);
 	public static final Effect CHIYU_HORMONE = new ChiyuHormoneEffect();
 	public static final Effect FROZEN = new FrozenEffect()
-		.addAttributesModifier(SharedMonsterAttributes.MOVEMENT_SPEED, "7107DE5E-7CE8-4030-940E-514C1F160890", -100, AttributeModifier.Operation.MULTIPLY_TOTAL);
+		.addAttributesModifier(SharedMonsterAttributes.MOVEMENT_SPEED, "7107DE5E-7CE8-4030-940E-514C1F160890", -100, AttributeModifier.Operation.MULTIPLY_TOTAL)
+		.addAttributesModifier(SharedMonsterAttributes.KNOCKBACK_RESISTANCE, "7d355019-7ef9-4beb-bcba-8b2608a73380", 100, AttributeModifier.Operation.ADDITION);
+
 	public static final Effect TENSION_HORMONE = new TensionHormoneEffect()
 		.addAttributesModifier(SharedMonsterAttributes.ATTACK_DAMAGE, "646707c2-479e-40fc-8df2-622582948a9d", 2, AttributeModifier.Operation.MULTIPLY_TOTAL)
 		.addAttributesModifier(SharedMonsterAttributes.KNOCKBACK_RESISTANCE, "7d355019-7ef9-4beb-bcba-8b2608a73380", 2, AttributeModifier.Operation.MULTIPLY_TOTAL);

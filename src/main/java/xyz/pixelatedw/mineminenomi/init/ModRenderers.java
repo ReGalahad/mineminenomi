@@ -1,5 +1,11 @@
 package xyz.pixelatedw.mineminenomi.init;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.IEntityRenderer;
+import net.minecraft.client.renderer.entity.LivingRenderer;
+import net.minecraft.client.renderer.entity.PlayerRenderer;
+import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.WantedPosterPackageTileEntity;
@@ -12,6 +18,7 @@ import xyz.pixelatedw.mineminenomi.blocks.tileentities.dials.FlashDialTileEntity
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.dials.ImpactDialTileEntity;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.dials.MilkyDialTileEntity;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.dials.RejectDialTileEntity;
+import xyz.pixelatedw.mineminenomi.entities.PhysicalBodyEntity;
 import xyz.pixelatedw.mineminenomi.entities.VivreCardEntity;
 import xyz.pixelatedw.mineminenomi.entities.WantedPosterPackageEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.bandits.BanditWithSwordEntity;
@@ -38,6 +45,7 @@ import xyz.pixelatedw.mineminenomi.models.entities.mobs.SniperTargetModel;
 import xyz.pixelatedw.mineminenomi.models.entities.mobs.humanoids.DojoSenseiModel;
 import xyz.pixelatedw.mineminenomi.models.entities.mobs.humanoids.SimpleHumanModel;
 import xyz.pixelatedw.mineminenomi.renderers.abilities.ChargingUrsusShockRenderer;
+import xyz.pixelatedw.mineminenomi.renderers.abilities.PhysicalBodyRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.blocks.DialTileEntityRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.blocks.WantedPosterTileEntityRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.blocks.WantedPostersPackageTileEntityRenderer;
@@ -48,6 +56,10 @@ import xyz.pixelatedw.mineminenomi.renderers.entities.GenericMobRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.VivreCardRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.WantedPosterPackageRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.WaxPlayerRenderer;
+import xyz.pixelatedw.mineminenomi.renderers.layers.PotionLayer;
+import xyz.pixelatedw.mineminenomi.renderers.layers.TestLayer;
+
+import java.util.Map;
 
 public class ModRenderers
 {
@@ -96,5 +108,21 @@ public class ModRenderers
 		RenderingRegistry.registerEntityRenderingHandler(VivreCardEntity.class, new VivreCardRenderer.Factory());
 		RenderingRegistry.registerEntityRenderingHandler(ChargingUrsusShockEntity.class, new ChargingUrsusShockRenderer.Factory());
 		RenderingRegistry.registerEntityRenderingHandler(SniperTargetEntity.class, new GenericMobRenderer.Factory(new SniperTargetModel(), 1, "sniper_target"));
+		RenderingRegistry.registerEntityRenderingHandler(PhysicalBodyEntity.class, new PhysicalBodyRenderer.Factory());
+
+		/*Pretty simple system, you just create a new layer, and add the layer to the living entities or the player */
+
+		for (Map.Entry<Class<? extends Entity>, EntityRenderer<? extends Entity>> entry : Minecraft.getInstance().getRenderManager().renderers.entrySet()) {
+			EntityRenderer render = entry.getValue();
+			if (render instanceof LivingRenderer) {
+				((LivingRenderer) render).addLayer(new PotionLayer((IEntityRenderer) render));
+			}
+		}
+
+		for (Map.Entry<String, PlayerRenderer> entry : Minecraft.getInstance().getRenderManager().getSkinMap().entrySet()) {
+			PlayerRenderer render = entry.getValue();
+			render.addLayer(new PotionLayer(render));
+		}
+
     }
 }

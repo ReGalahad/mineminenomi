@@ -3,7 +3,7 @@ package xyz.pixelatedw.mineminenomi.abilities.doru;
 import net.minecraft.entity.player.PlayerEntity;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.api.protection.BlockProtectionRule;
-import xyz.pixelatedw.mineminenomi.api.protection.block.CoreBlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.AirBlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.api.protection.block.FoliageBlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
@@ -12,7 +12,7 @@ import xyz.pixelatedw.wypi.abilities.Ability;
 public class CandleHouseAbility extends Ability
 {
 	public static final Ability INSTANCE = new CandleHouseAbility();
-	private static final BlockProtectionRule GRIEF_RULE = new BlockProtectionRule(CoreBlockProtectionRule.INSTANCE, FoliageBlockProtectionRule.INSTANCE); 
+	private static final BlockProtectionRule GRIEF_RULE = new BlockProtectionRule(AirBlockProtectionRule.INSTANCE, FoliageBlockProtectionRule.INSTANCE); 
 
 	public CandleHouseAbility()
 	{
@@ -25,7 +25,7 @@ public class CandleHouseAbility extends Ability
 	
 	private boolean onUseEvent(PlayerEntity player)
 	{
-		for (int y = 0; y <= 3; y++)
+		for (int y = -3; y <= 3; y++)
 		{
 			for (int x = 0; x < 1; x++)
 				for (int z = -5; z < 5; z++)

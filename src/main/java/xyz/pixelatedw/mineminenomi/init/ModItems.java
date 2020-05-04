@@ -25,6 +25,7 @@ import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyRegistry;
 import xyz.pixelatedw.wypi.json.models.JSONPredicateObject;
 import xyz.pixelatedw.wypi.json.models.item.JSONModelSimple3DItem;
+import xyz.pixelatedw.wypi.json.models.item.JSONModelSword;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModItems
@@ -91,7 +92,7 @@ public class ModItems
 		WyRegistry.registerItem(BUBBLY_CORAL, "Bubbly Coral");
 		WyRegistry.registerItem(VIVRE_CARD, "Vivre Card");
 		WyRegistry.registerItem(COLOR_PALETTE, "Color Palette");
-		WyRegistry.registerItem(DORU_PICKAXE, "Doru Doru Arts: Pickaxe");
+		WyRegistry.registerItem(DORU_PICKAXE, "Doru Doru Arts: Pickaxe", new JSONModelSword("Doru Doru Arts: Pickaxe"));
 		WyRegistry.registerItem(WATERING_CAN, "Watering Can");
 		WyRegistry.registerItem(SAKE_BOTTLE, "Sake Bottle");
 		WyRegistry.registerItem(SAKE_CUP, "Sake Cup", FILLED_CUP_MODEL);
