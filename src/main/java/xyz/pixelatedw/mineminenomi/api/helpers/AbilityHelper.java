@@ -268,8 +268,18 @@ public class AbilityHelper
 	public static boolean isAffectedByWater(LivingEntity entity)
 	{
 		boolean isUnderWater = entity.areEyesInFluid(FluidTags.WATER, true) && entity.getRidingEntity() == null;
-		boolean hasWaterUnder = entity.isInWater() && entity.world.getBlockState(entity.getPosition().down()).getBlock() == Blocks.WATER;
-
+		boolean waterAbove = entity.world.getBlockState(entity.getPosition().up()).getBlock() == Blocks.WATER;
+		boolean inWater = entity.world.getBlockState(entity.getPosition()).getBlock() == Blocks.WATER;
+		boolean waterUnder = entity.world.getBlockState(entity.getPosition().down()).getBlock() == Blocks.WATER;
+		int total = 0;
+		if(waterAbove)
+			total++;
+		if(inWater)
+			total++;
+		if(waterUnder)
+			total++;
+		boolean hasWaterUnder = entity.isInWater() && total >= 2;
+		
 		if (isUnderWater || hasWaterUnder)
 		{
 			return true;
