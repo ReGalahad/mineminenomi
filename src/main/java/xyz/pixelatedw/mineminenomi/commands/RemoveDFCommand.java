@@ -55,8 +55,8 @@ public class RemoveDFCommand
 					ability.stopCooldown(player);
 			}
 
-			abilityDataProps.clearUnlockedAbilities(AbilityCategory.ALL);
-			abilityDataProps.clearEquippedAbilities(AbilityCategory.ALL);
+			abilityDataProps.clearUnlockedAbilities(AbilityCategory.DEVIL_FRUIT);
+			abilityDataProps.clearEquippedAbilities(AbilityCategory.DEVIL_FRUIT);
 
 			player.clearActivePotions();
 

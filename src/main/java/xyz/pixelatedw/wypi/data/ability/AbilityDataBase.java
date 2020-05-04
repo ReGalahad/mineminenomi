@@ -200,7 +200,7 @@ public class AbilityDataBase implements IAbilityData
 		for(int i = 0; i < this.equippedAbilities.length; i++)
 		{
 			Ability ability = this.equippedAbilities[i];
-			if((ability != null && ability.getCategory() != category) || category == AbilityCategory.ALL)
+			if((ability != null && ability.getCategory() == category) || category == AbilityCategory.ALL)
 			{
 				this.equippedAbilities[i] = null;
 			}
@@ -213,7 +213,7 @@ public class AbilityDataBase implements IAbilityData
 		for(int i = 0; i < this.equippedAbilities.length; i++)
 		{
 			Ability ability = this.equippedAbilities[i];
-			if((ability != null && ability.getCategory() != category && !list.contains(ability)) || category != AbilityCategory.ALL)
+			if((ability != null && ability.getCategory() == category && list.contains(ability)) || category != AbilityCategory.ALL)
 			{
 				this.equippedAbilities[i] = null;
 			}

@@ -31,7 +31,6 @@ public class VenomRoadProjectile extends AbilityProjectileEntity
 		super(DokuProjectiles.VENOM_ROAD, world, player);
 
 		this.setDamage(10);
-		this.setPassThroughEntities();
 		
 		this.onEntityImpactEvent = this::onEntityImpactEvent;
 		this.onBlockImpactEvent = this::onBlockImpactEvent;
@@ -40,6 +39,7 @@ public class VenomRoadProjectile extends AbilityProjectileEntity
 	private void onEntityImpactEvent(LivingEntity hitEntity)
 	{
 		hitEntity.addPotionEffect(new EffectInstance(Effects.POISON, 200, 0));
+		this.onBlockImpactEvent.onImpact(hitEntity.getPosition());
 	}
 	
 	private void onBlockImpactEvent(BlockPos pos)

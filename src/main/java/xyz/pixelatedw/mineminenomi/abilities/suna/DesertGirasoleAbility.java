@@ -7,7 +7,6 @@ import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.api.protection.BlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.api.protection.block.CoreBlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.api.protection.block.FoliageBlockProtectionRule;
-import xyz.pixelatedw.mineminenomi.api.protection.block.LiquidBlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.api.protection.block.OreBlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
@@ -24,7 +23,7 @@ public class DesertGirasoleAbility extends ChargeableAbility
 
 	private static final ParticleEffect PARTICLES1 = new DesertGirasoleParticleEffect();
 	private static final ParticleEffect PARTICLES2 = new DesertGirasole2ParticleEffect();
-	private static final BlockProtectionRule GRIEF_RULE = new BlockProtectionRule(CoreBlockProtectionRule.INSTANCE, OreBlockProtectionRule.INSTANCE, LiquidBlockProtectionRule.INSTANCE, FoliageBlockProtectionRule.INSTANCE); 
+	private static final BlockProtectionRule GRIEF_RULE = new BlockProtectionRule(CoreBlockProtectionRule.INSTANCE, OreBlockProtectionRule.INSTANCE, FoliageBlockProtectionRule.INSTANCE); 
 
 	public DesertGirasoleAbility()
 	{
@@ -41,7 +40,7 @@ public class DesertGirasoleAbility extends ChargeableAbility
 	private boolean onStartChargingEvent(PlayerEntity player)
 	{
 		PARTICLES1.spawn(player.world, player.posX, player.posY, player.posZ, 0, 0, 0);
-		
+				
 		return true;
 	}
 	
@@ -55,22 +54,22 @@ public class DesertGirasoleAbility extends ChargeableAbility
 	private boolean onEndChargingEvent(PlayerEntity player)
 	{
 		PARTICLES2.spawn(player.world, player.posX, player.posY, player.posZ, 0, 0, 0);
-		
-		for (int i = -20; i < 20; i++)
+
+		for (int i = -15; i < 15; i++)
 		{
-			for (int j = -7; j < 7; j++)
+			for (int j = -10; j < 10; j++)
 			{
-				for (int k = -20; k < 20; k++)
+				for (int k = -15; k < 15; k++)
 				{
-					double posX = player.posX + i + (i < -WyHelper.randomWithRange(15, 20) || i > WyHelper.randomWithRange(15, 20) ? WyHelper.randomWithRange(-10, 10) : 0);
+					double posX = player.posX + i + (i < -WyHelper.randomWithRange(8, 12) || i > WyHelper.randomWithRange(8, 12) ? WyHelper.randomWithRange(-5, 5) : 0);
 					double posY = player.posY + j;
-					double posZ = player.posZ + k + (k < -WyHelper.randomWithRange(15, 20) || k > WyHelper.randomWithRange(15, 20) ? WyHelper.randomWithRange(-10, 10) : 0);
+					double posZ = player.posZ + k + (k < -WyHelper.randomWithRange(8, 12) || k > WyHelper.randomWithRange(8, 12) ? WyHelper.randomWithRange(-5, 5) : 0);
 
 					AbilityHelper.placeBlockIfAllowed(player.world, posX, posY - 1, posZ, ModBlocks.SUNA_SAND, GRIEF_RULE);
 				}
 			}
 		}
-
+		
 		return true;
 	}
 }

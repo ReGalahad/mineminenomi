@@ -2,8 +2,9 @@ package xyz.pixelatedw.mineminenomi.abilities.supa;
 
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.abilities.ContinuousAbility;
+import xyz.pixelatedw.wypi.abilities.IParallelContinuousAbility;
 
-public class AtomicSpurtAbility extends ContinuousAbility
+public class AtomicSpurtAbility extends ContinuousAbility implements IParallelContinuousAbility
 {
 	public static final AtomicSpurtAbility INSTANCE = new AtomicSpurtAbility();
 

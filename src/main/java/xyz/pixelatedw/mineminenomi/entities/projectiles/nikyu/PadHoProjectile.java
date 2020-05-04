@@ -7,6 +7,7 @@ import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.abilities.ExplosionAbility;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.particles.effects.common.CommonExplosionParticleEffect;
+import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 
 public class PadHoProjectile extends AbilityProjectileEntity
@@ -33,6 +34,24 @@ public class PadHoProjectile extends AbilityProjectileEntity
 		this.setDamage(10);
 
 		this.onBlockImpactEvent = this::onBlockImpactEvent;
+		this.onEntityImpactEvent = this::onEntityImpactEvent;
+	}
+	
+	private void onEntityImpactEvent(LivingEntity target)
+	{
+		this.onBlockImpactEvent.onImpact(target.getPosition());
+		
+		double xPower = WyHelper.randomWithRange(-5, 5);
+		if(xPower >= 0) xPower += 2;
+		else xPower -= 2;
+		
+		double zPower = WyHelper.randomWithRange(-5, 5);
+		if(zPower >= 0) zPower += 2;
+		else zPower -= 2;
+		
+		target.setMotion(xPower, 0.1, zPower);
+		target.velocityChanged = true;
+		target.fallDistance = 0;
 	}
 	
 	private void onBlockImpactEvent(BlockPos hit)
@@ -44,6 +63,6 @@ public class PadHoProjectile extends AbilityProjectileEntity
 		explosion.setFireAfterExplosion(false);
 		explosion.setSmokeParticles(new CommonExplosionParticleEffect(2));
 		explosion.setDamageEntities(true);
-		explosion.doExplosion();		
+		explosion.doExplosion();
 	}
 }

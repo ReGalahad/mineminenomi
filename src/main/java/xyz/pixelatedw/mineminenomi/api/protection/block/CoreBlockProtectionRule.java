@@ -2,6 +2,7 @@ package xyz.pixelatedw.mineminenomi.api.protection.block;
 
 import net.minecraft.block.Blocks;
 import xyz.pixelatedw.mineminenomi.api.protection.BlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 
 public class CoreBlockProtectionRule extends BlockProtectionRule
 {
@@ -54,6 +55,6 @@ public class CoreBlockProtectionRule extends BlockProtectionRule
 			Blocks.OAK_FENCE, Blocks.OAK_FENCE_GATE, Blocks.SPRUCE_FENCE, Blocks.SPRUCE_FENCE_GATE, Blocks.IRON_BARS, Blocks.GLASS_PANE,
 			Blocks.LADDER, Blocks.COBWEB, Blocks.LANTERN, Blocks.SEA_PICKLE, Blocks.FLOWER_POT, Blocks.BRAIN_CORAL_BLOCK, Blocks.BUBBLE_CORAL_BLOCK,
 			Blocks.DEAD_BRAIN_CORAL_BLOCK, Blocks.DEAD_BUBBLE_CORAL_BLOCK, Blocks.DEAD_HORN_CORAL_BLOCK, Blocks.DEAD_TUBE_CORAL_BLOCK,
-			Blocks.FIRE_CORAL_BLOCK, Blocks.HORN_CORAL_BLOCK, Blocks.TUBE_CORAL_BLOCK);
+			Blocks.FIRE_CORAL_BLOCK, Blocks.HORN_CORAL_BLOCK, Blocks.TUBE_CORAL_BLOCK, ModBlocks.SUNA_SAND, ModBlocks.SKY_BLOCK);
 	}
 }

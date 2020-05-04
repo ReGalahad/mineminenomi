@@ -37,7 +37,7 @@ public class GroundDeathAbility extends Ability
 		
 		for (LivingEntity target : targets)
 		{
-			AbilityHelper.createFilledCube(target.world, target.posX, target.posY, target.posZ, 2, 2, 2, Blocks.SAND, GRIEF_RULE);
+			AbilityHelper.createFilledCube(target.world, target.posX, target.posY, target.posZ, 1, 2, 1, Blocks.SAND, GRIEF_RULE);
 			PARTICLES.spawn(player.world, target.posX, target.posY, target.posZ, 0, 0, 0);
 		}
 		

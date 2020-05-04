@@ -32,8 +32,9 @@ public class ShamblesAbility extends Ability
 			return false;
 		}
 
-		List<LivingEntity> list = WyHelper.<LivingEntity>getEntitiesNear(player.getPosition(), player.world, 4);
+		List<LivingEntity> list = WyHelper.<LivingEntity>getEntitiesNear(player.getPosition(), player.world, 20);
 		list.remove(player);
+		
 		if (list.size() <= 0)
 			return true;
 
