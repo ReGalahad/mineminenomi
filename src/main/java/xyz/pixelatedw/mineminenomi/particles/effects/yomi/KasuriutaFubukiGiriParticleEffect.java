@@ -1,9 +1,9 @@
 package xyz.pixelatedw.mineminenomi.particles.effects.yomi;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
-import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
+import xyz.pixelatedw.mineminenomi.particles.data.GenericParticleData;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.wypi.WyHelper;
 
@@ -19,14 +19,11 @@ public class KasuriutaFubukiGiriParticleEffect extends ParticleEffect
 			double offsetY = WyHelper.randomWithRange(-1, 1) + WyHelper.randomDouble();
 			double offsetZ = WyHelper.randomWithRange(-1, 1) + WyHelper.randomDouble();
 	      
-			SimpleParticle cp = new SimpleParticle(world, ModResources.HIE, 
-							posX + offsetX, 
-							posY + 1 + offsetY, 
-							posZ + offsetZ, 
-							0, 0, 0)
-					.setParticleScale(1.3F).setParticleGravity(0).setParticleAge(20);
-			Minecraft.getInstance().particles.addEffect(cp);
-
+			GenericParticleData data = new GenericParticleData();
+			data.setTexture(ModResources.HIE);
+			data.setLife(20);
+			data.setSize(1.3F);
+			WyHelper.spawnParticles(data, (ServerWorld) world, posX + offsetX, posY + 1.5 + offsetY, posZ + offsetZ);
 		}
 	}
 }

@@ -166,6 +166,8 @@ import xyz.pixelatedw.mineminenomi.abilities.ushibison.BisonHeavyPointAbility;
 import xyz.pixelatedw.mineminenomi.abilities.ushibison.BisonWalkPointAbility;
 import xyz.pixelatedw.mineminenomi.abilities.ushibison.FiddleBanffAbility;
 import xyz.pixelatedw.mineminenomi.abilities.ushibison.KokuteiCrossAbility;
+import xyz.pixelatedw.mineminenomi.abilities.yomi.KasuriutaFubukiGiriAbility;
+import xyz.pixelatedw.mineminenomi.abilities.yomi.SoulParadeAbility;
 import xyz.pixelatedw.mineminenomi.abilities.yuki.FubukiAbility;
 import xyz.pixelatedw.mineminenomi.abilities.yuki.KamakuraAbility;
 import xyz.pixelatedw.mineminenomi.abilities.yuki.KamakuraJussoshiAbility;
@@ -202,7 +204,7 @@ public class ModAbilities
 	public static final AkumaNoMiItem HITO_HITO_NO_MI = new AkumaNoMiItem("Hito Hito no Mi", 1, EnumFruitType.ZOAN);
 	public static final AkumaNoMiItem SABI_SABI_NO_MI = new AkumaNoMiItem("Sabi Sabi no Mi", 1, EnumFruitType.PARAMECIA, RustTouchAbility.INSTANCE);
 	public static final AkumaNoMiItem ZOU_ZOU_NO_MI = new AkumaNoMiItem("Zou Zou no Mi", 3, EnumFruitType.ZOAN, ZouGuardPointAbility.INSTANCE, ZouHeavyPointAbility.INSTANCE, TrunkShotAbility.INSTANCE, GreatStompAbility.INSTANCE, IvoryDartAbility.INSTANCE, IvoryStompAbility.INSTANCE);
-	public static final AkumaNoMiItem YOMI_YOMI_NO_MI = new AkumaNoMiItem("Yomi Yomi no Mi", 3, EnumFruitType.PARAMECIA);
+	public static final AkumaNoMiItem YOMI_YOMI_NO_MI = new AkumaNoMiItem("Yomi Yomi no Mi", 3, EnumFruitType.PARAMECIA, SoulParadeAbility.INSTANCE, KasuriutaFubukiGiriAbility.INSTANCE);
 	public static final AkumaNoMiItem BAKU_BAKU_NO_MI = new AkumaNoMiItem("Baku Baku no Mi", 1, EnumFruitType.PARAMECIA, BakuMunchAbility.INSTANCE, BeroCannonAbility.INSTANCE, BakuTsuihoAbility.INSTANCE);
 	public static final AkumaNoMiItem TORI_TORI_NO_MI_PHOENIX = new AkumaNoMiItem("Tori Tori no Mi, Model: Phoenix", 3, EnumFruitType.ZOAN);
 	public static final AkumaNoMiItem USHI_USHI_NO_MI_BISON = new AkumaNoMiItem("Ushi Ushi no Mi, Model: Bison", 2, EnumFruitType.ZOAN, BisonHeavyPointAbility.INSTANCE, BisonWalkPointAbility.INSTANCE, FiddleBanffAbility.INSTANCE, KokuteiCrossAbility.INSTANCE);

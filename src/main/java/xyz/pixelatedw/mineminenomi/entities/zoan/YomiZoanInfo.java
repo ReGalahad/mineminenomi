@@ -5,14 +5,14 @@ import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer.Factory;
 import xyz.pixelatedw.wypi.abilities.Ability;
 
-public class ZoanInfoYomi extends ZoanInfo
+public class YomiZoanInfo extends ZoanInfo
 {
 	public static final String FORM = "yomi";
 
 	@Override
 	public String getDevilFruit()
 	{
-		return "yomiyomi";
+		return "yomi_yomi";
 	}
 
 	@Override

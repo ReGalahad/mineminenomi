@@ -33,7 +33,7 @@ import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoGiraffeHeavy;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoGiraffeWalk;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoPhoenixFull;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoPhoenixHybrid;
-import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoYomi;
+import xyz.pixelatedw.mineminenomi.entities.zoan.YomiZoanInfo;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZouGuardZoanInfo;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZouHeavyZoanInfo;
 import xyz.pixelatedw.mineminenomi.packets.server.SRecalculateEyeHeightPacket;
@@ -208,7 +208,7 @@ public class MorphHelper
 			if (!info.getForm().equalsIgnoreCase(devilFruitProps.getZoanPoint()))
 				continue;
 
-			if (devilFruitProps.getZoanPoint().equalsIgnoreCase(ZoanInfoYomi.FORM) || abilityProps.getEquippedAbility(info.getAbility()).isContinuous())
+			if (devilFruitProps.getZoanPoint().equalsIgnoreCase(YomiZoanInfo.FORM) || abilityProps.getEquippedAbility(info.getAbility()).isContinuous())
 				return info;
 		}
 		
@@ -249,7 +249,7 @@ public class MorphHelper
 		
 		// Non-zoan Morphs
 		zoanInfoList.add(new VenomDemonZoanInfo());
-		zoanInfoList.add(new ZoanInfoYomi());
+		zoanInfoList.add(new YomiZoanInfo());
 	}
 	
 }

@@ -1,9 +1,9 @@
 package xyz.pixelatedw.mineminenomi.particles.effects.yomi;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
-import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
+import xyz.pixelatedw.mineminenomi.particles.data.GenericParticleData;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.wypi.WyHelper;
 
@@ -26,16 +26,12 @@ public class SoulParadeParticleEffect extends ParticleEffect
 			motionY *= middlePoint / 2;
 			motionZ *= middlePoint / 2;
 
-			SimpleParticle cp = new SimpleParticle(world, ModResources.HIE,
-					posX,
-					posY + 1,
-					posZ,
-					motionX,
-					motionY,
-					motionZ)
-			.setParticleScale(1).setParticleAge(10);	
-			Minecraft.getInstance().particles.addEffect(cp);
-			
+			GenericParticleData data = new GenericParticleData();
+			data.setTexture(ModResources.HIE);
+			data.setLife(10);
+			data.setSize(1F);
+			data.setMotion(motionX, motionY, motionZ);
+			WyHelper.spawnParticles(data, (ServerWorld) world, posX, posY + 1, posZ);			
 		}
 	}
 }
