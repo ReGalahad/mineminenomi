@@ -123,20 +123,19 @@ public class DFUserDeathEvents {
 			YomiTriggerEvent yomiEvent = new YomiTriggerEvent(event.getPlayer(), oldPlayerProps, newPlayerProps);
 			if (MinecraftForge.EVENT_BUS.post(yomiEvent))
 				return;
+			
+				DFUserDeathEvents.changeApple(event);
 		}
 
-		// Apple replacement logic
-		double chance = WyHelper.randomWithRange(1, 10);
-		if (chance > 0)
-			DFUserDeathEvents.changeApple(event);
 
 	}
 
 	//wynd I swear I tried making this readable :(
 	@SuppressWarnings("unchecked")
 	public static boolean changeApple(PlayerEvent.Clone e) {
-		int changeCase = 0;
 
+		double droppedChance = WyHelper.randomWithRange(1, 100);
+		double chance = WyHelper.randomWithRange(1, 10);
 		PlayerEntity original = e.getOriginal();
 		IDevilFruit oldDevilFruit = DevilFruitCapability.get(e.getOriginal());
 		if (oldDevilFruit.hasDevilFruit()) {
@@ -166,10 +165,10 @@ public class DFUserDeathEvents {
 				}
 			}
 			villagers.removeIf(entry -> !entry.getVillagerInventory().hasAny(set));
-			if (!dropList.isEmpty()) {
+			if (!dropList.isEmpty() && droppedChance <= 15) {
 				dropList.get(0).setItem(AbilityHelper.getDevilFruitItem(oldDevilFruit.getDevilFruit()));
 				return true;
-			} else if (!players.isEmpty()) {
+			} else if (!players.isEmpty() && chance == 1) {
 				int stackIndex = WyHelper.getIndexOfItemStack(new ItemStack(Items.APPLE), players.get(0).inventory);
 
 				if (stackIndex != -1) {
@@ -177,7 +176,7 @@ public class DFUserDeathEvents {
 							AbilityHelper.getDevilFruitItem(oldDevilFruit.getDevilFruit()));
 				}
 				return true;
-			} else if (!villagers.isEmpty()) {
+			} else if (!villagers.isEmpty() && chance == 1) {
 				int stackIndex = WyHelper.getIndexOfItemStack(new ItemStack(Items.APPLE),
 						villagers.get(0).getVillagerInventory());
 				if (stackIndex != -1) {
@@ -185,7 +184,7 @@ public class DFUserDeathEvents {
 							AbilityHelper.getDevilFruitItem(oldDevilFruit.getDevilFruit()));
 				}
 				return true;
-			} else if (!blockPosList.isEmpty()) {
+			} else if (!blockPosList.isEmpty() && chance == 1) {
 				BlockState state = original.world.getBlockState(blockPosList.get(0));
 				IInventory inven = ChestBlock.getInventory(state, original.world, blockPosList.get(0), false);
 				int stackIndex = WyHelper.getIndexOfItemStack(new ItemStack(Items.APPLE), inven);
