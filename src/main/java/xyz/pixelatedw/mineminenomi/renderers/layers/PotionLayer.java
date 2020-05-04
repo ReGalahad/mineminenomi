@@ -12,10 +12,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import xyz.pixelatedw.mineminenomi.api.IHasOverlay;
 import xyz.pixelatedw.mineminenomi.init.ModEffects;
-import xyz.pixelatedw.mineminenomi.models.abilities.CandleLockModel;
-import xyz.pixelatedw.wypi.WyHelper;
-
-import java.awt.*;
 
 public class PotionLayer extends LayerRenderer {
     LivingRenderer renderer;
