@@ -92,6 +92,8 @@ import xyz.pixelatedw.mineminenomi.abilities.kage.BrickBatAbility;
 import xyz.pixelatedw.mineminenomi.abilities.kage.DoppelmanAbility;
 import xyz.pixelatedw.mineminenomi.abilities.kage.KagemushaAbility;
 import xyz.pixelatedw.mineminenomi.abilities.kage.TsunoTokageAbility;
+import xyz.pixelatedw.mineminenomi.abilities.kilo.KiloPress10000Ability;
+import xyz.pixelatedw.mineminenomi.abilities.kilo.KiloPress1Ability;
 import xyz.pixelatedw.mineminenomi.abilities.magu.BakuretsuKazanAbility;
 import xyz.pixelatedw.mineminenomi.abilities.magu.DaiFunkaAbility;
 import xyz.pixelatedw.mineminenomi.abilities.magu.MeigoAbility;
@@ -210,7 +212,7 @@ public class ModAbilities
 	public static final AkumaNoMiItem TORI_TORI_NO_MI_PHOENIX = new AkumaNoMiItem("Tori Tori no Mi, Model: Phoenix", 3, EnumFruitType.ZOAN);
 	public static final AkumaNoMiItem USHI_USHI_NO_MI_BISON = new AkumaNoMiItem("Ushi Ushi no Mi, Model: Bison", 2, EnumFruitType.ZOAN, BisonHeavyPointAbility.INSTANCE, BisonWalkPointAbility.INSTANCE, FiddleBanffAbility.INSTANCE, KokuteiCrossAbility.INSTANCE);
 	public static final AkumaNoMiItem HORU_HORU_NO_MI = new AkumaNoMiItem("Horu Horu no Mi", 2, EnumFruitType.PARAMECIA, OnnaHormoneAbility.INSTANCE, ChiyuHormoneAbility.INSTANCE, TensionHormoneAbility.INSTANCE, GanmenSeichoHormoneAbility.INSTANCE);
-	public static final AkumaNoMiItem KILO_KILO_NO_MI = new AkumaNoMiItem("Kilo Kilo no Mi", 2, EnumFruitType.PARAMECIA);
+	public static final AkumaNoMiItem KILO_KILO_NO_MI = new AkumaNoMiItem("Kilo Kilo no Mi", 2, EnumFruitType.PARAMECIA, KiloPress1Ability.INSTANCE, KiloPress10000Ability.INSTANCE);
 	public static final AkumaNoMiItem GOE_GOE_NO_MI = new AkumaNoMiItem("Goe Goe no Mi", 1, EnumFruitType.PARAMECIA, TodorokiAbility.INSTANCE);
 	public static final AkumaNoMiItem MERO_MERO_NO_MI = new AkumaNoMiItem("Mero Mero no Mi", 2, EnumFruitType.PARAMECIA, MeroMeroMellowAbility.INSTANCE, PistolKissAbility.INSTANCE, SlaveArrowAbility.INSTANCE, PerfumeFemurAbility.INSTANCE);
 	public static final AkumaNoMiItem ORI_ORI_NO_MI = new AkumaNoMiItem("Ori Ori no Mi", 1, EnumFruitType.PARAMECIA);

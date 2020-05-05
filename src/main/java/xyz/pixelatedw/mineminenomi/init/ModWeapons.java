@@ -16,6 +16,7 @@ import xyz.pixelatedw.mineminenomi.items.weapons.GunItem;
 import xyz.pixelatedw.mineminenomi.items.weapons.KujaBowItem;
 import xyz.pixelatedw.mineminenomi.items.weapons.PopGreenBowItem;
 import xyz.pixelatedw.mineminenomi.items.weapons.ScissorsItem;
+import xyz.pixelatedw.mineminenomi.items.weapons.UmbrellaItem;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyRegistry;
 import xyz.pixelatedw.wypi.json.models.JSONModelItem;
@@ -37,7 +38,7 @@ public class ModWeapons
 	public static final CoreSwordItem YORU = new CoreSwordItem(10, 500);
 	public static final CoreSwordItem MURAKUMOGIRI = new CoreSwordItem(8, 500);
 	public static final CoreSwordItem HOOK = new CoreSwordItem(6, 500).setIsPoisonous();
-	public static final CoreSwordItem UMBRELLA = new CoreSwordItem(3, 500);
+	public static final UmbrellaItem UMBRELLA = new UmbrellaItem();
 	public static final CoreSwordItem JITTE = new CoreSwordItem(7, 500);
 	public static final CoreSwordItem BO_STICK = new CoreSwordItem(6, 500);
 	public static final CoreSwordItem HAMMER_5T = new CoreSwordItem(1, 500);
@@ -78,6 +79,7 @@ public class ModWeapons
 	public static final JSONPredicateObject PULLING_0_PREDICATE = new JSONPredicateObject("pulling_0", new ImmutablePair("pulling", 1));
 	public static final JSONPredicateObject PULLING_1_PREDICATE = new JSONPredicateObject("pulling_1", new ImmutablePair("pulling", 1), new ImmutablePair("pull", 0.65));
 	public static final JSONPredicateObject PULLING_2_PREDICATE = new JSONPredicateObject("pulling_2", new ImmutablePair("pulling", 1), new ImmutablePair("pull", 0.9));
+	public static final JSONPredicateObject OPEN_PREDICATE = new JSONPredicateObject("open", new ImmutablePair("open", 1));
 
 	// JSON 3D Custom Models
 	public static final JSONModelSimple3DItem GREEN_KUJA_BOW_MODEL = new JSONModelSimple3DItem("Green Kuja Bow", PULLING_0_PREDICATE, PULLING_1_PREDICATE, PULLING_2_PREDICATE).isBow();
@@ -98,7 +100,7 @@ public class ModWeapons
 		registerSword(YORU, "Yoru", HAKI_PREDICATE);
 		registerRod(MURAKUMOGIRI, "Murakumogiri", HAKI_PREDICATE);
 		registerSword(HOOK, "Hook", HAKI_PREDICATE, SHEATHED_PREDICATE);
-		registerSword(UMBRELLA, "Umbrella");
+		registerSword(UMBRELLA, "Umbrella", OPEN_PREDICATE);
 		registerSword(JITTE, "Jitte", HAKI_PREDICATE);
 		registerRod(BO_STICK, "Bo Staff", HAKI_PREDICATE);
 		registerSword(HAMMER_5T, "5t Hammer", HAKI_PREDICATE);

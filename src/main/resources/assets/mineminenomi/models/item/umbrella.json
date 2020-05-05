@@ -27,6 +27,12 @@
     },
 	"overrides":
 	[
-		
+		{
+			"predicate": 
+			{
+				"open": 1
+			},
+			"model": "mineminenomi:item/umbrella_open"
+		}
 	]
 }
