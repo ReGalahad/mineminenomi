@@ -194,13 +194,13 @@ public class CombatModeEvents
 					GlStateManager.color4f(1, 1, 1, 1);
 										
 					// Drawing the ability icons
-					RendererHelper.drawAbilityIcon(WyHelper.getResourceName(abl.getName()), (posX - 192 + (i * 50)) / 2, posY - 19, 16, 16);	
+					if(!abl.isDisabled())
+						RendererHelper.drawAbilityIcon(WyHelper.getResourceName(abl.getName()), (posX - 192 + (i * 50)) / 2, posY - 19, 16, 16);	
 					GlStateManager.translated(0, 0, 2);
 					if(hasNumberVisual)
 						WyHelper.drawStringWithBorder(mc.fontRenderer, number, (posX - 172 + (i * 50)) / 2 - mc.fontRenderer.getStringWidth(number) / 2, posY - 14, WyHelper.hexToRGB("#FFFFFF").getRGB());
 					mc.getTextureManager().bindTexture(ModResources.WIDGETS);
-				}
-				
+				}		
 				GlStateManager.disableBlend();
 			}
 			GlStateManager.popMatrix();
