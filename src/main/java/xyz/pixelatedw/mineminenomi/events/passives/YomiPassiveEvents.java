@@ -30,7 +30,6 @@ import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.event.world.BlockEvent.EntityPlaceEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import xyz.pixelatedw.mineminenomi.abilities.horo.YutaiRidatsuAbility;
 import xyz.pixelatedw.mineminenomi.abilities.yomi.SoulParadeAbility;
 import xyz.pixelatedw.mineminenomi.abilities.yomi.YomiNoReikiAbility;
 import xyz.pixelatedw.mineminenomi.api.abilities.ExplosionAbility;

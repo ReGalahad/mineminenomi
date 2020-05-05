@@ -33,57 +33,54 @@ public class DFWeaknessesEvents
 		{
 			LivingEntity entity = event.getEntityLiving();
 			IDevilFruit props = DevilFruitCapability.get(entity);
-			
-			if(props.hasDevilFruit() && AbilityHelper.isAffectedByWater(entity) && !entity.isPotionActive(ModEffects.BUBBLY_CORAL))
-			{				
-				if(entity instanceof PlayerEntity && !((PlayerEntity) entity).abilities.isCreativeMode)
+
+			if (props.hasDevilFruit() && AbilityHelper.isAffectedByWater(entity) && !entity.isPotionActive(ModEffects.BUBBLY_CORAL))
+			{
+				if (entity instanceof PlayerEntity && !((PlayerEntity) entity).abilities.isCreativeMode)
 					entity.setMotion(entity.getMotion().x, entity.getMotion().y - 5, entity.getMotion().z);
-				else if(entity instanceof GenericNewEntity)
+				else if (entity instanceof GenericNewEntity)
 					entity.setMotion(entity.getMotion().x, entity.getMotion().y - 5, entity.getMotion().z);
 			}
 		}
-		
+
 		if (event.getEntityLiving() instanceof PlayerEntity)
 		{
 			PlayerEntity player = (PlayerEntity) event.getEntityLiving();
 			IDevilFruit props = DevilFruitCapability.get(player);
 			IAbilityData abilityProps = AbilityDataCapability.get(player);
-			
-			if(player.isServerWorld())
+
+			if (player.isServerWorld() && props.hasDevilFruit() && !player.isPotionActive(ModEffects.BUBBLY_CORAL))
 			{
-				if (props.hasDevilFruit())
+				if (AbilityHelper.isNearbyKairoseki(player))
 				{
-					if (AbilityHelper.isNearbyKairoseki(player))
+					player.addPotionEffect(new EffectInstance(Effects.NAUSEA, 100, 0));
+
+					for (int i = 0; i < abilityProps.getEquippedAbilities().length; i++)
 					{
-						player.addPotionEffect(new EffectInstance(Effects.NAUSEA, 100, 0));
-						
-						for (int i = 0; i < abilityProps.getEquippedAbilities().length; i++)
+						if (abilityProps.getEquippedAbility(i) != null && !abilityProps.getEquippedAbility(i).isDisabled())
 						{
-							if (abilityProps.getEquippedAbility(i) != null && !abilityProps.getEquippedAbility(i).isDisabled())
-							{		
-								Ability ability = abilityProps.getEquippedAbility(i);
-								if(ability instanceof ContinuousAbility)
-									((ContinuousAbility) ability).stopContinuity(player);
-								if(ability instanceof RepeaterAbility)
-									((RepeaterAbility) ability).setRepeaterCount(0);
-								if(ability instanceof ChargeableAbility)
-								{
-									((ChargeableAbility) ability).setChargeTime(((ChargeableAbility) ability).getMaxChargeTime() / 20);
-									ability.startCooldown();
-									WyNetwork.sendTo(new SSyncAbilityDataPacket(abilityProps), player);
-								}
-								ability.startDisable();
+							Ability ability = abilityProps.getEquippedAbility(i);
+							if (ability instanceof ContinuousAbility)
+								((ContinuousAbility) ability).stopContinuity(player);
+							if (ability instanceof RepeaterAbility)
+								((RepeaterAbility) ability).setRepeaterCount(0);
+							if (ability instanceof ChargeableAbility)
+							{
+								((ChargeableAbility) ability).setChargeTime(((ChargeableAbility) ability).getMaxChargeTime() / 20);
+								ability.startCooldown();
+								WyNetwork.sendTo(new SSyncAbilityDataPacket(abilityProps), player);
 							}
+							ability.startDisable();
 						}
 					}
-					else
+				}
+				else
+				{
+					for (int i = 0; i < abilityProps.getEquippedAbilities().length; i++)
 					{
-						for (int i = 0; i < abilityProps.getEquippedAbilities().length; i++)
+						if (abilityProps.getEquippedAbility(i) != null && abilityProps.getEquippedAbility(i).isDisabled())
 						{
-							if(abilityProps.getEquippedAbility(i) != null && abilityProps.getEquippedAbility(i).isDisabled())
-							{
-								abilityProps.getEquippedAbility(i).startCooldown();
-							}
+							abilityProps.getEquippedAbility(i).startCooldown();
 						}
 					}
 				}
