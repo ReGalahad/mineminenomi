@@ -49,7 +49,7 @@ public class KurouzuAbility extends ChargeableAbility
 			
 			this.entities.clear();
 			List<LivingEntity> targets = WyHelper.getEntitiesNear(new BlockPos(i, j, k), player.world, 5);
-			//targets.remove(player);
+			targets.remove(player);
 			
 			for(LivingEntity target : targets)
 			{
@@ -66,7 +66,7 @@ public class KurouzuAbility extends ChargeableAbility
 			target.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 100, 5));
 			target.addPotionEffect(new EffectInstance(Effects.MINING_FATIGUE, 100, 5));
 			target.addPotionEffect(new EffectInstance(Effects.BLINDNESS, 100, 5));
-			target.addPotionEffect(new EffectInstance(ModEffects.ABILITY_OFF, 100, 0));
+			target.addPotionEffect(new EffectInstance(ModEffects.ABILITY_OFF, 100, 0, false, false, false));
 		}
 		
 		return true;

@@ -18,7 +18,6 @@ import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -28,7 +27,6 @@ import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
-import xyz.pixelatedw.mineminenomi.events.custom.YomiTriggerEvent;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
@@ -120,18 +118,13 @@ public class DFUserDeathEvents {
 			// IQuestData newQuestData = QuestDataCapability.get(event.getPlayer());
 			// QuestDataCapability.INSTANCE.readNBT(newQuestData, null, nbt);
 
-			YomiTriggerEvent yomiEvent = new YomiTriggerEvent(event.getPlayer(), oldPlayerProps, newPlayerProps);
-			if (MinecraftForge.EVENT_BUS.post(yomiEvent))
-				return;
-			
-				DFUserDeathEvents.changeApple(event);
+			DFUserDeathEvents.changeApple(event);
 		}
 
 
 	}
 
 	//wynd I swear I tried making this readable :(
-	@SuppressWarnings("unchecked")
 	public static boolean changeApple(PlayerEvent.Clone e) {
 
 		double droppedChance = WyHelper.randomWithRange(1, 100);

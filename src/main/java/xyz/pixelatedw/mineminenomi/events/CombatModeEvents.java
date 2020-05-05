@@ -54,9 +54,6 @@ public class CombatModeEvents
 		if (abilityDataProps == null)
 			return;
 
-		//if (event.getType() == ElementType.FOOD && devilFruitProps.getDevilFruit().equalsIgnoreCase("yomi_yomi") && devilFruitProps.getZoanPoint().equalsIgnoreCase("yomi"))
-		//	event.setCanceled(true);
-
 		if (event.getType() == ElementType.HEALTH)
 		{
 			event.setCanceled(true);

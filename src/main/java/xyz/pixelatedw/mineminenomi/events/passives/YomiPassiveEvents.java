@@ -5,6 +5,7 @@ import com.mojang.blaze3d.platform.GlStateManager.DestFactor;
 import com.mojang.blaze3d.platform.GlStateManager.SourceFactor;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -18,12 +19,16 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.client.event.RenderLivingEvent;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.LeftClickBlock;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
@@ -49,6 +54,30 @@ import xyz.pixelatedw.wypi.network.WyNetwork;
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class YomiPassiveEvents
 {
+	@OnlyIn(Dist.CLIENT)
+	@SubscribeEvent
+	public static void onRenderOverlay(RenderGameOverlayEvent event)
+	{
+		PlayerEntity player = Minecraft.getInstance().player;
+		IDevilFruit props = DevilFruitCapability.get(player);
+		
+		if (event.getType() == ElementType.FOOD && props.getDevilFruit().equalsIgnoreCase("yomi_yomi") && props.getZoanPoint().equalsIgnoreCase(YomiZoanInfo.FORM))
+			event.setCanceled(true);
+	}
+
+	@SubscribeEvent
+	public static void onClonePlayer(PlayerEvent.Clone event)
+	{
+		if (event.isWasDeath())
+		{
+			IDevilFruit oldPlayerProps = DevilFruitCapability.get(event.getOriginal());
+			IDevilFruit newPlayerProps = DevilFruitCapability.get(event.getPlayer());
+
+			YomiTriggerEvent yomiEvent = new YomiTriggerEvent(event.getPlayer(), oldPlayerProps, newPlayerProps);
+			if (MinecraftForge.EVENT_BUS.post(yomiEvent))
+				return;
+		}
+	}
 
 	@SubscribeEvent
 	public static void onEntityUpdate(LivingUpdateEvent event)
@@ -103,119 +132,119 @@ public class YomiPassiveEvents
 	public static void onSpiritUpdate(LivingUpdateEvent event)
 	{
 		if (!(event.getEntityLiving() instanceof PlayerEntity))
-			return;	
-		
+			return;
+
 		PlayerEntity player = (PlayerEntity) event.getEntityLiving();
 		IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
-				
+
 		if (!devilFruitProps.getDevilFruit().equals("yomi_yomi") || player.isCreative() || player.isSpectator())
 			return;
 
-		if(!isSpirit(player))
+		if (!isSpirit(player))
 		{
 			player.noClip = false;
 			player.abilities.isFlying = false;
-			if(player instanceof ServerPlayerEntity)
-				((ServerPlayerEntity)player).sendPlayerAbilities();
+			if (player instanceof ServerPlayerEntity)
+				((ServerPlayerEntity) player).sendPlayerAbilities();
 			return;
 		}
-		
+
 		player.onGround = false;
 		player.noClip = true;
 		player.abilities.isFlying = true;
-		if(player instanceof ServerPlayerEntity)
-			((ServerPlayerEntity)player).sendPlayerAbilities();
+		if (player instanceof ServerPlayerEntity)
+			((ServerPlayerEntity) player).sendPlayerAbilities();
 	}
-	
+
 	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
 	public static void onEntityRendered(RenderLivingEvent.Pre event)
 	{
 		if (!(event.getEntity() instanceof PlayerEntity))
-			return;	
-		
+			return;
+
 		PlayerEntity player = (PlayerEntity) event.getEntity();
 
-		if(!isSpirit(player))
+		if (!isSpirit(player))
 			return;
 
 		GlStateManager.color4f(0.3F, 0.9F, 0.5F, 0.6F);
 		GlStateManager.enableBlend();
 		GlStateManager.blendFunc(SourceFactor.DST_COLOR, DestFactor.ONE_MINUS_CONSTANT_COLOR);
 	}
-	
+
 	@SubscribeEvent
 	public static void onEntityHits(AttackEntityEvent event)
 	{
 		PlayerEntity player = event.getPlayer();
 
-		if(!isSpirit(player))
+		if (!isSpirit(player))
 			return;
-		
+
 		event.setCanceled(true);
 	}
-	
+
 	@SubscribeEvent
 	public static void onEntityLeftClickBlocks(LeftClickBlock event)
 	{
 		PlayerEntity player = event.getPlayer();
 
-		if(!isSpirit(player))
+		if (!isSpirit(player))
 			return;
 
 		event.setCanceled(true);
 	}
-	
+
 	@SubscribeEvent
 	public static void onEntityRightClickBlocks(RightClickBlock event)
 	{
 		PlayerEntity player = event.getPlayer();
 
-		if(!isSpirit(player))
+		if (!isSpirit(player))
 			return;
 
 		event.setCanceled(true);
 	}
-	
+
 	@SubscribeEvent
 	public static void onEntityBreaksBlocks(BreakEvent event)
 	{
 		PlayerEntity player = event.getPlayer();
 
-		if(!isSpirit(player))
+		if (!isSpirit(player))
 			return;
 
 		event.setCanceled(true);
 	}
-	
+
 	@SubscribeEvent
 	public static void onEntityPlaceBlocks(EntityPlaceEvent event)
 	{
 		if (!(event.getEntity() instanceof PlayerEntity))
-			return;	
-		
+			return;
+
 		PlayerEntity player = (PlayerEntity) event.getEntity();
 
-		if(!isSpirit(player))
+		if (!isSpirit(player))
 			return;
-		
+
 		event.setCanceled(true);
 	}
-	
+
 	@SubscribeEvent
 	public static void onEntityAttackEvent(LivingAttackEvent event)
-	{	
+	{
 		if (!(event.getEntity() instanceof PlayerEntity))
-			return;	
-		
+			return;
+
 		PlayerEntity player = (PlayerEntity) event.getEntity();
 
-		if(!isSpirit(player))
+		if (!isSpirit(player))
 			return;
-		
+
 		event.setCanceled(true);
 	}
-	
+
 	@SubscribeEvent
 	public static void onEntityAttack(LivingHurtEvent event)
 	{
@@ -274,21 +303,21 @@ public class YomiPassiveEvents
 			WyNetwork.sendToAll(new SSyncDevilFruitPacket(player.getEntityId(), event.newPlayerData));
 		}
 	}
-	
+
 	private static boolean isSpirit(PlayerEntity player)
 	{
 		IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
 		IAbilityData abilityProps = AbilityDataCapability.get(player);
-		
+
 		if (!devilFruitProps.getDevilFruit().equals("yomi_yomi") || player.isCreative() || player.isSpectator())
 			return false;
-		
+
 		Ability ability = abilityProps.getEquippedAbility(YomiNoReikiAbility.INSTANCE);
 		boolean isActive = ability != null && ability.isContinuous();
-		
-		if(!isActive)
-			return false;	
-		
+
+		if (!isActive)
+			return false;
+
 		return true;
 	}
 }
