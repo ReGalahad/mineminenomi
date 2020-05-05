@@ -18,7 +18,7 @@ import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 
 public class DarknessBlock extends Block
 {	
-	private static final VoxelShape YAMI_AABB = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 15.0D, 16.0D);
+	private static final VoxelShape YAMI_AABB = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
 	private static final VoxelShape NON_YAMI_AABB = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D);
 	private static final BooleanProperty USER_ON_TOP = BooleanProperty.create("user_on_top");
 

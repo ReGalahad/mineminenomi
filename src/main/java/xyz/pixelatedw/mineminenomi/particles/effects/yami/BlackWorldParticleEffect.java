@@ -1,11 +1,9 @@
 package xyz.pixelatedw.mineminenomi.particles.effects.yami;
 
-import java.util.Random;
-
-import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
-import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
+import xyz.pixelatedw.mineminenomi.particles.data.GenericParticleData;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.wypi.WyHelper;
 
@@ -15,43 +13,33 @@ public class BlackWorldParticleEffect extends ParticleEffect
 	@Override
 	public void spawn(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
 	{
-		for (int i = 0; i < 2048 * 2; i++)
+		for (int i = 0; i < 500; i++)
 		{
-			double offsetX = (new Random().nextInt(40) + 1.0D - 20.0D) / 2.0D;
-			double offsetY = (new Random().nextInt(40) + 1.0D - 20.0D) / 35.0D;
-			double offsetZ = (new Random().nextInt(40) + 1.0D - 20.0D) / 2.0D;
+			double offsetX = WyHelper.randomWithRange(-10, 10) + WyHelper.randomDouble();
+			double offsetY = WyHelper.randomWithRange(0, 2) + WyHelper.randomDouble();
+			double offsetZ = WyHelper.randomWithRange(-10, 10) + WyHelper.randomDouble();
 			
-			SimpleParticle cp = new SimpleParticle(world, ModResources.DARKNESS,
-					posX + offsetX + WyHelper.randomWithRange(0, 5), 
-					posY + offsetY,
-					posZ + offsetZ + WyHelper.randomWithRange(0, 5), 
-					0, 0, 0)
-					.setParticleGravity(-1 + (world.rand.nextInt(2) * -1))
-					.setParticleAge(30 + world.rand.nextInt(10))
-					.setParticleScale(1.2F);
-			Minecraft.getInstance().particles.addEffect(cp);
+			GenericParticleData data = new GenericParticleData();
+			data.setTexture(ModResources.DARKNESS);
+			data.setLife(30 + world.rand.nextInt(10));
+			data.setSize(1.2F);
+			data.setMotion(0, 0.02, 0);
+			WyHelper.spawnParticles(data, (ServerWorld) world, posX + offsetX, posY + offsetY, posZ + offsetZ);
 
-			cp = new SimpleParticle(world, ModResources.DARKNESS,
-					posX + offsetX + WyHelper.randomWithRange(0, 5), 
-					posY + 1.5 + offsetY,
-					posZ + offsetZ + WyHelper.randomWithRange(0, 5), 
-					0, 0, 0)
-					.setParticleGravity(-1 + (world.rand.nextInt(2) * -1))
-					.setParticleAge(30 + world.rand.nextInt(10))
-					.setParticleScale(1.2F);
-			Minecraft.getInstance().particles.addEffect(cp);
+			data = new GenericParticleData();
+			data.setTexture(ModResources.DARKNESS);
+			data.setLife(30 + world.rand.nextInt(10));
+			data.setSize(1.2F);
+			data.setMotion(0, 0.02, 0);
+			WyHelper.spawnParticles(data, (ServerWorld) world, posX + offsetX, posY + 0.5 + offsetY, posZ + offsetZ);
 
-			cp = new SimpleParticle(world, ModResources.DARKNESS,
-					posX + offsetX + WyHelper.randomWithRange(0, 5), 
-					posY + 2.5 + offsetY,
-					posZ + offsetZ + WyHelper.randomWithRange(0, 5), 
-					0, 0, 0)
-					.setParticleGravity(-1 + (world.rand.nextInt(2) * -1))
-					.setParticleAge(30 + world.rand.nextInt(10))
-					.setParticleScale(1.2F);
-			Minecraft.getInstance().particles.addEffect(cp);
-		}		
-
+			data = new GenericParticleData();
+			data.setTexture(ModResources.DARKNESS);
+			data.setLife(30 + world.rand.nextInt(10));
+			data.setSize(1.2F);
+			data.setMotion(0, 0.02, 0);
+			WyHelper.spawnParticles(data, (ServerWorld) world, posX + offsetX, posY + 1.5 + offsetY, posZ + offsetZ);
+		}
 	}
 
 }

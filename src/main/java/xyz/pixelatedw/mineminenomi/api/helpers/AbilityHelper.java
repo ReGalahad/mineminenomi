@@ -411,7 +411,7 @@ public class AbilityHelper
 		}
 
 		if (fullName.equals("yamidummy"))
-			fullName = "yamiyami";
+			fullName = "yami_yami";
 
 		String finalName = (!WyHelper.isNullOrEmpty(model) ? fullName.replace("_" + model, "") : fullName) + "_no_mi" + fullModel;
 				

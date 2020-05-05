@@ -95,7 +95,7 @@ public class SelectHotbarAbilitiesScreen extends Screen
 			{
 				GuiUtils.drawTexturedModalRect((posX - 280) / 2, (posY - 200) / 2, 0, 23, 27, 26, 0);
 				if (this.devilFruitProps.hasYamiPower())
-					RendererHelper.drawDevilFruitIcon("yamiyaminomi", (posX - 268) / 2, (posY - 187) / 2, 16, 16);
+					RendererHelper.drawDevilFruitIcon("yami_yami_no_mi", (posX - 268) / 2, (posY - 187) / 2, 16, 16);
 				else
 				{
 					ItemStack df = AbilityHelper.getDevilFruitItem(this.devilFruitProps.getDevilFruit());

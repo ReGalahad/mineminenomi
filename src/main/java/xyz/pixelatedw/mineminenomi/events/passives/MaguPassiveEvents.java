@@ -33,7 +33,7 @@ public class MaguPassiveEvents
 		
 		PlayerEntity player = (PlayerEntity) event.getEntityLiving();
 		IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
-		
+
 		if (!devilFruitProps.getDevilFruit().equals("magu_magu"))
 			return;
 

@@ -49,9 +49,12 @@ public class DFWeaknessesEvents
 			IDevilFruit props = DevilFruitCapability.get(player);
 			IAbilityData abilityProps = AbilityDataCapability.get(player);
 
-			if (player.isServerWorld() && props.hasDevilFruit() && !player.isPotionActive(ModEffects.BUBBLY_CORAL))
+			boolean hasWaterWeakness =  AbilityHelper.isNearbyKairoseki(player) && !player.isPotionActive(ModEffects.BUBBLY_CORAL);
+			boolean hasDarknessWeakness = player.isPotionActive(ModEffects.ABILITY_OFF);
+			
+			if (player.isServerWorld() && props.hasDevilFruit())
 			{
-				if (AbilityHelper.isNearbyKairoseki(player))
+				if (hasWaterWeakness || hasDarknessWeakness)
 				{
 					player.addPotionEffect(new EffectInstance(Effects.NAUSEA, 100, 0));
 

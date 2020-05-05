@@ -45,6 +45,8 @@ public class ModEffects {
     public static final Effect DRUNK = new DrunkEffect()
             .addAttributesModifier(SharedMonsterAttributes.MOVEMENT_SPEED, "7107DE5E-7CE8-4030-940E-514C1F160890", -0.005, AttributeModifier.Operation.ADDITION);
 
+    public static final Effect ABILITY_OFF = new AbilityOffEffect();
+    
     static {
         WyRegistry.registerEffect(FROZEN, "Frozen");
         WyRegistry.registerEffect(BUBBLY_CORAL, "Bubbly Coral");
@@ -55,5 +57,6 @@ public class ModEffects {
         WyRegistry.registerEffect(TENSION_HORMONE, "Tension Hormone");
         WyRegistry.registerEffect(GANMEN_SEICHO_HORMONE, "Genmen Seicho Hormone");
         WyRegistry.registerEffect(DRUNK, "Drunk");
+        WyRegistry.registerEffect(ABILITY_OFF, "Ability Off");
     }
 }
