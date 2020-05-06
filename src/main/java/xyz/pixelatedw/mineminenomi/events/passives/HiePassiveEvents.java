@@ -40,7 +40,6 @@ public class HiePassiveEvents
 		if (!AbilityHelper.isNearbyKairoseki(player) && (player.getHealth() > player.getMaxHealth() / 5 || player.abilities.isCreativeMode))
 			AbilityHelper.createFilledSphere(player.world, (int) player.posX - 1, (int) player.posY, (int) player.posZ - 1, 2, Blocks.ICE, GRIEF_RULE);
 	}
-
 	
 	@SubscribeEvent
 	@OnlyIn(Dist.CLIENT)

@@ -58,7 +58,7 @@ public class ModI18n
 	public static final String QUEST_ALREADY_IN_PROGRESS = WyRegistry.registerName("quest.already_in_progress", "Already in progress!");
 		
 	public static final String TRADER_WELCOME_MESSAGE = WyRegistry.registerName("trader.welcome_message", "Welcome to my humble Shop! Fine traveler, please take whatever you need. I sell to all who need it.");
-	public static final String TRADER_NO_PIRATE = WyRegistry.registerName("trader.no_pirate", "I don't trade to Pirate Scum");
+	public static final String TRADER_NO_PIRATE = WyRegistry.registerName("trader.no_pirate", "I don't trade to Pirate scum");
 	public static final String TRADER_NO_MARINE = WyRegistry.registerName("trader.no_marine", "I don't support the Marines.");
 	
 	public static final String ABILITY_MESSAGE_NEED_SWORD = WyRegistry.registerName("ability.item.message.need_sword", "You need a sword to use this ability!");

@@ -25,6 +25,9 @@ import xyz.pixelatedw.mineminenomi.abilities.cyborg.CoupDeVentAbility;
 import xyz.pixelatedw.mineminenomi.abilities.cyborg.FreshFireAbility;
 import xyz.pixelatedw.mineminenomi.abilities.cyborg.RadicalBeamAbility;
 import xyz.pixelatedw.mineminenomi.abilities.cyborg.StrongRightAbility;
+import xyz.pixelatedw.mineminenomi.abilities.doa.AirDoorAbility;
+import xyz.pixelatedw.mineminenomi.abilities.doa.DoorDoorAbility;
+import xyz.pixelatedw.mineminenomi.abilities.doa.KaitenDoorAbility;
 import xyz.pixelatedw.mineminenomi.abilities.doctor.FailedExperimentAbility;
 import xyz.pixelatedw.mineminenomi.abilities.doctor.FirstAidAbility;
 import xyz.pixelatedw.mineminenomi.abilities.doctor.MedicBagExplosionAbility;
@@ -205,7 +208,7 @@ public class ModAbilities
 {
 
 	public static final AkumaNoMiItem KACHI_KACHI_NO_MI = new AkumaNoMiItem("Kachi Kachi no Mi", 1, EnumFruitType.PARAMECIA, EvaporateAbility.INSTANCE, HotBoilingSpecialAbility.INSTANCE);
-	public static final AkumaNoMiItem DOA_DOA_NO_MI = new AkumaNoMiItem("Doa Doa no Mi", 2, EnumFruitType.PARAMECIA);
+	public static final AkumaNoMiItem DOA_DOA_NO_MI = new AkumaNoMiItem("Doa Doa no Mi", 2, EnumFruitType.PARAMECIA, DoorDoorAbility.INSTANCE, KaitenDoorAbility.INSTANCE, AirDoorAbility.INSTANCE);
 	public static final AkumaNoMiItem USHI_USHI_NO_MI_GIRAFFE = new AkumaNoMiItem("Ushi Ushi no Mi, Model Giraffe", 2, EnumFruitType.ZOAN);
 	public static final AkumaNoMiItem MOGU_MOGU_NO_MI = new AkumaNoMiItem("Mogu Mogu no Mi", 2, EnumFruitType.ZOAN, MoguHeavyPointAbility.INSTANCE, MoguraBananaAbility.INSTANCE, MoguraTonpoAbility.INSTANCE);
 	public static final AkumaNoMiItem CHIYU_CHIYU_NO_MI = new AkumaNoMiItem("Chiyu Chiyu no Mi", 1, EnumFruitType.PARAMECIA, HealingTouchAbility.INSTANCE, ChiyupopoAbility.INSTANCE);
