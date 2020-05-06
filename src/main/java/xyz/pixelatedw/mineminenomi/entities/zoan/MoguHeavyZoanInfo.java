@@ -1,6 +1,7 @@
 package xyz.pixelatedw.mineminenomi.entities.zoan;
 
 import xyz.pixelatedw.mineminenomi.abilities.mogu.MoguHeavyPointAbility;
+import xyz.pixelatedw.mineminenomi.api.ZoanInfo;
 import xyz.pixelatedw.mineminenomi.models.entities.zoans.MoguMoleModel;
 import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer.Factory;

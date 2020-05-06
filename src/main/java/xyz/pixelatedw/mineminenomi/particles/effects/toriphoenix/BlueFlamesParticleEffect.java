@@ -1,9 +1,9 @@
 package xyz.pixelatedw.mineminenomi.particles.effects.toriphoenix;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
-import xyz.pixelatedw.mineminenomi.particles.SimpleParticle;
+import xyz.pixelatedw.mineminenomi.particles.data.GenericParticleData;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.wypi.WyHelper;
 
@@ -13,19 +13,17 @@ public class BlueFlamesParticleEffect extends ParticleEffect
 	@Override
 	public void spawn(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
 	{
-		for (int i = 0; i < 50; i++)
+		for (int i = 0; i < 20; i++)
 		{
-			double offsetX = WyHelper.randomDouble();
-			double offsetY = WyHelper.randomDouble();
-			double offsetZ = WyHelper.randomDouble();
+			double offsetX = WyHelper.randomDouble() / 1.25;
+			double offsetY = WyHelper.randomDouble() / 1.25;
+			double offsetZ = WyHelper.randomDouble() / 1.25;
 			
-			SimpleParticle cp = new SimpleParticle(world, ModResources.BLUE_FLAME,
-					posX + offsetX, 
-					posY + 1 + offsetY,
-					posZ + offsetZ, 
-					0, 0, 0)
-					.setParticleScale(1.2F).setParticleGravity(0).setParticleAge(1);
-			Minecraft.getInstance().particles.addEffect(cp);
+			GenericParticleData data = new GenericParticleData();
+			data.setTexture(ModResources.BLUE_FLAME);
+			data.setLife(1);
+			data.setSize(2.5F);
+			WyHelper.spawnParticles(data, (ServerWorld) world, posX + offsetX, posY + 1 + offsetY, posZ + offsetZ);
 		}
 	}
 

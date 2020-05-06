@@ -1,18 +1,20 @@
 package xyz.pixelatedw.mineminenomi.entities.zoan;
 
-import xyz.pixelatedw.mineminenomi.models.entities.zoans.PhoenixHybridModel;
+import xyz.pixelatedw.mineminenomi.abilities.toriphoenix.PhoenixFlyPointAbility;
+import xyz.pixelatedw.mineminenomi.api.ZoanInfo;
+import xyz.pixelatedw.mineminenomi.models.entities.zoans.PhoenixFullModel;
 import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer.Factory;
 import xyz.pixelatedw.wypi.abilities.Ability;
 
-public class ZoanInfoPhoenixHybrid extends ZoanInfo
+public class PhoenixFlyZoanInfo extends ZoanInfo
 {
-	public static final String FORM = "hybrid";
+	public static final String FORM = "fly";
 
 	@Override
 	public String getDevilFruit()
 	{
-		return "toritoriphoenix";
+		return "tori_tori_phoenix";
 	}
 
 	@Override
@@ -24,25 +26,25 @@ public class ZoanInfoPhoenixHybrid extends ZoanInfo
 	@Override
 	public Factory getFactory()
 	{
-		return new ZoanMorphRenderer.Factory(new PhoenixHybridModel(), "phoenixhybrid", 1, new float[] { 0, 0.2f, 0 });
+		return new ZoanMorphRenderer.Factory(new PhoenixFullModel(), "phoenixfull", 1.3, new float[] { 0, -0.5f, 0 });
 	}
 
 	@Override
 	public Ability getAbility()
 	{
-		return null;//ModAttributes.PHOENIX_HYBRID_POINT;
+		return PhoenixFlyPointAbility.INSTANCE;
 	}
 
 	@Override
 	public double getWidth()
 	{
-		return 0.6;
+		return 0.9;
 	}
 
 	@Override
 	public double getHeight()
 	{
-		return 1.8;
+		return 0.8;
 	}
 	
 	@Override

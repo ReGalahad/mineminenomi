@@ -22,17 +22,17 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityEvent;
+import xyz.pixelatedw.mineminenomi.api.ZoanInfo;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.entities.zoan.BisonHeavyZoanInfo;
 import xyz.pixelatedw.mineminenomi.entities.zoan.BisonWalkZoanInfo;
 import xyz.pixelatedw.mineminenomi.entities.zoan.MoguHeavyZoanInfo;
 import xyz.pixelatedw.mineminenomi.entities.zoan.VenomDemonZoanInfo;
-import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfo;
 import xyz.pixelatedw.mineminenomi.entities.zoan.GiraffeHeavyZoanInfo;
 import xyz.pixelatedw.mineminenomi.entities.zoan.GiraffeWalkZoanInfo;
-import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoPhoenixFull;
-import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoPhoenixHybrid;
+import xyz.pixelatedw.mineminenomi.entities.zoan.PhoenixFlyZoanInfo;
+import xyz.pixelatedw.mineminenomi.entities.zoan.PhoenixAssaultZoanInfo;
 import xyz.pixelatedw.mineminenomi.entities.zoan.YomiZoanInfo;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZouGuardZoanInfo;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZouHeavyZoanInfo;
@@ -233,8 +233,8 @@ public class MorphHelper
 		zoanInfoList.add(new BisonWalkZoanInfo());
 		
 		// Phoenix Zoan Points
-		zoanInfoList.add(new ZoanInfoPhoenixFull());
-		zoanInfoList.add(new ZoanInfoPhoenixHybrid());
+		zoanInfoList.add(new PhoenixFlyZoanInfo());
+		zoanInfoList.add(new PhoenixAssaultZoanInfo());
 		
 		// Zou Zoan Points
 		zoanInfoList.add(new ZouGuardZoanInfo());
