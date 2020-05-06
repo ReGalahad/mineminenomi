@@ -16,7 +16,9 @@ import net.minecraft.particles.ParticleType;
 import net.minecraft.potion.Effect;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import xyz.pixelatedw.wypi.abilities.Ability;
@@ -126,8 +128,11 @@ public class WyRegistry
 	{
 		String resourceName = WyHelper.getResourceName(ability.getName());
 		langMap.put("ability." + APIConfig.PROJECT_ID + "." + resourceName, ability.getName());
-
-		ABILITIES.register(resourceName, () -> ability);
+		
+        final ResourceLocation key = new ResourceLocation(APIConfig.PROJECT_ID, resourceName);
+		RegistryObject<Ability> ret = RegistryObject.of(key, APIRegistries.ABILITIES);
+		if(!ABILITIES.getEntries().contains(ret))
+			ABILITIES.register(resourceName, () -> ability);
 
 		return ability;
 	}

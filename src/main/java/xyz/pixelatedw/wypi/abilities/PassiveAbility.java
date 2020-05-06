@@ -8,7 +8,7 @@ import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 public abstract class PassiveAbility extends Ability
 {	
 	// Setting the defaults so that no crash occurs and so they will be null safe.
-	protected IDuringPassive duringPassive = (player) -> { };
+	protected IDuringPassive duringPassiveEvent = (player) -> { };
 	
 	public PassiveAbility(String name, AbilityCategory category)
 	{
@@ -20,7 +20,7 @@ public abstract class PassiveAbility extends Ability
 	
 	public void tick(PlayerEntity user)
 	{
-		this.duringPassive.duringPassive(user);
+		this.duringPassiveEvent.duringPassive(user);
 	}
 	
 	public interface IDuringPassive extends Serializable

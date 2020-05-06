@@ -2,6 +2,7 @@ package xyz.pixelatedw.mineminenomi.screens.extra;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
@@ -13,6 +14,7 @@ import xyz.pixelatedw.mineminenomi.screens.SelectHotbarAbilitiesScreen;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.abilities.PassiveAbility;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 import xyz.pixelatedw.wypi.network.WyNetwork;
 import xyz.pixelatedw.wypi.network.packets.client.CSyncAbilityDataPacket;
@@ -49,7 +51,8 @@ public class AbilitiesListScreenPanel extends ScrollPanel
 	@Override
 	protected int getContentHeight()
 	{
-		return ((this.entries.size()) * ENTRY_HEIGHT) + 30;
+		int size = this.entries.stream().filter(entry -> !(entry.ability instanceof PassiveAbility)).collect(Collectors.toList()).size();
+		return (size * ENTRY_HEIGHT) + 30;
 	}
 
 	@Override
@@ -63,18 +66,18 @@ public class AbilitiesListScreenPanel extends ScrollPanel
 	{
 		for (Entry entry : this.entries)
 		{
+			if(entry == null || entry.ability instanceof PassiveAbility)
+				continue;
+			
 			float y = relativeY;
 			float x = (parent.width / 2 - 109) + 40;
 			boolean flag = false;
 
-			if (entry != null)
-			{
-				if(this.props.hasEquippedAbility(entry.ability))
-					flag = true;
+			if (this.props.hasEquippedAbility(entry.ability))
+				flag = true;
 
-				Minecraft.getInstance().fontRenderer.drawStringWithShadow(I18n.format("ability." + APIConfig.PROJECT_ID + "." + WyHelper.getResourceName(entry.ability.getName())), x, y + 4, flag ? 0xFF0000 : 0xFFFFFF);
-				RendererHelper.drawAbilityIcon(WyHelper.getResourceName(entry.ability.getName()), MathHelper.floor(x) - 30, MathHelper.floor(y), 16, 16);
-			}
+			Minecraft.getInstance().fontRenderer.drawStringWithShadow(I18n.format("ability." + APIConfig.PROJECT_ID + "." + WyHelper.getResourceName(entry.ability.getName())), x, y + 4, flag ? 0xFF0000 : 0xFFFFFF);
+			RendererHelper.drawAbilityIcon(WyHelper.getResourceName(entry.ability.getName()), MathHelper.floor(x) - 30, MathHelper.floor(y), 16, 16);
 
 			relativeY += ENTRY_HEIGHT * 1.25;
 		}

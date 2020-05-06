@@ -28,7 +28,7 @@ public class ZoanAbility extends ContinuousAbility implements IParallelContinuou
 		this.onEndContinuityEvent = this::onEndContinuityEvent;
 	}
 	
-	private boolean onStartContinuityEvent(PlayerEntity player)
+	protected boolean onStartContinuityEvent(PlayerEntity player)
 	{
 		IDevilFruit props = DevilFruitCapability.get(player);
 		IAbilityData abilityProps = AbilityDataCapability.get(player);
@@ -47,7 +47,7 @@ public class ZoanAbility extends ContinuousAbility implements IParallelContinuou
 		return true;
 	}
 
-	private boolean onEndContinuityEvent(PlayerEntity player)
+	protected boolean onEndContinuityEvent(PlayerEntity player)
 	{
 		IDevilFruit props = DevilFruitCapability.get(player);
 

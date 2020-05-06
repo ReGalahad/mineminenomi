@@ -26,7 +26,6 @@ public class TenseiNoSoenAbility extends ChargeableAbility
 
 	private static final ParticleEffect PARTICLES1 = new TenseiNoSoenParticleEffect();
 	private static final ParticleEffect PARTICLES2 = new TenseiNoSoen2ParticleEffect();
-	private boolean touchedGround = false;
 	
 	public TenseiNoSoenAbility()
 	{
@@ -38,7 +37,6 @@ public class TenseiNoSoenAbility extends ChargeableAbility
 		this.onStartChargingEvent = this::onStartChargingEvent;
 		this.duringChargingEvent = this::duringChargingEvent;
 		this.onEndChargingEvent = this::onEndChargingEvent;
-		this.duringCooldownEvent = this::duringCooldownEvent;
 	}
 	
 	private boolean onStartChargingEvent(PlayerEntity player)
@@ -55,9 +53,7 @@ public class TenseiNoSoenAbility extends ChargeableAbility
 			WyHelper.sendMsgToPlayer(player, new TranslationTextComponent(ModI18n.ABILITY_MESSAGE_ONLY_IN_AIR, this.getName()).getFormattedText());
 			return false;
 		}
-		
-		this.touchedGround = false;
-		
+				
 		return true;
 	}
 	
