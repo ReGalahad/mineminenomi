@@ -1,9 +1,5 @@
 package xyz.pixelatedw.mineminenomi.items;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
@@ -17,6 +13,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Hand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -24,7 +21,11 @@ import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.packets.server.SEntityStatsSyncPacket;
+import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.network.WyNetwork;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class HeartItem extends Item
 {
@@ -33,13 +34,11 @@ public class HeartItem extends Item
 	{
 		super(new Properties().maxStackSize(1));
 	}
-
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand)
 	{
 		ItemStack itemStack = player.getHeldItem(hand);
-		LivingEntity owner = (LivingEntity) world.getEntityByID(itemStack.getTag().getInt("owner"));
-		
+		LivingEntity owner = getOwner(world, player.getPosition(), itemStack);
 		if(itemStack.getTag() != null && owner != null)
 		{
 			if(owner == player)
@@ -64,6 +63,22 @@ public class HeartItem extends Item
 		}
 		
 		return new ActionResult<>(ActionResultType.SUCCESS, player.getHeldItem(hand));
+	}
+
+	public LivingEntity getOwner(World world, BlockPos pos, ItemStack itemStack) {
+ 		LivingEntity entity = (LivingEntity) world.getEntityByID(itemStack.getTag().getInt("owner"));
+
+		if(entity == null) {
+			List<LivingEntity> list = WyHelper.getEntitiesNear(pos, world, 256);
+			for(LivingEntity e : list) {
+				if(e.getUniqueID().equals(itemStack.getTag().getUniqueId("ownerUUID"))) {
+					itemStack.getTag().putInt("owner", e.getEntityId());
+					return e;
+				}
+			}
+		}
+
+		return entity;
 	}
 
     @Override
@@ -106,5 +121,7 @@ public class HeartItem extends Item
 	{
 		itemStack.setTag(new CompoundNBT());
 		itemStack.getTag().putInt("owner", e.getEntityId());
+		itemStack.getTag().putUniqueId("ownerUUID", e.getUniqueID());
+
 	}
 }
