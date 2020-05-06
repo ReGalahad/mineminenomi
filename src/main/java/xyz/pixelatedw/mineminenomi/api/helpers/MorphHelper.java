@@ -29,8 +29,8 @@ import xyz.pixelatedw.mineminenomi.entities.zoan.BisonWalkZoanInfo;
 import xyz.pixelatedw.mineminenomi.entities.zoan.MoguHeavyZoanInfo;
 import xyz.pixelatedw.mineminenomi.entities.zoan.VenomDemonZoanInfo;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfo;
-import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoGiraffeHeavy;
-import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoGiraffeWalk;
+import xyz.pixelatedw.mineminenomi.entities.zoan.GiraffeHeavyZoanInfo;
+import xyz.pixelatedw.mineminenomi.entities.zoan.GiraffeWalkZoanInfo;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoPhoenixFull;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZoanInfoPhoenixHybrid;
 import xyz.pixelatedw.mineminenomi.entities.zoan.YomiZoanInfo;
@@ -244,8 +244,8 @@ public class MorphHelper
 		zoanInfoList.add(new MoguHeavyZoanInfo());
 	
 		// Giraffe Zoan Points
-		zoanInfoList.add(new ZoanInfoGiraffeHeavy());
-		zoanInfoList.add(new ZoanInfoGiraffeWalk());
+		zoanInfoList.add(new GiraffeHeavyZoanInfo());
+		zoanInfoList.add(new GiraffeWalkZoanInfo());
 		
 		// Non-zoan Morphs
 		zoanInfoList.add(new VenomDemonZoanInfo());

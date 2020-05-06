@@ -1,18 +1,19 @@
 package xyz.pixelatedw.mineminenomi.entities.zoan;
 
-import xyz.pixelatedw.mineminenomi.models.entities.zoans.GiraffeWalkModel;
+import xyz.pixelatedw.mineminenomi.abilities.ushigiraffe.GiraffeHeavyPointAbility;
+import xyz.pixelatedw.mineminenomi.models.entities.zoans.GiraffeHeavyModel;
 import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer.Factory;
 import xyz.pixelatedw.wypi.abilities.Ability;
 
-public class ZoanInfoGiraffeWalk extends ZoanInfo
+public class GiraffeHeavyZoanInfo extends ZoanInfo
 {
-	public static final String FORM = "walk";
+	public static final String FORM = "heavy";
 
 	@Override
 	public String getDevilFruit()
 	{
-		return "ushiushigiraffe";
+		return "ushi_ushi_giraffe";
 	}
 
 	@Override
@@ -24,19 +25,19 @@ public class ZoanInfoGiraffeWalk extends ZoanInfo
 	@Override
 	public Factory getFactory()
 	{
-		return new ZoanMorphRenderer.Factory(new GiraffeWalkModel(), "giraffefull", 1.55, new float[] { 0, 0.95f, 0 });
+		return new ZoanMorphRenderer.Factory(new GiraffeHeavyModel(), "giraffehybrid", 1.4, new float[] { 0, 0.7f, 0 });
 	}
 
 	@Override
 	public Ability getAbility()
 	{
-		return null;//ModAttributes.GIRAFFE_WALK_POINT;
+		return GiraffeHeavyPointAbility.INSTANCE;
 	}
 
 	@Override
 	public double getWidth()
 	{
-		return 1.5;
+		return 1.3;
 	}
 
 	@Override
@@ -48,13 +49,13 @@ public class ZoanInfoGiraffeWalk extends ZoanInfo
 	@Override
 	public double[] getHeldItemOffset()
 	{
-		return new double[] {0, 0, 0};
+		return new double[] {-0.39, 0.75, -0.4};
 	}
 
 	@Override
 	public double getHeldItemRotation()
 	{
-		return 0;
+		return 40;
 	}
 
 }

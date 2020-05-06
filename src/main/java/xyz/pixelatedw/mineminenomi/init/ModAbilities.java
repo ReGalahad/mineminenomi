@@ -171,6 +171,9 @@ import xyz.pixelatedw.mineminenomi.abilities.ushibison.BisonHeavyPointAbility;
 import xyz.pixelatedw.mineminenomi.abilities.ushibison.BisonWalkPointAbility;
 import xyz.pixelatedw.mineminenomi.abilities.ushibison.FiddleBanffAbility;
 import xyz.pixelatedw.mineminenomi.abilities.ushibison.KokuteiCrossAbility;
+import xyz.pixelatedw.mineminenomi.abilities.ushigiraffe.BiganAbility;
+import xyz.pixelatedw.mineminenomi.abilities.ushigiraffe.GiraffeHeavyPointAbility;
+import xyz.pixelatedw.mineminenomi.abilities.ushigiraffe.GiraffeWalkPointAbility;
 import xyz.pixelatedw.mineminenomi.abilities.yami.BlackHoleAbility;
 import xyz.pixelatedw.mineminenomi.abilities.yami.BlackWorldAbility;
 import xyz.pixelatedw.mineminenomi.abilities.yami.DarkMatterAbility;
@@ -209,7 +212,7 @@ public class ModAbilities
 
 	public static final AkumaNoMiItem KACHI_KACHI_NO_MI = new AkumaNoMiItem("Kachi Kachi no Mi", 1, EnumFruitType.PARAMECIA, EvaporateAbility.INSTANCE, HotBoilingSpecialAbility.INSTANCE);
 	public static final AkumaNoMiItem DOA_DOA_NO_MI = new AkumaNoMiItem("Doa Doa no Mi", 2, EnumFruitType.PARAMECIA, DoorDoorAbility.INSTANCE, KaitenDoorAbility.INSTANCE, AirDoorAbility.INSTANCE);
-	public static final AkumaNoMiItem USHI_USHI_NO_MI_GIRAFFE = new AkumaNoMiItem("Ushi Ushi no Mi, Model Giraffe", 2, EnumFruitType.ZOAN);
+	public static final AkumaNoMiItem USHI_USHI_NO_MI_GIRAFFE = new AkumaNoMiItem("Ushi Ushi no Mi, Model Giraffe", 2, EnumFruitType.ZOAN, GiraffeHeavyPointAbility.INSTANCE, GiraffeWalkPointAbility.INSTANCE, BiganAbility.INSTANCE);
 	public static final AkumaNoMiItem MOGU_MOGU_NO_MI = new AkumaNoMiItem("Mogu Mogu no Mi", 2, EnumFruitType.ZOAN, MoguHeavyPointAbility.INSTANCE, MoguraBananaAbility.INSTANCE, MoguraTonpoAbility.INSTANCE);
 	public static final AkumaNoMiItem CHIYU_CHIYU_NO_MI = new AkumaNoMiItem("Chiyu Chiyu no Mi", 1, EnumFruitType.PARAMECIA, HealingTouchAbility.INSTANCE, ChiyupopoAbility.INSTANCE);
 	public static final AkumaNoMiItem HITO_HITO_NO_MI = new AkumaNoMiItem("Hito Hito no Mi", 1, EnumFruitType.ZOAN);
