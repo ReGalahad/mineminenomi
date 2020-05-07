@@ -6,11 +6,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import xyz.pixelatedw.mineminenomi.abilities.yomi.KasuriutaFubukiGiriAbility;
+import xyz.pixelatedw.mineminenomi.abilities.yomi.SoulParadeAbility;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
+import xyz.pixelatedw.mineminenomi.entities.zoan.YomiZoanInfo;
 import xyz.pixelatedw.mineminenomi.items.AkumaNoMiItem;
 import xyz.pixelatedw.mineminenomi.packets.server.SEntityStatsSyncPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SSyncDevilFruitPacket;
@@ -34,7 +37,6 @@ public class AbilityValidationEvents
 			PlayerEntity player = (PlayerEntity) event.getEntity();
 			IEntityStats entityStatsProps = EntityStatsCapability.get(player);
 			IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
-			//QuestProperties questProps = QuestProperties.get(player);
 			IAbilityData abilityProps = AbilityDataCapability.get(player);
 
 			if (!player.world.isRemote)
@@ -66,14 +68,14 @@ public class AbilityValidationEvents
 				AbilityHelper.validateRacialMoves(player);
 				AbilityHelper.validateStyleMoves(player);
 				
-				/*for(Ability a : abilityProps.getAbilities(Category.ALL))
+				for(Ability abl : abilityProps.getUnlockedAbilities(AbilityCategory.DEVIL_FRUIT))
 				{
-					if(Arrays.asList(YomiAbilities.abilitiesArray).contains(a))
+					if(abl instanceof KasuriutaFubukiGiriAbility || abl instanceof SoulParadeAbility)
 					{
-						if(!devilFruitProps.getZoanPoint().equalsIgnoreCase("yomi"))
-							abilityProps.removeAbility(a);
+						if(!devilFruitProps.getZoanPoint().equalsIgnoreCase(YomiZoanInfo.FORM))
+							abilityProps.removeUnlockedAbility(abl);
 					}
-				}*/
+				}
 				
 				for(int i = 0; i < abilityProps.getEquippedAbilities().length; i++)
 				{
