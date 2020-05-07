@@ -245,6 +245,8 @@
 
 	"category.mmnmkeys": "Mine Mine no Mi Keys",
 
+	"death.attack.ability_projectile": "%1$s was killed by %2$s",
+
 	"effect.mineminenomi.ability_off": "Ability Off",
 	"effect.mineminenomi.bubbly_coral": "Bubbly Coral",
 	"effect.mineminenomi.candle_lock": "Candle Lock",
