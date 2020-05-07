@@ -71,7 +71,7 @@ public class DFWeaknessesEvents
 							{
 								((ChargeableAbility) ability).setChargeTime(((ChargeableAbility) ability).getMaxChargeTime() / 20);
 								ability.startCooldown();
-								WyNetwork.sendTo(new SSyncAbilityDataPacket(abilityProps), player);
+								WyNetwork.sendTo(new SSyncAbilityDataPacket(player.getEntityId(), abilityProps), player);
 							}
 							ability.startDisable();
 						}

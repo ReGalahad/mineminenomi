@@ -132,7 +132,7 @@ public class AkumaNoMiItem extends Item
 			if(!player.world.isRemote)
 			{
 				WyNetwork.sendTo(new SSyncDevilFruitPacket(player.getEntityId(), devilFruitProps), player);
-				WyNetwork.sendTo(new SSyncAbilityDataPacket(abilityDataProps), player);
+				WyNetwork.sendTo(new SSyncAbilityDataPacket(player.getEntityId(), abilityDataProps), player);
 			}		
 		}
 		

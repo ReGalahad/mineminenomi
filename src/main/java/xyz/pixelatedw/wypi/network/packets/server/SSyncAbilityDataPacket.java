@@ -3,7 +3,8 @@ package xyz.pixelatedw.wypi.network.packets.server;
 import java.util.function.Supplier;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.network.PacketBuffer;
@@ -16,26 +17,30 @@ import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 
 public class SSyncAbilityDataPacket
 {
+	private int entityId;
 	private INBT data;
 
 	public SSyncAbilityDataPacket()
 	{
 	}
 
-	public SSyncAbilityDataPacket(IAbilityData abiltiyDataProps)
+	public SSyncAbilityDataPacket(int entityId, IAbilityData abiltiyDataProps)
 	{
 		this.data = new CompoundNBT();
 		this.data = AbilityDataCapability.INSTANCE.getStorage().writeNBT(AbilityDataCapability.INSTANCE, abiltiyDataProps, null);
+		this.entityId = entityId;
 	}
 
 	public void encode(PacketBuffer buffer)
 	{
+		buffer.writeInt(this.entityId);
 		buffer.writeCompoundTag((CompoundNBT) this.data);
 	}
 
 	public static SSyncAbilityDataPacket decode(PacketBuffer buffer)
 	{
 		SSyncAbilityDataPacket msg = new SSyncAbilityDataPacket();
+		msg.entityId = buffer.readInt();
 		msg.data = buffer.readCompoundTag();
 		return msg;
 	}
@@ -57,10 +62,13 @@ public class SSyncAbilityDataPacket
 		@OnlyIn(Dist.CLIENT)
 		public static void handle(SSyncAbilityDataPacket message)
 		{
-			PlayerEntity player = Minecraft.getInstance().player;
-			IAbilityData props = AbilityDataCapability.get(player);
+			Entity target = Minecraft.getInstance().world.getEntityByID(message.entityId);			
+			if(target == null || !(target instanceof LivingEntity))
+				return;
 			
-			AbilityDataCapability.INSTANCE.getStorage().readNBT(AbilityDataCapability.INSTANCE, props, null, message.data);
+			IAbilityData props = AbilityDataCapability.get((LivingEntity) target);
+			
+			AbilityDataCapability.INSTANCE.getStorage().readNBT(AbilityDataCapability.INSTANCE, props, null, message.data);	
 		}
 	}
 }

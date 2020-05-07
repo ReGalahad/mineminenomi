@@ -187,7 +187,7 @@ public class SelectHotbarAbilitiesScreen extends Screen
 				else
 				{
 					this.abilityDataProps.setEquippedAbility(this.slotSelected, null);
-					WyNetwork.sendToServer(new SSyncAbilityDataPacket(this.abilityDataProps));
+					WyNetwork.sendToServer(new SSyncAbilityDataPacket(this.player.getEntityId(), this.abilityDataProps));
 				}
 			}));
 		}

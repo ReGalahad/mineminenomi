@@ -53,7 +53,7 @@ public abstract class RepeaterAbility extends Ability
 		this.setState(State.STANDBY);
 		this.onEndCooldown.onEndCooldown(player);
 		IAbilityData props = AbilityDataCapability.get(player);
-		WyNetwork.sendTo(new SSyncAbilityDataPacket(props), player);
+		WyNetwork.sendTo(new SSyncAbilityDataPacket(player.getEntityId(), props), player);
 	}
 	
 	@Override
@@ -85,7 +85,7 @@ public abstract class RepeaterAbility extends Ability
 			this.repeaterCount = this.maxRepeaterCount;
 			this.startStandby();
 			IAbilityData props = AbilityDataCapability.get(player);
-			WyNetwork.sendTo(new SSyncAbilityDataPacket(props), (ServerPlayerEntity)player);
+			WyNetwork.sendTo(new SSyncAbilityDataPacket(player.getEntityId(), props), (ServerPlayerEntity)player);
 		}
 	}
 }
