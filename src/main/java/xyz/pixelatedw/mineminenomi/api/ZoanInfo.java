@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.entities.zoan;
+package xyz.pixelatedw.mineminenomi.api;
 
 import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer;
 import xyz.pixelatedw.wypi.abilities.Ability;

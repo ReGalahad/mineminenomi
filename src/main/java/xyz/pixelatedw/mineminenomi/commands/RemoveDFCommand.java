@@ -11,6 +11,9 @@ import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.command.arguments.EntityArgument;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.network.play.server.SPlayerAbilitiesPacket;
+import xyz.pixelatedw.mineminenomi.abilities.SpecialFlyAbility;
+import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.packets.server.SSyncDevilFruitPacket;
@@ -54,12 +57,19 @@ public class RemoveDFCommand
 				if (ability != null)
 					ability.stopCooldown(player);
 			}
-
+		
+			if(CommonConfig.instance.isSpecialFlyingEnabled() && abilityDataProps.hasUnlockedAbility(SpecialFlyAbility.INSTANCE) && !player.isCreative() && !player.isSpectator())
+			{
+				player.abilities.allowFlying = false;
+				player.abilities.isFlying = false;
+				((ServerPlayerEntity)player).connection.sendPacket(new SPlayerAbilitiesPacket(player.abilities));
+			}
+			
 			abilityDataProps.clearUnlockedAbilities(AbilityCategory.DEVIL_FRUIT);
 			abilityDataProps.clearEquippedAbilities(AbilityCategory.DEVIL_FRUIT);
 
 			player.clearActivePotions();
-
+			
 			WyNetwork.sendTo(new SSyncDevilFruitPacket(player.getEntityId(), devilFruitProps), player);
 			WyNetwork.sendTo(new SSyncAbilityDataPacket(abilityDataProps), player);
 		}

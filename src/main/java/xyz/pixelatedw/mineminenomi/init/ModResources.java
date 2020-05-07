@@ -18,7 +18,7 @@ public class ModResources
 	public static final ResourceLocation SUNA2 = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/suna2.png");
 	public static final ResourceLocation GASU = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/gasu.png");
 	public static final ResourceLocation GASU2 = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/gasu2.png");
-	public static final ResourceLocation BLUE_FLAME = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/blueflame.png");
+	public static final ResourceLocation BLUE_FLAME = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/blue_flame.png");
 	public static final ResourceLocation DARKNESS = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/darkness.png");
 	public static final ResourceLocation GORO = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/goro.png");
 	public static final ResourceLocation GORO2 = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/goro2.png");

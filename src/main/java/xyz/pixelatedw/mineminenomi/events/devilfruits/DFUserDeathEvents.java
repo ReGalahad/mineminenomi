@@ -11,16 +11,19 @@ import net.minecraft.block.ChestBlock;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
+import net.minecraft.network.play.server.SPlayerAbilitiesPacket;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import xyz.pixelatedw.mineminenomi.abilities.SpecialFlyAbility;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
@@ -118,6 +121,13 @@ public class DFUserDeathEvents {
 			// IQuestData newQuestData = QuestDataCapability.get(event.getPlayer());
 			// QuestDataCapability.INSTANCE.readNBT(newQuestData, null, nbt);
 
+			if(CommonConfig.instance.isSpecialFlyingEnabled() && AbilityDataCapability.get(event.getPlayer()).hasUnlockedAbility(SpecialFlyAbility.INSTANCE) && !event.getPlayer().isCreative() && !event.getPlayer().isSpectator())
+			{
+				event.getPlayer().abilities.allowFlying = false;
+				event.getPlayer().abilities.isFlying = false;
+				((ServerPlayerEntity)event.getPlayer()).connection.sendPacket(new SPlayerAbilitiesPacket(event.getPlayer().abilities));
+			}
+			
 			DFUserDeathEvents.changeApple(event);
 		}
 

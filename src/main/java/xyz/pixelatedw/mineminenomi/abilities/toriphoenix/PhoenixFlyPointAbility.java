@@ -1,36 +1,35 @@
-package xyz.pixelatedw.mineminenomi.abilities.zushi;
+package xyz.pixelatedw.mineminenomi.abilities.toriphoenix;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.play.server.SPlayerAbilitiesPacket;
+import xyz.pixelatedw.mineminenomi.api.abilities.ZoanAbility;
+import xyz.pixelatedw.mineminenomi.entities.zoan.PhoenixFlyZoanInfo;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
-import xyz.pixelatedw.wypi.abilities.ContinuousAbility;
 
-public class AbareHimatsuriAbility extends ContinuousAbility
+public class PhoenixFlyPointAbility extends ZoanAbility
 {
-	public static final AbareHimatsuriAbility INSTANCE = new AbareHimatsuriAbility();
+	public static final PhoenixFlyPointAbility INSTANCE = new PhoenixFlyPointAbility();
 
-	public AbareHimatsuriAbility()
+	public PhoenixFlyPointAbility()
 	{
-		super("Abare Himatsuri", AbilityCategory.DEVIL_FRUIT);
-		this.setDescription("The user stands on a piece of rock and levitates it into the air and flies across the battlefield");
-		this.setMaxCooldown(10);
-		this.setThreshold(60);
-		
+		super("Phoenix Fly Point", AbilityCategory.DEVIL_FRUIT, PhoenixFlyZoanInfo.FORM);
+		this.setDescription("Allows the user to transforms into a phoenix, which focuses on speed and healing, Allows the user to use 'Phoenix Goen', 'Tensei no Soen' and 'Blue Flames of Resurrection'");
+	
 		this.onStartContinuityEvent = this::onStartContinuityEvent;
 		this.duringContinuityEvent = this::duringContinuityEvent;
 		this.onEndContinuityEvent = this::onEndContinuityEvent;
 	}
 	
-	private boolean onStartContinuityEvent(PlayerEntity player)
+	protected boolean onStartContinuityEvent(PlayerEntity player)
 	{
 		if(player.isCreative() || player.isSpectator())
-			return true;
+			return super.onStartContinuityEvent(player);
 			
 		player.abilities.allowFlying = true;	
 		((ServerPlayerEntity)player).connection.sendPacket(new SPlayerAbilitiesPacket(player.abilities));
 
-		return true;
+		return super.onStartContinuityEvent(player);
 	}
 	
 	private void duringContinuityEvent(PlayerEntity player, int activeTime)
@@ -38,15 +37,15 @@ public class AbareHimatsuriAbility extends ContinuousAbility
 		player.fallDistance = 0;
 	}
 	
-	private boolean onEndContinuityEvent(PlayerEntity player)
+	protected boolean onEndContinuityEvent(PlayerEntity player)
 	{
 		if(player.isCreative() || player.isSpectator())
-			return true;
+			return super.onEndContinuityEvent(player);
 		
 		player.abilities.allowFlying = false;	
 		player.abilities.isFlying = false;
 		((ServerPlayerEntity)player).connection.sendPacket(new SPlayerAbilitiesPacket(player.abilities));
 
-		return true;
+		return super.onEndContinuityEvent(player);
 	}
 }

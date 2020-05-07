@@ -32,6 +32,7 @@ import xyz.pixelatedw.mineminenomi.packets.server.SSyncDevilFruitPacket;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.abilities.PassiveAbility;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 import xyz.pixelatedw.wypi.network.WyNetwork;
@@ -143,7 +144,7 @@ public class AkumaNoMiItem extends Item
 	public void addInformation(ItemStack itemStack, @Nullable World world, List<ITextComponent> list, ITooltipFlag par4)
 	{
 		for (int i = 0; i < this.abilities.length; i++)
-			if (!AbilityHelper.verifyIfAbilityIsBanned(this.abilities[i]) && this.abilities[i] != null)
+			if (!AbilityHelper.verifyIfAbilityIsBanned(this.abilities[i]) && this.abilities[i] != null && !(this.abilities[i] instanceof PassiveAbility))
 				list.add(new StringTextComponent(TextFormatting.GRAY + I18n.format("ability." + APIConfig.PROJECT_ID + "." + WyHelper.getResourceName(this.abilities[i].getName()))));
 
 		list.add(new StringTextComponent(""));

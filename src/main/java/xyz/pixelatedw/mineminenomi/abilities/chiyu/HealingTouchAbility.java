@@ -26,7 +26,7 @@ public class HealingTouchAbility extends PunchAbility
 
 	private float onHitEntityEvent(PlayerEntity player, LivingEntity target)
 	{
-		target.setHealth(target.getHealth() + 20);
+		target.heal(20);
 		target.addPotionEffect(new EffectInstance(Effects.REGENERATION, 400, 1));
 
 		PARTICLES.spawn(player.world, target.posX, target.posY, target.posZ, 0, 0, 0);
