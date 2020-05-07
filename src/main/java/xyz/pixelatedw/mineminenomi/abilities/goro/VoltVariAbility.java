@@ -72,6 +72,7 @@ public class VoltVariAbility extends ChargeableAbility
 		
 		if (truePower > 0 && truePower <= 50)
 		{
+			/*
 			if (CommonConfig.instance.isAnimeScreamingEnabled())
 			{
 				if (truePower > 0 && truePower <= 25)
@@ -79,11 +80,13 @@ public class VoltVariAbility extends ChargeableAbility
 				else
 					this.setName("5 Million Volt Vari");
 			}
+			*/
 			projectile = new VoltVari5MillionProjectile(player.world, player);
 			this.setMaxCooldown(3);
 		}
 		else if (truePower > 50 && truePower <= 100)
 		{
+			/*
 			if (CommonConfig.instance.isAnimeScreamingEnabled())
 			{
 				if (truePower > 50 && truePower <= 75)
@@ -91,11 +94,13 @@ public class VoltVariAbility extends ChargeableAbility
 				else
 					this.setName("20 Million Volt Vari");
 			}
+			*/
 			projectile = new VoltVari20MillionProjectile(player.world, player);
 			this.setMaxCooldown(5);
 		}
 		else if (truePower > 100 && truePower <= 150)
 		{
+			/*
 			if (CommonConfig.instance.isAnimeScreamingEnabled())
 			{
 				if (truePower > 100 && truePower <= 125)
@@ -103,11 +108,13 @@ public class VoltVariAbility extends ChargeableAbility
 				else
 					this.setName("60 Million Volt Vari");
 			}
+			*/
 			projectile = new VoltVari60MillionProjectile(player.world, player);
 			this.setMaxCooldown(7);
 		}
 		else if (truePower > 150 && truePower <= 200)
 		{
+			/*
 			if (CommonConfig.instance.isAnimeScreamingEnabled())
 			{
 				if (truePower > 150 && truePower <= 175)
@@ -115,6 +122,7 @@ public class VoltVariAbility extends ChargeableAbility
 				else
 					this.setName("Max 200 Million Volt Vari");
 			}
+			*/
 			projectile = new VoltVari200MillionProjectile(player.world, player);
 			this.setMaxCooldown(10);
 		}
