@@ -20,7 +20,8 @@ public class BakuTsuihoAbility extends ChargeableAbility
 	
 	private List<ItemStack> projectiles = new ArrayList<ItemStack>();
 	private List<Block> loadedProjectiles = new ArrayList<Block>();
-
+	private int limit = 0;
+	
 	public BakuTsuihoAbility()
 	{
 		super("Baku Tsuiho", AbilityCategory.DEVIL_FRUIT);
@@ -32,18 +33,29 @@ public class BakuTsuihoAbility extends ChargeableAbility
 		this.onStartChargingEvent = this::onStartChargingEvent;
 		this.duringChargingEvent = this::duringChargingEvent;
 		this.onEndChargingEvent = this::onEndChargingEvent;
+		this.duringCooldownEvent = this::duringCooldownEvent;
+	}
+	
+	private void duringCooldownEvent(PlayerEntity player, int cooldown)
+	{
+		int projectileSpace = 2;
+		if(this.limit > 0 && (this.cooldown - 10) % 2 == 0)
+		{
+			BeroCannonProjectile proj = new BeroCannonProjectile(player.world, player);
+			proj.setLocationAndAngles(
+				player.posX + WyHelper.randomWithRange(-projectileSpace, projectileSpace) + WyHelper.randomDouble(), 
+				(player.posY + 0.3) + WyHelper.randomWithRange(0, projectileSpace) + WyHelper.randomDouble(), 
+				player.posZ + WyHelper.randomWithRange(-projectileSpace, projectileSpace) + WyHelper.randomDouble(),
+				0, 0);
+			player.world.addEntity(proj);
+			proj.shoot(player, player.rotationPitch, player.rotationYaw, 0, 3f, 3f);
+			this.limit--;
+		}
 	}
 	
 	private boolean onEndChargingEvent(PlayerEntity player)
 	{		
-		int limit = 1 + this.loadedProjectiles.size();
-		while(limit > 0)
-		{
-			BeroCannonProjectile proj = new BeroCannonProjectile(player.world, player);
-			player.world.addEntity(proj);
-			proj.shoot(player, player.rotationPitch, player.rotationYaw, 0, 2f, 2.5f);
-			limit--;
-		}
+		this.limit = 1 + this.loadedProjectiles.size();
 
 		return true;
 	}
@@ -52,7 +64,7 @@ public class BakuTsuihoAbility extends ChargeableAbility
 	{
 		if (!this.projectiles.isEmpty())
 		{
-			if (chargeTime % 20 == 0)
+			if (chargeTime % 10 == 0)
 			{
 				ItemStack stack = this.projectiles.stream().findAny().orElse(null);
 				if (stack != null)

@@ -34,7 +34,7 @@ public class GomuGomuNoGatlingAbility extends RepeaterAbility
 		IAbilityData props = AbilityDataCapability.get(player);
 		AbilityProjectileEntity projectile = null;
 		float speed = 2.5f;
-		int projectileSpace = 3;
+		int projectileSpace = 2;
 
 		if (GomuHelper.hasGearSecondActive(props))
 		{
@@ -42,7 +42,7 @@ public class GomuGomuNoGatlingAbility extends RepeaterAbility
 			if(!this.hasDataSet)
 			{
 				this.setMaxCooldown(10);
-				this.setMaxRepearCount(10, 3);
+				this.setMaxRepearCount(30, 3);
 				speed = 3.8f;
 				this.hasDataSet = true;
 			}
@@ -53,7 +53,7 @@ public class GomuGomuNoGatlingAbility extends RepeaterAbility
 			if(!this.hasDataSet)
 			{
 				this.setMaxCooldown(25);
-				this.setMaxRepearCount(3, 5);
+				this.setMaxRepearCount(7, 5);
 				speed = 2.3f;
 				projectileSpace = 7;
 				this.hasDataSet = true;
@@ -65,7 +65,7 @@ public class GomuGomuNoGatlingAbility extends RepeaterAbility
 			if(!this.hasDataSet)
 			{
 				this.setMaxCooldown(30);
-				this.setMaxRepearCount(2, 3);
+				this.setMaxRepearCount(5, 3);
 				speed = 2.3f;
 				projectileSpace = 7;
 				this.hasDataSet = true;
@@ -77,22 +77,19 @@ public class GomuGomuNoGatlingAbility extends RepeaterAbility
 			if(!this.hasDataSet)
 			{
 				this.setMaxCooldown(12);
-				this.setMaxRepearCount(5, 2);
+				this.setMaxRepearCount(20, 2);
 				speed = 2.8f;
 				this.hasDataSet = true;
 			}
 		}
 
-		for(int j = 0; j < 5; j++)
-		{
-			projectile.setLocationAndAngles(
-				player.posX + WyHelper.randomWithRange(-projectileSpace, projectileSpace) + WyHelper.randomDouble(), 
-				(player.posY + 0.3) + WyHelper.randomWithRange(0, projectileSpace) + WyHelper.randomDouble(), 
-				player.posZ + WyHelper.randomWithRange(-projectileSpace, projectileSpace) + WyHelper.randomDouble(),
-				0, 0);
-			player.world.addEntity(projectile);
-			projectile.shoot(player, player.rotationPitch, player.rotationYaw, 0, speed, 3);
-		}
+		projectile.setLocationAndAngles(
+			player.posX + WyHelper.randomWithRange(-projectileSpace, projectileSpace) + WyHelper.randomDouble(), 
+			(player.posY + 0.3) + WyHelper.randomWithRange(0, projectileSpace) + WyHelper.randomDouble(), 
+			player.posZ + WyHelper.randomWithRange(-projectileSpace, projectileSpace) + WyHelper.randomDouble(),
+			0, 0);
+		player.world.addEntity(projectile);
+		projectile.shoot(player, player.rotationPitch, player.rotationYaw, 0, speed, 3);
 
 		return true;
 	}

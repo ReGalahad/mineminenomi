@@ -26,7 +26,7 @@ public class SlaveArrowParticleEffect extends ParticleEffect
 	{
 		GenericParticleData data = new GenericParticleData();
 		data.setTexture(ModResources.MERO);
-		data.setLife(-10);
+		data.setLife(-5);
 		data.setSize(this.size);
 		data.setColor(1, 1, 1, 0.7F);
 		data.setMotion(motionX, motionY, motionZ);
