@@ -85,16 +85,16 @@ public class AbilitiesListScreenPanel extends ScrollPanel
 
 	private Entry findAbilityEntry(final int mouseX, final int mouseY)
 	{
-		double offset = (mouseY - top) + scrollDistance;
+		double offset = (mouseY - this.top) + this.scrollDistance;
 
 		if (offset <= 0)
 			return null;
 
 		int lineIdx = (int) (offset / (ENTRY_HEIGHT * 1.25));
-		if (lineIdx >= entries.size())
+		if (lineIdx >= this.entries.size())
 			return null;
 
-		Entry entry = entries.get(lineIdx);
+		Entry entry = this.entries.get(lineIdx);
 		if (entry != null)
 		{
 			return entry;
@@ -109,6 +109,11 @@ public class AbilitiesListScreenPanel extends ScrollPanel
 		Entry entry = this.findAbilityEntry((int) mouseX, (int) mouseY);
 
 		if (this.parent.slotSelected < 0 || entry == null)
+			return false;
+
+		boolean isHovered = mouseX >= this.left && mouseY >= this.top && mouseX < this.left + this.width && mouseY < this.top + this.height;
+		
+		if(!isHovered)
 			return false;
 
 		boolean flag = true;
