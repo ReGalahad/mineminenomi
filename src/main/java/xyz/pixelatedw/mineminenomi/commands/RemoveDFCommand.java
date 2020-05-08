@@ -71,7 +71,7 @@ public class RemoveDFCommand
 			player.clearActivePotions();
 			
 			WyNetwork.sendTo(new SSyncDevilFruitPacket(player.getEntityId(), devilFruitProps), player);
-			WyNetwork.sendTo(new SSyncAbilityDataPacket(abilityDataProps), player);
+			WyNetwork.sendTo(new SSyncAbilityDataPacket(player.getEntityId(), abilityDataProps), player);
 		}
 
 		return 1;

@@ -37,7 +37,7 @@ public class DFWeaknessesEvents
 			if (props.hasDevilFruit() && AbilityHelper.isAffectedByWater(entity) && !entity.isPotionActive(ModEffects.BUBBLY_CORAL))
 			{
 				if (entity instanceof PlayerEntity && !((PlayerEntity) entity).abilities.isCreativeMode)
-					entity.setMotion(entity.getMotion().x, entity.getMotion().y - 5, entity.getMotion().z);
+					entity.setMotion(entity.getMotion().x, entity.getMotion().y - 0.04, entity.getMotion().z);
 				else if (entity instanceof GenericNewEntity)
 					entity.setMotion(entity.getMotion().x, entity.getMotion().y - 5, entity.getMotion().z);
 			}
@@ -71,7 +71,7 @@ public class DFWeaknessesEvents
 							{
 								((ChargeableAbility) ability).setChargeTime(((ChargeableAbility) ability).getMaxChargeTime() / 20);
 								ability.startCooldown();
-								WyNetwork.sendTo(new SSyncAbilityDataPacket(abilityProps), player);
+								WyNetwork.sendTo(new SSyncAbilityDataPacket(player.getEntityId(), abilityProps), player);
 							}
 							ability.startDisable();
 						}

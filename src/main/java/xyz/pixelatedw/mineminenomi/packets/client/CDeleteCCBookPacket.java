@@ -86,7 +86,7 @@ public class CDeleteCCBookPacket
 						player.inventory.deleteStack(is);
 				
 				WyNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), entityProps), (ServerPlayerEntity) player);
-				WyNetwork.sendTo(new SSyncAbilityDataPacket(abilityProps), (ServerPlayerEntity) player);				
+				WyNetwork.sendTo(new SSyncAbilityDataPacket(player.getEntityId(), abilityProps), (ServerPlayerEntity) player);				
 			});			
 		}
 

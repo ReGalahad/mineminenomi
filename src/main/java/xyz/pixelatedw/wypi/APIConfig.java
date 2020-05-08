@@ -47,7 +47,7 @@ public class APIConfig
 	 * Generic API Enviromental Constants
 	 */
 
-	public static final String API_VERSION = "1.1.0";
+	public static final String API_VERSION = "1.2.0";
 	public static final BuildMode BUILD_MODE = BuildMode.DEV;
 
 	// Build Types

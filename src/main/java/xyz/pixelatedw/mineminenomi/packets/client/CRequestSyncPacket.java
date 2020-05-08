@@ -73,7 +73,7 @@ public class CRequestSyncPacket
 					WyNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), entityStatsProps), (ServerPlayerEntity) player);
 				
 				if(((message.sync >> 2) & 1) == 1)
-					WyNetwork.sendTo(new SSyncAbilityDataPacket(abilityDataProps), (ServerPlayerEntity) player);
+					WyNetwork.sendTo(new SSyncAbilityDataPacket(player.getEntityId(), abilityDataProps), (ServerPlayerEntity) player);
 				
 				if(((message.sync >> 3) & 1) == 1)
 					WyNetwork.sendTo(new SHakiDataSyncPacket(player.getEntityId(), hakiDataProps), (ServerPlayerEntity) player);

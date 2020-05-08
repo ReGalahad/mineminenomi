@@ -90,12 +90,6 @@ public class AbilityHelper
 						"ushi_ushi_giraffe", "giraffe"
 				},
 		};
-
-	public static String[] flyingFruits = new String[]
-		{
-				"gasugasu", "sunasuna", "mokumoku"
-		};
-
 	
 	public static boolean placeBlockIfAllowed(World world, double posX, double posY, double posZ, Block toPlace, BlockProtectionRule rule)
 	{

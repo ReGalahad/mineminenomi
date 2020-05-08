@@ -65,7 +65,7 @@ public class AbilityCommand
 			if(WyDebug.isDebug())
 				WyHelper.sendMsgToPlayer(player, TextFormatting.GREEN + "" + TextFormatting.ITALIC + "[DEBUG] " + ability.getName() + " unlocked for " + player.getName().getFormattedText()); 
 
-			WyNetwork.sendTo(new SSyncAbilityDataPacket(props), player);
+			WyNetwork.sendTo(new SSyncAbilityDataPacket(player.getEntityId(), props), player);
 		}
 		
 		return 1;
@@ -82,7 +82,7 @@ public class AbilityCommand
 			if(WyDebug.isDebug())
 				WyHelper.sendMsgToPlayer(player, TextFormatting.GREEN + "" + TextFormatting.ITALIC + "[DEBUG] " + ability.getName() + " removed for " + player.getName().getFormattedText()); 
 
-			WyNetwork.sendTo(new SSyncAbilityDataPacket(props), player);
+			WyNetwork.sendTo(new SSyncAbilityDataPacket(player.getEntityId(), props), player);
 		}
 		
 		return 1;

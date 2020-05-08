@@ -41,7 +41,7 @@ public class ZoanAbility extends ContinuousAbility implements IParallelContinuou
 		
 		props.setZoanPoint(this.zoanForm);
 		WyNetwork.sendToAll(new SSyncDevilFruitPacket(player.getEntityId(), props));
-		WyNetwork.sendToAll(new SSyncAbilityDataPacket(abilityProps));
+		WyNetwork.sendToAll(new SSyncAbilityDataPacket(player.getEntityId(), abilityProps));
 		MorphHelper.updateEyeView(player);
 		
 		return true;
@@ -50,10 +50,12 @@ public class ZoanAbility extends ContinuousAbility implements IParallelContinuou
 	protected boolean onEndContinuityEvent(PlayerEntity player)
 	{
 		IDevilFruit props = DevilFruitCapability.get(player);
+		IAbilityData abilityProps = AbilityDataCapability.get(player);
 
 		props.setZoanPoint("");
 		
 		WyNetwork.sendToAll(new SSyncDevilFruitPacket(player.getEntityId(), props));
+		WyNetwork.sendToAll(new SSyncAbilityDataPacket(player.getEntityId(),abilityProps));
 		MorphHelper.updateEyeView(player);
 
 		return true;

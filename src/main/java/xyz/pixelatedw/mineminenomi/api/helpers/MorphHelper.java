@@ -27,12 +27,12 @@ import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.entities.zoan.BisonHeavyZoanInfo;
 import xyz.pixelatedw.mineminenomi.entities.zoan.BisonWalkZoanInfo;
-import xyz.pixelatedw.mineminenomi.entities.zoan.MoguHeavyZoanInfo;
-import xyz.pixelatedw.mineminenomi.entities.zoan.VenomDemonZoanInfo;
 import xyz.pixelatedw.mineminenomi.entities.zoan.GiraffeHeavyZoanInfo;
 import xyz.pixelatedw.mineminenomi.entities.zoan.GiraffeWalkZoanInfo;
-import xyz.pixelatedw.mineminenomi.entities.zoan.PhoenixFlyZoanInfo;
+import xyz.pixelatedw.mineminenomi.entities.zoan.MoguHeavyZoanInfo;
 import xyz.pixelatedw.mineminenomi.entities.zoan.PhoenixAssaultZoanInfo;
+import xyz.pixelatedw.mineminenomi.entities.zoan.PhoenixFlyZoanInfo;
+import xyz.pixelatedw.mineminenomi.entities.zoan.VenomDemonZoanInfo;
 import xyz.pixelatedw.mineminenomi.entities.zoan.YomiZoanInfo;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZouGuardZoanInfo;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZouHeavyZoanInfo;
@@ -208,7 +208,7 @@ public class MorphHelper
 			if (!info.getForm().equalsIgnoreCase(devilFruitProps.getZoanPoint()))
 				continue;
 
-			if (devilFruitProps.getZoanPoint().equalsIgnoreCase(YomiZoanInfo.FORM) || abilityProps.getEquippedAbility(info.getAbility()).isContinuous())
+			if (devilFruitProps.getZoanPoint().equalsIgnoreCase(YomiZoanInfo.FORM) || (abilityProps.getEquippedAbility(info.getAbility()) != null && abilityProps.getEquippedAbility(info.getAbility()).isContinuous()))
 				return info;
 		}
 		

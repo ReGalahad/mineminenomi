@@ -51,7 +51,7 @@ public abstract class Ability extends ForgeRegistryEntry<Ability>
 		{
 			this.startCooldown();
 			IAbilityData props = AbilityDataCapability.get(player);
-			WyNetwork.sendTo(new SSyncAbilityDataPacket(props), (ServerPlayerEntity)player);
+			WyNetwork.sendTo(new SSyncAbilityDataPacket(player.getEntityId(), props), (ServerPlayerEntity)player);
 		}
 	}
 	
@@ -112,7 +112,7 @@ public abstract class Ability extends ForgeRegistryEntry<Ability>
 		this.state = State.STANDBY;
 		this.onEndCooldown.onEndCooldown(player);
 		IAbilityData props = AbilityDataCapability.get(player);
-		WyNetwork.sendTo(new SSyncAbilityDataPacket(props), player);
+		WyNetwork.sendTo(new SSyncAbilityDataPacket(player.getEntityId(), props), player);
 	}
 	
 	public void setState(State state)

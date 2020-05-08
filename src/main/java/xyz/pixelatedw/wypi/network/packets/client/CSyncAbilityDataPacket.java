@@ -49,7 +49,7 @@ public class CSyncAbilityDataPacket
 
 				AbilityDataCapability.INSTANCE.getStorage().readNBT(AbilityDataCapability.INSTANCE, props, null, message.data);
 				
-				WyNetwork.sendTo(new SSyncAbilityDataPacket(props), (ServerPlayerEntity) player);				
+				WyNetwork.sendTo(new SSyncAbilityDataPacket(player.getEntityId(), props), (ServerPlayerEntity) player);				
 			});
 		}
 		ctx.get().setPacketHandled(true);

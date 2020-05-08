@@ -2,6 +2,7 @@ package xyz.pixelatedw.mineminenomi.particles.effects.gomu;
 
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.wypi.WyHelper;
 
@@ -13,11 +14,11 @@ public class GearSecondParticleEffect extends ParticleEffect
 	{
 		for (int i = 0; i < 2; i++)
 		{
-			double offsetX = WyHelper.randomDouble();
-			double offsetY = WyHelper.randomDouble();
-			double offsetZ = WyHelper.randomDouble();
+			double offsetX = WyHelper.randomDouble() / 1.25;
+			double offsetY = WyHelper.randomDouble() / 1.25;
+			double offsetZ = WyHelper.randomDouble() / 1.25;
 	      
-			world.addParticle(ParticleTypes.EXPLOSION, posX + offsetX, (posY + 0.5) + offsetY, posZ + offsetZ, 0.0D, 0.0D, 0.0D);
+			((ServerWorld) world).spawnParticle(ParticleTypes.POOF, posX + offsetX, (posY + 1) + offsetY, posZ + offsetZ, 1, 0, 0, 0, 0);
 		}	
 	}
 
