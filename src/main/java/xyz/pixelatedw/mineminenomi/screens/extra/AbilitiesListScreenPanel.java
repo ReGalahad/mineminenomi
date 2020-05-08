@@ -52,7 +52,7 @@ public class AbilitiesListScreenPanel extends ScrollPanel
 	protected int getContentHeight()
 	{
 		int size = this.entries.stream().filter(entry -> !(entry.ability instanceof PassiveAbility)).collect(Collectors.toList()).size();
-		return (size * ENTRY_HEIGHT) + 30;
+		return (size * ENTRY_HEIGHT) + 40;
 	}
 
 	@Override

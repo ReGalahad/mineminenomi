@@ -30,6 +30,7 @@ import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
+import xyz.pixelatedw.mineminenomi.items.weapons.ClimaTactItem;
 import xyz.pixelatedw.wypi.WyHelper;
 
 public class ItemsHelper
@@ -125,6 +126,17 @@ public class ItemsHelper
 		if (multimap.containsKey(SharedMonsterAttributes.ATTACK_DAMAGE.getName()))
 			return true;
 
+		return false;
+	}
+	
+	public static boolean isClimaTact(ItemStack itemStack)
+	{
+		if(itemStack.isEmpty())
+			return false;
+		
+		if (itemStack.getItem() instanceof ClimaTactItem)
+			return true;
+		
 		return false;
 	}
 	

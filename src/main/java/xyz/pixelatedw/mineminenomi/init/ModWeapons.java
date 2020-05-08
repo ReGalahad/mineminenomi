@@ -11,6 +11,7 @@ import xyz.pixelatedw.mineminenomi.abilities.noro.NoroNoroBeamSwordAbility;
 import xyz.pixelatedw.mineminenomi.abilities.pika.AmaNoMurakumoAbility;
 import xyz.pixelatedw.mineminenomi.abilities.yuki.TabiraYukiAbility;
 import xyz.pixelatedw.mineminenomi.items.weapons.AbilitySwordItem;
+import xyz.pixelatedw.mineminenomi.items.weapons.ClimaTactItem;
 import xyz.pixelatedw.mineminenomi.items.weapons.CoreSwordItem;
 import xyz.pixelatedw.mineminenomi.items.weapons.GunItem;
 import xyz.pixelatedw.mineminenomi.items.weapons.KujaBowItem;
@@ -54,7 +55,10 @@ public class ModWeapons
 	public static final CoreSwordItem SHUSUI = new CoreSwordItem(8, 500);
 	public static final CoreSwordItem SOUL_SOLID = new CoreSwordItem(8, 500);
 	public static final CoreSwordItem DURANDAL = new CoreSwordItem(7, 500);
-	
+	public static final ClimaTactItem CLIMA_TACT = new ClimaTactItem(1);
+	public static final ClimaTactItem PERFECT_CLIMA_TACT = new ClimaTactItem(3);
+	public static final ClimaTactItem SORCERY_CLIMA_TACT = new ClimaTactItem(6);
+
 	// Normal Ranged Weapons
 	public static final GunItem FLINTLOCK = new GunItem(15, 2, 2);
 	public static final KujaBowItem GREEN_KUJA_BOW = new KujaBowItem();
@@ -116,6 +120,9 @@ public class ModWeapons
 		registerSword(SHUSUI, "Shusui", HAKI_PREDICATE, SHEATHED_PREDICATE);
 		registerSword(SOUL_SOLID, "Soul Solid", HAKI_PREDICATE, SHEATHED_PREDICATE);
 		registerSword(DURANDAL, "Durandal", HAKI_PREDICATE);
+		registerRod(CLIMA_TACT, "Clima Tact");
+		registerRod(PERFECT_CLIMA_TACT, "Perfect Clima Tact");
+		registerRod(SORCERY_CLIMA_TACT, "Sorcery Clima Tact");
 
 		registerSimple3DItem(FLINTLOCK, "Flintlock");
 		registerCustom3DItem(GREEN_KUJA_BOW, "Green Kuja Bow", GREEN_KUJA_BOW_MODEL);

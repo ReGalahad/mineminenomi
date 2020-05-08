@@ -3,6 +3,9 @@ package xyz.pixelatedw.mineminenomi.init;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.abilities.SpecialFlyAbility;
 import xyz.pixelatedw.mineminenomi.abilities.ZoomAbility;
+import xyz.pixelatedw.mineminenomi.abilities.artofweather.CoolBallAbility;
+import xyz.pixelatedw.mineminenomi.abilities.artofweather.HeatBallAbility;
+import xyz.pixelatedw.mineminenomi.abilities.artofweather.ThunderBallAbility;
 import xyz.pixelatedw.mineminenomi.abilities.baku.BakuMunchAbility;
 import xyz.pixelatedw.mineminenomi.abilities.baku.BakuTsuihoAbility;
 import xyz.pixelatedw.mineminenomi.abilities.baku.BeroCannonAbility;
@@ -245,7 +248,7 @@ public class ModAbilities
 	public static final AkumaNoMiItem KILO_KILO_NO_MI = new AkumaNoMiItem("Kilo Kilo no Mi", 2, EnumFruitType.PARAMECIA, KiloPress1Ability.INSTANCE, KiloPress10000Ability.INSTANCE);
 	public static final AkumaNoMiItem GOE_GOE_NO_MI = new AkumaNoMiItem("Goe Goe no Mi", 1, EnumFruitType.PARAMECIA, TodorokiAbility.INSTANCE);
 	public static final AkumaNoMiItem MERO_MERO_NO_MI = new AkumaNoMiItem("Mero Mero no Mi", 2, EnumFruitType.PARAMECIA, MeroMeroMellowAbility.INSTANCE, PistolKissAbility.INSTANCE, SlaveArrowAbility.INSTANCE, PerfumeFemurAbility.INSTANCE);
-	public static final AkumaNoMiItem ORI_ORI_NO_MI = new AkumaNoMiItem("Ori Ori no Mi", 1, EnumFruitType.PARAMECIA);
+	//public static final AkumaNoMiItem ORI_ORI_NO_MI = new AkumaNoMiItem("Ori Ori no Mi", 1, EnumFruitType.PARAMECIA);
 	public static final AkumaNoMiItem SUPA_SUPA_NO_MI = new AkumaNoMiItem("Supa Supa no Mi", 2, EnumFruitType.PARAMECIA, SpiderAbility.INSTANCE, SparClawAbility.INSTANCE, SpiralHollowAbility.INSTANCE, SparklingDaisyAbility.INSTANCE, AtomicSpurtAbility.INSTANCE);
 	public static final AkumaNoMiItem HORO_HORO_NO_MI = new AkumaNoMiItem("Horo Horo no Mi", 2, EnumFruitType.PARAMECIA, NegativeHollowAbility.INSTANCE, MiniHollowAbility.INSTANCE, TokuHollowAbility.INSTANCE, YutaiRidatsuAbility.INSTANCE);
 	public static final AkumaNoMiItem ITO_ITO_NO_MI = new AkumaNoMiItem("Ito Ito no Mi", 3, EnumFruitType.PARAMECIA, ParasiteAbility.INSTANCE, SoraNoMichiAbility.INSTANCE, TamaitoAbility.INSTANCE, OverheatAbility.INSTANCE, KumoNoSugakiAbility.INSTANCE, TorikagoAbility.INSTANCE, BlackKnightAbility.INSTANCE);
@@ -323,6 +326,11 @@ public class ModAbilities
 		WyRegistry.registerAbility(FirstAidAbility.INSTANCE);
 		WyRegistry.registerAbility(MedicBagExplosionAbility.INSTANCE);
 		WyRegistry.registerAbility(FailedExperimentAbility.INSTANCE);
+
+		// Doctor
+		WyRegistry.registerAbility(HeatBallAbility.INSTANCE);
+		WyRegistry.registerAbility(CoolBallAbility.INSTANCE);
+		WyRegistry.registerAbility(ThunderBallAbility.INSTANCE);
 
 		// Sniper Googles
 		WyRegistry.registerAbility(ZoomAbility.INSTANCE);
