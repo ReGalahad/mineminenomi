@@ -35,11 +35,12 @@ public class PotionLayer extends LayerRenderer {
                 ((LivingEntity) entity).removePotionEffect(ModEffects.FROZEN);
 
             GlStateManager.pushMatrix();
+            GlStateManager.disableLighting();
             GlStateManager.disableCull();
             GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
             float blocksWidth = (float) (Math.ceil(entity.getWidth()) + 1);
             float blocksHeight = (float) (Math.ceil(entity.getHeight()) + 1);
-            GlStateManager.translatef(0.4F - blocksWidth / 2F, 1.4F - entity.getHeight() / 2F - blocksHeight / 2F, 0.4F - blocksWidth / 2F);
+            GlStateManager.translatef(0.45F - blocksWidth / 2F, 1.3F - entity.getHeight() / 2F - blocksHeight / 2F, 0.45F - blocksWidth / 2F);
 
             for (int x = 0; x < blocksWidth; x++) {
                 for (int y = 0; y < blocksHeight; y++) {
@@ -52,6 +53,7 @@ public class PotionLayer extends LayerRenderer {
                 }
             }
             GlStateManager.enableCull();
+            GlStateManager.enableLighting();
             GlStateManager.popMatrix();
         }
 

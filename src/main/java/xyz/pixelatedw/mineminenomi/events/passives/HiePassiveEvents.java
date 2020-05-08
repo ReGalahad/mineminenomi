@@ -2,9 +2,11 @@ package xyz.pixelatedw.mineminenomi.events.passives;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -39,6 +41,35 @@ public class HiePassiveEvents
 				
 		if (!AbilityHelper.isNearbyKairoseki(player) && (player.getHealth() > player.getMaxHealth() / 5 || player.abilities.isCreativeMode))
 			AbilityHelper.createFilledSphere(player.world, (int) player.posX - 1, (int) player.posY, (int) player.posZ - 1, 2, Blocks.ICE, GRIEF_RULE);
+	}
+
+
+
+	@OnlyIn(Dist.CLIENT)
+	@SubscribeEvent
+	public static void onEntityPreRendered(RenderLivingEvent.Pre event)
+	{
+		LivingEntity entity = event.getEntity();
+
+		if (!entity.isPotionActive(ModEffects.FROZEN))
+			return;
+
+		entity.renderYawOffset = 0;
+		entity.prevRenderYawOffset = 0;
+	}
+
+
+	@OnlyIn(Dist.CLIENT)
+	@SubscribeEvent
+	public static void onEntityPostRendered(RenderLivingEvent.Post event)
+	{
+		LivingEntity entity = event.getEntity();
+
+		if (!entity.isPotionActive(ModEffects.FROZEN))
+			return;
+
+		entity.renderYawOffset = 0;
+		entity.prevRenderYawOffset = 0;
 	}
 	
 	@SubscribeEvent
