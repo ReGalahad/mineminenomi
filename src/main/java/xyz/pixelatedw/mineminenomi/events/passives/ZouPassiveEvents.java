@@ -1,6 +1,5 @@
 package xyz.pixelatedw.mineminenomi.events.passives;
 
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -22,13 +21,12 @@ public class ZouPassiveEvents
 		
 		PlayerEntity attacker = (PlayerEntity) event.getSource().getTrueSource();
 		IDevilFruit props = DevilFruitCapability.get(attacker);
-		LivingEntity attacked = event.getEntityLiving();
 
 		if (!props.getDevilFruit().equalsIgnoreCase("zou_zou"))
 			return;
 
 		if (props.getZoanPoint().equalsIgnoreCase(ZouHeavyZoanInfo.FORM))
-			event.setAmount(3);
+			event.setAmount(event.getAmount() + 3);
 		
 	}
 

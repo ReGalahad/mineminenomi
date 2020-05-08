@@ -12,7 +12,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Effects;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -424,10 +423,4 @@ public class AbilityHelper
 
 		return false;
 	}
-
-	public static int getRegenFromPoision(LivingEntity entity)
-	{
-		return entity.getActivePotionEffect(Effects.POISON).getAmplifier() / 5;
-	}
-
 }

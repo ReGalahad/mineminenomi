@@ -66,7 +66,7 @@ public class UshiGiraffePassiveEvents
 
 		if (props.getZoanPoint().equalsIgnoreCase(GiraffeHeavyZoanInfo.FORM))
 		{
-			event.setAmount(3);
+			event.setAmount(event.getAmount() + 3);
 		}
 	}
 }

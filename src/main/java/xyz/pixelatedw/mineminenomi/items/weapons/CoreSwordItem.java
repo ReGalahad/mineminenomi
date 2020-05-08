@@ -21,6 +21,7 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import xyz.pixelatedw.mineminenomi.abilities.haki.BusoshokuHakiImbuingAbility;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
@@ -43,9 +44,10 @@ public class CoreSwordItem extends Item
 		}
 		else
 		{
-			IAbilityData abilityData = AbilityDataCapability.get(livingEntity);
+			IAbilityData props = AbilityDataCapability.get(livingEntity);
 			boolean mainHandFlag = livingEntity.getHeldItemMainhand() == itemStack;
-			boolean hakiActiveFlag = false;//abilityData.isPassiveActive(ModAttributes.BUSOSHOKU_HAKI);
+			BusoshokuHakiImbuingAbility ability = props.getEquippedAbility(BusoshokuHakiImbuingAbility.INSTANCE);
+			boolean hakiActiveFlag = ability != null && ability.isContinuous();
 			return mainHandFlag && hakiActiveFlag ? 1.0F : 0.0F;
 		}
 	};
@@ -88,7 +90,7 @@ public class CoreSwordItem extends Item
 		this.addPropertyOverride(new ResourceLocation("sheathed"), this.sheathedProperty);
 	}
 
-	public void onUpdate(ItemStack itemStack, World world, Entity entity, int par4, boolean par5)
+	public void inventoryTick(ItemStack itemStack, World world, Entity entity, int par4, boolean par5)
 	{
 		if (!itemStack.hasTag())
 		{
@@ -104,6 +106,12 @@ public class CoreSwordItem extends Item
 
 			double multiplier = 1;
 
+			BusoshokuHakiImbuingAbility ability = abilityProps.getEquippedAbility(BusoshokuHakiImbuingAbility.INSTANCE);
+			boolean hakiActiveFlag = ability != null && ability.isContinuous();
+			
+			if(hakiActiveFlag)
+				multiplier += 0.50;
+			
 			if (statProps.isSwordsman())
 				multiplier += 0.25;
 
@@ -211,13 +219,12 @@ public class CoreSwordItem extends Item
 	}
 
 	@Override
-	public Multimap<String, AttributeModifier> getAttributeModifiers(EquipmentSlotType equipmentSlot)
+	public Multimap<String, AttributeModifier> getAttributeModifiers(EquipmentSlotType equipmentSlot, ItemStack stack)
 	{
 		Multimap<String, AttributeModifier> multimap = HashMultimap.create();
 
 		if(equipmentSlot == EquipmentSlotType.MAINHAND)
 		{
-			ItemStack stack = new ItemStack(this);
 			double multiplier;
 			if (stack.getTag() != null)
 				multiplier = stack.getTag().getDouble("multiplier");
