@@ -74,6 +74,11 @@ import xyz.pixelatedw.mineminenomi.abilities.gura.GekishinAbility;
 import xyz.pixelatedw.mineminenomi.abilities.gura.KaishinAbility;
 import xyz.pixelatedw.mineminenomi.abilities.gura.ShimaYurashiAbility;
 import xyz.pixelatedw.mineminenomi.abilities.gura.TenchiMeidoAbility;
+import xyz.pixelatedw.mineminenomi.abilities.haki.BusoshokuHakiFullBodyHardeningAbility;
+import xyz.pixelatedw.mineminenomi.abilities.haki.BusoshokuHakiHardeningAbility;
+import xyz.pixelatedw.mineminenomi.abilities.haki.BusoshokuHakiImbuingAbility;
+import xyz.pixelatedw.mineminenomi.abilities.haki.KenbunshokuHakiAuraAbility;
+import xyz.pixelatedw.mineminenomi.abilities.haki.KenbunshokuHakiFutureSightAbility;
 import xyz.pixelatedw.mineminenomi.abilities.hie.IceAgeAbility;
 import xyz.pixelatedw.mineminenomi.abilities.hie.IceBallAbility;
 import xyz.pixelatedw.mineminenomi.abilities.hie.IceBlockAvalancheAbility;
@@ -322,6 +327,13 @@ public class ModAbilities
 		// Sniper Googles
 		WyRegistry.registerAbility(ZoomAbility.INSTANCE);
 		
+		// Haki
+		WyRegistry.registerAbility(BusoshokuHakiHardeningAbility.INSTANCE);
+		WyRegistry.registerAbility(BusoshokuHakiImbuingAbility.INSTANCE);
+		WyRegistry.registerAbility(BusoshokuHakiFullBodyHardeningAbility.INSTANCE);
+		WyRegistry.registerAbility(KenbunshokuHakiAuraAbility.INSTANCE);
+		WyRegistry.registerAbility(KenbunshokuHakiFutureSightAbility.INSTANCE);
+
 		WyDebug.debug("A total of " + ModValues.devilfruits.size() + " Devil Fruits have been registered");
 		WyDebug.debug("A total of " + APIRegistries.ABILITIES.getEntries().size() + " abilities have been registered");
 	}

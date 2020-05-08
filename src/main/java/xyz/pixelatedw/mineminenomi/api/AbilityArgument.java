@@ -1,7 +1,6 @@
 package xyz.pixelatedw.mineminenomi.api;
 
 import java.util.concurrent.CompletableFuture;
-import java.util.function.Function;
 
 import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.arguments.ArgumentType;
@@ -17,10 +16,6 @@ import xyz.pixelatedw.wypi.abilities.Ability;
 
 public class AbilityArgument implements ArgumentType<Ability>
 {
-	private StringReader reader;
-	private static final Function<SuggestionsBuilder, CompletableFuture<Suggestions>> DEFAULT_SUGGESTIONS_BUILDER = SuggestionsBuilder::buildFuture;
-	private Function<SuggestionsBuilder, CompletableFuture<Suggestions>> suggestionsBuilder = DEFAULT_SUGGESTIONS_BUILDER;
-
 	@Override
 	public Ability parse(StringReader reader) throws CommandSyntaxException
 	{
@@ -39,31 +34,12 @@ public class AbilityArgument implements ArgumentType<Ability>
 	{
 		StringReader stringreader = new StringReader(builder.getInput());
 		stringreader.setCursor(builder.getStart());
-		this.reader = stringreader;
-		ResourceLocation res = null;
-		try
-		{
-			res = ResourceLocation.read(this.reader);
-			this.suggestionsBuilder = this::suggestAbility;
-		}
-		catch (CommandSyntaxException e)
-		{
-			e.printStackTrace();
-		}
 
-		if (res == null)
-			return null;
-
-		return this.fillSuggestions(builder);
+		return this.suggestAbility(builder);
 	}
 
 	private CompletableFuture<Suggestions> suggestAbility(SuggestionsBuilder builder)
 	{
 		return ISuggestionProvider.suggestIterable(GameRegistry.findRegistry(Ability.class).getKeys(), builder);
-	}
-
-	public CompletableFuture<Suggestions> fillSuggestions(SuggestionsBuilder builder)
-	{
-		return this.suggestionsBuilder.apply(builder.createOffset(this.reader.getCursor()));
 	}
 }

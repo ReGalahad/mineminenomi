@@ -73,7 +73,7 @@ public class UshiBisonPassiveEvents
 
 		if (props.getZoanPoint().equalsIgnoreCase(BisonHeavyZoanInfo.FORM))
 		{
-			event.setAmount(3);
+			event.setAmount(event.getAmount() + 3);
 		}
 	}
 

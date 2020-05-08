@@ -15,18 +15,37 @@ public class SlaveArrowAbility extends ChargeableAbility
 	public static final SlaveArrowAbility INSTANCE = new SlaveArrowAbility();
 
 	private static final SlaveArrowParticleEffect PARTICLES = new SlaveArrowParticleEffect();
+	private int limit = 0;
 
 	public SlaveArrowAbility()
 	{
 		super("Slave Arrow", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(10);
+		this.setMaxCooldown(13);
 		this.setMaxChargeTime(7);
 		this.setDescription("Creates a big heart from which the user shoots multiple love arrows.");
 
 		this.duringChargingEvent = this::duringChargingEvent;
 		this.onEndChargingEvent = this::onEndChargingEvent;
+		this.duringCooldownEvent = this::duringCooldownEvent;
 	}
 
+	private void duringCooldownEvent(PlayerEntity player, int cooldown)
+	{
+		int projectileSpace = 1;
+		if(this.limit > 0 && (this.cooldown - 10) % 2 == 0)
+		{
+			SlaveArrowProjectile proj = new SlaveArrowProjectile(player.world, player);
+			proj.setLocationAndAngles(
+				player.posX + WyHelper.randomWithRange(-projectileSpace, projectileSpace) + WyHelper.randomDouble(), 
+				(player.posY + 0.3) + WyHelper.randomWithRange(0, projectileSpace) + WyHelper.randomDouble(), 
+				player.posZ + WyHelper.randomWithRange(-projectileSpace, projectileSpace) + WyHelper.randomDouble(),
+				0, 0);
+			player.world.addEntity(proj);
+			proj.shoot(player, player.rotationPitch, player.rotationYaw, 0, 3f, 4f);
+			this.limit--;
+		}
+	}
+	
 	private void duringChargingEvent(PlayerEntity player, int chargeTime)
 	{
 		if(chargeTime > this.getMaxChargeTime() / 2)
@@ -45,19 +64,8 @@ public class SlaveArrowAbility extends ChargeableAbility
 
 	private boolean onEndChargingEvent(PlayerEntity player)
 	{
-		int current = player.ticksExisted;
-		int limit = (int) (current - this.maxCooldown);
-		while (current > limit)
-		{
-			if (current % 20 == 0)
-			{
-				SlaveArrowProjectile proj = new SlaveArrowProjectile(player.world, player);
-				player.world.addEntity(proj);
-				proj.shoot(player, player.rotationPitch, player.rotationYaw, 0, 2.5f, 4);
-			}
-			current--;
-		}
-
+		this.limit = 20;
+		
 		PARTICLES.setSize(5);
 
 		return true;

@@ -26,7 +26,7 @@ public class MoguPassiveEvents
 
 		if (props.getZoanPoint().equalsIgnoreCase(MoguHeavyZoanInfo.FORM))
 		{
-			event.setAmount(3);
+			event.setAmount(event.getAmount() + 3);
 		}
 	}
 }
