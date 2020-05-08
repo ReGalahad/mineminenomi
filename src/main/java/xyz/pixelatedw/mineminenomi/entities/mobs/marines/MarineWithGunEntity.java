@@ -71,11 +71,11 @@ public class MarineWithGunEntity extends GenericMarineEntity implements IRangedA
 		AbilityProjectileEntity proj = new NormalBulletProjectile(this.world, this);
 		
 		double velX = target.posX - this.posX;
-		double velY = target.getBoundingBox().minY + this.getAttackTarget().getHeight() / 3.0F - (this.posY + this.getHeight());
+		double velY = target.getBoundingBox().minY + this.getAttackTarget().getHeight() / 10.0F - (this.posY + this.getHeight());
 		double velZ = target.posZ - this.posZ;
 		double x = MathHelper.sqrt(velX * velX + velZ * velZ);
 		
-		proj.shoot(velX, velY + x * 0.2F, velZ, 1.6F, 14 - this.world.getDifficulty().getId() * 4);
+		proj.shoot(velX, velY + x * 0.1F, velZ, 1.6F, 14 - this.world.getDifficulty().getId() * 4);
 		this.world.addEntity(proj);
 	}
 }
