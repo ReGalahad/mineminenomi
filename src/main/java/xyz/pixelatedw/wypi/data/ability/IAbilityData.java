@@ -13,7 +13,7 @@ public interface IAbilityData
 	boolean hasUnlockedAbility(Ability abl);
 	<T extends Ability> T getUnlockedAbility(T abl);
 	<T extends Ability> T getUnlockedAbility(int slot);
-	List<Ability> getUnlockedAbilities(AbilityCategory category);
+	<T extends Ability> List<T> getUnlockedAbilities(AbilityCategory category);
 	void clearUnlockedAbilities(AbilityCategory category);
 	void clearUnlockedAbilityFromList(AbilityCategory category, List<Ability> list); 
 	int countUnlockedAbilities(AbilityCategory category);

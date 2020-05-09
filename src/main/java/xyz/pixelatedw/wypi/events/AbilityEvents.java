@@ -7,6 +7,7 @@ import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import xyz.pixelatedw.mineminenomi.api.abilities.TempoAbility;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.abilities.Ability;
@@ -35,6 +36,9 @@ public class AbilityEvents
 
 				if (ability instanceof PassiveAbility)
 					((PassiveAbility) props.getUnlockedAbility(ability)).tick(player);
+				
+				if (ability instanceof TempoAbility)
+					((TempoAbility) props.getUnlockedAbility(ability)).cooldown(player);
 			}
 
 			for (Ability ability : props.getEquippedAbilities(AbilityCategory.ALL))

@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.client.gui.ScrollPanel;
+import xyz.pixelatedw.mineminenomi.api.abilities.TempoAbility;
 import xyz.pixelatedw.mineminenomi.api.helpers.RendererHelper;
 import xyz.pixelatedw.mineminenomi.screens.SelectHotbarAbilitiesScreen;
 import xyz.pixelatedw.wypi.APIConfig;
@@ -36,7 +37,7 @@ public class AbilitiesListScreenPanel extends ScrollPanel
 
 		for (int i = 0; i <= abilities.length - 1; i++)
 		{
-			if (abilities[i] != null)
+			if (abilities[i] != null && !(abilities[i] instanceof PassiveAbility) && !(abilities[i] instanceof TempoAbility))
 				this.entries.add(new Entry(abilities[i]));
 		}
 		
@@ -51,14 +52,14 @@ public class AbilitiesListScreenPanel extends ScrollPanel
 	@Override
 	protected int getContentHeight()
 	{
-		int size = this.entries.stream().filter(entry -> !(entry.ability instanceof PassiveAbility)).collect(Collectors.toList()).size();
-		return (size * ENTRY_HEIGHT) + 40;
+		int size = this.entries.stream().filter(entry -> !(entry.ability instanceof PassiveAbility) && !(entry.ability instanceof TempoAbility)).collect(Collectors.toList()).size();
+		return (size * ENTRY_HEIGHT) + 50;
 	}
 
 	@Override
 	protected int getScrollAmount()
 	{
-		return 12;
+		return 15;
 	}
 
 	@Override
@@ -66,7 +67,7 @@ public class AbilitiesListScreenPanel extends ScrollPanel
 	{
 		for (Entry entry : this.entries)
 		{
-			if(entry == null || entry.ability instanceof PassiveAbility)
+			if(entry == null || entry.ability instanceof PassiveAbility || entry.ability instanceof TempoAbility)
 				continue;
 			
 			float y = relativeY;

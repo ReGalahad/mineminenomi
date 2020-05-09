@@ -1,10 +1,17 @@
 package xyz.pixelatedw.mineminenomi.entities.projectiles.artofweather;
 
+import java.util.List;
+
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
+import xyz.pixelatedw.mineminenomi.abilities.artofweather.tempos.WeatherCloudTempo;
+import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
+import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
+import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 
 public class WeatherBallProjectile extends AbilityProjectileEntity
 {
@@ -23,6 +30,8 @@ public class WeatherBallProjectile extends AbilityProjectileEntity
 	public WeatherBallProjectile(EntityType type, World world, LivingEntity player)
 	{
 		super(type, world, player);
+		
+		this.setMaxLife(300);
 	}
 	
 	public void tick()
@@ -34,6 +43,48 @@ public class WeatherBallProjectile extends AbilityProjectileEntity
 			this.getMotion().add(0, 0.25, 0);
 		else
 			this.setMotion(0, 0, 0);
+
+		if(this.world.isRemote || this.getThrower() == null || this.ticksExisted < 80)
+			return;
+
+		List<WeatherCloudEntity> clouds = WyHelper.getEntitiesNear(this.getPosition(), this.world, 5, WeatherCloudEntity.class);
+		
+		if(clouds.size() > 0)
+		{
+			clouds.get(0).addWeatherBall(this);
+			if(this instanceof ThunderBallProjectile)
+				clouds.get(0).setLife(clouds.get(0).getLife() + 100);
+			this.remove();
+			return;
+		}
+		
+		if(this instanceof CoolBallProjectile)
+		{
+			List<HeatBallProjectile> heatBalls = WyHelper.getEntitiesNear(this.getPosition(), this.world, 4, HeatBallProjectile.class);
+			IAbilityData props = AbilityDataCapability.get(this.getThrower());
+			WeatherCloudTempo ability = props.getUnlockedAbility(WeatherCloudTempo.INSTANCE);
+			boolean canUseAbility = ability != null && ability.canUseTempo((PlayerEntity) this.getThrower(), (player, check) -> 
+			{
+				return heatBalls.size() > 0;
+			});
+			
+			if(canUseAbility)
+			{
+				for (HeatBallProjectile heatBall : heatBalls)
+				{
+					ability.use((PlayerEntity) this.getThrower());
+					
+					WeatherCloudEntity cloud = new WeatherCloudEntity(this.world);
+					cloud.setLocationAndAngles(this.posX, (this.posY + 1), this.posZ, 0, 0);
+					cloud.setMotion(0, 0, 0);
+					cloud.setThrower((PlayerEntity) this.getThrower());
+					this.world.addEntity(cloud);
+					
+					heatBall.remove();
+				}
+				this.remove();
+			}
+		}
 	}
 	
 	public Item getWeaponUsed()

@@ -23,7 +23,6 @@ public class ArtOfWeatherProjectiles
 		WyRegistry.registerEntityType(HEAT_BALL, "Heat Ball");
 		WyRegistry.registerEntityType(COOL_BALL, "Cool Ball");
 		WyRegistry.registerEntityType(THUNDER_BALL, "Thunder Ball");
-
 	}
 
 	@OnlyIn(Dist.CLIENT)
@@ -33,7 +32,6 @@ public class ArtOfWeatherProjectiles
 		RenderingRegistry.registerEntityRenderingHandler(HeatBallProjectile.class, new AbilityProjectileRenderer.Factory(new SphereModel()).setColor("#FF0000BB").setScale(2, 2, 2));
 		RenderingRegistry.registerEntityRenderingHandler(CoolBallProjectile.class, new AbilityProjectileRenderer.Factory(new SphereModel()).setColor("#0000FFBB").setScale(2, 2, 2));
 		RenderingRegistry.registerEntityRenderingHandler(ThunderBallProjectile.class, new AbilityProjectileRenderer.Factory(new SphereModel()).setColor("#FFFF00BB").setScale(2, 2, 2));
-
 	}
 }
 

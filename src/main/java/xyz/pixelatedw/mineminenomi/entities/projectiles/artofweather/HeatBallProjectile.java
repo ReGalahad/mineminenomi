@@ -24,7 +24,5 @@ public class HeatBallProjectile extends WeatherBallProjectile
 	public HeatBallProjectile(World world, LivingEntity player)
 	{
 		super(ArtOfWeatherProjectiles.HEAT_BALL, world, player);
-		
-		this.setMaxLife(300);
 	}
 }

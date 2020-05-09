@@ -82,10 +82,10 @@ public class AbilityDataBase implements IAbilityData
 	}
 
 	@Override
-	public List<Ability> getUnlockedAbilities(AbilityCategory category)
+	public <T extends Ability> List<T> getUnlockedAbilities(AbilityCategory category)
 	{
 		this.unlockedAbilities.removeIf(ability -> ability == null);
-		return this.unlockedAbilities.parallelStream().filter(ability -> ability.getCategory() == category || category == AbilityCategory.ALL).collect(Collectors.toList());
+		return (List<T>) this.unlockedAbilities.parallelStream().filter(ability -> ability.getCategory() == category || category == AbilityCategory.ALL).collect(Collectors.toList());
 	}
 
 	@Override

@@ -27,10 +27,10 @@ public class EntityCloud extends Entity
 		super.tick();
 		if(!this.world.isRemote)
 		{
-			if(life <= 0)
+			if(this.life <= 0)
 				this.remove();
 
-			life--;
+			this.life--;
 		}		
 	}
 	

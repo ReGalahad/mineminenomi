@@ -6,6 +6,13 @@ import xyz.pixelatedw.mineminenomi.abilities.ZoomAbility;
 import xyz.pixelatedw.mineminenomi.abilities.artofweather.CoolBallAbility;
 import xyz.pixelatedw.mineminenomi.abilities.artofweather.HeatBallAbility;
 import xyz.pixelatedw.mineminenomi.abilities.artofweather.ThunderBallAbility;
+import xyz.pixelatedw.mineminenomi.abilities.artofweather.tempos.FogTempo;
+import xyz.pixelatedw.mineminenomi.abilities.artofweather.tempos.MirageTempo;
+import xyz.pixelatedw.mineminenomi.abilities.artofweather.tempos.RainTempo;
+import xyz.pixelatedw.mineminenomi.abilities.artofweather.tempos.ThunderLanceTempo;
+import xyz.pixelatedw.mineminenomi.abilities.artofweather.tempos.ThunderboltTempo;
+import xyz.pixelatedw.mineminenomi.abilities.artofweather.tempos.ThunderstormTempo;
+import xyz.pixelatedw.mineminenomi.abilities.artofweather.tempos.WeatherCloudTempo;
 import xyz.pixelatedw.mineminenomi.abilities.baku.BakuMunchAbility;
 import xyz.pixelatedw.mineminenomi.abilities.baku.BakuTsuihoAbility;
 import xyz.pixelatedw.mineminenomi.abilities.baku.BeroCannonAbility;
@@ -327,10 +334,17 @@ public class ModAbilities
 		WyRegistry.registerAbility(MedicBagExplosionAbility.INSTANCE);
 		WyRegistry.registerAbility(FailedExperimentAbility.INSTANCE);
 
-		// Doctor
+		// Art of Weather
 		WyRegistry.registerAbility(HeatBallAbility.INSTANCE);
 		WyRegistry.registerAbility(CoolBallAbility.INSTANCE);
-		WyRegistry.registerAbility(ThunderBallAbility.INSTANCE);
+		WyRegistry.registerAbility(ThunderBallAbility.INSTANCE);	
+		WyRegistry.registerAbility(WeatherCloudTempo.INSTANCE);
+		WyRegistry.registerAbility(ThunderLanceTempo.INSTANCE);
+		WyRegistry.registerAbility(ThunderboltTempo.INSTANCE);
+		WyRegistry.registerAbility(ThunderstormTempo.INSTANCE);
+		WyRegistry.registerAbility(RainTempo.INSTANCE);
+		WyRegistry.registerAbility(FogTempo.INSTANCE);
+		WyRegistry.registerAbility(MirageTempo.INSTANCE);
 
 		// Sniper Googles
 		WyRegistry.registerAbility(ZoomAbility.INSTANCE);

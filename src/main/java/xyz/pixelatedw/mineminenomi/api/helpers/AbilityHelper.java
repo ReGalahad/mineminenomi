@@ -19,6 +19,15 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.registries.ForgeRegistries;
+import xyz.pixelatedw.mineminenomi.abilities.artofweather.CoolBallAbility;
+import xyz.pixelatedw.mineminenomi.abilities.artofweather.HeatBallAbility;
+import xyz.pixelatedw.mineminenomi.abilities.artofweather.ThunderBallAbility;
+import xyz.pixelatedw.mineminenomi.abilities.artofweather.tempos.FogTempo;
+import xyz.pixelatedw.mineminenomi.abilities.artofweather.tempos.MirageTempo;
+import xyz.pixelatedw.mineminenomi.abilities.artofweather.tempos.RainTempo;
+import xyz.pixelatedw.mineminenomi.abilities.artofweather.tempos.ThunderLanceTempo;
+import xyz.pixelatedw.mineminenomi.abilities.artofweather.tempos.ThunderboltTempo;
+import xyz.pixelatedw.mineminenomi.abilities.artofweather.tempos.WeatherCloudTempo;
 import xyz.pixelatedw.mineminenomi.abilities.cyborg.ColaOverdriveAbility;
 import xyz.pixelatedw.mineminenomi.abilities.cyborg.CoupDeVentAbility;
 import xyz.pixelatedw.mineminenomi.abilities.cyborg.FreshFireAbility;
@@ -368,6 +377,18 @@ public class AbilityHelper
 			validateQuestAbility(player, ModQuests.SWORDSMAN_TRIAL_01, FirstAidAbility.INSTANCE);
 			validateQuestAbility(player, ModQuests.SWORDSMAN_TRIAL_02, MedicBagExplosionAbility.INSTANCE);
 			validateQuestAbility(player, ModQuests.SWORDSMAN_TRIAL_03, FailedExperimentAbility.INSTANCE);
+		}
+		{
+			validateQuestAbility(player, ModQuests.SWORDSMAN_TRIAL_01, HeatBallAbility.INSTANCE);
+			validateQuestAbility(player, ModQuests.SWORDSMAN_TRIAL_01, CoolBallAbility.INSTANCE);
+			validateQuestAbility(player, ModQuests.SWORDSMAN_TRIAL_01, WeatherCloudTempo.INSTANCE);
+			validateQuestAbility(player, ModQuests.SWORDSMAN_TRIAL_02, ThunderBallAbility.INSTANCE);
+			validateQuestAbility(player, ModQuests.SWORDSMAN_TRIAL_02, ThunderboltTempo.INSTANCE);
+			validateQuestAbility(player, ModQuests.SWORDSMAN_TRIAL_02, ThunderLanceTempo.INSTANCE);
+			validateQuestAbility(player, ModQuests.SWORDSMAN_TRIAL_02, FogTempo.INSTANCE);
+			validateQuestAbility(player, ModQuests.SWORDSMAN_TRIAL_02, MirageTempo.INSTANCE);
+			validateQuestAbility(player, ModQuests.SWORDSMAN_TRIAL_03, RainTempo.INSTANCE);
+
 		}
 	}
 

@@ -15,11 +15,13 @@ import xyz.pixelatedw.wypi.WyHelper;
 public class ClimaTactItem extends Item
 {
 	private int damage = 1;
+	private int level = 1;
 	
-	public ClimaTactItem(int damage)
+	public ClimaTactItem(int damage, int level)
 	{
 		super(new Properties().group(ModCreativeTabs.WEAPONS).maxStackSize(1));
 		this.damage = damage;
+		this.level = level;
 	}
 	
 	public String checkCharge(ItemStack itemStack)
@@ -58,6 +60,11 @@ public class ClimaTactItem extends Item
 	public void setDamageModifier(ItemStack stack, double multiplier)
 	{
 		stack.getOrCreateTag().putDouble("multiplier", multiplier);
+	}
+	
+	public int getLevel()
+	{
+		return this.level;
 	}
 	
 	@Override
