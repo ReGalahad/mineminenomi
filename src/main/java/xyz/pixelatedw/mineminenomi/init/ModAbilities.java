@@ -4,8 +4,10 @@ import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.abilities.SpecialFlyAbility;
 import xyz.pixelatedw.mineminenomi.abilities.ZoomAbility;
 import xyz.pixelatedw.mineminenomi.abilities.artofweather.CoolBallAbility;
+import xyz.pixelatedw.mineminenomi.abilities.artofweather.GustSwordAbility;
 import xyz.pixelatedw.mineminenomi.abilities.artofweather.HeatBallAbility;
 import xyz.pixelatedw.mineminenomi.abilities.artofweather.ThunderBallAbility;
+import xyz.pixelatedw.mineminenomi.abilities.artofweather.WeatherEggAbility;
 import xyz.pixelatedw.mineminenomi.abilities.artofweather.tempos.FogTempo;
 import xyz.pixelatedw.mineminenomi.abilities.artofweather.tempos.MirageTempo;
 import xyz.pixelatedw.mineminenomi.abilities.artofweather.tempos.RainTempo;
@@ -337,7 +339,9 @@ public class ModAbilities
 		// Art of Weather
 		WyRegistry.registerAbility(HeatBallAbility.INSTANCE);
 		WyRegistry.registerAbility(CoolBallAbility.INSTANCE);
-		WyRegistry.registerAbility(ThunderBallAbility.INSTANCE);	
+		WyRegistry.registerAbility(ThunderBallAbility.INSTANCE);
+		WyRegistry.registerAbility(GustSwordAbility.INSTANCE);
+		WyRegistry.registerAbility(WeatherEggAbility.INSTANCE);
 		WyRegistry.registerAbility(WeatherCloudTempo.INSTANCE);
 		WyRegistry.registerAbility(ThunderLanceTempo.INSTANCE);
 		WyRegistry.registerAbility(ThunderboltTempo.INSTANCE);
