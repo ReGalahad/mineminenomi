@@ -7,6 +7,7 @@ import xyz.pixelatedw.mineminenomi.api.helpers.ArtOfWeatherHelper;
 import xyz.pixelatedw.mineminenomi.api.helpers.ItemsHelper;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.artofweather.HeatBallProjectile;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
+import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.items.weapons.ClimaTactItem;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.artofweather.ChargedWeatherBallParticleEffect;
@@ -18,7 +19,7 @@ public class HeatBallAbility extends Ability
 {
 	public static final HeatBallAbility INSTANCE = new HeatBallAbility();
 
-	private static final ParticleEffect CHARGE_PARTICLES = new ChargedWeatherBallParticleEffect(WyHelper.hexToRGB("#FF0000"));
+	private static final ParticleEffect CHARGE_PARTICLES = new ChargedWeatherBallParticleEffect(WyHelper.hexToRGB("#FF0000"), ModResources.GASU);
 
 	public HeatBallAbility()
 	{

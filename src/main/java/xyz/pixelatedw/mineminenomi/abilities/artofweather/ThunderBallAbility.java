@@ -7,6 +7,7 @@ import xyz.pixelatedw.mineminenomi.api.helpers.ArtOfWeatherHelper;
 import xyz.pixelatedw.mineminenomi.api.helpers.ItemsHelper;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.artofweather.ThunderBallProjectile;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
+import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.items.weapons.ClimaTactItem;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.artofweather.ChargedWeatherBallParticleEffect;
@@ -18,7 +19,7 @@ public class ThunderBallAbility extends Ability
 {
 	public static final ThunderBallAbility INSTANCE = new ThunderBallAbility();
 
-	private static final ParticleEffect CHARGE_PARTICLES = new ChargedWeatherBallParticleEffect(WyHelper.hexToRGB("#FFFF00"));
+	private static final ParticleEffect CHARGE_PARTICLES = new ChargedWeatherBallParticleEffect(WyHelper.hexToRGB("#FFFF00"), ModResources.GORO);
 
 	public ThunderBallAbility()
 	{

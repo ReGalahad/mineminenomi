@@ -45,7 +45,10 @@ public class YukiRabiProjectile extends AbilityProjectileEntity
 				double offsetZ = WyHelper.randomDouble() / 5;
 
 				GenericParticleData data = new GenericParticleData();
-				data.setTexture(ModResources.YUKI);
+				if(i % 2 == 0)
+					data.setTexture(ModResources.YUKI2);
+				else
+					data.setTexture(ModResources.YUKI);				
 				data.setLife(20);
 				data.setSize(1.3F);
 				data.setMotion(0, -0.02, 0);

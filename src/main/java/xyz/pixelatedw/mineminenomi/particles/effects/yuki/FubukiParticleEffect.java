@@ -30,7 +30,12 @@ public class FubukiParticleEffect extends ParticleEffect
 			float scale = (float) (1 + WyHelper.randomWithRange(0, 3));
 			
 			GenericParticleData data = new GenericParticleData();
-			data.setTexture(ModResources.YUKI);
+			if(i % 5 == 0)
+				data.setTexture(ModResources.YUKI3);
+			else if(i % 2 == 0)
+				data.setTexture(ModResources.YUKI2);
+			else
+				data.setTexture(ModResources.YUKI);
 			data.setLife(300);
 			data.setSize(scale);
 			data.setMotion(motionX, -0.05, motionY);

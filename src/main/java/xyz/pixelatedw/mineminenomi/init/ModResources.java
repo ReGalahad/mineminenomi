@@ -8,6 +8,9 @@ public class ModResources
 
 	// Particles
 	public static final ResourceLocation YUKI = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/yuki.png");
+	public static final ResourceLocation YUKI2 = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/yuki2.png");
+	public static final ResourceLocation YUKI3 = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/yuki3.png");
+	public static final ResourceLocation YUKI4 = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/yuki4.png");
 	public static final ResourceLocation PIKA = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/pika.png");
 	public static final ResourceLocation MERA = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/mera.png");
 	public static final ResourceLocation MERA2 = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/mera2.png");
@@ -31,7 +34,15 @@ public class ModResources
 	public static final ResourceLocation KILO = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/kilo.png");
 	public static final ResourceLocation MERO = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/mero.png");
 	public static final ResourceLocation CHIYU = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/chiyu1.png");
+	public static final ResourceLocation CHIYU2 = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/chiyu2.png");
+	public static final ResourceLocation CHIYU3 = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/chiyu3.png");
+	public static final ResourceLocation CHIYU4 = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/chiyu4.png");
 	public static final ResourceLocation RUST = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/rust.png");
+	public static final ResourceLocation AWA = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/awa.png");
+	public static final ResourceLocation AWA2 = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/awa2.png");
+	public static final ResourceLocation AWA3 = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/awa3.png");
+	public static final ResourceLocation NETSU = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/netsu.png");
+	public static final ResourceLocation NETSU2 = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/netsu2.png");
 
 	// UI
 	public static final ResourceLocation WOOD_ARROW = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/icons/arrow.png");
