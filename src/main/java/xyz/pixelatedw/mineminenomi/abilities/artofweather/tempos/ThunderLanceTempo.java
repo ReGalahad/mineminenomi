@@ -35,7 +35,7 @@ public class ThunderLanceTempo extends TempoAbility
 		if(player.getHeldItemMainhand().getItem() instanceof ClimaTactItem)
 		{
 			ClimaTactItem climaTact = ((ClimaTactItem) player.getHeldItemMainhand().getItem());
-			climaTact.setDamageModifier(player.getHeldItemMainhand(), 1.5);
+			climaTact.setDamageModifier(player.getHeldItemMainhand(), 2.5);
 			this.setMaxCooldown(10);
 		}
 			

@@ -19,6 +19,7 @@ import xyz.pixelatedw.mineminenomi.entities.mobs.marines.MarineWithGunEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.marines.MarineWithSwordEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.BlackKnightEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.DoppelmanEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.misc.MirageCloneEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.WaxPlayerEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.PirateCaptainEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.PirateTraderEntity;
@@ -62,6 +63,7 @@ public class ModEntities
 	public static final EntityType VIVRE_CARD = WyRegistry.createEntityType(VivreCardEntity::new).size(0.4F, 0.4F).build("vivre_card");
 	public static final EntityType PHYSICAL_BODY = WyRegistry.createEntityType(PhysicalBodyEntity::new).build("physical_body");
 	public static final EntityType SNIPER_TARGET = WyRegistry.createEntityType(SniperTargetEntity::new).build("sniper_target");
+	public static final EntityType MIRAGE_CLONE = WyRegistry.createEntityType(MirageCloneEntity::new).build("mirage_clone");
 
 	static
 	{
@@ -94,6 +96,7 @@ public class ModEntities
 		WyRegistry.registerEntityType(VIVRE_CARD, "Vivre Card");
 		WyRegistry.registerEntityType(PHYSICAL_BODY, "Physical Body");
 		WyRegistry.registerEntityType(SNIPER_TARGET, "Sniper Target");
+		WyRegistry.registerEntityType(MIRAGE_CLONE, "Mirage Clone");
 	}
 
 	  public static void registerEntityWorldSpawn(EntityType<?> type, int weight, int maxGroup, Biome... biomes) {

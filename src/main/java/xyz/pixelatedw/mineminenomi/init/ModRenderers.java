@@ -1,5 +1,7 @@
 package xyz.pixelatedw.mineminenomi.init;
 
+import java.util.Map;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.IEntityRenderer;
@@ -10,7 +12,14 @@ import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.WantedPosterPackageTileEntity;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.WantedPosterTileEntity;
-import xyz.pixelatedw.mineminenomi.blocks.tileentities.dials.*;
+import xyz.pixelatedw.mineminenomi.blocks.tileentities.dials.AxeDialTileEntity;
+import xyz.pixelatedw.mineminenomi.blocks.tileentities.dials.BreathDialTileEntity;
+import xyz.pixelatedw.mineminenomi.blocks.tileentities.dials.EisenDialTileEntity;
+import xyz.pixelatedw.mineminenomi.blocks.tileentities.dials.FlameDialTileEntity;
+import xyz.pixelatedw.mineminenomi.blocks.tileentities.dials.FlashDialTileEntity;
+import xyz.pixelatedw.mineminenomi.blocks.tileentities.dials.ImpactDialTileEntity;
+import xyz.pixelatedw.mineminenomi.blocks.tileentities.dials.MilkyDialTileEntity;
+import xyz.pixelatedw.mineminenomi.blocks.tileentities.dials.RejectDialTileEntity;
 import xyz.pixelatedw.mineminenomi.entities.PhysicalBodyEntity;
 import xyz.pixelatedw.mineminenomi.entities.VivreCardEntity;
 import xyz.pixelatedw.mineminenomi.entities.WantedPosterPackageEntity;
@@ -20,6 +29,7 @@ import xyz.pixelatedw.mineminenomi.entities.mobs.marines.MarineWithGunEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.marines.MarineWithSwordEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.BlackKnightEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.DoppelmanEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.misc.MirageCloneEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.TraderEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.WaxPlayerEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.PirateCaptainEntity;
@@ -42,10 +52,15 @@ import xyz.pixelatedw.mineminenomi.renderers.abilities.PhysicalBodyRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.blocks.DialTileEntityRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.blocks.WantedPosterTileEntityRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.blocks.WantedPostersPackageTileEntityRenderer;
-import xyz.pixelatedw.mineminenomi.renderers.entities.*;
+import xyz.pixelatedw.mineminenomi.renderers.entities.BlackKnightRenderer;
+import xyz.pixelatedw.mineminenomi.renderers.entities.CloudRenderer;
+import xyz.pixelatedw.mineminenomi.renderers.entities.DoppelmanRenderer;
+import xyz.pixelatedw.mineminenomi.renderers.entities.GenericMobRenderer;
+import xyz.pixelatedw.mineminenomi.renderers.entities.MirageCloneRenderer;
+import xyz.pixelatedw.mineminenomi.renderers.entities.VivreCardRenderer;
+import xyz.pixelatedw.mineminenomi.renderers.entities.WantedPosterPackageRenderer;
+import xyz.pixelatedw.mineminenomi.renderers.entities.WaxPlayerRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.layers.PotionLayer;
-
-import java.util.Map;
 
 public class ModRenderers
 {
@@ -95,6 +110,7 @@ public class ModRenderers
 		RenderingRegistry.registerEntityRenderingHandler(ChargingUrsusShockEntity.class, new ChargingUrsusShockRenderer.Factory());
 		RenderingRegistry.registerEntityRenderingHandler(SniperTargetEntity.class, new GenericMobRenderer.Factory(new SniperTargetModel(), 1, "sniper_target"));
 		RenderingRegistry.registerEntityRenderingHandler(PhysicalBodyEntity.class, new PhysicalBodyRenderer.Factory());
+	    RenderingRegistry.registerEntityRenderingHandler(MirageCloneEntity.class, new MirageCloneRenderer.Factory());
 
 		/*Pretty simple system, you just create a new layer, and add the layer to the living entities or the player */
 

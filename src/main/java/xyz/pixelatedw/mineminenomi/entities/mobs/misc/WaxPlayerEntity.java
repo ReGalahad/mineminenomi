@@ -50,10 +50,10 @@ public class WaxPlayerEntity extends CreatureEntity{
 	 public void tick() {
 	      super.tick();
 	    
-	      if(tick > 300) {
+	      if(this.tick > 300) {
 	    	  this.remove();
 	      }
-	      tick++;
+	      this.tick++;
 	   }
 	
 

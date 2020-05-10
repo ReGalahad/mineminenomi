@@ -6,9 +6,12 @@ import com.google.common.collect.Multimap;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.AttributeModifier.Operation;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
 import xyz.pixelatedw.wypi.WyHelper;
 
@@ -17,9 +20,23 @@ public class ClimaTactItem extends Item
 	private int damage = 1;
 	private int level = 1;
 	
+	private IItemPropertyGetter openProperty = (itemStack, world, livingEntity) ->
+	{
+		if (livingEntity == null || !(livingEntity instanceof PlayerEntity))
+		{
+			return 0.0F;
+		}
+		else
+		{
+			boolean mainHandFlag = livingEntity.getHeldItemMainhand() == itemStack;
+			return mainHandFlag ? 1.0F : 0.0F;
+		}
+	};
+	
 	public ClimaTactItem(int damage, int level)
 	{
 		super(new Properties().group(ModCreativeTabs.WEAPONS).maxStackSize(1));
+		this.addPropertyOverride(new ResourceLocation("open"), this.openProperty);
 		this.damage = damage;
 		this.level = level;
 	}
