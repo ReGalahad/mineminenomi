@@ -16,7 +16,7 @@ public class GustSwordAbility extends RepeaterAbility
 
 	public GustSwordAbility()
 	{
-		super("Gust Sword", AbilityCategory.DEVIL_FRUIT);
+		super("Gust Sword", AbilityCategory.RACIAL);
 		this.setMaxCooldown(10);
 		this.setMaxRepearCount(5, 3);
 

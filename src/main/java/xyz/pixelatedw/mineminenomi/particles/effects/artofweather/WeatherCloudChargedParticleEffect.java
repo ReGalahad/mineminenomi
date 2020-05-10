@@ -13,17 +13,30 @@ public class WeatherCloudChargedParticleEffect extends ParticleEffect
 	@Override
 	public void spawn(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
 	{
-		for (int i = 0; i < 50; i++)
-		{
-			double offsetX = WyHelper.randomWithRange(-14, 14) + WyHelper.randomDouble();
-			double offsetY = (WyHelper.randomWithRange(-2, 1) + WyHelper.randomDouble()) - 4;
-			double offsetZ = WyHelper.randomWithRange(-14, 14) + WyHelper.randomDouble();
+		int i = 0;
+		double phi = 0;
+		double radius = 7;
 
-			GenericParticleData data = new GenericParticleData();
-			data.setTexture(ModResources.GORO2);
-			data.setLife(10);
-			data.setSize(6);
-			WyHelper.spawnParticles(data, (ServerWorld) world, posX + offsetX, posY + offsetY, posZ + offsetZ);
+		while(phi < Math.PI)
+		{
+			phi += Math.PI / 1.5;
+			
+			for(double theta = 0; theta <= 2 * Math.PI; theta += Math.PI / 4)
+			{
+				double x = (radius * Math.cos(theta) * Math.sin(phi)) + (WyHelper.randomDouble() * radius);
+				double y = radius * Math.cos(phi);
+				double z = (radius* Math.sin(theta) * Math.sin(phi)) + (WyHelper.randomDouble() * radius);
+							
+				GenericParticleData data = new GenericParticleData();
+				if(i % 4 == 0)
+					data.setTexture(ModResources.GORO);
+				else
+					data.setTexture(ModResources.GORO2);
+				data.setLife(10);
+				data.setSize(6);
+				WyHelper.spawnParticles(data, (ServerWorld) world, posX + x, (posY - 2) + y, posZ + z);
+				i++;
+			}
 		}
 	}
 
