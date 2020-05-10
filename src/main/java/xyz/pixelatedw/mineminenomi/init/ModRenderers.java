@@ -31,7 +31,7 @@ import xyz.pixelatedw.mineminenomi.entities.mobs.misc.BlackKnightEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.DoppelmanEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.MirageCloneEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.TraderEntity;
-import xyz.pixelatedw.mineminenomi.entities.mobs.misc.WaxPlayerEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.misc.WaxCloneEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.PirateCaptainEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.PirateWithGunEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.PirateWithSwordEntity;
@@ -59,7 +59,7 @@ import xyz.pixelatedw.mineminenomi.renderers.entities.GenericMobRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.MirageCloneRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.VivreCardRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.WantedPosterPackageRenderer;
-import xyz.pixelatedw.mineminenomi.renderers.entities.WaxPlayerRenderer;
+import xyz.pixelatedw.mineminenomi.renderers.entities.WaxCloneRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.layers.PotionLayer;
 
 public class ModRenderers
@@ -102,7 +102,7 @@ public class ModRenderers
 
 		// Others
 		RenderingRegistry.registerEntityRenderingHandler(DoppelmanEntity.class, new DoppelmanRenderer.Factory());
-	    RenderingRegistry.registerEntityRenderingHandler(WaxPlayerEntity.class, new WaxPlayerRenderer.Factory());
+	    RenderingRegistry.registerEntityRenderingHandler(WaxCloneEntity.class, new WaxCloneRenderer.Factory());
 		RenderingRegistry.registerEntityRenderingHandler(BlackKnightEntity.class, new BlackKnightRenderer.Factory());
 		RenderingRegistry.registerEntityRenderingHandler(EntityCloud.class, new CloudRenderer.Factory());
 		RenderingRegistry.registerEntityRenderingHandler(WantedPosterPackageEntity.class, new WantedPosterPackageRenderer.Factory());

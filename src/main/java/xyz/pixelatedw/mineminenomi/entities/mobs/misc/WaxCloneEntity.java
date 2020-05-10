@@ -17,14 +17,15 @@ import net.minecraft.world.server.ServerWorld;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.wypi.WyHelper;
 
-public class MirageCloneEntity extends CreatureEntity
+public class WaxCloneEntity extends CreatureEntity
 {
-	private static final DataParameter<Optional<UUID>> OWNER = EntityDataManager.createKey(MirageCloneEntity.class, DataSerializers.OPTIONAL_UNIQUE_ID);
+	private static final DataParameter<Optional<UUID>> OWNER = EntityDataManager.createKey(WaxCloneEntity.class, DataSerializers.OPTIONAL_UNIQUE_ID);
+	private static final DataParameter<Boolean> IS_TEXTURED = EntityDataManager.createKey(WaxCloneEntity.class, DataSerializers.BOOLEAN);
 	private int tick = 0;
 
-	public MirageCloneEntity(World world)
+	public WaxCloneEntity(World world)
 	{
-		super(ModEntities.MIRAGE_CLONE, world);
+		super(ModEntities.WAX_CLONE, world);	
 	}
 
 	@Override
@@ -33,7 +34,7 @@ public class MirageCloneEntity extends CreatureEntity
 		super.registerAttributes();
 		this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(35.0D);
 		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25F);
-		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(5.0D);
+		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
 		this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(10.0D);
 		this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
 	}
@@ -48,8 +49,27 @@ public class MirageCloneEntity extends CreatureEntity
 	{
 		super.registerData();
 		this.dataManager.register(OWNER, null);
+		this.dataManager.register(IS_TEXTURED, false);
 	}
 
+	@Override
+	public void tick()
+	{
+		if (!this.world.isRemote && this.getOwner() == null)
+		{
+			this.remove();
+			return;
+		}
+
+		this.setRevengeTarget(this.getOwner());
+
+		if (this.tick > 300)
+			this.remove();
+
+		this.tick++;
+		super.tick();
+	}
+	
 	public void remove()
 	{
 		if (!this.world.isRemote)
@@ -70,29 +90,12 @@ public class MirageCloneEntity extends CreatureEntity
 	}
 
 	@Override
-	public void tick()
-	{
-		if (!this.world.isRemote && this.getOwner() == null)
-		{
-			this.remove();
-			return;
-		}
-
-		this.setRevengeTarget(this.getOwner());
-
-		if (this.tick > 200)
-			this.remove();
-
-		this.tick++;
-		super.tick();
-	}
-
-	@Override
 	public void writeAdditional(CompoundNBT compound)
 	{
 		super.writeAdditional(compound);
 		if (this.dataManager.get(OWNER) != null)
 			compound.putString("OwnerUUID", this.dataManager.get(OWNER).get().toString());
+		compound.putBoolean("isTextured", this.dataManager.get(IS_TEXTURED));
 	}
 
 	@Override
@@ -100,6 +103,7 @@ public class MirageCloneEntity extends CreatureEntity
 	{
 		super.readAdditional(compound);
 		this.dataManager.set(OWNER, Optional.of(UUID.fromString(compound.getString("OwnerUUID"))));
+		this.dataManager.set(IS_TEXTURED, compound.getBoolean("isTextured"));
 	}
 
 	public void setOwner(UUID uuid)
@@ -110,5 +114,15 @@ public class MirageCloneEntity extends CreatureEntity
 	public PlayerEntity getOwner()
 	{
 		return this.getDataManager().get(OWNER).isPresent() ? this.world.getPlayerByUuid(this.getDataManager().get(OWNER).get()) : null;
+	}
+	
+	public void setTextured()
+	{
+		this.dataManager.set(IS_TEXTURED, true);
+	}
+	
+	public boolean isTextured()
+	{
+		return this.getDataManager().get(IS_TEXTURED);
 	}
 }
