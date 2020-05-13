@@ -26,6 +26,6 @@ public class KujaArrowProjectile extends AbilityProjectileEntity
 	{
 		super(ExtraProjectiles.KUJA_ARROW, world, player);
 		
-		this.setDamage(6);
+		this.setDamage(4);
 	}
 }

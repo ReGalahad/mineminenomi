@@ -39,12 +39,12 @@ public class ModCapabilities
 		
 		if (event.getObject() instanceof PlayerEntity)
 		{
-			event.addCapability(new ResourceLocation(APIConfig.PROJECT_ID, "devil_fruit"), new DevilFruitProvider());
 			event.addCapability(new ResourceLocation(APIConfig.PROJECT_ID, "haki_data"), new HakiDataProvider());
 		}
 		
 		if(event.getObject() instanceof LivingEntity)
 		{
+			event.addCapability(new ResourceLocation(APIConfig.PROJECT_ID, "devil_fruit"), new DevilFruitProvider());
 			event.addCapability(new ResourceLocation(APIConfig.PROJECT_ID, "entity_stats"), new EntityStatsProvider());
 		}
 	}
