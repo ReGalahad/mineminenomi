@@ -5,6 +5,8 @@ import java.util.List;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.network.play.server.SPlayEntityEffectPacket;
 import net.minecraft.potion.EffectInstance;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.api.protection.BlockProtectionRule;
@@ -50,12 +52,14 @@ public class IceAgeAbility extends Ability
 			}
 		}
 
-		List<LivingEntity> list = WyHelper.<LivingEntity>getEntitiesNear(player.getPosition(), player.world, 15);
+		List<LivingEntity> list = WyHelper.getEntitiesNear(player.getPosition(), player.world, 15);
 		list.remove(player);
 
 		for (LivingEntity target : list)
 		{
-			target.addPotionEffect(new EffectInstance(ModEffects.FROZEN, 200, 1));
+			EffectInstance instance = new EffectInstance(ModEffects.FROZEN, 200, 1);
+			target.addPotionEffect(instance);
+			((ServerPlayerEntity) player).connection.sendPacket(new SPlayEntityEffectPacket(target.getEntityId(), instance));
 		}
 
 		PARTICLES.spawn(player.world, player.posX, player.posY, player.posZ, 0, 0, 0);

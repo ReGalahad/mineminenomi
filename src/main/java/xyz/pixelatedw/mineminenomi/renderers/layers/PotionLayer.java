@@ -10,64 +10,80 @@ import net.minecraft.client.renderer.model.ItemCameraTransforms;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Effect;
 import xyz.pixelatedw.mineminenomi.api.IHasOverlay;
 import xyz.pixelatedw.mineminenomi.init.ModEffects;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PotionLayer extends LayerRenderer {
     LivingRenderer renderer;
+    private List<Effect> EffectsWithOverlay = new ArrayList();
 
     public PotionLayer(IEntityRenderer renderer) {
         super(renderer);
         this.renderer = (LivingRenderer) renderer;
+        EffectsWithOverlay.add(ModEffects.LOVESTRUCK);
+        EffectsWithOverlay.add(ModEffects.BUBBLY_CORAL);
     }
 
     @Override
     public void render(Entity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
-
-
         if(((LivingEntity) entity).isPotionActive(ModEffects.FROZEN)) {
+            if (((LivingEntity) entity).getActivePotionEffect(ModEffects.FROZEN).getDuration() <= 0)
+                ((LivingEntity) entity).removePotionEffect(ModEffects.FROZEN);
+
             GlStateManager.pushMatrix();
+            GlStateManager.disableLighting();
             GlStateManager.disableCull();
             GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-            int blocksWidth = (int) Math.ceil(entity.getWidth()) + 1;
-            int blocksHeight = (int) Math.ceil(entity.getHeight()) + 1;
-            GlStateManager.translatef(0.5F - blocksWidth / 3F, 2F - entity.getHeight() / 3F - blocksHeight / 2F, 0.5F - blocksWidth / 3F);
+            float blocksWidth = (float) (Math.ceil(entity.getWidth()) + 1);
+            float blocksHeight = (float) (Math.ceil(entity.getHeight()) + 1);
+            GlStateManager.translatef(0.45F - blocksWidth / 2F, 1.3F - entity.getHeight() / 2F - blocksHeight / 2F, 0.45F - blocksWidth / 2F);
 
             for (int x = 0; x < blocksWidth; x++) {
                 for (int y = 0; y < blocksHeight; y++) {
                     for (int z = 0; z < blocksWidth; z++) {
                         GlStateManager.pushMatrix();
                         GlStateManager.translatef(x, y, z);
-                        Minecraft.getInstance().getItemRenderer().renderItem(new ItemStack(Blocks.ICE), ItemCameraTransforms.TransformType.NONE);
+                        Minecraft.getInstance().getItemRenderer().renderItem(new ItemStack(Blocks.PACKED_ICE), ItemCameraTransforms.TransformType.HEAD);
                         GlStateManager.popMatrix();
                     }
                 }
             }
             GlStateManager.enableCull();
+            GlStateManager.enableLighting();
             GlStateManager.popMatrix();
         }
 
-        if(((LivingEntity) entity).isPotionActive(ModEffects.LOVESTRUCK)) {
-            IHasOverlay effect = (IHasOverlay) ModEffects.LOVESTRUCK;
-            GlStateManager.pushMatrix();
-            {
-                GlStateManager.disableTexture();
-                GlStateManager.enableBlend();
-                GlStateManager.disableLighting();
-                GlStateManager.disableCull();
-                GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+        for (Effect effect : EffectsWithOverlay) {
+            if(((LivingEntity) entity).isPotionActive(effect)) {
+                if (((LivingEntity) entity).getActivePotionEffect(effect).getDuration() <= 0)
+                    ((LivingEntity) entity).removePotionEffect(effect);
 
-                GlStateManager.color4f(effect.getOverlayColor()[0], effect.getOverlayColor()[1], effect.getOverlayColor()[2], effect.getOverlayColor()[3]);
-                GlStateManager.scaled(1.05, 1.04, 1.05);
-                renderer.getEntityModel().render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+                IHasOverlay overlay = (IHasOverlay) effect;
+                GlStateManager.pushMatrix();
+                {
+                    GlStateManager.disableTexture();
+                    GlStateManager.enableBlend();
+                    GlStateManager.disableLighting();
+                    GlStateManager.disableCull();
+                    GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
 
-                GlStateManager.enableTexture();
-                GlStateManager.enableCull();
-                GlStateManager.enableLighting();
-                GlStateManager.disableBlend();
+                    GlStateManager.color4f(overlay.getOverlayColor()[0], overlay.getOverlayColor()[1], overlay.getOverlayColor()[2], overlay.getOverlayColor()[3]);
+                    GlStateManager.scaled(1.05, 1.04, 1.05);
+                    renderer.getEntityModel().render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+
+                    GlStateManager.enableTexture();
+                    GlStateManager.enableCull();
+                    GlStateManager.enableLighting();
+                    GlStateManager.disableBlend();
+                }
+                GlStateManager.popMatrix();
             }
-            GlStateManager.popMatrix();
         }
+
 
     }
 
