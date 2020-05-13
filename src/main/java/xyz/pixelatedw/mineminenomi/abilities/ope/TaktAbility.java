@@ -20,7 +20,7 @@ public class TaktAbility extends ContinuousAbility
 	{
 		super("Takt", AbilityCategory.DEVIL_FRUIT);
 		this.setMaxCooldown(10);
-		this.setThreshold(5);
+		this.setThreshold(8);
 		this.setDescription("Lifts all entities inside ROOM, making them unable to move.");
 		
 		this.onStartContinuityEvent = this::onStartContinuityEvent;
@@ -52,7 +52,8 @@ public class TaktAbility extends ContinuousAbility
 		
 		list.stream().forEach(entity -> 
 		{
-			if(entity.posY <= player.posY + 5)
+			entity.setMotion(0,0,0);
+			if(entity.posY <= player.posY + 3)
 				entity.setPositionAndUpdate(entity.posX, entity.posY + 0.5, entity.posZ);
 		});
 	}

@@ -44,12 +44,29 @@
 		{
 			"type": "minecraft:item",
 			"name": "mineminenomi:belly_pouch",
-			"weight": 80,
+			"weight": 40,
 			"functions": [{
 				"function": "minecraft:set_count",
 				"count": {
 					"min": 2.0,
-					"max": 6.0,
+					"max": 4.0,
+					"type": "minecraft:uniform"
+				}
+			}]
+		},
+		{
+			"type": "minecraft:item",
+			"name": "minecraft:gunpowder",
+			"rolls": {
+				"min": 1.0,
+				"max": 2.0
+			},
+			"weight": 100,
+			"functions": [{
+				"function": "minecraft:set_count",
+				"count": {
+					"min": 3.0,
+					"max": 9.0,
 					"type": "minecraft:uniform"
 				}
 			}]
@@ -57,12 +74,12 @@
 		{
 			"type": "minecraft:item",
 			"name": "mineminenomi:belly_pouch",
-			"weight": 100,
+			"weight": 50,
 			"functions": [{
 				"function": "minecraft:set_count",
 				"count": {
-					"min": 6.0,
-					"max": 10.0,
+					"min": 3.0,
+					"max": 5.0,
 					"type": "minecraft:uniform"
 				}
 			}]
