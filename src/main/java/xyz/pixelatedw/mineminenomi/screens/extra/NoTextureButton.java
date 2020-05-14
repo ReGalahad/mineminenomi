@@ -3,14 +3,14 @@ package xyz.pixelatedw.mineminenomi.screens.extra;
 import com.mojang.blaze3d.platform.GlStateManager;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.widget.button.Button;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.client.config.GuiUtils;
-import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
 
 public class NoTextureButton extends Button
 {
+	private boolean isSelected;
+	
 	public NoTextureButton(int posX, int posY, int width, int height, String string, IPressable onPress)
 	{
 		super(posX, posY, width, height, string, onPress);
@@ -19,25 +19,40 @@ public class NoTextureButton extends Button
 	@Override
 	public void render(int mouseX, int mouseY, float partialTicks)
 	{
+		GlStateManager.pushMatrix();
 		if (this.visible)
 		{
-			Minecraft minecraft = Minecraft.getInstance();
-			minecraft.getTextureManager().bindTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/empty.png"));
-			GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 			this.isHovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
-			GlStateManager.enableBlend();
-			GlStateManager.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
-			GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-			GuiUtils.drawTexturedModalRect(this.x, this.y, 0, 46 * 20, this.width / 2, this.height, 1);
-			GuiUtils.drawTexturedModalRect(this.x + this.width / 2, this.y, 200 - this.width / 2, 46 * 20, this.width / 2, this.height, 1);
-			this.renderBg(minecraft, mouseX, mouseY);
-			int l;
+			int rgb = WyHelper.hexToRGB("#FFFFFF").getRGB();
+			int topGrad = WyHelper.hexToRGB("#B3B3B3").getRGB();
+			int bottomGrad = WyHelper.hexToRGB("#939393").getRGB();
+			
+			if (this.isHovered)
+			{
+				GlStateManager.translated(0, 0.5, 0);
+				rgb = WyHelper.hexToRGB("#00FFBB").getRGB();
+				topGrad = WyHelper.hexToRGB("#B3B3B3").getRGB();
+				bottomGrad = WyHelper.hexToRGB("#505050").getRGB();
+			}
+			
+			if (this.isSelected)
+			{
+				topGrad = WyHelper.hexToRGB("#00CC00").getRGB();
+				bottomGrad = WyHelper.hexToRGB("#005500").getRGB();
+			}
 
-			if (isHovered)
-				l = WyHelper.hexToRGB("FFD700").getRGB();
-			else
-				l = 14737632;
+			this.fillGradient(this.x, this.y, this.width + this.x, this.height + this.y, topGrad, bottomGrad);
+			
+			FontRenderer font = Minecraft.getInstance().fontRenderer;
+			WyHelper.drawStringWithBorder(font, this.getMessage(), this.x - font.getStringWidth(this.getMessage()) / 2 + this.width / 2, this.y + 4, rgb);
+			
+			GlStateManager.color3f(1f, 1f, 1f);
 		}
+		GlStateManager.popMatrix();
 	}
 
+	public void select()
+	{
+		this.isSelected = !this.isSelected;
+	}
 }
