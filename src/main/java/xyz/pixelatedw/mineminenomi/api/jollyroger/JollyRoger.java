@@ -11,17 +11,17 @@ public class JollyRoger
 	
 	public JollyRoger()
 	{
-		for(int i = 0; i < this.backgrounds.length - 1; i++)
+		this.base.setTexture(ModJollyRogers.BASE_0.getTexture());
+		
+		for(int i = 0; i < this.backgrounds.length; i++)
 		{
 			this.backgrounds[i] = new JollyRogerElement(LayerType.BACKGROUND);
 		}
 		
-		for(int i = 0; i < this.details.length - 1; i++)
+		for(int i = 0; i < this.details.length; i++)
 		{
 			this.details[i] = new JollyRogerElement(LayerType.DETAIL);
 		}
-		
-		this.base.setTexture(ModJollyRogers.BASE_0.getTexture());
 	}
 
 	public JollyRogerElement getBase()

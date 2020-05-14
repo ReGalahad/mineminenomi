@@ -4,8 +4,9 @@ import java.io.Serializable;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.registries.ForgeRegistryEntry;
 
-public class JollyRogerElement
+public class JollyRogerElement extends ForgeRegistryEntry<JollyRogerElement>
 {
 	private boolean canBeColored = false;
 	private String color = "#FFFFFF";
