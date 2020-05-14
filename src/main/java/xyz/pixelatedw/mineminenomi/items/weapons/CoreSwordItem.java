@@ -230,8 +230,10 @@ public class CoreSwordItem extends Item
 				multiplier = stack.getTag().getDouble("multiplier");
 			else
 				multiplier = 1;
-			multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", this.damage * multiplier, Operation.ADDITION));		
-		}	
+			multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", this.damage * multiplier, Operation.ADDITION));
+			multimap.put(SharedMonsterAttributes.MOVEMENT_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Speed modifier", -2.4D, Operation.ADDITION));
+
+		}
 		
 		return multimap;
 	}

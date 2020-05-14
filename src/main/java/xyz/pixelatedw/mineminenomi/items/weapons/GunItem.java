@@ -77,8 +77,8 @@ public class GunItem extends Item
 				ItemStack stack = player.inventory.getStackInSlot(i);
 				if (stack.getItem() == Items.GUNPOWDER)
 				{
-					int count = 10;
-					if (stack.getCount() < 10)
+					int count = 3;
+					if (stack.getCount() < 3)
 						count = stack.getCount();
 
 					this.setLoadedGunPowder(heldItemStack, count);
