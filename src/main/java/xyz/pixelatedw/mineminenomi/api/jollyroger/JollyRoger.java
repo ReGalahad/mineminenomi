@@ -28,14 +28,29 @@ public class JollyRoger
 	{
 		return this.base;
 	}
+	
+	public void setBase(JollyRogerElement base)
+	{
+		this.base = base;
+	}
 		
 	public JollyRogerElement[] getBackgrounds()
 	{
 		return this.backgrounds;
 	}
 	
+	public void setBackgrounds(JollyRogerElement[] details)
+	{
+		this.backgrounds = details;
+	}
+	
 	public JollyRogerElement[] getDetails()
 	{
 		return this.details;
+	}
+	
+	public void setDetails(JollyRogerElement[] details)
+	{
+		this.details = details;
 	}
 }

@@ -13,9 +13,11 @@ import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
+import xyz.pixelatedw.mineminenomi.data.entity.jollyroger.JollyRogerCapability;
 import xyz.pixelatedw.mineminenomi.entities.zoan.YomiZoanInfo;
 import xyz.pixelatedw.mineminenomi.items.AkumaNoMiItem;
 import xyz.pixelatedw.mineminenomi.packets.server.SEntityStatsSyncPacket;
+import xyz.pixelatedw.mineminenomi.packets.server.SJollyRogerSyncPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SSyncDevilFruitPacket;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
@@ -88,7 +90,8 @@ public class AbilityValidationEvents
 								
 				WyNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), entityStatsProps), (ServerPlayerEntity) player);
 				WyNetwork.sendTo(new SSyncDevilFruitPacket(player.getEntityId(), devilFruitProps), (ServerPlayerEntity) player);
-				WyNetwork.sendTo(new SSyncAbilityDataPacket(player.getEntityId(), abilityProps), (ServerPlayerEntity) player);		
+				WyNetwork.sendTo(new SSyncAbilityDataPacket(player.getEntityId(), abilityProps), (ServerPlayerEntity) player);
+				WyNetwork.sendTo(new SJollyRogerSyncPacket(player.getEntityId(), JollyRogerCapability.get(player)), (ServerPlayerEntity) player);
 			}
 		}
 	}

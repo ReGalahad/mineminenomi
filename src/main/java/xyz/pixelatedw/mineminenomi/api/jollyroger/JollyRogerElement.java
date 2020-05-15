@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistryEntry;
@@ -79,6 +81,29 @@ public class JollyRogerElement extends ForgeRegistryEntry<JollyRogerElement>
 	public LayerType getLayerType()
 	{
 		return this.type;
+	}
+	
+	@Override
+	public boolean equals(Object element)
+	{
+		if(!(element instanceof JollyRogerElement))
+			return false;
+		
+		return this.getTexture().toString().equalsIgnoreCase(((JollyRogerElement) element).getTexture().toString());
+	}
+
+	@Nullable
+	public JollyRogerElement create()
+	{
+		try
+		{
+			return this.getClass().getConstructor().newInstance();
+		}
+		catch (Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		return null;
 	}
 
 	public interface ICanUse extends Serializable

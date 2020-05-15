@@ -17,7 +17,6 @@ public class DevilFruitCapability
 	{
 		CapabilityManager.INSTANCE.register(IDevilFruit.class, new Capability.IStorage<IDevilFruit>()
 		{
-
 			@Override
 			public INBT writeNBT(Capability<IDevilFruit> capability, IDevilFruit instance, Direction side)
 			{
