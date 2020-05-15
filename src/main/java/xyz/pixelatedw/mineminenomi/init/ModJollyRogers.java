@@ -17,7 +17,7 @@ public class ModJollyRogers
 
 	public static JollyRogerElement registerElement(JollyRogerElement element)
 	{
-		String resourceName = WyHelper.getResourceName(element.getTexture().toString());
+		String resourceName = WyHelper.getResourceName(element.getTexture().toString().replace(APIConfig.PROJECT_ID, ""));
 
 		JOLLY_ROGER_ELEMENTS.register(resourceName, () -> element);
 

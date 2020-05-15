@@ -86,7 +86,7 @@ public class JollyRogerElement extends ForgeRegistryEntry<JollyRogerElement>
 	@Override
 	public boolean equals(Object element)
 	{
-		if(!(element instanceof JollyRogerElement))
+		if(!(element instanceof JollyRogerElement) || this.getTexture() == null || ((JollyRogerElement) element).getTexture() == null)
 			return false;
 		
 		return this.getTexture().toString().equalsIgnoreCase(((JollyRogerElement) element).getTexture().toString());

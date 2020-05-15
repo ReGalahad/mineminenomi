@@ -8,7 +8,6 @@ import net.minecraftforge.common.util.LazyOptional;
 
 public class JollyRogerProvider implements ICapabilitySerializable<CompoundNBT>
 {
-
 	private IJollyRoger instance = JollyRogerCapability.INSTANCE.getDefaultInstance();
 
 	@Override

@@ -64,7 +64,7 @@ public class JollyRogerBase implements IJollyRoger
 	@Override
 	public boolean hasBackground(JollyRogerElement bg)
 	{
-		return Arrays.stream(this.backgrounds).parallel().anyMatch(background -> background.equals(bg));
+		return Arrays.stream(this.backgrounds).parallel().anyMatch(background -> background != null && background.equals(bg));
 	}
 
 	@Override
@@ -108,7 +108,7 @@ public class JollyRogerBase implements IJollyRoger
 	@Override
 	public boolean hasDetail(JollyRogerElement det)
 	{
-		return Arrays.stream(this.details).parallel().anyMatch(detail -> detail.equals(det));
+		return Arrays.stream(this.details).parallel().anyMatch(detail -> detail != null && detail.equals(det));
 	}
 
 }

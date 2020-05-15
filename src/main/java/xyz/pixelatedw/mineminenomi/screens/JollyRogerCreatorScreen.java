@@ -28,7 +28,7 @@ import xyz.pixelatedw.mineminenomi.data.entity.jollyroger.IJollyRoger;
 import xyz.pixelatedw.mineminenomi.data.entity.jollyroger.JollyRogerCapability;
 import xyz.pixelatedw.mineminenomi.init.ModJollyRogers;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
-import xyz.pixelatedw.mineminenomi.packets.server.SJollyRogerSyncPacket;
+import xyz.pixelatedw.mineminenomi.packets.client.CJollyRogerSyncPacket;
 import xyz.pixelatedw.mineminenomi.screens.extra.NoTextureButton;
 import xyz.pixelatedw.mineminenomi.screens.extra.TexturedIconButton;
 import xyz.pixelatedw.wypi.WyHelper;
@@ -56,19 +56,22 @@ public class JollyRogerCreatorScreen extends Screen
 		this.player = Minecraft.getInstance().player;
 		this.props = JollyRogerCapability.get(this.player);
 		this.jollyRoger = new JollyRoger();
-		
-		this.jollyRoger.getBase().setTexture(this.props.getBase().getTexture());
-		
+
+		if(this.props.getBase() != null)
+			this.jollyRoger.getBase().setTexture(this.props.getBase().getTexture());
+	
 		for(int i = 0; i < this.jollyRoger.getBackgrounds().length; i++)
 		{
-			this.jollyRoger.getBackgrounds()[i].setTexture(this.props.getBackgrounds()[i].getTexture());
+			if(this.props.getBackgrounds()[i] != null)
+				this.jollyRoger.getBackgrounds()[i].setTexture(this.props.getBackgrounds()[i].getTexture());
 		}
 		
 		for(int i = 0; i < this.jollyRoger.getDetails().length; i++)
 		{
-			this.jollyRoger.getDetails()[i].setTexture(this.props.getDetails()[i].getTexture());
+			if(this.props.getDetails()[i] != null)
+				this.jollyRoger.getDetails()[i].setTexture(this.props.getDetails()[i].getTexture());
 		}
-
+		
 		this.allElements = ModJollyRogers.JOLLY_ROGER_ELEMENTS.getEntries();
 		this.allBases = this.getTotalElementsForType(this.player, LayerType.BASE);
 		this.allBackgrounds = this.getTotalElementsForType(this.player, LayerType.BACKGROUND);
@@ -319,7 +322,7 @@ public class JollyRogerCreatorScreen extends Screen
 		this.props.setBase(this.jollyRoger.getBase());
 		this.props.setBackgrounds(this.jollyRoger.getBackgrounds());
 		this.props.setDetails(this.jollyRoger.getDetails());
-		WyNetwork.sendToServer(new SJollyRogerSyncPacket(this.player.getEntityId(), this.props));
+		WyNetwork.sendToServer(new CJollyRogerSyncPacket(this.props));
 		super.onClose();
 	}
 

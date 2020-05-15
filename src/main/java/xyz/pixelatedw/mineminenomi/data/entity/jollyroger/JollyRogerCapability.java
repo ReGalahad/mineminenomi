@@ -29,7 +29,7 @@ public class JollyRogerCapability
 				CompoundNBT props = new CompoundNBT();
 
 				JollyRogerElement baseElement = instance.getBase();
-				if(baseElement != null)
+				if(baseElement != null && baseElement.getTexture() != null)
 				{
 					CompoundNBT baseNBT = new CompoundNBT();
 					baseNBT.putString("id", baseElement.getTexture().toString());
@@ -43,7 +43,7 @@ public class JollyRogerCapability
 					for (int i = 0; i < instance.getBackgrounds().length; i++)
 					{
 						JollyRogerElement bgElement = instance.getBackgrounds()[i];				
-						if(bgElement != null)
+						if(bgElement != null && bgElement.getTexture() != null)
 						{
 							CompoundNBT backgroundNBT = new CompoundNBT();
 							backgroundNBT.putInt("slot", i);
@@ -58,7 +58,7 @@ public class JollyRogerCapability
 					for (int i = 0; i < instance.getDetails().length; i++)
 					{
 						JollyRogerElement detElement = instance.getDetails()[i];				
-						if(detElement != null)
+						if(detElement != null && detElement.getTexture() != null)
 						{
 							CompoundNBT detailNBT = new CompoundNBT();
 							detailNBT.putInt("slot", i);
@@ -85,14 +85,15 @@ public class JollyRogerCapability
 				try
 				{
 					CompoundNBT baseNBT = props.getCompound("base");
-					JollyRogerElement baseElement = GameRegistry.findRegistry(JollyRogerElement.class).getValue(new ResourceLocation(APIConfig.PROJECT_ID, baseNBT.getString("id")));
+					JollyRogerElement baseElement = GameRegistry.findRegistry(JollyRogerElement.class).getValue(new ResourceLocation(APIConfig.PROJECT_ID, baseNBT.getString("id").replace(APIConfig.PROJECT_ID + ":", "")));
 					instance.setBase(baseElement);
 					
 					ListNBT backgroundsNBT = props.getList("backgrounds", Constants.NBT.TAG_COMPOUND);
 					for (int i = 0; i < backgroundsNBT.size(); i++)
 					{
 						CompoundNBT backgroundNBT = backgroundsNBT.getCompound(i);
-						JollyRogerElement bgElement = GameRegistry.findRegistry(JollyRogerElement.class).getValue(new ResourceLocation(APIConfig.PROJECT_ID, backgroundNBT.getString("id")));
+						ResourceLocation res = new ResourceLocation(APIConfig.PROJECT_ID, backgroundNBT.getString("id").replace(APIConfig.PROJECT_ID + ":", ""));
+						JollyRogerElement bgElement = GameRegistry.findRegistry(JollyRogerElement.class).getValue(res);
 						
 						int slot = backgroundNBT.getInt("slot");
 						
@@ -106,7 +107,7 @@ public class JollyRogerCapability
 					for (int i = 0; i < detailsNBT.size(); i++)
 					{
 						CompoundNBT detailNBT = detailsNBT.getCompound(i);
-						JollyRogerElement detElement = GameRegistry.findRegistry(JollyRogerElement.class).getValue(new ResourceLocation(APIConfig.PROJECT_ID, detailNBT.getString("id")));
+						JollyRogerElement detElement = GameRegistry.findRegistry(JollyRogerElement.class).getValue(new ResourceLocation(APIConfig.PROJECT_ID, detailNBT.getString("id").replace(APIConfig.PROJECT_ID + ":", "")));
 						
 						int slot = detailNBT.getInt("slot");
 						
@@ -122,11 +123,11 @@ public class JollyRogerCapability
 				}
 			}
 
-		}, () -> new JollyRogerBase());
+		}, JollyRogerBase::new);
 	}
 	
 	public static IJollyRoger get(final LivingEntity entity)
 	{
-		return entity.getCapability(INSTANCE, null).orElse(new JollyRogerBase());
+		return entity.getCapability(INSTANCE, null).orElse(null);
 	}
 }
