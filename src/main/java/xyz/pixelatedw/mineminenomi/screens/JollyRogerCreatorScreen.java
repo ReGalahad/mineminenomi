@@ -169,7 +169,7 @@ public class JollyRogerCreatorScreen extends Screen
 				text = this.trueIndex >= 0 ? (this.trueIndex + 1) + " / " + this.allBackgrounds.size() : "Empty";
 			else if (this.layerType == LayerType.DETAIL)
 				text = this.trueIndex >= 0 ? (this.trueIndex + 1) + " / " + this.allDetails.size() : "Empty";
-			WyHelper.drawStringWithBorder(this.font, text, posX - font.getStringWidth(text) / 2 + 30, posY + 80, WyHelper.hexToRGB("#FFFFFF").getRGB());
+			WyHelper.drawStringWithBorder(this.font, text, posX - font.getStringWidth(text) / 2 + 28, posY + 80, WyHelper.hexToRGB("#FFFFFF").getRGB());
 		}
 		
 		GlStateManager.disableBlend();
@@ -235,6 +235,24 @@ public class JollyRogerCreatorScreen extends Screen
 					this.selectedElement.setTexture(this.allBases.get(this.trueIndex).get().getTexture());
 				else if(this.currentIndex == 0 && this.selectedElement.getTexture() != null)
 					this.selectedElement.setTexture(null);
+				
+				this.props.setBase(this.jollyRoger.getBase());
+				
+				for(int i = 0; i < this.props.getBackgrounds().length; i++)
+				{
+					JollyRogerElement element = this.props.getBackgrounds()[i];
+					boolean hasElement = this.allBackgrounds.stream().anyMatch(elem -> elem != null && elem.get() != null && elem.get().equals(element) && !elem.get().canUse(this.player));
+					if(hasElement)
+						this.props.getBackgrounds()[i].setTexture(null);
+				}
+				
+				for(int i = 0; i < this.props.getDetails().length; i++)
+				{
+					JollyRogerElement element = this.props.getDetails()[i];
+					boolean hasElement = this.allDetails.stream().anyMatch(elem -> elem != null && elem.get() != null && elem.get().equals(element) && !elem.get().canUse(this.player));
+					if(hasElement)
+						this.props.getDetails()[i].setTexture(null);
+				}
 			}
 			else if (this.layerType == LayerType.BACKGROUND)
 			{
@@ -251,6 +269,8 @@ public class JollyRogerCreatorScreen extends Screen
 					this.selectedElement.setTexture(this.allBackgrounds.get(this.trueIndex).get().getTexture());
 				else if(this.currentIndex == 0 && this.selectedElement.getTexture() != null)
 					this.selectedElement.setTexture(null);
+				
+				this.props.setBackgrounds(this.jollyRoger.getBackgrounds());
 			}
 			else if (this.layerType == LayerType.DETAIL)
 			{
@@ -267,6 +287,8 @@ public class JollyRogerCreatorScreen extends Screen
 					this.selectedElement.setTexture(this.allDetails.get(this.trueIndex).get().getTexture());
 				else if(this.currentIndex == 0 && this.selectedElement.getTexture() != null)
 					this.selectedElement.setTexture(null);
+				
+				this.props.setDetails(this.jollyRoger.getDetails());
 			}
 		}
 		catch(Exception e)
@@ -302,6 +324,24 @@ public class JollyRogerCreatorScreen extends Screen
 					this.selectedElement.setTexture(this.allBases.get(this.trueIndex).get().getTexture());
 				else if(this.currentIndex <= 0 && this.selectedElement.getTexture() != null)
 					this.selectedElement.setTexture(null);
+				
+				this.props.setBase(this.jollyRoger.getBase());
+				
+				for(int i = 0; i < this.props.getBackgrounds().length; i++)
+				{
+					JollyRogerElement element = this.props.getBackgrounds()[i];
+					boolean hasElement = this.allBackgrounds.stream().anyMatch(elem -> elem != null && elem.get() != null && elem.get().equals(element) && !elem.get().canUse(this.player));
+					if(hasElement)
+						this.props.getBackgrounds()[i].setTexture(null);
+				}
+				
+				for(int i = 0; i < this.props.getDetails().length; i++)
+				{
+					JollyRogerElement element = this.props.getDetails()[i];
+					boolean hasElement = this.allDetails.stream().anyMatch(elem -> elem != null && elem.get() != null && elem.get().equals(element) && !elem.get().canUse(this.player));
+					if(hasElement)
+						this.props.getDetails()[i].setTexture(null);
+				}
 			}
 			else if (this.layerType == LayerType.BACKGROUND)
 			{
@@ -323,6 +363,8 @@ public class JollyRogerCreatorScreen extends Screen
 					this.selectedElement.setTexture(this.allBackgrounds.get(this.trueIndex).get().getTexture());
 				else if(this.currentIndex <= 0 && this.selectedElement.getTexture() != null)
 					this.selectedElement.setTexture(null);
+				
+				this.props.setBackgrounds(this.jollyRoger.getBackgrounds());
 			}
 			else if (this.layerType == LayerType.DETAIL)
 			{
@@ -332,18 +374,15 @@ public class JollyRogerCreatorScreen extends Screen
 				if(this.trueIndex >= this.allDetails.size())
 				{
 					this.currentIndex = 0;
-					this.trueIndex = this.currentIndex - 1;
-				}
-				else if(this.currentIndex == 0 && this.selectedElement.getTexture() == null)
-				{
-					this.currentIndex = 0;
-					this.trueIndex = 0;
+					this.trueIndex = -1;
 				}
 
 				if(this.trueIndex >= 0 && this.trueIndex <= this.allDetails.size())
 					this.selectedElement.setTexture(this.allDetails.get(this.trueIndex).get().getTexture());
 				else if(this.currentIndex <= 0 && this.selectedElement.getTexture() != null)
 					this.selectedElement.setTexture(null);
+				
+				this.props.setDetails(this.jollyRoger.getDetails());
 			}
 		}
 		catch(Exception e)
@@ -378,6 +417,7 @@ public class JollyRogerCreatorScreen extends Screen
 				this.selectedElement = this.jollyRoger.getBackgrounds()[j];
 				this.trueIndex = this.findIndex(this.getListFromType(LayerType.BACKGROUND), this.player);
 				this.layerType = LayerType.BACKGROUND;
+				this.allBackgrounds = this.getTotalElementsForType(this.player, LayerType.BACKGROUND);
 				return;
 			}
 			j++;
@@ -391,6 +431,7 @@ public class JollyRogerCreatorScreen extends Screen
 				this.selectedElement = this.jollyRoger.getDetails()[j];
 				this.trueIndex = this.findIndex(this.getListFromType(LayerType.DETAIL), this.player);
 				this.layerType = LayerType.DETAIL;
+				this.allDetails = this.getTotalElementsForType(this.player, LayerType.DETAIL);	
 				return;
 			}
 			j++;
@@ -400,9 +441,9 @@ public class JollyRogerCreatorScreen extends Screen
 	@Override
 	public void onClose()
 	{
-		this.props.setBase(this.jollyRoger.getBase());
-		this.props.setBackgrounds(this.jollyRoger.getBackgrounds());
-		this.props.setDetails(this.jollyRoger.getDetails());
+		//this.props.setBase(this.jollyRoger.getBase());
+		//this.props.setBackgrounds(this.jollyRoger.getBackgrounds());
+		//this.props.setDetails(this.jollyRoger.getDetails());
 		WyNetwork.sendToServer(new CJollyRogerSyncPacket(this.props));
 		super.onClose();
 	}
