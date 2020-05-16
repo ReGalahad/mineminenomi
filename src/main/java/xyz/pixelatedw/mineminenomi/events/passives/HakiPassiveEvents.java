@@ -158,7 +158,7 @@ public class HakiPassiveEvents
 		if(!isActive)
 			return;
 		
-		LivingEntity entity = (LivingEntity) event.getEntity();
+		LivingEntity entity = event.getEntity();
 		
 		if(entity == player)
 			return;
@@ -211,7 +211,7 @@ public class HakiPassiveEvents
 		if(!isActive)
 			return;
 		
-		LivingEntity entity = (LivingEntity) event.getEntity();
+		LivingEntity entity = event.getEntity();
 		
 		if(entity == player)
 			return;
@@ -223,6 +223,7 @@ public class HakiPassiveEvents
 		if(entity.getDistance(player) > 20 + finalPower)
 			return;
 		
+		GlStateManager.enableLighting();
 		if (event.getEntity().hurtTime <= 0)
 			GlStateManager.enableDepthTest();
 		GlStateManager.tearDownSolidRenderingTextureCombine();

@@ -94,7 +94,7 @@ public class JollyRogerCreatorScreen extends Screen
 		GL11.glPushMatrix();
 		{
 			double scale = 0.5;
-			GL11.glTranslated(posX - 130, posY - 120, 1);
+			GL11.glTranslated(posX - 100, posY - 130, 1);
 			GL11.glTranslated(128, 128, 0);
 			GL11.glScaled(scale, scale, scale);
 			GL11.glTranslated(-128, -128, 0);
@@ -166,7 +166,7 @@ public class JollyRogerCreatorScreen extends Screen
 			text = this.currentIndex + " / " + this.allBackgrounds.size();
 		else if (this.layerType == LayerType.DETAIL)
 			text = this.currentIndex + " / " + this.allDetails.size();
-		WyHelper.drawStringWithBorder(this.font, text, posX - font.getStringWidth(text) / 2 - 2, posY + 80, WyHelper.hexToRGB("#FFFFFF").getRGB());
+		WyHelper.drawStringWithBorder(this.font, text, posX - font.getStringWidth(text) / 2 + 25, posY + 80, WyHelper.hexToRGB("#FFFFFF").getRGB());
 
 		GlStateManager.disableBlend();
 

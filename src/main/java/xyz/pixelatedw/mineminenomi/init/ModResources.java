@@ -50,6 +50,8 @@ public class ModResources
 	public static final ResourceLocation BRIGHT_WOOD_ARROW_DOWN = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/icons/arrow2_down.png");
 	public static final ResourceLocation BRIGHT_WOOD_ARROW_RIGHT = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/icons/arrow2_right.png");
 	public static final ResourceLocation BRIGHT_WOOD_ARROW_LEFT = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/icons/arrow2_left.png");
+	public static final ResourceLocation BIG_WOOD_BUTTON_LEFT = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/icons/big_left_button.png");
+	public static final ResourceLocation BIG_WOOD_BUTTON_RIGHT = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/icons/big_right_button.png");
 
 	public static final ResourceLocation PIRATE = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/icons/pirate.png");
 	public static final ResourceLocation MARINE = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/icons/marine.png");
