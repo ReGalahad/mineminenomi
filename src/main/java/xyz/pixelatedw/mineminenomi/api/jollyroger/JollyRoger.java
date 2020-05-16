@@ -1,7 +1,6 @@
 package xyz.pixelatedw.mineminenomi.api.jollyroger;
 
 import xyz.pixelatedw.mineminenomi.api.jollyroger.JollyRogerElement.LayerType;
-import xyz.pixelatedw.mineminenomi.init.ModJollyRogers;
 
 public class JollyRoger
 {
@@ -11,8 +10,6 @@ public class JollyRoger
 	
 	public JollyRoger()
 	{
-		this.base.setTexture(ModJollyRogers.BASE_0.getTexture());
-		
 		for(int i = 0; i < this.backgrounds.length; i++)
 		{
 			this.backgrounds[i] = new JollyRogerElement(LayerType.BACKGROUND);

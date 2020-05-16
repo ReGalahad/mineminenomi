@@ -45,6 +45,7 @@ public class JollyRogerCreatorScreen extends Screen
 	private IJollyRoger props;
 
 	private int currentIndex;
+	private int trueIndex;
 	private Collection<RegistryObject<JollyRogerElement>> allElements;
 	private List<RegistryObject<JollyRogerElement>> allBases;
 	private List<RegistryObject<JollyRogerElement>> allBackgrounds;
@@ -161,13 +162,16 @@ public class JollyRogerCreatorScreen extends Screen
 		}
 		GL11.glPopMatrix();
 
-		String text = this.currentIndex + " / " + this.allBases.size();
-		if (this.layerType == LayerType.BACKGROUND)
-			text = this.currentIndex + " / " + this.allBackgrounds.size();
-		else if (this.layerType == LayerType.DETAIL)
-			text = this.currentIndex + " / " + this.allDetails.size();
-		WyHelper.drawStringWithBorder(this.font, text, posX - font.getStringWidth(text) / 2 + 25, posY + 80, WyHelper.hexToRGB("#FFFFFF").getRGB());
-
+		if(this.selectedElement != null)
+		{
+			String text = this.trueIndex >= 0 ? (this.trueIndex + 1) + " / " + this.allBases.size() : "Empty";
+			if (this.layerType == LayerType.BACKGROUND)
+				text = this.trueIndex >= 0 ? (this.trueIndex + 1) + " / " + this.allBackgrounds.size() : "Empty";
+			else if (this.layerType == LayerType.DETAIL)
+				text = this.trueIndex >= 0 ? (this.trueIndex + 1) + " / " + this.allDetails.size() : "Empty";
+			WyHelper.drawStringWithBorder(this.font, text, posX - font.getStringWidth(text) / 2 + 30, posY + 80, WyHelper.hexToRGB("#FFFFFF").getRGB());
+		}
+		
 		GlStateManager.disableBlend();
 
 		super.render(x, y, f);
@@ -200,17 +204,77 @@ public class JollyRogerCreatorScreen extends Screen
 
 		posX = this.width / 2;
 
-		TexturedIconButton nextBaseTexture = new TexturedIconButton(ModResources.BRIGHT_WOOD_ARROW_RIGHT, posX + 40, posY - 105, 16, 25, "", this::nextElement);
-		nextBaseTexture = nextBaseTexture.setTextureInfo(posX + 38, posY - 125, 16, 64);
+		TexturedIconButton nextBaseTexture = new TexturedIconButton(ModResources.BIG_WOOD_BUTTON_RIGHT, posX + 100, posY - 65, 32, 110, "", this::nextElement);
+		nextBaseTexture = nextBaseTexture.setTextureInfo(posX + 100, posY - 75, 32, 128);
 		this.addButton(nextBaseTexture);
 
-		/*
-		 * TexturedIconButton prevBaseTexture = new TexturedIconButton(ModResources.BRIGHT_WOOD_ARROW_LEFT, posX - 40, posY - 105, 16, 25, "", (button) -> {});
-		 * prevBaseTexture = prevBaseTexture.setTextureInfo(posX - 42, posY - 125, 16, 64);
-		 * this.addButton(prevBaseTexture);
-		 */
+		TexturedIconButton prevBaseTexture = new TexturedIconButton(ModResources.BIG_WOOD_BUTTON_LEFT, posX - 75, posY - 65, 32, 110, "", this::previousElement);
+		prevBaseTexture = prevBaseTexture.setTextureInfo(posX - 75, posY - 75, 32, 128);
+		this.addButton(prevBaseTexture);
 	}
 
+	public void previousElement(Button btn)
+	{
+		if (this.selectedElement == null)
+			return;
+		
+		try
+		{
+			if (this.layerType == LayerType.BASE)
+			{
+				this.currentIndex = this.findIndex(this.allBases, this.player);
+				this.trueIndex = this.currentIndex - 1;
+
+				if(this.trueIndex < 0 && this.selectedElement.getTexture() == null)
+				{
+					this.currentIndex = this.allBases.size();
+					this.trueIndex = this.currentIndex - 1;
+				}
+
+				if(this.trueIndex >= 0 && this.trueIndex <= this.allBases.size())
+					this.selectedElement.setTexture(this.allBases.get(this.trueIndex).get().getTexture());
+				else if(this.currentIndex == 0 && this.selectedElement.getTexture() != null)
+					this.selectedElement.setTexture(null);
+			}
+			else if (this.layerType == LayerType.BACKGROUND)
+			{
+				this.currentIndex = this.findIndex(this.allBackgrounds, this.player);
+				this.trueIndex = this.currentIndex - 1;
+
+				if(this.trueIndex < 0 && this.selectedElement.getTexture() == null)
+				{
+					this.currentIndex = this.allBackgrounds.size();
+					this.trueIndex = this.currentIndex - 1;
+				}
+
+				if(this.trueIndex >= 0 && this.trueIndex <= this.allBackgrounds.size())
+					this.selectedElement.setTexture(this.allBackgrounds.get(this.trueIndex).get().getTexture());
+				else if(this.currentIndex == 0 && this.selectedElement.getTexture() != null)
+					this.selectedElement.setTexture(null);
+			}
+			else if (this.layerType == LayerType.DETAIL)
+			{
+				this.currentIndex = this.findIndex(this.allDetails, this.player);
+				this.trueIndex = this.currentIndex - 1;
+
+				if(this.trueIndex < 0 && this.selectedElement.getTexture() == null)
+				{
+					this.currentIndex = this.allDetails.size();
+					this.trueIndex = this.currentIndex - 1;
+				}
+
+				if(this.trueIndex >= 0 && this.trueIndex <= this.allDetails.size())
+					this.selectedElement.setTexture(this.allDetails.get(this.trueIndex).get().getTexture());
+				else if(this.currentIndex == 0 && this.selectedElement.getTexture() != null)
+					this.selectedElement.setTexture(null);
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
 	public void nextElement(Button btn)
 	{
 		if (this.selectedElement == null)
@@ -221,48 +285,65 @@ public class JollyRogerCreatorScreen extends Screen
 			if (this.layerType == LayerType.BASE)
 			{
 				this.currentIndex = this.findIndex(this.allBases, this.player);
-				
-				if (this.currentIndex >= this.allBases.size())
+				this.trueIndex = this.currentIndex + 1;
+
+				if(this.trueIndex >= this.allBases.size())
+				{
 					this.currentIndex = 0;
-				else if (this.currentIndex < 0)
+					this.trueIndex = this.currentIndex - 1;
+				}
+				else if(this.currentIndex == 0 && this.selectedElement.getTexture() == null)
+				{
 					this.currentIndex = 0;
-				
-				if(this.currentIndex >= 0 && this.currentIndex < this.allBases.size())
-					this.selectedElement.setTexture(this.allBases.get(this.currentIndex).get().getTexture());
-				
-				this.currentIndex += 1;
+					this.trueIndex = 0;
+				}
+
+				if(this.trueIndex >= 0 && this.trueIndex <= this.allBases.size())
+					this.selectedElement.setTexture(this.allBases.get(this.trueIndex).get().getTexture());
+				else if(this.currentIndex <= 0 && this.selectedElement.getTexture() != null)
+					this.selectedElement.setTexture(null);
 			}
 			else if (this.layerType == LayerType.BACKGROUND)
 			{
 				this.currentIndex = this.findIndex(this.allBackgrounds, this.player);
-				
-				if(this.currentIndex >= 0 && this.currentIndex < this.allBackgrounds.size())
-					this.selectedElement.setTexture(this.allBackgrounds.get(this.currentIndex).get().getTexture());
-				else
-					this.selectedElement.setTexture(null);
-				
-				if (this.currentIndex == this.allBackgrounds.size())
-					this.currentIndex = -1;
-				else if (this.currentIndex < 0)
+				this.trueIndex = this.currentIndex + 1;
+
+				if(this.trueIndex >= this.allBackgrounds.size())
+				{
 					this.currentIndex = 0;
-	
-				this.currentIndex += 1;
+					this.trueIndex = this.currentIndex - 1;
+				}
+				else if(this.currentIndex == 0 && this.selectedElement.getTexture() == null)
+				{
+					this.currentIndex = 0;
+					this.trueIndex = 0;
+				}
+
+				if(this.trueIndex >= 0 && this.trueIndex <= this.allBackgrounds.size())
+					this.selectedElement.setTexture(this.allBackgrounds.get(this.trueIndex).get().getTexture());
+				else if(this.currentIndex <= 0 && this.selectedElement.getTexture() != null)
+					this.selectedElement.setTexture(null);
 			}
 			else if (this.layerType == LayerType.DETAIL)
 			{
 				this.currentIndex = this.findIndex(this.allDetails, this.player);
-	
-				if(this.currentIndex >= 0 && this.currentIndex < this.allDetails.size())
-					this.selectedElement.setTexture(this.allDetails.get(this.currentIndex).get().getTexture());
-				else
+				this.trueIndex = this.currentIndex + 1;
+
+				if(this.trueIndex >= this.allDetails.size())
+				{
+					this.currentIndex = 0;
+					this.trueIndex = this.currentIndex - 1;
+				}
+				else if(this.currentIndex == 0 && this.selectedElement.getTexture() == null)
+				{
+					this.currentIndex = 0;
+					this.trueIndex = 0;
+				}
+
+				if(this.trueIndex >= 0 && this.trueIndex <= this.allDetails.size())
+					this.selectedElement.setTexture(this.allDetails.get(this.trueIndex).get().getTexture());
+				else if(this.currentIndex <= 0 && this.selectedElement.getTexture() != null)
 					this.selectedElement.setTexture(null);
-					
-				if (this.currentIndex == this.allDetails.size())
-					this.currentIndex = -1;
-				else if (this.currentIndex < 0)
-					this.currentIndex = 0;		
-					
-				this.currentIndex += 1;
 			}
 		}
 		catch(Exception e)
@@ -284,7 +365,7 @@ public class JollyRogerCreatorScreen extends Screen
 		if (this.buttons.get(0) == btn)
 		{
 			this.selectedElement = this.jollyRoger.getBase();
-			this.currentIndex = this.findIndex(this.getListFromType(LayerType.BASE), this.player);
+			this.trueIndex = this.findIndex(this.getListFromType(LayerType.BASE), this.player);
 			this.layerType = LayerType.BASE;
 			return;
 		}
@@ -295,7 +376,7 @@ public class JollyRogerCreatorScreen extends Screen
 			if (this.buttons.get(i) == btn)
 			{
 				this.selectedElement = this.jollyRoger.getBackgrounds()[j];
-				this.currentIndex = this.findIndex(this.getListFromType(LayerType.BACKGROUND), this.player);
+				this.trueIndex = this.findIndex(this.getListFromType(LayerType.BACKGROUND), this.player);
 				this.layerType = LayerType.BACKGROUND;
 				return;
 			}
@@ -308,7 +389,7 @@ public class JollyRogerCreatorScreen extends Screen
 			if (this.buttons.get(i) == btn)
 			{
 				this.selectedElement = this.jollyRoger.getDetails()[j];
-				this.currentIndex = this.findIndex(this.getListFromType(LayerType.DETAIL), this.player);
+				this.trueIndex = this.findIndex(this.getListFromType(LayerType.DETAIL), this.player);
 				this.layerType = LayerType.DETAIL;
 				return;
 			}
@@ -340,7 +421,7 @@ public class JollyRogerCreatorScreen extends Screen
 		{
 			if (elements.get(i).get().equals(this.selectedElement))
 			{
-				return i + 1;
+				return i;
 			}
 		}
 

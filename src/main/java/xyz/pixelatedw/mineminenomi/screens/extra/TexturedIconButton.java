@@ -55,6 +55,8 @@ public class TexturedIconButton extends Button
 		
 		GlStateManager.color3f(1f, 1f, 1f);
 
+		//this.fillGradient(this.x, this.y, this.width + this.x, this.height + this.y, WyHelper.hexToRGB("#FF0000").getRGB(), WyHelper.hexToRGB("#FF5500").getRGB());
+		
 		GlStateManager.popMatrix();
 	}
 
