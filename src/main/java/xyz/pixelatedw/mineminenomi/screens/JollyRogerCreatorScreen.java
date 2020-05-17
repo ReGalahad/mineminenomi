@@ -332,7 +332,7 @@ public class JollyRogerCreatorScreen extends Screen
 					JollyRogerElement element = this.props.getBackgrounds()[i];
 					boolean hasElement = this.allBackgrounds.stream().anyMatch(elem -> elem != null && elem.get() != null && elem.get().equals(element) && !elem.get().canUse(this.player));
 					if(hasElement)
-						this.props.getBackgrounds()[this.layerIndex] = null;
+						this.props.getBackgrounds()[i] = null;
 				}
 				
 				for(int i = 0; i < this.props.getDetails().length; i++)
@@ -340,7 +340,7 @@ public class JollyRogerCreatorScreen extends Screen
 					JollyRogerElement element = this.props.getDetails()[i];
 					boolean hasElement = this.allDetails.stream().anyMatch(elem -> elem != null && elem.get() != null && elem.get().equals(element) && !elem.get().canUse(this.player));
 					if(hasElement)
-						this.props.getDetails()[this.layerIndex] = null;
+						this.props.getDetails()[i] = null;
 				}
 			}
 			else if (this.layerType == LayerType.BACKGROUND)
