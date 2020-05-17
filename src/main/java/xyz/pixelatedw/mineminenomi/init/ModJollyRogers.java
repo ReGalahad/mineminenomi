@@ -80,17 +80,17 @@ public class ModJollyRogers
 	{
 		ModJollyRogers.registerElement(BASE_0);
 		ModJollyRogers.registerElement(BASE_1);
-		
+
 		ModJollyRogers.registerElement(DETAIL_0);
 		ModJollyRogers.registerElement(DETAIL_1);
 		ModJollyRogers.registerElement(DETAIL_2);
 		ModJollyRogers.registerElement(DETAIL_3);
 		ModJollyRogers.registerElement(DETAIL_4);
 		ModJollyRogers.registerElement(DETAIL_5);
-		ModJollyRogers.registerElement(DETAIL_6);	
+		ModJollyRogers.registerElement(DETAIL_6);
 		ModJollyRogers.registerElement(DETAIL_7);
 		ModJollyRogers.registerElement(DETAIL_8);
-		ModJollyRogers.registerElement(DETAIL_9);	
+		ModJollyRogers.registerElement(DETAIL_9);
 		ModJollyRogers.registerElement(DETAIL_10);
 		ModJollyRogers.registerElement(DETAIL_11);
 		ModJollyRogers.registerElement(DETAIL_12);
@@ -99,17 +99,17 @@ public class ModJollyRogers
 		ModJollyRogers.registerElement(DETAIL_15);
 		ModJollyRogers.registerElement(DETAIL_16);
 		ModJollyRogers.registerElement(DETAIL_17);
-		ModJollyRogers.registerElement(DETAIL_18);	
+		ModJollyRogers.registerElement(DETAIL_18);
 		ModJollyRogers.registerElement(DETAIL_19);
 		ModJollyRogers.registerElement(DETAIL_20);
-		ModJollyRogers.registerElement(DETAIL_21);	
+		ModJollyRogers.registerElement(DETAIL_21);
 		ModJollyRogers.registerElement(DETAIL_22);
 		ModJollyRogers.registerElement(DETAIL_23);
 		ModJollyRogers.registerElement(DETAIL_24);
 		ModJollyRogers.registerElement(DETAIL_25);
-		ModJollyRogers.registerElement(DETAIL_26);	
+		ModJollyRogers.registerElement(DETAIL_26);
 		ModJollyRogers.registerElement(DETAIL_27);
-		
+
 		ModJollyRogers.registerElement(BACKGROUND_0);
 		ModJollyRogers.registerElement(BACKGROUND_1);
 		ModJollyRogers.registerElement(BACKGROUND_2);
@@ -127,23 +127,17 @@ public class ModJollyRogers
 
 	public static boolean onlyWith(PlayerEntity player, JollyRogerElement... elements)
 	{
-		int flag = 0;
 		IJollyRoger props = JollyRogerCapability.get(player);
-		
-		for(JollyRogerElement element : elements)
+
+		for (JollyRogerElement element : elements)
 		{
-			if(props.getBase() != null && props.getBase().getTexture() == null && element == null)
-			{
-				flag++;
-				continue;
-			}
-			
-			if(props.getBase() != null && props.getBase().getTexture() != null && props.getBase().equals(element))
-			{
-				flag++;
-			}			
+			if (props.getBase() != null && props.getBase().getTexture() == null && element == null)
+				return true;
+
+			if (props.getBase() != null && props.getBase().getTexture() != null && props.getBase().equals(element))
+				return true;
 		}
-		
-		return flag > 0;
+
+		return false;
 	}
 }

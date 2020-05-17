@@ -374,7 +374,12 @@ public class JollyRogerCreatorScreen extends Screen
 				if(this.trueIndex >= this.allDetails.size())
 				{
 					this.currentIndex = 0;
-					this.trueIndex = -1;
+					this.trueIndex = this.currentIndex - 1;
+				}
+				else if(this.currentIndex == 0 && this.selectedElement.getTexture() == null)
+				{
+					this.currentIndex = 0;
+					this.trueIndex = 0;
 				}
 
 				if(this.trueIndex >= 0 && this.trueIndex <= this.allDetails.size())
