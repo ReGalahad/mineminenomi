@@ -158,6 +158,11 @@ public class WyHelper
 		return p;
 	}
 
+	public static String rgbToHex(int red, int green, int blue)
+	{
+		return String.format("#%02X%02X%02X", red, green, blue);
+	}
+	
 	public static Color hexToRGB(String hexColor)
 	{
 		if (hexColor.startsWith("#"))

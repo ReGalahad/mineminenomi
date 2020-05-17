@@ -20,6 +20,7 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fml.client.config.GuiSlider;
 import net.minecraftforge.fml.client.config.GuiUtils;
 import xyz.pixelatedw.mineminenomi.api.jollyroger.JollyRogerElement;
 import xyz.pixelatedw.mineminenomi.api.jollyroger.JollyRogerElement.LayerType;
@@ -83,7 +84,7 @@ public class JollyRogerCreatorScreen extends Screen
 			GL11.glTranslated(-128, -128, 0);
 
 			// Draw the black flag background
-			//this.fillGradient(-10, 0, 0 + 270, 0 + 260, WyHelper.hexToRGB("#111115").getRGB(), WyHelper.hexToRGB("#202025").getRGB());		
+			//this.fillGradient(-10, 0, 0 + 270, 0 + 260, WyHelper.hexToRGB("#111115").getRGB(), WyHelper.hexToRGB("#202025").getRGB());
 			
 			// Jolly Roger draw with all the backgrounds and layers
 			// Drawing the base
@@ -152,10 +153,39 @@ public class JollyRogerCreatorScreen extends Screen
 			text = this.trueIndex >= 0 ? (this.trueIndex + 1) + " / " + this.allBackgrounds.size() : "Empty";
 		else if (this.layerType == LayerType.DETAIL)
 			text = this.trueIndex >= 0 ? (this.trueIndex + 1) + " / " + this.allDetails.size() : "Empty";
-		WyHelper.drawStringWithBorder(this.font, text, posX - font.getStringWidth(text) / 2 + 28, posY + 80, WyHelper.hexToRGB("#FFFFFF").getRGB());
+		WyHelper.drawStringWithBorder(this.font, text, posX - this.font.getStringWidth(text) / 2 + 28, posY + 80, WyHelper.hexToRGB("#FFFFFF").getRGB());
 
 		GlStateManager.disableBlend();
 
+		posX = this.width;
+		
+		int outlineSize = 2;
+		int pX = posX - 95;
+		int pY = posY - 85;
+		int sW = posX + 100;
+		int sH = posY + 45;
+
+		//if(this.layerIndex <= 0)
+		//	this.fillGradient(pX, pY, sW, sH, WyHelper.hexToRGB("#000000").getRGB(), WyHelper.hexToRGB("#000000").getRGB());
+		
+		this.fillGradient(pX - outlineSize, pY - outlineSize, sW + outlineSize, sH + outlineSize, WyHelper.hexToRGB("#000000").getRGB(), WyHelper.hexToRGB("#000000").getRGB());
+		this.fillGradient(pX, pY, sW, sH, WyHelper.hexToRGB("#B3B3B3").getRGB(), WyHelper.hexToRGB("#505050").getRGB());
+		
+		posY = posY - 75;		
+		WyHelper.drawStringWithBorder(this.font, "Red ", posX - 75, posY, WyHelper.hexToRGB("#FFFFFF").getRGB());
+		WyHelper.drawStringWithBorder(this.font, "0", posX - 85, posY + 14, WyHelper.hexToRGB("#FFFFFF").getRGB());
+		WyHelper.drawStringWithBorder(this.font, "255", posX - 23, posY + 14, WyHelper.hexToRGB("#FFFFFF").getRGB());
+
+		posY += 40;	
+		WyHelper.drawStringWithBorder(this.font, "Green ", posX - 75, posY, WyHelper.hexToRGB("#FFFFFF").getRGB());
+		WyHelper.drawStringWithBorder(this.font, "0", posX - 85, posY + 14, WyHelper.hexToRGB("#FFFFFF").getRGB());
+		WyHelper.drawStringWithBorder(this.font, "255", posX - 23, posY + 14, WyHelper.hexToRGB("#FFFFFF").getRGB());
+
+		posY += 40;	
+		WyHelper.drawStringWithBorder(this.font, "Blue ", posX - 75, posY, WyHelper.hexToRGB("#FFFFFF").getRGB());
+		WyHelper.drawStringWithBorder(this.font, "0", posX - 85, posY + 14, WyHelper.hexToRGB("#FFFFFF").getRGB());
+		WyHelper.drawStringWithBorder(this.font, "255", posX - 23, posY + 14, WyHelper.hexToRGB("#FFFFFF").getRGB());
+	
 		super.render(x, y, f);
 	}
 
@@ -193,8 +223,71 @@ public class JollyRogerCreatorScreen extends Screen
 		TexturedIconButton prevBaseTexture = new TexturedIconButton(ModResources.BIG_WOOD_BUTTON_LEFT, posX - 75, posY - 65, 32, 110, "", (btn) -> this.moveIndex(btn, false));
 		prevBaseTexture = prevBaseTexture.setTextureInfo(posX - 75, posY - 75, 32, 128);
 		this.addButton(prevBaseTexture);
+		
+		posX = this.width;
+
+		GuiSlider redColorPicker = new GuiSlider(posX - 76, posY - 65, 50, 16, "", "", 0, 255, 255, false, true, (btn) -> {}, (slider) -> this.changeColor(slider, "red"));
+		this.addButton(redColorPicker);	
+		
+		GuiSlider greenColorPicker = new GuiSlider(posX - 76, posY - 25, 50, 16, "", "", 0, 255, 255, false, true, (btn) -> {}, (slider) -> this.changeColor(slider, "green"));
+		this.addButton(greenColorPicker);	
+		
+		GuiSlider blueColorPicker = new GuiSlider(posX - 76, posY + 15, 50, 16, "", "", 0, 255, 255, false, true, (btn) -> {}, (slider) -> this.changeColor(slider, "blue"));
+		this.addButton(blueColorPicker);	
 	}
 
+	public void changeColor(GuiSlider slider, String color)
+	{
+		if (this.layerType == LayerType.BASE)
+		{
+			String currentColor = this.props.getBase().getColor();
+			Color rgb = WyHelper.hexToRGB(currentColor);
+			
+			String hex = "#FFFFFF";
+			
+			if(color.equalsIgnoreCase("red"))
+				hex = WyHelper.rgbToHex(slider.getValueInt(), rgb.getGreen(), rgb.getBlue());
+			else if(color.equalsIgnoreCase("green"))
+				hex = WyHelper.rgbToHex(rgb.getRed(), slider.getValueInt(), rgb.getBlue());	
+			else if(color.equalsIgnoreCase("blue"))
+				hex = WyHelper.rgbToHex(rgb.getRed(), rgb.getGreen(), slider.getValueInt());
+			
+			this.props.getBase().setColor(hex);
+		}
+		else if (this.layerType == LayerType.BACKGROUND)
+		{
+			String currentColor = this.props.getBackgrounds()[this.layerIndex].getColor();
+			Color rgb = WyHelper.hexToRGB(currentColor);
+			
+			String hex = "#FFFFFF";
+			
+			if(color.equalsIgnoreCase("red"))
+				hex = WyHelper.rgbToHex(slider.getValueInt(), rgb.getGreen(), rgb.getBlue());
+			else if(color.equalsIgnoreCase("green"))
+				hex = WyHelper.rgbToHex(rgb.getRed(), slider.getValueInt(), rgb.getBlue());	
+			else if(color.equalsIgnoreCase("blue"))
+				hex = WyHelper.rgbToHex(rgb.getRed(), rgb.getGreen(), slider.getValueInt());
+			
+			this.props.getBackgrounds()[this.layerIndex].setColor(hex);
+		}
+		else if (this.layerType == LayerType.DETAIL)
+		{
+			String currentColor = this.props.getDetails()[this.layerIndex].getColor();
+			Color rgb = WyHelper.hexToRGB(currentColor);
+			
+			String hex = "#FFFFFF";
+			
+			if(color.equalsIgnoreCase("red"))
+				hex = WyHelper.rgbToHex(slider.getValueInt(), rgb.getGreen(), rgb.getBlue());
+			else if(color.equalsIgnoreCase("green"))
+				hex = WyHelper.rgbToHex(rgb.getRed(), slider.getValueInt(), rgb.getBlue());	
+			else if(color.equalsIgnoreCase("blue"))
+				hex = WyHelper.rgbToHex(rgb.getRed(), rgb.getGreen(), slider.getValueInt());
+			
+			this.props.getDetails()[this.layerIndex].setColor(hex);
+		}
+	}
+	
 	public void moveIndex(Button btn, boolean toRight)
 	{
 		try
@@ -312,9 +405,6 @@ public class JollyRogerCreatorScreen extends Screen
 	@Override
 	public void onClose()
 	{
-		//this.props.setBase(this.props.getBase());
-		//this.props.setBackgrounds(this.props.getBackgrounds());
-		//this.props.setDetails(this.props.getDetails());
 		WyNetwork.sendToServer(new CJollyRogerSyncPacket(this.props));
 		super.onClose();
 	}
@@ -322,11 +412,6 @@ public class JollyRogerCreatorScreen extends Screen
 	public boolean doesGuiPauseGame()
 	{
 		return true;
-	}
-
-	private JollyRogerElement findElement(List<RegistryObject<JollyRogerElement>> elements, int index)
-	{
-		return elements.get(0).get();
 	}
 	
 	private int findIndex(List<RegistryObject<JollyRogerElement>> elements, JollyRogerElement element, PlayerEntity player)

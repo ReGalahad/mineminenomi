@@ -41,6 +41,9 @@ public class NoTextureButton extends Button
 				bottomGrad = WyHelper.hexToRGB("#005500").getRGB();
 			}
 
+			int outlineSize = 1;
+			
+			this.fillGradient(this.x - outlineSize, this.y - outlineSize, this.width + this.x + outlineSize, this.height + this.y + outlineSize, WyHelper.hexToRGB("#000000").getRGB(), WyHelper.hexToRGB("#000000").getRGB());
 			this.fillGradient(this.x, this.y, this.width + this.x, this.height + this.y, topGrad, bottomGrad);
 			
 			FontRenderer font = Minecraft.getInstance().fontRenderer;
