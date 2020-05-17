@@ -11,10 +11,12 @@ import xyz.pixelatedw.mineminenomi.commands.BellyCommand;
 import xyz.pixelatedw.mineminenomi.commands.BountyCommand;
 import xyz.pixelatedw.mineminenomi.commands.DorikiCommand;
 import xyz.pixelatedw.mineminenomi.commands.ExtolCommand;
+import xyz.pixelatedw.mineminenomi.commands.FGCommand;
 import xyz.pixelatedw.mineminenomi.commands.GetWantedPosterCommand;
 import xyz.pixelatedw.mineminenomi.commands.IssueBountyCommand;
 import xyz.pixelatedw.mineminenomi.commands.RemoveDFCommand;
 import xyz.pixelatedw.wypi.APIConfig;
+import xyz.pixelatedw.wypi.APIConfig.BuildMode;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ForgeSetup
@@ -33,5 +35,7 @@ public class ForgeSetup
 		GetWantedPosterCommand.register(dispatcher);
 		RemoveDFCommand.register(dispatcher);
 		AbilityCommand.register(dispatcher);
+		if(APIConfig.BUILD_MODE != BuildMode.FINAL)
+			FGCommand.register(dispatcher);
 	}
 }

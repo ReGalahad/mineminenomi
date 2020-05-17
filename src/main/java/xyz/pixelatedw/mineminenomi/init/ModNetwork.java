@@ -14,6 +14,7 @@ import xyz.pixelatedw.mineminenomi.packets.server.SDespawnQuestObjectivePacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SEntityStatsSyncPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SJollyRogerSyncPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SOpenCharacterCreatorScreenPacket;
+import xyz.pixelatedw.mineminenomi.packets.server.SOpenJollyRogerCreatorScreenPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SOpenTraderScreenPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SOpenWantedPosterScreenPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SRecalculateEyeHeightPacket;
@@ -58,5 +59,6 @@ public class ModNetwork
 		WyNetwork.registerPacket(SUpdateTraderOffersPacket.class, SUpdateTraderOffersPacket::encode, SUpdateTraderOffersPacket::decode, SUpdateTraderOffersPacket::handle);
 		WyNetwork.registerPacket(SOpenTraderScreenPacket.class, SOpenTraderScreenPacket::encode, SOpenTraderScreenPacket::decode, SOpenTraderScreenPacket::handle);
 		WyNetwork.registerPacket(SJollyRogerSyncPacket.class, SJollyRogerSyncPacket::encode, SJollyRogerSyncPacket::decode, SJollyRogerSyncPacket::handle);
+		WyNetwork.registerPacket(SOpenJollyRogerCreatorScreenPacket.class, SOpenJollyRogerCreatorScreenPacket::encode, SOpenJollyRogerCreatorScreenPacket::decode, SOpenJollyRogerCreatorScreenPacket::handle);
 	}
 }
