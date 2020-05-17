@@ -21,7 +21,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.client.config.GuiSlider;
-import net.minecraftforge.fml.client.config.GuiUtils;
+import xyz.pixelatedw.mineminenomi.api.helpers.RendererHelper;
 import xyz.pixelatedw.mineminenomi.api.jollyroger.JollyRogerElement;
 import xyz.pixelatedw.mineminenomi.api.jollyroger.JollyRogerElement.LayerType;
 import xyz.pixelatedw.mineminenomi.data.entity.jollyroger.IJollyRoger;
@@ -89,65 +89,7 @@ public class JollyRogerCreatorScreen extends Screen
 			// Draw the black flag background
 			//this.fillGradient(-10, 0, 0 + 270, 0 + 260, WyHelper.hexToRGB("#111115").getRGB(), WyHelper.hexToRGB("#202025").getRGB());
 			
-			// Jolly Roger draw with all the backgrounds and layers
-			// Drawing the base
-			if (this.props.getBase() != null && this.props.getBase().getTexture() != null)
-			{
-				if (this.props.getBase().canBeColored())
-				{
-					Color color = WyHelper.hexToRGB(this.props.getBase().getColor());
-					GlStateManager.color3f(color.getRed() / 255.0F, color.getGreen() / 255.0F, color.getBlue() / 255.0F);
-				}
-				else
-				{
-					GlStateManager.color3f(1.0F, 1.0F, 1.0F);
-				}
-				Minecraft.getInstance().getTextureManager().bindTexture(this.props.getBase().getTexture());
-				GuiUtils.drawTexturedModalRect(0, 0, 0, 0, 256, 256, 2);
-			}
-
-			// Drawing the backgrounds
-			for (JollyRogerElement element : this.props.getBackgrounds())
-			{
-				int i = 0;
-				if (element != null && element.getTexture() != null)
-				{
-					if (element.canBeColored())
-					{
-						Color color = WyHelper.hexToRGB(element.getColor());
-						GlStateManager.color3f(color.getRed() / 255.0F, color.getGreen() / 255.0F, color.getBlue() / 255.0F);
-					}
-					else
-					{
-						GlStateManager.color3f(1.0F, 1.0F, 1.0F);
-					}
-					Minecraft.getInstance().getTextureManager().bindTexture(element.getTexture());
-					GuiUtils.drawTexturedModalRect(0, 0, 0, 0, 256, 256, i);
-				}
-				i++;
-			}
-			
-			// Drawing the details
-			for (JollyRogerElement element : this.props.getDetails())
-			{
-				int i = 8;
-				if (element != null && element.getTexture() != null)
-				{
-					if (element.canBeColored())
-					{
-						Color color = WyHelper.hexToRGB(element.getColor());
-						GlStateManager.color3f(color.getRed() / 255.0F, color.getGreen() / 255.0F, color.getBlue() / 255.0F);
-					}
-					else
-					{
-						GlStateManager.color3f(1.0F, 1.0F, 1.0F);
-					}
-					Minecraft.getInstance().getTextureManager().bindTexture(element.getTexture());
-					GuiUtils.drawTexturedModalRect(0, 0, 0, 0, 256, 256, i);
-				}
-				i--;
-			}
-
+			RendererHelper.drawPlayerJollyRoger(this.props);
 		}
 		GL11.glPopMatrix();
 

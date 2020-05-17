@@ -15,7 +15,6 @@ import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
 import xyz.pixelatedw.mineminenomi.packets.server.SEntityStatsSyncPacket;
-import xyz.pixelatedw.mineminenomi.screens.JollyRogerCreatorScreen;
 import xyz.pixelatedw.wypi.network.WyNetwork;
 
 public class ColaItem extends Item
@@ -29,8 +28,7 @@ public class ColaItem extends Item
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand)
 	{
-		JollyRogerCreatorScreen.open();
-		//player.setActiveHand(hand);
+		player.setActiveHand(hand);
 		return new ActionResult<>(ActionResultType.SUCCESS, player.getHeldItem(hand));
 	}
 	
