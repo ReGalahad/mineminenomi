@@ -45,6 +45,9 @@ public class JollyRogerCreatorScreen extends Screen
 
 	private int layerIndex;
 	private int trueIndex;
+	private GuiSlider redSlider;
+	private GuiSlider greenSlider;
+	private GuiSlider blueSlider;
 	private Collection<RegistryObject<JollyRogerElement>> allElements;
 	private List<RegistryObject<JollyRogerElement>> allBases;
 	private List<RegistryObject<JollyRogerElement>> allBackgrounds;
@@ -78,7 +81,7 @@ public class JollyRogerCreatorScreen extends Screen
 		GL11.glPushMatrix();
 		{
 			double scale = 0.5;
-			GL11.glTranslated(posX - 100, posY - 130, 1);
+			GL11.glTranslated(posX - 115, posY - 130, 1);
 			GL11.glTranslated(128, 128, 0);
 			GL11.glScaled(scale, scale, scale);
 			GL11.glTranslated(-128, -128, 0);
@@ -153,7 +156,7 @@ public class JollyRogerCreatorScreen extends Screen
 			text = this.trueIndex >= 0 ? (this.trueIndex + 1) + " / " + this.allBackgrounds.size() : "Empty";
 		else if (this.layerType == LayerType.DETAIL)
 			text = this.trueIndex >= 0 ? (this.trueIndex + 1) + " / " + this.allDetails.size() : "Empty";
-		WyHelper.drawStringWithBorder(this.font, text, posX - this.font.getStringWidth(text) / 2 + 28, posY + 80, WyHelper.hexToRGB("#FFFFFF").getRGB());
+		WyHelper.drawStringWithBorder(this.font, text, posX - this.font.getStringWidth(text) / 2 + 12, posY + 80, WyHelper.hexToRGB("#FFFFFF").getRGB());
 
 		GlStateManager.disableBlend();
 
@@ -199,47 +202,56 @@ public class JollyRogerCreatorScreen extends Screen
 
 		int listPosY = posY - 85;
 
-		NoTextureButton baseButton = new NoTextureButton(posX + 5, listPosY, 128, 16, "Base", this::selectButton);
+		NoTextureButton baseButton = new NoTextureButton(posX + 5, listPosY, 115, 16, "Base", this::selectButton);
 		this.addButton(baseButton);
 
 		for (int i = 0; i < this.props.getBackgrounds().length; i++)
 		{
-			NoTextureButton bgButton = new NoTextureButton(posX + 5, (listPosY + 20 + (i * 20)), 128, 16, "Background " + (i + 1), this::selectButton);
+			NoTextureButton bgButton = new NoTextureButton(posX + 5, (listPosY + 20 + (i * 20)), 115, 16, "Background " + (i + 1), this::selectButton);
 			this.addButton(bgButton);
 		}
 
 		for (int i = 0; i < this.props.getDetails().length; i++)
 		{
-			NoTextureButton detailButton = new NoTextureButton(posX + 5, (listPosY + 60 + (i * 20)), 128, 16, "Detail " + (i + 1), this::selectButton);
+			NoTextureButton detailButton = new NoTextureButton(posX + 5, (listPosY + 60 + (i * 20)), 115, 16, "Detail " + (i + 1), this::selectButton);
 			this.addButton(detailButton);
 		}
 
 		posX = this.width / 2;
 
-		TexturedIconButton nextBaseTexture = new TexturedIconButton(ModResources.BIG_WOOD_BUTTON_RIGHT, posX + 100, posY - 65, 32, 110, "", (btn) -> this.moveIndex(btn, true));
-		nextBaseTexture = nextBaseTexture.setTextureInfo(posX + 100, posY - 75, 32, 128);
+		TexturedIconButton nextBaseTexture = new TexturedIconButton(ModResources.BIG_WOOD_BUTTON_RIGHT, posX + 80, posY - 65, 32, 110, "", (btn) -> this.moveIndex(btn, true));
+		nextBaseTexture = nextBaseTexture.setTextureInfo(posX + 80, posY - 75, 32, 128);
 		this.addButton(nextBaseTexture);
 
-		TexturedIconButton prevBaseTexture = new TexturedIconButton(ModResources.BIG_WOOD_BUTTON_LEFT, posX - 75, posY - 65, 32, 110, "", (btn) -> this.moveIndex(btn, false));
-		prevBaseTexture = prevBaseTexture.setTextureInfo(posX - 75, posY - 75, 32, 128);
+		TexturedIconButton prevBaseTexture = new TexturedIconButton(ModResources.BIG_WOOD_BUTTON_LEFT, posX - 85, posY - 65, 32, 110, "", (btn) -> this.moveIndex(btn, false));
+		prevBaseTexture = prevBaseTexture.setTextureInfo(posX - 85, posY - 75, 32, 128);
 		this.addButton(prevBaseTexture);
 		
 		posX = this.width;
 
 		GuiSlider redColorPicker = new GuiSlider(posX - 76, posY - 65, 50, 16, "", "", 0, 255, 255, false, true, (btn) -> {}, (slider) -> this.changeColor(slider, "red"));
+		this.redSlider = redColorPicker;
 		this.addButton(redColorPicker);	
 		
 		GuiSlider greenColorPicker = new GuiSlider(posX - 76, posY - 25, 50, 16, "", "", 0, 255, 255, false, true, (btn) -> {}, (slider) -> this.changeColor(slider, "green"));
+		this.greenSlider = greenColorPicker;
 		this.addButton(greenColorPicker);	
 		
 		GuiSlider blueColorPicker = new GuiSlider(posX - 76, posY + 15, 50, 16, "", "", 0, 255, 255, false, true, (btn) -> {}, (slider) -> this.changeColor(slider, "blue"));
+		this.blueSlider = blueColorPicker;
 		this.addButton(blueColorPicker);	
 	}
 
 	public void changeColor(GuiSlider slider, String color)
 	{
+		if(!slider.isHovered())
+			slider.dragging = false;
+		
 		if (this.layerType == LayerType.BASE)
 		{
+			if(this.props.getBase() == null)
+				return;
+			
 			String currentColor = this.props.getBase().getColor();
 			Color rgb = WyHelper.hexToRGB(currentColor);
 			
@@ -256,6 +268,9 @@ public class JollyRogerCreatorScreen extends Screen
 		}
 		else if (this.layerType == LayerType.BACKGROUND)
 		{
+			if(this.props.getBackgrounds()[this.layerIndex] == null)
+				return;
+			
 			String currentColor = this.props.getBackgrounds()[this.layerIndex].getColor();
 			Color rgb = WyHelper.hexToRGB(currentColor);
 			
@@ -272,6 +287,9 @@ public class JollyRogerCreatorScreen extends Screen
 		}
 		else if (this.layerType == LayerType.DETAIL)
 		{
+			if(this.props.getDetails()[this.layerIndex] == null)
+				return;
+			
 			String currentColor = this.props.getDetails()[this.layerIndex].getColor();
 			Color rgb = WyHelper.hexToRGB(currentColor);
 			
@@ -314,7 +332,7 @@ public class JollyRogerCreatorScreen extends Screen
 					JollyRogerElement element = this.props.getBackgrounds()[i];
 					boolean hasElement = this.allBackgrounds.stream().anyMatch(elem -> elem != null && elem.get() != null && elem.get().equals(element) && !elem.get().canUse(this.player));
 					if(hasElement)
-						this.props.getBackgrounds()[i].setTexture(null);
+						this.props.getBackgrounds()[this.layerIndex] = null;
 				}
 				
 				for(int i = 0; i < this.props.getDetails().length; i++)
@@ -322,7 +340,7 @@ public class JollyRogerCreatorScreen extends Screen
 					JollyRogerElement element = this.props.getDetails()[i];
 					boolean hasElement = this.allDetails.stream().anyMatch(elem -> elem != null && elem.get() != null && elem.get().equals(element) && !elem.get().canUse(this.player));
 					if(hasElement)
-						this.props.getDetails()[i].setTexture(null);
+						this.props.getDetails()[this.layerIndex] = null;
 				}
 			}
 			else if (this.layerType == LayerType.BACKGROUND)
@@ -370,6 +388,9 @@ public class JollyRogerCreatorScreen extends Screen
 		{
 			this.trueIndex = this.findIndex(this.getListFromType(LayerType.BASE), this.props.getBase(), this.player);
 			this.layerType = LayerType.BASE;
+			
+			this.resetColorSliders(this.props.getBase());
+
 			return;
 		}
 
@@ -382,6 +403,9 @@ public class JollyRogerCreatorScreen extends Screen
 				this.layerType = LayerType.BACKGROUND;
 				this.allBackgrounds = this.getTotalElementsForType(this.player, LayerType.BACKGROUND);
 				this.layerIndex = j;
+				
+				this.resetColorSliders(this.props.getBackgrounds()[j]);
+
 				return;
 			}
 			j++;
@@ -396,12 +420,38 @@ public class JollyRogerCreatorScreen extends Screen
 				this.layerType = LayerType.DETAIL;
 				this.allDetails = this.getTotalElementsForType(this.player, LayerType.DETAIL);	
 				this.layerIndex = j;
+				
+				this.resetColorSliders(this.props.getDetails()[j]);
+				
 				return;
 			}
 			j++;
 		}
 	}
 
+	private void resetColorSliders(JollyRogerElement element)
+	{
+		if(element != null)
+		{
+			Color rgb = WyHelper.hexToRGB(element.getColor());	
+			this.redSlider.setValue(rgb.getRed());
+			this.redSlider.updateSlider();
+			this.greenSlider.setValue(rgb.getGreen());
+			this.greenSlider.updateSlider();
+			this.blueSlider.setValue(rgb.getBlue());
+			this.blueSlider.updateSlider();
+		}
+		else
+		{
+			this.redSlider.setValue(255);
+			this.redSlider.updateSlider();
+			this.greenSlider.setValue(255);
+			this.greenSlider.updateSlider();
+			this.blueSlider.setValue(255);
+			this.blueSlider.updateSlider();
+		}
+	}
+	
 	@Override
 	public void onClose()
 	{
