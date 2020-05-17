@@ -33,6 +33,7 @@ public class JollyRogerCapability
 				{
 					CompoundNBT baseNBT = new CompoundNBT();
 					baseNBT.putString("id", baseElement.getTexture().toString());
+					baseNBT.putBoolean("canBeColored", baseElement.canBeColored());
 					baseNBT.putString("color", baseElement.getColor());
 					props.put("base", baseNBT);
 				}
@@ -48,6 +49,7 @@ public class JollyRogerCapability
 							CompoundNBT backgroundNBT = new CompoundNBT();
 							backgroundNBT.putInt("slot", i);
 							backgroundNBT.putString("id", bgElement.getTexture().toString());
+							backgroundNBT.putBoolean("canBeColored", bgElement.canBeColored());
 							backgroundNBT.putString("color", bgElement.getColor());
 							backgrounds.add(backgroundNBT);
 						}
@@ -63,6 +65,7 @@ public class JollyRogerCapability
 							CompoundNBT detailNBT = new CompoundNBT();
 							detailNBT.putInt("slot", i);
 							detailNBT.putString("id", detElement.getTexture().toString());
+							detailNBT.putBoolean("canBeColored", detElement.canBeColored());
 							detailNBT.putString("color", detElement.getColor());			
 							details.add(detailNBT);
 						}
@@ -86,6 +89,13 @@ public class JollyRogerCapability
 				{
 					CompoundNBT baseNBT = props.getCompound("base");
 					JollyRogerElement baseElement = GameRegistry.findRegistry(JollyRogerElement.class).getValue(new ResourceLocation(APIConfig.PROJECT_ID, baseNBT.getString("id").replace(APIConfig.PROJECT_ID + ":", "")));
+					
+					if(baseNBT.getBoolean("canBeColored"))
+						baseElement.setCanBeColored();
+					
+					String color = baseNBT.getString("color");
+					baseElement.setColor(color);
+					
 					instance.setBase(baseElement);
 					
 					ListNBT backgroundsNBT = props.getList("backgrounds", Constants.NBT.TAG_COMPOUND);
@@ -97,7 +107,10 @@ public class JollyRogerCapability
 						
 						int slot = backgroundNBT.getInt("slot");
 						
-						String color = backgroundNBT.getString("color");
+						if(backgroundNBT.getBoolean("canBeColored"))
+							bgElement.setCanBeColored();
+						
+						color = backgroundNBT.getString("color");
 						bgElement.setColor(color);
 						
 						instance.setBackground(slot, bgElement);
@@ -111,7 +124,10 @@ public class JollyRogerCapability
 						
 						int slot = detailNBT.getInt("slot");
 						
-						String color = detailNBT.getString("color");
+						if(detailNBT.getBoolean("canBeColored"))
+							detElement.setCanBeColored();
+						
+						color = detailNBT.getString("color");
 						detElement.setColor(color);
 						
 						instance.setDetail(slot, detElement);
