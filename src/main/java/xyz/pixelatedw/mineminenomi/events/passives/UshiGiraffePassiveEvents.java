@@ -20,38 +20,6 @@ import xyz.pixelatedw.wypi.APIConfig;
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class UshiGiraffePassiveEvents
 {
-	private static final AttributeModifier SPEED_MODIFIER = new AttributeModifier(UUID.fromString("d171ef28-e77a-418d-927b-ca9a09417189"), "Walk Point Speed Multiplier", 1.05, AttributeModifier.Operation.MULTIPLY_BASE);
-	private static final AttributeModifier JUMP_MODIFIER = new AttributeModifier(UUID.fromString("13b3d607-ed90-4459-832c-01e616a5ef16"), "Walk Point Jump Multiplier", 3, AttributeModifier.Operation.ADDITION);
-
-	@SubscribeEvent
-	public static void onEntityUpdate(LivingUpdateEvent event)
-	{
-		if (!(event.getEntityLiving() instanceof PlayerEntity))
-			return;
-
-		PlayerEntity player = (PlayerEntity) event.getEntityLiving();
-		IDevilFruit props = DevilFruitCapability.get(player);
-
-		if (!props.getDevilFruit().equalsIgnoreCase("ushi_ushi_giraffe"))
-			return;
-
-		IAttributeInstance speedAttr = player.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
-		IAttributeInstance jumpAttr = player.getAttribute(ModAttributes.JUMP_HEIGHT);
-		if (props.getZoanPoint().equalsIgnoreCase(GiraffeWalkZoanInfo.FORM))
-		{
-			if (!speedAttr.hasModifier(SPEED_MODIFIER))
-				speedAttr.applyModifier(SPEED_MODIFIER);
-
-			if (!jumpAttr.hasModifier(JUMP_MODIFIER))
-				jumpAttr.applyModifier(JUMP_MODIFIER);
-		}
-		else
-		{
-			speedAttr.removeModifier(SPEED_MODIFIER);
-			jumpAttr.removeModifier(JUMP_MODIFIER);
-		}
-	}
-
 	@SubscribeEvent
 	public static void onEntityAttack(LivingHurtEvent event)
 	{

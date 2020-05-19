@@ -24,8 +24,6 @@ import xyz.pixelatedw.wypi.WyHelper;
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class UshiBisonPassiveEvents
 {
-	private static final AttributeModifier SPEED_MODIFIER = new AttributeModifier(UUID.fromString("d171ef28-e77a-418d-927b-ca9a09417189"), "Walk Point Multiplier", 1.05, AttributeModifier.Operation.MULTIPLY_BASE);
-
 	@SubscribeEvent
 	public static void onEntityUpdate(LivingUpdateEvent event)
 	{
@@ -38,11 +36,8 @@ public class UshiBisonPassiveEvents
 		if (!props.getDevilFruit().equalsIgnoreCase("ushi_ushi_bison"))
 			return;
 
-		IAttributeInstance attr = player.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
 		if (props.getZoanPoint().equalsIgnoreCase(BisonWalkZoanInfo.FORM))
 		{
-			if (!attr.hasModifier(SPEED_MODIFIER))
-				attr.applyModifier(SPEED_MODIFIER);
 
 			List<LivingEntity> targets = WyHelper.getEntitiesNear(player.getPosition(), player.world, 0.8);
 			targets.remove(player);
@@ -55,8 +50,6 @@ public class UshiBisonPassiveEvents
 				target.setMotion(speed.x, 0.2, speed.z);
 			}
 		}
-		else
-			attr.removeModifier(SPEED_MODIFIER);
 	}
 
 	@SubscribeEvent

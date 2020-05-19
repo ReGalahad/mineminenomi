@@ -23,7 +23,7 @@ import xyz.pixelatedw.wypi.APIConfig;
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class SabiPassiveEvents
 {
-	public static final List<Item> IRON_ITEMS = Lists.newArrayList(ModWeapons.MARINE_SWORD, ModWeapons.PIRATE_CUTLASS, ModWeapons.BANDIT_KNIFE, Items.IRON_AXE, Items.IRON_BARS, Items.IRON_BLOCK, Items.IRON_BOOTS, Items.IRON_CHESTPLATE, Items.IRON_DOOR, Items.IRON_HELMET, Items.IRON_HOE, Items.IRON_HORSE_ARMOR, Items.IRON_INGOT, Items.IRON_LEGGINGS, Items.IRON_NUGGET, Items.IRON_ORE, Items.IRON_PICKAXE, Items.IRON_SHOVEL, Items.IRON_SWORD, Items.IRON_TRAPDOOR);
+	public static final List<Item> IRON_ITEMS = Lists.newArrayList(ModWeapons.MARINE_SWORD, ModWeapons.SOUL_SOLID, ModWeapons.SCISSORS, ModWeapons.NIDAI_KITESTU, ModWeapons.SANDAI_KITETSU, ModWeapons.WADO_ICHIMONJI, ModWeapons.KNIFE2, ModWeapons.KNIFE3 , ModWeapons.PIRATE_CUTLASS, ModWeapons.BANDIT_KNIFE, Items.IRON_AXE, Items.IRON_BARS, Items.IRON_BLOCK, Items.IRON_BOOTS, Items.IRON_CHESTPLATE, Items.IRON_DOOR, Items.IRON_HELMET, Items.IRON_HOE, Items.IRON_HORSE_ARMOR, Items.IRON_INGOT, Items.IRON_LEGGINGS, Items.IRON_NUGGET, Items.IRON_ORE, Items.IRON_PICKAXE, Items.IRON_SHOVEL, Items.IRON_SWORD, Items.IRON_TRAPDOOR);
 	
 	@SubscribeEvent
 	public static void onEntityAttack(LivingAttackEvent event)

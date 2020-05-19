@@ -26,7 +26,7 @@ public class ZouPassiveEvents
 			return;
 
 		if (props.getZoanPoint().equalsIgnoreCase(ZouHeavyZoanInfo.FORM))
-			event.setAmount(event.getAmount() + 3);
+			event.setAmount(event.getAmount() + 8);
 		
 	}
 
