@@ -41,8 +41,11 @@ public class ItoPassiveEvents
 		if(blockFallDamage)
 		{
 			player.fallDistance = 0;
-			if(!player.onGround && player.world.getBlockState(player.getPosition().down()).isSolid() && soraNoMichiAbiltiy.getCooldown() < soraNoMichiAbiltiy.getMaxCooldown() - 10)
-				soraNoMichiAbiltiy.resetFallDamage();
+			if(soraNoMichiAbiltiy.getCooldown() < soraNoMichiAbiltiy.getMaxCooldown() - 10 || soraNoMichiAbiltiy.getCooldown() == soraNoMichiAbiltiy.getMaxCooldown())
+			{
+				if(player.onGround)		
+					soraNoMichiAbiltiy.resetFallDamage();
+			}
 		}
 	}
 	

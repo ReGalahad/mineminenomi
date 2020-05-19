@@ -42,8 +42,11 @@ public class HumanPassiveEvents
 		if(blockFallDamage)
 		{
 			player.fallDistance = 0;
-			if(!player.onGround && player.world.getBlockState(player.getPosition().down()).isSolid() && geppoAbility.getCooldown() < geppoAbility.getMaxCooldown() - 10)
-				geppoAbility.resetFallDamage();
+			if(geppoAbility.getCooldown() < geppoAbility.getMaxCooldown() - 10 || geppoAbility.getCooldown() == geppoAbility.getMaxCooldown())
+			{
+				if(player.onGround)		
+					geppoAbility.resetFallDamage();
+			}
 		}
 	}
 	
