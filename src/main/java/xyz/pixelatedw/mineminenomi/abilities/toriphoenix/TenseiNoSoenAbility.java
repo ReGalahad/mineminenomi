@@ -76,7 +76,7 @@ public class TenseiNoSoenAbility extends ChargeableAbility
 	{
 		PARTICLES2.spawn(player.world, player.posX, player.posY, player.posZ, 0, 0, 0);
 		
-		List<LivingEntity> list = WyHelper.getEntitiesNear(player.getPosition(), player.world, 10);
+		List<LivingEntity> list = WyHelper.getEntitiesNear(player.getPosition(), player.world, 24);
 		list.remove(player);
 		
 		for (LivingEntity target : list)
