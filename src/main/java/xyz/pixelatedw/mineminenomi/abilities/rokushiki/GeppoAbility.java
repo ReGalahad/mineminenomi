@@ -10,10 +10,11 @@ import xyz.pixelatedw.wypi.abilities.Ability;
 
 public class GeppoAbility extends Ability
 {
-	public static final Ability INSTANCE = new GeppoAbility();
+	public static final GeppoAbility INSTANCE = new GeppoAbility();
 	public static final ParticleEffect PARTICLES = new GeppoParticleEffect();
 	
 	private int airJumps = 0;
+	private boolean hasFallDamage = true;
 	
 	public GeppoAbility()
 	{
@@ -40,6 +41,7 @@ public class GeppoAbility extends Ability
 			this.airJumps++;
 		}
 
+		this.hasFallDamage = false;
 		player.velocityChanged = true;
 
 		PARTICLES.spawn(player.world, player.posX, player.posY, player.posZ, 0, 0, 0);
@@ -48,7 +50,7 @@ public class GeppoAbility extends Ability
 		{
 			this.airJumps = 0;
 			this.setMaxCooldown(20);
-			this.startCooldown();
+			this.startCooldown(player);
 			return true;
 		}
 		else
@@ -57,5 +59,15 @@ public class GeppoAbility extends Ability
 		}
 		
 		return true;
+	}
+	
+	public void resetFallDamage()
+	{
+		this.hasFallDamage = true;
+	}
+	
+	public boolean hasFallDamage()
+	{
+		return this.hasFallDamage;
 	}
 }

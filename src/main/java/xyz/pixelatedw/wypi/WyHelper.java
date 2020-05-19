@@ -288,7 +288,9 @@ public class WyHelper
 				
 				if(distFromSource < distance)
 				{
-					Optional<Entity> target = WyHelper.getEntitiesNear(new BlockPos(targetVec), source.world, 1.25).stream().findFirst();
+					List<Entity> targets = WyHelper.getEntitiesNear(new BlockPos(targetVec), source.world, 1.25);
+					targets.remove(source);
+					Optional<Entity> target = targets.stream().findFirst();
 					
 					if(target.isPresent())
 					{

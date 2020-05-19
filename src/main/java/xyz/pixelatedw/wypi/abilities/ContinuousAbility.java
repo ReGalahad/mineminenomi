@@ -42,7 +42,7 @@ public abstract class ContinuousAbility extends Ability
 			
 			if (this.onStartContinuityEvent.onStartContinuity(player))
 			{
-				this.startContinuity();
+				this.startContinuity(player);
 				IAbilityData props = AbilityDataCapability.get(player);
 				WyNetwork.sendTo(new SSyncAbilityDataPacket(player.getEntityId(), props), (ServerPlayerEntity) player);
 			}
@@ -52,7 +52,7 @@ public abstract class ContinuousAbility extends Ability
 			if (this.onEndContinuityEvent.onEndContinuity(player))
 			{
 				this.continueTime = 0;
-				this.startCooldown();
+				this.startCooldown(player);
 				IAbilityData props = AbilityDataCapability.get(player);
 				WyNetwork.sendTo(new SSyncAbilityDataPacket(player.getEntityId(), props), (ServerPlayerEntity) player);
 			}
@@ -73,12 +73,7 @@ public abstract class ContinuousAbility extends Ability
 	{
 		return this.threshold;
 	}
-	
-	public void startContinuity()
-	{
-		this.setState(State.CONTINUOUS);
-	}
-	
+
 	public void setContinueTime(int time)
 	{
 		this.continueTime = time * 20;;
@@ -110,6 +105,11 @@ public abstract class ContinuousAbility extends Ability
 		}
 	}
 	
+	public void startContinuity(PlayerEntity player)
+	{
+		this.setState(State.CONTINUOUS);
+	}
+	
 	public void stopContinuity(PlayerEntity player)
 	{
 		if(player.world.isRemote)
@@ -117,7 +117,7 @@ public abstract class ContinuousAbility extends Ability
 		if(this.onEndContinuityEvent.onEndContinuity(player))
 		{
 			this.continueTime = 0;
-			this.startCooldown();	
+			this.startCooldown(player);	
 			IAbilityData props = AbilityDataCapability.get(player);
 			WyNetwork.sendTo(new SSyncAbilityDataPacket(player.getEntityId(), props), player);
 		}

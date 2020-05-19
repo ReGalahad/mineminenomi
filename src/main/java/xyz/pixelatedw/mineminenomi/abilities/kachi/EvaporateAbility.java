@@ -8,6 +8,7 @@ import net.minecraft.util.math.BlockPos;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.api.protection.BlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.api.protection.block.LiquidBlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.SnowLayerBlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.kachi.EvaporateParticleEffect;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
@@ -17,7 +18,7 @@ public class EvaporateAbility extends Ability
 {
 	public static final EvaporateAbility INSTANCE = new EvaporateAbility();
 
-	private static final BlockProtectionRule GRIEF_RULE = new BlockProtectionRule(LiquidBlockProtectionRule.INSTANCE); 
+	private static final BlockProtectionRule GRIEF_RULE = new BlockProtectionRule(LiquidBlockProtectionRule.INSTANCE, SnowLayerBlockProtectionRule.INSTANCE); 
 	private static final ParticleEffect PARTICLES = new EvaporateParticleEffect();
 	
 	public EvaporateAbility()

@@ -1,5 +1,7 @@
 package xyz.pixelatedw.mineminenomi.abilities.supa;
 
+import java.util.UUID;
+
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.EffectInstance;
@@ -7,8 +9,6 @@ import net.minecraft.potion.Effects;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.abilities.ContinuousAbility;
-
-import java.util.UUID;
 
 public class SpiderAbility extends ContinuousAbility
 {
@@ -21,12 +21,12 @@ public class SpiderAbility extends ContinuousAbility
 		this.setThreshold(15);
 		this.setDescription("Hardens the user's body to protect themselves, but they're unable to move.");
 
-		this.onStartContinuityEvent = this::startContinuity;
+		this.onStartContinuityEvent = this::onStartContinuityEvent;
 		this.duringContinuityEvent = this::duringContinuity;
 		this.onEndContinuityEvent = this::onEndContinuityEvent;
 	}
 
-	private boolean startContinuity(PlayerEntity player) {
+	private boolean onStartContinuityEvent(PlayerEntity player) {
 		player.getAttribute(ModAttributes.JUMP_HEIGHT).applyModifier(JUMP_MULTIPLIER);
 		return true;
 	}

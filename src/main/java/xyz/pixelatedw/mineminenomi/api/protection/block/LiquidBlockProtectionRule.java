@@ -11,5 +11,4 @@ public class LiquidBlockProtectionRule extends BlockProtectionRule
 	{
 		this.addApprovedBlocks(Blocks.WATER, Blocks.LAVA);
 	}
-
 }

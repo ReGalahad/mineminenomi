@@ -24,8 +24,8 @@ public class KaitenDoorAbility extends PunchAbility
 	
 	private float onHitEntityEvent(PlayerEntity player, LivingEntity target)
 	{
-		target.addPotionEffect(new EffectInstance(Effects.NAUSEA, 100, 1, false, false));
-		EffectInstance instance = new EffectInstance(ModEffects.DOOR_HEAD, 100, 0, false, false);
+		target.addPotionEffect(new EffectInstance(Effects.NAUSEA, 200, 1, false, false));
+		EffectInstance instance = new EffectInstance(ModEffects.DOOR_HEAD, 200, 0, false, false);
 		target.addPotionEffect(instance);
 		((ServerPlayerEntity) player).connection.sendPacket(new SPlayEntityEffectPacket(target.getEntityId(), instance));
 		

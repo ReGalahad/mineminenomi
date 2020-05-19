@@ -1,6 +1,7 @@
 package xyz.pixelatedw.mineminenomi.abilities.rokushiki;
 
-import net.minecraft.entity.SharedMonsterAttributes;
+import java.util.UUID;
+
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.EffectInstance;
@@ -9,8 +10,6 @@ import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.abilities.ContinuousAbility;
-
-import java.util.UUID;
 
 public class TekkaiAbility extends ContinuousAbility
 {
@@ -23,7 +22,7 @@ public class TekkaiAbility extends ContinuousAbility
 		this.setThreshold(10);
 		this.setDescription("Hardens the user's body to protect themselves, but they're unable to move.");
 
-		this.onStartContinuityEvent = this::startContinuity;
+		this.onStartContinuityEvent = this::onStartContinuityEvent;
 		this.duringContinuityEvent = this::duringContinuity;
 		this.onEndContinuityEvent = this::onEndContinuityEvent;
 	}
@@ -38,7 +37,7 @@ public class TekkaiAbility extends ContinuousAbility
 	}
 
 
-	private boolean startContinuity(PlayerEntity player) {
+	private boolean onStartContinuityEvent(PlayerEntity player) {
 		player.getAttribute(ModAttributes.JUMP_HEIGHT).applyModifier(JUMP_MULTIPLIER);
 		return true;
 	}

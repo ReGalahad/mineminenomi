@@ -5,6 +5,7 @@ import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import xyz.pixelatedw.mineminenomi.abilities.rokushiki.GeppoAbility;
 import xyz.pixelatedw.mineminenomi.abilities.rokushiki.KamieAbility;
 import xyz.pixelatedw.mineminenomi.abilities.rokushiki.TekkaiAbility;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
@@ -34,6 +35,16 @@ public class HumanPassiveEvents
 		boolean isTekkaiActive = tekkaiAbility != null && tekkaiAbility.isContinuous();
 		if(isTekkaiActive)
 			player.setMotion(0, -5, 0);
+		
+		GeppoAbility geppoAbility = abilityProps.getEquippedAbility(GeppoAbility.INSTANCE);
+		boolean blockFallDamage = geppoAbility != null && !geppoAbility.hasFallDamage();
+				
+		if(blockFallDamage)
+		{
+			player.fallDistance = 0;
+			if(!player.onGround && player.world.getBlockState(player.getPosition().down()).isSolid() && geppoAbility.getCooldown() < geppoAbility.getMaxCooldown() - 10)
+				geppoAbility.resetFallDamage();
+		}
 	}
 	
 	@SubscribeEvent

@@ -36,7 +36,7 @@ public class ChiyupopoAbility extends Ability
 
 		for(LivingEntity entity : targets)
 		{
-			entity.addPotionEffect(new EffectInstance(Effects.REGENERATION, 200, 0));
+			entity.addPotionEffect(new EffectInstance(Effects.REGENERATION, 300, 1));
 		}
 		
 		PARTICLES.spawn(player.world, player.posX, player.posY, player.posZ, 0, 0, 0);

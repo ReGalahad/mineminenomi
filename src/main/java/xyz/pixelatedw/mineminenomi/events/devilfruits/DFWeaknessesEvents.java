@@ -70,7 +70,7 @@ public class DFWeaknessesEvents
 							if (ability instanceof ChargeableAbility)
 							{
 								((ChargeableAbility) ability).setChargeTime(((ChargeableAbility) ability).getMaxChargeTime() / 20);
-								ability.startCooldown();
+								ability.startCooldown(player);
 								WyNetwork.sendTo(new SSyncAbilityDataPacket(player.getEntityId(), abilityProps), player);
 							}
 							ability.startDisable();
@@ -83,7 +83,7 @@ public class DFWeaknessesEvents
 					{
 						if (abilityProps.getEquippedAbility(i) != null && abilityProps.getEquippedAbility(i).isDisabled())
 						{
-							abilityProps.getEquippedAbility(i).startCooldown();
+							abilityProps.getEquippedAbility(i).startCooldown(player);
 						}
 					}
 				}
