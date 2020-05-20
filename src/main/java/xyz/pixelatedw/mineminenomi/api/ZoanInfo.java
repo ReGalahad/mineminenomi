@@ -16,6 +16,6 @@ public abstract class ZoanInfo
 	public abstract double getHeight();
 	public abstract float getShadowSize();
 	
-	public abstract double[] getHeldItemOffset();
+	public abstract double[][] getHeldItemOffset();
 	public abstract double getHeldItemRotation();
 }

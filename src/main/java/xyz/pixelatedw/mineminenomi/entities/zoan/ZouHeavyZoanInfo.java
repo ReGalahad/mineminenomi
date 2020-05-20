@@ -57,15 +57,19 @@ public class ZouHeavyZoanInfo extends ZoanInfo
 	}
 
 	@Override
-	public double[] getHeldItemOffset()
+	public double[][] getHeldItemOffset()
 	{
-		return new double[] {-0.77, 0.45, -0.4};
+		return new double[][] 
+			{
+				{-0.6, -0.5, 0.0}, 
+				{-0.05, 1.1, -0.4}
+			};
 	}
 
 	@Override
 	public double getHeldItemRotation()
 	{
-		return 80;
+		return 0;
 	}
 
 }

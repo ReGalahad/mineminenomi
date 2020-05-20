@@ -57,9 +57,13 @@ public class GiraffeHeavyZoanInfo extends ZoanInfo
 	}
 
 	@Override
-	public double[] getHeldItemOffset()
+	public double[][] getHeldItemOffset()
 	{
-		return new double[] {-0.39, 0.75, -0.4};
+		return new double[][] 
+			{
+				{-0.4, 0.2, 0.0},
+				{0.1, 0.7, -0.35}
+			};
 	}
 
 	@Override

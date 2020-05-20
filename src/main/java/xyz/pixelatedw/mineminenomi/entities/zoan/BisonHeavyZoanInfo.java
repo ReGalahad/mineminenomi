@@ -57,15 +57,19 @@ public class BisonHeavyZoanInfo extends ZoanInfo
 	}
 
 	@Override
-	public double[] getHeldItemOffset()
+	public double[][] getHeldItemOffset()
 	{
-		return new double[] {-0.37, 0.6, -0.325};
+		return new double[][] 
+			{
+				{-0.3F, -0.1F, 0F},
+				{0.05F, 0.9F, -0.4F}
+			};
 	}
 
 	@Override
 	public double getHeldItemRotation()
 	{
-		return 50;
+		return 0;
 	}
 
 }

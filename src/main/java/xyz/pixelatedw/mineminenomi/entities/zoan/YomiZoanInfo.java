@@ -56,9 +56,13 @@ public class YomiZoanInfo extends ZoanInfo
 	}
 
 	@Override
-	public double[] getHeldItemOffset()
+	public double[][] getHeldItemOffset()
 	{
-		return new double[] {-0.28, 0.45, -0.45};
+		return new double[][] 
+			{
+				{-0.2, 0.2, 0.0},
+				{0.05, 0.55, -0.35}
+			};
 	}
 
 	@Override

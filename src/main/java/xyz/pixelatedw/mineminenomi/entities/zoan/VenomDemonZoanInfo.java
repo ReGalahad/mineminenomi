@@ -57,9 +57,9 @@ public class VenomDemonZoanInfo extends ZoanInfo
 	}
 	
 	@Override
-	public double[] getHeldItemOffset()
+	public double[][] getHeldItemOffset()
 	{
-		return new double[] {0, 0, 0};
+		return null;
 	}
 
 	@Override

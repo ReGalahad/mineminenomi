@@ -53,13 +53,13 @@ public class ZouGuardZoanInfo extends ZoanInfo
 	@Override
 	public float getShadowSize()
 	{
-		return 1;
+		return 1.3F;
 	}
 
 	@Override
-	public double[] getHeldItemOffset()
+	public double[][] getHeldItemOffset()
 	{
-		return new double[] {0, 0, 0};
+		return null;
 	}
 
 	@Override
