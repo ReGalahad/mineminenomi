@@ -4,7 +4,6 @@ import net.minecraft.client.renderer.entity.model.RendererModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.MathHelper;
 import xyz.pixelatedw.mineminenomi.api.ZoanMorphModel;
-import xyz.pixelatedw.wypi.WyHelper;
 
 public class ZouGuardModel<T extends LivingEntity> extends ZoanMorphModel<T>
 {
@@ -135,10 +134,10 @@ public class ZouGuardModel<T extends LivingEntity> extends ZoanMorphModel<T>
 		// Handles the head movement when following the mouse or when swimming
 		this.head.rotateAngleY = netHeadYaw * ((float) Math.PI / 180F);
 		this.head.rotateAngleX = headPitch * ((float) Math.PI / 180F);
-		if (WyHelper.radToDeg(this.head.rotateAngleX) > 15)
-			this.head.rotateAngleX = WyHelper.degToRad(15);
-		if (WyHelper.radToDeg(this.head.rotateAngleX) < -25)
-			this.head.rotateAngleX = WyHelper.degToRad(-25);
+		if (Math.toDegrees(this.head.rotateAngleX) > 15)
+			this.head.rotateAngleX = (float) Math.toRadians(15);
+		if (Math.toDegrees(this.head.rotateAngleX) < -25)
+			this.head.rotateAngleX = (float) Math.toRadians(-25);
 		
 		// Hanldes the legs and tail movement
 		this.leg1.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 0.3F * limbSwingAmount;

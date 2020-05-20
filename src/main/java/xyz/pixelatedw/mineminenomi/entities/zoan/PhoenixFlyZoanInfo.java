@@ -2,7 +2,7 @@ package xyz.pixelatedw.mineminenomi.entities.zoan;
 
 import xyz.pixelatedw.mineminenomi.abilities.toriphoenix.PhoenixFlyPointAbility;
 import xyz.pixelatedw.mineminenomi.api.ZoanInfo;
-import xyz.pixelatedw.mineminenomi.models.entities.zoans.PhoenixFullModel;
+import xyz.pixelatedw.mineminenomi.models.entities.zoans.PhoenixFlyModel;
 import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer.Factory;
 import xyz.pixelatedw.wypi.abilities.Ability;
@@ -26,7 +26,7 @@ public class PhoenixFlyZoanInfo extends ZoanInfo
 	@Override
 	public Factory getFactory()
 	{
-		ZoanMorphRenderer.Factory factory = new ZoanMorphRenderer.Factory(new PhoenixFullModel(), "phoenixfull");
+		ZoanMorphRenderer.Factory factory = new ZoanMorphRenderer.Factory(new PhoenixFlyModel(), "phoenixfull");
 		factory.setScale(1.3);
 		factory.setOffset(0, -0.5f, 0);
 		return factory;

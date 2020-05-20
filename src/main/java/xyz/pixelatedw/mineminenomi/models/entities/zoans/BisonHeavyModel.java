@@ -2,15 +2,12 @@ package xyz.pixelatedw.mineminenomi.models.entities.zoans;
 
 import org.lwjgl.opengl.GL11;
 
-import com.mojang.blaze3d.platform.GlStateManager;
-
 import net.minecraft.client.renderer.entity.model.IHasArm;
 import net.minecraft.client.renderer.entity.model.RendererModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.HandSide;
 import net.minecraft.util.math.MathHelper;
 import xyz.pixelatedw.mineminenomi.api.ZoanMorphModel;
-import xyz.pixelatedw.wypi.WyHelper;
 
 public class BisonHeavyModel<T extends LivingEntity> extends ZoanMorphModel<T> implements IHasArm
 {
@@ -169,9 +166,6 @@ public class BisonHeavyModel<T extends LivingEntity> extends ZoanMorphModel<T> i
 	{
 		this.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
-		if (entity.shouldRenderSneaking())
-			GlStateManager.translatef(0.0F, 0.2F, 0.0F);
-
 		this.rightleg4.render(scale);
 		this.leftarm1.render(scale);
 		this.leftleg4.render(scale);
@@ -207,10 +201,10 @@ public class BisonHeavyModel<T extends LivingEntity> extends ZoanMorphModel<T> i
 		else
 		{
 			this.head.rotateAngleX = headPitch * ((float) Math.PI / 180F);
-			if (WyHelper.radToDeg(this.head.rotateAngleX) > 15)
-				this.head.rotateAngleX = WyHelper.degToRad(15);
-			if (WyHelper.radToDeg(this.head.rotateAngleX) < -45)
-				this.head.rotateAngleX = WyHelper.degToRad(-45);
+			if (Math.toDegrees(this.head.rotateAngleX) > 15)
+				this.head.rotateAngleX = (float) Math.toRadians(15);
+			if (Math.toDegrees(this.head.rotateAngleX) < -45)
+				this.head.rotateAngleX = (float) Math.toRadians(-45);
 		}
 
 		// Hanldes the arm and leg movement

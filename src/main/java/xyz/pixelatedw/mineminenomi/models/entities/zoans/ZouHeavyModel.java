@@ -8,7 +8,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.HandSide;
 import net.minecraft.util.math.MathHelper;
 import xyz.pixelatedw.mineminenomi.api.ZoanMorphModel;
-import xyz.pixelatedw.wypi.WyHelper;
 
 public class ZouHeavyModel<T extends LivingEntity> extends ZoanMorphModel<T> implements IHasArm
 {
@@ -165,10 +164,10 @@ public class ZouHeavyModel<T extends LivingEntity> extends ZoanMorphModel<T> imp
 		// Handles the head movement when following the mouse or when swimming
 		this.head.rotateAngleY = netHeadYaw * ((float) Math.PI / 180F);
 		this.head.rotateAngleX = headPitch * ((float) Math.PI / 180F);
-		if (WyHelper.radToDeg(this.head.rotateAngleX) > 35)
-			this.head.rotateAngleX = WyHelper.degToRad(35);
-		if (WyHelper.radToDeg(this.head.rotateAngleX) < -45)
-			this.head.rotateAngleX = WyHelper.degToRad(-45);
+		if (Math.toDegrees(this.head.rotateAngleX) > 35)
+			this.head.rotateAngleX = (float) Math.toRadians(35);
+		if (Math.toDegrees(this.head.rotateAngleX) < -45)
+			this.head.rotateAngleX = (float) Math.toRadians(-45);
 		
 		// Hanldes the arm and leg movement
 		float f = 1.0F;
