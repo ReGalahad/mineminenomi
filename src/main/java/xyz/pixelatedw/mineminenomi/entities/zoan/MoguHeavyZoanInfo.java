@@ -53,7 +53,7 @@ public class MoguHeavyZoanInfo extends ZoanInfo
 	@Override
 	public float getShadowSize()
 	{
-		return 1;
+		return 0.5F;
 	}
 
 	@Override
