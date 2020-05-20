@@ -26,7 +26,10 @@ public class VenomDemonZoanInfo extends ZoanInfo
 	@Override
 	public Factory getFactory()
 	{
-		return new ZoanMorphRenderer.Factory(new VenomDemonModel(), "venomdemon", 1.1, new float[] { 0, 0.3f, 0 });
+		ZoanMorphRenderer.Factory factory = new ZoanMorphRenderer.Factory(new VenomDemonModel(), "venomdemon");
+		factory.setScale(1.1);
+		factory.setOffset(0, 0.3f, 0);
+		return factory;
 	}
 
 	@Override
@@ -45,6 +48,12 @@ public class VenomDemonZoanInfo extends ZoanInfo
 	public double getHeight()
 	{
 		return 3.0;
+	}
+	
+	@Override
+	public float getShadowSize()
+	{
+		return 1;
 	}
 	
 	@Override

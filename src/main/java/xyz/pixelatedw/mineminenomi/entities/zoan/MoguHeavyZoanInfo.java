@@ -26,7 +26,10 @@ public class MoguHeavyZoanInfo extends ZoanInfo
 	@Override
 	public Factory getFactory()
 	{
-		return new ZoanMorphRenderer.Factory(new MoguMoleModel(), "mogu", 0.9, new float[] { 0, 0.05f, 0 });
+		ZoanMorphRenderer.Factory factory = new ZoanMorphRenderer.Factory(new MoguMoleModel(), "mogu");
+		factory.setScale(0.9);
+		factory.setOffset(0, 0.05f, 0);
+		return factory;
 	}
 
 	@Override
@@ -45,6 +48,12 @@ public class MoguHeavyZoanInfo extends ZoanInfo
 	public double getHeight()
 	{
 		return 1.5;
+	}
+	
+	@Override
+	public float getShadowSize()
+	{
+		return 1;
 	}
 
 	@Override

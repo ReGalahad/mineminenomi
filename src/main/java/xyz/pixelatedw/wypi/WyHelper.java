@@ -378,6 +378,11 @@ public class WyHelper
 	{
 		return (float) (degrees * Math.PI / 180);
 	}
+	
+	public static float radToDeg(double rad)
+	{
+		return 	(float) (rad * 180 / Math.PI);
+	}
 
 	public static double percentage(double percent, double value)
 	{

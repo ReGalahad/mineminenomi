@@ -25,14 +25,15 @@ import xyz.pixelatedw.mineminenomi.entities.VivreCardEntity;
 import xyz.pixelatedw.mineminenomi.entities.WantedPosterPackageEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.bandits.BanditWithSwordEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.marines.MarineCaptainEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.marines.MarineTraderEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.marines.MarineWithGunEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.marines.MarineWithSwordEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.BlackKnightEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.DoppelmanEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.MirageCloneEntity;
-import xyz.pixelatedw.mineminenomi.entities.mobs.misc.TraderEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.WaxCloneEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.PirateCaptainEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.PirateTraderEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.PirateWithGunEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.PirateWithSwordEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.quest.givers.BowMasterEntity;
@@ -86,11 +87,13 @@ public class ModRenderers
 		RenderingRegistry.registerEntityRenderingHandler(MarineWithSwordEntity.class, new GenericMobRenderer.Factory(new SimpleHumanModel(), 1, null));
 		RenderingRegistry.registerEntityRenderingHandler(MarineWithGunEntity.class, new GenericMobRenderer.Factory(new SimpleHumanModel(), 1, null));
 		RenderingRegistry.registerEntityRenderingHandler(MarineCaptainEntity.class, new GenericMobRenderer.Factory(new SimpleHumanModel(), 1, null));
+		RenderingRegistry.registerEntityRenderingHandler(MarineTraderEntity.class, new GenericMobRenderer.Factory(new SimpleHumanModel(), 1, null));
 
 		// Pirates
 		RenderingRegistry.registerEntityRenderingHandler(PirateWithSwordEntity.class, new GenericMobRenderer.Factory(new SimpleHumanModel(), 1, null));
 		RenderingRegistry.registerEntityRenderingHandler(PirateWithGunEntity.class, new GenericMobRenderer.Factory(new SimpleHumanModel(), 1, null));
 		RenderingRegistry.registerEntityRenderingHandler(PirateCaptainEntity.class, new GenericMobRenderer.Factory(new SimpleHumanModel(), 1, null));
+		RenderingRegistry.registerEntityRenderingHandler(PirateTraderEntity.class, new GenericMobRenderer.Factory(new SimpleHumanModel(), 1, null));
 
 		// Bandits
 		RenderingRegistry.registerEntityRenderingHandler(BanditWithSwordEntity.class, new GenericMobRenderer.Factory(new SimpleHumanModel(), 1, null));
@@ -98,7 +101,6 @@ public class ModRenderers
 		// Factionless
 		RenderingRegistry.registerEntityRenderingHandler(DojoSenseiEntity.class, new GenericMobRenderer.Factory(new DojoSenseiModel(), 1, null));
 		RenderingRegistry.registerEntityRenderingHandler(BowMasterEntity.class, new GenericMobRenderer.Factory(new SimpleHumanModel(), 1, null));
-		RenderingRegistry.registerEntityRenderingHandler(TraderEntity.class, new GenericMobRenderer.Factory(new SimpleHumanModel(), 1, null));
 
 		// Others
 		RenderingRegistry.registerEntityRenderingHandler(DoppelmanEntity.class, new DoppelmanRenderer.Factory());

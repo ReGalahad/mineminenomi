@@ -26,7 +26,10 @@ public class ZouHeavyZoanInfo extends ZoanInfo
 	@Override
 	public Factory getFactory()
 	{
-		return new ZoanMorphRenderer.Factory(new ZouHeavyModel(), "zouhybrid", 1.0, new float[] { 0, 0.2f, 0 });
+		ZoanMorphRenderer.Factory factory = new ZoanMorphRenderer.Factory(new ZouHeavyModel(), "zouhybrid");
+		factory.setScale(1);
+		factory.setOffset(0, 0.2f, 0);
+		return factory;	
 	}
 
 	@Override
@@ -45,6 +48,12 @@ public class ZouHeavyZoanInfo extends ZoanInfo
 	public double getHeight()
 	{
 		return 2.7;
+	}
+	
+	@Override
+	public float getShadowSize()
+	{
+		return 1;
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package xyz.pixelatedw.mineminenomi.models.entities.zoans;
 import net.minecraft.client.renderer.entity.model.RendererModel;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
+import xyz.pixelatedw.mineminenomi.api.ZoanMorphModel;
 
 public class PhoenixFullModel extends ZoanMorphModel
 {

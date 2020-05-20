@@ -22,13 +22,14 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import xyz.pixelatedw.mineminenomi.api.ZoanInfo;
+import xyz.pixelatedw.mineminenomi.api.ZoanMorphModel;
 import xyz.pixelatedw.mineminenomi.api.helpers.MorphHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
-import xyz.pixelatedw.mineminenomi.models.entities.zoans.ZoanMorphModel;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
 
+@SuppressWarnings("deprecation")
 @OnlyIn(Dist.CLIENT)
 public class ZoanMorphRenderer extends LivingRenderer
 {
@@ -39,26 +40,20 @@ public class ZoanMorphRenderer extends LivingRenderer
 
 	public ZoanMorphRenderer(EntityRendererManager renderManager, EntityModel model, String texture)
 	{
-		this(renderManager, model, texture, 1);
-	}
-
-	public ZoanMorphRenderer(EntityRendererManager renderManager, EntityModel model, String texture, double scale)
-	{
-		this(renderManager, model, texture, scale, new float[]
-			{
-					0, 0, 0
-			});
-	}
-
-	public ZoanMorphRenderer(EntityRendererManager renderManager, EntityModel model, String texture, double scale, float[] offset)
-	{
 		super(renderManager, model, 0.5F);
-		this.shadowSize = 0;
 		this.model = model;
-		this.scale = scale;
 		this.texture = new ResourceLocation(APIConfig.PROJECT_ID, "textures/models/zoanmorph/" + texture + ".png");
-		this.offset = offset;
 		this.addLayer(new HeldItemLayer<>(this));
+	}
+	
+	public void setScale(double size)
+	{
+		this.scale = size;
+	}
+	
+	public void setOffset(float[] offset)
+	{
+		this.offset = offset;
 	}
 
 	public void renderFirstPersonArm(PlayerEntity player)
@@ -72,6 +67,7 @@ public class ZoanMorphRenderer extends LivingRenderer
 	@Override
 	public void doRender(LivingEntity entity, double x, double y, double z, float u, float v)
 	{
+		//super.doRenderShadowAndFire(entity, x, y, z, (float) y, v);
 		GL11.glPushMatrix();
 
 		if (entity != Minecraft.getInstance().player)
@@ -113,14 +109,14 @@ public class ZoanMorphRenderer extends LivingRenderer
 			if (arm != null)
 			{
 				double rotation = info.getHeldItemRotation();
-				
+
 				GL11.glRotated(arm.rotateAngleX * rotation, 1, 0, 0);
 				GL11.glRotated(arm.rotateAngleY * rotation, 0, 1, 0);
 				GL11.glRotated(arm.rotateAngleZ * rotation, 0, 0, 1);
 
 				this.renderEquippedItems(entity, v);
 			}
-			
+
 			GL11.glEnable(GL11.GL_CULL_FACE);
 		}
 		GL11.glPopMatrix();
@@ -145,14 +141,14 @@ public class ZoanMorphRenderer extends LivingRenderer
 
 				ZoanInfo info = MorphHelper.getZoanInfo((PlayerEntity) entity);
 
-				if(this.getEntityModel() instanceof IHasArm)
+				if (this.getEntityModel() instanceof IHasArm)
 				{
 					this.translateToHand(HandSide.LEFT);
 					GlStateManager.rotatef(-180.0F, 1.0F, 0.0F, 0.0F);
 					GlStateManager.rotatef(180.0F, 0.0F, 1.0F, 0.0F);
 					GlStateManager.rotatef(180.0F, 0.0F, 0.0F, 1.0F);
 					GlStateManager.translated(info.getHeldItemOffset()[0], info.getHeldItemOffset()[1], info.getHeldItemOffset()[2]);
-	
+
 					Minecraft.getInstance().getFirstPersonRenderer().renderItemSide(entity, itemstack, TransformType.FIRST_PERSON_LEFT_HAND, false);
 				}
 			}
@@ -168,29 +164,41 @@ public class ZoanMorphRenderer extends LivingRenderer
 	@Override
 	public ResourceLocation getEntityTexture(Entity p_110775_1_)
 	{
-		return texture;
+		return this.texture;
 	}
 
-	public static class Factory implements IRenderFactory<PlayerEntity>
+	public static class Factory<T extends LivingEntity> implements IRenderFactory<T>
 	{
 		private EntityModel model;
 		private String texture;
 		private double scale;
-		private float[] offset;
+		private float[] offset = new float[] {0, 0, 0};
 
-		public Factory(EntityModel model, String texture, double scale, float[] offset)
+		public Factory(EntityModel model, String texture)
 		{
 			this.model = model;
 			this.texture = texture;
-			this.scale = scale;
-			this.offset = offset;
+		}
+		
+		public Factory setScale(double size)
+		{
+			this.scale = size;
+			return this;
+		}
+		
+		public Factory setOffset(float x, float y, float z)
+		{
+			this.offset = new float[] {x, y, z};
+			return this;
 		}
 
 		@Override
 		public ZoanMorphRenderer createRenderFor(EntityRendererManager manager)
 		{
-			return new ZoanMorphRenderer(manager, this.model, this.texture, this.scale, this.offset);
+			ZoanMorphRenderer renderer = new ZoanMorphRenderer(manager, this.model, this.texture);
+			renderer.setScale(this.scale);
+			renderer.setOffset(this.offset);
+			return renderer;
 		}
 	}
-
 }

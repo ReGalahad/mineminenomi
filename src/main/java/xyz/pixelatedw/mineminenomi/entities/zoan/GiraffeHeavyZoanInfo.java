@@ -26,7 +26,10 @@ public class GiraffeHeavyZoanInfo extends ZoanInfo
 	@Override
 	public Factory getFactory()
 	{
-		return new ZoanMorphRenderer.Factory(new GiraffeHeavyModel(), "giraffehybrid", 1.4, new float[] { 0, 0.7f, 0 });
+		ZoanMorphRenderer.Factory factory = new ZoanMorphRenderer.Factory(new GiraffeHeavyModel(), "giraffehybrid");
+		factory.setScale(1.4);
+		factory.setOffset(0, 0.7f, 0);
+		return factory;
 	}
 
 	@Override
@@ -45,6 +48,12 @@ public class GiraffeHeavyZoanInfo extends ZoanInfo
 	public double getHeight()
 	{
 		return 4;
+	}
+	
+	@Override
+	public float getShadowSize()
+	{
+		return 1;
 	}
 
 	@Override

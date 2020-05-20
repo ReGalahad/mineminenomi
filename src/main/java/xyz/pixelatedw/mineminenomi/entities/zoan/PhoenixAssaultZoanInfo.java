@@ -26,7 +26,10 @@ public class PhoenixAssaultZoanInfo extends ZoanInfo
 	@Override
 	public Factory getFactory()
 	{
-		return new ZoanMorphRenderer.Factory(new PhoenixHybridModel(), "phoenixhybrid", 1, new float[] { 0, 0.2f, 0 });
+		ZoanMorphRenderer.Factory factory = new ZoanMorphRenderer.Factory(new PhoenixHybridModel(), "phoenixhybrid");
+		factory.setScale(1);
+		factory.setOffset(0, 0.2f, 0);
+		return factory;
 	}
 
 	@Override
@@ -45,6 +48,12 @@ public class PhoenixAssaultZoanInfo extends ZoanInfo
 	public double getHeight()
 	{
 		return 1.8;
+	}
+	
+	@Override
+	public float getShadowSize()
+	{
+		return 1;
 	}
 	
 	@Override

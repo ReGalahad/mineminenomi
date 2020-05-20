@@ -26,7 +26,10 @@ public class BisonWalkZoanInfo extends ZoanInfo
 	@Override
 	public Factory getFactory()
 	{
-		return new ZoanMorphRenderer.Factory(new BisonWalkModel(), "bisonspeed", 1.4, new float[] { 0, 0.8f, 0 });
+		ZoanMorphRenderer.Factory factory = new ZoanMorphRenderer.Factory(new BisonWalkModel(), "bisonspeed");
+		factory.setScale(1.4);
+		factory.setOffset(0F, 0.8f, 0F);
+		return factory;
 	}
 
 	@Override
@@ -45,6 +48,12 @@ public class BisonWalkZoanInfo extends ZoanInfo
 	public double getHeight()
 	{
 		return 1.5;
+	}
+	
+	@Override
+	public float getShadowSize()
+	{
+		return 0.9F;
 	}
 
 	@Override

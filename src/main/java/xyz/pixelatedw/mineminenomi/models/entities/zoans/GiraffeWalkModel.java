@@ -4,6 +4,7 @@ import net.minecraft.client.renderer.entity.model.RendererModel;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.MathHelper;
+import xyz.pixelatedw.mineminenomi.api.ZoanMorphModel;
 
 public class GiraffeWalkModel extends ZoanMorphModel
 {
