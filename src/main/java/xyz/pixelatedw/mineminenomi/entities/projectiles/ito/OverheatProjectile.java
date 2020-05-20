@@ -48,7 +48,7 @@ public class OverheatProjectile extends AbilityProjectileEntity
 		explosion.setExplosionSound(true);
 		explosion.setDamageOwner(false);
 		explosion.setDestroyBlocks(true);
-		explosion.setFireAfterExplosion(false);
+		explosion.setFireAfterExplosion(true);
 		explosion.setSmokeParticles(null);
 		explosion.setDamageEntities(true);
 		explosion.doExplosion();

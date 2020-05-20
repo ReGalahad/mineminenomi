@@ -1,13 +1,16 @@
 package xyz.pixelatedw.mineminenomi.abilities.goro;
 
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import xyz.pixelatedw.mineminenomi.api.abilities.ExplosionAbility;
-import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
+import net.minecraft.util.DamageSource;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.goro.KariParticleEffect;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
+import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.abilities.ChargeableAbility;
+
+import java.util.List;
 
 public class KariAbility extends ChargeableAbility
 {
@@ -33,15 +36,12 @@ public class KariAbility extends ChargeableAbility
 	}
 	
 	private boolean onEndChargingEvent(PlayerEntity player)
-	{	
-		ExplosionAbility explosion = AbilityHelper.newExplosion(player, player.posX, player.posY, player.posZ, 10);
-		explosion.setExplosionSound(false);
-		explosion.setDamageOwner(false);
-		explosion.setDestroyBlocks(false);
-		explosion.setFireAfterExplosion(false);
-		explosion.setSmokeParticles(null);
-		explosion.setDamageEntities(true);
-		explosion.doExplosion();
+	{
+		List<LivingEntity> list = WyHelper.getEntitiesNear(player.getPosition(), player.world, 12);
+		list.remove(player);
+
+		for (LivingEntity target : list)
+			target.attackEntityFrom(DamageSource.causePlayerDamage(player), 25);
 		
 		return true;
 	}

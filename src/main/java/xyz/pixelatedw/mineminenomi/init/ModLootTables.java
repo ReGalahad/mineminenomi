@@ -24,23 +24,23 @@ public class ModLootTables {
         }
 
         if (event.getName().equals(LootTables.CHESTS_UNDERWATER_RUIN_BIG) || event.getName().equals(LootTables.CHESTS_UNDERWATER_RUIN_SMALL)) {
-            LootPool fruit_boxes = constructLootPool("fruit_boxes", 1F, 2F,
+            LootPool fruit_boxes = constructLootPool("fruit_boxes", 1F, 1F,
 					ItemLootEntry.builder(ModItems.TIER_1_BOX).weight(10),
-					ItemLootEntry.builder(ModItems.TIER_2_BOX).weight(4)
+					ItemLootEntry.builder(ModItems.TIER_2_BOX).weight(2)
             );
 			event.getTable().addPool(fruit_boxes);
         }
 
         if (event.getName().equals(LootTables.CHESTS_BURIED_TREASURE) || event.getName().equals(LootTables.CHESTS_SHIPWRECK_TREASURE)) {
             LootPool fruit_boxes = constructLootPool("fruit_boxes", 1F, 2F,
-                    ItemLootEntry.builder(ModItems.TIER_2_BOX).weight(12),
-                    ItemLootEntry.builder(ModItems.TIER_3_BOX).weight(5)
+                    ItemLootEntry.builder(ModItems.TIER_2_BOX).weight(10),
+                    ItemLootEntry.builder(ModItems.TIER_3_BOX).weight(3)
             );
 			event.getTable().addPool(fruit_boxes);
         }
 
         if (event.getName().equals(LootTables.CHESTS_SHIPWRECK_SUPPLY) && event.getName().equals(LootTables.CHESTS_SHIPWRECK_MAP)) {
-            LootPool fruit_boxes = constructLootPool("fruit_boxes", 1F, 2F,
+            LootPool fruit_boxes = constructLootPool("fruit_boxes", 1F, 1F,
                     ItemLootEntry.builder(ModItems.TIER_1_BOX).weight(8),
                     ItemLootEntry.builder(ModItems.TIER_2_BOX).weight(4)
             );

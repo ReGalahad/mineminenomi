@@ -44,6 +44,8 @@ public class AbilityProjectileEntity extends ThrowableEntity
 	private boolean canPassThroughEntities = false;
 	private boolean canGetStuckInGround = false;
 	protected boolean stuckInGround = false;
+	private boolean resetHurtTime = true;
+
 
 	// Setting the defaults so that no crash occurs and so they will be null safe.
 	public IOnEntityImpact onEntityImpactEvent = (hitEntity) -> { this.onBlockImpactEvent.onImpact(hitEntity.getPosition()); };
@@ -149,7 +151,7 @@ public class AbilityProjectileEntity extends ThrowableEntity
 						return;
 					
 					hitEntity.attackEntityFrom(this.causeAbilityProjectileDamage(), this.damage);
-						
+
 					if(this.withEffects.getEffects().length > 0)
 					{
 						for(EffectInstance instance : this.withEffects.getEffects())
@@ -163,6 +165,9 @@ public class AbilityProjectileEntity extends ThrowableEntity
 					this.onEntityImpactEvent.onImpact(hitEntity);
 					if(!this.canPassThroughEntities)
 						this.remove();
+
+					if(resetHurtTime)
+						hitEntity.hurtResistantTime = 0;
 				}
 			}
 			else if(hit.getType() == RayTraceResult.Type.BLOCK)
@@ -264,7 +269,7 @@ public class AbilityProjectileEntity extends ThrowableEntity
 	{
 		this.canGetStuckInGround = true;
 	}
-	
+
 	public void setDamage(float damage)
 	{
 		this.damage = damage;
@@ -284,7 +289,13 @@ public class AbilityProjectileEntity extends ThrowableEntity
 	{
 		return this.stuckInGround;
 	}
-	
+
+	public void setResetHurtTime(boolean value)
+	{
+		this.resetHurtTime = value;
+	}
+
+
 	/*
 	 *	Interfaces
 	 */

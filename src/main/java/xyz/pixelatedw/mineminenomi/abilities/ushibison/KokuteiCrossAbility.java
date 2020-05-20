@@ -47,7 +47,11 @@ public class KokuteiCrossAbility extends PunchAbility
 	
 	private float onHitEntityEvent(PlayerEntity player, LivingEntity target)
 	{
+<<<<<<< HEAD
 		Vec3d speed = WyHelper.propulsion(player, 1.2, 1.2);
+=======
+		Vec3d speed = WyHelper.propulsion(player, 2f, 2f);
+>>>>>>> 4e39f997fbd9ca0e07fb845c19dbeb92dcc91dd9
 		target.setMotion(speed.x, player.getMotion().getY(), speed.z);
 		if(target instanceof PlayerEntity)
 			((ServerPlayerEntity)target).connection.sendPacket(new SEntityVelocityPacket(target));
