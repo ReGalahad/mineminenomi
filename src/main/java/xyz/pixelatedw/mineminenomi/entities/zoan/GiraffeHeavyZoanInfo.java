@@ -53,7 +53,7 @@ public class GiraffeHeavyZoanInfo extends ZoanInfo
 	@Override
 	public float getShadowSize()
 	{
-		return 1;
+		return 0.9F;
 	}
 
 	@Override

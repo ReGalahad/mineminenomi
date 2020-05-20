@@ -1,12 +1,11 @@
 package xyz.pixelatedw.mineminenomi.models.entities.zoans;
 
 import net.minecraft.client.renderer.entity.model.RendererModel;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.MathHelper;
 import xyz.pixelatedw.mineminenomi.api.ZoanMorphModel;
 
-public class GiraffeWalkModel extends ZoanMorphModel
+public class GiraffeWalkModel<T extends LivingEntity> extends ZoanMorphModel<T>
 {
 	public RendererModel frontleg2;
 	public RendererModel backleg2;
@@ -141,27 +140,30 @@ public class GiraffeWalkModel extends ZoanMorphModel
 	}
 
 	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+	public void render(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
 	{
-		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+		this.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
-		this.backleg1.render(f5);
-		this.backleg2.render(f5);
-		this.frontleg2.render(f5);
-		this.frontleg1.render(f5);
-		this.body.render(f5);
-		this.neck.render(f5);
+		this.backleg1.render(scale);
+		this.backleg2.render(scale);
+		this.frontleg2.render(scale);
+		this.frontleg1.render(scale);
+		this.body.render(scale);
+		this.neck.render(scale);
 	}
 	
-	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float headYaw, float headPitch, float scaleFactor, Entity ent)
+	@Override
+	public void setRotationAngles(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
 	{
-		LivingEntity entity = ((LivingEntity) ent);
+		super.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
+		// Hanldes the legs and tail movement
 		this.frontleg1.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 0.3F * limbSwingAmount;
+		this.frontleg2.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 0.4F * limbSwingAmount;
 		this.backleg1.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.3F * limbSwingAmount;
-
-		this.frontleg2.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 0.3F * limbSwingAmount;
-		this.backleg2.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.3F * limbSwingAmount;
+		this.backleg2.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.4F * limbSwingAmount;
+		if(entity.isSprinting())
+			this.tail1.rotateAngleX = 0.2F + MathHelper.cos(limbSwing * 0.6662F) * 0.2F * limbSwingAmount;
 	}
 	
 	public void setRotateAngle(RendererModel RendererModel, float x, float y, float z)

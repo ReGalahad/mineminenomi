@@ -2,13 +2,15 @@ package xyz.pixelatedw.mineminenomi.models.entities.zoans;
 
 import org.lwjgl.opengl.GL11;
 
+import net.minecraft.client.renderer.entity.model.IHasArm;
 import net.minecraft.client.renderer.entity.model.RendererModel;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.util.HandSide;
 import net.minecraft.util.math.MathHelper;
 import xyz.pixelatedw.mineminenomi.api.ZoanMorphModel;
+import xyz.pixelatedw.wypi.WyHelper;
 
-public class GiraffeHeavyModel extends ZoanMorphModel
+public class GiraffeHeavyModel<T extends LivingEntity> extends ZoanMorphModel<T> implements IHasArm
 {
 	public RendererModel leftleg4;
 	public RendererModel leftleg3;
@@ -54,11 +56,11 @@ public class GiraffeHeavyModel extends ZoanMorphModel
 		this.horn2 = new RendererModel(this, 60, 20);
 		this.horn2.setRotationPoint(-1.5F, -6.0F, -0.5F);
 		this.horn2.addBox(0.0F, 0.0F, 0.0F, 1, 2, 1, 0.0F);
-        this.body2 = new RendererModel(this, 47, 0);
-        this.body2.mirror = true;
-        this.body2.setRotationPoint(-0.5F, 7.5F, -1.9F);
-        this.body2.addBox(0.0F, 0.0F, 0.0F, 9, 7, 5, 0.0F);
-        this.setRotateAngle(body2, 0.0F, -0.0F, -0.9599310885968813F);
+		this.body2 = new RendererModel(this, 47, 0);
+		this.body2.mirror = true;
+		this.body2.setRotationPoint(-0.5F, 7.5F, -1.9F);
+		this.body2.addBox(0.0F, 0.0F, 0.0F, 9, 7, 5, 0.0F);
+		this.setRotateAngle(body2, 0.0F, -0.0F, -0.9599310885968813F);
 		this.lefthull4 = new RendererModel(this, 65, 20);
 		this.lefthull4.setRotationPoint(-1.0F, 0.0F, -2.5F);
 		this.lefthull4.addBox(0.0F, 0.0F, 0.0F, 1, 2, 1, 0.0F);
@@ -75,10 +77,10 @@ public class GiraffeHeavyModel extends ZoanMorphModel
 		this.leftleg3.setRotationPoint(0.5F, 5.0F, 0.0F);
 		this.leftleg3.addBox(-2.0F, 0.0F, -2.0F, 2, 4, 2, 0.0F);
 		this.setRotateAngle(leftleg3, 1.7453292519943295F, -0.0F, 0.0F);
-        this.rightarm2 = new RendererModel(this, 23, 39);
-        this.rightarm2.setRotationPoint(0.0F, 6.0F, 0.0F);
-        this.rightarm2.addBox(0.0F, 0.0F, 0.1F, 2, 6, 2, 0.0F);
-        this.setRotateAngle(rightarm2, 0.0F, -0.0F, -0.41887902047863906F);
+		this.rightarm2 = new RendererModel(this, 23, 39);
+		this.rightarm2.setRotationPoint(0.0F, 6.0F, 0.0F);
+		this.rightarm2.addBox(0.0F, 0.0F, 0.1F, 2, 6, 2, 0.0F);
+		this.setRotateAngle(rightarm2, 0.0F, -0.0F, -0.41887902047863906F);
 		this.rightleg2 = new RendererModel(this, 0, 30);
 		this.rightleg2.setRotationPoint(0.0F, 5.8F, -0.5F);
 		this.rightleg2.addBox(-2.0F, 0.0F, -2.0F, 2, 6, 2, 0.0F);
@@ -99,9 +101,9 @@ public class GiraffeHeavyModel extends ZoanMorphModel
 		this.righthull2.setRotationPoint(1.0F, 6.1F, 0.8F);
 		this.righthull2.addBox(0.0F, 0.0F, 0.0F, 1, 2, 1, 0.0F);
 		this.setRotateAngle(righthull2, 0.17453292519943295F, -0.0F, -0.9599310885968813F);
-        this.head2 = new RendererModel(this, 31, 29);
-        this.head2.setRotationPoint(-2.0F, -1.0F, 0.5F);
-        this.head2.addBox(0.01F, 0.0F, -4.0F, 4, 2, 5, 0.0F);
+		this.head2 = new RendererModel(this, 31, 29);
+		this.head2.setRotationPoint(-2.0F, -1.0F, 0.5F);
+		this.head2.addBox(0.01F, 0.0F, -4.0F, 4, 2, 5, 0.0F);
 		this.lefthull1 = new RendererModel(this, 65, 24);
 		this.lefthull1.setRotationPoint(0.0F, 5.5F, 0.5F);
 		this.lefthull1.addBox(-2.0F, 0.0F, 0.0F, 2, 2, 1, 0.0F);
@@ -133,10 +135,10 @@ public class GiraffeHeavyModel extends ZoanMorphModel
 		this.tail3.setRotationPoint(-0.5F, -0.5F, 3.5F);
 		this.tail3.addBox(0.0F, 0.0F, 0.0F, 2, 2, 3, 0.0F);
 		this.setRotateAngle(tail3, 0.20943951023931953F, -0.0F, 0.0F);
-        this.body3 = new RendererModel(this, 47, 0);
-        this.body3.setRotationPoint(2.5F, 7.4F, -1.91F);
-        this.body3.addBox(0.0F, -7.5F, 0.0F, 9, 7, 5, 0.0F);
-        this.setRotateAngle(body3, 0.0F, -0.0F, -2.2689280275926285F);
+		this.body3 = new RendererModel(this, 47, 0);
+		this.body3.setRotationPoint(2.5F, 7.4F, -1.91F);
+		this.body3.addBox(0.0F, -7.5F, 0.0F, 9, 7, 5, 0.0F);
+		this.setRotateAngle(body3, 0.0F, -0.0F, -2.2689280275926285F);
 		this.lefthull2 = new RendererModel(this, 65, 20);
 		this.lefthull2.setRotationPoint(-1.1F, 6.1F, 0.8F);
 		this.lefthull2.addBox(-1.0F, 0.0F, 0.0F, 1, 2, 1, 0.0F);
@@ -145,10 +147,10 @@ public class GiraffeHeavyModel extends ZoanMorphModel
 		this.rightarm1.setRotationPoint(-8.0F, 1.0F, -1.0F);
 		this.rightarm1.addBox(0.0F, 0.0F, 0.0F, 2, 6, 2, 0.0F);
 		this.setRotateAngle(rightarm1, 0.0F, -0.0F, 0.27925267815589905F);
-        this.leftarm2 = new RendererModel(this, 23, 39);
-        this.leftarm2.setRotationPoint(0.0F, 6.0F, 0.0F);
-        this.leftarm2.addBox(-2.0F, 0.0F, 0.1F, 2, 6, 2, 0.0F);
-        this.setRotateAngle(leftarm2, 0.0F, -0.0F, 0.41887902047863906F);
+		this.leftarm2 = new RendererModel(this, 23, 39);
+		this.leftarm2.setRotationPoint(0.0F, 6.0F, 0.0F);
+		this.leftarm2.addBox(-2.0F, 0.0F, 0.1F, 2, 6, 2, 0.0F);
+		this.setRotateAngle(leftarm2, 0.0F, -0.0F, 0.41887902047863906F);
 		this.righthull4 = new RendererModel(this, 65, 20);
 		this.righthull4.setRotationPoint(-1.0F, 0.0F, -2.5F);
 		this.righthull4.addBox(0.0F, 0.0F, 0.0F, 1, 2, 1, 0.0F);
@@ -225,58 +227,67 @@ public class GiraffeHeavyModel extends ZoanMorphModel
 	}
 
 	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+	public void render(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
 	{
-		this.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-		
-		this.rightleg4.render(f5);
-		this.body1.render(f5);
-		this.rightarm1.render(f5);
-		this.neck.render(f5);
-		this.leftarm1.render(f5);
-		this.tail1.render(f5);
-		this.leftleg4.render(f5);
+		this.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+
+		this.rightleg4.render(scale);
+		this.body1.render(scale);
+		this.rightarm1.render(scale);
+		this.neck.render(scale);
+		this.leftarm1.render(scale);
+		this.tail1.render(scale);
+		this.leftleg4.render(scale);
 	}
 
-	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float headYaw, float headPitch, float scaleFactor, Entity ent)
+	@Override
+	public void setRotationAngles(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
 	{
-		LivingEntity entity = ((LivingEntity) ent);
+		super.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
-		this.head1.rotateAngleY = headYaw / (270F / (float) Math.PI);
-		this.head1.rotateAngleX = headPitch / (360F / (float) Math.PI);
+		// Handles the head movement when following the mouse or when swimming
+		this.head1.rotateAngleY = netHeadYaw * ((float) Math.PI / 180F) / 1.2F;
+		this.head1.rotateAngleX = headPitch * ((float) Math.PI / 180F);
+		if (WyHelper.radToDeg(this.head1.rotateAngleX) > 15)
+			this.head1.rotateAngleX = WyHelper.degToRad(15);
+		if (WyHelper.radToDeg(this.head1.rotateAngleX) < -45)
+			this.head1.rotateAngleX = WyHelper.degToRad(-45);
 
-		this.leftleg4.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 0.8F * limbSwingAmount;
-		this.rightleg4.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.8F * limbSwingAmount;
+		// Hanldes the arm and leg movement
+		float f = 1.0F;
+		this.rightarm1.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.8F * limbSwingAmount * 0.5F / f;
+		this.leftarm1.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 0.8F * limbSwingAmount * 0.5F / f;
+		this.rightleg4.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 0.7F * limbSwingAmount / f;
+		this.leftleg4.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.7F * limbSwingAmount / f;
 
-		this.rightarm1.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 0.4F * limbSwingAmount;
-		this.leftarm1.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.4F * limbSwingAmount;
-
-		if (entity.isSwingInProgress)
+		// Handles the punch and item use animations of the model
+		this.swingProgress = entity.swingProgress;
+		if (this.swingProgress > 0)
 		{
-			this.rightarm1.rotateAngleX = MathHelper.sin(entity.swingProgress * 3.0F + (float) Math.PI) * 1.2F;
-			this.rightarm1.rotateAngleY = MathHelper.sin(entity.swingProgress * 3.0F + (float) Math.PI) * -0.2F;
-			this.rightarm1.rotateAngleZ = -MathHelper.cos(entity.swingProgress * 4.0F + (float) Math.PI) * 0.5F;
+			this.body1.rotateAngleY = MathHelper.sin(MathHelper.sqrt(this.swingProgress) * ((float) Math.PI * 2F)) * 0.2F;
+			this.rightarm1.rotationPointZ = MathHelper.sin(this.body1.rotateAngleY) * 12.0F;
+			this.rightarm1.rotationPointX = -MathHelper.cos(this.body1.rotateAngleY) * 9.0F;
+			this.rightarm1.rotateAngleY += this.body1.rotateAngleY;
+			this.leftarm1.rotationPointZ = -MathHelper.sin(this.body1.rotateAngleY) * 5.0F;
+			this.leftarm1.rotateAngleY -= this.body1.rotateAngleY;
+			this.leftarm1.rotateAngleX -= this.body1.rotateAngleY;
+			float f1 = 1.0F - this.swingProgress;
+			f1 = f1 * f1;
+			f1 = f1 * f1;
+			f1 = 1.0F - f1;
+			float f2 = MathHelper.sin(f1 * (float) Math.PI);
+			float f3 = MathHelper.sin(this.swingProgress * (float) Math.PI) * -(this.head1.rotateAngleX - 0.7F) * 0.75F;
+			this.rightarm1.rotateAngleX = (float) (this.rightarm1.rotateAngleX - (f2 * 1.2D + f3));
+			this.rightarm1.rotateAngleY += this.body1.rotateAngleY * 2.0F;
+			this.rightarm1.rotateAngleZ += MathHelper.sin(this.swingProgress * (float) Math.PI) * -0.4F;
 		}
-
-		if (MathHelper.sqrt(ent.getDistanceSq(ent.prevPosX, ent.prevPosY, ent.prevPosZ)) <= 0.05F && !entity.isSwingInProgress)
-		{
-			this.rightarm1.rotateAngleX = 0;
-			this.rightarm1.rotateAngleY = 0;
-			this.rightarm1.rotateAngleZ = 0.209F;
-		}
-		else if (!entity.isSwingInProgress && MathHelper.sqrt(ent.getDistanceSq(ent.prevPosX, ent.prevPosY, ent.prevPosZ)) > 0)
-		{
-			this.rightarm1.rotateAngleY = 0;
-			this.rightarm1.rotateAngleZ = 0.209F;
-		}
-
 	}
-	
-	public void setRotateAngle(RendererModel RendererModel, float x, float y, float z)
+
+	public void setRotateAngle(RendererModel model, float x, float y, float z)
 	{
-		RendererModel.rotateAngleX = x;
-		RendererModel.rotateAngleY = y;
-		RendererModel.rotateAngleZ = z;
+		model.rotateAngleX = x;
+		model.rotateAngleY = y;
+		model.rotateAngleZ = z;
 	}
 
 	@Override
@@ -293,5 +304,11 @@ public class GiraffeHeavyModel extends ZoanMorphModel
 	public RendererModel getArmRenderer()
 	{
 		return this.rightarm1;
+	}
+
+	@Override
+	public void postRenderArm(float scale, HandSide side)
+	{
+		
 	}
 }
