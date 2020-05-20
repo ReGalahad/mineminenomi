@@ -15,7 +15,6 @@ import net.minecraft.client.renderer.entity.PlayerRenderer;
 import net.minecraft.client.renderer.entity.model.IHasArm;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.HandSide;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
@@ -218,7 +217,7 @@ public class MorphHelper
 	public static void updateEyeView(PlayerEntity player)
 	{
 		MinecraftForge.EVENT_BUS.post(new EntityEvent.EyeHeight(player, player.getPose(), player.getSize(player.getPose()), player.getHeight()));
-		WyNetwork.sendTo(new SRecalculateEyeHeightPacket(), (ServerPlayerEntity) player);
+		WyNetwork.sendTo(new SRecalculateEyeHeightPacket(), player);
 	}
 
 	public static List<ZoanInfo> getZoanInfoList()
