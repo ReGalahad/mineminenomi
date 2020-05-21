@@ -31,7 +31,7 @@ public class PadHoProjectile extends AbilityProjectileEntity
 	{
 		super(NikyuProjectiles.PAD_HO, world, player);
 
-		this.setDamage(10);
+		this.setDamage(8);
 
 		this.onBlockImpactEvent = this::onBlockImpactEvent;
 		this.onEntityImpactEvent = this::onEntityImpactEvent;

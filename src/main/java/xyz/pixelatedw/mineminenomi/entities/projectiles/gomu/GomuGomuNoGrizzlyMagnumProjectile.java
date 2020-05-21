@@ -32,7 +32,8 @@ public class GomuGomuNoGrizzlyMagnumProjectile extends AbilityProjectileEntity
 		this.setMaxLife(30);
 		this.setPhysical();	
 		this.setPassThroughEntities();
-		
+		this.setHurtTime(5);
+
 		this.onEntityImpactEvent = this::onEntityImpactEvent;
 	}
 	

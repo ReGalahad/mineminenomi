@@ -34,7 +34,7 @@ public class BlackBoxProjectile extends AbilityProjectileEntity
 	{
 		super(KageProjectiles.BLACK_BOX, world, player);
 
-		this.setDamage(4);
+		this.setDamage(5);
 		
 		this.onBlockImpactEvent = this::onBlockImpactEvent;
 	}

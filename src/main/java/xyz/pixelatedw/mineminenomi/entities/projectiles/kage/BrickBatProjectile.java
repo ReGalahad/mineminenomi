@@ -26,7 +26,7 @@ public class BrickBatProjectile extends AbilityProjectileEntity
 	{
 		super(KageProjectiles.BRICK_BAT, world, player);
 
-		this.setDamage(4);	
+		this.setDamage(3);
 		this.setPassThroughEntities();
 	}
 }

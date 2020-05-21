@@ -34,10 +34,11 @@ public class BarrierbilityStairsProjectile extends AbilityProjectileEntity
 	public BarrierbilityStairsProjectile(World world, LivingEntity player)
 	{
 		super(BariProjectiles.BARRIERBILITY_STAIRS, world, player);
-		
+
 		this.setMaxLife(40);
 		this.setPassThroughEntities();
-		
+		this.setPassThroughBlocks();
+
 		this.onTickEvent = this::onTickEvent;
 	}
 	

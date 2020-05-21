@@ -34,7 +34,7 @@ public class GomuGomuNoGatlingAbility extends RepeaterAbility
 		IAbilityData props = AbilityDataCapability.get(player);
 		AbilityProjectileEntity projectile = null;
 		float speed = 2.5f;
-		int projectileSpace = 2;
+		int projectileSpace = 3;
 
 		if (GomuHelper.hasGearSecondActive(props))
 		{
@@ -42,7 +42,7 @@ public class GomuGomuNoGatlingAbility extends RepeaterAbility
 			if(!this.hasDataSet)
 			{
 				this.setMaxCooldown(10);
-				this.setMaxRepearCount(30, 3);
+				this.setMaxRepearCount(20, 2);
 				speed = 3.8f;
 				this.hasDataSet = true;
 			}
@@ -55,7 +55,7 @@ public class GomuGomuNoGatlingAbility extends RepeaterAbility
 				this.setMaxCooldown(25);
 				this.setMaxRepearCount(7, 5);
 				speed = 2.3f;
-				projectileSpace = 7;
+				projectileSpace = 9;
 				this.hasDataSet = true;
 			}
 		}
