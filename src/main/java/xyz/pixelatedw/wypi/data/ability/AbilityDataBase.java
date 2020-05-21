@@ -191,7 +191,9 @@ public class AbilityDataBase implements IAbilityData
 	@Override
 	public <T extends Ability> T[] getEquippedAbilities(AbilityCategory category)
 	{
-		return (T[]) this.equippedAbilities;
+		List<Ability> list1 = Arrays.stream(this.equippedAbilities).filter(ability -> (ability != null && ability.getCategory() == category) || category == AbilityCategory.ALL).collect(Collectors.toList());
+		Ability list2[] = new Ability[list1.size()];
+		return (T[]) list1.toArray(list2);
 	}
 
 	@Override

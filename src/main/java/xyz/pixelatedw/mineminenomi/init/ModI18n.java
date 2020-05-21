@@ -71,6 +71,7 @@ public class ModI18n
 	public static final String ABILITY_MESSAGE_ONLY_IN_AIR = WyRegistry.registerName("ability.message.only_in_air", "%s can only be used while airborne!");
 	public static final String ABILITY_MESSAGE_NEED_CLIMA_TACT = WyRegistry.registerName("ability.item.message.need_clima_tact", "You need a clima tact to use this ability!");
 	public static final String ABILITY_MESSAGE_NEED_SORCERY_CLIMA_TACT = WyRegistry.registerName("ability.item.message.need_sorcery_clima_tact", "You need a Sorcery or higher grade clima tact to use this ability!");
+	public static final String ABILITY_MESSAGE_ONE_HAKI_TYPE = WyRegistry.registerName("ability.message.one_haki_type", "%s can't be used while another same type haki is active!");
 
 	public static final String ITEM_MESSAGE_NEED_KEY = WyRegistry.registerName("item.message.need_key", "You need a key!");
 	
