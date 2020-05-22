@@ -16,6 +16,7 @@ import net.minecraft.particles.BlockParticleData;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
@@ -62,7 +63,7 @@ public class YomiPassiveEvents
 	{
 		PlayerEntity player = Minecraft.getInstance().player;
 		IDevilFruit props = DevilFruitCapability.get(player);
-		
+
 		if (event.getType() == ElementType.FOOD && props.getDevilFruit().equalsIgnoreCase("yomi_yomi") && props.getZoanPoint().equalsIgnoreCase(YomiZoanInfo.FORM))
 			event.setCanceled(true);
 	}
@@ -241,10 +242,8 @@ public class YomiPassiveEvents
 
 		PlayerEntity player = (PlayerEntity) event.getEntity();
 
-		if (!isSpirit(player))
-			return;
-
-		event.setCanceled(true);
+		if (isSpirit(player) && event.getSource() != DamageSource.MAGIC)
+			event.setCanceled(true);
 	}
 
 	@SubscribeEvent

@@ -46,7 +46,7 @@ public class YomiZoanInfo extends ZoanInfo
 	@Override
 	public double getHeight()
 	{
-		return 1.8;
+		return 2.2;
 	}
 	
 	@Override

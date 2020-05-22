@@ -32,12 +32,14 @@ public class DoaPassiveEvents
 	@SubscribeEvent
 	public static void onEntityHits(AttackEntityEvent event)
 	{
+		/*
 		PlayerEntity player = event.getPlayer();
 
 		if(!isInsideDoor(player))
 			return;
 		
 		event.setCanceled(true);
+		*/
 	}
 	
 	@SubscribeEvent

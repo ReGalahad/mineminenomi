@@ -18,7 +18,7 @@ public class EventsEnchantments
 
 	@SubscribeEvent
 	public static void onLivingAttack(LivingAttackEvent event)
-	{	
+	{
 		if (event.getSource().getTrueSource() instanceof PlayerEntity && !event.getSource().isExplosion())
 		{
 			PlayerEntity player = (PlayerEntity) event.getSource().getTrueSource();

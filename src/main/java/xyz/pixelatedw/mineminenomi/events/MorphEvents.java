@@ -196,6 +196,9 @@ public class MorphEvents
 				height = info.getHeight();
 			}
 
+			if(player.isSneaking())
+				height = height - 0.2F;
+			
 			player.setBoundingBox(new AxisAlignedBB(posX - width, posY, posZ - width, posX + width, posY + height, posZ + width));
 		}
 	}
