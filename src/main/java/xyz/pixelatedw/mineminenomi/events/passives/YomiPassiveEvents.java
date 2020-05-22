@@ -11,6 +11,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Items;
 import net.minecraft.network.play.server.SEntityVelocityPacket;
+import net.minecraft.network.play.server.SPlayEntityEffectPacket;
 import net.minecraft.particles.BlockParticleData;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
@@ -43,6 +44,7 @@ import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.entities.zoan.YomiZoanInfo;
 import xyz.pixelatedw.mineminenomi.events.custom.YomiTriggerEvent;
+import xyz.pixelatedw.mineminenomi.init.ModEffects;
 import xyz.pixelatedw.mineminenomi.packets.server.SSyncDevilFruitPacket;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
@@ -266,7 +268,9 @@ public class YomiPassiveEvents
 		{
 			attacker.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 100, 1));
 			attacker.addPotionEffect(new EffectInstance(Effects.MINING_FATIGUE, 100, 1));
-			// new DFEffectHieSlowness(attacker, 100);
+			EffectInstance instance = new EffectInstance(ModEffects.FROZEN, 100, 1);
+			attacker.addPotionEffect(instance);
+			((ServerPlayerEntity) attacked).connection.sendPacket(new SPlayEntityEffectPacket(attacker.getEntityId(), instance));
 			ExplosionAbility explosion = AbilityHelper.newExplosion(attacked, attacker.posX, attacker.posY, attacker.posZ, 2);
 			explosion.setDamageOwner(false);
 			explosion.setDestroyBlocks(false);
