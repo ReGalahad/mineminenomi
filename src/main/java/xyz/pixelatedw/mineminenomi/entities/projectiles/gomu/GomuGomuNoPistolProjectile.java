@@ -26,7 +26,7 @@ public class GomuGomuNoPistolProjectile extends AbilityProjectileEntity
 	{
 		super(GomuProjectiles.GOMU_GOMU_NO_PISTOL, world, player);
 
-		this.setDamage(3);
+		this.setDamage(6);
 		this.setPhysical();	
 	}
 }

@@ -30,7 +30,7 @@ public class GomuGomuNoJetBazookaProjectile extends AbilityProjectileEntity
 
 		this.setDamage(12);
 		this.setPhysical();
-		this.setHurtTime(5);
+		this.setHurtTime(10);
 
 		this.onEntityImpactEvent = this::onEntityImpactEvent;
 	}

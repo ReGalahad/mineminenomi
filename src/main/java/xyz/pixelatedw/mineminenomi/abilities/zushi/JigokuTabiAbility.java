@@ -39,7 +39,7 @@ public class JigokuTabiAbility extends ContinuousAbility
 
 		for (LivingEntity entity : targets)
 		{
-			entity.setMotion(0, entity.getMotion().y - 5, 0);
+			entity.setMotion(0, entity.getMotion().y - 10, 0);
 			entity.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 100, 10));
 
 			if (++activeTimer % 100 == 0)

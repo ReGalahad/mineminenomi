@@ -30,7 +30,7 @@ public class PhoenixGoenProjectile extends AbilityProjectileEntity
 	{
 		super(ToriPhoenixProjectiles.PHOENIX_GOEN, world, player);
 		
-		this.setDamage(10);
+		this.setDamage(2);
 		this.setCanGetStuckInGround();
 		this.setMaxLife(45);
 		

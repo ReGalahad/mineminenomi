@@ -33,7 +33,7 @@ public class MurasameProjectile extends AbilityProjectileEntity
 	{
 		super(FishmanKarateProjectiles.MURASAME, world, player);
 		
-		this.setDamage(9);
+		this.setDamage(5.5f);
 		this.setPassThroughEntities();
 		
 		this.onBlockImpactEvent = this::onBlockImpactEvent;

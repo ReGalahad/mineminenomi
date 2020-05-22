@@ -29,7 +29,7 @@ public class GomuGomuNoElephantGunProjectile extends AbilityProjectileEntity
 	{
 		super(GomuProjectiles.GOMU_GOMU_NO_ELEPHANT_GUN, world, player);
 
-		this.setDamage(10);
+		this.setDamage(20);
 		this.setMaxLife(30);
 		this.setPhysical();	
 		this.setCanGetStuckInGround();

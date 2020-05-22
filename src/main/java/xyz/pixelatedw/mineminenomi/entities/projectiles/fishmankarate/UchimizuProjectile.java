@@ -33,21 +33,20 @@ public class UchimizuProjectile extends AbilityProjectileEntity
 	{
 		super(FishmanKarateProjectiles.UCHIMIZU, world, player);
 		
-		this.setDamage(5);
-		
+		this.setDamage(2);
 		this.onBlockImpactEvent = this::onBlockImpactEvent;
 		this.onTickEvent = this::onTickEvent;
 	}
-	
+
 	private void onBlockImpactEvent(BlockPos hit)
-	{		
+	{
 		ExplosionAbility explosion = AbilityHelper.newExplosion(this.getThrower(), hit.getX(), hit.getY(), hit.getZ(), 2);
 		explosion.setExplosionSound(false);
 		explosion.setDamageOwner(false);
 		explosion.setDestroyBlocks(false);
 		explosion.setFireAfterExplosion(false);
 		explosion.setSmokeParticles(new WaterExplosionParticleEffect());
-		explosion.setDamageEntities(true);
+		explosion.setDamageEntities(false);
 		explosion.doExplosion();
 	}
 	
