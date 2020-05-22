@@ -22,6 +22,6 @@ public class FoliageBlockProtectionRule extends BlockProtectionRule
 			Blocks.DEAD_HORN_CORAL, Blocks.DEAD_HORN_CORAL_FAN, Blocks.DEAD_HORN_CORAL_WALL_FAN, Blocks.HORN_CORAL, Blocks.HORN_CORAL_FAN,
 			Blocks.HORN_CORAL_WALL_FAN, Blocks.COCOA, Blocks.SUGAR_CANE, Blocks.BEETROOTS, Blocks.WHEAT, Blocks.FERN, Blocks.LARGE_FERN,
 			Blocks.ACACIA_SAPLING, Blocks.BAMBOO_SAPLING, Blocks.BIRCH_SAPLING, Blocks.DARK_OAK_SAPLING, Blocks.JUNGLE_SAPLING, Blocks.OAK_SAPLING,
-			Blocks.BAMBOO, Blocks.SNOW);
+			Blocks.BAMBOO);
 	}
 }

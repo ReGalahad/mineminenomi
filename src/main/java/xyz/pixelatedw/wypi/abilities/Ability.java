@@ -49,7 +49,7 @@ public abstract class Ability extends ForgeRegistryEntry<Ability>
 				
 		if(this.onUseEvent.onUse(player))
 		{
-			this.startCooldown();
+			this.startCooldown(player);
 			IAbilityData props = AbilityDataCapability.get(player);
 			WyNetwork.sendTo(new SSyncAbilityDataPacket(player.getEntityId(), props), (ServerPlayerEntity)player);
 		}
@@ -94,15 +94,15 @@ public abstract class Ability extends ForgeRegistryEntry<Ability>
 		this.state = State.STANDBY;
 	}
 	
-	public void startCooldown()
-	{
-		this.state = State.COOLDOWN;
-	}
-	
 	public void startDisable()
 	{
 		this.state = State.DISABLED;
 	}
+	
+	public void startCooldown(PlayerEntity player)
+	{
+		this.state = State.COOLDOWN;
+	}	
 	
 	public void stopCooldown(PlayerEntity player)
 	{

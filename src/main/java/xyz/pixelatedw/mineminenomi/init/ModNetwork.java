@@ -16,7 +16,7 @@ import xyz.pixelatedw.mineminenomi.packets.server.SOpenQuestChooseScreenPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SOpenTraderScreenPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SOpenWantedPosterScreenPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SRecalculateEyeHeightPacket;
-import xyz.pixelatedw.mineminenomi.packets.server.SSpecialFlyingPacket;
+import xyz.pixelatedw.mineminenomi.packets.server.SFlySpeedPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SSyncDevilFruitPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SUpdateTraderOffersPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SViewProtectionPacket;
@@ -47,7 +47,7 @@ public class ModNetwork
 		WyNetwork.registerPacket(SSyncDevilFruitPacket.class, SSyncDevilFruitPacket::encode, SSyncDevilFruitPacket::decode, SSyncDevilFruitPacket::handle);
 		WyNetwork.registerPacket(SSyncAbilityDataPacket.class, SSyncAbilityDataPacket::encode, SSyncAbilityDataPacket::decode, SSyncAbilityDataPacket::handle);
 		WyNetwork.registerPacket(SEntityStatsSyncPacket.class, SEntityStatsSyncPacket::encode, SEntityStatsSyncPacket::decode, SEntityStatsSyncPacket::handle);
-		WyNetwork.registerPacket(SSpecialFlyingPacket.class, SSpecialFlyingPacket::encode, SSpecialFlyingPacket::decode, SSpecialFlyingPacket::handle);
+		WyNetwork.registerPacket(SFlySpeedPacket.class, SFlySpeedPacket::encode, SFlySpeedPacket::decode, SFlySpeedPacket::handle);
 		WyNetwork.registerPacket(SRecalculateEyeHeightPacket.class, SRecalculateEyeHeightPacket::encode, SRecalculateEyeHeightPacket::decode, SRecalculateEyeHeightPacket::handle);
 		WyNetwork.registerPacket(SViewProtectionPacket.class, SViewProtectionPacket::encode, SViewProtectionPacket::decode, SViewProtectionPacket::handle);
 		WyNetwork.registerPacket(SOpenCharacterCreatorScreenPacket.class, SOpenCharacterCreatorScreenPacket::encode, SOpenCharacterCreatorScreenPacket::decode, SOpenCharacterCreatorScreenPacket::handle);

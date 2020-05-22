@@ -1,10 +1,13 @@
 package xyz.pixelatedw.mineminenomi.models.entities.zoans;
 
-import net.minecraft.client.renderer.entity.model.RendererModel;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.math.MathHelper;
+import com.mojang.blaze3d.platform.GlStateManager;
 
-public class BisonWalkModel extends ZoanMorphModel
+import net.minecraft.client.renderer.entity.model.RendererModel;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.util.math.MathHelper;
+import xyz.pixelatedw.mineminenomi.api.ZoanMorphModel;
+
+public class BisonWalkModel<T extends LivingEntity> extends ZoanMorphModel<T>
 {
 	public RendererModel head1;
 	public RendererModel head2;
@@ -136,33 +139,40 @@ public class BisonWalkModel extends ZoanMorphModel
 	}
 
 	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+	public void render(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
 	{
-		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+		this.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
-		this.righthorn2.render(f5);
-		this.rearrightleg1.render(f5);
-		this.lefthorn1.render(f5);
-		this.head1.render(f5);
-		this.lefthorn2.render(f5);
-		this.body2.render(f5);
-		this.rightleg2.render(f5);
-		this.righthorn1.render(f5);
-		this.head2.render(f5);
-		this.body1.render(f5);
-		this.tail.render(f5);
-		this.leftleg2.render(f5);
-		this.rearleftleg1.render(f5);
-		this.body3.render(f5);
+		GlStateManager.translatef(0.0F, 0.0F, -0.3F);
+
+		this.righthorn2.render(scale);
+		this.rearrightleg1.render(scale);
+		this.lefthorn1.render(scale);
+		this.head1.render(scale);
+		this.lefthorn2.render(scale);
+		this.body2.render(scale);
+		this.rightleg2.render(scale);
+		this.righthorn1.render(scale);
+		this.head2.render(scale);
+		this.body1.render(scale);
+		this.tail.render(scale);
+		this.leftleg2.render(scale);
+		this.rearleftleg1.render(scale);
+		this.body3.render(scale);
 	}
 
-	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float headYaw, float headPitch, float scaleFactor, Entity ent)
+	@Override
+	public void setRotationAngles(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
 	{
-		leftleg2.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 0.3F * limbSwingAmount;
-		rightleg2.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.3F * limbSwingAmount;
-
-		rearrightleg1.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 0.4F * limbSwingAmount;
-		rearleftleg1.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.4F * limbSwingAmount;
+		super.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+		
+		// Hanldes the legs and tail movement
+		this.leftleg2.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 0.3F * limbSwingAmount;
+		this.rightleg2.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.3F * limbSwingAmount;
+		this.rearrightleg1.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 0.4F * limbSwingAmount;
+		this.rearleftleg1.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.4F * limbSwingAmount;
+		if(entity.isSprinting())
+			this.tail.rotateAngleX = 1.2F + MathHelper.cos(limbSwing * 0.6662F) * 0.2F * limbSwingAmount;
 	}
 
 	public void setRotateAngle(RendererModel RendererModel, float x, float y, float z)

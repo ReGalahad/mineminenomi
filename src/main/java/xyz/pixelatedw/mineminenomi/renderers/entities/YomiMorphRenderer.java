@@ -3,7 +3,6 @@ package xyz.pixelatedw.mineminenomi.renderers.entities;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
@@ -15,9 +14,9 @@ public class YomiMorphRenderer extends ZoanMorphRenderer
 
 	private YomiModel model;
 	
-	public YomiMorphRenderer(EntityRendererManager renderManager, YomiModel model, String texture, double scale, float[] offset)
+	public YomiMorphRenderer(EntityRendererManager renderManager, YomiModel model, String texture)
 	{
-		super(renderManager, model, texture, scale, offset);
+		super(renderManager, model, texture);
 		this.model = model;
 	}
 
@@ -37,25 +36,22 @@ public class YomiMorphRenderer extends ZoanMorphRenderer
 		//}
 	}
 	
-	public static class Factory implements IRenderFactory<PlayerEntity>
+	public static class Factory<T extends LivingEntity> implements IRenderFactory<T>
 	{
 		private YomiModel model;
 		private String texture;
-		private double scale;
-		private float[] offset;
+
 		
-		public Factory(YomiModel model, String texture, double scale, float[] offset)
+		public Factory(YomiModel model, String texture)
 		{
 			this.model = model;
 			this.texture = texture;
-			this.scale = scale;
-			this.offset = offset;
 		}
 		
 		@Override
-		public EntityRenderer<? super PlayerEntity> createRenderFor(EntityRendererManager manager)
+		public EntityRenderer<? super T> createRenderFor(EntityRendererManager manager)
 		{
-			return new YomiMorphRenderer(manager, this.model, this.texture, this.scale, this.offset);
+			return new YomiMorphRenderer(manager, this.model, this.texture);
 		}
 	}
 }

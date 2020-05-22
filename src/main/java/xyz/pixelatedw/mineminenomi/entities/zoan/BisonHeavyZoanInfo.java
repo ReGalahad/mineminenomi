@@ -26,7 +26,10 @@ public class BisonHeavyZoanInfo extends ZoanInfo
 	@Override
 	public Factory getFactory()
 	{
-		return new ZoanMorphRenderer.Factory(new BisonHeavyModel(), "bisonpower", 1.4, new float[] { 0, 0.7f, 0 });
+		ZoanMorphRenderer.Factory factory = new ZoanMorphRenderer.Factory(new BisonHeavyModel(), "bisonpower");
+		factory.setScale(1.4);
+		factory.setOffset(0, 0.7f, 0);
+		return factory;
 	}
 
 	@Override
@@ -38,7 +41,7 @@ public class BisonHeavyZoanInfo extends ZoanInfo
 	@Override
 	public double getWidth()
 	{
-		return 1.5;
+		return 1.2;
 	}
 
 	@Override
@@ -46,17 +49,27 @@ public class BisonHeavyZoanInfo extends ZoanInfo
 	{
 		return 2.5;
 	}
+	
+	@Override
+	public float getShadowSize()
+	{
+		return 0.8F;
+	}
 
 	@Override
-	public double[] getHeldItemOffset()
+	public double[][] getHeldItemOffset()
 	{
-		return new double[] {-0.37, 0.6, -0.325};
+		return new double[][] 
+			{
+				{-0.3F, -0.1F, 0F},
+				{0.05F, 0.9F, -0.4F}
+			};
 	}
 
 	@Override
 	public double getHeldItemRotation()
 	{
-		return 50;
+		return 0;
 	}
 
 }

@@ -2,13 +2,13 @@ package xyz.pixelatedw.mineminenomi.abilities.haki;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import xyz.pixelatedw.mineminenomi.api.abilities.OverlayPunchAbility;
 import xyz.pixelatedw.mineminenomi.api.helpers.HakiHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
-import xyz.pixelatedw.wypi.abilities.PunchAbility;
 
-public class BusoshokuHakiHardeningAbility extends PunchAbility
+public class BusoshokuHakiHardeningAbility extends OverlayPunchAbility
 {
 	public static final BusoshokuHakiHardeningAbility INSTANCE = new BusoshokuHakiHardeningAbility();
 
@@ -21,6 +21,7 @@ public class BusoshokuHakiHardeningAbility extends PunchAbility
 	}
 
 	// Overriding this method for haki punches since we want the ability to remain active after the punch
+	@Override
 	public float hitEntity(PlayerEntity player, LivingEntity target)
 	{
 		IEntityStats props = EntityStatsCapability.get(player);

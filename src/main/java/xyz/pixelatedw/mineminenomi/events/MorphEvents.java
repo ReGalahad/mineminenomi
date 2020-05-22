@@ -1,9 +1,12 @@
 package xyz.pixelatedw.mineminenomi.events;
 
+import java.lang.reflect.Field;
+
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
+import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Hand;
@@ -53,6 +56,10 @@ public class MorphEvents
 		LivingEntity entity = event.getEntity();
 		IDevilFruit props = DevilFruitCapability.get(entity);
 
+		if(WyHelper.isNullOrEmpty(props.getDevilFruit()))
+			return;
+		
+		float shadowSize = 0.5F;
 		if (!WyHelper.isNullOrEmpty(props.getZoanPoint()))
 		{
 			if (event.getEntity().hurtTime > 0)
@@ -72,7 +79,25 @@ public class MorphEvents
 					render.doRender(entity, event.getX(), event.getY(), event.getZ(), 0F, 0.0625F);
 				else
 					render.doRender(entity, event.getX(), event.getY() + 1.2, event.getZ(), 0F, 0.0625F);
+				
+				shadowSize = info.getShadowSize();
 			}
+		}
+		else
+		{
+			shadowSize = 0.5F;
+		}
+		
+		Field field = null;
+		try
+		{
+			field = EntityRenderer.class.getDeclaredField("shadowSize");
+			field.setAccessible(true);
+			field.set(event.getRenderer(), shadowSize);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
 		}
 	}
 
@@ -141,13 +166,10 @@ public class MorphEvents
 	@SubscribeEvent
 	public static void onZoanSizeChange(TickEvent.PlayerTickEvent event)
 	{
-		if (event.phase == TickEvent.Phase.END)
+		if (event.phase == TickEvent.Phase.START)
 		{
 			PlayerEntity player = event.player;
 			IDevilFruit props = DevilFruitCapability.get(player);
-
-			if (WyHelper.isNullOrEmpty(props.getDevilFruit()) || WyHelper.isNullOrEmpty(props.getZoanPoint()))
-				return;
 
 			double posX = player.posX;
 			double posY = player.posY;
@@ -156,13 +178,21 @@ public class MorphEvents
 			double width = 0.6F / 2;
 			double height = 1.8F;
 
+			if(WyHelper.isNullOrEmpty(props.getDevilFruit()))
+				return;
+			else if(WyHelper.isNullOrEmpty(props.getZoanPoint()))
+			{
+				player.setBoundingBox(new AxisAlignedBB(posX - width, posY, posZ - width, posX + width, posY + height, posZ + width));
+				return;
+			}
+										
 			ZoanInfo info = MorphHelper.getZoanInfo(player);
 			if (info != null)
 			{
 				width = info.getWidth() / 2;
 				height = info.getHeight();
 			}
-
+			
 			player.setBoundingBox(new AxisAlignedBB(posX - width, posY, posZ - width, posX + width, posY + height, posZ + width));
 		}
 	}

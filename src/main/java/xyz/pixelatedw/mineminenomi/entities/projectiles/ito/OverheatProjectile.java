@@ -31,8 +31,15 @@ public class OverheatProjectile extends AbilityProjectileEntity
 
 		this.setDamage(20);
 		this.setPassThroughEntities();
-
+		
+		this.onEntityImpactEvent = this::onEntityImpactEvent;
 		this.onBlockImpactEvent = this::onBlockImpactEvent;
+	}
+	
+	private void onEntityImpactEvent(LivingEntity hitEntity)
+	{
+		this.onBlockImpactEvent.onImpact(hitEntity.getPosition());
+		hitEntity.setFire(10);
 	}
 	
 	private void onBlockImpactEvent(BlockPos hit)

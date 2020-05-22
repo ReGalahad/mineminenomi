@@ -26,7 +26,10 @@ public class GiraffeWalkZoanInfo extends ZoanInfo
 	@Override
 	public Factory getFactory()
 	{
-		return new ZoanMorphRenderer.Factory(new GiraffeWalkModel(), "giraffefull", 1.55, new float[] { 0, 0.95f, 0 });
+		ZoanMorphRenderer.Factory factory = new ZoanMorphRenderer.Factory(new GiraffeWalkModel(), "giraffefull");
+		factory.setScale(1.55);
+		factory.setOffset(0, 0.95f, 0);
+		return factory;
 	}
 
 	@Override
@@ -46,11 +49,17 @@ public class GiraffeWalkZoanInfo extends ZoanInfo
 	{
 		return 4;
 	}
+	
+	@Override
+	public float getShadowSize()
+	{
+		return 1;
+	}
 
 	@Override
-	public double[] getHeldItemOffset()
+	public double[][] getHeldItemOffset()
 	{
-		return new double[] {0, 0, 0};
+		return null;
 	}
 
 	@Override

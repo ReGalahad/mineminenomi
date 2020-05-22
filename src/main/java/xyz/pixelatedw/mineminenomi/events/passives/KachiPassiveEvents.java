@@ -60,12 +60,12 @@ public class KachiPassiveEvents
 
 		IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
 		IAbilityData abilityProps = AbilityDataCapability.get(player);
-
+			
 		if (!devilFruitProps.getDevilFruit().equals("kachi_kachi"))
 			return;
-
+		
 		HotBoilingSpecialAbility ability = abilityProps.getEquippedAbility(HotBoilingSpecialAbility.INSTANCE);
-
+		
 		if (ability == null || !ability.isContinuous())
 			return;
 
