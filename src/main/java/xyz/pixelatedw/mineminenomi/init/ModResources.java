@@ -43,6 +43,7 @@ public class ModResources
 	public static final ResourceLocation AWA3 = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/awa3.png");
 	public static final ResourceLocation NETSU = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/netsu.png");
 	public static final ResourceLocation NETSU2 = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/netsu2.png");
+	public static final ResourceLocation CIRCLE = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/circle.png");
 
 	// UI
 	public static final ResourceLocation WOOD_ARROW = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/icons/arrow.png");

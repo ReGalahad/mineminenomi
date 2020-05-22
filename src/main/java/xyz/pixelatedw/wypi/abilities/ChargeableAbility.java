@@ -54,9 +54,9 @@ public abstract class ChargeableAbility extends Ability
 	/*
 	 *  Setters / Getters
 	 */
-	public void setMaxChargeTime(int time)
+	public void setMaxChargeTime(int seconds)
 	{
-		this.maxChargeTime = time * 20;
+		this.maxChargeTime = seconds * 20;
 		this.chargeTime = this.maxChargeTime;
 	}
 	
