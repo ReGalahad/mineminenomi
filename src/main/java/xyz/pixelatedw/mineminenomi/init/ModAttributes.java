@@ -4,6 +4,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.ai.attributes.RangedAttribute;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
@@ -33,9 +34,10 @@ public class ModAttributes {
 
     @SubscribeEvent
     public static void onJump(LivingJumpEvent e) {
-        if (!e.getEntityLiving().isSneaking()) {
-            e.getEntityLiving().addVelocity(0,  0.1F * (e.getEntityLiving().getAttribute(JUMP_HEIGHT).getValue() - 1), 0);
-        }
+        double value = e.getEntityLiving().getAttribute(JUMP_HEIGHT).getValue();
+        e.getEntityLiving().addVelocity(0,  0.1F * (value - 1), 0);
+        if(value <= 0)
+            e.getEntityLiving().setVelocity(0, e.getEntityLiving().getMotion().y, 0);
     }
 
 }

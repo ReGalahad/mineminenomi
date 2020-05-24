@@ -89,21 +89,9 @@ public class PoisonBlock extends Block
 	{
 		if (entity instanceof LivingEntity)
 		{
-			IDevilFruit props = DevilFruitCapability.get((LivingEntity) entity);
-
-			if (!props.getDevilFruit().equals("doku_doku"))
+			if (!((LivingEntity) entity).isPotionActive(Effects.POISON))
 			{
-				if (!((LivingEntity) entity).isPotionActive(Effects.POISON))
-				{
-					((LivingEntity) entity).addPotionEffect(new EffectInstance(Effects.POISON, 300, 1));
-				}
-			}
-			else
-			{
-				if (!((LivingEntity) entity).isPotionActive(Effects.REGENERATION))
-				{
-					((LivingEntity) entity).addPotionEffect(new EffectInstance(Effects.REGENERATION, 50, 0));
-				}
+				((LivingEntity) entity).addPotionEffect(new EffectInstance(Effects.POISON, 300, 1));
 			}
 		}
 	}

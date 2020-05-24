@@ -256,6 +256,11 @@ public class AbilityProjectileEntity extends ThrowableEntity
 	{
 		this.isPhysical = true;
 	}
+
+	public boolean getPhysical()
+	{
+		return this.isPhysical;
+	}
 	
 	public void setPassThroughBlocks()
 	{

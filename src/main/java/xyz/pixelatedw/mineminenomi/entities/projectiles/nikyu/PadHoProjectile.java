@@ -49,7 +49,7 @@ public class PadHoProjectile extends AbilityProjectileEntity
 		if(zPower >= 0) zPower += 2;
 		else zPower -= 2;
 		
-		target.setMotion(xPower, 0.1, zPower);
+		target.setMotion(xPower, 1.2f, zPower);
 		target.velocityChanged = true;
 		target.fallDistance = 0;
 	}

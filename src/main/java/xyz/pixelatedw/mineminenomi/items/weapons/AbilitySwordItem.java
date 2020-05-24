@@ -1,6 +1,7 @@
 package xyz.pixelatedw.mineminenomi.items.weapons;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -29,15 +30,29 @@ public class AbilitySwordItem extends CoreSwordItem
 			PlayerEntity owner = (PlayerEntity) entity;
 			IAbilityData abilityDataProps = AbilityDataCapability.get(owner);
 
+			boolean deleteSword = true;
+
 			for(Ability ability : abilityDataProps.getEquippedAbilities(AbilityCategory.ALL))
 			{
 				if(ability == null || !(ability instanceof ItemAbility) || !this.ability.equals(ability))
 					continue;
 
-				if(!(ability instanceof ItemAbility) || !ability.isContinuous() || !((ItemAbility) ability).canBeActive(owner))
-					owner.inventory.deleteStack(itemStack);
+				if(ability.isContinuous())
+					deleteSword = false;
 			}
+
+			if(deleteSword)
+				owner.inventory.deleteStack(itemStack);
 		}
+	}
+
+	@Override
+	public boolean onEntityItemUpdate(ItemStack itemStack, ItemEntity entityItem)
+	{
+		if(entityItem.isAlive())
+			entityItem.remove();
+		return true;
+
 	}
 
 	@Override
