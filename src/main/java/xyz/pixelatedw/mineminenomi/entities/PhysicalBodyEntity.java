@@ -3,22 +3,20 @@ package xyz.pixelatedw.mineminenomi.entities;
 import java.util.Optional;
 import java.util.UUID;
 
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.HandSide;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 
-public class PhysicalBodyEntity extends LivingEntity
+public class PhysicalBodyEntity extends CreatureEntity
 {
 	private static final DataParameter<Optional<UUID>> OWNER = EntityDataManager.createKey(PhysicalBodyEntity.class, DataSerializers.OPTIONAL_UNIQUE_ID);
 
@@ -41,11 +39,12 @@ public class PhysicalBodyEntity extends LivingEntity
 	public boolean attackEntityFrom(DamageSource source, float amount)
 	{
 		PlayerEntity owner = this.getOwner();
-
-		if (owner == null)
-			return true;
-
-		return owner.attackEntityFrom(source, amount);
+		if(owner == null)
+			return false;
+		
+		owner.attackEntityFrom(DamageSource.MAGIC, 2);
+		
+		return super.attackEntityFrom(source, amount);
 	}
 
 	@Override
@@ -76,6 +75,8 @@ public class PhysicalBodyEntity extends LivingEntity
 	protected void registerAttributes()
 	{
 		super.registerAttributes();
+		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40.0D);
+		this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
 	}
 
 	@Override
@@ -100,28 +101,4 @@ public class PhysicalBodyEntity extends LivingEntity
 	{
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
-
-	@Override
-	public Iterable<ItemStack> getArmorInventoryList()
-	{
-		return null;
-	}
-
-	@Override
-	public ItemStack getItemStackFromSlot(EquipmentSlotType slotIn)
-	{
-		return ItemStack.EMPTY;
-	}
-
-	@Override
-	public void setItemStackToSlot(EquipmentSlotType slotIn, ItemStack stack)
-	{
-	}
-
-	@Override
-	public HandSide getPrimaryHand()
-	{
-		return HandSide.RIGHT;
-	}
-
 }

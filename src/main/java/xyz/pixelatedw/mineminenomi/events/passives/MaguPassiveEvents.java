@@ -48,17 +48,17 @@ public class MaguPassiveEvents
 	public static void onEntityAttackEvent(LivingAttackEvent event)
 	{
 		if (!(event.getEntityLiving() instanceof PlayerEntity))
-			return;	
-		
+			return;
+
 		PlayerEntity player = (PlayerEntity) event.getEntityLiving();
 		IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
 		DamageSource damageSource = event.getSource();
 
-		if(devilFruitProps.getDevilFruit().equalsIgnoreCase("magu_magu") && (damageSource.equals(DamageSource.IN_FIRE) || damageSource.equals(DamageSource.ON_FIRE) || damageSource.equals(DamageSource.LAVA)))
+		if (devilFruitProps.getDevilFruit().equalsIgnoreCase("magu_magu") && (damageSource.equals(DamageSource.IN_FIRE) || damageSource.equals(DamageSource.ON_FIRE) || damageSource.equals(DamageSource.LAVA)))
 		{
 			player.extinguish();
 			event.setCanceled(true);
-		}	
+		}
 	}
 
 	@OnlyIn(Dist.CLIENT)

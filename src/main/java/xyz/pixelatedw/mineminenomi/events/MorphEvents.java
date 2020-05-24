@@ -160,6 +160,9 @@ public class MorphEvents
 			}
 		}
 		
+		if(player.isSneaking())
+			eyeHeight = eyeHeight - 0.3F;
+		
 		event.setNewHeight(eyeHeight);
 	}
 
@@ -185,13 +188,16 @@ public class MorphEvents
 				player.setBoundingBox(new AxisAlignedBB(posX - width, posY, posZ - width, posX + width, posY + height, posZ + width));
 				return;
 			}
-										
+								
 			ZoanInfo info = MorphHelper.getZoanInfo(player);
 			if (info != null)
 			{
 				width = info.getWidth() / 2;
 				height = info.getHeight();
 			}
+
+			if(player.isSneaking())
+				height = height - 0.2F;
 			
 			player.setBoundingBox(new AxisAlignedBB(posX - width, posY, posZ - width, posX + width, posY + height, posZ + width));
 		}

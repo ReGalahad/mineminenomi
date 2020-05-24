@@ -2,7 +2,6 @@ package xyz.pixelatedw.mineminenomi.abilities.doku;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import xyz.pixelatedw.mineminenomi.api.abilities.ZoanAbility;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.api.protection.BlockProtectionRule;

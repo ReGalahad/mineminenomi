@@ -46,7 +46,7 @@ public class PhoenixFlyPointAbility extends ZoanAbility
 	private void duringContinuityEvent(PlayerEntity player, int activeTime)
 	{
 		player.fallDistance = 0;
-		System.out.println(player.abilities.getFlySpeed());
+		//System.out.println(player.abilities.getFlySpeed());
 	}
 	
 	@Override

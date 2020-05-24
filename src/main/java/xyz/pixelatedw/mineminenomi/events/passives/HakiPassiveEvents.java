@@ -1,5 +1,8 @@
 package xyz.pixelatedw.mineminenomi.events.passives;
 
+import java.awt.Color;
+import java.lang.reflect.Method;
+
 import com.mojang.blaze3d.platform.GLX;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.platform.GlStateManager.DestFactor;
@@ -8,7 +11,9 @@ import com.mojang.blaze3d.platform.GlStateManager.SourceFactor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.LivingRenderer;
 import net.minecraft.client.renderer.entity.model.IHasArm;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.Pose;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -18,6 +23,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderSpecificHandEvent;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -25,10 +31,12 @@ import xyz.pixelatedw.mineminenomi.abilities.haki.BusoshokuHakiFullBodyHardening
 import xyz.pixelatedw.mineminenomi.abilities.haki.BusoshokuHakiHardeningAbility;
 import xyz.pixelatedw.mineminenomi.abilities.haki.KenbunshokuHakiAuraAbility;
 import xyz.pixelatedw.mineminenomi.abilities.haki.KenbunshokuHakiFutureSightAbility;
+import xyz.pixelatedw.mineminenomi.api.IHasOverlay;
 import xyz.pixelatedw.mineminenomi.api.helpers.HakiHelper;
 import xyz.pixelatedw.mineminenomi.api.helpers.MorphHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
+import xyz.pixelatedw.mineminenomi.init.ModEffects;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
@@ -41,23 +49,23 @@ public class HakiPassiveEvents
 {
 	@SubscribeEvent
 	public static void onEntityAttackEvent(LivingAttackEvent event)
-	{	
+	{
 		if (!(event.getEntityLiving() instanceof PlayerEntity))
-			return;	
-				
+			return;
+
 		PlayerEntity player = (PlayerEntity) event.getEntityLiving();
 		IAbilityData abilityProps = AbilityDataCapability.get(player);
 
 		KenbunshokuHakiFutureSightAbility ability = abilityProps.getEquippedAbility(KenbunshokuHakiFutureSightAbility.INSTANCE);
 		boolean isActive = ability != null && ability.isContinuous();
-		
-		if(isActive)
+
+		if (isActive)
 		{
 			event.setCanceled(true);
 			ability.reduceProtection(event.getAmount());
 		}
 	}
-	
+
 	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
 	public static void onHandRendering(RenderSpecificHandEvent event)
@@ -147,51 +155,77 @@ public class HakiPassiveEvents
 	{
 		if (!(event.getEntity() instanceof LivingEntity))
 			return;
-		
+
 		PlayerEntity player = Minecraft.getInstance().player;
 		IAbilityData props = AbilityDataCapability.get(player);
 		IEntityStats sprops = EntityStatsCapability.get(player);
-		
+
 		Ability ability = props.getEquippedAbility(KenbunshokuHakiAuraAbility.INSTANCE);
 		boolean isActive = ability != null && ability.isContinuous();
-		
-		if(!isActive)
-			return;
-		
-		LivingEntity entity = (LivingEntity) event.getEntity();
-		
-		if(entity == player)
-			return;
-		
-		float dorikiPower = sprops.getDoriki() / 2000;
-		float hakiPower = HakiHelper.getBusoHakiExp() / 4;
-		float finalPower = dorikiPower + hakiPower;
-		
-		if(entity.getDistance(player) > 20 + finalPower)
-			return;
-		
-		GlStateManager.pushMatrix();
 
-		GlStateManager.disableLighting();
-		GlStateManager.activeTexture(GLX.GL_TEXTURE1);
-		GlStateManager.disableTexture();
-		GlStateManager.activeTexture(GLX.GL_TEXTURE0);
+		if (isActive)
+		{
+			LivingEntity entity = event.getEntity();
+	
+			if (entity == player)
+				return;
+	
+			float dorikiPower = sprops.getDoriki() / 2000;
+			float hakiPower = HakiHelper.getBusoHakiExp() / 4;
+			float finalPower = dorikiPower + hakiPower;
+	
+			if (entity.getDistance(player) > 20 + finalPower)
+				return;
+	
+			GlStateManager.pushMatrix();
+	
+			GlStateManager.disableLighting();
+			GlStateManager.activeTexture(GLX.GL_TEXTURE1);
+			GlStateManager.disableTexture();
+			GlStateManager.activeTexture(GLX.GL_TEXTURE0);
+	
+			GlStateManager.enableColorMaterial();
+	
+			String color = "#5555FF";
+	
+			if (entity instanceof AnimalEntity)
+				color = "#55FF55";
+			else if (entity instanceof MonsterEntity)
+				color = "#FF0000";
+			else if (entity instanceof PlayerEntity)
+				color = "#00FFFF";
+	
+			GlStateManager.setupSolidRenderingTextureCombine(WyHelper.hexToRGB(color).getRGB());
+			if (event.getEntity().hurtTime <= 0)
+				GlStateManager.disableDepthTest();
+		}
 
-		GlStateManager.enableColorMaterial();
-		
-		String color = "#5555FF";
-		
-		if(entity instanceof AnimalEntity)
-			color = "#55FF55";
-		else if(entity instanceof MonsterEntity)
-			color = "#FF0000";
-		else if(entity instanceof PlayerEntity)
-			color = "#00FFFF";
-		
-		GlStateManager.setupSolidRenderingTextureCombine(WyHelper.hexToRGB(color).getRGB());
-		if (event.getEntity().hurtTime <= 0)
-			GlStateManager.disableDepthTest();
-
+		LivingEntity entity = event.getEntity();
+		if (entity.isPotionActive(ModEffects.UNCONSCIOUS))
+		{			
+			if (entity.getActivePotionEffect(ModEffects.UNCONSCIOUS).getDuration() <= 0)
+			{
+				entity.removePotionEffect(ModEffects.UNCONSCIOUS);
+				try
+				{
+					entity.setBedPosition(entity.getPosition());
+					Method method = Entity.class.getDeclaredMethod("setPose", Pose.class);
+					method.setAccessible(true);
+					method.invoke(entity, Pose.STANDING);
+				}
+				catch (Exception e)
+				{
+					e.printStackTrace();
+				}
+				return;
+			}
+						
+			entity.rotationYawHead = 0;
+			entity.prevRotationYawHead = 0;
+			entity.renderYawOffset = 0;
+			entity.prevRenderYawOffset = 0;
+			entity.startSleeping(entity.getPosition());
+		}
 	}
 
 	@OnlyIn(Dist.CLIENT)
@@ -200,35 +234,55 @@ public class HakiPassiveEvents
 	{
 		if (!(event.getEntity() instanceof LivingEntity))
 			return;
-		
+
 		PlayerEntity player = Minecraft.getInstance().player;
 		IAbilityData props = AbilityDataCapability.get(player);
 		IEntityStats sprops = EntityStatsCapability.get(player);
-		
+
 		Ability ability = props.getEquippedAbility(KenbunshokuHakiAuraAbility.INSTANCE);
 		boolean isActive = ability != null && ability.isContinuous();
-		
-		if(!isActive)
-			return;
-		
-		LivingEntity entity = (LivingEntity) event.getEntity();
-		
-		if(entity == player)
-			return;
-		
-		float dorikiPower = sprops.getDoriki() / 2000;
-		float hakiPower = HakiHelper.getBusoHakiExp() / 20;
-		float finalPower = dorikiPower + hakiPower;
-		
-		if(entity.getDistance(player) > 20 + finalPower)
-			return;
-		
-		if (event.getEntity().hurtTime <= 0)
-			GlStateManager.enableDepthTest();
-		GlStateManager.tearDownSolidRenderingTextureCombine();
-		GlStateManager.disableColorMaterial();
 
-		GlStateManager.popMatrix();
+		if (isActive)
+		{
+			LivingEntity entity = event.getEntity();
+	
+			if (entity == player)
+				return;
+	
+			float dorikiPower = sprops.getDoriki() / 2000;
+			float hakiPower = HakiHelper.getBusoHakiExp() / 20;
+			float finalPower = dorikiPower + hakiPower;
+	
+			if (entity.getDistance(player) > 20 + finalPower)
+				return;
+	
+			if (event.getEntity().hurtTime <= 0)
+				GlStateManager.enableDepthTest();
+			GlStateManager.tearDownSolidRenderingTextureCombine();
+			GlStateManager.disableColorMaterial();
+	
+			GlStateManager.popMatrix();
+		}
+	}
 
+	@SubscribeEvent
+	@OnlyIn(Dist.CLIENT)
+	public static void onFirstPersonViewRendered(TickEvent.RenderTickEvent event)
+	{
+		Minecraft mc = Minecraft.getInstance();
+		PlayerEntity player = mc.player;
+
+		if (player == null)
+			return;
+
+		if (!player.isPotionActive(ModEffects.UNCONSCIOUS))
+			return;
+
+		if (player.getActivePotionEffect(ModEffects.UNCONSCIOUS).getDuration() <= 0)
+			player.removePotionEffect(ModEffects.UNCONSCIOUS);
+
+		float[] colors = ((IHasOverlay) ModEffects.UNCONSCIOUS).getOverlayColor();
+		Color color = new Color(colors[0], colors[1], colors[2]);
+		WyHelper.drawColourOnScreen(color.getRGB(), 255, 0, 0, mc.mainWindow.getScaledWidth(), mc.mainWindow.getScaledHeight(), 500);
 	}
 }

@@ -66,7 +66,9 @@ public class ZoanMorphRenderer extends LivingRenderer
 	{
 		//super.doRenderShadowAndFire(entity, x, y, z, (float) y, v);
 		GL11.glPushMatrix();
-
+		
+		GlStateManager.disableCull();
+		
 		if (entity != Minecraft.getInstance().player)
 			GL11.glTranslatef((float) x + this.offset[0], (float) y + 1.3F + this.offset[1] - 1.2F, (float) z + this.offset[2]);
 		else
@@ -113,7 +115,9 @@ public class ZoanMorphRenderer extends LivingRenderer
 				Minecraft.getInstance().getFirstPersonRenderer().renderItemSide(entity, stack, TransformType.FIRST_PERSON_LEFT_HAND, false);
 			}
 		}
-
+		
+		GlStateManager.enableCull();
+		
 		GL11.glPopMatrix();
 	}
 

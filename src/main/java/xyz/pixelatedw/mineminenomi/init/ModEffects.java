@@ -56,6 +56,10 @@ public class ModEffects {
             .addAttributesModifier(ModAttributes.JUMP_HEIGHT, "fa4d711c-faa4-41cd-83c9-8f97edc5800e", -256, AttributeModifier.Operation.ADDITION)
             .addAttributesModifier(SharedMonsterAttributes.KNOCKBACK_RESISTANCE, "7d355019-7ef9-4beb-bcba-8b2608a73380", 100, AttributeModifier.Operation.ADDITION);
 
+    public static final Effect UNCONSCIOUS = new UnconsciousEffect()
+            .addAttributesModifier(SharedMonsterAttributes.MOVEMENT_SPEED, "7107DE5E-7CE8-4030-940E-514C1F160890", -1000, AttributeModifier.Operation.ADDITION)
+            .addAttributesModifier(ModAttributes.JUMP_HEIGHT, "fa4d711c-faa4-41cd-83c9-8f97edc5800e", -256, AttributeModifier.Operation.ADDITION);
+
     static {
         WyRegistry.registerEffect(FROZEN, "Frozen");
         WyRegistry.registerEffect(BUBBLY_CORAL, "Bubbly Coral");
@@ -69,6 +73,7 @@ public class ModEffects {
         WyRegistry.registerEffect(ABILITY_OFF, "Ability Off");
         WyRegistry.registerEffect(DOOR_HEAD, "Door Head");
         WyRegistry.registerEffect(MOVEMENT_BLOCKED, "Movement Blocked");
+        WyRegistry.registerEffect(UNCONSCIOUS, "Unconscious");
 
     }
 }

@@ -1,5 +1,7 @@
 package xyz.pixelatedw.mineminenomi.renderers.abilities;
 
+import org.lwjgl.opengl.GL11;
+
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.platform.GlStateManager.DestFactor;
 import com.mojang.blaze3d.platform.GlStateManager.SourceFactor;
@@ -32,10 +34,13 @@ public class PhysicalBodyRenderer extends EntityRenderer<PhysicalBodyEntity>
 	@Override
 	public void doRender(PhysicalBodyEntity entity, double x, double y, double z, float entityYaw, float partialTicks)
 	{
-		IDevilFruit devilFruitProps = DevilFruitCapability.get(entity.getOwner());
-
-		boolean isSkeleton = devilFruitProps.getDevilFruit().equals("yomi_yomi") && devilFruitProps.getZoanPoint().equalsIgnoreCase(YomiZoanInfo.FORM);
-
+		boolean isSkeleton = false;
+		if(entity.getOwner() != null)
+		{
+			IDevilFruit devilFruitProps = DevilFruitCapability.get(entity.getOwner());
+			isSkeleton = devilFruitProps.getDevilFruit().equals("yomi_yomi") && devilFruitProps.getZoanPoint().equalsIgnoreCase(YomiZoanInfo.FORM);
+		}
+		
 		GlStateManager.pushMatrix();
 		{
 			GlStateManager.color4f(1, 1, 1, 1);
@@ -48,11 +53,18 @@ public class PhysicalBodyRenderer extends EntityRenderer<PhysicalBodyEntity>
 			
 			GlStateManager.scaled(1, 1, 1);
 
-			if(isSkeleton)
-				Minecraft.getInstance().getTextureManager().bindTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/models/zoanmorph/yomi_skeleton.png"));
+			if (entity.hurtTime > 0)
+			{
+				GL11.glPushMatrix();
+				GL11.glColor3f(1.0f, 0, 0);
+				GL11.glPopMatrix();
+			}
 			
+			if(isSkeleton)
+				Minecraft.getInstance().getTextureManager().bindTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/models/zoanmorph/yomi_skeleton.png"));			
 			else
 				Minecraft.getInstance().getTextureManager().bindTexture(this.getEntityTexture(entity));
+			
 			this.model.render(entity, (float) x, (float) y, (float) z, 0.0F, 0.0F, 0.0625F);
 		}
 		GlStateManager.popMatrix();

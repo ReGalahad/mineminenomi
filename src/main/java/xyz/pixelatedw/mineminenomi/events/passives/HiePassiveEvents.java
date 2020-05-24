@@ -1,5 +1,7 @@
 package xyz.pixelatedw.mineminenomi.events.passives;
 
+import java.awt.Color;
+
 import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.LivingEntity;
@@ -19,8 +21,6 @@ import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.init.ModEffects;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
-
-import java.awt.*;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class HiePassiveEvents
@@ -43,8 +43,6 @@ public class HiePassiveEvents
 			AbilityHelper.createFilledSphere(player.world, (int) player.posX - 1, (int) player.posY, (int) player.posZ - 1, 2, Blocks.ICE, GRIEF_RULE);
 	}
 
-
-
 	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
 	public static void onEntityPreRendered(RenderLivingEvent.Pre event)
@@ -57,7 +55,6 @@ public class HiePassiveEvents
 		entity.renderYawOffset = 0;
 		entity.prevRenderYawOffset = 0;
 	}
-
 
 	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
