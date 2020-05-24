@@ -13,6 +13,7 @@ import com.google.common.collect.Multimap;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.item.ItemEntity;
@@ -29,7 +30,9 @@ import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
+import xyz.pixelatedw.mineminenomi.init.ModEnchantments;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
+import xyz.pixelatedw.mineminenomi.init.ModWeapons;
 import xyz.pixelatedw.mineminenomi.items.weapons.ClimaTactItem;
 import xyz.pixelatedw.wypi.WyHelper;
 
@@ -157,6 +160,12 @@ public class ItemsHelper
 		 	}
 		}
 
+		return false;
+	}
+
+	public static boolean isKairosekiWeapon(ItemStack heldItem) {
+		if (heldItem != null)
+			return (heldItem.isEnchanted() && EnchantmentHelper.getEnchantmentLevel(ModEnchantments.KAIROSEKI, heldItem) > 0) || heldItem.getItem() == ModWeapons.JITTE;
 		return false;
 	}
 }

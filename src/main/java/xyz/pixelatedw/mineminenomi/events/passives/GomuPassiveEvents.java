@@ -6,18 +6,16 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import xyz.pixelatedw.mineminenomi.abilities.doru.DoruDoruArtsPickaxeAbility;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.ItemsHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
-import xyz.pixelatedw.mineminenomi.entities.projectiles.extra.KairosekiBulletProjectile;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.extra.NormalBulletProjectile;
-import xyz.pixelatedw.mineminenomi.items.weapons.AbilityPickaxeItem;
+import xyz.pixelatedw.mineminenomi.events.devilfruits.DFWeaknessesEvents;
 import xyz.pixelatedw.mineminenomi.items.weapons.ClimaTactItem;
 import xyz.pixelatedw.mineminenomi.items.weapons.CoreSwordItem;
 import xyz.pixelatedw.wypi.APIConfig;
@@ -63,7 +61,7 @@ public class GomuPassiveEvents
 			if(trueSource != null) {
 				if(trueSource instanceof LivingEntity) {
 					ItemStack mainhandGear = ((LivingEntity) trueSource).getItemStackFromSlot(EquipmentSlotType.MAINHAND);
-					if(getGomuDamagingItems(mainhandGear.getItem()))
+					if(getGomuDamagingItems(mainhandGear.getItem()) && !ItemsHelper.isKairosekiWeapon(mainhandGear))
 						reduction = 0.8f;
 				}
 			}
