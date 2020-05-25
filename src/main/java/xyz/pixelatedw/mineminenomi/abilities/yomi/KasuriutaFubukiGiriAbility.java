@@ -6,10 +6,13 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.play.server.SEntityVelocityPacket;
+import net.minecraft.network.play.server.SPlayEntityEffectPacket;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TranslationTextComponent;
 import xyz.pixelatedw.mineminenomi.api.helpers.ItemsHelper;
+import xyz.pixelatedw.mineminenomi.init.ModEffects;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.yomi.KasuriutaFubukiGiriParticleEffect;
@@ -56,7 +59,12 @@ public class KasuriutaFubukiGiriAbility extends Ability
 			List<LivingEntity> list = WyHelper.getEntitiesNear(player.getPosition(), player.world, 1.6);
 			list.remove(player);
 			for (LivingEntity target : list)
+			{
 				target.attackEntityFrom(DamageSource.causePlayerDamage(player), 8);
+				EffectInstance instance = new EffectInstance(ModEffects.FROZEN, 100, 1);
+				target.addPotionEffect(instance);
+				((ServerPlayerEntity) player).connection.sendPacket(new SPlayEntityEffectPacket(target.getEntityId(), instance));
+			}
 		}
 	}
 	

@@ -1,6 +1,10 @@
 package xyz.pixelatedw.mineminenomi.renderers.layers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.mojang.blaze3d.platform.GlStateManager;
+
 import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.IEntityRenderer;
@@ -14,21 +18,19 @@ import net.minecraft.potion.Effect;
 import xyz.pixelatedw.mineminenomi.api.IHasOverlay;
 import xyz.pixelatedw.mineminenomi.init.ModEffects;
 
-import java.util.ArrayList;
-import java.util.List;
-
+@SuppressWarnings("deprecation")
 public class PotionLayer extends LayerRenderer {
     LivingRenderer renderer;
-    private List<Effect> EffectsWithOverlay = new ArrayList();
+    private List<Effect> effectsWithOverlay = new ArrayList();
 
     public PotionLayer(IEntityRenderer renderer) {
         super(renderer);
         this.renderer = (LivingRenderer) renderer;
-        EffectsWithOverlay.add(ModEffects.LOVESTRUCK);
-        EffectsWithOverlay.add(ModEffects.BUBBLY_CORAL);
+        this.effectsWithOverlay.add(ModEffects.LOVESTRUCK);
+        this.effectsWithOverlay.add(ModEffects.BUBBLY_CORAL);
     }
 
-    @Override
+	@Override
     public void render(Entity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
         if(((LivingEntity) entity).isPotionActive(ModEffects.FROZEN)) {
             if (((LivingEntity) entity).getActivePotionEffect(ModEffects.FROZEN).getDuration() <= 0)
@@ -57,7 +59,7 @@ public class PotionLayer extends LayerRenderer {
             GlStateManager.popMatrix();
         }
 
-        for (Effect effect : EffectsWithOverlay) {
+        for (Effect effect : this.effectsWithOverlay) {
             if(((LivingEntity) entity).isPotionActive(effect)) {
                 if (((LivingEntity) entity).getActivePotionEffect(effect).getDuration() <= 0)
                     ((LivingEntity) entity).removePotionEffect(effect);

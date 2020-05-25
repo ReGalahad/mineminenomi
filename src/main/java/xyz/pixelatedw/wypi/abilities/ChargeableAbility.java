@@ -44,7 +44,7 @@ public abstract class ChargeableAbility extends Ability
 		{
 			if(this.onStartChargingEvent.onStartCharging(player))
 			{
-				this.startCharging();
+				this.startCharging(player);
 				IAbilityData props = AbilityDataCapability.get(player);
 				WyNetwork.sendTo(new SSyncAbilityDataPacket(player.getEntityId(), props), (ServerPlayerEntity)player);
 			}
@@ -54,15 +54,10 @@ public abstract class ChargeableAbility extends Ability
 	/*
 	 *  Setters / Getters
 	 */
-	public void setMaxChargeTime(int time)
+	public void setMaxChargeTime(int seconds)
 	{
-		this.maxChargeTime = time * 20;
+		this.maxChargeTime = seconds * 20;
 		this.chargeTime = this.maxChargeTime;
-	}
-	
-	public void startCharging()
-	{
-		this.setState(State.CHARGING);
 	}
 	
 	public int getMaxChargeTime()
@@ -112,6 +107,11 @@ public abstract class ChargeableAbility extends Ability
 		}
 	}
 	
+	public void startCharging(PlayerEntity player)
+	{
+		this.setState(State.CHARGING);
+	}
+	
 	public void stopCharging(PlayerEntity player)
 	{
 		if(player.world.isRemote)
@@ -119,7 +119,7 @@ public abstract class ChargeableAbility extends Ability
 		if (this.onEndChargingEvent.onEndCharging(player))
 		{
 			this.chargeTime = this.maxChargeTime;
-			this.startCooldown();
+			this.startCooldown(player);
 			IAbilityData props = AbilityDataCapability.get(player);
 			WyNetwork.sendTo(new SSyncAbilityDataPacket(player.getEntityId(), props), (ServerPlayerEntity) player);
 		}

@@ -89,6 +89,7 @@ import xyz.pixelatedw.mineminenomi.abilities.gura.TenchiMeidoAbility;
 import xyz.pixelatedw.mineminenomi.abilities.haki.BusoshokuHakiFullBodyHardeningAbility;
 import xyz.pixelatedw.mineminenomi.abilities.haki.BusoshokuHakiHardeningAbility;
 import xyz.pixelatedw.mineminenomi.abilities.haki.BusoshokuHakiImbuingAbility;
+import xyz.pixelatedw.mineminenomi.abilities.haki.HaoshokuHakiAbility;
 import xyz.pixelatedw.mineminenomi.abilities.haki.KenbunshokuHakiAuraAbility;
 import xyz.pixelatedw.mineminenomi.abilities.haki.KenbunshokuHakiFutureSightAbility;
 import xyz.pixelatedw.mineminenomi.abilities.hie.IceAgeAbility;
@@ -359,6 +360,7 @@ public class ModAbilities
 		WyRegistry.registerAbility(BusoshokuHakiFullBodyHardeningAbility.INSTANCE);
 		WyRegistry.registerAbility(KenbunshokuHakiAuraAbility.INSTANCE);
 		WyRegistry.registerAbility(KenbunshokuHakiFutureSightAbility.INSTANCE);
+		WyRegistry.registerAbility(HaoshokuHakiAbility.INSTANCE);
 
 		WyDebug.debug("A total of " + ModValues.devilfruits.size() + " Devil Fruits have been registered");
 		WyDebug.debug("A total of " + APIRegistries.ABILITIES.getEntries().size() + " abilities have been registered");

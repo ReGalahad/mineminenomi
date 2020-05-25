@@ -76,6 +76,9 @@ public class AbilitiesEvents
 	@SubscribeEvent
 	public static void onPlayarLogsOut(PlayerLoggedOutEvent event)
 	{
+		if(event.getPlayer().world.isRemote)
+			return;
+		
 		PlayerEntity player = event.getPlayer();
 
 		IAbilityData props = AbilityDataCapability.get(player);

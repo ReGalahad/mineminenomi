@@ -8,7 +8,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import xyz.pixelatedw.wypi.WyHelper;
 
 @OnlyIn(Dist.CLIENT)
 public class CaptainCapeModel extends BipedModel
@@ -137,11 +136,11 @@ public class CaptainCapeModel extends BipedModel
 		if(isMoving)
 			angle = angle + MathHelper.sin(MathHelper.lerp(limbSwing, entity.prevDistanceWalkedModified, entity.distanceWalkedModified)) * 4.0F;
 		
-		this.capeback.rotateAngleX = WyHelper.degToRad(angle);
-		this.caperightsholderpad2.rotateAngleX = WyHelper.degToRad(-angle);
-		this.capeleftsholderpad2.rotateAngleX = WyHelper.degToRad(-angle);
-		this.caperightarm.rotateAngleX = WyHelper.degToRad(angle - (!isMoving ? 0 : 20));
-		this.capeleftarm.rotateAngleX = WyHelper.degToRad(angle - (!isMoving ? 0 : 20));
+		this.capeback.rotateAngleX = (float) Math.toRadians(angle);
+		this.caperightsholderpad2.rotateAngleX = (float) Math.toRadians(-angle);
+		this.capeleftsholderpad2.rotateAngleX = (float) Math.toRadians(-angle);
+		this.caperightarm.rotateAngleX = (float) Math.toRadians(angle - (!isMoving ? 0 : 20));
+		this.capeleftarm.rotateAngleX = (float) Math.toRadians(angle - (!isMoving ? 0 : 20));
 	}
 
 	public void setRotateAngle(RendererModel model, float x, float y, float z)

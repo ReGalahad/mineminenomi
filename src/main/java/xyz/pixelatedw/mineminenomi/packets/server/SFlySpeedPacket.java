@@ -10,31 +10,30 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
 
-public class SSpecialFlyingPacket
+public class SFlySpeedPacket
 {
-
-	private boolean specialFlying;
+	private float speed;
 	
-	public SSpecialFlyingPacket() {}
+	public SFlySpeedPacket() {}
 	
-	public SSpecialFlyingPacket(boolean canSpecialFly)
+	public SFlySpeedPacket(float speed)
 	{
-		this.specialFlying = canSpecialFly;
+		this.speed = speed;
 	}
 	
 	public void encode(PacketBuffer buffer)
 	{
-		buffer.writeBoolean(this.specialFlying);
+		buffer.writeFloat(this.speed);
 	}
 	
-	public static SSpecialFlyingPacket decode(PacketBuffer buffer)
+	public static SFlySpeedPacket decode(PacketBuffer buffer)
 	{
-		SSpecialFlyingPacket msg = new SSpecialFlyingPacket();
-		msg.specialFlying = buffer.readBoolean();
+		SFlySpeedPacket msg = new SFlySpeedPacket();
+		msg.speed = buffer.readFloat();
 		return msg;
 	}
 	
-	public static void handle(SSpecialFlyingPacket message, final Supplier<NetworkEvent.Context> ctx)
+	public static void handle(SFlySpeedPacket message, final Supplier<NetworkEvent.Context> ctx)
 	{
 		if(ctx.get().getDirection() == NetworkDirection.PLAY_TO_CLIENT)
 		{
@@ -49,13 +48,11 @@ public class SSpecialFlyingPacket
 	public static class ClientHandler
 	{
 		@OnlyIn(Dist.CLIENT)
-		public static void handle(SSpecialFlyingPacket message)
+		public static void handle(SFlySpeedPacket message)
 		{
 			PlayerEntity player = Minecraft.getInstance().player;
 
-			player.abilities.allowFlying = message.specialFlying;
-			if(!message.specialFlying)
-				player.abilities.isFlying = false;
+			player.abilities.setFlySpeed(message.speed);
 		}
 	}
 }

@@ -44,7 +44,7 @@
 		{
 			"type": "minecraft:item",
 			"name": "mineminenomi:belly_pouch",
-			"weight": 45,
+			"weight": 30,
 			"functions": [{
 				"function": "minecraft:set_count",
 				"count": {

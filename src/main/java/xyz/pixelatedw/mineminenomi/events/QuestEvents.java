@@ -1,6 +1,5 @@
 package xyz.pixelatedw.mineminenomi.events;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -10,7 +9,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.entities.mobs.quest.givers.IQuestGiver;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
-import xyz.pixelatedw.mineminenomi.screens.QuestChooseScreen;
+import xyz.pixelatedw.mineminenomi.packets.server.SOpenQuestChooseScreenPacket;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.data.quest.IQuestData;
@@ -71,7 +70,7 @@ public class QuestEvents
 		if(player.world.isRemote && !hasReset)
 		{
 			if(hasQuests)
-				Minecraft.getInstance().displayGuiScreen(new QuestChooseScreen(player, event.getTarget(), questGiver.getAvailableQuests(player)));
+				WyNetwork.sendTo(new SOpenQuestChooseScreenPacket(event.getTarget().getEntityId()), player);
 			else
 				WyHelper.sendMsgToPlayer(player, new TranslationTextComponent(ModI18n.QUEST_NO_TRIALS_AVAILABLE, event.getTarget().getDisplayName().getFormattedText()).getFormattedText());
 		}

@@ -31,8 +31,8 @@ public class VoltVari5MillionProjectile extends AbilityProjectileEntity
 	{
 		super(GoroProjectiles.VOLT_VARI_5_MILLION, world, player);
 
-		this.setDamage(2);
-		this.setMaxLife(10);
+		this.setDamage(5);
+		this.setMaxLife(12);
 		
 		this.onTickEvent = this::onTickEvent;
 	}

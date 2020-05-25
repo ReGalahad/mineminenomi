@@ -6,6 +6,7 @@ import com.mojang.blaze3d.platform.GlStateManager.SourceFactor;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.util.DamageSource;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderLivingEvent;
@@ -145,10 +146,8 @@ public class HoroPassiveEvents
 		
 		PlayerEntity player = (PlayerEntity) event.getEntity();
 
-		if(!isSpirit(player))
-			return;
-		
-		event.setCanceled(true);
+		if(isSpirit(player) && event.getSource() != DamageSource.MAGIC)
+			event.setCanceled(true);
 	}
 	
 	private static boolean isSpirit(PlayerEntity player)

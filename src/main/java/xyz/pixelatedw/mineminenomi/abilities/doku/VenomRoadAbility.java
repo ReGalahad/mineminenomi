@@ -12,7 +12,7 @@ public class VenomRoadAbility extends Ability
 	public VenomRoadAbility()
 	{
 		super("Venom Road", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(30);
+		this.setMaxCooldown(20);
 		this.setDescription("The user fires a Hydra at the target location and transports there through its path.");
 
 		this.onUseEvent = this::onUseEvent;

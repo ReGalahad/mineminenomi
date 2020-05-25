@@ -4,12 +4,12 @@ import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.renderer.entity.model.IHasArm;
 import net.minecraft.client.renderer.entity.model.RendererModel;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.HandSide;
 import net.minecraft.util.math.MathHelper;
+import xyz.pixelatedw.mineminenomi.api.ZoanMorphModel;
 
-public class BisonHeavyModel extends ZoanMorphModel implements IHasArm
+public class BisonHeavyModel<T extends LivingEntity> extends ZoanMorphModel<T> implements IHasArm
 {
 	public RendererModel rightarm1;
 	public RendererModel leftarm1;
@@ -36,6 +36,8 @@ public class BisonHeavyModel extends ZoanMorphModel implements IHasArm
 	public RendererModel righthorn2;
 	public RendererModel lefthorn1;
 	public RendererModel lefthorn2;
+
+	public float swimAnimation;
 
 	public BisonHeavyModel()
 	{
@@ -149,7 +151,6 @@ public class BisonHeavyModel extends ZoanMorphModel implements IHasArm
 		this.head.addChild(this.lefthorn1);
 		this.head.addChild(this.righthorn2);
 		this.rightleg4.addChild(this.rightleg3);
-		this.body2.addChild(this.head);
 		this.leftarm1.addChild(this.leftarm2);
 		this.head.addChild(this.lefthorn2);
 		this.body2.addChild(this.body6);
@@ -160,72 +161,149 @@ public class BisonHeavyModel extends ZoanMorphModel implements IHasArm
 		this.body2.addChild(this.body5);
 	}
 
-	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float headYaw, float headPitch, float scaleFactor, Entity ent)
+	@Override
+	public void render(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
 	{
-		LivingEntity entity = ((LivingEntity) ent);
+		this.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
-		this.head.rotateAngleY = headYaw / (270F / (float) Math.PI);
-		this.head.rotateAngleX = headPitch / (360F / (float) Math.PI);
+		this.rightleg4.render(scale);
+		this.leftarm1.render(scale);
+		this.leftleg4.render(scale);
+		this.rightarm1.render(scale);
+		this.body2.render(scale);
+		this.head.render(scale);
+	}
+	
+	@Override
+	public void setRotationAngles(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
+	{
+		super.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
-		this.leftleg4.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 0.8F * limbSwingAmount;
-		this.rightleg4.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.8F * limbSwingAmount;
+		// Handles the head movement when following the mouse or when swimming
+		boolean flag = entity.getTicksElytraFlying() > 4;
+		boolean flag1 = entity.isActualySwimming();
+		this.head.rotateAngleY = netHeadYaw * ((float) Math.PI / 180F) / 2;
+		if (flag)
+		{
+			this.head.rotateAngleX = (-(float) Math.PI / 4F);
+		}
+		else if (this.swimAnimation > 0.0F)
+		{
+			if (flag1)
+			{
+				this.head.rotateAngleX = this.func_205060_a(this.head.rotateAngleX, (-(float) Math.PI / 4F), this.swimAnimation);
+			}
+			else
+			{
+				this.head.rotateAngleX = this.func_205060_a(this.head.rotateAngleX, headPitch * ((float) Math.PI / 180F), this.swimAnimation);
+			}
+		}
+		else
+		{
+			this.head.rotateAngleX = headPitch * ((float) Math.PI / 180F);
+			if (Math.toDegrees(this.head.rotateAngleX) > 15)
+				this.head.rotateAngleX = (float) Math.toRadians(15);
+			if (Math.toDegrees(this.head.rotateAngleX) < -45)
+				this.head.rotateAngleX = (float) Math.toRadians(-45);
+		}
 
-		this.rightarm1.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 0.4F * limbSwingAmount;
-		this.leftarm1.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.4F * limbSwingAmount;
+		// Hanldes the arm and leg movement
+		float f = 1.0F;
+		if (flag)
+		{
+			f = (float) entity.getMotion().lengthSquared();
+			f = f / 0.2F;
+			f = f * f * f;
+		}
 
+		if (f < 1.0F)
+		{
+			f = 1.0F;
+		}
+		this.rightarm1.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.8F * limbSwingAmount * 0.5F / f;
+		this.leftarm1.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 0.8F * limbSwingAmount * 0.5F / f;
+		this.rightleg4.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 0.7F * limbSwingAmount / f;
+		this.leftleg4.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.7F * limbSwingAmount / f;
+
+		// Handles the punch and item use animations of the model
 		this.swingProgress = entity.swingProgress;
-		
-		if(this.swingProgress > 0)
+		if (this.swingProgress > 0)
 		{
-	         float f1 = 1.0F - this.swingProgress;
-	         f1 = f1 * f1;
-	         f1 = f1 * f1;
-	         f1 = 1.0F - f1;
-	         float f2 = MathHelper.sin(f1 * (float)Math.PI);
-	         float f3 = MathHelper.sin(this.swingProgress * (float)Math.PI) * -(this.head.rotateAngleX - 0.7F) * 0.75F;
-	         this.rightarm1.rotateAngleX = (float)(this.rightarm1.rotateAngleX - (f2 * 1.2D + f3));
-	         this.rightarm1.rotateAngleY += this.body1.rotateAngleY * 2.0F;
-	         this.rightarm1.rotateAngleZ += MathHelper.sin(this.swingProgress * (float)Math.PI) * -0.4F;
-		}
-		
-		/*if (entity.isSwingInProgress)
-		{
-			this.rightarm1.rotateAngleX = MathHelper.sin(entity.swingProgress * 3.0F + (float) Math.PI) * 1.2F;
-			this.rightarm1.rotateAngleY = MathHelper.sin(entity.swingProgress * 3.0F + (float) Math.PI) * -0.2F;
-			this.rightarm1.rotateAngleZ = -MathHelper.cos(entity.swingProgress * 4.0F + (float) Math.PI) * 0.5F;
-		}*/
-
-		if (MathHelper.sqrt(ent.getDistanceSq(ent.prevPosX, ent.prevPosY, ent.prevPosZ)) <= 0.05F && !entity.isSwingInProgress)
-		{
-			this.rightarm1.rotateAngleX = 0;
-			this.rightarm1.rotateAngleY = 0;
-			this.rightarm1.rotateAngleZ = 0.209F;
-		}
-		else if (!entity.isSwingInProgress && MathHelper.sqrt(ent.getDistanceSq(ent.prevPosX, ent.prevPosY, ent.prevPosZ)) > 0)
-		{
-			this.rightarm1.rotateAngleY = 0;
-			this.rightarm1.rotateAngleZ = 0.209F;
+			this.body2.rotateAngleY = MathHelper.sin(MathHelper.sqrt(this.swingProgress) * ((float) Math.PI * 2F)) * 0.2F;
+			this.rightarm1.rotationPointZ = MathHelper.sin(this.body2.rotateAngleY) * 5.0F;
+			this.rightarm1.rotationPointX = -MathHelper.cos(this.body2.rotateAngleY) * 5.0F;
+			this.leftarm1.rotationPointZ = -MathHelper.sin(this.body2.rotateAngleY) * 5.0F;
+			this.leftarm1.rotationPointX = MathHelper.cos(this.body2.rotateAngleY) * 5.0F;
+			this.rightarm1.rotateAngleY += this.body2.rotateAngleY;
+			this.leftarm1.rotateAngleY += this.body2.rotateAngleY;
+			this.leftarm1.rotateAngleX += this.body2.rotateAngleY;
+			float f1 = 1.0F - this.swingProgress;
+			f1 = f1 * f1;
+			f1 = f1 * f1;
+			f1 = 1.0F - f1;
+			float f2 = MathHelper.sin(f1 * (float) Math.PI);
+			float f3 = MathHelper.sin(this.swingProgress * (float) Math.PI) * -(this.head.rotateAngleX - 0.7F) * 0.75F;
+			this.rightarm1.rotateAngleX = (float) (this.rightarm1.rotateAngleX - (f2 * 1.2D + f3));
+			this.rightarm1.rotateAngleY += this.body1.rotateAngleY * 2.0F;
+			this.rightarm1.rotateAngleZ += MathHelper.sin(this.swingProgress * (float) Math.PI) * -0.4F;
 		}
 
+		// Handles the rotations and positions of individual cubes when sneaking or not
+		if (entity.isSneaking())
+		{
+			this.body2.rotateAngleX = 0.5F;
+			this.body2.rotationPointZ -= 4F;
+			this.rightarm1.rotateAngleX += 0.4F;
+			this.rightarm1.rotationPointZ -= 2.5F;
+			this.leftarm1.rotateAngleX += 0.4F;
+			this.leftarm1.rotationPointZ -= 2.5F;
+			this.rightleg4.rotationPointZ = 4.0F;
+			this.leftleg4.rotationPointZ = 4.5F;
+			this.rightleg4.rotationPointY = 9.0F;
+			this.leftleg4.rotationPointY = 9.0F;
+			this.head.rotationPointY = -4F;
+			this.head.rotationPointZ = -2F;
+		}
+		else
+		{
+			this.body2.rotateAngleX = 0.0F;
+			this.rightleg4.rotationPointZ = 0.1F;
+			this.leftleg4.rotationPointZ = 0.6F;
+			this.rightleg4.rotationPointY = 12.0F;
+			this.leftleg4.rotationPointY = 12.0F;
+			this.head.rotationPointY = -3F;
+			this.head.rotationPointZ = 1F;
+		}
 	}
 
 	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+	public void setLivingAnimations(T entityIn, float limbSwing, float limbSwingAmount, float partialTick)
 	{
-		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-
-		this.rightleg4.render(f5);
-		this.leftarm1.render(f5);
-		this.leftleg4.render(f5);
-		this.rightarm1.render(f5);
-		this.body2.render(f5);
+		this.swimAnimation = entityIn.getSwimAnimation(partialTick);
+		super.setLivingAnimations(entityIn, limbSwing, limbSwingAmount, partialTick);
 	}
 
-	public void setRotateAngle(RendererModel RendererModel, float x, float y, float z)
+	public void setRotateAngle(RendererModel model, float x, float y, float z)
 	{
-		RendererModel.rotateAngleX = x;
-		RendererModel.rotateAngleY = y;
-		RendererModel.rotateAngleZ = z;
+		model.rotateAngleX = x;
+		model.rotateAngleY = y;
+		model.rotateAngleZ = z;
+	}
+
+	protected float func_205060_a(float p_205060_1_, float p_205060_2_, float p_205060_3_)
+	{
+		float f = (p_205060_2_ - p_205060_1_) % ((float) Math.PI * 2F);
+		if (f < -(float) Math.PI)
+		{
+			f += ((float) Math.PI * 2F);
+		}
+
+		if (f >= (float) Math.PI)
+		{
+			f -= ((float) Math.PI * 2F);
+		}
+
+		return p_205060_1_ + p_205060_3_ * f;
 	}
 
 	@Override
@@ -247,6 +325,6 @@ public class BisonHeavyModel extends ZoanMorphModel implements IHasArm
 	@Override
 	public void postRenderArm(float scale, HandSide side)
 	{
-		
+
 	}
 }

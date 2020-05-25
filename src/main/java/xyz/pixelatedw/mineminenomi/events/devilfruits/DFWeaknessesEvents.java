@@ -37,7 +37,12 @@ public class DFWeaknessesEvents
 			if (props.hasDevilFruit() && AbilityHelper.isAffectedByWater(entity) && !entity.isPotionActive(ModEffects.BUBBLY_CORAL))
 			{
 				if (entity instanceof PlayerEntity && !((PlayerEntity) entity).abilities.isCreativeMode)
-					entity.setMotion(entity.getMotion().x, entity.getMotion().y - 0.04, entity.getMotion().z);
+				{
+					if(entity.isActualySwimming())
+						entity.setMotion(entity.getMotion().x, entity.getMotion().y - 0.1, entity.getMotion().z);
+					else
+						entity.setMotion(entity.getMotion().x, entity.getMotion().y - 0.04, entity.getMotion().z);
+				}
 				else if (entity instanceof GenericNewEntity)
 					entity.setMotion(entity.getMotion().x, entity.getMotion().y - 0.04, entity.getMotion().z);
 			}
@@ -70,7 +75,7 @@ public class DFWeaknessesEvents
 							if (ability instanceof ChargeableAbility)
 							{
 								((ChargeableAbility) ability).setChargeTime(((ChargeableAbility) ability).getMaxChargeTime() / 20);
-								ability.startCooldown();
+								ability.startCooldown(player);
 								WyNetwork.sendTo(new SSyncAbilityDataPacket(player.getEntityId(), abilityProps), player);
 							}
 							ability.startDisable();
@@ -83,7 +88,7 @@ public class DFWeaknessesEvents
 					{
 						if (abilityProps.getEquippedAbility(i) != null && abilityProps.getEquippedAbility(i).isDisabled())
 						{
-							abilityProps.getEquippedAbility(i).startCooldown();
+							abilityProps.getEquippedAbility(i).startCooldown(player);
 						}
 					}
 				}

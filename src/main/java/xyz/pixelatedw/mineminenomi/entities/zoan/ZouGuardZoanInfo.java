@@ -26,7 +26,10 @@ public class ZouGuardZoanInfo extends ZoanInfo
 	@Override
 	public Factory getFactory()
 	{
-		return new ZoanMorphRenderer.Factory(new ZouGuardModel(), "zoufull", 1.3, new float[] { 0, 0.65f, 0 });
+		ZoanMorphRenderer.Factory factory = new ZoanMorphRenderer.Factory(new ZouGuardModel(), "zoufull");
+		factory.setScale(1.3);
+		factory.setOffset(0, 0.65f, 0);
+		return factory;	
 	}
 
 	@Override
@@ -46,11 +49,17 @@ public class ZouGuardZoanInfo extends ZoanInfo
 	{
 		return 2.2;
 	}
+	
+	@Override
+	public float getShadowSize()
+	{
+		return 1.3F;
+	}
 
 	@Override
-	public double[] getHeldItemOffset()
+	public double[][] getHeldItemOffset()
 	{
-		return new double[] {0, 0, 0};
+		return null;
 	}
 
 	@Override

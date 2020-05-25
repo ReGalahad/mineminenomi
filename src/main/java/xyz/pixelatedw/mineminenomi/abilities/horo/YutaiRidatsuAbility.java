@@ -64,8 +64,11 @@ public class YutaiRidatsuAbility extends ContinuousAbility
 			return true;
 		
 		if(this.body != null)
+		{
 			this.body.remove();
-		player.setPositionAndUpdate(this.posX, this.posY, this.posZ);
+			this.body = null;
+			player.setPositionAndUpdate(this.posX, this.posY, this.posZ);
+		}
 		
 		return true;
 	}

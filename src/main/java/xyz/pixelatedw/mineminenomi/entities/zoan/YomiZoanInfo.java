@@ -25,7 +25,10 @@ public class YomiZoanInfo extends ZoanInfo
 	@Override
 	public Factory getFactory()
 	{
-		return new ZoanMorphRenderer.Factory(new YomiModel(), "skeleton", 1.1, new float[] { 0, 0.35f, 0 });
+		ZoanMorphRenderer.Factory factory = new ZoanMorphRenderer.Factory(new YomiModel(), "skeleton");
+		factory.setScale(1.1);
+		factory.setOffset(0, 0.35f, 0);
+		return factory;	
 	}
 
 	@Override
@@ -43,13 +46,23 @@ public class YomiZoanInfo extends ZoanInfo
 	@Override
 	public double getHeight()
 	{
-		return 1.8;
+		return 2.2;
+	}
+	
+	@Override
+	public float getShadowSize()
+	{
+		return 0.55F;
 	}
 
 	@Override
-	public double[] getHeldItemOffset()
+	public double[][] getHeldItemOffset()
 	{
-		return new double[] {-0.28, 0.45, -0.45};
+		return new double[][] 
+			{
+				{-0.3F, -0.1F, 0F},
+				{0.15F, 0.9F, -0.4F}
+			};
 	}
 
 	@Override

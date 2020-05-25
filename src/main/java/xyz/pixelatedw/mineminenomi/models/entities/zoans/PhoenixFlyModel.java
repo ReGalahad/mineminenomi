@@ -1,10 +1,11 @@
 package xyz.pixelatedw.mineminenomi.models.entities.zoans;
 
 import net.minecraft.client.renderer.entity.model.RendererModel;
-import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.MathHelper;
+import xyz.pixelatedw.mineminenomi.api.ZoanMorphModel;
 
-public class PhoenixFullModel extends ZoanMorphModel
+public class PhoenixFlyModel<T extends LivingEntity> extends ZoanMorphModel<T>
 {
 	public RendererModel Fire2;
 	public RendererModel head1;
@@ -20,40 +21,34 @@ public class PhoenixFullModel extends ZoanMorphModel
 	public RendererModel body3;
 	public RendererModel body4;
 	public RendererModel Fire;
-	public RendererModel RightArm1;
-	public RendererModel LeftArm1;
+	public RendererModel rightArm1;
+	public RendererModel leftArm1;
 	public RendererModel RightLeg1;
 	public RendererModel RightLeg2;
 	public RendererModel RightFoot1;
 	public RendererModel LeftLeg1;
 	public RendererModel LeftLeg2;
 	public RendererModel LeftFoot1;
-	public RendererModel Tails1;
-	public RendererModel Tails2;
+	public RendererModel tails1;
+	public RendererModel tails2;
 	public RendererModel RightWing1;
-	public RendererModel RightWing2;
+	public RendererModel rightWing2;
 	public RendererModel LeftWing1;
-	public RendererModel LeftWing2;
-	public RendererModel Tails11;
-	public RendererModel Tails22;
+	public RendererModel leftWing2;
+	public RendererModel tails11;
+	public RendererModel tails22;
 
-	private double[] wingAnimationArray;
-	private double[] tailAnimationArray;
-
-	public PhoenixFullModel()
+	public PhoenixFlyModel()
 	{
-		//wingAnimationArray = WyRenderHelper.generateAnimationArray(0, -20, 20, 0.9, 1);
-		//tailAnimationArray = WyRenderHelper.generateAnimationArray(0, -5, 5, 0.5, 1);
-
 		this.textureWidth = 128;
 		this.textureHeight = 64;
 		this.RightWing1 = new RendererModel(this, 65, 20);
 		this.RightWing1.setRotationPoint(0.0F, 0.0F, 0.0F);
 		this.RightWing1.addBox(-13.0F, 0.5F, 0.0F, 13, 0, 10, 0.0F);
-		this.LeftWing2 = new RendererModel(this, 86, 31);
-		this.LeftWing2.setRotationPoint(12.0F, 0.0F, 0.0F);
-		this.LeftWing2.addBox(0.0F, 0.5F, 0.0F, 15, 0, 12, 0.0F);
-		this.setRotateAngle(LeftWing2, 0.0F, 0.05235987755982988F, 0.0F);
+		this.leftWing2 = new RendererModel(this, 86, 31);
+		this.leftWing2.setRotationPoint(12.0F, 0.0F, 0.0F);
+		this.leftWing2.addBox(0.0F, 0.5F, 0.0F, 15, 0, 12, 0.0F);
+		this.setRotateAngle(leftWing2, 0.0F, 0.05235987755982988F, 0.0F);
 		this.body2 = new RendererModel(this, 23, 19);
 		this.body2.setRotationPoint(-4.5F, 5.0F, -7.5F);
 		this.body2.addBox(0.0F, 0.0F, 0.0F, 9, 15, 4, 0.0F);
@@ -62,22 +57,22 @@ public class PhoenixFullModel extends ZoanMorphModel
 		this.RightFoot1.setRotationPoint(-3.5F, 9.399999618530273F, 5.800000190734863F);
 		this.RightFoot1.addBox(0.0F, 0.0F, 0.0F, 3, 0, 4, 0.0F);
 		this.setRotateAngle(RightFoot1, 0.6981316804885863F, -0.0F, 0.0F);
-		this.RightWing2 = new RendererModel(this, 55, 31);
-		this.RightWing2.setRotationPoint(-12.0F, 0.0F, 0.0F);
-		this.RightWing2.addBox(-15.0F, 0.5F, 0.0F, 15, 0, 12, 0.0F);
-		this.setRotateAngle(RightWing2, 0.0F, -0.06981317007977318F, 0.0F);
-		this.Tails2 = new RendererModel(this, 110, 55);
-		this.Tails2.setRotationPoint(0.0F, 3.0F, 11.0F);
-		this.Tails2.addBox(-2.5F, 0.0F, 0.0F, 2, 0, 9, 0.0F);
-		this.setRotateAngle(Tails2, 0.0F, -0.08726646259971647F, 0.0F);
-		this.LeftArm1 = new RendererModel(this, 100, 17);
-		this.LeftArm1.setRotationPoint(4.0F, 2.0F, -7.0F);
-		this.LeftArm1.addBox(0.0F, 0.0F, 0.0F, 13, 1, 1, 0.0F);
-		this.setRotateAngle(LeftArm1, 0.0F, 0.06981317007977318F, 0.0F);
-		this.Tails1 = new RendererModel(this, 110, 55);
-		this.Tails1.setRotationPoint(0.0F, 3.0F, 11.0F);
-		this.Tails1.addBox(0.5F, 0.0F, 0.0F, 2, 0, 9, 0.0F);
-		this.setRotateAngle(Tails1, 0.0F, 0.08726646259971647F, 0.0F);
+		this.rightWing2 = new RendererModel(this, 55, 31);
+		this.rightWing2.setRotationPoint(-12.0F, 0.0F, 0.0F);
+		this.rightWing2.addBox(-15.0F, 0.5F, 0.0F, 15, 0, 12, 0.0F);
+		this.setRotateAngle(rightWing2, 0.0F, -0.06981317007977318F, 0.0F);
+		this.tails2 = new RendererModel(this, 110, 55);
+		this.tails2.setRotationPoint(0.0F, 3.0F, 11.0F);
+		this.tails2.addBox(-2.5F, 0.0F, 0.0F, 2, 0, 9, 0.0F);
+		this.setRotateAngle(tails2, 0.0F, -0.08726646259971647F, 0.0F);
+		this.leftArm1 = new RendererModel(this, 100, 17);
+		this.leftArm1.setRotationPoint(4.0F, 2.0F, -7.0F);
+		this.leftArm1.addBox(0.0F, 0.0F, 0.0F, 13, 1, 1, 0.0F);
+		this.setRotateAngle(leftArm1, 0.0F, 0.06981317007977318F, 0.0F);
+		this.tails1 = new RendererModel(this, 110, 55);
+		this.tails1.setRotationPoint(0.0F, 3.0F, 11.0F);
+		this.tails1.addBox(0.5F, 0.0F, 0.0F, 2, 0, 9, 0.0F);
+		this.setRotateAngle(tails1, 0.0F, 0.08726646259971647F, 0.0F);
 		this.LeftLeg1 = new RendererModel(this, 115, 44);
 		this.LeftLeg1.setRotationPoint(3.0F, 5.0F, 4.0F);
 		this.LeftLeg1.addBox(-2.0F, 0.0F, 0.0F, 2, 3, 2, 0.0F);
@@ -86,10 +81,10 @@ public class PhoenixFullModel extends ZoanMorphModel
 		this.LeftLeg2.setRotationPoint(2.5F, 6.800000190734863F, 5.800000190734863F);
 		this.LeftLeg2.addBox(-1.0F, 0.0F, 0.0F, 1, 2, 1, 0.0F);
 		this.setRotateAngle(LeftLeg2, 0.6981316804885863F, -0.0F, 0.0F);
-		this.RightArm1 = new RendererModel(this, 71, 17);
-		this.RightArm1.setRotationPoint(-4.0F, 2.0F, -7.0F);
-		this.RightArm1.addBox(-13.0F, 0.0F, 0.0F, 13, 1, 1, 0.0F);
-		this.setRotateAngle(RightArm1, 0.0F, -0.06981317007977318F, 0.0F);
+		this.rightArm1 = new RendererModel(this, 71, 17);
+		this.rightArm1.setRotationPoint(-4.0F, 2.0F, -7.0F);
+		this.rightArm1.addBox(-13.0F, 0.0F, 0.0F, 13, 1, 1, 0.0F);
+		this.setRotateAngle(rightArm1, 0.0F, -0.06981317007977318F, 0.0F);
 		this.head2 = new RendererModel(this, 0, 4);
 		this.head2.setRotationPoint(-1.5F, 1.2000000476837158F, -16.0F);
 		this.head2.addBox(0.0F, 0.0F, 0.0F, 3, 3, 2, 0.0F);
@@ -151,81 +146,82 @@ public class PhoenixFullModel extends ZoanMorphModel
 		this.body4.setRotationPoint(-2.0F, 5.0F, -10.0F);
 		this.body4.addBox(0.0F, 0.0F, 0.0F, 4, 21, 4, 0.0F);
 		this.setRotateAngle(body4, 1.5707963705062866F, -0.0F, 0.0F);
-		this.Tails11 = new RendererModel(this, 117, 57);
-		this.Tails11.setRotationPoint(0.6F, 0.0F, 8.5F);
-		this.Tails11.addBox(0.0F, 0.0F, 0.0F, 2, 0, 7, 0.0F);
-		this.setRotateAngle(Tails11, 0.0F, -0.08726646259971647F, 0.0F);
-		this.Tails22 = new RendererModel(this, 117, 57);
-		this.Tails22.setRotationPoint(0.0F, 0.0F, 8.5F);
-		this.Tails22.addBox(-2.5F, 0.0F, 0.0F, 2, 0, 7, 0.0F);
-		this.setRotateAngle(Tails22, 0.0F, 0.08726646259971647F, 0.0F);
+		this.tails11 = new RendererModel(this, 117, 57);
+		this.tails11.setRotationPoint(0.6F, 0.0F, 8.5F);
+		this.tails11.addBox(0.0F, 0.0F, 0.0F, 2, 0, 7, 0.0F);
+		this.setRotateAngle(tails11, 0.0F, -0.08726646259971647F, 0.0F);
+		this.tails22 = new RendererModel(this, 117, 57);
+		this.tails22.setRotationPoint(0.0F, 0.0F, 8.5F);
+		this.tails22.addBox(-2.5F, 0.0F, 0.0F, 2, 0, 7, 0.0F);
+		this.setRotateAngle(tails22, 0.0F, 0.08726646259971647F, 0.0F);
 		this.Fire = new RendererModel(this, 78, 3);
 		this.Fire.setRotationPoint(0.0F, -1.0F, -16.0F);
 		this.Fire.addBox(0.0F, 0.0F, 0.0F, 0, 3, 7, 0.0F);
-		this.RightArm1.addChild(this.RightWing1);
-		this.LeftArm1.addChild(this.LeftWing2);
-		this.RightArm1.addChild(this.RightWing2);
-		this.LeftArm1.addChild(this.LeftWing1);
-		this.Tails1.addChild(this.Tails11);
-		this.Tails2.addChild(this.Tails22);
+		this.rightArm1.addChild(this.RightWing1);
+		this.leftArm1.addChild(this.leftWing2);
+		this.rightArm1.addChild(this.rightWing2);
+		this.leftArm1.addChild(this.LeftWing1);
+		this.tails1.addChild(this.tails11);
+		this.tails2.addChild(this.tails22);
 	}
 
 	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+	public void render(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
 	{
-		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-		this.body1.render(f5);
-		this.LeftArm1.render(f5);
-		this.RightFoot1.render(f5);
-		this.body4.render(f5);
-		this.Fire2.render(f5);
-		this.RightLeg2.render(f5);
-		this.LeftLeg2.render(f5);
-		this.body3.render(f5);
-		this.head1.render(f5);
-		this.RightArm1.render(f5);
-		this.head2.render(f5);
-		this.RightLeg1.render(f5);
-		this.neck1.render(f5);
-		this.body2.render(f5);
-		this.beak3.render(f5);
-		this.Fire.render(f5);
-		this.LeftLeg1.render(f5);
-		this.beak1.render(f5);
-		this.Tails1.render(f5);
-		this.Tails2.render(f5);
-		this.beak2.render(f5);
-		this.beak4.render(f5);
-		this.LeftFoot1.render(f5);
-		this.head3.render(f5);
+		this.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+
+		this.body1.render(scale);
+		this.leftArm1.render(scale);
+		this.RightFoot1.render(scale);
+		this.body4.render(scale);
+		this.Fire2.render(scale);
+		this.RightLeg2.render(scale);
+		this.LeftLeg2.render(scale);
+		this.body3.render(scale);
+		this.head1.render(scale);
+		this.rightArm1.render(scale);
+		this.head2.render(scale);
+		this.RightLeg1.render(scale);
+		this.neck1.render(scale);
+		this.body2.render(scale);
+		this.beak3.render(scale);
+		this.Fire.render(scale);
+		this.LeftLeg1.render(scale);
+		this.beak1.render(scale);
+		this.tails1.render(scale);
+		this.tails2.render(scale);
+		this.beak2.render(scale);
+		this.beak4.render(scale);
+		this.LeftFoot1.render(scale);
+		this.head3.render(scale);
 	}
 
-	public void setRotateAngle(RendererModel RendererModel, float x, float y, float z)
+	@Override
+	public void setRotationAngles(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
 	{
-		RendererModel.rotateAngleX = x;
-		RendererModel.rotateAngleY = y;
-		RendererModel.rotateAngleZ = z;
+		super.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+		
+		// Handles the wing and tail ornaments animations
+		this.leftArm1.rotateAngleZ = MathHelper.cos(ageInTicks * 0.4F) * 0.7F;
+		this.rightArm1.rotateAngleZ = MathHelper.cos(ageInTicks * 0.4F + (float) Math.PI) * 0.7F;
+
+		this.leftWing2.rotateAngleZ = MathHelper.cos(ageInTicks * 0.4F) * 0.4F;
+		this.rightWing2.rotateAngleZ = MathHelper.cos(ageInTicks * 0.4F + (float) Math.PI) * 0.4F;
+
+		this.tails1.rotateAngleX = 0.5F * MathHelper.cos(ageInTicks * 0.4F) * 0.3F;
+		this.tails2.rotateAngleX = 0.5F * MathHelper.cos(ageInTicks * 0.4F + (float) Math.PI) * 0.3F;
+
+		this.tails11.rotateAngleX = 0.2F * MathHelper.cos(ageInTicks * 0.5F) * 0.8F;
+		this.tails22.rotateAngleX = 0.2F * MathHelper.cos(ageInTicks * 0.5F + (float) Math.PI) * 0.8F;
+	}
+	
+	public void setRotateAngle(RendererModel model, float x, float y, float z)
+	{
+		model.rotateAngleX = x;
+		model.rotateAngleY = y;
+		model.rotateAngleZ = z;
 	}
 
-	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float headYaw, float headPitch, float scaleFactor, Entity ent)
-	{
-		LeftArm1.rotateAngleZ = MathHelper.cos(ageInTicks * 0.6F) * 0.3F;
-		RightArm1.rotateAngleZ = MathHelper.cos(ageInTicks * 0.6F + (float) Math.PI) * 0.3F;
-
-		LeftWing2.rotateAngleZ = MathHelper.cos(ageInTicks * 0.6F) * 0.4F;
-		RightWing2.rotateAngleZ = MathHelper.cos(ageInTicks * 0.6F + (float) Math.PI) * 0.4F;
-
-		Tails1.rotateAngleX = 0.5F * MathHelper.cos(ageInTicks * 0.4F) * 0.3F;
-		Tails2.rotateAngleX = 0.5F * MathHelper.cos(ageInTicks * 0.4F + (float) Math.PI) * 0.3F;
-
-		Tails11.rotateAngleX = 0.2F * MathHelper.cos(ageInTicks * 0.5F) * 0.8F;
-		Tails22.rotateAngleX = 0.2F * MathHelper.cos(ageInTicks * 0.5F + (float) Math.PI) * 0.8F;
-	}
-
-	protected float degToRad(double degrees)
-	{
-		return (float) (degrees * Math.PI / 180);
-	}
 
 	@Override
 	public RendererModel getHandRenderer()

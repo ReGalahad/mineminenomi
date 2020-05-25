@@ -4,11 +4,13 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.abilities.ito.BlackKnightAbility;
 import xyz.pixelatedw.mineminenomi.abilities.ito.KumoNoSugakiAbility;
+import xyz.pixelatedw.mineminenomi.abilities.ito.SoraNoMichiAbility;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.BlackKnightEntity;
@@ -20,6 +22,33 @@ import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class ItoPassiveEvents
 {
+	@SubscribeEvent
+	public static void onEntityUpdate(LivingUpdateEvent event)
+	{
+		if (!(event.getEntityLiving() instanceof PlayerEntity))
+			return;	
+		
+		PlayerEntity player = (PlayerEntity) event.getEntityLiving();
+		IDevilFruit devilProps = DevilFruitCapability.get(player);
+		IAbilityData abilityProps = AbilityDataCapability.get(player);
+		
+		if (!devilProps.getDevilFruit().equalsIgnoreCase("ito_ito"))
+			return;
+
+		SoraNoMichiAbility soraNoMichiAbiltiy = abilityProps.getEquippedAbility(SoraNoMichiAbility.INSTANCE);
+		boolean blockFallDamage = soraNoMichiAbiltiy != null && !soraNoMichiAbiltiy.hasFallDamage();
+				
+		if(blockFallDamage)
+		{
+			player.fallDistance = 0;
+			if(soraNoMichiAbiltiy.getCooldown() < soraNoMichiAbiltiy.getMaxCooldown() - 10 || soraNoMichiAbiltiy.getCooldown() == soraNoMichiAbiltiy.getMaxCooldown())
+			{
+				if(player.onGround)		
+					soraNoMichiAbiltiy.resetFallDamage();
+			}
+		}
+	}
+	
 	@SubscribeEvent
 	public static void onEntityAttackEvent(LivingAttackEvent event)
 	{	

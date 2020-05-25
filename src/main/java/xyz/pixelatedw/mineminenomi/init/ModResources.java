@@ -43,6 +43,7 @@ public class ModResources
 	public static final ResourceLocation AWA3 = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/awa3.png");
 	public static final ResourceLocation NETSU = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/netsu.png");
 	public static final ResourceLocation NETSU2 = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/netsu2.png");
+	public static final ResourceLocation CIRCLE = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/circle.png");
 
 	// UI
 	public static final ResourceLocation WOOD_ARROW = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/icons/arrow.png");
@@ -89,7 +90,8 @@ public class ModResources
 	// Zoan / Morphing
 	public static final ResourceLocation BUSOSHOKU_HAKI_ARM = new ResourceLocation(APIConfig.PROJECT_ID, "textures/models/zoanmorph/buso.png");
 	public static final ResourceLocation HOT_BOILING_SPECIAL_ARM = new ResourceLocation(APIConfig.PROJECT_ID, "textures/models/zoanmorph/hot_boiling_special.png");
-	
+	public static final ResourceLocation RUST_TOUCH_ARM = new ResourceLocation(APIConfig.PROJECT_ID, "textures/models/zoanmorph/rust_touch.png");
+
 	// Overlays
 	public static final ResourceLocation BUBBLY_CORAL = new ResourceLocation(APIConfig.PROJECT_ID, "textures/misc/bubbly_coral.png");	
 	public static final ResourceLocation CANDLE_LOCK = new ResourceLocation(APIConfig.PROJECT_ID, "textures/models/zoanmorph/candle_lock.png");

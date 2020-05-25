@@ -13,6 +13,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import xyz.pixelatedw.mineminenomi.entities.mobs.IDynamicRenderer;
+import xyz.pixelatedw.mineminenomi.renderers.layers.PotionLayer;
 import xyz.pixelatedw.wypi.APIConfig;
 
 @OnlyIn(Dist.CLIENT)
@@ -27,6 +28,7 @@ public class GenericMobRenderer<T extends MobEntity, M extends BipedModel<T>> ex
 		this.scale = scale;
 		this.texture = new ResourceLocation(APIConfig.PROJECT_ID, "textures/models/" + tex + ".png");
 		this.addLayer(new BipedArmorLayer<>(this, new BipedModel(0.5F), new BipedModel(1.0F)));
+		this.addLayer(new PotionLayer(this));
 	}
 
 	public GenericMobRenderer(EntityRendererManager manager, M model, String tex)
@@ -35,6 +37,7 @@ public class GenericMobRenderer<T extends MobEntity, M extends BipedModel<T>> ex
 		this.scale = 1.0F;
 		this.texture = new ResourceLocation(APIConfig.PROJECT_ID, "textures/models/" + tex + ".png");
 		this.addLayer(new BipedArmorLayer<>(this, new BipedModel(0.5F), new BipedModel(1.0F)));
+		this.addLayer(new PotionLayer(this));
 	}
 
 	public GenericMobRenderer(EntityRendererManager manager, M model)
@@ -43,6 +46,7 @@ public class GenericMobRenderer<T extends MobEntity, M extends BipedModel<T>> ex
 		this.scale = 1.0F;
 		this.texture = null;
 		this.addLayer(new BipedArmorLayer<>(this, new BipedModel(0.5F), new BipedModel(1.0F)));
+		this.addLayer(new PotionLayer(this));
 	}
 
 	@Override

@@ -14,7 +14,7 @@ public class SangoAbility extends RepeaterAbility
 	{
 		super("Sango", AbilityCategory.DEVIL_FRUIT);
 		this.setDescription("Launches a huge concentrated chunk of electricity at the opponent");
-		this.setMaxCooldown(10);
+		this.setMaxCooldown(6);
 		this.setMaxRepearCount(5, 3);
 
 		this.onUseEvent = this::onUseEvent;

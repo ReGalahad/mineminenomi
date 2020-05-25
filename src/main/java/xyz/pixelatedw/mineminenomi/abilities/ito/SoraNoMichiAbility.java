@@ -13,7 +13,8 @@ public class SoraNoMichiAbility extends Ability
 	public static final SoraNoMichiAbility INSTANCE = new SoraNoMichiAbility();
 	
 	private int airJumps = 0;
-	
+	private boolean hasFallDamage = true;
+
 	public SoraNoMichiAbility()
 	{
 		super("Sora no Michi", AbilityCategory.DEVIL_FRUIT);
@@ -39,6 +40,7 @@ public class SoraNoMichiAbility extends Ability
 			this.airJumps++;
 		}
 
+		this.hasFallDamage = false;
 		player.velocityChanged = true;
 		((ServerWorld) player.world).getChunkProvider().sendToTrackingAndSelf(player, new SAnimateHandPacket(player, 0));
 
@@ -46,7 +48,7 @@ public class SoraNoMichiAbility extends Ability
 		{
 			this.airJumps = 0;
 			this.setMaxCooldown(10);
-			this.startCooldown();
+			this.startCooldown(player);
 			return true;
 		}
 		else
@@ -55,5 +57,15 @@ public class SoraNoMichiAbility extends Ability
 		}
 		
 		return true;
+	}
+	
+	public void resetFallDamage()
+	{
+		this.hasFallDamage = true;
+	}
+	
+	public boolean hasFallDamage()
+	{
+		return this.hasFallDamage;
 	}
 }

@@ -103,10 +103,10 @@ public class SimpleParticle extends TexturedParticle
         	if(this.particleScale > 0)
         		this.setParticleScale(this.particleScale /= 1.01F);
         	
-        	if(this.particleAlpha > 0)
+        	if(this.particleAlpha - 0.15 > 0)
         		this.particleAlpha -= 0.15;
         }
-        
+
         if (this.age++ >= this.maxAge || this.onGround)
             this.setExpired();	
 	}

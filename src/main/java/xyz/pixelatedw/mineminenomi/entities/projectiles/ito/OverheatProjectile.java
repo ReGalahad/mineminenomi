@@ -32,7 +32,14 @@ public class OverheatProjectile extends AbilityProjectileEntity
 		this.setDamage(20);
 		this.setPassThroughEntities();
 		
+		this.onEntityImpactEvent = this::onEntityImpactEvent;
 		this.onBlockImpactEvent = this::onBlockImpactEvent;
+	}
+	
+	private void onEntityImpactEvent(LivingEntity hitEntity)
+	{
+		this.onBlockImpactEvent.onImpact(hitEntity.getPosition());
+		hitEntity.setFire(10);
 	}
 	
 	private void onBlockImpactEvent(BlockPos hit)
@@ -41,7 +48,7 @@ public class OverheatProjectile extends AbilityProjectileEntity
 		explosion.setExplosionSound(true);
 		explosion.setDamageOwner(false);
 		explosion.setDestroyBlocks(true);
-		explosion.setFireAfterExplosion(false);
+		explosion.setFireAfterExplosion(true);
 		explosion.setSmokeParticles(null);
 		explosion.setDamageEntities(true);
 		explosion.doExplosion();

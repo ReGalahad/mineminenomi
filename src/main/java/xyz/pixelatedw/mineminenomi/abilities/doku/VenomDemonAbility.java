@@ -1,6 +1,7 @@
 package xyz.pixelatedw.mineminenomi.abilities.doku;
 
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.math.BlockPos;
 import xyz.pixelatedw.mineminenomi.api.abilities.ZoanAbility;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.api.protection.BlockProtectionRule;
@@ -32,12 +33,14 @@ public class VenomDemonAbility extends ZoanAbility
 	
 	private void duringContinuity(PlayerEntity player, int timer)
 	{
-		if(player.world.getBlockState(player.getPosition().down()).isSolid() && !AbilityHelper.isNearbyKairoseki(player))
+		if(!AbilityHelper.isNearbyKairoseki(player))
 		{
 			for(int x = -1; x < 1; x++)
 			for(int z = -1; z < 1; z++)
 			{
-				AbilityHelper.placeBlockIfAllowed(player.world, player.posX + x, player.posY, player.posZ + z, ModBlocks.DEMON_POISON, GRIEF_RULE);
+				BlockPos pos = new BlockPos(player.posX + x, player.posY, player.posZ + z);
+				if(player.world.getBlockState(pos.down()).isSolid())
+					AbilityHelper.placeBlockIfAllowed(player.world, player.posX + x, player.posY, player.posZ + z, ModBlocks.DEMON_POISON, GRIEF_RULE);
 			}
 		}
 		

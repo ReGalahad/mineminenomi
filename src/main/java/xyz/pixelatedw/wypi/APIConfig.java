@@ -1,6 +1,5 @@
 package xyz.pixelatedw.wypi;
 
-import net.minecraft.util.Util;
 import xyz.pixelatedw.wypi.debug.WyDebug;
 
 public class APIConfig
@@ -25,17 +24,8 @@ public class APIConfig
 		if (!WyDebug.isDebug())
 			return;
 
-		if(Util.getOSType() == Util.OS.WINDOWS)
-		{
-			String basicPath = System.getProperty("java.class.path");
-			projectResourceFolder = basicPath.substring(0, basicPath.indexOf("\\bin")).replace("file:/", "").replace("%20", " ") + "/src/main/resources";
-		}
-		else if(Util.getOSType() == Util.OS.LINUX)
-		{
-			String basicPath = System.getProperty("user.dir");
-			projectResourceFolder = basicPath.replace("/run", "") + "/src/main/resources";
-		}
-		
+		String basicPath = System.getProperty("user.dir");
+		projectResourceFolder = basicPath.replace("/run", "") + "/src/main/resources";
 	}
 
 	public static String getResourceFolderPath()

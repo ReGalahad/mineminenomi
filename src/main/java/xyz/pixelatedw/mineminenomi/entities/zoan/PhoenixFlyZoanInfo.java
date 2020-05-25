@@ -2,7 +2,7 @@ package xyz.pixelatedw.mineminenomi.entities.zoan;
 
 import xyz.pixelatedw.mineminenomi.abilities.toriphoenix.PhoenixFlyPointAbility;
 import xyz.pixelatedw.mineminenomi.api.ZoanInfo;
-import xyz.pixelatedw.mineminenomi.models.entities.zoans.PhoenixFullModel;
+import xyz.pixelatedw.mineminenomi.models.entities.zoans.PhoenixFlyModel;
 import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer.Factory;
 import xyz.pixelatedw.wypi.abilities.Ability;
@@ -26,7 +26,10 @@ public class PhoenixFlyZoanInfo extends ZoanInfo
 	@Override
 	public Factory getFactory()
 	{
-		return new ZoanMorphRenderer.Factory(new PhoenixFullModel(), "phoenixfull", 1.3, new float[] { 0, -0.5f, 0 });
+		ZoanMorphRenderer.Factory factory = new ZoanMorphRenderer.Factory(new PhoenixFlyModel(), "phoenixfull");
+		factory.setScale(1.3);
+		factory.setOffset(0, -0.5f, 0);
+		return factory;
 	}
 
 	@Override
@@ -48,9 +51,15 @@ public class PhoenixFlyZoanInfo extends ZoanInfo
 	}
 	
 	@Override
-	public double[] getHeldItemOffset()
+	public float getShadowSize()
 	{
-		return new double[] {0, 0, 0};
+		return 1;
+	}
+	
+	@Override
+	public double[][] getHeldItemOffset()
+	{
+		return null;
 	}
 
 	@Override

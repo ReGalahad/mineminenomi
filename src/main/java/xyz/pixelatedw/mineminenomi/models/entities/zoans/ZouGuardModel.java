@@ -1,10 +1,11 @@
 package xyz.pixelatedw.mineminenomi.models.entities.zoans;
 
 import net.minecraft.client.renderer.entity.model.RendererModel;
-import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.MathHelper;
+import xyz.pixelatedw.mineminenomi.api.ZoanMorphModel;
 
-public class ZouGuardModel extends ZoanMorphModel
+public class ZouGuardModel<T extends LivingEntity> extends ZoanMorphModel<T>
 {
 	public RendererModel head;
 	public RendererModel rightear;
@@ -109,39 +110,49 @@ public class ZouGuardModel extends ZoanMorphModel
 	}
 
 	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+	public void render(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
 	{
-		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+		this.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
-		this.tuskA2.render(f5);
-		this.head.render(f5);
-		this.body2.render(f5);
-		this.leg3.render(f5);
-		this.leg1.render(f5);
-		this.tuskB2.render(f5);
-		this.leg4.render(f5);
-		this.tuskB1.render(f5);
-		this.leg2.render(f5);
-		this.tuskA1.render(f5);
+		this.tuskA2.render(scale);
+		this.head.render(scale);
+		this.body2.render(scale);
+		this.leg3.render(scale);
+		this.leg1.render(scale);
+		this.tuskB2.render(scale);
+		this.leg4.render(scale);
+		this.tuskB1.render(scale);
+		this.leg2.render(scale);
+		this.tuskA1.render(scale);
 	}
 
-	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float headYaw, float headPitch, float scaleFactor, Entity ent)
+	@Override
+	public void setRotationAngles(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
 	{
-		this.head.rotateAngleY = headYaw / (270F / (float) Math.PI);
-		this.head.rotateAngleX = headPitch / (360F / (float) Math.PI);
+		super.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+
+		// Handles the head movement when following the mouse or when swimming
+		this.head.rotateAngleY = netHeadYaw * ((float) Math.PI / 180F);
+		this.head.rotateAngleX = headPitch * ((float) Math.PI / 180F);
+		if (Math.toDegrees(this.head.rotateAngleX) > 15)
+			this.head.rotateAngleX = (float) Math.toRadians(15);
+		if (Math.toDegrees(this.head.rotateAngleX) < -25)
+			this.head.rotateAngleX = (float) Math.toRadians(-25);
 		
-		this.leg3.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 0.3F * limbSwingAmount;
-		this.leg4.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.3F * limbSwingAmount;
-
-		this.leg1.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 0.4F * limbSwingAmount;
-		this.leg2.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.4F * limbSwingAmount;
+		// Hanldes the legs and tail movement
+		this.leg1.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 0.3F * limbSwingAmount;
+		this.leg2.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.3F * limbSwingAmount;
+		this.leg3.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 0.4F * limbSwingAmount;
+		this.leg4.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.4F * limbSwingAmount;
+		if(entity.isSprinting())
+			this.tail1.rotateAngleX = 1.2F + MathHelper.cos(limbSwing * 0.6662F) * 0.2F * limbSwingAmount;
 	}
 
-	public void setRotateAngle(RendererModel RendererModel, float x, float y, float z)
+	public void setRotateAngle(RendererModel model, float x, float y, float z)
 	{
-		RendererModel.rotateAngleX = x;
-		RendererModel.rotateAngleY = y;
-		RendererModel.rotateAngleZ = z;
+		model.rotateAngleX = x;
+		model.rotateAngleY = y;
+		model.rotateAngleZ = z;
 	}
 
 	@Override

@@ -55,7 +55,7 @@ public class WyNetwork
 	{
 		try
 		{
-			INSTANCE.send(PacketDistributor.NEAR.with(() -> new TargetPoint(sender.posX, sender.posY, sender.posZ, 50, sender.dimension)), msg);
+			INSTANCE.send(PacketDistributor.NEAR.with(() -> new TargetPoint(sender.posX, sender.posY, sender.posZ, 250, sender.dimension)), msg);
 			if (sender instanceof ServerPlayerEntity)
 				sendTo(msg, (ServerPlayerEntity) sender);
 		}
