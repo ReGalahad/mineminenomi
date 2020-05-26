@@ -291,7 +291,21 @@ public class JollyRogerCreatorScreen extends Screen
 					this.trueIndex = -1;
 				if(this.trueIndex < 0 && this.props.getBackgrounds()[this.layerIndex] == null)
 					this.trueIndex = this.allBackgrounds.size() - 1;
-
+				
+				if(this.trueIndex >= 0 && this.trueIndex <= this.allBackgrounds.size())
+				{
+					JollyRogerElement ogElem = this.allBackgrounds.get(this.trueIndex).get();
+					for(int i = 0; i < this.props.getBackgrounds().length; i++)
+					{
+						JollyRogerElement element = this.props.getBackgrounds()[i];
+						if(element != null && ogElem != null && ogElem.equals(element))
+						{
+							this.moveIndex(btn, toRight);
+							return;
+						}
+					}
+				}
+				
 				if(this.trueIndex >= 0 && this.trueIndex <= this.allBackgrounds.size())
 					this.props.getBackgrounds()[this.layerIndex] = this.allBackgrounds.get(this.trueIndex).get();
 				else if(this.trueIndex <= 0 && this.props.getBackgrounds()[this.layerIndex].getTexture() != null)
@@ -301,8 +315,22 @@ public class JollyRogerCreatorScreen extends Screen
 			{
 				if(this.trueIndex >= this.allDetails.size())
 					this.trueIndex = -1;
-				if(this.trueIndex < 0 && this.props.getDetails()[this.layerIndex] == null)
+				if(this.trueIndex < 0 && this.trueIndex <= this.allDetails.size() && this.props.getDetails()[this.layerIndex] == null)
 					this.trueIndex = this.allDetails.size() - 1;
+
+				if(this.trueIndex >= 0 && this.trueIndex <= this.allDetails.size())
+				{
+					JollyRogerElement ogElem = this.allDetails.get(this.trueIndex).get();
+					for(int i = 0; i < this.props.getDetails().length; i++)
+					{
+						JollyRogerElement element = this.props.getDetails()[i];
+						if(element != null && ogElem != null && ogElem.equals(element))
+						{
+							this.moveIndex(btn, toRight);
+							return;
+						}
+					}
+				}
 
 				if(this.trueIndex >= 0 && this.trueIndex <= this.allDetails.size())
 					this.props.getDetails()[this.layerIndex] = this.allDetails.get(this.trueIndex).get();

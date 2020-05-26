@@ -8,6 +8,8 @@ import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.command.arguments.EntityArgument;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
+import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.packets.server.SOpenJollyRogerCreatorScreenPacket;
 import xyz.pixelatedw.wypi.network.WyNetwork;
 
@@ -28,7 +30,10 @@ public class FGCommand
 
 	private static int openJollyRogerCreator(CommandContext<CommandSource> context, ServerPlayerEntity target)
 	{
-		WyNetwork.sendTo(new SOpenJollyRogerCreatorScreenPacket(), target);
+		IEntityStats props = EntityStatsCapability.get(target);
+		
+		if(props.isPirate() || props.isBandit() || props.isBountyHunter())
+			WyNetwork.sendTo(new SOpenJollyRogerCreatorScreenPacket(), target);
 		
 		return 1;
 	}
