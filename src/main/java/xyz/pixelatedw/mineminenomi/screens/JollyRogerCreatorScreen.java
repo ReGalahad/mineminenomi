@@ -21,6 +21,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.client.config.GuiSlider;
+import net.minecraftforge.fml.client.config.GuiUtils;
 import xyz.pixelatedw.mineminenomi.api.helpers.RendererHelper;
 import xyz.pixelatedw.mineminenomi.api.jollyroger.JollyRogerElement;
 import xyz.pixelatedw.mineminenomi.api.jollyroger.JollyRogerElement.LayerType;
@@ -42,6 +43,7 @@ public class JollyRogerCreatorScreen extends Screen
 	//private JollyRogerElement selectedElement;
 	private LayerType layerType = LayerType.BASE;
 	private IJollyRoger props;
+	private float animationTime = 0;
 
 	private int layerIndex;
 	private int trueIndex;
@@ -90,6 +92,73 @@ public class JollyRogerCreatorScreen extends Screen
 			//this.fillGradient(-10, 0, 0 + 270, 0 + 260, WyHelper.hexToRGB("#111115").getRGB(), WyHelper.hexToRGB("#202025").getRGB());
 			
 			RendererHelper.drawPlayerJollyRoger(this.props);
+			
+			// Animation for when a new layer is selecting, showcasing the selected element.
+			// To make it more visible the complementary color is applied instead, if it has no color then a bright red will be applied.
+			if(this.animationTime < 0.15)
+			{
+				this.animationTime += 0.007;
+				scale += 0.45 + this.animationTime;
+
+				GL11.glTranslated(128, 128, 0);
+				GL11.glScaled(scale, scale, scale);
+				GL11.glTranslated(-128, -128, 0);
+				
+				if (this.layerType == LayerType.BASE)
+				{
+					JollyRogerElement element = this.props.getBase();
+					if(element != null)
+					{
+						if (element.canBeColored())
+						{
+							Color color = WyHelper.getComplementaryColor(WyHelper.hexToRGB(element.getColor()));
+							GlStateManager.color4f(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, 0.9F - (this.animationTime * 4));
+						}
+						else
+						{
+							GlStateManager.color4f(1.0F, 0.0F, 0.0F, 0.9F - (this.animationTime * 4));
+						}
+						Minecraft.getInstance().getTextureManager().bindTexture(element.getTexture());
+						GuiUtils.drawTexturedModalRect(0, 0, 0, 0, 256, 256, 10);
+					}
+				}
+				else if (this.layerType == LayerType.BACKGROUND)
+				{
+					JollyRogerElement element = this.props.getBackgrounds()[this.layerIndex];
+					if(element != null)
+					{
+						if (element.canBeColored())
+						{
+							Color color = WyHelper.getComplementaryColor(WyHelper.hexToRGB(element.getColor()));
+							GlStateManager.color4f(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, 0.9F - (this.animationTime * 4));
+						}
+						else
+						{
+							GlStateManager.color4f(1.0F, 0.0F, 0.0F, 0.9F - (this.animationTime * 4));
+						}
+						Minecraft.getInstance().getTextureManager().bindTexture(element.getTexture());
+						GuiUtils.drawTexturedModalRect(0, 0, 0, 0, 256, 256, 10);
+					}
+				}
+				else if (this.layerType == LayerType.DETAIL)
+				{
+					JollyRogerElement element = this.props.getDetails()[this.layerIndex];
+					if(element != null)
+					{
+						if (element.canBeColored())
+						{
+							Color color = WyHelper.getComplementaryColor(WyHelper.hexToRGB(element.getColor()));
+							GlStateManager.color4f(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, 0.9F - (this.animationTime * 4));
+						}
+						else
+						{
+							GlStateManager.color4f(1.0F, 0.0F, 0.0F, 0.9F - (this.animationTime * 4));
+						}
+						Minecraft.getInstance().getTextureManager().bindTexture(element.getTexture());
+						GuiUtils.drawTexturedModalRect(0, 0, 0, 0, 256, 256, 10);
+					}
+				}
+			}
 		}
 		GL11.glPopMatrix();
 
@@ -353,6 +422,7 @@ public class JollyRogerCreatorScreen extends Screen
 			((NoTextureButton) this.selectedButton).select();
 		this.selectedButton = btn;
 		((NoTextureButton) btn).select();
+		this.animationTime = 0;
 
 		if (this.buttons.get(0) == btn)
 		{
@@ -396,7 +466,7 @@ public class JollyRogerCreatorScreen extends Screen
 				return;
 			}
 			j++;
-		}
+		}	
 	}
 
 	private void resetColorSliders(JollyRogerElement element)

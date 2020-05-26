@@ -180,6 +180,11 @@ public class WyHelper
 			return Color.decode("#" + hexColor);
 	}
 
+	public static Color getComplementaryColor(Color color)
+	{
+		return new Color(255 - color.getRed(), 255 - color.getGreen(), 255 - color.getBlue());
+	}
+	
 	public static float colorTolerance(float tolerance)
 	{
 		return colorTolerance(tolerance, false);
