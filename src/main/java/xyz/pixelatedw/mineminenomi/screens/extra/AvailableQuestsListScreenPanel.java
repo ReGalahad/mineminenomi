@@ -165,7 +165,7 @@ public class AvailableQuestsListScreenPanel extends ScrollPanel
 			{
 				GlStateManager.pushMatrix();
 				{
-					List<String> splittedText = WyHelper.splitString(this.font, formattedQuestName, (int) x - 80, (int) y + 16, 140);
+					List<String> splittedText = WyHelper.splitString(this.font, formattedQuestName, (int) x - 80, 140);
 					GlStateManager.translated(0, -((splittedText.size() - 1) * 5), 0);
 					for(String string : splittedText)
 					{

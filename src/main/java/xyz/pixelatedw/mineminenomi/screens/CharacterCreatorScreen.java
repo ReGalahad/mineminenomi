@@ -6,16 +6,18 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.config.GuiUtils;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
+import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
 import xyz.pixelatedw.mineminenomi.packets.client.CDeleteCCBookPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CEntityStatsSyncPacket;
-import xyz.pixelatedw.mineminenomi.screens.extra.NoTextureButton;
+import xyz.pixelatedw.mineminenomi.screens.extra.TexturedIconButton;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.network.WyNetwork;
 
@@ -24,12 +26,14 @@ public class CharacterCreatorScreen extends Screen
 {
 	
 	private PlayerEntity player;
+	private IEntityStats props;
 	private int page = 0, selectedOpt = 0, maxOpt, lastFac = 0, lastRace = 0, lastFStyle = 0;
 	
 	public CharacterCreatorScreen()
 	{
 		super(new StringTextComponent(""));
 		this.player = Minecraft.getInstance().player;
+		this.props = EntityStatsCapability.get(player);
 	}
 	
 	@Override
@@ -44,25 +48,8 @@ public class CharacterCreatorScreen extends Screen
 		
 		// Background
 		Minecraft.getInstance().getTextureManager().bindTexture(ModResources.BLANK);
-		GuiUtils.drawTexturedModalRect(posX - 110, posY - 80, 0, 0, 256, 256, 1);
-		
-		// Next and previous buttons
-		Minecraft.getInstance().getTextureManager().bindTexture(ModResources.WIDGETS);
-		GuiUtils.drawTexturedModalRect(posX - 90, posY - 45, 0, 92, 25, 100, 1);	
-		GuiUtils.drawTexturedModalRect(posX + 85, posY - 45, 26, 92, 30, 100, 1);
-		
-		// Side buttons and the confirm button rendering
-		int distance = 75;
-		GuiUtils.drawTexturedModalRect(posX - 190, (posY - 140) + distance, 0, 196, 96, 49, 1);
-		GuiUtils.drawTexturedModalRect(posX - 190, (posY - 140) + (int)(distance * 1.6), 0, 196, 96, 49, 1);
-		GuiUtils.drawTexturedModalRect(posX - 190, (posY - 140) + (int)(distance * 2.2), 0, 196, 96, 49, 1);	
-		GuiUtils.drawTexturedModalRect(posX - 30, posY + 65, 0, 196, 96, 49, 1);
-		this.drawCategory("Faction", posX - 47, posY + 45, 1.75);
-		this.drawCategory("Race", posX - 47, posY + 90, 1.75);
-		this.drawCategory("Fighting", posX - 80, posY + 98, 1.5);
-		this.drawCategory("Style", posX - 67, posY + 110, 1.5);
-		this.drawCategory("Create", posX + 145, posY + 205, 2);
-		
+		GuiUtils.drawTexturedModalRect(posX - 110, posY - 80, 0, 0, 256, 256, 0);
+
 		if(this.page == 0) 
 		{
 			if(this.selectedOpt == 0)
@@ -149,10 +136,10 @@ public class CharacterCreatorScreen extends Screen
 	{
 		int posX = (this.width - 256) / 2;
 		int posY = (this.height - 256) / 2;
-		
-		IEntityStats props = EntityStatsCapability.get(player);
-		
-		this.addButton(new NoTextureButton(posX - 58, posY + 65, 90, 36, "", b -> 
+				
+		// Category selection	
+		String msg = new TranslationTextComponent(ModI18n.FACTION_NAME).getFormattedText();
+		TexturedIconButton factionButton = new TexturedIconButton(ModResources.BLANK2_SIMPLE, posX - 58, posY + 65, 90, 36, msg, (btn) -> 
 		{
 			if(this.page == 0) this.lastFac = this.selectedOpt;
 			if(this.page == 1) this.lastRace = this.selectedOpt;
@@ -160,9 +147,12 @@ public class CharacterCreatorScreen extends Screen
 			
 			this.page = 0;			
 			this.selectedOpt = this.lastFac;
-		}));
-		
-		this.addButton(new NoTextureButton(posX - 58, (int)(posY + 70 * 1.6), 90, 36, "", b -> 
+		});
+		factionButton = factionButton.setTextureInfo(posX - 58, posY + 65, 90, 60).setTextInfo(posX + 50, posY + 173, 1.75);
+		this.addButton(factionButton);
+
+		msg = new TranslationTextComponent(ModI18n.RACE_NAME).getFormattedText();
+		TexturedIconButton raceButton = new TexturedIconButton(ModResources.BLANK2_SIMPLE, posX - 58, posY + 110, 90, 36, msg, (btn) -> 
 		{
 			if(this.page == 0) this.lastFac = this.selectedOpt;
 			if(this.page == 1) this.lastRace = this.selectedOpt;
@@ -170,9 +160,12 @@ public class CharacterCreatorScreen extends Screen
 			
 			this.page = 1;
 			this.selectedOpt = this.lastRace;
-		}));
-		
-		this.addButton(new NoTextureButton(posX - 58, (int)(posY + 71 * 2.2), 90, 36, "", b -> 
+		});
+		raceButton = raceButton.setTextureInfo(posX - 58, posY + 110, 90, 60).setTextInfo(posX + 50, posY + 218, 1.75);
+		this.addButton(raceButton);
+
+		msg = new TranslationTextComponent(ModI18n.STYLE_NAME).getFormattedText();
+		TexturedIconButton styleButton = new TexturedIconButton(ModResources.BLANK2_SIMPLE, posX - 58, posY + 155, 90, 36, msg, (btn) -> 
 		{
 			if(this.page == 0) this.lastFac = this.selectedOpt;
 			if(this.page == 1) this.lastRace = this.selectedOpt;
@@ -180,107 +173,117 @@ public class CharacterCreatorScreen extends Screen
 			
 			this.page = 2;			
 			this.selectedOpt = this.lastFStyle;
-		}));
-		
-		// Next / Previous buttons
-		this.addButton(new NoTextureButton(posX + 35, posY + 75, 24, 100, "", b -> 
-		{
-			if(this.selectedOpt - 1 > -1)
-				this.selectedOpt--;
-			else
-				this.selectedOpt = this.maxOpt - 1;
-		}));
+		});
+		styleButton = styleButton.setTextureInfo(posX - 58, posY + 155, 90, 60).setTextInfo(posX + 50, posY + 264, 1.75);
+		this.addButton(styleButton);
 
-		this.addButton(new NoTextureButton(posX + 220, posY + 73, 24, 100, "", b -> 
+		// Next / Previous buttons
+		TexturedIconButton nextButton = new TexturedIconButton(ModResources.BIG_WOOD_BUTTON_RIGHT, posX + 215, posY + 80, 24, 100, "", (btn) -> 
 		{
 			if(this.selectedOpt + 1 < this.maxOpt)
 				this.selectedOpt++;
 			else
 				this.selectedOpt = 0;
-		}));
+		});
+		nextButton = nextButton.setTextureInfo(posX + 211, posY + 66, 32, 128);
+		this.addButton(nextButton);
 		
-		// Finish button
-		this.addButton(new NoTextureButton(posX + 100, posY + 195, 90, 35, "", b -> 
+		TexturedIconButton prevButton = new TexturedIconButton(ModResources.BIG_WOOD_BUTTON_LEFT, posX + 45, posY + 80, 24, 100, "", (btn) -> 
 		{
-			if(this.lastFac == 0) props.setFaction(ModValues.PIRATE);
-			else if(this.lastFac == 1) props.setFaction(ModValues.MARINE);
-			else if(this.lastFac == 2) props.setFaction(ModValues.BOUNTY_HUNTER);
-			else if(this.lastFac == 3) props.setFaction(ModValues.REVOLUTIONARY);
+			if(this.selectedOpt - 1 > -1)
+				this.selectedOpt--;
+			else
+				this.selectedOpt = this.maxOpt - 1;
+		});
+		prevButton = prevButton.setTextureInfo(posX + 41, posY + 66, 32, 128);
+		this.addButton(prevButton);
 
-			if(this.lastRace == 0) props.setRace(ModValues.HUMAN);
-			else if(this.lastRace == 1) props.setRace(ModValues.FISHMAN);
-			else if(this.lastRace == 2) props.setRace(ModValues.CYBORG);
-			
-			if(this.lastFStyle == 0) props.setFightingStyle(ModValues.SWORDSMAN);
-			else if(this.lastFStyle == 1) props.setFightingStyle(ModValues.SNIPER);
-			else if(this.lastFStyle == 2) props.setFightingStyle(ModValues.DOCTOR);
-			else if(this.lastFStyle == 3) props.setFightingStyle(ModValues.ART_OF_WEATHER);
+		// Finish button	
+		TexturedIconButton finishButton = new TexturedIconButton(ModResources.BLANK2_SIMPLE, posX + 100, posY + 200, 90, 36, "Finish", (btn) -> this.completeCreation());
+		finishButton = finishButton.setTextureInfo(posX + 100, posY + 200, 90, 60).setTextInfo(posX + 217, posY + 309, 1.75);
+		this.addButton(finishButton);
+	}
+	
+	private void completeCreation()
+	{
+		if(this.lastFac == 0) this.props.setFaction(ModValues.PIRATE);
+		else if(this.lastFac == 1) this.props.setFaction(ModValues.MARINE);
+		else if(this.lastFac == 2) this.props.setFaction(ModValues.BOUNTY_HUNTER);
+		else if(this.lastFac == 3) this.props.setFaction(ModValues.REVOLUTIONARY);
 
-			switch(this.page)
+		if(this.lastRace == 0) this.props.setRace(ModValues.HUMAN);
+		else if(this.lastRace == 1) this.props.setRace(ModValues.FISHMAN);
+		else if(this.lastRace == 2) this.props.setRace(ModValues.CYBORG);
+		
+		if(this.lastFStyle == 0) this.props.setFightingStyle(ModValues.SWORDSMAN);
+		else if(this.lastFStyle == 1) this.props.setFightingStyle(ModValues.SNIPER);
+		else if(this.lastFStyle == 2) this.props.setFightingStyle(ModValues.DOCTOR);
+		else if(this.lastFStyle == 3) this.props.setFightingStyle(ModValues.ART_OF_WEATHER);
+
+		switch(this.page)
+		{
+			case 0:
 			{
-				case 0:
+				switch(this.selectedOpt)
 				{
-					switch(this.selectedOpt)
-					{
-					case 0:
-						props.setFaction(ModValues.PIRATE);
-						break;
-					case 1:
-						props.setFaction(ModValues.MARINE);
-						break;
-					case 2:
-						props.setFaction(ModValues.BOUNTY_HUNTER);
-						break;
-					case 3:
-						props.setFaction(ModValues.REVOLUTIONARY);
-						break;
-					}
+				case 0:
+					this.props.setFaction(ModValues.PIRATE);
+					break;
+				case 1:
+					this.props.setFaction(ModValues.MARINE);
+					break;
+				case 2:
+					this.props.setFaction(ModValues.BOUNTY_HUNTER);
+					break;
+				case 3:
+					this.props.setFaction(ModValues.REVOLUTIONARY);
 					break;
 				}
-				case 1:
-				{
-					switch(this.selectedOpt)
-					{
-					case 0:
-						props.setRace(ModValues.HUMAN);
-						break;
-					case 1:
-						props.setRace(ModValues.FISHMAN);
-						break;
-					case 2:
-						props.setRace(ModValues.CYBORG);
-						break;
-					}
-					break;					
-				}
-				case 2:
-				{
-					switch(this.selectedOpt)
-					{
-					case 0:
-						props.setFightingStyle(ModValues.SWORDSMAN);
-						break;
-					case 1:
-						props.setFightingStyle(ModValues.SNIPER);
-						break;
-					case 2:
-						props.setFightingStyle(ModValues.DOCTOR);
-						break;
-					case 3:
-						props.setFightingStyle(ModValues.ART_OF_WEATHER);
-						break;
-					}
-					break;					
-				}
+				break;
 			}
-			
-			if(!WyHelper.isNullOrEmpty(props.getRace()) && !WyHelper.isNullOrEmpty(props.getFaction()) && !WyHelper.isNullOrEmpty(props.getFightingStyle()))
+			case 1:
 			{
-				Minecraft.getInstance().displayGuiScreen(null);
-				WyNetwork.sendToServer(new CEntityStatsSyncPacket(props));
-				WyNetwork.sendToServer(new CDeleteCCBookPacket());
+				switch(this.selectedOpt)
+				{
+				case 0:
+					this.props.setRace(ModValues.HUMAN);
+					break;
+				case 1:
+					this.props.setRace(ModValues.FISHMAN);
+					break;
+				case 2:
+					this.props.setRace(ModValues.CYBORG);
+					break;
+				}
+				break;					
 			}
-		}));
+			case 2:
+			{
+				switch(this.selectedOpt)
+				{
+				case 0:
+					this.props.setFightingStyle(ModValues.SWORDSMAN);
+					break;
+				case 1:
+					this.props.setFightingStyle(ModValues.SNIPER);
+					break;
+				case 2:
+					this.props.setFightingStyle(ModValues.DOCTOR);
+					break;
+				case 3:
+					this.props.setFightingStyle(ModValues.ART_OF_WEATHER);
+					break;
+				}
+				break;					
+			}
+		}
+		
+		if(!WyHelper.isNullOrEmpty(this.props.getRace()) && !WyHelper.isNullOrEmpty(this.props.getFaction()) && !WyHelper.isNullOrEmpty(this.props.getFightingStyle()))
+		{
+			Minecraft.getInstance().displayGuiScreen(null);
+			WyNetwork.sendToServer(new CEntityStatsSyncPacket(this.props));
+			WyNetwork.sendToServer(new CDeleteCCBookPacket());
+		}
 	}
 	
 	@Override

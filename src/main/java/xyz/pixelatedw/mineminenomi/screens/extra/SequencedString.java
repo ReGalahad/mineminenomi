@@ -42,7 +42,7 @@ public class SequencedString
 				tempStr = tempStr + this.chars[i];
 			}
 		}
-		List<String> strings = WyHelper.splitString(this.mc.fontRenderer, tempStr, posX, 0, this.maxLength);
+		List<String> strings = WyHelper.splitString(this.mc.fontRenderer, tempStr, posX, this.maxLength);
 		for (int b = 0; b < strings.size(); b++)
 		{
 			WyHelper.drawStringWithBorder(this.mc.fontRenderer, strings.get(b), posX, posY + 10 * b, this.color);

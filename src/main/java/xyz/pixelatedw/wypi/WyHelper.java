@@ -489,7 +489,7 @@ public class WyHelper
 		font.drawStringWithShadow(text, posX, posY, color);
 	}
 
-	public static List<String> splitString(FontRenderer font, String text, int posX, int posY, int wrapWidth)
+	public static List<String> splitString(FontRenderer font, String text, int posX, int wrapWidth)
 	{
 		while (text != null && text.endsWith("\n"))
 		{

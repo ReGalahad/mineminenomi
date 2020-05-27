@@ -10,12 +10,18 @@ import xyz.pixelatedw.wypi.WyHelper;
 public class NoTextureButton extends Button
 {
 	private boolean isSelected;
+	private boolean isFake;
 	
 	public NoTextureButton(int posX, int posY, int width, int height, String string, IPressable onPress)
 	{
 		super(posX, posY, width, height, string, onPress);
 	}
 
+	public void setFake()
+	{
+		this.isFake = true;
+	}
+	
 	@Override
 	public void render(int mouseX, int mouseY, float partialTicks)
 	{
@@ -33,6 +39,13 @@ public class NoTextureButton extends Button
 				rgb = WyHelper.hexToRGB("#00FFBB").getRGB();
 				topGrad = WyHelper.hexToRGB("#B3B3B3").getRGB();
 				bottomGrad = WyHelper.hexToRGB("#505050").getRGB();
+				
+				if(this.isFake)
+				{
+					topGrad = WyHelper.hexToRGB("#3333BB00").getRGB();
+					bottomGrad = WyHelper.hexToRGB("#000055FF").getRGB();				
+					this.fillGradient(this.x, this.y, this.width + this.x, this.height + this.y, topGrad, bottomGrad);
+				}
 			}
 			
 			if (this.isSelected)
@@ -43,11 +56,14 @@ public class NoTextureButton extends Button
 
 			int outlineSize = 1;
 			
-			this.fillGradient(this.x - outlineSize, this.y - outlineSize, this.width + this.x + outlineSize, this.height + this.y + outlineSize, WyHelper.hexToRGB("#000000").getRGB(), WyHelper.hexToRGB("#000000").getRGB());
-			this.fillGradient(this.x, this.y, this.width + this.x, this.height + this.y, topGrad, bottomGrad);
-			
-			FontRenderer font = Minecraft.getInstance().fontRenderer;
-			WyHelper.drawStringWithBorder(font, this.getMessage(), this.x - font.getStringWidth(this.getMessage()) / 2 + this.width / 2, this.y + 4, rgb);
+			if(!this.isFake)
+			{
+				this.fillGradient(this.x - outlineSize, this.y - outlineSize, this.width + this.x + outlineSize, this.height + this.y + outlineSize, WyHelper.hexToRGB("#000000").getRGB(), WyHelper.hexToRGB("#000000").getRGB());
+				this.fillGradient(this.x, this.y, this.width + this.x, this.height + this.y, topGrad, bottomGrad);
+				
+				FontRenderer font = Minecraft.getInstance().fontRenderer;
+				WyHelper.drawStringWithBorder(font, this.getMessage(), this.x - font.getStringWidth(this.getMessage()) / 2 + this.width / 2, this.y + 4, rgb);
+			}
 			
 			GlStateManager.color3f(1f, 1f, 1f);
 		}
