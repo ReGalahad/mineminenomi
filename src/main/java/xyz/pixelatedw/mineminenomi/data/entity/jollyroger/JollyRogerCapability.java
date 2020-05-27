@@ -37,6 +37,12 @@ public class JollyRogerCapability
 					baseNBT.putString("color", baseElement.getColor());
 					props.put("base", baseNBT);
 				}
+				else
+				{
+					CompoundNBT baseNBT = new CompoundNBT();
+					baseNBT.putString("id", "empty");
+					props.put("base", baseNBT);
+				}
 					
 				try
 				{
@@ -53,6 +59,13 @@ public class JollyRogerCapability
 							backgroundNBT.putString("color", bgElement.getColor());
 							backgrounds.add(backgroundNBT);
 						}
+						else
+						{
+							CompoundNBT backgroundNBT = new CompoundNBT();
+							backgroundNBT.putInt("slot", i);
+							backgroundNBT.putString("id", "empty");
+							backgrounds.add(backgroundNBT);
+						}
 					}
 					props.put("backgrounds", backgrounds);
 					
@@ -67,6 +80,13 @@ public class JollyRogerCapability
 							detailNBT.putString("id", detElement.getTexture().toString());
 							detailNBT.putBoolean("canBeColored", detElement.canBeColored());
 							detailNBT.putString("color", detElement.getColor());			
+							details.add(detailNBT);
+						}
+						else
+						{
+							CompoundNBT detailNBT = new CompoundNBT();
+							detailNBT.putInt("slot", i);
+							detailNBT.putString("id", "empty");
 							details.add(detailNBT);
 						}
 					}
@@ -100,6 +120,10 @@ public class JollyRogerCapability
 						
 						instance.setBase(baseElement);
 					}
+					else
+					{
+						instance.setBase(null);
+					}
 					
 					ListNBT backgroundsNBT = props.getList("backgrounds", Constants.NBT.TAG_COMPOUND);
 					for (int i = 0; i < backgroundsNBT.size(); i++)
@@ -108,10 +132,9 @@ public class JollyRogerCapability
 						ResourceLocation res = new ResourceLocation(APIConfig.PROJECT_ID, backgroundNBT.getString("id").replace(APIConfig.PROJECT_ID + ":", ""));
 						JollyRogerElement bgElement = GameRegistry.findRegistry(JollyRogerElement.class).getValue(res);
 						
+						int slot = backgroundNBT.getInt("slot");
 						if(bgElement != null)
-						{
-							int slot = backgroundNBT.getInt("slot");
-							
+						{			
 							if(backgroundNBT.getBoolean("canBeColored"))
 								bgElement.setCanBeColored();
 							
@@ -119,6 +142,10 @@ public class JollyRogerCapability
 							bgElement.setColor(color);
 							
 							instance.setBackground(slot, bgElement);
+						}
+						else
+						{
+							instance.setBackground(slot, null);
 						}
 					}
 					
@@ -128,10 +155,9 @@ public class JollyRogerCapability
 						CompoundNBT detailNBT = detailsNBT.getCompound(i);
 						JollyRogerElement detElement = GameRegistry.findRegistry(JollyRogerElement.class).getValue(new ResourceLocation(APIConfig.PROJECT_ID, detailNBT.getString("id").replace(APIConfig.PROJECT_ID + ":", "")));
 						
+						int slot = detailNBT.getInt("slot");
 						if(detElement != null)
-						{
-							int slot = detailNBT.getInt("slot");
-							
+						{			
 							if(detailNBT.getBoolean("canBeColored"))
 								detElement.setCanBeColored();
 							
@@ -139,6 +165,10 @@ public class JollyRogerCapability
 							detElement.setColor(color);
 							
 							instance.setDetail(slot, detElement);
+						}
+						else
+						{
+							instance.setDetail(slot, null);
 						}
 					}
 				}
