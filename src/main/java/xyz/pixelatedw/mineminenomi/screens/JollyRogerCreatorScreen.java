@@ -1,7 +1,6 @@
 package xyz.pixelatedw.mineminenomi.screens;
 
 import java.awt.Color;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -68,12 +67,7 @@ public class JollyRogerCreatorScreen extends Screen
 		this.allBackgrounds = this.getTotalElementsForType(this.player, LayerType.BACKGROUND);
 		this.allDetails = this.getTotalElementsForType(this.player, LayerType.DETAIL);
 		
-		Arrays.stream(this.props.getDetails()).forEach(element -> {
-			if(element != null) 
-				System.out.println(element.getTexture());
-			else
-				System.out.println("null");
-		});
+		this.animationTime = 1;
 	}
 
 	@Override
@@ -114,60 +108,21 @@ public class JollyRogerCreatorScreen extends Screen
 				GL11.glScaled(scale, scale, scale);
 				GL11.glTranslated(-128, -128, 0);
 
-				if (this.layerType == LayerType.BASE)
+				JollyRogerElement element = this.getLayerElement();
+				if (element != null)
 				{
-					JollyRogerElement element = this.props.getBase();
-					if (element != null)
+					if (element.canBeColored())
 					{
-						if (element.canBeColored())
-						{
-							Color color = WyHelper.getComplementaryColor(WyHelper.hexToRGB(element.getColor()));
-							GlStateManager.color4f(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, 0.9F - (this.animationTime * 5));
-						}
-						else
-						{
-							GlStateManager.color4f(1.0F, 0.0F, 0.0F, 0.9F - (this.animationTime * 4));
-						}
-						Minecraft.getInstance().getTextureManager().bindTexture(element.getTexture());
-						GuiUtils.drawTexturedModalRect(0, 0, 0, 0, 256, 256, 10);
+						Color color = WyHelper.getComplementaryColor(WyHelper.hexToRGB(element.getColor()));
+						GlStateManager.color4f(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, 0.9F - (this.animationTime * 5));
 					}
-				}
-				else if (this.layerType == LayerType.BACKGROUND)
-				{
-					JollyRogerElement element = this.props.getBackgrounds()[this.layerIndex];
-					if (element != null)
+					else
 					{
-						if (element.canBeColored())
-						{
-							Color color = WyHelper.getComplementaryColor(WyHelper.hexToRGB(element.getColor()));
-							GlStateManager.color4f(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, 0.9F - (this.animationTime * 5));
-						}
-						else
-						{
-							GlStateManager.color4f(1.0F, 0.0F, 0.0F, 0.9F - (this.animationTime * 4));
-						}
-						Minecraft.getInstance().getTextureManager().bindTexture(element.getTexture());
-						GuiUtils.drawTexturedModalRect(0, 0, 0, 0, 256, 256, 10);
+						GlStateManager.color4f(1.0F, 0.0F, 0.0F, 0.9F - (this.animationTime * 4));
 					}
-				}
-				else if (this.layerType == LayerType.DETAIL)
-				{
-					JollyRogerElement element = this.props.getDetails()[this.layerIndex];
-					if (element != null)
-					{
-						if (element.canBeColored())
-						{
-							Color color = WyHelper.getComplementaryColor(WyHelper.hexToRGB(element.getColor()));
-							GlStateManager.color4f(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, 0.9F - (this.animationTime * 5));
-						}
-						else
-						{
-							GlStateManager.color4f(1.0F, 0.0F, 0.0F, 0.9F - (this.animationTime * 4));
-						}
-						Minecraft.getInstance().getTextureManager().bindTexture(element.getTexture());
-						GuiUtils.drawTexturedModalRect(0, 0, 0, 0, 256, 256, 10);
-					}
-				}
+					Minecraft.getInstance().getTextureManager().bindTexture(element.getTexture());
+					GuiUtils.drawTexturedModalRect(0, 0, 0, 0, 256, 256, 10);
+				}	
 			}
 		}
 		GL11.glPopMatrix();
@@ -189,27 +144,29 @@ public class JollyRogerCreatorScreen extends Screen
 		int sW = posX + 100;
 		int sH = posY + 45;
 
-		// if(this.layerIndex <= 0)
-		// this.fillGradient(pX, pY, sW, sH, WyHelper.hexToRGB("#000000").getRGB(), WyHelper.hexToRGB("#000000").getRGB());
-
-		this.fillGradient(pX - outlineSize, pY - outlineSize, sW + outlineSize, sH + outlineSize, WyHelper.hexToRGB("#000000").getRGB(), WyHelper.hexToRGB("#000000").getRGB());
-		this.fillGradient(pX, pY, sW, sH, WyHelper.hexToRGB("#B3B3B3").getRGB(), WyHelper.hexToRGB("#505050").getRGB());
-
-		posY = posY - 75;
-		WyHelper.drawStringWithBorder(this.font, "Red ", posX - 75, posY, WyHelper.hexToRGB("#FFFFFF").getRGB());
-		WyHelper.drawStringWithBorder(this.font, "0", posX - 85, posY + 14, WyHelper.hexToRGB("#FFFFFF").getRGB());
-		WyHelper.drawStringWithBorder(this.font, "255", posX - 23, posY + 14, WyHelper.hexToRGB("#FFFFFF").getRGB());
-
-		posY += 40;
-		WyHelper.drawStringWithBorder(this.font, "Green ", posX - 75, posY, WyHelper.hexToRGB("#FFFFFF").getRGB());
-		WyHelper.drawStringWithBorder(this.font, "0", posX - 85, posY + 14, WyHelper.hexToRGB("#FFFFFF").getRGB());
-		WyHelper.drawStringWithBorder(this.font, "255", posX - 23, posY + 14, WyHelper.hexToRGB("#FFFFFF").getRGB());
-
-		posY += 40;
-		WyHelper.drawStringWithBorder(this.font, "Blue ", posX - 75, posY, WyHelper.hexToRGB("#FFFFFF").getRGB());
-		WyHelper.drawStringWithBorder(this.font, "0", posX - 85, posY + 14, WyHelper.hexToRGB("#FFFFFF").getRGB());
-		WyHelper.drawStringWithBorder(this.font, "255", posX - 23, posY + 14, WyHelper.hexToRGB("#FFFFFF").getRGB());
-
+		JollyRogerElement element = this.getLayerElement();
+		
+		if(element != null && element.canBeColored())
+		{
+			this.fillGradient(pX - outlineSize, pY - outlineSize, sW + outlineSize, sH + outlineSize, WyHelper.hexToRGB("#000000").getRGB(), WyHelper.hexToRGB("#000000").getRGB());
+			this.fillGradient(pX, pY, sW, sH, WyHelper.hexToRGB("#B3B3B3").getRGB(), WyHelper.hexToRGB("#505050").getRGB());
+		
+			posY = posY - 75;
+			WyHelper.drawStringWithBorder(this.font, "Red ", posX - 75, posY, WyHelper.hexToRGB("#FFFFFF").getRGB());
+			WyHelper.drawStringWithBorder(this.font, "0", posX - 85, posY + 14, WyHelper.hexToRGB("#FFFFFF").getRGB());
+			WyHelper.drawStringWithBorder(this.font, "255", posX - 23, posY + 14, WyHelper.hexToRGB("#FFFFFF").getRGB());
+	
+			posY += 40;
+			WyHelper.drawStringWithBorder(this.font, "Green ", posX - 75, posY, WyHelper.hexToRGB("#FFFFFF").getRGB());
+			WyHelper.drawStringWithBorder(this.font, "0", posX - 85, posY + 14, WyHelper.hexToRGB("#FFFFFF").getRGB());
+			WyHelper.drawStringWithBorder(this.font, "255", posX - 23, posY + 14, WyHelper.hexToRGB("#FFFFFF").getRGB());
+	
+			posY += 40;
+			WyHelper.drawStringWithBorder(this.font, "Blue ", posX - 75, posY, WyHelper.hexToRGB("#FFFFFF").getRGB());
+			WyHelper.drawStringWithBorder(this.font, "0", posX - 85, posY + 14, WyHelper.hexToRGB("#FFFFFF").getRGB());
+			WyHelper.drawStringWithBorder(this.font, "255", posX - 23, posY + 14, WyHelper.hexToRGB("#FFFFFF").getRGB());
+		}
+		
 		super.render(x, y, f);
 	}
 
@@ -249,7 +206,7 @@ public class JollyRogerCreatorScreen extends Screen
 		this.addButton(prevBaseTexture);
 
 		posX = this.width;
-
+	
 		GuiSlider redColorPicker = new GuiSlider(posX - 76, posY - 65, 50, 16, "", "", 0, 255, 255, false, true, (btn) ->
 		{
 		}, (slider) -> this.changeColor(slider, "red"));
@@ -274,63 +231,23 @@ public class JollyRogerCreatorScreen extends Screen
 		if (!slider.isHovered())
 			slider.dragging = false;
 
-		if (this.layerType == LayerType.BASE)
-		{
-			if (this.props.getBase() == null)
-				return;
+		JollyRogerElement element = this.getLayerElement();
+		if(element == null)
+			return;
+		
+		String currentColor = element.getColor();
+		Color rgb = WyHelper.hexToRGB(currentColor);
 
-			String currentColor = this.props.getBase().getColor();
-			Color rgb = WyHelper.hexToRGB(currentColor);
+		String hex = "#FFFFFF";
 
-			String hex = "#FFFFFF";
+		if (color.equalsIgnoreCase("red"))
+			hex = WyHelper.rgbToHex(slider.getValueInt(), rgb.getGreen(), rgb.getBlue());
+		else if (color.equalsIgnoreCase("green"))
+			hex = WyHelper.rgbToHex(rgb.getRed(), slider.getValueInt(), rgb.getBlue());
+		else if (color.equalsIgnoreCase("blue"))
+			hex = WyHelper.rgbToHex(rgb.getRed(), rgb.getGreen(), slider.getValueInt());
 
-			if (color.equalsIgnoreCase("red"))
-				hex = WyHelper.rgbToHex(slider.getValueInt(), rgb.getGreen(), rgb.getBlue());
-			else if (color.equalsIgnoreCase("green"))
-				hex = WyHelper.rgbToHex(rgb.getRed(), slider.getValueInt(), rgb.getBlue());
-			else if (color.equalsIgnoreCase("blue"))
-				hex = WyHelper.rgbToHex(rgb.getRed(), rgb.getGreen(), slider.getValueInt());
-
-			this.props.getBase().setColor(hex);
-		}
-		else if (this.layerType == LayerType.BACKGROUND)
-		{
-			if (this.props.getBackgrounds()[this.layerIndex] == null)
-				return;
-
-			String currentColor = this.props.getBackgrounds()[this.layerIndex].getColor();
-			Color rgb = WyHelper.hexToRGB(currentColor);
-
-			String hex = "#FFFFFF";
-
-			if (color.equalsIgnoreCase("red"))
-				hex = WyHelper.rgbToHex(slider.getValueInt(), rgb.getGreen(), rgb.getBlue());
-			else if (color.equalsIgnoreCase("green"))
-				hex = WyHelper.rgbToHex(rgb.getRed(), slider.getValueInt(), rgb.getBlue());
-			else if (color.equalsIgnoreCase("blue"))
-				hex = WyHelper.rgbToHex(rgb.getRed(), rgb.getGreen(), slider.getValueInt());
-
-			this.props.getBackgrounds()[this.layerIndex].setColor(hex);
-		}
-		else if (this.layerType == LayerType.DETAIL)
-		{
-			if (this.props.getDetails()[this.layerIndex] == null)
-				return;
-
-			String currentColor = this.props.getDetails()[this.layerIndex].getColor();
-			Color rgb = WyHelper.hexToRGB(currentColor);
-
-			String hex = "#FFFFFF";
-
-			if (color.equalsIgnoreCase("red"))
-				hex = WyHelper.rgbToHex(slider.getValueInt(), rgb.getGreen(), rgb.getBlue());
-			else if (color.equalsIgnoreCase("green"))
-				hex = WyHelper.rgbToHex(rgb.getRed(), slider.getValueInt(), rgb.getBlue());
-			else if (color.equalsIgnoreCase("blue"))
-				hex = WyHelper.rgbToHex(rgb.getRed(), rgb.getGreen(), slider.getValueInt());
-
-			this.props.getDetails()[this.layerIndex].setColor(hex);
-		}
+		element.setColor(hex);
 	}
 
 	public void moveIndex(Button btn, boolean toRight)
@@ -457,50 +374,88 @@ public class JollyRogerCreatorScreen extends Screen
 		this.selectedButton = btn;
 		((NoTextureButton) btn).select();
 		this.animationTime = 0;
+		
+		boolean hasLayerSet = false;
 
 		if (this.buttons.get(0) == btn)
 		{
 			this.trueIndex = this.findIndex(this.getListFromType(LayerType.BASE), this.props.getBase(), this.player);
 			this.layerType = LayerType.BASE;
 
+			hasLayerSet = true;
+			
 			this.resetColorSliders(this.props.getBase());
-
-			return;
 		}
 
-		int j = 0;
-		for (int i = 1; i < this.props.getBackgrounds().length + 1; i++)
+		if(!hasLayerSet)
 		{
-			if (this.buttons.get(i) == btn)
+			int j = 0;
+			for (int i = 1; i < this.props.getBackgrounds().length + 1; i++)
 			{
-				this.trueIndex = this.findIndex(this.getListFromType(LayerType.BACKGROUND), this.props.getBackgrounds()[j], this.player);
-				this.layerType = LayerType.BACKGROUND;
-				this.allBackgrounds = this.getTotalElementsForType(this.player, LayerType.BACKGROUND);
-				this.layerIndex = j;
-
-				this.resetColorSliders(this.props.getBackgrounds()[j]);
-
-				return;
+				if (this.buttons.get(i) == btn)
+				{
+					this.trueIndex = this.findIndex(this.getListFromType(LayerType.BACKGROUND), this.props.getBackgrounds()[j], this.player);
+					this.layerType = LayerType.BACKGROUND;
+					this.allBackgrounds = this.getTotalElementsForType(this.player, LayerType.BACKGROUND);
+					this.layerIndex = j;
+	
+					hasLayerSet = true;
+					
+					this.resetColorSliders(this.props.getBackgrounds()[j]);
+				}
+				j++;
 			}
-			j++;
 		}
 
-		j = 0;
-		for (int i = this.props.getBackgrounds().length + 1; i < this.props.getDetails().length + this.props.getBackgrounds().length + 1; i++)
+		if(!hasLayerSet)
 		{
-			if (this.buttons.get(i) == btn)
+			int j = 0;
+			for (int i = this.props.getBackgrounds().length + 1; i < this.props.getDetails().length + this.props.getBackgrounds().length + 1; i++)
 			{
-				this.trueIndex = this.findIndex(this.getListFromType(LayerType.DETAIL), this.props.getDetails()[j], this.player);
-				this.layerType = LayerType.DETAIL;
-				this.allDetails = this.getTotalElementsForType(this.player, LayerType.DETAIL);
-				this.layerIndex = j;
-
-				this.resetColorSliders(this.props.getDetails()[j]);
-
-				return;
+				if (this.buttons.get(i) == btn)
+				{
+					this.trueIndex = this.findIndex(this.getListFromType(LayerType.DETAIL), this.props.getDetails()[j], this.player);
+					this.layerType = LayerType.DETAIL;
+					this.allDetails = this.getTotalElementsForType(this.player, LayerType.DETAIL);
+					this.layerIndex = j;
+	
+					hasLayerSet = true;
+					
+					this.resetColorSliders(this.props.getDetails()[j]);
+				}
+				j++;
 			}
-			j++;
 		}
+		
+		JollyRogerElement element = this.getLayerElement();
+		int btnSize = this.buttons.size();
+		
+		if(element == null || !element.canBeColored())
+		{	
+			this.buttons.get(btnSize - 1).visible = false;
+			this.buttons.get(btnSize - 2).visible = false;
+			this.buttons.get(btnSize - 3).visible = false;
+		}
+		else
+		{
+			this.buttons.get(btnSize - 1).visible = true;
+			this.buttons.get(btnSize - 2).visible = true;
+			this.buttons.get(btnSize - 3).visible = true;
+		}
+	}
+
+	private JollyRogerElement getLayerElement()
+	{
+		JollyRogerElement element = this.props.getBase();
+
+		if (this.layerType == LayerType.BASE)
+			element = this.props.getBase();
+		else if (this.layerType == LayerType.BACKGROUND)
+			element = this.props.getBackgrounds()[this.layerIndex];
+		else if (this.layerType == LayerType.DETAIL)
+			element = this.props.getDetails()[this.layerIndex];
+
+		return element;
 	}
 
 	private void resetColorSliders(JollyRogerElement element)
