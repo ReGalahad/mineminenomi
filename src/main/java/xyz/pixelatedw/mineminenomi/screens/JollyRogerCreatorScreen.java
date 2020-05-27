@@ -169,18 +169,21 @@ public class JollyRogerCreatorScreen extends Screen
 				WyHelper.drawStringWithBorder(this.font, "0", posX - 85, posY + 14, WyHelper.hexToRGB("#FFFFFF").getRGB());
 				WyHelper.drawStringWithBorder(this.font, "255", posX - 23, posY + 14, WyHelper.hexToRGB("#FFFFFF").getRGB());
 			}
-					
-			posY = this.height / 2;
-			
-			pX = posX - 95;
-			pY = posY + 50;
-			sW = posX + 100;
-			sH = posY + 85;
-			
-			this.fillGradient(pX - outlineSize, pY - outlineSize, sW + outlineSize, sH + outlineSize, WyHelper.hexToRGB("#000000").getRGB(), WyHelper.hexToRGB("#000000").getRGB());
-			this.fillGradient(pX, pY, sW, sH, WyHelper.hexToRGB("#B3B3B3").getRGB(), WyHelper.hexToRGB("#505050").getRGB());
-			
-			WyHelper.drawStringWithBorder(this.font, (this.layerIndex + 1) + "", posX - 55, posY + 64, WyHelper.hexToRGB("#FFFFFF").getRGB());
+				
+			if(element != this.props.getBase())
+			{
+				posY = this.height / 2;
+				
+				pX = posX - 95;
+				pY = posY + 50;
+				sW = posX + 100;
+				sH = posY + 85;
+				
+				this.fillGradient(pX - outlineSize, pY - outlineSize, sW + outlineSize, sH + outlineSize, WyHelper.hexToRGB("#000000").getRGB(), WyHelper.hexToRGB("#000000").getRGB());
+				this.fillGradient(pX, pY, sW, sH, WyHelper.hexToRGB("#B3B3B3").getRGB(), WyHelper.hexToRGB("#505050").getRGB());
+				
+				WyHelper.drawStringWithBorder(this.font, (this.layerIndex + 1) + "", posX - 55, posY + 64, WyHelper.hexToRGB("#FFFFFF").getRGB());
+			}
 		}
 
 		super.render(x, y, f);
@@ -249,20 +252,55 @@ public class JollyRogerCreatorScreen extends Screen
 		layerDownBtn = layerDownBtn.setTextureInfo(posX - 64, posY + 48, 64, 32);
 		this.addButton(layerDownBtn);
 
-		this.displayColorSliders();
+		this.updateButtons();
 	}
 
 	private void changeLayerIndex(boolean isUp)
 	{
+		int layerIndex = this.layerIndex;
+		boolean canSwitch = false;
+
 		if (this.layerType == LayerType.BACKGROUND)
 		{
+			JollyRogerElement currentElement = this.props.getBackgrounds()[layerIndex];
+			JollyRogerElement nextElement = null;
+			JollyRogerElement prevElement = null;
+ 
+			if (isUp && this.layerIndex >= 0 && this.layerIndex + 1 < this.props.getBackgrounds().length)
+			{
+				nextElement = this.props.getBackgrounds()[++layerIndex];
+				canSwitch = true;
+			}
+			else if (!isUp && this.layerIndex - 1 >= 0 && this.layerIndex <= this.props.getBackgrounds().length)
+			{
+				prevElement = this.props.getBackgrounds()[--layerIndex];
+				canSwitch = true;
+			}
 
+			if (currentElement != null && canSwitch)
+			{
+				this.props.getBackgrounds()[layerIndex] = currentElement;
+
+				if (isUp)
+				{
+					this.props.getBackgrounds()[--layerIndex] = nextElement;
+					this.layerIndex++;				
+				}
+				else if (!isUp)
+				{
+					this.props.getBackgrounds()[++layerIndex] = prevElement;
+					this.layerIndex--;
+				}
+				
+				this.updateButtons();
+				this.animationTime = 0;
+				((NoTextureButton) this.selectedButton).select();
+				this.selectedButton = (this.buttons.get(1 + this.layerIndex));
+				((NoTextureButton) this.selectedButton).select();
+			}
 		}
 		else if (this.layerType == LayerType.DETAIL)
 		{
-			int layerIndex = this.layerIndex;
-			boolean canSwitch = false;
-
 			JollyRogerElement currentElement = this.props.getDetails()[layerIndex];
 			JollyRogerElement nextElement = null;
 			JollyRogerElement prevElement = null;
@@ -285,7 +323,7 @@ public class JollyRogerCreatorScreen extends Screen
 				if (isUp)
 				{
 					this.props.getDetails()[--layerIndex] = nextElement;
-					this.layerIndex++;
+					this.layerIndex++;				
 				}
 				else if (!isUp)
 				{
@@ -293,7 +331,11 @@ public class JollyRogerCreatorScreen extends Screen
 					this.layerIndex--;
 				}
 				
-				this.displayColorSliders();
+				this.updateButtons();
+				this.animationTime = 0;
+				((NoTextureButton) this.selectedButton).select();
+				this.selectedButton = (this.buttons.get(3 + this.layerIndex));
+				((NoTextureButton) this.selectedButton).select();
 			}
 		}
 	}
@@ -373,7 +415,7 @@ public class JollyRogerCreatorScreen extends Screen
 					this.props.getBackgrounds()[this.layerIndex] = null;
 					this.trueIndex = -1;
 					this.nextElementTry = 0;
-					this.displayColorSliders();
+					this.updateButtons();
 					return;
 				}
 
@@ -410,7 +452,7 @@ public class JollyRogerCreatorScreen extends Screen
 					this.props.getDetails()[this.layerIndex] = null;
 					this.trueIndex = -1;
 					this.nextElementTry = 0;
-					this.displayColorSliders();
+					this.updateButtons();
 					return;
 				}
 
@@ -436,7 +478,7 @@ public class JollyRogerCreatorScreen extends Screen
 				this.nextElementTry = 0;
 			}
 
-			this.displayColorSliders();
+			this.updateButtons();
 		}
 		catch (Exception e)
 		{
@@ -502,10 +544,10 @@ public class JollyRogerCreatorScreen extends Screen
 			}
 		}
 
-		this.displayColorSliders();
+		this.updateButtons();
 	}
 
-	private void displayColorSliders()
+	private void updateButtons()
 	{
 		JollyRogerElement element = this.getLayerElement();
 
@@ -526,6 +568,12 @@ public class JollyRogerCreatorScreen extends Screen
 		{
 			this.buttons.get(this.buttons.size() - 1).visible = true;
 			this.buttons.get(this.buttons.size() - 2).visible = true;
+			
+			if(element == this.props.getBase())
+			{
+				this.buttons.get(this.buttons.size() - 1).visible = false;
+				this.buttons.get(this.buttons.size() - 2).visible = false;
+			}
 			
 			if(!element.canBeColored())
 			{
