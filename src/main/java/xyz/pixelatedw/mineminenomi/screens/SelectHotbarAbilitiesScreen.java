@@ -88,40 +88,7 @@ public class SelectHotbarAbilitiesScreen extends Screen
 			if (this.abilityDataProps.getEquippedAbility(i) != null)
 				RendererHelper.drawAbilityIcon(WyHelper.getResourceName(this.abilityDataProps.getEquippedAbility(i).getName()), (posX - 192 + (i * 50)) / 2, posY - 29, 16, 16);
 		}
-		
-		/*
-		Ability abl = this.abilityDataProps.getUnlockedAbilities(AbilityCategory.DEVIL_FRUIT).parallelStream().findFirst().orElse(null);
-		if (abl != null || this.devilFruitProps.hasDevilFruit())
-		{
-			if(this.devilFruitProps.hasDevilFruit())
-			{
-				if (this.devilFruitProps.hasYamiPower())
-					RendererHelper.drawDevilFruitIcon("yami_yami_no_mi", (posX - 268) / 2, (posY - 187) / 2, 16, 16);
-				else
-				{
-					ItemStack df = AbilityHelper.getDevilFruitItem(this.devilFruitProps.getDevilFruit());
-					RendererHelper.drawDevilFruitIcon(df.getTranslationKey().replace("item." + APIConfig.PROJECT_ID + ".", ""), (posX - 268) / 2, (posY - 187) / 2, 56, 56);
-				}
-			}
-			else
-			{
-				GuiUtils.drawTexturedModalRect((posX - 280) / 2, (posY - 200) / 2, 0, 23, 27, 26, 0);
-				RendererHelper.drawAbilityIcon(abl.getName(), (posX - 268) / 2, (posY - 187) / 2, 16, 16);
-			}
-		}
-		abl = this.abilityDataProps.getUnlockedAbilities(AbilityCategory.RACIAL).parallelStream().findFirst().orElse(null);
-		if (abl != null)
-		{
-			GuiUtils.drawTexturedModalRect((posX - 280) / 2, (posY - 140) / 2, 0, 23, 27, 26, 0);
-			RendererHelper.drawAbilityIcon(abl.getName(), (posX - 268) / 2, (posY - 127) / 2, 16, 16);
-		}
-		abl = this.abilityDataProps.getUnlockedAbilities(AbilityCategory.HAKI).parallelStream().findFirst().orElse(null);
-		if (abl != null)
-		{
-			GuiUtils.drawTexturedModalRect((posX - 280) / 2, (posY - 80) / 2, 0, 23, 27, 26, 0);
-			RendererHelper.drawAbilityIcon(abl.getName(), (posX - 268) / 2, (posY - 67) / 2, 16, 16);
-		}
-		 */
+
 		GL11.glDisable(GL11.GL_BLEND);
 
 		// WyHelper.startGlScissor((posX - 220) / 2, (posY - 200) / 2, 215, 130);

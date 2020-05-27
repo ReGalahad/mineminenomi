@@ -32,7 +32,7 @@ public class ModJollyRogers
 	public static final JollyRogerElement BASE_1 = new JollyRogerElement(LayerType.BASE).setCanBeColored().setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/bases/base_1.png"));
 
 	// Details
-	public static final JollyRogerElement DETAIL_0 = new JollyRogerElement(LayerType.DETAIL).addUseCheck((player) -> onlyWith(player, BASE_0)).setCanBeColored().setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/details/detail_0.png"));
+	public static final JollyRogerElement DETAIL_0 = new JollyRogerElement(LayerType.DETAIL).addUseCheck((player) -> onlyWith(player, BASE_0, null)).setCanBeColored().setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/details/detail_0.png"));
 	public static final JollyRogerElement DETAIL_1 = new JollyRogerElement(LayerType.DETAIL).addUseCheck((player) -> onlyWith(player, BASE_0)).setCanBeColored().setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/details/detail_1.png"));
 	public static final JollyRogerElement DETAIL_2 = new JollyRogerElement(LayerType.DETAIL).addUseCheck((player) -> onlyWith(player, BASE_0)).setCanBeColored().setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/details/detail_2.png"));
 	public static final JollyRogerElement DETAIL_3 = new JollyRogerElement(LayerType.DETAIL).addUseCheck((player) -> onlyWith(player, BASE_0, ModJollyRogers.BASE_1)).setCanBeColored().setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/details/detail_3.png"));

@@ -68,7 +68,7 @@ public class JollyRogerElement extends ForgeRegistryEntry<JollyRogerElement>
 
 		for (ICanUse check : this.canUseChecks)
 		{
-			if (!check.canUse(player))
+			if (check != null && !check.canUse(player))
 			{
 				flag = false;
 				break;

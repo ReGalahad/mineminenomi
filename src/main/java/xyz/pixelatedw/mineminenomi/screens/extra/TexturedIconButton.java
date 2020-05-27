@@ -67,6 +67,9 @@ public class TexturedIconButton extends Button
 	@Override
 	public void render(int mouseX, int mouseY, float partialTicks)
 	{
+		if(!this.visible)
+			return;
+		
 		GlStateManager.pushMatrix();
 		this.isHovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
 		
