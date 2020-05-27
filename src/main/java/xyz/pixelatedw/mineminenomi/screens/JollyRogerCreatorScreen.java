@@ -301,6 +301,7 @@ public class JollyRogerCreatorScreen extends Screen
 					this.props.getBackgrounds()[this.layerIndex] = null;
 					this.trueIndex = -1;
 					this.nextElementTry = 0;
+					this.displayColorSliders();
 					return;
 				}
 				
@@ -321,7 +322,9 @@ public class JollyRogerCreatorScreen extends Screen
 				if (this.trueIndex >= 0 && this.trueIndex <= this.allBackgrounds.size())
 					this.props.getBackgrounds()[this.layerIndex] = this.allBackgrounds.get(this.trueIndex).get();
 				else if (this.trueIndex <= 0 && this.props.getBackgrounds()[this.layerIndex].getTexture() != null)
-					this.props.getBackgrounds()[this.layerIndex] = null;				
+					this.props.getBackgrounds()[this.layerIndex] = null;
+				
+				this.nextElementTry = 0;
 			}
 			else if (this.layerType == LayerType.DETAIL)
 			{				
@@ -335,6 +338,7 @@ public class JollyRogerCreatorScreen extends Screen
 					this.props.getDetails()[this.layerIndex] = null;
 					this.trueIndex = -1;
 					this.nextElementTry = 0;
+					this.displayColorSliders();
 					return;
 				}
 				
@@ -355,8 +359,12 @@ public class JollyRogerCreatorScreen extends Screen
 				if (this.trueIndex >= 0 && this.trueIndex <= this.allDetails.size())
 					this.props.getDetails()[this.layerIndex] = this.allDetails.get(this.trueIndex).get();
 				else if (this.trueIndex <= 0 && this.props.getDetails()[this.layerIndex].getTexture() != null)
-					this.props.getDetails()[this.layerIndex] = null;			
+					this.props.getDetails()[this.layerIndex] = null;
+				
+				this.nextElementTry = 0;
 			}
+			
+			this.displayColorSliders();
 		}
 		catch (Exception e)
 		{
@@ -383,8 +391,6 @@ public class JollyRogerCreatorScreen extends Screen
 			this.layerType = LayerType.BASE;
 
 			hasLayerSet = true;
-			
-			this.resetColorSliders(this.props.getBase());
 		}
 
 		if(!hasLayerSet)
@@ -400,8 +406,6 @@ public class JollyRogerCreatorScreen extends Screen
 					this.layerIndex = j;
 	
 					hasLayerSet = true;
-					
-					this.resetColorSliders(this.props.getBackgrounds()[j]);
 				}
 				j++;
 			}
@@ -420,13 +424,16 @@ public class JollyRogerCreatorScreen extends Screen
 					this.layerIndex = j;
 	
 					hasLayerSet = true;
-					
-					this.resetColorSliders(this.props.getDetails()[j]);
 				}
 				j++;
 			}
 		}
 		
+		this.displayColorSliders();
+	}
+	
+	private void displayColorSliders()
+	{
 		JollyRogerElement element = this.getLayerElement();
 		int btnSize = this.buttons.size();
 		
@@ -441,6 +448,7 @@ public class JollyRogerCreatorScreen extends Screen
 			this.buttons.get(btnSize - 1).visible = true;
 			this.buttons.get(btnSize - 2).visible = true;
 			this.buttons.get(btnSize - 3).visible = true;
+			this.resetColorSliders(element);
 		}
 	}
 
