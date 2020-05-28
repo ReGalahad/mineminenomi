@@ -26,7 +26,8 @@ public class ModEffects {
             .addAttributesModifier(SharedMonsterAttributes.MOVEMENT_SPEED, "7107DE5E-7CE8-4030-940E-514C1F160890", -0.01, AttributeModifier.Operation.ADDITION)
             .addAttributesModifier(SharedMonsterAttributes.ATTACK_SPEED, "7d355019-7ef9-4beb-bcba-8b2608a73380", -1.5, AttributeModifier.Operation.MULTIPLY_TOTAL);
 
-    public static final Effect CHIYU_HORMONE = new ChiyuHormoneEffect();
+    public static final Effect CHIYU_HORMONE = new ChiyuHormoneEffect()
+            .addAttributesModifier(ModAttributes.REGEN_RATE, "e7e5e8ad-04f9-4147-b825-d3cd77b017ba", 3, AttributeModifier.Operation.ADDITION);
 
     public static final Effect FROZEN = new FrozenEffect()
             .addAttributesModifier(SharedMonsterAttributes.MOVEMENT_SPEED, "7107DE5E-7CE8-4030-940E-514C1F160890", -1000, AttributeModifier.Operation.ADDITION)
