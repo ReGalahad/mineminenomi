@@ -46,6 +46,8 @@ public class CombatModeEvents
 		IAbilityData abilityDataProps = AbilityDataCapability.get(player);
 		IEntityStats entityStatsProps = EntityStatsCapability.get(player);
 
+		ForgeIngameGui.left_height += 1;
+
 		int posX = mc.mainWindow.getScaledWidth();
 		int posY = mc.mainWindow.getScaledHeight();
 
@@ -54,11 +56,6 @@ public class CombatModeEvents
 
 		if (event.getType() == ElementType.HEALTH)
 		{
-			ForgeIngameGui.left_height += 1;
-			
-			posX = mc.mainWindow.getScaledWidth();
-			posY = mc.mainWindow.getScaledHeight();
-			
 			event.setCanceled(true);
 			double maxHealth = player.getAttribute(SharedMonsterAttributes.MAX_HEALTH).getValue();
 			double health = player.getHealth();

@@ -24,6 +24,11 @@ public class AbilityArgument implements ArgumentType<Ability>
 		return ability;
 	}
 
+	public static AbilityArgument instance()
+	{
+		return new AbilityArgument();
+	}
+	
 	public static <S> Ability getAbility(CommandContext<S> context, String name)
 	{
 		return context.getArgument(name, Ability.class);

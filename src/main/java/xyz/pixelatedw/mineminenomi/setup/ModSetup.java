@@ -1,6 +1,8 @@
 package xyz.pixelatedw.mineminenomi.setup;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.command.arguments.ArgumentSerializer;
+import net.minecraft.command.arguments.ArgumentTypes;
 import net.minecraft.item.IDyeableArmorItem;
 import net.minecraft.world.storage.loot.functions.LootFunctionManager;
 import net.minecraftforge.api.distmarker.Dist;
@@ -9,6 +11,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import xyz.pixelatedw.mineminenomi.api.AbilityArgument;
 import xyz.pixelatedw.mineminenomi.data.functions.RandomWantedPosterFunction;
 import xyz.pixelatedw.mineminenomi.data.functions.SetInfiniteStockFunction;
 import xyz.pixelatedw.mineminenomi.data.functions.SetPriceFunction;
@@ -36,6 +39,8 @@ public class ModSetup
 		LootFunctionManager.registerFunction(new RandomWantedPosterFunction.Serializer());
 		LootFunctionManager.registerFunction(new SetPriceFunction.Serializer());
 		LootFunctionManager.registerFunction(new SetInfiniteStockFunction.Serializer());
+		
+		ArgumentTypes.register("ability", AbilityArgument.class, new ArgumentSerializer<>(AbilityArgument::instance));
 	}
 	
 	@OnlyIn(Dist.CLIENT)
