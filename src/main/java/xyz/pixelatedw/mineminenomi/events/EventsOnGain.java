@@ -19,8 +19,6 @@ import xyz.pixelatedw.mineminenomi.events.custom.DorikiEvent;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
 import xyz.pixelatedw.mineminenomi.packets.server.SEntityStatsSyncPacket;
 import xyz.pixelatedw.wypi.APIConfig;
-import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
-import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 import xyz.pixelatedw.wypi.network.WyNetwork;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
@@ -44,21 +42,6 @@ public class EventsOnGain
 	@SubscribeEvent
 	public static void onEntityDeath(LivingDeathEvent event)
 	{
-		if (event.getEntity() instanceof PlayerEntity)
-		{
-			PlayerEntity player = (PlayerEntity) event.getEntity();
-			IEntityStats props = EntityStatsCapability.get(player);
-			IAbilityData abilityProps = AbilityDataCapability.get(player);
-
-			for (int i = 0; i < 8; i++)
-			{
-				//if (abilityProps.getHotbarAbilityFromSlot(i) != null)
-				//	abilityProps.getHotbarAbilityFromSlot(i).reset();
-			}
-
-			WyNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), props), (ServerPlayerEntity) player);
-		}
-
 		if (event.getSource().getTrueSource() instanceof PlayerEntity)
 		{
 			PlayerEntity player = (PlayerEntity) event.getSource().getTrueSource();

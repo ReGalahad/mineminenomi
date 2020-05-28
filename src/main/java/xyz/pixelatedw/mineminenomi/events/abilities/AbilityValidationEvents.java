@@ -8,6 +8,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.abilities.yomi.KasuriutaFubukiGiriAbility;
 import xyz.pixelatedw.mineminenomi.abilities.yomi.SoulParadeAbility;
+import xyz.pixelatedw.mineminenomi.abilities.yomi.YomiNoReikiAbility;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
@@ -70,7 +71,7 @@ public class AbilityValidationEvents
 				
 				for(Ability abl : abilityProps.getUnlockedAbilities(AbilityCategory.DEVIL_FRUIT))
 				{
-					if(abl instanceof KasuriutaFubukiGiriAbility || abl instanceof SoulParadeAbility)
+					if(abl instanceof KasuriutaFubukiGiriAbility || abl instanceof SoulParadeAbility || abl instanceof YomiNoReikiAbility)
 					{
 						if(!devilFruitProps.getZoanPoint().equalsIgnoreCase(YomiZoanInfo.FORM))
 							abilityProps.removeUnlockedAbility(abl);
@@ -88,7 +89,7 @@ public class AbilityValidationEvents
 								
 				WyNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), entityStatsProps), (ServerPlayerEntity) player);
 				WyNetwork.sendTo(new SSyncDevilFruitPacket(player.getEntityId(), devilFruitProps), (ServerPlayerEntity) player);
-				WyNetwork.sendTo(new SSyncAbilityDataPacket(player.getEntityId(), abilityProps), (ServerPlayerEntity) player);		
+				WyNetwork.sendTo(new SSyncAbilityDataPacket(player.getEntityId(), abilityProps), (ServerPlayerEntity) player);
 			}
 		}
 	}
