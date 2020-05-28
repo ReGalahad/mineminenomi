@@ -8,6 +8,7 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedOutEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import xyz.pixelatedw.mineminenomi.api.abilities.TempoAbility;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.abilities.Ability;
@@ -27,24 +28,33 @@ public class AbilitiesEvents
 		if (event.getEntityLiving() instanceof PlayerEntity)
 		{
 			PlayerEntity player = (PlayerEntity) event.getEntityLiving();
-			IAbilityData props = AbilityDataCapability.get(player);
+			IAbilityData ablProps = AbilityDataCapability.get(player);
 
-			for (Ability ability : props.getEquippedAbilities(AbilityCategory.ALL))
+			for (Ability ability : ablProps.getUnlockedAbilities(AbilityCategory.ALL))
+			{
+				if (ability == null)
+					continue;
+
+				if (ability instanceof PassiveAbility)
+					((PassiveAbility) ablProps.getUnlockedAbility(ability)).tick(player);
+				
+				if (ability instanceof TempoAbility)
+					((TempoAbility) ablProps.getUnlockedAbility(ability)).cooldown(player);
+			}
+			
+			for (Ability ability : ablProps.getEquippedAbilities(AbilityCategory.ALL))
 			{
 				if (ability == null)
 					continue;
 
 				if (ability instanceof ChargeableAbility && ability.isCharging())
-					((ChargeableAbility) props.getEquippedAbility(ability)).charging(player);
+					((ChargeableAbility) ablProps.getEquippedAbility(ability)).charging(player);
 
 				if (ability instanceof ContinuousAbility && ability.isContinuous())
-					((ContinuousAbility) props.getEquippedAbility(ability)).tick(player);
-
-				if (ability instanceof PassiveAbility)
-					((PassiveAbility) props.getEquippedAbility(ability)).tick(player);
+					((ContinuousAbility) ablProps.getEquippedAbility(ability)).tick(player);
 
 				if (ability.isOnCooldown())
-					props.getEquippedAbility(ability).cooldown(player);
+					ablProps.getEquippedAbility(ability).cooldown(player);	
 			}
 		}
 	}
