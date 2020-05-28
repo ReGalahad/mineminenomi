@@ -59,7 +59,7 @@ public class HoruPassiveEvents
 
 		AbstractClientPlayerEntity abstractOwner = (AbstractClientPlayerEntity) entity;
 		BipedModel model = renderer.getEntityModel();
-
+		
 		if (!entity.isPotionActive(ModEffects.GANMEN_SEICHO_HORMONE))
 			return;
 
