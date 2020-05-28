@@ -29,8 +29,9 @@ public class GomuGomuNoBazookaProjectile extends AbilityProjectileEntity
 		super(GomuProjectiles.GOMU_GOMU_NO_BAZOOKA, world, player);
 
 		this.setDamage(10);
-		this.setPhysical();	
-		
+		this.setPhysical();
+		this.setHurtTime(10);
+
 		this.onEntityImpactEvent = this::onEntityImpactEvent;
 	}
 	

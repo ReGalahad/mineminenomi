@@ -14,7 +14,7 @@ public class BrickBatAbility extends RepeaterAbility
 		super("Brick Bat", AbilityCategory.DEVIL_FRUIT);
 		this.setDescription("Launches bats created from the user's shadow at the opponent.");
 		this.setMaxCooldown(4);
-		this.setMaxRepearCount(7, 3);
+		this.setMaxRepearCount(5, 3);
 
 		this.onUseEvent = this::onUseEvent;
 	}

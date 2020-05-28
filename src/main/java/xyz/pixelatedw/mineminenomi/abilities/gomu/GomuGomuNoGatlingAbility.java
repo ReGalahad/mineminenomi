@@ -34,7 +34,8 @@ public class GomuGomuNoGatlingAbility extends RepeaterAbility
 		IAbilityData props = AbilityDataCapability.get(player);
 		AbilityProjectileEntity projectile = null;
 		float speed = 2.5f;
-		int projectileSpace = 2;
+		float projDmageReduction = 0.6f;
+		int projectileSpace = 3;
 
 		if (GomuHelper.hasGearSecondActive(props))
 		{
@@ -42,7 +43,7 @@ public class GomuGomuNoGatlingAbility extends RepeaterAbility
 			if(!this.hasDataSet)
 			{
 				this.setMaxCooldown(10);
-				this.setMaxRepearCount(30, 3);
+				this.setMaxRepearCount(20, 3);
 				speed = 3.8f;
 				this.hasDataSet = true;
 			}
@@ -53,11 +54,12 @@ public class GomuGomuNoGatlingAbility extends RepeaterAbility
 			if(!this.hasDataSet)
 			{
 				this.setMaxCooldown(25);
-				this.setMaxRepearCount(7, 5);
+				this.setMaxRepearCount(5, 3);
 				speed = 2.3f;
-				projectileSpace = 7;
+				projectileSpace = 9;
 				this.hasDataSet = true;
 			}
+			projDmageReduction = 0.325f;
 		}
 		else if (GomuHelper.hasGearFourthActive(props))
 		{
@@ -70,6 +72,8 @@ public class GomuGomuNoGatlingAbility extends RepeaterAbility
 				projectileSpace = 7;
 				this.hasDataSet = true;
 			}
+			projDmageReduction = 0.325f;
+
 		}
 		else
 		{
@@ -82,7 +86,7 @@ public class GomuGomuNoGatlingAbility extends RepeaterAbility
 				this.hasDataSet = true;
 			}
 		}
-
+		projectile.setDamage(projectile.getDamage() * (1 - projDmageReduction));
 		projectile.setLocationAndAngles(
 			player.posX + WyHelper.randomWithRange(-projectileSpace, projectileSpace) + WyHelper.randomDouble(), 
 			(player.posY + 0.3) + WyHelper.randomWithRange(0, projectileSpace) + WyHelper.randomDouble(), 

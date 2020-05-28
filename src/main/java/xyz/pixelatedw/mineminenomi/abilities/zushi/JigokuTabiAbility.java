@@ -5,6 +5,8 @@ import java.util.List;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.network.play.server.SPlayEntityEffectPacket;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
@@ -13,6 +15,7 @@ import xyz.pixelatedw.mineminenomi.api.protection.BlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.api.protection.block.AllBlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.api.protection.block.LiquidBlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.api.protection.block.RestrictedBlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.init.ModEffects;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.ContinuousAbility;
@@ -35,12 +38,16 @@ public class JigokuTabiAbility extends ContinuousAbility
 	private void duringContinuityEvent(PlayerEntity player, int activeTimer)
 	{
 		List<LivingEntity> targets = WyHelper.<LivingEntity>getEntitiesNear(player.getPosition(), player.world, 10);
+/*
 		targets.remove(player);
+*/
 
 		for (LivingEntity entity : targets)
 		{
 			entity.setMotion(0, entity.getMotion().y - 5, 0);
-			entity.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 100, 10));
+			EffectInstance instance = new EffectInstance(ModEffects.MOVEMENT_BLOCKED, 20, 0);
+			entity.addPotionEffect(instance);
+			((ServerPlayerEntity) player).connection.sendPacket(new SPlayEntityEffectPacket(entity.getEntityId(), instance));
 
 			if (++activeTimer % 100 == 0)
 			{

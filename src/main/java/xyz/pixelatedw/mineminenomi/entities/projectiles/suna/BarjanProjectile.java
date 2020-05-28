@@ -32,7 +32,7 @@ public class BarjanProjectile extends AbilityProjectileEntity
 	{
 		super(SunaProjectiles.BARJAN, world, player);
 
-		this.setDamage(15);
+		this.setDamage(20);
 		this.setCanGetStuckInGround();
 		
 		this.withEffects = () -> {

@@ -25,7 +25,7 @@ public class BiganProjectile extends AbilityProjectileEntity
 	public BiganProjectile(World world, LivingEntity player)
 	{
 		super(UshiGiraffeProjectiles.BIGAN, world, player);
-		
+		this.setPhysical();
 		this.setDamage(10);
 		this.setCanGetStuckInGround();		
 	}

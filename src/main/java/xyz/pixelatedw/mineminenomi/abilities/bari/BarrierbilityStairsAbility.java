@@ -45,7 +45,7 @@ public class BarrierbilityStairsAbility extends ContinuousAbility
 			if (player.world.getBlockState(pos).getBlock() == ModBlocks.BARRIER)
 				player.world.setBlockState(pos, Blocks.AIR.getDefaultState());
 		}
-		this.posList = new ArrayList<BlockPos>();
+		this.posList = new ArrayList<>();
 		
 		return true;
 	}

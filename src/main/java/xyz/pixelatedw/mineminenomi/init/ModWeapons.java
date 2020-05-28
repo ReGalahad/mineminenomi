@@ -32,7 +32,7 @@ public class ModWeapons
 	// Normal Melee Weapons
 	public static final CoreSwordItem MARINE_SWORD = new CoreSwordItem(5, 300);
 	public static final CoreSwordItem PIRATE_CUTLASS = new CoreSwordItem(5, 300);
-	public static final CoreSwordItem PIPE = new CoreSwordItem(4, 200);
+	public static final CoreSwordItem PIPE = new CoreSwordItem(4, 200).setBlunt();
 	public static final CoreSwordItem SCISSORS = new ScissorsItem();
 	public static final CoreSwordItem KIKOKU = new CoreSwordItem(8, 500);
 	public static final CoreSwordItem KIRIBACHI = new CoreSwordItem(6, 500);
@@ -40,12 +40,12 @@ public class ModWeapons
 	public static final CoreSwordItem MURAKUMOGIRI = new CoreSwordItem(8, 500);
 	public static final CoreSwordItem HOOK = new CoreSwordItem(6, 500).setIsPoisonous();
 	public static final UmbrellaItem UMBRELLA = new UmbrellaItem();
-	public static final CoreSwordItem JITTE = new CoreSwordItem(7, 500);
-	public static final CoreSwordItem BO_STICK = new CoreSwordItem(6, 500);
-	public static final CoreSwordItem HAMMER_5T = new CoreSwordItem(1, 500);
-	public static final CoreSwordItem HAMMER_10T = new CoreSwordItem(1, 500);
-	public static final CoreSwordItem HAMMER_100T = new CoreSwordItem(1, 500);
-	public static final CoreSwordItem TONFA = new CoreSwordItem(4, 500);
+	public static final CoreSwordItem JITTE = new CoreSwordItem(7, 500).setBlunt();
+	public static final CoreSwordItem BO_STICK = new CoreSwordItem(6, 500).setBlunt();
+	public static final CoreSwordItem HAMMER_5T = new CoreSwordItem(1, 500).setBlunt();
+	public static final CoreSwordItem HAMMER_10T = new CoreSwordItem(1, 500).setBlunt();
+	public static final CoreSwordItem HAMMER_100T = new CoreSwordItem(1, 500).setBlunt();
+	public static final CoreSwordItem TONFA = new CoreSwordItem(4, 500).setBlunt();
 	public static final CoreSwordItem BANDIT_KNIFE = new CoreSwordItem(3, 500);
 	public static final CoreSwordItem KNIFE2 = new CoreSwordItem(3, 500);
 	public static final CoreSwordItem KNIFE3 = new CoreSwordItem(3, 250);
@@ -71,10 +71,10 @@ public class ModWeapons
 
 	// Devil Fruit Weapons
 	public static final AbilitySwordItem ICE_SABER = new AbilitySwordItem(IceSaberAbility.INSTANCE, 9).setIsSlownessInducing();
-	public static final AbilitySwordItem AMA_NO_MURAKUMO = new AbilitySwordItem(AmaNoMurakumoAbility.INSTANCE, 9);
+	public static final AbilitySwordItem AMA_NO_MURAKUMO = new AbilitySwordItem(AmaNoMurakumoAbility.INSTANCE, 9).setSwordSpeed(1);
 	public static final AbilitySwordItem NORO_NORO_BEAM_SWORD = new AbilitySwordItem(NoroNoroBeamSwordAbility.INSTANCE, 5).setIsSlownessInducing(75, true);
 	public static final AbilitySwordItem DORU_DORU_ARTS_KEN = new AbilitySwordItem(DoruDoruArtsKenAbility.INSTANCE, 6);
-	public static final AbilitySwordItem BLUE_SWORD = new AbilitySwordItem(BlueSwordAbility.INSTANCE, 8).setIsFireAspect();
+	public static final AbilitySwordItem BLUE_SWORD = new AbilitySwordItem(BlueSwordAbility.INSTANCE, 8).setIsFireAspect(8);
 	public static final AbilitySwordItem TABIRA_YUKI = new AbilitySwordItem(TabiraYukiAbility.INSTANCE, 8).setIsSlownessInducing(50);
 	
 	// JSON Predicates

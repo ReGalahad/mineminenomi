@@ -44,7 +44,9 @@ public class AbilityProjectileEntity extends ThrowableEntity
 	private boolean canPassThroughEntities = false;
 	private boolean canGetStuckInGround = false;
 	protected boolean stuckInGround = false;
-	private boolean resetHurtTime = true;
+	private boolean changeHurtTime = true;
+	// For reference default hurt time is 20
+	private int hurtTime = 0;
 
 
 	// Setting the defaults so that no crash occurs and so they will be null safe.
@@ -166,8 +168,8 @@ public class AbilityProjectileEntity extends ThrowableEntity
 					if(!this.canPassThroughEntities)
 						this.remove();
 
-					if(resetHurtTime)
-						hitEntity.hurtResistantTime = 0;
+					if(changeHurtTime)
+						hitEntity.hurtResistantTime = hurtTime;
 				}
 			}
 			else if(hit.getType() == RayTraceResult.Type.BLOCK)
@@ -254,6 +256,11 @@ public class AbilityProjectileEntity extends ThrowableEntity
 	{
 		this.isPhysical = true;
 	}
+
+	public boolean getPhysical()
+	{
+		return this.isPhysical;
+	}
 	
 	public void setPassThroughBlocks()
 	{
@@ -290,9 +297,14 @@ public class AbilityProjectileEntity extends ThrowableEntity
 		return this.stuckInGround;
 	}
 
-	public void setResetHurtTime(boolean value)
+	public void setChangeHurtTime(boolean v)
 	{
-		this.resetHurtTime = value;
+		this.changeHurtTime = v;
+	}
+
+	public void setHurtTime(int v)
+	{
+		this.hurtTime = v;
 	}
 
 

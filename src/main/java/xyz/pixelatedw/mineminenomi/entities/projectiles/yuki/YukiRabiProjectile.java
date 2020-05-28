@@ -30,7 +30,7 @@ public class YukiRabiProjectile extends AbilityProjectileEntity
 	{
 		super(YukiProjectiles.YUKI_RABI, world, player);
 
-		this.setDamage(5);
+		this.setDamage(2.5f);
 		this.onTickEvent = this::onTickEvent;
 	}
 	

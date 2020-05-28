@@ -25,7 +25,7 @@ public abstract class RepeaterAbility extends Ability
 	 */	
 	public void setMaxRepearCount(int count, int interval)
 	{
-		this.maxRepeaterCount = count;
+		this.maxRepeaterCount = count - 1;
 		this.repeaterCount = this.maxRepeaterCount;
 		this.repeaterInterval = interval;
 		

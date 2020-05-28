@@ -14,7 +14,7 @@ public class GasRobeAbility extends RepeaterAbility
 		super("Gas Robe", AbilityCategory.DEVIL_FRUIT);
 		this.setDescription("Launches a cloud of poisonous gas at the opponent.");
 		this.setMaxCooldown(6);
-		this.setMaxRepearCount(3, 3);
+		this.setMaxRepearCount(5, 3);
 
 		this.onUseEvent = this::onUseEvent;
 	}
