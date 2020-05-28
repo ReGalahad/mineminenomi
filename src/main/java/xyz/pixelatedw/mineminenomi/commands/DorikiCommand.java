@@ -44,7 +44,7 @@ public class DorikiCommand
 		
 		builder
 			.then(Commands.literal("=")
-				.then(Commands.argument("value", IntegerArgumentType.integer(1, ModValues.MAX_DORIKI))
+				.then(Commands.argument("value", IntegerArgumentType.integer(0, ModValues.MAX_DORIKI))
 					.then(Commands.argument("targets", EntityArgument.players())
 						.executes(context -> 
 							{ 

@@ -24,21 +24,6 @@ import xyz.pixelatedw.wypi.network.WyNetwork;
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class EventsOnGain
 {
-
-	@SubscribeEvent
-	public static void onDorikiGained(DorikiEvent event)
-	{
-		if (event.player != null && CommonConfig.instance.isExtraHeartsEnabled())
-		{
-			IAttributeInstance maxHpAttribute = event.player.getAttribute(SharedMonsterAttributes.MAX_HEALTH);
-
-			if (event.props.getDoriki() / 100 <= 20)
-				maxHpAttribute.setBaseValue(20);
-			else
-				maxHpAttribute.setBaseValue(event.props.getDoriki() / 100);
-		}
-	}
-
 	@SubscribeEvent
 	public static void onEntityDeath(LivingDeathEvent event)
 	{

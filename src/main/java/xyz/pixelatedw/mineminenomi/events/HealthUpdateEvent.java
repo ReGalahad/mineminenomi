@@ -1,5 +1,7 @@
 package xyz.pixelatedw.mineminenomi.events;
 
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.play.server.SUpdateHealthPacket;
@@ -7,11 +9,30 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerChangedDimensionEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import xyz.pixelatedw.mineminenomi.config.CommonConfig;
+import xyz.pixelatedw.mineminenomi.events.custom.DorikiEvent;
 import xyz.pixelatedw.wypi.APIConfig;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class HealthUpdateEvent
 {
+	@SubscribeEvent
+	public static void onDorikiGained(DorikiEvent event)
+	{
+		if (event.player != null && CommonConfig.instance.isExtraHeartsEnabled())
+		{
+			IAttributeInstance maxHpAttribute = event.player.getAttribute(SharedMonsterAttributes.MAX_HEALTH);
+
+			if (event.props.getDoriki() / 100 <= 20)
+				maxHpAttribute.setBaseValue(20);
+			else
+				maxHpAttribute.setBaseValue(event.props.getDoriki() / 100);
+			
+			((ServerPlayerEntity) event.player).connection.sendPacket(new SUpdateHealthPacket(event.player.getHealth(), event.player.getFoodStats().getFoodLevel(), event.player.getFoodStats().getSaturationLevel()));
+		}
+	}
+
+	
 	@SubscribeEvent
 	public static void onLivingUpdate(LivingUpdateEvent event)
 	{
