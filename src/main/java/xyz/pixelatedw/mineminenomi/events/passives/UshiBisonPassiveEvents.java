@@ -51,23 +51,4 @@ public class UshiBisonPassiveEvents
 			}
 		}
 	}
-
-	@SubscribeEvent
-	public static void onEntityAttack(LivingHurtEvent event)
-	{
-		if (!(event.getSource().getTrueSource() instanceof PlayerEntity))
-			return;
-
-		PlayerEntity attacker = (PlayerEntity) event.getSource().getTrueSource();
-		IDevilFruit props = DevilFruitCapability.get(attacker);
-
-		if (!props.getDevilFruit().equalsIgnoreCase("ushi_ushi_bison"))
-			return;
-
-		if (props.getZoanPoint().equalsIgnoreCase(BisonHeavyZoanInfo.FORM))
-		{
-			event.setAmount(event.getAmount() + 3);
-		}
-	}
-
 }

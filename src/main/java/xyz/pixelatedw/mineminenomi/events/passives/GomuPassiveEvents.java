@@ -6,6 +6,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraft.util.DamageSource;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -15,7 +16,6 @@ import xyz.pixelatedw.mineminenomi.api.helpers.ItemsHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.extra.NormalBulletProjectile;
-import xyz.pixelatedw.mineminenomi.events.devilfruits.DFWeaknessesEvents;
 import xyz.pixelatedw.mineminenomi.items.weapons.ClimaTactItem;
 import xyz.pixelatedw.mineminenomi.items.weapons.CoreSwordItem;
 import xyz.pixelatedw.wypi.APIConfig;
@@ -70,8 +70,6 @@ public class GomuPassiveEvents
 					boolean isPhysical = ((AbilityProjectileEntity) instantSource).getPhysical();
 					if(isPhysical)
 						reduction = 0.8f;
-					if(instantSource instanceof NormalBulletProjectile)
-						reduction = 1.0f;
 				}
 			}
 
@@ -81,6 +79,30 @@ public class GomuPassiveEvents
 			}
 
 			event.setAmount(event.getAmount() * (1 - reduction));
+		}
+	}
+
+	@SubscribeEvent
+	public static void onEntityAttackEvent(LivingAttackEvent event) {
+		if (!(event.getEntityLiving() instanceof PlayerEntity))
+			return;
+
+		PlayerEntity attacked = (PlayerEntity) event.getEntityLiving();
+		IDevilFruit devilFruitProps = DevilFruitCapability.get(attacked);
+
+		if (!devilFruitProps.getDevilFruit().equals("gomu_gomu"))
+			return;
+
+		if(!AbilityHelper.isNearbyKairoseki(attacked)) {
+			DamageSource source = event.getSource();
+			Entity instantSource = source.getImmediateSource();
+
+			if(instantSource instanceof NormalBulletProjectile)
+			{
+				event.setCanceled(true);
+				((NormalBulletProjectile) instantSource).setThrower(attacked);
+				((NormalBulletProjectile) instantSource).shoot(-instantSource.getMotion().x, -instantSource.getMotion().y, -instantSource.getMotion().z,0.8f, 20);
+			}
 		}
 	}
 

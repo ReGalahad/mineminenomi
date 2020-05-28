@@ -152,7 +152,7 @@ public class AbilityProjectileEntity extends ThrowableEntity
 					if(MinecraftForge.EVENT_BUS.post(event))
 						return;
 					
-					hitEntity.attackEntityFrom(this.causeAbilityProjectileDamage(), this.damage);
+					boolean entityDamaged = hitEntity.attackEntityFrom(this.causeAbilityProjectileDamage(), this.damage);
 
 					if(this.withEffects.getEffects().length > 0)
 					{
@@ -165,7 +165,7 @@ public class AbilityProjectileEntity extends ThrowableEntity
 					}
 							
 					this.onEntityImpactEvent.onImpact(hitEntity);
-					if(!this.canPassThroughEntities)
+					if(!this.canPassThroughEntities && entityDamaged)
 						this.remove();
 
 					if(changeHurtTime)
@@ -307,7 +307,7 @@ public class AbilityProjectileEntity extends ThrowableEntity
 		this.hurtTime = v;
 	}
 
-
+	public void setThrower(LivingEntity e) { this.owner = e; }
 	/*
 	 *	Interfaces
 	 */
