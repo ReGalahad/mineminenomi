@@ -22,8 +22,6 @@ import net.minecraft.world.TickPriority;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
-import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 
 public class PoisonBlock extends Block
 {

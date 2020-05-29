@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.entities.mobs.misc;
+package xyz.pixelatedw.mineminenomi.api.entities;
 
 import java.util.ArrayList;
 import java.util.List;

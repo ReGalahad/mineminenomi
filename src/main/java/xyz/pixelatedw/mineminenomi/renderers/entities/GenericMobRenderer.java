@@ -61,31 +61,6 @@ public class GenericMobRenderer<T extends MobEntity, M extends BipedModel<T>> ex
 		GL11.glScalef(this.scale, this.scale, this.scale);
 	}
 
-	/*protected void renderEquippedItems(LivingEntity entity, float f)
-	{
-		GL11.glPushMatrix();
-		if (entity instanceof IDynamicRenderer)
-		{
-			GL11.glScaled(((IDynamicRenderer) entity).itemScale()[0], ((IDynamicRenderer) entity).itemScale()[1], ((IDynamicRenderer) entity).itemScale()[2]);
-			GL11.glTranslated(((IDynamicRenderer) entity).itemOffset()[0], ((IDynamicRenderer) entity).itemOffset()[1], ((IDynamicRenderer) entity).itemOffset()[2]);
-		}
-
-		/*ExtendedEntityData props = ExtendedEntityData.get((EntityLivingBase) entity);
-		boolean hasHaki = props.hasBusoHakiActive();
-
-		if(hasHaki)
-		{
-			this.bindTexture(ID.HANDTEXTURE_ZOANMORPH_BUSO);
-			GL11.glColor3d(0.5, 0, 0.5);
-			super.renderEquippedItems(entity, f);
-		}
-		else
-		{
-			super.renderEquippedItems(entity, f);
-		}/
-		GL11.glPopMatrix();
-	}*/
-
 	@Override
 	protected ResourceLocation getEntityTexture(T entity)
 	{

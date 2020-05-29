@@ -1,11 +1,6 @@
 package xyz.pixelatedw.mineminenomi.blocks;
 
-import java.util.Map;
-
 import javax.annotation.Nullable;
-
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Maps;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
@@ -13,82 +8,30 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.HorizontalBlock;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.IFluidState;
+import net.minecraft.entity.EntityType;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import xyz.pixelatedw.mineminenomi.blocks.tileentities.WantedPosterTileEntity;
+import xyz.pixelatedw.mineminenomi.blocks.tileentities.DenDenMushiTileEntity;
 
-public class WantedPosterBlock extends Block
+public class DenDenMushiBlock extends Block
 {
-
 	public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
-	private static final Map<Direction, VoxelShape> SHAPES = Maps.newEnumMap(ImmutableMap.of
-			(
-				Direction.NORTH, Block.makeCuboidShape(0.0D, -2.5D, 14.0D, 16.0D, 18.5D, 16.0D), 
-				Direction.SOUTH, Block.makeCuboidShape(0.0D, -2.5D, 0.0D, 16.0D, 18.5D, 2.0D), 
-				Direction.EAST, Block.makeCuboidShape(0.0D, -2.5D, 0.0D, 2.0D, 18.5D, 16.0D), 
-				Direction.WEST, Block.makeCuboidShape(14.0D, -2.5D, 0.0D, 16.0D, 18.5D, 16.0D)
-			));
 
-	public WantedPosterBlock()
+	public DenDenMushiBlock()
 	{
-		super(Properties.create(Material.WOOL).hardnessAndResistance(0.2F));
+		super(Properties.create(Material.DRAGON_EGG).hardnessAndResistance(0.4f));
 		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
-	}
-
-	@Override
-	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
-	{
-		return SHAPES.get(state.get(FACING));
-	}
-
-	@Override
-	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos)
-	{
-		return worldIn.getBlockState(pos.offset(state.get(FACING).getOpposite())).getMaterial().isSolid();
-	}
-
-	@Override
-	public BlockRenderType getRenderType(BlockState state)
-	{
-		return BlockRenderType.INVISIBLE;
-	}
-
-	@Override
-	public BlockRenderLayer getRenderLayer()
-	{
-		return BlockRenderLayer.TRANSLUCENT;
-	}
-
-	@Override
-	@OnlyIn(Dist.CLIENT)
-	public boolean isSideInvisible(BlockState state, BlockState adjacentBlockState, Direction side)
-	{
-		return true;
-	}
-
-	@Override
-	public int getOpacity(BlockState state, IBlockReader worldIn, BlockPos pos)
-	{
-		return 0;
 	}
 
 	@Override
@@ -96,7 +39,6 @@ public class WantedPosterBlock extends Block
 	public BlockState getStateForPlacement(BlockItemUseContext context)
 	{
 		BlockState blockstate = this.getDefaultState();
-		IFluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
 		BlockPos blockpos = context.getPos();
 		Direction[] adirection = context.getNearestLookingDirections();
 
@@ -147,25 +89,65 @@ public class WantedPosterBlock extends Block
 	}
 
 	@Override
-	public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
+	public BlockRenderType getRenderType(BlockState state)
 	{
-		if (world.isRemote)
-		{
-			return true;
-		}
-		else
-		{
-			//lol
-			System.out.println("TEST");
-		}
+		return BlockRenderType.INVISIBLE;
+	}
 
+	@Override
+	public BlockRenderLayer getRenderLayer()
+	{
+		return BlockRenderLayer.TRANSLUCENT;
+	}
+
+	@Override
+	@OnlyIn(Dist.CLIENT)
+	public float getAmbientOcclusionLightValue(BlockState state, IBlockReader worldIn, BlockPos pos)
+	{
+		return 1.0F;
+	}
+
+	@Override
+	public boolean propagatesSkylightDown(BlockState state, IBlockReader reader, BlockPos pos)
+	{
+		return true;
+	}
+
+	@Override
+	public boolean causesSuffocation(BlockState state, IBlockReader worldIn, BlockPos pos)
+	{
 		return false;
+	}
+
+	@Override
+	public boolean isNormalCube(BlockState state, IBlockReader worldIn, BlockPos pos)
+	{
+		return false;
+	}
+
+	@Override
+	public boolean canEntitySpawn(BlockState state, IBlockReader worldIn, BlockPos pos, EntityType<?> type)
+	{
+		return false;
+	}
+
+	@Override
+	@OnlyIn(Dist.CLIENT)
+	public boolean isSideInvisible(BlockState state, BlockState adjacentBlockState, Direction side)
+	{
+		return true;
+	}
+
+	@Override
+	public int getOpacity(BlockState state, IBlockReader worldIn, BlockPos pos)
+	{
+		return 0;
 	}
 
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world)
 	{
-		return new WantedPosterTileEntity();
+		return new DenDenMushiTileEntity();
 	}
 
 	@Override

@@ -7,8 +7,6 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
-import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 
 public class DemonPoisonBlock extends PoisonBlock
 {

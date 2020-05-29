@@ -21,7 +21,7 @@ public class ZouHeavyPointAbility extends ZoanAbility
 	public ZouHeavyPointAbility()
 	{
 		super("Zou Heavy Point", AbilityCategory.DEVIL_FRUIT, ZouHeavyZoanInfo.FORM);
-		this.setDescription("Allows the user to transforms into an full, which focuses on defense. Allows the user to use 'Trunk Shot' and 'Ivory Stomp'");
+		this.setDescription("Allows the user to transforms into an elephant hybrid, which focuses on strength. Allows the user to use 'Trunk Shot' and 'Ivory Stomp'");
 	}
 
 	@Override

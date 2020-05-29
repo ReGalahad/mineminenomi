@@ -23,7 +23,7 @@ public class ZouGuardPointAbility extends ZoanAbility
 	public ZouGuardPointAbility()
 	{
 		super("Zou Guard Point", AbilityCategory.DEVIL_FRUIT, ZouGuardZoanInfo.FORM);
-		this.setDescription("Allows the user to transforms into an elephant hybrid, which focuses on strength, Allows the user to use 'Great Stomp', 'Trunk Shot' and 'Ivory Dart'");
+		this.setDescription("Allows the user to transforms into an elephant, which focuses on defense, Allows the user to use 'Great Stomp', 'Trunk Shot' and 'Ivory Dart'");
 	}
 
 	@Override

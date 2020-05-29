@@ -12,6 +12,7 @@ import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.entities.PhysicalBodyEntity;
 import xyz.pixelatedw.mineminenomi.entities.VivreCardEntity;
 import xyz.pixelatedw.mineminenomi.entities.WantedPosterPackageEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.animals.DenDenMushiEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.bandits.BanditWithSwordEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.marines.MarineCaptainEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.marines.MarineTraderEntity;
@@ -55,6 +56,9 @@ public class ModEntities
 	public static final EntityType DOJO_SENSEI = WyRegistry.createEntityType(DojoSenseiEntity::new).build("dojo_sensei");
 	public static final EntityType BOW_MASTER = WyRegistry.createEntityType(BowMasterEntity::new).build("bow_master");
    
+	// Animals
+	public static final EntityType DEN_DEN_MUSHI = WyRegistry.createEntityType(DenDenMushiEntity::new).size(0.8F, 0.8F).build("den_den_mushi");
+	
 	// Other
 	public static final EntityType DOPPELMAN = WyRegistry.createEntityType(DoppelmanEntity::new).build("doppelman");
 	public static final EntityType WAX_CLONE = WyRegistry.createEntityType(WaxCloneEntity::new).build("wax_clone");
@@ -88,6 +92,9 @@ public class ModEntities
 		registerFactionlessWithSpawnEgg(DOJO_SENSEI, "Dojo Sensei");
 		registerFactionlessWithSpawnEgg(BOW_MASTER, "Bow Master");
 
+		// Animals
+		registerAnimalWithSpawnEgg(DEN_DEN_MUSHI, "Den Den Mushi");
+		
 		// Other
 		WyRegistry.registerEntityType(DOPPELMAN, "Doppelman");
 		WyRegistry.registerEntityType(WAX_CLONE, "Wax Clone");
@@ -137,4 +144,9 @@ public class ModEntities
 		return WyRegistry.registerSpawnEggItem(type, name, WyHelper.hexToRGB("#fbbf4c").getRGB(), WyHelper.hexToRGB("#F7F7F7").getRGB());
 	}
 
+	private static Item registerAnimalWithSpawnEgg(EntityType type, String name)
+	{
+		WyRegistry.registerEntityType(type, name);
+		return WyRegistry.registerSpawnEggItem(type, name, WyHelper.hexToRGB("#a7ca34").getRGB(), WyHelper.hexToRGB("#a2f7c8").getRGB());
+	}
 }

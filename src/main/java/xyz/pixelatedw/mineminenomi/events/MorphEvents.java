@@ -114,7 +114,7 @@ public class MorphEvents
 			// and send them to all players around it (250 blocks radius).
 			// The SyncZoan packet is just a 'middleman' since we cannot send a sync to all packet from the client, so we're sending the player id
 			// to the server which will then sync all.
-			if(clientPlayer != player)
+			if(player != null && clientPlayer != player)
 			{
 				WyNetwork.sendToServer(new CSyncZoanPacket(player.getEntityId()));
 			}
