@@ -45,10 +45,8 @@ public class AbilityValidationEvents
 				{
 					ItemStack df = AbilityHelper.getDevilFruitItem(devilFruitProps.getDevilFruit());
 					
-					abilityProps.clearUnlockedAbilities(AbilityCategory.ALL);
-					if(!devilFruitProps.getZoanPoint().equalsIgnoreCase("yomi"))
-						devilFruitProps.setZoanPoint("");
-					
+					abilityProps.clearUnlockedAbilities(AbilityCategory.DEVIL_FRUIT);
+
 					if(df != null && !df.isEmpty())
 					{
 						if(devilFruitProps.hasYamiPower())
@@ -63,6 +61,10 @@ public class AbilityValidationEvents
 							if(!AbilityHelper.verifyIfAbilityIsBanned(a))
 								abilityProps.addUnlockedAbility(a);
 					}
+				}
+				else
+				{
+					abilityProps.clearUnlockedAbilities(AbilityCategory.DEVIL_FRUIT);
 				}
 				
 				AbilityHelper.validateRacialMoves(player);

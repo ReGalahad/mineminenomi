@@ -100,7 +100,7 @@ public class MorphEvents
 			e.printStackTrace();
 		}
 	}
-
+	
 	@SubscribeEvent
 	public static void onEntityConstructing(EntityJoinWorldEvent event)
 	{
@@ -111,7 +111,7 @@ public class MorphEvents
 
 			// If the player that joins the world is different than our client player it sends a zoan sync packet
 			// This packet will get the player who just joined the world from its entity id, get the devil fruit and ability capabilities
-			// and send them to all players around it (250 blocks radius).
+			// and send them to all players who are tracking it.
 			// The SyncZoan packet is just a 'middleman' since we cannot send a sync to all packet from the client, so we're sending the player id
 			// to the server which will then sync all.
 			if(player != null && clientPlayer != player)

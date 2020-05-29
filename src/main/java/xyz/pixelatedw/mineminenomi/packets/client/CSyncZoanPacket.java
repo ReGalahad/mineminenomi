@@ -53,8 +53,8 @@ public class CSyncZoanPacket
 				IDevilFruit devilFruitProps = DevilFruitCapability.get((PlayerEntity) targetPlayer);
 				IAbilityData abilityDataProps = AbilityDataCapability.get((PlayerEntity) targetPlayer);
 
-				WyNetwork.sendToAllAround(new SSyncDevilFruitPacket(targetPlayer.getEntityId(), devilFruitProps), (PlayerEntity) targetPlayer);
-				WyNetwork.sendToAllAround(new SSyncAbilityDataPacket(targetPlayer.getEntityId(), abilityDataProps), (PlayerEntity) targetPlayer);
+				WyNetwork.sendToAllTracking(new SSyncDevilFruitPacket(targetPlayer.getEntityId(), devilFruitProps), (PlayerEntity) targetPlayer);
+				WyNetwork.sendToAllTracking(new SSyncAbilityDataPacket(targetPlayer.getEntityId(), abilityDataProps), (PlayerEntity) targetPlayer);
 			});	
 		}
 		ctx.get().setPacketHandled(true);
