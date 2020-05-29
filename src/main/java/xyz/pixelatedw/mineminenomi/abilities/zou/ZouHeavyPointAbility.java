@@ -1,13 +1,13 @@
 package xyz.pixelatedw.mineminenomi.abilities.zou;
 
+import java.util.UUID;
+
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
 import xyz.pixelatedw.mineminenomi.api.abilities.ZoanAbility;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZouHeavyZoanInfo;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
-
-import java.util.UUID;
 
 public class ZouHeavyPointAbility extends ZoanAbility
 {
@@ -21,7 +21,7 @@ public class ZouHeavyPointAbility extends ZoanAbility
 	public ZouHeavyPointAbility()
 	{
 		super("Zou Heavy Point", AbilityCategory.DEVIL_FRUIT, ZouHeavyZoanInfo.FORM);
-		this.setDescription("Allows the user to transforms into an full, which focuses on defense. Allows Ivory Stomp.");
+		this.setDescription("Allows the user to transforms into an full, which focuses on defense. Allows the user to use 'Trunk Shot' and 'Ivory Stomp'");
 	}
 
 	@Override

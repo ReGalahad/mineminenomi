@@ -1,5 +1,7 @@
 package xyz.pixelatedw.mineminenomi.abilities.zou;
 
+import java.util.UUID;
+
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
@@ -7,8 +9,6 @@ import xyz.pixelatedw.mineminenomi.api.abilities.ZoanAbility;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZouGuardZoanInfo;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
-
-import java.util.UUID;
 
 public class ZouGuardPointAbility extends ZoanAbility
 {
@@ -23,7 +23,7 @@ public class ZouGuardPointAbility extends ZoanAbility
 	public ZouGuardPointAbility()
 	{
 		super("Zou Guard Point", AbilityCategory.DEVIL_FRUIT, ZouGuardZoanInfo.FORM);
-		this.setDescription("Allows the user to transforms into an elephant hybrid, which focuses on strength, Allows the user to use 'Trunk Shot' and 'Ivory Dart'");
+		this.setDescription("Allows the user to transforms into an elephant hybrid, which focuses on strength, Allows the user to use 'Great Stomp', 'Trunk Shot' and 'Ivory Dart'");
 	}
 
 	@Override

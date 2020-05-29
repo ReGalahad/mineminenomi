@@ -1,6 +1,7 @@
 package xyz.pixelatedw.mineminenomi.abilities.toriphoenix;
 
-import net.minecraft.entity.SharedMonsterAttributes;
+import java.util.UUID;
+
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -12,8 +13,6 @@ import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
-
-import java.util.UUID;
 
 public class PhoenixFlyPointAbility extends ZoanAbility
 {
