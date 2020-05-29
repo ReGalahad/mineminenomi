@@ -39,7 +39,7 @@ public class HiePassiveEvents
 		if (!devilFruitProps.getDevilFruit().equals("hie_hie"))
 			return;
 				
-		if (!AbilityHelper.isNearbyKairoseki(player) && (player.getHealth() > player.getMaxHealth() / 5 || player.abilities.isCreativeMode))
+		if (!AbilityHelper.isNearbyKairoseki(player) && player.getRidingEntity() == null && (player.getHealth() > player.getMaxHealth() / 5 || player.abilities.isCreativeMode))
 			AbilityHelper.createFilledSphere(player.world, (int) player.posX - 1, (int) player.posY, (int) player.posZ - 1, 2, Blocks.ICE, GRIEF_RULE);
 	}
 
