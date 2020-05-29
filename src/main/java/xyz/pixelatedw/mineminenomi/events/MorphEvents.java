@@ -26,7 +26,7 @@ import xyz.pixelatedw.mineminenomi.api.ZoanInfo;
 import xyz.pixelatedw.mineminenomi.api.helpers.MorphHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
-import xyz.pixelatedw.mineminenomi.packets.server.SSyncDevilFruitPacket;
+import xyz.pixelatedw.mineminenomi.packets.client.CSyncZoanPacket;
 import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
@@ -106,14 +106,17 @@ public class MorphEvents
 	{
 		if (event.getEntity() instanceof PlayerEntity)
 		{
-			PlayerEntity owner = (PlayerEntity) event.getEntity();
-			IDevilFruit props = DevilFruitCapability.get(owner);
+			PlayerEntity clientPlayer = Minecraft.getInstance().player;
+			PlayerEntity player = (PlayerEntity) event.getEntity();
 
-			if (!WyHelper.isNullOrEmpty(props.getZoanPoint()) && !props.getZoanPoint().equalsIgnoreCase("yomi"))
+			// If the player that joins the world is different than our client player it sends a zoan sync packet
+			// This packet will get the player who just joined the world from its entity id, get the devil fruit and ability capabilities
+			// and send them to all players around it (250 blocks radius).
+			// The SyncZoan packet is just a 'middleman' since we cannot send a sync to all packet from the client, so we're sending the player id
+			// to the server which will then sync all.
+			if(clientPlayer != player)
 			{
-				props.setZoanPoint("");
-
-				WyNetwork.sendToAll(new SSyncDevilFruitPacket(owner.getEntityId(), props));
+				WyNetwork.sendToServer(new CSyncZoanPacket(player.getEntityId()));
 			}
 		}
 	}

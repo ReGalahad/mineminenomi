@@ -1,9 +1,11 @@
 package xyz.pixelatedw.mineminenomi.api.abilities;
 
 import net.minecraft.entity.player.PlayerEntity;
-import xyz.pixelatedw.mineminenomi.api.helpers.MorphHelper;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.EntityEvent;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
+import xyz.pixelatedw.mineminenomi.packets.server.SRecalculateEyeHeightPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SSyncDevilFruitPacket;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
@@ -42,8 +44,10 @@ public class ZoanAbility extends ContinuousAbility implements IParallelContinuou
 		props.setZoanPoint(this.zoanForm);
 		WyNetwork.sendToAll(new SSyncDevilFruitPacket(player.getEntityId(), props));
 		WyNetwork.sendToAll(new SSyncAbilityDataPacket(player.getEntityId(), abilityProps));
-		if(!player.world.isRemote)
-			MorphHelper.updateEyeView(player);
+
+		// Updating the eye height
+		MinecraftForge.EVENT_BUS.post(new EntityEvent.EyeHeight(player, player.getPose(), player.getSize(player.getPose()), player.getHeight()));
+		WyNetwork.sendTo(new SRecalculateEyeHeightPacket(), player);
 		
 		return true;
 	}
@@ -57,9 +61,11 @@ public class ZoanAbility extends ContinuousAbility implements IParallelContinuou
 				
 		WyNetwork.sendToAll(new SSyncDevilFruitPacket(player.getEntityId(), props));
 		WyNetwork.sendToAll(new SSyncAbilityDataPacket(player.getEntityId(),abilityProps));
-		if(!player.world.isRemote)
-			MorphHelper.updateEyeView(player);
 
+		// Updating the eye height
+		MinecraftForge.EVENT_BUS.post(new EntityEvent.EyeHeight(player, player.getPose(), player.getSize(player.getPose()), player.getHeight()));
+		WyNetwork.sendTo(new SRecalculateEyeHeightPacket(), player);
+		
 		return true;
 	}
 	
