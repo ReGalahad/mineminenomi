@@ -114,7 +114,7 @@ public class MorphEvents
 			// and send them to all players who are tracking it.
 			// The SyncZoan packet is just a 'middleman' since we cannot send a sync to all packet from the client, so we're sending the player id
 			// to the server which will then sync all.
-			if(player != null && clientPlayer != player)
+			if(player.world.isRemote && clientPlayer != player)
 			{
 				WyNetwork.sendToServer(new CSyncZoanPacket(player.getEntityId()));
 			}

@@ -89,7 +89,7 @@ public class AbilityValidationEvents
 				}
 								
 				WyNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), entityStatsProps), player);
-				WyNetwork.sendToAll(new SSyncDevilFruitPacket(player.getEntityId(), devilFruitProps));
+				WyNetwork.sendTo(new SSyncDevilFruitPacket(player.getEntityId(), devilFruitProps), player);
 				WyNetwork.sendTo(new SSyncAbilityDataPacket(player.getEntityId(), abilityProps), player);
 			}
 		}

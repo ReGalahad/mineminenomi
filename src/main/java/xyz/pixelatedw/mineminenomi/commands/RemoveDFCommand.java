@@ -12,13 +12,18 @@ import net.minecraft.command.Commands;
 import net.minecraft.command.arguments.EntityArgument;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.play.server.SPlayerAbilitiesPacket;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.EntityEvent;
 import xyz.pixelatedw.mineminenomi.abilities.SpecialFlyAbility;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
+import xyz.pixelatedw.mineminenomi.packets.server.SRecalculateEyeHeightPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SSyncDevilFruitPacket;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.abilities.ChargeableAbility;
+import xyz.pixelatedw.wypi.abilities.ContinuousAbility;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 import xyz.pixelatedw.wypi.network.WyNetwork;
@@ -51,18 +56,29 @@ public class RemoveDFCommand
 			devilFruitProps.setLogia(false);
 			devilFruitProps.setZoanPoint("");
 			devilFruitProps.setYamiPower(false);
+			
+			// Updating the eye height
+			MinecraftForge.EVENT_BUS.post(new EntityEvent.EyeHeight(player, player.getPose(), player.getSize(player.getPose()), player.getHeight()));
+			WyNetwork.sendTo(new SRecalculateEyeHeightPacket(), player);
 
 			for (Ability ability : abilityDataProps.getEquippedAbilities(AbilityCategory.ALL))
 			{
 				if (ability != null)
-					ability.stopCooldown(player);
+				{
+					if(ability instanceof ContinuousAbility)
+						((ContinuousAbility)ability).stopContinuity(player);
+					else if(ability instanceof ChargeableAbility)
+						((ChargeableAbility)ability).stopCharging(player);
+					else
+						ability.stopCooldown(player);
+				}
 			}
 		
 			if(CommonConfig.instance.isSpecialFlyingEnabled() && abilityDataProps.hasUnlockedAbility(SpecialFlyAbility.INSTANCE) && !player.isCreative() && !player.isSpectator())
 			{
 				player.abilities.allowFlying = false;
 				player.abilities.isFlying = false;
-				((ServerPlayerEntity)player).connection.sendPacket(new SPlayerAbilitiesPacket(player.abilities));
+				player.connection.sendPacket(new SPlayerAbilitiesPacket(player.abilities));
 			}
 			
 			abilityDataProps.clearUnlockedAbilities(AbilityCategory.DEVIL_FRUIT);
@@ -70,8 +86,8 @@ public class RemoveDFCommand
 
 			player.clearActivePotions();
 			
-			WyNetwork.sendTo(new SSyncDevilFruitPacket(player.getEntityId(), devilFruitProps), player);
-			WyNetwork.sendTo(new SSyncAbilityDataPacket(player.getEntityId(), abilityDataProps), player);
+			WyNetwork.sendToAllTracking(new SSyncDevilFruitPacket(player.getEntityId(), devilFruitProps), player);
+			WyNetwork.sendToAllTracking(new SSyncAbilityDataPacket(player.getEntityId(), abilityDataProps), player);
 		}
 
 		return 1;

@@ -1,5 +1,7 @@
 package xyz.pixelatedw.mineminenomi.abilities.ushibison;
 
+import java.util.UUID;
+
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
@@ -7,8 +9,6 @@ import xyz.pixelatedw.mineminenomi.api.abilities.ZoanAbility;
 import xyz.pixelatedw.mineminenomi.entities.zoan.BisonHeavyZoanInfo;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
-
-import java.util.UUID;
 
 public class BisonHeavyPointAbility extends ZoanAbility
 {
