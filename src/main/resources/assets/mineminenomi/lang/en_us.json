@@ -254,7 +254,6 @@
 	"block.mineminenomi.flame_dial": "Flame Dial",
 	"block.mineminenomi.flash_dial": "Flash Dial",
 	"block.mineminenomi.impact_dial": "Impact Dial",
-	"block.mineminenomi.kage_block": "Kage Block",
 	"block.mineminenomi.kairoseki_bars": "Kairoseki Bars",
 	"block.mineminenomi.kairoseki_block": "Kairoseki Block",
 	"block.mineminenomi.kairoseki_ore": "Kairoseki Ore",
@@ -277,6 +276,7 @@
 	"death.attack.ability_projectile": "%1$s was killed by %2$s",
 
 	"effect.mineminenomi.ability_off": "Ability Off",
+	"effect.mineminenomi.black_box": "Black Box",
 	"effect.mineminenomi.bubbly_coral": "Bubbly Coral",
 	"effect.mineminenomi.candle_lock": "Candle Lock",
 	"effect.mineminenomi.chiyu_hormone": "Chiyu Hormone",
@@ -500,7 +500,6 @@
 	"item.mineminenomi.jitte": "Jitte",
 	"item.mineminenomi.kabuto": "Kabuto",
 	"item.mineminenomi.kachi_kachi_no_mi": "Kachi Kachi no Mi",
-	"item.mineminenomi.kage_block": "kage_block",
 	"item.mineminenomi.kage_kage_no_mi": "Kage Kage no Mi",
 	"item.mineminenomi.kairoseki": "Kairoseki",
 	"item.mineminenomi.kairoseki_bars": "kairoseki_bars",

@@ -42,7 +42,7 @@ public class ShadowItem extends Item
 			if (!props.hasShadow())
 			{
 				props.setShadow(true);
-				WyNetwork.sendToServer(new SEntityStatsSyncPacket(entity.getEntityId(), props));
+				WyNetwork.sendToAllTracking(new SEntityStatsSyncPacket(entity.getEntityId(), props), entity);
 			}
 			else
 			{

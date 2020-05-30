@@ -21,12 +21,21 @@ public class SpringHopperAbility extends ChargeableAbility
 		this.setDescription("Turning the user's legs into springs, which launches them into the air.");
 
 		this.onStartChargingEvent = this::onStartChargingEvent;
+		this.duringChargingEvent = this::duringChargingEvent;
 		this.onEndChargingEvent = this::onEndChargingEvent;
 	}
 	
 	private boolean onStartChargingEvent(PlayerEntity player)
 	{
-		return player.onGround;
+		return true;
+	}
+	
+	private void duringChargingEvent(PlayerEntity player, int chargeTime)
+	{
+		if(!player.onGround && chargeTime <= 1)
+		{
+			this.setChargeTime(1);
+		}
 	}
 	
 	private boolean onEndChargingEvent(PlayerEntity player)

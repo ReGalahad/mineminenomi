@@ -32,14 +32,12 @@ public class DoaPassiveEvents
 	@SubscribeEvent
 	public static void onEntityHits(AttackEntityEvent event)
 	{
-		/*
 		PlayerEntity player = event.getPlayer();
 
 		if(!isInsideDoor(player))
 			return;
 		
 		event.setCanceled(true);
-		*/
 	}
 	
 	@SubscribeEvent
@@ -145,17 +143,30 @@ public class DoaPassiveEvents
 	{
 		LivingEntity entity = event.getEntity();
 
-		if (!entity.isPotionActive(ModEffects.DOOR_HEAD))
-			return;
-
-		if (entity.getActivePotionEffect(ModEffects.DOOR_HEAD).getDuration() <= 0)
+		if (entity.isPotionActive(ModEffects.DOOR_HEAD))
 		{
-			entity.removePotionEffect(ModEffects.DOOR_HEAD);
-			return;
+			if (entity.getActivePotionEffect(ModEffects.DOOR_HEAD).getDuration() <= 0)
+			{
+				entity.removePotionEffect(ModEffects.DOOR_HEAD);
+				return;
+			}
+			
+			entity.renderYawOffset = 0;
+			entity.prevRenderYawOffset = 0;
+		}
+
+		IDevilFruit devilFruitProps = DevilFruitCapability.get(entity);
+		IAbilityData abilityProps = AbilityDataCapability.get(entity);
+		
+		if (devilFruitProps.getDevilFruit().equalsIgnoreCase("doa_doa"))
+		{
+			AirDoorAbility ability = abilityProps.getEquippedAbility(AirDoorAbility.INSTANCE);
+			boolean isActive = ability != null && ability.isContinuous();
+			
+			if(isActive)
+				event.setCanceled(true);
 		}
 		
-		entity.renderYawOffset = 0;
-		entity.prevRenderYawOffset = 0;
 	}
 	
 	@OnlyIn(Dist.CLIENT)

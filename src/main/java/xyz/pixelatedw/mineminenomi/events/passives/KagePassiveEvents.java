@@ -2,6 +2,9 @@ package xyz.pixelatedw.mineminenomi.events.passives;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
@@ -13,6 +16,7 @@ import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.DoppelmanEntity;
+import xyz.pixelatedw.mineminenomi.init.ModEffects;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
@@ -88,5 +92,31 @@ public class KagePassiveEvents
 		
 		ability.setMaxCooldown(60);
 		ability.stopContinuity(owner);
+	}
+	
+	@OnlyIn(Dist.CLIENT)
+	@SubscribeEvent
+	public static void onEntityPreRendered(RenderLivingEvent.Pre event)
+	{
+		LivingEntity entity = event.getEntity();
+
+		if (!entity.isPotionActive(ModEffects.BLACK_BOX))
+			return;
+
+		entity.renderYawOffset = 0;
+		entity.prevRenderYawOffset = 0;
+	}
+
+	@OnlyIn(Dist.CLIENT)
+	@SubscribeEvent
+	public static void onEntityPostRendered(RenderLivingEvent.Post event)
+	{
+		LivingEntity entity = event.getEntity();
+
+		if (!entity.isPotionActive(ModEffects.BLACK_BOX))
+			return;
+
+		entity.renderYawOffset = 0;
+		entity.prevRenderYawOffset = 0;
 	}
 }
