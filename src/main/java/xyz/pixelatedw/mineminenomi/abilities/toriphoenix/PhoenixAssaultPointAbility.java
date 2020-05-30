@@ -1,5 +1,7 @@
 package xyz.pixelatedw.mineminenomi.abilities.toriphoenix;
 
+import java.util.UUID;
+
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -8,8 +10,6 @@ import xyz.pixelatedw.mineminenomi.api.abilities.ZoanAbility;
 import xyz.pixelatedw.mineminenomi.entities.zoan.PhoenixAssaultZoanInfo;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
-
-import java.util.UUID;
 
 public class PhoenixAssaultPointAbility extends ZoanAbility
 {
@@ -24,14 +24,16 @@ public class PhoenixAssaultPointAbility extends ZoanAbility
 		this.onStartContinuityEvent = this::onStartContinuityEvent;
 		this.duringContinuityEvent = this::duringContinuityEvent;
 		this.onEndContinuityEvent = this::onEndContinuityEvent;
+		
+		this.addZoanModifier(ModAttributes.REGEN_RATE, REGEN_RATE_MODIFIER);
 	}
 
+	@Override
 	protected boolean onStartContinuityEvent(PlayerEntity player)
 	{
 		if(player.isCreative() || player.isSpectator())
 			return super.onStartContinuityEvent(player);
 
-		player.getAttribute(ModAttributes.REGEN_RATE).applyModifier(REGEN_RATE_MODIFIER);
 		player.abilities.allowFlying = true;	
 		((ServerPlayerEntity)player).connection.sendPacket(new SPlayerAbilitiesPacket(player.abilities));
 
@@ -43,12 +45,12 @@ public class PhoenixAssaultPointAbility extends ZoanAbility
 		player.fallDistance = 0;
 	}
 	
+	@Override
 	protected boolean onEndContinuityEvent(PlayerEntity player)
 	{
 		if(player.isCreative() || player.isSpectator())
 			return super.onEndContinuityEvent(player);
 
-		player.getAttribute(ModAttributes.REGEN_RATE).removeModifier(REGEN_RATE_MODIFIER);
 		player.abilities.allowFlying = false;	
 		player.abilities.isFlying = false;
 		((ServerPlayerEntity)player).connection.sendPacket(new SPlayerAbilitiesPacket(player.abilities));

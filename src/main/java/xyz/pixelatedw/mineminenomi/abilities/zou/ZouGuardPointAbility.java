@@ -4,7 +4,6 @@ import java.util.UUID;
 
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.player.PlayerEntity;
 import xyz.pixelatedw.mineminenomi.api.abilities.ZoanAbility;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZouGuardZoanInfo;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
@@ -24,28 +23,10 @@ public class ZouGuardPointAbility extends ZoanAbility
 	{
 		super("Zou Guard Point", AbilityCategory.DEVIL_FRUIT, ZouGuardZoanInfo.FORM);
 		this.setDescription("Allows the user to transforms into an elephant, which focuses on defense, Allows the user to use 'Great Stomp', 'Trunk Shot' and 'Ivory Dart'");
+		this.addZoanModifier(SharedMonsterAttributes.MOVEMENT_SPEED, SPEED_MODIFIER);
+		this.addZoanModifier(SharedMonsterAttributes.ARMOR, ARMOR_MODIFIER);
+		this.addZoanModifier(SharedMonsterAttributes.ATTACK_DAMAGE, STRENGTH_MODIFIER);
+		this.addZoanModifier(SharedMonsterAttributes.ATTACK_SPEED, ATTACK_SPEED_MODIFIER);
+		this.addZoanModifier(ModAttributes.JUMP_HEIGHT, JUMP_BOOST);
 	}
-
-	@Override
-	protected boolean onStartContinuityEvent(PlayerEntity player) {
-		player.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).applyModifier(SPEED_MODIFIER);
-		player.getAttribute(SharedMonsterAttributes.ARMOR).applyModifier(ARMOR_MODIFIER);
-		player.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).applyModifier(STRENGTH_MODIFIER);
-		player.getAttribute(SharedMonsterAttributes.ATTACK_SPEED).applyModifier(ATTACK_SPEED_MODIFIER);
-		player.getAttribute(ModAttributes.JUMP_HEIGHT).applyModifier(JUMP_BOOST);
-
-		return super.onStartContinuityEvent(player);
-	}
-
-	@Override
-	protected boolean onEndContinuityEvent(PlayerEntity player) {
-		player.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).removeModifier(SPEED_MODIFIER);
-		player.getAttribute(SharedMonsterAttributes.ARMOR).removeModifier(ARMOR_MODIFIER);
-		player.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).removeModifier(STRENGTH_MODIFIER);
-		player.getAttribute(SharedMonsterAttributes.ATTACK_SPEED).removeModifier(ATTACK_SPEED_MODIFIER);
-		player.getAttribute(ModAttributes.JUMP_HEIGHT).removeModifier(JUMP_BOOST);
-
-		return super.onEndContinuityEvent(player);
-	}
-
 }

@@ -27,6 +27,8 @@ public class PhoenixFlyPointAbility extends ZoanAbility
 		this.onStartContinuityEvent = this::onStartContinuityEvent;
 		this.duringContinuityEvent = this::duringContinuityEvent;
 		this.onEndContinuityEvent = this::onEndContinuityEvent;
+		
+		this.addZoanModifier(ModAttributes.REGEN_RATE, REGEN_RATE_MODIFIER);
 	}
 	
 	@Override
@@ -37,8 +39,6 @@ public class PhoenixFlyPointAbility extends ZoanAbility
 			WyHelper.sendMsgToPlayer(player, new TranslationTextComponent(ModI18n.ABILITY_MESSAGE_ONLY_IN_AIR, this.getName()).getFormattedText());
 			return false;
 		}
-
-		player.getAttribute(ModAttributes.REGEN_RATE).applyModifier(REGEN_RATE_MODIFIER);
 
 		if(player.isCreative() || player.isSpectator())
 			return super.onStartContinuityEvent(player);
@@ -59,7 +59,6 @@ public class PhoenixFlyPointAbility extends ZoanAbility
 		if(player.isCreative() || player.isSpectator())
 			return super.onEndContinuityEvent(player);
 
-		player.getAttribute(ModAttributes.REGEN_RATE).removeModifier(REGEN_RATE_MODIFIER);
 		player.abilities.allowFlying = false;
 		player.abilities.isFlying = false;
 		((ServerPlayerEntity)player).connection.sendPacket(new SPlayerAbilitiesPacket(player.abilities));
