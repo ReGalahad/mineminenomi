@@ -40,7 +40,7 @@ public class HiganProjectile extends AbilityProjectileEntity
 	
 	private void onEntityImpactEvent(LivingEntity hitEntity)
 	{
-		hitEntity.setFire(200);
+		hitEntity.setFire(8);
 	}
 	
 	private void onBlockImpactEvent(BlockPos hit)

@@ -18,6 +18,7 @@ public class GiraffeWalkPointAbility extends ZoanAbility
 	private static final AttributeModifier ARMOR_MODIFIER = new AttributeModifier(UUID.fromString("0847f786-0a5a-4e83-9ea6-f924c259a798"), "Heavy Point Multiplier", 2, AttributeModifier.Operation.ADDITION).setSaved(false);
 	private static final AttributeModifier STRENGTH_MODIFIER = new AttributeModifier(UUID.fromString("4b03a4b4-1eb5-464a-8312-0f9079044462"), "Heavy Point Multiplier", 1, AttributeModifier.Operation.ADDITION).setSaved(false);
 	private static final AttributeModifier ATTACK_SPEED_MODIFIER = new AttributeModifier(UUID.fromString("1d78a133-8a0e-4b8f-8790-1360007d4741"), "Heavy Point Multiplier", 1f, AttributeModifier.Operation.ADDITION).setSaved(false);
+	private static final AttributeModifier STEP_HEIGHT = new AttributeModifier(UUID.fromString("1d68a133-8a0e-4b8f-8790-1360007d4741"), "Heavy Point Multiplier", 1, AttributeModifier.Operation.ADDITION).setSaved(false);
 
 	public GiraffeWalkPointAbility()
 	{
@@ -32,6 +33,7 @@ public class GiraffeWalkPointAbility extends ZoanAbility
 		player.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).applyModifier(STRENGTH_MODIFIER);
 		player.getAttribute(SharedMonsterAttributes.ATTACK_SPEED).applyModifier(ATTACK_SPEED_MODIFIER);
 		player.getAttribute(ModAttributes.JUMP_HEIGHT).applyModifier(JUMP_BOOST);
+		player.getAttribute(ModAttributes.STEP_HEIGHT).applyModifier(STEP_HEIGHT);
 
 		return super.onStartContinuityEvent(player);
 	}
@@ -40,11 +42,11 @@ public class GiraffeWalkPointAbility extends ZoanAbility
 	protected boolean onEndContinuityEvent(PlayerEntity player) {
 		player.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).removeModifier(SPEED_MODIFIER);
 		player.getAttribute(SharedMonsterAttributes.FLYING_SPEED).removeModifier(SPEED_MODIFIER);
-
 		player.getAttribute(SharedMonsterAttributes.ARMOR).removeModifier(ARMOR_MODIFIER);
 		player.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).removeModifier(STRENGTH_MODIFIER);
 		player.getAttribute(SharedMonsterAttributes.ATTACK_SPEED).removeModifier(ATTACK_SPEED_MODIFIER);
 		player.getAttribute(ModAttributes.JUMP_HEIGHT).removeModifier(JUMP_BOOST);
+		player.getAttribute(ModAttributes.STEP_HEIGHT).removeModifier(STEP_HEIGHT);
 
 		return super.onEndContinuityEvent(player);
 	}
