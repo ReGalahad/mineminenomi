@@ -1,12 +1,9 @@
 package xyz.pixelatedw.mineminenomi.commands;
 
-import java.util.Collection;
-
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.command.arguments.EntityArgument;
@@ -19,12 +16,13 @@ import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.packets.server.SSyncDevilFruitPacket;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.abilities.Ability;
-import xyz.pixelatedw.wypi.abilities.ChargeableAbility;
 import xyz.pixelatedw.wypi.abilities.ContinuousAbility;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 import xyz.pixelatedw.wypi.network.WyNetwork;
 import xyz.pixelatedw.wypi.network.packets.server.SSyncAbilityDataPacket;
+
+import java.util.Collection;
 
 public class RemoveDFCommand
 {
@@ -60,8 +58,6 @@ public class RemoveDFCommand
 				{
 					if(ability instanceof ContinuousAbility)
 						((ContinuousAbility)ability).stopContinuity(player);
-					else if(ability instanceof ChargeableAbility)
-						((ChargeableAbility)ability).stopCharging(player);
 					else
 						ability.stopCooldown(player);
 				}
