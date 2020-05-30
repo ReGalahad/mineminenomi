@@ -40,7 +40,7 @@ public class HidarumaProjectile extends AbilityProjectileEntity
 
 	private void onEntityImpactEvent(LivingEntity hitEntity)
 	{
-		hitEntity.setFire(200);
+		hitEntity.setFire(15);
 	}
 	
 	private void onBlockImpactEvent(BlockPos hit)

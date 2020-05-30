@@ -63,6 +63,8 @@ public class GomuPassiveEvents
 					ItemStack mainhandGear = ((LivingEntity) trueSource).getItemStackFromSlot(EquipmentSlotType.MAINHAND);
 					if(getGomuDamagingItems(mainhandGear.getItem()) && !ItemsHelper.isKairosekiWeapon(mainhandGear))
 						reduction = 0.8f;
+					if(DevilFruitCapability.get((LivingEntity) trueSource).getDevilFruit().equals("goro_goro"))
+						reduction = 1.0f;
 				}
 			}
 			if(instantSource != null) {

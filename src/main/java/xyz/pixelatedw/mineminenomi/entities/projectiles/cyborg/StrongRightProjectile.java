@@ -25,7 +25,8 @@ public class StrongRightProjectile extends AbilityProjectileEntity
 	public StrongRightProjectile(World world, LivingEntity player)
 	{
 		super(CyborgProjectiles.STRONG_RIGHT, world, player);
-		
+
+		this.setPhysical();
 		this.setDamage(20);
 		this.setMaxLife(7);
 	}

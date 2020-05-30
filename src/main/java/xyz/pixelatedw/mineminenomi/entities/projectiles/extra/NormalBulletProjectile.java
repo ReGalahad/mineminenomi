@@ -23,8 +23,5 @@ public class NormalBulletProjectile extends AbilityProjectileEntity {
 		super(ExtraProjectiles.NORMAL_BULLET, world, player);
 		this.setPhysical();
 		this.setDamage(6);
-//		this.setPassThroughEntities();
-//		this.setMaxLife(200);
-//		this.setHurtTime(30);
 	}
 }

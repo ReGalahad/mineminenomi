@@ -37,7 +37,8 @@ public class KemuriBoshiProjectile extends AbilityProjectileEntity
 		super(SniperProjectiles.KEMURI_BOSHI, world, player);
 
 		this.setDamage(3);
-		
+		this.setPhysical();
+
 		this.onBlockImpactEvent = this::onBlockImpactEvent;
 	}
 
