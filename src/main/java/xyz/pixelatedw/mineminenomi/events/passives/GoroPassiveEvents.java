@@ -1,13 +1,8 @@
 package xyz.pixelatedw.mineminenomi.events.passives;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
-import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
@@ -40,13 +35,13 @@ public class GoroPassiveEvents {
         if (!devilFruitProps.getDevilFruit().equals("goro_goro"))
             return;
 
-        World world = entity.world;
-        if (!world.isRemote) {
+        if (!entity.world.isRemote) {
             if (entity.getHealth() - event.getAmount() <= 0) {
                 event.setCanceled(true);
-                world.playSound(null, entity.getPosition(), SoundEvents.ENTITY_LIGHTNING_BOLT_IMPACT, SoundCategory.PLAYERS, 1, 1);
+                entity.hurtTime = 40;
                 entity.setHealth(entity.getMaxHealth() / 20);
             }
         }
     }*/
+    
 }

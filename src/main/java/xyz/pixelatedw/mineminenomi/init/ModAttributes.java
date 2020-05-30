@@ -4,12 +4,11 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.ai.attributes.RangedAttribute;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHealEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.wypi.APIConfig;
@@ -19,15 +18,22 @@ public class ModAttributes {
     public static final IAttribute FALL_RESISTANCE = (new RangedAttribute(null, APIConfig.PROJECT_ID + ".fallResistance", 0D, -256D, 256D)).setDescription("Fall Resistance");
     public static final IAttribute JUMP_HEIGHT = (new RangedAttribute(null, APIConfig.PROJECT_ID + ".jumpHeight", 1D, -256D, 256D)).setDescription("Jump Height").setShouldWatch(true);
     public static final IAttribute REGEN_RATE = (new RangedAttribute(null, APIConfig.PROJECT_ID + ".regenRate", 1D, 0D, 32D)).setDescription("Regen Rate").setShouldWatch(true);
-    public static final IAttribute STEP_HEIGHT = (new RangedAttribute(null, APIConfig.PROJECT_ID + ".stepHeight", 1D, 0D, 32D)).setDescription("Step Height").setShouldWatch(true);
-
+    public static final IAttribute STEP_HEIGHT = (new RangedAttribute(null, APIConfig.PROJECT_ID + ".stepHeight", 0.4D, 0D, 20D)).setDescription("Step Height").setShouldWatch(true);
     @SubscribeEvent
     public static void onEntityConstruct(EntityEvent.EntityConstructing e) {
         if (e.getEntity() instanceof LivingEntity) {
             ((LivingEntity) e.getEntity()).getAttributes().registerAttribute(FALL_RESISTANCE);
             ((LivingEntity) e.getEntity()).getAttributes().registerAttribute(JUMP_HEIGHT);
             ((LivingEntity) e.getEntity()).getAttributes().registerAttribute(REGEN_RATE);
+            ((LivingEntity) e.getEntity()).getAttributes().registerAttribute(STEP_HEIGHT);
         }
+    }
+
+    @SubscribeEvent
+    public static void onTick(TickEvent.PlayerTickEvent e) {
+        if (!e.player.world.isRemote) return;
+        IAttributeInstance attributeInstance = e.player.getAttribute(STEP_HEIGHT);
+        e.player.stepHeight = (float) attributeInstance.getValue();
     }
 
     @SubscribeEvent
