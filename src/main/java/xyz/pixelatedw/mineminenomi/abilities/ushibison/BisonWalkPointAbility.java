@@ -18,7 +18,7 @@ public class BisonWalkPointAbility extends ZoanAbility
 	private static final AttributeModifier STRENGTH_MODIFIER = new AttributeModifier(UUID.fromString("4b03a4b4-1eb5-464a-8312-0f9079044462"), "Walk Point Multiplier", 3, AttributeModifier.Operation.ADDITION).setSaved(false);
 	private static final AttributeModifier ATTACK_SPEED_MODIFIER = new AttributeModifier(UUID.fromString("1d78a133-8a0e-4b8f-8790-1360007d4741"), "Walk Point Multiplier", -1f, AttributeModifier.Operation.ADDITION).setSaved(false);
 	private static final AttributeModifier JUMP_BOOST = new AttributeModifier(UUID.fromString("72ee5c43-a900-4545-883c-709d84ef1f9c"), "Walk Point Multiplier", 1, AttributeModifier.Operation.ADDITION).setSaved(false);
-	private static final AttributeModifier STEP_HEIGHT = new AttributeModifier(UUID.fromString("1d68a133-8a0e-4b8f-8790-1360007d4741"), "Heavy Point Multiplier", 1, AttributeModifier.Operation.ADDITION).setSaved(false);
+	private static final AttributeModifier STEP_HEIGHT = new AttributeModifier(UUID.fromString("1d68a133-8a0e-4b8f-8790-1360007d4741"), "Walk Point Multiplier", 1, AttributeModifier.Operation.ADDITION).setSaved(false);
 
 	public BisonWalkPointAbility()
 	{

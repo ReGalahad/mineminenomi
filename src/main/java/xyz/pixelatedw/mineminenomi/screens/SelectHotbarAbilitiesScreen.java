@@ -20,6 +20,7 @@ import xyz.pixelatedw.mineminenomi.api.helpers.RendererHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
+import xyz.pixelatedw.mineminenomi.packets.client.CStopAbilityPacket;
 import xyz.pixelatedw.mineminenomi.screens.extra.AbilitiesListScreenPanel;
 import xyz.pixelatedw.mineminenomi.screens.extra.NoTextureButton;
 import xyz.pixelatedw.wypi.APIConfig;
@@ -30,7 +31,6 @@ import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 import xyz.pixelatedw.wypi.network.WyNetwork;
 import xyz.pixelatedw.wypi.network.packets.client.CSyncAbilityDataPacket;
-import xyz.pixelatedw.wypi.network.packets.server.SSyncAbilityDataPacket;
 
 @OnlyIn(Dist.CLIENT)
 public class SelectHotbarAbilitiesScreen extends Screen
@@ -186,8 +186,8 @@ public class SelectHotbarAbilitiesScreen extends Screen
 					this.slotSelected = id;
 				else
 				{
+					WyNetwork.sendToServer(new CStopAbilityPacket(this.slotSelected));
 					this.abilityDataProps.setEquippedAbility(this.slotSelected, null);
-					WyNetwork.sendToServer(new SSyncAbilityDataPacket(this.player.getEntityId(), this.abilityDataProps));
 				}
 			}));
 		}
@@ -231,17 +231,6 @@ public class SelectHotbarAbilitiesScreen extends Screen
 			this.children.add(this.hakiAbilitiesList);
 			this.setFocused(this.hakiAbilitiesList);
 		}
-	}
-
-	@Override
-	public boolean mouseClicked(double mouseX, double mouseY, int mouseButton)
-	{
-		if (mouseButton == 1 && this.slotSelected > -1 && this.abilityDataProps.getEquippedAbility(this.slotSelected) != null)
-		{
-			this.abilityDataProps.setEquippedAbility(this.slotSelected, null);
-			WyNetwork.sendToServer(new CSyncAbilityDataPacket(this.abilityDataProps));
-		}
-		return super.mouseClicked(mouseX, mouseY, mouseButton);
 	}
 
 	@Override
