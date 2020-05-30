@@ -13,7 +13,6 @@ import xyz.pixelatedw.mineminenomi.blocks.CustomSpawnerBlock;
 import xyz.pixelatedw.mineminenomi.blocks.DarknessBlock;
 import xyz.pixelatedw.mineminenomi.blocks.DemonPoisonBlock;
 import xyz.pixelatedw.mineminenomi.blocks.DenDenMushiBlock;
-import xyz.pixelatedw.mineminenomi.blocks.KageBlock;
 import xyz.pixelatedw.mineminenomi.blocks.KairosekiOreBlock;
 import xyz.pixelatedw.mineminenomi.blocks.OpeBlock;
 import xyz.pixelatedw.mineminenomi.blocks.OpeMidBlock;
@@ -57,7 +56,6 @@ public class ModBlocks
 	// Devil Fruit created blocks
 	public static final Block OPE = new OpeBlock();
 	public static final Block OPE_MID = new OpeMidBlock();
-	public static final Block KAGE = new KageBlock();
 	public static final Block SUNA_SAND = new SunaSandBlock();
 	public static final Block WAX = new Block(Properties.create(Material.CLAY).hardnessAndResistance(2));
 	public static final Block POISON = new PoisonBlock();
@@ -100,7 +98,6 @@ public class ModBlocks
 		WyRegistry.registerBlock(KAIROSEKI_ORE, "Kairoseki Ore");
 		WyRegistry.registerBlock(SKY_BLOCK, "Sky Block");
 		WyRegistry.registerBlock(KAIROSEKI_BARS, "Kairoseki Bars", new JSONModelBars("Kairoseki Bars"));
-		WyRegistry.registerBlock(KAGE, "Kage Block");
 		WyRegistry.registerBlock(SUNA_SAND, "Suna Sand");
 		WyRegistry.registerBlock(WAX, "Wax Block");
 		WyRegistry.registerBlock(POISON, "Poison", new JSONModelThinBlock("Poison"));
@@ -131,7 +128,6 @@ public class ModBlocks
 		registerItemBlock(KAIROSEKI_ORE, "Kairoseki Ore", true);
 		registerItemBlock(SKY_BLOCK, "Sky Block", true);
 		registerItemBlock(KAIROSEKI_BARS, "Kairoseki Bars", true, new JSONModelSimpleItem("Kairoseki Bars"));
-		registerItemBlock(KAGE, "Kage Block", false);
 		registerItemBlock(SUNA_SAND, "Suna Sand", false);
 		registerItemBlock(WAX, "Wax Block", false);
 		registerItemBlock(POISON, "Poison", false);

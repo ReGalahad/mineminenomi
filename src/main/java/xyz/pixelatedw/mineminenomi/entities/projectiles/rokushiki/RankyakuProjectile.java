@@ -39,7 +39,7 @@ public class RankyakuProjectile extends AbilityProjectileEntity
 	
 	private void onBlockImpactEvent(BlockPos hit)
 	{
-		ExplosionAbility explosion = AbilityHelper.newExplosion(this.getThrower(), hit.getX(), hit.getY(), hit.getZ(), 3);
+		ExplosionAbility explosion = AbilityHelper.newExplosion(this.getThrower(), hit.getX(), hit.getY(), hit.getZ(), 2);
 		explosion.setExplosionSound(true);
 		explosion.setDamageOwner(false);
 		explosion.setDestroyBlocks(true);

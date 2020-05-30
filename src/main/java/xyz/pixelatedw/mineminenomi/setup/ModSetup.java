@@ -40,7 +40,7 @@ public class ModSetup
 		LootFunctionManager.registerFunction(new SetPriceFunction.Serializer());
 		LootFunctionManager.registerFunction(new SetInfiniteStockFunction.Serializer());
 		
-		ArgumentTypes.register("ability", AbilityArgument.class, new ArgumentSerializer<>(AbilityArgument::instance));
+		ArgumentTypes.register("ability", AbilityArgument.class, new ArgumentSerializer<>(AbilityArgument::ability));
 	}
 	
 	@OnlyIn(Dist.CLIENT)

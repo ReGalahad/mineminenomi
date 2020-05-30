@@ -75,13 +75,6 @@ public class PoisonBlock extends Block
 		return adjacentBlockState.getBlock() == this ? true : false;
 	}
 
-	/*
-	 * public BlockFaceUV getBlockFaceShape(IBlockReader worldIn, BlockState state, BlockPos pos, Direction face)
-	 * {
-	 * return face == Direction.DOWN ? BlockFaceUV.SOLID : BlockFaceUV.UNDEFINED;
-	 * }
-	 */
-
 	@Override
 	public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity)
 	{

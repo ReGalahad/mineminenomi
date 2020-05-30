@@ -24,7 +24,7 @@ public class AbilityArgument implements ArgumentType<Ability>
 		return ability;
 	}
 
-	public static AbilityArgument instance()
+	public static AbilityArgument ability()
 	{
 		return new AbilityArgument();
 	}

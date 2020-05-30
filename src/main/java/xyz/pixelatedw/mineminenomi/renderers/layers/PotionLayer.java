@@ -16,6 +16,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Effect;
 import xyz.pixelatedw.mineminenomi.api.IHasOverlay;
+import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.mineminenomi.init.ModEffects;
 
 @SuppressWarnings("deprecation")
@@ -50,6 +51,33 @@ public class PotionLayer extends LayerRenderer {
                         GlStateManager.pushMatrix();
                         GlStateManager.translatef(x, y, z);
                         Minecraft.getInstance().getItemRenderer().renderItem(new ItemStack(Blocks.PACKED_ICE), ItemCameraTransforms.TransformType.HEAD);
+                        GlStateManager.popMatrix();
+                    }
+                }
+            }
+            GlStateManager.enableCull();
+            GlStateManager.enableLighting();
+            GlStateManager.popMatrix();
+        }
+        
+        if(((LivingEntity) entity).isPotionActive(ModEffects.BLACK_BOX)) {
+            if (((LivingEntity) entity).getActivePotionEffect(ModEffects.BLACK_BOX).getDuration() <= 0)
+                ((LivingEntity) entity).removePotionEffect(ModEffects.BLACK_BOX);
+
+            GlStateManager.pushMatrix();
+            GlStateManager.disableLighting();
+            GlStateManager.disableCull();
+            GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+            float blocksWidth = (float) (Math.ceil(entity.getWidth()) + 1);
+            float blocksHeight = (float) (Math.ceil(entity.getHeight()) + 1);
+            GlStateManager.translatef(0.45F - blocksWidth / 2F, 1.3F - entity.getHeight() / 2F - blocksHeight / 2F, 0.45F - blocksWidth / 2F);
+
+            for (int x = 0; x < blocksWidth; x++) {
+                for (int y = 0; y < blocksHeight; y++) {
+                    for (int z = 0; z < blocksWidth; z++) {
+                        GlStateManager.pushMatrix();
+                        GlStateManager.translatef(x, y, z);
+                        Minecraft.getInstance().getItemRenderer().renderItem(new ItemStack(ModBlocks.DARKNESS), ItemCameraTransforms.TransformType.HEAD);
                         GlStateManager.popMatrix();
                     }
                 }
