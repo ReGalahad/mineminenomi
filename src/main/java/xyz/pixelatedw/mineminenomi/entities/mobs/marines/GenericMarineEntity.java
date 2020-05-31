@@ -21,7 +21,6 @@ import xyz.pixelatedw.mineminenomi.init.ModWeapons;
 
 public class GenericMarineEntity extends GenericNewEntity
 {
-
 	protected Item[] marineSwords = new Item[] {ModWeapons.MARINE_SWORD, Items.IRON_SWORD};
 	
 	protected GenericMarineEntity(EntityType<? extends MobEntity> type, World worldIn, String[] textures)

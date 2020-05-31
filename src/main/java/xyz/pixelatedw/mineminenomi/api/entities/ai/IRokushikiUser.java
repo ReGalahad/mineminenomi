@@ -1,9 +1,13 @@
-package xyz.pixelatedw.mineminenomi.entities.mobs.ai.abilities.rokushiki;
+package xyz.pixelatedw.mineminenomi.api.entities.ai;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import xyz.pixelatedw.mineminenomi.entities.mobs.GenericNewEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.ai.abilities.rokushiki.GeppoGoal;
+import xyz.pixelatedw.mineminenomi.entities.mobs.ai.abilities.rokushiki.RankyakuGoal;
+import xyz.pixelatedw.mineminenomi.entities.mobs.ai.abilities.rokushiki.SoruGoal;
+import xyz.pixelatedw.mineminenomi.entities.mobs.ai.abilities.rokushiki.TekkaiGoal;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.debug.WyDebug;
 

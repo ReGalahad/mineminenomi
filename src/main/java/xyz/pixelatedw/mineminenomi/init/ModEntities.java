@@ -19,6 +19,7 @@ import xyz.pixelatedw.mineminenomi.entities.PhysicalBodyEntity;
 import xyz.pixelatedw.mineminenomi.entities.VivreCardEntity;
 import xyz.pixelatedw.mineminenomi.entities.WantedPosterPackageEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.animals.DenDenMushiEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.animals.LapahnEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.bandits.BanditWithSwordEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.marines.MarineCaptainEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.marines.MarineTraderEntity;
@@ -69,6 +70,7 @@ public class ModEntities
 
 	// Animals
 	public static final EntityType DEN_DEN_MUSHI = WyRegistry.createEntityType(DenDenMushiEntity::new).size(0.8F, 0.8F).build("den_den_mushi");
+	public static final EntityType LAPAHN = WyRegistry.createEntityType(LapahnEntity::new, EntityClassification.CREATURE).size(0.8F, 2.5F).build("lapahn");
 
 	// Other
 	public static final EntityType DOPPELMAN = WyRegistry.createEntityType(DoppelmanEntity::new).build("doppelman");
@@ -116,6 +118,8 @@ public class ModEntities
 		// Animals
 		registerAnimalWithSpawnEgg(DEN_DEN_MUSHI, "Den Den Mushi");
 		registerEntityWorldSpawn(DEN_DEN_MUSHI, 12, 2, 5, GENERIC_ONES);
+		registerAnimalWithSpawnEgg(LAPAHN, "Lapahn");
+		registerEntityWorldSpawn(LAPAHN, 20, 1, 3, Biome.Category.ICY);
 
 		// Other
 		WyRegistry.registerEntityType(DOPPELMAN, "Doppelman");

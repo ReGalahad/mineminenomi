@@ -18,7 +18,6 @@ import net.minecraft.world.World;
 
 public class GenericNewEntity extends CreatureEntity implements IDynamicRenderer
 {
-
 	protected String[] textures;
 	private static final DataParameter<Integer> TEXTURE_ID = EntityDataManager.createKey(GenericNewEntity.class, DataSerializers.VARINT);
 	private int doriki, belly;
