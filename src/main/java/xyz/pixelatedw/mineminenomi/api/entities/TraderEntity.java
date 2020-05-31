@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.command.arguments.EntityAnchorArgument.Type;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -17,6 +18,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.DifficultyInstance;
@@ -30,19 +32,25 @@ import net.minecraftforge.common.util.Constants;
 import xyz.pixelatedw.mineminenomi.api.TradeEntry;
 import xyz.pixelatedw.mineminenomi.entities.mobs.GenericNewEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.ai.TradeGoal;
+import xyz.pixelatedw.mineminenomi.init.ModEffects;
 import xyz.pixelatedw.mineminenomi.packets.server.SOpenTraderScreenPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SUpdateTraderOffersPacket;
+import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.network.WyNetwork;
 
-public abstract class TraderEntity extends GenericNewEntity {
+public abstract class TraderEntity extends GenericNewEntity
+{
 	private List<TradeEntry> tradeEntries = new ArrayList<TradeEntry>();
-
-	public TraderEntity(EntityType type, World world) {
+	private boolean isTrading = false;
+	
+	public TraderEntity(EntityType type, World world)
+	{
 		super(type, world, null);
 	}
 
 	@Override
-	protected void registerGoals() {
+	protected void registerGoals()
+	{
 		super.registerGoals();
 		this.goalSelector.addGoal(1, new SwimGoal(this));
 		this.goalSelector.addGoal(3, new WaterAvoidingRandomWalkingGoal(this, 0.8D));
@@ -52,7 +60,8 @@ public abstract class TraderEntity extends GenericNewEntity {
 	}
 
 	@Override
-	protected void registerAttributes() {
+	protected void registerAttributes()
+	{
 		super.registerAttributes();
 		this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(25.0D);
 		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.20F);
@@ -62,7 +71,8 @@ public abstract class TraderEntity extends GenericNewEntity {
 	}
 
 	@Override
-	protected void registerData() {
+	protected void registerData()
+	{
 		super.registerData();
 	}
 
@@ -73,11 +83,26 @@ public abstract class TraderEntity extends GenericNewEntity {
 	public abstract ResourceLocation getTradeTable();
 
 	@Override
-	public void writeAdditional(CompoundNBT nbt) {
+	public void tick()
+	{
+		super.tick();
+		
+		List<PlayerEntity> customers = WyHelper.getEntitiesNear(this.getPosition(), this.world, 3, PlayerEntity.class);
+		if(customers.size() > 0)
+		{
+			this.lookAt(Type.EYES, customers.get(0).getEyePosition(0));
+			this.addPotionEffect(new EffectInstance(ModEffects.MOVEMENT_BLOCKED, 40, 0, false, false));
+		}
+	}
+	
+	@Override
+	public void writeAdditional(CompoundNBT nbt)
+	{
 		super.writeAdditional(nbt);
 
 		ListNBT items = new ListNBT();
-		for (TradeEntry stack : this.tradeEntries) {
+		for (TradeEntry stack : this.tradeEntries)
+		{
 			CompoundNBT nbtTrade = new CompoundNBT();
 			nbtTrade = stack.getItemStack().write(nbtTrade);
 			items.add(nbtTrade);
@@ -86,21 +111,25 @@ public abstract class TraderEntity extends GenericNewEntity {
 	}
 
 	@Override
-	public void readAdditional(CompoundNBT nbt) {
+	public void readAdditional(CompoundNBT nbt)
+	{
 		super.readAdditional(nbt);
 
 		ListNBT tradeList = nbt.getList("Items", Constants.NBT.TAG_COMPOUND);
-		for (int i = 0; i < tradeList.size(); i++) {
+		for (int i = 0; i < tradeList.size(); i++)
+		{
 			CompoundNBT nbtTrade = tradeList.getCompound(i);
 			ItemStack stack = ItemStack.read(nbtTrade);
 			this.tradeEntries.add(new TradeEntry(stack));
 		}
 	}
 
-	public void setStacksFromNBT(CompoundNBT nbt) {
+	public void setStacksFromNBT(CompoundNBT nbt)
+	{
 
 		ListNBT tradeList = nbt.getList("Items", Constants.NBT.TAG_COMPOUND);
-		for (int i = 0; i < tradeList.size(); i++) {
+		for (int i = 0; i < tradeList.size(); i++)
+		{
 			CompoundNBT nbtTrade = tradeList.getCompound(i);
 			ItemStack stack = ItemStack.read(nbtTrade);
 			this.tradeEntries.add(new TradeEntry(stack));
@@ -109,36 +138,45 @@ public abstract class TraderEntity extends GenericNewEntity {
 
 	@Override
 	@Nullable
-	public ILivingEntityData onInitialSpawn(IWorld world, DifficultyInstance difficulty, SpawnReason reason,
-			@Nullable ILivingEntityData spawnData, @Nullable CompoundNBT dataTag) {
+	public ILivingEntityData onInitialSpawn(IWorld world, DifficultyInstance difficulty, SpawnReason reason, @Nullable ILivingEntityData spawnData, @Nullable CompoundNBT dataTag)
+	{
 		spawnData = super.onInitialSpawn(world, difficulty, reason, spawnData, dataTag);
 
 		// Generates the trade entries from a loot table json file
-		LootTable lootTable = this.world.getServer().getLootTableManager()
-				.getLootTableFromLocation(this.getTradeTable());
+		LootTable lootTable = this.world.getServer().getLootTableManager().getLootTableFromLocation(this.getTradeTable());
 		LootContext.Builder builder = (new LootContext.Builder((ServerWorld) this.world));
 
 		LootContext context = builder.build(LootParameterSets.EMPTY);
 		List<ItemStack> stacks = lootTable.generate(context);
 
-		for (ItemStack stack : stacks) {
+		for (ItemStack stack : stacks)
+		{
 			this.tradeEntries.add(new TradeEntry(stack));
 		}
 
 		return spawnData;
 	}
 
-	public List<TradeEntry> getTradingItems() {
+	public List<TradeEntry> getTradingItems()
+	{
 		return this.tradeEntries;
 	}
 
-	public void setTradingItems(List<TradeEntry> entries) {
+	public void setIsTrading(boolean flag)
+	{
+		this.isTrading = flag;
+	}
+	
+	public void setTradingItems(List<TradeEntry> entries)
+	{
 		this.tradeEntries = entries;
 	}
 
 	@Override
-	protected boolean processInteract(PlayerEntity player, Hand hand) {
-		if (!player.world.isRemote) {
+	protected boolean processInteract(PlayerEntity player, Hand hand)
+	{
+		if (!player.world.isRemote)
+		{
 			WyNetwork.sendTo(new SOpenTraderScreenPacket(this.getEntityId()), player);
 			WyNetwork.sendTo(new SUpdateTraderOffersPacket(this.getEntityId(), this.tradeEntries), player);
 			return true;
