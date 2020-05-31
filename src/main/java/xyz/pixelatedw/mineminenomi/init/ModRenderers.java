@@ -108,7 +108,7 @@ public class ModRenderers
 		RenderingRegistry.registerEntityRenderingHandler(BowMasterEntity.class, new GenericMobRenderer.Factory(new SimpleHumanModel(), 1, null));
 
 		// Animals
-		RenderingRegistry.registerEntityRenderingHandler(DenDenMushiEntity.class, new GenericMobRenderer.Factory(new DenDenMushiModel(), 1, "dendenmushi"));
+		RenderingRegistry.registerEntityRenderingHandler(DenDenMushiEntity.class, new GenericMobRenderer.Factory(new DenDenMushiModel(), 1, null));
 	
 		// Others
 		RenderingRegistry.registerEntityRenderingHandler(DoppelmanEntity.class, new DoppelmanRenderer.Factory());
