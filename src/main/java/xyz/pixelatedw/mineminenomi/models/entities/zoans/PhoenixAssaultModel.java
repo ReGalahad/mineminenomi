@@ -1,5 +1,7 @@
 package xyz.pixelatedw.mineminenomi.models.entities.zoans;
 
+import com.mojang.blaze3d.platform.GlStateManager;
+
 import net.minecraft.client.renderer.entity.model.RendererModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.MathHelper;
@@ -77,12 +79,16 @@ public class PhoenixAssaultModel<T extends LivingEntity> extends ZoanMorphModel<
 	{
 		this.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
+		GlStateManager.enableCull();
+
 		this.leftleg.render(scale);
 		this.body.render(scale);
 		this.rightarm.render(scale);
 		this.leftarm.render(scale);
 		this.rightleg.render(scale);
 		this.head.render(scale);
+		
+		GlStateManager.disableCull();
 	}
 
 	@Override

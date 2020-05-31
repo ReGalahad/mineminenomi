@@ -81,13 +81,12 @@ public class SniperPassiveEvents
 		PlayerEntity player = (PlayerEntity) event.getEntityLiving();
 		IAbilityData aprops = AbilityDataCapability.get(player);
 		
-		if(!player.inventory.hasAny(ImmutableSet.of(ModArmors.SNIPER_GOGGLES)))
+		if(player.inventory.armorInventory.get(3).getItem() != ModArmors.SNIPER_GOGGLES)
 		{
 			if(aprops.hasUnlockedAbility(ZoomAbility.INSTANCE))
 			{
 				aprops.getUnlockedAbility(ZoomAbility.INSTANCE).stopContinuity(player);
 				aprops.removeUnlockedAbility(ZoomAbility.INSTANCE);
-				aprops.removeEquippedAbility(ZoomAbility.INSTANCE);
 				WyNetwork.sendToServer(new CSyncAbilityDataPacket(aprops));
 			}
 			return;
