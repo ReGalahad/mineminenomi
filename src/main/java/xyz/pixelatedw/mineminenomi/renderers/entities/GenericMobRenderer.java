@@ -65,7 +65,7 @@ public class GenericMobRenderer<T extends MobEntity, M extends BipedModel<T>> ex
 	protected ResourceLocation getEntityTexture(T entity)
 	{
 		if ((this.texture == null && entity instanceof IDynamicRenderer) || this.texture.equals(new ResourceLocation(APIConfig.PROJECT_ID + ":textures/models/null.png")))
-			return new ResourceLocation(APIConfig.PROJECT_ID + ":textures/models/" + ((IDynamicRenderer) entity).getMobTexture() + ".png");
+			return new ResourceLocation(APIConfig.PROJECT_ID, "textures/models/" + ((IDynamicRenderer) entity).getMobTexture() + ".png");
 		else
 			return this.texture;
 	}

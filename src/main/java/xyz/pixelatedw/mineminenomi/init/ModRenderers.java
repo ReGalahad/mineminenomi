@@ -25,6 +25,7 @@ import xyz.pixelatedw.mineminenomi.entities.PhysicalBodyEntity;
 import xyz.pixelatedw.mineminenomi.entities.VivreCardEntity;
 import xyz.pixelatedw.mineminenomi.entities.WantedPosterPackageEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.animals.DenDenMushiEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.animals.KungFuDugongEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.animals.LapahnEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.bandits.BanditWithSwordEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.marines.MarineCaptainEntity;
@@ -50,6 +51,7 @@ import xyz.pixelatedw.mineminenomi.models.blocks.Dial03Model;
 import xyz.pixelatedw.mineminenomi.models.blocks.Dial04Model;
 import xyz.pixelatedw.mineminenomi.models.entities.mobs.SniperTargetModel;
 import xyz.pixelatedw.mineminenomi.models.entities.mobs.animals.DenDenMushiModel;
+import xyz.pixelatedw.mineminenomi.models.entities.mobs.animals.KungFuDugongModel;
 import xyz.pixelatedw.mineminenomi.models.entities.mobs.animals.LapahnModel;
 import xyz.pixelatedw.mineminenomi.models.entities.mobs.humanoids.DojoSenseiModel;
 import xyz.pixelatedw.mineminenomi.models.entities.mobs.humanoids.SimpleHumanModel;
@@ -112,6 +114,7 @@ public class ModRenderers
 		// Animals
 		RenderingRegistry.registerEntityRenderingHandler(DenDenMushiEntity.class, new GenericMobRenderer.Factory(new DenDenMushiModel(), 1, null));
 		RenderingRegistry.registerEntityRenderingHandler(LapahnEntity.class, new GenericMobRenderer.Factory(new LapahnModel(), 1, "lapahn"));
+		RenderingRegistry.registerEntityRenderingHandler(KungFuDugongEntity.class, new GenericMobRenderer.Factory(new KungFuDugongModel(), 1, "kung_fu_dugong"));
 
 		// Others
 		RenderingRegistry.registerEntityRenderingHandler(DoppelmanEntity.class, new DoppelmanRenderer.Factory());
