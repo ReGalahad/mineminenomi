@@ -29,7 +29,7 @@ public class AmbushSpawner
 		if (--this.cooldown <= 0)
 		{
 			this.cooldown = CommonConfig.instance.getTimeBetweenAmbushSpawns();
-			if (this.random.nextInt(100) <= 100)
+			if (this.random.nextInt(100) <= CommonConfig.instance.getChanceForAmbushSpawn())
 			{
 				this.spawn(world);
 			}
