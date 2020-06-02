@@ -8,6 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.blocks.AblProtectionBlock;
 import xyz.pixelatedw.mineminenomi.blocks.BarrierBlock;
+import xyz.pixelatedw.mineminenomi.blocks.CannonBlock;
 import xyz.pixelatedw.mineminenomi.blocks.CustomBarsBlock;
 import xyz.pixelatedw.mineminenomi.blocks.CustomSpawnerBlock;
 import xyz.pixelatedw.mineminenomi.blocks.DarknessBlock;
@@ -75,6 +76,7 @@ public class ModBlocks
 	public static final Block WANTED_POSTER_PACKAGE = new WantedPosterPackageBlock();
 	public static final Block CUSTOM_SPAWNER = new CustomSpawnerBlock();
 	public static final Block DEN_DEN_MUSHI = new DenDenMushiBlock();
+	public static final Block CANNON = new CannonBlock();
 
 	// Dials
 	public static final Block AXE_DIAL = new AxeDialBlock();
@@ -120,7 +122,8 @@ public class ModBlocks
 		WyRegistry.registerBlock(MILKY_DIAL, "Milky Dial");
 		WyRegistry.registerBlock(ABILITY_PROTECTION, "Ability Protection");
 		WyRegistry.registerBlock(DEN_DEN_MUSHI, "Den Den Mushi");
-
+		WyRegistry.registerBlock(CANNON, "Cannon");
+		
 		// Item Blocks
 		registerItemBlock(OPE, "Ope", false);
 		registerItemBlock(OPE_MID, "Ope Mid", false);
@@ -140,6 +143,7 @@ public class ModBlocks
 		registerItemBlock(CUSTOM_SPAWNER, "Custom Spawner", false);
 		registerItemBlock(WANTED_POSTER_PACKAGE, "Wanted Poster Package", true, new JSONModelSimpleItem("Wanted Poster Package"));
 		registerItemBlock(DEN_DEN_MUSHI, "Den Den Mushi", true, new JSONModelSimpleItem("Den Den Mushi"));
+		registerItemBlock(CANNON, "Cannon", true, new JSONModelSimpleItem("Cannon"));
 		registerCustomItemBlock(WANTED_POSTER, "Wanted Poster", new WantedPosterItem());
 		registerCustomItemBlock(AXE_DIAL, "Axe Dial", new AxeDialItem());
 		registerCustomItemBlock(BREATH_DIAL, "Breath Dial", new BreathDialItem());
@@ -166,6 +170,7 @@ public class ModBlocks
 		WyRegistry.registerLootTable(EISEN_DIAL, new JSONLootTableSimpleBlock("Eisen Dial"));
 		WyRegistry.registerLootTable(MILKY_DIAL, new JSONLootTableSimpleBlock("Milky Dial"));
 		WyRegistry.registerLootTable(DEN_DEN_MUSHI, new JSONLootTableSimpleBlock("Den Den Mushi"));
+		WyRegistry.registerLootTable(CANNON, new JSONLootTableSimpleBlock("Cannon"));
 	}
 
 	public static Item registerItemBlock(Block block, String localizedName, boolean isInCreative)

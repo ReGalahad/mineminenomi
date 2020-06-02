@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.entity.PlayerRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import xyz.pixelatedw.mineminenomi.blocks.tileentities.CannonTileEntity;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.DenDenMushiTileEntity;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.WantedPosterPackageTileEntity;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.WantedPosterTileEntity;
@@ -57,6 +58,7 @@ import xyz.pixelatedw.mineminenomi.models.entities.mobs.humanoids.DojoSenseiMode
 import xyz.pixelatedw.mineminenomi.models.entities.mobs.humanoids.SimpleHumanModel;
 import xyz.pixelatedw.mineminenomi.renderers.abilities.ChargingUrsusShockRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.abilities.PhysicalBodyRenderer;
+import xyz.pixelatedw.mineminenomi.renderers.blocks.CannonTileEntityRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.blocks.DenDenMushiTileEntityRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.blocks.DialTileEntityRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.blocks.WantedPosterTileEntityRenderer;
@@ -90,6 +92,7 @@ public class ModRenderers
     	ClientRegistry.bindTileEntitySpecialRenderer(WantedPosterPackageTileEntity.class, new WantedPostersPackageTileEntityRenderer());
     	ClientRegistry.bindTileEntitySpecialRenderer(WantedPosterTileEntity.class, new WantedPosterTileEntityRenderer());
     	ClientRegistry.bindTileEntitySpecialRenderer(DenDenMushiTileEntity.class, new DenDenMushiTileEntityRenderer());
+    	ClientRegistry.bindTileEntitySpecialRenderer(CannonTileEntity.class, new CannonTileEntityRenderer());
 
     	// Entities
     	// Marines

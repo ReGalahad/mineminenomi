@@ -3,6 +3,7 @@ package xyz.pixelatedw.mineminenomi.init;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.AblProtectionTileEntity;
+import xyz.pixelatedw.mineminenomi.blocks.tileentities.CannonTileEntity;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.CustomSpawnerTileEntity;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.DenDenMushiTileEntity;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.RoomTileEntity;
@@ -38,7 +39,8 @@ public class ModTileEntities
 	public static final TileEntityType MILKY_DIAL = WyRegistry.createTileEntity(MilkyDialTileEntity::new, ModBlocks.MILKY_DIAL).build(null);
 	public static final TileEntityType ABILITY_PROTECTION = WyRegistry.createTileEntity(AblProtectionTileEntity::new, ModBlocks.ABILITY_PROTECTION).build(null);
 	public static final TileEntityType DEN_DEN_MUSHI = WyRegistry.createTileEntity(DenDenMushiTileEntity::new, ModBlocks.DEN_DEN_MUSHI).build(null);
-	
+	public static final TileEntityType CANNON = WyRegistry.createTileEntity(CannonTileEntity::new, ModBlocks.CANNON).build(null);
+
 	static
 	{
 		WyRegistry.registerTileEntity(ROOM, "room");
@@ -56,5 +58,6 @@ public class ModTileEntities
 		WyRegistry.registerTileEntity(MILKY_DIAL, "milky_dial");
 		WyRegistry.registerTileEntity(ABILITY_PROTECTION, "ability_protection");
 		WyRegistry.registerTileEntity(DEN_DEN_MUSHI, "den_den_mushi");
+		WyRegistry.registerTileEntity(CANNON, "cannon");
 	}
 }

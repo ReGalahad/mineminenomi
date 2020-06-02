@@ -168,7 +168,7 @@ public class AbilityProjectileEntity extends ThrowableEntity
 					if(!this.canPassThroughEntities && entityDamaged)
 						this.remove();
 
-					if(changeHurtTime)
+					if(this.changeHurtTime)
 						hitEntity.hurtResistantTime = hurtTime;
 				}
 			}
