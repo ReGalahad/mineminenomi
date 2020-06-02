@@ -23,7 +23,7 @@ public class BlueFlamesOfResurrectionAbility extends Ability
 	public BlueFlamesOfResurrectionAbility()
 	{
 		super("Blue Flames of Resurrection", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(20);
+		this.setMaxCooldown(30);
 		this.setDescription("Blue phoenix flames grant the user regeneration.");
 
 		this.onUseEvent = this::onUseEvent;
@@ -38,7 +38,7 @@ public class BlueFlamesOfResurrectionAbility extends Ability
 			return false;
 		}
 		
-		player.addPotionEffect(new EffectInstance(Effects.REGENERATION, 600, 2));
+		player.addPotionEffect(new EffectInstance(Effects.REGENERATION, 200, 2));
 		
 		PARTICLES.spawn(player.world, player.posX, player.posY, player.posZ, 0, 0, 0);
 		

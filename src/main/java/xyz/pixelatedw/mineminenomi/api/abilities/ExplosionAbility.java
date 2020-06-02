@@ -1,14 +1,7 @@
 package xyz.pixelatedw.mineminenomi.api.abilities;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
-
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -33,6 +26,8 @@ import net.minecraft.world.storage.loot.LootParameters;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 
+import java.util.*;
+
 public class ExplosionAbility extends Explosion
 {
 
@@ -52,7 +47,7 @@ public class ExplosionAbility extends Explosion
 	private boolean canDestroyBlocks = true;
 	private boolean canDropBlocksAfterExplosion = false;
 	private boolean canDamageEntities = true;
-	private boolean canDamageOwner = true;
+	private boolean canDamageOwner = false;
 	private boolean canProduceExplosionSound = true;
 
 	public ExplosionAbility(Entity entity, double posX, double posY, double posZ, float power)
@@ -170,7 +165,11 @@ public class ExplosionAbility extends Explosion
 		int i1 = MathHelper.floor(this.explosionY + f3 + 1.0D);
 		int j2 = MathHelper.floor(this.explosionZ - f3 - 1.0D);
 		int j1 = MathHelper.floor(this.explosionZ + f3 + 1.0D);
-		List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this.exploder, new AxisAlignedBB(k1, i2, j2, l1, i1, j1));
+		List<Entity> list;
+		if(canDamageOwner)
+			list = this.world.getEntitiesWithinAABB(LivingEntity.class, new AxisAlignedBB(k1, i2, j2, l1, i1, j1));
+		else
+			list = this.world.getEntitiesWithinAABBExcludingEntity(this.exploder, new AxisAlignedBB(k1, i2, j2, l1, i1, j1));
 		net.minecraftforge.event.ForgeEventFactory.onExplosionDetonate(this.world, this, list, f3);
 		Vec3d vec3d = new Vec3d(this.explosionX, this.explosionY, this.explosionZ);
 
