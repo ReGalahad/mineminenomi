@@ -63,6 +63,10 @@ public class CommonConfig
 	private BooleanValue canSpawnTraders;
 	private IntValue timeBetweenTraderSpawns;
 	private IntValue chanceForTraderSpawn;
+	// Trainers
+	private BooleanValue canSpawnTrainers;
+	private IntValue timeBetweenTrainerSpawns;
+	private IntValue chanceForTrainerSpawn;
 	
 	// Permissions
 	
@@ -165,6 +169,10 @@ public class CommonConfig
 		this.timeBetweenTraderSpawns = builder.comment("Determines the time (in seconds) between two spawn attempts; 1800 by default").defineInRange("Time Between Trader Spawns", 1800, 1, 99999);
 		this.chanceForTraderSpawn = builder.comment("Determines the % chance for a trader to spawn; 1 by default").defineInRange("Chance for Trader Spawns", 1, 1, 100);
 		
+		this.canSpawnTrainers = builder.comment("Allows Trainers to spawn in the world; true by default").define("Trainer Spawns", true);
+		this.timeBetweenTrainerSpawns = builder.comment("Determines the time (in seconds) between two spawn attempts; 1800 by default").defineInRange("Time Between Trainer Spawns", 1800, 1, 99999);
+		this.chanceForTrainerSpawn = builder.comment("Determines the % chance for a trainer to spawn; 15 by default").defineInRange("Chance for Trainer Spawns", 15, 1, 100);
+		
 		builder.pop();
 		
 		builder.push("Bounty");
@@ -186,6 +194,21 @@ public class CommonConfig
 		builder.pop();
 	}
 
+	public int getChanceForTrainerSpawn()
+	{
+		return this.chanceForTrainerSpawn.get();
+	}
+	
+	public int getTimeBetweenTrainerSpawns()
+	{
+		return this.timeBetweenTrainerSpawns.get();
+	}
+	
+	public boolean canSpawnTrainers()
+	{
+		return this.canSpawnTrainers.get();
+	}
+	
 	public int getChanceForTraderSpawn()
 	{
 		return this.chanceForTraderSpawn.get();
