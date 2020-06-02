@@ -18,6 +18,7 @@ import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.entities.mobs.quest.givers.IQuestGiver;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.debug.WyDebug;
 
 public class TrainerSpawner
 {
@@ -55,6 +56,7 @@ public class TrainerSpawner
 			if (spawnPos != null && trainers.size() < 2 && canSpawnInBiome)
 			{
 				entityType.spawn(world, (CompoundNBT) null, (ITextComponent) null, (PlayerEntity) null, spawnPos, SpawnReason.EVENT, false, false);
+				WyDebug.debug("Trainer spawned at: " + spawnPos);
 			}
 		}
 	}

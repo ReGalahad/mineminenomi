@@ -16,6 +16,7 @@ import xyz.pixelatedw.mineminenomi.api.entities.TraderEntity;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.debug.WyDebug;
 
 public class TraderSpawner
 {
@@ -53,6 +54,7 @@ public class TraderSpawner
 			if (spawnPos != null && traders.size() < 3 && canSpawnInBiome)
 			{
 				entityType.spawn(world, (CompoundNBT) null, (ITextComponent) null, (PlayerEntity) null, spawnPos, SpawnReason.EVENT, false, false);
+				WyDebug.debug("Trader spawned at: " + spawnPos);
 			}
 		}
 	}

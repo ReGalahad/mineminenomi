@@ -67,6 +67,10 @@ public class CommonConfig
 	private BooleanValue canSpawnTrainers;
 	private IntValue timeBetweenTrainerSpawns;
 	private IntValue chanceForTrainerSpawn;
+	// Ambushes
+	private BooleanValue canSpawnAmbushes;
+	private IntValue timeBetweenAmbushSpawns;
+	private IntValue chanceForAmbushSpawn;
 	
 	// Permissions
 	
@@ -173,6 +177,10 @@ public class CommonConfig
 		this.timeBetweenTrainerSpawns = builder.comment("Determines the time (in seconds) between two spawn attempts; 1800 by default").defineInRange("Time Between Trainer Spawns", 1800, 1, 99999);
 		this.chanceForTrainerSpawn = builder.comment("Determines the % chance for a trainer to spawn; 15 by default").defineInRange("Chance for Trainer Spawns", 15, 1, 100);
 		
+		this.canSpawnAmbushes = builder.comment("Allows Ambushes to spawn in the world; true by default").define("Ambushe Spawns", true);
+		this.timeBetweenAmbushSpawns = builder.comment("Determines the time (in seconds) between two spawn attempts; 3600 by default").defineInRange("Time Between Ambushes Spawns", 3600, 1, 99999);
+		this.chanceForAmbushSpawn = builder.comment("Determines the % chance for a ambush to spawn; 15 by default").defineInRange("Chance for Ambush Spawns", 15, 1, 100);
+		
 		builder.pop();
 		
 		builder.push("Bounty");
@@ -194,6 +202,21 @@ public class CommonConfig
 		builder.pop();
 	}
 
+	public int getChanceForAmbushSpawn()
+	{
+		return this.chanceForAmbushSpawn.get();
+	}
+	
+	public int getTimeBetweenAmbushSpawns()
+	{
+		return this.timeBetweenAmbushSpawns.get();
+	}
+	
+	public boolean canSpawnAmbushes()
+	{
+		return this.canSpawnAmbushes.get();
+	}
+	
 	public int getChanceForTrainerSpawn()
 	{
 		return this.chanceForTrainerSpawn.get();

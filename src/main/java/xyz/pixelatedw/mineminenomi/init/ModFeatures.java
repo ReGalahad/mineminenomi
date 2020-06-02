@@ -1,19 +1,15 @@
 package xyz.pixelatedw.mineminenomi.init;
 
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biome.Category;
-import net.minecraft.world.gen.GenerationStage.Decoration;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraft.world.gen.feature.OreFeatureConfig;
 import net.minecraft.world.gen.feature.structure.IStructurePieceType;
 import net.minecraft.world.gen.feature.structure.Structure;
-import net.minecraft.world.gen.placement.CountRangeConfig;
-import net.minecraft.world.gen.placement.Placement;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
+import xyz.pixelatedw.mineminenomi.world.features.ores.KairosekiOreFeature;
 import xyz.pixelatedw.mineminenomi.world.features.structures.dojo.DojoPieces;
 import xyz.pixelatedw.mineminenomi.world.features.structures.dojo.DojoStructure;
 import xyz.pixelatedw.mineminenomi.world.features.structures.largeship.LargeShipPieces;
@@ -32,36 +28,12 @@ public class ModFeatures
 	{
 		for (Biome biome : ForgeRegistries.BIOMES)
 		{
-			if (biome.getCategory() == Category.OCEAN)
-			{
-				SmallShipStructure.register(biome);
-				LargeShipStructure.register(biome);
-			}
+			SmallShipStructure.register(biome);
+			LargeShipStructure.register(biome);
+				
+			DojoStructure.register(biome);
 			
-			if(biome.getCategory() == Category.PLAINS || biome.getCategory() == Category.DESERT)
-			{
-				DojoStructure.register(biome);
-			}
-			
-			if(biome.getCategory() == Category.OCEAN || biome.getCategory() == Category.BEACH)
-			{
-				biome.addFeature
-				(
-					Decoration.UNDERGROUND_ORES, 
-					Biome.createDecoratedFeature
-					(
-						Feature.ORE, 
-						new OreFeatureConfig
-						(
-							OreFeatureConfig.FillerBlockType.NATURAL_STONE,
-							ModBlocks.KAIROSEKI_ORE.getDefaultState(),
-							6
-						),
-						Placement.COUNT_RANGE,
-						new CountRangeConfig(40, 10, 0, 128)
-					)
-				);
-			}
+			KairosekiOreFeature.register(biome);
 		}
 	}
 	
