@@ -98,7 +98,6 @@ public class ModEntities
 		registerEntityWorldSpawn(MARINE_WITH_GUN, 8, 2, 5, GENERIC_ONES_PLUS);
 		registerMarineWithSpawnEgg(MARINE_CAPTAIN, "Marine Captain");
 		registerMarineWithSpawnEgg(MARINE_TRADER, "Marine Trader");
-		registerEntityWorldSpawn(MARINE_TRADER, 2, 0, 1, GENERIC_ONES);
 
 		// Pirates
 		registerPirateWithSpawnEgg(PIRATE_WITH_SWORD, "Pirate with Sword");
@@ -107,7 +106,6 @@ public class ModEntities
 		registerEntityWorldSpawn(PIRATE_WITH_GUN, 8, 2, 5, GENERIC_ONES_PLUS);
 		registerPirateWithSpawnEgg(PIRATE_CAPTAIN, "Pirate Captain");
 		registerPirateWithSpawnEgg(PIRATE_TRADER, "Pirate Trader");
-		registerEntityWorldSpawn(PIRATE_TRADER, 2, 0, 1, GENERIC_ONES);
 
 		// Bandits
 		registerBanditWithSpawnEgg(BANDIT_WITH_SWORD, "Bandit with Sword");
@@ -116,7 +114,6 @@ public class ModEntities
 		// Factionless
 		registerFactionlessWithSpawnEgg(DOJO_SENSEI, "Dojo Sensei");
 		registerFactionlessWithSpawnEgg(BOW_MASTER, "Bow Master");
-		registerEntityWorldSpawn(BOW_MASTER, 12, 1, 1, Biome.Category.FOREST, Biome.Category.TAIGA, Biome.Category.JUNGLE);
 
 		// Animals
 		registerAnimalWithSpawnEgg(DEN_DEN_MUSHI, "Den Den Mushi");
