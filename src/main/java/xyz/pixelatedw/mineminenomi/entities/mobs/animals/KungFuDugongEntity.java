@@ -248,7 +248,8 @@ public class KungFuDugongEntity extends AnimalEntity
 	public void readAdditional(CompoundNBT compound)
 	{
 		super.readAdditional(compound);
-		this.dataManager.set(OWNER, Optional.of(UUID.fromString(compound.getString("owner"))));
+		if(!WyHelper.isNullOrEmpty(compound.getString("owner")))
+			this.dataManager.set(OWNER, Optional.of(UUID.fromString(compound.getString("owner"))));
 		this.dataManager.set(IS_ENRAGED, compound.getBoolean("isEnraged"));
 		this.dataManager.set(IS_SITTING, compound.getBoolean("isSitting"));
 		this.dataManager.set(IS_HAPPY, compound.getBoolean("isHappy"));

@@ -32,6 +32,7 @@ public class HiganProjectile extends AbilityProjectileEntity
 		super(MeraProjectiles.HIGAN, world, player);
 		
 		this.setDamage(5);
+		this.setChangeHurtTime(true);
 		
 		this.onEntityImpactEvent = this::onEntityImpactEvent;
 		this.onBlockImpactEvent = this::onBlockImpactEvent;

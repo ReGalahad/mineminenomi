@@ -38,7 +38,6 @@ public class KaishinProjectile extends AbilityProjectileEntity
 		this.setDamage(50);
 		this.setCanGetStuckInGround();
 		this.setPassThroughEntities();
-		this.setChangeHurtTime(false);
 
 		this.onBlockImpactEvent = this::onBlockImpactEvent;
 		this.onTickEvent = this::onTickEvent;

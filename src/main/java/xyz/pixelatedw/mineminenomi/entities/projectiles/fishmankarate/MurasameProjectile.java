@@ -35,6 +35,7 @@ public class MurasameProjectile extends AbilityProjectileEntity
 		
 		this.setDamage(5.5f);
 		this.setPassThroughEntities();
+		this.setChangeHurtTime(true);
 		
 		this.onBlockImpactEvent = this::onBlockImpactEvent;
 		this.onTickEvent = this::onTickEvent;

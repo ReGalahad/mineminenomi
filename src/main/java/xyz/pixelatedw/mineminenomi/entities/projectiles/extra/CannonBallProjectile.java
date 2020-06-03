@@ -31,7 +31,6 @@ public class CannonBallProjectile extends AbilityProjectileEntity
 	{
 		super(ExtraProjectiles.CANNON_BALL, world, player);
 		this.setPhysical();
-		this.setChangeHurtTime(false);
 		this.setDamage(10);
 		this.setGravity(0.01f);
 		

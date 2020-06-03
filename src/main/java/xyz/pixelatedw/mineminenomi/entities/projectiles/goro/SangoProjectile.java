@@ -33,6 +33,7 @@ public class SangoProjectile extends AbilityProjectileEntity
 
 		this.setDamage(15);
 		this.setMaxLife(128);
+		this.setChangeHurtTime(true);
 		
 		this.onTickEvent = this::onTickEvent;
 	}

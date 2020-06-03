@@ -43,9 +43,9 @@ public class AbilityProjectileEntity extends ThrowableEntity
 	private boolean canPassThroughEntities = false;
 	private boolean canGetStuckInGround = false;
 	protected boolean stuckInGround = false;
-	private boolean changeHurtTime = true;
+	private boolean changeHurtTime = false;
 	// For reference default hurt time is 20
-	private int hurtTime = 0;
+	private int hurtTime = 5;
 
 	// Setting the defaults so that no crash occurs and so they will be null safe.
 	public IOnEntityImpact onEntityImpactEvent = (hitEntity) ->
@@ -134,7 +134,7 @@ public class AbilityProjectileEntity extends ThrowableEntity
 	@Override
 	public void shoot(Entity entityThrower, float rotationPitchIn, float rotationYawIn, float pitchOffset, float velocity, float inaccuracy)
 	{
-		if(entityThrower instanceof PlayerEntity)
+		if (entityThrower instanceof PlayerEntity)
 			inaccuracy = ItemsHelper.getSniperInaccuracy(inaccuracy, (PlayerEntity) entityThrower);
 		super.shoot(entityThrower, rotationPitchIn, rotationYawIn, pitchOffset, velocity, inaccuracy);
 	}
@@ -184,7 +184,7 @@ public class AbilityProjectileEntity extends ThrowableEntity
 						this.remove();
 
 					if (this.changeHurtTime)
-						hitEntity.hurtResistantTime = hurtTime;
+						hitEntity.hurtResistantTime = this.hurtTime;
 				}
 			}
 			else if (hit.getType() == RayTraceResult.Type.BLOCK)
@@ -314,14 +314,14 @@ public class AbilityProjectileEntity extends ThrowableEntity
 		return this.stuckInGround;
 	}
 
-	public void setChangeHurtTime(boolean v)
+	public void setChangeHurtTime(boolean flag)
 	{
-		this.changeHurtTime = v;
+		this.changeHurtTime = flag;
 	}
 
-	public void setHurtTime(int v)
+	public void setHurtTime(int time)
 	{
-		this.hurtTime = v;
+		this.hurtTime = time;
 	}
 
 	public void setThrower(LivingEntity e)

@@ -42,6 +42,7 @@ public class MokoProjectile extends AbilityProjectileEntity
 
 		this.setDamage(6);
 		this.setPassThroughEntities();
+		this.setChangeHurtTime(true);
 		
 		this.onEntityImpactEvent = this::onEntityImpactEvent;
 		this.onTickEvent = this::onTickEvent;
