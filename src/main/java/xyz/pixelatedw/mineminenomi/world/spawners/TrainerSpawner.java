@@ -15,6 +15,8 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.server.ServerWorld;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
+import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
+import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.entities.mobs.quest.givers.IQuestGiver;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.wypi.WyHelper;
@@ -24,8 +26,7 @@ public class TrainerSpawner
 {
 	private Random random = new Random();
 	private int cooldown;
-	private static final Biome.Category[] BIOMES = new Biome.Category[] { Biome.Category.FOREST, Biome.Category.TAIGA, Biome.Category.JUNGLE };
-	private static final EntityType[] TRAINER_TYPES = new EntityType[] { ModEntities.BOW_MASTER };
+	private static final Biome.Category[] SNIPER_BIOMES = new Biome.Category[] { Biome.Category.FOREST, Biome.Category.TAIGA, Biome.Category.JUNGLE };
 	
 	public void tick(ServerWorld world)
 	{
@@ -46,17 +47,33 @@ public class TrainerSpawner
 			return;
 		else
 		{
-			int r = this.random.nextInt(TRAINER_TYPES.length);
-			EntityType entityType = TRAINER_TYPES[r];
+			IEntityStats props = EntityStatsCapability.get(player);
+			EntityType entityType = null;
+			Biome.Category[] biomes = null;
+			
+			// TODO Check to see if it has snipers quests available, don't spawn if they've already finished their training
+			if(props.isSniper())
+			{
+				entityType = ModEntities.BOW_MASTER;
+				biomes = SNIPER_BIOMES;
+			}
+			
+			if(entityType == null)
+				return;
+			
 			BlockPos targetPos = player.getPosition();
 			BlockPos spawnPos = WyHelper.findOnGroundSpawnLocation(world, entityType, targetPos, 20);
 			List<LivingEntity> trainers = WyHelper.<LivingEntity>getEntitiesNear(targetPos, world, 40).stream().filter(entity -> entity instanceof IQuestGiver).collect(Collectors.toList());
-			boolean canSpawnInBiome = Arrays.stream(BIOMES).anyMatch(category -> world.getBiome(spawnPos).getCategory() == category);
 
-			if (spawnPos != null && trainers.size() < 2 && canSpawnInBiome)
+			if (spawnPos != null)
 			{
-				entityType.spawn(world, (CompoundNBT) null, (ITextComponent) null, (PlayerEntity) null, spawnPos, SpawnReason.EVENT, false, false);
-				WyDebug.debug("Trainer spawned at: " + spawnPos);
+				boolean canSpawnInBiome = Arrays.stream(biomes).anyMatch(category -> world.getBiome(spawnPos).getCategory() == category);
+
+				if(trainers.size() < 2 && canSpawnInBiome)
+				{
+					entityType.spawn(world, (CompoundNBT) null, (ITextComponent) null, (PlayerEntity) null, spawnPos, SpawnReason.EVENT, false, false);
+					WyDebug.debug("Trainer spawned at: " + spawnPos);
+				}
 			}
 		}
 	}
