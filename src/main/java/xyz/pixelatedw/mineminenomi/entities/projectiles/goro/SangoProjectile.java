@@ -31,10 +31,11 @@ public class SangoProjectile extends AbilityProjectileEntity
 	{
 		super(GoroProjectiles.SANGO, world, player);
 
-		this.setDamage(7);
+		this.setDamage(8);
 		this.setMaxLife(128);
 
 		this.setPassThroughBlocks();
+		this.setChangeHurtTime(true);
 		this.onTickEvent = this::onTickEvent;
 	}
 	
