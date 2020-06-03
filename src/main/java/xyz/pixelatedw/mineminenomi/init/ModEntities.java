@@ -30,6 +30,7 @@ import xyz.pixelatedw.mineminenomi.entities.mobs.misc.BlackKnightEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.DoppelmanEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.MirageCloneEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.WaxCloneEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.PirateBruteEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.PirateCaptainEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.PirateTraderEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.PirateWithGunEntity;
@@ -61,6 +62,7 @@ public class ModEntities
 	public static final EntityType PIRATE_WITH_GUN = WyRegistry.createEntityType(PirateWithGunEntity::new, PIRATES).build("pirate_with_gun");
 	public static final EntityType PIRATE_CAPTAIN = WyRegistry.createEntityType(PirateCaptainEntity::new, PIRATES).build("pirate_captain");
 	public static final EntityType PIRATE_TRADER = WyRegistry.createEntityType(PirateTraderEntity::new, PIRATES).build("pirate_trader");
+	public static final EntityType PIRATE_BRUTE = WyRegistry.createEntityType(PirateBruteEntity::new, PIRATES).build("pirate_brute");
 
 	// Bandits
 	public static final EntityType BANDIT_WITH_SWORD = WyRegistry.createEntityType(BanditWithSwordEntity::new, BANDITS).build("bandit_with_sword");
@@ -106,6 +108,7 @@ public class ModEntities
 		registerEntityWorldSpawn(PIRATE_WITH_GUN, 8, 2, 5, GENERIC_ONES_PLUS);
 		registerPirateWithSpawnEgg(PIRATE_CAPTAIN, "Pirate Captain");
 		registerPirateWithSpawnEgg(PIRATE_TRADER, "Pirate Trader");
+		registerPirateWithSpawnEgg(PIRATE_BRUTE, "Pirate Brute");
 
 		// Bandits
 		registerBanditWithSpawnEgg(BANDIT_WITH_SWORD, "Bandit with Sword");

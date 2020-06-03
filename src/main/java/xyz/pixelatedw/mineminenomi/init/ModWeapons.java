@@ -58,6 +58,7 @@ public class ModWeapons
 	public static final ClimaTactItem CLIMA_TACT = new ClimaTactItem(1, 1);
 	public static final ClimaTactItem PERFECT_CLIMA_TACT = new ClimaTactItem(3, 2);
 	public static final ClimaTactItem SORCERY_CLIMA_TACT = new ClimaTactItem(5, 3);
+	public static final CoreSwordItem MACE = new CoreSwordItem(4, 800).setBlunt();
 
 	// Normal Ranged Weapons
 	public static final GunItem FLINTLOCK = new GunItem(15, 2, 2);
@@ -123,6 +124,7 @@ public class ModWeapons
 		registerRod(CLIMA_TACT, "Clima Tact");
 		registerRod(PERFECT_CLIMA_TACT, "Perfect Clima Tact");
 		registerRod(SORCERY_CLIMA_TACT, "Sorcery Clima Tact", OPEN_PREDICATE);
+		registerSword(MACE, "Mace", HAKI_PREDICATE);
 
 		registerSimple3DItem(FLINTLOCK, "Flintlock");
 		registerCustom3DItem(GREEN_KUJA_BOW, "Green Kuja Bow", GREEN_KUJA_BOW_MODEL);

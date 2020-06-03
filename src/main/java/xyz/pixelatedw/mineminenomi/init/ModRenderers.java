@@ -37,6 +37,7 @@ import xyz.pixelatedw.mineminenomi.entities.mobs.misc.BlackKnightEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.DoppelmanEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.MirageCloneEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.WaxCloneEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.PirateBruteEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.PirateCaptainEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.PirateTraderEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.PirateWithGunEntity;
@@ -55,6 +56,7 @@ import xyz.pixelatedw.mineminenomi.models.entities.mobs.animals.DenDenMushiModel
 import xyz.pixelatedw.mineminenomi.models.entities.mobs.animals.KungFuDugongModel;
 import xyz.pixelatedw.mineminenomi.models.entities.mobs.animals.LapahnModel;
 import xyz.pixelatedw.mineminenomi.models.entities.mobs.humanoids.DojoSenseiModel;
+import xyz.pixelatedw.mineminenomi.models.entities.mobs.humanoids.FatHumanModel;
 import xyz.pixelatedw.mineminenomi.models.entities.mobs.humanoids.SimpleHumanModel;
 import xyz.pixelatedw.mineminenomi.renderers.abilities.ChargingUrsusShockRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.abilities.PhysicalBodyRenderer;
@@ -106,6 +108,7 @@ public class ModRenderers
 		RenderingRegistry.registerEntityRenderingHandler(PirateWithGunEntity.class, new GenericMobRenderer.Factory(new SimpleHumanModel(), 1, null));
 		RenderingRegistry.registerEntityRenderingHandler(PirateCaptainEntity.class, new GenericMobRenderer.Factory(new SimpleHumanModel(), 1, null));
 		RenderingRegistry.registerEntityRenderingHandler(PirateTraderEntity.class, new GenericMobRenderer.Factory(new SimpleHumanModel(), 1, null));
+		RenderingRegistry.registerEntityRenderingHandler(PirateBruteEntity.class, new GenericMobRenderer.Factory(new FatHumanModel(), 1.25F, null));
 
 		// Bandits
 		RenderingRegistry.registerEntityRenderingHandler(BanditWithSwordEntity.class, new GenericMobRenderer.Factory(new SimpleHumanModel(), 1, null));

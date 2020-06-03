@@ -1,0 +1,6 @@
+{
+	"parent": "mineminenomi:item/mace",
+	"textures": {
+		"layer0": "mineminenomi:items/mace_haki"
+	}
+}
