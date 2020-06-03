@@ -42,6 +42,7 @@ public class IceBlockPartisanProjectile extends AbilityProjectileEntity
 		super(HieProjectiles.ICE_BLOCK_PARTISAN, world, player);
 
 		this.setDamage(10);
+		this.setChangeHurtTime(true);
 		
 		this.onBlockImpactEvent = this::onBlockImpactEvent;
 		this.onTickEvent = this::onTickEvent;

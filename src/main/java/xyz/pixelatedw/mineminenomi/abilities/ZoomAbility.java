@@ -5,8 +5,9 @@ import net.minecraft.inventory.EquipmentSlotType;
 import xyz.pixelatedw.mineminenomi.init.ModArmors;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.abilities.ContinuousAbility;
+import xyz.pixelatedw.wypi.abilities.IParallelContinuousAbility;
 
-public class ZoomAbility extends ContinuousAbility
+public class ZoomAbility extends ContinuousAbility implements IParallelContinuousAbility
 {
 	public static final ZoomAbility INSTANCE = new ZoomAbility();
 	

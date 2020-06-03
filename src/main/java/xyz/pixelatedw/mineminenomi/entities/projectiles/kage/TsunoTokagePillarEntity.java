@@ -30,7 +30,5 @@ public class TsunoTokagePillarEntity extends AbilityProjectileEntity
 		this.setMaxLife(10);
 		this.setPassThroughEntities();
 		this.setPassThroughBlocks();
-		this.setChangeHurtTime(false);
-		this.setChangeHurtTime(false);
 	}
 }

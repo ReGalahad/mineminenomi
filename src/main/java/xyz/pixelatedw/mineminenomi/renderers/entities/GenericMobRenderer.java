@@ -24,7 +24,7 @@ public class GenericMobRenderer<T extends MobEntity, M extends BipedModel<T>> ex
 
 	public GenericMobRenderer(EntityRendererManager manager, M model, float scale, String tex)
 	{
-		super(manager, model, 0.0F);
+		super(manager, model, 0.5F * scale);
 		this.scale = scale;
 		this.texture = new ResourceLocation(APIConfig.PROJECT_ID, "textures/models/" + tex + ".png");
 		this.addLayer(new BipedArmorLayer<>(this, new BipedModel(0.5F), new BipedModel(1.0F)));
@@ -33,7 +33,7 @@ public class GenericMobRenderer<T extends MobEntity, M extends BipedModel<T>> ex
 
 	public GenericMobRenderer(EntityRendererManager manager, M model, String tex)
 	{
-		super(manager, model, 0.0F);
+		super(manager, model, 0.5F);
 		this.scale = 1.0F;
 		this.texture = new ResourceLocation(APIConfig.PROJECT_ID, "textures/models/" + tex + ".png");
 		this.addLayer(new BipedArmorLayer<>(this, new BipedModel(0.5F), new BipedModel(1.0F)));
@@ -42,7 +42,7 @@ public class GenericMobRenderer<T extends MobEntity, M extends BipedModel<T>> ex
 
 	public GenericMobRenderer(EntityRendererManager manager, M model)
 	{
-		super(manager, model, 0.0F);
+		super(manager, model, 0.5F);
 		this.scale = 1.0F;
 		this.texture = null;
 		this.addLayer(new BipedArmorLayer<>(this, new BipedModel(0.5F), new BipedModel(1.0F)));
@@ -65,7 +65,7 @@ public class GenericMobRenderer<T extends MobEntity, M extends BipedModel<T>> ex
 	protected ResourceLocation getEntityTexture(T entity)
 	{
 		if ((this.texture == null && entity instanceof IDynamicRenderer) || this.texture.equals(new ResourceLocation(APIConfig.PROJECT_ID + ":textures/models/null.png")))
-			return new ResourceLocation(APIConfig.PROJECT_ID + ":textures/models/" + ((IDynamicRenderer) entity).getMobTexture() + ".png");
+			return new ResourceLocation(APIConfig.PROJECT_ID, "textures/models/" + ((IDynamicRenderer) entity).getMobTexture() + ".png");
 		else
 			return this.texture;
 	}

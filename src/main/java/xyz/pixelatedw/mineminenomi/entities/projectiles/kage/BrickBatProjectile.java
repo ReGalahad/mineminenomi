@@ -28,6 +28,7 @@ public class BrickBatProjectile extends AbilityProjectileEntity
 
 		this.setDamage(3);
 		this.setPassThroughEntities();
+		this.setChangeHurtTime(true);
 	}
 }
 

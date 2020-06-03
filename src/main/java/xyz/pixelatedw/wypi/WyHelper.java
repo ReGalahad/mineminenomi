@@ -21,6 +21,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
 
+import javax.annotation.Nullable;
+
 import org.lwjgl.opengl.GL11;
 
 import com.mojang.blaze3d.platform.GLX;
@@ -36,6 +38,8 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntitySpawnPlacementRegistry;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -54,7 +58,9 @@ import net.minecraft.util.math.RayTraceContext;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.spawner.WorldEntitySpawner;
 
 public class WyHelper
 {
@@ -96,10 +102,7 @@ public class WyHelper
 
 	public static Color hslToColor(float h, float s, float l)
 	{
-		float[] hsl = new float[]
-			{
-					h, s, l
-			};
+		float[] hsl = new float[] { h, s, l };
 
 		if (s < 0.0f || s > 100.0f)
 		{
@@ -258,8 +261,9 @@ public class WyHelper
 		return ray;
 	}
 
-	public static BlockRayTraceResult rayTraceBlocksWithDistance(Entity source, double distance) {
-		
+	public static BlockRayTraceResult rayTraceBlocksWithDistance(Entity source, double distance)
+	{
+
 		Vec3d lookVec = source.getLook(1.0F);
 		Vec3d startVec = source.getEyePosition(1.0F);
 		Vec3d endVec = startVec.add(lookVec.x * distance, lookVec.y * distance, lookVec.z * distance);
@@ -268,38 +272,41 @@ public class WyHelper
 
 		return ray;
 	}
-	
+
 	public static EntityRayTraceResult rayTraceEntities(Entity source, double distance)
 	{
 		Vec3d lookVec = source.getLook(1.0F);
 		Vec3d startVec = source.getEyePosition(1.0F);
 		Vec3d endVec = startVec.add(lookVec.x * distance, lookVec.y * distance, lookVec.z * distance);
-        AxisAlignedBB boundingBox = source.getBoundingBox().grow(distance);
+		AxisAlignedBB boundingBox = source.getBoundingBox().grow(distance);
 
-		for (Entity entity : source.world.getEntitiesInAABBexcluding(source, boundingBox, (entity) -> { return entity != source ;}))
+		for (Entity entity : source.world.getEntitiesInAABBexcluding(source, boundingBox, (entity) ->
+		{
+			return entity != source;
+		}))
 		{
 			AxisAlignedBB entityBB = entity.getBoundingBox().grow(1);
 			Optional<Vec3d> optional = entityBB.rayTrace(startVec, endVec);
-					
-			if(optional.isPresent())
+
+			if (optional.isPresent())
 			{
 				Vec3d targetVec = optional.get();
 				double distFromSource = MathHelper.sqrt(startVec.squareDistanceTo(targetVec));
-				
-				if(distFromSource < distance)
+
+				if (distFromSource < distance)
 				{
 					List<Entity> targets = WyHelper.getEntitiesNear(new BlockPos(targetVec), source.world, 1.25);
 					targets.remove(source);
 					Optional<Entity> target = targets.stream().findFirst();
-					
-					if(target.isPresent())
+
+					if (target.isPresent())
 					{
 						return new EntityRayTraceResult(target.get(), endVec);
 					}
 				}
 			}
 		}
-		
+
 		return new EntityRayTraceResult(null, endVec);
 	}
 
@@ -325,7 +332,7 @@ public class WyHelper
 
 		return false;
 	}
-	
+
 	public static List<BlockPos> getNearbyBlocks(LivingEntity player, int radius)
 	{
 		List<BlockPos> blockLocations = new ArrayList<BlockPos>();
@@ -343,8 +350,30 @@ public class WyHelper
 				}
 			}
 		}
-			
+
 		return blockLocations;
+	}
+
+	@Nullable
+	public static BlockPos findOnGroundSpawnLocation(World world, EntityType type, BlockPos spawnLocation, int radius)
+	{
+		BlockPos blockpos = null;
+		Random random = new Random();
+
+		for (int i = 0; i < 10; ++i)
+		{
+			int j = spawnLocation.getX() + random.nextInt(radius * 2) - radius;
+			int k = spawnLocation.getZ() + random.nextInt(radius * 2) - radius;
+			int l = world.getHeight(Heightmap.Type.WORLD_SURFACE, j, k);
+			BlockPos blockpos1 = new BlockPos(j, l, k);
+			if (WorldEntitySpawner.canCreatureTypeSpawnAtLocation(EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, world, blockpos1, type))
+			{
+				blockpos = blockpos1;
+				break;
+			}
+		}
+
+		return blockpos;
 	}
 
 	/*
@@ -429,7 +458,7 @@ public class WyHelper
 		bufferbuilder.pos(x, y, 1).tex(0.0, 0.0).endVertex();
 		Tessellator.getInstance().draw();
 	}
-	
+
 	public static void drawEntityOnScreen(int posX, int posY, int scale, float mouseX, float mouseY, LivingEntity entity)
 	{
 		GlStateManager.enableColorMaterial();
@@ -501,9 +530,9 @@ public class WyHelper
 	}
 
 	public static float handleRotationFloat(LivingEntity entity, float partialTicks)
-    {
-        return entity.ticksExisted + partialTicks;
-    }
+	{
+		return entity.ticksExisted + partialTicks;
+	}
 
 	public static void rotateCorpse(LivingEntity entityLiving, float ageInTicks, float headYawOffset, float v)
 	{
@@ -518,7 +547,7 @@ public class WyHelper
 			{
 				f3 = 1.0F;
 			}
-			
+
 			GL11.glRotatef(f3 * 90, 0.0F, 0.0F, 1.0F);
 		}
 	}
@@ -539,7 +568,7 @@ public class WyHelper
 
 		return lowerLimit + range * f3;
 	}
-	
+
 	/*
 	 * Misc Helpers
 	 */
@@ -606,9 +635,12 @@ public class WyHelper
 		return null;
 	}
 
-	public static final int getIndexOfItemStack(ItemStack stack, IInventory inven) {
-		for(int i = 0; i < inven.getSizeInventory(); i++) {
-			if(inven.getStackInSlot(i).getItem() == stack.getItem()) {
+	public static final int getIndexOfItemStack(ItemStack stack, IInventory inven)
+	{
+		for (int i = 0; i < inven.getSizeInventory(); i++)
+		{
+			if (inven.getStackInSlot(i).getItem() == stack.getItem())
+			{
 				return i;
 			}
 		}

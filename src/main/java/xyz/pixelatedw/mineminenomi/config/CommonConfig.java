@@ -1,5 +1,14 @@
 package xyz.pixelatedw.mineminenomi.config;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Predicate;
+
+import org.apache.commons.lang3.tuple.Pair;
+
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
 import net.minecraftforge.common.ForgeConfigSpec.DoubleValue;
@@ -7,11 +16,7 @@ import net.minecraftforge.common.ForgeConfigSpec.EnumValue;
 import net.minecraftforge.common.ForgeConfigSpec.IntValue;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
-import org.apache.commons.lang3.tuple.Pair;
 import xyz.pixelatedw.wypi.WyHelper;
-
-import java.util.*;
-import java.util.function.Predicate;
 
 public class CommonConfig
 {
@@ -52,6 +57,20 @@ public class CommonConfig
 	// Bounty
 	private BooleanValue wantedPosterPackages;
 	private IntValue timeBetweenPackageDrops;
+	
+	// World Events
+	// Traders
+	private BooleanValue canSpawnTraders;
+	private IntValue timeBetweenTraderSpawns;
+	private IntValue chanceForTraderSpawn;
+	// Trainers
+	private BooleanValue canSpawnTrainers;
+	private IntValue timeBetweenTrainerSpawns;
+	private IntValue chanceForTrainerSpawn;
+	// Ambushes
+	private BooleanValue canSpawnAmbushes;
+	private IntValue timeBetweenAmbushSpawns;
+	private IntValue chanceForAmbushSpawn;
 	
 	// Permissions
 	
@@ -146,6 +165,22 @@ public class CommonConfig
 		this.quests = builder.comment("Allows quests to be accepted / completed; true by default").define("Quests", true);
 		this.questProgression = builder.comment("Allows quests to reward players with abilities, otherwise all abilities will be unlocked from the beginning; true by default").define("Quest Progression", true);
 		
+		builder.pop();		
+		
+		builder.push("World Events");
+		
+		this.canSpawnTraders = builder.comment("Allows Traders to spawn in the world; true by default").define("Trader Spawns", true);
+		this.timeBetweenTraderSpawns = builder.comment("Determines the time (in seconds) between two spawn attempts; 1800 by default").defineInRange("Time Between Trader Spawns", 1800, 1, 99999);
+		this.chanceForTraderSpawn = builder.comment("Determines the % chance for a trader to spawn; 1 by default").defineInRange("Chance for Trader Spawns", 1, 1, 100);
+		
+		this.canSpawnTrainers = builder.comment("Allows Trainers to spawn in the world; true by default").define("Trainer Spawns", true);
+		this.timeBetweenTrainerSpawns = builder.comment("Determines the time (in seconds) between two spawn attempts; 1800 by default").defineInRange("Time Between Trainer Spawns", 1800, 1, 99999);
+		this.chanceForTrainerSpawn = builder.comment("Determines the % chance for a trainer to spawn; 15 by default").defineInRange("Chance for Trainer Spawns", 15, 1, 100);
+		
+		this.canSpawnAmbushes = builder.comment("Allows Ambushes to spawn in the world; true by default").define("Ambushe Spawns", true);
+		this.timeBetweenAmbushSpawns = builder.comment("Determines the time (in seconds) between two spawn attempts; 3600 by default").defineInRange("Time Between Ambushes Spawns", 3600, 1, 99999);
+		this.chanceForAmbushSpawn = builder.comment("Determines the % chance for a ambush to spawn; 15 by default").defineInRange("Chance for Ambush Spawns", 15, 1, 100);
+		
 		builder.pop();
 		
 		builder.push("Bounty");
@@ -167,6 +202,51 @@ public class CommonConfig
 		builder.pop();
 	}
 
+	public int getChanceForAmbushSpawn()
+	{
+		return this.chanceForAmbushSpawn.get();
+	}
+	
+	public int getTimeBetweenAmbushSpawns()
+	{
+		return this.timeBetweenAmbushSpawns.get();
+	}
+	
+	public boolean canSpawnAmbushes()
+	{
+		return this.canSpawnAmbushes.get();
+	}
+	
+	public int getChanceForTrainerSpawn()
+	{
+		return this.chanceForTrainerSpawn.get();
+	}
+	
+	public int getTimeBetweenTrainerSpawns()
+	{
+		return this.timeBetweenTrainerSpawns.get();
+	}
+	
+	public boolean canSpawnTrainers()
+	{
+		return this.canSpawnTrainers.get();
+	}
+	
+	public int getChanceForTraderSpawn()
+	{
+		return this.chanceForTraderSpawn.get();
+	}
+	
+	public int getTimeBetweenTraderSpawns()
+	{
+		return this.timeBetweenTraderSpawns.get();
+	}
+	
+	public boolean canSpawnTraders()
+	{
+		return this.canSpawnTraders.get();
+	}
+	
 	public String[] getCooldownVisuals()
 	{
 		String[] newArray = new String[] {};

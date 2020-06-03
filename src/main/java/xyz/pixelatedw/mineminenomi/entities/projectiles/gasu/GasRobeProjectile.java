@@ -34,6 +34,7 @@ public class GasRobeProjectile extends AbilityProjectileEntity
 		
 		this.setDamage(4);
 		this.setPassThroughEntities();
+		this.setChangeHurtTime(true);
 		
 		this.withEffects = () -> {
 			return new EffectInstance[] {

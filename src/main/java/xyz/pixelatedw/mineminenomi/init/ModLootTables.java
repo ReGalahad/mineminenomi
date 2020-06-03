@@ -1,15 +1,16 @@
 package xyz.pixelatedw.mineminenomi.init;
 
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.storage.loot.*;
+import net.minecraft.world.storage.loot.ItemLootEntry;
+import net.minecraft.world.storage.loot.LootEntry;
+import net.minecraft.world.storage.loot.LootPool;
+import net.minecraft.world.storage.loot.LootTables;
+import net.minecraft.world.storage.loot.RandomValueRange;
+import net.minecraft.world.storage.loot.TableLootEntry;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.wypi.APIConfig;
-
-import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.List;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class ModLootTables {

@@ -162,9 +162,9 @@ public class DoppelmanEntity extends CreatureEntity
 			if(target != null)
 				this.setAttackTarget(target);
 			
-			if(!forcedTargets.isEmpty())
+			if(!this.forcedTargets.isEmpty())
 			{
-				Iterator it = forcedTargets.iterator();
+				Iterator it = this.forcedTargets.iterator();
 				while(it.hasNext())
 				{
 					LivingEntity forcedTarget = (LivingEntity) it.next();

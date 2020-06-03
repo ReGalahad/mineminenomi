@@ -38,7 +38,7 @@ public class BowMasterEntity extends GenericNewEntity implements IQuestGiver
 {
 	public BowMasterEntity(World worldIn)
 	{
-		super(ModEntities.BOW_MASTER, worldIn, new String[] {"bowmaster1", "bowmaster2", "bowmaster3"});
+		super(ModEntities.BOW_MASTER, worldIn, new String[] {"bow_master1", "bow_master2", "bow_master3"});
 	}
 
 	@Override

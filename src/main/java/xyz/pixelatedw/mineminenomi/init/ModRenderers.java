@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.entity.PlayerRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import xyz.pixelatedw.mineminenomi.blocks.tileentities.CannonTileEntity;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.DenDenMushiTileEntity;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.WantedPosterPackageTileEntity;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.WantedPosterTileEntity;
@@ -25,6 +26,8 @@ import xyz.pixelatedw.mineminenomi.entities.PhysicalBodyEntity;
 import xyz.pixelatedw.mineminenomi.entities.VivreCardEntity;
 import xyz.pixelatedw.mineminenomi.entities.WantedPosterPackageEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.animals.DenDenMushiEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.animals.KungFuDugongEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.animals.LapahnEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.bandits.BanditWithSwordEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.marines.MarineCaptainEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.marines.MarineTraderEntity;
@@ -34,6 +37,7 @@ import xyz.pixelatedw.mineminenomi.entities.mobs.misc.BlackKnightEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.DoppelmanEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.MirageCloneEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.misc.WaxCloneEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.PirateBruteEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.PirateCaptainEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.PirateTraderEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.PirateWithGunEntity;
@@ -49,10 +53,14 @@ import xyz.pixelatedw.mineminenomi.models.blocks.Dial03Model;
 import xyz.pixelatedw.mineminenomi.models.blocks.Dial04Model;
 import xyz.pixelatedw.mineminenomi.models.entities.mobs.SniperTargetModel;
 import xyz.pixelatedw.mineminenomi.models.entities.mobs.animals.DenDenMushiModel;
+import xyz.pixelatedw.mineminenomi.models.entities.mobs.animals.KungFuDugongModel;
+import xyz.pixelatedw.mineminenomi.models.entities.mobs.animals.LapahnModel;
 import xyz.pixelatedw.mineminenomi.models.entities.mobs.humanoids.DojoSenseiModel;
+import xyz.pixelatedw.mineminenomi.models.entities.mobs.humanoids.FatHumanModel;
 import xyz.pixelatedw.mineminenomi.models.entities.mobs.humanoids.SimpleHumanModel;
 import xyz.pixelatedw.mineminenomi.renderers.abilities.ChargingUrsusShockRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.abilities.PhysicalBodyRenderer;
+import xyz.pixelatedw.mineminenomi.renderers.blocks.CannonTileEntityRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.blocks.DenDenMushiTileEntityRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.blocks.DialTileEntityRenderer;
 import xyz.pixelatedw.mineminenomi.renderers.blocks.WantedPosterTileEntityRenderer;
@@ -86,6 +94,7 @@ public class ModRenderers
     	ClientRegistry.bindTileEntitySpecialRenderer(WantedPosterPackageTileEntity.class, new WantedPostersPackageTileEntityRenderer());
     	ClientRegistry.bindTileEntitySpecialRenderer(WantedPosterTileEntity.class, new WantedPosterTileEntityRenderer());
     	ClientRegistry.bindTileEntitySpecialRenderer(DenDenMushiTileEntity.class, new DenDenMushiTileEntityRenderer());
+    	ClientRegistry.bindTileEntitySpecialRenderer(CannonTileEntity.class, new CannonTileEntityRenderer());
 
     	// Entities
     	// Marines
@@ -99,6 +108,7 @@ public class ModRenderers
 		RenderingRegistry.registerEntityRenderingHandler(PirateWithGunEntity.class, new GenericMobRenderer.Factory(new SimpleHumanModel(), 1, null));
 		RenderingRegistry.registerEntityRenderingHandler(PirateCaptainEntity.class, new GenericMobRenderer.Factory(new SimpleHumanModel(), 1, null));
 		RenderingRegistry.registerEntityRenderingHandler(PirateTraderEntity.class, new GenericMobRenderer.Factory(new SimpleHumanModel(), 1, null));
+		RenderingRegistry.registerEntityRenderingHandler(PirateBruteEntity.class, new GenericMobRenderer.Factory(new FatHumanModel(), 1.25F, null));
 
 		// Bandits
 		RenderingRegistry.registerEntityRenderingHandler(BanditWithSwordEntity.class, new GenericMobRenderer.Factory(new SimpleHumanModel(), 1, null));
@@ -108,8 +118,10 @@ public class ModRenderers
 		RenderingRegistry.registerEntityRenderingHandler(BowMasterEntity.class, new GenericMobRenderer.Factory(new SimpleHumanModel(), 1, null));
 
 		// Animals
-		RenderingRegistry.registerEntityRenderingHandler(DenDenMushiEntity.class, new GenericMobRenderer.Factory(new DenDenMushiModel(), 1, "dendenmushi"));
-	
+		RenderingRegistry.registerEntityRenderingHandler(DenDenMushiEntity.class, new GenericMobRenderer.Factory(new DenDenMushiModel(), 1, null));
+		RenderingRegistry.registerEntityRenderingHandler(LapahnEntity.class, new GenericMobRenderer.Factory(new LapahnModel(), 1, "lapahn"));
+		RenderingRegistry.registerEntityRenderingHandler(KungFuDugongEntity.class, new GenericMobRenderer.Factory(new KungFuDugongModel(), 1, "kung_fu_dugong"));
+
 		// Others
 		RenderingRegistry.registerEntityRenderingHandler(DoppelmanEntity.class, new DoppelmanRenderer.Factory());
 	    RenderingRegistry.registerEntityRenderingHandler(WaxCloneEntity.class, new WaxCloneRenderer.Factory());

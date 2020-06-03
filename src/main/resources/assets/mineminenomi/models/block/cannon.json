@@ -2,6 +2,6 @@
 	"parent": "block/cube_all",
 	"textures": 
 	{
-		"all": "mineminenomi:blocks/kage_block"
+		"all": "mineminenomi:blocks/cannon"
 	}
 }

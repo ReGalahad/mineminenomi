@@ -32,6 +32,7 @@ public class GomuGomuNoJetPistolProjectile extends AbilityProjectileEntity
 
 		this.setDamage(10);
 		this.setPhysical();
+		this.setChangeHurtTime(true);
 		
 		this.onTickEvent = this::onTickEvent;
 	}

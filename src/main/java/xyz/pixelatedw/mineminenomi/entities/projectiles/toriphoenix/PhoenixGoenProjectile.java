@@ -33,6 +33,7 @@ public class PhoenixGoenProjectile extends AbilityProjectileEntity
 		this.setDamage(2);
 		this.setCanGetStuckInGround();
 		this.setMaxLife(45);
+		this.setChangeHurtTime(true);
 		
 		this.onTickEvent = this::onTickEvent;
 	}

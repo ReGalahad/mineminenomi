@@ -1,6 +1,12 @@
 package xyz.pixelatedw.mineminenomi.entities.mobs.pirates;
 
-import net.minecraft.entity.*;
+import javax.annotation.Nullable;
+
+import net.minecraft.entity.ILivingEntityData;
+import net.minecraft.entity.IRangedAttackMob;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.goal.RangedAttackGoal;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
@@ -13,8 +19,6 @@ import xyz.pixelatedw.mineminenomi.entities.projectiles.extra.NormalBulletProjec
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.mineminenomi.init.ModWeapons;
 import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
-
-import javax.annotation.Nullable;
 
 public class PirateWithGunEntity extends GenericPirateEntity implements IRangedAttackMob
 {
@@ -65,7 +69,10 @@ public class PirateWithGunEntity extends GenericPirateEntity implements IRangedA
 	public void attackEntityWithRangedAttack(LivingEntity target, float distance)
 	{
 		AbilityProjectileEntity proj = new NormalBulletProjectile(this.world, this);
-		
+
+		if(this.getAttackTarget() == null)
+			return;
+
 		double velX = target.posX - this.posX;
 		double velY = target.getBoundingBox().minY + this.getAttackTarget().getHeight() / 3.0F - (this.posY + this.getHeight());
 		double velZ = target.posZ - this.posZ;

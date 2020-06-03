@@ -23,6 +23,7 @@ public class ExtraProjectiles
 	public static final EntityType POP_GREEN = WyRegistry.createEntityType(PopGreenProjectile::new).size(0.3F, 0.3F).build("pop_green");
 	public static final EntityType KUJA_ARROW = WyRegistry.createEntityType(KujaArrowProjectile::new).size(0.5F, 0.5F).build("kuja_arrow");
 	public static final EntityType CLOUD = WyRegistry.createEntityType(EntityCloud::new).build("cloud");
+	public static final EntityType CANNON_BALL = WyRegistry.createEntityType(CannonBallProjectile::new).build("cannon_ball");
 
 	static
 	{
@@ -33,6 +34,7 @@ public class ExtraProjectiles
 		WyRegistry.registerEntityType(POP_GREEN, "Pop Green");
 		WyRegistry.registerEntityType(KUJA_ARROW, "Kuja Arrow");
 		WyRegistry.registerEntityType(CLOUD, "Cloud");
+		WyRegistry.registerEntityType(CANNON_BALL, "Cannon Ball");
 	}
 
 	@OnlyIn(Dist.CLIENT)
@@ -45,5 +47,6 @@ public class ExtraProjectiles
 		RenderingRegistry.registerEntityRenderingHandler(MilkyDialProjectile.class, new AbilityProjectileRenderer.Factory(new SphereModel()).setScale(.1).setColor("#69E3FF"));
 		RenderingRegistry.registerEntityRenderingHandler(PopGreenProjectile.class, new AbilityProjectileRenderer.Factory(new SphereModel()).setScale(0.5).setColor("#7ccc6a"));
 		RenderingRegistry.registerEntityRenderingHandler(KujaArrowProjectile.class, new AbilityProjectileRenderer.Factory(new ArrowModel()).setTexture("kujaarrow").setScale(1.25));
+		RenderingRegistry.registerEntityRenderingHandler(CannonBallProjectile.class, new AbilityProjectileRenderer.Factory(new SphereModel()).setScale(2.5).setColor("#878787"));
 	}
 }

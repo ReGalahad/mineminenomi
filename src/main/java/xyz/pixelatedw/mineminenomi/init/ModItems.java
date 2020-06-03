@@ -63,6 +63,7 @@ public class ModItems
 	public static final Item KAIROSEKI_BULLET = new Item(new Properties().group(ModCreativeTabs.MISC));
 	public static final Item KUJA_ARROW = new Item(new Properties().group(ModCreativeTabs.MISC));
 	public static final Item POP_GREEN = new Item(new Properties().group(ModCreativeTabs.MISC));
+	public static final Item CANNON_BALL = new Item(new Properties().group(ModCreativeTabs.MISC));
 
 	// JSON Predicates
 	public static final JSONPredicateObject FILLED_PREDICATE = new JSONPredicateObject("filled", new ImmutablePair("filled", 1));
@@ -97,5 +98,6 @@ public class ModItems
 		WyRegistry.registerItem(WATERING_CAN, "Watering Can");
 		WyRegistry.registerItem(SAKE_BOTTLE, "Sake Bottle");
 		WyRegistry.registerItem(SAKE_CUP, "Sake Cup", FILLED_CUP_MODEL);
+		WyRegistry.registerItem(CANNON_BALL, "Cannon Ball");
 	}
 }

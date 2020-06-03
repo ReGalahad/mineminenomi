@@ -1,9 +1,10 @@
-package xyz.pixelatedw.mineminenomi.entities.mobs.ai.abilities.brawler;
+package xyz.pixelatedw.mineminenomi.api.entities.ai;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import xyz.pixelatedw.mineminenomi.entities.mobs.GenericNewEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.ai.abilities.brawler.HakaiHoGoal;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.debug.WyDebug;
 
