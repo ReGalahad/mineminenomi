@@ -2,7 +2,6 @@ package xyz.pixelatedw.mineminenomi.init;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -11,8 +10,6 @@ import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitProvider;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsProvider;
-import xyz.pixelatedw.mineminenomi.data.entity.haki.HakiDataCapability;
-import xyz.pixelatedw.mineminenomi.data.entity.haki.HakiDataProvider;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.APIDefaults;
 
@@ -28,7 +25,6 @@ public class ModCapabilities
 		// Mod Capabilities
 		DevilFruitCapability.register();
 		EntityStatsCapability.register();
-		HakiDataCapability.register();
 	}
 
 	@SubscribeEvent
@@ -36,12 +32,7 @@ public class ModCapabilities
 	{
 		if(event.getObject() == null)
 			return;
-		
-		if (event.getObject() instanceof PlayerEntity)
-		{
-			event.addCapability(new ResourceLocation(APIConfig.PROJECT_ID, "haki_data"), new HakiDataProvider());
-		}
-		
+
 		if(event.getObject() instanceof LivingEntity)
 		{
 			event.addCapability(new ResourceLocation(APIConfig.PROJECT_ID, "devil_fruit"), new DevilFruitProvider());

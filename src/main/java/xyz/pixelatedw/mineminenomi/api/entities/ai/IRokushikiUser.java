@@ -60,7 +60,7 @@ public interface IRokushikiUser
 		
 		if(WyDebug.isDebug())
 		{
-			System.out.println("Abilities : ");
+			System.out.println("Rokushiki Abilities : ");
 			System.out.println(goals);
 		}
 	}

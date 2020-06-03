@@ -33,7 +33,7 @@ public interface IBrawler
 		
 		if(WyDebug.isDebug())
 		{
-			System.out.println("Abilities : ");
+			System.out.println("Brawler Abilities : ");
 			System.out.println(goals);
 		}
 	}

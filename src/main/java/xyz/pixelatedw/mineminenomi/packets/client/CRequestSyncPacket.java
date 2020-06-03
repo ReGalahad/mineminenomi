@@ -11,10 +11,7 @@ import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
-import xyz.pixelatedw.mineminenomi.data.entity.haki.HakiDataCapability;
-import xyz.pixelatedw.mineminenomi.data.entity.haki.IHakiData;
 import xyz.pixelatedw.mineminenomi.packets.server.SEntityStatsSyncPacket;
-import xyz.pixelatedw.mineminenomi.packets.server.SHakiDataSyncPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SSyncDevilFruitPacket;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
@@ -64,7 +61,6 @@ public class CRequestSyncPacket
 				IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
 				IEntityStats entityStatsProps = EntityStatsCapability.get(player);
 				IAbilityData abilityDataProps = AbilityDataCapability.get(player);
-				IHakiData hakiDataProps = HakiDataCapability.get(player);
 				
 				if(((message.sync >> 0) & 1) == 1)
 					WyNetwork.sendTo(new SSyncDevilFruitPacket(player.getEntityId(), devilFruitProps), (ServerPlayerEntity) player);
@@ -74,9 +70,6 @@ public class CRequestSyncPacket
 				
 				if(((message.sync >> 2) & 1) == 1)
 					WyNetwork.sendTo(new SSyncAbilityDataPacket(player.getEntityId(), abilityDataProps), (ServerPlayerEntity) player);
-				
-				if(((message.sync >> 3) & 1) == 1)
-					WyNetwork.sendTo(new SHakiDataSyncPacket(player.getEntityId(), hakiDataProps), (ServerPlayerEntity) player);
 			});			
 		}
 		ctx.get().setPacketHandled(true);

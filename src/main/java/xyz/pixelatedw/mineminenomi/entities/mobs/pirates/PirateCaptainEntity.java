@@ -13,12 +13,13 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.entities.ai.IBrawler;
+import xyz.pixelatedw.mineminenomi.api.entities.ai.IHakiUser;
 import xyz.pixelatedw.mineminenomi.api.entities.ai.IRokushikiUser;
 import xyz.pixelatedw.mineminenomi.api.entities.ai.ISwordsman;
 import xyz.pixelatedw.mineminenomi.entities.mobs.ai.abilities.GapCloserGoal;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 
-public class PirateCaptainEntity extends GenericPirateEntity implements IRokushikiUser, ISwordsman, IBrawler
+public class PirateCaptainEntity extends GenericPirateEntity implements IRokushikiUser, ISwordsman, IBrawler, IHakiUser
 {
 	public PirateCaptainEntity(World world)
 	{
@@ -31,9 +32,10 @@ public class PirateCaptainEntity extends GenericPirateEntity implements IRokushi
 		super.registerGoals();
 		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1, true));
 		this.goalSelector.addGoal(2, new GapCloserGoal(this));
-		this.addRokushikiAbilities(this, 2);
+		this.addRokushikiAbilities(this, 1);
 		this.addSwordsmanAbilities(this, 2);
-		this.addBrawlerAbilities(this, 2);
+		this.addBrawlerAbilities(this, 3);
+		this.addBusoshokuHaki(this, 40);
 	}
 	
 	@Override

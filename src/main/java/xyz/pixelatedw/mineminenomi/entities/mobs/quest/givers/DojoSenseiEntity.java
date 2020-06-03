@@ -26,6 +26,8 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import xyz.pixelatedw.mineminenomi.api.entities.ai.IHakiUser;
+import xyz.pixelatedw.mineminenomi.api.entities.ai.ISwordsman;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.entities.mobs.GenericNewEntity;
@@ -36,7 +38,7 @@ import xyz.pixelatedw.mineminenomi.init.ModQuests;
 import xyz.pixelatedw.mineminenomi.init.ModWeapons;
 import xyz.pixelatedw.wypi.quests.Quest;
 
-public class DojoSenseiEntity extends GenericNewEntity implements IQuestGiver
+public class DojoSenseiEntity extends GenericNewEntity implements IQuestGiver, IHakiUser, ISwordsman
 {
 	protected Item[] swords = new Item[] {ModWeapons.SANDAI_KITETSU, ModWeapons.NIDAI_KITESTU, ModWeapons.WADO_ICHIMONJI, Items.DIAMOND_SWORD};
 	
@@ -58,6 +60,9 @@ public class DojoSenseiEntity extends GenericNewEntity implements IQuestGiver
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, GenericPirateEntity.class, true));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, GenericBanditEntity.class, true));
 		this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
+		
+		this.addSwordsmanAbilities(this, 4);
+		this.addBusoshokuHaki(this, 100);
 	}
 	
 	@Override

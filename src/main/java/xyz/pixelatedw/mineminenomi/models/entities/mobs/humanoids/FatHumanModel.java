@@ -11,6 +11,7 @@ import net.minecraft.util.HandSide;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import xyz.pixelatedw.mineminenomi.entities.mobs.GenericNewEntity;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 
 @OnlyIn(Dist.CLIENT)
@@ -67,7 +68,7 @@ public class FatHumanModel extends BipedModel implements IHasArm
 	{
 		this.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
-    	boolean hasHaki = false;
+    	boolean hasHaki = ((GenericNewEntity)entity).hasBusoHaki();
     	
 		this.rightleg1.render(scale);
 		this.leftarm.render(scale);

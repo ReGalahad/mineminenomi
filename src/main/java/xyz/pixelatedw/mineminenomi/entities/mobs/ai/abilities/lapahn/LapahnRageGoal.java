@@ -28,7 +28,6 @@ public class LapahnRageGoal extends Goal
 		this.execute();
 		return true;
 	}
-
 	
 	public void execute()
 	{
