@@ -2,7 +2,6 @@ package xyz.pixelatedw.mineminenomi.events.passives;
 
 import java.util.List;
 
-import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 
 import net.minecraft.client.Minecraft;
@@ -57,13 +56,13 @@ public class SniperPassiveEvents
 	@SubscribeEvent
 	public static void updateZoom(FOVUpdateEvent event)
 	{
-		if(!Minecraft.getInstance().player.inventory.hasAny(ImmutableSet.of(ModArmors.SNIPER_GOGGLES)))
+		PlayerEntity player = Minecraft.getInstance().player;		
+		if(player.getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() != ModArmors.SNIPER_GOGGLES)
 			return;
 		
-		PlayerEntity player = Minecraft.getInstance().player;		
 		IAbilityData aprops = AbilityDataCapability.get(player);
 		
-		if(aprops.getEquippedAbility(ZoomAbility.INSTANCE) != null && player.getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() == ModArmors.SNIPER_GOGGLES)
+		if(aprops.getEquippedAbility(ZoomAbility.INSTANCE) != null)
 		{
 			Ability ability = aprops.getEquippedAbility(ZoomAbility.INSTANCE);
 			
@@ -81,7 +80,7 @@ public class SniperPassiveEvents
 		PlayerEntity player = (PlayerEntity) event.getEntityLiving();
 		IAbilityData aprops = AbilityDataCapability.get(player);
 		
-		if(player.inventory.armorInventory.get(3).getItem() != ModArmors.SNIPER_GOGGLES)
+		if(player.getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() != ModArmors.SNIPER_GOGGLES)
 		{
 			if(aprops.hasUnlockedAbility(ZoomAbility.INSTANCE))
 			{
