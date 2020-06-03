@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.player.PlayerEntity;
 import xyz.pixelatedw.mineminenomi.api.abilities.ZoanAbility;
 import xyz.pixelatedw.mineminenomi.entities.zoan.GiraffeWalkZoanInfo;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
@@ -29,5 +30,12 @@ public class GiraffeWalkPointAbility extends ZoanAbility
 		this.addZoanModifier(SharedMonsterAttributes.ATTACK_SPEED, ATTACK_SPEED_MODIFIER);
 		this.addZoanModifier(ModAttributes.JUMP_HEIGHT, JUMP_BOOST);
 		this.addZoanModifier(ModAttributes.STEP_HEIGHT, STEP_HEIGHT);
+		
+		this.duringContinuityEvent = this::duringContinuityEvent;
+	}
+	
+	private void duringContinuityEvent(PlayerEntity player, int time)
+	{
+		player.fallDistance -= 0.05;
 	}
 }

@@ -2,6 +2,7 @@ package xyz.pixelatedw.mineminenomi.particles.effects.fishkarate;
 
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 
 public class SamehadaParticleEffect extends ParticleEffect
@@ -26,7 +27,7 @@ public class SamehadaParticleEffect extends ParticleEffect
 				double y = radius * Math.cos(phi);
 				double z = radius* Math.sin(theta) * Math.sin(phi);
 
-				world.addParticle(ParticleTypes.SPLASH, posX + x, posY + y, posZ + z, 0.0D, 0.0D, 0.0D);
+				((ServerWorld) world).spawnParticle(ParticleTypes.SPLASH, posX + x, posY + y, posZ + z, 1, 0, 0, 0, 0);			
 			}
 		}
 	}

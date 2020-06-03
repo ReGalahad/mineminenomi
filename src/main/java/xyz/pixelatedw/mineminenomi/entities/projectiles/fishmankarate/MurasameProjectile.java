@@ -46,7 +46,7 @@ public class MurasameProjectile extends AbilityProjectileEntity
 		ExplosionAbility explosion = AbilityHelper.newExplosion(this.getThrower(), hit.getX(), hit.getY(), hit.getZ(), 2);
 		explosion.setExplosionSound(false);
 		explosion.setDamageOwner(false);
-		explosion.setDestroyBlocks(false);
+		explosion.setDestroyBlocks(true);
 		explosion.setFireAfterExplosion(false);
 		explosion.setSmokeParticles(new WaterExplosionParticleEffect());
 		explosion.setDamageEntities(true);

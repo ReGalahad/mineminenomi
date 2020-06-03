@@ -65,7 +65,7 @@ public class DoppelmanEntity extends CreatureEntity
 		this.goalSelector.addGoal(5, new LookAtGoal(this, GenericBanditEntity.class, 8.0F));
 		this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
 
-		this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
+		this.targetSelector.addGoal(0, new HurtByTargetGoal(this));
 	}
 	
 	@Override
