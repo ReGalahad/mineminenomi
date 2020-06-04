@@ -41,6 +41,7 @@ public class CommonConfig
 	private BooleanValue yamiPower;
 	private DoubleValue dorikiRewardMultiplier;
 	private BooleanValue minimumDorikiPerKill;
+	private BooleanValue abilityFraudChecks;
 		
 	//private DoubleValue devilFruitDropsFromLeaves
 		
@@ -76,7 +77,6 @@ public class CommonConfig
 	// Permissions
 	
 	// System
-	private BooleanValue telemetry;
 	private BooleanValue fovRemover;
 	private BooleanValue updateMessage;
 	
@@ -103,13 +103,14 @@ public class CommonConfig
 			this.extraHearts = builder.comment("Allows players to receive extra hearts based on their doriki; true by default").define("Extra Hearts", true);
 			this.mobRewards = builder.comment("Allows mobs to reward doriki, bounty or items; true by default").define("Mob Rewards", true);
 			this.griefing = builder.comment("Allows abilities to break or replace blocks; if turned OFF it will make some abilities completly useless; true by default").define("Griefing", true);
-			this.animeScreaming = builder.comment("Will send a chat message to nearby players with the used ability's name; false by default").define("Anime Scream", false);
+			//this.animeScreaming = builder.comment("Will send a chat message to nearby players with the used ability's name; false by default").define("Anime Scream", false);
 			this.specialFlying = builder.comment("Allows Gasu Gasu no Mi, Moku Moku no Mi and Suna Suna no Mi users to fly, this option does not affect flying Zoans which will be able to fly regardless; false by default").define("Special Flying", false);
 			this.oneFruitPerWorld = builder.comment("Restricts the Devil Fruit spawns to only 1 of each type per world; false by default").define("One Devil Fruit per World", false);
 			this.yamiPower = builder.comment("Allows Yami Yami no Mi users to eat an additional fruit; true by default").define("Yami Yami no Mi additional fruit", true);
 			this.dorikiRewardMultiplier = builder.comment("Multiplies any doriki gained by this amount; 1 by default, min: 0, max: 10").defineInRange("Doriki Reward Multiplier", 1.0, 0.0, 10.0);
 			this.minimumDorikiPerKill = builder.comment("Guarantees a minimum of 1 doriki per kill; false by default").define("Minimum Doriki per Kill", false);
-			
+			this.abilityFraudChecks = builder.comment("Runs a check for all abilities on a player to remove dupes or suspicious abilities when the player joins the world; true by default").define("Ability Fraud Checks", true);
+
 			this.bannedAbilities = new ArrayList<String>();
 			Predicate<Object> bannedAbilitiesTest = new Predicate<Object>() 
 			{
@@ -170,19 +171,25 @@ public class CommonConfig
 		builder.pop();		
 		
 		builder.push("World Events");
-		
-		this.canSpawnTraders = builder.comment("Allows Traders to spawn in the world; true by default").define("Trader Spawns", true);
-		this.timeBetweenTraderSpawns = builder.comment("Determines the time (in seconds) between two spawn attempts; 1800 by default").defineInRange("Time Between Trader Spawns", 1800, 1, 99999);
-		this.chanceForTraderSpawn = builder.comment("Determines the % chance for a trader to spawn; 1 by default").defineInRange("Chance for Trader Spawns", 1, 1, 100);
-		
-		this.canSpawnTrainers = builder.comment("Allows Trainers to spawn in the world; true by default").define("Trainer Spawns", true);
-		this.timeBetweenTrainerSpawns = builder.comment("Determines the time (in seconds) between two spawn attempts; 1800 by default").defineInRange("Time Between Trainer Spawns", 1800, 1, 99999);
-		this.chanceForTrainerSpawn = builder.comment("Determines the % chance for a trainer to spawn; 15 by default").defineInRange("Chance for Trainer Spawns", 15, 1, 100);
-		
-		this.canSpawnAmbushes = builder.comment("Allows Ambushes to spawn in the world; true by default").define("Ambushe Spawns", true);
-		this.timeBetweenAmbushSpawns = builder.comment("Determines the time (in seconds) between two spawn attempts; 3600 by default").defineInRange("Time Between Ambushes Spawns", 3600, 1, 99999);
-		this.chanceForAmbushSpawn = builder.comment("Determines the % chance for a ambush to spawn; 15 by default").defineInRange("Chance for Ambush Spawns", 15, 1, 100);
-		
+		{
+			builder.push("Traders");
+			this.canSpawnTraders = builder.comment("Allows Traders to spawn in the world; true by default").define("Trader Spawns", true);
+			this.timeBetweenTraderSpawns = builder.comment("Determines the time (in seconds) between two spawn attempts; 1800 by default").defineInRange("Time Between Trader Spawns", 1800, 1, 99999);
+			this.chanceForTraderSpawn = builder.comment("Determines the % chance for a trader to spawn; 1 by default").defineInRange("Chance for Trader Spawns", 1, 1, 100);
+			builder.pop();
+			
+			builder.push("Trainers");
+			this.canSpawnTrainers = builder.comment("Allows Trainers to spawn in the world; true by default").define("Trainer Spawns", true);
+			this.timeBetweenTrainerSpawns = builder.comment("Determines the time (in seconds) between two spawn attempts; 1800 by default").defineInRange("Time Between Trainer Spawns", 1800, 1, 99999);
+			this.chanceForTrainerSpawn = builder.comment("Determines the % chance for a trainer to spawn; 15 by default").defineInRange("Chance for Trainer Spawns", 15, 1, 100);
+			builder.pop();
+			
+			builder.push("Ambushes");
+			this.canSpawnAmbushes = builder.comment("Allows Ambushes to spawn in the world; true by default").define("Ambushe Spawns", true);
+			this.timeBetweenAmbushSpawns = builder.comment("Determines the time (in seconds) between two spawn attempts; 3600 by default").defineInRange("Time Between Ambushes Spawns", 3600, 1, 99999);
+			this.chanceForAmbushSpawn = builder.comment("Determines the % chance for a ambush to spawn; 15 by default").defineInRange("Chance for Ambush Spawns", 15, 1, 100);
+			builder.pop();
+		}
 		builder.pop();
 		
 		builder.push("Bounty");
@@ -196,14 +203,18 @@ public class CommonConfig
 		builder.pop();
 		
 		builder.push("System");	
-		
-		this.telemetry = builder.comment("Allows the game to send data to our server for statistics, no personal information is sent only minor things like which fruit the player ate, what ability was used, which mobs killed etc; true by default").define("Telemtry", true);
-		this.updateMessage = builder.comment("Allows the game to show a text message when the installed mod is outdated; true by default").define("Update Message", true);	
-		this.fovRemover = builder.comment("Keeps the FOV fixed when the player has speed effects active").define("FOV Remover", true);
-		
+		{
+			this.updateMessage = builder.comment("Allows the game to show a text message when the installed mod is outdated; true by default").define("Update Message", true);	
+			this.fovRemover = builder.comment("Keeps the FOV fixed when the player has speed effects active").define("FOV Remover", true);
+		}
 		builder.pop();
 	}
 
+	public boolean isAbilityFraudChecksEnabled()
+	{
+		return this.abilityFraudChecks.get();
+	}
+	
 	public boolean isMinimumDorikiPerKillEnabled()
 	{
 		return this.minimumDorikiPerKill.get();
@@ -384,10 +395,5 @@ public class CommonConfig
 	public boolean isYamiPowerEnabled()
 	{
 		return this.yamiPower.get().booleanValue();
-	}
-
-	public boolean isTelemetryEnabled()
-	{
-		return this.telemetry.get().booleanValue();
 	}
 }

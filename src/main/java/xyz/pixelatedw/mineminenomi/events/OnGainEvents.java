@@ -36,7 +36,6 @@ public class OnGainEvents
 			IAttributeInstance attrAtk = target.getAttributes().getAttributeInstance(SharedMonsterAttributes.ATTACK_DAMAGE);
 			IAttributeInstance attrHP = target.getAttributes().getAttributeInstance(SharedMonsterAttributes.MAX_HEALTH);
 
-			int rng = player.world.rand.nextInt(3) + 1;
 			int plusBelly = 0;
 			long plusBounty = 0;
 			double plusDoriki = 0;
@@ -45,8 +44,8 @@ public class OnGainEvents
 			{
 				IEntityStats targetprops = EntityStatsCapability.get(player);
 
-				plusDoriki = (targetprops.getDoriki() / 4) + rng;
-				plusBounty = (targetprops.getBounty() / 2) + rng;
+				plusDoriki = targetprops.getDoriki() / 4;
+				plusBounty = targetprops.getBounty() / 2;
 				plusBelly = targetprops.getBelly();
 			}
 			else
@@ -65,8 +64,8 @@ public class OnGainEvents
 
 					plusDoriki *= CommonConfig.instance.getDorikiRewardMultiplier();
 
-					plusBounty = (entity.getDoriki() * 2) + rng;
-					plusBelly = entity.getBelly() + rng;
+					plusBounty = entity.getDoriki() * 2;
+					plusBelly = entity.getBelly();
 				}
 				else
 				{
@@ -75,8 +74,8 @@ public class OnGainEvents
 						double i = attrAtk.getBaseValue();
 						double j = attrHP.getBaseValue();
 
-						plusDoriki = (int) Math.round(((i + j) / 10) / Math.PI) + rng;
-						plusBounty = (int) Math.round((i + j) / 10) + rng;
+						plusDoriki = (int) Math.round(((i + j) / 10) / Math.PI);
+						plusBounty = (int) Math.round((i + j) / 10);
 						plusBelly = 1;
 
 						plusDoriki *= CommonConfig.instance.getDorikiRewardMultiplier();

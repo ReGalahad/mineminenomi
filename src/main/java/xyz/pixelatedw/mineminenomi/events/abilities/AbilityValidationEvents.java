@@ -9,6 +9,7 @@ import xyz.pixelatedw.mineminenomi.abilities.yomi.KasuriutaFubukiGiriAbility;
 import xyz.pixelatedw.mineminenomi.abilities.yomi.SoulParadeAbility;
 import xyz.pixelatedw.mineminenomi.abilities.yomi.YomiNoReikiAbility;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
+import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
@@ -32,7 +33,7 @@ public class AbilityValidationEvents
 	@SubscribeEvent
 	public static void onEntityJoinWorld(EntityJoinWorldEvent event)
 	{
-		if (event.getEntity() instanceof PlayerEntity)
+		if (event.getEntity() instanceof PlayerEntity && CommonConfig.instance.isAbilityFraudChecksEnabled())
 		{
 			PlayerEntity player = (PlayerEntity) event.getEntity();
 			IEntityStats entityStatsProps = EntityStatsCapability.get(player);
