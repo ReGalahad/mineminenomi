@@ -22,8 +22,11 @@ public class SimpleHumanModel extends BipedModel
 	{
 		this.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
-    	boolean hasHaki = ((GenericNewEntity)entity).hasBusoHaki();
+    	boolean hasHaki = false;
     	
+    	if(entity instanceof GenericNewEntity)
+    		hasHaki = ((GenericNewEntity)entity).hasBusoHaki();
+
         this.bipedHead.render(scale);
         this.bipedBody.render(scale);
         this.bipedLeftArm.render(scale);

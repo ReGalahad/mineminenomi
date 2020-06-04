@@ -142,13 +142,13 @@ public class DoppelmanEntity extends CreatureEntity
 			
 			IEntityStats ownerProps = EntityStatsCapability.get(this.getOwner());
 			IDevilFruit ownerDFProps = DevilFruitCapability.get(this.getOwner());		
-			List<LivingEntity> doppelmanAttackList = this.isAggressive ? WyHelper.getEntitiesNear(this.getPosition(), this.world, 10, PlayerEntity.class, GenericMarineEntity.class, GenericPirateEntity.class, MonsterEntity.class) : !forcedTargets.isEmpty() ? forcedTargets : new ArrayList<LivingEntity>();
+			List<LivingEntity> doppelmanAttackList = this.isAggressive ? WyHelper.getEntitiesNear(this.getPosition(), this.world, 10, PlayerEntity.class, GenericMarineEntity.class, GenericPirateEntity.class, MonsterEntity.class) : !this.forcedTargets.isEmpty() ? this.forcedTargets : new ArrayList<LivingEntity>();
 			LivingEntity target = null;
 
 			if(!ownerDFProps.getDevilFruit().equalsIgnoreCase("kage_kage"))
 				this.remove();
-			
-			if(!doppelmanAttackList.isEmpty())
+
+			if(!doppelmanAttackList.isEmpty() && (this.getAttackTarget() == null || !this.getAttackTarget().isAlive()))
 			{
 				if(doppelmanAttackList.contains(this.getOwner()))
 					doppelmanAttackList.remove(this.getOwner());
