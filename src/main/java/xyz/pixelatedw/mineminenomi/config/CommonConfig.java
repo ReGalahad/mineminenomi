@@ -40,6 +40,7 @@ public class CommonConfig
 	private BooleanValue oneFruitPerWorld;
 	private BooleanValue yamiPower;
 	private DoubleValue dorikiRewardMultiplier;
+	private BooleanValue minimumDorikiPerKill;
 		
 	//private DoubleValue devilFruitDropsFromLeaves
 		
@@ -107,7 +108,8 @@ public class CommonConfig
 			this.oneFruitPerWorld = builder.comment("Restricts the Devil Fruit spawns to only 1 of each type per world; false by default").define("One Devil Fruit per World", false);
 			this.yamiPower = builder.comment("Allows Yami Yami no Mi users to eat an additional fruit; true by default").define("Yami Yami no Mi additional fruit", true);
 			this.dorikiRewardMultiplier = builder.comment("Multiplies any doriki gained by this amount; 1 by default, min: 0, max: 10").defineInRange("Doriki Reward Multiplier", 1.0, 0.0, 10.0);
-
+			this.minimumDorikiPerKill = builder.comment("Guarantees a minimum of 1 doriki per kill; false by default").define("Minimum Doriki per Kill", false);
+			
 			this.bannedAbilities = new ArrayList<String>();
 			Predicate<Object> bannedAbilitiesTest = new Predicate<Object>() 
 			{
@@ -202,6 +204,11 @@ public class CommonConfig
 		builder.pop();
 	}
 
+	public boolean isMinimumDorikiPerKillEnabled()
+	{
+		return this.minimumDorikiPerKill.get();
+	}
+	
 	public int getChanceForAmbushSpawn()
 	{
 		return this.chanceForAmbushSpawn.get();

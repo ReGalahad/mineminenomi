@@ -22,7 +22,7 @@ import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.network.WyNetwork;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
-public class EventsOnGain
+public class OnGainEvents
 {
 	@SubscribeEvent
 	public static void onEntityDeath(LivingDeathEvent event)
@@ -41,8 +41,6 @@ public class EventsOnGain
 			long plusBounty = 0;
 			double plusDoriki = 0;
 
-			boolean targetPlayer = false;
-
 			if (target instanceof PlayerEntity)
 			{
 				IEntityStats targetprops = EntityStatsCapability.get(player);
@@ -50,8 +48,6 @@ public class EventsOnGain
 				plusDoriki = (targetprops.getDoriki() / 4) + rng;
 				plusBounty = (targetprops.getBounty() / 2) + rng;
 				plusBelly = targetprops.getBelly();
-
-				targetPlayer = true;
 			}
 			else
 			{
@@ -62,20 +58,12 @@ public class EventsOnGain
 				{
 					GenericNewEntity entity = (GenericNewEntity) target;
 
-					if ((props.getDoriki() / 100) > entity.getDoriki())
-					{
-						int x = (props.getDoriki() / 100) - entity.getDoriki();
-						if (x <= 0)
-							x = 1;
-
-						plusDoriki = 1 / x;
-						if (plusDoriki < 1)
-							plusDoriki = 1;
-					}
+					if ((props.getDoriki() / 100) > entity.getDoriki() && CommonConfig.instance.isMinimumDorikiPerKillEnabled())
+						plusDoriki = 1;
 					else
 						plusDoriki = entity.getDoriki();
 
-					//plusDoriki *= MainConfig.modifierDorikiReward;
+					plusDoriki *= CommonConfig.instance.getDorikiRewardMultiplier();
 
 					plusBounty = (entity.getDoriki() * 2) + rng;
 					plusBelly = entity.getBelly() + rng;
@@ -97,8 +85,8 @@ public class EventsOnGain
 					else
 					{
 						plusDoriki = 0;
-						plusBounty = 0;
-						plusBelly = 1;
+						plusBounty = 1;
+						plusBelly = 0;
 					}
 				}
 
@@ -113,15 +101,16 @@ public class EventsOnGain
 					}
 				}
 
-				if (props.isPirate())
-					if (plusBounty > 0)
-						if (props.getBounty() + plusBounty < ModValues.MAX_GENERAL)
-						{
-							props.alterBounty(plusBounty);
-							BountyEvent e = new BountyEvent(player, plusBounty);
-							if (MinecraftForge.EVENT_BUS.post(e))
-								return;
-						}
+				if (props.isPirate() || props.isBandit() || props.isRevolutionary())
+				{
+					if (plusBounty > 0 && props.getBounty() + plusBounty < ModValues.MAX_GENERAL)
+					{
+						props.alterBounty(plusBounty);
+						BountyEvent e = new BountyEvent(player, plusBounty);
+						if (MinecraftForge.EVENT_BUS.post(e))
+							return;
+					}
+				}
 
 				if (props.getBelly() + plusBelly < ModValues.MAX_GENERAL)
 					props.alterBelly(plusBelly);
