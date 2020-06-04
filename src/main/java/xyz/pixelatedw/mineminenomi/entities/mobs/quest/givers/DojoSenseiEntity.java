@@ -36,6 +36,7 @@ import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.GenericPirateEntity;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.mineminenomi.init.ModQuests;
 import xyz.pixelatedw.mineminenomi.init.ModWeapons;
+import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.quests.Quest;
 
 public class DojoSenseiEntity extends GenericNewEntity implements IQuestGiver, IHakiUser, ISwordsman
@@ -75,8 +76,8 @@ public class DojoSenseiEntity extends GenericNewEntity implements IQuestGiver, I
 		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(80.0D);
 		this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
 		
-		this.setDoriki(20);
-		this.setBelly(20);
+		this.setDoriki(20 + WyHelper.randomWithRange(0, 10));
+		this.setBelly(20 + WyHelper.randomWithRange(0, 20));
 	}
 
 	@Override

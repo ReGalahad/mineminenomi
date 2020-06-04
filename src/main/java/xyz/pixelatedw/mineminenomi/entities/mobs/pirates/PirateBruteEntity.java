@@ -16,6 +16,7 @@ import xyz.pixelatedw.mineminenomi.api.entities.ai.IBrawler;
 import xyz.pixelatedw.mineminenomi.api.entities.ai.IHakiUser;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.mineminenomi.init.ModWeapons;
+import xyz.pixelatedw.wypi.WyHelper;
 
 public class PirateBruteEntity extends GenericPirateEntity implements IBrawler, IHakiUser
 {
@@ -43,8 +44,8 @@ public class PirateBruteEntity extends GenericPirateEntity implements IBrawler, 
 		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40.0D);
 		this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(4.0D);
 		
-		this.setDoriki(15);
-		this.setBelly(5);
+		this.setDoriki(15 + WyHelper.randomWithRange(0, 20));
+		this.setBelly(5 + WyHelper.randomWithRange(0, 5));
 	}
 	
 	@Override

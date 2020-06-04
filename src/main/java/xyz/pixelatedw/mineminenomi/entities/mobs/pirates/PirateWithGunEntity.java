@@ -18,6 +18,7 @@ import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.extra.NormalBulletProjectile;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.mineminenomi.init.ModWeapons;
+import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 
 public class PirateWithGunEntity extends GenericPirateEntity implements IRangedAttackMob
@@ -44,8 +45,8 @@ public class PirateWithGunEntity extends GenericPirateEntity implements IRangedA
 		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D);
 		this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
 		
-		this.setDoriki(10);
-		this.setBelly(5);
+		this.setDoriki(10 + WyHelper.randomWithRange(0, 5));
+		this.setBelly(5 + WyHelper.randomWithRange(0, 5));
 	}
 
 	@Override

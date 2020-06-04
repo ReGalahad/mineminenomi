@@ -102,9 +102,9 @@ public class GenericNewEntity extends CreatureEntity implements IDynamicRenderer
 		return this.doriki;
 	}
 
-	public void setDoriki(int value)
+	public void setDoriki(double value)
 	{
-		this.doriki = value;
+		this.doriki = (int) Math.floor(value);
 	}
 
 	public int getBelly()
@@ -112,9 +112,9 @@ public class GenericNewEntity extends CreatureEntity implements IDynamicRenderer
 		return this.belly;
 	}
 
-	public void setBelly(int value)
+	public void setBelly(double value)
 	{
-		this.belly = value;
+		this.belly = (int) Math.floor(value);
 	}
 
 	public boolean hasBusoHaki()

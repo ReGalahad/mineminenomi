@@ -18,6 +18,7 @@ import xyz.pixelatedw.mineminenomi.api.entities.ai.IRokushikiUser;
 import xyz.pixelatedw.mineminenomi.api.entities.ai.ISwordsman;
 import xyz.pixelatedw.mineminenomi.entities.mobs.ai.abilities.GapCloserGoal;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
+import xyz.pixelatedw.wypi.WyHelper;
 
 public class PirateCaptainEntity extends GenericPirateEntity implements IRokushikiUser, ISwordsman, IBrawler, IHakiUser
 {
@@ -48,8 +49,8 @@ public class PirateCaptainEntity extends GenericPirateEntity implements IRokushi
 		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(50.0D);
 		this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
 		
-		this.setDoriki(20);
-		this.setBelly(20);
+		this.setDoriki(20 + WyHelper.randomWithRange(0, 10));
+		this.setBelly(20 + WyHelper.randomWithRange(0, 20));
 	}
 
 	@Override
