@@ -1,14 +1,5 @@
 package xyz.pixelatedw.mineminenomi.config;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.function.Predicate;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
 import net.minecraftforge.common.ForgeConfigSpec.DoubleValue;
@@ -16,7 +7,11 @@ import net.minecraftforge.common.ForgeConfigSpec.EnumValue;
 import net.minecraftforge.common.ForgeConfigSpec.IntValue;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
+import org.apache.commons.lang3.tuple.Pair;
 import xyz.pixelatedw.wypi.WyHelper;
+
+import java.util.*;
+import java.util.function.Predicate;
 
 public class CommonConfig
 {
@@ -83,7 +78,8 @@ public class CommonConfig
 	private BooleanValue telemetry;
 	private BooleanValue fovRemover;
 	private BooleanValue updateMessage;
-	
+
+
 	public enum KeepStatsLogic
 	{
 		NONE, AUTO, FULL, CUSTOM
@@ -402,4 +398,15 @@ public class CommonConfig
 	{
 		return this.telemetry.get().booleanValue();
 	}
+
+	public boolean isAbilityFraudChecksEnabled()
+	{
+		return this.abilityFraudChecks.get();
+	}
+
+	public boolean isMinimumDorikiPerKillEnabled() { return this.minimumDorikiPerKill.get(); }
+
+	public int getkairosekiSpawnCount() { return this.KairosekiSpawnCount.get(); }
+
+	public int getKairosekiSpawnHeight() { return this.KairosekiSpawnCount.get(); }
 }
