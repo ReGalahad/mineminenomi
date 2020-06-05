@@ -36,8 +36,8 @@ public class ToriPhoenixPassiveEvents {
         if (ability != null && ability.isContinuous()) {
             if (TenseiNoSoen != null && 5 > TenseiNoSoen.getChargeTime()) return;
 
-            float maxSpeed = 2.0f;
-            float acceleration = 0.005f;
+            float maxSpeed = 2.1f;
+            float acceleration = 0.008f;
 
             acceleration *= (ability.speed > 0 ? (1 - ability.speed / maxSpeed) : 1);
             acceleration = (player.moveForward > 0 && !player.collided) ? acceleration : -maxSpeed / 10;
@@ -47,7 +47,7 @@ public class ToriPhoenixPassiveEvents {
             int d2 = player.moveForward > 0F ? 1 : 0;
             int d3 = player.isSneaking() ? 1 : 0;
             int d4 = ((maxSpeed / 3) >= ability.speed || d2 == 0) ? 1 : 0;
-            System.out.println(ability.speed >= maxSpeed);
+
             Vec3d vec = player.getLookVec();
             double x = (vec.x * ability.speed) * (1 - d1) * d2 + d3 * player.getMotion().z;
             double y = d1 * 5f + (vec.y * ability.speed) * (1 - d1) * d2 + d3 * -0.5f + d4 * (Math.cos(player.ticksExisted / 4f) / 5f);

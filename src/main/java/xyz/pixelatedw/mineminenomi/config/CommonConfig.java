@@ -1,14 +1,5 @@
 package xyz.pixelatedw.mineminenomi.config;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.function.Predicate;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
 import net.minecraftforge.common.ForgeConfigSpec.DoubleValue;
@@ -16,7 +7,11 @@ import net.minecraftforge.common.ForgeConfigSpec.EnumValue;
 import net.minecraftforge.common.ForgeConfigSpec.IntValue;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
+import org.apache.commons.lang3.tuple.Pair;
 import xyz.pixelatedw.wypi.WyHelper;
+
+import java.util.*;
+import java.util.function.Predicate;
 
 public class CommonConfig
 {
@@ -71,7 +66,11 @@ public class CommonConfig
 	private BooleanValue canSpawnAmbushes;
 	private IntValue timeBetweenAmbushSpawns;
 	private IntValue chanceForAmbushSpawn;
-	
+
+	// Ores
+	private IntValue KairosekiSpawnCount;
+	private IntValue KairosekiSpawnHeight;
+
 	// Permissions
 	
 	// System
@@ -180,7 +179,11 @@ public class CommonConfig
 		this.canSpawnAmbushes = builder.comment("Allows Ambushes to spawn in the world; true by default").define("Ambushe Spawns", true);
 		this.timeBetweenAmbushSpawns = builder.comment("Determines the time (in seconds) between two spawn attempts; 3600 by default").defineInRange("Time Between Ambushes Spawns", 3600, 1, 99999);
 		this.chanceForAmbushSpawn = builder.comment("Determines the % chance for a ambush to spawn; 15 by default").defineInRange("Chance for Ambush Spawns", 15, 1, 100);
-		
+		builder.pop();
+
+		builder.push("Ores");
+		this.KairosekiSpawnCount = builder.comment("Kairoseki vein spawn count; 3 by default").defineInRange("Chance for vein to spawn", 3, 0, 100);
+		this.KairosekiSpawnHeight = builder.comment("Kairoseki spawn height; 128 by default").defineInRange("Kairoseki max spawn size", 128, 0, 256);
 		builder.pop();
 		
 		builder.push("Bounty");
@@ -216,7 +219,7 @@ public class CommonConfig
 	{
 		return this.canSpawnAmbushes.get();
 	}
-	
+
 	public int getChanceForTrainerSpawn()
 	{
 		return this.chanceForTrainerSpawn.get();
@@ -246,7 +249,17 @@ public class CommonConfig
 	{
 		return this.canSpawnTraders.get();
 	}
-	
+
+	public int getkairosekiSpawnCount()
+	{
+		return this.KairosekiSpawnCount.get();
+	}
+
+	public int getKairosekiSpawnHeight()
+	{
+		return this.KairosekiSpawnHeight.get();
+	}
+
 	public String[] getCooldownVisuals()
 	{
 		String[] newArray = new String[] {};
