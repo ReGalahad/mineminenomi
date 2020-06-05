@@ -90,29 +90,32 @@ public class ModEntities
 	// Biome Sets
 	private static final Biome.Category[] GENERIC_ONES = new Biome.Category[] { Biome.Category.PLAINS, Biome.Category.FOREST, Biome.Category.BEACH, Biome.Category.EXTREME_HILLS, Biome.Category.TAIGA, Biome.Category.SAVANNA, Biome.Category.SWAMP };
 	private static final Biome.Category[] GENERIC_ONES_PLUS = ArrayUtils.addAll(GENERIC_ONES, Biome.Category.MESA, Biome.Category.DESERT);
-
+	private static final Biome.Category[] PIRATE_BIOMES = new Biome.Category[] { Biome.Category.BEACH, Biome.Category.SWAMP, Biome.Category.FOREST };
+	private static final Biome.Category[] MARINE_BIOMES = new Biome.Category[] { Biome.Category.PLAINS, Biome.Category.TAIGA, Biome.Category.FOREST, Biome.Category.SAVANNA, Biome.Category.BEACH, Biome.Category.SWAMP };
+	private static final Biome.Category[] BANDIT_BIOMES = new Biome.Category[] { Biome.Category.EXTREME_HILLS, Biome.Category.FOREST, Biome.Category.MESA };
+	
 	static
 	{
 		// Marines
 		registerMarineWithSpawnEgg(MARINE_WITH_SWORD, "Marine with Sword");
-		registerEntityWorldSpawn(MARINE_WITH_SWORD, 10, 2, 5, GENERIC_ONES_PLUS);
+		registerEntityWorldSpawn(MARINE_WITH_SWORD, 10, 2, 5, MARINE_BIOMES);
 		registerMarineWithSpawnEgg(MARINE_WITH_GUN, "Marine with Gun");
-		registerEntityWorldSpawn(MARINE_WITH_GUN, 8, 2, 5, GENERIC_ONES_PLUS);
+		registerEntityWorldSpawn(MARINE_WITH_GUN, 8, 2, 5, MARINE_BIOMES);
 		registerMarineWithSpawnEgg(MARINE_CAPTAIN, "Marine Captain");
 		registerMarineWithSpawnEgg(MARINE_TRADER, "Marine Trader");
 
 		// Pirates
 		registerPirateWithSpawnEgg(PIRATE_WITH_SWORD, "Pirate with Sword");
-		registerEntityWorldSpawn(PIRATE_WITH_SWORD, 10, 2, 5, GENERIC_ONES_PLUS);
+		registerEntityWorldSpawn(PIRATE_WITH_SWORD, 10, 2, 5, PIRATE_BIOMES);
 		registerPirateWithSpawnEgg(PIRATE_WITH_GUN, "Pirate with Gun");
-		registerEntityWorldSpawn(PIRATE_WITH_GUN, 8, 2, 5, GENERIC_ONES_PLUS);
+		registerEntityWorldSpawn(PIRATE_WITH_GUN, 8, 2, 5, PIRATE_BIOMES);
 		registerPirateWithSpawnEgg(PIRATE_CAPTAIN, "Pirate Captain");
 		registerPirateWithSpawnEgg(PIRATE_TRADER, "Pirate Trader");
 		registerPirateWithSpawnEgg(PIRATE_BRUTE, "Pirate Brute");
 
 		// Bandits
 		registerBanditWithSpawnEgg(BANDIT_WITH_SWORD, "Bandit with Sword");
-		registerEntityWorldSpawn(BANDIT_WITH_SWORD, 10, 2, 5, Biome.Category.EXTREME_HILLS, Biome.Category.FOREST, Biome.Category.MESA);
+		registerEntityWorldSpawn(BANDIT_WITH_SWORD, 10, 2, 5, BANDIT_BIOMES);
 
 		// Factionless
 		registerFactionlessWithSpawnEgg(DOJO_SENSEI, "Dojo Sensei");
