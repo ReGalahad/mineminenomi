@@ -13,6 +13,7 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
+import xyz.pixelatedw.wypi.WyHelper;
 
 public class BanditWithSwordEntity extends GenericBanditEntity
 {
@@ -39,8 +40,8 @@ public class BanditWithSwordEntity extends GenericBanditEntity
 		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D);
 		this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
 		
-		this.setDoriki(10);
-		this.setBelly(5);
+		this.setDoriki(10 + WyHelper.randomWithRange(0, 5));
+		this.setBelly(5 + WyHelper.randomWithRange(0, 5));
 	}
 
 	@Override

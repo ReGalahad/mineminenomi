@@ -54,7 +54,7 @@ public class AbilityCommand
 	}
 
 	private static int addAbility(CommandContext<CommandSource> context, Ability ability, Collection<ServerPlayerEntity> targets)
-	{		
+	{
 		for (ServerPlayerEntity player : targets)
 		{
 			IAbilityData props = AbilityDataCapability.get(player);

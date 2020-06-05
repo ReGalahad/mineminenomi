@@ -1,8 +1,5 @@
 package xyz.pixelatedw.mineminenomi.api.abilities;
 
-import java.util.HashMap;
-import java.util.Map.Entry;
-
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.player.PlayerEntity;
@@ -20,6 +17,9 @@ import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 import xyz.pixelatedw.wypi.network.WyNetwork;
 import xyz.pixelatedw.wypi.network.packets.server.SSyncAbilityDataPacket;
+
+import java.util.HashMap;
+import java.util.Map.Entry;
 
 public class ZoanAbility extends ContinuousAbility implements IParallelContinuousAbility
 {
@@ -46,8 +46,8 @@ public class ZoanAbility extends ContinuousAbility implements IParallelContinuou
 		
 		for(Entry<IAttribute, AttributeModifier> entry : this.zoanModifiers.entrySet())
 		{
-			player.getAttribute(entry.getKey()).removeModifier(entry.getValue());
-			player.getAttribute(entry.getKey()).applyModifier(entry.getValue());
+			player.getAttribute(entry.getKey()).removeModifier(entry.getValue().setSaved(false));
+			player.getAttribute(entry.getKey()).applyModifier(entry.getValue().setSaved(false));
 		}
 		
 		// Need to set this before the updateEyeView method is called to ensure the ability is active
@@ -73,7 +73,7 @@ public class ZoanAbility extends ContinuousAbility implements IParallelContinuou
 		
 		for(Entry<IAttribute, AttributeModifier> entry : this.zoanModifiers.entrySet())
 		{
-			player.getAttribute(entry.getKey()).removeModifier(entry.getValue());
+			player.getAttribute(entry.getKey()).removeModifier(entry.getValue().setSaved(false));
 		}
 		
 		WyNetwork.sendToAll(new SSyncDevilFruitPacket(player.getEntityId(), props));

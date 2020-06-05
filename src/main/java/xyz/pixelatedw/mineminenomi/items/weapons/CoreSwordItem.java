@@ -24,6 +24,7 @@ import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.abilities.haki.BusoshokuHakiImbuingAbility;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
+import xyz.pixelatedw.mineminenomi.entities.mobs.GenericNewEntity;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
@@ -40,17 +41,26 @@ public class CoreSwordItem extends Item
 
 	private IItemPropertyGetter hakiProperty = (itemStack, world, livingEntity) ->
 	{
-		if (livingEntity == null || !(livingEntity instanceof PlayerEntity))
+		if (livingEntity == null)
 		{
 			return 0.0F;
 		}
 		else
 		{
-			IAbilityData props = AbilityDataCapability.get(livingEntity);
-			boolean mainHandFlag = livingEntity.getHeldItemMainhand() == itemStack;
-			BusoshokuHakiImbuingAbility ability = props.getEquippedAbility(BusoshokuHakiImbuingAbility.INSTANCE);
-			boolean hakiActiveFlag = ability != null && ability.isContinuous();
-			return mainHandFlag && hakiActiveFlag ? 1.0F : 0.0F;
+			float hasHakiActive = 0;
+			if(livingEntity instanceof PlayerEntity)
+			{
+				IAbilityData props = AbilityDataCapability.get(livingEntity);
+				boolean mainHandFlag = livingEntity.getHeldItemMainhand() == itemStack;
+				BusoshokuHakiImbuingAbility ability = props.getEquippedAbility(BusoshokuHakiImbuingAbility.INSTANCE);
+				boolean hakiActiveFlag = ability != null && ability.isContinuous();
+				hasHakiActive = mainHandFlag && hakiActiveFlag ? 1 : 0;
+			}
+			else if(livingEntity instanceof GenericNewEntity)
+			{
+				hasHakiActive = ((GenericNewEntity)livingEntity).hasBusoHaki() ? 1 : 0;
+			}
+			return hasHakiActive;
 		}
 	};
 	
@@ -92,6 +102,7 @@ public class CoreSwordItem extends Item
 		this.addPropertyOverride(new ResourceLocation("sheathed"), this.sheathedProperty);
 	}
 
+	@Override
 	public void inventoryTick(ItemStack itemStack, World world, Entity entity, int par4, boolean par5)
 	{
 		if (!itemStack.hasTag())

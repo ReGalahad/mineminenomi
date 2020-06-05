@@ -21,7 +21,7 @@ public class DoppelmanRenderer extends GenericMobRenderer<DoppelmanEntity, Biped
 	}
 	
 	@Override
-	protected void preRenderCallback(DoppelmanEntity entity, float f) 
+	protected void preRenderCallback(DoppelmanEntity entity, float f)
 	{
 		float scale = 1 + ((float)entity.getShadows() / 7);
 

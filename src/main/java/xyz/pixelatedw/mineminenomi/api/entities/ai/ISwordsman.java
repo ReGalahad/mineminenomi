@@ -42,7 +42,7 @@ public interface ISwordsman
 		
 		if(WyDebug.isDebug())
 		{
-			System.out.println("Abilities : ");
+			System.out.println("Swordsman Abilities : ");
 			System.out.println(goals);
 		}
 	}

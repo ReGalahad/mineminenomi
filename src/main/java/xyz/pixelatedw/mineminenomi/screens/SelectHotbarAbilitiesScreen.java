@@ -11,6 +11,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -23,6 +24,7 @@ import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.packets.client.CStopAbilityPacket;
 import xyz.pixelatedw.mineminenomi.screens.extra.AbilitiesListScreenPanel;
 import xyz.pixelatedw.mineminenomi.screens.extra.NoTextureButton;
+import xyz.pixelatedw.mineminenomi.screens.extra.TexturedIconButton;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
@@ -87,44 +89,6 @@ public class SelectHotbarAbilitiesScreen extends Screen
 				RendererHelper.drawAbilityIcon(WyHelper.getResourceName(this.abilityDataProps.getEquippedAbility(i).getName()), (posX - 192 + (i * 50)) / 2, posY - 29, 16, 16);
 		}
 
-		this.minecraft.getTextureManager().bindTexture(ModResources.WIDGETS);
-		Ability abl = this.abilityDataProps.getUnlockedAbilities(AbilityCategory.DEVIL_FRUIT).parallelStream().findFirst().orElse(null);
-		if (abl != null || this.devilFruitProps.hasDevilFruit())
-		{
-			if(this.devilFruitProps.hasDevilFruit())
-			{
-				GuiUtils.drawTexturedModalRect((posX - 280) / 2, (posY - 200) / 2, 0, 23, 27, 26, 0);
-				if (this.devilFruitProps.hasYamiPower())
-					RendererHelper.drawDevilFruitIcon("yami_yami_no_mi", (posX - 268) / 2, (posY - 187) / 2, 16, 16);
-				else
-				{
-					ItemStack df = AbilityHelper.getDevilFruitItem(this.devilFruitProps.getDevilFruit());
-	
-					RendererHelper.drawDevilFruitIcon(df.getTranslationKey().replace("item." + APIConfig.PROJECT_ID + ".", ""), (posX - 268) / 2, (posY - 187) / 2, 16, 16);
-				}
-			}
-			else
-			{
-				GuiUtils.drawTexturedModalRect((posX - 280) / 2, (posY - 200) / 2, 0, 23, 27, 26, 0);
-				RendererHelper.drawAbilityIcon(abl.getName(), (posX - 268) / 2, (posY - 187) / 2, 16, 16);
-			}
-			this.minecraft.getTextureManager().bindTexture(ModResources.WIDGETS);
-		}
-		abl = this.abilityDataProps.getUnlockedAbilities(AbilityCategory.RACIAL).parallelStream().findFirst().orElse(null);
-		if (abl != null)
-		{
-			GuiUtils.drawTexturedModalRect((posX - 280) / 2, (posY - 140) / 2, 0, 23, 27, 26, 0);
-			RendererHelper.drawAbilityIcon(abl.getName(), (posX - 268) / 2, (posY - 127) / 2, 16, 16);
-			this.minecraft.getTextureManager().bindTexture(ModResources.WIDGETS);
-		}
-		abl = this.abilityDataProps.getUnlockedAbilities(AbilityCategory.HAKI).parallelStream().findFirst().orElse(null);
-		if (abl != null)
-		{
-			GuiUtils.drawTexturedModalRect((posX - 280) / 2, (posY - 80) / 2, 0, 23, 27, 26, 0);
-			RendererHelper.drawAbilityIcon(abl.getName(), (posX - 268) / 2, (posY - 67) / 2, 16, 16);
-			this.minecraft.getTextureManager().bindTexture(ModResources.WIDGETS);
-		}
-
 		GL11.glDisable(GL11.GL_BLEND);
 
 		// WyHelper.startGlScissor((posX - 220) / 2, (posY - 200) / 2, 215, 130);
@@ -152,35 +116,48 @@ public class SelectHotbarAbilitiesScreen extends Screen
 		Ability abl = this.abilityDataProps.getUnlockedAbilities(AbilityCategory.DEVIL_FRUIT).stream().findFirst().orElse(null);
 		if (abl != null || this.devilFruitProps.hasDevilFruit())
 		{
-			this.addButton(new NoTextureButton((posX - 280) / 2, (posY - 200) / 2, 27, 25, "", b ->
+			String iconName = abl.getName();
+			ResourceLocation dfIcon = new ResourceLocation(APIConfig.PROJECT_ID, "textures/abilities/" + WyHelper.getResourceName(iconName) + ".png");
+			
+			if(this.devilFruitProps.hasDevilFruit())
 			{
-				this.menuSelected = 0;
-				this.updateScreen();
-			}));
+				if (this.devilFruitProps.hasYamiPower())
+					iconName = "yami_yami_no_mi";
+				else
+				{
+					ItemStack df = AbilityHelper.getDevilFruitItem(this.devilFruitProps.getDevilFruit());
+					iconName = df.getTranslationKey().replace("item." + APIConfig.PROJECT_ID + ".", "");
+				}
+				dfIcon = new ResourceLocation(APIConfig.PROJECT_ID, "textures/items/" + WyHelper.getResourceName(iconName) + ".png");
+			}
+
+			TexturedIconButton devilFruitsButton = new TexturedIconButton(ModResources.BLANK2_SIMPLE, (posX - 290) / 2, (posY - 200) / 2, 30, 30, "", (btn) -> this.updateListScreen(0));
+			devilFruitsButton = devilFruitsButton.setTextureInfo((posX - 290) / 2, (posY - 200) / 2, 30, 40).setIconInfo(dfIcon, (posX - 268) / 2, (posY - 183) / 2, 1.5);
+			this.addButton(devilFruitsButton);
 		}
 		abl = this.abilityDataProps.getUnlockedAbilities(AbilityCategory.RACIAL).stream().findFirst().orElse(null);
 		if (abl != null)
 		{
-			this.addButton(new NoTextureButton((posX - 280) / 2, (posY - 140) / 2, 27, 25, "", b ->
-			{
-				this.menuSelected = 1;
-				this.updateScreen();
-			}));
+			String iconName = abl.getName();
+			ResourceLocation raceIcon = new ResourceLocation(APIConfig.PROJECT_ID, "textures/abilities/" + WyHelper.getResourceName(iconName) + ".png");
+			TexturedIconButton racialButton = new TexturedIconButton(ModResources.BLANK2_SIMPLE, (posX - 290) / 2, (posY - 130) / 2, 30, 30, "", (btn) -> this.updateListScreen(1));
+			racialButton = racialButton.setTextureInfo((posX - 290) / 2, (posY - 130) / 2, 30, 40).setIconInfo(raceIcon, (posX - 268) / 2, (posY - 112) / 2, 1.5);
+			this.addButton(racialButton);
 		}
 		abl = this.abilityDataProps.getUnlockedAbilities(AbilityCategory.HAKI).stream().findFirst().orElse(null);
 		if (abl != null)
 		{
-			this.addButton(new NoTextureButton((posX - 280) / 2, (posY - 80) / 2, 27, 25, "", b ->
-			{
-				this.menuSelected = 2;
-				this.updateScreen();
-			}));
+			String iconName = abl.getName();
+			ResourceLocation hakiIcon = new ResourceLocation(APIConfig.PROJECT_ID, "textures/abilities/" + WyHelper.getResourceName(iconName) + ".png");
+			TexturedIconButton hakiButton = new TexturedIconButton(ModResources.BLANK2_SIMPLE, (posX - 290) / 2, (posY - 60) / 2, 30, 30, "", (btn) -> this.updateListScreen(2));
+			hakiButton = hakiButton.setTextureInfo((posX - 290) / 2, (posY - 60) / 2, 30, 40).setIconInfo(hakiIcon, (posX - 268) / 2, (posY - 42) / 2, 1.5);
+			this.addButton(hakiButton);
 		}
 		for (int i = 0; i < 8; i++)
 		{
 			GL11.glEnable(GL11.GL_BLEND);
 			final int id = i;
-			this.addButton(new NoTextureButton((posX - 196 + (i * 50)) / 2, posY - 31, 21, 21, "", b ->
+			NoTextureButton slotButton = new NoTextureButton((posX - 197 + (i * 50)) / 2, posY - 31, 22, 21, "", b ->
 			{
 				if (this.slotSelected != id)
 					this.slotSelected = id;
@@ -189,18 +166,22 @@ public class SelectHotbarAbilitiesScreen extends Screen
 					WyNetwork.sendToServer(new CStopAbilityPacket(this.slotSelected));
 					this.abilityDataProps.setEquippedAbility(this.slotSelected, null);
 				}
-			}));
+			});
+			slotButton.setFake();
+			this.addButton(slotButton);
 		}
 		
-		this.updateScreen();
+		this.updateListScreen(0);
 	}
 
-	public void updateScreen()
-	{
+	public void updateListScreen(int listNo)
+	{		
 		this.children.remove(this.devilFruitsAbilitiesList);
 		this.children.remove(this.racialAbilitiesList);
 		this.children.remove(this.hakiAbilitiesList);
 
+		this.menuSelected = listNo;
+		
 		if (this.menuSelected == 0)
 		{
 			List<Ability> list = this.abilityDataProps.getUnlockedAbilities(AbilityCategory.DEVIL_FRUIT);

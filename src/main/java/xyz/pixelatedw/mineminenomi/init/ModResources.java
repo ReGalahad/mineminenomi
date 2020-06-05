@@ -49,6 +49,10 @@ public class ModResources
 	public static final ResourceLocation WOOD_ARROW = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/icons/arrow.png");
 	public static final ResourceLocation BRIGHT_WOOD_ARROW = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/icons/arrow2.png");
 	public static final ResourceLocation BRIGHT_WOOD_ARROW_DOWN = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/icons/arrow2_down.png");
+	public static final ResourceLocation BRIGHT_WOOD_ARROW_RIGHT = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/icons/arrow2_right.png");
+	public static final ResourceLocation BRIGHT_WOOD_ARROW_LEFT = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/icons/arrow2_left.png");
+	public static final ResourceLocation BIG_WOOD_BUTTON_LEFT = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/big_left_button.png");
+	public static final ResourceLocation BIG_WOOD_BUTTON_RIGHT = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/big_right_button.png");
 
 	public static final ResourceLocation PIRATE = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/icons/pirate.png");
 	public static final ResourceLocation MARINE = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/icons/marine.png");
@@ -72,6 +76,7 @@ public class ModResources
 	public static final ResourceLocation SCROLL = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/quest_scroll.png");
 	public static final ResourceLocation BLANK_SLIM = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/blank_slim.png");
 	public static final ResourceLocation BLANK2 = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/blank2.png");
+	public static final ResourceLocation BLANK2_SIMPLE = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/blank2_simple.png");
 
 	// Loot Tables
 	public static final ResourceLocation SMALL_SHIP_COMBAT = new ResourceLocation(APIConfig.PROJECT_ID, "chests/small_ship/combat");

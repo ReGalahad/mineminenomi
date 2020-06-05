@@ -10,7 +10,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 import xyz.pixelatedw.mineminenomi.world.features.ores.KairosekiOreFeature;
-import xyz.pixelatedw.mineminenomi.world.features.structures.dojo.DojoPieces;
+import xyz.pixelatedw.mineminenomi.world.features.structures.dojo.DojoPiece;
 import xyz.pixelatedw.mineminenomi.world.features.structures.dojo.DojoStructure;
 import xyz.pixelatedw.mineminenomi.world.features.structures.largeship.LargeShipPieces;
 import xyz.pixelatedw.mineminenomi.world.features.structures.largeship.LargeShipStructure;
@@ -31,7 +31,7 @@ public class ModFeatures
 			SmallShipStructure.register(biome);
 			LargeShipStructure.register(biome);
 				
-			DojoStructure.register(biome);
+			//DojoStructure.register(biome);
 			
 			KairosekiOreFeature.register(biome);
 		}
@@ -41,7 +41,7 @@ public class ModFeatures
 	{
 		public static final IStructurePieceType SMALL_SHIP_BODY = IStructurePieceType.register(SmallShipPieces.Piece::new, "small_ship_body");
 		public static final IStructurePieceType LARGE_SHIP_BODY = IStructurePieceType.register(LargeShipPieces.Piece::new, "large_ship_body");
-		public static final IStructurePieceType DOJO_BODY = IStructurePieceType.register(DojoPieces.Piece::new, "dojo_body");
+		public static final IStructurePieceType DOJO_BODY = IStructurePieceType.register(DojoPiece::new, "dojo_body");
 	}
 	
 	@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)

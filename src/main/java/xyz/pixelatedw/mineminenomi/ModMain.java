@@ -7,6 +7,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
+import xyz.pixelatedw.mineminenomi.init.ModJollyRogers;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyRegistry;
 
@@ -33,6 +34,7 @@ public class ModMain
 		WyRegistry.PARTICLE_TYPES.register(modEventBus);
 		WyRegistry.QUESTS.register(modEventBus);
 		WyRegistry.CONTAINER_TYPES.register(modEventBus);
+		ModJollyRogers.JOLLY_ROGER_ELEMENTS.register(modEventBus);
 		
 		CommonConfig.init();
 	}

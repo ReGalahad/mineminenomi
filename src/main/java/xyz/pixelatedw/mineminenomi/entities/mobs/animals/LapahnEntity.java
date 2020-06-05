@@ -67,7 +67,7 @@ public class LapahnEntity extends GenericNewEntity
 		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0F);
 		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(50.0D);
 		
-		this.setDoriki(10);
+		this.setDoriki(10 + WyHelper.randomWithRange(0, 5));
 		this.setBelly(0);
 	}
 	

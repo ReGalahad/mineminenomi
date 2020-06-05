@@ -4,6 +4,9 @@ import java.util.UUID;
 
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import xyz.pixelatedw.mineminenomi.api.abilities.ZoanAbility;
 import xyz.pixelatedw.mineminenomi.entities.zoan.MoguHeavyZoanInfo;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
@@ -23,5 +26,20 @@ public class MoguHeavyPointAbility extends ZoanAbility
 		this.addZoanModifier(SharedMonsterAttributes.ARMOR, ARMOR_MODIFIER);
 		this.addZoanModifier(SharedMonsterAttributes.ATTACK_DAMAGE, STRENGTH_MODIFIER);
 		this.addZoanModifier(SharedMonsterAttributes.ATTACK_SPEED, ATTACK_SPEED_MODIFIER);
+		
+		this.duringContinuityEvent = this::duringContinuityEvent;
+		this.onEndContinuityEvent = this::onEndContinuityEvent;
+	}
+	
+	private void duringContinuityEvent(PlayerEntity player, int time)
+	{
+		player.addPotionEffect(new EffectInstance(Effects.HASTE, 40, 2, false, false));
+	}
+	
+	@Override
+	protected boolean onEndContinuityEvent(PlayerEntity player)
+	{
+		player.removePotionEffect(Effects.HASTE);
+		return super.onEndContinuityEvent(player);
 	}
 }

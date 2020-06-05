@@ -29,6 +29,7 @@ import com.mojang.blaze3d.platform.GLX;
 import com.mojang.blaze3d.platform.GlStateManager;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -48,10 +49,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.IPacket;
 import net.minecraft.network.play.server.SSpawnParticlePacket;
 import net.minecraft.particles.IParticleData;
+import net.minecraft.util.Mirror;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.ResourceLocationException;
+import net.minecraft.util.Rotation;
+import net.minecraft.util.Util;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceContext;
@@ -59,6 +65,10 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.Heightmap;
+import net.minecraft.world.gen.feature.template.IntegrityProcessor;
+import net.minecraft.world.gen.feature.template.PlacementSettings;
+import net.minecraft.world.gen.feature.template.Template;
+import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.spawner.WorldEntitySpawner;
 
@@ -161,6 +171,11 @@ public class WyHelper
 		return p;
 	}
 
+	public static String rgbToHex(int red, int green, int blue)
+	{
+		return String.format("#%02X%02X%02X", red, green, blue);
+	}
+	
 	public static Color hexToRGB(String hexColor)
 	{
 		if (hexColor.startsWith("#"))
@@ -178,6 +193,11 @@ public class WyHelper
 			return Color.decode("#" + hexColor);
 	}
 
+	public static Color getComplementaryColor(Color color)
+	{
+		return new Color(255 - color.getRed(), 255 - color.getGreen(), 255 - color.getBlue());
+	}
+	
 	public static float colorTolerance(float tolerance)
 	{
 		return colorTolerance(tolerance, false);
@@ -508,7 +528,7 @@ public class WyHelper
 		font.drawStringWithShadow(text, posX, posY, color);
 	}
 
-	public static List<String> splitString(FontRenderer font, String text, int posX, int posY, int wrapWidth)
+	public static List<String> splitString(FontRenderer font, String text, int posX, int wrapWidth)
 	{
 		while (text != null && text.endsWith("\n"))
 		{
@@ -646,4 +666,84 @@ public class WyHelper
 		}
 		return -1;
 	}
+
+	public static boolean saveNBTStructure(ServerWorld world, String name, BlockPos pos, BlockPos size)
+	{
+		if (!world.isRemote)
+		{
+			ServerWorld serverworld = world;
+			TemplateManager templatemanager = serverworld.getStructureTemplateManager();
+			ResourceLocation res = new ResourceLocation(APIConfig.PROJECT_ID, name);
+
+			Template template;
+			try
+			{
+				template = templatemanager.getTemplateDefaulted(res);
+			}
+			catch (ResourceLocationException ex)
+			{
+				ex.printStackTrace();
+				return false;
+			}
+
+			template.takeBlocksFromWorld(world, pos, size, false, Blocks.STRUCTURE_VOID);
+			template.setAuthor("?");
+			try
+			{
+				return templatemanager.writeToFile(res);
+			}
+			catch (ResourceLocationException var7)
+			{
+				return false;
+			}
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	public static boolean loadNBTStructure(ServerWorld world, String name, BlockPos pos)
+	{
+		if (!world.isRemote)
+		{
+			BlockPos blockpos = pos;
+			ServerWorld serverworld = world;
+			TemplateManager templatemanager = serverworld.getStructureTemplateManager();
+			ResourceLocation res = new ResourceLocation(APIConfig.PROJECT_ID, name);
+
+			Template template;
+			try
+			{
+				template = templatemanager.getTemplate(res);
+			}
+			catch (ResourceLocationException ex)
+			{
+				ex.printStackTrace();
+				return false;
+			}
+
+			if (template == null)
+			{
+				return false;
+			}
+			else
+			{
+				BlockPos blockpos2 = template.getSize();
+				BlockState blockstate = world.getBlockState(blockpos);
+				world.notifyBlockUpdate(blockpos, blockstate, blockstate, 3);
+			}
+
+			PlacementSettings placementsettings = (new PlacementSettings()).setMirror(Mirror.NONE).setRotation(Rotation.CLOCKWISE_180).setIgnoreEntities(true).setChunk((ChunkPos) null);
+			placementsettings.clearProcessors().addProcessor(new IntegrityProcessor(MathHelper.clamp(1, 0.0F, 1.0F))).setRandom(new Random(Util.milliTime()));
+
+			template.addBlocksToWorldChunk(world, blockpos, placementsettings);
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 }
