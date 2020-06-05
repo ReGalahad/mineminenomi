@@ -11,6 +11,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.storage.WorldSavedData;
+import xyz.pixelatedw.mineminenomi.api.crew.Crew;
 import xyz.pixelatedw.mineminenomi.items.AkumaNoMiItem;
 import xyz.pixelatedw.wypi.APIConfig;
 
@@ -21,7 +22,8 @@ public class ExtendedWorldData extends WorldSavedData
 	private HashMap<String, Long> issuedBounties = new HashMap<String, Long>();
 	private List<String> devilFruitsInWorld = new ArrayList<String>();
 	private List<int[][]> protectedAreas = new ArrayList<int[][]>();
-	
+	private List<Crew> pirateCrews = new ArrayList<Crew>();
+
 	public static Map<World, ExtendedWorldData> loadedExtWorlds = new HashMap<>();
 	
 	public ExtendedWorldData()

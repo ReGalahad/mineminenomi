@@ -55,7 +55,10 @@ public class SakeCupItem extends Item
 			PlayerEntity player = (PlayerEntity) entity;
 			PlayerEntity leader = this.getLeader(itemStack, player.world);
 			
-			
+			if(player == leader)
+			{
+				
+			}
 			
 			if(!player.isCreative())
 				itemStack.shrink(1);
