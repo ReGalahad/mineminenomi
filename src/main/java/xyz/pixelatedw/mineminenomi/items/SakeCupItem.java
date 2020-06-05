@@ -67,10 +67,13 @@ public class SakeCupItem extends Item
 					WyDebug.debug("Cannot find a crew for captain " + leader.getName().getFormattedText());
 				else
 				{
-					crew.addMember(player.getUniqueID());
-					WyHelper.sendMsgToPlayer(leader, player.getName().getFormattedText() + " joined your crew.");
-					EntityStatsCapability.get(player).setInCrew(true);
-					itemStack.getOrCreateTag().putInt("leader", 0);
+					if(!crew.hasMember(player.getUniqueID()))
+					{
+						crew.addMember(player.getUniqueID());
+						WyHelper.sendMsgToPlayer(leader, player.getName().getFormattedText() + " joined your crew.");
+						EntityStatsCapability.get(player).setInCrew(true);
+						itemStack.getOrCreateTag().putInt("leader", 0);
+					}
 				}
 			}
 			

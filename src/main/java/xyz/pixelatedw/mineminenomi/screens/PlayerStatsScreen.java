@@ -33,6 +33,7 @@ import xyz.pixelatedw.wypi.network.WyNetwork;
 public class PlayerStatsScreen extends Screen
 {
 	private PlayerEntity player;
+	private ExtendedWorldData worldProps;
 
 	public PlayerStatsScreen(PlayerEntity player)
 	{
@@ -47,8 +48,8 @@ public class PlayerStatsScreen extends Screen
 
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-		IEntityStats entityStatsProps = EntityStatsCapability.get(player);
-		IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
+		IEntityStats entityStatsProps = EntityStatsCapability.get(this.player);
+		IDevilFruit devilFruitProps = DevilFruitCapability.get(this.player);
 
 		int posX = (this.width - 256) / 2;
 		int posY = (this.height - 256) / 2;
@@ -75,7 +76,13 @@ public class PlayerStatsScreen extends Screen
 		String factionActual = I18n.format("faction." + faction);
 		String raceActual = I18n.format("race." + race);
 		String styleActual = I18n.format("style." + style);
-		Crew crew = ExtendedWorldData.get(this.player.world).getCrewWithMember(this.player.getUniqueID());
+		Crew crew = this.worldProps.getCrewWithMember(this.player.getUniqueID());
+		if(crew != null)
+		{
+			System.out.println(crew.getName());
+			System.out.println(crew.getMembers().size());
+			System.out.println(this.player.world.getPlayerByUuid(crew.getCaptain().getUUID()).getName().getFormattedText());
+		}
 		String crewActual = "";
 		if(crew != null)
 			crewActual = crew.getName();
@@ -136,12 +143,15 @@ public class PlayerStatsScreen extends Screen
 	@Override
 	public void init()
 	{
+		//WyNetwork.sendToServer(new CRequestSyncPirateCrewsPacket());
+		this.worldProps = ExtendedWorldData.get(this.player.world);
+		
 		int posX = (this.width - 256) / 2;
 		int posY = (this.height - 256) / 2;
 
 		this.addButton(new Button(posX - 23, posY + 210, 80, 20, I18n.format(ModI18n.GUI_ABILITIES), b -> 
 		{
-			Minecraft.getInstance().displayGuiScreen(new SelectHotbarAbilitiesScreen(player));
+			Minecraft.getInstance().displayGuiScreen(new SelectHotbarAbilitiesScreen(this.player));
 		}));
 		
 		if (CommonConfig.instance.isQuestsEnabled())
@@ -149,7 +159,7 @@ public class PlayerStatsScreen extends Screen
 			this.addButton(new Button(posX + 63, posY + 210, 80, 20, I18n.format(ModI18n.GUI_QUESTS), b ->
 			{
 				WyNetwork.sendToServer(new CRequestQuestDataSyncPacket());
-				Minecraft.getInstance().displayGuiScreen(new QuestsTrackerScreen(player));
+				Minecraft.getInstance().displayGuiScreen(new QuestsTrackerScreen(this.player));
 			}));
 		}
 	}

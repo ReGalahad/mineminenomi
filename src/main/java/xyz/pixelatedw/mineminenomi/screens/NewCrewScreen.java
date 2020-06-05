@@ -3,6 +3,8 @@ package xyz.pixelatedw.mineminenomi.screens;
 import org.lwjgl.opengl.GL11;
 
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.platform.GlStateManager.DestFactor;
+import com.mojang.blaze3d.platform.GlStateManager.SourceFactor;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
@@ -35,7 +37,6 @@ public class NewCrewScreen extends Screen
 		this.player = Minecraft.getInstance().player;
 		this.props = JollyRogerCapability.get(this.player);
 		this.crew = ExtendedWorldData.get(this.player.world).getCrewWithCaptain(this.player.getUniqueID());
-		System.out.println(this.crew);
 	}
 
 	@Override
@@ -51,6 +52,9 @@ public class NewCrewScreen extends Screen
 		
 		GlStateManager.pushMatrix();
 		{
+			GlStateManager.enableBlend();
+			GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);
+
 			double scale = 0.5;
 			GlStateManager.translated(posX - 125, posY - 120, 1);
 			GlStateManager.translated(128, 128, 0);
@@ -58,6 +62,8 @@ public class NewCrewScreen extends Screen
 			GlStateManager.translated(-128, -128, 0);
 
 			RendererHelper.drawPlayerJollyRoger(this.props);
+			
+			GlStateManager.disableBlend();
 		}
 		GlStateManager.popMatrix();
 
@@ -88,7 +94,7 @@ public class NewCrewScreen extends Screen
 	
 	private void createCrew()
 	{
-		WyNetwork.sendToServer(new CCreateCrewPacket(this.nameEdit.getMessage()));
+		WyNetwork.sendToServer(new CCreateCrewPacket(this.nameEdit.getText()));
 		this.onClose();
 	}
 

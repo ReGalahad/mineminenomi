@@ -50,6 +50,11 @@ public class Crew
 		return member;
 	}
 
+	public boolean hasMember(UUID id)
+	{
+		return this.members.stream().filter(member -> member.getUUID().equals(id)).findFirst().orElse(null) != null;
+	}
+
 	public void create(World world)
 	{
 		this.isTemporary = false;
@@ -94,8 +99,8 @@ public class Crew
 		{
 			CompoundNBT memberNBT = members.getCompound(j);
 			Crew.Member member = this.addMember(memberNBT.getUniqueId("id"));
-			if(memberNBT.getBoolean("isCaptain"))
-				member.setIsCaptain();		
+			if (memberNBT.getBoolean("isCaptain"))
+				member.setIsCaptain();
 		}
 	}
 

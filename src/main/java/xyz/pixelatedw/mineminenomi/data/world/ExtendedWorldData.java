@@ -158,9 +158,6 @@ public class ExtendedWorldData extends WorldSavedData
 		ListNBT crews = new ListNBT();
 		for(Crew crew : this.pirateCrews)
 		{
-			if(crew.isTemporary())
-				continue;
-			
 			crews.add(crew.write());
 		}
 		nbt.put("crews", crews);

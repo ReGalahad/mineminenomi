@@ -12,6 +12,8 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.crew.Crew;
+import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
+import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
 import xyz.pixelatedw.mineminenomi.init.ModEffects;
@@ -29,9 +31,10 @@ public class SakeBottleItem extends Item
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand)
 	{
-		if(player.isSneaking())
+		ItemStack itemStack = player.getHeldItemMainhand();
+		IEntityStats props = EntityStatsCapability.get(player);
+		if(player.isSneaking() && !props.isInCrew())
 		{
-			ItemStack itemStack = player.getHeldItemMainhand();
 			Crew crew = new Crew("", player.getUniqueID());
 			ExtendedWorldData worldProps = ExtendedWorldData.get(world);
 			worldProps.addCrew(crew);
@@ -39,7 +42,10 @@ public class SakeBottleItem extends Item
 			WyNetwork.sendTo(new SOpenNewCrewScreenPacket(), player);				
 		}
 		else
+		{
+			itemStack.getOrCreateTag().putBoolean("crewReady", false);
 			player.setActiveHand(hand);
+		}
 		return new ActionResult<>(ActionResultType.SUCCESS, player.getHeldItem(hand));
 	}
 
