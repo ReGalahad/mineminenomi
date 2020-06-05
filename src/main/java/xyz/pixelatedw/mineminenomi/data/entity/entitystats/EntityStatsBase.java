@@ -9,7 +9,7 @@ public class EntityStatsBase implements IEntityStats
 	private int doriki, belly, extol, cola = 100, maxCola = 100, ultraCola = 0;
 	private long bounty;
 	private String faction = "", race = "", fightingStyle = "";
-	private boolean hasShadow = true, hasHeart = true, inCombatMode = false;
+	private boolean hasShadow = true, hasHeart = true, inCombatMode = false, isInCrew = false;
 	
 	@Override
 	public int getDoriki()
@@ -370,5 +370,15 @@ public class EntityStatsBase implements IEntityStats
 		this.inCombatMode = value;
 	}
 
+	@Override
+	public boolean isInCrew()
+	{
+		return this.isInCrew;
+	}
 
+	@Override
+	public void setInCrew(boolean value)
+	{
+		this.isInCrew = value;
+	}
 }

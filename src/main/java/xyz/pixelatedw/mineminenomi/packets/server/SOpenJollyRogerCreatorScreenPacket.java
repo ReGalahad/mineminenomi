@@ -11,18 +11,26 @@ import xyz.pixelatedw.mineminenomi.screens.JollyRogerCreatorScreen;
 
 public class SOpenJollyRogerCreatorScreenPacket
 {
+	private boolean isEditing;
 
 	public SOpenJollyRogerCreatorScreenPacket()
 	{
 	}
+	
+	public SOpenJollyRogerCreatorScreenPacket(boolean isEditing)
+	{
+		this.isEditing = isEditing;
+	}
 
 	public void encode(PacketBuffer buffer)
 	{
+		buffer.writeBoolean(this.isEditing);
 	}
 
 	public static SOpenJollyRogerCreatorScreenPacket decode(PacketBuffer buffer)
 	{
 		SOpenJollyRogerCreatorScreenPacket msg = new SOpenJollyRogerCreatorScreenPacket();
+		msg.isEditing = buffer.readBoolean();
 		return msg;
 	}
 
@@ -38,7 +46,7 @@ public class SOpenJollyRogerCreatorScreenPacket
 		@OnlyIn(Dist.CLIENT)
 		public static void handle(SOpenJollyRogerCreatorScreenPacket message)
 		{
-			JollyRogerCreatorScreen.open();
+			JollyRogerCreatorScreen.open(message.isEditing);
 		}
 	}
 }

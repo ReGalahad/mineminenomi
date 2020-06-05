@@ -15,8 +15,12 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import xyz.pixelatedw.mineminenomi.api.crew.Crew;
+import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
+import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
 import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.debug.WyDebug;
 
 public class SakeCupItem extends Item
 {
@@ -55,9 +59,19 @@ public class SakeCupItem extends Item
 			PlayerEntity player = (PlayerEntity) entity;
 			PlayerEntity leader = this.getLeader(itemStack, player.world);
 			
-			if(player == leader)
+			if(leader != null)
 			{
-				
+				ExtendedWorldData worldProps = ExtendedWorldData.get(player.world);
+				Crew crew = worldProps.getCrewWithCaptain(leader.getUniqueID());
+				if(crew == null)
+					WyDebug.debug("Cannot find a crew for captain " + leader.getName().getFormattedText());
+				else
+				{
+					crew.addMember(player.getUniqueID());
+					WyHelper.sendMsgToPlayer(leader, player.getName().getFormattedText() + " joined your crew.");
+					EntityStatsCapability.get(player).setInCrew(true);
+					itemStack.getOrCreateTag().putInt("leader", 0);
+				}
 			}
 			
 			if(!player.isCreative())

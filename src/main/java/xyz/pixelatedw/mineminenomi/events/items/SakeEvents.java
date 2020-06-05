@@ -29,6 +29,9 @@ public class SakeEvents
 		if(target.getHeldItemMainhand().getItem() != ModItems.SAKE_CUP)
 			return;
 		
+		if(!player.getHeldItemMainhand().getOrCreateTag().getBoolean("crewReady"))
+			return;
+		
 		ItemStack itemStack = target.getHeldItemMainhand();
 		((SakeCupItem)itemStack.getItem()).setLeader(itemStack, player);
 		event.setCanceled(true);

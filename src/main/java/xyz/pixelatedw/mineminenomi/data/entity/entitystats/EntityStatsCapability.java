@@ -36,6 +36,7 @@ public class EntityStatsCapability
 				props.putBoolean("hasShadow", instance.hasShadow());
 				props.putBoolean("hasHeart", instance.hasHeart());
 				props.putBoolean("isInCombatMode", instance.isInCombatMode());
+				props.putBoolean("isInCrew", instance.isInCrew());
 
 				return props;
 			}
@@ -58,6 +59,7 @@ public class EntityStatsCapability
 				instance.setShadow(props.getBoolean("hasShadow"));
 				instance.setHeart(props.getBoolean("hasHeart"));
 				instance.setCombatMode(props.getBoolean("isInCombatMode"));
+				instance.setInCrew(props.getBoolean("isInCrew"));
 			}
 
 		}, () -> new EntityStatsBase());

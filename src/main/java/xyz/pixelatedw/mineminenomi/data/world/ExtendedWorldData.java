@@ -6,12 +6,18 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
+
+import javax.annotation.Nullable;
 
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.ListNBT;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.storage.WorldSavedData;
+import net.minecraftforge.common.util.Constants;
 import xyz.pixelatedw.mineminenomi.api.crew.Crew;
+import xyz.pixelatedw.mineminenomi.api.crew.Crew.Member;
 import xyz.pixelatedw.mineminenomi.items.AkumaNoMiItem;
 import xyz.pixelatedw.wypi.APIConfig;
 
@@ -102,6 +108,15 @@ public class ExtendedWorldData extends WorldSavedData
 						minPos, maxPos
 				});
 		}
+		
+		ListNBT crews = nbt.getList("crews", Constants.NBT.TAG_COMPOUND);
+		for (int i = 0; i < crews.size(); i++)
+		{
+			CompoundNBT crewNBT = crews.getCompound(i);
+			Crew crew = new Crew();
+			crew.read(crewNBT);
+			this.pirateCrews.add(crew);
+		}	
 	}
 
 	@Override
@@ -139,10 +154,60 @@ public class ExtendedWorldData extends WorldSavedData
 			}
 		}
 		nbt.put("protectedAreas", protectedAreas);
-
+		
+		ListNBT crews = new ListNBT();
+		for(Crew crew : this.pirateCrews)
+		{
+			if(crew.isTemporary())
+				continue;
+			
+			crews.add(crew.write());
+		}
+		nbt.put("crews", crews);
+		
 		return nbt;
 	}
 
+	public List<Crew> getCrews()
+	{
+		return this.pirateCrews;
+	}
+	
+	@Nullable
+	public Crew getCrewWithMember(UUID memId)
+	{
+		for(Crew crew : this.pirateCrews)
+		{
+			for(Member member : crew.getMembers())
+			{
+				if(member.getUUID().equals(memId))
+					return crew;
+			}
+		}
+		
+		return null;
+	}
+	
+	@Nullable
+	public Crew getCrewWithCaptain(UUID capId)
+	{
+		return this.pirateCrews.stream().filter(crew -> crew.getCaptain() != null && crew.getCaptain().getUUID() == capId).findFirst().orElse(null);
+	}
+	
+	public void removeCrew(Crew crew)
+	{
+		if(this.pirateCrews.contains(crew))
+			this.pirateCrews.remove(crew);
+		this.markDirty();
+	}
+	
+	public void addCrew(Crew crew)
+	{
+		if(!this.pirateCrews.contains(crew))
+			this.pirateCrews.add(crew);
+		this.markDirty();
+	}
+	
 	public boolean isInsideRestrictedArea(int posX, int posY, int posZ)
 	{
 		if (this.protectedAreas.size() <= 0)

@@ -1,6 +1,7 @@
 package xyz.pixelatedw.mineminenomi.init;
 
 import xyz.pixelatedw.mineminenomi.packets.client.CCombatModeTriggerPacket;
+import xyz.pixelatedw.mineminenomi.packets.client.CCreateCrewPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CDeleteCCBookPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CDevilFruitSyncPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CEntityStatsSyncPacket;
@@ -18,6 +19,7 @@ import xyz.pixelatedw.mineminenomi.packets.server.SFlySpeedPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SJollyRogerSyncPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SOpenCharacterCreatorScreenPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SOpenJollyRogerCreatorScreenPacket;
+import xyz.pixelatedw.mineminenomi.packets.server.SOpenNewCrewScreenPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SOpenQuestChooseScreenPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SOpenTraderScreenPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SOpenWantedPosterScreenPacket;
@@ -50,6 +52,7 @@ public class ModNetwork
 		WyNetwork.registerPacket(CJollyRogerSyncPacket.class, CJollyRogerSyncPacket::encode, CJollyRogerSyncPacket::decode, CJollyRogerSyncPacket::handle);
 		WyNetwork.registerPacket(CSyncZoanPacket.class, CSyncZoanPacket::encode, CSyncZoanPacket::decode, CSyncZoanPacket::handle);
 		WyNetwork.registerPacket(CStopAbilityPacket.class, CStopAbilityPacket::encode, CStopAbilityPacket::decode, CStopAbilityPacket::handle);
+		WyNetwork.registerPacket(CCreateCrewPacket.class, CCreateCrewPacket::encode, CCreateCrewPacket::decode, CCreateCrewPacket::handle);
 		
 		// From Server to Client
 		WyNetwork.registerPacket(SSyncDevilFruitPacket.class, SSyncDevilFruitPacket::encode, SSyncDevilFruitPacket::decode, SSyncDevilFruitPacket::handle);
@@ -66,5 +69,6 @@ public class ModNetwork
 		WyNetwork.registerPacket(SJollyRogerSyncPacket.class, SJollyRogerSyncPacket::encode, SJollyRogerSyncPacket::decode, SJollyRogerSyncPacket::handle);
 		WyNetwork.registerPacket(SOpenJollyRogerCreatorScreenPacket.class, SOpenJollyRogerCreatorScreenPacket::encode, SOpenJollyRogerCreatorScreenPacket::decode, SOpenJollyRogerCreatorScreenPacket::handle);
 		WyNetwork.registerPacket(SOpenQuestChooseScreenPacket.class, SOpenQuestChooseScreenPacket::encode, SOpenQuestChooseScreenPacket::decode, SOpenQuestChooseScreenPacket::handle);
+		WyNetwork.registerPacket(SOpenNewCrewScreenPacket.class, SOpenNewCrewScreenPacket::encode, SOpenNewCrewScreenPacket::decode, SOpenNewCrewScreenPacket::handle);
 	}
 }

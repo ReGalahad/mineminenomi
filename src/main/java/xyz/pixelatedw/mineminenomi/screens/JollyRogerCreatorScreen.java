@@ -45,7 +45,8 @@ public class JollyRogerCreatorScreen extends Screen
 	private IJollyRoger props;
 	private float animationTime = 0;
 	private int nextElementTry = 0;
-
+	private boolean isEditing = false;
+	
 	private int layerIndex;
 	private int trueIndex;
 	private GuiSlider redSlider;
@@ -56,12 +57,13 @@ public class JollyRogerCreatorScreen extends Screen
 	private List<RegistryObject<JollyRogerElement>> allBackgrounds;
 	private List<RegistryObject<JollyRogerElement>> allDetails;
 
-	public JollyRogerCreatorScreen()
+	public JollyRogerCreatorScreen(boolean isEditing)
 	{
 		super(new StringTextComponent(""));
 		this.player = Minecraft.getInstance().player;
 		this.props = JollyRogerCapability.get(this.player);
-
+		this.isEditing = isEditing;
+		
 		this.allElements = ModJollyRogers.JOLLY_ROGER_ELEMENTS.getEntries();
 		this.allBases = this.getTotalElementsForType(this.player, LayerType.BASE);
 		this.allBackgrounds = this.getTotalElementsForType(this.player, LayerType.BACKGROUND);
@@ -244,6 +246,9 @@ public class JollyRogerCreatorScreen extends Screen
 		this.blueSlider = blueColorPicker;
 		this.addButton(blueColorPicker);
 
+		NoTextureButton editJollyRogerButton = new NoTextureButton((this.width / 2) - 17, posY + 95, 60, 16, "Finish", (btn) -> { this.finishEditing(); });
+		this.addButton(editJollyRogerButton);
+		
 		TexturedIconButton layerUpBtn = new TexturedIconButton(ModResources.BRIGHT_WOOD_ARROW, posX - 80, posY + 53, 16, 25, "", (btn) -> this.changeLayerIndex(true));
 		layerUpBtn = layerUpBtn.setTextureInfo(posX - 104, posY + 51, 64, 32);
 		this.addButton(layerUpBtn);
@@ -255,6 +260,14 @@ public class JollyRogerCreatorScreen extends Screen
 		this.updateButtons();
 	}
 
+	private void finishEditing()
+	{
+		if(this.isEditing)
+			NewCrewScreen.open();
+		else
+			this.onClose();
+	}
+	
 	private void changeLayerIndex(boolean isUp)
 	{
 		int layerIndex = this.layerIndex;
@@ -553,9 +566,11 @@ public class JollyRogerCreatorScreen extends Screen
 
 		if(element == null)
 		{
+			// Hides the layer buttons
 			this.buttons.get(this.buttons.size() - 1).visible = false;
 			this.buttons.get(this.buttons.size() - 2).visible = false;
 						
+			// Resets the color sliders
 			for (Widget widget : this.buttons)
 			{
 				if (widget instanceof GuiSlider)
@@ -678,8 +693,8 @@ public class JollyRogerCreatorScreen extends Screen
 		return this.allElements.stream().filter(reg -> reg.get().getLayerType() == type && reg.get().canUse(player)).collect(Collectors.toList());
 	}
 
-	public static void open()
+	public static void open(boolean isEditing)
 	{
-		Minecraft.getInstance().displayGuiScreen(new JollyRogerCreatorScreen());
+		Minecraft.getInstance().displayGuiScreen(new JollyRogerCreatorScreen(isEditing));
 	}
 }

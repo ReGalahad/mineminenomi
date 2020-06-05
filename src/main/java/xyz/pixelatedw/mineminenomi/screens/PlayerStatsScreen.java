@@ -14,12 +14,14 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.config.GuiUtils;
+import xyz.pixelatedw.mineminenomi.api.crew.Crew;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
+import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModAbilities;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
@@ -56,6 +58,7 @@ public class PlayerStatsScreen extends Screen
 		String factionGUI = I18n.format(ModI18n.FACTION_NAME);
 		String raceGUI = I18n.format(ModI18n.RACE_NAME);
 		String styleGUI = I18n.format(ModI18n.STYLE_NAME);
+		String crewGUI = "Crew";
 
 		String faction = WyHelper.getResourceName(entityStatsProps.getFaction().toLowerCase());
 		if(WyHelper.isNullOrEmpty(faction))
@@ -72,14 +75,19 @@ public class PlayerStatsScreen extends Screen
 		String factionActual = I18n.format("faction." + faction);
 		String raceActual = I18n.format("race." + race);
 		String styleActual = I18n.format("style." + style);
-
+		Crew crew = ExtendedWorldData.get(this.player.world).getCrewWithMember(this.player.getUniqueID());
+		String crewActual = "";
+		if(crew != null)
+			crewActual = crew.getName();
+		
 		if (entityStatsProps.isCyborg())
 			this.minecraft.fontRenderer.drawStringWithShadow(TextFormatting.BOLD + colaGUI + ": " + TextFormatting.RESET + entityStatsProps.getCola() + " / " + entityStatsProps.getMaxCola(), posX - 30, posY + 50, -1);
 		this.minecraft.fontRenderer.drawStringWithShadow(TextFormatting.BOLD + dorikiGUI + ": " + TextFormatting.RESET + entityStatsProps.getDoriki(), posX - 30, posY + 70, -1);
 		this.minecraft.fontRenderer.drawStringWithShadow(TextFormatting.BOLD + factionGUI + ": " + TextFormatting.RESET + factionActual, posX - 30, posY + 90, -1);
 		this.minecraft.fontRenderer.drawStringWithShadow(TextFormatting.BOLD + raceGUI + ": " + TextFormatting.RESET + raceActual, posX - 30, posY + 110, -1);
 		this.minecraft.fontRenderer.drawStringWithShadow(TextFormatting.BOLD + styleGUI + ": " + TextFormatting.RESET + styleActual, posX - 30, posY + 130, -1);
-
+		this.minecraft.fontRenderer.drawStringWithShadow(TextFormatting.BOLD + crewGUI + ": " + TextFormatting.RESET + crewActual, posX - 30, posY + 150, -1);
+		
 		if (entityStatsProps.getBelly() > 0)
 		{
 			this.minecraft.fontRenderer.drawStringWithShadow("" + entityStatsProps.getBelly(), posX + 215, posY + 72, -1);
