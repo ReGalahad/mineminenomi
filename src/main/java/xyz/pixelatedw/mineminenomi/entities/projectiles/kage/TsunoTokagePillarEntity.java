@@ -26,7 +26,7 @@ public class TsunoTokagePillarEntity extends AbilityProjectileEntity
 	{
 		super(KageProjectiles.TSUNO_TOKAGE, world, player);
 
-		this.setDamage(25);
+		this.setDamage(30);
 		this.setMaxLife(10);
 		this.setPassThroughEntities();
 		this.setPassThroughBlocks();

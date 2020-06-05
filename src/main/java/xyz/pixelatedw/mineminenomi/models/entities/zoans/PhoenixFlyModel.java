@@ -1,5 +1,7 @@
 package xyz.pixelatedw.mineminenomi.models.entities.zoans;
 
+import com.mojang.blaze3d.platform.GlStateManager;
+
 import net.minecraft.client.renderer.entity.model.RendererModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.MathHelper;
@@ -170,6 +172,8 @@ public class PhoenixFlyModel<T extends LivingEntity> extends ZoanMorphModel<T>
 	{
 		this.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
+		GlStateManager.enableCull();
+		
 		this.body1.render(scale);
 		this.leftArm1.render(scale);
 		this.RightFoot1.render(scale);
@@ -194,6 +198,8 @@ public class PhoenixFlyModel<T extends LivingEntity> extends ZoanMorphModel<T>
 		this.beak4.render(scale);
 		this.LeftFoot1.render(scale);
 		this.head3.render(scale);
+		
+		GlStateManager.disableCull();
 	}
 
 	@Override

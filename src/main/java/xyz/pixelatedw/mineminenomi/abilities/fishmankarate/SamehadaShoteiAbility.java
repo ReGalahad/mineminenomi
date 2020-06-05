@@ -7,6 +7,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
+import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
+import xyz.pixelatedw.mineminenomi.particles.effects.fishkarate.SamehadaParticleEffect;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.abilities.ContinuousAbility;
@@ -14,6 +16,7 @@ import xyz.pixelatedw.wypi.abilities.ContinuousAbility;
 public class SamehadaShoteiAbility extends ContinuousAbility
 {
 	public static final Ability INSTANCE = new SamehadaShoteiAbility();
+	private static final ParticleEffect PARTICLES = new SamehadaParticleEffect();
 	private static final AttributeModifier JUMP_MULTIPLIER = new AttributeModifier(UUID.fromString("efa11cbd-57e5-478f-b15c-6295eb1b375e"), "Jump Multiplier",  -50, AttributeModifier.Operation.ADDITION).setSaved(false);
 
 	public SamehadaShoteiAbility()
@@ -37,6 +40,8 @@ public class SamehadaShoteiAbility extends ContinuousAbility
 		player.addPotionEffect(new EffectInstance(Effects.RESISTANCE, 20, 6, false, false));
 		player.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 20, 100, false, false));
 		player.addPotionEffect(new EffectInstance(Effects.MINING_FATIGUE, 20, 5, false, false));
+		
+		PARTICLES.spawn(player.world, player.posX, player.posY, player.posZ, 0, 0, 0);
 	}
 
 	private boolean onEndContinuityEvent(PlayerEntity player)

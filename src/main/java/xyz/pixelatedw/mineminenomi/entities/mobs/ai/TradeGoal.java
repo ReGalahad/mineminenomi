@@ -1,7 +1,7 @@
 package xyz.pixelatedw.mineminenomi.entities.mobs.ai;
 
 import net.minecraft.entity.ai.goal.Goal;
-import xyz.pixelatedw.mineminenomi.entities.mobs.misc.TraderEntity;
+import xyz.pixelatedw.mineminenomi.api.entities.TraderEntity;
 
 public class TradeGoal extends Goal{
 

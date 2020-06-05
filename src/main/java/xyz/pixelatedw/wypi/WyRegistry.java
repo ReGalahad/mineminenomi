@@ -201,7 +201,12 @@ public class WyRegistry
 
 	public static <T extends Entity> EntityType.Builder<T> createEntityType(Function<World, T> func)
 	{
-		Builder<T> builder = EntityType.Builder.create((entityType, world) -> func.apply(world), EntityClassification.MISC);
+		return createEntityType(func, EntityClassification.MISC);
+	}
+	
+	public static <T extends Entity> EntityType.Builder<T> createEntityType(Function<World, T> func, EntityClassification classification)
+	{
+		Builder<T> builder = EntityType.Builder.create((entityType, world) -> func.apply(world), classification);
 
 		builder.setTrackingRange(128).setShouldReceiveVelocityUpdates(true).setUpdateInterval(1).setCustomClientFactory((entity, world) -> func.apply(world)).size(0.6F, 1.8F);
 

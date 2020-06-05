@@ -47,7 +47,7 @@ public class CombatModeEvents
 		IEntityStats entityStatsProps = EntityStatsCapability.get(player);
 
 		ForgeIngameGui.left_height += 1;
-		
+
 		int posX = mc.mainWindow.getScaledWidth();
 		int posY = mc.mainWindow.getScaledHeight();
 

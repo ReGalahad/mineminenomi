@@ -9,7 +9,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
-import xyz.pixelatedw.mineminenomi.entities.mobs.misc.TraderEntity;
+import xyz.pixelatedw.mineminenomi.api.entities.TraderEntity;
 import xyz.pixelatedw.mineminenomi.screens.TraderScreen;
 
 public class SOpenTraderScreenPacket

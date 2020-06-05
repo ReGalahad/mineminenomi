@@ -8,6 +8,8 @@ import xyz.pixelatedw.mineminenomi.packets.client.CGiveItemStackPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CJollyRogerSyncPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CRequestQuestDataSyncPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CRequestSyncPacket;
+import xyz.pixelatedw.mineminenomi.packets.client.CStopAbilityPacket;
+import xyz.pixelatedw.mineminenomi.packets.client.CSyncZoanPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CUpdateTraderOffersPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CUseAbilityPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SDespawnQuestObjectivePacket;
@@ -46,7 +48,9 @@ public class ModNetwork
 		WyNetwork.registerPacket(CUpdateTraderOffersPacket.class, CUpdateTraderOffersPacket::encode, CUpdateTraderOffersPacket::decode, CUpdateTraderOffersPacket::handle);
 		WyNetwork.registerPacket(CRequestQuestDataSyncPacket.class, CRequestQuestDataSyncPacket::encode, CRequestQuestDataSyncPacket::decode, CRequestQuestDataSyncPacket::handle);
 		WyNetwork.registerPacket(CJollyRogerSyncPacket.class, CJollyRogerSyncPacket::encode, CJollyRogerSyncPacket::decode, CJollyRogerSyncPacket::handle);
-
+		WyNetwork.registerPacket(CSyncZoanPacket.class, CSyncZoanPacket::encode, CSyncZoanPacket::decode, CSyncZoanPacket::handle);
+		WyNetwork.registerPacket(CStopAbilityPacket.class, CStopAbilityPacket::encode, CStopAbilityPacket::decode, CStopAbilityPacket::handle);
+		
 		// From Server to Client
 		WyNetwork.registerPacket(SSyncDevilFruitPacket.class, SSyncDevilFruitPacket::encode, SSyncDevilFruitPacket::decode, SSyncDevilFruitPacket::handle);
 		WyNetwork.registerPacket(SSyncAbilityDataPacket.class, SSyncAbilityDataPacket::encode, SSyncAbilityDataPacket::decode, SSyncAbilityDataPacket::handle);

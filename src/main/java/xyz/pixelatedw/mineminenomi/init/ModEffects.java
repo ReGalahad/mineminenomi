@@ -5,6 +5,7 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.potion.Effect;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.effects.AbilityOffEffect;
+import xyz.pixelatedw.mineminenomi.effects.BlackBoxEffect;
 import xyz.pixelatedw.mineminenomi.effects.BubblyCoralEffect;
 import xyz.pixelatedw.mineminenomi.effects.CandleLockEffect;
 import xyz.pixelatedw.mineminenomi.effects.ChiyuHormoneEffect;
@@ -13,6 +14,7 @@ import xyz.pixelatedw.mineminenomi.effects.DrunkEffect;
 import xyz.pixelatedw.mineminenomi.effects.FrozenEffect;
 import xyz.pixelatedw.mineminenomi.effects.GanmenSeichoHormoneEffect;
 import xyz.pixelatedw.mineminenomi.effects.LovestruckEffect;
+import xyz.pixelatedw.mineminenomi.effects.MovementBlockedEffect;
 import xyz.pixelatedw.mineminenomi.effects.NegativeEffect;
 import xyz.pixelatedw.mineminenomi.effects.TensionHormoneEffect;
 import xyz.pixelatedw.mineminenomi.effects.UnconsciousEffect;
@@ -37,7 +39,8 @@ public class ModEffects {
             .addAttributesModifier(SharedMonsterAttributes.MOVEMENT_SPEED, "7107DE5E-7CE8-4030-940E-514C1F160890", -0.01, AttributeModifier.Operation.ADDITION)
             .addAttributesModifier(SharedMonsterAttributes.ATTACK_SPEED, "7d355019-7ef9-4beb-bcba-8b2608a73380", -1.5, AttributeModifier.Operation.MULTIPLY_TOTAL);
 
-    public static final Effect CHIYU_HORMONE = new ChiyuHormoneEffect();
+    public static final Effect CHIYU_HORMONE = new ChiyuHormoneEffect()
+            .addAttributesModifier(ModAttributes.REGEN_RATE, "e7e5e8ad-04f9-4147-b825-d3cd77b017ba", 3, AttributeModifier.Operation.ADDITION);
 
     public static final Effect FROZEN = new FrozenEffect()
             .addAttributesModifier(SharedMonsterAttributes.MOVEMENT_SPEED, "7107DE5E-7CE8-4030-940E-514C1F160890", -1000, AttributeModifier.Operation.ADDITION)
@@ -53,18 +56,29 @@ public class ModEffects {
     public static final Effect GANMEN_SEICHO_HORMONE = new GanmenSeichoHormoneEffect()
             .addAttributesModifier(SharedMonsterAttributes.MOVEMENT_SPEED, "7107DE5E-7CE8-4030-940E-514C1F160890", -0.01, AttributeModifier.Operation.ADDITION);
 
-	public static final Effect DRUNK = new DrunkEffect()
-    		.addAttributesModifier(SharedMonsterAttributes.MOVEMENT_SPEED, "7107DE5E-7CE8-4030-940E-514C1F160890", -0.005, AttributeModifier.Operation.ADDITION);
+    public static final Effect DRUNK = new DrunkEffect()
+            .addAttributesModifier(SharedMonsterAttributes.MOVEMENT_SPEED, "7107DE5E-7CE8-4030-940E-514C1F160890", -0.005, AttributeModifier.Operation.ADDITION);
 
-	public static final Effect ABILITY_OFF = new AbilityOffEffect();
+    public static final Effect ABILITY_OFF = new AbilityOffEffect();
     
-	public static final Effect DOOR_HEAD = new DoorHeadEffect()
-			.addAttributesModifier(SharedMonsterAttributes.MOVEMENT_SPEED, "7107DE5E-7CE8-4030-940E-514C1F160890", -1000, AttributeModifier.Operation.ADDITION)
-			.addAttributesModifier(ModAttributes.JUMP_HEIGHT, "fa4d711c-faa4-41cd-83c9-8f97edc5800e", -256, AttributeModifier.Operation.ADDITION);
-    
-	public static final Effect UNCONSCIOUS = new UnconsciousEffect()
-			.addAttributesModifier(SharedMonsterAttributes.MOVEMENT_SPEED, "7107DE5E-7CE8-4030-940E-514C1F160890", -1000, AttributeModifier.Operation.ADDITION)
-			.addAttributesModifier(ModAttributes.JUMP_HEIGHT, "fa4d711c-faa4-41cd-83c9-8f97edc5800e", -256, AttributeModifier.Operation.ADDITION);
+    public static final Effect DOOR_HEAD = new DoorHeadEffect()
+        .addAttributesModifier(SharedMonsterAttributes.MOVEMENT_SPEED, "7107DE5E-7CE8-4030-940E-514C1F160890", -1000, AttributeModifier.Operation.ADDITION)
+        .addAttributesModifier(ModAttributes.JUMP_HEIGHT, "fa4d711c-faa4-41cd-83c9-8f97edc5800e", -256, AttributeModifier.Operation.ADDITION);
+
+    public static final Effect MOVEMENT_BLOCKED = new MovementBlockedEffect()
+            .addAttributesModifier(SharedMonsterAttributes.MOVEMENT_SPEED, "7107DE5E-7CE8-4030-940E-514C1F160890", -256, AttributeModifier.Operation.ADDITION)
+            .addAttributesModifier(ModAttributes.JUMP_HEIGHT, "fa4d711c-faa4-41cd-83c9-8f97edc5800e", -256, AttributeModifier.Operation.ADDITION)
+            .addAttributesModifier(SharedMonsterAttributes.KNOCKBACK_RESISTANCE, "7d355019-7ef9-4beb-bcba-8b2608a73380", 100, AttributeModifier.Operation.ADDITION);
+
+    public static final Effect UNCONSCIOUS = new UnconsciousEffect()
+            .addAttributesModifier(SharedMonsterAttributes.MOVEMENT_SPEED, "7107DE5E-7CE8-4030-940E-514C1F160890", -1000, AttributeModifier.Operation.ADDITION)
+            .addAttributesModifier(ModAttributes.JUMP_HEIGHT, "fa4d711c-faa4-41cd-83c9-8f97edc5800e", -256, AttributeModifier.Operation.ADDITION);
+
+    public static final Effect BLACK_BOX = new BlackBoxEffect()
+        .addAttributesModifier(SharedMonsterAttributes.MOVEMENT_SPEED, "7107DE5E-7CE8-4030-940E-514C1F160890", -1000, AttributeModifier.Operation.ADDITION)
+        .addAttributesModifier(SharedMonsterAttributes.KNOCKBACK_RESISTANCE, "7d355019-7ef9-4beb-bcba-8b2608a73380", 100, AttributeModifier.Operation.ADDITION)
+        .addAttributesModifier(ModAttributes.JUMP_HEIGHT, "fa4d711c-faa4-41cd-83c9-8f97edc5800e", -256, AttributeModifier.Operation.ADDITION);
+
     
     static {
         WyRegistry.registerEffect(FROZEN, "Frozen");
@@ -78,6 +92,9 @@ public class ModEffects {
         WyRegistry.registerEffect(DRUNK, "Drunk");
         WyRegistry.registerEffect(ABILITY_OFF, "Ability Off");
         WyRegistry.registerEffect(DOOR_HEAD, "Door Head");
+        WyRegistry.registerEffect(MOVEMENT_BLOCKED, "Movement Blocked");
         WyRegistry.registerEffect(UNCONSCIOUS, "Unconscious");
+        WyRegistry.registerEffect(BLACK_BOX, "Black Box");
+
     }
 }

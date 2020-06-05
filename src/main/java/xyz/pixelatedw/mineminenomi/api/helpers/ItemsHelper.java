@@ -13,6 +13,7 @@ import com.google.common.collect.Multimap;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.item.ItemEntity;
@@ -26,12 +27,18 @@ import net.minecraft.item.UseAction;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import xyz.pixelatedw.mineminenomi.abilities.ZoomAbility;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
+import xyz.pixelatedw.mineminenomi.init.ModArmors;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
+import xyz.pixelatedw.mineminenomi.init.ModEnchantments;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
+import xyz.pixelatedw.mineminenomi.init.ModWeapons;
 import xyz.pixelatedw.mineminenomi.items.weapons.ClimaTactItem;
 import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
+import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 
 public class ItemsHelper
 {
@@ -158,5 +165,26 @@ public class ItemsHelper
 		}
 
 		return false;
+	}
+
+	public static boolean isKairosekiWeapon(ItemStack heldItem) {
+		if (heldItem != null)
+			return (heldItem.isEnchanted() && EnchantmentHelper.getEnchantmentLevel(ModEnchantments.KAIROSEKI, heldItem) > 0) || heldItem.getItem() == ModWeapons.JITTE;
+		return false;
+	}
+	
+	public static float getSniperInaccuracy(float inaccuracy, PlayerEntity player)
+	{
+		if(EntityStatsCapability.get(player).isSniper() && player.getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() == ModArmors.SNIPER_GOGGLES)
+		{
+			IAbilityData aprops = AbilityDataCapability.get(player);
+			ZoomAbility ability = aprops.getEquippedAbility(ZoomAbility.INSTANCE);
+			boolean isActive = ability != null && ability.isContinuous();
+			
+			if(isActive)
+				return inaccuracy / 4;
+		}
+		
+		return inaccuracy;
 	}
 }

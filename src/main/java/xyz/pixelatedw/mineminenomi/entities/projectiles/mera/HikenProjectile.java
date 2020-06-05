@@ -34,7 +34,7 @@ public class HikenProjectile extends AbilityProjectileEntity
 	{
 		super(MeraProjectiles.HIKEN, world, player);
 
-		this.setDamage(20);
+		this.setDamage(35);
 		
 		this.onBlockImpactEvent = this::onBlockImpactEvent;
 		this.onTickEvent = this::onTickEvent;

@@ -37,9 +37,10 @@ public class FreshFireProjectile extends AbilityProjectileEntity
 	{
 		super(CyborgProjectiles.FRESH_FIRE, world, player);
 		
-		this.setDamage(5);
+		this.setDamage(1.5f);
 		this.setPassThroughEntities();
 		this.setMaxLife(15);
+		this.setChangeHurtTime(true);
 		
 		this.onEntityImpactEvent = this::onEntityImpactEvent;
 		this.onBlockImpactEvent = this::onBlockImpactEvent;

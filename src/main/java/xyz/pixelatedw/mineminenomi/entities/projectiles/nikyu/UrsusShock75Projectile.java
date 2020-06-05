@@ -37,7 +37,7 @@ public class UrsusShock75Projectile extends AbilityProjectileEntity
 	
 	private void onBlockImpactEvent(BlockPos hit)
 	{
-		ExplosionAbility explosion = AbilityHelper.newExplosion(this.getThrower(), hit.getX(), hit.getY(), hit.getZ(), 4);
+		ExplosionAbility explosion = AbilityHelper.newExplosion(this.getThrower(), hit.getX(), hit.getY(), hit.getZ(), 5);
 		explosion.setExplosionSound(true);
 		explosion.setDamageOwner(false);
 		explosion.setDestroyBlocks(true);

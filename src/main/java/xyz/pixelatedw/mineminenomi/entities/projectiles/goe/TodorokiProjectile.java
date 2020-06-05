@@ -30,7 +30,7 @@ public class TodorokiProjectile extends AbilityProjectileEntity
 	{
 		super(GoeProjectiles.TODOROKI, world, player);
 
-		this.setDamage(20);
+		this.setDamage(8);
 		this.setPassThroughEntities();
 		
 		this.onBlockImpactEvent = this::onBlockImpactEvent;

@@ -140,7 +140,7 @@ public class BlackKnightEntity extends CreatureEntity
 			if(!ownerDFProps.getDevilFruit().equalsIgnoreCase("ito_ito"))
 				this.remove();
 			
-			if(!targetsList.isEmpty())
+			if(!targetsList.isEmpty() && (this.getAttackTarget() == null || !this.getAttackTarget().isAlive()))
 			{
 				if(targetsList.contains(owner))
 					targetsList.remove(owner);

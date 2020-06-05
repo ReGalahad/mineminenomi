@@ -42,7 +42,7 @@ public class ExtolCommand
 		
 		builder
 			.then(Commands.literal("=")
-				.then(Commands.argument("value", IntegerArgumentType.integer(1, ModValues.MAX_GENERAL))
+				.then(Commands.argument("value", IntegerArgumentType.integer(0, ModValues.MAX_GENERAL))
 					.then(Commands.argument("targets", EntityArgument.players())
 						.executes(context -> 
 							{ 

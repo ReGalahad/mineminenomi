@@ -1,22 +1,16 @@
 package xyz.pixelatedw.mineminenomi.events.passives;
 
-import java.util.UUID;
+import java.util.List;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
-import xyz.pixelatedw.mineminenomi.entities.zoan.BisonHeavyZoanInfo;
 import xyz.pixelatedw.mineminenomi.entities.zoan.BisonWalkZoanInfo;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
@@ -38,11 +32,10 @@ public class UshiBisonPassiveEvents
 
 		if (props.getZoanPoint().equalsIgnoreCase(BisonWalkZoanInfo.FORM))
 		{
-
-			Entity rayTracedEntity = WyHelper.rayTraceEntities(player, 1).getEntity();
-			LivingEntity target = (rayTracedEntity != null && rayTracedEntity instanceof LivingEntity) ? (LivingEntity) rayTracedEntity : null;
+			List<LivingEntity> targets = WyHelper.getEntitiesNear(player.getPosition(), player.world, 1.5);
+			targets.remove(player);
 			
-			if(target != null)
+			for(LivingEntity target : targets)
 			{
 				Vec3d speed = WyHelper.propulsion(player, 2, 2);
 	
@@ -51,23 +44,4 @@ public class UshiBisonPassiveEvents
 			}
 		}
 	}
-
-	@SubscribeEvent
-	public static void onEntityAttack(LivingHurtEvent event)
-	{
-		if (!(event.getSource().getTrueSource() instanceof PlayerEntity))
-			return;
-
-		PlayerEntity attacker = (PlayerEntity) event.getSource().getTrueSource();
-		IDevilFruit props = DevilFruitCapability.get(attacker);
-
-		if (!props.getDevilFruit().equalsIgnoreCase("ushi_ushi_bison"))
-			return;
-
-		if (props.getZoanPoint().equalsIgnoreCase(BisonHeavyZoanInfo.FORM))
-		{
-			event.setAmount(event.getAmount() + 3);
-		}
-	}
-
 }

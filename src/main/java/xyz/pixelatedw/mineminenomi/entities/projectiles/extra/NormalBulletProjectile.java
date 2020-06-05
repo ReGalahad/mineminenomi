@@ -21,7 +21,7 @@ public class NormalBulletProjectile extends AbilityProjectileEntity {
 
 	public NormalBulletProjectile(World world, LivingEntity player) {
 		super(ExtraProjectiles.NORMAL_BULLET, world, player);
-
+		this.setPhysical();
 		this.setDamage(6);
 	}
 }

@@ -44,7 +44,7 @@ public class BountyCommand
 		
 		builder
 			.then(Commands.literal("=")
-				.then(Commands.argument("value", LongArgumentType.longArg(1, ModValues.MAX_BOUNTY))
+				.then(Commands.argument("value", LongArgumentType.longArg(0, ModValues.MAX_BOUNTY))
 					.then(Commands.argument("targets", EntityArgument.players())
 						.executes(context -> 
 							{ 

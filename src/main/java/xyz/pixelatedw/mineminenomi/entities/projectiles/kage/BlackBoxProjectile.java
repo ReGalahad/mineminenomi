@@ -2,13 +2,14 @@ package xyz.pixelatedw.mineminenomi.entities.projectiles.kage;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.network.play.server.SPlayEntityEffectPacket;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.api.protection.BlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.api.protection.block.AirBlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.api.protection.block.FoliageBlockProtectionRule;
-import xyz.pixelatedw.mineminenomi.init.ModBlocks;
+import xyz.pixelatedw.mineminenomi.init.ModEffects;
 import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 
 public class BlackBoxProjectile extends AbilityProjectileEntity
@@ -34,13 +35,16 @@ public class BlackBoxProjectile extends AbilityProjectileEntity
 	{
 		super(KageProjectiles.BLACK_BOX, world, player);
 
-		this.setDamage(4);
+		this.setDamage(5);
 		
-		this.onBlockImpactEvent = this::onBlockImpactEvent;
+		this.onEntityImpactEvent = this::onEntityImpactEvent;
 	}
 	
-	private void onBlockImpactEvent(BlockPos pos)
+	private void onEntityImpactEvent(LivingEntity target)
 	{
-		AbilityHelper.createFilledCube(this.world, pos.getX(), pos.getY(), pos.getZ(), 2, 2, 2, ModBlocks.KAGE, GRIEF_RULE);
+		EffectInstance instance = new EffectInstance(ModEffects.BLACK_BOX, 200, 0);
+		target.addPotionEffect(instance);	
+		if(this.owner instanceof ServerPlayerEntity)
+			((ServerPlayerEntity) this.owner).connection.sendPacket(new SPlayEntityEffectPacket(target.getEntityId(), instance));		
 	}
 }

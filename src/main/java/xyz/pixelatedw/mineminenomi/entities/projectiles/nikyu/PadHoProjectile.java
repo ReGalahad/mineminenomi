@@ -31,8 +31,8 @@ public class PadHoProjectile extends AbilityProjectileEntity
 	{
 		super(NikyuProjectiles.PAD_HO, world, player);
 
-		this.setDamage(10);
-
+		this.setDamage(8);
+		
 		this.onBlockImpactEvent = this::onBlockImpactEvent;
 		this.onEntityImpactEvent = this::onEntityImpactEvent;
 	}
@@ -49,7 +49,7 @@ public class PadHoProjectile extends AbilityProjectileEntity
 		if(zPower >= 0) zPower += 2;
 		else zPower -= 2;
 		
-		target.setMotion(xPower, 0.1, zPower);
+		target.setMotion(xPower, 1.2f, zPower);
 		target.velocityChanged = true;
 		target.fallDistance = 0;
 	}

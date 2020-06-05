@@ -33,6 +33,7 @@ public class MiniHollowProjectile extends AbilityProjectileEntity
 		super(HoroProjectiles.MINI_HOLLOW, world, player);
 
 		this.setDamage(2);
+		this.setChangeHurtTime(true);
 		
 		this.withEffects = () -> {
 			return new EffectInstance[] {

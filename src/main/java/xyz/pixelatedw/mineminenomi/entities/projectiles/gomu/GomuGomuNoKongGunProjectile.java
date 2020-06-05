@@ -31,10 +31,10 @@ public class GomuGomuNoKongGunProjectile extends AbilityProjectileEntity
 
 		this.setDamage(30);
 		this.setMaxLife(30);
-		this.setPhysical();	
-		this.setPassThroughBlocks();
+		this.setPhysical();
+		this.setCanGetStuckInGround();
 		this.setPassThroughEntities();
-		
+
 		this.onBlockImpactEvent = this::onBlockImpactEvent;
 	}
 	

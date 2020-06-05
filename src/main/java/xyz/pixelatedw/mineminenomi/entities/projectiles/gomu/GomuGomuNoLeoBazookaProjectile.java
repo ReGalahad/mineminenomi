@@ -32,7 +32,8 @@ public class GomuGomuNoLeoBazookaProjectile extends AbilityProjectileEntity
 		this.setMaxLife(30);
 		this.setPhysical();
 		this.setPassThroughEntities();
-		
+		this.setHurtTime(10);
+
 		this.onEntityImpactEvent = this::onEntityImpactEvent;
 	}
 	

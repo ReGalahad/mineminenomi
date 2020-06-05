@@ -32,13 +32,14 @@ import xyz.pixelatedw.mineminenomi.entities.mobs.bandits.GenericBanditEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.GenericPirateEntity;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.mineminenomi.init.ModQuests;
+import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.quests.Quest;
 
 public class BowMasterEntity extends GenericNewEntity implements IQuestGiver
 {
 	public BowMasterEntity(World worldIn)
 	{
-		super(ModEntities.BOW_MASTER, worldIn, new String[] {"bowmaster1", "bowmaster2", "bowmaster3"});
+		super(ModEntities.BOW_MASTER, worldIn, new String[] {"bow_master1", "bow_master2", "bow_master3"});
 	}
 
 	@Override
@@ -66,8 +67,8 @@ public class BowMasterEntity extends GenericNewEntity implements IQuestGiver
 		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(70.0D);
 		this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
 		
-		this.setDoriki(20);
-		this.setBelly(20);
+		this.setDoriki(20 + WyHelper.randomWithRange(0, 10));
+		this.setBelly(20 + WyHelper.randomWithRange(0, 20));
 	}
 
 	@Override

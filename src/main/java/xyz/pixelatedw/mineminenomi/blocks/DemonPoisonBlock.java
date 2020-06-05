@@ -7,8 +7,6 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
-import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 
 public class DemonPoisonBlock extends PoisonBlock
 {
@@ -18,22 +16,10 @@ public class DemonPoisonBlock extends PoisonBlock
 	{
 	   	if(entity instanceof LivingEntity)
     	{
-    		IDevilFruit props = DevilFruitCapability.get((LivingEntity) entity);
-    		
-    		if(!props.getDevilFruit().equals("doku_doku"))
-    		{
-    			if(!((LivingEntity)entity).isPotionActive(Effects.POISON))
-    			{
-    				((LivingEntity)entity).addPotionEffect(new EffectInstance(Effects.POISON, 300, 2));
-    			}
-    		}
-    		else
-    		{
-    			if(!((LivingEntity)entity).isPotionActive(Effects.REGENERATION))
-    			{
-    				((LivingEntity)entity).addPotionEffect(new EffectInstance(Effects.REGENERATION, 50, 1));
-    			}
-    		}
+			if(!((LivingEntity)entity).isPotionActive(Effects.POISON))
+			{
+				((LivingEntity)entity).addPotionEffect(new EffectInstance(Effects.POISON, 300, 2));
+			}
     	}
 	}
 	

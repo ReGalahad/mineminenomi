@@ -16,8 +16,6 @@ public class DoppelmanAbility extends ContinuousAbility implements IParallelCont
 	public DoppelmanAbility()
 	{
 		super("Doppelman", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(1);
-		this.setThreshold(120);
 		this.setDescription("Creates a living version of the user's shadow to help them fight.");
 
 		this.onStartContinuityEvent = this::onStartContinuityEvent;
@@ -48,7 +46,10 @@ public class DoppelmanAbility extends ContinuousAbility implements IParallelCont
 			
 			this.doppelman.remove();
 		}
-				
+		
+		int cooldown = (int) Math.round(this.continueTime / 50.0);
+		this.setMaxCooldown(cooldown);
+		
 		return true;
 	}
 	

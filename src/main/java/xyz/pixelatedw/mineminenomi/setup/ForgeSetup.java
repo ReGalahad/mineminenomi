@@ -25,7 +25,7 @@ public class ForgeSetup
 	public static void serverStarting(FMLServerStartingEvent event)
 	{		
 		CommandDispatcher dispatcher = event.getServer().getCommandManager().getDispatcher();
-		
+
 		AbilityProtectionCommand.register(dispatcher);
 		DorikiCommand.register(dispatcher);
 		BountyCommand.register(dispatcher);

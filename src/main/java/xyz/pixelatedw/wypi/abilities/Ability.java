@@ -69,7 +69,7 @@ public abstract class Ability extends ForgeRegistryEntry<Ability>
 		return this.state == State.COOLDOWN;
 	}
 
-	public boolean isPassiveActive()
+	public boolean isPassiveEnabled()
 	{
 		return this.state == State.PASSIVE;
 	}

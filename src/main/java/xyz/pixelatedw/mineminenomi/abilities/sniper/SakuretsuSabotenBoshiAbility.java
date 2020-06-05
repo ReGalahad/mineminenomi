@@ -23,6 +23,6 @@ public class SakuretsuSabotenBoshiAbility extends ContinuousAbility implements I
 	{
 		SakuretsuSabotenBoshiProjectile proj = new SakuretsuSabotenBoshiProjectile(player.world, player);
 		player.world.addEntity(proj);
-		proj.shoot(player, player.rotationPitch, player.rotationYaw, 0, 2f, 1);
+		proj.shoot(player, player.rotationPitch, player.rotationYaw, 0, 2f, 5);
 	}
 }

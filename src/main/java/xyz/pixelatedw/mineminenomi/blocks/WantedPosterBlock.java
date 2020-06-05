@@ -72,7 +72,6 @@ public class WantedPosterBlock extends Block
 		return BlockRenderType.INVISIBLE;
 	}
 
-
 	@Override
 	public BlockRenderLayer getRenderLayer()
 	{

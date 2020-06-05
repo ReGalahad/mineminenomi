@@ -21,7 +21,6 @@ import xyz.pixelatedw.wypi.WyHelper;
 
 public class VivreCardEntity extends Entity
 {
-	
 	private UUID ownerUUID;
 	private final double speedLimit = 0.001;
 	

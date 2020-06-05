@@ -30,7 +30,10 @@ public class SukePassiveEvents
 		if (!devilFruitProps.getDevilFruit().equalsIgnoreCase("suke_suke"))
 			return;
 		
-		if(abilityProps.getEquippedAbility(SkattingAbility.INSTANCE).isContinuous())
+		SkattingAbility ability = (SkattingAbility) abilityProps.getEquippedAbility(SkattingAbility.INSTANCE);
+		boolean isActive = ability != null && ability.isContinuous();
+		
+		if(isActive)
 			event.setCanceled(true);
 	}
 }

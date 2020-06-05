@@ -15,7 +15,7 @@ import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 public class AbilityPickaxeItem extends PickaxeItem
 {
 	private Ability ability = null;
-	
+
 	public AbilityPickaxeItem(Ability ability, AbilityItemTier tier, int attackDamage, float attackSpeed)
 	{
 		super(tier, attackDamage, attackSpeed, new Properties());
@@ -31,14 +31,19 @@ public class AbilityPickaxeItem extends PickaxeItem
 			PlayerEntity owner = (PlayerEntity) entity;
 			IAbilityData abilityDataProps = AbilityDataCapability.get(owner);
 
+			boolean deletePicaxe = true;
+
 			for(Ability ability : abilityDataProps.getEquippedAbilities(AbilityCategory.ALL))
 			{
 				if(ability == null || !(ability instanceof ItemAbility) || !this.ability.equals(ability))
 					continue;
 
-				if(!(ability instanceof ItemAbility) || !ability.isContinuous() || !((ItemAbility) ability).canBeActive(owner))
-					owner.inventory.deleteStack(itemStack);
+				if(ability.isContinuous())
+					deletePicaxe = false;
 			}
+
+			if(deletePicaxe)
+				owner.inventory.deleteStack(itemStack);
 		}
 	}
 

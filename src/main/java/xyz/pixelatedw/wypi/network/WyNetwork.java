@@ -50,6 +50,11 @@ public class WyNetwork
 	{
 		INSTANCE.send(PacketDistributor.ALL.noArg(), msg);
 	}
+	
+	public static <MSG> void sendToAllTracking(MSG msg, LivingEntity tracked)
+	{
+		INSTANCE.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> tracked), msg);
+	}
 
 	public static <MSG> void sendToAllAround(MSG msg, LivingEntity sender)
 	{

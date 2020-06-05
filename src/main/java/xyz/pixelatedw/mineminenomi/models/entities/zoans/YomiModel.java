@@ -119,11 +119,11 @@ public class YomiModel<T extends LivingEntity> extends ZoanMorphModel<T> impleme
 		}
 	}
 
-	public void setRotateAngle(RendererModel RendererModel, float x, float y, float z)
+	public void setRotateAngle(RendererModel model, float x, float y, float z)
 	{
-		RendererModel.rotateAngleX = x;
-		RendererModel.rotateAngleY = y;
-		RendererModel.rotateAngleZ = z;
+		model.rotateAngleX = x;
+		model.rotateAngleY = y;
+		model.rotateAngleZ = z;
 	}
 
 	@Override

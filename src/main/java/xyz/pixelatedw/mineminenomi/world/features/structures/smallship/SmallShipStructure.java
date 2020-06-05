@@ -5,6 +5,7 @@ import java.util.Random;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biome.Category;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.IFeatureConfig;
@@ -63,8 +64,11 @@ public class SmallShipStructure extends ScatteredStructure<NoFeatureConfig>
 
 	public static void register(Biome biome)
 	{
-		biome.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, Biome.createDecoratedFeature(ModFeatures.SMALL_SHIP, IFeatureConfig.NO_FEATURE_CONFIG, Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
-		biome.addStructure(ModFeatures.SMALL_SHIP, IFeatureConfig.NO_FEATURE_CONFIG);
+		if (biome.getCategory() == Category.OCEAN)
+		{
+			biome.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, Biome.createDecoratedFeature(ModFeatures.SMALL_SHIP, IFeatureConfig.NO_FEATURE_CONFIG, Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
+			biome.addStructure(ModFeatures.SMALL_SHIP, IFeatureConfig.NO_FEATURE_CONFIG);
+		}
 	}
 
 	public static class Start extends StructureStart

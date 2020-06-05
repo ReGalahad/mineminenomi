@@ -22,14 +22,13 @@ import xyz.pixelatedw.wypi.network.packets.server.SSyncAbilityDataPacket;
 
 public class AbilityCommand
 {
-
 	public static void register(CommandDispatcher<CommandSource> dispatcher)
 	{
 		LiteralArgumentBuilder<CommandSource> builder = Commands.literal("ability").requires(source -> source.hasPermissionLevel(2));
 
 		builder
 			.then(Commands.literal("give")
-				.then(Commands.argument("ability", new AbilityArgument())
+				.then(Commands.argument("ability", AbilityArgument.ability())
 					.then(Commands.argument("targets", EntityArgument.players())
 						.executes(context -> 
 							{ 
@@ -53,7 +52,7 @@ public class AbilityCommand
 		
 		dispatcher.register(builder);
 	}
-	
+
 	private static int addAbility(CommandContext<CommandSource> context, Ability ability, Collection<ServerPlayerEntity> targets)
 	{
 		for (ServerPlayerEntity player : targets)

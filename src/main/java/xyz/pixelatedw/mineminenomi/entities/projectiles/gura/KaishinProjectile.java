@@ -37,7 +37,8 @@ public class KaishinProjectile extends AbilityProjectileEntity
 
 		this.setDamage(50);
 		this.setCanGetStuckInGround();
-		
+		this.setPassThroughEntities();
+
 		this.onBlockImpactEvent = this::onBlockImpactEvent;
 		this.onTickEvent = this::onTickEvent;
 	}
@@ -76,7 +77,7 @@ public class KaishinProjectile extends AbilityProjectileEntity
 	
 	private void onBlockImpactEvent(BlockPos hit)
 	{		
-		ExplosionAbility explosion = AbilityHelper.newExplosion(this.getThrower(), hit.getX(), hit.getY(), hit.getZ(), 3);
+		ExplosionAbility explosion = AbilityHelper.newExplosion(this.getThrower(), hit.getX(), hit.getY(), hit.getZ(), 4);
 		explosion.setExplosionSound(true);
 		explosion.setDamageOwner(false);
 		explosion.setDestroyBlocks(true);

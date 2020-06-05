@@ -22,8 +22,6 @@ import net.minecraft.world.TickPriority;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
-import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 
 public class PoisonBlock extends Block
 {
@@ -77,33 +75,14 @@ public class PoisonBlock extends Block
 		return adjacentBlockState.getBlock() == this ? true : false;
 	}
 
-	/*
-	 * public BlockFaceUV getBlockFaceShape(IBlockReader worldIn, BlockState state, BlockPos pos, Direction face)
-	 * {
-	 * return face == Direction.DOWN ? BlockFaceUV.SOLID : BlockFaceUV.UNDEFINED;
-	 * }
-	 */
-
 	@Override
 	public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity)
 	{
 		if (entity instanceof LivingEntity)
 		{
-			IDevilFruit props = DevilFruitCapability.get((LivingEntity) entity);
-
-			if (!props.getDevilFruit().equals("doku_doku"))
+			if (!((LivingEntity) entity).isPotionActive(Effects.POISON))
 			{
-				if (!((LivingEntity) entity).isPotionActive(Effects.POISON))
-				{
-					((LivingEntity) entity).addPotionEffect(new EffectInstance(Effects.POISON, 300, 1));
-				}
-			}
-			else
-			{
-				if (!((LivingEntity) entity).isPotionActive(Effects.REGENERATION))
-				{
-					((LivingEntity) entity).addPotionEffect(new EffectInstance(Effects.REGENERATION, 50, 0));
-				}
+				((LivingEntity) entity).addPotionEffect(new EffectInstance(Effects.POISON, 300, 1));
 			}
 		}
 	}

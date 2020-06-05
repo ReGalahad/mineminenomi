@@ -18,6 +18,7 @@ import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.extra.NormalBulletProjectile;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.mineminenomi.init.ModWeapons;
+import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 
 public class MarineWithGunEntity extends GenericMarineEntity implements IRangedAttackMob
@@ -44,8 +45,8 @@ public class MarineWithGunEntity extends GenericMarineEntity implements IRangedA
 		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D);
 		this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
 		
-		this.setDoriki(10);
-		this.setBelly(5);
+		this.setDoriki(10 + WyHelper.randomWithRange(0, 5));
+		this.setBelly(5 + WyHelper.randomWithRange(0, 5));
 	}
 
 	@Override
@@ -70,8 +71,11 @@ public class MarineWithGunEntity extends GenericMarineEntity implements IRangedA
 	{
 		AbilityProjectileEntity proj = new NormalBulletProjectile(this.world, this);
 		
+		if(this.getAttackTarget() == null)
+			return;
+		
 		double velX = target.posX - this.posX;
-		double velY = target.getBoundingBox().minY + this.getAttackTarget().getHeight() / 10.0F - (this.posY + this.getHeight());
+		double velY = target.getBoundingBox().minY + this.getAttackTarget().getHeight() / 3.0F - (this.posY + this.getHeight());
 		double velZ = target.posZ - this.posZ;
 		double x = MathHelper.sqrt(velX * velX + velZ * velZ);
 		

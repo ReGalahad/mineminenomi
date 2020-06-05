@@ -8,11 +8,12 @@ import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.blocks.AblProtectionBlock;
 import xyz.pixelatedw.mineminenomi.blocks.BarrierBlock;
+import xyz.pixelatedw.mineminenomi.blocks.CannonBlock;
 import xyz.pixelatedw.mineminenomi.blocks.CustomBarsBlock;
 import xyz.pixelatedw.mineminenomi.blocks.CustomSpawnerBlock;
 import xyz.pixelatedw.mineminenomi.blocks.DarknessBlock;
 import xyz.pixelatedw.mineminenomi.blocks.DemonPoisonBlock;
-import xyz.pixelatedw.mineminenomi.blocks.KageBlock;
+import xyz.pixelatedw.mineminenomi.blocks.DenDenMushiBlock;
 import xyz.pixelatedw.mineminenomi.blocks.KairosekiOreBlock;
 import xyz.pixelatedw.mineminenomi.blocks.OpeBlock;
 import xyz.pixelatedw.mineminenomi.blocks.OpeMidBlock;
@@ -56,7 +57,6 @@ public class ModBlocks
 	// Devil Fruit created blocks
 	public static final Block OPE = new OpeBlock();
 	public static final Block OPE_MID = new OpeMidBlock();
-	public static final Block KAGE = new KageBlock();
 	public static final Block SUNA_SAND = new SunaSandBlock();
 	public static final Block WAX = new Block(Properties.create(Material.CLAY).hardnessAndResistance(2));
 	public static final Block POISON = new PoisonBlock();
@@ -74,10 +74,9 @@ public class ModBlocks
 	public static final Block SKY_BLOCK = new SkyBlockBlock();
 	public static final Block WANTED_POSTER = new WantedPosterBlock();
 	public static final Block WANTED_POSTER_PACKAGE = new WantedPosterPackageBlock();
-
-	// public static final Block DenDenMushi = new BlockDenDenMushi();
-
-	public static final CustomSpawnerBlock CUSTOM_SPAWNER = new CustomSpawnerBlock();
+	public static final Block CUSTOM_SPAWNER = new CustomSpawnerBlock();
+	public static final Block DEN_DEN_MUSHI = new DenDenMushiBlock();
+	public static final Block CANNON = new CannonBlock();
 
 	// Dials
 	public static final Block AXE_DIAL = new AxeDialBlock();
@@ -91,11 +90,7 @@ public class ModBlocks
 
 	// Ability Protection
 	public static final Block ABILITY_PROTECTION = new AblProtectionBlock();
-	/*
-	 * public static final Block AbilityProtectionAreaBlock = new BlockAbilityProtectionArea();
-	 * public static final Block AbilityProtectionCenterBlock = new BlockAbilityProtectionArea();
-	 */
-	
+
 	static
 	{
 		// Blocks
@@ -105,7 +100,6 @@ public class ModBlocks
 		WyRegistry.registerBlock(KAIROSEKI_ORE, "Kairoseki Ore");
 		WyRegistry.registerBlock(SKY_BLOCK, "Sky Block");
 		WyRegistry.registerBlock(KAIROSEKI_BARS, "Kairoseki Bars", new JSONModelBars("Kairoseki Bars"));
-		WyRegistry.registerBlock(KAGE, "Kage Block");
 		WyRegistry.registerBlock(SUNA_SAND, "Suna Sand");
 		WyRegistry.registerBlock(WAX, "Wax Block");
 		WyRegistry.registerBlock(POISON, "Poison", new JSONModelThinBlock("Poison"));
@@ -127,7 +121,9 @@ public class ModBlocks
 		WyRegistry.registerBlock(EISEN_DIAL, "Eisen Dial");
 		WyRegistry.registerBlock(MILKY_DIAL, "Milky Dial");
 		WyRegistry.registerBlock(ABILITY_PROTECTION, "Ability Protection");
-
+		WyRegistry.registerBlock(DEN_DEN_MUSHI, "Den Den Mushi");
+		WyRegistry.registerBlock(CANNON, "Cannon");
+		
 		// Item Blocks
 		registerItemBlock(OPE, "Ope", false);
 		registerItemBlock(OPE_MID, "Ope Mid", false);
@@ -135,7 +131,6 @@ public class ModBlocks
 		registerItemBlock(KAIROSEKI_ORE, "Kairoseki Ore", true);
 		registerItemBlock(SKY_BLOCK, "Sky Block", true);
 		registerItemBlock(KAIROSEKI_BARS, "Kairoseki Bars", true, new JSONModelSimpleItem("Kairoseki Bars"));
-		registerItemBlock(KAGE, "Kage Block", false);
 		registerItemBlock(SUNA_SAND, "Suna Sand", false);
 		registerItemBlock(WAX, "Wax Block", false);
 		registerItemBlock(POISON, "Poison", false);
@@ -147,6 +142,8 @@ public class ModBlocks
 		registerItemBlock(ORI_BARS, "Ori Bars", false, new JSONModelSimpleItem("Ori Bars"));
 		registerItemBlock(CUSTOM_SPAWNER, "Custom Spawner", false);
 		registerItemBlock(WANTED_POSTER_PACKAGE, "Wanted Poster Package", true, new JSONModelSimpleItem("Wanted Poster Package"));
+		registerItemBlock(DEN_DEN_MUSHI, "Den Den Mushi", true, new JSONModelSimpleItem("Den Den Mushi"));
+		registerItemBlock(CANNON, "Cannon", true, new JSONModelSimpleItem("Cannon"));
 		registerCustomItemBlock(WANTED_POSTER, "Wanted Poster", new WantedPosterItem());
 		registerCustomItemBlock(AXE_DIAL, "Axe Dial", new AxeDialItem());
 		registerCustomItemBlock(BREATH_DIAL, "Breath Dial", new BreathDialItem());
@@ -172,6 +169,8 @@ public class ModBlocks
 		WyRegistry.registerLootTable(FLASH_DIAL, new JSONLootTableSimpleBlock("Flash Dial"));
 		WyRegistry.registerLootTable(EISEN_DIAL, new JSONLootTableSimpleBlock("Eisen Dial"));
 		WyRegistry.registerLootTable(MILKY_DIAL, new JSONLootTableSimpleBlock("Milky Dial"));
+		WyRegistry.registerLootTable(DEN_DEN_MUSHI, new JSONLootTableSimpleBlock("Den Den Mushi"));
+		WyRegistry.registerLootTable(CANNON, new JSONLootTableSimpleBlock("Cannon"));
 	}
 
 	public static Item registerItemBlock(Block block, String localizedName, boolean isInCreative)

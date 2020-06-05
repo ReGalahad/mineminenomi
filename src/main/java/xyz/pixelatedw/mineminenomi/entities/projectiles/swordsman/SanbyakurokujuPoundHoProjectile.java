@@ -32,7 +32,8 @@ public class SanbyakurokujuPoundHoProjectile extends AbilityProjectileEntity
 		
 		this.setDamage(20);
 		this.setPassThroughEntities();
-		
+		this.setPhysical();
+
 		this.onBlockImpactEvent = this::onBlockImpactEvent;
 	}
 	

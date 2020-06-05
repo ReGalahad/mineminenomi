@@ -17,7 +17,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.registries.ForgeRegistries;
 import xyz.pixelatedw.mineminenomi.abilities.artofweather.CoolBallAbility;
 import xyz.pixelatedw.mineminenomi.abilities.artofweather.HeatBallAbility;
@@ -64,7 +63,6 @@ import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
-import xyz.pixelatedw.mineminenomi.events.custom.DorikiEvent;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.mineminenomi.init.ModQuests;
 import xyz.pixelatedw.mineminenomi.items.AkumaNoMiItem;
@@ -315,10 +313,6 @@ public class AbilityHelper
 	{
 		IEntityStats props = EntityStatsCapability.get(player);
 		IAbilityData abilityProps = AbilityDataCapability.get(player);
-
-		DorikiEvent e = new DorikiEvent(player);
-		if (MinecraftForge.EVENT_BUS.post(e))
-			return;
 
 		List<Ability> tempAblList = new ArrayList<Ability>();
 

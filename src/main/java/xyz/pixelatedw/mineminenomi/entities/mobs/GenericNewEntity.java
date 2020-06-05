@@ -18,11 +18,10 @@ import net.minecraft.world.World;
 
 public class GenericNewEntity extends CreatureEntity implements IDynamicRenderer
 {
-
 	protected String[] textures;
 	private static final DataParameter<Integer> TEXTURE_ID = EntityDataManager.createKey(GenericNewEntity.class, DataSerializers.VARINT);
+	private static final DataParameter<Boolean> HAS_BUSOSHOKU_HAKI_ACTIVE = EntityDataManager.createKey(GenericNewEntity.class, DataSerializers.BOOLEAN);
 	private int doriki, belly;
-	private boolean hasBusoHaki;
 	protected int threat;
 	private Goal currentGoal, previousGoal;
 	
@@ -45,28 +44,29 @@ public class GenericNewEntity extends CreatureEntity implements IDynamicRenderer
 	{
 		super.registerData();
 		this.getDataManager().register(TEXTURE_ID, 0);
+		this.getDataManager().register(HAS_BUSOSHOKU_HAKI_ACTIVE, false);
 	}
 
 	@Override
 	public void writeAdditional(CompoundNBT nbt)
 	{
 		super.writeAdditional(nbt);
-		nbt.putInt("Texture", this.getTextureId());
-		nbt.putInt("Doriki", this.doriki);
-		nbt.putInt("Belly", this.belly);
+		nbt.putInt("texture", this.getTextureId());
+		nbt.putInt("doriki", this.doriki);
+		nbt.putInt("belly", this.belly);
 
-		nbt.putBoolean("HasBusoHaki", this.hasBusoHaki);
+		nbt.putBoolean("hasBusoHaki", this.hasBusoHaki());
 	}
 
 	@Override
 	public void readAdditional(CompoundNBT nbt)
 	{
 		super.readAdditional(nbt);
-		this.setTexture(nbt.getInt("Texture"));
-		this.doriki = nbt.getInt("Doriki");
-		this.belly = nbt.getInt("Belly");
+		this.setTexture(nbt.getInt("texture"));
+		this.doriki = nbt.getInt("doriki");
+		this.belly = nbt.getInt("belly");
 
-		this.hasBusoHaki = nbt.getBoolean("HasBusoHaki");
+		this.setBusoHaki(nbt.getBoolean("hasBusoHaki"));
 	}
 
 	@Override
@@ -102,9 +102,9 @@ public class GenericNewEntity extends CreatureEntity implements IDynamicRenderer
 		return this.doriki;
 	}
 
-	public void setDoriki(int value)
+	public void setDoriki(double value)
 	{
-		this.doriki = value;
+		this.doriki = (int) Math.floor(value);
 	}
 
 	public int getBelly()
@@ -112,19 +112,19 @@ public class GenericNewEntity extends CreatureEntity implements IDynamicRenderer
 		return this.belly;
 	}
 
-	public void setBelly(int value)
+	public void setBelly(double value)
 	{
-		this.belly = value;
+		this.belly = (int) Math.floor(value);
 	}
 
 	public boolean hasBusoHaki()
 	{
-		return this.hasBusoHaki;
+		return this.dataManager.get(HAS_BUSOSHOKU_HAKI_ACTIVE);
 	}
 
 	public void setBusoHaki(boolean value)
 	{
-		this.hasBusoHaki = value;
+		this.dataManager.set(HAS_BUSOSHOKU_HAKI_ACTIVE, value);
 	}
 
 	public Goal getCurrentGoal()

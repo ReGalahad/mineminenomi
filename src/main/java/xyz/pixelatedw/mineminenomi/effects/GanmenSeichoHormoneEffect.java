@@ -6,7 +6,6 @@ import xyz.pixelatedw.wypi.WyHelper;
 
 public class GanmenSeichoHormoneEffect extends Effect
 {
-
 	public GanmenSeichoHormoneEffect()
 	{
 		super(EffectType.NEUTRAL, WyHelper.hexToRGB("#000000").getRGB());

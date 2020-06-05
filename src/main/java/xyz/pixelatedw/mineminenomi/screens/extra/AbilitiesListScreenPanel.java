@@ -138,13 +138,11 @@ public class AbilitiesListScreenPanel extends ScrollPanel
 
 	class Entry
 	{
-
 		private Ability ability;
 
 		public Entry(Ability ability)
 		{
 			this.ability = ability;
 		}
-
 	}
 }

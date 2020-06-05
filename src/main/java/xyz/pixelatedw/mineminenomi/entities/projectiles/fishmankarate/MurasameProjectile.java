@@ -33,8 +33,9 @@ public class MurasameProjectile extends AbilityProjectileEntity
 	{
 		super(FishmanKarateProjectiles.MURASAME, world, player);
 		
-		this.setDamage(25);
+		this.setDamage(5.5f);
 		this.setPassThroughEntities();
+		this.setChangeHurtTime(true);
 		
 		this.onBlockImpactEvent = this::onBlockImpactEvent;
 		this.onTickEvent = this::onTickEvent;
@@ -45,7 +46,7 @@ public class MurasameProjectile extends AbilityProjectileEntity
 		ExplosionAbility explosion = AbilityHelper.newExplosion(this.getThrower(), hit.getX(), hit.getY(), hit.getZ(), 2);
 		explosion.setExplosionSound(false);
 		explosion.setDamageOwner(false);
-		explosion.setDestroyBlocks(false);
+		explosion.setDestroyBlocks(true);
 		explosion.setFireAfterExplosion(false);
 		explosion.setSmokeParticles(new WaterExplosionParticleEffect());
 		explosion.setDamageEntities(true);

@@ -41,7 +41,8 @@ public class SakuretsuSabotenBoshiProjectile extends AbilityProjectileEntity
 		super(SniperProjectiles.SAKURETSU_SABOTEN_BOSHI, world, player);
 
 		this.setDamage(10);
-		
+		this.setPhysical();
+
 		this.onBlockImpactEvent = this::onBlockImpactEvent;
 	}
 

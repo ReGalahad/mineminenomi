@@ -34,7 +34,7 @@ public class GomuGomuNoElephantGunProjectile extends AbilityProjectileEntity
 		this.setPhysical();	
 		this.setCanGetStuckInGround();
 		this.setPassThroughEntities();
-		
+
 		this.onBlockImpactEvent = this::onBlockImpactEvent;
 	}
 	

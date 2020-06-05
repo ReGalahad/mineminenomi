@@ -32,7 +32,8 @@ public class YakkodoriProjectile extends AbilityProjectileEntity
 		
 		this.setDamage(10);
 		this.setCanGetStuckInGround();
-		
+		this.setPhysical();
+
 		this.onBlockImpactEvent = this::onBlockImpactEvent;
 	}
 	

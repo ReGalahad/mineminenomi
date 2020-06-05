@@ -17,6 +17,7 @@ import xyz.pixelatedw.mineminenomi.items.HeartItem;
 import xyz.pixelatedw.mineminenomi.items.SakeBottleItem;
 import xyz.pixelatedw.mineminenomi.items.SakeCupItem;
 import xyz.pixelatedw.mineminenomi.items.SeaKingMeatItem;
+import xyz.pixelatedw.mineminenomi.items.ShadowItem;
 import xyz.pixelatedw.mineminenomi.items.UltraColaItem;
 import xyz.pixelatedw.mineminenomi.items.VivreCardItem;
 import xyz.pixelatedw.mineminenomi.items.WateringCanItem;
@@ -35,7 +36,7 @@ public class ModItems
 	public static final Item KAIROSEKI = new Item(new Properties().group(ModCreativeTabs.MISC));
 	public static final Item DENSE_KAIROSEKI = new Item(new Properties().group(ModCreativeTabs.MISC));
 	public static final Item BLACK_METAL = new Item(new Properties().group(ModCreativeTabs.MISC));
-	public static final Item SHADOW = new Item(new Properties().group(ModCreativeTabs.MISC));
+	public static final Item SHADOW = new ShadowItem();
 	public static final Item HEART = new HeartItem();
 	public static final Item BELLY_POUCH = new BellyPouchItem();
 	public static final Item KEY = new Item(new Properties().group(ModCreativeTabs.MISC));
@@ -62,6 +63,7 @@ public class ModItems
 	public static final Item KAIROSEKI_BULLET = new Item(new Properties().group(ModCreativeTabs.MISC));
 	public static final Item KUJA_ARROW = new Item(new Properties().group(ModCreativeTabs.MISC));
 	public static final Item POP_GREEN = new Item(new Properties().group(ModCreativeTabs.MISC));
+	public static final Item CANNON_BALL = new Item(new Properties().group(ModCreativeTabs.MISC));
 
 	// JSON Predicates
 	public static final JSONPredicateObject FILLED_PREDICATE = new JSONPredicateObject("filled", new ImmutablePair("filled", 1));
@@ -96,5 +98,6 @@ public class ModItems
 		WyRegistry.registerItem(WATERING_CAN, "Watering Can");
 		WyRegistry.registerItem(SAKE_BOTTLE, "Sake Bottle");
 		WyRegistry.registerItem(SAKE_CUP, "Sake Cup", FILLED_CUP_MODEL);
+		WyRegistry.registerItem(CANNON_BALL, "Cannon Ball");
 	}
 }

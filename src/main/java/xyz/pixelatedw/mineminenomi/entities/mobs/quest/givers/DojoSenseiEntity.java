@@ -26,6 +26,8 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import xyz.pixelatedw.mineminenomi.api.entities.ai.IHakiUser;
+import xyz.pixelatedw.mineminenomi.api.entities.ai.ISwordsman;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.entities.mobs.GenericNewEntity;
@@ -34,9 +36,10 @@ import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.GenericPirateEntity;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.mineminenomi.init.ModQuests;
 import xyz.pixelatedw.mineminenomi.init.ModWeapons;
+import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.quests.Quest;
 
-public class DojoSenseiEntity extends GenericNewEntity implements IQuestGiver
+public class DojoSenseiEntity extends GenericNewEntity implements IQuestGiver, IHakiUser, ISwordsman
 {
 	protected Item[] swords = new Item[] {ModWeapons.SANDAI_KITETSU, ModWeapons.NIDAI_KITESTU, ModWeapons.WADO_ICHIMONJI, Items.DIAMOND_SWORD};
 	
@@ -58,6 +61,9 @@ public class DojoSenseiEntity extends GenericNewEntity implements IQuestGiver
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, GenericPirateEntity.class, true));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, GenericBanditEntity.class, true));
 		this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
+		
+		this.addSwordsmanAbilities(this, 4);
+		this.addBusoshokuHaki(this, 100);
 	}
 	
 	@Override
@@ -70,8 +76,8 @@ public class DojoSenseiEntity extends GenericNewEntity implements IQuestGiver
 		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(80.0D);
 		this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
 		
-		this.setDoriki(20);
-		this.setBelly(20);
+		this.setDoriki(20 + WyHelper.randomWithRange(0, 10));
+		this.setBelly(20 + WyHelper.randomWithRange(0, 20));
 	}
 
 	@Override

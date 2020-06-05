@@ -38,7 +38,7 @@ public class KaenBoshiProjectile extends AbilityProjectileEntity
 		super(SniperProjectiles.KAEN_BOSHI, world, player);
 
 		this.setDamage(8);
-		
+		this.setPhysical();
 		this.onEntityImpactEvent = this::onEntityImpactEvent;
 		this.onBlockImpactEvent = this::onBlockImpactEvent;
 		this.onTickEvent = this::onTickEvent;

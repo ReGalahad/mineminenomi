@@ -33,7 +33,8 @@ public class DokuGumoAbility extends ContinuousAbility
 	{
 		List<LivingEntity> targets = WyHelper.<LivingEntity>getEntitiesNear(player.getPosition(), player.world, 10);
 		targets.remove(player);
-		
+		player.addPotionEffect(new EffectInstance(Effects.POISON, 200, 1));
+
 		for(LivingEntity enemy : targets)
 		{
 			if(!enemy.isPotionActive(Effects.BLINDNESS))

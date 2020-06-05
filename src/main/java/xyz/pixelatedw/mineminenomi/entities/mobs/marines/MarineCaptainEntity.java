@@ -12,14 +12,16 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import xyz.pixelatedw.mineminenomi.api.entities.ai.IBrawler;
+import xyz.pixelatedw.mineminenomi.api.entities.ai.IHakiUser;
+import xyz.pixelatedw.mineminenomi.api.entities.ai.IRokushikiUser;
+import xyz.pixelatedw.mineminenomi.api.entities.ai.ISwordsman;
 import xyz.pixelatedw.mineminenomi.entities.mobs.ai.abilities.GapCloserGoal;
-import xyz.pixelatedw.mineminenomi.entities.mobs.ai.abilities.brawler.IBrawler;
-import xyz.pixelatedw.mineminenomi.entities.mobs.ai.abilities.rokushiki.IRokushikiUser;
-import xyz.pixelatedw.mineminenomi.entities.mobs.ai.abilities.swordsman.ISwordsman;
 import xyz.pixelatedw.mineminenomi.init.ModArmors;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
+import xyz.pixelatedw.wypi.WyHelper;
 
-public class MarineCaptainEntity extends GenericMarineEntity implements IRokushikiUser, ISwordsman, IBrawler
+public class MarineCaptainEntity extends GenericMarineEntity implements IRokushikiUser, ISwordsman, IBrawler, IHakiUser
 {
 
 	public MarineCaptainEntity(World world)
@@ -36,6 +38,7 @@ public class MarineCaptainEntity extends GenericMarineEntity implements IRokushi
 		this.addRokushikiAbilities(this, 2);
 		this.addSwordsmanAbilities(this, 2);
 		this.addBrawlerAbilities(this, 2);
+		this.addBusoshokuHaki(this, 40);
 	}
 	
 	@Override
@@ -48,8 +51,8 @@ public class MarineCaptainEntity extends GenericMarineEntity implements IRokushi
 		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(50.0D);
 		this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
 		
-		this.setDoriki(20);
-		this.setBelly(20);
+		this.setDoriki(20 + WyHelper.randomWithRange(0, 10));
+		this.setBelly(20 + WyHelper.randomWithRange(0, 20));
 	}
 
 	@Override

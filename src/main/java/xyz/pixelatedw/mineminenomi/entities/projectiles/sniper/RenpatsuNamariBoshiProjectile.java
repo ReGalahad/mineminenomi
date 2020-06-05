@@ -31,7 +31,8 @@ public class RenpatsuNamariBoshiProjectile extends AbilityProjectileEntity
 		super(SniperProjectiles.RENPATSU_NAMARI_BOSHI, world, player);
 
 		this.setDamage(10);
-		
+		this.setPhysical();
+
 		this.onBlockImpactEvent = this::onBlockImpactEvent;
 	}
 

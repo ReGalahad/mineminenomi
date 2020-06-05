@@ -10,7 +10,7 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
 import xyz.pixelatedw.mineminenomi.api.TradeEntry;
-import xyz.pixelatedw.mineminenomi.entities.mobs.misc.TraderEntity;
+import xyz.pixelatedw.mineminenomi.api.entities.TraderEntity;
 
 public class CUpdateTraderOffersPacket
 {

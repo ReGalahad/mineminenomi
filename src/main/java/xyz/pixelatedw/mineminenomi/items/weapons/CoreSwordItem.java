@@ -24,6 +24,7 @@ import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.abilities.haki.BusoshokuHakiImbuingAbility;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
+import xyz.pixelatedw.mineminenomi.entities.mobs.GenericNewEntity;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
@@ -31,24 +32,35 @@ import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 public class CoreSwordItem extends Item
 {
 	private double damage = 1;
+	private double speed = -2.4D;
 	private double multiplier = 1;
 	private boolean canUseSpecial = false;
 	protected boolean isPoisonous = false, isFireAspect = false, isSlownessInducing = false, isStackable = false;
 	protected int poisonTimer = 100, fireAspectTimer = 100, slownessTimer = 100;
+	private boolean isBlunt = false;
 
 	private IItemPropertyGetter hakiProperty = (itemStack, world, livingEntity) ->
 	{
-		if (livingEntity == null || !(livingEntity instanceof PlayerEntity))
+		if (livingEntity == null)
 		{
 			return 0.0F;
 		}
 		else
 		{
-			IAbilityData props = AbilityDataCapability.get(livingEntity);
-			boolean mainHandFlag = livingEntity.getHeldItemMainhand() == itemStack;
-			BusoshokuHakiImbuingAbility ability = props.getEquippedAbility(BusoshokuHakiImbuingAbility.INSTANCE);
-			boolean hakiActiveFlag = ability != null && ability.isContinuous();
-			return mainHandFlag && hakiActiveFlag ? 1.0F : 0.0F;
+			float hasHakiActive = 0;
+			if(livingEntity instanceof PlayerEntity)
+			{
+				IAbilityData props = AbilityDataCapability.get(livingEntity);
+				boolean mainHandFlag = livingEntity.getHeldItemMainhand() == itemStack;
+				BusoshokuHakiImbuingAbility ability = props.getEquippedAbility(BusoshokuHakiImbuingAbility.INSTANCE);
+				boolean hakiActiveFlag = ability != null && ability.isContinuous();
+				hasHakiActive = mainHandFlag && hakiActiveFlag ? 1 : 0;
+			}
+			else if(livingEntity instanceof GenericNewEntity)
+			{
+				hasHakiActive = ((GenericNewEntity)livingEntity).hasBusoHaki() ? 1 : 0;
+			}
+			return hasHakiActive;
 		}
 	};
 	
@@ -90,6 +102,7 @@ public class CoreSwordItem extends Item
 		this.addPropertyOverride(new ResourceLocation("sheathed"), this.sheathedProperty);
 	}
 
+	@Override
 	public void inventoryTick(ItemStack itemStack, World world, Entity entity, int par4, boolean par5)
 	{
 		if (!itemStack.hasTag())
@@ -130,7 +143,6 @@ public class CoreSwordItem extends Item
 	{
 		return 14;
 	}
-
 	public CoreSwordItem setQuality()
 	{
 		return this;
@@ -183,6 +195,20 @@ public class CoreSwordItem extends Item
 		return (T) this;
 	}
 
+	public  <T extends CoreSwordItem> T setSwordSpeed(double speed) {
+		this.speed = speed;
+		return (T) this;
+	}
+
+	public  <T extends CoreSwordItem> T setBlunt() {
+		this.isBlunt = true;
+		return (T) this;
+	}
+
+	public boolean isBlunt() {
+		return this.isBlunt;
+	}
+
 	public <T extends CoreSwordItem> T setIsFireAspect()
 	{
 		this.isFireAspect = true;
@@ -231,7 +257,7 @@ public class CoreSwordItem extends Item
 			else
 				multiplier = 1;
 			multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", this.damage * multiplier, Operation.ADDITION));
-			multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Speed modifier", -2.4D, Operation.ADDITION));
+			multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Speed modifier", speed, Operation.ADDITION));
 
 		}
 		

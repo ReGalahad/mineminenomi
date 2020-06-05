@@ -47,6 +47,6 @@ public class IvoryStompAbility extends PunchAbility
 		if(target instanceof PlayerEntity)
 			((ServerPlayerEntity)target).connection.sendPacket(new SEntityVelocityPacket(target));
 				
-		return 6;
+		return 12;
 	}
 }

@@ -57,7 +57,7 @@ public class DFWeaknessesEvents
 			boolean hasWaterWeakness =  AbilityHelper.isNearbyKairoseki(player) && !player.isPotionActive(ModEffects.BUBBLY_CORAL);
 			boolean hasDarknessWeakness = player.isPotionActive(ModEffects.ABILITY_OFF);
 			
-			if (player.isServerWorld() && props.hasDevilFruit())
+			if (!player.world.isRemote && props.hasDevilFruit())
 			{
 				if (hasWaterWeakness || hasDarknessWeakness)
 				{
