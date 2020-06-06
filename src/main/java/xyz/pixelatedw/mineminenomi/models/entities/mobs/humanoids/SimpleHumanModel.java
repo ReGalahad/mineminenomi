@@ -22,8 +22,7 @@ public class SimpleHumanModel extends BipedModel
 	{
 		this.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
-    	boolean hasHaki = false;
-    	
+    	boolean hasHaki = false;   	
     	if(entity instanceof GenericNewEntity)
     		hasHaki = ((GenericNewEntity)entity).hasBusoHaki();
 

@@ -1,11 +1,14 @@
 package xyz.pixelatedw.mineminenomi.models.entities.mobs.humanoids;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.client.renderer.entity.model.RendererModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import xyz.pixelatedw.mineminenomi.entities.mobs.GenericNewEntity;
+import xyz.pixelatedw.mineminenomi.init.ModResources;
 
 @OnlyIn(Dist.CLIENT)
 public class DojoSenseiModel extends BipedModel
@@ -294,74 +297,88 @@ public class DojoSenseiModel extends BipedModel
 	}
 
 	@Override
-	public void render(LivingEntity entity, float f, float f1, float f2, float f3, float f4, float f5)
+	public void render(LivingEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
 	{
-		this.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-
-		super.render(entity, f, f1, f2, f3, f4, f5);
-
+		this.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+		super.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+		
+    	boolean hasHaki = false;   	
+    	if(entity instanceof GenericNewEntity)
+    		hasHaki = ((GenericNewEntity)entity).hasBusoHaki();
+		
 		this.bipedLeftLeg.isHidden = true;
 		this.bipedRightLeg.isHidden = true;
 		this.bipedHead.isHidden = true;
 		this.bipedHeadwear.isHidden = true;
 		this.bipedBody.isHidden = false;
 
-		this.hat10.render(f5);
-		this.hat16.render(f5);
-		this.hat23.render(f5);
-		this.hat2.render(f5);
-		this.hat41.render(f5);
-		this.hat26.render(f5);
-		this.hat3.render(f5);
-		this.hat36.render(f5);
-		this.hat22.render(f5);
-		this.hat27.render(f5);
-		this.leftleg.render(f5);
-		this.hat21.render(f5);
-		this.hat6.render(f5);
-		this.hat24.render(f5);
-		this.hat7.render(f5);
-		this.hat25.render(f5);
-		this.hat8.render(f5);
-		this.hat12.render(f5);
-		this.hat15.render(f5);
-		this.hat30.render(f5);
-		this.hat40.render(f5);
-		this.hat44.render(f5);
-		this.hat39.render(f5);
-		this.hat31.render(f5);
-		this.sheath2.render(f5);
-		this.hat4.render(f5);
-		this.sheath1.render(f5);
-		this.hat19.render(f5);
-		this.hat43.render(f5);
-		this.hat45.render(f5);
-		this.hat18.render(f5);
-		this.hat17.render(f5);
-		this.hat32.render(f5);
-		this.hat9.render(f5);
-		this.hat28.render(f5);
-		this.hat11.render(f5);
-		this.hat38.render(f5);
-		this.hat14.render(f5);
-		this.head.render(f5);
-		this.hat20.render(f5);
-		this.hat42.render(f5);
-		this.hat34.render(f5);
-		this.hat33.render(f5);
-		this.rightleg.render(f5);
-		this.hat1.render(f5);
-		this.hat35.render(f5);
-		this.hat46.render(f5);
-		this.hat37.render(f5);
-		this.hat13.render(f5);
-		this.hat29.render(f5);
-		this.hat5.render(f5);
+		this.hat10.render(scale);
+		this.hat16.render(scale);
+		this.hat23.render(scale);
+		this.hat2.render(scale);
+		this.hat41.render(scale);
+		this.hat26.render(scale);
+		this.hat3.render(scale);
+		this.hat36.render(scale);
+		this.hat22.render(scale);
+		this.hat27.render(scale);
+		this.leftleg.render(scale);
+		this.hat21.render(scale);
+		this.hat6.render(scale);
+		this.hat24.render(scale);
+		this.hat7.render(scale);
+		this.hat25.render(scale);
+		this.hat8.render(scale);
+		this.hat12.render(scale);
+		this.hat15.render(scale);
+		this.hat30.render(scale);
+		this.hat40.render(scale);
+		this.hat44.render(scale);
+		this.hat39.render(scale);
+		this.hat31.render(scale);
+		this.sheath2.render(scale);
+		this.hat4.render(scale);
+		this.sheath1.render(scale);
+		this.hat19.render(scale);
+		this.hat43.render(scale);
+		this.hat45.render(scale);
+		this.hat18.render(scale);
+		this.hat17.render(scale);
+		this.hat32.render(scale);
+		this.hat9.render(scale);
+		this.hat28.render(scale);
+		this.hat11.render(scale);
+		this.hat38.render(scale);
+		this.hat14.render(scale);
+		this.head.render(scale);
+		this.hat20.render(scale);
+		this.hat42.render(scale);
+		this.hat34.render(scale);
+		this.hat33.render(scale);
+		this.rightleg.render(scale);
+		this.hat1.render(scale);
+		this.hat35.render(scale);
+		this.hat46.render(scale);
+		this.hat37.render(scale);
+		this.hat13.render(scale);
+		this.hat29.render(scale);
+		this.hat5.render(scale);
+		
+		if (hasHaki)
+		{
+			Minecraft.getInstance().getTextureManager().bindTexture(ModResources.BUSOSHOKU_HAKI_ARM);
+	        this.bipedRightArm.render(scale);
+		}
+		else
+		{
+	        this.bipedRightArm.render(scale);
+		}
 	}
 
-	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float headYaw, float headPitch, float scaleFactor, LivingEntity ent)
+	@Override
+	public void setRotationAngles(LivingEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float headYaw, float headPitch, float scaleFactor)
 	{
-		super.setRotationAngles(ent, limbSwingAmount, ageInTicks, headYaw, headPitch, scaleFactor, limbSwing);
+		super.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, headYaw, headPitch, scaleFactor);
 
 		this.leftleg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.0F * limbSwingAmount;
 		this.rightleg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.0F * limbSwingAmount;
