@@ -89,10 +89,10 @@ public class ConfigEvents
 					case "faction":
 						newEntityStats.setFaction(oldEntityStats.getFaction());
 						break;
-					case "fightingstyle":
+					case "fighting_style":
 						newEntityStats.setFightingStyle(oldEntityStats.getFightingStyle());
 						break;
-					case "devilfruit":
+					case "devil_fruit":
 						newDevilFruit.setDevilFruit(oldDevilFruit.getDevilFruit());
 						break;
 					}
