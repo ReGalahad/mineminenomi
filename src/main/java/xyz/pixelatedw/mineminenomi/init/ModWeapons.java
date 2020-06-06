@@ -58,7 +58,7 @@ public class ModWeapons
 	public static final ClimaTactItem CLIMA_TACT = new ClimaTactItem(1, 1);
 	public static final ClimaTactItem PERFECT_CLIMA_TACT = new ClimaTactItem(3, 2);
 	public static final ClimaTactItem SORCERY_CLIMA_TACT = new ClimaTactItem(5, 3);
-	public static final CoreSwordItem MACE = new CoreSwordItem(4, 800).setBlunt();
+	public static final CoreSwordItem MACE = new CoreSwordItem(8, 800).setBlunt().setSwordSpeed(-3);
 
 	// Normal Ranged Weapons
 	public static final GunItem FLINTLOCK = new GunItem(15, 2, 2);

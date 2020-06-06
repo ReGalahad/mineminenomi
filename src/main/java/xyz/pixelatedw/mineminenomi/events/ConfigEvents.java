@@ -72,6 +72,9 @@ public class ConfigEvents
 				IDevilFruit oldDevilFruit = DevilFruitCapability.get(event.getOriginal());
 				IDevilFruit newDevilFruit = DevilFruitCapability.get(event.getPlayer());
 
+				INBT nbt;
+
+
 				for (String stat : CommonConfig.instance.getStatsToKeep()) {
 					switch (WyHelper.getResourceName(stat)) {
 					case "doriki":
@@ -89,11 +92,13 @@ public class ConfigEvents
 					case "faction":
 						newEntityStats.setFaction(oldEntityStats.getFaction());
 						break;
-					case "fightingstyle":
+					case "fighting_style":
 						newEntityStats.setFightingStyle(oldEntityStats.getFightingStyle());
 						break;
-					case "devilfruit":
-						newDevilFruit.setDevilFruit(oldDevilFruit.getDevilFruit());
+					case "devil_fruit":
+                        oldPlayerProps.setZoanPoint("");
+                        nbt = DevilFruitCapability.INSTANCE.writeNBT(oldPlayerProps, null);
+						DevilFruitCapability.INSTANCE.readNBT(newPlayerProps, null, nbt);
 						break;
 					}
 				}

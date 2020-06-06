@@ -16,11 +16,11 @@ import xyz.pixelatedw.wypi.abilities.renderers.AbilityProjectileRenderer;
 public class GoroProjectiles
 {
 	public static final EntityType SANGO = WyRegistry.createEntityType(SangoProjectile::new).size(0.5F, 0.5F).build("sango");
-	public static final EntityType RAIGO = WyRegistry.createEntityType(RaigoProjectile::new).size(5F, 5F).build("raigo");;
+	public static final EntityType RAIGO = WyRegistry.createEntityType(RaigoProjectile::new).size(10F, 10F).build("raigo");;
 	public static final EntityType VOLT_VARI_5_MILLION = WyRegistry.createEntityType(VoltVari5MillionProjectile::new).size(0.5F, 0.5F).build("volt_vari_5_million");
-	public static final EntityType VOLT_VARI_20_MILLION = WyRegistry.createEntityType(VoltVari20MillionProjectile::new).size(0.5F, 0.5F).build("volt_vari_20_million");
-	public static final EntityType VOLT_VARI_60_MILLION = WyRegistry.createEntityType(VoltVari60MillionProjectile::new).size(0.5F, 0.5F).build("volt_vari_60_million");
-	public static final EntityType VOLT_VARI_200_MILLION = WyRegistry.createEntityType(VoltVari200MillionProjectile::new).size(1, 1).build("volt_vari_200_million");
+	public static final EntityType VOLT_VARI_20_MILLION = WyRegistry.createEntityType(VoltVari20MillionProjectile::new).size(0.75F, 0.75F).build("volt_vari_20_million");
+	public static final EntityType VOLT_VARI_60_MILLION = WyRegistry.createEntityType(VoltVari60MillionProjectile::new).size(1F, 1F).build("volt_vari_60_million");
+	public static final EntityType VOLT_VARI_100_MILLION = WyRegistry.createEntityType(VoltVari100MillionProjectile::new).size(1.25F, 1.25F).build("volt_vari_200_million");
 
 	static
 	{
@@ -29,7 +29,7 @@ public class GoroProjectiles
 		WyRegistry.registerEntityType(VOLT_VARI_5_MILLION, "Volt Vari 5 Million");
 		WyRegistry.registerEntityType(VOLT_VARI_20_MILLION, "Volt Vari 20 Million");
 		WyRegistry.registerEntityType(VOLT_VARI_60_MILLION, "Volt Vari 60 Million");
-		WyRegistry.registerEntityType(VOLT_VARI_200_MILLION, "Volt Vari 200 Million");
+		WyRegistry.registerEntityType(VOLT_VARI_100_MILLION, "Volt Vari 100 Million");
 	}
 
 	@OnlyIn(Dist.CLIENT)
@@ -41,6 +41,6 @@ public class GoroProjectiles
 		RenderingRegistry.registerEntityRenderingHandler(VoltVari5MillionProjectile.class, new AbilityProjectileRenderer.Factory(new SphereModel()).setColor("#92C1E5").setScale(1));
 		RenderingRegistry.registerEntityRenderingHandler(VoltVari20MillionProjectile.class, new AbilityProjectileRenderer.Factory(new SphereModel()).setColor("#7CB9E8").setScale(3));
 		RenderingRegistry.registerEntityRenderingHandler(VoltVari60MillionProjectile.class, new AbilityProjectileRenderer.Factory(new SphereModel()).setColor("#6BB0E5").setScale(5));
-		RenderingRegistry.registerEntityRenderingHandler(VoltVari200MillionProjectile.class, new AbilityProjectileRenderer.Factory(new SphereModel()).setColor("#3170A0").setScale(7));
+		RenderingRegistry.registerEntityRenderingHandler(VoltVari100MillionProjectile.class, new AbilityProjectileRenderer.Factory(new SphereModel()).setColor("#3170A0").setScale(7));
 	}
 }

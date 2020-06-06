@@ -3,10 +3,14 @@ package xyz.pixelatedw.mineminenomi.entities.projectiles.goro;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import xyz.pixelatedw.mineminenomi.api.abilities.ExplosionAbility;
+import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.data.GenericParticleData;
+import xyz.pixelatedw.mineminenomi.particles.effects.common.CommonExplosionParticleEffect;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 
@@ -31,12 +35,26 @@ public class VoltVari20MillionProjectile extends AbilityProjectileEntity
 	{
 		super(GoroProjectiles.VOLT_VARI_20_MILLION, world, player);
 
-		this.setDamage(12);
-		this.setMaxLife(15);
+		this.setDamage(20);
+		this.setMaxLife(20);
 		
 		this.onTickEvent = this::onTickEvent;
+		this.onBlockImpactEvent = this::onBlockImpactEvent;
+
 	}
-	
+
+	private void onBlockImpactEvent(BlockPos hit)
+	{
+		ExplosionAbility explosion = AbilityHelper.newExplosion(this.getThrower(), this.posX, this.posY, this.posZ, 3);
+		explosion.setExplosionSound(true);
+		explosion.setDamageOwner(false);
+		explosion.setDestroyBlocks(true);
+		explosion.setFireAfterExplosion(false);
+		explosion.setSmokeParticles(new CommonExplosionParticleEffect(3));
+		explosion.setDamageEntities(true);
+		explosion.doExplosion();
+	}
+
 	private void onTickEvent()
 	{
 		if (!this.world.isRemote)

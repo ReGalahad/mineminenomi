@@ -2,7 +2,7 @@ package xyz.pixelatedw.mineminenomi.abilities.goro;
 
 import net.minecraft.entity.player.PlayerEntity;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
-import xyz.pixelatedw.mineminenomi.entities.projectiles.goro.VoltVari200MillionProjectile;
+import xyz.pixelatedw.mineminenomi.entities.projectiles.goro.VoltVari100MillionProjectile;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.goro.VoltVari20MillionProjectile;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.goro.VoltVari5MillionProjectile;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.goro.VoltVari60MillionProjectile;
@@ -123,7 +123,7 @@ public class VoltVariAbility extends ChargeableAbility
 					this.setName("Max 200 Million Volt Vari");
 			}
 			*/
-			projectile = new VoltVari200MillionProjectile(player.world, player);
+			projectile = new VoltVari100MillionProjectile(player.world, player);
 			this.setMaxCooldown(10);
 		}
 		
