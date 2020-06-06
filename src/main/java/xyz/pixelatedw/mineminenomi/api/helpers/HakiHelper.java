@@ -6,6 +6,8 @@ import net.minecraft.potion.Effects;
 import xyz.pixelatedw.mineminenomi.api.abilities.IHakiAbility;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
+import xyz.pixelatedw.mineminenomi.data.entity.haki.HakiDataCapability;
+import xyz.pixelatedw.mineminenomi.data.entity.haki.IHakiData;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.abilities.ContinuousAbility;
@@ -49,24 +51,10 @@ public class HakiHelper
 		return HakiType.HARDENING;
 	}
 	
-	public static float getKenHakiExp()
+	public static float getTotalHakiExp(PlayerEntity player)
 	{
-		return 0;
-	}
-	
-	public static float getBusoHardeningHakiExp()
-	{
-		return 0;
-	}
-	
-	public static float getBusoImbuingHakiExp()
-	{
-		return 0;
-	}
-	
-	public static float getTotalHakiExp()
-	{
-		return getKenHakiExp() + getBusoHardeningHakiExp() + getBusoImbuingHakiExp();
+		IHakiData props = HakiDataCapability.get(player);
+		return props.getKenbunshokuHakiExp() + props.getBusoshokuHardeningHakiExp() + props.getBusoshokuImbuingHakiExp();
 	}
 	
 	public static void checkForHakiOveruse(PlayerEntity player, int passiveTimer)

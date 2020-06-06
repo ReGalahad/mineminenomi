@@ -285,11 +285,6 @@ public class CommonConfig
 		return this.cooldownVisual.keySet().toArray(newArray);
 	}
 	
-	public boolean getAnimeScreaming()
-	{
-		return this.animeScreaming.get();
-	}
-	
 	public String[] getStatsToKeep()
 	{
 		String[] newArray = new String[] {};
@@ -363,57 +358,57 @@ public class CommonConfig
 	
 	public boolean isLogiaInvulnerabilityEnabled()
 	{
-		return this.logiaInvulnerability.get().booleanValue();
+		return this.logiaInvulnerability.get();
 	}
 
 	public boolean isLogiaHurtsLogiasEnabled()
 	{
-		return this.logiaHurtsLogias.get().booleanValue();
+		return this.logiaHurtsLogias.get();
 	}
 
 	public boolean isDevilFruitDropsFromLeavesEnabled()
 	{
-		return this.devilFruitDropsFromLeaves.get().booleanValue();
+		return this.devilFruitDropsFromLeaves.get();
 	}
 	
 	public boolean isExtraHeartsEnabled()
 	{
-		return this.extraHearts.get().booleanValue();
+		return this.extraHearts.get();
 	}
 	
 	public boolean isMobRewardsEnabled()
 	{
-		return this.mobRewards.get().booleanValue();
+		return this.mobRewards.get();
 	}
 	
 	public boolean isGriefingEnabled()
 	{
-		return this.griefing.get().booleanValue();
+		return this.griefing.get();
 	}
 	
 	public boolean isAnimeScreamingEnabled()
 	{
-		return this.animeScreaming.get().booleanValue();
+		return this.animeScreaming.get();
 	}
 	
 	public boolean isSpecialFlyingEnabled()
 	{
-		return this.specialFlying.get().booleanValue();
+		return this.specialFlying.get();
 	}
 	
 	public boolean isOneFruitPerWorldEnabled()
 	{
-		return this.oneFruitPerWorld.get().booleanValue();
+		return this.oneFruitPerWorld.get();
 	}
 	
 	public boolean isYamiPowerEnabled()
 	{
-		return this.yamiPower.get().booleanValue();
+		return this.yamiPower.get();
 	}
 
 	public boolean isTelemetryEnabled()
 	{
-		return this.telemetry.get().booleanValue();
+		return this.telemetry.get();
 	}
 
 	public boolean isAbilityFraudChecksEnabled()

@@ -1,68 +1,65 @@
 package xyz.pixelatedw.mineminenomi.data.entity.haki;
 
 import net.minecraft.util.math.MathHelper;
+import xyz.pixelatedw.mineminenomi.init.ModValues;
 
 public class HakiDataBase implements IHakiData
 {
-	private static final int KENBUNSHOKU_MAX_EXP = 1000;
-	private static final int BUSOSHOKU_HARDENING_MAX_EXP = 1000;
-	private static final int BUSOSHOKU_IMBUING_MAX_EXP = 1000;
-
-	private int kenbunshokuExp, busoshokuHardeningExp, busoshokuImbuingExp;
+	private float kenbunshokuExp, busoshokuHardeningExp, busoshokuImbuingExp;
 	
 	@Override
-	public int getKenbunshokuHakiExp()
+	public float getKenbunshokuHakiExp()
 	{
 		return this.kenbunshokuExp;
 	}
 
 	@Override
-	public void alterKenbunshokuHakiExp(int value)
+	public void alterKenbunshokuHakiExp(float value)
 	{
 		this.kenbunshokuExp += value;
-		this.kenbunshokuExp = MathHelper.clamp(this.kenbunshokuExp, 0, KENBUNSHOKU_MAX_EXP);
+		this.kenbunshokuExp = MathHelper.clamp(this.kenbunshokuExp, 0, ModValues.KENBUNSHOKU_MAX_EXP);
 	}
 
 	@Override
-	public void setKenbunshokuHakiExp(int value)
+	public void setKenbunshokuHakiExp(float value)
 	{
 		this.kenbunshokuExp = value;
 	}
 
 	@Override
-	public int getBusoshokuHardeningHakiExp()
+	public float getBusoshokuHardeningHakiExp()
 	{
 		return this.busoshokuHardeningExp;
 	}
 
 	@Override
-	public void alterBusoshokuHardeningHakiExp(int value)
+	public void alterBusoshokuHardeningHakiExp(float value)
 	{
 		this.busoshokuHardeningExp += value;
-		this.busoshokuHardeningExp = MathHelper.clamp(this.busoshokuHardeningExp, 0, BUSOSHOKU_HARDENING_MAX_EXP);		
+		this.busoshokuHardeningExp = MathHelper.clamp(this.busoshokuHardeningExp, 0, ModValues.BUSOSHOKU_HARDENING_MAX_EXP);		
 	}
 
 	@Override
-	public void setBusoshokuHardeningHakiExp(int value)
+	public void setBusoshokuHardeningHakiExp(float value)
 	{
 		this.busoshokuHardeningExp = value;
 	}
 
 	@Override
-	public int getBusoshokuImbuingHakiExp()
+	public float getBusoshokuImbuingHakiExp()
 	{
 		return this.busoshokuImbuingExp;
 	}
 
 	@Override
-	public void alterBusoshokuImbuingHakiExp(int value)
+	public void alterBusoshokuImbuingHakiExp(float value)
 	{
 		this.busoshokuImbuingExp += value;
-		this.busoshokuImbuingExp = MathHelper.clamp(this.busoshokuImbuingExp, 0, BUSOSHOKU_IMBUING_MAX_EXP);		
+		this.busoshokuImbuingExp = MathHelper.clamp(this.busoshokuImbuingExp, 0, ModValues.BUSOSHOKU_IMBUING_MAX_EXP);		
 	}
 
 	@Override
-	public void setBusoshokuImbuingHakiExp(int value)
+	public void setBusoshokuImbuingHakiExp(float value)
 	{
 		this.busoshokuImbuingExp = value;
 	}

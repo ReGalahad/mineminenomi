@@ -59,7 +59,7 @@ public class ItemsHelper
     	// Populating the list with wanted posters
     	List<Entry<String, Long>> bountiesInPackage = new ArrayList<Entry<String, Long>>();
     	
-    	List<PlayerEntity> nearbyPlayers = WyHelper.getEntitiesNear(new BlockPos(posX, posY, posZ), world, 10);
+    	List<PlayerEntity> nearbyPlayers = WyHelper.getEntitiesNear(new BlockPos(posX, posY, posZ), world, 10, PlayerEntity.class);
     	
     	if(!nearbyPlayers.isEmpty())
     	{

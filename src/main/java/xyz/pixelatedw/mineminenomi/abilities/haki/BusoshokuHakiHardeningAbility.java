@@ -9,6 +9,8 @@ import xyz.pixelatedw.mineminenomi.api.helpers.HakiHelper;
 import xyz.pixelatedw.mineminenomi.api.helpers.HakiHelper.HakiType;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
+import xyz.pixelatedw.mineminenomi.data.entity.haki.HakiDataCapability;
+import xyz.pixelatedw.mineminenomi.data.entity.haki.IHakiData;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
@@ -43,9 +45,10 @@ public class BusoshokuHakiHardeningAbility extends OverlayPunchAbility implement
 	public float hitEntity(PlayerEntity player, LivingEntity target)
 	{
 		IEntityStats props = EntityStatsCapability.get(player);
-		
+		IHakiData hakiProps = HakiDataCapability.get(player);
+
 		float dorikiPower = props.getDoriki() / 1000;
-		float hakiPower = HakiHelper.getBusoHardeningHakiExp() / 5;
+		float hakiPower = hakiProps.getBusoshokuHardeningHakiExp() / 5;
 		float finalPower = dorikiPower + hakiPower;
 		
 		return finalPower;

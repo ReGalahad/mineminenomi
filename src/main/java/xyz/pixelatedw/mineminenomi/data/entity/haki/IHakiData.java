@@ -2,15 +2,15 @@ package xyz.pixelatedw.mineminenomi.data.entity.haki;
 
 public interface IHakiData
 {
-	int getKenbunshokuHakiExp();
-	void alterKenbunshokuHakiExp(int value);
-	void setKenbunshokuHakiExp(int value);
+	float getKenbunshokuHakiExp();
+	void alterKenbunshokuHakiExp(float value);
+	void setKenbunshokuHakiExp(float value);
 	
-	int getBusoshokuHardeningHakiExp();
-	void alterBusoshokuHardeningHakiExp(int value);
-	void setBusoshokuHardeningHakiExp(int value);
+	float getBusoshokuHardeningHakiExp();
+	void alterBusoshokuHardeningHakiExp(float value);
+	void setBusoshokuHardeningHakiExp(float value);
 	
-	int getBusoshokuImbuingHakiExp();
-	void alterBusoshokuImbuingHakiExp(int value);
-	void setBusoshokuImbuingHakiExp(int value);
+	float getBusoshokuImbuingHakiExp();
+	void alterBusoshokuImbuingHakiExp(float value);
+	void setBusoshokuImbuingHakiExp(float value);
 }

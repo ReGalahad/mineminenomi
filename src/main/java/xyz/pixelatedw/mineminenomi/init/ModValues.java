@@ -39,6 +39,11 @@ public class ModValues
 	public static final int CHARACTER_CREATOR = 0;
 	public static final int WANTED_POSTER = 1;
 	
+	// Haki
+	public static final float KENBUNSHOKU_MAX_EXP = 100;
+	public static final float BUSOSHOKU_HARDENING_MAX_EXP = 100;
+	public static final float BUSOSHOKU_IMBUING_MAX_EXP = 100;
+	
 	public static final long MAX_BOUNTY = 100000000000L;
 	
 	public static final String PIRATE = "pirate";

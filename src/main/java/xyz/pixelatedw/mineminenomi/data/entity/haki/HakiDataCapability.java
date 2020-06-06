@@ -22,9 +22,9 @@ public class HakiDataCapability
 			{
 				CompoundNBT props = new CompoundNBT();
 
-				props.putInt("kenHakiExp", instance.getKenbunshokuHakiExp());
-				props.putInt("busoHardeningHakiExp", instance.getBusoshokuHardeningHakiExp());
-				props.putInt("busoImbuingHakiExp", instance.getBusoshokuImbuingHakiExp());
+				props.putFloat("kenHakiExp", instance.getKenbunshokuHakiExp());
+				props.putFloat("busoHardeningHakiExp", instance.getBusoshokuHardeningHakiExp());
+				props.putFloat("busoImbuingHakiExp", instance.getBusoshokuImbuingHakiExp());
 
 				return props;
 			}
@@ -34,9 +34,9 @@ public class HakiDataCapability
 			{
 				CompoundNBT props = (CompoundNBT) nbt;
 
-				instance.setKenbunshokuHakiExp(props.getInt("kenHakiExp"));
-				instance.setBusoshokuHardeningHakiExp(props.getInt("busoHardeningHakiExp"));
-				instance.setBusoshokuImbuingHakiExp(props.getInt("busoImbuingHakiExp"));
+				instance.setKenbunshokuHakiExp(props.getFloat("kenHakiExp"));
+				instance.setBusoshokuHardeningHakiExp(props.getFloat("busoHardeningHakiExp"));
+				instance.setBusoshokuImbuingHakiExp(props.getFloat("busoImbuingHakiExp"));
 
 			}
 

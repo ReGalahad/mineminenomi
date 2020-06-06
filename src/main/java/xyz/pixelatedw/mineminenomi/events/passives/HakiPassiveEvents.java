@@ -32,10 +32,11 @@ import xyz.pixelatedw.mineminenomi.abilities.haki.BusoshokuHakiHardeningAbility;
 import xyz.pixelatedw.mineminenomi.abilities.haki.KenbunshokuHakiAuraAbility;
 import xyz.pixelatedw.mineminenomi.abilities.haki.KenbunshokuHakiFutureSightAbility;
 import xyz.pixelatedw.mineminenomi.api.IHasOverlay;
-import xyz.pixelatedw.mineminenomi.api.helpers.HakiHelper;
 import xyz.pixelatedw.mineminenomi.api.helpers.MorphHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
+import xyz.pixelatedw.mineminenomi.data.entity.haki.HakiDataCapability;
+import xyz.pixelatedw.mineminenomi.data.entity.haki.IHakiData;
 import xyz.pixelatedw.mineminenomi.init.ModEffects;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.wypi.APIConfig;
@@ -159,6 +160,7 @@ public class HakiPassiveEvents
 		PlayerEntity player = Minecraft.getInstance().player;
 		IAbilityData props = AbilityDataCapability.get(player);
 		IEntityStats sprops = EntityStatsCapability.get(player);
+		IHakiData hakiProps = HakiDataCapability.get(player);
 
 		Ability ability = props.getEquippedAbility(KenbunshokuHakiAuraAbility.INSTANCE);
 		boolean isActive = ability != null && ability.isContinuous();
@@ -171,7 +173,7 @@ public class HakiPassiveEvents
 				return;
 	
 			float dorikiPower = sprops.getDoriki() / 2000;
-			float hakiPower = HakiHelper.getKenHakiExp() / 4;
+			float hakiPower = hakiProps.getKenbunshokuHakiExp() / 4;
 			float finalPower = dorikiPower + hakiPower;
 	
 			if (entity.getDistance(player) > 20 + finalPower)
@@ -238,6 +240,7 @@ public class HakiPassiveEvents
 		PlayerEntity player = Minecraft.getInstance().player;
 		IAbilityData props = AbilityDataCapability.get(player);
 		IEntityStats sprops = EntityStatsCapability.get(player);
+		IHakiData hakiProps = HakiDataCapability.get(player);
 
 		Ability ability = props.getEquippedAbility(KenbunshokuHakiAuraAbility.INSTANCE);
 		boolean isActive = ability != null && ability.isContinuous();
@@ -250,7 +253,7 @@ public class HakiPassiveEvents
 				return;
 	
 			float dorikiPower = sprops.getDoriki() / 2000;
-			float hakiPower = HakiHelper.getKenHakiExp() / 20;
+			float hakiPower = hakiProps.getKenbunshokuHakiExp() / 20;
 			float finalPower = dorikiPower + hakiPower;
 	
 			if (entity.getDistance(player) > 20 + finalPower)
