@@ -2,14 +2,16 @@ package xyz.pixelatedw.mineminenomi.abilities.haki;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.text.TranslationTextComponent;
+import xyz.pixelatedw.mineminenomi.api.abilities.IHakiAbility;
 import xyz.pixelatedw.mineminenomi.api.helpers.HakiHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.HakiHelper.HakiType;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.ContinuousAbility;
 import xyz.pixelatedw.wypi.abilities.IParallelContinuousAbility;
 
-public class KenbunshokuHakiAuraAbility extends ContinuousAbility implements IParallelContinuousAbility
+public class KenbunshokuHakiAuraAbility extends ContinuousAbility implements IHakiAbility, IParallelContinuousAbility
 {
 	public static final KenbunshokuHakiAuraAbility INSTANCE = new KenbunshokuHakiAuraAbility();
 
@@ -43,5 +45,11 @@ public class KenbunshokuHakiAuraAbility extends ContinuousAbility implements IPa
 		int cooldown = (int) Math.round(this.continueTime / 25.0);
 		this.setMaxCooldown(cooldown);
 		return true;
+	}
+
+	@Override
+	public HakiType getType()
+	{
+		return HakiType.KENBUNSHOKU;
 	}
 }

@@ -3,8 +3,10 @@ package xyz.pixelatedw.mineminenomi.abilities.haki;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.text.TranslationTextComponent;
+import xyz.pixelatedw.mineminenomi.api.abilities.IHakiAbility;
 import xyz.pixelatedw.mineminenomi.api.abilities.OverlayPunchAbility;
 import xyz.pixelatedw.mineminenomi.api.helpers.HakiHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.HakiHelper.HakiType;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
@@ -12,7 +14,7 @@ import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.IParallelContinuousAbility;
 
-public class BusoshokuHakiFullBodyHardeningAbility extends OverlayPunchAbility implements IParallelContinuousAbility
+public class BusoshokuHakiFullBodyHardeningAbility extends OverlayPunchAbility implements IHakiAbility, IParallelContinuousAbility
 {
 	public static final BusoshokuHakiFullBodyHardeningAbility INSTANCE = new BusoshokuHakiFullBodyHardeningAbility();
 
@@ -43,7 +45,7 @@ public class BusoshokuHakiFullBodyHardeningAbility extends OverlayPunchAbility i
 		IEntityStats props = EntityStatsCapability.get(player);
 		
 		float dorikiPower = props.getDoriki() / 1000;
-		float hakiPower = HakiHelper.getBusoHakiExp() / 4;
+		float hakiPower = HakiHelper.getBusoHardeningHakiExp() / 4;
 		float finalPower = dorikiPower + hakiPower;
 		
 		return finalPower;
@@ -59,5 +61,11 @@ public class BusoshokuHakiFullBodyHardeningAbility extends OverlayPunchAbility i
 		int cooldown = (int) Math.round(this.continueTime / 20.0);
 		this.setMaxCooldown(cooldown);
 		return true;
+	}
+
+	@Override
+	public HakiType getType()
+	{
+		return HakiType.HARDENING;
 	}
 }

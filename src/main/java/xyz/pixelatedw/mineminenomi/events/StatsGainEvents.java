@@ -22,7 +22,7 @@ import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.network.WyNetwork;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
-public class OnGainEvents
+public class StatsGainEvents
 {
 	@SubscribeEvent
 	public static void onEntityDeath(LivingDeathEvent event)

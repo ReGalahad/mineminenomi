@@ -75,7 +75,7 @@ public class ItemsHelper
     	
     	if((5 + world.rand.nextInt(2)) - bountiesInPackage.size() > 0)
     		bountiesInPackage.addAll( worldData.getAllBounties().entrySet().stream().filter(x -> !bountiesInPackage.contains(x) ).limit((5 + world.rand.nextInt(2)) - bountiesInPackage.size()).collect(Collectors.toList()) );
-    	    	
+    	
     	// Spawning the wanted posters
     	bountiesInPackage.stream().forEach(x -> 
     	{

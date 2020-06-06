@@ -11,6 +11,7 @@ import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitProvider;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsProvider;
+import xyz.pixelatedw.mineminenomi.data.entity.haki.HakiDataProvider;
 import xyz.pixelatedw.mineminenomi.data.entity.jollyroger.JollyRogerCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.jollyroger.JollyRogerProvider;
 import xyz.pixelatedw.wypi.APIConfig;
@@ -40,6 +41,7 @@ public class ModCapabilities
 		if (event.getObject() instanceof PlayerEntity)
 		{
 			event.addCapability(new ResourceLocation(APIConfig.PROJECT_ID, "jolly_roger"), new JollyRogerProvider());
+			event.addCapability(new ResourceLocation(APIConfig.PROJECT_ID, "haki_data"), new HakiDataProvider());
 		}
 
 		if(event.getObject() instanceof LivingEntity)

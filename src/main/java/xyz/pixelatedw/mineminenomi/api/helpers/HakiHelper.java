@@ -3,11 +3,7 @@ package xyz.pixelatedw.mineminenomi.api.helpers;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import xyz.pixelatedw.mineminenomi.abilities.haki.BusoshokuHakiFullBodyHardeningAbility;
-import xyz.pixelatedw.mineminenomi.abilities.haki.BusoshokuHakiHardeningAbility;
-import xyz.pixelatedw.mineminenomi.abilities.haki.BusoshokuHakiImbuingAbility;
-import xyz.pixelatedw.mineminenomi.abilities.haki.KenbunshokuHakiAuraAbility;
-import xyz.pixelatedw.mineminenomi.abilities.haki.KenbunshokuHakiFutureSightAbility;
+import xyz.pixelatedw.mineminenomi.api.abilities.IHakiAbility;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
@@ -47,15 +43,9 @@ public class HakiHelper
 	
 	public static HakiType getHakiType(Ability ability)
 	{
-		if(ability instanceof BusoshokuHakiHardeningAbility || ability instanceof BusoshokuHakiFullBodyHardeningAbility)
-			return HakiType.HARDENING;
-		
-		if(ability instanceof BusoshokuHakiImbuingAbility)
-			return HakiType.IMBUING;
-		
-		if(ability instanceof KenbunshokuHakiAuraAbility || ability instanceof KenbunshokuHakiFutureSightAbility)
-			return HakiType.KENBUNSHOKU;
-		
+		if(ability instanceof IHakiAbility)
+			return ((IHakiAbility)ability).getType();
+
 		return HakiType.HARDENING;
 	}
 	
@@ -64,14 +54,19 @@ public class HakiHelper
 		return 0;
 	}
 	
-	public static float getBusoHakiExp()
+	public static float getBusoHardeningHakiExp()
+	{
+		return 0;
+	}
+	
+	public static float getBusoImbuingHakiExp()
 	{
 		return 0;
 	}
 	
 	public static float getTotalHakiExp()
 	{
-		return 0;
+		return getKenHakiExp() + getBusoHardeningHakiExp() + getBusoImbuingHakiExp();
 	}
 	
 	public static void checkForHakiOveruse(PlayerEntity player, int passiveTimer)
@@ -92,7 +87,7 @@ public class HakiHelper
 		}
 	}
 	
-	enum HakiType
+	public static enum HakiType
 	{
 		HARDENING,
 		IMBUING,

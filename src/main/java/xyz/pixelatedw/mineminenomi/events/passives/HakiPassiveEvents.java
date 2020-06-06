@@ -171,7 +171,7 @@ public class HakiPassiveEvents
 				return;
 	
 			float dorikiPower = sprops.getDoriki() / 2000;
-			float hakiPower = HakiHelper.getBusoHakiExp() / 4;
+			float hakiPower = HakiHelper.getKenHakiExp() / 4;
 			float finalPower = dorikiPower + hakiPower;
 	
 			if (entity.getDistance(player) > 20 + finalPower)
@@ -250,7 +250,7 @@ public class HakiPassiveEvents
 				return;
 	
 			float dorikiPower = sprops.getDoriki() / 2000;
-			float hakiPower = HakiHelper.getBusoHakiExp() / 20;
+			float hakiPower = HakiHelper.getKenHakiExp() / 20;
 			float finalPower = dorikiPower + hakiPower;
 	
 			if (entity.getDistance(player) > 20 + finalPower)

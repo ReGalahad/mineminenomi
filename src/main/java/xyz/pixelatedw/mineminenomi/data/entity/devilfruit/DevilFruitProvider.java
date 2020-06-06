@@ -14,19 +14,19 @@ public class DevilFruitProvider implements ICapabilitySerializable<CompoundNBT>
 	@Override
 	public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side)
 	{
-		return DevilFruitCapability.INSTANCE.orEmpty(cap, LazyOptional.of(() -> instance));
+		return DevilFruitCapability.INSTANCE.orEmpty(cap, LazyOptional.of(() -> this.instance));
 	}
 
 	@Override
 	public CompoundNBT serializeNBT()
 	{
-		return (CompoundNBT) DevilFruitCapability.INSTANCE.getStorage().writeNBT(DevilFruitCapability.INSTANCE, instance, null);
+		return (CompoundNBT) DevilFruitCapability.INSTANCE.getStorage().writeNBT(DevilFruitCapability.INSTANCE, this.instance, null);
 	}
 
 	@Override
 	public void deserializeNBT(CompoundNBT nbt)
 	{
-		DevilFruitCapability.INSTANCE.getStorage().readNBT(DevilFruitCapability.INSTANCE, instance, null, nbt);
+		DevilFruitCapability.INSTANCE.getStorage().readNBT(DevilFruitCapability.INSTANCE, this.instance, null, nbt);
 	}
 	
 }

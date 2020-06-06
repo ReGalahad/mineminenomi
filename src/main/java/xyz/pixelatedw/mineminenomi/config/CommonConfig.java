@@ -1,5 +1,14 @@
 package xyz.pixelatedw.mineminenomi.config;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Predicate;
+
+import org.apache.commons.lang3.tuple.Pair;
+
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
 import net.minecraftforge.common.ForgeConfigSpec.DoubleValue;
@@ -7,11 +16,7 @@ import net.minecraftforge.common.ForgeConfigSpec.EnumValue;
 import net.minecraftforge.common.ForgeConfigSpec.IntValue;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
-import org.apache.commons.lang3.tuple.Pair;
 import xyz.pixelatedw.wypi.WyHelper;
-
-import java.util.*;
-import java.util.function.Predicate;
 
 public class CommonConfig
 {
@@ -23,6 +28,7 @@ public class CommonConfig
 	private Map<String, ForgeConfigSpec.BooleanValue> statsToKeep;
 	private Map<String, ForgeConfigSpec.BooleanValue> cooldownVisual;
 	private List<String> bannedAbilities;
+	private EnumValue haoshokuUnlockLogic;
 
 	private BooleanValue logiaInvulnerability;
 	private BooleanValue logiaHurtsLogias;
@@ -71,8 +77,8 @@ public class CommonConfig
 	// Permissions
 
 	// Ores
-	private IntValue KairosekiSpawnCount;
-	private IntValue KairosekiSpawnHeight;
+	private IntValue kairosekiSpawnCount;
+	private IntValue kairosekiSpawnHeight;
 
 	// System
 	private BooleanValue telemetry;
@@ -83,6 +89,11 @@ public class CommonConfig
 	public enum KeepStatsLogic
 	{
 		NONE, AUTO, FULL, CUSTOM
+	}
+	
+	public enum HaoshokuUnlockLogic
+	{
+		NONE, RANDOM, EXPERIENCE
 	}
 	
 	public static void init()
@@ -110,6 +121,7 @@ public class CommonConfig
 			this.dorikiRewardMultiplier = builder.comment("Multiplies any doriki gained by this amount; 1 by default, min: 0, max: 10").defineInRange("Doriki Reward Multiplier", 1.0, 0.0, 10.0);
 			this.minimumDorikiPerKill = builder.comment("Guarantees a minimum of 1 doriki per kill; false by default").define("Minimum Doriki per Kill", false);
 			this.abilityFraudChecks = builder.comment("Runs a check for all abilities on a player to remove dupes or suspicious abilities when the player joins the world; true by default").define("Ability Fraud Checks", true);
+			this.haoshokuUnlockLogic = builder.comment("Responsible for how player unlock Haoshoku Haki; \n NONE - Haoshoku Haki cannot be unlocked naturally \n RANDOM - Only a few chosen ones receive it when they spawn \n EXPERIENCE - Will unlock based on the total amount of Haki experience a player has").defineEnum("Haoshoku Haki Unlock Logic", HaoshokuUnlockLogic.EXPERIENCE, HaoshokuUnlockLogic.values());
 
 			this.bannedAbilities = new ArrayList<String>();
 			Predicate<Object> bannedAbilitiesTest = new Predicate<Object>() 
@@ -194,8 +206,8 @@ public class CommonConfig
 
 
 		builder.push("Ores");
-		this.KairosekiSpawnCount = builder.comment("Kairoseki vein spawn count; 3 by default").defineInRange("Chance for vein to spawn", 3, 0, 100);
-		this.KairosekiSpawnHeight = builder.comment("Kairoseki spawn height; 128 by default").defineInRange("Kairoseki max spawn size", 128, 0, 256);
+		this.kairosekiSpawnCount = builder.comment("Kairoseki vein spawn count; 3 by default").defineInRange("Chance for vein to spawn", 3, 0, 100);
+		this.kairosekiSpawnHeight = builder.comment("Kairoseki spawn height; 128 by default").defineInRange("Kairoseki max spawn size", 128, 0, 256);
 		builder.pop();
 
 		builder.push("Bounty");
@@ -217,6 +229,11 @@ public class CommonConfig
 		builder.pop();
 	}
 
+	public HaoshokuUnlockLogic getHaoshokuUnlockLogic()
+	{
+		return (HaoshokuUnlockLogic) this.haoshokuUnlockLogic.get();
+	}
+	
 	public int getChanceForAmbushSpawn()
 	{
 		return this.chanceForAmbushSpawn.get();
@@ -406,7 +423,7 @@ public class CommonConfig
 
 	public boolean isMinimumDorikiPerKillEnabled() { return this.minimumDorikiPerKill.get(); }
 
-	public int getkairosekiSpawnCount() { return this.KairosekiSpawnCount.get(); }
+	public int getkairosekiSpawnCount() { return this.kairosekiSpawnCount.get(); }
 
-	public int getKairosekiSpawnHeight() { return this.KairosekiSpawnCount.get(); }
+	public int getKairosekiSpawnHeight() { return this.kairosekiSpawnCount.get(); }
 }

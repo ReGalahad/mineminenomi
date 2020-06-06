@@ -2,14 +2,16 @@ package xyz.pixelatedw.mineminenomi.abilities.haki;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.text.TranslationTextComponent;
+import xyz.pixelatedw.mineminenomi.api.abilities.IHakiAbility;
 import xyz.pixelatedw.mineminenomi.api.helpers.HakiHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.HakiHelper.HakiType;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.ContinuousAbility;
 import xyz.pixelatedw.wypi.abilities.IParallelContinuousAbility;
 
-public class KenbunshokuHakiFutureSightAbility extends ContinuousAbility implements IParallelContinuousAbility
+public class KenbunshokuHakiFutureSightAbility extends ContinuousAbility implements IHakiAbility, IParallelContinuousAbility
 {
 	public static final KenbunshokuHakiFutureSightAbility INSTANCE = new KenbunshokuHakiFutureSightAbility();
 	
@@ -55,5 +57,11 @@ public class KenbunshokuHakiFutureSightAbility extends ContinuousAbility impleme
 	public void reduceProtection(float ammount)
 	{
 		this.protection -= ammount;
+	}
+
+	@Override
+	public HakiType getType()
+	{
+		return HakiType.KENBUNSHOKU;
 	}
 }
