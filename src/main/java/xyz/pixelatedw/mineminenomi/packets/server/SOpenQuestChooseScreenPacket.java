@@ -25,7 +25,7 @@ public class SOpenQuestChooseScreenPacket
 	{
 		this.questGiverEntity = questGiverEntity;
 	}
-	
+
 	public void encode(PacketBuffer buffer)
 	{
 		buffer.writeInt(this.questGiverEntity);
@@ -40,6 +40,7 @@ public class SOpenQuestChooseScreenPacket
 
 	public static void handle(SOpenQuestChooseScreenPacket message, final Supplier<NetworkEvent.Context> ctx)
 	{
+		System.out.println("@");
 		if (ctx.get().getDirection() == NetworkDirection.PLAY_TO_CLIENT)
 			ctx.get().enqueueWork(() -> ClientHandler.handle(message));
 		ctx.get().setPacketHandled(true);
@@ -50,12 +51,13 @@ public class SOpenQuestChooseScreenPacket
 		@OnlyIn(Dist.CLIENT)
 		public static void handle(SOpenQuestChooseScreenPacket message)
 		{
-			PlayerEntity player = Minecraft.getInstance().player;	
+			PlayerEntity player = Minecraft.getInstance().player;
 			Entity questGiver = Minecraft.getInstance().world.getEntityByID(message.questGiverEntity);
+			System.out.println(message.questGiverEntity);
 
-			if(!(questGiver instanceof IQuestGiver))
+			if (!(questGiver instanceof IQuestGiver))
 				return;
-			
+
 			Minecraft.getInstance().displayGuiScreen(new QuestChooseScreen(player, questGiver, ((IQuestGiver) questGiver).getAvailableQuests(player)));
 		}
 	}

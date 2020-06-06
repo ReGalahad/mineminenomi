@@ -67,7 +67,7 @@ public class QuestEvents
 			}
 		}
 
-		if(player.world.isRemote && !hasReset)
+		if(!player.world.isRemote && !hasReset)
 		{
 			if(hasQuests)
 				WyNetwork.sendTo(new SOpenQuestChooseScreenPacket(event.getTarget().getEntityId()), player);

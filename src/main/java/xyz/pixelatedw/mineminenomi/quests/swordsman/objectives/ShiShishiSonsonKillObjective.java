@@ -21,10 +21,9 @@ public class ShiShishiSonsonKillObjective extends SwordKillObjective implements 
 	public boolean checkKill(PlayerEntity player, LivingEntity target, DamageSource source)
 	{
 		IAbilityData props = AbilityDataCapability.get(player);
-		ShiShishiSonsonAbility ability = props.getEquippedAbility(ShiShishiSonsonAbility.INSTANCE);
-		
-		boolean hasAbility = ability != null && ability.isOnCooldown();
-		
+		ShiShishiSonsonAbility ability = props.getEquippedAbility(ShiShishiSonsonAbility.INSTANCE);		
+		boolean hasAbility = ability != null && ability.isOnCooldown();	
+	
 		boolean hasDamageFrame = hasAbility && ability.canDealDamage();
 				
 		return super.checkKill(player, target, source) && hasDamageFrame;
