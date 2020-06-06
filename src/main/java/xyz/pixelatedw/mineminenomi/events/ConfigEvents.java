@@ -96,7 +96,8 @@ public class ConfigEvents
 						newEntityStats.setFightingStyle(oldEntityStats.getFightingStyle());
 						break;
 					case "devil_fruit":
-						nbt = DevilFruitCapability.INSTANCE.writeNBT(oldPlayerProps, null);
+                        oldPlayerProps.setZoanPoint("");
+                        nbt = DevilFruitCapability.INSTANCE.writeNBT(oldPlayerProps, null);
 						DevilFruitCapability.INSTANCE.readNBT(newPlayerProps, null, nbt);
 						break;
 					}
