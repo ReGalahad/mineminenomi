@@ -1,11 +1,6 @@
 package xyz.pixelatedw.mineminenomi.events.devilfruits;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-
 import com.google.common.collect.ImmutableSet;
-
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ChestBlock;
 import net.minecraft.entity.item.ItemEntity;
@@ -20,10 +15,15 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
+import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
+
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class DFUserDeathEvents
@@ -32,6 +32,13 @@ public class DFUserDeathEvents
 	@SubscribeEvent
 	public static void onClonePlayer(PlayerEvent.Clone event)
 	{
+		if (CommonConfig.instance.getAfterDeathLogic() == CommonConfig.KeepStatsLogic.CUSTOM) {
+			for (String stat : CommonConfig.instance.getStatsToKeep()) {
+				if (WyHelper.getResourceName(stat).equals("devil_fruit"))
+					return;
+			}
+		} else if (CommonConfig.instance.getAfterDeathLogic() == CommonConfig.KeepStatsLogic.FULL) return;
+
 		if (event.isWasDeath())
 		{
 			double droppedChance = WyHelper.randomWithRange(1, 100);

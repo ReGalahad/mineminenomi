@@ -1,7 +1,5 @@
 package xyz.pixelatedw.mineminenomi.abilities.gomu;
 
-import java.util.UUID;
-
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.AttributeModifier.Operation;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
@@ -13,11 +11,13 @@ import xyz.pixelatedw.wypi.abilities.ContinuousAbility;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 
+import java.util.UUID;
+
 public class GearFourthAbility extends ContinuousAbility
 {
 	public static final GearFourthAbility INSTANCE = new GearFourthAbility();
 
-	private static final AttributeModifier MODIFIER = new AttributeModifier(UUID.fromString("a44a9644-369a-4e18-88d9-323727d3d85b"), "Gear Fourth Modifier", 5, Operation.ADDITION);
+	private static final AttributeModifier MODIFIER = new AttributeModifier(UUID.fromString("a44a9644-369a-4e18-88d9-323727d3d85b"), "Gear Fourth Modifier", 5, Operation.ADDITION).setSaved(false);
 
 	public GearFourthAbility()
 	{

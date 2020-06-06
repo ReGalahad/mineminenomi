@@ -1,7 +1,5 @@
 package xyz.pixelatedw.mineminenomi.abilities.fishmankarate;
 
-import java.util.UUID;
-
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.EffectInstance;
@@ -12,6 +10,8 @@ import xyz.pixelatedw.mineminenomi.particles.effects.fishkarate.SamehadaParticle
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.abilities.ContinuousAbility;
+
+import java.util.UUID;
 
 public class SamehadaShoteiAbility extends ContinuousAbility
 {

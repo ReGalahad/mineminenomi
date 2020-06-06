@@ -26,35 +26,40 @@ public class GeppoAbility extends Ability
 	}
 	
 	private boolean onUseEvent(PlayerEntity player)
-	{		
+	{
 		Vec3d speed;
-		if(player.onGround)
-		{
-			speed = WyHelper.propulsion(player, 1.0, 1.0);
-			player.setMotion(speed.x, 1.86, speed.z);
+		if(!player.isInWater()) {
+			if(player.onGround) {
+				speed = WyHelper.propulsion(player, 1.0, 1.0);
+				player.setMotion(speed.x, 1.86, speed.z);
+				this.airJumps = 0;
+			}
+			else {
+				speed = WyHelper.propulsion(player, 1.5, 1.5);
+				player.setMotion(speed.x, 1.25, speed.z);
+				this.airJumps++;
+			}
+			this.hasFallDamage = false;
+			player.velocityChanged = true;
+		} else {
+			speed = WyHelper.propulsion(player, 2, 2, 2);
+			player.setMotion(speed.x, speed.y, speed.z);
 			this.airJumps = 0;
+			this.hasFallDamage = false;
+			player.velocityChanged = true;
+			this.setMaxCooldown(5);
+			this.startCooldown(player);
+			return true;
 		}
-		else
-		{
-			speed = WyHelper.propulsion(player, 1.5, 1.5);
-			player.setMotion(speed.x, 1.25, speed.z);
-			this.airJumps++;
-		}
-
-		this.hasFallDamage = false;
-		player.velocityChanged = true;
 
 		PARTICLES.spawn(player.world, player.posX, player.posY, player.posZ, 0, 0, 0);
-		
-		if(this.airJumps > 5)
-		{
+
+		if(this.airJumps > 5) {
 			this.airJumps = 0;
 			this.setMaxCooldown(20);
 			this.startCooldown(player);
 			return true;
-		}
-		else
-		{
+		} else {
 			this.setMaxCooldown(2);
 		}
 		

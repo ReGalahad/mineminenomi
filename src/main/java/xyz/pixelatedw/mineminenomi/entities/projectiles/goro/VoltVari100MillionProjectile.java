@@ -14,32 +14,33 @@ import xyz.pixelatedw.mineminenomi.particles.effects.common.CommonExplosionParti
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 
-public class VoltVari200MillionProjectile extends AbilityProjectileEntity
+public class VoltVari100MillionProjectile extends AbilityProjectileEntity
 {
-	public VoltVari200MillionProjectile(World world)
+	public VoltVari100MillionProjectile(World world)
 	{
-		super(GoroProjectiles.VOLT_VARI_60_MILLION, world);
+		super(GoroProjectiles.VOLT_VARI_100_MILLION, world);
 	}
 
-	public VoltVari200MillionProjectile(EntityType type, World world)
+	public VoltVari100MillionProjectile(EntityType type, World world)
 	{
 		super(type, world);
 	}
 
-	public VoltVari200MillionProjectile(World world, double x, double y, double z)
+	public VoltVari100MillionProjectile(World world, double x, double y, double z)
 	{
-		super(GoroProjectiles.VOLT_VARI_60_MILLION, world, x, y, z);
+		super(GoroProjectiles.VOLT_VARI_100_MILLION, world, x, y, z);
 	}
 
-	public VoltVari200MillionProjectile(World world, LivingEntity player)
+	public VoltVari100MillionProjectile(World world, LivingEntity player)
 	{
-		super(GoroProjectiles.VOLT_VARI_60_MILLION, world, player);
+		super(GoroProjectiles.VOLT_VARI_100_MILLION, world, player);
 
-		this.setDamage(35);
-		
+		this.setDamage(50);
+
 		this.onTickEvent = this::onTickEvent;
 		this.onBlockImpactEvent = this::onBlockImpactEvent;
 	}
+
 	
 	private void onBlockImpactEvent(BlockPos hit)
 	{		
@@ -48,7 +49,7 @@ public class VoltVari200MillionProjectile extends AbilityProjectileEntity
 		explosion.setDamageOwner(false);
 		explosion.setDestroyBlocks(true);
 		explosion.setFireAfterExplosion(false);
-		explosion.setSmokeParticles(new CommonExplosionParticleEffect(3));
+		explosion.setSmokeParticles(new CommonExplosionParticleEffect(5));
 		explosion.setDamageEntities(true);
 		explosion.doExplosion();
 	}

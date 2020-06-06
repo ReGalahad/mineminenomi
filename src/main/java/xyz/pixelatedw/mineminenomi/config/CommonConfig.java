@@ -1,14 +1,5 @@
 package xyz.pixelatedw.mineminenomi.config;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.function.Predicate;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
 import net.minecraftforge.common.ForgeConfigSpec.DoubleValue;
@@ -16,7 +7,11 @@ import net.minecraftforge.common.ForgeConfigSpec.EnumValue;
 import net.minecraftforge.common.ForgeConfigSpec.IntValue;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
+import org.apache.commons.lang3.tuple.Pair;
 import xyz.pixelatedw.wypi.WyHelper;
+
+import java.util.*;
+import java.util.function.Predicate;
 
 public class CommonConfig
 {
@@ -42,7 +37,6 @@ public class CommonConfig
 	private DoubleValue dorikiRewardMultiplier;
 	private BooleanValue minimumDorikiPerKill;
 	private BooleanValue abilityFraudChecks;
-		
 	//private DoubleValue devilFruitDropsFromLeaves
 		
 	// Structures
@@ -75,11 +69,17 @@ public class CommonConfig
 	private IntValue chanceForAmbushSpawn;
 	
 	// Permissions
-	
+
+	// Ores
+	private IntValue KairosekiSpawnCount;
+	private IntValue KairosekiSpawnHeight;
+
 	// System
+	private BooleanValue telemetry;
 	private BooleanValue fovRemover;
 	private BooleanValue updateMessage;
-	
+
+
 	public enum KeepStatsLogic
 	{
 		NONE, AUTO, FULL, CUSTOM
@@ -103,7 +103,7 @@ public class CommonConfig
 			this.extraHearts = builder.comment("Allows players to receive extra hearts based on their doriki; true by default").define("Extra Hearts", true);
 			this.mobRewards = builder.comment("Allows mobs to reward doriki, bounty or items; true by default").define("Mob Rewards", true);
 			this.griefing = builder.comment("Allows abilities to break or replace blocks; if turned OFF it will make some abilities completly useless; true by default").define("Griefing", true);
-			//this.animeScreaming = builder.comment("Will send a chat message to nearby players with the used ability's name; false by default").define("Anime Scream", false);
+			this.animeScreaming = builder.comment("Will send a chat message to nearby players with the used ability's name; false by default").define("Anime Scream", false);
 			this.specialFlying = builder.comment("Allows Gasu Gasu no Mi, Moku Moku no Mi and Suna Suna no Mi users to fly, this option does not affect flying Zoans which will be able to fly regardless; false by default").define("Special Flying", false);
 			this.oneFruitPerWorld = builder.comment("Restricts the Devil Fruit spawns to only 1 of each type per world; false by default").define("One Devil Fruit per World", false);
 			this.yamiPower = builder.comment("Allows Yami Yami no Mi users to eat an additional fruit; true by default").define("Yami Yami no Mi additional fruit", true);
@@ -168,8 +168,8 @@ public class CommonConfig
 		this.quests = builder.comment("Allows quests to be accepted / completed; true by default").define("Quests", true);
 		this.questProgression = builder.comment("Allows quests to reward players with abilities, otherwise all abilities will be unlocked from the beginning; true by default").define("Quest Progression", true);
 		
-		builder.pop();		
-		
+		builder.pop();
+
 		builder.push("World Events");
 		{
 			builder.push("Traders");
@@ -177,13 +177,13 @@ public class CommonConfig
 			this.timeBetweenTraderSpawns = builder.comment("Determines the time (in seconds) between two spawn attempts; 1800 by default").defineInRange("Time Between Trader Spawns", 1800, 1, 99999);
 			this.chanceForTraderSpawn = builder.comment("Determines the % chance for a trader to spawn; 1 by default").defineInRange("Chance for Trader Spawns", 1, 1, 100);
 			builder.pop();
-			
+
 			builder.push("Trainers");
 			this.canSpawnTrainers = builder.comment("Allows Trainers to spawn in the world; true by default").define("Trainer Spawns", true);
 			this.timeBetweenTrainerSpawns = builder.comment("Determines the time (in seconds) between two spawn attempts; 1800 by default").defineInRange("Time Between Trainer Spawns", 1800, 1, 99999);
 			this.chanceForTrainerSpawn = builder.comment("Determines the % chance for a trainer to spawn; 15 by default").defineInRange("Chance for Trainer Spawns", 15, 1, 100);
 			builder.pop();
-			
+
 			builder.push("Ambushes");
 			this.canSpawnAmbushes = builder.comment("Allows Ambushes to spawn in the world; true by default").define("Ambushe Spawns", true);
 			this.timeBetweenAmbushSpawns = builder.comment("Determines the time (in seconds) between two spawn attempts; 3600 by default").defineInRange("Time Between Ambushes Spawns", 3600, 1, 99999);
@@ -191,7 +191,13 @@ public class CommonConfig
 			builder.pop();
 		}
 		builder.pop();
-		
+
+
+		builder.push("Ores");
+		this.KairosekiSpawnCount = builder.comment("Kairoseki vein spawn count; 3 by default").defineInRange("Chance for vein to spawn", 3, 0, 100);
+		this.KairosekiSpawnHeight = builder.comment("Kairoseki spawn height; 128 by default").defineInRange("Kairoseki max spawn size", 128, 0, 256);
+		builder.pop();
+
 		builder.push("Bounty");
 		
 		this.wantedPosterPackages = builder.comment("Allows wanted poster packages to drop from the sky; true by default").define("Wanted Poster Package Drops", true);
@@ -203,23 +209,14 @@ public class CommonConfig
 		builder.pop();
 		
 		builder.push("System");	
-		{
-			this.updateMessage = builder.comment("Allows the game to show a text message when the installed mod is outdated; true by default").define("Update Message", true);	
-			this.fovRemover = builder.comment("Keeps the FOV fixed when the player has speed effects active").define("FOV Remover", true);
-		}
+		
+		this.telemetry = builder.comment("Allows the game to send data to our server for statistics, no personal information is sent only minor things like which fruit the player ate, what ability was used, which mobs killed etc; true by default").define("Telemtry", true);
+		this.updateMessage = builder.comment("Allows the game to show a text message when the installed mod is outdated; true by default").define("Update Message", true);	
+		this.fovRemover = builder.comment("Keeps the FOV fixed when the player has speed effects active").define("FOV Remover", true);
+		
 		builder.pop();
 	}
 
-	public boolean isAbilityFraudChecksEnabled()
-	{
-		return this.abilityFraudChecks.get();
-	}
-	
-	public boolean isMinimumDorikiPerKillEnabled()
-	{
-		return this.minimumDorikiPerKill.get();
-	}
-	
 	public int getChanceForAmbushSpawn()
 	{
 		return this.chanceForAmbushSpawn.get();
@@ -396,4 +393,20 @@ public class CommonConfig
 	{
 		return this.yamiPower.get().booleanValue();
 	}
+
+	public boolean isTelemetryEnabled()
+	{
+		return this.telemetry.get().booleanValue();
+	}
+
+	public boolean isAbilityFraudChecksEnabled()
+	{
+		return this.abilityFraudChecks.get();
+	}
+
+	public boolean isMinimumDorikiPerKillEnabled() { return this.minimumDorikiPerKill.get(); }
+
+	public int getkairosekiSpawnCount() { return this.KairosekiSpawnCount.get(); }
+
+	public int getKairosekiSpawnHeight() { return this.KairosekiSpawnCount.get(); }
 }

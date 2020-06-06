@@ -7,6 +7,7 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
 import net.minecraft.world.gen.placement.CountRangeConfig;
 import net.minecraft.world.gen.placement.Placement;
+import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 
 public class KairosekiOreFeature
@@ -28,7 +29,7 @@ public class KairosekiOreFeature
 						6
 					),
 					Placement.COUNT_RANGE,
-					new CountRangeConfig(40, 10, 0, 128)
+					new CountRangeConfig(CommonConfig.instance.getkairosekiSpawnCount(), 0, 0, CommonConfig.instance.getKairosekiSpawnHeight())
 				)
 			);
 		}
