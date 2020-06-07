@@ -5,6 +5,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
@@ -25,6 +26,16 @@ import xyz.pixelatedw.wypi.network.packets.server.SSyncAbilityDataPacket;
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class DFWeaknessesEvents
 {
+
+	@SubscribeEvent
+	public static void onPlayerBreakSpeed(PlayerEvent.BreakSpeed event)
+	{
+		PlayerEntity player = event.getPlayer();
+		IDevilFruit props = DevilFruitCapability.get(player);
+
+		if (props.hasDevilFruit() && AbilityHelper.isAffectedByWater(player) && !player.isPotionActive(ModEffects.BUBBLY_CORAL))
+			event.setNewSpeed(event.getOriginalSpeed() / 15);
+	}
 
 	@SubscribeEvent
 	public static void onEntityUpdate(LivingUpdateEvent event)
