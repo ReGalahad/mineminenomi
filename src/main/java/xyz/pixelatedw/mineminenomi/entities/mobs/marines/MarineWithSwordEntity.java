@@ -1,7 +1,5 @@
 package xyz.pixelatedw.mineminenomi.entities.mobs.marines;
 
-import javax.annotation.Nullable;
-
 import net.minecraft.entity.ILivingEntityData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.SpawnReason;
@@ -14,6 +12,8 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.wypi.WyHelper;
+
+import javax.annotation.Nullable;
 
 public class MarineWithSwordEntity extends GenericMarineEntity
 {
@@ -38,7 +38,7 @@ public class MarineWithSwordEntity extends GenericMarineEntity
 		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23F);
 		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(2.0D);
 		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D);
-		this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
+		this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(4.0D);
 		
 		this.setDoriki(10 + WyHelper.randomWithRange(0, 5));
 		this.setBelly(5 + WyHelper.randomWithRange(0, 5));

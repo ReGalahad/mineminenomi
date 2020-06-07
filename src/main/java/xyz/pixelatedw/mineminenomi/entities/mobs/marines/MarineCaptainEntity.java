@@ -1,7 +1,5 @@
 package xyz.pixelatedw.mineminenomi.entities.mobs.marines;
 
-import javax.annotation.Nullable;
-
 import net.minecraft.entity.ILivingEntityData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.SpawnReason;
@@ -20,6 +18,8 @@ import xyz.pixelatedw.mineminenomi.entities.mobs.ai.abilities.GapCloserGoal;
 import xyz.pixelatedw.mineminenomi.init.ModArmors;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.wypi.WyHelper;
+
+import javax.annotation.Nullable;
 
 public class MarineCaptainEntity extends GenericMarineEntity implements IRokushikiUser, ISwordsman, IBrawler, IHakiUser
 {
@@ -49,7 +49,7 @@ public class MarineCaptainEntity extends GenericMarineEntity implements IRokushi
 		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23F);
 		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0D);
 		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(50.0D);
-		this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
+		this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(WyHelper.randomWithRange(12, 15));
 		
 		this.setDoriki(20 + WyHelper.randomWithRange(0, 10));
 		this.setBelly(20 + WyHelper.randomWithRange(0, 20));
