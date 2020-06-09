@@ -6,10 +6,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
+import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
 import xyz.pixelatedw.wypi.WyHelper;
 
@@ -33,7 +35,7 @@ public class BellyPouchItem extends Item
 			if(props.getBelly() <= ModValues.MAX_GENERAL - amount)
 			{
 				props.alterBelly(amount);
-				WyHelper.sendMsgToPlayer(player, "You've obtained " + amount + " belly !");
+				WyHelper.sendMsgToPlayer(player, new TranslationTextComponent(ModI18n.ITEM_MESSAGE_POUCH_BELLY_GAINED, amount).getFormattedText());
 				player.inventory.deleteStack(player.getHeldItemMainhand());
 			}
 			else

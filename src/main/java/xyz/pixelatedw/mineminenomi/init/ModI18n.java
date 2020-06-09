@@ -49,7 +49,15 @@ public class ModI18n
 	public static final String GUI_BUY = WyRegistry.registerName("gui.buy", "Buy");
 	public static final String GUI_NAME = WyRegistry.registerName("gui.name", "Name");	
 	public static final String GUI_PRICE = WyRegistry.registerName("gui.price", "Price");
-	
+	public static final String GUI_EMPTY = WyRegistry.registerName("gui.empty", "Empty");
+	public static final String GUI_RED = WyRegistry.registerName("gui.red", "Red");
+	public static final String GUI_GREEN = WyRegistry.registerName("gui.green", "Green");
+	public static final String GUI_BLUE = WyRegistry.registerName("gui.blue", "Blue");
+	public static final String GUI_BASE = WyRegistry.registerName("gui.base", "Base");
+	public static final String GUI_BACKGROUND = WyRegistry.registerName("gui.background", "Background");
+	public static final String GUI_DETAIL = WyRegistry.registerName("gui.detail", "Detail");
+	public static final String GUI_FINISH = WyRegistry.registerName("gui.finish", "Finish");
+
 	public static final String GUI_CLICK_TO_SKIP = WyRegistry.registerName("gui.click_to_skip", "Click to Skip");
 
 	public static final String QUEST_NO_QUESTS_AVAILABLE = WyRegistry.registerName("quest.no_quests_available", "<%s> I don't have any quests for you at the moment.");
@@ -61,6 +69,10 @@ public class ModI18n
 	public static final String TRADER_NO_PIRATE = WyRegistry.registerName("trader.no_pirate", "I don't trade to Pirate scum");
 	public static final String TRADER_NO_MARINE = WyRegistry.registerName("trader.no_marine", "I don't support the Marines.");
 	
+	public static final String CREW_MESSAGE_ALREADY_IN_CREW = WyRegistry.registerName("crew.message.already_in_crew", "You're already in a Crew!");
+	public static final String CREW_MESSAGE_BOUNTY_REQUIREMENT = WyRegistry.registerName("crew.message.bounty_requirement", "Bounty requirement not met!");
+	public static final String CREW_MESSAGE_NEW_JOIN = WyRegistry.registerName("crew.message.new_join", "%s joined your crew.");
+
 	public static final String ABILITY_MESSAGE_NEED_SWORD = WyRegistry.registerName("ability.item.message.need_sword", "You need a sword to use this ability!");
 	public static final String ABILITY_MESSAGE_ONLY_IN_ROOM = WyRegistry.registerName("ability.item.message.only_in_room", "%s can only be used inside ROOM!");
 	public static final String ABILITY_MESSAGE_NEED_MEDIC_BAG = WyRegistry.registerName("ability.item.message.need_medic_bag", "You need a medic bag equipped to use this ability!");
@@ -74,6 +86,7 @@ public class ModI18n
 	public static final String ABILITY_MESSAGE_ONE_HAKI_TYPE = WyRegistry.registerName("ability.message.one_haki_type", "%s can't be used while another same type haki is active!");
 
 	public static final String ITEM_MESSAGE_NEED_KEY = WyRegistry.registerName("item.message.need_key", "You need a key!");
+	public static final String ITEM_MESSAGE_POUCH_BELLY_GAINED = WyRegistry.registerName("item.message.pouch_belly_gained", "You've obtained %s belly !");
 	
 	public static void init()
 	{

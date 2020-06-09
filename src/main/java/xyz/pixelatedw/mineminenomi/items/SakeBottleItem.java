@@ -10,14 +10,18 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.crew.Crew;
+import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
 import xyz.pixelatedw.mineminenomi.init.ModEffects;
+import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.mineminenomi.packets.server.SOpenNewCrewScreenPacket;
+import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.network.WyNetwork;
 
 public class SakeBottleItem extends Item
@@ -33,13 +37,25 @@ public class SakeBottleItem extends Item
 	{
 		ItemStack itemStack = player.getHeldItemMainhand();
 		IEntityStats props = EntityStatsCapability.get(player);
-		if(player.isSneaking() && !props.isInCrew())
+		if(player.isSneaking())
 		{
+			if(props.isInCrew())
+			{
+				WyHelper.sendMsgToPlayer(player, new TranslationTextComponent(ModI18n.CREW_MESSAGE_ALREADY_IN_CREW).getFormattedText());
+				return new ActionResult<>(ActionResultType.FAIL, player.getHeldItem(hand));
+			}
+			
+			if(props.getBounty() < CommonConfig.instance.getBountyRequirementForCrews())
+			{
+				WyHelper.sendMsgToPlayer(player, new TranslationTextComponent(ModI18n.CREW_MESSAGE_BOUNTY_REQUIREMENT).getFormattedText());
+				return new ActionResult<>(ActionResultType.FAIL, player.getHeldItem(hand));
+			}
+				
 			Crew crew = new Crew("", player.getUniqueID());
 			ExtendedWorldData worldProps = ExtendedWorldData.get(world);
 			worldProps.addCrew(crew);
 			itemStack.getOrCreateTag().putBoolean("crewReady", true);
-			WyNetwork.sendTo(new SOpenNewCrewScreenPacket(), player);				
+			WyNetwork.sendTo(new SOpenNewCrewScreenPacket(), player);
 		}
 		else
 		{

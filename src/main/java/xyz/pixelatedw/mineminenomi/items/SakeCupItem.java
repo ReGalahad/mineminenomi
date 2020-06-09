@@ -14,11 +14,13 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.crew.Crew;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
+import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.debug.WyDebug;
 
@@ -70,7 +72,7 @@ public class SakeCupItem extends Item
 					if(!crew.hasMember(player.getUniqueID()))
 					{
 						crew.addMember(player.getUniqueID());
-						WyHelper.sendMsgToPlayer(leader, player.getName().getFormattedText() + " joined your crew.");
+						WyHelper.sendMsgToPlayer(leader, new TranslationTextComponent(ModI18n.CREW_MESSAGE_NEW_JOIN, player.getName().getFormattedText()).getFormattedText());
 						EntityStatsCapability.get(player).setInCrew(true);
 						itemStack.getOrCreateTag().putInt("leader", 0);
 					}

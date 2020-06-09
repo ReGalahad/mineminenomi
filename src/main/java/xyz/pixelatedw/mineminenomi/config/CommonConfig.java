@@ -16,6 +16,7 @@ import net.minecraftforge.common.ForgeConfigSpec.EnumValue;
 import net.minecraftforge.common.ForgeConfigSpec.IntValue;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
+import xyz.pixelatedw.mineminenomi.init.ModValues;
 import xyz.pixelatedw.wypi.WyHelper;
 
 public class CommonConfig
@@ -74,8 +75,10 @@ public class CommonConfig
 	private IntValue timeBetweenAmbushSpawns;
 	private IntValue chanceForAmbushSpawn;
 	
-	// Permissions
-
+	// Crews
+	private IntValue bountyRequirement;
+	private BooleanValue worldMessageOnCrewCreate;
+	
 	// Ores
 	private IntValue kairosekiSpawnCount;
 	private IntValue kairosekiSpawnHeight;
@@ -210,6 +213,13 @@ public class CommonConfig
 		this.kairosekiSpawnHeight = builder.comment("Kairoseki spawn height; 128 by default").defineInRange("Kairoseki max spawn size", 128, 0, 256);
 		builder.pop();
 
+		builder.push("Crews");
+		{
+			this.bountyRequirement = builder.comment("Bounty Requirement for creating a crew; 0 means no requirement; 0 by default").defineInRange("Bounty Requirement", 0, 0, ModValues.MAX_DORIKI);
+			this.worldMessageOnCrewCreate = builder.comment("Sends a message to all players when a new crew gets formed; false by default").define("World Message", false);
+		}
+		builder.pop();
+		
 		builder.push("Bounty");
 		
 		this.wantedPosterPackages = builder.comment("Allows wanted poster packages to drop from the sky; true by default").define("Wanted Poster Package Drops", true);
@@ -229,6 +239,16 @@ public class CommonConfig
 		builder.pop();
 	}
 
+	public boolean isCrewWorldMessageEnabled()
+	{
+		return this.worldMessageOnCrewCreate.get();
+	}
+	
+	public int getBountyRequirementForCrews()
+	{
+		return this.bountyRequirement.get();
+	}
+	
 	public HaoshokuUnlockLogic getHaoshokuUnlockLogic()
 	{
 		return (HaoshokuUnlockLogic) this.haoshokuUnlockLogic.get();

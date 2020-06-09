@@ -17,6 +17,7 @@ import net.minecraft.client.gui.widget.Widget;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.RegistryObject;
@@ -27,6 +28,7 @@ import xyz.pixelatedw.mineminenomi.api.jollyroger.JollyRogerElement;
 import xyz.pixelatedw.mineminenomi.api.jollyroger.JollyRogerElement.LayerType;
 import xyz.pixelatedw.mineminenomi.data.entity.jollyroger.IJollyRoger;
 import xyz.pixelatedw.mineminenomi.data.entity.jollyroger.JollyRogerCapability;
+import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.mineminenomi.init.ModJollyRogers;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.packets.client.CJollyRogerSyncPacket;
@@ -129,11 +131,11 @@ public class JollyRogerCreatorScreen extends Screen
 		}
 		GL11.glPopMatrix();
 
-		String text = this.trueIndex >= 0 ? (this.trueIndex + 1) + " / " + this.allBases.size() : "Empty";
+		String text = this.trueIndex >= 0 ? (this.trueIndex + 1) + " / " + this.allBases.size() : new TranslationTextComponent(ModI18n.GUI_EMPTY).getFormattedText();
 		if (this.layerType == LayerType.BACKGROUND)
-			text = this.trueIndex >= 0 ? (this.trueIndex + 1) + " / " + this.allBackgrounds.size() : "Empty";
+			text = this.trueIndex >= 0 ? (this.trueIndex + 1) + " / " + this.allBackgrounds.size() : new TranslationTextComponent(ModI18n.GUI_EMPTY).getFormattedText();
 		else if (this.layerType == LayerType.DETAIL)
-			text = this.trueIndex >= 0 ? (this.trueIndex + 1) + " / " + this.allDetails.size() : "Empty";
+			text = this.trueIndex >= 0 ? (this.trueIndex + 1) + " / " + this.allDetails.size() : new TranslationTextComponent(ModI18n.GUI_EMPTY).getFormattedText();
 		WyHelper.drawStringWithBorder(this.font, text, posX - this.font.getStringWidth(text) / 2 + 12, posY + 80, WyHelper.hexToRGB("#FFFFFF").getRGB());
 
 		GlStateManager.disableBlend();
@@ -157,17 +159,17 @@ public class JollyRogerCreatorScreen extends Screen
 				this.fillGradient(pX, pY, sW, sH, WyHelper.hexToRGB("#B3B3B3").getRGB(), WyHelper.hexToRGB("#505050").getRGB());
 	
 				posY = posY - 75;
-				WyHelper.drawStringWithBorder(this.font, "Red ", posX - 75, posY, WyHelper.hexToRGB("#FFFFFF").getRGB());
+				WyHelper.drawStringWithBorder(this.font, new TranslationTextComponent(ModI18n.GUI_RED).getFormattedText() + " ", posX - 75, posY, WyHelper.hexToRGB("#FFFFFF").getRGB());
 				WyHelper.drawStringWithBorder(this.font, "0", posX - 85, posY + 14, WyHelper.hexToRGB("#FFFFFF").getRGB());
 				WyHelper.drawStringWithBorder(this.font, "255", posX - 23, posY + 14, WyHelper.hexToRGB("#FFFFFF").getRGB());
 	
 				posY += 40;
-				WyHelper.drawStringWithBorder(this.font, "Green ", posX - 75, posY, WyHelper.hexToRGB("#FFFFFF").getRGB());
+				WyHelper.drawStringWithBorder(this.font, new TranslationTextComponent(ModI18n.GUI_GREEN).getFormattedText() + " ", posX - 75, posY, WyHelper.hexToRGB("#FFFFFF").getRGB());
 				WyHelper.drawStringWithBorder(this.font, "0", posX - 85, posY + 14, WyHelper.hexToRGB("#FFFFFF").getRGB());
 				WyHelper.drawStringWithBorder(this.font, "255", posX - 23, posY + 14, WyHelper.hexToRGB("#FFFFFF").getRGB());
 	
 				posY += 40;
-				WyHelper.drawStringWithBorder(this.font, "Blue ", posX - 75, posY, WyHelper.hexToRGB("#FFFFFF").getRGB());
+				WyHelper.drawStringWithBorder(this.font, new TranslationTextComponent(ModI18n.GUI_BLUE).getFormattedText() + " ", posX - 75, posY, WyHelper.hexToRGB("#FFFFFF").getRGB());
 				WyHelper.drawStringWithBorder(this.font, "0", posX - 85, posY + 14, WyHelper.hexToRGB("#FFFFFF").getRGB());
 				WyHelper.drawStringWithBorder(this.font, "255", posX - 23, posY + 14, WyHelper.hexToRGB("#FFFFFF").getRGB());
 			}
@@ -201,18 +203,18 @@ public class JollyRogerCreatorScreen extends Screen
 
 		int listPosY = posY - 85;
 
-		NoTextureButton baseButton = new NoTextureButton(posX + 5, listPosY, 115, 16, "Base", this::selectButton);
+		NoTextureButton baseButton = new NoTextureButton(posX + 5, listPosY, 115, 16, new TranslationTextComponent(ModI18n.GUI_BASE).getFormattedText(), this::selectButton);
 		this.addButton(baseButton);
 
 		for (int i = 0; i < this.props.getBackgrounds().length; i++)
 		{
-			NoTextureButton bgButton = new NoTextureButton(posX + 5, (listPosY + 20 + (i * 20)), 115, 16, "Background " + (i + 1), this::selectButton);
+			NoTextureButton bgButton = new NoTextureButton(posX + 5, (listPosY + 20 + (i * 20)), 115, 16, new TranslationTextComponent(ModI18n.GUI_BACKGROUND).getFormattedText() + " " + (i + 1), this::selectButton);
 			this.addButton(bgButton);
 		}
 
 		for (int i = 0; i < this.props.getDetails().length; i++)
 		{
-			NoTextureButton detailButton = new NoTextureButton(posX + 5, (listPosY + 60 + (i * 20)), 115, 16, "Detail " + (i + 1), this::selectButton);
+			NoTextureButton detailButton = new NoTextureButton(posX + 5, (listPosY + 60 + (i * 20)), 115, 16, new TranslationTextComponent(ModI18n.GUI_DETAIL).getFormattedText() + " " + (i + 1), this::selectButton);
 			this.addButton(detailButton);
 		}
 
@@ -246,7 +248,7 @@ public class JollyRogerCreatorScreen extends Screen
 		this.blueSlider = blueColorPicker;
 		this.addButton(blueColorPicker);
 
-		NoTextureButton editJollyRogerButton = new NoTextureButton((this.width / 2) - 17, posY + 95, 60, 16, "Finish", (btn) -> { this.finishEditing(); });
+		NoTextureButton editJollyRogerButton = new NoTextureButton((this.width / 2) - 17, posY + 95, 60, 16, new TranslationTextComponent(ModI18n.GUI_FINISH).getFormattedText(), (btn) -> { this.finishEditing(); });
 		this.addButton(editJollyRogerButton);
 		
 		TexturedIconButton layerUpBtn = new TexturedIconButton(ModResources.BRIGHT_WOOD_ARROW, posX - 80, posY + 53, 16, 25, "", (btn) -> this.changeLayerIndex(true));
