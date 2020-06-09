@@ -20,6 +20,8 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.abilities.haki.BusoshokuHakiImbuingAbility;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
@@ -118,6 +120,12 @@ public class CoreSwordItem extends Item
 				multiplier += 0.25;
 
 			itemStack.getTag().putDouble("multiplier", multiplier);
+			
+			if(itemStack.getTag().getBoolean("isClone") && !itemStack.getTag().getBoolean("hasCloneTag"))
+			{
+				itemStack.setDisplayName(new StringTextComponent(TextFormatting.RESET + itemStack.getDisplayName().getFormattedText() + " (Clone)"));
+				itemStack.getTag().putBoolean("hasCloneTag", true);
+			}
 		}
 	}
 
