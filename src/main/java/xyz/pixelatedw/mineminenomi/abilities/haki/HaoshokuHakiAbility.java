@@ -17,7 +17,7 @@ import xyz.pixelatedw.wypi.abilities.ChargeableAbility;
 public class HaoshokuHakiAbility extends ChargeableAbility
 {
 	public static final HaoshokuHakiAbility INSTANCE = new HaoshokuHakiAbility();
-	private static final ParticleEffect PARTICLES = new HaoshokuHakiParticleEffect();
+	public static final ParticleEffect PARTICLES = new HaoshokuHakiParticleEffect();
 
 	public HaoshokuHakiAbility()
 	{
