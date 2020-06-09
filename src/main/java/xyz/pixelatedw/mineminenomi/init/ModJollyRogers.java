@@ -38,7 +38,7 @@ public class ModJollyRogers
 	public static final JollyRogerElement DETAIL_3 = new JollyRogerElement(LayerType.DETAIL).addUseCheck((player) -> onlyWith(player, BASE_0, ModJollyRogers.BASE_1)).setCanBeColored().setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/details/detail_3.png"));
 	public static final JollyRogerElement DETAIL_4 = new JollyRogerElement(LayerType.DETAIL).addUseCheck((player) -> onlyWith(player, BASE_0, ModJollyRogers.BASE_1)).setCanBeColored().setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/details/detail_4.png"));
 	public static final JollyRogerElement DETAIL_5 = new JollyRogerElement(LayerType.DETAIL).addUseCheck((player) -> onlyWith(player, BASE_0, ModJollyRogers.BASE_1)).setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/details/detail_5.png"));
-	public static final JollyRogerElement DETAIL_6 = new JollyRogerElement(LayerType.DETAIL).addUseCheck((player) -> onlyWith(player, BASE_0, ModJollyRogers.BASE_1)).addUseCheck(WyPatreon::isSupernova).setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/details/detail_6.png"));
+	public static final JollyRogerElement DETAIL_6 = new JollyRogerElement(LayerType.DETAIL).addUseCheck(WyPatreon::isSupernova).addUseCheck((player) -> onlyWith(player, BASE_0, ModJollyRogers.BASE_1)).setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/details/detail_6.png"));
 	public static final JollyRogerElement DETAIL_7 = new JollyRogerElement(LayerType.DETAIL).setCanBeColored().setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/details/detail_7.png"));
 	public static final JollyRogerElement DETAIL_8 = new JollyRogerElement(LayerType.DETAIL).addUseCheck((player) -> onlyWith(player, BASE_0)).setCanBeColored().setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/details/detail_8.png"));
 	public static final JollyRogerElement DETAIL_9 = new JollyRogerElement(LayerType.DETAIL).addUseCheck((player) -> onlyWith(player, BASE_0)).setCanBeColored().setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/details/detail_9.png"));
@@ -50,7 +50,7 @@ public class ModJollyRogers
 	public static final JollyRogerElement DETAIL_15 = new JollyRogerElement(LayerType.DETAIL).addUseCheck((player) -> onlyWith(player, BASE_0, ModJollyRogers.BASE_1)).setCanBeColored().setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/details/detail_15.png"));
 	public static final JollyRogerElement DETAIL_16 = new JollyRogerElement(LayerType.DETAIL).addUseCheck((player) -> onlyWith(player, BASE_0, ModJollyRogers.BASE_1)).setCanBeColored().setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/details/detail_16.png"));
 	public static final JollyRogerElement DETAIL_17 = new JollyRogerElement(LayerType.DETAIL).addUseCheck(WyPatreon::isSupernova).addUseCheck((player) -> onlyWith(player, BASE_0, ModJollyRogers.BASE_1)).setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/details/detail_17.png"));
-	public static final JollyRogerElement DETAIL_18 = new JollyRogerElement(LayerType.DETAIL).addUseCheck(WyPatreon::isSupernova).setCanBeColored().setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/details/detail_18.png"));
+	public static final JollyRogerElement DETAIL_18 = new JollyRogerElement(LayerType.DETAIL).addUseCheck(WyPatreon::isRookie).setCanBeColored().setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/details/detail_18.png"));
 	public static final JollyRogerElement DETAIL_19 = new JollyRogerElement(LayerType.DETAIL).addUseCheck((player) -> onlyWith(player, BASE_0)).setCanBeColored().setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/details/detail_19.png"));
 	public static final JollyRogerElement DETAIL_20 = new JollyRogerElement(LayerType.DETAIL).addUseCheck((player) -> onlyWith(player, BASE_0)).setCanBeColored().setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/details/detail_20.png"));
 	public static final JollyRogerElement DETAIL_21 = new JollyRogerElement(LayerType.DETAIL).addUseCheck((player) -> onlyWith(player, BASE_0)).setCanBeColored().setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/details/detail_21.png"));
@@ -66,7 +66,18 @@ public class ModJollyRogers
 	public static final JollyRogerElement DETAIL_31 = new JollyRogerElement(LayerType.DETAIL).addUseCheck((player) -> onlyWith(player, BASE_0)).setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/details/detail_31.png"));
 	public static final JollyRogerElement DETAIL_32 = new JollyRogerElement(LayerType.DETAIL).addUseCheck((player) -> onlyWith(player, BASE_0)).setCanBeColored().setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/details/detail_32.png"));
 	public static final JollyRogerElement DETAIL_33 = new JollyRogerElement(LayerType.DETAIL).addUseCheck((player) -> onlyWith(player, BASE_0)).setCanBeColored().setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/details/detail_33.png"));
-	
+	public static final JollyRogerElement DETAIL_34 = new JollyRogerElement(LayerType.DETAIL).addUseCheck((player) -> onlyWith(player, BASE_0)).setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/details/detail_34.png"));
+	public static final JollyRogerElement DETAIL_35 = new JollyRogerElement(LayerType.DETAIL).addUseCheck(WyPatreon::isRookie).addUseCheck((player) -> onlyWith(player, BASE_0)).setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/details/detail_35.png"));
+	public static final JollyRogerElement DETAIL_36 = new JollyRogerElement(LayerType.DETAIL).addUseCheck((player) -> onlyWith(player, BASE_0)).setCanBeColored().setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/details/detail_36.png"));
+	public static final JollyRogerElement DETAIL_37 = new JollyRogerElement(LayerType.DETAIL).addUseCheck((player) -> onlyWith(player, BASE_0)).setCanBeColored().setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/details/detail_37.png"));
+	public static final JollyRogerElement DETAIL_38 = new JollyRogerElement(LayerType.DETAIL).setCanBeColored().setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/details/detail_38.png"));
+	public static final JollyRogerElement DETAIL_39 = new JollyRogerElement(LayerType.DETAIL).addUseCheck((player) -> onlyWith(player, BASE_0)).setCanBeColored().setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/details/detail_39.png"));
+	public static final JollyRogerElement DETAIL_40 = new JollyRogerElement(LayerType.DETAIL).addUseCheck((player) -> onlyWith(player, BASE_0)).setCanBeColored().setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/details/detail_40.png"));
+	public static final JollyRogerElement DETAIL_41 = new JollyRogerElement(LayerType.DETAIL).addUseCheck(WyPatreon::isRookie).addUseCheck((player) -> onlyWith(player, BASE_0)).setCanBeColored().setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/details/detail_41.png"));
+	public static final JollyRogerElement DETAIL_42 = new JollyRogerElement(LayerType.DETAIL).addUseCheck(WyPatreon::isRookie).setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/details/detail_42.png"));
+	public static final JollyRogerElement DETAIL_43 = new JollyRogerElement(LayerType.DETAIL).addUseCheck((player) -> onlyWith(player, BASE_0)).setCanBeColored().setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/details/detail_43.png"));
+	public static final JollyRogerElement DETAIL_44 = new JollyRogerElement(LayerType.DETAIL).addUseCheck(WyPatreon::isSupernova).addUseCheck((player) -> onlyWith(player, BASE_0)).setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/details/detail_44.png"));
+
 	// Backgrounds
 	public static final JollyRogerElement BACKGROUND_0 = new JollyRogerElement(LayerType.BACKGROUND).setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/backgrounds/bg_0.png"));
 	public static final JollyRogerElement BACKGROUND_1 = new JollyRogerElement(LayerType.BACKGROUND).setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/backgrounds/bg_1.png"));
@@ -83,6 +94,11 @@ public class ModJollyRogers
 	public static final JollyRogerElement BACKGROUND_12 = new JollyRogerElement(LayerType.BACKGROUND).setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/backgrounds/bg_12.png"));
 	public static final JollyRogerElement BACKGROUND_13 = new JollyRogerElement(LayerType.BACKGROUND).setCanBeColored().setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/backgrounds/bg_13.png"));
 	public static final JollyRogerElement BACKGROUND_14 = new JollyRogerElement(LayerType.BACKGROUND).addUseCheck((player) -> onlyWith(player, BASE_0)).setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/backgrounds/bg_14.png"));
+	public static final JollyRogerElement BACKGROUND_15 = new JollyRogerElement(LayerType.BACKGROUND).setCanBeColored().setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/backgrounds/bg_15.png"));
+	public static final JollyRogerElement BACKGROUND_16 = new JollyRogerElement(LayerType.BACKGROUND).setCanBeColored().setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/backgrounds/bg_16.png"));
+	public static final JollyRogerElement BACKGROUND_17 = new JollyRogerElement(LayerType.BACKGROUND).setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/backgrounds/bg_17.png"));
+	public static final JollyRogerElement BACKGROUND_18 = new JollyRogerElement(LayerType.BACKGROUND).setCanBeColored().setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/backgrounds/bg_18.png"));
+	public static final JollyRogerElement BACKGROUND_19 = new JollyRogerElement(LayerType.BACKGROUND).setCanBeColored().setTexture(new ResourceLocation(APIConfig.PROJECT_ID, "textures/jolly_rogers/backgrounds/bg_19.png"));
 
 	static
 	{
@@ -123,6 +139,17 @@ public class ModJollyRogers
 		ModJollyRogers.registerElement(DETAIL_31);
 		ModJollyRogers.registerElement(DETAIL_32);
 		ModJollyRogers.registerElement(DETAIL_33);
+		ModJollyRogers.registerElement(DETAIL_34);
+		ModJollyRogers.registerElement(DETAIL_35);
+		ModJollyRogers.registerElement(DETAIL_36);
+		ModJollyRogers.registerElement(DETAIL_37);
+		ModJollyRogers.registerElement(DETAIL_38);
+		ModJollyRogers.registerElement(DETAIL_39);
+		ModJollyRogers.registerElement(DETAIL_40);
+		ModJollyRogers.registerElement(DETAIL_41);
+		ModJollyRogers.registerElement(DETAIL_42);
+		ModJollyRogers.registerElement(DETAIL_43);
+		ModJollyRogers.registerElement(DETAIL_44);
 
 		ModJollyRogers.registerElement(BACKGROUND_0);
 		ModJollyRogers.registerElement(BACKGROUND_1);
@@ -139,6 +166,11 @@ public class ModJollyRogers
 		ModJollyRogers.registerElement(BACKGROUND_12);
 		ModJollyRogers.registerElement(BACKGROUND_13);
 		ModJollyRogers.registerElement(BACKGROUND_14);
+		ModJollyRogers.registerElement(BACKGROUND_15);
+		ModJollyRogers.registerElement(BACKGROUND_16);
+		ModJollyRogers.registerElement(BACKGROUND_17);
+		ModJollyRogers.registerElement(BACKGROUND_18);
+		ModJollyRogers.registerElement(BACKGROUND_19);
 	}
 
 	public static boolean onlyWith(PlayerEntity player, JollyRogerElement... elements)

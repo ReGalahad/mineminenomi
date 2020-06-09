@@ -8,9 +8,13 @@ import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.command.arguments.EntityArgument;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import xyz.pixelatedw.mineminenomi.api.helpers.HakiHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
+import xyz.pixelatedw.mineminenomi.data.entity.haki.HakiDataCapability;
+import xyz.pixelatedw.mineminenomi.data.entity.haki.IHakiData;
 import xyz.pixelatedw.mineminenomi.packets.server.SOpenJollyRogerCreatorScreenPacket;
+import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.network.WyNetwork;
 
 public class FGCommand
@@ -25,9 +29,26 @@ public class FGCommand
 			.then(Commands.argument("target", EntityArgument.player())
 				.executes(context -> openJollyRogerCreator(context, EntityArgument.getPlayer(context, "target")))));
 
+		builder
+			.then(Commands.literal("check_haki")
+			.then(Commands.argument("target", EntityArgument.player())
+				.executes(context -> checkHakiStats(context, EntityArgument.getPlayer(context, "target")))));
+		
 		dispatcher.register(builder);
 	}
 
+	private static int checkHakiStats(CommandContext<CommandSource> context, ServerPlayerEntity target)
+	{
+		IHakiData props = HakiDataCapability.get(target);
+
+		WyHelper.sendMsgToPlayer(target, "Imbuing: " + props.getBusoshokuImbuingHakiExp());
+		WyHelper.sendMsgToPlayer(target, "Hardening: " + props.getBusoshokuHardeningHakiExp());
+		WyHelper.sendMsgToPlayer(target, "Observation: " + props.getKenbunshokuHakiExp());
+		WyHelper.sendMsgToPlayer(target, "Total: " + HakiHelper.getTotalHakiExp(target));
+
+		return 1;
+	}
+	
 	private static int openJollyRogerCreator(CommandContext<CommandSource> context, ServerPlayerEntity target)
 	{
 		IEntityStats props = EntityStatsCapability.get(target);
