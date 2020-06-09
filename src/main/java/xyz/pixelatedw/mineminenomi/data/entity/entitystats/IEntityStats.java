@@ -66,4 +66,7 @@ public interface IEntityStats
 	
 	boolean isInCrew();
 	void setInCrew(boolean value);
+	
+	double getDamageMultiplier();
+	void setDamageMultiplier(double multiplier);
 }

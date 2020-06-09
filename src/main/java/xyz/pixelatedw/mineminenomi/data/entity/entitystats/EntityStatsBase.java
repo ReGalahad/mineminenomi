@@ -10,6 +10,7 @@ public class EntityStatsBase implements IEntityStats
 	private long bounty;
 	private String faction = "", race = "", fightingStyle = "";
 	private boolean hasShadow = true, hasHeart = true, inCombatMode = false, isInCrew = false;
+	private double damageMultiplier = 1;
 	
 	@Override
 	public int getDoriki()
@@ -380,5 +381,17 @@ public class EntityStatsBase implements IEntityStats
 	public void setInCrew(boolean value)
 	{
 		this.isInCrew = value;
+	}
+
+	@Override
+	public double getDamageMultiplier()
+	{
+		return this.damageMultiplier;
+	}
+
+	@Override
+	public void setDamageMultiplier(double multiplier)
+	{
+		this.damageMultiplier = multiplier;
 	}
 }

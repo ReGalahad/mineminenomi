@@ -44,7 +44,7 @@ public class GoroPassiveEvents {
             return;
 
         ShinzoMassageAbility ability = AbilityProps.getUnlockedAbility(ShinzoMassageAbility.INSTANCE);
-        System.out.println(ability.getCooldown());
+
         if (!ability.isOnCooldown()) {
             if (entity.getHealth() - event.getAmount() <= 0) {
                 event.setCanceled(true);

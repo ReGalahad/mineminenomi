@@ -26,10 +26,11 @@ public class EntityStatsCapability
 				props.putInt("doriki", instance.getDoriki());
 				props.putInt("belly", instance.getBelly());
 				props.putInt("extol", instance.getExtol());
-				props.putLong("bounty", instance.getBounty());
 				props.putInt("cola", instance.getCola());
 				props.putInt("maxCola", instance.getMaxCola());
 				props.putInt("ultraCola", instance.getUltraCola());
+				props.putDouble("damageMultiplier", instance.getDamageMultiplier());
+				props.putLong("bounty", instance.getBounty());
 				props.putString("faction", instance.getFaction());
 				props.putString("race", instance.getRace());
 				props.putString("fightingStyle", instance.getFightingStyle());
@@ -49,10 +50,11 @@ public class EntityStatsCapability
 				instance.setDoriki(props.getInt("doriki"));
 				instance.setBelly(props.getInt("belly"));
 				instance.setExtol(props.getInt("extol"));
-				instance.setBounty(props.getLong("bounty"));
 				instance.setCola(props.getInt("cola"));
 				instance.setMaxCola(props.getInt("maxCola"));
 				instance.setUltraCola(props.getInt("ultraCola"));
+				instance.setDamageMultiplier(props.getDouble("damageMultiplier"));
+				instance.setBounty(props.getLong("bounty"));
 				instance.setFaction(props.getString("faction"));
 				instance.setRace(props.getString("race"));
 				instance.setFightingStyle(props.getString("fightingStyle"));

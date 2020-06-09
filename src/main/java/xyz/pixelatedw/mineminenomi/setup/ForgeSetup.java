@@ -39,6 +39,7 @@ public class ForgeSetup
 		AbilityCommand.register(dispatcher);
 		HakiExpCommand.register(dispatcher);
 		PouchCommand.register(dispatcher);
+		//DamageMultiplierCommand.register(dispatcher);
 		if(APIConfig.BUILD_MODE != BuildMode.FINAL)
 			FGCommand.register(dispatcher);
 	}

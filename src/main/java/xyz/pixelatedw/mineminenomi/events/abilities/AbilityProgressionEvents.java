@@ -31,7 +31,6 @@ import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class AbilityProgressionEvents
 {
-
 	@SubscribeEvent
 	public static void onDorikiGained(DorikiEvent event)
 	{
