@@ -86,7 +86,7 @@ public class SelectHotbarAbilitiesScreen extends Screen
 		{
 			GLX.glBlendFuncSeparate(770, 771, 1, 0);
 			if (this.abilityDataProps.getEquippedAbility(i) != null)
-				RendererHelper.drawAbilityIcon(WyHelper.getResourceName(this.abilityDataProps.getEquippedAbility(i).getName()), (posX - 192 + (i * 50)) / 2, posY - 29, 16, 16);
+				RendererHelper.drawAbilityIcon(WyHelper.getResourceName(this.abilityDataProps.getEquippedAbility(i).getName()), (posX / 2) - 98 + (i * 25), posY - 29, 16, 16);
 		}
 
 		GL11.glDisable(GL11.GL_BLEND);

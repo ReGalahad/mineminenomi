@@ -95,8 +95,11 @@ public class CUseAbilityPacket
 				{
 					abl.use(player);
 
-					WyNetwork.sendToAllTracking(new SSyncDevilFruitPacket(player.getEntityId(), devilFruitProps), player);
-					WyNetwork.sendToAllTracking(new SSyncAbilityDataPacket(player.getEntityId(), abilityDataProps), player);
+					if(abl.isOnStandby())
+					{
+						WyNetwork.sendToAllTracking(new SSyncDevilFruitPacket(player.getEntityId(), devilFruitProps), player);
+						WyNetwork.sendToAllTracking(new SSyncAbilityDataPacket(player.getEntityId(), abilityDataProps), player);
+					}
 				}
 			});
 		}
