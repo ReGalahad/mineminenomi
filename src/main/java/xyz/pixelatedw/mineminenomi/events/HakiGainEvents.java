@@ -206,10 +206,10 @@ public class HakiGainEvents
 		if(statsProps.getDoriki() > 4000 && hakiProps.getBusoshokuImbuingHakiExp() > 40 + WyHelper.randomWithRange(-5, 20))
 			giveHakiAbility(player, BusoshokuHakiImbuingAbility.INSTANCE);
 
-		if(statsProps.getDoriki() > 3000 && hakiProps.getBusoshokuImbuingHakiExp() > 50 + WyHelper.randomWithRange(-2, 25))
+		if(statsProps.getDoriki() > 3000 && hakiProps.getBusoshokuHardeningHakiExp() > 50 + WyHelper.randomWithRange(-2, 25))
 		{
 			giveHakiAbility(player, BusoshokuHakiHardeningAbility.INSTANCE);
-			if(hakiProps.getBusoshokuImbuingHakiExp() > 80 + WyHelper.randomWithRange(0, 20))
+			if(hakiProps.getBusoshokuHardeningHakiExp() > 80 + WyHelper.randomWithRange(0, 20))
 			{
 				giveHakiAbility(player, BusoshokuHakiFullBodyHardeningAbility.INSTANCE);
 			}

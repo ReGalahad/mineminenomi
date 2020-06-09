@@ -13,6 +13,7 @@ import xyz.pixelatedw.mineminenomi.commands.DorikiCommand;
 import xyz.pixelatedw.mineminenomi.commands.ExtolCommand;
 import xyz.pixelatedw.mineminenomi.commands.FGCommand;
 import xyz.pixelatedw.mineminenomi.commands.GetWantedPosterCommand;
+import xyz.pixelatedw.mineminenomi.commands.HakiExpCommand;
 import xyz.pixelatedw.mineminenomi.commands.IssueBountyCommand;
 import xyz.pixelatedw.mineminenomi.commands.RemoveDFCommand;
 import xyz.pixelatedw.wypi.APIConfig;
@@ -35,6 +36,7 @@ public class ForgeSetup
 		GetWantedPosterCommand.register(dispatcher);
 		RemoveDFCommand.register(dispatcher);
 		AbilityCommand.register(dispatcher);
+		HakiExpCommand.register(dispatcher);
 		if(APIConfig.BUILD_MODE != BuildMode.FINAL)
 			FGCommand.register(dispatcher);
 	}
