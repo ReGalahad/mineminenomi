@@ -78,7 +78,7 @@ public class SelectHotbarAbilitiesScreen extends Screen
 			if (this.slotSelected == i)
 				GlStateManager.color4f(0, 0, 1, 1);
 			
-			GuiUtils.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 33, 0, 0, 23, 23, 1);
+			GuiUtils.drawTexturedModalRect((posX / 2) - 102 + (i * 25), posY - 33, 0, 0, 23, 23, 1);
 			GlStateManager.color4f(1, 1, 1, 1);
 		}
 
@@ -157,7 +157,7 @@ public class SelectHotbarAbilitiesScreen extends Screen
 		{
 			GL11.glEnable(GL11.GL_BLEND);
 			final int id = i;
-			NoTextureButton slotButton = new NoTextureButton((posX - 197 + (i * 50)) / 2, posY - 31, 22, 21, "", b ->
+			NoTextureButton slotButton = new NoTextureButton((posX / 2) - 101 + (i * 25), posY - 31, 22, 21, "", b ->
 			{
 				if (this.slotSelected != id)
 					this.slotSelected = id;
