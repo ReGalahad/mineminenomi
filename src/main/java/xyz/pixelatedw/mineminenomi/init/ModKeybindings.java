@@ -14,7 +14,6 @@ import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.packets.client.CCombatModeTriggerPacket;
-import xyz.pixelatedw.mineminenomi.packets.client.CRequestSyncPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CUseAbilityPacket;
 import xyz.pixelatedw.mineminenomi.screens.CharacterCreatorScreen;
 import xyz.pixelatedw.mineminenomi.screens.PlayerStatsScreen;
@@ -81,9 +80,6 @@ public class ModKeybindings
 		
 		if (guiPlayer.isPressed())
 		{
-			byte sync = 0b000100111;
-			WyNetwork.sendToServer(new CRequestSyncPacket(sync));
-			
 			if(!entityStatsProps.hasRace() || !entityStatsProps.hasFaction() || !entityStatsProps.hasFightingStyle())
 				Minecraft.getInstance().displayGuiScreen(new CharacterCreatorScreen());
 			else

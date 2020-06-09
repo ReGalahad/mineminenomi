@@ -24,7 +24,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
-import xyz.pixelatedw.mineminenomi.packets.server.SEntityStatsSyncPacket;
+import xyz.pixelatedw.mineminenomi.packets.server.SSyncEntityStatsPacket;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.network.WyNetwork;
 
@@ -51,7 +51,7 @@ public class HeartItem extends Item
 			{
 				IEntityStats props = EntityStatsCapability.get(player);
 				props.setHeart(true);
-				WyNetwork.sendToServer(new SEntityStatsSyncPacket(player.getEntityId(), props));
+				WyNetwork.sendToServer(new SSyncEntityStatsPacket(player.getEntityId(), props));
 				player.inventory.deleteStack(itemStack);
 			}
 			else

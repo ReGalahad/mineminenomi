@@ -11,21 +11,21 @@ import xyz.pixelatedw.wypi.data.quest.QuestDataCapability;
 import xyz.pixelatedw.wypi.network.WyNetwork;
 import xyz.pixelatedw.wypi.network.packets.server.SSyncQuestDataPacket;
 
-public class CRequestQuestDataSyncPacket
+public class CRequestSyncQuestDataPacket
 {
-	public CRequestQuestDataSyncPacket() {}
+	public CRequestSyncQuestDataPacket() {}
 	
 	public void encode(PacketBuffer buffer)
 	{
 	}
 	
-	public static CRequestQuestDataSyncPacket decode(PacketBuffer buffer)
+	public static CRequestSyncQuestDataPacket decode(PacketBuffer buffer)
 	{
-		CRequestQuestDataSyncPacket msg = new CRequestQuestDataSyncPacket();
+		CRequestSyncQuestDataPacket msg = new CRequestSyncQuestDataPacket();
 		return msg;
 	}
 	
-	public static void handle(CRequestQuestDataSyncPacket message, final Supplier<NetworkEvent.Context> ctx)
+	public static void handle(CRequestSyncQuestDataPacket message, final Supplier<NetworkEvent.Context> ctx)
 	{
 		if(ctx.get().getDirection() == NetworkDirection.PLAY_TO_SERVER)
 		{

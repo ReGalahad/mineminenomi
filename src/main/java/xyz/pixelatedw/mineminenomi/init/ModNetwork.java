@@ -3,20 +3,19 @@ package xyz.pixelatedw.mineminenomi.init;
 import xyz.pixelatedw.mineminenomi.packets.client.CCombatModeTriggerPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CCreateCrewPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CDeleteCCBookPacket;
-import xyz.pixelatedw.mineminenomi.packets.client.CDevilFruitSyncPacket;
-import xyz.pixelatedw.mineminenomi.packets.client.CEntityStatsSyncPacket;
+import xyz.pixelatedw.mineminenomi.packets.client.CSyncDevilFruitPacket;
+import xyz.pixelatedw.mineminenomi.packets.client.CSyncEntityStatsPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CGiveItemStackPacket;
-import xyz.pixelatedw.mineminenomi.packets.client.CJollyRogerSyncPacket;
-import xyz.pixelatedw.mineminenomi.packets.client.CRequestQuestDataSyncPacket;
-import xyz.pixelatedw.mineminenomi.packets.client.CRequestSyncPacket;
+import xyz.pixelatedw.mineminenomi.packets.client.CSyncJollyRogerPacket;
+import xyz.pixelatedw.mineminenomi.packets.client.CRequestSyncQuestDataPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CStopAbilityPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CSyncZoanPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CUpdateTraderOffersPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CUseAbilityPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SDespawnQuestObjectivePacket;
-import xyz.pixelatedw.mineminenomi.packets.server.SEntityStatsSyncPacket;
+import xyz.pixelatedw.mineminenomi.packets.server.SSyncEntityStatsPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SFlySpeedPacket;
-import xyz.pixelatedw.mineminenomi.packets.server.SJollyRogerSyncPacket;
+import xyz.pixelatedw.mineminenomi.packets.server.SSyncJollyRogerPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SOpenCharacterCreatorScreenPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SOpenJollyRogerCreatorScreenPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SOpenNewCrewScreenPacket;
@@ -39,17 +38,16 @@ public class ModNetwork
 		APIDefaults.initPackets();
 
 		// From Client to Server
-		WyNetwork.registerPacket(CRequestSyncPacket.class, CRequestSyncPacket::encode, CRequestSyncPacket::decode, CRequestSyncPacket::handle);
 		WyNetwork.registerPacket(CCombatModeTriggerPacket.class, CCombatModeTriggerPacket::encode, CCombatModeTriggerPacket::decode, CCombatModeTriggerPacket::handle);
 		WyNetwork.registerPacket(CUseAbilityPacket.class, CUseAbilityPacket::encode, CUseAbilityPacket::decode, CUseAbilityPacket::handle);
 		WyNetwork.registerPacket(CDeleteCCBookPacket.class, CDeleteCCBookPacket::encode, CDeleteCCBookPacket::decode, CDeleteCCBookPacket::handle);
-		WyNetwork.registerPacket(CEntityStatsSyncPacket.class, CEntityStatsSyncPacket::encode, CEntityStatsSyncPacket::decode, CEntityStatsSyncPacket::handle);
-		WyNetwork.registerPacket(CDevilFruitSyncPacket.class, CDevilFruitSyncPacket::encode, CDevilFruitSyncPacket::decode, CDevilFruitSyncPacket::handle);
+		WyNetwork.registerPacket(CSyncEntityStatsPacket.class, CSyncEntityStatsPacket::encode, CSyncEntityStatsPacket::decode, CSyncEntityStatsPacket::handle);
+		WyNetwork.registerPacket(CSyncDevilFruitPacket.class, CSyncDevilFruitPacket::encode, CSyncDevilFruitPacket::decode, CSyncDevilFruitPacket::handle);
 		WyNetwork.registerPacket(CSyncAbilityDataPacket.class, CSyncAbilityDataPacket::encode, CSyncAbilityDataPacket::decode, CSyncAbilityDataPacket::handle);
 		WyNetwork.registerPacket(CGiveItemStackPacket.class, CGiveItemStackPacket::encode, CGiveItemStackPacket::decode, CGiveItemStackPacket::handle);
 		WyNetwork.registerPacket(CUpdateTraderOffersPacket.class, CUpdateTraderOffersPacket::encode, CUpdateTraderOffersPacket::decode, CUpdateTraderOffersPacket::handle);
-		WyNetwork.registerPacket(CRequestQuestDataSyncPacket.class, CRequestQuestDataSyncPacket::encode, CRequestQuestDataSyncPacket::decode, CRequestQuestDataSyncPacket::handle);
-		WyNetwork.registerPacket(CJollyRogerSyncPacket.class, CJollyRogerSyncPacket::encode, CJollyRogerSyncPacket::decode, CJollyRogerSyncPacket::handle);
+		WyNetwork.registerPacket(CRequestSyncQuestDataPacket.class, CRequestSyncQuestDataPacket::encode, CRequestSyncQuestDataPacket::decode, CRequestSyncQuestDataPacket::handle);
+		WyNetwork.registerPacket(CSyncJollyRogerPacket.class, CSyncJollyRogerPacket::encode, CSyncJollyRogerPacket::decode, CSyncJollyRogerPacket::handle);
 		WyNetwork.registerPacket(CSyncZoanPacket.class, CSyncZoanPacket::encode, CSyncZoanPacket::decode, CSyncZoanPacket::handle);
 		WyNetwork.registerPacket(CStopAbilityPacket.class, CStopAbilityPacket::encode, CStopAbilityPacket::decode, CStopAbilityPacket::handle);
 		WyNetwork.registerPacket(CCreateCrewPacket.class, CCreateCrewPacket::encode, CCreateCrewPacket::decode, CCreateCrewPacket::handle);
@@ -57,7 +55,7 @@ public class ModNetwork
 		// From Server to Client
 		WyNetwork.registerPacket(SSyncDevilFruitPacket.class, SSyncDevilFruitPacket::encode, SSyncDevilFruitPacket::decode, SSyncDevilFruitPacket::handle);
 		WyNetwork.registerPacket(SSyncAbilityDataPacket.class, SSyncAbilityDataPacket::encode, SSyncAbilityDataPacket::decode, SSyncAbilityDataPacket::handle);
-		WyNetwork.registerPacket(SEntityStatsSyncPacket.class, SEntityStatsSyncPacket::encode, SEntityStatsSyncPacket::decode, SEntityStatsSyncPacket::handle);
+		WyNetwork.registerPacket(SSyncEntityStatsPacket.class, SSyncEntityStatsPacket::encode, SSyncEntityStatsPacket::decode, SSyncEntityStatsPacket::handle);
 		WyNetwork.registerPacket(SFlySpeedPacket.class, SFlySpeedPacket::encode, SFlySpeedPacket::decode, SFlySpeedPacket::handle);
 		WyNetwork.registerPacket(SRecalculateEyeHeightPacket.class, SRecalculateEyeHeightPacket::encode, SRecalculateEyeHeightPacket::decode, SRecalculateEyeHeightPacket::handle);
 		WyNetwork.registerPacket(SViewProtectionPacket.class, SViewProtectionPacket::encode, SViewProtectionPacket::decode, SViewProtectionPacket::handle);
@@ -66,7 +64,7 @@ public class ModNetwork
 		WyNetwork.registerPacket(SDespawnQuestObjectivePacket.class, SDespawnQuestObjectivePacket::encode, SDespawnQuestObjectivePacket::decode, SDespawnQuestObjectivePacket::handle);
 		WyNetwork.registerPacket(SUpdateTraderOffersPacket.class, SUpdateTraderOffersPacket::encode, SUpdateTraderOffersPacket::decode, SUpdateTraderOffersPacket::handle);
 		WyNetwork.registerPacket(SOpenTraderScreenPacket.class, SOpenTraderScreenPacket::encode, SOpenTraderScreenPacket::decode, SOpenTraderScreenPacket::handle);
-		WyNetwork.registerPacket(SJollyRogerSyncPacket.class, SJollyRogerSyncPacket::encode, SJollyRogerSyncPacket::decode, SJollyRogerSyncPacket::handle);
+		WyNetwork.registerPacket(SSyncJollyRogerPacket.class, SSyncJollyRogerPacket::encode, SSyncJollyRogerPacket::decode, SSyncJollyRogerPacket::handle);
 		WyNetwork.registerPacket(SOpenJollyRogerCreatorScreenPacket.class, SOpenJollyRogerCreatorScreenPacket::encode, SOpenJollyRogerCreatorScreenPacket::decode, SOpenJollyRogerCreatorScreenPacket::handle);
 		WyNetwork.registerPacket(SOpenQuestChooseScreenPacket.class, SOpenQuestChooseScreenPacket::encode, SOpenQuestChooseScreenPacket::decode, SOpenQuestChooseScreenPacket::handle);
 		WyNetwork.registerPacket(SOpenNewCrewScreenPacket.class, SOpenNewCrewScreenPacket::encode, SOpenNewCrewScreenPacket::decode, SOpenNewCrewScreenPacket::handle);

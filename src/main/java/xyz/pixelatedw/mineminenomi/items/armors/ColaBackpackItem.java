@@ -19,7 +19,7 @@ import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.init.ModArmors;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
-import xyz.pixelatedw.mineminenomi.packets.server.SEntityStatsSyncPacket;
+import xyz.pixelatedw.mineminenomi.packets.server.SSyncEntityStatsPacket;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.network.WyNetwork;
 
@@ -75,12 +75,12 @@ public class ColaBackpackItem extends ArmorItem
 						if(props.getCola() + 10 <= props.getMaxCola())
 						{
 							props.alterCola(10);
-							WyNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), props), (ServerPlayerEntity) player);
+							WyNetwork.sendTo(new SSyncEntityStatsPacket(player.getEntityId(), props), (ServerPlayerEntity) player);
 						}
 						else
 						{
 							props.setCola(props.getMaxCola());
-							WyNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), props), (ServerPlayerEntity) player);
+							WyNetwork.sendTo(new SSyncEntityStatsPacket(player.getEntityId(), props), (ServerPlayerEntity) player);
 						}
 					}
 				}
@@ -95,7 +95,7 @@ public class ColaBackpackItem extends ArmorItem
 						if (props.getCola() >= props.getMaxCola())
 							props.setCola(props.getMaxCola());
 						
-						WyNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), props), (ServerPlayerEntity) player);
+						WyNetwork.sendTo(new SSyncEntityStatsPacket(player.getEntityId(), props), (ServerPlayerEntity) player);
 					}
 				}
 			}

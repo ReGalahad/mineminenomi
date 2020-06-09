@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
-import xyz.pixelatedw.mineminenomi.packets.server.SEntityStatsSyncPacket;
+import xyz.pixelatedw.mineminenomi.packets.server.SSyncEntityStatsPacket;
 import xyz.pixelatedw.wypi.network.WyNetwork;
 
 public class ColaItem extends Item
@@ -48,7 +48,7 @@ public class ColaItem extends Item
 					props.setCola(props.getMaxCola());
 			}
 
-			WyNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), props), (ServerPlayerEntity) player);
+			WyNetwork.sendTo(new SSyncEntityStatsPacket(player.getEntityId(), props), (ServerPlayerEntity) player);
 			if(!player.isCreative())
 				itemStack.shrink(1);
 		}

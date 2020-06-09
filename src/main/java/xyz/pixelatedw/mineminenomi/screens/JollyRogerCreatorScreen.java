@@ -31,7 +31,7 @@ import xyz.pixelatedw.mineminenomi.data.entity.jollyroger.JollyRogerCapability;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.mineminenomi.init.ModJollyRogers;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
-import xyz.pixelatedw.mineminenomi.packets.client.CJollyRogerSyncPacket;
+import xyz.pixelatedw.mineminenomi.packets.client.CSyncJollyRogerPacket;
 import xyz.pixelatedw.mineminenomi.screens.extra.NoTextureButton;
 import xyz.pixelatedw.mineminenomi.screens.extra.TexturedIconButton;
 import xyz.pixelatedw.wypi.WyHelper;
@@ -656,7 +656,7 @@ public class JollyRogerCreatorScreen extends Screen
 	@Override
 	public void onClose()
 	{
-		WyNetwork.sendToServer(new CJollyRogerSyncPacket(this.props));
+		WyNetwork.sendToServer(new CSyncJollyRogerPacket(this.props));
 		super.onClose();
 	}
 

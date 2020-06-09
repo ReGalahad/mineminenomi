@@ -8,7 +8,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
-import xyz.pixelatedw.mineminenomi.packets.server.SEntityStatsSyncPacket;
+import xyz.pixelatedw.mineminenomi.packets.server.SSyncEntityStatsPacket;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.Ability;
@@ -40,7 +40,7 @@ public class ColaOverdriveAbility extends Ability
 		}
 		
 		props.setCola((int) (props.getCola() - half));
-		WyNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), props), player);
+		WyNetwork.sendTo(new SSyncEntityStatsPacket(player.getEntityId(), props), player);
 		
 		player.setHealth((float) (player.getHealth() + ((props.getCola() / 100) * player.getAttribute(SharedMonsterAttributes.MAX_HEALTH).getBaseValue())));
 		

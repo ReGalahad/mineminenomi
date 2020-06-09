@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
-import xyz.pixelatedw.mineminenomi.packets.server.SEntityStatsSyncPacket;
+import xyz.pixelatedw.mineminenomi.packets.server.SSyncEntityStatsPacket;
 import xyz.pixelatedw.wypi.network.WyNetwork;
 
 public class ShadowItem extends Item
@@ -42,7 +42,7 @@ public class ShadowItem extends Item
 			if (!props.hasShadow())
 			{
 				props.setShadow(true);
-				WyNetwork.sendToAllTracking(new SEntityStatsSyncPacket(entity.getEntityId(), props), entity);
+				WyNetwork.sendToAllTracking(new SSyncEntityStatsPacket(entity.getEntityId(), props), entity);
 			}
 			else
 			{

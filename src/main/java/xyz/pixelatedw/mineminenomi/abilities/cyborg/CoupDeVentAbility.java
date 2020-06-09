@@ -6,7 +6,7 @@ import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.cyborg.CoupDeVentProjectile;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
-import xyz.pixelatedw.mineminenomi.packets.server.SEntityStatsSyncPacket;
+import xyz.pixelatedw.mineminenomi.packets.server.SSyncEntityStatsPacket;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.Ability;
@@ -40,7 +40,7 @@ public class CoupDeVentAbility extends Ability
 		proj.shoot(player, player.rotationPitch, player.rotationYaw, 0, 3f, 1);
 				
 		props.alterCola(-30);
-		WyNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), props), player);
+		WyNetwork.sendTo(new SSyncEntityStatsPacket(player.getEntityId(), props), player);
 		
 		return true;
 	}

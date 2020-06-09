@@ -16,7 +16,7 @@ import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
 import xyz.pixelatedw.mineminenomi.packets.client.CDeleteCCBookPacket;
-import xyz.pixelatedw.mineminenomi.packets.client.CEntityStatsSyncPacket;
+import xyz.pixelatedw.mineminenomi.packets.client.CSyncEntityStatsPacket;
 import xyz.pixelatedw.mineminenomi.screens.extra.TexturedIconButton;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.network.WyNetwork;
@@ -281,7 +281,7 @@ public class CharacterCreatorScreen extends Screen
 		if(!WyHelper.isNullOrEmpty(this.props.getRace()) && !WyHelper.isNullOrEmpty(this.props.getFaction()) && !WyHelper.isNullOrEmpty(this.props.getFightingStyle()))
 		{
 			Minecraft.getInstance().displayGuiScreen(null);
-			WyNetwork.sendToServer(new CEntityStatsSyncPacket(this.props));
+			WyNetwork.sendToServer(new CSyncEntityStatsPacket(this.props));
 			WyNetwork.sendToServer(new CDeleteCCBookPacket());
 		}
 	}

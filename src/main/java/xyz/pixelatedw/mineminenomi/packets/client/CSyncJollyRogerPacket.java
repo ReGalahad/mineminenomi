@@ -11,13 +11,13 @@ import net.minecraftforge.fml.network.NetworkEvent;
 import xyz.pixelatedw.mineminenomi.data.entity.jollyroger.IJollyRoger;
 import xyz.pixelatedw.mineminenomi.data.entity.jollyroger.JollyRogerCapability;
 
-public class CJollyRogerSyncPacket
+public class CSyncJollyRogerPacket
 {
 	private INBT data;
 
-	public CJollyRogerSyncPacket() {}
+	public CSyncJollyRogerPacket() {}
 	
-	public CJollyRogerSyncPacket(IJollyRoger props)
+	public CSyncJollyRogerPacket(IJollyRoger props)
 	{
 		this.data = new CompoundNBT();
 		this.data = JollyRogerCapability.INSTANCE.getStorage().writeNBT(JollyRogerCapability.INSTANCE, props, null);
@@ -28,14 +28,14 @@ public class CJollyRogerSyncPacket
 		buffer.writeCompoundTag((CompoundNBT) data);
 	}
 	
-	public static CJollyRogerSyncPacket decode(PacketBuffer buffer)
+	public static CSyncJollyRogerPacket decode(PacketBuffer buffer)
 	{
-		CJollyRogerSyncPacket msg = new CJollyRogerSyncPacket();
+		CSyncJollyRogerPacket msg = new CSyncJollyRogerPacket();
 		msg.data = buffer.readCompoundTag();
 		return msg;
 	}
 
-	public static void handle(CJollyRogerSyncPacket message, final Supplier<NetworkEvent.Context> ctx)
+	public static void handle(CSyncJollyRogerPacket message, final Supplier<NetworkEvent.Context> ctx)
 	{
 		if(ctx.get().getDirection() == NetworkDirection.PLAY_TO_SERVER)
 		{

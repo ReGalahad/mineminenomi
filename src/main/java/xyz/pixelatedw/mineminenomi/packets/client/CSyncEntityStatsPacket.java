@@ -11,13 +11,13 @@ import net.minecraftforge.fml.network.NetworkEvent;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 
-public class CEntityStatsSyncPacket
+public class CSyncEntityStatsPacket
 {
 	private INBT data;
 
-	public CEntityStatsSyncPacket() {}
+	public CSyncEntityStatsPacket() {}
 	
-	public CEntityStatsSyncPacket(IEntityStats props)
+	public CSyncEntityStatsPacket(IEntityStats props)
 	{
 		this.data = new CompoundNBT();
 		this.data = EntityStatsCapability.INSTANCE.getStorage().writeNBT(EntityStatsCapability.INSTANCE, props, null);
@@ -28,14 +28,14 @@ public class CEntityStatsSyncPacket
 		buffer.writeCompoundTag((CompoundNBT) data);
 	}
 	
-	public static CEntityStatsSyncPacket decode(PacketBuffer buffer)
+	public static CSyncEntityStatsPacket decode(PacketBuffer buffer)
 	{
-		CEntityStatsSyncPacket msg = new CEntityStatsSyncPacket();
+		CSyncEntityStatsPacket msg = new CSyncEntityStatsPacket();
 		msg.data = buffer.readCompoundTag();
 		return msg;
 	}
 
-	public static void handle(CEntityStatsSyncPacket message, final Supplier<NetworkEvent.Context> ctx)
+	public static void handle(CSyncEntityStatsPacket message, final Supplier<NetworkEvent.Context> ctx)
 	{
 		if(ctx.get().getDirection() == NetworkDirection.PLAY_TO_SERVER)
 		{

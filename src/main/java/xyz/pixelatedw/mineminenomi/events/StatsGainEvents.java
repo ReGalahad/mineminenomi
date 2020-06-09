@@ -17,7 +17,7 @@ import xyz.pixelatedw.mineminenomi.entities.mobs.marines.GenericMarineEntity;
 import xyz.pixelatedw.mineminenomi.events.custom.BountyEvent;
 import xyz.pixelatedw.mineminenomi.events.custom.DorikiEvent;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
-import xyz.pixelatedw.mineminenomi.packets.server.SEntityStatsSyncPacket;
+import xyz.pixelatedw.mineminenomi.packets.server.SSyncEntityStatsPacket;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.network.WyNetwork;
 
@@ -116,7 +116,7 @@ public class StatsGainEvents
 
 			}
 
-			WyNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), props), (ServerPlayerEntity) player);
+			WyNetwork.sendTo(new SSyncEntityStatsPacket(player.getEntityId(), props), (ServerPlayerEntity) player);
 		}
 	}
 

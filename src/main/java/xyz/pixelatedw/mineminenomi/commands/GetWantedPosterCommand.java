@@ -14,7 +14,7 @@ import xyz.pixelatedw.mineminenomi.api.helpers.ItemsHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
-import xyz.pixelatedw.mineminenomi.packets.server.SEntityStatsSyncPacket;
+import xyz.pixelatedw.mineminenomi.packets.server.SSyncEntityStatsPacket;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.debug.WyDebug;
 import xyz.pixelatedw.wypi.network.WyNetwork;
@@ -48,7 +48,7 @@ public class GetWantedPosterCommand
 		if(WyDebug.isDebug())
 			WyHelper.sendMsgToPlayer(player, TextFormatting.GREEN + "" + TextFormatting.ITALIC + "[DEBUG] A new bounty was issued on your name!");
 		
-		WyNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), entityStatsProps), player);
+		WyNetwork.sendTo(new SSyncEntityStatsPacket(player.getEntityId(), entityStatsProps), player);
 		
 		ItemStack posterStack = ItemStack.EMPTY;//new ItemStack(ModItems.wantedPoster);
 		posterStack.setTag(ItemsHelper.setWantedData(player.world, player.getUniqueID().toString(), worldData.getBounty(player.getUniqueID().toString())));

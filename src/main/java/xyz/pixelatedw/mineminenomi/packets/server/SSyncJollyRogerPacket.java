@@ -4,7 +4,7 @@ import java.util.function.Supplier;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.network.PacketBuffer;
@@ -12,22 +12,22 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
-import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
-import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
+import xyz.pixelatedw.mineminenomi.data.entity.jollyroger.IJollyRoger;
+import xyz.pixelatedw.mineminenomi.data.entity.jollyroger.JollyRogerCapability;
 
-public class SEntityStatsSyncPacket
+public class SSyncJollyRogerPacket
 {
 	private int entityId;
 	private INBT data;
 
-	public SEntityStatsSyncPacket()
+	public SSyncJollyRogerPacket()
 	{
 	}
 
-	public SEntityStatsSyncPacket(int entityId, IEntityStats props)
+	public SSyncJollyRogerPacket(int entityId, IJollyRoger props)
 	{
 		this.data = new CompoundNBT();
-		this.data = EntityStatsCapability.INSTANCE.getStorage().writeNBT(EntityStatsCapability.INSTANCE, props, null);
+		this.data = JollyRogerCapability.INSTANCE.getStorage().writeNBT(JollyRogerCapability.INSTANCE, props, null);
 		this.entityId = entityId;
 	}
 
@@ -37,15 +37,15 @@ public class SEntityStatsSyncPacket
 		buffer.writeCompoundTag((CompoundNBT) this.data);
 	}
 
-	public static SEntityStatsSyncPacket decode(PacketBuffer buffer)
+	public static SSyncJollyRogerPacket decode(PacketBuffer buffer)
 	{
-		SEntityStatsSyncPacket msg = new SEntityStatsSyncPacket();
+		SSyncJollyRogerPacket msg = new SSyncJollyRogerPacket();
 		msg.entityId = buffer.readInt();
 		msg.data = buffer.readCompoundTag();
 		return msg;
 	}
 
-	public static void handle(SEntityStatsSyncPacket message, final Supplier<NetworkEvent.Context> ctx)
+	public static void handle(SSyncJollyRogerPacket message, final Supplier<NetworkEvent.Context> ctx)
 	{
 		if (ctx.get().getDirection() == NetworkDirection.PLAY_TO_CLIENT)
 		{
@@ -60,14 +60,14 @@ public class SEntityStatsSyncPacket
 	public static class ClientHandler
 	{
 		@OnlyIn(Dist.CLIENT)
-		public static void handle(SEntityStatsSyncPacket message)
+		public static void handle(SSyncJollyRogerPacket message)
 		{
 			Entity target = Minecraft.getInstance().world.getEntityByID(message.entityId);
-			if (target == null || !(target instanceof LivingEntity))
+			if (target == null || !(target instanceof PlayerEntity))
 				return;
 
-			IEntityStats props = EntityStatsCapability.get((LivingEntity) target);
-			EntityStatsCapability.INSTANCE.getStorage().readNBT(EntityStatsCapability.INSTANCE, props, null, message.data);
+			IJollyRoger props = JollyRogerCapability.get((PlayerEntity) target);
+			JollyRogerCapability.INSTANCE.getStorage().readNBT(JollyRogerCapability.INSTANCE, props, null, message.data);
 		}
 	}
 

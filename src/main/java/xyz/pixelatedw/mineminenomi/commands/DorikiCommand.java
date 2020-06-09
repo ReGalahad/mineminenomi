@@ -18,7 +18,7 @@ import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.events.custom.DorikiEvent;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
-import xyz.pixelatedw.mineminenomi.packets.server.SEntityStatsSyncPacket;
+import xyz.pixelatedw.mineminenomi.packets.server.SSyncEntityStatsPacket;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.debug.WyDebug;
 import xyz.pixelatedw.wypi.network.WyNetwork;
@@ -95,7 +95,7 @@ public class DorikiCommand
 			if (MinecraftForge.EVENT_BUS.post(e))
 				return 1;
 			
-			WyNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), entityStatsProps), player);
+			WyNetwork.sendTo(new SSyncEntityStatsPacket(player.getEntityId(), entityStatsProps), player);
 		}
 		
 		return 1;
@@ -116,7 +116,7 @@ public class DorikiCommand
 			if (MinecraftForge.EVENT_BUS.post(e))
 				return 1;
 			
-			WyNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), entityStatsProps), player);
+			WyNetwork.sendTo(new SSyncEntityStatsPacket(player.getEntityId(), entityStatsProps), player);
 		}
 		
 		return 1;
@@ -137,7 +137,7 @@ public class DorikiCommand
 			if (MinecraftForge.EVENT_BUS.post(e))
 				return 1;
 			
-			WyNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), entityStatsProps), player);
+			WyNetwork.sendTo(new SSyncEntityStatsPacket(player.getEntityId(), entityStatsProps), player);
 		}
 		
 		return 1;

@@ -11,13 +11,13 @@ import net.minecraftforge.fml.network.NetworkEvent;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 
-public class CDevilFruitSyncPacket
+public class CSyncDevilFruitPacket
 {
 	private INBT data;
 
-	public CDevilFruitSyncPacket() {}
+	public CSyncDevilFruitPacket() {}
 	
-	public CDevilFruitSyncPacket(IDevilFruit props)
+	public CSyncDevilFruitPacket(IDevilFruit props)
 	{
 		this.data = new CompoundNBT();
 		this.data = DevilFruitCapability.INSTANCE.getStorage().writeNBT(DevilFruitCapability.INSTANCE, props, null);
@@ -28,14 +28,14 @@ public class CDevilFruitSyncPacket
 		buffer.writeCompoundTag((CompoundNBT) data);
 	}
 	
-	public static CDevilFruitSyncPacket decode(PacketBuffer buffer)
+	public static CSyncDevilFruitPacket decode(PacketBuffer buffer)
 	{
-		CDevilFruitSyncPacket msg = new CDevilFruitSyncPacket();
+		CSyncDevilFruitPacket msg = new CSyncDevilFruitPacket();
 		msg.data = buffer.readCompoundTag();
 		return msg;
 	}
 
-	public static void handle(CDevilFruitSyncPacket message, final Supplier<NetworkEvent.Context> ctx)
+	public static void handle(CSyncDevilFruitPacket message, final Supplier<NetworkEvent.Context> ctx)
 	{
 		if(ctx.get().getDirection() == NetworkDirection.PLAY_TO_SERVER)
 		{

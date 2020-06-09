@@ -22,7 +22,7 @@ import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
-import xyz.pixelatedw.mineminenomi.packets.client.CEntityStatsSyncPacket;
+import xyz.pixelatedw.mineminenomi.packets.client.CSyncEntityStatsPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CGiveItemStackPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CUpdateTraderOffersPacket;
 import xyz.pixelatedw.mineminenomi.screens.extra.FlickeringString;
@@ -246,7 +246,7 @@ public class TraderScreen extends Screen
 		
 		// Reduce belly from the user
 		this.props.alterBelly(-totalPrice);
-		WyNetwork.sendToServer(new CEntityStatsSyncPacket(this.props));
+		WyNetwork.sendToServer(new CSyncEntityStatsPacket(this.props));
 		
 		this.setSelectedStack(null);
 	}

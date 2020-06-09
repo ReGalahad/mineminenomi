@@ -6,7 +6,7 @@ import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.cyborg.FreshFireProjectile;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
-import xyz.pixelatedw.mineminenomi.packets.server.SEntityStatsSyncPacket;
+import xyz.pixelatedw.mineminenomi.packets.server.SSyncEntityStatsPacket;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.Ability;
@@ -42,7 +42,7 @@ public class FreshFireAbility extends RepeaterAbility
 		proj.shoot(player, player.rotationPitch, player.rotationYaw, 0, 2f, 10);
 			
 		props.alterCola(-1);
-		WyNetwork.sendTo(new SEntityStatsSyncPacket(player.getEntityId(), props), player);
+		WyNetwork.sendTo(new SSyncEntityStatsPacket(player.getEntityId(), props), player);
 		
 		return true;
 	}

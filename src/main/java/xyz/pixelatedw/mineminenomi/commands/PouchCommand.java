@@ -28,7 +28,6 @@ public class PouchCommand
 		builder
 			.then(Commands.literal("ALL")
 				.executes(context -> createBellyPouch(context, ModValues.MAX_GENERAL)));
-	
 		
 		dispatcher.register(builder);
 	}
