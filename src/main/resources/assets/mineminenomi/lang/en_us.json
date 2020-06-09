@@ -277,6 +277,7 @@
 
 	"crew.message.already_in_crew": "You're already in a Crew!",
 	"crew.message.bounty_requirement": "Bounty requirement not met!",
+	"crew.message.new_crew": "A new crew just formed, %s!",
 	"crew.message.new_join": "%s joined your crew.",
 
 	"death.attack.ability_projectile": "%1$s was killed by %2$s",

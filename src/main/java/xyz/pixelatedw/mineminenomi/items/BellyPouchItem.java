@@ -1,11 +1,19 @@
 package xyz.pixelatedw.mineminenomi.items;
 
+import java.util.List;
+
+import javax.annotation.Nullable;
+
+import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
@@ -24,13 +32,25 @@ public class BellyPouchItem extends Item
 	}
 
 	@Override
+	public void inventoryTick(ItemStack itemStack, World world, Entity entity, int par4, boolean par5)
+	{
+		if(!world.isRemote)
+		{
+			if(!itemStack.hasTag())
+			{
+				itemStack.getOrCreateTag().putInt("belly", (int) WyHelper.randomWithRange(5, 100));
+			}
+		}
+	}
+	
+	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand)
     { 
 		IEntityStats props = EntityStatsCapability.get(player);
 		
 		if(!world.isRemote)
 		{
-			int amount = (int) WyHelper.randomWithRange(5, 100);		
+			int amount = player.getHeldItemMainhand().getOrCreateTag().getInt("belly");		
 
 			if(props.getBelly() <= ModValues.MAX_GENERAL - amount)
 			{
@@ -44,5 +64,14 @@ public class BellyPouchItem extends Item
 		}
 				
 		return new ActionResult<>(ActionResultType.SUCCESS, player.getHeldItem(hand));
+	}
+	
+	@Override
+	public void addInformation(ItemStack itemStack, @Nullable World world, List<ITextComponent> list, ITooltipFlag flag)
+	{
+		if(itemStack.hasTag())
+		{
+			list.add(new StringTextComponent("Belly: " + itemStack.getOrCreateTag().getInt("belly")));
+		}
 	}
 }
