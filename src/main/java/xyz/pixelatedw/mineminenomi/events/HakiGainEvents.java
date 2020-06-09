@@ -1,16 +1,10 @@
 package xyz.pixelatedw.mineminenomi.events;
 
-import java.util.List;
-
-import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.play.server.SPlayEntityEffectPacket;
-import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
@@ -34,7 +28,6 @@ import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.data.entity.haki.HakiDataCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.haki.IHakiData;
-import xyz.pixelatedw.mineminenomi.init.ModEffects;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
@@ -111,6 +104,7 @@ public class HakiGainEvents
 			giveHakiAbility(player, KenbunshokuHakiFutureSightAbility.INSTANCE);
 
 		// "Random" burts of Haoshoku Haki if the player has it unlocked (or if exp mode is enabled) and if the player is in danger.
+		/*
 		if(!player.world.isRemote && player.getHealth() < WyHelper.percentage(20, player.getMaxHealth()))
 		{
 			boolean releaseHaki = false;
@@ -147,6 +141,7 @@ public class HakiGainEvents
 				}
 			}
 		}
+		*/
 	}
 
 	@SubscribeEvent

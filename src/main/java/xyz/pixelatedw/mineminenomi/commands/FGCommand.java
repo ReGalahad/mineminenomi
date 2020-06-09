@@ -8,6 +8,7 @@ import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.command.arguments.EntityArgument;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.item.ItemStack;
 import xyz.pixelatedw.mineminenomi.api.helpers.HakiHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
@@ -34,7 +35,22 @@ public class FGCommand
 			.then(Commands.argument("target", EntityArgument.player())
 				.executes(context -> checkHakiStats(context, EntityArgument.getPlayer(context, "target")))));
 		
+		builder
+			.then(Commands.literal("turn_sword_clone")
+			.then(Commands.argument("target", EntityArgument.player())
+				.executes(context -> turnSwordInClone(context, EntityArgument.getPlayer(context, "target")))));
+		
 		dispatcher.register(builder);
+	}
+
+	private static int turnSwordInClone(CommandContext<CommandSource> context, ServerPlayerEntity player)
+	{
+		ItemStack heldStack = player.getHeldItemMainhand();
+		
+		if(!heldStack.isEmpty())
+			heldStack.getOrCreateTag().putBoolean("isClone", true);
+		
+		return 1;
 	}
 
 	private static int checkHakiStats(CommandContext<CommandSource> context, ServerPlayerEntity target)

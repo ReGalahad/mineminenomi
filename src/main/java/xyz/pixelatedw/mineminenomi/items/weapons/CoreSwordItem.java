@@ -33,8 +33,6 @@ public class CoreSwordItem extends Item
 {
 	private double damage = 1;
 	private double speed = -2.4D;
-	private double multiplier = 1;
-	private boolean canUseSpecial = false;
 	protected boolean isPoisonous = false, isFireAspect = false, isSlownessInducing = false, isStackable = false;
 	protected int poisonTimer = 100, fireAspectTimer = 100, slownessTimer = 100;
 	private boolean isBlunt = false;
@@ -93,15 +91,6 @@ public class CoreSwordItem extends Item
 		this.addPropertyOverride(new ResourceLocation("sheathed"), this.sheathedProperty);
 	}
 
-	public CoreSwordItem(int damage, boolean canUseSpecial)
-	{
-		super(new Properties().group(ModCreativeTabs.WEAPONS).maxStackSize(1).defaultMaxDamage(500));
-		this.damage = damage;
-		this.canUseSpecial = canUseSpecial;
-		this.addPropertyOverride(new ResourceLocation("haki"), this.hakiProperty);
-		this.addPropertyOverride(new ResourceLocation("sheathed"), this.sheathedProperty);
-	}
-
 	@Override
 	public void inventoryTick(ItemStack itemStack, World world, Entity entity, int par4, boolean par5)
 	{
@@ -143,18 +132,23 @@ public class CoreSwordItem extends Item
 	{
 		return 14;
 	}
-	public CoreSwordItem setQuality()
-	{
-		return this;
-	}
 
 	@Override
 	public boolean hitEntity(ItemStack itemStack, LivingEntity target, LivingEntity attacker)
 	{
 		IAbilityData abilityProps = AbilityDataCapability.get(attacker);
 		
-		//if (!props.hasBusoHakiActive())
-		//	itemStack.damageItem(1, attacker);
+		BusoshokuHakiImbuingAbility ability = abilityProps.getEquippedAbility(BusoshokuHakiImbuingAbility.INSTANCE);
+		boolean hasBusoHaki = ability != null && ability.isContinuous();
+		
+		if (!hasBusoHaki)
+		{
+			int damage = itemStack.getOrCreateTag().getBoolean("isClone") ? 3 : 1;
+			itemStack.damageItem(damage, attacker, (entity) ->
+			{
+				entity.sendBreakAnimation(EquipmentSlotType.MAINHAND);
+			});
+		}
 
 		if (this.isPoisonous)
 			target.addPotionEffect(new EffectInstance(Effects.POISON, this.poisonTimer, 0));
@@ -251,14 +245,16 @@ public class CoreSwordItem extends Item
 
 		if(equipmentSlot == EquipmentSlotType.MAINHAND)
 		{
-			double multiplier;
+			double multiplier = 1;
 			if (stack.getTag() != null)
+			{
 				multiplier = stack.getTag().getDouble("multiplier");
-			else
-				multiplier = 1;
+				if(stack.getTag().getBoolean("isClone"))
+					multiplier /= 1.5;
+			}
+			
 			multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", this.damage * multiplier, Operation.ADDITION));
 			multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Speed modifier", speed, Operation.ADDITION));
-
 		}
 		
 		return multimap;
