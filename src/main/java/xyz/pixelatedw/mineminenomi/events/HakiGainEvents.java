@@ -4,6 +4,8 @@ import java.util.List;
 
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -45,9 +47,9 @@ import xyz.pixelatedw.wypi.debug.WyDebug;
 public class HakiGainEvents
 {
 	@SubscribeEvent
-	public void onEntityUpdate(LivingUpdateEvent event)
+	public static void onEntityUpdate(LivingUpdateEvent event)
 	{
-		if (event.getEntityLiving() instanceof PlayerEntity)
+		if (event.getEntityLiving() instanceof PlayerEntity && !event.getEntityLiving().world.isRemote)
 		{
 			PlayerEntity player = (PlayerEntity) event.getEntityLiving();
 			IAbilityData props = AbilityDataCapability.get(player);
@@ -66,7 +68,7 @@ public class HakiGainEvents
 				totalCheck = MathHelper.clamp(totalCheck, 0, totalPossible);
 
 				if (totalExp >= totalCheck)
-					this.giveHakiAbility(player, HaoshokuHakiAbility.INSTANCE);
+					giveHakiAbility(player, HaoshokuHakiAbility.INSTANCE);
 			}
 			
 			if(WyDebug.isDebug() && player.ticksExisted % 200 == 0)
@@ -80,9 +82,9 @@ public class HakiGainEvents
 	}
 	
 	@SubscribeEvent
-	public void onEntityAttack(LivingHurtEvent event)
+	public static void onEntityAttack(LivingHurtEvent event)
 	{
-		if (!(event.getEntityLiving() instanceof PlayerEntity) || !(event.getSource().getTrueSource() instanceof LivingEntity))
+		if (!(event.getEntityLiving() instanceof PlayerEntity) || !(event.getSource().getTrueSource() instanceof LivingEntity) || event.getEntityLiving().world.isRemote)
 			return;
 		
 		PlayerEntity player = (PlayerEntity) event.getEntityLiving();
@@ -103,10 +105,10 @@ public class HakiGainEvents
 		}
 		
 		if(statsProps.getDoriki() > 1500 && hakiProps.getKenbunshokuHakiExp() > 30 + WyHelper.randomWithRange(-5, 20))
-			this.giveHakiAbility(player, KenbunshokuHakiAuraAbility.INSTANCE);
+			giveHakiAbility(player, KenbunshokuHakiAuraAbility.INSTANCE);
 
 		if(statsProps.getDoriki() > 5500 && hakiProps.getKenbunshokuHakiExp() > 60 + WyHelper.randomWithRange(0, 30))
-			this.giveHakiAbility(player, KenbunshokuHakiFutureSightAbility.INSTANCE);
+			giveHakiAbility(player, KenbunshokuHakiFutureSightAbility.INSTANCE);
 
 		// "Random" burts of Haoshoku Haki if the player has it unlocked (or if exp mode is enabled) and if the player is in danger.
 		if(!player.world.isRemote && player.getHealth() < WyHelper.percentage(20, player.getMaxHealth()))
@@ -148,9 +150,9 @@ public class HakiGainEvents
 	}
 
 	@SubscribeEvent
-	public void onEntityDeath(LivingDeathEvent event)
+	public static void onEntityDeath(LivingDeathEvent event)
 	{
-		if (!(event.getSource().getTrueSource() instanceof PlayerEntity))
+		if (!(event.getSource().getTrueSource() instanceof PlayerEntity) || event.getSource().getTrueSource().world.isRemote)
 			return;
 		
 		PlayerEntity player = (PlayerEntity) event.getSource().getTrueSource();
@@ -161,15 +163,23 @@ public class HakiGainEvents
 		
 		float hakiMultiplier = 1;
 		
-		if(heldStack != null)
+		if(!heldStack.isEmpty())
 		{
 			BusoshokuHakiImbuingAbility ability = abilityProps.getEquippedAbility(BusoshokuHakiImbuingAbility.INSTANCE);
 			if((ability != null && ability.isContinuous()) || hakiProps.getBusoshokuImbuingHakiExp() < 60)
 			{
+				IAttributeInstance attrAtk = event.getEntityLiving().getAttributes().getAttributeInstance(SharedMonsterAttributes.ATTACK_DAMAGE);
+				IAttributeInstance attrHP = event.getEntityLiving().getAttributes().getAttributeInstance(SharedMonsterAttributes.MAX_HEALTH);
+
+				double atk = attrAtk.getBaseValue();
+				double hp = attrHP.getBaseValue();
+				
+				float exp = (float) ((atk + hp) / 300);
+
 				if(ItemsHelper.isSword(heldStack))
-					hakiProps.alterBusoshokuImbuingHakiExp(0.1F * hakiMultiplier);
+					hakiProps.alterBusoshokuImbuingHakiExp(exp * hakiMultiplier);
 				else
-					hakiProps.alterBusoshokuImbuingHakiExp(0.01F);
+					hakiProps.alterBusoshokuImbuingHakiExp(exp / 4);
 			}
 		}
 		else
@@ -177,25 +187,33 @@ public class HakiGainEvents
 			BusoshokuHakiHardeningAbility ability = abilityProps.getEquippedAbility(BusoshokuHakiHardeningAbility.INSTANCE);
 			if((ability != null && ability.isContinuous()) || hakiProps.getBusoshokuImbuingHakiExp() < 60)
 			{
-				hakiProps.alterBusoshokuHardeningHakiExp(0.3F * hakiMultiplier);
+				IAttributeInstance attrAtk = event.getEntityLiving().getAttributes().getAttributeInstance(SharedMonsterAttributes.ATTACK_DAMAGE);
+				IAttributeInstance attrHP = event.getEntityLiving().getAttributes().getAttributeInstance(SharedMonsterAttributes.MAX_HEALTH);
+
+				double atk = attrAtk.getBaseValue();
+				double hp = attrHP.getBaseValue();
+				
+				float exp = (float) ((atk + hp) / 200);
+
+				hakiProps.alterBusoshokuHardeningHakiExp(exp * hakiMultiplier);
 			}
 		}
 		
 		if(statsProps.getDoriki() > 4000 && hakiProps.getBusoshokuImbuingHakiExp() > 40 + WyHelper.randomWithRange(-5, 20))
-			this.giveHakiAbility(player, BusoshokuHakiImbuingAbility.INSTANCE);
+			giveHakiAbility(player, BusoshokuHakiImbuingAbility.INSTANCE);
 
 		if(statsProps.getDoriki() > 3000 && hakiProps.getBusoshokuImbuingHakiExp() > 50 + WyHelper.randomWithRange(-2, 25))
 		{
-			this.giveHakiAbility(player, BusoshokuHakiHardeningAbility.INSTANCE);
+			giveHakiAbility(player, BusoshokuHakiHardeningAbility.INSTANCE);
 			if(hakiProps.getBusoshokuImbuingHakiExp() > 80 + WyHelper.randomWithRange(0, 20))
 			{
-				this.giveHakiAbility(player, BusoshokuHakiFullBodyHardeningAbility.INSTANCE);
+				giveHakiAbility(player, BusoshokuHakiFullBodyHardeningAbility.INSTANCE);
 			}
 		}
 	}
 
 	@SubscribeEvent
-	public void onPlayerLoggedIn(EntityJoinWorldEvent event)
+	public static void onPlayerLoggedIn(EntityJoinWorldEvent event)
 	{
 		if (event.getEntity() instanceof PlayerEntity && CommonConfig.instance.getHaoshokuUnlockLogic() == HaoshokuUnlockLogic.RANDOM)
 		{
@@ -204,11 +222,11 @@ public class HakiGainEvents
 
 			// That moment when your entire chance of getting haoshoku haki is based on the time when you bought minecraft. Design 101
 			if (isKing == 0)
-				this.giveHakiAbility(player, HaoshokuHakiAbility.INSTANCE);
+				giveHakiAbility(player, HaoshokuHakiAbility.INSTANCE);
 		}
 	}
 
-	private void giveHakiAbility(PlayerEntity player, Ability ability)
+	private static void giveHakiAbility(PlayerEntity player, Ability ability)
 	{
 		IAbilityData props = AbilityDataCapability.get(player);
 		if (!props.hasUnlockedAbility(ability) && !AbilityHelper.verifyIfAbilityIsBanned(ability))

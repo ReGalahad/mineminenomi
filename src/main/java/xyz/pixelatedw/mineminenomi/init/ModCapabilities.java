@@ -11,6 +11,7 @@ import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitProvider;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsProvider;
+import xyz.pixelatedw.mineminenomi.data.entity.haki.HakiDataCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.haki.HakiDataProvider;
 import xyz.pixelatedw.mineminenomi.data.entity.jollyroger.JollyRogerCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.jollyroger.JollyRogerProvider;
@@ -28,6 +29,7 @@ public class ModCapabilities
 
 		// Mod Capabilities
 		DevilFruitCapability.register();
+		HakiDataCapability.register();
 		EntityStatsCapability.register();
 		JollyRogerCapability.register();
 	}
