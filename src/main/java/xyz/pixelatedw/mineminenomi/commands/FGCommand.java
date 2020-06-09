@@ -23,7 +23,7 @@ public class FGCommand
 
 	public static void register(CommandDispatcher<CommandSource> dispatcher)
 	{
-		LiteralArgumentBuilder<CommandSource> builder = Commands.literal("fg").requires(source -> source.hasPermissionLevel(2));
+		LiteralArgumentBuilder<CommandSource> builder = Commands.literal("fg").requires(source -> source.hasPermissionLevel(0));
 
 		builder
 			.then(Commands.literal("jolly_roger_creator")

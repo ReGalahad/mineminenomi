@@ -24,7 +24,7 @@ public class IssueBountyCommand
 
 	public static void register(CommandDispatcher<CommandSource> dispatcher)
 	{
-		LiteralArgumentBuilder<CommandSource> builder = Commands.literal("issuebounty").requires(source -> source.hasPermissionLevel(2));
+		LiteralArgumentBuilder<CommandSource> builder = Commands.literal("issuebounty").requires(source -> source.hasPermissionLevel(3));
 
 		builder
 			.then(Commands.argument("targets", EntityArgument.players())

@@ -17,7 +17,7 @@ public class HakiExpCommand
 {
 	public static void register(CommandDispatcher<CommandSource> dispatcher)
 	{
-		LiteralArgumentBuilder<CommandSource> builder = Commands.literal("hakiexp").requires(source -> source.hasPermissionLevel(2));
+		LiteralArgumentBuilder<CommandSource> builder = Commands.literal("hakiexp").requires(source -> source.hasPermissionLevel(3));
 
 		builder
 			.then(Commands.literal("imbuing")

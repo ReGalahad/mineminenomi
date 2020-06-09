@@ -1,9 +1,13 @@
 package xyz.pixelatedw.mineminenomi.commands;
 
+import java.util.Collection;
+
+import com.google.common.collect.Lists;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.command.arguments.EntityArgument;
@@ -22,21 +26,22 @@ import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 import xyz.pixelatedw.wypi.network.WyNetwork;
 import xyz.pixelatedw.wypi.network.packets.server.SSyncAbilityDataPacket;
 
-import java.util.Collection;
-
 public class RemoveDFCommand
 {
 
 	public static void register(CommandDispatcher<CommandSource> dispatcher)
 	{
-		LiteralArgumentBuilder<CommandSource> builder = Commands.literal("removedf").requires(source -> source.hasPermissionLevel(2));
+		LiteralArgumentBuilder<CommandSource> builder = Commands.literal("removedf");
 
 		builder
-			.then(Commands.argument("targets", EntityArgument.players()).executes(context ->
-			{
-				return removesDF(context, EntityArgument.getPlayers(context, "targets"));
-			}));
+			.requires(source -> source.hasPermissionLevel(2))
+			.then(Commands.argument("targets", EntityArgument.players())
+				.executes(context -> removesDF(context, EntityArgument.getPlayers(context, "targets"))));
 
+		builder
+			.requires(source -> source.hasPermissionLevel(0))
+				.executes(context -> removesDF(context, Lists.newArrayList(context.getSource().asPlayer())));
+	
 		dispatcher.register(builder);
 	}
 

@@ -19,7 +19,7 @@ public class PouchCommand
 {
 	public static void register(CommandDispatcher<CommandSource> dispatcher)
 	{
-		LiteralArgumentBuilder<CommandSource> builder = Commands.literal("pouch").requires(source -> source.hasPermissionLevel(2));
+		LiteralArgumentBuilder<CommandSource> builder = Commands.literal("pouch").requires(source -> source.hasPermissionLevel(0));
 
 		builder
 			.then(Commands.argument("amount", IntegerArgumentType.integer(1, ModValues.MAX_GENERAL))
