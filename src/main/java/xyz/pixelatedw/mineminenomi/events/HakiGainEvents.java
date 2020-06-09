@@ -171,10 +171,12 @@ public class HakiGainEvents
 				IAttributeInstance attrAtk = event.getEntityLiving().getAttributes().getAttributeInstance(SharedMonsterAttributes.ATTACK_DAMAGE);
 				IAttributeInstance attrHP = event.getEntityLiving().getAttributes().getAttributeInstance(SharedMonsterAttributes.MAX_HEALTH);
 
-				double atk = attrAtk.getBaseValue();
+				double atk = attrAtk != null ? attrAtk.getBaseValue() : 0;
 				double hp = attrHP.getBaseValue();
 				
 				float exp = (float) ((atk + hp) / 300);
+				if(exp <= 0)
+					exp = 0.1F;
 
 				if(ItemsHelper.isSword(heldStack))
 					hakiProps.alterBusoshokuImbuingHakiExp(exp * hakiMultiplier);
@@ -190,11 +192,13 @@ public class HakiGainEvents
 				IAttributeInstance attrAtk = event.getEntityLiving().getAttributes().getAttributeInstance(SharedMonsterAttributes.ATTACK_DAMAGE);
 				IAttributeInstance attrHP = event.getEntityLiving().getAttributes().getAttributeInstance(SharedMonsterAttributes.MAX_HEALTH);
 
-				double atk = attrAtk.getBaseValue();
+				double atk = attrAtk != null ? attrAtk.getBaseValue() : 0;
 				double hp = attrHP.getBaseValue();
 				
 				float exp = (float) ((atk + hp) / 200);
-
+				if(exp <= 0)
+					exp = 0.1F;
+				
 				hakiProps.alterBusoshokuHardeningHakiExp(exp * hakiMultiplier);
 			}
 		}
