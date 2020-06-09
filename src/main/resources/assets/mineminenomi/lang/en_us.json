@@ -275,6 +275,10 @@
 
 	"category.mmnmkeys": "Mine Mine no Mi Keys",
 
+	"crew.message.already_in_crew": "You're already in a Crew!",
+	"crew.message.bounty_requirement": "Bounty requirement not met!",
+	"crew.message.new_join": "%s joined your crew.",
+
 	"death.attack.ability_projectile": "%1$s was killed by %2$s",
 
 	"effect.mineminenomi.ability_off": "Ability Off",
@@ -428,18 +432,27 @@
 
 	"gui.abilities": "Abilities",
 	"gui.accept": "Accept",
+	"gui.background": "Background",
+	"gui.base": "Base",
+	"gui.blue": "Blue",
 	"gui.buy": "Buy",
 	"gui.click_to_skip": "Click to Skip",
 	"gui.cola": "Cola",
 	"gui.decline": "Decline",
+	"gui.detail": "Detail",
 	"gui.doriki": "Doriki",
+	"gui.empty": "Empty",
+	"gui.finish": "Finish",
+	"gui.green": "Green",
 	"gui.name": "Name",
 	"gui.price": "Price",
 	"gui.quests": "Quests",
 	"gui.quests.accept": "Accept this quest ?",
 	"gui.quests.progress": "Progress",
+	"gui.red": "Red",
 
 	"item.message.need_key": "You need a key!",
+	"item.message.pouch_belly_gained": "You've obtained %s belly !",
 	"item.mineminenomi.100t_hammer": "100t Hammer",
 	"item.mineminenomi.10t_hammer": "10t Hammer",
 	"item.mineminenomi.5t_hammer": "5t Hammer",

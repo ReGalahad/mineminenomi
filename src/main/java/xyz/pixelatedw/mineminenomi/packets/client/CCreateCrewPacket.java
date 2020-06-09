@@ -4,11 +4,16 @@ import java.util.function.Supplier;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
 import xyz.pixelatedw.mineminenomi.api.crew.Crew;
+import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
+import xyz.pixelatedw.mineminenomi.init.ModI18n;
+import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.debug.WyDebug;
 
 public class CCreateCrewPacket
@@ -55,6 +60,15 @@ public class CCreateCrewPacket
 				crew.setName(message.name);
 				EntityStatsCapability.get(player).setInCrew(true);
 				crew.create(player.world);
+
+				if(CommonConfig.instance.isCrewWorldMessageEnabled())
+				{
+					TranslationTextComponent newCrewMsg = new TranslationTextComponent(ModI18n.CREW_MESSAGE_NEW_CREW, message.name);
+					for (PlayerEntity target : player.world.getPlayers())
+					{
+						WyHelper.sendMsgToPlayer(target, TextFormatting.GOLD + newCrewMsg.getFormattedText());
+					}
+				}
 			});			
 		}
 		ctx.get().setPacketHandled(true);

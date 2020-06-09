@@ -226,10 +226,7 @@ public class CommonConfig
 		this.timeBetweenPackageDrops = builder.comment("Time it takes for another package to drop; 18000 (15 minutes) by default").defineInRange("Time Between Package Drops", 18000, 0, Integer.MAX_VALUE);
 		
 		builder.pop();
-		
-		builder.push("Permissions");
-		builder.pop();
-		
+
 		builder.push("System");	
 		
 		this.telemetry = builder.comment("Allows the game to send data to our server for statistics, no personal information is sent only minor things like which fruit the player ate, what ability was used, which mobs killed etc; true by default").define("Telemtry", true);
