@@ -28,10 +28,10 @@ public class ModFeatures
 	{
 		for (Biome biome : ForgeRegistries.BIOMES)
 		{
-			SmallShipStructure.register(biome);
-			LargeShipStructure.register(biome);
+			//SmallShipStructure.register(biome);
+			//LargeShipStructure.register(biome);
 				
-			//DojoStructure.register(biome);
+			DojoStructure.register(biome);
 			
 			KairosekiOreFeature.register(biome);
 		}

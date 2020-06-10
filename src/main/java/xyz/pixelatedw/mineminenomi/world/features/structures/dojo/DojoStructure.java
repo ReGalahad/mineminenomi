@@ -2,7 +2,7 @@ package xyz.pixelatedw.mineminenomi.world.features.structures.dojo;
 
 import java.util.Random;
 
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.biome.Biome;
@@ -46,7 +46,7 @@ public class DojoStructure extends Structure<NoFeatureConfig>
 		Biome biome = generator.getBiomeProvider().getBiome(new BlockPos((chunkPosX << 4) + 9, 0, (chunkPosZ << 4) + 9));
 		if (generator.hasStructure(biome, this))
 			return WyHelper.randomWithRange(0, 100) < 1;
-		
+
 		return false;
 	}
 
@@ -58,7 +58,7 @@ public class DojoStructure extends Structure<NoFeatureConfig>
 
 	public static void register(Biome biome)
 	{
-		if(biome.getCategory() == Category.PLAINS || biome.getCategory() == Category.DESERT)
+		if (biome.getCategory() == Category.PLAINS || biome.getCategory() == Category.DESERT)
 		{
 			biome.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, Biome.createDecoratedFeature(ModFeatures.DOJO, IFeatureConfig.NO_FEATURE_CONFIG, Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
 			biome.addStructure(ModFeatures.DOJO, IFeatureConfig.NO_FEATURE_CONFIG);
@@ -73,14 +73,13 @@ public class DojoStructure extends Structure<NoFeatureConfig>
 		}
 
 		@Override
-		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biome)
+		public void init(ChunkGenerator<?> generator, TemplateManager templateManager, int chunkX, int chunkZ, Biome biome)
 		{
-			BlockPos blockpos = new BlockPos(chunkX * 16, 90, chunkZ * 16);
-			CompoundNBT nbt = new CompoundNBT();
-			nbt.putInt("TPX", blockpos.getX());
-			nbt.putInt("TPZ", blockpos.getY());
-			nbt.putInt("TPZ", blockpos.getZ());
-			this.components.add(new DojoPiece(templateManagerIn, nbt));			
+			int i = chunkX * 16;
+			int j = chunkZ * 16;
+			BlockPos blockpos = new BlockPos(i, 90, j);
+			Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
+			this.components.add(new DojoPiece(templateManager, blockpos, rotation));
 			this.recalculateStructureSize();
 		}
 	}
