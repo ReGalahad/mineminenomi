@@ -1,12 +1,7 @@
 package xyz.pixelatedw.mineminenomi.init;
 
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.storage.loot.ItemLootEntry;
-import net.minecraft.world.storage.loot.LootEntry;
-import net.minecraft.world.storage.loot.LootPool;
-import net.minecraft.world.storage.loot.LootTables;
-import net.minecraft.world.storage.loot.RandomValueRange;
-import net.minecraft.world.storage.loot.TableLootEntry;
+import net.minecraft.world.storage.loot.*;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -25,25 +20,25 @@ public class ModLootTables {
         }
 
         if (event.getName().equals(LootTables.CHESTS_UNDERWATER_RUIN_BIG) || event.getName().equals(LootTables.CHESTS_UNDERWATER_RUIN_SMALL)) {
-            LootPool fruit_boxes = constructLootPool("fruit_boxes", 1F, 1F,
-					ItemLootEntry.builder(ModItems.TIER_1_BOX).weight(10),
-					ItemLootEntry.builder(ModItems.TIER_2_BOX).weight(2)
+            LootPool fruit_boxes = constructLootPool("fruit_boxes", -7F, 1F,
+					ItemLootEntry.builder(ModItems.TIER_1_BOX).weight(7),
+					ItemLootEntry.builder(ModItems.TIER_2_BOX).weight(1)
             );
 			event.getTable().addPool(fruit_boxes);
         }
 
         if (event.getName().equals(LootTables.CHESTS_BURIED_TREASURE) || event.getName().equals(LootTables.CHESTS_SHIPWRECK_TREASURE)) {
-            LootPool fruit_boxes = constructLootPool("fruit_boxes", 1F, 2F,
-                    ItemLootEntry.builder(ModItems.TIER_2_BOX).weight(10),
-                    ItemLootEntry.builder(ModItems.TIER_3_BOX).weight(3)
+            LootPool fruit_boxes = constructLootPool("fruit_boxes", -2F, 1F,
+                    ItemLootEntry.builder(ModItems.TIER_2_BOX).weight(7),
+                    ItemLootEntry.builder(ModItems.TIER_3_BOX).weight(1)
             );
 			event.getTable().addPool(fruit_boxes);
         }
 
         if (event.getName().equals(LootTables.CHESTS_SHIPWRECK_SUPPLY) && event.getName().equals(LootTables.CHESTS_SHIPWRECK_MAP)) {
-            LootPool fruit_boxes = constructLootPool("fruit_boxes", 1F, 1F,
-                    ItemLootEntry.builder(ModItems.TIER_1_BOX).weight(8),
-                    ItemLootEntry.builder(ModItems.TIER_2_BOX).weight(4)
+            LootPool fruit_boxes = constructLootPool("fruit_boxes", -7F, 1F,
+                    ItemLootEntry.builder(ModItems.TIER_1_BOX).weight(7),
+                    ItemLootEntry.builder(ModItems.TIER_2_BOX).weight(1)
             );
 			event.getTable().addPool(fruit_boxes);
 		}

@@ -1,7 +1,5 @@
 package xyz.pixelatedw.mineminenomi.entities.mobs.pirates;
 
-import javax.annotation.Nullable;
-
 import net.minecraft.entity.ILivingEntityData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.SpawnReason;
@@ -17,6 +15,8 @@ import xyz.pixelatedw.mineminenomi.api.entities.ai.IHakiUser;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.mineminenomi.init.ModWeapons;
 import xyz.pixelatedw.wypi.WyHelper;
+
+import javax.annotation.Nullable;
 
 public class PirateBruteEntity extends GenericPirateEntity implements IBrawler, IHakiUser
 {
@@ -42,7 +42,7 @@ public class PirateBruteEntity extends GenericPirateEntity implements IBrawler, 
 		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.20F);
 		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0D);
 		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40.0D);
-		this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(4.0D);
+		this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(WyHelper.randomWithRange(8, 12));
 		
 		this.setDoriki(15 + WyHelper.randomWithRange(0, 20));
 		this.setBelly(5 + WyHelper.randomWithRange(0, 5));
