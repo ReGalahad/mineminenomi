@@ -147,7 +147,7 @@ public class CommonConfig
 			
 			builder.push("Stats to Keep");
 			{
-				String[] statsToKeepNames = new String[] {"Doriki", "Bounty", "Belly", "Race", "Faction", "Fighting Style", "Devil Fruit"};
+				String[] statsToKeepNames = new String[] {"Doriki", "Bounty", "Belly", "Race", "Faction", "Fighting Style", "Devil Fruit", "Haki Exp"};
 				this.statsToKeep = new HashMap<String, ForgeConfigSpec.BooleanValue>();
 				
 				for(String stat : statsToKeepNames) 
