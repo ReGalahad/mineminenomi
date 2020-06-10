@@ -6,6 +6,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.api.GenericEnchantment;
+import xyz.pixelatedw.wypi.WyRegistry;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModEnchantments {
@@ -13,13 +14,10 @@ public class ModEnchantments {
 	public static final Enchantment DIAL_FLASH = new GenericEnchantment("Flash Dial", Enchantment.Rarity.COMMON, EquipmentSlotType.MAINHAND);
 	public static final Enchantment KAIROSEKI = new GenericEnchantment("Kairoseki", Enchantment.Rarity.COMMON, EquipmentSlotType.MAINHAND);
 
-	@SubscribeEvent
-	public static void registerEnchantments(RegistryEvent.Register<Enchantment> event) {
-		event.getRegistry().registerAll
-				(
-						DIAL_IMPACT, DIAL_FLASH,
-
-						KAIROSEKI
-				);
+	static {
+		WyRegistry.registerEnchantment(DIAL_IMPACT, "Dial Impact");
+		WyRegistry.registerEnchantment(DIAL_FLASH, "Dial Flash");
+		WyRegistry.registerEnchantment(KAIROSEKI, "Kairoseki");
 	}
+
 }

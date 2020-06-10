@@ -11,7 +11,6 @@ public class GenericEnchantment extends Enchantment
     public GenericEnchantment(String name, Enchantment.Rarity rarityIn, EquipmentSlotType... slots)
     {
         super(rarityIn, EnchantmentType.WEAPON, slots);
-        this.setRegistryName(APIConfig.PROJECT_ID, WyHelper.getResourceName(name));
     }
     
     @Override
