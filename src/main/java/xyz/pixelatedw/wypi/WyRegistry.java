@@ -5,6 +5,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 import net.minecraft.block.Block;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -72,6 +73,7 @@ public class WyRegistry
 	public static final DeferredRegister<ContainerType<?>> CONTAINER_TYPES = new DeferredRegister<>(ForgeRegistries.CONTAINERS, APIConfig.PROJECT_ID);
 	public static final DeferredRegister<Ability> ABILITIES = new DeferredRegister<>(APIRegistries.ABILITIES, APIConfig.PROJECT_ID);
 	public static final DeferredRegister<Effect> EFFECTS = new DeferredRegister<>(ForgeRegistries.POTIONS, APIConfig.PROJECT_ID);
+	public static final DeferredRegister<Enchantment> ENCHANTMENTS = new DeferredRegister<>(ForgeRegistries.ENCHANTMENTS, APIConfig.PROJECT_ID);
 	public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = new DeferredRegister<>(ForgeRegistries.ENTITIES, APIConfig.PROJECT_ID);
 	public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES = new DeferredRegister<>(ForgeRegistries.TILE_ENTITIES, APIConfig.PROJECT_ID);
 	public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES = new DeferredRegister<>(ForgeRegistries.PARTICLE_TYPES, APIConfig.PROJECT_ID);
@@ -107,6 +109,16 @@ public class WyRegistry
 		EFFECTS.register(resourceName, () -> effect);
 
 		return effect;
+	}
+
+	public static Enchantment registerEnchantment(Enchantment enchantment, String localizedName)
+	{
+		String resourceName = WyHelper.getResourceName(localizedName);
+		langMap.put("enchantment." + APIConfig.PROJECT_ID + "." + resourceName, localizedName);
+
+		ENCHANTMENTS.register(resourceName, () -> enchantment);
+
+		return enchantment;
 	}
 
 	public static Quest registerQuest(Quest quest)
