@@ -19,7 +19,7 @@ public class ModAttributes
 	public static final IAttribute FALL_RESISTANCE = (new RangedAttribute(null, APIConfig.PROJECT_ID + ".fallResistance", 0D, -256D, 256D)).setDescription("Fall Resistance");
 	public static final IAttribute JUMP_HEIGHT = (new RangedAttribute(null, APIConfig.PROJECT_ID + ".jumpHeight", 1D, -256D, 256D)).setDescription("Jump Height").setShouldWatch(true);
 	public static final IAttribute REGEN_RATE = (new RangedAttribute(null, APIConfig.PROJECT_ID + ".regenRate", 1D, 0D, 32D)).setDescription("Regen Rate").setShouldWatch(true);
-	public static final IAttribute STEP_HEIGHT = (new RangedAttribute(null, APIConfig.PROJECT_ID + ".stepHeight", 0.4D, 0D, 20D)).setDescription("Step Height").setShouldWatch(true);
+	public static final IAttribute STEP_HEIGHT = (new RangedAttribute(null, APIConfig.PROJECT_ID + ".stepHeight", 0.5D, 0D, 20D)).setDescription("Step Height").setShouldWatch(true);
 
 	@SubscribeEvent
 	public static void onEntityConstruct(EntityEvent.EntityConstructing e)

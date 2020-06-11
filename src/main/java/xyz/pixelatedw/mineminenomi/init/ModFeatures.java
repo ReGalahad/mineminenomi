@@ -9,7 +9,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 import xyz.pixelatedw.mineminenomi.world.features.ores.KairosekiOreFeature;
 import xyz.pixelatedw.mineminenomi.world.features.structures.dojo.DojoPiece;
 import xyz.pixelatedw.mineminenomi.world.features.structures.dojo.DojoStructure;
-import xyz.pixelatedw.mineminenomi.world.features.structures.smallship.SmallShipPieces;
 import xyz.pixelatedw.mineminenomi.world.features.structures.smallship.SmallShipStructure;
 import xyz.pixelatedw.wypi.WyRegistry;
 
@@ -35,10 +34,12 @@ public class ModFeatures
 	
 	public static class Pieces
 	{
+		/*
 		public static final IStructurePieceType SMALL_SHIP_MARINE_MAST = IStructurePieceType.register(SmallShipPieces.Piece::new, "small_ship_marine_mast");
 		public static final IStructurePieceType SMALL_SHIP_MARINE_BACK = IStructurePieceType.register(SmallShipPieces.Piece::new, "small_ship_marine_back");
 		public static final IStructurePieceType SMALL_SHIP_MARINE_MIDDLE = IStructurePieceType.register(SmallShipPieces.Piece::new, "small_ship_marine_middle");
 		public static final IStructurePieceType SMALL_SHIP_MARINE_FRONT = IStructurePieceType.register(SmallShipPieces.Piece::new, "small_ship_marine_front");
+		*/
 		public static final IStructurePieceType DOJO_BODY = IStructurePieceType.register(DojoPiece::new, "dojo_body");
 	}
 	
