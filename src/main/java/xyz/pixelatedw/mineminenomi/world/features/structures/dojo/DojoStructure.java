@@ -17,7 +17,6 @@ import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.minecraft.world.gen.placement.IPlacementConfig;
 import net.minecraft.world.gen.placement.Placement;
 import xyz.pixelatedw.mineminenomi.init.ModFeatures;
-import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
 
 public class DojoStructure extends Structure<NoFeatureConfig>
@@ -25,7 +24,6 @@ public class DojoStructure extends Structure<NoFeatureConfig>
 	public DojoStructure()
 	{
 		super(NoFeatureConfig::deserialize);
-		this.setRegistryName(APIConfig.PROJECT_ID, "dojo");
 	}
 
 	@Override

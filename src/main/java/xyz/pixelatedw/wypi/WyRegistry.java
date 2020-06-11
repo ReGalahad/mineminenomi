@@ -19,6 +19,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.Feature;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -78,6 +79,7 @@ public class WyRegistry
 	public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES = new DeferredRegister<>(ForgeRegistries.TILE_ENTITIES, APIConfig.PROJECT_ID);
 	public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES = new DeferredRegister<>(ForgeRegistries.PARTICLE_TYPES, APIConfig.PROJECT_ID);
 	public static final DeferredRegister<Quest> QUESTS = new DeferredRegister<>(APIRegistries.QUESTS, APIConfig.PROJECT_ID);
+	public static final DeferredRegister<Feature<?>> FEATURES = new DeferredRegister<>(ForgeRegistries.FEATURES, APIConfig.PROJECT_ID);
 
 	/*
 	 * Register Helpers
@@ -101,6 +103,15 @@ public class WyRegistry
 		PARTICLE_TYPES.register(resourceName, () -> type);
 	}
 
+	public static Feature<?> registerFeature(Feature<?> feature, String localizedName)
+	{
+		String resourceName = WyHelper.getResourceName(localizedName);
+
+		FEATURES.register(resourceName, () -> feature);
+
+		return feature;
+	}
+	
 	public static Effect registerEffect(Effect effect, String localizedName)
 	{
 		String resourceName = WyHelper.getResourceName(localizedName);

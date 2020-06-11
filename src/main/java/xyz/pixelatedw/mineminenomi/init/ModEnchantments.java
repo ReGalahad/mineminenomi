@@ -2,8 +2,6 @@ package xyz.pixelatedw.mineminenomi.init;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.api.GenericEnchantment;
 import xyz.pixelatedw.wypi.WyRegistry;

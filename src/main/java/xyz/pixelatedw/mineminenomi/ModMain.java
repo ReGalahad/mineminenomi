@@ -35,6 +35,7 @@ public class ModMain
 		WyRegistry.PARTICLE_TYPES.register(modEventBus);
 		WyRegistry.QUESTS.register(modEventBus);
 		WyRegistry.CONTAINER_TYPES.register(modEventBus);
+		WyRegistry.FEATURES.register(modEventBus);
 		ModJollyRogers.JOLLY_ROGER_ELEMENTS.register(modEventBus);
 		
 		CommonConfig.init();
