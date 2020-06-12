@@ -4,6 +4,7 @@ import java.util.Random;
 
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.biome.Biome;
@@ -38,27 +39,36 @@ public class MarineSmallShipStructure extends ScatteredStructure<NoFeatureConfig
 	@Override
 	protected int getSeedModifier()
 	{
-		return 14357611;
+		return 14357621;
 	}
 
 	@Override
 	public int getSize()
 	{
-		return 3;
+		return 2;
 	}
-	
+
+	// Keep in mind Feature Distance - Feature Separation MUST BE > 0, otherwise the game will crash!
+	@Override
+	protected int getBiomeFeatureDistance(ChunkGenerator<?> chunkGenerator)
+	{
+		return 9;
+	}
+
 	@Override
 	protected int getBiomeFeatureSeparation(ChunkGenerator<?> chunkGenerator)
 	{
-		return 5;
+		return 8;
 	}
-	
+
 	@Override
 	public boolean hasStartAt(ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ)
 	{
-		Biome biome = chunkGen.getBiomeProvider().getBiome(new BlockPos((chunkPosX << 4) + 9, 0, (chunkPosZ << 4) + 9));
-		if (chunkGen.hasStructure(biome, this))
-			return MathHelper.clamp(WyHelper.randomWithRange(0, 100) + WyHelper.randomDouble(), 0, 100) < CommonConfig.instance.getSmallShipSpawnChance();
+		ChunkPos chunkPos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
+		if (chunkPosX == chunkPos.x && chunkPosZ == chunkPos.z && WyHelper.isSurfaceFlat(chunkGen, chunkPosX, chunkPosZ) && MathHelper.clamp(WyHelper.randomWithRange(0, 100) + WyHelper.randomDouble(), 0, 100) < CommonConfig.instance.getChanceForSmallShipSpawn())
+		{
+			return chunkGen.getBiomeProvider().getBiomesInSquare((chunkPosX << 4) + 9, (chunkPosZ << 4) + 9, this.getSize() * 16).stream().allMatch(biome -> chunkGen.hasStructure(biome, this));
+		}
 
 		return false;
 	}
@@ -71,9 +81,9 @@ public class MarineSmallShipStructure extends ScatteredStructure<NoFeatureConfig
 
 	public static void register(Biome biome)
 	{
-		if(!CommonConfig.instance.canSpawnSmallShips())
+		if (!CommonConfig.instance.canSpawnSmallShips())
 			return;
-		
+
 		if (biome.getCategory() == Category.OCEAN)
 		{
 			biome.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, Biome.createDecoratedFeature(ModFeatures.MARINE_SMALL_SHIP, IFeatureConfig.NO_FEATURE_CONFIG, Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
@@ -90,10 +100,10 @@ public class MarineSmallShipStructure extends ScatteredStructure<NoFeatureConfig
 
 		@Override
 		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biome)
-		{	
+		{
 			int i = chunkX * 16;
 			int j = chunkZ * 16;
-			BlockPos blockpos = new BlockPos(i, 90, j);
+			BlockPos blockpos = new BlockPos(i, generator.getSeaLevel() - 2, j);
 			Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
 			MarineSmallShipPieces.addComponents(templateManagerIn, blockpos, rotation, this.components);
 			this.recalculateStructureSize();

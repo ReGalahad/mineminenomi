@@ -45,8 +45,8 @@ public class DojoStructure extends ScatteredStructure<NoFeatureConfig>
 	public boolean hasStartAt(ChunkGenerator<?> generator, Random rand, int chunkPosX, int chunkPosZ)
 	{
 		Biome biome = generator.getBiomeProvider().getBiome(new BlockPos((chunkPosX << 4) + 9, 0, (chunkPosZ << 4) + 9));
-		if (generator.hasStructure(biome, this))
-			return MathHelper.clamp(WyHelper.randomWithRange(0, 100) + WyHelper.randomDouble(), 0, 100) < CommonConfig.instance.getDojoSpawnChance();
+		if (generator.hasStructure(biome, this) && WyHelper.isSurfaceFlat(generator, chunkPosX, chunkPosZ))
+			return MathHelper.clamp(WyHelper.randomWithRange(0, 100) + WyHelper.randomDouble(), 0, 100) < CommonConfig.instance.getChanceForDojoSpawn();
 
 		return false;
 	}

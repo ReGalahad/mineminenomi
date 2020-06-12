@@ -171,7 +171,7 @@ public class CommonConfig
 			this.spawnDojos = builder.comment("Allows dojos to spawn in the world; true by default").define("Spawn Dojos", true);
 			this.spawnChanceDojo = builder.comment("Sets the % chance for a dojo to spawn; 0.01 by default, min is 0 and max is 100").defineInRange("Dojo Spawn Chance", 0.01, 0, 100);
 			this.spawnSmallShips = builder.comment("Allows ships to spawn in the world; true by default").define("Spawn Ships", true);
-			this.spawnChanceSmallShip = builder.comment("Sets the % chance for a Small Ship to spawn, min is 0 and max is 100").defineInRange("Small Ships Spawn Chance", 1.5, 0.0, 100);
+			this.spawnChanceSmallShip = builder.comment("Sets the % chance for a Small Ship to spawn, the % is calculated per chunk (16x16), 20% by default, min is 0 and max is 100; ").defineInRange("Small Ships Spawn Chance", 20, 0.0, 100);
 			this.spawnRateLargeShip = builder.comment("Spawn Rate for Large Ships, min is 0 and max is 100").defineInRange("Spawn Rate for Large Ships", 1.0, 0.0, 100.0);
 		}
 		builder.pop();
@@ -233,7 +233,7 @@ public class CommonConfig
 		}
 		builder.pop();
 	}
-	public double getSmallShipSpawnChance()
+	public double getChanceForSmallShipSpawn()
 	{
 		return this.spawnChanceSmallShip.get();
 	}
@@ -243,7 +243,7 @@ public class CommonConfig
 		return this.spawnSmallShips.get();
 	}
 	
-	public double getDojoSpawnChance()
+	public double getChanceForDojoSpawn()
 	{
 		return this.spawnChanceDojo.get();
 	}

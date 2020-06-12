@@ -63,6 +63,8 @@ public class TrainerSpawner
 			
 			BlockPos targetPos = player.getPosition();
 			BlockPos spawnPos = WyHelper.findOnGroundSpawnLocation(world, entityType, targetPos, 20);
+			if(spawnPos == null)
+				return;
 			List<LivingEntity> trainers = WyHelper.<LivingEntity>getEntitiesNear(targetPos, world, 40).stream().filter(entity -> entity instanceof IQuestGiver).collect(Collectors.toList());
 
 			if (spawnPos != null)

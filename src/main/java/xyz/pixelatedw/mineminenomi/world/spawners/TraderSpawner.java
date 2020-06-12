@@ -49,6 +49,8 @@ public class TraderSpawner
 			BlockPos targetPos = player.getPosition();
 			BlockPos spawnPos = WyHelper.findOnGroundSpawnLocation(world, entityType, targetPos, 20);
 			List<TraderEntity> traders = WyHelper.getEntitiesNear(targetPos, world, 40, TraderEntity.class);
+			if(spawnPos == null)
+				return;
 			boolean canSpawnInBiome = Arrays.stream(BIOMES).anyMatch(category -> world.getBiome(spawnPos).getCategory() == category);
 
 			if (spawnPos != null && traders.size() < 3 && canSpawnInBiome)

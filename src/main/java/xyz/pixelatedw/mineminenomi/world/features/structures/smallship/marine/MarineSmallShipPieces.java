@@ -17,7 +17,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.structure.StructurePiece;
 import net.minecraft.world.gen.feature.structure.TemplateStructurePiece;
 import net.minecraft.world.gen.feature.template.BlockIgnoreStructureProcessor;
@@ -85,7 +84,7 @@ public class MarineSmallShipPieces
 			Template template = templateManager.getTemplateDefaulted(this.resourceLocation);
 			PlacementSettings placementsettings = (new PlacementSettings()).setRotation(this.rotation).setMirror(Mirror.NONE).setCenterOffset(MarineSmallShipPieces.CENTER_OFFSET.get(this.resourceLocation)).addProcessor(BlockIgnoreStructureProcessor.AIR_AND_STRUCTURE_BLOCK);
 			this.setup(template, this.templatePosition, placementsettings);
-
+			
 			WyDebug.debug("Marine Small Ship spawned at: /tp " + this.templatePosition.getX() + " ~ " + this.templatePosition.getZ());
 		}
 
@@ -156,18 +155,12 @@ public class MarineSmallShipPieces
 		}
 
 		@Override
-		public boolean addComponentParts(IWorld world, Random randomIn, MutableBoundingBox structureBoundingBoxIn, ChunkPos chunkPosIn)
+		public boolean addComponentParts(IWorld world, Random random, MutableBoundingBox bb, ChunkPos chunkPos)
 		{
 			PlacementSettings placementsettings = (new PlacementSettings()).setRotation(this.rotation).setMirror(Mirror.NONE).setCenterOffset(MarineSmallShipPieces.CENTER_OFFSET.get(this.resourceLocation)).addProcessor(BlockIgnoreStructureProcessor.STRUCTURE_BLOCK);
-			BlockPos blockpos = MarineSmallShipPieces.POSITION_OFFSET.get(this.resourceLocation);
-			BlockPos blockpos1 = this.templatePosition.add(Template.transformedBlockPos(placementsettings, new BlockPos(blockpos.getX(), blockpos.getY(), blockpos.getZ())));
-			int i = world.getHeight(Heightmap.Type.WORLD_SURFACE_WG, blockpos1.getX(), blockpos1.getZ());
-			BlockPos blockpos2 = this.templatePosition;
-			this.templatePosition = this.templatePosition.add(0, i - 90 - 2, 0);
-			boolean flag = super.addComponentParts(world, randomIn, structureBoundingBoxIn, chunkPosIn);
-
-			this.templatePosition = blockpos2;
-			return flag;
+			BlockPos offset = MarineSmallShipPieces.POSITION_OFFSET.get(this.resourceLocation);
+			this.templatePosition.add(Template.transformedBlockPos(placementsettings, new BlockPos(offset.getX(), offset.getY(), offset.getZ())));
+			return super.addComponentParts(world, random, bb, chunkPos);
 		}
 	}
 }

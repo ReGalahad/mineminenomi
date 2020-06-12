@@ -64,6 +64,7 @@ import net.minecraft.util.math.RayTraceContext;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.template.IntegrityProcessor;
 import net.minecraft.world.gen.feature.template.PlacementSettings;
@@ -175,7 +176,7 @@ public class WyHelper
 	{
 		return String.format("#%02X%02X%02X", red, green, blue);
 	}
-	
+
 	public static Color hexToRGB(String hexColor)
 	{
 		if (hexColor.startsWith("#"))
@@ -197,7 +198,7 @@ public class WyHelper
 	{
 		return new Color(255 - color.getRed(), 255 - color.getGreen(), 255 - color.getBlue());
 	}
-	
+
 	public static float colorTolerance(float tolerance)
 	{
 		return colorTolerance(tolerance, false);
@@ -733,17 +734,10 @@ public class WyHelper
 				world.notifyBlockUpdate(blockpos, blockstate, blockstate, 3);
 			}
 
-			//BlockPos centerOffset = new BlockPos(4, 4, 3);
-			BlockPos centerOffset = new BlockPos(9, 0, 4);
-			PlacementSettings placementsettings = (new PlacementSettings()).setMirror(Mirror.NONE).setRotation(Rotation.NONE).setCenterOffset(centerOffset).setIgnoreEntities(true).setChunk((ChunkPos) null);
+			PlacementSettings placementsettings = (new PlacementSettings()).setMirror(Mirror.NONE).setRotation(Rotation.NONE).setIgnoreEntities(true).setChunk((ChunkPos) null);
 			placementsettings.clearProcessors().addProcessor(new IntegrityProcessor(MathHelper.clamp(1, 0.0F, 1.0F))).setRandom(new Random(Util.milliTime()));
-			pos = pos.add(-4, 8, 0);
-			
+
 			template.addBlocksToWorldChunk(world, pos, placementsettings);
-			
-			BlockPos blockpos3 = pos.add(centerOffset.getX(), centerOffset.getY(), centerOffset.getZ());
-			world.setBlockState(blockpos3, Blocks.COAL_BLOCK.getDefaultState(), 3);
-						
 			return true;
 		}
 		else
@@ -752,4 +746,20 @@ public class WyHelper
 		}
 	}
 
+	public static boolean isSurfaceFlat(ChunkGenerator<?> chunkGen, int chunkPosX, int chunkPosZ)
+	{
+		int offset = 16;
+
+		int xStart = (chunkPosX << 4) + (7 - (offset / 2));
+		int zStart = (chunkPosZ << 4) + (7 - (offset / 2));
+
+		int i1 = chunkGen.func_222531_c(xStart, zStart, Heightmap.Type.WORLD_SURFACE_WG);
+		int j1 = chunkGen.func_222531_c(xStart, zStart + offset, Heightmap.Type.WORLD_SURFACE_WG);
+		int k1 = chunkGen.func_222531_c(xStart + offset, zStart, Heightmap.Type.WORLD_SURFACE_WG);
+		int l1 = chunkGen.func_222531_c(xStart + offset, zStart + offset, Heightmap.Type.WORLD_SURFACE_WG);
+		int minHeight = Math.min(Math.min(i1, j1), Math.min(k1, l1));
+		int maxHeight = Math.max(Math.max(i1, j1), Math.max(k1, l1));
+
+		return Math.abs(maxHeight - minHeight) <= 3;
+	}
 }

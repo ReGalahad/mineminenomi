@@ -57,7 +57,7 @@ public class DojoPiece extends TemplateStructurePiece
 	private void build(TemplateManager templateManager)
 	{
 		Template template = templateManager.getTemplateDefaulted(this.resourceLocation);
-		PlacementSettings placementsettings = (new PlacementSettings()).setRotation(this.rotation).setMirror(Mirror.NONE).addProcessor(BlockIgnoreStructureProcessor.AIR_AND_STRUCTURE_BLOCK);
+		PlacementSettings placementsettings = (new PlacementSettings()).setRotation(this.rotation).setMirror(Mirror.NONE).addProcessor(BlockIgnoreStructureProcessor.STRUCTURE_BLOCK);
 		this.setup(template, this.templatePosition, placementsettings);
 		
 		WyDebug.debug("Dojo spawned at: /tp " + this.templatePosition.getX() + " ~ " + this.templatePosition.getZ());
