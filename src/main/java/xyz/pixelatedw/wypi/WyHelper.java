@@ -733,10 +733,17 @@ public class WyHelper
 				world.notifyBlockUpdate(blockpos, blockstate, blockstate, 3);
 			}
 
-			PlacementSettings placementsettings = (new PlacementSettings()).setMirror(Mirror.NONE).setRotation(Rotation.CLOCKWISE_180).setIgnoreEntities(true).setChunk((ChunkPos) null);
+			//BlockPos centerOffset = new BlockPos(4, 4, 3);
+			BlockPos centerOffset = new BlockPos(9, 0, 4);
+			PlacementSettings placementsettings = (new PlacementSettings()).setMirror(Mirror.NONE).setRotation(Rotation.NONE).setCenterOffset(centerOffset).setIgnoreEntities(true).setChunk((ChunkPos) null);
 			placementsettings.clearProcessors().addProcessor(new IntegrityProcessor(MathHelper.clamp(1, 0.0F, 1.0F))).setRandom(new Random(Util.milliTime()));
-
-			template.addBlocksToWorldChunk(world, blockpos, placementsettings);
+			pos = pos.add(-4, 8, 0);
+			
+			template.addBlocksToWorldChunk(world, pos, placementsettings);
+			
+			BlockPos blockpos3 = pos.add(centerOffset.getX(), centerOffset.getY(), centerOffset.getZ());
+			world.setBlockState(blockpos3, Blocks.COAL_BLOCK.getDefaultState(), 3);
+						
 			return true;
 		}
 		else

@@ -38,11 +38,6 @@ public class ModResources
 	public static final ResourceLocation CHIYU3 = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/chiyu3.png");
 	public static final ResourceLocation CHIYU4 = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/chiyu4.png");
 	public static final ResourceLocation RUST = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/rust.png");
-	public static final ResourceLocation AWA = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/awa.png");
-	public static final ResourceLocation AWA2 = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/awa2.png");
-	public static final ResourceLocation AWA3 = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/awa3.png");
-	public static final ResourceLocation NETSU = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/netsu.png");
-	public static final ResourceLocation NETSU2 = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/netsu2.png");
 	public static final ResourceLocation CIRCLE = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/circle.png");
 
 	// UI

@@ -29,7 +29,7 @@ public class KairosekiOreFeature
 						6
 					),
 					Placement.COUNT_RANGE,
-					new CountRangeConfig(CommonConfig.instance.getkairosekiSpawnCount(), 0, 0, CommonConfig.instance.getKairosekiSpawnHeight())
+					new CountRangeConfig(CommonConfig.instance.getKairosekiSpawnCount(), 0, 0, CommonConfig.instance.getKairosekiSpawnHeight())
 				)
 			);
 		}

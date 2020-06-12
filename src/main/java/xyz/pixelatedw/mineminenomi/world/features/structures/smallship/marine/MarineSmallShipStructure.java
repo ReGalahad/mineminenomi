@@ -1,8 +1,10 @@
-package xyz.pixelatedw.mineminenomi.world.features.structures.smallship;
+package xyz.pixelatedw.mineminenomi.world.features.structures.smallship.marine;
 
 import java.util.Random;
 
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
@@ -18,20 +20,19 @@ import net.minecraft.world.gen.placement.IPlacementConfig;
 import net.minecraft.world.gen.placement.Placement;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.init.ModFeatures;
-import xyz.pixelatedw.wypi.APIConfig;
+import xyz.pixelatedw.wypi.WyHelper;
 
-public class SmallShipStructure extends ScatteredStructure<NoFeatureConfig>
+public class MarineSmallShipStructure extends ScatteredStructure<NoFeatureConfig>
 {
-	public SmallShipStructure()
+	public MarineSmallShipStructure()
 	{
 		super(NoFeatureConfig::deserialize);
-		this.setRegistryName(APIConfig.PROJECT_ID, "small_ship");
 	}
 
 	@Override
 	public String getStructureName()
 	{
-		return "Small_Ship";
+		return "Marine_Small_Ship";
 	}
 
 	@Override
@@ -47,11 +48,17 @@ public class SmallShipStructure extends ScatteredStructure<NoFeatureConfig>
 	}
 	
 	@Override
+	protected int getBiomeFeatureSeparation(ChunkGenerator<?> chunkGenerator)
+	{
+		return 5;
+	}
+	
+	@Override
 	public boolean hasStartAt(ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ)
 	{
 		Biome biome = chunkGen.getBiomeProvider().getBiome(new BlockPos((chunkPosX << 4) + 9, 0, (chunkPosZ << 4) + 9));
 		if (chunkGen.hasStructure(biome, this))
-			return rand.nextDouble() < (CommonConfig.instance.getSmallShipSpawnRate() / 1000.0);
+			return MathHelper.clamp(WyHelper.randomWithRange(0, 100) + WyHelper.randomDouble(), 0, 100) < CommonConfig.instance.getSmallShipSpawnChance();
 
 		return false;
 	}
@@ -59,15 +66,18 @@ public class SmallShipStructure extends ScatteredStructure<NoFeatureConfig>
 	@Override
 	public IStartFactory getStartFactory()
 	{
-		return Start::new;
+		return MarineSmallShipStructure.Start::new;
 	}
 
 	public static void register(Biome biome)
 	{
+		if(!CommonConfig.instance.canSpawnSmallShips())
+			return;
+		
 		if (biome.getCategory() == Category.OCEAN)
 		{
-			biome.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, Biome.createDecoratedFeature(ModFeatures.SMALL_SHIP, IFeatureConfig.NO_FEATURE_CONFIG, Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
-			biome.addStructure(ModFeatures.SMALL_SHIP, IFeatureConfig.NO_FEATURE_CONFIG);
+			biome.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, Biome.createDecoratedFeature(ModFeatures.MARINE_SMALL_SHIP, IFeatureConfig.NO_FEATURE_CONFIG, Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
+			biome.addStructure(ModFeatures.MARINE_SMALL_SHIP, IFeatureConfig.NO_FEATURE_CONFIG);
 		}
 	}
 
@@ -80,12 +90,12 @@ public class SmallShipStructure extends ScatteredStructure<NoFeatureConfig>
 
 		@Override
 		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biome)
-		{
-			NoFeatureConfig config = generator.getStructureConfig(biome, ModFeatures.SMALL_SHIP);
+		{	
 			int i = chunkX * 16;
 			int j = chunkZ * 16;
-			BlockPos pos = new BlockPos(i, 90, j);
-			//this.components.add(new SmallShipPieces.Piece(pos.down(4)));
+			BlockPos blockpos = new BlockPos(i, 90, j);
+			Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
+			MarineSmallShipPieces.addComponents(templateManagerIn, blockpos, rotation, this.components);
 			this.recalculateStructureSize();
 		}
 	}
