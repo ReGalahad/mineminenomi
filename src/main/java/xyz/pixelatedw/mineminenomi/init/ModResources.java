@@ -73,16 +73,6 @@ public class ModResources
 	public static final ResourceLocation BLANK2 = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/blank2.png");
 	public static final ResourceLocation BLANK2_SIMPLE = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/blank2_simple.png");
 
-	// Loot Tables
-	public static final ResourceLocation SMALL_SHIP_COMBAT = new ResourceLocation(APIConfig.PROJECT_ID, "chests/small_ship/combat");
-	public static final ResourceLocation SMALL_SHIP_FOOD = new ResourceLocation(APIConfig.PROJECT_ID, "chests/small_ship/food");
-	
-	public static final ResourceLocation LARGE_SHIP_TREASURE = new ResourceLocation(APIConfig.PROJECT_ID, "chests/large_ship/treasure");
-	public static final ResourceLocation LARGE_SHIP_FOOD = new ResourceLocation(APIConfig.PROJECT_ID, "chests/large_ship/food");
-	public static final ResourceLocation LARGE_SHIP_COMBAT = new ResourceLocation(APIConfig.PROJECT_ID, "chests/large_ship/combat");
-	
-	public static final ResourceLocation TRADER_WEAPONS = new ResourceLocation(APIConfig.PROJECT_ID, "entities/trader/weapons");
-	
 	// Zoan / Morphing
 	public static final ResourceLocation BUSOSHOKU_HAKI_ARM = new ResourceLocation(APIConfig.PROJECT_ID, "textures/models/zoanmorph/buso.png");
 	public static final ResourceLocation HOT_BOILING_SPECIAL_ARM = new ResourceLocation(APIConfig.PROJECT_ID, "textures/models/zoanmorph/hot_boiling_special.png");

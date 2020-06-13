@@ -27,7 +27,7 @@ import xyz.pixelatedw.mineminenomi.blocks.tileentities.CustomSpawnerTileEntity;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.mineminenomi.init.ModFeatures;
-import xyz.pixelatedw.mineminenomi.init.ModResources;
+import xyz.pixelatedw.mineminenomi.init.ModLootTables;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.debug.WyDebug;
 
@@ -98,7 +98,7 @@ public class MarineSmallShipPieces
 				TileEntity tileentity = world.getTileEntity(pos.down());
 				if (tileentity instanceof ChestTileEntity)
 				{
-					((ChestTileEntity) tileentity).setLootTable(ModResources.SMALL_SHIP_COMBAT, rand.nextLong());
+					((ChestTileEntity) tileentity).setLootTable(ModLootTables.SMALL_SHIP_MARINE_COMBAT_CHEST, rand.nextLong());
 				}
 			}
 			if (function.equals("food_chest"))
@@ -107,7 +107,7 @@ public class MarineSmallShipPieces
 				TileEntity tileentity = world.getTileEntity(pos.down());
 				if (tileentity instanceof ChestTileEntity)
 				{
-					((ChestTileEntity) tileentity).setLootTable(ModResources.SMALL_SHIP_FOOD, rand.nextLong());
+					((ChestTileEntity) tileentity).setLootTable(ModLootTables.SMALL_SHIP_FOOD_CHEST, rand.nextLong());
 				}
 			}
 

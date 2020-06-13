@@ -1,0 +1,201 @@
+{
+	"type": "minecraft:chest",
+	"pools": [
+		{
+			"name": "mineminenomi:escape_boat",
+			"rolls": 1.0,
+			"entries": [
+				{
+					"type": "minecraft:item",
+					"name": "minecraft:oak_boat",
+					"weight": 100
+				}
+			]
+		},
+		{
+			"name": "mineminenomi:melee_weapons",
+			"rolls": {
+				"min": 0.0,
+				"max": 2.0,
+				"type": "minecraft:uniform"
+			},
+			"entries": [
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:marine_sword",
+					"weight": 90
+				},
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:marine_sword",
+					"weight": 70
+				},
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:pipe",
+					"weight": 70
+				},
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:mace",
+					"weight": 30
+				}
+			]
+		},
+		{
+			"name": "mineminenomi:range_weapons",
+			"rolls": {
+				"min": 1.0,
+				"max": 3.0,
+				"type": "minecraft:uniform"
+			},
+			"entries": [
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:bullet",
+					"weight": 100,
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"min": 5.0,
+								"max": 10.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:bullet",
+					"weight": 70,
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"min": 3.0,
+								"max": 7.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:kairoseki_bullet",
+					"weight": 50,
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"min": 2.0,
+								"max": 5.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:flintlock",
+					"weight": 70
+				},
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:flintlock",
+					"weight": 10
+				},
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:senriku",
+					"weight": 20
+				}
+			]
+		},
+		{
+			"name": "mineminenomi:riches",
+			"rolls": {
+				"min": 1.0,
+				"max": 2.0,
+				"type": "minecraft:uniform"
+			},
+			"entries": [
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:belly_pouch",
+					"weight": 100,
+					"functions": [
+						{
+							"function": "mineminenomi:set_belly_in_pouch",
+							"belly_range": {
+								"min": 10.0,
+								"max": 50.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:belly_pouch",
+					"weight": 90,
+					"functions": [
+						{
+							"function": "mineminenomi:set_belly_in_pouch",
+							"belly_range": {
+								"min": 20.0,
+								"max": 30.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:belly_pouch",
+					"weight": 90,
+					"functions": [
+						{
+							"function": "mineminenomi:set_belly_in_pouch",
+							"belly_range": {
+								"min": 10.0,
+								"max": 40.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:belly_pouch",
+					"weight": 30,
+					"functions": [
+						{
+							"function": "mineminenomi:set_belly_in_pouch",
+							"belly_range": {
+								"min": 50.0,
+								"max": 100.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:wanted_poster_package",
+					"weight": 25
+				},
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:wooden_box",
+					"weight": 10
+				},
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:iron_box",
+					"weight": 5
+				}
+			]
+		}
+	]
+}

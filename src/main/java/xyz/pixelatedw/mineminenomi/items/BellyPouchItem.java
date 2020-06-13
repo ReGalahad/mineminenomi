@@ -21,7 +21,9 @@ import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
+import xyz.pixelatedw.mineminenomi.packets.server.SSyncEntityStatsPacket;
 import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.network.WyNetwork;
 
 public class BellyPouchItem extends Item
 {
@@ -60,7 +62,8 @@ public class BellyPouchItem extends Item
 			}
 			else
 				props.setBelly(ModValues.MAX_GENERAL);	
-
+			
+			WyNetwork.sendTo(new SSyncEntityStatsPacket(player.getEntityId(), props), player);
 		}
 				
 		return new ActionResult<>(ActionResultType.SUCCESS, player.getHeldItem(hand));

@@ -9,7 +9,7 @@ import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
-import xyz.pixelatedw.mineminenomi.init.ModResources;
+import xyz.pixelatedw.mineminenomi.init.ModLootTables;
 
 public class MarineTraderEntity extends TraderEntity
 {
@@ -30,7 +30,7 @@ public class MarineTraderEntity extends TraderEntity
 	@Override
 	public ResourceLocation getTradeTable()
 	{
-		return ModResources.TRADER_WEAPONS;
+		return ModLootTables.TRADER_WEAPONS;
 	}
 
 	@Override
