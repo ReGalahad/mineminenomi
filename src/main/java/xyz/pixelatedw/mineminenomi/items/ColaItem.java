@@ -28,6 +28,7 @@ public class ColaItem extends Item
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand)
 	{
+		//WySchematic.build(WySchematic.load("dojo"), world, player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ(), Blocks.BEDROCK);
 		player.setActiveHand(hand);
 		return new ActionResult<>(ActionResultType.SUCCESS, player.getHeldItem(hand));
 	}

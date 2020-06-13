@@ -1,27 +1,8 @@
 package xyz.pixelatedw.mineminenomi.world.features.structures.smallship;
 
-import java.util.Random;
-
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.LockableLootTileEntity;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Rotation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.MutableBoundingBox;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.Heightmap;
-import net.minecraft.world.gen.feature.structure.StructurePiece;
-import net.minecraft.world.gen.feature.template.TemplateManager;
-import xyz.pixelatedw.mineminenomi.blocks.tileentities.CustomSpawnerTileEntity;
-import xyz.pixelatedw.mineminenomi.init.ModBlocks;
-import xyz.pixelatedw.mineminenomi.init.ModEntities;
-import xyz.pixelatedw.mineminenomi.init.ModFeatures;
-import xyz.pixelatedw.mineminenomi.init.ModResources;
-import xyz.pixelatedw.wypi.debug.WyDebug;
-
 public class SmallShipPieces
 {
+	/*
 	public static class Piece extends StructurePiece
 	{
 		private ResourceLocation resourceLocation;
@@ -91,4 +72,5 @@ public class SmallShipPieces
 			return true;
 		}
 	}
+	*/
 }

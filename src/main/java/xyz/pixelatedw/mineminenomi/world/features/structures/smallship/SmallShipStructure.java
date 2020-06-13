@@ -85,7 +85,7 @@ public class SmallShipStructure extends ScatteredStructure<NoFeatureConfig>
 			int i = chunkX * 16;
 			int j = chunkZ * 16;
 			BlockPos pos = new BlockPos(i, 90, j);
-			this.components.add(new SmallShipPieces.Piece(pos.down(4)));
+			//this.components.add(new SmallShipPieces.Piece(pos.down(4)));
 			this.recalculateStructureSize();
 		}
 	}

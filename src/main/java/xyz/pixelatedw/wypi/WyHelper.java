@@ -729,7 +729,6 @@ public class WyHelper
 			}
 			else
 			{
-				BlockPos blockpos2 = template.getSize();
 				BlockState blockstate = world.getBlockState(blockpos);
 				world.notifyBlockUpdate(blockpos, blockstate, blockstate, 3);
 			}

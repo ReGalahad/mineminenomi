@@ -47,9 +47,9 @@ public class CommonConfig
 	//private DoubleValue devilFruitDropsFromLeaves
 		
 	// Structures
-	private BooleanValue spawnShips;
 	private BooleanValue spawnDojos;
-	private IntValue maxDojoSpawns;
+	private DoubleValue spawnChanceDojo;
+	private BooleanValue spawnShips;
 	private DoubleValue spawnRateSmallShip;
 	private DoubleValue spawnRateLargeShip;
 	
@@ -147,7 +147,7 @@ public class CommonConfig
 			
 			builder.push("Stats to Keep");
 			{
-				String[] statsToKeepNames = new String[] {"Doriki", "Bounty", "Belly", "Race", "Faction", "Fighting Style", "Devil Fruit"};
+				String[] statsToKeepNames = new String[] {"Doriki", "Bounty", "Belly", "Race", "Faction", "Fighting Style", "Devil Fruit", "Haki Exp"};
 				this.statsToKeep = new HashMap<String, ForgeConfigSpec.BooleanValue>();
 				
 				for(String stat : statsToKeepNames) 
@@ -170,11 +170,11 @@ public class CommonConfig
 		
 		builder.push("Structures");
 		
+		this.spawnDojos = builder.comment("Allows dojos to spawn in the world; true by default").define("Spawn Dojos", true);
+		this.spawnChanceDojo = builder.comment("Sets the % chance for a dojo to spawn; 0.01 by default, min is 0 and max is 100").defineInRange("Dojo Spawn Chance", 0.01, 0, 100);		
 		this.spawnShips = builder.comment("Allows ships to spawn in the world; true by default").define("Spawn Ships", true);
 		this.spawnRateSmallShip = builder.comment("Spawn Rate for Small Ships, min is 0 and max is 100").defineInRange("Spawn Rate for Small Ships", 1.5, 0.0, 100.0);
 		this.spawnRateLargeShip = builder.comment("Spawn Rate for Large Ships, min is 0 and max is 100").defineInRange("Spawn Rate for Large Ships", 1.0, 0.0, 100.0);
-		this.spawnDojos = builder.comment("Allows dojos to spawn in the world; true by default").define("Spawn Dojos", true);
-		this.maxDojoSpawns = builder.comment("Sets the maximum number of dojos that can spawn in a world; 5 by default, min is 0 and max is 9999").defineInRange("Max Dojos per World", 5, 0, 9999);	
 		
 		builder.pop();
 		
@@ -236,6 +236,16 @@ public class CommonConfig
 		builder.pop();
 	}
 
+	public double getDojoSpawnChance()
+	{
+		return this.spawnChanceDojo.get();
+	}
+	
+	public boolean canSpawnDojos()
+	{
+		return this.spawnDojos.get();
+	}
+	
 	public boolean isCrewWorldMessageEnabled()
 	{
 		return this.worldMessageOnCrewCreate.get();
@@ -342,12 +352,7 @@ public class CommonConfig
 	{
 		return this.updateMessage.get();
 	}
-	
-	public int getMaxDojoSpawns()
-	{
-		return this.maxDojoSpawns.get();
-	}
-	
+
 	public boolean isQuestProgressionEnabled()
 	{
 		return this.questProgression.get();
