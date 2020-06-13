@@ -20,6 +20,7 @@ public class SoulParadeAbility extends ContinuousAbility
 	public SoulParadeAbility()
 	{
 		super("Soul Parade", AbilityCategory.DEVIL_FRUIT);
+		this.setThreshold(15);
 
 		this.onStartContinuityEvent = this::onStartContinuityEvent;
 		this.duringContinuityEvent = this::duringContinuity;
