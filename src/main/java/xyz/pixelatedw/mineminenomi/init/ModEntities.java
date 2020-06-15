@@ -46,9 +46,9 @@ import xyz.pixelatedw.wypi.WyRegistry;
 public class ModEntities
 {
 	// Entity Classifications
-	private static final EntityClassification MARINES = EntityClassification.create("marines", "marines", 20, false, false);
-	private static final EntityClassification PIRATES = EntityClassification.create("pirates", "pirates", 20, false, false);
-	private static final EntityClassification BANDITS = EntityClassification.create("bandits", "bandits", 20, false, false);
+	private static final EntityClassification MARINES = EntityClassification.create("marines", "marines", 5, false, false);
+	private static final EntityClassification PIRATES = EntityClassification.create("pirates", "pirates", 5, false, false);
+	private static final EntityClassification BANDITS = EntityClassification.create("bandits", "bandits", 5, false, false);
 
 	// Mobs
 	// Marines

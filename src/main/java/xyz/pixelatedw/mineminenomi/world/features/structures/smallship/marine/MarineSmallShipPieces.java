@@ -5,8 +5,10 @@ import java.util.Map;
 import java.util.Random;
 
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Lists;
 
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.EntityType;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ChestTileEntity;
 import net.minecraft.tileentity.TileEntity;
@@ -29,17 +31,25 @@ import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.mineminenomi.init.ModFeatures;
 import xyz.pixelatedw.mineminenomi.init.ModLootTables;
 import xyz.pixelatedw.wypi.APIConfig;
+import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.debug.WyDebug;
 
 public class MarineSmallShipPieces
 {
-	private static final ResourceLocation FRONT = new ResourceLocation(APIConfig.PROJECT_ID, "small_ship/marine/front");
-	private static final ResourceLocation MIDDLE = new ResourceLocation(APIConfig.PROJECT_ID, "small_ship/marine/middle");
-	private static final ResourceLocation BACK = new ResourceLocation(APIConfig.PROJECT_ID, "small_ship/marine/back");
+	private static final ResourceLocation FRONT = new ResourceLocation(APIConfig.PROJECT_ID, "small_ship/front");
+	private static final ResourceLocation MIDDLE = new ResourceLocation(APIConfig.PROJECT_ID, "small_ship/middle");
+	private static final ResourceLocation BACK = new ResourceLocation(APIConfig.PROJECT_ID, "small_ship/back");
 	private static final ResourceLocation MAST = new ResourceLocation(APIConfig.PROJECT_ID, "small_ship/marine/mast");
 	private static final Map<ResourceLocation, BlockPos> CENTER_OFFSET = ImmutableMap.of(FRONT, new BlockPos(4, 4, 21), MIDDLE, new BlockPos(4, 4, 4), BACK, new BlockPos(4, 4, -10), MAST, new BlockPos(9, 0, 5));
 	private static final Map<ResourceLocation, BlockPos> POSITION_OFFSET = ImmutableMap.of(FRONT, new BlockPos(0, 0, -17), MIDDLE, BlockPos.ZERO, BACK, new BlockPos(0, 0, 14), MAST, new BlockPos(-5, 8, -1));
-
+	
+	private static final List<EntityType> GRUNT_TYPES = Lists.newArrayList(ModEntities.MARINE_WITH_SWORD, ModEntities.MARINE_WITH_GUN);
+	
+	private static EntityType chooseGruntType()
+	{
+		return GRUNT_TYPES.get((int) WyHelper.randomWithRange(0, GRUNT_TYPES.size() - 1));
+	}
+	
 	public static void addComponents(TemplateManager templateManager, BlockPos pos, Rotation rot, List<StructurePiece> components)
 	{
 		components.add(new Piece(templateManager, FRONT, pos, rot));
@@ -112,44 +122,34 @@ public class MarineSmallShipPieces
 			}
 
 			// Spawners
-			if (function.equals("grunt_spawn_1"))
-			{
-				world.setBlockState(pos, ModBlocks.CUSTOM_SPAWNER.getDefaultState(), 3);
-				TileEntity spawner = world.getTileEntity(pos);
-				if (spawner instanceof CustomSpawnerTileEntity)
-				{
-					((CustomSpawnerTileEntity) spawner).setSpawnerLimit(4);
-					((CustomSpawnerTileEntity) spawner).setSpawnerMob(ModEntities.MARINE_WITH_GUN);
-				}
-			}
-			if (function.equals("grunt_spawn_2"))
-			{
-				world.setBlockState(pos, ModBlocks.CUSTOM_SPAWNER.getDefaultState(), 3);
-				TileEntity spawner = world.getTileEntity(pos);
-				if (spawner instanceof CustomSpawnerTileEntity)
-				{
-					((CustomSpawnerTileEntity) spawner).setSpawnerLimit(4);
-					((CustomSpawnerTileEntity) spawner).setSpawnerMob(ModEntities.MARINE_WITH_SWORD);
-				}
-			}
-			if (function.equals("grunt_spawn_3"))
+			if (function.equals("grunt_x2_spawn"))
 			{
 				world.setBlockState(pos, ModBlocks.CUSTOM_SPAWNER.getDefaultState(), 3);
 				TileEntity spawner = world.getTileEntity(pos);
 				if (spawner instanceof CustomSpawnerTileEntity)
 				{
 					((CustomSpawnerTileEntity) spawner).setSpawnerLimit(2);
-					((CustomSpawnerTileEntity) spawner).setSpawnerMob(ModEntities.MARINE_WITH_SWORD);
+					((CustomSpawnerTileEntity) spawner).setSpawnerMob(MarineSmallShipPieces.chooseGruntType());
 				}
 			}
-			if (function.equals("grunt_spawn_4"))
+			if (function.equals("grunt_x3_spawn"))
 			{
 				world.setBlockState(pos, ModBlocks.CUSTOM_SPAWNER.getDefaultState(), 3);
 				TileEntity spawner = world.getTileEntity(pos);
 				if (spawner instanceof CustomSpawnerTileEntity)
 				{
 					((CustomSpawnerTileEntity) spawner).setSpawnerLimit(3);
-					((CustomSpawnerTileEntity) spawner).setSpawnerMob(ModEntities.MARINE_WITH_GUN);
+					((CustomSpawnerTileEntity) spawner).setSpawnerMob(MarineSmallShipPieces.chooseGruntType());
+				}
+			}
+			if (function.equals("grunt_x5_spawn"))
+			{
+				world.setBlockState(pos, ModBlocks.CUSTOM_SPAWNER.getDefaultState(), 3);
+				TileEntity spawner = world.getTileEntity(pos);
+				if (spawner instanceof CustomSpawnerTileEntity)
+				{
+					((CustomSpawnerTileEntity) spawner).setSpawnerLimit(5);
+					((CustomSpawnerTileEntity) spawner).setSpawnerMob(MarineSmallShipPieces.chooseGruntType());
 				}
 			}
 		}

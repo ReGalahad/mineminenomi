@@ -1,8 +1,7 @@
-package xyz.pixelatedw.mineminenomi.world.features.structures.dojo;
+package xyz.pixelatedw.mineminenomi.world.features.structures.camp.marine;
 
 import java.util.Random;
 
-import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
@@ -23,74 +22,74 @@ import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.init.ModFeatures;
 import xyz.pixelatedw.wypi.WyHelper;
 
-public class DojoStructure extends ScatteredStructure<NoFeatureConfig>
+public class MarineCampStructure extends ScatteredStructure<NoFeatureConfig>
 {
-	public DojoStructure()
+
+	public MarineCampStructure()
 	{
 		super(NoFeatureConfig::deserialize);
 	}
-
 	@Override
 	public String getStructureName()
 	{
-		return "Dojo";
+		return "Marine_Camp";
+	}
+
+	@Override
+	protected int getSeedModifier()
+	{
+		return 14357621;
 	}
 
 	@Override
 	public int getSize()
 	{
-		return 5;
-	}
-
-	@Override
-	public boolean hasStartAt(ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ)
-	{
-		ChunkPos chunkPos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
-		if (chunkPosX == chunkPos.x && chunkPosZ == chunkPos.z && WyHelper.isSurfaceFlat(chunkGen, chunkPosX, chunkPosZ) && MathHelper.clamp(WyHelper.randomWithRange(0, 100) + WyHelper.randomDouble(), 0, 100) < CommonConfig.instance.getChanceForDojoSpawn())
-		{
-			return chunkGen.getBiomeProvider().getBiomesInSquare((chunkPosX << 4) + 9, (chunkPosZ << 4) + 9, this.getSize() * 16).stream().allMatch(biome -> chunkGen.hasStructure(biome, this));
-		}
-
-		return false;
-	}
-
-	@Override
-	public IStartFactory getStartFactory()
-	{
-		return DojoStructure.Start::new;
+		return 4;
 	}
 
 	// Keep in mind Feature Distance - Feature Separation MUST BE > 0, otherwise the game will crash!
 	@Override
 	protected int getBiomeFeatureDistance(ChunkGenerator<?> chunkGenerator)
 	{
-		return 64;
+		return 10;
 	}
-	
+
 	@Override
 	protected int getBiomeFeatureSeparation(ChunkGenerator<?> chunkGenerator)
 	{
 		return 8;
 	}
-
+	
 	@Override
-	protected int getSeedModifier()
+	public boolean hasStartAt(ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ)
 	{
-		return 14357618;
-	}
+		ChunkPos chunkPos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
+		if (chunkPosX == chunkPos.x && chunkPosZ == chunkPos.z && WyHelper.isSurfaceFlat(chunkGen, chunkPosX, chunkPosZ) && MathHelper.clamp(WyHelper.randomWithRange(0, 100) + WyHelper.randomDouble(), 0, 100) < CommonConfig.instance.getChanceForCampsSpawn())
+		{
+			return chunkGen.getBiomeProvider().getBiomesInSquare((chunkPosX << 4) + 9, (chunkPosZ << 4) + 9, this.getSize() * 16).stream().allMatch(biome -> chunkGen.hasStructure(biome, this));
+		}
 
+		return false;
+	}
+	
+	@Override
+	public IStartFactory getStartFactory()
+	{
+		return MarineCampStructure.Start::new;
+	}
+	
 	public static void register(Biome biome)
 	{
-		if(!CommonConfig.instance.canSpawnDojos())
+		if (!CommonConfig.instance.canSpawnCamps())
 			return;
-		
-		if (biome.getCategory() == Category.PLAINS || biome.getCategory() == Category.DESERT)
+
+		if (biome.getCategory() == Category.PLAINS || biome.getCategory() == Category.DESERT || biome.getCategory() == Category.BEACH || biome.getCategory() == Category.FOREST || biome.getCategory() == Category.MESA)
 		{
-			biome.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, Biome.createDecoratedFeature(ModFeatures.DOJO, IFeatureConfig.NO_FEATURE_CONFIG, Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
-			biome.addStructure(ModFeatures.DOJO, IFeatureConfig.NO_FEATURE_CONFIG);
+			biome.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, Biome.createDecoratedFeature(ModFeatures.MARINE_CAMP, IFeatureConfig.NO_FEATURE_CONFIG, Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
+			biome.addStructure(ModFeatures.MARINE_CAMP, IFeatureConfig.NO_FEATURE_CONFIG);
 		}
 	}
-
+	
 	public static class Start extends StructureStart
 	{
 		public Start(Structure<?> structure, int chunkX, int chunkZ, Biome biome, MutableBoundingBox bb, int i3, long seed)
@@ -99,13 +98,12 @@ public class DojoStructure extends ScatteredStructure<NoFeatureConfig>
 		}
 
 		@Override
-		public void init(ChunkGenerator<?> generator, TemplateManager templateManager, int chunkX, int chunkZ, Biome biome)
+		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biome)
 		{
 			int i = chunkX * 16;
 			int j = chunkZ * 16;
 			BlockPos blockpos = new BlockPos(i, 90, j);
-			Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
-			this.components.add(new DojoPiece(templateManager, blockpos, rotation));
+			MarineCampPieces.addComponents(templateManagerIn, blockpos, new Random(), this.components);
 			this.recalculateStructureSize();
 		}
 	}

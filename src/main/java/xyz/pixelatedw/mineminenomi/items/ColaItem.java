@@ -11,13 +11,12 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
 import xyz.pixelatedw.mineminenomi.packets.server.SSyncEntityStatsPacket;
-import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.network.WyNetwork;
+import xyz.pixelatedw.wypi.schematic.WySchematic;
 
 public class ColaItem extends Item
 {
@@ -30,10 +29,11 @@ public class ColaItem extends Item
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand)
 	{
+		System.out.println(WySchematic.load(("marineCamp")));
 		//WySchematic.build(WySchematic.load("dojo"), world, player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ(), Blocks.BEDROCK);
 		//player.setActiveHand(hand);
-		if(!world.isRemote)
-			WyHelper.loadNBTStructure((ServerWorld) world, "small_ship/marine/mast", player.getPosition());
+		//if(!world.isRemote)
+		//	WyHelper.loadNBTStructure((ServerWorld) world, "small_ship/marine/mast", player.getPosition());
 		return new ActionResult<>(ActionResultType.SUCCESS, player.getHeldItem(hand));
 	}
 	

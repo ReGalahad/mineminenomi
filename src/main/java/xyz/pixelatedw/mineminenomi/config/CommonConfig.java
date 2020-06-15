@@ -51,6 +51,8 @@ public class CommonConfig
 	private DoubleValue spawnChanceDojo;
 	private BooleanValue spawnSmallShips;
 	private DoubleValue spawnChanceSmallShip;
+	private BooleanValue spawnCamps;
+	private DoubleValue spawnChanceCamps;	
 	private DoubleValue spawnRateLargeShip;
 
 	// Quests
@@ -169,9 +171,11 @@ public class CommonConfig
 		builder.push("Structures");
 		{
 			this.spawnDojos = builder.comment("Allows dojos to spawn in the world; true by default").define("Spawn Dojos", true);
-			this.spawnChanceDojo = builder.comment("Sets the % chance for a dojo to spawn; 0.01 by default, min is 0 and max is 100").defineInRange("Dojo Spawn Chance", 0.01, 0, 100);
+			this.spawnChanceDojo = builder.comment("Sets the % chance for a dojo to spawn; 60 by default, min is 0 and max is 100").defineInRange("Dojo Spawn Chance", 60, 0.0, 100);
 			this.spawnSmallShips = builder.comment("Allows ships to spawn in the world; true by default").define("Spawn Ships", true);
 			this.spawnChanceSmallShip = builder.comment("Sets the % chance for a Small Ship to spawn, the % is calculated per chunk (16x16), 20% by default, min is 0 and max is 100; ").defineInRange("Small Ships Spawn Chance", 20, 0.0, 100);
+			this.spawnCamps = builder.comment("Allows camps to spawn in the world; true by default").define("Spawn Camps", true);
+			this.spawnChanceCamps = builder.comment("Sets the % chance for a Camp to spawn, the % is calculated per chunk (16x16), 40% by default, min is 0 and max is 100; ").defineInRange("Camps Spawn Chance", 40, 0.0, 100);
 			this.spawnRateLargeShip = builder.comment("Spawn Rate for Large Ships, min is 0 and max is 100").defineInRange("Spawn Rate for Large Ships", 1.0, 0.0, 100.0);
 		}
 		builder.pop();
@@ -233,6 +237,17 @@ public class CommonConfig
 		}
 		builder.pop();
 	}
+	
+	public double getChanceForCampsSpawn()
+	{
+		return this.spawnChanceCamps.get();
+	}
+
+	public boolean canSpawnCamps()
+	{
+		return this.spawnCamps.get();
+	}
+	
 	public double getChanceForSmallShipSpawn()
 	{
 		return this.spawnChanceSmallShip.get();
