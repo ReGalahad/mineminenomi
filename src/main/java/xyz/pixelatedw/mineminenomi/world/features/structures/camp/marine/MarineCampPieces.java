@@ -8,7 +8,6 @@ import java.util.Random;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 
-import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.nbt.CompoundNBT;
@@ -44,7 +43,7 @@ public class MarineCampPieces
 	private static final ResourceLocation FIRE_PLACE = new ResourceLocation(APIConfig.PROJECT_ID, "camp/fire_place");
 	private static final Map<ResourceLocation, BlockPos> CENTER_OFFSET = ImmutableMap.of(SMALL_TENT, new BlockPos(3, 0, 3), LERGE_TENT, new BlockPos(0, 0, 0), FIRE_PLACE, new BlockPos(0, 0, 0));
 
-	private static final Map<ResourceLocation, BlockState> DEBUG_BLOCKS = ImmutableMap.of(SMALL_TENT, Blocks.EMERALD_BLOCK.getDefaultState(), LERGE_TENT, Blocks.DIAMOND_BLOCK.getDefaultState(), FIRE_PLACE, Blocks.COAL_BLOCK.getDefaultState());
+	//private static final Map<ResourceLocation, BlockState> DEBUG_BLOCKS = ImmutableMap.of(SMALL_TENT, Blocks.EMERALD_BLOCK.getDefaultState(), LERGE_TENT, Blocks.DIAMOND_BLOCK.getDefaultState(), FIRE_PLACE, Blocks.COAL_BLOCK.getDefaultState());
 	
 	private static final List<EntityType> GRUNT_TYPES = Lists.newArrayList(ModEntities.MARINE_WITH_SWORD, ModEntities.MARINE_WITH_GUN);
 	
@@ -151,7 +150,7 @@ public class MarineCampPieces
 				TileEntity tileentity = world.getTileEntity(pos.down());
 				if (tileentity instanceof ChestTileEntity)
 				{
-					((ChestTileEntity) tileentity).setLootTable(ModLootTables.SMALL_SHIP_MARINE_COMBAT_CHEST, rand.nextLong());
+					((ChestTileEntity) tileentity).setLootTable(ModLootTables.CAMP_SMALL_TENT, rand.nextLong());
 				}
 			}
 			if (function.equals("large_tent_chest"))
@@ -160,7 +159,7 @@ public class MarineCampPieces
 				TileEntity tileentity = world.getTileEntity(pos.down());
 				if (tileentity instanceof ChestTileEntity)
 				{
-					((ChestTileEntity) tileentity).setLootTable(ModLootTables.SMALL_SHIP_FOOD_CHEST, rand.nextLong());
+					((ChestTileEntity) tileentity).setLootTable(ModLootTables.CAMP_LARGE_TENT, rand.nextLong());
 				}
 			}
 
@@ -200,8 +199,8 @@ public class MarineCampPieces
 
 			boolean flag = super.addComponentParts(world, random, bb, chunkPos);
 
-			BlockPos debugOffset = this.templatePosition.add(MarineCampPieces.CENTER_OFFSET.get(this.resourceLocation));
-			world.setBlockState(debugOffset, DEBUG_BLOCKS.get(this.resourceLocation), 3);
+			//BlockPos debugOffset = this.templatePosition.add(MarineCampPieces.CENTER_OFFSET.get(this.resourceLocation));
+			//world.setBlockState(debugOffset, DEBUG_BLOCKS.get(this.resourceLocation), 3);
 			
 			this.templatePosition = blockpos2;
 			return flag;		

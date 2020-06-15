@@ -16,9 +16,12 @@ import xyz.pixelatedw.wypi.APIConfig;
 public class ModLootTables
 {
 	// Loot Tables
-	public static final ResourceLocation SMALL_SHIP_MARINE_COMBAT_CHEST = new ResourceLocation(APIConfig.PROJECT_ID, "chests/small_ship/marine_combat");
+	public static final ResourceLocation MARINE_SMALL_SHIP_COMBAT_CHEST = new ResourceLocation(APIConfig.PROJECT_ID, "chests/small_ship/marine_combat");
 	public static final ResourceLocation SMALL_SHIP_FOOD_CHEST = new ResourceLocation(APIConfig.PROJECT_ID, "chests/small_ship/food");
 
+	public static final ResourceLocation CAMP_SMALL_TENT = new ResourceLocation(APIConfig.PROJECT_ID, "chests/camp/small_tent");
+	public static final ResourceLocation CAMP_LARGE_TENT = new ResourceLocation(APIConfig.PROJECT_ID, "chests/camp/large_tent");
+	
 	public static final ResourceLocation LARGE_SHIP_TREASURE_CHEST = new ResourceLocation(APIConfig.PROJECT_ID, "chests/large_ship/treasure");
 	public static final ResourceLocation LARGE_SHIP_FOOD_CHEST = new ResourceLocation(APIConfig.PROJECT_ID, "chests/large_ship/food");
 	public static final ResourceLocation LARGE_SHIP_COMBAT_CHEST = new ResourceLocation(APIConfig.PROJECT_ID, "chests/large_ship/combat");
