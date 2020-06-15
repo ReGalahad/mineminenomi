@@ -31,7 +31,6 @@ public class BusoshokuHakiImbuingAbility extends ContinuousAbility implements IH
 			WyHelper.sendMsgToPlayer(player, new TranslationTextComponent(ModI18n.ABILITY_MESSAGE_ONE_HAKI_TYPE, this.getName()).getFormattedText());
 			return false;
 		}
-		
 		return true;
 	}
 	

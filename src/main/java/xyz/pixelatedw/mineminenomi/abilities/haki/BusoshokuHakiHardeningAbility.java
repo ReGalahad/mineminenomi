@@ -4,7 +4,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.text.TranslationTextComponent;
 import xyz.pixelatedw.mineminenomi.api.abilities.IHakiAbility;
-import xyz.pixelatedw.mineminenomi.api.abilities.OverlayPunchAbility;
 import xyz.pixelatedw.mineminenomi.api.helpers.HakiHelper;
 import xyz.pixelatedw.mineminenomi.api.helpers.HakiHelper.HakiType;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
@@ -15,8 +14,9 @@ import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.IParallelContinuousAbility;
+import xyz.pixelatedw.wypi.abilities.PunchAbility;
 
-public class BusoshokuHakiHardeningAbility extends OverlayPunchAbility implements IHakiAbility, IParallelContinuousAbility
+public class BusoshokuHakiHardeningAbility extends PunchAbility implements IHakiAbility, IParallelContinuousAbility
 {
 	public static final BusoshokuHakiHardeningAbility INSTANCE = new BusoshokuHakiHardeningAbility();
 

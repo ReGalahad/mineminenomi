@@ -23,6 +23,7 @@ import net.minecraftforge.client.event.RenderSpecificHandEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import xyz.pixelatedw.mineminenomi.abilities.haki.BusoshokuHakiImbuingAbility;
 import xyz.pixelatedw.mineminenomi.abilities.sabi.RustTouchAbility;
 import xyz.pixelatedw.mineminenomi.api.helpers.MorphHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
@@ -39,12 +40,12 @@ import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class SabiPassiveEvents
 {
-	public static final List<Item> IRON_ITEMS = Lists.newArrayList(ModWeapons.MARINE_SWORD, ModWeapons.SOUL_SOLID, ModWeapons.SCISSORS, ModWeapons.NIDAI_KITESTU, ModWeapons.SANDAI_KITETSU, ModWeapons.WADO_ICHIMONJI, ModWeapons.KNIFE2, ModWeapons.KNIFE3 , ModWeapons.PIRATE_CUTLASS, ModWeapons.BANDIT_KNIFE, Items.IRON_AXE, Items.IRON_BARS, Items.IRON_BLOCK, Items.IRON_BOOTS, Items.IRON_CHESTPLATE, Items.IRON_DOOR, Items.IRON_HELMET, Items.IRON_HOE, Items.IRON_HORSE_ARMOR, Items.IRON_INGOT, Items.IRON_LEGGINGS, Items.IRON_NUGGET, Items.IRON_ORE, Items.IRON_PICKAXE, Items.IRON_SHOVEL, Items.IRON_SWORD, Items.IRON_TRAPDOOR);
+	public static final List<Item> IRON_ITEMS = Lists.newArrayList(ModWeapons.PIPE, ModWeapons.MARINE_SWORD, ModWeapons.SOUL_SOLID, ModWeapons.SCISSORS, ModWeapons.NIDAI_KITESTU, ModWeapons.SANDAI_KITETSU, ModWeapons.WADO_ICHIMONJI, ModWeapons.KNIFE2, ModWeapons.KNIFE3 , ModWeapons.PIRATE_CUTLASS, ModWeapons.BANDIT_KNIFE, Items.IRON_AXE, Items.IRON_BARS, Items.IRON_BLOCK, Items.IRON_BOOTS, Items.IRON_CHESTPLATE, Items.IRON_DOOR, Items.IRON_HELMET, Items.IRON_HOE, Items.IRON_HORSE_ARMOR, Items.IRON_INGOT, Items.IRON_LEGGINGS, Items.IRON_NUGGET, Items.IRON_ORE, Items.IRON_PICKAXE, Items.IRON_SHOVEL, Items.IRON_SWORD, Items.IRON_TRAPDOOR);
 	
 	@SubscribeEvent
 	public static void onEntityAttack(LivingAttackEvent event)
 	{
-		if (!(event.getSource().getTrueSource() instanceof LivingEntity) || !(event.getEntityLiving() instanceof PlayerEntity))
+		if (!(event.getSource().getTrueSource() instanceof LivingEntity) || !(event.getEntityLiving() instanceof PlayerEntity) || event.getEntityLiving().world.isRemote)
 			return;
 
 		LivingEntity attacker = (LivingEntity) event.getSource().getTrueSource();
@@ -58,6 +59,13 @@ public class SabiPassiveEvents
 		ItemStack offhandGear = attacker.getItemStackFromSlot(EquipmentSlotType.OFFHAND);	
 		
 		ItemStack toDamage = null;
+		
+		IAbilityData abilityProps = AbilityDataCapability.get(attacker);
+		BusoshokuHakiImbuingAbility ability = abilityProps.getEquippedAbility(BusoshokuHakiImbuingAbility.INSTANCE);
+		boolean isActive = ability != null && ability.isContinuous();
+
+		if(isActive)
+			return;
 		
 		for(Item item : SabiPassiveEvents.IRON_ITEMS)
 		{

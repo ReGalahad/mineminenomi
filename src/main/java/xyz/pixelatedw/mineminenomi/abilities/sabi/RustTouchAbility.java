@@ -8,13 +8,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import xyz.pixelatedw.mineminenomi.api.abilities.OverlayPunchAbility;
 import xyz.pixelatedw.mineminenomi.events.passives.SabiPassiveEvents;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.sabi.RustTouchParticleEffect;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
+import xyz.pixelatedw.wypi.abilities.PunchAbility;
 
-public class RustTouchAbility extends OverlayPunchAbility
+public class RustTouchAbility extends PunchAbility
 {
 	public static final RustTouchAbility INSTANCE = new RustTouchAbility();
 

@@ -2,10 +2,10 @@ package xyz.pixelatedw.mineminenomi.abilities.bari;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import xyz.pixelatedw.mineminenomi.api.abilities.OverlayPunchAbility;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
+import xyz.pixelatedw.wypi.abilities.PunchAbility;
 
-public class BariBariNoPistolAbility extends OverlayPunchAbility
+public class BariBariNoPistolAbility extends PunchAbility
 {
 	public static final BariBariNoPistolAbility INSTANCE = new BariBariNoPistolAbility();
 
