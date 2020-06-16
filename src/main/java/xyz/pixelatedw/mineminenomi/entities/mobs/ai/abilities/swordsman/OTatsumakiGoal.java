@@ -34,6 +34,9 @@ public class OTatsumakiGoal extends CooldownGoal
 		if(itemStack == null || itemStack.isEmpty() || this.entity.getAttackTarget() == null)
 			return false;
 			
+		if(!this.entity.getEntitySenses().canSee(this.entity.getAttackTarget()))
+			return false;
+		
 		if(this.entity.getDistance(this.entity.getAttackTarget()) > 3)
 			return false;
 				

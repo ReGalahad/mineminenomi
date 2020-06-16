@@ -22,6 +22,9 @@ public class RankyakuGoal extends CooldownGoal
 		if (this.entity.getAttackTarget() == null)
 			return false;
 
+		if(!this.entity.getEntitySenses().canSee(this.entity.getAttackTarget()))
+			return false;
+		
 		if (this.entity.getDistance(this.entity.getAttackTarget()) < 5)
 			return false;
 
