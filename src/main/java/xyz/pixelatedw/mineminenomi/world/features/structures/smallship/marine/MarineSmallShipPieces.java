@@ -105,7 +105,7 @@ public class MarineSmallShipPieces
 				TileEntity tileentity = world.getTileEntity(pos.down());
 				if (tileentity instanceof ChestTileEntity)
 				{
-					((ChestTileEntity) tileentity).setLootTable(ModLootTables.MARINE_SMALL_SHIP_COMBAT_CHEST, rand.nextLong());
+					((ChestTileEntity) tileentity).setLootTable(ModLootTables.SMALL_SHIP_COMBAT_CHEST, rand.nextLong());
 				}
 			}
 			if (function.equals("food_chest"))

@@ -27,8 +27,8 @@
 				},
 				{
 					"type": "minecraft:item",
-					"name": "mineminenomi:marine_sword",
-					"weight": 70
+					"name": "mineminenomi:pirate_cutlass",
+					"weight": 90
 				},
 				{
 					"type": "minecraft:item",
