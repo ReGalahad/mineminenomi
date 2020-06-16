@@ -7,11 +7,13 @@ import net.minecraft.entity.ai.goal.HurtByTargetGoal;
 import net.minecraft.entity.ai.goal.LookAtGoal;
 import net.minecraft.entity.ai.goal.LookRandomlyGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
+import net.minecraft.entity.ai.goal.OpenDoorGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
+import net.minecraft.pathfinding.GroundPathNavigator;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.entities.mobs.GenericNewEntity;
@@ -22,17 +24,20 @@ import xyz.pixelatedw.mineminenomi.init.ModWeapons;
 public class GenericBanditEntity extends GenericNewEntity
 {
 
-	protected Item[] banditSwords = new Item[] {ModWeapons.BANDIT_KNIFE, ModWeapons.PIRATE_CUTLASS, Items.IRON_SWORD};
-	
+	protected Item[] banditSwords = new Item[] { ModWeapons.BANDIT_KNIFE, ModWeapons.PIRATE_CUTLASS, Items.IRON_SWORD };
+
 	protected GenericBanditEntity(EntityType<? extends MobEntity> type, World worldIn, String[] textures)
 	{
 		super(type, worldIn, textures);
 	}
-	
+
 	@Override
 	protected void registerGoals()
 	{
+		((GroundPathNavigator) this.getNavigator()).setBreakDoors(true);
+
 		this.goalSelector.addGoal(1, new SwimGoal(this));
+		this.goalSelector.addGoal(2, new OpenDoorGoal(this, false));
 		this.goalSelector.addGoal(3, new WaterAvoidingRandomWalkingGoal(this, 0.8D));
 		this.goalSelector.addGoal(5, new LookAtGoal(this, PlayerEntity.class, 8.0F));
 		this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
@@ -42,7 +47,7 @@ public class GenericBanditEntity extends GenericNewEntity
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, GenericMarineEntity.class, true));
 		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
 	}
-	
+
 	@Override
 	protected void registerData()
 	{
@@ -54,14 +59,13 @@ public class GenericBanditEntity extends GenericNewEntity
 	{
 		return true;
 	}
-	
+
 	@Override
 	public boolean canDespawn(double distance)
 	{
-		if(distance > 1024)
+		if (distance > 1024)
 			return true;
-		
+
 		return false;
 	}
 }
-
