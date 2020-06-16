@@ -64,7 +64,7 @@ public class MarineSmallShipPieces
 
 		public Piece(TemplateManager template, CompoundNBT nbt)
 		{
-			super(ModFeatures.Pieces.MARINE_SMALL_SHIP_BODY, nbt);
+			super(ModFeatures.Pieces.MARINE_SMALL_SHIP_PIECE, nbt);
 			this.resourceLocation = new ResourceLocation(nbt.getString("Template"));
 			this.rotation = Rotation.valueOf(nbt.getString("Rot"));
 			this.build(template);
@@ -72,7 +72,7 @@ public class MarineSmallShipPieces
 
 		public Piece(TemplateManager template, ResourceLocation res, BlockPos pos, Rotation rot)
 		{
-			super(ModFeatures.Pieces.MARINE_SMALL_SHIP_BODY, 0);
+			super(ModFeatures.Pieces.MARINE_SMALL_SHIP_PIECE, 0);
 			this.rotation = rot;
 			this.resourceLocation = res;
 			BlockPos blockpos = MarineSmallShipPieces.POSITION_OFFSET.get(this.resourceLocation);

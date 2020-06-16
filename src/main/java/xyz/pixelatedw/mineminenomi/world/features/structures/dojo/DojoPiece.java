@@ -30,7 +30,7 @@ public class DojoPiece extends TemplateStructurePiece
 
 	public DojoPiece(TemplateManager template, CompoundNBT nbt)
 	{
-		super(ModFeatures.Pieces.DOJO_BODY, nbt);
+		super(ModFeatures.Pieces.DOJO_PIECE, nbt);
         this.resourceLocation = new ResourceLocation(nbt.getString("Template"));
         this.rotation = Rotation.valueOf(nbt.getString("Rot"));
         this.build(template);
@@ -38,7 +38,7 @@ public class DojoPiece extends TemplateStructurePiece
 	
 	public DojoPiece(TemplateManager template, BlockPos pos, Rotation rot)
 	{
-		super(ModFeatures.Pieces.DOJO_BODY, 0);
+		super(ModFeatures.Pieces.DOJO_PIECE, 0);
 		this.templatePosition = pos;
 		this.rotation = rot;
 		this.resourceLocation = new ResourceLocation(APIConfig.PROJECT_ID, "dojo");

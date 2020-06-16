@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.world.features.structures.camp.marine;
+package xyz.pixelatedw.mineminenomi.world.features.structures.camp.bandit;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,16 +36,14 @@ import xyz.pixelatedw.mineminenomi.init.ModLootTables;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
 
-public class MarineCampPieces
+public class BanditCampPieces
 {
-	private static final ResourceLocation SMALL_TENT = new ResourceLocation(APIConfig.PROJECT_ID, "camp/marine/small_tent");
-	private static final ResourceLocation LERGE_TENT = new ResourceLocation(APIConfig.PROJECT_ID, "camp/marine/large_tent");
+	private static final ResourceLocation SMALL_TENT = new ResourceLocation(APIConfig.PROJECT_ID, "camp/bandit/small_tent");
+	private static final ResourceLocation LERGE_TENT = new ResourceLocation(APIConfig.PROJECT_ID, "camp/bandit/large_tent");
 	private static final ResourceLocation FIRE_PLACE = new ResourceLocation(APIConfig.PROJECT_ID, "camp/fire_place");
 	private static final Map<ResourceLocation, BlockPos> CENTER_OFFSET = ImmutableMap.of(SMALL_TENT, new BlockPos(3, 0, 3), LERGE_TENT, new BlockPos(0, 0, 0), FIRE_PLACE, new BlockPos(0, 0, 0));
 
-	//private static final Map<ResourceLocation, BlockState> DEBUG_BLOCKS = ImmutableMap.of(SMALL_TENT, Blocks.EMERALD_BLOCK.getDefaultState(), LERGE_TENT, Blocks.DIAMOND_BLOCK.getDefaultState(), FIRE_PLACE, Blocks.COAL_BLOCK.getDefaultState());
-	
-	private static final List<EntityType> GRUNT_TYPES = Lists.newArrayList(ModEntities.MARINE_WITH_SWORD, ModEntities.MARINE_WITH_GUN);
+	private static final List<EntityType> GRUNT_TYPES = Lists.newArrayList(ModEntities.BANDIT_WITH_SWORD);
 	
 	private static EntityType chooseGruntType()
 	{
@@ -108,7 +106,7 @@ public class MarineCampPieces
 		
 		public Piece(TemplateManager template, CompoundNBT nbt)
 		{
-			super(ModFeatures.Pieces.MARINE_CAMP_PIECE, nbt);
+			super(ModFeatures.Pieces.BANDIT_CAMP_PIECE, nbt);
 			this.resourceLocation = new ResourceLocation(nbt.getString("Template"));
 			this.rotation = Rotation.valueOf(nbt.getString("Rot"));
 			this.processor = BlockIgnoreStructureProcessor.STRUCTURE_BLOCK;
@@ -117,7 +115,7 @@ public class MarineCampPieces
 
 		public Piece(TemplateManager template, ResourceLocation res, BlockPos pos, Rotation rot, StructureProcessor proc)
 		{
-			super(ModFeatures.Pieces.MARINE_CAMP_PIECE, 0);
+			super(ModFeatures.Pieces.BANDIT_CAMP_PIECE, 0);
 			this.rotation = rot;
 			this.resourceLocation = res;
 			this.templatePosition = pos;
@@ -136,7 +134,7 @@ public class MarineCampPieces
 		private void build(TemplateManager templateManager)
 		{
 			Template template = templateManager.getTemplateDefaulted(this.resourceLocation);
-			PlacementSettings placementsettings = (new PlacementSettings()).setRotation(this.rotation).setMirror(Mirror.NONE).setCenterOffset(MarineCampPieces.CENTER_OFFSET.get(this.resourceLocation)).addProcessor(this.processor);
+			PlacementSettings placementsettings = (new PlacementSettings()).setRotation(this.rotation).setMirror(Mirror.NONE).setCenterOffset(BanditCampPieces.CENTER_OFFSET.get(this.resourceLocation)).addProcessor(this.processor);
 			this.setup(template, this.templatePosition, placementsettings);			
 		}
 
@@ -171,7 +169,7 @@ public class MarineCampPieces
 				if (spawner instanceof CustomSpawnerTileEntity)
 				{
 					((CustomSpawnerTileEntity) spawner).setSpawnerLimit(1);
-					((CustomSpawnerTileEntity) spawner).setSpawnerMob(ModEntities.MARINE_CAPTAIN);
+					((CustomSpawnerTileEntity) spawner).setSpawnerMob(BanditCampPieces.chooseGruntType());
 				}
 			}
 			if (function.equals("grunt_spawn"))
@@ -181,7 +179,7 @@ public class MarineCampPieces
 				if (spawner instanceof CustomSpawnerTileEntity)
 				{
 					((CustomSpawnerTileEntity) spawner).setSpawnerLimit(2);
-					((CustomSpawnerTileEntity) spawner).setSpawnerMob(MarineCampPieces.chooseGruntType());
+					((CustomSpawnerTileEntity) spawner).setSpawnerMob(BanditCampPieces.chooseGruntType());
 				}
 			}
 		}
@@ -189,7 +187,7 @@ public class MarineCampPieces
 		@Override
 		public boolean addComponentParts(IWorld world, Random random, MutableBoundingBox bb, ChunkPos chunkPos)
 		{
-			PlacementSettings placementsettings = (new PlacementSettings()).setRotation(this.rotation).setMirror(Mirror.NONE).setCenterOffset(MarineCampPieces.CENTER_OFFSET.get(this.resourceLocation)).addProcessor(this.processor);
+			PlacementSettings placementsettings = (new PlacementSettings()).setRotation(this.rotation).setMirror(Mirror.NONE).setCenterOffset(BanditCampPieces.CENTER_OFFSET.get(this.resourceLocation)).addProcessor(this.processor);
 			BlockPos offset = new BlockPos(0, 0, 0);
 			this.templatePosition.add(Template.transformedBlockPos(placementsettings, new BlockPos(offset.getX(), offset.getY(), offset.getZ())));
 			
@@ -199,9 +197,6 @@ public class MarineCampPieces
 
 			boolean flag = super.addComponentParts(world, random, bb, chunkPos);
 
-			//BlockPos debugOffset = this.templatePosition.add(MarineCampPieces.CENTER_OFFSET.get(this.resourceLocation));
-			//world.setBlockState(debugOffset, DEBUG_BLOCKS.get(this.resourceLocation), 3);
-			
 			this.templatePosition = blockpos2;
 			return flag;		
 		}
