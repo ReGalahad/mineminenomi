@@ -30,7 +30,7 @@ public class MeroMeroMellowProjectile extends AbilityProjectileEntity
 
 		this.setDamage(10);
 		this.setPassThroughEntities();
-		this.setChangeHurtTime(false);
+		
 		this.withEffects = () -> {
 			return new EffectInstance[] {
 						new EffectInstance(ModEffects.LOVESTRUCK, 200, 1)

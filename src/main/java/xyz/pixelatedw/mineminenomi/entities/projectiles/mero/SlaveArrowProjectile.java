@@ -28,7 +28,7 @@ public class SlaveArrowProjectile extends AbilityProjectileEntity
 	{
 		super(MeroProjectiles.SLAVE_ARROW, world, player);
 
-		this.setDamage(4);
+		this.setDamage(0.8F);
 		this.setChangeHurtTime(true);
 
 		this.withEffects = () ->

@@ -41,6 +41,7 @@ public class FreshFireProjectile extends AbilityProjectileEntity
 		this.setPassThroughEntities();
 		this.setMaxLife(15);
 		this.setChangeHurtTime(true);
+		this.setHurtTime(15);
 		
 		this.onEntityImpactEvent = this::onEntityImpactEvent;
 		this.onBlockImpactEvent = this::onBlockImpactEvent;
@@ -49,7 +50,7 @@ public class FreshFireProjectile extends AbilityProjectileEntity
 	
 	private void onEntityImpactEvent(LivingEntity hitEntity)
 	{
-		hitEntity.setFire(200);
+		hitEntity.setFire(10);
 	}
 	
 	private void onBlockImpactEvent(BlockPos hit)

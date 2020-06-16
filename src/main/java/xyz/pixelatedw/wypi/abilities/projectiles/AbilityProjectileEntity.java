@@ -45,23 +45,13 @@ public class AbilityProjectileEntity extends ThrowableEntity
 	protected boolean stuckInGround = false;
 	private boolean changeHurtTime = false;
 	// For reference default hurt time is 20
-	private int hurtTime = 5;
+	private int hurtTime = 10;
 
 	// Setting the defaults so that no crash occurs and so they will be null safe.
-	public IOnEntityImpact onEntityImpactEvent = (hitEntity) ->
-	{
-		this.onBlockImpactEvent.onImpact(hitEntity.getPosition());
-	};
-	public IOnBlockImpact onBlockImpactEvent = (hit) ->
-	{
-	};
-	public IOnTick onTickEvent = () ->
-	{
-	};
-	public IWithEffects withEffects = () ->
-	{
-		return new EffectInstance[0];
-	};
+	public IOnEntityImpact onEntityImpactEvent = (hitEntity) -> { this.onBlockImpactEvent.onImpact(hitEntity.getPosition()); };
+	public IOnBlockImpact onBlockImpactEvent = (hit) -> {};
+	public IOnTick onTickEvent = () -> {};
+	public IWithEffects withEffects = () -> { return new EffectInstance[0]; };
 
 	public AbilityProjectileEntity(EntityType type, World world)
 	{
@@ -179,9 +169,12 @@ public class AbilityProjectileEntity extends ThrowableEntity
 						}
 					}
 
-					this.onEntityImpactEvent.onImpact(hitEntity);
-					if (!this.canPassThroughEntities && entityDamaged)
-						this.remove();
+					if(entityDamaged)
+					{
+						this.onEntityImpactEvent.onImpact(hitEntity);
+						if (!this.canPassThroughEntities)
+							this.remove();
+					}
 
 					if (this.changeHurtTime)
 						hitEntity.hurtResistantTime = this.hurtTime;

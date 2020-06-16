@@ -28,6 +28,5 @@ public class GomuGomuNoPistolProjectile extends AbilityProjectileEntity
 
 		this.setDamage(6);
 		this.setPhysical();	
-		this.setChangeHurtTime(true);
 	}
 }

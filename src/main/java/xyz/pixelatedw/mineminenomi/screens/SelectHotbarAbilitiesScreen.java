@@ -136,6 +136,7 @@ public class SelectHotbarAbilitiesScreen extends Screen
 			this.addButton(devilFruitsButton);
 		}
 		abl = this.abilityDataProps.getUnlockedAbilities(AbilityCategory.RACIAL).stream().findFirst().orElse(null);
+		System.out.println(this.abilityDataProps.getUnlockedAbilities(AbilityCategory.RACIAL));
 		if (abl != null)
 		{
 			String iconName = abl.getName();

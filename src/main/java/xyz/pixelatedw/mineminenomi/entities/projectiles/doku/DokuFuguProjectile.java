@@ -45,6 +45,7 @@ public class DokuFuguProjectile extends AbilityProjectileEntity
 
 		this.setDamage(10);
 		this.setChangeHurtTime(true);
+		this.setHurtTime(20);
 		
 		this.onEntityImpactEvent = this::onEntityImpactEvent;
 		this.onBlockImpactEvent = this::onBlockImpactEvent;

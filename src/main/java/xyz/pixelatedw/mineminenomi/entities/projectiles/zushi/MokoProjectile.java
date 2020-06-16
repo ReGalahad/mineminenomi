@@ -40,7 +40,7 @@ public class MokoProjectile extends AbilityProjectileEntity
 	{
 		super(ZushiProjectiles.MOKO, world, player);
 
-		this.setDamage(6);
+		this.setDamage(4);
 		this.setPassThroughEntities();
 		this.setChangeHurtTime(true);
 		

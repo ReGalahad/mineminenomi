@@ -34,8 +34,9 @@ public class YasakaniNoMagatamaProjectile extends AbilityProjectileEntity
 	{
 		super(PikaProjectiles.YASAKANI_NO_MAGATAMA, world, player);
 		
-		this.setDamage(2);
+		this.setDamage(2F);
 		this.setChangeHurtTime(true);
+		this.setHurtTime(20);
 		
 		this.onBlockImpactEvent = this::onBlockImpactEvent;
 		this.onTickEvent = this::onTickEvent;

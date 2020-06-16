@@ -34,6 +34,7 @@ public class MiniHollowProjectile extends AbilityProjectileEntity
 
 		this.setDamage(2);
 		this.setChangeHurtTime(true);
+		this.setHurtTime(20);
 		
 		this.withEffects = () -> {
 			return new EffectInstance[] {

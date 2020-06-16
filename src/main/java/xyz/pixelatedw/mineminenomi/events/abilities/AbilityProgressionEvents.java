@@ -27,6 +27,8 @@ import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
+import xyz.pixelatedw.wypi.network.WyNetwork;
+import xyz.pixelatedw.wypi.network.packets.server.SSyncAbilityDataPacket;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class AbilityProgressionEvents
@@ -70,5 +72,7 @@ public class AbilityProgressionEvents
 			abilityProps.addUnlockedAbility(ability);
 		if ((props.getDoriki() < doriki || AbilityHelper.verifyIfAbilityIsBanned(ability)) && abilityProps.hasUnlockedAbility(ability))
 			abilityProps.removeUnlockedAbility(ability);
+		
+		WyNetwork.sendTo(new SSyncAbilityDataPacket(player.getEntityId(), abilityProps), player);
 	}
 }

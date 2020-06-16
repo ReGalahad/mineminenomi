@@ -33,8 +33,9 @@ public class UchimizuProjectile extends AbilityProjectileEntity
 	{
 		super(FishmanKarateProjectiles.UCHIMIZU, world, player);
 		
-		this.setDamage(2);
+		this.setDamage(0.8F);
 		this.setChangeHurtTime(true);
+		this.setHurtTime(10);
 		
 		this.onBlockImpactEvent = this::onBlockImpactEvent;
 		this.onTickEvent = this::onTickEvent;
