@@ -25,6 +25,7 @@ import net.minecraft.world.gen.feature.structure.StructurePiece;
 import net.minecraft.world.gen.feature.structure.TemplateStructurePiece;
 import net.minecraft.world.gen.feature.template.BlockIgnoreStructureProcessor;
 import net.minecraft.world.gen.feature.template.PlacementSettings;
+import net.minecraft.world.gen.feature.template.StructureProcessor;
 import net.minecraft.world.gen.feature.template.Template;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.CustomSpawnerTileEntity;
@@ -34,7 +35,6 @@ import xyz.pixelatedw.mineminenomi.init.ModFeatures;
 import xyz.pixelatedw.mineminenomi.init.ModLootTables;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
-import xyz.pixelatedw.wypi.debug.WyDebug;
 
 public class MarineCampPieces
 {
@@ -62,23 +62,23 @@ public class MarineCampPieces
 		if(WyHelper.randomDouble() < 0.2)
 			hasExtraTents = true;
 
-		components.add(new Piece(templateManager, FIRE_PLACE, pos, Rotation.CLOCKWISE_90));
+		components.add(new Piece(templateManager, FIRE_PLACE, pos, Rotation.CLOCKWISE_90, BlockIgnoreStructureProcessor.AIR_AND_STRUCTURE_BLOCK));
 
-		components.add(new Piece(templateManager, LERGE_TENT, pos.add(13, -1, 0), Rotation.CLOCKWISE_90));
+		components.add(new Piece(templateManager, LERGE_TENT, pos.add(13, 0, 0), Rotation.CLOCKWISE_90, BlockIgnoreStructureProcessor.STRUCTURE_BLOCK));
 		if(hasExtraTents)
 		{
-			components.add(new Piece(templateManager, LERGE_TENT, pos.add(-19, -1, 6), Rotation.COUNTERCLOCKWISE_90));
-			list.add(pos.add(-19, -1, 6));
+			components.add(new Piece(templateManager, LERGE_TENT, pos.add(-19, 0, 6), Rotation.COUNTERCLOCKWISE_90, BlockIgnoreStructureProcessor.STRUCTURE_BLOCK));
+			list.add(pos.add(-19, 0, 6));
 		}
 			
-		list.add(pos.add(13, -1, 0));
+		list.add(pos.add(13, 0, 0));
 		
 		for(int i = 0; i < (hasExtraTents ? 6 : 4); i++)
 		{
 			BlockPos piecePos = trySpawnTent(pos, 0, list);
 			if(piecePos == null)
 				continue;
-			components.add(new Piece(templateManager, SMALL_TENT, piecePos, Rotation.randomRotation(rand)));
+			components.add(new Piece(templateManager, SMALL_TENT, piecePos, Rotation.randomRotation(rand), BlockIgnoreStructureProcessor.STRUCTURE_BLOCK));
 			list.add(piecePos);
 		}
 	}
@@ -104,22 +104,24 @@ public class MarineCampPieces
 	{
 		private ResourceLocation resourceLocation;
 		private Rotation rotation;
-		private Random rand;
+		private StructureProcessor processor;
 		
 		public Piece(TemplateManager template, CompoundNBT nbt)
 		{
 			super(ModFeatures.Pieces.MARINE_CAMP_BODY, nbt);
 			this.resourceLocation = new ResourceLocation(nbt.getString("Template"));
 			this.rotation = Rotation.valueOf(nbt.getString("Rot"));
+			this.processor = BlockIgnoreStructureProcessor.STRUCTURE_BLOCK;
 			this.build(template);
 		}
 
-		public Piece(TemplateManager template, ResourceLocation res, BlockPos pos, Rotation rot)
+		public Piece(TemplateManager template, ResourceLocation res, BlockPos pos, Rotation rot, StructureProcessor proc)
 		{
 			super(ModFeatures.Pieces.MARINE_CAMP_BODY, 0);
 			this.rotation = rot;
 			this.resourceLocation = res;
 			this.templatePosition = pos;
+			this.processor = proc;
 			this.build(template);
 		}
 
@@ -134,10 +136,8 @@ public class MarineCampPieces
 		private void build(TemplateManager templateManager)
 		{
 			Template template = templateManager.getTemplateDefaulted(this.resourceLocation);
-			PlacementSettings placementsettings = (new PlacementSettings()).setRotation(this.rotation).setMirror(Mirror.NONE).setCenterOffset(MarineCampPieces.CENTER_OFFSET.get(this.resourceLocation)).addProcessor(BlockIgnoreStructureProcessor.AIR_AND_STRUCTURE_BLOCK);
-			this.setup(template, this.templatePosition, placementsettings);
-			
-			WyDebug.debug("Marine Camp spawned at: /tp " + this.templatePosition.getX() + " ~ " + this.templatePosition.getZ());
+			PlacementSettings placementsettings = (new PlacementSettings()).setRotation(this.rotation).setMirror(Mirror.NONE).setCenterOffset(MarineCampPieces.CENTER_OFFSET.get(this.resourceLocation)).addProcessor(this.processor);
+			this.setup(template, this.templatePosition, placementsettings);			
 		}
 
 		@Override
@@ -189,7 +189,7 @@ public class MarineCampPieces
 		@Override
 		public boolean addComponentParts(IWorld world, Random random, MutableBoundingBox bb, ChunkPos chunkPos)
 		{
-			PlacementSettings placementsettings = (new PlacementSettings()).setRotation(this.rotation).setMirror(Mirror.NONE).setCenterOffset(MarineCampPieces.CENTER_OFFSET.get(this.resourceLocation)).addProcessor(BlockIgnoreStructureProcessor.AIR_AND_STRUCTURE_BLOCK);
+			PlacementSettings placementsettings = (new PlacementSettings()).setRotation(this.rotation).setMirror(Mirror.NONE).setCenterOffset(MarineCampPieces.CENTER_OFFSET.get(this.resourceLocation)).addProcessor(this.processor);
 			BlockPos offset = new BlockPos(0, 0, 0);
 			this.templatePosition.add(Template.transformedBlockPos(placementsettings, new BlockPos(offset.getX(), offset.getY(), offset.getZ())));
 			

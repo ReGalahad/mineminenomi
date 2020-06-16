@@ -22,6 +22,7 @@ import net.minecraft.world.gen.placement.Placement;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.init.ModFeatures;
 import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.debug.WyDebug;
 
 public class DojoStructure extends ScatteredStructure<NoFeatureConfig>
 {
@@ -64,7 +65,7 @@ public class DojoStructure extends ScatteredStructure<NoFeatureConfig>
 	@Override
 	protected int getBiomeFeatureDistance(ChunkGenerator<?> chunkGenerator)
 	{
-		return 64;
+		return 32;
 	}
 	
 	@Override
@@ -107,6 +108,8 @@ public class DojoStructure extends ScatteredStructure<NoFeatureConfig>
 			Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
 			this.components.add(new DojoPiece(templateManager, blockpos, rotation));
 			this.recalculateStructureSize();
+			
+			WyDebug.debug("Dojo spawned at: /tp " + blockpos.getX() + " ~ " + blockpos.getZ());
 		}
 	}
 }

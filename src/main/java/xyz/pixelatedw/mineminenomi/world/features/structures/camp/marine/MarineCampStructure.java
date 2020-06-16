@@ -21,6 +21,7 @@ import net.minecraft.world.gen.placement.Placement;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.init.ModFeatures;
 import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.debug.WyDebug;
 
 public class MarineCampStructure extends ScatteredStructure<NoFeatureConfig>
 {
@@ -105,6 +106,8 @@ public class MarineCampStructure extends ScatteredStructure<NoFeatureConfig>
 			BlockPos blockpos = new BlockPos(i, 90, j);
 			MarineCampPieces.addComponents(templateManagerIn, blockpos, new Random(), this.components);
 			this.recalculateStructureSize();
+			
+			WyDebug.debug("Marine Camp spawned at: /tp " + blockpos.getX() + " ~ " + blockpos.getZ());
 		}
 	}
 }

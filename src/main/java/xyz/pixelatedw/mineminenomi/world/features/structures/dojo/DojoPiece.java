@@ -22,7 +22,6 @@ import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.mineminenomi.init.ModFeatures;
 import xyz.pixelatedw.wypi.APIConfig;
-import xyz.pixelatedw.wypi.debug.WyDebug;
 
 public class DojoPiece extends TemplateStructurePiece
 {
@@ -58,9 +57,7 @@ public class DojoPiece extends TemplateStructurePiece
 	{
 		Template template = templateManager.getTemplateDefaulted(this.resourceLocation);
 		PlacementSettings placementsettings = (new PlacementSettings()).setRotation(this.rotation).setMirror(Mirror.NONE).addProcessor(BlockIgnoreStructureProcessor.STRUCTURE_BLOCK);
-		this.setup(template, this.templatePosition, placementsettings);
-		
-		WyDebug.debug("Dojo spawned at: /tp " + this.templatePosition.getX() + " ~ " + this.templatePosition.getZ());
+		this.setup(template, this.templatePosition, placementsettings);		
 	}
 
 	@Override

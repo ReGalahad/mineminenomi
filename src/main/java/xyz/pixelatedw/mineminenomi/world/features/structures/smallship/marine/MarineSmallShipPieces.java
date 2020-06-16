@@ -32,7 +32,6 @@ import xyz.pixelatedw.mineminenomi.init.ModFeatures;
 import xyz.pixelatedw.mineminenomi.init.ModLootTables;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
-import xyz.pixelatedw.wypi.debug.WyDebug;
 
 public class MarineSmallShipPieces
 {
@@ -93,9 +92,7 @@ public class MarineSmallShipPieces
 		{
 			Template template = templateManager.getTemplateDefaulted(this.resourceLocation);
 			PlacementSettings placementsettings = (new PlacementSettings()).setRotation(this.rotation).setMirror(Mirror.NONE).setCenterOffset(MarineSmallShipPieces.CENTER_OFFSET.get(this.resourceLocation)).addProcessor(BlockIgnoreStructureProcessor.AIR_AND_STRUCTURE_BLOCK);
-			this.setup(template, this.templatePosition, placementsettings);
-			
-			WyDebug.debug("Marine Small Ship spawned at: /tp " + this.templatePosition.getX() + " ~ " + this.templatePosition.getZ());
+			this.setup(template, this.templatePosition, placementsettings);			
 		}
 
 		@Override
@@ -157,7 +154,7 @@ public class MarineSmallShipPieces
 		@Override
 		public boolean addComponentParts(IWorld world, Random random, MutableBoundingBox bb, ChunkPos chunkPos)
 		{
-			PlacementSettings placementsettings = (new PlacementSettings()).setRotation(this.rotation).setMirror(Mirror.NONE).setCenterOffset(MarineSmallShipPieces.CENTER_OFFSET.get(this.resourceLocation)).addProcessor(BlockIgnoreStructureProcessor.STRUCTURE_BLOCK);
+			PlacementSettings placementsettings = (new PlacementSettings()).setRotation(this.rotation).setMirror(Mirror.NONE).setCenterOffset(MarineSmallShipPieces.CENTER_OFFSET.get(this.resourceLocation)).addProcessor(BlockIgnoreStructureProcessor.AIR_AND_STRUCTURE_BLOCK);
 			BlockPos offset = MarineSmallShipPieces.POSITION_OFFSET.get(this.resourceLocation);
 			this.templatePosition.add(Template.transformedBlockPos(placementsettings, new BlockPos(offset.getX(), offset.getY(), offset.getZ())));
 			return super.addComponentParts(world, random, bb, chunkPos);

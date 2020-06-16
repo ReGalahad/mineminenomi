@@ -22,6 +22,7 @@ import net.minecraft.world.gen.placement.Placement;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.init.ModFeatures;
 import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.debug.WyDebug;
 
 public class MarineSmallShipStructure extends ScatteredStructure<NoFeatureConfig>
 {
@@ -107,6 +108,8 @@ public class MarineSmallShipStructure extends ScatteredStructure<NoFeatureConfig
 			Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
 			MarineSmallShipPieces.addComponents(templateManagerIn, blockpos, rotation, this.components);
 			this.recalculateStructureSize();
+			
+			WyDebug.debug("Marine Small Ship spawned at: /tp " + blockpos.getX() + " ~ " + blockpos.getZ());
 		}
 	}
 }
