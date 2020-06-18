@@ -112,7 +112,7 @@ public class CoreSwordItem extends Item
 
 			BusoshokuHakiImbuingAbility ability = abilityProps.getEquippedAbility(BusoshokuHakiImbuingAbility.INSTANCE);
 			boolean hakiActiveFlag = ability != null && ability.isContinuous();
-			
+
 			if(hakiActiveFlag)
 				multiplier += 0.50;
 			

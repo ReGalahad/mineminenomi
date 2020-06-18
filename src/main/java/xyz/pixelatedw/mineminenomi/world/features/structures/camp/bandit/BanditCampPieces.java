@@ -57,7 +57,7 @@ public class BanditCampPieces
 		List<BlockPos> list = new ArrayList<BlockPos>();
 		boolean hasExtraTents = false;
 		
-		if(WyHelper.randomDouble() < 0.2)
+		if(WyHelper.randomDouble() < 0.1)
 			hasExtraTents = true;
 
 		components.add(new Piece(templateManager, FIRE_PLACE, pos, Rotation.CLOCKWISE_90, BlockIgnoreStructureProcessor.AIR_AND_STRUCTURE_BLOCK));

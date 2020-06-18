@@ -20,9 +20,9 @@ Mine Mine no Mi is a Minecraft mod, using MinecraftForge, inspired by the famous
 6. Enjoy
 
 ## Support
-* Donations via [Paypal](shorturl.at/cfhHR) or [Patreon](https://www.patreon.com/wynd) helps us keep the servers going
-* Help us localize the mod in your language, make sure somebody didn't already did it first by checking this list
-* Report bugs when you encouter in a clear and concise way using the available templates here on Github
+* Donations via [Paypal](shorturl.at/cfhHR) or [Patreon](https://www.patreon.com/wynd) help us keep the servers going
+* Help us localize the mod in your language, make sure nobody already thought about doing that first by checking this list
+* Report bugs when you encounter them in a **clear** and **concise** way using the available templates here on Github
 * Join the [discord server](http://discord.gg/CYK9xs8), helping newcomers, chatting or just sharing dank memes
 * Spread the word about our projects 
 
@@ -32,10 +32,10 @@ Mine Mine no Mi is a Minecraft mod, using MinecraftForge, inspired by the famous
     https://github.com/PixelatedW/mineminenomi
     ```
 
-2. Run one of the following command, in order to setup forge and generate the .run files
+2. Run one of the following command, in order to setup forge and generate the .launch files
     * For Eclipse:
     ```
-    ./gradlew eclipse genEclipseRunes
+    ./gradlew eclipse genEclipseRuns
     ```
     * For IntelliJ:
     ```

@@ -93,7 +93,7 @@ public class ModI18n
 	{
 		// ItemGroups
 		WyRegistry.registerName("itemGroup.devil_fruits", "Devil Fruits");
-		WyRegistry.registerName("itemGroup.weapons", "Equipement");
+		WyRegistry.registerName("itemGroup.weapons", "Equipment");
 		
 		// Messages
 		WyRegistry.registerName("death.attack.ability_projectile", "%1$s was killed by %2$s");

@@ -746,7 +746,7 @@ public class WyHelper
 		}
 	}
 
-	public static boolean isSurfaceFlat(ChunkGenerator<?> chunkGen, int chunkPosX, int chunkPosZ)
+	public static boolean isSurfaceFlat(ChunkGenerator<?> chunkGen, int chunkPosX, int chunkPosZ, int difference)
 	{
 		int offset = 16;
 
@@ -760,6 +760,6 @@ public class WyHelper
 		int minHeight = Math.min(Math.min(i1, j1), Math.min(k1, l1));
 		int maxHeight = Math.max(Math.max(i1, j1), Math.max(k1, l1));
 
-		return Math.abs(maxHeight - minHeight) <= 3;
+		return Math.abs(maxHeight - minHeight) <= difference;
 	}
 }

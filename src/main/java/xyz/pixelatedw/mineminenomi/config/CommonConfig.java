@@ -52,7 +52,9 @@ public class CommonConfig
 	private BooleanValue spawnSmallShips;
 	private DoubleValue spawnChanceSmallShip;
 	private BooleanValue spawnCamps;
-	private DoubleValue spawnChanceCamps;	
+	private DoubleValue spawnChanceCamps;
+	private BooleanValue spawnSmallBases;
+	private DoubleValue spawnChanceSmallBase;
 	private DoubleValue spawnRateLargeShip;
 
 	// Quests
@@ -124,7 +126,8 @@ public class CommonConfig
 			this.dorikiRewardMultiplier = builder.comment("Multiplies any doriki gained by this amount; 1 by default, min: 0, max: 10").defineInRange("Doriki Reward Multiplier", 1.0, 0.0, 10.0);
 			this.minimumDorikiPerKill = builder.comment("Guarantees a minimum of 1 doriki per kill; false by default").define("Minimum Doriki per Kill", false);
 			this.abilityFraudChecks = builder.comment("Runs a check for all abilities on a player to remove dupes or suspicious abilities when the player joins the world; true by default").define("Ability Fraud Checks", true);
-			this.haoshokuUnlockLogic = builder.comment("Responsible for how player unlock Haoshoku Haki; \n NONE - Haoshoku Haki cannot be unlocked naturally \n RANDOM - Only a few chosen ones receive it when they spawn \n EXPERIENCE - Will unlock based on the total amount of Haki experience a player has").defineEnum("Haoshoku Haki Unlock Logic", HaoshokuUnlockLogic.EXPERIENCE, HaoshokuUnlockLogic.values());
+			this.haoshokuUnlockLogic = builder.comment("Responsible for how player unlock Haoshoku Haki; \n NONE - Haoshoku Haki cannot be unlocked naturally \n RANDOM - Only a few chosen ones receive it when they spawn \n EXPERIENCE - Will unlock based on the total amount of Haki experience a player has").defineEnum("Haoshoku Haki Unlock Logic", HaoshokuUnlockLogic.EXPERIENCE,
+				HaoshokuUnlockLogic.values());
 
 			this.bannedAbilities = new ArrayList<String>();
 			Predicate<Object> bannedAbilitiesTest = new Predicate<Object>()
@@ -143,7 +146,8 @@ public class CommonConfig
 			this.bannedAbilities.add("Example2");
 			builder.comment("List with ability names that are banned, the names can be written in any case with or without spaces").defineList("Banned Abilities", this.bannedAbilities, bannedAbilitiesTest);
 
-			this.keepStatsAfterDeath = builder.comment("Defines which logic to apply after a player's death \n NONE - nothing is kept \n AUTO (default) - only the faction/race/fighting style stats are kept \n FULL - everything is kept \n CUSTOM - will use the 'Stats to Keep' section to determine which stats to keep").defineEnum("Keep Stats after Death", KeepStatsLogic.AUTO, KeepStatsLogic.values());
+			this.keepStatsAfterDeath = builder.comment("Defines which logic to apply after a player's death \n NONE - nothing is kept \n AUTO (default) - only the faction/race/fighting style stats are kept \n FULL - everything is kept \n CUSTOM - will use the 'Stats to Keep' section to determine which stats to keep").defineEnum("Keep Stats after Death", KeepStatsLogic.AUTO,
+				KeepStatsLogic.values());
 
 			builder.push("Stats to Keep");
 			{
@@ -176,6 +180,9 @@ public class CommonConfig
 			this.spawnChanceSmallShip = builder.comment("Sets the % chance for a Small Ship to spawn, the % is calculated per chunk (16x16), 20% by default, min is 0 and max is 100; ").defineInRange("Small Ships Spawn Chance", 20, 0.0, 100);
 			this.spawnCamps = builder.comment("Allows camps to spawn in the world; true by default").define("Spawn Camps", true);
 			this.spawnChanceCamps = builder.comment("Sets the % chance for a Camp to spawn, the % is calculated per chunk (16x16), 40% by default, min is 0 and max is 100; ").defineInRange("Camps Spawn Chance", 40, 0.0, 100);
+			this.spawnSmallBases = builder.comment("Allows small bases to spawn in the world; true by default").define("Spawn Small Bases", true);
+			this.spawnChanceSmallBase = builder.comment("Sets the % chance for a Small Base to spawn, the % is calculated per chunk (16x16), 25% by default, min is 0 and max is 100; ").defineInRange("Small Bases Spawn Chance", 25, 0.0, 100);
+
 			this.spawnRateLargeShip = builder.comment("Spawn Rate for Large Ships, min is 0 and max is 100").defineInRange("Spawn Rate for Large Ships", 1.0, 0.0, 100.0);
 		}
 		builder.pop();
@@ -238,6 +245,16 @@ public class CommonConfig
 		builder.pop();
 	}
 	
+	public double getChanceForSmallBasesSpawn()
+	{
+		return this.spawnChanceSmallBase.get();
+	}
+
+	public boolean canSpawnSmallBases()
+	{
+		return this.spawnSmallBases.get();
+	}
+	
 	public double getChanceForCampsSpawn()
 	{
 		return this.spawnChanceCamps.get();
@@ -247,7 +264,7 @@ public class CommonConfig
 	{
 		return this.spawnCamps.get();
 	}
-	
+
 	public double getChanceForSmallShipSpawn()
 	{
 		return this.spawnChanceSmallShip.get();
@@ -257,7 +274,7 @@ public class CommonConfig
 	{
 		return this.spawnSmallShips.get();
 	}
-	
+
 	public double getChanceForDojoSpawn()
 	{
 		return this.spawnChanceDojo.get();
