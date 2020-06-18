@@ -105,7 +105,7 @@ public class KungFuDugongEntity extends AnimalEntity
 				this.setTraining(false);
 			}
 			
-			if (flagHasNoTarget && this.ticksExisted % 250 == 0)
+			if (flagHasNoTarget && this.ticksExisted % (250 + WyHelper.randomWithRange(0, 250)) == 0)
 				this.setTraining(!this.isTraining());
 			
 			if (flagSitting || this.isTraining())

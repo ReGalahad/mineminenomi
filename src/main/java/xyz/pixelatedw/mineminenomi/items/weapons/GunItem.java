@@ -35,18 +35,20 @@ public class GunItem extends Item
 	private int maxCooldown = 15;
 	private int bulletSpeed = 2;
 	private int bulletAccuracy = 2;
+	private float damageMultiplier = 1;
 
 	public static final Predicate<ItemStack> BULLETS = (itemStack) ->
 	{
 		return itemStack.getItem() == ModItems.BULLET || itemStack.getItem() == ModItems.KAIROSEKI_BULLET;
 	};
 
-	public GunItem(int maxCooldown, int bulletSpeed, int bulletAccuracy)
+	public GunItem(int maxCooldown, int bulletSpeed, int bulletAccuracy, float mutliplier)
 	{
 		super(new Properties().group(ModCreativeTabs.WEAPONS).maxStackSize(1));
 		this.maxCooldown = maxCooldown;
 		this.bulletSpeed = bulletSpeed;
 		this.bulletAccuracy = bulletAccuracy;
+		this.damageMultiplier = mutliplier;
 	}
 
 	@Override
@@ -125,6 +127,7 @@ public class GunItem extends Item
 				proj = new NormalBulletProjectile(player.world, player);
 			else if (bulletType == ModItems.KAIROSEKI_BULLET)
 				proj = new KairosekiBulletProjectile(player.world, player);
+			proj.setDamage(proj.getDamage() * this.damageMultiplier);
 			player.world.addEntity(proj);
 			proj.shoot(player, player.rotationPitch, player.rotationYaw, 0, this.bulletSpeed, this.bulletAccuracy);
 		}
