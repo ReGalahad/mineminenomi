@@ -6,7 +6,10 @@ Mine Mine no Mi is a Minecraft mod, using MinecraftForge, inspired by the famous
 * Different classes, factions and fighting styles to choose from, each slightly changing the outcome of the playthrough
 * Various new enemies from different factions like marines, pirates, bandits as well different types of animals, each with different, custom-made AI
 * New structures to raid and loot, such as pirate ships or marine bases
+* A bounty system for Pirates, Revolutionaries and other similar factions as well as a Bounty Hunter system for players to hunt them down
+* A crew system where Pirates can form their own crews, create a Jolly Roger and explore the world together
 * Quests and open world activities for players to do while in singleplayer or multiplayer
+* Various weapons and vanity items from
 * Customization support for both servers and single player worlds in the form of different config options
 
 ## How to Install
@@ -14,7 +17,8 @@ Mine Mine no Mi is a Minecraft mod, using MinecraftForge, inspired by the famous
 2. Download the Mod from either our [official website](https://pixelatedw.xyz/mine-mine-no-mi/downloads), or the [curse page](https://www.curseforge.com/minecraft/mc-mods/mine-mine-no-mi)
 3. Create a new "mods" folder, if not already present, inside your ".minecraft" folder
     * On Windows the ".minecraft" folder can be found by pressing Windows Key + R and running the %appdata% command
-    * On Linux it can be found inside the "/home/**user**/.minecraft" directory, where **user** is your username
+    * On Linux it can be found inside the "~/.minecraft" directory
+    * On macOS it can be found inside "~/Library/Application Support/minecraft" directory
 4. Move the Mod file (the .jar file) inside this folder
 5. Start Minecraft and choose the newly created "forge" profile
 6. Enjoy
