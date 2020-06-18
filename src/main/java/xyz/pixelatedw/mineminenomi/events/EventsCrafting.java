@@ -19,7 +19,39 @@ public class EventsCrafting
 	@SubscribeEvent
 	public static void onAnvilUpdate(AnvilUpdateEvent event)
 	{	
-		if(ItemsHelper.isSword(event.getLeft()))
+		if(ItemsHelper.isBow(event.getLeft()))
+		{
+			if(event.getRight().getItem() == ModBlocks.FLAME_DIAL.asItem() && event.getRight().getCount() >= 3 && 1 > EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, event.getLeft()))
+			{
+				event.setCost(1);
+				event.setMaterialCost(3);
+				event.setOutput(new ItemStack(event.getLeft().getItem()));
+				EnchantmentHelper.setEnchantments(EnchantmentHelper.getEnchantments(event.getLeft()), event.getOutput());
+				event.getOutput().addEnchantment(Enchantments.FLAME, 1);
+			}
+			else if(event.getRight().getItem() == ModBlocks.BREATH_DIAL.asItem() && event.getRight().getCount() >= 3 && 1 > EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, event.getLeft()))
+			{
+				event.setCost(1);
+				event.setMaterialCost(3);
+				event.setOutput(new ItemStack(event.getLeft().getItem()));
+				EnchantmentHelper.setEnchantments(EnchantmentHelper.getEnchantments(event.getLeft()), event.getOutput());
+				event.getOutput().addEnchantment(Enchantments.PUNCH, 1);
+			}
+			else if(event.getRight().getItem() == ModBlocks.EISEN_DIAL.asItem() && event.getRight().getCount() >= 3 && 1 > EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, event.getLeft()))
+			{
+				int level = event.getRight().getCount() / 3;
+				
+				if(level > 3)
+					level = 3;
+				
+				event.setCost(1);
+				event.setMaterialCost(3 * level);
+				event.setOutput(new ItemStack(event.getLeft().getItem()));
+				EnchantmentHelper.setEnchantments(EnchantmentHelper.getEnchantments(event.getLeft()), event.getOutput());
+				event.getOutput().addEnchantment(Enchantments.POWER, level);
+			}
+		}
+		else if(ItemsHelper.isSword(event.getLeft()))
 		{
 			if(event.getRight().getItem() == ModItems.KAIROSEKI && event.getRight().getCount() >= 10 && 1 > EnchantmentHelper.getEnchantmentLevel(ModEnchantments.KAIROSEKI, event.getLeft()))
 			{
