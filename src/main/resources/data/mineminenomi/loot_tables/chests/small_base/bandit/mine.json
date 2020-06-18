@@ -1,0 +1,45 @@
+{
+	"type": "minecraft:chest",
+	"pools": [
+		{
+			"name": "minecraft:mine",
+			"rolls": {
+				"min": 0.0,
+				"max": 1.0,
+				"type": "minecraft:uniform"
+			},
+			"entries": [
+				{
+					"type": "minecraft:item",
+					"name": "minecraft:iron_pickaxe",
+					"weight": 90
+				},
+				{
+					"type": "minecraft:item",
+					"name": "minecraft:iron_shovel",
+					"weight": 80
+				},
+				{
+					"type": "minecraft:item",
+					"name": "minecraft:diamond_pickaxe",
+					"weight": 30
+				},
+				{
+					"type": "minecraft:item",
+					"name": "minecraft:coal",
+					"weight": 60,
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"min": 1.0,
+								"max": 10.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				}
+			]
+		}
+	]
+}

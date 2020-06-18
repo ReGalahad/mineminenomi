@@ -82,6 +82,21 @@
 				},
 				{
 					"type": "minecraft:item",
+					"name": "minecraft:gunpowder",
+					"weight": 80,
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"min": 3.0,
+								"max": 10.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},				
+				{
+					"type": "minecraft:item",
 					"name": "mineminenomi:kairoseki_bullet",
 					"weight": 50,
 					"functions": [

@@ -7,8 +7,10 @@ import java.util.Random;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.tileentity.ChestTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.ResourceLocation;
@@ -29,6 +31,7 @@ import xyz.pixelatedw.mineminenomi.blocks.tileentities.CustomSpawnerTileEntity;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.mineminenomi.init.ModFeatures;
+import xyz.pixelatedw.mineminenomi.init.ModLootTables;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.debug.WyDebug;
@@ -142,7 +145,44 @@ public class BanditSmallBasePieces
 		protected void handleDataMarker(String function, BlockPos pos, IWorld world, Random rand, MutableBoundingBox sbb)
 		{
 			// Chests
-
+			System.out.println(function);
+			if (function.equals("gold_chest"))
+			{
+				world.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
+				TileEntity tileentity = world.getTileEntity(pos.down());
+				if (tileentity instanceof ChestTileEntity)
+				{
+					((ChestTileEntity) tileentity).setLootTable(ModLootTables.BANDIT_SMALL_BASE_GOLD_CHEST, rand.nextLong());
+				}
+			}
+			if (function.equals("lab_chest"))
+			{
+				world.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
+				TileEntity tileentity = world.getTileEntity(pos.down());
+				if (tileentity instanceof ChestTileEntity)
+				{
+					((ChestTileEntity) tileentity).setLootTable(ModLootTables.BANDIT_SMALL_BASE_LAB_CHEST, rand.nextLong());
+				}
+			}
+			if (function.equals("mine_chest"))
+			{
+				world.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
+				TileEntity tileentity = world.getTileEntity(pos.down());
+				if (tileentity instanceof ChestTileEntity)
+				{
+					((ChestTileEntity) tileentity).setLootTable(ModLootTables.BANDIT_SMALL_BASE_MINE_CHEST, rand.nextLong());
+				}
+			}
+			if (function.equals("ore_chest"))
+			{
+				world.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
+				TileEntity tileentity = world.getTileEntity(pos.down());
+				if (tileentity instanceof ChestTileEntity)
+				{
+					((ChestTileEntity) tileentity).setLootTable(ModLootTables.BANDIT_SMALL_BASE_ORES_CHEST, rand.nextLong());
+				}
+			}
+			
 			// Spawners
 			if (function.equals("captain_spawn"))
 			{

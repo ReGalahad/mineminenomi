@@ -156,6 +156,21 @@
 				},
 				{
 					"type": "minecraft:item",
+					"name": "minecraft:gunpowder",
+					"weight": 80,
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"min": 1.0,
+								"max": 5.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
 					"name": "mineminenomi:pipe",
 					"weight": 90
 				},

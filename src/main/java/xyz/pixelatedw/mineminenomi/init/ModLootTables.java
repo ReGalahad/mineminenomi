@@ -26,6 +26,11 @@ public class ModLootTables
 	public static final ResourceLocation LARGE_SHIP_FOOD_CHEST = new ResourceLocation(APIConfig.PROJECT_ID, "chests/large_ship/food");
 	public static final ResourceLocation LARGE_SHIP_COMBAT_CHEST = new ResourceLocation(APIConfig.PROJECT_ID, "chests/large_ship/combat");
 
+	public static final ResourceLocation BANDIT_SMALL_BASE_GOLD_CHEST = new ResourceLocation(APIConfig.PROJECT_ID, "chests/small_base/bandit/gold");
+	public static final ResourceLocation BANDIT_SMALL_BASE_MINE_CHEST = new ResourceLocation(APIConfig.PROJECT_ID, "chests/small_base/bandit/mine");
+	public static final ResourceLocation BANDIT_SMALL_BASE_LAB_CHEST = new ResourceLocation(APIConfig.PROJECT_ID, "chests/small_base/bandit/lab");
+	public static final ResourceLocation BANDIT_SMALL_BASE_ORES_CHEST = new ResourceLocation(APIConfig.PROJECT_ID, "chests/small_base/bandit/ores");
+
 	public static final ResourceLocation TRADER_WEAPONS = new ResourceLocation(APIConfig.PROJECT_ID, "entities/trader/weapons");
 
 	@SubscribeEvent
