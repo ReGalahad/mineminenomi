@@ -15,7 +15,6 @@ import xyz.pixelatedw.wypi.APIConfig;
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class EventsCrafting
 {
-
 	@SubscribeEvent
 	public static void onAnvilUpdate(AnvilUpdateEvent event)
 	{	
@@ -131,5 +130,4 @@ public class EventsCrafting
 			}
 		}
 	}
-	
 }

@@ -84,7 +84,7 @@ public class BanditSmallBaseStructure extends ScatteredStructure<NoFeatureConfig
 		if (!CommonConfig.instance.canSpawnSmallBases())
 			return;
 
-		if (biome.getCategory() == Category.PLAINS || biome.getCategory() == Category.BEACH || biome.getCategory() == Category.FOREST || biome.getCategory() == Category.EXTREME_HILLS || biome.getCategory() == Category.MESA || biome.getCategory() == Category.SAVANNA)
+		if (biome.getCategory() == Category.PLAINS || biome.getCategory() == Category.BEACH || biome.getCategory() == Category.FOREST || biome.getCategory() == Category.MESA || biome.getCategory() == Category.SAVANNA)
 		{
 			biome.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, Biome.createDecoratedFeature(ModFeatures.BANDIT_SMALL_BASE, IFeatureConfig.NO_FEATURE_CONFIG, Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
 			biome.addStructure(ModFeatures.BANDIT_SMALL_BASE, IFeatureConfig.NO_FEATURE_CONFIG);

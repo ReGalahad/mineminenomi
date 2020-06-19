@@ -116,7 +116,7 @@ public class SelectHotbarAbilitiesScreen extends Screen
 		Ability abl = this.abilityDataProps.getUnlockedAbilities(AbilityCategory.DEVIL_FRUIT).stream().findFirst().orElse(null);
 		if (abl != null || this.devilFruitProps.hasDevilFruit())
 		{
-			String iconName = abl.getName();
+			String iconName = abl != null ? abl.getName() : "";
 			ResourceLocation dfIcon = new ResourceLocation(APIConfig.PROJECT_ID, "textures/abilities/" + WyHelper.getResourceName(iconName) + ".png");
 			
 			if(this.devilFruitProps.hasDevilFruit())
@@ -136,7 +136,6 @@ public class SelectHotbarAbilitiesScreen extends Screen
 			this.addButton(devilFruitsButton);
 		}
 		abl = this.abilityDataProps.getUnlockedAbilities(AbilityCategory.RACIAL).stream().findFirst().orElse(null);
-		System.out.println(this.abilityDataProps.getUnlockedAbilities(AbilityCategory.RACIAL));
 		if (abl != null)
 		{
 			String iconName = abl.getName();
