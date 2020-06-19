@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.world.features.structures.smallship.marine;
+package xyz.pixelatedw.mineminenomi.world.features.structures.largeship.marine;
 
 import java.util.Random;
 
@@ -24,9 +24,9 @@ import xyz.pixelatedw.mineminenomi.init.ModFeatures;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.debug.WyDebug;
 
-public class MarineSmallShipStructure extends ScatteredStructure<NoFeatureConfig>
+public class MarineLargeShipStructure extends ScatteredStructure<NoFeatureConfig>
 {
-	public MarineSmallShipStructure()
+	public MarineLargeShipStructure()
 	{
 		super(NoFeatureConfig::deserialize);
 	}
@@ -34,7 +34,7 @@ public class MarineSmallShipStructure extends ScatteredStructure<NoFeatureConfig
 	@Override
 	public String getStructureName()
 	{
-		return "Marine_Small_Ship";
+		return "Marine_Large_Ship";
 	}
 
 	@Override
@@ -46,14 +46,14 @@ public class MarineSmallShipStructure extends ScatteredStructure<NoFeatureConfig
 	@Override
 	public int getSize()
 	{
-		return 2;
+		return 3;
 	}
 
 	// Keep in mind Feature Distance - Feature Separation MUST BE > 0, otherwise the game will crash!
 	@Override
 	protected int getBiomeFeatureDistance(ChunkGenerator<?> chunkGenerator)
 	{
-		return 10;
+		return 9; //16;
 	}
 
 	@Override
@@ -66,7 +66,7 @@ public class MarineSmallShipStructure extends ScatteredStructure<NoFeatureConfig
 	public boolean hasStartAt(ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ)
 	{
 		ChunkPos chunkPos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
-		if (chunkPosX == chunkPos.x && chunkPosZ == chunkPos.z && WyHelper.isSurfaceFlat(chunkGen, chunkPosX, chunkPosZ, 3) && MathHelper.clamp(WyHelper.randomWithRange(0, 100) + WyHelper.randomDouble(), 0, 100) < CommonConfig.instance.getChanceForSmallShipsSpawn())
+		if (chunkPosX == chunkPos.x && chunkPosZ == chunkPos.z && WyHelper.isSurfaceFlat(chunkGen, chunkPosX, chunkPosZ, 3) && MathHelper.clamp(WyHelper.randomWithRange(0, 100) + WyHelper.randomDouble(), 0, 100) < 100)
 		{
 			return chunkGen.getBiomeProvider().getBiomesInSquare((chunkPosX << 4) + 9, (chunkPosZ << 4) + 9, this.getSize() * 16).stream().allMatch(biome -> chunkGen.hasStructure(biome, this));
 		}
@@ -77,18 +77,18 @@ public class MarineSmallShipStructure extends ScatteredStructure<NoFeatureConfig
 	@Override
 	public IStartFactory getStartFactory()
 	{
-		return MarineSmallShipStructure.Start::new;
+		return MarineLargeShipStructure.Start::new;
 	}
 
 	public static void register(Biome biome)
 	{
-		if (!CommonConfig.instance.canSpawnSmallShips())
+		if (!CommonConfig.instance.canSpawnLargeShips())
 			return;
 
 		if (biome.getCategory() == Category.OCEAN)
 		{
-			biome.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, Biome.createDecoratedFeature(ModFeatures.MARINE_SMALL_SHIP, IFeatureConfig.NO_FEATURE_CONFIG, Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
-			biome.addStructure(ModFeatures.MARINE_SMALL_SHIP, IFeatureConfig.NO_FEATURE_CONFIG);
+			biome.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, Biome.createDecoratedFeature(ModFeatures.MARINE_LARGE_SHIP, IFeatureConfig.NO_FEATURE_CONFIG, Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
+			biome.addStructure(ModFeatures.MARINE_LARGE_SHIP, IFeatureConfig.NO_FEATURE_CONFIG);
 		}
 	}
 
@@ -104,12 +104,12 @@ public class MarineSmallShipStructure extends ScatteredStructure<NoFeatureConfig
 		{
 			int i = chunkX * 16;
 			int j = chunkZ * 16;
-			BlockPos blockpos = new BlockPos(i, generator.getSeaLevel() - 2, j);
-			Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
-			MarineSmallShipPieces.addComponents(templateManagerIn, blockpos, rotation, this.components);
+			BlockPos blockpos = new BlockPos(i, generator.getSeaLevel() - 4, j);
+			//Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
+			MarineLargeShipPieces.addComponents(templateManagerIn, blockpos, Rotation.NONE, this.components);
 			this.recalculateStructureSize();
 			
-			WyDebug.debug("Marine Small Ship spawned at: /tp " + blockpos.getX() + " ~ " + blockpos.getZ());
+			WyDebug.debug("Marine Large Ship spawned at: /tp " + blockpos.getX() + " ~ " + blockpos.getZ());
 		}
 	}
 }

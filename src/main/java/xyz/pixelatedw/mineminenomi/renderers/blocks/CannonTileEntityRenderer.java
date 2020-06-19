@@ -5,6 +5,7 @@ import org.lwjgl.opengl.GL11;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.util.ResourceLocation;
+import xyz.pixelatedw.mineminenomi.blocks.CannonBlock;
 import xyz.pixelatedw.mineminenomi.blocks.DenDenMushiBlock;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.CannonTileEntity;
 import xyz.pixelatedw.mineminenomi.models.blocks.CannonModel;
@@ -27,9 +28,30 @@ public class CannonTileEntityRenderer extends TileEntityRenderer<CannonTileEntit
 		
 		this.bindTexture(TEXTURE1);
 		
+		double xRotation = 0.5;
+		double zRotation = 0.5;
+		
+		switch(state.get(CannonBlock.FACING))
+		{
+			case NORTH:
+				zRotation -= 0.25F;
+				break;
+			case SOUTH:
+				zRotation += 0.25F;
+				break;
+			case WEST:
+				xRotation -= 0.25F;
+				break;
+			case EAST:
+				xRotation += 0.25F;
+				break;
+			default:
+				break;
+		}
+		
 		GL11.glPushMatrix();
 		{
-			GL11.glTranslated(posX + 0.5, posY + 1.5, posZ + 0.5);
+			GL11.glTranslated(posX + xRotation, posY + 1.5, posZ + zRotation);
 			GL11.glScalef(1, 1, 1);
 			GL11.glRotatef(-state.get(DenDenMushiBlock.FACING).getHorizontalAngle() + 180, 0F, 1F, 0F);
 			GL11.glRotatef(180, 0F, 0F, 1F);

@@ -55,7 +55,8 @@ public class CommonConfig
 	private DoubleValue spawnChanceCamps;
 	private BooleanValue spawnSmallBases;
 	private DoubleValue spawnChanceSmallBase;
-	private DoubleValue spawnRateLargeShip;
+	private BooleanValue spawnLargeShips;
+	private DoubleValue spawnChanceLargeShips;
 
 	// Quests
 	private BooleanValue quests;
@@ -182,8 +183,8 @@ public class CommonConfig
 			this.spawnChanceCamps = builder.comment("Sets the % chance for a Camp to spawn, the % is calculated per chunk (16x16), 40% by default, min is 0 and max is 100; ").defineInRange("Camps Spawn Chance", 40, 0.0, 100);
 			this.spawnSmallBases = builder.comment("Allows small bases to spawn in the world; true by default").define("Spawn Small Bases", true);
 			this.spawnChanceSmallBase = builder.comment("Sets the % chance for a Small Base to spawn, the % is calculated per chunk (16x16), 25% by default, min is 0 and max is 100; ").defineInRange("Small Bases Spawn Chance", 25, 0.0, 100);
-
-			this.spawnRateLargeShip = builder.comment("Spawn Rate for Large Ships, min is 0 and max is 100").defineInRange("Spawn Rate for Large Ships", 1.0, 0.0, 100.0);
+			this.spawnLargeShips = builder.comment("Allows large ships to spawn in the world; true by default").define("Spawn Large Ships", true);
+			this.spawnChanceLargeShips = builder.comment("Sets the % chance for a Large Ships to spawn, the % is calculated per chunk (16x16), 25% by default, min is 0 and max is 100; ").defineInRange("Large Ships Spawn Chance", 25, 0.0, 100);
 		}
 		builder.pop();
 
@@ -245,6 +246,16 @@ public class CommonConfig
 		builder.pop();
 	}
 	
+	public double getChanceForLargeShipsSpawn()
+	{
+		return this.spawnChanceLargeShips.get();
+	}
+
+	public boolean canSpawnLargeShips()
+	{
+		return this.spawnLargeShips.get();
+	}
+	
 	public double getChanceForSmallBasesSpawn()
 	{
 		return this.spawnChanceSmallBase.get();
@@ -265,7 +276,7 @@ public class CommonConfig
 		return this.spawnCamps.get();
 	}
 
-	public double getChanceForSmallShipSpawn()
+	public double getChanceForSmallShipsSpawn()
 	{
 		return this.spawnChanceSmallShip.get();
 	}
@@ -365,11 +376,6 @@ public class CommonConfig
 	public boolean isWantedPosterPackagesEnabled()
 	{
 		return this.wantedPosterPackages.get();
-	}
-
-	public double getLargeShipSpawnRate()
-	{
-		return this.spawnRateLargeShip.get();
 	}
 
 	public double getDorikiRewardMultiplier()

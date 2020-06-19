@@ -25,11 +25,11 @@ import xyz.pixelatedw.wypi.debug.WyDebug;
 
 public class BanditSmallBaseStructure extends ScatteredStructure<NoFeatureConfig>
 {
-
 	public BanditSmallBaseStructure()
 	{
 		super(NoFeatureConfig::deserialize);
 	}
+	
 	@Override
 	public String getStructureName()
 	{
@@ -45,14 +45,14 @@ public class BanditSmallBaseStructure extends ScatteredStructure<NoFeatureConfig
 	@Override
 	public int getSize()
 	{
-		return 6;
+		return 4;
 	}
 
 	// Keep in mind Feature Distance - Feature Separation MUST BE > 0, otherwise the game will crash!
 	@Override
 	protected int getBiomeFeatureDistance(ChunkGenerator<?> chunkGenerator)
 	{
-		return 16;
+		return 12;
 	}
 
 	@Override
