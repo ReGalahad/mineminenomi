@@ -46,7 +46,7 @@ public class AbilityProjectileEntity extends ThrowableEntity
 	private boolean changeHurtTime = false;
 	// For reference default hurt time is 20
 	private int hurtTime = 10;
-
+	boolean entityDamaged = false;
 	// Setting the defaults so that no crash occurs and so they will be null safe.
 	public IOnEntityImpact onEntityImpactEvent = (hitEntity) -> { this.onBlockImpactEvent.onImpact(hitEntity.getPosition()); };
 	public IOnBlockImpact onBlockImpactEvent = (hit) -> {};
@@ -157,7 +157,8 @@ public class AbilityProjectileEntity extends ThrowableEntity
 					if (MinecraftForge.EVENT_BUS.post(event))
 						return;
 
-					boolean entityDamaged = hitEntity.attackEntityFrom(this.causeAbilityProjectileDamage(), this.damage);
+					if(!this.entityDamaged)
+					entityDamaged = hitEntity.attackEntityFrom(this.causeAbilityProjectileDamage(), this.damage);
 
 					if (this.withEffects.getEffects().length > 0)
 					{
@@ -171,9 +172,12 @@ public class AbilityProjectileEntity extends ThrowableEntity
 
 					if(entityDamaged)
 					{
+						System.out.println("damaged");
 						this.onEntityImpactEvent.onImpact(hitEntity);
 						if (!this.canPassThroughEntities)
 							this.remove();
+						else
+							entityDamaged = false;
 					}
 
 					if (this.changeHurtTime)
@@ -190,6 +194,7 @@ public class AbilityProjectileEntity extends ThrowableEntity
 
 				if (!this.canPassThroughBlocks)
 				{
+					System.out.println("impacts: " + blockHit.getPos());
 					this.onBlockImpactEvent.onImpact(blockHit.getPos());
 					if (!this.canGetStuckInGround)
 						this.remove();

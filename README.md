@@ -55,7 +55,12 @@ Mine Mine no Mi is a Minecraft mod, using MinecraftForge, inspired by the famous
         5. Finish
     
     * For IntelliJ:
-        1. (Soon<sup>tm</sup>)
+        1. File -> New 
+        2. Project from existing source...
+        3. Click the build.gradle
+        
+        - You can alternatively open it as a project folder with the 
+        windows extension and it should start importing it automatically.
 
 
 ## License

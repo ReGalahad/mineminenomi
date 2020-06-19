@@ -32,10 +32,9 @@ public class MiniHollowProjectile extends AbilityProjectileEntity
 	{
 		super(HoroProjectiles.MINI_HOLLOW, world, player);
 
-		this.setDamage(2);
+		this.setDamage(2.5f);
 		this.setChangeHurtTime(true);
-		this.setHurtTime(20);
-		
+
 		this.withEffects = () -> {
 			return new EffectInstance[] {
 					new EffectInstance(Effects.NAUSEA, 150, 0),
@@ -54,7 +53,7 @@ public class MiniHollowProjectile extends AbilityProjectileEntity
 		explosion.setDestroyBlocks(true);
 		explosion.setFireAfterExplosion(false);
 		explosion.setSmokeParticles(new CommonExplosionParticleEffect(2));
-		explosion.setDamageEntities(true);
+		explosion.setDamageEntities(false);
 		explosion.doExplosion();
 	}
 }
