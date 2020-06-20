@@ -74,7 +74,7 @@ public class StatsGainEvents
 						double i = attrAtk.getBaseValue();
 						double j = attrHP.getBaseValue();
 
-						plusDoriki = (int) Math.round(((i + j) / 10) / Math.PI);
+						plusDoriki = (int) Math.round(((i + j) / 10) / 2);
 						plusBounty = (int) Math.round((i + j) / 10);
 						plusBelly = 1;
 

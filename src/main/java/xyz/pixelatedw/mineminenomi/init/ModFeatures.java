@@ -19,6 +19,8 @@ import xyz.pixelatedw.mineminenomi.world.features.structures.smallbase.bandit.Ba
 import xyz.pixelatedw.mineminenomi.world.features.structures.smallbase.bandit.BanditSmallBaseStructure;
 import xyz.pixelatedw.mineminenomi.world.features.structures.smallship.marine.MarineSmallShipPieces;
 import xyz.pixelatedw.mineminenomi.world.features.structures.smallship.marine.MarineSmallShipStructure;
+import xyz.pixelatedw.mineminenomi.world.features.structures.smallship.pirate.PirateSmallShipPieces;
+import xyz.pixelatedw.mineminenomi.world.features.structures.smallship.pirate.PirateSmallShipStructure;
 import xyz.pixelatedw.wypi.WyRegistry;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -28,6 +30,7 @@ public class ModFeatures
 	public static final Structure<NoFeatureConfig> BANDIT_SMALL_BASE = new BanditSmallBaseStructure();
 	public static final Structure<NoFeatureConfig> BANDIT_CAMP = new BanditCampStructure();
 	public static final Structure<NoFeatureConfig> MARINE_CAMP = new MarineCampStructure();
+	public static final Structure<NoFeatureConfig> PIRATE_SMALL_SHIP = new PirateSmallShipStructure();
 	public static final Structure<NoFeatureConfig> MARINE_SMALL_SHIP = new MarineSmallShipStructure();
 	public static final Structure<NoFeatureConfig> DOJO = new DojoStructure();
 
@@ -39,6 +42,7 @@ public class ModFeatures
 
 			BanditSmallBaseStructure.register(biome);
 			
+			PirateSmallShipStructure.register(biome);
 			MarineSmallShipStructure.register(biome);
 
 			BanditCampStructure.register(biome);
@@ -56,6 +60,7 @@ public class ModFeatures
 		WyRegistry.registerFeature(BANDIT_SMALL_BASE, "Bandit Small Base");
 		WyRegistry.registerFeature(BANDIT_CAMP, "Bandit Camp");
 		WyRegistry.registerFeature(MARINE_CAMP, "Marine Camp");
+		WyRegistry.registerFeature(PIRATE_SMALL_SHIP, "Pirate Small Ship");
 		WyRegistry.registerFeature(MARINE_SMALL_SHIP, "Marine Small Ship");
 		WyRegistry.registerFeature(DOJO, "Dojo");
 	}
@@ -66,6 +71,7 @@ public class ModFeatures
 		public static final IStructurePieceType BANDIT_SMALL_BASE_PIECE = IStructurePieceType.register(BanditSmallBasePieces.Piece::new, "bandit_small_base_piece");
 		public static final IStructurePieceType BANDIT_CAMP_PIECE = IStructurePieceType.register(BanditCampPieces.Piece::new, "bandit_camp_piece");
 		public static final IStructurePieceType MARINE_CAMP_PIECE = IStructurePieceType.register(MarineCampPieces.Piece::new, "marine_camp_piece");
+		public static final IStructurePieceType PIRATE_SMALL_SHIP_PIECE = IStructurePieceType.register(PirateSmallShipPieces.Piece::new, "pirate_small_ship_piece");
 		public static final IStructurePieceType MARINE_SMALL_SHIP_PIECE = IStructurePieceType.register(MarineSmallShipPieces.Piece::new, "marine_small_ship_piece");
 		public static final IStructurePieceType DOJO_PIECE = IStructurePieceType.register(DojoPiece::new, "dojo_piece");
 	}
