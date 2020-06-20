@@ -158,7 +158,7 @@ public class AbilityProjectileEntity extends ThrowableEntity
 						return;
 
 					if(!this.entityDamaged)
-					entityDamaged = hitEntity.attackEntityFrom(this.causeAbilityProjectileDamage(), this.damage);
+						this.entityDamaged = hitEntity.attackEntityFrom(this.causeAbilityProjectileDamage(), this.damage);
 
 					if (this.withEffects.getEffects().length > 0)
 					{
@@ -170,14 +170,13 @@ public class AbilityProjectileEntity extends ThrowableEntity
 						}
 					}
 
-					if(entityDamaged)
+					if(this.entityDamaged)
 					{
-						System.out.println("damaged");
 						this.onEntityImpactEvent.onImpact(hitEntity);
 						if (!this.canPassThroughEntities)
 							this.remove();
 						else
-							entityDamaged = false;
+							this.entityDamaged = false;
 					}
 
 					if (this.changeHurtTime)
@@ -194,7 +193,6 @@ public class AbilityProjectileEntity extends ThrowableEntity
 
 				if (!this.canPassThroughBlocks)
 				{
-					System.out.println("impacts: " + blockHit.getPos());
 					this.onBlockImpactEvent.onImpact(blockHit.getPos());
 					if (!this.canGetStuckInGround)
 						this.remove();

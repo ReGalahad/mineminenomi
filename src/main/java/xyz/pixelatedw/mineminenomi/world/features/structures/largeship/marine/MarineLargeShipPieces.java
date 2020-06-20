@@ -43,22 +43,22 @@ public class MarineLargeShipPieces
 	private static final ResourceLocation SMALL_MAST = new ResourceLocation(APIConfig.PROJECT_ID, "large_ship/marine/small_mast");
 
 	private static final Map<ResourceLocation, BlockPos> POSITION_OFFSET = ImmutableMap.<ResourceLocation, BlockPos>builder()
-		.put(FRONT, new BlockPos(0, 0, 0))
+		.put(FRONT, new BlockPos(0, 0, -22))
 		.put(MIDDLE, new BlockPos(0, 0, 0))
-		.put(BACK, new BlockPos(0, 0, 0))
-		.put(LARGE_MAST, new BlockPos(0, 0, 0))
-		.put(SMALL_MAST, new BlockPos(0, 0, 0))
+		.put(BACK, new BlockPos(0, 0, 15))
+		.put(LARGE_MAST, new BlockPos(-2, 13, 0))
+		.put(SMALL_MAST, new BlockPos(2, 18, 19))
 		.build();
 	
 	private static final Map<ResourceLocation, BlockPos> CENTER_OFFSET = ImmutableMap.<ResourceLocation, BlockPos>builder()
-		.put(FRONT, new BlockPos(0, 0, 0))
+		.put(FRONT, new BlockPos(7, 12, 26))
 		.put(MIDDLE, new BlockPos(7, 12, 4))
-		.put(BACK, new BlockPos(0, 0, 0))
-		.put(LARGE_MAST, new BlockPos(0, 0, 0))
-		.put(SMALL_MAST, new BlockPos(0, 0, 0))
+		.put(BACK, new BlockPos(7, 12, -11))
+		.put(LARGE_MAST, new BlockPos(9, 0, 4))
+		.put(SMALL_MAST, new BlockPos(5, 0, -15))
 		.build();
 	
-	private static final Map<ResourceLocation, BlockState> DEBUG_BLOCK = ImmutableMap.<ResourceLocation, BlockState>builder()
+	private static final Map<ResourceLocation, BlockState> DEBUG_BLOCKS = ImmutableMap.<ResourceLocation, BlockState>builder()
 		.put(FRONT, Blocks.EMERALD_BLOCK.getDefaultState())
 		.put(MIDDLE, Blocks.COAL_BLOCK.getDefaultState())
 		.put(BACK, Blocks.REDSTONE_BLOCK.getDefaultState())
@@ -75,11 +75,11 @@ public class MarineLargeShipPieces
 	
 	public static void addComponents(TemplateManager templateManager, BlockPos pos, Rotation rot, List<StructurePiece> components)
 	{
-		//components.add(new Piece(templateManager, FRONT, pos, rot));
+		components.add(new Piece(templateManager, FRONT, pos, rot));
 		components.add(new Piece(templateManager, MIDDLE, pos, rot));
-		//components.add(new Piece(templateManager, BACK, pos, rot));
-		//components.add(new Piece(templateManager, LARGE_MAST, pos, rot));
-		//components.add(new Piece(templateManager, SMALL_MAST, pos, rot));
+		components.add(new Piece(templateManager, BACK, pos, rot));
+		components.add(new Piece(templateManager, LARGE_MAST, pos, rot));
+		components.add(new Piece(templateManager, SMALL_MAST, pos, rot));
 	}
 
 	public static class Piece extends TemplateStructurePiece
@@ -163,11 +163,12 @@ public class MarineLargeShipPieces
 			BlockPos offset = MarineLargeShipPieces.POSITION_OFFSET.get(this.resourceLocation);
 			this.templatePosition.add(Template.transformedBlockPos(placementsettings, new BlockPos(offset.getX(), offset.getY(), offset.getZ())));
 			
-			BlockPos pos = this.templatePosition.add(Template.transformedBlockPos(placementsettings, CENTER_OFFSET.get(this.resourceLocation)));
-			BlockState block = DEBUG_BLOCK.get(this.resourceLocation);
-			world.setBlockState(pos, block, 3);
+			boolean flag = super.addComponentParts(world, random, bb, chunkPos);
 			
-			return super.addComponentParts(world, random, bb, chunkPos);
+			BlockPos debugOffset = this.templatePosition.add(MarineLargeShipPieces.CENTER_OFFSET.get(this.resourceLocation));
+			world.setBlockState(debugOffset, DEBUG_BLOCKS.get(this.resourceLocation), 3);
+			
+			return flag;
 		}
 	}
 }

@@ -35,7 +35,7 @@ public class ModFeatures
 	{
 		for (Biome biome : ForgeRegistries.BIOMES)
 		{
-			//MarineLargeShipStructure.register(biome);
+			MarineLargeShipStructure.register(biome);
 
 			BanditSmallBaseStructure.register(biome);
 			

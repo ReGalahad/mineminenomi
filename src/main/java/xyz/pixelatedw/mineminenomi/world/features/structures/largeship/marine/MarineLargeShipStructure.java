@@ -66,7 +66,7 @@ public class MarineLargeShipStructure extends ScatteredStructure<NoFeatureConfig
 	public boolean hasStartAt(ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ)
 	{
 		ChunkPos chunkPos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
-		if (chunkPosX == chunkPos.x && chunkPosZ == chunkPos.z && WyHelper.isSurfaceFlat(chunkGen, chunkPosX, chunkPosZ, 3) && MathHelper.clamp(WyHelper.randomWithRange(0, 100) + WyHelper.randomDouble(), 0, 100) < 100)
+		if (chunkPosX == chunkPos.x && chunkPosZ == chunkPos.z && WyHelper.isSurfaceFlat(chunkGen, chunkPosX, chunkPosZ, 3) && MathHelper.clamp(WyHelper.randomWithRange(0, 100) + WyHelper.randomDouble(), 0, 100) < CommonConfig.instance.getChanceForLargeShipsSpawn())
 		{
 			return chunkGen.getBiomeProvider().getBiomesInSquare((chunkPosX << 4) + 9, (chunkPosZ << 4) + 9, this.getSize() * 16).stream().allMatch(biome -> chunkGen.hasStructure(biome, this));
 		}
@@ -105,8 +105,8 @@ public class MarineLargeShipStructure extends ScatteredStructure<NoFeatureConfig
 			int i = chunkX * 16;
 			int j = chunkZ * 16;
 			BlockPos blockpos = new BlockPos(i, generator.getSeaLevel() - 4, j);
-			//Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
-			MarineLargeShipPieces.addComponents(templateManagerIn, blockpos, Rotation.NONE, this.components);
+			Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
+			MarineLargeShipPieces.addComponents(templateManagerIn, blockpos, rotation, this.components);
 			this.recalculateStructureSize();
 			
 			WyDebug.debug("Marine Large Ship spawned at: /tp " + blockpos.getX() + " ~ " + blockpos.getZ());
