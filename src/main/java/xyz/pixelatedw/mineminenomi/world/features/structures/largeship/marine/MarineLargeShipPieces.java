@@ -133,6 +133,9 @@ public class MarineLargeShipPieces
 			}
 
 			// Spawners
+			// 3 x5 Grunt Spawners
+			// 1 x3 Grunt Spawner
+			// 1 Captain Spawner
 			StructuresHelper.setupSpawners(function, world, pos, StructureFaction.MARINE);
 		}
 

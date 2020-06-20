@@ -28,8 +28,8 @@ import net.minecraft.world.gen.feature.template.PlacementSettings;
 import net.minecraft.world.gen.feature.template.StructureProcessor;
 import net.minecraft.world.gen.feature.template.Template;
 import net.minecraft.world.gen.feature.template.TemplateManager;
-import xyz.pixelatedw.mineminenomi.blocks.tileentities.CustomSpawnerTileEntity;
-import xyz.pixelatedw.mineminenomi.init.ModBlocks;
+import xyz.pixelatedw.mineminenomi.api.helpers.StructuresHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.StructuresHelper.StructureFaction;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.mineminenomi.init.ModFeatures;
 import xyz.pixelatedw.mineminenomi.init.ModLootTables;
@@ -164,26 +164,9 @@ public class MarineCampPieces
 			}
 
 			// Spawners
-			if (function.equals("captain_spawn"))
-			{
-				world.setBlockState(pos, ModBlocks.CUSTOM_SPAWNER.getDefaultState(), 3);
-				TileEntity spawner = world.getTileEntity(pos);
-				if (spawner instanceof CustomSpawnerTileEntity)
-				{
-					((CustomSpawnerTileEntity) spawner).setSpawnerLimit(1);
-					((CustomSpawnerTileEntity) spawner).setSpawnerMob(ModEntities.MARINE_CAPTAIN);
-				}
-			}
-			if (function.equals("grunt_spawn"))
-			{
-				world.setBlockState(pos, ModBlocks.CUSTOM_SPAWNER.getDefaultState(), 3);
-				TileEntity spawner = world.getTileEntity(pos);
-				if (spawner instanceof CustomSpawnerTileEntity)
-				{
-					((CustomSpawnerTileEntity) spawner).setSpawnerLimit(2);
-					((CustomSpawnerTileEntity) spawner).setSpawnerMob(MarineCampPieces.chooseGruntType());
-				}
-			}
+			// 4-6 x2 Grunt Spawners
+			// 1 Captain Spawner
+			StructuresHelper.setupSpawners(function, world, pos, StructureFaction.MARINE);
 		}
 
 		@Override

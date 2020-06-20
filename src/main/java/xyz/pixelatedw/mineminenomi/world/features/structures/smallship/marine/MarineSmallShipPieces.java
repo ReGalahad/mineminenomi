@@ -5,10 +5,8 @@ import java.util.Map;
 import java.util.Random;
 
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Lists;
 
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.EntityType;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ChestTileEntity;
 import net.minecraft.tileentity.TileEntity;
@@ -25,13 +23,11 @@ import net.minecraft.world.gen.feature.template.BlockIgnoreStructureProcessor;
 import net.minecraft.world.gen.feature.template.PlacementSettings;
 import net.minecraft.world.gen.feature.template.Template;
 import net.minecraft.world.gen.feature.template.TemplateManager;
-import xyz.pixelatedw.mineminenomi.blocks.tileentities.CustomSpawnerTileEntity;
-import xyz.pixelatedw.mineminenomi.init.ModBlocks;
-import xyz.pixelatedw.mineminenomi.init.ModEntities;
+import xyz.pixelatedw.mineminenomi.api.helpers.StructuresHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.StructuresHelper.StructureFaction;
 import xyz.pixelatedw.mineminenomi.init.ModFeatures;
 import xyz.pixelatedw.mineminenomi.init.ModLootTables;
 import xyz.pixelatedw.wypi.APIConfig;
-import xyz.pixelatedw.wypi.WyHelper;
 
 public class MarineSmallShipPieces
 {
@@ -41,14 +37,7 @@ public class MarineSmallShipPieces
 	private static final ResourceLocation MAST = new ResourceLocation(APIConfig.PROJECT_ID, "small_ship/marine/mast");
 	private static final Map<ResourceLocation, BlockPos> CENTER_OFFSET = ImmutableMap.of(FRONT, new BlockPos(4, 4, 21), MIDDLE, new BlockPos(4, 4, 4), BACK, new BlockPos(4, 4, -10), MAST, new BlockPos(9, 0, 5));
 	private static final Map<ResourceLocation, BlockPos> POSITION_OFFSET = ImmutableMap.of(FRONT, new BlockPos(0, 0, -17), MIDDLE, BlockPos.ZERO, BACK, new BlockPos(0, 0, 14), MAST, new BlockPos(-5, 8, -1));
-	
-	private static final List<EntityType> GRUNT_TYPES = Lists.newArrayList(ModEntities.MARINE_WITH_SWORD, ModEntities.MARINE_WITH_GUN);
-	
-	private static EntityType chooseGruntType()
-	{
-		return GRUNT_TYPES.get((int) WyHelper.randomWithRange(0, GRUNT_TYPES.size() - 1));
-	}
-	
+
 	public static void addComponents(TemplateManager templateManager, BlockPos pos, Rotation rot, List<StructurePiece> components)
 	{
 		components.add(new Piece(templateManager, FRONT, pos, rot));
@@ -119,36 +108,10 @@ public class MarineSmallShipPieces
 			}
 
 			// Spawners
-			if (function.equals("grunt_x2_spawn"))
-			{
-				world.setBlockState(pos, ModBlocks.CUSTOM_SPAWNER.getDefaultState(), 3);
-				TileEntity spawner = world.getTileEntity(pos);
-				if (spawner instanceof CustomSpawnerTileEntity)
-				{
-					((CustomSpawnerTileEntity) spawner).setSpawnerLimit(2);
-					((CustomSpawnerTileEntity) spawner).setSpawnerMob(MarineSmallShipPieces.chooseGruntType());
-				}
-			}
-			if (function.equals("grunt_x3_spawn"))
-			{
-				world.setBlockState(pos, ModBlocks.CUSTOM_SPAWNER.getDefaultState(), 3);
-				TileEntity spawner = world.getTileEntity(pos);
-				if (spawner instanceof CustomSpawnerTileEntity)
-				{
-					((CustomSpawnerTileEntity) spawner).setSpawnerLimit(3);
-					((CustomSpawnerTileEntity) spawner).setSpawnerMob(MarineSmallShipPieces.chooseGruntType());
-				}
-			}
-			if (function.equals("grunt_x5_spawn"))
-			{
-				world.setBlockState(pos, ModBlocks.CUSTOM_SPAWNER.getDefaultState(), 3);
-				TileEntity spawner = world.getTileEntity(pos);
-				if (spawner instanceof CustomSpawnerTileEntity)
-				{
-					((CustomSpawnerTileEntity) spawner).setSpawnerLimit(5);
-					((CustomSpawnerTileEntity) spawner).setSpawnerMob(MarineSmallShipPieces.chooseGruntType());
-				}
-			}
+			// 2 x5 Grunt Spawners
+			// 1 x3 Grunt Spawner
+			// 1 x2 Grunt Spawner
+			StructuresHelper.setupSpawners(function, world, pos, StructureFaction.MARINE);
 		}
 
 		@Override
