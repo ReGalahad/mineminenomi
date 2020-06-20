@@ -5,11 +5,8 @@ import java.util.Map;
 import java.util.Random;
 
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Lists;
 
-import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.EntityType;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ChestTileEntity;
 import net.minecraft.tileentity.TileEntity;
@@ -26,13 +23,11 @@ import net.minecraft.world.gen.feature.template.BlockIgnoreStructureProcessor;
 import net.minecraft.world.gen.feature.template.PlacementSettings;
 import net.minecraft.world.gen.feature.template.Template;
 import net.minecraft.world.gen.feature.template.TemplateManager;
-import xyz.pixelatedw.mineminenomi.blocks.tileentities.CustomSpawnerTileEntity;
-import xyz.pixelatedw.mineminenomi.init.ModBlocks;
-import xyz.pixelatedw.mineminenomi.init.ModEntities;
+import xyz.pixelatedw.mineminenomi.api.helpers.StructuresHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.StructuresHelper.StructureFaction;
 import xyz.pixelatedw.mineminenomi.init.ModFeatures;
 import xyz.pixelatedw.mineminenomi.init.ModLootTables;
 import xyz.pixelatedw.wypi.APIConfig;
-import xyz.pixelatedw.wypi.WyHelper;
 
 public class MarineLargeShipPieces
 {
@@ -57,21 +52,6 @@ public class MarineLargeShipPieces
 		.put(LARGE_MAST, new BlockPos(9, 0, 4))
 		.put(SMALL_MAST, new BlockPos(5, 0, -15))
 		.build();
-	
-	private static final Map<ResourceLocation, BlockState> DEBUG_BLOCKS = ImmutableMap.<ResourceLocation, BlockState>builder()
-		.put(FRONT, Blocks.EMERALD_BLOCK.getDefaultState())
-		.put(MIDDLE, Blocks.COAL_BLOCK.getDefaultState())
-		.put(BACK, Blocks.REDSTONE_BLOCK.getDefaultState())
-		.put(LARGE_MAST, Blocks.LAPIS_BLOCK.getDefaultState())
-		.put(SMALL_MAST, Blocks.YELLOW_WOOL.getDefaultState())
-		.build();
-	
-	private static final List<EntityType> GRUNT_TYPES = Lists.newArrayList(ModEntities.MARINE_WITH_SWORD, ModEntities.MARINE_WITH_GUN);
-	
-	private static EntityType chooseGruntType()
-	{
-		return GRUNT_TYPES.get((int) WyHelper.randomWithRange(0, GRUNT_TYPES.size() - 1));
-	}
 	
 	public static void addComponents(TemplateManager templateManager, BlockPos pos, Rotation rot, List<StructurePiece> components)
 	{
@@ -124,36 +104,36 @@ public class MarineLargeShipPieces
 		protected void handleDataMarker(String function, BlockPos pos, IWorld world, Random rand, MutableBoundingBox sbb)
 		{
 			// Chests
-			if (function.equals("weapons_chest"))
+			if (function.equals("combat_chest"))
 			{
 				world.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
 				TileEntity tileentity = world.getTileEntity(pos.down());
 				if (tileentity instanceof ChestTileEntity)
 				{
-					((ChestTileEntity) tileentity).setLootTable(ModLootTables.SMALL_SHIP_COMBAT_CHEST, rand.nextLong());
+					((ChestTileEntity) tileentity).setLootTable(ModLootTables.LARGE_SHIP_COMBAT_CHEST, rand.nextLong());
 				}
 			}
-			if (function.equals("food_chest"))
+			else if (function.equals("food_chest"))
 			{
 				world.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
 				TileEntity tileentity = world.getTileEntity(pos.down());
 				if (tileentity instanceof ChestTileEntity)
 				{
-					((ChestTileEntity) tileentity).setLootTable(ModLootTables.SMALL_SHIP_FOOD_CHEST, rand.nextLong());
+					((ChestTileEntity) tileentity).setLootTable(ModLootTables.LARGE_SHIP_FOOD_CHEST, rand.nextLong());
+				}
+			}
+			else if (function.equals("treasure_chest"))
+			{
+				world.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
+				TileEntity tileentity = world.getTileEntity(pos.down());
+				if (tileentity instanceof ChestTileEntity)
+				{
+					((ChestTileEntity) tileentity).setLootTable(ModLootTables.LARGE_SHIP_TREASURE_CHEST, rand.nextLong());
 				}
 			}
 
 			// Spawners
-			if (function.equals("grunt_x5_spawn"))
-			{
-				world.setBlockState(pos, ModBlocks.CUSTOM_SPAWNER.getDefaultState(), 3);
-				TileEntity spawner = world.getTileEntity(pos);
-				if (spawner instanceof CustomSpawnerTileEntity)
-				{
-					((CustomSpawnerTileEntity) spawner).setSpawnerLimit(5);
-					((CustomSpawnerTileEntity) spawner).setSpawnerMob(MarineLargeShipPieces.chooseGruntType());
-				}
-			}
+			StructuresHelper.setupSpawners(function, world, pos, StructureFaction.MARINE);
 		}
 
 		@Override
@@ -164,9 +144,6 @@ public class MarineLargeShipPieces
 			this.templatePosition.add(Template.transformedBlockPos(placementsettings, new BlockPos(offset.getX(), offset.getY(), offset.getZ())));
 			
 			boolean flag = super.addComponentParts(world, random, bb, chunkPos);
-			
-			BlockPos debugOffset = this.templatePosition.add(MarineLargeShipPieces.CENTER_OFFSET.get(this.resourceLocation));
-			world.setBlockState(debugOffset, DEBUG_BLOCKS.get(this.resourceLocation), 3);
 			
 			return flag;
 		}

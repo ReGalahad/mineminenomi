@@ -2,10 +2,51 @@
 	"type": "minecraft:chest",
 	"pools": [
 		{
-			"name": "mineminenomi:large_ship_combat",
+			"name": "mineminenomi:escape_boat",
+			"rolls": 1.0,
+			"entries": [
+				{
+					"type": "minecraft:item",
+					"name": "minecraft:oak_boat",
+					"weight": 100
+				}
+			]
+		},
+		{
+			"name": "mineminenomi:melee_weapons",
 			"rolls": {
-				"min": 3.0,
-				"max": 4.0,
+				"min": 1.0,
+				"max": 2.0,
+				"type": "minecraft:uniform"
+			},
+			"entries": [
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:marine_sword",
+					"weight": 90
+				},
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:pirate_cutlass",
+					"weight": 90
+				},
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:pipe",
+					"weight": 70
+				},
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:mace",
+					"weight": 30
+				}
+			]
+		},
+		{
+			"name": "mineminenomi:range_weapons",
+			"rolls": {
+				"min": 1.0,
+				"max": 3.0,
 				"type": "minecraft:uniform"
 			},
 			"entries": [
@@ -13,6 +54,21 @@
 					"type": "minecraft:item",
 					"name": "mineminenomi:bullet",
 					"weight": 100,
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"min": 7.0,
+								"max": 15.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "minecraft:gunpowder",
+					"weight": 80,
 					"functions": [
 						{
 							"function": "minecraft:set_count",
@@ -26,13 +82,13 @@
 				},
 				{
 					"type": "minecraft:item",
-					"name": "mineminenomi:bullet",
-					"weight": 100,
+					"name": "mineminenomi:cannon_ball",
+					"weight": 80,
 					"functions": [
 						{
 							"function": "minecraft:set_count",
 							"count": {
-								"min": 10.0,
+								"min": 3.0,
 								"max": 15.0,
 								"type": "minecraft:uniform"
 							}
@@ -41,68 +97,14 @@
 				},
 				{
 					"type": "minecraft:item",
-					"name": "minecraft:oak_boat",
-					"weight": 80
-				},
-				{
-					"type": "minecraft:item",
-					"name": "mineminenomi:belly_pouch",
-					"weight": 40,
-					"functions": [
-						{
-							"function": "minecraft:set_count",
-							"count": {
-								"min": 2.0,
-								"max": 4.0,
-								"type": "minecraft:uniform"
-							}
-						}
-					]
-				},
-				{
-					"type": "minecraft:item",
-					"name": "minecraft:gunpowder",
-					"rolls": {
-						"min": 1.0,
-						"max": 2.0
-					},
-					"weight": 100,
-					"functions": [
-						{
-							"function": "minecraft:set_count",
-							"count": {
-								"min": 3.0,
-								"max": 9.0,
-								"type": "minecraft:uniform"
-							}
-						}
-					]
-				},
-				{
-					"type": "minecraft:item",
-					"name": "mineminenomi:belly_pouch",
-					"weight": 50,
-					"functions": [
-						{
-							"function": "minecraft:set_count",
-							"count": {
-								"min": 3.0,
-								"max": 5.0,
-								"type": "minecraft:uniform"
-							}
-						}
-					]
-				},
-				{
-					"type": "minecraft:item",
 					"name": "mineminenomi:kairoseki_bullet",
-					"weight": 50,
+					"weight": 80,
 					"functions": [
 						{
 							"function": "minecraft:set_count",
 							"count": {
-								"min": 3.0,
-								"max": 5.0,
+								"min": 5.0,
+								"max": 15.0,
 								"type": "minecraft:uniform"
 							}
 						}
@@ -111,32 +113,12 @@
 				{
 					"type": "minecraft:item",
 					"name": "mineminenomi:flintlock",
-					"weight": 45,
-					"functions": [
-						{
-							"function": "minecraft:set_count",
-							"count": {
-								"min": 0.0,
-								"max": 1.0,
-								"type": "minecraft:uniform"
-							}
-						}
-					]
+					"weight": 80
 				},
 				{
 					"type": "minecraft:item",
-					"name": "mineminenomi:wooden_box",
-					"weight": 20,
-					"functions": [
-						{
-							"function": "minecraft:set_count",
-							"count": {
-								"min": 1.0,
-								"max": 1.0,
-								"type": "minecraft:uniform"
-							}
-						}
-					]
+					"name": "mineminenomi:senriku",
+					"weight": 40
 				}
 			]
 		}

@@ -2,38 +2,31 @@
 	"type": "minecraft:chest",
 	"pools": [
 		{
-			"name": "mineminenomi:large_ship_treasure",
+			"name": "mineminenomi:riches",
 			"rolls": {
 				"min": 1.0,
-				"max": 2.0,
+				"max": 3.0,
 				"type": "minecraft:uniform"
 			},
 			"entries": [
 				{
 					"type": "minecraft:item",
 					"name": "mineminenomi:belly_pouch",
-					"weight": 50,
+					"weight": 100,
 					"functions": [
 						{
 							"function": "minecraft:set_count",
 							"count": {
-								"min": 4.0,
-								"max": 8.0,
+								"min": 1.0,
+								"max": 5.0,
 								"type": "minecraft:uniform"
 							}
-						}
-					]
-				},
-				{
-					"type": "minecraft:item",
-					"name": "mineminenomi:kairoseki_bullet",
-					"weight": 70,
-					"functions": [
+						},
 						{
-							"function": "minecraft:set_count",
-							"count": {
-								"min": 5.0,
-								"max": 10.0,
+							"function": "mineminenomi:set_belly_in_pouch",
+							"belly_range": {
+								"min": 20.0,
+								"max": 70.0,
 								"type": "minecraft:uniform"
 							}
 						}
@@ -42,13 +35,13 @@
 				{
 					"type": "minecraft:item",
 					"name": "mineminenomi:belly_pouch",
-					"weight": 40,
+					"weight": 20,
 					"functions": [
 						{
-							"function": "minecraft:set_count",
-							"count": {
-								"min": 3.0,
-								"max": 6.0,
+							"function": "mineminenomi:set_belly_in_pouch",
+							"belly_range": {
+								"min": 100.0,
+								"max": 150.0,
 								"type": "minecraft:uniform"
 							}
 						}
@@ -56,53 +49,13 @@
 				},
 				{
 					"type": "minecraft:item",
-					"name": "minecraft:oak_boat",
-					"weight": 50,
-					"functions": [
-						{
-							"function": "minecraft:set_count",
-							"count": {
-								"min": 1.0,
-								"max": 1.0,
-								"type": "minecraft:uniform"
-							}
-						}
-					]
-				},
+					"name": "mineminenomi:den_den_mushi",
+					"weight": 55
+				},				
 				{
 					"type": "minecraft:item",
-					"name": "mineminenomi:belly_pouch",
-					"weight": 35,
-					"functions": [
-						{
-							"function": "minecraft:set_count",
-							"count": {
-								"min": 5.0,
-								"max": 6.0,
-								"type": "minecraft:uniform"
-							}
-						}
-					]
-				},
-				{
-					"type": "minecraft:item",
-					"name": "mineminenomi:black_metal",
-					"weight": 35,
-					"functions": [
-						{
-							"function": "minecraft:set_count",
-							"count": {
-								"min": 1.0,
-								"max": 6.0,
-								"type": "minecraft:uniform"
-							}
-						}
-					]
-				},
-				{
-					"type": "minecraft:item",
-					"name": "mineminenomi:ultra_cola",
-					"weight": 20
+					"name": "mineminenomi:wanted_poster_package",
+					"weight": 25
 				},
 				{
 					"type": "minecraft:item",

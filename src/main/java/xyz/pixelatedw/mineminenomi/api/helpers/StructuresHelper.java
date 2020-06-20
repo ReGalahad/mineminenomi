@@ -1,116 +1,110 @@
 package xyz.pixelatedw.mineminenomi.api.helpers;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.Enchantments;
+import com.google.common.collect.Lists;
+
 import net.minecraft.entity.EntityType;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.ChestTileEntity;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.IWorld;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.CustomSpawnerTileEntity;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
+import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.wypi.WyHelper;
 
 public class StructuresHelper
 {
-	
-	public static void addChestLoot(World world, ChestTileEntity te, double rarity, ItemStack loot)
-	{
-		if (getRandomChance(world) <= rarity)
-			te.setInventorySlotContents((int) WyHelper.randomWithRange(0, 26), loot);
-	}
-	
-	public static void addChestLoot(World world, ChestTileEntity te, double rarity, Item loot, int min, int max)
-	{
-		addChestLoot(world, te, rarity, loot, null, min, max);
-	}
+	private static final List<EntityType> MARINE_GRUNT_TYPES = Lists.newArrayList(ModEntities.MARINE_WITH_SWORD, ModEntities.MARINE_WITH_GUN);
+	private static final List<EntityType> PIRATE_GRUNT_TYPES = Lists.newArrayList(ModEntities.PIRATE_WITH_SWORD, ModEntities.PIRATE_WITH_GUN);
+	private static final List<EntityType> BANDIT_GRUNT_TYPES = Lists.newArrayList(ModEntities.BANDIT_WITH_SWORD);
 
-	public static void addChestLoot(World world, ChestTileEntity te, double rarity, Item loot, CompoundNBT metadata, int min, int max)
+	private static EntityType chooseCaptainType(StructureFaction faction)
 	{
-		if (getRandomChance(world) <= rarity)
-		{
-			int chance = max <= 0 ? min : (int) WyHelper.randomWithRange(min, max);
-			te.setInventorySlotContents((int) WyHelper.randomWithRange(0, 26), new ItemStack(loot, chance, metadata));		
-		}
-	}
-	
-	public static void addChestTileEntity(World world, int[][] positions, int maxChests, Consumer<ChestTileEntity> lootList)
-	{
-		List<ChestTileEntity> chests = new ArrayList<ChestTileEntity>();
+		EntityType captainType = null;
 		
-		for(int[] pos : positions)
+		switch(faction)
 		{
-			ChestTileEntity chest = new ChestTileEntity();
-			world.setTileEntity(new BlockPos(pos[0], pos[1], pos[2]), chest);
-
-			chests.add(chest);
-		}
-
-		WyHelper.shuffle(chests);
-		
-		int index = 0;
-		for(ChestTileEntity chest : chests)
-		{
-			if(maxChests > 0 && index > maxChests)
+			case MARINE:
+				captainType = ModEntities.MARINE_CAPTAIN;
 				break;
-			
-			lootList.accept(chest);
-			
-			index++;
-		}
-	}
-	
-	public static void addSpawnerTileEntity(World world, int[][] positions, EntityType mobType, int min, int max)
-	{
-		List<CustomSpawnerTileEntity> spawners = new ArrayList<CustomSpawnerTileEntity>();
-		
-		for(int[] pos : positions)
-		{
-			int chance = max <= 0 ? min : (int) WyHelper.randomWithRange(min, max);		
-			CustomSpawnerTileEntity spawner = new CustomSpawnerTileEntity().setSpawnerMob(mobType).setSpawnerLimit(chance);
-			world.setBlockState(new BlockPos(pos[0], pos[1], pos[2]), ModBlocks.CUSTOM_SPAWNER.getDefaultState());
-			world.setTileEntity(new BlockPos(pos[0], pos[1], pos[2]), spawner);
-		}
-	}
-	
-	public static Enchantment getEnchantment()
-	{
-		Enchantment ench = null;
-		switch((int)WyHelper.randomWithRange(0, 5))
-		{
-			case 0:
-				ench = Enchantments.SHARPNESS;
+			case PIRATE:
+				captainType = ModEntities.PIRATE_CAPTAIN;
 				break;
-			case 1:
-				ench = Enchantments.BANE_OF_ARTHROPODS;
-				break;
-			case 2:
-				ench = Enchantments.EFFICIENCY;
-				break;
-			case 3:
-				ench = Enchantments.PROTECTION;
-				break;
-			case 4:
-				ench = Enchantments.THORNS;
-				break;
-			case 5:
-				ench = Enchantments.UNBREAKING;
+			case BANDIT:
+				captainType = ModEntities.BANDIT_WITH_SWORD;
 				break;
 			default:
-				ench = Enchantments.SHARPNESS;
+				captainType = ModEntities.MARINE_CAPTAIN;
+				break;
 		}
 		
-		return ench;
+		return captainType;
 	}
 	
-	public static double getRandomChance(World world)
+	private static EntityType chooseGruntType(StructureFaction faction)
 	{
-		return world.rand.nextInt(100) + world.rand.nextDouble();
+		List<EntityType> factionList = null;
+		
+		switch(faction)
+		{
+			case MARINE:
+				factionList = MARINE_GRUNT_TYPES;
+				break;
+			case PIRATE:
+				factionList = PIRATE_GRUNT_TYPES;
+				break;
+			case BANDIT:
+				factionList = BANDIT_GRUNT_TYPES;
+				break;
+			default:
+				factionList = MARINE_GRUNT_TYPES;
+				break;
+		}
+		
+		return factionList.get((int) WyHelper.randomWithRange(0, factionList.size() - 1));
+	}
+	
+	public static void setupSpawners(String function, IWorld world, BlockPos pos, StructureFaction faction)
+	{
+		String[] func = function.split("_");
+		
+		if(!func[func.length - 1].equalsIgnoreCase("spawn"))
+			return;
+		
+		try
+		{
+			EntityType type = null;
+			int spawnLimit = 1;
+			if(func[0].startsWith("grunt"))
+			{
+				spawnLimit = Integer.parseInt(func[1].replace("x", ""));
+				type = chooseGruntType(faction);
+			}
+			else if(func[0].startsWith("captain"))
+			{
+				spawnLimit = 1;
+				type = chooseCaptainType(faction);
+			}
+			
+			world.setBlockState(pos, ModBlocks.CUSTOM_SPAWNER.getDefaultState(), 3);
+			TileEntity spawner = world.getTileEntity(pos);
+			if (spawner instanceof CustomSpawnerTileEntity)
+			{
+				((CustomSpawnerTileEntity) spawner).setSpawnerLimit(spawnLimit);
+				((CustomSpawnerTileEntity) spawner).setSpawnerMob(type);
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	public static enum StructureFaction
+	{
+		MARINE,
+		PIRATE,
+		BANDIT
 	}
 }
