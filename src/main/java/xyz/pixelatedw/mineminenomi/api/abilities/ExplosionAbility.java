@@ -1,7 +1,14 @@
 package xyz.pixelatedw.mineminenomi.api.abilities;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.Set;
+
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -24,9 +31,8 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.storage.loot.LootContext;
 import net.minecraft.world.storage.loot.LootParameters;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
+import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
-
-import java.util.*;
 
 public class ExplosionAbility extends Explosion
 {
@@ -230,7 +236,7 @@ public class ExplosionAbility extends Explosion
 				BlockState blockstate = this.world.getBlockState(blockpos);
 				Block block = blockstate.getBlock();
 
-				if (!blockstate.isAir(world, blockpos))
+				if (!blockstate.isAir(world, blockpos) && blockstate.getBlock() != ModBlocks.KAIROSEKI && blockstate.getBlock() != ModBlocks.KAIROSEKI_BARS && blockstate.getBlock() != ModBlocks.KAIROSEKI_ORE)
 				{
 					if (this.world instanceof ServerWorld && blockstate.canDropFromExplosion(this.world, blockpos, this))
 					{

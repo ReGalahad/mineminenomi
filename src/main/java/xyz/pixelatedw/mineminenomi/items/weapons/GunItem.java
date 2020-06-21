@@ -6,6 +6,8 @@ import java.util.function.Predicate;
 import javax.annotation.Nullable;
 
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -20,6 +22,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
+import net.minecraftforge.event.ForgeEventFactory;
 import xyz.pixelatedw.mineminenomi.abilities.bomu.BreezeBreathBombAbility;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.bomu.BreezeBreathBombProjectile;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.extra.KairosekiBulletProjectile;
@@ -122,11 +125,29 @@ public class GunItem extends Item
 		int powder = this.getLoadedGunPowder(itemStack);
 		if (!world.isRemote)
 		{
+			boolean flag = player.abilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, itemStack) > 0;
+			int i = this.getUseDuration(itemStack) - timeLeft;
+			i = ForgeEventFactory.onArrowLoose(itemStack, world, player, i, !itemStack.isEmpty() || flag);
+			if(i < 0)
+				return;
+			
 			AbilityProjectileEntity proj = null;
 			if (bulletType == ModItems.BULLET)
 				proj = new NormalBulletProjectile(player.world, player);
 			else if (bulletType == ModItems.KAIROSEKI_BULLET)
 				proj = new KairosekiBulletProjectile(player.world, player);
+			
+			int j = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, itemStack);
+			if (j > 0)
+				proj.setDamage((float) (proj.getDamage() + j * 0.5D + 0.5D));
+
+			int k = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, itemStack);
+			if (k > 0)
+				proj.setKnockbackStrength(k);
+			
+			if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, itemStack) > 0)
+				proj.setFire(100);
+			
 			proj.setDamage(proj.getDamage() * this.damageMultiplier);
 			player.world.addEntity(proj);
 			proj.shoot(player, player.rotationPitch, player.rotationYaw, 0, this.bulletSpeed, this.bulletAccuracy);

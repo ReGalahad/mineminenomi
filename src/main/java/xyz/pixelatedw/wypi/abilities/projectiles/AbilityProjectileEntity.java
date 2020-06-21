@@ -35,6 +35,7 @@ public class AbilityProjectileEntity extends ThrowableEntity
 {
 	private int life = 64;
 	private int maxLife = 64;
+	private int knockbackStrength = 0;
 	private double collisionSize = 1;
 	private float damage = 1;
 	private float gravity = 0.0001F;
@@ -171,8 +172,18 @@ public class AbilityProjectileEntity extends ThrowableEntity
 					}
 
 					if(this.entityDamaged)
-					{
+					{			
 						this.onEntityImpactEvent.onImpact(hitEntity);
+
+						if (this.knockbackStrength > 0)
+						{
+							Vec3d vec3d = this.getMotion().mul(1.0D, 0.0D, 1.0D).normalize().scale(this.knockbackStrength * 0.6D);
+							if (vec3d.lengthSquared() > 0.0D)
+							{
+								hitEntity.addVelocity(vec3d.x, 0.1D, vec3d.z);
+							}
+						}
+			            
 						if (!this.canPassThroughEntities)
 							this.remove();
 						else
@@ -210,6 +221,11 @@ public class AbilityProjectileEntity extends ThrowableEntity
 	public void remove()
 	{
 		super.remove();
+	}
+
+	public void setKnockbackStrength(int knockbackStrengthIn)
+	{
+		this.knockbackStrength = knockbackStrengthIn;
 	}
 
 	@Override

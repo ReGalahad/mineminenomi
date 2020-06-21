@@ -1,5 +1,6 @@
 package xyz.pixelatedw.mineminenomi.entities;
 
+import java.util.List;
 import java.util.UUID;
 
 import net.minecraft.command.arguments.EntityAnchorArgument.Type;
@@ -72,21 +73,20 @@ public class VivreCardEntity extends Entity
 		this.move(MoverType.SELF, new Vec3d(-posX, 0, -posZ));
 
 		this.lookAt(Type.EYES, owner.getPositionVec());
-		
+
 		if(this.ticksExisted > 40)
 		{
-			for(LivingEntity player : WyHelper.<LivingEntity>getEntitiesNear(this.getPosition(), this.world, 0.2))
+			List<PlayerEntity> players = WyHelper.<PlayerEntity>getEntitiesNear(this.getPosition(), this.world, 0.5, PlayerEntity.class);
+
+			for(PlayerEntity player : players)
 			{
-				if(player instanceof PlayerEntity)
-				{
-					ItemStack stack = new ItemStack(ModItems.VIVRE_CARD);
-					
-					((VivreCardItem) stack.getItem()).setOwner(stack, owner);
-					
-					((PlayerEntity) player).addItemStackToInventory(stack);
-					this.remove();
-					break;
-				}
+				ItemStack stack = new ItemStack(ModItems.VIVRE_CARD);
+
+				((VivreCardItem) stack.getItem()).setOwner(stack, owner);
+
+				player.addItemStackToInventory(stack);
+				this.remove();
+				break;
 			}
 		}
 	}

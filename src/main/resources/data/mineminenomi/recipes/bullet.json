@@ -3,23 +3,19 @@
 	"pattern":
 	[
 		"ii ",
-		"ik ",
+		"ii ",
 		"   "
 	],
 	"key": 
 	{
 		"i":
 		{
-			"item": "minecraft:iron_ingot"
-		},
-		"k":
-		{
-			"item": "mineminenomi:kairoseki"
-		}	
+			"item": "minecraft:iron_nugget"
+		}
 	},
 	"result": 
 	{
 		"item": "mineminenomi:bullet",
-		"count": 4
+		"count": 1
 	}
 }

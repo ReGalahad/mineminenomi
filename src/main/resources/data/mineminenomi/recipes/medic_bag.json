@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"s s",
+		"lbl",
+		"lll"
+	],
+	"key": {
+		"s": {
+			"item": "minecraft:string"
+		},
+		"l": {
+			"item": "minecraft:leather"
+		},
+		"b": {
+			"item": "minecraft:lapis_lazuli"
+		}
+	},
+	"result": {
+		"item": "mineminenomi:medic_bag",
+		"count": 1
+	}
+}
