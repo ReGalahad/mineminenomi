@@ -1,8 +1,5 @@
 package xyz.pixelatedw.mineminenomi.commands;
 
-import java.util.Collection;
-
-import com.google.common.collect.Lists;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
@@ -35,54 +32,51 @@ public class RemoveDFCommand
 
 		builder
 			.requires(source -> source.hasPermissionLevel(2))
-			.then(Commands.argument("targets", EntityArgument.players())
-				.executes(context -> removesDF(context, EntityArgument.getPlayers(context, "targets"))));
+			.then(Commands.argument("target", EntityArgument.player())
+				.executes(context -> removesDF(context, EntityArgument.getPlayer(context, "target"))));
 
 		builder
 			.requires(source -> source.hasPermissionLevel(0))
-				.executes(context -> removesDF(context, Lists.newArrayList(context.getSource().asPlayer())));
+				.executes(context -> removesDF(context, context.getSource().asPlayer()));
 	
 		dispatcher.register(builder);
 	}
 
-	private static int removesDF(CommandContext<CommandSource> context, Collection<ServerPlayerEntity> targets) throws CommandSyntaxException
+	private static int removesDF(CommandContext<CommandSource> context, ServerPlayerEntity player) throws CommandSyntaxException
 	{
-		for (ServerPlayerEntity player : targets)
+		IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
+		IAbilityData abilityDataProps = AbilityDataCapability.get(player);
+
+		devilFruitProps.setDevilFruit("");
+		devilFruitProps.setLogia(false);
+		devilFruitProps.setZoanPoint("");
+		devilFruitProps.setYamiPower(false);
+
+		for (Ability ability : abilityDataProps.getEquippedAbilities(AbilityCategory.ALL))
 		{
-			IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
-			IAbilityData abilityDataProps = AbilityDataCapability.get(player);
-
-			devilFruitProps.setDevilFruit("");
-			devilFruitProps.setLogia(false);
-			devilFruitProps.setZoanPoint("");
-			devilFruitProps.setYamiPower(false);
-
-			for (Ability ability : abilityDataProps.getEquippedAbilities(AbilityCategory.ALL))
+			if (ability != null)
 			{
-				if (ability != null)
-				{
-					if(ability instanceof ContinuousAbility)
-						((ContinuousAbility)ability).stopContinuity(player);
-					else
-						ability.stopCooldown(player);
-				}
+				if (ability instanceof ContinuousAbility)
+					((ContinuousAbility) ability).stopContinuity(player);
+				else
+					ability.stopCooldown(player);
 			}
-		
-			if(CommonConfig.instance.isSpecialFlyingEnabled() && abilityDataProps.hasUnlockedAbility(SpecialFlyAbility.INSTANCE) && !player.isCreative() && !player.isSpectator())
-			{
-				player.abilities.allowFlying = false;
-				player.abilities.isFlying = false;
-				player.connection.sendPacket(new SPlayerAbilitiesPacket(player.abilities));
-			}
-			
-			abilityDataProps.clearUnlockedAbilities(AbilityCategory.DEVIL_FRUIT);
-			abilityDataProps.clearEquippedAbilities(AbilityCategory.DEVIL_FRUIT);
-
-			player.clearActivePotions();
-			
-			WyNetwork.sendToAllTracking(new SSyncDevilFruitPacket(player.getEntityId(), devilFruitProps), player);
-			WyNetwork.sendToAllTracking(new SSyncAbilityDataPacket(player.getEntityId(), abilityDataProps), player);
 		}
+
+		if (CommonConfig.instance.isSpecialFlyingEnabled() && abilityDataProps.hasUnlockedAbility(SpecialFlyAbility.INSTANCE) && !player.isCreative() && !player.isSpectator())
+		{
+			player.abilities.allowFlying = false;
+			player.abilities.isFlying = false;
+			player.connection.sendPacket(new SPlayerAbilitiesPacket(player.abilities));
+		}
+
+		abilityDataProps.clearUnlockedAbilities(AbilityCategory.DEVIL_FRUIT);
+		abilityDataProps.clearEquippedAbilities(AbilityCategory.DEVIL_FRUIT);
+
+		player.clearActivePotions();
+
+		WyNetwork.sendToAllTracking(new SSyncDevilFruitPacket(player.getEntityId(), devilFruitProps), player);
+		WyNetwork.sendToAllTracking(new SSyncAbilityDataPacket(player.getEntityId(), abilityDataProps), player);
 
 		return 1;
 	}

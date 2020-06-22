@@ -41,7 +41,7 @@ public class HeartItem extends Item
 	{
 		ItemStack itemStack = player.getHeldItem(hand);
 		
-		if(!(world.getEntityByID(itemStack.getOrCreateTag().getInt("owner")) instanceof LivingEntity))
+		if(this.getOwner(world, player.getPosition(), itemStack) == null)
 			player.inventory.deleteStack(itemStack);
 		
 		LivingEntity owner = this.getOwner(world, player.getPosition(), itemStack);
@@ -116,8 +116,8 @@ public class HeartItem extends Item
 			{
 				LivingEntity entity = (LivingEntity) world.getEntityByID(itemStack.getTag().getInt("owner"));
 
-				list.add(new StringTextComponent(TextFormatting.GOLD + "[Owner] " + TextFormatting.RESET + entity.getName().getFormattedText()));
-				list.add(new StringTextComponent(TextFormatting.GOLD + "[HP] " + TextFormatting.RESET + entity.getHealth()));
+				//list.add(new StringTextComponent(TextFormatting.GOLD + "[Owner] " + TextFormatting.RESET + entity.getName().getFormattedText()));
+				//list.add(new StringTextComponent(TextFormatting.GOLD + "[HP] " + TextFormatting.RESET + entity.getHealth()));
 			}
 			else
 				list.add(new StringTextComponent(TextFormatting.GOLD + itemStack.getDisplayName().getFormattedText().toString().replace("'s Heart", "") + " is dead !"));

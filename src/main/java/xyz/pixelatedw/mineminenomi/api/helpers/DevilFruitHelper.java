@@ -1,10 +1,14 @@
 package xyz.pixelatedw.mineminenomi.api.helpers;
 
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.registries.ForgeRegistries;
+import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
+import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
+import xyz.pixelatedw.mineminenomi.items.AkumaNoMiItem;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
 
@@ -22,6 +26,14 @@ public class DevilFruitHelper
 						"ushi_ushi_giraffe", "giraffe"
 				},
 		};
+		
+	public static boolean hasDevilFruit(LivingEntity player, AkumaNoMiItem df)
+	{
+		IDevilFruit props = DevilFruitCapability.get(player);
+		String fruitName = WyHelper.getResourceName(df.getDevilFruitName()).replace("_no_mi", "").replace("model", "");
+
+		return props.getDevilFruit().equalsIgnoreCase(fruitName);
+	}
 		
 	public static boolean isDevilFruitInWorld(World world, String devilFruitName)
 	{
@@ -52,7 +64,7 @@ public class DevilFruitHelper
 			fullName = "yami_yami";
 
 		String finalName = (!WyHelper.isNullOrEmpty(model) ? fullName.replace("_" + model, "") : fullName) + "_no_mi" + fullModel;
-				
+
 		return new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(APIConfig.PROJECT_ID, finalName)));
 	}
 }

@@ -25,7 +25,7 @@ public abstract class Ability extends ForgeRegistryEntry<Ability>
 	// Setting the defaults so that no crash occurs and so they will be null safe.
 	protected IOnUse onUseEvent = (player) -> { return true; };
 	protected IDuringCooldown duringCooldownEvent = (player, cooldown) -> {};
-	protected IOnEndCooldown onEndCooldown = (player) -> {};
+	protected IOnEndCooldown onEndCooldownEvent = (player) -> {};
 	
 	public Ability(String name, AbilityCategory category)
 	{
@@ -110,7 +110,7 @@ public abstract class Ability extends ForgeRegistryEntry<Ability>
 			return;
 		this.cooldown = this.maxCooldown;				
 		this.state = State.STANDBY;
-		this.onEndCooldown.onEndCooldown(player);
+		this.onEndCooldownEvent.onEndCooldown(player);
 		IAbilityData props = AbilityDataCapability.get(player);
 		WyNetwork.sendTo(new SSyncAbilityDataPacket(player.getEntityId(), props), player);
 	}
