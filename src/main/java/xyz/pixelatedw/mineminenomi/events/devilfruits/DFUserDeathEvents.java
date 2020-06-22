@@ -1,6 +1,11 @@
 package xyz.pixelatedw.mineminenomi.events.devilfruits;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
 import com.google.common.collect.ImmutableSet;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ChestBlock;
 import net.minecraft.entity.item.ItemEntity;
@@ -14,16 +19,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitHelper;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
-
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class DFUserDeathEvents
@@ -76,7 +77,7 @@ public class DFUserDeathEvents
 				villagers.removeIf(entry -> !entry.getVillagerInventory().hasAny(set));
 				if (!dropList.isEmpty() && droppedChance <= 15)
 				{
-					dropList.get(0).setItem(AbilityHelper.getDevilFruitItem(oldDevilFruit.getDevilFruit()));
+					dropList.get(0).setItem(DevilFruitHelper.getDevilFruitItem(oldDevilFruit.getDevilFruit()));
 				}
 				else if (!players.isEmpty() && chance == 1)
 				{
@@ -84,7 +85,7 @@ public class DFUserDeathEvents
 
 					if (stackIndex != -1)
 					{
-						players.get(0).inventory.setInventorySlotContents(stackIndex, AbilityHelper.getDevilFruitItem(oldDevilFruit.getDevilFruit()));
+						players.get(0).inventory.setInventorySlotContents(stackIndex, DevilFruitHelper.getDevilFruitItem(oldDevilFruit.getDevilFruit()));
 					}
 				}
 				else if (!villagers.isEmpty() && chance == 1)
@@ -92,7 +93,7 @@ public class DFUserDeathEvents
 					int stackIndex = WyHelper.getIndexOfItemStack(new ItemStack(Items.APPLE), villagers.get(0).getVillagerInventory());
 					if (stackIndex != -1)
 					{
-						villagers.get(0).getVillagerInventory().setInventorySlotContents(stackIndex, AbilityHelper.getDevilFruitItem(oldDevilFruit.getDevilFruit()));
+						villagers.get(0).getVillagerInventory().setInventorySlotContents(stackIndex, DevilFruitHelper.getDevilFruitItem(oldDevilFruit.getDevilFruit()));
 					}
 				}
 				else if (!blockPosList.isEmpty() && chance == 1)
@@ -103,7 +104,7 @@ public class DFUserDeathEvents
 
 					if (stackIndex != -1)
 					{
-						inven.setInventorySlotContents(stackIndex, AbilityHelper.getDevilFruitItem(oldDevilFruit.getDevilFruit()));
+						inven.setInventorySlotContents(stackIndex, DevilFruitHelper.getDevilFruitItem(oldDevilFruit.getDevilFruit()));
 					}
 				}
 			}

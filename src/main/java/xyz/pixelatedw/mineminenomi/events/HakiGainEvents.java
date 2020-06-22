@@ -35,6 +35,8 @@ import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 import xyz.pixelatedw.wypi.debug.WyDebug;
+import xyz.pixelatedw.wypi.network.WyNetwork;
+import xyz.pixelatedw.wypi.network.packets.server.SSyncAbilityDataPacket;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class HakiGainEvents
@@ -217,10 +219,19 @@ public class HakiGainEvents
 		if (event.getEntity() instanceof PlayerEntity && CommonConfig.instance.getHaoshokuUnlockLogic() == HaoshokuUnlockLogic.RANDOM)
 		{
 			PlayerEntity player = (PlayerEntity) event.getEntity();
-			int isKing = (int) (player.getUniqueID().getMostSignificantBits() % 100);
+			String[] bits = ("" + player.getUniqueID().getMostSignificantBits()).split("");
+			int sum = 0;
+			for(String bit : bits)
+			{
+				if(bit.equalsIgnoreCase("-"))
+					continue;
+				sum += Integer.parseInt(bit);
+			}
+			sum = MathHelper.clamp(sum / 10, 0, 10);
+			boolean isKing = sum < 1;
 
 			// That moment when your entire chance of getting haoshoku haki is based on the time when you bought minecraft. Design 101
-			if (isKing == 0)
+			if (isKing)
 				giveHakiAbility(player, HaoshokuHakiAbility.INSTANCE);
 		}
 	}
@@ -232,6 +243,8 @@ public class HakiGainEvents
 		{
 			props.addUnlockedAbility(ability);
 			WyHelper.sendMsgToPlayer(player, "Obtained " + ability.getName());
+			if(!player.world.isRemote)
+				WyNetwork.sendTo(new SSyncAbilityDataPacket(player.getEntityId(), props), player);
 		}
 	}
 }

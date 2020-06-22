@@ -11,6 +11,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitHelper;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
@@ -71,7 +72,7 @@ public class AkumaNoMiBoxItem extends Item
 
 				String fruitName = randomFruit.getTranslationKey().substring("item.mineminenomi.".length()).replace("_no_mi", "").replace(":", "").replace(".", "").replace(",", "").replace("model_", "");
 
-				while (AbilityHelper.isDevilFruitInWorld(world, fruitName))
+				while (DevilFruitHelper.isDevilFruitInWorld(world, fruitName))
 				{
 					final AkumaNoMiItem inContextFruit = randomFruit;
 					AbilityHelper.tier1Fruits.removeIf(x -> x == inContextFruit);

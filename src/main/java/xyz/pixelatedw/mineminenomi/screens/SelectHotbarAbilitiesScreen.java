@@ -16,7 +16,7 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.config.GuiUtils;
-import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitHelper;
 import xyz.pixelatedw.mineminenomi.api.helpers.RendererHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
@@ -125,7 +125,7 @@ public class SelectHotbarAbilitiesScreen extends Screen
 					iconName = "yami_yami_no_mi";
 				else
 				{
-					ItemStack df = AbilityHelper.getDevilFruitItem(this.devilFruitProps.getDevilFruit());
+					ItemStack df = DevilFruitHelper.getDevilFruitItem(this.devilFruitProps.getDevilFruit());
 					iconName = df.getTranslationKey().replace("item." + APIConfig.PROJECT_ID + ".", "");
 				}
 				dfIcon = new ResourceLocation(APIConfig.PROJECT_ID, "textures/items/" + WyHelper.getResourceName(iconName) + ".png");

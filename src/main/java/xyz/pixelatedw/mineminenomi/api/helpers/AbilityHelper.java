@@ -11,13 +11,10 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.registries.ForgeRegistries;
 import xyz.pixelatedw.mineminenomi.abilities.artofweather.CoolBallAbility;
 import xyz.pixelatedw.mineminenomi.abilities.artofweather.HeatBallAbility;
 import xyz.pixelatedw.mineminenomi.abilities.artofweather.ThunderBallAbility;
@@ -40,6 +37,12 @@ import xyz.pixelatedw.mineminenomi.abilities.fishmankarate.KarakusagawaraSeikenA
 import xyz.pixelatedw.mineminenomi.abilities.fishmankarate.MurasameAbility;
 import xyz.pixelatedw.mineminenomi.abilities.fishmankarate.SamehadaShoteiAbility;
 import xyz.pixelatedw.mineminenomi.abilities.fishmankarate.UchimizuAbility;
+import xyz.pixelatedw.mineminenomi.abilities.haki.BusoshokuHakiFullBodyHardeningAbility;
+import xyz.pixelatedw.mineminenomi.abilities.haki.BusoshokuHakiHardeningAbility;
+import xyz.pixelatedw.mineminenomi.abilities.haki.BusoshokuHakiImbuingAbility;
+import xyz.pixelatedw.mineminenomi.abilities.haki.HaoshokuHakiAbility;
+import xyz.pixelatedw.mineminenomi.abilities.haki.KenbunshokuHakiAuraAbility;
+import xyz.pixelatedw.mineminenomi.abilities.haki.KenbunshokuHakiFutureSightAbility;
 import xyz.pixelatedw.mineminenomi.abilities.rokushiki.GeppoAbility;
 import xyz.pixelatedw.mineminenomi.abilities.rokushiki.KamieAbility;
 import xyz.pixelatedw.mineminenomi.abilities.rokushiki.RankyakuAbility;
@@ -66,7 +69,6 @@ import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.mineminenomi.init.ModQuests;
 import xyz.pixelatedw.mineminenomi.items.AkumaNoMiItem;
-import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.Ability;
@@ -83,19 +85,6 @@ public class AbilityHelper
 	public static List<AkumaNoMiItem> tier1Fruits = new ArrayList<AkumaNoMiItem>();
 	public static List<AkumaNoMiItem> tier2Fruits = new ArrayList<AkumaNoMiItem>();
 	public static List<AkumaNoMiItem> tier3Fruits = new ArrayList<AkumaNoMiItem>();
-
-	private static String[][] zoanModels = new String[][]
-		{
-				{
-						"ushi_ushi_bison", "bison"
-				},
-				{
-						"tori_tori_phoenix", "phoenix"
-				},
-				{
-						"ushi_ushi_giraffe", "giraffe"
-				},
-		};
 	
 	public static boolean placeBlockIfAllowed(World world, double posX, double posY, double posZ, Block toPlace, BlockProtectionRule rule)
 	{
@@ -255,16 +244,6 @@ public class AbilityHelper
 		return false;
 	}
 
-	public static boolean isDevilFruitInWorld(World world, String devilFruitName)
-	{
-		ExtendedWorldData worldData = ExtendedWorldData.get(world);
-
-		if (worldData.isDevilFruitInWorld(devilFruitName))
-			return true;
-
-		return false;
-	}
-
 	public static boolean isAffectedByWater(LivingEntity entity)
 	{
 		boolean isUnderWater = entity.areEyesInFluid(FluidTags.WATER, true) && entity.getRidingEntity() == null;
@@ -319,6 +298,8 @@ public class AbilityHelper
 		List<Ability> rokushikiAbilities = Lists.newArrayList(SoruAbility.INSTANCE, TekkaiAbility.INSTANCE, ShiganAbility.INSTANCE, RankyakuAbility.INSTANCE, KamieAbility.INSTANCE, GeppoAbility.INSTANCE);
 		List<Ability> fishmanKarateAbilities = Lists.newArrayList(UchimizuAbility.INSTANCE, SamehadaShoteiAbility.INSTANCE, MurasameAbility.INSTANCE, KarakusagawaraSeikenAbility.INSTANCE, KachiageHaisokuAbility.INSTANCE);
 		List<Ability> cyborgAbilities = Lists.newArrayList(StrongRightAbility.INSTANCE, RadicalBeamAbility.INSTANCE, FreshFireAbility.INSTANCE, CoupDeVentAbility.INSTANCE, ColaOverdriveAbility.INSTANCE);
+		
+		List<Ability> hakiAbilities = Lists.newArrayList(BusoshokuHakiFullBodyHardeningAbility.INSTANCE, BusoshokuHakiHardeningAbility.INSTANCE, BusoshokuHakiImbuingAbility.INSTANCE, HaoshokuHakiAbility.INSTANCE, KenbunshokuHakiAuraAbility.INSTANCE, KenbunshokuHakiFutureSightAbility.INSTANCE);
 
 		if (props.isHuman())
 			for (Ability a : rokushikiAbilities)
@@ -338,14 +319,16 @@ public class AbilityHelper
 		for (Ability a : tempAblList)
 			abilityProps.addUnlockedAbility(a);
 		tempAblList.clear();
-		/*
-		for (Ability a : HakiAbilities.abilitiesArray)
-			if (abilityProps.hasHakiAbility(a) && !verifyIfAbilityIsBanned(a))
-				tempAblList.add(a);
-		abilityProps.clearHakiAbilities();
-		for (Ability a : tempAblList)
-			abilityProps.addHakiAbility(a);*/
 
+		for (Ability a : hakiAbilities)
+			if (abilityProps.hasUnlockedAbility(a) && !verifyIfAbilityIsBanned(a))
+				tempAblList.add(a);
+		
+		abilityProps.clearUnlockedAbilities(AbilityCategory.HAKI);
+		
+		for (Ability a : tempAblList)
+			abilityProps.addUnlockedAbility(a);
+		tempAblList.clear();
 	}
 
 	public static void validateStyleMoves(PlayerEntity player)
@@ -401,29 +384,6 @@ public class AbilityHelper
 			if(!verifyIfAbilityIsBanned(ability))
 				abilityProps.addUnlockedAbility(ability);
 		}
-	}
-	
-	public static ItemStack getDevilFruitItem(String fullName)
-	{
-		String model = "";
-		String fullModel = "";
-
-		for (String[] s : zoanModels)
-		{
-			if (fullName.equals(s[0]))
-			{
-				model = s[1];
-				fullModel = "_model_" + model;
-				break;
-			}
-		}
-
-		if (fullName.equals("yamidummy"))
-			fullName = "yami_yami";
-
-		String finalName = (!WyHelper.isNullOrEmpty(model) ? fullName.replace("_" + model, "") : fullName) + "_no_mi" + fullModel;
-				
-		return new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(APIConfig.PROJECT_ID, finalName)));
 	}
 
 	public static boolean isEntityInRoom(LivingEntity entity)

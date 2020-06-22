@@ -33,7 +33,7 @@ public class CommonConfig
 
 	private BooleanValue logiaInvulnerability;
 	private BooleanValue logiaHurtsLogias;
-	private BooleanValue devilFruitDropsFromLeaves;
+	private DoubleValue devilFruitDropsFromLeavesChance;
 	private BooleanValue extraHearts;
 	private BooleanValue mobRewards;
 	private BooleanValue griefing;
@@ -44,7 +44,6 @@ public class CommonConfig
 	private DoubleValue dorikiRewardMultiplier;
 	private BooleanValue minimumDorikiPerKill;
 	private BooleanValue abilityFraudChecks;
-	// private DoubleValue devilFruitDropsFromLeaves
 
 	// Structures
 	private BooleanValue spawnDojos;
@@ -116,7 +115,7 @@ public class CommonConfig
 		{
 			this.logiaInvulnerability = builder.comment("Allows logia users to avoid physical attacks; true by default").define("Logia Invulnerability", true);
 			this.logiaHurtsLogias = builder.comment("Allows logia users to hurt other logia users with projectiles; true by default").define("Logias hurt Logias", true);
-			this.devilFruitDropsFromLeaves = builder.comment("Allows Devil Fruits to drop from leaves; false by default").define("Devil Fruit drops from leaves", false);
+			this.devilFruitDropsFromLeavesChance = builder.comment("Allows Devil Fruits to drop from leaves if higher than 0; 0 by default").defineInRange("Chance for Devil Fruits to drop from leaves", 0.0, 0.0, 100.0);
 			this.extraHearts = builder.comment("Allows players to receive extra hearts based on their doriki; true by default").define("Extra Hearts", true);
 			this.mobRewards = builder.comment("Allows mobs to reward doriki, bounty or items; true by default").define("Mob Rewards", true);
 			this.griefing = builder.comment("Allows abilities to break or replace blocks; if turned OFF it will make some abilities completly useless; true by default").define("Griefing", true);
@@ -423,9 +422,9 @@ public class CommonConfig
 		return this.logiaHurtsLogias.get();
 	}
 
-	public boolean isDevilFruitDropsFromLeavesEnabled()
+	public double getDevilFruitDropsFromLeavesChance()
 	{
-		return this.devilFruitDropsFromLeaves.get();
+		return this.devilFruitDropsFromLeavesChance.get();
 	}
 
 	public boolean isExtraHeartsEnabled()

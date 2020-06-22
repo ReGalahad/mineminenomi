@@ -9,6 +9,7 @@ import xyz.pixelatedw.mineminenomi.abilities.yomi.KasuriutaFubukiGiriAbility;
 import xyz.pixelatedw.mineminenomi.abilities.yomi.SoulParadeAbility;
 import xyz.pixelatedw.mineminenomi.abilities.yomi.YomiNoReikiAbility;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitHelper;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
@@ -17,9 +18,9 @@ import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.data.entity.jollyroger.JollyRogerCapability;
 import xyz.pixelatedw.mineminenomi.entities.zoan.YomiZoanInfo;
 import xyz.pixelatedw.mineminenomi.items.AkumaNoMiItem;
+import xyz.pixelatedw.mineminenomi.packets.server.SSyncDevilFruitPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SSyncEntityStatsPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SSyncJollyRogerPacket;
-import xyz.pixelatedw.mineminenomi.packets.server.SSyncDevilFruitPacket;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
@@ -44,24 +45,24 @@ public class AbilityValidationEvents
 
 			if (!player.world.isRemote)
 			{
-				if(!WyHelper.isNullOrEmpty(devilFruitProps.getDevilFruit()))
+				if (!WyHelper.isNullOrEmpty(devilFruitProps.getDevilFruit()))
 				{
-					ItemStack df = AbilityHelper.getDevilFruitItem(devilFruitProps.getDevilFruit());
-					
+					ItemStack df = DevilFruitHelper.getDevilFruitItem(devilFruitProps.getDevilFruit());
+
 					abilityProps.clearUnlockedAbilities(AbilityCategory.DEVIL_FRUIT);
 
-					if(df != null && !df.isEmpty())
+					if (df != null && !df.isEmpty())
 					{
-						if(devilFruitProps.hasYamiPower())
+						if (devilFruitProps.hasYamiPower())
 						{
-							ItemStack yami = AbilityHelper.getDevilFruitItem("yami_yami");
-							for(Ability a : ((AkumaNoMiItem)yami.getItem()).abilities)
-								if(!AbilityHelper.verifyIfAbilityIsBanned(a))
+							ItemStack yami = DevilFruitHelper.getDevilFruitItem("yami_yami");
+							for (Ability a : ((AkumaNoMiItem) yami.getItem()).abilities)
+								if (!AbilityHelper.verifyIfAbilityIsBanned(a))
 									abilityProps.addUnlockedAbility(a);
 						}
-						
-						for(Ability a : ((AkumaNoMiItem)df.getItem()).abilities)
-							if(!AbilityHelper.verifyIfAbilityIsBanned(a))
+
+						for (Ability a : ((AkumaNoMiItem) df.getItem()).abilities)
+							if (!AbilityHelper.verifyIfAbilityIsBanned(a))
 								abilityProps.addUnlockedAbility(a);
 					}
 				}
@@ -69,24 +70,24 @@ public class AbilityValidationEvents
 				{
 					abilityProps.clearUnlockedAbilities(AbilityCategory.DEVIL_FRUIT);
 				}
-				
+
 				AbilityHelper.validateRacialMoves(player);
 				AbilityHelper.validateStyleMoves(player);
-				
-				for(Ability abl : abilityProps.getUnlockedAbilities(AbilityCategory.DEVIL_FRUIT))
+
+				for (Ability abl : abilityProps.getUnlockedAbilities(AbilityCategory.DEVIL_FRUIT))
 				{
-					if(abl instanceof KasuriutaFubukiGiriAbility || abl instanceof SoulParadeAbility || abl instanceof YomiNoReikiAbility)
+					if (abl instanceof KasuriutaFubukiGiriAbility || abl instanceof SoulParadeAbility || abl instanceof YomiNoReikiAbility)
 					{
-						if(!devilFruitProps.getZoanPoint().equalsIgnoreCase(YomiZoanInfo.FORM))
+						if (!devilFruitProps.getZoanPoint().equalsIgnoreCase(YomiZoanInfo.FORM))
 							abilityProps.removeUnlockedAbility(abl);
 					}
 				}
-				
-				for(int i = 0; i < abilityProps.getEquippedAbilities().length; i++)
+
+				for (int i = 0; i < abilityProps.getEquippedAbilities().length; i++)
 				{
-					if(abilityProps.getEquippedAbility(i) != null)
+					if (abilityProps.getEquippedAbility(i) != null)
 					{
-						if(AbilityHelper.verifyIfAbilityIsBanned(abilityProps.getEquippedAbility(i)))
+						if (AbilityHelper.verifyIfAbilityIsBanned(abilityProps.getEquippedAbility(i)))
 							abilityProps.setEquippedAbility(i, null);
 					}
 				}
@@ -97,7 +98,7 @@ public class AbilityValidationEvents
 				WyNetwork.sendTo(new SSyncJollyRogerPacket(player.getEntityId(), JollyRogerCapability.get(player)), player);
 			}
 		}
-		else if(event.getEntity() instanceof PlayerEntity && !CommonConfig.instance.isAbilityFraudChecksEnabled())
+		else if (event.getEntity() instanceof PlayerEntity && !CommonConfig.instance.isAbilityFraudChecksEnabled())
 		{
 			PlayerEntity player = (PlayerEntity) event.getEntity();
 			IEntityStats entityStatsProps = EntityStatsCapability.get(player);
