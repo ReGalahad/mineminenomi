@@ -34,7 +34,6 @@ import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
-import xyz.pixelatedw.wypi.debug.WyDebug;
 import xyz.pixelatedw.wypi.network.WyNetwork;
 import xyz.pixelatedw.wypi.network.packets.server.SSyncAbilityDataPacket;
 
@@ -64,14 +63,6 @@ public class HakiGainEvents
 
 				if (totalExp >= totalCheck)
 					giveHakiAbility(player, HaoshokuHakiAbility.INSTANCE);
-			}
-			
-			if(WyDebug.isDebug() && player.ticksExisted % 200 == 0)
-			{
-				System.out.println("Imbuing: " + hakiProps.getBusoshokuImbuingHakiExp());
-				System.out.println("Hardening: " + hakiProps.getBusoshokuHardeningHakiExp());
-				System.out.println("Observation: " + hakiProps.getKenbunshokuHakiExp());
-				System.out.println("Total: " + HakiHelper.getTotalHakiExp(player));
 			}
 		}
 	}

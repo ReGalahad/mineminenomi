@@ -30,8 +30,8 @@ public class DevilFruitHelper
 	public static boolean hasDevilFruit(LivingEntity player, AkumaNoMiItem df)
 	{
 		IDevilFruit props = DevilFruitCapability.get(player);
-		String fruitName = WyHelper.getResourceName(df.getDevilFruitName()).replace("_no_mi", "").replace("model", "");
-
+		String fruitName = WyHelper.getResourceName(df.getDevilFruitName()).replace("_no_mi", "").replace("_model", "");
+		
 		return props.getDevilFruit().equalsIgnoreCase(fruitName);
 	}
 		
