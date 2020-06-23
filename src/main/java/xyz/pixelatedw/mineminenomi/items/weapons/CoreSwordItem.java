@@ -132,7 +132,7 @@ public class CoreSwordItem extends Item
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand)
 	{
-		return new ActionResult<>(ActionResultType.SUCCESS, player.getHeldItem(hand));
+		return new ActionResult<>(ActionResultType.PASS, player.getHeldItem(hand));
 	}
 
 	@Override
