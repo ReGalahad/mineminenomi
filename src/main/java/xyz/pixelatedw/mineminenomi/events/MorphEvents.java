@@ -88,17 +88,34 @@ public class MorphEvents
 			shadowSize = 0.5F;
 		}
 		
-		Field field = null;
+		Field field = getShadowSizeField();
 		try
 		{
-			field = EntityRenderer.class.getDeclaredField("shadowSize");
-			field.setAccessible(true);
 			field.set(event.getRenderer(), shadowSize);
 		}
 		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
+	}
+	
+	private static Field getShadowSizeField()
+	{
+		Field field = null;
+		
+		try
+		{
+			field = EntityRenderer.class.getDeclaredField("shadowSize");
+			if(field == null)
+				field = EntityRenderer.class.getDeclaredField("field_76989_e");
+			field.setAccessible(true);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return field;
 	}
 	
 	@SubscribeEvent
