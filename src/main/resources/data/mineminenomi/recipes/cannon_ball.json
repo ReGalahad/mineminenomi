@@ -1,9 +1,9 @@
 {
 	"type": "minecraft:crafting_shaped",
 	"pattern": [
-		"ic ",
-		"ci ",
-		"   "
+		"ccc",
+		"cic",
+		"ccc"
 	],
 	"key": {
 		"i": {
@@ -14,7 +14,7 @@
 		}
 	},
 	"result": {
-		"item": "mineminenomi:bullet",
+		"item": "mineminenomi:cannon_ball",
 		"count": 1
 	}
 }

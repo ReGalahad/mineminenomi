@@ -22,7 +22,7 @@ public class GenericNewEntity extends CreatureEntity implements IDynamicRenderer
 	private static final DataParameter<Integer> TEXTURE_ID = EntityDataManager.createKey(GenericNewEntity.class, DataSerializers.VARINT);
 	private static final DataParameter<Boolean> HAS_BUSOSHOKU_HAKI_ACTIVE = EntityDataManager.createKey(GenericNewEntity.class, DataSerializers.BOOLEAN);
 	private int doriki, belly;
-	protected int threat;
+	protected int threat = 2;
 	private Goal currentGoal, previousGoal;
 	
 	public GenericNewEntity(EntityType type, World worldIn, String[] textures)

@@ -1,20 +1,23 @@
 {
 	"type": "minecraft:crafting_shaped",
 	"pattern": [
-		"ic ",
-		"ci ",
-		"   "
+		"s  ",
+		"iii",
+		"cc "
 	],
 	"key": {
 		"i": {
-			"item": "minecraft:iron_ingot"
+			"item": "minecraft:iron_block"
 		},
 		"c": {
 			"item": "minecraft:cobblestone"
+		},
+		"s": {
+			"item": "minecraft:string"
 		}
 	},
 	"result": {
-		"item": "mineminenomi:bullet",
+		"item": "mineminenomi:cannon",
 		"count": 1
 	}
 }
