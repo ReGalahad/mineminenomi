@@ -1,6 +1,9 @@
 package xyz.pixelatedw.mineminenomi.events.passives;
 
+import java.util.UUID;
+
 import com.mojang.blaze3d.platform.GlStateManager;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -27,8 +30,6 @@ import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 
-import java.util.UUID;
-
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class FishmanPassiveEvents
 {
@@ -53,7 +54,8 @@ public class FishmanPassiveEvents
 		if (AbilityHelper.isAffectedByWater(player) && (!devilFruitProps.hasDevilFruit() || event.getEntityLiving().isPotionActive(ModEffects.BUBBLY_CORAL)))
 		{
 			player.setAir(300);
-			player.addPotionEffect(new EffectInstance(Effects.NIGHT_VISION, 50, 0));
+			if(player.getRidingEntity() == null)
+				player.addPotionEffect(new EffectInstance(Effects.NIGHT_VISION, 50, 0, false, false));
 			if(!player.getAttribute(LivingEntity.SWIM_SPEED).hasModifier(SWIN_SPEED))
 				player.getAttribute(LivingEntity.SWIM_SPEED).applyModifier(SWIN_SPEED);
 

@@ -78,6 +78,7 @@ public class SoruGoal extends CooldownGoal
 		
 		this.speedModifier = new AttributeModifier(this.soruSpeedUUID, "Soru Speed", level, Operation.ADDITION);
 
+		this.entity.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).removeModifier(this.speedModifier);
 		this.entity.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).applyModifier(this.speedModifier);
 		
 		this.entity.setCurrentGoal(this);

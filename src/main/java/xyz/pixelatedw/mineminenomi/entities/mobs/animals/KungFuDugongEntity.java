@@ -256,6 +256,12 @@ public class KungFuDugongEntity extends AnimalEntity
 		this.dataManager.set(IS_TRAINING, compound.getBoolean("isTraining"));
 	}
 
+	@Override
+	public boolean canDespawn(double distance)
+	{
+		return !this.isTamed();
+	}
+	
 	public boolean isTraining()
 	{
 		return this.dataManager.get(IS_TRAINING);

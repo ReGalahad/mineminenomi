@@ -28,6 +28,7 @@ import xyz.pixelatedw.mineminenomi.entities.WantedPosterPackageEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.animals.DenDenMushiEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.animals.KungFuDugongEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.animals.LapahnEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.animals.YagaraBullEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.bandits.BanditWithSwordEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.marines.MarineCaptainEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.marines.MarineTraderEntity;
@@ -55,6 +56,7 @@ import xyz.pixelatedw.mineminenomi.models.entities.mobs.SniperTargetModel;
 import xyz.pixelatedw.mineminenomi.models.entities.mobs.animals.DenDenMushiModel;
 import xyz.pixelatedw.mineminenomi.models.entities.mobs.animals.KungFuDugongModel;
 import xyz.pixelatedw.mineminenomi.models.entities.mobs.animals.LapahnModel;
+import xyz.pixelatedw.mineminenomi.models.entities.mobs.animals.YagaraBullModel;
 import xyz.pixelatedw.mineminenomi.models.entities.mobs.humanoids.DojoSenseiModel;
 import xyz.pixelatedw.mineminenomi.models.entities.mobs.humanoids.FatHumanModel;
 import xyz.pixelatedw.mineminenomi.models.entities.mobs.humanoids.SimpleHumanModel;
@@ -121,6 +123,7 @@ public class ModRenderers
 		RenderingRegistry.registerEntityRenderingHandler(DenDenMushiEntity.class, new GenericMobRenderer.Factory(new DenDenMushiModel(), 1, null));
 		RenderingRegistry.registerEntityRenderingHandler(LapahnEntity.class, new GenericMobRenderer.Factory(new LapahnModel(), 1, "lapahn"));
 		RenderingRegistry.registerEntityRenderingHandler(KungFuDugongEntity.class, new GenericMobRenderer.Factory(new KungFuDugongModel(), 1, "kung_fu_dugong"));
+		RenderingRegistry.registerEntityRenderingHandler(YagaraBullEntity.class, new GenericMobRenderer.Factory(new YagaraBullModel(), 1, null));
 
 		// Others
 		RenderingRegistry.registerEntityRenderingHandler(DoppelmanEntity.class, new DoppelmanRenderer.Factory());

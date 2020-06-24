@@ -21,6 +21,7 @@ import xyz.pixelatedw.mineminenomi.entities.WantedPosterPackageEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.animals.DenDenMushiEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.animals.KungFuDugongEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.animals.LapahnEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.animals.YagaraBullEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.bandits.BanditWithSwordEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.marines.MarineCaptainEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.marines.MarineTraderEntity;
@@ -75,7 +76,7 @@ public class ModEntities
 	public static final EntityType DEN_DEN_MUSHI = WyRegistry.createEntityType(DenDenMushiEntity::new).size(0.8F, 0.8F).build("den_den_mushi");
 	public static final EntityType LAPAHN = WyRegistry.createEntityType(LapahnEntity::new, EntityClassification.CREATURE).size(0.8F, 2.5F).build("lapahn");
 	public static final EntityType KUNG_FU_DUGONG = WyRegistry.createEntityType(KungFuDugongEntity::new, EntityClassification.CREATURE).size(0.6F, 1.2F).build("kung_fu_dugong");
-	public static final EntityType YAGARA_BULL = WyRegistry.createEntityType(LapahnEntity::new, EntityClassification.CREATURE).size(1.4F, 1.6F).build("yagara_bull");
+	public static final EntityType YAGARA_BULL = WyRegistry.createEntityType(YagaraBullEntity::new, EntityClassification.WATER_CREATURE).size(1.4F, 1.6F).build("yagara_bull");
 
 	// Other
 	public static final EntityType DOPPELMAN = WyRegistry.createEntityType(DoppelmanEntity::new).build("doppelman");
@@ -128,7 +129,9 @@ public class ModEntities
 		registerEntityWorldSpawn(LAPAHN, 20, 1, 3, Biome.Category.ICY);
 		registerAnimalWithSpawnEgg(KUNG_FU_DUGONG, "Kung Fu Dugong");
 		registerEntityWorldSpawn(KUNG_FU_DUGONG, 22, 3, 5, Biome.Category.BEACH, Biome.Category.MUSHROOM, Biome.Category.SWAMP, Biome.Category.RIVER);
-		
+		registerAnimalWithSpawnEgg(YAGARA_BULL, "Yagara Bull");
+		registerEntityWorldSpawn(YAGARA_BULL, 30, 1, 3, Biome.Category.RIVER, Biome.Category.OCEAN);
+				
 		// Other
 		WyRegistry.registerEntityType(DOPPELMAN, "Doppelman");
 		WyRegistry.registerEntityType(WAX_CLONE, "Wax Clone");
