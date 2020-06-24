@@ -31,7 +31,7 @@ public class ModLootTables
 	public static final ResourceLocation BANDIT_SMALL_BASE_LAB_CHEST = new ResourceLocation(APIConfig.PROJECT_ID, "chests/small_base/bandit/lab");
 	public static final ResourceLocation BANDIT_SMALL_BASE_ORES_CHEST = new ResourceLocation(APIConfig.PROJECT_ID, "chests/small_base/bandit/ores");
 
-	public static final ResourceLocation TRADER_WEAPONS = new ResourceLocation(APIConfig.PROJECT_ID, "entities/trader/weapons");
+	public static final ResourceLocation JACK_OF_ALL_TRADES_TRADER_POOL = new ResourceLocation(APIConfig.PROJECT_ID, "entities/trader/jack_pool");
 
 	@SubscribeEvent
 	public static void onVanillaLootLoading(LootTableLoadEvent event)

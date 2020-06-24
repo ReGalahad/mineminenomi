@@ -12,6 +12,7 @@ import net.minecraft.world.storage.loot.LootFunction;
 import net.minecraft.world.storage.loot.RandomRanges;
 import net.minecraft.world.storage.loot.conditions.ILootCondition;
 import xyz.pixelatedw.wypi.APIConfig;
+import xyz.pixelatedw.wypi.WyHelper;
 
 public class SetPriceFunction extends LootFunction
 {
@@ -26,7 +27,7 @@ public class SetPriceFunction extends LootFunction
 	@Override
 	protected ItemStack doApply(ItemStack stack, LootContext context)
 	{
-		stack.getOrCreateTag().putInt("price", this.range.generateInt(context.getRandom()));
+		stack.getOrCreateTag().putInt("price", WyHelper.round(this.range.generateInt(context.getRandom())));
 		return stack;
 	}
 

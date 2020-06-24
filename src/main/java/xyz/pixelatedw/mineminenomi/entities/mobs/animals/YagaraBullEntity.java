@@ -284,8 +284,8 @@ public class YagaraBullEntity extends AnimalEntity implements IDynamicRenderer
 				{
 					stack.shrink(1);
 					double chance = this.rand.nextDouble();
-					System.out.println(chance);
-					if (chance < 0.25)
+
+					if (chance < 0.35)
 					{
 						this.spawnHeartParticles();
 						this.setOwner(player.getUniqueID());

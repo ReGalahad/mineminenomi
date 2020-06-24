@@ -22,8 +22,8 @@ import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
-import xyz.pixelatedw.mineminenomi.packets.client.CSyncEntityStatsPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CGiveItemStackPacket;
+import xyz.pixelatedw.mineminenomi.packets.client.CSyncEntityStatsPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CUpdateTraderOffersPacket;
 import xyz.pixelatedw.mineminenomi.screens.extra.FlickeringString;
 import xyz.pixelatedw.mineminenomi.screens.extra.ItemListScreenPanel;
@@ -203,7 +203,7 @@ public class TraderScreen extends Screen
 			this.addButton(decQtyBtn);
 			// Buy
 			TexturedIconButton buyBtn = new TexturedIconButton(ModResources.BLANK, posX - 10, posY - 100, 64, 22, new TranslationTextComponent(ModI18n.GUI_BUY).getFormattedText(), this::onBuy);
-			buyBtn = buyBtn.setTextureInfo(posX - 10, posY - 100, 64, 32);
+			buyBtn = buyBtn.setTextureInfo(posX - 10, posY - 100, 64, 32).setTextInfo(posX + 10, posY - 95, 1);
 			this.addButton(buyBtn);
 		}
 	}

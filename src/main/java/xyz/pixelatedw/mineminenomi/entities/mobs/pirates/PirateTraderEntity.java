@@ -30,7 +30,7 @@ public class PirateTraderEntity extends TraderEntity
 	@Override
 	public ResourceLocation getTradeTable()
 	{
-		return ModLootTables.TRADER_WEAPONS;
+		return ModLootTables.JACK_OF_ALL_TRADES_TRADER_POOL;
 	}
 	
 	@Override

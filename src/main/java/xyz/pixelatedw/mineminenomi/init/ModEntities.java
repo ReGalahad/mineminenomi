@@ -130,7 +130,7 @@ public class ModEntities
 		registerAnimalWithSpawnEgg(KUNG_FU_DUGONG, "Kung Fu Dugong");
 		registerEntityWorldSpawn(KUNG_FU_DUGONG, 22, 3, 5, Biome.Category.BEACH, Biome.Category.MUSHROOM, Biome.Category.SWAMP, Biome.Category.RIVER);
 		registerAnimalWithSpawnEgg(YAGARA_BULL, "Yagara Bull");
-		registerEntityWorldSpawn(YAGARA_BULL, 30, 1, 3, Biome.Category.RIVER, Biome.Category.OCEAN);
+		registerEntityWorldSpawn(YAGARA_BULL, 10, 1, 3, Biome.Category.RIVER, Biome.Category.OCEAN);
 				
 		// Other
 		WyRegistry.registerEntityType(DOPPELMAN, "Doppelman");

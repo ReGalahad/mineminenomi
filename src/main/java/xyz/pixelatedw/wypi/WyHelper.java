@@ -439,6 +439,32 @@ public class WyHelper
 		return new Random().nextDouble() * 2 - 1;
 	}
 
+	public static int round(int value)
+	{
+		String valueString = "" + value;
+		
+		if(valueString.length() < 1)
+			return value;
+		
+		return round(value, valueString.length() - 1);
+	}
+	
+	public static int round(int value, int nth)
+	{
+		String valueString = "" + value;
+		
+		if(valueString.length() < 1 || nth < 0)
+			return value;
+		
+		if(nth == 0)
+			nth = 1;
+		
+		int n = (int) Math.pow(10, nth - 1);
+		int r = 5 * (n / 10);
+
+		return ((value + r) / n ) * n;
+	}
+	
 	/*
 	 * Rendering Helpers
 	 */

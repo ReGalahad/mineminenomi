@@ -1,0 +1,441 @@
+{
+	"type": "minecraft:chest",
+	"pools": [
+		{
+			"name": "mineminenomi:infinite_projectiles",
+			"rolls": 1,
+			"entries": [
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:bullet",
+					"weight": 100,
+					"functions": [
+						{
+							"function": "mineminenomi:infinite_stock"
+						},
+						{
+							"function": "mineminenomi:set_price",
+							"price_range": {
+								"min": 10.0,
+								"max": 20.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:kairoseki_bullet",
+					"weight": 70,
+					"functions": [
+						{
+							"function": "mineminenomi:infinite_stock"
+						},
+						{
+							"function": "mineminenomi:set_price",
+							"price_range": {
+								"min": 20.0,
+								"max": 50.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "minecraft:arrow",
+					"weight": 90,
+					"functions": [
+						{
+							"function": "mineminenomi:infinite_stock"
+						},
+						{
+							"function": "mineminenomi:set_price",
+							"price_range": {
+								"min": 3.0,
+								"max": 8.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "mineminenomi:finite_projectiles",
+			"rolls": {
+				"min": 0.0,
+				"max": 1.0,
+				"type": "minecraft:uniform"
+			},
+			"entries": [
+				{
+					"type": "minecraft:item",
+					"name": "minecraft:gunpowder",
+					"weight": 100,
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"min": 10.0,
+								"max": 64.0,
+								"type": "minecraft:uniform"
+							}
+						},
+						{
+							"function": "mineminenomi:set_price",
+							"price_range": {
+								"min": 8.0,
+								"max": 12.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:cannon_ball",
+					"weight": 70,
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"min": 5.0,
+								"max": 30.0,
+								"type": "minecraft:uniform"
+							}
+						},
+						{
+							"function": "mineminenomi:set_price",
+							"price_range": {
+								"min": 20.0,
+								"max": 30.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "mineminenomi:guns",
+			"rolls": {
+				"min": 0.0,
+				"max": 1.0,
+				"type": "minecraft:uniform"
+			},
+			"entries": [
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:flintlock",
+					"weight": 100,
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"min": 1.0,
+								"max": 3.0,
+								"type": "minecraft:uniform"
+							}
+						},
+						{
+							"function": "mineminenomi:set_price",
+							"price_range": {
+								"min": 100.0,
+								"max": 150.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:ginga_pachinko",
+					"weight": 70,
+					"functions": [
+						{
+							"function": "mineminenomi:set_price",
+							"price_range": {
+								"min": 500.0,
+								"max": 750.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "minecraft:bow",
+					"weight": 100,
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"min": 1.0,
+								"max": 2.0,
+								"type": "minecraft:uniform"
+							}
+						},
+						{
+							"function": "mineminenomi:set_price",
+							"price_range": {
+								"min": 80.0,
+								"max": 120.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:senriku",
+					"weight": 20,
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"min": 1.0,
+								"max": 2.0,
+								"type": "minecraft:uniform"
+							}
+						},
+						{
+							"function": "mineminenomi:set_price",
+							"price_range": {
+								"min": 1000.0,
+								"max": 2000.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "mineminenomi:melee_weapons",
+			"rolls": {
+				"min": 1.0,
+				"max": 2.0,
+				"type": "minecraft:uniform"
+			},
+			"entries": [
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:mace",
+					"weight": 30,
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"min": 1.0,
+								"max": 2.0,
+								"type": "minecraft:uniform"
+							}
+						},
+						{
+							"function": "mineminenomi:set_price",
+							"price_range": {
+								"min": 500.0,
+								"max": 700.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:pipe",
+					"weight": 100,
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"min": 1.0,
+								"max": 3.0,
+								"type": "minecraft:uniform"
+							}
+						},
+						{
+							"function": "mineminenomi:set_price",
+							"price_range": {
+								"min": 200.0,
+								"max": 500.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:tonfa",
+					"weight": 80,
+					"functions": [
+						{
+							"function": "mineminenomi:set_price",
+							"price_range": {
+								"min": 500.0,
+								"max": 600.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:umbrella",
+					"weight": 70,
+					"functions": [
+						{
+							"function": "mineminenomi:set_price",
+							"price_range": {
+								"min": 300.0,
+								"max": 400.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:jitte",
+					"weight": 70,
+					"functions": [
+						{
+							"function": "mineminenomi:set_price",
+							"price_range": {
+								"min": 1500.0,
+								"max": 3000.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "mineminenomi:dials",
+			"rolls": {
+				"min": 0.0,
+				"max": 3.0,
+				"type": "minecraft:uniform"
+			},
+			"entries": [
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:eisen_dial",
+					"weight": 100,
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"min": 1.0,
+								"max": 3.0,
+								"type": "minecraft:uniform"
+							}
+						},
+						{
+							"function": "mineminenomi:set_price",
+							"price_range": {
+								"min": 500.0,
+								"max": 700.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:flame_dial",
+					"weight": 80,
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"min": 1.0,
+								"max": 3.0,
+								"type": "minecraft:uniform"
+							}
+						},
+						{
+							"function": "mineminenomi:set_price",
+							"price_range": {
+								"min": 1000.0,
+								"max": 1200.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:axe_dial",
+					"weight": 80,
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"min": 1.0,
+								"max": 3.0,
+								"type": "minecraft:uniform"
+							}
+						},
+						{
+							"function": "mineminenomi:set_price",
+							"price_range": {
+								"min": 1000.0,
+								"max": 1500.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:milky_dial",
+					"weight": 20,
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"min": 1.0,
+								"max": 2.0,
+								"type": "minecraft:uniform"
+							}
+						},
+						{
+							"function": "mineminenomi:set_price",
+							"price_range": {
+								"min": 1200.0,
+								"max": 1500.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:flash_dial",
+					"weight": 20,
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"min": 1.0,
+								"max": 2.0,
+								"type": "minecraft:uniform"
+							}
+						},
+						{
+							"function": "mineminenomi:set_price",
+							"price_range": {
+								"min": 1200.0,
+								"max": 1500.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				}
+			]
+		}
+	]
+}
