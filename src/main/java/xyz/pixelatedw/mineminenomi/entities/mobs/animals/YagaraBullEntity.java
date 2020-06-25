@@ -16,13 +16,17 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.goal.LookAtGoal;
 import net.minecraft.entity.ai.goal.LookRandomlyGoal;
+import net.minecraft.entity.ai.goal.PanicGoal;
+import net.minecraft.entity.ai.goal.RandomSwimmingGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
+import net.minecraft.entity.ai.goal.TemptGoal;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.IFluidState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -58,9 +62,12 @@ public class YagaraBullEntity extends AnimalEntity implements IDynamicRenderer
 	public YagaraBullEntity(World world)
 	{
 		super(ModEntities.YAGARA_BULL, world);
-		this.goalSelector.addGoal(1, new SwimGoal(this));
+		this.goalSelector.addGoal(0, new SwimGoal(this));
+		this.goalSelector.addGoal(1, new PanicGoal(this, 1.25D));
 		this.goalSelector.addGoal(2, new LookAtGoal(this, PlayerEntity.class, 8.0F));
 		this.goalSelector.addGoal(2, new LookRandomlyGoal(this));
+		this.goalSelector.addGoal(3, new TemptGoal(this, 1.25D, Ingredient.fromItems(Items.TROPICAL_FISH), true));
+		this.goalSelector.addGoal(4, new RandomSwimmingGoal(this, 1.5D, 80));
 	}
 
 	@Override
@@ -215,7 +222,7 @@ public class YagaraBullEntity extends AnimalEntity implements IDynamicRenderer
 	public void travel(Vec3d vec)
 	{
 		if (this.isAlive())
-		{		
+		{
 			if (this.isBeingRidden() && this.canBeSteered() && this.isSaddled())
 			{
 				LivingEntity livingentity = (LivingEntity) this.getControllingPassenger();
