@@ -1,6 +1,7 @@
 package xyz.pixelatedw.mineminenomi.world.spawners;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.entity.EntityType;
@@ -14,6 +15,7 @@ import net.minecraft.world.server.ServerWorld;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
+import xyz.pixelatedw.mineminenomi.entities.mobs.GenericNewEntity;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.debug.WyDebug;
@@ -66,6 +68,10 @@ public class AmbushSpawner
 					//grunt1Entity = ModEntities.MARINE_WITH_SWORD;
 					//grunt2Entity = ModEntities.MARINE_WITH_GUN;
 				}
+				
+				List<GenericNewEntity> dangers = WyHelper.getEntitiesNear(targetPos, world, 80, GenericNewEntity.class);
+				if(dangers.size() > 50)
+					return;
 				
 				int nrCaptains = 1 + (int) Math.ceil(bounty / 200000);
 				int nrGrunts = 3 + (int) Math.ceil(bounty / 100000);
