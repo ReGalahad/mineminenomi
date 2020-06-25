@@ -258,7 +258,7 @@
 						{
 							"function": "mineminenomi:set_price",
 							"price_range": {
-								"min": 200.0,
+								"min": 300.0,
 								"max": 500.0,
 								"type": "minecraft:uniform"
 							}

@@ -12,6 +12,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import xyz.pixelatedw.mineminenomi.api.AbilityArgument;
+import xyz.pixelatedw.mineminenomi.data.functions.FakeWeaponFunction;
 import xyz.pixelatedw.mineminenomi.data.functions.RandomWantedPosterFunction;
 import xyz.pixelatedw.mineminenomi.data.functions.SetBellyInPouchFunction;
 import xyz.pixelatedw.mineminenomi.data.functions.SetInfiniteStockFunction;
@@ -41,7 +42,8 @@ public class ModSetup
 		LootFunctionManager.registerFunction(new SetPriceFunction.Serializer());
 		LootFunctionManager.registerFunction(new SetInfiniteStockFunction.Serializer());
 		LootFunctionManager.registerFunction(new SetBellyInPouchFunction.Serializer());
-		
+		LootFunctionManager.registerFunction(new FakeWeaponFunction.Serializer());
+
 		ArgumentTypes.register("ability", AbilityArgument.class, new ArgumentSerializer<>(AbilityArgument::ability));
 	}
 	

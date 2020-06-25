@@ -49,12 +49,12 @@ public class ModWeapons
 	public static final CoreSwordItem BANDIT_KNIFE = new CoreSwordItem(3, 500);
 	public static final CoreSwordItem KNIFE2 = new CoreSwordItem(3, 500);
 	public static final CoreSwordItem KNIFE3 = new CoreSwordItem(3, 250);
-	public static final CoreSwordItem WADO_ICHIMONJI = new CoreSwordItem(8, 500);
-	public static final CoreSwordItem SANDAI_KITETSU = new CoreSwordItem(8, 500);
-	public static final CoreSwordItem NIDAI_KITESTU = new CoreSwordItem(10, 500);
-	public static final CoreSwordItem SHUSUI = new CoreSwordItem(8, 500);
+	public static final CoreSwordItem WADO_ICHIMONJI = new CoreSwordItem(8, 500).setSwordSpeed(-2);
+	public static final CoreSwordItem SANDAI_KITETSU = new CoreSwordItem(8, 500).setSwordSpeed(-2);
+	public static final CoreSwordItem NIDAI_KITESTU = new CoreSwordItem(10, 500).setSwordSpeed(-2);
+	public static final CoreSwordItem SHUSUI = new CoreSwordItem(8, 500).setSwordSpeed(-2);
 	public static final CoreSwordItem SOUL_SOLID = new CoreSwordItem(8, 500);
-	public static final CoreSwordItem DURANDAL = new CoreSwordItem(7, 500);
+	public static final CoreSwordItem DURANDAL = new CoreSwordItem(7, 400).setSwordSpeed(-1.5);
 	public static final ClimaTactItem CLIMA_TACT = new ClimaTactItem(1, 1);
 	public static final ClimaTactItem PERFECT_CLIMA_TACT = new ClimaTactItem(3, 2);
 	public static final ClimaTactItem SORCERY_CLIMA_TACT = new ClimaTactItem(5, 3);

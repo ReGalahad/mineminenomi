@@ -16,6 +16,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.goal.LookAtGoal;
 import net.minecraft.entity.ai.goal.LookRandomlyGoal;
+import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.IFluidState;
@@ -57,6 +58,7 @@ public class YagaraBullEntity extends AnimalEntity implements IDynamicRenderer
 	public YagaraBullEntity(World world)
 	{
 		super(ModEntities.YAGARA_BULL, world);
+		this.goalSelector.addGoal(1, new SwimGoal(this));
 		this.goalSelector.addGoal(2, new LookAtGoal(this, PlayerEntity.class, 8.0F));
 		this.goalSelector.addGoal(2, new LookRandomlyGoal(this));
 	}

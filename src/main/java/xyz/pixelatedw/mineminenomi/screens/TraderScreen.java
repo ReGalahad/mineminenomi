@@ -227,6 +227,9 @@ public class TraderScreen extends Screen
 		ItemStack stack = new ItemStack(this.getSelectedStack().getItemStack().getItem());
 		stack.setCount(this.getWantedAmount());
 		
+		if(this.getSelectedStack().getItemStack().getOrCreateTag().getBoolean("isClone"))
+			stack.getOrCreateTag().putBoolean("isClone", true);
+		
 		// Reduce the available stacks if its not infinite stock
 		if(!this.getSelectedStack().hasInfiniteStock())
 		{

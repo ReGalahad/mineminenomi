@@ -29,8 +29,11 @@ public class MarineTraderEntity extends TraderEntity
 
 	@Override
 	public ResourceLocation getTradeTable()
-	{
-		return ModLootTables.JACK_OF_ALL_TRADES_TRADER_POOL;
+	{		
+		//if(WyHelper.randomDouble() < 0.1)
+		//	return ModLootTables.GILGAMESH_TRADER_POOL;
+		
+		return ModLootTables.GILGAMESH_TRADER_POOL;
 	}
 
 	@Override

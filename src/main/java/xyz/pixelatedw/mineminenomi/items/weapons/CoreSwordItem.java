@@ -99,7 +99,6 @@ public class CoreSwordItem extends Item
 		if (!itemStack.hasTag())
 		{
 			itemStack.setTag(new CompoundNBT());
-			itemStack.getTag().putInt("metadata", 0);
 			itemStack.getTag().putDouble("multiplier", 1);
 		}
 
@@ -258,11 +257,11 @@ public class CoreSwordItem extends Item
 			{
 				multiplier = stack.getTag().getDouble("multiplier");
 				if(stack.getTag().getBoolean("isClone"))
-					multiplier /= 1.5;
+					multiplier /= 1.25;
 			}
 			
-			multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", this.damage * multiplier, Operation.ADDITION));
-			multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Speed modifier", speed, Operation.ADDITION));
+			multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", Math.round(this.damage * multiplier), Operation.ADDITION));
+			multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Speed modifier", this.speed, Operation.ADDITION));
 		}
 		
 		return multimap;

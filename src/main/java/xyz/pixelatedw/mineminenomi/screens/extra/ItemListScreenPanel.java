@@ -6,6 +6,8 @@ import java.util.List;
 
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.client.gui.ScrollPanel;
 import xyz.pixelatedw.mineminenomi.api.TradeEntry;
 import xyz.pixelatedw.mineminenomi.screens.TraderScreen;
@@ -24,6 +26,14 @@ public class ItemListScreenPanel extends ScrollPanel
 
 		this.parent = parent;
 		this.entries = list;
+		
+		for(TradeEntry entry : this.entries)
+		{
+			if(entry.getItemStack().getOrCreateTag().getBoolean("isClone"))
+			{
+				entry.getItemStack().setDisplayName(new StringTextComponent(TextFormatting.RESET + entry.getItemStack().getDisplayName().getFormattedText() + " (Clone)"));
+			}
+		}
 	}
 
 	@Override
