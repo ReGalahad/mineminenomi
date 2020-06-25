@@ -45,7 +45,7 @@ public class ItemListScreenPanel extends ScrollPanel
 	@Override
 	protected int getContentHeight()
 	{
-		return (this.entries.size()) * ENTRY_HEIGHT + 46;
+		return (int) ((this.entries.size() * (ENTRY_HEIGHT * 1.25)) + 2);
 	}
 
 	@Override
@@ -95,7 +95,9 @@ public class ItemListScreenPanel extends ScrollPanel
 	{
 		TradeEntry entry = this.findStackEntry((int) mouseX, (int) mouseY);
 
-		if (entry != null)
+		boolean isHovered = mouseX >= this.left && mouseY >= this.top && mouseX < this.left + this.width - 5 && mouseY < this.top + this.height;
+		
+		if (isHovered && entry != null)
 		{
 			this.parent.setSelectedStack(entry);
 			this.parent.setWantedAmount(1);

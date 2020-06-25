@@ -53,7 +53,7 @@ public class AbilitiesListScreenPanel extends ScrollPanel
 	protected int getContentHeight()
 	{
 		int size = this.entries.stream().filter(entry -> !(entry.ability instanceof PassiveAbility) && !(entry.ability instanceof TempoAbility)).collect(Collectors.toList()).size();
-		return (size * ENTRY_HEIGHT) + 50;
+		return (int) ((size * (ENTRY_HEIGHT * 1.25)) + 2);
 	}
 
 	@Override
@@ -109,25 +109,21 @@ public class AbilitiesListScreenPanel extends ScrollPanel
 	{
 		Entry entry = this.findAbilityEntry((int) mouseX, (int) mouseY);
 
-		if (this.parent.slotSelected < 0 || entry == null)
-			return false;
-
-		boolean isHovered = mouseX >= this.left && mouseY >= this.top && mouseX < this.left + this.width && mouseY < this.top + this.height;
-		
-		if(!isHovered)
-			return false;
-
+		boolean isHovered = mouseX >= this.left && mouseY >= this.top && mouseX < this.left + this.width - 5 && mouseY < this.top + this.height;
 		boolean flag = true;
 		
-		for (int i = 0; i < this.props.getEquippedAbilities().length; i++)
+		if(entry != null)
 		{
-			if (this.props.getEquippedAbility(i) != null && this.props.getEquippedAbility(i).equals(entry.ability))
+			for (int i = 0; i < this.props.getEquippedAbilities().length; i++)
 			{
-				flag = false;
+				if (this.props.getEquippedAbility(i) != null && this.props.getEquippedAbility(i).equals(entry.ability))
+				{
+					flag = false;
+				}
 			}
 		}
-		
-		if (flag)
+			
+		if (isHovered && this.parent.slotSelected >= 0 &&flag)
 		{
 			this.props.setEquippedAbility(this.parent.slotSelected, entry.ability);
 			WyNetwork.sendToServer(new CSyncAbilityDataPacket(this.props));
