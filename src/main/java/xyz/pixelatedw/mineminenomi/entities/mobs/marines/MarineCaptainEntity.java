@@ -1,5 +1,7 @@
 package xyz.pixelatedw.mineminenomi.entities.mobs.marines;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.entity.ILivingEntityData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.SpawnReason;
@@ -19,8 +21,6 @@ import xyz.pixelatedw.mineminenomi.init.ModArmors;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.wypi.WyHelper;
 
-import javax.annotation.Nullable;
-
 public class MarineCaptainEntity extends GenericMarineEntity implements IRokushikiUser, ISwordsman, IBrawler, IHakiUser
 {
 
@@ -31,7 +31,7 @@ public class MarineCaptainEntity extends GenericMarineEntity implements IRokushi
 	
 	@Override
 	protected void registerGoals()
-	{
+	{ 
 		super.registerGoals();
 		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1, true));
 		this.goalSelector.addGoal(2, new GapCloserGoal(this));

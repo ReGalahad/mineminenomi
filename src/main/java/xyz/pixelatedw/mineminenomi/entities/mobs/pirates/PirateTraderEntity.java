@@ -10,6 +10,7 @@ import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.mineminenomi.init.ModLootTables;
+import xyz.pixelatedw.wypi.WyHelper;
 
 public class PirateTraderEntity extends TraderEntity
 {
@@ -30,6 +31,9 @@ public class PirateTraderEntity extends TraderEntity
 	@Override
 	public ResourceLocation getTradeTable()
 	{
+		if(WyHelper.randomDouble() < 0.1)
+			return ModLootTables.GILGAMESH_TRADER_POOL;
+		
 		return ModLootTables.JACK_OF_ALL_TRADES_TRADER_POOL;
 	}
 	

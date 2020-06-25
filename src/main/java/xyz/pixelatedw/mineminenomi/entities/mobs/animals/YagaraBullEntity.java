@@ -60,7 +60,7 @@ public class YagaraBullEntity extends AnimalEntity implements IDynamicRenderer
 	private double waterLevel;
 
 	public YagaraBullEntity(World world)
-	{
+	{ 
 		super(ModEntities.YAGARA_BULL, world);
 		this.goalSelector.addGoal(0, new SwimGoal(this));
 		this.goalSelector.addGoal(1, new PanicGoal(this, 1.25D));
