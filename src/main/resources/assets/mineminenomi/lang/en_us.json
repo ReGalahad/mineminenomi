@@ -6,6 +6,7 @@
 	"ability.item.message.need_sorcery_clima_tact": "You need a Sorcery or higher grade clima tact to use this ability!",
 	"ability.item.message.need_sword": "You need a sword to use this ability!",
 	"ability.item.message.only_in_room": "%s can only be used inside ROOM!",
+	"ability.message.cannot_use_here": "Cannot use abilites in a restricted area!",
 	"ability.message.not_enough_blocks": "Not enough blocks in the inventory!",
 	"ability.message.not_enough_cola": "Not enough Cola!",
 	"ability.message.not_zoan_form_double": "%s can only be used while %s or %s is active !",

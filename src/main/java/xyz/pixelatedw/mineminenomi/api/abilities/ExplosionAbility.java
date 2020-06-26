@@ -30,6 +30,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.storage.loot.LootContext;
 import net.minecraft.world.storage.loot.LootParameters;
+import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
@@ -109,7 +110,10 @@ public class ExplosionAbility extends Explosion
 
 	public void doExplosion()
 	{
-
+		boolean flag = this.exploder instanceof PlayerEntity && AbilityHelper.checkForRestriction(this.exploder.world, (int) this.explosionX, (int) this.explosionY, (int) this.explosionZ);
+		if(flag)
+			return;
+		
 		Set<BlockPos> set = Sets.newHashSet();
 		int i = 16;
 

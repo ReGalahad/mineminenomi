@@ -14,6 +14,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.abilities.artofweather.CoolBallAbility;
 import xyz.pixelatedw.mineminenomi.abilities.artofweather.HeatBallAbility;
@@ -67,6 +68,7 @@ import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
+import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.mineminenomi.init.ModQuests;
 import xyz.pixelatedw.mineminenomi.items.AkumaNoMiItem;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
@@ -235,11 +237,21 @@ public class AbilityHelper
 	{
 		ExtendedWorldData worldData = ExtendedWorldData.get(player.world);
 
-		if (worldData.isInsideRestrictedArea((int) player.posX, (int) player.posY, (int) player.posZ))
+		if (worldData.isInsideRestrictedArea(player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ()))
 		{
-			WyHelper.sendMsgToPlayer(player, "Cannot use abilites in a restricted area !");
+			WyHelper.sendMsgToPlayer(player, new TranslationTextComponent(ModI18n.ABILITY_MESSAGE_CANNOT_USE_HERE).getFormattedText());
 			return true;
 		}
+
+		return false;
+	}
+	
+	public static boolean checkForRestriction(World world, int posX, int posY, int posZ)
+	{
+		ExtendedWorldData worldData = ExtendedWorldData.get(world);
+
+		if (worldData.isInsideRestrictedArea(posX, posY, posZ))
+			return true;
 
 		return false;
 	}

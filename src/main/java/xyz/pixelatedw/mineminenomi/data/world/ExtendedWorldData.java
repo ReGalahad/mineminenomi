@@ -218,8 +218,6 @@ public class ExtendedWorldData extends WorldSavedData
 			if (minPos.length <= 0 || maxPos.length <= 0)
 				continue;
 
-			//System.out.println((posX > minPos[0]) + " " + (posX < maxPos[0]));
-			
 			if (posX > minPos[0] && posX < maxPos[0] && posY > minPos[1] && posY < maxPos[1] && posZ > minPos[2] && posZ < maxPos[2])
 			{
 				return true;

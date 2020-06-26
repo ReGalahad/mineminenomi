@@ -1,18 +1,31 @@
 package xyz.pixelatedw.mineminenomi.blocks.tileentities;
 
+import java.util.Arrays;
+import java.util.List;
+
 import javax.annotation.Nullable;
 
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
+import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModTileEntities;
+import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.abilities.ChargeableAbility;
+import xyz.pixelatedw.wypi.abilities.ContinuousAbility;
+import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
+import xyz.pixelatedw.wypi.data.ability.IAbilityData;
+import xyz.pixelatedw.wypi.network.WyNetwork;
+import xyz.pixelatedw.wypi.network.packets.server.SSyncAbilityDataPacket;
 
-public class AblProtectionTileEntity extends TileEntity
+public class AblProtectionTileEntity extends TileEntity implements ITickableTileEntity
 {
-	private int protectedSize = 100;
+	private int protectedSize = 10;
 	
 	public AblProtectionTileEntity()
 	{
@@ -35,16 +48,60 @@ public class AblProtectionTileEntity extends TileEntity
 		int maxPosY = posY + size;
 		int maxPosZ = posZ + size;
 
-		System.out.println(minPosX + " " + maxPosX);
-		System.out.println(minPosY + " " + maxPosY);
-		System.out.println(minPosZ + " " + maxPosZ);
-
 		worldData.addRestrictedArea(new int[] { minPosX, minPosY, minPosZ }, new int[] { maxPosX, maxPosY, maxPosZ });
 	}
 	
 	public int getSize()
 	{
 		return this.protectedSize;
+	}
+	
+	@Override
+	public void tick()
+	{
+		if (!this.world.isRemote)
+		{
+			List<PlayerEntity> nearbyEntities = WyHelper.getEntitiesNear(this.getPos(), this.world, this.protectedSize, PlayerEntity.class);
+			
+			if (!nearbyEntities.isEmpty())
+			{
+				IAbilityData props;
+				for(PlayerEntity entity : nearbyEntities) 
+				{
+					if(entity == null || !entity.isAlive())
+						continue;
+					
+					props = AbilityDataCapability.get(entity);
+					boolean abilityCheck = Arrays.stream(props.getEquippedAbilities()).anyMatch(ability -> {
+						
+						boolean continuousCheck = ability instanceof ContinuousAbility && ((ContinuousAbility)ability).isContinuous();
+						boolean chargeableCheck = ability instanceof ChargeableAbility && ((ChargeableAbility)ability).isCharging();
+						
+						return continuousCheck || chargeableCheck;
+					});
+					
+					if(!abilityCheck)
+						continue;
+						
+					for(Ability abl : props.getEquippedAbilities())
+					{
+						if(abl == null)
+							continue;
+						
+						if(abl instanceof ContinuousAbility && abl.isContinuous())
+							((ContinuousAbility)abl).stopContinuity(entity);
+						else if(abl instanceof ChargeableAbility && abl.isCharging())
+						{
+							ChargeableAbility cAbl = ((ChargeableAbility)abl);
+							cAbl.setChargeTime(cAbl.getMaxChargeTime());
+							cAbl.startCooldown(entity);	
+						}
+					}
+					
+					WyNetwork.sendTo(new SSyncAbilityDataPacket(entity.getEntityId(), props), entity);
+				}
+			}
+		}
 	}
 
 	@Override

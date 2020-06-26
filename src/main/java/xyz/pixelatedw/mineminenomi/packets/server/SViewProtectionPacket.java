@@ -57,7 +57,7 @@ public class SViewProtectionPacket
 		{
 			ctx.get().enqueueWork(() ->
 			{
-	
+				ClientHandler.handle(message);
 			});
 		}
 
