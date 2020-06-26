@@ -1,7 +1,9 @@
 package xyz.pixelatedw.mineminenomi.screens;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 
@@ -19,6 +21,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.config.GuiUtils;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
+import xyz.pixelatedw.mineminenomi.screens.extra.TexturedIconButton;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.data.quest.IQuestData;
@@ -72,12 +75,7 @@ public class QuestsTrackerScreen extends Screen
 			GlStateManager.translated(256, 256, 0);
 			
 			GlStateManager.scaled(scale * 0.7, scale * 0.9, 0);
-			GlStateManager.translated(-256, -256, 0);
-			
-			// Next / Previous buttons
-			this.minecraft.getTextureManager().bindTexture(ModResources.WIDGETS);
-			GuiUtils.drawTexturedModalRect(-20, 30, 0, 92, 25, 100, 1);
-			GuiUtils.drawTexturedModalRect(240, 30, 26, 92, 30, 100, 1);		
+			GlStateManager.translated(-256, -256, 0);	
 		}
 		GlStateManager.popMatrix();
 
@@ -109,7 +107,7 @@ public class QuestsTrackerScreen extends Screen
 			GlStateManager.pushMatrix();
 			{
 				double scale = 1.4;
-				GlStateManager.translated(posX + 120, posY + 15, 0);
+				GlStateManager.translated(posX + 110, posY + 15, 0);
 				GlStateManager.translated(256, 256, 0);
 				
 				GlStateManager.scaled(scale, scale, 0);
@@ -126,7 +124,7 @@ public class QuestsTrackerScreen extends Screen
 				if(this.currentQuest.isComplete())
 					textColor = "#00FF55";
 				String progress = TextFormatting.BOLD + new TranslationTextComponent(ModI18n.GUI_QUEST_PROGRESS).getFormattedText() + " : " + String.format("%.1f", currentQuestProgress) + "%";
-				WyHelper.drawStringWithBorder(this.font, progress, posX - 90, posY - 65, WyHelper.hexToRGB(textColor).getRGB());
+				WyHelper.drawStringWithBorder(this.font, progress, posX - 120, posY - 65, WyHelper.hexToRGB(textColor).getRGB());
 			}
 			
 			// Quest Objective
@@ -153,10 +151,10 @@ public class QuestsTrackerScreen extends Screen
 					{
 			            FontRenderer galacticFont = this.minecraft.getFontResourceManager().getFontRenderer(Minecraft.standardGalacticFontRenderer);
 			            WyHelper.drawStringWithBorder(this.font, "• ", posX - 90, posY - 45 + yOffset, WyHelper.hexToRGB(textColor).getRGB());
-						WyHelper.drawStringWithBorder(galacticFont, this.hiddenTexts.get((int) WyHelper.randomWithRange(0, this.hiddenTexts.size() - 1)), posX - 82, posY - 45 + yOffset, WyHelper.hexToRGB(textColor).getRGB());
+						WyHelper.drawStringWithBorder(galacticFont, this.hiddenTexts.get((int) WyHelper.randomWithRange(0, this.hiddenTexts.size() - 1)), posX - 112, posY - 45 + yOffset, WyHelper.hexToRGB(textColor).getRGB());
 					}
 					else
-						WyHelper.drawStringWithBorder(this.font, (obj.isComplete() ? TextFormatting.STRIKETHROUGH + "" : "") + "• " + objectiveName + progress, posX - 90, posY - 45 + yOffset, WyHelper.hexToRGB(textColor).getRGB());
+						WyHelper.drawStringWithBorder(this.font, (obj.isComplete() ? TextFormatting.STRIKETHROUGH + "" : "") + "• " + objectiveName + progress, posX - 120, posY - 45 + yOffset, WyHelper.hexToRGB(textColor).getRGB());
 				}
 			}
 			GlStateManager.popMatrix();
@@ -211,6 +209,31 @@ public class QuestsTrackerScreen extends Screen
 				}
 			}
 		}
+		
+		posX = (this.width - 256) / 2;
+		posY = (this.height - 256) / 2;
+		
+		List<Quest> availableQuests = Arrays.asList(this.qprops.getInProgressQuests()).stream().filter(quest -> quest != null).collect(Collectors.toList());
+		
+		TexturedIconButton nextButton = new TexturedIconButton(ModResources.BIG_WOOD_BUTTON_RIGHT, posX + 285, posY + 80, 24, 100, "", (btn) -> 
+		{
+			if(this.questIndex + 1 < availableQuests.size())
+				this.questIndex++;
+			else
+				this.questIndex = 0;
+		});
+		nextButton = nextButton.setTextureInfo(posX + 280, posY + 35, 32, 128);
+		this.addButton(nextButton);
+		
+		TexturedIconButton prevButton = new TexturedIconButton(ModResources.BIG_WOOD_BUTTON_LEFT, posX - 55, posY + 80, 24, 100, "", (btn) -> 
+		{
+			if(this.questIndex > 0)
+				this.questIndex--;
+			else
+				this.questIndex = availableQuests.size() - 1;
+		});
+		prevButton = prevButton.setTextureInfo(posX - 58, posY + 35, 32, 128);
+		this.addButton(prevButton);
 	}
 	
 	@Override

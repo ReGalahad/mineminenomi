@@ -50,7 +50,7 @@ public class QuestDataBase implements IQuestData
 			for(int i = 0; i < this.inProgressQuests.length; i++)
 			{
 				Quest inProgressQuest = this.inProgressQuests[i];
-				if(inProgressQuest != null)
+				if(inProgressQuest != null && inProgressQuest.equals(ogQuest))
 				{
 					 this.inProgressQuests[i] = null;
 					 return true;

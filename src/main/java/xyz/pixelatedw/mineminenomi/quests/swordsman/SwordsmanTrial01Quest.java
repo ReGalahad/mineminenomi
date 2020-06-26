@@ -14,7 +14,7 @@ import xyz.pixelatedw.wypi.quests.objectives.Objective;
 public class SwordsmanTrial01Quest extends Quest
 {
 	private Objective objective01 = new FindStrongSwordObjective();
-	private Objective objective02 = new SwordKillRunningObjective("Kill 5 enemies with running towards them", 5).addRequirement(this.objective01);
+	private Objective objective02 = new SwordKillRunningObjective("Kill 5 enemies while running towards them", 5).addRequirement(this.objective01);
 
 	public SwordsmanTrial01Quest()
 	{

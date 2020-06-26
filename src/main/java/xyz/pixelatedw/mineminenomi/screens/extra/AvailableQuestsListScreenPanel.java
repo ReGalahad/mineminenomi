@@ -78,7 +78,7 @@ public class AvailableQuestsListScreenPanel extends ScrollPanel
 	@Override
 	protected int getContentHeight()
 	{
-		return (this.availableQuests.size()) * ENTRY_HEIGHT * 3 - 30;
+		return (int) ((this.availableQuests.size() * (ENTRY_HEIGHT * 2.75)) - 2);
 	}
 
 	@Override

@@ -9,6 +9,7 @@ import net.minecraft.command.Commands;
 import net.minecraft.command.arguments.EntityArgument;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
+import xyz.pixelatedw.mineminenomi.api.QuestArgument;
 import xyz.pixelatedw.mineminenomi.api.helpers.HakiHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
@@ -16,7 +17,10 @@ import xyz.pixelatedw.mineminenomi.data.entity.haki.HakiDataCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.haki.IHakiData;
 import xyz.pixelatedw.mineminenomi.packets.server.SOpenJollyRogerCreatorScreenPacket;
 import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.data.quest.IQuestData;
+import xyz.pixelatedw.wypi.data.quest.QuestDataCapability;
 import xyz.pixelatedw.wypi.network.WyNetwork;
+import xyz.pixelatedw.wypi.quests.Quest;
 
 public class FGCommand
 {
@@ -40,7 +44,26 @@ public class FGCommand
 			.then(Commands.argument("target", EntityArgument.player())
 				.executes(context -> turnSwordInClone(context, EntityArgument.getPlayer(context, "target")))));
 		
+		builder
+			.then(Commands.literal("quest")
+				.then(Commands.literal("remove")
+					.then(Commands.argument("quest", QuestArgument.quest())
+					.then(Commands.argument("target", EntityArgument.player())
+						.executes(context -> removeQuest(context, QuestArgument.getQuest(context, "quest"), EntityArgument.getPlayer(context, "target")))))));
+			
 		dispatcher.register(builder);
+	}
+
+	private static int removeQuest(CommandContext<CommandSource> context, Quest quest, ServerPlayerEntity player)
+	{
+		IQuestData props = QuestDataCapability.get(player);
+		
+		if(props.hasInProgressQuest(quest))
+			props.removeInProgressQuest(quest);
+		else
+			WyHelper.sendMsgToPlayer(player, "You don't have this quest!");
+		
+		return 1;
 	}
 
 	private static int turnSwordInClone(CommandContext<CommandSource> context, ServerPlayerEntity player)
