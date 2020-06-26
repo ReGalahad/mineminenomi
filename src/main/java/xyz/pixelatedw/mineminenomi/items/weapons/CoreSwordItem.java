@@ -52,9 +52,10 @@ public class CoreSwordItem extends Item
 			{
 				IAbilityData props = AbilityDataCapability.get(livingEntity);
 				boolean mainHandFlag = livingEntity.getHeldItemMainhand() == itemStack;
+				boolean offHandFlag = livingEntity.getHeldItemOffhand() == itemStack;
 				BusoshokuHakiImbuingAbility ability = props.getEquippedAbility(BusoshokuHakiImbuingAbility.INSTANCE);
-				boolean hakiActiveFlag = ability != null && ability.isContinuous();
-				hasHakiActive = mainHandFlag && hakiActiveFlag ? 1 : 0;
+				boolean hakiActiveFlag = ability != null && ability.isContinuous();			
+				hasHakiActive = (mainHandFlag || offHandFlag) && hakiActiveFlag ? 1 : 0;
 			}
 			else if(livingEntity instanceof GenericNewEntity)
 			{
@@ -73,7 +74,8 @@ public class CoreSwordItem extends Item
 		else
 		{
 			boolean mainHandFlag = livingEntity.getHeldItemMainhand() != itemStack;
-			return mainHandFlag ? 1.0F : 0.0F;
+			boolean offHandFlag = livingEntity.getHeldItemOffhand() != itemStack;
+			return (mainHandFlag && offHandFlag) ? 1.0F : 0.0F;
 		}
 	};
 	

@@ -56,7 +56,7 @@ public class WantedPosterScreen extends Screen
 
 		GL11.glPushMatrix();
 		{
-			ResourceLocation rs = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/wantedposters/backgrounds/" + background + ".png");
+			ResourceLocation rs = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/wantedposters/backgrounds/" + background + ".jpg");
 			this.minecraft.getTextureManager().bindTexture(rs);
 
 			GL11.glScaled(0.34, 0.245, 0);

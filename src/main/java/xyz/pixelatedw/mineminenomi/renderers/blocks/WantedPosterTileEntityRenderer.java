@@ -90,7 +90,7 @@ public class WantedPosterTileEntityRenderer extends TileEntityRenderer<WantedPos
 
 				GlStateManager.pushMatrix();
 				{
-					rs = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/wantedposters/backgrounds/" + tileEntity.getBackground() + ".png");
+					rs = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/wantedposters/backgrounds/" + tileEntity.getBackground() + ".jpg");
 					this.bindTexture(rs);
 
 					GL11.glTranslated(50, -50, 0.015);

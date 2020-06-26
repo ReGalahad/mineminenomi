@@ -4,7 +4,6 @@ import javax.annotation.Nullable;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.WallOrFloorItem;
 import net.minecraft.util.ActionResult;
@@ -28,8 +27,8 @@ public class WantedPosterItem extends WallOrFloorItem
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand)
 	{
-		if (player.getHeldItem(hand).hasTag())
-			WyNetwork.sendTo(new SOpenWantedPosterScreenPacket(), (ServerPlayerEntity)player);
+		if (!player.world.isRemote && player.getHeldItem(hand).hasTag())
+			WyNetwork.sendTo(new SOpenWantedPosterScreenPacket(), player);
 		return new ActionResult<>(ActionResultType.SUCCESS, player.getHeldItem(hand));
 	}
 
