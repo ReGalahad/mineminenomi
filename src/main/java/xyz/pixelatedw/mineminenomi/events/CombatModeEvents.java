@@ -96,7 +96,7 @@ public class CombatModeEvents
 			{
 				GlStateManager.color4f(1, 1, 1, 1);
 				GlStateManager.disableLighting();
-				GlStateManager.enableBlend();
+				//GlStateManager.enableBlend();
 				mc.getTextureManager().bindTexture(ModResources.WIDGETS);			
 				
 				for (int i = 0; i < 8; i++)
@@ -180,7 +180,7 @@ public class CombatModeEvents
 									GlStateManager.translated(12, 12, 0);
 									GlStateManager.scaled(scale, scale, 1);
 									GlStateManager.translated(-12, -12, 0);
-									GuiUtils.drawTexturedModalRect(0, 0, 0, 0, 23, 23, -1);							
+									GuiUtils.drawTexturedModalRect(0, 0, 0, 0, 23, 23, -1);	
 								}
 								GlStateManager.popMatrix();
 							}
@@ -198,7 +198,7 @@ public class CombatModeEvents
 						WyHelper.drawStringWithBorder(mc.fontRenderer, number, (posX - 172 + (i * 50)) / 2 - mc.fontRenderer.getStringWidth(number) / 2, posY - 14, WyHelper.hexToRGB("#FFFFFF").getRGB());
 					mc.getTextureManager().bindTexture(ModResources.WIDGETS);
 				}		
-				GlStateManager.disableBlend();
+				//GlStateManager.disableBlend();
 			}
 			GlStateManager.popMatrix();
 		}

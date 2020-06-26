@@ -172,8 +172,8 @@ public class HakiPassiveEvents
 			if (entity == player)
 				return;
 	
-			float dorikiPower = sprops.getDoriki() / 2000;
-			float hakiPower = hakiProps.getKenbunshokuHakiExp() / 4;
+			float dorikiPower = sprops.getDoriki() / 1000;
+			float hakiPower = hakiProps.getKenbunshokuHakiExp() / 2.5F;
 			float finalPower = dorikiPower + hakiPower;
 	
 			if (entity.getDistance(player) > 20 + finalPower)
@@ -200,6 +200,8 @@ public class HakiPassiveEvents
 			GlStateManager.setupSolidRenderingTextureCombine(WyHelper.hexToRGB(color).getRGB());
 			if (event.getEntity().hurtTime <= 0)
 				GlStateManager.disableDepthTest();
+			
+			GlStateManager.enableLighting();
 		}
 
 		LivingEntity entity = event.getEntity();
@@ -208,10 +210,13 @@ public class HakiPassiveEvents
 			if (entity.getActivePotionEffect(ModEffects.UNCONSCIOUS).getDuration() <= 0)
 			{
 				entity.removePotionEffect(ModEffects.UNCONSCIOUS);
+				Method method;
 				try
 				{
 					entity.setBedPosition(entity.getPosition());
-					Method method = Entity.class.getDeclaredMethod("setPose", Pose.class);
+					method = Entity.class.getDeclaredMethod("setPose", Pose.class);
+					if(method == null)
+						method = Entity.class.getDeclaredMethod("func_213301_b", Pose.class);
 					method.setAccessible(true);
 					method.invoke(entity, Pose.STANDING);
 				}
@@ -252,17 +257,17 @@ public class HakiPassiveEvents
 			if (entity == player)
 				return;
 	
-			float dorikiPower = sprops.getDoriki() / 2000;
-			float hakiPower = hakiProps.getKenbunshokuHakiExp() / 20;
+			float dorikiPower = sprops.getDoriki() / 1000;
+			float hakiPower = hakiProps.getKenbunshokuHakiExp() / 2.5F;
 			float finalPower = dorikiPower + hakiPower;
-	
+
 			if (entity.getDistance(player) > 20 + finalPower)
 				return;
 	
 			if (event.getEntity().hurtTime <= 0)
 				GlStateManager.enableDepthTest();
 			GlStateManager.tearDownSolidRenderingTextureCombine();
-			GlStateManager.disableColorMaterial();
+			//GlStateManager.disableColorMaterial();
 	
 			GlStateManager.popMatrix();
 		}

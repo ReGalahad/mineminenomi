@@ -2,6 +2,8 @@ package xyz.pixelatedw.mineminenomi.abilities.haki;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.text.TranslationTextComponent;
 import xyz.pixelatedw.mineminenomi.api.abilities.IHakiAbility;
 import xyz.pixelatedw.mineminenomi.api.helpers.HakiHelper;
@@ -57,6 +59,8 @@ public class BusoshokuHakiFullBodyHardeningAbility extends PunchAbility implemen
 	private void duringContinuity(PlayerEntity player, int passiveTimer)
 	{
 		HakiHelper.checkForHakiOveruse(player, passiveTimer);
+		
+		player.addPotionEffect(new EffectInstance(Effects.RESISTANCE, 100, 3, false, false));
 	}
 
 	private boolean onEndContinuityEvent(PlayerEntity player)

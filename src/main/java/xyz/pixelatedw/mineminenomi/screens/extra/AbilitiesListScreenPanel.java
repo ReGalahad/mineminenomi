@@ -123,7 +123,7 @@ public class AbilitiesListScreenPanel extends ScrollPanel
 			}
 		}
 			
-		if (isHovered && this.parent.slotSelected >= 0 &&flag)
+		if (isHovered && this.parent.slotSelected >= 0 && flag && entry.ability != null)
 		{
 			this.props.setEquippedAbility(this.parent.slotSelected, entry.ability);
 			WyNetwork.sendToServer(new CSyncAbilityDataPacket(this.props));

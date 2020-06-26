@@ -5,6 +5,10 @@ import net.minecraft.util.text.TranslationTextComponent;
 import xyz.pixelatedw.mineminenomi.api.abilities.IHakiAbility;
 import xyz.pixelatedw.mineminenomi.api.helpers.HakiHelper;
 import xyz.pixelatedw.mineminenomi.api.helpers.HakiHelper.HakiType;
+import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
+import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
+import xyz.pixelatedw.mineminenomi.data.entity.haki.HakiDataCapability;
+import xyz.pixelatedw.mineminenomi.data.entity.haki.IHakiData;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
@@ -15,7 +19,7 @@ public class KenbunshokuHakiFutureSightAbility extends ContinuousAbility impleme
 {
 	public static final KenbunshokuHakiFutureSightAbility INSTANCE = new KenbunshokuHakiFutureSightAbility();
 	
-	private static final int MAX_PROTECTION = 1000;
+	private static final int MAX_PROTECTION = 300;
 	private int protection;
 	
 	public KenbunshokuHakiFutureSightAbility()
@@ -35,7 +39,14 @@ public class KenbunshokuHakiFutureSightAbility extends ContinuousAbility impleme
 			return false;
 		}
 		
-		this.protection = MAX_PROTECTION;
+		IEntityStats sprops = EntityStatsCapability.get(player);
+		IHakiData hakiProps = HakiDataCapability.get(player);
+		
+		float dorikiPower = sprops.getDoriki() / 1000;
+		float hakiPower = hakiProps.getKenbunshokuHakiExp() / 2.5F;
+		float finalPower = dorikiPower + hakiPower;
+		
+		this.protection = (int) (MAX_PROTECTION + (finalPower * 2));
 		return true;
 	}
 	
