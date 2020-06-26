@@ -117,6 +117,6 @@ public class FatHumanModel extends BipedModel implements IHasArm
 		GlStateManager.rotated(Math.toDegrees(this.rightarm.rotateAngleX), 1, 0, 0);
 		GlStateManager.rotated(Math.toDegrees(this.rightarm.rotateAngleY), 0, 1, 0);
 		GlStateManager.rotated(Math.toDegrees(this.rightarm.rotateAngleZ), 0, 0, 1);
-		GlStateManager.translated(-0.5, 0.3, -0.2);
+		GlStateManager.translated(-0.5, 0.17, 0.02);
 	}
 }
