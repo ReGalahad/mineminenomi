@@ -3,6 +3,7 @@ package xyz.pixelatedw.mineminenomi.events.devilfruits;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -20,7 +21,8 @@ public class DFDropEvents
 	@SubscribeEvent	
 	public static void onBreak(BreakEvent event)
 	{
-		if(CommonConfig.instance.getDevilFruitDropsFromLeavesChance() > 0 && event.getState().getBlock() instanceof LeavesBlock)
+		boolean hasShears = event.getPlayer().getHeldItem(event.getPlayer().getActiveHand()).getItem() == Items.SHEARS;
+		if(CommonConfig.instance.getDevilFruitDropsFromLeavesChance() > 0 && event.getState().getBlock() instanceof LeavesBlock && !hasShears)
 		{
 			double chance = WyHelper.randomWithRange(0, 100) + WyHelper.randomDouble();
 
