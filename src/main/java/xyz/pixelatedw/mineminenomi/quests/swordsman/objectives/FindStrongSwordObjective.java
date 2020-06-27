@@ -1,10 +1,10 @@
 package xyz.pixelatedw.mineminenomi.quests.swordsman.objectives;
 
 import java.util.Map.Entry;
+import java.util.UUID;
 
 import com.google.common.collect.Multimap;
 
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
@@ -31,7 +31,8 @@ public class FindStrongSwordObjective extends Objective implements IObtainItemOb
 		for(Entry<String, AttributeModifier> entry : multimap.entries())
 		{
 			AttributeModifier attr = entry.getValue();
-			if (attr.getName().equalsIgnoreCase(SharedMonsterAttributes.ATTACK_DAMAGE.getName()))
+
+			if (attr.getID().equals(UUID.fromString("cb3f55d3-645c-4f38-a497-9c13a33db5cf")))
 			{
 				double damage = attr.getAmount();
 				if(damage >= 7)
@@ -41,7 +42,7 @@ public class FindStrongSwordObjective extends Objective implements IObtainItemOb
 			}
 		}
 		
-		return true;
+		return false;
 	}
 
 }

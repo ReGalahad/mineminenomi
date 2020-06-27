@@ -265,11 +265,13 @@ public class YagaraBullModel<T extends YagaraBullEntity> extends BipedModel<T>
 		this.rightfin2.rotateAngleY = 0.2F * MathHelper.cos(ageInTicks * 0.15F);
 		this.rightfin2.rotateAngleX = 0.2F * MathHelper.cos(ageInTicks * 0.15F);
 
+		/*
 		// Neck animation
 		if (ageInTicks % 300 > 0 && ageInTicks % 300 < 50)
 			this.neck4.rotateAngleZ = 0.4F * MathHelper.cos(ageInTicks * 0.25F);
 		else
 			this.neck4.rotateAngleZ = (float) Math.toDegrees(0);
+		*/
 	}
 
 	public void setRotateAngle(RendererModel modelRenderer, float x, float y, float z)

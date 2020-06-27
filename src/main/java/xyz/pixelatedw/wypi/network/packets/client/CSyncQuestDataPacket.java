@@ -48,7 +48,7 @@ public class CSyncQuestDataPacket
 
 				QuestDataCapability.INSTANCE.getStorage().readNBT(QuestDataCapability.INSTANCE, props, null, message.data);
 				
-				WyNetwork.sendTo(new SSyncQuestDataPacket(props), player);				
+				WyNetwork.sendTo(new SSyncQuestDataPacket(player.getEntityId(), props), player);				
 			});
 		}
 		ctx.get().setPacketHandled(true);

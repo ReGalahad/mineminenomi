@@ -45,7 +45,7 @@ public class QuestEvents
 				if (((IKillEntityObjective) obj).checkKill(player, target, event.getSource()))
 				{
 					obj.alterProgress(1);
-					WyNetwork.sendTo(new SSyncQuestDataPacket(questProps), player);
+					WyNetwork.sendTo(new SSyncQuestDataPacket(player.getEntityId(), questProps), player);
 				}
 			}
 		}
@@ -68,7 +68,7 @@ public class QuestEvents
 				if (((IHitEntityObjective) obj).checkHit(player, target, event.getSource()))
 				{
 					obj.alterProgress(1);
-					WyNetwork.sendTo(new SSyncQuestDataPacket(questProps), player);
+					WyNetwork.sendTo(new SSyncQuestDataPacket(player.getEntityId(), questProps), player);
 				}
 			}
 		}
@@ -90,7 +90,7 @@ public class QuestEvents
 				if (((IObtainItemObjective) obj).checkItem(event.getItem().getItem()))
 				{
 					obj.alterProgress(1);
-					WyNetwork.sendTo(new SSyncQuestDataPacket(questProps), player);
+					WyNetwork.sendTo(new SSyncQuestDataPacket(player.getEntityId(), questProps), player);
 				}
 			}
 		}
@@ -131,7 +131,7 @@ public class QuestEvents
 				if (((IEntityInteractObjective) obj).checkInteraction(player, event.getTarget()))
 				{
 					obj.alterProgress(1);
-					WyNetwork.sendTo(new SSyncQuestDataPacket(questProps), player);
+					WyNetwork.sendTo(new SSyncQuestDataPacket(player.getEntityId(), questProps), player);
 				}
 			}
 		}

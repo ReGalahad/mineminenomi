@@ -58,15 +58,16 @@ public class QuestsTrackerScreen extends Screen
 		int posX = this.width / 2;
 		int posY = this.height / 2;
 		
-		Minecraft.getInstance().getTextureManager().bindTexture(ModResources.SCROLL);
+		Minecraft.getInstance().getTextureManager().bindTexture(ModResources.BLANK);
 		GlStateManager.pushMatrix();
 		{
 			double scale = 1.1;
-			GlStateManager.translated(posX - 45, posY - 110, 0);
+			GlStateManager.translated(posX - 35, posY + 10, 0);
 			GlStateManager.translated(256, 256, 0);
 			
-			GlStateManager.scaled(scale * 1.5, scale, 0);
+			GlStateManager.scaled(scale * 1.5, scale * 1.4, 0);
 			GlStateManager.translated(-256, -256, 0);
+			//GlStateManager.rotated(90, 0, 0, 1);
 			
 			// Background
 			GuiUtils.drawTexturedModalRect(0, 0, 0, 0, 256, 256, 1);
@@ -78,28 +79,11 @@ public class QuestsTrackerScreen extends Screen
 			GlStateManager.translated(-256, -256, 0);	
 		}
 		GlStateManager.popMatrix();
-
-		try
-		{
-			this.currentQuest = this.qprops.getInProgressQuests()[this.questIndex];
-		}
-		catch (Exception e)
-		{
-			if(this.qprops.getInProgressQuests().length > 0)
-			{
-				this.currentQuest = this.qprops.getInProgressQuests()[0];
-				WyDebug.debug(String.format("\n[ArrayOutOfBounds] \n Max possible index is : %s \n But the index requested is : %s", this.qprops.getInProgressQuests().length - 1, this.questIndex));
-			}
-			else
-				this.currentQuest = null;		
-			this.questIndex = 0;
-			e.printStackTrace();
-		}
 		
 		String currentQuestName = this.currentQuest != null ? new TranslationTextComponent(String.format("quest." + APIConfig.PROJECT_ID + ".%s", this.currentQuest.getId())).getFormattedText() : "None";
 		double currentQuestProgress = this.currentQuest != null ? this.currentQuest.getProgress() * 100 : -1;
-		
-		GlStateManager.translated(0, 30, 0);
+			
+		GlStateManager.translated(0, 10, 0);
 		
 		if(this.currentQuest != null)
 		{
@@ -107,7 +91,7 @@ public class QuestsTrackerScreen extends Screen
 			GlStateManager.pushMatrix();
 			{
 				double scale = 1.4;
-				GlStateManager.translated(posX + 110, posY + 15, 0);
+				GlStateManager.translated(posX + 100, posY + 10, 0);
 				GlStateManager.translated(256, 256, 0);
 				
 				GlStateManager.scaled(scale, scale, 0);
@@ -130,12 +114,19 @@ public class QuestsTrackerScreen extends Screen
 			// Quest Objective
 			GlStateManager.pushMatrix();
 			{
+				List<Objective> avilableObjectives = this.currentQuest.getObjectives().stream().limit(5).collect(Collectors.toList());
+
 				int yOffset = -20;
-				for(Objective obj : this.currentQuest.getObjectives())
+				int i = 0;
+				for(Objective obj : avilableObjectives)
 				{
+					if(obj.isComplete())
+						continue;
+					
 					String objectiveName = new TranslationTextComponent(String.format("quest.objective." + APIConfig.PROJECT_ID + ".%s", obj.getId())).getFormattedText();
 					String progress = "";
 					double objectiveProgress = (obj.getProgress() / obj.getMaxProgress()) * 100;
+					List<Objective> hiddenObjs = avilableObjectives.stream().filter(o -> o.isHidden()).collect(Collectors.toList());
 					yOffset += 20;
 
 					String textColor = "#FFFFFF";
@@ -144,20 +135,24 @@ public class QuestsTrackerScreen extends Screen
 					else
 						progress = " - " + String.format("%.1f", objectiveProgress) + "%";
 					
-					if(obj.isComplete())
-						progress =  "";
-					
 					if(obj.isHidden())
 					{
 			            FontRenderer galacticFont = this.minecraft.getFontResourceManager().getFontRenderer(Minecraft.standardGalacticFontRenderer);
-			            WyHelper.drawStringWithBorder(this.font, "• ", posX - 90, posY - 45 + yOffset, WyHelper.hexToRGB(textColor).getRGB());
-						WyHelper.drawStringWithBorder(galacticFont, this.hiddenTexts.get((int) WyHelper.randomWithRange(0, this.hiddenTexts.size() - 1)), posX - 112, posY - 45 + yOffset, WyHelper.hexToRGB(textColor).getRGB());
+			            WyHelper.drawStringWithBorder(this.font, "• ", posX - 130, posY - 45 + yOffset, WyHelper.hexToRGB(textColor).getRGB());
+			            if(hiddenObjs.size() > 0)
+			            	WyHelper.drawStringWithBorder(galacticFont, this.hiddenTexts.get(hiddenObjs.indexOf(obj)), posX - 123, posY - 45 + yOffset, WyHelper.hexToRGB(textColor).getRGB());
 					}
 					else
-						WyHelper.drawStringWithBorder(this.font, (obj.isComplete() ? TextFormatting.STRIKETHROUGH + "" : "") + "• " + objectiveName + progress, posX - 120, posY - 45 + yOffset, WyHelper.hexToRGB(textColor).getRGB());
+						WyHelper.drawStringWithBorder(this.font, (obj.isComplete() ? TextFormatting.STRIKETHROUGH + "" : "") + "• " + objectiveName + progress, posX - 130, posY - 45 + yOffset, WyHelper.hexToRGB(textColor).getRGB());
+					i++;
 				}
+				
+				if(i == 0)
+					WyHelper.drawStringWithBorder(this.font, new TranslationTextComponent(ModI18n.QUEST_NO_OBJECTIVES_LEFT).getFormattedText(), posX - 120, posY - 20 + yOffset, WyHelper.hexToRGB("#FFFFFF").getRGB());
 			}
 			GlStateManager.popMatrix();
+			
+			GlStateManager.translated(0, 20, 0);
 		}
 		
 		super.render(x, y, f);
@@ -165,10 +160,10 @@ public class QuestsTrackerScreen extends Screen
 	
 	@Override
 	public void init()
-	{
-		int posX = this.width / 2;
-		int posY = this.height / 2;
-				
+	{	
+		int posX = (this.width - 256) / 2;
+		int posY = (this.height - 256) / 2;
+			
 		try
 		{
 			this.currentQuest = this.qprops.getInProgressQuests()[this.questIndex];
@@ -210,9 +205,6 @@ public class QuestsTrackerScreen extends Screen
 			}
 		}
 		
-		posX = (this.width - 256) / 2;
-		posY = (this.height - 256) / 2;
-		
 		List<Quest> availableQuests = Arrays.asList(this.qprops.getInProgressQuests()).stream().filter(quest -> quest != null).collect(Collectors.toList());
 		
 		TexturedIconButton nextButton = new TexturedIconButton(ModResources.BIG_WOOD_BUTTON_RIGHT, posX + 285, posY + 80, 24, 100, "", (btn) -> 
@@ -221,6 +213,7 @@ public class QuestsTrackerScreen extends Screen
 				this.questIndex++;
 			else
 				this.questIndex = 0;
+			this.init();
 		});
 		nextButton = nextButton.setTextureInfo(posX + 280, posY + 35, 32, 128);
 		this.addButton(nextButton);
@@ -231,6 +224,7 @@ public class QuestsTrackerScreen extends Screen
 				this.questIndex--;
 			else
 				this.questIndex = availableQuests.size() - 1;
+			this.init();
 		});
 		prevButton = prevButton.setTextureInfo(posX - 58, posY + 35, 32, 128);
 		this.addButton(prevButton);

@@ -1,6 +1,8 @@
 package xyz.pixelatedw.mineminenomi.init;
 
 import net.minecraftforge.fml.common.Mod;
+import xyz.pixelatedw.mineminenomi.quests.Test2Quest;
+import xyz.pixelatedw.mineminenomi.quests.TestQuest;
 import xyz.pixelatedw.mineminenomi.quests.sniper.SniperTrial01Quest;
 import xyz.pixelatedw.mineminenomi.quests.sniper.SniperTrial02Quest;
 import xyz.pixelatedw.mineminenomi.quests.sniper.SniperTrial03Quest;
@@ -11,11 +13,15 @@ import xyz.pixelatedw.mineminenomi.quests.swordsman.SwordsmanTrial03Quest;
 import xyz.pixelatedw.mineminenomi.quests.swordsman.SwordsmanTrial04Quest;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyRegistry;
+import xyz.pixelatedw.wypi.debug.WyDebug;
 import xyz.pixelatedw.wypi.quests.Quest;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModQuests
 {
+
+	public static final Quest TEST_QUEST = new TestQuest();
+	public static final Quest TEST_QUEST_2 = new Test2Quest();
 
 	// Swordsman
 	public static final Quest SWORDSMAN_TRIAL_01 = new SwordsmanTrial01Quest();
@@ -37,6 +43,12 @@ public class ModQuests
 	
 	static
 	{
+		if(WyDebug.isDebug())
+		{
+			WyRegistry.registerQuest(TEST_QUEST);
+			WyRegistry.registerQuest(TEST_QUEST_2);
+		}
+		
 		// Swordsman
 		WyRegistry.registerQuest(SWORDSMAN_TRIAL_01);
 		WyRegistry.registerQuest(SWORDSMAN_TRIAL_02);

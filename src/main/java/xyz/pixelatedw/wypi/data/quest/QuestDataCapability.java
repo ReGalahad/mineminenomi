@@ -1,6 +1,6 @@
 package xyz.pixelatedw.wypi.data.quest;
 
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.nbt.ListNBT;
@@ -97,12 +97,12 @@ public class QuestDataCapability
 		}, QuestDataBase::new);
 	}
 	
-	public static IQuestData get(final LivingEntity entity)
+	public static IQuestData get(final PlayerEntity entity)
 	{
 		return entity.getCapability(INSTANCE, null).orElse(new QuestDataBase());
 	}
 
-	public static LazyOptional<IQuestData> getLazy(final LivingEntity entity)
+	public static LazyOptional<IQuestData> getLazy(final PlayerEntity entity)
 	{
 		return entity.getCapability(INSTANCE, null);
 	}

@@ -34,7 +34,7 @@ public class CRequestSyncQuestDataPacket
 				PlayerEntity player = ctx.get().getSender();
 				IQuestData props = QuestDataCapability.get(player);
 
-				WyNetwork.sendTo(new SSyncQuestDataPacket(props), player);
+				WyNetwork.sendTo(new SSyncQuestDataPacket(player.getEntityId(), props), player);
 			});			
 		}
 		ctx.get().setPacketHandled(true);

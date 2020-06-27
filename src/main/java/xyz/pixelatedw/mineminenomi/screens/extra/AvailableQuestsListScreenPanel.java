@@ -241,7 +241,7 @@ public class AvailableQuestsListScreenPanel extends ScrollPanel
 		Quest quest = this.availableQuests.get(lineIdx);
 		if (quest != null)
 		{
-			return quest;
+			return quest.create();
 		}
 
 		return null;

@@ -64,7 +64,8 @@ public class ModI18n
 	public static final String QUEST_NO_TRIALS_AVAILABLE = WyRegistry.registerName("quest.no_trials_available", "<%s> I don't have any trials for you at the moment.");
 	public static final String QUEST_TOO_MANY = WyRegistry.registerName("quest.too_many", "<%s> You cannot accept any more quests");
 	public static final String QUEST_ALREADY_IN_PROGRESS = WyRegistry.registerName("quest.already_in_progress", "Already in progress!");
-		
+	public static final String QUEST_NO_OBJECTIVES_LEFT = WyRegistry.registerName("quest.no_objectives_left", "No objectives left!");
+	
 	public static final String TRADER_WELCOME_MESSAGE = WyRegistry.registerName("trader.welcome_message", "Welcome to my humble Shop! Fine traveler, please take whatever you need. I sell to all who need it.");
 	public static final String TRADER_NO_PIRATE = WyRegistry.registerName("trader.no_pirate", "I don't trade to Pirate scum");
 	public static final String TRADER_NO_MARINE = WyRegistry.registerName("trader.no_marine", "I don't support the Marines.");

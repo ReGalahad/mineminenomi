@@ -33,7 +33,7 @@ public class QuestEvents
 		if (player.world.isRemote)
 			return;
 			
-		WyNetwork.sendTo(new SSyncQuestDataPacket(questProps), (ServerPlayerEntity) player);		
+		WyNetwork.sendTo(new SSyncQuestDataPacket(player.getEntityId(), questProps), (ServerPlayerEntity) player);		
 	}
 	
 	@SubscribeEvent

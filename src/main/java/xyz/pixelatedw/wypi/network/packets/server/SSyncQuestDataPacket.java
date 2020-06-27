@@ -3,6 +3,7 @@ package xyz.pixelatedw.wypi.network.packets.server;
 import java.util.function.Supplier;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
@@ -16,26 +17,30 @@ import xyz.pixelatedw.wypi.data.quest.QuestDataCapability;
 
 public class SSyncQuestDataPacket
 {
+	private int entityId;
 	private INBT data;
 
 	public SSyncQuestDataPacket()
 	{
 	}
 
-	public SSyncQuestDataPacket(IQuestData props)
+	public SSyncQuestDataPacket(int entityId, IQuestData props)
 	{
 		this.data = new CompoundNBT();
 		this.data = QuestDataCapability.INSTANCE.getStorage().writeNBT(QuestDataCapability.INSTANCE, props, null);
+		this.entityId = entityId;
 	}
 
 	public void encode(PacketBuffer buffer)
 	{
+		buffer.writeInt(this.entityId);
 		buffer.writeCompoundTag((CompoundNBT) this.data);
 	}
 
 	public static SSyncQuestDataPacket decode(PacketBuffer buffer)
 	{
 		SSyncQuestDataPacket msg = new SSyncQuestDataPacket();
+		msg.entityId = buffer.readInt();
 		msg.data = buffer.readCompoundTag();
 		return msg;
 	}
@@ -57,8 +62,11 @@ public class SSyncQuestDataPacket
 		@OnlyIn(Dist.CLIENT)
 		public static void handle(SSyncQuestDataPacket message)
 		{
-			PlayerEntity player = Minecraft.getInstance().player;
-			IQuestData props = QuestDataCapability.get(player);
+			Entity target = Minecraft.getInstance().world.getEntityByID(message.entityId);			
+			if(target == null || !(target instanceof PlayerEntity))
+				return;
+			
+			IQuestData props = QuestDataCapability.get((PlayerEntity) target);
 						
 			QuestDataCapability.INSTANCE.getStorage().readNBT(QuestDataCapability.INSTANCE, props, null, message.data);		
 		}

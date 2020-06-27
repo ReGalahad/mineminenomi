@@ -60,7 +60,7 @@ public abstract class Quest extends ForgeRegistryEntry<Quest>
 		
 		return this.getId().equalsIgnoreCase(((Quest) quest).getId());
 	}
-	
+
 	/*
 	 *  Setters and Getters
 	 */

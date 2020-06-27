@@ -20,6 +20,7 @@ import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.data.quest.IQuestData;
 import xyz.pixelatedw.wypi.data.quest.QuestDataCapability;
 import xyz.pixelatedw.wypi.network.WyNetwork;
+import xyz.pixelatedw.wypi.network.packets.server.SSyncQuestDataPacket;
 import xyz.pixelatedw.wypi.quests.Quest;
 
 public class FGCommand
@@ -46,6 +47,10 @@ public class FGCommand
 		
 		builder
 			.then(Commands.literal("quest")
+				.then(Commands.literal("give")
+					.then(Commands.argument("quest", QuestArgument.quest())
+					.then(Commands.argument("target", EntityArgument.player())
+						.executes(context -> giveQuest(context, QuestArgument.getQuest(context, "quest"), EntityArgument.getPlayer(context, "target"))))))
 				.then(Commands.literal("remove")
 					.then(Commands.argument("quest", QuestArgument.quest())
 					.then(Commands.argument("target", EntityArgument.player())
@@ -54,12 +59,31 @@ public class FGCommand
 		dispatcher.register(builder);
 	}
 
+	private static int giveQuest(CommandContext<CommandSource> context, Quest quest, ServerPlayerEntity player)
+	{
+		IQuestData props = QuestDataCapability.get(player);
+		
+		if(!props.hasInProgressQuest(quest))
+		{
+			props.addInProgressQuest(quest.create());
+			WyNetwork.sendTo(new SSyncQuestDataPacket(player.getEntityId(), props), player);
+		}
+		else
+			WyHelper.sendMsgToPlayer(player, "You aleady have this quest!");
+		
+		return 1;
+	}
+	
 	private static int removeQuest(CommandContext<CommandSource> context, Quest quest, ServerPlayerEntity player)
 	{
 		IQuestData props = QuestDataCapability.get(player);
 		
 		if(props.hasInProgressQuest(quest))
+		{
 			props.removeInProgressQuest(quest);
+			props.removeFinishedQuest(quest);
+			WyNetwork.sendTo(new SSyncQuestDataPacket(player.getEntityId(), props), player);
+		}
 		else
 			WyHelper.sendMsgToPlayer(player, "You don't have this quest!");
 		

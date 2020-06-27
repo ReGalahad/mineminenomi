@@ -641,6 +641,8 @@
 	"key.playerui": "Player Stats",
 
 	"quest.already_in_progress": "Already in progress!",
+	"quest.mineminenomi.test_quest": "Test Quest",
+	"quest.mineminenomi.test_quest_2": "Test Quest 2",
 	"quest.mineminenomi.trial_kaen_boshi": "Trial: Kaen Boshi",
 	"quest.mineminenomi.trial_kemuri_boshi": "Trial: Kemuri Boshi",
 	"quest.mineminenomi.trial_o_tatsumaki": "Trial: O Tatsumaki",
@@ -655,6 +657,8 @@
 	"quest.objective.mineminenomi.find_a_sword_that_has_over_7_damage": "Find a sword that has over 7 damage",
 	"quest.objective.mineminenomi.hit_all_10_targets_before_they_hit_the_ground": "Hit all 10 targets before they hit the ground",
 	"quest.objective.mineminenomi.kill_10_enemies_using_shi_shishi_sonson": "Kill 10 enemies using Shi Shishi Sonson",
+	"quest.objective.mineminenomi.kill_1_enemies_while_running_towards_them": "Kill 1 enemies while running towards them",
+	"quest.objective.mineminenomi.kill_1_enemies_with_critical_hits": "Kill 1 enemies with critical hits",
 	"quest.objective.mineminenomi.kill_3_enemies_in_less_than_5_seconds": "Kill 3 enemies in less than 5 seconds",
 	"quest.objective.mineminenomi.kill_3_enemies_in_less_than_5_seconds_using_renpatsu_namari_boshi": "Kill 3 enemies in less than 5 seconds using Renpatsu Namari Boshi",
 	"quest.objective.mineminenomi.kill_5_enemies_while_running_towards_them": "Kill 5 enemies while running towards them",
