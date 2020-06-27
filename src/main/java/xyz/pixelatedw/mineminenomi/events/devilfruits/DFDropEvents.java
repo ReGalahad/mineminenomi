@@ -1,7 +1,9 @@
 package xyz.pixelatedw.mineminenomi.events.devilfruits;
 
 import net.minecraft.block.LeavesBlock;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -45,7 +47,7 @@ public class DFDropEvents
 				}
 				
 				if(isAvailable)
-					event.getPlayer().inventory.addItemStackToInventory(new ItemStack(df));
+					event.getWorld().addEntity(new ItemEntity((World) event.getWorld(), event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), new ItemStack(df)));
 			}
 		}
 	}
