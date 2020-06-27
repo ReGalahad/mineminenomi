@@ -3,6 +3,7 @@ package xyz.pixelatedw.mineminenomi.events.passives;
 import com.mojang.blaze3d.platform.GlStateManager;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.DamageSource;
@@ -15,8 +16,10 @@ import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import xyz.pixelatedw.mineminenomi.abilities.LogiaInvulnerabilityAbility;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
+import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
@@ -24,6 +27,13 @@ import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class MaguPassiveEvents
 {
+	public static final LogiaInvulnerabilityAbility INVULNERABILITY_INSTANCE = new LogiaInvulnerabilityAbility(ModResources.MERA, MaguPassiveEvents::maguDamage, DamageSource.IN_FIRE, DamageSource.ON_FIRE, DamageSource.LAVA);
+
+	public static boolean maguDamage(LivingEntity target, LivingEntity attacker) {
+		attacker.setFire(8);
+		attacker.attackEntityFrom(DamageSource.causePlayerDamage((PlayerEntity) target), 5);
+		return true;
+	}
 
 	@SubscribeEvent
 	public static void onEntityUpdate(LivingUpdateEvent event)
@@ -42,23 +52,6 @@ public class MaguPassiveEvents
 		
 		if (player.isInLava() && !player.abilities.isFlying)
 			player.setMotion(vec3d.mul(1.9F, 1.2F, 1.9F));
-	}
-	
-	@SubscribeEvent
-	public static void onEntityAttackEvent(LivingAttackEvent event)
-	{
-		if (!(event.getEntityLiving() instanceof PlayerEntity))
-			return;
-
-		PlayerEntity player = (PlayerEntity) event.getEntityLiving();
-		IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
-		DamageSource damageSource = event.getSource();
-
-		if (devilFruitProps.getDevilFruit().equalsIgnoreCase("magu_magu") && (damageSource.equals(DamageSource.IN_FIRE) || damageSource.equals(DamageSource.ON_FIRE) || damageSource.equals(DamageSource.LAVA)))
-		{
-			player.extinguish();
-			event.setCanceled(true);
-		}
 	}
 
 	@OnlyIn(Dist.CLIENT)

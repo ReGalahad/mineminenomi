@@ -3,12 +3,17 @@ package xyz.pixelatedw.mineminenomi.events.abilities;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedOutEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import xyz.pixelatedw.mineminenomi.abilities.LogiaInvulnerabilityAbility;
 import xyz.pixelatedw.mineminenomi.api.abilities.TempoAbility;
+import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitHelper;
+import xyz.pixelatedw.mineminenomi.init.ModAbilities;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.abilities.Ability;
@@ -39,7 +44,7 @@ public class AbilitiesEvents
 					((PassiveAbility) ablProps.getUnlockedAbility(ability)).tick(player);
 				
 				if (ability instanceof TempoAbility)
-					((TempoAbility) ablProps.getUnlockedAbility(ability)).cooldown(player);
+					ablProps.getUnlockedAbility(ability).cooldown(player);
 			}
 			
 			for (Ability ability : ablProps.getEquippedAbilities(AbilityCategory.ALL))
@@ -55,6 +60,27 @@ public class AbilitiesEvents
 
 				if (ability.isOnCooldown())
 					ablProps.getEquippedAbility(ability).cooldown(player);	
+			}
+		}
+	}
+
+	@SubscribeEvent
+	public static void onEntityAttackEvent(LivingAttackEvent event)
+	{
+		if (event.getEntityLiving() != null && !event.getEntityLiving().world.isRemote)
+		{
+			LivingEntity entity = event.getEntityLiving();
+			IAbilityData ablProps = AbilityDataCapability.get(entity);
+
+			for (Ability ability : ablProps.getUnlockedAbilities(AbilityCategory.ALL)) {
+
+				if (ability == null)
+					continue;
+
+				if (ability instanceof LogiaInvulnerabilityAbility) {
+					boolean result = ((LogiaInvulnerabilityAbility) ablProps.getUnlockedAbility(ability)).damageReceived(entity, event.getSource());
+					event.setCanceled(result);
+				}
 			}
 		}
 	}

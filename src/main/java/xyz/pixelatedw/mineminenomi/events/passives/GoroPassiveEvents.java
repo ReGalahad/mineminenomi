@@ -1,15 +1,23 @@
 package xyz.pixelatedw.mineminenomi.events.passives;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import xyz.pixelatedw.mineminenomi.abilities.LogiaInvulnerabilityAbility;
 import xyz.pixelatedw.mineminenomi.abilities.goro.ShinzoMassageAbility;
+import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitHelper;
+import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
+import xyz.pixelatedw.mineminenomi.init.ModAbilities;
+import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
@@ -17,19 +25,16 @@ import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class GoroPassiveEvents {
 
-    @SubscribeEvent
-    public static void onEntityAttackEvent(LivingAttackEvent event) {
-        LivingEntity entity = event.getEntityLiving();
-        IDevilFruit devilFruitProps = DevilFruitCapability.get(entity);
+    public static final LogiaInvulnerabilityAbility INVULNERABILITY_INSTANCE = new LogiaInvulnerabilityAbility(ModResources.GORO, GoroPassiveEvents::goroDamage, DamageSource.LIGHTNING_BOLT, DamageSource.IN_FIRE);
 
-        if (!devilFruitProps.getDevilFruit().equals("goro_goro"))
-            return;
-
-        DamageSource damageSource = event.getSource();
-        if (damageSource.equals(DamageSource.LIGHTNING_BOLT) || damageSource.equals(DamageSource.IN_FIRE)) {
-            entity.extinguish();
-            event.setCanceled(true);
+    public static boolean goroDamage(LivingEntity target, LivingEntity attacker) {
+        boolean attackedByGomu = DevilFruitHelper.hasDevilFruit(attacker, ModAbilities.GOMU_GOMU_NO_MI);
+        if(!attackedByGomu) {
+            attacker.attackEntityFrom(DamageSource.causePlayerDamage((PlayerEntity) target), 5);
+            return true;
         }
+
+        return false;
     }
 
     @SubscribeEvent
@@ -49,6 +54,7 @@ public class GoroPassiveEvents {
             if (entity.getHealth() - event.getAmount() <= 0) {
                 event.setCanceled(true);
                 ability.startCooldown(entity);
+                entity.setHealth(entity.getMaxHealth() / 20);
                 entity.hurtTime = 300;
             }
         }
