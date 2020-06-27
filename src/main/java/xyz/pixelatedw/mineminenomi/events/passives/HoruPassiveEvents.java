@@ -1,7 +1,6 @@
 package xyz.pixelatedw.mineminenomi.events.passives;
 
 import com.mojang.blaze3d.platform.GlStateManager;
-
 import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
 import net.minecraft.client.renderer.entity.PlayerRenderer;
 import net.minecraft.client.renderer.entity.model.BipedModel;

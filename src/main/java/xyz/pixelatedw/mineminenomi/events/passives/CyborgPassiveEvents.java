@@ -1,9 +1,6 @@
 package xyz.pixelatedw.mineminenomi.events.passives;
 
-import java.awt.Color;
-
 import com.mojang.blaze3d.platform.GlStateManager;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.api.distmarker.Dist;
@@ -18,6 +15,8 @@ import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
+
+import java.awt.Color;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class CyborgPassiveEvents

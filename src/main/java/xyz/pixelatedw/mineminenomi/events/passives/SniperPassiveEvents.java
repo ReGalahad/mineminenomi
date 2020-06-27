@@ -1,9 +1,6 @@
 package xyz.pixelatedw.mineminenomi.events.passives;
 
-import java.util.List;
-
 import com.google.common.collect.Lists;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -27,6 +24,8 @@ import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 import xyz.pixelatedw.wypi.network.WyNetwork;
 import xyz.pixelatedw.wypi.network.packets.client.CSyncAbilityDataPacket;
+
+import java.util.List;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class SniperPassiveEvents

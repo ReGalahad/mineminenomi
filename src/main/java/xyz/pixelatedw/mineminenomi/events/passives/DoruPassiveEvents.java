@@ -1,9 +1,6 @@
 package xyz.pixelatedw.mineminenomi.events.passives;
 
-import java.awt.Color;
-
 import com.mojang.blaze3d.platform.GlStateManager;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
 import net.minecraft.entity.LivingEntity;
@@ -30,6 +27,8 @@ import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.abilities.models.SphereModel;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
+
+import java.awt.Color;
 
 public class DoruPassiveEvents
 {

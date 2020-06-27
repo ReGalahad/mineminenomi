@@ -1,13 +1,9 @@
 package xyz.pixelatedw.mineminenomi.events.passives;
 
-import java.awt.Color;
-import java.lang.reflect.Method;
-
 import com.mojang.blaze3d.platform.GLX;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.platform.GlStateManager.DestFactor;
 import com.mojang.blaze3d.platform.GlStateManager.SourceFactor;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.LivingRenderer;
 import net.minecraft.client.renderer.entity.model.IHasArm;
@@ -44,6 +40,9 @@ import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
+
+import java.awt.Color;
+import java.lang.reflect.Method;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class HakiPassiveEvents

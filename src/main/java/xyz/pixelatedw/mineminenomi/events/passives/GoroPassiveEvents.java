@@ -12,7 +12,6 @@ import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.init.ModAbilities;
-import xyz.pixelatedw.mineminenomi.init.ModEffects;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
@@ -24,12 +23,11 @@ public class GoroPassiveEvents {
     public static final LogiaInvulnerabilityAbility INVULNERABILITY_INSTANCE = new LogiaInvulnerabilityAbility(ModResources.GORO, GoroPassiveEvents::goroDamage, DamageSource.LIGHTNING_BOLT, DamageSource.IN_FIRE);
 
     public static boolean goroDamage(LivingEntity target, LivingEntity attacker) {
-        boolean attackedByGomu = DevilFruitHelper.hasDevilFruit(attacker, ModAbilities.GOMU_GOMU_NO_MI);
-        if(!attackedByGomu) {
+        boolean attackerHasGomu = DevilFruitHelper.hasDevilFruit(attacker, ModAbilities.GOMU_GOMU_NO_MI);
+        if(!attackerHasGomu) {
             attacker.attackEntityFrom(DamageSource.causePlayerDamage((PlayerEntity) target), 8);
             return true;
         }
-
         return false;
     }
 
