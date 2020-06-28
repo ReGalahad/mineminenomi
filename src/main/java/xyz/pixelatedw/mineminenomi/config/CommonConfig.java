@@ -21,13 +21,11 @@ import xyz.pixelatedw.wypi.WyHelper;
 
 public class CommonConfig
 {
-
 	public static CommonConfig instance;
 
 	// General
 	private EnumValue keepStatsAfterDeath;
 	private Map<String, ForgeConfigSpec.BooleanValue> statsToKeep;
-	private Map<String, ForgeConfigSpec.BooleanValue> cooldownVisual;
 	private List<String> bannedAbilities;
 	private EnumValue haoshokuUnlockLogic;
 
@@ -158,17 +156,6 @@ public class CommonConfig
 					this.statsToKeep.put(stat, builder.define(stat, true));
 			}
 			builder.pop();
-
-			builder.push("Cooldown Visuals");
-			{
-				String[] cooldownVisuals = new String[] { "Text", "Color" };
-				this.cooldownVisual = new HashMap<String, ForgeConfigSpec.BooleanValue>();
-
-				for (String mode : cooldownVisuals)
-					this.cooldownVisual.put(mode, builder.define(mode, true));
-			}
-			builder.pop();
-
 		}
 		builder.pop();
 
@@ -353,12 +340,6 @@ public class CommonConfig
 	public boolean canSpawnTraders()
 	{
 		return this.canSpawnTraders.get();
-	}
-
-	public String[] getCooldownVisuals()
-	{
-		String[] newArray = new String[] {};
-		return this.cooldownVisual.keySet().toArray(newArray);
 	}
 
 	public String[] getStatsToKeep()

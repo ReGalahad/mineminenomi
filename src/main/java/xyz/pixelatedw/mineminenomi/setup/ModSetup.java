@@ -66,7 +66,7 @@ public class ModSetup
 		Minecraft.getInstance().getItemColors().register((itemStack, i) -> {
 	         return i > 0 ? -1 : ((IDyeableArmorItem)itemStack.getItem()).getColor(itemStack);
 		}, ModArmors.CAPTAIN_CAPE);
-		
+				
 		// Registering Containers and Screens together so when the container is opened the screen will also be shown
 		// ScreenManager.registerFactory(ModContainers.TRADER, TraderScreen::new);
 	}

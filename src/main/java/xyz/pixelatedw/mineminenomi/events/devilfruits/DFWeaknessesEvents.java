@@ -92,6 +92,7 @@ public class DFWeaknessesEvents
 							ability.startDisable();
 						}
 					}
+					WyNetwork.sendTo(new SSyncAbilityDataPacket(player.getEntityId(), abilityProps), player);
 				}
 				else
 				{

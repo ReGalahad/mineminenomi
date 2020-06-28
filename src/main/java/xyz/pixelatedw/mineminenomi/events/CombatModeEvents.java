@@ -23,6 +23,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.config.GuiUtils;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.api.helpers.RendererHelper;
+import xyz.pixelatedw.mineminenomi.config.ClientConfig;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
@@ -86,11 +87,12 @@ public class CombatModeEvents
 		
 		if (event.getType() == ElementType.HOTBAR)
 		{
-			List<String> visuals = Arrays.asList(CommonConfig.instance.getCooldownVisuals());
+			List<String> visuals = Arrays.asList(ClientConfig.instance.getCooldownVisuals());
 
 			boolean hasNumberVisual = visuals.contains("Text");
 			boolean hasColorVisual = visuals.contains("Color");
-
+			//System.out.println(Arrays.toString(visuals.toArray()));
+			
 			event.setCanceled(true);
 			GlStateManager.pushMatrix();	
 			{
