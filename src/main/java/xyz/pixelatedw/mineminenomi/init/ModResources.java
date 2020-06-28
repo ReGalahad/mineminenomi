@@ -25,6 +25,7 @@ public class ModResources
 	public static final ResourceLocation DARKNESS = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/darkness.png");
 	public static final ResourceLocation GORO = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/goro.png");
 	public static final ResourceLocation GORO2 = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/goro2.png");
+	public static final ResourceLocation MAGU = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/magu.png");
 	public static final ResourceLocation GORO3 = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/goro3.png");
 	public static final ResourceLocation DOKU = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/doku.png");
 	public static final ResourceLocation ITO = new ResourceLocation(APIConfig.PROJECT_ID, "textures/particles/ito.png");

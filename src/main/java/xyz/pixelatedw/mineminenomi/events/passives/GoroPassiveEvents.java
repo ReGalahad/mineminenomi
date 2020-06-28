@@ -20,7 +20,7 @@ import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class GoroPassiveEvents {
 
-    public static final LogiaInvulnerabilityAbility INVULNERABILITY_INSTANCE = new LogiaInvulnerabilityAbility(ModResources.GORO, GoroPassiveEvents::goroDamage, DamageSource.LIGHTNING_BOLT, DamageSource.IN_FIRE);
+    public static final LogiaInvulnerabilityAbility INVULNERABILITY_INSTANCE = new LogiaInvulnerabilityAbility(ModResources.GORO, GoroPassiveEvents::goroDamage, DamageSource.LIGHTNING_BOLT, DamageSource.IN_FIRE, DamageSource.HOT_FLOOR);
 
     public static boolean goroDamage(LivingEntity target, LivingEntity attacker) {
         boolean attackerHasGomu = DevilFruitHelper.hasDevilFruit(attacker, ModAbilities.GOMU_GOMU_NO_MI);
@@ -38,11 +38,10 @@ public class GoroPassiveEvents {
         PlayerEntity entity = (PlayerEntity) event.getEntityLiving();
         IDevilFruit devilFruitProps = DevilFruitCapability.get(entity);
         IAbilityData AbilityProps = AbilityDataCapability.get(entity);
-
-        if (!devilFruitProps.getDevilFruit().equals("goro_goro") || entity.world.isRemote)
-            return;
-
         ShinzoMassageAbility ability = AbilityProps.getUnlockedAbility(ShinzoMassageAbility.INSTANCE);
+
+        if (ability == null || !devilFruitProps.getDevilFruit().equals("goro_goro") || entity.world.isRemote)
+            return;
 
         if (!ability.isOnCooldown()) {
             if (entity.getHealth() - event.getAmount() <= 0) {

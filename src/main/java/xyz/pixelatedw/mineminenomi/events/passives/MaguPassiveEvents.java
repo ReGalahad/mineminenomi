@@ -25,7 +25,7 @@ import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class MaguPassiveEvents
 {
-	public static final LogiaInvulnerabilityAbility INVULNERABILITY_INSTANCE = new LogiaInvulnerabilityAbility(ModResources.MERA, MaguPassiveEvents::maguDamage, DamageSource.IN_FIRE, DamageSource.ON_FIRE, DamageSource.LAVA);
+	public static final LogiaInvulnerabilityAbility INVULNERABILITY_INSTANCE = new LogiaInvulnerabilityAbility(ModResources.MAGU, MaguPassiveEvents::maguDamage, DamageSource.IN_FIRE, DamageSource.ON_FIRE, DamageSource.LAVA, DamageSource.HOT_FLOOR);
 
 	public static boolean maguDamage(LivingEntity target, LivingEntity attacker) {
 		attacker.setFire(8);
