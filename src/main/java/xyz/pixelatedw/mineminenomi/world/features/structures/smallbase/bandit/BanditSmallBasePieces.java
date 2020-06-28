@@ -145,7 +145,6 @@ public class BanditSmallBasePieces
 		protected void handleDataMarker(String function, BlockPos pos, IWorld world, Random rand, MutableBoundingBox sbb)
 		{
 			// Chests
-			System.out.println(function);
 			if (function.equals("gold_chest"))
 			{
 				world.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);

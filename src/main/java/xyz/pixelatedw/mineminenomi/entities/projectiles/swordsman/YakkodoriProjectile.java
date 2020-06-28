@@ -31,6 +31,7 @@ public class YakkodoriProjectile extends AbilityProjectileEntity
 		super(SwordsmanProjectiles.YAKKODORI, world, player);
 		
 		this.setDamage(10);
+		this.setMaxLife(30);
 		this.setCanGetStuckInGround();
 		this.setPhysical();
 

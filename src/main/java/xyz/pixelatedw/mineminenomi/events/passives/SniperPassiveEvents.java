@@ -1,6 +1,9 @@
 package xyz.pixelatedw.mineminenomi.events.passives;
 
+import java.util.List;
+
 import com.google.common.collect.Lists;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -23,9 +26,7 @@ import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 import xyz.pixelatedw.wypi.network.WyNetwork;
-import xyz.pixelatedw.wypi.network.packets.client.CSyncAbilityDataPacket;
-
-import java.util.List;
+import xyz.pixelatedw.wypi.network.packets.server.SSyncAbilityDataPacket;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class SniperPassiveEvents
@@ -73,8 +74,11 @@ public class SniperPassiveEvents
 	@SubscribeEvent
 	public static void onEntityUpdate(LivingUpdateEvent event)
 	{
-		if (!(event.getEntityLiving() instanceof PlayerEntity))
+		if (!(event.getEntityLiving() instanceof PlayerEntity) || event.getEntityLiving().world.isRemote)
 			return;	
+		
+		if(event.getEntityLiving().world.getGameTime() % 200 != 0)
+			return;
 		
 		PlayerEntity player = (PlayerEntity) event.getEntityLiving();
 		IAbilityData aprops = AbilityDataCapability.get(player);
@@ -85,12 +89,15 @@ public class SniperPassiveEvents
 			{
 				aprops.getUnlockedAbility(ZoomAbility.INSTANCE).stopContinuity(player);
 				aprops.removeUnlockedAbility(ZoomAbility.INSTANCE);
-				WyNetwork.sendToServer(new CSyncAbilityDataPacket(aprops));
+				WyNetwork.sendTo(new SSyncAbilityDataPacket(player.getEntityId(), aprops), player);
 			}
 			return;
 		}
 		
 		if(!aprops.hasUnlockedAbility(ZoomAbility.INSTANCE))
+		{
 			aprops.addUnlockedAbility(ZoomAbility.INSTANCE);
+			WyNetwork.sendTo(new SSyncAbilityDataPacket(player.getEntityId(), aprops), player);
+		}
 	}
 }

@@ -1,6 +1,8 @@
 package xyz.pixelatedw.mineminenomi.quests.objectives;
 
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.item.ItemStack;
@@ -27,7 +29,10 @@ public class ArrowKillObjective extends Objective implements IKillEntityObjectiv
 		boolean bowFlag = ItemsHelper.isBow(heldItem);
 		boolean arrowFlag = source.getImmediateSource() instanceof ArrowEntity || source.getImmediateSource() instanceof KujaArrowProjectile || source.getImmediateSource() instanceof AbilityProjectileEntity;
 		
-		return bowFlag && arrowFlag;
+		IAttributeInstance attackAttribute = target.getAttributes().getAttributeInstance(SharedMonsterAttributes.ATTACK_DAMAGE);
+		boolean isAggressive = attackAttribute != null && attackAttribute.getValue() > 0;
+		
+		return bowFlag && arrowFlag && isAggressive;
 	}
 
 }

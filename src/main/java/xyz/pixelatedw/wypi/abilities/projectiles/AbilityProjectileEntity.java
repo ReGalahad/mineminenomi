@@ -161,15 +161,7 @@ public class AbilityProjectileEntity extends ThrowableEntity
 					if(!this.entityDamaged)
 						this.entityDamaged = hitEntity.attackEntityFrom(this.causeAbilityProjectileDamage(), this.damage);
 
-					if (this.withEffects.getEffects().length > 0)
-					{
-						for (EffectInstance instance : this.withEffects.getEffects())
-						{
-							hitEntity.addPotionEffect(instance);
-							if (this.getThrower() instanceof ServerPlayerEntity)
-								((ServerPlayerEntity) this.getThrower()).connection.sendPacket(new SPlayEntityEffectPacket(hitEntity.getEntityId(), instance));
-						}
-					}
+					this.triggerEffects(hitEntity);
 
 					if(this.entityDamaged)
 					{			
@@ -212,6 +204,19 @@ public class AbilityProjectileEntity extends ThrowableEntity
 		}
 	}
 
+	public void triggerEffects(LivingEntity hitEntity)
+	{
+		if (this.withEffects.getEffects().length > 0)
+		{
+			for (EffectInstance instance : this.withEffects.getEffects())
+			{
+				hitEntity.addPotionEffect(instance);
+				if (this.getThrower() instanceof ServerPlayerEntity)
+					((ServerPlayerEntity) this.getThrower()).connection.sendPacket(new SPlayEntityEffectPacket(hitEntity.getEntityId(), instance));
+			}
+		}
+	}
+	
 	public DamageSource causeAbilityProjectileDamage()
 	{
 		return new IndirectEntityDamageSource("ability_projectile", this, this.getThrower()).setProjectile();

@@ -660,11 +660,6 @@ public class JollyRogerCreatorScreen extends Screen
 		super.onClose();
 	}
 
-	public boolean doesGuiPauseGame()
-	{
-		return true;
-	}
-
 	private int findIndex(List<RegistryObject<JollyRogerElement>> elements, JollyRogerElement element, PlayerEntity player)
 	{
 		for (int i = 0; i < elements.size(); i++)

@@ -24,7 +24,7 @@ public class GeppoGoal extends CooldownGoal
 	{
 		this.entity.fallDistance = 0;
 		
-		List<ThrowableEntity> dangers = WyHelper.getEntitiesNear(this.entity.getPosition(), this.entity.world, 7, ThrowableEntity.class);
+		List<ThrowableEntity> dangers = WyHelper.getEntitiesNear(this.entity.getPosition(), this.entity.world, 3, ThrowableEntity.class);
 		
 		if(dangers.size() > 0)
 		{

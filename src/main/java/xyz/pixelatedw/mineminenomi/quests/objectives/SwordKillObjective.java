@@ -1,6 +1,8 @@
 package xyz.pixelatedw.mineminenomi.quests.objectives;
 
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
@@ -22,8 +24,11 @@ public class SwordKillObjective extends Objective implements IKillEntityObjectiv
 		ItemStack heldItem = player.getHeldItemMainhand();
 
 		boolean swordFlag = ItemsHelper.isSword(heldItem);
+		
+		IAttributeInstance attackAttribute = target.getAttributes().getAttributeInstance(SharedMonsterAttributes.ATTACK_DAMAGE);
+		boolean isAggressive = attackAttribute != null && attackAttribute.getValue() > 0;
 				
-		return swordFlag;
+		return swordFlag && isAggressive;
 	}
 
 }

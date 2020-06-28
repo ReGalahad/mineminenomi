@@ -60,7 +60,7 @@ public class BanditCampPieces
 		if(WyHelper.randomDouble() < 0.1)
 			hasExtraTents = true;
 
-		components.add(new Piece(templateManager, FIRE_PLACE, pos, Rotation.CLOCKWISE_90, BlockIgnoreStructureProcessor.AIR_AND_STRUCTURE_BLOCK));
+		components.add(new Piece(templateManager, FIRE_PLACE, pos, Rotation.CLOCKWISE_90, BlockIgnoreStructureProcessor.STRUCTURE_BLOCK));
 
 		components.add(new Piece(templateManager, LERGE_TENT, pos.add(13, 0, 0), Rotation.CLOCKWISE_90, BlockIgnoreStructureProcessor.STRUCTURE_BLOCK));
 		if(hasExtraTents)

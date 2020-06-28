@@ -12,6 +12,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import xyz.pixelatedw.mineminenomi.api.AbilityArgument;
+import xyz.pixelatedw.mineminenomi.api.QuestArgument;
 import xyz.pixelatedw.mineminenomi.data.functions.FakeWeaponFunction;
 import xyz.pixelatedw.mineminenomi.data.functions.RandomWantedPosterFunction;
 import xyz.pixelatedw.mineminenomi.data.functions.SetBellyInPouchFunction;
@@ -45,6 +46,7 @@ public class ModSetup
 		LootFunctionManager.registerFunction(new FakeWeaponFunction.Serializer());
 
 		ArgumentTypes.register("ability", AbilityArgument.class, new ArgumentSerializer<>(AbilityArgument::ability));
+		ArgumentTypes.register("quest", QuestArgument.class, new ArgumentSerializer<>(QuestArgument::quest));
 	}
 	
 	@OnlyIn(Dist.CLIENT)

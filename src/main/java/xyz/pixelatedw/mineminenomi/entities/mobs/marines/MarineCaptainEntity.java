@@ -67,7 +67,9 @@ public class MarineCaptainEntity extends GenericMarineEntity implements IRokushi
 	{
 		spawnData = super.onInitialSpawn(world, difficulty, reason, spawnData, dataTag);
 		
-		this.setItemStackToSlot(EquipmentSlotType.CHEST, new ItemStack(ModArmors.CAPTAIN_CAPE));
+		ItemStack capeStack = new ItemStack(ModArmors.CAPTAIN_CAPE);
+		capeStack.getOrCreateChildTag("display").putInt("color", WyHelper.hexToRGB("#0BB6FF").getRGB());
+		this.setItemStackToSlot(EquipmentSlotType.CHEST, capeStack);
 	
 		if(this.rand.nextDouble() < 0.8)
 		{

@@ -230,8 +230,9 @@ public class AvailableQuestsListScreenPanel extends ScrollPanel
 	private Quest findQuestEntry(final int mouseX, final int mouseY)
 	{
 		double offset = (mouseY - this.top) + this.scrollDistance;
+		boolean isHovered = mouseX >= this.left && mouseY >= this.top && mouseX < this.left + this.width - 5 && mouseY < this.top + this.height;
 
-		if (offset <= 0)
+		if (offset <= 0 || !isHovered)
 			return null;
 
 		int lineIdx = (int) (offset / (ENTRY_HEIGHT * 2.75));

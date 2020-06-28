@@ -13,7 +13,6 @@ public class IceBlockAvalancheParticleEffect extends ParticleEffect
 	@Override
 	public void spawn(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
 	{
-		double density = 6;
 		double phi = 0;
 
 		while (phi < Math.PI)
@@ -22,11 +21,11 @@ public class IceBlockAvalancheParticleEffect extends ParticleEffect
 
 			for (double theta = 0; theta <= 2 * Math.PI; theta += Math.PI / 6)
 			{
-				double x = (3 * Math.cos(theta) * Math.sin(phi)) + WyHelper.randomDouble();
+				double x = (8 * Math.cos(theta) * Math.sin(phi)) + WyHelper.randomDouble();
 				double y = posY - 3 - 1;
-				double z = (3 * Math.sin(theta) * Math.sin(phi)) + WyHelper.randomDouble();
+				double z = (8 * Math.sin(theta) * Math.sin(phi)) + WyHelper.randomDouble();
 				motionX = x / 40;
-				motionY = 0.1;
+				motionY = -0.2;
 				motionZ = z / 40;
 
 				GenericParticleData data = new GenericParticleData();
@@ -36,10 +35,7 @@ public class IceBlockAvalancheParticleEffect extends ParticleEffect
 
 				data.setMotion(-motionX, motionY, -motionZ);
 				if (Math.random() > 0.7)
-				{
-					WyHelper.spawnParticles(data, (ServerWorld) world, posX + x, y, posZ + z);
-				}
-
+					WyHelper.spawnParticles(data, (ServerWorld) world, posX + x + WyHelper.randomDouble(), y, posZ + z + WyHelper.randomDouble());
 			}
 		}
 	}

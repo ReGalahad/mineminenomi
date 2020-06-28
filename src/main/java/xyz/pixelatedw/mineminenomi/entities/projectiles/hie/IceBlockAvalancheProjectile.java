@@ -1,6 +1,7 @@
 package xyz.pixelatedw.mineminenomi.entities.projectiles.hie;
 
-import net.minecraft.entity.Entity;
+import java.util.List;
+
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.nbt.CompoundNBT;
@@ -10,15 +11,17 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.abilities.hie.IceAgeAbility;
 import xyz.pixelatedw.mineminenomi.init.ModEffects;
+import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 
-public class IceBlockAvalancheProjectile extends AbilityProjectileEntity{
-
+public class IceBlockAvalancheProjectile extends AbilityProjectileEntity
+{
 	private static final DataParameter<Boolean> FINALIZED = EntityDataManager.createKey(IceBlockAvalancheProjectile.class, DataSerializers.BOOLEAN);
+	
 	public IceBlockAvalancheProjectile(World world)
 	{
 		super(HieProjectiles.ICE_BLOCK_AVALANCHE, world);
@@ -51,21 +54,26 @@ public class IceBlockAvalancheProjectile extends AbilityProjectileEntity{
 		this.onEntityImpactEvent = this::onEntityImpactEvent;
 		this.onBlockImpactEvent = this::onBlockImpactEvent;
 	}
-	private void onTickEvent() {
-		if (this.getFinalized() == false) {
+
+	private void onTickEvent()
+	{
+		if (this.getFinalized() == false)
+		{
 			this.setCollisionSize(this.ticksExisted / 10);
 		}
-		if(this.isStuckInGround()) {
+		if (this.isStuckInGround())
+		{
 			this.setMotion(0, 0, 0);
 		}
 	}
-	
+
 	@Override
-	public void registerData() {
+	public void registerData()
+	{
 		super.registerData();
 		this.dataManager.register(FINALIZED, false);
 	}
-	
+
 	@Override
 	public void writeAdditional(CompoundNBT compound)
 	{
@@ -79,51 +87,40 @@ public class IceBlockAvalancheProjectile extends AbilityProjectileEntity{
 		super.readAdditional(compound);
 		this.dataManager.set(FINALIZED, compound.getBoolean("finalized"));
 	}
-	public void setFinalized(boolean val) {
+
+	public void setFinalized(boolean val)
+	{
 		this.dataManager.set(FINALIZED, val);
 	}
-	public boolean getFinalized() {
+
+	public boolean getFinalized()
+	{
 		return this.dataManager.get(FINALIZED);
 	}
-	public void onEntityImpactEvent(LivingEntity e) {
-		this.applySingleEntityCollision(e);
+
+	public void onEntityImpactEvent(LivingEntity entity)
+	{
+		List<LivingEntity> targets = WyHelper.getEntitiesNear(this.getPosition(), this.world, 30);
+		
+		for(LivingEntity target : targets)
+		{
+			Vec3d speed = WyHelper.propulsion(target, 1, 1);
+			target.setMotion(-speed.x, 0.5, -speed.z);
+			target.attackEntityFrom(this.causeAbilityProjectileDamage(), this.getDamage() / 2);
+			
+			this.triggerEffects(target);
+		}
+		
+		this.onBlockImpactEvent.onImpact(entity.getPosition());
 	}
-	public void onBlockImpactEvent(BlockPos pos) {
+
+	public void onBlockImpactEvent(BlockPos pos)
+	{
 		this.setCollisionSize(0);
 		this.setMotion(0, 0, 0);
-		if(!world.isRemote) {
+		if (!this.world.isRemote)
+		{
 			IceAgeAbility.PARTICLES.spawn(world, posX, posY, posZ, 0, 0, 0);
 		}
 	}
-	
-	//to make it so that only the entities hit by the avalanche move and not the avalanche itself
-	   public void applySingleEntityCollision(Entity entityIn) {
-		      if (!this.isRidingSameEntity(entityIn)) {
-		         if (!entityIn.noClip && !this.noClip) {
-		            double d0 = entityIn.posX - this.posX;
-		            double d1 = entityIn.posZ - this.posZ;
-		            double d2 = MathHelper.absMax(d0, d1);
-		            if (d2 >= 0.01F) {
-		               d2 = MathHelper.sqrt(d2);
-		               d0 = d0 / d2;
-		               d1 = d1 / d2;
-		               double d3 = 1.0D / d2;
-		               if (d3 > 1.0D) {
-		                  d3 = 1.0D;
-		               }
-
-		               d0 = d0 * d3;
-		               d1 = d1 * d3;
-		               d0 = d0 * 0.05F;
-		               d1 = d1 * 0.05F;
-		               d0 = d0 * (1.0F - this.entityCollisionReduction);
-		               d1 = d1 * (1.0F - this.entityCollisionReduction);
-		               if (!entityIn.isBeingRidden()) {
-		                  entityIn.addVelocity(d0, 0.0D, d1);
-		               }
-		            }
-
-		         }
-		      }
-		   }
 }

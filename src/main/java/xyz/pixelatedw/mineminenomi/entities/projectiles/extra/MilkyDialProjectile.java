@@ -16,7 +16,7 @@ public class MilkyDialProjectile extends AbilityProjectileEntity
 
 	public MilkyDialProjectile(World world)
 	{
-		super(ExtraProjectiles.AXE_DIAL_PROJECTILE, world);
+		super(ExtraProjectiles.MILKY_DIAL_PROJECTILE, world);
 	}
 
 	public MilkyDialProjectile(EntityType type, World world)
@@ -26,14 +26,15 @@ public class MilkyDialProjectile extends AbilityProjectileEntity
 
 	public MilkyDialProjectile(World world, double x, double y, double z)
 	{
-		super(ExtraProjectiles.AXE_DIAL_PROJECTILE, world, x, y, z);
+		super(ExtraProjectiles.MILKY_DIAL_PROJECTILE, world, x, y, z);
 	}
 
 	public MilkyDialProjectile(World world, LivingEntity player)
 	{
-		super(ExtraProjectiles.AXE_DIAL_PROJECTILE, world, player);
+		super(ExtraProjectiles.MILKY_DIAL_PROJECTILE, world, player);
 
 		this.setMaxLife(40);
+		this.setPassThroughBlocks();
 		
 		this.onTickEvent = this::onTickEvent;
 	}
@@ -44,7 +45,7 @@ public class MilkyDialProjectile extends AbilityProjectileEntity
 		{
 			int k = this.getPosition().getX() - blockpos.getX();
 			int l = this.getPosition().getZ() - blockpos.getZ();
-			AbilityHelper.placeBlockIfAllowed(this.world, blockpos.getX(), blockpos.getY(), blockpos.getZ(), ModBlocks.SKY_BLOCK, 4, GRIEF_RULE);
+			AbilityHelper.placeBlockIfAllowed(this.world, blockpos.getX(), blockpos.getY(), blockpos.getZ(), ModBlocks.SKY_BLOCK, 3, GRIEF_RULE);
 		}
 	}
 }
