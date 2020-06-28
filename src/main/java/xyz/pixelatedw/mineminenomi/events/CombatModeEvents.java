@@ -1,8 +1,6 @@
 package xyz.pixelatedw.mineminenomi.events;
 
 import java.awt.Color;
-import java.util.Arrays;
-import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
@@ -87,10 +85,10 @@ public class CombatModeEvents
 		
 		if (event.getType() == ElementType.HOTBAR)
 		{
-			List<String> visuals = Arrays.asList(ClientConfig.instance.getCooldownVisuals());
+			boolean[] visuals = ClientConfig.instance.getCooldownVisuals();
 
-			boolean hasNumberVisual = visuals.contains("Text");
-			boolean hasColorVisual = visuals.contains("Color");
+			boolean hasNumberVisual = visuals[0]; // For Text
+			boolean hasColorVisual = visuals[1]; // For Color
 			//System.out.println(Arrays.toString(visuals.toArray()));
 			
 			event.setCanceled(true);

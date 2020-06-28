@@ -3,7 +3,9 @@ package xyz.pixelatedw.mineminenomi;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import xyz.pixelatedw.mineminenomi.config.ClientConfig;
@@ -19,13 +21,13 @@ public class ModMain
 	public static final Logger LOGGER = LogManager.getLogger(APIConfig.PROJECT_ID);
 
 	public ModMain()
-	{	
+	{
 		APIConfig.setupResourceFolderPath();
 
 		instance = this;
-		
+
 		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-		
+
 		WyRegistry.ENTITY_TYPES.register(modEventBus);
 		WyRegistry.BLOCKS.register(modEventBus);
 		WyRegistry.ITEMS.register(modEventBus);
@@ -38,8 +40,12 @@ public class ModMain
 		WyRegistry.CONTAINER_TYPES.register(modEventBus);
 		WyRegistry.FEATURES.register(modEventBus);
 		ModJollyRogers.JOLLY_ROGER_ELEMENTS.register(modEventBus);
-		
+
 		CommonConfig.init();
-		ClientConfig.init();
+
+		DistExecutor.runWhenOn(Dist.CLIENT, () -> () ->
+		{
+			ClientConfig.init();
+		});
 	}
 }

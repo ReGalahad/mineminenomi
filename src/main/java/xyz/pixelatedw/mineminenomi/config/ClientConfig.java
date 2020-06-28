@@ -39,9 +39,11 @@ public class ClientConfig
 		}
 	}
 	
-	public String[] getCooldownVisuals()
-	{
-		String[] newArray = new String[] {};
-		return this.cooldownVisual.keySet().toArray(newArray);
+	public boolean[] getCooldownVisuals()
+	{		
+		boolean hasText = this.cooldownVisual.get("Text").get();
+		boolean hasColor = this.cooldownVisual.get("Color").get();
+
+		return new boolean[] {hasText, hasColor};
 	}
 }
