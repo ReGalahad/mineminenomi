@@ -124,8 +124,7 @@ public class CommonConfig
 			this.dorikiRewardMultiplier = builder.comment("Multiplies any doriki gained by this amount; 1 by default, min: 0, max: 10").defineInRange("Doriki Reward Multiplier", 1.0, 0.0, 10.0);
 			this.minimumDorikiPerKill = builder.comment("Guarantees a minimum of 1 doriki per kill; false by default").define("Minimum Doriki per Kill", false);
 			this.abilityFraudChecks = builder.comment("Runs a check for all abilities on a player to remove dupes or suspicious abilities when the player joins the world; true by default").define("Ability Fraud Checks", true);
-			this.haoshokuUnlockLogic = builder.comment("Responsible for how player unlock Haoshoku Haki; \n NONE - Haoshoku Haki cannot be unlocked naturally \n RANDOM - Only a few chosen ones receive it when they spawn \n EXPERIENCE - Will unlock based on the total amount of Haki experience a player has").defineEnum("Haoshoku Haki Unlock Logic", HaoshokuUnlockLogic.EXPERIENCE,
-				HaoshokuUnlockLogic.values());
+			this.haoshokuUnlockLogic = builder.comment("Responsible for how player unlock Haoshoku Haki; \n NONE - Haoshoku Haki cannot be unlocked naturally \n RANDOM - Only a few chosen ones receive it when they spawn \n EXPERIENCE - Will unlock based on the total amount of Haki experience a player has").defineEnum("Haoshoku Haki Unlock Logic", HaoshokuUnlockLogic.EXPERIENCE, HaoshokuUnlockLogic.values());
 
 			this.bannedAbilities = new ArrayList<String>();
 			Predicate<Object> bannedAbilitiesTest = new Predicate<Object>()
@@ -161,16 +160,30 @@ public class CommonConfig
 
 		builder.push("Structures");
 		{
+			builder.push("Dojos");
 			this.spawnDojos = builder.comment("Allows dojos to spawn in the world; true by default").define("Spawn Dojos", true);
 			this.spawnChanceDojo = builder.comment("Sets the % chance for a dojo to spawn; 60 by default, min is 0 and max is 100").defineInRange("Dojo Spawn Chance", 60, 0.0, 100);
+			builder.pop();
+			
+			builder.push("Small Ships");
 			this.spawnSmallShips = builder.comment("Allows ships to spawn in the world; true by default").define("Spawn Ships", true);
 			this.spawnChanceSmallShip = builder.comment("Sets the % chance for a Small Ship to spawn, the % is calculated per chunk (16x16), 20% by default, min is 0 and max is 100; ").defineInRange("Small Ships Spawn Chance", 20, 0.0, 100);
-			this.spawnCamps = builder.comment("Allows camps to spawn in the world; true by default").define("Spawn Camps", true);
-			this.spawnChanceCamps = builder.comment("Sets the % chance for a Camp to spawn, the % is calculated per chunk (16x16), 40% by default, min is 0 and max is 100; ").defineInRange("Camps Spawn Chance", 40, 0.0, 100);
-			this.spawnSmallBases = builder.comment("Allows small bases to spawn in the world; true by default").define("Spawn Small Bases", true);
-			this.spawnChanceSmallBase = builder.comment("Sets the % chance for a Small Base to spawn, the % is calculated per chunk (16x16), 25% by default, min is 0 and max is 100; ").defineInRange("Small Bases Spawn Chance", 25, 0.0, 100);
+			builder.pop();
+				
+			builder.push("Large Ships");
 			this.spawnLargeShips = builder.comment("Allows large ships to spawn in the world; true by default").define("Spawn Large Ships", true);
 			this.spawnChanceLargeShips = builder.comment("Sets the % chance for a Large Ships to spawn, the % is calculated per chunk (16x16), 25% by default, min is 0 and max is 100; ").defineInRange("Large Ships Spawn Chance", 25, 0.0, 100);
+			builder.pop();
+			
+			builder.push("Camps");
+			this.spawnCamps = builder.comment("Allows camps to spawn in the world; true by default").define("Spawn Camps", true);
+			this.spawnChanceCamps = builder.comment("Sets the % chance for a Camp to spawn, the % is calculated per chunk (16x16), 40% by default, min is 0 and max is 100; ").defineInRange("Camps Spawn Chance", 40, 0.0, 100);
+			builder.pop();
+			
+			builder.push("Small Bases");
+			this.spawnSmallBases = builder.comment("Allows small bases to spawn in the world; true by default").define("Spawn Small Bases", true);
+			this.spawnChanceSmallBase = builder.comment("Sets the % chance for a Small Base to spawn, the % is calculated per chunk (16x16), 25% by default, min is 0 and max is 100; ").defineInRange("Small Bases Spawn Chance", 25, 0.0, 100);
+			builder.pop();
 		}
 		builder.pop();
 
