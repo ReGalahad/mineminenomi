@@ -1,7 +1,5 @@
 package xyz.pixelatedw.mineminenomi.events;
 
-import java.util.HashMap;
-
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -20,6 +18,8 @@ import xyz.pixelatedw.mineminenomi.entities.WantedPosterPackageEntity;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
+
+import java.util.HashMap;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class EventsBounty

@@ -1,7 +1,5 @@
 package xyz.pixelatedw.mineminenomi.events.passives;
 
-import java.util.List;
-
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.DamageSource;
@@ -14,6 +12,8 @@ import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.entities.zoan.BisonWalkZoanInfo;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
+
+import java.util.List;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class UshiBisonPassiveEvents

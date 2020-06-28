@@ -1,9 +1,6 @@
 package xyz.pixelatedw.mineminenomi.events.passives;
 
-import java.util.List;
-
 import com.google.common.collect.Lists;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.LivingRenderer;
 import net.minecraft.client.renderer.entity.model.IHasArm;
@@ -36,6 +33,8 @@ import xyz.pixelatedw.mineminenomi.particles.effects.common.LogiaParticleEffect;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
+
+import java.util.List;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class SabiPassiveEvents

@@ -1,9 +1,6 @@
 package xyz.pixelatedw.mineminenomi.events.passives;
 
-import java.util.UUID;
-
 import com.mojang.blaze3d.platform.GlStateManager;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -29,6 +26,8 @@ import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
+
+import java.util.UUID;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class FishmanPassiveEvents

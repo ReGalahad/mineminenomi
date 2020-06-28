@@ -1,11 +1,6 @@
 package xyz.pixelatedw.mineminenomi.events.devilfruits;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-
 import com.google.common.collect.ImmutableSet;
-
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ChestBlock;
 import net.minecraft.entity.item.ItemEntity;
@@ -25,6 +20,10 @@ import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
+
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class DFUserDeathEvents

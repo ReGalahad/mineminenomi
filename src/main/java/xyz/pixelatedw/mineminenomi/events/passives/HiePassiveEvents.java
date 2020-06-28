@@ -1,31 +1,43 @@
 package xyz.pixelatedw.mineminenomi.events.passives;
 
-import java.awt.Color;
-
 import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.potion.EffectInstance;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.event.entity.living.PotionEvent;
+import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import xyz.pixelatedw.mineminenomi.abilities.LogiaInvulnerabilityAbility;
 import xyz.pixelatedw.mineminenomi.api.IHasOverlay;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.api.protection.BlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.init.ModEffects;
+import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
+
+import java.awt.Color;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class HiePassiveEvents
 {
-	private static final BlockProtectionRule GRIEF_RULE = new BlockProtectionRule().addApprovedBlocks(Blocks.WATER); 
+	private static final BlockProtectionRule GRIEF_RULE = new BlockProtectionRule().addApprovedBlocks(Blocks.WATER);
+
+	public static final LogiaInvulnerabilityAbility INVULNERABILITY_INSTANCE = new LogiaInvulnerabilityAbility(ModResources.HIE, HiePassiveEvents::hieDamage);
+
+	public static boolean hieDamage(LivingEntity target, LivingEntity attacker) {
+		attacker.addPotionEffect(new EffectInstance(ModEffects.FROZEN, 40, 0));
+		return true;
+	}
 
 	@SubscribeEvent
 	public static void onEntityUpdate(LivingUpdateEvent event)
@@ -54,6 +66,25 @@ public class HiePassiveEvents
 
 		entity.renderYawOffset = 0;
 		entity.prevRenderYawOffset = 0;
+	}
+
+	@SubscribeEvent
+	public static void onPotionApplicable(PotionEvent.PotionApplicableEvent event)
+	{
+		if (!(event.getEntity() instanceof PlayerEntity))
+			return;
+
+		PlayerEntity entity = (PlayerEntity) event.getEntity();
+		IDevilFruit devilFruitProps = DevilFruitCapability.get(entity);
+		EffectInstance potion = event.getPotionEffect();
+
+		if (!devilFruitProps.getDevilFruit().equalsIgnoreCase("hie_hie"))
+			return;
+
+		if (potion.getPotion().getEffect().equals(ModEffects.FROZEN))
+		{
+			event.setResult(Event.Result.DENY);
+		}
 	}
 
 	@OnlyIn(Dist.CLIENT)
