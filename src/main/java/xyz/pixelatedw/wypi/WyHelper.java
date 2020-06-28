@@ -789,7 +789,7 @@ public class WyHelper
 	}
 
 
-	public static String getNameFromTexture(String t) {
+	public static String getTextureName(String t) {
 		for(String s : t.split("/")) {
 			if(s.contains(".png")) {
 				return s.replace(".png", "");
