@@ -21,6 +21,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.EnumFruitType;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitHelper;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
@@ -52,11 +53,11 @@ public class AkumaNoMiItem extends Item
 		this.abilities = abilitiesArray;
 		
 		if(tier == 1)
-			AbilityHelper.tier1Fruits.add(this);
+			DevilFruitHelper.tier1Fruits.add(this);
 		else if(tier == 2)
-			AbilityHelper.tier2Fruits.add(this);
+			DevilFruitHelper.tier2Fruits.add(this);
 		else if(tier == 3)
-			AbilityHelper.tier3Fruits.add(this);
+			DevilFruitHelper.tier3Fruits.add(this);
 		
 		if (this.type == EnumFruitType.LOGIA)
 			ModValues.logias.add(this);
@@ -82,7 +83,7 @@ public class AkumaNoMiItem extends Item
 		IEntityStats entityStatsProps = EntityStatsCapability.get(player);
 		IAbilityData abilityDataProps = AbilityDataCapability.get(player);
 
-		String eatenFruit = this.getDefaultTranslationKey().substring("item.mineminenomi.".length()).replace("_no_mi", "").replace(":", "").replace(".", "").replace(",", "").replace("model_", "");
+		String eatenFruit = this.getDefaultTranslationKey().substring(("item." + APIConfig.PROJECT_ID + ".").length()).replace("_no_mi", "").replace(":", "").replace(".", "").replace(",", "").replace("model_", "");
 
 		boolean flag1 = !WyHelper.isNullOrEmpty(devilFruitProps.getDevilFruit()) && !devilFruitProps.hasYamiPower() && !eatenFruit.equalsIgnoreCase("yami_yami");
 		boolean flag2 = devilFruitProps.hasYamiPower() && !eatenFruit.equalsIgnoreCase(devilFruitProps.getDevilFruit()) && !devilFruitProps.getDevilFruit().equalsIgnoreCase("yamidummy");

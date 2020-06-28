@@ -10,6 +10,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitHelper;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
+import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
 import xyz.pixelatedw.mineminenomi.items.AkumaNoMiItem;
 import xyz.pixelatedw.wypi.APIConfig;
@@ -30,26 +31,13 @@ public class DFDropEvents
 			{
 				AkumaNoMiItem df = ModValues.devilfruits.get((int) WyHelper.randomWithRange(0, ModValues.devilfruits.size() - 1));
 				
-				boolean isAvailable = true;
-				
-				if(CommonConfig.instance.isOneFruitPerWorldEnabled())
-				{
-					String fruitName = df.getTranslationKey().substring("item.mineminenomi.".length()).replace("_no_mi", "").replace(":", "").replace(".", "").replace(",", "").replace("model_", "");
-					int chanceForNewFruit = 0;
-					while(DevilFruitHelper.isDevilFruitInWorld(event.getPlayer().world, fruitName))
-					{
-						if(chanceForNewFruit >= 10)
-						{
-							isAvailable = false;
-							break;
-						}
-						df = ModValues.devilfruits.get((int) WyHelper.randomWithRange(0, ModValues.devilfruits.size() - 1));
-						chanceForNewFruit++;
-					}
-				}
-				
+				boolean isAvailable = true && DevilFruitHelper.oneFruitPerWorldCheck((World) event.getWorld(), df);
+
 				if(isAvailable)
+				{
 					event.getWorld().addEntity(new ItemEntity((World) event.getWorld(), event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), new ItemStack(df)));
+					ExtendedWorldData.get(event.getPlayer().world).addDevilFruitInWorld(df);
+				}
 			}
 		}
 	}

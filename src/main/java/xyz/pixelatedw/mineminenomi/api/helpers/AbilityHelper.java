@@ -70,7 +70,6 @@ import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.mineminenomi.init.ModQuests;
-import xyz.pixelatedw.mineminenomi.items.AkumaNoMiItem;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.Ability;
@@ -84,10 +83,6 @@ import xyz.pixelatedw.wypi.quests.Quest;
 
 public class AbilityHelper
 {
-	public static List<AkumaNoMiItem> tier1Fruits = new ArrayList<AkumaNoMiItem>();
-	public static List<AkumaNoMiItem> tier2Fruits = new ArrayList<AkumaNoMiItem>();
-	public static List<AkumaNoMiItem> tier3Fruits = new ArrayList<AkumaNoMiItem>();
-	
 	public static boolean placeBlockIfAllowed(World world, double posX, double posY, double posZ, Block toPlace, BlockProtectionRule rule)
 	{
 		return placeBlockIfAllowed(world, posX, posY, posZ, toPlace, 2, rule);

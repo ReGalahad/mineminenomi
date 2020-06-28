@@ -304,7 +304,7 @@ public class ExtendedWorldData extends WorldSavedData
 
 	public void addDevilFruitInWorld(AkumaNoMiItem fruit)
 	{
-		String name = fruit.getTranslationKey().replace("item." + APIConfig.PROJECT_ID + ".", "").replace("nomi", "").replace(":", "").replace(",", "").replace("model", "");
+		String name = fruit.getTranslationKey().substring(("item." + APIConfig.PROJECT_ID + ".").length()).replace("_no_mi", "").replace(":", "").replace(".", "").replace(",", "").replace("model_", "");
 
 		if (!this.devilFruitsInWorld.contains(name))
 		{

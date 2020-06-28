@@ -1,7 +1,5 @@
 package xyz.pixelatedw.mineminenomi.items;
 
-import java.util.Random;
-
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -10,10 +8,7 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitHelper;
-import xyz.pixelatedw.mineminenomi.config.CommonConfig;
-import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.mineminenomi.init.ModItems;
@@ -62,35 +57,8 @@ public class AkumaNoMiBoxItem extends Item
 			player.inventory.decrStackSize(keySlot, 1);
 			player.inventory.deleteStack(itemStack);
 
-			AkumaNoMiItem randomFruit = this.roulette();
-			boolean isAvailable = true;
-
-			if (CommonConfig.instance.isOneFruitPerWorldEnabled())
-			{
-				ExtendedWorldData worldProps = ExtendedWorldData.get(world);
-				int chanceForNewFruit = 0;
-
-				String fruitName = randomFruit.getTranslationKey().substring("item.mineminenomi.".length()).replace("_no_mi", "").replace(":", "").replace(".", "").replace(",", "").replace("model_", "");
-
-				while (DevilFruitHelper.isDevilFruitInWorld(world, fruitName))
-				{
-					final AkumaNoMiItem inContextFruit = randomFruit;
-					AbilityHelper.tier1Fruits.removeIf(x -> x == inContextFruit);
-					AbilityHelper.tier2Fruits.removeIf(x -> x == inContextFruit);
-					AbilityHelper.tier3Fruits.removeIf(x -> x == inContextFruit);
-
-					if (chanceForNewFruit >= 10)
-					{
-						isAvailable = false;
-						break;
-					}
-					randomFruit = this.roulette();
-					chanceForNewFruit++;
-				}
-
-				if (isAvailable)
-					worldProps.addDevilFruitInWorld(randomFruit);
-			}
+			AkumaNoMiItem randomFruit = DevilFruitHelper.rouletteDevilFruits(this.tier);
+			boolean isAvailable = true && DevilFruitHelper.oneFruitPerWorldCheck(world, randomFruit);
 
 			if (isAvailable)
 			{
@@ -107,45 +75,5 @@ public class AkumaNoMiBoxItem extends Item
 		return new ActionResult<>(ActionResultType.SUCCESS, player.getHeldItem(hand));
 	}
 
-	private AkumaNoMiItem roulette()
-	{
-		Random rand = new Random();
 
-		if (rand.nextInt(100) + rand.nextDouble() <= 98)
-		{
-			if (this.tier == 1)
-			{
-				if (rand.nextInt(100) + rand.nextDouble() < 10)
-				{
-					if (AbilityHelper.tier2Fruits.size() > 0)
-						return AbilityHelper.tier2Fruits.get(rand.nextInt(AbilityHelper.tier2Fruits.size()));
-				}
-				else
-				{
-					if (AbilityHelper.tier1Fruits.size() > 0)
-						return AbilityHelper.tier1Fruits.get(rand.nextInt(AbilityHelper.tier1Fruits.size()));
-				}
-			}
-			else if (this.tier == 2)
-			{
-				if (rand.nextInt(100) + rand.nextDouble() < 10)
-				{
-					if (AbilityHelper.tier3Fruits.size() > 0)
-						return AbilityHelper.tier3Fruits.get(rand.nextInt(AbilityHelper.tier3Fruits.size()));
-				}
-				else
-				{
-					if (AbilityHelper.tier2Fruits.size() > 0)
-						return AbilityHelper.tier2Fruits.get(rand.nextInt(AbilityHelper.tier2Fruits.size()));
-				}
-			}
-			else if (this.tier == 3)
-			{
-				if (AbilityHelper.tier3Fruits.size() > 0)
-					return AbilityHelper.tier3Fruits.get(rand.nextInt(AbilityHelper.tier3Fruits.size()));
-			}
-		}
-
-		return null;
-	}
 }

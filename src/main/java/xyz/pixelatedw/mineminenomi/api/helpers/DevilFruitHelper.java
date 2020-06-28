@@ -1,10 +1,15 @@
 package xyz.pixelatedw.mineminenomi.api.helpers;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.registries.ForgeRegistries;
+import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
@@ -14,6 +19,10 @@ import xyz.pixelatedw.wypi.WyHelper;
 
 public class DevilFruitHelper
 {
+	public static List<AkumaNoMiItem> tier1Fruits = new ArrayList<AkumaNoMiItem>();
+	public static List<AkumaNoMiItem> tier2Fruits = new ArrayList<AkumaNoMiItem>();
+	public static List<AkumaNoMiItem> tier3Fruits = new ArrayList<AkumaNoMiItem>();
+	
 	private static String[][] zoanModels = new String[][]
 		{
 				{
@@ -27,6 +36,85 @@ public class DevilFruitHelper
 				},
 		};
 		
+	public static boolean oneFruitPerWorldCheck(World world, AkumaNoMiItem devilFruit)
+	{
+		if (!CommonConfig.instance.isOneFruitPerWorldEnabled())
+			return true;
+			
+		boolean isAvailable = true;
+
+		ExtendedWorldData worldProps = ExtendedWorldData.get(world);
+		int chanceForNewFruit = 0;
+
+		String fruitName = devilFruit.getTranslationKey().substring("item.mineminenomi.".length()).replace("_no_mi", "").replace(":", "").replace(".", "").replace(",", "").replace("model_", "");
+
+		while (DevilFruitHelper.isDevilFruitInWorld(world, fruitName))
+		{
+			final AkumaNoMiItem inContextFruit = devilFruit;
+			DevilFruitHelper.tier1Fruits.removeIf(x -> x == inContextFruit);
+			DevilFruitHelper.tier2Fruits.removeIf(x -> x == inContextFruit);
+			DevilFruitHelper.tier3Fruits.removeIf(x -> x == inContextFruit);
+
+			if (chanceForNewFruit >= 10)
+			{
+				isAvailable = false;
+				break;
+			}
+			devilFruit = rouletteDevilFruits(1);
+			chanceForNewFruit++;
+		}
+
+		if (isAvailable)
+		{
+			worldProps.addDevilFruitInWorld(devilFruit);
+			return true;
+		}
+
+		return false;
+	}
+	
+	public static AkumaNoMiItem rouletteDevilFruits(int tier)
+	{
+		Random rand = new Random();
+
+		if (rand.nextInt(100) + rand.nextDouble() <= 98)
+		{
+			if (tier == 1)
+			{
+				if (rand.nextInt(100) + rand.nextDouble() < 10)
+				{
+					if (DevilFruitHelper.tier2Fruits.size() > 0)
+						return DevilFruitHelper.tier2Fruits.get(rand.nextInt(DevilFruitHelper.tier2Fruits.size()));
+				}
+				else
+				{
+					if (DevilFruitHelper.tier1Fruits.size() > 0)
+						return DevilFruitHelper.tier1Fruits.get(rand.nextInt(DevilFruitHelper.tier1Fruits.size()));
+				}
+			}
+			else if (tier == 2)
+			{
+				if (rand.nextInt(100) + rand.nextDouble() < 10)
+				{
+					if (DevilFruitHelper.tier3Fruits.size() > 0)
+						return DevilFruitHelper.tier3Fruits.get(rand.nextInt(DevilFruitHelper.tier3Fruits.size()));
+				}
+				else
+				{
+					if (DevilFruitHelper.tier2Fruits.size() > 0)
+						return DevilFruitHelper.tier2Fruits.get(rand.nextInt(DevilFruitHelper.tier2Fruits.size()));
+				}
+			}
+			else if (tier == 3)
+			{
+				if (DevilFruitHelper.tier3Fruits.size() > 0)
+					return DevilFruitHelper.tier3Fruits.get(rand.nextInt(DevilFruitHelper.tier3Fruits.size()));
+			}
+		}
+
+		return null;
+	}
+	
 	public static boolean hasDevilFruit(LivingEntity player, AkumaNoMiItem df)
 	{
 		IDevilFruit props = DevilFruitCapability.get(player);
