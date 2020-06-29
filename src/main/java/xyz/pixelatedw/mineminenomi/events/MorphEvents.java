@@ -1,5 +1,7 @@
 package xyz.pixelatedw.mineminenomi.events;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -18,7 +20,7 @@ import net.minecraftforge.event.entity.EntityEvent.EyeHeight;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import org.lwjgl.opengl.GL11;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import xyz.pixelatedw.mineminenomi.api.ZoanInfo;
 import xyz.pixelatedw.mineminenomi.api.helpers.MorphHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
@@ -28,8 +30,6 @@ import xyz.pixelatedw.mineminenomi.renderers.entities.ZoanMorphRenderer;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.network.WyNetwork;
-
-import java.lang.reflect.Field;
 
 @OnlyIn(Dist.CLIENT)
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID, value = Dist.CLIENT)
@@ -87,34 +87,7 @@ public class MorphEvents
 			shadowSize = 0.5F;
 		}
 		
-		Field field = getShadowSizeField();
-		try
-		{
-			field.set(event.getRenderer(), shadowSize);
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
-	
-	private static Field getShadowSizeField()
-	{
-		Field field = null;
-		
-		try
-		{
-			field = EntityRenderer.class.getDeclaredField("shadowSize");
-			if(field == null)
-				field = EntityRenderer.class.getDeclaredField("field_76989_e");
-			field.setAccessible(true);
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-		
-		return field;
+		ObfuscationReflectionHelper.setPrivateValue(EntityRenderer.class, event.getRenderer(), shadowSize, "field_76989_e");
 	}
 	
 	@SubscribeEvent

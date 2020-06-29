@@ -4,11 +4,13 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
 import xyz.pixelatedw.wypi.APIConfig;
 
@@ -31,7 +33,7 @@ public class KairosekiTooltipEvents
 						
 			if ( event.getItemStack().getItem().equals(itm) )
 			{
-				StringTextComponent kairosekiString = new StringTextComponent(TextFormatting.YELLOW + "Kairoseki Item");
+				StringTextComponent kairosekiString = new StringTextComponent(TextFormatting.YELLOW + "" + new TranslationTextComponent(ModI18n.ITEM_KAIROSEKI_ITEM).getFormattedText());
 				if(!event.getToolTip().contains(kairosekiString))
 				{
 					event.getToolTip().add(new StringTextComponent(""));

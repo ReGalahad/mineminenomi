@@ -88,6 +88,7 @@ public class ModI18n
 	public static final String ABILITY_MESSAGE_ONE_HAKI_TYPE = WyRegistry.registerName("ability.message.one_haki_type", "%s can't be used while another same type haki is active!");
 	public static final String ABILITY_MESSAGE_CANNOT_USE_HERE = WyRegistry.registerName("ability.message.cannot_use_here", "Cannot use abilites in a restricted area!");
 	
+	public static final String ITEM_KAIROSEKI_ITEM = WyRegistry.registerName("item.kairoseki_item", "Kairoseki Item");
 	public static final String ITEM_MESSAGE_NEED_KEY = WyRegistry.registerName("item.message.need_key", "You need a key!");
 	public static final String ITEM_MESSAGE_POUCH_BELLY_GAINED = WyRegistry.registerName("item.message.pouch_belly_gained", "You've obtained %s belly !");
 	

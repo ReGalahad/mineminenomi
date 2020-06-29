@@ -27,7 +27,6 @@ public class HaoshokuHakiAbility extends ChargeableAbility
 	{
 		super("Haoshoku Haki", AbilityCategory.HAKI);
 		this.setMaxChargeTime(3);
-		//this.setMaxCooldown(60);
 		
 		this.onEndChargingEvent = this::onEndChargingEvent;
 	}

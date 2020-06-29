@@ -1,9 +1,13 @@
 package xyz.pixelatedw.mineminenomi.events.passives;
 
+import java.awt.Color;
+import java.lang.reflect.Method;
+
 import com.mojang.blaze3d.platform.GLX;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.platform.GlStateManager.DestFactor;
 import com.mojang.blaze3d.platform.GlStateManager.SourceFactor;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.LivingRenderer;
 import net.minecraft.client.renderer.entity.model.IHasArm;
@@ -23,6 +27,7 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import xyz.pixelatedw.mineminenomi.abilities.haki.BusoshokuHakiFullBodyHardeningAbility;
 import xyz.pixelatedw.mineminenomi.abilities.haki.BusoshokuHakiHardeningAbility;
 import xyz.pixelatedw.mineminenomi.abilities.haki.KenbunshokuHakiAuraAbility;
@@ -40,9 +45,6 @@ import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
-
-import java.awt.Color;
-import java.lang.reflect.Method;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class HakiPassiveEvents
@@ -209,13 +211,10 @@ public class HakiPassiveEvents
 			if (entity.getActivePotionEffect(ModEffects.UNCONSCIOUS).getDuration() <= 0)
 			{
 				entity.removePotionEffect(ModEffects.UNCONSCIOUS);
-				Method method;
+				Method method = ObfuscationReflectionHelper.findMethod(Entity.class, "func_213301_b", Pose.class);
 				try
 				{
 					entity.setBedPosition(entity.getPosition());
-					method = Entity.class.getDeclaredMethod("setPose", Pose.class);
-					if(method == null)
-						method = Entity.class.getDeclaredMethod("func_213301_b", Pose.class);
 					method.setAccessible(true);
 					method.invoke(entity, Pose.STANDING);
 				}
