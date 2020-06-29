@@ -51,7 +51,7 @@ public class KyokaenAbility extends ContinuousAbility {
 				} else if (e instanceof ArrowEntity || e instanceof KairosekiBulletProjectile || e instanceof NormalBulletProjectile) {
 					e.remove();
 				} else if(e instanceof AbilityProjectileEntity) {
-					e.setVelocity(0, -1, 0);
+					e.setMotion(0, -1, 0);
 				}
 			}
 		}

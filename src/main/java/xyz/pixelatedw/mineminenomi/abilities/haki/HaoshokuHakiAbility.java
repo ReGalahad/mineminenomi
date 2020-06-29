@@ -69,7 +69,8 @@ public class HaoshokuHakiAbility extends ChargeableAbility
 		{
 			if(unconsciousTimer > 0)
 			{
-				EffectInstance instance = new EffectInstance(ModEffects.UNCONSCIOUS, unconsciousTimer, 1);
+				EffectInstance instance = new EffectInstance(ModEffects.UNCONSCIOUS, unconsciousTimer, 1, false, false);
+				target.addPotionEffect(new EffectInstance(ModEffects.ABILITY_OFF, unconsciousTimer - 20, 0, false, false));
 				target.addPotionEffect(instance);
 				((ServerPlayerEntity) player).connection.sendPacket(new SPlayEntityEffectPacket(target.getEntityId(), instance));
 			}

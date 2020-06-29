@@ -56,7 +56,7 @@ public class ModAttributes
 		double value = e.getEntityLiving().getAttribute(JUMP_HEIGHT).getValue();
 		e.getEntityLiving().addVelocity(0, 0.1F * (value - 1), 0);
 		if (value <= 0)
-			e.getEntityLiving().setVelocity(0, e.getEntityLiving().getMotion().y, 0);
+			e.getEntityLiving().setMotion(0, e.getEntityLiving().getMotion().y, 0);
 	}
 
 	@SubscribeEvent
