@@ -79,7 +79,6 @@ public class WyHelper
 	/*
 	 * String Helpers
 	 */
-
 	public static boolean isNullOrEmpty(String str)
 	{
 		if (str != null && !str.isEmpty() && !str.equalsIgnoreCase("n/a"))
@@ -787,5 +786,15 @@ public class WyHelper
 		int maxHeight = Math.max(Math.max(i1, j1), Math.max(k1, l1));
 
 		return Math.abs(maxHeight - minHeight) <= difference;
+	}
+
+
+	public static String getTextureName(String t) {
+		for(String s : t.split("/")) {
+			if(s.contains(".png")) {
+				return s.replace(".png", "");
+			}
+		}
+		return null;
 	}
 }
