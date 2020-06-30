@@ -16,7 +16,7 @@ import xyz.pixelatedw.wypi.APIConfig;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class GasuPassiveEvents {
-    public static final LogiaInvulnerabilityAbility INVULNERABILITY_INSTANCE = new LogiaInvulnerabilityAbility(ModResources.GORO, GasuPassiveEvents::gasuDamage);
+    public static final LogiaInvulnerabilityAbility INVULNERABILITY_INSTANCE = new LogiaInvulnerabilityAbility(ModResources.GASU, GasuPassiveEvents::gasuDamage);
 
     public static boolean gasuDamage(LivingEntity target, LivingEntity attacker) {
         attacker.addPotionEffect(new EffectInstance(Effects.POISON, 40, 0));

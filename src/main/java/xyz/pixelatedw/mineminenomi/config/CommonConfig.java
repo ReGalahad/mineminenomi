@@ -30,6 +30,7 @@ public class CommonConfig
 	private EnumValue haoshokuUnlockLogic;
 
 	private BooleanValue logiaInvulnerability;
+	private BooleanValue logiaReturnEffect;
 	private BooleanValue logiaHurtsLogias;
 	private DoubleValue devilFruitDropsFromLeavesChance;
 	private BooleanValue extraHearts;
@@ -112,7 +113,8 @@ public class CommonConfig
 		builder.push("General");
 		{
 			this.logiaInvulnerability = builder.comment("Allows logia users to avoid physical attacks; true by default").define("Logia Invulnerability", true);
-			this.logiaHurtsLogias = builder.comment("Allows logia users to hurt other logia users with projectiles; true by default").define("Logias hurt Logias", true);
+			this.logiaReturnEffect = builder.comment("Allos logia users to have different effects when punched").define("Logia Return Effect", true);
+			this.logiaHurtsLogias = builder.comment("Allows logia users to hurt other logia users with projectiles; true by default").define("Logias hurt Logias", false);
 			this.devilFruitDropsFromLeavesChance = builder.comment("Allows Devil Fruits to drop from leaves if higher than 0; 0 by default").defineInRange("Chance for Devil Fruits to drop from leaves", 0.0, 0.0, 100.0);
 			this.extraHearts = builder.comment("Allows players to receive extra hearts based on their doriki; true by default").define("Extra Hearts", true);
 			this.mobRewards = builder.comment("Allows mobs to reward doriki, bounty or items; true by default").define("Mob Rewards", true);
@@ -409,6 +411,11 @@ public class CommonConfig
 	public boolean isLogiaInvulnerabilityEnabled()
 	{
 		return this.logiaInvulnerability.get();
+	}
+
+	public boolean isLogiaDamageEffectEnabled()
+	{
+		return this.logiaReturnEffect.get();
 	}
 
 	public boolean isLogiaHurtsLogiasEnabled()
