@@ -69,7 +69,7 @@ public class PirateWithGunEntity extends GenericPirateEntity implements IRangedA
 	@Override
 	public void attackEntityWithRangedAttack(LivingEntity target, float distance)
 	{
-		AbilityProjectileEntity proj = new NormalBulletProjectile(this.world, this);
+		AbilityProjectileEntity proj = new NormalBulletProjectile(this.world, this, 1.0);
 
 		if(this.getAttackTarget() == null)
 			return;
