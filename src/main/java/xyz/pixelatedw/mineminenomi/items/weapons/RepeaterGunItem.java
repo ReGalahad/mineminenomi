@@ -128,15 +128,7 @@ public class RepeaterGunItem extends GunItem{
 
 	@Override
 	public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-		if(entityIn instanceof PlayerEntity) {
-		PlayerEntity p = (PlayerEntity) entityIn;
-		if(worldIn.isRemote()) {
-			System.out.println("client" + p.getCooldownTracker().getCooldown(this, 1));
-		} else {
-			System.out.println("server" + p.getCooldownTracker().getCooldown(this, 1));
-
-		}
-		}
+		
 		super.inventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);
 	}
 
