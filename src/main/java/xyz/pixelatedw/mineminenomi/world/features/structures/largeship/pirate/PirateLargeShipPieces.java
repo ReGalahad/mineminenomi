@@ -36,11 +36,11 @@ public class PirateLargeShipPieces
 	private static final ResourceLocation MIDDLE = new ResourceLocation(APIConfig.PROJECT_ID, "large_ship/middle");
 	private static final ResourceLocation BACK = new ResourceLocation(APIConfig.PROJECT_ID, "large_ship/back");
 	private static final ResourceLocation SMALL_MAST = new ResourceLocation(APIConfig.PROJECT_ID, "large_ship/pirate/small_mast");
-	private static final ResourceLocation LARGE_MAST0 = new ResourceLocation(APIConfig.PROJECT_ID, "large_ship/pirate/mast0");
-	private static final ResourceLocation LARGE_MAST1 = new ResourceLocation(APIConfig.PROJECT_ID, "large_ship/pirate/mast1");
-	private static final ResourceLocation LARGE_MAST2 = new ResourceLocation(APIConfig.PROJECT_ID, "large_ship/pirate/mast2");
-	private static final ResourceLocation LARGE_MAST3 = new ResourceLocation(APIConfig.PROJECT_ID, "large_ship/pirate/mast3");
-	private static final ResourceLocation LARGE_MAST4 = new ResourceLocation(APIConfig.PROJECT_ID, "large_ship/pirate/mast4");
+	private static final ResourceLocation LARGE_MAST0 = new ResourceLocation(APIConfig.PROJECT_ID, "large_ship/pirate/large_mast0");
+	private static final ResourceLocation LARGE_MAST1 = new ResourceLocation(APIConfig.PROJECT_ID, "large_ship/pirate/large_mast1");
+	private static final ResourceLocation LARGE_MAST2 = new ResourceLocation(APIConfig.PROJECT_ID, "large_ship/pirate/large_mast2");
+	private static final ResourceLocation LARGE_MAST3 = new ResourceLocation(APIConfig.PROJECT_ID, "large_ship/pirate/large_mast3");
+	private static final ResourceLocation LARGE_MAST4 = new ResourceLocation(APIConfig.PROJECT_ID, "large_ship/pirate/large_mast4");
 	
 	private static final ResourceLocation[] MASTS = new ResourceLocation[] { LARGE_MAST0, LARGE_MAST1, LARGE_MAST2, LARGE_MAST3, LARGE_MAST4 };
 
