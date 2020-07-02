@@ -17,6 +17,7 @@ import xyz.pixelatedw.mineminenomi.items.weapons.GunItem;
 import xyz.pixelatedw.mineminenomi.items.weapons.KujaBowItem;
 import xyz.pixelatedw.mineminenomi.items.weapons.PopGreenBowItem;
 import xyz.pixelatedw.mineminenomi.items.weapons.RepeaterGunItem;
+import xyz.pixelatedw.mineminenomi.items.weapons.RepeaterPopGreenBowItem;
 import xyz.pixelatedw.mineminenomi.items.weapons.ScissorsItem;
 import xyz.pixelatedw.mineminenomi.items.weapons.UmbrellaItem;
 import xyz.pixelatedw.wypi.APIConfig;
@@ -68,7 +69,7 @@ public class ModWeapons
 	public static final KujaBowItem BLUE_KUJA_BOW = new KujaBowItem();
 	public static final PopGreenBowItem KABUTO = new PopGreenBowItem(1d);
 	public static final PopGreenBowItem BLACK_KABUTO = new PopGreenBowItem(1.5d);
-	public static final PopGreenBowItem GINGA_PACHINKO = new PopGreenBowItem(0.8d);
+	public static final PopGreenBowItem GINGA_PACHINKO = new RepeaterPopGreenBowItem(0.8d);
 	public static final GunItem SENRIKU = new GunItem(25, 4, 0, 1.5F);
 
 	// Devil Fruit Weapons
