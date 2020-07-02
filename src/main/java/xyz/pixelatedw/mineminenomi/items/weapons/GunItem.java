@@ -30,10 +30,10 @@ import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 
 public class GunItem extends RangedWeaponItem
 {
-	private int maxCooldown = 15;
-	private int bulletSpeed = 2;
-	private int bulletAccuracy = 2;
-	private int maxBullets = 10;
+	public int maxCooldown = 15;
+	public int bulletSpeed = 2;
+	public int bulletAccuracy = 2;
+	public int maxBullets = 10;
 
 	public static final Predicate<ItemStack> BULLETS = (itemStack) ->
 	{
@@ -174,10 +174,14 @@ public class GunItem extends RangedWeaponItem
 			if (BULLETS.test(itemstack))
 			{
 				if(itemstack.getCount() >= maxBullets) {
+					if(!player.world.isRemote()) {
 					player.inventory.decrStackSize(i, maxBullets);
+					}
 				} else {
 					count = itemstack.getCount();
+					if(!player.world.isRemote()) {
 					player.inventory.removeStackFromSlot(i);
+					}
 				}
 				break;
 			}

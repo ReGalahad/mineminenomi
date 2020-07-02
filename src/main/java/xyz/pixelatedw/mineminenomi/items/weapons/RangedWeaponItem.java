@@ -89,7 +89,6 @@ public abstract class RangedWeaponItem extends BowItem{
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
 
-    	System.out.println("right clicked");
     	return super.onItemRightClick(worldIn, playerIn, handIn);
     }
 

@@ -16,6 +16,7 @@ import xyz.pixelatedw.mineminenomi.items.weapons.CoreSwordItem;
 import xyz.pixelatedw.mineminenomi.items.weapons.GunItem;
 import xyz.pixelatedw.mineminenomi.items.weapons.KujaBowItem;
 import xyz.pixelatedw.mineminenomi.items.weapons.PopGreenBowItem;
+import xyz.pixelatedw.mineminenomi.items.weapons.RepeaterGunItem;
 import xyz.pixelatedw.mineminenomi.items.weapons.ScissorsItem;
 import xyz.pixelatedw.mineminenomi.items.weapons.UmbrellaItem;
 import xyz.pixelatedw.wypi.APIConfig;
@@ -61,7 +62,7 @@ public class ModWeapons
 	public static final CoreSwordItem MACE = new CoreSwordItem(8, 800).setBlunt().setSwordSpeed(-3);
 
 	// Normal Ranged Weapons
-	public static final GunItem FLINTLOCK = new GunItem(15, 2, 2, 0.8f);
+	public static final GunItem FLINTLOCK = new RepeaterGunItem(15, 2, 2, 0.8f);
 	public static final KujaBowItem GREEN_KUJA_BOW = new KujaBowItem();
 	public static final KujaBowItem RED_KUJA_BOW = new KujaBowItem();
 	public static final KujaBowItem BLUE_KUJA_BOW = new KujaBowItem();
