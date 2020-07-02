@@ -32,14 +32,14 @@ public class RepeaterGunItem extends GunItem{
 	public void onUsingTick(ItemStack stack, LivingEntity player, int count) {
 		if(count % updateValue == 0 && this.isBeingUsed(stack)) {
 
-			if(!player.world.isRemote()) {
 			PlayerEntity playerIn = (PlayerEntity) player;
 			IAbilityData abilityProps = AbilityDataCapability.get(player);
 			BreezeBreathBombAbility ability = abilityProps.getEquippedAbility(BreezeBreathBombAbility.INSTANCE);
 			boolean hasAbility = ability != null && ability.isContinuous();
 			boolean hasBullets = this.findBulletStack(playerIn) != null ? true : false;
 			Item bulletType = this.findBulletStack(playerIn) != null ? this.findBulletStack(playerIn).getItem() : null;
-			
+			if(!player.world.isRemote()) {
+
 			if(hasAbility)
 			{
 
@@ -54,20 +54,28 @@ public class RepeaterGunItem extends GunItem{
 			if (!hasBullets || bulletType == null) {
 				return;
 			}
+			}
 
 			boolean hasGunPowder = this.getLoadedGunPowder(stack) > 0;
 			
 			boolean loadedBullets = this.getLoadedBullets(stack) > 0;
 			if(!loadedBullets) {
+				if(!player.world.isRemote()) {
 				playerIn.getCooldownTracker().setCooldown(this, (int) (80 * (2 - weightScale)));
+				} else {
+					playerIn.getCooldownTracker().setCooldown(this, (int) (80 * (2 - weightScale) + 17));
+				}
+				if(!playerIn.world.isRemote()) {
 				this.reloadBullets(stack, playerIn);
 				
 				this.setIsBeingUsed(stack, false);
 				
 				return;
+				}
 			} 
 			
 
+			if(!playerIn.world.isRemote()) {
 			if(!hasGunPowder)
 			{
 				for (int i = 0; i < playerIn.inventory.getSizeInventory(); ++i)
@@ -111,8 +119,8 @@ public class RepeaterGunItem extends GunItem{
 			int powder = this.getLoadedGunPowder(stack);
 			this.setLoadedGunPowder(stack, --powder);
 
+			}
 		
-		}
 		}
 		super.onUsingTick(stack, player, count);
 		
@@ -120,6 +128,15 @@ public class RepeaterGunItem extends GunItem{
 
 	@Override
 	public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+		if(entityIn instanceof PlayerEntity) {
+		PlayerEntity p = (PlayerEntity) entityIn;
+		if(worldIn.isRemote()) {
+			System.out.println("client" + p.getCooldownTracker().getCooldown(this, 1));
+		} else {
+			System.out.println("server" + p.getCooldownTracker().getCooldown(this, 1));
+
+		}
+		}
 		super.inventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);
 	}
 
