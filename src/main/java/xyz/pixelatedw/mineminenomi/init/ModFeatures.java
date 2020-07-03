@@ -13,6 +13,8 @@ import xyz.pixelatedw.mineminenomi.world.features.structures.camp.marine.MarineC
 import xyz.pixelatedw.mineminenomi.world.features.structures.camp.marine.MarineCampStructure;
 import xyz.pixelatedw.mineminenomi.world.features.structures.dojo.DojoPiece;
 import xyz.pixelatedw.mineminenomi.world.features.structures.dojo.DojoStructure;
+import xyz.pixelatedw.mineminenomi.world.features.structures.largebase.marine.MarineLargeBasePieces;
+import xyz.pixelatedw.mineminenomi.world.features.structures.largebase.marine.MarineLargeBaseStructure;
 import xyz.pixelatedw.mineminenomi.world.features.structures.largeship.marine.MarineLargeShipPieces;
 import xyz.pixelatedw.mineminenomi.world.features.structures.largeship.marine.MarineLargeShipStructure;
 import xyz.pixelatedw.mineminenomi.world.features.structures.largeship.pirate.PirateLargeShipPieces;
@@ -28,6 +30,7 @@ import xyz.pixelatedw.wypi.WyRegistry;
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModFeatures
 {
+	public static final Structure<NoFeatureConfig> MARINE_LARGE_BASE = new MarineLargeBaseStructure();
 	public static final Structure<NoFeatureConfig> PIRATE_LARGE_SHIP = new PirateLargeShipStructure();
 	public static final Structure<NoFeatureConfig> MARINE_LARGE_SHIP = new MarineLargeShipStructure();
 	public static final Structure<NoFeatureConfig> BANDIT_SMALL_BASE = new BanditSmallBaseStructure();
@@ -41,6 +44,8 @@ public class ModFeatures
 	{
 		for (Biome biome : ForgeRegistries.BIOMES)
 		{
+			MarineLargeBaseStructure.register(biome);
+
 			PirateLargeShipStructure.register(biome);
 			MarineLargeShipStructure.register(biome);
 
@@ -60,6 +65,7 @@ public class ModFeatures
 
 	static
 	{
+		WyRegistry.registerFeature(MARINE_LARGE_BASE, "Marine Large Base");
 		WyRegistry.registerFeature(PIRATE_LARGE_SHIP, "Pirate Large Ship");
 		WyRegistry.registerFeature(MARINE_LARGE_SHIP, "Marine Large Ship");
 		WyRegistry.registerFeature(BANDIT_SMALL_BASE, "Bandit Small Base");
@@ -72,6 +78,7 @@ public class ModFeatures
 
 	public static class Pieces
 	{
+		public static final IStructurePieceType MARINE_LARGE_BASE_PIECE = IStructurePieceType.register(MarineLargeBasePieces.Piece::new, "marine_large_base_piece");
 		public static final IStructurePieceType PIRATE_LARGE_SHIP_PIECE = IStructurePieceType.register(PirateLargeShipPieces.Piece::new, "pirate_large_ship_piece");
 		public static final IStructurePieceType MARINE_LARGE_SHIP_PIECE = IStructurePieceType.register(MarineLargeShipPieces.Piece::new, "marine_large_ship_piece");
 		public static final IStructurePieceType BANDIT_SMALL_BASE_PIECE = IStructurePieceType.register(BanditSmallBasePieces.Piece::new, "bandit_small_base_piece");

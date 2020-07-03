@@ -1,0 +1,260 @@
+{
+	"type": "minecraft:chest",
+	"pools": [
+		{
+			"name": "mineminenomi:food",
+			"rolls": {
+				"min": 2.0,
+				"max": 4.0,
+				"type": "minecraft:uniform"
+			},
+			"entries": [
+				{
+					"type": "minecraft:item",
+					"name": "minecraft:bread",
+					"weight": 100,
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"min": 1.0,
+								"max": 4.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "minecraft:bread",
+					"weight": 100,
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"min": 1.0,
+								"max": 2.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "minecraft:apple",
+					"weight": 100,
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"min": 1.0,
+								"max": 5.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "minecraft:dried_kelp",
+					"weight": 80,
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"min": 5.0,
+								"max": 10.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "minecraft:mushroom_stew",
+					"weight": 80,
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"min": 1.0,
+								"max": 3.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "minecraft:melon_slice",
+					"weight": 45,
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"min": 5.0,
+								"max": 10.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "minecraft:baked_potato",
+					"weight": 45,
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"min": 0.0,
+								"max": 5.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "minecraft:cake",
+					"weight": 45
+				},
+				{
+					"type": "minecraft:item",
+					"name": "minecraft:apple",
+					"weight": 45,
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"min": 1.0,
+								"max": 10.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "minecraft:melon_slice",
+					"weight": 45,
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"min": 5.0,
+								"max": 10.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:cola",
+					"weight": 20,
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"min": 2.0,
+								"max": 5.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "minecraft:cooked_chicken",
+					"weight": 10,
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"min": 1.0,
+								"max": 2.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "minecraft:cooked_cod",
+					"weight": 10,
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"min": 1.0,
+								"max": 4.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "minecraft:cooked_chicken",
+					"weight": 10,
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"min": 1.0,
+								"max": 2.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:cola",
+					"weight": 10,
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"min": 2.0,
+								"max": 5.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:ultra_cola",
+					"weight": 20,
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"min": 1.0,
+								"max": 3.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:sea_king_meat",
+					"weight": 10,
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"min": 1.0,
+								"max": 4.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				}
+			]
+		}
+	]
+}

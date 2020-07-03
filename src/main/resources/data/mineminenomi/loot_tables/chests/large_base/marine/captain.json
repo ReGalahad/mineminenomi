@@ -1,0 +1,126 @@
+{
+	"type": "minecraft:chest",
+	"pools": [
+		{
+			"name": "mineminenomi:food",
+			"rolls": 1.0,
+			"entries": [
+				{
+					"type": "minecraft:item",
+					"name": "minecraft:porkchop",
+					"weight": 100,
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"min": 1.0,
+								"max": 3.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:cola",
+					"weight": 20,
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"min": 1.0,
+								"max": 2.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:ultra_cola",
+					"weight": 5
+				}
+			]
+		},
+		{
+			"name": "mineminenomi:weapons_and_riches",
+			"rolls": {
+				"min": 1.0,
+				"max": 2.0,
+				"type": "minecraft:uniform"
+			},
+			"entries": [
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:belly_pouch",
+					"weight": 100,
+					"functions": [
+						{
+							"function": "mineminenomi:set_belly_in_pouch",
+							"belly_range": {
+								"min": 10.0,
+								"max": 50.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:belly_pouch",
+					"weight": 80,
+					"functions": [
+						{
+							"function": "mineminenomi:set_belly_in_pouch",
+							"belly_range": {
+								"min": 50.0,
+								"max": 70.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:flintlock",
+					"weight": 80
+				},
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:kairoseki_bullet",
+					"weight": 80,
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"min": 5.0,
+								"max": 7.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:wanted_poster_package",
+					"weight": 50
+				},
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:den_den_mushi",
+					"weight": 55
+				},
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:wooden_box",
+					"weight": 10
+				},
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:iron_box",
+					"weight": 5
+				}							
+			]
+		}
+	]
+}
