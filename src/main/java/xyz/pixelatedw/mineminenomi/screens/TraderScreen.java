@@ -233,7 +233,7 @@ public class TraderScreen extends Screen
 		// Reduce the available stacks if its not infinite stock
 		if(!this.getSelectedStack().hasInfiniteStock())
 		{
-			int count = this.getSelectedStack().getCount() - 1;
+			int count = this.getSelectedStack().getCount() - this.wantedAmount;
 			
 			if(count <= 0)
 				this.trader.getTradingItems().remove(this.getSelectedStack());
