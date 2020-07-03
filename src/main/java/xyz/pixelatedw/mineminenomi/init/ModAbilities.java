@@ -227,10 +227,6 @@ import xyz.pixelatedw.mineminenomi.abilities.zou.IvoryStompAbility;
 import xyz.pixelatedw.mineminenomi.abilities.zou.TrunkShotAbility;
 import xyz.pixelatedw.mineminenomi.abilities.zou.ZouGuardPointAbility;
 import xyz.pixelatedw.mineminenomi.abilities.zou.ZouHeavyPointAbility;
-import xyz.pixelatedw.mineminenomi.abilities.zushi.AbareHimatsuriAbility;
-import xyz.pixelatedw.mineminenomi.abilities.zushi.JigokuTabiAbility;
-import xyz.pixelatedw.mineminenomi.abilities.zushi.MokoAbility;
-import xyz.pixelatedw.mineminenomi.abilities.zushi.SagariNoRyuseiAbility;
 import xyz.pixelatedw.mineminenomi.api.EnumFruitType;
 import xyz.pixelatedw.mineminenomi.events.passives.GasuPassiveEvents;
 import xyz.pixelatedw.mineminenomi.events.passives.GoroPassiveEvents;
@@ -251,19 +247,19 @@ import xyz.pixelatedw.wypi.debug.WyDebug;
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModAbilities
 {
+	public static final AkumaNoMiItem USHI_USHI_NO_MI_GIRAFFE = new AkumaNoMiItem("Ushi Ushi no Mi, Model Giraffe", 2, EnumFruitType.ZOAN, GiraffeHeavyPointAbility.INSTANCE, GiraffeWalkPointAbility.INSTANCE, BiganAbility.INSTANCE);
+	public static final AkumaNoMiItem MOGU_MOGU_NO_MI = new AkumaNoMiItem("Mogu Mogu no Mi", 2, EnumFruitType.ZOAN, MoguHeavyPointAbility.INSTANCE, MoguraBananaAbility.INSTANCE, MoguraTonpoAbility.INSTANCE);
+	public static final AkumaNoMiItem HITO_HITO_NO_MI = new AkumaNoMiItem("Hito Hito no Mi", 1, EnumFruitType.ZOAN);
+	public static final AkumaNoMiItem ZOU_ZOU_NO_MI = new AkumaNoMiItem("Zou Zou no Mi", 3, EnumFruitType.ZOAN, ZouGuardPointAbility.INSTANCE, ZouHeavyPointAbility.INSTANCE, TrunkShotAbility.INSTANCE, GreatStompAbility.INSTANCE, IvoryDartAbility.INSTANCE, IvoryStompAbility.INSTANCE);
+	public static final AkumaNoMiItem TORI_TORI_NO_MI_PHOENIX = new AkumaNoMiItem("Tori Tori no Mi, Model: Phoenix", 3, EnumFruitType.ZOAN, PhoenixAssaultPointAbility.INSTANCE, PhoenixFlyPointAbility.INSTANCE, PhoenixGoenAbility.INSTANCE, FlameOfRestorationAbility.INSTANCE, BlueFlamesOfResurrectionAbility.INSTANCE, TenseiNoSoenAbility.INSTANCE);
+	public static final AkumaNoMiItem USHI_USHI_NO_MI_BISON = new AkumaNoMiItem("Ushi Ushi no Mi, Model: Bison", 2, EnumFruitType.ZOAN, BisonHeavyPointAbility.INSTANCE, BisonWalkPointAbility.INSTANCE, FiddleBanffAbility.INSTANCE, KokuteiCrossAbility.INSTANCE);
 
 	public static final AkumaNoMiItem KACHI_KACHI_NO_MI = new AkumaNoMiItem("Kachi Kachi no Mi", 1, EnumFruitType.PARAMECIA, EvaporateAbility.INSTANCE, HotBoilingSpecialAbility.INSTANCE);
 	public static final AkumaNoMiItem DOA_DOA_NO_MI = new AkumaNoMiItem("Doa Doa no Mi", 2, EnumFruitType.PARAMECIA, DoorDoorAbility.INSTANCE, KaitenDoorAbility.INSTANCE, AirDoorAbility.INSTANCE);
-	public static final AkumaNoMiItem USHI_USHI_NO_MI_GIRAFFE = new AkumaNoMiItem("Ushi Ushi no Mi, Model Giraffe", 2, EnumFruitType.ZOAN, GiraffeHeavyPointAbility.INSTANCE, GiraffeWalkPointAbility.INSTANCE, BiganAbility.INSTANCE);
-	public static final AkumaNoMiItem MOGU_MOGU_NO_MI = new AkumaNoMiItem("Mogu Mogu no Mi", 2, EnumFruitType.ZOAN, MoguHeavyPointAbility.INSTANCE, MoguraBananaAbility.INSTANCE, MoguraTonpoAbility.INSTANCE);
 	public static final AkumaNoMiItem CHIYU_CHIYU_NO_MI = new AkumaNoMiItem("Chiyu Chiyu no Mi", 1, EnumFruitType.PARAMECIA, HealingTouchAbility.INSTANCE, ChiyupopoAbility.INSTANCE);
-	public static final AkumaNoMiItem HITO_HITO_NO_MI = new AkumaNoMiItem("Hito Hito no Mi", 1, EnumFruitType.ZOAN);
 	public static final AkumaNoMiItem SABI_SABI_NO_MI = new AkumaNoMiItem("Sabi Sabi no Mi", 1, EnumFruitType.PARAMECIA, RustTouchAbility.INSTANCE);
-	public static final AkumaNoMiItem ZOU_ZOU_NO_MI = new AkumaNoMiItem("Zou Zou no Mi", 3, EnumFruitType.ZOAN, ZouGuardPointAbility.INSTANCE, ZouHeavyPointAbility.INSTANCE, TrunkShotAbility.INSTANCE, GreatStompAbility.INSTANCE, IvoryDartAbility.INSTANCE, IvoryStompAbility.INSTANCE);
 	public static final AkumaNoMiItem YOMI_YOMI_NO_MI = new AkumaNoMiItem("Yomi Yomi no Mi", 3, EnumFruitType.PARAMECIA, SoulParadeAbility.INSTANCE, KasuriutaFubukiGiriAbility.INSTANCE, YomiNoReikiAbility.INSTANCE);
 	public static final AkumaNoMiItem BAKU_BAKU_NO_MI = new AkumaNoMiItem("Baku Baku no Mi", 1, EnumFruitType.PARAMECIA, BakuMunchAbility.INSTANCE, BeroCannonAbility.INSTANCE, BakuTsuihoAbility.INSTANCE);
-	public static final AkumaNoMiItem TORI_TORI_NO_MI_PHOENIX = new AkumaNoMiItem("Tori Tori no Mi, Model: Phoenix", 3, EnumFruitType.ZOAN, PhoenixAssaultPointAbility.INSTANCE, PhoenixFlyPointAbility.INSTANCE, PhoenixGoenAbility.INSTANCE, FlameOfRestorationAbility.INSTANCE, BlueFlamesOfResurrectionAbility.INSTANCE, TenseiNoSoenAbility.INSTANCE);
-	public static final AkumaNoMiItem USHI_USHI_NO_MI_BISON = new AkumaNoMiItem("Ushi Ushi no Mi, Model: Bison", 2, EnumFruitType.ZOAN, BisonHeavyPointAbility.INSTANCE, BisonWalkPointAbility.INSTANCE, FiddleBanffAbility.INSTANCE, KokuteiCrossAbility.INSTANCE);
 	public static final AkumaNoMiItem HORU_HORU_NO_MI = new AkumaNoMiItem("Horu Horu no Mi", 2, EnumFruitType.PARAMECIA, OnnaHormoneAbility.INSTANCE, ChiyuHormoneAbility.INSTANCE, TensionHormoneAbility.INSTANCE, GanmenSeichoHormoneAbility.INSTANCE);
 	public static final AkumaNoMiItem KILO_KILO_NO_MI = new AkumaNoMiItem("Kilo Kilo no Mi", 2, EnumFruitType.PARAMECIA, KiloPress1Ability.INSTANCE, KiloPress10000Ability.INSTANCE);
 	public static final AkumaNoMiItem GOE_GOE_NO_MI = new AkumaNoMiItem("Goe Goe no Mi", 1, EnumFruitType.PARAMECIA, TodorokiAbility.INSTANCE);
@@ -272,7 +268,6 @@ public class ModAbilities
 	public static final AkumaNoMiItem SUPA_SUPA_NO_MI = new AkumaNoMiItem("Supa Supa no Mi", 2, EnumFruitType.PARAMECIA, SpiderAbility.INSTANCE, SparClawAbility.INSTANCE, SpiralHollowAbility.INSTANCE, SparklingDaisyAbility.INSTANCE, AtomicSpurtAbility.INSTANCE);
 	public static final AkumaNoMiItem HORO_HORO_NO_MI = new AkumaNoMiItem("Horo Horo no Mi", 2, EnumFruitType.PARAMECIA, NegativeHollowAbility.INSTANCE, MiniHollowAbility.INSTANCE, TokuHollowAbility.INSTANCE, YutaiRidatsuAbility.INSTANCE);
 	public static final AkumaNoMiItem ITO_ITO_NO_MI = new AkumaNoMiItem("Ito Ito no Mi", 3, EnumFruitType.PARAMECIA, ParasiteAbility.INSTANCE, SoraNoMichiAbility.INSTANCE, TamaitoAbility.INSTANCE, OverheatAbility.INSTANCE, KumoNoSugakiAbility.INSTANCE, TorikagoAbility.INSTANCE, BlackKnightAbility.INSTANCE);
-	public static final AkumaNoMiItem ZUSHI_ZUSHI_NO_MI = new AkumaNoMiItem("Zushi Zushi no Mi", 2, EnumFruitType.PARAMECIA, JigokuTabiAbility.INSTANCE, SagariNoRyuseiAbility.INSTANCE, MokoAbility.INSTANCE, AbareHimatsuriAbility.INSTANCE);
 	public static final AkumaNoMiItem BARI_BARI_NO_MI = new AkumaNoMiItem("Bari Bari no Mi", 1, EnumFruitType.PARAMECIA, BarrierAbility.INSTANCE, BarrierBallAbility.INSTANCE, BarrierCrashAbility.INSTANCE, BariBariNoPistolAbility.INSTANCE, BarrierbilityStairsAbility.INSTANCE);
 	public static final AkumaNoMiItem DOKU_DOKU_NO_MI = new AkumaNoMiItem("Doku Doku no Mi", 2, EnumFruitType.PARAMECIA, HydraAbility.INSTANCE, ChloroBallAbility.INSTANCE, DokuFuguAbility.INSTANCE, VenomRoadAbility.INSTANCE, DokuGumoAbility.INSTANCE, VenomDemonAbility.INSTANCE);
 	public static final AkumaNoMiItem DORU_DORU_NO_MI = new AkumaNoMiItem("Doru Doru no Mi", 2, EnumFruitType.PARAMECIA, CandleWallAbility.INSTANCE, CandleHouseAbility.INSTANCE, DoruDoruArtsMoriAbility.INSTANCE, DoruDoruArtsKenAbility.INSTANCE, CandleLockAbility.INSTANCE,DoruDoruArtsPickaxeAbility.INSTANCE, DoruDoruBallAbility.INSTANCE, DoruDoruNoYakataAbility.INSTANCE);

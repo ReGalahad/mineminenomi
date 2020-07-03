@@ -67,9 +67,13 @@ public class ModItems
 
 	// JSON Predicates
 	public static final JSONPredicateObject FILLED_PREDICATE = new JSONPredicateObject("filled", new ImmutablePair("filled", 1));
-	
+	public static final JSONPredicateObject SIZE_0_PREDICATE = new JSONPredicateObject("0", new ImmutablePair("size", 0));
+	public static final JSONPredicateObject SIZE_1_PREDICATE = new JSONPredicateObject("1", new ImmutablePair("size", 1));
+	public static final JSONPredicateObject SIZE_2_PREDICATE = new JSONPredicateObject("2", new ImmutablePair("size", 2));
+
 	// JSON 3D Custom Models
 	public static final JSONModelSimple3DItem FILLED_CUP_MODEL = new JSONModelSimple3DItem("sake_cup", FILLED_PREDICATE).setThirdPersonRotations(0, 0, 0);
+	public static final JSONModelSimple3DItem SIZE_POUCH_MODEL = new JSONModelSimple3DItem("belly_pouch", SIZE_0_PREDICATE, SIZE_1_PREDICATE, SIZE_2_PREDICATE);
 
 	static
 	{
@@ -79,7 +83,7 @@ public class ModItems
 		WyRegistry.registerItem(SHADOW, "Shadow");
 		WyRegistry.registerItem(KEY, "Key");
 		WyRegistry.registerItem(CHARACTER_CREATOR, "Character Creator");
-		WyRegistry.registerItem(BELLY_POUCH, "Belly Pouch");
+		WyRegistry.registerItem(BELLY_POUCH, "Belly Pouch", SIZE_POUCH_MODEL);
 		WyRegistry.registerItem(SEA_KING_MEAT, "Sea King Meat");
 		WyRegistry.registerItem(COLA, "Cola");
 		WyRegistry.registerItem(ULTRA_COLA, "Ultra Cola");

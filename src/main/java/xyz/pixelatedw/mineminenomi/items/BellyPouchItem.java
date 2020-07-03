@@ -7,11 +7,13 @@ import javax.annotation.Nullable;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -27,10 +29,23 @@ import xyz.pixelatedw.wypi.network.WyNetwork;
 
 public class BellyPouchItem extends Item
 {
-
+	private IItemPropertyGetter sizeProperty = (itemStack, world, livingEntity) ->
+	{
+		int belly = itemStack.getOrCreateTag().getInt("belly");
+		int size = 0;
+		
+		if(belly > 20 && belly <= 70)
+			size = 1;
+		else if(belly > 70)
+			size = 2;
+		
+		return size;
+	};
+	
 	public BellyPouchItem()
 	{
 		super(new Properties().group(ModCreativeTabs.MISC).maxStackSize(1));
+		this.addPropertyOverride(new ResourceLocation("size"), this.sizeProperty);
 	}
 
 	@Override
