@@ -4,7 +4,6 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.BowItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Stats;
@@ -21,15 +20,15 @@ public class RepeaterPopGreenBowItem extends PopGreenBowItem {
 
 	public RepeaterPopGreenBowItem(double weightScale) {
 		super(weightScale);
-		requiredTime = (float) (30 * weightScale);
+		this.requiredTime = (float) (30 * weightScale);
 		this.properties.remove(new ResourceLocation("pull"));
 		this.addPropertyOverride(new ResourceLocation("pull"), (p_210310_0_, p_210310_1_, p_210310_2_) -> {
 	         if (p_210310_2_ == null) {
 	             return 0.0F;
 	          } else {
 	        	  float val1 = p_210310_0_.getUseDuration() - p_210310_2_.getItemInUseCount();
-	        	  float val2 = (val1 % requiredTime) + 1;
-	        	  float val = val2 / requiredTime;
+	        	  float val2 = (val1 % this.requiredTime) + 1;
+	        	  float val = val2 / this.requiredTime;
 	             return !(p_210310_2_.getActiveItemStack().getItem() instanceof BowItem) ? 0.0F : val;
 	          }
 	       });
@@ -40,8 +39,8 @@ public class RepeaterPopGreenBowItem extends PopGreenBowItem {
 	public void onUsingTick(ItemStack stack, LivingEntity player, int count) {
 		if(player instanceof PlayerEntity) {
 			PlayerEntity p = (PlayerEntity) player;
-      	  float val = count  % requiredTime;
-				if(val >= requiredTime - 1 && this.isBeingUsed(stack)) {
+      	  float val = count  % this.requiredTime;
+				if(val >= this.requiredTime - 1 && this.isBeingUsed(stack)) {
 					boolean flag = p.abilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, stack) > 0;
 
 					ItemStack arrowStack = p.findAmmo(stack);

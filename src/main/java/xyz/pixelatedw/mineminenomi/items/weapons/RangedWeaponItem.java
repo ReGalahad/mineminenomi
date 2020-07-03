@@ -10,7 +10,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
@@ -32,7 +31,7 @@ public abstract class RangedWeaponItem extends BowItem{
 	         if (p_210310_2_ == null) {
 	             return 0.0F;
 	          } else {
-	             return !(p_210310_2_.getActiveItemStack().getItem() instanceof BowItem) ? 0.0F : (float)(p_210310_0_.getUseDuration() - p_210310_2_.getItemInUseCount()) / requiredTime;
+	             return !(p_210310_2_.getActiveItemStack().getItem() instanceof BowItem) ? 0.0F : (p_210310_0_.getUseDuration() - p_210310_2_.getItemInUseCount()) / requiredTime;
 	          }
 	       });
 	}
@@ -76,7 +75,7 @@ public abstract class RangedWeaponItem extends BowItem{
 					world.playSound((PlayerEntity) null, playerentity.posX, playerentity.posY, playerentity.posZ, SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
 					playerentity.addStat(Stats.ITEM_USED.get(this));
 					if(!world.isRemote) {
-					itemStack.attemptDamageItem((int) ((Math.round(weightScale * 10) - 10) / 2), world.rand, (ServerPlayerEntity) playerentity);
+					itemStack.attemptDamageItem((int) ((Math.round(this.weightScale * 10) - 10) / 2), world.rand, (ServerPlayerEntity) playerentity);
 					}
 					}
 			}

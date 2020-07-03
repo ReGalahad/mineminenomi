@@ -25,12 +25,12 @@ public class RepeaterGunItem extends GunItem{
 	private int updateValue;
 	public RepeaterGunItem(int maxCooldown, int bulletSpeed, int bulletAccuracy, float weightScale) {
 		super(maxCooldown, bulletSpeed, bulletAccuracy, weightScale);
-		updateValue = (int) ((weightScale + (weightScale / 2)) * 10);
+		this.updateValue = (int) ((weightScale + (weightScale / 2)) * 10);
 	}
 
 	@Override
 	public void onUsingTick(ItemStack stack, LivingEntity player, int count) {
-		if(count % updateValue == 0 && this.isBeingUsed(stack)) {
+		if(count % this.updateValue == 0 && this.isBeingUsed(stack)) {
 
 			PlayerEntity playerIn = (PlayerEntity) player;
 			IAbilityData abilityProps = AbilityDataCapability.get(player);
@@ -61,9 +61,9 @@ public class RepeaterGunItem extends GunItem{
 			boolean loadedBullets = this.getLoadedBullets(stack) > 0;
 			if(!loadedBullets) {
 				if(!player.world.isRemote()) {
-				playerIn.getCooldownTracker().setCooldown(this, (int) (80 * (2 - weightScale)));
+				playerIn.getCooldownTracker().setCooldown(this, (int) (80 * (2 - this.weightScale)));
 				} else {
-					playerIn.getCooldownTracker().setCooldown(this, (int) (80 * (2 - weightScale) + 17));
+					playerIn.getCooldownTracker().setCooldown(this, (int) (80 * (2 - this.weightScale) + 17));
 				}
 				if(!playerIn.world.isRemote()) {
 				this.reloadBullets(stack, playerIn);
@@ -103,16 +103,16 @@ public class RepeaterGunItem extends GunItem{
 				this.decrementBullets(stack);
 				AbilityProjectileEntity proj = null;
 				if (bulletType == ModItems.BULLET)
-					proj = new NormalBulletProjectile(player.world, player, weightScale);
+					proj = new NormalBulletProjectile(player.world, player, this.weightScale);
 				else if (bulletType == ModItems.KAIROSEKI_BULLET)
-					proj = new KairosekiBulletProjectile(player.world, player, weightScale);
+					proj = new KairosekiBulletProjectile(player.world, player, this.weightScale);
 				proj.setDamage((float) (proj.getDamage() * this.weightScale));
 			
 				player.world.addEntity(proj);
 				proj.shoot(player, player.rotationPitch, player.rotationYaw, 0, this.bulletSpeed, this.bulletAccuracy);
 				
 				if(!playerIn.abilities.isCreativeMode) {
-					stack.attemptDamageItem((int) ((Math.round(weightScale * 10) - 10) / 2), playerIn.world.rand, (ServerPlayerEntity) playerIn);
+					stack.attemptDamageItem((int) ((Math.round(this.weightScale * 10) - 10) / 2), playerIn.world.rand, (ServerPlayerEntity) playerIn);
 
 				
 			}

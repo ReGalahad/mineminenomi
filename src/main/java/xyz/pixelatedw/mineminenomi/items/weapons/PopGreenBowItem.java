@@ -22,12 +22,12 @@ public class PopGreenBowItem extends RangedWeaponItem {
 	}
 
 	@Override
-	Item getBulletItem() {
+	public Item getBulletItem() {
 		return ModItems.POP_GREEN;
 	}
 
 	@Override
-	AbilityProjectileEntity getProjectile(World w, LivingEntity e) {
+	public AbilityProjectileEntity getProjectile(World w, LivingEntity e) {
 		return new PopGreenProjectile(w, e, weightScale);
 	}
 
