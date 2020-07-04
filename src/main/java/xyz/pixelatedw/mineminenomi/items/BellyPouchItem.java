@@ -34,9 +34,9 @@ public class BellyPouchItem extends Item
 		int belly = itemStack.getOrCreateTag().getInt("belly");
 		int size = 0;
 		
-		if(belly > 20 && belly <= 70)
+		if(belly > 100 && belly <= 500)
 			size = 1;
-		else if(belly > 70)
+		else if(belly > 500)
 			size = 2;
 		
 		return size;

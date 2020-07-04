@@ -43,6 +43,26 @@
 			]
 		},
 		{
+			"name": "mineminenomi:captains_gold",
+			"rolls": 1.0,
+			"entries": [
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:belly_pouch",
+					"functions": [
+						{
+							"function": "mineminenomi:set_belly_in_pouch",
+							"belly_range": {
+								"min": 50.0,
+								"max": 70.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "mineminenomi:weapons_and_riches",
 			"rolls": {
 				"min": 1.0,
@@ -58,8 +78,8 @@
 						{
 							"function": "mineminenomi:set_belly_in_pouch",
 							"belly_range": {
-								"min": 10.0,
-								"max": 50.0,
+								"min": 30.0,
+								"max": 70.0,
 								"type": "minecraft:uniform"
 							}
 						}
@@ -73,8 +93,8 @@
 						{
 							"function": "mineminenomi:set_belly_in_pouch",
 							"belly_range": {
-								"min": 50.0,
-								"max": 70.0,
+								"min": 70.0,
+								"max": 100.0,
 								"type": "minecraft:uniform"
 							}
 						}
@@ -93,8 +113,8 @@
 						{
 							"function": "minecraft:set_count",
 							"count": {
-								"min": 5.0,
-								"max": 7.0,
+								"min": 7.0,
+								"max": 10.0,
 								"type": "minecraft:uniform"
 							}
 						}
@@ -109,6 +129,11 @@
 					"type": "minecraft:item",
 					"name": "mineminenomi:den_den_mushi",
 					"weight": 55
+				},
+				{
+					"type": "minecraft:item",
+					"name": "mineminenomi:tonfa",
+					"weight": 20
 				},
 				{
 					"type": "minecraft:item",

@@ -26,6 +26,11 @@
 				},
 				{
 					"type": "minecraft:item",
+					"name": "mineminenomi:tonfa",
+					"weight": 70
+				},
+				{
+					"type": "minecraft:item",
 					"name": "mineminenomi:mace",
 					"weight": 30
 				}
@@ -34,8 +39,8 @@
 		{
 			"name": "mineminenomi:range_weapons",
 			"rolls": {
-				"min": 1.0,
-				"max": 3.0,
+				"min": 0.0,
+				"max": 2.0,
 				"type": "minecraft:uniform"
 			},
 			"entries": [
@@ -118,11 +123,7 @@
 		},
 		{
 			"name": "mineminenomi:riches",
-			"rolls": {
-				"min": 1.0,
-				"max": 2.0,
-				"type": "minecraft:uniform"
-			},
+			"rolls": 1.0,
 			"entries": [
 				{
 					"type": "minecraft:item",
@@ -133,7 +134,7 @@
 							"function": "mineminenomi:set_belly_in_pouch",
 							"belly_range": {
 								"min": 10.0,
-								"max": 50.0,
+								"max": 20.0,
 								"type": "minecraft:uniform"
 							}
 						}
@@ -142,7 +143,7 @@
 				{
 					"type": "minecraft:item",
 					"name": "mineminenomi:belly_pouch",
-					"weight": 90,
+					"weight": 80,
 					"functions": [
 						{
 							"function": "mineminenomi:set_belly_in_pouch",
@@ -157,28 +158,13 @@
 				{
 					"type": "minecraft:item",
 					"name": "mineminenomi:belly_pouch",
-					"weight": 90,
+					"weight": 20,
 					"functions": [
 						{
 							"function": "mineminenomi:set_belly_in_pouch",
 							"belly_range": {
-								"min": 10.0,
-								"max": 40.0,
-								"type": "minecraft:uniform"
-							}
-						}
-					]
-				},
-				{
-					"type": "minecraft:item",
-					"name": "mineminenomi:belly_pouch",
-					"weight": 30,
-					"functions": [
-						{
-							"function": "mineminenomi:set_belly_in_pouch",
-							"belly_range": {
-								"min": 50.0,
-								"max": 100.0,
+								"min": 20.0,
+								"max": 60.0,
 								"type": "minecraft:uniform"
 							}
 						}

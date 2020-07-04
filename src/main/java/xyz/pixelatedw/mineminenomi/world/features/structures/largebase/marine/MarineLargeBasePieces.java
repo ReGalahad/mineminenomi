@@ -142,7 +142,7 @@ public class MarineLargeBasePieces
 		@Override
 		protected void handleDataMarker(String function, BlockPos pos, IWorld world, Random rand, MutableBoundingBox sbb)
 		{
-			if (function.equals("captain_chest"))
+			if (function.equals("captain_chest") && WyHelper.randomDouble() < 0.75)
 			{
 				world.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
 				TileEntity tileentity = world.getTileEntity(pos.down());
@@ -160,7 +160,7 @@ public class MarineLargeBasePieces
 					((ChestTileEntity) tileentity).setLootTable(ModLootTables.MARINE_LARGE_BASE_FOOD_CHEST, rand.nextLong());
 				}
 			}
-			else if (function.equals("generic_chest"))
+			else if (function.equals("generic_chest") && WyHelper.randomDouble() < 0.5)
 			{
 				world.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
 				TileEntity tileentity = world.getTileEntity(pos.down());
@@ -224,7 +224,7 @@ public class MarineLargeBasePieces
 			
 			BlockPos blockpos2 = this.templatePosition;
 			int i = world.getHeight(Heightmap.Type.WORLD_SURFACE_WG, this.centerPosition.getX(), this.centerPosition.getZ());
-			this.templatePosition = this.templatePosition.add(0, i - 90, 0);
+			this.templatePosition = this.templatePosition.add(0, i - 90 - 1, 0);
 
 			boolean flag = super.addComponentParts(world, random, bb, chunkPos);
 			

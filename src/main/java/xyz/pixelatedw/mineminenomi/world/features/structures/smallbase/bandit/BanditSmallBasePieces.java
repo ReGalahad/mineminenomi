@@ -70,7 +70,7 @@ public class BanditSmallBasePieces
 
 	public static void addComponents(TemplateManager templateManager, BlockPos pos, List<StructurePiece> components)
 	{
-		components.add(new Piece(templateManager, HOUSE, pos, BlockIgnoreStructureProcessor.AIR_AND_STRUCTURE_BLOCK));
+		components.add(new Piece(templateManager, HOUSE, pos, BlockIgnoreStructureProcessor.STRUCTURE_BLOCK));
 		components.add(new Piece(templateManager, TUNNEL, pos, BlockIgnoreStructureProcessor.STRUCTURE_BLOCK));
 		components.add(new Piece(templateManager, HALLWAY, pos, BlockIgnoreStructureProcessor.STRUCTURE_BLOCK));
 		components.add(new Piece(templateManager, LOUNGE, pos, BlockIgnoreStructureProcessor.STRUCTURE_BLOCK));
