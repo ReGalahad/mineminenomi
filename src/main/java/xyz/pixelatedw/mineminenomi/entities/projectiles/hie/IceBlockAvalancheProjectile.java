@@ -106,8 +106,7 @@ public class IceBlockAvalancheProjectile extends AbilityProjectileEntity
 		{
 			Vec3d speed = WyHelper.propulsion(target, 1, 1);
 			target.setMotion(-speed.x, 0.5, -speed.z);
-			target.attackEntityFrom(this.causeAbilityProjectileDamage(), this.getDamage() / 2);
-			
+			target.attackEntityFrom(this.source, this.getDamage() / 2);
 			this.triggerEffects(target);
 		}
 		

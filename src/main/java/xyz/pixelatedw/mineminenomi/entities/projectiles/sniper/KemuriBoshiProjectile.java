@@ -64,8 +64,8 @@ public class KemuriBoshiProjectile extends AbilityProjectileEntity
 		{
 			super.tick();
 			if(!this.world.isRemote)
-			{				
-				for(LivingEntity target : WyHelper.<LivingEntity>getEntitiesNear(this.getPosition(), this.world, 5))
+			{
+				for(LivingEntity target : WyHelper.<LivingEntity>getEntitiesNear(this.getPosition(), this.world, 6))
 					target.addPotionEffect(new EffectInstance(Effects.POISON, 100, 1));
 				
 				if(this.ticksExisted % 2 == 0)

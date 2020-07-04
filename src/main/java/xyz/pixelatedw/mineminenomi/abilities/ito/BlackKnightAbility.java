@@ -16,8 +16,8 @@ public class BlackKnightAbility extends ContinuousAbility implements IParallelCo
 	public BlackKnightAbility()
 	{
 		super("Black Knight", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(1);
-		this.setThreshold(120);
+		this.setMaxCooldown(10);
+		this.setThreshold(100);
 		this.setDescription("Creates a clone of himself made entirely out of compressed strings.");
 
 		this.onStartContinuityEvent = this::onStartContinuityEvent;
@@ -26,7 +26,6 @@ public class BlackKnightAbility extends ContinuousAbility implements IParallelCo
 
 	private boolean onStartContinuityEvent(PlayerEntity player)
 	{
-		this.setMaxCooldown(1);
 		this.knight = new BlackKnightEntity(player.world);
 		this.knight.setPositionAndRotation(player.posX, player.posY, player.posZ, player.rotationYaw, player.rotationPitch);
 		this.knight.setOwner(player.getUniqueID());

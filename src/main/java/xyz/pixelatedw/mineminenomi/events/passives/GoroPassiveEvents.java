@@ -43,11 +43,11 @@ public class GoroPassiveEvents {
         if (ability == null || !devilFruitProps.getDevilFruit().equals("goro_goro") || entity.world.isRemote)
             return;
 
-        if (!ability.isOnCooldown()) {
+        if (!ability.isOnCooldown() && !event.getSource().equals(DamageSource.OUT_OF_WORLD)) {
             if (entity.getHealth() - event.getAmount() <= 0) {
                 event.setCanceled(true);
                 ability.startCooldown(entity);
-                entity.setHealth(entity.getMaxHealth() / 20);
+                entity.setHealth(entity.getMaxHealth() / 10);
                 entity.hurtTime = 300;
             }
         }

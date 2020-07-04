@@ -53,6 +53,8 @@ public class AbilityProjectileEntity extends ThrowableEntity
 	public IOnBlockImpact onBlockImpactEvent = (hit) -> {};
 	public IOnTick onTickEvent = () -> {};
 	public IWithEffects withEffects = () -> { return new EffectInstance[0]; };
+	public DamageSource source = new IndirectEntityDamageSource("ability_projectile", this, this.getThrower()).setProjectile();
+
 
 	public AbilityProjectileEntity(EntityType type, World world)
 	{
@@ -158,8 +160,13 @@ public class AbilityProjectileEntity extends ThrowableEntity
 					if (MinecraftForge.EVENT_BUS.post(event))
 						return;
 
-					if(!this.entityDamaged)
-						this.entityDamaged = hitEntity.attackEntityFrom(this.causeAbilityProjectileDamage(), this.damage);
+					if(!this.entityDamaged) {
+						float reduction = getAbsoluteDamage();
+						this.entityDamaged = hitEntity.attackEntityFrom(this.source, this.damage - reduction);
+						hitEntity.hurtTime = 0;
+						hitEntity.hurtResistantTime = 0;
+						hitEntity.attackEntityFrom(this.source, reduction);
+					}
 
 					this.triggerEffects(hitEntity);
 
@@ -184,6 +191,8 @@ public class AbilityProjectileEntity extends ThrowableEntity
 
 					if (this.changeHurtTime)
 						hitEntity.hurtResistantTime = this.hurtTime;
+					else
+						hitEntity.hurtResistantTime = 20;
 				}
 			}
 			else if (hit.getType() == RayTraceResult.Type.BLOCK)
@@ -204,6 +213,13 @@ public class AbilityProjectileEntity extends ThrowableEntity
 		}
 	}
 
+	public float getAbsoluteDamage() {
+		float reduction = (float) (this.damage * (0.5 + this.damage / 250));
+		if(reduction > this.damage)
+			reduction = this.damage;
+		return reduction;
+	}
+
 	public void triggerEffects(LivingEntity hitEntity)
 	{
 		if (this.withEffects.getEffects().length > 0)
@@ -215,11 +231,6 @@ public class AbilityProjectileEntity extends ThrowableEntity
 					((ServerPlayerEntity) this.getThrower()).connection.sendPacket(new SPlayEntityEffectPacket(hitEntity.getEntityId(), instance));
 			}
 		}
-	}
-	
-	public DamageSource causeAbilityProjectileDamage()
-	{
-		return new IndirectEntityDamageSource("ability_projectile", this, this.getThrower()).setProjectile();
 	}
 
 	@Override

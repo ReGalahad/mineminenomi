@@ -45,7 +45,6 @@ public class RenpatsuNamariBoshiProjectile extends AbilityProjectileEntity
 		explosion.setFireAfterExplosion(false);
 		explosion.setSmokeParticles(new CommonExplosionParticleEffect(4));
 		explosion.setDamageEntities(true);
-		explosion.setDamageSource(this.causeAbilityProjectileDamage());
 		explosion.doExplosion();
 	}
 }

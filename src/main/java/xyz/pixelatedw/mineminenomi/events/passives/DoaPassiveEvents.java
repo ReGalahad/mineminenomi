@@ -2,13 +2,18 @@ package xyz.pixelatedw.mineminenomi.events.passives;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.monster.ZombiePigmanEntity;
+import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityViewRenderEvent.CameraSetup;
 import net.minecraftforge.client.event.RenderLivingEvent;
+import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.LeftClickBlock;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
@@ -136,6 +141,20 @@ public class DoaPassiveEvents
 		if(Minecraft.getInstance().gameSettings.thirdPersonView == 0)	
 			event.setYaw((player.ticksExisted * 10) % 360);
 	}
+
+	@SubscribeEvent
+	public static void onEntityTargetedEvent(LivingSetAttackTargetEvent event) {
+		if (!(event.getTarget() instanceof PlayerEntity) || event.getTarget() instanceof FakePlayer || !(event.getEntity() instanceof MobEntity))
+			return;
+
+		if (!isInsideDoor((PlayerEntity) event.getTarget())) return;
+
+		MobEntity entity = (MobEntity) event.getEntity();
+
+		entity.setAttackTarget(null);
+		entity.setRevengeTarget(null);
+	}
+
 	
 	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent

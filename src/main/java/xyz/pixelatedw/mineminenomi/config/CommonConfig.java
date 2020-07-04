@@ -27,6 +27,7 @@ public class CommonConfig
 	private EnumValue keepStatsAfterDeath;
 	private Map<String, ForgeConfigSpec.BooleanValue> statsToKeep;
 	private List<String> bannedAbilities;
+	private DoubleValue hakiExpMultiplier;
 	private EnumValue haoshokuUnlockLogic;
 
 	private BooleanValue logiaInvulnerability;
@@ -126,6 +127,7 @@ public class CommonConfig
 			this.dorikiRewardMultiplier = builder.comment("Multiplies any doriki gained by this amount; 1 by default, min: 0, max: 10").defineInRange("Doriki Reward Multiplier", 1.0, 0.0, 10.0);
 			this.minimumDorikiPerKill = builder.comment("Guarantees a minimum of 1 doriki per kill; false by default").define("Minimum Doriki per Kill", false);
 			this.abilityFraudChecks = builder.comment("Runs a check for all abilities on a player to remove dupes or suspicious abilities when the player joins the world; true by default").define("Ability Fraud Checks", true);
+			this.hakiExpMultiplier = builder.comment("Multiplies any haki gained by this amount; 1 by default, min: 0, max: 10").defineInRange("Haki Exp Multiplier", 1.0, 0.0, 10.0);
 			this.haoshokuUnlockLogic = builder.comment("Responsible for how player unlock Haoshoku Haki; \n NONE - Haoshoku Haki cannot be unlocked naturally \n RANDOM - Only a few chosen ones receive it when they spawn \n EXPERIENCE - Will unlock based on the total amount of Haki experience a player has").defineEnum("Haoshoku Haki Unlock Logic", HaoshokuUnlockLogic.EXPERIENCE, HaoshokuUnlockLogic.values());
 
 			this.bannedAbilities = new ArrayList<String>();
@@ -376,6 +378,11 @@ public class CommonConfig
 	public double getDorikiRewardMultiplier()
 	{
 		return this.dorikiRewardMultiplier.get();
+	}
+
+	public double getHakiExpMultiplier()
+	{
+		return this.hakiExpMultiplier.get();
 	}
 
 	public boolean isUpdateMessageEnabled()

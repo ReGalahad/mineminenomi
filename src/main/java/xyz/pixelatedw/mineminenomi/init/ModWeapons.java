@@ -38,8 +38,8 @@ public class ModWeapons
 	public static final CoreSwordItem SCISSORS = new ScissorsItem();
 	public static final CoreSwordItem KIKOKU = new CoreSwordItem(8, 500);
 	public static final CoreSwordItem KIRIBACHI = new CoreSwordItem(6, 500);
-	public static final CoreSwordItem YORU = new CoreSwordItem(10, 500).setSwordSpeed(-2.7);
-	public static final CoreSwordItem MURAKUMOGIRI = new CoreSwordItem(8, 500);
+	public static final CoreSwordItem YORU = new CoreSwordItem(12, 800).setSwordSpeed(-2.2);
+	public static final CoreSwordItem MURAKUMOGIRI = new CoreSwordItem(14, 800).setSwordSpeed(-2.8);
 	public static final CoreSwordItem HOOK = new CoreSwordItem(6, 500).setIsPoisonous();
 	public static final UmbrellaItem UMBRELLA = new UmbrellaItem();
 	public static final CoreSwordItem JITTE = new CoreSwordItem(7, 500).setBlunt();
