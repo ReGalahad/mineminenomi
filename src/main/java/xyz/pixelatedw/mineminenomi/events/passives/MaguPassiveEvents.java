@@ -31,7 +31,7 @@ public class MaguPassiveEvents
 
 	public static boolean maguDamage(LivingEntity target, LivingEntity attacker) {
 		attacker.setFire(8);
-		attacker.attackEntityFrom(DamageSource.causePlayerDamage((PlayerEntity) target), 5);
+		attacker.attackEntityFrom(DamageSource.LAVA, 5);
 		return true;
 	}
 
@@ -57,7 +57,6 @@ public class MaguPassiveEvents
 			else
 				player.setMotion(vec3d);
 		}
-
 	}
 
 	@OnlyIn(Dist.CLIENT)

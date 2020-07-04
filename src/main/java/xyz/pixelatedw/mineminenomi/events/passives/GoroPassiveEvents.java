@@ -26,7 +26,7 @@ public class GoroPassiveEvents {
         boolean attackerHasGomu = DevilFruitHelper.hasDevilFruit(attacker, ModAbilities.GOMU_GOMU_NO_MI);
         if(!attackerHasGomu)
         {
-            attacker.attackEntityFrom(DamageSource.causePlayerDamage((PlayerEntity) target), 8);
+            attacker.attackEntityFrom(DamageSource.LIGHTNING_BOLT, 8);
             return true;
         }
         return false;
