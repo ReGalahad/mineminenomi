@@ -6,10 +6,8 @@ import java.util.Map;
 import java.util.Random;
 
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Lists;
 
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.EntityType;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ChestTileEntity;
 import net.minecraft.tileentity.TileEntity;
@@ -30,7 +28,6 @@ import net.minecraft.world.gen.feature.template.Template;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import xyz.pixelatedw.mineminenomi.api.helpers.StructuresHelper;
 import xyz.pixelatedw.mineminenomi.api.helpers.StructuresHelper.StructureFaction;
-import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.mineminenomi.init.ModFeatures;
 import xyz.pixelatedw.mineminenomi.init.ModLootTables;
 import xyz.pixelatedw.wypi.APIConfig;
@@ -44,13 +41,6 @@ public class MarineCampPieces
 	private static final Map<ResourceLocation, BlockPos> CENTER_OFFSET = ImmutableMap.of(SMALL_TENT, new BlockPos(3, 0, 3), LERGE_TENT, new BlockPos(0, 0, 0), FIRE_PLACE, new BlockPos(0, 0, 0));
 
 	//private static final Map<ResourceLocation, BlockState> DEBUG_BLOCKS = ImmutableMap.of(SMALL_TENT, Blocks.EMERALD_BLOCK.getDefaultState(), LERGE_TENT, Blocks.DIAMOND_BLOCK.getDefaultState(), FIRE_PLACE, Blocks.COAL_BLOCK.getDefaultState());
-	
-	private static final List<EntityType> GRUNT_TYPES = Lists.newArrayList(ModEntities.MARINE_WITH_SWORD, ModEntities.MARINE_WITH_GUN);
-	
-	private static EntityType chooseGruntType()
-	{
-		return GRUNT_TYPES.get((int) WyHelper.randomWithRange(0, GRUNT_TYPES.size() - 1));
-	}
 	
 	// Setting up the structure with a camp fire (center piece), a minimum of 4 small tents with 2 additional ones and 1 large tent, with 1 additional one.
 	// Additional tents are based on a random value

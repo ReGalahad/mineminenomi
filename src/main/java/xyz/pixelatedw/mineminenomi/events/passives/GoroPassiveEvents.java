@@ -24,7 +24,8 @@ public class GoroPassiveEvents {
 
     public static boolean goroDamage(LivingEntity target, LivingEntity attacker) {
         boolean attackerHasGomu = DevilFruitHelper.hasDevilFruit(attacker, ModAbilities.GOMU_GOMU_NO_MI);
-        if(!attackerHasGomu) {
+        if(!attackerHasGomu)
+        {
             attacker.attackEntityFrom(DamageSource.causePlayerDamage((PlayerEntity) target), 8);
             return true;
         }
@@ -35,22 +36,22 @@ public class GoroPassiveEvents {
     public static void livingDamage(LivingDamageEvent event) {
         if(!(event.getEntity() instanceof PlayerEntity)) return;
 
-        PlayerEntity entity = (PlayerEntity) event.getEntityLiving();
-        IDevilFruit devilFruitProps = DevilFruitCapability.get(entity);
-        IAbilityData AbilityProps = AbilityDataCapability.get(entity);
+        PlayerEntity player = (PlayerEntity) event.getEntityLiving();
+        IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
+        IAbilityData AbilityProps = AbilityDataCapability.get(player);
         ShinzoMassageAbility ability = AbilityProps.getUnlockedAbility(ShinzoMassageAbility.INSTANCE);
 
-        if (ability == null || !devilFruitProps.getDevilFruit().equals("goro_goro") || entity.world.isRemote)
+        if (ability == null || !devilFruitProps.getDevilFruit().equals("goro_goro") || player.world.isRemote)
             return;
 
-        if (!ability.isOnCooldown() && !event.getSource().equals(DamageSource.OUT_OF_WORLD)) {
-            if (entity.getHealth() - event.getAmount() <= 0) {
-                event.setCanceled(true);
-                ability.startCooldown(entity);
-                entity.setHealth(entity.getMaxHealth() / 10);
-                entity.hurtTime = 300;
-            }
-        }
+		if (!ability.isOnCooldown() && !event.getSource().equals(DamageSource.OUT_OF_WORLD)) {
+			if (player.getHealth() - event.getAmount() <= 0) {
+				event.setCanceled(true);
+				ability.startCooldown(player);
+				player.setHealth(player.getMaxHealth() / 10);
+				player.hurtTime = 300;
+			}
+		}
     }
 
 }

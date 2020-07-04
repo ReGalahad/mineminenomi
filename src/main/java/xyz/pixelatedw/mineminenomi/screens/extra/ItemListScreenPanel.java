@@ -29,9 +29,10 @@ public class ItemListScreenPanel extends ScrollPanel
 		
 		for(TradeEntry entry : this.entries)
 		{
-			if(entry.getItemStack().getOrCreateTag().getBoolean("isClone"))
+			if(entry.getItemStack().getOrCreateTag().getBoolean("isClone") && !entry.getItemStack().getOrCreateTag().getBoolean("hasCloneTag"))
 			{
 				entry.getItemStack().setDisplayName(new StringTextComponent(TextFormatting.RESET + entry.getItemStack().getDisplayName().getFormattedText() + " (Clone)"));
+				entry.getItemStack().getOrCreateTag().putBoolean("hasCloneTag", true);
 			}
 		}
 	}

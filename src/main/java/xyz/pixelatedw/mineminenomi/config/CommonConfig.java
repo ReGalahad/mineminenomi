@@ -56,7 +56,9 @@ public class CommonConfig
 	private DoubleValue spawnChanceSmallBase;
 	private BooleanValue spawnLargeShips;
 	private DoubleValue spawnChanceLargeShips;
-
+	private BooleanValue spawnLargeBases;
+	private DoubleValue spawnChanceLargeBase;
+	
 	// Quests
 	private BooleanValue quests;
 	private BooleanValue questProgression;
@@ -186,7 +188,12 @@ public class CommonConfig
 			
 			builder.push("Small Bases");
 			this.spawnSmallBases = builder.comment("Allows small bases to spawn in the world; true by default").define("Spawn Small Bases", true);
-			this.spawnChanceSmallBase = builder.comment("Sets the % chance for a Small Base to spawn, the % is calculated per chunk (16x16), 25% by default, min is 0 and max is 100; ").defineInRange("Small Bases Spawn Chance", 25, 0.0, 100);
+			this.spawnChanceSmallBase = builder.comment("Sets the % chance for a Small Base to spawn, the % is calculated per chunk (16x16), 45% by default, min is 0 and max is 100; ").defineInRange("Small Bases Spawn Chance", 45, 0.0, 100);
+			builder.pop();
+			
+			builder.push("Large Bases");
+			this.spawnLargeBases = builder.comment("Allows large bases to spawn in the world; true by default").define("Spawn Large Bases", true);
+			this.spawnChanceLargeBase = builder.comment("Sets the % chance for a Large Base to spawn, the % is calculated per chunk (16x16), 30% by default, min is 0 and max is 100; ").defineInRange("Large Bases Spawn Chance", 30, 0.0, 100);
 			builder.pop();
 		}
 		builder.pop();
@@ -247,6 +254,16 @@ public class CommonConfig
 			this.fovRemover = builder.comment("Keeps the FOV fixed when the player has speed effects active").define("FOV Remover", true);
 		}
 		builder.pop();
+	}
+	
+	public double getChanceForLargeBasesSpawn()
+	{
+		return this.spawnChanceLargeBase.get();
+	}
+
+	public boolean canSpawnLargeBases()
+	{
+		return this.spawnLargeBases.get();
 	}
 	
 	public double getChanceForLargeShipsSpawn()

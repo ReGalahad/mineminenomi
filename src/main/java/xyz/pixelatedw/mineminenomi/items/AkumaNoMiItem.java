@@ -91,7 +91,7 @@ public class AkumaNoMiItem extends Item
 		
 		if (flag1 || flag2 || flag3)
 		{
-			player.attackEntityFrom(DamageSource.WITHER, Float.POSITIVE_INFINITY);
+			player.attackEntityFrom(DamageSource.WITHER, player.getMaxHealth());
 			itemStack.shrink(1);
 			return itemStack;
 		}

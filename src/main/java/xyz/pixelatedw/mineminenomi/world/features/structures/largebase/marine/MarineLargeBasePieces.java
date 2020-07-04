@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.world.features.structures.smallbase.bandit;
+package xyz.pixelatedw.mineminenomi.world.features.structures.largebase.marine;
 
 import java.util.List;
 import java.util.Map;
@@ -27,57 +27,66 @@ import net.minecraft.world.gen.feature.template.Template;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import xyz.pixelatedw.mineminenomi.api.helpers.StructuresHelper;
 import xyz.pixelatedw.mineminenomi.api.helpers.StructuresHelper.StructureFaction;
+import xyz.pixelatedw.mineminenomi.blocks.tileentities.CustomSpawnerTileEntity;
+import xyz.pixelatedw.mineminenomi.init.ModBlocks;
+import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.mineminenomi.init.ModFeatures;
 import xyz.pixelatedw.mineminenomi.init.ModLootTables;
 import xyz.pixelatedw.wypi.APIConfig;
+import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.debug.WyDebug;
 
-public class BanditSmallBasePieces
+public class MarineLargeBasePieces
 {
-	private static final ResourceLocation HOUSE = new ResourceLocation(APIConfig.PROJECT_ID, "small_base/bandit/house");
-	private static final ResourceLocation LOGS = new ResourceLocation(APIConfig.PROJECT_ID, "small_base/bandit/logs");
-	private static final ResourceLocation TUNNEL = new ResourceLocation(APIConfig.PROJECT_ID, "small_base/bandit/tunnel");
-	private static final ResourceLocation HALLWAY = new ResourceLocation(APIConfig.PROJECT_ID, "small_base/bandit/hallway");
-	private static final ResourceLocation LOUNGE = new ResourceLocation(APIConfig.PROJECT_ID, "small_base/bandit/lounge");
-	private static final ResourceLocation LAB = new ResourceLocation(APIConfig.PROJECT_ID, "small_base/bandit/lab");
-	private static final ResourceLocation MINE = new ResourceLocation(APIConfig.PROJECT_ID, "small_base/bandit/mine");
-	private static final ResourceLocation BEDS_ROOM = new ResourceLocation(APIConfig.PROJECT_ID, "small_base/bandit/beds_room");
-	private static final ResourceLocation TREASURE_ROOM = new ResourceLocation(APIConfig.PROJECT_ID, "small_base/bandit/treasure_room");
+	private static final ResourceLocation PRISON = new ResourceLocation(APIConfig.PROJECT_ID, "large_base/marine/prison");
+	private static final ResourceLocation PRISON_STAIRS = new ResourceLocation(APIConfig.PROJECT_ID, "large_base/marine/stairs");
+	private static final ResourceLocation BOTTOM0 = new ResourceLocation(APIConfig.PROJECT_ID, "large_base/marine/bottom0");
+	private static final ResourceLocation BOTTOM1 = new ResourceLocation(APIConfig.PROJECT_ID, "large_base/marine/bottom1");
+	private static final ResourceLocation BOTTOM2 = new ResourceLocation(APIConfig.PROJECT_ID, "large_base/marine/bottom2");
+	private static final ResourceLocation BOTTOM3 = new ResourceLocation(APIConfig.PROJECT_ID, "large_base/marine/bottom3");
+	private static final ResourceLocation UPPER_LOBBY = new ResourceLocation(APIConfig.PROJECT_ID, "large_base/marine/upper_lobby");
+	private static final ResourceLocation OFFICE = new ResourceLocation(APIConfig.PROJECT_ID, "large_base/marine/office");
+	private static final ResourceLocation ROOF = new ResourceLocation(APIConfig.PROJECT_ID, "large_base/marine/roof");
+	private static final ResourceLocation FLAG = new ResourceLocation(APIConfig.PROJECT_ID, "large_base/marine/flag");
 
 	private static final Map<ResourceLocation, BlockPos> POSITION_OFFSET = ImmutableMap.<ResourceLocation, BlockPos>builder()
-		.put(HOUSE, new BlockPos(0, 0, 0))
-		.put(LOGS, new BlockPos(0, 0, 0))
-		.put(TUNNEL, new BlockPos(2, -19, 4))
-		.put(HALLWAY, new BlockPos(-7, -22, 0))
-		.put(LOUNGE, new BlockPos(-7, -24, -16))
-		.put(LAB, new BlockPos(-18, -27, -23))
-		.put(MINE, new BlockPos(-20, -28, -15))
-		.put(BEDS_ROOM, new BlockPos(-6, -26, -25))
-		.put(TREASURE_ROOM, new BlockPos(-19, -27, -5))
+		.put(BOTTOM0, new BlockPos(0, 0, 0))
+		.put(BOTTOM1, new BlockPos(0, 0, 20))
+		.put(BOTTOM2, new BlockPos(-19, 0, 20))
+		.put(BOTTOM3, new BlockPos(-19, 0, 0))
+		.put(PRISON, new BlockPos(-11, -19, 4))
+		.put(PRISON_STAIRS, new BlockPos(12, -4, 15))
+		.put(UPPER_LOBBY, new BlockPos(-15, 26, 4))
+		.put(OFFICE, new BlockPos(-13, 36, 6))
+		.put(ROOF, new BlockPos(-12, 47, 7))
+		.put(FLAG, new BlockPos(4, 48, -10))
 		.build();
 	
 	private static final Map<ResourceLocation, BlockPos> CENTER_OFFSET = ImmutableMap.<ResourceLocation, BlockPos>builder()
-		.put(HOUSE, new BlockPos(5, 0, 6))
-		.put(LOGS, new BlockPos(0, 0, 0))
-		.put(TUNNEL, new BlockPos(3, 19, 2))
-		.put(HALLWAY, new BlockPos(12, 17, 6))
-		.put(LOUNGE, new BlockPos(0, 0, 0))
-		.put(LAB, new BlockPos(0, 0, 0))
-		.put(MINE, new BlockPos(0, 0, 0))
-		.put(BEDS_ROOM, new BlockPos(0, 0, 0))
-		.put(TREASURE_ROOM, new BlockPos(0, 0, 0))
+		.put(BOTTOM0, new BlockPos(0, 0, 0))
+		.put(BOTTOM1, new BlockPos(0, 0, 0))
+		.put(BOTTOM2, new BlockPos(0, 0, 0))
+		.put(BOTTOM3, new BlockPos(0, 0, 0))
+		.put(PRISON, new BlockPos(0, 0, 0))
+		.put(PRISON_STAIRS, new BlockPos(0, 0, 0))
+		.put(UPPER_LOBBY, new BlockPos(0, 0, 0))
+		.put(OFFICE, new BlockPos(0, 0, 0))
+		.put(ROOF, new BlockPos(0, 0, 0))
+		.put(FLAG, new BlockPos(0, 0, 0))
 		.build();
 
 	public static void addComponents(TemplateManager templateManager, BlockPos pos, List<StructurePiece> components)
 	{
-		components.add(new Piece(templateManager, HOUSE, pos, BlockIgnoreStructureProcessor.AIR_AND_STRUCTURE_BLOCK));
-		components.add(new Piece(templateManager, TUNNEL, pos, BlockIgnoreStructureProcessor.STRUCTURE_BLOCK));
-		components.add(new Piece(templateManager, HALLWAY, pos, BlockIgnoreStructureProcessor.STRUCTURE_BLOCK));
-		components.add(new Piece(templateManager, LOUNGE, pos, BlockIgnoreStructureProcessor.STRUCTURE_BLOCK));
-		components.add(new Piece(templateManager, TREASURE_ROOM, pos, BlockIgnoreStructureProcessor.STRUCTURE_BLOCK));
-		components.add(new Piece(templateManager, MINE, pos, BlockIgnoreStructureProcessor.STRUCTURE_BLOCK));
-		components.add(new Piece(templateManager, LAB, pos, BlockIgnoreStructureProcessor.STRUCTURE_BLOCK));
-		components.add(new Piece(templateManager, BEDS_ROOM, pos, BlockIgnoreStructureProcessor.STRUCTURE_BLOCK));
+		components.add(new Piece(templateManager, BOTTOM0, pos, BlockIgnoreStructureProcessor.AIR_AND_STRUCTURE_BLOCK));
+		components.add(new Piece(templateManager, BOTTOM1, pos, BlockIgnoreStructureProcessor.AIR_AND_STRUCTURE_BLOCK));
+		components.add(new Piece(templateManager, BOTTOM2, pos, BlockIgnoreStructureProcessor.AIR_AND_STRUCTURE_BLOCK));
+		components.add(new Piece(templateManager, BOTTOM3, pos, BlockIgnoreStructureProcessor.AIR_AND_STRUCTURE_BLOCK));
+		components.add(new Piece(templateManager, PRISON, pos, BlockIgnoreStructureProcessor.STRUCTURE_BLOCK));
+		components.add(new Piece(templateManager, PRISON_STAIRS, pos, BlockIgnoreStructureProcessor.STRUCTURE_BLOCK));
+		components.add(new Piece(templateManager, UPPER_LOBBY, pos, BlockIgnoreStructureProcessor.AIR_AND_STRUCTURE_BLOCK));
+		components.add(new Piece(templateManager, OFFICE, pos, BlockIgnoreStructureProcessor.AIR_AND_STRUCTURE_BLOCK));
+		components.add(new Piece(templateManager, ROOF, pos, BlockIgnoreStructureProcessor.AIR_AND_STRUCTURE_BLOCK));
+		components.add(new Piece(templateManager, FLAG, pos, BlockIgnoreStructureProcessor.STRUCTURE_BLOCK));
 	}
 
 	public static class Piece extends TemplateStructurePiece
@@ -89,7 +98,7 @@ public class BanditSmallBasePieces
 
 		public Piece(TemplateManager template, CompoundNBT nbt)
 		{
-			super(ModFeatures.Pieces.BANDIT_SMALL_BASE_PIECE, nbt);
+			super(ModFeatures.Pieces.MARINE_LARGE_BASE_PIECE, nbt);
 			this.resourceLocation = new ResourceLocation(nbt.getString("Template"));
 			this.rotation = Rotation.valueOf(nbt.getString("Rot"));
 			int centerX = nbt.getShort("CenterX");
@@ -102,7 +111,7 @@ public class BanditSmallBasePieces
 
 		public Piece(TemplateManager template, ResourceLocation res, BlockPos pos, StructureProcessor proc)
 		{
-			super(ModFeatures.Pieces.BANDIT_SMALL_BASE_PIECE, 0);
+			super(ModFeatures.Pieces.MARINE_LARGE_BASE_PIECE, 0);
 			this.rotation = Rotation.NONE;
 			this.resourceLocation = res;
 			BlockPos blockpos = POSITION_OFFSET.get(this.resourceLocation);
@@ -133,48 +142,71 @@ public class BanditSmallBasePieces
 		@Override
 		protected void handleDataMarker(String function, BlockPos pos, IWorld world, Random rand, MutableBoundingBox sbb)
 		{
-			// Chests
-			if (function.equals("gold_chest"))
+			if (function.equals("captain_chest"))
 			{
 				world.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
 				TileEntity tileentity = world.getTileEntity(pos.down());
 				if (tileentity instanceof ChestTileEntity)
 				{
-					((ChestTileEntity) tileentity).setLootTable(ModLootTables.BANDIT_SMALL_BASE_GOLD_CHEST, rand.nextLong());
+					((ChestTileEntity) tileentity).setLootTable(ModLootTables.MARINE_LARGE_BASE_CAPTAIN_CHEST, rand.nextLong());
 				}
 			}
-			if (function.equals("lab_chest"))
+			else if (function.equals("food_chest"))
 			{
 				world.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
 				TileEntity tileentity = world.getTileEntity(pos.down());
 				if (tileentity instanceof ChestTileEntity)
 				{
-					((ChestTileEntity) tileentity).setLootTable(ModLootTables.BANDIT_SMALL_BASE_LAB_CHEST, rand.nextLong());
+					((ChestTileEntity) tileentity).setLootTable(ModLootTables.MARINE_LARGE_BASE_FOOD_CHEST, rand.nextLong());
 				}
 			}
-			if (function.equals("mine_chest"))
+			else if (function.equals("generic_chest"))
 			{
 				world.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
 				TileEntity tileentity = world.getTileEntity(pos.down());
 				if (tileentity instanceof ChestTileEntity)
 				{
-					((ChestTileEntity) tileentity).setLootTable(ModLootTables.BANDIT_SMALL_BASE_MINE_CHEST, rand.nextLong());
+					((ChestTileEntity) tileentity).setLootTable(ModLootTables.MARINE_LARGE_BASE_GENERIC_CHEST, rand.nextLong());
 				}
 			}
-			if (function.equals("ore_chest"))
+			else if (function.equals("lab_chest"))
 			{
 				world.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
 				TileEntity tileentity = world.getTileEntity(pos.down());
 				if (tileentity instanceof ChestTileEntity)
 				{
-					((ChestTileEntity) tileentity).setLootTable(ModLootTables.BANDIT_SMALL_BASE_ORES_CHEST, rand.nextLong());
+					((ChestTileEntity) tileentity).setLootTable(ModLootTables.MARINE_LARGE_BASE_LAB_CHEST, rand.nextLong());
 				}
 			}
 			
 			// Spawners
+			// 8 x3 Prisoner Spawners - 25%
+			// 6 x2 Prisoner Spawners - 25%
+			// 3 x1 Captain Spawner
+			// 8 x3 Grunt Spawners
 			// 3 x5 Grunt Spawners
-			// 1 Captain Spawner
-			StructuresHelper.setupSpawners(function, world, pos, StructureFaction.BANDIT);
+			StructuresHelper.setupSpawners(function, world, pos, StructureFaction.MARINE);
+			
+			if(function.equalsIgnoreCase("prisoner_x3_spawn") && WyHelper.randomDouble() < 0.25)
+			{
+				world.setBlockState(pos, ModBlocks.CUSTOM_SPAWNER.getDefaultState(), 3);
+				TileEntity spawner = world.getTileEntity(pos);
+				if (spawner instanceof CustomSpawnerTileEntity)
+				{
+					((CustomSpawnerTileEntity) spawner).setSpawnerLimit(3);
+					((CustomSpawnerTileEntity) spawner).setSpawnerMob(ModEntities.PIRATE_WITH_SWORD);
+				}
+			}
+			else if(function.equalsIgnoreCase("prisoner_x2_spawn") && WyHelper.randomDouble() < 0.25)
+			{
+				world.setBlockState(pos, ModBlocks.CUSTOM_SPAWNER.getDefaultState(), 3);
+				TileEntity spawner = world.getTileEntity(pos);
+				if (spawner instanceof CustomSpawnerTileEntity)
+				{
+					((CustomSpawnerTileEntity) spawner).setSpawnerLimit(2);
+					((CustomSpawnerTileEntity) spawner).setSpawnerMob(ModEntities.BANDIT_WITH_SWORD);
+				}
+			}
 		}
 
 		@Override
@@ -192,10 +224,10 @@ public class BanditSmallBasePieces
 			
 			BlockPos blockpos2 = this.templatePosition;
 			int i = world.getHeight(Heightmap.Type.WORLD_SURFACE_WG, this.centerPosition.getX(), this.centerPosition.getZ());
-			this.templatePosition = this.templatePosition.add(0, i - 90 - 1, 0);
+			this.templatePosition = this.templatePosition.add(0, i - 90, 0);
 
 			boolean flag = super.addComponentParts(world, random, bb, chunkPos);
-
+			
 			this.templatePosition = blockpos2;
 			return flag;
 		}

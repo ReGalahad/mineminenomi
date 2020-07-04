@@ -50,13 +50,11 @@ public class CustomSpawnerTileEntity extends TileEntity implements ITickableTile
 			{
 				LivingEntity e = nearbyEntities.get(0);
 
-				if (e != null && e instanceof PlayerEntity)
+				if (e != null && e instanceof PlayerEntity && this.entityToSpawn != null)
 				{
-					PlayerEntity player = (PlayerEntity) e;
-
 					if ((this.spawnedEntities.size() < this.spawnLimit))
 					{
-						LivingEntity newSpawn = (LivingEntity) entityToSpawn.spawn(world, (CompoundNBT)null, (ITextComponent)null, (PlayerEntity)null, pos.up(), SpawnReason.STRUCTURE, false, false);
+						LivingEntity newSpawn = (LivingEntity) this.entityToSpawn.spawn(world, (CompoundNBT)null, (ITextComponent)null, (PlayerEntity)null, pos.up(), SpawnReason.STRUCTURE, false, false);
 						if (newSpawn != null)
 						{
 							newSpawn.setLocationAndAngles(this.pos.getX(), this.pos.getY(), this.pos.getZ(), 0, 0);

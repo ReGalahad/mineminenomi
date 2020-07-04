@@ -53,7 +53,7 @@ public class PirateSmallShipStructure extends ScatteredStructure<NoFeatureConfig
 	@Override
 	protected int getBiomeFeatureDistance(ChunkGenerator<?> chunkGenerator)
 	{
-		return 10;
+		return 11;
 	}
 
 	@Override

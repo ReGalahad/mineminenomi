@@ -32,6 +32,7 @@ public class AxeDialItem extends BlockItem
 			AxeDialProjectile proj = new AxeDialProjectile(player.world, player);
 
 			world.addEntity(proj);
+    		proj.shoot(player, player.rotationPitch, player.rotationYaw, 0, 2f, 1);
 
 			if (!player.isCreative())
 			{
