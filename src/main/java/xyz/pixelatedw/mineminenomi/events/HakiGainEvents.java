@@ -218,8 +218,8 @@ public class HakiGainEvents
 					continue;
 				sum += Integer.parseInt(bit);
 			}
-			sum = MathHelper.clamp(sum / 10, 0, 10);
-			boolean isKing = sum < 1;
+			sum = MathHelper.clamp(sum & 10, 0, 10);
+			boolean isKing = sum <= 1;
 
 			// That moment when your entire chance of getting haoshoku haki is based on the time when you bought minecraft. Design 101
 			if (isKing)
