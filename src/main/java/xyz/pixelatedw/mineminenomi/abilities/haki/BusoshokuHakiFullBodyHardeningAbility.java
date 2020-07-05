@@ -27,8 +27,6 @@ import java.util.UUID;
 public class BusoshokuHakiFullBodyHardeningAbility extends PunchAbility implements IHakiAbility, IParallelContinuousAbility
 {
 	public static final BusoshokuHakiFullBodyHardeningAbility INSTANCE = new BusoshokuHakiFullBodyHardeningAbility();
-	private AttributeModifier entryArmor;
-	private AttributeModifier entryArmorThougness;
 
 	private final UUID ArmorUUID = UUID.fromString("0457f786-0a5a-4e83-9ea6-f924c259a798");
 	private final UUID ArmorThougnessUUID = UUID.fromString("0457f786-0a5a-4e83-9ea6-f924c259a798");

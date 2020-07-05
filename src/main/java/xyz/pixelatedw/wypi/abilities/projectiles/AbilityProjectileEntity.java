@@ -161,11 +161,12 @@ public class AbilityProjectileEntity extends ThrowableEntity
 						return;
 
 					if(!this.entityDamaged) {
-						float reduction = getAbsoluteDamage();
+/*						float reduction = getAbsoluteDamage();
 						this.entityDamaged = hitEntity.attackEntityFrom(this.source, this.damage - reduction);
 						hitEntity.hurtTime = 0;
 						hitEntity.hurtResistantTime = 0;
-						hitEntity.attackEntityFrom(this.source, reduction);
+						hitEntity.attackEntityFrom(this.source, reduction);*/
+						this.entityDamaged = hitEntity.attackEntityFrom(this.source, this.damage);
 					}
 
 					this.triggerEffects(hitEntity);
@@ -191,8 +192,6 @@ public class AbilityProjectileEntity extends ThrowableEntity
 
 					if (this.changeHurtTime)
 						hitEntity.hurtResistantTime = this.hurtTime;
-					else
-						hitEntity.hurtResistantTime = 20;
 				}
 			}
 			else if (hit.getType() == RayTraceResult.Type.BLOCK)
