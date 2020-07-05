@@ -12,7 +12,7 @@ public class BarjanAbility extends Ability
 	public BarjanAbility()
 	{
 		super("Barjan", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(5);
+		this.setMaxCooldown(6);
 		this.setDescription("Launches a crescent-shaped wave of sand at the opponent, that dehydrates them.");
 
 		this.onUseEvent = this::onUseEvent;

@@ -20,7 +20,7 @@ public class GekishinAbility extends PunchAbility
 	public GekishinAbility()
 	{
 		super("Gekishin", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(20);
+		this.setMaxCooldown(25);
 		this.setDescription("The user cracks the air, which launches a small but powerful shockwave towards the opponent.");
 
 		this.onHitEntityEvent = this::onHitEntity;

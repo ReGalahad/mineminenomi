@@ -31,7 +31,7 @@ public class SparklingDaisyAbility extends Ability
 	{
 		super("Sparkling Daisy", AbilityCategory.DEVIL_FRUIT);
 		this.setDescription("Launches the user forward slicing anything in his path");
-		this.setMaxCooldown(15);
+		this.setMaxCooldown(10);
 		
 		this.onUseEvent = this::onUseEvent;
 		this.duringCooldownEvent = this::duringCooldownEvent;

@@ -33,7 +33,7 @@ public class MurasameProjectile extends AbilityProjectileEntity
 	{
 		super(FishmanKarateProjectiles.MURASAME, world, player);
 		
-		this.setDamage(5.5f);
+		this.setDamage(6);
 		this.setPassThroughEntities();
 		this.setChangeHurtTime(true);
 

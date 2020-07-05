@@ -12,7 +12,7 @@ public class DoruDoruArtsMoriAbility extends Ability
 	public DoruDoruArtsMoriAbility()
 	{
 		super("Doru Doru Arts: Mori", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(5);
+		this.setMaxCooldown(8);
 		this.setDescription("The user fires a harpoon made of wax at the opponent.");
 
 		this.onUseEvent = this::onUseEvent;

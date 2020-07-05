@@ -12,7 +12,7 @@ public class MiniHollowAbility extends RepeaterAbility
 	public MiniHollowAbility()
 	{
 		super("Mini Hollow", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(2);
+		this.setMaxCooldown(4);
 		this.setMaxRepearCount(5, 3);
 		this.setDescription("Launches small ghosts at the opponent, exploding upon impact.");
 

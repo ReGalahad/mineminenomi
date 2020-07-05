@@ -14,7 +14,7 @@ public class TensionHormoneAbility extends PunchAbility
 	public TensionHormoneAbility()
 	{
 		super("Tension Hormone", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(35);
+		this.setMaxCooldown(30);
 		this.setDescription("The user injects a target or themselves with special hormones meant to provide them a supply of adrenaline");
 
 		this.onStartContinuityEvent = this::onStartContinuityEvent;

@@ -14,7 +14,7 @@ public class KaenBoshiAbility extends ContinuousAbility implements ISniperAbilit
 	public KaenBoshiAbility()
 	{
 		super("Kaen Boshi", AbilityCategory.RACIAL);
-		this.setMaxCooldown(4);
+		this.setMaxCooldown(5);
 		this.setDescription("Fires a flaming pellet, that sets the target on fire");
 	}
 

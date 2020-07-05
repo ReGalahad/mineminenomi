@@ -56,7 +56,7 @@ public class FiddleBanffAbility extends Ability
 			List<LivingEntity> list = WyHelper.getEntitiesNear(player.getPosition(), player.world, 1.6);
 			list.remove(player);
 			for (LivingEntity target : list)
-				target.attackEntityFrom(DamageSource.causePlayerDamage(player), 6);
+				target.attackEntityFrom(DamageSource.causePlayerDamage(player), 8);
 		}
 	}
 	

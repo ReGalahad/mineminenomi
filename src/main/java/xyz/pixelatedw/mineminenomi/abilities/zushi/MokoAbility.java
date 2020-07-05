@@ -17,7 +17,7 @@ public class MokoAbility extends RepeaterAbility
 	{
 		super("Moko", AbilityCategory.DEVIL_FRUIT);
 		this.setDescription("Sends a wave of gravitational waves towards the enemies, slowing them down");
-		this.setMaxCooldown(12);
+		this.setMaxCooldown(10);
 		this.setMaxRepearCount(3, 5);
 
 		this.onUseEvent = this::onUseEvent;

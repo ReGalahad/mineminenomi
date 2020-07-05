@@ -13,7 +13,7 @@ public class GastilleAbility extends Ability
 	{
 		super("Gastille", AbilityCategory.DEVIL_FRUIT);
 		this.setDescription("Shoots a beam of condensed poisonous gas from the user's mouth, that explodes on impact.");
-		this.setMaxCooldown(8);
+		this.setMaxCooldown(7);
 
 		this.onUseEvent = this::onUseEvent;
 	}

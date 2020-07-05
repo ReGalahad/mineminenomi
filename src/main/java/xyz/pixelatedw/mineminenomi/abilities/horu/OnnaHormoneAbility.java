@@ -14,7 +14,7 @@ public class OnnaHormoneAbility extends PunchAbility
 	public OnnaHormoneAbility()
 	{
 		super("Onna Hormone", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(10);
+		this.setMaxCooldown(7);
 		this.setDescription("By injecting an enemy with special female hormones, the user can inflict moderate debuffs on them.");
 
 		this.onStartContinuityEvent = this::onStartContinuityEvent;

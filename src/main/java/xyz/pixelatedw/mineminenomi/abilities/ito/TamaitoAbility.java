@@ -13,7 +13,7 @@ public class TamaitoAbility extends Ability
 	{
 		super("Tamaito", AbilityCategory.DEVIL_FRUIT);
 		this.setDescription("The user shoots a small bundle of strings, acting like a bullet.");
-		this.setMaxCooldown(3);
+		this.setMaxCooldown(2);
 
 		this.onUseEvent = this::onUseEvent;
 	}

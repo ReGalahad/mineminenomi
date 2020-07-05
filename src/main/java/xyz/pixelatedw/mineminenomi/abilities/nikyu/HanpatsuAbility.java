@@ -14,7 +14,7 @@ public class HanpatsuAbility extends PunchAbility
 	public HanpatsuAbility()
 	{
 		super("Hanpatsu", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(4);
+		this.setMaxCooldown(5);
 		this.setDescription("Anyone the user punches gets sent flying far into the air.");
 
 		this.onHitEntityEvent = this::onHitEntity;

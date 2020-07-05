@@ -14,7 +14,7 @@ public class RyuseiKazanAbility extends RepeaterAbility
 	{
 		super("Ryusei Kazan", AbilityCategory.DEVIL_FRUIT);
 		this.setDescription("Functions like 'Dai Funka', but multiple fists are launched at the opponent.");
-		this.setMaxCooldown(12);
+		this.setMaxCooldown(14);
 		this.setMaxRepearCount(5, 3);
 
 		this.onUseEvent = this::onUseEvent;

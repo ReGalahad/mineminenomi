@@ -13,8 +13,8 @@ public class DoruDoruBallAbility extends ContinuousAbility {
 	public double rotateAngleZ = 0;
 	public DoruDoruBallAbility() {
 		super("Doru Doru Ball", AbilityCategory.DEVIL_FRUIT);
-		this.setThreshold(15);
-		this.setCooldown(5);
+		this.setThreshold(8);
+		this.setCooldown(10);
 		this.setDescription("Puts the user into a hardened wax ball for max defense.");
 		this.onStartContinuityEvent = this::onStartContinuityEvent;
 		this.duringContinuityEvent = this::duringContinuity;

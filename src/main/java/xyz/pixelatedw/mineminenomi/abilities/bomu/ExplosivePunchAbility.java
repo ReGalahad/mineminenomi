@@ -14,7 +14,7 @@ public class ExplosivePunchAbility extends PunchAbility {
 	public static final Ability INSTANCE = new ExplosivePunchAbility();
 	public ExplosivePunchAbility() {
 		super("Explosive Punch", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(14);
+		this.setMaxCooldown(5);
 		this.setDescription("User punches and creates an explosion around his fist");
 		this.onHitEntityEvent = this::onHitEntity;
 	}
@@ -29,6 +29,6 @@ public class ExplosivePunchAbility extends PunchAbility {
 		explosion.setSmokeParticles(new CommonExplosionParticleEffect(3));
 		explosion.setDamageEntities(true);
 		explosion.doExplosion();
-		return 50;
+		return 30;
 	}
 }

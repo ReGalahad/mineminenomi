@@ -30,7 +30,7 @@ public class RankyakuProjectile extends AbilityProjectileEntity
 	{
 		super(RokushikiProjectiles.RANKYAKU, world, player);
 		
-		this.setDamage(40);
+		this.setDamage(30);
 		this.setCanGetStuckInGround();
 		this.setPassThroughEntities();
 		

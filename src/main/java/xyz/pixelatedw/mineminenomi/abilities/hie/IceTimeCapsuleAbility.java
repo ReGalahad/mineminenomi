@@ -24,7 +24,7 @@ public class IceTimeCapsuleAbility extends Ability
 	public IceTimeCapsuleAbility()
 	{
 		super("Ice Time Capsule", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(15);
+		this.setMaxCooldown(20);
 		this.setDescription("A wave of ice is sent along the ground and freezes every enemy it hits, locking them in an ice capsule.");
 
 		this.onUseEvent = this::onUseEvent;

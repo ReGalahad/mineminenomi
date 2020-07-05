@@ -21,7 +21,7 @@ public class WhiteStrikeAbility extends Ability
 	public WhiteStrikeAbility()
 	{
 		super("White Strike", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(30);
+		this.setMaxCooldown(20);
 		this.setDescription("Surrounds the nearby area with smoke slowing down nearby entities");
 		
 		this.onUseEvent = this::onUseEvent;

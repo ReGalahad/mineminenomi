@@ -13,7 +13,7 @@ public class DokuFuguAbility extends RepeaterAbility
 	public DokuFuguAbility()
 	{
 		super("Doku Fugu", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(6);
+		this.setMaxCooldown(7);
 		this.setMaxRepearCount(3, 4);
 		this.setDescription("Shoots multiple poisonous bullets at the opponent.");
 

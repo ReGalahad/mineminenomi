@@ -12,7 +12,7 @@ public class HydraAbility extends Ability
 	public HydraAbility()
 	{
 		super("Hydra", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(8);
+		this.setMaxCooldown(1);
 		this.setDescription("Launches a dragon made out of liqiud poison at the opponent.");
 
 		this.onUseEvent = this::onUseEvent;

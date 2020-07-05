@@ -14,8 +14,8 @@ public class TodorokiAbility extends RepeaterAbility
 	{
 		super("Todoroki", AbilityCategory.DEVIL_FRUIT);
 		this.setDescription("The user shouts and creates a powerful sound blast.");
-		this.setMaxCooldown(8);
-		this.setMaxRepearCount(5, 4);
+		this.setMaxCooldown(6);
+		this.setMaxRepearCount(5, 2);
 
 		this.onUseEvent = this::onUseEvent;
 	}

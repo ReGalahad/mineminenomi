@@ -20,7 +20,7 @@ public class SpringSnipeAbility  extends ChargeableAbility
 	public SpringSnipeAbility()
 	{
 		super("Spring Snipe", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(5);
+		this.setMaxCooldown(6);
 		this.setMaxChargeTime(1);
 		this.setDescription("Turning the user's forelegs into springs, they can launch themselves directly at the opponent.");
 
@@ -43,7 +43,7 @@ public class SpringSnipeAbility  extends ChargeableAbility
 			List<LivingEntity> list = WyHelper.getEntitiesNear(player.getPosition(), player.world, 2);
 			list.remove(player);
 			for (LivingEntity target : list)
-				target.attackEntityFrom(DamageSource.causePlayerDamage(player), 15);
+				target.attackEntityFrom(DamageSource.causePlayerDamage(player), 12);
 		}
 	}
 }

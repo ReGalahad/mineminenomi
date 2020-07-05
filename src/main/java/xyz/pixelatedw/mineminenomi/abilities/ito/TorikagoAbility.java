@@ -28,7 +28,7 @@ public class TorikagoAbility extends ContinuousAbility implements IParallelConti
 	public TorikagoAbility()
 	{
 		super("Torikago", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(1);
+		this.setMaxCooldown(5);
 		this.setDescription("Creates an indestructible dome made of strings, that damage anyone who toches then.");
 
 		this.onStartContinuityEvent = this::onStartContinuityEvent;
