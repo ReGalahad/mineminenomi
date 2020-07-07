@@ -29,6 +29,7 @@ public class CommonConfig
 	private List<String> bannedAbilities;
 	private DoubleValue hakiExpMultiplier;
 	private EnumValue haoshokuUnlockLogic;
+	private EnumValue oneFruitPerWorldLogic;
 
 	private BooleanValue logiaInvulnerability;
 	private BooleanValue logiaReturnEffect;
@@ -39,7 +40,6 @@ public class CommonConfig
 	private BooleanValue griefing;
 	private BooleanValue animeScreaming;
 	private BooleanValue specialFlying;
-	private BooleanValue oneFruitPerWorld;
 	private BooleanValue yamiPower;
 	private DoubleValue dorikiRewardMultiplier;
 	private BooleanValue minimumDorikiPerKill;
@@ -102,6 +102,11 @@ public class CommonConfig
 	{
 		NONE, RANDOM, EXPERIENCE
 	}
+	
+	public enum OneFruitPerWorldLogic
+	{
+		NONE, SIMPLE, EXTENDED
+	}
 
 	public static void init()
 	{
@@ -124,13 +129,13 @@ public class CommonConfig
 			this.griefing = builder.comment("Allows abilities to break or replace blocks; if turned OFF it will make some abilities completly useless; true by default").define("Griefing", true);
 			this.animeScreaming = builder.comment("Will send a chat message to nearby players with the used ability's name; false by default").define("Anime Scream", false);
 			this.specialFlying = builder.comment("Allows Gasu Gasu no Mi, Moku Moku no Mi and Suna Suna no Mi users to fly, this option does not affect flying Zoans which will be able to fly regardless; false by default").define("Special Flying", false);
-			this.oneFruitPerWorld = builder.comment("Restricts the Devil Fruit spawns to only 1 of each type per world; false by default").define("One Devil Fruit per World", false);
+			this.oneFruitPerWorldLogic = builder.comment("Restricts the Devil Fruit spawns to only 1 of each type per world; \n NONE - No logic is applied, an infinite number of each fruit can exist \n SIMPLE - No more than one fruit type can be acquired via natural means (chests, leaves, fruit reincarnations etc) \n EXTENDED - Extra rules are applied on top of the SIMPLE set that blocks any means (or as many as possible) of storing/hoarding fruits \n NONE by default").defineEnum("One Devil Fruit per World Logic", OneFruitPerWorldLogic.NONE, OneFruitPerWorldLogic.values());
 			this.yamiPower = builder.comment("Allows Yami Yami no Mi users to eat an additional fruit; true by default").define("Yami Yami no Mi additional fruit", true);
 			this.dorikiRewardMultiplier = builder.comment("Multiplies any doriki gained by this amount; 1 by default, min: 0, max: 10").defineInRange("Doriki Reward Multiplier", 1.0, 0.0, 10.0);
 			this.minimumDorikiPerKill = builder.comment("Guarantees a minimum of 1 doriki per kill; false by default").define("Minimum Doriki per Kill", false);
 			this.abilityFraudChecks = builder.comment("Runs a check for all abilities on a player to remove dupes or suspicious abilities when the player joins the world; true by default").define("Ability Fraud Checks", true);
 			this.hakiExpMultiplier = builder.comment("Multiplies any haki gained by this amount; 1 by default, min: 0, max: 10").defineInRange("Haki Exp Multiplier", 1.0, 0.0, 10.0);
-			this.haoshokuUnlockLogic = builder.comment("Responsible for how player unlock Haoshoku Haki; \n NONE - Haoshoku Haki cannot be unlocked naturally \n RANDOM - Only a few chosen ones receive it when they spawn \n EXPERIENCE - Will unlock based on the total amount of Haki experience a player has").defineEnum("Haoshoku Haki Unlock Logic", HaoshokuUnlockLogic.EXPERIENCE, HaoshokuUnlockLogic.values());
+			this.haoshokuUnlockLogic = builder.comment("Responsible for how player unlock Haoshoku Haki; \n NONE - Haoshoku Haki cannot be unlocked naturally \n RANDOM - Only a few chosen ones receive it when they spawn \n EXPERIENCE - Will unlock based on the total amount of Haki experience a player has \n EXPERIENCE by default").defineEnum("Haoshoku Haki Unlock Logic", HaoshokuUnlockLogic.EXPERIENCE, HaoshokuUnlockLogic.values());
 
 			this.bannedAbilities = new ArrayList<String>();
 			Predicate<Object> bannedAbilitiesTest = new Predicate<Object>()
@@ -254,6 +259,16 @@ public class CommonConfig
 			this.fovRemover = builder.comment("Keeps the FOV fixed when the player has speed effects active").define("FOV Remover", true);
 		}
 		builder.pop();
+	}
+	
+	public boolean hasOneFruitPerWorldExtendedLogic()
+	{
+		return this.oneFruitPerWorldLogic.get().equals(OneFruitPerWorldLogic.EXTENDED);
+	}
+	
+	public boolean hasOneFruitPerWorldSimpleLogic()
+	{
+		return this.oneFruitPerWorldLogic.get().equals(OneFruitPerWorldLogic.SIMPLE) || this.hasOneFruitPerWorldExtendedLogic();
 	}
 	
 	public double getChanceForLargeBasesSpawn()
@@ -475,11 +490,6 @@ public class CommonConfig
 	public boolean isSpecialFlyingEnabled()
 	{
 		return this.specialFlying.get();
-	}
-
-	public boolean isOneFruitPerWorldEnabled()
-	{
-		return this.oneFruitPerWorld.get();
 	}
 
 	public boolean isYamiPowerEnabled()

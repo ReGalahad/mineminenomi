@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Foods;
 import net.minecraft.item.Item;
@@ -27,6 +28,8 @@ import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
+import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
+import xyz.pixelatedw.mineminenomi.init.ModAbilities;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
 import xyz.pixelatedw.mineminenomi.packets.server.SSyncDevilFruitPacket;
@@ -83,11 +86,13 @@ public class AkumaNoMiItem extends Item
 		IEntityStats entityStatsProps = EntityStatsCapability.get(player);
 		IAbilityData abilityDataProps = AbilityDataCapability.get(player);
 
-		String eatenFruit = this.getDefaultTranslationKey().substring(("item." + APIConfig.PROJECT_ID + ".").length()).replace("_no_mi", "").replace(":", "").replace(".", "").replace(",", "").replace("model_", "");
-
-		boolean flag1 = !WyHelper.isNullOrEmpty(devilFruitProps.getDevilFruit()) && !devilFruitProps.hasYamiPower() && !eatenFruit.equalsIgnoreCase("yami_yami");
+		String eatenFruit = DevilFruitHelper.getDevilFruitKey(this);
+		
+		boolean hasYami = DevilFruitHelper.hasDevilFruit(player, ModAbilities.YAMI_YAMI_NO_MI);
+		
+		boolean flag1 = !WyHelper.isNullOrEmpty(devilFruitProps.getDevilFruit()) && !devilFruitProps.hasYamiPower() && !hasYami;
 		boolean flag2 = devilFruitProps.hasYamiPower() && !eatenFruit.equalsIgnoreCase(devilFruitProps.getDevilFruit()) && !devilFruitProps.getDevilFruit().equalsIgnoreCase("yamidummy");
-		boolean flag3 = !CommonConfig.instance.isYamiPowerEnabled() && !WyHelper.isNullOrEmpty(devilFruitProps.getDevilFruit()) && (eatenFruit.equalsIgnoreCase("yami_yami") || !eatenFruit.equalsIgnoreCase(devilFruitProps.getDevilFruit()));
+		boolean flag3 = !CommonConfig.instance.isYamiPowerEnabled() && !WyHelper.isNullOrEmpty(devilFruitProps.getDevilFruit()) && (hasYami || !eatenFruit.equalsIgnoreCase(devilFruitProps.getDevilFruit()));
 		
 		if (flag1 || flag2 || flag3)
 		{
@@ -99,7 +104,7 @@ public class AkumaNoMiItem extends Item
 		if (this.type == EnumFruitType.LOGIA)
 			devilFruitProps.setLogia(true);
 		
-		if (!eatenFruit.equalsIgnoreCase("yami_yami"))
+		if (!hasYami)
 			devilFruitProps.setDevilFruit(eatenFruit);
 		else
 		{
@@ -111,7 +116,7 @@ public class AkumaNoMiItem extends Item
 				devilFruitProps.setDevilFruit("yamidummy");
 		}
 
-		if (eatenFruit.equalsIgnoreCase("hito_hito") && !player.world.isRemote)
+		if (DevilFruitHelper.hasDevilFruit(player, ModAbilities.HITO_HITO_NO_MI) && !player.world.isRemote)
 		{
 			WyHelper.sendMsgToPlayer(player, "You've gained some enlightenment");
 			if (entityStatsProps.isFishman())
@@ -125,7 +130,7 @@ public class AkumaNoMiItem extends Item
 			}
 		}
 
-		if(!eatenFruit.equalsIgnoreCase("yomi_yomi"))
+		if(!DevilFruitHelper.hasDevilFruit(player, ModAbilities.YOMI_YOMI_NO_MI))
 		{
 			for(Ability a : abilities)
 				if(!AbilityHelper.verifyIfAbilityIsBanned(a) && abilityDataProps.getUnlockedAbility(a) == null)
@@ -151,6 +156,23 @@ public class AkumaNoMiItem extends Item
 		list.add(new StringTextComponent(""));
 		list.add(new StringTextComponent(this.type.getColor() + this.type.getName()));
 	}
+	
+	@Override
+	public boolean onEntityItemUpdate(ItemStack stack, ItemEntity entity)
+    {
+    	ExtendedWorldData worldData = ExtendedWorldData.get(entity.world);
+
+    	if(entity.isBurning())
+    		worldData.removeDevilFruitInWorld(this);
+
+    	if(entity.getPosition().getY() < -1)
+    	{
+    		entity.remove();
+    		worldData.removeDevilFruitInWorld(this);
+    	}
+    	
+        return false;
+    }
 	
 	public EnumFruitType getType()
 	{

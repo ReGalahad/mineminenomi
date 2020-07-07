@@ -51,7 +51,7 @@ public class ItemsHelper
 					"plains1", "plains2", "plains3", 
 					"taiga1", "taiga2",
 			};
-	
+
 	public static void dropWantedPosters(World world, int posX, int posY, int posZ)
 	{
     	ExtendedWorldData worldData = ExtendedWorldData.get(world);

@@ -18,8 +18,9 @@ import net.minecraft.world.storage.WorldSavedData;
 import net.minecraftforge.common.util.Constants;
 import xyz.pixelatedw.mineminenomi.api.crew.Crew;
 import xyz.pixelatedw.mineminenomi.api.crew.Crew.Member;
+import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitHelper;
+import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.items.AkumaNoMiItem;
-import xyz.pixelatedw.wypi.APIConfig;
 
 public class ExtendedWorldData extends WorldSavedData
 {
@@ -301,20 +302,41 @@ public class ExtendedWorldData extends WorldSavedData
 
 		this.markDirty();
 	}
-
-	public void addDevilFruitInWorld(AkumaNoMiItem fruit)
+	
+	public List<String> getDevilFruitsInWorld()
 	{
-		String name = fruit.getTranslationKey().substring(("item." + APIConfig.PROJECT_ID + ".").length()).replace("_no_mi", "").replace(":", "").replace(".", "").replace(",", "").replace("model_", "");
+		return this.devilFruitsInWorld;
+	}
 
-		if (!this.devilFruitsInWorld.contains(name))
+	public void removeDevilFruitInWorld(AkumaNoMiItem fruit)
+	{
+		String name = DevilFruitHelper.getDevilFruitKey(fruit);
+		this.removeDevilFruitInWorld(name);
+	}
+
+	public void removeDevilFruitInWorld(String name)
+	{
+		if(!CommonConfig.instance.hasOneFruitPerWorldSimpleLogic())
+			return;
+		
+		if (this.devilFruitsInWorld.contains(name))
 		{
-			this.devilFruitsInWorld.add(name);
+			this.devilFruitsInWorld.remove(name);
 			this.markDirty();
 		}
+	}
+	
+	public void addDevilFruitInWorld(AkumaNoMiItem fruit)
+	{
+		String name = DevilFruitHelper.getDevilFruitKey(fruit);
+		this.addDevilFruitInWorld(name);
 	}
 
 	public void addDevilFruitInWorld(String name)
 	{
+		if(!CommonConfig.instance.hasOneFruitPerWorldSimpleLogic())
+			return;
+		
 		if (!this.devilFruitsInWorld.contains(name))
 		{
 			this.devilFruitsInWorld.add(name);

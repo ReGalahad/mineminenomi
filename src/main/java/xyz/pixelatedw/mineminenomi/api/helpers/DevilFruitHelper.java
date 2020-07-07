@@ -38,7 +38,7 @@ public class DevilFruitHelper
 		
 	public static boolean oneFruitPerWorldCheck(World world, AkumaNoMiItem devilFruit)
 	{
-		if (!CommonConfig.instance.isOneFruitPerWorldEnabled())
+		if (!CommonConfig.instance.hasOneFruitPerWorldSimpleLogic())
 			return true;
 			
 		boolean isAvailable = true;
@@ -133,6 +133,11 @@ public class DevilFruitHelper
 		return false;
 	}
 
+	public static String getDevilFruitKey(AkumaNoMiItem item)
+	{
+		return item.getTranslationKey().substring(("item." + APIConfig.PROJECT_ID + ".").length()).replace("_no_mi", "").replace(":", "").replace(".", "").replace(",", "").replace("model_", "");
+	}
+	
 	public static ItemStack getDevilFruitItem(String fullName)
 	{
 		String model = "";

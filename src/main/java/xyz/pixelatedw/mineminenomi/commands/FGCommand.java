@@ -15,6 +15,7 @@ import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.data.entity.haki.HakiDataCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.haki.IHakiData;
+import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.packets.server.SOpenJollyRogerCreatorScreenPacket;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.data.quest.IQuestData;
@@ -55,10 +56,37 @@ public class FGCommand
 					.then(Commands.argument("quest", QuestArgument.quest())
 					.then(Commands.argument("target", EntityArgument.player())
 						.executes(context -> removeQuest(context, QuestArgument.getQuest(context, "quest"), EntityArgument.getPlayer(context, "target")))))));
-			
+		
+		builder
+			.then(Commands.literal("check_fruits_in_world")
+				.executes(context -> checkFruitsInWorld(context, context.getSource().asPlayer())));
+		
 		dispatcher.register(builder);
 	}
 
+	private static int checkFruitsInWorld(CommandContext<CommandSource> context, ServerPlayerEntity target)
+	{
+		ExtendedWorldData worldData = ExtendedWorldData.get(target.world); 
+
+		if(worldData.getDevilFruitsInWorld().size() <= 0)
+		{
+			WyHelper.sendMsgToPlayer(target, "None");
+			return 1;
+		}
+		
+		StringBuilder builder = new StringBuilder();
+		
+		builder.append(worldData.getDevilFruitsInWorld().size() + " ");
+		
+		for(String fruit : worldData.getDevilFruitsInWorld())
+		{
+			builder.append(fruit + " ");
+		}
+		WyHelper.sendMsgToPlayer(target, builder.toString());
+
+		return 1;
+	}
+	
 	private static int giveQuest(CommandContext<CommandSource> context, Quest quest, ServerPlayerEntity player)
 	{
 		IQuestData props = QuestDataCapability.get(player);

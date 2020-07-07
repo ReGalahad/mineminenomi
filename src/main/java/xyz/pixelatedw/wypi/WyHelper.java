@@ -374,6 +374,27 @@ public class WyHelper
 		return blockLocations;
 	}
 
+	public static List<BlockPos> getNearbyTileEntities(LivingEntity player, int radius)
+	{
+		List<BlockPos> blockLocations = new ArrayList<BlockPos>();
+		for (int x = -radius; x <= radius; x++)
+		{
+			for (int y = -radius; y <= radius; y++)
+			{
+				for (int z = -radius; z <= radius; z++)
+				{
+					BlockPos pos = new BlockPos(player.posX + x, player.posY + y, player.posZ + z);
+					if (player.world.getBlockState(pos).getBlock() != Blocks.AIR && player.world.getTileEntity(pos) != null)
+					{
+						blockLocations.add(pos);
+					}
+				}
+			}
+		}
+
+		return blockLocations;
+	}
+	
 	@Nullable
 	public static BlockPos findOnGroundSpawnLocation(World world, EntityType type, BlockPos spawnLocation, int radius)
 	{
