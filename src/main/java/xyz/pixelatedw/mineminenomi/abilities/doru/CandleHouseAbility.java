@@ -17,7 +17,7 @@ public class CandleHouseAbility extends Ability
 	public CandleHouseAbility()
 	{
 		super("Candle House", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(60);
+		this.setMaxCooldown(50);
 		this.setDescription("Creates a big house-like structure made of wax, to protect the user.");
 		
 		this.onUseEvent = this::onUseEvent;

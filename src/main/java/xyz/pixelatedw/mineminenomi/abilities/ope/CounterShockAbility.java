@@ -20,7 +20,7 @@ public class CounterShockAbility extends PunchAbility
 	public CounterShockAbility()
 	{
 		super("Counter Shock", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(10);
+		this.setMaxCooldown(15);
 		this.setDescription("Releases a strong electrical current which shocks the opponent");
 		
 		this.onHitEntityEvent = this::onHitEntity;

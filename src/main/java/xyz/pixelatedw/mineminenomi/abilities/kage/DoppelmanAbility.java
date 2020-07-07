@@ -17,14 +17,13 @@ public class DoppelmanAbility extends ContinuousAbility implements IParallelCont
 	{
 		super("Doppelman", AbilityCategory.DEVIL_FRUIT);
 		this.setDescription("Creates a living version of the user's shadow to help them fight.");
-
+		this.setMaxCooldown(20);
 		this.onStartContinuityEvent = this::onStartContinuityEvent;
 		this.onEndContinuityEvent = this::onEndContinuityEvent;
 	}
 
 	private boolean onStartContinuityEvent(PlayerEntity player)
 	{
-		this.setMaxCooldown(1);
 		this.doppelman = new DoppelmanEntity(player.world);
 		this.doppelman.setPositionAndRotation(player.posX, player.posY, player.posZ, player.rotationYaw, player.rotationPitch);
 		this.doppelman.setOwner(player.getUniqueID());

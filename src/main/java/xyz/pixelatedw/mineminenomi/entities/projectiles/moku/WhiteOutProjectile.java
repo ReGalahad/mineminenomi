@@ -32,7 +32,7 @@ public class WhiteOutProjectile extends AbilityProjectileEntity
 	{
 		super(MokuProjectiles.WHITE_OUT, world, player);
 
-		this.setDamage(5);
+		this.setDamage(7);
 		this.setMaxLife(128);
 		
 		this.withEffects = () -> {

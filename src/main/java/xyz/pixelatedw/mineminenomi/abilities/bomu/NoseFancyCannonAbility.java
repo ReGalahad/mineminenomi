@@ -12,7 +12,7 @@ public class NoseFancyCannonAbility extends Ability
 	public NoseFancyCannonAbility()
 	{
 		super("Nose Fancy Cannon", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(3);
+		this.setMaxCooldown(4);
 		this.setDescription("Shoots dried mucus at the opponent, which explodes on impact.");
 
 		this.onUseEvent = this::onUseEvent;

@@ -25,6 +25,7 @@ import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderSpecificHandEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
@@ -43,6 +44,7 @@ import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 
@@ -66,6 +68,18 @@ public class HakiPassiveEvents
 			event.setCanceled(true);
 			ability.reduceProtection(event.getAmount());
 		}
+	}
+
+	@SubscribeEvent
+	public static void onEntityHurt(LivingHurtEvent event) {
+		if(!(event.getSource().getImmediateSource() instanceof AbilityProjectileEntity))
+			return;
+
+		IAbilityData attackerAbilityProps = AbilityDataCapability.get(event.getEntityLiving());
+		Ability fullBodyBusoHaki = attackerAbilityProps.getEquippedAbility(BusoshokuHakiFullBodyHardeningAbility.INSTANCE);
+		boolean hasFullBodyBusoHakiActive = (fullBodyBusoHaki != null && fullBodyBusoHaki.isContinuous());
+		if(hasFullBodyBusoHakiActive)
+			event.setAmount(event.getAmount() / 2);
 	}
 
 	@OnlyIn(Dist.CLIENT)

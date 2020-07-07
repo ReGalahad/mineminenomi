@@ -18,6 +18,6 @@ public class KumoNoSugakiParticleEffect extends ParticleEffect
 		data.setSize(20);
 		data.setColor(1, 1, 1, 0.7F);
 		data.setMotion(motionX, motionY, motionZ);
-		WyHelper.spawnParticles(data, (ServerWorld) world, posX, posY + 1.5, posZ);
+		WyHelper.spawnParticles(data, (ServerWorld) world, posX, posY + 1.2, posZ);
 	}
 }

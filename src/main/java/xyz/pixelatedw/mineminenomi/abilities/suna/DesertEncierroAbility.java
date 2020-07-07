@@ -19,7 +19,7 @@ public class DesertEncierroAbility extends PunchAbility
 	public DesertEncierroAbility()
 	{
 		super("Desert Encierro", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(10);
+		this.setMaxCooldown(8);
 		this.setDescription("Quickly drains the enemy of their moisture leaving them weak for a few seconds.");
 
 		this.onHitEntityEvent = this::onHitEntity;

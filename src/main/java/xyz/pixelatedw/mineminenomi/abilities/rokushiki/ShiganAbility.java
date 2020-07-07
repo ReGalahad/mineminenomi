@@ -13,7 +13,7 @@ public class ShiganAbility extends PunchAbility
 	public ShiganAbility()
 	{
 		super("Shigan", AbilityCategory.RACIAL);
-		this.setMaxCooldown(5);
+		this.setMaxCooldown(8);
 		this.setDescription("The user thrusts their finger at the opponent, to pierce them.");
 		
 		this.onHitEntityEvent = this::onHitEntity;

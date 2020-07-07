@@ -19,7 +19,7 @@ public class TrunkShotAbility extends Ability
 	public TrunkShotAbility()
 	{
 		super("Trunk Shot", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(7);
+		this.setMaxCooldown(5);
 
 		this.onUseEvent = this::onUseEvent;
 	}

@@ -13,6 +13,7 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import xyz.pixelatedw.mineminenomi.abilities.haki.BusoshokuHakiFullBodyHardeningAbility;
 import xyz.pixelatedw.mineminenomi.abilities.haki.BusoshokuHakiHardeningAbility;
 import xyz.pixelatedw.mineminenomi.abilities.haki.BusoshokuHakiImbuingAbility;
@@ -78,7 +79,7 @@ public class HakiGainEvents
 		IHakiData hakiProps = HakiDataCapability.get(player);
 		IAbilityData abilityProps = AbilityDataCapability.get(player);
 		
-		float hakiMultiplier = 1;
+		float hakiMultiplier = (float) CommonConfig.instance.getHakiExpMultiplier();
 
 		KenbunshokuHakiAuraAbility ability = abilityProps.getEquippedAbility(KenbunshokuHakiAuraAbility.INSTANCE);
 		if((ability != null && ability.isContinuous()) || hakiProps.getKenbunshokuHakiExp() < 30)
@@ -149,7 +150,7 @@ public class HakiGainEvents
 		IAbilityData abilityProps = AbilityDataCapability.get(player);
 		ItemStack heldStack = player.getHeldItem(player.getActiveHand() != null ? player.getActiveHand() : Hand.MAIN_HAND);
 		
-		float hakiMultiplier = 1;
+		float hakiMultiplier = (float) CommonConfig.instance.getHakiExpMultiplier();
 		
 		if(!heldStack.isEmpty())
 		{

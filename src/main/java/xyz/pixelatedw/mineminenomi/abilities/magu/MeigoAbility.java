@@ -12,7 +12,7 @@ public class MeigoAbility extends Ability
 	public MeigoAbility()
 	{
 		super("Meigo", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(10);
+		this.setMaxCooldown(12);
 		this.setDescription("The user transforms their arm into magma and thrusts it at the opponent.");
 
 		this.onUseEvent = this::onUseEvent;

@@ -12,7 +12,7 @@ public class SpiralHollowAbility extends Ability
 	public SpiralHollowAbility()
 	{
 		super("Spiral Hollow", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(10);
+		this.setMaxCooldown(7);
 		this.setDescription("Creates circular blades along the user's forearms slicing enemies in a close line.");
 
 		this.onUseEvent = this::onUseEvent;

@@ -42,7 +42,7 @@ public class SanbyakurokujuPoundHoProjectile extends AbilityProjectileEntity
 		ExplosionAbility explosion = AbilityHelper.newExplosion(this.getThrower(), hit.getX(), hit.getY(), hit.getZ(), 2);
 		explosion.setExplosionSound(true);
 		explosion.setDamageOwner(false);
-		explosion.setDestroyBlocks(false);
+		explosion.setDestroyBlocks(true);
 		explosion.setFireAfterExplosion(false);
 		explosion.setSmokeParticles(new CommonExplosionParticleEffect(4));
 		explosion.setDamageEntities(true);

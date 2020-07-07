@@ -12,7 +12,7 @@ public class NegativeHollowAbility extends Ability
 	public NegativeHollowAbility()
 	{
 		super("Negative Hollow", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(4);
+		this.setMaxCooldown(5);
 		this.setDescription("The user launches a ghost that drains the target's will.");
 
 		this.onUseEvent = this::onUseEvent;

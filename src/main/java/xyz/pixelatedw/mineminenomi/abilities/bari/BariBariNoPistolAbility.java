@@ -20,6 +20,6 @@ public class BariBariNoPistolAbility extends PunchAbility
 	
 	private float onHitEntity(PlayerEntity player, LivingEntity target)
 	{		
-		return 10;
+		return 12;
 	}
 }

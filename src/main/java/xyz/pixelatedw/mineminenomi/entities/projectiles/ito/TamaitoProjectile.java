@@ -26,6 +26,6 @@ public class TamaitoProjectile extends AbilityProjectileEntity
 	{
 		super(ItoProjectiles.TAMAITO, world, player);
 
-		this.setDamage(4);		
+		this.setDamage(5);
 	}
 }

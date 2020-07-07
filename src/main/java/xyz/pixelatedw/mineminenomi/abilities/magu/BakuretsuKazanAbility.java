@@ -8,8 +8,9 @@ import xyz.pixelatedw.mineminenomi.api.protection.block.CoreBlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.api.protection.block.OreBlockProtectionRule;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.abilities.ChargeableAbility;
 
-public class BakuretsuKazanAbility extends Ability
+public class BakuretsuKazanAbility extends ChargeableAbility
 {
 	public static final Ability INSTANCE = new BakuretsuKazanAbility();
 
@@ -19,6 +20,7 @@ public class BakuretsuKazanAbility extends Ability
 	{
 		super("Bakuretsu Kazan", AbilityCategory.DEVIL_FRUIT);
 		this.setMaxCooldown(15);
+		this.setChargeTime(5);
 		this.setDescription("By spreading magma to the surroundings, the user turns everything into lava.");
 
 		this.onUseEvent = this::onUseEvent;

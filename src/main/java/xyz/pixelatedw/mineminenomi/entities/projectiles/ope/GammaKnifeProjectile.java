@@ -26,7 +26,7 @@ public class GammaKnifeProjectile extends AbilityProjectileEntity
 	{
 		super(OpeProjectiles.GAMMA_KNIFE, world, player);
 
-		this.setDamage(100);
+		this.setDamage(80);
 		this.setMaxLife(5);
 	}
 }

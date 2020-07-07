@@ -25,8 +25,8 @@ public class BakuTsuihoAbility extends ChargeableAbility
 	public BakuTsuihoAbility()
 	{
 		super("Baku Tsuiho", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(10);
-		this.setMaxChargeTime(10);
+		this.setMaxCooldown(8);
+		this.setMaxChargeTime(4);
 		this.setCancelable();
 		this.setDescription("Allows the user to charge multiple blocks in their mouth and shoot them all at the same time");
 

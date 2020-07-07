@@ -19,7 +19,7 @@ public class CandleWallAbility extends Ability
 	public CandleWallAbility()
 	{
 		super("Candle Wall", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(4);
+		this.setMaxCooldown(6);
 		this.setDescription("Creates a wax wall to protect the user.");
 		
 		this.onUseEvent = this::onUseEvent;

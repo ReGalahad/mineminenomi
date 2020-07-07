@@ -20,7 +20,7 @@ public class DaiEnkaiEnteiAbility extends ChargeableAbility
 	{
 		super("Dai Enkai: Entei", AbilityCategory.DEVIL_FRUIT);
 		this.setDescription("Amasses the user's flames into a gigantic fireball that the user hurls at the opponent.");
-		this.setMaxCooldown(25);
+		this.setMaxCooldown(20);
 		this.setMaxChargeTime(2);
 		
 		this.duringChargingEvent = this::duringChargingEvent;

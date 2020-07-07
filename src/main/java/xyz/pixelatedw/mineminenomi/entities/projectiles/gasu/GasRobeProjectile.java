@@ -32,7 +32,7 @@ public class GasRobeProjectile extends AbilityProjectileEntity
 	{
 		super(GasuProjectiles.GAS_ROBE, world, player);
 		
-		this.setDamage(1F);
+		this.setDamage(2);
 		this.setPassThroughEntities();
 		this.setChangeHurtTime(true);
 		

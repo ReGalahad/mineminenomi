@@ -18,7 +18,7 @@ public class YakkodoriAbility extends Ability
 	public YakkodoriAbility()
 	{
 		super("Yakkodori", AbilityCategory.RACIAL);
-		this.setMaxCooldown(5);
+		this.setMaxCooldown(6);
 		this.setDescription("Launches a crescent moon-shaped slash, which destroys everything in its path");
 
 		this.onUseEvent = this::onUseEvent;

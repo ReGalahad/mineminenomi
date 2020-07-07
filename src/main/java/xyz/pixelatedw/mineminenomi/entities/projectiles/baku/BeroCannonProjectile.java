@@ -26,7 +26,7 @@ public class BeroCannonProjectile extends AbilityProjectileEntity
 	{
 		super(BakuProjectiles.BERO_CANNON, world, player);
 
-		this.setDamage(8);
+		this.setDamage(10);
 		this.setPhysical();
 	}
 }
