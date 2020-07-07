@@ -21,7 +21,7 @@ public class ModArmors
 {
 	// Materials
     public static final GenericArmorMaterial BASIC_ARMOR_MATERIAL = new GenericArmorMaterial(APIConfig.PROJECT_ID + ":basic_armor", 100, new int[] { 1, 1, 1, 1 }, 12, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 2.0F,() -> Ingredient.fromItems(Items.LEATHER));
-    public static final GenericArmorMaterial CAPTAIN_CAPE_MATERIAL = new GenericArmorMaterial(APIConfig.PROJECT_ID + ":captain_cape", 100, new int[] { 2, 2, 2, 2 }, 12, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 2.0F,() -> Ingredient.fromItems(Items.LEATHER));
+    public static final GenericArmorMaterial CAPTAIN_CAPE_MATERIAL = new GenericArmorMaterial(APIConfig.PROJECT_ID + ":captain_cape", 100, new int[] { 2, 2, 2, 2 }, 12, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 2.0F,() -> Ingredient.fromItems(Items.WHITE_WOOL));
     public static final GenericArmorMaterial COLA_BACKPACK_MATERIAL = new GenericArmorMaterial(APIConfig.PROJECT_ID + ":cola_backpack", 100, new int[] { 1, 1, 1, 1 }, 12, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, 2.0F,() -> Ingredient.fromItems(ModItems.COLA));
     public static final GenericArmorMaterial MEDIC_BAG_MATERIAL = new GenericArmorMaterial(APIConfig.PROJECT_ID + ":medic_bag", 100, new int[] { 1, 1, 1, 1 }, 12, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 2.0F,() -> Ingredient.fromItems(Items.LEATHER));
     public static final GenericArmorMaterial TOMOE_DRUMS_MATERIAL = new GenericArmorMaterial(APIConfig.PROJECT_ID + ":tomoe_drums", 100, new int[] { 2, 2, 2, 2 }, 12, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 2.0F,() -> Ingredient.fromItems(Items.IRON_INGOT, Items.GOLD_INGOT));

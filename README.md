@@ -9,8 +9,8 @@ Mine Mine no Mi is a Minecraft Mod, using MinecraftForge, inspired by the famous
 * A bounty system for Pirates, Revolutionaries and other similar factions as well as a Bounty Hunter system for players to hunt them down
 * A crew system where Pirates can form their own crews, create a Jolly Roger and explore the world together
 * Quests and open world activities for players to do while in singleplayer or multiplayer
-* New weapon enchantments using dials or other new items 
-* Various weapons and vanity items from
+* New weapon/armor enchantments using dials or kairoseki
+* Various weapons and vanity items
 * Customization support for both servers and single player worlds in the form of different config options
 
 ## How to Install
