@@ -1,6 +1,11 @@
 package xyz.pixelatedw.mineminenomi.events.devilfruits;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
 import com.google.common.collect.ImmutableSet;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ChestBlock;
 import net.minecraft.entity.item.ItemEntity;
@@ -18,12 +23,10 @@ import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitHelper;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
+import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
+import xyz.pixelatedw.mineminenomi.items.AkumaNoMiItem;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
-
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class DFUserDeathEvents
@@ -45,6 +48,8 @@ public class DFUserDeathEvents
 			double chance = WyHelper.randomWithRange(1, 10);
 			PlayerEntity original = event.getOriginal();
 			IDevilFruit oldDevilFruit = DevilFruitCapability.get(event.getOriginal());
+			ExtendedWorldData worldData = ExtendedWorldData.get(original.world);
+
 			if (oldDevilFruit.hasDevilFruit())
 			{
 				List<ItemEntity> dropList = WyHelper.getEntitiesNear(event.getOriginal().getPosition(), event.getOriginal().world, 30, ItemEntity.class);
@@ -76,39 +81,73 @@ public class DFUserDeathEvents
 				villagers.removeIf(entry -> !entry.getVillagerInventory().hasAny(set));
 				if (!dropList.isEmpty() && droppedChance <= 15)
 				{
-					dropList.get(0).setItem(DevilFruitHelper.getDevilFruitItem(oldDevilFruit.getDevilFruit()));
+					if(CommonConfig.instance.hasOneFruitPerWorldSimpleLogic())
+					{
+						String oldFruit = oldDevilFruit.getDevilFruit();
+						if(worldData.isDevilFruitInWorld(oldFruit))
+						{
+							AkumaNoMiItem randomFruit = DevilFruitHelper.rouletteDevilFruits(original.getRNG().nextInt(3));
+							boolean isAvailable = DevilFruitHelper.oneFruitPerWorldCheck(original.world, randomFruit);
+							
+							if(isAvailable)
+								dropList.get(0).setItem(new ItemStack(randomFruit));
+						}
+						else
+							dropList.get(0).setItem(DevilFruitHelper.getDevilFruitItem(oldFruit));
+					}
+					else
+						dropList.get(0).setItem(DevilFruitHelper.getDevilFruitItem(oldDevilFruit.getDevilFruit()));
 				}
-				else if (!players.isEmpty() && chance == 1)
+				else if (!players.isEmpty() && chance <= 1)
 				{
 					int stackIndex = WyHelper.getIndexOfItemStack(new ItemStack(Items.APPLE), players.get(0).inventory);
 
 					if (stackIndex != -1)
-					{
-						players.get(0).inventory.setInventorySlotContents(stackIndex, DevilFruitHelper.getDevilFruitItem(oldDevilFruit.getDevilFruit()));
-					}
+						tryReplaceApple(original, worldData, players.get(0).inventory, stackIndex, oldDevilFruit.getDevilFruit());	
 				}
-				else if (!villagers.isEmpty() && chance == 1)
+				else if (!villagers.isEmpty() && chance <= 1)
 				{
 					int stackIndex = WyHelper.getIndexOfItemStack(new ItemStack(Items.APPLE), villagers.get(0).getVillagerInventory());
 					if (stackIndex != -1)
-					{
-						villagers.get(0).getVillagerInventory().setInventorySlotContents(stackIndex, DevilFruitHelper.getDevilFruitItem(oldDevilFruit.getDevilFruit()));
-					}
+						tryReplaceApple(original, worldData, players.get(0).inventory, stackIndex, oldDevilFruit.getDevilFruit());					
 				}
-				else if (!blockPosList.isEmpty() && chance == 1)
+				else if (!blockPosList.isEmpty() && chance <= 1)
 				{
 					BlockState state = original.world.getBlockState(blockPosList.get(0));
 					IInventory inven = ChestBlock.getInventory(state, original.world, blockPosList.get(0), false);
 					int stackIndex = WyHelper.getIndexOfItemStack(new ItemStack(Items.APPLE), inven);
 
 					if (stackIndex != -1)
+						tryReplaceApple(original, worldData, inven, stackIndex, oldDevilFruit.getDevilFruit());
+				}
+				else
+				{
+					if(CommonConfig.instance.hasOneFruitPerWorldSimpleLogic())
 					{
-						inven.setInventorySlotContents(stackIndex, DevilFruitHelper.getDevilFruitItem(oldDevilFruit.getDevilFruit()));
+						worldData.removeDevilFruitInWorld(oldDevilFruit.getDevilFruit());
 					}
 				}
 			}
 		}
-
+	}
+	
+	private static void tryReplaceApple(PlayerEntity original, ExtendedWorldData worldData, IInventory inven, int stackIndex, String oldFruit)
+	{
+		if(CommonConfig.instance.hasOneFruitPerWorldSimpleLogic())
+		{
+			if(worldData.isDevilFruitInWorld(oldFruit))
+			{
+				AkumaNoMiItem randomFruit = DevilFruitHelper.rouletteDevilFruits(original.getRNG().nextInt(3));
+				boolean isAvailable = DevilFruitHelper.oneFruitPerWorldCheck(original.world, randomFruit);
+				
+				if(isAvailable)
+					inven.setInventorySlotContents(stackIndex, new ItemStack(randomFruit));
+			}
+			else
+				inven.setInventorySlotContents(stackIndex, DevilFruitHelper.getDevilFruitItem(oldFruit));
+		}
+		else
+			inven.setInventorySlotContents(stackIndex, DevilFruitHelper.getDevilFruitItem(oldFruit));	
 	}
 
 }

@@ -12,10 +12,13 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Foods;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.HopperTileEntity;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Hand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -54,14 +57,14 @@ public class AkumaNoMiItem extends Item
 		this.name = name;
 		this.type = type;
 		this.abilities = abilitiesArray;
-		
-		if(tier == 1)
+
+		if (tier == 1)
 			DevilFruitHelper.tier1Fruits.add(this);
-		else if(tier == 2)
+		else if (tier == 2)
 			DevilFruitHelper.tier2Fruits.add(this);
-		else if(tier == 3)
+		else if (tier == 3)
 			DevilFruitHelper.tier3Fruits.add(this);
-		
+
 		if (this.type == EnumFruitType.LOGIA)
 			ModValues.logias.add(this);
 		ModValues.devilfruits.add(this);
@@ -77,23 +80,23 @@ public class AkumaNoMiItem extends Item
 	@Override
 	public ItemStack onItemUseFinish(ItemStack itemStack, World world, LivingEntity livingEntity)
 	{
-		if(!(livingEntity instanceof PlayerEntity))
+		if (!(livingEntity instanceof PlayerEntity))
 			return itemStack;
-		
+
 		PlayerEntity player = (PlayerEntity) livingEntity;
-	
+
 		IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
 		IEntityStats entityStatsProps = EntityStatsCapability.get(player);
 		IAbilityData abilityDataProps = AbilityDataCapability.get(player);
 
 		String eatenFruit = DevilFruitHelper.getDevilFruitKey(this);
-		
+
 		boolean hasYami = DevilFruitHelper.hasDevilFruit(player, ModAbilities.YAMI_YAMI_NO_MI);
-		
+
 		boolean flag1 = !WyHelper.isNullOrEmpty(devilFruitProps.getDevilFruit()) && !devilFruitProps.hasYamiPower() && !hasYami;
 		boolean flag2 = devilFruitProps.hasYamiPower() && !eatenFruit.equalsIgnoreCase(devilFruitProps.getDevilFruit()) && !devilFruitProps.getDevilFruit().equalsIgnoreCase("yamidummy");
 		boolean flag3 = !CommonConfig.instance.isYamiPowerEnabled() && !WyHelper.isNullOrEmpty(devilFruitProps.getDevilFruit()) && (hasYami || !eatenFruit.equalsIgnoreCase(devilFruitProps.getDevilFruit()));
-		
+
 		if (flag1 || flag2 || flag3)
 		{
 			player.attackEntityFrom(DamageSource.WITHER, player.getMaxHealth());
@@ -103,15 +106,15 @@ public class AkumaNoMiItem extends Item
 
 		if (this.type == EnumFruitType.LOGIA)
 			devilFruitProps.setLogia(true);
-		
+
 		if (!hasYami)
 			devilFruitProps.setDevilFruit(eatenFruit);
 		else
 		{
 			devilFruitProps.setLogia(false);
-			
+
 			devilFruitProps.setYamiPower(true);
-			
+
 			if (WyHelper.isNullOrEmpty(devilFruitProps.getDevilFruit()))
 				devilFruitProps.setDevilFruit("yamidummy");
 		}
@@ -122,30 +125,30 @@ public class AkumaNoMiItem extends Item
 			if (entityStatsProps.isFishman())
 			{
 				entityStatsProps.setRace(ModValues.HUMAN);
-				
-				//abilityDataProps.clearHotbarFromList(player, FishKarateAbilities.abilitiesArray);
+
+				// abilityDataProps.clearHotbarFromList(player, FishKarateAbilities.abilitiesArray);
 				AbilityHelper.validateStyleMoves(player);
 				AbilityHelper.validateRacialMoves(player);
-				//ModNetwork.sendTo(new PacketAbilityDataSync(abilityDataProps), (ServerPlayerEntity) player);
+				// ModNetwork.sendTo(new PacketAbilityDataSync(abilityDataProps), (ServerPlayerEntity) player);
 			}
 		}
 
-		if(!DevilFruitHelper.hasDevilFruit(player, ModAbilities.YOMI_YOMI_NO_MI))
+		if (!DevilFruitHelper.hasDevilFruit(player, ModAbilities.YOMI_YOMI_NO_MI))
 		{
-			for(Ability a : abilities)
-				if(!AbilityHelper.verifyIfAbilityIsBanned(a) && abilityDataProps.getUnlockedAbility(a) == null)
+			for (Ability a : abilities)
+				if (!AbilityHelper.verifyIfAbilityIsBanned(a) && abilityDataProps.getUnlockedAbility(a) == null)
 					abilityDataProps.addUnlockedAbility(a);
-			if(!player.world.isRemote)
+			if (!player.world.isRemote)
 			{
 				WyNetwork.sendTo(new SSyncDevilFruitPacket(player.getEntityId(), devilFruitProps), player);
 				WyNetwork.sendTo(new SSyncAbilityDataPacket(player.getEntityId(), abilityDataProps), player);
-			}		
+			}
 		}
-		
+
 		itemStack.shrink(1);
 		return itemStack;
 	}
-	
+
 	@Override
 	public void addInformation(ItemStack itemStack, @Nullable World world, List<ITextComponent> list, ITooltipFlag par4)
 	{
@@ -156,24 +159,74 @@ public class AkumaNoMiItem extends Item
 		list.add(new StringTextComponent(""));
 		list.add(new StringTextComponent(this.type.getColor() + this.type.getName()));
 	}
-	
+
 	@Override
 	public boolean onEntityItemUpdate(ItemStack stack, ItemEntity entity)
-    {
-    	ExtendedWorldData worldData = ExtendedWorldData.get(entity.world);
+	{
+		ExtendedWorldData worldData = ExtendedWorldData.get(entity.world);
 
-    	if(entity.isBurning())
-    		worldData.removeDevilFruitInWorld(this);
+		if (entity.isBurning())
+		{
+			entity.remove();
+			worldData.removeDevilFruitInWorld(this);
+		}
 
-    	if(entity.getPosition().getY() < -1)
-    	{
-    		entity.remove();
-    		worldData.removeDevilFruitInWorld(this);
-    	}
-    	
-        return false;
-    }
-	
+		if (entity.getPosition().getY() < -1)
+		{
+			entity.remove();
+			worldData.removeDevilFruitInWorld(this);
+		}
+
+		List<BlockPos> blockPosList = WyHelper.getNearbyTileEntities(entity.getPosition(), entity.world, 2);
+
+		if (entity.getThrowerId() != null)
+		{
+			PlayerEntity player = entity.world.getPlayerByUuid(entity.getThrowerId());
+
+			if (player != null)
+			{
+				for (BlockPos pos : blockPosList)
+				{
+					TileEntity te = entity.world.getTileEntity(pos);
+
+					if (te instanceof HopperTileEntity)
+					{
+						entity.world.addEntity(new ItemEntity(entity.world, player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ(), stack.copy()));
+						entity.remove();
+						return false;
+					}
+				}
+			}
+		}
+		else
+		{
+			List<PlayerEntity> nearbyPlayers = WyHelper.getEntitiesNear(entity.getPosition(), entity.world, 10, PlayerEntity.class);
+
+			if (nearbyPlayers.size() > 0)
+			{
+				PlayerEntity player = nearbyPlayers.get(0);
+				for (BlockPos pos : blockPosList)
+				{
+					TileEntity te = entity.world.getTileEntity(pos);
+
+					if (te instanceof HopperTileEntity)
+					{
+						entity.world.addEntity(new ItemEntity(entity.world, player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ(), stack.copy()));
+						entity.remove();
+						return false;
+					}
+				}
+			}
+			else
+			{
+				entity.remove();
+				worldData.removeDevilFruitInWorld(this);
+			}
+		}
+
+		return false;
+	}
+
 	public EnumFruitType getType()
 	{
 		return this.type;

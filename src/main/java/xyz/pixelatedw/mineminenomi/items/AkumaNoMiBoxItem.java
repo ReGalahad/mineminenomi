@@ -58,7 +58,7 @@ public class AkumaNoMiBoxItem extends Item
 			player.inventory.deleteStack(itemStack);
 
 			AkumaNoMiItem randomFruit = DevilFruitHelper.rouletteDevilFruits(this.tier);
-			boolean isAvailable = true && DevilFruitHelper.oneFruitPerWorldCheck(world, randomFruit);
+			boolean isAvailable = DevilFruitHelper.oneFruitPerWorldCheck(world, randomFruit);
 
 			if (isAvailable)
 			{

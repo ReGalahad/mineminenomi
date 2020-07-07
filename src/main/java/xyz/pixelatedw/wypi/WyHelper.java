@@ -355,26 +355,10 @@ public class WyHelper
 
 	public static List<BlockPos> getNearbyBlocks(LivingEntity player, int radius)
 	{
-		List<BlockPos> blockLocations = new ArrayList<BlockPos>();
-		for (int x = -radius; x <= radius; x++)
-		{
-			for (int y = -radius; y <= radius; y++)
-			{
-				for (int z = -radius; z <= radius; z++)
-				{
-					BlockPos pos = new BlockPos(player.posX + x, player.posY + y, player.posZ + z);
-					if (player.world.getBlockState(pos).getBlock() != Blocks.AIR)
-					{
-						blockLocations.add(pos);
-					}
-				}
-			}
-		}
-
-		return blockLocations;
+		return getNearbyBlocks(player.getPosition(), player.world, radius);
 	}
 
-	public static List<BlockPos> getNearbyTileEntities(LivingEntity player, int radius)
+	public static List<BlockPos> getNearbyBlocks(BlockPos pos, World world, int radius)
 	{
 		List<BlockPos> blockLocations = new ArrayList<BlockPos>();
 		for (int x = -radius; x <= radius; x++)
@@ -383,10 +367,36 @@ public class WyHelper
 			{
 				for (int z = -radius; z <= radius; z++)
 				{
-					BlockPos pos = new BlockPos(player.posX + x, player.posY + y, player.posZ + z);
-					if (player.world.getBlockState(pos).getBlock() != Blocks.AIR && player.world.getTileEntity(pos) != null)
+					BlockPos newPos = new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
+					if (world.getBlockState(newPos).getBlock() != Blocks.AIR)
 					{
-						blockLocations.add(pos);
+						blockLocations.add(newPos);
+					}
+				}
+			}
+		}
+
+		return blockLocations;
+	}
+	
+	public static List<BlockPos> getNearbyTileEntities(LivingEntity player, int radius)
+	{
+		return getNearbyTileEntities(player.getPosition(), player.world, radius);
+	}
+	
+	public static List<BlockPos> getNearbyTileEntities(BlockPos pos, World world, int radius)
+	{
+		List<BlockPos> blockLocations = new ArrayList<BlockPos>();
+		for (int x = -radius; x <= radius; x++)
+		{
+			for (int y = -radius; y <= radius; y++)
+			{
+				for (int z = -radius; z <= radius; z++)
+				{
+					BlockPos newPos = new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
+					if (world.getBlockState(newPos).getBlock() != Blocks.AIR && world.getTileEntity(newPos) != null)
+					{
+						blockLocations.add(newPos);
 					}
 				}
 			}

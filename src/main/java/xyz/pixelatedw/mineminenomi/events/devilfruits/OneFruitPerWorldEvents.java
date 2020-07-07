@@ -1,19 +1,10 @@
 package xyz.pixelatedw.mineminenomi.events.devilfruits;
 
-import java.util.List;
-
 import net.minecraft.block.LeavesBlock;
-import net.minecraft.client.gui.screen.inventory.CreativeScreen.CreativeContainer;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.item.ItemFrameEntity;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.inventory.container.PlayerContainer;
-import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.item.ItemExpireEvent;
 import net.minecraftforge.event.entity.player.PlayerContainerEvent;
@@ -71,6 +62,7 @@ public class OneFruitPerWorldEvents
 	@SubscribeEvent
 	public static void onStored(PlayerContainerEvent.Close event)
 	{
+		/*
 		if (CommonConfig.instance.hasOneFruitPerWorldExtendedLogic() && !(event.getContainer() instanceof CreativeContainer) && !(event.getContainer() instanceof PlayerContainer))
 		{
 			int containerSlots = event.getContainer().inventorySlots.size() - (event.getPlayer().inventory.mainInventory.size());
@@ -96,6 +88,7 @@ public class OneFruitPerWorldEvents
 				}
 			}
 		}
+		*/
 	}
 	
 	@SubscribeEvent
