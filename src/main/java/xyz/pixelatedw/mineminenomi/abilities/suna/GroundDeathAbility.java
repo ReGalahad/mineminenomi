@@ -24,7 +24,7 @@ public class GroundDeathAbility extends Ability
 	public GroundDeathAbility()
 	{
 		super("Ground Death", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(15);
+		this.setMaxCooldown(18);
 		this.setDescription("Dries out the surroundings and suffucates all nearby opponents in sand.");
 
 		this.onUseEvent = this::onUseEvent;

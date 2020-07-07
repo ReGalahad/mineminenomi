@@ -27,7 +27,7 @@ public class KyubiRushAbility extends PunchAbility
 		
 		if (target.isPotionActive(Effects.SLOWNESS))
 		{
-			damageFromSlowness = (float) (Math.sqrt(target.getActivePotionEffect(Effects.SLOWNESS).getDuration()) / 2);
+			damageFromSlowness = (float) (Math.sqrt(target.getActivePotionEffect(Effects.SLOWNESS).getDuration()) / 1.5f);
 			int newTime = target.getActivePotionEffect(Effects.SLOWNESS).getDuration() / 2;
 			int newAmplifier = target.getActivePotionEffect(Effects.SLOWNESS).getAmplifier() - 5;
 			target.removePotionEffect(Effects.SLOWNESS);

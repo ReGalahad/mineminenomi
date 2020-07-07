@@ -13,7 +13,7 @@ public class IceBlockPartisanAbility extends RepeaterAbility
 	public IceBlockPartisanAbility()
 	{
 		super("Ice Block: Partisan", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(7);
+		this.setMaxCooldown(8);
 		this.setMaxRepearCount(5, 3);
 		this.setDescription("Creates several spears of ice that the user hurls at the enemy.");
 

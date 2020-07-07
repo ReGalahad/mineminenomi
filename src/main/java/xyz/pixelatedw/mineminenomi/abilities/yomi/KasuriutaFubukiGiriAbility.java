@@ -29,7 +29,7 @@ public class KasuriutaFubukiGiriAbility extends Ability
 	public KasuriutaFubukiGiriAbility()
 	{
 		super("Kasuriuta: Fubuki Giri", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(10);
+		this.setMaxCooldown(8);
 
 		this.onUseEvent = this::onUseEvent;
 		this.duringCooldownEvent = this::duringCooldown;

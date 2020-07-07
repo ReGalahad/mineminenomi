@@ -19,7 +19,7 @@ public class StrongRightAbility extends Ability
 	public StrongRightAbility()
 	{
 		super("Strong Right", AbilityCategory.RACIAL);
-		this.setMaxCooldown(3);
+		this.setMaxCooldown(7);
 		this.setDescription("The user punches the opponent with a metal fist.");
 
 		this.onUseEvent = this::onUseEvent;

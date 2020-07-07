@@ -12,7 +12,7 @@ public class SparClawAbility extends PunchAbility
 	public SparClawAbility()
 	{
 		super("Spar Claw", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(5);
+		this.setMaxCooldown(6);
 		this.setDescription("Turns the undersides of the user's fingers into blades before slashing at his opponent.");
 
 		this.onHitEntityEvent = this::onHitEntityEvent;
@@ -20,6 +20,6 @@ public class SparClawAbility extends PunchAbility
 	
 	private float onHitEntityEvent(PlayerEntity player, LivingEntity target)
 	{
-		return 10;
+		return 14;
 	}
 }

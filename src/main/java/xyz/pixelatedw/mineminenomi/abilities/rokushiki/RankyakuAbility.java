@@ -12,7 +12,7 @@ public class RankyakuAbility extends Ability
 	public RankyakuAbility()
 	{
 		super("Rankyaku", AbilityCategory.RACIAL);
-		this.setMaxCooldown(8);
+		this.setMaxCooldown(10);
 		this.setDescription("By kicking at a very high speed, the user launches an air blade at the opponent.");
 
 		this.onUseEvent = this::onUseEvent;

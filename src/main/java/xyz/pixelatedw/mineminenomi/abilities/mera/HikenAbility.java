@@ -12,7 +12,7 @@ public class HikenAbility extends Ability
 	public HikenAbility()
 	{
 		super("Hiken", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(8);
+		this.setMaxCooldown(10);
 		this.setDescription("Turns the user's fist into flames and launches it towards the target.");
 
 		this.onUseEvent = this::onUseEvent;

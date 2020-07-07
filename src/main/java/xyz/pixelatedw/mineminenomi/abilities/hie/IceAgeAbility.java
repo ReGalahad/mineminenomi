@@ -18,8 +18,9 @@ import xyz.pixelatedw.mineminenomi.particles.effects.hie.IceAgeParticleEffect;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.abilities.ChargeableAbility;
 
-public class IceAgeAbility extends Ability
+public class IceAgeAbility extends ChargeableAbility
 {
 	public static final Ability INSTANCE = new IceAgeAbility();
 
@@ -30,6 +31,7 @@ public class IceAgeAbility extends Ability
 	{
 		super("Ice Age", AbilityCategory.DEVIL_FRUIT);
 		this.setMaxCooldown(15);
+		this.setChargeTime(5);
 		this.setDescription("Freezes a large area around the user and everyone inside of it.");
 
 		this.onUseEvent = this::onUseEvent;

@@ -41,7 +41,7 @@ public class MoguraTonpoAbility extends Ability
 	public MoguraTonpoAbility()
 	{
 		super("Mogura Tonpo", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(15);
+		this.setMaxCooldown(12);
 
 		this.onUseEvent = this::onUseEvent;
 		this.duringCooldownEvent = this::duringCooldown;

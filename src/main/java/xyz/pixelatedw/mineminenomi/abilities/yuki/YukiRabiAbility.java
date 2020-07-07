@@ -13,7 +13,7 @@ public class YukiRabiAbility extends RepeaterAbility
 	{
 		super("Yuki Rabi", AbilityCategory.DEVIL_FRUIT);
 		this.setDescription("Launches numerous hardened snowballs, that have the shape of a rabbit's head.");
-		this.setMaxCooldown(2);
+		this.setMaxCooldown(4);
 		this.setMaxRepearCount(6, 3);
 
 		this.onUseEvent = this::onUseEvent;

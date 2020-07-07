@@ -19,7 +19,7 @@ public class YukiGakiAbility extends Ability
 	public YukiGakiAbility()
 	{
 		super("Yuki Gaki", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(12);
+		this.setMaxCooldown(7);
 		this.setDescription("Creates a wall made of hardened snow to protect the user.");
 		
 		this.onUseEvent = this::onUseEvent;

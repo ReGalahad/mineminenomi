@@ -12,7 +12,7 @@ public class ChloroBallAbility extends Ability
 	public ChloroBallAbility()
 	{
 		super("Chloro Ball", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(6);
+		this.setMaxCooldown(7);
 		this.setDescription("The user spits a bubble made of poison towards the enemy, which leaves poison on the ground.");
 
 		this.onUseEvent = this::onUseEvent;

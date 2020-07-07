@@ -21,7 +21,7 @@ public class IvoryStompAbility extends PunchAbility
 	public IvoryStompAbility()
 	{
 		super("Ivory Stomp", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(10);
+		this.setMaxCooldown(6);
 		
 		this.onStartContinuityEvent = this::onStartContinuityEvent;
 		this.onHitEntityEvent = this::onHitEntityEvent;

@@ -27,7 +27,7 @@ public class FubukiAbility extends Ability
 	public FubukiAbility()
 	{
 		super("Fubuki", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(15);
+		this.setMaxCooldown(10);
 		this.setDescription("The user releases an extremely cold stream of snow that spreads into the air around them.");
 		
 		this.onUseEvent = this::onUseEvent;

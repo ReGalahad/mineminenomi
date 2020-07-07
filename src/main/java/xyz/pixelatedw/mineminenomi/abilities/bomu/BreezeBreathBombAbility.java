@@ -9,7 +9,7 @@ public class BreezeBreathBombAbility extends ContinuousAbility{
 	
 	public BreezeBreathBombAbility() {
 		super("Breeze Breath Bomb", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(4);
+		this.setMaxCooldown(7);
 	}
 
 }

@@ -25,7 +25,7 @@ public class GreatStompAbility extends Ability
 	public GreatStompAbility()
 	{
 		super("Great Stomp", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(15);
+		this.setMaxCooldown(12);
 		
 		this.onUseEvent = this::onUseEvent;
 	}

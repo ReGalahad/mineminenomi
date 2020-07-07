@@ -12,7 +12,7 @@ public class KaishinAbility extends Ability
 	public KaishinAbility()
 	{
 		super("Kaishin", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(10);
+		this.setMaxCooldown(18);
 		this.setDescription("The user cracks the air, which launches a small but powerful shockwave towards the opponent.");
 
 		this.onUseEvent = this::onUseEvent;

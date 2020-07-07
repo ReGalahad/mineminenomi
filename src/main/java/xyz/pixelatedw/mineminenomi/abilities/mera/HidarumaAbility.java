@@ -12,7 +12,7 @@ public class HidarumaAbility extends Ability
 	public HidarumaAbility()
 	{
 		super("Hidaruma", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(6);
+		this.setMaxCooldown(5);
 		this.setDescription("Creates small green fireballs that set the target on fire.");
 
 		this.onUseEvent = this::onUseEvent;

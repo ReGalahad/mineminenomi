@@ -30,7 +30,7 @@ public class ShishaNoTeProjectile extends AbilityProjectileEntity
 	{
 		super(SukeProjectiles.SHISHA_NO_TE, world, player);
 
-		this.setDamage(20);
+		this.setDamage(18);
 		
 		this.onBlockImpactEvent = this::onBlockImpactEvent;
 	}

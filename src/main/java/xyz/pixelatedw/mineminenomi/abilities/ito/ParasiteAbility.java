@@ -18,7 +18,7 @@ public class ParasiteAbility extends Ability
 	{
 		super("Parasite", AbilityCategory.DEVIL_FRUIT);
 		this.setDescription("By attaching your strings to nearby enemies they'll start attacking nearby targets, except you!");
-		this.setMaxCooldown(10);
+		this.setMaxCooldown(14);
 		
 		this.onUseEvent = this::onUseEvent;
 	}

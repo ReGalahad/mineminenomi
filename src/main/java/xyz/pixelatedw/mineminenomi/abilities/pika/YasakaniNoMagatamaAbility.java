@@ -13,7 +13,7 @@ public class YasakaniNoMagatamaAbility extends RepeaterAbility
 	public YasakaniNoMagatamaAbility()
 	{
 		super("Yasakani no Magatama", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(2.5);
+		this.setMaxCooldown(4);
 		this.setMaxRepearCount(7, 2);
 		this.setDescription("Fires a torrent of deadly light particles, causing huge destruction.");
 

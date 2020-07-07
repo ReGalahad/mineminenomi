@@ -12,7 +12,7 @@ public class WhiteSnakeAbility extends Ability
 	public WhiteSnakeAbility()
 	{
 		super("White Snake", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(10);
+		this.setMaxCooldown(12);
 		this.setDescription("Launches a long dense smoke cloud in the shape of a snake that will damage and give poison its target.");
 
 		this.onUseEvent = this::onUseEvent;

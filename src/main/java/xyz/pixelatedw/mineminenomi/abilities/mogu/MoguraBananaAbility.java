@@ -21,7 +21,7 @@ public class MoguraBananaAbility extends PunchAbility
 	public MoguraBananaAbility()
 	{
 		super("Mogura Banana", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(12);
+		this.setMaxCooldown(6);
 				
 		this.onStartContinuityEvent = this::onStartContinuityEvent;
 		this.onHitEntityEvent = this::onHitEntityEvent;
@@ -47,6 +47,6 @@ public class MoguraBananaAbility extends PunchAbility
 		if(target instanceof PlayerEntity)
 			((ServerPlayerEntity)target).connection.sendPacket(new SEntityVelocityPacket(target));
 				
-		return 10;
+		return 12;
 	}
 }

@@ -28,7 +28,7 @@ public class HydraProjectile extends AbilityProjectileEntity
 	{
 		super(DokuProjectiles.HYDRA, world, player);
 
-		this.setDamage(30);
+		this.setDamage(25);
 		this.setMaxLife(15);
 		this.setPassThroughEntities();
 		

@@ -19,7 +19,7 @@ public class MesAbility extends PunchAbility
 	public MesAbility()
 	{
 		super("MES", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(5);
+		this.setMaxCooldown(10);
 		this.setDescription("Removes the heart of the user's target which they can then damage to hurt the opponent");
 
 		this.onHitEntityEvent = this::onHitEntity;

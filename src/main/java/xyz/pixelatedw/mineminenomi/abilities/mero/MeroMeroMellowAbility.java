@@ -12,7 +12,7 @@ public class MeroMeroMellowAbility extends Ability
 	public MeroMeroMellowAbility()
 	{
 		super("Mero Mero Mellow", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(20);
+		this.setMaxCooldown(15);
 		this.setDescription("Fires a heart-shaped beam, turning every enemy in its path into stone.");
 
 		this.onUseEvent = this::onUseEvent;

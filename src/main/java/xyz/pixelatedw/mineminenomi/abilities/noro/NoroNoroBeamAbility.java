@@ -12,7 +12,7 @@ public class NoroNoroBeamAbility extends Ability
 	public NoroNoroBeamAbility()
 	{
 		super("Noro Noro Beam", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(5);
+		this.setMaxCooldown(4);
 		this.setDescription("Shoots a beam of photons at the opponent, completely slowing them down");
 
 		this.onUseEvent = this::onUseEvent;

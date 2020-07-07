@@ -16,7 +16,7 @@ public class GammaKnifeAbility extends Ability
 	public GammaKnifeAbility()
 	{
 		super("Gamma Knife", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(30);
+		this.setMaxCooldown(20);
 		this.setDescription("Creates a blade of gamma radiation which massively damages the opponent's organs");
 
 		this.onUseEvent = this::onUseEvent;

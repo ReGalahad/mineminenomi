@@ -39,7 +39,7 @@ public class EffectsEvents
 		if(entity.getActivePotionEffect(ModEffects.GUARDING) != null) {
 			EffectInstance instance = entity.getActivePotionEffect(ModEffects.GUARDING);
 			float power = (instance.getAmplifier() + 1) * 10;
-			if(event.getAmount() > power) {
+			if(event.getAmount() >= power) {
 				if(event.getAmount() * 0.4f - power >  0) event.setAmount(event.getAmount() * 0.4f - power);
 				else event.setAmount(event.getAmount() - power);
 			} else {

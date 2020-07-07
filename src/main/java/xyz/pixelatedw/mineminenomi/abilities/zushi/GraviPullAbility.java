@@ -21,7 +21,7 @@ public class GraviPullAbility extends ChargeableAbility{
 		this.setMaxChargeTime(1);
 		this.onEndChargingEvent = this::onEndChargingEvent; 
 
-		this.setMaxCooldown(30);
+		this.setMaxCooldown(15);
 	}
 
 	

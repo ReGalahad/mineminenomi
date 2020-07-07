@@ -17,7 +17,7 @@ public class SablesAbility extends PunchAbility
 	public SablesAbility()
 	{
 		super("Sables", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(3);
+		this.setMaxCooldown(5);
 		this.setDescription("The user launches a compressed sandstorm at the opponent, which sends them flying.");
 
 		this.onHitEntityEvent = this::onHitEntity;
@@ -31,6 +31,6 @@ public class SablesAbility extends PunchAbility
 		target.setMotion(0, 2, 0);
 		target.velocityChanged = true;
 
-		return 0;
+		return 1;
 	}
 }

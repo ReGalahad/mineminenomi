@@ -22,6 +22,8 @@ import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 
+import java.util.Vector;
+
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class MaguPassiveEvents
 {
@@ -29,7 +31,7 @@ public class MaguPassiveEvents
 
 	public static boolean maguDamage(LivingEntity target, LivingEntity attacker) {
 		attacker.setFire(8);
-		attacker.attackEntityFrom(DamageSource.causePlayerDamage((PlayerEntity) target), 5);
+		attacker.attackEntityFrom(DamageSource.LAVA, 5);
 		return true;
 	}
 
@@ -45,11 +47,16 @@ public class MaguPassiveEvents
 		if (!devilFruitProps.getDevilFruit().equals("magu_magu"))
 			return;
 
-		Vec3d vec3d = player.getMotion();
-		IAbilityData abilityProps = AbilityDataCapability.get(player);
-		
-		if (player.isInLava() && !player.abilities.isFlying)
-			player.setMotion(vec3d.mul(1.9F, 1.2F, 1.9F));
+		if (player.isInLava() && !player.abilities.isFlying) {
+			float a = (player.moveForward > 0) ? 2f : 0.5f;
+			float y = player.isSneaking() && !(player.posY - player.prevPosY > 0) ? 2f : 0f;
+			Vec3d vec3d = player.getMotion().mul(a, y, a);
+
+			if(player.posY - player.prevPosY > 0)
+				player.setMotion(vec3d.add(0, 0.1, 0));
+			else
+				player.setMotion(vec3d);
+		}
 	}
 
 	@OnlyIn(Dist.CLIENT)
@@ -63,9 +70,7 @@ public class MaguPassiveEvents
 			return;
 
 		if(player.isBurning() && player.areEyesInFluid(FluidTags.LAVA))
-		{
 			event.setCanceled(true);
-		}
 	}
 	
 	@OnlyIn(Dist.CLIENT)

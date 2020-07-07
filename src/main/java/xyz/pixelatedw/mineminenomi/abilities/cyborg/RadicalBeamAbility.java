@@ -19,7 +19,7 @@ public class RadicalBeamAbility extends Ability
 	public RadicalBeamAbility()
 	{
 		super("Radical Beam", AbilityCategory.RACIAL);
-		this.setMaxCooldown(7);
+		this.setMaxCooldown(11);
 		this.setDescription("The user launches a powerful beam of energy at the opponent.");
 
 		this.onUseEvent = this::onUseEvent;

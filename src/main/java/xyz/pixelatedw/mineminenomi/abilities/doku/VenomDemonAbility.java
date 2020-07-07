@@ -24,7 +24,7 @@ public class VenomDemonAbility extends ZoanAbility
 	public VenomDemonAbility()
 	{
 		super("Venom Demon", AbilityCategory.DEVIL_FRUIT, VenomDemonZoanInfo.FORM);
-		this.setMaxCooldown(3);
+		this.setMaxCooldown(40);
 		this.setThreshold(60);
 		this.setDescription("The user coats himself in layers of strong corrosive venom, becoming a Venom Demon and leaving a highly poisonous trail.");
 

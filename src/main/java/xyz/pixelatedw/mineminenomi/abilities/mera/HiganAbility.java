@@ -14,7 +14,7 @@ public class HiganAbility extends RepeaterAbility
 	{
 		super("Higan", AbilityCategory.DEVIL_FRUIT);
 		this.setDescription("Turns the user's fingertips into flames and shoots bullets made of fire from them.");
-		this.setMaxCooldown(4);
+		this.setMaxCooldown(5);
 		this.setMaxRepearCount(5, 2);
 
 		this.onUseEvent = this::onUseEvent;
