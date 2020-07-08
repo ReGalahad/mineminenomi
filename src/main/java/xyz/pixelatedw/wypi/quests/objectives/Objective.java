@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.text.TranslationTextComponent;
+import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
 
 public abstract class Objective
@@ -123,6 +125,11 @@ public abstract class Objective
 		return true;
 	}
 	
+	public String getLocalizedTitle() 
+	{
+		String objectiveKey = new TranslationTextComponent(String.format("quest.objective." + APIConfig.PROJECT_ID + ".%s", this.getId())).getKey();
+		return new TranslationTextComponent(objectiveKey, ((int)this.getMaxProgress())).getFormattedText(); 
+	}
 	
 	
 	/*

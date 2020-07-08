@@ -5,6 +5,7 @@ import java.util.List;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraftforge.event.entity.item.ItemTossEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
@@ -89,7 +90,29 @@ public class QuestEvents
 			{
 				if (((IObtainItemObjective) obj).checkItem(event.getItem().getItem()))
 				{
-					obj.alterProgress(1);
+					obj.alterProgress(event.getItem().getItem().getCount());
+					WyNetwork.sendTo(new SSyncQuestDataPacket(player.getEntityId(), questProps), player);
+				}
+			}
+		}
+	}
+	
+	@SubscribeEvent
+	public static void onItemTossed(ItemTossEvent event)
+	{
+		PlayerEntity player = event.getPlayer();
+		IQuestData questProps = QuestDataCapability.get(player);
+		
+		if(player.world.isRemote)
+			return;
+		
+		for (Objective obj : getObjectives(questProps))
+		{
+			if (obj instanceof IObtainItemObjective)
+			{
+				if (((IObtainItemObjective) obj).checkItem(event.getEntityItem().getItem()) && obj.getProgress() > 0)
+				{
+					obj.alterProgress(-event.getEntityItem().getItem().getCount());
 					WyNetwork.sendTo(new SSyncQuestDataPacket(player.getEntityId(), questProps), player);
 				}
 			}

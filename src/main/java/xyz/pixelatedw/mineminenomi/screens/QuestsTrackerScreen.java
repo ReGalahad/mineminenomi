@@ -11,7 +11,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnchantmentNameParts;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -27,10 +26,7 @@ import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.data.quest.IQuestData;
 import xyz.pixelatedw.wypi.data.quest.QuestDataCapability;
 import xyz.pixelatedw.wypi.debug.WyDebug;
-import xyz.pixelatedw.wypi.network.WyNetwork;
-import xyz.pixelatedw.wypi.network.packets.client.CSyncQuestDataPacket;
 import xyz.pixelatedw.wypi.quests.Quest;
-import xyz.pixelatedw.wypi.quests.objectives.IObtainItemObjective;
 import xyz.pixelatedw.wypi.quests.objectives.Objective;
 
 @OnlyIn(Dist.CLIENT)
@@ -123,7 +119,7 @@ public class QuestsTrackerScreen extends Screen
 					if(obj.isComplete())
 						continue;
 					
-					String objectiveName = new TranslationTextComponent(String.format("quest.objective." + APIConfig.PROJECT_ID + ".%s", obj.getId())).getFormattedText();
+					String objectiveName = obj.getLocalizedTitle();
 					String progress = "";
 					double objectiveProgress = (obj.getProgress() / obj.getMaxProgress()) * 100;
 					List<Objective> hiddenObjs = avilableObjectives.stream().filter(o -> o.isHidden()).collect(Collectors.toList());
@@ -190,18 +186,6 @@ public class QuestsTrackerScreen extends Screen
 			if(obj.isHidden())
 			{
 				this.hiddenTexts.add(EnchantmentNameParts.getInstance().generateNewRandomName(Minecraft.getInstance().fontRenderer, obj.getTitle().length() * 2));
-			}
-			
-			if (!obj.isHidden() && !obj.isLocked() && !obj.isComplete() && obj instanceof IObtainItemObjective)
-			{
-				for(ItemStack stack : this.player.inventory.mainInventory)
-				{
-					if (((IObtainItemObjective) obj).checkItem(stack))
-					{
-						obj.alterProgress(1);
-						WyNetwork.sendToServer(new CSyncQuestDataPacket(QuestDataCapability.get(this.player)));
-					}
-				}
 			}
 		}
 		
