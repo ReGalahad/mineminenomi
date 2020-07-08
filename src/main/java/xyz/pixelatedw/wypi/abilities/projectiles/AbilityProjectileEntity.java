@@ -85,6 +85,7 @@ public class AbilityProjectileEntity extends ThrowableEntity
 			if (this.life <= 0)
 			{
 				this.life = this.maxLife;
+				this.onBlockImpactEvent.onImpact(this.getPosition());
 				this.remove();
 			}
 			else

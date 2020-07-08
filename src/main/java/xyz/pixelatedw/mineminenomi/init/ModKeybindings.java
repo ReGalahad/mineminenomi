@@ -110,7 +110,7 @@ public class ModKeybindings
 			{
 				for (KeyBinding kb : keyBindsCombatbar)
 				{
-					if (kb.getKey().getKeyCode() < GLFW.GLFW_KEY_8)
+					if (kb.getKey().getKeyCode() <= GLFW.GLFW_KEY_8)
 						kb.bind(InputMappings.getInputByCode(GLFW.GLFW_KEY_UNKNOWN, 0));
 				}
 

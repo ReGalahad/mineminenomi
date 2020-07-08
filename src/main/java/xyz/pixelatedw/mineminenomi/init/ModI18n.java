@@ -100,6 +100,9 @@ public class ModI18n
 		
 		// Messages
 		WyRegistry.registerName("death.attack.ability_projectile", "%1$s was killed by %2$s");
+		
+		// Special
+		WyRegistry.registerName("scancode.0", "No Key");
 	}
 	
 }
