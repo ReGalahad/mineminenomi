@@ -16,8 +16,6 @@ import xyz.pixelatedw.mineminenomi.items.weapons.CoreSwordItem;
 import xyz.pixelatedw.mineminenomi.items.weapons.GunItem;
 import xyz.pixelatedw.mineminenomi.items.weapons.KujaBowItem;
 import xyz.pixelatedw.mineminenomi.items.weapons.PopGreenBowItem;
-import xyz.pixelatedw.mineminenomi.items.weapons.RepeaterGunItem;
-import xyz.pixelatedw.mineminenomi.items.weapons.RepeaterPopGreenBowItem;
 import xyz.pixelatedw.mineminenomi.items.weapons.ScissorsItem;
 import xyz.pixelatedw.mineminenomi.items.weapons.UmbrellaItem;
 import xyz.pixelatedw.wypi.APIConfig;
@@ -63,14 +61,14 @@ public class ModWeapons
 	public static final CoreSwordItem MACE = new CoreSwordItem(8, 800).setBlunt().setSwordSpeed(-3);
 
 	// Normal Ranged Weapons
-	public static final GunItem FLINTLOCK = new RepeaterGunItem(15, 2, 2, 0.8f);
+	public static final GunItem FLINTLOCK = new GunItem(200).setShotCooldown(5).setReloadCooldown(40).setBulletAccuracy(2).setBulletSpeed(2).setDamageMultiplier(1.6F).setGunpowderLimit(5);
 	public static final KujaBowItem GREEN_KUJA_BOW = new KujaBowItem();
 	public static final KujaBowItem RED_KUJA_BOW = new KujaBowItem();
 	public static final KujaBowItem BLUE_KUJA_BOW = new KujaBowItem();
-	public static final PopGreenBowItem KABUTO = new PopGreenBowItem(1d);
-	public static final PopGreenBowItem BLACK_KABUTO = new PopGreenBowItem(1.5d);
-	public static final PopGreenBowItem GINGA_PACHINKO = new RepeaterPopGreenBowItem(0.8d);
-	public static final GunItem SENRIKU = new GunItem(25, 4, 0, 1.5F);
+	public static final PopGreenBowItem KABUTO = new PopGreenBowItem();
+	public static final PopGreenBowItem BLACK_KABUTO = new PopGreenBowItem();
+	public static final PopGreenBowItem GINGA_PACHINKO = new PopGreenBowItem();
+	public static final GunItem SENRIKU = new GunItem(800).setShotCooldown(25).setReloadCooldown(80).setBulletAccuracy(0).setBulletSpeed(4).setDamageMultiplier(2F).setGunpowderLimit(2);
 
 	// Devil Fruit Weapons
 	public static final AbilitySwordItem ICE_SABER = new AbilitySwordItem(IceSaberAbility.INSTANCE, 9).setIsSlownessInducing();
@@ -130,8 +128,8 @@ public class ModWeapons
 
 		registerSimple3DItem(FLINTLOCK, "Flintlock");
 		registerCustom3DItem(GREEN_KUJA_BOW, "Green Kuja Bow", GREEN_KUJA_BOW_MODEL);
-		registerCustom3DItem(RED_KUJA_BOW, "Red Kuja Bow", RED_KUJA_BOW_MODEL);
-		registerCustom3DItem(BLUE_KUJA_BOW, "Blue Kuja Bow", BLUE_KUJA_BOW_MODEL);
+		//registerCustom3DItem(RED_KUJA_BOW, "Red Kuja Bow", RED_KUJA_BOW_MODEL);
+		//registerCustom3DItem(BLUE_KUJA_BOW, "Blue Kuja Bow", BLUE_KUJA_BOW_MODEL);
 		registerCustom3DItem(KABUTO, "Kabuto", KABUTO_MODEL);
 		registerCustom3DItem(BLACK_KABUTO, "Kuro Kabuto", BLACK_KABUTO_MODEL);
 		registerCustom3DItem(GINGA_PACHINKO, "Ginga Pachinko", GINGA_PACHINKO_MODEL);

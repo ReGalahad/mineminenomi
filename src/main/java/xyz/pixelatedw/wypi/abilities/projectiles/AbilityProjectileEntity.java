@@ -3,6 +3,8 @@ package xyz.pixelatedw.wypi.abilities.projectiles;
 import java.io.Serializable;
 import java.util.List;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -55,6 +57,7 @@ public class AbilityProjectileEntity extends ThrowableEntity
 	public IWithEffects withEffects = () -> { return new EffectInstance[0]; };
 	public DamageSource source = new IndirectEntityDamageSource("ability_projectile", this, this.getThrower()).setProjectile();
 
+	private static final Block[] NON_SOLID_BLOCKS = new Block[] {Blocks.GRASS, Blocks.TALL_GRASS, Blocks.SEAGRASS, Blocks.TALL_SEAGRASS, Blocks.VINE, Blocks.REDSTONE_WIRE, Blocks.DEAD_BUSH};
 
 	public AbilityProjectileEntity(EntityType type, World world)
 	{
@@ -202,11 +205,14 @@ public class AbilityProjectileEntity extends ThrowableEntity
 				if (MinecraftForge.EVENT_BUS.post(event))
 					return;
 
-				if (!this.canPassThroughBlocks)
+				if(!this.passedThroughNonSolidBlock(blockHit.getPos()))
 				{
-					this.onBlockImpactEvent.onImpact(blockHit.getPos());
-					if (!this.canGetStuckInGround)
-						this.remove();
+					if (!this.canPassThroughBlocks)
+					{
+						this.onBlockImpactEvent.onImpact(blockHit.getPos());
+						if (!this.canGetStuckInGround)
+							this.remove();
+					}
 				}
 			}
 		}
@@ -232,6 +238,19 @@ public class AbilityProjectileEntity extends ThrowableEntity
 		}
 	}
 
+	private boolean passedThroughNonSolidBlock(BlockPos pos)
+	{
+		for(Block block : NON_SOLID_BLOCKS)
+		{
+			if(this.world.getBlockState(pos).getBlock() == block)
+			{
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
 	@Override
 	public void remove()
 	{

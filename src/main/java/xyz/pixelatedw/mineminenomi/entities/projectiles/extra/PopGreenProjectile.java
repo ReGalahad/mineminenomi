@@ -22,10 +22,10 @@ public class PopGreenProjectile extends AbilityProjectileEntity
 		super(ExtraProjectiles.POP_GREEN, world, x, y, z);
 	}
 
-	public PopGreenProjectile(World world, LivingEntity player, double weightScale)
+	public PopGreenProjectile(World world, LivingEntity player)
 	{
 		super(ExtraProjectiles.POP_GREEN, world, player);
-		
-		this.setDamage((float) (6 * weightScale));
+		this.setPhysical();
+		this.setDamage(4);
 	}
 }

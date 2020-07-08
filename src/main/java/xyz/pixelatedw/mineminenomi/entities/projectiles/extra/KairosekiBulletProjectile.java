@@ -22,12 +22,10 @@ public class KairosekiBulletProjectile extends AbilityProjectileEntity
 		super(ExtraProjectiles.KAIROSEKI_BULLET, world, x, y, z);
 	}
 
-	public KairosekiBulletProjectile(World world, LivingEntity player, double weightScale)
+	public KairosekiBulletProjectile(World world, LivingEntity player)
 	{
 		super(ExtraProjectiles.KAIROSEKI_BULLET, world, player);
-		
-		this.setDamage((float) (6 * weightScale));
+		this.setPhysical();
+		this.setDamage(6);
 	}
-
-
 }

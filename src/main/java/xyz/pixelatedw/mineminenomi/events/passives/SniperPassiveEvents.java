@@ -76,10 +76,7 @@ public class SniperPassiveEvents
 	{
 		if (!(event.getEntityLiving() instanceof PlayerEntity) || event.getEntityLiving().world.isRemote)
 			return;	
-		
-		if(event.getEntityLiving().world.getGameTime() % 200 != 0)
-			return;
-		
+	
 		PlayerEntity player = (PlayerEntity) event.getEntityLiving();
 		IAbilityData aprops = AbilityDataCapability.get(player);
 		

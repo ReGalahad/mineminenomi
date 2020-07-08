@@ -121,13 +121,13 @@ public class AbilitiesListScreenPanel extends ScrollPanel
 					flag = false;
 				}
 			}
-		}
 			
-		if (isHovered && this.parent.slotSelected >= 0 && flag && entry.ability != null)
-		{
-			this.props.setEquippedAbility(this.parent.slotSelected, entry.ability);
-			WyNetwork.sendToServer(new CSyncAbilityDataPacket(this.props));
-		}
+			if (isHovered && this.parent.slotSelected >= 0 && flag && entry.ability != null)
+			{
+				this.props.setEquippedAbility(this.parent.slotSelected, entry.ability);
+				WyNetwork.sendToServer(new CSyncAbilityDataPacket(this.props));
+			}
+		}		
 
 		return super.mouseClicked(mouseX, mouseY, button);
 	}

@@ -26,7 +26,7 @@
 				{
 					"type": "minecraft:item",
 					"name": "mineminenomi:kairoseki_bullet",
-					"weight": 70,
+					"weight": 50,
 					"functions": [
 						{
 							"function": "mineminenomi:infinite_stock"
@@ -58,7 +58,25 @@
 							}
 						}
 					]
-				}
+				},
+{
+					"type": "minecraft:item",
+					"name": "mineminenomi:pop_green",
+					"weight": 20,
+					"functions": [
+						{
+							"function": "mineminenomi:infinite_stock"
+						},
+						{
+							"function": "mineminenomi:set_price",
+							"price_range": {
+								"min": 15.0,
+								"max": 20.0,
+								"type": "minecraft:uniform"
+							}
+						}
+					]
+				}				
 			]
 		},
 		{

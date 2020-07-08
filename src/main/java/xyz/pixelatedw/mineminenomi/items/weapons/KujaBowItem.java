@@ -6,6 +6,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.BowItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Stats;
@@ -29,12 +30,12 @@ public class KujaBowItem extends BowItem
 	{
 		if (entityLiving instanceof PlayerEntity)
 		{
-			PlayerEntity playerentity = (PlayerEntity) entityLiving;
-			boolean flag = playerentity.abilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, itemStack) > 0;
-			ItemStack arrowStack = playerentity.findAmmo(itemStack);
+			PlayerEntity player = (PlayerEntity) entityLiving;
+			boolean flag = player.abilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, itemStack) > 0;
+			ItemStack arrowStack = player.findAmmo(itemStack);
 
 			int i = this.getUseDuration(itemStack) - timeLeft;
-			i = net.minecraftforge.event.ForgeEventFactory.onArrowLoose(itemStack, world, playerentity, i, !arrowStack.isEmpty() || flag);
+			i = net.minecraftforge.event.ForgeEventFactory.onArrowLoose(itemStack, world, player, i, !arrowStack.isEmpty() || flag);
 			if (i < 0)
 				return;
 
@@ -44,22 +45,23 @@ public class KujaBowItem extends BowItem
 					arrowStack = new ItemStack(ModItems.KUJA_ARROW);
 
 				float f = getArrowVelocity(i);
-				if (!(f < 0.1D))
+				if (f > 0.7F)
 				{
 					if (!world.isRemote)
 					{
 						KujaArrowProjectile proj = new KujaArrowProjectile(world, entityLiving);
-						proj.shoot(playerentity, playerentity.rotationPitch, playerentity.rotationYaw, 0.0F, f * 3.0F, 1.0F);
+						proj.shoot(player, player.rotationPitch, player.rotationYaw, 0.0F, f * 3.0F, 1.0F);
 
 						if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, itemStack) > 0)
 							proj.setFire(100);
 						
 						world.addEntity(proj);
 						arrowStack.shrink(1);
+						player.addStat(Stats.ITEM_USED.get(this));
+						itemStack.attemptDamageItem(1 + random.nextInt(2), random, (ServerPlayerEntity) player);
 					}
 
-					world.playSound((PlayerEntity) null, playerentity.posX, playerentity.posY, playerentity.posZ, SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
-					playerentity.addStat(Stats.ITEM_USED.get(this));
+					world.playSound((PlayerEntity) null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
 				}
 			}
 		}
