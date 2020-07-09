@@ -61,7 +61,7 @@ public class QuestEvents
 		PlayerEntity player = (PlayerEntity) event.getSource().getTrueSource();
 		LivingEntity target = event.getEntityLiving();
 		IQuestData questProps = QuestDataCapability.get(player);
-
+		
 		for (Objective obj : getObjectives(questProps))
 		{
 			if (obj instanceof IHitEntityObjective)

@@ -3,7 +3,7 @@ package xyz.pixelatedw.mineminenomi.quests.sniper;
 import net.minecraft.entity.player.PlayerEntity;
 import xyz.pixelatedw.mineminenomi.abilities.sniper.KemuriBoshiAbility;
 import xyz.pixelatedw.mineminenomi.init.ModQuests;
-import xyz.pixelatedw.mineminenomi.quests.sniper.objectives.HoldBowObjective;
+import xyz.pixelatedw.mineminenomi.quests.objectives.ObtainBowObjective;
 import xyz.pixelatedw.mineminenomi.quests.sniper.objectives.KaenHitObjective;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
@@ -14,7 +14,7 @@ import xyz.pixelatedw.wypi.quests.objectives.Objective;
 
 public class SniperTrial02Quest extends Quest
 {
-	private Objective objective01 = new HoldBowObjective();
+	private Objective objective01 = new ObtainBowObjective();
 	private Objective objective02 = new KaenHitObjective("Set 10 enemies on fire using Kaen Boshi", 10).addRequirement(this.objective01);
 
 	public SniperTrial02Quest()

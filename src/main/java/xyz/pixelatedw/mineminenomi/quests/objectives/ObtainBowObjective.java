@@ -1,13 +1,13 @@
-package xyz.pixelatedw.mineminenomi.quests.sniper.objectives;
+package xyz.pixelatedw.mineminenomi.quests.objectives;
 
 import net.minecraft.item.ItemStack;
 import xyz.pixelatedw.mineminenomi.api.helpers.ItemsHelper;
 import xyz.pixelatedw.wypi.quests.objectives.IObtainItemObjective;
 import xyz.pixelatedw.wypi.quests.objectives.Objective;
 
-public class HoldBowObjective extends Objective implements IObtainItemObjective
+public class ObtainBowObjective extends Objective implements IObtainItemObjective
 {	
-	public HoldBowObjective()
+	public ObtainBowObjective()
 	{
 		super("Find a bow");
 		this.setMaxProgress(1);

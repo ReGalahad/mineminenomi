@@ -1,9 +1,8 @@
-package xyz.pixelatedw.mineminenomi.quests.sniper.objectives;
+package xyz.pixelatedw.mineminenomi.quests.objectives.arrow;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.DamageSource;
-import xyz.pixelatedw.mineminenomi.quests.objectives.ArrowKillObjective;
 import xyz.pixelatedw.wypi.quests.objectives.IKillEntityObjective;
 
 public class ArrowKillInSecondsObjective extends ArrowKillObjective implements IKillEntityObjective

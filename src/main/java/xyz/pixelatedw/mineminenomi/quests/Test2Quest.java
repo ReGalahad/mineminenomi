@@ -1,8 +1,8 @@
 package xyz.pixelatedw.mineminenomi.quests;
 
 import net.minecraft.entity.player.PlayerEntity;
+import xyz.pixelatedw.mineminenomi.quests.objectives.sword.SwordKillWithCriticalObjective;
 import xyz.pixelatedw.mineminenomi.quests.swordsman.objectives.FindStrongSwordObjective;
-import xyz.pixelatedw.mineminenomi.quests.swordsman.objectives.SwordKillWithCriticalObjective;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.quests.Quest;
 import xyz.pixelatedw.wypi.quests.objectives.Objective;

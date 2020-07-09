@@ -3,7 +3,7 @@ package xyz.pixelatedw.mineminenomi.quests.sniper;
 import net.minecraft.entity.player.PlayerEntity;
 import xyz.pixelatedw.mineminenomi.abilities.sniper.SakuretsuSabotenBoshiAbility;
 import xyz.pixelatedw.mineminenomi.init.ModQuests;
-import xyz.pixelatedw.mineminenomi.quests.sniper.objectives.HoldBowObjective;
+import xyz.pixelatedw.mineminenomi.quests.objectives.ObtainBowObjective;
 import xyz.pixelatedw.mineminenomi.quests.sniper.objectives.RenpatsuKillInSecondsObjective;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
@@ -14,7 +14,7 @@ import xyz.pixelatedw.wypi.quests.objectives.Objective;
 
 public class SniperTrial04Quest extends Quest
 {
-	private Objective objective01 = new HoldBowObjective();
+	private Objective objective01 = new ObtainBowObjective();
 	private Objective objective02 = new RenpatsuKillInSecondsObjective("Kill 3 enemies in less than 5 seconds using Renpatsu Namari Boshi", 3, 100).addRequirement(this.objective01);
 	
 	public SniperTrial04Quest()

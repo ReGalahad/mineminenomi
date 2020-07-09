@@ -2,8 +2,8 @@ package xyz.pixelatedw.mineminenomi.quests.sniper;
 
 import net.minecraft.entity.player.PlayerEntity;
 import xyz.pixelatedw.mineminenomi.abilities.sniper.KaenBoshiAbility;
-import xyz.pixelatedw.mineminenomi.quests.sniper.objectives.ArrowKillFromDistanceObjective;
-import xyz.pixelatedw.mineminenomi.quests.sniper.objectives.HoldBowObjective;
+import xyz.pixelatedw.mineminenomi.quests.objectives.ObtainBowObjective;
+import xyz.pixelatedw.mineminenomi.quests.objectives.arrow.ArrowKillFromDistanceObjective;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 import xyz.pixelatedw.wypi.network.WyNetwork;
@@ -13,7 +13,7 @@ import xyz.pixelatedw.wypi.quests.objectives.Objective;
 
 public class SniperTrial01Quest extends Quest
 {
-	private Objective objective01 = new HoldBowObjective();
+	private Objective objective01 = new ObtainBowObjective();
 	private Objective objective02 = new ArrowKillFromDistanceObjective("Kill an enemy from 30 blocks away", 1, 30).addRequirement(this.objective01);
 
 	public SniperTrial01Quest()

@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.quests.objectives;
+package xyz.pixelatedw.mineminenomi.quests.objectives.arrow;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;

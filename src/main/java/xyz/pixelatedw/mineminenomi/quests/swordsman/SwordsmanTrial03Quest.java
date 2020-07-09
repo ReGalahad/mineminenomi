@@ -15,7 +15,7 @@ import xyz.pixelatedw.wypi.quests.objectives.Objective;
 public class SwordsmanTrial03Quest extends Quest
 {
 	private Objective objective01 = new FindStrongSwordObjective();
-	private Objective objective02 = new ShiShishiSonsonKillObjective("Kill 10 enemies using Shi Shishi Sonson", 10).addRequirement(this.objective01);
+	private Objective objective02 = new ShiShishiSonsonKillObjective("Kill %s enemies using Shi Shishi Sonson", 15).addRequirement(this.objective01);
 	
 	public SwordsmanTrial03Quest()
 	{
