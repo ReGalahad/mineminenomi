@@ -1,16 +1,18 @@
-package xyz.pixelatedw.mineminenomi.quests.objectives.arrow;
+package xyz.pixelatedw.mineminenomi.quests.sniper.objectives;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.DamageSource;
 import xyz.pixelatedw.mineminenomi.entities.mobs.quest.objectives.SniperTargetEntity;
-import xyz.pixelatedw.wypi.quests.objectives.IKillEntityObjective;
+import xyz.pixelatedw.mineminenomi.quests.objectives.IArrowKillObjective;
+import xyz.pixelatedw.wypi.quests.objectives.Objective;
 
-public class ArrowKillSniperTargetObjective extends ArrowKillObjective implements IKillEntityObjective
+public class ArrowKillSniperTargetObjective extends Objective implements IArrowKillObjective
 {
 	public ArrowKillSniperTargetObjective(String title, int count)
 	{
-		super(title, count);
+		super(title);
+		this.setMaxProgress(count);
 	}
 
 	@Override
@@ -18,6 +20,6 @@ public class ArrowKillSniperTargetObjective extends ArrowKillObjective implement
 	{
 		boolean isTargetFlag = target instanceof SniperTargetEntity;
 		
-		return super.checkKill(player, target, source) && isTargetFlag;
+		return this.checkArrowKill(player, target, source) && isTargetFlag;
 	}
 }

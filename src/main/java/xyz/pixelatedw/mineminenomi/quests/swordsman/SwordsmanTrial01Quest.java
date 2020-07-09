@@ -5,7 +5,7 @@ import net.minecraft.item.Items;
 import xyz.pixelatedw.mineminenomi.abilities.swordsman.ShiShishiSonsonAbility;
 import xyz.pixelatedw.mineminenomi.quests.objectives.ObtainItemObjective;
 import xyz.pixelatedw.mineminenomi.quests.objectives.sword.SwordKillRunningObjective;
-import xyz.pixelatedw.mineminenomi.quests.swordsman.objectives.FindStrongSwordObjective;
+import xyz.pixelatedw.mineminenomi.quests.swordsman.objectives.ObtainStrongSwordObjective;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 import xyz.pixelatedw.wypi.network.WyNetwork;
@@ -15,7 +15,7 @@ import xyz.pixelatedw.wypi.quests.objectives.Objective;
 
 public class SwordsmanTrial01Quest extends Quest
 {
-	private Objective objective01 = new FindStrongSwordObjective();
+	private Objective objective01 = new ObtainStrongSwordObjective();
 	private Objective objective02 = new ObtainItemObjective("Collect %s bones", Items.BONE, 30).addRequirement(this.objective01);
 	private Objective objective03 = new SwordKillRunningObjective("Kill %s enemies while running towards them", 15).addRequirement(this.objective01);
 

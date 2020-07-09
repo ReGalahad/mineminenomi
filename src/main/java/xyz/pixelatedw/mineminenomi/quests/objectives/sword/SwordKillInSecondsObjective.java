@@ -23,11 +23,11 @@ public class SwordKillInSecondsObjective extends Objective implements ISwordKill
 	@Override
 	public boolean checkKill(PlayerEntity player, LivingEntity target, DamageSource source)
 	{
+		long killTime = player.world.getGameTime();
+
 		if(this.lastKill == 0)
 			this.lastKill = player.world.getGameTime();
 		
-		long killTime = player.world.getGameTime();
-
 		if(killTime - this.seconds <= this.lastKill)
 		{
 			this.lastKill = killTime;

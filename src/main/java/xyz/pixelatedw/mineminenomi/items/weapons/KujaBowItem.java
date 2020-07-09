@@ -45,7 +45,7 @@ public class KujaBowItem extends BowItem
 					arrowStack = new ItemStack(ModItems.KUJA_ARROW);
 
 				float f = getArrowVelocity(i);
-				if (f > 0.7F)
+				if (f > 0.4F)
 				{
 					if (!world.isRemote)
 					{

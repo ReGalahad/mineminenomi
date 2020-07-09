@@ -45,7 +45,7 @@ public class PopGreenBowItem extends BowItem
 					arrowStack = new ItemStack(ModItems.POP_GREEN);
 
 				float f = getArrowVelocity(i);
-				if (f > 0.7D)
+				if (f > 0.4D)
 				{
 					if (!world.isRemote)
 					{

@@ -139,7 +139,15 @@ public class QuestsTrackerScreen extends Screen
 			            	WyHelper.drawStringWithBorder(galacticFont, this.hiddenTexts.get(hiddenObjs.indexOf(obj)), posX - 123, posY - 45 + yOffset, WyHelper.hexToRGB(textColor).getRGB());
 					}
 					else
-						WyHelper.drawStringWithBorder(this.font, (obj.isComplete() ? TextFormatting.STRIKETHROUGH + "" : "") + "• " + objectiveName + progress, posX - 130, posY - 45 + yOffset, WyHelper.hexToRGB(textColor).getRGB());
+					{
+						objectiveName = "• " + objectiveName + " " + progress;
+						List<String> splitText = WyHelper.splitString(this.font, objectiveName, posX, 280);
+						for(int j = 0; j < splitText.size(); j++)
+						{
+							WyHelper.drawStringWithBorder(this.font, (obj.isComplete() ? TextFormatting.STRIKETHROUGH + "" : "") + splitText.get(j), posX - 130, posY - 45 + yOffset + (j * 12), WyHelper.hexToRGB(textColor).getRGB());							
+						}
+						yOffset += (splitText.size() * 8);
+					}
 					i++;
 				}
 				

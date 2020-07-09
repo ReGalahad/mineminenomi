@@ -3,7 +3,7 @@ package xyz.pixelatedw.mineminenomi.quests.swordsman;
 import net.minecraft.entity.player.PlayerEntity;
 import xyz.pixelatedw.mineminenomi.abilities.swordsman.SanbyakurokujuPoundHoAbility;
 import xyz.pixelatedw.mineminenomi.init.ModQuests;
-import xyz.pixelatedw.mineminenomi.quests.swordsman.objectives.FindStrongSwordObjective;
+import xyz.pixelatedw.mineminenomi.quests.swordsman.objectives.ObtainStrongSwordObjective;
 import xyz.pixelatedw.mineminenomi.quests.swordsman.objectives.ShiShishiSonsonKillObjective;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
@@ -14,7 +14,7 @@ import xyz.pixelatedw.wypi.quests.objectives.Objective;
 
 public class SwordsmanTrial03Quest extends Quest
 {
-	private Objective objective01 = new FindStrongSwordObjective();
+	private Objective objective01 = new ObtainStrongSwordObjective();
 	private Objective objective02 = new ShiShishiSonsonKillObjective("Kill %s enemies using Shi Shishi Sonson", 15).addRequirement(this.objective01);
 	
 	public SwordsmanTrial03Quest()

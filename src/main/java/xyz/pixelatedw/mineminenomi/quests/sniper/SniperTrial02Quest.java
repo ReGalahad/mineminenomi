@@ -15,7 +15,7 @@ import xyz.pixelatedw.wypi.quests.objectives.Objective;
 public class SniperTrial02Quest extends Quest
 {
 	private Objective objective01 = new ObtainBowObjective();
-	private Objective objective02 = new KaenHitObjective("Set 10 enemies on fire using Kaen Boshi", 10).addRequirement(this.objective01);
+	private Objective objective02 = new KaenHitObjective("Set %s enemies on fire using Kaen Boshi", 20).addRequirement(this.objective01);
 
 	public SniperTrial02Quest()
 	{

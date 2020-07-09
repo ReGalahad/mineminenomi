@@ -46,7 +46,7 @@ public class KaenBoshiProjectile extends AbilityProjectileEntity
 
 	private void onEntityImpactEvent(LivingEntity hitEntity)
 	{
-		hitEntity.setFire(400);
+		hitEntity.setFire(10);
 	}
 
 	private void onBlockImpactEvent(BlockPos hit)

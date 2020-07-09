@@ -40,7 +40,6 @@ public class SOpenQuestChooseScreenPacket
 
 	public static void handle(SOpenQuestChooseScreenPacket message, final Supplier<NetworkEvent.Context> ctx)
 	{
-		System.out.println("@");
 		if (ctx.get().getDirection() == NetworkDirection.PLAY_TO_CLIENT)
 			ctx.get().enqueueWork(() -> ClientHandler.handle(message));
 		ctx.get().setPacketHandled(true);
@@ -53,7 +52,6 @@ public class SOpenQuestChooseScreenPacket
 		{
 			PlayerEntity player = Minecraft.getInstance().player;
 			Entity questGiver = Minecraft.getInstance().world.getEntityByID(message.questGiverEntity);
-			System.out.println(message.questGiverEntity);
 
 			if (!(questGiver instanceof IQuestGiver))
 				return;

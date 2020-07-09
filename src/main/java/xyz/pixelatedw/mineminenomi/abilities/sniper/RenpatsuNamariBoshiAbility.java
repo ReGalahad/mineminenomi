@@ -4,12 +4,11 @@ import net.minecraft.entity.player.PlayerEntity;
 import xyz.pixelatedw.mineminenomi.api.abilities.ISniperAbility;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.sniper.RenpatsuNamariBoshiProjectile;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
-import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.abilities.ContinuousAbility;
 
 public class RenpatsuNamariBoshiAbility extends ContinuousAbility implements ISniperAbility
 {
-	public static final Ability INSTANCE = new RenpatsuNamariBoshiAbility();
+	public static final RenpatsuNamariBoshiAbility INSTANCE = new RenpatsuNamariBoshiAbility();
 
 	public RenpatsuNamariBoshiAbility()
 	{

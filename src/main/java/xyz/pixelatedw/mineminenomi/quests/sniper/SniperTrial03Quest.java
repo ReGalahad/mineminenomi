@@ -9,7 +9,7 @@ import xyz.pixelatedw.mineminenomi.abilities.sniper.RenpatsuNamariBoshiAbility;
 import xyz.pixelatedw.mineminenomi.entities.mobs.quest.objectives.SniperTargetEntity;
 import xyz.pixelatedw.mineminenomi.packets.server.SDespawnQuestObjectivePacket;
 import xyz.pixelatedw.mineminenomi.quests.objectives.ObtainBowObjective;
-import xyz.pixelatedw.mineminenomi.quests.objectives.arrow.ArrowKillSniperTargetObjective;
+import xyz.pixelatedw.mineminenomi.quests.sniper.objectives.ArrowKillSniperTargetObjective;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.WyRegistry;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
@@ -22,10 +22,10 @@ import xyz.pixelatedw.wypi.quests.objectives.Objective;
 public class SniperTrial03Quest extends Quest
 {
 	private Objective objective01 = new ObtainBowObjective();
-	private Objective objective02 = new ArrowKillSniperTargetObjective("Hit all 10 targets before they hit the ground", 10).addRequirement(this.objective01);
+	private Objective objective02 = new ArrowKillSniperTargetObjective("Hit all %s targets before they hit the ground", 10).addRequirement(this.objective01);
 
 	private List<SniperTargetEntity> targets = new ArrayList<SniperTargetEntity>();
-	private static final String RESET_DIALOGUE = WyRegistry.registerName("quest.sniper_trial_03.reset_dialogue", "<Bow Master> Look out for those targets!");
+	private static final String RESET_DIALOGUE = WyRegistry.registerName("quest.sniper_trial_03.reset_dialogue", "<Bow Master> Look above and hit those targets!");
 
 	public SniperTrial03Quest()
 	{
@@ -38,10 +38,11 @@ public class SniperTrial03Quest extends Quest
 	}
 
 	public boolean shouldRestartEvent(PlayerEntity player)
-	{
+	{		
 		if(this.isComplete())
 			return false;
-				
+		
+		this.targets = WyHelper.getEntitiesNear(player.getPosition(), player.world, 50, SniperTargetEntity.class);
 		if(this.targets.size() <= 0)
 			return true;
 		
@@ -78,11 +79,11 @@ public class SniperTrial03Quest extends Quest
 			target.setLocationAndAngles(posX, posY, posZ, 0, 0);
 			
 			player.world.addEntity(target);			
-			this.targets.add(target);
 			
 			WyNetwork.sendToAll(new SDespawnQuestObjectivePacket(player.getUniqueID(), target.getEntityId()));
 		}
-		WyHelper.sendMsgToPlayer(player, new TranslationTextComponent(RESET_DIALOGUE).getFormattedText());
+		if(!this.objective02.isLocked())
+			WyHelper.sendMsgToPlayer(player, new TranslationTextComponent(RESET_DIALOGUE).getFormattedText());
 	}
 	
 	private void giveReward(PlayerEntity player)

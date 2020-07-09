@@ -1,8 +1,6 @@
 package xyz.pixelatedw.mineminenomi.init;
 
 import net.minecraftforge.fml.common.Mod;
-import xyz.pixelatedw.mineminenomi.quests.Test2Quest;
-import xyz.pixelatedw.mineminenomi.quests.TestQuest;
 import xyz.pixelatedw.mineminenomi.quests.sniper.SniperTrial01Quest;
 import xyz.pixelatedw.mineminenomi.quests.sniper.SniperTrial02Quest;
 import xyz.pixelatedw.mineminenomi.quests.sniper.SniperTrial03Quest;
@@ -19,34 +17,29 @@ import xyz.pixelatedw.wypi.quests.Quest;
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModQuests
 {
-
-	public static final Quest TEST_QUEST = new TestQuest();
-	public static final Quest TEST_QUEST_2 = new Test2Quest();
-
 	// Swordsman
 	public static final Quest SWORDSMAN_TRIAL_01 = new SwordsmanTrial01Quest();
 	public static final Quest SWORDSMAN_TRIAL_02 = new SwordsmanTrial02Quest();
 	public static final Quest SWORDSMAN_TRIAL_03 = new SwordsmanTrial03Quest();
 	public static final Quest SWORDSMAN_TRIAL_04 = new SwordsmanTrial04Quest();
 
-	
 	// Sniper
 	public static final Quest SNIPER_TRIAL_01 = new SniperTrial01Quest();
 	public static final Quest SNIPER_TRIAL_02 = new SniperTrial02Quest();
 	public static final Quest SNIPER_TRIAL_03 = new SniperTrial03Quest();
 	public static final Quest SNIPER_TRIAL_04 = new SniperTrial04Quest();
 
+	// Doctor
 	
-	// Medic
 	
-	
+	// Art of Weather
 	
 	static
 	{
 		if(WyDebug.isDebug())
 		{
-			WyRegistry.registerQuest(TEST_QUEST);
-			WyRegistry.registerQuest(TEST_QUEST_2);
+			// Debug Quests
+			
 		}
 		
 		// Swordsman

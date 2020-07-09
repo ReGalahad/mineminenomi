@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.quests.objectives.arrow;
+package xyz.pixelatedw.mineminenomi.quests.objectives;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -9,18 +9,10 @@ import xyz.pixelatedw.mineminenomi.api.helpers.ItemsHelper;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.extra.KujaArrowProjectile;
 import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 import xyz.pixelatedw.wypi.quests.objectives.IHitEntityObjective;
-import xyz.pixelatedw.wypi.quests.objectives.Objective;
 
-public class ArrowHitObjective extends Objective implements IHitEntityObjective
-{	
-	public ArrowHitObjective(String title, int count)
-	{
-		super(title);
-		this.setMaxProgress(count);
-	}
-
-	@Override
-	public boolean checkHit(PlayerEntity player, LivingEntity target, DamageSource source)
+public interface IArrowHitObjective extends IHitEntityObjective
+{
+	public default boolean checkArrowHit(PlayerEntity player, LivingEntity target, DamageSource source)
 	{		
 		ItemStack heldItem = player.getHeldItemMainhand();
 
@@ -29,5 +21,4 @@ public class ArrowHitObjective extends Objective implements IHitEntityObjective
 		
 		return bowFlag && arrowFlag;
 	}
-
 }

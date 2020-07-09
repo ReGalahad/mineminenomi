@@ -3,6 +3,7 @@ package xyz.pixelatedw.wypi.network.packets.client;
 import java.util.function.Supplier;
 
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.network.PacketBuffer;
@@ -12,6 +13,9 @@ import xyz.pixelatedw.wypi.data.quest.IQuestData;
 import xyz.pixelatedw.wypi.data.quest.QuestDataCapability;
 import xyz.pixelatedw.wypi.network.WyNetwork;
 import xyz.pixelatedw.wypi.network.packets.server.SSyncQuestDataPacket;
+import xyz.pixelatedw.wypi.quests.Quest;
+import xyz.pixelatedw.wypi.quests.objectives.IObtainItemObjective;
+import xyz.pixelatedw.wypi.quests.objectives.Objective;
 
 public class CSyncQuestDataPacket
 {
@@ -47,8 +51,29 @@ public class CSyncQuestDataPacket
 				IQuestData props = QuestDataCapability.get(player);
 
 				QuestDataCapability.INSTANCE.getStorage().readNBT(QuestDataCapability.INSTANCE, props, null, message.data);
+							
+				for(Quest quest : props.getInProgressQuests())
+				{
+					if(quest != null)
+					{
+						for(Objective obj : quest.getObjectives())
+						{
+							if(obj != null && obj instanceof IObtainItemObjective)
+							{
+								IObtainItemObjective itemQuest = (IObtainItemObjective)obj;
+								for(ItemStack stack : player.inventory.mainInventory)
+								{
+									if(itemQuest.checkItem(stack))
+									{
+										obj.alterProgress(stack.getCount());
+									}
+								}								
+							}
+						}
+					}
+				}
 				
-				WyNetwork.sendTo(new SSyncQuestDataPacket(player.getEntityId(), props), player);				
+				WyNetwork.sendTo(new SSyncQuestDataPacket(player.getEntityId(), props), player);
 			});
 		}
 		ctx.get().setPacketHandled(true);
