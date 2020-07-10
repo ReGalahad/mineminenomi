@@ -18,7 +18,7 @@ import xyz.pixelatedw.wypi.abilities.Ability;
 
 public class MedicBagExplosionAbility extends Ability
 {
-	public static final Ability INSTANCE = new MedicBagExplosionAbility();
+	public static final MedicBagExplosionAbility INSTANCE = new MedicBagExplosionAbility();
 
 	private static final ParticleEffect PARTICLES = new MedicBagExplosionParticleEffect();
 	

@@ -10,12 +10,11 @@ import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.doctor.FirstAidParticleEffect;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
-import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.abilities.PunchAbility;
 
 public class FirstAidAbility extends PunchAbility
 {
-	public static final Ability INSTANCE = new FirstAidAbility();
+	public static final FirstAidAbility INSTANCE = new FirstAidAbility();
 
 	private static final ParticleEffect PARTICLES = new FirstAidParticleEffect();
 	
@@ -41,7 +40,8 @@ public class FirstAidAbility extends PunchAbility
 		
 		target.heal(10);
 
-		PARTICLES.spawn(player.world, target.posX, target.posY, target.posZ, 0, 0, 0);
+		if(target.getHealth() < target.getMaxHealth())
+			PARTICLES.spawn(player.world, target.posX, target.posY, target.posZ, 0, 0, 0);
 
 		int damage = medicBag.getDamage() + 10 <= medicBag.getMaxDamage() ? 10 : medicBag.getMaxDamage() - medicBag.getDamage();
 		medicBag.damageItem(damage, player, (user) -> {});

@@ -1,6 +1,9 @@
 package xyz.pixelatedw.mineminenomi.init;
 
 import net.minecraftforge.fml.common.Mod;
+import xyz.pixelatedw.mineminenomi.quests.doctor.DoctorTrial01Quest;
+import xyz.pixelatedw.mineminenomi.quests.doctor.DoctorTrial02Quest;
+import xyz.pixelatedw.mineminenomi.quests.doctor.DoctorTrial03Quest;
 import xyz.pixelatedw.mineminenomi.quests.sniper.SniperTrial01Quest;
 import xyz.pixelatedw.mineminenomi.quests.sniper.SniperTrial02Quest;
 import xyz.pixelatedw.mineminenomi.quests.sniper.SniperTrial03Quest;
@@ -30,8 +33,10 @@ public class ModQuests
 	public static final Quest SNIPER_TRIAL_04 = new SniperTrial04Quest();
 
 	// Doctor
-	
-	
+	public static final Quest DOCTOR_TRIAL_01 = new DoctorTrial01Quest();
+	public static final Quest DOCTOR_TRIAL_02 = new DoctorTrial02Quest();
+	public static final Quest DOCTOR_TRIAL_03 = new DoctorTrial03Quest();
+
 	// Art of Weather
 	
 	static
@@ -53,5 +58,10 @@ public class ModQuests
 		WyRegistry.registerQuest(SNIPER_TRIAL_02);
 		WyRegistry.registerQuest(SNIPER_TRIAL_03);
 		WyRegistry.registerQuest(SNIPER_TRIAL_04);
+		
+		// Doctor
+		WyRegistry.registerQuest(DOCTOR_TRIAL_01);
+		WyRegistry.registerQuest(DOCTOR_TRIAL_02);
+		WyRegistry.registerQuest(DOCTOR_TRIAL_03);
 	}
 }

@@ -4,7 +4,9 @@ import java.io.Serializable;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraftforge.common.MinecraftForge;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
+import xyz.pixelatedw.wypi.abilities.events.AbilityEvent;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 import xyz.pixelatedw.wypi.network.WyNetwork;
@@ -37,6 +39,10 @@ public abstract class ChargeableAbility extends Ability
 		
 		if(this.isOnCooldown() && this.getCooldown() <= 10)
 			this.stopCooldown(player);
+		
+		AbilityEvent.Use event = new AbilityEvent.Use(player, this);
+		if (MinecraftForge.EVENT_BUS.post(event))
+			return;
 		
 		if(this.isCharging() && this.chargeTime > 0)
 			this.stopCharging(player);

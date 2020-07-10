@@ -101,9 +101,12 @@ public class AbilitiesEvents
 				{
 					float damage = ((PunchAbility) props.getEquippedAbility(ability)).hitEntity(player, target);
 					
-					if(damage < 0)
+					if(damage <= 0)
+					{
 						event.setCanceled(true);
-					
+						return;
+					}
+
 					event.setAmount(damage);
 				}
 			}
