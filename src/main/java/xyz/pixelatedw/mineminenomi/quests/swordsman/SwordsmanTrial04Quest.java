@@ -5,7 +5,7 @@ import xyz.pixelatedw.mineminenomi.abilities.swordsman.OTatsumakiAbility;
 import xyz.pixelatedw.mineminenomi.init.ModQuests;
 import xyz.pixelatedw.mineminenomi.quests.objectives.sword.SwordAirborneKillObjective;
 import xyz.pixelatedw.mineminenomi.quests.objectives.sword.SwordKillInSecondsObjective;
-import xyz.pixelatedw.mineminenomi.quests.swordsman.objectives.ObtainStrongSwordObjective;
+import xyz.pixelatedw.mineminenomi.quests.objectives.swordsman.ObtainStrongSwordObjective;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 import xyz.pixelatedw.wypi.network.WyNetwork;

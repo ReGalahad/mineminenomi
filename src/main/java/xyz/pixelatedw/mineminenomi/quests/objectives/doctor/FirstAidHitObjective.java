@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.quests.doctor.objectives;
+package xyz.pixelatedw.mineminenomi.quests.objectives.doctor;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;

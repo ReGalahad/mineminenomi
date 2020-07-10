@@ -4,7 +4,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import xyz.pixelatedw.mineminenomi.abilities.sniper.KemuriBoshiAbility;
 import xyz.pixelatedw.mineminenomi.init.ModQuests;
 import xyz.pixelatedw.mineminenomi.quests.objectives.ObtainBowObjective;
-import xyz.pixelatedw.mineminenomi.quests.sniper.objectives.KaenHitObjective;
+import xyz.pixelatedw.mineminenomi.quests.objectives.sniper.KaenHitObjective;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 import xyz.pixelatedw.wypi.network.WyNetwork;

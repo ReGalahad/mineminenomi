@@ -6,7 +6,7 @@ import xyz.pixelatedw.mineminenomi.abilities.sniper.SakuretsuSabotenBoshiAbility
 import xyz.pixelatedw.mineminenomi.init.ModQuests;
 import xyz.pixelatedw.mineminenomi.quests.objectives.ObtainBowObjective;
 import xyz.pixelatedw.mineminenomi.quests.objectives.ObtainItemObjective;
-import xyz.pixelatedw.mineminenomi.quests.sniper.objectives.RenpatsuKillInSecondsObjective;
+import xyz.pixelatedw.mineminenomi.quests.objectives.sniper.RenpatsuKillInSecondsObjective;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 import xyz.pixelatedw.wypi.network.WyNetwork;

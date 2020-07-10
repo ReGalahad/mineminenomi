@@ -1,6 +1,10 @@
 package xyz.pixelatedw.mineminenomi.init;
 
 import net.minecraftforge.fml.common.Mod;
+import xyz.pixelatedw.mineminenomi.quests.artofweather.ArtOfWeatherTrial01Quest;
+import xyz.pixelatedw.mineminenomi.quests.artofweather.ArtOfWeatherTrial02Quest;
+import xyz.pixelatedw.mineminenomi.quests.artofweather.ArtOfWeatherTrial03Quest;
+import xyz.pixelatedw.mineminenomi.quests.artofweather.ArtOfWeatherTrial04Quest;
 import xyz.pixelatedw.mineminenomi.quests.doctor.DoctorTrial01Quest;
 import xyz.pixelatedw.mineminenomi.quests.doctor.DoctorTrial02Quest;
 import xyz.pixelatedw.mineminenomi.quests.doctor.DoctorTrial03Quest;
@@ -38,6 +42,10 @@ public class ModQuests
 	public static final Quest DOCTOR_TRIAL_03 = new DoctorTrial03Quest();
 
 	// Art of Weather
+	public static final Quest ART_OF_WEATHER_TRIAL_01 = new ArtOfWeatherTrial01Quest();
+	public static final Quest ART_OF_WEATHER_TRIAL_02 = new ArtOfWeatherTrial02Quest();
+	public static final Quest ART_OF_WEATHER_TRIAL_03 = new ArtOfWeatherTrial03Quest();
+	public static final Quest ART_OF_WEATHER_TRIAL_04 = new ArtOfWeatherTrial04Quest();
 	
 	static
 	{
@@ -63,5 +71,11 @@ public class ModQuests
 		WyRegistry.registerQuest(DOCTOR_TRIAL_01);
 		WyRegistry.registerQuest(DOCTOR_TRIAL_02);
 		WyRegistry.registerQuest(DOCTOR_TRIAL_03);
+		
+		// Art of Weather
+		WyRegistry.registerQuest(ART_OF_WEATHER_TRIAL_01);
+		WyRegistry.registerQuest(ART_OF_WEATHER_TRIAL_02);
+		WyRegistry.registerQuest(ART_OF_WEATHER_TRIAL_03);
+		WyRegistry.registerQuest(ART_OF_WEATHER_TRIAL_04);
 	}
 }

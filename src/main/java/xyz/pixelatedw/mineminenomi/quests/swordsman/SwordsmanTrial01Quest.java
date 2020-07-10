@@ -5,7 +5,7 @@ import net.minecraft.item.Items;
 import xyz.pixelatedw.mineminenomi.abilities.swordsman.ShiShishiSonsonAbility;
 import xyz.pixelatedw.mineminenomi.quests.objectives.ObtainItemObjective;
 import xyz.pixelatedw.mineminenomi.quests.objectives.sword.SwordKillRunningObjective;
-import xyz.pixelatedw.mineminenomi.quests.swordsman.objectives.ObtainStrongSwordObjective;
+import xyz.pixelatedw.mineminenomi.quests.objectives.swordsman.ObtainStrongSwordObjective;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 import xyz.pixelatedw.wypi.network.WyNetwork;

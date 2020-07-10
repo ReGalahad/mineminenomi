@@ -57,6 +57,7 @@ public abstract class Ability extends ForgeRegistryEntry<Ability>
 		{
 			this.startCooldown(player);
 			IAbilityData props = AbilityDataCapability.get(player);
+			props.setPreviouslyUsedAbility(this);
 			WyNetwork.sendTo(new SSyncAbilityDataPacket(player.getEntityId(), props), (ServerPlayerEntity)player);
 		}
 	}

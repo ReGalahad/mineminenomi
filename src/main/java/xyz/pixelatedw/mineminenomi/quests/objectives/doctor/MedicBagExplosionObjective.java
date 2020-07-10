@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.quests.doctor.objectives;
+package xyz.pixelatedw.mineminenomi.quests.objectives.doctor;
 
 import java.util.List;
 

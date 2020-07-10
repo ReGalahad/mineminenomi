@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.quests.swordsman.objectives;
+package xyz.pixelatedw.mineminenomi.quests.objectives.swordsman;
 
 import java.util.Map.Entry;
 import java.util.UUID;

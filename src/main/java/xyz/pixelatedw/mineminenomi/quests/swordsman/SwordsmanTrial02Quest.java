@@ -5,7 +5,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import xyz.pixelatedw.mineminenomi.abilities.swordsman.YakkodoriAbility;
 import xyz.pixelatedw.mineminenomi.quests.objectives.ObtainEnchantedItemObjective;
 import xyz.pixelatedw.mineminenomi.quests.objectives.sword.SwordKillWithCriticalObjective;
-import xyz.pixelatedw.mineminenomi.quests.swordsman.objectives.ObtainStrongSwordObjective;
+import xyz.pixelatedw.mineminenomi.quests.objectives.swordsman.ObtainStrongSwordObjective;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 import xyz.pixelatedw.wypi.network.WyNetwork;

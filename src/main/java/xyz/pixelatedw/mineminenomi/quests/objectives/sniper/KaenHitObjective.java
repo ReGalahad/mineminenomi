@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.quests.sniper.objectives;
+package xyz.pixelatedw.mineminenomi.quests.objectives.sniper;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;

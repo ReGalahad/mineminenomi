@@ -9,7 +9,7 @@ import xyz.pixelatedw.mineminenomi.abilities.sniper.RenpatsuNamariBoshiAbility;
 import xyz.pixelatedw.mineminenomi.entities.mobs.quest.objectives.SniperTargetEntity;
 import xyz.pixelatedw.mineminenomi.packets.server.SDespawnQuestObjectivePacket;
 import xyz.pixelatedw.mineminenomi.quests.objectives.ObtainBowObjective;
-import xyz.pixelatedw.mineminenomi.quests.sniper.objectives.ArrowKillSniperTargetObjective;
+import xyz.pixelatedw.mineminenomi.quests.objectives.arrow.ArrowKillSniperTargetObjective;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.WyRegistry;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
