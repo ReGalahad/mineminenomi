@@ -358,20 +358,21 @@ public class AbilityHelper
 		}
 		else if (props.isDoctor())
 		{
-			validateQuestAbility(player, ModQuests.SWORDSMAN_TRIAL_01, FirstAidAbility.INSTANCE);
-			validateQuestAbility(player, ModQuests.SWORDSMAN_TRIAL_02, MedicBagExplosionAbility.INSTANCE);
-			validateQuestAbility(player, ModQuests.SWORDSMAN_TRIAL_03, FailedExperimentAbility.INSTANCE);
+			validateQuestAbility(player, ModQuests.DOCTOR_TRIAL_01, FirstAidAbility.INSTANCE);
+			validateQuestAbility(player, ModQuests.DOCTOR_TRIAL_02, MedicBagExplosionAbility.INSTANCE);
+			validateQuestAbility(player, ModQuests.DOCTOR_TRIAL_03, FailedExperimentAbility.INSTANCE);
 		}
+		else if (props.isWeatherWizard())
 		{
-			validateQuestAbility(player, ModQuests.SWORDSMAN_TRIAL_01, HeatBallAbility.INSTANCE);
-			validateQuestAbility(player, ModQuests.SWORDSMAN_TRIAL_01, CoolBallAbility.INSTANCE);
-			validateQuestAbility(player, ModQuests.SWORDSMAN_TRIAL_01, WeatherCloudTempo.INSTANCE);
-			validateQuestAbility(player, ModQuests.SWORDSMAN_TRIAL_02, ThunderBallAbility.INSTANCE);
-			validateQuestAbility(player, ModQuests.SWORDSMAN_TRIAL_02, ThunderboltTempo.INSTANCE);
-			validateQuestAbility(player, ModQuests.SWORDSMAN_TRIAL_02, ThunderLanceTempo.INSTANCE);
-			validateQuestAbility(player, ModQuests.SWORDSMAN_TRIAL_02, FogTempo.INSTANCE);
-			validateQuestAbility(player, ModQuests.SWORDSMAN_TRIAL_02, MirageTempo.INSTANCE);
-			validateQuestAbility(player, ModQuests.SWORDSMAN_TRIAL_03, RainTempo.INSTANCE);
+			validateQuestAbility(player, ModQuests.ART_OF_WEATHER_TRIAL_01, HeatBallAbility.INSTANCE);
+			validateQuestAbility(player, ModQuests.ART_OF_WEATHER_TRIAL_01, CoolBallAbility.INSTANCE);
+			validateQuestAbility(player, ModQuests.ART_OF_WEATHER_TRIAL_01, WeatherCloudTempo.INSTANCE);
+			validateQuestAbility(player, ModQuests.ART_OF_WEATHER_TRIAL_02, ThunderBallAbility.INSTANCE);
+			validateQuestAbility(player, ModQuests.ART_OF_WEATHER_TRIAL_02, ThunderboltTempo.INSTANCE);
+			validateQuestAbility(player, ModQuests.ART_OF_WEATHER_TRIAL_02, ThunderLanceTempo.INSTANCE);
+			validateQuestAbility(player, ModQuests.ART_OF_WEATHER_TRIAL_02, FogTempo.INSTANCE);
+			validateQuestAbility(player, ModQuests.ART_OF_WEATHER_TRIAL_02, MirageTempo.INSTANCE);
+			validateQuestAbility(player, ModQuests.ART_OF_WEATHER_TRIAL_02, RainTempo.INSTANCE);
 
 		}
 	}
