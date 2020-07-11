@@ -3,19 +3,18 @@ package xyz.pixelatedw.mineminenomi.init;
 import xyz.pixelatedw.mineminenomi.packets.client.CCombatModeTriggerPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CCreateCrewPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CDeleteCCBookPacket;
-import xyz.pixelatedw.mineminenomi.packets.client.CSyncDevilFruitPacket;
-import xyz.pixelatedw.mineminenomi.packets.client.CSyncEntityStatsPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CGiveItemStackPacket;
-import xyz.pixelatedw.mineminenomi.packets.client.CSyncJollyRogerPacket;
+import xyz.pixelatedw.mineminenomi.packets.client.CRequestSyncCrewDataPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CRequestSyncQuestDataPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CStopAbilityPacket;
+import xyz.pixelatedw.mineminenomi.packets.client.CSyncDevilFruitPacket;
+import xyz.pixelatedw.mineminenomi.packets.client.CSyncEntityStatsPacket;
+import xyz.pixelatedw.mineminenomi.packets.client.CSyncJollyRogerPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CSyncZoanPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CUpdateTraderOffersPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CUseAbilityPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SDespawnQuestObjectivePacket;
-import xyz.pixelatedw.mineminenomi.packets.server.SSyncEntityStatsPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SFlySpeedPacket;
-import xyz.pixelatedw.mineminenomi.packets.server.SSyncJollyRogerPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SOpenCharacterCreatorScreenPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SOpenJollyRogerCreatorScreenPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SOpenNewCrewScreenPacket;
@@ -23,7 +22,10 @@ import xyz.pixelatedw.mineminenomi.packets.server.SOpenQuestChooseScreenPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SOpenTraderScreenPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SOpenWantedPosterScreenPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SRecalculateEyeHeightPacket;
+import xyz.pixelatedw.mineminenomi.packets.server.SSyncCrewDataPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SSyncDevilFruitPacket;
+import xyz.pixelatedw.mineminenomi.packets.server.SSyncEntityStatsPacket;
+import xyz.pixelatedw.mineminenomi.packets.server.SSyncJollyRogerPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SUpdateTraderOffersPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SViewProtectionPacket;
 import xyz.pixelatedw.wypi.APIDefaults;
@@ -51,7 +53,8 @@ public class ModNetwork
 		WyNetwork.registerPacket(CSyncZoanPacket.class, CSyncZoanPacket::encode, CSyncZoanPacket::decode, CSyncZoanPacket::handle);
 		WyNetwork.registerPacket(CStopAbilityPacket.class, CStopAbilityPacket::encode, CStopAbilityPacket::decode, CStopAbilityPacket::handle);
 		WyNetwork.registerPacket(CCreateCrewPacket.class, CCreateCrewPacket::encode, CCreateCrewPacket::decode, CCreateCrewPacket::handle);
-		
+		WyNetwork.registerPacket(CRequestSyncCrewDataPacket.class, CRequestSyncCrewDataPacket::encode, CRequestSyncCrewDataPacket::decode, CRequestSyncCrewDataPacket::handle);
+
 		// From Server to Client
 		WyNetwork.registerPacket(SSyncDevilFruitPacket.class, SSyncDevilFruitPacket::encode, SSyncDevilFruitPacket::decode, SSyncDevilFruitPacket::handle);
 		WyNetwork.registerPacket(SSyncAbilityDataPacket.class, SSyncAbilityDataPacket::encode, SSyncAbilityDataPacket::decode, SSyncAbilityDataPacket::handle);
@@ -68,5 +71,7 @@ public class ModNetwork
 		WyNetwork.registerPacket(SOpenJollyRogerCreatorScreenPacket.class, SOpenJollyRogerCreatorScreenPacket::encode, SOpenJollyRogerCreatorScreenPacket::decode, SOpenJollyRogerCreatorScreenPacket::handle);
 		WyNetwork.registerPacket(SOpenQuestChooseScreenPacket.class, SOpenQuestChooseScreenPacket::encode, SOpenQuestChooseScreenPacket::decode, SOpenQuestChooseScreenPacket::handle);
 		WyNetwork.registerPacket(SOpenNewCrewScreenPacket.class, SOpenNewCrewScreenPacket::encode, SOpenNewCrewScreenPacket::decode, SOpenNewCrewScreenPacket::handle);
+		WyNetwork.registerPacket(SSyncCrewDataPacket.class, SSyncCrewDataPacket::encode, SSyncCrewDataPacket::decode, SSyncCrewDataPacket::handle);
+
 	}
 }

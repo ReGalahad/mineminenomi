@@ -25,6 +25,7 @@ import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModAbilities;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
+import xyz.pixelatedw.mineminenomi.packets.client.CRequestSyncCrewDataPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CRequestSyncQuestDataPacket;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.network.WyNetwork;
@@ -77,12 +78,6 @@ public class PlayerStatsScreen extends Screen
 		String raceActual = I18n.format("race." + race);
 		String styleActual = I18n.format("style." + style);
 		Crew crew = this.worldProps.getCrewWithMember(this.player.getUniqueID());
-		if(crew != null)
-		{
-			System.out.println(crew.getName());
-			System.out.println(crew.getMembers().size());
-			System.out.println(this.player.world.getPlayerByUuid(crew.getCaptain().getUUID()).getName().getFormattedText());
-		}
 		String crewActual = "";
 		if(crew != null)
 			crewActual = crew.getName();
@@ -144,6 +139,7 @@ public class PlayerStatsScreen extends Screen
 	public void init()
 	{
 		//WyNetwork.sendToServer(new CRequestSyncPirateCrewsPacket());
+		WyNetwork.sendToServer(new CRequestSyncCrewDataPacket());
 		this.worldProps = ExtendedWorldData.get(this.player.world);
 		
 		int posX = (this.width - 256) / 2;

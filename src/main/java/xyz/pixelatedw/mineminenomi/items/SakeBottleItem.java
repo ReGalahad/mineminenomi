@@ -29,7 +29,7 @@ public class SakeBottleItem extends Item
 
 	public SakeBottleItem()
 	{
-		super(new Properties().group(ModCreativeTabs.MISC).maxStackSize(16).food(Foods.APPLE));
+		super(new Properties().group(ModCreativeTabs.MISC).defaultMaxDamage(5).food(Foods.APPLE));
 	}
 
 	@Override
@@ -37,31 +37,31 @@ public class SakeBottleItem extends Item
 	{
 		ItemStack itemStack = player.getHeldItemMainhand();
 		IEntityStats props = EntityStatsCapability.get(player);
-		if(player.isSneaking())
+		if (player.isSneaking())
 		{
-			if(props.isInCrew())
+			if(!player.world.isRemote)
 			{
-				WyHelper.sendMsgToPlayer(player, new TranslationTextComponent(ModI18n.CREW_MESSAGE_ALREADY_IN_CREW).getFormattedText());
-				return new ActionResult<>(ActionResultType.FAIL, player.getHeldItem(hand));
+				if (props.isInCrew())
+				{
+					WyHelper.sendMsgToPlayer(player, new TranslationTextComponent(ModI18n.CREW_MESSAGE_ALREADY_IN_CREW).getFormattedText());
+					return new ActionResult<>(ActionResultType.FAIL, player.getHeldItem(hand));
+				}
+	
+				if (props.getBounty() < CommonConfig.instance.getBountyRequirementForCrews())
+				{
+					WyHelper.sendMsgToPlayer(player, new TranslationTextComponent(ModI18n.CREW_MESSAGE_BOUNTY_REQUIREMENT).getFormattedText());
+					return new ActionResult<>(ActionResultType.FAIL, player.getHeldItem(hand));
+				}
+	
+				Crew crew = new Crew("", player.getUniqueID());
+				ExtendedWorldData worldProps = ExtendedWorldData.get(world);
+				worldProps.addCrew(crew);
+				itemStack.getOrCreateTag().putBoolean("crewReady", true);
+				WyNetwork.sendTo(new SOpenNewCrewScreenPacket(), player);
 			}
-			
-			if(props.getBounty() < CommonConfig.instance.getBountyRequirementForCrews())
-			{
-				WyHelper.sendMsgToPlayer(player, new TranslationTextComponent(ModI18n.CREW_MESSAGE_BOUNTY_REQUIREMENT).getFormattedText());
-				return new ActionResult<>(ActionResultType.FAIL, player.getHeldItem(hand));
-			}
-				
-			Crew crew = new Crew("", player.getUniqueID());
-			ExtendedWorldData worldProps = ExtendedWorldData.get(world);
-			worldProps.addCrew(crew);
-			itemStack.getOrCreateTag().putBoolean("crewReady", true);
-			WyNetwork.sendTo(new SOpenNewCrewScreenPacket(), player);
 		}
 		else
-		{
-			itemStack.getOrCreateTag().putBoolean("crewReady", false);
 			player.setActiveHand(hand);
-		}
 		return new ActionResult<>(ActionResultType.SUCCESS, player.getHeldItem(hand));
 	}
 
@@ -91,7 +91,7 @@ public class SakeBottleItem extends Item
 			}
 
 			if (!player.isCreative())
-				itemStack.shrink(1);
+				itemStack.damageItem(1, entity, (user) -> {});
 		}
 
 		return itemStack;
