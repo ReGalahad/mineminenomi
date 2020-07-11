@@ -25,6 +25,8 @@ import xyz.pixelatedw.mineminenomi.api.ZoanMorphModel;
 import xyz.pixelatedw.mineminenomi.api.helpers.MorphHelper;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.abilities.models.CubeModel;
+import xyz.pixelatedw.wypi.debug.WyDebug;
 
 @SuppressWarnings("deprecation")
 @OnlyIn(Dist.CLIENT)
@@ -99,8 +101,19 @@ public class ZoanMorphRenderer extends LivingRenderer
 		RendererModel arm = ((ZoanMorphModel) this.model).getArmRenderer();
 		if (arm != null)
 		{	
+			if(entity.isSneaking())
+				GlStateManager.translated(0, -0.1, -0.2);
+			
 			GlStateManager.disableTexture();
 			GlStateManager.translated(info.getHeldItemOffset()[0][0], info.getHeldItemOffset()[0][1], info.getHeldItemOffset()[0][2]);
+			if(WyDebug.isDebug())
+			{
+				GlStateManager.disableDepthTest();
+				GlStateManager.enableCull();
+				new CubeModel().render(entity, 0, 0, 0, 0, 0, 0.0325F);
+				GlStateManager.disableCull();
+				GlStateManager.enableDepthTest();
+			}
 			GlStateManager.rotated(Math.toDegrees(arm.rotateAngleX), 1, 0, 0);
 			GlStateManager.rotated(Math.toDegrees(arm.rotateAngleY), 0, 1, 0);
 			GlStateManager.rotated(Math.toDegrees(arm.rotateAngleZ), 0, 0, 1);
@@ -112,6 +125,7 @@ public class ZoanMorphRenderer extends LivingRenderer
 			{
 				GlStateManager.rotatef(180.0F, 1.0F, 0.0F, 0.0F);
 				GlStateManager.rotatef(180.0F, 0.0F, 1.0F, 0.0F);
+				GlStateManager.rotatef(180.0F, 0.0F, 0.0F, 1.0F);
 				Minecraft.getInstance().getFirstPersonRenderer().renderItemSide(entity, stack, TransformType.FIRST_PERSON_LEFT_HAND, false);
 			}
 		}

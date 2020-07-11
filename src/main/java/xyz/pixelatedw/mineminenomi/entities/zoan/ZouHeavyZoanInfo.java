@@ -62,7 +62,7 @@ public class ZouHeavyZoanInfo extends ZoanInfo
 		return new double[][] 
 			{
 				{-0.6, -0.5, 0.0}, 
-				{-0.05, 1.1, -0.4}
+				{-0.15, 0.8, -0.4}
 			};
 	}
 

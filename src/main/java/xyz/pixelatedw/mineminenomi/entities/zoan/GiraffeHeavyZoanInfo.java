@@ -61,8 +61,8 @@ public class GiraffeHeavyZoanInfo extends ZoanInfo
 	{
 		return new double[][] 
 			{
-				{-0.4, 0.2, 0.0},
-				{0.1, 0.7, -0.35}
+				{-0.4, -0.1, 0.0},
+				{0.1, 0.65, -0.5}
 			};
 	}
 

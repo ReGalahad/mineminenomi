@@ -60,8 +60,8 @@ public class YomiZoanInfo extends ZoanInfo
 	{
 		return new double[][] 
 			{
-				{-0.3F, -0.1F, 0F},
-				{0.15F, 0.9F, -0.4F}
+				{-0.22F, 0.05F, 0.2F},
+				{-0.05F, 0.45F, -0.75F}
 			};
 	}
 
