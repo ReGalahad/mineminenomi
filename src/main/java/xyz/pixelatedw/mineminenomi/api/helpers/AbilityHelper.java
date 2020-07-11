@@ -24,6 +24,7 @@ import xyz.pixelatedw.mineminenomi.abilities.artofweather.tempos.MirageTempo;
 import xyz.pixelatedw.mineminenomi.abilities.artofweather.tempos.RainTempo;
 import xyz.pixelatedw.mineminenomi.abilities.artofweather.tempos.ThunderLanceTempo;
 import xyz.pixelatedw.mineminenomi.abilities.artofweather.tempos.ThunderboltTempo;
+import xyz.pixelatedw.mineminenomi.abilities.artofweather.tempos.ThunderstormTempo;
 import xyz.pixelatedw.mineminenomi.abilities.artofweather.tempos.WeatherCloudTempo;
 import xyz.pixelatedw.mineminenomi.abilities.cyborg.ColaOverdriveAbility;
 import xyz.pixelatedw.mineminenomi.abilities.cyborg.CoupDeVentAbility;
@@ -369,6 +370,7 @@ public class AbilityHelper
 			validateQuestAbility(player, ModQuests.ART_OF_WEATHER_TRIAL_01, WeatherCloudTempo.INSTANCE);
 			validateQuestAbility(player, ModQuests.ART_OF_WEATHER_TRIAL_02, ThunderBallAbility.INSTANCE);
 			validateQuestAbility(player, ModQuests.ART_OF_WEATHER_TRIAL_02, ThunderboltTempo.INSTANCE);
+			validateQuestAbility(player, ModQuests.ART_OF_WEATHER_TRIAL_02, ThunderstormTempo.INSTANCE);
 			validateQuestAbility(player, ModQuests.ART_OF_WEATHER_TRIAL_02, ThunderLanceTempo.INSTANCE);
 			validateQuestAbility(player, ModQuests.ART_OF_WEATHER_TRIAL_02, FogTempo.INSTANCE);
 			validateQuestAbility(player, ModQuests.ART_OF_WEATHER_TRIAL_02, MirageTempo.INSTANCE);

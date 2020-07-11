@@ -25,7 +25,7 @@ import xyz.pixelatedw.wypi.quests.objectives.Objective;
 public class ArtOfWeatherTrial02Quest extends Quest
 {
 	private Objective objective01 = new ObtainItemObjective("Obtain a Clima Tact", ModWeapons.CLIMA_TACT, 1);
-	private Objective objective02 = new WeatherCloudAbilityObjective();
+	private Objective objective02 = new WeatherCloudAbilityObjective().addRequirement(this.objective01);
 	
 	private static final String TIP = WyRegistry.registerName("quest.art_of_weather_trial_02.tip", "<Weather Wizard> In order to use Weather Cloud Tempo a Heat Ball and Cool Ball must collide");
 

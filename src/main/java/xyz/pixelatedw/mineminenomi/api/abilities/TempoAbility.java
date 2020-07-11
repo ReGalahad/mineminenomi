@@ -3,10 +3,8 @@ package xyz.pixelatedw.mineminenomi.api.abilities;
 import java.io.Serializable;
 
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraftforge.common.MinecraftForge;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.abilities.Ability;
-import xyz.pixelatedw.wypi.abilities.events.AbilityEvent;
 
 public abstract class TempoAbility extends Ability
 {
@@ -19,10 +17,6 @@ public abstract class TempoAbility extends Ability
 
 	public boolean canUseTempo(PlayerEntity player, ICanUse check)
 	{
-		AbilityEvent.Use event = new AbilityEvent.Use(player, this);
-		if (MinecraftForge.EVENT_BUS.post(event))
-			return false;
-		
 		return check != null ? check.canUse(player, check) : this.canUseCheck.canUse(player, check);
 	}
 

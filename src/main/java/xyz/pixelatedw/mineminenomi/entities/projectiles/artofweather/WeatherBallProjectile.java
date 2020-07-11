@@ -34,6 +34,7 @@ public class WeatherBallProjectile extends AbilityProjectileEntity
 		this.setMaxLife(300);
 	}
 	
+	@Override
 	public void tick()
 	{
 		super.tick();
@@ -44,7 +45,7 @@ public class WeatherBallProjectile extends AbilityProjectileEntity
 		else
 			this.setMotion(0, 0, 0);
 
-		if(this.world.isRemote || this.getThrower() == null || this.ticksExisted < 80)
+		if(this.world.isRemote || this.getThrower() == null || this.ticksExisted < 70)
 			return;
 
 		List<WeatherCloudEntity> clouds = WyHelper.getEntitiesNear(this.getPosition(), this.world, 5, WeatherCloudEntity.class);
@@ -52,8 +53,6 @@ public class WeatherBallProjectile extends AbilityProjectileEntity
 		if(clouds.size() > 0)
 		{
 			clouds.get(0).addWeatherBall(this);
-			if(this instanceof ThunderBallProjectile)
-				clouds.get(0).setLife(clouds.get(0).getLife() + 100);
 			this.remove();
 			return;
 		}

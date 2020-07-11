@@ -24,7 +24,7 @@ public class HeatBallAbility extends Ability
 	public HeatBallAbility()
 	{
 		super("Heat Ball", AbilityCategory.RACIAL);
-		this.setMaxCooldown(5);
+		this.setMaxCooldown(3);
 
 		this.onUseEvent = this::onUseEvent;
 	}

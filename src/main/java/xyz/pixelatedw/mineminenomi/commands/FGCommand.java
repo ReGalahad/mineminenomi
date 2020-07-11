@@ -48,6 +48,9 @@ public class FGCommand
 		
 		builder
 			.then(Commands.literal("quest")
+				.then(Commands.literal("finish")
+					.then(Commands.argument("quest", QuestArgument.quest())
+						.executes(context -> finishQuest(context, QuestArgument.getQuest(context, "quest"), context.getSource().asPlayer()))))
 				.then(Commands.literal("give")
 					.then(Commands.argument("quest", QuestArgument.quest())
 					.then(Commands.argument("target", EntityArgument.player())
@@ -84,6 +87,23 @@ public class FGCommand
 		}
 		WyHelper.sendMsgToPlayer(target, builder.toString());
 
+		return 1;
+	}
+	
+	private static int finishQuest(CommandContext<CommandSource> context, Quest quest, ServerPlayerEntity player)
+	{
+		IQuestData props = QuestDataCapability.get(player);
+		
+		if(props.hasInProgressQuest(quest))
+		{
+			props.addFinishedQuest(quest);
+			props.removeInProgressQuest(quest);
+			quest.triggerCompleteEvent(player);
+			WyNetwork.sendTo(new SSyncQuestDataPacket(player.getEntityId(), props), player);
+		}
+		else
+			WyHelper.sendMsgToPlayer(player, "You don't have this quest!");
+		
 		return 1;
 	}
 	

@@ -79,6 +79,16 @@ public class ClimaTactItem extends Item
 		stack.getOrCreateTag().putDouble("multiplier", multiplier);
 	}
 	
+	public void setCharged(ItemStack stack, boolean flag)
+	{
+		stack.getOrCreateTag().putBoolean("isCharged", flag);
+	}
+	
+	public boolean isCharged(ItemStack stack)
+	{
+		return stack.getOrCreateTag().getBoolean("isCharged");
+	}
+	
 	public int getLevel()
 	{
 		return this.level;

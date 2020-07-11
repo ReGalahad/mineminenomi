@@ -24,7 +24,7 @@ public class CoolBallAbility extends Ability
 	public CoolBallAbility()
 	{
 		super("Cool Ball", AbilityCategory.RACIAL);
-		this.setMaxCooldown(5);
+		this.setMaxCooldown(3);
 
 		this.onUseEvent = this::onUseEvent;
 	}

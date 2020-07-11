@@ -79,6 +79,7 @@ public class WyHelper
 	/*
 	 * String Helpers
 	 */
+	
 	public static boolean isNullOrEmpty(String str)
 	{
 		if (str != null && !str.isEmpty() && !str.equalsIgnoreCase("n/a"))
@@ -103,7 +104,7 @@ public class WyHelper
 
 	public static String getResourceName(String text)
 	{
-		return text.replaceAll("[ \\t]+$", "").replaceAll("\\s+", "_").replaceAll("[\\'\\:\\-\\,\\#]", "").toLowerCase();
+		return text.replaceAll("[ \\t]+$", "").replaceAll("\\s+", "_").replaceAll("[\\'\\:\\-\\,\\#]", "").replaceAll("\\&", "and").toLowerCase();
 	}
 
 	/*

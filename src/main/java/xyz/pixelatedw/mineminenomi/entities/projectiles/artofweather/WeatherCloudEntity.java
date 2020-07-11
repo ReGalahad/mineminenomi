@@ -76,7 +76,7 @@ public class WeatherCloudEntity extends EntityCloud
 					{
 						world.addLightningBolt(new LightningBoltEntity(world, entity.posX, entity.posY, entity.posZ, false));
 
-						ExplosionAbility explosion = AbilityHelper.newExplosion(this, entity.posX, entity.posY, entity.posZ, 1);
+						ExplosionAbility explosion = AbilityHelper.newExplosion(this.getThrower(), entity.posX, entity.posY, entity.posZ, 1);
 						explosion.setExplosionSound(true);
 						explosion.setDamageOwner(false);
 						explosion.setDestroyBlocks(false);
@@ -94,7 +94,7 @@ public class WeatherCloudEntity extends EntityCloud
 			
 			List<WeatherBallProjectile> thunderBalls = this.weatherBalls.stream().filter(ball -> ball instanceof ThunderBallProjectile).collect(Collectors.toList());
 			List<WeatherBallProjectile> coolBalls = this.weatherBalls.stream().filter(ball -> ball instanceof CoolBallProjectile).collect(Collectors.toList());
-						
+					
 			// Check if there are thunder balls nearby and absorb them for Thunderstorm Tempo, this can only happen if the player has a Perfect Clima Tact or higher
 			// Can only occur if the cloud is charged but not super charged.
 			ThunderstormTempo thunderstormTempo = props.getUnlockedAbility(ThunderstormTempo.INSTANCE);
@@ -103,10 +103,9 @@ public class WeatherCloudEntity extends EntityCloud
 				if(!ItemsHelper.isClimaTact(this.getThrower().getHeldItemMainhand()))
 					return false;			
 				ClimaTactItem climaTact = ((ClimaTactItem) this.getThrower().getHeldItemMainhand().getItem());
-
+				System.out.println(climaTact.getLevel());
 				return climaTact.getLevel() >= 2 && !this.superCharged && this.charged && thunderBalls.size() >= 3;
 			});
-			
 			if (canUseAbility)
 			{
 				thunderstormTempo.use(this.getThrower());
@@ -125,10 +124,13 @@ public class WeatherCloudEntity extends EntityCloud
 			{
 				thunderboltTempo.use(this.getThrower());
 				this.charged = true;
+				int extraLife = 0;
 				for (WeatherBallProjectile ball : thunderBalls)
 				{
 					ball.remove();
+					extraLife += 200;
 				}
+				this.setLife(this.getLife() + extraLife);
 			}
 
 			// Two cool balls will trigger the Rain Tempo
