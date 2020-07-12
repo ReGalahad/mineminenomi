@@ -5,8 +5,10 @@ import xyz.pixelatedw.mineminenomi.packets.client.CCreateCrewPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CDeleteCCBookPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CGiveItemStackPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CRequestSyncCrewDataPacket;
+import xyz.pixelatedw.mineminenomi.packets.client.CRequestSyncJollyRogerDataPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CRequestSyncQuestDataPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CStopAbilityPacket;
+import xyz.pixelatedw.mineminenomi.packets.client.CSyncCrewDataPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CSyncDevilFruitPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CSyncEntityStatsPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CSyncJollyRogerPacket;
@@ -54,7 +56,9 @@ public class ModNetwork
 		WyNetwork.registerPacket(CStopAbilityPacket.class, CStopAbilityPacket::encode, CStopAbilityPacket::decode, CStopAbilityPacket::handle);
 		WyNetwork.registerPacket(CCreateCrewPacket.class, CCreateCrewPacket::encode, CCreateCrewPacket::decode, CCreateCrewPacket::handle);
 		WyNetwork.registerPacket(CRequestSyncCrewDataPacket.class, CRequestSyncCrewDataPacket::encode, CRequestSyncCrewDataPacket::decode, CRequestSyncCrewDataPacket::handle);
-
+		WyNetwork.registerPacket(CRequestSyncJollyRogerDataPacket.class, CRequestSyncJollyRogerDataPacket::encode, CRequestSyncJollyRogerDataPacket::decode, CRequestSyncJollyRogerDataPacket::handle);
+		WyNetwork.registerPacket(CSyncCrewDataPacket.class, CSyncCrewDataPacket::encode, CSyncCrewDataPacket::decode, CSyncCrewDataPacket::handle);
+		
 		// From Server to Client
 		WyNetwork.registerPacket(SSyncDevilFruitPacket.class, SSyncDevilFruitPacket::encode, SSyncDevilFruitPacket::decode, SSyncDevilFruitPacket::handle);
 		WyNetwork.registerPacket(SSyncAbilityDataPacket.class, SSyncAbilityDataPacket::encode, SSyncAbilityDataPacket::decode, SSyncAbilityDataPacket::handle);

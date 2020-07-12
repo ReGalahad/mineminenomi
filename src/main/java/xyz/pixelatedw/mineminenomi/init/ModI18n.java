@@ -39,11 +39,17 @@ public class ModI18n
 	public static final String GUI_ABILITIES = WyRegistry.registerName("gui.abilities", "Abilities");
 	public static final String GUI_COLA = WyRegistry.registerName("gui.cola", "Cola");
 	public static final String GUI_DORIKI = WyRegistry.registerName("gui.doriki", "Doriki");
-			
+	public static final String GUI_LEAVE = WyRegistry.registerName("gui.leave", "Leave");
+
 	public static final String GUI_QUESTS = WyRegistry.registerName("gui.quests", "Quests");
 	public static final String GUI_QUEST_PROGRESS = WyRegistry.registerName("gui.quests.progress", "Progress");
 	public static final String GUI_QUEST_ACCEPT = WyRegistry.registerName("gui.quests.accept", "Accept this quest ?");
 	
+	public static final String GUI_CREW = WyRegistry.registerName("gui.crew", "Crew");
+	public static final String GUI_CREW_JOLLY_ROGER = WyRegistry.registerName("gui.crew_jolly_roger", "Crew's Jolly Roger");
+	public static final String GUI_CREW_MEMBERS = WyRegistry.registerName("gui.crew_members", "Crew's Members");
+	public static final String CREW_CAPTAIN = WyRegistry.registerName("gui.captain", "Captain");
+
 	public static final String GUI_ACCEPT = WyRegistry.registerName("gui.accept", "Accept");
 	public static final String GUI_DECLINE = WyRegistry.registerName("gui.decline", "Decline");
 	public static final String GUI_BUY = WyRegistry.registerName("gui.buy", "Buy");

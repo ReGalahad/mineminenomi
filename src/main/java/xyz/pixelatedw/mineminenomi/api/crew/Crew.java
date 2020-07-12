@@ -50,9 +50,23 @@ public class Crew
 		return member;
 	}
 
+	public void removeMember(UUID id)
+	{
+		Member member = this.getMember(id);
+		if(member.isCaptain())
+			this.members.removeAll(this.members);
+		else
+			this.members.remove(member);
+	}
+	
+	public Member getMember(UUID id)
+	{
+		return this.members.stream().filter(member -> member.getUUID().equals(id)).findFirst().orElse(null);
+	}
+	
 	public boolean hasMember(UUID id)
 	{
-		return this.members.stream().filter(member -> member.getUUID().equals(id)).findFirst().orElse(null) != null;
+		return this.getMember(id) != null;
 	}
 
 	public void create(World world)

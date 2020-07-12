@@ -17,7 +17,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.api.crew.Crew;
-import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
@@ -73,7 +72,6 @@ public class SakeCupItem extends Item
 					{
 						crew.addMember(player.getUniqueID());
 						WyHelper.sendMsgToPlayer(leader, new TranslationTextComponent(ModI18n.CREW_MESSAGE_NEW_JOIN, player.getName().getFormattedText()).getFormattedText());
-						EntityStatsCapability.get(player).setInCrew(true);
 						itemStack.getOrCreateTag().putInt("leader", 0);
 					}
 				}

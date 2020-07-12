@@ -63,10 +63,7 @@ public interface IEntityStats
 	
 	boolean hasHeart();
 	void setHeart(boolean value);
-	
-	boolean isInCrew();
-	void setInCrew(boolean value);
-	
+
 	double getDamageMultiplier();
 	void setDamageMultiplier(double multiplier);
 }

@@ -21,6 +21,7 @@ import xyz.pixelatedw.mineminenomi.api.crew.Crew.Member;
 import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitHelper;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.items.AkumaNoMiItem;
+import xyz.pixelatedw.wypi.WyHelper;
 
 public class ExtendedWorldData extends WorldSavedData
 {
@@ -29,7 +30,7 @@ public class ExtendedWorldData extends WorldSavedData
 	private HashMap<String, Long> issuedBounties = new HashMap<String, Long>();
 	private List<String> devilFruitsInWorld = new ArrayList<String>();
 	private List<int[][]> protectedAreas = new ArrayList<int[][]>();
-	private List<Crew> pirateCrews = new ArrayList<Crew>();
+	private HashMap<String, Crew> pirateCrews = new HashMap<String, Crew>();
 
 	public static Map<World, ExtendedWorldData> loadedExtWorlds = new HashMap<>();
 	
@@ -110,13 +111,14 @@ public class ExtendedWorldData extends WorldSavedData
 				});
 		}
 		
+		this.pirateCrews.clear();
 		ListNBT crews = nbt.getList("crews", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < crews.size(); i++)
 		{
 			CompoundNBT crewNBT = crews.getCompound(i);
 			Crew crew = new Crew();
 			crew.read(crewNBT);
-			this.pirateCrews.add(crew);
+			this.pirateCrews.put(WyHelper.getResourceName(crew.getName()), crew);
 		}	
 	}
 
@@ -157,7 +159,7 @@ public class ExtendedWorldData extends WorldSavedData
 		nbt.put("protectedAreas", protectedAreas);
 		
 		ListNBT crews = new ListNBT();
-		for(Crew crew : this.pirateCrews)
+		for(Crew crew : this.pirateCrews.values())
 		{
 			crews.add(crew.write());
 		}
@@ -168,13 +170,13 @@ public class ExtendedWorldData extends WorldSavedData
 
 	public List<Crew> getCrews()
 	{
-		return this.pirateCrews;
+		return new ArrayList(this.pirateCrews.values());
 	}
 	
 	@Nullable
 	public Crew getCrewWithMember(UUID memId)
 	{
-		for(Crew crew : this.pirateCrews)
+		for(Crew crew : this.pirateCrews.values())
 		{
 			for(Member member : crew.getMembers())
 			{
@@ -189,20 +191,22 @@ public class ExtendedWorldData extends WorldSavedData
 	@Nullable
 	public Crew getCrewWithCaptain(UUID capId)
 	{
-		return this.pirateCrews.stream().filter(crew -> crew.getCaptain() != null && crew.getCaptain().getUUID() == capId).findFirst().orElse(null);
+		return this.pirateCrews.values().stream().filter(crew -> crew.getCaptain() != null && crew.getCaptain().getUUID() == capId).findFirst().orElse(null);
 	}
 	
 	public void removeCrew(Crew crew)
 	{
-		if(this.pirateCrews.contains(crew))
-			this.pirateCrews.remove(crew);
+		String key = WyHelper.getResourceName(crew.getName());
+		if(this.pirateCrews.containsKey(key))
+			this.pirateCrews.remove(key);
 		this.markDirty();
 	}
 	
 	public void addCrew(Crew crew)
 	{
-		if(!this.pirateCrews.contains(crew))
-			this.pirateCrews.add(crew);
+		String key = WyHelper.getResourceName(crew.getName());
+		if(!this.pirateCrews.containsKey(key))
+			this.pirateCrews.put(key, crew);
 		this.markDirty();
 	}
 	

@@ -26,7 +26,6 @@ import xyz.pixelatedw.wypi.network.WyNetwork;
 
 public class SakeBottleItem extends Item
 {
-
 	public SakeBottleItem()
 	{
 		super(new Properties().group(ModCreativeTabs.MISC).defaultMaxDamage(5).food(Foods.APPLE));
@@ -41,7 +40,10 @@ public class SakeBottleItem extends Item
 		{
 			if(!player.world.isRemote)
 			{
-				if (props.isInCrew())
+				ExtendedWorldData worldProps = ExtendedWorldData.get(world);
+
+				boolean isInCrew = worldProps.getCrewWithMember(player.getUniqueID()) != null;
+				if (isInCrew)
 				{
 					WyHelper.sendMsgToPlayer(player, new TranslationTextComponent(ModI18n.CREW_MESSAGE_ALREADY_IN_CREW).getFormattedText());
 					return new ActionResult<>(ActionResultType.FAIL, player.getHeldItem(hand));
@@ -54,7 +56,6 @@ public class SakeBottleItem extends Item
 				}
 	
 				Crew crew = new Crew("", player.getUniqueID());
-				ExtendedWorldData worldProps = ExtendedWorldData.get(world);
 				worldProps.addCrew(crew);
 				itemStack.getOrCreateTag().putBoolean("crewReady", true);
 				WyNetwork.sendTo(new SOpenNewCrewScreenPacket(), player);

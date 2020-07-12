@@ -10,7 +10,6 @@ import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
 import xyz.pixelatedw.mineminenomi.api.crew.Crew;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
-import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.wypi.WyHelper;
@@ -58,7 +57,6 @@ public class CCreateCrewPacket
 				}
 				
 				crew.setName(message.name);
-				EntityStatsCapability.get(player).setInCrew(true);
 				crew.create(player.world);
 
 				if(CommonConfig.instance.isCrewWorldMessageEnabled())

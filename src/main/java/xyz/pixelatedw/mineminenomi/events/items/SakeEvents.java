@@ -34,6 +34,7 @@ public class SakeEvents
 		
 		ItemStack itemStack = target.getHeldItemMainhand();
 		((SakeCupItem)itemStack.getItem()).setLeader(itemStack, player);
+		player.getHeldItemMainhand().damageItem(1, player, (user) -> {});
 		event.setCanceled(true);
 	}
 	

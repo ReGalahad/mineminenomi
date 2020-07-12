@@ -70,7 +70,6 @@ public class ConfigEvents
 				String faction = oldEntityStats.getFaction();
 				String race = oldEntityStats.getRace();
 				String fightStyle = oldEntityStats.getFightingStyle();
-				boolean isInCrew = oldEntityStats.isInCrew();
 				int doriki = oldEntityStats.getDoriki() / 3;
 				long bounty = oldEntityStats.getBounty() / 3;
 				int belly = oldEntityStats.getBelly() / 3;
@@ -86,7 +85,6 @@ public class ConfigEvents
 				newEntityStats.setBounty(bounty);
 				newEntityStats.setBelly(belly);
 				newEntityStats.setExtol(extol);
-				newEntityStats.setInCrew(isInCrew);
 				
 				IHakiData oldHakiProps = HakiDataCapability.get(event.getOriginal());
 				float hardeningBusoExp = oldHakiProps.getBusoshokuHardeningHakiExp() / 2;
