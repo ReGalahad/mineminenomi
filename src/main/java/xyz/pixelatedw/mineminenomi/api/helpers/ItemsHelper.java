@@ -65,10 +65,10 @@ public class ItemsHelper
     	{
     		nearbyPlayers.stream().filter(x -> 
     		{
-    			return x instanceof PlayerEntity && EntityStatsCapability.get(x).isPirate() && worldData.getBounty(x.getName().getFormattedText()) != 0;
+    			return x instanceof PlayerEntity && EntityStatsCapability.get(x).isPirate() && worldData.getBounty(x.getUniqueID().toString().toLowerCase()) != 0;
     		}).forEach(x -> 
     		{
-    			SimpleEntry<String, Long> se = new SimpleEntry<String, Long>( x.getName().getFormattedText(), worldData.getBounty(x.getName().getFormattedText()) );
+    			SimpleEntry<String, Long> se = new SimpleEntry<String, Long>( x.getName().getFormattedText(), worldData.getBounty(x.getUniqueID().toString().toLowerCase()) );
     			bountiesInPackage.add( se );
     		});
     	}

@@ -24,6 +24,7 @@ import xyz.pixelatedw.mineminenomi.blocks.tileentities.WantedPosterTileEntity;
 import xyz.pixelatedw.mineminenomi.data.entity.jollyroger.IJollyRoger;
 import xyz.pixelatedw.mineminenomi.data.entity.jollyroger.JollyRogerCapability;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
+import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.models.blocks.WantedPosterModel;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
@@ -57,7 +58,7 @@ public class WantedPosterTileEntityRenderer extends TileEntityRenderer<WantedPos
 			GlStateManager.color3f(1, 1, 1);
 			GlStateManager.depthMask(true);
 			GlStateManager.disableLighting();
-			
+
 			// Render the model
 			GlStateManager.pushMatrix();
 			{
@@ -77,44 +78,71 @@ public class WantedPosterTileEntityRenderer extends TileEntityRenderer<WantedPos
 				return;
 			}
 
-			// Render the background and the face
+			final PlayerEntity finalEntity = this.minecraft.world.getPlayerByUuid(UUID.fromString(tileEntity.getUUID()));
+			ExtendedWorldData worldData = ExtendedWorldData.get(finalEntity.world);
+
+			DecimalFormat decimalFormat = new DecimalFormat("#,##0");
+			if (WyHelper.isNullOrEmpty(tileEntity.getPosterBounty()))
+				tileEntity.setPosterBounty("0");
+			String bounty = "0";
+			try
+			{
+				bounty = decimalFormat.format(Long.parseLong(tileEntity.getPosterBounty()));
+			}
+			catch (Exception e)
+			{
+				bounty = "0";
+				e.printStackTrace();
+			}
+
+			// Render the background, the face, crew jolly roger and the expired mark if its expired
 			GlStateManager.pushMatrix();
 			{
 				GL11.glScalef(.0035F, .0025F, .5F);
 				GL11.glTranslated(x - 160, y - 100, 0.9);
-				final PlayerEntity finalEntity = this.minecraft.world.getPlayerByUuid(UUID.fromString(tileEntity.getUUID()));
 
+				if (worldData.getBounty(finalEntity.getUniqueID().toString()) != Long.parseLong(bounty.replace(",", "")))
+				{
+					GlStateManager.pushMatrix();
+					{
+						this.bindTexture(ModResources.EXPIRED);
+
+						GL11.glTranslated(45, -45, -0.001);
+						GuiUtils.drawTexturedModalRect(0, 0, 16, 16, 256, 256, 0);
+					}
+					GlStateManager.popMatrix();
+				}
+				
 				GlStateManager.pushMatrix();
 				{
-					ExtendedWorldData worldData = ExtendedWorldData.get(finalEntity.world);
 					Crew crew = worldData.getCrewWithMember(finalEntity.getUniqueID());
-					if(crew != null)
+					if (crew != null)
 					{
 						PlayerEntity crewCaptain = finalEntity.world.getPlayerByUuid(crew.getCaptain().getUUID());
 						IJollyRoger jollyRoger = JollyRogerCapability.get(crewCaptain);
-						
+
 						GL11.glTranslated(0, 0, -2.4);
 						GlStateManager.pushMatrix();
 						{
 							GlStateManager.enableBlend();
 							GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);
-					
+
 							double scale = 0.3;
 							GlStateManager.translated(x + 100, y + 10, 0);
 							GlStateManager.translated(128, 128, 0);
 							GlStateManager.scaled(scale, scale, scale);
 							GlStateManager.translated(-128, -128, 0);
-					
-							if(jollyRoger != null)
+
+							if (jollyRoger != null)
 								RendererHelper.drawPlayerJollyRoger(jollyRoger);
-							
+
 							GlStateManager.disableBlend();
 						}
-						GlStateManager.popMatrix();	
+						GlStateManager.popMatrix();
 					}
 				}
 				GlStateManager.popMatrix();
-				
+
 				GlStateManager.pushMatrix();
 				{
 					rs = ((AbstractClientPlayerEntity) finalEntity).getLocationSkin();
@@ -135,7 +163,7 @@ public class WantedPosterTileEntityRenderer extends TileEntityRenderer<WantedPos
 					GL11.glScalef(0.87F, 0.94F, 1.0F);
 					GuiUtils.drawTexturedModalRect(0, 0, 0, 0, 250, 250, 0);
 				}
-				GlStateManager.popMatrix();				
+				GlStateManager.popMatrix();
 			}
 			GlStateManager.popMatrix();
 
@@ -150,19 +178,6 @@ public class WantedPosterTileEntityRenderer extends TileEntityRenderer<WantedPos
 				this.minecraft.fontRenderer.drawString(TextFormatting.BOLD + name, 3 - this.minecraft.fontRenderer.getStringWidth(name) / 2, 0, WyHelper.hexToRGB("513413").getRGB());
 
 				GL11.glScalef(1.2F, 1.2F, 1.2F);
-				DecimalFormat decimalFormat = new DecimalFormat("#,##0");
-				if (WyHelper.isNullOrEmpty(tileEntity.getPosterBounty()))
-					tileEntity.setPosterBounty("0");
-				String bounty = "0";
-				try
-				{
-					bounty = decimalFormat.format(Long.parseLong(tileEntity.getPosterBounty()));
-				}
-				catch (Exception e)
-				{
-					bounty = "0";
-					e.printStackTrace();
-				}
 
 				boolean flag = bounty.length() > 10;
 
@@ -189,5 +204,5 @@ public class WantedPosterTileEntityRenderer extends TileEntityRenderer<WantedPos
 		}
 		GlStateManager.popMatrix();
 	}
-	
+
 }

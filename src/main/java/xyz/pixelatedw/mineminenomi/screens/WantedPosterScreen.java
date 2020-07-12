@@ -79,11 +79,15 @@ public class WantedPosterScreen extends Screen
 
 		String name = this.wantedData.getString("Name");
 		String background = this.wantedData.getString("Background");
-
-		// Drawing the background, the player's skin face segment and their crew's jolly roger (if they are in a crew)
+		DecimalFormat decimalFormat = new DecimalFormat("#,##0");
+		String bounty = decimalFormat.format(this.wantedData.getLong("Bounty"));
+		
+		// Drawing the background, the player's skin face segment and their crew's jolly roger (if they are in a crew) and expried mark if its expired
 		GL11.glPushMatrix();
 		{
-			ResourceLocation rs = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/wantedposters/backgrounds/" + background + ".jpg");
+			ResourceLocation rs;
+
+			rs = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/wantedposters/backgrounds/" + background + ".jpg");
 			this.minecraft.getTextureManager().bindTexture(rs);
 
 			GL11.glScaled(0.34, 0.245, 0);
@@ -114,18 +118,30 @@ public class WantedPosterScreen extends Screen
 				GlStateManager.disableBlend();
 			}
 			GlStateManager.popMatrix();	
+			
+			if (this.worldData.getBounty(this.player.getUniqueID().toString()) != Long.parseLong(bounty.replace(",", "")))
+			{
+				GlStateManager.pushMatrix();
+				{
+					this.minecraft.getTextureManager().bindTexture(ModResources.EXPIRED);
+
+					double scale = 0.25;
+					GlStateManager.scaled(scale, scale, scale);
+					GlStateManager.translated(30, -50, 0);
+					GuiUtils.drawTexturedModalRect(0, 0, 16, 16, 256, 256, 0);
+				}
+				GlStateManager.popMatrix();
+			}		
 		}
 		GL11.glPopMatrix();
 
 		this.minecraft.getTextureManager().bindTexture(ModResources.CURRENCIES);
 		GuiUtils.drawTexturedModalRect(-2, 63, 0, 0, 32, 32, 1);
-		DecimalFormat decimalFormat = new DecimalFormat("#,##0");
 
 		if (name.length() > 13)
 			name = name.substring(0, 10) + "...";
 		this.minecraft.fontRenderer.drawString(TextFormatting.BOLD + name, 47 - this.minecraft.fontRenderer.getStringWidth(name) / 2, 62, WyHelper.hexToRGB("513413").getRGB());
-
-		String bounty = decimalFormat.format(this.wantedData.getLong("Bounty"));
+	
 		boolean flag = bounty.length() > 10;
 		if (flag)
 		{
