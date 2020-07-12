@@ -39,7 +39,7 @@ public class MarineCampStructure extends ScatteredStructure<NoFeatureConfig>
 	@Override
 	protected int getSeedModifier()
 	{
-		return 14357621;
+		return 36793156;
 	}
 
 	@Override

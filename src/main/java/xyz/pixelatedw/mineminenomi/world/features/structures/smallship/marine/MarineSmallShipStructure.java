@@ -40,7 +40,7 @@ public class MarineSmallShipStructure extends ScatteredStructure<NoFeatureConfig
 	@Override
 	protected int getSeedModifier()
 	{
-		return 14357621;
+		return 82902242;
 	}
 
 	@Override

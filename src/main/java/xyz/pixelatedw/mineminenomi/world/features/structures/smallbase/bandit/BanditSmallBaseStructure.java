@@ -39,7 +39,7 @@ public class BanditSmallBaseStructure extends ScatteredStructure<NoFeatureConfig
 	@Override
 	protected int getSeedModifier()
 	{
-		return 14357621;
+		return 19773711;
 	}
 
 	@Override

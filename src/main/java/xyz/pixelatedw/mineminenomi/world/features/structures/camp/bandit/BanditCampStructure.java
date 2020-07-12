@@ -39,7 +39,7 @@ public class BanditCampStructure extends ScatteredStructure<NoFeatureConfig>
 	@Override
 	protected int getSeedModifier()
 	{
-		return 14357621;
+		return 23286686;
 	}
 
 	@Override

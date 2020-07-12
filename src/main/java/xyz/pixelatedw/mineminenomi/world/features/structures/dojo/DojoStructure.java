@@ -77,7 +77,7 @@ public class DojoStructure extends ScatteredStructure<NoFeatureConfig>
 	@Override
 	protected int getSeedModifier()
 	{
-		return 14357618;
+		return 65891445;
 	}
 
 	public static void register(Biome biome)

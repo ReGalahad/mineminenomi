@@ -40,7 +40,7 @@ public class PirateLargeShipStructure extends ScatteredStructure<NoFeatureConfig
 	@Override
 	protected int getSeedModifier()
 	{
-		return 14357621;
+		return 72930491;
 	}
 
 	@Override
