@@ -2,6 +2,7 @@ package xyz.pixelatedw.mineminenomi.abilities.doctor;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TranslationTextComponent;
 import xyz.pixelatedw.mineminenomi.init.ModArmors;
@@ -44,7 +45,9 @@ public class FirstAidAbility extends PunchAbility
 			PARTICLES.spawn(player.world, target.posX, target.posY, target.posZ, 0, 0, 0);
 
 		int damage = medicBag.getDamage() + 10 <= medicBag.getMaxDamage() ? 10 : medicBag.getMaxDamage() - medicBag.getDamage();
-		medicBag.damageItem(damage, player, (user) -> {});
+		medicBag.damageItem(damage, player, (user) -> {
+			user.sendBreakAnimation(EquipmentSlotType.MAINHAND);
+		});
 		if(medicBag.getDamage() >= medicBag.getMaxDamage())
 		{
 			//WyNetworkHelper.sendTo(new PacketBrokenItemParticles(medicBag), (EntityPlayerMP) player);

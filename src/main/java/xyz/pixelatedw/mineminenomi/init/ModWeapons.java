@@ -55,19 +55,19 @@ public class ModWeapons
 	public static final CoreSwordItem SHUSUI = new CoreSwordItem(8, 500).setSwordSpeed(-2);
 	public static final CoreSwordItem SOUL_SOLID = new CoreSwordItem(8, 500);
 	public static final CoreSwordItem DURANDAL = new CoreSwordItem(7, 400).setSwordSpeed(-1.5);
-	public static final ClimaTactItem CLIMA_TACT = new ClimaTactItem(1, 1);
-	public static final ClimaTactItem PERFECT_CLIMA_TACT = new ClimaTactItem(3, 2);
-	public static final ClimaTactItem SORCERY_CLIMA_TACT = new ClimaTactItem(5, 3);
+	public static final ClimaTactItem CLIMA_TACT = new ClimaTactItem(1, 1, 300);
+	public static final ClimaTactItem PERFECT_CLIMA_TACT = new ClimaTactItem(3, 2, 500);
+	public static final ClimaTactItem SORCERY_CLIMA_TACT = new ClimaTactItem(5, 3, 800);
 	public static final CoreSwordItem MACE = new CoreSwordItem(8, 800).setBlunt().setSwordSpeed(-3);
 
 	// Normal Ranged Weapons
 	public static final GunItem FLINTLOCK = new GunItem(200).setShotCooldown(5).setReloadCooldown(40).setBulletAccuracy(2).setBulletSpeed(2).setDamageMultiplier(1.6F).setGunpowderLimit(5);
-	public static final KujaBowItem GREEN_KUJA_BOW = new KujaBowItem();
-	public static final KujaBowItem RED_KUJA_BOW = new KujaBowItem();
-	public static final KujaBowItem BLUE_KUJA_BOW = new KujaBowItem();
-	public static final PopGreenBowItem KABUTO = new PopGreenBowItem();
-	public static final PopGreenBowItem BLACK_KABUTO = new PopGreenBowItem();
-	public static final PopGreenBowItem GINGA_PACHINKO = new PopGreenBowItem();
+	public static final KujaBowItem GREEN_KUJA_BOW = new KujaBowItem(700);
+	public static final KujaBowItem RED_KUJA_BOW = new KujaBowItem(700);
+	public static final KujaBowItem BLUE_KUJA_BOW = new KujaBowItem(700);
+	public static final PopGreenBowItem KABUTO = new PopGreenBowItem(400);
+	public static final PopGreenBowItem BLACK_KABUTO = new PopGreenBowItem(800);
+	public static final PopGreenBowItem GINGA_PACHINKO = new PopGreenBowItem(200);
 	public static final GunItem SENRIKU = new GunItem(800).setShotCooldown(25).setReloadCooldown(80).setBulletAccuracy(0).setBulletSpeed(4).setDamageMultiplier(2F).setGunpowderLimit(2);
 
 	// Devil Fruit Weapons

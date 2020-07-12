@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
@@ -72,7 +73,9 @@ public class MedicBagExplosionAbility extends Ability
 		PARTICLES.spawn(player.world, player.posX, player.posY, player.posZ, 0, 0, 0);
 
 		int damage = medicBag.getDamage() + 100 <= medicBag.getMaxDamage() ? 100 : medicBag.getMaxDamage() - medicBag.getDamage();
-		medicBag.damageItem(damage, player, (user) -> {});
+		medicBag.damageItem(damage, player, (user) -> {
+			user.sendBreakAnimation(EquipmentSlotType.MAINHAND);
+		});
 		if(medicBag.getDamage() >= medicBag.getMaxDamage())
 		{
 			//WyNetworkHelper.sendTo(new PacketBrokenItemParticles(medicBag), (EntityPlayerMP) player);

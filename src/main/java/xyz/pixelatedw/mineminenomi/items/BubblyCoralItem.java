@@ -1,6 +1,7 @@
 package xyz.pixelatedw.mineminenomi.items;
 
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
@@ -27,7 +28,9 @@ public class BubblyCoralItem extends Item
 			return new ActionResult<>(ActionResultType.PASS, player.getHeldItem(hand));
 		
 		player.addPotionEffect(new EffectInstance(ModEffects.BUBBLY_CORAL, 2000, 0));		
-		itemStack.damageItem(1, player, (user) -> {});
+		itemStack.damageItem(1, player, (user) -> {
+			user.sendBreakAnimation(EquipmentSlotType.MAINHAND);
+		});
 
 		return new ActionResult<>(ActionResultType.SUCCESS, player.getHeldItem(hand));
 	}

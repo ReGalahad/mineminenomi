@@ -41,42 +41,28 @@ public class CoreSwordItem extends Item
 
 	private IItemPropertyGetter hakiProperty = (itemStack, world, livingEntity) ->
 	{
-		if (livingEntity == null)
+		float hasHakiActive = 0;
+		if (livingEntity instanceof PlayerEntity)
 		{
-			return 0.0F;
+			IAbilityData props = AbilityDataCapability.get(livingEntity);
+			boolean mainHandFlag = livingEntity.getHeldItemMainhand().getItem() == itemStack.getItem();
+			boolean offHandFlag = livingEntity.getHeldItemOffhand().getItem() == itemStack.getItem();
+			BusoshokuHakiImbuingAbility ability = props.getEquippedAbility(BusoshokuHakiImbuingAbility.INSTANCE);
+			boolean hakiActiveFlag = ability != null && ability.isContinuous();
+			hasHakiActive = (mainHandFlag || offHandFlag) && hakiActiveFlag ? 1 : 0;
 		}
-		else
+		else if (livingEntity instanceof GenericNewEntity)
 		{
-			float hasHakiActive = 0;
-			if(livingEntity instanceof PlayerEntity)
-			{
-				IAbilityData props = AbilityDataCapability.get(livingEntity);
-				boolean mainHandFlag = livingEntity.getHeldItemMainhand() == itemStack;
-				boolean offHandFlag = livingEntity.getHeldItemOffhand() == itemStack;
-				BusoshokuHakiImbuingAbility ability = props.getEquippedAbility(BusoshokuHakiImbuingAbility.INSTANCE);
-				boolean hakiActiveFlag = ability != null && ability.isContinuous();			
-				hasHakiActive = (mainHandFlag || offHandFlag) && hakiActiveFlag ? 1 : 0;
-			}
-			else if(livingEntity instanceof GenericNewEntity)
-			{
-				hasHakiActive = ((GenericNewEntity)livingEntity).hasBusoHaki() ? 1 : 0;
-			}
-			return hasHakiActive;
+			hasHakiActive = ((GenericNewEntity) livingEntity).hasBusoHaki() ? 1 : 0;
 		}
+		return hasHakiActive;
 	};
 	
 	private IItemPropertyGetter sheathedProperty = (itemStack, world, livingEntity) ->
 	{
-		if (livingEntity == null || !(livingEntity instanceof PlayerEntity))
-		{
-			return 0.0F;
-		}
-		else
-		{
-			boolean mainHandFlag = livingEntity.getHeldItemMainhand() != itemStack;
-			boolean offHandFlag = livingEntity.getHeldItemOffhand() != itemStack;
-			return (mainHandFlag && offHandFlag) ? 1.0F : 0.0F;
-		}
+		boolean mainHandFlag = livingEntity.getHeldItemMainhand().getItem() != itemStack.getItem();
+		boolean offHandFlag = livingEntity.getHeldItemOffhand().getItem() != itemStack.getItem();
+		return (mainHandFlag && offHandFlag) ? 1.0F : 0.0F;
 	};
 	
 	public CoreSwordItem(Properties props, int damage)

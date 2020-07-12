@@ -1,6 +1,9 @@
 package xyz.pixelatedw.mineminenomi.events.passives;
 
+import java.util.List;
+
 import com.google.common.collect.Lists;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.LivingRenderer;
 import net.minecraft.client.renderer.entity.model.IHasArm;
@@ -33,8 +36,6 @@ import xyz.pixelatedw.mineminenomi.particles.effects.common.LogiaParticleEffect;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
-
-import java.util.List;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class SabiPassiveEvents
@@ -79,7 +80,9 @@ public class SabiPassiveEvents
 		
 		if(toDamage != null)
 		{
-			toDamage.damageItem((toDamage.getMaxDamage() / 4) + 1, attacked, (entity) -> {});
+			toDamage.damageItem((toDamage.getMaxDamage() / 4) + 1, attacked, (entity) -> {
+				entity.sendBreakAnimation(EquipmentSlotType.MAINHAND);
+			});
 			event.setCanceled(true);
 			ParticleEffect effect = new LogiaParticleEffect(ModResources.RUST);	
 			effect.spawn(attacked.world, attacked.posX, attacked.posY, attacked.posZ, 0, 0, 0);

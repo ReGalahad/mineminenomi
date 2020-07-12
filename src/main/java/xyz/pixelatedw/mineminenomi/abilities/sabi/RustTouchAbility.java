@@ -2,12 +2,10 @@ package xyz.pixelatedw.mineminenomi.abilities.sabi;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.network.play.server.SPlayEntityEffectPacket;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import xyz.pixelatedw.mineminenomi.events.passives.SabiPassiveEvents;
@@ -39,28 +37,40 @@ public class RustTouchAbility extends PunchAbility
 
 		ItemStack gear = target.getItemStackFromSlot(EquipmentSlotType.HEAD);
 		if(gear.getItem() == Items.IRON_HELMET)
-			gear.damageItem(((gear.getMaxDamage() / 3) + 1) + 1, target, (entity) -> {});
+			gear.damageItem(((gear.getMaxDamage() / 3) + 1) + 1, target, (entity) -> {
+				entity.sendBreakAnimation(EquipmentSlotType.MAINHAND);
+			});
 		
 		gear = target.getItemStackFromSlot(EquipmentSlotType.CHEST);
 		if(gear.getItem() == Items.IRON_CHESTPLATE)
-			gear.damageItem((gear.getMaxDamage() / 3) + 1, target, (entity) -> {});
+			gear.damageItem((gear.getMaxDamage() / 3) + 1, target, (entity) -> {
+				entity.sendBreakAnimation(EquipmentSlotType.MAINHAND);
+			});
 		
 		gear = target.getItemStackFromSlot(EquipmentSlotType.LEGS);
 		if(gear.getItem() == Items.IRON_LEGGINGS)
-			gear.damageItem((gear.getMaxDamage() / 3) + 1, target, (entity) -> {});
+			gear.damageItem((gear.getMaxDamage() / 3) + 1, target, (entity) -> {
+				entity.sendBreakAnimation(EquipmentSlotType.MAINHAND);
+			});
 		
 		gear = target.getItemStackFromSlot(EquipmentSlotType.FEET);
 		if(gear.getItem() == Items.IRON_BOOTS)
-			gear.damageItem((gear.getMaxDamage() / 3) + 1, target, (entity) -> {});
+			gear.damageItem((gear.getMaxDamage() / 3) + 1, target, (entity) -> {
+				entity.sendBreakAnimation(EquipmentSlotType.MAINHAND);
+			});
 				
 		gear = target.getItemStackFromSlot(EquipmentSlotType.MAINHAND);	
 		ItemStack offhandGear = target.getItemStackFromSlot(EquipmentSlotType.OFFHAND);	
 		for(Item item : SabiPassiveEvents.IRON_ITEMS)
 		{
 			if(gear.getItem() == item)
-				gear.damageItem((gear.getMaxDamage() / 3) + 1, target, (entity) -> {});
+				gear.damageItem((gear.getMaxDamage() / 3) + 1, target, (entity) -> {
+					entity.sendBreakAnimation(EquipmentSlotType.MAINHAND);
+				});
 			else if(offhandGear.getItem() == item)
-				offhandGear.damageItem((offhandGear.getMaxDamage() / 3) + 1, target, (entity) -> {});
+				offhandGear.damageItem((offhandGear.getMaxDamage() / 3) + 1, target, (entity) -> {
+					entity.sendBreakAnimation(EquipmentSlotType.MAINHAND);
+				});
 		}
 		
 		PARTICLES.spawn(player.world, target.posX, target.posY, target.posZ, 0, 0, 0);

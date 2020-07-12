@@ -20,9 +20,9 @@ import xyz.pixelatedw.mineminenomi.init.ModItems;
 public class KujaBowItem extends BowItem
 {
 
-	public KujaBowItem()
+	public KujaBowItem(int maxDamage)
 	{
-		super(new Properties().group(ModCreativeTabs.WEAPONS).maxStackSize(1));
+		super(new Properties().group(ModCreativeTabs.WEAPONS).maxStackSize(1).defaultMaxDamage(maxDamage));
 	}
 
 	@Override

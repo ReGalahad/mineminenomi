@@ -33,9 +33,9 @@ public class ClimaTactItem extends Item
 		}
 	};
 	
-	public ClimaTactItem(int damage, int level)
+	public ClimaTactItem(int damage, int level, int maxDamage)
 	{
-		super(new Properties().group(ModCreativeTabs.WEAPONS).maxStackSize(1));
+		super(new Properties().group(ModCreativeTabs.WEAPONS).maxStackSize(1).defaultMaxDamage(maxDamage));
 		this.addPropertyOverride(new ResourceLocation("open"), this.openProperty);
 		this.damage = damage;
 		this.level = level;

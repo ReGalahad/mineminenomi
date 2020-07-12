@@ -28,14 +28,7 @@ public class SakeCupItem extends Item
 
 	private IItemPropertyGetter filledProperty = (itemStack, world, livingEntity) ->
 	{
-		if (livingEntity == null || !(livingEntity instanceof PlayerEntity))
-		{
-			return 0.0F;
-		}
-		else
-		{
-			return itemStack.getTag() != null && !WyHelper.isNullOrEmpty(itemStack.getTag().getString("leader")) ? 1 : 0;
-		}
+		return itemStack.getTag() != null && !WyHelper.isNullOrEmpty(itemStack.getTag().getString("leader")) ? 1 : 0;
 	};
 	
 	public SakeCupItem()

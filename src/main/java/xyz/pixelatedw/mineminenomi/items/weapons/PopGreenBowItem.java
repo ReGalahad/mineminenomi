@@ -20,9 +20,9 @@ import xyz.pixelatedw.mineminenomi.init.ModItems;
 public class PopGreenBowItem extends BowItem
 {
 
-	public PopGreenBowItem()
+	public PopGreenBowItem(int maxDamage)
 	{
-		super(new Properties().group(ModCreativeTabs.WEAPONS).maxStackSize(1));
+		super(new Properties().group(ModCreativeTabs.WEAPONS).maxStackSize(1).defaultMaxDamage(maxDamage));
 	}
 
 	@Override

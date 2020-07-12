@@ -4,8 +4,11 @@ import java.util.List;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.text.TranslationTextComponent;
+import xyz.pixelatedw.mineminenomi.abilities.haki.BusoshokuHakiImbuingAbility;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
@@ -13,6 +16,8 @@ import xyz.pixelatedw.mineminenomi.particles.effects.swordsman.OTatsumakiParticl
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
+import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 
 public class OTatsumakiAbility extends Ability
 {
@@ -36,6 +41,18 @@ public class OTatsumakiAbility extends Ability
 			return false;
 		}
 
+		ItemStack stack = player.getHeldItemMainhand();		
+		IAbilityData abilityProps = AbilityDataCapability.get(player);
+		BusoshokuHakiImbuingAbility ability = abilityProps.getEquippedAbility(BusoshokuHakiImbuingAbility.INSTANCE);
+		boolean hakiActiveFlag = ability != null && ability.isContinuous();
+		if(!hakiActiveFlag)
+		{
+			stack.damageItem(1, player, (user) ->
+			{
+				user.sendBreakAnimation(EquipmentSlotType.MAINHAND);
+			});
+		}
+		
 		List<LivingEntity> list = WyHelper.getEntitiesNear(player.getPosition(), player.world, 2.5);
 		list.remove(player);
 

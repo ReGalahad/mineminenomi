@@ -2,6 +2,7 @@ package xyz.pixelatedw.mineminenomi.items;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Foods;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -92,7 +93,9 @@ public class SakeBottleItem extends Item
 			}
 
 			if (!player.isCreative())
-				itemStack.damageItem(1, entity, (user) -> {});
+				itemStack.damageItem(1, entity, (user) -> {
+					user.sendBreakAnimation(EquipmentSlotType.MAINHAND);
+				});
 		}
 
 		return itemStack;

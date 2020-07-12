@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PotionEntity;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.potion.EffectInstance;
@@ -68,7 +69,9 @@ public class FailedExperimentAbility extends ChargeableAbility
 		player.world.addEntity(potion);
 
 		int damage = medicBag.getDamage() + 10 <= medicBag.getMaxDamage() ? 10 : medicBag.getMaxDamage() - medicBag.getDamage();
-		medicBag.damageItem(damage, player, (user) -> {});
+		medicBag.damageItem(damage, player, (user) -> {
+			user.sendBreakAnimation(EquipmentSlotType.MAINHAND);
+		});
 		if(medicBag.getDamage() >= medicBag.getMaxDamage())
 		{
 			//WyNetworkHelper.sendTo(new PacketBrokenItemParticles(medicBag), (EntityPlayerMP) player);

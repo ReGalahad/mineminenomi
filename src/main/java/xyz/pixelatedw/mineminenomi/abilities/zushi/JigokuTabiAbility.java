@@ -8,7 +8,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.play.server.SPlayEntityEffectPacket;
 import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.api.protection.BlockProtectionRule;
@@ -38,9 +37,7 @@ public class JigokuTabiAbility extends ContinuousAbility
 	private void duringContinuityEvent(PlayerEntity player, int activeTimer)
 	{
 		List<LivingEntity> targets = WyHelper.<LivingEntity>getEntitiesNear(player.getPosition(), player.world, 10);
-/*
 		targets.remove(player);
-*/
 
 		for (LivingEntity entity : targets)
 		{

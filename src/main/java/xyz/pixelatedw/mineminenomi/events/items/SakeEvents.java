@@ -1,6 +1,7 @@
 package xyz.pixelatedw.mineminenomi.events.items;
 
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteractSpecific;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -34,7 +35,9 @@ public class SakeEvents
 		
 		ItemStack itemStack = target.getHeldItemMainhand();
 		((SakeCupItem)itemStack.getItem()).setLeader(itemStack, player);
-		player.getHeldItemMainhand().damageItem(1, player, (user) -> {});
+		player.getHeldItemMainhand().damageItem(1, player, (user) -> {
+			user.sendBreakAnimation(EquipmentSlotType.MAINHAND);
+		});
 		event.setCanceled(true);
 	}
 	
