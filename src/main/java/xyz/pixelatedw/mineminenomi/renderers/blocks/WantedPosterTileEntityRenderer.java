@@ -169,7 +169,7 @@ public class WantedPosterTileEntityRenderer extends TileEntityRenderer<WantedPos
 				if (flag)
 				{
 					GL11.glPushMatrix();
-					GL11.glTranslated(-40, -13.5, 0);
+					GL11.glTranslated(-42, -12, 3.5);
 					GL11.glTranslated(128, 128, 512);
 					GL11.glScaled(.72, 0.89, 1.005);
 					GL11.glTranslated(-128, -128, -512);
