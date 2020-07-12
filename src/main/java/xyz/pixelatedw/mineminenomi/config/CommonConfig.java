@@ -84,6 +84,7 @@ public class CommonConfig
 	// Crews
 	private IntValue bountyRequirement;
 	private BooleanValue worldMessageOnCrewCreate;
+	private BooleanValue canChangeJollyRoger;
 
 	// Ores
 	private IntValue kairosekiSpawnCount;
@@ -243,6 +244,7 @@ public class CommonConfig
 		{
 			this.bountyRequirement = builder.comment("Bounty Requirement for creating a crew; 0 means no requirement; 0 by default").defineInRange("Bounty Requirement", 0, 0, ModValues.MAX_DORIKI);
 			this.worldMessageOnCrewCreate = builder.comment("Sends a message to all players when a new crew gets formed; false by default").define("World Message", false);
+			this.canChangeJollyRoger = builder.comment("Allows Captains to change their jolly rogers whenever they want; false by default").define("Can Change Jolly Roger", false);
 		}
 		builder.pop();
 
@@ -259,6 +261,11 @@ public class CommonConfig
 			this.fovRemover = builder.comment("Keeps the FOV fixed when the player has speed effects active").define("FOV Remover", true);
 		}
 		builder.pop();
+	}
+
+	public boolean canChangeJollyRoger()
+	{
+		return this.canChangeJollyRoger.get();
 	}
 	
 	public boolean hasOneFruitPerWorldExtendedLogic()

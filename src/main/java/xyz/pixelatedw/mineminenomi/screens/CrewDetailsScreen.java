@@ -20,6 +20,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import xyz.pixelatedw.mineminenomi.api.crew.Crew;
 import xyz.pixelatedw.mineminenomi.api.crew.Crew.Member;
 import xyz.pixelatedw.mineminenomi.api.helpers.RendererHelper;
+import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.entity.jollyroger.IJollyRoger;
 import xyz.pixelatedw.mineminenomi.data.entity.jollyroger.JollyRogerCapability;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
@@ -108,10 +109,11 @@ public class CrewDetailsScreen extends Screen
 		
 		this.jollyRoger = JollyRogerCapability.get(crewCaptain);
 		
-		int posX = ((this.width - 256) / 2);
+		int posX = ((this.width - 256) / 2) - 50;
 		int posY = (this.height - 256) / 2;
 		
-		this.addButton(new Button(posX - 50, posY + 210, 70, 20, I18n.format(ModI18n.GUI_LEAVE), b -> 
+		posX += 80;
+		this.addButton(new Button(posX, posY + 210, 70, 20, I18n.format(ModI18n.GUI_LEAVE), b -> 
 		{
 			this.crew.removeMember(this.player.getUniqueID());
 			if(this.crew.getMembers().size() <= 0)
@@ -119,5 +121,14 @@ public class CrewDetailsScreen extends Screen
 			WyNetwork.sendToServer(new CSyncCrewDataPacket(this.worldProps));
 			Minecraft.getInstance().displayGuiScreen(null);
 		}));
+		
+		if(CommonConfig.instance.canChangeJollyRoger() && this.player == crewCaptain)
+		{
+			posX += 80;
+			this.addButton(new Button(posX, posY + 210, 120, 20, I18n.format(ModI18n.GUI_CHANGE_JOLLY_ROGER), b -> 
+			{
+				Minecraft.getInstance().displayGuiScreen(new JollyRogerCreatorScreen(false));
+			}));
+		}
 	}
 }

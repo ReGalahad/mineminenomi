@@ -48,8 +48,8 @@ public class ModI18n
 	public static final String GUI_CREW = WyRegistry.registerName("gui.crew", "Crew");
 	public static final String GUI_CREW_JOLLY_ROGER = WyRegistry.registerName("gui.crew_jolly_roger", "Crew's Jolly Roger");
 	public static final String GUI_CREW_MEMBERS = WyRegistry.registerName("gui.crew_members", "Crew's Members");
-	public static final String CREW_CAPTAIN = WyRegistry.registerName("gui.captain", "Captain");
-
+	public static final String GUI_CHANGE_JOLLY_ROGER = WyRegistry.registerName("gui.crew_change_jolly_roger", "Change Jolly Roger");
+	
 	public static final String GUI_ACCEPT = WyRegistry.registerName("gui.accept", "Accept");
 	public static final String GUI_DECLINE = WyRegistry.registerName("gui.decline", "Decline");
 	public static final String GUI_BUY = WyRegistry.registerName("gui.buy", "Buy");
@@ -80,6 +80,7 @@ public class ModI18n
 	public static final String CREW_MESSAGE_BOUNTY_REQUIREMENT = WyRegistry.registerName("crew.message.bounty_requirement", "Bounty requirement not met!");
 	public static final String CREW_MESSAGE_NEW_JOIN = WyRegistry.registerName("crew.message.new_join", "%s joined your crew.");
 	public static final String CREW_MESSAGE_NEW_CREW = WyRegistry.registerName("crew.message.new_crew", "A new crew just formed, %s!");
+	public static final String CREW_CAPTAIN = WyRegistry.registerName("gui.captain", "Captain");
 
 	public static final String ABILITY_MESSAGE_NEED_SWORD = WyRegistry.registerName("ability.item.message.need_sword", "You need a sword to use this ability!");
 	public static final String ABILITY_MESSAGE_ONLY_IN_ROOM = WyRegistry.registerName("ability.item.message.only_in_room", "%s can only be used inside ROOM!");
