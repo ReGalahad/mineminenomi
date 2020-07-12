@@ -4,14 +4,24 @@ import java.text.DecimalFormat;
 
 import org.lwjgl.opengl.GL11;
 
+import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.platform.GlStateManager.DestFactor;
+import com.mojang.blaze3d.platform.GlStateManager.SourceFactor;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.client.config.GuiUtils;
+import xyz.pixelatedw.mineminenomi.api.crew.Crew;
+import xyz.pixelatedw.mineminenomi.api.helpers.RendererHelper;
+import xyz.pixelatedw.mineminenomi.data.entity.jollyroger.IJollyRoger;
+import xyz.pixelatedw.mineminenomi.data.entity.jollyroger.JollyRogerCapability;
+import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
@@ -19,11 +29,27 @@ import xyz.pixelatedw.wypi.WyHelper;
 public class WantedPosterScreen extends Screen
 {
 	private CompoundNBT wantedData;
+	private ExtendedWorldData worldData;
+	private IJollyRoger jollyRoger;
+	private PlayerEntity player;
 
 	public WantedPosterScreen()
 	{
 		super(new StringTextComponent(""));
 		this.wantedData = Minecraft.getInstance().player.getHeldItemMainhand().getTag();
+		
+		String name = this.wantedData.getString("Name");
+		final String finalName = name;
+		this.minecraft = Minecraft.getInstance();
+		this.player = this.minecraft.world.getPlayers().stream().filter((entity) -> WyHelper.getResourceName(entity.getName().getFormattedText()).equalsIgnoreCase(finalName)).findFirst().orElse(this.minecraft.player);
+		this.worldData = ExtendedWorldData.get(this.player.world);
+		
+		Crew crew = this.worldData.getCrewWithMember(this.player.getUniqueID());
+		if(crew != null)
+		{
+			PlayerEntity crewCaptain = this.player.world.getPlayerByUuid(crew.getCaptain().getUUID());
+			this.jollyRoger = JollyRogerCapability.get(crewCaptain);
+		}
 	}
 
 	@Override
@@ -54,6 +80,7 @@ public class WantedPosterScreen extends Screen
 		String name = this.wantedData.getString("Name");
 		String background = this.wantedData.getString("Background");
 
+		// Drawing the background, the player's skin face segment and their crew's jolly roger (if they are in a crew)
 		GL11.glPushMatrix();
 		{
 			ResourceLocation rs = new ResourceLocation(APIConfig.PROJECT_ID, "textures/gui/wantedposters/backgrounds/" + background + ".jpg");
@@ -63,14 +90,30 @@ public class WantedPosterScreen extends Screen
 			GuiUtils.drawTexturedModalRect(23, -57, 0, 0, 256, 256, 2);
 			GL11.glDisable(GL11.GL_BLEND);
 
-			final String finalName = name;
-			AbstractClientPlayerEntity player = this.minecraft.world.getPlayers().stream().filter((entity) -> WyHelper.getResourceName(entity.getName().getFormattedText()).equalsIgnoreCase(finalName)).findFirst().orElse(this.minecraft.player);
-			rs = player.getLocationSkin();
+			rs = ((AbstractClientPlayerEntity) player).getLocationSkin();
 
 			this.minecraft.getTextureManager().bindTexture(rs);
 
 			GL11.glScaled(4.25, 5.5, 0);
 			GuiUtils.drawTexturedModalRect(21, 0, 32, 32, 32, 32, 3);
+			
+			GlStateManager.pushMatrix();
+			{
+				GlStateManager.enableBlend();
+				GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);
+		
+				double scale = 0.10;
+				GlStateManager.translated(posX - 188, posY - 108, 0);
+				GlStateManager.translated(128, 128, 0);
+				GlStateManager.scaled(scale, scale, scale);
+				GlStateManager.translated(-128, -128, 0);
+		
+				if(this.jollyRoger != null)
+					RendererHelper.drawPlayerJollyRoger(this.jollyRoger);
+				
+				GlStateManager.disableBlend();
+			}
+			GlStateManager.popMatrix();	
 		}
 		GL11.glPopMatrix();
 

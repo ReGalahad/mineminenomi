@@ -6,6 +6,8 @@ import java.util.UUID;
 import org.lwjgl.opengl.GL11;
 
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.platform.GlStateManager.DestFactor;
+import com.mojang.blaze3d.platform.GlStateManager.SourceFactor;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
@@ -15,8 +17,13 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.client.config.GuiUtils;
+import xyz.pixelatedw.mineminenomi.api.crew.Crew;
+import xyz.pixelatedw.mineminenomi.api.helpers.RendererHelper;
 import xyz.pixelatedw.mineminenomi.blocks.WantedPosterBlock;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.WantedPosterTileEntity;
+import xyz.pixelatedw.mineminenomi.data.entity.jollyroger.IJollyRoger;
+import xyz.pixelatedw.mineminenomi.data.entity.jollyroger.JollyRogerCapability;
+import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.models.blocks.WantedPosterModel;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
@@ -75,10 +82,41 @@ public class WantedPosterTileEntityRenderer extends TileEntityRenderer<WantedPos
 			{
 				GL11.glScalef(.0035F, .0025F, .5F);
 				GL11.glTranslated(x - 160, y - 100, 0.9);
+				final PlayerEntity finalEntity = this.minecraft.world.getPlayerByUuid(UUID.fromString(tileEntity.getUUID()));
 
 				GlStateManager.pushMatrix();
 				{
-					final PlayerEntity finalEntity = this.minecraft.world.getPlayerByUuid(UUID.fromString(tileEntity.getUUID()));
+					ExtendedWorldData worldData = ExtendedWorldData.get(finalEntity.world);
+					Crew crew = worldData.getCrewWithMember(finalEntity.getUniqueID());
+					if(crew != null)
+					{
+						PlayerEntity crewCaptain = finalEntity.world.getPlayerByUuid(crew.getCaptain().getUUID());
+						IJollyRoger jollyRoger = JollyRogerCapability.get(crewCaptain);
+						
+						GL11.glTranslated(0, 0, -2.4);
+						GlStateManager.pushMatrix();
+						{
+							GlStateManager.enableBlend();
+							GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);
+					
+							double scale = 0.3;
+							GlStateManager.translated(x + 100, y + 10, 0);
+							GlStateManager.translated(128, 128, 0);
+							GlStateManager.scaled(scale, scale, scale);
+							GlStateManager.translated(-128, -128, 0);
+					
+							if(jollyRoger != null)
+								RendererHelper.drawPlayerJollyRoger(jollyRoger);
+							
+							GlStateManager.disableBlend();
+						}
+						GlStateManager.popMatrix();	
+					}
+				}
+				GlStateManager.popMatrix();
+				
+				GlStateManager.pushMatrix();
+				{
 					rs = ((AbstractClientPlayerEntity) finalEntity).getLocationSkin();
 					this.bindTexture(rs);
 

@@ -14,6 +14,7 @@ import xyz.pixelatedw.mineminenomi.api.helpers.ItemsHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
+import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.mineminenomi.packets.server.SSyncEntityStatsPacket;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.debug.WyDebug;
@@ -50,7 +51,7 @@ public class GetWantedPosterCommand
 		
 		WyNetwork.sendTo(new SSyncEntityStatsPacket(player.getEntityId(), entityStatsProps), player);
 		
-		ItemStack posterStack = ItemStack.EMPTY;//new ItemStack(ModItems.wantedPoster);
+		ItemStack posterStack = new ItemStack(ModBlocks.WANTED_POSTER);
 		posterStack.setTag(ItemsHelper.setWantedData(player.world, player.getUniqueID().toString(), worldData.getBounty(player.getUniqueID().toString())));
 		player.inventory.addItemStackToInventory(posterStack);
 		

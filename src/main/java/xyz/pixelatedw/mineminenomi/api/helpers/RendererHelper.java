@@ -62,7 +62,7 @@ public class RendererHelper
 				GlStateManager.color3f(1.0F, 1.0F, 1.0F);
 			}
 			Minecraft.getInstance().getTextureManager().bindTexture(props.getBase().getTexture());
-			GuiUtils.drawTexturedModalRect(0, 0, 0, 0, 256, 256, 2);
+			GuiUtils.drawTexturedModalRect(0, 0, 0, 0, 256, 256, 8);
 		}
 
 		// Drawing the backgrounds

@@ -149,16 +149,12 @@ public class WantedPosterBlock extends Block
 	@Override
 	public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
 	{
+		/*
 		if (world.isRemote)
-		{
 			return true;
-		}
 		else
-		{
-			//lol
-			System.out.println("TEST");
-		}
-
+			WyNetwork.sendTo(new SOpenWantedPosterScreenPacket(), player);
+		 */
 		return false;
 	}
 
