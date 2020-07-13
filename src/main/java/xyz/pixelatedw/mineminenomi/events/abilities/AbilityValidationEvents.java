@@ -16,8 +16,10 @@ import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.data.entity.jollyroger.JollyRogerCapability;
+import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.entities.zoan.YomiZoanInfo;
 import xyz.pixelatedw.mineminenomi.items.AkumaNoMiItem;
+import xyz.pixelatedw.mineminenomi.packets.server.SSyncCrewDataPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SSyncDevilFruitPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SSyncEntityStatsPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SSyncJollyRogerPacket;
@@ -96,6 +98,7 @@ public class AbilityValidationEvents
 				WyNetwork.sendTo(new SSyncDevilFruitPacket(player.getEntityId(), devilFruitProps), player);
 				WyNetwork.sendTo(new SSyncAbilityDataPacket(player.getEntityId(), abilityProps), player);
 				WyNetwork.sendTo(new SSyncJollyRogerPacket(player.getEntityId(), JollyRogerCapability.get(player)), player);
+				WyNetwork.sendTo(new SSyncCrewDataPacket(player.getEntityId(), ExtendedWorldData.get(player.world)), player);
 			}
 		}
 		else if (event.getEntity() instanceof PlayerEntity && !CommonConfig.instance.isAbilityFraudChecksEnabled())
