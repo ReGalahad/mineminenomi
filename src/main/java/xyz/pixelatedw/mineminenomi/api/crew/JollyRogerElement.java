@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.api.jollyroger;
+package xyz.pixelatedw.mineminenomi.api.crew;
 
 import java.io.Serializable;
 import java.util.ArrayList;

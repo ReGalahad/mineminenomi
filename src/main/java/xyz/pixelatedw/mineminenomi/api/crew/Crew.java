@@ -16,7 +16,8 @@ public class Crew
 	private String name;
 	private boolean isTemporary;
 	private List<Member> members = new ArrayList<Member>();
-
+	private JollyRoger jollyRoger = new JollyRoger();
+	
 	public Crew()
 	{
 	}
@@ -85,6 +86,11 @@ public class Crew
 		return this.members;
 	}
 
+	public JollyRoger getJollyRoger()
+	{
+		return this.jollyRoger;
+	}
+	
 	public CompoundNBT write()
 	{
 		CompoundNBT crewNBT = new CompoundNBT();
@@ -100,6 +106,8 @@ public class Crew
 		}
 		crewNBT.put("members", members);
 
+		crewNBT.put("jollyRoger", this.jollyRoger.write());
+		
 		return crewNBT;
 	}
 
@@ -116,6 +124,8 @@ public class Crew
 			if (memberNBT.getBoolean("isCaptain"))
 				member.setIsCaptain();
 		}
+		
+		this.jollyRoger.read(nbt.getCompound("jollyRoger"));
 	}
 
 	public static class Member

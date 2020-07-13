@@ -129,7 +129,7 @@ public class BountyEvents
 					
 					if(WyHelper.isNullOrEmpty(uuid))
 						continue;
-										
+					
 					boolean isTarget = UUID.fromString(uuid).equals(target.getUniqueID());
 					boolean hasBounty = worldData.getBounty(target.getUniqueID().toString()) == bounty;
 					

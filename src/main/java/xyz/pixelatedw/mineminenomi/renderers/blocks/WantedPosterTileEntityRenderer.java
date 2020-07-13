@@ -22,8 +22,6 @@ import xyz.pixelatedw.mineminenomi.api.crew.Crew;
 import xyz.pixelatedw.mineminenomi.api.helpers.RendererHelper;
 import xyz.pixelatedw.mineminenomi.blocks.WantedPosterBlock;
 import xyz.pixelatedw.mineminenomi.blocks.tileentities.WantedPosterTileEntity;
-import xyz.pixelatedw.mineminenomi.data.entity.jollyroger.IJollyRoger;
-import xyz.pixelatedw.mineminenomi.data.entity.jollyroger.JollyRogerCapability;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.models.blocks.WantedPosterModel;
@@ -120,32 +118,24 @@ public class WantedPosterTileEntityRenderer extends TileEntityRenderer<WantedPos
 				{
 					Crew crew = worldData.getCrewWithMember(UUID.fromString(uuid));
 					if (crew != null)
-					{
-						PlayerEntity crewCaptain = tileEntity.getWorld().getPlayerByUuid(crew.getCaptain().getUUID());
-						
-						if(crewCaptain != null)
+					{						
+						GL11.glTranslated(0, 0, -2.4);
+						GlStateManager.pushMatrix();
 						{
-							IJollyRoger jollyRoger = JollyRogerCapability.get(crewCaptain);
-	
-							GL11.glTranslated(0, 0, -2.4);
-							GlStateManager.pushMatrix();
-							{
-								GlStateManager.enableBlend();
-								GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);
-	
-								double scale = 0.3;
-								GlStateManager.translated(x + 100, y + 10, 0);
-								GlStateManager.translated(128, 128, 0);
-								GlStateManager.scaled(scale, scale, scale);
-								GlStateManager.translated(-128, -128, 0);
-	
-								if (jollyRoger != null)
-									RendererHelper.drawPlayerJollyRoger(jollyRoger);
-	
-								GlStateManager.disableBlend();
-							}
-							GlStateManager.popMatrix();
+							GlStateManager.enableBlend();
+							GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);
+
+							double scale = 0.3;
+							GlStateManager.translated(x + 100, y + 10, 0);
+							GlStateManager.translated(128, 128, 0);
+							GlStateManager.scaled(scale, scale, scale);
+							GlStateManager.translated(-128, -128, 0);
+
+							RendererHelper.drawPlayerJollyRoger(crew.getJollyRoger());
+
+							GlStateManager.disableBlend();
 						}
+						GlStateManager.popMatrix();
 					}
 				}
 				GlStateManager.popMatrix();

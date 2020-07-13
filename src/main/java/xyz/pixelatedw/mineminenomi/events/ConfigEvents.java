@@ -15,8 +15,6 @@ import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.data.entity.haki.HakiDataCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.haki.IHakiData;
-import xyz.pixelatedw.mineminenomi.data.entity.jollyroger.IJollyRoger;
-import xyz.pixelatedw.mineminenomi.data.entity.jollyroger.JollyRogerCapability;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
@@ -143,13 +141,7 @@ public class ConfigEvents
 			nbt = QuestDataCapability.INSTANCE.writeNBT(oldQuestData, null);
 			IQuestData newQuestData = QuestDataCapability.get(event.getPlayer());
 			QuestDataCapability.INSTANCE.readNBT(newQuestData, null, nbt);
-			
-			// Keep the jolly roger
-			IJollyRoger oldJollyRoger = JollyRogerCapability.get(event.getOriginal());
-			nbt = JollyRogerCapability.INSTANCE.writeNBT(oldJollyRoger, null);
-			IJollyRoger newJollyRoger = JollyRogerCapability.get(event.getPlayer());
-			JollyRogerCapability.INSTANCE.readNBT(newJollyRoger, null, nbt);
-			
+
 			if (CommonConfig.instance.isSpecialFlyingEnabled() && AbilityDataCapability.get(event.getPlayer()).hasUnlockedAbility(SpecialFlyAbility.INSTANCE) && !event.getPlayer().isCreative() && !event.getPlayer().isSpectator())
 			{
 				event.getPlayer().abilities.allowFlying = false;

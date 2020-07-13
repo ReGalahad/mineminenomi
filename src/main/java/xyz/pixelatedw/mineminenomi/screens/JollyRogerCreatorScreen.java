@@ -23,15 +23,16 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.client.config.GuiSlider;
 import net.minecraftforge.fml.client.config.GuiUtils;
+import xyz.pixelatedw.mineminenomi.api.crew.Crew;
+import xyz.pixelatedw.mineminenomi.api.crew.JollyRoger;
+import xyz.pixelatedw.mineminenomi.api.crew.JollyRogerElement;
+import xyz.pixelatedw.mineminenomi.api.crew.JollyRogerElement.LayerType;
 import xyz.pixelatedw.mineminenomi.api.helpers.RendererHelper;
-import xyz.pixelatedw.mineminenomi.api.jollyroger.JollyRogerElement;
-import xyz.pixelatedw.mineminenomi.api.jollyroger.JollyRogerElement.LayerType;
-import xyz.pixelatedw.mineminenomi.data.entity.jollyroger.IJollyRoger;
-import xyz.pixelatedw.mineminenomi.data.entity.jollyroger.JollyRogerCapability;
+import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.mineminenomi.init.ModJollyRogers;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
-import xyz.pixelatedw.mineminenomi.packets.client.CSyncJollyRogerPacket;
+import xyz.pixelatedw.mineminenomi.packets.client.CSyncWorldDataPacket;
 import xyz.pixelatedw.mineminenomi.screens.extra.NoTextureButton;
 import xyz.pixelatedw.mineminenomi.screens.extra.TexturedIconButton;
 import xyz.pixelatedw.wypi.WyHelper;
@@ -44,7 +45,8 @@ public class JollyRogerCreatorScreen extends Screen
 	private Widget selectedButton;
 	// private JollyRogerElement selectedElement;
 	private LayerType layerType = LayerType.BASE;
-	private IJollyRoger props;
+	private ExtendedWorldData worldData;
+	private JollyRoger jollyRoger;
 	private float animationTime = 0;
 	private int nextElementTry = 0;
 	private boolean isEditing = false;
@@ -63,7 +65,9 @@ public class JollyRogerCreatorScreen extends Screen
 	{
 		super(new StringTextComponent(""));
 		this.player = Minecraft.getInstance().player;
-		this.props = JollyRogerCapability.get(this.player);
+		this.worldData = ExtendedWorldData.get(this.player.world);
+		Crew crew = this.worldData.getCrewWithMember(this.player.getUniqueID());
+		this.jollyRoger = crew.getJollyRoger();
 		this.isEditing = isEditing;
 		
 		this.allElements = ModJollyRogers.JOLLY_ROGER_ELEMENTS.getEntries();
@@ -99,7 +103,7 @@ public class JollyRogerCreatorScreen extends Screen
 			// this.fillGradient(-10, 0, 0 + 270, 0 + 260, WyHelper.hexToRGB("#111115").getRGB(), WyHelper.hexToRGB("#202025").getRGB());
 
 			// Actually drawing the jolly roger using the player capability data provided.
-			RendererHelper.drawPlayerJollyRoger(this.props);
+			RendererHelper.drawPlayerJollyRoger(this.jollyRoger);
 
 			// Animation for when a new layer is selecting, showcasing the selected element.
 			// To make it more visible the complementary color is applied instead, if it has no color then a bright red will be applied.
@@ -174,7 +178,7 @@ public class JollyRogerCreatorScreen extends Screen
 				WyHelper.drawStringWithBorder(this.font, "255", posX - 23, posY + 14, WyHelper.hexToRGB("#FFFFFF").getRGB());
 			}
 				
-			if(element != this.props.getBase())
+			if(element != this.jollyRoger.getBase())
 			{
 				posY = this.height / 2;
 				
@@ -206,13 +210,13 @@ public class JollyRogerCreatorScreen extends Screen
 		NoTextureButton baseButton = new NoTextureButton(posX + 5, listPosY, 115, 16, new TranslationTextComponent(ModI18n.GUI_BASE).getFormattedText(), this::selectButton);
 		this.addButton(baseButton);
 
-		for (int i = 0; i < this.props.getBackgrounds().length; i++)
+		for (int i = 0; i < this.jollyRoger.getBackgrounds().length; i++)
 		{
 			NoTextureButton bgButton = new NoTextureButton(posX + 5, (listPosY + 20 + (i * 20)), 115, 16, new TranslationTextComponent(ModI18n.GUI_BACKGROUND).getFormattedText() + " " + (i + 1), this::selectButton);
 			this.addButton(bgButton);
 		}
 
-		for (int i = 0; i < this.props.getDetails().length; i++)
+		for (int i = 0; i < this.jollyRoger.getDetails().length; i++)
 		{
 			NoTextureButton detailButton = new NoTextureButton(posX + 5, (listPosY + 60 + (i * 20)), 115, 16, new TranslationTextComponent(ModI18n.GUI_DETAIL).getFormattedText() + " " + (i + 1), this::selectButton);
 			this.addButton(detailButton);
@@ -277,33 +281,33 @@ public class JollyRogerCreatorScreen extends Screen
 
 		if (this.layerType == LayerType.BACKGROUND)
 		{
-			JollyRogerElement currentElement = this.props.getBackgrounds()[layerIndex];
+			JollyRogerElement currentElement = this.jollyRoger.getBackgrounds()[layerIndex];
 			JollyRogerElement nextElement = null;
 			JollyRogerElement prevElement = null;
  
-			if (isUp && this.layerIndex >= 0 && this.layerIndex + 1 < this.props.getBackgrounds().length)
+			if (isUp && this.layerIndex >= 0 && this.layerIndex + 1 < this.jollyRoger.getBackgrounds().length)
 			{
-				nextElement = this.props.getBackgrounds()[++layerIndex];
+				nextElement = this.jollyRoger.getBackgrounds()[++layerIndex];
 				canSwitch = true;
 			}
-			else if (!isUp && this.layerIndex - 1 >= 0 && this.layerIndex <= this.props.getBackgrounds().length)
+			else if (!isUp && this.layerIndex - 1 >= 0 && this.layerIndex <= this.jollyRoger.getBackgrounds().length)
 			{
-				prevElement = this.props.getBackgrounds()[--layerIndex];
+				prevElement = this.jollyRoger.getBackgrounds()[--layerIndex];
 				canSwitch = true;
 			}
 
 			if (currentElement != null && canSwitch)
 			{
-				this.props.getBackgrounds()[layerIndex] = currentElement;
+				this.jollyRoger.getBackgrounds()[layerIndex] = currentElement;
 
 				if (isUp)
 				{
-					this.props.getBackgrounds()[--layerIndex] = nextElement;
+					this.jollyRoger.getBackgrounds()[--layerIndex] = nextElement;
 					this.layerIndex++;				
 				}
 				else if (!isUp)
 				{
-					this.props.getBackgrounds()[++layerIndex] = prevElement;
+					this.jollyRoger.getBackgrounds()[++layerIndex] = prevElement;
 					this.layerIndex--;
 				}
 				
@@ -316,33 +320,33 @@ public class JollyRogerCreatorScreen extends Screen
 		}
 		else if (this.layerType == LayerType.DETAIL)
 		{
-			JollyRogerElement currentElement = this.props.getDetails()[layerIndex];
+			JollyRogerElement currentElement = this.jollyRoger.getDetails()[layerIndex];
 			JollyRogerElement nextElement = null;
 			JollyRogerElement prevElement = null;
  
-			if (isUp && this.layerIndex >= 0 && this.layerIndex + 1 < this.props.getDetails().length)
+			if (isUp && this.layerIndex >= 0 && this.layerIndex + 1 < this.jollyRoger.getDetails().length)
 			{
-				nextElement = this.props.getDetails()[++layerIndex];
+				nextElement = this.jollyRoger.getDetails()[++layerIndex];
 				canSwitch = true;
 			}
-			else if (!isUp && this.layerIndex - 1 >= 0 && this.layerIndex <= this.props.getDetails().length)
+			else if (!isUp && this.layerIndex - 1 >= 0 && this.layerIndex <= this.jollyRoger.getDetails().length)
 			{
-				prevElement = this.props.getDetails()[--layerIndex];
+				prevElement = this.jollyRoger.getDetails()[--layerIndex];
 				canSwitch = true;
 			}
 
 			if (currentElement != null && canSwitch)
 			{
-				this.props.getDetails()[layerIndex] = currentElement;
+				this.jollyRoger.getDetails()[layerIndex] = currentElement;
 
 				if (isUp)
 				{
-					this.props.getDetails()[--layerIndex] = nextElement;
+					this.jollyRoger.getDetails()[--layerIndex] = nextElement;
 					this.layerIndex++;				
 				}
 				else if (!isUp)
 				{
-					this.props.getDetails()[++layerIndex] = prevElement;
+					this.jollyRoger.getDetails()[++layerIndex] = prevElement;
 					this.layerIndex--;
 				}
 				
@@ -394,40 +398,40 @@ public class JollyRogerCreatorScreen extends Screen
 			{
 				if (this.trueIndex >= this.allBases.size())
 					this.trueIndex = -1;
-				if (this.trueIndex < 0 && this.props.getBase() == null)
+				if (this.trueIndex < 0 && this.jollyRoger.getBase() == null)
 					this.trueIndex = this.allBases.size() - 1;
 
 				if (this.trueIndex >= 0 && this.trueIndex <= this.allBases.size())
-					this.props.setBase(this.allBases.get(this.trueIndex).get());
-				else if (this.trueIndex <= 0 && this.props.getBase().getTexture() != null)
-					this.props.setBase(null);
+					this.jollyRoger.setBase(this.allBases.get(this.trueIndex).get());
+				else if (this.trueIndex <= 0 && this.jollyRoger.getBase().getTexture() != null)
+					this.jollyRoger.setBase(null);
 
-				for (int i = 0; i < this.props.getBackgrounds().length; i++)
+				for (int i = 0; i < this.jollyRoger.getBackgrounds().length; i++)
 				{
-					JollyRogerElement element = this.props.getBackgrounds()[i];
+					JollyRogerElement element = this.jollyRoger.getBackgrounds()[i];
 					boolean hasElement = this.allBackgrounds.stream().anyMatch(elem -> elem != null && elem.get() != null && elem.get().equals(element) && !elem.get().canUse(this.player));
 					if (hasElement)
-						this.props.getBackgrounds()[i] = null;
+						this.jollyRoger.getBackgrounds()[i] = null;
 				}
 
-				for (int i = 0; i < this.props.getDetails().length; i++)
+				for (int i = 0; i < this.jollyRoger.getDetails().length; i++)
 				{
-					JollyRogerElement element = this.props.getDetails()[i];
+					JollyRogerElement element = this.jollyRoger.getDetails()[i];
 					boolean hasElement = this.allDetails.stream().anyMatch(elem -> elem != null && elem.get() != null && elem.get().equals(element) && !elem.get().canUse(this.player));
 					if (hasElement)
-						this.props.getDetails()[i] = null;
+						this.jollyRoger.getDetails()[i] = null;
 				}
 			}
 			else if (this.layerType == LayerType.BACKGROUND)
 			{
 				if (this.trueIndex >= this.allBackgrounds.size())
 					this.trueIndex = -1;
-				if (this.trueIndex < 0 && this.props.getBackgrounds()[this.layerIndex] == null)
+				if (this.trueIndex < 0 && this.jollyRoger.getBackgrounds()[this.layerIndex] == null)
 					this.trueIndex = this.allBackgrounds.size() - 1;
 
 				if (this.nextElementTry > this.allBackgrounds.size())
 				{
-					this.props.getBackgrounds()[this.layerIndex] = null;
+					this.jollyRoger.getBackgrounds()[this.layerIndex] = null;
 					this.trueIndex = -1;
 					this.nextElementTry = 0;
 					this.updateButtons();
@@ -437,9 +441,9 @@ public class JollyRogerCreatorScreen extends Screen
 				if (this.trueIndex >= 0 && this.trueIndex <= this.allBackgrounds.size())
 				{
 					JollyRogerElement ogElem = this.allBackgrounds.get(this.trueIndex).get();
-					for (int i = 0; i < this.props.getBackgrounds().length; i++)
+					for (int i = 0; i < this.jollyRoger.getBackgrounds().length; i++)
 					{
-						JollyRogerElement element = this.props.getBackgrounds()[i];
+						JollyRogerElement element = this.jollyRoger.getBackgrounds()[i];
 						if (element != null && ogElem != null && ogElem.equals(element))
 						{
 							this.moveIndex(btn, toRight);
@@ -449,9 +453,9 @@ public class JollyRogerCreatorScreen extends Screen
 				}
 
 				if (this.trueIndex >= 0 && this.trueIndex <= this.allBackgrounds.size())
-					this.props.getBackgrounds()[this.layerIndex] = this.allBackgrounds.get(this.trueIndex).get();
-				else if (this.trueIndex <= 0 && this.props.getBackgrounds()[this.layerIndex].getTexture() != null)
-					this.props.getBackgrounds()[this.layerIndex] = null;
+					this.jollyRoger.getBackgrounds()[this.layerIndex] = this.allBackgrounds.get(this.trueIndex).get();
+				else if (this.trueIndex <= 0 && this.jollyRoger.getBackgrounds()[this.layerIndex].getTexture() != null)
+					this.jollyRoger.getBackgrounds()[this.layerIndex] = null;
 
 				this.nextElementTry = 0;
 			}
@@ -459,12 +463,12 @@ public class JollyRogerCreatorScreen extends Screen
 			{
 				if (this.trueIndex >= this.allDetails.size())
 					this.trueIndex = -1;
-				if (this.trueIndex < 0 && this.trueIndex <= this.allDetails.size() && this.props.getDetails()[this.layerIndex] == null)
+				if (this.trueIndex < 0 && this.trueIndex <= this.allDetails.size() && this.jollyRoger.getDetails()[this.layerIndex] == null)
 					this.trueIndex = this.allDetails.size() - 1;
 
 				if (this.nextElementTry >= this.allDetails.size())
 				{
-					this.props.getDetails()[this.layerIndex] = null;
+					this.jollyRoger.getDetails()[this.layerIndex] = null;
 					this.trueIndex = -1;
 					this.nextElementTry = 0;
 					this.updateButtons();
@@ -474,9 +478,9 @@ public class JollyRogerCreatorScreen extends Screen
 				if (this.trueIndex >= 0 && this.trueIndex <= this.allDetails.size())
 				{
 					JollyRogerElement ogElem = this.allDetails.get(this.trueIndex).get();
-					for (int i = 0; i < this.props.getDetails().length; i++)
+					for (int i = 0; i < this.jollyRoger.getDetails().length; i++)
 					{
-						JollyRogerElement element = this.props.getDetails()[i];
+						JollyRogerElement element = this.jollyRoger.getDetails()[i];
 						if (element != null && ogElem != null && ogElem.equals(element))
 						{
 							this.moveIndex(btn, toRight);
@@ -486,9 +490,9 @@ public class JollyRogerCreatorScreen extends Screen
 				}
 
 				if (this.trueIndex >= 0 && this.trueIndex <= this.allDetails.size())
-					this.props.getDetails()[this.layerIndex] = this.allDetails.get(this.trueIndex).get();
-				else if (this.trueIndex <= 0 && this.props.getDetails()[this.layerIndex].getTexture() != null)
-					this.props.getDetails()[this.layerIndex] = null;
+					this.jollyRoger.getDetails()[this.layerIndex] = this.allDetails.get(this.trueIndex).get();
+				else if (this.trueIndex <= 0 && this.jollyRoger.getDetails()[this.layerIndex].getTexture() != null)
+					this.jollyRoger.getDetails()[this.layerIndex] = null;
 
 				this.nextElementTry = 0;
 			}
@@ -516,7 +520,7 @@ public class JollyRogerCreatorScreen extends Screen
 
 		if (this.buttons.get(0) == btn)
 		{
-			this.trueIndex = this.findIndex(this.getListFromType(LayerType.BASE), this.props.getBase(), this.player);
+			this.trueIndex = this.findIndex(this.getListFromType(LayerType.BASE), this.jollyRoger.getBase(), this.player);
 			this.layerType = LayerType.BASE;
 			this.layerIndex = 0;
 
@@ -526,11 +530,11 @@ public class JollyRogerCreatorScreen extends Screen
 		if (!hasLayerSet)
 		{
 			int j = 0;
-			for (int i = 1; i < this.props.getBackgrounds().length + 1; i++)
+			for (int i = 1; i < this.jollyRoger.getBackgrounds().length + 1; i++)
 			{
 				if (this.buttons.get(i) == btn)
 				{
-					this.trueIndex = this.findIndex(this.getListFromType(LayerType.BACKGROUND), this.props.getBackgrounds()[j], this.player);
+					this.trueIndex = this.findIndex(this.getListFromType(LayerType.BACKGROUND), this.jollyRoger.getBackgrounds()[j], this.player);
 					this.layerType = LayerType.BACKGROUND;
 					this.allBackgrounds = this.getTotalElementsForType(this.player, LayerType.BACKGROUND);
 					this.layerIndex = j;
@@ -544,11 +548,11 @@ public class JollyRogerCreatorScreen extends Screen
 		if (!hasLayerSet)
 		{
 			int j = 0;
-			for (int i = this.props.getBackgrounds().length + 1; i < this.props.getDetails().length + this.props.getBackgrounds().length + 1; i++)
+			for (int i = this.jollyRoger.getBackgrounds().length + 1; i < this.jollyRoger.getDetails().length + this.jollyRoger.getBackgrounds().length + 1; i++)
 			{
 				if (this.buttons.get(i) == btn)
 				{
-					this.trueIndex = this.findIndex(this.getListFromType(LayerType.DETAIL), this.props.getDetails()[j], this.player);
+					this.trueIndex = this.findIndex(this.getListFromType(LayerType.DETAIL), this.jollyRoger.getDetails()[j], this.player);
 					this.layerType = LayerType.DETAIL;
 					this.allDetails = this.getTotalElementsForType(this.player, LayerType.DETAIL);
 					this.layerIndex = j;
@@ -586,7 +590,7 @@ public class JollyRogerCreatorScreen extends Screen
 			this.buttons.get(this.buttons.size() - 1).visible = true;
 			this.buttons.get(this.buttons.size() - 2).visible = true;
 			
-			if(element == this.props.getBase())
+			if(element == this.jollyRoger.getBase())
 			{
 				this.buttons.get(this.buttons.size() - 1).visible = false;
 				this.buttons.get(this.buttons.size() - 2).visible = false;
@@ -618,14 +622,14 @@ public class JollyRogerCreatorScreen extends Screen
 
 	private JollyRogerElement getLayerElement()
 	{
-		JollyRogerElement element = this.props.getBase();
+		JollyRogerElement element = this.jollyRoger.getBase();
 
 		if (this.layerType == LayerType.BASE)
-			element = this.props.getBase();
+			element = this.jollyRoger.getBase();
 		else if (this.layerType == LayerType.BACKGROUND)
-			element = this.props.getBackgrounds()[this.layerIndex];
+			element = this.jollyRoger.getBackgrounds()[this.layerIndex];
 		else if (this.layerType == LayerType.DETAIL)
-			element = this.props.getDetails()[this.layerIndex];
+			element = this.jollyRoger.getDetails()[this.layerIndex];
 
 		return element;
 	}
@@ -656,7 +660,7 @@ public class JollyRogerCreatorScreen extends Screen
 	@Override
 	public void onClose()
 	{
-		WyNetwork.sendToServer(new CSyncJollyRogerPacket(this.props));
+		WyNetwork.sendToServer(new CSyncWorldDataPacket(this.worldData));
 		super.onClose();
 	}
 

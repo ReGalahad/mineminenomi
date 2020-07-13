@@ -19,10 +19,9 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import xyz.pixelatedw.mineminenomi.api.crew.Crew;
 import xyz.pixelatedw.mineminenomi.api.crew.Crew.Member;
+import xyz.pixelatedw.mineminenomi.api.crew.JollyRoger;
 import xyz.pixelatedw.mineminenomi.api.helpers.RendererHelper;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
-import xyz.pixelatedw.mineminenomi.data.entity.jollyroger.IJollyRoger;
-import xyz.pixelatedw.mineminenomi.data.entity.jollyroger.JollyRogerCapability;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.mineminenomi.packets.client.CSyncWorldDataPacket;
@@ -33,7 +32,7 @@ public class CrewDetailsScreen extends Screen
 {
 	private PlayerEntity player;
 	private ExtendedWorldData worldProps;
-	private IJollyRoger jollyRoger;
+	private JollyRoger jollyRoger;
 	private Crew crew;
 	
 	public CrewDetailsScreen()
@@ -107,7 +106,7 @@ public class CrewDetailsScreen extends Screen
 		UUID captainUUID = this.crew.getCaptain().getUUID();
 		PlayerEntity crewCaptain = this.minecraft.world.getPlayerByUuid(captainUUID);
 		
-		this.jollyRoger = JollyRogerCapability.get(crewCaptain);
+		this.jollyRoger = this.crew.getJollyRoger();
 		
 		int posX = ((this.width - 256) / 2) - 50;
 		int posY = (this.height - 256) / 2;

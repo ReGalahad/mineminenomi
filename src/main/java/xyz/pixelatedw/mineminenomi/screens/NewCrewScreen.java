@@ -14,9 +14,8 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import xyz.pixelatedw.mineminenomi.api.crew.Crew;
+import xyz.pixelatedw.mineminenomi.api.crew.JollyRoger;
 import xyz.pixelatedw.mineminenomi.api.helpers.RendererHelper;
-import xyz.pixelatedw.mineminenomi.data.entity.jollyroger.IJollyRoger;
-import xyz.pixelatedw.mineminenomi.data.entity.jollyroger.JollyRogerCapability;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.packets.client.CCreateCrewPacket;
 import xyz.pixelatedw.mineminenomi.screens.extra.NoTextureButton;
@@ -26,7 +25,8 @@ import xyz.pixelatedw.wypi.network.WyNetwork;
 public class NewCrewScreen extends Screen
 {
 	private PlayerEntity player;
-	private IJollyRoger props;
+	private ExtendedWorldData worldData;
+	private JollyRoger jollyRoger;
 	private Crew crew;
 	
 	private TextFieldWidget nameEdit;
@@ -35,7 +35,9 @@ public class NewCrewScreen extends Screen
 	{
 		super(new StringTextComponent(""));
 		this.player = Minecraft.getInstance().player;
-		this.props = JollyRogerCapability.get(this.player);
+		this.worldData = ExtendedWorldData.get(this.player.world);
+		Crew crew = this.worldData.getCrewWithMember(this.player.getUniqueID());
+		this.jollyRoger = crew.getJollyRoger();
 		this.crew = ExtendedWorldData.get(this.player.world).getCrewWithCaptain(this.player.getUniqueID());
 	}
 
@@ -61,7 +63,7 @@ public class NewCrewScreen extends Screen
 			GlStateManager.scaled(scale, scale, scale);
 			GlStateManager.translated(-128, -128, 0);
 
-			RendererHelper.drawPlayerJollyRoger(this.props);
+			RendererHelper.drawPlayerJollyRoger(this.jollyRoger);
 			
 			GlStateManager.disableBlend();
 		}

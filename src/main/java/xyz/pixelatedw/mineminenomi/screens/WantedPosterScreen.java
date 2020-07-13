@@ -18,9 +18,8 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.client.config.GuiUtils;
 import xyz.pixelatedw.mineminenomi.api.crew.Crew;
+import xyz.pixelatedw.mineminenomi.api.crew.JollyRoger;
 import xyz.pixelatedw.mineminenomi.api.helpers.RendererHelper;
-import xyz.pixelatedw.mineminenomi.data.entity.jollyroger.IJollyRoger;
-import xyz.pixelatedw.mineminenomi.data.entity.jollyroger.JollyRogerCapability;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.packets.client.CRequestSyncWorldDataPacket;
@@ -32,7 +31,7 @@ public class WantedPosterScreen extends Screen
 {
 	private CompoundNBT wantedData;
 	private ExtendedWorldData worldData;
-	private IJollyRoger jollyRoger;
+	private JollyRoger jollyRoger;
 	private PlayerEntity player;
 
 	public WantedPosterScreen()
@@ -47,11 +46,7 @@ public class WantedPosterScreen extends Screen
 		this.worldData = ExtendedWorldData.get(this.player.world);
 		
 		Crew crew = this.worldData.getCrewWithMember(this.player.getUniqueID());
-		if(crew != null)
-		{
-			PlayerEntity crewCaptain = this.player.world.getPlayerByUuid(crew.getCaptain().getUUID());
-			this.jollyRoger = JollyRogerCapability.get(crewCaptain);
-		}
+		this.jollyRoger = crew.getJollyRoger();
 		
 		WyNetwork.sendToServer(new CRequestSyncWorldDataPacket());
 	}

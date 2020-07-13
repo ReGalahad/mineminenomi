@@ -5,10 +5,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import xyz.pixelatedw.mineminenomi.api.ModRegistries;
-import xyz.pixelatedw.mineminenomi.api.jollyroger.JollyRogerElement;
-import xyz.pixelatedw.mineminenomi.api.jollyroger.JollyRogerElement.LayerType;
-import xyz.pixelatedw.mineminenomi.data.entity.jollyroger.IJollyRoger;
-import xyz.pixelatedw.mineminenomi.data.entity.jollyroger.JollyRogerCapability;
+import xyz.pixelatedw.mineminenomi.api.crew.Crew;
+import xyz.pixelatedw.mineminenomi.api.crew.JollyRoger;
+import xyz.pixelatedw.mineminenomi.api.crew.JollyRogerElement;
+import xyz.pixelatedw.mineminenomi.api.crew.JollyRogerElement.LayerType;
+import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.WyPatreon;
@@ -175,14 +176,16 @@ public class ModJollyRogers
 
 	public static boolean onlyWith(PlayerEntity player, JollyRogerElement... elements)
 	{
-		IJollyRoger props = JollyRogerCapability.get(player);
+		ExtendedWorldData worldProps = ExtendedWorldData.get(player.world);
+		Crew crew = worldProps.getCrewWithMember(player.getUniqueID());
+		JollyRoger jollyRoger = crew.getJollyRoger();
 
 		for (JollyRogerElement element : elements)
 		{
-			if (props.getBase() != null && props.getBase().getTexture() == null && element == null)
+			if (jollyRoger.getBase() != null && jollyRoger.getBase().getTexture() == null && element == null)
 				return true;
 
-			if (props.getBase() != null && props.getBase().getTexture() != null && props.getBase().equals(element))
+			if (jollyRoger.getBase() != null && jollyRoger.getBase().getTexture() != null && jollyRoger.getBase().equals(element))
 				return true;
 		}
 

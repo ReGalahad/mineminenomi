@@ -24,9 +24,8 @@ import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModAbilities;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
-import xyz.pixelatedw.mineminenomi.packets.client.CRequestSyncWorldDataPacket;
-import xyz.pixelatedw.mineminenomi.packets.client.CRequestSyncJollyRogerDataPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CRequestSyncQuestDataPacket;
+import xyz.pixelatedw.mineminenomi.packets.client.CRequestSyncWorldDataPacket;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.network.WyNetwork;
 
@@ -162,7 +161,7 @@ public class PlayerStatsScreen extends Screen
 			posX += 80;
 			this.addButton(new Button(posX, posY + 210, 70, 20, I18n.format(ModI18n.GUI_CREW), b ->
 			{				
-				WyNetwork.sendToServer(new CRequestSyncJollyRogerDataPacket());
+				WyNetwork.sendToServer(new CRequestSyncWorldDataPacket());
 				Minecraft.getInstance().displayGuiScreen(new CrewDetailsScreen());
 			}));
 		}

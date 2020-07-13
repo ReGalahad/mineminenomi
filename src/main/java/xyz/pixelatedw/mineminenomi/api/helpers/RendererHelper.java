@@ -10,8 +10,8 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.config.GuiUtils;
-import xyz.pixelatedw.mineminenomi.api.jollyroger.JollyRogerElement;
-import xyz.pixelatedw.mineminenomi.data.entity.jollyroger.IJollyRoger;
+import xyz.pixelatedw.mineminenomi.api.crew.JollyRoger;
+import xyz.pixelatedw.mineminenomi.api.crew.JollyRogerElement;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
 
@@ -46,27 +46,27 @@ public class RendererHelper
 		Tessellator.getInstance().draw();
 	}
 	
-	public static void drawPlayerJollyRoger(IJollyRoger props)
+	public static void drawPlayerJollyRoger(JollyRoger jollyRoger)
 	{
 		// Jolly Roger draw with all the backgrounds and layers
 		// Drawing the base
-		if (props.getBase() != null && props.getBase().getTexture() != null)
+		if (jollyRoger.getBase() != null && jollyRoger.getBase().getTexture() != null)
 		{
-			if (props.getBase().canBeColored())
+			if (jollyRoger.getBase().canBeColored())
 			{
-				Color color = WyHelper.hexToRGB(props.getBase().getColor());
+				Color color = WyHelper.hexToRGB(jollyRoger.getBase().getColor());
 				GlStateManager.color3f(color.getRed() / 255.0F, color.getGreen() / 255.0F, color.getBlue() / 255.0F);
 			}
 			else
 			{
 				GlStateManager.color3f(1.0F, 1.0F, 1.0F);
 			}
-			Minecraft.getInstance().getTextureManager().bindTexture(props.getBase().getTexture());
+			Minecraft.getInstance().getTextureManager().bindTexture(jollyRoger.getBase().getTexture());
 			GuiUtils.drawTexturedModalRect(0, 0, 0, 0, 256, 256, 8);
 		}
 
 		// Drawing the backgrounds
-		for (JollyRogerElement element : props.getBackgrounds())
+		for (JollyRogerElement element : jollyRoger.getBackgrounds())
 		{
 			int i = 0;
 			if (element != null && element.getTexture() != null)
@@ -87,7 +87,7 @@ public class RendererHelper
 		}
 		
 		// Drawing the details
-		for (JollyRogerElement element : props.getDetails())
+		for (JollyRogerElement element : jollyRoger.getDetails())
 		{
 			int i = 8;
 			if (element != null && element.getTexture() != null)

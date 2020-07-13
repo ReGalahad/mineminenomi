@@ -4,7 +4,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryManager;
-import xyz.pixelatedw.mineminenomi.api.jollyroger.JollyRogerElement;
+import xyz.pixelatedw.mineminenomi.api.crew.JollyRogerElement;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.APIRegistries;
 
