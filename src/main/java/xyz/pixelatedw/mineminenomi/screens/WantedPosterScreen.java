@@ -106,12 +106,10 @@ public class WantedPosterScreen extends Screen
 				GlStateManager.enableBlend();
 				GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);
 		
-				double scale = 0.10;
-				GlStateManager.translated(posX - 188, posY - 108, 0);
-				GlStateManager.translated(128, 128, 0);
+				double scale = 0.09;
 				GlStateManager.scaled(scale, scale, scale);
-				GlStateManager.translated(-128, -128, 0);
-		
+				GlStateManager.translated(470, 140, 0);
+				
 				if(this.jollyRoger != null)
 					RendererHelper.drawPlayerJollyRoger(this.jollyRoger);
 				
