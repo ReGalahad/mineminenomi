@@ -10,9 +10,9 @@ public interface IEntityStats
 	void alterDoriki(int value);
 	void setDoriki(int value);
 
-	int getBelly();
-	void alterBelly(int value);
-	void setBelly(int value);
+	long getBelly();
+	void alterBelly(long value);
+	void setBelly(long value);
 
 	int getExtol();
 	void alterExtol(int value);

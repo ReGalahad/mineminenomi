@@ -24,13 +24,13 @@ public class EntityStatsCapability
 				CompoundNBT props = new CompoundNBT();
 
 				props.putInt("doriki", instance.getDoriki());
-				props.putInt("belly", instance.getBelly());
 				props.putInt("extol", instance.getExtol());
 				props.putInt("cola", instance.getCola());
 				props.putInt("maxCola", instance.getMaxCola());
 				props.putInt("ultraCola", instance.getUltraCola());
 				props.putDouble("damageMultiplier", instance.getDamageMultiplier());
 				props.putLong("bounty", instance.getBounty());
+				props.putLong("belly", instance.getBelly());
 				props.putString("faction", instance.getFaction());
 				props.putString("race", instance.getRace());
 				props.putString("fightingStyle", instance.getFightingStyle());
@@ -47,12 +47,12 @@ public class EntityStatsCapability
 				CompoundNBT props = (CompoundNBT) nbt;
 
 				instance.setDoriki(props.getInt("doriki"));
-				instance.setBelly(props.getInt("belly"));
 				instance.setExtol(props.getInt("extol"));
 				instance.setCola(props.getInt("cola"));
 				instance.setMaxCola(props.getInt("maxCola"));
 				instance.setUltraCola(props.getInt("ultraCola"));
 				instance.setDamageMultiplier(props.getDouble("damageMultiplier"));
+				instance.setBelly(props.getLong("belly"));
 				instance.setBounty(props.getLong("bounty"));
 				instance.setFaction(props.getString("faction"));
 				instance.setRace(props.getString("race"));

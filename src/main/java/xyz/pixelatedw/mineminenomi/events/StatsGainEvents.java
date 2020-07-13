@@ -36,7 +36,7 @@ public class StatsGainEvents
 			IAttributeInstance attrAtk = target.getAttributes().getAttributeInstance(SharedMonsterAttributes.ATTACK_DAMAGE);
 			IAttributeInstance attrHP = target.getAttributes().getAttributeInstance(SharedMonsterAttributes.MAX_HEALTH);
 
-			int plusBelly = 0;
+			long plusBelly = 0;
 			long plusBounty = 0;
 			double plusDoriki = 0;
 

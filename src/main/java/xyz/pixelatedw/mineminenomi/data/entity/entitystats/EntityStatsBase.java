@@ -6,8 +6,8 @@ import xyz.pixelatedw.wypi.WyHelper;
 public class EntityStatsBase implements IEntityStats
 {
 
-	private int doriki, belly, extol, cola = 100, maxCola = 100, ultraCola = 0;
-	private long bounty;
+	private int doriki, extol, cola = 100, maxCola = 100, ultraCola = 0;
+	private long bounty, belly;
 	private String faction = "", race = "", fightingStyle = "";
 	private boolean hasShadow = true, hasHeart = true, inCombatMode = false;
 	private double damageMultiplier = 1;
@@ -39,22 +39,24 @@ public class EntityStatsBase implements IEntityStats
 	}
 
 	@Override
-	public int getBelly()
+	public long getBelly()
 	{
 		return this.belly;
 	}
 
 	@Override
-	public void alterBelly(int value)
+	public void alterBelly(long value)
 	{
 		if (this.belly + value < 0)
 			this.belly = 0;
+		else if(this.belly + value > ModValues.MAX_GENERAL)
+			this.belly = ModValues.MAX_GENERAL;
 		else
 			this.belly = this.belly + value;
 	}
 
 	@Override
-	public void setBelly(int value)
+	public void setBelly(long value)
 	{
 		this.belly = value;
 	}
@@ -70,6 +72,8 @@ public class EntityStatsBase implements IEntityStats
 	{
 		if (this.extol + value < 0)
 			this.extol = 0;
+		else if(this.extol + value > ModValues.MAX_GENERAL)
+			this.extol = ModValues.MAX_GENERAL;
 		else
 			this.extol = this.extol + value;
 	}
@@ -91,6 +95,8 @@ public class EntityStatsBase implements IEntityStats
 	{
 		if (this.bounty + value < 0)
 			this.bounty = 0;
+		else if(this.bounty + value > ModValues.MAX_BOUNTY)
+			this.bounty = ModValues.MAX_BOUNTY;
 		else
 			this.bounty = this.bounty + value;
 	}

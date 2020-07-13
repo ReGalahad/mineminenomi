@@ -2,7 +2,11 @@ package xyz.pixelatedw.mineminenomi.blocks.tileentities;
 
 import javax.annotation.Nullable;
 
+import com.mojang.authlib.GameProfile;
+
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.NBTUtil;
+import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.TileEntity;
 import xyz.pixelatedw.mineminenomi.init.ModTileEntities;
@@ -15,10 +19,21 @@ public class WantedPosterTileEntity extends TileEntity
 	private String bounty = "";
 	private String date = "";
 	private String background = "";
+	private GameProfile gameProfile;
 
 	public WantedPosterTileEntity()
 	{
 		super(ModTileEntities.WANTED_POSTER);
+	}
+
+	public void setGameProfile(GameProfile gp)
+	{
+		this.gameProfile = gp;
+	}
+
+	public GameProfile getGameProfile()
+	{
+		return this.gameProfile;
 	}
 
 	public String getUUID()
@@ -83,6 +98,12 @@ public class WantedPosterTileEntity extends TileEntity
 		nbt.putString("Bounty", this.bounty);
 		nbt.putString("Date", this.date);
 		nbt.putString("Background", this.background);
+		if (this.gameProfile != null)
+		{
+			CompoundNBT compoundnbt = new CompoundNBT();
+			NBTUtil.writeGameProfile(compoundnbt, this.gameProfile);
+			nbt.put("Owner", compoundnbt);
+		}
 
 		return nbt;
 	}
@@ -96,6 +117,8 @@ public class WantedPosterTileEntity extends TileEntity
 		this.bounty = nbt.getString("Bounty");
 		this.date = nbt.getString("Date");
 		this.background = nbt.getString("Background");
+		if (nbt.contains("Owner", 10))
+			this.setGameProfile(NBTUtil.readGameProfile(nbt.getCompound("Owner")));
 	}
 
 	@Override
@@ -113,10 +136,18 @@ public class WantedPosterTileEntity extends TileEntity
 		return new SUpdateTileEntityPacket(this.pos, 9, this.getUpdateTag());
 	}
 
-	/*@Override
+	@Override
 	public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt)
 	{
 		this.read(pkt.getNbtCompound());
-		// this.world.markAndNotifyBlock(pos, chunk, blockstate, newState, flags);
-	}*/
+	}
+
+	/*
+	 * @Override
+	 * public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt)
+	 * {
+	 * this.read(pkt.getNbtCompound());
+	 * // this.world.markAndNotifyBlock(pos, chunk, blockstate, newState, flags);
+	 * }
+	 */
 }

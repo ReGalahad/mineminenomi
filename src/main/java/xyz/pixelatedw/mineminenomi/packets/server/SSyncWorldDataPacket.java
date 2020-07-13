@@ -3,47 +3,42 @@ package xyz.pixelatedw.mineminenomi.packets.server;
 import java.util.function.Supplier;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 
-public class SSyncCrewDataPacket
+public class SSyncWorldDataPacket
 {
-	private int entityId;
 	private CompoundNBT data;
 
-	public SSyncCrewDataPacket()
+	public SSyncWorldDataPacket()
 	{
 	}
 
-	public SSyncCrewDataPacket(int entityId, ExtendedWorldData worldData)
+	public SSyncWorldDataPacket(ExtendedWorldData worldData)
 	{
 		this.data = new CompoundNBT();
 		this.data = worldData.write(this.data);
-		this.entityId = entityId;
 	}
 
 	public void encode(PacketBuffer buffer)
 	{
-		buffer.writeInt(this.entityId);
 		buffer.writeCompoundTag(this.data);
 	}
 
-	public static SSyncCrewDataPacket decode(PacketBuffer buffer)
+	public static SSyncWorldDataPacket decode(PacketBuffer buffer)
 	{
-		SSyncCrewDataPacket msg = new SSyncCrewDataPacket();
-		msg.entityId = buffer.readInt();
+		SSyncWorldDataPacket msg = new SSyncWorldDataPacket();
 		msg.data = buffer.readCompoundTag();
 		return msg;
 	}
 
-	public static void handle(SSyncCrewDataPacket message, final Supplier<NetworkEvent.Context> ctx)
+	public static void handle(SSyncWorldDataPacket message, final Supplier<NetworkEvent.Context> ctx)
 	{
 		if (ctx.get().getDirection() == NetworkDirection.PLAY_TO_CLIENT)
 		{
@@ -58,13 +53,10 @@ public class SSyncCrewDataPacket
 	public static class ClientHandler
 	{
 		@OnlyIn(Dist.CLIENT)
-		public static void handle(SSyncCrewDataPacket message)
+		public static void handle(SSyncWorldDataPacket message)
 		{
-			Entity target = Minecraft.getInstance().world.getEntityByID(message.entityId);
-			if (target == null || !(target instanceof LivingEntity))
-				return;
-
-			ExtendedWorldData worldData = ExtendedWorldData.get(target.world);
+			World world = Minecraft.getInstance().world;
+			ExtendedWorldData worldData = ExtendedWorldData.get(world);
 			worldData.read(message.data);
 		}
 	}

@@ -13,6 +13,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
+import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
@@ -48,6 +49,7 @@ public class WantedPosterTileEntityRenderer extends TileEntityRenderer<WantedPos
 		BlockState blockstate = tileEntity.getBlockState();
 
 		String name = tileEntity.getEntityName();
+		String uuid = tileEntity.getUUID();
 		ResourceLocation rs = null;
 
 		GlStateManager.pushMatrix();
@@ -79,7 +81,8 @@ public class WantedPosterTileEntityRenderer extends TileEntityRenderer<WantedPos
 			}
 
 			final PlayerEntity finalEntity = this.minecraft.world.getPlayerByUuid(UUID.fromString(tileEntity.getUUID()));
-			ExtendedWorldData worldData = ExtendedWorldData.get(finalEntity.world);
+
+			ExtendedWorldData worldData = ExtendedWorldData.get(tileEntity.getWorld());
 
 			DecimalFormat decimalFormat = new DecimalFormat("#,##0");
 			if (WyHelper.isNullOrEmpty(tileEntity.getPosterBounty()))
@@ -100,8 +103,8 @@ public class WantedPosterTileEntityRenderer extends TileEntityRenderer<WantedPos
 			{
 				GL11.glScalef(.0035F, .0025F, .5F);
 				GL11.glTranslated(x - 160, y - 100, 0.9);
-
-				if (worldData.getBounty(finalEntity.getUniqueID().toString()) != Long.parseLong(bounty.replace(",", "")))
+				
+				if (worldData.getBounty(uuid) != Long.parseLong(bounty.replace(",", "")))
 				{
 					GlStateManager.pushMatrix();
 					{
@@ -115,37 +118,44 @@ public class WantedPosterTileEntityRenderer extends TileEntityRenderer<WantedPos
 				
 				GlStateManager.pushMatrix();
 				{
-					Crew crew = worldData.getCrewWithMember(finalEntity.getUniqueID());
+					Crew crew = worldData.getCrewWithMember(UUID.fromString(uuid));
 					if (crew != null)
 					{
-						PlayerEntity crewCaptain = finalEntity.world.getPlayerByUuid(crew.getCaptain().getUUID());
-						IJollyRoger jollyRoger = JollyRogerCapability.get(crewCaptain);
-
-						GL11.glTranslated(0, 0, -2.4);
-						GlStateManager.pushMatrix();
+						PlayerEntity crewCaptain = tileEntity.getWorld().getPlayerByUuid(crew.getCaptain().getUUID());
+						
+						if(crewCaptain != null)
 						{
-							GlStateManager.enableBlend();
-							GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);
-
-							double scale = 0.3;
-							GlStateManager.translated(x + 100, y + 10, 0);
-							GlStateManager.translated(128, 128, 0);
-							GlStateManager.scaled(scale, scale, scale);
-							GlStateManager.translated(-128, -128, 0);
-
-							if (jollyRoger != null)
-								RendererHelper.drawPlayerJollyRoger(jollyRoger);
-
-							GlStateManager.disableBlend();
+							IJollyRoger jollyRoger = JollyRogerCapability.get(crewCaptain);
+	
+							GL11.glTranslated(0, 0, -2.4);
+							GlStateManager.pushMatrix();
+							{
+								GlStateManager.enableBlend();
+								GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);
+	
+								double scale = 0.3;
+								GlStateManager.translated(x + 100, y + 10, 0);
+								GlStateManager.translated(128, 128, 0);
+								GlStateManager.scaled(scale, scale, scale);
+								GlStateManager.translated(-128, -128, 0);
+	
+								if (jollyRoger != null)
+									RendererHelper.drawPlayerJollyRoger(jollyRoger);
+	
+								GlStateManager.disableBlend();
+							}
+							GlStateManager.popMatrix();
 						}
-						GlStateManager.popMatrix();
 					}
 				}
 				GlStateManager.popMatrix();
 
 				GlStateManager.pushMatrix();
 				{
-					rs = ((AbstractClientPlayerEntity) finalEntity).getLocationSkin();
+					if(finalEntity != null)
+						rs = ((AbstractClientPlayerEntity) finalEntity).getLocationSkin();
+					else
+						rs = DefaultPlayerSkin.getDefaultSkin(UUID.fromString(uuid));
 					this.bindTexture(rs);
 
 					GL11.glTranslated(1, 1, 0.014);

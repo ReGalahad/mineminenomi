@@ -2,6 +2,7 @@ package xyz.pixelatedw.mineminenomi.commands;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
+import com.mojang.brigadier.arguments.LongArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
@@ -23,7 +24,7 @@ public class PouchCommand
 
 		builder
 			.then(Commands.argument("amount", IntegerArgumentType.integer(1, ModValues.MAX_GENERAL))
-				.executes(context -> createBellyPouch(context, IntegerArgumentType.getInteger(context, "amount"))));
+				.executes(context -> createBellyPouch(context, LongArgumentType.getLong(context, "amount"))));
 		
 		builder
 			.then(Commands.literal("ALL")
@@ -32,7 +33,7 @@ public class PouchCommand
 		dispatcher.register(builder);
 	}
 
-	private static int createBellyPouch(CommandContext<CommandSource> context, int amount)
+	private static int createBellyPouch(CommandContext<CommandSource> context, long amount)
 	{
 		if(amount <= 0)
 			return 1;
@@ -54,7 +55,7 @@ public class PouchCommand
 			}
 			
 			ItemStack pouch = new ItemStack(ModItems.BELLY_POUCH);
-			pouch.getOrCreateTag().putInt("belly", amount);
+			pouch.getOrCreateTag().putLong("belly", amount);
 			
 			player.inventory.addItemStackToInventory(pouch);
 		}

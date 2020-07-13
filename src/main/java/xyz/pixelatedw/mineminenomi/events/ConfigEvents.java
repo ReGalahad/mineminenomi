@@ -72,7 +72,7 @@ public class ConfigEvents
 				String fightStyle = oldEntityStats.getFightingStyle();
 				int doriki = oldEntityStats.getDoriki() / 3;
 				long bounty = oldEntityStats.getBounty() / 3;
-				int belly = oldEntityStats.getBelly() / 3;
+				long belly = oldEntityStats.getBelly() / 3;
 				int extol = oldEntityStats.getExtol() / 3;
 
 				IEntityStats newEntityStats = EntityStatsCapability.get(event.getPlayer());

@@ -25,7 +25,7 @@ import xyz.pixelatedw.mineminenomi.data.entity.jollyroger.IJollyRoger;
 import xyz.pixelatedw.mineminenomi.data.entity.jollyroger.JollyRogerCapability;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
-import xyz.pixelatedw.mineminenomi.packets.client.CSyncCrewDataPacket;
+import xyz.pixelatedw.mineminenomi.packets.client.CSyncWorldDataPacket;
 import xyz.pixelatedw.wypi.network.WyNetwork;
 
 @OnlyIn(Dist.CLIENT)
@@ -118,7 +118,7 @@ public class CrewDetailsScreen extends Screen
 			this.crew.removeMember(this.player.getUniqueID());
 			if(this.crew.getMembers().size() <= 0)
 				this.worldProps.removeCrew(this.crew);
-			WyNetwork.sendToServer(new CSyncCrewDataPacket(this.worldProps));
+			WyNetwork.sendToServer(new CSyncWorldDataPacket(this.worldProps));
 			Minecraft.getInstance().displayGuiScreen(null);
 		}));
 		

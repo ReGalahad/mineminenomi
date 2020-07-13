@@ -31,7 +31,10 @@ public class BellyPouchItem extends Item
 {
 	private IItemPropertyGetter sizeProperty = (itemStack, world, livingEntity) ->
 	{
-		int belly = itemStack.getOrCreateTag().getInt("belly");
+		if(livingEntity == null)
+			return 0;
+		
+		long belly = itemStack.getOrCreateTag().getLong("belly");
 		int size = 0;
 		
 		if(belly > 100 && belly <= 500)
@@ -55,7 +58,7 @@ public class BellyPouchItem extends Item
 		{
 			if(!itemStack.hasTag())
 			{
-				itemStack.getOrCreateTag().putInt("belly", (int) WyHelper.randomWithRange(5, 100));
+				itemStack.getOrCreateTag().putLong("belly", (int) WyHelper.randomWithRange(5, 100));
 			}
 		}
 	}
@@ -67,7 +70,7 @@ public class BellyPouchItem extends Item
 		
 		if(!world.isRemote)
 		{
-			int amount = player.getHeldItemMainhand().getOrCreateTag().getInt("belly");		
+			long amount = player.getHeldItemMainhand().getOrCreateTag().getLong("belly");		
 
 			if(props.getBelly() <= ModValues.MAX_GENERAL - amount)
 			{
@@ -89,7 +92,7 @@ public class BellyPouchItem extends Item
 	{
 		if(itemStack.hasTag())
 		{
-			list.add(new StringTextComponent("Belly: " + itemStack.getOrCreateTag().getInt("belly")));
+			list.add(new StringTextComponent("Belly: " + itemStack.getOrCreateTag().getLong("belly")));
 		}
 	}
 }

@@ -11,6 +11,9 @@ public class UmbrellaItem extends Item
 
 	private IItemPropertyGetter openProperty = (itemStack, world, livingEntity) ->
 	{
+		if(livingEntity == null)
+			return 0;
+		
 		boolean hasUmbrella = livingEntity.getHeldItemMainhand().getItem() == ModWeapons.UMBRELLA;
 		boolean isInAir = !livingEntity.onGround && livingEntity.getMotion().y < 0;
 		return (hasUmbrella && isInAir) ? 1.0F : 0.0F;

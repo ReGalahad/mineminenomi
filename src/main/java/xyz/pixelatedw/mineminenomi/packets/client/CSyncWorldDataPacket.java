@@ -9,13 +9,13 @@ import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 
-public class CSyncCrewDataPacket
+public class CSyncWorldDataPacket
 {
 	private CompoundNBT data;
 
-	public CSyncCrewDataPacket() {}
+	public CSyncWorldDataPacket() {}
 	
-	public CSyncCrewDataPacket(ExtendedWorldData worldData)
+	public CSyncWorldDataPacket(ExtendedWorldData worldData)
 	{
 		this.data = new CompoundNBT();
 		this.data = worldData.write(this.data);
@@ -26,14 +26,14 @@ public class CSyncCrewDataPacket
 		buffer.writeCompoundTag(data);
 	}
 	
-	public static CSyncCrewDataPacket decode(PacketBuffer buffer)
+	public static CSyncWorldDataPacket decode(PacketBuffer buffer)
 	{
-		CSyncCrewDataPacket msg = new CSyncCrewDataPacket();
+		CSyncWorldDataPacket msg = new CSyncWorldDataPacket();
 		msg.data = buffer.readCompoundTag();
 		return msg;
 	}
 
-	public static void handle(CSyncCrewDataPacket message, final Supplier<NetworkEvent.Context> ctx)
+	public static void handle(CSyncWorldDataPacket message, final Supplier<NetworkEvent.Context> ctx)
 	{
 		if(ctx.get().getDirection() == NetworkDirection.PLAY_TO_SERVER)
 		{

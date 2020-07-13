@@ -41,6 +41,9 @@ public class CoreSwordItem extends Item
 
 	private IItemPropertyGetter hakiProperty = (itemStack, world, livingEntity) ->
 	{
+		if(livingEntity == null)
+			return 0;
+		
 		float hasHakiActive = 0;
 		if (livingEntity instanceof PlayerEntity)
 		{
@@ -60,6 +63,9 @@ public class CoreSwordItem extends Item
 	
 	private IItemPropertyGetter sheathedProperty = (itemStack, world, livingEntity) ->
 	{
+		if(livingEntity == null)
+			return 1;
+		
 		boolean mainHandFlag = livingEntity.getHeldItemMainhand().getItem() != itemStack.getItem();
 		boolean offHandFlag = livingEntity.getHeldItemOffhand().getItem() != itemStack.getItem();
 		return (mainHandFlag && offHandFlag) ? 1.0F : 0.0F;

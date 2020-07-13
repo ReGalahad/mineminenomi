@@ -24,7 +24,7 @@ import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModAbilities;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
-import xyz.pixelatedw.mineminenomi.packets.client.CRequestSyncCrewDataPacket;
+import xyz.pixelatedw.mineminenomi.packets.client.CRequestSyncWorldDataPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CRequestSyncJollyRogerDataPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CRequestSyncQuestDataPacket;
 import xyz.pixelatedw.wypi.WyHelper;
@@ -131,7 +131,7 @@ public class PlayerStatsScreen extends Screen
 	@Override
 	public void init()
 	{
-		WyNetwork.sendToServer(new CRequestSyncCrewDataPacket());
+		WyNetwork.sendToServer(new CRequestSyncWorldDataPacket());
 		//WyNetwork.sendToServer(new CRequestSyncPirateCrewsPacket());
 		this.worldProps = ExtendedWorldData.get(this.player.world);
 		this.entityStatsProps = EntityStatsCapability.get(this.player);

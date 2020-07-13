@@ -7,24 +7,24 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
-import xyz.pixelatedw.mineminenomi.packets.server.SSyncCrewDataPacket;
+import xyz.pixelatedw.mineminenomi.packets.server.SSyncWorldDataPacket;
 import xyz.pixelatedw.wypi.network.WyNetwork;
 
-public class CRequestSyncCrewDataPacket
+public class CRequestSyncWorldDataPacket
 {
-	public CRequestSyncCrewDataPacket() {}
+	public CRequestSyncWorldDataPacket() {}
 	
 	public void encode(PacketBuffer buffer)
 	{
 	}
 	
-	public static CRequestSyncCrewDataPacket decode(PacketBuffer buffer)
+	public static CRequestSyncWorldDataPacket decode(PacketBuffer buffer)
 	{
-		CRequestSyncCrewDataPacket msg = new CRequestSyncCrewDataPacket();
+		CRequestSyncWorldDataPacket msg = new CRequestSyncWorldDataPacket();
 		return msg;
 	}
 	
-	public static void handle(CRequestSyncCrewDataPacket message, final Supplier<NetworkEvent.Context> ctx)
+	public static void handle(CRequestSyncWorldDataPacket message, final Supplier<NetworkEvent.Context> ctx)
 	{
 		if(ctx.get().getDirection() == NetworkDirection.PLAY_TO_SERVER)
 		{
@@ -33,7 +33,7 @@ public class CRequestSyncCrewDataPacket
 				PlayerEntity player = ctx.get().getSender();
 				ExtendedWorldData worldData = ExtendedWorldData.get(player.world);
 
-				WyNetwork.sendTo(new SSyncCrewDataPacket(player.getEntityId(), worldData), player);
+				WyNetwork.sendTo(new SSyncWorldDataPacket(worldData), player);
 			});			
 		}
 		ctx.get().setPacketHandled(true);

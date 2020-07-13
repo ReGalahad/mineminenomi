@@ -105,10 +105,14 @@ public class ExtendedWorldData extends WorldSavedData
 		{
 			int[] minPos = protectedAreas.getIntArray("minPos_" + i);
 			int[] maxPos = protectedAreas.getIntArray("maxPos_" + i);
-			this.protectedAreas.add(new int[][]
-				{
-						minPos, maxPos
-				});
+			
+			if(minPos.length == 3 && maxPos.length == 3)
+			{
+				this.protectedAreas.add(new int[][]
+					{
+							minPos, maxPos
+					});
+			}
 		}
 		
 		this.pirateCrews.clear();

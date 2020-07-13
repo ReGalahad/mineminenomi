@@ -4,11 +4,11 @@ import xyz.pixelatedw.mineminenomi.packets.client.CCombatModeTriggerPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CCreateCrewPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CDeleteCCBookPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CGiveItemStackPacket;
-import xyz.pixelatedw.mineminenomi.packets.client.CRequestSyncCrewDataPacket;
+import xyz.pixelatedw.mineminenomi.packets.client.CRequestSyncWorldDataPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CRequestSyncJollyRogerDataPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CRequestSyncQuestDataPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CStopAbilityPacket;
-import xyz.pixelatedw.mineminenomi.packets.client.CSyncCrewDataPacket;
+import xyz.pixelatedw.mineminenomi.packets.client.CSyncWorldDataPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CSyncDevilFruitPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CSyncEntityStatsPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CSyncJollyRogerPacket;
@@ -24,7 +24,7 @@ import xyz.pixelatedw.mineminenomi.packets.server.SOpenQuestChooseScreenPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SOpenTraderScreenPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SOpenWantedPosterScreenPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SRecalculateEyeHeightPacket;
-import xyz.pixelatedw.mineminenomi.packets.server.SSyncCrewDataPacket;
+import xyz.pixelatedw.mineminenomi.packets.server.SSyncWorldDataPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SSyncDevilFruitPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SSyncEntityStatsPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SSyncJollyRogerPacket;
@@ -55,9 +55,9 @@ public class ModNetwork
 		WyNetwork.registerPacket(CSyncZoanPacket.class, CSyncZoanPacket::encode, CSyncZoanPacket::decode, CSyncZoanPacket::handle);
 		WyNetwork.registerPacket(CStopAbilityPacket.class, CStopAbilityPacket::encode, CStopAbilityPacket::decode, CStopAbilityPacket::handle);
 		WyNetwork.registerPacket(CCreateCrewPacket.class, CCreateCrewPacket::encode, CCreateCrewPacket::decode, CCreateCrewPacket::handle);
-		WyNetwork.registerPacket(CRequestSyncCrewDataPacket.class, CRequestSyncCrewDataPacket::encode, CRequestSyncCrewDataPacket::decode, CRequestSyncCrewDataPacket::handle);
+		WyNetwork.registerPacket(CRequestSyncWorldDataPacket.class, CRequestSyncWorldDataPacket::encode, CRequestSyncWorldDataPacket::decode, CRequestSyncWorldDataPacket::handle);
 		WyNetwork.registerPacket(CRequestSyncJollyRogerDataPacket.class, CRequestSyncJollyRogerDataPacket::encode, CRequestSyncJollyRogerDataPacket::decode, CRequestSyncJollyRogerDataPacket::handle);
-		WyNetwork.registerPacket(CSyncCrewDataPacket.class, CSyncCrewDataPacket::encode, CSyncCrewDataPacket::decode, CSyncCrewDataPacket::handle);
+		WyNetwork.registerPacket(CSyncWorldDataPacket.class, CSyncWorldDataPacket::encode, CSyncWorldDataPacket::decode, CSyncWorldDataPacket::handle);
 		
 		// From Server to Client
 		WyNetwork.registerPacket(SSyncDevilFruitPacket.class, SSyncDevilFruitPacket::encode, SSyncDevilFruitPacket::decode, SSyncDevilFruitPacket::handle);
@@ -75,7 +75,7 @@ public class ModNetwork
 		WyNetwork.registerPacket(SOpenJollyRogerCreatorScreenPacket.class, SOpenJollyRogerCreatorScreenPacket::encode, SOpenJollyRogerCreatorScreenPacket::decode, SOpenJollyRogerCreatorScreenPacket::handle);
 		WyNetwork.registerPacket(SOpenQuestChooseScreenPacket.class, SOpenQuestChooseScreenPacket::encode, SOpenQuestChooseScreenPacket::decode, SOpenQuestChooseScreenPacket::handle);
 		WyNetwork.registerPacket(SOpenNewCrewScreenPacket.class, SOpenNewCrewScreenPacket::encode, SOpenNewCrewScreenPacket::decode, SOpenNewCrewScreenPacket::handle);
-		WyNetwork.registerPacket(SSyncCrewDataPacket.class, SSyncCrewDataPacket::encode, SSyncCrewDataPacket::decode, SSyncCrewDataPacket::handle);
+		WyNetwork.registerPacket(SSyncWorldDataPacket.class, SSyncWorldDataPacket::encode, SSyncWorldDataPacket::decode, SSyncWorldDataPacket::handle);
 
 	}
 }

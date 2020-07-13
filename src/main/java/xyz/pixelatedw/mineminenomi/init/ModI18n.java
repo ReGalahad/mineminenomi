@@ -20,7 +20,7 @@ public class ModI18n
 	public static final String FACTION_EMPTY = WyRegistry.registerName("faction.empty", "No Faction");
 	public static final String FACTION_PIRATE = WyRegistry.registerName("faction.pirate", "Pirate");
 	public static final String FACTION_MARINE = WyRegistry.registerName("faction.marine", "Marine");
-	public static final String FACTION_BOUNTY_HUNTER = WyRegistry.registerName("faction.bountyhunter", "Bounty Hunter");
+	public static final String FACTION_BOUNTY_HUNTER = WyRegistry.registerName("faction.bounty_hunter", "Bounty Hunter");
 	public static final String FACTION_REVOLUTIONARY = WyRegistry.registerName("faction.revolutionary", "Revolutionary");
 	
 	public static final String RACE_NAME = WyRegistry.registerName("race.name", "Race");
