@@ -2,10 +2,13 @@ package xyz.pixelatedw.mineminenomi.entities.projectiles.ito;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import xyz.pixelatedw.mineminenomi.api.abilities.ExplosionAbility;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
+import xyz.pixelatedw.wypi.abilities.events.SetOnFireEvent;
 import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 
 public class OverheatProjectile extends AbilityProjectileEntity
@@ -39,7 +42,9 @@ public class OverheatProjectile extends AbilityProjectileEntity
 	private void onEntityImpactEvent(LivingEntity hitEntity)
 	{
 		this.onBlockImpactEvent.onImpact(hitEntity.getPosition());
-		hitEntity.setFire(10);
+		SetOnFireEvent event = new SetOnFireEvent((PlayerEntity) this.getThrower(), hitEntity, 10);
+		if (!MinecraftForge.EVENT_BUS.post(event))
+			hitEntity.setFire(10);
 	}
 	
 	private void onBlockImpactEvent(BlockPos hit)

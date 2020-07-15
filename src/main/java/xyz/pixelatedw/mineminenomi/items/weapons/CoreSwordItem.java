@@ -23,11 +23,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import xyz.pixelatedw.mineminenomi.abilities.haki.BusoshokuHakiImbuingAbility;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.entities.mobs.GenericNewEntity;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
+import xyz.pixelatedw.wypi.abilities.events.SetOnFireEvent;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 
@@ -155,7 +157,11 @@ public class CoreSwordItem extends Item
 			target.addPotionEffect(new EffectInstance(Effects.POISON, this.poisonTimer, 0));
 
 		if (this.isFireAspect)
-			target.setFire(this.fireAspectTimer);
+		{
+			SetOnFireEvent event = new SetOnFireEvent(attacker, target, this.fireAspectTimer);
+			if (!MinecraftForge.EVENT_BUS.post(event))
+				attacker.setFire(this.fireAspectTimer);
+		}
 
 		if (this.isSlownessInducing)
 		{

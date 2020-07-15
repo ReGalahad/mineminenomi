@@ -3,15 +3,18 @@ package xyz.pixelatedw.mineminenomi.entities.projectiles.cyborg;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.common.MinecraftForge;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.api.protection.BlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.api.protection.block.AirBlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.data.GenericParticleData;
 import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.abilities.events.SetOnFireEvent;
 import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 
 public class FreshFireProjectile extends AbilityProjectileEntity
@@ -50,7 +53,9 @@ public class FreshFireProjectile extends AbilityProjectileEntity
 	
 	private void onEntityImpactEvent(LivingEntity hitEntity)
 	{
-		hitEntity.setFire(10);
+		SetOnFireEvent event = new SetOnFireEvent((PlayerEntity) this.getThrower(), hitEntity, 10);
+		if (!MinecraftForge.EVENT_BUS.post(event))
+			hitEntity.setFire(10);
 	}
 	
 	private void onBlockImpactEvent(BlockPos hit)

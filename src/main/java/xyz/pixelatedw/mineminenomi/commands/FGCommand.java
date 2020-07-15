@@ -84,19 +84,19 @@ public class FGCommand
 
 		for(Crew crew : worldData.getCrews())
 		{
-			builder.append(crew.getName() + "\n");
+			builder.append("\n=================\n" + crew.getName() + "\n");
 			builder.append("Members: \n");
 			for(Member member : crew.getMembers())
 			{
 				PlayerEntity crewMember = target.world.getPlayerByUuid(member.getUUID());
-				builder.append("> " + crewMember.getDisplayName().getFormattedText() + "\n\n");
+				builder.append("> " + crewMember.getDisplayName().getFormattedText() + "\n");
 			}
 			builder.append("Details: \n");
 			for(JollyRogerElement elem : crew.getJollyRoger().getDetails())
 			{
 				if(elem == null)
 					continue;
-				builder.append("> " + elem.getTexture());
+				builder.append("> " + elem.getTexture() + "\n");
 			}
 		}
 		WyHelper.sendMsgToPlayer(target, builder.toString());

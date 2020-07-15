@@ -7,11 +7,13 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.play.server.SEntityVelocityPacket;
 import net.minecraft.util.math.Vec3d;
+import net.minecraftforge.common.MinecraftForge;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.mera.HeatDashParticleEffect;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.abilities.events.SetOnFireEvent;
 
 public class HeatDashAbility extends Ability
 {
@@ -48,7 +50,11 @@ public class HeatDashAbility extends Ability
 			List<LivingEntity> list = WyHelper.getEntitiesNear(player.getPosition(), player.world, 1.4);
 			list.remove(player);
 			for (LivingEntity target : list)
-				target.setFire(2);
+			{
+				SetOnFireEvent event = new SetOnFireEvent(player, target, 2);
+				if (!MinecraftForge.EVENT_BUS.post(event))
+					target.setFire(2);
+			}
 		}
 	}
 }

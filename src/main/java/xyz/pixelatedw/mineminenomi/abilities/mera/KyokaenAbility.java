@@ -10,12 +10,14 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.Vec3d;
+import net.minecraftforge.common.MinecraftForge;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.extra.KairosekiBulletProjectile;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.extra.NormalBulletProjectile;
 import xyz.pixelatedw.mineminenomi.particles.effects.mera.KyokaenParticleEffect;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.ContinuousAbility;
+import xyz.pixelatedw.wypi.abilities.events.SetOnFireEvent;
 import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 
 public class KyokaenAbility extends ContinuousAbility {
@@ -43,7 +45,9 @@ public class KyokaenAbility extends ContinuousAbility {
 			for (Entity e : list) {
 				if (e instanceof LivingEntity) {
 					if (!e.isBurning()) {
-						e.setFire(3);
+						SetOnFireEvent event = new SetOnFireEvent(player, (LivingEntity) e, 3);
+						if (!MinecraftForge.EVENT_BUS.post(event))
+							e.setFire(3);
 						e.attackEntityFrom(DamageSource.causePlayerDamage(player), 3);
 					}
 					Vec3d speed = WyHelper.propulsion((LivingEntity) e, 3, 3);

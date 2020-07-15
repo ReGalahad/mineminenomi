@@ -21,7 +21,6 @@ import xyz.pixelatedw.mineminenomi.api.crew.Crew;
 import xyz.pixelatedw.mineminenomi.api.crew.Crew.Member;
 import xyz.pixelatedw.mineminenomi.api.crew.JollyRoger;
 import xyz.pixelatedw.mineminenomi.api.helpers.RendererHelper;
-import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.mineminenomi.packets.client.CLeaveCrewPacket;
@@ -119,7 +118,7 @@ public class CrewDetailsScreen extends Screen
 			Minecraft.getInstance().displayGuiScreen(null);
 		}));
 		
-		if(CommonConfig.instance.canChangeJollyRoger() && this.player == crewCaptain)
+		if(this.player == crewCaptain)
 		{
 			posX += 80;
 			this.addButton(new Button(posX, posY + 210, 120, 20, I18n.format(ModI18n.GUI_CHANGE_JOLLY_ROGER), b -> 

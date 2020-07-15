@@ -12,6 +12,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.client.event.RenderBlockOverlayEvent;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -20,6 +21,7 @@ import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.wypi.APIConfig;
+import xyz.pixelatedw.wypi.abilities.events.SetOnFireEvent;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class MaguPassiveEvents
@@ -27,7 +29,9 @@ public class MaguPassiveEvents
 	public static final LogiaInvulnerabilityAbility INVULNERABILITY_INSTANCE = new LogiaInvulnerabilityAbility(ModResources.MAGU, MaguPassiveEvents::maguDamage, DamageSource.IN_FIRE, DamageSource.ON_FIRE, DamageSource.LAVA, DamageSource.HOT_FLOOR);
 
 	public static boolean maguDamage(LivingEntity target, LivingEntity attacker) {
-		attacker.setFire(8);
+		SetOnFireEvent event = new SetOnFireEvent(attacker, target, 8);
+		if (!MinecraftForge.EVENT_BUS.post(event))
+			attacker.setFire(8);
 		attacker.attackEntityFrom(DamageSource.LAVA, 5);
 		return true;
 	}
