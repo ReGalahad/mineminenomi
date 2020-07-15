@@ -25,6 +25,7 @@ import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.mineminenomi.packets.client.CSyncWorldDataPacket;
+import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.network.WyNetwork;
 
 @OnlyIn(Dist.CLIENT)
@@ -61,16 +62,16 @@ public class CrewDetailsScreen extends Screen
 		
 		crewActual = this.crew.getName();
 		
-		this.minecraft.fontRenderer.drawStringWithShadow(TextFormatting.BOLD + nameString + ": " + TextFormatting.RESET + crewActual, posX - 50, posY + 50, -1);
-		this.minecraft.fontRenderer.drawStringWithShadow(TextFormatting.BOLD + jollyRogerString + ": ", posX - 50, posY + 70, -1);
-		this.minecraft.fontRenderer.drawStringWithShadow(TextFormatting.BOLD + membersString + ": ", posX + 150, posY + 50, -1);
+		WyHelper.drawStringWithBorder(this.font, TextFormatting.BOLD + nameString + ": " + TextFormatting.RESET + crewActual, posX - 50, posY + 50, -1);
+		WyHelper.drawStringWithBorder(this.font, TextFormatting.BOLD + jollyRogerString + ": ", posX - 50, posY + 70, -1);
+		WyHelper.drawStringWithBorder(this.font, TextFormatting.BOLD + membersString + ": ", posX + 150, posY + 50, -1);
 
 		int memPosY = posY + 70;
 		for(Member member : this.crew.getMembers())
 		{		
 			PlayerEntity player = this.minecraft.world.getPlayerByUuid(member.getUUID());
 			String memberName = player.getDisplayName().getFormattedText() + (member.isCaptain() ? " (" + I18n.format(ModI18n.CREW_CAPTAIN) + ")" : "");
-			this.minecraft.fontRenderer.drawStringWithShadow(memberName, posX + 150, memPosY, -1);
+			WyHelper.drawStringWithBorder(this.font, memberName, posX + 150, memPosY, -1);
 			memPosY += 20;
 		}
 		

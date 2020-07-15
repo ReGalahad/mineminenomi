@@ -13,25 +13,26 @@ import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.wypi.WyHelper;
-import xyz.pixelatedw.wypi.debug.WyDebug;
 
 public class CCreateCrewPacket
 {
 	private String name;
-	
-	public CCreateCrewPacket() {}
+
+	public CCreateCrewPacket()
+	{
+	}
 
 	public CCreateCrewPacket(String name)
 	{
 		this.name = name;
 	}
-	
+
 	public void encode(PacketBuffer buffer)
 	{
 		buffer.writeInt(this.name.length());
 		buffer.writeString(this.name);
 	}
-	
+
 	public static CCreateCrewPacket decode(PacketBuffer buffer)
 	{
 		CCreateCrewPacket msg = new CCreateCrewPacket();
@@ -42,24 +43,18 @@ public class CCreateCrewPacket
 
 	public static void handle(CCreateCrewPacket message, final Supplier<NetworkEvent.Context> ctx)
 	{
-		if(ctx.get().getDirection() == NetworkDirection.PLAY_TO_SERVER)
+		if (ctx.get().getDirection() == NetworkDirection.PLAY_TO_SERVER)
 		{
 			ctx.get().enqueueWork(() ->
 			{
 				PlayerEntity player = ctx.get().getSender();
 				ExtendedWorldData worldProps = ExtendedWorldData.get(player.world);
-										
-				Crew crew = worldProps.getCrewWithCaptain(player.getUniqueID());
-				if(crew == null)
-				{
-					WyDebug.debug("Cannot find a crew for captain " + player.getName().getFormattedText());
-					return;
-				}
-				
-				crew.setName(message.name);
+
+				Crew crew = new Crew(message.name, player.getUniqueID());
+				worldProps.addCrew(crew);
 				crew.create(player.world);
 
-				if(CommonConfig.instance.isCrewWorldMessageEnabled())
+				if (CommonConfig.instance.isCrewWorldMessageEnabled())
 				{
 					TranslationTextComponent newCrewMsg = new TranslationTextComponent(ModI18n.CREW_MESSAGE_NEW_CREW, message.name);
 					for (PlayerEntity target : player.world.getPlayers())
@@ -67,7 +62,7 @@ public class CCreateCrewPacket
 						WyHelper.sendMsgToPlayer(target, TextFormatting.GOLD + newCrewMsg.getFormattedText());
 					}
 				}
-			});			
+			});
 		}
 		ctx.get().setPacketHandled(true);
 	}

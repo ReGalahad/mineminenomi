@@ -67,6 +67,8 @@ public class JollyRogerCreatorScreen extends Screen
 		this.player = Minecraft.getInstance().player;
 		this.worldData = ExtendedWorldData.get(this.player.world);
 		Crew crew = this.worldData.getCrewWithMember(this.player.getUniqueID());
+		if(crew == null)
+			crew = new Crew();
 		this.jollyRoger = crew.getJollyRoger();
 		this.isEditing = isEditing;
 		

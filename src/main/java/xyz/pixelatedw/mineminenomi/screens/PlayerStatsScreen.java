@@ -59,15 +59,15 @@ public class PlayerStatsScreen extends Screen
 		String raceGUI = I18n.format(ModI18n.RACE_NAME);
 		String styleGUI = I18n.format(ModI18n.STYLE_NAME);
 
-		String faction = WyHelper.getResourceName(entityStatsProps.getFaction().toLowerCase());
+		String faction = WyHelper.getResourceName(this.entityStatsProps.getFaction().toLowerCase());
 		if(WyHelper.isNullOrEmpty(faction))
 			faction = "empty";
 		
-		String race = WyHelper.getResourceName(entityStatsProps.getRace().toLowerCase());
+		String race = WyHelper.getResourceName(this.entityStatsProps.getRace().toLowerCase());
 		if(WyHelper.isNullOrEmpty(race))
 			race = "empty";
 		
-		String style = WyHelper.getResourceName(entityStatsProps.getFightingStyle().toLowerCase());
+		String style = WyHelper.getResourceName(this.entityStatsProps.getFightingStyle().toLowerCase());
 		if(WyHelper.isNullOrEmpty(style))
 			style = "empty";
 		
@@ -75,23 +75,23 @@ public class PlayerStatsScreen extends Screen
 		String raceActual = I18n.format("race." + race);
 		String styleActual = I18n.format("style." + style);
 	
-		if (entityStatsProps.isCyborg())
-			this.minecraft.fontRenderer.drawStringWithShadow(TextFormatting.BOLD + colaGUI + ": " + TextFormatting.RESET + entityStatsProps.getCola() + " / " + entityStatsProps.getMaxCola(), posX - 30, posY + 50, -1);
-		this.minecraft.fontRenderer.drawStringWithShadow(TextFormatting.BOLD + dorikiGUI + ": " + TextFormatting.RESET + entityStatsProps.getDoriki(), posX - 30, posY + 70, -1);
-		this.minecraft.fontRenderer.drawStringWithShadow(TextFormatting.BOLD + factionGUI + ": " + TextFormatting.RESET + factionActual, posX - 30, posY + 90, -1);
-		this.minecraft.fontRenderer.drawStringWithShadow(TextFormatting.BOLD + raceGUI + ": " + TextFormatting.RESET + raceActual, posX - 30, posY + 110, -1);
-		this.minecraft.fontRenderer.drawStringWithShadow(TextFormatting.BOLD + styleGUI + ": " + TextFormatting.RESET + styleActual, posX - 30, posY + 130, -1);
+		if (this.entityStatsProps.isCyborg())
+			WyHelper.drawStringWithBorder(this.font, TextFormatting.BOLD + colaGUI + ": " + TextFormatting.RESET + this.entityStatsProps.getCola() + " / " + this.entityStatsProps.getMaxCola(), posX - 30, posY + 50, -1);
+		WyHelper.drawStringWithBorder(this.font, TextFormatting.BOLD + dorikiGUI + ": " + TextFormatting.RESET + this.entityStatsProps.getDoriki(), posX - 30, posY + 70, -1);
+		WyHelper.drawStringWithBorder(this.font, TextFormatting.BOLD + factionGUI + ": " + TextFormatting.RESET + factionActual, posX - 30, posY + 90, -1);
+		WyHelper.drawStringWithBorder(this.font, TextFormatting.BOLD + raceGUI + ": " + TextFormatting.RESET + raceActual, posX - 30, posY + 110, -1);
+		WyHelper.drawStringWithBorder(this.font, TextFormatting.BOLD + styleGUI + ": " + TextFormatting.RESET + styleActual, posX - 30, posY + 130, -1);
 		
-		if (entityStatsProps.getBelly() > 0)
+		if (this.entityStatsProps.getBelly() > 0)
 		{
-			this.minecraft.fontRenderer.drawStringWithShadow("" + entityStatsProps.getBelly(), posX + 215, posY + 72, -1);
+			WyHelper.drawStringWithBorder(this.font, "" + this.entityStatsProps.getBelly(), posX + 215, posY + 72, -1);
 			this.minecraft.textureManager.bindTexture(ModResources.CURRENCIES);		
 			GuiUtils.drawTexturedModalRect(posX + 190, posY + 60, 0, 32, 32, 64, 1);
 		}
 
-		if (entityStatsProps.getExtol() > 0)
+		if (this.entityStatsProps.getExtol() > 0)
 		{
-			this.minecraft.fontRenderer.drawStringWithShadow("" + entityStatsProps.getExtol(), posX + 215, posY + 102, -1);
+			WyHelper.drawStringWithBorder(this.font, "" + this.entityStatsProps.getExtol(), posX + 215, posY + 102, -1);
 			this.minecraft.textureManager.bindTexture(ModResources.CURRENCIES);
 			GuiUtils.drawTexturedModalRect(posX + 190, posY + 90, 34, 32, 64, 86, 1);
 		}
@@ -100,16 +100,16 @@ public class PlayerStatsScreen extends Screen
 		{
 			ItemStack yamiFruit = new ItemStack(ModAbilities.YAMI_YAMI_NO_MI);
 			ItemStack df;
-			if (!devilFruitProps.getDevilFruit().equals("yamidummy"))
+			if (!this.devilFruitProps.getDevilFruit().equals("yamidummy"))
 			{
-				df = DevilFruitHelper.getDevilFruitItem(devilFruitProps.getDevilFruit());
+				df = DevilFruitHelper.getDevilFruitItem(this.devilFruitProps.getDevilFruit());
 
-				if (devilFruitProps.hasYamiPower())
+				if (this.devilFruitProps.hasYamiPower())
 					this.minecraft.fontRenderer.drawStringWithShadow(TextFormatting.BOLD + "" + yamiFruit.getDisplayName().getFormattedText() + " + " + df.getDisplayName().getFormattedText(), posX - 28, posY + 194, -1);
 				else
 					this.minecraft.fontRenderer.drawStringWithShadow(TextFormatting.BOLD + "" + df.getDisplayName().getFormattedText(), posX - 28, posY + 194, -1);
 
-				if (devilFruitProps.hasYamiPower())
+				if (this.devilFruitProps.hasYamiPower())
 					this.drawItemStack(yamiFruit, posX - 56, posY + 187, "");
 				this.drawItemStack(df, posX - 50, posY + 190, "");
 			}

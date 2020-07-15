@@ -13,7 +13,6 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.api.crew.Crew;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
@@ -56,8 +55,6 @@ public class SakeBottleItem extends Item
 					return new ActionResult<>(ActionResultType.FAIL, player.getHeldItem(hand));
 				}
 	
-				Crew crew = new Crew("", player.getUniqueID());
-				worldProps.addCrew(crew);
 				itemStack.getOrCreateTag().putBoolean("crewReady", true);
 				WyNetwork.sendTo(new SOpenNewCrewScreenPacket(), player);
 			}
