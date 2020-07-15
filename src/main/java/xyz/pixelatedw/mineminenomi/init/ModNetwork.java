@@ -4,13 +4,14 @@ import xyz.pixelatedw.mineminenomi.packets.client.CCombatModeTriggerPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CCreateCrewPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CDeleteCCBookPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CGiveItemStackPacket;
+import xyz.pixelatedw.mineminenomi.packets.client.CLeaveCrewPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CRequestSyncQuestDataPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CRequestSyncWorldDataPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CStopAbilityPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CSyncDevilFruitPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CSyncEntityStatsPacket;
-import xyz.pixelatedw.mineminenomi.packets.client.CSyncWorldDataPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CSyncZoanPacket;
+import xyz.pixelatedw.mineminenomi.packets.client.CUpdateJollyRogerPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CUpdateTraderOffersPacket;
 import xyz.pixelatedw.mineminenomi.packets.client.CUseAbilityPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SDespawnQuestObjectivePacket;
@@ -52,7 +53,8 @@ public class ModNetwork
 		WyNetwork.registerPacket(CStopAbilityPacket.class, CStopAbilityPacket::encode, CStopAbilityPacket::decode, CStopAbilityPacket::handle);
 		WyNetwork.registerPacket(CCreateCrewPacket.class, CCreateCrewPacket::encode, CCreateCrewPacket::decode, CCreateCrewPacket::handle);
 		WyNetwork.registerPacket(CRequestSyncWorldDataPacket.class, CRequestSyncWorldDataPacket::encode, CRequestSyncWorldDataPacket::decode, CRequestSyncWorldDataPacket::handle);
-		WyNetwork.registerPacket(CSyncWorldDataPacket.class, CSyncWorldDataPacket::encode, CSyncWorldDataPacket::decode, CSyncWorldDataPacket::handle);
+		WyNetwork.registerPacket(CLeaveCrewPacket.class, CLeaveCrewPacket::encode, CLeaveCrewPacket::decode, CLeaveCrewPacket::handle);
+		WyNetwork.registerPacket(CUpdateJollyRogerPacket.class, CUpdateJollyRogerPacket::encode, CUpdateJollyRogerPacket::decode, CUpdateJollyRogerPacket::handle);
 		
 		// From Server to Client
 		WyNetwork.registerPacket(SSyncDevilFruitPacket.class, SSyncDevilFruitPacket::encode, SSyncDevilFruitPacket::decode, SSyncDevilFruitPacket::handle);

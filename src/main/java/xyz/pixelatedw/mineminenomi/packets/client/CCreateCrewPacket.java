@@ -12,7 +12,9 @@ import xyz.pixelatedw.mineminenomi.api.crew.Crew;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
+import xyz.pixelatedw.mineminenomi.packets.server.SSyncWorldDataPacket;
 import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.network.WyNetwork;
 
 public class CCreateCrewPacket
 {
@@ -62,6 +64,8 @@ public class CCreateCrewPacket
 						WyHelper.sendMsgToPlayer(target, TextFormatting.GOLD + newCrewMsg.getFormattedText());
 					}
 				}
+				
+				WyNetwork.sendToAll(new SSyncWorldDataPacket(worldProps));
 			});
 		}
 		ctx.get().setPacketHandled(true);

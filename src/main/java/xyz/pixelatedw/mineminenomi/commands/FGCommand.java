@@ -7,9 +7,13 @@ import com.mojang.brigadier.context.CommandContext;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.command.arguments.EntityArgument;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import xyz.pixelatedw.mineminenomi.api.QuestArgument;
+import xyz.pixelatedw.mineminenomi.api.crew.Crew;
+import xyz.pixelatedw.mineminenomi.api.crew.Crew.Member;
+import xyz.pixelatedw.mineminenomi.api.crew.JollyRogerElement;
 import xyz.pixelatedw.mineminenomi.api.helpers.HakiHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
@@ -42,6 +46,11 @@ public class FGCommand
 				.executes(context -> checkHakiStats(context, EntityArgument.getPlayer(context, "target")))));
 		
 		builder
+			.then(Commands.literal("check_crews")
+			.then(Commands.argument("target", EntityArgument.player())
+				.executes(context -> checkCrews(context, EntityArgument.getPlayer(context, "target")))));
+		
+		builder
 			.then(Commands.literal("turn_sword_clone")
 			.then(Commands.argument("target", EntityArgument.player())
 				.executes(context -> turnSwordInClone(context, EntityArgument.getPlayer(context, "target")))));
@@ -67,6 +76,34 @@ public class FGCommand
 		dispatcher.register(builder);
 	}
 
+	private static int checkCrews(CommandContext<CommandSource> source, ServerPlayerEntity target)
+	{
+		ExtendedWorldData worldData = ExtendedWorldData.get(target.world); 
+
+		StringBuilder builder = new StringBuilder();
+
+		for(Crew crew : worldData.getCrews())
+		{
+			builder.append(crew.getName() + "\n");
+			builder.append("Members: \n");
+			for(Member member : crew.getMembers())
+			{
+				PlayerEntity crewMember = target.world.getPlayerByUuid(member.getUUID());
+				builder.append("> " + crewMember.getDisplayName().getFormattedText() + "\n\n");
+			}
+			builder.append("Details: \n");
+			for(JollyRogerElement elem : crew.getJollyRoger().getDetails())
+			{
+				if(elem == null)
+					continue;
+				builder.append("> " + elem.getTexture());
+			}
+		}
+		WyHelper.sendMsgToPlayer(target, builder.toString());
+		
+		return 1;
+	}
+	
 	private static int checkFruitsInWorld(CommandContext<CommandSource> context, ServerPlayerEntity target)
 	{
 		ExtendedWorldData worldData = ExtendedWorldData.get(target.world); 

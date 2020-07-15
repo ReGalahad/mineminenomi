@@ -24,7 +24,7 @@ import xyz.pixelatedw.mineminenomi.api.helpers.RendererHelper;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
-import xyz.pixelatedw.mineminenomi.packets.client.CSyncWorldDataPacket;
+import xyz.pixelatedw.mineminenomi.packets.client.CLeaveCrewPacket;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.network.WyNetwork;
 
@@ -115,10 +115,7 @@ public class CrewDetailsScreen extends Screen
 		posX += 80;
 		this.addButton(new Button(posX, posY + 210, 70, 20, I18n.format(ModI18n.GUI_LEAVE), b -> 
 		{
-			this.crew.removeMember(this.player.getUniqueID());
-			if(this.crew.getMembers().size() <= 0)
-				this.worldProps.removeCrew(this.crew);
-			WyNetwork.sendToServer(new CSyncWorldDataPacket(this.worldProps));
+			WyNetwork.sendToServer(new CLeaveCrewPacket());
 			Minecraft.getInstance().displayGuiScreen(null);
 		}));
 		

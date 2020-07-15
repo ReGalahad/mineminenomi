@@ -18,6 +18,7 @@ import net.minecraft.world.storage.WorldSavedData;
 import net.minecraftforge.common.util.Constants;
 import xyz.pixelatedw.mineminenomi.api.crew.Crew;
 import xyz.pixelatedw.mineminenomi.api.crew.Crew.Member;
+import xyz.pixelatedw.mineminenomi.api.crew.JollyRoger;
 import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitHelper;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.items.AkumaNoMiItem;
@@ -211,6 +212,12 @@ public class ExtendedWorldData extends WorldSavedData
 		String key = WyHelper.getResourceName(crew.getName());
 		if(!this.pirateCrews.containsKey(key))
 			this.pirateCrews.put(key, crew);
+		this.markDirty();
+	}
+	
+	public void updateCrewJollyRoger(Crew crew, JollyRoger jollyRoger)
+	{
+		crew.setJollyRoger(jollyRoger);
 		this.markDirty();
 	}
 	

@@ -22,10 +22,8 @@ import xyz.pixelatedw.mineminenomi.api.crew.JollyRoger;
 import xyz.pixelatedw.mineminenomi.api.helpers.RendererHelper;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
-import xyz.pixelatedw.mineminenomi.packets.client.CRequestSyncWorldDataPacket;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
-import xyz.pixelatedw.wypi.network.WyNetwork;
 
 public class WantedPosterScreen extends Screen
 {
@@ -46,9 +44,10 @@ public class WantedPosterScreen extends Screen
 		this.worldData = ExtendedWorldData.get(this.player.world);
 		
 		Crew crew = this.worldData.getCrewWithMember(this.player.getUniqueID());
-		this.jollyRoger = crew.getJollyRoger();
+		if(crew != null)
+			this.jollyRoger = crew.getJollyRoger();
 		
-		WyNetwork.sendToServer(new CRequestSyncWorldDataPacket());
+		//WyNetwork.sendToServer(new CRequestSyncWorldDataPacket());
 	}
 
 	@Override

@@ -32,7 +32,7 @@ import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.mineminenomi.init.ModJollyRogers;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
-import xyz.pixelatedw.mineminenomi.packets.client.CSyncWorldDataPacket;
+import xyz.pixelatedw.mineminenomi.packets.client.CUpdateJollyRogerPacket;
 import xyz.pixelatedw.mineminenomi.screens.extra.NoTextureButton;
 import xyz.pixelatedw.mineminenomi.screens.extra.TexturedIconButton;
 import xyz.pixelatedw.wypi.WyHelper;
@@ -50,6 +50,7 @@ public class JollyRogerCreatorScreen extends Screen
 	private float animationTime = 0;
 	private int nextElementTry = 0;
 	private boolean isEditing = false;
+	private Crew crew;
 	
 	private int layerIndex;
 	private int trueIndex;
@@ -66,10 +67,8 @@ public class JollyRogerCreatorScreen extends Screen
 		super(new StringTextComponent(""));
 		this.player = Minecraft.getInstance().player;
 		this.worldData = ExtendedWorldData.get(this.player.world);
-		Crew crew = this.worldData.getCrewWithMember(this.player.getUniqueID());
-		if(crew == null)
-			crew = new Crew();
-		this.jollyRoger = crew.getJollyRoger();
+		this.crew = this.worldData.getCrewWithMember(this.player.getUniqueID());
+		this.jollyRoger = this.crew.getJollyRoger();
 		this.isEditing = isEditing;
 		
 		this.allElements = ModJollyRogers.JOLLY_ROGER_ELEMENTS.getEntries();
@@ -662,7 +661,7 @@ public class JollyRogerCreatorScreen extends Screen
 	@Override
 	public void onClose()
 	{
-		WyNetwork.sendToServer(new CSyncWorldDataPacket(this.worldData));
+		WyNetwork.sendToServer(new CUpdateJollyRogerPacket(this.jollyRoger));
 		super.onClose();
 	}
 

@@ -91,6 +91,11 @@ public class Crew
 		return this.jollyRoger;
 	}
 	
+	public void setJollyRoger(JollyRoger jr)
+	{
+		this.jollyRoger = jr;
+	}
+	
 	public CompoundNBT write()
 	{
 		CompoundNBT crewNBT = new CompoundNBT();
@@ -106,7 +111,8 @@ public class Crew
 		}
 		crewNBT.put("members", members);
 
-		crewNBT.put("jollyRoger", this.jollyRoger.write());
+		CompoundNBT jollyRogerData = this.jollyRoger.write();
+		crewNBT.put("jollyRoger", jollyRogerData);
 		
 		return crewNBT;
 	}
@@ -125,7 +131,8 @@ public class Crew
 				member.setIsCaptain();
 		}
 		
-		this.jollyRoger.read(nbt.getCompound("jollyRoger"));
+		CompoundNBT jollyRogerData = nbt.getCompound("jollyRoger");
+		this.jollyRoger.read(jollyRogerData);
 	}
 
 	public static class Member
