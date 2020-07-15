@@ -52,7 +52,7 @@ public class CCreateCrewPacket
 				PlayerEntity player = ctx.get().getSender();
 				ExtendedWorldData worldProps = ExtendedWorldData.get(player.world);
 
-				Crew crew = new Crew(message.name, player.getUniqueID());
+				Crew crew = new Crew(message.name, player);
 				worldProps.addCrew(crew);
 				crew.create(player.world);
 

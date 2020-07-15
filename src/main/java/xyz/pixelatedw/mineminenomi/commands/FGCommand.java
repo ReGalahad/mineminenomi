@@ -7,7 +7,6 @@ import com.mojang.brigadier.context.CommandContext;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.command.arguments.EntityArgument;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import xyz.pixelatedw.mineminenomi.api.QuestArgument;
@@ -88,8 +87,7 @@ public class FGCommand
 			builder.append("Members: \n");
 			for(Member member : crew.getMembers())
 			{
-				PlayerEntity crewMember = target.world.getPlayerByUuid(member.getUUID());
-				builder.append("> " + crewMember.getDisplayName().getFormattedText() + "\n");
+				builder.append("> " + member.getUsername() + "\n");
 			}
 			builder.append("Details: \n");
 			for(JollyRogerElement elem : crew.getJollyRoger().getDetails())

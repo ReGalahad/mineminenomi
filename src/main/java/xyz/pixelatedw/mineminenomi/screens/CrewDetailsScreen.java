@@ -68,8 +68,7 @@ public class CrewDetailsScreen extends Screen
 		int memPosY = posY + 70;
 		for(Member member : this.crew.getMembers())
 		{		
-			PlayerEntity player = this.minecraft.world.getPlayerByUuid(member.getUUID());
-			String memberName = player.getDisplayName().getFormattedText() + (member.isCaptain() ? " (" + I18n.format(ModI18n.CREW_CAPTAIN) + ")" : "");
+			String memberName = member.getUsername() + (member.isCaptain() ? " (" + I18n.format(ModI18n.CREW_CAPTAIN) + ")" : "");
 			WyHelper.drawStringWithBorder(this.font, memberName, posX + 150, memPosY, -1);
 			memPosY += 20;
 		}
@@ -118,7 +117,7 @@ public class CrewDetailsScreen extends Screen
 			Minecraft.getInstance().displayGuiScreen(null);
 		}));
 		
-		if(this.player == crewCaptain)
+		if(crewCaptain != null && this.player == crewCaptain)
 		{
 			posX += 80;
 			this.addButton(new Button(posX, posY + 210, 120, 20, I18n.format(ModI18n.GUI_CHANGE_JOLLY_ROGER), b -> 

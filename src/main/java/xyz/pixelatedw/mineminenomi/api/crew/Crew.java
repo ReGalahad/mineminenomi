@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.world.World;
@@ -22,11 +23,16 @@ public class Crew
 	{
 	}
 
-	public Crew(String name, UUID capId)
+	public Crew(String name, LivingEntity entity)
+	{
+		this(name, entity.getUniqueID(), entity.getDisplayName().getFormattedText());
+	}
+	
+	public Crew(String name, UUID capId, String username)
 	{
 		this.name = name;
 		this.isTemporary = true;
-		this.addMember(capId).setIsCaptain();
+		this.addMember(capId, username).setIsCaptain();
 	}
 
 	public void setName(String name)
@@ -44,13 +50,18 @@ public class Crew
 		return this.isTemporary;
 	}
 
-	public Member addMember(UUID id)
+	public Member addMember(LivingEntity entity)
 	{
-		Member member = new Member(id);
-		this.members.add(member);
-		return member;
+		return this.addMember(entity.getUniqueID(), entity.getDisplayName().getFormattedText());
 	}
 
+	public Member addMember(UUID uuid, String username)
+	{
+		Member member = new Member(uuid, username);
+		this.members.add(member);
+		return member;	
+	}
+	
 	public void removeMember(UUID id)
 	{
 		Member member = this.getMember(id);
@@ -106,6 +117,7 @@ public class Crew
 		{
 			CompoundNBT memberNBT = new CompoundNBT();
 			memberNBT.putUniqueId("id", member.getUUID());
+			memberNBT.putString("username", member.getUsername());
 			memberNBT.putBoolean("isCaptain", member.isCaptain());
 			members.add(memberNBT);
 		}
@@ -126,7 +138,7 @@ public class Crew
 		for (int j = 0; j < members.size(); j++)
 		{
 			CompoundNBT memberNBT = members.getCompound(j);
-			Crew.Member member = this.addMember(memberNBT.getUniqueId("id"));
+			Crew.Member member = this.addMember(memberNBT.getUniqueId("id"), memberNBT.getString("username"));
 			if (memberNBT.getBoolean("isCaptain"))
 				member.setIsCaptain();
 		}
@@ -138,11 +150,18 @@ public class Crew
 	public static class Member
 	{
 		private UUID uuid;
+		private String username;
 		private boolean isCaptain;
 
-		public Member(UUID uuid)
+		public Member(LivingEntity entity)
+		{
+			this(entity.getUniqueID(), entity.getDisplayName().getFormattedText());
+		}
+		
+		public Member(UUID uuid, String username)
 		{
 			this.uuid = uuid;
+			this.username = username;
 		}
 
 		public Member setIsCaptain()
@@ -159,6 +178,11 @@ public class Crew
 		public UUID getUUID()
 		{
 			return this.uuid;
+		}
+		
+		public String getUsername()
+		{
+			return this.username;
 		}
 	}
 }

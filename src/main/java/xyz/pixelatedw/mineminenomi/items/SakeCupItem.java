@@ -63,7 +63,7 @@ public class SakeCupItem extends Item
 				{
 					if(!crew.hasMember(player.getUniqueID()))
 					{
-						crew.addMember(player.getUniqueID());
+						crew.addMember(player);
 						WyHelper.sendMsgToPlayer(leader, new TranslationTextComponent(ModI18n.CREW_MESSAGE_NEW_JOIN, player.getName().getFormattedText()).getFormattedText());
 						itemStack.getOrCreateTag().putInt("leader", 0);
 					}
