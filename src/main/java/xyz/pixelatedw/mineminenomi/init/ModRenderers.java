@@ -44,6 +44,7 @@ import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.PirateTraderEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.PirateWithGunEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.PirateWithSwordEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.quest.givers.BowMasterEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.quest.givers.DoctorEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.quest.givers.DojoSenseiEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.quest.givers.WeatherWizardEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.quest.objectives.SniperTargetEntity;
@@ -121,6 +122,7 @@ public class ModRenderers
 		RenderingRegistry.registerEntityRenderingHandler(DojoSenseiEntity.class, new GenericMobRenderer.Factory(new DojoSenseiModel(), 1, null));
 		RenderingRegistry.registerEntityRenderingHandler(BowMasterEntity.class, new GenericMobRenderer.Factory(new SimpleHumanModel(), 1, null));
 		RenderingRegistry.registerEntityRenderingHandler(WeatherWizardEntity.class, new GenericMobRenderer.Factory(new WeatherWizardModel(), 1, null));
+		RenderingRegistry.registerEntityRenderingHandler(DoctorEntity.class, new GenericMobRenderer.Factory(new SimpleHumanModel(), 1, null));
 
 		// Animals
 		RenderingRegistry.registerEntityRenderingHandler(DenDenMushiEntity.class, new GenericMobRenderer.Factory(new DenDenMushiModel(), 1, null));

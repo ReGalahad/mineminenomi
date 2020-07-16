@@ -37,6 +37,7 @@ import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.PirateTraderEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.PirateWithGunEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.PirateWithSwordEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.quest.givers.BowMasterEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.quest.givers.DoctorEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.quest.givers.DojoSenseiEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.quest.givers.WeatherWizardEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.quest.objectives.SniperTargetEntity;
@@ -73,6 +74,7 @@ public class ModEntities
 	public static final EntityType DOJO_SENSEI = WyRegistry.createEntityType(DojoSenseiEntity::new).build("dojo_sensei");
 	public static final EntityType BOW_MASTER = WyRegistry.createEntityType(BowMasterEntity::new).build("bow_master");
 	public static final EntityType WEATHER_WIZARD = WyRegistry.createEntityType(WeatherWizardEntity::new).build("weather_wizard");
+	public static final EntityType DOCTOR = WyRegistry.createEntityType(DoctorEntity::new).build("doctor");
 
 	// Animals
 	public static final EntityType DEN_DEN_MUSHI = WyRegistry.createEntityType(DenDenMushiEntity::new).size(0.8F, 0.8F).build("den_den_mushi");
@@ -124,6 +126,7 @@ public class ModEntities
 		registerFactionlessWithSpawnEgg(DOJO_SENSEI, "Dojo Sensei");
 		registerFactionlessWithSpawnEgg(BOW_MASTER, "Bow Master");
 		registerFactionlessWithSpawnEgg(WEATHER_WIZARD, "Weather Wizard");
+		registerFactionlessWithSpawnEgg(DOCTOR, "Doctor");
 
 		// Animals
 		registerAnimalWithSpawnEgg(DEN_DEN_MUSHI, "Den Den Mushi");
