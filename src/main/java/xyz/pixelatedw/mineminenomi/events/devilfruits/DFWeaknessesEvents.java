@@ -96,13 +96,18 @@ public class DFWeaknessesEvents
 				}
 				else
 				{
+					int disabledAbilities = 0;
 					for (int i = 0; i < abilityProps.getEquippedAbilities().length; i++)
 					{
 						if (abilityProps.getEquippedAbility(i) != null && abilityProps.getEquippedAbility(i).isDisabled())
 						{
 							abilityProps.getEquippedAbility(i).startCooldown(player);
+							disabledAbilities++;
 						}
 					}
+					
+					if(disabledAbilities > 0)
+						WyNetwork.sendTo(new SSyncAbilityDataPacket(player.getEntityId(), abilityProps), player);
 				}
 			}
 		}

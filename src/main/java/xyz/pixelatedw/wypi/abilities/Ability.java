@@ -23,6 +23,7 @@ public abstract class Ability extends ForgeRegistryEntry<Ability>
 	protected double maxCooldown;
 	private AbilityCategory category = AbilityCategory.ALL;
 	private State state = State.STANDBY;
+	private State previousState = State.STANDBY;
 	
 	// Setting the defaults so that no crash occurs and so they will be null safe.
 	protected IOnUse onUseEvent = (player) -> { return true; };
@@ -98,16 +99,19 @@ public abstract class Ability extends ForgeRegistryEntry<Ability>
 	
 	public void startStandby()
 	{
+		this.previousState = this.state;
 		this.state = State.STANDBY;
 	}
 	
 	public void startDisable()
 	{
+		this.previousState = this.state;
 		this.state = State.DISABLED;
 	}
 	
 	public void startCooldown(PlayerEntity player)
 	{
+		this.previousState = this.state;
 		this.state = State.COOLDOWN;
 	}	
 	
@@ -116,6 +120,7 @@ public abstract class Ability extends ForgeRegistryEntry<Ability>
 		if(player.world.isRemote)
 			return;
 		this.cooldown = this.maxCooldown;				
+		this.previousState = this.state;
 		this.state = State.STANDBY;
 		this.onEndCooldownEvent.onEndCooldown(player);
 		IAbilityData props = AbilityDataCapability.get(player);
@@ -124,12 +129,18 @@ public abstract class Ability extends ForgeRegistryEntry<Ability>
 	
 	public void setState(State state)
 	{
+		this.previousState = this.state;
 		this.state = state;
 	}
 	
 	public State getState()
 	{
 		return this.state;
+	}
+	
+	public State getPreviousState()
+	{
+		return this.previousState;
 	}
 	
 	/**
@@ -194,7 +205,7 @@ public abstract class Ability extends ForgeRegistryEntry<Ability>
 		if(this.isOnCooldown() && this.cooldown > 0)
 		{
 			this.cooldown--;
-			if(!player.world.isRemote)
+			if(!player.world.isRemote && this.getPreviousState() != State.DISABLED)
 				this.duringCooldownEvent.duringCooldown(player, (int) this.cooldown);
 		}
 		else if(this.isOnCooldown() && this.cooldown <= 0)
