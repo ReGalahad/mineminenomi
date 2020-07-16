@@ -10,6 +10,7 @@ import java.util.UUID;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.world.World;
@@ -212,6 +213,18 @@ public class ExtendedWorldData extends WorldSavedData
 		String key = WyHelper.getResourceName(crew.getName());
 		if(!this.pirateCrews.containsKey(key))
 			this.pirateCrews.put(key, crew);
+		this.markDirty();
+	}
+	
+	public void removeCrewMember(Crew crew, LivingEntity entity)
+	{
+		crew.removeMember(entity.getUniqueID());
+		this.markDirty();
+	}
+	
+	public void addCrewMember(Crew crew, LivingEntity entity)
+	{
+		crew.addMember(entity);
 		this.markDirty();
 	}
 	

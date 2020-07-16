@@ -20,8 +20,10 @@ import xyz.pixelatedw.mineminenomi.api.crew.Crew;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
+import xyz.pixelatedw.mineminenomi.packets.server.SSyncWorldDataPacket;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.debug.WyDebug;
+import xyz.pixelatedw.wypi.network.WyNetwork;
 
 public class SakeCupItem extends Item
 {
@@ -63,7 +65,8 @@ public class SakeCupItem extends Item
 				{
 					if(!crew.hasMember(player.getUniqueID()))
 					{
-						crew.addMember(player);
+						worldProps.addCrewMember(crew, player);
+						WyNetwork.sendToAll(new SSyncWorldDataPacket(worldProps));
 						WyHelper.sendMsgToPlayer(leader, new TranslationTextComponent(ModI18n.CREW_MESSAGE_NEW_JOIN, player.getName().getFormattedText()).getFormattedText());
 						itemStack.getOrCreateTag().putInt("leader", 0);
 					}
