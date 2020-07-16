@@ -19,7 +19,6 @@ import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IWorld;
@@ -29,14 +28,15 @@ import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.entities.mobs.GenericNewEntity;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.mineminenomi.init.ModQuests;
+import xyz.pixelatedw.mineminenomi.init.ModWeapons;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.quests.Quest;
 
-public class BowMasterEntity extends GenericNewEntity implements IQuestGiver
+public class WeatherWizardEntity extends GenericNewEntity implements IQuestGiver
 {
-	public BowMasterEntity(World worldIn)
+	public WeatherWizardEntity(World world)
 	{
-		super(ModEntities.BOW_MASTER, worldIn, new String[] {"bow_master1", "bow_master2"});
+		super(ModEntities.WEATHER_WIZARD, world, new String[] {"weather_wizard1"});
 	}
 
 	@Override
@@ -51,21 +51,21 @@ public class BowMasterEntity extends GenericNewEntity implements IQuestGiver
 
 		this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
 	}
-	
+
 	@Override
 	protected void registerAttributes()
 	{
 		super.registerAttributes();
 		this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(35.0D);
-		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.26F);
+		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.22F);
 		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(2.0D);
-		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(70.0D);
+		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(50.0D);
 		this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
 		
-		this.setDoriki(20 + WyHelper.randomWithRange(0, 10));
-		this.setBelly(20 + WyHelper.randomWithRange(0, 20));
+		this.setDoriki(10 + WyHelper.randomWithRange(0, 10));
+		this.setBelly(20 + WyHelper.randomWithRange(0, 10));
 	}
-
+	
 	@Override
 	protected void registerData()
 	{
@@ -93,20 +93,23 @@ public class BowMasterEntity extends GenericNewEntity implements IQuestGiver
 	{
 		spawnData = super.onInitialSpawn(world, difficulty, reason, spawnData, dataTag);
 
-		ItemStack randomSword = new ItemStack(Items.BOW);
-		this.setItemStackToSlot(EquipmentSlotType.MAINHAND, randomSword);
-
+		if(this.rand.nextDouble() < 0.4)
+		{
+			ItemStack climaTact = new ItemStack(ModWeapons.CLIMA_TACT);
+			this.setItemStackToSlot(EquipmentSlotType.MAINHAND, climaTact);
+		}
+		
 		return spawnData;
 	}
-
+	
 	@Override
 	public Quest[] getAvailableQuests(PlayerEntity player)
 	{
 		IEntityStats entityProps = EntityStatsCapability.get(player);		
 		List<Quest> availableQuests = new ArrayList<Quest>();
 
-		if(entityProps.isSniper())
-			availableQuests.addAll(ImmutableList.of(ModQuests.SNIPER_TRIAL_01, ModQuests.SNIPER_TRIAL_02, ModQuests.SNIPER_TRIAL_03, ModQuests.SNIPER_TRIAL_04));
+		if(entityProps.isWeatherWizard())
+			availableQuests.addAll(ImmutableList.of(ModQuests.ART_OF_WEATHER_TRIAL_01, ModQuests.ART_OF_WEATHER_TRIAL_02, ModQuests.ART_OF_WEATHER_TRIAL_03, ModQuests.ART_OF_WEATHER_TRIAL_04));
 		
 		Quest[] quests = new Quest[availableQuests.size()];	
 		return availableQuests.toArray(quests);

@@ -27,7 +27,8 @@ public class TrainerSpawner
 	private Random random = new Random();
 	private int cooldown;
 	private static final Biome.Category[] SNIPER_BIOMES = new Biome.Category[] { Biome.Category.FOREST, Biome.Category.TAIGA, Biome.Category.JUNGLE };
-	
+	private static final Biome.Category[] WEATHER_WIZARD_BIOMES = new Biome.Category[] { Biome.Category.FOREST, Biome.Category.ICY, Biome.Category.MUSHROOM, Biome.Category.BEACH };
+
 	public void tick(ServerWorld world)
 	{
 		if (--this.cooldown <= 0)
@@ -56,6 +57,11 @@ public class TrainerSpawner
 			{
 				entityType = ModEntities.BOW_MASTER;
 				biomes = SNIPER_BIOMES;
+			}
+			else if(props.isWeatherWizard())
+			{
+				entityType = ModEntities.WEATHER_WIZARD;
+				biomes = WEATHER_WIZARD_BIOMES;
 			}
 			
 			if(entityType == null)
