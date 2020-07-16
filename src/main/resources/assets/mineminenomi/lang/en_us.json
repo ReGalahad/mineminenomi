@@ -13,6 +13,7 @@
 	"ability.message.not_zoan_form_single": "%s can only be used while %s is active !",
 	"ability.message.one_haki_type": "%s can't be used while another same type haki is active!",
 	"ability.message.only_in_air": "%s can only be used while airborne!",
+	"ability.message.survival_only": "Cannot use this ability in creative!",
 	"ability.mineminenomi.10000_kilo_press": "10,000 Kilo Press",
 	"ability.mineminenomi.1_kilo_press": "1 Kilo Press",
 	"ability.mineminenomi.abare_himatsuri": "Abare Himatsuri",

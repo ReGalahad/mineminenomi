@@ -3,8 +3,11 @@ package xyz.pixelatedw.mineminenomi.abilities.horo;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.play.server.SEntityVelocityPacket;
+import net.minecraft.util.text.TranslationTextComponent;
 import xyz.pixelatedw.mineminenomi.entities.PhysicalBodyEntity;
+import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
+import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.ContinuousAbility;
 
 public class YutaiRidatsuAbility extends ContinuousAbility
@@ -28,7 +31,10 @@ public class YutaiRidatsuAbility extends ContinuousAbility
 	private boolean onStartContinuityEvent(PlayerEntity player)
 	{
 		if(player.isCreative() || player.isSpectator())
+		{
+			WyHelper.sendMsgToPlayer(player, new TranslationTextComponent(ModI18n.ABILITY_MESSAGE_SUVIVAL_ONLY).getFormattedText());
 			return true;
+		}
 		
 		player.setMotion(0, 5, 0);
 		((ServerPlayerEntity)player).connection.sendPacket(new SEntityVelocityPacket(player));
