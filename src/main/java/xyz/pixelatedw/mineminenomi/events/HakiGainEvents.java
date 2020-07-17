@@ -227,7 +227,7 @@ public class HakiGainEvents
 		}
 	}
 
-	private static void giveHakiAbility(PlayerEntity player, Ability ability)
+	public static void giveHakiAbility(PlayerEntity player, Ability ability)
 	{
 		IAbilityData props = AbilityDataCapability.get(player);
 		if (!props.hasUnlockedAbility(ability) && !AbilityHelper.verifyIfAbilityIsBanned(ability))
