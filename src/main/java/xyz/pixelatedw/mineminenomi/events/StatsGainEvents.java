@@ -57,8 +57,17 @@ public class StatsGainEvents
 				{
 					GenericNewEntity entity = (GenericNewEntity) target;
 
-					if ((props.getDoriki() / 100) > entity.getDoriki() && CommonConfig.instance.isMinimumDorikiPerKillEnabled())
-						plusDoriki = 1;
+					System.out.println(props.getDoriki());
+					System.out.println((props.getDoriki() / 100));
+					System.out.println(entity.getDoriki());
+					System.out.println(CommonConfig.instance.isMinimumDorikiPerKillEnabled());
+					System.out.println((props.getDoriki() / 100) > entity.getDoriki());
+					
+					if ((props.getDoriki() / 100) > entity.getDoriki())
+					{
+						if(CommonConfig.instance.isMinimumDorikiPerKillEnabled())
+							plusDoriki = 1;						
+					}
 					else
 						plusDoriki = entity.getDoriki();
 
