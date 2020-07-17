@@ -9,6 +9,7 @@ import xyz.pixelatedw.mineminenomi.commands.AbilityCommand;
 import xyz.pixelatedw.mineminenomi.commands.AbilityProtectionCommand;
 import xyz.pixelatedw.mineminenomi.commands.BellyCommand;
 import xyz.pixelatedw.mineminenomi.commands.BountyCommand;
+import xyz.pixelatedw.mineminenomi.commands.CheckFruitsCommand;
 import xyz.pixelatedw.mineminenomi.commands.DorikiCommand;
 import xyz.pixelatedw.mineminenomi.commands.ExtolCommand;
 import xyz.pixelatedw.mineminenomi.commands.FGCommand;
@@ -39,6 +40,7 @@ public class ForgeSetup
 		AbilityCommand.register(dispatcher);
 		HakiExpCommand.register(dispatcher);
 		PouchCommand.register(dispatcher);
+		CheckFruitsCommand.register(dispatcher);
 		//DamageMultiplierCommand.register(dispatcher);
 		if(APIConfig.BUILD_MODE != BuildMode.FINAL)
 			FGCommand.register(dispatcher);

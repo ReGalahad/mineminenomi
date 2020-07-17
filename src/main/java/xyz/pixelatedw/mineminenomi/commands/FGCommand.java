@@ -1,5 +1,7 @@
 package xyz.pixelatedw.mineminenomi.commands;
 
+import java.util.Map;
+
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
@@ -43,7 +45,7 @@ public class FGCommand
 			.then(Commands.literal("check_haki")
 			.then(Commands.argument("target", EntityArgument.player())
 				.executes(context -> checkHakiStats(context, EntityArgument.getPlayer(context, "target")))));
-		
+
 		builder
 			.then(Commands.literal("check_crews")
 			.then(Commands.argument("target", EntityArgument.player())
@@ -114,12 +116,20 @@ public class FGCommand
 		
 		StringBuilder builder = new StringBuilder();
 		
+		builder.append("Devil Fruits in World\n");
 		builder.append(worldData.getDevilFruitsInWorld().size() + " ");
-		
 		for(String fruit : worldData.getDevilFruitsInWorld())
 		{
 			builder.append(fruit + " ");
 		}
+		builder.append("\n");
+		
+		builder.append("Devil Fruits Eaten by a Player\n");
+		for(Map.Entry<String, String> entry : worldData.getAteFruits().entrySet())
+		{
+			builder.append(entry.getKey() + " ; " + entry.getValue() + "\n");
+		}
+		
 		WyHelper.sendMsgToPlayer(target, builder.toString());
 
 		return 1;

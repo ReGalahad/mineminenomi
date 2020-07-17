@@ -120,13 +120,6 @@ public class DFUserDeathEvents
 					if (stackIndex != -1)
 						tryReplaceApple(original, worldData, inven, stackIndex, oldDevilFruit.getDevilFruit());
 				}
-				else
-				{
-					if(CommonConfig.instance.hasOneFruitPerWorldSimpleLogic())
-					{
-						worldData.removeDevilFruitInWorld(oldDevilFruit.getDevilFruit());
-					}
-				}
 			}
 		}
 	}

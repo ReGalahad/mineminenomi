@@ -11,6 +11,7 @@ import java.util.UUID;
 import javax.annotation.Nullable;
 
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.world.World;
@@ -33,6 +34,7 @@ public class ExtendedWorldData extends WorldSavedData
 	private List<String> devilFruitsInWorld = new ArrayList<String>();
 	private List<int[][]> protectedAreas = new ArrayList<int[][]>();
 	private HashMap<String, Crew> pirateCrews = new HashMap<String, Crew>();
+	private HashMap<String, String> ateDevilFruits = new HashMap<String, String>();
 
 	public static Map<World, ExtendedWorldData> loadedExtWorlds = new HashMap<>();
 	
@@ -126,6 +128,13 @@ public class ExtendedWorldData extends WorldSavedData
 			crew.read(crewNBT);
 			this.pirateCrews.put(WyHelper.getResourceName(crew.getName()), crew);
 		}	
+		
+		CompoundNBT ateDevilFruits = nbt.getCompound("ateDevilFruits");
+		this.ateDevilFruits.clear();
+		ateDevilFruits.keySet().stream().forEach(x ->
+		{
+			this.ateDevilFruits.put(x, ateDevilFruits.getString(x));
+		});
 	}
 
 	@Override
@@ -171,9 +180,42 @@ public class ExtendedWorldData extends WorldSavedData
 		}
 		nbt.put("crews", crews);
 		
+		CompoundNBT ateDevilFruits = new CompoundNBT();
+		if (this.ateDevilFruits.size() > 0)
+		{
+			this.ateDevilFruits.entrySet().stream().forEach(x ->
+			{
+				ateDevilFruits.putString(x.getKey(), x.getValue());
+			});
+		}
+		nbt.put("ateDevilFruits", ateDevilFruits);
+		
 		return nbt;
 	}
+	
+	public HashMap<String, String> getAteFruits()
+	{
+		return this.ateDevilFruits;
+	}
 
+	public void addAteDevilFruit(PlayerEntity player, AkumaNoMiItem df)
+	{
+		String key = DevilFruitHelper.getDevilFruitKey(df);
+		this.addAteDevilFruit(player, key);
+	}
+	
+	public void addAteDevilFruit(PlayerEntity player, String key)
+	{
+		this.ateDevilFruits.put(player.getDisplayName().getFormattedText(), key);
+		this.markDirty();
+	}
+	
+	public void removeAteDevilFruit(PlayerEntity player)
+	{
+		this.ateDevilFruits.remove(player.getDisplayName().getFormattedText());
+		this.markDirty();
+	}
+	
 	public List<Crew> getCrews()
 	{
 		return new ArrayList(this.pirateCrews.values());

@@ -88,7 +88,8 @@ public class AkumaNoMiItem extends Item
 		IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
 		IEntityStats entityStatsProps = EntityStatsCapability.get(player);
 		IAbilityData abilityDataProps = AbilityDataCapability.get(player);
-
+		ExtendedWorldData worldData = ExtendedWorldData.get(world);
+		
 		String eatenFruit = DevilFruitHelper.getDevilFruitKey(this);
 
 		boolean hasYami = DevilFruitHelper.hasDevilFruit(player, ModAbilities.YAMI_YAMI_NO_MI);
@@ -145,6 +146,8 @@ public class AkumaNoMiItem extends Item
 			}
 		}
 
+		if(CommonConfig.instance.hasOneFruitPerWorldSimpleLogic())
+			worldData.addAteDevilFruit(player, this);
 		itemStack.shrink(1);
 		return itemStack;
 	}

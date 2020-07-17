@@ -15,12 +15,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.item.ItemExpireEvent;
 import net.minecraftforge.event.entity.player.PlayerContainerEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitHelper;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
+import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
+import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
 import xyz.pixelatedw.mineminenomi.items.AkumaNoMiItem;
@@ -103,13 +106,37 @@ public class OneFruitPerWorldEvents
 			}
 		}
 	}
-	
+
 	@SubscribeEvent
 	public static void onRightClick(PlayerInteractEvent.EntityInteract event)
 	{
-		if(CommonConfig.instance.hasOneFruitPerWorldExtendedLogic() && event.getTarget() instanceof ItemFrameEntity && !event.getItemStack().isEmpty() && event.getItemStack().getItem() instanceof AkumaNoMiItem)
-		{		
+		if (CommonConfig.instance.hasOneFruitPerWorldExtendedLogic() && event.getTarget() instanceof ItemFrameEntity && !event.getItemStack().isEmpty() && event.getItemStack().getItem() instanceof AkumaNoMiItem)
+		{
 			event.setCanceled(true);
+		}
+	}
+
+	@SubscribeEvent
+	public static void onClonePlayer(PlayerEvent.Clone event)
+	{
+		if (CommonConfig.instance.getAfterDeathLogic() == CommonConfig.KeepStatsLogic.CUSTOM)
+		{
+			for (String stat : CommonConfig.instance.getStatsToKeep())
+			{
+				if (WyHelper.getResourceName(stat).equals("devil_fruit"))
+					return;
+			}
+		}
+		else if (CommonConfig.instance.getAfterDeathLogic() == CommonConfig.KeepStatsLogic.FULL)
+			return;
+
+		IDevilFruit oldDevilFruit = DevilFruitCapability.get(event.getOriginal());
+		ExtendedWorldData worldData = ExtendedWorldData.get(event.getOriginal().world);
+		
+		if(CommonConfig.instance.hasOneFruitPerWorldSimpleLogic())
+		{
+			worldData.removeAteDevilFruit(event.getOriginal());
+			worldData.removeDevilFruitInWorld(oldDevilFruit.getDevilFruit());
 		}
 	}
 }
