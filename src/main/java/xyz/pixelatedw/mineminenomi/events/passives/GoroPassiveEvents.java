@@ -2,6 +2,8 @@ package xyz.pixelatedw.mineminenomi.events.passives;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -44,12 +46,12 @@ public class GoroPassiveEvents {
         if (ability == null || !devilFruitProps.getDevilFruit().equals("goro_goro") || player.world.isRemote)
             return;
 
-		if (!ability.isOnCooldown() && !event.getSource().equals(DamageSource.OUT_OF_WORLD)) {
+		if (!ability.isOnCooldown()) {
 			if (player.getHealth() - event.getAmount() <= 0) {
 				event.setCanceled(true);
 				ability.startCooldown(player);
-				player.setHealth(player.getMaxHealth() / 10);
-				player.hurtTime = 300;
+				player.setHealth(player.getMaxHealth() / 5);
+			    player.addPotionEffect(new EffectInstance(Effects.RESISTANCE, 100, 2, false, false));
 			}
 		}
     }

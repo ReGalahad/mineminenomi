@@ -34,10 +34,12 @@ public class KenbunshokuHakiAuraAbility extends ContinuousAbility implements IHa
 		
 		return true;
 	}
-	
+
 	private void duringContinuity(PlayerEntity player, int passiveTimer)
 	{
-		HakiHelper.checkForHakiOveruse(player, passiveTimer);
+		boolean isOnMaxOveruse = HakiHelper.checkForHakiOveruse(player, passiveTimer);
+		if(isOnMaxOveruse)
+			this.stopContinuity(player);
 	}
 
 	private boolean onEndContinuityEvent(PlayerEntity player)

@@ -52,9 +52,8 @@ public class KenbunshokuHakiFutureSightAbility extends ContinuousAbility impleme
 	
 	private void duringContinuity(PlayerEntity player, int passiveTimer)
 	{
-		HakiHelper.checkForHakiOveruse(player, passiveTimer);
-
-		if(this.protection <= 0)
+		boolean isOnMaxOveruse = HakiHelper.checkForHakiOveruse(player, passiveTimer);
+		if(this.protection <= 0 || isOnMaxOveruse)
 			this.stopContinuity(player);
 	}
 	

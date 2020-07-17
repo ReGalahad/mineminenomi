@@ -31,13 +31,13 @@ public class IceAgeAbility extends ChargeableAbility
 	{
 		super("Ice Age", AbilityCategory.DEVIL_FRUIT);
 		this.setMaxCooldown(15);
-		this.setChargeTime(5);
+		this.setMaxChargeTime(5);
 		this.setDescription("Freezes a large area around the user and everyone inside of it.");
 
-		this.onUseEvent = this::onUseEvent;
+		this.onEndChargingEvent = this::endChargingEvent;
 	}
 
-	private boolean onUseEvent(PlayerEntity player)
+	private boolean endChargingEvent(PlayerEntity player)
 	{
 		for (int i = -15; i < 15; i++)
 		{

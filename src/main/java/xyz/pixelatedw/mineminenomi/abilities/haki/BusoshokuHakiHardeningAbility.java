@@ -47,7 +47,7 @@ public class BusoshokuHakiHardeningAbility extends PunchAbility implements IHaki
 		IEntityStats props = EntityStatsCapability.get(player);
 		IHakiData hakiProps = HakiDataCapability.get(player);
 
-		float dorikiPower = props.getDoriki() / 1000;
+		float dorikiPower = props.getDoriki() / 1000f;
 		float hakiPower = hakiProps.getBusoshokuHardeningHakiExp() / 5;
 		float finalPower = dorikiPower + hakiPower;
 		
@@ -56,7 +56,9 @@ public class BusoshokuHakiHardeningAbility extends PunchAbility implements IHaki
 	
 	private void duringContinuity(PlayerEntity player, int passiveTimer)
 	{
-		HakiHelper.checkForHakiOveruse(player, passiveTimer);
+		boolean isOnMaxOveruse = HakiHelper.checkForHakiOveruse(player, passiveTimer);
+		if(isOnMaxOveruse)
+			this.stopContinuity(player);
 	}
 
 	private boolean onEndContinuityEvent(PlayerEntity player)

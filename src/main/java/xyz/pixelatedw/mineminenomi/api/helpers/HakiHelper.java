@@ -57,22 +57,25 @@ public class HakiHelper
 		return props.getKenbunshokuHakiExp() + props.getBusoshokuHardeningHakiExp() + props.getBusoshokuImbuingHakiExp();
 	}
 	
-	public static void checkForHakiOveruse(PlayerEntity player, int passiveTimer)
+	public static boolean checkForHakiOveruse(PlayerEntity player, int passiveTimer)
 	{
 		IEntityStats props = EntityStatsCapability.get(player);
 		if (passiveTimer > 2400 + (props.getDoriki() / 15))
 		{
 			player.addPotionEffect(new EffectInstance(Effects.NAUSEA, 100, 0));
 			player.addPotionEffect(new EffectInstance(Effects.WEAKNESS, 100, 0));
-			
+
 			if(passiveTimer > 3600 + (props.getDoriki() / 15))
 			{
-				player.addPotionEffect(new EffectInstance(Effects.NAUSEA, 100, 5));
-				player.addPotionEffect(new EffectInstance(Effects.WEAKNESS, 100, 5));
-				player.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 100, 5));
-				player.addPotionEffect(new EffectInstance(Effects.BLINDNESS, 100, 5));
+				player.addPotionEffect(new EffectInstance(Effects.NAUSEA, 1000, 5));
+				player.addPotionEffect(new EffectInstance(Effects.WEAKNESS, 1000, 5));
+				player.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 1000, 5));
+				player.addPotionEffect(new EffectInstance(Effects.BLINDNESS, 1000, 5));
+				return true;
 			}
+
 		}
+		return false;
 	}
 	
 	public static enum HakiType
