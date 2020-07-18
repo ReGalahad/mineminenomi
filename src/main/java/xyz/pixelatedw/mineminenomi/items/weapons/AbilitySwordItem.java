@@ -17,7 +17,7 @@ public class AbilitySwordItem extends CoreSwordItem
 
 	public AbilitySwordItem(Ability ability, int damage)
 	{
-		super(new Properties().defaultMaxDamage(10), damage);
+		super(new Properties(), damage);
 		this.ability = ability;
 	}
 
