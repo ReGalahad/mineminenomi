@@ -194,6 +194,9 @@ public class HakiPassiveEvents
 			if (entity.getDistance(player) > 20 + finalPower)
 				return;
 	
+			if(entity.isInvisible())
+				entity.setInvisible(false);
+			
 			GlStateManager.pushMatrix();
 	
 			GlStateManager.disableLighting();

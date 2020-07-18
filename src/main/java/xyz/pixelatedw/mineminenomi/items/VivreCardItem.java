@@ -74,8 +74,6 @@ public class VivreCardItem extends Item
 	public void onCreated(ItemStack itemStack, World world, PlayerEntity player)
 	{
 		this.setOwner(itemStack, player);
-		String itemName = itemStack.getDisplayName().getFormattedText();
-		itemStack.setDisplayName(new StringTextComponent(TextFormatting.RESET + player.getDisplayName().getFormattedText() + "'s " + itemName));
 	}
 
 	public void setOwner(ItemStack itemStack, LivingEntity e)

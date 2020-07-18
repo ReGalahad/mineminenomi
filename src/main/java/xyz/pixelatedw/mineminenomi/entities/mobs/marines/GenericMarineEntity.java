@@ -1,6 +1,9 @@
 package xyz.pixelatedw.mineminenomi.entities.mobs.marines;
 
+import java.util.function.Predicate;
+
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.goal.HurtByTargetGoal;
@@ -16,6 +19,8 @@ import net.minecraft.item.Items;
 import net.minecraft.pathfinding.GroundPathNavigator;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
+import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.entities.mobs.GenericNewEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.bandits.GenericBanditEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.pirates.GenericPirateEntity;
@@ -25,6 +30,19 @@ public class GenericMarineEntity extends GenericNewEntity
 {
 	protected Item[] marineSwords = new Item[] { ModWeapons.MARINE_SWORD, Items.IRON_SWORD };
 
+	private static final Predicate<LivingEntity> NON_MARINE = (target) ->
+	{
+		if (target instanceof PlayerEntity)
+		{
+			IEntityStats props = EntityStatsCapability.get(target);
+			return !props.isMarine() && !props.isBountyHunter();
+		}
+		else
+		{
+			return target instanceof GenericPirateEntity || target instanceof GenericBanditEntity;
+		}
+	};
+	
 	protected GenericMarineEntity(EntityType<? extends MobEntity> type, World worldIn, String[] textures)
 	{
 		super(type, worldIn, textures);
@@ -42,9 +60,7 @@ public class GenericMarineEntity extends GenericNewEntity
 		this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
 
 		this.targetSelector.addGoal(0, new HurtByTargetGoal(this));
-		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, GenericPirateEntity.class, true));
-		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, GenericBanditEntity.class, true));
-		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
+		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal(this, LivingEntity.class, 10, true, true, NON_MARINE));
 	}
 
 	@Override

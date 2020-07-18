@@ -76,6 +76,12 @@ public class AmbushSpawner
 				int nrCaptains = 1 + (int) Math.ceil(bounty / 200000);
 				int nrGrunts = 3 + (int) Math.ceil(bounty / 100000);
 				
+				if(nrCaptains > 3)
+					nrCaptains = 3;
+				
+				if(nrGrunts > 30)
+					nrGrunts = 30;
+				
 				// Spawn Captains
 				for(int i = 0; i < nrCaptains; i++)
 				{

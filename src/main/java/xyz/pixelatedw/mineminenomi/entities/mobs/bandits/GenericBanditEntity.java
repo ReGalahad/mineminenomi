@@ -1,6 +1,9 @@
 package xyz.pixelatedw.mineminenomi.entities.mobs.bandits;
 
+import java.util.function.Predicate;
+
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.goal.HurtByTargetGoal;
@@ -23,9 +26,20 @@ import xyz.pixelatedw.mineminenomi.init.ModWeapons;
 
 public class GenericBanditEntity extends GenericNewEntity
 {
-
 	protected Item[] banditSwords = new Item[] { ModWeapons.BANDIT_KNIFE, ModWeapons.PIRATE_CUTLASS, Items.IRON_SWORD };
 
+	private static final Predicate<LivingEntity> NON_BANDIT = (target) ->
+	{
+		if (target instanceof PlayerEntity)
+		{
+			return true;
+		}
+		else
+		{
+			return target instanceof GenericMarineEntity || target instanceof GenericPirateEntity;
+		}
+	};
+	
 	protected GenericBanditEntity(EntityType<? extends MobEntity> type, World worldIn, String[] textures)
 	{
 		super(type, worldIn, textures);
@@ -43,9 +57,7 @@ public class GenericBanditEntity extends GenericNewEntity
 		this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
 
 		this.targetSelector.addGoal(0, new HurtByTargetGoal(this));
-		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, GenericPirateEntity.class, true));
-		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, GenericMarineEntity.class, true));
-		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
+		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal(this, LivingEntity.class, 10, true, true, NON_BANDIT));
 	}
 
 	@Override

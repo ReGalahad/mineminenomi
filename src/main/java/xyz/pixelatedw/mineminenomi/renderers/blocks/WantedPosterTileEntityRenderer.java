@@ -119,7 +119,7 @@ public class WantedPosterTileEntityRenderer extends TileEntityRenderer<WantedPos
 					Crew crew = worldData.getCrewWithMember(UUID.fromString(uuid));
 					if (crew != null)
 					{						
-						GL11.glTranslated(0, 0, -2.4);
+						GL11.glTranslated(0, 0, 0);
 						GlStateManager.pushMatrix();
 						{
 							GlStateManager.enableBlend();
@@ -133,7 +133,7 @@ public class WantedPosterTileEntityRenderer extends TileEntityRenderer<WantedPos
 
 							RendererHelper.drawPlayerJollyRoger(crew.getJollyRoger());
 
-							GlStateManager.disableBlend();
+							GlStateManager.disableBlend();					
 						}
 						GlStateManager.popMatrix();
 					}

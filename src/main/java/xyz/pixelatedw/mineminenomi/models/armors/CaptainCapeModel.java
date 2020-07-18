@@ -109,6 +109,8 @@ public class CaptainCapeModel extends BipedModel
 		GlStateManager.pushMatrix();
 		this.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 		
+		GlStateManager.translated(0, -0.05, 0.1);
+		
 		this.capeback.render(scale);
 		this.caperightsholder.render(scale);
 		this.capeleftcollar1.render(scale);

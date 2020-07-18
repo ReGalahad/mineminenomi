@@ -49,21 +49,6 @@ public class RendererHelper
 	public static void drawPlayerJollyRoger(JollyRoger jollyRoger)
 	{
 		// Jolly Roger draw with all the backgrounds and layers
-		// Drawing the base
-		if (jollyRoger.getBase() != null && jollyRoger.getBase().getTexture() != null)
-		{
-			if (jollyRoger.getBase().canBeColored())
-			{
-				Color color = WyHelper.hexToRGB(jollyRoger.getBase().getColor());
-				GlStateManager.color3f(color.getRed() / 255.0F, color.getGreen() / 255.0F, color.getBlue() / 255.0F);
-			}
-			else
-			{
-				GlStateManager.color3f(1.0F, 1.0F, 1.0F);
-			}
-			Minecraft.getInstance().getTextureManager().bindTexture(jollyRoger.getBase().getTexture());
-			GuiUtils.drawTexturedModalRect(0, 0, 0, 0, 256, 256, 8);
-		}
 
 		// Drawing the backgrounds
 		for (JollyRogerElement element : jollyRoger.getBackgrounds())
@@ -83,13 +68,29 @@ public class RendererHelper
 				Minecraft.getInstance().getTextureManager().bindTexture(element.getTexture());
 				GuiUtils.drawTexturedModalRect(0, 0, 0, 0, 256, 256, i);
 			}
-			i++;
+			i--;
+		}
+		
+		// Drawing the base
+		if (jollyRoger.getBase() != null && jollyRoger.getBase().getTexture() != null)
+		{
+			if (jollyRoger.getBase().canBeColored())
+			{
+				Color color = WyHelper.hexToRGB(jollyRoger.getBase().getColor());
+				GlStateManager.color3f(color.getRed() / 255.0F, color.getGreen() / 255.0F, color.getBlue() / 255.0F);
+			}
+			else
+			{
+				GlStateManager.color3f(1.0F, 1.0F, 1.0F);
+			}
+			Minecraft.getInstance().getTextureManager().bindTexture(jollyRoger.getBase().getTexture());
+			GuiUtils.drawTexturedModalRect(0, 0, 0, 0, 256, 256, 0);
 		}
 		
 		// Drawing the details
 		for (JollyRogerElement element : jollyRoger.getDetails())
 		{
-			int i = 8;
+			int i = 0;
 			if (element != null && element.getTexture() != null)
 			{
 				if (element.canBeColored())
@@ -104,7 +105,9 @@ public class RendererHelper
 				Minecraft.getInstance().getTextureManager().bindTexture(element.getTexture());
 				GuiUtils.drawTexturedModalRect(0, 0, 0, 0, 256, 256, i);
 			}
-			i--;
+			i++;
 		}
+		
+		GlStateManager.color4f(1, 1, 1, 1);
 	}
 }

@@ -19,7 +19,7 @@ public class GeppoAbility extends Ability
 	public GeppoAbility()
 	{
 		super("Geppo", AbilityCategory.RACIAL);
-		this.setMaxCooldown(2);
+		this.setMaxCooldown(1);
 		this.setDescription("The user kicks the air beneath them to launch themselves into the air.");
 
 		this.onUseEvent = this::onUseEvent;
@@ -60,7 +60,7 @@ public class GeppoAbility extends Ability
 			this.startCooldown(player);
 			return true;
 		} else {
-			this.setMaxCooldown(2);
+			this.setMaxCooldown(1);
 		}
 		
 		return true;
