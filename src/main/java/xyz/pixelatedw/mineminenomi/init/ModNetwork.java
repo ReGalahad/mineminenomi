@@ -25,6 +25,7 @@ import xyz.pixelatedw.mineminenomi.packets.server.SOpenWantedPosterScreenPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SRecalculateEyeHeightPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SSyncDevilFruitPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SSyncEntityStatsPacket;
+import xyz.pixelatedw.mineminenomi.packets.server.SSyncHakiDataPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SSyncWorldDataPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SUpdateTraderOffersPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SViewProtectionPacket;
@@ -72,6 +73,6 @@ public class ModNetwork
 		WyNetwork.registerPacket(SOpenQuestChooseScreenPacket.class, SOpenQuestChooseScreenPacket::encode, SOpenQuestChooseScreenPacket::decode, SOpenQuestChooseScreenPacket::handle);
 		WyNetwork.registerPacket(SOpenNewCrewScreenPacket.class, SOpenNewCrewScreenPacket::encode, SOpenNewCrewScreenPacket::decode, SOpenNewCrewScreenPacket::handle);
 		WyNetwork.registerPacket(SSyncWorldDataPacket.class, SSyncWorldDataPacket::encode, SSyncWorldDataPacket::decode, SSyncWorldDataPacket::handle);
-
+		WyNetwork.registerPacket(SSyncHakiDataPacket.class, SSyncHakiDataPacket::encode, SSyncHakiDataPacket::decode, SSyncHakiDataPacket::handle);
 	}
 }

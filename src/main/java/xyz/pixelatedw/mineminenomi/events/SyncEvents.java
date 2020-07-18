@@ -15,9 +15,12 @@ import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
+import xyz.pixelatedw.mineminenomi.data.entity.haki.HakiDataCapability;
+import xyz.pixelatedw.mineminenomi.data.entity.haki.IHakiData;
 import xyz.pixelatedw.mineminenomi.events.custom.DorikiEvent;
 import xyz.pixelatedw.mineminenomi.packets.server.SRecalculateEyeHeightPacket;
 import xyz.pixelatedw.mineminenomi.packets.server.SSyncDevilFruitPacket;
+import xyz.pixelatedw.mineminenomi.packets.server.SSyncHakiDataPacket;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
@@ -82,9 +85,11 @@ public class SyncEvents
 
 			IDevilFruit devilFruitProps = DevilFruitCapability.get(targetPlayer);
 			IAbilityData abilityDataProps = AbilityDataCapability.get(targetPlayer);
+			IHakiData hakiDataProps = HakiDataCapability.get(targetPlayer);
 
 			WyNetwork.sendToAllTracking(new SSyncDevilFruitPacket(targetPlayer.getEntityId(), devilFruitProps), targetPlayer);
 			WyNetwork.sendToAllTracking(new SSyncAbilityDataPacket(targetPlayer.getEntityId(), abilityDataProps), targetPlayer);
+			WyNetwork.sendToAllTracking(new SSyncHakiDataPacket(targetPlayer.getEntityId(), hakiDataProps), targetPlayer);
 		}
 	}
 }

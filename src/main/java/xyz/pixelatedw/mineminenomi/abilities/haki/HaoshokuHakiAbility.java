@@ -9,6 +9,8 @@ import net.minecraft.network.play.server.SPlayEntityEffectPacket;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import xyz.pixelatedw.mineminenomi.api.helpers.HakiHelper;
+import xyz.pixelatedw.mineminenomi.entities.mobs.GenericNewEntity;
+import xyz.pixelatedw.mineminenomi.entities.mobs.ai.abilities.haki.BusoshokuHakiGoal;
 import xyz.pixelatedw.mineminenomi.init.ModEffects;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.haki.HaoshokuHakiParticleEffect;
@@ -68,6 +70,22 @@ public class HaoshokuHakiAbility extends ChargeableAbility
 		{
 			if(unconsciousTimer > 0)
 			{
+				float targetHaoLevel = 0;
+				if(target instanceof PlayerEntity)
+				{
+					targetHaoLevel = HakiHelper.getTotalHakiExp((PlayerEntity) target) / 100;
+				}
+				else if(target instanceof GenericNewEntity)
+				{
+					float busoHaki = ((GenericNewEntity) target).goalSelector.getRunningGoals().anyMatch(goal -> goal.getGoal() instanceof BusoshokuHakiGoal) ? 1 : 0;
+					float dorikiConversion = ((GenericNewEntity) target).getDoriki() / 100;
+					
+					targetHaoLevel = busoHaki + dorikiConversion;
+				}
+				
+				if(targetHaoLevel + 0.3 >= haoLevel)
+					continue;
+					
 				EffectInstance instance = new EffectInstance(ModEffects.UNCONSCIOUS, unconsciousTimer, 1, false, false);
 				target.addPotionEffect(new EffectInstance(ModEffects.ABILITY_OFF, unconsciousTimer - 20, 0, false, false));
 				target.addPotionEffect(instance);
