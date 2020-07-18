@@ -42,7 +42,8 @@ public class PhysicalBodyEntity extends CreatureEntity
 		if(owner == null)
 			return false;
 		
-		owner.attackEntityFrom(DamageSource.MAGIC, 2);
+		owner.attackEntityFrom(DamageSource.MAGIC, amount);
+		this.setHealth(owner.getHealth());
 		
 		return super.attackEntityFrom(source, amount);
 	}
@@ -75,7 +76,7 @@ public class PhysicalBodyEntity extends CreatureEntity
 	protected void registerAttributes()
 	{
 		super.registerAttributes();
-		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40.0D);
+		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
 		this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
 	}
 

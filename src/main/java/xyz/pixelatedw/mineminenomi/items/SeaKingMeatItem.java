@@ -2,7 +2,6 @@ package xyz.pixelatedw.mineminenomi.items;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Foods;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
@@ -12,13 +11,13 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
+import xyz.pixelatedw.mineminenomi.init.ModFoods;
 
 public class SeaKingMeatItem extends Item
 {
-
 	public SeaKingMeatItem()
 	{
-		super(new Properties().group(ModCreativeTabs.MISC).food(Foods.COOKED_BEEF));
+		super(new Properties().group(ModCreativeTabs.MISC).food(ModFoods.SEA_KING_MEAT));
 	}
 
 	@Override
@@ -36,7 +35,8 @@ public class SeaKingMeatItem extends Item
 			PlayerEntity player = (PlayerEntity) entity;
 			player.addPotionEffect(new EffectInstance(Effects.REGENERATION, 100, 0));
 			
-			player.heal(player.getMaxHealth() / 3.0F);
+			player.heal(player.getMaxHealth() / 5.0F);
+			player.getFoodStats().consume(this, itemStack);
 		}
 		
 		itemStack.shrink(1);

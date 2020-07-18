@@ -408,8 +408,18 @@ public class CommonConfig
 
 	public String[] getStatsToKeep()
 	{
+		List<String> stats = new ArrayList<String>();
+		
+		for(Map.Entry<String, BooleanValue> entry : this.statsToKeep.entrySet())
+		{
+			if(entry.getValue().get())
+			{
+				stats.add(entry.getKey());
+			}
+		}
+		
 		String[] newArray = new String[] {};
-		return this.statsToKeep.keySet().toArray(newArray);
+		return stats.toArray(newArray);
 	}
 
 	public int getTimeBetweenPackages()

@@ -34,10 +34,15 @@ public class SparkStepAbility extends Ability
 			double y = mop.getHitVec().y;
 			double z = mop.getHitVec().z;
 			
+			// Distance in blocks
+			double distance = Math.sqrt(player.getDistanceSq(x, y, z));		
+			if(distance > 150)
+				return false;
+
 			if (player.getRidingEntity() != null)
 				player.dismountEntity(player.getRidingEntity());
 			
-			EnderTeleportEvent event = new EnderTeleportEvent(player, x, y, z, 5.0F);
+			EnderTeleportEvent event = new EnderTeleportEvent(player, x, y, z, 0.0F);
 			PARTICLES.spawn(player.world, player.posX, player.posY, player.posZ, 0, 0, 0);
 			player.setPositionAndUpdate(event.getTargetX(), event.getTargetY() + 1, event.getTargetZ());
 			PARTICLES.spawn(player.world, player.posX, player.posY, player.posZ, 0, 0, 0);

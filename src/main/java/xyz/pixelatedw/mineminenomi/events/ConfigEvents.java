@@ -4,6 +4,7 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.network.play.server.SPlayerAbilitiesPacket;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -15,6 +16,7 @@ import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.data.entity.haki.HakiDataCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.haki.IHakiData;
+import xyz.pixelatedw.mineminenomi.events.custom.DorikiEvent;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
@@ -43,7 +45,9 @@ public class ConfigEvents
 				nbt = EntityStatsCapability.INSTANCE.writeNBT(oldEntityStats, null);
 				IEntityStats newEntityStats = EntityStatsCapability.get(event.getPlayer());
 				EntityStatsCapability.INSTANCE.readNBT(newEntityStats, null, nbt);
-
+				DorikiEvent e = new DorikiEvent(event.getPlayer());
+				MinecraftForge.EVENT_BUS.post(e);
+				
 				// Keep the DF stats
 				oldPlayerProps.setZoanPoint("");
 				nbt = DevilFruitCapability.INSTANCE.writeNBT(oldPlayerProps, null);
@@ -105,6 +109,8 @@ public class ConfigEvents
 					{
 						case "doriki":
 							newEntityStats.setDoriki(oldEntityStats.getDoriki());
+							DorikiEvent e = new DorikiEvent(event.getPlayer());
+							MinecraftForge.EVENT_BUS.post(e);
 							break;
 						case "bounty":
 							newEntityStats.setBounty(oldEntityStats.getBounty());
@@ -135,7 +141,7 @@ public class ConfigEvents
 				}
 			}
 
-			// Quest and Jolly Roger data are persisted no matter the config option.
+			// Quest data is persisted no matter the config option.
 			// Keep the quests data
 			IQuestData oldQuestData = QuestDataCapability.get(event.getOriginal());
 			nbt = QuestDataCapability.INSTANCE.writeNBT(oldQuestData, null);

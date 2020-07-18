@@ -40,6 +40,7 @@ public class SyncEvents
 				maxHpAttribute.setBaseValue(event.props.getDoriki() / 100);
 			
 			((ServerPlayerEntity) event.player).connection.sendPacket(new SUpdateHealthPacket(event.player.getHealth(), event.player.getFoodStats().getFoodLevel(), event.player.getFoodStats().getSaturationLevel()));
+			System.out.println("@@@@@@2");
 		}
 	}
 

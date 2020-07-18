@@ -33,7 +33,7 @@ public class YomiNoReikiAbility extends ContinuousAbility
 		if(player.isCreative() || player.isSpectator())
 		{
 			WyHelper.sendMsgToPlayer(player, new TranslationTextComponent(ModI18n.ABILITY_MESSAGE_SUVIVAL_ONLY).getFormattedText());
-			return true;
+			return false;
 		}
 		
 		player.setMotion(0, 5, 0);

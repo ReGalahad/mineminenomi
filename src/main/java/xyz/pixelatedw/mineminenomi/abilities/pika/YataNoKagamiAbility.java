@@ -34,6 +34,11 @@ public class YataNoKagamiAbility extends Ability
 			double y = mop.getHitVec().y;
 			double z = mop.getHitVec().z;
 			
+			// Distance in blocks
+			double distance = Math.sqrt(player.getDistanceSq(x, y, z));		
+			if(distance > 150)
+				return false;
+			
 			if (player.getRidingEntity() != null)
 				player.dismountEntity(player.getRidingEntity());
 			

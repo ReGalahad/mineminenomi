@@ -35,12 +35,16 @@ public class DFUserDeathEvents
 	@SubscribeEvent
 	public static void onClonePlayer(PlayerEvent.Clone event)
 	{
-		if (CommonConfig.instance.getAfterDeathLogic() == CommonConfig.KeepStatsLogic.CUSTOM) {
-			for (String stat : CommonConfig.instance.getStatsToKeep()) {
+		if (CommonConfig.instance.getAfterDeathLogic() == CommonConfig.KeepStatsLogic.CUSTOM)
+		{
+			for (String stat : CommonConfig.instance.getStatsToKeep())
+			{
 				if (WyHelper.getResourceName(stat).equals("devil_fruit"))
 					return;
 			}
-		} else if (CommonConfig.instance.getAfterDeathLogic() == CommonConfig.KeepStatsLogic.FULL) return;
+		}
+		else if (CommonConfig.instance.getAfterDeathLogic() == CommonConfig.KeepStatsLogic.FULL)
+			return;
 
 		if (event.isWasDeath())
 		{

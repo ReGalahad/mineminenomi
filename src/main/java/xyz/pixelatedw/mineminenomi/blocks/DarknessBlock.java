@@ -4,8 +4,6 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.material.MaterialColor;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.state.BooleanProperty;
@@ -20,17 +18,17 @@ import net.minecraft.world.TickPriority;
 import net.minecraft.world.World;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
+import xyz.pixelatedw.mineminenomi.init.ModMaterials;
 
 public class DarknessBlock extends Block
 {
 	private static final VoxelShape FULL_AABB = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
 	private static final VoxelShape EMPTY_AABB = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D);
 	private static final BooleanProperty USER_ON_TOP = BooleanProperty.create("user_on_top");
-	private static final Material DARKNESS_MATERIAL = (new Material.Builder(MaterialColor.BLACK)).build();
 	
 	public DarknessBlock()
 	{
-		super(Block.Properties.create(DARKNESS_MATERIAL).doesNotBlockMovement().hardnessAndResistance(-1.0F, 3600000.0F).noDrops());
+		super(Block.Properties.create(ModMaterials.DARKNESS_MATERIAL).doesNotBlockMovement().hardnessAndResistance(-1.0F, 3600000.0F).noDrops());
 		this.setDefaultState(this.stateContainer.getBaseState().with(USER_ON_TOP, Boolean.valueOf(false)));
 	}
 

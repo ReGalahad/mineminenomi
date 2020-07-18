@@ -33,7 +33,7 @@ public class YutaiRidatsuAbility extends ContinuousAbility
 		if(player.isCreative() || player.isSpectator())
 		{
 			WyHelper.sendMsgToPlayer(player, new TranslationTextComponent(ModI18n.ABILITY_MESSAGE_SUVIVAL_ONLY).getFormattedText());
-			return true;
+			return false;
 		}
 		
 		player.setMotion(0, 5, 0);
@@ -48,6 +48,7 @@ public class YutaiRidatsuAbility extends ContinuousAbility
 		this.body.setPositionAndRotation(player.posX, player.posY, player.posZ, player.rotationYaw, player.rotationPitch);
 		this.body.setOwner(player.getUniqueID());
 		player.world.addEntity(this.body);
+		this.body.setHealth(player.getHealth());
 		
 		return true;
 	}
