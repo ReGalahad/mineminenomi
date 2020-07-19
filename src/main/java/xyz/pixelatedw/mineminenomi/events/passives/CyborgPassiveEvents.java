@@ -1,6 +1,7 @@
 package xyz.pixelatedw.mineminenomi.events.passives;
 
-import com.mojang.blaze3d.platform.GlStateManager;
+import java.awt.Color;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.api.distmarker.Dist;
@@ -16,8 +17,6 @@ import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
 
-import java.awt.Color;
-
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class CyborgPassiveEvents
 {
@@ -29,9 +28,9 @@ public class CyborgPassiveEvents
 		PlayerEntity player = mc.player;
 		IEntityStats entityStatsProps = EntityStatsCapability.get(player);
 
-		if (!entityStatsProps.isCyborg())
+		if (!entityStatsProps.isCyborg() || !entityStatsProps.isInCombatMode())
 			return;
-				
+			
 		int posX = mc.mainWindow.getScaledWidth();
 		int posY = mc.mainWindow.getScaledHeight();
 
@@ -39,7 +38,7 @@ public class CyborgPassiveEvents
 		{
 			mc.getTextureManager().bindTexture(ModResources.WIDGETS);
 			
-			GlStateManager.enableBlend();
+			//GlStateManager.enableBlend();
 			
 			GuiUtils.drawTexturedModalRect((posX - 260) / 2, posY - 42, 0, 52, 23, 40, 0);
 			int barHeight = (int) (((float) entityStatsProps.getCola() / entityStatsProps.getMaxCola()) * 30) + 23;
@@ -53,7 +52,7 @@ public class CyborgPassiveEvents
 			String cola = entityStatsProps.getCola() + "";
 			WyHelper.drawStringWithBorder(Minecraft.getInstance().fontRenderer, cola, ((posX - 235) / 2) - mc.fontRenderer.getStringWidth(cola) / 2, posY - 12, Color.WHITE.getRGB());
 			
-			GlStateManager.disableBlend();
+			//GlStateManager.disableBlend();
 		}
 	}
 	

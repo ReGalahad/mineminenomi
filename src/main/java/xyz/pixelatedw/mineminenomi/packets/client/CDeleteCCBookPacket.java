@@ -8,6 +8,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
+import xyz.pixelatedw.mineminenomi.abilities.cyborg.ColaOverdriveAbility;
+import xyz.pixelatedw.mineminenomi.abilities.cyborg.CoupDeVentAbility;
+import xyz.pixelatedw.mineminenomi.abilities.cyborg.FreshFireAbility;
+import xyz.pixelatedw.mineminenomi.abilities.cyborg.RadicalBeamAbility;
+import xyz.pixelatedw.mineminenomi.abilities.cyborg.StrongRightAbility;
+import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.items.CharacterCreatorItem;
@@ -47,39 +53,19 @@ public class CDeleteCCBookPacket
 				abilityProps.clearEquippedAbilities(AbilityCategory.RACIAL);
 				abilityProps.clearUnlockedAbilities(AbilityCategory.RACIAL);
 				
-				/*if(entityProps.isCyborg())
+				if(entityProps.isCyborg())
 				{										
-					abilityProps.addAbility(CyborgAbilities.FRESH_FIRE);
-					abilityProps.addAbility(CyborgAbilities.COLA_OVERDRIVE);
-					abilityProps.addAbility(CyborgAbilities.RADICAL_BEAM);
-					abilityProps.addAbility(CyborgAbilities.STRONG_RIGHT);
-					abilityProps.addAbility(CyborgAbilities.COUP_DE_VENT);
+					abilityProps.addUnlockedAbility(FreshFireAbility.INSTANCE);
+					abilityProps.addUnlockedAbility(ColaOverdriveAbility.INSTANCE);
+					abilityProps.addUnlockedAbility(RadicalBeamAbility.INSTANCE);
+					abilityProps.addUnlockedAbility(StrongRightAbility.INSTANCE);
+					abilityProps.addUnlockedAbility(CoupDeVentAbility.INSTANCE);
+					
+					AbilityHelper.validateRacialMoves(player);
 					
 					entityProps.setMaxCola(100);
 					entityProps.setCola(entityProps.getMaxCola());
 				}
-				
-				if(entityProps.isSwordsman())
-				{
-					abilityProps.addAbility(SwordsmanAbilities.SHI_SHISHI_SONSON);
-					if(!CommonConfig.instance.isQuestProgressionEnabled())
-					{
-						abilityProps.addAbility(SwordsmanAbilities.SANBYAKUROKUJU_POUND_HO);
-						abilityProps.addAbility(SwordsmanAbilities.YAKKODORI);
-						abilityProps.addAbility(SwordsmanAbilities.O_TATSUMAKI);
-					}
-				}
-	
-				if(entityProps.isSniper())		
-				{
-					abilityProps.addAbility(SniperAbilities.KAENBOSHI);
-					if(!CommonConfig.instance.isQuestProgressionEnabled())
-					{
-						abilityProps.addAbility(SniperAbilities.KEMURIBOSHI);
-						abilityProps.addAbility(SniperAbilities.RENPATSUNAMARIBOSHI);
-						abilityProps.addAbility(SniperAbilities.SAKURETSUSABOTENBOSHI);
-					}
-				}*/
 				
 				for(ItemStack is : player.inventory.mainInventory)
 					if(is != null && is.getItem() instanceof CharacterCreatorItem)

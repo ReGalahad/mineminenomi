@@ -90,7 +90,6 @@ public class CombatModeEvents
 
 			boolean hasNumberVisual = visuals[0]; // For Text
 			boolean hasColorVisual = visuals[1]; // For Color
-			//System.out.println(Arrays.toString(visuals.toArray()));
 			
 			event.setCanceled(true);
 			GlStateManager.pushMatrix();	

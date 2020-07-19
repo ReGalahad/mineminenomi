@@ -103,17 +103,17 @@ public class ModEntities
 	{
 		// Marines
 		registerMarineWithSpawnEgg(MARINE_WITH_SWORD, "Marine with Sword");
-		registerEntityWorldSpawn(MARINE_WITH_SWORD, 10, 2, 5, MARINE_BIOMES);
+		registerEntityWorldSpawn(MARINE_WITH_SWORD, 10, 2, 3, MARINE_BIOMES);
 		registerMarineWithSpawnEgg(MARINE_WITH_GUN, "Marine with Gun");
-		registerEntityWorldSpawn(MARINE_WITH_GUN, 8, 2, 5, MARINE_BIOMES);
+		registerEntityWorldSpawn(MARINE_WITH_GUN, 5, 2, 3, MARINE_BIOMES);
 		registerMarineWithSpawnEgg(MARINE_CAPTAIN, "Marine Captain");
 		registerMarineWithSpawnEgg(MARINE_TRADER, "Marine Trader");
 
 		// Pirates
 		registerPirateWithSpawnEgg(PIRATE_WITH_SWORD, "Pirate with Sword");
-		registerEntityWorldSpawn(PIRATE_WITH_SWORD, 10, 2, 5, PIRATE_BIOMES);
+		registerEntityWorldSpawn(PIRATE_WITH_SWORD, 10, 2, 3, PIRATE_BIOMES);
 		registerPirateWithSpawnEgg(PIRATE_WITH_GUN, "Pirate with Gun");
-		registerEntityWorldSpawn(PIRATE_WITH_GUN, 8, 2, 5, PIRATE_BIOMES);
+		registerEntityWorldSpawn(PIRATE_WITH_GUN, 5, 2, 3, PIRATE_BIOMES);
 		registerPirateWithSpawnEgg(PIRATE_CAPTAIN, "Pirate Captain");
 		registerPirateWithSpawnEgg(PIRATE_TRADER, "Pirate Trader");
 		registerPirateWithSpawnEgg(PIRATE_BRUTE, "Pirate Brute");
