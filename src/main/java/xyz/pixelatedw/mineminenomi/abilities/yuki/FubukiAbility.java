@@ -9,6 +9,7 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
+import xyz.pixelatedw.mineminenomi.api.helpers.CrewHelper;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.yuki.FubukiParticleEffect;
@@ -49,7 +50,7 @@ public class FubukiAbility extends Ability
 			});
 		}
 		
-		List<LivingEntity> targets = WyHelper.<LivingEntity>getEntitiesNear(player.getPosition(), player.world, 25);
+		List<LivingEntity> targets = WyHelper.<LivingEntity>getEntitiesNear(player.getPosition(), player.world, 25, CrewHelper.NOT_IN_CREW_PREDICATE, LivingEntity.class);
 		targets.remove(player);
 		
 		for (LivingEntity entity : targets)

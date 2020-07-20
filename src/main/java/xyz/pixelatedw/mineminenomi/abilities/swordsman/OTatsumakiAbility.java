@@ -10,6 +10,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.text.TranslationTextComponent;
 import xyz.pixelatedw.mineminenomi.abilities.haki.BusoshokuHakiImbuingAbility;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.CrewHelper;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.swordsman.OTatsumakiParticleEffect;
@@ -53,7 +54,7 @@ public class OTatsumakiAbility extends Ability
 			});
 		}
 		
-		List<LivingEntity> list = WyHelper.getEntitiesNear(player.getPosition(), player.world, 2.5);
+		List<LivingEntity> list = WyHelper.getEntitiesNear(player.getPosition(), player.world, 2.5, CrewHelper.NOT_IN_CREW_PREDICATE, LivingEntity.class);
 		list.remove(player);
 
 		list.stream().forEach(entity ->

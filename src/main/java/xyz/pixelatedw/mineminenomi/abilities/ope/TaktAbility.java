@@ -6,6 +6,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.text.TranslationTextComponent;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.CrewHelper;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
@@ -46,7 +47,7 @@ public class TaktAbility extends ContinuousAbility
 			return;
 		}
 		
-		List<LivingEntity> list = WyHelper.getEntitiesNear(player.getPosition(), player.world, 40);
+		List<LivingEntity> list = WyHelper.getEntitiesNear(player.getPosition(), player.world, 40, CrewHelper.NOT_IN_CREW_PREDICATE, LivingEntity.class);
 		list.remove(player);
 		list.removeIf(entity -> !AbilityHelper.isEntityInRoom(entity));
 		

@@ -8,6 +8,7 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.play.server.SEntityVelocityPacket;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.common.MinecraftForge;
+import xyz.pixelatedw.mineminenomi.api.helpers.CrewHelper;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.mera.HeatDashParticleEffect;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
@@ -47,7 +48,7 @@ public class HeatDashAbility extends Ability
 		{
 			if(cooldownTimer % 2 == 0)
 				PARTICLES.spawn(player.world, player.posX, player.posY, player.posZ, 0, 0, 0);
-			List<LivingEntity> list = WyHelper.getEntitiesNear(player.getPosition(), player.world, 1.4);
+			List<LivingEntity> list = WyHelper.getEntitiesNear(player.getPosition(), player.world, 1.4, CrewHelper.NOT_IN_CREW_PREDICATE, LivingEntity.class);
 			list.remove(player);
 			for (LivingEntity target : list)
 			{

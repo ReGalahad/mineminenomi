@@ -9,6 +9,7 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.play.server.SPlayEntityEffectPacket;
 import net.minecraft.potion.EffectInstance;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.CrewHelper;
 import xyz.pixelatedw.mineminenomi.api.protection.BlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.api.protection.block.CoreBlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.api.protection.block.FoliageBlockProtectionRule;
@@ -54,7 +55,7 @@ public class IceAgeAbility extends ChargeableAbility
 			}
 		}
 
-		List<LivingEntity> list = WyHelper.getEntitiesNear(player.getPosition(), player.world, 15);
+		List<LivingEntity> list = WyHelper.getEntitiesNear(player.getPosition(), player.world, 15, CrewHelper.NOT_IN_CREW_PREDICATE, LivingEntity.class);
 		list.remove(player);
 
 		for (LivingEntity target : list)

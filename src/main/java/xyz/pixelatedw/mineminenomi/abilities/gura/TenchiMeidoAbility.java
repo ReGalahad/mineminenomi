@@ -6,6 +6,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
+import xyz.pixelatedw.mineminenomi.api.helpers.CrewHelper;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.gura.TenchiMeidoParticleEffect;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
@@ -41,7 +42,7 @@ public class TenchiMeidoAbility extends ChargeableAbility
 	
 	private boolean onEndChargingEvent(PlayerEntity player)
 	{
-		List<LivingEntity> targets = WyHelper.<LivingEntity>getEntitiesNear(player.getPosition(), player.world, 20);
+		List<LivingEntity> targets = WyHelper.<LivingEntity>getEntitiesNear(player.getPosition(), player.world, 20, CrewHelper.NOT_IN_CREW_PREDICATE, LivingEntity.class);
 		targets.removeIf(entity -> !entity.onGround);
 		targets.remove(player);
 		

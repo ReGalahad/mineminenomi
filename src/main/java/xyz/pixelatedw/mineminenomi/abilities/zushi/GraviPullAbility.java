@@ -3,8 +3,10 @@ package xyz.pixelatedw.mineminenomi.abilities.zushi;
 import java.util.List;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.server.ServerWorld;
+import xyz.pixelatedw.mineminenomi.api.helpers.CrewHelper;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.data.GenericParticleData;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
@@ -53,7 +55,7 @@ public class GraviPullAbility extends ChargeableAbility{
 			WyHelper.spawnParticles(data, (ServerWorld) p.world, p.posX + offsetX, p.posY + 1, p.posZ + offsetZ);
 		}
 
-		List<Entity> list = WyHelper.getEntitiesNear(p.getPosition(), p.world, 20);
+		List<Entity> list = WyHelper.getEntitiesNear(p.getPosition(), p.world, 20, CrewHelper.NOT_IN_CREW_PREDICATE, LivingEntity.class);
 		list.forEach(e -> {
 			double offsetX = p.posX - e.posX;
 			double offsetZ = p.posZ - e.posZ;

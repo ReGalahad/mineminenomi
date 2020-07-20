@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.text.TranslationTextComponent;
+import xyz.pixelatedw.mineminenomi.api.helpers.CrewHelper;
 import xyz.pixelatedw.mineminenomi.init.ModArmors;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
@@ -45,7 +46,7 @@ public class MedicBagExplosionAbility extends Ability
 		
 		player.heal(player.getMaxHealth());
 
-		List<LivingEntity> targets = WyHelper.<LivingEntity>getEntitiesNear(player.getPosition(), player.world, 10);
+		List<LivingEntity> targets = WyHelper.<LivingEntity>getEntitiesNear(player.getPosition(), player.world, 10, CrewHelper.NOT_IN_CREW_PREDICATE, LivingEntity.class);
 		targets.remove(player);
 		for(LivingEntity entity : targets)
 		{

@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
+import java.util.function.Predicate;
 
 import javax.annotation.Nullable;
 
@@ -49,6 +50,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.IPacket;
 import net.minecraft.network.play.server.SSpawnParticlePacket;
 import net.minecraft.particles.IParticleData;
+import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.ResourceLocationException;
@@ -250,11 +252,19 @@ public class WyHelper
 
 	public static <T extends Entity> List<T> getEntitiesNear(BlockPos pos, World world, double radius, Class<? extends T>... classEntities)
 	{
+		return getEntitiesNear(pos, world, radius, null, classEntities);
+	}
+	
+	public static <T extends Entity> List<T> getEntitiesNear(BlockPos pos, World world, double radius, Predicate<Entity> predicate, Class<? extends T>... classEntities)
+	{
+		if(predicate == null)
+			predicate = EntityPredicates.NOT_SPECTATING;
+		
 		AxisAlignedBB aabb = new AxisAlignedBB(pos.add(1, 1, 1)).grow(radius, radius, radius);
 		List<T> list = new ArrayList<T>();
 		for (Class<? extends T> clzz : classEntities)
 		{
-			list.addAll(world.getEntitiesWithinAABB(clzz, aabb));
+			list.addAll(world.getEntitiesWithinAABB(clzz, aabb, predicate));
 		}
 		return list;
 	}

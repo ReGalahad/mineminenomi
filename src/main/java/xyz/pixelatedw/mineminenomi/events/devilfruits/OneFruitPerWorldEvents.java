@@ -5,17 +5,21 @@ import java.util.List;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.item.ItemFrameEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.PlayerContainer;
+import net.minecraft.inventory.container.ShulkerBoxContainer;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.item.ItemExpireEvent;
 import net.minecraftforge.event.entity.player.PlayerContainerEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedOutEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -37,6 +41,7 @@ public class OneFruitPerWorldEvents
 	public static void onBreak(BreakEvent event)
 	{
 		boolean hasShears = event.getPlayer().getHeldItem(event.getPlayer().getActiveHand()).getItem() == Items.SHEARS;
+		System.out.println(event.getState().getBlock());
 		if (CommonConfig.instance.getDevilFruitDropsFromLeavesChance() > 0 && event.getState().getBlock() instanceof LeavesBlock && !hasShears)
 		{
 			double chance = WyHelper.randomWithRange(0, 100) + WyHelper.randomDouble();
@@ -70,6 +75,26 @@ public class OneFruitPerWorldEvents
 	}
 
 	@SubscribeEvent
+	public static void onStored(PlayerContainerEvent.Open event)
+	{
+		if (CommonConfig.instance.hasOneFruitPerWorldExtendedLogic() && event.getContainer() instanceof ShulkerBoxContainer)
+		{
+			PlayerEntity player = event.getPlayer();
+			for (int i = 0; i < player.inventory.mainInventory.size(); i++)
+			{
+				ItemStack stack = player.inventory.mainInventory.get(i);
+				if (stack != null && stack.getItem() instanceof AkumaNoMiItem)
+				{
+					event.getPlayer().dropItem(stack.copy(), false);
+					stack.shrink(stack.getCount());
+				}
+			}
+
+			OneFruitPerWorldEvents.dropFruitsFromNearbyContainers(event.getPlayer());
+		}
+	}
+	
+	@SubscribeEvent
 	public static void onStored(PlayerContainerEvent.Close event)
 	{
 		if (CommonConfig.instance.hasOneFruitPerWorldExtendedLogic() && !(event.getContainer() instanceof PlayerContainer))
@@ -85,25 +110,7 @@ public class OneFruitPerWorldEvents
 				}
 			}
 
-			List<BlockPos> blockPosList = WyHelper.getNearbyTileEntities(event.getPlayer(), 30);
-
-			for (BlockPos pos : blockPosList)
-			{
-				TileEntity te = event.getPlayer().world.getTileEntity(pos);
-
-				if (te instanceof IInventory)
-				{
-					for (int i = 0; i < ((IInventory) te).getSizeInventory(); i++)
-					{
-						Slot slot = event.getContainer().inventorySlots.get(i);
-						if (slot.getHasStack() && slot.getStack().getItem() instanceof AkumaNoMiItem)
-						{
-							event.getPlayer().dropItem(slot.getStack().copy(), false);
-							slot.decrStackSize(1);
-						}
-					}
-				}
-			}
+			OneFruitPerWorldEvents.dropFruitsFromNearbyContainers(event.getPlayer());
 		}
 	}
 
@@ -137,6 +144,47 @@ public class OneFruitPerWorldEvents
 		{
 			worldData.removeAteDevilFruit(event.getOriginal());
 			worldData.removeDevilFruitInWorld(oldDevilFruit.getDevilFruit());
+		}
+	}
+
+	@SubscribeEvent
+	public static void onEntityJoinWorld(EntityJoinWorldEvent event)
+	{
+		if(event.getEntity() instanceof PlayerEntity && CommonConfig.instance.hasOneFruitPerWorldExtendedLogic())
+		{
+			OneFruitPerWorldEvents.dropFruitsFromNearbyContainers((PlayerEntity) event.getEntity());
+		}
+	}
+	
+	@SubscribeEvent
+	public static void onEntityLeavesWorld(PlayerLoggedOutEvent event)
+	{
+		if(CommonConfig.instance.hasOneFruitPerWorldExtendedLogic())
+		{
+			OneFruitPerWorldEvents.dropFruitsFromNearbyContainers((PlayerEntity) event.getEntity());
+		}
+	}
+
+	private static void dropFruitsFromNearbyContainers(PlayerEntity player)
+	{
+		List<BlockPos> blockPosList = WyHelper.getNearbyTileEntities(player, 40);
+
+		for (BlockPos pos : blockPosList)
+		{
+			TileEntity te = player.world.getTileEntity(pos);
+
+			if (te instanceof IInventory)
+			{
+				for (int i = 0; i < ((IInventory) te).getSizeInventory(); i++)
+				{
+					ItemStack stack = ((IInventory) te).getStackInSlot(i);
+					if (stack != null && stack.getItem() instanceof AkumaNoMiItem)
+					{
+						player.dropItem(stack.copy(), false);
+						stack.shrink(stack.getCount());
+					}
+				}
+			}
 		}
 	}
 }

@@ -15,7 +15,9 @@ import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
+import xyz.pixelatedw.mineminenomi.api.helpers.CrewHelper;
 import xyz.pixelatedw.mineminenomi.api.helpers.ItemsHelper;
+import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.gura.TenchiMeidoParticleEffect;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
@@ -61,7 +63,7 @@ public class ShimaYurashiAbility extends ChargeableAbility
 					boolean airBlocksAbove = player.world.getBlockState(pos.up()).getBlock() == Blocks.AIR && player.world.getBlockState(pos.up(2)).getBlock() == Blocks.AIR;
 					boolean isAllowedToMove = !Arrays.<Block>asList(ItemsHelper.RESTRICTED_BLOCKS).contains(state.getBlock());
 					
-					if(airBlocksAbove && isAllowedToMove && state.isSolid() && !this.blocks.contains(pos))
+					if(airBlocksAbove && isAllowedToMove && state.isSolid() && !this.blocks.contains(pos) && CommonConfig.instance.isGriefingEnabled())
 					{
 						this.blocks.add(pos);
 					}
@@ -103,7 +105,7 @@ public class ShimaYurashiAbility extends ChargeableAbility
 		
 		this.blocks.clear();
 		
-		List<LivingEntity> targets = WyHelper.<LivingEntity>getEntitiesNear(player.getPosition(), player.world, 20);
+		List<LivingEntity> targets = WyHelper.<LivingEntity>getEntitiesNear(player.getPosition(), player.world, 20, CrewHelper.NOT_IN_CREW_PREDICATE, LivingEntity.class);
 		targets.removeIf(entity -> !entity.onGround);
 		targets.remove(player);
 

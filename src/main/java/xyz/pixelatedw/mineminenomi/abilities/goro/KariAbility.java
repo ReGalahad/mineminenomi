@@ -1,16 +1,17 @@
 package xyz.pixelatedw.mineminenomi.abilities.goro;
 
+import java.util.List;
+
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.DamageSource;
+import xyz.pixelatedw.mineminenomi.api.helpers.CrewHelper;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.goro.KariParticleEffect;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.Ability;
 import xyz.pixelatedw.wypi.abilities.ChargeableAbility;
-
-import java.util.List;
 
 public class KariAbility extends ChargeableAbility
 {
@@ -37,7 +38,7 @@ public class KariAbility extends ChargeableAbility
 	
 	private boolean onEndChargingEvent(PlayerEntity player)
 	{
-		List<LivingEntity> list = WyHelper.getEntitiesNear(player.getPosition(), player.world, 12);
+		List<LivingEntity> list = WyHelper.getEntitiesNear(player.getPosition(), player.world, 12, CrewHelper.NOT_IN_CREW_PREDICATE, LivingEntity.class);
 		list.remove(player);
 
 		for (LivingEntity target : list)

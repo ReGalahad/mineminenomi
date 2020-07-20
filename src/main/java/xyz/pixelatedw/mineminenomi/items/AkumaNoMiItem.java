@@ -6,8 +6,10 @@ import javax.annotation.Nullable;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.item.minecart.HopperMinecartEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Foods;
 import net.minecraft.item.Item;
@@ -166,6 +168,9 @@ public class AkumaNoMiItem extends Item
 	@Override
 	public boolean onEntityItemUpdate(ItemStack stack, ItemEntity entity)
 	{
+		if(entity.world.isRemote)
+			return false;
+
 		ExtendedWorldData worldData = ExtendedWorldData.get(entity.world);
 
 		if (entity.isBurning())
@@ -180,13 +185,37 @@ public class AkumaNoMiItem extends Item
 			worldData.removeDevilFruitInWorld(this);
 		}
 
+		boolean nearHopper = false;
+		
 		List<BlockPos> blockPosList = WyHelper.getNearbyTileEntities(entity.getPosition(), entity.world, 2);
+		
+		for (BlockPos pos : blockPosList)
+		{
+			TileEntity te = entity.world.getTileEntity(pos);
 
+			if (te instanceof HopperTileEntity)
+			{
+				nearHopper = true;
+				break;
+			}
+		}
+		
+		List<Entity> hopperMinecards = WyHelper.getEntitiesNear(entity.getPosition(), entity.world, 0.5, HopperMinecartEntity.class);
+
+		if(hopperMinecards.size() > 0)
+			nearHopper = true;
+		
+		if(nearHopper) 
+		{
+			entity.remove();
+			worldData.removeDevilFruitInWorld(this);
+		}
+		/*
 		if (entity.getThrowerId() != null)
 		{
 			PlayerEntity player = entity.world.getPlayerByUuid(entity.getThrowerId());
 
-			if (player != null)
+			if (player != null && blockPosList.size() > 0)
 			{
 				for (BlockPos pos : blockPosList)
 				{
@@ -204,7 +233,7 @@ public class AkumaNoMiItem extends Item
 		else
 		{
 			List<PlayerEntity> nearbyPlayers = WyHelper.getEntitiesNear(entity.getPosition(), entity.world, 10, PlayerEntity.class);
-
+			
 			if (nearbyPlayers.size() > 0)
 			{
 				PlayerEntity player = nearbyPlayers.get(0);
@@ -225,7 +254,7 @@ public class AkumaNoMiItem extends Item
 				entity.remove();
 				worldData.removeDevilFruitInWorld(this);
 			}
-		}
+		}*/
 
 		return false;
 	}

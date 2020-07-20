@@ -20,7 +20,9 @@ import xyz.pixelatedw.mineminenomi.data.entity.haki.HakiDataCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.haki.IHakiData;
 import xyz.pixelatedw.mineminenomi.events.HakiGainEvents;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
+import xyz.pixelatedw.mineminenomi.packets.server.SSyncHakiDataPacket;
 import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.network.WyNetwork;
 
 public class HakiExpCommand
 {
@@ -79,6 +81,7 @@ public class HakiExpCommand
 		if(statsProps.getDoriki() > 5500 && props.getKenbunshokuHakiExp() > 60 + WyHelper.randomWithRange(0, 30))
 			HakiGainEvents.giveHakiAbility(player, KenbunshokuHakiFutureSightAbility.INSTANCE);
 
+		WyNetwork.sendToAllTracking(new SSyncHakiDataPacket(player.getEntityId(), props), player);
 		
 		return 1;
 	}
