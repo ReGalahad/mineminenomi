@@ -15,6 +15,7 @@ import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.packets.server.SSyncEntityStatsPacket;
+import xyz.pixelatedw.mineminenomi.packets.server.SSyncWorldDataPacket;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.debug.WyDebug;
 import xyz.pixelatedw.wypi.network.WyNetwork;
@@ -50,7 +51,9 @@ public class IssueBountyCommand
 			if(WyDebug.isDebug())
 				WyHelper.sendMsgToPlayer(player, TextFormatting.GREEN + "" + TextFormatting.ITALIC + "[DEBUG] A new bounty was issued on your name!");
 
-			WyNetwork.sendTo(new SSyncEntityStatsPacket(player.getEntityId(), entityStatsProps), player);
+			WyNetwork.sendToAllTracking(new SSyncEntityStatsPacket(player.getEntityId(), entityStatsProps), player);
+			WyNetwork.sendToAllTracking(new SSyncWorldDataPacket(worldData), player);
+
 		}
 		
 		return 1;

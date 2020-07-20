@@ -6,6 +6,8 @@ import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
+import xyz.pixelatedw.mineminenomi.packets.server.SSyncWorldDataPacket;
+import xyz.pixelatedw.wypi.network.WyNetwork;
 
 public class BountyHelper
 {
@@ -17,7 +19,8 @@ public class BountyHelper
 		
 		if(props.getFaction().equalsIgnoreCase(ModValues.PIRATE) && props.getBounty() > 1000)
 		{
-			worldData.issueBounty(player.getUniqueID().toString(), props.getBounty());		
+			worldData.issueBounty(player.getUniqueID().toString(), props.getBounty());	
+			WyNetwork.sendToAllTracking(new SSyncWorldDataPacket(worldData), player);
 			return true;
 		}
 		

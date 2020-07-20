@@ -190,17 +190,17 @@ public class CommonConfig
 			
 			builder.push("Camps");
 			this.spawnCamps = builder.comment("Allows camps to spawn in the world; true by default").define("Spawn Camps", true);
-			this.spawnChanceCamps = builder.comment("Sets the % chance for a Camp to spawn, the % is calculated per chunk (16x16), 40% by default, min is 0 and max is 100; ").defineInRange("Camps Spawn Chance", 40, 0.0, 100);
+			this.spawnChanceCamps = builder.comment("Sets the % chance for a Camp to spawn, the % is calculated per chunk (16x16), 60% by default, min is 0 and max is 100; ").defineInRange("Camps Spawn Chance", 60, 0.0, 100);
 			builder.pop();
 			
 			builder.push("Small Bases");
 			this.spawnSmallBases = builder.comment("Allows small bases to spawn in the world; true by default").define("Spawn Small Bases", true);
-			this.spawnChanceSmallBase = builder.comment("Sets the % chance for a Small Base to spawn, the % is calculated per chunk (16x16), 45% by default, min is 0 and max is 100; ").defineInRange("Small Bases Spawn Chance", 45, 0.0, 100);
+			this.spawnChanceSmallBase = builder.comment("Sets the % chance for a Small Base to spawn, the % is calculated per chunk (16x16), 80% by default, min is 0 and max is 100; ").defineInRange("Small Bases Spawn Chance", 80, 0.0, 100);
 			builder.pop();
 			
 			builder.push("Large Bases");
 			this.spawnLargeBases = builder.comment("Allows large bases to spawn in the world; true by default").define("Spawn Large Bases", true);
-			this.spawnChanceLargeBase = builder.comment("Sets the % chance for a Large Base to spawn, the % is calculated per chunk (16x16), 30% by default, min is 0 and max is 100; ").defineInRange("Large Bases Spawn Chance", 30, 0.0, 100);
+			this.spawnChanceLargeBase = builder.comment("Sets the % chance for a Large Base to spawn, the % is calculated per chunk (16x16), 70% by default, min is 0 and max is 100; ").defineInRange("Large Bases Spawn Chance", 70, 0.0, 100);
 			builder.pop();
 		}
 		builder.pop();
