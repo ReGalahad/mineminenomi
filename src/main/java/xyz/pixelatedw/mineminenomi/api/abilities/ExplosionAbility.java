@@ -248,7 +248,7 @@ public class ExplosionAbility extends Explosion
 						LootContext.Builder lootcontext$builder = (new LootContext.Builder((ServerWorld) this.world)).withRandom(this.world.rand).withParameter(LootParameters.POSITION, blockpos).withParameter(LootParameters.TOOL, ItemStack.EMPTY).withNullableParameter(LootParameters.BLOCK_ENTITY, tileentity);
 						lootcontext$builder.withParameter(LootParameters.EXPLOSION_RADIUS, this.explosionSize);
 
-						Block.spawnDrops(blockstate, lootcontext$builder);
+						//Block.spawnDrops(blockstate, lootcontext$builder);
 					}
 
 					//if(block != Blocks.CACTUS.getBlock())

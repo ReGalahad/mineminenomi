@@ -113,6 +113,7 @@ public class SelectHotbarAbilitiesScreen extends Screen
 		this.relativePosX = posX;
 		this.relativePosY = posY;
 		
+		// Side menu buttons
 		Ability abl = this.abilityDataProps.getUnlockedAbilities(AbilityCategory.DEVIL_FRUIT).stream().findFirst().orElse(null);
 		if (abl != null || this.devilFruitProps.hasDevilFruit())
 		{
@@ -153,6 +154,8 @@ public class SelectHotbarAbilitiesScreen extends Screen
 			hakiButton = hakiButton.setTextureInfo((posX - 290) / 2, (posY - 60) / 2, 30, 40).setIconInfo(hakiIcon, (posX - 268) / 2, (posY - 42) / 2, 1.5);
 			this.addButton(hakiButton);
 		}
+		
+		// Ability slots
 		for (int i = 0; i < 8; i++)
 		{
 			GL11.glEnable(GL11.GL_BLEND);
@@ -163,8 +166,12 @@ public class SelectHotbarAbilitiesScreen extends Screen
 					this.slotSelected = id;
 				else
 				{
-					WyNetwork.sendToServer(new CStopAbilityPacket(this.slotSelected));
-					this.abilityDataProps.setEquippedAbility(this.slotSelected, null);
+					Ability ability = this.abilityDataProps.getEquippedAbility(this.slotSelected);
+					if(ability != null && ability.isOnStandby())
+					{
+						WyNetwork.sendToServer(new CStopAbilityPacket(this.slotSelected));
+						this.abilityDataProps.setEquippedAbility(this.slotSelected, null);
+					}
 				}
 			});
 			slotButton.setFake();
