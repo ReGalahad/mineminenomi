@@ -88,6 +88,9 @@ public class ConfigEvents
 				newEntityStats.setBelly(belly);
 				newEntityStats.setExtol(extol);
 				
+				DorikiEvent e = new DorikiEvent(event.getPlayer());
+				MinecraftForge.EVENT_BUS.post(e);
+				
 				IHakiData oldHakiProps = HakiDataCapability.get(event.getOriginal());
 				float hardeningBusoExp = oldHakiProps.getBusoshokuHardeningHakiExp() / 2;
 				float imbuingBusoExp = oldHakiProps.getBusoshokuImbuingHakiExp() / 2;

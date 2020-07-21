@@ -129,7 +129,7 @@ public class CommonConfig
 			this.extraHearts = builder.comment("Allows players to receive extra hearts based on their doriki; true by default").define("Extra Hearts", true);
 			this.mobRewards = builder.comment("Allows mobs to reward doriki, bounty or items; true by default").define("Mob Rewards", true);
 			this.griefing = builder.comment("Allows abilities to break or replace blocks; if turned OFF it will make some abilities completly useless; true by default").define("Griefing", true);
-			this.animeScreaming = builder.comment("Will send a chat message to nearby players with the used ability's name; false by default").define("Anime Scream", false);
+			//this.animeScreaming = builder.comment("Will send a chat message to nearby players with the used ability's name; false by default").define("Anime Scream", false);
 			this.specialFlying = builder.comment("Allows Gasu Gasu no Mi, Moku Moku no Mi and Suna Suna no Mi users to fly, this option does not affect flying Zoans which will be able to fly regardless; false by default").define("Special Flying", false);
 			this.oneFruitPerWorldLogic = builder.comment("Restricts the Devil Fruit spawns to only 1 of each type per world; \n NONE - No logic is applied, an infinite number of each fruit can exist \n SIMPLE - No more than one fruit type can be acquired via natural means (chests, leaves, fruit reincarnations etc) \n EXTENDED - Extra rules are applied on top of the SIMPLE set that blocks any means (or as many as possible) of storing/hoarding fruits \n NONE by default").defineEnum("One Devil Fruit per World Logic", OneFruitPerWorldLogic.NONE, OneFruitPerWorldLogic.values());
 			this.yamiPower = builder.comment("Allows Yami Yami no Mi users to eat an additional fruit; true by default").define("Yami Yami no Mi additional fruit", true);
@@ -505,11 +505,6 @@ public class CommonConfig
 	public boolean isGriefingEnabled()
 	{
 		return this.griefing.get();
-	}
-
-	public boolean isAnimeScreamingEnabled()
-	{
-		return this.animeScreaming.get();
 	}
 
 	public boolean isSpecialFlyingEnabled()

@@ -1,7 +1,6 @@
 package xyz.pixelatedw.mineminenomi.abilities.goro;
 
 import net.minecraft.entity.player.PlayerEntity;
-import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.goro.VoltVari100MillionProjectile;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.goro.VoltVari20MillionProjectile;
 import xyz.pixelatedw.mineminenomi.entities.projectiles.goro.VoltVari5MillionProjectile;
@@ -33,6 +32,7 @@ public class VoltVariAbility extends ChargeableAbility
 	{
 		this.power = chargeTimer;
 		double truePower = Math.abs(power - this.getMaxChargeTime());
+		/*
 		if (truePower % 25 == 0 && CommonConfig.instance.isAnimeScreamingEnabled())
 		{
 			int voltVariType = (int) Math.floor(truePower / 25);
@@ -60,9 +60,10 @@ public class VoltVariAbility extends ChargeableAbility
 					this.setName("100 Million Volt Vari");
 					break;
 			}
+			
 //			if (voltVariType < 8)
 //				this.sendShounenScream(player);
-		}
+		}*/
 	}
 	
 	private boolean onEndChargingEvent(PlayerEntity player)
