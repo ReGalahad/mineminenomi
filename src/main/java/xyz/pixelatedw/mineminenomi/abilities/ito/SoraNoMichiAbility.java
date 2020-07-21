@@ -18,7 +18,7 @@ public class SoraNoMichiAbility extends Ability
 	public SoraNoMichiAbility()
 	{
 		super("Sora no Michi", AbilityCategory.DEVIL_FRUIT);
-		this.setMaxCooldown(2);
+		this.setMaxCooldown(1);
 		this.setDescription("The user attaches the strings to clouds, allowing them to move through the air.");
 
 		this.onUseEvent = this::onUseEvent;

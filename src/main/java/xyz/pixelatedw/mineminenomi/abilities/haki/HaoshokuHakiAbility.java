@@ -98,8 +98,7 @@ public class HaoshokuHakiAbility extends ChargeableAbility
 			}
 		}
 		
-		//this.setMaxCooldown(cooldown);
-		this.setMaxCooldown(1);
+		this.setMaxCooldown(cooldown);
 		return true;
 	}
 }

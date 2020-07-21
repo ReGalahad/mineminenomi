@@ -3,6 +3,7 @@ package xyz.pixelatedw.mineminenomi.blocks.tileentities;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
@@ -42,6 +43,9 @@ public class CustomSpawnerTileEntity extends TileEntity implements ITickableTile
 	{
 		if (!this.world.isRemote)
 		{
+	    	if(this.world.getBlockState(this.pos.down()).getBlock() == Blocks.AIR)
+	    		this.world.setBlockState(this.pos, Blocks.AIR.getDefaultState());
+			
 			boolean flag = false;
 
 			List<PlayerEntity> nearbyEntities = WyHelper.getEntitiesNear(this.getPos(), this.world, 30, PlayerEntity.class);

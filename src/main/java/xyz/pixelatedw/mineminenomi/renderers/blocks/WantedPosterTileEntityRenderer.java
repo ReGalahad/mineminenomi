@@ -102,7 +102,7 @@ public class WantedPosterTileEntityRenderer extends TileEntityRenderer<WantedPos
 				GL11.glScalef(.0035F, .0025F, .5F);
 				GL11.glTranslated(x - 160, y - 100, 0.9);
 				
-				if (worldData.getBounty(uuid) != Long.parseLong(bounty.replace(",", "")))
+				if (worldData.getBounty(uuid) != Long.parseLong(bounty.replaceAll("[\\,\\.\\ ]", "")))
 				{
 					GlStateManager.pushMatrix();
 					{

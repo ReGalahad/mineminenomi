@@ -93,7 +93,16 @@ public class BountyEvents
 			CompoundNBT nbt = stack.getOrCreateTag();
 			nbt.putString("UUID", tileEntity.getUUID());
 			nbt.putString("Name", tileEntity.getEntityName());
-			nbt.putLong("Bounty", Long.parseLong(tileEntity.getPosterBounty()));
+			long bounty = 0;
+			try
+			{
+				bounty = Long.parseLong(tileEntity.getPosterBounty());
+			}
+			catch(NumberFormatException ex)
+			{
+				ex.printStackTrace();
+			}
+			nbt.putLong("Bounty", bounty);
 			nbt.putString("Background", tileEntity.getBackground());
 			nbt.putString("Date", tileEntity.getIssuedDate());
 			CompoundNBT compoundnbt = new CompoundNBT();

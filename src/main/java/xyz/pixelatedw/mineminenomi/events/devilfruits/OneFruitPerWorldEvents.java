@@ -41,7 +41,7 @@ public class OneFruitPerWorldEvents
 	public static void onBreak(BreakEvent event)
 	{
 		boolean hasShears = event.getPlayer().getHeldItem(event.getPlayer().getActiveHand()).getItem() == Items.SHEARS;
-		System.out.println(event.getState().getBlock());
+
 		if (CommonConfig.instance.getDevilFruitDropsFromLeavesChance() > 0 && event.getState().getBlock() instanceof LeavesBlock && !hasShears)
 		{
 			double chance = WyHelper.randomWithRange(0, 100) + WyHelper.randomDouble();

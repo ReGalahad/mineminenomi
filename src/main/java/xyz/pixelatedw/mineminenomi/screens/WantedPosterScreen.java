@@ -115,7 +115,7 @@ public class WantedPosterScreen extends Screen
 			}
 			GlStateManager.popMatrix();	
 			
-			if (this.worldData.getBounty(this.player.getUniqueID().toString()) != Long.parseLong(bounty.replace(",", "")))
+			if (this.worldData.getBounty(this.player.getUniqueID().toString()) != Long.parseLong(bounty.replaceAll("[\\,\\.\\ ]", "")))
 			{
 				GlStateManager.pushMatrix();
 				{
