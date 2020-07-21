@@ -116,7 +116,7 @@ public class AbilitiesListScreenPanel extends ScrollPanel
 		{
 			for (int i = 0; i < this.props.getEquippedAbilities().length; i++)
 			{
-				if (this.props.getEquippedAbility(i) != null && this.props.getEquippedAbility(i).equals(entry.ability))
+				if (this.props.getEquippedAbility(i) != null && (this.props.getEquippedAbility(i).equals(entry.ability) || !this.props.getEquippedAbility(i).isOnStandby()))
 				{
 					flag = false;
 				}

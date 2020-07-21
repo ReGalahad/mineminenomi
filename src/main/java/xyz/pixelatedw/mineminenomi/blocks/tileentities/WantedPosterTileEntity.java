@@ -5,7 +5,6 @@ import javax.annotation.Nullable;
 import com.mojang.authlib.GameProfile;
 
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.NBTUtil;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.TileEntity;
@@ -98,12 +97,12 @@ public class WantedPosterTileEntity extends TileEntity
 		nbt.putString("Bounty", this.bounty);
 		nbt.putString("Date", this.date);
 		nbt.putString("Background", this.background);
-		if (this.gameProfile != null)
+		/*if (this.gameProfile != null)
 		{
 			CompoundNBT compoundnbt = new CompoundNBT();
 			NBTUtil.writeGameProfile(compoundnbt, this.gameProfile);
 			nbt.put("Owner", compoundnbt);
-		}
+		}*/
 
 		return nbt;
 	}
@@ -117,8 +116,8 @@ public class WantedPosterTileEntity extends TileEntity
 		this.bounty = nbt.getString("Bounty");
 		this.date = nbt.getString("Date");
 		this.background = nbt.getString("Background");
-		if (nbt.contains("Owner", 10))
-			this.setGameProfile(NBTUtil.readGameProfile(nbt.getCompound("Owner")));
+		//if (nbt.contains("Owner", 10))
+		//	this.setGameProfile(NBTUtil.readGameProfile(nbt.getCompound("Owner")));
 	}
 
 	@Override

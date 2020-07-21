@@ -6,8 +6,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.WallOrFloorItem;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.NBTUtil;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
@@ -48,7 +46,7 @@ public class WantedPosterItem extends WallOrFloorItem
 				tileEntity.setPosterBounty(itemStack.getTag().getLong("Bounty") + "");
 				tileEntity.setBackground(itemStack.getTag().getString("Background"));
 				tileEntity.setIssuedDate(itemStack.getTag().getString("Date"));
-				tileEntity.setGameProfile(NBTUtil.readGameProfile((CompoundNBT) itemStack.getTag().get("Owner")));
+				//tileEntity.setGameProfile(NBTUtil.readGameProfile((CompoundNBT) itemStack.getTag().get("Owner")));
 				tileEntity.markDirty();
 			}
 		}

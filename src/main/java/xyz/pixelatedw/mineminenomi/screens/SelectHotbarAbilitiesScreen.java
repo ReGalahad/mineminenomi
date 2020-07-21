@@ -163,9 +163,11 @@ public class SelectHotbarAbilitiesScreen extends Screen
 			NoTextureButton slotButton = new NoTextureButton((posX / 2) - 101 + (i * 25), posY - 31, 22, 21, "", b ->
 			{
 				if (this.slotSelected != id)
-					this.slotSelected = id;
-				else
 				{
+					this.slotSelected = id;
+				}
+				else
+				{			
 					Ability ability = this.abilityDataProps.getEquippedAbility(this.slotSelected);
 					if(ability != null && ability.isOnStandby())
 					{
