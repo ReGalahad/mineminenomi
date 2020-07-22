@@ -10,6 +10,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.item.minecart.HopperMinecartEntity;
+import net.minecraft.entity.passive.FoxEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Foods;
 import net.minecraft.item.Item;
@@ -190,7 +191,7 @@ public class AkumaNoMiItem extends Item
 			worldData.removeDevilFruitInWorld(this);
 		}
 
-		boolean nearHopper = false;
+		boolean shouldRemove = false;
 		
 		List<BlockPos> blockPosList = WyHelper.getNearbyTileEntities(entity.getPosition(), entity.world, 1);
 		
@@ -200,7 +201,7 @@ public class AkumaNoMiItem extends Item
 
 			if (te instanceof HopperTileEntity)
 			{
-				nearHopper = true;
+				shouldRemove = true;
 				break;
 			}
 		}
@@ -208,14 +209,25 @@ public class AkumaNoMiItem extends Item
 		List<Entity> hopperMinecarts = WyHelper.getEntitiesNear(entity.getPosition(), entity.world, 0.5, HopperMinecartEntity.class);
 
 		if(hopperMinecarts.size() > 0)
-			nearHopper = true;
+			shouldRemove = true;
 		
-		if(nearHopper) 
+		List<Entity> foxes = WyHelper.getEntitiesNear(entity.getPosition(), entity.world, 1.5, FoxEntity.class);
+
+		if(foxes.size() > 0)
+			shouldRemove = true;
+		
+		if(shouldRemove) 
 		{
 			entity.remove();
-			PlayerEntity thrower = entity.world.getPlayerByUuid(entity.getThrowerId());
-			if(thrower != null)
-				thrower.inventory.addItemStackToInventory(stack);
+			
+			if(entity.getThrowerId() != null)
+			{
+				PlayerEntity thrower = entity.world.getPlayerByUuid(entity.getThrowerId());
+				if(thrower != null)
+					thrower.inventory.addItemStackToInventory(stack);
+				else
+					worldData.removeDevilFruitInWorld(this);
+			}
 			else
 				worldData.removeDevilFruitInWorld(this);
 		}
