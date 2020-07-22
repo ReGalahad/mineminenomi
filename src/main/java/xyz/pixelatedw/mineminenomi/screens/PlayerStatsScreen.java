@@ -24,6 +24,7 @@ import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModAbilities;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
+import xyz.pixelatedw.mineminenomi.items.AkumaNoMiItem;
 import xyz.pixelatedw.mineminenomi.packets.client.CRequestSyncQuestDataPacket;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.network.WyNetwork;
@@ -102,13 +103,18 @@ public class PlayerStatsScreen extends Screen
 			if (!this.devilFruitProps.getDevilFruit().equals("yamidummy"))
 			{
 				df = DevilFruitHelper.getDevilFruitItem(this.devilFruitProps.getDevilFruit());
-
-				if (this.devilFruitProps.hasYamiPower())
+				boolean doubleYamiCheck = false;
+				
+				String dfKey = DevilFruitHelper.getDevilFruitKey((AkumaNoMiItem) df.getItem());
+				if(dfKey.equalsIgnoreCase("yamidummy") || dfKey.equalsIgnoreCase("yami_yami"))
+					doubleYamiCheck = true;
+								
+				if (this.devilFruitProps.hasYamiPower() && !doubleYamiCheck)
 					this.minecraft.fontRenderer.drawStringWithShadow(TextFormatting.BOLD + "" + yamiFruit.getDisplayName().getFormattedText() + " + " + df.getDisplayName().getFormattedText(), posX - 28, posY + 194, -1);
 				else
 					this.minecraft.fontRenderer.drawStringWithShadow(TextFormatting.BOLD + "" + df.getDisplayName().getFormattedText(), posX - 28, posY + 194, -1);
 
-				if (this.devilFruitProps.hasYamiPower())
+				if (this.devilFruitProps.hasYamiPower() && !doubleYamiCheck)
 					this.drawItemStack(yamiFruit, posX - 56, posY + 187, "");
 				this.drawItemStack(df, posX - 50, posY + 190, "");
 			}

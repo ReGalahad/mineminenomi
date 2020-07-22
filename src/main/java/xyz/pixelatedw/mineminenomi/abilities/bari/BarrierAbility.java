@@ -11,6 +11,7 @@ import net.minecraft.util.math.BlockPos;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.api.protection.BlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.api.protection.block.AirBlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.FoliageBlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.abilities.ContinuousAbility;
@@ -19,7 +20,7 @@ public class BarrierAbility extends ContinuousAbility
 {
 	public static final BarrierAbility INSTANCE = new BarrierAbility();
 
-	private static final BlockProtectionRule GRIEF_RULE = new BlockProtectionRule(AirBlockProtectionRule.INSTANCE).setBypassGriefRule(); 
+	private static final BlockProtectionRule GRIEF_RULE = new BlockProtectionRule(AirBlockProtectionRule.INSTANCE, FoliageBlockProtectionRule.INSTANCE).setBypassGriefRule(); 
 	private List<BlockPos> posList = new ArrayList<BlockPos>();
 	
 	public BarrierAbility()

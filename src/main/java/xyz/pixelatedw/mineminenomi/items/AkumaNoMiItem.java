@@ -99,7 +99,7 @@ public class AkumaNoMiItem extends Item
 		boolean flag1 = !WyHelper.isNullOrEmpty(devilFruitProps.getDevilFruit()) && !devilFruitProps.hasYamiPower() && !hasYami;
 		boolean flag2 = devilFruitProps.hasYamiPower() && !eatenFruit.equalsIgnoreCase(devilFruitProps.getDevilFruit()) && !devilFruitProps.getDevilFruit().equalsIgnoreCase("yamidummy");
 		boolean flag3 = !CommonConfig.instance.isYamiPowerEnabled() && !WyHelper.isNullOrEmpty(devilFruitProps.getDevilFruit()) && (hasYami || !eatenFruit.equalsIgnoreCase(devilFruitProps.getDevilFruit()));
-
+		
 		if (flag1 || flag2 || flag3)
 		{
 			player.attackEntityFrom(DamageSource.WITHER, player.getMaxHealth());
@@ -111,15 +111,20 @@ public class AkumaNoMiItem extends Item
 			devilFruitProps.setLogia(true);
 
 		if (!hasYami)
+		{
+			if(!WyHelper.isNullOrEmpty(devilFruitProps.getDevilFruit()) && eatenFruit.equalsIgnoreCase("yami_yami"))
+				devilFruitProps.setYamiPower(true);
 			devilFruitProps.setDevilFruit(eatenFruit);
+		}
 		else
 		{
 			devilFruitProps.setLogia(false);
-
 			devilFruitProps.setYamiPower(true);
 
 			if (WyHelper.isNullOrEmpty(devilFruitProps.getDevilFruit()))
 				devilFruitProps.setDevilFruit("yamidummy");
+			else if(devilFruitProps.getDevilFruit().equalsIgnoreCase("yamidummy") || hasYami)
+				devilFruitProps.setDevilFruit(eatenFruit);
 		}
 
 		if (DevilFruitHelper.hasDevilFruit(player, ModAbilities.HITO_HITO_NO_MI) && !player.world.isRemote)
