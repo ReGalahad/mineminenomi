@@ -192,7 +192,7 @@ public class AkumaNoMiItem extends Item
 
 		boolean nearHopper = false;
 		
-		List<BlockPos> blockPosList = WyHelper.getNearbyTileEntities(entity.getPosition(), entity.world, 2);
+		List<BlockPos> blockPosList = WyHelper.getNearbyTileEntities(entity.getPosition(), entity.world, 1);
 		
 		for (BlockPos pos : blockPosList)
 		{
@@ -205,61 +205,20 @@ public class AkumaNoMiItem extends Item
 			}
 		}
 		
-		List<Entity> hopperMinecards = WyHelper.getEntitiesNear(entity.getPosition(), entity.world, 0.5, HopperMinecartEntity.class);
+		List<Entity> hopperMinecarts = WyHelper.getEntitiesNear(entity.getPosition(), entity.world, 0.5, HopperMinecartEntity.class);
 
-		if(hopperMinecards.size() > 0)
+		if(hopperMinecarts.size() > 0)
 			nearHopper = true;
 		
 		if(nearHopper) 
 		{
 			entity.remove();
-			worldData.removeDevilFruitInWorld(this);
-		}
-		/*
-		if (entity.getThrowerId() != null)
-		{
-			PlayerEntity player = entity.world.getPlayerByUuid(entity.getThrowerId());
-
-			if (player != null && blockPosList.size() > 0)
-			{
-				for (BlockPos pos : blockPosList)
-				{
-					TileEntity te = entity.world.getTileEntity(pos);
-
-					if (te instanceof HopperTileEntity)
-					{
-						entity.world.addEntity(new ItemEntity(entity.world, player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ(), stack.copy()));
-						entity.remove();
-						return false;
-					}
-				}
-			}
-		}
-		else
-		{
-			List<PlayerEntity> nearbyPlayers = WyHelper.getEntitiesNear(entity.getPosition(), entity.world, 10, PlayerEntity.class);
-			
-			if (nearbyPlayers.size() > 0)
-			{
-				PlayerEntity player = nearbyPlayers.get(0);
-				for (BlockPos pos : blockPosList)
-				{
-					TileEntity te = entity.world.getTileEntity(pos);
-
-					if (te instanceof HopperTileEntity)
-					{
-						entity.world.addEntity(new ItemEntity(entity.world, player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ(), stack.copy()));
-						entity.remove();
-						return false;
-					}
-				}
-			}
+			PlayerEntity thrower = entity.world.getPlayerByUuid(entity.getThrowerId());
+			if(thrower != null)
+				thrower.inventory.addItemStackToInventory(stack);
 			else
-			{
-				entity.remove();
 				worldData.removeDevilFruitInWorld(this);
-			}
-		}*/
+		}
 
 		return false;
 	}

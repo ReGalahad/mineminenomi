@@ -260,7 +260,7 @@ public class WyHelper
 		if(predicate == null)
 			predicate = EntityPredicates.NOT_SPECTATING;
 		
-		AxisAlignedBB aabb = new AxisAlignedBB(pos.add(1, 1, 1)).grow(radius, radius, radius);
+		AxisAlignedBB aabb = new AxisAlignedBB(pos).grow(radius, radius, radius);
 		List<T> list = new ArrayList<T>();
 		for (Class<? extends T> clzz : classEntities)
 		{

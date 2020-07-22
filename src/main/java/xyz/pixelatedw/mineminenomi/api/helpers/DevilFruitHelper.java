@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -36,8 +38,11 @@ public class DevilFruitHelper
 				},
 		};
 		
-	public static boolean oneFruitPerWorldCheck(World world, AkumaNoMiItem devilFruit)
+	public static boolean oneFruitPerWorldCheck(World world, @Nullable AkumaNoMiItem devilFruit)
 	{
+		if(devilFruit == null)
+			return false;
+		
 		if (!CommonConfig.instance.hasOneFruitPerWorldSimpleLogic())
 			return true;
 			
@@ -46,7 +51,7 @@ public class DevilFruitHelper
 		ExtendedWorldData worldProps = ExtendedWorldData.get(world);
 		int chanceForNewFruit = 0;
 
-		String fruitName = devilFruit.getTranslationKey().substring("item.mineminenomi.".length()).replace("_no_mi", "").replace(":", "").replace(".", "").replace(",", "").replace("model_", "");
+		String fruitName = getDevilFruitKey(devilFruit);
 
 		while (DevilFruitHelper.isDevilFruitInWorld(world, fruitName))
 		{
@@ -73,6 +78,7 @@ public class DevilFruitHelper
 		return false;
 	}
 	
+	@Nullable
 	public static AkumaNoMiItem rouletteDevilFruits(int tier)
 	{
 		Random rand = new Random();

@@ -10,13 +10,19 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.PlayerContainer;
 import net.minecraft.inventory.container.ShulkerBoxContainer;
 import net.minecraft.inventory.container.Slot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.ListNBT;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.item.ItemExpireEvent;
+import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerContainerEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedOutEvent;
@@ -24,6 +30,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.ForgeRegistries;
 import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitHelper;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
@@ -164,7 +171,32 @@ public class OneFruitPerWorldEvents
 			OneFruitPerWorldEvents.dropFruitsFromNearbyContainers((PlayerEntity) event.getEntity());
 		}
 	}
+	
+	@SubscribeEvent
+	public static void onItemPickedUp(EntityItemPickupEvent event)
+	{
+		if (CommonConfig.instance.hasOneFruitPerWorldExtendedLogic() && event.getItem().getItem().getItem() == Items.SHULKER_BOX)
+		{
+			ItemStack shulkerBox = event.getItem().getItem();
+			if (shulkerBox.hasTag())
+			{
+				ListNBT items = shulkerBox.getOrCreateTag().getCompound("BlockEntityTag").getList("Items", Constants.NBT.TAG_COMPOUND);
+				for (int i = 0; i < items.size(); i++)
+				{
+					CompoundNBT itemNBT = items.getCompound(i);
+					String itemId = itemNBT.getString("id");
 
+					Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(itemId));
+					if (item == null)
+						continue;
+
+					if (item instanceof AkumaNoMiItem)
+						items.remove(i);
+				}
+			}
+		}
+	}
+	
 	private static void dropFruitsFromNearbyContainers(PlayerEntity player)
 	{
 		List<BlockPos> blockPosList = WyHelper.getNearbyTileEntities(player, 40);
