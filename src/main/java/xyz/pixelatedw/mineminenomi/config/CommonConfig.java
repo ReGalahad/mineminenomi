@@ -44,6 +44,9 @@ public class CommonConfig
 	private DoubleValue dorikiRewardMultiplier;
 	private BooleanValue minimumDorikiPerKill;
 	private BooleanValue abilityFraudChecks;
+	private DoubleValue chanceForDroppedAppleReincarnation;
+	private DoubleValue chanceForInventoryAppleReincarnation;
+	private DoubleValue chanceForChestAppleReincarnation;
 
 	// Structures
 	private BooleanValue spawnDojos;
@@ -137,8 +140,8 @@ public class CommonConfig
 			this.minimumDorikiPerKill = builder.comment("Guarantees a minimum of 1 doriki per kill; false by default").define("Minimum Doriki per Kill", false);
 			this.abilityFraudChecks = builder.comment("Runs a check for all abilities on a player to remove dupes or suspicious abilities when the player joins the world; true by default").define("Ability Fraud Checks", true);
 			this.hakiExpMultiplier = builder.comment("Multiplies any haki gained by this amount; 1 by default, min: 0, max: 10").defineInRange("Haki Exp Multiplier", 1.0, 0.0, 10.0);
-			this.haoshokuUnlockLogic = builder.comment("Responsible for how player unlock Haoshoku Haki; \n NONE - Haoshoku Haki cannot be unlocked naturally \n RANDOM - Only a few chosen ones receive it when they spawn \n EXPERIENCE - Will unlock based on the total amount of Haki experience a player has \n EXPERIENCE by default").defineEnum("Haoshoku Haki Unlock Logic", HaoshokuUnlockLogic.EXPERIENCE, HaoshokuUnlockLogic.values());
-
+			this.haoshokuUnlockLogic = builder.comment("Responsible for how player unlock Haoshoku Haki; \n NONE - Haoshoku Haki cannot be unlocked naturally \n RANDOM - Only a few chosen ones receive it when they spawn \n EXPERIENCE - Will unlock based on the total amount of Haki experience a player has \n EXPERIENCE by default").defineEnum("Haoshoku Haki Unlock Logic", HaoshokuUnlockLogic.EXPERIENCE, HaoshokuUnlockLogic.values());		
+			
 			this.bannedAbilities = new ArrayList<String>();
 			Predicate<Object> bannedAbilitiesTest = new Predicate<Object>()
 			{
@@ -167,6 +170,12 @@ public class CommonConfig
 				for (String stat : statsToKeepNames)
 					this.statsToKeep.put(stat, builder.define(stat, true));
 			}
+			builder.pop();
+			
+			builder.push("Devil Fruits Reincarnation");
+			this.chanceForDroppedAppleReincarnation = builder.comment("Sets the % chance for a Devil Fruit to get reincarnated from a dropped apple; 15 by default").defineInRange("Dropped Apple Reincarnation Chance", 15.0, 0.0, 100.0);
+			this.chanceForInventoryAppleReincarnation = builder.comment("Sets the % chance for a Devil Fruit to get reincarnated from an apple inside an entity's inventory; 1 by default").defineInRange("Inventory Apple Reincarnation Chance", 1.0, 0.0, 100.0);
+			this.chanceForChestAppleReincarnation = builder.comment("Sets the % chance for a Devil Fruit to get reincarnated from an apple inside of a nearby chest; 1 by default").defineInRange("Chest Apple Reincarnation Chance", 1.0, 0.0, 100.0);		
 			builder.pop();
 		}
 		builder.pop();
@@ -264,7 +273,22 @@ public class CommonConfig
 		}
 		builder.pop();
 	}
-
+	
+	public double getChanceForChestAppleReincarnation()
+	{
+		return this.chanceForChestAppleReincarnation.get();
+	}
+	
+	public double getChanceForInventoryAppleReincarnation()
+	{
+		return this.chanceForInventoryAppleReincarnation.get();
+	}
+	
+	public double getChanceForDroppedAppleReincarnation()
+	{
+		return this.chanceForDroppedAppleReincarnation.get();
+	}
+	
 	public boolean isFriendlyDamageDisabled()
 	{
 		return this.disableFriendlyFire.get();

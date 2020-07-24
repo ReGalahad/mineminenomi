@@ -83,7 +83,7 @@ public class DFUserDeathEvents
 					}
 				}
 				villagers.removeIf(entry -> !entry.getVillagerInventory().hasAny(set));
-				if (!dropList.isEmpty() && droppedChance <= 15)
+				if (!dropList.isEmpty() && droppedChance <= CommonConfig.instance.getChanceForDroppedAppleReincarnation())
 				{
 					if(CommonConfig.instance.hasOneFruitPerWorldSimpleLogic())
 					{
@@ -102,20 +102,20 @@ public class DFUserDeathEvents
 					else
 						dropList.get(0).setItem(DevilFruitHelper.getDevilFruitItem(oldDevilFruit.getDevilFruit()));
 				}
-				else if (!players.isEmpty() && chance <= 1)
+				else if (!players.isEmpty() && chance <= CommonConfig.instance.getChanceForInventoryAppleReincarnation())
 				{
 					int stackIndex = WyHelper.getIndexOfItemStack(new ItemStack(Items.APPLE), players.get(0).inventory);
 
 					if (stackIndex != -1)
 						tryReplaceApple(original, worldData, players.get(0).inventory, stackIndex, oldDevilFruit.getDevilFruit());	
 				}
-				else if (!villagers.isEmpty() && chance <= 1)
+				else if (!villagers.isEmpty() && chance <= CommonConfig.instance.getChanceForInventoryAppleReincarnation())
 				{
 					int stackIndex = WyHelper.getIndexOfItemStack(new ItemStack(Items.APPLE), villagers.get(0).getVillagerInventory());
 					if (stackIndex != -1)
 						tryReplaceApple(original, worldData, players.get(0).inventory, stackIndex, oldDevilFruit.getDevilFruit());					
 				}
-				else if (!blockPosList.isEmpty() && chance <= 1)
+				else if (!blockPosList.isEmpty() && chance <= CommonConfig.instance.getChanceForChestAppleReincarnation())
 				{
 					BlockState state = original.world.getBlockState(blockPosList.get(0));
 					IInventory inven = ChestBlock.getInventory(state, original.world, blockPosList.get(0), false);

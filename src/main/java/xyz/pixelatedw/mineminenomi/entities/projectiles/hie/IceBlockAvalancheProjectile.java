@@ -41,7 +41,7 @@ public class IceBlockAvalancheProjectile extends AbilityProjectileEntity
 	{
 		super(HieProjectiles.ICE_BLOCK_AVALANCHE, world, player);
 		this.setDamage(40);
-		this.setMaxLife(130);
+		this.setMaxLife(150);
 		this.setPassThroughEntities();
 		this.setCanGetStuckInGround();
 		this.onTickEvent = this::onTickEvent;
@@ -119,7 +119,6 @@ public class IceBlockAvalancheProjectile extends AbilityProjectileEntity
 
 	public void onBlockImpactEvent(BlockPos pos)
 	{
-		System.out.println(this.getCollisionSize());
 		this.setCollisionSize(0);
 		this.setMotion(0, 0, 0);
 		if (!this.world.isRemote)
