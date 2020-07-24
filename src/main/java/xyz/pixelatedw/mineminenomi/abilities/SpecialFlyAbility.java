@@ -31,7 +31,7 @@ public class SpecialFlyAbility extends PassiveAbility
 		{
 			player.abilities.allowFlying = true;
 
-			if(!player.world.isRemote && player.abilities.isFlying)
+			if(!player.world.isRemote && !player.abilities.isCreativeMode && player.abilities.isFlying)
 			{
 				if(DevilFruitHelper.hasDevilFruit(player, ModAbilities.SUNA_SUNA_NO_MI))
 					PARTICLES_SUNA.spawn(player.world, player.posX, player.posY, player.posZ, 0, 0, 0);

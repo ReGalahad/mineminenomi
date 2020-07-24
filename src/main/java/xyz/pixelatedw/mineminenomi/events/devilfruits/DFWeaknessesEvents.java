@@ -67,12 +67,14 @@ public class DFWeaknessesEvents
 
 			boolean hasWaterWeakness =  AbilityHelper.isNearbyKairoseki(player) && !player.isPotionActive(ModEffects.BUBBLY_CORAL);
 			boolean hasDarknessWeakness = player.isPotionActive(ModEffects.ABILITY_OFF);
-			
+						
 			if (!player.world.isRemote && props.hasDevilFruit())
 			{
 				if (hasWaterWeakness || hasDarknessWeakness)
 				{
-					player.addPotionEffect(new EffectInstance(Effects.NAUSEA, 100, 0));
+					player.addPotionEffect(new EffectInstance(Effects.WEAKNESS, 100, 0));
+					player.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 100, 0));
+					player.addPotionEffect(new EffectInstance(Effects.MINING_FATIGUE, 100, 0));
 
 					for (int i = 0; i < abilityProps.getEquippedAbilities().length; i++)
 					{

@@ -11,6 +11,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -71,6 +72,7 @@ import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.mineminenomi.init.ModQuests;
+import xyz.pixelatedw.mineminenomi.items.AkumaNoMiItem;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.Ability;
@@ -295,9 +297,46 @@ public class AbilityHelper
 
 		return false;
 	}
+	
+	public static void validateDevilFruitMoves(PlayerEntity player)
+	{
+		if(!CommonConfig.instance.isAbilityFraudChecksEnabled())
+			return;
+		
+		IDevilFruit devilFruitProps = DevilFruitCapability.get(player);
+		IAbilityData abilityProps = AbilityDataCapability.get(player);
+
+		if (WyHelper.isNullOrEmpty(devilFruitProps.getDevilFruit()))
+		{
+			abilityProps.clearUnlockedAbilities(AbilityCategory.DEVIL_FRUIT);
+			return;
+		}
+		
+		ItemStack df = DevilFruitHelper.getDevilFruitItem(devilFruitProps.getDevilFruit());
+
+		abilityProps.clearUnlockedAbilities(AbilityCategory.DEVIL_FRUIT);
+
+		if (df != null && !df.isEmpty())
+		{
+			if (devilFruitProps.hasYamiPower())
+			{
+				ItemStack yami = DevilFruitHelper.getDevilFruitItem("yami_yami");
+				for (Ability a : ((AkumaNoMiItem) yami.getItem()).abilities)
+					if (!AbilityHelper.verifyIfAbilityIsBanned(a))
+						abilityProps.addUnlockedAbility(a);
+			}
+
+			for (Ability a : ((AkumaNoMiItem) df.getItem()).abilities)
+				if (!AbilityHelper.verifyIfAbilityIsBanned(a))
+					abilityProps.addUnlockedAbility(a);
+		}
+	}
 
 	public static void validateRacialMoves(PlayerEntity player)
 	{
+		if(!CommonConfig.instance.isAbilityFraudChecksEnabled())
+			return;
+		
 		IEntityStats props = EntityStatsCapability.get(player);
 		IAbilityData abilityProps = AbilityDataCapability.get(player);
 
@@ -341,6 +380,9 @@ public class AbilityHelper
 
 	public static void validateStyleMoves(PlayerEntity player)
 	{
+		if(!CommonConfig.instance.isAbilityFraudChecksEnabled())
+			return;
+		
 		IEntityStats props = EntityStatsCapability.get(player);
 		
 		if (props.isSwordsman())

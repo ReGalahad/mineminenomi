@@ -20,7 +20,7 @@ public class LiberationAbility extends Ability
 	{
 		super("Liberation", AbilityCategory.DEVIL_FRUIT);
 		this.setDescription("The user expells everything sucked up by the 'Black Hole' at the target location.");
-		this.setMaxCooldown(5);
+		this.setMaxCooldown(2);
 
 		this.onUseEvent = this::onUseEvent;
 	}

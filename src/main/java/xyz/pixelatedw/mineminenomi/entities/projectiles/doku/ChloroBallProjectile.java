@@ -115,8 +115,9 @@ public class ChloroBallProjectile extends AbilityProjectileEntity
 			super.tick();
 			if(!this.world.isRemote)
 			{				
-				for(LivingEntity target : WyHelper.<LivingEntity>getEntitiesNear(this.getPosition(), this.world, 5)) {
-					if(this.getThrower() != target)
+				for(LivingEntity target : WyHelper.<LivingEntity>getEntitiesNear(this.getPosition(), this.world, 5)) 
+				{
+					if(this.getThrower() != target && target.isPotionActive(Effects.POISON))
 						target.addPotionEffect(new EffectInstance(Effects.POISON, 200, 2));
 				}
 				

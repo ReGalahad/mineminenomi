@@ -66,8 +66,7 @@ public class SSyncAbilityDataPacket
 			if(target == null || !(target instanceof LivingEntity))
 				return;
 			
-			IAbilityData props = AbilityDataCapability.get((LivingEntity) target);
-			
+			IAbilityData props = AbilityDataCapability.get((LivingEntity) target);		
 			AbilityDataCapability.INSTANCE.getStorage().readNBT(AbilityDataCapability.INSTANCE, props, null, message.data);	
 		}
 	}

@@ -66,7 +66,10 @@ public class KemuriBoshiProjectile extends AbilityProjectileEntity
 			if(!this.world.isRemote)
 			{
 				for(LivingEntity target : WyHelper.<LivingEntity>getEntitiesNear(this.getPosition(), this.world, 6))
-					target.addPotionEffect(new EffectInstance(Effects.POISON, 80, 1));
+				{
+					if(this.getThrower() != target && !target.isPotionActive(Effects.POISON))
+						target.addPotionEffect(new EffectInstance(Effects.POISON, 80, 1));
+				}
 				
 				if(this.ticksExisted % 2 == 0)
 					PARTICLES.spawn(this.world, this.posX, this.posY, this.posZ, 0, 0, 0);

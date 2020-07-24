@@ -81,11 +81,12 @@ public class ItemsHelper
 
 	public static CompoundNBT setWantedData(World world, String id, long bounty)
 	{
-		CompoundNBT data = null;
+		CompoundNBT data = new CompoundNBT();
 
 		LivingEntity entity = world.getPlayerByUuid(UUID.fromString(id));
 
-		data = new CompoundNBT();
+		if(entity == null)
+			return data;
 
 		data.putString("UUID", id);
 		data.putString("Name", entity.getName().getFormattedText());

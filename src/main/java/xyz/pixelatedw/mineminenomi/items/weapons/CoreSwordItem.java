@@ -160,7 +160,7 @@ public class CoreSwordItem extends Item
 		{
 			SetOnFireEvent event = new SetOnFireEvent(attacker, target, this.fireAspectTimer);
 			if (!MinecraftForge.EVENT_BUS.post(event))
-				attacker.setFire(this.fireAspectTimer);
+				target.setFire(this.fireAspectTimer);
 		}
 
 		if (this.isSlownessInducing)

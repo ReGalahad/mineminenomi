@@ -9,6 +9,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.abilities.SpecialFlyAbility;
+import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
@@ -17,12 +18,15 @@ import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.data.entity.haki.HakiDataCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.haki.IHakiData;
 import xyz.pixelatedw.mineminenomi.events.custom.DorikiEvent;
+import xyz.pixelatedw.mineminenomi.packets.server.SSyncDevilFruitPacket;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.data.ability.AbilityDataCapability;
 import xyz.pixelatedw.wypi.data.ability.IAbilityData;
 import xyz.pixelatedw.wypi.data.quest.IQuestData;
 import xyz.pixelatedw.wypi.data.quest.QuestDataCapability;
+import xyz.pixelatedw.wypi.network.WyNetwork;
+import xyz.pixelatedw.wypi.network.packets.server.SSyncAbilityDataPacket;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class ConfigEvents
@@ -32,9 +36,10 @@ public class ConfigEvents
 	{
 		if (event.isWasDeath())
 		{
-			IDevilFruit oldPlayerProps = DevilFruitCapability.get(event.getOriginal());
-			IDevilFruit newPlayerProps = DevilFruitCapability.get(event.getPlayer());
-
+			IDevilFruit oldDevilFruitProps = DevilFruitCapability.get(event.getOriginal());
+			IDevilFruit newDevilFruitProps = DevilFruitCapability.get(event.getPlayer());
+			IAbilityData newAbilityData = AbilityDataCapability.get(event.getPlayer());
+			
 			INBT nbt = new CompoundNBT();
 			
 			if (CommonConfig.instance.getAfterDeathLogic() == CommonConfig.KeepStatsLogic.FULL)
@@ -49,14 +54,13 @@ public class ConfigEvents
 				MinecraftForge.EVENT_BUS.post(e);
 				
 				// Keep the DF stats
-				oldPlayerProps.setZoanPoint("");
-				nbt = DevilFruitCapability.INSTANCE.writeNBT(oldPlayerProps, null);
-				DevilFruitCapability.INSTANCE.readNBT(newPlayerProps, null, nbt);
-
+				nbt = DevilFruitCapability.INSTANCE.writeNBT(oldDevilFruitProps, null);
+				DevilFruitCapability.INSTANCE.readNBT(newDevilFruitProps, null, nbt);
+				newDevilFruitProps.setZoanPoint("");
+				
 				// Keep the abilities
 				IAbilityData oldAbilityData = AbilityDataCapability.get(event.getOriginal());
 				nbt = AbilityDataCapability.INSTANCE.writeNBT(oldAbilityData, null);
-				IAbilityData newAbilityData = AbilityDataCapability.get(event.getPlayer());
 				AbilityDataCapability.INSTANCE.readNBT(newAbilityData, null, nbt);
 				
 				// Keep the haki data
@@ -131,8 +135,8 @@ public class ConfigEvents
 							newEntityStats.setFightingStyle(oldEntityStats.getFightingStyle());
 							break;
 						case "devil_fruit":
-							nbt = DevilFruitCapability.INSTANCE.writeNBT(oldPlayerProps, null);
-							DevilFruitCapability.INSTANCE.readNBT(newPlayerProps, null, nbt);
+							nbt = DevilFruitCapability.INSTANCE.writeNBT(oldDevilFruitProps, null);
+							DevilFruitCapability.INSTANCE.readNBT(newDevilFruitProps, null, nbt);
 							break;
 						case "haki_exp":
 							IHakiData oldHakiData = HakiDataCapability.get(event.getOriginal());
@@ -151,6 +155,15 @@ public class ConfigEvents
 			IQuestData newQuestData = QuestDataCapability.get(event.getPlayer());
 			QuestDataCapability.INSTANCE.readNBT(newQuestData, null, nbt);
 
+			System.out.println("@@@");
+			
+			WyNetwork.sendTo(new SSyncDevilFruitPacket(event.getPlayer().getEntityId(), newDevilFruitProps), event.getPlayer());
+			WyNetwork.sendTo(new SSyncAbilityDataPacket(event.getPlayer().getEntityId(), newAbilityData), event.getPlayer());
+
+			AbilityHelper.validateDevilFruitMoves(event.getPlayer());
+			AbilityHelper.validateRacialMoves(event.getPlayer());
+			AbilityHelper.validateStyleMoves(event.getPlayer());
+			
 			if (CommonConfig.instance.isSpecialFlyingEnabled() && AbilityDataCapability.get(event.getPlayer()).hasUnlockedAbility(SpecialFlyAbility.INSTANCE) && !event.getPlayer().isCreative() && !event.getPlayer().isSpectator())
 			{
 				event.getPlayer().abilities.allowFlying = false;
