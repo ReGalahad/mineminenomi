@@ -8,8 +8,7 @@ import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 
 public class BlockProtectionRule
-{
-
+{	
 	private boolean bypassGriefRule = false;
 	private boolean banListedBlocks = false;
 	private List<Block> blocks = new ArrayList<Block>();

@@ -3,18 +3,22 @@ package xyz.pixelatedw.mineminenomi.entities.projectiles.mera;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.MinecraftForge;
+import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
+import xyz.pixelatedw.mineminenomi.api.protection.BlockProtectionRule;
+import xyz.pixelatedw.mineminenomi.api.protection.block.AirBlockProtectionRule;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.events.SetOnFireEvent;
 import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 
 public class HidarumaProjectile extends AbilityProjectileEntity
 {
+	private static final BlockProtectionRule GRIEF_RULE = new BlockProtectionRule(AirBlockProtectionRule.INSTANCE); 
+
 	public HidarumaProjectile(World world)
 	{
 		super(MeraProjectiles.HIDARUMA, world);
@@ -43,14 +47,14 @@ public class HidarumaProjectile extends AbilityProjectileEntity
 
 	private void onEntityImpactEvent(LivingEntity hitEntity)
 	{
-		SetOnFireEvent event = new SetOnFireEvent((PlayerEntity) this.getThrower(), hitEntity, 15);
+		SetOnFireEvent event = new SetOnFireEvent(this.getThrower(), hitEntity, 15);
 		if (!MinecraftForge.EVENT_BUS.post(event))
 			hitEntity.setFire(15);
 	}
 	
 	private void onBlockImpactEvent(BlockPos hit)
-	{		
-		this.world.setBlockState(new BlockPos(hit.getX(), hit.getY(), hit.getZ()).up(), Blocks.FIRE.getDefaultState());
+	{	
+		AbilityHelper.placeBlockIfAllowed(this.world, hit.getX(), hit.getY() + 1, hit.getZ(), Blocks.FIRE, GRIEF_RULE);
 	}
 
 	private void onTickEvent()

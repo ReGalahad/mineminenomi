@@ -31,6 +31,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.network.NetworkHooks;
 import xyz.pixelatedw.mineminenomi.api.helpers.ItemsHelper;
+import xyz.pixelatedw.mineminenomi.init.ModBlocks;
 import xyz.pixelatedw.wypi.abilities.events.AbilityProjectileEvents;
 
 public class AbilityProjectileEntity extends ThrowableEntity
@@ -241,6 +242,13 @@ public class AbilityProjectileEntity extends ThrowableEntity
 
 	private boolean passedThroughNonSolidBlock(BlockPos pos)
 	{
+		// #TODO Remove this from API code and create a predicate or smth, also ugly hardcoded shit
+		if(this.world.getBlockState(pos).getBlock() == ModBlocks.BARRIER || this.world.getBlockState(pos).getBlock() == Blocks.BEDROCK)
+		{
+			this.remove();
+			return false;
+		}
+		
 		for(Block block : NON_SOLID_BLOCKS)
 		{
 			if(this.world.getBlockState(pos).getBlock() == block)
