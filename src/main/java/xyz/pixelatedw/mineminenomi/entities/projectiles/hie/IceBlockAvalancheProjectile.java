@@ -41,7 +41,7 @@ public class IceBlockAvalancheProjectile extends AbilityProjectileEntity
 	{
 		super(HieProjectiles.ICE_BLOCK_AVALANCHE, world, player);
 		this.setDamage(40);
-		this.setMaxLife(100);
+		this.setMaxLife(130);
 		this.setPassThroughEntities();
 		this.setCanGetStuckInGround();
 		this.onTickEvent = this::onTickEvent;
@@ -60,6 +60,10 @@ public class IceBlockAvalancheProjectile extends AbilityProjectileEntity
 		if (this.getFinalized() == false)
 		{
 			this.setCollisionSize(this.ticksExisted / 10);
+			if(this.ticksExisted > 3 * 20) {
+				this.setFinalized(true);
+			}
+
 		}
 		if (this.isStuckInGround())
 		{
@@ -100,7 +104,7 @@ public class IceBlockAvalancheProjectile extends AbilityProjectileEntity
 
 	public void onEntityImpactEvent(LivingEntity entity)
 	{
-		List<LivingEntity> targets = WyHelper.getEntitiesNear(this.getPosition(), this.world, 30);
+		List<LivingEntity> targets = WyHelper.getEntitiesNear(this.getPosition(), this.world, this.getCollisionSize());
 		
 		for(LivingEntity target : targets)
 		{
@@ -115,6 +119,7 @@ public class IceBlockAvalancheProjectile extends AbilityProjectileEntity
 
 	public void onBlockImpactEvent(BlockPos pos)
 	{
+		System.out.println(this.getCollisionSize());
 		this.setCollisionSize(0);
 		this.setMotion(0, 0, 0);
 		if (!this.world.isRemote)
