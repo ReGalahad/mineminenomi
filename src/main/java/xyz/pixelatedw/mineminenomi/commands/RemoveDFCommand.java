@@ -34,11 +34,7 @@ public class RemoveDFCommand
 			.requires(source -> source.hasPermissionLevel(2))
 			.then(Commands.argument("target", EntityArgument.player())
 				.executes(context -> removesDF(context, EntityArgument.getPlayer(context, "target"))));
-
-		builder
-			.requires(source -> source.hasPermissionLevel(0))
-				.executes(context -> removesDF(context, context.getSource().asPlayer()));
-	
+		
 		dispatcher.register(builder);
 	}
 
