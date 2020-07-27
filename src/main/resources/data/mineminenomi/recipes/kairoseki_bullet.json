@@ -2,16 +2,19 @@
 	"type": "minecraft:crafting_shaped",
 	"pattern":
 	[
-		"kk ",
-		"kk ",
+		"kc ",
+		"ck ",
 		"   "
 	],
 	"key": 
 	{
 		"k":
 		{
-			"item": "mineminenomi:dense_kairoseki"
-		}	
+			"item": "mineminenomi:kairoseki"
+		},
+		"c": {
+			"item": "minecraft:cobblestone"
+		}
 	},
 	"result": 
 	{

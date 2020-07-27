@@ -2,20 +2,20 @@
 	"type": "minecraft:crafting_shaped",
 	"pattern":
 	[
-		"kk ",
-		"kk ",
-		"   "
+		"   ",
+		"kkk",
+		"kkk"
 	],
 	"key": 
 	{
 		"k":
 		{
-			"item": "mineminenomi:kairoseki"
+			"item": "mineminenomi:dense_kairoseki"
 		}
 	},
 	"result": 
 	{
-		"item": "mineminenomi:dense_kairoseki",
+		"item": "mineminenomi:black_metal",
 		"count": 1
 	}
 }
