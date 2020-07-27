@@ -142,8 +142,8 @@
 				},
 				{
 					"type": "minecraft:item",
-					"name": "mineminenomi:iron_box",
-					"weight": 5
+					"name": "mineminenomi:golden_box",
+					"weight": 2
 				}							
 			]
 		}

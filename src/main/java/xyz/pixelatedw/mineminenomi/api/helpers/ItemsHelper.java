@@ -62,7 +62,7 @@ public class ItemsHelper
 				return x instanceof PlayerEntity && EntityStatsCapability.get(x).isPirate() && worldData.getBounty(x.getUniqueID().toString().toLowerCase()) != 0;
 			}).forEach(x ->
 			{
-				SimpleEntry<String, Long> se = new SimpleEntry<String, Long>(x.getName().getFormattedText(), worldData.getBounty(x.getUniqueID().toString().toLowerCase()));
+				SimpleEntry<String, Long> se = new SimpleEntry<String, Long>(x.getUniqueID().toString(), worldData.getBounty(x.getUniqueID().toString().toLowerCase()));
 				bountiesInPackage.add(se);
 			});
 		}

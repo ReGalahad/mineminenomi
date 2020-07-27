@@ -172,6 +172,13 @@ public class AkumaNoMiItem extends Item
 	}
 
 	@Override
+	public Entity createEntity(World world, Entity location, ItemStack itemstack)
+    {
+		System.out.println("@@@");
+		return location;	
+    }
+	
+	@Override
 	public boolean onEntityItemUpdate(ItemStack stack, ItemEntity entity)
 	{
 		if(entity.world.isRemote)
@@ -193,14 +200,15 @@ public class AkumaNoMiItem extends Item
 
 		boolean shouldRemove = false;
 		
-		List<BlockPos> blockPosList = WyHelper.getNearbyTileEntities(entity.getPosition(), entity.world, 1);
-		
+		List<BlockPos> blockPosList = WyHelper.getNearbyTileEntities(entity.getPosition(), entity.world, 2);
+
 		for (BlockPos pos : blockPosList)
 		{
+			System.out.println(entity.world.getBlockState(pos).getBlock());
 			TileEntity te = entity.world.getTileEntity(pos);
 
 			if (te instanceof HopperTileEntity)
-			{
+			{				
 				shouldRemove = true;
 				break;
 			}
