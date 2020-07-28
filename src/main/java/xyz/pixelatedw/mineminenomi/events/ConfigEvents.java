@@ -154,8 +154,6 @@ public class ConfigEvents
 			nbt = QuestDataCapability.INSTANCE.writeNBT(oldQuestData, null);
 			IQuestData newQuestData = QuestDataCapability.get(event.getPlayer());
 			QuestDataCapability.INSTANCE.readNBT(newQuestData, null, nbt);
-
-			System.out.println("@@@");
 			
 			WyNetwork.sendTo(new SSyncDevilFruitPacket(event.getPlayer().getEntityId(), newDevilFruitProps), event.getPlayer());
 			WyNetwork.sendTo(new SSyncAbilityDataPacket(event.getPlayer().getEntityId(), newAbilityData), event.getPlayer());
