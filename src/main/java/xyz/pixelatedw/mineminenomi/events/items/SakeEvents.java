@@ -13,7 +13,6 @@ import xyz.pixelatedw.wypi.APIConfig;
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
 public class SakeEvents
 {
-
 	@SubscribeEvent
 	public static void onPlayerInteract(EntityInteractSpecific event)
 	{
@@ -30,15 +29,11 @@ public class SakeEvents
 		if(target.getHeldItemMainhand().getItem() != ModItems.SAKE_CUP)
 			return;
 		
-		if(!player.getHeldItemMainhand().getOrCreateTag().getBoolean("crewReady"))
-			return;
-		
 		ItemStack itemStack = target.getHeldItemMainhand();
 		((SakeCupItem)itemStack.getItem()).setLeader(itemStack, player);
 		player.getHeldItemMainhand().damageItem(1, player, (user) -> {
 			user.sendBreakAnimation(EquipmentSlotType.MAINHAND);
 		});
 		event.setCanceled(true);
-	}
-	
+	}	
 }

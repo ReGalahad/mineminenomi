@@ -34,7 +34,6 @@ public class SakeBottleItem extends Item
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand)
 	{
-		ItemStack itemStack = player.getHeldItemMainhand();
 		IEntityStats props = EntityStatsCapability.get(player);
 		if (player.isSneaking())
 		{
@@ -55,7 +54,6 @@ public class SakeBottleItem extends Item
 					return new ActionResult<>(ActionResultType.FAIL, player.getHeldItem(hand));
 				}
 	
-				itemStack.getOrCreateTag().putBoolean("crewReady", true);
 				WyNetwork.sendTo(new SOpenNewCrewScreenPacket(), player);
 			}
 		}
