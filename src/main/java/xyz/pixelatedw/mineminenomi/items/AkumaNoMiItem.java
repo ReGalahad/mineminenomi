@@ -204,7 +204,6 @@ public class AkumaNoMiItem extends Item
 
 		for (BlockPos pos : blockPosList)
 		{
-			System.out.println(entity.world.getBlockState(pos).getBlock());
 			TileEntity te = entity.world.getTileEntity(pos);
 
 			if (te instanceof HopperTileEntity)
@@ -213,7 +212,7 @@ public class AkumaNoMiItem extends Item
 				break;
 			}
 		}
-		
+
 		List<Entity> hopperMinecarts = WyHelper.getEntitiesNear(entity.getPosition(), entity.world, 0.5, HopperMinecartEntity.class);
 
 		if(hopperMinecarts.size() > 0)
