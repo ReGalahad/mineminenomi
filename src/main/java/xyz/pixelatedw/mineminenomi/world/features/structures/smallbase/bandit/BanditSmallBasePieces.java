@@ -189,14 +189,23 @@ public class BanditSmallBasePieces
 			PlacementSettings placementsettings = (new PlacementSettings()).setRotation(this.rotation).setMirror(Mirror.NONE).setCenterOffset(CENTER_OFFSET.get(this.resourceLocation)).addProcessor(this.processor);
 			BlockPos offset = POSITION_OFFSET.get(this.resourceLocation);
 			this.templatePosition.add(Template.transformedBlockPos(placementsettings, new BlockPos(offset.getX(), offset.getY(), offset.getZ())));
+			boolean flag = false;
 			
-			BlockPos blockpos2 = this.templatePosition;
-			int i = world.getHeight(Heightmap.Type.WORLD_SURFACE_WG, this.centerPosition.getX(), this.centerPosition.getZ());
-			this.templatePosition = this.templatePosition.add(0, i - 90 - 1, 0);
-
-			boolean flag = super.addComponentParts(world, random, bb, chunkPos);
-
-			this.templatePosition = blockpos2;
+			try
+			{
+				BlockPos blockpos2 = this.templatePosition;
+				int i = world.getHeight(Heightmap.Type.WORLD_SURFACE_WG, this.centerPosition.getX(), this.centerPosition.getZ());
+				this.templatePosition = this.templatePosition.add(0, i - 90 - 1, 0);
+	
+				flag = super.addComponentParts(world, random, bb, chunkPos);
+	
+				this.templatePosition = blockpos2;
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+			
 			return flag;
 		}
 	}

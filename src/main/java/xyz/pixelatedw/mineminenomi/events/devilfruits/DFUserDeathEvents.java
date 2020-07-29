@@ -109,13 +109,13 @@ public class DFUserDeathEvents
 					if (stackIndex != -1)
 						tryReplaceApple(original, worldData, players.get(0).inventory, stackIndex, oldDevilFruit.getDevilFruit());	
 				}
-				else if (!villagers.isEmpty() && chance <= CommonConfig.instance.getChanceForInventoryAppleReincarnation())
+				else if (!villagers.isEmpty() && chance <= CommonConfig.instance.getChanceForInventoryAppleReincarnation() && !CommonConfig.instance.hasOneFruitPerWorldExtendedLogic())
 				{
 					int stackIndex = WyHelper.getIndexOfItemStack(new ItemStack(Items.APPLE), villagers.get(0).getVillagerInventory());
 					if (stackIndex != -1)
 						tryReplaceApple(original, worldData, players.get(0).inventory, stackIndex, oldDevilFruit.getDevilFruit());					
 				}
-				else if (!blockPosList.isEmpty() && chance <= CommonConfig.instance.getChanceForChestAppleReincarnation())
+				else if (!blockPosList.isEmpty() && chance <= CommonConfig.instance.getChanceForChestAppleReincarnation() && !CommonConfig.instance.hasOneFruitPerWorldExtendedLogic())
 				{
 					BlockState state = original.world.getBlockState(blockPosList.get(0));
 					IInventory inven = ChestBlock.getInventory(state, original.world, blockPosList.get(0), false);

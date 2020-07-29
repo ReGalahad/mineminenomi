@@ -53,7 +53,7 @@ public class ModSetup
 	@SubscribeEvent
 	public static void clientSetup(FMLClientSetupEvent event)
 	{
-		//  Keybindings
+		// Keybindings
 		ModKeybindings.init();	
 		
 		// Static strings
