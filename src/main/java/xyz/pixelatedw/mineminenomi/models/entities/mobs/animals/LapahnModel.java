@@ -170,7 +170,7 @@ public class LapahnModel<T extends LapahnEntity> extends BipedModel<T>
 	public void setRotationAngles(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float headYaw, float headPitch, float scaleFactor)
 	{
 		// Jumping animation...could use some polish later on
-		if (Math.sqrt(entity.getDistanceSq(entity.prevPosX, entity.prevPosY, entity.prevPosZ)) > 0)
+		if (Math.sqrt(entity.getDistanceSq(entity.prevPosX, entity.prevPosY, entity.prevPosZ)) > 0 && !entity.isInWater())
 		{
 			this.rightLeg1.rotateAngleX = 0.9F * (-0.2F + MathHelper.cos(ageInTicks * 0.45F));
 			this.leftLeg1.rotateAngleX = 0.9F * (-0.2F + MathHelper.cos(ageInTicks * 0.45F));

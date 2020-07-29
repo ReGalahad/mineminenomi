@@ -273,6 +273,7 @@ public class YagaraBullEntity extends AnimalEntity implements IDynamicRenderer
 				else if (saddle.isPresent() && !this.isSaddled())
 				{
 					this.setSaddled(true);
+					stack.shrink(1);
 				}
 			}
 			else
