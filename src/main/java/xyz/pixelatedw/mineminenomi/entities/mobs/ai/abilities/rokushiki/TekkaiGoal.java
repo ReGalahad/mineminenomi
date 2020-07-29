@@ -24,7 +24,7 @@ public class TekkaiGoal extends CooldownGoal
 	{
 		super(entity, 50, (int) WyHelper.randomWithRange(5, 10));
 		this.entity = entity;
-		this.entity.addThreat(10);
+		this.entity.addThreat(3);
 		this.maxCount = 2;
 		this.prevHealth = this.entity.getHealth();
 	}

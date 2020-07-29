@@ -13,7 +13,7 @@ public class RankyakuGoal extends CooldownGoal
 	{
 		super(entity, 120, entity.getRNG().nextInt(10));
 		this.entity = entity;
-		this.entity.addThreat(20);
+		this.entity.addThreat(5);
 	}
 
 	@Override

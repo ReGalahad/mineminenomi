@@ -13,7 +13,7 @@ public class YakkodoriGoal extends CooldownGoal
 	{
 		super(entity, 120, entity.getRNG().nextInt(20));
 		this.entity = entity;
-		this.entity.addThreat(10);
+		this.entity.addThreat(3);
 	}
 
 	@Override

@@ -19,6 +19,9 @@ public class EffectsEvents
 	@SubscribeEvent
 	public static void onDrinkMilk(PotionRemoveEvent event)
 	{
+		if(event.getEntityLiving().getActiveHand() == null)
+			return;
+		
 		boolean isMilkBucket = event.getEntityLiving().getHeldItem(event.getEntityLiving().getActiveHand()).getItem() == Items.MILK_BUCKET;
 
 		if (isMilkBucket)

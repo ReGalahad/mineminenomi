@@ -28,7 +28,7 @@ import xyz.pixelatedw.mineminenomi.init.ModWeapons;
 
 public class GenericMarineEntity extends GenericNewEntity
 {
-	protected Item[] marineSwords = new Item[] { ModWeapons.MARINE_SWORD, Items.IRON_SWORD };
+	protected Item[] marineSwords = new Item[] { ModWeapons.MARINE_SWORD, Items.IRON_SWORD, Items.STONE_SWORD };
 
 	private static final Predicate<LivingEntity> NON_MARINE = (target) ->
 	{

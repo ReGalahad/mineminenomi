@@ -13,6 +13,7 @@ import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.ai.goal.OpenDoorGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
+import net.minecraft.entity.merchant.villager.VillagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
@@ -26,7 +27,7 @@ import xyz.pixelatedw.mineminenomi.init.ModWeapons;
 
 public class GenericBanditEntity extends GenericNewEntity
 {
-	protected Item[] banditSwords = new Item[] { ModWeapons.BANDIT_KNIFE, ModWeapons.PIRATE_CUTLASS, Items.IRON_SWORD };
+	protected Item[] banditSwords = new Item[] { ModWeapons.BANDIT_KNIFE, ModWeapons.PIRATE_CUTLASS, Items.IRON_SWORD, Items.STONE_SWORD };
 
 	private static final Predicate<LivingEntity> NON_BANDIT = (target) ->
 	{
@@ -36,7 +37,7 @@ public class GenericBanditEntity extends GenericNewEntity
 		}
 		else
 		{
-			return target instanceof GenericMarineEntity || target instanceof GenericPirateEntity;
+			return target instanceof GenericMarineEntity || target instanceof GenericPirateEntity || target instanceof VillagerEntity;
 		}
 	};
 	

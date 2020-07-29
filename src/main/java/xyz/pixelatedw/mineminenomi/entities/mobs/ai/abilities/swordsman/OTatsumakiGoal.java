@@ -22,7 +22,7 @@ public class OTatsumakiGoal extends CooldownGoal
 	{
 		super(entity, 80, entity.getRNG().nextInt(20));
 		this.entity = entity;
-		this.entity.addThreat(15);
+		this.entity.addThreat(5);
 		this.damage = this.entity.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getValue();
 	}
 

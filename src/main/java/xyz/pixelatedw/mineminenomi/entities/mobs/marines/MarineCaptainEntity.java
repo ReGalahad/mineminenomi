@@ -23,7 +23,6 @@ import xyz.pixelatedw.wypi.WyHelper;
 
 public class MarineCaptainEntity extends GenericMarineEntity implements IRokushikiUser, ISwordsman, IBrawler, IHakiUser
 {
-
 	public MarineCaptainEntity(World world)
 	{
 		super(ModEntities.MARINE_CAPTAIN, world, new String[] {"marine_captain1", "marine_captain2", "marine_captain3", "marine_captain4", "marine_captain5"});
@@ -39,6 +38,10 @@ public class MarineCaptainEntity extends GenericMarineEntity implements IRokushi
 		this.addSwordsmanAbilities(this, 2);
 		this.addBrawlerAbilities(this, 2);
 		this.addBusoshokuHaki(this, 40);
+		
+		// Keep these here because registerGoals is called after registerAttributes, so the threat will be 0 otherwise
+		this.setDoriki(20 + WyHelper.randomWithRange(0, 10) + this.getThreat());
+		this.setBelly(20 + WyHelper.randomWithRange(0, 20));
 	}
 	
 	@Override
@@ -47,12 +50,9 @@ public class MarineCaptainEntity extends GenericMarineEntity implements IRokushi
 		super.registerAttributes();
 		this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(35.0D);
 		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23F);
-		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0D);
+		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(3.0D);
 		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(50.0D);
 		this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(WyHelper.randomWithRange(12, 15));
-		
-		this.setDoriki(20 + WyHelper.randomWithRange(0, 10));
-		this.setBelly(20 + WyHelper.randomWithRange(0, 20));
 	}
 
 	@Override

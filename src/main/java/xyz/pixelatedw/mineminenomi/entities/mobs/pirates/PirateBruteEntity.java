@@ -1,5 +1,7 @@
 package xyz.pixelatedw.mineminenomi.entities.mobs.pirates;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.entity.ILivingEntityData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.SpawnReason;
@@ -16,13 +18,11 @@ import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.mineminenomi.init.ModWeapons;
 import xyz.pixelatedw.wypi.WyHelper;
 
-import javax.annotation.Nullable;
-
 public class PirateBruteEntity extends GenericPirateEntity implements IBrawler, IHakiUser
 {
 	public PirateBruteEntity(World world)
 	{
-		super(ModEntities.PIRATE_BRUTE, world, new String[] {"pirate_brute1", "pirate_brute2"});
+		super(ModEntities.PIRATE_BRUTE, world, new String[] { "pirate_brute1", "pirate_brute2" });
 	}
 	
 	@Override
@@ -32,6 +32,10 @@ public class PirateBruteEntity extends GenericPirateEntity implements IBrawler, 
 		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1, true));
 		this.addBrawlerAbilities(this, 1);
 		this.addBusoshokuHaki(this, 15);
+		
+		// Keep these here because registerGoals is called after registerAttributes, so the threat will be 0 otherwise
+		this.setDoriki(15 + WyHelper.randomWithRange(0, 20) + this.getThreat());
+		this.setBelly(5 + WyHelper.randomWithRange(0, 5));
 	}
 	
 	@Override
@@ -43,9 +47,6 @@ public class PirateBruteEntity extends GenericPirateEntity implements IBrawler, 
 		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0D);
 		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40.0D);
 		this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(WyHelper.randomWithRange(8, 12));
-		
-		this.setDoriki(15 + WyHelper.randomWithRange(0, 20));
-		this.setBelly(5 + WyHelper.randomWithRange(0, 5));
 	}
 	
 	@Override

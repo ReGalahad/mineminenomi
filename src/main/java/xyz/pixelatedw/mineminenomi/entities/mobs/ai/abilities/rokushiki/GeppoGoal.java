@@ -16,7 +16,7 @@ public class GeppoGoal extends CooldownGoal
 	{
 		super(entity, 80, (int) WyHelper.randomWithRange(2, 7));		
 		this.entity = entity;
-		this.entity.addThreat(10);
+		this.entity.addThreat(4);
 	}
 	
 	@Override

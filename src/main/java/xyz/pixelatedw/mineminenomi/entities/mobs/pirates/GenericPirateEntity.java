@@ -26,7 +26,7 @@ import xyz.pixelatedw.mineminenomi.init.ModWeapons;
 
 public class GenericPirateEntity extends GenericNewEntity
 {
-	protected Item[] pirateSwords = new Item[] { ModWeapons.PIRATE_CUTLASS, Items.IRON_SWORD };
+	protected Item[] pirateSwords = new Item[] { ModWeapons.PIRATE_CUTLASS, Items.IRON_SWORD, Items.STONE_SWORD };
 
 	private static final Predicate<LivingEntity> NON_PIRATE = (target) ->
 	{

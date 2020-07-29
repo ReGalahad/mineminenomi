@@ -20,7 +20,7 @@ public class SoruGoal extends CooldownGoal
 	{
 		super(entity, 40, (int) WyHelper.randomWithRange(5, 10));		
 		this.entity = entity;
-		this.entity.addThreat(5);
+		this.entity.addThreat(1);
 	}
 	
 	@Override

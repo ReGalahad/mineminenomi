@@ -10,6 +10,7 @@ public class BusoshokuHakiGoal extends Goal
 	public BusoshokuHakiGoal(GenericNewEntity entity)
 	{
 		this.entity = entity;
+		this.entity.addThreat(10);
 	}
 
 	@Override

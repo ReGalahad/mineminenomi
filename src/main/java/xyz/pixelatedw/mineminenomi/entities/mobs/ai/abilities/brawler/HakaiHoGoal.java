@@ -23,6 +23,7 @@ public class HakaiHoGoal extends CooldownGoal
 		super(entity, 90, entity.getRNG().nextInt(20));
 		this.entity = entity;
 		this.damage = 2 + this.entity.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getValue();
+		this.entity.addThreat(4);
 	}
 
 	@Override
