@@ -39,7 +39,7 @@ public interface IRokushikiUser
 				continue;
 			}
 			
-			if(!goals.contains("rankyaku") && WyHelper.randomWithRange(1, 10) >= 5)
+			if(!goals.contains("rankyaku") && WyHelper.randomWithRange(1, 10) >= 2)
 			{
 				entity.goalSelector.addGoal(1, new RankyakuGoal(entity));
 				rokushikiCount++;

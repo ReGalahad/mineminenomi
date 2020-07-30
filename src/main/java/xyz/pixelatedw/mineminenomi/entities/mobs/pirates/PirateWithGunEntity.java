@@ -46,7 +46,7 @@ public class PirateWithGunEntity extends GenericPirateEntity implements IRangedA
 		this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
 		
 		this.setDoriki(10 + WyHelper.randomWithRange(0, 5));
-		this.setBelly(5 + WyHelper.randomWithRange(0, 5));
+		this.setBelly(10 + WyHelper.randomWithRange(0, 5));
 	}
 
 	@Override

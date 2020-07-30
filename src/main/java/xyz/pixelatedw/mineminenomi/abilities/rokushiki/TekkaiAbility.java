@@ -22,13 +22,10 @@ public class TekkaiAbility extends ContinuousAbility
 		this.onEndContinuityEvent = this::onEndContinuityEvent;
 	}
 
-
-
 	private void duringContinuity(PlayerEntity player, int passiveTimer)
 	{
 		player.addPotionEffect(new EffectInstance(ModEffects.GUARDING, 10, 2, false, false));
 	}
-
 
 	private boolean onStartContinuityEvent(PlayerEntity player) {
 		return true;

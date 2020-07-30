@@ -40,7 +40,7 @@ public class PirateCaptainEntity extends GenericPirateEntity implements IRokushi
 		
 		// Keep these here because registerGoals is called after registerAttributes, so the threat will be 0 otherwise
 		this.setDoriki(20 + WyHelper.randomWithRange(0, 10) + this.getThreat());
-		this.setBelly(20 + WyHelper.randomWithRange(0, 20));
+		this.setBelly(30 + WyHelper.randomWithRange(0, 20));
 	}
 	
 	@Override

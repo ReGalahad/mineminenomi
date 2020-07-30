@@ -41,7 +41,7 @@ public class PirateWithSwordEntity extends GenericPirateEntity
 		this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(4.0D);
 		
 		this.setDoriki(10 + WyHelper.randomWithRange(0, 5));
-		this.setBelly(5 + WyHelper.randomWithRange(0, 5));
+		this.setBelly(10 + WyHelper.randomWithRange(0, 5));
 	}
 
 	@Override

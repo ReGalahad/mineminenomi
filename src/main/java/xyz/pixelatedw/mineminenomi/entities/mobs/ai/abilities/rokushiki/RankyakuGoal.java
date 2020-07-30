@@ -11,7 +11,7 @@ public class RankyakuGoal extends CooldownGoal
 
 	public RankyakuGoal(GenericNewEntity entity)
 	{
-		super(entity, 120, entity.getRNG().nextInt(10));
+		super(entity, 200, entity.getRNG().nextInt(10));
 		this.entity = entity;
 		this.entity.addThreat(5);
 	}
@@ -55,7 +55,9 @@ public class RankyakuGoal extends CooldownGoal
 		double d3 = entity.getAttackTarget().posZ - entity.posZ;
 
 		RankyakuProjectile projectile = new RankyakuProjectile(this.entity.world, this.entity);
-
+		projectile.setDamage(15);
+		projectile.setMaxLife(30);
+		
 		projectile.posY = entity.posY + entity.getHeight() / 2.0F + 0.5D;
 		projectile.shoot(d1 + entity.getRNG().nextGaussian(), d2, d3 + entity.getRNG().nextGaussian(), 1.5F, 0);
 		entity.world.addEntity(projectile);

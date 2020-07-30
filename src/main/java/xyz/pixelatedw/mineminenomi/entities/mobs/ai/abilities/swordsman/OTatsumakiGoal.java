@@ -65,8 +65,8 @@ public class OTatsumakiGoal extends CooldownGoal
 		for(LivingEntity target : targets)
 		{
 			target.attackEntityFrom(DamageSource.causeMobDamage(this.entity), (float) this.damage);				
-			target.addPotionEffect(new EffectInstance(Effects.WEAKNESS, 10 * 20, 1, false, false));
-		}	
+			target.addPotionEffect(new EffectInstance(Effects.WEAKNESS, 5 * 20, 0, false, false));
+		}
 
 		OTatsumakiAbility.PARTICLES.spawn(this.entity.world, this.entity.posX, this.entity.posY, this.entity.posZ, 0, 0, 0);
 		
