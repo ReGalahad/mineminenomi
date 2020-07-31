@@ -13,12 +13,10 @@ import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
 
 public class FlashDialItem extends BlockItem
 {
-
 	public FlashDialItem()
 	{
 		super(ModBlocks.FLASH_DIAL, new Properties().group(ModCreativeTabs.MISC).maxStackSize(16));
 	}
-
 
 	@Override
 	protected boolean onBlockPlaced(BlockPos pos, World world, @Nullable PlayerEntity player, ItemStack itemStack, BlockState state)

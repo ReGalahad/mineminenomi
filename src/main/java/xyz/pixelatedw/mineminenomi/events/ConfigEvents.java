@@ -1,9 +1,11 @@
 package xyz.pixelatedw.mineminenomi.events;
 
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.network.play.server.SPlayerAbilitiesPacket;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -17,6 +19,7 @@ import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.data.entity.haki.HakiDataCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.haki.IHakiData;
+import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.events.custom.DorikiEvent;
 import xyz.pixelatedw.mineminenomi.packets.server.SSyncDevilFruitPacket;
 import xyz.pixelatedw.wypi.APIConfig;
@@ -41,33 +44,17 @@ public class ConfigEvents
 			IAbilityData newAbilityData = AbilityDataCapability.get(event.getPlayer());
 			
 			INBT nbt = new CompoundNBT();
+		
+			BlockPos ogPos = event.getOriginal().getPosition();
+			if(ExtendedWorldData.get(event.getOriginal().world).isInsideRestrictedArea(ogPos.getX(), ogPos.getY(), ogPos.getZ()))
+			{
+				ConfigEvents.restoreFullData(event.getOriginal(), event.getPlayer());
+				return;
+			}
 			
 			if (CommonConfig.instance.getAfterDeathLogic() == CommonConfig.KeepStatsLogic.FULL)
 			{
-				// Keep the entity stats
-				IEntityStats oldEntityStats = EntityStatsCapability.get(event.getOriginal());
-				oldEntityStats.setCola(oldEntityStats.getMaxCola());
-				nbt = EntityStatsCapability.INSTANCE.writeNBT(oldEntityStats, null);
-				IEntityStats newEntityStats = EntityStatsCapability.get(event.getPlayer());
-				EntityStatsCapability.INSTANCE.readNBT(newEntityStats, null, nbt);
-				DorikiEvent e = new DorikiEvent(event.getPlayer());
-				MinecraftForge.EVENT_BUS.post(e);
-				
-				// Keep the DF stats
-				nbt = DevilFruitCapability.INSTANCE.writeNBT(oldDevilFruitProps, null);
-				DevilFruitCapability.INSTANCE.readNBT(newDevilFruitProps, null, nbt);
-				newDevilFruitProps.setZoanPoint("");
-				
-				// Keep the abilities
-				IAbilityData oldAbilityData = AbilityDataCapability.get(event.getOriginal());
-				nbt = AbilityDataCapability.INSTANCE.writeNBT(oldAbilityData, null);
-				AbilityDataCapability.INSTANCE.readNBT(newAbilityData, null, nbt);
-				
-				// Keep the haki data
-				IHakiData oldHakiData = HakiDataCapability.get(event.getOriginal());
-				nbt = HakiDataCapability.INSTANCE.writeNBT(oldHakiData, null);
-				IHakiData newHakiData = HakiDataCapability.get(event.getPlayer());
-				HakiDataCapability.INSTANCE.readNBT(newHakiData, null, nbt);
+				ConfigEvents.restoreFullData(event.getOriginal(), event.getPlayer());
 			}
 			else if (CommonConfig.instance.getAfterDeathLogic() == CommonConfig.KeepStatsLogic.AUTO)
 			{
@@ -169,5 +156,43 @@ public class ConfigEvents
 				((ServerPlayerEntity) event.getPlayer()).connection.sendPacket(new SPlayerAbilitiesPacket(event.getPlayer().abilities));
 			}
 		}
+		else
+		{
+			ConfigEvents.restoreFullData(event.getOriginal(), event.getPlayer());
+		}
+	}
+	
+	private static void restoreFullData(PlayerEntity original, PlayerEntity player)
+	{
+		IDevilFruit oldDevilFruitProps = DevilFruitCapability.get(original);
+		IDevilFruit newDevilFruitProps = DevilFruitCapability.get(player);
+		IAbilityData newAbilityData = AbilityDataCapability.get(player);
+		
+		INBT nbt = new CompoundNBT();
+		
+		// Keep the entity stats
+		IEntityStats oldEntityStats = EntityStatsCapability.get(original);
+		oldEntityStats.setCola(oldEntityStats.getMaxCola());
+		nbt = EntityStatsCapability.INSTANCE.writeNBT(oldEntityStats, null);
+		IEntityStats newEntityStats = EntityStatsCapability.get(player);
+		EntityStatsCapability.INSTANCE.readNBT(newEntityStats, null, nbt);
+		DorikiEvent e = new DorikiEvent(player);
+		MinecraftForge.EVENT_BUS.post(e);
+		
+		// Keep the DF stats
+		nbt = DevilFruitCapability.INSTANCE.writeNBT(oldDevilFruitProps, null);
+		DevilFruitCapability.INSTANCE.readNBT(newDevilFruitProps, null, nbt);
+		newDevilFruitProps.setZoanPoint("");
+		
+		// Keep the abilities
+		IAbilityData oldAbilityData = AbilityDataCapability.get(original);
+		nbt = AbilityDataCapability.INSTANCE.writeNBT(oldAbilityData, null);
+		AbilityDataCapability.INSTANCE.readNBT(newAbilityData, null, nbt);
+		
+		// Keep the haki data
+		IHakiData oldHakiData = HakiDataCapability.get(original);
+		nbt = HakiDataCapability.INSTANCE.writeNBT(oldHakiData, null);
+		IHakiData newHakiData = HakiDataCapability.get(player);
+		HakiDataCapability.INSTANCE.readNBT(newHakiData, null, nbt);
 	}
 }
