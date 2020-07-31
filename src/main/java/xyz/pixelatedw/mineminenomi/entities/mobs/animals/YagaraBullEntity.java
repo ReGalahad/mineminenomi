@@ -232,13 +232,17 @@ public class YagaraBullEntity extends AnimalEntity implements IDynamicRenderer
 				this.setRotation(this.rotationYaw, this.rotationPitch);
 				this.renderYawOffset = this.rotationYaw;
 				this.rotationYawHead = this.renderYawOffset;
-				float f = livingentity.moveStrafing * 0.5F;
+				float f = livingentity.moveStrafing * 0.2F;
 				float f1 = livingentity.moveForward;
-
+			
 				if (this.canPassengerSteer())
 				{
-					this.setAIMoveSpeed((float) this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getValue());
+					this.setAIMoveSpeed((float)this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getValue());
 					super.travel(new Vec3d(f, vec.y, f1));
+				}
+				else if (livingentity instanceof PlayerEntity)
+				{
+					this.setMotion(Vec3d.ZERO);
 				}
 			}
 			else

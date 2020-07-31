@@ -1,7 +1,6 @@
 package xyz.pixelatedw.mineminenomi.config;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +10,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
+import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 import net.minecraftforge.common.ForgeConfigSpec.DoubleValue;
 import net.minecraftforge.common.ForgeConfigSpec.EnumValue;
 import net.minecraftforge.common.ForgeConfigSpec.IntValue;
@@ -26,7 +26,7 @@ public class CommonConfig
 	// General
 	private EnumValue keepStatsAfterDeath;
 	private Map<String, ForgeConfigSpec.BooleanValue> statsToKeep;
-	private List<String> bannedAbilities;
+	private ConfigValue<List<? extends String>> bannedAbilities;
 	private DoubleValue hakiExpMultiplier;
 	private EnumValue haoshokuUnlockLogic;
 	private EnumValue oneFruitPerWorldLogic;
@@ -142,7 +142,6 @@ public class CommonConfig
 			this.hakiExpMultiplier = builder.comment("Multiplies any haki gained by this amount; 1 by default, min: 0, max: 10").defineInRange("Haki Exp Multiplier", 1.0, 0.0, 10.0);
 			this.haoshokuUnlockLogic = builder.comment("Responsible for how player unlock Haoshoku Haki; \n NONE - Haoshoku Haki cannot be unlocked naturally \n RANDOM - Only a few chosen ones receive it when they spawn \n EXPERIENCE - Will unlock based on the total amount of Haki experience a player has \n EXPERIENCE by default").defineEnum("Haoshoku Haki Unlock Logic", HaoshokuUnlockLogic.EXPERIENCE, HaoshokuUnlockLogic.values());		
 			
-			this.bannedAbilities = new ArrayList<String>();
 			Predicate<Object> bannedAbilitiesTest = new Predicate<Object>()
 			{
 				@Override
@@ -155,9 +154,10 @@ public class CommonConfig
 					return !WyHelper.isNullOrEmpty(str);
 				}
 			};
-			this.bannedAbilities.add("Example1");
-			this.bannedAbilities.add("Example2");
-			builder.comment("List with ability names that are banned, the names can be written in any case with or without spaces").defineList("Banned Abilities", this.bannedAbilities, bannedAbilitiesTest);
+			List<String> defaultBannedAbilities = new ArrayList<String>();
+			defaultBannedAbilities.add("example1");
+			defaultBannedAbilities.add("example2");
+			this.bannedAbilities = builder.comment("List with ability names that are banned, the names can be written in any case with or without spaces").defineList("Banned Abilities", defaultBannedAbilities, bannedAbilitiesTest);
 
 			this.keepStatsAfterDeath = builder.comment("Defines which logic to apply after a player's death \n NONE - nothing is kept \n AUTO (default) - only the faction/race/fighting style stats are kept \n FULL - everything is kept \n CUSTOM - will use the 'Stats to Keep' section to determine which stats to keep").defineEnum("Keep Stats after Death", KeepStatsLogic.AUTO,
 				KeepStatsLogic.values());
@@ -486,9 +486,9 @@ public class CommonConfig
 		return this.quests.get();
 	}
 
-	public String[] getBannedAbilities()
+	public List<String> getBannedAbilities()
 	{
-		return Arrays.copyOf(this.bannedAbilities.toArray(), this.bannedAbilities.toArray().length, String[].class);
+		return (List<String>) this.bannedAbilities.get();
 	}
 
 	public KeepStatsLogic getAfterDeathLogic()
