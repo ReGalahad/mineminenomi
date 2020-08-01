@@ -19,6 +19,4 @@ public class ShinzoMassageAbility extends PassiveAbility {
             this.cooldown--;
         }
     }
-
-
 }

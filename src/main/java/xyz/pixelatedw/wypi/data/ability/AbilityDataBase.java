@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.abilities.Ability;
+import xyz.pixelatedw.wypi.abilities.PassiveAbility;
 
 public class AbilityDataBase implements IAbilityData
 {
@@ -104,7 +105,11 @@ public class AbilityDataBase implements IAbilityData
 	public int countUnlockedAbilities(AbilityCategory category)
 	{
 		this.unlockedAbilities.removeIf(ability -> ability == null);
-		return this.unlockedAbilities.parallelStream().filter(ability -> ability.getCategory() == category || category == AbilityCategory.ALL).collect(Collectors.toList()).size();
+		this.unlockedAbilities.removeIf(ability -> ability instanceof PassiveAbility);
+		return this.unlockedAbilities
+			.parallelStream()
+			.filter(ability -> ability.getCategory() == category || category == AbilityCategory.ALL)
+			.collect(Collectors.toList()).size();
 	}
 
 	/*
@@ -229,6 +234,7 @@ public class AbilityDataBase implements IAbilityData
 				.parallel()
 				.filter(ability -> ability != null)
 				.filter(ability -> ability.getCategory() == category || category == AbilityCategory.ALL)
+				.filter(ability -> !(ability instanceof PassiveAbility))
 				.collect(Collectors.toList())
 				.size();
 	}

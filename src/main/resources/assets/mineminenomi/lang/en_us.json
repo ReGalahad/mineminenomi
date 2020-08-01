@@ -48,6 +48,16 @@
 	"ability.mineminenomi.candle_house": "Candle House",
 	"ability.mineminenomi.candle_lock": "Candle Lock",
 	"ability.mineminenomi.candle_wall": "Candle Wall",
+<<<<<<< HEAD
+=======
+	"ability.mineminenomi.candy_armor": "Candy Armor",
+	"ability.mineminenomi.candy_escalator": "Candy Escalator",
+	"ability.mineminenomi.candy_maiden": "Candy Maiden",
+	"ability.mineminenomi.candy_man": "Candy Man",
+	"ability.mineminenomi.candy_stuck_immunity": "Candy Stuck Immunity",
+	"ability.mineminenomi.candy_wall": "Candy Wall",
+	"ability.mineminenomi.candy_wave": "Candy Wave",
+>>>>>>> f62ec9c4... Changed some ability counting methods to ignore passives
 	"ability.mineminenomi.chiyu_hormone": "Chiyu Hormone",
 	"ability.mineminenomi.chiyupopo": "Chiyupopo",
 	"ability.mineminenomi.chloro_ball": "Chloro Ball",
