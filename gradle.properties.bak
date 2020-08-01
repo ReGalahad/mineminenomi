@@ -4,9 +4,10 @@ org.gradle.jvmargs=-Xmx3G
 org.gradle.daemon=false
 
 mod_name=Mine Mine no Mi
-mod_version=0.6.3
+mod_version=0.6.2
+mod_version_id=062
 
-version_type=DEV
+version_type=FINAL
 
 mc_version=1.14.4
 
