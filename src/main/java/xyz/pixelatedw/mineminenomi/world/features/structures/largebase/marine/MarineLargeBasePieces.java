@@ -185,7 +185,7 @@ public class MarineLargeBasePieces
 			// 3 x1 Captain Spawner
 			// 8 x3 Grunt Spawners
 			// 3 x5 Grunt Spawners
-			StructuresHelper.setupSpawners(function, world, pos, StructureFaction.MARINE);
+			StructuresHelper.setupSpawners(function, world, pos, StructureFaction.MARINE, 100);
 			
 			if(function.equalsIgnoreCase("prisoner_x3_spawn") && WyHelper.randomDouble() < 0.25)
 			{

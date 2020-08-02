@@ -67,6 +67,11 @@ public class StructuresHelper
 	
 	public static void setupSpawners(String function, IWorld world, BlockPos pos, StructureFaction faction)
 	{
+		setupSpawners(function, world, pos, faction, 30);
+	}
+	
+	public static void setupSpawners(String function, IWorld world, BlockPos pos, StructureFaction faction, int playerDistance)
+	{
 		String[] func = function.split("_");
 		
 		if(!func[func.length - 1].equalsIgnoreCase("spawn"))

@@ -11,16 +11,20 @@ import net.minecraft.command.Commands;
 import net.minecraft.command.arguments.EntityArgument;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import xyz.pixelatedw.mineminenomi.api.QuestArgument;
 import xyz.pixelatedw.mineminenomi.api.crew.Crew;
 import xyz.pixelatedw.mineminenomi.api.crew.Crew.Member;
 import xyz.pixelatedw.mineminenomi.api.crew.JollyRogerElement;
 import xyz.pixelatedw.mineminenomi.api.helpers.HakiHelper;
+import xyz.pixelatedw.mineminenomi.blocks.tileentities.CustomSpawnerTileEntity;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.data.entity.haki.HakiDataCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.haki.IHakiData;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
+import xyz.pixelatedw.mineminenomi.init.ModBlocks;
+import xyz.pixelatedw.mineminenomi.init.ModEntities;
 import xyz.pixelatedw.mineminenomi.packets.server.SOpenJollyRogerCreatorScreenPacket;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.data.quest.IQuestData;
@@ -74,7 +78,24 @@ public class FGCommand
 			.then(Commands.literal("check_fruits_in_world")
 				.executes(context -> checkFruitsInWorld(context, context.getSource().asPlayer())));
 		
+		builder
+			.then(Commands.literal("place_spawner")
+				.executes(context -> placeSpawner(context, context.getSource().asPlayer())));
+		
 		dispatcher.register(builder);
+	}
+
+	private static int placeSpawner(CommandContext<CommandSource> context, ServerPlayerEntity player)
+	{
+		player.world.setBlockState(player.getPosition(), ModBlocks.CUSTOM_SPAWNER.getDefaultState(), 3);
+		TileEntity spawner = player.world.getTileEntity(player.getPosition());
+		if (spawner instanceof CustomSpawnerTileEntity)
+		{
+			((CustomSpawnerTileEntity) spawner).setSpawnerLimit(2);
+			((CustomSpawnerTileEntity) spawner).setSpawnerMob(ModEntities.MARINE_WITH_SWORD);
+		}
+		
+		return 1;
 	}
 
 	private static int checkCrews(CommandContext<CommandSource> source, ServerPlayerEntity target)
