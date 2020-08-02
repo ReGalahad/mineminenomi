@@ -125,9 +125,7 @@ public class CustomSpawnerTileEntity extends TileEntity implements ITickableTile
 			CompoundNBT nbtEntity = spawnedEntities.getCompound(i);
 			UUID nbtUUID = nbtEntity.getUniqueId("uuid");
 			this.spawnedEntities.add(nbtUUID);
-		}
-		
-		System.out.println(this.spawnedEntities.size());
+		}	
 	}
 
 	@Override

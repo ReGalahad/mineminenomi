@@ -1,11 +1,10 @@
 package xyz.pixelatedw.mineminenomi.entities.mobs.quest.givers;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.Nullable;
-
-import com.google.common.collect.ImmutableList;
 
 import net.minecraft.entity.ILivingEntityData;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -106,7 +105,7 @@ public class BowMasterEntity extends GenericNewEntity implements IQuestGiver
 		List<Quest> availableQuests = new ArrayList<Quest>();
 
 		if(entityProps.isSniper())
-			availableQuests.addAll(ImmutableList.of(ModQuests.SNIPER_TRIAL_01, ModQuests.SNIPER_TRIAL_02, ModQuests.SNIPER_TRIAL_03, ModQuests.SNIPER_TRIAL_04));
+			availableQuests.addAll(Arrays.asList(ModQuests.SNIPER_TRIALS));
 		
 		Quest[] quests = new Quest[availableQuests.size()];	
 		return availableQuests.toArray(quests);

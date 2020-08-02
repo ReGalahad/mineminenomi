@@ -29,24 +29,28 @@ public class ModQuests
 	public static final Quest SWORDSMAN_TRIAL_02 = new SwordsmanTrial02Quest();
 	public static final Quest SWORDSMAN_TRIAL_03 = new SwordsmanTrial03Quest();
 	public static final Quest SWORDSMAN_TRIAL_04 = new SwordsmanTrial04Quest();
+	public static final Quest[] SWORDSMAN_TRIALS = new Quest[] {SWORDSMAN_TRIAL_01, SWORDSMAN_TRIAL_02, SWORDSMAN_TRIAL_03, SWORDSMAN_TRIAL_04};
 
 	// Sniper
 	public static final Quest SNIPER_TRIAL_01 = new SniperTrial01Quest();
 	public static final Quest SNIPER_TRIAL_02 = new SniperTrial02Quest();
 	public static final Quest SNIPER_TRIAL_03 = new SniperTrial03Quest();
 	public static final Quest SNIPER_TRIAL_04 = new SniperTrial04Quest();
+	public static final Quest[] SNIPER_TRIALS = new Quest[] {SNIPER_TRIAL_01, SNIPER_TRIAL_02, SNIPER_TRIAL_03, SNIPER_TRIAL_04};
 
 	// Doctor
 	public static final Quest DOCTOR_TRIAL_01 = new DoctorTrial01Quest();
 	public static final Quest DOCTOR_TRIAL_02 = new DoctorTrial02Quest();
 	public static final Quest DOCTOR_TRIAL_03 = new DoctorTrial03Quest();
+	public static final Quest[] DOCTOR_TRIALS = new Quest[] {DOCTOR_TRIAL_01, DOCTOR_TRIAL_02, DOCTOR_TRIAL_03};
 
 	// Art of Weather
 	public static final Quest ART_OF_WEATHER_TRIAL_01 = new ArtOfWeatherTrial01Quest();
 	public static final Quest ART_OF_WEATHER_TRIAL_02 = new ArtOfWeatherTrial02Quest();
 	public static final Quest ART_OF_WEATHER_TRIAL_03 = new ArtOfWeatherTrial03Quest();
 	public static final Quest ART_OF_WEATHER_TRIAL_04 = new ArtOfWeatherTrial04Quest();
-	
+	public static final Quest[] ART_OF_WEATHER_TRIALS = new Quest[] {ART_OF_WEATHER_TRIAL_01, ART_OF_WEATHER_TRIAL_02, ART_OF_WEATHER_TRIAL_03, ART_OF_WEATHER_TRIAL_04};
+
 	static
 	{
 		if(WyDebug.isDebug())

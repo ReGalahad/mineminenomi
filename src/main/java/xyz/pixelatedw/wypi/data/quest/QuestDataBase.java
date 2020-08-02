@@ -171,5 +171,4 @@ public class QuestDataBase implements IQuestData
 		this.finishedQuests.removeIf(qst -> qst == null);
 		return this.finishedQuests.size();
 	}
-
 }

@@ -19,8 +19,11 @@ import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.entities.mobs.quest.givers.IQuestGiver;
 import xyz.pixelatedw.mineminenomi.init.ModEntities;
+import xyz.pixelatedw.mineminenomi.init.ModQuests;
 import xyz.pixelatedw.wypi.WyHelper;
+import xyz.pixelatedw.wypi.data.quest.QuestDataCapability;
 import xyz.pixelatedw.wypi.debug.WyDebug;
+import xyz.pixelatedw.wypi.quests.Quest;
 
 public class TrainerSpawner
 {
@@ -32,6 +35,7 @@ public class TrainerSpawner
 
 	public void tick(ServerWorld world)
 	{
+		System.out.println(this.cooldown);
 		if (--this.cooldown <= 0)
 		{
 			this.cooldown = CommonConfig.instance.getTimeBetweenTrainerSpawns();
@@ -52,22 +56,37 @@ public class TrainerSpawner
 			IEntityStats props = EntityStatsCapability.get(player);
 			EntityType entityType = null;
 			Biome.Category[] biomes = null;
+<<<<<<< HEAD
 			
 			// TODO Check to see if it has snipers quests available, don't spawn if they've already finished their training
 			if(props.isSniper())
+=======
+			Quest[] quests = null;
+
+			if(props.isSwordsman())
+			{
+				entityType = ModEntities.DOJO_SENSEI;
+				biomes = SWORDSMAN_BIOMES;
+				quests = ModQuests.SWORDSMAN_TRIALS;
+			}
+			else if(props.isSniper())
+>>>>>>> 42edd836... Fixed and improved the trainer spawner world event
 			{
 				entityType = ModEntities.BOW_MASTER;
 				biomes = SNIPER_BIOMES;
+				quests = ModQuests.SNIPER_TRIALS;
 			}
 			else if(props.isWeatherWizard())
 			{
 				entityType = ModEntities.WEATHER_WIZARD;
 				biomes = WEATHER_WIZARD_BIOMES;
+				quests = ModQuests.ART_OF_WEATHER_TRIALS;
 			}
 			else if(props.isDoctor())
 			{
 				entityType = ModEntities.DOCTOR;
 				biomes = DOCTOR_BIOMES;
+				quests = ModQuests.DOCTOR_TRIALS;
 			}
 			
 			if(entityType == null)
@@ -77,9 +96,21 @@ public class TrainerSpawner
 			BlockPos spawnPos = WyHelper.findOnGroundSpawnLocation(world, entityType, targetPos, 20);
 			if(spawnPos == null)
 				return;
-			List<LivingEntity> trainers = WyHelper.<LivingEntity>getEntitiesNear(targetPos, world, 40).stream().filter(entity -> entity instanceof IQuestGiver).collect(Collectors.toList());
-
-			if (spawnPos != null)
+			List<LivingEntity> trainers = WyHelper.<LivingEntity>getEntitiesNear(spawnPos, world, 100).stream().filter(entity -> entity instanceof IQuestGiver).collect(Collectors.toList());
+			boolean hasAvailableQuests = true;
+			
+			if(quests != null)
+			{
+				for(Quest trail : quests)
+				{
+					if(!QuestDataCapability.get(player).hasFinishedQuest(trail))
+						break;
+					
+					hasAvailableQuests = false;
+				}
+			}
+			
+			if (spawnPos != null && hasAvailableQuests)
 			{
 				boolean canSpawnInBiome = Arrays.stream(biomes).anyMatch(category -> world.getBiome(spawnPos).getCategory() == category);
 

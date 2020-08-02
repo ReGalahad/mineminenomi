@@ -1,11 +1,10 @@
 package xyz.pixelatedw.mineminenomi.entities.mobs.quest.givers;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.Nullable;
-
-import com.google.common.collect.ImmutableList;
 
 import net.minecraft.entity.ILivingEntityData;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -120,7 +119,7 @@ public class DojoSenseiEntity extends GenericNewEntity implements IQuestGiver, I
 		List<Quest> availableQuests = new ArrayList<Quest>();
 		
 		if(entityProps.isSwordsman())
-			availableQuests.addAll(ImmutableList.of(ModQuests.SWORDSMAN_TRIAL_01, ModQuests.SWORDSMAN_TRIAL_02, ModQuests.SWORDSMAN_TRIAL_03, ModQuests.SWORDSMAN_TRIAL_04));
+			availableQuests.addAll(Arrays.asList(ModQuests.SWORDSMAN_TRIALS));
 		
 		Quest[] quests = new Quest[availableQuests.size()];	
 		return availableQuests.toArray(quests);

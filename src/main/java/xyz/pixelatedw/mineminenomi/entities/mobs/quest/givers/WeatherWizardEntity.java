@@ -1,11 +1,10 @@
 package xyz.pixelatedw.mineminenomi.entities.mobs.quest.givers;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.Nullable;
-
-import com.google.common.collect.ImmutableList;
 
 import net.minecraft.entity.ILivingEntityData;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -109,7 +108,7 @@ public class WeatherWizardEntity extends GenericNewEntity implements IQuestGiver
 		List<Quest> availableQuests = new ArrayList<Quest>();
 
 		if(entityProps.isWeatherWizard())
-			availableQuests.addAll(ImmutableList.of(ModQuests.ART_OF_WEATHER_TRIAL_01, ModQuests.ART_OF_WEATHER_TRIAL_02, ModQuests.ART_OF_WEATHER_TRIAL_03, ModQuests.ART_OF_WEATHER_TRIAL_04));
+			availableQuests.addAll(Arrays.asList(ModQuests.ART_OF_WEATHER_TRIALS));
 		
 		Quest[] quests = new Quest[availableQuests.size()];	
 		return availableQuests.toArray(quests);
