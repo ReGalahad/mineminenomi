@@ -35,7 +35,6 @@ public class TrainerSpawner
 
 	public void tick(ServerWorld world)
 	{
-		System.out.println(this.cooldown);
 		if (--this.cooldown <= 0)
 		{
 			this.cooldown = CommonConfig.instance.getTimeBetweenTrainerSpawns();
