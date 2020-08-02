@@ -125,8 +125,12 @@ public class DevilFruitHelper
 	{
 		IDevilFruit props = DevilFruitCapability.get(player);
 		String fruitName = WyHelper.getResourceName(df.getDevilFruitName()).replace("_no_mi", "").replace("_model", "");
+		boolean check = props.getDevilFruit().equalsIgnoreCase(fruitName);
 		
-		return props.getDevilFruit().equalsIgnoreCase(fruitName);
+		if(!check && fruitName.equalsIgnoreCase("yami_yami"))
+			check = props.hasYamiPower();
+		
+		return check;
 	}
 		
 	public static boolean isDevilFruitInWorld(World world, String devilFruitName)

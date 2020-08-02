@@ -9,15 +9,14 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.TickPriority;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
-import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
+import xyz.pixelatedw.mineminenomi.api.helpers.DevilFruitHelper;
+import xyz.pixelatedw.mineminenomi.init.ModAbilities;
 import xyz.pixelatedw.mineminenomi.init.ModMaterials;
 
 public class DarknessBlock extends Block
@@ -57,14 +56,12 @@ public class DarknessBlock extends Block
 	{
 		if (entity instanceof LivingEntity)
 		{
-			IDevilFruit dfProps = DevilFruitCapability.get((LivingEntity) entity);
-
-			if (dfProps.getDevilFruit().equalsIgnoreCase("yami_yami") || dfProps.getDevilFruit().equalsIgnoreCase("yamidummy"))
+			if (DevilFruitHelper.hasDevilFruit((LivingEntity) entity, ModAbilities.YAMI_YAMI_NO_MI))
 				world.setBlockState(pos, state.with(USER_ON_TOP, true));
 			else
 			{
 				world.setBlockState(pos, state.with(USER_ON_TOP, false));
-				entity.setMotionMultiplier(state, new Vec3d(0.25D, 0.05F, 0.25D));
+				entity.setMotionMultiplier(state, entity.getMotion().add(0, 0.05, 0));
 			}
 		}
 	}
