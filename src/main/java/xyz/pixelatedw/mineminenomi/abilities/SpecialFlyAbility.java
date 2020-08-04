@@ -17,7 +17,6 @@ public class SpecialFlyAbility extends PassiveAbility
 	private static final ParticleEffect PARTICLES_SUNA = new SpecialFlyingParticleEffect(ModResources.SUNA2);
 	private static final ParticleEffect PARTICLES_GASU = new SpecialFlyingParticleEffect(ModResources.GASU);
 	private static final ParticleEffect PARTICLES_MOKU = new SpecialFlyingParticleEffect(ModResources.MOKU);
-	private static final ParticleEffect PARTICLES_MAGU = new SpecialFlyingParticleEffect(ModResources.MAGU);
 	
 	public SpecialFlyAbility()
 	{
@@ -40,8 +39,6 @@ public class SpecialFlyAbility extends PassiveAbility
 					PARTICLES_GASU.spawn(player.world, player.posX, player.posY, player.posZ, 0, 0, 0);
 				else if(DevilFruitHelper.hasDevilFruit(player, ModAbilities.MOKU_MOKU_NO_MI))
 					PARTICLES_MOKU.spawn(player.world, player.posX, player.posY, player.posZ, 0, 0, 0);
-				else if(DevilFruitHelper.hasDevilFruit(player, ModAbilities.MAGU_MAGU_NO_MI))
-					PARTICLES_MAGU.spawn(player.world, player.posX, player.posY, player.posZ, 0, 0, 0);
 			}
 		}
 	}
