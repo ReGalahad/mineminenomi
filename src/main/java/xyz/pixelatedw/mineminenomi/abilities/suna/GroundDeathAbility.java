@@ -6,7 +6,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
-import xyz.pixelatedw.mineminenomi.api.helpers.CrewHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.FactionHelper;
 import xyz.pixelatedw.mineminenomi.api.protection.BlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.api.protection.block.AirBlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
@@ -33,7 +33,7 @@ public class GroundDeathAbility extends Ability
 
 	private boolean onUseEvent(PlayerEntity player)
 	{
-		List<LivingEntity> targets = WyHelper.<LivingEntity>getEntitiesNear(player.getPosition(), player.world, 25, CrewHelper.NOT_IN_CREW_PREDICATE, LivingEntity.class);
+		List<LivingEntity> targets = WyHelper.<LivingEntity>getEntitiesNear(player.getPosition(), player.world, 25, FactionHelper.getOutsideGroupPredicate(player), LivingEntity.class);
 		targets.remove(player);
 		
 		for (LivingEntity target : targets)

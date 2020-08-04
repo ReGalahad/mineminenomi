@@ -8,7 +8,7 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import xyz.pixelatedw.mineminenomi.api.abilities.ExplosionAbility;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
-import xyz.pixelatedw.mineminenomi.api.helpers.CrewHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.FactionHelper;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.gasu.GastanetParticleEffect;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
@@ -41,7 +41,7 @@ public class GastanetAbility extends Ability
 		explosion.setDamageEntities(true);
 		explosion.doExplosion();		
 		
-		List<LivingEntity> targets = WyHelper.<LivingEntity>getEntitiesNear(player.getPosition(), player.world, 6, CrewHelper.NOT_IN_CREW_PREDICATE, LivingEntity.class);
+		List<LivingEntity> targets = WyHelper.<LivingEntity>getEntitiesNear(player.getPosition(), player.world, 6, FactionHelper.getOutsideGroupPredicate(player), LivingEntity.class);
 		targets.remove(player);
 		
 		for (LivingEntity target : targets)

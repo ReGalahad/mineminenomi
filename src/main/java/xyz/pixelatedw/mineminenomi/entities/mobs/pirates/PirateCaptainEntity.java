@@ -68,7 +68,7 @@ public class PirateCaptainEntity extends GenericPirateEntity implements IRokushi
 
 		if(this.rand.nextDouble() < 0.8)
 		{
-			ItemStack randomSword = new ItemStack(this.pirateSwords[this.rand.nextInt(this.pirateSwords.length)]);
+			ItemStack randomSword = new ItemStack(PIRATE_SWORDS[this.rand.nextInt(PIRATE_SWORDS.length)]);
 			this.setItemStackToSlot(EquipmentSlotType.MAINHAND, randomSword);
 
 			if(this.rand.nextDouble() < 0.2)

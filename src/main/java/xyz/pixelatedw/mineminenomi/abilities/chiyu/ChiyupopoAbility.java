@@ -6,7 +6,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import xyz.pixelatedw.mineminenomi.api.helpers.CrewHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.FactionHelper;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.chiyu.ChiyupopoParticleEffect;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
@@ -32,7 +32,7 @@ public class ChiyupopoAbility extends Ability
 	{
 		player.heal(player.getMaxHealth());
 
-		List<LivingEntity> targets = WyHelper.<LivingEntity>getEntitiesNear(player.getPosition(), player.world, 15, CrewHelper.IN_CREW_PREDICATE, LivingEntity.class);
+		List<LivingEntity> targets = WyHelper.<LivingEntity>getEntitiesNear(player.getPosition(), player.world, 15, FactionHelper.IN_CREW_PREDICATE, LivingEntity.class);
 		targets.remove(player);
 
 		for(LivingEntity entity : targets)

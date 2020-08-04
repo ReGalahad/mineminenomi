@@ -28,7 +28,7 @@ import xyz.pixelatedw.mineminenomi.init.ModWeapons;
 
 public class GenericMarineEntity extends GenericNewEntity
 {
-	protected Item[] marineSwords = new Item[] { ModWeapons.MARINE_SWORD, Items.IRON_SWORD, Items.STONE_SWORD };
+	protected static final Item[] MARINE_SWORDS = new Item[] { ModWeapons.MARINE_SWORD, Items.IRON_SWORD, Items.STONE_SWORD };
 
 	private static final Predicate<LivingEntity> NON_MARINE = (target) ->
 	{
@@ -63,6 +63,28 @@ public class GenericMarineEntity extends GenericNewEntity
 		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal(this, LivingEntity.class, 10, true, true, NON_MARINE));
 	}
 
+	@Override
+	public void baseTick()
+	{
+		super.baseTick();
+		
+		/*
+		if(this.getAttackTarget() != null)
+		{
+			IEntityStats props = EntityStatsCapability.get(this.getAttackTarget());
+			if(props.isMarine())
+			{
+				this.setAttackTarget(null);
+				this.setRevengeTarget(null);
+			}
+			
+			System.out.println(this.getAttackTarget());
+			System.out.println(this.getRevengeTarget());
+			System.out.println("=========================");
+		}
+		*/
+	}
+	
 	@Override
 	protected void registerData()
 	{

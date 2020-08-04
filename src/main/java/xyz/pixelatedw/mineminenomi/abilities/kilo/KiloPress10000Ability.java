@@ -11,7 +11,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.play.server.SEntityVelocityPacket;
 import net.minecraft.util.DamageSource;
-import xyz.pixelatedw.mineminenomi.api.helpers.CrewHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.FactionHelper;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
@@ -61,7 +61,7 @@ public class KiloPress10000Ability extends ContinuousAbility
 			double damage = this.initialPosY - player.posY;
 			if (damage > 0)
 			{
-				List<LivingEntity> targets = WyHelper.getEntitiesNear(player.getPosition(), player.world, 5, CrewHelper.NOT_IN_CREW_PREDICATE, LivingEntity.class);
+				List<LivingEntity> targets = WyHelper.getEntitiesNear(player.getPosition(), player.world, 5, FactionHelper.getOutsideGroupPredicate(player), LivingEntity.class);
 				targets.remove(player);
 				for (LivingEntity entity : targets)
 				{

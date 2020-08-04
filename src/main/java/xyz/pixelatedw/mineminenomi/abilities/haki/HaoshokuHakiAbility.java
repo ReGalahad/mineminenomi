@@ -8,7 +8,7 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.play.server.SPlayEntityEffectPacket;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import xyz.pixelatedw.mineminenomi.api.helpers.CrewHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.FactionHelper;
 import xyz.pixelatedw.mineminenomi.api.helpers.HakiHelper;
 import xyz.pixelatedw.mineminenomi.entities.mobs.GenericNewEntity;
 import xyz.pixelatedw.mineminenomi.entities.mobs.ai.abilities.haki.BusoshokuHakiGoal;
@@ -64,7 +64,7 @@ public class HaoshokuHakiAbility extends ChargeableAbility
 			PARTICLES_3.spawn(player.world, player.posX, player.posY, player.posZ, 0, 0, 0);
 		}
 
-		List<LivingEntity> targets = WyHelper.getEntitiesNear(player.getPosition(), player.world, radius, CrewHelper.NOT_IN_CREW_PREDICATE, LivingEntity.class);
+		List<LivingEntity> targets = WyHelper.getEntitiesNear(player.getPosition(), player.world, radius, FactionHelper.getOutsideGroupPredicate(player), LivingEntity.class);
 		targets.remove(player);
 				
 		for (LivingEntity target : targets)

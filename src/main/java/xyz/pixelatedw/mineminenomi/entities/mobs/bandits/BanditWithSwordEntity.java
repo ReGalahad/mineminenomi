@@ -56,7 +56,7 @@ public class BanditWithSwordEntity extends GenericBanditEntity
 	{
 		spawnData = super.onInitialSpawn(world, difficulty, reason, spawnData, dataTag);
 		
-		ItemStack randomSword = new ItemStack(this.banditSwords[this.rand.nextInt(this.banditSwords.length)]);
+		ItemStack randomSword = new ItemStack(BANDIT_SWORDS[this.rand.nextInt(BANDIT_SWORDS.length)]);
 		this.setItemStackToSlot(EquipmentSlotType.MAINHAND, randomSword);
 
 		return spawnData;

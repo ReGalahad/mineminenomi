@@ -9,7 +9,7 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
-import xyz.pixelatedw.mineminenomi.api.helpers.CrewHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.FactionHelper;
 import xyz.pixelatedw.mineminenomi.init.ModEffects;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.yami.KorouzuParticleEffect;
@@ -49,7 +49,7 @@ public class KurouzuAbility extends ChargeableAbility
 				PARTICLES.spawn(player.world, i, j, k, 0, 0, 0);
 			
 			this.entities.clear();
-			List<LivingEntity> targets = WyHelper.getEntitiesNear(new BlockPos(i, j, k), player.world, 5, CrewHelper.NOT_IN_CREW_PREDICATE, LivingEntity.class);
+			List<LivingEntity> targets = WyHelper.getEntitiesNear(new BlockPos(i, j, k), player.world, 5, FactionHelper.getOutsideGroupPredicate(player), LivingEntity.class);
 			targets.remove(player);
 			
 			for(LivingEntity target : targets)

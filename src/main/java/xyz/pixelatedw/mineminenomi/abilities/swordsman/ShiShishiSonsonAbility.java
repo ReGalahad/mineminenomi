@@ -13,7 +13,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.server.ServerWorld;
 import xyz.pixelatedw.mineminenomi.abilities.haki.BusoshokuHakiImbuingAbility;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
-import xyz.pixelatedw.mineminenomi.api.helpers.CrewHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.FactionHelper;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
 import xyz.pixelatedw.wypi.WyHelper;
@@ -67,7 +67,7 @@ public class ShiShishiSonsonAbility extends Ability
 	{
 		if (this.canDealDamage())
 		{
-			List<LivingEntity> list = WyHelper.getEntitiesNear(player.getPosition(), player.world, 1.6, CrewHelper.NOT_IN_CREW_PREDICATE, LivingEntity.class);
+			List<LivingEntity> list = WyHelper.getEntitiesNear(player.getPosition(), player.world, 1.6, FactionHelper.getOutsideGroupPredicate(player), LivingEntity.class);
 			list.remove(player);
 
 			list.stream().forEach(entity ->

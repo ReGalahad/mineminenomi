@@ -7,7 +7,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
-import xyz.pixelatedw.mineminenomi.api.helpers.CrewHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.FactionHelper;
 import xyz.pixelatedw.mineminenomi.api.protection.BlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.api.protection.block.AirBlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.init.ModBlocks;
@@ -51,7 +51,7 @@ public class BlackWorldAbility extends Ability
 			}
 		}
 		
-		List<LivingEntity> targets = WyHelper.getEntitiesNear(player.getPosition(), player.world, 20, CrewHelper.NOT_IN_CREW_PREDICATE, LivingEntity.class);
+		List<LivingEntity> targets = WyHelper.getEntitiesNear(player.getPosition(), player.world, 20, FactionHelper.getOutsideGroupPredicate(player), LivingEntity.class);
 		targets.remove(player);
 		
 		for(LivingEntity target : targets)

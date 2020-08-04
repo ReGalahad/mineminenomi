@@ -9,7 +9,7 @@ import net.minecraft.network.play.server.SEntityVelocityPacket;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TranslationTextComponent;
-import xyz.pixelatedw.mineminenomi.api.helpers.CrewHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.FactionHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.entities.zoan.BisonHeavyZoanInfo;
@@ -54,7 +54,7 @@ public class FiddleBanffAbility extends Ability
 	{
 		if (this.canDealDamage())
 		{
-			List<LivingEntity> list = WyHelper.getEntitiesNear(player.getPosition(), player.world, 1.6, CrewHelper.NOT_IN_CREW_PREDICATE, LivingEntity.class);
+			List<LivingEntity> list = WyHelper.getEntitiesNear(player.getPosition(), player.world, 1.6, FactionHelper.getOutsideGroupPredicate(player), LivingEntity.class);
 			list.remove(player);
 			for (LivingEntity target : list)
 				target.attackEntityFrom(DamageSource.causePlayerDamage(player), 8);

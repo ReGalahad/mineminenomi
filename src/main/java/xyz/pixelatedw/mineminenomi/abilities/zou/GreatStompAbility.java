@@ -6,7 +6,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.text.TranslationTextComponent;
-import xyz.pixelatedw.mineminenomi.api.helpers.CrewHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.FactionHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.entities.zoan.ZouGuardZoanInfo;
@@ -41,7 +41,7 @@ public class GreatStompAbility extends Ability
 			return false;
 		}
 		
-		List<LivingEntity> targets = WyHelper.getEntitiesNear(player.getPosition(), player.world, 10, CrewHelper.NOT_IN_CREW_PREDICATE, LivingEntity.class);
+		List<LivingEntity> targets = WyHelper.getEntitiesNear(player.getPosition(), player.world, 10, FactionHelper.getOutsideGroupPredicate(player), LivingEntity.class);
 		targets.remove(player);
 		
 		for(LivingEntity entity : targets)

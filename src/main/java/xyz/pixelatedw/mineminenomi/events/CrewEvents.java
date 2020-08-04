@@ -1,13 +1,15 @@
 package xyz.pixelatedw.mineminenomi.events;
 
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import xyz.pixelatedw.mineminenomi.api.helpers.CrewHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.FactionHelper;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.abilities.events.AbilityProjectileEvents;
@@ -28,7 +30,8 @@ public class CrewEvents
 			PlayerEntity attacker = (PlayerEntity) event.getSource().getTrueSource();
 			LivingEntity target = event.getEntityLiving();
 
-			if (CrewHelper.isInCrew(attacker, target))
+			boolean sameGroup = FactionHelper.getSameGroupPredicate(attacker).test(target);
+			if (sameGroup)
 			{
 				event.setCanceled(true);
 				return;
@@ -48,7 +51,8 @@ public class CrewEvents
 			{
 				LivingEntity target = (LivingEntity) hitResult.getEntity();
 
-				if (CrewHelper.isInCrew(attacker, target))
+				boolean sameGroup = FactionHelper.getSameGroupPredicate(attacker).test(target);
+				if (sameGroup)
 				{
 					event.setCanceled(true);
 					return;
@@ -65,11 +69,28 @@ public class CrewEvents
 			PlayerEntity attacker = (PlayerEntity) event.getAttacker();
 			LivingEntity target = event.getEntityLiving();
 
-			if (CrewHelper.isInCrew(attacker, target))
+			boolean sameGroup = FactionHelper.getSameGroupPredicate(attacker).test(target);
+			if (sameGroup)
 			{
 				event.setCanceled(true);
 				return;
 			}
 		}
+	}
+	
+	@SubscribeEvent
+	public static void onTargetSet(LivingSetAttackTargetEvent event)
+	{
+		if(CommonConfig.instance.isFriendlyDamageDisabled() && event.getTarget() instanceof PlayerEntity)
+		{		
+			boolean sameGroup = FactionHelper.getSameGroupPredicate((PlayerEntity) event.getTarget()).test(event.getEntityLiving());
+			if(sameGroup)
+			{
+				if(event.getEntityLiving() instanceof MobEntity)
+					((MobEntity)event.getEntityLiving()).setAttackTarget(null);
+				event.getEntityLiving().setRevengeTarget(null);
+				event.getEntityLiving().setLastAttackedEntity(null);
+			}
+		}	
 	}
 }

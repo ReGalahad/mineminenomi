@@ -69,17 +69,6 @@ public class AbilitiesEvents
 			LivingEntity entity = event.getEntityLiving();
 			IAbilityData ablProps = AbilityDataCapability.get(entity);
 
-			if(entity instanceof PlayerEntity)
-			{
-				for (Ability ability : ablProps.getUnlockedAbilities(AbilityCategory.ALL))
-				{
-					if (ability == null)
-						continue;
-					
-					System.out.println(ability.getName());
-				}
-			}
-			
 			for (Ability ability : ablProps.getUnlockedAbilities(AbilityCategory.ALL))
 			{
 				if (ability == null)

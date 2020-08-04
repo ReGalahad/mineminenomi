@@ -17,7 +17,6 @@ import xyz.pixelatedw.wypi.WyHelper;
 
 public class MarineWithSwordEntity extends GenericMarineEntity
 {
-
 	public MarineWithSwordEntity(World world)
 	{
 		super(ModEntities.MARINE_WITH_SWORD, world, new String[] {"marine1", "marine2", "marine3", "marine4", "marine5"});
@@ -56,7 +55,7 @@ public class MarineWithSwordEntity extends GenericMarineEntity
 	{
 		spawnData = super.onInitialSpawn(world, difficulty, reason, spawnData, dataTag);
 		
-		ItemStack randomSword = new ItemStack(this.marineSwords[this.rand.nextInt(this.marineSwords.length)]);
+		ItemStack randomSword = new ItemStack(MARINE_SWORDS[this.rand.nextInt(MARINE_SWORDS.length)]);
 		this.setItemStackToSlot(EquipmentSlotType.MAINHAND, randomSword);
 
 		return spawnData;

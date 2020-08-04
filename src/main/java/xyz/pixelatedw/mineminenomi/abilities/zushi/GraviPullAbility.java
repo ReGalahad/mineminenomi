@@ -6,7 +6,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.server.ServerWorld;
-import xyz.pixelatedw.mineminenomi.api.helpers.CrewHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.FactionHelper;
 import xyz.pixelatedw.mineminenomi.init.ModResources;
 import xyz.pixelatedw.mineminenomi.particles.data.GenericParticleData;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
@@ -27,7 +27,7 @@ public class GraviPullAbility extends ChargeableAbility{
 	}
 
 	
-	private boolean onStartChargingEvent(PlayerEntity p) {
+	private boolean onStartChargingEvent(PlayerEntity player) {
 		for(double i = 0; i < 2 * Math.PI + 1; i += Math.PI / 32) {
 			GenericParticleData data = new GenericParticleData();
 			data.setTexture(ModResources.GASU);
@@ -37,13 +37,13 @@ public class GraviPullAbility extends ChargeableAbility{
 			double offsetZ = Math.sin(i);
 			data.setMotion(offsetX / 5, 0, offsetZ / 5);
 			data.setHasMotionDecay(false);
-			WyHelper.spawnParticles(data, (ServerWorld) p.world, p.posX + offsetX, p.posY + 1, p.posZ + offsetZ);
+			WyHelper.spawnParticles(data, (ServerWorld) player.world, player.posX + offsetX, player.posY + 1, player.posZ + offsetZ);
 		}
 		return true;
 	}
 	
 	
-	private boolean onEndChargingEvent(PlayerEntity p) {
+	private boolean onEndChargingEvent(PlayerEntity player) {
 		for(double i = 0; i < 2 * Math.PI + 1; i += Math.PI / 32) {
 			GenericParticleData data = new GenericParticleData();
 			data.setTexture(ModResources.GASU);
@@ -52,13 +52,13 @@ public class GraviPullAbility extends ChargeableAbility{
 			double offsetX = Math.cos(i) * 20;
 			double offsetZ = Math.sin(i) * 20;
 			data.setMotion(-offsetX / 10, 0, -offsetZ / 10);
-			WyHelper.spawnParticles(data, (ServerWorld) p.world, p.posX + offsetX, p.posY + 1, p.posZ + offsetZ);
+			WyHelper.spawnParticles(data, (ServerWorld) player.world, player.posX + offsetX, player.posY + 1, player.posZ + offsetZ);
 		}
 
-		List<Entity> list = WyHelper.getEntitiesNear(p.getPosition(), p.world, 20, CrewHelper.NOT_IN_CREW_PREDICATE, LivingEntity.class);
+		List<Entity> list = WyHelper.getEntitiesNear(player.getPosition(), player.world, 20, FactionHelper.getOutsideGroupPredicate(player), LivingEntity.class);
 		list.forEach(e -> {
-			double offsetX = p.posX - e.posX;
-			double offsetZ = p.posZ - e.posZ;
+			double offsetX = player.posX - e.posX;
+			double offsetZ = player.posZ - e.posZ;
 			e.setMotion(offsetX / 2, e.getMotion().y, offsetZ / 2);
 		});
 		return true;

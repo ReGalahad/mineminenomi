@@ -56,7 +56,7 @@ public class PirateWithSwordEntity extends GenericPirateEntity
 	{
 		spawnData = super.onInitialSpawn(world, difficulty, reason, spawnData, dataTag);
 		
-		ItemStack randomSword = new ItemStack(this.pirateSwords[this.rand.nextInt(this.pirateSwords.length)]);
+		ItemStack randomSword = new ItemStack(PIRATE_SWORDS[this.rand.nextInt(PIRATE_SWORDS.length)]);
 		this.setItemStackToSlot(EquipmentSlotType.MAINHAND, randomSword);
 
 		return spawnData;

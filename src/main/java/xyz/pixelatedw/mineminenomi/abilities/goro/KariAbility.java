@@ -5,7 +5,7 @@ import java.util.List;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.DamageSource;
-import xyz.pixelatedw.mineminenomi.api.helpers.CrewHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.FactionHelper;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.goro.KariParticleEffect;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
@@ -38,7 +38,7 @@ public class KariAbility extends ChargeableAbility
 	
 	private boolean onEndChargingEvent(PlayerEntity player)
 	{
-		List<LivingEntity> list = WyHelper.getEntitiesNear(player.getPosition(), player.world, 12, CrewHelper.NOT_IN_CREW_PREDICATE, LivingEntity.class);
+		List<LivingEntity> list = WyHelper.getEntitiesNear(player.getPosition(), player.world, 12, FactionHelper.getOutsideGroupPredicate(player), LivingEntity.class);
 		list.remove(player);
 
 		for (LivingEntity target : list)

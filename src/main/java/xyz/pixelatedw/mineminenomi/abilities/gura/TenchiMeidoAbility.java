@@ -5,8 +5,13 @@ import java.util.List;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.EffectInstance;
+<<<<<<< HEAD
 import net.minecraft.potion.Effects;
 import xyz.pixelatedw.mineminenomi.api.helpers.CrewHelper;
+=======
+import xyz.pixelatedw.mineminenomi.api.helpers.FactionHelper;
+import xyz.pixelatedw.mineminenomi.init.ModEffects;
+>>>>>>> d222802d... Marines and Revos won't hurt each other anymore as part of the friendly fire config option
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.gura.TenchiMeidoParticleEffect;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
@@ -42,7 +47,7 @@ public class TenchiMeidoAbility extends ChargeableAbility
 	
 	private boolean onEndChargingEvent(PlayerEntity player)
 	{
-		List<LivingEntity> targets = WyHelper.<LivingEntity>getEntitiesNear(player.getPosition(), player.world, 20, CrewHelper.NOT_IN_CREW_PREDICATE, LivingEntity.class);
+		List<LivingEntity> targets = WyHelper.<LivingEntity>getEntitiesNear(player.getPosition(), player.world, 20, FactionHelper.getOutsideGroupPredicate(player), LivingEntity.class);
 		targets.removeIf(entity -> !entity.onGround);
 		targets.remove(player);
 		

@@ -16,7 +16,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TranslationTextComponent;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
-import xyz.pixelatedw.mineminenomi.api.helpers.CrewHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.FactionHelper;
 import xyz.pixelatedw.mineminenomi.api.protection.BlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.api.protection.block.CoreBlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.api.protection.block.FoliageBlockProtectionRule;
@@ -100,7 +100,7 @@ public class MoguraTonpoAbility extends Ability
 	{
 		if (this.canDealDamage() && player.posY >= this.initialY)
 		{
-			List<LivingEntity> list = WyHelper.getEntitiesNear(player.getPosition(), player.world, 1.6, CrewHelper.NOT_IN_CREW_PREDICATE, LivingEntity.class);
+			List<LivingEntity> list = WyHelper.getEntitiesNear(player.getPosition(), player.world, 1.6, FactionHelper.getOutsideGroupPredicate(player), LivingEntity.class);
 			list.remove(player);
 			for (LivingEntity target : list)
 				target.attackEntityFrom(DamageSource.causePlayerDamage(player), 8);

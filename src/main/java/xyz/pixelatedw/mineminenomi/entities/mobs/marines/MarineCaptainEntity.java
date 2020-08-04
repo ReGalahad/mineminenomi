@@ -73,7 +73,7 @@ public class MarineCaptainEntity extends GenericMarineEntity implements IRokushi
 	
 		if(this.rand.nextDouble() < 0.8)
 		{
-			ItemStack randomSword = new ItemStack(this.marineSwords[this.rand.nextInt(this.marineSwords.length)]);
+			ItemStack randomSword = new ItemStack(MARINE_SWORDS[this.rand.nextInt(MARINE_SWORDS.length)]);
 			this.setItemStackToSlot(EquipmentSlotType.MAINHAND, randomSword);
 	
 			if(this.rand.nextDouble() < 0.1)

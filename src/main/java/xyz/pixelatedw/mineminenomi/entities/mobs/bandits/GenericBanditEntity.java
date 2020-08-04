@@ -27,7 +27,7 @@ import xyz.pixelatedw.mineminenomi.init.ModWeapons;
 
 public class GenericBanditEntity extends GenericNewEntity
 {
-	protected Item[] banditSwords = new Item[] { ModWeapons.BANDIT_KNIFE, ModWeapons.PIRATE_CUTLASS, Items.IRON_SWORD, Items.STONE_SWORD };
+	protected static final Item[] BANDIT_SWORDS = new Item[] { ModWeapons.BANDIT_KNIFE, ModWeapons.PIRATE_CUTLASS, Items.IRON_SWORD, Items.STONE_SWORD };
 
 	private static final Predicate<LivingEntity> NON_BANDIT = (target) ->
 	{

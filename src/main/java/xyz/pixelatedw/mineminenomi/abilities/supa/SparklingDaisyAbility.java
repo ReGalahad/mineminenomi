@@ -8,7 +8,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
-import xyz.pixelatedw.mineminenomi.api.helpers.CrewHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.FactionHelper;
 import xyz.pixelatedw.mineminenomi.api.protection.BlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.api.protection.block.CoreBlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.api.protection.block.FoliageBlockProtectionRule;
@@ -52,7 +52,7 @@ public class SparklingDaisyAbility extends Ability
 	{
 		if ((cooldownTimer / 20) > (this.maxCooldown / 20) - 2 && player.posY >= this.initialY)
 		{
-			List<LivingEntity> list = WyHelper.getEntitiesNear(player.getPosition(), player.world, 1.6, CrewHelper.NOT_IN_CREW_PREDICATE, LivingEntity.class);
+			List<LivingEntity> list = WyHelper.getEntitiesNear(player.getPosition(), player.world, 1.6, FactionHelper.getOutsideGroupPredicate(player), LivingEntity.class);
 			list.remove(player);
 			for (LivingEntity target : list)
 				target.attackEntityFrom(DamageSource.causePlayerDamage(player), 20);

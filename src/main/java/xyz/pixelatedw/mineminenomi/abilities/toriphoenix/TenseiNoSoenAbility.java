@@ -9,7 +9,7 @@ import net.minecraft.network.play.server.SEntityVelocityPacket;
 import net.minecraft.network.play.server.SPlayerAbilitiesPacket;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.text.TranslationTextComponent;
-import xyz.pixelatedw.mineminenomi.api.helpers.CrewHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.FactionHelper;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.entities.zoan.PhoenixFlyZoanInfo;
@@ -77,7 +77,7 @@ public class TenseiNoSoenAbility extends ChargeableAbility
 	{
 		PARTICLES2.spawn(player.world, player.posX, player.posY, player.posZ, 0, 0, 0);
 		
-		List<LivingEntity> list = WyHelper.getEntitiesNear(player.getPosition(), player.world, 24, CrewHelper.NOT_IN_CREW_PREDICATE, LivingEntity.class);
+		List<LivingEntity> list = WyHelper.getEntitiesNear(player.getPosition(), player.world, 24, FactionHelper.getOutsideGroupPredicate(player), LivingEntity.class);
 		list.remove(player);
 		
 		for (LivingEntity target : list)
