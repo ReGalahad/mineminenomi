@@ -175,12 +175,14 @@ public class OneFruitPerWorldEvents
 	@SubscribeEvent
 	public static void onItemPickedUp(EntityItemPickupEvent event)
 	{
-		if (CommonConfig.instance.hasOneFruitPerWorldExtendedLogic() && event.getItem().getItem().getItem() == Items.SHULKER_BOX)
+		if (CommonConfig.instance.hasOneFruitPerWorldExtendedLogic())
 		{
-			ItemStack shulkerBox = event.getItem().getItem();
-			if (shulkerBox.hasTag())
+			PlayerEntity player = event.getPlayer();
+			ItemStack stack = event.getItem().getItem();
+			
+			if(stack.getItem() == Items.SHULKER_BOX && stack.hasTag())
 			{
-				ListNBT items = shulkerBox.getOrCreateTag().getCompound("BlockEntityTag").getList("Items", Constants.NBT.TAG_COMPOUND);
+				ListNBT items = stack.getOrCreateTag().getCompound("BlockEntityTag").getList("Items", Constants.NBT.TAG_COMPOUND);
 				for (int i = 0; i < items.size(); i++)
 				{
 					CompoundNBT itemNBT = items.getCompound(i);
@@ -193,6 +195,22 @@ public class OneFruitPerWorldEvents
 					if (item instanceof AkumaNoMiItem)
 						items.remove(i);
 				}
+			}
+			else if(stack.getItem() instanceof AkumaNoMiItem)
+			{
+				int inventoryDevilFruits = 0;
+				for(ItemStack invStack : player.inventory.mainInventory)
+				{
+					if(invStack != null && invStack.getItem() instanceof AkumaNoMiItem)
+					{
+						inventoryDevilFruits++;
+						if(inventoryDevilFruits >= 3)
+							break;
+					}
+				}
+				
+				if(inventoryDevilFruits >= 3)
+					event.setCanceled(true);
 			}
 		}
 	}
