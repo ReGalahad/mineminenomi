@@ -16,7 +16,7 @@ import xyz.pixelatedw.wypi.abilities.events.AbilityProjectileEvents;
 import xyz.pixelatedw.wypi.abilities.events.SetOnFireEvent;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
-public class CrewEvents
+public class FactionEvents
 {
 	// Lmao you got bamboozeled there is no crew only us, the Dugongs
 	// (ง •̀_•̀)ง

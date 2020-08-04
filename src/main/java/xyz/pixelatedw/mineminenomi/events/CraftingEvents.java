@@ -2,7 +2,6 @@ package xyz.pixelatedw.mineminenomi.events;
 
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -13,7 +12,7 @@ import xyz.pixelatedw.mineminenomi.init.ModItems;
 import xyz.pixelatedw.wypi.APIConfig;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
-public class EventsCrafting
+public class CraftingEvents
 {
 	@SubscribeEvent
 	public static void onAnvilUpdate(AnvilUpdateEvent event)
@@ -24,7 +23,7 @@ public class EventsCrafting
 			{
 				event.setCost(1);
 				event.setMaterialCost(3);
-				event.setOutput(new ItemStack(event.getLeft().getItem()));
+				event.setOutput(event.getLeft().copy());
 				EnchantmentHelper.setEnchantments(EnchantmentHelper.getEnchantments(event.getLeft()), event.getOutput());
 				event.getOutput().addEnchantment(Enchantments.FLAME, 1);
 			}
@@ -32,7 +31,7 @@ public class EventsCrafting
 			{
 				event.setCost(1);
 				event.setMaterialCost(3);
-				event.setOutput(new ItemStack(event.getLeft().getItem()));
+				event.setOutput(event.getLeft().copy());
 				EnchantmentHelper.setEnchantments(EnchantmentHelper.getEnchantments(event.getLeft()), event.getOutput());
 				event.getOutput().addEnchantment(Enchantments.PUNCH, 1);
 			}
@@ -45,7 +44,7 @@ public class EventsCrafting
 				
 				event.setCost(1);
 				event.setMaterialCost(3 * level);
-				event.setOutput(new ItemStack(event.getLeft().getItem()));
+				event.setOutput(event.getLeft().copy());
 				EnchantmentHelper.setEnchantments(EnchantmentHelper.getEnchantments(event.getLeft()), event.getOutput());
 				event.getOutput().addEnchantment(Enchantments.POWER, level);
 			}
@@ -56,7 +55,7 @@ public class EventsCrafting
 			{
 				event.setCost(1);
 				event.setMaterialCost(10);
-				event.setOutput(new ItemStack(event.getLeft().getItem()));
+				event.setOutput(event.getLeft().copy());
 				EnchantmentHelper.setEnchantments(EnchantmentHelper.getEnchantments(event.getLeft()), event.getOutput());
 				event.getOutput().addEnchantment(ModEnchantments.KAIROSEKI, 1);
 			}
@@ -69,7 +68,7 @@ public class EventsCrafting
 				
 				event.setCost(1);
 				event.setMaterialCost(5 * level);
-				event.setOutput(new ItemStack(event.getLeft().getItem()));
+				event.setOutput(event.getLeft().copy());
 				EnchantmentHelper.setEnchantments(EnchantmentHelper.getEnchantments(event.getLeft()), event.getOutput());
 				event.getOutput().addEnchantment(Enchantments.SHARPNESS, 3 * level);
 			}
@@ -77,7 +76,7 @@ public class EventsCrafting
 			{
 				event.setCost(1);
 				event.setMaterialCost(3);
-				event.setOutput(new ItemStack(event.getLeft().getItem()));
+				event.setOutput(event.getLeft().copy());
 				EnchantmentHelper.setEnchantments(EnchantmentHelper.getEnchantments(event.getLeft()), event.getOutput());
 				event.getOutput().addEnchantment(Enchantments.FIRE_ASPECT, 1);
 			}
@@ -90,7 +89,7 @@ public class EventsCrafting
 				
 				event.setCost(1);
 				event.setMaterialCost(3 * level);
-				event.setOutput(new ItemStack(event.getLeft().getItem()));
+				event.setOutput(event.getLeft().copy());
 				EnchantmentHelper.setEnchantments(EnchantmentHelper.getEnchantments(event.getLeft()), event.getOutput());
 				event.getOutput().addEnchantment(Enchantments.SHARPNESS, level);
 			}
@@ -98,7 +97,7 @@ public class EventsCrafting
 			{
 				event.setCost(1);
 				event.setMaterialCost(3);
-				event.setOutput(new ItemStack(event.getLeft().getItem()));
+				event.setOutput(event.getLeft().copy());
 				EnchantmentHelper.setEnchantments(EnchantmentHelper.getEnchantments(event.getLeft()), event.getOutput());
 				event.getOutput().addEnchantment(ModEnchantments.DIAL_FLASH, 1);
 			}
@@ -111,7 +110,7 @@ public class EventsCrafting
 				
 				event.setCost(1);
 				event.setMaterialCost(3 * level);
-				event.setOutput(new ItemStack(event.getLeft().getItem()));
+				event.setOutput(event.getLeft().copy());
 				EnchantmentHelper.setEnchantments(EnchantmentHelper.getEnchantments(event.getLeft()), event.getOutput());
 				event.getOutput().addEnchantment(ModEnchantments.DIAL_IMPACT, level);
 			}
@@ -124,7 +123,7 @@ public class EventsCrafting
 				
 				event.setCost(1);
 				event.setMaterialCost(3 * level);
-				event.setOutput(new ItemStack(event.getLeft().getItem()));
+				event.setOutput(event.getLeft().copy());
 				EnchantmentHelper.setEnchantments(EnchantmentHelper.getEnchantments(event.getLeft()), event.getOutput());
 				event.getOutput().addEnchantment(Enchantments.KNOCKBACK, level);
 			}

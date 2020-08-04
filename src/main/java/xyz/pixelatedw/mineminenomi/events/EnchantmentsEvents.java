@@ -13,7 +13,7 @@ import xyz.pixelatedw.mineminenomi.init.ModEnchantments;
 import xyz.pixelatedw.wypi.APIConfig;
 
 @Mod.EventBusSubscriber(modid = APIConfig.PROJECT_ID)
-public class EventsEnchantments
+public class EnchantmentsEvents
 {
 
 	@SubscribeEvent
