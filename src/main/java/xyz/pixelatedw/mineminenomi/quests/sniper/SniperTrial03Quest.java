@@ -80,7 +80,8 @@ public class SniperTrial03Quest extends Quest
 			
 			player.world.addEntity(target);			
 			
-			WyNetwork.sendToAll(new SDespawnQuestObjectivePacket(player.getUniqueID(), target.getEntityId()));
+			if(target.isAlive())
+				WyNetwork.sendToAll(new SDespawnQuestObjectivePacket(player.getUniqueID(), target.getEntityId()));
 		}
 		if(!this.objective02.isLocked())
 			WyHelper.sendMsgToPlayer(player, new TranslationTextComponent(RESET_DIALOGUE).getFormattedText());

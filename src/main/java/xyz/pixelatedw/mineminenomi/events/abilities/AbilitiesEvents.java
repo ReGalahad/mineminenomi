@@ -69,12 +69,24 @@ public class AbilitiesEvents
 			LivingEntity entity = event.getEntityLiving();
 			IAbilityData ablProps = AbilityDataCapability.get(entity);
 
-			for (Ability ability : ablProps.getUnlockedAbilities(AbilityCategory.ALL)) {
-
+			if(entity instanceof PlayerEntity)
+			{
+				for (Ability ability : ablProps.getUnlockedAbilities(AbilityCategory.ALL))
+				{
+					if (ability == null)
+						continue;
+					
+					System.out.println(ability.getName());
+				}
+			}
+			
+			for (Ability ability : ablProps.getUnlockedAbilities(AbilityCategory.ALL))
+			{
 				if (ability == null)
 					continue;
 
-				if (ability instanceof LogiaInvulnerabilityAbility) {
+				if (ability instanceof LogiaInvulnerabilityAbility)
+				{
 					boolean result = ((LogiaInvulnerabilityAbility) ablProps.getUnlockedAbility(ability)).damageReceived(entity, event.getSource());
 					event.setCanceled(result);
 				}

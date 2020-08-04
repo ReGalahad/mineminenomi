@@ -105,9 +105,9 @@ public class AbilityDataBase implements IAbilityData
 	public int countUnlockedAbilities(AbilityCategory category)
 	{
 		this.unlockedAbilities.removeIf(ability -> ability == null);
-		this.unlockedAbilities.removeIf(ability -> ability instanceof PassiveAbility);
 		return this.unlockedAbilities
 			.parallelStream()
+			.filter(ability -> !(ability instanceof PassiveAbility))
 			.filter(ability -> ability.getCategory() == category || category == AbilityCategory.ALL)
 			.collect(Collectors.toList()).size();
 	}

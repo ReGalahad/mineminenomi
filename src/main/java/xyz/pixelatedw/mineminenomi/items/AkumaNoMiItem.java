@@ -144,9 +144,14 @@ public class AkumaNoMiItem extends Item
 
 		if (!DevilFruitHelper.hasDevilFruit(player, ModAbilities.YOMI_YOMI_NO_MI))
 		{
-			for (Ability a : abilities)
+			for (Ability a : this.abilities)
+			{
 				if (!AbilityHelper.verifyIfAbilityIsBanned(a) && abilityDataProps.getUnlockedAbility(a) == null)
+				{
+					System.out.println(a.getName());
 					abilityDataProps.addUnlockedAbility(a);
+				}
+			}
 			if (!player.world.isRemote)
 			{
 				WyNetwork.sendTo(new SSyncDevilFruitPacket(player.getEntityId(), devilFruitProps), player);
@@ -173,8 +178,7 @@ public class AkumaNoMiItem extends Item
 
 	@Override
 	public Entity createEntity(World world, Entity location, ItemStack itemstack)
-    {
-		System.out.println("@@@");
+    {	
 		return location;	
     }
 	
