@@ -3,9 +3,12 @@
 	"pattern": [
 		"i",
 		"i",
-		"i"
+		"s"
 	],
 	"key": {
+		"s": {
+			"item": "minecraft:stick"
+		},
 		"i": {
 			"item": "minecraft:iron_block"
 		}
