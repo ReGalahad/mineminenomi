@@ -10,15 +10,12 @@ import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
 import xyz.pixelatedw.mineminenomi.api.protection.BlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.api.protection.block.AirBlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.api.protection.block.FoliageBlockProtectionRule;
-import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.common.CommonExplosionParticleEffect;
-import xyz.pixelatedw.mineminenomi.particles.effects.sniper.KemuriBoshiParticleEffect;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.abilities.projectiles.AbilityProjectileEntity;
 
 public class SakuretsuSabotenBoshiProjectile extends AbilityProjectileEntity
 {
-	private static final ParticleEffect PARTICLES = new KemuriBoshiParticleEffect();
 	private static final BlockProtectionRule GRIEF_RULE = new BlockProtectionRule(AirBlockProtectionRule.INSTANCE, FoliageBlockProtectionRule.INSTANCE); 
 
 	public SakuretsuSabotenBoshiProjectile(World world)
@@ -54,7 +51,7 @@ public class SakuretsuSabotenBoshiProjectile extends AbilityProjectileEntity
 		explosion.setDestroyBlocks(false);
 		explosion.setFireAfterExplosion(false);
 		explosion.setSmokeParticles(new CommonExplosionParticleEffect(6));
-		explosion.setDamageEntities(true);
+		explosion.setDamageEntities(false);
 		explosion.doExplosion();
 		
 		int flag = 2 | 16 | 32;
