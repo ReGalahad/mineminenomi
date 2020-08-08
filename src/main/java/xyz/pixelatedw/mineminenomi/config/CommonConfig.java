@@ -44,6 +44,8 @@ public class CommonConfig
 	private DoubleValue dorikiRewardMultiplier;
 	private BooleanValue minimumDorikiPerKill;
 	private BooleanValue abilityFraudChecks;
+	private BooleanValue destroySpawner;
+	private BooleanValue removeExpCap;
 	private DoubleValue chanceForDroppedAppleReincarnation;
 	private DoubleValue chanceForInventoryAppleReincarnation;
 	private DoubleValue chanceForChestAppleReincarnation;
@@ -141,6 +143,8 @@ public class CommonConfig
 			this.abilityFraudChecks = builder.comment("Runs a check for all abilities on a player to remove dupes or suspicious abilities when the player joins the world; true by default").define("Ability Fraud Checks", true);
 			this.hakiExpMultiplier = builder.comment("Multiplies any haki gained by this amount; 1 by default, min: 0, max: 10").defineInRange("Haki Exp Multiplier", 1.0, 0.0, 10.0);
 			this.haoshokuUnlockLogic = builder.comment("Responsible for how player unlock Haoshoku Haki; \n NONE - Haoshoku Haki cannot be unlocked naturally \n RANDOM - Only a few chosen ones receive it when they spawn \n EXPERIENCE - Will unlock based on the total amount of Haki experience a player has \n EXPERIENCE by default").defineEnum("Haoshoku Haki Unlock Logic", HaoshokuUnlockLogic.EXPERIENCE, HaoshokuUnlockLogic.values());		
+			this.destroySpawner = builder.comment("Destroys the spawner after all its spawns are killed; true by default").define("Destroy Spawner", true);
+			this.removeExpCap = builder.comment("Removes the limit for doriki and haki exp gain, please note that even if the soft limits are removed there still are some technical limits for this, in this case its 2.147.483.647; false by default").define("Remove Doriki and Haki Exp limits", false);
 			
 			Predicate<Object> bannedAbilitiesTest = new Predicate<Object>()
 			{
@@ -272,6 +276,16 @@ public class CommonConfig
 			this.fovRemover = builder.comment("Keeps the FOV fixed when the player has speed effects active").define("FOV Remover", true);
 		}
 		builder.pop();
+	}
+	
+	public boolean getRemoveSoftLimitForExp()
+	{
+		return this.removeExpCap.get();
+	}
+	
+	public boolean getDestroySpawner()
+	{
+		return this.destroySpawner.get();
 	}
 	
 	public double getChanceForChestAppleReincarnation()

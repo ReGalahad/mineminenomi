@@ -1,6 +1,7 @@
 package xyz.pixelatedw.mineminenomi.data.entity.haki;
 
 import net.minecraft.util.math.MathHelper;
+import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
 
 public class HakiDataBase implements IHakiData
@@ -17,7 +18,8 @@ public class HakiDataBase implements IHakiData
 	public void alterKenbunshokuHakiExp(float value)
 	{
 		this.kenbunshokuExp += value;
-		this.kenbunshokuExp = MathHelper.clamp(this.kenbunshokuExp, 0, ModValues.KENBUNSHOKU_MAX_EXP);
+		if(!CommonConfig.instance.getRemoveSoftLimitForExp())
+			this.kenbunshokuExp = MathHelper.clamp(this.kenbunshokuExp, 0, ModValues.KENBUNSHOKU_MAX_EXP);
 	}
 
 	@Override
@@ -36,7 +38,8 @@ public class HakiDataBase implements IHakiData
 	public void alterBusoshokuHardeningHakiExp(float value)
 	{
 		this.busoshokuHardeningExp += value;
-		this.busoshokuHardeningExp = MathHelper.clamp(this.busoshokuHardeningExp, 0, ModValues.BUSOSHOKU_HARDENING_MAX_EXP);		
+		if(!CommonConfig.instance.getRemoveSoftLimitForExp())
+			this.busoshokuHardeningExp = MathHelper.clamp(this.busoshokuHardeningExp, 0, ModValues.BUSOSHOKU_HARDENING_MAX_EXP);		
 	}
 
 	@Override
@@ -55,7 +58,8 @@ public class HakiDataBase implements IHakiData
 	public void alterBusoshokuImbuingHakiExp(float value)
 	{
 		this.busoshokuImbuingExp += value;
-		this.busoshokuImbuingExp = MathHelper.clamp(this.busoshokuImbuingExp, 0, ModValues.BUSOSHOKU_IMBUING_MAX_EXP);		
+		if(!CommonConfig.instance.getRemoveSoftLimitForExp())
+			this.busoshokuImbuingExp = MathHelper.clamp(this.busoshokuImbuingExp, 0, ModValues.BUSOSHOKU_IMBUING_MAX_EXP);		
 	}
 
 	@Override

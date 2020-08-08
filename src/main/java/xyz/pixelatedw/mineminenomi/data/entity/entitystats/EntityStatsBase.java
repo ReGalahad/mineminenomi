@@ -1,5 +1,6 @@
 package xyz.pixelatedw.mineminenomi.data.entity.entitystats;
 
+import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.init.ModValues;
 import xyz.pixelatedw.wypi.WyHelper;
 
@@ -23,7 +24,7 @@ public class EntityStatsBase implements IEntityStats
 	{
 		if (this.doriki + value < 0)
 			this.doriki = 0;
-		else if(this.doriki + value > ModValues.MAX_DORIKI)
+		else if(!CommonConfig.instance.getRemoveSoftLimitForExp() && this.doriki + value > ModValues.MAX_DORIKI)
 			this.doriki = ModValues.MAX_DORIKI;
 		else
 			this.doriki = this.doriki + value;
@@ -32,6 +33,9 @@ public class EntityStatsBase implements IEntityStats
 	@Override
 	public void setDoriki(int value)
 	{
+		if(CommonConfig.instance.getRemoveSoftLimitForExp())
+			this.doriki = value;
+		
 		if(value <= ModValues.MAX_DORIKI)
 			this.doriki = value;
 		else

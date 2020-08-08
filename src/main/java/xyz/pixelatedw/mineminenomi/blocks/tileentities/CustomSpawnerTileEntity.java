@@ -16,6 +16,7 @@ import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.common.util.Constants;
+import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.init.ModTileEntities;
 import xyz.pixelatedw.wypi.WyHelper;
 
@@ -60,8 +61,23 @@ public class CustomSpawnerTileEntity extends TileEntity implements ITickableTile
 	    	if(this.world.getBlockState(this.pos.down()).getBlock() == Blocks.AIR)
 	    		this.world.setBlockState(this.pos, Blocks.AIR.getDefaultState());
 			
-			boolean flag = false;
-
+	    	if(CommonConfig.instance.getDestroySpawner() && this.spawnedEntities.size() > 0)
+	    	{
+	    		int alive = 0;
+				for (UUID spawnUUID : this.spawnedEntities)
+				{
+					LivingEntity target = this.world.getPlayerByUuid(spawnUUID);
+					if(target != null && target.isAlive())
+					{
+						alive++;
+						break;
+					}
+				}
+				
+				if(alive == 0)
+					this.world.setBlockState(this.pos, Blocks.AIR.getDefaultState());
+	    	}
+	    	
 			List<PlayerEntity> nearbyEntities = WyHelper.getEntitiesNear(this.getPos(), this.world, this.playerDistance, PlayerEntity.class);
 			
 			if (!nearbyEntities.isEmpty())
@@ -88,23 +104,17 @@ public class CustomSpawnerTileEntity extends TileEntity implements ITickableTile
 			{
 				if (this.spawnedEntities.size() == this.spawnLimit)
 				{
-					flag = true;
-				}
-			}
-
-			if (flag)
-			{
-				for (UUID spawnUUID : this.spawnedEntities)
-				{
-					for(Entity target : WyHelper.getEntitiesNear(this.getPos(), this.world, 200, this.entityToSpawn.create(this.world).getClass()))
+					for (UUID spawnUUID : this.spawnedEntities)
 					{
-						if(target.getUniqueID().equals(spawnUUID))
-							target.remove();
+						for(Entity target : WyHelper.getEntitiesNear(this.getPos(), this.world, 200, this.entityToSpawn.create(this.world).getClass()))
+						{
+							if(target.getUniqueID().equals(spawnUUID))
+								target.remove();
+						}
 					}
+					this.spawnedEntities.clear();
+					this.markDirty();
 				}
-				this.spawnedEntities.clear();
-				this.markDirty();
-				flag = false;
 			}
 		}
 	}
