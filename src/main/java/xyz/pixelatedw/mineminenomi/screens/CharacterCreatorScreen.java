@@ -24,7 +24,6 @@ import xyz.pixelatedw.wypi.network.WyNetwork;
 @OnlyIn(Dist.CLIENT)
 public class CharacterCreatorScreen extends Screen
 {
-	
 	private PlayerEntity player;
 	private IEntityStats props;
 	private int page = 0, selectedOpt = 0, maxOpt, lastFac = 0, lastRace = 0, lastFStyle = 0;
