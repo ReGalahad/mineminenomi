@@ -9,32 +9,34 @@ import net.minecraft.client.renderer.model.ModelBox;
 import net.minecraft.entity.LivingEntity;
 
 public class StrawHatModel extends BipedModel {
-	private final RendererModel bb_main;
+	private final RendererModel Hat;
 
 	public StrawHatModel() {
 		textureWidth = 32;
 		textureHeight = 32;
 
-		bb_main = new RendererModel(this);
-		bb_main.setRotationPoint(0.0F, 24.0F, 0.0F);
-		bb_main.cubeList.add(new ModelBox(bb_main, 0, 12, -4.0F, -8.0F, -4.0F, 8, 3, 8, 0.0F, false));
-		bb_main.cubeList.add(new ModelBox(bb_main, 0, 1, -6.0F, -5.0F, -6.0F, 12, 1, 12, 0.0F, false));
+		Hat = new RendererModel(this);
+		Hat.setRotationPoint(0.0F, 24.0F, 0.0F);
+		Hat.cubeList.add(new ModelBox(Hat, 14, 1, -2.0F, -9.0F, -2.0F, 4, 1, 4, 0.0F, false));
+		Hat.cubeList.add(new ModelBox(Hat, 0, 6, -3.0F, -8.0F, -3.0F, 6, 1, 6, 0.0F, false));
+		Hat.cubeList.add(new ModelBox(Hat, 0, 13, -4.0F, -7.0F, -4.0F, 8, 2, 8, 0.0F, false));
+		Hat.cubeList.add(new ModelBox(Hat, 0, 1, -6.0F, -5.0F, -6.0F, 12, 1, 12, 0.0F, false));
 	}
 
 	@Override
 	public void render(LivingEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
 	{
-		scale = scale * 1.1f;
+		scale = scale * 1.15f;
 
-		this.bipedHeadwear = this.bb_main;
+		this.bipedHeadwear = this.Hat;
 
 		this.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
 
 		if(this.isSneak)
-			this.bb_main.offsetY = 0.2F;
+			this.Hat.offsetY = 0.2F;
 
-		this.bb_main.render(scale);
+		this.Hat.render(scale);
 	}
 
 	public void setRotationAngle(RendererModel modelRenderer, float x, float y, float z) {
