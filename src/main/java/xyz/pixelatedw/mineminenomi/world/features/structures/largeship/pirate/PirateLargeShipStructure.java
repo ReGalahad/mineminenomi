@@ -4,7 +4,6 @@ import java.util.Random;
 
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.biome.Biome;
@@ -65,10 +64,12 @@ public class PirateLargeShipStructure extends ScatteredStructure<NoFeatureConfig
 	@Override
 	public boolean hasStartAt(ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ)
 	{
-		ChunkPos chunkPos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
-		if (chunkPosX == chunkPos.x && chunkPosZ == chunkPos.z && WyHelper.isSurfaceFlat(chunkGen, chunkPosX, chunkPosZ, 3) && MathHelper.clamp(WyHelper.randomWithRange(0, 100) + WyHelper.randomDouble(), 0, 100) < CommonConfig.instance.getChanceForLargeShipsSpawn())
+		boolean isFlat = WyHelper.isSurfaceFlat(chunkGen, chunkPosX, chunkPosZ, 3);
+		boolean isChance = MathHelper.clamp(WyHelper.randomWithRange(0, 100) + WyHelper.randomDouble(), 0, 100) < CommonConfig.instance.getChanceForLargeShipsSpawn();
+		
+		if (isFlat && isChance)
 		{
-			return chunkGen.getBiomeProvider().getBiomesInSquare((chunkPosX << 4) + 9, (chunkPosZ << 4) + 9, this.getSize() * 16).stream().allMatch(biome -> chunkGen.hasStructure(biome, this));
+			return super.hasStartAt(chunkGen, rand, chunkPosX, chunkPosZ);
 		}
 
 		return false;

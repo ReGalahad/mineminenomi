@@ -830,7 +830,6 @@ public class WyHelper
 		return Math.abs(maxHeight - minHeight) <= difference;
 	}
 
-
 	public static String getTextureName(String t) {
 		for(String s : t.split("/")) {
 			if(s.contains(".png")) {

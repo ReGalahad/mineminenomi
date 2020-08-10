@@ -2,8 +2,8 @@ package xyz.pixelatedw.mineminenomi.world.features.structures.largebase.marine;
 
 import java.util.Random;
 
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.biome.Biome;
@@ -20,6 +20,7 @@ import net.minecraft.world.gen.placement.IPlacementConfig;
 import net.minecraft.world.gen.placement.Placement;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.init.ModFeatures;
+import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyHelper;
 import xyz.pixelatedw.wypi.debug.WyDebug;
 
@@ -33,7 +34,7 @@ public class MarineLargeBaseStructure extends ScatteredStructure<NoFeatureConfig
 	@Override
 	public String getStructureName()
 	{
-		return "Marine_Large_Base";
+		return new ResourceLocation(APIConfig.PROJECT_ID, "marine_large_base").toString();
 	}
 
 	@Override
@@ -58,21 +59,24 @@ public class MarineLargeBaseStructure extends ScatteredStructure<NoFeatureConfig
 	@Override
 	protected int getBiomeFeatureSeparation(ChunkGenerator<?> chunkGenerator)
 	{
-		return 8;
+		return 5;
 	}
 	
 	@Override
 	public boolean hasStartAt(ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ)
 	{
-		ChunkPos chunkPos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
-		if (chunkPosX == chunkPos.x && chunkPosZ == chunkPos.z && WyHelper.isSurfaceFlat(chunkGen, chunkPosX, chunkPosZ, 2) && MathHelper.clamp(WyHelper.randomWithRange(0, 100) + WyHelper.randomDouble(), 0, 100) < CommonConfig.instance.getChanceForLargeBasesSpawn())
+		boolean isFlat = WyHelper.isSurfaceFlat(chunkGen, chunkPosX, chunkPosZ, 2);
+		boolean isChance = MathHelper.clamp(WyHelper.randomWithRange(0, 100) + WyHelper.randomDouble(), 0, 100) < CommonConfig.instance.getChanceForLargeBasesSpawn();
+		//boolean isEmptyAround = WyHelper.isEmptyAround(chunkGen, rand, chunkPosX, chunkPosZ, 10, ModFeatures.BANDIT_CAMP, ModFeatures.MARINE_CAMP, ModFeatures.BANDIT_SMALL_BASE, ModFeatures.DOJO);
+		
+		if (isFlat && isChance)
 		{
-			return chunkGen.getBiomeProvider().getBiomesInSquare((chunkPosX << 4) + 9, (chunkPosZ << 4) + 9, this.getSize() * 16).stream().allMatch(biome -> chunkGen.hasStructure(biome, this));
+			return super.hasStartAt(chunkGen, rand, chunkPosX, chunkPosZ);
 		}
 
 		return false;
 	}
-	
+
 	@Override
 	public IStartFactory getStartFactory()
 	{
@@ -111,7 +115,6 @@ public class MarineLargeBaseStructure extends ScatteredStructure<NoFeatureConfig
 			this.recalculateStructureSize();
 			
 			WyDebug.debug("Marine Large Base spawned at: /tp " + blockpos.getX() + " ~ " + blockpos.getZ());
-
 		}
 	}
 }

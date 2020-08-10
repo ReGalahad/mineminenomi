@@ -65,13 +65,13 @@ public class DojoStructure extends ScatteredStructure<NoFeatureConfig>
 	@Override
 	protected int getBiomeFeatureDistance(ChunkGenerator<?> chunkGenerator)
 	{
-		return 32;
+		return 16;
 	}
 	
 	@Override
 	protected int getBiomeFeatureSeparation(ChunkGenerator<?> chunkGenerator)
 	{
-		return 8;
+		return 4;
 	}
 
 	@Override
