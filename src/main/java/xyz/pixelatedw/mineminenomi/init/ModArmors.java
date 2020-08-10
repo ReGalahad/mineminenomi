@@ -7,12 +7,7 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.SoundEvents;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.api.GenericArmorMaterial;
-import xyz.pixelatedw.mineminenomi.items.armors.BasicArmorItem;
-import xyz.pixelatedw.mineminenomi.items.armors.CaptainCapeItem;
-import xyz.pixelatedw.mineminenomi.items.armors.ColaBackpackItem;
-import xyz.pixelatedw.mineminenomi.items.armors.MedicBagItem;
-import xyz.pixelatedw.mineminenomi.items.armors.SniperGogglesItem;
-import xyz.pixelatedw.mineminenomi.items.armors.TomoeDrumsItem;
+import xyz.pixelatedw.mineminenomi.items.armors.*;
 import xyz.pixelatedw.wypi.APIConfig;
 import xyz.pixelatedw.wypi.WyRegistry;
 
@@ -43,6 +38,7 @@ public class ModArmors
 	public static final Item MEDIC_BAG = new MedicBagItem();
 	public static final Item TOMOE_DRUMS = new TomoeDrumsItem();
 	public static final Item SNIPER_GOGGLES = new SniperGogglesItem();
+	public static final Item STRAW_HAT = new StrawHatItem();
 
 	static
 	{
@@ -61,5 +57,7 @@ public class ModArmors
 		WyRegistry.registerItem(MEDIC_BAG, "Medic Bag");
 		WyRegistry.registerItem(TOMOE_DRUMS, "Tomoe Drums");
 		WyRegistry.registerItem(SNIPER_GOGGLES, "Sniper Goggles");
+
+		WyRegistry.registerItem(STRAW_HAT, "Straw Hat");
 	}
 }
