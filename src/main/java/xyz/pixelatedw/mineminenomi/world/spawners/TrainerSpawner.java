@@ -29,6 +29,7 @@ public class TrainerSpawner
 {
 	private Random random = new Random();
 	private int cooldown;
+	private static final Biome.Category[] SWORDSMAN_BIOMES = new Biome.Category[] { Biome.Category.FOREST, Biome.Category.TAIGA, Biome.Category.PLAINS, Biome.Category.EXTREME_HILLS };
 	private static final Biome.Category[] SNIPER_BIOMES = new Biome.Category[] { Biome.Category.FOREST, Biome.Category.TAIGA, Biome.Category.JUNGLE };
 	private static final Biome.Category[] WEATHER_WIZARD_BIOMES = new Biome.Category[] { Biome.Category.MESA, Biome.Category.ICY, Biome.Category.MUSHROOM, Biome.Category.BEACH };
 	private static final Biome.Category[] DOCTOR_BIOMES = new Biome.Category[] { Biome.Category.BEACH, Biome.Category.PLAINS, Biome.Category.TAIGA, Biome.Category.FOREST };
@@ -55,11 +56,6 @@ public class TrainerSpawner
 			IEntityStats props = EntityStatsCapability.get(player);
 			EntityType entityType = null;
 			Biome.Category[] biomes = null;
-<<<<<<< HEAD
-			
-			// TODO Check to see if it has snipers quests available, don't spawn if they've already finished their training
-			if(props.isSniper())
-=======
 			Quest[] quests = null;
 
 			if(props.isSwordsman())
@@ -69,7 +65,6 @@ public class TrainerSpawner
 				quests = ModQuests.SWORDSMAN_TRIALS;
 			}
 			else if(props.isSniper())
->>>>>>> 42edd836... Fixed and improved the trainer spawner world event
 			{
 				entityType = ModEntities.BOW_MASTER;
 				biomes = SNIPER_BIOMES;

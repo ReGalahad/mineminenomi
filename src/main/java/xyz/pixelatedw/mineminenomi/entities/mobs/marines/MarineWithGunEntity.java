@@ -70,13 +70,8 @@ public class MarineWithGunEntity extends GenericMarineEntity implements IRangedA
 	public void attackEntityWithRangedAttack(LivingEntity target, float distance)
 	{
 		AbilityProjectileEntity proj = new NormalBulletProjectile(this.world, this);
-<<<<<<< HEAD
-		
-		if(this.getAttackTarget() == null)
-=======
 		proj.setDamage(2);
 		if (this.getAttackTarget() == null)
->>>>>>> 901d2fa2... Doriki scale for captains and various fixes and nerfs for marines/pirates/bandits
 			return;
 		
 		double velX = target.posX - this.posX;

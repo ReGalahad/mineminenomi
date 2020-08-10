@@ -5,13 +5,8 @@ import java.util.List;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.EffectInstance;
-<<<<<<< HEAD
 import net.minecraft.potion.Effects;
-import xyz.pixelatedw.mineminenomi.api.helpers.CrewHelper;
-=======
 import xyz.pixelatedw.mineminenomi.api.helpers.FactionHelper;
-import xyz.pixelatedw.mineminenomi.init.ModEffects;
->>>>>>> d222802d... Marines and Revos won't hurt each other anymore as part of the friendly fire config option
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.gura.TenchiMeidoParticleEffect;
 import xyz.pixelatedw.wypi.APIConfig.AbilityCategory;
