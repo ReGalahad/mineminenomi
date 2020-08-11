@@ -8,7 +8,7 @@ import net.minecraft.network.play.server.SEntityVelocityPacket;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.Vec3d;
 import xyz.pixelatedw.mineminenomi.api.helpers.AbilityHelper;
-import xyz.pixelatedw.mineminenomi.api.helpers.CrewHelper;
+import xyz.pixelatedw.mineminenomi.api.helpers.FactionHelper;
 import xyz.pixelatedw.mineminenomi.api.protection.BlockProtectionRule;
 import xyz.pixelatedw.mineminenomi.particles.effects.ParticleEffect;
 import xyz.pixelatedw.mineminenomi.particles.effects.magu.MagumaLauncherParticleEffect;
@@ -93,7 +93,7 @@ public class MagumaLauncherAbility extends ChargeableAbility
 		{
 			if(cooldownTimer % 2 == 0)
 				PARTICLES.spawn(player.world, player.posX, player.posY, player.posZ, 0, 0, 0);
-			List<LivingEntity> list = WyHelper.getEntitiesNear(player.getPosition(), player.world, 1.6, CrewHelper.NOT_IN_CREW_PREDICATE, LivingEntity.class);
+			List<LivingEntity> list = WyHelper.getEntitiesNear(player.getPosition(), player.world, 1.6, FactionHelper.getOutsideGroupPredicate(player), LivingEntity.class);
 			list.remove(player);
 			for (LivingEntity target : list)
 				target.attackEntityFrom(DamageSource.causePlayerDamage(player), 4);
