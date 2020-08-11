@@ -26,7 +26,7 @@ public class StrawHatModel extends BipedModel {
 	@Override
 	public void render(LivingEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
 	{
-		scale = scale * 1.15f;
+		scale = scale * 1.25f;
 
 		this.bipedHeadwear = this.Hat;
 
