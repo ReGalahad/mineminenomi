@@ -20,7 +20,11 @@ public class StrawHatModel extends BipedModel {
 		Hat.cubeList.add(new ModelBox(Hat, 14, 1, -2.0F, -9.0F, -2.0F, 4, 1, 4, 0.0F, false));
 		Hat.cubeList.add(new ModelBox(Hat, 0, 6, -3.0F, -8.0F, -3.0F, 6, 1, 6, 0.0F, false));
 		Hat.cubeList.add(new ModelBox(Hat, 0, 13, -4.0F, -7.0F, -4.0F, 8, 2, 8, 0.0F, false));
-		Hat.cubeList.add(new ModelBox(Hat, 0, 1, -6.0F, -5.0F, -6.0F, 12, 1, 12, 0.0F, false));
+		Hat.cubeList.add(new ModelBox(Hat, 0, 1, -5.0F, -5.0F, -5.0F, 10, 1, 10, 0.0F, false));
+		Hat.cubeList.add(new ModelBox(Hat, 10, 10, -4.0F, -5.0F, 5.0F, 8, 1, 1, 0.0F, false));
+		Hat.cubeList.add(new ModelBox(Hat, 0, 0, -4.0F, -5.0F, -6.0F, 8, 1, 1, 0.0F, false));
+		Hat.cubeList.add(new ModelBox(Hat, 14, 0, 5.0F, -5.0F, -4.0F, 1, 1, 8, 0.0F, false));
+		Hat.cubeList.add(new ModelBox(Hat, 0, 0, -6.0F, -5.0F, -4.0F, 1, 1, 8, 0.0F, false));
 	}
 
 	@Override

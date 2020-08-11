@@ -1,0 +1,25 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		"www",
+		"wrw",
+		"   "
+	],
+	"key": 
+	{
+		"w":
+		{
+			"item": "minecraft:wheat"
+		},
+		"r":
+		{
+			"item": "minecraft:red_wool"
+		}
+	},
+	"result": 
+	{
+		"item": "mineminenomi:straw_hat",
+		"count": 1
+	}
+}
